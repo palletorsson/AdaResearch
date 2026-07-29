@@ -70,6 +70,17 @@ const FAN_SEED: int = 20260729
 var _fan_root: Node3D
 var _title: Label3D
 var _readout: Label3D
+## Where the readout board stands, measured rather than eyeballed.
+##
+## The widest thing the canopy swings is a level-2 node: orbit radius 0.352 m plus a
+## 0.022 m sphere = 0.374 m of reach. The board is 0.556 m wide with its bezel, so its
+## inner edge sits at BOARD_X - 0.278. At the old 0.62 that edge was 0.342 — inside the
+## sweep — and the nodes ploughed through the panel on every rotation. 0.70 puts the
+## edge at 0.422, clear by 0.048 m.
+const BOARD_X: float = 0.70
+const BOARD_HALF_W: float = 0.278
+const NODE_REACH: float = 0.374
+
 var _screen: Node3D               # TextScreen carrying the readout on a real board
 var _t: float = 0.0
 var _rebuild_at: float = 0.0
@@ -202,7 +213,13 @@ func _build_readout_screen() -> void:
 	ts.mode = 0                       # Mode.SCREEN — a framed panel, no post
 	ts.width_m = 0.52                 # board 0.556 x 0.358 m with its bezel
 	ts.title_color = leaf_color
-	ts.position = Vector3(0.62, 0.86, 0.02)
+	# Stood clear of the canopy's sweep, not merely beside it. At x 0.62 the board's
+	# inner edge fell at 0.342 while the level-2 nodes orbit to radius 0.352 with a
+	# 0.022 m sphere — reaching 0.374 — so under `breath` (the DEFAULT, where
+	# _fan_root spins) the nodes passed THROUGH the readout on every turn. Two solid
+	# things cannot occupy one place, and a still catches it at an arbitrary phase, so
+	# it read as a glitch rather than as an instrument beside a tree.
+	ts.position = Vector3(BOARD_X, 0.86, 0.02)
 	_screen = ts
 	_own(ts)
 

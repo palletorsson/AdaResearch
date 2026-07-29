@@ -148,7 +148,18 @@ uniform float lambda = 0.5;
 uniform float phi = 0.0;
 
 float noise3d(vec3 p) {
-	return fmod(sin(dot(p, vec3(12.9898, 78.233, 45.164, 1.0))) * 43758.5453);
+	// Two errors in one line, and the shader has never compiled because of them:
+	// vec3() was given FOUR components, and fmod() one argument where it takes two.
+	// This is the standard sin-dot hash, whose last step is fract(), not fmod() —
+	// it wants the fractional part, and fmod(x, 1.0) would only be the same thing
+	// for positive x. Caught by the shader compiler once probe_label_placement
+	// started instantiating this artifact headless:
+	//   SHADER ERROR: Invalid arguments for the built-in function:
+	//   "vec3(float,float,float,float)"
+	// It matters beyond tidiness: three of the four `becoming` values are defined
+	// against the fluid volume this noise drives, so they were all rendering with
+	// the error material.
+	return fract(sin(dot(p, vec3(12.9898, 78.233, 45.164))) * 43758.5453);
 }
 
 float fbm(vec3 p) {

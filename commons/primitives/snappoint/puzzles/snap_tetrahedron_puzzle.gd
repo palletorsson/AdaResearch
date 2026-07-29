@@ -88,6 +88,14 @@ var _shipped_mask: Dictionary = {}
 
 
 func _ready() -> void:
+	# Normalise FIRST, exactly as the octahedron sibling does. Without this the
+	# raw value from a .tscn override or a sweep — "Closed", " closed" — falls
+	# through the build's match to the `loose` branch WHILE the line below still
+	# switches the reset timer off, which is a fifth state nothing declares:
+	# shipped geometry with the timer silently disabled. apply_grid_config folds
+	# case already, so the same token behaved differently by route.
+	solid = _pick_axis(solid, SOLIDS, "loose")
+
 	# Non-default arrangements must not be restored by the 60 s reset timer —
 	# _store_initial_positions() records the SHIPPED transforms during
 	# super._ready(), so leaving the timer on would quietly undo the axis.

@@ -292,16 +292,31 @@ func _frame(gx: float, y0: float, y1: float) -> void:
 # PIECES
 # ═══════════════════════════════════════════════════════════════════
 
+## The instrument's board. It is sized FROM the title plate rather than fixed, so the
+## two read as one object.
+##
+## The plate had to rise to PLATE_Y 0.47 to stop covering the amber over-scale arrow
+## (y 0.22-0.34) and the "true max entropy" tag at 0.31 — that move was right. But the
+## board was left at its old 0.74 m height, top edge 0.41, so 0.135 m of a 0.15 m
+## title plate hung off the top of the instrument with nothing behind it: the
+## occlusion was traded for a slab floating in air. Deriving the height here means the
+## board always reaches far enough to carry whatever the plate is doing.
+const BOARD_BOTTOM: float = -0.33
+const BOARD_MARGIN: float = 0.015   ## reveal left above the plate, so it reads as inset
+const PLATE_H: float = 0.15
+
 func _backing() -> void:
+	var top: float = PLATE_Y + PLATE_H * 0.5 + BOARD_MARGIN
+	var h: float = top - BOARD_BOTTOM
 	var mi := MeshInstance3D.new()
 	var bm := BoxMesh.new()
-	bm.size = Vector3(0.86, 0.74, 0.006)
+	bm.size = Vector3(0.86, h, 0.006)
 	mi.mesh = bm
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(0.07, 0.08, 0.10)
 	mat.roughness = 0.7
 	mi.material_override = mat
-	mi.position = Vector3(0.0, 0.04, -0.014)
+	mi.position = Vector3(0.0, (BOARD_BOTTOM + top) * 0.5, -0.014)
 	_own(mi)
 
 
@@ -387,7 +402,7 @@ func _tag(text: String, pos: Vector2, color: Color, fs: int) -> void:
 func _plate(title: String, body: String, pos: Vector3, accent: Color) -> void:
 	var panel := MeshInstance3D.new()
 	var pm := BoxMesh.new()
-	pm.size = Vector3(0.86, 0.15, 0.008)
+	pm.size = Vector3(0.86, PLATE_H, 0.008)
 	panel.mesh = pm
 	var pmat := StandardMaterial3D.new()
 	pmat.albedo_color = Color(0.09, 0.10, 0.12)
