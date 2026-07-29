@@ -367,6 +367,10 @@ func _build_hierarchy(slate_mat: StandardMaterial3D) -> void:
 func _surface_label(text: String, pos: Vector3, font: int, col: Color) -> Label3D:
 	var l: Label3D = _billboard_label(text, pos, font, col)
 	l.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	# Ink on a surface is behind whatever stands in front of that surface. Inherited
+	# no_depth_test = true made the words draw over the bulbs and the cage, so text
+	# painted on the sign read as if it were floating in front of the lamp.
+	l.no_depth_test = false
 	return l
 
 

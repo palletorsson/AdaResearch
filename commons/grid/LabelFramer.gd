@@ -111,6 +111,14 @@ static func _framable(label: Label3D) -> bool:
 static func _prepare(label: Label3D) -> Dictionary:
 	label.set_meta("label_framed", true)
 	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	# TEXT WITH A BODY OCCLUDES LIKE A BODY. embodied_prop._billboard_label sets
+	# no_depth_test = true — correct for a see-through caption that must stay readable
+	# through the object it names, and wrong the moment this framer hands it an opaque
+	# panel. Left alone the assembly is incoherent: the panel depth-tests and is hidden
+	# behind intervening geometry while its own glyphs draw on top of everything,
+	# so the words float free of the plate they are printed on. Only labels THIS
+	# function frames are touched; the 646 unframed call sites keep their own choice.
+	label.no_depth_test = false
 
 	# DO NOT USE get_aabb() HERE. A billboarded Label3D reports a CUBE — the text's
 	# diagonal on all three axes, so it never culls whichever way it spins — and the
