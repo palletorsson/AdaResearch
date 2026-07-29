@@ -202,32 +202,75 @@ def _report_bite(sweep_name: str, shots: list) -> None:
         return
     if len(shots) < 2:
         return
-    # The FIRST shot is not a usable baseline: the environment has not settled
-    # on it, so its background sits at a different tint and every later variant
-    # "differs" from it by 100% of the frame. Measuring against it reported
-    # BITES for an axis known to change nothing. Baseline on the second shot
-    # whenever there is one to spare.
-    base_idx = 1 if len(shots) >= 3 else 0
+
+    # Compare SUBJECT SILHOUETTES, pairwise, not frames against one baseline.
+    #
+    # Two failures forced this. Baselining on the first shot reported BITES for
+    # an axis that changes nothing, because the environment has not settled on
+    # shot one and its background sits at a different tint, so every later
+    # variant differs from it across the whole frame. Baselining on the SECOND
+    # shot then reported 0.00% for cube_scene, whose `solid` value differs from
+    # the other four by 86% — because solid was shot one, and the four values
+    # being compared are identical to each other. One baseline cannot survive
+    # either case.
+    #
+    # Masking each image against ITS OWN background colour cancels the tint
+    # difference, and taking the max over all pairs means a single distinct
+    # value cannot hide wherever it lands in the order.
+    # Silhouette alone is not enough either: cube_scene's grain changes the
+    # INSIDE of a cube whose outline never moves, so a mask comparison scored it
+    # 0.00% just as confidently as the baseline did. Compare colour, but only
+    # where at least one variant has a subject — background is excluded, so the
+    # unsettled first frame's tint cannot register, and internal structure can.
+    def load(path):
+        im = Image.open(path).convert("RGB")
+        bg = im.getpixel((3, 3))
+        return im, bg
+
     try:
-        base = Image.open(shots[base_idx][2]).convert("RGB")
+        loaded = [(params, *load(p)) for (_a, params, p) in shots]
     except OSError:
         return
-    total = base.width * base.height
+    if len(loaded) < 2:
+        return
+    w, h = loaded[0][1].size
+    total = w * h
+
+    def subject(im, bg):
+        px = im.load()
+        s = bytearray(w * h)
+        i = 0
+        for y in range(h):
+            for x in range(w):
+                r, g, b = px[x, y]
+                s[i] = 1 if (abs(r - bg[0]) + abs(g - bg[1]) + abs(b - bg[2])) > 26 else 0
+                i += 1
+        return s
+
+    subs = [(p, im, subject(im, bg)) for (p, im, bg) in loaded]
     rows = []
-    for (art, params, p) in [s for i, s in enumerate(shots) if i != base_idx and i != 0]:
-        try:
-            im = Image.open(p).convert("RGB")
-        except OSError:
-            continue
-        if im.size != base.size:
-            continue
-        diff = ImageChops.difference(base, im)
-        changed = sum(1 for px in diff.getdata() if sum(px) > 12)
-        rows.append({"params": params, "changed_px": changed,
-                     "changed_pct": round(100.0 * changed / max(1, total), 3)})
+    peak = 0.0
+    for i in range(len(subs)):
+        for j in range(i + 1, len(subs)):
+            (pa, ia, sa), (pb, ib, sb) = subs[i], subs[j]
+            if ia.size != ib.size:
+                continue
+            da, db = ia.load(), ib.load()
+            changed = 0
+            k = 0
+            for y in range(h):
+                for x in range(w):
+                    if sa[k] or sb[k]:
+                        ra, ga, ba = da[x, y]
+                        rb, gb, bb = db[x, y]
+                        if abs(ra - rb) + abs(ga - gb) + abs(ba - bb) > 26:
+                            changed += 1
+                    k += 1
+            pct = round(100.0 * changed / max(1, total), 3)
+            peak = max(peak, pct)
+            rows.append({"a": pa, "b": pb, "changed_px": changed, "changed_pct": pct})
     if not rows:
         return
-    peak = max(r["changed_pct"] for r in rows)
     verdict = ("BITES" if peak >= 2.0 else
                "faint - under 2% of the frame moved" if peak > 0.05 else
                "NO VISIBLE CHANGE - the axis did nothing a still can show")
