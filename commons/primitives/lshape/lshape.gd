@@ -11,24 +11,66 @@ extends Node3D
 # relationships: sibling to plus.gd in the shape vocabulary; both demonstrate combined geometry
 # truth: non-convex shapes require explicit geometry at re-entrant corners — they cannot be a single box
 
+## STAGE-2 DNA PROMOTION (2026-07-29).
+##
+## Before this the script had zero exports: one fixed cyan L, 12 placements, no
+## way to say anything with it. But the @identity above already named the thing
+## that carries the argument — "critical_parameter: the corner joint geometry —
+## the notch where vertical and horizontal arms meet". That was a declared
+## parameter with no knob attached. This promotes it.
+##
+##   corner  HOW THE TWO ARMS MEET     joint · butt · mitre · gap
+##
+##   joint  the arms share the corner cell and the notch is built explicitly —
+##          neither member is continuous, the re-entrant corner is real geometry.
+##          THIS IS THE PRE-PROMOTION MESH, VERTEX FOR VERTEX, and the default.
+##   butt   the column runs full height and the arm lands on its side. The corner
+##          belongs to one member; the other just arrives.
+##   mitre  a 45° seam from the inner corner to the outer. Neither member owns
+##          the corner; the join is a negotiated diagonal.
+##   gap    the arms never touch. The L is entirely in the eye — an adjacency
+##          claim the geometry refuses to make.
+##
+## The axis is not decoration: it is four different answers to the artifact's own
+## truth statement, that a non-convex shape cannot be a single box. `gap` is the
+## one that argues back.
+
+## How the vertical and horizontal arms meet. See the block above.
+@export var corner: String = "joint"
+
 var base_color: Color = Color(0.2, 0.8, 1.0)  # Cyan
 var vertical_height: float = 3.0
 var horizontal_length: float = 1.0
 var thickness: float = 0.2
 
+## How far the arm stands off the column in corner=gap, in metres.
+const CORNER_GAP: float = 0.2
+
+var _built: bool = false
+
 func _ready():
 	create_lshape()
+	_built = true
 
 func create_lshape():
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	var vertices = create_lshape_vertices()
-	var faces = create_lshape_faces()
+	match corner:
+		"butt":
+			emit_stacked(st, 0.0)
+		"gap":
+			emit_stacked(st, CORNER_GAP)
+		"mitre":
+			emit_mitred(st)
+		_:
+			# joint — the original mesh, untouched.
+			var vertices = create_lshape_vertices()
+			var faces = create_lshape_faces()
 
-	# Add all triangular faces
-	for face in faces:
-		add_triangle_with_normal(st, vertices, face)
+			# Add all triangular faces
+			for face in faces:
+				add_triangle_with_normal(st, vertices, face)
 
 	# Create mesh instance
 	var mesh_instance = MeshInstance3D.new()
@@ -38,7 +80,15 @@ func create_lshape():
 	add_child(mesh_instance)
 
 	# Add collision
-	create_collision(vertices)
+	match corner:
+		"butt":
+			create_stacked_collision(0.0)
+		"gap":
+			create_stacked_collision(CORNER_GAP)
+		"mitre":
+			create_mitred_collision()
+		_:
+			create_collision(create_lshape_vertices())
 
 func create_lshape_vertices() -> Array:
 	var vertices = []
@@ -162,6 +212,151 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 	st.add_vertex(v1)
 	st.set_normal(normal)
 	st.add_vertex(v2)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# CORNER VARIANTS — everything below is reached only when corner != "joint",
+# so the default mesh above is untouched by any of it.
+# ═══════════════════════════════════════════════════════════════════════════
+
+## corner = butt (offset 0) and corner = gap (offset > 0).
+## The column is continuous over the full height; the arm is a separate box that
+## meets its side face, or stands off it by `offset` and touches nothing.
+func emit_stacked(st: SurfaceTool, offset: float) -> void:
+	var half_thick: float = thickness * 0.5
+	var top: float = vertical_height + thickness
+	# Column — owns the corner outright.
+	emit_box(st, Vector3(-half_thick, 0.0, -half_thick), Vector3(half_thick, top, half_thick))
+	# Arm — starts at the column face (butt) or beyond it (gap).
+	var arm_start: float = half_thick + offset
+	if arm_start < horizontal_length:
+		emit_box(st, Vector3(arm_start, vertical_height, -half_thick), Vector3(horizontal_length, top, half_thick))
+
+## corner = mitre. A 45° seam runs from the inner corner (half_thick, vertical_height)
+## to the outer corner (-half_thick, vertical_height + thickness). Both members are
+## cut; neither is continuous through the joint.
+func emit_mitred(st: SurfaceTool) -> void:
+	var half_thick: float = thickness * 0.5
+	var top: float = vertical_height + thickness
+	# Column profile in XY, counter-clockwise, with a slanted top.
+	var column: Array = [
+		Vector2(-half_thick, 0.0),
+		Vector2(half_thick, 0.0),
+		Vector2(half_thick, vertical_height),
+		Vector2(-half_thick, top),
+	]
+	emit_prism(st, column, -half_thick, half_thick)
+	# Arm profile — the complementary trapezoid across the same diagonal.
+	var arm: Array = [
+		Vector2(half_thick, vertical_height),
+		Vector2(horizontal_length, vertical_height),
+		Vector2(horizontal_length, top),
+		Vector2(-half_thick, top),
+	]
+	emit_prism(st, arm, -half_thick, half_thick)
+
+## Axis-aligned box with outward-facing normals.
+func emit_box(st: SurfaceTool, mn: Vector3, mx: Vector3) -> void:
+	var v: Array = [
+		Vector3(mn.x, mn.y, mn.z), Vector3(mx.x, mn.y, mn.z),
+		Vector3(mx.x, mn.y, mx.z), Vector3(mn.x, mn.y, mx.z),
+		Vector3(mn.x, mx.y, mn.z), Vector3(mx.x, mx.y, mn.z),
+		Vector3(mx.x, mx.y, mx.z), Vector3(mn.x, mx.y, mx.z),
+	]
+	var f: Array = [
+		[0, 1, 2], [0, 2, 3],   # bottom (-Y)
+		[4, 6, 5], [4, 7, 6],   # top (+Y)
+		[0, 5, 1], [0, 4, 5],   # -Z
+		[1, 6, 2], [1, 5, 6],   # +X
+		[2, 7, 3], [2, 6, 7],   # +Z
+		[3, 4, 0], [3, 7, 4],   # -X
+	]
+	for face in f:
+		add_triangle_with_normal(st, v, face)
+
+## Convex XY profile (counter-clockwise) extruded along Z.
+func emit_prism(st: SurfaceTool, profile: Array, z_min: float, z_max: float) -> void:
+	var n: int = profile.size()
+	if n < 3:
+		return
+	var verts: Array = []
+	for i: int in n:
+		var p_back: Vector2 = profile[i]
+		verts.append(Vector3(p_back.x, p_back.y, z_min))
+	for i: int in n:
+		var p_front: Vector2 = profile[i]
+		verts.append(Vector3(p_front.x, p_front.y, z_max))
+	# Caps
+	for i: int in range(1, n - 1):
+		add_triangle_with_normal(st, verts, [n, n + i, n + i + 1])
+		add_triangle_with_normal(st, verts, [0, i + 1, i])
+	# Sides
+	for i: int in n:
+		var j: int = (i + 1) % n
+		add_triangle_with_normal(st, verts, [i, j, n + j])
+		add_triangle_with_normal(st, verts, [i, n + j, n + i])
+
+func create_stacked_collision(offset: float) -> void:
+	var half_thick: float = thickness * 0.5
+	var top: float = vertical_height + thickness
+	var static_body = StaticBody3D.new()
+	static_body.name = "LShapeCollision"
+	add_child(static_body)
+
+	var collision1 = CollisionShape3D.new()
+	var box1 = BoxShape3D.new()
+	box1.size = Vector3(thickness, top, thickness)
+	collision1.shape = box1
+	collision1.position = Vector3(0, top * 0.5, 0)
+	static_body.add_child(collision1)
+
+	var arm_start: float = half_thick + offset
+	if arm_start < horizontal_length:
+		var collision2 = CollisionShape3D.new()
+		var box2 = BoxShape3D.new()
+		box2.size = Vector3(horizontal_length - arm_start, thickness, thickness)
+		collision2.shape = box2
+		collision2.position = Vector3((arm_start + horizontal_length) * 0.5, vertical_height + thickness * 0.5, 0)
+		static_body.add_child(collision2)
+
+func create_mitred_collision() -> void:
+	var half_thick: float = thickness * 0.5
+	var static_body = StaticBody3D.new()
+	static_body.name = "LShapeCollision"
+	add_child(static_body)
+
+	var collision1 = CollisionShape3D.new()
+	var box1 = BoxShape3D.new()
+	box1.size = Vector3(thickness, vertical_height, thickness)
+	collision1.shape = box1
+	collision1.position = Vector3(0, vertical_height * 0.5, 0)
+	static_body.add_child(collision1)
+
+	var collision2 = CollisionShape3D.new()
+	var box2 = BoxShape3D.new()
+	box2.size = Vector3(horizontal_length + half_thick, thickness, thickness)
+	collision2.shape = box2
+	collision2.position = Vector3((horizontal_length - half_thick) * 0.5, vertical_height + thickness * 0.5, 0)
+	static_body.add_child(collision2)
+
+## Guarded rebuild: only after _ready has built once, and only when `corner`
+## actually changes. Placements that pass no corner token are never rebuilt.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("corner"):
+		return
+	var want: String = str(config_data["corner"])
+	if want == "" or want == corner:
+		return
+	corner = want
+	if not _built or not is_inside_tree():
+		return
+	rebuild_lshape()
+
+func rebuild_lshape() -> void:
+	for child in get_children():
+		if child.name == "LShapeMesh" or child.name == "LShapeCollision":
+			remove_child(child)
+			child.queue_free()
+	create_lshape()
 
 func apply_queer_material(mesh_instance: MeshInstance3D, color: Color):
 	var material = ShaderMaterial.new()

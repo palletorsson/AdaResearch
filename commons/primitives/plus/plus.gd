@@ -4,7 +4,7 @@ extends Node3D
 # @identity
 # essence: cross = central box + 4 arm boxes rotated at 0°/90°/180°/270° — 4-fold rotational symmetry
 # desire: learner recognises the plus symbol as a designed artifact with symmetry group C4
-# critical_parameter: arm_length — controls the reach of each arm; determines aspect ratio of the cross
+# critical_parameter: symmetry — the four arm lengths are one number today, and that single number IS the C4 group; split it and the group collapses (c4 → c2 → a single mirror)
 # triggers: nothing — static display; fan-triangulated for clean geometry without T-junction artifacts
 # emerges: that a cross has the same symmetry as a square — 90° rotation leaves it invariant
 # needs: [missing VR controls — static display only]
@@ -16,10 +16,57 @@ var arm_length: float = 0.45  # Length from center to arm tip
 var arm_width: float = 0.15   # Width of each arm
 var thickness: float = 0.125  # Z thickness
 
+# ── DNA (stage 2 — variation) ────────────────────────────────────────
+# One number (arm_length) reaches in all four directions, and that identity of
+# reach IS the symmetry group: the plus has C4 because nothing distinguishes up
+# from right. Split the reach and the group falls, one step at a time —
+#   c4    all four arms equal   → 4-fold rotation + 4 mirrors (order 8)
+#   c2    vertical ≠ horizontal → half-turn + 2 mirrors (order 4)
+#   latin one arm longest       → a single vertical mirror (order 2)
+#   tau   bottom arm removed    → a single vertical mirror, a different figure
+# The shape is the same 24 vertices and the same faces throughout; only the
+# reach differs. That is the argument — symmetry is not drawn, it is measured.
+@export_enum("c4", "c2", "latin", "tau") var symmetry: String = "c4"
+
+var _arm_up: float = 0.45
+var _arm_down: float = 0.45
+var _arm_left: float = 0.45
+var _arm_right: float = 0.45
+var _built: bool = false
+
 func _ready():
 	create_plus()
+	_built = true
+
+# Resolve the four reaches from `symmetry`. "c4" returns arm_length on all four
+# sides — bit-for-bit the pre-promotion geometry.
+func _resolve_arms() -> void:
+	match symmetry:
+		"c2":
+			_arm_up = arm_length
+			_arm_down = arm_length
+			_arm_left = 0.25
+			_arm_right = 0.25
+		"latin":
+			_arm_up = 0.30
+			_arm_down = 0.60
+			_arm_left = 0.35
+			_arm_right = 0.35
+		"tau":
+			# Bottom arm pulled back flush with the bar: the T. The four faces
+			# of the vanished arm collapse to zero area and simply stop drawing.
+			_arm_up = arm_length
+			_arm_down = arm_width / 2.0
+			_arm_left = arm_length
+			_arm_right = arm_length
+		_:
+			_arm_up = arm_length
+			_arm_down = arm_length
+			_arm_left = arm_length
+			_arm_right = arm_length
 
 func create_plus():
+	_resolve_arms()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -55,31 +102,31 @@ func create_plus_vertices() -> Array:
 	#    (also 7,6,15,14 on inner corners)
 
 	# Front vertices (0-11) - outer corners clockwise from bottom-right
-	vertices.append(Vector3(half_w, -arm_length, half_t))   # 0 - bottom arm, right
-	vertices.append(Vector3(-half_w, -arm_length, half_t))  # 1 - bottom arm, left
+	vertices.append(Vector3(half_w, -_arm_down, half_t))    # 0 - bottom arm, right
+	vertices.append(Vector3(-half_w, -_arm_down, half_t))   # 1 - bottom arm, left
 	vertices.append(Vector3(-half_w, -half_w, half_t))      # 2 - inner corner
-	vertices.append(Vector3(-arm_length, -half_w, half_t))  # 3 - left arm, bottom
-	vertices.append(Vector3(-arm_length, half_w, half_t))   # 4 - left arm, top
+	vertices.append(Vector3(-_arm_left, -half_w, half_t))   # 3 - left arm, bottom
+	vertices.append(Vector3(-_arm_left, half_w, half_t))    # 4 - left arm, top
 	vertices.append(Vector3(-half_w, half_w, half_t))       # 5 - inner corner
-	vertices.append(Vector3(-half_w, arm_length, half_t))   # 6 - top arm, left
-	vertices.append(Vector3(half_w, arm_length, half_t))    # 7 - top arm, right
+	vertices.append(Vector3(-half_w, _arm_up, half_t))      # 6 - top arm, left
+	vertices.append(Vector3(half_w, _arm_up, half_t))       # 7 - top arm, right
 	vertices.append(Vector3(half_w, half_w, half_t))        # 8 - inner corner
-	vertices.append(Vector3(arm_length, half_w, half_t))    # 9 - right arm, top
-	vertices.append(Vector3(arm_length, -half_w, half_t))   # 10 - right arm, bottom
+	vertices.append(Vector3(_arm_right, half_w, half_t))    # 9 - right arm, top
+	vertices.append(Vector3(_arm_right, -half_w, half_t))   # 10 - right arm, bottom
 	vertices.append(Vector3(half_w, -half_w, half_t))       # 11 - inner corner
 
 	# Back vertices (12-23) - same pattern at Z-
-	vertices.append(Vector3(half_w, -arm_length, -half_t))   # 12
-	vertices.append(Vector3(-half_w, -arm_length, -half_t))  # 13
+	vertices.append(Vector3(half_w, -_arm_down, -half_t))    # 12
+	vertices.append(Vector3(-half_w, -_arm_down, -half_t))   # 13
 	vertices.append(Vector3(-half_w, -half_w, -half_t))      # 14
-	vertices.append(Vector3(-arm_length, -half_w, -half_t))  # 15
-	vertices.append(Vector3(-arm_length, half_w, -half_t))   # 16
+	vertices.append(Vector3(-_arm_left, -half_w, -half_t))   # 15
+	vertices.append(Vector3(-_arm_left, half_w, -half_t))    # 16
 	vertices.append(Vector3(-half_w, half_w, -half_t))       # 17
-	vertices.append(Vector3(-half_w, arm_length, -half_t))   # 18
-	vertices.append(Vector3(half_w, arm_length, -half_t))    # 19
+	vertices.append(Vector3(-half_w, _arm_up, -half_t))      # 18
+	vertices.append(Vector3(half_w, _arm_up, -half_t))       # 19
 	vertices.append(Vector3(half_w, half_w, -half_t))        # 20
-	vertices.append(Vector3(arm_length, half_w, -half_t))    # 21
-	vertices.append(Vector3(arm_length, -half_w, -half_t))   # 22
+	vertices.append(Vector3(_arm_right, half_w, -half_t))    # 21
+	vertices.append(Vector3(_arm_right, -half_w, -half_t))   # 22
 	vertices.append(Vector3(half_w, -half_w, -half_t))       # 23
 
 	return vertices
@@ -156,18 +203,21 @@ func create_collision():
 	static_body.name = "PlusCollision"
 	add_child(static_body)
 
-	# Horizontal bar
+	# Horizontal bar — offset is zero whenever left and right reach the same,
+	# so the c4 default lands exactly where the old centred box did.
 	var h_collision = CollisionShape3D.new()
 	var h_box = BoxShape3D.new()
-	h_box.size = Vector3(arm_length * 2, arm_width, thickness)
+	h_box.size = Vector3(_arm_left + _arm_right, arm_width, thickness)
 	h_collision.shape = h_box
+	h_collision.position = Vector3((_arm_right - _arm_left) * 0.5, 0.0, 0.0)
 	static_body.add_child(h_collision)
 
 	# Vertical bar
 	var v_collision = CollisionShape3D.new()
 	var v_box = BoxShape3D.new()
-	v_box.size = Vector3(arm_width, arm_length * 2, thickness)
+	v_box.size = Vector3(arm_width, _arm_up + _arm_down, thickness)
 	v_collision.shape = v_box
+	v_collision.position = Vector3(0.0, (_arm_up - _arm_down) * 0.5, 0.0)
 	static_body.add_child(v_collision)
 
 func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
@@ -203,6 +253,31 @@ func apply_queer_material(mesh_instance: MeshInstance3D, color: Color):
 		standard_material.emission_enabled = true
 		standard_material.emission = color * 0.3
 		mesh_instance.material_override = standard_material
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("symmetry"):
+		return
+	var new_symmetry: String = str(config_data["symmetry"])
+	if new_symmetry == symmetry:
+		return
+	symmetry = new_symmetry
+	# Before _ready the new value is simply what create_plus() will build from.
+	# After _ready, rebuild only because the value genuinely moved — an
+	# unconditional rebuild here would re-cut every already-placed cross.
+	if not _built:
+		return
+	_rebuild_plus()
+
+func _rebuild_plus() -> void:
+	var old_mesh: Node = get_node_or_null("PlusMesh")
+	if old_mesh:
+		remove_child(old_mesh)
+		old_mesh.queue_free()
+	var old_body: Node = get_node_or_null("PlusCollision")
+	if old_body:
+		remove_child(old_body)
+		old_body.queue_free()
+	create_plus()
 
 func set_base_color(color: Color):
 	base_color = color

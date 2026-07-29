@@ -12684,6 +12684,25 @@
   "perspective_lines": {
    "category": "unknown",
    "complexity": "intermediate",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "vanishing_points": [
+      "one",
+      "two",
+      "three"
+     ],
+     "reach": [
+      "touch",
+      "short",
+      "through"
+     ]
+    },
+    "default": "vanishing_points=one, reach=touch - every endpoint forced to Vector3.ZERO at full travel, wearing the single shipped colour (1.0, 0.3, 0.5), which is literally the code that has always run, so all 10 existing placements are pixel-identical",
+    "was": "the shared origin is this artifact's own declared critical_parameter and it was a literal Vector3.ZERO, with the four frame corners, the 0.008 thickness and the pink all inlined in setup_perspective_lines() and no apply_grid_config() at all. The piece could state one-point perspective and nothing else - it could not say that a vanishing point belongs to a family of parallels rather than to the world.",
+    "note": "vanishing_points is not a count of lines - the scene still has exactly four, and at every value they still run from the same rectangular frame. What changes is how many origins those four are forced to share, which is the whole claim. In two- and three-point modes the lines are tinted by family so you can see which parallels answer to which point; in one-point mode all four keep the shipped colour, so the default is untouched. reach answers the identity line that calls the vanishing point 'a limit, not a place' - the shipped drawing contradicted it by letting the cylinders arrive and stop."
+   },
    "description": "all lines → (0,0,0) — convergence to a single vanishing point as perspective law",
    "dev_themes": [
     "core",
@@ -13701,6 +13720,20 @@
    }
   },
   "plus": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "symmetry": [
+      "c4",
+      "c2",
+      "latin",
+      "tau"
+     ]
+    },
+    "default": "symmetry=c4 - all four arms reach arm_length exactly as the single hard-coded value did, giving the identical mesh and identical two-box collision, so all 9 existing placements are unchanged",
+    "was": "no exports: one arm_length reaching in all four directions, so the C4 symmetry the artifact is about was welded shut and could not be broken to be seen"
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Plus/cross shape (+) with 4 arms at 90 degree angles. Classic health pickup shape.",
@@ -17332,6 +17365,28 @@
    "qfep_connection": "Molnár's (Dés)Ordres run in reverse: the canvas shows its disorder as ghost outlines and asks the hand to reproduce it within ten degrees. Restoring noise turns out to be harder than restoring order — E_flux has an exact shape."
   },
   "roughrock": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "roughness": [
+      0.0,
+      0.05,
+      0.15,
+      0.35
+     ],
+     "rock_seed": [
+      0,
+      1,
+      2,
+      3,
+      7
+     ]
+    },
+    "default": "roughness=0.05, rock_seed=0 - the two hard-coded constants read straight out of the shipped build (the +/-0.05 jitter and the unshifted per-vertex hash), so all 10 existing placements generate the identical mesh",
+    "was": "zero exports, though its own @identity named noise_seed as the critical parameter and asked for a slider: a fixed eight-point hull perturbed by a hash nobody could reach",
+    "argues": "roughness=0.0 switches the noise term off and shows the regular polyhedron underneath - the thing the irregularity was irregular ON. Past ~0.2 the fixed face list can no longer close a convex hull and the rock breaks into shards: the boundary where controlled randomness stops being controlled."
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Irregular rock polyhedron created from noise-perturbed vertices.",
@@ -19022,6 +19077,27 @@
   "sphere_mid": {
    "category": "unknown",
    "complexity": "beginner",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "resolution": [
+      "coarse",
+      "mid",
+      "fine",
+      "ultra"
+     ],
+     "budget_bias": [
+      "even",
+      "latitude",
+      "longitude"
+     ]
+    },
+    "default": "resolution=mid (rings=7, radial_segments=7), budget_bias=even - these are the two literals the script has always used and the isotropic split it has always assumed, so all 10 existing placements are byte-identical",
+    "was": "rings and radial_segments are this artifact's own declared critical_parameter and were two hard-coded 7s in _ready(), with no apply_grid_config() at all. Because they were always equal, the trio sphere_low/mid/high could argue about HOW MUCH resolution a sphere is given but never about WHERE it is spent.",
+    "note": "budget_bias is the axis that belongs to the middle term specifically, and it is not a size knob - the sphere keeps radius 0.5 and height 1.0 at every value. n*2 rings by n/2 segments (latitude) and its transpose (longitude) hold the face count in the same neighbourhood as n by n, so what you see is the same budget spent in a direction: a barrel of stacked bands, or an orange cut into gores. The truth line says resolution is a budget decision; a budget is spent somewhere, not merely sized. resolution is the amount axis, kept name-compatible in spirit with sphere_high's tessellation.",
+    "doc_discrepancy": "The description string says 16 rings / 16 radial segments; the shipping code and the artifact's own @identity block both say 7. The default is pinned to the code (mid=7), not the description; 16 is now reachable as resolution=fine."
+   },
    "description": "Medium poly sphere with 16 rings and 16 radial segments for balanced detail.",
    "dev_themes": [
     "core",
@@ -19226,6 +19302,28 @@
    "qfep_connection": "J1, the smallest name in Norman Johnson's census of ninety-two: four triangles pitched over a square, delegated entirely to a shared factory. The catalogue is the real artifact; this scene just cites entry one."
   },
   "star_primitive": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "points": [
+      4,
+      5,
+      6,
+      8,
+      12
+     ],
+     "waist_radius": [
+      0.1,
+      0.25,
+      0.35,
+      0.45
+     ]
+    },
+    "default": "points=5, waist_radius=0.25 - these are the constants the shipped 22-vertex table encodes, and at the default the code returns that literal table verbatim rather than regenerating it, so all 10 existing placements get byte-identical geometry with no float drift",
+    "was": "zero exports: a five-pointed star hard-coded as 22 literal vertices and 40 literal face indices, a magic table with no way in",
+    "argues": "reading the table back shows it is not a magic list at all - ten rim points at 36-degree steps alternating radius 0.25 and 0.50. Turning points and waist_radius asks where a star stops: at 12 points it is a sun or a gear, at waist 0.45 the arms sink into a polygon, at 0.10 they become needles. The artifact's own truth is 'form is data'; the axes show that the data itself has an author."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Five-pointed star shape with thickness",

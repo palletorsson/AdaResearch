@@ -2239,6 +2239,27 @@
    }
   },
   "invariants_demo": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "figure": [
+      "equilateral",
+      "right",
+      "scalene"
+     ],
+     "pose": [
+      "none",
+      "translate",
+      "rotate",
+      "scale",
+      "shear",
+      "project"
+     ]
+    },
+    "default": "figure=equilateral, pose=none - the equilateral triangle sitting untransformed with the panel unpressed is exactly the pre-promotion build, so all 10 existing placements are unchanged",
+    "was": "no exports and an empty apply_grid_config: one hard-coded equilateral triangle, always shown in its identity pose, with every variation reachable only by walking up and pressing a button"
+   },
    "category": "transforms",
    "complexity": "intermediate",
    "description": "A triangle with labeled measurements — side lengths, angles, area. Apply translation, rotation, scale, or shear and watch which properties survive. Preserved measurements glow green; changed ones glow red. Each transform has a signature: what it cannot touch defines it.",

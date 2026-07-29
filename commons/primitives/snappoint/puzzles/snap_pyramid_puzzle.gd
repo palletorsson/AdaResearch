@@ -89,29 +89,28 @@ func _is_scene_default() -> bool:
 
 ## (x, z) offsets per snap point name for the current base_shape.
 func _base_offsets() -> Dictionary:
-	match base_shape:
-		"rect":
-			return {
-				"PointBaseBackLeft": Vector2(-0.14, -0.07),
-				"PointBaseBackRight": Vector2(0.14, -0.07),
-				"PointBaseFrontLeft": Vector2(-0.14, 0.07),
-				"PointBaseFrontRight": Vector2(0.14, 0.07),
-			}
-		"rhombus":
-			# Diagonals 0.32 and 0.16 — all four edges sqrt(0.16^2 + 0.08^2), no right angles.
-			return {
-				"PointBaseBackLeft": Vector2(0.0, -0.16),
-				"PointBaseBackRight": Vector2(0.08, 0.0),
-				"PointBaseFrontLeft": Vector2(-0.08, 0.0),
-				"PointBaseFrontRight": Vector2(0.0, 0.16),
-			}
-		_:
-			return {
-				"PointBaseBackLeft": Vector2(-0.1, -0.1),
-				"PointBaseBackRight": Vector2(0.1, -0.1),
-				"PointBaseFrontLeft": Vector2(-0.1, 0.1),
-				"PointBaseFrontRight": Vector2(0.1, 0.1),
-			}
+	var out: Dictionary = {
+		"PointBaseBackLeft": Vector2(-0.1, -0.1),
+		"PointBaseBackRight": Vector2(0.1, -0.1),
+		"PointBaseFrontLeft": Vector2(-0.1, 0.1),
+		"PointBaseFrontRight": Vector2(0.1, 0.1),
+	}
+	if base_shape == "rect":
+		out = {
+			"PointBaseBackLeft": Vector2(-0.14, -0.07),
+			"PointBaseBackRight": Vector2(0.14, -0.07),
+			"PointBaseFrontLeft": Vector2(-0.14, 0.07),
+			"PointBaseFrontRight": Vector2(0.14, 0.07),
+		}
+	elif base_shape == "rhombus":
+		# Diagonals 0.32 and 0.16 — all four edges sqrt(0.16^2 + 0.08^2), no right angles.
+		out = {
+			"PointBaseBackLeft": Vector2(0.0, -0.16),
+			"PointBaseBackRight": Vector2(0.08, 0.0),
+			"PointBaseFrontLeft": Vector2(-0.08, 0.0),
+			"PointBaseFrontRight": Vector2(0.0, 0.16),
+		}
+	return out
 
 func _apply_geometry() -> void:
 	var offsets: Dictionary = _base_offsets()

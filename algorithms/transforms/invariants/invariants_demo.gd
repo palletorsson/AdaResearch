@@ -19,6 +19,19 @@ class_name InvariantsDemo
 
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 
+# ── DNA (stage 2 — variation) ────────────────────────────────────────
+# `figure` = WHICH shape is put under transformation. The equilateral triangle
+# is the flattering case: its own symmetry hides which measurement belongs to
+# which edge, so "everything held" reads as a property of the transform when it
+# is partly a property of the figure. A scalene triangle removes that alibi.
+# `pose` = WHICH face of the argument this copy already shows when you walk up.
+# A placed SHEAR copy argues "identity fully dissolved" before anyone touches a
+# button; the default `none` waits, exactly as every shipped placement does.
+@export_enum("equilateral", "right", "scalene") var figure: String = "equilateral"
+@export_enum("none", "translate", "rotate", "scale", "shear", "project") var pose: String = "none"
+
+var _built: bool = false
+
 # ── Constants ────────────────────────────────────────────────────────
 const EDGE_RADIUS: float = 0.003
 const VERTEX_RADIUS: float = 0.008
@@ -30,6 +43,8 @@ const AMBER := Color(1.0, 0.75, 0.25)  # projection shadow — the length that s
 const SHADOW_RADIUS: float = 0.006
 
 # ── Original triangle (equilateral, ~0.3m side) ─────────────────────
+# Set from `figure` in _ready; the literal below is the `equilateral` default
+# and stays the value every existing placement is built on.
 var _orig_verts: Array[Vector3] = [
 	Vector3(-0.15, 0.35, 0.0),
 	Vector3(0.15, 0.35, 0.0),
@@ -62,6 +77,7 @@ var _projection_tag: Node3D           # reports dot product and cos θ
 
 
 func _ready() -> void:
+	_orig_verts = _verts_for_figure(figure)
 	_current_verts = _orig_verts.duplicate()
 	_compute_original_measurements()
 	_build_triangle()
@@ -69,6 +85,32 @@ func _ready() -> void:
 	_build_projection()
 	_build_panel()
 	_update_display()
+	# pose == "none" leaves the untouched figure on show — the pre-promotion state.
+	if pose != "none":
+		_apply_transform(pose.to_upper())
+	_built = true
+
+
+# The figure under test. Each keeps roughly the same footprint and sits on the
+# same baseline (y = 0.35) so the panel, labels and grid placement are unmoved.
+func _verts_for_figure(which: String) -> Array[Vector3]:
+	var verts: Array[Vector3] = []
+	match which:
+		"right":
+			# Right angle at vert0 — the 90° tag is the one you watch die under shear.
+			verts.append(Vector3(-0.15, 0.35, 0.0))
+			verts.append(Vector3(0.15, 0.35, 0.0))
+			verts.append(Vector3(-0.15, 0.65, 0.0))
+		"scalene":
+			# No two sides or angles equal — no coincidence can be mistaken for invariance.
+			verts.append(Vector3(-0.17, 0.35, 0.0))
+			verts.append(Vector3(0.16, 0.35, 0.0))
+			verts.append(Vector3(0.02, 0.62, 0.0))
+		_:
+			verts.append(Vector3(-0.15, 0.35, 0.0))
+			verts.append(Vector3(0.15, 0.35, 0.0))
+			verts.append(Vector3(0.0, 0.35 + 0.15 * sqrt(3.0), 0.0))
+	return verts
 
 
 # ═════════════════════════════════════════════════════════════════════
@@ -442,4 +484,28 @@ func _invariant_color(current_val: float, orig_val: float) -> Color:
 # ═════════════════════════════════════════════════════════════════════
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	var new_figure: String = str(config_data.get("figure", figure))
+	var new_pose: String = str(config_data.get("pose", pose))
+	var changed: bool = (new_figure != figure) or (new_pose != pose)
+	figure = new_figure
+	pose = new_pose
+	# Before _ready the values are simply picked up when it builds; after _ready
+	# we only restage when something actually moved. An unguarded restage here
+	# would re-pose every already-placed copy.
+	if not _built or not changed:
+		return
+	_restage()
+
+
+# Re-seat the figure and re-show the pose without rebuilding any node — the
+# edge/vertex meshes are repositioned by _update_display, tags are rebaked there.
+func _restage() -> void:
+	_orig_verts = _verts_for_figure(figure)
+	_compute_original_measurements()
+	_projection_active = false
+	_active_transform = "NONE"
+	_current_verts = _orig_verts.duplicate()
+	if pose == "none":
+		_update_display()
+	else:
+		_apply_transform(pose.to_upper())

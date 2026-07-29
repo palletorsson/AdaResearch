@@ -15,10 +15,40 @@
 #
 # Place in map_data.json interactables layer as "wedge_skill_pickup".
 
+## STAGE-2 DNA PROMOTION (2026-07-29).
+##
+## Before this the script had zero exports and apply_grid_config() was a bare
+## `pass`. The cage was not a neutral container: a wireframe cube around a power
+## says the power is confined, catalogued, a specimen you must reach into. That
+## was an unexamined constant. Two axes —
+##
+##   housing  HOW THE SKILL IS KEPT UNTIL IT IS YOURS   cage · plinth · open
+##   after    WHAT THE SITE DOES ONCE IT IS TAKEN       fade · remain
+##
+##   cage    the wireframe cube (pre-promotion behaviour, the default).
+##   plinth  a solid column under the prism, nothing above it. The power is
+##           offered, ceremonially, rather than confined.
+##   open    no housing at all. The power lies about in the room, unguarded —
+##           a capability nobody thought to fence.
+##
+##   fade    the housing dissolves and the artifact frees itself. The site of
+##           acquisition erases the fact that anything was here (default).
+##   remain  the housing stays, dimmed and empty, a scar marking that something
+##           was taken from this spot.
+##
+## `after` is a time-domain axis — it is invisible to a still capture and only
+## reads once the prism has been grabbed.
+
 extends Node3D
 class_name WedgeSkillPickup
 
+## How the skill is kept before it is yours: cage, plinth, or open.
+@export var housing: String = "cage"
+## What the site does after collection: fade (dissolve and free) or remain (dim, empty).
+@export var after: String = "fade"
+
 const CAGE_SIZE := 1.0
+const PLINTH_HEIGHT := 0.42
 const EDGE_THICKNESS := 0.006
 const CAGE_COLOR := Color(0.85, 0.55, 0.2, 0.8)  # Warm orange — wedge identity
 const BOB_SPEED := 1.0
@@ -27,6 +57,8 @@ const SPIN_SPEED := 0.6
 const FADE_TIME := 1.5
 
 var _cage: Node3D = null
+var _plinth: Node3D = null
+var _built: bool = false
 var _prism_visual: MeshInstance3D = null
 var _prism_pickable: RigidBody3D = null
 var _cage_light: OmniLight3D = null
@@ -40,9 +72,22 @@ signal skill_collected()
 
 
 func _ready() -> void:
-	_build_cage()
+	_build_housing()
 	_build_light()
 	_build_prism_pickable()
+	_built = true
+
+
+## Dispatch on the housing axis. housing="cage" calls the original builder
+## unchanged, so every existing placement is byte-for-byte what it was.
+func _build_housing() -> void:
+	match housing:
+		"plinth":
+			_build_plinth()
+		"open":
+			pass
+		_:
+			_build_cage()
 
 
 func _process(delta: float) -> void:
@@ -62,6 +107,16 @@ func _process(delta: float) -> void:
 	if _fading:
 		_fade_progress += delta / FADE_TIME
 		if _fade_progress >= 1.0:
+			if after == "remain":
+				# The site keeps its shape, dimmed — a scar where a power was taken.
+				_fading = false
+				_fade_progress = 1.0
+				for mat in _edge_materials:
+					mat.albedo_color.a = 0.18
+					mat.emission_energy_multiplier = 0.15
+				if _cage_light:
+					_cage_light.light_energy = 0.15
+				return
 			queue_free()
 			return
 		var alpha := 1.0 - _fade_progress
@@ -133,6 +188,51 @@ func _build_edge(start: Vector3, end_pos: Vector3, idx: int) -> void:
 		if axis.length() > 0.001:
 			mesh_inst.transform.basis = Basis(axis, angle)
 			mesh_inst.position = mid
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PLINTH — housing="plinth". A column under the prism and nothing above it:
+# the power offered rather than confined. Reached only via the axis.
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _build_plinth() -> void:
+	_plinth = Node3D.new()
+	_plinth.name = "Plinth"
+	add_child(_plinth)
+
+	var shaft := CylinderMesh.new()
+	shaft.top_radius = 0.13
+	shaft.bottom_radius = 0.19
+	shaft.height = PLINTH_HEIGHT
+	shaft.radial_segments = 16
+	_add_plinth_piece(shaft, "PlinthShaft", Vector3(0, PLINTH_HEIGHT * 0.5, 0))
+
+	var cap := CylinderMesh.new()
+	cap.top_radius = 0.21
+	cap.bottom_radius = 0.21
+	cap.height = 0.03
+	cap.radial_segments = 16
+	_add_plinth_piece(cap, "PlinthCap", Vector3(0, PLINTH_HEIGHT + 0.015, 0))
+
+
+func _add_plinth_piece(mesh: Mesh, piece_name: String, pos: Vector3) -> void:
+	var mesh_inst := MeshInstance3D.new()
+	mesh_inst.name = piece_name
+	mesh_inst.mesh = mesh
+	mesh_inst.position = pos
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(CAGE_COLOR.r * 0.45, CAGE_COLOR.g * 0.4, CAGE_COLOR.b * 0.35, 1.0)
+	mat.emission_enabled = true
+	mat.emission = Color(CAGE_COLOR.r, CAGE_COLOR.g, CAGE_COLOR.b)
+	mat.emission_energy_multiplier = 0.3
+	mat.metallic = 0.55
+	mat.roughness = 0.35
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mesh_inst.material_override = mat
+
+	_plinth.add_child(mesh_inst)
+	_edge_materials.append(mat)
 
 
 func _build_light() -> void:
@@ -224,5 +324,32 @@ func _on_prism_grabbed(_pickable) -> void:
 	print("[WedgePickup] Skill collected — cage fading")
 
 
+## Guarded: `after` is a plain assignment (nothing to rebuild), and the housing is
+## only rebuilt when the token actually names a different one AND _ready has
+## already built once. A placement that passes no housing token never rebuilds.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass  # No config needed
+	if config_data.has("after"):
+		after = str(config_data["after"])
+
+	if not config_data.has("housing"):
+		return
+	var want: String = str(config_data["housing"])
+	if want == "" or want == housing:
+		return
+	housing = want
+	if not _built or _collected or _fading or not is_inside_tree():
+		return
+	_rebuild_housing()
+
+
+## Swaps only the housing. The prism, the light and the collected state are left
+## exactly where they are — nothing about the pickup itself is re-created.
+func _rebuild_housing() -> void:
+	if is_instance_valid(_cage):
+		_cage.queue_free()
+	_cage = null
+	if is_instance_valid(_plinth):
+		_plinth.queue_free()
+	_plinth = null
+	_edge_materials.clear()
+	_build_housing()

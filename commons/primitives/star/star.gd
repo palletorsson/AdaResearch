@@ -6,17 +6,48 @@
 # critical_parameter: the vertex array — move one number and the star deforms; the form lives in the coordinates
 # triggers: constructs its mesh on ready via SurfaceTool from the hardcoded vertex/face arrays
 # emerges: the insight that "shape" is not drawn but declared — geometry is a data structure before it is an image
-# needs: [builds mesh + collision from arrays [has], missing grabbable vertices to let the learner edit the data]
+# needs: [builds mesh + collision from arrays [has], points + waist_radius exposed as config axes [has], missing grabbable vertices to let the learner edit the data]
 # relationships: an applied triangle — every face is a triangle; a bridge from primitive faces to named forms
 # truth: a star is not drawn — it is a specific list of vertices and the faces that connect them; form is data
 extends Node3D
 
 var base_color: Color = Color(1.0, 0.9, 0.2)  # Golden yellow
 
+# --- DNA (stage 2, promoted 2026-07-29) ---
+# The shipped 22-vertex table is not arbitrary: reading it back, the rim is ten points
+# at 36-degree steps alternating radius 0.25 and 0.50 at z = +/-0.125. The "specific
+# list" is the output of a rule, so the two constants inside that rule are the axes.
+#
+# points: how many arms. 5 is the shipped star. At 4 it reads as a compass rose, at 12
+#   as a sun/gear — the question of when a star stops being a star and becomes a wheel.
+@export var points: int = 5
+# waist_radius: how deep the notch between arms cuts, against a fixed 0.5 outer radius.
+#   0.25 is shipped. Near 0.45 the arms vanish into a polygon; near 0.10 they become
+#   needles. This is the knob that decides "star" versus "disc" versus "asterisk".
+@export var waist_radius: float = 0.25
+
+const OUTER_RADIUS: float = 0.5
+const HALF_THICKNESS: float = 0.125
+
+var _built: bool = false
+var _mesh_instance: MeshInstance3D = null
+var _static_body: StaticBody3D = null
+
 func _ready():
 	create_star()
+	_built = true
 
 func create_star():
+	# Free only what a previous build made — the scene's own children stay put.
+	if _mesh_instance and is_instance_valid(_mesh_instance):
+		remove_child(_mesh_instance)
+		_mesh_instance.queue_free()
+		_mesh_instance = null
+	if _static_body and is_instance_valid(_static_body):
+		remove_child(_static_body)
+		_static_body.queue_free()
+		_static_body = null
+
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -31,10 +62,34 @@ func create_star():
 	mesh_instance.name = "StarMesh"
 	apply_queer_material(mesh_instance, base_color)
 	add_child(mesh_instance)
+	_mesh_instance = mesh_instance
 
 	create_collision()
 
 func create_star_vertices() -> Array:
+	# Default path returns the literal shipped table verbatim, so every existing
+	# placement gets byte-identical geometry — no float drift from regeneration.
+	if points == 5 and is_equal_approx(waist_radius, 0.25):
+		return _shipped_star_vertices()
+	return _generated_star_vertices()
+
+func _generated_star_vertices() -> Array:
+	# Same rule the shipped table encodes, opened up to any arm count and waist.
+	var vertices = [
+		Vector3(0.0, 0.0, HALF_THICKNESS),    # 0 - center top
+		Vector3(0.0, 0.0, -HALF_THICKNESS),   # 1 - center bottom
+	]
+	var rim_count: int = max(3, points) * 2
+	for k in range(rim_count):
+		var angle: float = TAU * float(k) / float(rim_count)
+		var radius: float = waist_radius if k % 2 == 0 else OUTER_RADIUS
+		var x: float = cos(angle) * radius
+		var y: float = sin(angle) * radius
+		vertices.append(Vector3(x, y, HALF_THICKNESS))
+		vertices.append(Vector3(x, y, -HALF_THICKNESS))
+	return vertices
+
+func _shipped_star_vertices() -> Array:
 	# Original vertex array (22 vertices) - 5-pointed star with thickness
 	var vertices = [
 		Vector3(0.00000000e+00, 0.00000000e+00, 1.25000000e-01),      # 0 - center top
@@ -64,79 +119,43 @@ func create_star_vertices() -> Array:
 	return vertices
 
 func create_star_faces() -> Array:
+	# The shipped face list, read back as a rule: a top fan, a ring of side quads split
+	# into triangles, and a bottom fan. For points == 5 this emits the original 40
+	# triangles in the original order and with the original winding (verified).
 	var faces = []
+	var rim_count: int = max(3, points) * 2
+	var last: int = rim_count - 1
 
-	# Top face triangles (faces 0-9)
-	faces.append([2, 0, 20])
-	faces.append([0, 2, 4])
-	faces.append([0, 4, 6])
-	faces.append([0, 6, 8])
-	faces.append([0, 8, 10])
-	faces.append([0, 10, 12])
-	faces.append([0, 12, 14])
-	faces.append([0, 14, 16])
-	faces.append([0, 16, 18])
-	faces.append([0, 18, 20])
+	# Top face triangles
+	faces.append([_rim_top(0), 0, _rim_top(last)])
+	for k in range(last):
+		faces.append([0, _rim_top(k), _rim_top(k + 1)])
 
-	# Side quad faces converted to triangles (faces 10-19)
-	# Face 10: [3, 2, 20, 21]
-	faces.append([3, 2, 20])
-	faces.append([3, 20, 21])
+	# Side quads converted to triangles
+	faces.append([_rim_bot(0), _rim_top(0), _rim_top(last)])
+	faces.append([_rim_bot(0), _rim_top(last), _rim_bot(last)])
+	for k in range(last):
+		faces.append([_rim_top(k), _rim_bot(k), _rim_bot(k + 1)])
+		faces.append([_rim_top(k), _rim_bot(k + 1), _rim_top(k + 1)])
 
-	# Face 11: [2, 3, 5, 4]
-	faces.append([2, 3, 5])
-	faces.append([2, 5, 4])
-
-	# Face 12: [4, 5, 7, 6]
-	faces.append([4, 5, 7])
-	faces.append([4, 7, 6])
-
-	# Face 13: [6, 7, 9, 8]
-	faces.append([6, 7, 9])
-	faces.append([6, 9, 8])
-
-	# Face 14: [8, 9, 11, 10]
-	faces.append([8, 9, 11])
-	faces.append([8, 11, 10])
-
-	# Face 15: [10, 11, 13, 12]
-	faces.append([10, 11, 13])
-	faces.append([10, 13, 12])
-
-	# Face 16: [12, 13, 15, 14]
-	faces.append([12, 13, 15])
-	faces.append([12, 15, 14])
-
-	# Face 17: [14, 15, 17, 16]
-	faces.append([14, 15, 17])
-	faces.append([14, 17, 16])
-
-	# Face 18: [16, 17, 19, 18]
-	faces.append([16, 17, 19])
-	faces.append([16, 19, 18])
-
-	# Face 19: [18, 19, 21, 20]
-	faces.append([18, 19, 21])
-	faces.append([18, 21, 20])
-
-	# Bottom face triangles (faces 20-29)
-	faces.append([1, 3, 21])
-	faces.append([3, 1, 5])
-	faces.append([5, 1, 7])
-	faces.append([7, 1, 9])
-	faces.append([9, 1, 11])
-	faces.append([11, 1, 13])
-	faces.append([13, 1, 15])
-	faces.append([15, 1, 17])
-	faces.append([17, 1, 19])
-	faces.append([19, 1, 21])
+	# Bottom face triangles
+	faces.append([1, _rim_bot(0), _rim_bot(last)])
+	for k in range(last):
+		faces.append([_rim_bot(k), 1, _rim_bot(k + 1)])
 
 	return faces
+
+func _rim_top(k: int) -> int:
+	return 2 + 2 * k
+
+func _rim_bot(k: int) -> int:
+	return 3 + 2 * k
 
 func create_collision():
 	var static_body = StaticBody3D.new()
 	static_body.name = "StarCollision"
 	add_child(static_body)
+	_static_body = static_body
 
 	# Approximate star collision with cylinder
 	var collision = CollisionShape3D.new()
@@ -147,6 +166,23 @@ func create_collision():
 	collision.position = Vector3(0, 0, 0)
 	collision.rotation_degrees = Vector3(90, 0, 0)  # Rotate to align with Z thickness
 	static_body.add_child(collision)
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	var rebuild: bool = false
+	if config_data.has("points"):
+		var new_points: int = int(config_data["points"])
+		if new_points != points:
+			points = new_points
+			rebuild = true
+	if config_data.has("waist_radius"):
+		var new_waist: float = float(config_data["waist_radius"])
+		if not is_equal_approx(new_waist, waist_radius):
+			waist_radius = new_waist
+			rebuild = true
+	# Only rebuild when a value actually changed AND _ready already built once —
+	# an unguarded rebuild here would re-generate every shipped placement.
+	if rebuild and _built and is_inside_tree():
+		create_star()
 
 func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 	var v0 = vertices[face[0]]
