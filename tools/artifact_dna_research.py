@@ -90,11 +90,33 @@ def registry() -> dict:
 
 
 def gd_for(entry: dict) -> Path | None:
+    """The script behind an artifact's scene.
+
+    The sibling guess (foo.tscn -> foo.gd) covers most of the project but not
+    all of it: commons/interface/line.tscn loads its script from
+    commons/primitives/line/line.gd, so line_interface reported "no .gd
+    resolvable" and its declared axis stayed unreachable. Fall back to reading
+    the scene's own Script ext_resource, which is where the truth is.
+    """
     sc = entry.get("scene") or entry.get("scene_path") or ""
     if not sc:
         return None
-    p = REPO / sc.replace("res://", "").replace(".tscn", ".gd")
-    return p if p.exists() else None
+    rel = sc.replace("res://", "")
+    sibling = REPO / rel.replace(".tscn", ".gd")
+    if sibling.exists():
+        return sibling
+    tscn = REPO / rel
+    if not tscn.exists():
+        return None
+    try:
+        text = tscn.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return None
+    for m in re.finditer(r'\[ext_resource[^\]]*type="Script"[^\]]*path="res://([^"]+)"', text):
+        p = REPO / m.group(1)
+        if p.exists():
+            return p
+    return None
 
 
 def discover_axes(entry: dict, src: str) -> list[tuple[str, list, str]]:
