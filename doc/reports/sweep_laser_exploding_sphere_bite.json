@@ -1,0 +1,39 @@
+{
+ "sweep": "laser_exploding_sphere",
+ "peak_changed_pct": 0.0,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "params": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 1.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "params": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 2.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "params": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 1.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "params": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 2.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

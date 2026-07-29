@@ -1,0 +1,39 @@
+{
+ "sweep": "random_butterflies",
+ "peak_changed_pct": 0.572,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "params": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 5.0
+   },
+   "changed_px": 967,
+   "changed_pct": 0.167
+  },
+  {
+   "params": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 10.0
+   },
+   "changed_px": 2246,
+   "changed_pct": 0.389
+  },
+  {
+   "params": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 5.0
+   },
+   "changed_px": 3302,
+   "changed_pct": 0.572
+  },
+  {
+   "params": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 10.0
+   },
+   "changed_px": 1192,
+   "changed_pct": 0.206
+  }
+ ]
+}

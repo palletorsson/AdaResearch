@@ -1,0 +1,55 @@
+{
+ "sweep": "station_crates",
+ "peak_changed_pct": 14.642,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "params": {
+    "upkeep": "store",
+    "hazard_labels": true
+   },
+   "changed_px": 84572,
+   "changed_pct": 14.642
+  },
+  {
+   "params": {
+    "upkeep": "store",
+    "hazard_labels": false
+   },
+   "changed_px": 84570,
+   "changed_pct": 14.642
+  },
+  {
+   "params": {
+    "upkeep": "scrap",
+    "hazard_labels": true
+   },
+   "changed_px": 76533,
+   "changed_pct": 13.25
+  },
+  {
+   "params": {
+    "upkeep": "scrap",
+    "hazard_labels": false
+   },
+   "changed_px": 76532,
+   "changed_pct": 13.25
+  },
+  {
+   "params": {
+    "upkeep": "works",
+    "hazard_labels": true
+   },
+   "changed_px": 65197,
+   "changed_pct": 11.288
+  },
+  {
+   "params": {
+    "upkeep": "works",
+    "hazard_labels": false
+   },
+   "changed_px": 65197,
+   "changed_pct": 11.288
+  }
+ ]
+}

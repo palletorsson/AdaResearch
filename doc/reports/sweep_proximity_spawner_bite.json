@@ -1,0 +1,39 @@
+{
+ "sweep": "proximity_spawner",
+ "peak_changed_pct": 0.0,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "params": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "params": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 30.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "params": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 15.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "params": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 30.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  }
+ ]
+}

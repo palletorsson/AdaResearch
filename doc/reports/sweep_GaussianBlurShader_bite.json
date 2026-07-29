@@ -1,0 +1,39 @@
+{
+ "sweep": "GaussianBlurShader",
+ "peak_changed_pct": 3.893,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "params": {
+    "show_visual_frame": true,
+    "max_blur_radius": 64.0
+   },
+   "changed_px": 401,
+   "changed_pct": 0.069
+  },
+  {
+   "params": {
+    "show_visual_frame": false,
+    "max_blur_radius": 20.0
+   },
+   "changed_px": 22372,
+   "changed_pct": 3.873
+  },
+  {
+   "params": {
+    "show_visual_frame": false,
+    "max_blur_radius": 40.0
+   },
+   "changed_px": 22420,
+   "changed_pct": 3.882
+  },
+  {
+   "params": {
+    "show_visual_frame": false,
+    "max_blur_radius": 64.0
+   },
+   "changed_px": 22486,
+   "changed_pct": 3.893
+  }
+ ]
+}

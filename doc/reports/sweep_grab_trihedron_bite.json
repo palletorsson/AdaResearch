@@ -1,0 +1,23 @@
+{
+ "sweep": "grab_trihedron",
+ "peak_changed_pct": 0.495,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "params": {
+    "snap_to_shelf": false,
+    "snap_match_rotation": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "params": {
+    "snap_to_shelf": false,
+    "snap_match_rotation": false
+   },
+   "changed_px": 2862,
+   "changed_pct": 0.495
+  }
+ ]
+}
