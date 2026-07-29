@@ -276,10 +276,49 @@ def load_ledger() -> dict:
     return {"generated_at": "", "total": 0, "artifacts": []}
 
 
+def _placements() -> dict:
+    """How many map cells hold each artifact, from the stage-1 manifests."""
+    counts: dict = {}
+    for mf in (OUT.parent / "map-dna").glob("*/manifest.json"):
+        try:
+            m = json.loads(mf.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for e in m.get("entries", []):
+            tok = e.get("id")
+            if tok:
+                counts[tok] = counts.get(tok, 0) + 1
+    return counts
+
+
 def save_ledger(led: dict) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     led["generated_at"] = time.strftime("%Y-%m-%dT%H:%M:%S")
     led["total"] = len(led["artifacts"])
+
+    # Stamp reach, and summarise the loop by PLACEMENTS rather than by artifact
+    # count. Those two numbers tell different stories and only one of them is
+    # about the project a player walks through: 246 of 1554 artifacts researched
+    # reads as 16% done, while the same state weighted by placements is half the
+    # rooms covered and 3% with an axis anyone has proven expressive. The
+    # artifact count flatters; reach does not.
+    counts = _placements()
+    total_placements = sum(counts.values())
+    reached = measured = biting = 0
+    for a in led["artifacts"]:
+        n = counts.get(a.get("token", ""), 0)
+        a["placements"] = n
+        reached += n
+        if a.get("bite_pct") is not None:
+            measured += n
+            if a["bite_pct"] >= 2.0:
+                biting += n
+    led["reach"] = {
+        "placements_total": total_placements,
+        "placements_researched": reached,
+        "placements_measured": measured,
+        "placements_biting": biting,
+    }
     LEDGER.write_text(json.dumps(led, indent=1), encoding="utf-8")
 
 
