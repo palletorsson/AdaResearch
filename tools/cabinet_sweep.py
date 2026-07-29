@@ -183,6 +183,62 @@ def main() -> int:
     return tile(sweep_name, variants, keys, cross_member=args.all)
 
 
+def _report_bite(sweep_name: str, shots: list) -> None:
+    """Measure how much each variant actually changed the image, and say so.
+
+    A sweep sheet looks like a verdict whether or not the axis did anything.
+    Three separate causes produce the same innocent-looking grid of tiles: an
+    axis that genuinely does nothing, an axis whose value never reached the
+    node that owns it, and a subject too small to read. Until this ran, telling
+    them apart meant diffing tiles by hand — which is how line_interface spent
+    an afternoon misdiagnosed as inert when its value simply was not arriving.
+
+    Writes doc/reports/sweep_<name>_bite.json alongside the sheet so the
+    research ledger can carry the number instead of an impression.
+    """
+    try:
+        from PIL import Image, ImageChops
+    except ImportError:
+        return
+    if len(shots) < 2:
+        return
+    # The FIRST shot is not a usable baseline: the environment has not settled
+    # on it, so its background sits at a different tint and every later variant
+    # "differs" from it by 100% of the frame. Measuring against it reported
+    # BITES for an axis known to change nothing. Baseline on the second shot
+    # whenever there is one to spare.
+    base_idx = 1 if len(shots) >= 3 else 0
+    try:
+        base = Image.open(shots[base_idx][2]).convert("RGB")
+    except OSError:
+        return
+    total = base.width * base.height
+    rows = []
+    for (art, params, p) in [s for i, s in enumerate(shots) if i != base_idx and i != 0]:
+        try:
+            im = Image.open(p).convert("RGB")
+        except OSError:
+            continue
+        if im.size != base.size:
+            continue
+        diff = ImageChops.difference(base, im)
+        changed = sum(1 for px in diff.getdata() if sum(px) > 12)
+        rows.append({"params": params, "changed_px": changed,
+                     "changed_pct": round(100.0 * changed / max(1, total), 3)})
+    if not rows:
+        return
+    peak = max(r["changed_pct"] for r in rows)
+    verdict = ("BITES" if peak >= 2.0 else
+               "faint - under 2% of the frame moved" if peak > 0.05 else
+               "NO VISIBLE CHANGE - the axis did nothing a still can show")
+    print(f"  bite: peak {peak:.2f}% of pixels changed across variants — {verdict}")
+    out = REPO / "doc" / "reports" / f"sweep_{sweep_name}_bite.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps({"sweep": sweep_name, "peak_changed_pct": peak,
+                               "verdict": verdict, "variants": rows}, indent=1),
+                   encoding="utf-8")
+
+
 def tile(sweep_name: str, variants: list[dict], keys: list[str],
          cross_member: bool = False) -> int:
     try:
@@ -195,6 +251,7 @@ def tile(sweep_name: str, variants: list[dict], keys: list[str],
     if not shots:
         print("  no shots produced")
         return 1
+    _report_bite(sweep_name, shots)
     n = len(shots)
     # cross-member sweep: one ROW per member, its finishes side by side, so
     # cols = combos-per-member. Single artifact: up to 4 wide.
