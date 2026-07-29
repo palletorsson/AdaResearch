@@ -8287,7 +8287,9 @@
     "default": "readout=numeral - the shipped code path, so existing placements are unchanged",
     "was": "the artifact's critical_parameter was a RATE - 'the glitch/haptic resistance when length is near an integer' - and a rate is invisible to a still frame. The promotion demoted the mechanism and built the claim underneath it instead: 'whole numbers resist' is an argument about LEGIBILITY, about which values this apparatus treats as clean",
     "kin": "shares one vocabulary with xyz_slider_plate.readout - one word, two apparatuses",
-    "note": "declared by hand 2026-07-29 - the axis was in the script and the registry had never been told. Its script is NOT a sibling of its scene (scene commons/interface/line.tscn loads res://commons/primitives/line/line.gd), which is why a sibling-path scan missed it"
+    "note": "declared by hand 2026-07-29 - the axis was in the script and the registry had never been told. Its script is NOT a sibling of its scene (scene commons/interface/line.tscn loads res://commons/primitives/line/line.gd), which is why a sibling-path scan missed it",
+    "framing": 0.85,
+    "framing_note": "gradation and lattice build a graduated row far wider than the bare line, so a hint tuned for numeral crops them. 0.85 holds all four values in frame"
    }
   },
   "lsystem_editor": {

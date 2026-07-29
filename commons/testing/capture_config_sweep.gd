@@ -37,6 +37,11 @@ const PAD := 1.9
 const SETTLE := 1.1
 
 var _spec_path: String = ""
+## Scales the framing distance. 1.0 = fit the whole artifact (the old fixed
+## behaviour). Below 1.0 moves the camera in, for artifacts whose axis lives in
+## a detail rather than in the silhouette. Read from the spec's "framing" key,
+## which cabinet_sweep fills from the registry's dna.framing.
+var _framing: float = 1.0
 
 
 func _initialize() -> void:
@@ -49,6 +54,9 @@ func _initialize() -> void:
 
 func _run() -> void:
 	var spec: Dictionary = _load_json(_spec_path)
+	var framing_hint: float = float(spec.get("framing", 1.0))
+	if framing_hint > 0.05 and framing_hint < 20.0:
+		_framing = framing_hint
 	var scene_path: String = str(spec.get("scene", ""))
 	var out_dir: String = str(spec.get("out_dir", "res://ada_run/sweep"))
 	var variants: Array = spec.get("variants", [])
@@ -83,10 +91,22 @@ func _run() -> void:
 
 		var inst: Node = packed.instantiate()
 		# Set every swept @export BEFORE add_child, so _ready() builds with it.
+		#
+		# The property is not always on the root. Plenty of scenes wrap their
+		# logic one level down — commons/interface/line.tscn is a bare Node3D
+		# whose script lives on a `lineContainer` child, and the script cannot
+		# simply move up because it must be the grab spheres' parent. Setting
+		# only on the root silently did nothing there: the sweep rendered eight
+		# identical tiles and the axis looked inert when it was merely unreachable.
 		for key in params.keys():
 			var val: Variant = params[key]
-			if key in inst:
-				inst.set(key, val)
+			var holder: Node = _holder_of(inst, String(key))
+			if holder != null:
+				holder.set(key, val)
+			else:
+				push_warning("capture_config_sweep: no node in %s exposes '%s' — "
+					+ "the value was not applied and this tile is not a variant."
+					% [inst.name, key])
 		vp.add_child(inst)
 		# Frame the labels exactly as the grid does at spawn, so the tile shows the
 		# 2D-in-3D plate the player meets and not the hanging billboard.
@@ -100,7 +120,13 @@ func _run() -> void:
 		var aabb := _subtree_aabb(inst)
 		var c := aabb.get_center()
 		var radius: float = maxf(aabb.size.length() * 0.5, 0.2)
-		var dist: float = radius / tan(deg_to_rad(FOV * 0.5)) * PAD
+		# PAD frames the WHOLE artifact, which is wrong when the axis lives in a
+		# small part of a large object: line_interface's readout axis rendered at
+		# ~30 px in a 700 px frame, so four different values were indistinguishable
+		# and the sheet could not be told apart from an inert axis. --framing
+		# scales that distance (below 1.0 moves in), set per artifact from the
+		# registry's dna.framing so the subject of the axis is what gets framed.
+		var dist: float = radius / tan(deg_to_rad(FOV * 0.5)) * PAD * _framing
 		var dir := Vector3(sin(YAW) * cos(PITCH), -sin(PITCH), cos(YAW) * cos(PITCH))
 		cam.global_position = c + dir * dist
 		cam.look_at(c, Vector3.UP)
@@ -145,6 +171,21 @@ func _stage(vp: SubViewport) -> void:
 	cam.name = "Cam"
 	cam.fov = FOV
 	vp.add_child(cam)
+
+
+## The node that actually owns a swept property — the root if it has it, else
+## the first descendant that does. Breadth-first so the shallowest owner wins.
+func _holder_of(node: Node, key: String) -> Node:
+	if key in node:
+		return node
+	var queue: Array[Node] = [node]
+	while not queue.is_empty():
+		var n: Node = queue.pop_front()
+		for c in n.get_children():
+			if key in c:
+				return c
+			queue.append(c)
+	return null
 
 
 func _subtree_aabb(root_node: Node) -> AABB:

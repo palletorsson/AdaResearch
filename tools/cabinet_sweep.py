@@ -125,12 +125,38 @@ def main() -> int:
         print(f"{len(variants)} variants exceeds --max {args.max}; raise --max or narrow")
         return 1
 
+    # Framing hint. The sweep fits the whole artifact by default, which
+    # under-frames any axis that lives in a detail rather than the silhouette —
+    # line_interface's readout rendered at ~30 px in a 700 px frame, so four
+    # different values were indistinguishable from an inert axis. An artifact
+    # can ask for a tighter shot with "framing" in its registry dna block.
+    framing = 1.0
+    if targets:
+        import glob as _glob
+        for _f in _glob.glob(str(REPO / "commons/artifacts/registry/*.json")):
+            try:
+                _reg = json.loads(Path(_f).read_text(encoding="utf-8")).get("artifacts", {})
+            except Exception:
+                continue
+            _e = _reg.get(targets[0][0])
+            if isinstance(_e, dict) and isinstance(_e.get("dna"), dict):
+                try:
+                    _v = float(_e["dna"].get("framing", 1.0))
+                except (TypeError, ValueError):
+                    _v = 1.0
+                if 0.05 < _v < 20.0:
+                    framing = _v
+                break
+
     SPEC.parent.mkdir(exist_ok=True)
     SPEC.write_text(json.dumps({
         "scene": targets[0][1],
         "out_dir": "res://ada_run/sweep",
+        "framing": framing,
         "variants": variants,
     }, indent=1), encoding="utf-8")
+    if framing != 1.0:
+        print(f"  framing hint from registry: x{framing}")
 
     # clear old shots + done marker
     if SWEEP_OUT.exists():

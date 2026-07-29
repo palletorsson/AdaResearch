@@ -13,6 +13,11 @@ var _values: Array = []
 var _out := "user://dna_sweep"
 var _w := 700
 var _h := 700
+## Multiplier on the just-fits distance. 1.0 = the subject exactly fills the
+## frame; larger backs off. Passed as --framing= so an artifact whose axis lives
+## in fine detail can be shot tight, and one that needs its surroundings can be
+## shot loose, without changing the artifact.
+var _framing := 1.12
 
 
 func _initialize() -> void:
@@ -25,6 +30,10 @@ func _initialize() -> void:
 			"scene": _scene_path = val
 			"param": _param = val
 			"out": _out = val
+			"framing":
+				var f: float = float(val)
+				if f > 0.05:
+					_framing = f
 			"values":
 				for v in val.split(","):
 					_values.append(float(v))
@@ -80,10 +89,29 @@ func _run() -> void:
 	await process_frame
 	var box := _aabb(artifact)
 	var focus := box.get_center()
-	var dist: float = max(box.size.x, max(box.size.y, box.size.z)) * 1.5
-	if dist <= 0.0: dist = 1.0
+
+	# Fit the BOUNDING SPHERE, not the widest axis. max_dim * 1.5 is an
+	# orthographic assumption and it under-frames small apparatus badly: the
+	# line_interface sweep put a 30-pixel subject in a 700-pixel frame, so all
+	# four values of an axis about LEGIBILITY were themselves illegible and the
+	# sheet could not be told apart from an inert axis. A degenerate AABB used
+	# to fall back to a flat 1.0 m, which is how that happened — an artifact
+	# that builds its geometry deferred measures as nothing on the first frame.
+	var radius: float = box.size.length() * 0.5
+	var half_fov: float = deg_to_rad(cam.fov) * 0.5
+	var dist: float = 0.0
+	if radius > 0.0001:
+		dist = (radius / max(0.05, sin(half_fov))) * _framing
+	else:
+		# Nothing measurable. Say so rather than guessing a metre and shipping a
+		# sheet of specks that reads as a verdict.
+		push_warning("capture_dna_sweep: AABB is degenerate for %s — the subject may "
+			+ "build deferred; framing at a close default instead of measuring." % _scene_path)
+		dist = 0.6 * _framing
 	cam.global_position = focus + Vector3(sin(0.0), sin(0.1), cos(0.0)) * dist + Vector3(0, dist * 0.15, 0)
 	cam.look_at(focus, Vector3.UP)
+	print("capture_dna_sweep: aabb=%s radius=%.3f dist=%.3f (framing x%.2f)" % [
+		box.size, radius, dist, _framing])
 
 	var out_abs := ProjectSettings.globalize_path(_out)
 	DirAccess.make_dir_recursive_absolute(out_abs)
