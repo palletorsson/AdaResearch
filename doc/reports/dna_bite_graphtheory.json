@@ -1,0 +1,119 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "graphtheory-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "graphspace",
+   "axis": "siting",
+   "frame": 0.1526,
+   "focus": 0.37867,
+   "verdict": "bites",
+   "subject": 0.87418,
+   "pairs": 10
+  },
+  {
+   "artifact": "KonigsbergBridge",
+   "axis": "parity",
+   "frame": 0.06974,
+   "focus": 0.19727,
+   "verdict": "bites",
+   "subject": 0.23316,
+   "pairs": 6
+  },
+  {
+   "artifact": "pathfinding3d",
+   "axis": "frontier",
+   "frame": 0.14227,
+   "focus": 0.369,
+   "verdict": "bites",
+   "subject": 0.32434,
+   "pairs": 6
+  },
+  {
+   "artifact": "rhizomatic_structure",
+   "axis": "mutuality",
+   "frame": 0.03591,
+   "focus": 0.13418,
+   "verdict": "bites",
+   "subject": 0.01324,
+   "pairs": 6
+  },
+  {
+   "artifact": "networkflow3d",
+   "axis": "bottleneck",
+   "frame": 0.04403,
+   "focus": 0.1804,
+   "verdict": "bites",
+   "subject": 0.87203,
+   "pairs": 6
+  },
+  {
+   "artifact": "topological_sort",
+   "axis": "precedence",
+   "frame": 0.04611,
+   "focus": 0.23423,
+   "verdict": "bites",
+   "subject": 0.02035,
+   "pairs": 10
+  },
+  {
+   "artifact": "tarjan_algorithm",
+   "axis": "mutuality",
+   "frame": 0.06671,
+   "focus": 0.30821,
+   "verdict": "bites",
+   "subject": 0.01648,
+   "pairs": 6
+  },
+  {
+   "artifact": "kosaraju_algorithm",
+   "axis": "mutuality",
+   "frame": 0.06328,
+   "focus": 0.29825,
+   "verdict": "bites",
+   "subject": 0.01762,
+   "pairs": 6
+  },
+  {
+   "artifact": "mst_visualization",
+   "axis": "backbone",
+   "frame": 0.13731,
+   "focus": 0.168,
+   "verdict": "bites",
+   "subject": 0.65422,
+   "pairs": 6
+  },
+  {
+   "artifact": "karger_algorithm",
+   "axis": "bottleneck",
+   "frame": 0.0722,
+   "focus": 0.38927,
+   "verdict": "bites",
+   "subject": 0.03293,
+   "pairs": 6
+  },
+  {
+   "artifact": "push_relabel_algorithm",
+   "axis": "relief",
+   "frame": 0.09487,
+   "focus": 0.32738,
+   "verdict": "bites",
+   "subject": 0.04063,
+   "pairs": 6
+  },
+  {
+   "artifact": "edmonds_algorithm",
+   "axis": "coupling",
+   "frame": 0.05603,
+   "focus": 0.26854,
+   "verdict": "bites",
+   "subject": 0.01391,
+   "pairs": 6
+  }
+ ]
+}

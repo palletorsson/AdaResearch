@@ -121,6 +121,18 @@ func _run() -> void:
 					+ "the value was not applied and this tile is not a variant."
 					% [inst.name, key])
 		vp.add_child(inst)
+		# Suppress demo chrome exactly as the grid does at spawn. Many algorithms/
+		# scenes were authored as standalone demos and build a screen-space
+		# CanvasLayer UI and/or their own Camera3D; GridInteractablesComponent hides
+		# both (_suppress_embedded_chrome) because screen-space UI is never correct in
+		# VR and a stray camera steals focus.
+		#
+		# This capturer was not doing it, and the cost was silent: mst_visualization's
+		# setup_ui() builds a 500 x 900 Panel, which filled two thirds of every tile
+		# and squeezed the graph itself down to a few pixels. Its axis then measured
+		# 1.18% frame / 1.47% focus and was reported INERT — a verdict about a debug
+		# panel the player never sees, not about the artifact.
+		_suppress_chrome(inst)
 		# Frame the labels exactly as the grid does at spawn, so the tile shows the
 		# 2D-in-3D plate the player meets and not the hanging billboard.
 		LabelFramer.frame_labels(inst)
@@ -158,6 +170,20 @@ func _run() -> void:
 	f.close()
 	print("config sweep: %d variants -> %s" % [shot, out_dir])
 	quit(0)
+
+
+## Mirror of GridInteractablesComponent._suppress_embedded_chrome (line 1010): hide
+## any screen-space CanvasLayer and stand down any Camera3D the artifact brought with
+## it, so the tile shows the artifact and not its debug UI.
+func _suppress_chrome(node: Node) -> void:
+	if not is_instance_valid(node):
+		return
+	for child in node.get_children():
+		if child is CanvasLayer:
+			(child as CanvasLayer).visible = false
+		elif child is Camera3D:
+			(child as Camera3D).current = false
+		_suppress_chrome(child)
 
 
 func _stage(vp: SubViewport) -> void:

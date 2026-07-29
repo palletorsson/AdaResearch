@@ -52,6 +52,74 @@ extends Node3D
 @export var animate_search: bool = true
 @export var search_step_delay: float = 0.05
 
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — axis `frontier`
+# ═══════════════════════════════════════════════════════════════════
+#
+# What the search has LEFT STANDING in the voxel graph. Not how fast it ran.
+# Every temporal handle this artifact owns (search_step_delay, animate_search,
+# curve_segments) is unphotographable; a closed set is not. A closed set is a
+# deposit — a standing volume you can walk around — and that is the only part
+# of a search a still can hold.
+#
+#   unsearched  the maze alone: ~300 grey 0.9 m obstacle cubes in a
+#               10 x 15 x 10 m volume, one green start cube, one red goal cube,
+#               and nothing between them. Exactly what ships today, because
+#               _ready() has never called start_pathfinding().
+#   route       the solution alone — ~23 blue 0.35 m-radius tubes and blue path
+#               cubes threading the cloud from green to red. A single coherent
+#               line through an incoherent field.
+#   expanded    route plus the closed set as lilac 0.9 m cubes, a corridor lying
+#               between start and goal; the rest of the box stays empty air.
+#               That empty air is the heuristic made visible as a shape.
+#   flooded     heuristic_weight 0 — Dijkstra. The closed set is every reachable
+#               cell, ~1200 lilac cubes filling the whole 10 x 15 x 10 m box
+#               with the obstacles standing in it as holes. The cost of not
+#               guessing, as volume.
+#
+# The pair `expanded` / `flooded` is the axis's whole argument: both return the
+# SAME path. The only way to see what a heuristic bought is to see the volume it
+# did not have to touch, standing beside the volume it did. At 1 m voxels that
+# is the difference between a thread (~23 cells) and a solid (~1200) — the
+# largest legible delta this artifact can offer.
+#
+# CAPTIONS: this artifact has zero Label3D nodes and gains none. The "1 Label3D"
+# in the brief is a string inside the `# needs:` @identity comment above. Every
+# statistic lives in a CanvasLayer of 20 Control labels (setup_ui) — 2D chrome,
+# not a 3D caption, and suppressed by GridInteractablesComponent's
+# _suppress_embedded_chrome when the artifact spawns in a map. plates = 0 and
+# crossing = 0 at all four values. `flooded` fills the body volume completely,
+# so a hanging nameplate would be the only thing in the frame occluding the
+# subject. If one is ever required it belongs at
+# (0, grid_dimensions.y * voxel_size + 1.0, 0), font_size 48, billboard ENABLED
+# — clear above the box at every value.
+const FRONTIERS: PackedStringArray = ["unsearched", "route", "expanded", "flooded"]
+
+@export_category("Stage-2 DNA")
+@export_enum("unsearched", "route", "expanded", "flooded") var frontier: String = "unsearched"
+
+## Metres. The shipped 0.1 m tube is a hair inside a 10 x 15 x 10 m box —
+## invisible at the distance the camera picks to frame this subtree. 0.35 m
+## reads as a thread against 0.9 m cubes without becoming a wall itself.
+const PATH_TUBE_RADIUS: float = 0.35
+
+## The obstacle field is randomised by nature. Two builds of one axis value must
+## be pixel-identical or the critic reads noise as signal — same density, same
+## per-cell procedure, fixed draw.
+const OBSTACLE_SEED: int = 20260729
+
+## `expanded` runs this artifact's own declared critical_parameter — the
+## heuristic weight — at a value the cost model can actually feel.
+## calculate_movement_cost compounds elevation_change_cost, the vertical and
+## diagonal multipliers and the VR comfort term into ~2.9 per straight descent
+## and ~4.7 per unit distance on a descending diagonal, while calculate_heuristic
+## returns raw cell distance. At weight 1.0 the heuristic is swamped by that
+## inflation and A* degenerates toward Dijkstra — which IS `flooded`, and would
+## leave `expanded` a near-duplicate of it. 3.0 is the scale that makes h
+## commensurate with g, and commensurability is the only condition under which a
+## wavefront has a shape at all.
+const FRONTIER_HEURISTIC_WEIGHT: float = 3.0
+
 @export_category("Performance")
 @export var max_search_nodes: int = 50000
 @export var use_hierarchical_pathfinding: bool = false
@@ -214,27 +282,59 @@ var closed_set_visual: Array = []
 var path_cache: Dictionary = {}
 var heuristic_cache: Dictionary = {}
 
-# Movement direction vectors for different connectivity
-var movement_6_connected = [
+# Movement direction vectors for different connectivity.
+# TYPED on purpose: get_movement_directions() is declared `-> Array[Vector3i]`,
+# and Godot 4 refuses to return an untyped Array through that signature. These
+# were untyped, and `+`-composed (which also yields an untyped Array), so the
+# very first call to get_valid_neighbors would have failed at runtime. Nothing
+# noticed because nothing ever searched.
+var movement_6_connected: Array[Vector3i] = [
 	Vector3i(1, 0, 0), Vector3i(-1, 0, 0),    # X axis
 	Vector3i(0, 1, 0), Vector3i(0, -1, 0),    # Y axis
 	Vector3i(0, 0, 1), Vector3i(0, 0, -1)     # Z axis
 ]
 
-var movement_18_connected = movement_6_connected + [
+var movement_18_connected: Array[Vector3i] = [
+	Vector3i(1, 0, 0), Vector3i(-1, 0, 0),
+	Vector3i(0, 1, 0), Vector3i(0, -1, 0),
+	Vector3i(0, 0, 1), Vector3i(0, 0, -1),
 	# Face diagonals
 	Vector3i(1, 1, 0), Vector3i(1, -1, 0), Vector3i(-1, 1, 0), Vector3i(-1, -1, 0),
 	Vector3i(1, 0, 1), Vector3i(1, 0, -1), Vector3i(-1, 0, 1), Vector3i(-1, 0, -1),
 	Vector3i(0, 1, 1), Vector3i(0, 1, -1), Vector3i(0, -1, 1), Vector3i(0, -1, -1)
 ]
 
-var movement_26_connected = movement_18_connected + [
+var movement_26_connected: Array[Vector3i] = [
+	Vector3i(1, 0, 0), Vector3i(-1, 0, 0),
+	Vector3i(0, 1, 0), Vector3i(0, -1, 0),
+	Vector3i(0, 0, 1), Vector3i(0, 0, -1),
+	Vector3i(1, 1, 0), Vector3i(1, -1, 0), Vector3i(-1, 1, 0), Vector3i(-1, -1, 0),
+	Vector3i(1, 0, 1), Vector3i(1, 0, -1), Vector3i(-1, 0, 1), Vector3i(-1, 0, -1),
+	Vector3i(0, 1, 1), Vector3i(0, 1, -1), Vector3i(0, -1, 1), Vector3i(0, -1, -1),
 	# Edge and corner diagonals
 	Vector3i(1, 1, 1), Vector3i(1, 1, -1), Vector3i(1, -1, 1), Vector3i(1, -1, -1),
 	Vector3i(-1, 1, 1), Vector3i(-1, 1, -1), Vector3i(-1, -1, 1), Vector3i(-1, -1, -1)
 ]
 
+# ── Stage-2 DNA build state ──────────────────────────────────────────
+## Nodes THIS SCRIPT added to itself. _rebuild_now frees only these — the scene's
+## own Camera3D, and any plate the grid hangs on us afterwards, are not ours.
+var _owned_nodes: Array[Node] = []
+var _built: bool = false
+## True only while an axis-driven solve is running. The open set is the OUTER
+## SHELL of the closed set; drawn, it would hide every lilac cube behind it and
+## `expanded` and `flooded` would both read as one yellow blob.
+var _suppress_open_visuals: bool = false
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 func _ready() -> void:
+	_build_all()
+	_built = true
+
+## Everything the still is made of, synchronously, from @export values alone.
+## No call_deferred anywhere below this line: a deferred rebuild that removes
+## children first makes the grid's auto-grounding measure a zero AABB and bail.
+func _build_all() -> void:
 	setup_environment()
 	setup_containers()
 	setup_ui()
@@ -243,11 +343,19 @@ func _ready() -> void:
 	place_random_obstacles()
 	set_start_and_goal()
 	create_grid_visualization()
-	
-	print("3D Pathfinding initialized with grid ", grid_dimensions)
+	_run_frontier()
+
+	print("3D Pathfinding initialized with grid ", grid_dimensions, " frontier=", frontier)
 
 func _process(_delta):
 	update_ui_stats()
+
+## add_child + remember. Only nodes that pass through here are freed by
+## _rebuild_now; freeing get_children() would destroy the scene's Camera3D and
+## any label the grid hung on us.
+func _add_owned(n: Node) -> void:
+	add_child(n)
+	_owned_nodes.append(n)
 
 func setup_environment() -> void:
 	"""Setup basic 3D environment"""
@@ -255,8 +363,8 @@ func setup_environment() -> void:
 	light.light_energy = 1.0
 	light.rotation_degrees = Vector3(-45, 45, 0)
 	light.shadow_enabled = true
-	add_child(light)
-	
+	_add_owned(light)
+
 	var env = WorldEnvironment.new()
 	var environment = Environment.new()
 	environment.background_mode = Environment.BG_COLOR
@@ -264,28 +372,28 @@ func setup_environment() -> void:
 	environment.ambient_light_color = Color(0.4, 0.4, 0.5)
 	environment.ambient_light_energy = 0.5
 	env.environment = environment
-	add_child(env)
+	_add_owned(env)
 
 func setup_containers() -> void:
 	"""Create containers for different visual elements"""
 	grid_container = Node3D.new()
 	grid_container.name = "GridContainer"
-	add_child(grid_container)
-	
+	_add_owned(grid_container)
+
 	path_container = Node3D.new()
 	path_container.name = "PathContainer"
-	add_child(path_container)
-	
+	_add_owned(path_container)
+
 	search_container = Node3D.new()
 	search_container.name = "SearchContainer"
-	add_child(search_container)
+	_add_owned(search_container)
 
 func setup_ui() -> void:
 	"""Create UI for statistics and controls"""
 	ui_container = CanvasLayer.new()
 	ui_container.name = "UIContainer"
-	add_child(ui_container)
-	
+	_add_owned(ui_container)
+
 	var panel = Panel.new()
 	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	panel.size = Vector2(350, 400)
@@ -306,7 +414,7 @@ func setup_search_timer() -> void:
 	search_timer = Timer.new()
 	search_timer.wait_time = search_step_delay
 	search_timer.timeout.connect(_on_search_step)
-	add_child(search_timer)
+	_add_owned(search_timer)
 
 func initialize_3d_grid() -> void:
 	"""Initialize the 3D voxel grid"""
@@ -324,35 +432,97 @@ func initialize_3d_grid() -> void:
 
 func place_random_obstacles() -> void:
 	"""Place random obstacles in the grid"""
+	# Same density, same per-cell test, fixed draw. See OBSTACLE_SEED.
+	_rng.seed = OBSTACLE_SEED
 	for x in range(grid_dimensions.x):
 		for y in range(grid_dimensions.y):
 			for z in range(grid_dimensions.z):
-				if randf() < obstacle_probability:
+				if _rng.randf() < obstacle_probability:
 					set_voxel_type(Vector3i(x, y, z), VoxelType.OBSTACLE)
 
 func set_start_and_goal() -> void:
-	"""Set start and goal positions"""
-	# Find open positions for start and goal
-	start_position = find_open_position()
-	goal_position = find_open_position()
-	
-	# Ensure start and goal are different
-	while goal_position == start_position:
+	"""Set start and goal positions.
+
+	Chosen structurally rather than by two random draws, for one reason the
+	shipped scene forces on us: movement_model is GROUND_BASED and
+	max_slope_angle is 35 degrees, and calculate_slope_angle returns 90 for a
+	straight climb and 35.26 for the shallowest diagonal one — so under this
+	configuration the search can move level or DOWN and can never go up. Two
+	random cells give a query that is unanswerable roughly half the time, and an
+	unanswerable query makes `route` render nothing and `expanded` render the
+	whole flood. Start at the top near one corner, goal at the bottom of the
+	opposite one, picked out of the set proven reachable from the start.
+	"""
+	start_position = _find_top_corner_open()
+	goal_position = _find_far_low_reachable(start_position)
+
+	if goal_position == start_position:
 		goal_position = find_open_position()
-	
+
 	set_voxel_type(start_position, VoxelType.START)
 	set_voxel_type(goal_position, VoxelType.GOAL)
-	
+
 	print("Start: ", start_position, " Goal: ", goal_position)
+
+## Highest open cell, nearest the (0, *, 0) corner of that layer. Starting at the
+## ceiling is what makes `flooded` fill the box: everything below a descent-only
+## start is reachable, everything above it never was.
+func _find_top_corner_open() -> Vector3i:
+	for y in range(grid_dimensions.y - 1, -1, -1):
+		var best: Vector3i = Vector3i(-1, -1, -1)
+		var best_rank: int = 1 << 30
+		for x in range(grid_dimensions.x):
+			for z in range(grid_dimensions.z):
+				var pos: Vector3i = Vector3i(x, y, z)
+				if get_voxel(pos).type != VoxelType.EMPTY:
+					continue
+				var rank: int = (x + z) * 100 + x
+				if rank < best_rank:
+					best_rank = rank
+					best = pos
+		if best.x >= 0:
+			return best
+	return Vector3i.ZERO
+
+## Flood the movement graph once from `from`, then take the reachable cell that
+## is lowest and furthest across. Guarantees a path exists — which is the whole
+## difference between `expanded` showing a corridor and `expanded` showing the
+## same solid `flooded` shows because the search exhausted the open set. Both the
+## BFS order and the tie-break are deterministic.
+func _find_far_low_reachable(from: Vector3i) -> Vector3i:
+	var seen: Dictionary = {from: true}
+	var queue: Array[Vector3i] = [from]
+	var head: int = 0
+
+	while head < queue.size():
+		var cur: Vector3i = queue[head]
+		head += 1
+		for n in get_valid_neighbors(cur):
+			if n in seen:
+				continue
+			seen[n] = true
+			queue.append(n)
+
+	var best: Vector3i = from
+	var best_rank: int = -1
+	for key in seen:
+		var p: Vector3i = key
+		var rank: int = (grid_dimensions.y - 1 - p.y) * 100 + (p.x + p.z)
+		if rank > best_rank:
+			best_rank = rank
+			best = p
+	return best
 
 func find_open_position() -> Vector3i:
 	"""Find a random open position in the grid"""
 	var attempts = 0
 	while attempts < 1000:
+		# _rng, not the global generator: no code path that can reach a build may
+		# introduce a draw the next build will not repeat.
 		var pos = Vector3i(
-			randi() % grid_dimensions.x,
-			randi() % grid_dimensions.y,
-			randi() % grid_dimensions.z
+			_rng.randi() % grid_dimensions.x,
+			_rng.randi() % grid_dimensions.y,
+			_rng.randi() % grid_dimensions.z
 		)
 		
 		if is_position_valid(pos) and get_voxel(pos).type == VoxelType.EMPTY:
@@ -424,6 +594,49 @@ func create_voxel_visual(voxel: Voxel3D) -> void:
 		grid_container.add_child(mesh_instance)
 	
 	voxel.visual_object = mesh_instance
+
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — building the frontier
+# ═══════════════════════════════════════════════════════════════════
+
+## Deposit whatever the axis says the search has left standing.
+##
+## Deliberately does NOT route through start_pathfinding(): that dispatcher
+## sends A* to start_animated_astar() whenever animate_search is true, and an
+## animated search photographs as an empty frame moments after add_child — the
+## INERT verdict this loop keeps re-earning. animate_search stays true in the
+## shipped scene and is simply not consulted here; the SPACE key still animates.
+func _run_frontier() -> void:
+	match frontier:
+		"route":
+			# The solution alone. show_search_progress off, so not one closed
+			# cube is deposited — a thread through an untouched field.
+			_solve_and_deposit(FRONTIER_HEURISTIC_WEIGHT, false)
+		"expanded":
+			# The solution plus the region the heuristic committed to.
+			_solve_and_deposit(FRONTIER_HEURISTIC_WEIGHT, true)
+		"flooded":
+			# heuristic_weight 0 — the artifact's own critical_parameter at the
+			# value where A* IS Dijkstra. Same path, every reachable cell paid for.
+			_solve_and_deposit(0.0, true)
+		_:
+			# `unsearched` — the shipped still, untouched. No solve, no deposit,
+			# nothing added beyond the maze, the green cube and the red one.
+			pass
+
+func _solve_and_deposit(weight: float, deposit_closed: bool) -> void:
+	# WEIGHTED_EUCLIDEAN is the only heuristic that reads heuristic_weight, so it
+	# is the only one through which this axis can say anything. The cache is keyed
+	# on positions, not on the weight, so it has to go with the weight.
+	heuristic_type = HeuristicType.WEIGHTED_EUCLIDEAN
+	heuristic_weight = weight
+	heuristic_cache.clear()
+
+	show_search_progress = deposit_closed
+	_suppress_open_visuals = true
+	find_path_astar_3d()
+	_suppress_open_visuals = false
+	search_complete = true
 
 func start_pathfinding() -> void:
 	"""Start the pathfinding algorithm"""
@@ -524,12 +737,17 @@ func find_path_astar_3d() -> Array[Vector3i]:
 				neighbor_node.calculate_f_cost()
 				neighbor_node.parent = current
 				
-				if not open_set.contains(neighbor_node):
-					open_set.push(neighbor_node)
-					search_nodes_created += 1
-					
-					if show_search_progress:
-						set_voxel_type(neighbor_pos, VoxelType.OPEN_NODE)
+				# `open_set.contains()` compared PathNode3D objects by REFERENCE
+				# against a node constructed one line earlier, so it could never
+				# be true — a linear scan of the entire open set, once per
+				# relaxation, guarding nothing. Dropping it is behaviour-
+				# identical and is what lets `flooded` (~1200 expansions) build
+				# synchronously inside _ready instead of stalling the still.
+				open_set.push(neighbor_node)
+				search_nodes_created += 1
+
+				if show_search_progress and not _suppress_open_visuals:
+					set_voxel_type(neighbor_pos, VoxelType.OPEN_NODE)
 	
 	search_complete = true
 	return []  # No path found
@@ -901,17 +1119,29 @@ func create_path_segment(from: Vector3i, to: Vector3i, segment_index: int) -> vo
 	var cylinder = CylinderMesh.new()
 	
 	var distance = from_world.distance_to(to_world)
-	cylinder.top_radius = 0.1
-	cylinder.bottom_radius = 0.1
+	if distance <= 0.0:
+		return
+	cylinder.top_radius = PATH_TUBE_RADIUS
+	cylinder.bottom_radius = PATH_TUBE_RADIUS
 	cylinder.height = distance
-	
+
 	segment.mesh = cylinder
-	
+
 	var mid_point = (from_world + to_world) * 0.5
 	segment.position = mid_point
-	segment.look_at_from_position(segment.position, to_world, Vector3.UP)
+
+	# Under GROUND_BASED the cheapest descent is straight down, so most segments
+	# of a real route are vertical — and look_at with Vector3.UP fails outright
+	# when the direction is parallel to up, leaving the tube unrotated and then
+	# tipped 90 degrees onto its side by the line below. Pick an up vector that
+	# is never parallel to the run.
+	var run: Vector3 = (to_world - from_world).normalized()
+	var up_hint: Vector3 = Vector3.UP
+	if absf(run.dot(up_hint)) > 0.999:
+		up_hint = Vector3.RIGHT
+	segment.look_at_from_position(segment.position, to_world, up_hint)
 	segment.rotate_object_local(Vector3.RIGHT, PI/2)
-	
+
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(0.2, 0.8, 0.9)
 	material.emission_enabled = true
@@ -1059,7 +1289,10 @@ func reset_pathfinding() -> void:
 	place_random_obstacles()
 	set_start_and_goal()
 	create_grid_visualization()
-	
+	# R returns to the axis state, not to a blank maze — otherwise a keypress
+	# silently demotes a `flooded` placement to `unsearched`.
+	_run_frontier()
+
 	print("Pathfinding system reset")
 
 func recreate_grid_visualization() -> void:
@@ -1099,5 +1332,66 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass
+# ═══════════════════════════════════════════════════════════════════
+# GRID CONFIG INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+
+## Called by GridInteractablesComponent via call_deferred, AFTER _ready() and
+## first in the deferred queue. Everything the still needs is already built by
+## then; this only re-builds when a map actually asks for a different frontier.
+##
+## `emissive` is NOT accepted. curation_station.gd:367-372 hands every artifact
+## it curates {"emissive": false}; that dict carries no axis key and must change
+## nothing here, and a key that is accepted but applied nowhere is exactly the
+## failure this contract exists to prevent. Declining it is the honest form of
+## "changes nothing" — the start and goal cubes keep their glow, as they do today.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_frontier: String = frontier
+
+	if config_data.has("frontier"):
+		frontier = _pick_axis(str(config_data["frontier"]), FRONTIERS, frontier)
+
+	if not _built:
+		return
+	if frontier == before_frontier:
+		return
+
+	_rebuild_now()
+	print("[Pathfinding3D] Config applied — frontier=%s" % [frontier])
+
+## Accept an axis value only if it names something we actually build. A typo in a
+## map token falls back to the value already standing rather than half-resolving
+## into a blank frame.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+## Synchronous, inline. Frees only what _add_owned handed us.
+func _rebuild_now() -> void:
+	if search_timer != null and is_instance_valid(search_timer):
+		search_timer.stop()
+
+	for n in _owned_nodes:
+		if is_instance_valid(n):
+			remove_child(n)
+			n.queue_free()
+	_owned_nodes.clear()
+
+	grid_container = null
+	path_container = null
+	search_container = null
+	ui_container = null
+	search_timer = null
+
+	voxel_grid.clear()
+	current_path.clear()
+	path_cache.clear()
+	heuristic_cache.clear()
+	open_set_visual.clear()
+	closed_set_visual.clear()
+	search_nodes_created = 0
+	search_nodes_expanded = 0
+	path_found = false
+	search_complete = false
+
+	_build_all()

@@ -217,6 +217,16 @@
    }
   },
   "KonigsbergBridge": {
+   "dna": {
+    "axes": {
+    "parity": [
+    "blocked",
+    "walk",
+    "circuit",
+    "severed"
+    ]
+    }
+   },
    "capacity": "PROVE why a bridge network does or does not admit an Eulerian walk by reading vertex parity.",
    "category": "unknown",
    "complexity": "intermediate",
@@ -2806,6 +2816,16 @@
    "qfep_connection": "Entities are born as randomized QueerTraits first and only then grown a morphology to fit — identity precedes body, form is derived rather than assigned. And the update loop tends systems, not individuals: resources, boundaries, the relationship network are what actually get a turn each frame."
   },
   "edmonds_algorithm": {
+   "dna": {
+    "axes": {
+    "coupling": [
+    "partial",
+    "perfect",
+    "stranded",
+    "blossom"
+    ]
+    }
+   },
    "capacity": "EVALUATE how graph structure enables or blocks pairings and why greedy matching can fall short of the optimum.",
    "category": "unknown",
    "complexity": "intermediate",
@@ -4123,6 +4143,17 @@
    }
   },
   "graphspace": {
+   "dna": {
+    "axes": {
+    "siting": [
+    "relaxed",
+    "lattice",
+    "circle",
+    "shell",
+    "star"
+    ]
+    }
+   },
    "capacity": "WALK a graph as a spatial structure and read how distance, degree, and equilibrium reorganize the network.",
    "category": "unknown",
    "complexity": "intermediate",
@@ -4461,6 +4492,16 @@
    }
   },
   "karger_algorithm": {
+   "dna": {
+    "axes": {
+    "bottleneck": [
+    "mixed",
+    "throat",
+    "braid",
+    "severed"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Randomized algorithm for finding minimum cut in undirected graphs",
@@ -4883,6 +4924,16 @@
    }
   },
   "kosaraju_algorithm": {
+   "dna": {
+    "axes": {
+    "mutuality": [
+    "pockets",
+    "none",
+    "split",
+    "total"
+    ]
+    }
+   },
    "capacity": "FOLLOW the two DFS passes and explain why SCCs survive graph transposition.",
    "category": "unknown",
    "complexity": "intermediate",
@@ -5121,6 +5172,16 @@
    "qfep_connection": "The DP table prices a transition — 'deadname' to 'chosen_name', every insertion, deletion, and substitution costed at one. What the matrix cannot encode is that the operations were never symmetric for the person performing them."
   },
   "mst_visualization": {
+   "dna": {
+    "axes": {
+    "backbone": [
+    "picked",
+    "bare",
+    "refused",
+    "forest"
+    ]
+    }
+   },
    "capacity": "DISTINGUISH necessary from redundant edges in a weighted network and explain why the cheapest backbone works.",
    "category": "unknown",
    "complexity": "beginner",
@@ -5496,6 +5557,16 @@
    "qfep_connection": "Augmenting paths push flow until the bottleneck answers back: the maximum a network can carry equals the minimum cut that severs it. Duality staged as capacity politics — what a system delivers is exactly measured by where it can be strangled."
   },
   "networkflow3d": {
+   "dna": {
+    "axes": {
+    "bottleneck": [
+    "mixed",
+    "throat",
+    "braid",
+    "severed"
+    ]
+    }
+   },
    "capacity": "IDENTIFY bottlenecks and explain how augmenting paths raise the total flow through a network.",
    "category": "unknown",
    "complexity": "beginner",
@@ -5737,6 +5808,16 @@
    "qfep_connection": "Trust the tangent completely, land wrong, trust again from where you landed — quadratic convergence is the reward for being mistaken in a rapidly shrinking way. The orange tangent lines archive that faith in linearization; the flat spots where the derivative vanishes are the irreducible the convergence proof never mentions."
   },
   "pathfinding3d": {
+   "dna": {
+    "axes": {
+    "frontier": [
+    "unsearched",
+    "route",
+    "expanded",
+    "flooded"
+    ]
+    }
+   },
    "capacity": "COMPARE heuristic strategies by watching how different search rules expand through the same 3D graph.",
    "category": "unknown",
    "complexity": "intermediate",
@@ -6433,6 +6514,16 @@
    }
   },
   "push_relabel_algorithm": {
+   "dna": {
+    "axes": {
+    "relief": [
+    "flat",
+    "terraced",
+    "scarp",
+    "shaft"
+    ]
+    }
+   },
    "capacity": "EXPLAIN how excess flow and height labels solve max flow without searching complete augmenting paths.",
    "category": "unknown",
    "complexity": "intermediate",
@@ -7748,6 +7839,16 @@
    }
   },
   "tarjan_algorithm": {
+   "dna": {
+    "axes": {
+    "mutuality": [
+    "pockets",
+    "none",
+    "split",
+    "total"
+    ]
+    }
+   },
    "capacity": "TRACE low-link propagation and see where directed cycles collapse into strongly connected components.",
    "category": "unknown",
    "complexity": "intermediate",
@@ -8262,6 +8363,17 @@
    "qfep_connection": "Territory as nearest-neighbour arithmetic: every point of the plane pledges to its closest site until nothing is unclaimed, the Fortune sweep performing the annexation live. POWER mode leaks the politics — weight a site and its cell swells, borders redrawn by an invisible coefficient."
   },
   "topological_sort": {
+   "dna": {
+    "axes": {
+    "precedence": [
+    "levels",
+    "stair",
+    "flat",
+    "lens",
+    "snarl"
+    ]
+    }
+   },
    "category": "graphtheory",
    "complexity": "intermediate",
    "description": "Topological sort — linear ordering of vertices in a directed acyclic graph",

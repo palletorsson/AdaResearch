@@ -20,6 +20,58 @@ extends Node3D
 @export var initial_vertex_count: int = 8
 @export var initial_edge_density: float = 0.45
 
+# ── Stage-2 DNA axis: bottleneck ─────────────────────────────────────────
+## WHERE THE NARROW PLACE IS, AND WHETHER THERE IS ONE AT ALL.
+##
+## Karger contracts random edges until two super-vertices remain and calls what
+## still crosses a cut. Until now every placement stood on the same
+## undifferentiated random graph, so the artifact whose entire subject is finding
+## a minimum cut could never be asked to stand on a graph whose minimum cut is
+## obvious, expensive, or already made.
+##
+##   mixed     the shipped graph — G(8, 0.45), ~13 edges on a 0.56 m ring.
+##   throat    two 4-cliques joined by exactly 2 edges. The ring becomes a
+##             dumbbell with a 0.10 m waist and every run finds the same cut of
+##             size 2, so the probability argument becomes legible instead of
+##             asserted.
+##   braid     near-complete, 24 edges, a solid woven disc. No cheap cut exists;
+##             the cut edges fan out around one vertex instead of crossing a
+##             waist, and the random bet is hopeless.
+##   severed   the same two 4-cliques with NO edge between them. Two 0.22 m arcs
+##             with a 0.12 m gap; every panel finishes at cut size 0. This is the
+##             value that earns the axis: the cut was never something the
+##             algorithm made, only something it found.
+##
+## This axis is read at the top of _generate_graph, so setting the @export before
+## _ready() is enough — the sweep never calls apply_grid_config.
+@export_enum("mixed", "throat", "braid", "severed") var bottleneck: String = "mixed"
+
+const BOTTLENECKS: PackedStringArray = ["mixed", "throat", "braid", "severed"]
+
+## Dumbbell geometry, as fractions of the ring radius passed to _vertex_pos, so
+## the main graph (r = 0.28) and the four 0.18 m panels (r = 0.072) read the same
+## shape at both scales.
+##   throat  : lobe d = 0.224 m, waist gap = 0.100 m, overall 0.549 m
+##   severed : lobe d = 0.218 m, gap      = 0.123 m, overall 0.560 m
+const THROAT_LOBE_R: float = 0.40
+const THROAT_LOBE_CX: float = 0.58
+const SEVERED_LOBE_R: float = 0.39
+const SEVERED_LOBE_CX: float = 0.61
+
+## The pixel critic must never read noise as signal: two builds of one axis value
+## have to be identical. _generate_graph reseeds from this before it draws a
+## single edge, and the first four contraction orders are drawn from the same
+## stream, so a still taken at the same beat of the same value is the same still.
+const GRAPH_SEED: int = 20260729
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+var _built: bool = false
+## _sync_controllers pushes values back into ParameterController3D, whose
+## set_value() EMITS value_changed — which used to re-enter _on_density_changed →
+## _rebuild_graph → _sync_controllers without end. The guard is what makes any
+## config-driven rebuild survivable.
+var _syncing: bool = false
+
 # ── Graph state ──────────────────────────────────────────────────────────
 var _n: int = 8
 var _density: float = 0.45
@@ -100,6 +152,14 @@ const COL_CHART_THEORY := Color(0.95, 0.5, 0.2)
 
 
 func _ready() -> void:
+	_build_all()
+	_built = true
+
+
+## SYNCHRONOUS, from @export values alone. No call_deferred anywhere in the build
+## path: a deferred rebuild that removes children first makes the grid's
+## auto-grounding measure a zero AABB and bail.
+func _build_all() -> void:
 	_n = clampi(initial_vertex_count, 4, 12)
 	_density = clampf(initial_edge_density, 0.2, 0.8)
 	_generate_graph()
@@ -114,7 +174,21 @@ func _ready() -> void:
 
 # ── Graph generation ─────────────────────────────────────────────────────
 
+## Every value's edge set and vertex layout is decided here, and this is the only
+## place the axis is read on the build path — which is what makes the sweep
+## (@export set, add to tree, never a config call) render the right thing.
 func _generate_graph() -> void:
+	bottleneck = _pick_axis(bottleneck, BOTTLENECKS, "mixed")
+	# Two 4-cliques need exactly eight vertices; the vertex slider is pinned in
+	# those two values and _sync_controllers pushes the pin back to the knob
+	# rather than letting it show a number the graph does not have.
+	if bottleneck == "throat" or bottleneck == "severed":
+		_n = 8
+	elif bottleneck == "braid":
+		_density = 0.8
+
+	_rng.seed = GRAPH_SEED
+
 	_adj.clear()
 	_edge_from.clear()
 	_edge_to.clear()
@@ -131,16 +205,64 @@ func _generate_graph() -> void:
 	for i in range(_n):
 		_adj[i] = PackedInt32Array()
 
-	# Random edges
+	match bottleneck:
+		"throat":
+			_build_two_cliques(2)
+		"severed":
+			_build_two_cliques(0)
+		"braid":
+			_build_braid()
+		_:
+			_build_mixed()
+
+
+## The shipped graph: G(n, density) plus a chain so it stays connected. Seeded
+## now, so it is one particular random graph instead of a different one per run.
+func _build_mixed() -> void:
 	for i in range(_n):
 		for j in range(i + 1, _n):
-			if randf() < _density:
+			if _rng.randf() < _density:
 				_add_edge(i, j)
 
 	# Ensure connectivity via chain
 	for i in range(_n - 1):
 		if not _has_edge(i, i + 1):
 			_add_edge(i, i + 1)
+
+
+## Two K4s and `bridges` edges between them — 14 edges at bridges=2, 12 at 0.
+## The chain that _build_mixed uses to guarantee connectivity is deliberately NOT
+## run here: edge 3-4 would cross the waist and turn a cut of 2 into a cut of 3,
+## and in `severed` it would sew the two pieces back together.
+##
+## The bridges are (0, half+1) and (half-1, half+2) because those are the four
+## vertices _vertex_pos puts nearest the waist, so both crossings are drawn as
+## short parallel lines through the gap rather than long diagonals over a lobe.
+func _build_two_cliques(bridges: int) -> void:
+	var half: int = maxi(_n / 2, 2)
+	for i in range(half):
+		for j in range(i + 1, half):
+			_add_edge(i, j)
+			_add_edge(i + half, j + half)
+	if bridges > 0:
+		_add_edge(0, half + 1)
+	if bridges > 1:
+		_add_edge(half - 1, half + 2)
+
+
+## Near-complete: every chord except the diameters. At n=8 that is 28 - 4 = 24
+## edges, every vertex of degree 6, so the cheapest cut in the graph is one
+## vertex's own star and no bipartition is cheap. Dropping the diameters leaves
+## the disc a hollow centre, which is why it reads as a woven band and not as a
+## solid blot.
+func _build_braid() -> void:
+	var diameter: int = _n / 2
+	for i in range(_n):
+		for j in range(i + 1, _n):
+			if _n % 2 == 0 and j - i == diameter:
+				continue
+			_add_edge(i, j)
+
 
 func _add_edge(a: int, b: int) -> void:
 	var idx := _edge_count
@@ -157,10 +279,26 @@ func _has_edge(a: int, b: int) -> bool:
 	return false
 
 
-# ── Vertex positions (circle layout) ────────────────────────────────────
+# ── Vertex positions (circle, or dumbbell) ──────────────────────────────
 
+## `throat` and `severed` split the ring into two lobes so the narrow place is
+## visible as a narrow place — the layout has to say what the edge set says, or
+## a waist of two edges just looks like a ring with two edges missing. The other
+## two values keep the shipped circle: `braid` needs the full circumference for
+## its chords, and `mixed` is the pre-promotion look.
 func _vertex_pos(v: int, cx: float, cz: float, r: float) -> Vector3:
-	var angle := (float(v) / float(_n)) * TAU - PI * 0.5
+	if bottleneck == "throat" or bottleneck == "severed":
+		var is_throat: bool = bottleneck == "throat"
+		var lobe_r: float = (THROAT_LOBE_R if is_throat else SEVERED_LOBE_R) * r
+		var lobe_cx: float = (THROAT_LOBE_CX if is_throat else SEVERED_LOBE_CX) * r
+		var half: int = maxi(_n / 2, 2)
+		var side: float = -1.0 if v < half else 1.0
+		var li: int = v if v < half else v - half
+		# +45° start puts one vertex of each lobe at each diagonal, so two sit
+		# either side of the waist and none sits dead centre blocking it.
+		var local: float = PI * 0.25 + (float(li) / float(half)) * TAU
+		return Vector3(cx + side * lobe_cx + cos(local) * lobe_r, 0.0, cz + sin(local) * lobe_r)
+	var angle: float = (float(v) / float(_n)) * TAU - PI * 0.5
 	return Vector3(cx + cos(angle) * r, 0.0, cz + sin(angle) * r)
 
 
@@ -184,9 +322,10 @@ func _make_fresh_run() -> Dictionary:
 	var order := PackedInt32Array()
 	for i in range(_edge_count):
 		order.append(i)
-	# Fisher-Yates shuffle
+	# Fisher-Yates shuffle — from the seeded stream, so the four contraction
+	# orders that exist at build time are the same four every launch.
 	for i in range(order.size() - 1, 0, -1):
-		var j := randi_range(0, i)
+		var j := _rng.randi_range(0, i)
 		var tmp := order[i]
 		order[i] = order[j]
 		order[j] = tmp
@@ -363,10 +502,26 @@ func _make_label(pos: Vector3, font_sz: int) -> Label3D:
 	add_child(lbl)
 	return lbl
 
+## CAPTION PLACEMENT. LabelFramer turns each of these three into an opaque
+## anthracite plate at spawn, so where they sit is a geometry decision.
+##
+## Title (font 28, glyphs 0.14 m) and metrics (font 20, 0.10 m) share a parent
+## and a column 0.07 m apart, so the framer merges them into ONE plate spanning
+## roughly y 0.50..0.69 — above the graph's 0.35 m plane by 0.15 m. Correct as
+## authored; left alone.
+##
+## The probability caption was the fault. At y=-0.22 with 0.09 m glyphs its plate
+## spanned -0.30..-0.14 while the amplification chart occupies -0.33..-0.19
+## across the full 1.62 m body — about 0.18 m2 of frontal overlap against a
+## 1.09 m2 body, ~16%, eight times the probe's 2% bar. Moved to y=-0.50: the
+## plate now spans -0.58..-0.42, clearing the chart's bottom edge by 0.09 m,
+## below the four controllers at y=0, in a band nothing else occupies. Fixed
+## offsets are safe because no bottleneck value moves the graph plane, the panel
+## row or the chart — a caption correct at `mixed` is correct at all four.
 func _setup_labels() -> void:
 	_title_label = _make_label(Vector3(0, 0.62, 0), 28)
 	_metrics_label = _make_label(Vector3(0, 0.55, 0), 20)
-	_prob_label = _make_label(Vector3(0, -0.22, 0), 18)
+	_prob_label = _make_label(Vector3(0, -0.50, 0), 18)
 
 
 # ── Controller setup ─────────────────────────────────────────────────────
@@ -399,30 +554,58 @@ func _setup_controllers() -> void:
 	_panels_ctrl.value_changed.connect(_on_panels_changed)
 
 func _on_vertex_changed(val: float) -> void:
+	if _syncing:
+		return
 	var new_n := clampi(int(val), 4, 12)
 	if new_n != _n:
 		_n = new_n
 		_rebuild_graph()
 
 func _on_density_changed(val: float) -> void:
+	if _syncing:
+		return
 	_density = clampf(val, 0.2, 0.8)
 	_rebuild_graph()
 
 func _on_speed_changed(val: float) -> void:
+	if _syncing:
+		return
 	_anim_speed = clampf(val, 0.1, 1.5)
 
 func _on_panels_changed(val: float) -> void:
+	if _syncing:
+		return
 	_num_panels = clampi(int(val), 1, 4)
+	_apply_panel_visibility()
+
+func _apply_panel_visibility() -> void:
 	for p in range(MAX_PANELS):
-		_panel_mis[p].visible = p < _num_panels
+		if p < _panel_mis.size() and is_instance_valid(_panel_mis[p]):
+			_panel_mis[p].visible = p < _num_panels
 
 func _rebuild_graph() -> void:
+	_rebuild_now()
+
+
+## SYNCHRONOUS and node-preserving. Everything this artifact draws is an
+## ImmediateMesh regenerated from _adj / _edge_* every frame, so a new bottleneck
+## is a new data set, not a new scene: nothing needs freeing and nothing may be.
+## Freeing the three Label3Ds in particular would destroy the plates LabelFramer
+## already built around them at spawn, and the framer does not run twice.
+func _rebuild_now() -> void:
 	_generate_graph()
 	_init_run_states()
 	_is_running = false
+	_auto_timer = 0.0
 	_sync_controllers()
 
 func _sync_controllers() -> void:
+	# ParameterController3D.set_value() emits value_changed, and the handlers
+	# above rebuild — without this flag a single density push re-enters until the
+	# stack gives out.
+	if _syncing:
+		return
+	_syncing = true
 	if _vertex_ctrl:
 		_vertex_ctrl.set_value(float(_n))
 	if _density_ctrl:
@@ -431,6 +614,7 @@ func _sync_controllers() -> void:
 		_speed_ctrl.set_value(_anim_speed)
 	if _panels_ctrl:
 		_panels_ctrl.set_value(float(_num_panels))
+	_syncing = false
 
 
 # ── Process loop ─────────────────────────────────────────────────────────
@@ -500,7 +684,12 @@ func _rebuild_graph_mesh() -> void:
 		var pos := _vertex_pos(v, 0.0, 0.0, GRAPH_RADIUS)
 		# Color by partition if we have a best cut
 		var col := COL_VERTEX
-		if _best_global_edges.size() > 0 and _run_states.size() > 0:
+		# Gate on a finished round, NOT on a non-empty cut list. A connected
+		# graph always ends with at least one crossing edge so the two are the
+		# same test in `mixed`, `throat` and `braid` — but `severed` finishes at
+		# cut size 0 with an empty list, and the old test left all eight vertices
+		# one colour in the one value whose whole point is that they are two.
+		if _best_global_cut < 999 and _run_states.size() > 0:
 			var state: Dictionary = _run_states[0] if _best_panel < 0 else _run_states[clampi(_best_panel, 0, _num_panels - 1)]
 			if state.done:
 				# Determine partition from the best run
@@ -648,8 +837,11 @@ func _update_labels() -> void:
 		var p_single := 2.0 / float(_n * (_n - 1)) if _n > 1 else 1.0
 		var p_amp := 1.0 - pow(1.0 - p_single, float(maxi(_total_runs, 1)))
 		var obs_rate := float(_success_count) / float(maxi(_total_runs, 1)) * 100.0 if _total_runs > 0 else 0.0
-		_prob_label.text = "P(single)=%.1f%%  P(amp/%d runs)=%.1f%%  observed=%.0f%%" % [
-			p_single * 100.0, _total_runs, p_amp * 100.0, obs_rate
+		# Under 30 characters at worst ("p=100.0%  amp=100%  obs=100%" = 28), so
+		# the plate stays inside the 1.62 m body width instead of the ~1.9 m the
+		# long form needed.
+		_prob_label.text = "p=%.1f%%  amp=%.0f%%  obs=%.0f%%" % [
+			p_single * 100.0, p_amp * 100.0, obs_rate
 		]
 		# Color by observed success
 		if obs_rate > 50.0:
@@ -742,22 +934,53 @@ func _add_sphere_approx(im: ImmediateMesh, center: Vector3, radius: float, col: 
 
 # ── apply_grid_config ────────────────────────────────────────────────────
 
+## Called by GridInteractablesComponent via call_deferred, after _ready(). It is
+## also handed {"emissive": false} by curation_station one line after it frames
+## the labels — a dict with no key this artifact claims, which must therefore
+## change nothing at all. It does: nothing is read from it, the four geometry
+## keys are unchanged, and the guard below returns before any rebuild.
+##
+## This is the one artifact in the batch whose config path was already live, so
+## `bottleneck` has to exist on BOTH paths — as the @export read at the top of
+## _generate_graph (the sweep never calls this function) and as the branch here
+## (the map path) — or the two would disagree about what is standing there.
 func apply_grid_config(config: Dictionary) -> void:
+	var before_bottleneck: String = bottleneck
+	var before_n: int = _n
+	var before_density: float = _density
+
+	if config.has("bottleneck"):
+		bottleneck = _pick_axis(str(config["bottleneck"]), BOTTLENECKS, bottleneck)
 	if config.has("vertex_count"):
-		var vc := clampi(int(config.vertex_count), 4, 12)
-		if vc != _n:
-			_n = vc
-			_rebuild_graph()
+		_n = clampi(int(config["vertex_count"]), 4, 12)
 	if config.has("edge_density"):
-		_density = clampf(float(config.edge_density), 0.2, 0.8)
-		_rebuild_graph()
+		_density = clampf(float(config["edge_density"]), 0.2, 0.8)
+
+	# Non-geometry keys apply IN PLACE, before the returns, or a config that only
+	# sets speed or panel count would be silently swallowed by the guard.
 	if config.has("anim_speed"):
-		_anim_speed = clampf(float(config.anim_speed), 0.1, 1.5)
+		_anim_speed = clampf(float(config["anim_speed"]), 0.1, 1.5)
 	if config.has("panels"):
-		_num_panels = clampi(int(config.panels), 1, 4)
-		for p in range(MAX_PANELS):
-			_panel_mis[p].visible = p < _num_panels
+		_num_panels = clampi(int(config["panels"]), 1, 4)
+		_apply_panel_visibility()
 	_sync_controllers()
+
+	if not _built:
+		return
+	if bottleneck == before_bottleneck and _n == before_n \
+			and is_equal_approx(_density, before_density):
+		return
+	_rebuild_now()
+	print("[KargerAlgorithm] Config applied — bottleneck=%s, n=%d, edges=%d" % [
+		bottleneck, _n, _edge_count])
+
+
+## Accept an axis value only if it names something this artifact actually builds.
+## A typo in a map token falls back to the value already standing rather than to
+## an empty graph.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
 
 
 # ── Algorithm info ───────────────────────────────────────────────────────
