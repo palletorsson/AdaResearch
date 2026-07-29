@@ -90,6 +90,19 @@ func _run() -> void:
 		var packed: PackedScene = packed_cache[vscene]
 
 		var inst: Node = packed.instantiate()
+
+		# Stamp the lookup name BEFORE _ready(), the same contract the grid and
+		# capture_multi_angle honour. Whole families share one scene here and
+		# pick their variant from this meta — the six pattern_tile members all
+		# point at pattern_tile_puzzle.tscn, and so do specimen_plinth, dome_kit
+		# and the bricolage affordances. Without it every member of a family
+		# rendered as the family default, so their sweeps measured a difference
+		# of 0.04% and looked like axes that do nothing. They were being asked
+		# the wrong question.
+		var lookup: String = str(variant.get("artifact", ""))
+		if lookup != "":
+			inst.set_meta("artifact_lookup_name", lookup)
+
 		# Set every swept @export BEFORE add_child, so _ready() builds with it.
 		#
 		# The property is not always on the root. Plenty of scenes wrap their
