@@ -4890,7 +4890,26 @@
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "Engine.get_process_frames() shown live — the render loop counting itself out loud. The most honest artifact in the room: a reminder that all this geometry is being redrawn dozens of times a second, that the still point and the solid cube are both, underneath, a number ticking up."
+   "qfep_connection": "Engine.get_process_frames() shown live — the render loop counting itself out loud. The most honest artifact in the room: a reminder that all this geometry is being redrawn dozens of times a second, that the still point and the solid cube are both, underneath, a number ticking up.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "reading": [
+      "count",
+      "rate",
+      "delta",
+      "budget"
+     ],
+     "epoch": [
+      "boot",
+      "arrival"
+     ]
+    },
+    "default": "reading=count, epoch=boot - the legacy three-line behaviour to the character, so all 11 existing placements are untouched",
+    "was": "three lines and zero exports: label.text = \"%d\" % Engine.get_process_frames(). The hard-coded parameter space was hiding in that one format string - a cumulative count is the least honest thing a frame counter can say, and the artifact's own truth line ('there is no continuous time in real-time 3D, only discrete frame steps') asks for the rate readout its @identity had been requesting since it was written",
+    "note": "declaration completed by hand - the promoting agent wrote the script and died on the session limit before declaring the axes"
+   }
   },
   "frames_display": {
    "category": "unknown",
@@ -11454,12 +11473,12 @@
   "queer_morphology_specimen": {
    "dna": {
     "axes": {
-    "becoming": [
-    "jarred",
-    "cracked",
-    "escaped",
-    "clouded"
-    ]
+     "becoming": [
+      "jarred",
+      "cracked",
+      "escaped",
+      "clouded"
+     ]
     }
    },
    "category": "emergence",

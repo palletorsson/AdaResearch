@@ -19072,7 +19072,26 @@
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
    },
-   "qfep_connection": "The sphere at 8 rings — faceted, blunt, honest about its lie. The low-poly exhibit that shows what a sphere really is underneath: not a curve but a *decision* about how many flat triangles will stand in for one, curvature confessed as an illusion held by enough small planes."
+   "qfep_connection": "The sphere at 8 rings — faceted, blunt, honest about its lie. The low-poly exhibit that shows what a sphere really is underneath: not a curve but a *decision* about how many flat triangles will stand in for one, curvature confessed as an illusion held by enough small planes.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "grain": [
+      "meridian",
+      "parallel",
+      "even"
+     ],
+     "facets": [
+      "shown",
+      "hidden",
+      "only"
+     ]
+    },
+    "default": "grain=meridian, facets=shown - rings=1, radial_segments=10 exactly as shipped, so all 10 existing placements are unchanged",
+    "was": "rings=1 and radial_segments=10 read as 'low resolution' but are a low resolution spent ENTIRELY IN ONE DIRECTION - ten meridians, no parallels, a lantern rather than a ball. All three grain values spend the same ~20 quads and disagree about where they go, so the knob changes WHICH failure of the approximation you are looking at",
+    "note": "declaration completed by hand - the promoting agent wrote the script and died on the session limit before declaring the axes"
+   }
   },
   "sphere_mid": {
    "category": "unknown",
