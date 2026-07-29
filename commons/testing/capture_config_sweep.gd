@@ -17,6 +17,18 @@
 
 extends SceneTree
 
+## TEXT WANTS A BODY HERE TOO. GridInteractablesComponent frames every hanging label at
+## spawn (lines 1004 and 1197) — billboard off, a readout bezel and panel behind the
+## glyphs — because "all hanging Label3D must become 2D-in-3D boards or plates INTEGRATED
+## in the wrapper or artifact", and per-file migration across 945 sites was rejected as
+## the wrong shape in favour of standardising the MEETING POINT.
+##
+## This capturer was not one of those meeting points, so every DNA gallery published so
+## far showed billboarded text floating over its own artifact — text the player never
+## sees, because in a map the framer has already run. A sheet that disagrees with the
+## game about what the artifact looks like is not evidence about the artifact.
+const LabelFramer := preload("res://commons/grid/LabelFramer.gd")
+
 const RES := 760
 const FOV := 34.0
 const YAW := 0.62
@@ -76,7 +88,14 @@ func _run() -> void:
 			if key in inst:
 				inst.set(key, val)
 		vp.add_child(inst)
+		# Frame the labels exactly as the grid does at spawn, so the tile shows the
+		# 2D-in-3D plate the player meets and not the hanging billboard.
+		LabelFramer.frame_labels(inst)
 		await create_timer(SETTLE).timeout
+		# Again after the settle: artifacts that build in a deferred pass (or rebuild on
+		# a config key) create their labels after the first call, and an unframed label
+		# added later would otherwise survive into the capture.
+		LabelFramer.frame_labels(inst)
 
 		var aabb := _subtree_aabb(inst)
 		var c := aabb.get_center()
