@@ -2,11 +2,11 @@ extends Node3D
 class_name SchlegelDiagram
 
 # @identity
-# essence: a tesseract projected from a viewpoint parked just outside one of its eight cells, so that cell swells into the glass box every other cell is nested inside — one cube containing seven, none of them actually smaller than the others
+# essence: a tesseract projected from a viewpoint parked just outside one of its eight cells, so that cell swells into the bright wire cage every other cell is nested inside — one cube containing seven, none of them actually smaller than the others
 # desire: to give the higher-dimensions room its still object; tesseract_bench spins so nothing can be counted, and a projection you cannot hold still teaches nothing about which cell is where
 # critical_parameter: view_w — how far outside the near cell the 4D camera stands. 1.6 is just outside and gives the classic 4.3:1 nesting; push it up and the projection flattens toward the parallel shadow, drop it toward 1.0 and the near cell blows up past the room
-# triggers: _ready() lays the 16 vertices of (±1)^4, pairs them into 32 edges by Hamming distance 1, projects every point through the perspective divide borrowed live from tesseract_bench, then skins each of the 8 cells as a transparent hull from its own 6 quads
-# emerges: the lie you can see through — the outer box looks like a frame and the inner cube looks like a core, and both are ordinary cubes that a 4D observer would call congruent; the hierarchy is entirely an artifact of where the camera stands
+# triggers: _ready() lays the 16 vertices of (±1)^4, pairs them into 32 edges by Hamming distance 1, projects every point through the perspective divide borrowed live from tesseract_bench, then draws all 32 as struts whose radius and emission fall off with picture-space depth — thick and bright on the enclosing cell, thin and dim on the enclosed. The cell hulls still exist but are off by default; eight overlapping transparent boxes read as one empty vitrine, and the nesting has to be carried by the edges to be seen at all
+# emerges: the lie you can see through — the outer cage looks like a frame and the inner cube looks like a core, and both are ordinary cubes that a 4D observer would call congruent; the hierarchy is entirely an artifact of where the camera stands, which is why the depth gradient is measured in the projection and nowhere else
 # needs: tesseract_bench.gd [present — its _project() is the shared 4D camera]; SurfaceTool [Godot built-in, for the cell hulls]; Grid.gdshader [present]; TextScreen PAD plate [present]
 # relationships: the still twin of tesseract_bench and the last rung of dimensional_analogy — same 16 vertices, same 32 edges, same projection call, one parameter apart
 # truth: a Schlegel diagram does not show you the fourth dimension, it shows you what one cell's worth of distance does to everything behind it. Perspective is not a window, it is a ranking — and the thing nearest the observer always gets to be the container.
@@ -23,7 +23,9 @@ const TesseractBenchScript := preload("res://commons/artifacts/tesseract_bench/t
 
 const PLINTH_W := 1.02
 const PLINTH_H := 0.72
-const VERT_R := 0.014
+## Joint radius at the enclosing cell. Has to clear EDGE_R_OUTER or the corners
+## read as pinches in the strut rather than as vertices.
+const VERT_R := 0.021
 
 ## 4D camera distance. Cell faces sit at w = ±1, so anything above 1.0 is
 ## outside the near cell — "just outside" is the Schlegel condition and the
@@ -46,14 +48,24 @@ const VERT_R := 0.014
 ## meant to be held still. A map that wants it turning can say so.
 @export var drift_speed: float = 0.0
 
-## The six cells between near and far. They are the honest content of the
-## projection, but eight overlapping transparent hulls can turn to soup; a map
-## working in a bright room can drop them and keep the two cubes and the edges.
+## Transparent cell skins. Off by default: eight overlapping hulls with no
+## contrast between them read as one empty glass box and hide the very nesting
+## the diagram exists to show. The edges carry the structure instead. A map with
+## a dark backdrop and a close camera can turn them back on.
+@export var show_hulls: bool = false
+
+## The six cells between near and far — hulls only, and only when show_hulls is
+## on. Their edges are always drawn; they are the honest content of the
+## projection and the only place the near-to-far links appear.
 @export var show_side_cells: bool = true
 
-const EDGE_R_OUTER := 0.008
-const EDGE_R_INNER := 0.006
-const EDGE_R_LINK := 0.005
+## Strut radius at the enclosing cell and at the innermost. The ratio is the
+## whole legibility argument: containment has to be readable as weight before it
+## is readable as position.
+const EDGE_R_OUTER := 0.015
+const EDGE_R_INNER := 0.0035
+const EDGE_TINT_OUTER := Color(0.66, 0.93, 1.00)
+const EDGE_TINT_INNER := Color(1.00, 0.66, 0.30)
 
 var _built := false
 var _created: Array[Node] = []
@@ -66,6 +78,12 @@ var _drift: float = 0.0
 var _vertices_4d: Array[Vector4] = []
 var _edges: Array[Vector2i] = []
 var _projected: Array[Vector3] = []
+## Radius of the outermost edge in the finished picture. Everything else is read
+## as a fraction of it, so the gradient survives any view_w / hull_radius.
+var _depth_scale: float = 1.0
+## Depth-bucket → Material. Untyped values on purpose; Dictionary takes no
+## element types.
+var _mat_cache := {}
 
 
 func _ready() -> void:
@@ -162,6 +180,12 @@ func _build_all() -> void:
 	for i in range(_vertices_4d.size()):
 		_projected.append(_project(_vertices_4d[i]))
 
+	_depth_scale = 0.0001
+	for e in _edges:
+		var pe: Vector2i = e
+		var mid: Vector3 = (_projected[pe.x] + _projected[pe.y]) * 0.5
+		_depth_scale = maxf(_depth_scale, mid.length())
+
 	_hub = Node3D.new()
 	_hub.name = "SchlegelHub"
 	_hub.position = Vector3(0.0, PLINTH_H + lift, 0.0)
@@ -177,16 +201,20 @@ func _build_all() -> void:
 ## Eight cells, eight hulls. Only the tint and the alpha distinguish them —
 ## the geometry of all eight is the same six-quad box, put through the same
 ## projection. That is the claim: the near cell is not a frame, it is a cube.
+## Off by default: with nothing but alpha between them the eight hulls stack
+## into an even wash and the picture becomes an empty vitrine.
 func _build_cells() -> void:
+	if not show_hulls:
+		return
 	var specs := [
-		[3, 1.0, Color(0.45, 0.85, 1.00), 0.055],   # near cell — the enclosing hull
-		[3, -1.0, Color(1.00, 0.72, 0.35), 0.170],  # far cell — the nested core
-		[0, 1.0, Color(0.55, 0.75, 1.00), 0.055],
-		[0, -1.0, Color(0.55, 0.75, 1.00), 0.055],
-		[1, 1.0, Color(0.70, 0.62, 1.00), 0.055],
-		[1, -1.0, Color(0.70, 0.62, 1.00), 0.055],
-		[2, 1.0, Color(0.50, 0.95, 0.85), 0.055],
-		[2, -1.0, Color(0.50, 0.95, 0.85), 0.055],
+		[3, 1.0, Color(0.45, 0.85, 1.00), 0.030],   # near cell — the enclosing hull
+		[3, -1.0, Color(1.00, 0.72, 0.35), 0.110],  # far cell — the nested core
+		[0, 1.0, Color(0.55, 0.75, 1.00), 0.030],
+		[0, -1.0, Color(0.55, 0.75, 1.00), 0.030],
+		[1, 1.0, Color(0.70, 0.62, 1.00), 0.030],
+		[1, -1.0, Color(0.70, 0.62, 1.00), 0.030],
+		[2, 1.0, Color(0.50, 0.95, 0.85), 0.030],
+		[2, -1.0, Color(0.50, 0.95, 0.85), 0.030],
 	]
 	for si in range(specs.size()):
 		if si >= 2 and not show_side_cells:
@@ -240,36 +268,40 @@ func _cell_hull(fixed_axis: int, fixed_val: float) -> ArrayMesh:
 	return st.commit()
 
 
-## The 32 edges, sorted by which cube they belong to. The 12 of the near cell
-## are drawn heaviest because that is what a viewer will read as the room; the
-## 8 that connect near to far are the ones with no 3D counterpart at all.
+## How deeply enclosed a point in the finished picture is: 0 out at the near
+## cell's edges, 1 at the innermost. Measured in the projection and nowhere
+## else, on purpose — in 4D none of these cells contains any other, so the only
+## place the nesting exists is the picture, and the only honest place to read it
+## from is the picture.
+## The 0.6 exponent is not decoration. Raw radial depth puts the eight near-to-far
+## links at 0.25 — visually almost the same weight as the enclosing cage, which
+## collapses three ranks back into two. The ease pushes them to 0.43 and gives
+## the picture the 1 : 0.67 : 0.35 fall-off the nesting is actually read from.
+func _depth_at(p: Vector3) -> float:
+	var raw: float = clampf(1.0 - p.length() / _depth_scale, 0.0, 1.0)
+	return pow(raw, 0.6)
+
+
+## The 32 edges, weighted by depth rather than sorted into three buckets. The 12
+## of the near cell come out thickest and brightest, the 8 near-to-far links come
+## out two-thirds as heavy, the 12 of the far cell are thin and dim in the middle.
+## The eye reads that fall-off as containment before it reads any geometry.
 func _build_edges() -> void:
-	var outer_mat := _line_mat(Color(0.60, 0.72, 0.85), Color(0.45, 0.90, 1.00), 2.6)
-	var inner_mat := _line_mat(Color(0.75, 0.60, 0.40), Color(1.00, 0.74, 0.36), 2.6)
-	var link_mat := _line_mat(Color(0.44, 0.48, 0.58), Color(0.62, 0.70, 0.88), 1.1)
 	for e in _edges:
 		var pair: Vector2i = e
-		var wa: float = _vertices_4d[pair.x].w
-		var wb: float = _vertices_4d[pair.y].w
-		var mat: Material = link_mat
-		var r: float = EDGE_R_LINK
-		if wa > 0.0 and wb > 0.0:
-			mat = outer_mat
-			r = EDGE_R_OUTER
-		elif wa < 0.0 and wb < 0.0:
-			mat = inner_mat
-			r = EDGE_R_INNER
-		_hub.add_child(_strut(_projected[pair.x], _projected[pair.y], r, mat))
+		var a: Vector3 = _projected[pair.x]
+		var b: Vector3 = _projected[pair.y]
+		var depth: float = _depth_at((a + b) * 0.5)
+		var r: float = lerpf(EDGE_R_OUTER, EDGE_R_INNER, depth)
+		_hub.add_child(_strut(a, b, r, _depth_mat(depth)))
 
 
 func _build_vertices() -> void:
-	var outer_mat := _line_mat(Color(0.80, 0.90, 1.00), Color(0.55, 0.95, 1.00), 2.8)
-	var inner_mat := _line_mat(Color(1.00, 0.85, 0.60), Color(1.00, 0.78, 0.40), 2.8)
 	for i in range(_vertices_4d.size()):
-		var near: bool = _vertices_4d[i].w > 0.0
-		var mat: Material = outer_mat if near else inner_mat
-		var r: float = VERT_R if near else VERT_R * 0.8
-		_hub.add_child(_sphere(_projected[i], r, mat))
+		var p: Vector3 = _projected[i]
+		var depth: float = _depth_at(p)
+		var r: float = lerpf(VERT_R, VERT_R * 0.30, depth)
+		_hub.add_child(_sphere(p, r, _depth_mat(depth)))
 
 
 func _process(delta: float) -> void:
@@ -352,7 +384,7 @@ func _add_plate() -> void:
 	ts.width_m = 0.44
 	ts.position = Vector3(0.0, PLINTH_H + 0.005, PLINTH_W * 0.5 - 0.16)
 	if ts.has_method("set_text"):
-		ts.set_text("SCHLEGEL DIAGRAM", "camera parked just outside one cell —\nthe cell you left becomes the box\nholding the seven you did not")
+		ts.set_text("SCHLEGEL DIAGRAM", "the thick bright cage is one cell — it encloses\nsix frusta, which enclose the thin dim cell\nat the centre. All eight are the same cube.")
 	_own(ts)
 
 
@@ -370,8 +402,25 @@ func _hull_mat(tint: Color, alpha: float) -> StandardMaterial3D:
 	return m
 
 
-func _line_mat(fill: Color, wire: Color, emit: float) -> Material:
-	return _grid_material(fill, wire, emit)
+## One material per depth: cyan-white and hot at the enclosing cell, amber and
+## banked down at the enclosed one. Hue carries which cube you are looking at,
+## brightness carries how far inside it sits.
+func _depth_mat(depth: float) -> Material:
+	# Quantised and cached: a tesseract only has three nesting ranks, so the 48
+	# struts and vertices want three materials, not forty-eight.
+	var key: int = int(round(clampf(depth, 0.0, 1.0) * 24.0))
+	if _mat_cache.has(key):
+		var cached: Material = _mat_cache[key]
+		return cached
+	var d: float = float(key) / 24.0
+	var tint: Color = EDGE_TINT_OUTER.lerp(EDGE_TINT_INNER, d)
+	var bright: float = lerpf(1.0, 0.46, d)
+	var wire: Color = Color(tint.r * bright, tint.g * bright, tint.b * bright)
+	var fill: Color = Color(wire.r * 0.62, wire.g * 0.62, wire.b * 0.62)
+	var emit: float = lerpf(3.4, 0.80, d)
+	var mat: Material = _grid_material(fill, wire, emit)
+	_mat_cache[key] = mat
+	return mat
 
 
 func _witness_mat() -> Material:
@@ -414,7 +463,7 @@ func _rebuild_now() -> void:
 
 
 ## Grid config. Keys: "view_w", "hull_radius", "lift", "drift_speed",
-## "show_side_cells". Only geometric changes rebuild — curation_station hands
+## "show_hulls", "show_side_cells". Only geometric changes rebuild — curation_station hands
 ## every artifact it curates {"emissive": false} straight after framing its
 ## labels, and rebuilding on that would discard the framing.
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -422,6 +471,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	var before_radius: float = hull_radius
 	var before_lift: float = lift
 	var before_sides: bool = show_side_cells
+	var before_hulls: bool = show_hulls
 
 	if config_data.has("view_w"):
 		view_w = maxf(float(config_data["view_w"]), 1.02)
@@ -432,12 +482,15 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("drift_speed"):
 		drift_speed = float(config_data["drift_speed"])
 		set_process(not Engine.is_editor_hint() and absf(drift_speed) > 0.0001)
+	if config_data.has("show_hulls"):
+		show_hulls = bool(config_data["show_hulls"])
 	if config_data.has("show_side_cells"):
 		show_side_cells = bool(config_data["show_side_cells"])
 
 	if not _built:
 		return
 	if is_equal_approx(view_w, before_view) and is_equal_approx(hull_radius, before_radius) \
-			and is_equal_approx(lift, before_lift) and show_side_cells == before_sides:
+			and is_equal_approx(lift, before_lift) and show_side_cells == before_sides \
+			and show_hulls == before_hulls:
 		return
 	_rebuild_now()

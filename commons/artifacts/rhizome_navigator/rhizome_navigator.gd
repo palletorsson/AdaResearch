@@ -2,19 +2,20 @@ extends Node3D
 class_name RhizomeNavigator
 
 # @identity
-# essence: a three-metre patch of floor with a rhizome grown flat across it — plinths a boot-height tall, strips flush enough to walk over, a thin hole where a centre would be, and every strip running out past the boundary so you can step on from any side
+# essence: a three-metre dark plate with a pale rhizome grown across it in low relief — plinths standing 15 cm proud, strips raised 5 cm and narrow enough that dark plate shows between them, a thin hole where a centre would be, and the mat reaching the rim on every side so you can step on from anywhere
 # desire: to make the rhizome something a body enters rather than a diagram a body reads; the tabletop graph always has a front, and a front is a beginning
 # critical_parameter: links_per_node — how many existing points a new shoot joins. At one it is a tree with a hidden root; at three the mat closes into loops and no node can be called first
 # triggers: _ready() grows the graph from a seeded annulus (shoots sprout at the rim, each joining its several nearest neighbours) and lays it as floor geometry; _process runs a wavefront that re-enters at a different random node every few seconds
 # emerges: you arrive somewhere in the middle of something already connected. The pulse arrives from a different direction each time and the mat does not care, because there is nowhere it has to start
-# needs: MultiMeshInstance3D for plinths and strips [one draw call each]; a seeded RNG so the mat is the same mat on every load; no collision anywhere — nothing here is a trip hazard
+# needs: a dark matte plate to be pale against — without it the graph sat at floor height and read as one white smear; MultiMeshInstance3D for plinths and strips [one draw call each]; strips narrower than MIN_GAP or the mat welds shut; a seeded RNG so the mat is the same mat on every load; no collision anywhere — nothing here is a trip hazard
 # relationships: the walkable twin of rhizome_grower, which grows the same rule at arm's length on a bench; where the grower says "no root" in a readout, this one says it by having no entrance
 # truth: a map with an entrance has already told you where you are. This one has twelve, and the pulse comes from a different one every time.
 # @qfep_term: Rhizome — connection without hierarchy, laid where feet go.
 
-## Room-scale walk-through, 3x1x3. A floor-plane rhizome: node plinths and flush
-## edge strips grown by the sideways rule (shoots link to SEVERAL neighbours,
-## never to one parent), with no marked start and no privileged edge.
+## Room-scale walk-through, 3x1x3. A floor-plane rhizome on a dark plate: node
+## plinths in low relief and narrow raised edge strips, grown by the sideways
+## rule (shoots link to SEVERAL neighbours, never to one parent), with no marked
+## start and no privileged edge.
 
 const SHADER_PATH := "res://commons/resourses/shaders/Grid.gdshader"
 
@@ -30,16 +31,23 @@ const SHADER_PATH := "res://commons/resourses/shaders/Grid.gdshader"
 ## Seconds between wavefront re-entries. Each re-entry picks a new origin node.
 @export var pulse_period: float = 3.2
 
-const NODE_R := 0.17
-const NODE_H := 0.07
-const STRIP_W := 0.30
-const STRIP_H := 0.022
+const NODE_R := 0.13
+const NODE_H := 0.15
+## Strips must stay well under MIN_GAP or the mat welds shut into one sheet and
+## the graph stops being a graph. At the old 0.30 the 59 strips covered 65% of
+## the patch and fused; 0.12 leaves the plate showing across ~54% of it, which
+## is what makes the web legible as a web.
+const STRIP_W := 0.12
+const STRIP_H := 0.05
+const PLATE_H := 0.03
 ## Closest two nodes may sit. Keeps plinths from fusing into a slab.
-const MIN_GAP := 0.34
+const MIN_GAP := 0.38
 
-const COLD := Color(0.26, 0.30, 0.40)
-const WARM := Color(0.42, 0.88, 0.80)
-const PLINTH := Color(0.55, 0.50, 0.86)
+## Dark ground so the pale mat has something to be pale against.
+const PLATE := Color(0.075, 0.082, 0.105)
+const COLD := Color(0.50, 0.55, 0.66)
+const WARM := Color(0.46, 0.95, 0.82)
+const PLINTH := Color(0.62, 0.58, 0.92)
 
 var _rng := RandomNumberGenerator.new()
 var _built := false
@@ -68,6 +76,7 @@ func _ready() -> void:
 func _build_all() -> void:
 	_rng.seed = nav_seed
 	_grow()
+	_lay_plate()
 	_lay_nodes()
 	_lay_edges()
 	_lay_readout()
@@ -155,8 +164,27 @@ func _own(n: Node) -> Node:
 	return n
 
 
+## The ground the mat is laid on. Dark and matte: without it the pale plinths
+## and strips sat at floor height with nothing behind them and the whole patch
+## read as one white smear. The plate is what gives the graph a silhouette.
+func _lay_plate() -> void:
+	var box := BoxMesh.new()
+	box.size = Vector3(patch_size, PLATE_H, patch_size)
+	var mi := MeshInstance3D.new()
+	mi.name = "Plate"
+	mi.mesh = box
+	mi.position = Vector3(0.0, PLATE_H * 0.5, 0.0)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = PLATE
+	mat.roughness = 0.92
+	mat.metallic = 0.0
+	mi.material_override = mat
+	_own(mi)
+
+
 ## Node plinths: every one identical. Birth order is not encoded anywhere —
-## no size ramp, no colour ramp, nothing that would let the eye rank them.
+## no size ramp, no colour ramp, nothing that would let the eye rank them. They
+## stand 15 cm proud of the plate — a step up, not a decal.
 func _lay_nodes() -> void:
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
@@ -169,18 +197,22 @@ func _lay_nodes() -> void:
 	mm.instance_count = _points.size()
 	for i in _points.size():
 		var t := Transform3D.IDENTITY
-		t.origin = _points[i] + Vector3(0.0, NODE_H * 0.5, 0.0)
+		t.origin = _points[i] + Vector3(0.0, PLATE_H + NODE_H * 0.5, 0.0)
 		mm.set_instance_transform(i, t)
 	var mi := MultiMeshInstance3D.new()
 	mi.name = "Nodes"
 	mi.multimesh = mm
-	mi.material_override = _grid_material(PLINTH, PLINTH.lightened(0.4), 1.1)
+	# Emission held well under 1: at 1.1 the plinths clipped to white and lost
+	# the shading that tells you they have a side.
+	mi.material_override = _grid_material(PLINTH, PLINTH.lightened(0.45), 0.5)
 	_own(mi)
 
 
-## Edge strips: flat boxes laid between plinth centres, 2 cm proud of the floor
-## so they read as path rather than paint and still cannot trip anyone. Coloured
-## per instance, because the pulse rewrites those colours every frame.
+## Edge strips: narrow boxes laid between plinth centres, 5 cm proud of the
+## plate — enough that the side face catches light and the strip has a visible
+## edge, low enough to walk over. Narrower than MIN_GAP on purpose: wide strips
+## overlap their neighbours and the mat stops being a graph. Coloured per
+## instance, because the pulse rewrites those colours every frame.
 func _lay_edges() -> void:
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
@@ -199,16 +231,20 @@ func _lay_edges() -> void:
 		# Named edge_basis, not basis — Node3D already has a `basis` property and a
 		# local of that name shadows it.
 		var edge_basis: Basis = Basis(Vector3.UP, yaw).scaled(Vector3(length, 1.0, 1.0))
-		mm.set_instance_transform(i, Transform3D(edge_basis, (a + b) * 0.5 + Vector3(0.0, STRIP_H * 0.5, 0.0)))
+		mm.set_instance_transform(i, Transform3D(edge_basis, (a + b) * 0.5 + Vector3(0.0, PLATE_H + STRIP_H * 0.5, 0.0)))
 		mm.set_instance_color(i, COLD)
 	_edge_field = MultiMeshInstance3D.new()
 	_edge_field.name = "Edges"
 	_edge_field.multimesh = mm
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
+	mat.roughness = 0.45
+	# Emission is a fixed dim teal, NOT white. White emission at 0.7 added a flat
+	# 0.7 to every channel of every strip, so cold and warm both clipped to paper
+	# and the pulse was invisible. The pulse now lives in the vertex albedo.
 	mat.emission_enabled = true
-	mat.emission = Color.WHITE
-	mat.emission_energy_multiplier = 0.7
+	mat.emission = Color(0.10, 0.22, 0.20)
+	mat.emission_energy_multiplier = 0.45
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
 	_edge_field.material_override = mat
 	_own(_edge_field)

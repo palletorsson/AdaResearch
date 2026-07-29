@@ -3,11 +3,12 @@
 [ext_resource type="Script" path="res://commons/artifacts/rhizome_navigator/rhizome_navigator.gd" id="1_script"]
 
 ; rhizome_navigator.tscn — room-scale walk-through, 3x1x3, backed by
-; rhizome_navigator.gd. A floor-plane rhizome: identical boot-height node
-; plinths and flush walkable edge strips, grown by the sideways rule (each new
-; shoot joins SEVERAL nearest points, never one parent), with a thin middle, no
-; marked start, and a wavefront that re-enters at a different node every few
-; seconds. No collision anywhere — the mat is walked over, not around.
+; rhizome_navigator.gd. A floor-plane rhizome on a dark matte plate: identical
+; node plinths standing 15 cm proud and narrow walkable edge strips raised 5 cm,
+; grown by the sideways rule (each new shoot joins SEVERAL nearest points, never
+; one parent), with a thin middle, no marked start, and a wavefront that
+; re-enters at a different node every few seconds. No collision anywhere — the
+; mat is walked over, not around.
 
 [node name="rhizome_navigator" type="Node3D"]
 script = ExtResource("1_script")

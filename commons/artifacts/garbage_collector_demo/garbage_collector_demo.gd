@@ -138,13 +138,15 @@ func _build_pillar() -> void:
 	cap.position = Vector3(PILLAR_X, PILLAR_TOP, 0.0)
 	cap.material_override = _emissive_mat(C_ROOT, 1.8)
 	_spawn(cap)
+	# Below the cap and forward of the shaft, not above it: at pillar-top height the
+	# label lands in the same screen band as the centred readout and the two collide.
 	var label := Label3D.new()
 	label.text = "ROOTS"
-	label.font_size = 20
+	label.font_size = 17
 	label.outline_size = 5
 	label.modulate = C_ROOT
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(PILLAR_X, PILLAR_TOP + 0.14, 0.0)
+	label.position = Vector3(PILLAR_X - 0.02, PILLAR_TOP - 0.08, 0.30)
 	_spawn(label)
 
 

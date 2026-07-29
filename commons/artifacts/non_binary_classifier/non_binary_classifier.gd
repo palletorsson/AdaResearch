@@ -2,12 +2,12 @@ extends Node3D
 class_name NonBinaryClassifier
 
 # @identity
-# essence: a scatter of sixty samples on a lit table with a curved decision boundary standing over them as a thin vertical ribbon, taking gradient steps every frame and never arriving, because every sample inside the margin has its label re-drawn before the optimiser can use it
+# essence: a scatter of sixty samples filling a lit table, a violet slab of undecided ground lying across it, and a curved decision boundary floating above both as a standing ribbon — taking gradient steps every frame and never arriving, because every sample caught inside that slab has its label re-drawn before the optimiser can use it
 # desire: to refuse the demonstration where a classifier converges and the lesson is that categories are findable — this one runs the same arithmetic and cannot stop, and the reason is legible on the table
-# critical_parameter: margin_width — the half-width of the undecided band. At 0 no sample is ever relabelled, the loss descends, and the boundary snaps to a hard binary split within seconds; widened, it can never close
-# triggers: _process runs gradient_steps descents on logistic loss over a quadratic feature map, then every relabel_period frames re-draws the label of each sample whose score falls inside the margin; the boundary is re-contoured by marching squares over the live score field
-# emerges: the boundary keeps moving BECAUSE the ambiguous samples refuse to resolve — the drift readout goes to zero the moment the margin does, which is the proof that this is not a broken optimiser but a contested ground truth
-# needs: ImmediateMesh for the boundary ribbon and margin contours [Godot built-in]; SphereMesh samples [built-in]; Grid.gdshader for the table [present]; TextScreen plate [present]
+# critical_parameter: margin_width — the half-width of the undecided band, in RMS score units, which is also the visible half-width of the violet slab. At 0 no sample is ever relabelled, the loss descends, and the boundary snaps to a hard binary split within seconds; widened, the slab swallows enough of the population that it can never close
+# triggers: _process runs gradient_steps descents on logistic loss over a quadratic feature map, then every relabel_period frames re-draws the label of each sample whose score falls inside the margin; the boundary is re-contoured by marching squares over the live score field and the margin band is re-filled cell by cell from the same sampling
+# emerges: the boundary keeps moving BECAUSE the ambiguous samples refuse to resolve — the drift readout goes to zero the moment the margin does, which is the proof that this is not a broken optimiser but a contested ground truth; the slab is the visible extent of what the model will not commit to, and the magenta samples standing in it are the reason it cannot
+# needs: ImmediateMesh for the boundary ribbon, the margin walls and the margin slab [Godot built-in]; SphereMesh samples [built-in]; Grid.gdshader for the table [present]; TextScreen plate [present]
 # relationships: the speculative-computation answer to excluded_class_visualizer — that one shows who is outside a fixed line, this one shows a line that cannot fix itself while they are inside it
 # truth: a classifier does not fail on ambiguous cases. It fails to terminate. Convergence was never a property of the algorithm; it was a promise about the data, and the promise was that everyone had already been sorted.
 
@@ -17,16 +17,22 @@ class_name NonBinaryClassifier
 ##   φ(x, z) = [1, x, z, x², x·z, z²]
 ## so the zero set of w·φ is a conic — a curve that genuinely bends, not a line
 ## wearing a curve's name. The boundary is drawn by marching squares over a
-## 28×28 sampling of w·φ, extruded upward into a standing ribbon; the ±margin
-## level sets are drawn as two lower, fainter ribbons, so the band you can see
-## is exactly the band that does the relabelling.
+## 28×28 sampling of w·φ, extruded into a ribbon that floats clear of the deck.
+##
+## Under it, the region |w·φ| < margin_width is filled as a translucent violet
+## slab: capped on top, walled at the ±margin level sets, with the samples
+## standing inside it. The slab is not decoration for the margin — it is the
+## margin, drawn at the size it actually occupies on the table, so the magenta
+## dots inside it are visibly the population being re-labelled.
 
 const SHADER_PATH := "res://commons/resourses/shaders/Grid.gdshader"
 const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 
 # ── Configuration ────────────────────────────────────────────────────
 
-## THE critical parameter. Half-width of the undecided band, in score units.
+## THE critical parameter. Half-width of the undecided band, in RMS score units
+## (the weight vector is held at unit RMS, so this is a stable fraction of the
+## field and not a quantity that shrinks as training proceeds).
 ## 0.0 → the classifier converges and stops. Anything above ~0.15 → it cannot.
 @export var margin_width: float = 0.55
 @export var sample_count: int = 60
@@ -38,18 +44,32 @@ const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 @export var build_seed: int = 20260729
 
 @export_group("Table")
-@export var deck_height: float = 0.82
-@export var deck_size: float = 1.80
+## Low enough that the boundary can float clear of the deck and the whole
+## artifact still fits under the 1 m of its declared 2×1×2 footprint.
+@export var deck_height: float = 0.74
+@export var deck_size: float = 1.88
 ## Half-extent of the field in table metres. Model space is ±1.
-@export var field_half: float = 0.76
+@export var field_half: float = 0.84
+## Sample radius. Sized against the field, not against the eye: 60 dots on a
+## 1.7 m board have to be this big to read as a population rather than dust.
+@export var dot_radius: float = 0.036
 
 @export_group("Boundary")
 ## Marching-squares resolution over the score field.
 @export var contour_res: int = 28
-## How tall the boundary ribbon stands off the deck.
-@export var ribbon_height: float = 0.22
+## How tall the boundary ribbon stands.
+@export var ribbon_height: float = 0.20
+## How far the boundary floats above the deck. Non-zero on purpose: at 0 the
+## boundary is a decal on the table, and a decal is a fact about the surface
+## rather than an object with a position of its own.
+@export var boundary_lift: float = 0.115
 ## Redraws per second of the contour. The gradient still runs every frame.
 @export var contour_hz: float = 20.0
+
+@export_group("Margin band")
+## Underside and top cap of the translucent slab, above the field plane.
+@export var band_floor: float = 0.014
+@export var band_ceiling: float = 0.086
 
 # ── Palette ──────────────────────────────────────────────────────────
 
@@ -77,6 +97,7 @@ var _w: Array[float] = []
 var _field_root: Node3D
 var _bound_mesh: ImmediateMesh
 var _margin_mesh: ImmediateMesh
+var _band_mesh: ImmediateMesh
 var _readout: Label3D
 var _rng := RandomNumberGenerator.new()
 
@@ -101,6 +122,7 @@ func _build_all() -> void:
 	_rng.seed = build_seed
 	_seed_samples()
 	_seed_weights()
+	_fix_the_gauge()   # so frame zero is drawn in the same units as every frame after it
 	_build_table()
 	_build_field()
 	_build_plate()
@@ -127,10 +149,13 @@ func _seed_samples() -> void:
 	var n: int = maxi(8, sample_count)
 	for i in range(n):
 		var side: float = 1.0 if i % 2 == 0 else -1.0
-		var cx: float = side * 0.42
-		var cz: float = side * 0.30
-		var x: float = clampf(cx + _rng.randfn(0.0, 0.40), -0.98, 0.98)
-		var z: float = clampf(cz + _rng.randfn(0.0, 0.42), -0.98, 0.98)
+		var cx: float = side * 0.50
+		var cz: float = side * 0.34
+		# Wide enough that the two lobes reach the edges of the board. A scatter
+		# huddled in the middle of its own field looks like a shortage of data;
+		# the shortage here is of a line, not of samples.
+		var x: float = clampf(cx + _rng.randfn(0.0, 0.47), -0.97, 0.97)
+		var z: float = clampf(cz + _rng.randfn(0.0, 0.49), -0.97, 0.97)
 		_sx.append(x)
 		_sz.append(z)
 		_label.append(side)
@@ -164,6 +189,7 @@ func _process(delta: float) -> void:
 	_frame += 1
 	for _s in range(maxi(1, gradient_steps)):
 		_descend()
+	_fix_the_gauge()
 	if relabel_period > 0 and _frame % relabel_period == 0:
 		_relabel_the_undecided()
 
@@ -204,10 +230,36 @@ func _descend() -> void:
 	var grad: Array[float] = [g0, g1, g2, g3, g4, g5]
 	var scale: float = learning_rate / float(n)
 	for i in range(FEATURES):
-		# A weak decay keeps the conic from running off to infinity when the
-		# labels are stable enough to reward ever-larger weights. It does not
-		# stop convergence — set margin_width to 0 and watch it stop.
+		# A weak decay, kept from the plain version; the gauge fix below is what
+		# actually holds the scale. Neither stops convergence — set margin_width
+		# to 0 and watch it stop.
 		_w[i] = float(_w[i]) * 0.9995 - scale * float(grad[i])
+
+
+## Scale the whole weight vector to unit RMS score over the samples.
+##
+## Uniform scaling of w leaves the zero set of w·φ exactly where it was, so this
+## does nothing to the boundary and nothing to the descent's direction. What it
+## fixes is the UNIT the margin is measured in. Logistic loss rewards ever-larger
+## weights on data it has already separated, and an unscaled run inflates every
+## score until a margin of 0.55 covers a sliver of the table and the undecided
+## population empties out — the artifact would look like it had settled while
+## still churning. Held at RMS 1, margin_width means a stable fraction of the
+## field, and the band keeps the width it is set to.
+func _fix_the_gauge() -> void:
+	var n: int = _sx.size()
+	if n == 0:
+		return
+	var acc: float = 0.0
+	for k in range(n):
+		var s: float = _score(float(_sx[k]), float(_sz[k]))
+		acc += s * s
+	var rms: float = sqrt(acc / float(n))
+	if rms < 1.0e-4:
+		return
+	var inv: float = 1.0 / rms
+	for i in range(FEATURES):
+		_w[i] = float(_w[i]) * inv
 
 
 ## THE MECHANISM. Every sample whose score falls inside the margin has its label
@@ -224,7 +276,13 @@ func _relabel_the_undecided() -> void:
 		if not inside:
 			continue
 		_ambig_count += 1
-		var p: float = 1.0 / (1.0 + exp(clampf(-s, -30.0, 30.0)))
+		# Confidence read against the band's own half-width rather than against
+		# raw score units, now that the gauge holds those at RMS 1: a sample
+		# standing at the wall keeps its label about nine times in ten, one at
+		# the centre of the band is a coin flip. Churn concentrated where the
+		# model has genuinely nothing to say, instead of smeared over the band.
+		var t: float = maxf(1.0e-4, m * 0.5)
+		var p: float = 1.0 / (1.0 + exp(clampf(-s / t, -30.0, 30.0)))
 		_label[k] = 1.0 if _rng.randf() < p else -1.0
 	_repaint_dots()
 
@@ -242,19 +300,35 @@ func _build_field() -> void:
 	_own(_field_root)
 
 	_dots.clear()
+	var r: float = maxf(0.006, dot_radius)
 	for k in range(_sx.size()):
 		var dot := MeshInstance3D.new()
 		var sm := SphereMesh.new()
-		sm.radius = 0.022
-		sm.height = 0.044
-		sm.radial_segments = 10
-		sm.rings = 6
+		sm.radius = r
+		sm.height = r * 2.0
+		sm.radial_segments = 12
+		sm.rings = 7
 		dot.mesh = sm
 		dot.material_override = _emissive(COL_A, 2.0)
-		dot.position = _model_to_local(float(_sx[k]), float(_sz[k])) + Vector3(0.0, 0.024, 0.0)
+		# Seated so the samples stand inside the margin slab rather than under it.
+		dot.position = _model_to_local(float(_sx[k]), float(_sz[k])) + Vector3(0.0, r, 0.0)
 		_field_root.add_child(dot)
 		_dots.append(dot)
 	_repaint_dots()
+
+	# The margin, at the size it actually occupies. Drawn before the boundary so
+	# the ribbon reads as floating over it.
+	_band_mesh = ImmediateMesh.new()
+	var dmi := MeshInstance3D.new()
+	dmi.name = "MarginSlab"
+	dmi.mesh = _band_mesh
+	dmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var dmat := _emissive(COL_MARGIN, 0.9)
+	dmat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	dmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	dmat.albedo_color = Color(COL_MARGIN.r, COL_MARGIN.g, COL_MARGIN.b, 0.22)
+	dmi.material_override = dmat
+	_field_root.add_child(dmi)
 
 	_bound_mesh = ImmediateMesh.new()
 	var bmi := MeshInstance3D.new()
@@ -287,17 +361,27 @@ func _repaint_dots() -> void:
 		var mat: StandardMaterial3D = (dot as MeshInstance3D).material_override as StandardMaterial3D
 		if mat == null:
 			continue
+		var amb: bool = k < _ambiguous.size() and bool(_ambiguous[k])
 		var c: Color = COL_A if float(_label[k]) > 0.0 else COL_B
-		if k < _ambiguous.size() and bool(_ambiguous[k]):
+		if amb:
 			c = COL_AMBIG
 		mat.albedo_color = c
 		mat.emission = c
-		mat.emission_energy_multiplier = 3.2 if (k < _ambiguous.size() and bool(_ambiguous[k])) else 2.0
+		mat.emission_energy_multiplier = 3.4 if amb else 2.0
+		# Undecided samples swell. Colour alone loses the argument against a
+		# violet slab sitting between them and the eye. Re-seated as they grow,
+		# so a swollen sample stands on the field instead of sinking into it.
+		var s: float = 1.5 if amb else 1.0
+		var mi: MeshInstance3D = dot as MeshInstance3D
+		mi.scale = Vector3(s, s, s)
+		var p: Vector3 = mi.position
+		mi.position = Vector3(p.x, maxf(0.006, dot_radius) * s, p.z)
 
 
 ## Marching squares over one sampling of the score field, at three levels: the
-## decision boundary and the two margin walls. Sampling once and contouring
-## three times is the only reason this can run at 20 Hz in GDScript.
+## decision boundary and the two margin walls. The same sampling is walked once
+## more to cap the slab between the walls. Sampling once and reading it four
+## times is the only reason this can run at 20 Hz in GDScript.
 func _redraw_contours() -> void:
 	if _bound_mesh == null or _margin_mesh == null:
 		return
@@ -311,14 +395,17 @@ func _redraw_contours() -> void:
 			row.append(_score(x, z))
 		grid.append(row)
 
+	var lift: float = maxf(0.0, boundary_lift)
 	var segs: Array = _contour(grid, res, 0.0)
 	_bound_mesh.clear_surfaces()
 	if not segs.is_empty():
 		_bound_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 		for s in segs:
-			_ribbon(_bound_mesh, s[0], s[1], ribbon_height)
+			_ribbon(_bound_mesh, s[0], s[1], lift, ribbon_height)
 		_bound_mesh.surface_end()
 
+	var y0: float = minf(band_floor, band_ceiling)
+	var y1: float = maxf(band_floor, band_ceiling)
 	_margin_mesh.clear_surfaces()
 	var m: float = maxf(0.0, margin_width)
 	if m > 0.001:
@@ -327,10 +414,50 @@ func _redraw_contours() -> void:
 		if not walls.is_empty():
 			_margin_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 			for s2 in walls:
-				_ribbon(_margin_mesh, s2[0], s2[1], ribbon_height * 0.45)
+				_ribbon(_margin_mesh, s2[0], s2[1], y0, y1 - y0)
 			_margin_mesh.surface_end()
 
+	if _band_mesh != null:
+		_band_mesh.clear_surfaces()
+		if m > 0.001:
+			_fill_band(grid, res, m, y1)
+
 	_track_drift(segs)
+
+
+## The cap of the margin slab: one horizontal quad per cell whose centre score
+## falls inside the band. Cell-centre testing steps slightly against the walls,
+## which is why the walls are drawn from the exact level sets and drawn on top —
+## the crisp edge comes from them, the area comes from here.
+func _fill_band(grid: Array, res: int, m: float, y: float) -> void:
+	var step: float = 2.0 / float(res)
+	var opened: bool = false
+	for i in range(res):
+		var col0: Array = grid[i]
+		var col1: Array = grid[i + 1]
+		for j in range(res):
+			var avg: float = (float(col0[j]) + float(col1[j])
+				+ float(col1[j + 1]) + float(col0[j + 1])) * 0.25
+			if absf(avg) >= m:
+				continue
+			if not opened:
+				_band_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+				opened = true
+			var x0: float = -1.0 + step * float(i)
+			var z0: float = -1.0 + step * float(j)
+			var a: Vector3 = _model_to_local(x0, z0) + Vector3(0.0, y, 0.0)
+			var b: Vector3 = _model_to_local(x0 + step, z0) + Vector3(0.0, y, 0.0)
+			var c: Vector3 = _model_to_local(x0 + step, z0 + step) + Vector3(0.0, y, 0.0)
+			var d: Vector3 = _model_to_local(x0, z0 + step) + Vector3(0.0, y, 0.0)
+			_band_mesh.surface_set_normal(Vector3.UP)
+			_band_mesh.surface_add_vertex(a)
+			_band_mesh.surface_add_vertex(b)
+			_band_mesh.surface_add_vertex(c)
+			_band_mesh.surface_add_vertex(a)
+			_band_mesh.surface_add_vertex(c)
+			_band_mesh.surface_add_vertex(d)
+	if opened:
+		_band_mesh.surface_end()
 
 
 ## Zero crossings of (field − level) along cell edges, joined per cell. Returns
@@ -374,10 +501,11 @@ func _frac(a: float, b: float) -> float:
 	return clampf(-a / d, 0.0, 1.0)
 
 
-## One segment of contour, extruded into a standing quad (two triangles).
-func _ribbon(im: ImmediateMesh, p0: Vector2, p1: Vector2, h: float) -> void:
-	var a: Vector3 = _model_to_local(p0.x, p0.y)
-	var b: Vector3 = _model_to_local(p1.x, p1.y)
+## One segment of contour, extruded into a standing quad (two triangles), based
+## at height y0 above the field plane.
+func _ribbon(im: ImmediateMesh, p0: Vector2, p1: Vector2, y0: float, h: float) -> void:
+	var a: Vector3 = _model_to_local(p0.x, p0.y) + Vector3(0.0, y0, 0.0)
+	var b: Vector3 = _model_to_local(p1.x, p1.y) + Vector3(0.0, y0, 0.0)
 	var au: Vector3 = a + Vector3(0.0, h, 0.0)
 	var bu: Vector3 = b + Vector3(0.0, h, 0.0)
 	im.surface_set_normal(Vector3.UP)
@@ -456,8 +584,9 @@ func _build_table() -> void:
 	_readout.pixel_size = 0.001
 	_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_readout.modulate = Color(0.88, 0.92, 1.0)
-	# Kept under 1.10 m total so the artifact's AABB honours its declared
-	# 2×1×2 footprint — a billboard is measured into the bounds like anything else.
+	# Below the top of the floating boundary, and the whole stack stays under
+	# 1.10 m so the artifact's AABB honours its declared 2×1×2 footprint —
+	# a billboard is measured into the bounds like anything else.
 	_readout.position = Vector3(0.0, deck_height + 0.24, -deck_size * 0.5 + 0.06)
 	_own(_readout)
 
@@ -529,6 +658,7 @@ func _rebuild_now() -> void:
 	_field_root = null
 	_bound_mesh = null
 	_margin_mesh = null
+	_band_mesh = null
 	_readout = null
 	_drift = 0.0
 	_has_centroid = false
