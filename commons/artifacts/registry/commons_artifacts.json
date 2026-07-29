@@ -8272,7 +8272,23 @@
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "Two grab spheres and the segment between them, length read out live — but drag it near a whole number and it jitters, buzzes, and resists letting go. Integers are staged as privilege: the continuum pays a haptic toll at every round value."
+   "qfep_connection": "Two grab spheres and the segment between them, length read out live — but drag it near a whole number and it jitters, buzzes, and resists letting go. Integers are staged as privilege: the continuum pays a haptic toll at every round value.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "readout": [
+      "none",
+      "numeral",
+      "gradation",
+      "lattice"
+     ]
+    },
+    "default": "readout=numeral - the shipped code path, so existing placements are unchanged",
+    "was": "the artifact's critical_parameter was a RATE - 'the glitch/haptic resistance when length is near an integer' - and a rate is invisible to a still frame. The promotion demoted the mechanism and built the claim underneath it instead: 'whole numbers resist' is an argument about LEGIBILITY, about which values this apparatus treats as clean",
+    "kin": "shares one vocabulary with xyz_slider_plate.readout - one word, two apparatuses",
+    "note": "declared by hand 2026-07-29 - the axis was in the script and the registry had never been told. Its script is NOT a sibling of its scene (scene commons/interface/line.tscn loads res://commons/primitives/line/line.gd), which is why a sibling-path scan missed it"
+   }
   },
   "lsystem_editor": {
    "category": "procedural",
