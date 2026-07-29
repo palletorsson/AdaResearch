@@ -1,0 +1,67 @@
+{
+ "sweep": "snap_tetrahedron_puzzle",
+ "peak_changed_pct": 7.337,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "solid": "loose"
+   },
+   "b": {
+    "solid": "closed"
+   },
+   "changed_px": 42376,
+   "changed_pct": 7.337
+  },
+  {
+   "a": {
+    "solid": "loose"
+   },
+   "b": {
+    "solid": "scattered"
+   },
+   "changed_px": 37074,
+   "changed_pct": 6.419
+  },
+  {
+   "a": {
+    "solid": "loose"
+   },
+   "b": {
+    "solid": "short"
+   },
+   "changed_px": 40950,
+   "changed_pct": 7.09
+  },
+  {
+   "a": {
+    "solid": "closed"
+   },
+   "b": {
+    "solid": "scattered"
+   },
+   "changed_px": 9368,
+   "changed_pct": 1.622
+  },
+  {
+   "a": {
+    "solid": "closed"
+   },
+   "b": {
+    "solid": "short"
+   },
+   "changed_px": 2514,
+   "changed_pct": 0.435
+  },
+  {
+   "a": {
+    "solid": "scattered"
+   },
+   "b": {
+    "solid": "short"
+   },
+   "changed_px": 7947,
+   "changed_pct": 1.376
+  }
+ ]
+}

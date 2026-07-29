@@ -1,39 +1,187 @@
 {
  "sweep": "GaussianBlurShader",
- "peak_changed_pct": 3.893,
+ "peak_changed_pct": 3.865,
  "verdict": "BITES",
  "variants": [
   {
-   "params": {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 20.0
+   },
+   "b": {
+    "show_visual_frame": true,
+    "max_blur_radius": 40.0
+   },
+   "changed_px": 538,
+   "changed_pct": 0.093
+  },
+  {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 20.0
+   },
+   "b": {
     "show_visual_frame": true,
     "max_blur_radius": 64.0
    },
-   "changed_px": 401,
-   "changed_pct": 0.069
+   "changed_px": 702,
+   "changed_pct": 0.122
   },
   {
-   "params": {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 20.0
+   },
+   "b": {
     "show_visual_frame": false,
     "max_blur_radius": 20.0
    },
-   "changed_px": 22372,
-   "changed_pct": 3.873
+   "changed_px": 22152,
+   "changed_pct": 3.835
   },
   {
-   "params": {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 20.0
+   },
+   "b": {
     "show_visual_frame": false,
     "max_blur_radius": 40.0
    },
-   "changed_px": 22420,
-   "changed_pct": 3.882
+   "changed_px": 22189,
+   "changed_pct": 3.842
   },
   {
-   "params": {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 20.0
+   },
+   "b": {
     "show_visual_frame": false,
     "max_blur_radius": 64.0
    },
-   "changed_px": 22486,
-   "changed_pct": 3.893
+   "changed_px": 22237,
+   "changed_pct": 3.85
+  },
+  {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 40.0
+   },
+   "b": {
+    "show_visual_frame": true,
+    "max_blur_radius": 64.0
+   },
+   "changed_px": 286,
+   "changed_pct": 0.05
+  },
+  {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 40.0
+   },
+   "b": {
+    "show_visual_frame": false,
+    "max_blur_radius": 20.0
+   },
+   "changed_px": 22130,
+   "changed_pct": 3.831
+  },
+  {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 40.0
+   },
+   "b": {
+    "show_visual_frame": false,
+    "max_blur_radius": 40.0
+   },
+   "changed_px": 22159,
+   "changed_pct": 3.836
+  },
+  {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 40.0
+   },
+   "b": {
+    "show_visual_frame": false,
+    "max_blur_radius": 64.0
+   },
+   "changed_px": 22209,
+   "changed_pct": 3.845
+  },
+  {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 64.0
+   },
+   "b": {
+    "show_visual_frame": false,
+    "max_blur_radius": 20.0
+   },
+   "changed_px": 22246,
+   "changed_pct": 3.851
+  },
+  {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 64.0
+   },
+   "b": {
+    "show_visual_frame": false,
+    "max_blur_radius": 40.0
+   },
+   "changed_px": 22275,
+   "changed_pct": 3.856
+  },
+  {
+   "a": {
+    "show_visual_frame": true,
+    "max_blur_radius": 64.0
+   },
+   "b": {
+    "show_visual_frame": false,
+    "max_blur_radius": 64.0
+   },
+   "changed_px": 22325,
+   "changed_pct": 3.865
+  },
+  {
+   "a": {
+    "show_visual_frame": false,
+    "max_blur_radius": 20.0
+   },
+   "b": {
+    "show_visual_frame": false,
+    "max_blur_radius": 40.0
+   },
+   "changed_px": 263,
+   "changed_pct": 0.046
+  },
+  {
+   "a": {
+    "show_visual_frame": false,
+    "max_blur_radius": 20.0
+   },
+   "b": {
+    "show_visual_frame": false,
+    "max_blur_radius": 64.0
+   },
+   "changed_px": 484,
+   "changed_pct": 0.084
+  },
+  {
+   "a": {
+    "show_visual_frame": false,
+    "max_blur_radius": 40.0
+   },
+   "b": {
+    "show_visual_frame": false,
+    "max_blur_radius": 64.0
+   },
+   "changed_px": 387,
+   "changed_pct": 0.067
   }
  ]
 }

@@ -1,55 +1,343 @@
 {
  "sweep": "station_crates",
- "peak_changed_pct": 14.642,
+ "peak_changed_pct": 13.89,
  "verdict": "BITES",
  "variants": [
   {
-   "params": {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "service",
+    "hazard_labels": false
+   },
+   "changed_px": 1071,
+   "changed_pct": 0.185
+  },
+  {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": true
+   },
+   "b": {
     "upkeep": "store",
     "hazard_labels": true
    },
-   "changed_px": 84572,
-   "changed_pct": 14.642
+   "changed_px": 78816,
+   "changed_pct": 13.645
   },
   {
-   "params": {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": true
+   },
+   "b": {
     "upkeep": "store",
     "hazard_labels": false
    },
-   "changed_px": 84570,
-   "changed_pct": 14.642
+   "changed_px": 78816,
+   "changed_pct": 13.645
   },
   {
-   "params": {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": true
+   },
+   "b": {
     "upkeep": "scrap",
     "hazard_labels": true
    },
-   "changed_px": 76533,
-   "changed_pct": 13.25
+   "changed_px": 75057,
+   "changed_pct": 12.995
   },
   {
-   "params": {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": true
+   },
+   "b": {
     "upkeep": "scrap",
     "hazard_labels": false
    },
-   "changed_px": 76532,
-   "changed_pct": 13.25
+   "changed_px": 75057,
+   "changed_pct": 12.995
   },
   {
-   "params": {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": true
+   },
+   "b": {
     "upkeep": "works",
     "hazard_labels": true
    },
-   "changed_px": 65197,
-   "changed_pct": 11.288
+   "changed_px": 63835,
+   "changed_pct": 11.052
   },
   {
-   "params": {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": true
+   },
+   "b": {
     "upkeep": "works",
     "hazard_labels": false
    },
-   "changed_px": 65197,
-   "changed_pct": 11.288
+   "changed_px": 63835,
+   "changed_pct": 11.052
+  },
+  {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "store",
+    "hazard_labels": true
+   },
+   "changed_px": 79056,
+   "changed_pct": 13.687
+  },
+  {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "store",
+    "hazard_labels": false
+   },
+   "changed_px": 79055,
+   "changed_pct": 13.687
+  },
+  {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "scrap",
+    "hazard_labels": true
+   },
+   "changed_px": 75253,
+   "changed_pct": 13.029
+  },
+  {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "scrap",
+    "hazard_labels": false
+   },
+   "changed_px": 75254,
+   "changed_pct": 13.029
+  },
+  {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": true
+   },
+   "changed_px": 63534,
+   "changed_pct": 11.0
+  },
+  {
+   "a": {
+    "upkeep": "service",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": false
+   },
+   "changed_px": 63532,
+   "changed_pct": 10.999
+  },
+  {
+   "a": {
+    "upkeep": "store",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "store",
+    "hazard_labels": false
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "upkeep": "store",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "scrap",
+    "hazard_labels": true
+   },
+   "changed_px": 80225,
+   "changed_pct": 13.889
+  },
+  {
+   "a": {
+    "upkeep": "store",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "scrap",
+    "hazard_labels": false
+   },
+   "changed_px": 80226,
+   "changed_pct": 13.89
+  },
+  {
+   "a": {
+    "upkeep": "store",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": true
+   },
+   "changed_px": 76915,
+   "changed_pct": 13.316
+  },
+  {
+   "a": {
+    "upkeep": "store",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": false
+   },
+   "changed_px": 76913,
+   "changed_pct": 13.316
+  },
+  {
+   "a": {
+    "upkeep": "store",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "scrap",
+    "hazard_labels": true
+   },
+   "changed_px": 80224,
+   "changed_pct": 13.889
+  },
+  {
+   "a": {
+    "upkeep": "store",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "scrap",
+    "hazard_labels": false
+   },
+   "changed_px": 80225,
+   "changed_pct": 13.889
+  },
+  {
+   "a": {
+    "upkeep": "store",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": true
+   },
+   "changed_px": 76914,
+   "changed_pct": 13.316
+  },
+  {
+   "a": {
+    "upkeep": "store",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": false
+   },
+   "changed_px": 76912,
+   "changed_pct": 13.316
+  },
+  {
+   "a": {
+    "upkeep": "scrap",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "scrap",
+    "hazard_labels": false
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "upkeep": "scrap",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": true
+   },
+   "changed_px": 60115,
+   "changed_pct": 10.408
+  },
+  {
+   "a": {
+    "upkeep": "scrap",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": false
+   },
+   "changed_px": 60112,
+   "changed_pct": 10.407
+  },
+  {
+   "a": {
+    "upkeep": "scrap",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": true
+   },
+   "changed_px": 60116,
+   "changed_pct": 10.408
+  },
+  {
+   "a": {
+    "upkeep": "scrap",
+    "hazard_labels": false
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": false
+   },
+   "changed_px": 60113,
+   "changed_pct": 10.407
+  },
+  {
+   "a": {
+    "upkeep": "works",
+    "hazard_labels": true
+   },
+   "b": {
+    "upkeep": "works",
+    "hazard_labels": false
+   },
+   "changed_px": 3,
+   "changed_pct": 0.001
   }
  ]
 }

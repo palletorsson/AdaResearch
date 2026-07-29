@@ -1,0 +1,79 @@
+{
+ "sweep": "grabbable_line",
+ "peak_changed_pct": 0.0,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "a": {
+    "show_length_label": true,
+    "show_endpoints": true
+   },
+   "b": {
+    "show_length_label": true,
+    "show_endpoints": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_length_label": true,
+    "show_endpoints": true
+   },
+   "b": {
+    "show_length_label": false,
+    "show_endpoints": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_length_label": true,
+    "show_endpoints": true
+   },
+   "b": {
+    "show_length_label": false,
+    "show_endpoints": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_length_label": true,
+    "show_endpoints": false
+   },
+   "b": {
+    "show_length_label": false,
+    "show_endpoints": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_length_label": true,
+    "show_endpoints": false
+   },
+   "b": {
+    "show_length_label": false,
+    "show_endpoints": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_length_label": false,
+    "show_endpoints": true
+   },
+   "b": {
+    "show_length_label": false,
+    "show_endpoints": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

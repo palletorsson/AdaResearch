@@ -1,23 +1,79 @@
 {
  "sweep": "pattern_tile_puzzle",
- "peak_changed_pct": 0.038,
- "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "peak_changed_pct": 0.146,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
-   "params": {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": true
+   },
+   "b": {
+    "show_grid_lines": true,
+    "show_index_math": false
+   },
+   "changed_px": 742,
+   "changed_pct": 0.128
+  },
+  {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": true
+   },
+   "b": {
     "show_grid_lines": false,
     "show_index_math": true
    },
-   "changed_px": 217,
-   "changed_pct": 0.038
+   "changed_px": 841,
+   "changed_pct": 0.146
   },
   {
-   "params": {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": true
+   },
+   "b": {
     "show_grid_lines": false,
     "show_index_math": false
    },
-   "changed_px": 216,
-   "changed_pct": 0.037
+   "changed_px": 841,
+   "changed_pct": 0.146
+  },
+  {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": false
+   },
+   "b": {
+    "show_grid_lines": false,
+    "show_index_math": true
+   },
+   "changed_px": 163,
+   "changed_pct": 0.028
+  },
+  {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": false
+   },
+   "b": {
+    "show_grid_lines": false,
+    "show_index_math": false
+   },
+   "changed_px": 163,
+   "changed_pct": 0.028
+  },
+  {
+   "a": {
+    "show_grid_lines": false,
+    "show_index_math": true
+   },
+   "b": {
+    "show_grid_lines": false,
+    "show_index_math": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
   }
  ]
 }

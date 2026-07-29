@@ -1,39 +1,187 @@
 {
  "sweep": "random_butterflies",
- "peak_changed_pct": 0.572,
+ "peak_changed_pct": 0.349,
  "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
-   "params": {
+   "a": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 5.0
+   },
+   "b": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 10.0
+   },
+   "changed_px": 1107,
+   "changed_pct": 0.192
+  },
+  {
+   "a": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 5.0
+   },
+   "b": {
     "max_butterflies": 8.0,
     "spawn_interval": 5.0
    },
-   "changed_px": 967,
-   "changed_pct": 0.167
+   "changed_px": 885,
+   "changed_pct": 0.153
   },
   {
-   "params": {
+   "a": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 5.0
+   },
+   "b": {
     "max_butterflies": 8.0,
     "spawn_interval": 10.0
    },
-   "changed_px": 2246,
-   "changed_pct": 0.389
+   "changed_px": 725,
+   "changed_pct": 0.126
   },
   {
-   "params": {
+   "a": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 5.0
+   },
+   "b": {
     "max_butterflies": 12.8,
     "spawn_interval": 5.0
    },
-   "changed_px": 3302,
-   "changed_pct": 0.572
+   "changed_px": 1456,
+   "changed_pct": 0.252
   },
   {
-   "params": {
+   "a": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 5.0
+   },
+   "b": {
     "max_butterflies": 12.8,
     "spawn_interval": 10.0
    },
-   "changed_px": 1192,
-   "changed_pct": 0.206
+   "changed_px": 623,
+   "changed_pct": 0.108
+  },
+  {
+   "a": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 10.0
+   },
+   "b": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 5.0
+   },
+   "changed_px": 1405,
+   "changed_pct": 0.243
+  },
+  {
+   "a": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 10.0
+   },
+   "b": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 10.0
+   },
+   "changed_px": 1194,
+   "changed_pct": 0.207
+  },
+  {
+   "a": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 10.0
+   },
+   "b": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 5.0
+   },
+   "changed_px": 2016,
+   "changed_pct": 0.349
+  },
+  {
+   "a": {
+    "max_butterflies": 4.0,
+    "spawn_interval": 10.0
+   },
+   "b": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 10.0
+   },
+   "changed_px": 1114,
+   "changed_pct": 0.193
+  },
+  {
+   "a": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 5.0
+   },
+   "b": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 10.0
+   },
+   "changed_px": 1004,
+   "changed_pct": 0.174
+  },
+  {
+   "a": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 5.0
+   },
+   "b": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 5.0
+   },
+   "changed_px": 1821,
+   "changed_pct": 0.315
+  },
+  {
+   "a": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 5.0
+   },
+   "b": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 10.0
+   },
+   "changed_px": 919,
+   "changed_pct": 0.159
+  },
+  {
+   "a": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 10.0
+   },
+   "b": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 5.0
+   },
+   "changed_px": 1615,
+   "changed_pct": 0.28
+  },
+  {
+   "a": {
+    "max_butterflies": 8.0,
+    "spawn_interval": 10.0
+   },
+   "b": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 10.0
+   },
+   "changed_px": 713,
+   "changed_pct": 0.123
+  },
+  {
+   "a": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 5.0
+   },
+   "b": {
+    "max_butterflies": 12.8,
+    "spawn_interval": 10.0
+   },
+   "changed_px": 1530,
+   "changed_pct": 0.265
   }
  ]
 }

@@ -1,0 +1,187 @@
+{
+ "sweep": "noise_terrain",
+ "peak_changed_pct": 0.914,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 100.0
+   },
+   "b": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 200.0
+   },
+   "changed_px": 5279,
+   "changed_pct": 0.914
+  },
+  {
+   "a": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 100.0
+   },
+   "b": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 100.0
+   },
+   "changed_px": 5114,
+   "changed_pct": 0.885
+  },
+  {
+   "a": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 100.0
+   },
+   "b": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 200.0
+   },
+   "changed_px": 5114,
+   "changed_pct": 0.885
+  },
+  {
+   "a": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 100.0
+   },
+   "b": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 100.0
+   },
+   "changed_px": 5114,
+   "changed_pct": 0.885
+  },
+  {
+   "a": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 100.0
+   },
+   "b": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 200.0
+   },
+   "changed_px": 5114,
+   "changed_pct": 0.885
+  },
+  {
+   "a": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 200.0
+   },
+   "b": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 100.0
+   },
+   "changed_px": 190,
+   "changed_pct": 0.033
+  },
+  {
+   "a": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 200.0
+   },
+   "b": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 200.0
+   },
+   "changed_px": 195,
+   "changed_pct": 0.034
+  },
+  {
+   "a": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 200.0
+   },
+   "b": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 100.0
+   },
+   "changed_px": 212,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "terrain_size": 50.0,
+    "terrain_resolution": 200.0
+   },
+   "b": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 200.0
+   },
+   "changed_px": 212,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 100.0
+   },
+   "b": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 200.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 100.0
+   },
+   "b": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 100.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 100.0
+   },
+   "b": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 200.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 200.0
+   },
+   "b": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 100.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "terrain_size": 100.0,
+    "terrain_resolution": 200.0
+   },
+   "b": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 200.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 100.0
+   },
+   "b": {
+    "terrain_size": 160.0,
+    "terrain_resolution": 200.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

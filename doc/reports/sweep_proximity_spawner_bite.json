@@ -4,7 +4,23 @@
  "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
  "variants": [
   {
-   "params": {
+   "a": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 15.0
+   },
+   "b": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 30.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 15.0
+   },
+   "b": {
     "spawn_radius": 15.0,
     "despawn_radius": 15.0
    },
@@ -12,27 +28,159 @@
    "changed_pct": 0.0
   },
   {
-   "params": {
+   "a": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 15.0
+   },
+   "b": {
     "spawn_radius": 15.0,
     "despawn_radius": 30.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
-   "params": {
+   "a": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 15.0
+   },
+   "b": {
     "spawn_radius": 24.0,
     "despawn_radius": 15.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
-   "params": {
+   "a": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 15.0
+   },
+   "b": {
     "spawn_radius": 24.0,
     "despawn_radius": 30.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 30.0
+   },
+   "b": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 30.0
+   },
+   "b": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 30.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 30.0
+   },
+   "b": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 7.5,
+    "despawn_radius": 30.0
+   },
+   "b": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 30.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 15.0
+   },
+   "b": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 30.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 15.0
+   },
+   "b": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 15.0
+   },
+   "b": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 30.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 30.0
+   },
+   "b": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 15.0,
+    "despawn_radius": 30.0
+   },
+   "b": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 30.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 15.0
+   },
+   "b": {
+    "spawn_radius": 24.0,
+    "despawn_radius": 30.0
+   },
+   "changed_px": 0,
    "changed_pct": 0.0
   }
  ]

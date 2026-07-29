@@ -1,0 +1,79 @@
+{
+ "sweep": "pattern_tile_4x4",
+ "peak_changed_pct": 0.146,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": true
+   },
+   "b": {
+    "show_grid_lines": true,
+    "show_index_math": false
+   },
+   "changed_px": 743,
+   "changed_pct": 0.129
+  },
+  {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": true
+   },
+   "b": {
+    "show_grid_lines": false,
+    "show_index_math": true
+   },
+   "changed_px": 842,
+   "changed_pct": 0.146
+  },
+  {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": true
+   },
+   "b": {
+    "show_grid_lines": false,
+    "show_index_math": false
+   },
+   "changed_px": 842,
+   "changed_pct": 0.146
+  },
+  {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": false
+   },
+   "b": {
+    "show_grid_lines": false,
+    "show_index_math": true
+   },
+   "changed_px": 163,
+   "changed_pct": 0.028
+  },
+  {
+   "a": {
+    "show_grid_lines": true,
+    "show_index_math": false
+   },
+   "b": {
+    "show_grid_lines": false,
+    "show_index_math": false
+   },
+   "changed_px": 163,
+   "changed_pct": 0.028
+  },
+  {
+   "a": {
+    "show_grid_lines": false,
+    "show_index_math": true
+   },
+   "b": {
+    "show_grid_lines": false,
+    "show_index_math": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

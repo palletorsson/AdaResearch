@@ -1,0 +1,107 @@
+{
+ "sweep": "cube_scene",
+ "peak_changed_pct": 0.037,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "a": {
+    "grain": "solid"
+   },
+   "b": {
+    "grain": "split"
+   },
+   "changed_px": 216,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "grain": "solid"
+   },
+   "b": {
+    "grain": "quartered"
+   },
+   "changed_px": 216,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "grain": "solid"
+   },
+   "b": {
+    "grain": "lattice"
+   },
+   "changed_px": 216,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "grain": "solid"
+   },
+   "b": {
+    "grain": "shell"
+   },
+   "changed_px": 216,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "grain": "split"
+   },
+   "b": {
+    "grain": "quartered"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "grain": "split"
+   },
+   "b": {
+    "grain": "lattice"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "grain": "split"
+   },
+   "b": {
+    "grain": "shell"
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "grain": "quartered"
+   },
+   "b": {
+    "grain": "lattice"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "grain": "quartered"
+   },
+   "b": {
+    "grain": "shell"
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "grain": "lattice"
+   },
+   "b": {
+    "grain": "shell"
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  }
+ ]
+}

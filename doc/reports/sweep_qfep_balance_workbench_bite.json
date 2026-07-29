@@ -1,0 +1,107 @@
+{
+ "sweep": "qfep_balance_workbench",
+ "peak_changed_pct": 4.322,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "settling": "edge"
+   },
+   "b": {
+    "settling": "order"
+   },
+   "changed_px": 23932,
+   "changed_pct": 4.143
+  },
+  {
+   "a": {
+    "settling": "edge"
+   },
+   "b": {
+    "settling": "entropy"
+   },
+   "changed_px": 4451,
+   "changed_pct": 0.771
+  },
+  {
+   "a": {
+    "settling": "edge"
+   },
+   "b": {
+    "settling": "integration"
+   },
+   "changed_px": 24377,
+   "changed_pct": 4.22
+  },
+  {
+   "a": {
+    "settling": "edge"
+   },
+   "b": {
+    "settling": "synthesis"
+   },
+   "changed_px": 4553,
+   "changed_pct": 0.788
+  },
+  {
+   "a": {
+    "settling": "order"
+   },
+   "b": {
+    "settling": "entropy"
+   },
+   "changed_px": 24224,
+   "changed_pct": 4.194
+  },
+  {
+   "a": {
+    "settling": "order"
+   },
+   "b": {
+    "settling": "integration"
+   },
+   "changed_px": 3808,
+   "changed_pct": 0.659
+  },
+  {
+   "a": {
+    "settling": "order"
+   },
+   "b": {
+    "settling": "synthesis"
+   },
+   "changed_px": 24489,
+   "changed_pct": 4.24
+  },
+  {
+   "a": {
+    "settling": "entropy"
+   },
+   "b": {
+    "settling": "integration"
+   },
+   "changed_px": 24792,
+   "changed_pct": 4.292
+  },
+  {
+   "a": {
+    "settling": "entropy"
+   },
+   "b": {
+    "settling": "synthesis"
+   },
+   "changed_px": 24961,
+   "changed_pct": 4.322
+  },
+  {
+   "a": {
+    "settling": "integration"
+   },
+   "b": {
+    "settling": "synthesis"
+   },
+   "changed_px": 24653,
+   "changed_pct": 4.268
+  }
+ ]
+}

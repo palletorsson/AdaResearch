@@ -1,10 +1,74 @@
 {
  "sweep": "laser_exploding_sphere",
- "peak_changed_pct": 0.0,
- "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "peak_changed_pct": 0.068,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
-   "params": {
+   "a": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 1.0
+   },
+   "b": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 2.0
+   },
+   "changed_px": 390,
+   "changed_pct": 0.068
+  },
+  {
+   "a": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 1.0
+   },
+   "b": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 1.0
+   },
+   "changed_px": 390,
+   "changed_pct": 0.068
+  },
+  {
+   "a": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 1.0
+   },
+   "b": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 2.0
+   },
+   "changed_px": 390,
+   "changed_pct": 0.068
+  },
+  {
+   "a": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 1.0
+   },
+   "b": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 1.0
+   },
+   "changed_px": 390,
+   "changed_pct": 0.068
+  },
+  {
+   "a": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 1.0
+   },
+   "b": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 2.0
+   },
+   "changed_px": 390,
+   "changed_pct": 0.068
+  },
+  {
+   "a": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 2.0
+   },
+   "b": {
     "explosion_particle_count": 30.0,
     "explosion_speed": 1.0
    },
@@ -12,27 +76,111 @@
    "changed_pct": 0.0
   },
   {
-   "params": {
+   "a": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 2.0
+   },
+   "b": {
     "explosion_particle_count": 30.0,
     "explosion_speed": 2.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 2.0
+   },
+   "b": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 1.0
    },
    "changed_px": 1,
    "changed_pct": 0.0
   },
   {
-   "params": {
+   "a": {
+    "explosion_particle_count": 15.0,
+    "explosion_speed": 2.0
+   },
+   "b": {
     "explosion_particle_count": 48.0,
-    "explosion_speed": 1.0
+    "explosion_speed": 2.0
    },
    "changed_px": 0,
    "changed_pct": 0.0
   },
   {
-   "params": {
+   "a": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 1.0
+   },
+   "b": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 2.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 1.0
+   },
+   "b": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 1.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 1.0
+   },
+   "b": {
     "explosion_particle_count": 48.0,
     "explosion_speed": 2.0
    },
    "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 2.0
+   },
+   "b": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 1.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "explosion_particle_count": 30.0,
+    "explosion_speed": 2.0
+   },
+   "b": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 2.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 1.0
+   },
+   "b": {
+    "explosion_particle_count": 48.0,
+    "explosion_speed": 2.0
+   },
+   "changed_px": 1,
    "changed_pct": 0.0
   }
  ]

@@ -1,0 +1,107 @@
+{
+ "sweep": "topological_sort",
+ "peak_changed_pct": 3.579,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "precedence": "levels"
+   },
+   "b": {
+    "precedence": "stair"
+   },
+   "changed_px": 12310,
+   "changed_pct": 2.131
+  },
+  {
+   "a": {
+    "precedence": "levels"
+   },
+   "b": {
+    "precedence": "flat"
+   },
+   "changed_px": 10614,
+   "changed_pct": 1.838
+  },
+  {
+   "a": {
+    "precedence": "levels"
+   },
+   "b": {
+    "precedence": "lens"
+   },
+   "changed_px": 14888,
+   "changed_pct": 2.578
+  },
+  {
+   "a": {
+    "precedence": "levels"
+   },
+   "b": {
+    "precedence": "snarl"
+   },
+   "changed_px": 17397,
+   "changed_pct": 3.012
+  },
+  {
+   "a": {
+    "precedence": "stair"
+   },
+   "b": {
+    "precedence": "flat"
+   },
+   "changed_px": 13458,
+   "changed_pct": 2.33
+  },
+  {
+   "a": {
+    "precedence": "stair"
+   },
+   "b": {
+    "precedence": "lens"
+   },
+   "changed_px": 18948,
+   "changed_pct": 3.28
+  },
+  {
+   "a": {
+    "precedence": "stair"
+   },
+   "b": {
+    "precedence": "snarl"
+   },
+   "changed_px": 20675,
+   "changed_pct": 3.579
+  },
+  {
+   "a": {
+    "precedence": "flat"
+   },
+   "b": {
+    "precedence": "lens"
+   },
+   "changed_px": 13635,
+   "changed_pct": 2.361
+  },
+  {
+   "a": {
+    "precedence": "flat"
+   },
+   "b": {
+    "precedence": "snarl"
+   },
+   "changed_px": 17475,
+   "changed_pct": 3.025
+  },
+  {
+   "a": {
+    "precedence": "lens"
+   },
+   "b": {
+    "precedence": "snarl"
+   },
+   "changed_px": 20574,
+   "changed_pct": 3.562
+  }
+ ]
+}

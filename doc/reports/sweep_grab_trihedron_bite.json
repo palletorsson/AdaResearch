@@ -1,10 +1,50 @@
 {
  "sweep": "grab_trihedron",
- "peak_changed_pct": 0.495,
- "verdict": "faint - under 2% of the frame moved",
+ "peak_changed_pct": 2.077,
+ "verdict": "BITES",
  "variants": [
   {
-   "params": {
+   "a": {
+    "snap_to_shelf": true,
+    "snap_match_rotation": true
+   },
+   "b": {
+    "snap_to_shelf": true,
+    "snap_match_rotation": false
+   },
+   "changed_px": 11994,
+   "changed_pct": 2.077
+  },
+  {
+   "a": {
+    "snap_to_shelf": true,
+    "snap_match_rotation": true
+   },
+   "b": {
+    "snap_to_shelf": false,
+    "snap_match_rotation": true
+   },
+   "changed_px": 11994,
+   "changed_pct": 2.077
+  },
+  {
+   "a": {
+    "snap_to_shelf": true,
+    "snap_match_rotation": true
+   },
+   "b": {
+    "snap_to_shelf": false,
+    "snap_match_rotation": false
+   },
+   "changed_px": 11994,
+   "changed_pct": 2.077
+  },
+  {
+   "a": {
+    "snap_to_shelf": true,
+    "snap_match_rotation": false
+   },
+   "b": {
     "snap_to_shelf": false,
     "snap_match_rotation": true
    },
@@ -12,12 +52,28 @@
    "changed_pct": 0.0
   },
   {
-   "params": {
+   "a": {
+    "snap_to_shelf": true,
+    "snap_match_rotation": false
+   },
+   "b": {
     "snap_to_shelf": false,
     "snap_match_rotation": false
    },
-   "changed_px": 2862,
-   "changed_pct": 0.495
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "snap_to_shelf": false,
+    "snap_match_rotation": true
+   },
+   "b": {
+    "snap_to_shelf": false,
+    "snap_match_rotation": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
   }
  ]
 }

@@ -1,55 +1,343 @@
 {
  "sweep": "line_interface",
- "peak_changed_pct": 4.463,
+ "peak_changed_pct": 4.756,
  "verdict": "BITES",
  "variants": [
   {
-   "params": {
+   "a": {
+    "readout": "none",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "none",
+    "enable_resistance": false
+   },
+   "changed_px": 854,
+   "changed_pct": 0.148
+  },
+  {
+   "a": {
+    "readout": "none",
+    "enable_resistance": true
+   },
+   "b": {
     "readout": "numeral",
     "enable_resistance": true
    },
-   "changed_px": 10824,
-   "changed_pct": 1.874
+   "changed_px": 10605,
+   "changed_pct": 1.836
   },
   {
-   "params": {
+   "a": {
+    "readout": "none",
+    "enable_resistance": true
+   },
+   "b": {
     "readout": "numeral",
     "enable_resistance": false
    },
-   "changed_px": 10798,
-   "changed_pct": 1.869
+   "changed_px": 10563,
+   "changed_pct": 1.829
   },
   {
-   "params": {
+   "a": {
+    "readout": "none",
+    "enable_resistance": true
+   },
+   "b": {
     "readout": "gradation",
     "enable_resistance": true
    },
-   "changed_px": 25411,
-   "changed_pct": 4.399
+   "changed_px": 24354,
+   "changed_pct": 4.216
   },
   {
-   "params": {
+   "a": {
+    "readout": "none",
+    "enable_resistance": true
+   },
+   "b": {
     "readout": "gradation",
     "enable_resistance": false
    },
-   "changed_px": 25413,
-   "changed_pct": 4.4
+   "changed_px": 24354,
+   "changed_pct": 4.216
   },
   {
-   "params": {
+   "a": {
+    "readout": "none",
+    "enable_resistance": true
+   },
+   "b": {
     "readout": "lattice",
     "enable_resistance": true
    },
-   "changed_px": 25775,
-   "changed_pct": 4.462
+   "changed_px": 24771,
+   "changed_pct": 4.289
   },
   {
-   "params": {
+   "a": {
+    "readout": "none",
+    "enable_resistance": true
+   },
+   "b": {
     "readout": "lattice",
     "enable_resistance": false
    },
-   "changed_px": 25777,
-   "changed_pct": 4.463
+   "changed_px": 24773,
+   "changed_pct": 4.289
+  },
+  {
+   "a": {
+    "readout": "none",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "numeral",
+    "enable_resistance": true
+   },
+   "changed_px": 10716,
+   "changed_pct": 1.855
+  },
+  {
+   "a": {
+    "readout": "none",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "numeral",
+    "enable_resistance": false
+   },
+   "changed_px": 10675,
+   "changed_pct": 1.848
+  },
+  {
+   "a": {
+    "readout": "none",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "gradation",
+    "enable_resistance": true
+   },
+   "changed_px": 25232,
+   "changed_pct": 4.368
+  },
+  {
+   "a": {
+    "readout": "none",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "gradation",
+    "enable_resistance": false
+   },
+   "changed_px": 25232,
+   "changed_pct": 4.368
+  },
+  {
+   "a": {
+    "readout": "none",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": true
+   },
+   "changed_px": 25628,
+   "changed_pct": 4.437
+  },
+  {
+   "a": {
+    "readout": "none",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": false
+   },
+   "changed_px": 25630,
+   "changed_pct": 4.437
+  },
+  {
+   "a": {
+    "readout": "numeral",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "numeral",
+    "enable_resistance": false
+   },
+   "changed_px": 269,
+   "changed_pct": 0.047
+  },
+  {
+   "a": {
+    "readout": "numeral",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "gradation",
+    "enable_resistance": true
+   },
+   "changed_px": 26830,
+   "changed_pct": 4.645
+  },
+  {
+   "a": {
+    "readout": "numeral",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "gradation",
+    "enable_resistance": false
+   },
+   "changed_px": 26830,
+   "changed_pct": 4.645
+  },
+  {
+   "a": {
+    "readout": "numeral",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": true
+   },
+   "changed_px": 27466,
+   "changed_pct": 4.755
+  },
+  {
+   "a": {
+    "readout": "numeral",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": false
+   },
+   "changed_px": 27468,
+   "changed_pct": 4.756
+  },
+  {
+   "a": {
+    "readout": "numeral",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "gradation",
+    "enable_resistance": true
+   },
+   "changed_px": 26832,
+   "changed_pct": 4.645
+  },
+  {
+   "a": {
+    "readout": "numeral",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "gradation",
+    "enable_resistance": false
+   },
+   "changed_px": 26832,
+   "changed_pct": 4.645
+  },
+  {
+   "a": {
+    "readout": "numeral",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": true
+   },
+   "changed_px": 27461,
+   "changed_pct": 4.754
+  },
+  {
+   "a": {
+    "readout": "numeral",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": false
+   },
+   "changed_px": 27463,
+   "changed_pct": 4.755
+  },
+  {
+   "a": {
+    "readout": "gradation",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "gradation",
+    "enable_resistance": false
+   },
+   "changed_px": 6,
+   "changed_pct": 0.001
+  },
+  {
+   "a": {
+    "readout": "gradation",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": true
+   },
+   "changed_px": 9494,
+   "changed_pct": 1.644
+  },
+  {
+   "a": {
+    "readout": "gradation",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": false
+   },
+   "changed_px": 9493,
+   "changed_pct": 1.644
+  },
+  {
+   "a": {
+    "readout": "gradation",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": true
+   },
+   "changed_px": 9493,
+   "changed_pct": 1.644
+  },
+  {
+   "a": {
+    "readout": "gradation",
+    "enable_resistance": false
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": false
+   },
+   "changed_px": 9493,
+   "changed_pct": 1.644
+  },
+  {
+   "a": {
+    "readout": "lattice",
+    "enable_resistance": true
+   },
+   "b": {
+    "readout": "lattice",
+    "enable_resistance": false
+   },
+   "changed_px": 21,
+   "changed_pct": 0.004
   }
  ]
 }

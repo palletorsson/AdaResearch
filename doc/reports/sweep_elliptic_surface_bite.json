@@ -1,0 +1,107 @@
+{
+ "sweep": "elliptic_surface",
+ "peak_changed_pct": 7.745,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "postulate": "bare"
+   },
+   "b": {
+    "postulate": "parallels"
+   },
+   "changed_px": 33550,
+   "changed_pct": 5.809
+  },
+  {
+   "a": {
+    "postulate": "bare"
+   },
+   "b": {
+    "postulate": "triangle"
+   },
+   "changed_px": 33769,
+   "changed_pct": 5.846
+  },
+  {
+   "a": {
+    "postulate": "bare"
+   },
+   "b": {
+    "postulate": "net"
+   },
+   "changed_px": 17720,
+   "changed_pct": 3.068
+  },
+  {
+   "a": {
+    "postulate": "bare"
+   },
+   "b": {
+    "postulate": "euclid"
+   },
+   "changed_px": 44734,
+   "changed_pct": 7.745
+  },
+  {
+   "a": {
+    "postulate": "parallels"
+   },
+   "b": {
+    "postulate": "triangle"
+   },
+   "changed_px": 7249,
+   "changed_pct": 1.255
+  },
+  {
+   "a": {
+    "postulate": "parallels"
+   },
+   "b": {
+    "postulate": "net"
+   },
+   "changed_px": 36073,
+   "changed_pct": 6.245
+  },
+  {
+   "a": {
+    "postulate": "parallels"
+   },
+   "b": {
+    "postulate": "euclid"
+   },
+   "changed_px": 37944,
+   "changed_pct": 6.569
+  },
+  {
+   "a": {
+    "postulate": "triangle"
+   },
+   "b": {
+    "postulate": "net"
+   },
+   "changed_px": 35052,
+   "changed_pct": 6.069
+  },
+  {
+   "a": {
+    "postulate": "triangle"
+   },
+   "b": {
+    "postulate": "euclid"
+   },
+   "changed_px": 38636,
+   "changed_pct": 6.689
+  },
+  {
+   "a": {
+    "postulate": "net"
+   },
+   "b": {
+    "postulate": "euclid"
+   },
+   "changed_px": 43817,
+   "changed_pct": 7.586
+  }
+ ]
+}

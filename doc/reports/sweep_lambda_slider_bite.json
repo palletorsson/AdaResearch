@@ -1,23 +1,79 @@
 {
  "sweep": "lambda_slider",
- "peak_changed_pct": 12.368,
+ "peak_changed_pct": 12.31,
  "verdict": "BITES",
  "variants": [
   {
-   "params": {
+   "a": {
+    "console_body": true,
+    "show_particles": true
+   },
+   "b": {
+    "console_body": true,
+    "show_particles": false
+   },
+   "changed_px": 1006,
+   "changed_pct": 0.174
+  },
+  {
+   "a": {
+    "console_body": true,
+    "show_particles": true
+   },
+   "b": {
     "console_body": false,
     "show_particles": true
    },
-   "changed_px": 71437,
-   "changed_pct": 12.368
+   "changed_px": 57564,
+   "changed_pct": 9.966
   },
   {
-   "params": {
+   "a": {
+    "console_body": true,
+    "show_particles": true
+   },
+   "b": {
     "console_body": false,
     "show_particles": false
    },
-   "changed_px": 71020,
-   "changed_pct": 12.296
+   "changed_px": 56971,
+   "changed_pct": 9.863
+  },
+  {
+   "a": {
+    "console_body": true,
+    "show_particles": false
+   },
+   "b": {
+    "console_body": false,
+    "show_particles": true
+   },
+   "changed_px": 71105,
+   "changed_pct": 12.31
+  },
+  {
+   "a": {
+    "console_body": true,
+    "show_particles": false
+   },
+   "b": {
+    "console_body": false,
+    "show_particles": false
+   },
+   "changed_px": 70489,
+   "changed_pct": 12.204
+  },
+  {
+   "a": {
+    "console_body": false,
+    "show_particles": true
+   },
+   "b": {
+    "console_body": false,
+    "show_particles": false
+   },
+   "changed_px": 1115,
+   "changed_pct": 0.193
   }
  ]
 }

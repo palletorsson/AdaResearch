@@ -1,0 +1,107 @@
+{
+ "sweep": "coin_toss",
+ "peak_changed_pct": 1.473,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "disclosure": "oracle"
+   },
+   "b": {
+    "disclosure": "tally"
+   },
+   "changed_px": 6717,
+   "changed_pct": 1.163
+  },
+  {
+   "a": {
+    "disclosure": "oracle"
+   },
+   "b": {
+    "disclosure": "ledger"
+   },
+   "changed_px": 6711,
+   "changed_pct": 1.162
+  },
+  {
+   "a": {
+    "disclosure": "oracle"
+   },
+   "b": {
+    "disclosure": "works"
+   },
+   "changed_px": 6803,
+   "changed_pct": 1.178
+  },
+  {
+   "a": {
+    "disclosure": "oracle"
+   },
+   "b": {
+    "disclosure": "origin"
+   },
+   "changed_px": 8506,
+   "changed_pct": 1.473
+  },
+  {
+   "a": {
+    "disclosure": "tally"
+   },
+   "b": {
+    "disclosure": "ledger"
+   },
+   "changed_px": 118,
+   "changed_pct": 0.02
+  },
+  {
+   "a": {
+    "disclosure": "tally"
+   },
+   "b": {
+    "disclosure": "works"
+   },
+   "changed_px": 208,
+   "changed_pct": 0.036
+  },
+  {
+   "a": {
+    "disclosure": "tally"
+   },
+   "b": {
+    "disclosure": "origin"
+   },
+   "changed_px": 1233,
+   "changed_pct": 0.213
+  },
+  {
+   "a": {
+    "disclosure": "ledger"
+   },
+   "b": {
+    "disclosure": "works"
+   },
+   "changed_px": 252,
+   "changed_pct": 0.044
+  },
+  {
+   "a": {
+    "disclosure": "ledger"
+   },
+   "b": {
+    "disclosure": "origin"
+   },
+   "changed_px": 1277,
+   "changed_pct": 0.221
+  },
+  {
+   "a": {
+    "disclosure": "works"
+   },
+   "b": {
+    "disclosure": "origin"
+   },
+   "changed_px": 1025,
+   "changed_pct": 0.177
+  }
+ ]
+}

@@ -1,0 +1,107 @@
+{
+ "sweep": "schrodinger_box",
+ "peak_changed_pct": 14.462,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "remainder": "core"
+   },
+   "b": {
+    "remainder": "twin"
+   },
+   "changed_px": 78602,
+   "changed_pct": 13.608
+  },
+  {
+   "a": {
+    "remainder": "core"
+   },
+   "b": {
+    "remainder": "seam"
+   },
+   "changed_px": 17693,
+   "changed_pct": 3.063
+  },
+  {
+   "a": {
+    "remainder": "core"
+   },
+   "b": {
+    "remainder": "haze"
+   },
+   "changed_px": 81871,
+   "changed_pct": 14.174
+  },
+  {
+   "a": {
+    "remainder": "core"
+   },
+   "b": {
+    "remainder": "witness"
+   },
+   "changed_px": 47534,
+   "changed_pct": 8.23
+  },
+  {
+   "a": {
+    "remainder": "twin"
+   },
+   "b": {
+    "remainder": "seam"
+   },
+   "changed_px": 80951,
+   "changed_pct": 14.015
+  },
+  {
+   "a": {
+    "remainder": "twin"
+   },
+   "b": {
+    "remainder": "haze"
+   },
+   "changed_px": 39864,
+   "changed_pct": 6.902
+  },
+  {
+   "a": {
+    "remainder": "twin"
+   },
+   "b": {
+    "remainder": "witness"
+   },
+   "changed_px": 80851,
+   "changed_pct": 13.998
+  },
+  {
+   "a": {
+    "remainder": "seam"
+   },
+   "b": {
+    "remainder": "haze"
+   },
+   "changed_px": 81613,
+   "changed_pct": 14.13
+  },
+  {
+   "a": {
+    "remainder": "seam"
+   },
+   "b": {
+    "remainder": "witness"
+   },
+   "changed_px": 52911,
+   "changed_pct": 9.16
+  },
+  {
+   "a": {
+    "remainder": "haze"
+   },
+   "b": {
+    "remainder": "witness"
+   },
+   "changed_px": 83535,
+   "changed_pct": 14.462
+  }
+ ]
+}

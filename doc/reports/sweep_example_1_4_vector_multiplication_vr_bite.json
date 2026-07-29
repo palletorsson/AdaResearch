@@ -1,0 +1,37 @@
+{
+ "sweep": "example_1_4_vector_multiplication_vr",
+ "peak_changed_pct": 0.134,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "scalar": 1.0
+   },
+   "b": {
+    "scalar": 2.0
+   },
+   "changed_px": 775,
+   "changed_pct": 0.134
+  },
+  {
+   "a": {
+    "scalar": 1.0
+   },
+   "b": {
+    "scalar": 3.2
+   },
+   "changed_px": 707,
+   "changed_pct": 0.122
+  },
+  {
+   "a": {
+    "scalar": 2.0
+   },
+   "b": {
+    "scalar": 3.2
+   },
+   "changed_px": 494,
+   "changed_pct": 0.086
+  }
+ ]
+}

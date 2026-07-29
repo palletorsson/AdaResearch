@@ -1,0 +1,67 @@
+{
+ "sweep": "brouwer_choice_sequence",
+ "peak_changed_pct": 2.338,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "horizon": "question"
+   },
+   "b": {
+    "horizon": "spread"
+   },
+   "changed_px": 13507,
+   "changed_pct": 2.338
+  },
+  {
+   "a": {
+    "horizon": "question"
+   },
+   "b": {
+    "horizon": "law"
+   },
+   "changed_px": 12661,
+   "changed_pct": 2.192
+  },
+  {
+   "a": {
+    "horizon": "question"
+   },
+   "b": {
+    "horizon": "closed"
+   },
+   "changed_px": 11538,
+   "changed_pct": 1.998
+  },
+  {
+   "a": {
+    "horizon": "spread"
+   },
+   "b": {
+    "horizon": "law"
+   },
+   "changed_px": 13094,
+   "changed_pct": 2.267
+  },
+  {
+   "a": {
+    "horizon": "spread"
+   },
+   "b": {
+    "horizon": "closed"
+   },
+   "changed_px": 11898,
+   "changed_pct": 2.06
+  },
+  {
+   "a": {
+    "horizon": "law"
+   },
+   "b": {
+    "horizon": "closed"
+   },
+   "changed_px": 12453,
+   "changed_pct": 2.156
+  }
+ ]
+}

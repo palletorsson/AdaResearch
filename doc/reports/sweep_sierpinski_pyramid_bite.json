@@ -1,0 +1,187 @@
+{
+ "sweep": "sierpinski_pyramid",
+ "peak_changed_pct": 11.252,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 2.0
+   },
+   "b": {
+    "generate_on_ready": true,
+    "depth": 4.0
+   },
+   "changed_px": 64828,
+   "changed_pct": 11.224
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 2.0
+   },
+   "b": {
+    "generate_on_ready": true,
+    "depth": 6.4
+   },
+   "changed_px": 64994,
+   "changed_pct": 11.252
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 2.0
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 2.0
+   },
+   "changed_px": 64069,
+   "changed_pct": 11.092
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 2.0
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 4.0
+   },
+   "changed_px": 64069,
+   "changed_pct": 11.092
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 2.0
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 6.4
+   },
+   "changed_px": 64069,
+   "changed_pct": 11.092
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 4.0
+   },
+   "b": {
+    "generate_on_ready": true,
+    "depth": 6.4
+   },
+   "changed_px": 50331,
+   "changed_pct": 8.714
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 4.0
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 2.0
+   },
+   "changed_px": 50518,
+   "changed_pct": 8.746
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 4.0
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 4.0
+   },
+   "changed_px": 50518,
+   "changed_pct": 8.746
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 4.0
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 6.4
+   },
+   "changed_px": 50519,
+   "changed_pct": 8.746
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 6.4
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 2.0
+   },
+   "changed_px": 45828,
+   "changed_pct": 7.934
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 6.4
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 4.0
+   },
+   "changed_px": 45828,
+   "changed_pct": 7.934
+  },
+  {
+   "a": {
+    "generate_on_ready": true,
+    "depth": 6.4
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 6.4
+   },
+   "changed_px": 45829,
+   "changed_pct": 7.934
+  },
+  {
+   "a": {
+    "generate_on_ready": false,
+    "depth": 2.0
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 4.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "generate_on_ready": false,
+    "depth": 2.0
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 6.4
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "generate_on_ready": false,
+    "depth": 4.0
+   },
+   "b": {
+    "generate_on_ready": false,
+    "depth": 6.4
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  }
+ ]
+}
