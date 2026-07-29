@@ -84,6 +84,28 @@
   "FlowFieldMain": {
    "category": "unknown",
    "complexity": "beginner",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "scenario": [
+      "tour",
+      "open",
+      "block",
+      "u_wall",
+      "zigzag",
+      "wind",
+      "noise"
+     ],
+     "field_display": [
+      "arrows",
+      "hidden"
+     ]
+    },
+    "default": "scenario=tour, field_display=arrows - tour reproduces the shipped 10-second carousel starting at Open Field and parking in animated noise, and arrows is the visualizer's existing visible state, so all 12 existing placements render identically",
+    "was": "sequence_mode was a private int the artifact declared as its own critical_parameter, driven only by a hard-coded DURATION=10.0 timer; every placement showed the same six-scenario carousel and no map could hold one field topology. The arrows were unconditionally drawn, so the piece could only ever be read as a diagram of its own cause. apply_grid_config() was an empty pass.",
+    "note": "field_display is the argument axis: hiding the arrows leaves the same 200 agents moving with no visible cause, which is the artifact's own truth line (purpose lives in the field, not the agent) staged as a question rather than answered by a picture."
+   },
    "description": "v_i(t+1) = field[grid(pos_i)] — each agent reads one arrow and moves; the entire \"decision\" is a lookup",
    "dev_themes": [
     "algorithms",

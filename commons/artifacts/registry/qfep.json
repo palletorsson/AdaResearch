@@ -4458,6 +4458,17 @@
    "qfep_connection": "Fifteen blobs wearing three thousand hairs each — softness purchased by count, the way Donovan builds clouds from toothpicks. Nothing is fuzzy at the level of the datum; every strand is a placed cylinder, so the haze is entirely a victory of quantity over form."
   },
   "edge_of_chaos_unlocked": {
+   "dna": {
+    "axes": {
+    "tenure": [
+    "unlocked",
+    "clamped",
+    "withheld",
+    "frozen",
+    "chaos"
+    ]
+    }
+   },
    "name": "Edge of Chaos Unlocked",
    "lookup_name": "edge_of_chaos_unlocked",
    "description": "Reaction-diffusion system with the UNLOCKED lambda slider that the QFEP_Edge_Of_Chaos map withheld. Drag lambda from 0 (frozen crystal) through 0.4 (Turing patterns emerge) to 1.0 (pure noise). The artifact answers the critical text's question: adjusting IS knowledge. Witnessing IS knowledge. Different kinds.",
@@ -4700,6 +4711,16 @@
    "qfep_connection": "The containment furniture — petri dishes, flasks, bioreactors — is assembled first, and then forty bacteria are instanced already outside it, drifting through the fog on their own MultiMesh. Escape is never staged as accident; the code simply never wrote a lid."
   },
   "snap_tetra_puzzle": {
+   "dna": {
+    "axes": {
+    "solid": [
+    "loose",
+    "closed",
+    "scattered",
+    "short"
+    ]
+    }
+   },
    "name": "Snap Tetra Puzzle",
    "lookup_name": "snap_tetra_puzzle",
    "description": "Snap-point tetrahedron assembly puzzle. Represents constraint satisfaction and ordered structure — how Free Energy minimization drives systems toward specific geometric configurations.",
@@ -4770,6 +4791,16 @@
    }
   },
   "snap_cube_puzzle": {
+   "dna": {
+    "axes": {
+    "solid": [
+    "loose",
+    "closed",
+    "scattered",
+    "short"
+    ]
+    }
+   },
    "name": "Snap Cube Puzzle",
    "lookup_name": "snap_cube_puzzle",
    "description": "Snap-point octahedral assembly puzzle. Represents ordered structure and constraint — the crystalline end state of a system minimizing free energy.",
@@ -5089,6 +5120,17 @@
    }
   },
   "qfep_balance_workbench": {
+   "dna": {
+    "axes": {
+    "settling": [
+    "edge",
+    "order",
+    "entropy",
+    "integration",
+    "synthesis"
+    ]
+    }
+   },
    "name": "QFEP Balance Workbench",
    "lookup_name": "qfep_balance_workbench",
    "description": "Four-knob console for the QFEP formula. Player turns F, E(S), lambda, phi sliders; a radar chart shows the current quadrilateral; the dominant timeline phase color tints the readout. The frame made into a balance.",
@@ -5129,6 +5171,16 @@
    "size_group": "standard"
   },
   "microstate_counter": {
+   "dna": {
+    "axes": {
+    "macrostate": [
+    "uniform",
+    "corner",
+    "layered",
+    "spilled"
+    ]
+    }
+   },
    "lookup_name": "microstate_counter",
    "scene": "res://commons/artifacts/microstate_counter/microstate_counter.tscn",
    "class_name": "MicrostateCounter",
@@ -5173,6 +5225,17 @@
    }
   },
   "possibility_space_cloud": {
+   "dna": {
+    "axes": {
+    "occupancy": [
+    "breath",
+    "pinched",
+    "packed",
+    "unboxed",
+    "widened"
+    ]
+    }
+   },
    "lookup_name": "possibility_space_cloud",
    "scene": "res://commons/artifacts/possibility_space_cloud/possibility_space_cloud.tscn",
    "class_name": "PossibilitySpaceCloud",
@@ -5217,6 +5280,16 @@
    }
   },
   "entropy_fan": {
+   "dna": {
+    "axes": {
+    "prospect": [
+    "breath",
+    "thread",
+    "fan",
+    "pruned"
+    ]
+    }
+   },
    "lookup_name": "entropy_fan",
    "scene": "res://commons/artifacts/entropy_fan/entropy_fan.tscn",
    "class_name": "EntropyFan",

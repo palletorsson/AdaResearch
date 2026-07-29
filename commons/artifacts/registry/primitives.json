@@ -4903,7 +4903,28 @@
   "diamonds": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "Stacks rotating octahedron instances into a twisting diamond tower sculpture.",
+   "description": "Stacks rotating solids into a twisting tower. DNA: twist_rule selects HOW the angle accumulates up the stack (linear=the helix, fixed=no accumulation, alternating=braid between two orientations, accelerating=same total twist reached superlinearly); unit selects which solid the rule acts on. Config: #twist_rule:fixed#unit:tetrahedron",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "twist_rule": [
+      "linear",
+      "fixed",
+      "alternating",
+      "accelerating"
+     ],
+     "unit": [
+      "octahedron",
+      "cube",
+      "tetrahedron",
+      "icosahedron"
+     ]
+    },
+    "default": "twist_rule=linear, unit=octahedron - the exact pre-promotion construction (rotation.y = rotation_offset * i on stacked octahedron.tscn), so the 11 existing placements are unchanged",
+    "was": "the artifact's own truth statement says the RULE is more fundamental than the result, and the rule was the one thing hard-coded: rotation_offset * i, linear accumulation, stated once and never varied. The four exports it did have (unit_count, unit_size, unit_height, rotation_offset) only changed how big the same claim was, which is why the sweep read it as having no turnable knobs.",
+    "note": "The two axes are a control pair: twist_rule varies the rule with the unit held, unit varies the unit with the rule held. fixed is the null hypothesis the docstring already named — every unit turned by the same amount, no accumulation, no helix. accelerating reaches the same total twist at the top as linear by a different path, so the endpoints agree and the form does not."
+   },
    "dev_themes": [
     "art",
     "core",
@@ -11313,7 +11334,22 @@
   "lshape": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "Upside down L shape primitive with meeting corner joints",
+   "description": "Upside down L shape primitive. DNA: corner selects HOW THE TWO ARMS MEET — joint (the arms share the corner cell and the notch is explicit geometry), butt (the column runs full height and the arm lands on its side), mitre (a 45 degree seam, neither member continuous), gap (the arms never touch and the L exists only in the eye). Use #corner:mitre.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "corner": [
+      "joint",
+      "butt",
+      "mitre",
+      "gap"
+     ]
+    },
+    "default": "corner=joint - the original vertex/face lists are still the joint branch, called verbatim, so all 12 existing placements render the identical mesh",
+    "was": "zero exports: one fixed cyan L whose own @identity named 'the corner joint geometry' as its critical parameter while offering no way to turn it",
+    "note": "The artifact's truth statement is that a non-convex shape cannot be a single box. corner=gap is the value that argues back — the arms stop touching and the L survives anyway, as an adjacency claim the geometry refuses to make."
+   },
    "dev_themes": [
     "core",
     "primitives"
@@ -16417,6 +16453,26 @@
    "capacity": "READ which properties survive rotation and translation because the right angle stays invariant.",
    "category": "unknown",
    "complexity": "beginner",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "proportion": [
+      "isoceles",
+      "3-4-5",
+      "1-2",
+      "kepler"
+     ],
+     "reading": [
+      "uniform",
+      "corner_marked",
+      "legs_hypotenuse"
+     ]
+    },
+    "default": "proportion=isoceles + reading=uniform - both legs were hard-coded to triangle_size and the slab was a single uniform black surface, so the default rebuilds the original mesh vertex-for-vertex and adds no extra nodes; all 16 existing placements are unchanged",
+    "was": "No exports at all. base_color and triangle_size were plain private vars, the two legs were both pinned to triangle_size (the isoceles case), and there was no apply_grid_config(). The artifact's stated truth - that the right angle is the invariant surviving motion - was never spoken by the form itself, which read as one mute black wedge. proportion turns the claim over: isoceles argues that the metre grid cannot name the hypotenuse, 3-4-5 argues that the rope-stretchers could build it with knots, 1-2 generates root five, kepler puts the sides in golden ratio. reading decides whether the form names its invariant out loud: corner_marked adds the draughtsman's square glyph at the origin, legs_hypotenuse colours the two given sides against the derived third.",
+    "note": "Existing set_base_color() and set_triangle_size() were also broken before this pass - both reached for get_child(0), which is the scene's embedded Camera3D, not the mesh. The parts list added here fixes that."
+   },
    "description": "A right triangle presented as a clean spatial reference. Translation and rotation can move it anywhere, but the ninety-degree relation remains the defining invariant. That makes it useful for reading orientation, perpendicularity, and angular preservation against more complex scenes. It keeps the idea of the right angle available as a diagnostic form.",
    "dev_themes": [
     "core",
@@ -18126,9 +18182,29 @@
    "qfep_connection": "Connect six snap points and an octahedron assembles — then becomes a walkable prism. The dual of the cube built by hand: the puzzle stages the chapter's ascent from points to solids to *places*, and rewards a correct construction with a room you can enter. Geometry earning habitability, six vertices at a time."
   },
   "snap_pyramid_puzzle": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "apex": [
+      "tall",
+      "regular",
+      "flat",
+      "spire",
+      "inverted"
+     ],
+     "base_shape": [
+      "square",
+      "rect",
+      "rhombus"
+     ]
+    },
+    "default": "apex=tall, base_shape=square - reproduces the scene file exactly (apex at local y=0.7, base corners at +/-0.1), so all 17 existing placements are unchanged",
+    "was": "zero exports: the @identity truth claimed 'a pyramid has a free parameter, apex height, that tetrahedra and octahedra do not' while that height sat frozen in the .tscn at 0.7 and could never be turned"
+   },
    "category": "unknown",
    "complexity": "beginner",
-   "description": "Interactive puzzle where connecting 5 snap points forms a square pyramid that spawns a walkable prism.",
+   "description": "Interactive puzzle where connecting 5 snap points forms a square pyramid that spawns a walkable prism. DNA: apex sets the free parameter the solid is named for (tall/regular/flat/spire/inverted — regular gives equilateral lateral faces, inverted hangs the apex below the base); base_shape sets the outline the four base points make (square/rect/rhombus), which reveals that the detector only ever checks the 4-cycle, never the squareness.",
    "dev_themes": [
     "core",
     "primitives"
@@ -18719,6 +18795,27 @@
   "sphere_high": {
    "category": "unknown",
    "complexity": "beginner",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "tessellation": [
+      "coarse",
+      "low",
+      "high",
+      "ultra"
+     ],
+     "facets": [
+      "shown",
+      "hidden",
+      "only"
+     ]
+    },
+    "default": "tessellation=high (rings=16, radial_segments=16), facets=shown - these are the literals the script has always used and the SimpleGrid material it has always worn, so all 11 existing placements are byte-identical",
+    "was": "rings and radial_segments are this artifact's own declared critical_parameter and were two literals hard-coded in _ready(), with no apply_grid_config() at all. The trio sphere_low/mid/high spent three tokens making one argument that no single token could state. The grid material was likewise fixed, so the mesh could only ever confess its triangles, never stage the smoothness illusion it exists to deny.",
+    "note": "tessellation is not a size knob - the object's proportions are unchanged at every value. What changes is whether it admits to being a polyhedron. facets is the paired claim: same geometry, shaded as a surface (hidden) it reads smooth, which is the lie the truth line is arguing against. The axis is named facets rather than skin because MeshInstance3D already owns a skin property and the export would not have compiled.",
+    "doc_discrepancy": "The description string and the file header both said 32 rings / 32 segments; the shipping code has always been 16. The default is pinned to the code (high=16), not the claim; 32 is now reachable as tessellation=ultra."
+   },
    "description": "High poly sphere with 32 rings and 32 radial segments for smooth appearance.",
    "dev_themes": [
     "core",
@@ -21605,7 +21702,27 @@
   "truncatedtetrahedron": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "tetrahedron with corners cut — each vertex replaced by a triangular face, adding 4 new faces",
+   "description": "tetrahedron with corners cut — each vertex replaced by a triangular face, adding 4 new faces. DNA: truncation is how deep the cut goes as a fraction of the body (the parameter the Archimedean family is indexed by); origin_solid decides whether the un-cut tetrahedron stands around the result as a translucent shell, so the cut reads as a subtraction. Config: #truncation:0.9#origin_solid:ghost",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "truncation": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+     ],
+     "origin_solid": [
+      "hidden",
+      "ghost"
+     ]
+    },
+    "default": "truncation=0.5, origin_solid=hidden - 0.5 reproduces the previous mesh vertex for vertex (corner vertices at ±0.1 against a body of ±0.2) and hidden is the result shown alone, so the 11 existing placements are unchanged",
+    "was": "zero exports. The artifact claims truncation is an OPERATION and then showed exactly one frozen output of it: the cut depth lived as the bare literal 0.1 in a vertex array, a ratio of one half against the body's 0.2, named nowhere. An operation you can only ever see one result of is indistinguishable from a shape.",
+    "note": "origin_solid=ghost answers the question the static version could not — cut from WHAT. It closes the seed tetrahedron's four faces on the same corner vertices and stands them around the result unshaded at 16% alpha."
+   },
    "dev_themes": [
     "core",
     "primitives"

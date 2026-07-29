@@ -9255,6 +9255,26 @@
   "lab_table": {
    "category": "waves",
    "complexity": "intermediate",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "stance": [
+      "bench",
+      "pedestal",
+      "trestle"
+     ],
+     "finish": [
+      "wood",
+      "steel",
+      "stone",
+      "glass"
+     ]
+    },
+    "default": "stance=bench + finish=wood - bench rebuilds the same four corner legs and the same four ankle-height beams, and wood keeps base_color at Color(0.6,0.3,0.1) with the original shader parameters verbatim, so all 13 existing placements are unchanged",
+    "was": "No exports at all. The understructure was four corner legs plus a four-beam skirt at ankle height, hard-coded in two literal arrays, and base_color was a private var pinned to dark wood - the artifact's own declared critical_parameter, unreachable from a map. stance lifts what holds the zero plane up, which is what decides the claim the surface makes: bench is furniture that expects weight and hands, pedestal drops the legs for one central column on a foot so the top reads as a plinth and whatever stands on it becomes the subject, trestle swaps them for two end panels and one stretcher - the board that admits it comes apart. finish carries the material argument: wood is the nineteenth-century bench where the experiment is craft, steel the clean room, stone the slab that outlasts the work, glass the surface that refuses to hide what is under it.",
+    "note": "finish only overrides base_color when it is not the wood default, so set_base_color() stays authoritative on the default path."
+   },
    "description": "Procedural wooden lab table with legs and support frame. Surface for placing instruments and apparatus. The workbench where oscillation becomes experiment.",
    "dev_themes": [
     "music",

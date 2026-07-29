@@ -4,6 +4,16 @@
  "description": "QFEP-laboratory artifacts - measuring the limit with instruments made of it.",
  "artifacts": {
   "entropy_ceiling": {
+   "dna": {
+    "axes": {
+    "headroom": [
+    "pinned",
+    "cropped",
+    "raised",
+    "smooth"
+    ]
+    }
+   },
    "category": "qfeplaboratory",
    "complexity": "intermediate",
    "description": "The QFEP-laboratory seam, the thesis at its most self-aware. The lab measures order and disorder, but its meters are quantized - a finite ladder of ticks, a needle that steps. True maximum entropy is a limit the instrument can never reach; push toward it and the needle pins at the last tick, reading MAX - a finite number standing in for an infinity it cannot hold. The lab that studies the limit is built out of the limit.",

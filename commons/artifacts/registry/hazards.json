@@ -1053,7 +1053,25 @@
   "wedge_skill_pickup": {
    "category": "tools",
    "complexity": "simple",
-   "description": "A one-meter wireframe cube containing a floating orange prism. When grabbed, unlocks the wedge_placer mode on the catalyst bracelet. Place in the primitives sequence for the player to discover.",
+   "description": "A floating orange prism that unlocks the wedge_placer mode on the catalyst bracelet when grabbed. DNA: housing selects how the skill is kept until it is yours (cage = the one-meter wireframe cube, plinth = a solid column offering it, open = no housing at all); after selects what the site does once it is taken (fade = dissolve and free, remain = a dimmed empty housing left standing). Use #housing:plinth#after:remain.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "housing": [
+      "cage",
+      "plinth",
+      "open"
+     ],
+     "after": [
+      "fade",
+      "remain"
+     ]
+    },
+    "default": "housing=cage, after=fade - the cage branch calls the original _build_cage() unchanged and the fade branch still queue_free()s, so all 12 existing placements look and behave exactly as before",
+    "was": "zero exports and apply_grid_config() was a bare pass: one fixed wireframe cage, as though a cube around a power were a neutral container",
+    "note": "The cage was an unexamined argument — it says a capability is a specimen you must reach into. plinth says it is conferred, open says nobody thought to fence it. after=remain leaves a scar where the power was taken; it is a time-domain axis and invisible to a still capture."
+   },
    "dev_themes": [
     "gameplay",
     "hazards"

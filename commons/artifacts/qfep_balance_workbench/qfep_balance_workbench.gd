@@ -72,6 +72,50 @@ class_name QFEPBalanceWorkbench
 ## "things are changing, moderately" band.
 @export var rate_delta_e: float = 0.30
 
+# ── Stage-2 DNA axis ──────────────────────────────────────────────────
+
+## Which of the four terms the console is settled on — i.e. which characteristic
+## settling of (F, E, λ, φ) the instrument is showing when you walk up to it.
+##
+## The header of this file claims the seven phases are "the seven characteristic
+## ways those knobs can settle", and then the object settles them once, forever.
+## This is that knob, exposed as one thing. It moves radar polygon vertices by up
+## to 0.40 m on a 0.84 m radar AND recolours the 2.2 x 1.7 m halo, the readout
+## border and the phase bar — no new geometry, all of it already meant.
+##
+##   edge        λ ≈ 0.4 — the near-symmetric kite (top 0.23 / right 0.24 /
+##               bottom 0.17 / left 0.15 m), hub letter λ, crimson #E63946.
+##               THE SHIPPED DEFAULT — identical to the pre-axis build.
+##   order       F alone — a 0.40 m spike straight up, the other three vertices
+##               collapsed inside 0.03 m of the hub, letter F, blue #3A7BFF.
+##   entropy     λE(S) dominant — a broad right-and-down wedge (right 0.39 m,
+##               bottom 0.40 m, top only 0.15 m), letter E, amber #F4A261.
+##   integration φΔE dominant — the left (φ) vertex swings out to 0.36 m so the
+##               kite leans hard left instead of standing up, letter φ,
+##               violet #9B5DE5.
+##   synthesis   the whole formula — a near-regular diamond, 0.50 m vertical by
+##               0.57 m horizontal, letter Q, white, darkened-letter branch on.
+@export_enum("edge", "order", "entropy", "integration", "synthesis") var settling: String = "edge"
+
+## The allow-list. A token outside it falls back to whatever is already set —
+## a half-recognised value would strand a placement on an unbuilt settling.
+const SETTLINGS: PackedStringArray = ["edge", "order", "entropy", "integration", "synthesis"]
+
+## settling value → index into PHASE_DATA. Only five of the seven phases are on
+## the axis, and that is deliberate: `oscillation` (index 1) and `relation`
+## (index 5) have knob signatures that sit within ~0.15 Manhattan of `edge` and
+## `integration` respectively, so their polygons would render as near-duplicates
+## of tiles already on the sheet. Declaring them would advertise two variants the
+## camera cannot tell apart — the inert-axis failure. They stay reachable through
+## initial_F/E/lambda/phi, which is where a hand-tuned in-between belongs.
+const SETTLING_PHASE: Dictionary = {
+	"edge": 3,          # lambda_edge
+	"order": 0,         # F_order
+	"entropy": 2,       # E_entropy
+	"integration": 4,   # integration
+	"synthesis": 6,     # synthesis
+}
+
 # ── Phase data (mirrors capture_qfep_balance_gallery.gd PHASES) ───────
 # Each phase: id, display name, color (timeline PHASE_COLORS), F/E/λ/φ
 # signature, dominant letter, formula readout, caption.
@@ -138,9 +182,18 @@ const PHASE_DATA: Array = [
 const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
 const DisplayMount = preload("res://commons/ui/display_mount.gd")
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+## Preloaded, not referenced by class_name — the headless capture path resolves
+## global classes late and a bare `TextScreen` here has bitten other artifacts.
+const TextScreenScript = preload("res://commons/ui/text_screen.gd")
 
 # Knob labels (top → right → bottom → left)
 const KNOB_NAMES: Array = ["F", "E(S)", "λ", "φ"]
+
+## The promoted phase-name board. 0.46 m of text width becomes a 0.496 x 0.321 m
+## framed screen; PHASE_SCREEN_GAP lifts its centre above the bar's top edge so
+## the board's lower edge clears the bar by 0.054 m and covers nothing.
+const PHASE_SCREEN_WIDTH := 0.46
+const PHASE_SCREEN_GAP := 0.215
 
 # ── Internal state ────────────────────────────────────────────────────
 
@@ -181,19 +234,54 @@ const READOUT_LINE_H := 0.045         # per-line height in meters
 
 var _phase_bar_root: Node3D
 var _phase_bar_material: StandardMaterial3D
+## The phase name used to be a bare hanging Label3D ("PhaseDisplay") floating
+## 0.06 m over the bar's top edge on nothing. It is now a canonical TextScreen
+## board. See _build_phase_bar for the placement note. Deliberately untyped: the
+## TextScreen properties (mode/width_m/title/title_color) are not on Node3D, and
+## typing it against the global class name would make this file fail to compile
+## wherever that class has not been registered yet.
+var _phase_screen = null
+## Kept as the text source only — invisible, billboard disabled. Never deleted:
+## scripts and tooling that read `.text` off "PhaseDisplay" keep working.
 var _phase_bar_label_top: Label3D
 var _phase_bar_label_letter: Label3D
 
 var _halo_material: StandardMaterial3D
 
+# ── Build bookkeeping ─────────────────────────────────────────────────
+
+## True once the synchronous first build has completed.
+var _built: bool = false
+## Every node THIS script added to the tree, in creation order. _rebuild_now frees
+## exactly these — never get_children(), which by then also holds the grid's own
+## framed label plates and the auto-grounding it did after us.
+var _owned: Array = []
+## Guards the one deferred call in this file (the DisplayMount re-parent, which
+## must stay deferred — it measures a global AABB). A rebuild does the mount
+## inline and clears this so the still-queued call from _ready no-ops.
+var _mount_scheduled: bool = false
+## Explicit per-knob overrides from apply_grid_config's initial_F/E/lambda/phi.
+## Held separately so they survive a settling rebuild instead of being wiped by it.
+var _knob_override: Dictionary = {}
+## plate_scale defaults to 2.0 but the shipped _ready never applied it — only
+## apply_grid_config did. This records whether a map actually asked, so a rebuild
+## reproduces the look the placement had rather than the export's stale value.
+var _plate_scale_configured: bool = false
+
 
 # ── Lifecycle ─────────────────────────────────────────────────────────
 
 func _ready() -> void:
-	_F = clampf(default_F, 0.0, 1.0)
-	_E = clampf(default_E, 0.0, 1.0)
-	_lambda = clampf(default_lambda, 0.0, 1.0)
-	_phi = clampf(default_phi, 0.0, 1.0)
+	_build_all()
+	_built = true
+	_mount_scheduled = true
+	_mount_display.call_deferred()
+
+
+## The whole console, synchronously, from the @export values alone.
+func _build_all() -> void:
+	settling = _pick_axis(settling, SETTLINGS, "edge")
+	_apply_settling()
 
 	_build_halo()
 	_build_plate_and_sliders()
@@ -201,15 +289,76 @@ func _ready() -> void:
 	_build_readout_panel()
 	_build_phase_bar()
 	_refresh_all()
-	_mount_display.call_deferred()
+
+
+## Seat the four knobs on the named settling.
+##
+## This ONE assignment is the entire axis. Polygon vertices are radar_max × the
+## knob value; the hub letter, the halo tint, the readout border and the phase bar
+## all come from _detect_phase()'s Manhattan match against PHASE_DATA, which the
+## settled tuple hits exactly (distance 0). Nothing else needed changing.
+func _apply_settling() -> void:
+	if settling == "edge":
+		# The shipped look, byte-for-byte: the author-set defaults ARE the
+		# lambda_edge signature, and a map that tunes default_F keeps tuning it.
+		_F = clampf(default_F, 0.0, 1.0)
+		_E = clampf(default_E, 0.0, 1.0)
+		_lambda = clampf(default_lambda, 0.0, 1.0)
+		_phi = clampf(default_phi, 0.0, 1.0)
+	else:
+		var p: Dictionary = PHASE_DATA[int(SETTLING_PHASE.get(settling, 3))]
+		_F = clampf(float(p.F), 0.0, 1.0)
+		_E = clampf(float(p.E), 0.0, 1.0)
+		_lambda = clampf(float(p["lambda"]), 0.0, 1.0)
+		_phi = clampf(float(p.phi), 0.0, 1.0)
+
+	# A hand-set knob still wins over the settling it was placed inside.
+	if _knob_override.has("F"):
+		_F = float(_knob_override["F"])
+	if _knob_override.has("E"):
+		_E = float(_knob_override["E"])
+	if _knob_override.has("lambda"):
+		_lambda = float(_knob_override["lambda"])
+	if _knob_override.has("phi"):
+		_phi = float(_knob_override["phi"])
+
+	_phase_index = _detect_phase()
+
+
+## Push the current knob tuple back into the four faders.
+##
+## Load-bearing for the axis, not cosmetic: _process reads the faders every frame
+## and writes them into _F.._phi, so a settling that only touched the internal
+## state would revert to the fader defaults on frame 2 and every value would
+## photograph identically.
+func _seat_sliders() -> void:
+	var vals: Array = [_F, _E, _lambda, _phi]
+	for i in range(_sliders.size()):
+		var s = _sliders[i]
+		if s != null and is_instance_valid(s) and s.has_method("set_normalized_value"):
+			s.call("set_normalized_value", float(vals[i]))
 
 
 ## Gather the viz roots onto a composer-placed anchor + floor stand (DisplayMount).
 func _mount_display() -> void:
+	if not _mount_scheduled:
+		return
+	_mount_scheduled = false
+	_mount_now()
+
+
+func _mount_now() -> void:
 	var center := radar_offset
 	_display_root = DisplayMount.make_anchor(self, "qfep_balance_workbench", center, 1.0, 0.0)
+	_owned.append(_display_root)
 	DisplayMount.mount_cluster(_display_root, [_radar_root, _readout_root, _phase_bar_root, _halo_inst], center)
+	# build_stand adds its three boxes straight onto us — claim them so a rebuild
+	# does not leave an orphan stand under a display that no longer exists.
+	var before: Array = get_children()
 	DisplayMount.build_stand(self, _display_root)
+	for c in get_children():
+		if not before.has(c):
+			_owned.append(c)
 
 
 func _process(_delta: float) -> void:
@@ -288,6 +437,7 @@ func _build_halo() -> void:
 	_halo_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	halo.material_override = _halo_material
 	add_child(halo)
+	_owned.append(halo)
 	_halo_inst = halo
 
 
@@ -301,14 +451,19 @@ func _build_plate_and_sliders() -> void:
 	_plate_root = InterfacePresets.build("workbench", "QFEP Balance", plate_height)
 	_plate_root.position = Vector3(0.0, plate_height, plate_offset_z)
 	add_child(_plate_root)
+	_owned.append(_plate_root)
+	# plate_scale is applied ONLY when a map actually set it. The export defaults
+	# to 2.0 but the shipped build never applied it, so scaling here unasked would
+	# double the console the moment anything else triggered a rebuild.
+	if _plate_scale_configured:
+		_plate_root.scale = Vector3.ONE * plate_scale
 	_plate_readout = _plate_root.add_readout("")
-	var defaults: Array = [_F, _E, _lambda, _phi]
 	_sliders.clear()
 	for i in range(4):
 		var s = _plate_root.add_slider(KNOB_NAMES[i], KNOB_NAMES[i])
-		if s and s.has_method("set_normalized_value"):
-			s.call("set_normalized_value", float(defaults[i]))
 		_sliders.append(s)
+	# Seat the faders on the settled tuple — see _seat_sliders.
+	_seat_sliders()
 
 
 # ── Radar (4-axis, F top / E right / λ down / φ left) ─────────────────
@@ -318,6 +473,7 @@ func _build_radar() -> void:
 	_radar_root.name = "Radar"
 	_radar_root.position = radar_offset
 	add_child(_radar_root)
+	_owned.append(_radar_root)
 
 	# Backplate — a tinted square behind the radar
 	var back := MeshInstance3D.new()
@@ -510,6 +666,7 @@ func _build_readout_panel() -> void:
 	_readout_root.name = "Readout"
 	_readout_root.position = readout_offset
 	add_child(_readout_root)
+	_owned.append(_readout_root)
 
 	# Dark backing card
 	var card := MeshInstance3D.new()
@@ -590,6 +747,7 @@ func _build_phase_bar() -> void:
 	_phase_bar_root.name = "PhaseBar"
 	_phase_bar_root.position = phase_bar_offset
 	add_child(_phase_bar_root)
+	_owned.append(_phase_bar_root)
 
 	# The tall bar
 	var bar := MeshInstance3D.new()
@@ -607,13 +765,40 @@ func _build_phase_bar() -> void:
 	bar.material_override = _phase_bar_material
 	_phase_bar_root.add_child(bar)
 
-	# Label above (phase name)
+	# Phase name — PROMOTED from a bare Label3D to the canonical TextScreen board.
+	#
+	# It was the one piece of text on this artifact that lay on nothing: a
+	# billboard-disabled Label3D at local (0, 0.485, 0.01) → world
+	# (-0.70, 1.585, 0.06), hanging 0.06 m over the bar's top edge with open air
+	# behind it, and carrying a live readout up to 24 characters wide ("λ ≈ 0.4 —
+	# Edge of Chaos" measures ~0.66 m at font 22 / pixel_size 0.001, six times the
+	# 0.10 m bar it belongs to). The framer skips it — billboard is disabled — so
+	# nothing was ever going to give it a surface. This does: a 0.50 x 0.31 m
+	# SCREEN sitting at local (0, 0.64, 0.0) → world (-0.70, 1.74, 0.05), its
+	# bottom edge at 1.5795 clear of the bar top at 1.525. It covers nothing; the
+	# move is for legibility, not rescue.
+	# Configure BEFORE add_child — TextScreen's setters rebuild only when in-tree.
+	_phase_screen = TextScreenScript.new()
+	_phase_screen.name = "PhaseScreen"
+	_phase_screen.mode = 0                  # TextScreen.Mode.SCREEN
+	_phase_screen.width_m = PHASE_SCREEN_WIDTH
+	_phase_screen.title = ""
+	_phase_screen.body = ""
+	_phase_screen.position = Vector3(0.0, phase_bar_size.y * 0.5 + PHASE_SCREEN_GAP, 0.0)
+	_phase_bar_root.add_child(_phase_screen)
+
+	# The Label3D survives as the text source, so anything reading .text on
+	# "PhaseDisplay" keeps working. It hangs on nothing now: billboard DISABLED
+	# means the framer skips it (its own skip rule), and invisible means it adds
+	# no glyphs of its own in front of the bar.
 	_phase_bar_label_top = Label3D.new()
 	_phase_bar_label_top.name = "PhaseDisplay"
 	_phase_bar_label_top.font_size = 22
 	_phase_bar_label_top.outline_size = 4
 	_phase_bar_label_top.pixel_size = 0.001
 	_phase_bar_label_top.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_phase_bar_label_top.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_phase_bar_label_top.visible = false
 	_phase_bar_label_top.modulate = Color(0.902, 0.224, 0.275)
 	_phase_bar_label_top.position = Vector3(0.0, phase_bar_size.y * 0.5 + 0.06, 0.01)
 	_phase_bar_root.add_child(_phase_bar_label_top)
@@ -636,8 +821,14 @@ func _refresh_phase_bar() -> void:
 	var c: Color = phase.color
 	_phase_bar_material.albedo_color = c
 	_phase_bar_material.emission = c
-	_phase_bar_label_top.text = str(phase.display)
-	_phase_bar_label_top.modulate = c
+	# The phase name is a TextScreen now — same live readout, on a real board.
+	# The hidden Label3D keeps carrying the same string for anything reading .text.
+	if _phase_bar_label_top != null and is_instance_valid(_phase_bar_label_top):
+		_phase_bar_label_top.text = str(phase.display)
+		_phase_bar_label_top.modulate = c
+	if _phase_screen != null and is_instance_valid(_phase_screen):
+		_phase_screen.title_color = c
+		_phase_screen.set_text(str(phase.display), "")
 	_phase_bar_label_letter.text = str(phase.letter)
 	# Pure white phase (synthesis): use a darker letter for legibility
 	if phase.id == "synthesis":
@@ -776,28 +967,113 @@ func _color_to_hex(c: Color) -> String:
 
 # ── Grid system integration ───────────────────────────────────────────
 
+## Accept an axis value only if it names something we actually build. A typo in a
+## map token has to fall back to the shipped look — a half-recognised value would
+## strand a placement on a settling with no signature behind it.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+
 func apply_grid_config(config_data: Dictionary) -> void:
+	var before_settling: String = settling
+	var before_F: float = _F
+	var before_E: float = _E
+	var before_lambda: float = _lambda
+	var before_phi: float = _phi
+	var before_rate: float = rate_delta_e
+
+	# Stage-2 DNA axis — #settling:entropy
+	if config_data.has("settling"):
+		settling = _pick_axis(str(config_data["settling"]), SETTLINGS, settling)
+
+	# ── keys applied IN PLACE, before any early return ────────────────
+	# plate_scale never needed a rebuild and must not start needing one: the
+	# curation station calls apply_grid_config with no axis key at all, and a
+	# rebuild there would free the label plates the grid added one line earlier.
 	if config_data.has("plate_scale"):
 		plate_scale = float(config_data["plate_scale"])
-		if _plate_root:
+		_plate_scale_configured = true
+		if _plate_root and is_instance_valid(_plate_root):
 			_plate_root.scale = Vector3.ONE * plate_scale
 	if config_data.has("rate_delta_e"):
 		rate_delta_e = clampf(float(config_data["rate_delta_e"]), 0.0, 1.0)
-		_refresh_all()
 	if config_data.has("initial_F"):
-		_F = clampf(float(config_data["initial_F"]), 0.0, 1.0)
-		if _sliders.size() > 0 and _sliders[0].has_method("set_normalized_value"):
-			_sliders[0].call("set_normalized_value", _F)
+		_knob_override["F"] = clampf(float(config_data["initial_F"]), 0.0, 1.0)
 	if config_data.has("initial_E"):
-		_E = clampf(float(config_data["initial_E"]), 0.0, 1.0)
-		if _sliders.size() > 1 and _sliders[1].has_method("set_normalized_value"):
-			_sliders[1].call("set_normalized_value", _E)
+		_knob_override["E"] = clampf(float(config_data["initial_E"]), 0.0, 1.0)
 	if config_data.has("initial_lambda"):
-		_lambda = clampf(float(config_data["initial_lambda"]), 0.0, 1.0)
-		if _sliders.size() > 2 and _sliders[2].has_method("set_normalized_value"):
-			_sliders[2].call("set_normalized_value", _lambda)
+		_knob_override["lambda"] = clampf(float(config_data["initial_lambda"]), 0.0, 1.0)
 	if config_data.has("initial_phi"):
-		_phi = clampf(float(config_data["initial_phi"]), 0.0, 1.0)
-		if _sliders.size() > 3 and _sliders[3].has_method("set_normalized_value"):
-			_sliders[3].call("set_normalized_value", _phi)
-	_refresh_all()
+		_knob_override["phi"] = clampf(float(config_data["initial_phi"]), 0.0, 1.0)
+
+	if not _built:
+		return
+
+	# The knobs are state, not geometry — reseat them without tearing anything
+	# down, then decide whether the settling itself moved.
+	_apply_settling()
+	_seat_sliders()
+
+	if settling == before_settling:
+		# Same settling. If a knob or the ΔE constant moved, the console is a
+		# live instrument: refresh in place. If nothing moved (the curation
+		# station's {"emissive": false}), do nothing at all.
+		if not is_equal_approx(_F, before_F) or not is_equal_approx(_E, before_E) \
+				or not is_equal_approx(_lambda, before_lambda) \
+				or not is_equal_approx(_phi, before_phi) \
+				or not is_equal_approx(rate_delta_e, before_rate):
+			_refresh_all()
+		return
+
+	_rebuild_now()
+	print("[QFEPBalanceWorkbench] Config applied — settling=%s (F %.2f / E %.2f / λ %.2f / φ %.2f)" % [
+		settling, _F, _E, _lambda, _phi])
+
+
+## Tear down only what this script built, then build again — synchronously, so
+## the auto-grounding pass that runs after us still measures a real AABB.
+func _rebuild_now() -> void:
+	for n in _owned:
+		if n != null and is_instance_valid(n):
+			var node: Node = n
+			var p: Node = node.get_parent()
+			if p != null:
+				p.remove_child(node)
+			node.queue_free()
+	_owned.clear()
+
+	_plate_root = null
+	_plate_readout = null
+	_sliders.clear()
+	_display_root = null
+	_halo_inst = null
+	_halo_material = null
+	_radar_root = null
+	_radar_polygon_mesh = null
+	_radar_polygon_mesh_inst = null
+	_radar_polygon_material = null
+	_radar_outline_mesh = null
+	_radar_outline_mesh_inst = null
+	_radar_outline_material = null
+	_radar_knob_dots.clear()
+	_radar_knob_materials.clear()
+	_radar_hub_material = null
+	_radar_letter_label = null
+	_readout_root = null
+	_readout_card_material = null
+	_readout_border_material = null
+	_readout_block = null
+	_phase_bar_root = null
+	_phase_bar_material = null
+	_phase_screen = null
+	_phase_bar_label_top = null
+	_phase_bar_label_letter = null
+	_viz_dirty = false
+	_viz_cooldown = 0.0
+
+	_build_all()
+	# Mount inline — no deferral in the build path. Clearing the flag makes any
+	# call still sitting in the queue from _ready a no-op instead of a second mount.
+	_mount_scheduled = false
+	_mount_now()

@@ -101,7 +101,33 @@
    "scene": "res://commons/artifacts/sim_cube/sim_cube.tscn",
    "category": "exhibit",
    "artifact_type": "wrapper",
-   "description": "A 2m housing on a 1m cube plinth that integrates a simulation into map space — the grid cell made visible. Five family styles (gridglass/tank/cage/shadowbox/openframe) keep housed artifacts recognizable by nature. Token: sim_cube#family:tank#mount:<lookup>.",
+   "description": "A 2m housing on a 1m cube plinth that integrates a simulation into map space — the grid cell made visible. Five family styles (gridglass/tank/cage/shadowbox/openframe) keep housed artifacts recognizable by nature, plus six stand families (table_display_1m/2m, podium, plinth, frame, pedestal). DNA: family selects the enclosure; fit selects who holds authority over size — metric lets the housing contain-scale the mounted artifact, raw lets the artifact keep its authored size and overflow the case. Token: sim_cube#family:tank#mount:<lookup>#fit:raw.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "family": [
+      "gridglass",
+      "tank",
+      "cage",
+      "shadowbox",
+      "openframe",
+      "table_display_1m",
+      "table_display_2m",
+      "podium",
+      "plinth",
+      "frame",
+      "pedestal"
+     ],
+     "fit": [
+      "metric",
+      "raw"
+     ]
+    },
+    "default": "family=gridglass, fit=metric - fit=metric is the pre-promotion call to fit_artifact(), so all 37 existing placements are unchanged; every one of them already names its own family in the token, so the family default is never reached in a shipped map",
+    "was": "family and mount were untyped String exports with no declared range, and the mounted artifact was ALWAYS contain-scaled by the em-square engine - the housing's authority over the specimen was a hard-coded call, not a choice",
+    "note": "family is taxonomy by enclosure: the case tells you what nature of thing is inside before it moves. fit asks the next question — whether the case gets to decide how big the thing is."
+   },
    "footprint": [
     2,
     3,

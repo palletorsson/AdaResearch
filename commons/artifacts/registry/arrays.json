@@ -7174,8 +7174,27 @@
   "floor_plan_space": {
    "name": "Floor Plan Space",
    "lookup_name": "floor_plan_space",
-   "description": "Standalone 3D space builder that loads a floor_plan.json and constructs rooms with facade walls and mosaic floors, independent of the grid system.",
+   "description": "Standalone 3D space builder that loads a floor_plan.json and constructs rooms with facade walls and mosaic floors, independent of the grid system. DNA: solidity decides whether the plan is a drawing you pass through (diagram) or a building that stops you (built — walls get colliders and the JSON's doorways become the only openings); bay_span is the facade module in metres, the rhythm of columns and openings on every wall. Token: floor_plan_space#solidity:built#bay_span:4.5.",
    "scene": "res://commons/artifacts/floor_plan_space/floor_plan_space.tscn",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "solidity": [
+      "diagram",
+      "built"
+     ],
+     "bay_span": [
+      2.0,
+      3.0,
+      4.5,
+      6.0
+     ]
+    },
+    "default": "solidity=diagram, bay_span=3.0 - diagram is the commented-out collider block left off, and 3.0 is the literal in roundi(width / 3.0), so all 23 existing placements build byte-identical geometry",
+    "was": "no declared axes at all. The wall colliders existed as a commented-out block marked 'players can walk through walls for now', and the facade bay module was the bare literal 3.0 - so an artifact that claims a floor plan becomes an inhabitable space shipped a space no body could touch",
+    "note": "The artifact's truth statement is that a room is a grammar of connections, not a boundary. Under solidity=diagram the doorways in the JSON are decoration - you walk through the walls too. Under built they are the argument."
+   },
    "category": "architecture",
    "include_in_map_data": true,
    "map_ready": true,

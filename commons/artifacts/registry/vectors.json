@@ -462,9 +462,29 @@
     },
     "VectorBasics": {
       "capacity": "UNDERSTAND that a vector is not a number and not a point — it is a displacement carrying both how far and which way",
+      "dna": {
+        "promoted": "2026-07-29",
+        "stage": "2 - variation",
+        "axes": {
+          "reading": [
+            "full",
+            "polar",
+            "cartesian",
+            "bare"
+          ],
+          "reference": [
+            "x",
+            "y",
+            "z",
+            "ground"
+          ]
+        },
+        "default": "reading=full, reference=x - full leaves every piece of apparatus visible and reference=x keeps the arc sweeping from Vector3.RIGHT, which is exactly the hard-coded build, so all 22 existing placements are unchanged",
+        "was": "zero exports and an apply_grid_config() whose body was `pass`: the bench asserted BOTH decompositions at once (magnitude arc + unit vector + three component arrows + spring scale) and measured every angle from a privileged +X axis, with neither choice available to a map"
+      },
       "category": "unknown",
       "complexity": "beginner",
-      "description": "Grab an arrow and stretch it. Watch magnitude, unit vector, and components all update as one system. v = |v| * v-hat — a vector is magnitude times direction, decomposed into (x,y,z) components along the axes. The magnitude arc sweeps from the x-axis. The spring scale responds to vector length like a physical instrument.",
+      "description": "Grab an arrow and stretch it. Watch magnitude, unit vector, and components all update as one system. v = |v| * v-hat — a vector is magnitude times direction, decomposed into (x,y,z) components along the axes. The magnitude arc sweeps from the x-axis. The spring scale responds to vector length like a physical instrument. DNA: reading picks which decomposition the bench argues IS the vector (full=both at once, polar=|v| and v-hat only, cartesian=components only, bare=the arrow alone, refusing both); reference picks the direction the magnitude arc is measured from (x/y/z/ground), making visible that no frame is privileged.",
       "dev_themes": [
         "linear_algebra",
         "math",

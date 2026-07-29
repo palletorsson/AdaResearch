@@ -7,7 +7,7 @@ class_name SnapPyramidPuzzle
 # critical_parameter: 5 snap target positions — 4 corners of a square base plus 1 apex above center
 # triggers: snapping all 5 snap points to their targets → puzzle complete signal fires
 # emerges: that the apex position determines whether the pyramid is regular or skewed — height is a free variable
-# needs: [missing VR controls besides snapping — no label or slider]
+# needs: apex height as a real, turnable parameter [has, 2026-07-29 — the `apex` axis]. Missing: VR controls besides snapping — no label or slider.
 # relationships: extends SnapPointPuzzleBase; sibling to snap_tetrahedron_puzzle; pyramid.gd is its static version
 # truth: a pyramid has a free parameter — apex height — that tetrahedra and octahedra do not
 
@@ -15,10 +15,49 @@ class_name SnapPyramidPuzzle
 ## Manages a 5-point pyramid puzzle
 ## Extends SnapPointPuzzleBase for common functionality and tag system
 
+# ── DNA (promoted 2026-07-29, stage 2) ───────────────────────────────────────
+# apex — the free parameter this artifact's own truth statement names: "a pyramid
+# has a free parameter, apex height, that tetrahedra and octahedra do not". It was
+# frozen in the scene file at y=0.7, so the claim was made but never demonstrated.
+#   tall     apex 0.20 above the base (the historical scene)
+#   regular  apex 0.1414 = s/sqrt(2) — lateral faces become equilateral (Johnson J1)
+#   flat     apex 0.07 — a squat cap, the base dominates
+#   spire    apex 0.35 — a needle, the base nearly vanishes
+#   inverted apex 0.20 BELOW the base — the detector says "above/below", so this is
+#            still a square pyramid, just not one gravity agrees with
+@export_enum("tall", "regular", "flat", "spire", "inverted") var apex: String = "tall"
+
+# base_shape — the 4 base points. The name says "square pyramid" but the detector
+# only checks the 4-cycle + an apex joined to all of it. Turning this exposes the
+# gap between what the solid is called and what is actually being recognised.
+#   square   0.2 x 0.2 (the historical scene)
+#   rect     0.28 x 0.14 — right angles, unequal edges
+#   rhombus  equal edges, unequal diagonals — every side the same and still no square
+@export_enum("square", "rect", "rhombus") var base_shape: String = "square"
+
+const BASE_Y: float = 0.5
+const APEX_Y: Dictionary = {
+	"tall": 0.7,
+	"regular": 0.6414,
+	"flat": 0.57,
+	"spire": 0.85,
+	"inverted": 0.3,
+}
+
+var _geometry_applied: bool = false
+
 func _ready() -> void:
+	# Seat the 5 points at the declared geometry BEFORE the base stores initial
+	# positions, so the reset timer returns them to the promoted shape. At the
+	# defaults the geometry IS the scene file, so we do not touch the bodies at
+	# all — shipped placements take no code path they did not take before.
+	if not _is_scene_default():
+		_apply_geometry()
+	_geometry_applied = true
+
 	# Apply transparent emissive material to snap points
 	_apply_puzzle_materials()
-	
+
 	# Call parent ready
 	super._ready()
 
@@ -40,6 +79,86 @@ func _on_pyramid_formed(points: Array) -> void:
 	if our_points_count == 5:
 		print("SnapPyramidPuzzle: Pyramid completed with our points!")
 		_complete_puzzle()  # Call base class completion method
+
+# ── Geometry (apex height + base outline) ───────────────────────────────────
+
+## True when the declared axes describe exactly what snap_pyramid_puzzle.tscn
+## already contains, so applying them would be a no-op write.
+func _is_scene_default() -> bool:
+	return apex == "tall" and base_shape == "square"
+
+## (x, z) offsets per snap point name for the current base_shape.
+func _base_offsets() -> Dictionary:
+	match base_shape:
+		"rect":
+			return {
+				"PointBaseBackLeft": Vector2(-0.14, -0.07),
+				"PointBaseBackRight": Vector2(0.14, -0.07),
+				"PointBaseFrontLeft": Vector2(-0.14, 0.07),
+				"PointBaseFrontRight": Vector2(0.14, 0.07),
+			}
+		"rhombus":
+			# Diagonals 0.32 and 0.16 — all four edges sqrt(0.16^2 + 0.08^2), no right angles.
+			return {
+				"PointBaseBackLeft": Vector2(0.0, -0.16),
+				"PointBaseBackRight": Vector2(0.08, 0.0),
+				"PointBaseFrontLeft": Vector2(-0.08, 0.0),
+				"PointBaseFrontRight": Vector2(0.0, 0.16),
+			}
+		_:
+			return {
+				"PointBaseBackLeft": Vector2(-0.1, -0.1),
+				"PointBaseBackRight": Vector2(0.1, -0.1),
+				"PointBaseFrontLeft": Vector2(-0.1, 0.1),
+				"PointBaseFrontRight": Vector2(0.1, 0.1),
+			}
+
+func _apply_geometry() -> void:
+	var offsets: Dictionary = _base_offsets()
+	for point_name in offsets:
+		var node: Node3D = get_node_or_null(str(point_name)) as Node3D
+		if node == null:
+			continue
+		var off: Vector2 = offsets[point_name]
+		_reseat_point(node, Vector3(off.x, BASE_Y, off.y))
+	var apex_node: Node3D = get_node_or_null("PointApex") as Node3D
+	if apex_node:
+		_reseat_point(apex_node, Vector3(0.0, float(APEX_Y.get(apex, 0.7)), 0.0))
+
+## Snap points are RigidBody3D pickables — move them without letting physics
+## fight the change, and restore whatever freeze state they were in.
+func _reseat_point(node: Node3D, pos: Vector3) -> void:
+	if node is RigidBody3D:
+		var body: RigidBody3D = node as RigidBody3D
+		var was_frozen: bool = body.freeze
+		body.freeze = true
+		body.linear_velocity = Vector3.ZERO
+		body.angular_velocity = Vector3.ZERO
+		body.position = pos
+		body.freeze = was_frozen
+	else:
+		node.position = pos
+
+## Grid config arrives deferred, i.e. after _ready has already stored the initial
+## positions — so a real change must reseat AND re-store. Unchanged values do
+## nothing at all, which is why the 17 existing placements are untouched.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data == null or config_data.is_empty():
+		return
+	var changed: bool = false
+	if config_data.has("apex"):
+		var a: String = str(config_data["apex"])
+		if APEX_Y.has(a) and a != apex:
+			apex = a
+			changed = true
+	if config_data.has("base_shape"):
+		var b: String = str(config_data["base_shape"])
+		if b in ["square", "rect", "rhombus"] and b != base_shape:
+			base_shape = b
+			changed = true
+	if changed and _geometry_applied:
+		_apply_geometry()
+		_store_initial_positions()
 
 func _apply_puzzle_materials() -> void:
 	# Wait for snap points to be found

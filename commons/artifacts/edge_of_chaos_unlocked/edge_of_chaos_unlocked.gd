@@ -16,6 +16,8 @@ extends Node3D
 
 class_name EdgeOfChaosUnlocked
 
+const TextScreenScript = preload("res://commons/ui/text_screen.gd")
+
 ## Grid resolution for reaction-diffusion
 @export var grid_size: int = 64
 
@@ -31,6 +33,59 @@ class_name EdgeOfChaosUnlocked
 
 ## Simulation steps per frame
 @export_range(1, 8) var sim_steps: int = 4
+
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA AXIS — tenure
+# ═══════════════════════════════════════════════════════════════════
+#
+# WHO HOLDS LAMBDA, AND AT WHAT SETTING. The truth statement above names two
+# states — the knob held and the knob withheld — and the artifact ships one.
+# This axis ships both, plus the two poles the parameter space actually has.
+#
+#   unlocked  the LAMBDA fader is built live at 0.40 on the rack at
+#             (1.2, 1.0, 0); the 1.5 x 1.5 m quad carries the Turing
+#             spot/stripe field in teal-amber-cream; regime reads
+#             EDGE OF CHAOS. This is the pre-promotion look, exactly.
+#   clamped   the fader is still built at 0.40, but a 0.34 x 0.05 x 0.03 m
+#             brushed-steel bracket is bolted across its travel with two
+#             0.02 m bolt heads at its ends. The pattern is the SAME spot
+#             field, so the only difference in the still is that the control
+#             is visibly seized — the companion map's locked slider made an
+#             object instead of a sentence in a relationships line.
+#   withheld  the LAMBDA fader is not built at all. A blank
+#             0.30 x 0.09 x 0.012 m anthracite blanking plate with four
+#             0.012 m rivets fills its slot; the other two controls keep the
+#             exact y they have in every other tenure; lambda is held at 0.40
+#             so the pattern is unchanged. The artifact whose whole title is
+#             UNLOCKED, shipped locked. This is the value the axis exists for.
+#   frozen    the fader is built pushed to its left stop and clamped there.
+#             lambda 0.0 -> feed 0.01 / kill 0.08, so the quad goes to a flat
+#             deep-teal field with the 12 seed blots dying back to nothing and
+#             the regime readout reads FROZEN in blue.
+#   chaos     the fader is built at its right stop and clamped. lambda 1.0 ->
+#             feed 0.08 / kill 0.03, so the same quad fills edge-to-edge with
+#             cream-and-amber static and the readout reads CHAOS in red.
+#
+# NOT swept here: sim_steps and display_rate. Both are exported, both beg to be
+# swept, and both photograph as identical stills — a time-domain axis is not
+# evidence.
+const TENURES: PackedStringArray = ["unlocked", "clamped", "withheld", "frozen", "chaos"]
+
+## Who holds lambda and at what setting.
+@export_enum("unlocked", "clamped", "withheld", "frozen", "chaos") var tenure: String = "unlocked"
+
+# Rack slot pitch — must match ArtifactControls._slot_spacing so the blanking
+# plate lands exactly where the LAMBDA fader would have been.
+const SLOT_PITCH: float = 0.09
+const RACK_ORIGIN := Vector3(1.2, 1.0, 0.0)
+
+# The two pole tenures are the only ones whose payload IS the developed field,
+# so only they are pre-rolled. clamped/withheld must keep the DEFAULT's frame-1
+# spot field — their difference is the bracket and the plate, nothing else.
+const PREROLL_STEPS: int = 240
+
+# Fixed seed: the still has to be the same still every run.
+const SEED_RNG: int = 0x5EED17
 
 # Gray-Scott parameters derived from lambda
 var _feed_rate: float = 0.037
@@ -55,19 +110,58 @@ var _controls: Node
 var _regime_label: Label3D
 var _lambda_label: Label3D
 var _title_label: Label3D
+var _readout: Node3D
+
+# Lifecycle
+var _built: bool = false
+var _authored_lambda: float = 0.4
+## Only nodes THIS script created. Freeing get_children() would destroy the
+## anthracite plates the label framer adds one deferred call later.
+var _owned: Array[Node] = []
 
 
 func _ready() -> void:
-	_init_grid()
-	_build_display()
-	_build_controls()
-	_build_labels()
-	_update_reaction_params()
-	_seed_pattern()
+	_authored_lambda = lambda
+	tenure = _pick_axis(tenure, TENURES, "unlocked")
+	_build_all()
+	_built = true
 
+
+# ═══════════════════════════════════════════════════════════════════
+# GRID CONFIG INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+#
+# Reached via call_deferred AFTER _ready and BEFORE label framing. Note that
+# curation_station calls this with {"emissive": false} one line after hiding
+# labels — a key this artifact does not claim, so the call falls through both
+# early returns and the framing survives. No key is accepted here that does
+# not do something.
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	var before_tenure: String = tenure
+	if config_data.has("tenure"):
+		tenure = _pick_axis(str(config_data["tenure"]), TENURES, tenure)
+
+	if not _built:
+		return
+
+	if tenure != before_tenure:
+		_rebuild_now()
+		print("[EdgeOfChaosUnlocked] Config applied — tenure=%s" % [tenure])
+
+	# lambda is applied IN PLACE — its setter re-derives feed/kill and refreshes
+	# the readout, so no rebuild is owed. Applied after any tenure rebuild so an
+	# explicit lambda wins over the pole tenures' forced value.
+	if config_data.has("lambda"):
+		lambda = clampf(float(config_data["lambda"]), 0.0, 1.0)
+
+
+## Accept an axis value only if it names something we actually build. A typo in
+## a map token falls back to the legacy look rather than stranding the placement
+## with a rack that has neither a fader nor a plate.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
 
 
 func _process(delta: float) -> void:
@@ -76,6 +170,69 @@ func _process(delta: float) -> void:
 		_simulate_step()
 	if _frame_count % display_rate == 0:
 		_update_texture()
+
+
+# ── Build / rebuild ─────────────────────────────────────────
+
+func _build_all() -> void:
+	_apply_tenure_lambda()
+	_init_grid()
+	_build_display()
+	_build_controls()
+	_build_labels()
+	_update_reaction_params()
+	_seed_pattern()
+	_preroll()
+
+
+## SYNCHRONOUS. A deferred rebuild that removes children first makes
+## auto-grounding measure a zero AABB and bail.
+func _rebuild_now() -> void:
+	for c in _owned:
+		if is_instance_valid(c):
+			remove_child(c)
+			c.queue_free()
+	_owned.clear()
+	_display_quad = null
+	_controls = null
+	_title_label = null
+	_regime_label = null
+	_lambda_label = null
+	_readout = null
+	_texture = null
+	_image = null
+	_frame_count = 0
+	_build_all()
+
+
+func _own(n: Node) -> void:
+	add_child(n)
+	_owned.append(n)
+
+
+## Only the two poles move lambda. unlocked / clamped / withheld all restore the
+## value the author set, so a rebuild back off chaos does not strand at 1.0.
+func _apply_tenure_lambda() -> void:
+	match tenure:
+		"frozen":
+			lambda = 0.0
+		"chaos":
+			lambda = 1.0
+		_:
+			lambda = _authored_lambda
+
+
+## frozen and chaos are the only tenures whose evidence is the field itself, and
+## the field needs frames. Pre-rolling them here makes the still deterministic
+## instead of shutter-timing dependent. unlocked, clamped and withheld are NOT
+## pre-rolled: they must show the same frame-1 seed field as each other, so the
+## only difference between them in the capture is the hardware on the rack.
+func _preroll() -> void:
+	if tenure != "frozen" and tenure != "chaos":
+		return
+	for _i in range(PREROLL_STEPS):
+		_simulate_step()
+	_update_texture()
 
 
 # ── Grid Init ───────────────────────────────────────────────
@@ -98,12 +255,16 @@ func _init_grid() -> void:
 
 
 func _seed_pattern() -> void:
-	# Seed a few spots of chemical B in the center region
+	# Seed a few spots of chemical B in the center region.
+	# Fixed seed — five tenure stills have to be comparable, which means the
+	# blots have to land in the same twelve places every run.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = SEED_RNG
 	var center := grid_size / 2
 	var radius := grid_size / 8
 	for _s in range(12):
-		var sx := center + randi_range(-radius, radius)
-		var sz := center + randi_range(-radius, radius)
+		var sx := center + rng.randi_range(-radius, radius)
+		var sz := center + rng.randi_range(-radius, radius)
 		for dx in range(-2, 3):
 			for dz in range(-2, 3):
 				var x := clampi(sx + dx, 0, grid_size - 1)
@@ -188,7 +349,7 @@ func _build_display() -> void:
 	# Tilt the quad to face the viewer
 	_display_quad.position = Vector3(0, 0.85, 0)
 	_display_quad.rotation_degrees.x = -15
-	add_child(_display_quad)
+	_own(_display_quad)
 
 	# Base
 	var base := MeshInstance3D.new()
@@ -202,7 +363,7 @@ func _build_display() -> void:
 	bmat.roughness = 0.4
 	base.material_override = bmat
 	base.position = Vector3(0, 0.03, 0)
-	add_child(base)
+	_own(base)
 
 
 func _update_texture() -> void:
@@ -235,12 +396,24 @@ func _update_texture() -> void:
 func _build_controls() -> void:
 	_controls = ArtifactControls.new()
 	_controls.name = "Controls"
-	_controls.position = Vector3(1.2, 1.0, 0.0)
-	add_child(_controls)
+	if tenure == "withheld":
+		# Slot 0 is left empty for the blanking plate. Push the whole rack down
+		# one pitch so SIM SPEED and RESEED keep the exact y they hold in every
+		# other tenure — the rack must read as the SAME rack, minus one control.
+		_controls.position = RACK_ORIGIN + Vector3(0.0, -SLOT_PITCH, 0.0)
+	else:
+		_controls.position = RACK_ORIGIN
+	_own(_controls)
 
-	_controls.add_slider("LAMBDA", lambda, func(v: float):
-		lambda = v
-	)
+	if tenure != "withheld":
+		_controls.add_slider("LAMBDA", lambda, func(v: float):
+			# unlocked is the only tenure where the fader writes anything. On
+			# clamped / frozen / chaos the bracket is bolted across its travel,
+			# so the handle is hardware, not a control.
+			if tenure == "unlocked":
+				lambda = v
+		)
+
 	_controls.add_slider("SIM SPEED", float(sim_steps - 1) / 7.0, func(v: float):
 		sim_steps = int(round(v * 7.0)) + 1
 	)
@@ -249,6 +422,116 @@ func _build_controls() -> void:
 		_seed_pattern()
 	)
 
+	match tenure:
+		"clamped", "frozen", "chaos":
+			_own(_build_clamp_bracket())
+		"withheld":
+			_own(_build_blanking_plate())
+
+
+## A bar bolted across the LAMBDA fader's travel. Wider than the 0.18 m fader
+## because it has to reach past it to the rack on either side — that overhang is
+## what makes it read as a clamp and not as a second control.
+func _build_clamp_bracket() -> Node3D:
+	var node := Node3D.new()
+	node.name = "LambdaClamp"
+	node.position = RACK_ORIGIN
+
+	var steel := StandardMaterial3D.new()
+	steel.albedo_color = Color(0.62, 0.63, 0.65)
+	steel.metallic = 0.85
+	steel.roughness = 0.35
+
+	var bar := MeshInstance3D.new()
+	bar.name = "Bracket"
+	var bar_box := BoxMesh.new()
+	bar_box.size = Vector3(0.34, 0.05, 0.03)
+	bar.mesh = bar_box
+	bar.material_override = steel
+	# The rack chassis is 0.02 deep and its lit screen quad sits at z = 0.011,
+	# so the bar clears the glyphs it is holding shut.
+	bar.position = Vector3(0.0, 0.0, 0.030)
+	node.add_child(bar)
+
+	var bolt_steel := StandardMaterial3D.new()
+	bolt_steel.albedo_color = Color(0.48, 0.49, 0.52)
+	bolt_steel.metallic = 0.9
+	bolt_steel.roughness = 0.28
+
+	for i in range(2):
+		var side: float = -1.0 if i == 0 else 1.0
+		var bolt := MeshInstance3D.new()
+		bolt.name = "Bolt%s" % ("L" if i == 0 else "R")
+		var cyl := CylinderMesh.new()
+		cyl.top_radius = 0.010
+		cyl.bottom_radius = 0.010
+		cyl.height = 0.020
+		bolt.mesh = cyl
+		bolt.material_override = bolt_steel
+		bolt.rotation_degrees = Vector3(90.0, 0.0, 0.0)
+		bolt.position = Vector3(0.15 * side, 0.0, 0.048)
+		node.add_child(bolt)
+
+	return node
+
+
+## No fader. A riveted blank in its slot — the sequence's politics as an object.
+## Anthracite is deliberately the label framer's own panel colour: the plate and
+## the framed captions read as the same institutional material.
+func _build_blanking_plate() -> Node3D:
+	var node := Node3D.new()
+	node.name = "LambdaBlankingPlate"
+	node.position = RACK_ORIGIN
+
+	var anthracite := StandardMaterial3D.new()
+	anthracite.albedo_color = Color(0.12, 0.12, 0.135)
+	anthracite.metallic = 0.2
+	anthracite.roughness = 0.55
+
+	var plate := MeshInstance3D.new()
+	plate.name = "Plate"
+	var box := BoxMesh.new()
+	box.size = Vector3(0.30, 0.09, 0.012)
+	plate.mesh = box
+	plate.material_override = anthracite
+	plate.position = Vector3(0.0, 0.0, 0.012)
+	node.add_child(plate)
+
+	var rivet_mat := StandardMaterial3D.new()
+	rivet_mat.albedo_color = Color(0.34, 0.34, 0.36)
+	rivet_mat.metallic = 0.8
+	rivet_mat.roughness = 0.4
+
+	for i in range(4):
+		var sx: float = -1.0 if (i % 2) == 0 else 1.0
+		var sy: float = -1.0 if i < 2 else 1.0
+		var rivet := MeshInstance3D.new()
+		rivet.name = "Rivet%d" % i
+		var cyl := CylinderMesh.new()
+		cyl.top_radius = 0.006
+		cyl.bottom_radius = 0.006
+		cyl.height = 0.008
+		rivet.mesh = cyl
+		rivet.material_override = rivet_mat
+		rivet.rotation_degrees = Vector3(90.0, 0.0, 0.0)
+		rivet.position = Vector3(0.13 * sx, 0.032 * sy, 0.020)
+		node.add_child(rivet)
+
+	return node
+
+
+# ── Labels ──────────────────────────────────────────────────
+#
+# TWO hanging Label3Ds remain, and both are meant to be framed by
+# GridInteractablesComponent at spawn: title and subtitle. Their y positions are
+# chosen for the OPAQUE plate the framer builds behind them (text width + 0.05,
+# height + 0.035), not for the see-through glyphs the old capture harness drew.
+#
+# The two live readouts are NOT hanging labels any more. Framed, they became a
+# 1.05 x 0.21 m plate centred at floor level and a 0.77 x 0.18 m plate centred
+# 0.15 m BELOW the floor, standing 0.19 m in front of the 1.6 x 0.06 x 0.3 m
+# base and masking its whole front face from any camera below eye height. They
+# are promoted to one TextScreen on the rack side instead.
 
 func _build_labels() -> void:
 	_title_label = Label3D.new()
@@ -256,49 +539,91 @@ func _build_labels() -> void:
 	_title_label.text = "EDGE OF CHAOS — UNLOCKED"
 	_title_label.font_size = 36
 	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	# KEPT. Framed plate ~1.72 x 0.25 m spans y 1.875–2.125; the display quad's
+	# top edge is at (0, 1.574, -0.194), so it clears the artwork by 0.30 m.
 	_title_label.position = Vector3(0, 2.0, 0)
 	_title_label.modulate = Color(0.4, 1.0, 0.6, 0.9)
-	add_child(_title_label)
+	_own(_title_label)
 
 	var sub := Label3D.new()
 	sub.name = "Subtitle"
 	sub.text = "The slider the map withheld. Now it is yours."
 	sub.font_size = 20
 	sub.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	sub.position = Vector3(0, 1.85, 0)
+	# MOVED 1.85 -> 1.76. At 1.85 the framed plate spanned 1.765–1.935 and
+	# shingled 0.06 m into the title plate's bottom edge at 1.875 — two
+	# anthracite slabs overlapping. At 1.76 it spans 1.675–1.845: 0.03 m clear
+	# under the title, 0.10 m clear above the display's top edge.
+	sub.position = Vector3(0, 1.76, 0)
 	sub.modulate = Color(0.7, 0.8, 0.7, 0.7)
-	add_child(sub)
+	_own(sub)
 
+	_build_readout()
+	_update_regime_label()
+
+
+## The regime word and the lambda value on ONE TextScreen (SCREEN mode), parked
+## above the control rack and just outboard of the display quad's right edge.
+## Board 0.636 x 0.41 m: x 0.782–1.418 (quad ends at 0.75), y 1.215–1.625 (rack
+## top ~1.03). Nothing in the viewing corridor.
+func _build_readout() -> void:
+	_readout = Node3D.new()
+	_readout.name = "ReadoutHolder"
+	_readout.position = Vector3(1.10, 1.42, 0.02)
+	_own(_readout)
+
+	# Deliberately untyped: the script is preloaded rather than reached through
+	# its class_name, which is what keeps it resolvable headless.
+	var screen = TextScreenScript.new()
+	screen.name = "RegimeScreen"
+	screen.mode = 0                     # TextScreen.Mode.SCREEN
+	screen.width_m = 0.60
+	screen.title = "EDGE OF CHAOS"
+	screen.body = "lambda = %.2f" % lambda
+	_readout.add_child(screen)
+
+	# The Label3D nodes survive as the text source so anything reading .text
+	# keeps working, but they hang on nothing now: billboard DISABLED means the
+	# framer skips them (its own skip rule), and invisible means they add no
+	# glyphs and no AABB of their own to the camera's framing.
 	_regime_label = Label3D.new()
 	_regime_label.name = "RegimeLabel"
 	_regime_label.font_size = 28
-	_regime_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_regime_label.position = Vector3(0, 0.0, 0.3)
-	add_child(_regime_label)
+	_regime_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_regime_label.visible = false
+	_regime_label.position = Vector3.ZERO
+	_readout.add_child(_regime_label)
 
 	_lambda_label = Label3D.new()
 	_lambda_label.name = "LambdaValue"
 	_lambda_label.font_size = 22
-	_lambda_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_lambda_label.position = Vector3(0, -0.15, 0.3)
+	_lambda_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_lambda_label.visible = false
+	_lambda_label.position = Vector3(0, -0.05, 0)
 	_lambda_label.modulate = Color(0.8, 0.8, 0.8, 0.7)
-	add_child(_lambda_label)
-
-	_update_regime_label()
+	_readout.add_child(_lambda_label)
 
 
 func _update_regime_label() -> void:
 	if not _regime_label:
 		return
+	var word: String = "EDGE OF CHAOS"
+	var tint: Color = Color(0.2, 1.0, 0.5, 0.9)
 	if lambda < 0.2:
-		_regime_label.text = "FROZEN"
-		_regime_label.modulate = Color(0.4, 0.6, 1.0, 0.9)
-	elif lambda < 0.55:
-		_regime_label.text = "EDGE OF CHAOS"
-		_regime_label.modulate = Color(0.2, 1.0, 0.5, 0.9)
-	else:
-		_regime_label.text = "CHAOS"
-		_regime_label.modulate = Color(1.0, 0.3, 0.2, 0.9)
+		word = "FROZEN"
+		tint = Color(0.4, 0.6, 1.0, 0.9)
+	elif lambda >= 0.55:
+		word = "CHAOS"
+		tint = Color(1.0, 0.3, 0.2, 0.9)
+
+	_regime_label.text = word
+	_regime_label.modulate = tint
 
 	if _lambda_label:
 		_lambda_label.text = "lambda = %.2f" % lambda
+
+	if _readout and is_instance_valid(_readout):
+		var screen = _readout.get_node_or_null("RegimeScreen")
+		if screen:
+			screen.title_color = tint
+			screen.set_text(word, "lambda = %.2f" % lambda)
