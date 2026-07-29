@@ -178,7 +178,17 @@ def build_map(map_dir: Path, reg: dict, voiced_idx: set) -> dict | None:
         is_voiced = bool(voice) or lk in voiced_idx
         if is_voiced:
             n_voice += 1
-        promoted = str(e.get("category", "")) == "dna_promoted" or lk.startswith("dna_")
+        # An artifact counts as promoted once it DECLARES AXES, not only when it
+        # was born from a promotion run. The original test asked whether the
+        # entry came out of dna_promoted.json — true for the first fourteen and
+        # for nothing since, so the tracker read 21 promoted while the registry
+        # declared 116 and the whole stage-2 push looked like it had not
+        # happened. Legacy conditions kept so nothing already counted drops out.
+        promoted = (
+            isinstance(e.get("dna"), dict) and bool(e["dna"].get("axes"))
+            or str(e.get("category", "")) == "dna_promoted"
+            or lk.startswith("dna_")
+        )
         if promoted:
             n_promoted += 1
         entries.append({
