@@ -354,6 +354,33 @@ def check_token(tok: str, entry: dict) -> list[dict]:
     return rows
 
 
+PROMOTION_MARK = re.compile(
+    r"STAGE-2 DNA|DNA PROMOTION|stage 2, promoted|--- DNA \(stage 2", re.I)
+
+
+def undeclared_promotions(reg: dict) -> list[tuple[str, str]]:
+    """Artifacts whose SOURCE carries a promotion but whose registry says nothing.
+
+    The rest of this tool reads declarations and asks whether the code backs
+    them. That direction cannot see the opposite failure: axes written into a
+    script and never declared. Those are worse than a mismatch, because nothing
+    reports them at all — the sweep has no axis to turn, so the artifact sits in
+    the agenda looking un-promoted while its knobs already exist. Found this way
+    after a run of promoting agents died mid-task, having written scripts but
+    not registries.
+    """
+    out: list[tuple[str, str]] = []
+    for tok, (entry, rf) in sorted(reg.items()):
+        if isinstance(entry.get("dna"), dict):
+            continue
+        src_path, src = source_for(entry)
+        if not src or not PROMOTION_MARK.search(src):
+            continue
+        axes = re.findall(r"@export_enum\([^)]*\)\s*var\s+(\w+)", src)
+        out.append((tok, ", ".join(axes) if axes else "(promotion marker, no enum axis found)"))
+    return out
+
+
 def main() -> int:
     only = ""
     quiet = False
@@ -398,6 +425,13 @@ def main() -> int:
         print("\nunverifiable (no machine-readable value list in the source — not a failure):")
         for r in unv:
             print(f"  {r['token']}.{r['axis']}: {r['detail']}")
+
+    orphans = undeclared_promotions(reg)
+    if orphans:
+        print(f"\n{len(orphans)} promoted in code, undeclared in the registry "
+              f"[the axes exist but the sweep can never reach them]:")
+        for tok, axes in orphans:
+            print(f"  {tok}: {axes}")
 
     return len({r["token"] for r in bad})
 
