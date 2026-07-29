@@ -1865,6 +1865,22 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.246444Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "disclosure": [
+      "oracle",
+      "tally",
+      "ledger",
+      "works",
+      "origin"
+     ]
+    },
+    "default": "disclosure=works - the shipped code path, so existing placements are unchanged",
+    "was": "a coin that returned a verdict and showed none of its working — the sequence of outcomes, the running count and the generator behind them all existed and none of them were ever on the table",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
    }
   },
   "crystal_random_walk_demo": {
@@ -2989,17 +3005,17 @@
   "galton_board": {
    "dna": {
     "axes": {
-    "derivation": [
-    "none",
-    "field",
-    "paths"
-    ],
-    "evidence": [
-    "none",
-    "anecdote",
-    "sample",
-    "census"
-    ]
+     "derivation": [
+      "none",
+      "field",
+      "paths"
+     ],
+     "evidence": [
+      "none",
+      "anecdote",
+      "sample",
+      "census"
+     ]
     }
    },
    "category": "randomness",
@@ -6676,13 +6692,13 @@
   "prng_crank_machine": {
    "dna": {
     "axes": {
-    "disclosure": [
-    "works",
-    "oracle",
-    "tally",
-    "ledger",
-    "origin"
-    ]
+     "disclosure": [
+      "works",
+      "oracle",
+      "tally",
+      "ledger",
+      "origin"
+     ]
     }
    },
    "category": "randomness",

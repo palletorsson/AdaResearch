@@ -401,7 +401,22 @@
    "map_sequences": [
     "bricolage"
    ],
-   "qfep_connection": "The seed: twenty identical triangles, the most faces a regular solid can have. Every geodesic dome in the world starts here — not because the icosahedron is dome-shaped, but because it is the closest a perfectly regular thing gets to a sphere. Bricolage begins with the best available part, not the ideal one."
+   "qfep_connection": "The seed: twenty identical triangles, the most faces a regular solid can have. Every geodesic dome in the world starts here — not because the icosahedron is dome-shaped, but because it is the closest a perfectly regular thing gets to a sphere. Bricolage begins with the best available part, not the ideal one.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "subdivision": [
+      "v1",
+      "v2",
+      "v3",
+      "v4"
+     ]
+    },
+    "default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
+    "was": "the seed solid held at frequency 1 — the twenty faces before any subdivision, unable to show what happens next",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+   }
   },
   "subdivision_demo": {
    "name": "Subdivision",
@@ -416,7 +431,22 @@
    "map_sequences": [
     "bricolage"
    ],
-   "qfep_connection": "The operation that turns a solid into a sphere: split each triangle into four, push the new corners out to the sphere, repeat. Frequency is the only dial. Left to right you watch a face become four and then nine — and the curve is not drawn at any point, it is what the projection leaves behind."
+   "qfep_connection": "The operation that turns a solid into a sphere: split each triangle into four, push the new corners out to the sphere, repeat. Frequency is the only dial. Left to right you watch a face become four and then nine — and the curve is not drawn at any point, it is what the projection leaves behind.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "subdivision": [
+      "v1",
+      "v2",
+      "v3",
+      "v4"
+     ]
+    },
+    "default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
+    "was": "a demonstration of subdivision whose subdivision was a constant",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+   }
   },
   "strut_inventory": {
    "name": "Strut Inventory",
@@ -431,7 +461,22 @@
    "map_sequences": [
     "bricolage"
    ],
-   "qfep_connection": "The stock, and the reason domes are buildable: a subdivided sphere has hundreds of edges but only a handful of distinct LENGTHS. Sort them, cut them, and the whole curve is orderable from a short list. This is the moment bricolage becomes manufacture — the sphere reduced to a parts order."
+   "qfep_connection": "The stock, and the reason domes are buildable: a subdivided sphere has hundreds of edges but only a handful of distinct LENGTHS. Sort them, cut them, and the whole curve is orderable from a short list. This is the moment bricolage becomes manufacture — the sphere reduced to a parts order.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "subdivision": [
+      "v1",
+      "v2",
+      "v3",
+      "v4"
+     ]
+    },
+    "default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
+    "was": "the stock list held at 2V, so the count of distinct strut lengths — the thing the inventory exists to report — could never change",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+   }
   },
   "dome_builder": {
    "name": "Dome Builder",
@@ -446,17 +491,32 @@
    "map_sequences": [
     "bricolage"
    ],
-   "qfep_connection": "Assembly caught in the middle — the lower band triangulated and standing, the rest still lying flat as lengths. The half-built state is the honest one: a dome is not placed, it is closed, ring by ring, and until the last ring goes in every triangle below is already carrying itself."
+   "qfep_connection": "Assembly caught in the middle — the lower band triangulated and standing, the rest still lying flat as lengths. The half-built state is the honest one: a dome is not placed, it is closed, ring by ring, and until the last ring goes in every triangle below is already carrying itself.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "subdivision": [
+      "v1",
+      "v2",
+      "v3",
+      "v4"
+     ]
+    },
+    "default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
+    "was": "the geodesic frequency was frozen at 2V, so the dome could not show that its curve is a consequence of how many times you subdivide",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+   }
   },
   "geodesic_dome": {
    "dna": {
     "axes": {
-    "subdivision": [
-    "v2",
-    "v1",
-    "v3",
-    "v4"
-    ]
+     "subdivision": [
+      "v2",
+      "v1",
+      "v3",
+      "v4"
+     ]
     }
    },
    "name": "Geodesic Dome",

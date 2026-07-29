@@ -2676,7 +2676,22 @@
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "a code and text pane — the room's marginal note; it shows the notation beside the demonstration, never dominant, a container for whatever the lesson is currently saying."
+   "qfep_connection": "a code and text pane — the room's marginal note; it shows the notation beside the demonstration, never dominant, a container for whatever the lesson is currently saying.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "support": [
+      "none",
+      "stand",
+      "frame",
+      "pylon"
+     ]
+    },
+    "default": "support=none - the shipped code path, so existing placements are unchanged",
+    "was": "a screen with no declared way of meeting the floor: support was hard-coded to nothing, so every placement floated or relied on the map to improvise a mount",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+   }
   },
   "constraint_sculptor": {
    "category": "design",
@@ -14657,6 +14672,21 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084544Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "evidence": [
+      "result",
+      "trace",
+      "sources",
+      "longhand"
+     ]
+    },
+    "default": "evidence=result - the shipped code path, so existing placements are unchanged",
+    "was": "ten exports and every one a dial on the physics — frequency, amplitude, speed, separation, phase, tank size, three colours — and not one about the demonstration. The two component waves exist in _update_wave_surface() for one line each before being added together and thrown away: computed 4096 times a frame and never shown once",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
    }
   },
   "xyz_coordinates": {

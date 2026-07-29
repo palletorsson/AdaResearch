@@ -4089,6 +4089,22 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.188276Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "grain": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ]
+    },
+    "default": "grain=solid - the shipped code path, so existing placements are unchanged",
+    "was": "a cube shipped as one undivided block, so the question of what a cube is made of could not be asked of it",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
    }
   },
   "cube_scene_drag_points": {
@@ -14506,6 +14522,22 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.189797Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "grain": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ]
+    },
+    "default": "grain=solid - the shipped code path, so existing placements are unchanged",
+    "was": "the prism's sibling of cube_scene.grain — the same question of internal division, asked of the non-cubic solid",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
    }
   },
   "prismblock": {
@@ -18483,7 +18515,22 @@
     "derived_at": "2026-04-29T09:39:46.189797Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "Four snap points, and a tetrahedron forms — which then spawns a cube. The minimal solid conjuring the familiar one: the puzzle stages the chapter's whole ascent, from the simplest possible volume to the one everything in this grid is made of."
+   "qfep_connection": "Four snap points, and a tetrahedron forms — which then spawns a cube. The minimal solid conjuring the familiar one: the puzzle stages the chapter's whole ascent, from the simplest possible volume to the one everything in this grid is made of.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "solid": [
+      "loose",
+      "closed",
+      "scattered",
+      "short"
+     ]
+    },
+    "default": "solid=loose - the shipped code path, so existing placements are unchanged",
+    "was": "every position frozen in the .tscn — four points hovering near, but not on, the answer. The solved state its @identity talks about existed only as a transient side-effect of a player finishing it",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+   }
   },
   "snap_triangle_puzzle": {
    "category": "unknown",

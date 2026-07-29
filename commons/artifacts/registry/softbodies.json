@@ -36,7 +36,22 @@
     "size_group": "tiny",
     "label": "SOFT BODY"
    },
-   "qfep_connection": "a you-are-here anchor: bronze pedestal, glowing stake, a name in the air. Wayfinding furniture, never dominant — it marks the inhabited gallery without asserting content of its own."
+   "qfep_connection": "a you-are-here anchor: bronze pedestal, glowing stake, a name in the air. Wayfinding furniture, never dominant — it marks the inhabited gallery without asserting content of its own.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "mode": [
+      "float",
+      "plate",
+      "stake",
+      "decal"
+     ]
+    },
+    "default": "mode=stake - the shipped code path, so existing placements are unchanged",
+    "was": "the gallery_marker family shares request_note's attachment axis: how a sign meets the world it points at. It was billboarding in mid-air",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+   }
   },
   "flex_cloth_pad": {
    "name": "Flex Cloth Pad",

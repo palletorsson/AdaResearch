@@ -3209,12 +3209,12 @@
   "gallery_marker_facade": {
    "dna": {
     "axes": {
-    "mode": [
-    "stake",
-    "float",
-    "plate",
-    "decal"
-    ]
+     "mode": [
+      "stake",
+      "float",
+      "plate",
+      "decal"
+     ]
     }
    },
    "name": "Gallery Marker — Facade",
@@ -10915,7 +10915,22 @@
     1,
     1
    ],
-   "qfep_connection": "The stake anchoring ten wallpaper-group rooms holds no pattern itself: the same shared gallery_marker scene as every other sequence, with PATTERN written in by config. The symmetry groups get a signpost whose only symmetry-breaking is a word."
+   "qfep_connection": "The stake anchoring ten wallpaper-group rooms holds no pattern itself: the same shared gallery_marker scene as every other sequence, with PATTERN written in by config. The symmetry groups get a signpost whose only symmetry-breaking is a word.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "mode": [
+      "float",
+      "plate",
+      "stake",
+      "decal"
+     ]
+    },
+    "default": "mode=stake - the shipped code path, so existing placements are unchanged",
+    "was": "the gallery_marker family shares request_note's attachment axis: how a sign meets the world it points at. It was billboarding in mid-air",
+    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+   }
   }
  }
 }
