@@ -70,22 +70,40 @@ TIME_AXIS = re.compile(
     re.I)
 
 
+def _buildable(e: dict) -> bool:
+    return bool(str(e.get("scene", "") or e.get("scene_path", "")).strip()
+                or str(e.get("delegate_to", "")).strip())
+
+
 def registry() -> dict:
+    """Every artifact entry, preferring the one that can actually be built.
+
+    A lookup name can appear in more than one file here, and not every file is
+    an artifact registry: substrate_vectors.json is a feature-weight table keyed
+    by the same names. Last-write-wins let a body-less entry overwrite the real
+    one, and the whole runner then reported "no .gd resolvable from its scene"
+    for artifacts whose scene and script were both present and fine — fifteen in
+    a row on one batch. Same defect as the capture tool's first-match-wins scan.
+    """
     out: dict = {}
-    for rp in (REPO / "commons" / "artifacts" / "registry").glob("*.json"):
+    for rp in sorted((REPO / "commons" / "artifacts" / "registry").glob("*.json")):
         try:
             data = json.loads(rp.read_text(encoding="utf-8"))
         except Exception:
             continue
         items = data.get("artifacts", data) if isinstance(data, dict) else data
+        pairs: list[tuple[str, dict]] = []
         if isinstance(items, dict):
-            for tok, e in items.items():
-                if isinstance(e, dict):
-                    out[tok] = e
+            pairs = [(t, e) for t, e in items.items() if isinstance(e, dict)]
         elif isinstance(items, list):
-            for e in items:
-                if isinstance(e, dict) and e.get("lookup_name"):
-                    out[e["lookup_name"]] = e
+            pairs = [(e["lookup_name"], e) for e in items
+                     if isinstance(e, dict) and e.get("lookup_name")]
+        for tok, e in pairs:
+            prev = out.get(tok)
+            # Never let a body-less entry displace one that can be built.
+            if prev is not None and _buildable(prev) and not _buildable(e):
+                continue
+            out[tok] = e
     return out
 
 
