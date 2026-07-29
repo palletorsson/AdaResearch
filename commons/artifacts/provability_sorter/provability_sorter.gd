@@ -299,10 +299,34 @@ func _build() -> void:
 			gap_band.scale = Vector3(1.0, 0.10, 1.0)  # flatten into a band on the plinth
 			_own(gap_band)
 
+	# ── THE CAPTION BOARD ─────────────────────────────────────────────────
+	# This artifact's body is a DISC: about 1.04 m across and only 0.16 m tall
+	# (plinth underside plinth_y-0.08 up to the Godel sphere's crown at
+	# plinth_y+0.084). Its frontal footprint is therefore a wide, shallow band,
+	# and the three region names used to hang inside it — TRUE at ring height off
+	# the back rim, PROVABLE 0.16 m over the centre, the gap phrase out front —
+	# were authored when a label was see-through glyphs that hid nothing. Framed,
+	# each became an opaque plate lying across the very rings this object exists
+	# to let you compare: six crossing plates, the worst covering 21.2% of the
+	# body.
+	#
+	# They now stand as ONE legend board at the plinth's back edge, in RADIAL
+	# ORDER — TRUE (outermost) on top, the gold remainder in the middle, PROVABLE
+	# (innermost) at the bottom — so the stack reads the same way the rings do
+	# from rim to centre. Same parent, same facing, same column, 0.12 m apart:
+	# LabelFramer merges them into a single plate instead of three loose cards.
+	# Standing BEHIND the disc it can never come between an eye and the rings the
+	# way a front-hung caption does, and its lowest bezel sits ~0.07 m clear of
+	# the body's crown. Nothing here touches geometry, radii or the axis.
+	var board_z: float = -(_r_outer + 0.06)          # the plinth's back edge
+	var board_y_inner: float = plinth_y + 0.26       # PROVABLE
+	var board_y_gap: float = plinth_y + 0.38         # TRUE BUT UNPROVABLE
+	var board_y_outer: float = plinth_y + 0.50       # TRUE
+
 	# --- outer ring: TRUE ---
 	var true_mat: StandardMaterial3D = _glow(true_blue, 1.0)
 	_own(_torus(Vector3(0.0, plinth_y + 0.02, 0.0), _r_outer, 0.012, true_mat))
-	_own(_billboard_label("TRUE", Vector3(0.0, plinth_y + 0.10, -_r_outer - 0.02), 18, true_blue))
+	_own(_billboard_label("TRUE", Vector3(0.0, board_y_outer, board_z), 18, true_blue))
 
 	# --- inner ring: PROVABLE ---
 	if _has_inner_ring:
@@ -318,19 +342,29 @@ func _build() -> void:
 		var prov_fill: StandardMaterial3D = _glass(provable_cyan, 0.16)
 		_own(_cylinder(Vector3(0.0, plinth_y + 0.015, 0.0), _fill_r, 0.006, prov_fill))
 	if _has_provable_label:
-		_own(_billboard_label("PROVABLE", Vector3(0.0, plinth_y + 0.16, 0.0), 16, provable_cyan))
+		# bottom line of the board — innermost region, innermost name
+		_own(_billboard_label("PROVABLE", Vector3(0.0, board_y_inner, board_z), 16, provable_cyan))
 
-	# gap label
+	# gap label — middle line: the remainder lives between the two rings, and its
+	# name now sits between their two names.
 	if _has_gap_label:
 		_own(_billboard_label("TRUE BUT UNPROVABLE",
-			Vector3(0.0, plinth_y + 0.30, _r_outer + 0.04), 14, gap_gold))
+			Vector3(0.0, board_y_gap, board_z), 14, gap_gold))
 
 	# --- the Godel sentence: a fixed glowing token sitting in the gap ---
 	if _has_godel:
 		_godel_mat = _glow(gap_gold, 1.6)
 		_godel_dot = _sphere(Vector3(_gap_r, plinth_y + 0.05, 0.0), 0.034, _godel_mat)
 		_own(_godel_dot)
-		_own(_billboard_label("G", Vector3(_gap_r, plinth_y + 0.13, 0.0), 18, gap_gold))
+		# The G plate is the one caption that must stay at the SENTENCE'S OWN
+		# HEIGHT — a marker floating a third of a metre above its dot names
+		# nothing in particular. So it moves sideways instead of up: out past the
+		# plinth rim (radius _r_outer + 0.06) on the same +X side as the sphere,
+		# level with it, with 0.07 m of air between plate and rim. Sitting beside
+		# the body rather than over it, its plate no longer overlaps the frontal
+		# footprint at all, whatever height it keeps. Offset from _r_outer, not a
+		# literal, so a map that widens the rings carries the marker with them.
+		_own(_billboard_label("G", Vector3(_r_outer + 0.24, plinth_y + 0.13, 0.0), 18, gap_gold))
 
 	# --- the raining statement-tokens (MultiMesh) ---
 	_build_tokens()

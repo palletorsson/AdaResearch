@@ -69,6 +69,28 @@ const GAP_R_COLUMN: float = 0.09              # the gap that does not shrink
 const CAP_R: float = 0.24                     # capped: the sealing slab
 const CAP_H: float = 0.06
 
+# --- caption placement -------------------------------------------------------
+# LabelFramer turns every hanging label into an OPAQUE anthracite plate, so a
+# caption no longer costs nothing where it stands. The body's widest part is the
+# chalk ring on the floor: radius 0.50 + 0.012 tube = 0.512 m either side, at
+# every axis value. Side captions therefore have to clear x = +-0.512 plus their
+# own half-plate, or they sit across the tower whatever height they are at.
+#
+# TAG_X   the S1..Sn ladder. Formerly -r - 0.02, which rode the taper inward and
+#         put every tag over a platform; it also spread the tags across four
+#         grouping columns so they never merged. One fixed column: the framer
+#         (same parent, same facing, columns within 0.18, gaps under 0.16) folds
+#         the whole ladder into ONE plate beside the stack.
+# AXIOM_X the "+ AXIOM" caption, widest of the side plates, so it stands further
+#         out — its inner edge lands within a few cm of the ladder's.
+# BAR_TOP the tower's real ceiling is not the top platform: the AXIOM bar for the
+#         top level hovers at y + 0.30 and its cap plate reaches 0.336 above it.
+#         The title used to be measured from the platform and hung inside that.
+const TAG_X: float = 0.68
+const AXIOM_X: float = 0.80
+const BAR_TOP: float = 0.336
+const CAP_GAP: float = 0.16                   # title block's clearance over the ceiling
+
 var _t: float = 0.0
 var _base_y: float = 0.06
 var _gap_mats: Array[StandardMaterial3D] = []     # the gold gap disc per level
@@ -279,23 +301,38 @@ func _build() -> void:
 			_patch_bars.append(bar_root)
 			_own(bar_root)
 
-		# tiny level tag
-		_own(_billboard_label("S%d" % (lvl + 1), Vector3(-r - 0.02, y + 0.04, 0.0), 13, level_blue))
+		# tiny level tag — held at its own level's height, but out in ONE column
+		# clear of the chalk ring, so the ladder frames as a single side plate
+		# instead of five plates lying on five platforms.
+		_own(_billboard_label("S%d" % (lvl + 1), Vector3(-TAG_X, y + 0.04, 0.0), 13, level_blue))
 		lvl += 1
 
-	# axiom-ladder label up the side
-	_own(_billboard_label("+ AXIOM", Vector3(0.34, _base_y + _pitch * 0.5, 0.34), 12, patch_cyan))
+	# axiom-ladder label, out on the opposite flank at the pitch it describes
+	_own(_billboard_label("+ AXIOM", Vector3(AXIOM_X, _base_y + _pitch * 0.5, 0.0), 12, patch_cyan))
 
-	# --- title ---
-	var top_y: float = _base_y + float(_n - 1) * _pitch
+	# --- title, hung above everything the tower actually occupies ---------------
+	# Measure the ceiling instead of assuming the top platform is it: the lifted
+	# AXIOM bar reaches BAR_TOP above its level, and under `capped` the sealing
+	# slab and the bar one level down both compete for the highest point.
+	var stack_top: float = _base_y + float(_n - 1) * _pitch
+	var body_top: float = stack_top + 0.03
 	if regress == "capped":
-		top_y += CAP_H
-	_own(_billboard_label("INCOMPLETENESS TOWER", Vector3(0.0, top_y + 0.42, 0.0), 28, cool_white))
+		body_top = maxf(body_top, stack_top + 0.007 + CAP_H)
+		if _n >= 2:
+			body_top = maxf(body_top, _base_y + float(_n - 2) * _pitch + BAR_TOP)
+	else:
+		body_top = maxf(body_top, stack_top + BAR_TOP)
+
+	# Subtitle sits at the clearance line and the title 0.20 m over it: the gap
+	# between the two blocks lands near 0.06 m, under the framer's 0.16 m merge
+	# threshold, so the pair becomes ONE nameplate crowning the tower.
+	var cap_y: float = body_top + CAP_GAP
+	_own(_billboard_label("INCOMPLETENESS TOWER", Vector3(0.0, cap_y + 0.20, 0.0), 28, cool_white))
 	if regress == "capped":
 		# The claim on the floor. The sequence around it is the counter-argument.
-		_own(_billboard_label("the system is complete", Vector3(0.0, top_y + 0.30, 0.0), 13, cool_white))
+		_own(_billboard_label("the system is complete", Vector3(0.0, cap_y, 0.0), 13, cool_white))
 	else:
-		_own(_billboard_label("patch the gap — a new gap opens above", Vector3(0.0, top_y + 0.30, 0.0), 13, gap_gold))
+		_own(_billboard_label("patch the gap — a new gap opens above", Vector3(0.0, cap_y, 0.0), 13, gap_gold))
 
 	_apply_emissive()
 

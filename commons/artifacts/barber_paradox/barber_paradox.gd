@@ -62,6 +62,34 @@ const BIN_Y: float = 0.32          ## bin centre height; floor plate sits at 0.1
 ## body cylinder's local half-height).
 const TOKEN_STAND_Y: float = 0.195
 
+# --- caption rows ------------------------------------------------------------
+#
+# WHY THESE EXIST. commons/grid/LabelFramer.gd turns every hanging Label3D into an
+# OPAQUE anthracite panel with a bezel at spawn — the project's rule that text in
+# 3D is a plate, not floating glyphs. The captions here were authored when text was
+# see-through, so they hung at body height: probe_label_placement measured five
+# plates crossing the body, the "SHAVED BY BARBER" tag alone covering 13.3% of the
+# frontal area. Nothing about the object changes below. These are only the heights
+# at which its captions hang, chosen so every plate clears the body's frontal
+# footprint.
+#
+# Top of the body, per roster. The tallest geometry is the sorting arrow's tail at
+# y = 0.95; the tilted shaft's transformed AABB adds ~0.016. Under "exception" the
+# full-stop sphere (y = 1.18, r = 0.05) is body and lifts the line to 1.23.
+const BODY_TOP: float = 0.97
+const BODY_TOP_EXCEPTION: float = 1.23
+
+# Half-height of the plate the framer will build behind each caption: the glyphs
+# (about font_size * pixel_size, pixel_size = 0.005) plus 0.10 m of padding and
+# bezel, halved. The "?" is pulsed to 1.25x in _process and its plate is parented
+# to the label, so it carries that factor.
+const HALF_TAG: float = 0.11      ## font 18 — bin tags
+const HALF_SUB: float = 0.10      ## font 16 — subtitle
+const HALF_TITLE: float = 0.16    ## font 34 — title
+const HALF_Q: float = 0.30        ## font 64 "?" pulsed
+const HALF_Q_LOUD: float = 0.42   ## font 96 "?" pulsed, under `none`
+const CAPTION_GAP: float = 0.05   ## air between one plate and the next
+
 ## Fixed — two builds of one roster value must be pixel-identical or the critic
 ## reads noise as signal. `_rng` is unused by the build; the seed is hygiene.
 const BUILD_SEED: int = 20260728
@@ -246,12 +274,14 @@ func _build() -> void:
 	else:
 		# "none" has no categories left to argue about and shouts loudest.
 		var qsize: int = 96 if roster == "none" else 64
-		_qmark = _billboard_label("?", Vector3(0.0, 1.18, 0.0), qsize, contradiction_red)
+		_qmark = _billboard_label("?", Vector3(0.0, _verdict_y(), 0.0), qsize, contradiction_red)
 		_add(_qmark)
 
 	# --- billboard title ---
-	_add(_billboard_label("BARBER PARADOX", Vector3(0.0, 1.5, 0.0), 34, cool_white))
-	_add(_billboard_label("shaves all who don't shave themselves", Vector3(0.0, 1.36, 0.0), 16, wire_purple))
+	# One column, one merge gap apart: the framer folds these two into a single
+	# nameplate riding above the whole apparatus.
+	_add(_billboard_label("BARBER PARADOX", Vector3(0.0, _title_y(), 0.0), 34, cool_white))
+	_add(_billboard_label("shaves all who don't shave themselves", Vector3(0.0, _subtitle_y(), 0.0), 16, wire_purple))
 
 
 ## Where the token lives. Under every roster but "pair" it is PARKED: a still that
@@ -265,6 +295,40 @@ func _token_home() -> Vector3:
 			return Vector3(0.0, 0.62, 0.0)            # riding the bare post
 		_:
 			return _left_pos
+
+
+## Where this roster's own geometry stops, so a caption plate knows what to clear.
+func _body_top() -> float:
+	return BODY_TOP_EXCEPTION if roster == "exception" else BODY_TOP
+
+
+## The bin tags: the lowest caption row, one plate-half clear of the body and
+## still standing in its own bin's column, so each tag reads over the bin it names.
+func _tag_row_y() -> float:
+	return _body_top() + CAPTION_GAP + HALF_TAG
+
+
+## The subtitle. Deliberately far enough above the tag row that the framer does
+## NOT merge the two — its merge gap is 0.16 m of text-to-text, and under
+## `blanket`/`exception` a centre tag shares this column. A bin tag has no
+## business inside the nameplate.
+func _subtitle_y() -> float:
+	return _tag_row_y() + HALF_TAG + CAPTION_GAP + HALF_SUB + 0.04
+
+
+## The title, held close enough under the merge gap that the framer folds it and
+## the subtitle into ONE nameplate rather than two stacked cards.
+func _title_y() -> float:
+	return _subtitle_y() + HALF_SUB + HALF_TITLE - 0.10
+
+
+## The "?" crowns the stack. Its plate is by far the tallest here — a font-64
+## glyph pulsed to 1.25x is ~0.60 m of panel, ~0.84 m at font 96 under `none` —
+## so anywhere lower it either lands on the body or swallows the nameplate.
+## Nameplate width is roster-invariant, so the four values still frame alike.
+func _verdict_y() -> float:
+	var q_half: float = HALF_Q_LOUD if roster == "none" else HALF_Q
+	return _title_y() + HALF_TITLE + CAPTION_GAP + q_half
 
 
 func _build_bin(center: Vector3, label: String, bw: float) -> void:
@@ -283,8 +347,9 @@ func _build_bin(center: Vector3, label: String, bw: float) -> void:
 	_add(_box(Vector3(center.x, top, center.z + bd * 0.5), Vector3(bw, 0.008, 0.008), edge_mat))
 	_add(_box(Vector3(center.x - bw * 0.5, top, center.z), Vector3(0.008, 0.008, bd), edge_mat))
 	_add(_box(Vector3(center.x + bw * 0.5, top, center.z), Vector3(0.008, 0.008, bd), edge_mat))
-	# label above the bin
-	_add(_billboard_label(label, Vector3(center.x, top + 0.12, center.z), 18, cool_white))
+	# Tag above the bin — but on the caption row, not on the rim. Framed, a tag at
+	# rim height is an opaque plate laid straight across the bins it names.
+	_add(_billboard_label(label, Vector3(center.x, _tag_row_y(), center.z), 18, cool_white))
 
 
 func _process(delta: float) -> void:

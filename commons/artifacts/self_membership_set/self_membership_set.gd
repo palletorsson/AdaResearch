@@ -36,8 +36,9 @@ class_name SelfMembershipSet
 ##   barred      only 3 braces are built — this value IGNORES `levels` on purpose,
 ##               because the axiom of foundation is precisely a bound on the
 ##               chain, and letting the map lengthen it would un-draw the axiom.
-##               A cool-white 0.34 x 0.26 x 0.02 m plate carrying ∉ is fixed
-##               across the mouth of the third at y = 0.72; the R panel is matte
+##               A cool-white 0.34 x 0.26 x 0.02 m plate is fixed across the
+##               mouth of the third at y = 0.72, its ∉ read from the column
+##               beside it at that same height; the R panel is matte
 ##               dark red with no glow and no wire frame. Filed as settled.
 ##   swallowed   no R panel and no wire frame beside the nest. A 0.14 m red cube
 ##               sits at the centre of the innermost brace at y = 0.72 inside a
@@ -47,6 +48,41 @@ class_name SelfMembershipSet
 @export_enum("nested", "stratified", "barred", "swallowed") var descent: String = "nested"
 
 const DESCENTS: PackedStringArray = ["nested", "stratified", "barred", "swallowed"]
+
+# ── WHERE THE CAPTIONS HANG ──────────────────────────────────────────────────
+# LabelFramer gives every billboarded Label3D an opaque anthracite plate. These
+# captions were authored when text was see-through glyphs, so they were written
+# straight across the diagram — the ∈ chain down the centre line of the nest, the
+# R panel's two lines lying on the panel itself. Correctly sized plates in those
+# positions still bury the thing they name.
+#
+# The body occupies x = -0.31 .. 0.59 (floor ring to R-panel frame) and
+# y = 0 .. 0.93; in `stratified` the ladder runs to y = 1.59. Every caption below
+# is placed clear of that rectangle. Nothing about the geometry moved.
+#
+# Vertical clearance is preferred over horizontal wherever there is room, because
+# a plate's height follows from the font size alone while its width follows from
+# the string — so "above the body" stays true when the text is re-worded and
+# "beside the body" does not.
+
+## The ∈ chain steps out of the nest into a column just left of the 0.31 m floor
+## ring. A plate is ~0.21 m wide and the pulse scales it to 1.15, so its right
+## edge lands at -0.40 — 0.09 m clear of the body.
+const EPS_COLUMN_X: float = -0.52
+## Its mirror, for the outward ∈ of `swallowed`.
+const EPS_OUT_COLUMN_X: float = 0.52
+
+## The R panel's caption is a two-line stack. This pitch is inside LabelFramer's
+## MERGE_GAP (0.16) and the lines share a column, so the pair is framed as ONE
+## nameplate rather than two shingled cards.
+const CAP_PITCH: float = 0.125
+## Anchor of the LOWER caption line (the question); the equation sits CAP_PITCH
+## above it. `nested` and `barred` have air between the body's 0.93 top and the
+## title, so the stack goes there. `stratified` has none — the ladder fills that
+## column to 1.59 — so its stack goes out to the right of the panel, level with
+## the panel it reads.
+const CAP_ABOVE: Vector3 = Vector3(0.42, 1.12, 0.02)
+const CAP_BESIDE: Vector3 = Vector3(1.15, 0.715, 0.02)
 
 ## `barred` is the axiom of foundation drawn: the descending chain stops. Three
 ## braces, always — see the note on the axis above.
@@ -147,11 +183,16 @@ func _build() -> void:
 	var ring_mat: StandardMaterial3D = _lit_glow(wire_purple, 0.5)
 	_own(_torus(Vector3(0.0, 0.025, 0.0), 0.30, 0.010, ring_mat))
 
-	var title_y: float = 1.5
+	# The title sits above the R panel's caption stack, not just above the body:
+	# CAP_ABOVE tops out (with pad and bezel) near y = 1.35, so 1.68 leaves the
+	# title plate's underside at ~1.44 and the two nameplates do not shingle.
+	var title_y: float = 1.68
 	match descent:
 		"stratified":
 			_build_stratified()
-			title_y = 1.78     # clear the top rung at y = 1.43 + its 0.15 m half-side
+			# clear the top rung at y = 1.43 + its 0.15 m half-side: the subtitle
+			# plate's underside must sit above 1.59, not merely the glyphs.
+			title_y = 1.94
 		"barred":
 			_build_barred()
 		"swallowed":
@@ -178,7 +219,7 @@ func _subtitle() -> String:
 ## nested — the shipped look, unchanged.
 func _build_nested() -> void:
 	_build_nest(maxi(levels, 2), false)
-	_build_r_panel(true)
+	_build_r_panel(true, CAP_ABOVE)
 
 
 ## stratified — Russell's answer. The nest is unrolled into a type hierarchy:
@@ -194,9 +235,12 @@ func _build_stratified() -> void:
 		var brace: Node3D = _make_brace(Vector3(0.0, cy, 0.0), rung, _lit_glow(brace_blue, bright))
 		_own(brace)
 		_braces.append(brace)
-		# ∈ on the RISER: membership runs from a rung to the one above it, never back.
+		# ∈ on the RISER: membership runs from a rung to the one above it, never
+		# back. Read from the column beside the ladder, at the riser's own height —
+		# framed, the glyph carries a plate, and a plate on the riser is a plate
+		# across the rung above and below it.
 		if i < n - 1:
-			var eps: Label3D = _billboard_label("∈", Vector3(0.0, cy + pitch * 0.5, 0.02), 26, cool_white)
+			var eps: Label3D = _billboard_label("∈", Vector3(EPS_COLUMN_X, cy + pitch * 0.5, 0.02), 26, cool_white)
 			_own(eps)
 			_epsilons.append(eps)
 
@@ -211,7 +255,9 @@ func _build_stratified() -> void:
 		var sz: float = -1.0 if k < 2 else 1.0
 		_own(_box(Vector3(sx * 0.17, mid, sz * 0.06), Vector3(0.008, h, 0.008), post_mat))
 
-	_build_r_panel(true)
+	# The ladder fills the column above the panel all the way to y = 1.59, so this
+	# value alone reads its R panel from the side. See CAP_BESIDE.
+	_build_r_panel(true, CAP_BESIDE)
 
 
 ## barred — the axiom of foundation. Three braces, a ∉ plate across the mouth of
@@ -221,10 +267,15 @@ func _build_barred() -> void:
 
 	var bar_mat: StandardMaterial3D = _lit_glow(cool_white, 0.8)
 	_own(_box(Vector3(0.0, 0.72, 0.06), Vector3(0.34, 0.26, 0.02), bar_mat))
-	_own(_billboard_label("∉", Vector3(0.0, 0.72, 0.09), 30, contradiction_red))
+	# The bar itself still crosses the mouth of the third brace — that is geometry
+	# and it has not moved. The GLYPH steps out to the same column as the ∈ chain
+	# and to the bar's own height, so the column reads ∉ over ∈ over ∈, top-down:
+	# the descending chain, and the thing that stops it. Framed in place it would
+	# have been an opaque plate over the bar, the nest and both.
+	_own(_billboard_label("∉", Vector3(EPS_COLUMN_X, 0.72, 0.09), 30, contradiction_red))
 
 	_flicker_r = false
-	_build_r_panel(false)
+	_build_r_panel(false, CAP_ABOVE)
 
 
 ## swallowed — the red panel is not beside the nest. It is a cube at the centre
@@ -236,7 +287,9 @@ func _build_swallowed() -> void:
 	_r_panel = _box(Vector3(0.0, 0.72, 0.0), Vector3(0.14, 0.14, 0.14), _r_mat)
 	_own(_r_panel)
 	_own(_torus(Vector3(0.0, 0.72, 0.0), 0.20, 0.012, _lit_glow(contradiction_red, 1.6)))
-	_own(_billboard_label("R ∈ R", Vector3(0.0, 0.92, 0.02), 18, contradiction_red))
+	# Straight above the swallowed cube, clear of the outermost brace's top serif
+	# at y = 0.90 — at 0.92 the plate sat over the nest's own shoulders.
+	_own(_billboard_label("R ∈ R", Vector3(0.0, 1.06, 0.02), 18, contradiction_red))
 
 
 ## The nest proper: each brace holds a smaller copy of itself, drifting up.
@@ -252,13 +305,23 @@ func _build_nest(n: int, outward: bool) -> void:
 		var brace: Node3D = _make_brace(Vector3(0.0, cy, 0.0), s, _lit_glow(brace_blue, bright))
 		_own(brace)
 		_braces.append(brace)
-		# a glowing ∈ between this level and the next-inner one
+		# a glowing ∈ between this level and the next-inner one — kept at exactly
+		# that height, but read from the column beside the nest. On the centre line
+		# it sat inside the braces it names, and a framed plate there is an opaque
+		# card in the mouth of the set.
+		#
+		# These four never merge into one plate, so the column is four cards rather
+		# than one: _process pulses each ∈ on its own phase, which puts a different
+		# scale in each label's basis, and LabelFramer buckets by facing.
 		if i < n - 1:
-			var eps: Label3D = _billboard_label("∈", Vector3(0.0, cy - s * 0.30, 0.02), 26, cool_white)
+			var eps: Label3D = _billboard_label("∈", Vector3(EPS_COLUMN_X, cy - s * 0.30, 0.02), 26, cool_white)
 			_own(eps)
 			_epsilons.append(eps)
 		if outward:
-			var out_eps: Label3D = _billboard_label("∈", Vector3(s * 0.5 + 0.06, cy, 0.02), 22, cool_white)
+			# The outward glyph was pinned to the brace's own edge (s * 0.5 + 0.06),
+			# which walks inward as the levels shrink — every one of them landing on
+			# the body. One column instead, mirroring the inward chain.
+			var out_eps: Label3D = _billboard_label("∈", Vector3(EPS_OUT_COLUMN_X, cy, 0.02), 22, cool_white)
 			_own(out_eps)
 			_epsilons.append(out_eps)
 
@@ -266,7 +329,13 @@ func _build_nest(n: int, outward: bool) -> void:
 ## The red R = { x : x ∉ x } panel, standing beside the nest.
 ## `live` = glowing material inside a wire frame (the paradox still open).
 ## Otherwise: matte dark red, no frame — the same claim, filed.
-func _build_r_panel(live: bool) -> void:
+##
+## `cap` is where the caption's LOWER line hangs; the equation sits CAP_PITCH
+## above it, close enough that LabelFramer merges the pair into a single plate.
+## The panel is 0.34 x 0.30 m and the caption is ~0.7 m wide, so the two lines
+## can no longer lie on the panel: framed, they covered it and 20% of the whole
+## diagram besides. The panel keeps its position; only the reading moves.
+func _build_r_panel(live: bool, cap: Vector3) -> void:
 	var panel_x: float = 0.42
 	var panel_y: float = 0.78
 	if live:
@@ -282,8 +351,8 @@ func _build_r_panel(live: bool) -> void:
 		_own(_box(Vector3(panel_x, panel_y - 0.15, 0.01), Vector3(0.34, 0.008, 0.008), fr))
 		_own(_box(Vector3(panel_x - 0.17, panel_y, 0.01), Vector3(0.008, 0.30, 0.008), fr))
 		_own(_box(Vector3(panel_x + 0.17, panel_y, 0.01), Vector3(0.008, 0.30, 0.008), fr))
-	_own(_billboard_label("R = { x : x ∉ x }", Vector3(panel_x, panel_y + 0.05, 0.02), 16, cool_white))
-	_r_label = _billboard_label("is R ∈ R ?" if live else "R is not a set.", Vector3(panel_x, panel_y - 0.07, 0.02), 18, contradiction_red)
+	_own(_billboard_label("R = { x : x ∉ x }", cap + Vector3(0.0, CAP_PITCH, 0.0), 16, cool_white))
+	_r_label = _billboard_label("is R ∈ R ?" if live else "R is not a set.", cap, 18, contradiction_red)
 	_own(_r_label)
 
 

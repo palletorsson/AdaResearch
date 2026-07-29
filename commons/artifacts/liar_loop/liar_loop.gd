@@ -54,6 +54,29 @@ const GAP_GREY: Color = Color(0.45, 0.45, 0.48)
 ## the ring never closes, so it has to be large enough to read across a room.
 const HELIX_RISE: float = 0.34
 
+# ── CAPTION PLACEMENT ────────────────────────────────────────────────
+# LabelFramer turns every hanging Label3D into an OPAQUE anthracite plate at
+# spawn. Captions authored as see-through glyphs therefore black out whatever
+# they were written across — measured here at 8 plates, 6 of them crossing the
+# body, worst one covering 35.5% of the frontal area. The numbers below keep
+# every plate off the body's frontal footprint. They are placement only: no
+# mesh, no axis value and no export default moves.
+
+## Metres of glyph height per font_size unit at the default pixel_size 0.005.
+## Font.get_multiline_string_size returns ascent+descent (~1.4 em for the default
+## face) and LabelFramer sizes its plates from exactly that, so spacing derived
+## from this constant lands where the plates actually land.
+const GLYPH_H: float = 0.0072
+## Vertical space left between two lines of the caption column. Well under
+## LabelFramer's MERGE_GAP (0.16 m), so the column fuses into ONE nameplate
+## instead of shingling four cards; comfortably above zero, so glyphs never touch.
+const LINE_GAP: float = 0.03
+## How far out the flanking verdict labels stand. The sign's frame reaches
+## x = +/- 0.395, and a "FALSE" plate is ~0.43 m wide before _process scales it
+## to 1.25 — so 0.75 clears the body with room to spare while the labels stay at
+## bulb height, still flanking the lamp they can never settle between.
+const VERDICT_X: float = 0.75
+
 var _lamp: MeshInstance3D
 var _lamp_mat: StandardMaterial3D
 var _true_lbl: Label3D
@@ -193,8 +216,9 @@ func _build() -> void:
 	_own(_box(Vector3(0.0, sign_y, 0.0), Vector3(0.78, 0.30, 0.02), slate_mat))
 	var frame_mat: StandardMaterial3D = _glow(wire_purple, 0.7)
 	_frame_rect(Vector3(0.0, sign_y, 0.012), 0.78, 0.30, frame_mat)
-	_own(_billboard_label("THIS STATEMENT", Vector3(0.0, sign_y + 0.05, 0.02), 26, cool_white))
-	_own(_billboard_label("IS FALSE", Vector3(0.0, sign_y - 0.06, 0.02), 30, false_red))
+	# The sentence itself is NOT written across the slate face any more: framed, it
+	# became an opaque plate covering the sign it quotes. It is the bottom of the
+	# caption column below, the nearest line to the slate it belongs to.
 
 	# --- what the object offers the sentence, above the sign ---
 	match valuation:
@@ -213,11 +237,48 @@ func _build() -> void:
 	_own(_loop_arrow)
 	_rebuild_loop(0.0)
 
-	# --- billboard title ---
-	_own(_billboard_label("LIAR LOOP", Vector3(0.0, 1.5, 0.0), 34, cool_white))
-	_own(_billboard_label(_subtitle(), Vector3(0.0, 1.36, 0.0), 16, wire_purple))
+	# --- the caption column, standing clear of the body ---
+	# Sentence at the bottom (nearest the slate), then the strapline, then the
+	# title: one x, one z, LINE_GAP between lines, so LabelFramer reads the four
+	# as a single caption block and gives them ONE plate. It starts above the
+	# tallest mesh this valuation builds — see _caption_base_y.
+	_stack_up([
+		{"text": "IS FALSE", "font": 30, "color": false_red},
+		{"text": "THIS STATEMENT", "font": 26, "color": cool_white},
+		{"text": _subtitle(), "font": 16, "color": wire_purple},
+		{"text": "LIAR LOOP", "font": 34, "color": cool_white},
+	], _caption_base_y())
 
 	_apply_emissive()
+
+
+## The height the caption column starts at: clear of every mesh this valuation
+## builds, plus the plate's own half-height and padding.
+##
+## `flip`, `neither` and `both` all top out at the bulb (y 1.13). `tiered` has no
+## bulb but carries a second slate to y 1.275, and that slate keeps its own quoted
+## sentence — so the column starts higher there, and far enough above the quoted
+## block (> LabelFramer's 0.16 m MERGE_GAP) that the two do not fuse into one
+## slab across the metalanguage slate.
+func _caption_base_y() -> float:
+	return 1.60 if valuation == "tiered" else 1.34
+
+
+## Build a caption column upward from `base_y`, first entry at the bottom.
+## Positions only — this creates the same Label3D nodes the artifact always made,
+## in a column the framer can merge, and touches no geometry.
+func _stack_up(lines: Array, base_y: float) -> void:
+	var y: float = base_y
+	var prev_h: float = 0.0
+	for i in range(lines.size()):
+		var line: Dictionary = lines[i]
+		var font: int = int(line["font"])
+		var col: Color = line["color"]
+		var h: float = float(font) * GLYPH_H
+		if i > 0:
+			y += prev_h * 0.5 + LINE_GAP + h * 0.5
+		_own(_billboard_label(str(line["text"]), Vector3(0.0, y, 0.0), font, col))
+		prev_h = h
 
 
 ## flip — THE SHIPPED LOOK, unchanged. One glass bulb in a steel cage that swings
@@ -228,9 +289,13 @@ func _build_flip() -> void:
 	_own(_lamp)
 	var cage_mat: StandardMaterial3D = _steel(Color(0.55, 0.58, 0.66))
 	_own(_torus(Vector3(0.0, 1.06, 0.0), 0.085, 0.006, cage_mat))
-	# the two verdict labels flanking the lamp; the active one brightens
-	_true_lbl = _billboard_label("TRUE", Vector3(-0.22, 1.06, 0.0), 20, true_green)
-	_false_lbl = _billboard_label("FALSE", Vector3(0.22, 1.06, 0.0), 20, false_red)
+	# The two verdict labels flanking the lamp; the active one brightens. They stay
+	# at bulb height so the lamp still swings between them, but stand at VERDICT_X
+	# rather than the old +/- 0.22: framed, a plate at 0.22 sat across both the bulb
+	# and the top of the sign, and _process scales these to 1.25 which scales the
+	# plate with them.
+	_true_lbl = _billboard_label("TRUE", Vector3(-VERDICT_X, 1.06, 0.0), 20, true_green)
+	_false_lbl = _billboard_label("FALSE", Vector3(VERDICT_X, 1.06, 0.0), 20, false_red)
 	_own(_true_lbl)
 	_own(_false_lbl)
 
@@ -247,9 +312,10 @@ func _build_gap() -> void:
 	# the two poles, evicted from the cage and switched off
 	_own(_sphere(Vector3(-0.16, 1.06, 0.0), 0.07, _matte_mat(true_green.darkened(0.35), 0.9)))
 	_own(_sphere(Vector3(0.16, 1.06, 0.0), 0.07, _matte_mat(false_red.darkened(0.35), 0.9)))
-	# the verdict names stay, unlit and unclaimed
-	var t_dead: Label3D = _billboard_label("TRUE", Vector3(-0.30, 1.06, 0.0), 20, true_green.darkened(0.6))
-	var f_dead: Label3D = _billboard_label("FALSE", Vector3(0.30, 1.06, 0.0), 20, false_red.darkened(0.6))
+	# the verdict names stay, unlit and unclaimed — out at VERDICT_X with the lit
+	# pair's, so their plates clear the sign instead of straddling it
+	var t_dead: Label3D = _billboard_label("TRUE", Vector3(-VERDICT_X, 1.06, 0.0), 20, true_green.darkened(0.6))
+	var f_dead: Label3D = _billboard_label("FALSE", Vector3(VERDICT_X, 1.06, 0.0), 20, false_red.darkened(0.6))
 	_own(t_dead)
 	_own(f_dead)
 	_own(_plate("NEITHER", 0.40, 0.09))
@@ -279,19 +345,38 @@ func _build_hierarchy(slate_mat: StandardMaterial3D) -> void:
 	var frame_mat: StandardMaterial3D = _glow(wire_purple, 0.7)
 	_frame_rect(Vector3(0.0, meta_y, 0.012), 0.60, 0.22, frame_mat)
 	# the sentence, quoted, spoken from above
-	_own(_billboard_label("\"THIS STATEMENT", Vector3(0.0, meta_y + 0.045, 0.02), 18, cool_white))
-	_own(_billboard_label("IS FALSE\" IS FALSE", Vector3(0.0, meta_y - 0.05, 0.02), 20, wire_purple))
+	_own(_surface_label("\"THIS STATEMENT", Vector3(0.0, meta_y + 0.045, 0.02), 18, cool_white))
+	_own(_surface_label("IS FALSE\" IS FALSE", Vector3(0.0, meta_y - 0.05, 0.02), 20, wire_purple))
 
 
 ## The cool-white verdict plate that replaces flanking labels under `neither` and
 ## `both`. Sits under the cage, in front of the slate so nothing z-fights.
+## Text PRINTED ON one of this artifact's own surfaces — a sign face, a slate.
+##
+## LabelFramer frames HANGING labels (billboard enabled is the hanging signal) and
+## deliberately skips labels that already lie on a body, because those are integrated
+## 2D-in-3D text already. These are that second kind: `_plate` paints its word on a
+## white sign box 3 mm proud of the face, and `_build_hierarchy` writes the quoted
+## sentence on the metalanguage slate. They were built with _billboard_label, so the
+## framer treated them as hanging and wrapped each in a SECOND anthracite panel —
+## which is what lay across the bulbs under `neither`, `both` and `tiered`, measured
+## at up to 22.4% of the body by probe_label_placement.
+##
+## Disabling the billboard here is not dodging the framer. It is telling the truth
+## about which of its two categories this text belongs to: it is already on a body.
+func _surface_label(text: String, pos: Vector3, font: int, col: Color) -> Label3D:
+	var l: Label3D = _billboard_label(text, pos, font, col)
+	l.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	return l
+
+
 func _plate(text: String, w: float, h: float) -> Node3D:
 	var root := Node3D.new()
 	# Between the slate top (y 0.93) and the cage underside (y 1.054), stood 0.045 m
 	# proud of the sign face so it never z-fights the slate.
 	root.position = Vector3(0.0, 0.985, 0.045)
 	root.add_child(_box(Vector3.ZERO, Vector3(w, h, 0.015), _matte_mat(cool_white, 0.55)))
-	var lbl: Label3D = _billboard_label(text, Vector3(0.0, 0.0, 0.018), 22, Color(0.09, 0.10, 0.15))
+	var lbl: Label3D = _surface_label(text, Vector3(0.0, 0.0, 0.018), 22, Color(0.09, 0.10, 0.15))
 	lbl.outline_size = 0  # dark text on a white plate; a black outline would smear it
 	root.add_child(lbl)
 	return root

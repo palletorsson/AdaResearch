@@ -303,13 +303,33 @@ func _build_all() -> void:
 	# --- labels ---
 	# The tallies are the readout of the axis: base count, top count. In `global`
 	# they read 2 and 3 exactly as shipped.
+	#
+	# WHERE THESE SIT, AND WHY (placement only — no glyph, size or value changed).
+	# LabelFramer turns every hanging label into an OPAQUE plate, so a caption in
+	# front of the figure now deletes the figure. This body occupies, in artifact
+	# space, x within +/-0.69 (base-plate outline, 1.38 m wide) and y from 0.008
+	# (the chalk ring on the floor) to about 1.13 (top wire plus the trace dot).
+	# Every caption is therefore kept out of that rectangle:
+	#
+	#   TITLE + COUNT LINE  a two-line column at x = 0, ABOVE the figure. They
+	#     share a parent, a facing and a column and sit 0.14 m apart, so the
+	#     framer merges them into ONE nameplate; its underside lands near y 1.35,
+	#     clear of the 1.13 crown. Nothing else is allowed into that column —
+	#     the top tally used to be, and it dragged the shared plate's bottom edge
+	#     down over the prongs.
+	#   THE TALLIES  pushed out sideways to x = -/+0.95. A single digit is
+	#     MIN_W-bound, so its plate is ~0.21 m wide including bezel and its inner
+	#     edge stands at 0.845 — clear of the static half-width 0.69 and of the
+	#     ~0.79 radius the figure sweeps as _body spins. Each keeps the HEIGHT of
+	#     the thing it counts (rods at y 0.21, tines at y 1.06), so the number
+	#     still points at its prongs; it now points from beside them.
 	var base_n: int = rod_xs.size()
 	var top_n: int = tine_xs.size()
-	_own(_billboard_label("IMPOSSIBLE TRIDENT", Vector3(0.0, 1.5, 0.0), 32, cool_white))
-	_own(_billboard_label("count the base: %d   count the top: %d" % [base_n, top_n], Vector3(0.0, 1.36, 0.0), 16, accent_amber))
-	# small standing tallies near each end of the figure
-	_own(_billboard_label(str(base_n), Vector3(0.0, 0.20, 0.0), 30, accent_amber))
-	_own(_billboard_label(str(top_n), Vector3(0.0, 1.18, 0.0), 30, accent_amber))
+	_own(_billboard_label("IMPOSSIBLE TRIDENT", Vector3(0.0, 1.60, 0.0), 32, cool_white))
+	_own(_billboard_label("count the base: %d   count the top: %d" % [base_n, top_n], Vector3(0.0, 1.46, 0.0), 16, accent_amber))
+	# small standing tallies flanking the figure, each at its own end's height
+	_own(_billboard_label(str(base_n), Vector3(-0.95, 0.21, 0.0), 30, accent_amber))
+	_own(_billboard_label(str(top_n), Vector3(0.95, 1.06, 0.0), 30, accent_amber))
 
 
 func _process(delta: float) -> void:

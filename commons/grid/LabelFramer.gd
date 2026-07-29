@@ -252,6 +252,10 @@ static func _plate_group(group: Array) -> void:
 
 static func _plate(size: Vector3, pos: Vector3, color: Color) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
+	# Marked so tooling can tell the caption furniture from the artifact's own
+	# body — probe_label_placement uses it to find plates that cross the thing
+	# they are captioning.
+	mi.set_meta("label_plate", true)
 	var bm := BoxMesh.new()
 	bm.size = size
 	mi.mesh = bm
