@@ -691,6 +691,13 @@ func _find_artifact(lookup_name: String) -> Dictionary:
 		push_error("capture_multi_angle: Cannot open registry dir")
 		return {}
 
+	# A lookup_name can appear in more than one file in this directory, and not
+	# every hit is an artifact definition: substrate_vectors.json is a
+	# feature-weight table keyed by the same names, so a first-match-wins scan
+	# returns a body-less entry and the capture dies with "Scene not found:".
+	# Keep scanning for an entry that can actually be built; fall back to the
+	# first hit only so a genuinely scene-less artifact still reports itself.
+	var fallback: Dictionary = {}
 	dir.list_dir_begin()
 	var file_name: String = dir.get_next()
 	while file_name != "":
@@ -703,10 +710,19 @@ func _find_artifact(lookup_name: String) -> Dictionary:
 					var data2: Dictionary = json2.data
 					var artifacts2: Dictionary = data2.get("artifacts", data2)
 					if artifacts2.has(lookup_name):
-						return artifacts2[lookup_name]
+						var hit: Dictionary = artifacts2[lookup_name]
+						var buildable: bool = (
+							str(hit.get("scene", "")).strip_edges() != ""
+							or str(hit.get("delegate_to", "")).strip_edges() != ""
+						)
+						if buildable:
+							dir.list_dir_end()
+							return hit
+						if fallback.is_empty():
+							fallback = hit
 		file_name = dir.get_next()
 	dir.list_dir_end()
-	return {}
+	return fallback
 
 func _get_combined_aabb(node: Node3D) -> AABB:
 	var result := AABB()
