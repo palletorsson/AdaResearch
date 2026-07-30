@@ -1,0 +1,101 @@
+{
+	"_readme": "Museum spatial-design principles extracted from literature for the endless museum (2026-07-21). Provenance: literature-unverified — the deep-research verifier panels died on a usage limit, so each claim carries its source but zero adversarial votes (P-10: these PROPOSE, never bind; a ruling or our own measurement outranks them). maps_to ties each principle to the pipeline concept it parameterizes.",
+	"provenance": "literature-unverified",
+	"corridor_width_cells": [13, 17],
+	"cell_meters": 1.0,
+	"vitruvian": {
+		"_note": "Palle 2026-07-21: 'imagine a Vitruvian space' — the corridor proportioned from the walking, seeing body. These constants are MEASURED in our own pipeline (provenance: code), and the corridor's dimensions are their radii: width 13-17 brackets 2 x promise (16 m) — the corridor width IS the promise diameter.",
+		"eye_height_m": {"value": 1.65, "source": "commons/testing/capture_eye_stations.gd"},
+		"reach_m": {"value": 2.5, "source": "tools/desire_timeline.py REACH_M — touch radius"},
+		"inspect_m": {"value": 4.0, "source": "tools/desire_timeline.py INSPECT_M — feature-detail radius"},
+		"promise_m": {"value": 8.0, "source": "tools/desire_timeline.py PROMISE_M — desire-at-distance radius"},
+		"walk_mps": {"value": 1.4, "source": "tools/desire_timeline.py WALK_MPS"},
+		"fov_deg": {"value": 90, "source": "capture_eye_stations.gd camera FOV"}
+	},
+	"principles": [
+		{
+			"id": "viewing-distance-formula",
+			"claim": "Viewing distance scales linearly with artwork size: distance ~ 1.4 m + 0.21 m per m2 of canvas (r2=0.93); mean 1.75 m, range 1.49-2.12 m.",
+			"number": "d = 1.4 + 0.21 * area_m2",
+			"source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5347319/",
+			"maps_to": "gaze_ride size oracle; em-square viewing contract; wing offset from walk path"
+		},
+		{
+			"id": "dwell-with-returns",
+			"claim": "Initial viewing of an artwork averages 33.9 s (median 25.1); counting return visits, total viewing averages 50.5 s (median 43.0).",
+			"number": "33.9 s first look, 50.5 s with returns",
+			"source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5347319/",
+			"maps_to": "artifact_dwell.json calibration; performer dwell defaults"
+		},
+		{
+			"id": "return-visits",
+			"claim": "In free-plan galleries 55.3% of visitors return to an already-viewed artwork (up to six times); forced single paths forfeit the return visit.",
+			"number": "55.3% return rate",
+			"maps_to": "cost of the endless-runner form; loop templates and backtrack scoring",
+			"source": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5347319/"
+		},
+		{
+			"id": "visibility-predicts-flow",
+			"claim": "Room occupancy in the Tate correlates with visual shallowness (visibility-graph mean path length, R2=0.63); plain metric centrality predicts nothing. Seeing, not distance, drives flow. Validated on a 1 m analysis grid.",
+			"number": "R2 = 0.63 at 1 m grid",
+			"source": "https://doi.org/10.1068/B2684",
+			"maps_to": "gaze_ride IS a visibility instrument; 1 cell = 1 m is the validated resolution"
+		},
+		{
+			"id": "flow-width",
+			"claim": "Minimum route width 1525 mm for two-way flow, and even one-way routes should be 1525 mm so a visitor can STOP TO LOOK without blocking movement; passing spaces every <=61 m on narrower routes.",
+			"number": "1.5 m lanes; stop-and-look is a width requirement",
+			"source": "https://www.sifacilities.si.edu/sites/default/files/Files/Accessibility/accessible-exhibition-design1.pdf",
+			"maps_to": "corridor width budget: 2 lanes + 2 stop pockets + axis fits in 13-17 cells"
+		},
+		{
+			"id": "stop-pocket",
+			"claim": "Stopping to inspect requires a clear pocket ~760 x 1220 mm per viewing side of a display, overlapping the route.",
+			"number": "0.76 x 1.22 m per viewing side",
+			"source": "https://www.sifacilities.si.edu/sites/default/files/Files/Accessibility/accessible-exhibition-design1.pdf",
+			"maps_to": "one free cell in front of every wing artifact — a placement contract"
+		},
+		{
+			"id": "stop-rate",
+			"claim": "Across 34 tracked exhibitions visitors averaged ~13 minutes and stopped at ~29% of exhibits; 'diligent visitors' (>=51% of stops) benchmark at 25%.",
+			"number": "29% stop rate; 51%/25% diligence benchmark",
+			"source": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.2151-6952.1997.tb01292.x",
+			"maps_to": "coverage target honesty: a map must read when hero + 2 are consumed"
+		},
+		{
+			"id": "fatigue",
+			"claim": "Attention declines after 30-45 minutes (museum fatigue); dwell drops ~34% through a visit; object satiation — sameness dulls attention.",
+			"number": "30-45 min budget; -34% dwell",
+			"source": "https://en.wikipedia.org/wiki/Museum_fatigue",
+			"maps_to": "sequence length (7-10 maps x 3-5 min); register alternation; chamber as mid-sequence rest (2026-07-19 chamber rule)"
+		},
+		{
+			"id": "exit-gradient",
+			"claim": "Visitors take the shortest route to the first visible exit (Melton). Museums fight it; the composed corridor aligns hero and exit on one axis so the pull toward the exit IS the pull through the promise.",
+			"number": "mechanism, not number",
+			"source": "https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.2151-6952.2006.tb00237.x",
+			"maps_to": "P-1 axis discipline; close register (hero last, on axis)"
+		},
+		{
+			"id": "hero-two-strategies",
+			"claim": "Curators use two opposite hero placements: bury the masterpiece in the deepest dead-end to pull visitors through everything (Sainsbury Wing), or put it in the most integrated space to catch existing flow (Pompidou 5).",
+			"number": "two named contracts",
+			"source": "http://spacesyntaxistanbul.itu.edu.tr/papers/longpapers/072%20-%20Tzortzi.pdf",
+			"maps_to": "two template families: deep-hero (close register) vs integrated-hero (turn/chamber)"
+		},
+		{
+			"id": "promise-surprise-tradeoff",
+			"claim": "Long synchronized axes with uniform isovists aid orientation but DIMINISH the visual impact of individual works — promising from afar spends the work's surprise.",
+			"number": "trade-off, not number",
+			"source": "http://spacesyntaxistanbul.itu.edu.tr/papers/longpapers/072%20-%20Tzortzi.pdf",
+			"maps_to": "the Spectacle question; when to break axis discipline (worn heroes, thresholds)"
+		},
+		{
+			"id": "endstop-pacing",
+			"claim": "Pacing devices slow walking into looking: at Castelvecchio long vistas are end-stopped by blank walls; thresholds and decompression rooms reset attention between dense rooms.",
+			"number": "mechanism",
+			"source": "http://spacesyntaxistanbul.itu.edu.tr/papers/longpapers/072%20-%20Tzortzi.pdf",
+			"maps_to": "register rhythm arrival/promenade/close; temporal void as rest beat (P-4)"
+		}
+	]
+}
