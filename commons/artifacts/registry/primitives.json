@@ -12516,7 +12516,26 @@
     "derived_at": "2026-04-29T09:39:46.189285Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "Drag two lines until they will never meet. The puzzle makes 'parallel' a thing your hands discover rather than a word you're told — and quietly seeds the crisis chapter, where the promise these lines keep turns out to have been a choice all along."
+   "qfep_connection": "Drag two lines until they will never meet. The puzzle makes 'parallel' a thing your hands discover rather than a word you're told — and quietly seeds the crisis chapter, where the promise these lines keep turns out to have been a choice all along.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "pair_pose": [
+      "upright",
+      "oblique",
+      "lying"
+     ],
+     "start_state": [
+      "parallel",
+      "crossed",
+      "tilted"
+     ]
+    },
+    "default": "pair_pose=upright, start_state=parallel - both generators collapse to the shipped literal coordinates at 0 degrees tilt, so the 8 existing placements are unchanged",
+    "was": "four target vertices and two starting segments written as literal arrays: the finished pair could only ever be two vertical posts, and the two lines were handed over already parallel to each other, so the learner transported a parallelism instead of making one",
+    "note": "declared by hand 2026-07-29 - the artifact exposed no @export of its own and the sweep refused it as NO TURNABLE KNOBS; the pose of the pair and the state it is handed over in were the constants carrying the argument"
+   }
   },
   "parallel_lines": {
    "category": "unknown",
@@ -13897,6 +13916,25 @@
    "tags": [
     "primitive"
    ],
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "proof": [
+      "relation",
+      "targets",
+      "angle",
+      "invariant"
+     ],
+     "stock": [
+      "stacked",
+      "crossed",
+      "scattered"
+     ]
+    },
+    "default": "proof=relation, stock=stacked - the pre-promotion behaviour exactly (four marks required, perpendicular + crossing at centres, two parallel lines waiting below), so all 8 existing placements are unchanged",
+    "was": "no exports of its own: the figure, the starting layout and the success condition were all hard-coded in _init(), so the sweep found no turnable knob"
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",
@@ -14070,6 +14108,26 @@
    "map_ready": true,
    "map_sequences": [],
    "name": "1.0 A Point",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "frame": [
+      "world",
+      "local",
+      "grid",
+      "mute"
+     ],
+     "attach": [
+      "float",
+      "stake",
+      "plate"
+     ]
+    },
+    "default": "frame=world, attach=float - reproduces the shipped label exactly (same format string with its inherited 'local position:' caption, same global reading, same 0.1 billboard offset), so the 7 existing placements are unchanged",
+    "was": "zero exports - a Label3D built in code, billboarded yellow above the grab sphere, printing the sphere's global position under a caption that called it local",
+    "reads": "frame chooses the origin a point measures itself from (and mute takes the address away entirely); attach decides whether the address turns to face the reader or belongs to the place"
+   },
    "parameters": {
     "footprint": [
      1,
@@ -14926,6 +14984,28 @@
    "qfep_connection": "Legs, seat, and back as one side-elevation extruded 8 cm thick — the draughtsman's view made solid. You cannot sit on it because it is the profile of sitting, not the affordance; the drawing convention has been given collision."
   },
   "pyramid": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "base_sides": [
+      3,
+      4,
+      5,
+      6,
+      8
+     ],
+     "apex_stance": [
+      "centred",
+      "edge",
+      "corner",
+      "beyond"
+     ]
+    },
+    "default": "base_sides=4, apex_stance=centred - a square base with the apex directly over its centre. base_sides=4 returns the original literal four-corner list rather than the polygon formula, and centred is the original (0, height, 0), so the geometry is bit-for-bit what it was and the 8 existing placements are unchanged.",
+    "was": "No exports at all - the sweep refused it as NO TURNABLE KNOBS. base_size 0.6 and pyramid_height 0.8 were private vars, and the two constants the word 'pyramid' is really hiding were not variables at all: the base was a hard-coded four-corner literal and the apex was hard-coded to (0, h, 0). Every placement in the project showed the same right square pyramid, and the face list was a fixed six-triangle table.",
+    "note": "Hand promotion. base_sides makes the base polygon a variable, so 'pyramid' reads as a family (tetrahedron at 3) rather than a shape; apex_stance separates right from oblique - same base, same height, same volume by Cavalieri, but the apex has left the centre. Face generation is now a base fan plus one triangle per base edge, which reproduces the old table exactly at 4 sides."
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Procedural square-based pyramid primitive built via surface tool.",
@@ -15041,6 +15121,21 @@
    "qfep_connection": "The square base lifts to a point and the plane becomes a volume — the first primitive with a *height*, built face by face from the surface tool. Position, then line, then face, then this: the fourth step, where flat space finally admits it was hiding a third direction."
   },
   "pyramid_edit": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "constraint": [
+      "free",
+      "symmetric",
+      "apex_only",
+      "base_only"
+     ]
+    },
+    "default": "constraint=free - the constraint code never runs and no handle position is ever written back, which is exactly the pre-promotion behaviour, so the 11 existing placements are unchanged.",
+    "was": "No exports and no apply_grid_config at all - the sweep refused it as NO TURNABLE KNOBS. Five handles, every one of them independent, in every placement. The artifact's own @identity listed 'missing symmetry-lock toggle' under needs, so the axis was already named in the file; it just was not reachable from a map.",
+    "note": "Hand promotion. The truth line says a pyramid is just a parameterisation; the axis adds that a parameterisation is defined by what it forbids. symmetric mirrors the moved base corner into the other three and pins the apex to the centre axis, so dragging can never leave the family of right pyramids; apex_only freezes the base and stages the truth line literally; base_only nails the apex and deforms the footprint under it."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Interactive pyramid demo with grab handles to reshape the base and apex.",
@@ -15747,6 +15842,24 @@
    },
    "scene": "res://commons/primitives/line/puzzles/quad_line_puzzle.tscn",
    "size_group": "compact",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "figure": [
+      "square",
+      "rectangle",
+      "rhombus",
+      "trapezoid"
+     ],
+     "plane": [
+      "upright",
+      "ground"
+     ]
+    },
+    "default": "figure=square, plane=upright - the four hard-coded corner literals verbatim, so the 7 existing placements are unchanged",
+    "was": "no exports of its own: four Vector3 literals in _init, so the only quad you could ever be asked to close was a square standing in the air"
+   },
    "tags": [
     "primitive"
    ],
@@ -17633,7 +17746,26 @@
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
    },
-   "qfep_connection": "A logarithmic ladder made tangible — 100m, 10m, 1m, 10cm, 1mm — the reference lengths that give every other measurement meaning. The primitive of scale itself: before a size can be read, a ruler of sizes must exist, and this exhibit is the chapter admitting that even measurement needs its own furniture."
+   "qfep_connection": "A logarithmic ladder made tangible — 100m, 10m, 1m, 10cm, 1mm — the reference lengths that give every other measurement meaning. The primitive of scale itself: before a size can be read, a ruler of sizes must exist, and this exhibit is the chapter admitting that even measurement needs its own furniture.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "rungs": [
+      "world",
+      "decade",
+      "body"
+     ],
+     "arrangement": [
+      "ladder",
+      "log",
+      "ruler"
+     ]
+    },
+    "default": "rungs=world, arrangement=ladder - the shipped magnitudes at the shipped stacking heights, centred on the axis, so the 8 existing placements are unchanged",
+    "was": "a single literal array holding both the magnitudes and their heights: the ladder could only be 100m/10m/1m/10cm/1mm stacked at fixed y, and the decade it skips (10cm straight to 1mm) could not be read as a choice because no unbroken ladder existed to compare it with",
+    "note": "declared by hand 2026-07-29 - the artifact exposed no @export of its own and the sweep refused it as NO TURNABLE KNOBS; which magnitudes are shown and how they are laid out were the constants carrying the argument"
+   }
   },
   "scifi_panel_wall": {
    "category": "unknown",
@@ -21347,6 +21479,25 @@
     "size_group": "compact"
    },
    "scene": "res://commons/primitives/line/puzzles/triangle_line_puzzle.tscn",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "target_plane": [
+      "upright",
+      "ground",
+      "tilted"
+     ],
+     "stock": [
+      "racked",
+      "strewn",
+      "ringed"
+     ]
+    },
+    "default": "target_plane=upright, stock=racked - upright maps the canonical triangle back to the shipped literals (0,-0.173,-0.2), (0,-0.173,0.2), (0,0.173,0) and racked returns the three parallel lines at x=0.2, y=-0.2/-0.3/-0.4 verbatim, so all 7 existing placements start in exactly the layout they had before",
+    "was": "Both tables were hard-coded literals in _init(): one equilateral triangle standing in the local ZY plane, and three identical parallel lines racked beside it. The artifact's own truth line says three points define a unique PLANE, but the plane was never a choice - every placement argued it from the same picture-on-a-wall angle, and the parts were always issued from the same rack. The subclass exported nothing and had no apply_grid_config().",
+    "note": "target_plane is the argument axis: ground lays the same three points flat so you assemble a floor facet (the triangle as the atomic unit of mesh geometry) instead of a sign, and tilted removes both readings so the plane has to be chosen rather than assumed. stock changes what the act of solving is - racked is assembly from interchangeable parts, strewn is recognition imposed on debris, ringed parks each line just outside the edge it belongs to so the whole puzzle collapses to closure. ringed follows target_plane, so the two axes compose."
+   },
    "size_group": "compact",
    "tags": [
     "primitive"

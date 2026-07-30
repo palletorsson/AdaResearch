@@ -6,9 +6,30 @@ extends Node3D
 # critical_parameter: apex handle — moving it changes the character from flat to tall, from pyramid to spike
 # triggers: dragging any of the 5 grab sphere handles — mesh rebuilds instantly from new vertex positions
 # emerges: the intuition that named shapes are just default parameterisations of a more general vertex space
-# needs: [has 5 grabbable vertex handles [has], missing symmetry-lock toggle]
+# needs: [has 5 grabbable vertex handles [has], symmetry-lock toggle via the constraint axis [has]]
 # relationships: interactive version of pyramid.gd; sibling to animatedcubebuilder and triangle
 # truth: a pyramid is just a parameterisation — move the apex and it stops being a pyramid
+
+##
+## STAGE-2 DNA PROMOTION (2026-07-29). The script had no exports: five handles,
+## all of them free, always. That is one position in a parameter space the artifact
+## itself names — its @identity listed "missing symmetry-lock toggle" as a need, and
+## its truth line ("a pyramid is just a parameterisation") is only half the sentence.
+## The other half is that a parameterisation is defined by what it FORBIDS. One axis —
+##
+##   constraint   which degrees of freedom the handles actually offer
+##                free · symmetric · apex_only · base_only
+##
+## free is the pre-promotion behaviour exactly (no positions are ever written back)
+## and is the default, so all 11 existing placements are untouched. Under symmetric
+## the base can only ever be a rectangle centred under the apex, so no amount of
+## dragging escapes the family of right pyramids; under apex_only the base is frozen
+## and the artifact argues its own truth line literally; under base_only the apex is
+## nailed and the learner deforms the footprint under a fixed peak.
+##
+## Usage in map_data.json:
+##   "pyramid_edit#constraint:symmetric"
+##   "pyramid_edit#constraint:apex_only"
 
 const HANDLE_SCENE := preload("res://commons/primitives/point/grab_sphere_point.tscn")
 const HANDLE_ORDER := [
@@ -19,6 +40,11 @@ const HANDLE_ORDER := [
 	"apex"
 ]
 
+## Which degrees of freedom the five handles offer. free = every vertex independent
+## (the original). symmetric = the four base corners mirror each other and the apex
+## stays on the centre axis. apex_only = base frozen. base_only = apex frozen.
+@export_enum("free", "symmetric", "apex_only", "base_only") var constraint: String = "free"
+
 var base_color: Color = Color(1.0, 0.8, 0.2)
 var pyramid_height: float = 0.8
 var base_size: float = 0.6
@@ -26,6 +52,7 @@ var base_size: float = 0.6
 var mesh_instance: MeshInstance3D
 var handle_nodes: Dictionary = {}
 var last_handle_positions: Dictionary = {}
+var _home_positions: Dictionary = {}
 
 func _ready():
 	_create_handles()
@@ -33,8 +60,12 @@ func _ready():
 	set_process(true)
 
 func _process(_delta: float) -> void:
-	if _handles_changed():
-		_rebuild_pyramid()
+	var moved: Array = _changed_handles()
+	if moved.is_empty():
+		return
+	if constraint != "free":
+		_apply_constraint(moved)
+	_rebuild_pyramid()
 
 func _create_handles() -> void:
 	if not handle_nodes.is_empty():
@@ -58,6 +89,7 @@ func _create_handles() -> void:
 		handle.set_meta("pyramid_handle", name)
 		add_child(handle)
 		handle_nodes[name] = handle
+		_home_positions[name] = handle.position
 		if owner:
 			handle.owner = owner
 
@@ -181,14 +213,20 @@ func set_pyramid_size(height: float, base: float) -> void:
 	if handle_nodes.has("apex"):
 		handle_nodes["apex"].position = Vector3(0.0, height, 0.0)
 
+	for hname in HANDLE_ORDER:
+		var key: String = str(hname)
+		if handle_nodes.has(key):
+			_home_positions[key] = handle_nodes[key].position
+
 	_sync_handle_positions()
 	_rebuild_pyramid()
 
-func _handles_changed() -> bool:
+## Names of the handles the player has moved since the last rebuild.
+func _changed_handles() -> Array:
+	var changed: Array = []
 	if handle_nodes.is_empty():
-		return false
+		return changed
 
-	var changed := false
 	for name in HANDLE_ORDER:
 		if not handle_nodes.has(name):
 			continue
@@ -196,10 +234,70 @@ func _handles_changed() -> bool:
 		var pos := handle.position
 		var last_position = last_handle_positions.get(name)
 		if last_position == null or not pos.is_equal_approx(last_position):
-			changed = true
+			changed.append(str(name))
 			last_handle_positions[name] = pos
 
 	return changed
+
+## Write handle positions back so the moved handle only bought the freedom this
+## constraint allows. Never called when constraint == "free", which is the default,
+## so the original behaviour touches no positions at all.
+func _apply_constraint(moved: Array) -> void:
+	match constraint:
+		"apex_only":
+			for hname in HANDLE_ORDER:
+				if str(hname) != "apex":
+					_restore_home(str(hname))
+		"base_only":
+			_restore_home("apex")
+		"symmetric":
+			var driver: String = ""
+			for hname in moved:
+				if str(hname) != "apex":
+					driver = str(hname)
+					break
+			if driver != "":
+				_mirror_base(driver)
+			if handle_nodes.has("apex"):
+				var apex: Node3D = handle_nodes["apex"]
+				apex.position = Vector3(0.0, apex.position.y, 0.0)
+
+## The moved corner sets the half-extents; the other three take the same
+## magnitudes with their own signs, so the base stays a centred rectangle.
+func _mirror_base(driver: String) -> void:
+	if not handle_nodes.has(driver):
+		return
+	var lead: Vector3 = handle_nodes[driver].position
+	var half_x: float = abs(lead.x)
+	var half_z: float = abs(lead.z)
+	for hname in HANDLE_ORDER:
+		var key: String = str(hname)
+		if key == "apex" or not handle_nodes.has(key):
+			continue
+		var home: Vector3 = _home_positions.get(key, Vector3.ZERO)
+		var sign_x: float = -1.0 if home.x < 0.0 else 1.0
+		var sign_z: float = -1.0 if home.z < 0.0 else 1.0
+		handle_nodes[key].position = Vector3(sign_x * half_x, lead.y, sign_z * half_z)
+
+func _restore_home(hname: String) -> void:
+	if handle_nodes.has(hname) and _home_positions.has(hname):
+		handle_nodes[hname].position = _home_positions[hname]
+
+## Grid config hook. Only re-applies when the value actually changed AND the
+## handles already exist (i.e. _ready has built once) — an unguarded rebuild here
+## breaks shipped placements.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("constraint"):
+		return
+	var wanted: String = str(config_data["constraint"])
+	if wanted == constraint:
+		return
+	constraint = wanted
+	if handle_nodes.is_empty() or not is_inside_tree():
+		return
+	if constraint != "free":
+		_apply_constraint(HANDLE_ORDER.duplicate())
+	_rebuild_pyramid()
 
 func _sync_handle_positions() -> void:
 	for name in handle_nodes.keys():

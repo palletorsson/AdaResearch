@@ -1,0 +1,88 @@
+{
+ "name": "Trial_service",
+ "date": "2026-07-25",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "order": {
+   "strategy": "narrative"
+  },
+  "typology": "hall_wings",
+  "grower": "rect",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "elevation": "procession",
+  "trim_approach": false,
+  "arrival": {
+   "threshold": "none",
+   "prologue": false,
+   "overview": "none"
+  },
+  "track": {
+   "enabled": true,
+   "harvest": false
+  },
+  "doors": {
+   "enabled": true,
+   "accent": ""
+  },
+  "service": {
+   "enabled": true,
+   "in_cycle": true
+  },
+  "spans": {
+   "enabled": true,
+   "railings": true,
+   "style": "br"
+  },
+  "landmark": {
+   "enabled": true,
+   "height": 4
+  },
+  "lights": {
+   "enabled": true,
+   "every": 7
+  },
+  "principal_wall": {
+   "enabled": true,
+   "style": "hangar",
+   "cluster": "pw_primitives_portals",
+   "props": [
+    "hangar_podium",
+    "hangar_worktable",
+    "hangar_supply_pile"
+   ],
+   "kin": []
+  }
+ },
+ "score_soft": 0.525,
+ "metrics": {
+  "room_band": 0.66,
+  "enclosure": 0.1,
+  "hall": 0.08,
+  "arrival": 0.5,
+  "elevation": 0.5,
+  "compact": 0.81,
+  "tissue": 1.0,
+  "story": 1.0,
+  "aura": 0.89
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.97,
+  "tail": "OK    Trial_service  (461/476 reachable, 18 artifacts, 1 teleport(s))\n  Rule 2 [WARN] Teleport at (6,53) \u2014 row z=54 has no floor cubes to catch player\n  Rule 4 [WARN] Artifact 'mold_network' at (3,45) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ }
+}

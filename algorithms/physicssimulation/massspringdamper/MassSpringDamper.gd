@@ -32,42 +32,139 @@ var grab_anchor: StaticBody3D = null
 var mass_bodies: Array[RigidBody3D] = []
 
 # ---------------------------------------------------------------------------
-# Damping configurations
+# DNA — stage 2 (variation), promoted 2026-07-29
+# ---------------------------------------------------------------------------
+# The bench used to hard-code one argument: damping comes in THREE NAMED KINDS,
+# and here they are, side by side. Both knobs below lift that argument out of
+# the constants and let a map choose a different one.
+#
+#   spread — what the row varies, i.e. what the comparison is ABOUT
+#     "regimes"   three named categories (underdamped / critical / overdamped)
+#                 — damping as a TAXONOMY. The historical bench, unchanged.
+#     "sweep"     five masses at evenly spaced damping ratios — damping as a
+#                 CONTINUUM; the named regimes dissolve into a gradient.
+#     "stiffness" damping held at critical, k varied 10/40/160 — argues that
+#                 stiffness sets the PITCH while damping sets the DECAY.
+#
+#   regime — how many temperaments are present at once
+#     "all"       the whole row: a comparison chart.
+#     "underdamped" / "critical" / "overdamped"
+#                 a single mass, centred: a specimen, not a chart. (For the
+#                 non-taxonomic spreads these read as first / middle / last.)
+#
+# Defaults spread="regimes", regime="all" rebuild the pre-promotion bench
+# exactly — same three configs, same k/d, same colors, same x offsets.
+const SPREADS: Array = ["regimes", "sweep", "stiffness"]
+const REGIMES: Array = ["all", "underdamped", "critical", "overdamped"]
+
+@export var spread: String = "regimes"
+@export var regime: String = "all"
+
+# Set once _ready() has built the bench, so apply_grid_config() knows whether a
+# rebuild is needed or whether _ready() has yet to build for the first time.
+var _built: bool = false
+
+# ---------------------------------------------------------------------------
+# Damping configurations — built from (spread, regime) in _ready()
 # ---------------------------------------------------------------------------
 # Each entry: { label, stiffness (k), damping (d), color, x_offset }
-var configs := [
-	{
-		"label": "Underdamped",
-		"k": 40.0,
-		"d": 0.5,
-		"color": Color(0.3, 0.5, 1.0),   # Blue
-		"x": -1.5,
-	},
-	{
-		"label": "Critically Damped",
-		"k": 40.0,
-		"d": 12.0,
-		"color": Color(0.3, 1.0, 0.3),   # Green
-		"x": 0.0,
-	},
-	{
-		"label": "Overdamped",
-		"k": 40.0,
-		"d": 40.0,
-		"color": Color(1.0, 0.3, 0.3),   # Red
-		"x": 1.5,
-	},
-]
+var configs: Array = []
 
 func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
+	configs = _build_configs()
 	setup_vr_controllers()
 	create_demonstrations()
 	create_ui()
+	_built = true
 
 	print("Mass-Spring-Damper — grab a mass and release to oscillate!")
+
+# ---------------------------------------------------------------------------
+# Build the row of configurations the current genome asks for.
+# ---------------------------------------------------------------------------
+func _build_configs() -> Array:
+	var rows: Array = []
+	match spread:
+		"sweep":
+			# Damping as a continuum: five ratios from ringing to sluggish.
+			var damps: Array = [0.5, 4.0, 12.0, 24.0, 40.0]
+			var cold := Color(0.3, 0.5, 1.0)
+			var warm := Color(1.0, 0.3, 0.3)
+			for i in range(damps.size()):
+				var d_val: float = float(damps[i])
+				var t: float = float(i) / float(damps.size() - 1)
+				var col: Color = cold.lerp(warm, t)
+				var zeta: float = d_val / (2.0 * sqrt(40.0))
+				rows.append({
+					"label": "zeta=%.2f" % zeta,
+					"k": 40.0,
+					"d": d_val,
+					"color": col,
+					"x": (float(i) - 2.0) * 1.1,
+				})
+		"stiffness":
+			# Damping held constant, stiffness varied: pitch, not decay.
+			var stiffs: Array = [10.0, 40.0, 160.0]
+			var cols: Array = [
+				Color(0.6, 0.4, 1.0),
+				Color(0.3, 1.0, 0.3),
+				Color(1.0, 0.8, 0.3),
+			]
+			for i in range(stiffs.size()):
+				var k_val: float = float(stiffs[i])
+				rows.append({
+					"label": "k=%d" % int(k_val),
+					"k": k_val,
+					"d": 12.0,
+					"color": cols[i],
+					"x": (float(i) - 1.0) * 1.5,
+				})
+		_:
+			# "regimes" — the historical bench, byte for byte.
+			rows = [
+				{
+					"label": "Underdamped",
+					"k": 40.0,
+					"d": 0.5,
+					"color": Color(0.3, 0.5, 1.0),   # Blue
+					"x": -1.5,
+				},
+				{
+					"label": "Critically Damped",
+					"k": 40.0,
+					"d": 12.0,
+					"color": Color(0.3, 1.0, 0.3),   # Green
+					"x": 0.0,
+				},
+				{
+					"label": "Overdamped",
+					"k": 40.0,
+					"d": 40.0,
+					"color": Color(1.0, 0.3, 0.3),   # Red
+					"x": 1.5,
+				},
+			]
+
+	if regime == "all" or rows.size() <= 1:
+		return rows
+
+	# A single temperament, centred: a specimen rather than a comparison.
+	var pick: int = 0
+	match regime:
+		"underdamped":
+			pick = 0
+		"critical":
+			pick = int(rows.size() / 2)
+		"overdamped":
+			pick = rows.size() - 1
+		_:
+			return rows
+	var only: Dictionary = rows[pick]
+	only["x"] = 0.0
+	return [only]
 
 # ===========================================================================
 # VR controller wiring
@@ -349,4 +446,39 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config == null or config.is_empty():
+		return
+
+	var changed: bool = false
+
+	if config.has("spread"):
+		var new_spread: String = str(config["spread"]).strip_edges().to_lower()
+		if SPREADS.has(new_spread) and new_spread != spread:
+			spread = new_spread
+			changed = true
+
+	if config.has("regime"):
+		var new_regime: String = str(config["regime"]).strip_edges().to_lower()
+		if REGIMES.has(new_regime) and new_regime != regime:
+			regime = new_regime
+			changed = true
+
+	# Only rebuild when a value actually changed AND _ready() already built once.
+	# A map that passes no genome (every placement shipped before 2026-07-29)
+	# never reaches this line, so its bench is untouched.
+	if changed and _built:
+		_rebuild()
+
+# Tear the bench down and build it again at the current genome. Children are
+# removed from the tree before queue_free() so the SpringLine_<label> names are
+# free again immediately (queue_free alone defers to end of frame).
+func _rebuild() -> void:
+	release_grab()
+	mass_bodies.clear()
+	for child in get_children():
+		if child.owner == null:
+			remove_child(child)
+			child.queue_free()
+	configs = _build_configs()
+	create_demonstrations()
+	create_ui()

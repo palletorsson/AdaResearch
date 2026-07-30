@@ -30,6 +30,72 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 ## PHASE_TRANSITION mode detects order/disorder transitions via order parameters.
 ## ATTRACTOR_BASINS mode maps basin boundaries and convergence flow.
 
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA AXIS — cue
+# ═══════════════════════════════════════════════════════════════════
+#
+# What an agent actually reads before it moves. The three values are the three
+# things this artifact already argues order can come from, and until now only
+# the first of them was ever shipped: `_mode` was pinned to STIGMERGY and
+# reachable only by pressing MODE in the headset, so every placement and every
+# capture showed the deposit heatmap. An artifact built to say that order has
+# three possible sources had shipped exactly one.
+#
+#   trace      a mark left in the environment  -> STIGMERGY
+#              6 x 6 m plate carries the deposit heatmap, dim blue rising to
+#              green and yellow; 60 agent triangles ~0.12 m drift across it;
+#              order bar 0.3 x 4.8 m at x 3.3..3.6. Nothing on the left.
+#   neighbour  the agent beside it             -> PHASE_TRANSITION
+#              centre plate CLEARED; agents redraw as Ising spins coloured cyan
+#              or red by local alignment; the right-hand order bar disappears
+#              and a 2.0 x 4.8 m phase graph with an orange temperature bar
+#              appears at x -5.5..-3.5. Two metres of geometry no other value
+#              builds, and on the opposite side of the body.
+#   slope      a landscape someone else drew   -> ATTRACTOR_BASINS
+#              centre plate fills edge to edge with four flat saturated basin
+#              colours meeting along hard Voronoi seams; a full-resolution grid
+#              of flow arrows overlays it pointing into the four wells; agents
+#              redraw as basin-tinted markers; the order bar returns.
+#
+# No fourth value. A no-medium variant (all coupling off, empty field, agents on
+# pure noise) was considered and cut: a plate with nothing on it is how a render
+# scores INERT, and a blank tile is not an argument.
+#
+# `cue` is the stigmergy literature's own word for the thing an agent reads. It
+# was chosen over `mode`, `channel` and `coupling` (all already axis names
+# elsewhere in the registry, and `coupling` is this file's own declared critical
+# parameter) and over `medium`, which is a live VALUE across twenty-odd registry
+# files as a density grade. Value `trace` is deliberately spelled the same as the
+# existing `trace` elsewhere in the registry — same meaning, a mark left behind.
+# `basin` was taken by the machinelearning wave, hence `slope`.
+@export_enum("trace", "neighbour", "slope") var cue: String = "trace"
+
+## The allow-list. A token outside it is a typo and falls back to the shipped
+## default rather than half-resolving into a mode with no geometry.
+const CUES: PackedStringArray = ["trace", "neighbour", "slope"]
+
+## Every draw in the build path comes off one seeded generator, never the global
+## one. Swarms are built from noise — positions, headings, spins, attractor
+## placement — and an attractor layout that jitters between runs reads to the
+## critic as noise rather than as a value. seed()/randomize() is never called:
+## reseeding the whole process from inside one artifact is not this file's right.
+const BUILD_SEED: int = 20260730
+
+## The masthead. Info and stats boards are capped at this many rows and the plate
+## is sized for exactly this many regardless, so the plate height is fixed across
+## cue values (0.16 * 4 + 0.14 = 0.78 m).
+const BOARD_ROWS: int = 4
+const BOARD_LINE_GAP: float = 0.16
+const BOARD_PAD: float = 0.14
+const BOARD_WIDTH: float = 1.9
+
+## Basin fill opacity in `slope`. The palette entries carry alpha 0.35 because
+## the agent markers and attractor discs reuse them; the field itself has to read
+## as four FLAT SATURATED regions, which is the whole of its difference from
+## trace's dim graded heatmap.
+const BASIN_FILL_ALPHA: float = 0.85
+const BASIN_SEAM_ALPHA: float = 0.95
+
 # --- Configuration ---
 @export var agent_count: int = 60
 @export var grid_resolution: int = 40
@@ -43,8 +109,22 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var num_attractors: int = 4
 
 # --- Mode ---
+# `_mode` is now DERIVED from `cue` at the top of the build and never guessed.
+# The MODE button still cycles it in the headset — that is a live instrument, not
+# a declaration — but nothing else sets it behind the axis's back.
 enum Mode { STIGMERGY, PHASE_TRANSITION, ATTRACTOR_BASINS }
 var _mode: int = Mode.STIGMERGY
+
+# --- Lifecycle ---
+var _built: bool = false
+## Only nodes THIS script added. Freeing get_children() would take the grid's own
+## plates with it.
+var _owned: Array[Node] = []
+var _rng := RandomNumberGenerator.new()
+## Board plate faces carry emission. `emissive:false` (which curation_station
+## hands to every curated artifact) turns it off in place — the key is accepted,
+## so it has to do something.
+var _emissive: bool = true
 
 # --- Internal state ---
 var _time: float = 0.0
@@ -130,13 +210,31 @@ class AgentState:
 	var spin: float     # +1 or -1 for Ising-like alignment
 	var basin_id: int = -1
 
-	func _init(start: Vector2) -> void:
+	## Heading and spin are HANDED IN, never drawn here. An inner class calling
+	## the global randf() is exactly the unseeded draw that voids a sweep sheet.
+	func _init(start: Vector2, start_heading: float, start_spin: float) -> void:
 		pos = start
-		heading = randf() * TAU
-		spin = 1.0 if randf() > 0.5 else -1.0
+		heading = start_heading
+		spin = start_spin
 
+
+# =========================================================================
+# Lifecycle — build synchronously, return, rebuild only on a real change
+# =========================================================================
 
 func _ready() -> void:
+	_build_all()
+	_built = true
+
+
+## Everything this script puts in the tree, built from the @export values alone.
+## Synchronous and bounded: no await, no call_deferred, no loop without a fixed
+## count. This sequence has a known headless hang class (simulation artifacts
+## that never yield under --no-window) and the cure is that _ready RETURNS.
+func _build_all() -> void:
+	_rng.seed = BUILD_SEED
+	_mode = _mode_for_cue(cue)
+	_time = 0.0
 	_create_materials()
 	_create_mesh_instances()
 	_create_labels()
@@ -144,6 +242,106 @@ func _ready() -> void:
 	_init_grids()
 	_spawn_attractors()
 	_spawn_agents()
+	_reset_axis_state()
+	# Fill the ImmediateMesh surfaces NOW. Two reasons: auto-grounding measures
+	# the AABB the moment the build returns and empty surfaces measure zero, and
+	# the capturer shoots at ~1.1 s, so the axis has to be legible from the
+	# starting arrangement rather than from a settled simulation.
+	_draw_all()
+
+
+## trace / neighbour / slope -> the mode that draws them.
+func _mode_for_cue(v: String) -> int:
+	match v:
+		"neighbour":
+			return Mode.PHASE_TRANSITION
+		"slope":
+			return Mode.ATTRACTOR_BASINS
+		_:
+			return Mode.STIGMERGY
+
+
+## Scalar state that depends on which cue is in force. No simulation step is
+## taken here — `_measure_order` reads the arrangement we just spawned, which is
+## a measurement, not a pre-roll.
+func _reset_axis_state() -> void:
+	_order_history = PackedFloat32Array()
+	_susceptibility = 0.0
+	_phase_sweep_active = true
+	_phase_sweep_dir = -1.0
+	_temperature = 2.0 if _mode == Mode.PHASE_TRANSITION else 1.0
+	_measure_order()
+	if _mode == Mode.PHASE_TRANSITION:
+		# One sample so the phase graph has a value at frame zero.
+		_order_history.append(_order_parameter)
+
+
+## The order parameter of the CURRENT arrangement, per mode. Costs one pass over
+## the agents and takes no time step.
+func _measure_order() -> void:
+	match _mode:
+		Mode.PHASE_TRANSITION:
+			var total_spin: float = 0.0
+			for a in _agents:
+				var ag: AgentState = a
+				total_spin += ag.spin
+			_order_parameter = absf(total_spin) / maxf(float(_agents.size()), 1.0)
+		Mode.ATTRACTOR_BASINS:
+			var near: int = 0
+			for a in _agents:
+				var ag: AgentState = a
+				ag.basin_id = _nearest_basin(ag.pos)
+				if ag.basin_id >= 0:
+					var attr: Dictionary = _attractors[ag.basin_id]
+					if ag.pos.distance_to(attr["pos"]) < 1.5:
+						near += 1
+			_order_parameter = float(near) / maxf(float(_agents.size()), 1.0)
+		_:
+			_compute_order_parameter_clustering()
+
+
+## Index of the attractor pulling hardest at `p`, or -1 when there are none.
+func _nearest_basin(p: Vector2) -> int:
+	var best: int = -1
+	var best_pull: float = 0.0
+	for ai in range(_attractors.size()):
+		var attr: Dictionary = _attractors[ai]
+		var dir: Vector2 = attr["pos"] - p
+		var pull: float = float(attr["strength"]) / maxf(dir.length_squared(), 0.1)
+		if best < 0 or pull > best_pull:
+			best_pull = pull
+			best = ai
+	return best
+
+
+## Tear down only what this script built, then build again — inline, this frame.
+## A deferred rebuild that removes children first leaves auto-grounding measuring
+## a zero AABB and bailing out.
+func _rebuild_now() -> void:
+	for c in _owned:
+		if is_instance_valid(c):
+			remove_child(c)
+			c.queue_free()
+	_owned.clear()
+	_field_im = null
+	_field_mi = null
+	_overlay_im = null
+	_overlay_mi = null
+	_flow_im = null
+	_flow_mi = null
+	_agents_im = null
+	_agents_mi = null
+	_graph_im = null
+	_graph_mi = null
+	_header_root = null
+	_info_root = null
+	_stats_root = null
+	_control_rack = null
+	_header_cache = ""
+	_info_cache = ""
+	_stats_cache = ""
+	_label_cooldown = 0.0
+	_build_all()
 
 
 # =========================================================================
@@ -170,33 +368,44 @@ func _create_materials() -> void:
 func _create_mesh_instances() -> void:
 	_field_im = ImmediateMesh.new()
 	_field_mi = MeshInstance3D.new()
+	_field_mi.name = "StigmergyField"
 	_field_mi.mesh = _field_im
 	_field_mi.material_override = _mat_alpha
-	add_child(_field_mi)
+	_adopt(_field_mi)
 
 	_overlay_im = ImmediateMesh.new()
 	_overlay_mi = MeshInstance3D.new()
+	_overlay_mi.name = "BasinOverlay"
 	_overlay_mi.mesh = _overlay_im
 	_overlay_mi.material_override = _mat_alpha
-	add_child(_overlay_mi)
+	_adopt(_overlay_mi)
 
 	_flow_im = ImmediateMesh.new()
 	_flow_mi = MeshInstance3D.new()
+	_flow_mi.name = "FlowField"
 	_flow_mi.mesh = _flow_im
 	_flow_mi.material_override = _mat_alpha
-	add_child(_flow_mi)
+	_adopt(_flow_mi)
 
 	_agents_im = ImmediateMesh.new()
 	_agents_mi = MeshInstance3D.new()
+	_agents_mi.name = "Agents"
 	_agents_mi.mesh = _agents_im
 	_agents_mi.material_override = _mat_unshaded
-	add_child(_agents_mi)
+	_adopt(_agents_mi)
 
 	_graph_im = ImmediateMesh.new()
 	_graph_mi = MeshInstance3D.new()
+	_graph_mi.name = "SideGadget"
 	_graph_mi.mesh = _graph_im
 	_graph_mi.material_override = _mat_unshaded
-	add_child(_graph_mi)
+	_adopt(_graph_mi)
+
+
+## add_child + remember. The remembering is what makes _rebuild_now safe.
+func _adopt(n: Node) -> void:
+	add_child(n)
+	_owned.append(n)
 
 
 # =========================================================================
@@ -204,23 +413,37 @@ func _create_mesh_instances() -> void:
 # =========================================================================
 
 func _create_labels() -> void:
-	# Three framed dark boards (R-027): header (title + mode) at the top,
-	# info at the lower left, stats at the lower right. Board content is
-	# baked text, rebuilt only when the string changes (see _update_labels).
+	# Three framed dark boards (R-027) baked as plates, NOT Label3D — so
+	# LabelFramer never sees them and there is nothing here for it to fight. What
+	# had to be fixed is the boards crossing the axis's own geometry:
+	#
+	#   was: InfoBoard  (-3.6, -3.0) spanned x -4.575..-2.625, landing ON TOP of
+	#        neighbour's phase graph at x -5.5..-3.5.
+	#   was: StatsBoard (+3.6, -3.0) spanned x 2.625..4.575, landing on top of
+	#        the order bar at x 3.3..3.6 at both trace and slope.
+	#
+	# Now both sit ABOVE the field and INSIDE its width: at field_size 6 the
+	# header plate 3.2 x 0.62 m spans y 3.29..3.91, clearing the field's top edge
+	# at y 3.0 by 0.29 m, and the two boards (1.9 m wide, 0.78 m tall for four
+	# rows) span y 3.97..4.75 at x -2.625..-0.675 and +0.675..+2.625 — clear of
+	# the left graph (x < -3.5) and the right bar (x > 3.3) at EVERY cue value.
+	# Their 1.35 m horizontal gap is eight times the merge gap, and they are not
+	# Label3D in any case, so the three read as one masthead by arrangement
+	# rather than by fusion.
 	_header_root = Node3D.new()
 	_header_root.name = "HeaderBoard"
 	_header_root.position = Vector3(0, field_size * 0.5 + 0.6, 0)
-	add_child(_header_root)
+	_adopt(_header_root)
 
 	_info_root = Node3D.new()
 	_info_root.name = "InfoBoard"
-	_info_root.position = Vector3(-field_size * 0.5 - 0.6, -field_size * 0.5, 0)
-	add_child(_info_root)
+	_info_root.position = Vector3(-field_size * 0.275, field_size * 0.5 + 1.36, 0)
+	_adopt(_info_root)
 
 	_stats_root = Node3D.new()
 	_stats_root.name = "StatsBoard"
-	_stats_root.position = Vector3(field_size * 0.5 + 0.6, -field_size * 0.5, 0)
-	add_child(_stats_root)
+	_stats_root.position = Vector3(field_size * 0.275, field_size * 0.5 + 1.36, 0)
+	_adopt(_stats_root)
 
 	_update_labels()
 
@@ -243,16 +466,22 @@ func _rebuild_board(root: Node3D, text: String, color: Color) -> void:
 	for child in root.get_children():
 		child.queue_free()
 	var rows: PackedStringArray = text.split("\n")
-	var line_h := 0.12
-	var gap := 0.16
-	root.add_child(_plate(Vector3(1.9, gap * rows.size() + 0.14, 0.05)))
-	var y := gap * 0.5 * (rows.size() - 1)
+	# Cap at four rows and size the plate for four regardless, so the plate
+	# height is FIXED across cue values. Otherwise a three-row stats board at
+	# slope would be a different-sized object from a four-row one at trace, and
+	# the masthead would flinch when the axis changes.
+	while rows.size() > BOARD_ROWS:
+		rows.remove_at(rows.size() - 1)
+	var line_h: float = 0.12
+	root.add_child(_plate(Vector3(
+		BOARD_WIDTH, BOARD_LINE_GAP * float(BOARD_ROWS) + BOARD_PAD, 0.05)))
+	var y: float = BOARD_LINE_GAP * 0.5 * float(rows.size() - 1)
 	for r in rows:
 		var line: MeshInstance3D = BakedText.make_label_mesh(str(r), color, Vector2(1.7, line_h), 1300, true)
 		if line:
 			line.position = Vector3(0, y, 0.035)
 			root.add_child(line)
-		y -= gap
+		y -= BOARD_LINE_GAP
 
 
 func _plate(size: Vector3) -> Node3D:
@@ -273,12 +502,35 @@ func _plate(size: Vector3) -> Node3D:
 	face.mesh = bm
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(0.10, 0.11, 0.14)
-	mat.emission_enabled = true
+	# Honour the current emissive state at creation as well as in place —
+	# _rebuild_board makes a fresh plate every time the readout text changes.
+	mat.emission_enabled = _emissive
 	mat.emission = Color(0.10, 0.11, 0.14)
 	mat.emission_energy_multiplier = 0.25
 	face.material_override = mat
+	face.set_meta("board_face", true)
 	g.add_child(face)
 	return g
+
+
+## `emissive:false` from a map or from curation_station turns the board glow off
+## across all three boards, including plates rebuilt later. Stateless walk, so it
+## stays correct after any number of text rebuilds.
+func _apply_emissive() -> void:
+	for root in [_header_root, _info_root, _stats_root]:
+		if root != null and is_instance_valid(root):
+			_apply_emissive_to(root)
+
+
+func _apply_emissive_to(n: Node) -> void:
+	if n is MeshInstance3D and n.has_meta("board_face"):
+		var mi: MeshInstance3D = n
+		var m: Material = mi.material_override
+		if m is StandardMaterial3D:
+			var sm: StandardMaterial3D = m
+			sm.emission_enabled = _emissive
+	for c in n.get_children():
+		_apply_emissive_to(c)
 
 
 # =========================================================================
@@ -291,9 +543,11 @@ func _create_vr_controls() -> void:
 		[{"type": "slider_h", "label": "NOISE", "default": noise_level}, {"type": "slider_h", "label": "COUPLING", "default": coupling_strength / 3.0}],
 		[{"type": "button", "label": "MODE"}, {"type": "button", "label": "RESET"}],
 	])
+	if _control_rack == null:
+		return
 	_control_rack.position = Vector3(0, -field_size * 0.5 - 1.0, 0)
 	_control_rack.rotation_degrees = Vector3(-25, 0, 0)
-	add_child(_control_rack)
+	_adopt(_control_rack)
 
 	var noise_slider: Node = _control_rack.find_child("Param_0", true, false)
 	if noise_slider and noise_slider.has_signal("slider_moved"):
@@ -316,14 +570,16 @@ func _create_vr_controls() -> void:
 			area.button_pressed.connect(func(_b): _on_reset_pressed())
 
 
+## The headset's MODE button walks the axis rather than going behind it: `cue`
+## follows `_mode` so the declared value never disagrees with what is on screen.
+## No node rebuild is needed — all five mesh instances exist at every value and
+## it is the draw path that differs.
 func _on_mode_pressed() -> void:
 	_mode = (_mode + 1) % 3
-	if _mode == Mode.PHASE_TRANSITION:
-		_temperature = 2.0
-		_phase_sweep_active = true
-		_phase_sweep_dir = -1.0
-		_order_history = PackedFloat32Array()
+	cue = CUES[_mode]
+	_reset_axis_state()
 	_update_labels()
+	_draw_all()
 
 
 func _on_reset_pressed() -> void:
@@ -418,16 +674,21 @@ func _evaporate_field() -> void:
 # =========================================================================
 
 func _spawn_attractors() -> void:
+	# Seeded, so slope's four colour regions and its flow field land in the same
+	# place on every run. An attractor layout that jitters between builds reads to
+	# the critic as noise rather than as a value.
 	_attractors.clear()
 	var half := field_size * 0.35
 	for i in range(num_attractors):
 		var angle := float(i) / num_attractors * TAU + 0.4
-		var dist := half * (0.6 + randf() * 0.4)
+		var dist := half * (0.6 + _rng.randf() * 0.4)
 		_attractors.append({
 			"pos": Vector2(cos(angle) * dist, sin(angle) * dist),
 			"color": BASIN_COLORS[i % BASIN_COLORS.size()],
-			"strength": 1.5 + randf() * 1.0,
+			"strength": 1.5 + _rng.randf() * 1.0,
 		})
+	# Bounded: grid_resolution^2 cells, no convergence loop. Complete before the
+	# first frame, which is why slope needs no pre-roll.
 	_compute_basin_grid()
 
 
@@ -467,21 +728,22 @@ func _spawn_agents() -> void:
 	_agents.clear()
 	var half := field_size * 0.4
 	for i in range(agent_count):
-		var pos := Vector2(randf_range(-half, half), randf_range(-half, half))
-		_agents.append(AgentState.new(pos))
+		var pos := Vector2(_rng.randf_range(-half, half), _rng.randf_range(-half, half))
+		var heading: float = _rng.randf() * TAU
+		var spin: float = 1.0 if _rng.randf() > 0.5 else -1.0
+		_agents.append(AgentState.new(pos, heading, spin))
 
 
+## The RESET button in the headset. Re-seeds, so pressing it returns the exact
+## arrangement the artifact was built with rather than a new random one.
 func _reset_simulation() -> void:
+	_rng.seed = BUILD_SEED
+	_time = 0.0
 	_init_grids()
 	_spawn_attractors()
 	_spawn_agents()
-	_order_parameter = 0.0
-	_order_history = PackedFloat32Array()
-	_susceptibility = 0.0
-	_temperature = 1.0 if _mode != Mode.PHASE_TRANSITION else 2.0
-	_phase_sweep_active = true
-	_phase_sweep_dir = -1.0
-	_time = 0.0
+	_reset_axis_state()
+	_draw_all()
 
 
 # =========================================================================
@@ -535,8 +797,9 @@ func _update_stigmergy_mode(delta: float) -> void:
 		elif s_right > s_fwd and s_right > s_left:
 			agent.heading += 0.4 * delta * agent_speed
 
-		# Random wander
-		agent.heading += (randf() - 0.5) * noise_level * 2.0 * delta
+		# Random wander — off the seeded generator, never the global one. This
+		# artifact must not consume or reseed the process-wide RNG stream.
+		agent.heading += (_rng.randf() - 0.5) * noise_level * 2.0 * delta
 
 		# Move
 		var vel := Vector2(cos(agent.heading), sin(agent.heading)) * agent_speed
@@ -590,7 +853,7 @@ func _update_phase_transition_mode(delta: float) -> void:
 
 		# Metropolis-like spin flip: probability based on energy difference
 		var delta_energy := 2.0 * agent.spin * local_field
-		if delta_energy < 0.0 or randf() < exp(-delta_energy / maxf(_temperature, 0.01)):
+		if delta_energy < 0.0 or _rng.randf() < exp(-delta_energy / maxf(_temperature, 0.01)):
 			agent.spin = -agent.spin
 
 		# Gentle drift to visualize clusters
@@ -660,7 +923,7 @@ func _update_attractor_basins_mode(delta: float) -> void:
 		agent.basin_id = best_attr
 
 		# Add noise for exploration
-		force += Vector2(randf() - 0.5, randf() - 0.5) * noise_level * 2.0
+		force += Vector2(_rng.randf() - 0.5, _rng.randf() - 0.5) * noise_level * 2.0
 
 		# Move
 		agent.pos += force.normalized() * agent_speed * delta
@@ -673,7 +936,7 @@ func _update_attractor_basins_mode(delta: float) -> void:
 		for ai in range(_attractors.size()):
 			var attr: Dictionary = _attractors[ai]
 			if agent.pos.distance_to(attr["pos"]) < 0.25:
-				agent.pos = Vector2(randf_range(-half, half), randf_range(-half, half))
+				agent.pos = Vector2(_rng.randf_range(-half, half), _rng.randf_range(-half, half))
 				agent.basin_id = -1
 				break
 

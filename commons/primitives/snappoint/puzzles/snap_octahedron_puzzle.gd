@@ -7,7 +7,7 @@ class_name SnapOctahedronPuzzle
 # critical_parameter: 6 snap target positions — form a regular octahedron at ±1 on each axis
 # triggers: snapping all 6 snap points to their targets → puzzle complete signal fires
 # emerges: the dual relationship to the cube — realizing these 6 positions are the face-centers of a cube
-# needs: [missing VR controls besides snapping — no label or slider]
+# needs: the cube this thing is the dual OF, visible rather than asserted [has, 2026-07-29 — the `dual` axis]. Missing: VR controls besides snapping — no label or slider.
 # relationships: extends SnapPointPuzzleBase; sibling to snap_tetrahedron_puzzle; grab_octahedron is its held version
 # truth: the octahedron is the cube's dual — swap faces and vertices and you get the other
 
@@ -51,6 +51,42 @@ class_name SnapOctahedronPuzzle
 
 const SOLIDS: PackedStringArray = ["loose", "closed", "scattered", "short"]
 
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — axis `dual` (promoted 2026-07-29)
+# ═══════════════════════════════════════════════════════════════════
+#
+# This artifact's own truth statement is "the octahedron is the cube's dual — swap
+# faces and vertices and you get the other", and its `emerges` line promises the
+# learner will realise "these 6 positions are the face-centers of a cube". No cube
+# has ever been in the scene. The claim was carried entirely by the label and by
+# whatever the player already knew; the object asserted a relation it never showed.
+# Same failure the sibling `apex` promotion fixed: a truth frozen out of reach.
+#
+# `dual` is the knob that assertion hides: WHICH SIDE OF THE DUALITY IS DRAWN.
+#
+#   off     the shipped look — duality asserted, never shown
+#   around  the cube whose six FACE CENTRES are the octahedron's vertices
+#   inside  the cube whose eight VERTICES are the octahedron's face centres
+#   both    both cubes at once — the duality does not terminate, it nests
+#
+# `both` is the value that earns the axis. Taught once, duality reads as a pair of
+# solids swapping roles. Drawn twice at two scales around one octahedron it stops
+# being a pair and becomes a LADDER: every dual has a dual, and the reciprocal that
+# looked like an identity is a step. That is a different argument from `around`,
+# and it is the argument the sequence actually wants.
+#
+# Orthogonal to `solid` on purpose. The cube is the ideal frame, so it can stand
+# around a scattered arrangement (the answer's frame with no answer in it) or around
+# the `short` outline (the dual survives a vertex the figure has lost).
+
+## Which side of the octahedron-cube duality is actually drawn.
+## off = the shipped scene, nothing added. around = the circumscribing cube whose six
+## face centres are the six vertices. inside = the inscribed cube whose eight corners
+## are the octahedron's eight face centres. both = both, showing duality nests.
+@export_enum("off", "around", "inside", "both") var dual: String = "off"
+
+const DUALS: PackedStringArray = ["off", "around", "inside", "both"]
+
 # ── Geometry ───────────────────────────────────────────────────────
 ## Centre of the puzzle volume in local space — the .tscn's boundary sphere origin.
 const CENTRE: Vector3 = Vector3(0.0, 0.70, 0.0)
@@ -81,6 +117,35 @@ const GHOST_STUB: float = 0.55
 ## The puzzle's amber — the same colour _apply_puzzle_materials gives the points, so
 ## the built edges read as belonging to the points rather than as scaffolding.
 const AMBER: Color = Color(1.0, 0.8, 0.3, 1.0)
+
+## The dual cube's cyan — the boundary sphere's own colour, so the cube reads as part
+## of the frame around the puzzle rather than as more of the puzzle's amber structure.
+const CYAN: Color = Color(0.3, 0.8, 1.0, 1.0)
+
+## Circumscribing cube: half-side equals the octahedron's circumradius, which is exactly
+## what puts each of the six vertices at the centre of one cube face. Corners land
+## 0.20 * sqrt(3) = 0.346 m from CENTRE, inside the 0.40 m shipped boundary radius, so
+## `around` needs no boundary resize and the measured footprint does not move.
+const DUAL_HALF: float = SOLID_R
+
+## Inscribed cube: an octahedron face centre is (R, 0, 0), (0, R, 0), (0, 0, R) averaged,
+## i.e. R/3 on each axis — so the eight face centres are the corners of a cube of
+## half-side R/3. The other direction of the same reciprocity.
+const INNER_HALF: float = SOLID_R / 3.0
+
+## Dual struts are thinner than the solid's own 0.012 m edges: the cube is the relation,
+## not the figure, and must not out-weigh what it is a relation to.
+const DUAL_D: float = 0.008
+const INNER_D: float = 0.005
+
+## Corner signs, as a table rather than nested sign loops — an untyped loop variable
+## multiplied into a Vector3 is the compile trap this codebase keeps hitting.
+const CUBE_SIGNS: Array = [
+	Vector3(-1.0, -1.0, -1.0), Vector3(-1.0, -1.0, 1.0),
+	Vector3(-1.0, 1.0, -1.0), Vector3(-1.0, 1.0, 1.0),
+	Vector3(1.0, -1.0, -1.0), Vector3(1.0, -1.0, 1.0),
+	Vector3(1.0, 1.0, -1.0), Vector3(1.0, 1.0, 1.0),
+]
 
 ## Where each snap point goes when the solid is built, as an offset from CENTRE.
 ## The four equatorial points rotate 45° onto the four horizontal axis vertices —
@@ -149,6 +214,7 @@ var _reset_timer_shipped: bool = true
 
 func _ready() -> void:
 	solid = _pick_axis(solid, SOLIDS, "loose")
+	dual = _pick_axis(dual, DUALS, "off")
 	_reset_timer_shipped = enable_reset_timer
 
 	# A non-default arrangement must survive the 60 s reset. _store_initial_positions
@@ -242,6 +308,7 @@ func _build_all() -> void:
 			_build_short()
 		_:
 			_build_loose()
+	_build_dual()
 
 
 ## loose — the pre-promotion look, untouched. The six points stay on the transforms
@@ -340,6 +407,60 @@ func _octahedron_edges() -> Array:
 				continue  # antipodal — not an edge
 			edges.append([a, b])
 	return edges
+
+
+# ═══════════════════════════════════════════════════════════════════
+# DUAL — the cube the six points have always been about
+# ═══════════════════════════════════════════════════════════════════
+
+## Builds nothing at all on the default, so an `off` placement takes exactly the code
+## path it took before this axis existed.
+func _build_dual() -> void:
+	if dual == "off":
+		return
+	if dual == "around" or dual == "both":
+		_add_cube(DUAL_HALF, DUAL_D * 0.5, _make_dual_material())
+	if dual == "inside" or dual == "both":
+		_add_cube(INNER_HALF, INNER_D * 0.5, _make_dual_material())
+
+
+func _add_cube(half: float, radius: float, mat: StandardMaterial3D) -> void:
+	for edge in _cube_edges(half):
+		var a: Vector3 = edge[0]
+		var b: Vector3 = edge[1]
+		_add_strut(CENTRE + a, CENTRE + b, radius, mat)
+
+
+## The twelve edges as corner pairs: two corners are joined exactly when they differ on
+## one axis, which is when their distance is the full side length. Derived from the same
+## sign table the corners come from, so edges cannot drift from vertices.
+func _cube_edges(half: float) -> Array:
+	var corners: Array = []
+	for i in range(CUBE_SIGNS.size()):
+		var sign_vec: Vector3 = CUBE_SIGNS[i]
+		corners.append(sign_vec * half)
+	var side: float = half * 2.0
+	var edges: Array = []
+	for i in range(corners.size()):
+		for j in range(i + 1, corners.size()):
+			var a: Vector3 = corners[i]
+			var b: Vector3 = corners[j]
+			if absf(a.distance_to(b) - side) < 0.0001:
+				edges.append([a, b])
+	return edges
+
+
+func _make_dual_material() -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.albedo_color = Color(CYAN.r, CYAN.g, CYAN.b, 0.75)
+	m.metallic = 0.2
+	m.roughness = 0.4
+	m.emission_enabled = _emissive_on
+	m.emission = CYAN
+	m.emission_energy_multiplier = 1.2
+	_dna_materials.append(m)
+	return m
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -492,9 +613,13 @@ func _set_point_present(point: Node3D, present: bool) -> void:
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	var before_solid: String = solid
+	var before_dual: String = dual
 
 	if config_data.has("solid"):
 		solid = _pick_axis(str(config_data["solid"]), SOLIDS, solid)
+
+	if config_data.has("dual"):
+		dual = _pick_axis(str(config_data["dual"]), DUALS, dual)
 
 	# Applied IN PLACE, before any early return — curation_station calls
 	# apply_grid_config({"emissive": false}) with no axis key, and an accepted key that
@@ -505,15 +630,19 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	if not _built:
 		return
-	if solid == before_solid:
+	# Rebuild ONLY on a real change, and only after _ready has built once. A placement
+	# that passes no axis key — or passes the value it already has — must not be torn
+	# down and reassembled, or every shipped map pays for this axis existing.
+	if solid == before_solid and dual == before_dual:
 		return
 
 	# Same reasoning as _ready: only the shipped arrangement may be reset out from
-	# under itself, because the reset restores exactly that arrangement.
+	# under itself, because the reset restores exactly that arrangement. `dual` adds
+	# nothing to this — it never moves a snap point, so it cannot be undone by a reset.
 	enable_reset_timer = _reset_timer_shipped and solid == "loose"
 
 	_rebuild_now()
-	print("[SnapOctahedronPuzzle] Config applied — solid=%s" % [solid])
+	print("[SnapOctahedronPuzzle] Config applied — solid=%s dual=%s" % [solid, dual])
 
 
 ## Free ONLY what this script made, put the scene's own children back the way they

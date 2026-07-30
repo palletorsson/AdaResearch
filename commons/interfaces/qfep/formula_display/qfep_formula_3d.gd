@@ -11,7 +11,7 @@ class_name QFEPFormula3D
 # critical_parameter: highlighted_term — which term pulses brightest. The book-role privileges φΔE(S,t): it is the queer generative term, the OPEN one, the part of the equation that is never closed off. Highlighting it is highlighting the dark spot the formula deliberately leaves un-sealed.
 # triggers: highlight_term() intensifies one symbol; on_lambda_changed/on_phi_changed shift term colours to match live system state — the formula re-reads itself as the sliders move, order↔edge↔chaos and resist↔embrace.
 # emerges: the formula reads differently depending on which term is lit — the whole changes meaning with focus. Under φΔE it stops being a static balance sheet (F minus its entropy cost) and becomes a becoming: entropy as a function of time, the rate of change welcomed rather than penalised.
-# needs: VR term touch selection [missing], slider connections [missing]
+# needs: VR term touch selection [missing], slider connections [missing], apply_grid_config so a map can choose the emphasis and the posture [has]
 # relationships: the assembled centrepiece of [[qfeplaboratory]] ("the formula assembled") and the closing figure of [[postfoundationscrisis]] ("the closing") — load-bearing across three book chapters; depends on [[lambda_slider]], [[phi_slider]]; gathers every QFEP term the curriculum has taught into one place.
 # book_role: thesis artifact. QFE = F − λE(S) + φΔE(S,t) is the book's own argument made walkable — F is the order the reader has been building, λE(S) is what that order costs in foreclosed possibility, and φΔE(S,t) is the term that refuses to close: the generative dark spot, the queer surplus, entropy still in motion.
 # truth: the formula is not an equation to solve but a lens to see every system through — and it stays deliberately open. φΔE(S,t) is the dark spot left un-sealed on purpose: the place where change is not a cost to minimise but a generativity to keep. A closed formula would foreclose; this one is written to stay breathing.
@@ -30,6 +30,23 @@ const COLOR_OPERATOR := Color(0.7, 0.7, 0.7)  # Gray - operators
 const GENERATIVE_TERMS := ["phi", "delta", "E_rate"]
 const GENERATIVE_IDLE_BONUS := 0.25
 
+# --- DNA (promoted 2026-07-29, stage 2) -------------------------------------
+# posture: the stance of the equation in space — how a reader meets it.
+#   line (shipped) one horizontal row, centred: the formula as a printed sentence
+#   stack  one term per row: the formula as a balance sheet, terms as line items
+#   arc    bent around the reader: the formula as a lens you stand at the focus of
+#   ring   closed circle: no vantage shows the whole equation at once — a horizon
+# emphasis: which term is lit from the start, i.e. which reading the room argues.
+#   none (shipped) nothing highlighted until something calls highlight_term()
+#   phi/delta/E_rate  the generative dark spot, the formula as becoming
+#   lambda/E          the cost, the formula as accounting
+#   F / QFE           the order, or the result
+const POSTURES: Array = ["line", "stack", "arc", "ring"]
+const EMPHASES: Array = ["none", "QFE", "F", "lambda", "E", "phi", "delta", "E_rate"]
+
+@export_enum("line", "stack", "arc", "ring") var posture: String = "line"
+@export_enum("none", "QFE", "F", "lambda", "E", "phi", "delta", "E_rate") var emphasis: String = "none"
+
 # Animation settings
 @export var animate := true
 @export var pulse_speed := 2.0
@@ -43,6 +60,12 @@ const GENERATIVE_IDLE_BONUS := 0.25
 var term_nodes: Dictionary = {}
 var materials: Dictionary = {}
 
+# Arrangement bookkeeping — filled by _add_term, consumed by _arrange
+var _term_order: Array[String] = []
+var _term_start: Dictionary = {}
+var _term_width: Dictionary = {}
+var _built: bool = false
+
 # Current highlight
 var highlighted_term := ""
 
@@ -53,7 +76,9 @@ signal term_selected(term_name: String)
 func _ready():
 	_create_formula()
 	_setup_materials()
-	
+	_apply_emphasis()
+	_built = true
+
 	# Add to interactable group
 	add_to_group("interactable")
 	add_to_group("qfep_display")
@@ -101,11 +126,56 @@ func _create_formula():
 	# E(S,t)
 	x_offset = _add_term("E_rate", "E(S,t)", x_offset, COLOR_E)
 	
-	# Center the formula
-	var total_width = x_offset
-	for child in get_children():
-		if child is MeshInstance3D:
-			child.position.x -= total_width / 2.0
+	# Arrange — `line` is the shipped centring pass, untouched
+	_arrange(x_offset)
+
+
+## The posture axis. `line` runs the original centring loop verbatim, so every
+## existing placement of this artifact reads exactly as it did before promotion.
+func _arrange(total_width: float) -> void:
+	match posture:
+		"stack":
+			_arrange_stack()
+		"arc":
+			_arrange_curved(total_width, deg_to_rad(110.0))
+		"ring":
+			_arrange_curved(total_width, TAU)
+		_:
+			# Center the formula
+			for child in get_children():
+				if child is MeshInstance3D:
+					child.position.x -= total_width / 2.0
+
+
+## One term per row — the equation as a list of items rather than a sentence.
+func _arrange_stack() -> void:
+	var row: float = font_size * 1.5
+	var count: int = _term_order.size()
+	for i in range(count):
+		var term_id: String = _term_order[i]
+		var mesh_instance: MeshInstance3D = term_nodes[term_id]
+		var w: float = float(_term_width[term_id])
+		mesh_instance.position = Vector3(
+			-w / 2.0,
+			(float(count - 1) / 2.0 - float(i)) * row,
+			0.0
+		)
+		mesh_instance.rotation = Vector3.ZERO
+
+
+## Bend the line around the reader. Each term keeps its place in the reading
+## order but is turned to face the centre — at TAU the equation closes on itself
+## and no single vantage holds all of it.
+func _arrange_curved(total_width: float, sweep: float) -> void:
+	var span: float = max(total_width, 0.001)
+	var radius: float = max(span / max(sweep, 0.001), font_size * 2.0)
+	for i in range(_term_order.size()):
+		var term_id: String = _term_order[i]
+		var mesh_instance: MeshInstance3D = term_nodes[term_id]
+		var center_x: float = float(_term_start[term_id]) + float(_term_width[term_id]) / 2.0
+		var a: float = (center_x / span - 0.5) * sweep
+		mesh_instance.position = Vector3(sin(a) * radius, 0.0, cos(a) * radius)
+		mesh_instance.rotation = Vector3(0.0, a + PI, 0.0)
 
 func _add_term(term_id: String, text: String, x_pos: float, color: Color) -> float:
 	var mesh_instance := MeshInstance3D.new()
@@ -131,12 +201,16 @@ func _add_term(term_id: String, text: String, x_pos: float, color: Color) -> flo
 	add_child(mesh_instance)
 	term_nodes[term_id] = mesh_instance
 	materials[term_id] = material
-	
+
 	# Calculate width for next term position
 	# Approximate width based on text length
 	var char_width: float = font_size * 0.6
 	var term_width: float = text.length() * char_width
-	
+
+	_term_order.append(term_id)
+	_term_start[term_id] = x_pos
+	_term_width[term_id] = term_width
+
 	return x_pos + term_width
 
 func _setup_materials():
@@ -165,6 +239,62 @@ func _process(_delta):
 				base_energy += GENERATIVE_IDLE_BONUS
 
 		mat.emission_energy_multiplier = base_energy
+
+# --- Grid config ------------------------------------------------------------
+
+## Grid hook. `emphasis` is applied IN PLACE — it only moves the highlight, so it
+## never needs a rebuild. `posture` rebuilds the geometry, but ONLY when it really
+## changed and only after _ready has built once: an unguarded rebuild here would
+## free the terms out from under every shipped placement.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_posture: String = posture
+
+	if config_data.has("posture"):
+		posture = _pick_axis(str(config_data["posture"]), POSTURES, posture)
+	if config_data.has("emphasis"):
+		var want: String = _pick_axis(str(config_data["emphasis"]), EMPHASES, emphasis)
+		if want != emphasis:
+			emphasis = want
+			if _built:
+				_apply_emphasis()
+
+	if not _built:
+		return
+	if posture == before_posture:
+		return
+	_rebuild_now()
+
+
+## Accept an axis value only if it names something we actually build.
+## Case-insensitive on the way in, canonical on the way out — the term ids are
+## mixed case ("QFE", "E_rate") and must survive the round trip.
+func _pick_axis(raw: String, allowed: Array, fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	for a in allowed:
+		if str(a).to_lower() == v:
+			return str(a)
+	return fallback
+
+
+func _apply_emphasis() -> void:
+	highlighted_term = "" if emphasis == "none" else emphasis
+
+
+func _rebuild_now() -> void:
+	for term_id in term_nodes:
+		var node: Node = term_nodes[term_id]
+		if is_instance_valid(node):
+			remove_child(node)
+			node.queue_free()
+	term_nodes.clear()
+	materials.clear()
+	_term_order.clear()
+	_term_start.clear()
+	_term_width.clear()
+	_create_formula()
+	_setup_materials()
+	_apply_emphasis()
+
 
 # Highlight a specific term
 func highlight_term(term_name: String):

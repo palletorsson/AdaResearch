@@ -1,0 +1,406 @@
+{
+	"map_info": {
+		"name": "Trial_eye_Chamber_Noise",
+		"lookup_name": "Trial_eye_Chamber_Noise",
+		"description": "No weapon, no creature. You sculpt the terrain with Perlin noise. The landscape rises and falls. You are making a world.\n\n[Placement applied hybrid engine \u2014 constraint 0.947\u21920.947, walkability 0.659\u21920.912]",
+		"dimensions": {
+			"width": 11,
+			"depth": 7,
+			"max_height": 2
+		},
+		"title": "Trial_eye_Chamber_Noise",
+		"eye_shot_of": "Chamber_Noise",
+		"version": "placed-hybrid"
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"enter_type": "I"
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Return to Lab",
+			"description": "Sequence complete",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"layers": {
+		"structure": [
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0"
+			]
+		],
+		"utilities": [
+			[
+				"sp",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t"
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"catalyst_target",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"science_screen:180:1.5#mode:field",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"biome": [
+			[
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				""
+			],
+			[
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"flora:scatter:field:on=dwell:seed",
+				"",
+				""
+			],
+			[
+				"",
+				"flora:scatter:field:on=catalyst:seed",
+				"",
+				"flora:scatter:field:on=catalyst:seed",
+				"",
+				"",
+				"",
+				"flora:scatter:field:on=catalyst:seed",
+				"",
+				"flora:scatter:field:on=catalyst:seed",
+				""
+			],
+			[
+				"",
+				"",
+				"",
+				"",
+				"",
+				"flora:scatter:field:on=touch:seed",
+				"",
+				"",
+				"",
+				"",
+				""
+			],
+			[
+				"",
+				"",
+				"mineral:tint:field:on=touch:seed",
+				"",
+				"",
+				"",
+				"flora:scatter:field:on=touch:seed",
+				"",
+				"mineral:tint:field:on=touch:seed",
+				"",
+				""
+			],
+			[
+				"",
+				"",
+				"",
+				"flora:scatter:field:on=touch:seed",
+				"",
+				"",
+				"flora:scatter:field:on=touch:seed",
+				"flora:scatter:field",
+				"flora:scatter:field:on=touch:seed/claim",
+				"flora:scatter:field",
+				""
+			],
+			[
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"flora:scatter:field",
+				"",
+				""
+			]
+		]
+	}
+}

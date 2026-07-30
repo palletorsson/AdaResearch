@@ -18,6 +18,44 @@ const PARTICLE_FOLLOW := 0.35
 const PARTICLE_DAMPING := 0.985
 const PARTICLE_VERTICAL_LIMIT := 0.35
 
+# ---------------------------------------------------------------------------
+# DNA — stage 2 (variation), promoted 2026-07-29
+# ---------------------------------------------------------------------------
+# The @identity already named the parameter space: "the swirl-to-radial ratio in
+# _field_value()... determines whether the field spirals inward, orbits, or
+# ejects", and asked for a way to blend the two. These two knobs are that.
+#
+#   field — what instruction space is written with
+#     "spiral"  swirl with a weak inward pull (the historical field, exactly)
+#               — the particle circles AND falls: it never repeats a path.
+#     "orbit"   pure swirl, no radial term — closed circles. The field keeps
+#               you, forever, at the radius you arrived with.
+#     "sink"    pure inward radial — no rotation. Every start ends at the
+#               centre; the field is a drain and origin is destiny.
+#     "source"  pure outward radial — the field is an exile. Nothing stays.
+#
+#   lattice — how the invisible instruction is made visible
+#     "square"  the 9x9 Cartesian grid of arrows (historical).
+#     "polar"   concentric rings of samples — shows the field's OWN symmetry
+#               instead of the grid's; the square lattice was already an
+#               argument about what kind of space this is.
+#     "hidden"  no arrows at all. Only the tracer moves, and the field must be
+#               inferred from behaviour rather than read off a diagram.
+const FIELD_MODES: Array = ["spiral", "orbit", "sink", "source"]
+const LATTICES: Array = ["square", "polar", "hidden"]
+
+# Per-mode (swirl gain, radial gain). "spiral" reproduces the pre-promotion
+# formula exactly: Vector3(-z, breath, x) - position * 0.1.
+const FIELD_GAINS: Dictionary = {
+	"spiral": Vector2(1.0, 0.1),
+	"orbit": Vector2(1.0, 0.0),
+	"sink": Vector2(0.0, 1.0),
+	"source": Vector2(0.0, -1.0),
+}
+
+@export var field: String = "spiral"
+@export var lattice: String = "square"
+
 var field_vectors: Array[Node3D] = []  # kept for compatibility but unused with MultiMesh
 var particle: Node3D
 var particle_velocity: Vector3 = Vector3.ZERO
@@ -62,11 +100,26 @@ func _input(event: InputEvent) -> void:
 			particle_velocity = Vector3.ZERO
 
 func _create_field_vectors() -> void:
-	# Compute grid origins
+	# Compute sample origins for the chosen lattice
 	_field_origins.clear()
-	for x in range(-GRID_RANGE, GRID_RANGE + 1):
-		for z in range(-GRID_RANGE, GRID_RANGE + 1):
-			_field_origins.append(Vector3(x * GRID_SPACING, 0.0, z * GRID_SPACING))
+	match lattice:
+		"polar":
+			# Concentric rings: the field's own symmetry rather than the grid's.
+			_field_origins.append(Vector3.ZERO)
+			for ring in range(1, GRID_RANGE + 1):
+				var radius: float = float(ring) * GRID_SPACING
+				var spokes: int = 4 + ring * 4
+				for s in range(spokes):
+					var ang: float = TAU * float(s) / float(spokes)
+					_field_origins.append(Vector3(cos(ang) * radius, 0.0, sin(ang) * radius))
+		"hidden":
+			# No arrows: the field is inferred from the tracer, not displayed.
+			pass
+		_:
+			# "square" — the historical 9x9 Cartesian grid.
+			for x in range(-GRID_RANGE, GRID_RANGE + 1):
+				for z in range(-GRID_RANGE, GRID_RANGE + 1):
+					_field_origins.append(Vector3(x * GRID_SPACING, 0.0, z * GRID_SPACING))
 	_field_count = _field_origins.size()
 
 	# Arrow shafts — unit cylinder scaled per instance
@@ -155,12 +208,15 @@ func _update_field_vectors() -> void:
 		head_mm.set_instance_transform(i, Transform3D(head_basis, head_pos))
 
 func _field_value(position: Vector3) -> Vector3:
+	var gains: Vector2 = FIELD_GAINS.get(field, FIELD_GAINS["spiral"])
+	var swirl_gain: float = gains.x
+	var radial_gain: float = gains.y
 	var swirl = Vector3(
-		-position.z,
+		-position.z * swirl_gain,
 		FIELD_VERTICAL_OSCILLATION * sin(elapsed * FIELD_VERTICAL_FREQUENCY),
-		position.x
+		position.x * swirl_gain
 	)
-	var radial = position * 0.1
+	var radial = position * radial_gain
 	return (swirl - radial).limit_length(2.5)
 
 func _create_particle_marker() -> Node3D:
@@ -221,4 +277,37 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# NOTE: deliberately does not chain to VectorSceneBase.apply_grid_config().
+	# This scene builds inline in _ready() rather than overriding build_scene(),
+	# so the base rebuild() would tear it down and rebuild nothing. That was true
+	# before this promotion and is unchanged by it.
+	if config == null or config.is_empty():
+		return
+
+	if config.has("field"):
+		var new_field: String = str(config["field"]).strip_edges().to_lower()
+		if FIELD_MODES.has(new_field):
+			# Read fresh every frame by _field_value(); no rebuild needed.
+			field = new_field
+
+	if config.has("lattice"):
+		var new_lattice: String = str(config["lattice"]).strip_edges().to_lower()
+		# Only touch the arrows when the value actually CHANGED and the scene has
+		# already been built. Placements that pass no genome never get here, so
+		# their 81-arrow square grid is bit-identical to before.
+		if LATTICES.has(new_lattice) and new_lattice != lattice:
+			lattice = new_lattice
+			if _field_shaft_mm_instance != null:
+				_rebuild_field_arrows()
+
+# Free the two MultiMeshInstance3D arrow layers and lay out the new lattice.
+func _rebuild_field_arrows() -> void:
+	var layers: Array = [_field_shaft_mm_instance, _field_head_mm_instance]
+	for i in range(layers.size()):
+		var mm: Node = layers[i]
+		if mm != null and is_instance_valid(mm):
+			remove_child(mm)
+			mm.queue_free()
+	_field_shaft_mm_instance = null
+	_field_head_mm_instance = null
+	_create_field_vectors()

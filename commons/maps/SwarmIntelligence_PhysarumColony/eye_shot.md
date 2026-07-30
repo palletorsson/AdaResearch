@@ -4,13 +4,13 @@
 
 ## The ride (before)
 clearance violations: **1 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] science_screen:180:1.5#mode:scatter <-> PhysarumColony             gap -21.38m (centers 4.12m)`
+- `[OVERLAP] science_screen:180:1.5#mode:scatter <-> PhysarumColony             gap -21.03m (centers 4.47m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.084
-      walkability improved: 1/1  mean Δ=+0.064
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
 no sibling kept — the move did not beat the ride (overlaps 1→1, tight 0→0). Note-only.
 

@@ -12,6 +12,28 @@ extends Node3D
 # relationships: the seed of the whole primitives sequence — a line joins two points, a triangle closes three, a cube stacks eight
 # truth: a point is position without extension — everything is built from nothing
 
+# --- DNA (promoted 2026-07-29, stage 2) ------------------------------------------------
+# The point had no exports at all: a hard-coded Label3D, billboarded, yellow, 0.1 above the
+# sphere, printing the sphere's GLOBAL position under the caption "local position:". Two of
+# those constants are arguments, not styling.
+#
+# frame — which origin the point measures itself from. "world" prints the shipped string
+#   (caption and all, including its inherited lie); "local" makes the caption true by
+#   reporting displacement from where the point was placed, so at rest it reads (0.0, 0.0,
+#   0.0) and only moving gives it a number; "grid" quantises to whole cells — the snap-to-grid
+#   reading the @identity above names as missing; "mute" keeps the point and takes the address
+#   away, which is the counter-claim: position without report.
+# attach — how the address binds to the world. "float" is the shipped billboard that always
+#   turns to the reader; "stake" fixes the tag in world orientation so you must walk around
+#   it; "plate" lays it flat on the ground beneath, where the address belongs to the place
+#   rather than to the thing.
+#
+# Defaults frame=world + attach=float reproduce the pre-promotion label exactly — the same
+# format string, the same global position, the same offset, billboard and colour — so the
+# maps already placing a point are unchanged.
+@export_enum("world", "local", "grid", "mute") var frame: String = "world"
+@export_enum("float", "stake", "plate") var attach: String = "float"
+
 var position_label: Label3D
 var grab_sphere: Node3D
 var point_sphere: MeshInstance3D
@@ -42,14 +64,70 @@ func setup_point_scene():
 	# Add label as child of the grab sphere so it follows the point
 	grab_sphere.add_child(position_label)
 
+	_apply_label_style()
+
+func _apply_label_style() -> void:
+	# Posture of the readout only — never rebuilds the label, so a config arriving after
+	# _ready re-poses the same node instead of replacing it.
+	if position_label == null:
+		return
+	position_label.visible = frame != "mute"
+	match attach:
+		"stake":
+			position_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+			position_label.position = Vector3(0.0, 0.22, 0.0)
+			position_label.rotation_degrees = Vector3.ZERO
+			position_label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+		"plate":
+			position_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+			position_label.position = Vector3(0.0, -0.06, 0.0)
+			position_label.rotation_degrees = Vector3(-90.0, 0.0, 0.0)
+			position_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		_:
+			position_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			position_label.position = Vector3(0.0, 0.1, 0.0)
+			position_label.rotation_degrees = Vector3.ZERO
+			position_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+
 func get_position_text() -> String:
 	# Use the grab sphere's global position since the label is now a child of it
 	var pos = global_position
 	if grab_sphere:
 		pos = grab_sphere.global_position
 
+	# if/elif rather than match: every branch returns, and the analyzer must be able to see
+	# that without relying on a wildcard being read as exhaustive.
+	if frame == "mute":
+		return ""
+	if frame == "local":
+		var offset: Vector3 = pos - global_position
+		return "offset: (%.1f, %.1f, %.1f)" % [offset.x, offset.y, offset.z]
+	if frame == "grid":
+		return "cell: (%d, %d, %d)" % [int(round(pos.x)), int(round(pos.y)), int(round(pos.z))]
+
 	# Format numbers to always show exactly one decimal place
 	return "local position: (%.1f, %.1f, %.1f)" % [pos.x, pos.y, pos.z]
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.is_empty():
+		return
+
+	var changed: bool = false
+	if config_data.has("frame"):
+		var want_frame: String = str(config_data["frame"]).strip_edges().to_lower()
+		if want_frame in ["world", "local", "grid", "mute"] and want_frame != frame:
+			frame = want_frame
+			changed = true
+	if config_data.has("attach"):
+		var want_attach: String = str(config_data["attach"]).strip_edges().to_lower()
+		if want_attach in ["float", "stake", "plate"] and want_attach != attach:
+			attach = want_attach
+			changed = true
+
+	# Guarded: only when a value actually changed, and only once the label exists.
+	if changed and position_label != null:
+		_apply_label_style()
+		position_label.text = get_position_text()
 
 func _process(_delta):
 	# Update position text continuously

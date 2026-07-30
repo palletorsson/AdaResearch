@@ -7,10 +7,10 @@ clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 - `[tight  ] godel_statement_plaque:0:1.2:1 <-> provability_sorter:0:1:1   gap +0.41m (centers 1.41m)`
 
 ## The move
-        new_placements = fn(room, artifacts, rng)
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 1283, in strategy_humanoid_walker
-        for r in range(room.depth - d + 1):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 0/1  mean Δ=-0.034
+      walkability improved: 0/1  mean Δ=-0.057
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1). Note-only.
 

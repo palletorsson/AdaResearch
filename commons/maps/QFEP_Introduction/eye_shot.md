@@ -3,17 +3,21 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 2 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] phi_slider:0:0.5           <-> science_screen:180:1.5#mode:wave gap +0.41m (centers 1.41m)`
-- `[tight  ] science_screen:180:1.5#mode:wave <-> grab_sphere_lambda:0:0.3   gap +0.00m (centers 1.00m)`
+clearance violations: **0 overlaps, 6 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] tt:qfep_introduction:180:0.5 <-> qfep_balance_workbench:0:0 gap +0.00m (centers 1.00m)`
+- `[tight  ] tt:qfep_introduction:180:0.5 <-> phi_slider:0:0.5           gap +1.00m (centers 2.00m)`
+- `[tight  ] qfep_balance_workbench:0:0 <-> grab_sphere_F:0:0.3        gap +1.00m (centers 2.00m)`
+- `[tight  ] qfep_balance_workbench:0:0 <-> phi_slider:0:0.5           gap +0.00m (centers 1.00m)`
+- `[tight  ] grab_sphere_F:0:0.3        <-> lambda_slider:0:0.5        gap +0.00m (centers 1.00m)`
+- `[tight  ] grab_sphere_E:0:0.3        <-> grab_sphere_lambda:0:0.3   gap +0.00m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.182
-      walkability improved: 0/1  mean Δ=-0.026
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→6). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 6→6). Note-only.
 
 ## The voice (qfep)
 9 of 9 cast members carry a theory-claim; 0 mute.
@@ -24,8 +28,8 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→6)
 
 ## The text vs the space
 walked.md exists — the writing names 8/9 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: grab_sphere_lambda, phi_slider sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: grab_sphere_E, grab_sphere_F, grab_sphere_lambda, lambda_slider, phi_slider, qfep_balance_workbench, tt sit in clearance violations — the text promises what the floor obstructs.
 - space without text: science_screen — standing in the room, absent from the walk.
 
 ## The heuristic understanding
-The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
+The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

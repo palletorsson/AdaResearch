@@ -4,17 +4,17 @@
 
 ## The ride (before)
 clearance violations: **4 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] boids_aquarium             <-> boid_manager               gap -6.66m (centers 4.00m)`
-- `[tight  ] boid_flocking              <-> science_screen:180:1.5#mode:scatter gap +1.00m (centers 2.00m)`
-- `[OVERLAP] boid_flocking              <-> boid_manager               gap -4.90m (centers 5.66m)`
-- `[OVERLAP] science_screen:180:1.5#mode:scatter <-> boid_manager               gap -3.34m (centers 7.21m)`
-- `[OVERLAP] boid_manager               <-> boids_2d_in_3d             gap -7.55m (centers 4.00m)`
+- `[OVERLAP] boid_flocking              <-> boid_manager               gap -3.85m (centers 6.71m)`
+- `[OVERLAP] science_screen:180:1.5#mode:scatter <-> boid_manager               gap -2.74m (centers 7.81m)`
+- `[tight  ] boids_aquarium             <-> boids_2d_in_3d             gap +0.72m (centers 2.83m)`
+- `[OVERLAP] boids_aquarium             <-> boid_manager               gap -8.42m (centers 2.24m)`
+- `[OVERLAP] boids_2d_in_3d             <-> boid_manager               gap -8.55m (centers 3.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.009
-      walkability improved: 1/1  mean Δ=+0.006
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
 no sibling kept — the move did not beat the ride (overlaps 4→4, tight 1→1). Note-only.
 

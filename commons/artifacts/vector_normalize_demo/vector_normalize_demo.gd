@@ -18,11 +18,40 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 class_name VectorNormalizeDemo
 
+## DNA (stage 2 — variation, promoted 2026-07-29)
+##   input_mode      — the vector you are handed. The @identity names input
+##                     magnitude as the critical parameter: a long V is
+##                     compressed to unit, a short V is stretched to unit, a
+##                     unit V is left alone. Direction is held fixed across all
+##                     three, so only the claim about magnitude varies.
+##   reference_mode  — what "length one" is measured against: a shell you can
+##                     see, three great circles, or nothing but the readout.
+## Both defaults reproduce the pre-promotion artifact exactly.
+
+const INPUT_MODES: Array[String] = ["long", "short", "unit"]
+const REFERENCE_MODES: Array[String] = ["sphere", "rings", "none"]
+
+## The vector handed to the learner (all three share one direction).
+##   long  — (1.2, 0.8, 0.4), |V| ≈ 1.49: normalization shrinks it (shipped)
+##   short — the same direction at |V| ≈ 0.37: normalization grows it
+##   unit  — already length 1: normalization is a no-op, its fixed point
+@export_enum("long", "short", "unit") var input_mode: String = "long"
+
+## How unit length is shown.
+##   sphere — translucent unit shell plus three wireframe rings (shipped)
+##   rings  — the three great circles alone; unit-ness as outline, not volume
+##   none   — no reference geometry; |V̂| = 1.000 is claimed only by the numbers
+@export_enum("sphere", "rings", "none") var reference_mode: String = "sphere"
+
+const BASE_INPUT: Vector3 = Vector3(1.2, 0.8, 0.4)
+
 var vector_v: Node3D
 var unit_vector: Node3D
 var unit_sphere: MeshInstance3D
 var info_label: Label
 var unit_label: Label3D
+var _ring_nodes: Array[Node3D] = []
+var _ring_materials: Array[StandardMaterial3D] = []
 
 # Cached references
 var _cached_vector_nodes: Dictionary = {}
@@ -39,7 +68,7 @@ func _ready():
 	_create_unit_sphere()
 	
 	# Main vector - faded (original)
-	vector_v = spawn_vector(Vector3.ZERO, Vector3(1.2, 0.8, 0.4), Color(0.5, 0.5, 0.6, 0.6), "Vector V")
+	vector_v = spawn_vector(Vector3.ZERO, _input_vector(), Color(0.5, 0.5, 0.6, 0.6), "Vector V")
 	
 	# Unit vector - bright green
 	unit_vector = spawn_vector(Vector3.ZERO, Vector3(1, 0, 0), Color(0.2, 1.0, 0.5, 1.0), "Unit V", false)
@@ -87,6 +116,10 @@ func _create_unit_sphere():
 	_create_wireframe_ring(Vector3.UP, Color(0.4, 0.4, 0.5, 0.25))
 	_create_wireframe_ring(Vector3.RIGHT, Color(0.4, 0.4, 0.5, 0.25))
 	_create_wireframe_ring(Vector3.FORWARD, Color(0.4, 0.4, 0.5, 0.25))
+
+	# The reference geometry is always built and only ever hidden, so any mode
+	# stays reachable later without tearing the scene down.
+	_apply_reference_visibility()
 
 func _create_wireframe_ring(normal: Vector3, color: Color):
 	var segments = 48
@@ -155,6 +188,8 @@ func _create_wireframe_ring(normal: Vector3, color: Color):
 	mmi.material_override = mat
 
 	environment_root.add_child(mmi)
+	_ring_nodes.append(mmi)
+	_ring_materials.append(mat)
 
 func _process(_delta):
 	var vec = _get_vector_fast(vector_v, _cached_vector_nodes)
@@ -232,6 +267,55 @@ func _on_sphere_opacity_changed():
 	var val = _sphere_slider.get_normalized_value()
 	if unit_sphere and unit_sphere.material_override:
 		unit_sphere.material_override.albedo_color.a = val * 0.15
+	# With the shell hidden the slider would be dead, so it drives the rings
+	# instead — at the slider's 0.5 rest position they keep their built alpha.
+	if reference_mode == "rings":
+		for mat in _ring_materials:
+			mat.albedo_color.a = val * 0.5
 
+# ── DNA plumbing ──────────────────────────────────────────────────────────────
+
+func _input_vector() -> Vector3:
+	if input_mode == "short":
+		return BASE_INPUT * 0.25
+	if input_mode == "unit":
+		return BASE_INPUT.normalized()
+	return BASE_INPUT
+
+func _apply_input_vector() -> void:
+	# spawn_vector's convention: the end handle sits at vector * SCENE_SCALE.
+	var end_node: Node3D = _cached_vector_nodes.get("end")
+	if end_node == null:
+		return
+	end_node.position = _input_vector() * SCENE_SCALE
+	var line_container: Node3D = _cached_vector_nodes.get("line_container")
+	if line_container and line_container.has_method("refresh_connections"):
+		line_container.refresh_connections()
+
+func _apply_reference_visibility() -> void:
+	if unit_sphere:
+		unit_sphere.visible = (reference_mode == "sphere")
+	var rings_on: bool = (reference_mode != "none")
+	for ring in _ring_nodes:
+		if is_instance_valid(ring):
+			ring.visible = rings_on
+
+## Grid config arrives deferred, after _ready(). Nothing here rebuilds the
+## scene: both axes are re-applied in place, so an existing placement that
+## passes no config (or a config naming neither axis) is left exactly as built.
+## Deliberately does NOT chain to the base apply_grid_config — this demo builds
+## inline in _ready() rather than in build_scene(), so the base's rebuild() path
+## would blank it.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	if config_data == null or config_data.is_empty():
+		return
+	if config_data.has("input_mode"):
+		var new_input: String = str(config_data["input_mode"]).strip_edges().to_lower()
+		if INPUT_MODES.has(new_input) and new_input != input_mode:
+			input_mode = new_input
+			_apply_input_vector()
+	if config_data.has("reference_mode"):
+		var new_ref: String = str(config_data["reference_mode"]).strip_edges().to_lower()
+		if REFERENCE_MODES.has(new_ref) and new_ref != reference_mode:
+			reference_mode = new_ref
+			_apply_reference_visibility()

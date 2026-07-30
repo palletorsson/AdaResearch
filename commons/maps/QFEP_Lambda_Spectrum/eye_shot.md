@@ -3,16 +3,17 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] edge_particles:0:0.8       <-> complexity_pattern:0:0.8   gap +1.00m (centers 2.00m)`
+clearance violations: **0 overlaps, 2 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] dissolving_form:0:0.5      <-> ordered_grid:0:0.5         gap +0.00m (centers 1.00m)`
+- `[tight  ] complexity_pattern:0:0.8   <-> crystal_formation:0:0.5    gap +0.00m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.097
-      walkability improved: 1/1  mean Δ=+0.071
+      constraint improved: 1/1  mean Δ=+0.009
+      walkability improved: 0/1  mean Δ=-0.079
 
-no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→2). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→2). Note-only.
 
 ## The voice (qfep)
 7 of 7 cast members carry a theory-claim; 0 mute.
@@ -23,7 +24,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→2)
 
 ## The text vs the space
 walked.md exists — the writing names 7/7 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: complexity_pattern, edge_particles sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: complexity_pattern, crystal_formation, dissolving_form, ordered_grid sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

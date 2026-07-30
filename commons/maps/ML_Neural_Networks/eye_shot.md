@@ -8,19 +8,18 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.133
-      walkability improved: 1/1  mean Δ=+0.211
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.350
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
-3 of 3 cast members carry a theory-claim; 0 mute.
-- **learn_world_stacked** — Multiple models stacked, each learning from the layer below — the chapter's architecture-of-architectures, whe
+2 of 2 cast members carry a theory-claim; 0 mute.
 - **neural_network_visualization** — Neural networks learn F-models through gradient descent — each weight update reduces prediction error. Overfit
 - **neural_networks_vr** — The network turned inside out and made walkable — weights hanging in the air as visible thicknesses, activatio
 
 ## The text vs the space
-walked.md exists — the writing names 3/3 of the cast; dwells declared for 0.
+walked.md exists — the writing names 2/2 of the cast; dwells declared for 0.
 - the text and the space cover each other — the walk as written is the walk as built.
 
 ## The heuristic understanding

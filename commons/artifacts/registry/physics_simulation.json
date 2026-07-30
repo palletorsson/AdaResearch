@@ -7483,6 +7483,26 @@
     "size_group": "xlarge"
    },
    "qfep_connection": "Classical F with damping — the spring IS F (restoring order), the damper IS lambda (how fast chaos dissipates). Three regimes at three damping ratios: underdamped, critical, overdamped.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "spread": [
+      "regimes",
+      "sweep",
+      "stiffness"
+     ],
+     "regime": [
+      "all",
+      "underdamped",
+      "critical",
+      "overdamped"
+     ]
+    },
+    "default": "spread=regimes, regime=all - rebuilds the pre-promotion configs array byte for byte (k=40 with d=0.5/12/40, blue/green/red, x=-1.5/0/+1.5), so all 7 existing placements render exactly as before; apply_grid_config only rebuilds when a genome key actually changes the value and _ready already built once",
+    "was": "the three damping regimes hard-coded in a configs array literal - the bench could only ever make one argument, that damping comes in three named kinds",
+    "note": "hand promotion 2026-07-29 - the runner refused it for NO TURNABLE KNOBS. spread chooses what the row is ABOUT (taxonomy of three regimes / a continuum sweep of five damping ratios / stiffness varied at fixed damping, i.e. pitch rather than decay). regime chooses whether the bench is a comparison chart or a single centred specimen."
+   },
    "scene": "res://algorithms/physicssimulation/massspringdamper/massspringdamper.tscn",
    "sequence": "forces",
    "size_group": "xlarge",
@@ -8265,6 +8285,26 @@
    "qfep_connection": "E(S) from F — each particle obeys deterministic forces, but thousands of them produce statistical behavior. Individual determinism creates collective entropy.",
    "scene": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
    "scene_path": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "cast": [
+      "all",
+      "fountain",
+      "fire",
+      "sparks",
+      "snow"
+     ],
+     "arrangement": [
+      "grid",
+      "row",
+      "ring"
+     ]
+    },
+    "default": "cast=all, arrangement=grid - the four original corner positions verbatim, so the 7 existing placements are unchanged",
+    "was": "zero exports and an apply_grid_config whose body was pass: always the whole four-up taxonomy, always a 12x9x11 square of ground, even when the map wanted one fire"
+   },
    "sequence": "forces",
    "size_group": "xlarge",
    "tags": [

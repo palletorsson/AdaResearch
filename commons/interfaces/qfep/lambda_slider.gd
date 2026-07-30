@@ -19,6 +19,56 @@ class_name LambdaSlider
 # relationships: controls edge_core, qfep_reactor, queer_morphology_specimen; paired with phi_slider; central to every QFEP map
 # truth: lambda is the entropy drive — the dial between crystallization and dissolution that every living system must negotiate
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-07-27) — ONE AXIS, TWO FILES. phi_slider.gd carries
+# the same `calibration` token with the same five values. The pair is the QFEP
+# formula's own parameters made grabbable; it would be incoherent for them to
+# speak different vocabularies about the same question.
+#
+#   calibration   WHAT THE SCALE CLAIMS ABOUT WHERE THE RIGHT VALUE LIES
+#                 optimum · band · dispute · gap · none
+#
+# WHY THIS, AND NOT A REGISTER OR AN EXPOSURE AXIS. A slider is not a thing in a
+# room and not a machine you operate. It is a claim that a quantity is
+# continuous, ordered, and yours to set. For λ — a term in an epistemology, not a
+# quantity — that claim is the whole argument, and the argument's limit is that
+# there is no standard to calibrate it against. There is no metre bar in Sèvres
+# for how much a system should value disorder. An instrument's authority comes
+# from its calibration chain; this one's chain ends nowhere, and today's build
+# covers that by painting the answer on in green.
+#
+# WHAT EACH VALUE DOES WITH THE PART IT CANNOT REPRESENT — the sieve's third
+# question, which is what decides whether this is a family or a menu:
+#   optimum  HIDES it.     One apex, coloured in. The question is settled, so the
+#                          working face has nothing to argue and stays blank.
+#   band     BOUNDS it.    Correctness is a tolerance, not a number. The claim
+#                          survives, with its width admitted.
+#   dispute  EXHIBITS it.  Three schools, three optima, none dominant. The
+#                          disagreement becomes the thing the instrument shows.
+#   gap      LEAVES A HOLE. The rail is cut where the recommended value sits. The
+#                          scale cannot hold the position it recommends, and the
+#                          word EDGE ends up labelling rail that is not there.
+#   none     BUILDS THERE. An even ruler. Every position equally warranted, no
+#                          colour argument at all. You have to site yourself.
+#
+# calibration=optimum is the legacy lineage, segment for segment: ten gradient
+# boxes at their old sizes, positions, colours, emission 0.3 and alpha 0.6, the
+# rail in its old grey, and the scale plate the other four inscribe is not built
+# at all. All 23 placements are untouched.
+#
+# WHAT IT COST. The rail is no longer built in one readable pass — five branches
+# now stand between a reader and the answer to "what colour is a segment". And
+# `optimum`'s blank working face, which used to be merely an unbuilt surface, is
+# now legible as a CLAIM (nothing to show because nothing is in doubt). That is a
+# real foreclosure: this object can no longer be innocent about its confidence.
+#
+# NOT ROUTED THROUGH calibration: the λ value, its range, the colour meanings
+# (blue order / green edge / red chaos), the three word-marks, and every
+# threshold in is_at_edge() and get_state_description(). The regions the variants
+# bracket, flag and cut are READ OUT of those thresholds, never invented — this
+# pass stages the curriculum's last claims, it does not edit them.
+# ─────────────────────────────────────────────────────────────────────────────
+
 ## Signal emitted when lambda value changes
 signal lambda_changed(value: float)
 

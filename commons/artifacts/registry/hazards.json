@@ -727,6 +727,24 @@
     "testmaps"
    ],
    "name": "Armadillo Eggling",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "posture": [
+      "ball",
+      "walker"
+     ],
+     "pursuit": [
+      "chase",
+      "patrol",
+      "flee"
+     ]
+    },
+    "default": "posture=ball, pursuit=chase - the exact pre-promotion body: the default pair delegates straight to super._process_roll_state(), so the 8 existing placements are unchanged",
+    "was": "zero exports of its own - the base droideka with every weapon switched off in _ready(), hard-coded to roll at the player as a sealed ball and hurt on touch",
+    "reads": "posture opens the shell without giving it a gun (the deployment was never the weapon); pursuit decides whether the threat is an agent, terrain, or prey"
+   },
    "scene": "res://commons/hazards/armadillo_droideka/armadillo_eggling.tscn",
    "sequence": "randomness",
    "size_group": "standard",

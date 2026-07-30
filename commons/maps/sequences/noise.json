@@ -12,161 +12,161 @@
     "randomness"
    ],
    "unlocks": [
-    "proceduralgeneration",
+	"proceduralgeneration",
     "morphogenesis"
    ],
    "difficulty": "intermediate",
    "estimated_time": "30-40 minutes",
    "learning_objectives": [
-    "Noise as structured entropy: randomness with continuity constraints",
-    "White noise vs. smooth noise: the Î» spectrum of coherence",
-    "Octaves as fractal layering: multiple scales of structured randomness",
-    "Perlin/Simplex: grid + gradient + interpolation algorithms",
-    "Vector fields: noise as flow direction",
+	"Noise as structured entropy: randomness with continuity constraints",
+	"White noise vs. smooth noise: the Î» spectrum of coherence",
+	"Octaves as fractal layering: multiple scales of structured randomness",
+	"Perlin/Simplex: grid + gradient + interpolation algorithms",
+	"Vector fields: noise as flow direction",
     "Procedural generation: noise as substrate for worlds"
    ],
    "content": [
-    "Random_Noise_Types: White Noise vs Blue Noise",
-    "Noise_Columns: Noise Extruded to Terrain",
-    "Noise_One: Coherent Noise Fundamentals",
-    "Noise_Voxel: Noise Carved into Blocks",
-    "Noise_6_Wall: Fractal Octave Layering",
-    "Noise_Inside_Noise: Domain Warping",
-    "Noise_Space_10: Noise Parameter Space",
-    "Noise_Perlin_Simplex: Perlin vs Simplex",
-    "Chamber_Noise: The Walker Writes the Field",
+	"Random_Noise_Types: White Noise vs Blue Noise",
+	"Noise_Columns: Noise Extruded to Terrain",
+	"Noise_One: Coherent Noise Fundamentals",
+	"Noise_Voxel: Noise Carved into Blocks",
+	"Noise_6_Wall: Fractal Octave Layering",
+	"Noise_Inside_Noise: Domain Warping",
+	"Noise_Space_10: Noise Parameter Space",
+	"Noise_Perlin_Simplex: Perlin vs Simplex",
+	"Chamber_Noise: The Walker Writes the Field",
     "Lab_Path: Return Corridor"
    ],
    "maps": [
-    "Random_Noise_Types",
-    "Noise_Columns",
-    "Noise_One",
-    "Noise_Voxel",
-    "Noise_6_Wall",
-    "Noise_Inside_Noise",
-    "Noise_Space_10",
-    "Noise_Perlin_Simplex",
-    "Chamber_Noise",
+	"Random_Noise_Types",
+	"Noise_Columns",
+	"Noise_One",
+	"Noise_Voxel",
+	"Noise_6_Wall",
+	"Noise_Inside_Noise",
+	"Noise_Space_10",
+	"Noise_Perlin_Simplex",
+	"Chamber_Noise",
     "Lab_Path"
    ],
    "deferred_maps": [
-    "Noise_Blue",
-    "Noise_Functions",
+	"Noise_Blue",
+	"Noise_Functions",
     "Noise_Volume"
    ],
    "axiom_files": [
-    "res://commons/context/clipboard/tutorial_text/noise_axioms.md",
+	"res://commons/context/clipboard/tutorial_text/noise_axioms.md",
     "res://commons/context/clipboard/tutorial_text/perlin_axioms.md"
    ],
    "algorithm_paths": {
-    "Noise_Perlin_Simplex": "res://algorithms/noise/",
-    "VectorFieldFlow": "res://algorithms/vectors/flowfield/"
+	"Noise_Perlin_Simplex": "res://algorithms/noise/",
+	"VectorFieldFlow": "res://algorithms/vectors/flowfield/"
    },
    "return_to": "lab",
    "lab_map": "Lab/map_data_post_noise",
    "unlock_requirements": [],
    "completion_rewards": [
-    "noise_architect_badge",
-    "coherent_chaos_badge",
-    "procedural_mind_badge",
+	"noise_architect_badge",
+	"coherent_chaos_badge",
+	"procedural_mind_badge",
     "flow_field_badge"
    ],
    "artifact_groups": [
-    {
-     "map": "Random_Noise_Types",
-     "position": "intro",
-     "artifacts": [
-      "randompoint",
-      "randompoints",
+	{
+	 "map": "Random_Noise_Types",
+	 "position": "intro",
+	 "artifacts": [
+	  "randompoint",
+	  "randompoints",
       "dark_sphere"
-     ],
-     "size_budget": "compact_only",
-     "rationale": "White noise vs blue noise comparison; introduces structured randomness concept"
-    },
-    {
-     "map": "Noise_Columns",
-     "position": "intro",
-     "artifacts": [
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "White noise vs blue noise comparison; introduces structured randomness concept"
+	},
+	{
+	 "map": "Noise_Columns",
+	 "position": "intro",
+	 "artifacts": [
       "dark_sphere"
-     ],
-     "size_budget": "compact_only",
-     "rationale": "3D Perlin noise as erosion sculptor on classical columns; visual intro to coherent noise"
-    },
-    {
-     "map": "Noise_One",
-     "position": "foundation",
-     "artifacts": [
-      "noisetorus",
-      "noiselayers",
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "3D Perlin noise as erosion sculptor on classical columns; visual intro to coherent noise"
+	},
+	{
+	 "map": "Noise_One",
+	 "position": "foundation",
+	 "artifacts": [
+	  "noisetorus",
+	  "noiselayers",
       "dark_sphere"
-     ],
-     "size_budget": "mixed",
-     "rationale": "Noise octaves and fractal summation through interactive torus and layered visualization"
-    },
-    {
-     "map": "Noise_Voxel",
-     "position": "exploration",
-     "artifacts": [
-      "perlin_terrain_sculptor",
-      "voxelnoise",
+	 ],
+	 "size_budget": "mixed",
+	 "rationale": "Noise octaves and fractal summation through interactive torus and layered visualization"
+	},
+	{
+	 "map": "Noise_Voxel",
+	 "position": "exploration",
+	 "artifacts": [
+	  "perlin_terrain_sculptor",
+	  "voxelnoise",
       "dark_sphere"
-     ],
-     "size_budget": "environment",
-     "rationale": "Continuous noise discretized into voxel space; procedural terrain generation algorithm"
-    },
-    {
-     "map": "Noise_6_Wall",
-     "position": "exploration",
-     "artifacts": [
-      "shader_noise_space",
+	 ],
+	 "size_budget": "environment",
+	 "rationale": "Continuous noise discretized into voxel space; procedural terrain generation algorithm"
+	},
+	{
+	 "map": "Noise_6_Wall",
+	 "position": "exploration",
+	 "artifacts": [
+	  "shader_noise_space",
       "dark_sphere"
-     ],
-     "size_budget": "mixed",
-     "rationale": "GPU-based shader noise: hash functions and massively parallel noise computation"
-    },
-    {
-     "map": "Noise_Inside_Noise",
-     "position": "integration",
-     "artifacts": [
-      "dark_sphere",
+	 ],
+	 "size_budget": "mixed",
+	 "rationale": "GPU-based shader noise: hash functions and massively parallel noise computation"
+	},
+	{
+	 "map": "Noise_Inside_Noise",
+	 "position": "integration",
+	 "artifacts": [
+	  "dark_sphere",
       "noisesphere"
-     ],
-     "size_budget": "mixed",
-     "rationale": "Domain warping: noise modulating noise coordinates for organic swirling patterns"
-    },
-    {
-     "map": "Noise_Space_10",
-     "position": "integration",
-     "artifacts": [
-      "dark_sphere",
+	 ],
+	 "size_budget": "mixed",
+	 "rationale": "Domain warping: noise modulating noise coordinates for organic swirling patterns"
+	},
+	{
+	 "map": "Noise_Space_10",
+	 "position": "integration",
+	 "artifacts": [
+	  "dark_sphere",
       "noise_space"
-     ],
-     "size_budget": "mixed",
-     "rationale": "Interactive noise parameter manipulation with real-time visualization"
-    },
-    {
-     "map": "Noise_Perlin_Simplex",
-     "position": "synthesis",
-     "artifacts": [
-      "simplex_noise",
-      "perlin_noise",
-      "noise_terrain",
-      "dark_sphere",
-      "perlin_noise_terrain",
+	 ],
+	 "size_budget": "mixed",
+	 "rationale": "Interactive noise parameter manipulation with real-time visualization"
+	},
+	{
+	 "map": "Noise_Perlin_Simplex",
+	 "position": "synthesis",
+	 "artifacts": [
+	  "simplex_noise",
+	  "perlin_noise",
+	  "noise_terrain",
+	  "dark_sphere",
+	  "perlin_noise_terrain",
       "configurable_portal"
-     ],
-     "size_budget": "environment",
-     "rationale": "Culmination comparing Perlin vs Simplex with terrain generation; portal back to lab"
-    },
-    {
-     "map": "Lab_Path",
-     "position": "synthesis",
-     "artifacts": [
+	 ],
+	 "size_budget": "environment",
+	 "rationale": "Culmination comparing Perlin vs Simplex with terrain generation; portal back to lab"
+	},
+	{
+	 "map": "Lab_Path",
+	 "position": "synthesis",
+	 "artifacts": [
       "dark_sphere"
-     ],
-     "size_budget": "compact_only",
-     "rationale": "Transition corridor back to lab; minimal navigation-only map"
-    }
+	 ],
+	 "size_budget": "compact_only",
+	 "rationale": "Transition corridor back to lab; minimal navigation-only map"
+	}
    ]
   }
  },

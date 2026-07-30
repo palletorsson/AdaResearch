@@ -1055,6 +1055,26 @@
       "tags": [
         "vector"
       ],
+      "dna": {
+        "promoted": "2026-07-29",
+        "stage": "2 - variation",
+        "axes": {
+          "field": [
+            "spiral",
+            "orbit",
+            "sink",
+            "source"
+          ],
+          "lattice": [
+            "square",
+            "polar",
+            "hidden"
+          ]
+        },
+        "default": "field=spiral, lattice=square - spiral restores the exact pre-promotion formula (swirl gain 1.0, radial gain 0.1, so _field_value returns Vector3(-z, breath, x) - position * 0.1 unchanged) and square rebuilds the same 9x9 = 81 arrow grid, so all 7 existing placements are pixel-identical; the lattice rebuild is guarded on a real value change plus an already-built scene",
+        "was": "one field hard-coded in _field_value as swirl minus 0.1 * radial, sampled on one 9x9 Cartesian arrow grid - the @identity itself named the swirl-to-radial ratio as the critical parameter and asked for a way to blend the two",
+        "note": "hand promotion 2026-07-29 - the runner refused it for NO TURNABLE KNOBS. field changes what the instruction written in space SAYS: spiral (circles and falls, never repeats), orbit (closed circles, kept at the radius you arrived with), sink (origin is destiny), source (the field is an exile). lattice changes how the invisible is made visible: the Cartesian grid, the field's own polar rings, or nothing at all - inferred from the tracer's path instead of read off a diagram."
+      },
       "geometry_spec": {
         "mesh_type": "instanced_particles",
         "topology": "scattered",
@@ -6251,6 +6271,24 @@
         "size_group": "compact"
       },
       "qfep_connection": "Pure direction - stripping magnitude to reveal only orientation",
+      "dna": {
+        "promoted": "2026-07-29",
+        "stage": "2 - variation",
+        "axes": {
+          "input_mode": [
+            "long",
+            "short",
+            "unit"
+          ],
+          "reference_mode": [
+            "sphere",
+            "rings",
+            "none"
+          ]
+        },
+        "default": "input_mode=long, reference_mode=sphere - the shipped V = (1.2, 0.8, 0.4) inside the translucent unit shell with its three rings, so all 8 existing placements are unchanged",
+        "was": "no exports of its own: the input vector, the unit shell and its rings were hard-coded in _ready(), and apply_grid_config() was an empty pass"
+      },
       "scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
       "sequence": "forces",
       "tags": [

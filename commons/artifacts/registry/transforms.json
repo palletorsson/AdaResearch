@@ -486,6 +486,25 @@
    "name": "Homogeneous Coordinates",
    "qfep_connection": "4x4 matrices unify all affine transforms into one representation — the most compressed (F-minimal) description of spatial change. Adding a dimension to reduce complexity: higher-dimensional embedding as F-minimization strategy.",
    "scene": "res://commons/artifacts/homogeneous_coordinates/homogeneous_coordinates.tscn",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "regime": [
+      "affine",
+      "projective",
+      "rigid"
+     ],
+     "mount": [
+      "panel",
+      "glass",
+      "hologram"
+     ]
+    },
+    "default": "regime=affine, mount=panel - affine returns the shipped 4x4 literal for literal (rotation block, translation column 3.0/1.5/2.0, bottom row 0 0 0 1) with the shipped output label and insight line, and panel keeps the opaque backing quad, so all 7 existing placements render identically",
+    "was": "The matrix was a hard-coded 4x4 string table inside _build_matrix_display(). Its bottom row was always 0 0 0 1 - which meant the red PROJECTION cells the legend names, and the whole reason the fourth coordinate exists, were colour-coded but never exercised. Only the six panel colours were exported; apply_grid_config() rebuilt unconditionally on every deferred grid call.",
+    "note": "regime is the argument axis: projective gives the red row a nonzero entry so w' stops being 1 and the output label becomes [x', y', z', w] - the case the colouring has always promised. rigid zeroes the translation column and drops the frame's translation arrow, staging the 3x3 the panel exists to refute. mount is the attachment axis (opaque poster / translucent / unbacked light), the request_note question of how a claim holds onto the room it is made in."
+   },
    "sequence": "transformation",
    "tags": [
     "3d",

@@ -35,6 +35,21 @@ const AXIS_LENGTH_Z := 0.08
 ## Color for titles and bracket lines
 @export var color_title: Color = Color(0.92, 0.92, 0.97)
 
+# --- DNA (stage 2 — variation) ---
+
+## Which claim the displayed 4×4 makes about its own bottom row.
+## "affine" is the shipped panel: rotation + translation, bottom row [0 0 0 1], w stays 1.
+## "projective" gives the red row a nonzero entry — w' ≠ 1 and the output must be divided by it,
+## which is the case the red colouring has always promised and never shown.
+## "rigid" zeroes the translation column — the fourth dimension is unemployed and a 3×3 would do,
+## which is the argument the panel is refuting.
+@export_enum("affine", "projective", "rigid") var regime: String = "affine"
+
+## How the panel attaches to the room it hangs in.
+## "panel" is the shipped opaque backing quad, "glass" keeps the quad but lets the room through,
+## "hologram" drops the backing entirely so the matrix floats as unbacked light.
+@export_enum("panel", "glass", "hologram") var mount: String = "panel"
+
 # --- Internal ---
 
 var _panel: MeshInstance3D
@@ -70,6 +85,10 @@ func _rebuild() -> void:
 
 ## Builds the background quad panel.
 func _build_panel() -> void:
+	if mount == "hologram":
+		_panel = null
+		return
+
 	_panel = MeshInstance3D.new()
 	_panel.name = "BackPanel"
 	var quad = QuadMesh.new()
@@ -80,19 +99,36 @@ func _build_panel() -> void:
 	mat.albedo_color = color_panel
 	mat.roughness = 0.9
 	mat.metallic = 0.1
+	if mount == "glass":
+		mat.albedo_color = Color(color_panel, 0.35)
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_panel.material_override = mat
 
 	_add_node(_panel)
 
 
-## Builds the 4×4 matrix display with brackets and color-coded cells.
-func _build_matrix_display() -> void:
-	var matrix_values = [
+## The 4×4 the panel displays, per `regime`. The "affine" branch is the shipped matrix, literal
+## for literal — every existing placement reads this one.
+func _matrix_values() -> Array:
+	# Shipped matrix — the "affine" default, literal for literal.
+	var rows: Array = [
 		["0.87", "-0.50", "0.00", "3.0"],
 		["0.50", "0.87", "0.00", "1.5"],
 		["0.00", "0.00", "1.00", "2.0"],
 		["0", "0", "0", "1"],
 	]
+	if regime == "projective":
+		rows[3] = ["0", "0", "-0.33", "1"]
+	elif regime == "rigid":
+		rows[0] = ["0.87", "-0.50", "0.00", "0.0"]
+		rows[1] = ["0.50", "0.87", "0.00", "0.0"]
+		rows[2] = ["0.00", "0.00", "1.00", "0.0"]
+	return rows
+
+
+## Builds the 4×4 matrix display with brackets and color-coded cells.
+func _build_matrix_display() -> void:
+	var matrix_values: Array = _matrix_values()
 
 	var cell_colors = [
 		[color_rotation, color_rotation, color_rotation, color_translation],
@@ -210,7 +246,7 @@ func _build_point_transform() -> void:
 
 	var output_label = Label3D.new()
 	output_label.name = "OutputVector"
-	output_label.text = "[x', y', z', 1]"
+	output_label.text = "[x', y', z', w]" if regime == "projective" else "[x', y', z', 1]"
 	output_label.font_size = 20
 	output_label.pixel_size = 0.001
 	output_label.position = Vector3(0.2, y_pos, Z_LABEL)
@@ -291,6 +327,11 @@ func _build_origin_dot() -> void:
 
 
 func _build_translation_arrow() -> void:
+	# "rigid" zeroes the translation column, so there is no translation to draw — the frame sits
+	# at the origin and the missing arrow is the point.
+	if regime == "rigid":
+		return
+
 	var t_end = Vector3(0.07, 0.04, 0.03)
 	var tvec_mesh = ImmediateMesh.new()
 	tvec_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
@@ -401,9 +442,15 @@ func _build_legend() -> void:
 
 
 func _build_insight_label() -> void:
+	var insight_text := "Translation lives in the last column — impossible with 3x3 alone"
+	if regime == "projective":
+		insight_text = "The bottom row is no longer 0 0 0 1 — w comes out wrong on purpose, divide by it"
+	elif regime == "rigid":
+		insight_text = "Translation column zeroed — nothing moves, and a 3x3 would have sufficed"
+
 	var insight = Label3D.new()
 	insight.name = "InsightLabel"
-	insight.text = "Translation lives in the last column — impossible with 3x3 alone"
+	insight.text = insight_text
 	insight.font_size = 13
 	insight.pixel_size = 0.001
 	insight.position = Vector3(0, -0.37, Z_LABEL)
@@ -457,18 +504,38 @@ func _exit_tree() -> void:
 
 
 ## Grid system integration — accept configuration from map data.
+## Rebuilds ONLY when a value actually changed and _ready has already built once: this method is
+## call_deferred by the grid for every placement, and an unconditional _rebuild() would tear down
+## and re-make every shipped panel for config dictionaries that say nothing about this artifact.
 func apply_grid_config(config_data: Dictionary) -> void:
-	if config_data.has("color_panel"):
-		color_panel = config_data["color_panel"]
-	if config_data.has("color_rotation"):
-		color_rotation = config_data["color_rotation"]
-	if config_data.has("color_translation"):
-		color_translation = config_data["color_translation"]
-	if config_data.has("color_projection"):
-		color_projection = config_data["color_projection"]
-	if config_data.has("color_homogeneous"):
-		color_homogeneous = config_data["color_homogeneous"]
-	if config_data.has("color_title"):
-		color_title = config_data["color_title"]
-	if is_inside_tree():
+	var changed := false
+
+	for key in ["color_panel", "color_rotation", "color_translation", "color_projection", "color_homogeneous", "color_title"]:
+		if not config_data.has(key):
+			continue
+		var incoming = config_data[key]
+		if typeof(incoming) == TYPE_STRING:
+			if not Color.html_is_valid(str(incoming)):
+				continue
+			incoming = Color(str(incoming))
+		if typeof(incoming) != TYPE_COLOR:
+			continue
+		if get(key) != incoming:
+			set(key, incoming)
+			changed = true
+
+	if config_data.has("regime"):
+		var r: String = str(config_data["regime"]).strip_edges().to_lower()
+		if r in ["affine", "projective", "rigid"] and r != regime:
+			regime = r
+			changed = true
+
+	if config_data.has("mount"):
+		var m: String = str(config_data["mount"]).strip_edges().to_lower()
+		if m in ["panel", "glass", "hologram"] and m != mount:
+			mount = m
+			changed = true
+
+	# _unshaded_mat is only non-null after _ready has run — never rebuild before the first build.
+	if changed and is_inside_tree() and _unshaded_mat != null:
 		_rebuild()
