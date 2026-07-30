@@ -1,0 +1,343 @@
+{
+ "sweep": "panel_bridge_loom",
+ "peak_changed_pct": 2.859,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "straight",
+    "treadling_order": "point"
+   },
+   "changed_px": 15303,
+   "changed_pct": 2.649
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "point",
+    "treadling_order": "straight"
+   },
+   "changed_px": 15284,
+   "changed_pct": 2.646
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "point",
+    "treadling_order": "point"
+   },
+   "changed_px": 16419,
+   "changed_pct": 2.843
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "block",
+    "treadling_order": "straight"
+   },
+   "changed_px": 15578,
+   "changed_pct": 2.697
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "block",
+    "treadling_order": "point"
+   },
+   "changed_px": 16511,
+   "changed_pct": 2.859
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "straight"
+   },
+   "changed_px": 13839,
+   "changed_pct": 2.396
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "point"
+   },
+   "changed_px": 16033,
+   "changed_pct": 2.776
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "point",
+    "treadling_order": "straight"
+   },
+   "changed_px": 6634,
+   "changed_pct": 1.149
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "point",
+    "treadling_order": "point"
+   },
+   "changed_px": 5828,
+   "changed_pct": 1.009
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "block",
+    "treadling_order": "straight"
+   },
+   "changed_px": 6805,
+   "changed_pct": 1.178
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "block",
+    "treadling_order": "point"
+   },
+   "changed_px": 6134,
+   "changed_pct": 1.062
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "straight"
+   },
+   "changed_px": 6328,
+   "changed_pct": 1.096
+  },
+  {
+   "a": {
+    "threading_draw": "straight",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "point"
+   },
+   "changed_px": 3902,
+   "changed_pct": 0.676
+  },
+  {
+   "a": {
+    "threading_draw": "point",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "point",
+    "treadling_order": "point"
+   },
+   "changed_px": 5827,
+   "changed_pct": 1.009
+  },
+  {
+   "a": {
+    "threading_draw": "point",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "block",
+    "treadling_order": "straight"
+   },
+   "changed_px": 6033,
+   "changed_pct": 1.044
+  },
+  {
+   "a": {
+    "threading_draw": "point",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "block",
+    "treadling_order": "point"
+   },
+   "changed_px": 6943,
+   "changed_pct": 1.202
+  },
+  {
+   "a": {
+    "threading_draw": "point",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "straight"
+   },
+   "changed_px": 6118,
+   "changed_pct": 1.059
+  },
+  {
+   "a": {
+    "threading_draw": "point",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "point"
+   },
+   "changed_px": 6951,
+   "changed_pct": 1.203
+  },
+  {
+   "a": {
+    "threading_draw": "point",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "block",
+    "treadling_order": "straight"
+   },
+   "changed_px": 7027,
+   "changed_pct": 1.217
+  },
+  {
+   "a": {
+    "threading_draw": "point",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "block",
+    "treadling_order": "point"
+   },
+   "changed_px": 6227,
+   "changed_pct": 1.078
+  },
+  {
+   "a": {
+    "threading_draw": "point",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "straight"
+   },
+   "changed_px": 7037,
+   "changed_pct": 1.218
+  },
+  {
+   "a": {
+    "threading_draw": "point",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "point"
+   },
+   "changed_px": 6304,
+   "changed_pct": 1.091
+  },
+  {
+   "a": {
+    "threading_draw": "block",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "block",
+    "treadling_order": "point"
+   },
+   "changed_px": 5578,
+   "changed_pct": 0.966
+  },
+  {
+   "a": {
+    "threading_draw": "block",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "straight"
+   },
+   "changed_px": 6598,
+   "changed_pct": 1.142
+  },
+  {
+   "a": {
+    "threading_draw": "block",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "point"
+   },
+   "changed_px": 6831,
+   "changed_pct": 1.183
+  },
+  {
+   "a": {
+    "threading_draw": "block",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "straight"
+   },
+   "changed_px": 6585,
+   "changed_pct": 1.14
+  },
+  {
+   "a": {
+    "threading_draw": "block",
+    "treadling_order": "point"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "point"
+   },
+   "changed_px": 6614,
+   "changed_pct": 1.145
+  },
+  {
+   "a": {
+    "threading_draw": "broken",
+    "treadling_order": "straight"
+   },
+   "b": {
+    "threading_draw": "broken",
+    "treadling_order": "point"
+   },
+   "changed_px": 5564,
+   "changed_pct": 0.963
+  }
+ ]
+}

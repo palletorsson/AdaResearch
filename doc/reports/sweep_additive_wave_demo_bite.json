@@ -1,0 +1,107 @@
+{
+ "sweep": "additive_wave_demo",
+ "peak_changed_pct": 4.859,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "waveform": "sine"
+   },
+   "b": {
+    "waveform": "square"
+   },
+   "changed_px": 26139,
+   "changed_pct": 4.525
+  },
+  {
+   "a": {
+    "waveform": "sine"
+   },
+   "b": {
+    "waveform": "sawtooth"
+   },
+   "changed_px": 26135,
+   "changed_pct": 4.525
+  },
+  {
+   "a": {
+    "waveform": "sine"
+   },
+   "b": {
+    "waveform": "triangle"
+   },
+   "changed_px": 25801,
+   "changed_pct": 4.467
+  },
+  {
+   "a": {
+    "waveform": "sine"
+   },
+   "b": {
+    "waveform": "clear"
+   },
+   "changed_px": 17332,
+   "changed_pct": 3.001
+  },
+  {
+   "a": {
+    "waveform": "square"
+   },
+   "b": {
+    "waveform": "sawtooth"
+   },
+   "changed_px": 22123,
+   "changed_pct": 3.83
+  },
+  {
+   "a": {
+    "waveform": "square"
+   },
+   "b": {
+    "waveform": "triangle"
+   },
+   "changed_px": 13401,
+   "changed_pct": 2.32
+  },
+  {
+   "a": {
+    "waveform": "square"
+   },
+   "b": {
+    "waveform": "clear"
+   },
+   "changed_px": 27662,
+   "changed_pct": 4.789
+  },
+  {
+   "a": {
+    "waveform": "sawtooth"
+   },
+   "b": {
+    "waveform": "triangle"
+   },
+   "changed_px": 19298,
+   "changed_pct": 3.341
+  },
+  {
+   "a": {
+    "waveform": "sawtooth"
+   },
+   "b": {
+    "waveform": "clear"
+   },
+   "changed_px": 28064,
+   "changed_pct": 4.859
+  },
+  {
+   "a": {
+    "waveform": "triangle"
+   },
+   "b": {
+    "waveform": "clear"
+   },
+   "changed_px": 26589,
+   "changed_pct": 4.603
+  }
+ ]
+}

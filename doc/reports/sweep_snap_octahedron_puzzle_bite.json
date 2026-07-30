@@ -1,0 +1,343 @@
+{
+ "sweep": "snap_octahedron_puzzle",
+ "peak_changed_pct": 7.752,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "loose",
+    "dual": "around"
+   },
+   "changed_px": 19908,
+   "changed_pct": 3.447
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "closed",
+    "dual": "off"
+   },
+   "changed_px": 43432,
+   "changed_pct": 7.519
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "closed",
+    "dual": "around"
+   },
+   "changed_px": 43807,
+   "changed_pct": 7.584
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "scattered",
+    "dual": "off"
+   },
+   "changed_px": 44572,
+   "changed_pct": 7.717
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "scattered",
+    "dual": "around"
+   },
+   "changed_px": 44777,
+   "changed_pct": 7.752
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "off"
+   },
+   "changed_px": 43320,
+   "changed_pct": 7.5
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "around"
+   },
+   "changed_px": 43702,
+   "changed_pct": 7.566
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "closed",
+    "dual": "off"
+   },
+   "changed_px": 35952,
+   "changed_pct": 6.224
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "closed",
+    "dual": "around"
+   },
+   "changed_px": 37029,
+   "changed_pct": 6.411
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "scattered",
+    "dual": "off"
+   },
+   "changed_px": 35416,
+   "changed_pct": 6.132
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "scattered",
+    "dual": "around"
+   },
+   "changed_px": 35834,
+   "changed_pct": 6.204
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "off"
+   },
+   "changed_px": 35058,
+   "changed_pct": 6.07
+  },
+  {
+   "a": {
+    "solid": "loose",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "around"
+   },
+   "changed_px": 36242,
+   "changed_pct": 6.275
+  },
+  {
+   "a": {
+    "solid": "closed",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "closed",
+    "dual": "around"
+   },
+   "changed_px": 2282,
+   "changed_pct": 0.395
+  },
+  {
+   "a": {
+    "solid": "closed",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "scattered",
+    "dual": "off"
+   },
+   "changed_px": 13071,
+   "changed_pct": 2.263
+  },
+  {
+   "a": {
+    "solid": "closed",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "scattered",
+    "dual": "around"
+   },
+   "changed_px": 14474,
+   "changed_pct": 2.506
+  },
+  {
+   "a": {
+    "solid": "closed",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "off"
+   },
+   "changed_px": 1945,
+   "changed_pct": 0.337
+  },
+  {
+   "a": {
+    "solid": "closed",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "around"
+   },
+   "changed_px": 4075,
+   "changed_pct": 0.706
+  },
+  {
+   "a": {
+    "solid": "closed",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "scattered",
+    "dual": "off"
+   },
+   "changed_px": 15058,
+   "changed_pct": 2.607
+  },
+  {
+   "a": {
+    "solid": "closed",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "scattered",
+    "dual": "around"
+   },
+   "changed_px": 16194,
+   "changed_pct": 2.804
+  },
+  {
+   "a": {
+    "solid": "closed",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "off"
+   },
+   "changed_px": 4062,
+   "changed_pct": 0.703
+  },
+  {
+   "a": {
+    "solid": "closed",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "around"
+   },
+   "changed_px": 1916,
+   "changed_pct": 0.332
+  },
+  {
+   "a": {
+    "solid": "scattered",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "scattered",
+    "dual": "around"
+   },
+   "changed_px": 1782,
+   "changed_pct": 0.309
+  },
+  {
+   "a": {
+    "solid": "scattered",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "off"
+   },
+   "changed_px": 11705,
+   "changed_pct": 2.026
+  },
+  {
+   "a": {
+    "solid": "scattered",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "around"
+   },
+   "changed_px": 13853,
+   "changed_pct": 2.398
+  },
+  {
+   "a": {
+    "solid": "scattered",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "off"
+   },
+   "changed_px": 13239,
+   "changed_pct": 2.292
+  },
+  {
+   "a": {
+    "solid": "scattered",
+    "dual": "around"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "around"
+   },
+   "changed_px": 15071,
+   "changed_pct": 2.609
+  },
+  {
+   "a": {
+    "solid": "short",
+    "dual": "off"
+   },
+   "b": {
+    "solid": "short",
+    "dual": "around"
+   },
+   "changed_px": 2342,
+   "changed_pct": 0.405
+  }
+ ]
+}

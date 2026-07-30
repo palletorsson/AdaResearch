@@ -1,0 +1,187 @@
+{
+ "sweep": "vector_magnitude_demo",
+ "peak_changed_pct": 0.615,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "decomposition": "star",
+    "metric": "euclidean"
+   },
+   "b": {
+    "decomposition": "star",
+    "metric": "taxicab"
+   },
+   "changed_px": 2057,
+   "changed_pct": 0.356
+  },
+  {
+   "a": {
+    "decomposition": "star",
+    "metric": "euclidean"
+   },
+   "b": {
+    "decomposition": "chain",
+    "metric": "euclidean"
+   },
+   "changed_px": 3386,
+   "changed_pct": 0.586
+  },
+  {
+   "a": {
+    "decomposition": "star",
+    "metric": "euclidean"
+   },
+   "b": {
+    "decomposition": "chain",
+    "metric": "taxicab"
+   },
+   "changed_px": 3551,
+   "changed_pct": 0.615
+  },
+  {
+   "a": {
+    "decomposition": "star",
+    "metric": "euclidean"
+   },
+   "b": {
+    "decomposition": "none",
+    "metric": "euclidean"
+   },
+   "changed_px": 2362,
+   "changed_pct": 0.409
+  },
+  {
+   "a": {
+    "decomposition": "star",
+    "metric": "euclidean"
+   },
+   "b": {
+    "decomposition": "none",
+    "metric": "taxicab"
+   },
+   "changed_px": 2527,
+   "changed_pct": 0.438
+  },
+  {
+   "a": {
+    "decomposition": "star",
+    "metric": "taxicab"
+   },
+   "b": {
+    "decomposition": "chain",
+    "metric": "euclidean"
+   },
+   "changed_px": 1549,
+   "changed_pct": 0.268
+  },
+  {
+   "a": {
+    "decomposition": "star",
+    "metric": "taxicab"
+   },
+   "b": {
+    "decomposition": "chain",
+    "metric": "taxicab"
+   },
+   "changed_px": 1385,
+   "changed_pct": 0.24
+  },
+  {
+   "a": {
+    "decomposition": "star",
+    "metric": "taxicab"
+   },
+   "b": {
+    "decomposition": "none",
+    "metric": "euclidean"
+   },
+   "changed_px": 693,
+   "changed_pct": 0.12
+  },
+  {
+   "a": {
+    "decomposition": "star",
+    "metric": "taxicab"
+   },
+   "b": {
+    "decomposition": "none",
+    "metric": "taxicab"
+   },
+   "changed_px": 531,
+   "changed_pct": 0.092
+  },
+  {
+   "a": {
+    "decomposition": "chain",
+    "metric": "euclidean"
+   },
+   "b": {
+    "decomposition": "chain",
+    "metric": "taxicab"
+   },
+   "changed_px": 164,
+   "changed_pct": 0.028
+  },
+  {
+   "a": {
+    "decomposition": "chain",
+    "metric": "euclidean"
+   },
+   "b": {
+    "decomposition": "none",
+    "metric": "euclidean"
+   },
+   "changed_px": 1243,
+   "changed_pct": 0.215
+  },
+  {
+   "a": {
+    "decomposition": "chain",
+    "metric": "euclidean"
+   },
+   "b": {
+    "decomposition": "none",
+    "metric": "taxicab"
+   },
+   "changed_px": 1409,
+   "changed_pct": 0.244
+  },
+  {
+   "a": {
+    "decomposition": "chain",
+    "metric": "taxicab"
+   },
+   "b": {
+    "decomposition": "none",
+    "metric": "euclidean"
+   },
+   "changed_px": 1407,
+   "changed_pct": 0.244
+  },
+  {
+   "a": {
+    "decomposition": "chain",
+    "metric": "taxicab"
+   },
+   "b": {
+    "decomposition": "none",
+    "metric": "taxicab"
+   },
+   "changed_px": 1245,
+   "changed_pct": 0.216
+  },
+  {
+   "a": {
+    "decomposition": "none",
+    "metric": "euclidean"
+   },
+   "b": {
+    "decomposition": "none",
+    "metric": "taxicab"
+   },
+   "changed_px": 166,
+   "changed_pct": 0.029
+  }
+ ]
+}

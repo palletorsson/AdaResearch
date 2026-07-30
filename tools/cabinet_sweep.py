@@ -296,13 +296,26 @@ def _report_bite(sweep_name: str, shots: list) -> None:
             rows.append({"a": pa, "b": pb, "changed_px": changed, "changed_pct": pct})
     if not rows:
         return
-    verdict = ("BITES" if peak >= 2.0 else
-               "faint - under 2% of the frame moved" if peak > 0.05 else
-               "NO VISIBLE CHANGE - the axis did nothing a still can show")
-    print(f"  bite: peak {peak:.2f}% of pixels changed across variants — {verdict}")
+    # How much subject was there to compare at all? rainbow renders a pale
+    # translucent arc barely separable from the backdrop, so the subject test
+    # found almost nothing and the axis scored 0.00% — reported as "the axis did
+    # nothing" when the truth was "nothing was detected to measure". Those are
+    # different claims and only one of them is about the artifact's design.
+    biggest = max((sum(1 for v in s if v) for (_p, _im, s) in subs), default=0)
+    subject_pct = 100.0 * biggest / max(1, total)
+    if subject_pct < 0.5:
+        verdict = (f"SUBJECT NOT DETECTED - only {subject_pct:.2f}% of the frame differs from "
+                   "the backdrop, so there was nothing to compare. Not a verdict about the axis.")
+    else:
+        verdict = ("BITES" if peak >= 2.0 else
+                   "faint - under 2% of the frame moved" if peak > 0.05 else
+                   "NO VISIBLE CHANGE - the axis did nothing a still can show")
+    print(f"  bite: peak {peak:.2f}% of pixels changed across variants "
+          f"(subject {subject_pct:.1f}% of frame) — {verdict}")
     out = REPO / "doc" / "reports" / f"sweep_{sweep_name}_bite.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"sweep": sweep_name, "peak_changed_pct": peak,
+                               "subject_pct": round(subject_pct, 3),
                                "verdict": verdict, "variants": rows}, indent=1),
                    encoding="utf-8")
 
