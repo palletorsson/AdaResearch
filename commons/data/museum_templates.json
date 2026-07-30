@@ -1,0 +1,396 @@
+{
+ "_readme": "Principal spatial templates extracted from real museum floor plans (multi-agent extraction 2026-07-21, 8 museums, 8/8 agents clean). Each template abstracts the museum's principal idea into the /template-maps cell vocabulary; tiles are merged into template_patterns.json (mode stamp) for the editor and map making. Provenance: literature+abstraction \u2014 templates PROPOSE (P-10); numbers carry their sources. Validation: dims/tokens/top-to-bottom walkability/stop pockets, results per entry.",
+ "extracted": "2026-07-21",
+ "museums": [
+  {
+   "museum": "Uffizi Gallery, Florence",
+   "architect": "Giorgio Vasari, 1560-1581 (completed by Buontalenti and Parigi; Tribuna by Buontalenti, 1584)",
+   "circulation_type": "enfilade off a U-shaped spine corridor (single-loaded statue-lined corridor with lateral room enfilade)",
+   "mechanism": "The U-corridor separates flow from seeing: movement, daylight, and the long end-stopped vista belong to the statue-lined spine, while stationary looking is decanted into optional enfilade rooms one door off the spine, so stopping to see never blocks the walk.",
+   "numbers": [
+    {
+     "name": "Vasari Corridor length (attached passage, Uffizi to Boboli)",
+     "value": "~760 m",
+     "source_note": "uffizi.it / Wikipedia Vasari Corridor"
+    },
+    {
+     "name": "Tribuna octagonal room diameter",
+     "value": "~10 m",
+     "source_note": "virtualuffizi.com / lagalleriadegliuffizi.com"
+    },
+    {
+     "name": "Exhibition space after 2006 Nuovi Uffizi expansion",
+     "value": "6,000 -> 13,000 m2",
+     "source_note": "Wikipedia Uffizi"
+    },
+    {
+     "name": "Top-floor gallery rooms (historic hang) / rooms today",
+     "value": "45-50 historic, 101 today",
+     "source_note": "Wikipedia Uffizi; uffizigallery-tickets.org floor map"
+    },
+    {
+     "name": "Corridor ceiling rhythm",
+     "value": "3 large coffered bays + 1 narrower bay per section",
+     "source_note": "uffizi.it Gallery Corridors page (ratio, no metric given)"
+    }
+   ],
+   "sources": [
+    "https://www.uffizi.it/en/artworks/i-corridoi-di-galleria",
+    "https://en.wikipedia.org/wiki/Uffizi",
+    "https://en.wikipedia.org/wiki/Vasari_Corridor",
+    "https://www.virtualuffizi.com/tribune.html",
+    "https://uffizigallery-tickets.org/what-to-see/floor-map/",
+    "https://www.uffizi.it/en/corridoio-vasariano"
+   ],
+   "template_key": "uffizi-spine-enfilade",
+   "walk_rule": "Enter at the head of the east spine and walk the 3-wide corridor pulled forward by the hero visible on-axis 27 cells ahead, dipping optionally through door gaps into three side rooms whose aligned doors form a second parallel vista, then turn west along the south corridor past the hero and exit on the enfilade axis.",
+   "pacing_rule": "Paired podium statues line the spine's inner wall in bays broken by door gaps (Vasari's three-bays-plus-narrow-bay rhythm), and every pause option sits off the clear lane so lingering never dams the flow; the one mandated stop is the raised dais step before the end-stopped hero.",
+   "validation": {
+    "issues": [],
+    "slots": 18,
+    "ok": true
+   }
+  },
+  {
+   "museum": "Solomon R. Guggenheim Museum, New York",
+   "architect": "Frank Lloyd Wright, 1959",
+   "circulation_type": "forced single path (continuous spiral ramp; abstracted as switchback serpentine)",
+   "mechanism": "By collapsing all circulation into one gently sloped descending ramp, the plan removes route choice entirely \u2014 flow is automatic \u2014 while shallow web-wall bays create stop pockets just off the moving path and the open central void lets visitors preview and re-encounter works across the atrium before and after passing them.",
+   "numbers": [
+    {
+     "name": "ramp length",
+     "value": "~1,416 ft (~431 m, 'quarter mile')",
+     "source_note": "continuous spiral ramp, illustrarch / New Republic"
+    },
+    {
+     "name": "ramp rise / dome height",
+     "value": "92 ft rise; 96 ft glass dome",
+     "source_note": "ground floor to top gallery; oculus height, franklloydwright.org / guggenheim.org"
+    },
+    {
+     "name": "ramp grade",
+     "value": "~3% slope",
+     "source_note": "New Republic ('three percent grade')"
+    },
+    {
+     "name": "rotunda diameter",
+     "value": "100 ft at bottom, 128 ft at top",
+     "source_note": "spiral widens as it rises, New Republic"
+    },
+    {
+     "name": "web wall run",
+     "value": "96 ft, oculus to rotunda floor",
+     "source_note": "web walls form the numbered art bays; bay depth grows up the ramp, guggenheim.org 'Secret Language'"
+    }
+   ],
+   "sources": [
+    "https://www.dezeen.com/2017/06/09/solomon-r-guggenheim-museum-frank-lloyd-wright-new-york-city/",
+    "https://www.guggenheim.org/articles/checklist/your-guide-to-the-guggenheims-secret-language",
+    "https://newrepublic.com/article/122818/brilliance-frank-lloyd-wrights-guggenheim-museum",
+    "https://franklloydwright.org/illuminating-details-frank-lloyd-wrights-guggenheim-blueprints/",
+    "https://illustrarch.com/articles/73819-guggenheim-museum.html",
+    "https://www.oocities.org/lpittack/arc476.html"
+   ],
+   "template_key": "guggenheim-serpentine",
+   "walk_rule": "Enter at the top (the elevator drop-off) and walk one un-branching serpentine: each 3-wide lane runs the full width, turns through a 3-cell gap at the alternating end of each partition, and empties onto the rotunda floor at the bottom where the hero stands on the atrium axis.",
+   "pacing_rule": "Movement never pauses the route \u2014 art bays are recessed into the solid partition stretches as stop pockets beside the flow, while the aligned see-through void windows (c6-c8) form the atrium axis that promises the hero podium from up to 27 cells away and re-shows passed works across lanes.",
+   "validation": {
+    "issues": [],
+    "slots": 19,
+    "ok": true
+   }
+  },
+  {
+   "museum": "Neue Nationalgalerie, Berlin",
+   "architect": "Ludwig Mies van der Rohe, 1968",
+   "circulation_type": "free-plan matrix",
+   "mechanism": "By clearing the entire 50 m span of structure and putting art on freestanding walls and suspended panels, the plan makes flow and seeing the same act \u2014 the visitor self-routes through a matrix of view-objects, and no wall ever hides the next work for long.",
+   "numbers": [
+    {
+     "name": "upper hall footprint",
+     "value": "50.40 \u00d7 50.40 m",
+     "source_note": "WikiArquitectura \u2014 glazed square hall, unobstructed floor plan"
+    },
+    {
+     "name": "hall ceiling height",
+     "value": "8.40 m",
+     "source_note": "WikiArquitectura / ArchEyes"
+    },
+    {
+     "name": "planning module",
+     "value": "3.6 m square grid",
+     "source_note": "ArchEyes \u2014 dimensional grid of the pavilion"
+    },
+    {
+     "name": "roof cantilever beyond columns",
+     "value": "18 m",
+     "source_note": "ArchEyes / RTF \u2014 8 cruciform columns, two per side, avoiding corners"
+    },
+    {
+     "name": "upper exhibition hall area",
+     "value": "2,683 m\u00b2",
+     "source_note": "Wikipedia \u2014 upper story serves as entrance and primary special-exhibit gallery"
+    }
+   ],
+   "sources": [
+    "https://en.wikiarquitectura.com/building/neue-nationalgalerie/",
+    "https://archeyes.com/neue-national-gallery-by-mies-van-der-rohe-david-chipperfields-renovation/",
+    "https://en.wikipedia.org/wiki/Neue_Nationalgalerie",
+    "https://www.re-thinkingthefuture.com/architectural-community/a9559-neue-nationalgalerie-mies-van-der-rohe-and-chipperfields-perfect-blend/",
+    "https://www.spkmagazin.de/en/new-neue-nationalgalerie-from-the-outside-in-part-2.html",
+    "https://architectuul.com/architecture/new-national-gallery"
+   ],
+   "template_key": "neue-nationalgalerie-free-plan",
+   "walk_rule": "Enter anywhere on the open top edge and drift freely through a column-free field; freestanding picture-walls and podia are obstacles to orbit, not corridors to follow, and the only fixed event is the on-axis hero at the hall's centre.",
+   "pacing_rule": "Pacing comes from paired off-axis freestanding walls at each third of the walk that slow the drift into eddies, while the untouched central axis keeps a 13-cell promise to the hero so the visitor always chooses between lingering and advancing.",
+   "validation": {
+    "issues": [],
+    "slots": 9,
+    "ok": true
+   }
+  },
+  {
+   "museum": "Sir John Soane's Museum, 13 Lincoln's Inn Fields, London",
+   "architect": "Sir John Soane, 1792-1824 (house rebuilt in three campaigns; museum arranged until his death 1837)",
+   "circulation_type": "cabinet \u2014 a dense wunderkammer loop of tiny interconnected rooms threaded on narrow passages, with one end-stopped axial vista to the deepest point",
+   "mechanism": "Soane resolves flow versus seeing by making every wall of the narrow path itself the display and letting the eye outrun the body \u2014 layered apertures (colonnade screens, floor cuts to the crypt, folding picture-planes) show objects several rooms ahead, so walking is compressed to a shuffle while seeing is multiplied in depth.",
+   "numbers": [
+    {
+     "name": "Picture Room plan",
+     "value": "13 ft 8 in x 12 ft 4 in (4.17 x 3.76 m)",
+     "source_note": "A General Description of Sir John Soane's Museum (Oxford Taylor Editions digital edition); soane.org/picture-room"
+    },
+    {
+     "name": "Picture Room height",
+     "value": "19 ft 6 in (5.94 m)",
+     "source_note": "same source; top-lit, hung with 118 paintings on folding planes"
+    },
+    {
+     "name": "equivalent gallery the Picture Room replaces",
+     "value": "45 ft x 20 ft (13.7 x 6.1 m)",
+     "source_note": "Soane's own claim in the General Description \u2014 the folding planes triple the hang"
+    },
+    {
+     "name": "house frontage (No. 13)",
+     "value": "32 ft 7 in (9.93 m) east-west",
+     "source_note": "1737 deed, Survey of London vol. 3 (british-history.ac.uk)"
+    },
+    {
+     "name": "main house depth",
+     "value": "47 ft (14.3 m) north-south, museum extending behind",
+     "source_note": "Survey of London vol. 3; visitor cap 90 at a time due to narrow passages (Wikipedia)"
+    }
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Sir_John_Soane's_Museum",
+    "https://editions.mml.ox.ac.uk/editions/soanes-museum/",
+    "https://www.british-history.ac.uk/survey-london/vol3/pt1/pp26-31",
+    "https://www.soane.org/picture-room",
+    "https://www.soane.org/our-spaces",
+    "https://collections.soane.org/ARC2640"
+   ],
+   "template_key": "soane-cabinet-vista",
+   "walk_rule": "A 3-wide spine runs the full axis while staggered door gaps pull the body sideways into small 3x4 cabinet pockets; the eye keeps the long axial vista to the hero as the feet loop room by room.",
+   "pacing_rule": "Every five rows a cross-wall with corridor-facing niche slots compresses the walk back onto the spine, alternating pocket-dwell and corridor-glide, until the terminal dome room releases the width and the hero end-stops the 16-cell sightline just before a blind wall.",
+   "validation": {
+    "issues": [],
+    "slots": 51,
+    "ok": true
+   }
+  },
+  {
+   "museum": "Museo di Castelvecchio, Verona",
+   "architect": "Carlo Scarpa, 1959-1973",
+   "circulation_type": "forced single path: end-stopped enfilade with off-axis display (loop at building scale)",
+   "mechanism": "Aligned door openings fuse five rooms into one long axial vista that promises the terminus (flow), while every sculpture is displaced off that axis with its own facing direction \u2014 a network of gazes that pulls the walker sideways into stops \u2014 and the axis itself is end-stopped at the Cangrande hinge, where a single hero on a raised plinth owns a whole bay and is circled rather than passed.",
+   "numbers": [
+    {
+     "name": "entrance approach corridor length",
+     "value": "30 m",
+     "source_note": "Archiobjects describes the ~30 m long approach past external sculptures before the gallery proper"
+    },
+    {
+     "name": "ground-floor sculpture gallery rooms",
+     "value": "5 rooms (some counts give 7 with flanking spaces)",
+     "source_note": "multiple sources describe the five-room enfilade in the Napoleonic wing, arched openings clad with stone slabs"
+    },
+    {
+     "name": "restoration duration",
+     "value": "14 years (1959-1973)",
+     "source_note": "Wikipedia / Atlante architettura contemporanea"
+    },
+    {
+     "name": "sculpture viewshed used in analysis",
+     "value": "~30 degrees facing field of view",
+     "source_note": "Stavroulaki & Peponis 2003 modeled each statue's gaze as a ~30-degree viewshed intersecting the integration axis"
+    },
+    {
+     "name": "main door gap width abstracted",
+     "value": "3 m (3 cells)",
+     "source_note": "abstraction: human-scaled stone-clad archway rendered as a 3-cell aligned gap in each cross wall"
+    }
+   ],
+   "sources": [
+    "https://www.archiobjects.org/museo-castelvecchio-verona-italy-carlo-scarpa/",
+    "https://www.veronissima.com/sito_inglese/html/tour-museums-castelvecchio-scarpa.html",
+    "https://www.spacesyntax.net/symposia-archive/SSS4/fullpapers/66Stavroulaki-Peponis.pdf",
+    "https://atlantearchitetturacontemporanea.cultura.gov.it/en/restauro-e-allestimento-del-museo-di-castelvecchio/",
+    "https://museodicastelvecchio.comune.verona.it/nqcontent.cfm?a_id=43073&lang=en",
+    "https://en.wikipedia.org/wiki/Castelvecchio_Museum"
+   ],
+   "template_key": "castelvecchio-endstopped-enfilade",
+   "walk_rule": "Enter on the central axis and cross four rooms through aligned 3-wide door gaps; in each room the works sit off-axis so you drift sideways to a stop pocket and return to the line, until the axis delivers you into the hero bay where you circle the raised podium and exit through the off-axis side door behind it.",
+   "pacing_rule": "The hero is visible from the entrance through every aligned gap (a 24-cell promise), but four cross walls each impose a pause-and-drift beat before the axis is allowed to resolve, and the end-stop wall plus sideways exit ensure the vista terminates on the hero instead of continuing past it.",
+   "validation": {
+    "issues": [],
+    "slots": 9,
+    "ok": true
+   }
+  },
+  {
+   "museum": "Louvre \u2014 Grande Galerie, Paris",
+   "architect": "Louis M\u00e9tezeau & Jacques II Androuet du Cerceau, 1595\u20131607 (bay rhythm: Percier & Fontaine, 1805\u20131810; skylights: Lefuel, 1860s)",
+   "circulation_type": "forced single path \u2014 continuous axial promenade with walk-past wall hang, rhythmed by bays",
+   "mechanism": "A single very long, 13 m-wide axis keeps everyone flowing toward an endless vanishing point, while nine column-framed bays with overhead skylights pinch the walk into regular stopping pockets where the continuous wall hang can be faced one painting at a time.",
+   "numbers": [
+    {
+     "name": "current gallery length",
+     "value": "288 m",
+     "source_note": "Wikipedia: reduced from original length in 1860s Lefuel remodeling"
+    },
+    {
+     "name": "original gallery length",
+     "value": "460 m",
+     "source_note": "Wikipedia / louvre.fr: 'longest of its kind in Europe'"
+    },
+    {
+     "name": "gallery width",
+     "value": "13 m",
+     "source_note": "Wikipedia: 'The gallery is 13 meters wide' \u2014 template width copies this 1:1"
+    },
+    {
+     "name": "number of bays",
+     "value": "9",
+     "source_note": "louvre.fr / Wikipedia: Percier & Fontaine's nine subdivisions separated by column groups"
+    },
+    {
+     "name": "construction period",
+     "value": "1595\u20131607",
+     "source_note": "Wikipedia: eastern half M\u00e9tezeau, western half du Cerceau"
+    }
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Grande_Galerie",
+    "https://www.louvre.fr/en/explore/the-palace/italian-painting-in-perspective",
+    "https://en.wikipedia.org/wiki/Project_for_the_Transformation_of_the_Grande_Galerie_du_Louvre",
+    "https://www.artchive.com/artwork/imaginary-view-of-the-grande-galerie-in-the-louvre-hubert-robert-1789/"
+   ],
+   "template_key": "grande-galerie-axial",
+   "walk_rule": "Enter on axis and drift down the wide central lane toward the hero visible from the first step; at each bay, step sideways into the wall pocket to face a slot, then rejoin the flow, finally rounding the end-stopped hero to exit.",
+   "pacing_rule": "Paired column cells pinch the 13-cell width every 4 rows into nine bays, and each bay's midpoint row carries a facing pair of wall slots \u2014 a metronome of stop-beats under one uninterrupted 33-cell sightline.",
+   "validation": {
+    "issues": [],
+    "slots": 19,
+    "ok": true
+   }
+  },
+  {
+   "museum": "21st Century Museum of Contemporary Art, Kanazawa",
+   "architect": "SANAA (Kazuyo Sejima + Ryue Nishizawa), 2004",
+   "circulation_type": "free-plan matrix \u2014 independent room-boxes floating in a multi-entry, non-hierarchical circulation field",
+   "mechanism": "Flow and seeing never compete because they occupy different spaces: movement is free in the daylight corridor-streets between boxes, while each artwork gets a sealed room individually tuned (size 18\u2013324 m\u00b2, height 4\u201312 m, light) to seeing it, entered and exited at the visitor's choice.",
+   "numbers": [
+    {
+     "name": "building diameter",
+     "value": "112.5 m",
+     "source_note": "circular glass perimeter; WikiArquitectura / archiweb.cz"
+    },
+    {
+     "name": "gallery room sizes",
+     "value": "18\u2013324 m\u00b2",
+     "source_note": "15 exhibition galleries of deliberately varied proportion; WikiArquitectura"
+    },
+    {
+     "name": "gallery ceiling heights",
+     "value": "4\u201312 m",
+     "source_note": "each box tuned to its work; tallest 12 m box sits mid-field; archiweb.cz / architecturalmoleskine"
+    },
+    {
+     "name": "corridor ceiling height",
+     "value": "3.955 m",
+     "source_note": "circulation band lower than galleries, marking room vs street; kanazawa21.jp concept data"
+    },
+    {
+     "name": "courtyards",
+     "value": "4 glazed courtyards",
+     "source_note": "light wells breaking the matrix, blur public/museum zones; archiweb.cz"
+    }
+   ],
+   "sources": [
+    "https://en.wikiarquitectura.com/building/21st-century-museum-contemprary-art-kanazawa/",
+    "https://www.archiweb.cz/en/b/21st-century-museum-of-contemporary-art-kanazawa",
+    "http://architecturalmoleskine.blogspot.com/2012/05/sanaa-21st-century-museum-kanazawa.html",
+    "https://www.re-thinkingthefuture.com/case-studies/a7825-21st-century-museum-of-contemporary-art-kanazawa-by-sanaa/",
+    "https://www.kanazawa21.jp/data_list.php?g=11&d=2",
+    "https://en.wikipedia.org/wiki/21st_Century_Museum_of_Contemporary_Art,_Kanazawa"
+   ],
+   "template_key": "kanazawa-room-matrix",
+   "walk_rule": "Enter anywhere along the open top edge; parallel streets (west 3-wide, central 3-wide, east lane) and full-width cross streets loop around sealed room-boxes, and the central street's promised hero room dead-ends, sending the walker back into the field to choose an exit route.",
+   "pacing_rule": "Seeing is quantized into rooms \u2014 pace is the number of boxes you elect to enter and leave through the street field, not distance walked; corridor-hung slots give the streets themselves exhibition weight between stops.",
+   "validation": {
+    "issues": [],
+    "slots": 9,
+    "ok": true
+   }
+  },
+  {
+   "museum": "Sainsbury Wing, National Gallery, London",
+   "architect": "Robert Venturi & Denise Scott Brown (VSBA, with Sheppard Robson), 1991",
+   "circulation_type": "enfilade \u2014 three parallel lines of galleries off a skewed axis; the central line is a true on-axis enfilade with false-perspective diminishing arches, the side lines have offset doorways that deliberately interrupt the vistas",
+   "mechanism": "The central nave-like enfilade makes one long promise \u2014 Cima's altarpiece glimpsed through five diminishing arches at the deepest point pulls flow forward \u2014 while the flanking rooms, entered through offset doors that break the lateral sightlines, decompress into small domestic-scale chambers where stopping and seeing individual panels is the default.",
+   "numbers": [
+    {
+     "name": "principal gallery rooms",
+     "value": "16 rooms",
+     "source_note": "Historic England listing / press accounts of the gallery floor"
+    },
+    {
+     "name": "total floor area",
+     "value": "120,000 sq ft (~11,150 m2)",
+     "source_note": "VSBA project fact sheet (venturiscottbrown.org PDF)"
+    },
+    {
+     "name": "hero altarpiece size (Cima, The Incredulity of Saint Thomas)",
+     "value": "294 x 199.4 cm",
+     "source_note": "National Gallery catalogue, NG816"
+    },
+    {
+     "name": "walk to the hero along the axis",
+     "value": "4 rooms, 5 diminishing arches",
+     "source_note": "CBCEW readers' notes on the painting's placement at the end of the vista"
+    },
+    {
+     "name": "construction cost / completion",
+     "value": "$47.93M, completed 1991",
+     "source_note": "VSBA project fact sheet"
+    }
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/National_Gallery",
+    "http://venturiscottbrown.org/pdfs/NationalGallerySainsburyWingLondon02.pdf",
+    "https://c20society.org.uk/building-of-the-month/national-gallery-sainsbury-wing-london",
+    "https://www.cbcew.org.uk/wp-content/uploads/sites/3/2020/02/GWS-Readers-Notes-Incredulity-of-Thomas.pdf",
+    "https://www.theartnewspaper.com/2025/05/09/the-big-review-|-the-reopening-and-rehang-of-the-sainsbury-wing-national-gallery-london",
+    "https://www.nationalgallery.org.uk/paintings/giovanni-battista-cima-da-conegliano-the-incredulity-of-saint-thomas"
+   ],
+   "template_key": "sainsbury-false-perspective-enfilade",
+   "walk_rule": "Enter on-axis at the top and the hero is already visible 28 cells away through every door gap; the 3-wide central nave carries the flow straight to the raised hero chamber, while offset side doors peel viewers into 3-cell-wide cabinet rooms and return them to the axis one bay deeper.",
+   "pacing_rule": "Cross walls every 5-6 rows frame the vista and the door gaps narrow as you go (5, 5, 3, 3 cells) \u2014 a false perspective that makes the hero feel farther then suddenly near \u2014 with the final threshold stepping up onto a platform where the 3s altarpiece slot is end-stopped by the terminal wall and the exit turns off-axis, exactly as the wing hands you sideways to the bridge.",
+   "validation": {
+    "issues": [],
+    "slots": 14,
+    "ok": true
+   }
+  }
+ ]
+}
