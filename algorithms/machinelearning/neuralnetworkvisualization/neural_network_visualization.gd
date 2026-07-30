@@ -46,6 +46,81 @@ enum ActivationType { SIGMOID, RELU, TANH }
 @export var show_weights: bool = true
 @export var show_activations: bool = true
 
+# ============================================================================
+# STAGE-2 DNA — one axis: topology
+#
+# The whole body of this artifact IS the architecture: columns of spheres and a
+# fan of cylinders, nothing else. That makes the layer stack the only axis whose
+# values are automatically room-sized. Before promotion, hidden_layer_sizes
+# [6, 4] was the only architecture this artifact could ever have in any map
+# (apply_grid_config was a bare `pass`), so the teaching point — that a network's
+# shape is a bet about the problem, and that some shapes cannot represent some
+# problems no matter how long you train them — was stated in the exports and
+# never once shown.
+#
+# `flat` is the value that earns the axis: a network wired straight from input to
+# output, standing in front of the XOR data generate_training_data() writes four
+# lines later, provably unable to learn it. A picture of foreclosure.
+#
+# Shared verbatim with neural_networks_vr, which asks the identical question at
+# building scale. The two defaults differ because each artifact's shipped stack is
+# its own; `graded` means "the shipped graduated stack" in both.
+#
+# REFUSED: training_iterations, batch_size, training_speed, learning_rate,
+# auto_train. All five move emission brightness and an error-graph polyline —
+# time-domain, unphotographable. A sweep of them returns five stills of the same
+# diagram at five arbitrary epochs.
+# ============================================================================
+@export_category("Stage-2 DNA")
+
+## topology — the shape of the layer stack, which is a claim about the shape of the
+## problem: what this network could ever represent, before a single weight is trained.
+##
+##   graded   4-6-4-2. Four columns across 9.0 m, the tallest spanning 7.5 m in y,
+##            16 neurons at 0.3 m radius, 56 weight cylinders at 0.02 m. The shipped
+##            diagram, roughly as wide as it is tall.
+##   flat     4-2, no hidden layer at all. Two columns 3.0 m apart, 8 cylinders,
+##            body 3.0 x 4.5 m. The architecture that provably cannot learn the XOR
+##            data this artifact generates, standing in the room being unable to.
+##   deep     4-3-3-3-3-3-2. Seven columns across 18.0 m, none taller than 4.5 m,
+##            54 cylinders in near-identical bays. A corridor rather than a diagram,
+##            and the same 4-sample problem.
+##   widened  4-10-2. The middle column 10 neurons tall, spanning 13.5 m in y, 60
+##            cylinders fanning into and out of it. The auto-frame goes portrait and
+##            the input and output columns recede toward specks — that recession is
+##            the content, not a framing accident: sixty parameters for four samples.
+##   pinched  4-1-4-2. A one-neuron waist between two wide layers, 16 cylinders,
+##            four in and four out through a single 0.3 m sphere. Everything the
+##            network knows passes through one number — the compression thesis as a
+##            bottleneck you can point at.
+@export_enum("graded", "flat", "deep", "widened", "pinched") var topology: String = "graded"
+
+## Allow-list for token resolution. A value outside it is a typo and falls back to
+## whatever the @export already says, which is the shipped look.
+const TOPOLOGYS: PackedStringArray = ["graded", "flat", "deep", "widened", "pinched"]
+
+## Hidden stacks per value. input_layer_size stays 4 and output_layer_size stays 2 at
+## EVERY value — generate_training_data() hard-codes a 4-input / 2-output XOR set and
+## forward_pass/backward_pass index straight into it, so widening the input would run
+## off the end of the data.
+const TOPOLOGY_HIDDEN: Dictionary = {
+	"graded": [6, 4],
+	"flat": [],
+	"deep": [3, 3, 3, 3, 3],
+	"widened": [10],
+	"pinched": [1, 4],
+}
+
+## Every draw in the build path is seeded from this. Xavier weight init decides the
+## colour and (after the first batch) the radius of all 56 cylinders, so an unseeded
+## draw would make two builds of one topology value differ and the pixel critic would
+## read noise as signal. Replaces the randomize() this script used to call in _ready.
+const DNA_SEED: int = 20260730
+
+## Metres the telemetry plate floats above the TOP NEURON CENTRE of the tallest
+## column, at every topology value. See create_info_display().
+const LABEL_LIFT: float = 2.25
+
 # --- Network State ---
 var layers = []  # Array of layer arrays containing neurons
 var weights = []  # Weight matrices between layers
@@ -73,32 +148,86 @@ var camera_pivot: Node3D
 var camera_distance: float = 15.0
 var camera_rotation: Vector2 = Vector2(-0.5, 0.5)
 
+# --- Lifecycle / DNA ---
+## True once the synchronous first build has run. apply_grid_config arrives via
+## call_deferred AFTER _ready(), so it must never build — only re-build.
+var _built: bool = false
+## Every node THIS SCRIPT parented to self. _rebuild_now() frees these and nothing
+## else: freeing get_children() would destroy the caption plates and bezels the grid
+## adds after spawn.
+var _owned: Array[Node] = []
+## Non-geometry key. curation_station hands every artifact it curates
+## {"emissive": false} one line after framing its labels; that must switch the neuron
+## glow off IN PLACE and never trigger a rebuild.
+var _emissive: bool = true
+## Seeded per build. Feeds the Xavier/Glorot weight draw in build_network().
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 #=============================================================================
 #  Engine Functions
 #=============================================================================
 
 func _ready() -> void:
-	# Initialize random seed
-	randomize()
+	_build_all()
+	_built = true
+
+## The whole build, SYNCHRONOUS, from @export values alone — which is how the sweep
+## reaches the axis: it sets `topology` on the instance, adds it to the tree, and
+## never calls apply_grid_config. Neurons and weight cylinders exist in frame one.
+## start_training() is the only deferred part and it changes emission, not structure.
+##
+## The call ORDER is the shipped order, including the double setup_environment():
+## create_visualization() ends by calling setup_camera() and setup_environment()
+## itself, so the artifact has always spawned with two WorldEnvironments and two
+## DirectionalLight3Ds. That doubled key light IS the default look, so it stays.
+func _build_all() -> void:
+	# Deterministic instead of randomize(): the global RNG (batch sampling, the
+	# KEY_SPACE probe) and the weight RNG both start from DNA_SEED, so two builds of
+	# one topology value are pixel-identical.
+	seed(DNA_SEED)
+	_rng.seed = DNA_SEED
+
+	# Axis first: setup_camera and build_network both read hidden_layer_sizes.
+	_apply_topology()
 
 	# Setup camera for interactive control
 	setup_camera()
-	
+
 	# Build network architecture
 	build_network()
-	
+
 	# Generate training data (XOR problem as example)
 	generate_training_data()
-	
+
 	# Create 3D visualization
 	create_visualization()
-	
+
 	# Add lighting and environment for glow effect
 	setup_environment()
-	
+
+	# Honour a non-geometry emissive override across rebuilds (no-op while true).
+	_apply_emissive()
+
 	# Setup training loop
 	if auto_train:
 		start_training()
+
+## Translate the axis value into a hidden stack. Nothing else about the network
+## changes: the problem stays the same 4-sample XOR set at every value, which is the
+## point — the shape is the bet, and the data does not move to accommodate it.
+func _apply_topology() -> void:
+	topology = _pick_axis(topology, TOPOLOGYS, "graded")
+	var src: Array = TOPOLOGY_HIDDEN.get(topology, TOPOLOGY_HIDDEN["graded"])
+	var stack: Array[int] = []
+	for h in src:
+		stack.append(int(h))
+	hidden_layer_sizes = stack
+
+	# Hard constraint, not a preference: the training data is literally 4-in / 2-out.
+	if input_layer_size != 4 or output_layer_size != 2:
+		push_warning("[NeuralNetworkVisualization] XOR data is 4-in/2-out — forcing input/output layer sizes.")
+		input_layer_size = 4
+		output_layer_size = 2
 
 func _input(event: InputEvent) -> void:
 	# Handle interactive camera controls
@@ -167,7 +296,9 @@ func build_network() -> void:
 			var w_row = PackedFloat32Array()
 			w_row.resize(layer_sizes[i+1])
 			for k in range(layer_sizes[i+1]):
-				w_row[k] = randf_range(-limit, limit)
+				# Seeded stream (see DNA_SEED), never the global randf_range: this
+				# draw decides the colour of every weight cylinder in the still.
+				w_row[k] = _rng.randf_range(-limit, limit)
 			w_matrix.append(w_row)
 		weights.append(w_matrix)
 
@@ -196,9 +327,17 @@ func generate_training_data() -> void:
 
 func create_visualization() -> void:
 	"""Create 3D visualization of the neural network."""
-	# Clear previous visuals
-	for child in get_children():
+	# Clear previous visuals. This walks _owned, NOT get_children(): the grid parents
+	# framer panels and bezels into this subtree after spawn and freeing those would
+	# strip the artifact of its own caption.
+	for child in _owned.duplicate():
+		if not is_instance_valid(child):
+			_owned.erase(child)
+			continue
 		if child is MeshInstance3D or child.name == "ErrorGraph" or child is Label3D or child is WorldEnvironment or child is DirectionalLight3D or child.name == "CameraPivot":
+			_owned.erase(child)
+			if child.get_parent() == self:
+				remove_child(child)
 			child.queue_free()
 	neuron_meshes.clear()
 	weight_lines.clear()
@@ -211,7 +350,7 @@ func create_visualization() -> void:
 		for neuron_idx in range(num_neurons):
 			var neuron = create_neuron(layer_idx, neuron_idx, num_neurons)
 			layer_meshes.append(neuron)
-			add_child(neuron)
+			_own(neuron)
 		neuron_meshes.append(layer_meshes)
 	
 	# Create weight connections
@@ -238,7 +377,9 @@ func setup_camera() -> void:
 	var layer_sizes = [input_layer_size] + hidden_layer_sizes + [output_layer_size]
 	var network_center_x = (layer_sizes.size() - 1) * layer_spacing / 2.0
 	camera_pivot.position = Vector3(network_center_x, 0, 0)
-	add_child(camera_pivot)
+	# The camera itself is NOT tracked: it ends up parented to the pivot two lines
+	# below, so the pivot's free takes it with it.
+	_own(camera_pivot)
 	
 	# Parent the camera to the pivot
 	if camera.get_parent() != camera_pivot:
@@ -275,12 +416,12 @@ func setup_environment() -> void:
 	env.ambient_light_energy = 1.0
 
 	world_env.environment = env
-	add_child(world_env)
-	
+	_own(world_env)
+
 	# Add key light
 	var light = DirectionalLight3D.new()
 	light.transform.basis = Basis.from_euler(Vector3(-0.8, -0.6, 0))
-	add_child(light)
+	_own(light)
 
 #=============================================================================
 #  3D Object Creation
@@ -323,7 +464,7 @@ func create_weight_lines() -> void:
 			for to_idx in range(layer_sizes[layer_idx + 1]):
 				var line = create_weight_line(layer_idx, from_idx, layer_idx + 1, to_idx)
 				weight_lines.append(line)
-				add_child(line)
+				_own(line)
 
 func create_weight_line(from_layer: int, from_neuron: int, to_layer: int, to_neuron: int) -> MeshInstance3D:
 	"""Create a cylinder representing a weight, correctly oriented."""
@@ -382,6 +523,32 @@ func create_weight_line(from_layer: int, from_neuron: int, to_layer: int, to_neu
 	
 	return line
 
+## THE ONLY CAPTION. One Label3D, billboard ENABLED, so LabelFramer turns it into an
+## opaque anthracite plate with a bezel at spawn: font 24 at the default pixel_size
+## 0.005 is 0.12 m of text, three lines of telemetry about 30 characters wide, so a
+## plate near 1.9 x 0.5 m. It must therefore hang clear of the diagram.
+##
+## The x stays 0. That is the INPUT column's own x rather than the network's centre —
+## the body runs x = 0 to x = 9.0 m at the default — so the plate hangs over the left
+## end. Moving it would change the shipped look at the default value, so it is left
+## exactly where it was.
+##
+## The y is the fix. It used to be hard-coded `neuron_spacing * 4` = 6.0 m, which does
+## NOT follow the stack: at `widened` the tallest column reaches 6.75 m and a plate
+## pinned at 6.0 m would sit inside the fan of 0.02 m weight cylinders. It is now
+## always LABEL_LIFT above the top neuron CENTRE of the tallest column —
+##   graded   6-neuron column -> 3.75 + 2.25 = 6.00 m (the shipped look, to the mm)
+##   widened  10-neuron column -> 6.75 + 2.25 = 9.00 m
+##   flat / deep / pinched, 4-neuron column -> 2.25 + 2.25 = 4.50 m
+## The top neuron's surface is centre + 0.3 m and the plate's bottom edge sits about
+## 0.25 m below its own centre, so roughly 1.70 m of empty air separates plate from
+## body at EVERY value. Frontal crossing is zero.
+##
+## No other captions exist and none should be added: 16 neurons with numeric labels
+## would be 16 opaque plates, and R-027 already removed exactly that on the VR sibling.
+##
+## create_visualization()'s cleanup frees any tracked child that is a Label3D, so this
+## must keep being called AFTER that loop, as it is.
 func create_info_display() -> void:
 	info_display = get_node_or_null("InfoLabel") as Label3D
 	if not info_display:
@@ -389,19 +556,39 @@ func create_info_display() -> void:
 		info_display.name = "InfoLabel"
 		info_display.font_size = 24
 		info_display.outline_size = 3
-		info_display.position = Vector3(0, neuron_spacing * 4, 0)
 		info_display.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		add_child(info_display)
+		_own(info_display)
+	# Set unconditionally: the stack may have changed under a re-used node.
+	info_display.position = Vector3(0, _caption_y(), 0)
 	update_info_display()
+
+## Neurons in the tallest column, whichever column that is.
+func _tallest_layer_size() -> int:
+	var tallest: int = input_layer_size
+	if output_layer_size > tallest:
+		tallest = output_layer_size
+	for h in hidden_layer_sizes:
+		if int(h) > tallest:
+			tallest = int(h)
+	return tallest
+
+## y of the telemetry plate: LABEL_LIFT above the top neuron centre of the tallest
+## column. At the default 6-neuron column this is 6.0 m — the shipped value.
+func _caption_y() -> float:
+	return (float(_tallest_layer_size()) - 1.0) * neuron_spacing * 0.5 + LABEL_LIFT
 
 func create_error_graph() -> void:
 	error_graph = get_node_or_null("ErrorGraph")
-	if error_graph: error_graph.queue_free()
+	if error_graph:
+		_owned.erase(error_graph)
+		if error_graph.get_parent() == self:
+			remove_child(error_graph)
+		error_graph.queue_free()
 	error_graph = Node3D.new()
 	error_graph.name = "ErrorGraph"
 	var layer_sizes = [input_layer_size] + hidden_layer_sizes + [output_layer_size]
 	error_graph.position = Vector3(layer_sizes.size() * layer_spacing, -3, -5)
-	add_child(error_graph)
+	_own(error_graph)
 	error_history.clear()
 
 #=============================================================================
@@ -415,14 +602,20 @@ func start_training() -> void:
 	timer.name = "TrainingTimer"
 	timer.wait_time = 0.05 / training_speed
 	timer.timeout.connect(_run_training_batch)
-	add_child(timer)
+	_own(timer)
 	timer.start()
 
 func _run_training_batch() -> void:
 	"""Perform one batch of training."""
 	if not is_training or current_epoch >= training_iterations:
 		is_training = false
-		get_node_or_null("TrainingTimer").queue_free()
+		# Guarded: a rebuild frees this timer, and the unguarded call crashed on null.
+		var done_timer: Node = get_node_or_null("TrainingTimer")
+		if done_timer:
+			_owned.erase(done_timer)
+			if done_timer.get_parent() == self:
+				remove_child(done_timer)
+			done_timer.queue_free()
 		print("Training finished.")
 		return
 
@@ -673,15 +866,13 @@ func test_network(inputs: Array) -> Array:
 
 func reset_network() -> void:
 	"""Reset the network to initial random state."""
-	if is_training:
-		is_training = false
-		if get_node_or_null("TrainingTimer"):
-			get_node("TrainingTimer").queue_free()
-	
+	_stop_training()
+
 	current_epoch = 0
 	current_error = 0.0
 	build_network()
 	create_visualization() # Re-create all visual elements
+	_apply_emissive()
 	update_visualization()
 	if auto_train:
 		start_training()
@@ -692,5 +883,110 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass
+#=============================================================================
+#  GRID CONFIG INTEGRATION — Stage-2 DNA
+#=============================================================================
+
+## GridInteractablesComponent calls this via call_deferred, AFTER _ready() and first
+## in the deferred queue. So the geometry already exists and this method's only job is
+## to decide whether it was the WRONG geometry.
+##
+## curation_station hands every artifact it curates {"emissive": false} one line after
+## framing its labels. That dict carries no axis key, so it must not rebuild — but it
+## must not be silently swallowed either, so the glow is switched in place before the
+## early returns.
+func apply_grid_config(config_data: Dictionary) -> void:
+	# Snapshot every axis and geometry key BEFORE resolving anything.
+	var before_topology: String = topology
+
+	if config_data.has("topology"):
+		topology = _pick_axis(str(config_data["topology"]), TOPOLOGYS, topology)
+
+	# Non-geometry keys, applied IN PLACE, before either return.
+	if config_data.has("emissive"):
+		_emissive = _as_bool(config_data["emissive"], _emissive)
+		_apply_emissive()
+
+	if not _built:
+		return
+	if topology == before_topology:
+		return
+
+	_rebuild_now()
+	print("[NeuralNetworkVisualization] Config applied — topology=%s" % [topology])
+
+## Free ONLY what this script parented to self, then build again SYNCHRONOUSLY. No
+## call_deferred anywhere in the build path: a deferred rebuild that removes children
+## first makes the grid's auto-grounding measure a zero AABB and bail, and the artifact
+## sinks into the floor.
+func _rebuild_now() -> void:
+	_stop_training()
+	for c in _owned:
+		if not is_instance_valid(c):
+			continue
+		if c.get_parent() == self:
+			remove_child(c)
+		c.queue_free()
+	_owned.clear()
+
+	# Cached refs — all of those nodes are gone now.
+	neuron_meshes.clear()
+	weight_lines.clear()
+	info_display = null
+	error_graph = null
+	camera = null
+	camera_pivot = null
+	current_epoch = 0
+	current_error = 0.0
+	error_history.clear()
+
+	_build_all()
+
+## add_child + remember, so _rebuild_now knows exactly what it may destroy.
+func _own(n: Node) -> void:
+	add_child(n)
+	_owned.append(n)
+
+## Accept an axis value only if it names something this artifact actually builds. A
+## typo in a map token falls back to the shipped look rather than stranding a
+## placement with an empty room.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+## Map tokens arrive as strings, so "false" must not read as true.
+func _as_bool(raw: Variant, fallback: bool) -> bool:
+	if raw is bool:
+		return bool(raw)
+	if raw is int or raw is float:
+		return float(raw) != 0.0
+	if raw is String:
+		var v: String = str(raw).to_lower().strip_edges()
+		if v in ["false", "0", "off", "no"]:
+			return false
+		if v in ["true", "1", "on", "yes"]:
+			return true
+	return fallback
+
+## The emissive key does real work: it switches emission on the neuron spheres, which
+## is what the glow in the still is. update_visualization only ever writes
+## emission_energy_multiplier, so a false here stays false while training runs.
+## Re-applied after every build so a rebuild cannot quietly re-light the network.
+func _apply_emissive() -> void:
+	for layer in neuron_meshes:
+		for n in layer:
+			if not is_instance_valid(n):
+				continue
+			var mat: StandardMaterial3D = (n as MeshInstance3D).material_override as StandardMaterial3D
+			if mat:
+				mat.emission_enabled = _emissive
+
+## Stop the batch loop and take its timer with it.
+func _stop_training() -> void:
+	is_training = false
+	var t: Node = get_node_or_null("TrainingTimer")
+	if t:
+		_owned.erase(t)
+		if t.get_parent() == self:
+			remove_child(t)
+		t.queue_free()

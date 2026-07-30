@@ -38,6 +38,60 @@ const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for highlights
 @export var correlation_strength: float = 0.7
 @export var noise_level: float = 0.3
 
+# --- Stage-2 DNA axis --------------------------------------------------------
+## bearing — which way the data's real structure runs relative to the axes of
+## greatest variance; that is, whether the thing worth keeping is the thing this
+## method keeps.
+##
+##   aligned    the shipped cloud. The long axis of the smear and PC1 are the same
+##              line, so the projection costs nothing worth naming.
+##   crosswise  one 8.0 m axis, and the structure — two 0.9 m cigars offset 1.6 m —
+##              lying ACROSS it at under a third of its spread, subordinate to the
+##              direction the method ranks first. The still holds both the evidence
+##              and the loss.
+##   none       an isotropic 4.0 m ball. No direction is dominant, so the ranking
+##              PCA is asked for does not exist and PC1 points somewhere arbitrary.
+##   curve      a 6.0 m arc of radius 3.0 m. One-dimensional, but no straight rod
+##              follows it, so the flattening turns an arc into a disc.
+##   plane      a 4.6 x 4.6 m sheet 0.1 m thick. Already two-dimensional: the third
+##              component has nothing left to explain.
+##
+## Deliberately built on the VISIBLE dimensions — the visualiser only ever plots
+## sample[0..2], so an axis that hid its structure in dimension 3 would render five
+## identical stills.
+@export_enum("aligned", "crosswise", "none", "curve", "plane") var bearing: String = "aligned"
+
+## Allow-list for the axis. A value outside it is a typo in a map token and must fall
+## back to the shipped look rather than strand a placement with no cloud at all.
+const BEARINGS: PackedStringArray = ["aligned", "crosswise", "none", "curve", "plane"]
+
+# --- Bearing geometry (metres) ------------------------------------------------
+## crosswise: extent along dimension 0, cigar diameter, centre-to-centre offset of
+## the two cigars along dimension 2.
+const CROSS_LENGTH: float = 8.0
+const CROSS_THICK: float = 0.9
+const CROSS_OFFSET: float = 1.6
+
+## none: diameter of the isotropic ball.
+const BALL_DIAMETER: float = 4.0
+
+## curve: arc length, radius (so the subtended angle is 6.0 / 3.0 = 2.0 rad ≈ 115°),
+## and the diameter of the tube the samples are scattered in around the arc.
+const ARC_LENGTH: float = 6.0
+const ARC_RADIUS: float = 3.0
+const ARC_THICK: float = 0.5
+
+## plane: side of the square sheet and its thickness along dimension 2.
+const SHEET_SIDE: float = 4.6
+const SHEET_THICK: float = 0.1
+
+## DETERMINISM. Every draw in the build path comes from one of these two seeds, so
+## two builds of one bearing value are pixel-identical. Unseeded global randf() made
+## the shipped cloud a different cloud on every launch, which is noise the pixel
+## critic would read as signal.
+const DATA_SEED: int = 20260730
+const PCA_SEED: int = 90513
+
 @export_category("Visualization")
 @export var show_original_data: bool = true
 @export var show_projected_data: bool = true
@@ -95,24 +149,48 @@ var animation_progress: float = 0.0
 var _title_label_3d: Label3D
 var _stats_label_3d: Label3D
 
+# --- Lifecycle bookkeeping ----------------------------------------------------
+## True once the synchronous build has run. apply_grid_config must not rebuild
+## before it, or it would build twice.
+var _built: bool = false
+
+## Only the nodes THIS script parents to self. _rebuild_now frees these and nothing
+## else — get_children() by then also holds the grid's own added plates.
+var _owned: Array[Node] = []
+
+## Non-geometry key from curation_station.gd, applied in place to live materials and
+## honoured by every later build.
+var _emissive: bool = true
+
+## Seeded generator for power_iteration's starting vector.
+var _pca_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 func _init() -> void:
 	name = "PCA_Visualization"
 
 func _ready() -> void:
+	_build_all()
+	_built = true
+
+	if auto_start:
+		call_deferred("start_pca_computation")
+
+## The whole subtree this script owns, built SYNCHRONOUSLY from @export values alone
+## so the sweep (which sets exports and adds to the tree, nothing else) and the
+## auto-grounder (which measures the AABB the same frame) both see real geometry.
+func _build_all() -> void:
 	setup_ui()
 	setup_timer()
 	setup_data_container()
 	_build_3d_labels()
 	generate_data()
-	
-	if auto_start:
-		call_deferred("start_pca_computation")
 
 func setup_ui() -> void:
 	"""Create comprehensive UI for PCA visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
-	
+	_owned.append(ui_display)
+
 	var panel = Panel.new()
 	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	panel.size = Vector2(450, 800)
@@ -137,56 +215,214 @@ func setup_timer() -> void:
 	computation_timer.wait_time = step_delay
 	computation_timer.timeout.connect(_on_computation_timer_timeout)
 	add_child(computation_timer)
+	_owned.append(computation_timer)
 
 func setup_data_container() -> void:
 	"""Setup container for data visualization"""
 	data_container = Node3D.new()
 	data_container.name = "Data_Container"
 	add_child(data_container)
+	_owned.append(data_container)
 
 func _build_3d_labels() -> void:
-	"""Create in-scene 3D labels for VR / immersive viewing."""
+	"""Create in-scene 3D labels for VR / immersive viewing.
+
+	CAPTION PLACEMENT. Both of these hang, both keep billboard ENABLED, and both are
+	framed into opaque plates. That is correct here and costs nothing:
+	  - title at y = 6.0, font 64 -> 0.32 m of text, 28 characters ≈ 4.5 m wide, so a
+	    plate near 4.6 x 0.39 m.
+	  - stats at y = 5.0, font 36, EMPTY at spawn — the framer has nothing to plate
+	    until _update_3d_stats writes into it, and then it is ≈ 55 characters / 2.5 m.
+	Their 1.0 m separation is far over the framer's 0.16 m merge gap, so they stay two
+	plates. That is the right outcome: one is permanent, one is live.
+	The cloud tops out near 2.4 m at EVERY bearing value — highest sample plus the
+	0.08 m sphere radius: aligned 2.38, none 2.08, plane 1.50, curve 1.02,
+	crosswise 0.53 — so both plates clear it by more than 2.5 m and the frontal
+	crossing is 0 at every value of the axis, not just the default."""
 	_title_label_3d = Label3D.new()
 	_title_label_3d.text = "Principal Component Analysis"
 	_title_label_3d.font_size = 64
 	_title_label_3d.modulate = COLOR_SPECIAL
-	_title_label_3d.position = Vector3(0, 6, 0)
+	_title_label_3d.position = Vector3(0, 6.0, 0)
 	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(_title_label_3d)
+	_owned.append(_title_label_3d)
 
 	_stats_label_3d = Label3D.new()
 	_stats_label_3d.font_size = 36
 	_stats_label_3d.modulate = Color.WHITE
-	_stats_label_3d.position = Vector3(0, 5, 0)
+	_stats_label_3d.position = Vector3(0, 5.0, 0)
 	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(_stats_label_3d)
+	_owned.append(_stats_label_3d)
 
 func generate_data() -> void:
-	"""Generate high-dimensional correlated data"""
+	"""Generate the sample cloud for the current `bearing`.
+
+	This is where the axis bites. The rigged condition the artifact shipped with was
+	the correlated cloud below (`aligned`): a population whose direction of greatest
+	variance is also its meaningful one, so the compression is free and nothing is
+	ever seen to be lost. Each other value moves the real structure somewhere else
+	relative to that direction.
+
+	All five write dimensions 0..2 — the only ones the visualiser plots — and then
+	fill any remaining dimension, so the same still cannot come out twice."""
 	original_data.clear()
-	
-	# Generate correlated data in higher dimensions
+
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = DATA_SEED
+
+	match bearing:
+		"crosswise":
+			_generate_crosswise(rng)
+		"none":
+			_generate_isotropic(rng)
+		"curve":
+			_generate_arc(rng)
+		"plane":
+			_generate_sheet(rng)
+		_:
+			_generate_aligned(rng)
+
+	create_original_data_visualization()
+	print("Generated ", num_samples, " samples with ", num_dimensions, " dimensions (bearing=", bearing, ")")
+
+## aligned — THE SHIPPED CLOUD, formula untouched. Two latent bases, dimension 0 is
+## base1 plus noise and every other dimension is a decreasingly correlated mix, which
+## gives a diagonal smear about 4.6 m along its long axis. The only change from the
+## pre-promotion code is that the draws come from a seeded generator instead of the
+## global one, so the cloud is the same cloud on every launch.
+func _generate_aligned(rng: RandomNumberGenerator) -> void:
 	for i in range(num_samples):
-		var sample = []
-		
+		var sample: Array = []
+
 		# Create base variables
-		var base1 = randf_range(-data_spread, data_spread)
-		var base2 = randf_range(-data_spread, data_spread)
-		
+		var base1: float = rng.randf_range(-data_spread, data_spread)
+		var base2: float = rng.randf_range(-data_spread, data_spread)
+
 		# Create correlated features
-		sample.append(base1 + randf_range(-noise_level, noise_level))
-		sample.append(base1 * correlation_strength + base2 * (1.0 - correlation_strength) + randf_range(-noise_level, noise_level))
-		
+		sample.append(base1 + rng.randf_range(-noise_level, noise_level))
+		sample.append(base1 * correlation_strength + base2 * (1.0 - correlation_strength) + rng.randf_range(-noise_level, noise_level))
+
 		# Additional dimensions with varying correlations
 		for j in range(2, num_dimensions):
-			var correlation = correlation_strength * pow(0.7, j - 1)  # Decreasing correlation
-			var feature = base1 * correlation + base2 * (1.0 - correlation) + randf_range(-noise_level * 2, noise_level * 2)
+			var correlation: float = correlation_strength * pow(0.7, j - 1)  # Decreasing correlation
+			var feature: float = base1 * correlation + base2 * (1.0 - correlation) + rng.randf_range(-noise_level * 2, noise_level * 2)
 			sample.append(feature)
-		
+
 		original_data.append(sample)
-	
-	create_original_data_visualization()
-	print("Generated ", num_samples, " samples with ", num_dimensions, " dimensions")
+
+## crosswise — the value that earns the axis. One long axis, 8.0 m of it along
+## dimension 0, and the thing worth knowing lying ACROSS that axis: two cigars of
+## 0.9 m diameter whose centres sit 1.6 m apart along dimension 2. Anyone in the room
+## sees two groups; a method that ranks directions by spread sees 2.5 m against 8.0 m
+## and puts the groups behind the smear. The still contains both the evidence and the
+## loss.
+##
+## STATED PLAINLY: the geometry is what makes the point, not the pipeline's arithmetic.
+## Under the shipped normalize_data = true every dimension is divided by its own
+## standard deviation before the covariance is taken, so the 8:1 spread ratio built
+## here does not survive into the eigenvalues and the split is not guaranteed to be the
+## first thing dropped. What the still shows — a population whose real structure runs
+## across the axis of greatest extent — is true regardless.
+func _generate_crosswise(rng: RandomNumberGenerator) -> void:
+	var half_len: float = CROSS_LENGTH * 0.5
+	var cigar_r: float = CROSS_THICK * 0.5
+	for i in range(num_samples):
+		var side: float = 1.0 if (i % 2) == 0 else -1.0
+		var along: float = rng.randf_range(-half_len, half_len)
+		var ang: float = rng.randf_range(0.0, TAU)
+		var rad: float = cigar_r * sqrt(rng.randf())   # sqrt keeps the disc uniform
+		var d0: float = along
+		var d1: float = cos(ang) * rad
+		var d2: float = side * CROSS_OFFSET * 0.5 + sin(ang) * rad
+		var sample: Array = [d0, d1, d2]
+		for _j in range(3, num_dimensions):
+			# The extra dimensions follow the long axis, never the group split — the
+			# split must stay the smallest thing in the set.
+			sample.append(d0 * 0.35 + rng.randf_range(-noise_level, noise_level))
+		original_data.append(sample)
+
+## none — an isotropic ball 4.0 m across, uniform in volume. There is no dominant
+## direction, so the covariance is near-spherical and PC1 points somewhere arbitrary:
+## measured explained variance comes out ≈40/32/28 % across the three rods, against
+## 83/14/3 % for the shipped `aligned` cloud. It does not flatten to zero — at 100
+## samples the sampling noise is the only thing left to rank, which is exactly the
+## honest picture of a method asked to order directions that are not ordered.
+func _generate_isotropic(rng: RandomNumberGenerator) -> void:
+	var ball_r: float = BALL_DIAMETER * 0.5
+	for i in range(num_samples):
+		var dir: Vector3 = Vector3(rng.randfn(), rng.randfn(), rng.randfn())
+		if dir.length() < 0.000001:
+			dir = Vector3.UP
+		dir = dir.normalized()
+		var r: float = ball_r * pow(rng.randf(), 1.0 / 3.0)   # uniform in volume
+		var p: Vector3 = dir * r
+		var sample: Array = [p.x, p.y, p.z]
+		for _j in range(3, num_dimensions):
+			# Independent, same spread — isotropy has to hold in the unseen dimensions
+			# too or the ranking quietly comes back.
+			sample.append(rng.randf_range(-ball_r, ball_r))
+		original_data.append(sample)
+
+## curve — the 100 samples laid along a 6.0 m arc of radius 3.0 m in the plane of
+## dimensions 0 and 1 (subtending 2.0 rad), scattered in a 0.5 m tube around it. A
+## one-dimensional structure that no straight 3.0 m rod can follow: the flattening
+## turns an arc into a disc. Recentred so the arc's own bounding box sits on the
+## origin, which keeps the framing camera honest.
+func _generate_arc(rng: RandomNumberGenerator) -> void:
+	var span: float = ARC_LENGTH / ARC_RADIUS               # 2.0 rad ≈ 114.6°
+	var y_mid: float = ARC_RADIUS * (1.0 + cos(span * 0.5)) * 0.5
+	var tube_r: float = ARC_THICK * 0.5
+	var denom: float = float(max(num_samples - 1, 1))
+	for i in range(num_samples):
+		var t: float = -span * 0.5 + span * float(i) / denom
+		var ang: float = rng.randf_range(0.0, TAU)
+		var rad: float = tube_r * sqrt(rng.randf())
+		var radial: float = cos(ang) * rad                  # outward from the arc
+		var d0: float = ARC_RADIUS * sin(t) + sin(t) * radial
+		var d1: float = ARC_RADIUS * cos(t) - y_mid + cos(t) * radial
+		var d2: float = sin(ang) * rad
+		var sample: Array = [d0, d1, d2]
+		for _j in range(3, num_dimensions):
+			# The latent coordinate the arc actually runs along — one number explains
+			# the whole population, and it is not a direction in the space.
+			sample.append(t * 1.5 + rng.randf_range(-noise_level, noise_level))
+		original_data.append(sample)
+
+## plane — the cloud collapsed onto a 4.6 x 4.6 m sheet 0.1 m thick, already
+## two-dimensional in three-space, so the reduction to two components costs nothing at
+## all and the third component has nothing left to explain.
+##
+## The sheet is TILTED, not axis-aligned, and both reasons matter.
+##   Optically: a sheet lying square to the framing camera fills a square outline and
+##   its flatness is invisible — it would photograph as an ordinary cloud. Leaning it
+##   53° about dimension 0 puts the flatness in the picture.
+##   Honestly: center_and_normalize_data divides EVERY dimension by its own standard
+##   deviation, so a 0.1 m axis-aligned thickness gets inflated back to unit variance
+##   and the third rod recovers a fifth of the explained variance it has no right to.
+##   Tilting spreads the degeneracy across two dimensions instead of hiding it in one,
+##   where no per-dimension rescaling can undo it: the third eigenvalue goes to ~0 and
+##   stays there. The flatness of the data survives the pipeline's own bookkeeping.
+func _generate_sheet(rng: RandomNumberGenerator) -> void:
+	var half: float = SHEET_SIDE * 0.5
+	var thin: float = SHEET_THICK * 0.5
+	# Orthonormal frame of the sheet: e1 along dimension 0, e2 leaning out of the
+	# vertical, and the 0.1 m thickness along the normal n = e1 x e2.
+	var e1: Vector3 = Vector3(1.0, 0.0, 0.0)
+	var e2: Vector3 = Vector3(0.0, 0.6, 0.8)
+	var nrm: Vector3 = Vector3(0.0, -0.8, 0.6)
+	for i in range(num_samples):
+		var u: float = rng.randf_range(-half, half)
+		var v: float = rng.randf_range(-half, half)
+		var w: float = rng.randf_range(-thin, thin)
+		var p: Vector3 = e1 * u + e2 * v + nrm * w
+		var sample: Array = [p.x, p.y, p.z]
+		for _j in range(3, num_dimensions):
+			# A fixed linear mix of the two coordinates that matter: the unseen
+			# dimensions add no rank, so the whole population is a plane in 4-space too.
+			sample.append(0.6 * u - 0.4 * v + rng.randf_range(-thin, thin))
+		original_data.append(sample)
 
 func create_original_data_visualization() -> void:
 	"""Create 3D visualization of original data (first 3 dimensions)"""
@@ -219,7 +455,7 @@ func create_data_point(position: Vector3, color: Color, size: float) -> MeshInst
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = color
-	material.emission_enabled = true
+	material.emission_enabled = _emissive
 	material.emission = color * 0.35
 	material.metallic = 0.3
 	material.roughness = 0.45
@@ -354,10 +590,18 @@ func compute_eigenvalues_vectors() -> void:
 	"""Compute eigenvalues and eigenvectors using power iteration method"""
 	eigenvalues.clear()
 	eigenvectors.clear()
-	
+
 	# Simplified eigenvalue/eigenvector computation using power iteration
 	# This is educational - real implementations use more sophisticated methods
-	
+
+	# DETERMINISM: re-seed before the decomposition so the whole sequence of starting
+	# vectors is fixed. Power iteration converges to the same eigenvector from almost
+	# any start, but "almost" is not "always" — a near-degenerate covariance (bearing
+	# `none`, where the eigenvalues are within a few percent) is exactly the case where
+	# the start decides the answer, and an unseeded start would put a differently
+	# oriented rod in every frame.
+	_pca_rng.seed = PCA_SEED
+
 	var remaining_matrix = duplicate_matrix(covariance_matrix)
 	
 	for component in range(min(num_dimensions, target_dimensions + 1)):
@@ -379,9 +623,9 @@ func power_iteration(matrix: Array, max_iterations: int) -> Dictionary:
 	var n = matrix.size()
 	var vector = []
 	
-	# Initialize random vector
+	# Initialize random vector — seeded, see compute_eigenvalues_vectors
 	for i in range(n):
-		vector.append(randf_range(-1.0, 1.0))
+		vector.append(_pca_rng.randf_range(-1.0, 1.0))
 	
 	# Normalize initial vector
 	vector = normalize_vector(vector)
@@ -610,22 +854,40 @@ func create_component_line(component: Array, color: Color, index: int) -> MeshIn
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = color
-	material.emission_enabled = true
+	material.emission_enabled = _emissive
 	material.emission = color * 0.5
 	line.material_override = material
-	
+
 	# Position and orient the line
 	line.position = Vector3.ZERO
 	line.look_at(direction * length, Vector3.UP)
 	line.rotate_object_local(Vector3.RIGHT, PI/2)
-	
-	# Add label
+
+	# CAPTION PLACEMENT — the readout is INK ON THE ROD, not a tag hanging off it.
+	#
+	# It used to be two lines ("PC1" / "45.2%", font 20 -> 0.10 m of text, ≈0.24 m wide)
+	# sitting at direction * length * 0.6 = 1.8 m in the rod's local frame — PAST the
+	# 1.5 m tip, floating in the cloud with nothing behind it. It passed the placement
+	# gate only because Label3D's default billboard is DISABLED and the framer skips
+	# disabled labels, which is precisely the unearned exemption a previous wave was
+	# caught claiming on 28 labels.
+	#
+	# So earn it. One line, font 8 -> 0.04 m tall and about 0.18 m long; the basis turns
+	# the glyph plane onto the rod's +Y face so the text runs ALONG the 3.0 m length
+	# (0.18 m of it, centred 0.45 m out, well inside the 1.5 m half-length) and stands
+	# only 0.04 m across the 0.05 m face; y = 0.032 lays it 0.007 m off that face. There
+	# are now 0.05 m of rod behind every glyph, so billboard DISABLED is the truth about
+	# this label and not a dodge — and no plate is ever raised in front of the cloud.
 	var label = Label3D.new()
-	label.text = "PC" + str(index + 1) + "\n" + str(explained_variance_ratio[index] * 100).pad_decimals(1) + "%"
-	label.font_size = 20
-	label.position = direction * length * 0.6
+	label.text = "PC" + str(index + 1) + " " + str(explained_variance_ratio[index] * 100).pad_decimals(1) + "%"
+	label.font_size = 8
+	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	# Glyph plane -> the rod's X-Z faces, glyph normal -> +Y, text run -> the rod's
+	# length. Columns are (x_axis, y_axis, z_axis).
+	label.transform.basis = Basis(Vector3(0, 0, 1), Vector3(1, 0, 0), Vector3(0, 1, 0))
+	label.position = Vector3(0, 0.032, 0.45)
 	line.add_child(label)
-	
+
 	return line
 
 func finalize_pca() -> void:
@@ -690,17 +952,23 @@ func get_reconstruction_error() -> float:
 	return total_error / original_data.size()
 
 func clear_visualizations() -> void:
-	"""Clear all visualization elements"""
+	"""Clear all visualization elements.
+
+	is_instance_valid guards throughout: after a bearing rebuild the whole
+	Data_Container has already gone, so these references can be dangling."""
 	for point in original_points:
-		point.queue_free()
+		if is_instance_valid(point):
+			point.queue_free()
 	original_points.clear()
-	
+
 	for point in projected_points:
-		point.queue_free()
+		if is_instance_valid(point):
+			point.queue_free()
 	projected_points.clear()
-	
+
 	for line in component_lines:
-		line.queue_free()
+		if is_instance_valid(line):
+			line.queue_free()
 	component_lines.clear()
 
 func update_ui() -> void:
@@ -857,5 +1125,120 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass
+# ═══════════════════════════════════════════════════════════════════
+# GRID CONFIG INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+
+## Called by GridInteractablesComponent via call_deferred, AFTER _ready(). Every
+## accepted key does something; everything else is ignored in silence.
+##
+##   #bearing:crosswise   Stage-2 DNA axis — rebuilds the cloud.
+##   #emissive:false      curation_station hands this to every artifact it curates,
+##                        one line after framing the labels. It arrives with no axis
+##                        key, so it must change nothing about the geometry — and it
+##                        must not be quietly swallowed either, which is what happens
+##                        when a key is accepted above an early return and applied
+##                        only inside the rebuild that the early return skips.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_bearing: String = bearing
+
+	if config_data.has("bearing"):
+		bearing = _pick_axis(str(config_data["bearing"]), BEARINGS, bearing)
+
+	# Non-geometry keys are applied IN PLACE, before any return.
+	if config_data.has("emissive"):
+		_emissive = _as_bool(config_data["emissive"], _emissive)
+		_apply_emissive_now()
+
+	if not _built:
+		return
+	if bearing == before_bearing:
+		return
+
+	_rebuild_now()
+	print("[PCA_Visualization] Config applied - bearing=%s" % [bearing])
+
+## Accept an axis value only if it names something we actually build. A typo in a map
+## token falls back to the shipped look rather than stranding a placement with no
+## cloud at all.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+## Map tokens arrive as strings, so "false" has to mean false.
+func _as_bool(raw, fallback: bool) -> bool:
+	if raw is bool:
+		return bool(raw)
+	if raw is int or raw is float:
+		return float(raw) != 0.0
+	if raw is String:
+		var v: String = str(raw).to_lower().strip_edges()
+		if v in ["false", "0", "no", "off"]:
+			return false
+		if v in ["true", "1", "yes", "on"]:
+			return true
+	return fallback
+
+## Emission on every sphere and rod already in the scene. Materials are per-node
+## material_override instances, so this is a live edit, not a rebuild — and
+## create_data_point / create_component_line read _emissive too, so a later bearing
+## rebuild keeps the setting.
+func _apply_emissive_now() -> void:
+	var targets: Array = []
+	targets.append_array(original_points)
+	targets.append_array(projected_points)
+	targets.append_array(component_lines)
+	for n in targets:
+		if not is_instance_valid(n):
+			continue
+		var mi: MeshInstance3D = n as MeshInstance3D
+		if mi == null:
+			continue
+		var mat: StandardMaterial3D = mi.material_override as StandardMaterial3D
+		if mat == null:
+			continue
+		mat.emission_enabled = _emissive
+
+## Free only what this script parented to self, then build again SYNCHRONOUSLY in the
+## same frame. No call_deferred in here: a rebuild that removes children and returns
+## leaves the auto-grounder measuring a zero AABB, and it bails.
+func _rebuild_now() -> void:
+	for c in _owned:
+		if is_instance_valid(c):
+			remove_child(c)
+			c.queue_free()
+	_owned.clear()
+
+	# Cached refs are dangling now
+	ui_display = null
+	computation_timer = null
+	data_container = null
+	_title_label_3d = null
+	_stats_label_3d = null
+	original_points.clear()
+	projected_points.clear()
+	component_lines.clear()
+
+	# The pipeline was running against the old cloud
+	is_computing = false
+	computation_step = 0
+	computation_complete = false
+	projection_animation_active = false
+	animation_progress = 0.0
+	centered_data.clear()
+	normalized_data.clear()
+	covariance_matrix.clear()
+	eigenvalues.clear()
+	eigenvectors.clear()
+	principal_components.clear()
+	projected_data.clear()
+	explained_variance_ratio.clear()
+	total_variance = 0.0
+
+	_build_all()
+
+	# Restart the timer-driven half exactly the way _ready() does. Deferred, and
+	# strictly AFTER the synchronous build above, so the geometry the grounder
+	# measures is already in the tree.
+	if auto_start:
+		call_deferred("start_pca_computation")

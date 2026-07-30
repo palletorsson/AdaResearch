@@ -122,6 +122,11 @@ def subject_fraction(img: list[int]) -> float:
 # fixing an old one.
 BLANK_SUBJECT = 0.002
 
+# Two values whose renders differ by less than this in FOCUS are twins: the axis
+# declares two things and shows one. Set at half the WEAK bar, so a twin is
+# unambiguous rather than merely subtle.
+TWIN_FOCUS = 0.060
+
 
 def main() -> int:
     gallery = "readymades-dna"
@@ -169,6 +174,7 @@ def main() -> int:
                 continue
             fr: list[float] = []
             fo: list[float] = []
+            pair_focus: list[tuple] = []
             # MEASURE THE ARTIFACT, NOT THE MARGIN. capture_config_sweep frames the
             # camera on the bounding SPHERE (the AABB diagonal) and then multiplies the
             # distance by PAD = 1.9, so a tile is roughly three-quarters empty
@@ -211,8 +217,21 @@ def main() -> int:
                     f1, f2 = diff(cache[xid], cache[yid])
                 fr.append(f1)
                 fo.append(f2)
+                # Remember WHICH pair, so twins can be named below.
+                pair_focus.append((f2, str(x.get("dna", {}).get(axis, "?")),
+                                   str(y.get("dna", {}).get(axis, "?"))))
             frame = sum(fr) / len(fr)
             focus = sum(fo) / len(fo)
+
+            # TWINS: value pairs that render the same. The verdict above is a MEAN over
+            # every pair, so an axis can pass while several of its values are one
+            # picture — pca_visualization scored 11.6% overall while four of its five
+            # values (crosswise, curve, none, plane) were mutually identical at ~1%, the
+            # whole score coming from the fifth. A five-value axis that is really a
+            # two-value axis is a false declaration, and averaging hid it. Reported, not
+            # scored: a twin is a design fault for a human to judge, not a verdict.
+            twins = sorted((p for p in pair_focus if p[0] < TWIN_FOCUS),
+                           key=lambda p: p[0])
             # Did the artifact draw ANYTHING? Checked before any verdict, because a
             # verdict on an empty picture is a statement about the harness, not the axis.
             seen = {str(e["id"]) for pair in pairs for e in pair}
@@ -233,7 +252,9 @@ def main() -> int:
             print(f"{prop:24} {axis:22} {frame*100:6.2f}% {focus*100:7.2f}%  {verdict}")
             report.append({"artifact": prop, "axis": axis, "frame": round(frame, 5),
                            "focus": round(focus, 5), "verdict": verdict,
-                           "subject": round(subject, 5), "pairs": len(pairs)})
+                           "subject": round(subject, 5), "pairs": len(pairs),
+                           "twins": [{"a": a, "b": b, "focus": round(f, 5)}
+                                     for f, a, b in twins]})
 
     inert = [r for r in report if r["verdict"] == "INERT"]
     weak = [r for r in report if r["verdict"] == "WEAK"]
@@ -251,6 +272,20 @@ def main() -> int:
         for r in blank:
             print(f"  {r['artifact']}.{r['axis']}"
                   f"  subject {r['subject']*100:.2f}% of frame")
+    twinned = [r for r in report if r.get("twins")]
+    if twinned:
+        n = sum(len(r["twins"]) for r in twinned)
+        print("\nTWINS — declared values that render the SAME. The verdict above is a MEAN"
+              " over pairs, so an axis can pass while several of its values are one"
+              " picture. pca_visualization scored 11.6% overall while four of its five"
+              " values were mutually identical at ~1%, the whole score coming from the"
+              " fifth. A five-value axis that is really a two-value axis is a false"
+              " declaration, and averaging hid it:")
+        for r in twinned:
+            for t in r["twins"]:
+                print(f"  {r['artifact']}.{r['axis']}  {t['a']} == {t['b']}"
+                      f"  (focus {t['focus']*100:.2f}%)")
+        print(f"  {n} twin pair(s) across {len(twinned)} axes")
     if inert:
         print("\nINERT — these knobs are not connected to anything you can see:")
         for r in inert:

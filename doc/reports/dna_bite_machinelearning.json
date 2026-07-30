@@ -1,0 +1,174 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "machinelearning-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "gradient_descent_visualization",
+   "axis": "basin",
+   "frame": 0.07208,
+   "focus": 0.23186,
+   "verdict": "bites",
+   "subject": 0.0734,
+   "pairs": 10,
+   "twins": []
+  },
+  {
+   "artifact": "evolved_creatures",
+   "axis": "selection",
+   "frame": 0.0277,
+   "focus": 0.12921,
+   "verdict": "bites",
+   "subject": 0.00297,
+   "pairs": 10,
+   "twins": []
+  },
+  {
+   "artifact": "non_teleological_evolution",
+   "axis": "selection",
+   "frame": 0.07756,
+   "focus": 0.55814,
+   "verdict": "bites",
+   "subject": 0.04437,
+   "pairs": 10,
+   "twins": []
+  },
+  {
+   "artifact": "evolvingflowers",
+   "axis": "selection",
+   "frame": 0.03186,
+   "focus": 0.16284,
+   "verdict": "bites",
+   "subject": 0.0368,
+   "pairs": 10,
+   "twins": []
+  },
+  {
+   "artifact": "pca_visualization",
+   "axis": "bearing",
+   "frame": 0.0944,
+   "focus": 0.11623,
+   "verdict": "WEAK",
+   "subject": 0.59094,
+   "pairs": 10,
+   "twins": [
+    {
+     "a": "curve",
+     "b": "plane",
+     "focus": 0.00893
+    },
+    {
+     "a": "crosswise",
+     "b": "curve",
+     "focus": 0.01044
+    },
+    {
+     "a": "crosswise",
+     "b": "plane",
+     "focus": 0.01078
+    },
+    {
+     "a": "curve",
+     "b": "none",
+     "focus": 0.01262
+    },
+    {
+     "a": "none",
+     "b": "plane",
+     "focus": 0.01309
+    },
+    {
+     "a": "crosswise",
+     "b": "none",
+     "focus": 0.0146
+    }
+   ]
+  },
+  {
+   "artifact": "loss_function_comparator",
+   "axis": "tail",
+   "frame": 0.04212,
+   "focus": 0.33817,
+   "verdict": "bites",
+   "subject": 0.03383,
+   "pairs": 10,
+   "twins": []
+  },
+  {
+   "artifact": "enhanced_kmeans",
+   "axis": "cohort",
+   "frame": 0.10369,
+   "focus": 0.26506,
+   "verdict": "bites",
+   "subject": 0.28184,
+   "pairs": 10,
+   "twins": []
+  },
+  {
+   "artifact": "svm_visualization",
+   "axis": "cohort",
+   "frame": 0.09233,
+   "focus": 0.20095,
+   "verdict": "bites",
+   "subject": 0.43258,
+   "pairs": 10,
+   "twins": [
+    {
+     "a": "block",
+     "b": "skew",
+     "focus": 0.05979
+    }
+   ]
+  },
+  {
+   "artifact": "random_forest_visualization",
+   "axis": "cohort",
+   "frame": 0.09509,
+   "focus": 0.28176,
+   "verdict": "bites",
+   "subject": 0.50465,
+   "pairs": 10,
+   "twins": [
+    {
+     "a": "braid",
+     "b": "skew",
+     "focus": 0.01805
+    }
+   ]
+  },
+  {
+   "artifact": "neural_network_visualization",
+   "axis": "topology",
+   "frame": 0.03552,
+   "focus": 0.19583,
+   "verdict": "bites",
+   "subject": 0.01793,
+   "pairs": 10,
+   "twins": []
+  },
+  {
+   "artifact": "neural_networks_vr",
+   "axis": "topology",
+   "frame": 0.03488,
+   "focus": 0.1537,
+   "verdict": "bites",
+   "subject": 0.01836,
+   "pairs": 10,
+   "twins": []
+  },
+  {
+   "artifact": "computer_vision_vr",
+   "axis": "detection",
+   "frame": 0.0362,
+   "focus": 0.18442,
+   "verdict": "bites",
+   "subject": 0.01867,
+   "pairs": 10,
+   "twins": []
+  }
+ ]
+}

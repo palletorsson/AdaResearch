@@ -3812,6 +3812,17 @@
    }
   },
   "gradient_descent_visualization": {
+   "dna": {
+    "axes": {
+    "basin": [
+    "bowl",
+    "valley",
+    "plural",
+    "plateau",
+    "scarp"
+    ]
+    }
+   },
    "category": "algorithms",
    "complexity": "intermediate",
    "description": "Gradient descent optimization on a loss landscape — watch the optimizer slide downhill following the steepest direction. The engine behind all neural network training, with learning rate and momentum visible.",

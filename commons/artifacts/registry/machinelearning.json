@@ -1240,6 +1240,17 @@
    "qfep_connection": "The vision pipeline laid end to end — raw pixels to edges to features to labels. Sight as a supply chain: each stage consumes the last one's output, and 'seeing a cat' turns out to be the top floor of a factory of thresholds."
   },
   "computer_vision_vr": {
+   "dna": {
+    "axes": {
+    "detection": [
+    "named",
+    "invented",
+    "swarm",
+    "whole",
+    "bare"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Interactive image processing with spatial convolution filters",
@@ -1814,6 +1825,17 @@
    "qfep_connection": "PCA, t-SNE, and UMAP flattening high-dimensional clouds into maps you can read — each with its own loyalty: PCA to variance, t-SNE to neighborhoods, UMAP to structure. Every flattening lies; each lies differently; choosing the lie is the craft."
   },
   "enhanced_kmeans": {
+   "dna": {
+    "axes": {
+    "cohort": [
+    "blobs",
+    "block",
+    "rings",
+    "braid",
+    "skew"
+    ]
+    }
+   },
    "category": "machinelearning",
    "complexity": "intermediate",
    "description": "Interactive K-means clustering visualization with adjustable k, colored cluster assignments, and centroid movement animation.",
@@ -2062,6 +2084,17 @@
    "qfep_connection": "Weak learners voting their way to strength — bagging, boosting, forests of shallow opinions outperforming a single deep one. The statistics of the committee: errors that cancel when they're uncorrelated. Democracy as a variance-reduction technique."
   },
   "evolved_creatures": {
+   "dna": {
+    "axes": {
+    "selection": [
+    "drift",
+    "uniform",
+    "culled",
+    "runaway",
+    "split"
+    ]
+    }
+   },
    "category": "machinelearning",
    "complexity": "advanced",
    "description": "Physics-based creature evolution inspired by Karl Sims — bipedal bodies evolve locomotion through genetic algorithms. Morphology and behavior co-evolve, producing creatures that learn to walk through selection pressure.",
@@ -2508,6 +2541,17 @@
    }
   },
   "evolvingflowers": {
+   "dna": {
+    "axes": {
+    "selection": [
+    "drift",
+    "uniform",
+    "culled",
+    "runaway",
+    "split"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "genome = {petals, color_hue, symmetry, L-system_rules, branch_angle}; fitness = symmetry + vibrancy + complexity",
@@ -4093,6 +4137,17 @@
    "qfep_connection": "Multiple models stacked, each learning from the layer below — the chapter's architecture-of-architectures, where one learner's output is another's raw world. Depth as the whole trick: no single layer understands anything, and the stack, somehow, does."
   },
   "loss_function_comparator": {
+   "dna": {
+    "axes": {
+    "tail": [
+    "few",
+    "none",
+    "heavy",
+    "sole",
+    "split"
+    ]
+    }
+   },
    "category": "machinelearning",
    "complexity": "intermediate",
    "description": "Same dataset, three different loss functions applied simultaneously. MSE (smooth bowl), Huber (outlier-robust), and adversarial (deceptive valleys). Gradient descent balls roll on each surface, arriving at different answers. The landscape is not given — it is authored.",
@@ -4462,6 +4517,17 @@
    "qfep_connection": "A memory cell you can walk through — gates deciding what to keep, what to forget, what to let out. The LSTM is the chapter's answer to time: a network that carries a thread of context forward, forgetting on purpose so the important thing survives. Memory as a valve, not a vault."
   },
   "neural_network_visualization": {
+   "dna": {
+    "axes": {
+    "topology": [
+    "graded",
+    "flat",
+    "deep",
+    "widened",
+    "pinched"
+    ]
+    }
+   },
    "category": "machinelearning",
    "complexity": "intermediate",
    "description": "Layered neural network with visible activations, weights as line thickness, forward pass animation. See how information transforms through layers.",
@@ -4698,6 +4764,17 @@
    "qfep_connection": "A feedforward network with visible activations — signal flowing layer to layer, weights as living wires. The blind adjuster from the ML chapter, here held still enough to watch think."
   },
   "neural_networks_vr": {
+   "dna": {
+    "axes": {
+    "topology": [
+    "graded",
+    "flat",
+    "deep",
+    "widened",
+    "pinched"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "advanced",
    "description": "Walkable neural network with visible weights and backpropagation",
@@ -4935,6 +5012,17 @@
    "qfep_connection": "The language pipeline — tokenization, embedding, sequence modeling — words becoming vectors becoming predictions. The uncomfortable center: meaning handled as geometry, nearness in a space no one can visit."
   },
   "non_teleological_evolution": {
+   "dna": {
+    "axes": {
+    "selection": [
+    "drift",
+    "uniform",
+    "culled",
+    "runaway",
+    "split"
+    ]
+    }
+   },
    "category": "machinelearning",
    "complexity": "intermediate",
    "description": "Bodies exist in a space with no fitness function. They reproduce based on proximity and energy (gained by exploring, lost by existing). Forms diversify without goal or optimization — just drift, variation, and persistence. No best creature. No progress narrative.",
@@ -5173,6 +5261,17 @@
    "qfep_connection": "SGD, Adam, RMSprop racing down the same loss landscape — momentum, adaptive steps, and raw descent taking different paths to different valleys. The chapter's marble multiplied into a field of runners: even blind downhill has schools of technique."
   },
   "pca_visualization": {
+   "dna": {
+    "axes": {
+    "bearing": [
+    "aligned",
+    "crosswise",
+    "none",
+    "curve",
+    "plane"
+    ]
+    }
+   },
    "category": "machinelearning",
    "complexity": "advanced",
    "description": "Principal Component Analysis — high-dimensional data projected onto principal axes. Shows variance capture and dimensionality reduction in 3D.",
@@ -5410,6 +5509,17 @@
    }
   },
   "random_forest_visualization": {
+   "dna": {
+    "axes": {
+    "cohort": [
+    "block",
+    "blobs",
+    "rings",
+    "braid",
+    "skew"
+    ]
+    }
+   },
    "category": "machinelearning",
    "complexity": "intermediate",
    "description": "Visual representation of random forest ensemble — multiple decision trees voting on classification, showing how diversity improves accuracy.",
@@ -6190,6 +6300,17 @@
    "qfep_connection": "Attention as a spotlight — one beam, serially sweeping, illuminating what cognition currently holds. The older psychology of focus: attention as a scarce resource pointed at one thing at a time."
   },
   "svm_visualization": {
+   "dna": {
+    "axes": {
+    "cohort": [
+    "blobs",
+    "block",
+    "rings",
+    "braid",
+    "skew"
+    ]
+    }
+   },
    "category": "machinelearning",
    "complexity": "intermediate",
    "description": "SVM hyperplane separator with support vectors highlighted. Shows maximum margin classification and kernel trick for non-linear boundaries.",

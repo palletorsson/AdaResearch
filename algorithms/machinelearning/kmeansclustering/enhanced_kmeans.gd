@@ -13,6 +13,72 @@ extends Node3D
 # Enhanced K-Means Clustering Algorithm Visualization
 # Educational tool with advanced features and interactive controls
 
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — axis: cohort
+# ═══════════════════════════════════════════════════════════════════
+#
+# The shape of the population the method is asked to divide. The data here was
+# authored to flatter the method — three tidy gaussian discs, which k-means was
+# built to find — and this is the knob that stops it flattering. The algorithm is
+# untouched at every value: it produces whatever boundary it produces, including
+# a wrong one.
+#
+#   blobs  the shipped case. Three discs of ~30 points at up to 4.0 m radius,
+#          centres anywhere within +/-8.3 m, plus 10 noise points loose in the
+#          25 x 8 x 25 m box. k = 4 asked to find 3 clusters that genuinely exist.
+#   block  100 points filling the whole box uniformly, no cluster structure at
+#          all. The four pucks still land, still claim four territories: a method
+#          returning a confident answer to a question the data did not ask.
+#   rings  two concentric shells — 60 points on a 10.0 m ring 1.0 m thick around
+#          a 3.0 m core of 40. A Voronoi cell cannot express a shell, so the four
+#          pucks quarter the ring like a pie.
+#   braid  two interleaved spiral arms of 50, two turns across a 22 m span and
+#          1.5 m apart at closest approach — every point's nearest neighbour
+#          belongs to the other arm.
+#   skew   one dominant cluster of 88 at 5.0 m radius with two 6-point clusters
+#          11 m away; the pucks crowd the majority and the two small groups end
+#          up sharing one centroid between them.
+#
+# REFUSED as axes: iteration_speed, animate_clustering, convergence_threshold,
+# step_by_step_mode. All four govern how fast grey points turn colour, and the
+# evidence is a still — it would catch the recolouring mid-phase at random.
+@export_enum("blobs", "block", "rings", "braid", "skew") var cohort: String = "blobs"
+
+## Allow-list for the axis. A token outside it falls back to the shipped look
+## rather than stranding a placement with an empty cloud.
+const COHORTS: PackedStringArray = ["blobs", "block", "rings", "braid", "skew"]
+
+## Every random draw in the build path comes from _rng, seeded from this. Two
+## builds of one cohort value are pixel-identical; without it the pixel critic
+## reads gaussian noise as an axis signal.
+const RNG_SEED: int = 20260730
+
+# rings — the shell k-means cannot say
+const RING_N: int = 60
+const RING_RADIUS: float = 10.0
+const RING_THICK: float = 1.0
+const CORE_N: int = 40
+const CORE_RADIUS: float = 3.0
+
+# braid — two Archimedean arms, phase-offset by PI. The radial growth per radian
+# is BRAID_GAP / PI, which makes the two arms exactly BRAID_GAP apart at any
+# shared angle. Over BRAID_TURNS the radius therefore grows by
+# (BRAID_GAP / PI) * BRAID_TURNS * TAU = 6.0 m, taking the outer arm from
+# BRAID_INNER_RADIUS 5.0 m to 11.0 m: a 22 m span.
+const BRAID_ARM_N: int = 50
+const BRAID_TURNS: float = 2.0
+const BRAID_GAP: float = 1.5
+const BRAID_INNER_RADIUS: float = 5.0
+const BRAID_Y_JITTER: float = 0.4
+
+# skew — the majority that eats the centroids
+const SKEW_MAJOR_N: int = 88
+const SKEW_MAJOR_RADIUS: float = 5.0
+const SKEW_MINOR_N: int = 6
+const SKEW_MINOR_RADIUS: float = 1.2
+const SKEW_MINOR_DISTANCE: float = 11.0
+const SKEW_MINOR_BEARINGS: Array = [0.35, -0.35]
+
 @export_category("Algorithm Parameters")
 @export var data_point_count: int = 100:
 	set(value):
@@ -79,6 +145,26 @@ extends Node3D
 @export var show_distance_calculations: bool = false
 @export var pause_on_convergence: bool = true
 
+# Build state
+## True once _ready() has run a full synchronous build. apply_grid_config arrives
+## via call_deferred AFTER _ready(), so it can only ever rebuild — never build.
+var _built: bool = false
+## Lights, camera and the screen-space UI are built once and survive a rebuild;
+## a second camera or a second CanvasLayer would be a bug, not a variant.
+var _chrome_built: bool = false
+## Only nodes THIS script parented to self. _rebuild_now frees these and nothing
+## else — freeing get_children() would destroy the caption plates the grid adds.
+var _spawned: Array = []
+## Deterministic source for every draw in the build path.
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+## Bumped by the user-facing restart (ESC) so a restart still means "new random
+## initialisation" while staying reproducible: seed = RNG_SEED + cohort + n.
+## A build always resets it to 0.
+var _restart_count: int = 0
+## The `emissive` key curation_station hands every artifact. Default true = the
+## glowing pucks of the shipped look.
+var _emissive: bool = true
+
 # Algorithm state
 var data_points: Array = []
 var centroids: Array = []
@@ -144,15 +230,39 @@ class Centroid:
 		cluster_id = id
 
 func _ready() -> void:
-	setup_environment()
-	setup_ui()
+	_build_all()
+	_built = true
+
+## The whole body, synchronously, from @export values alone — the sweep sets
+## `cohort` and adds the node, never calls apply_grid_config, so frame one must
+## already hold the full cloud and all four pucks.
+func _build_all() -> void:
+	if not _chrome_built:
+		setup_environment()
+		setup_ui()
+		_chrome_built = true
+	_restart_count = 0
+	_seed_rng()
 	generate_data()
 	initialize_centroids()
 	create_visuals()
 	update_ui()
-	
+	# So a rebuild honours flags that arrived with the config dict. All three are
+	# no-ops at the shipped defaults (centroids visible, nothing else built yet).
+	update_centroid_visibility()
+	update_connection_visibility()
+	update_voronoi_visibility()
+
 	if animate_clustering and not step_by_step_mode:
 		start_clustering()
+
+## Seed from the cohort so the five values do not share a draw sequence, and from
+## the restart counter so ESC still reshuffles.
+func _seed_rng() -> void:
+	var idx: int = COHORTS.find(cohort)
+	if idx < 0:
+		idx = 0
+	_rng.seed = RNG_SEED + idx * 1013 + _restart_count
 
 func _process(delta: float) -> void:
 	if animate_clustering and not converged and not is_paused and not step_by_step_mode:
@@ -359,61 +469,146 @@ func create_convergence_graph() -> Panel:
 	# Graph will be drawn in _draw method
 	return panel
 
+## The cohort axis lives here. `blobs` keeps the legacy path exactly, including
+## the generate_clustered_data toggle; the other four are explicit layouts that
+## supersede the generate_clustered_data / natural_cluster_count / cluster_spread
+## / noise_points_percentage combination, because a shell or a spiral is not a
+## setting of a gaussian.
 func generate_data() -> void:
 	clear_data()
-	
-	if generate_clustered_data:
-		generate_clustered_dataset()
-	else:
-		generate_random_dataset()
-	
-	print("Generated ", data_points.size(), " data points")
+
+	match cohort:
+		"block":
+			generate_random_dataset()
+		"rings":
+			generate_ring_dataset()
+		"braid":
+			generate_braid_dataset()
+		"skew":
+			generate_skewed_dataset()
+		_:
+			if generate_clustered_data:
+				generate_clustered_dataset()
+			else:
+				generate_random_dataset()
+
+	print("Generated ", data_points.size(), " data points (cohort=", cohort, ")")
 
 func generate_clustered_dataset() -> void:
-	var points_per_cluster = int(data_point_count * (1.0 - noise_points_percentage) / natural_cluster_count)
-	
+	var points_per_cluster: int = int(data_point_count * (1.0 - noise_points_percentage) / natural_cluster_count)
+
 	# Generate natural clusters
 	for cluster_idx in range(natural_cluster_count):
-		var cluster_center = Vector3(
-			randf_range(-data_space_size/3, data_space_size/3),
-			randf_range(-3, 3),
-			randf_range(-data_space_size/3, data_space_size/3)
+		var cluster_center: Vector3 = Vector3(
+			_rng.randf_range(-data_space_size/3, data_space_size/3),
+			_rng.randf_range(-3, 3),
+			_rng.randf_range(-data_space_size/3, data_space_size/3)
 		)
-		
+
 		for i in range(points_per_cluster):
-			var angle = randf() * TAU
-			var distance = randf_range(0, cluster_spread)
-			var height_offset = randf_range(-cluster_spread/3, cluster_spread/3)
-			
-			var offset = Vector3(
+			var angle: float = _rng.randf() * TAU
+			var distance: float = _rng.randf_range(0, cluster_spread)
+			var height_offset: float = _rng.randf_range(-cluster_spread/3, cluster_spread/3)
+
+			var offset: Vector3 = Vector3(
 				cos(angle) * distance,
 				height_offset,
 				sin(angle) * distance
 			)
-			
-			var point = DataPoint.new(cluster_center + offset)
+
+			var point: DataPoint = DataPoint.new(cluster_center + offset)
 			data_points.append(point)
-	
+
 	# Add noise points
-	var noise_count = data_point_count - data_points.size()
+	var noise_count: int = data_point_count - data_points.size()
 	for i in range(noise_count):
-		var random_pos = Vector3(
-			randf_range(-data_space_size/2, data_space_size/2),
-			randf_range(-4, 4),
-			randf_range(-data_space_size/2, data_space_size/2)
+		var random_pos: Vector3 = Vector3(
+			_rng.randf_range(-data_space_size/2, data_space_size/2),
+			_rng.randf_range(-4, 4),
+			_rng.randf_range(-data_space_size/2, data_space_size/2)
 		)
-		var point = DataPoint.new(random_pos)
-		data_points.append(point)
+		var point2: DataPoint = DataPoint.new(random_pos)
+		data_points.append(point2)
 
 func generate_random_dataset() -> void:
 	for i in range(data_point_count):
-		var random_pos = Vector3(
-			randf_range(-data_space_size/2, data_space_size/2),
-			randf_range(-4, 4),
-			randf_range(-data_space_size/2, data_space_size/2)
+		var random_pos: Vector3 = Vector3(
+			_rng.randf_range(-data_space_size/2, data_space_size/2),
+			_rng.randf_range(-4, 4),
+			_rng.randf_range(-data_space_size/2, data_space_size/2)
 		)
-		var point = DataPoint.new(random_pos)
+		var point: DataPoint = DataPoint.new(random_pos)
 		data_points.append(point)
+
+## rings — 60 points on a 10.0 m shell 1.0 m thick around a 3.0 m core of 40.
+## Angles are evenly spaced with a sub-spacing jitter so the shell reads as a
+## shell rather than as a random annulus.
+func generate_ring_dataset() -> void:
+	var half_thick: float = RING_THICK * 0.5
+	var step: float = TAU / float(RING_N)
+	for i in range(RING_N):
+		var shell_angle: float = float(i) * step + _rng.randf_range(-step * 0.35, step * 0.35)
+		var shell_r: float = RING_RADIUS + _rng.randf_range(-half_thick, half_thick)
+		data_points.append(DataPoint.new(Vector3(
+			cos(shell_angle) * shell_r,
+			_rng.randf_range(-0.5, 0.5),
+			sin(shell_angle) * shell_r
+		)))
+
+	for j in range(CORE_N):
+		var core_angle: float = _rng.randf() * TAU
+		# sqrt keeps the core an even disc instead of a centre-heavy smear
+		var core_r: float = sqrt(_rng.randf()) * CORE_RADIUS
+		data_points.append(DataPoint.new(Vector3(
+			cos(core_angle) * core_r,
+			_rng.randf_range(-1.5, 1.5),
+			sin(core_angle) * core_r
+		)))
+
+## braid — two interleaved spiral arms of 50, two turns, 1.5 m apart at closest
+## approach. The arms are the same spiral rotated by PI, which is what makes the
+## nearest neighbour of nearly every point a member of the other arm.
+func generate_braid_dataset() -> void:
+	var pitch: float = BRAID_GAP / PI
+	var sweep: float = BRAID_TURNS * TAU
+	for arm in range(2):
+		var phase: float = float(arm) * PI
+		for i in range(BRAID_ARM_N):
+			var t: float = float(i) / float(BRAID_ARM_N - 1)
+			var theta: float = t * sweep
+			var r: float = BRAID_INNER_RADIUS + pitch * theta
+			var a: float = theta + phase
+			data_points.append(DataPoint.new(Vector3(
+				cos(a) * r,
+				_rng.randf_range(-BRAID_Y_JITTER, BRAID_Y_JITTER),
+				sin(a) * r
+			)))
+
+## skew — 88 points in one dominant disc at the origin, plus two 6-point clusters
+## 11 m out and 7.6 m apart from each other. Four centroids over three groups of
+## wildly unequal mass.
+func generate_skewed_dataset() -> void:
+	for i in range(SKEW_MAJOR_N):
+		var major_angle: float = _rng.randf() * TAU
+		var major_r: float = sqrt(_rng.randf()) * SKEW_MAJOR_RADIUS
+		data_points.append(DataPoint.new(Vector3(
+			cos(major_angle) * major_r,
+			_rng.randf_range(-2.0, 2.0),
+			sin(major_angle) * major_r
+		)))
+
+	for bearing in SKEW_MINOR_BEARINGS:
+		var b: float = float(bearing)
+		var cx: float = cos(b) * SKEW_MINOR_DISTANCE
+		var cz: float = sin(b) * SKEW_MINOR_DISTANCE
+		for j in range(SKEW_MINOR_N):
+			var minor_angle: float = _rng.randf() * TAU
+			var minor_r: float = sqrt(_rng.randf()) * SKEW_MINOR_RADIUS
+			data_points.append(DataPoint.new(Vector3(
+				cx + cos(minor_angle) * minor_r,
+				_rng.randf_range(-0.8, 0.8),
+				cz + sin(minor_angle) * minor_r
+			)))
 
 func initialize_centroids() -> void:
 	clear_centroids()
@@ -421,7 +616,7 @@ func initialize_centroids() -> void:
 	# K-means++ initialization for better initial centroid placement
 	if data_points.size() > 0:
 		# Choose first centroid randomly
-		var first_centroid = Centroid.new(data_points[randi() % data_points.size()].position, 0)
+		var first_centroid = Centroid.new(data_points[_rng.randi() % data_points.size()].position, 0)
 		centroids.append(first_centroid)
 		
 		# Choose remaining centroids with probability proportional to squared distance
@@ -437,7 +632,7 @@ func initialize_centroids() -> void:
 				distances.append(min_dist)
 				total_distance += min_dist
 			
-			var random_value = randf() * total_distance
+			var random_value = _rng.randf() * total_distance
 			var cumulative = 0.0
 			
 			for j in range(distances.size()):
@@ -474,6 +669,7 @@ func create_visuals() -> void:
 		
 		point.mesh_instance = mesh_instance
 		add_child(mesh_instance)
+		_spawned.append(mesh_instance)
 		point_meshes.append(mesh_instance)
 	
 	# Create centroid visuals
@@ -487,15 +683,16 @@ func create_visuals() -> void:
 		
 		var material = StandardMaterial3D.new()
 		material.albedo_color = cluster_colors[centroid.cluster_id]
-		material.emission_enabled = true
+		material.emission_enabled = _emissive
 		material.emission = material.albedo_color * 0.6
 		material.metallic = 0.8
 		material.roughness = 0.2
 		mesh_instance.material_override = material
 		mesh_instance.position = centroid.position
-		
+
 		centroid.mesh_instance = mesh_instance
 		add_child(mesh_instance)
+		_spawned.append(mesh_instance)
 		centroid_meshes.append(mesh_instance)
 
 func start_clustering() -> void:
@@ -583,7 +780,7 @@ func update_visuals() -> void:
 			var material = point.mesh_instance.material_override
 			material.albedo_color = cluster_colors[cluster_id]
 			
-			if changed and iteration > 1:
+			if _emissive and changed and iteration > 1:
 				# Highlight recently changed points
 				material.emission_enabled = true
 				material.emission = Color.WHITE * 0.5
@@ -602,7 +799,7 @@ func update_visuals() -> void:
 			tween.tween_property(centroid.mesh_instance, "position", centroid.position, 0.5)
 			
 			# Highlight moving centroids
-			if highlight_moving_centroids and centroid.movement_distance > 0.1:
+			if _emissive and highlight_moving_centroids and centroid.movement_distance > 0.1:
 				var material = centroid.mesh_instance.material_override
 				var original_emission = material.emission
 				material.emission = Color.WHITE
@@ -659,8 +856,9 @@ func create_connection_line(from: Vector3, to: Vector3, color: Color) -> MeshIns
 	line_mesh.look_at_from_position(line_mesh.position, center + direction, Vector3.UP)
 	line_mesh.rotate_object_local(Vector3(1, 0, 0), PI/2)
 	line_mesh.scale.y = distance
-	
+
 	add_child(line_mesh)
+	_spawned.append(line_mesh)
 	return line_mesh
 
 func update_voronoi_regions() -> void:
@@ -682,6 +880,7 @@ func update_voronoi_regions() -> void:
 		
 		plane_mesh.position = centroid.position
 		add_child(plane_mesh)
+		_spawned.append(plane_mesh)
 		voronoi_planes.append(plane_mesh)
 
 func update_ui() -> void:
@@ -713,30 +912,37 @@ func clear_data() -> void:
 func clear_centroids() -> void:
 	centroids.clear()
 
+## Un-parent then free, and forget it. queue_free alone leaves the node in the
+## tree for the rest of the frame, which is how a rebuild ends up measured with
+## stale geometry; remove_child makes the AABB honest immediately.
+func _despawn(node: Node) -> void:
+	if node == null:
+		return
+	_spawned.erase(node)
+	if node.get_parent() == self:
+		remove_child(node)
+	node.queue_free()
+
 func clear_visuals() -> void:
 	for mesh in point_meshes:
-		if mesh:
-			mesh.queue_free()
+		_despawn(mesh)
 	point_meshes.clear()
-	
-	for mesh in centroid_meshes:
-		if mesh:
-			mesh.queue_free()
+
+	for mesh2 in centroid_meshes:
+		_despawn(mesh2)
 	centroid_meshes.clear()
-	
+
 	clear_connections()
 	clear_voronoi()
 
 func clear_connections() -> void:
 	for line in connection_lines:
-		if line:
-			line.queue_free()
+		_despawn(line)
 	connection_lines.clear()
 
 func clear_voronoi() -> void:
 	for plane in voronoi_planes:
-		if plane:
-			plane.queue_free()
+		_despawn(plane)
 	voronoi_planes.clear()
 
 func update_centroid_visibility() -> void:
@@ -762,7 +968,12 @@ func update_point_sizes() -> void:
 				sphere.radius = 0.3 * point_size_scale
 				sphere.height = 0.6 * point_size_scale
 
+## ESC in the standalone demo. Advances the seed so a restart really is a new
+## initialisation, and stays reproducible: restart n of cohort c is always the
+## same cloud. A build resets the counter, so the evidence never sees n > 0.
 func restart_clustering() -> void:
+	_restart_count += 1
+	_seed_rng()
 	clear_visuals()
 	generate_data()
 	initialize_centroids()
@@ -772,6 +983,8 @@ func restart_clustering() -> void:
 func regenerate_data() -> void:
 	if not is_inside_tree():
 		return
+	_restart_count += 1
+	_seed_rng()
 	clear_visuals()
 	generate_data()
 	initialize_centroids()
@@ -1099,9 +1312,9 @@ func initialize_centroids_random() -> void:
 	
 	for i in range(cluster_count):
 		var random_pos = Vector3(
-			randf_range(-data_space_size/2, data_space_size/2),
-			randf_range(-4, 4),
-			randf_range(-data_space_size/2, data_space_size/2)
+			_rng.randf_range(-data_space_size/2, data_space_size/2),
+			_rng.randf_range(-4, 4),
+			_rng.randf_range(-data_space_size/2, data_space_size/2)
 		)
 		var centroid = Centroid.new(random_pos, i)
 		centroids.append(centroid)
@@ -1121,9 +1334,9 @@ func initialize_centroids_data_points() -> void:
 		var selected_indices = []
 		
 		for i in range(cluster_count):
-			var random_index = randi() % data_points.size()
+			var random_index = _rng.randi() % data_points.size()
 			while random_index in selected_indices:
-				random_index = randi() % data_points.size()
+				random_index = _rng.randi() % data_points.size()
 			
 			selected_indices.append(random_index)
 			var centroid = Centroid.new(data_points[random_index].position, i)
@@ -1244,5 +1457,82 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass
+# ═══════════════════════════════════════════════════════════════════
+# GRID CONFIG INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+
+## Arrives via call_deferred from GridInteractablesComponent, after _ready() and
+## first in the deferred queue — so the body already exists and this can only
+## ever be a rebuild.
+##
+## curation_station hands every artifact it curates {"emissive": false}. That
+## dict carries no axis key, so it must change nothing about the layout — and
+## `emissive` itself is applied IN PLACE, above the early returns, because a key
+## that is accepted and then dropped by a return is worse than a key refused.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_cohort: String = cohort
+
+	if config_data.has("cohort"):
+		cohort = _pick_axis(str(config_data["cohort"]), COHORTS, cohort)
+
+	# Non-geometry keys, applied in place before any return.
+	if config_data.has("emissive"):
+		_set_emissive(bool(config_data["emissive"]))
+	if config_data.has("show_centroids"):
+		show_centroids = bool(config_data["show_centroids"])
+	if config_data.has("show_connections"):
+		show_connections = bool(config_data["show_connections"])
+	if config_data.has("show_voronoi_regions"):
+		show_voronoi_regions = bool(config_data["show_voronoi_regions"])
+
+	if not _built:
+		return
+	if cohort == before_cohort:
+		return
+
+	_rebuild_now()
+	print("[EnhancedKMeans] Config applied - cohort=%s, points=%d, k=%d" % [
+		cohort, data_points.size(), centroids.size()])
+
+## Accept an axis value only if it names something we actually build. A typo has
+## to land on the shipped look rather than on an empty 25 m room.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+## The only emissive surfaces on this artifact are the four centroid pucks (and
+## the brief white flash on reassigned points). Applied live to the materials
+## that already exist, and remembered so a later rebuild honours it.
+func _set_emissive(enabled: bool) -> void:
+	_emissive = enabled
+	for mesh in centroid_meshes:
+		if mesh == null:
+			continue
+		var mat: StandardMaterial3D = mesh.material_override as StandardMaterial3D
+		if mat:
+			mat.emission_enabled = enabled
+
+## SYNCHRONOUS. No call_deferred anywhere in the build path: a deferred rebuild
+## that removes children first leaves auto-grounding measuring a zero AABB, and
+## it bails. Frees only what this script parented to self.
+func _rebuild_now() -> void:
+	for c in _spawned.duplicate():
+		_despawn(c)
+	_spawned.clear()
+
+	point_meshes.clear()
+	centroid_meshes.clear()
+	connection_lines.clear()
+	voronoi_planes.clear()
+	data_points.clear()
+	centroids.clear()
+	assignments.clear()
+	previous_assignments.clear()
+	distance_history.clear()
+	centroid_movement_history.clear()
+	iteration = 0
+	converged = false
+	total_distance = 0.0
+	algorithm_timer = 0.0
+
+	_build_all()

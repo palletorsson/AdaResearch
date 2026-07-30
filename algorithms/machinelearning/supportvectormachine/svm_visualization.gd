@@ -56,6 +56,72 @@ const COLOR_BOUNDARY := Color(0.9, 0.2, 0.9)    # Magenta for boundary
 @export var step_delay: float = 0.1
 @export var show_optimization_steps: bool = true
 
+# =============================================================================
+# STAGE-2 DNA — #cohort:blobs|block|rings|braid|skew
+# =============================================================================
+# cohort — the shape of the population the method is asked to divide.
+#
+# The data was authored to flatter the method: two blobs pushed apart by
+# `class_separation`, so the margin the SMO loop maximises always exists and the
+# artifact whose subject is WHERE TO DRAW THE LINE could only ever be placed over
+# data where the line is obvious. This is the knob that stops it flattering.
+#
+#   blobs  two rectangular clouds, 4.0 x 5.0 m each, centres 2.0 m apart in x.
+#          The shipped case, unchanged. `class_separation` and `data_noise` still
+#          govern it; the other four values replace them with an explicit layout.
+#   block  one filled 6.0 x 5.0 m field, the two classes meeting along a
+#          diagonal through the middle. Same extent, no gap: the thing being
+#          maximised has nowhere to sit.
+#   rings  a small disc of one class ringed by an annulus of the other.
+#          Separable by the rbf kernel this artifact defaults to and by no
+#          straight line at all — the honest advertisement for the kernel trick.
+#   braid  two sinusoidal bands 0.5 m apart, amplitude 1.5 m, period 3.0 m, so
+#          the classes interleave four times across the field and no single
+#          margin can hold.
+#   skew   95 points of the negative class across the whole field and 5 positive
+#          in one corner: the boundary that scores 95 percent is the boundary
+#          that ignores them.
+#
+# Refused as axes: step_delay, auto_start, show_optimization_steps, tolerance.
+# They set how far along an optimisation is when photographed, which is not a
+# photographable property.
+@export_category("Stage-2 DNA")
+## The shape of the population the method is asked to divide.
+@export_enum("blobs", "block", "rings", "braid", "skew") var cohort: String = "blobs"
+
+const COHORTS: PackedStringArray = ["blobs", "block", "rings", "braid", "skew"]
+
+## Fixed data seed. Every point position in this artifact is drawn from `_rng`,
+## which is re-seeded from this constant at the top of every generate pass — two
+## builds of one cohort value must be pixel-identical or the pixel critic reads
+## sampling noise as axis signal.
+const DATA_SEED: int = 20260730
+
+# --- Field envelope ----------------------------------------------------------
+# The caption plan depends on the scatter never leaving |y| <= 2.5 (see
+# _ensure_labels). Every cohort below is built inside this rectangle, and the
+# shipped blobs case already sits exactly on it (2.0 + data_noise 0.5).
+const FIELD_W: float = 6.0
+const FIELD_H: float = 5.0
+
+# rings: polar radii before the field fit. Generated at mean radius 3.0 with a
+# 0.6 m wall, then scaled so the outer edge lands on the field rectangle — which
+# makes it an ellipse rather than a circle. That is deliberate: a true 3.3 m
+# circle would push the top of the scatter to y = 3.3 and eat the clearance the
+# caption plan is built on.
+const RING_R: float = 3.0
+const RING_WALL: float = 0.6
+const RING_DISC_R: float = 1.2
+
+# braid: two offset sine bands.
+const BRAID_AMP: float = 1.5
+const BRAID_PERIOD: float = 3.0
+const BRAID_SEP: float = 0.5
+const BRAID_JITTER: float = 0.10
+
+# skew: the minority pocket, a 0.9 m box tucked into the +x/+y corner.
+const SKEW_POCKET: float = 0.9
+
 # SVM Algorithm State
 var training_data: Array = []
 var training_labels: Array = []
@@ -81,6 +147,11 @@ var ui_display: CanvasLayer
 var _title_label_3d: Label3D
 var _stats_label_3d: Label3D
 
+# Build state
+var _built: bool = false
+var _emissive: bool = true
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 # Algorithm signals
 signal training_step_complete()
 signal training_finished()
@@ -90,36 +161,74 @@ func _init() -> void:
 	name = "SVM_Visualization"
 
 func _ready() -> void:
+	_build_all()
+	_built = true
+
+	if auto_start:
+		call_deferred("start_training")
+
+## Everything the still needs, synchronously, from @export values alone. The
+## sweep sets `cohort` and adds the node to the tree; it never touches meta and
+## never calls apply_grid_config, so the whole scatter has to land here.
+func _build_all() -> void:
 	setup_ui()
 	setup_timer()
 	_build_3d_labels()
 	generate_training_data()
-	
-	if auto_start:
-		call_deferred("start_training")
+
+# --- Caption placement -------------------------------------------------------
+# Two plates, both above the body, nothing in the viewing corridor.
+#
+# LabelFramer turns each of these into an opaque anthracite panel at spawn, so
+# placement is the only thing that keeps them off the scatter:
+#
+#   title  y = 5.00, font 64 -> 0.32 m of text, 22 characters at ~3.5 m wide
+#          => plate ~3.60 x 0.39 m, bezel ~3.66 x 0.45 m, spanning y 4.78..5.23
+#   stats  y = 4.20, font 36 -> 0.18 m of text, empty at spawn, ~2.7 m once
+#          update_ui writes into it => plate ~2.80 x 0.25 m, y 4.07..4.33
+#
+# The 0.80 m separation is far over the framer's 0.16 m merge gap, so they stay
+# TWO plates — which is right: one is a permanent name, the other is live
+# telemetry that the training loop rewrites. The scatter is a flat sheet in the
+# z = 0 plane topping out at y = 2.5 under every cohort value, so the lower plate
+# clears it by 1.57 m and frontal crossing is 0 everywhere.
+#
+# The empty stats label stays: it is the node the script live-updates and
+# deleting it would break finalize_training. No per-point or per-support-vector
+# captions — at 0.1 m radius, 100 points would become 100 opaque plates and the
+# scatter would vanish under its own labelling.
+const TITLE_Y: float = 5.0
+const STATS_Y: float = 4.2
 
 func _build_3d_labels() -> void:
-	"""Create in-scene 3D labels for VR / immersive viewing."""
-	_title_label_3d = Label3D.new()
-	_title_label_3d.text = "Support Vector Machine"
-	_title_label_3d.font_size = 64
-	_title_label_3d.modulate = COLOR_SPECIAL
-	_title_label_3d.position = Vector3(0, 5, 0)
-	_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	add_child(_title_label_3d)
+	"""Create in-scene 3D labels for VR / immersive viewing (once)."""
+	if _title_label_3d == null or not is_instance_valid(_title_label_3d):
+		_title_label_3d = Label3D.new()
+		_title_label_3d.text = "Support Vector Machine"
+		_title_label_3d.font_size = 64
+		_title_label_3d.modulate = COLOR_SPECIAL
+		_title_label_3d.position = Vector3(0, TITLE_Y, 0)
+		# Billboard stays ENABLED on both: these hang in the air above the sheet,
+		# they are not ink on a surface of the artifact.
+		_title_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		add_child(_title_label_3d)
 
-	_stats_label_3d = Label3D.new()
-	_stats_label_3d.font_size = 36
-	_stats_label_3d.modulate = Color.WHITE
-	_stats_label_3d.position = Vector3(0, 4.2, 0)
-	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	add_child(_stats_label_3d)
+	if _stats_label_3d == null or not is_instance_valid(_stats_label_3d):
+		_stats_label_3d = Label3D.new()
+		_stats_label_3d.font_size = 36
+		_stats_label_3d.modulate = Color.WHITE
+		_stats_label_3d.position = Vector3(0, STATS_Y, 0)
+		_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		add_child(_stats_label_3d)
 
 func setup_ui() -> void:
-	"""Create comprehensive UI for SVM visualization"""
+	"""Create comprehensive UI for SVM visualization (once)."""
+	if ui_display != null and is_instance_valid(ui_display):
+		update_ui()
+		return
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
-	
+
 	var panel = Panel.new()
 	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	panel.size = Vector2(400, 600)
@@ -139,37 +248,149 @@ func setup_ui() -> void:
 	update_ui()
 
 func setup_timer() -> void:
-	"""Setup timer for animation"""
+	"""Setup timer for animation (once)"""
+	if optimization_timer != null and is_instance_valid(optimization_timer):
+		optimization_timer.wait_time = step_delay
+		return
 	optimization_timer = Timer.new()
 	optimization_timer.wait_time = step_delay
 	optimization_timer.timeout.connect(_on_optimization_timer_timeout)
 	add_child(optimization_timer)
 
 func generate_training_data() -> void:
-	"""Generate training data with clear class separation"""
+	"""Lay out the population named by `cohort`, then draw it."""
 	training_data.clear()
 	training_labels.clear()
-	
-	# Generate positive class samples
+
+	# Re-seeded here, not in _init: a rebuild must redraw the SAME points.
+	_rng.seed = DATA_SEED
+
+	var total: int = maxi(4, num_positive_samples + num_negative_samples)
+
+	match cohort:
+		"block":
+			_layout_block(total)
+		"rings":
+			_layout_rings(total)
+		"braid":
+			_layout_braid(total)
+		"skew":
+			_layout_skew(total)
+		_:
+			_layout_blobs()
+
+	create_data_visualization()
+	print("Generated ", training_data.size(), " training samples (cohort=", cohort, ")")
+
+## blobs — the shipped layout, expression for expression. Two 4.0 x 5.0 m clouds
+## pushed `class_separation` apart in x, y smeared by `data_noise`. The only
+## change is the source of the numbers: a seeded generator instead of the global
+## one, so two builds are identical.
+func _layout_blobs() -> void:
 	for i in range(num_positive_samples):
-		var point = Vector2(
-			randf_range(-2, 2) + class_separation/2,
-			randf_range(-2, 2) + data_noise * randf_range(-1, 1)
+		var point: Vector2 = Vector2(
+			_rng.randf_range(-2, 2) + class_separation / 2.0,
+			_rng.randf_range(-2, 2) + data_noise * _rng.randf_range(-1, 1)
 		)
 		training_data.append(point)
 		training_labels.append(1)
-	
-	# Generate negative class samples
+
 	for i in range(num_negative_samples):
-		var point = Vector2(
-			randf_range(-2, 2) - class_separation/2,
-			randf_range(-2, 2) + data_noise * randf_range(-1, 1)
+		var point: Vector2 = Vector2(
+			_rng.randf_range(-2, 2) - class_separation / 2.0,
+			_rng.randf_range(-2, 2) + data_noise * _rng.randf_range(-1, 1)
 		)
 		training_data.append(point)
 		training_labels.append(-1)
-	
-	create_data_visualization()
-	print("Generated ", training_data.size(), " training samples")
+
+## block — one filled field, split corner to corner. Same footprint as blobs,
+## no gap anywhere along the seam: whatever the SMO loop converges on, there is
+## no margin for it to sit in.
+func _layout_block(total: int) -> void:
+	var hx: float = FIELD_W * 0.5
+	var hy: float = FIELD_H * 0.5
+	for i in range(total):
+		var x: float = _rng.randf_range(-hx, hx)
+		var y: float = _rng.randf_range(-hy, hy)
+		training_data.append(Vector2(x, y))
+		# Diagonal through the middle, in normalised field coordinates so it runs
+		# corner to corner rather than at 45 degrees in a non-square field.
+		var side: float = (y / hy) - (x / hx)
+		training_labels.append(1 if side >= 0.0 else -1)
+
+## rings — 40% of the population in a central disc, 60% on a wall around it.
+## Generated in polar form at mean radius 3.0 with a 0.6 m wall, then scaled onto
+## the field rectangle (so it is an ellipse: see RING_R). No straight line
+## separates these; the rbf kernel this artifact already defaults to does.
+func _layout_rings(total: int) -> void:
+	var inner_count: int = int(roundf(float(total) * 0.4))
+	var outer_count: int = total - inner_count
+	var outer_edge: float = RING_R + RING_WALL * 0.5
+	var sx: float = (FIELD_W * 0.5) / outer_edge
+	var sy: float = (FIELD_H * 0.5) / outer_edge
+
+	for i in range(inner_count):
+		var a: float = _rng.randf_range(0.0, TAU)
+		# sqrt of a uniform draw keeps the disc evenly covered instead of piling
+		# points at the centre.
+		var r: float = RING_DISC_R * sqrt(_rng.randf())
+		training_data.append(Vector2(cos(a) * r * sx, sin(a) * r * sy))
+		training_labels.append(1)
+
+	for i in range(outer_count):
+		var a: float = _rng.randf_range(0.0, TAU)
+		var r: float = _rng.randf_range(RING_R - RING_WALL * 0.5, outer_edge)
+		training_data.append(Vector2(cos(a) * r * sx, sin(a) * r * sy))
+		training_labels.append(-1)
+
+## braid — two sine bands 0.5 m apart, amplitude 1.5 m, period 3.0 m across a
+## 6.0 m field, so each class occupies four alternating stretches of any straight
+## cut through the field. x is stratified (evenly spaced, not sampled) so the
+## bands read as bands; only the cross-band scatter is random.
+func _layout_braid(total: int) -> void:
+	var upper: int = int(float(total) * 0.5)
+	var lower: int = total - upper
+	var hx: float = FIELD_W * 0.5
+
+	for i in range(upper):
+		var x: float = -hx + (float(i) + 0.5) / float(upper) * FIELD_W
+		var base: float = BRAID_AMP * sin(TAU * x / BRAID_PERIOD)
+		var y: float = base + BRAID_SEP * 0.5 + _rng.randf_range(-BRAID_JITTER, BRAID_JITTER)
+		training_data.append(Vector2(x, y))
+		training_labels.append(1)
+
+	for i in range(lower):
+		var x: float = -hx + (float(i) + 0.5) / float(lower) * FIELD_W
+		var base: float = BRAID_AMP * sin(TAU * x / BRAID_PERIOD)
+		var y: float = base - BRAID_SEP * 0.5 + _rng.randf_range(-BRAID_JITTER, BRAID_JITTER)
+		training_data.append(Vector2(x, y))
+		training_labels.append(-1)
+
+## skew — 95 negative across the whole field, 5 positive in one corner. The
+## majority class is spread, not clustered, so there is no shape to find: the
+## boundary that scores 95 percent is the boundary that never looks at the
+## pocket, and the still shows how small the pocket is.
+func _layout_skew(total: int) -> void:
+	var minority: int = maxi(1, int(roundf(float(total) * 0.05)))
+	var majority: int = total - minority
+	var hx: float = FIELD_W * 0.5
+	var hy: float = FIELD_H * 0.5
+
+	for i in range(majority):
+		training_data.append(Vector2(
+			_rng.randf_range(-hx, hx),
+			_rng.randf_range(-hy, hy)
+		))
+		training_labels.append(-1)
+
+	var cx: float = hx - SKEW_POCKET * 0.5 - 0.1
+	var cy: float = hy - SKEW_POCKET * 0.5 - 0.1
+	for i in range(minority):
+		training_data.append(Vector2(
+			cx + _rng.randf_range(-SKEW_POCKET * 0.5, SKEW_POCKET * 0.5),
+			cy + _rng.randf_range(-SKEW_POCKET * 0.5, SKEW_POCKET * 0.5)
+		))
+		training_labels.append(1)
 
 func create_data_visualization() -> void:
 	"""Create 3D visualization of training data"""
@@ -194,7 +415,7 @@ func create_data_point(point: Vector2, label: int) -> MeshInstance3D:
 	var base_color: Color = positive_color if label == 1 else negative_color
 	var material = StandardMaterial3D.new()
 	material.albedo_color = base_color
-	material.emission_enabled = true
+	material.emission_enabled = _emissive
 	material.emission = base_color * 0.35
 	material.metallic = 0.3
 	material.roughness = 0.45
@@ -423,16 +644,19 @@ func extract_support_vectors() -> void:
 
 func create_decision_boundary() -> void:
 	"""Create visualization of decision boundary"""
-	if boundary_mesh:
+	if is_instance_valid(boundary_mesh):
+		if boundary_mesh.get_parent() == self:
+			remove_child(boundary_mesh)
 		boundary_mesh.queue_free()
-	
+	boundary_mesh = null
+
 	boundary_mesh = MeshInstance3D.new()
 	var mesh = create_boundary_mesh()
 	boundary_mesh.mesh = mesh
-	
+
 	var material = StandardMaterial3D.new()
 	material.albedo_color = boundary_color
-	material.emission_enabled = true
+	material.emission_enabled = _emissive
 	material.emission = boundary_color * 0.3
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	boundary_mesh.material_override = material
@@ -517,16 +741,30 @@ func classify_new_point(point: Vector2) -> Dictionary:
 	}
 
 func clear_previous_visualization() -> void:
-	"""Clear previous visualization elements"""
+	"""Clear previous visualization elements.
+
+	remove_child BEFORE queue_free: the rebuild is synchronous, and a freed-but-
+	still-parented node would still be measured by the grid's auto-grounding pass
+	on the way past. Only nodes THIS script created are touched — grid-added
+	plates and utilities live in the same parent."""
 	for point in data_points:
-		point.queue_free()
+		if is_instance_valid(point):
+			if point.get_parent() == self:
+				remove_child(point)
+			point.queue_free()
 	data_points.clear()
-	
-	if boundary_mesh:
+
+	if is_instance_valid(boundary_mesh):
+		if boundary_mesh.get_parent() == self:
+			remove_child(boundary_mesh)
 		boundary_mesh.queue_free()
-	
+	boundary_mesh = null
+
 	for margin_mesh in margin_meshes:
-		margin_mesh.queue_free()
+		if is_instance_valid(margin_mesh):
+			if margin_mesh.get_parent() == self:
+				remove_child(margin_mesh)
+			margin_mesh.queue_free()
 	margin_meshes.clear()
 
 func update_ui() -> void:
@@ -636,5 +874,90 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass
+# =============================================================================
+# GRID CONFIG INTEGRATION
+# =============================================================================
+# Called by GridInteractablesComponent via call_deferred, AFTER _ready(). The
+# scatter already exists by then — this only has to notice a real change and
+# redraw. curation_station hands every artifact it curates {"emissive": false};
+# that dict carries no axis key, so it must change nothing about the layout, and
+# the key it DOES carry is applied in place before the early returns rather than
+# quietly relying on a rebuild that no longer happens.
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_cohort: String = cohort
+
+	if config_data.has("cohort"):
+		cohort = _pick_axis(str(config_data["cohort"]), COHORTS, cohort)
+
+	# Non-geometry key, applied IN PLACE, before any return.
+	if config_data.has("emissive"):
+		_emissive = _as_bool(config_data["emissive"], _emissive)
+		_apply_emissive()
+
+	if not _built:
+		return
+	if cohort == before_cohort:
+		return
+
+	_rebuild_now()
+	print("[SVM_Visualization] Config applied - cohort=%s" % [cohort])
+
+## Accept an axis value only if it names something this artifact actually builds.
+## A typo in a map token falls back to the shipped look rather than stranding a
+## placement with no scatter at all.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+func _as_bool(raw, fallback: bool) -> bool:
+	if raw is bool:
+		return bool(raw)
+	if raw is int or raw is float:
+		return float(raw) != 0.0
+	if raw is String:
+		var v: String = str(raw).to_lower().strip_edges()
+		if v in ["true", "1", "yes", "on"]:
+			return true
+		if v in ["false", "0", "no", "off"]:
+			return false
+	return fallback
+
+## Toggle glow on everything this script has already drawn. Materials are
+## per-node, so this walks them rather than rebuilding.
+func _apply_emissive() -> void:
+	for point in data_points:
+		if is_instance_valid(point):
+			var m: StandardMaterial3D = point.material_override as StandardMaterial3D
+			if m:
+				m.emission_enabled = _emissive
+	if is_instance_valid(boundary_mesh):
+		var bm: StandardMaterial3D = boundary_mesh.material_override as StandardMaterial3D
+		if bm:
+			bm.emission_enabled = _emissive
+
+## Synchronous, inline, no call_deferred anywhere in the build path. The UI,
+## timer and both caption labels are NOT freed — the labels have already been
+## framed by LabelFramer at spawn, and a fresh pair would come back unframed.
+func _rebuild_now() -> void:
+	if optimization_timer != null and is_instance_valid(optimization_timer):
+		optimization_timer.stop()
+	is_training = false
+	is_trained = false
+	current_iteration = 0
+	bias = 0.0
+	alphas.clear()
+	support_vectors.clear()
+	support_vector_labels.clear()
+	if _stats_label_3d != null and is_instance_valid(_stats_label_3d):
+		_stats_label_3d.text = ""
+		_stats_label_3d.modulate = Color.WHITE
+
+	clear_previous_visualization()
+	_build_all()
+
+	# Same entry point _ready uses, not train_svm_full(): a config change must not
+	# secretly photograph a converged model where the default photographs a
+	# half-solved one.
+	if auto_start:
+		start_training()

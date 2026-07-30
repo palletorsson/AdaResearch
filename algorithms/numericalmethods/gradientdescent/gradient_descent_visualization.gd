@@ -41,8 +41,68 @@ const SURFACE_RES := 40
 const TRAIL_MAX   := 200
 const ADAM_EPS     := 1e-8
 
+# ── the basin axis ─────────────────────────────────────────────────────
+# The artifact's argument IS the surface, and until now the surface was the one
+# thing no map could change: function_preset is an int only apply_grid_config
+# could set, so every placement of the sequence's optimisation centrepiece stood
+# under a header about landscapes you cannot fully see while showing the single
+# flattering case — one minimum, convex, gradient-honest.
+#
+# The five values are ordered by how badly the local gradient lies:
+#   bowl     the gradient is the truth
+#   valley   the gradient is true but useless (steepest ≠ toward the minimum)
+#   plural   the gradient is true about SOME minimum, and there are four
+#   plateau  there is no gradient to have
+#   scarp    the gradient is false — a jump the derivative cannot see
+const FN_BOWL: int    = 0
+const FN_VALLEY: int  = 1
+const FN_PLURAL: int  = 2
+const FN_PLATEAU: int = 3
+const FN_SCARP: int   = 4
+
+const BASINS: PackedStringArray = ["bowl", "valley", "plural", "plateau", "scarp"]
+
+## basin name -> function_preset index. One table so the word and the int cannot
+## drift; every route (sweep @export, map token, VR FUNCTION button) goes through it.
+const BASIN_PRESET: Dictionary = {
+	"bowl": FN_BOWL,
+	"valley": FN_VALLEY,
+	"plural": FN_PLURAL,
+	"plateau": FN_PLATEAU,
+	"scarp": FN_SCARP,
+}
+
+## PLATEAU. r² of the flat disc — 6.25 is a 5.0 m diameter table over the 8 x 8 m
+## field. Inside it the tanh rim term is identically zero and the only relief is
+## PLATEAU_TILT * r², which at the disc edge is 0.125 * 0.1275 = 0.016 m: flat to
+## within 0.02 m, but NOT exactly flat. That distinction is the whole value. Zero
+## gradient would trip the |∇f| < 0.0005 convergence test on step one and the four
+## runners would be declared converged before they moved, which photographs as a
+## bug. A gradient of 0.04·r instead lets each optimizer show what it does when the
+## surface has almost nothing to say: SGD and Momentum creep in proportion to a
+## vanishing slope, while Adam — which divides the gradient by its own magnitude —
+## walks across the flat at full learning rate as if it knew something.
+const PLATEAU_R2: float = 6.25
+const PLATEAU_TILT: float = 0.02
+
+## SCARP. f jumps by 3.0 across x = 0; at y_scale 0.15 that is a 0.45 m face.
+const SCARP_RISE: float = 3.0
+## Half-width of the shear column, 0.02 mm. The surface is sampled on 40 columns
+## 0.2 m apart, so a plain step would be emitted as a 0.2 m RAMP — a smear where
+## the artifact's whole claim is a discontinuity. Two columns straddling x = 0 by
+## this much make the jump a genuinely vertical quad.
+const SCARP_SEAM: float = 0.00002
+
 # ── exported params ────────────────────────────────────────────────────
-@export var function_preset: int = 0  # 0=Quadratic, 1=Rosenbrock, 2=Himmelblau
+## Stage-2 DNA axis — the shape of the surface being descended: how many minima it
+## has, and whether the local gradient tells the truth about where they are.
+## Read at the top of _ready(), so the sweep reaches it by setting the @export
+## alone; apply_grid_config accepts it too (`#basin:scarp`) but is not the only route.
+@export_enum("bowl", "valley", "plural", "plateau", "scarp") var basin: String = "bowl"
+## The int the surface code actually switches on. Kept in sync with `basin` by
+## _sync_basin_from_exports(); a scene or inspector that sets this and leaves
+## `basin` at its default still wins, so nothing shipped changes shape.
+@export var function_preset: int = 0  # 0=bowl 1=valley 2=plural 3=plateau 4=scarp
 @export var learning_rate: float = 0.05
 @export var momentum_beta: float = 0.9
 @export var adam_beta1: float = 0.9
@@ -76,6 +136,15 @@ const ADAM_EPS     := 1e-8
 @export var bay_d: float = 0.52
 
 # ── internal state ─────────────────────────────────────────────────────
+## True once _ready() has finished a full synchronous build. apply_grid_config
+## arrives deferred, AFTER _ready(), and must never rebuild before there is
+## something to rebuild.
+var _built: bool = false
+## Every node THIS SCRIPT parented into the tree, in creation order. The rebuild
+## frees exactly these — never get_children(), which would take the grid's own
+## added plates and the framer's panels with it.
+var _created: Array[Node] = []
+
 var _mode: int = Mode.OPTIMIZERS
 var _time: float = 0.0
 var _stepping: bool = false
@@ -137,12 +206,82 @@ var _fn_button: Node3D
 # ════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	_sync_basin_from_exports()
+	_build_all()
+	_built = true
+
+## The whole body, from @export values alone, SYNCHRONOUSLY. No call_deferred:
+## a deferred build that has already removed its children hands the grid's
+## auto-grounding a zero AABB, and the artifact silently sinks into the floor.
+func _build_all() -> void:
 	_create_materials()
 	_create_mesh_instances()
 	_create_labels()
 	_create_controls()
 	_init_mode()
 	_create_console()
+
+## Reconcile the word and the int before anything samples _eval().
+##
+## `basin` wins when it is set, which is the sweep's route and the map's route.
+## When it is left at its default the legacy `function_preset` wins and `basin` is
+## renamed to match — so a scene or an inspector that already asked for
+## Rosenbrock keeps Rosenbrock instead of being quietly reset to the bowl.
+func _sync_basin_from_exports() -> void:
+	basin = _pick_axis(basin, BASINS, "bowl")
+	if basin != "bowl":
+		function_preset = int(BASIN_PRESET.get(basin, FN_BOWL))
+	else:
+		function_preset = clampi(function_preset, 0, BASINS.size() - 1)
+		basin = BASINS[function_preset]
+
+## Free only what this script made, then build again INLINE. Ordered so the three
+## label anchors are detached from the console before the console itself goes.
+func _rebuild_now() -> void:
+	for c in _created:
+		if not is_instance_valid(c):
+			continue
+		var p: Node = c.get_parent()
+		if p != null:
+			p.remove_child(c)
+		c.queue_free()
+	_created.clear()
+
+	_surface_im = null
+	_surface_mi = null
+	_trails_im = null
+	_trails_mi = null
+	_arrows_im = null
+	_arrows_mi = null
+	_hessian_im = null
+	_hessian_mi = null
+	_markers_im = null
+	_markers_mi = null
+	_title_root = null
+	_info_root = null
+	_legend_root = null
+	# The *_node refs point at children of the anchors just freed, and the caches
+	# would otherwise make _update_labels() early-return on a matching string and
+	# never re-bake the readout.
+	_title_node = null
+	_info_node = null
+	_legend_node = null
+	_title_cache = ""
+	_info_cache = ""
+	_legend_cache = ""
+	_mode_button = null
+	_lr_slider = null
+	_beta_slider = null
+	_speed_slider = null
+	_fn_button = null
+
+	_build_all()
+
+## Parent a node and remember it belongs to us.
+func _own(n: Node) -> Node:
+	add_child(n)
+	_created.append(n)
+	return n
 
 func _process(delta: float) -> void:
 	_time += delta
@@ -179,31 +318,31 @@ func _create_mesh_instances() -> void:
 	_surface_mi = MeshInstance3D.new()
 	_surface_mi.mesh = _surface_im
 	_surface_mi.material_override = _mat_alpha
-	add_child(_surface_mi)
+	_own(_surface_mi)
 
 	_trails_im = ImmediateMesh.new()
 	_trails_mi = MeshInstance3D.new()
 	_trails_mi.mesh = _trails_im
 	_trails_mi.material_override = _mat_unshaded
-	add_child(_trails_mi)
+	_own(_trails_mi)
 
 	_arrows_im = ImmediateMesh.new()
 	_arrows_mi = MeshInstance3D.new()
 	_arrows_mi.mesh = _arrows_im
 	_arrows_mi.material_override = _mat_unshaded
-	add_child(_arrows_mi)
+	_own(_arrows_mi)
 
 	_hessian_im = ImmediateMesh.new()
 	_hessian_mi = MeshInstance3D.new()
 	_hessian_mi.mesh = _hessian_im
 	_hessian_mi.material_override = _mat_alpha
-	add_child(_hessian_mi)
+	_own(_hessian_mi)
 
 	_markers_im = ImmediateMesh.new()
 	_markers_mi = MeshInstance3D.new()
 	_markers_mi.mesh = _markers_im
 	_markers_mi.material_override = _mat_unshaded
-	add_child(_markers_mi)
+	_own(_markers_mi)
 
 # ════════════════════════════════════════════════════════════════════════
 #  LABELS
@@ -219,17 +358,25 @@ func _create_labels() -> void:
 	# on, _create_console() re-parents all three onto the plotting table: the
 	# title into the curb's name inlay, the telemetry into the sunk readout, the
 	# legend into the milled key strip. The interface is part of the body.
+	#
+	# NOTHING HERE MOVES FOR THE BASIN AXIS, and that is a finding rather than an
+	# omission: all three homes sit at z >= 4.16, beyond the field's near edge at
+	# z = 4.0. The terrain occupies x,z in [-4, 4] exactly. So no surface this axis
+	# can name — not the 0.55 m plateau rim, not the 0.45 m scarp face, not the
+	# corner slopes that cap out at 4.0 m — can reach a caption, whatever its
+	# height. The captions are protected by the plan of the table, not by a
+	# clearance number that a new preset could overrun.
 	_title_root = Node3D.new()
 	_title_root.position = Vector3(0, 3.2, 0)
-	add_child(_title_root)
+	_own(_title_root)
 
 	_info_root = Node3D.new()
 	_info_root.position = Vector3(0, 2.5, 0)
-	add_child(_info_root)
+	_own(_info_root)
 
 	_legend_root = Node3D.new()
 	_legend_root.position = Vector3(0, -1.6, 0)
-	add_child(_legend_root)
+	_own(_legend_root)
 
 # ════════════════════════════════════════════════════════════════════════
 #  CONTROLS
@@ -274,7 +421,7 @@ func _create_controls() -> void:
 	else:
 		panel.position = Vector3(0, -1.0, 0)
 		panel.rotation_degrees = Vector3(-25, 0, 0)
-	add_child(panel)
+	_own(panel)
 	if show_console:
 		# The curb inlay owns the name; the pad's baked title would say it twice.
 		var pad_title: Node = panel.get_node_or_null("Title")
@@ -309,8 +456,13 @@ func _cycle_mode() -> void:
 	_mode = (_mode + 1) % 3
 	_init_mode()
 
+## The FUNCTION button now walks all five surfaces, not the first three. The two
+## new ones are standing geometry the surface code already handles, so there is
+## nothing to rebuild — _init_mode() re-seeds the runners and the ImmediateMesh
+## re-samples _eval() on the next frame.
 func _cycle_function() -> void:
-	function_preset = (function_preset + 1) % 3
+	function_preset = (function_preset + 1) % BASINS.size()
+	basin = BASINS[function_preset]
 	_init_mode()
 
 func _on_lr_changed(_v: float) -> void:
@@ -397,7 +549,7 @@ func _create_console() -> void:
 	var con := Node3D.new()
 	con.name = "TableConsole"
 	con.set_meta("housing", true)      # so the grammar probe scopes its rules here
-	add_child(con)
+	_own(con)
 
 	# ── one word drives every colour ──
 	var pal: Dictionary = HangarKit.finish_palette(finish)
@@ -686,21 +838,45 @@ func _rehome(node: Node3D, parent: Node3D, nm: String, pos: Vector3, rot: Vector
 
 func _fn_name() -> String:
 	match function_preset:
-		0: return "Quadratic Bowl"
-		1: return "Rosenbrock Valley"
-		2: return "Himmelblau"
+		FN_BOWL: return "Quadratic Bowl"
+		FN_VALLEY: return "Rosenbrock Valley"
+		FN_PLURAL: return "Himmelblau"
+		FN_PLATEAU: return "Plateau"
+		FN_SCARP: return "Scarp"
 		_: return "Quadratic Bowl"
 
 func _eval(p: Vector2) -> float:
 	var x := p.x
 	var y := p.y
 	match function_preset:
-		0:  # Quadratic bowl: x² + y²
+		FN_BOWL:  # Quadratic bowl: x² + y²
 			return x * x + y * y
-		1:  # Rosenbrock: (1-x)² + 100(y-x²)²
+		FN_VALLEY:  # Rosenbrock: (1-x)² + 100(y-x²)²
 			return (1.0 - x) * (1.0 - x) + 100.0 * (y - x * x) * (y - x * x)
-		2:  # Himmelblau: (x²+y-11)² + (x+y²-7)²
+		FN_PLURAL:  # Himmelblau: (x²+y-11)² + (x+y²-7)²
 			return (x*x + y - 11.0) * (x*x + y - 11.0) + (x + y*y - 7.0) * (x + y*y - 7.0)
+		FN_PLATEAU:
+			# 4·tanh(0.35·max(0, r²-6.25)) + 0.02·r²
+			#
+			# A surface with no information to give. The tanh term is IDENTICALLY
+			# ZERO inside the 5 m disc — max() clamps its argument, so this is not a
+			# small number, it is nothing — and saturates to 4.0 in the outer ring,
+			# which at y_scale 0.1275 is the 0.55 m rim at the field edge. What is
+			# left over the disc is the 0.02·r² residue: 0.016 m of relief at the
+			# disc edge, flat to within 0.02 m and yet not so flat that the runners
+			# are declared converged before they have moved.
+			var r2p := x * x + y * y
+			return 4.0 * tanh(0.35 * maxf(0.0, r2p - PLATEAU_R2)) + PLATEAU_TILT * r2p
+		FN_SCARP:
+			# r² + 3·step(x)
+			#
+			# The shipped bowl, cut. Everywhere except x = 0 the derivative is the
+			# bowl's own and is perfectly honest about the bowl; it has no term for
+			# the 0.45 m drop standing one step away, because a step function has no
+			# derivative to give. The local truth is false. Gradient arrows on
+			# either side of the face point at each other and one of them is wrong.
+			var r2s := x * x + y * y
+			return r2s + SCARP_RISE * (1.0 if x > 0.0 else 0.0)
 		_:
 			return x * x + y * y
 
@@ -747,16 +923,25 @@ func _hessian_eigen(p: Vector2) -> Dictionary:
 
 func _start_pos() -> Vector2:
 	match function_preset:
-		0: return Vector2(3.5, 2.5)
-		1: return Vector2(-1.5, 1.5)
-		2: return Vector2(0.5, 0.5)
+		FN_BOWL: return Vector2(3.5, 2.5)
+		FN_VALLEY: return Vector2(-1.5, 1.5)
+		FN_PLURAL: return Vector2(0.5, 0.5)
+		# Inside the flat disc (r² = 5.96 < 6.25), so the runners start on the part
+		# of the surface that is telling them nothing.
+		FN_PLATEAU: return Vector2(2.0, 1.4)
+		# The bowl's own start, deliberately: scarp is the bowl plus a cliff and the
+		# still should differ from `bowl` by the cliff and nothing else. x = 3.5 puts
+		# every runner on the HIGH side, walking down into the face.
+		FN_SCARP: return Vector2(3.5, 2.5)
 		_: return Vector2(3.0, 2.0)
 
 func _y_scale_for_fn() -> float:
 	match function_preset:
-		0: return 0.15
-		1: return 0.0005  # Rosenbrock has huge values
-		2: return 0.003
+		FN_BOWL: return 0.15
+		FN_VALLEY: return 0.0005  # Rosenbrock has huge values
+		FN_PLURAL: return 0.003
+		FN_PLATEAU: return 0.1275  # 4.0 saturation -> a 0.55 m rim at the field edge
+		FN_SCARP: return 0.15      # the bowl's own scale; 3.0 jump -> a 0.45 m face
 		_: return 0.15
 
 # ════════════════════════════════════════════════════════════════════════
@@ -992,64 +1177,85 @@ func _draw_surface() -> void:
 	var dx := (_x_range.y - _x_range.x) / float(SURFACE_RES)
 	var dz := (_z_range.y - _z_range.x) / float(SURFACE_RES)
 
-	# Find max for normalization
-	var max_val := 1.0
-	for i in range(SURFACE_RES + 1):
-		for j in range(SURFACE_RES + 1):
-			var px := _x_range.x + i * dx
-			var pz := _z_range.x + j * dz
-			var val := _eval(Vector2(px, pz)) * _y_scale
-			if val > max_val:
-				max_val = val
-
-	for i in range(SURFACE_RES):
-		for j in range(SURFACE_RES):
-			var x0 := _x_range.x + i * dx
-			var x1 := x0 + dx
-			var z0 := _z_range.x + j * dz
-			var z1 := z0 + dz
-
-			var y00 := _eval(Vector2(x0, z0)) * _y_scale
-			var y10 := _eval(Vector2(x1, z0)) * _y_scale
-			var y01 := _eval(Vector2(x0, z1)) * _y_scale
-			var y11 := _eval(Vector2(x1, z1)) * _y_scale
-
-			# Cap height for visualization
-			y00 = minf(y00, 4.0)
-			y10 = minf(y10, 4.0)
-			y01 = minf(y01, 4.0)
-			y11 = minf(y11, 4.0)
-
-			var c00 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y00 / 3.0, 0.0, 1.0))
-			var c10 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y10 / 3.0, 0.0, 1.0))
-			var c01 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y01 / 3.0, 0.0, 1.0))
-			var c11 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y11 / 3.0, 0.0, 1.0))
-
-			var n := Vector3.UP
-
-			# Tri 1
-			_surface_im.surface_set_color(c00)
-			_surface_im.surface_set_normal(n)
-			_surface_im.surface_add_vertex(Vector3(x0, y00, z0))
-			_surface_im.surface_set_color(c10)
-			_surface_im.surface_set_normal(n)
-			_surface_im.surface_add_vertex(Vector3(x1, y10, z0))
-			_surface_im.surface_set_color(c01)
-			_surface_im.surface_set_normal(n)
-			_surface_im.surface_add_vertex(Vector3(x0, y01, z1))
-
-			# Tri 2
-			_surface_im.surface_set_color(c10)
-			_surface_im.surface_set_normal(n)
-			_surface_im.surface_add_vertex(Vector3(x1, y10, z0))
-			_surface_im.surface_set_color(c11)
-			_surface_im.surface_set_normal(n)
-			_surface_im.surface_add_vertex(Vector3(x1, y11, z1))
-			_surface_im.surface_set_color(c01)
-			_surface_im.surface_set_normal(n)
-			_surface_im.surface_add_vertex(Vector3(x0, y01, z1))
+	if function_preset == FN_SCARP:
+		# One extra column pair straddling x = 0, so the discontinuity is emitted as
+		# a vertical quad rather than smeared into a 0.2 m ramp by the sampling.
+		var cols: PackedFloat64Array = _scarp_columns(dx)
+		for ci in range(cols.size() - 1):
+			for cj in range(SURFACE_RES):
+				var zs: float = _z_range.x + cj * dz
+				_emit_surface_quad(cols[ci], cols[ci + 1], zs, zs + dz)
+	else:
+		# Untouched arithmetic — same loop bounds, same `x0 + dx` recurrence, so the
+		# three shipped presets emit the same vertex stream they always did.
+		for i in range(SURFACE_RES):
+			for j in range(SURFACE_RES):
+				var x0 := _x_range.x + i * dx
+				var z0 := _z_range.x + j * dz
+				_emit_surface_quad(x0, x0 + dx, z0, z0 + dz)
 
 	_surface_im.surface_end()
+
+## The column edges for `scarp`: every normal sample except the one that lands on
+## x = 0, which is replaced by a pair 0.02 mm either side of it. The quad between
+## that pair spans 0.04 mm horizontally and 0.45 m vertically — a clean shear line
+## running the full 8.0 m of the field.
+func _scarp_columns(dx: float) -> PackedFloat64Array:
+	var cols := PackedFloat64Array()
+	for i in range(SURFACE_RES + 1):
+		var xa: float = _x_range.x + i * dx
+		if xa < -SCARP_SEAM:
+			cols.append(xa)
+	cols.append(-SCARP_SEAM)
+	cols.append(SCARP_SEAM)
+	for k in range(SURFACE_RES + 1):
+		var xb: float = _x_range.x + k * dx
+		if xb > SCARP_SEAM:
+			cols.append(xb)
+	return cols
+
+## One surface quad, verbatim from the loop it used to live inside: two triangles,
+## the 4.0 m height cap, and the low-to-high colour ramp.
+func _emit_surface_quad(x0: float, x1: float, z0: float, z1: float) -> void:
+	var y00 := _eval(Vector2(x0, z0)) * _y_scale
+	var y10 := _eval(Vector2(x1, z0)) * _y_scale
+	var y01 := _eval(Vector2(x0, z1)) * _y_scale
+	var y11 := _eval(Vector2(x1, z1)) * _y_scale
+
+	# Cap height for visualization
+	y00 = minf(y00, 4.0)
+	y10 = minf(y10, 4.0)
+	y01 = minf(y01, 4.0)
+	y11 = minf(y11, 4.0)
+
+	var c00 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y00 / 3.0, 0.0, 1.0))
+	var c10 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y10 / 3.0, 0.0, 1.0))
+	var c01 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y01 / 3.0, 0.0, 1.0))
+	var c11 := COL_SURFACE.lerp(COL_SURFACE_HI, clampf(y11 / 3.0, 0.0, 1.0))
+
+	var n := Vector3.UP
+
+	# Tri 1
+	_surface_im.surface_set_color(c00)
+	_surface_im.surface_set_normal(n)
+	_surface_im.surface_add_vertex(Vector3(x0, y00, z0))
+	_surface_im.surface_set_color(c10)
+	_surface_im.surface_set_normal(n)
+	_surface_im.surface_add_vertex(Vector3(x1, y10, z0))
+	_surface_im.surface_set_color(c01)
+	_surface_im.surface_set_normal(n)
+	_surface_im.surface_add_vertex(Vector3(x0, y01, z1))
+
+	# Tri 2
+	_surface_im.surface_set_color(c10)
+	_surface_im.surface_set_normal(n)
+	_surface_im.surface_add_vertex(Vector3(x1, y10, z0))
+	_surface_im.surface_set_color(c11)
+	_surface_im.surface_set_normal(n)
+	_surface_im.surface_add_vertex(Vector3(x1, y11, z1))
+	_surface_im.surface_set_color(c01)
+	_surface_im.surface_set_normal(n)
+	_surface_im.surface_add_vertex(Vector3(x0, y01, z1))
 
 func _draw_optimizer_trails() -> void:
 	_trails_im.clear_surfaces()
@@ -1477,16 +1683,42 @@ func _make_billboard_block(text: String, color: Color, line_h: float, max_w: flo
 # ════════════════════════════════════════════════════════════════════════
 
 func apply_grid_config(config: Dictionary) -> void:
+	# Snapshot everything before touching it. This arrives via call_deferred AFTER
+	# _ready(), and curation_station hands EVERY artifact it curates
+	# {"emissive": false} one line after framing its labels — a dict with no key
+	# this artifact accepts, which must therefore change nothing at all. It is not
+	# accepted here precisely so that it cannot half-work: an accepted key that
+	# applies nowhere is the failure this guard was written after.
+	var before_basin: String = basin
+	var before_preset: int = function_preset
+	var before_mode: int = _mode
+	var before_lr: float = learning_rate
+	var before_mb: float = momentum_beta
+	var before_b1: float = adam_beta1
+	var before_b2: float = adam_beta2
+	var before_ss: float = step_speed
+
+	# ── Stage-2 DNA axis — `#basin:plateau` ────────────────────────────────
+	if config.has("basin"):
+		basin = _pick_axis(str(config["basin"]), BASINS, basin)
+		function_preset = int(BASIN_PRESET.get(basin, FN_BOWL))
+
+	# The legacy int/string route, still working, extended to the five. `basin` is
+	# renamed to follow it so the word and the int cannot disagree afterwards.
 	if config.has("function_preset"):
 		var fp = config["function_preset"]
 		if fp is int:
-			function_preset = clampi(fp, 0, 2)
+			function_preset = clampi(fp, 0, BASINS.size() - 1)
 		elif fp is String:
 			match (fp as String).to_lower():
-				"quadratic", "bowl": function_preset = 0
-				"rosenbrock": function_preset = 1
-				"himmelblau": function_preset = 2
+				"quadratic", "bowl": function_preset = FN_BOWL
+				"rosenbrock", "valley": function_preset = FN_VALLEY
+				"himmelblau", "plural": function_preset = FN_PLURAL
+				"plateau": function_preset = FN_PLATEAU
+				"scarp": function_preset = FN_SCARP
+		basin = BASINS[clampi(function_preset, 0, BASINS.size() - 1)]
 
+	# ── the temporal params, applied IN PLACE ──────────────────────────────
 	if config.has("learning_rate"):
 		learning_rate = clampf(float(config["learning_rate"]), 0.0001, 0.5)
 	if config.has("momentum_beta"):
@@ -1505,4 +1737,30 @@ func apply_grid_config(config: Dictionary) -> void:
 			"CONVERGENCE": _mode = Mode.CONVERGENCE
 			"HESSIAN": _mode = Mode.HESSIAN
 
-	_init_mode()
+	if not _built:
+		return
+
+	if basin == before_basin and function_preset == before_preset:
+		# No standing geometry changed, so the body stays exactly as built. The
+		# runners still need re-seeding if a temporal param moved.
+		var temporal_moved: bool = (_mode != before_mode)
+		temporal_moved = temporal_moved or (learning_rate != before_lr)
+		temporal_moved = temporal_moved or (momentum_beta != before_mb)
+		temporal_moved = temporal_moved or (adam_beta1 != before_b1)
+		temporal_moved = temporal_moved or (adam_beta2 != before_b2)
+		temporal_moved = temporal_moved or (step_speed != before_ss)
+		if temporal_moved:
+			_init_mode()
+		return
+
+	_rebuild_now()
+	print("[GradientDescent] Config applied — basin=%s (preset %d, %s)" % [
+		basin, function_preset, _fn_name()])
+
+
+## Accept an axis value only if it names something this artifact actually builds.
+## A typo has to fall back to the shipped look; a half-recognised value would
+## strand a placement showing a surface nobody asked for.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback

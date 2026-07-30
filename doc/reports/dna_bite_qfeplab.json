@@ -14,7 +14,8 @@
    "focus": 0.24672,
    "verdict": "bites",
    "subject": 0.07926,
-   "pairs": 10
+   "pairs": 10,
+   "twins": []
   },
   {
    "artifact": "edge_of_chaos_unlocked",
@@ -23,7 +24,19 @@
    "focus": 0.17824,
    "verdict": "bites",
    "subject": 0.0634,
-   "pairs": 10
+   "pairs": 10,
+   "twins": [
+    {
+     "a": "clamped",
+     "b": "withheld",
+     "focus": 0.0153
+    },
+    {
+     "a": "chaos",
+     "b": "frozen",
+     "focus": 0.05874
+    }
+   ]
   },
   {
    "artifact": "queer_morphology_specimen",
@@ -32,7 +45,14 @@
    "focus": 0.36668,
    "verdict": "bites",
    "subject": 0.06285,
-   "pairs": 6
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "clouded",
+     "b": "jarred",
+     "focus": 0.05536
+    }
+   ]
   },
   {
    "artifact": "possibility_space_cloud",
@@ -41,7 +61,8 @@
    "focus": 0.34482,
    "verdict": "bites",
    "subject": 0.06391,
-   "pairs": 10
+   "pairs": 10,
+   "twins": []
   },
   {
    "artifact": "microstate_counter",
@@ -50,7 +71,8 @@
    "focus": 0.27812,
    "verdict": "bites",
    "subject": 0.07859,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "entropy_fan",
@@ -59,7 +81,14 @@
    "focus": 0.26291,
    "verdict": "bites",
    "subject": 0.0516,
-   "pairs": 6
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "breath",
+     "b": "thread",
+     "focus": 0.05555
+    }
+   ]
   },
   {
    "artifact": "entropy_ceiling",
@@ -68,7 +97,8 @@
    "focus": 0.27527,
    "verdict": "bites",
    "subject": 0.11273,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "snap_cube_puzzle",
@@ -77,7 +107,8 @@
    "focus": 0.3296,
    "verdict": "bites",
    "subject": 0.08293,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "snap_tetra_puzzle",
@@ -86,7 +117,8 @@
    "focus": 0.34069,
    "verdict": "bites",
    "subject": 0.06418,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   }
  ]
 }

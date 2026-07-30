@@ -14,7 +14,8 @@
    "focus": 0.35765,
    "verdict": "bites",
    "subject": 0.10336,
-   "pairs": 24
+   "pairs": 24,
+   "twins": []
   },
   {
    "artifact": "lab_room",
@@ -23,7 +24,29 @@
    "focus": 0.16752,
    "verdict": "bites",
    "subject": 0.10336,
-   "pairs": 24
+   "pairs": 24,
+   "twins": [
+    {
+     "a": "none",
+     "b": "port",
+     "focus": 0.00625
+    },
+    {
+     "a": "none",
+     "b": "port",
+     "focus": 0.01161
+    },
+    {
+     "a": "none",
+     "b": "port",
+     "focus": 0.0136
+    },
+    {
+     "a": "none",
+     "b": "port",
+     "focus": 0.01561
+    }
+   ]
   },
   {
    "artifact": "library_rack",
@@ -32,7 +55,59 @@
    "focus": 0.02196,
    "verdict": "NO RENDER",
    "subject": 0.0,
-   "pairs": 10
+   "pairs": 10,
+   "twins": [
+    {
+     "a": "cordon",
+     "b": "fixture",
+     "focus": 0.0
+    },
+    {
+     "a": "cordon",
+     "b": "hood",
+     "focus": 0.0
+    },
+    {
+     "a": "cordon",
+     "b": "label",
+     "focus": 0.0
+    },
+    {
+     "a": "fixture",
+     "b": "hood",
+     "focus": 0.0
+    },
+    {
+     "a": "fixture",
+     "b": "label",
+     "focus": 0.0
+    },
+    {
+     "a": "hood",
+     "b": "label",
+     "focus": 0.0
+    },
+    {
+     "a": "cordon",
+     "b": "none",
+     "focus": 0.0549
+    },
+    {
+     "a": "fixture",
+     "b": "none",
+     "focus": 0.0549
+    },
+    {
+     "a": "hood",
+     "b": "none",
+     "focus": 0.0549
+    },
+    {
+     "a": "label",
+     "b": "none",
+     "focus": 0.0549
+    }
+   ]
   },
   {
    "artifact": "prng_crank_machine",
@@ -41,7 +116,19 @@
    "focus": 0.11023,
    "verdict": "WEAK",
    "subject": 0.08164,
-   "pairs": 10
+   "pairs": 10,
+   "twins": [
+    {
+     "a": "ledger",
+     "b": "tally",
+     "focus": 0.01963
+    },
+    {
+     "a": "oracle",
+     "b": "tally",
+     "focus": 0.0475
+    }
+   ]
   },
   {
    "artifact": "floating_sphere_field",
@@ -50,7 +137,19 @@
    "focus": 0.06613,
    "verdict": "WEAK",
    "subject": 0.00828,
-   "pairs": 6
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "dense",
+     "b": "scarce",
+     "focus": 0.03823
+    },
+    {
+     "a": "fog",
+     "b": "scarce",
+     "focus": 0.05248
+    }
+   ]
   },
   {
    "artifact": "exit_sign",
@@ -59,7 +158,8 @@
    "focus": 0.48902,
    "verdict": "bites",
    "subject": 0.10531,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "tt",
@@ -68,7 +168,8 @@
    "focus": 0.50346,
    "verdict": "bites",
    "subject": 0.11582,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "geodesic_dome",
@@ -77,7 +178,39 @@
    "focus": 0.02799,
    "verdict": "INERT",
    "subject": 0.06176,
-   "pairs": 6
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "v1",
+     "b": "v3",
+     "focus": 0.0
+    },
+    {
+     "a": "v1",
+     "b": "v4",
+     "focus": 0.0
+    },
+    {
+     "a": "v3",
+     "b": "v4",
+     "focus": 0.0
+    },
+    {
+     "a": "v1",
+     "b": "v2",
+     "focus": 0.05599
+    },
+    {
+     "a": "v2",
+     "b": "v3",
+     "focus": 0.05599
+    },
+    {
+     "a": "v2",
+     "b": "v4",
+     "focus": 0.05599
+    }
+   ]
   },
   {
    "artifact": "gallery_marker_facade",
@@ -86,7 +219,8 @@
    "focus": 0.37499,
    "verdict": "bites",
    "subject": 0.10645,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   }
  ]
 }

@@ -13,6 +13,42 @@ extends Node3D
 ## Evolving Flowers — a genetic algorithm that breeds flowers via L-System branching,
 ## petal geometry, and colour genes. Each generation is evaluated for aesthetic fitness
 ## (symmetry, colour vibrancy, branching complexity) and the best survive to breed.
+#
+# ── STAGE-2 DNA — ONE AXIS: `selection` ──────────────────────────────────────
+#
+# calculate_fitness() below is one of the most explicit statements of taste in the
+# project: more petals better, longer petals better, symmetry better, hue near 0.8
+# better, vivid better, more L-system iterations better — with explicit penalties
+# past petal_count 10 and branch_count 50. That taste is authored, unattributed, and
+# until now unfalsifiable in a still, because the still was always of the generation
+# BEFORE selection had happened: a random gen-0 bed, every placement, forever.
+#
+# `selection` states in geometry what a pressure DID to this population — and
+# whether any pressure was applied at all.
+#
+#   drift    the shipped gen-0 bed: 16 randomised genomes, 4 x 4 at 3.0 m pitch on
+#            the 20 m plane. No pressure applied yet. The default and the
+#            pre-promotion look — now drawn from a SEEDED generator, so two builds
+#            are the same bed rather than two samples of a distribution.
+#   uniform  16 copies of the fitness function's own stated optimum. A regimented
+#            purple bed 9 m across in which the aesthetic the code rewards has
+#            already won and nothing else remains.
+#   culled   three of that optimum standing on the 4 x 4 pattern with 13 plots bare,
+#            so the 20 m plane reads as an abandoned trial rather than a garden.
+#   runaway  16 flowers pushed PAST the code's own penalty thresholds — petal_count
+#            11, petal_length 1.5, 2.5 m stems, 4 L-system iterations (256 branch
+#            segments, well over the 50 the fitness function punishes). Beauty
+#            carried until the fitness function starts subtracting from it.
+#   split    eight 3-petal yellow flowers on 1.0 m stems filling the -x half, eight
+#            10-petal purple flowers on 2.4 m stems filling the +x half, the 3.0 m
+#            pitch gap empty between two incompatible tastes.
+#
+# NOT AN AXIS: generation_time. It is a 3-to-30-second clock. A rate cannot be
+# photographed, and sweeping it produces sixteen random flowers every time.
+#
+# The four non-drift values are PAST-TENSE claims, so they hold still: only `drift`
+# runs the generational loop in _process. A live GA would overwrite a stated outcome
+# eight seconds after spawn and turn the map token into a lie.
 
 const POPULATION_SIZE = 16
 @export_range(3.0, 30.0) var generation_time: float = 8.0
@@ -22,12 +58,58 @@ const POPULATION_SIZE = 16
 const MUTATION_RATE = 0.15  # Still used by FlowerGenome.mutate()
 const ELITE_COUNT = 2
 
+## What a selection pressure did to this population — and whether any pressure was
+## applied at all. Read in _ready() before the bed is planted.
+@export_enum("drift", "uniform", "culled", "runaway", "split") var selection: String = "drift"
+
+const SELECTIONS: PackedStringArray = ["drift", "uniform", "culled", "runaway", "split"]
+
+## Every random draw in the build path comes from this seed. Fixed, so two builds of
+## one value are the same bed down to the petal — an unseeded draw here would make
+## the pixel critic read noise as signal.
+const BUILD_SEED: int = 20260730
+
+## The three plots left standing under `culled`. Scattered on the diagonal, not a
+## tidy row, so what is left reads as survivors on an abandoned plot grid rather
+## than as a smaller, neater garden.
+const CULLED_PLOTS: PackedInt32Array = [0, 6, 11]
+
+## The rule the three authored tableaux use. It is one of the five options
+## randomize_genome() already draws from, not a new grammar — four F per iteration,
+## so `runaway` at 4 iterations is 256 branch segments and the branch_count > 50
+## penalty genuinely bites.
+const TABLEAU_RULE: String = "F[+F][-F]F"
+
+## The five rule options, lifted to script scope so the seeded drift builder draws
+## from exactly the list FlowerGenome.randomize_genome() uses.
+const RULE_OPTIONS: PackedStringArray = [
+	"F[+F]F[-F]F",
+	"F[+F][-F]F",
+	"FF[+F][-F]",
+	"F[++F][--F]F",
+	"F[+F][F][-F]",
+]
+
 var generation := 0
 var timer := 0.0
 var current_population := []
 var fitness_scores := []
 var _info_label: Label3D  # Floating generation display
 var _best_fitness_ever: float = 0.0
+
+## Build state. `_env_built` keeps ground, sky, light and the readout label out of
+## the rebuild path: by the time a config key arrives, LabelFramer has already
+## plated that label, and rebuilding it would throw the plate away and leave naked
+## glyphs hanging over the bed.
+var _built: bool = false
+var _env_built: bool = false
+var _rng := RandomNumberGenerator.new()
+
+## `emissive` is not an axis — curation_station hands every artifact it curates
+## {"emissive": false}. Petals, flower centres and the L-system's mini petals all
+## glow; these are the materials that carry it, so the key can be honoured in place.
+var _emissive: bool = true
+var _emissive_mats: Array = []
 
 class FlowerGenome:
 	var petal_count: int = 5
@@ -158,7 +240,17 @@ class Flower:
 		position = pos
 
 func _ready() -> void:
-	setup_environment()
+	_build_all()
+	_built = true
+
+
+## SYNCHRONOUS, from @export values alone. The sweep sets `selection` before the node
+## enters the tree and never calls apply_grid_config, so the whole bed has to be
+## standing by the time _ready() returns.
+func _build_all() -> void:
+	if not _env_built:
+		setup_environment()
+		_env_built = true
 	initialize_population()
 
 func setup_environment() -> void:
@@ -209,12 +301,169 @@ func setup_environment() -> void:
 	add_child(_info_label)
 
 func initialize_population() -> void:
-	for i in range(POPULATION_SIZE):
-		var genome = FlowerGenome.new()
-		var x = (i % 4 - 1.5) * 3.0
-		var z = (i / 4 - 1.5) * 3.0
-		var flower = spawn_flower(genome, Vector3(x, 0, z))
-		current_population.append(flower)
+	# One seed for the whole bed, reset at the top of every build: the drift genomes
+	# and the per-petal symmetry jitter both draw from here, in this order.
+	_rng.seed = BUILD_SEED
+	for entry in _population_plan():
+		var genome: FlowerGenome = entry["genome"]
+		var plot: int = entry["plot"]
+		current_population.append(spawn_flower(genome, _plot_position(plot)))
+	# Say what the taste makes of this bed, now, in the readout. Before this the label
+	# carried its title until the first generation eight seconds later, so no still
+	# ever showed a fitness number — the artifact's whole claim, unphotographed.
+	calculate_fitness()
+	update_generation_label()
+
+
+## The shipped 4 x 4 bed: 3.0 m pitch, 9 m across, centred on the 20 m plane.
+func _plot_position(index: int) -> Vector3:
+	var col: int = index % 4
+	var row: int = int(index / 4.0)
+	return Vector3((col - 1.5) * 3.0, 0.0, (row - 1.5) * 3.0)
+
+
+## Which genome stands in which plot, per axis value. Every value returns a different
+## population — nothing here falls through to a shared builder.
+func _population_plan() -> Array:
+	var plan: Array = []
+	match selection:
+		"uniform":
+			# The aesthetic the code rewards has already won: sixteen of its winner.
+			for i in range(POPULATION_SIZE):
+				plan.append({"genome": _optimum_genome(), "plot": i})
+		"culled":
+			# Same winner, three of it, thirteen plots bare.
+			for i in CULLED_PLOTS:
+				plan.append({"genome": _optimum_genome(), "plot": int(i)})
+		"runaway":
+			# The same taste carried past the point where its own author flinched
+			# and started subtracting.
+			for i in range(POPULATION_SIZE):
+				plan.append({"genome": _runaway_genome(), "plot": i})
+		"split":
+			# Columns 0 and 1 are the -x half, columns 2 and 3 the +x half; the 3.0 m
+			# pitch between x = -1.5 and x = 1.5 is the empty centre.
+			for i in range(POPULATION_SIZE):
+				plan.append({"genome": _split_genome((i % 4) < 2), "plot": i})
+		_:
+			# drift — no pressure has been applied yet.
+			for i in range(POPULATION_SIZE):
+				plan.append({"genome": _drift_genome(), "plot": i})
+	return plan
+
+
+## The shipped gen-0 genome: exactly randomize_genome()'s ranges — 3 to 10 petals,
+## hues around the whole wheel, 1.0 to 2.5 m stems — drawn from the seeded generator
+## instead of the global one, so the bed is one fixed bed instead of a new sample
+## every boot.
+func _drift_genome() -> FlowerGenome:
+	var g := FlowerGenome.new()
+	g.petal_count = _rng.randi_range(3, 10)
+	g.petal_length = _rng.randf_range(0.5, 1.5)
+	g.petal_width = _rng.randf_range(0.2, 0.8)
+	g.petal_curve = _rng.randf_range(-0.3, 0.3)
+	g.center_size = _rng.randf_range(0.2, 0.5)
+	g.color_hue = _rng.randf()
+	g.color_saturation = _rng.randf_range(0.6, 1.0)
+	g.color_value = _rng.randf_range(0.7, 1.0)
+	g.stem_height = _rng.randf_range(1.0, 2.5)
+	g.leaf_size = _rng.randf_range(0.3, 0.8)
+	g.symmetry = _rng.randf_range(0.8, 1.0)
+	g.lsystem_iterations = _rng.randi_range(1, 3)
+	g.branch_angle = _rng.randf_range(15.0, 45.0)
+	g.branch_length_decay = _rng.randf_range(0.5, 0.8)
+	g.lsystem_rules = {"F": RULE_OPTIONS[_rng.randi_range(0, RULE_OPTIONS.size() - 1)]}
+	return g
+
+
+## What calculate_fitness() says it wants, read straight off its own arithmetic:
+## 8 petals (the most it does not punish, minus a margin), hue 0.8, saturation 1.0,
+## symmetry 1.0, 2.0 m stems, 3 L-system iterations, ~30 degree branch angles,
+## gradual decay. Note that 3 iterations of a four-F rule is already 64 branches, so
+## the code's stated optimum trips the code's own branch_count > 50 penalty — the
+## taste contradicts itself, and the readout now prints the number that says so.
+func _optimum_genome() -> FlowerGenome:
+	var g := FlowerGenome.new()
+	g.petal_count = 8
+	g.petal_length = 1.0
+	g.petal_width = 0.5
+	g.petal_curve = 0.0
+	g.center_size = 0.3
+	g.color_hue = 0.8
+	g.color_saturation = 1.0
+	g.color_value = 1.0
+	g.stem_height = 2.0
+	g.leaf_size = 0.5
+	g.symmetry = 1.0
+	g.lsystem_iterations = 3
+	g.branch_angle = 30.0
+	g.branch_length_decay = 0.8
+	g.lsystem_rules = {"F": TABLEAU_RULE}
+	return g
+
+
+## The optimum carried past every threshold the fitness function penalises: 11 petals
+## (over the 10 it punishes), 1.5 m petals on 2.5 m stems, fat petals well clear of
+## the thin-petal penalty, and 4 iterations for 256 branch segments against a ceiling
+## of 50. Heads overlap their 3.0 m plots — beauty pushed until it costs.
+func _runaway_genome() -> FlowerGenome:
+	var g := FlowerGenome.new()
+	g.petal_count = 11
+	g.petal_length = 1.5
+	g.petal_width = 0.8
+	g.petal_curve = 0.25
+	g.center_size = 0.4
+	g.color_hue = 0.8
+	g.color_saturation = 1.0
+	g.color_value = 1.0
+	g.stem_height = 2.5
+	g.leaf_size = 0.8
+	g.symmetry = 1.0
+	g.lsystem_iterations = 4
+	g.branch_angle = 30.0
+	g.branch_length_decay = 0.75
+	g.lsystem_rules = {"F": TABLEAU_RULE}
+	return g
+
+
+## Two tastes that could not be reconciled, one per half of the bed. West: small,
+## three-petalled, yellow, short-stemmed, barely branched. East: ten-petalled,
+## purple, tall, elaborate — the fitness function's own preference. Nothing in
+## between, because nothing in between survived.
+func _split_genome(west: bool) -> FlowerGenome:
+	var g := FlowerGenome.new()
+	if west:
+		g.petal_count = 3
+		g.petal_length = 0.7
+		g.petal_width = 0.35
+		g.petal_curve = 0.0
+		g.center_size = 0.25
+		g.color_hue = 0.15
+		g.color_saturation = 1.0
+		g.color_value = 1.0
+		g.stem_height = 1.0
+		g.leaf_size = 0.4
+		g.symmetry = 1.0
+		g.lsystem_iterations = 1
+		g.branch_angle = 20.0
+		g.branch_length_decay = 0.6
+	else:
+		g.petal_count = 10
+		g.petal_length = 1.3
+		g.petal_width = 0.7
+		g.petal_curve = 0.15
+		g.center_size = 0.35
+		g.color_hue = 0.8
+		g.color_saturation = 1.0
+		g.color_value = 1.0
+		g.stem_height = 2.4
+		g.leaf_size = 0.7
+		g.symmetry = 1.0
+		g.lsystem_iterations = 3
+		g.branch_angle = 30.0
+		g.branch_length_decay = 0.8
+	g.lsystem_rules = {"F": TABLEAU_RULE}
+	return g
 
 func spawn_flower(genome: FlowerGenome, pos: Vector3) -> Flower:
 	var flower = Flower.new(genome, pos)
@@ -268,26 +517,33 @@ func spawn_flower(genome: FlowerGenome, pos: Vector3) -> Flower:
 	center.mesh = center_mesh
 	var center_mat := StandardMaterial3D.new()
 	center_mat.albedo_color = Color(0.9, 0.7, 0.2)
-	center_mat.emission_enabled = true
+	center_mat.emission_enabled = _emissive
 	center_mat.emission = Color(0.9, 0.7, 0.2) * 0.3
 	center.material_override = center_mat
+	_emissive_mats.append(center_mat)
 	flower.flower_head.add_child(center)
-	
-	# Petals
+
+	# Petals — ONE mesh and ONE material for the whole head. Every petal used to build
+	# its own identical ArrayMesh and its own identical material; sharing them is
+	# pixel-identical and is what keeps `runaway` (256 branch segments x 16 flowers)
+	# inside a single synchronous _ready() instead of stalling a capture.
 	var petal_color = Color.from_hsv(genome.color_hue, genome.color_saturation, genome.color_value)
+	var petal_mesh: ArrayMesh = create_petal_mesh(genome)
+	var petal_mat := StandardMaterial3D.new()
+	petal_mat.albedo_color = petal_color
+	petal_mat.emission_enabled = _emissive
+	petal_mat.emission = petal_color * 0.2
+	petal_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_emissive_mats.append(petal_mat)
 	for i in range(genome.petal_count):
 		var angle = (float(i) / genome.petal_count) * TAU
 		var petal := MeshInstance3D.new()
-		petal.mesh = create_petal_mesh(genome)
-		var petal_mat := StandardMaterial3D.new()
-		petal_mat.albedo_color = petal_color
-		petal_mat.emission_enabled = true
-		petal_mat.emission = petal_color * 0.2
-		petal_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		petal.mesh = petal_mesh
 		petal.material_override = petal_mat
 
-		# Position with symmetry variation
-		var symmetry_offset = randf_range(-1.0 + genome.symmetry, 1.0 - genome.symmetry) * 0.1
+		# Position with symmetry variation — from the SEEDED generator, so a flower
+		# that is imperfect is imperfect the same way in every build.
+		var symmetry_offset = _rng.randf_range(-1.0 + genome.symmetry, 1.0 - genome.symmetry) * 0.1
 		petal.rotation.y = angle + symmetry_offset
 		petal.position = Vector3(0, 0, 0)
 
@@ -398,6 +654,17 @@ func create_lsystem_branches(genome: FlowerGenome, parent: Node3D, petal_color: 
 
 	var stack = []  # Stack for push/pop operations
 
+	# One mini-petal mesh and one mini-petal material for the whole branching
+	# structure. Both were being rebuilt per F: identical every time, and at 256 F
+	# (the `runaway` value) that was 256 ArrayMeshes and 256 materials per flower.
+	var mini_mesh: ArrayMesh = create_petal_mesh(genome)
+	var mini_mat := StandardMaterial3D.new()
+	mini_mat.albedo_color = petal_color
+	mini_mat.emission_enabled = _emissive
+	mini_mat.emission = petal_color * 0.3
+	mini_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_emissive_mats.append(mini_mat)
+
 	for c in lstring:
 		match c:
 			"F":  # Draw forward
@@ -407,15 +674,10 @@ func create_lsystem_branches(genome: FlowerGenome, parent: Node3D, petal_color: 
 
 				# Add small petal at end
 				var mini_petal = MeshInstance3D.new()
-				mini_petal.mesh = create_petal_mesh(genome)
+				mini_petal.mesh = mini_mesh
 				mini_petal.scale = Vector3.ONE * 0.3
 				mini_petal.position = end_pos
-				var petal_mat = StandardMaterial3D.new()
-				petal_mat.albedo_color = petal_color
-				petal_mat.emission_enabled = true
-				petal_mat.emission = petal_color * 0.3
-				petal_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-				mini_petal.material_override = petal_mat
+				mini_petal.material_override = mini_mat
 				parent.add_child(mini_petal)
 
 				position = end_pos
@@ -469,7 +731,11 @@ func _process(delta: float) -> void:
 			var bob = sin(flower.age * 2.0) * 0.05
 			flower.flower_head.position.y = flower.genome.stem_height + bob
 	
-	if timer >= generation_time:
+	# Only the shipped `drift` bed runs the generational loop. The other four values
+	# are past-tense claims about a pressure that has already been applied; a live GA
+	# would overwrite the stated outcome eight seconds after spawn and make the map
+	# token a lie about the room it is standing in.
+	if selection == "drift" and timer >= generation_time:
 		evolve_population()
 		timer = 0.0
 
@@ -516,9 +782,7 @@ func evolve_population() -> void:
 	
 	# Spawn new generation
 	for i in range(POPULATION_SIZE):
-		var x = (i % 4 - 1.5) * 3.0
-		var z = (i / 4 - 1.5) * 3.0
-		var flower = spawn_flower(new_genomes[i], Vector3(x, 0, z))
+		var flower = spawn_flower(new_genomes[i], _plot_position(i))
 		current_population.append(flower)
 	
 	update_generation_label()
@@ -589,5 +853,75 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass
+## Map tokens: #selection:uniform, #selection:runaway, ...
+##
+## GridInteractablesComponent calls this via call_deferred, AFTER _ready() has already
+## planted the default bed, so this is a change-detected REBUILD and never the first
+## build. curation_station hands every artifact it curates {"emissive": false} one line
+## after framing its labels: that dict carries no axis key, so it must leave the
+## geometry exactly as it stands — hence the snapshot and the early return.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_selection: String = selection
+	if config_data.has("selection"):
+		selection = _pick_axis(str(config_data["selection"]), SELECTIONS, selection)
+
+	# Non-geometry, applied IN PLACE and before the returns — an accepted key that
+	# does nothing is worse than a key that was never accepted.
+	if config_data.has("emissive"):
+		_emissive = _to_bool(config_data["emissive"], _emissive)
+		_apply_emissive()
+
+	if not _built:
+		return
+	if selection == before_selection:
+		return
+	_rebuild_now()
+	print("[EvolvingFlowers] Config applied — selection=%s" % [selection])
+
+
+## Accept an axis value only if it names a population this artifact actually plants.
+## A typo has to land on the shipped look rather than on an empty plot grid.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+
+func _to_bool(raw: Variant, fallback: bool) -> bool:
+	if raw is bool:
+		return bool(raw)
+	if raw is int or raw is float:
+		return float(raw) != 0.0
+	var s: String = str(raw).to_lower().strip_edges()
+	if s in ["true", "1", "on", "yes"]:
+		return true
+	if s in ["false", "0", "off", "no"]:
+		return false
+	return fallback
+
+
+## Petals, flower centres and the L-system's mini petals glow by default. Turning that
+## off is a material change, not a geometry change, so it happens on the standing bed.
+func _apply_emissive() -> void:
+	for m in _emissive_mats:
+		if m is StandardMaterial3D:
+			(m as StandardMaterial3D).emission_enabled = _emissive
+
+
+## SYNCHRONOUS. No call_deferred anywhere in the build path: a deferred rebuild that
+## removes children first makes the grid's auto-grounding measure a zero AABB and bail.
+##
+## Frees ONLY the flower roots this script planted. The ground plane, sky, light and
+## the readout label stay — they are not part of the axis, and the label already
+## carries the plate LabelFramer gave it at spawn.
+func _rebuild_now() -> void:
+	for flower in current_population:
+		if flower.root_node != null and is_instance_valid(flower.root_node):
+			remove_child(flower.root_node)
+			flower.root_node.queue_free()
+	current_population.clear()
+	fitness_scores.clear()
+	_emissive_mats.clear()
+	generation = 0
+	timer = 0.0
+	_best_fitness_ever = 0.0
+	initialize_population()

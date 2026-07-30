@@ -22,7 +22,33 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var room_height: float = 8.0  # Height of layer rooms
 
 @export_group("Network Architecture")
-@export var layer_sizes: Array[int] = [5, 4, 3, 2]  # Neurons per layer
+
+## Stage-2 DNA — the shape of the layer stack, which is a claim about the shape of
+## the problem: what this network could ever represent, before a single weight is
+## trained. Same word and same five values as `neural_network_visualization`,
+## verbatim and deliberately — that one is the diagram, this one is the building,
+## and on a sweep sheet they read as one family answering the same question at two
+## scales.
+##
+##   graded   5-4-3-2      the shipped building: four glass rooms, 6.0 m pitch,
+##                         18.0 m long, 14 neurons, 38 weight lines
+##   flat     5-2          two rooms 6.0 m apart, 10 lines crossing the gap — an
+##                         entrance hall, an exit, and no interior to walk through
+##   deep     5-4-4-4-4-4-2  seven rooms across 36.0 m, 92 lines, five identical
+##                         hidden rooms in a row; a corridor whose middle is
+##                         indistinguishable from itself
+##   widened  5-7-2        the middle room holds 7 neurons filling 8.4 m of its
+##                         interior, 49 lines converging — the only full room here
+##   pinched  5-1-2        one 0.25 m sphere alone in 4.0 x 8.0 x 9.0 m of glass,
+##                         7 lines total; the emptiest room and the most
+##                         consequential, since everything the network knows
+##                         is standing in it
+##
+## Refused: training_speed, learning_rate, auto_train, show_backprop (time-domain —
+## they drive the particle animations and a still catches them at an arbitrary
+## phase) and room_height (resizes the glass without changing what the network is).
+@export_enum("graded", "flat", "deep", "widened", "pinched") var topology: String = "graded"
+@export var layer_sizes: Array[int] = [5, 4, 3, 2]  # Neurons per layer — derived from `topology`
 @export var enable_bias_neurons: bool = true
 @export var activation_function: String = "ReLU"  # ReLU, Sigmoid, Tanh
 
@@ -38,6 +64,45 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var show_weights: bool = true
 @export var show_activations: bool = true
 @export var weight_line_thickness: float = 0.02
+
+# ── Stage-2 DNA tables ────────────────────────────────────────────────
+
+## Allow-list. A typo in a map token falls back to the shipped building rather
+## than stranding a placement with no architecture at all.
+const TOPOLOGYS: PackedStringArray = ["graded", "flat", "deep", "widened", "pinched"]
+
+## The five stacks. Every value builds a physically different building — different
+## room count, different total width, different weight-line count. Line totals are
+## the sum of adjacent products: 38 / 10 / 92 / 49 / 7.
+const TOPOLOGY_STACKS: Dictionary = {
+	"graded": [5, 4, 3, 2],
+	"flat": [5, 2],
+	"deep": [5, 4, 4, 4, 4, 4, 2],
+	"widened": [5, 7, 2],
+	"pinched": [5, 1, 2],
+}
+
+## Hard ceiling on a single layer. Neurons stack at 1.2 m pitch inside a room whose
+## interior is `room_height` (8.0 m) between a floor slab whose top face is at
+## -4.45 m and a ceiling slab whose underside is at +4.45 m. 7 neurons span 7.2 m
+## centre-to-centre (+/-3.6 m) plus 0.25 m of radius at each end = +/-3.85 m, which
+## clears. 8 lands at +/-4.45 m, exactly on the glass, and would read as a bug rather
+## than as an argument — so no value may request more.
+const MAX_COLUMN: int = 7
+
+## DETERMINISM. Every random draw in the build path is pulled from one of these
+## fixed seeds, so two builds of the same topology are pixel-identical. An unseeded
+## initial weight would recolour half the 38 lines between takes and the pixel
+## critic would read that noise as signal.
+const SEED_WEIGHTS: int = 20260730
+const SEED_DATA: int = 20260731
+const SEED_FORWARD: int = 20260732
+const SEED_BACKWARD: int = 20260733
+
+## Lateral offset used when a topology has fewer than two hidden bays and the two
+## upper info boards would otherwise land on the same spot. 1.9 m clears the 3.4 m
+## board width with a 0.4 m gap between bezels.
+const INFO_PANEL_FLANK: float = 1.9
 
 # Training state
 var time: float = 0.0
@@ -61,8 +126,21 @@ var input_data_particles: Array = []
 # Visual elements
 var weight_lines: Array = []
 
+# Lifecycle — `_owned` holds every node THIS script parented to self, so a rebuild
+# frees only its own building and never the plates the grid added around it.
+var _built: bool = false
+var _owned: Array[Node] = []
+
 func _ready() -> void:
 	print("[NeuralNetworks_VR] Initializing interactive neural network")
+	_build_all()
+	_built = true
+
+## The whole building, synchronously, from @export values alone. No call_deferred
+## anywhere in here: a deferred rebuild that removes children first makes the grid's
+## auto-grounding measure a zero AABB and bail.
+func _build_all() -> void:
+	_apply_topology()
 	_initialize_network()
 	_create_network_layers()
 	_create_weight_connections()
@@ -71,6 +149,24 @@ func _ready() -> void:
 	_create_gradient_flow()
 	_create_control_panel()
 	_create_info_panels()
+
+## `topology` is the single source of the layer stack. Everything downstream —
+## room count, room positions, neuron columns, weight lines, the control panel's x,
+## the architecture string, the info-board anchors, the particle path length —
+## derives from `layer_sizes`, so setting it here is the whole branch.
+func _apply_topology() -> void:
+	if not TOPOLOGYS.has(topology):
+		topology = "graded"
+	var stack: Array = TOPOLOGY_STACKS[topology]
+	var out: Array[int] = []
+	for raw in stack:
+		out.append(clampi(int(raw), 1, MAX_COLUMN))
+	layer_sizes = out
+
+## Adopt a node as a direct child of the building and remember it for teardown.
+func _own(n: Node) -> void:
+	add_child(n)
+	_owned.append(n)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -91,12 +187,22 @@ func _process(delta: float) -> void:
 	_update_control_panel()
 
 func _initialize_network() -> void:
-	"""Initialize network structure"""
+	"""Initialize network structure — every draw from SEED_WEIGHTS, never the
+	global RNG. Initial activations set neuron emission and pulse; initial weights
+	set every line's colour (green positive / red negative) and brightness. Both are
+	visible in a still, so both must be identical between two builds of one value."""
+	activations.clear()
+	gradients.clear()
+	weights.clear()
+
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = SEED_WEIGHTS
+
 	# Initialize activations for each layer
 	for layer_size in layer_sizes:
 		var layer_activations = []
 		for i in range(layer_size):
-			layer_activations.append(randf())
+			layer_activations.append(rng.randf())
 		activations.append(layer_activations)
 		gradients.append(layer_activations.duplicate())
 
@@ -106,17 +212,18 @@ func _initialize_network() -> void:
 		for j in range(layer_sizes[i]):
 			var neuron_weights = []
 			for k in range(layer_sizes[i + 1]):
-				neuron_weights.append(randf_range(-0.5, 0.5))
+				neuron_weights.append(rng.randf_range(-0.5, 0.5))
 			layer_weights.append(neuron_weights)
 		weights.append(layer_weights)
 
 func _create_network_layers() -> void:
 	"""Create visual representation of all layers"""
+	layers.clear()
 	for layer_idx in range(layer_sizes.size()):
 		var layer_container = Node3D.new()
 		layer_container.name = "Layer_%d" % layer_idx
 		layer_container.position = Vector3(layer_idx * layer_spacing, 0, 0)
-		add_child(layer_container)
+		_own(layer_container)
 
 		var layer_neurons = []
 
@@ -271,9 +378,11 @@ func _create_weight_connections() -> void:
 	if not show_weights:
 		return
 
+	weight_lines.clear()
+
 	var weights_container = Node3D.new()
 	weights_container.name = "WeightConnections"
-	add_child(weights_container)
+	_own(weights_container)
 
 	# Create lines between each pair of connected neurons
 	for layer_idx in range(layers.size() - 1):
@@ -338,24 +447,32 @@ func _create_data_input_area() -> void:
 	platform.material_override = mat
 
 	platform.position = Vector3(-3.0, -room_height / 2.0, 0)
-	add_child(platform)
+	_own(platform)
 
-	# Framed tag (R-027)
+	# Framed tag (R-027) — a BakedText board, not a Label3D, so LabelFramer never
+	# touches it. Left exactly where it shipped: x = -3.0, y = 0, on the input
+	# platform's own column WEST of the building, on the far side of the first room
+	# from the stack you look down. It does not move per topology because the platform
+	# it names does not move either — every value still enters at x = 0.
 	var tag: Node3D = BakedText.make_tag("TRAINING DATA — throw into network", Color(0.9, 0.9, 0.3), 0.14)
 	if tag:
 		tag.position = Vector3(-3.0, 0, 0)
-		add_child(tag)
+		_own(tag)
 
-	# Create throwable data particles
+	# Create throwable data particles — SEED_DATA, not the global RNG: these are ten
+	# visible 0.15 m spheres and their scatter has to repeat exactly.
+	input_data_particles.clear()
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = SEED_DATA
 	for i in range(10):
 		var data = _create_data_particle(
 			Vector3(
-				-3.0 + randf_range(-1.2, 1.2),
+				-3.0 + rng.randf_range(-1.2, 1.2),
 				-room_height / 2.0 + 0.3 + i * 0.15,
-				randf_range(-1.2, 1.2)
+				rng.randf_range(-1.2, 1.2)
 			)
 		)
-		add_child(data)
+		_own(data)
 		input_data_particles.append(data)
 
 func _create_data_particle(pos: Vector3) -> RigidBody3D:
@@ -397,9 +514,11 @@ func _create_activation_flow() -> void:
 	if not show_activations:
 		return
 
+	forward_particles.clear()
+
 	var flow_container = Node3D.new()
 	flow_container.name = "ForwardPropagation"
-	add_child(flow_container)
+	_own(flow_container)
 
 	var fwd_count = 25
 	var sphere = SphereMesh.new()
@@ -421,9 +540,14 @@ func _create_activation_flow() -> void:
 	mm.instance_count = fwd_count
 	mm.mesh = sphere
 
+	# SEED_FORWARD — the starting phase of every flow particle. The transforms are
+	# zeroed here and _process moves them, so a capture taken a few frames in sees
+	# these offsets; unseeded they would scatter differently in every take.
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = SEED_FORWARD
 	for i in range(fwd_count):
 		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3.ZERO))
-		forward_particles.append({"index": i, "progress": randf()})
+		forward_particles.append({"index": i, "progress": rng.randf()})
 
 	var mmi = MultiMeshInstance3D.new()
 	mmi.name = "ForwardParticles_MM"
@@ -438,9 +562,11 @@ func _create_gradient_flow() -> void:
 	if not show_backprop:
 		return
 
+	backward_particles.clear()
+
 	var gradient_container = Node3D.new()
 	gradient_container.name = "Backpropagation"
-	add_child(gradient_container)
+	_own(gradient_container)
 
 	var bwd_count = 20
 	var sphere = SphereMesh.new()
@@ -462,9 +588,13 @@ func _create_gradient_flow() -> void:
 	mm.instance_count = bwd_count
 	mm.mesh = sphere
 
+	# SEED_BACKWARD — same reason as the forward stream, own seed so the two do not
+	# share a draw order.
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = SEED_BACKWARD
 	for i in range(bwd_count):
 		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3.ZERO))
-		backward_particles.append({"index": i, "progress": randf()})
+		backward_particles.append({"index": i, "progress": rng.randf()})
 
 	var mmi = MultiMeshInstance3D.new()
 	mmi.name = "BackwardParticles_MM"
@@ -477,9 +607,11 @@ func _create_control_panel() -> void:
 	"""Create VR-accessible control panel"""
 	var controls = Node3D.new()
 	controls.name = "ControlPanel"
+	# Already derived: the panel stands 3.0 m past the last room whatever the
+	# topology — x = 9.0 at flat, 21.0 at graded, 39.0 at deep.
 	var total_width = (layer_sizes.size() - 1) * layer_spacing
 	controls.position = Vector3(total_width + 3.0, 0, 0)
-	add_child(controls)
+	_own(controls)
 
 	# Panel background
 	var panel = MeshInstance3D.new()
@@ -502,12 +634,8 @@ func _create_control_panel() -> void:
 		title.position = Vector3(0, 1.8, 0.1)
 		controls.add_child(title)
 
-	# Architecture info
-	var arch_text = "Architecture:  "
-	for i in range(layer_sizes.size()):
-		arch_text += str(layer_sizes[i])
-		if i < layer_sizes.size() - 1:
-			arch_text += " - "
+	# Architecture info — reads "5 - 4 - 3 - 2" at graded, "5 - 2" at flat, and so on
+	var arch_text = "Architecture:  " + _arch_string()
 	var arch: MeshInstance3D = BakedText.make_label_mesh(arch_text, Color(0.85, 0.88, 0.95), Vector2(2.9, 0.26), 1300, true)
 	if arch:
 		arch.position = Vector3(0, 0.9, 0.1)
@@ -527,6 +655,13 @@ func _create_control_panel() -> void:
 		act.position = Vector3(0, -1.5, 0.1)
 		controls.add_child(act)
 
+## The stack as it appears on the control panel and in the config log line.
+func _arch_string() -> String:
+	var parts: PackedStringArray = PackedStringArray()
+	for n in layer_sizes:
+		parts.append(str(n))
+	return " - ".join(parts)
+
 func _update_metrics_board(loss: float, epoch: int) -> void:
 	var text := "Loss %.3f   Epoch %d   LR %.3f" % [loss, epoch, learning_rate]
 	if text == _metrics_cache or _metrics_board == null:
@@ -538,27 +673,62 @@ func _update_metrics_board(loss: float, epoch: int) -> void:
 	if q:
 		_metrics_board.add_child(q)
 
+## Where the three boards stand, as a function of the ACTUAL layer count.
+##
+## They used to be hard-coded to `layer_spacing`, `layer_spacing * 2` and
+## `layer_spacing / 2`, which only ever meant anything for a four-room building: at
+## `flat` the backprop board stood 6 m past the last room with nothing under it, and
+## at `deep` the weights board sat below the second bay of a 36 m building like
+## debris. Returns [upper_a_x, upper_b_x, lower_x].
+##
+## With two or more hidden bays the upper pair takes the first and the last of them.
+## With one (widened, pinched) they flank that single bay by INFO_PANEL_FLANK, since
+## "first" and "last" name the same room and two 3.4 m boards cannot share a spot.
+## With none (flat) they flank the midpoint of the gap the weight lines cross.
+func _info_panel_anchors() -> Array:
+	var n: int = layer_sizes.size()
+	var total_width: float = float(n - 1) * layer_spacing
+	var hidden: int = n - 2
+	var ax: float
+	var bx: float
+	if hidden >= 2:
+		ax = layer_spacing
+		bx = layer_spacing * float(n - 2)
+	else:
+		var centre: float = layer_spacing if hidden == 1 else total_width * 0.5
+		ax = centre - INFO_PANEL_FLANK
+		bx = centre + INFO_PANEL_FLANK
+	return [ax, bx, total_width * 0.5]
+
 func _create_info_panels() -> void:
-	"""Create educational info panels"""
-	# Forward propagation
+	"""Create educational info panels.
+
+	Vertical placement is untouched and is what keeps these clear of every body:
+	the upper pair at y = room_height / 2 + 2.5 = 6.5 m sits above rooms whose
+	ceiling slab tops out at 4.55 m, and the lower board at y = -6.0 m hangs below a
+	floor slab whose underside is -4.55 m. True at every topology, since no value
+	changes room_height."""
+	var anchors: Array = _info_panel_anchors()
+
+	# Forward propagation — first hidden bay
 	_create_info_panel(
-		Vector3(layer_spacing, room_height / 2.0 + 2.5, -4.0),
+		Vector3(float(anchors[0]), room_height / 2.0 + 2.5, -4.0),
 		"FORWARD PROPAGATION\nData flows left to right\nEach neuron computes:\nweighted sum + bias",
 		Color(0.3, 0.9, 0.9)
 	)
 
-	# Backpropagation
+	# Backpropagation — last hidden bay
 	if show_backprop:
 		_create_info_panel(
-			Vector3(layer_spacing * 2, room_height / 2.0 + 2.5, -4.0),
+			Vector3(float(anchors[1]), room_height / 2.0 + 2.5, -4.0),
 			"BACKPROPAGATION\nGradients flow right to left\nWeights updated by:\nw -= learning_rate * gradient",
 			Color(0.9, 0.3, 0.9)
 		)
 
-	# Weight connections
+	# Weight connections — centred under the building it describes
 	if show_weights:
 		_create_info_panel(
-			Vector3(layer_spacing / 2.0, -room_height / 2.0 - 2.0, 0),
+			Vector3(float(anchors[2]), -room_height / 2.0 - 2.0, 0),
 			"WEIGHT CONNECTIONS\nGreen: positive weights\nRed: negative weights\nBrightness: magnitude",
 			Color(0.6, 0.9, 0.6)
 		)
@@ -568,7 +738,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	var rows := text.split("\n")
 	var board := Node3D.new()
 	board.position = pos
-	add_child(board)
+	_own(board)
 
 	var h: float = 0.34 * rows.size() + 0.3
 	var face := MeshInstance3D.new()
@@ -728,5 +898,68 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass
+# ═══════════════════════════════════════════════════════════════════
+# GRID CONFIG INTEGRATION — Stage-2 DNA
+# ═══════════════════════════════════════════════════════════════════
+
+## `#topology:pinched` in a map's interactables layer.
+##
+## Called via call_deferred by GridInteractablesComponent, AFTER _ready() has
+## already built the default building. So this is a re-build, not the build.
+##
+## `emissive` is deliberately NOT accepted. curation_station hands every artifact it
+## curates {"emissive": false} one line after framing its labels; before this pass
+## apply_grid_config was a bare `pass`, so that key did nothing here, and honouring
+## it now would silently darken this building in every curated map. The shipped look
+## is the contract. An unrecognised key changes nothing and the early return below
+## makes that explicit rather than accidental.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_topology: String = topology
+	var before_stack: Array = layer_sizes.duplicate()
+
+	if config_data.has("topology"):
+		topology = _pick_axis(str(config_data["topology"]), TOPOLOGYS, topology)
+
+	if not _built:
+		return
+	if topology == before_topology and layer_sizes == before_stack:
+		return
+
+	_rebuild_now()
+	print("[NeuralNetworks_VR] Config applied — topology=%s (%s)" % [topology, _arch_string()])
+
+## Accept an axis value only if it names something we actually build. A typo has to
+## fall back to the legacy building rather than leave a placement with no rooms.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+## Tear down and rebuild SYNCHRONOUSLY. Nothing deferred: the grid auto-grounds this
+## artifact by measuring its subtree AABB, and a deferred rebuild that has already
+## removed its children measures zero and bails, dropping the building through
+## the floor.
+##
+## Frees only `_owned` — the nodes this script parented to self. get_children() would
+## also take the plates, labels and colliders the grid added around us.
+func _rebuild_now() -> void:
+	for c in _owned:
+		if c != null and is_instance_valid(c):
+			remove_child(c)
+			c.queue_free()
+	_owned.clear()
+
+	# Cached refs into the freed subtree
+	layers.clear()
+	weights.clear()
+	activations.clear()
+	gradients.clear()
+	weight_lines.clear()
+	forward_particles.clear()
+	backward_particles.clear()
+	input_data_particles.clear()
+	_metrics_board = null
+	# Must clear, or _create_control_panel's first _update_metrics_board call matches
+	# the stale string and early-returns, leaving the new panel with a blank board.
+	_metrics_cache = ""
+
+	_build_all()

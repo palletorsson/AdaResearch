@@ -14,7 +14,8 @@
    "focus": 0.37867,
    "verdict": "bites",
    "subject": 0.87418,
-   "pairs": 10
+   "pairs": 10,
+   "twins": []
   },
   {
    "artifact": "KonigsbergBridge",
@@ -23,7 +24,14 @@
    "focus": 0.19727,
    "verdict": "bites",
    "subject": 0.23316,
-   "pairs": 6
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "circuit",
+     "b": "walk",
+     "focus": 0.05027
+    }
+   ]
   },
   {
    "artifact": "pathfinding3d",
@@ -32,7 +40,8 @@
    "focus": 0.369,
    "verdict": "bites",
    "subject": 0.32434,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "rhizomatic_structure",
@@ -41,7 +50,8 @@
    "focus": 0.13418,
    "verdict": "bites",
    "subject": 0.01324,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "networkflow3d",
@@ -50,7 +60,8 @@
    "focus": 0.1804,
    "verdict": "bites",
    "subject": 0.87203,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "topological_sort",
@@ -59,7 +70,8 @@
    "focus": 0.23423,
    "verdict": "bites",
    "subject": 0.02035,
-   "pairs": 10
+   "pairs": 10,
+   "twins": []
   },
   {
    "artifact": "tarjan_algorithm",
@@ -68,7 +80,8 @@
    "focus": 0.30821,
    "verdict": "bites",
    "subject": 0.01648,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "kosaraju_algorithm",
@@ -77,7 +90,8 @@
    "focus": 0.29825,
    "verdict": "bites",
    "subject": 0.01762,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "mst_visualization",
@@ -86,7 +100,8 @@
    "focus": 0.168,
    "verdict": "bites",
    "subject": 0.65422,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "karger_algorithm",
@@ -95,7 +110,14 @@
    "focus": 0.38927,
    "verdict": "bites",
    "subject": 0.03293,
-   "pairs": 6
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "severed",
+     "b": "throat",
+     "focus": 0.04483
+    }
+   ]
   },
   {
    "artifact": "push_relabel_algorithm",
@@ -104,7 +126,8 @@
    "focus": 0.32738,
    "verdict": "bites",
    "subject": 0.04063,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "edmonds_algorithm",
@@ -113,7 +136,8 @@
    "focus": 0.26854,
    "verdict": "bites",
    "subject": 0.01391,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   }
  ]
 }

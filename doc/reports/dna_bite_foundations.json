@@ -14,7 +14,8 @@
    "focus": 0.35961,
    "verdict": "bites",
    "subject": 0.04074,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "incompleteness_tower",
@@ -23,7 +24,8 @@
    "focus": 0.51112,
    "verdict": "bites",
    "subject": 0.05859,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "provability_sorter",
@@ -32,7 +34,8 @@
    "focus": 0.32356,
    "verdict": "bites",
    "subject": 0.06109,
-   "pairs": 10
+   "pairs": 10,
+   "twins": []
   },
   {
    "artifact": "self_membership_set",
@@ -41,7 +44,8 @@
    "focus": 0.36631,
    "verdict": "bites",
    "subject": 0.05152,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "barber_paradox",
@@ -50,16 +54,18 @@
    "focus": 0.49102,
    "verdict": "bites",
    "subject": 0.04414,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "liar_loop",
    "axis": "valuation",
-   "frame": 0.11301,
-   "focus": 0.55873,
+   "frame": 0.11299,
+   "focus": 0.55865,
    "verdict": "bites",
-   "subject": 0.05609,
-   "pairs": 6
+   "subject": 0.05605,
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "impossible_trident",
@@ -68,7 +74,8 @@
    "focus": 0.25238,
    "verdict": "bites",
    "subject": 0.05883,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "hyperbolic_surface",
@@ -77,7 +84,8 @@
    "focus": 0.25816,
    "verdict": "bites",
    "subject": 0.03629,
-   "pairs": 10
+   "pairs": 10,
+   "twins": []
   },
   {
    "artifact": "elliptic_surface",
@@ -86,7 +94,8 @@
    "focus": 0.42612,
    "verdict": "bites",
    "subject": 0.06387,
-   "pairs": 10
+   "pairs": 10,
+   "twins": []
   },
   {
    "artifact": "riemann_sphere",
@@ -95,7 +104,24 @@
    "focus": 0.24731,
    "verdict": "bites",
    "subject": 0.06285,
-   "pairs": 15
+   "pairs": 15,
+   "twins": [
+    {
+     "a": "open",
+     "b": "pole",
+     "focus": 0.0
+    },
+    {
+     "a": "open",
+     "b": "rays",
+     "focus": 0.0
+    },
+    {
+     "a": "pole",
+     "b": "rays",
+     "focus": 0.0
+    }
+   ]
   },
   {
    "artifact": "riemann_sphere",
@@ -104,7 +130,8 @@
    "focus": 0.33133,
    "verdict": "bites",
    "subject": 0.06285,
-   "pairs": 30
+   "pairs": 30,
+   "twins": []
   },
   {
    "artifact": "excluded_middle_demo",
@@ -113,7 +140,8 @@
    "focus": 0.35147,
    "verdict": "bites",
    "subject": 0.02078,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   },
   {
    "artifact": "brouwer_choice_sequence",
@@ -122,7 +150,8 @@
    "focus": 0.30189,
    "verdict": "bites",
    "subject": 0.01348,
-   "pairs": 6
+   "pairs": 6,
+   "twins": []
   }
  ]
 }
