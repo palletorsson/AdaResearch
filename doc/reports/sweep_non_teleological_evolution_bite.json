@@ -1,0 +1,107 @@
+{
+ "sweep": "non_teleological_evolution",
+ "peak_changed_pct": 2.831,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "selection": "drift"
+   },
+   "b": {
+    "selection": "uniform"
+   },
+   "changed_px": 7360,
+   "changed_pct": 1.274
+  },
+  {
+   "a": {
+    "selection": "drift"
+   },
+   "b": {
+    "selection": "culled"
+   },
+   "changed_px": 5976,
+   "changed_pct": 1.035
+  },
+  {
+   "a": {
+    "selection": "drift"
+   },
+   "b": {
+    "selection": "runaway"
+   },
+   "changed_px": 16353,
+   "changed_pct": 2.831
+  },
+  {
+   "a": {
+    "selection": "drift"
+   },
+   "b": {
+    "selection": "split"
+   },
+   "changed_px": 7602,
+   "changed_pct": 1.316
+  },
+  {
+   "a": {
+    "selection": "uniform"
+   },
+   "b": {
+    "selection": "culled"
+   },
+   "changed_px": 3118,
+   "changed_pct": 0.54
+  },
+  {
+   "a": {
+    "selection": "uniform"
+   },
+   "b": {
+    "selection": "runaway"
+   },
+   "changed_px": 15174,
+   "changed_pct": 2.627
+  },
+  {
+   "a": {
+    "selection": "uniform"
+   },
+   "b": {
+    "selection": "split"
+   },
+   "changed_px": 5157,
+   "changed_pct": 0.893
+  },
+  {
+   "a": {
+    "selection": "culled"
+   },
+   "b": {
+    "selection": "runaway"
+   },
+   "changed_px": 15060,
+   "changed_pct": 2.607
+  },
+  {
+   "a": {
+    "selection": "culled"
+   },
+   "b": {
+    "selection": "split"
+   },
+   "changed_px": 3251,
+   "changed_pct": 0.563
+  },
+  {
+   "a": {
+    "selection": "runaway"
+   },
+   "b": {
+    "selection": "split"
+   },
+   "changed_px": 15648,
+   "changed_pct": 2.709
+  }
+ ]
+}

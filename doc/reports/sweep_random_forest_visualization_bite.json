@@ -1,0 +1,107 @@
+{
+ "sweep": "random_forest_visualization",
+ "peak_changed_pct": 48.919,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "cohort": "block"
+   },
+   "b": {
+    "cohort": "blobs"
+   },
+   "changed_px": 282305,
+   "changed_pct": 48.876
+  },
+  {
+   "a": {
+    "cohort": "block"
+   },
+   "b": {
+    "cohort": "rings"
+   },
+   "changed_px": 282559,
+   "changed_pct": 48.919
+  },
+  {
+   "a": {
+    "cohort": "block"
+   },
+   "b": {
+    "cohort": "braid"
+   },
+   "changed_px": 280525,
+   "changed_pct": 48.567
+  },
+  {
+   "a": {
+    "cohort": "block"
+   },
+   "b": {
+    "cohort": "skew"
+   },
+   "changed_px": 280522,
+   "changed_pct": 48.567
+  },
+  {
+   "a": {
+    "cohort": "blobs"
+   },
+   "b": {
+    "cohort": "rings"
+   },
+   "changed_px": 2052,
+   "changed_pct": 0.355
+  },
+  {
+   "a": {
+    "cohort": "blobs"
+   },
+   "b": {
+    "cohort": "braid"
+   },
+   "changed_px": 6336,
+   "changed_pct": 1.097
+  },
+  {
+   "a": {
+    "cohort": "blobs"
+   },
+   "b": {
+    "cohort": "skew"
+   },
+   "changed_px": 6300,
+   "changed_pct": 1.091
+  },
+  {
+   "a": {
+    "cohort": "rings"
+   },
+   "b": {
+    "cohort": "braid"
+   },
+   "changed_px": 7075,
+   "changed_pct": 1.225
+  },
+  {
+   "a": {
+    "cohort": "rings"
+   },
+   "b": {
+    "cohort": "skew"
+   },
+   "changed_px": 7101,
+   "changed_pct": 1.229
+  },
+  {
+   "a": {
+    "cohort": "braid"
+   },
+   "b": {
+    "cohort": "skew"
+   },
+   "changed_px": 704,
+   "changed_pct": 0.122
+  }
+ ]
+}

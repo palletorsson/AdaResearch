@@ -1,0 +1,79 @@
+{
+ "sweep": "spin",
+ "peak_changed_pct": 0.096,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "alternating_colors": true,
+    "regenerate": true
+   },
+   "b": {
+    "alternating_colors": true,
+    "regenerate": false
+   },
+   "changed_px": 553,
+   "changed_pct": 0.096
+  },
+  {
+   "a": {
+    "alternating_colors": true,
+    "regenerate": true
+   },
+   "b": {
+    "alternating_colors": false,
+    "regenerate": true
+   },
+   "changed_px": 553,
+   "changed_pct": 0.096
+  },
+  {
+   "a": {
+    "alternating_colors": true,
+    "regenerate": true
+   },
+   "b": {
+    "alternating_colors": false,
+    "regenerate": false
+   },
+   "changed_px": 553,
+   "changed_pct": 0.096
+  },
+  {
+   "a": {
+    "alternating_colors": true,
+    "regenerate": false
+   },
+   "b": {
+    "alternating_colors": false,
+    "regenerate": true
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "alternating_colors": true,
+    "regenerate": false
+   },
+   "b": {
+    "alternating_colors": false,
+    "regenerate": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "alternating_colors": false,
+    "regenerate": true
+   },
+   "b": {
+    "alternating_colors": false,
+    "regenerate": false
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  }
+ ]
+}

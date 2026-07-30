@@ -1,0 +1,107 @@
+{
+ "sweep": "enhanced_kmeans",
+ "peak_changed_pct": 27.551,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "cohort": "blobs"
+   },
+   "b": {
+    "cohort": "block"
+   },
+   "changed_px": 159054,
+   "changed_pct": 27.537
+  },
+  {
+   "a": {
+    "cohort": "blobs"
+   },
+   "b": {
+    "cohort": "rings"
+   },
+   "changed_px": 159072,
+   "changed_pct": 27.54
+  },
+  {
+   "a": {
+    "cohort": "blobs"
+   },
+   "b": {
+    "cohort": "braid"
+   },
+   "changed_px": 159137,
+   "changed_pct": 27.551
+  },
+  {
+   "a": {
+    "cohort": "blobs"
+   },
+   "b": {
+    "cohort": "skew"
+   },
+   "changed_px": 158975,
+   "changed_pct": 27.523
+  },
+  {
+   "a": {
+    "cohort": "block"
+   },
+   "b": {
+    "cohort": "rings"
+   },
+   "changed_px": 1557,
+   "changed_pct": 0.27
+  },
+  {
+   "a": {
+    "cohort": "block"
+   },
+   "b": {
+    "cohort": "braid"
+   },
+   "changed_px": 1638,
+   "changed_pct": 0.284
+  },
+  {
+   "a": {
+    "cohort": "block"
+   },
+   "b": {
+    "cohort": "skew"
+   },
+   "changed_px": 1452,
+   "changed_pct": 0.251
+  },
+  {
+   "a": {
+    "cohort": "rings"
+   },
+   "b": {
+    "cohort": "braid"
+   },
+   "changed_px": 1580,
+   "changed_pct": 0.274
+  },
+  {
+   "a": {
+    "cohort": "rings"
+   },
+   "b": {
+    "cohort": "skew"
+   },
+   "changed_px": 1442,
+   "changed_pct": 0.25
+  },
+  {
+   "a": {
+    "cohort": "braid"
+   },
+   "b": {
+    "cohort": "skew"
+   },
+   "changed_px": 1510,
+   "changed_pct": 0.261
+  }
+ ]
+}

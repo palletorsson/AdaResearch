@@ -1,0 +1,37 @@
+{
+ "sweep": "entropy_bench",
+ "peak_changed_pct": 0.131,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "bias": 0.25
+   },
+   "b": {
+    "bias": 0.5
+   },
+   "changed_px": 756,
+   "changed_pct": 0.131
+  },
+  {
+   "a": {
+    "bias": 0.25
+   },
+   "b": {
+    "bias": 0.8
+   },
+   "changed_px": 722,
+   "changed_pct": 0.125
+  },
+  {
+   "a": {
+    "bias": 0.5
+   },
+   "b": {
+    "bias": 0.8
+   },
+   "changed_px": 33,
+   "changed_pct": 0.006
+  }
+ ]
+}

@@ -1,0 +1,79 @@
+{
+ "sweep": "pattern_artifact",
+ "peak_changed_pct": 0.0,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "a": {
+    "face_up": true,
+    "vr_preview": true
+   },
+   "b": {
+    "face_up": true,
+    "vr_preview": false
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "face_up": true,
+    "vr_preview": true
+   },
+   "b": {
+    "face_up": false,
+    "vr_preview": true
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "face_up": true,
+    "vr_preview": true
+   },
+   "b": {
+    "face_up": false,
+    "vr_preview": false
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "face_up": true,
+    "vr_preview": false
+   },
+   "b": {
+    "face_up": false,
+    "vr_preview": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "face_up": true,
+    "vr_preview": false
+   },
+   "b": {
+    "face_up": false,
+    "vr_preview": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "face_up": false,
+    "vr_preview": true
+   },
+   "b": {
+    "face_up": false,
+    "vr_preview": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

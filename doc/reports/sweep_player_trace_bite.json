@@ -1,0 +1,79 @@
+{
+ "sweep": "player_trace",
+ "peak_changed_pct": 0.0,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "a": {
+    "show_reference_frame": true,
+    "velocity_color": true
+   },
+   "b": {
+    "show_reference_frame": true,
+    "velocity_color": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_reference_frame": true,
+    "velocity_color": true
+   },
+   "b": {
+    "show_reference_frame": false,
+    "velocity_color": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_reference_frame": true,
+    "velocity_color": true
+   },
+   "b": {
+    "show_reference_frame": false,
+    "velocity_color": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_reference_frame": true,
+    "velocity_color": false
+   },
+   "b": {
+    "show_reference_frame": false,
+    "velocity_color": true
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_reference_frame": true,
+    "velocity_color": false
+   },
+   "b": {
+    "show_reference_frame": false,
+    "velocity_color": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_reference_frame": false,
+    "velocity_color": true
+   },
+   "b": {
+    "show_reference_frame": false,
+    "velocity_color": false
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  }
+ ]
+}

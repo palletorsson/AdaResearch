@@ -1,0 +1,187 @@
+{
+ "sweep": "catalyst_vent",
+ "peak_changed_pct": 0.086,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 2.5
+   },
+   "b": {
+    "require_catalyst_armed": true,
+    "wave_size": 5.0
+   },
+   "changed_px": 494,
+   "changed_pct": 0.086
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 2.5
+   },
+   "b": {
+    "require_catalyst_armed": true,
+    "wave_size": 8.0
+   },
+   "changed_px": 494,
+   "changed_pct": 0.086
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 2.5
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 2.5
+   },
+   "changed_px": 494,
+   "changed_pct": 0.086
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 2.5
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 5.0
+   },
+   "changed_px": 494,
+   "changed_pct": 0.086
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 2.5
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 8.0
+   },
+   "changed_px": 494,
+   "changed_pct": 0.086
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 5.0
+   },
+   "b": {
+    "require_catalyst_armed": true,
+    "wave_size": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 5.0
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 2.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 5.0
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 5.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 5.0
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 8.0
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 2.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 8.0
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 5.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_catalyst_armed": true,
+    "wave_size": 8.0
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_catalyst_armed": false,
+    "wave_size": 2.5
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 5.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_catalyst_armed": false,
+    "wave_size": 2.5
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_catalyst_armed": false,
+    "wave_size": 5.0
+   },
+   "b": {
+    "require_catalyst_armed": false,
+    "wave_size": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

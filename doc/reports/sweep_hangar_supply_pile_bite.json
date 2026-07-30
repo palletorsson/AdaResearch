@@ -1,0 +1,79 @@
+{
+ "sweep": "hangar_supply_pile",
+ "peak_changed_pct": 6.34,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "hazard_labels": true,
+    "with_cylinder": true
+   },
+   "b": {
+    "hazard_labels": true,
+    "with_cylinder": false
+   },
+   "changed_px": 36618,
+   "changed_pct": 6.34
+  },
+  {
+   "a": {
+    "hazard_labels": true,
+    "with_cylinder": true
+   },
+   "b": {
+    "hazard_labels": false,
+    "with_cylinder": true
+   },
+   "changed_px": 1130,
+   "changed_pct": 0.196
+  },
+  {
+   "a": {
+    "hazard_labels": true,
+    "with_cylinder": true
+   },
+   "b": {
+    "hazard_labels": false,
+    "with_cylinder": false
+   },
+   "changed_px": 36317,
+   "changed_pct": 6.288
+  },
+  {
+   "a": {
+    "hazard_labels": true,
+    "with_cylinder": false
+   },
+   "b": {
+    "hazard_labels": false,
+    "with_cylinder": true
+   },
+   "changed_px": 36380,
+   "changed_pct": 6.298
+  },
+  {
+   "a": {
+    "hazard_labels": true,
+    "with_cylinder": false
+   },
+   "b": {
+    "hazard_labels": false,
+    "with_cylinder": false
+   },
+   "changed_px": 436,
+   "changed_pct": 0.075
+  },
+  {
+   "a": {
+    "hazard_labels": false,
+    "with_cylinder": true
+   },
+   "b": {
+    "hazard_labels": false,
+    "with_cylinder": false
+   },
+   "changed_px": 35982,
+   "changed_pct": 6.23
+  }
+ ]
+}

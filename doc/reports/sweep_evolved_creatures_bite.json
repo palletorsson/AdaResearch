@@ -1,0 +1,107 @@
+{
+ "sweep": "evolved_creatures",
+ "peak_changed_pct": 0.47,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "selection": "drift"
+   },
+   "b": {
+    "selection": "uniform"
+   },
+   "changed_px": 1654,
+   "changed_pct": 0.286
+  },
+  {
+   "a": {
+    "selection": "drift"
+   },
+   "b": {
+    "selection": "culled"
+   },
+   "changed_px": 1161,
+   "changed_pct": 0.201
+  },
+  {
+   "a": {
+    "selection": "drift"
+   },
+   "b": {
+    "selection": "runaway"
+   },
+   "changed_px": 2272,
+   "changed_pct": 0.393
+  },
+  {
+   "a": {
+    "selection": "drift"
+   },
+   "b": {
+    "selection": "split"
+   },
+   "changed_px": 2145,
+   "changed_pct": 0.371
+  },
+  {
+   "a": {
+    "selection": "uniform"
+   },
+   "b": {
+    "selection": "culled"
+   },
+   "changed_px": 1097,
+   "changed_pct": 0.19
+  },
+  {
+   "a": {
+    "selection": "uniform"
+   },
+   "b": {
+    "selection": "runaway"
+   },
+   "changed_px": 2642,
+   "changed_pct": 0.457
+  },
+  {
+   "a": {
+    "selection": "uniform"
+   },
+   "b": {
+    "selection": "split"
+   },
+   "changed_px": 2588,
+   "changed_pct": 0.448
+  },
+  {
+   "a": {
+    "selection": "culled"
+   },
+   "b": {
+    "selection": "runaway"
+   },
+   "changed_px": 1767,
+   "changed_pct": 0.306
+  },
+  {
+   "a": {
+    "selection": "culled"
+   },
+   "b": {
+    "selection": "split"
+   },
+   "changed_px": 1496,
+   "changed_pct": 0.259
+  },
+  {
+   "a": {
+    "selection": "runaway"
+   },
+   "b": {
+    "selection": "split"
+   },
+   "changed_px": 2714,
+   "changed_pct": 0.47
+  }
+ ]
+}

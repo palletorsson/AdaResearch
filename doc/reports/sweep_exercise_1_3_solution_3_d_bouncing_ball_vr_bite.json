@@ -1,0 +1,187 @@
+{
+ "sweep": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+ "peak_changed_pct": 1.206,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "ball_radius": 0.03,
+    "elasticity": 0.45
+   },
+   "b": {
+    "ball_radius": 0.03,
+    "elasticity": 0.9
+   },
+   "changed_px": 5815,
+   "changed_pct": 1.007
+  },
+  {
+   "a": {
+    "ball_radius": 0.03,
+    "elasticity": 0.45
+   },
+   "b": {
+    "ball_radius": 0.06,
+    "elasticity": 0.45
+   },
+   "changed_px": 4520,
+   "changed_pct": 0.783
+  },
+  {
+   "a": {
+    "ball_radius": 0.03,
+    "elasticity": 0.45
+   },
+   "b": {
+    "ball_radius": 0.06,
+    "elasticity": 0.9
+   },
+   "changed_px": 6020,
+   "changed_pct": 1.042
+  },
+  {
+   "a": {
+    "ball_radius": 0.03,
+    "elasticity": 0.45
+   },
+   "b": {
+    "ball_radius": 0.096,
+    "elasticity": 0.45
+   },
+   "changed_px": 5742,
+   "changed_pct": 0.994
+  },
+  {
+   "a": {
+    "ball_radius": 0.03,
+    "elasticity": 0.45
+   },
+   "b": {
+    "ball_radius": 0.096,
+    "elasticity": 0.9
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "ball_radius": 0.03,
+    "elasticity": 0.9
+   },
+   "b": {
+    "ball_radius": 0.06,
+    "elasticity": 0.45
+   },
+   "changed_px": 4241,
+   "changed_pct": 0.734
+  },
+  {
+   "a": {
+    "ball_radius": 0.03,
+    "elasticity": 0.9
+   },
+   "b": {
+    "ball_radius": 0.06,
+    "elasticity": 0.9
+   },
+   "changed_px": 5377,
+   "changed_pct": 0.931
+  },
+  {
+   "a": {
+    "ball_radius": 0.03,
+    "elasticity": 0.9
+   },
+   "b": {
+    "ball_radius": 0.096,
+    "elasticity": 0.45
+   },
+   "changed_px": 5230,
+   "changed_pct": 0.905
+  },
+  {
+   "a": {
+    "ball_radius": 0.03,
+    "elasticity": 0.9
+   },
+   "b": {
+    "ball_radius": 0.096,
+    "elasticity": 0.9
+   },
+   "changed_px": 6352,
+   "changed_pct": 1.1
+  },
+  {
+   "a": {
+    "ball_radius": 0.06,
+    "elasticity": 0.45
+   },
+   "b": {
+    "ball_radius": 0.06,
+    "elasticity": 0.9
+   },
+   "changed_px": 4334,
+   "changed_pct": 0.75
+  },
+  {
+   "a": {
+    "ball_radius": 0.06,
+    "elasticity": 0.45
+   },
+   "b": {
+    "ball_radius": 0.096,
+    "elasticity": 0.45
+   },
+   "changed_px": 3581,
+   "changed_pct": 0.62
+  },
+  {
+   "a": {
+    "ball_radius": 0.06,
+    "elasticity": 0.45
+   },
+   "b": {
+    "ball_radius": 0.096,
+    "elasticity": 0.9
+   },
+   "changed_px": 5458,
+   "changed_pct": 0.945
+  },
+  {
+   "a": {
+    "ball_radius": 0.06,
+    "elasticity": 0.9
+   },
+   "b": {
+    "ball_radius": 0.096,
+    "elasticity": 0.45
+   },
+   "changed_px": 5349,
+   "changed_pct": 0.926
+  },
+  {
+   "a": {
+    "ball_radius": 0.06,
+    "elasticity": 0.9
+   },
+   "b": {
+    "ball_radius": 0.096,
+    "elasticity": 0.9
+   },
+   "changed_px": 6382,
+   "changed_pct": 1.105
+  },
+  {
+   "a": {
+    "ball_radius": 0.096,
+    "elasticity": 0.45
+   },
+   "b": {
+    "ball_radius": 0.096,
+    "elasticity": 0.9
+   },
+   "changed_px": 6294,
+   "changed_pct": 1.09
+  }
+ ]
+}

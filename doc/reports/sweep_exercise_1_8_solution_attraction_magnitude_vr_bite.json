@@ -1,0 +1,37 @@
+{
+ "sweep": "exercise_1_8_solution_attraction_magnitude_vr",
+ "peak_changed_pct": 0.482,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "attraction_strength": 0.25
+   },
+   "b": {
+    "attraction_strength": 0.5
+   },
+   "changed_px": 2785,
+   "changed_pct": 0.482
+  },
+  {
+   "a": {
+    "attraction_strength": 0.25
+   },
+   "b": {
+    "attraction_strength": 0.8
+   },
+   "changed_px": 2782,
+   "changed_pct": 0.482
+  },
+  {
+   "a": {
+    "attraction_strength": 0.5
+   },
+   "b": {
+    "attraction_strength": 0.8
+   },
+   "changed_px": 342,
+   "changed_pct": 0.059
+  }
+ ]
+}

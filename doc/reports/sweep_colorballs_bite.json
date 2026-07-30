@@ -1,0 +1,79 @@
+{
+ "sweep": "colorballs",
+ "peak_changed_pct": 9.01,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "respawn_on_fall": true,
+    "use_random_colors": true
+   },
+   "b": {
+    "respawn_on_fall": true,
+    "use_random_colors": false
+   },
+   "changed_px": 52043,
+   "changed_pct": 9.01
+  },
+  {
+   "a": {
+    "respawn_on_fall": true,
+    "use_random_colors": true
+   },
+   "b": {
+    "respawn_on_fall": false,
+    "use_random_colors": true
+   },
+   "changed_px": 45134,
+   "changed_pct": 7.814
+  },
+  {
+   "a": {
+    "respawn_on_fall": true,
+    "use_random_colors": true
+   },
+   "b": {
+    "respawn_on_fall": false,
+    "use_random_colors": false
+   },
+   "changed_px": 43046,
+   "changed_pct": 7.453
+  },
+  {
+   "a": {
+    "respawn_on_fall": true,
+    "use_random_colors": false
+   },
+   "b": {
+    "respawn_on_fall": false,
+    "use_random_colors": true
+   },
+   "changed_px": 20375,
+   "changed_pct": 3.528
+  },
+  {
+   "a": {
+    "respawn_on_fall": true,
+    "use_random_colors": false
+   },
+   "b": {
+    "respawn_on_fall": false,
+    "use_random_colors": false
+   },
+   "changed_px": 18265,
+   "changed_pct": 3.162
+  },
+  {
+   "a": {
+    "respawn_on_fall": false,
+    "use_random_colors": true
+   },
+   "b": {
+    "respawn_on_fall": false,
+    "use_random_colors": false
+   },
+   "changed_px": 6290,
+   "changed_pct": 1.089
+  }
+ ]
+}

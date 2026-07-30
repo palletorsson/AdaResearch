@@ -1,0 +1,79 @@
+{
+ "sweep": "lissajous_curves",
+ "peak_changed_pct": 1.248,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "animate_phase": true,
+    "show_particle": true
+   },
+   "b": {
+    "animate_phase": true,
+    "show_particle": false
+   },
+   "changed_px": 4514,
+   "changed_pct": 0.782
+  },
+  {
+   "a": {
+    "animate_phase": true,
+    "show_particle": true
+   },
+   "b": {
+    "animate_phase": false,
+    "show_particle": true
+   },
+   "changed_px": 7211,
+   "changed_pct": 1.248
+  },
+  {
+   "a": {
+    "animate_phase": true,
+    "show_particle": true
+   },
+   "b": {
+    "animate_phase": false,
+    "show_particle": false
+   },
+   "changed_px": 6901,
+   "changed_pct": 1.195
+  },
+  {
+   "a": {
+    "animate_phase": true,
+    "show_particle": false
+   },
+   "b": {
+    "animate_phase": false,
+    "show_particle": true
+   },
+   "changed_px": 7058,
+   "changed_pct": 1.222
+  },
+  {
+   "a": {
+    "animate_phase": true,
+    "show_particle": false
+   },
+   "b": {
+    "animate_phase": false,
+    "show_particle": false
+   },
+   "changed_px": 6726,
+   "changed_pct": 1.164
+  },
+  {
+   "a": {
+    "animate_phase": false,
+    "show_particle": true
+   },
+   "b": {
+    "animate_phase": false,
+    "show_particle": false
+   },
+   "changed_px": 4671,
+   "changed_pct": 0.809
+  }
+ ]
+}

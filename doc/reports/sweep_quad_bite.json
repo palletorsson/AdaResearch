@@ -1,0 +1,187 @@
+{
+ "sweep": "quad",
+ "peak_changed_pct": 0.356,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.25
+   },
+   "b": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.5
+   },
+   "changed_px": 1390,
+   "changed_pct": 0.241
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.25
+   },
+   "b": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.8
+   },
+   "changed_px": 2029,
+   "changed_pct": 0.351
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.25
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.25
+   },
+   "changed_px": 628,
+   "changed_pct": 0.109
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.25
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.5
+   },
+   "changed_px": 1390,
+   "changed_pct": 0.241
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.25
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.8
+   },
+   "changed_px": 2029,
+   "changed_pct": 0.351
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.5
+   },
+   "b": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.8
+   },
+   "changed_px": 1586,
+   "changed_pct": 0.275
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.5
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.25
+   },
+   "changed_px": 1425,
+   "changed_pct": 0.247
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.5
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.5
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.8
+   },
+   "changed_px": 1586,
+   "changed_pct": 0.275
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.8
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.25
+   },
+   "changed_px": 2055,
+   "changed_pct": 0.356
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.8
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.5
+   },
+   "changed_px": 1586,
+   "changed_pct": 0.275
+  },
+  {
+   "a": {
+    "alter_freeze": true,
+    "sphere_size_multiplier": 0.8
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.8
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.25
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.5
+   },
+   "changed_px": 1425,
+   "changed_pct": 0.247
+  },
+  {
+   "a": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.25
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.8
+   },
+   "changed_px": 2055,
+   "changed_pct": 0.356
+  },
+  {
+   "a": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.5
+   },
+   "b": {
+    "alter_freeze": false,
+    "sphere_size_multiplier": 0.8
+   },
+   "changed_px": 1586,
+   "changed_pct": 0.275
+  }
+ ]
+}

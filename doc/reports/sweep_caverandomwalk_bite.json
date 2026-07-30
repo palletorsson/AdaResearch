@@ -1,0 +1,79 @@
+{
+ "sweep": "caverandomwalk",
+ "peak_changed_pct": 0.149,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "show_gizmos": true,
+    "make_collision": true
+   },
+   "b": {
+    "show_gizmos": true,
+    "make_collision": false
+   },
+   "changed_px": 863,
+   "changed_pct": 0.149
+  },
+  {
+   "a": {
+    "show_gizmos": true,
+    "make_collision": true
+   },
+   "b": {
+    "show_gizmos": false,
+    "make_collision": true
+   },
+   "changed_px": 863,
+   "changed_pct": 0.149
+  },
+  {
+   "a": {
+    "show_gizmos": true,
+    "make_collision": true
+   },
+   "b": {
+    "show_gizmos": false,
+    "make_collision": false
+   },
+   "changed_px": 863,
+   "changed_pct": 0.149
+  },
+  {
+   "a": {
+    "show_gizmos": true,
+    "make_collision": false
+   },
+   "b": {
+    "show_gizmos": false,
+    "make_collision": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_gizmos": true,
+    "make_collision": false
+   },
+   "b": {
+    "show_gizmos": false,
+    "make_collision": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "show_gizmos": false,
+    "make_collision": true
+   },
+   "b": {
+    "show_gizmos": false,
+    "make_collision": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

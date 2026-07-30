@@ -1,0 +1,107 @@
+{
+ "sweep": "prng_crank_machine",
+ "peak_changed_pct": 0.289,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "disclosure": "works"
+   },
+   "b": {
+    "disclosure": "oracle"
+   },
+   "changed_px": 1269,
+   "changed_pct": 0.22
+  },
+  {
+   "a": {
+    "disclosure": "works"
+   },
+   "b": {
+    "disclosure": "tally"
+   },
+   "changed_px": 1284,
+   "changed_pct": 0.222
+  },
+  {
+   "a": {
+    "disclosure": "works"
+   },
+   "b": {
+    "disclosure": "ledger"
+   },
+   "changed_px": 1091,
+   "changed_pct": 0.189
+  },
+  {
+   "a": {
+    "disclosure": "works"
+   },
+   "b": {
+    "disclosure": "origin"
+   },
+   "changed_px": 1640,
+   "changed_pct": 0.284
+  },
+  {
+   "a": {
+    "disclosure": "oracle"
+   },
+   "b": {
+    "disclosure": "tally"
+   },
+   "changed_px": 567,
+   "changed_pct": 0.098
+  },
+  {
+   "a": {
+    "disclosure": "oracle"
+   },
+   "b": {
+    "disclosure": "ledger"
+   },
+   "changed_px": 756,
+   "changed_pct": 0.131
+  },
+  {
+   "a": {
+    "disclosure": "oracle"
+   },
+   "b": {
+    "disclosure": "origin"
+   },
+   "changed_px": 1652,
+   "changed_pct": 0.286
+  },
+  {
+   "a": {
+    "disclosure": "tally"
+   },
+   "b": {
+    "disclosure": "ledger"
+   },
+   "changed_px": 189,
+   "changed_pct": 0.033
+  },
+  {
+   "a": {
+    "disclosure": "tally"
+   },
+   "b": {
+    "disclosure": "origin"
+   },
+   "changed_px": 1667,
+   "changed_pct": 0.289
+  },
+  {
+   "a": {
+    "disclosure": "ledger"
+   },
+   "b": {
+    "disclosure": "origin"
+   },
+   "changed_px": 1478,
+   "changed_pct": 0.256
+  }
+ ]
+}

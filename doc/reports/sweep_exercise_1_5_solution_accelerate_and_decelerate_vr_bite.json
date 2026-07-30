@@ -1,0 +1,187 @@
+{
+ "sweep": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+ "peak_changed_pct": 0.873,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "max_force": 0.003,
+    "ball_radius": 0.025
+   },
+   "b": {
+    "max_force": 0.003,
+    "ball_radius": 0.05
+   },
+   "changed_px": 3731,
+   "changed_pct": 0.646
+  },
+  {
+   "a": {
+    "max_force": 0.003,
+    "ball_radius": 0.025
+   },
+   "b": {
+    "max_force": 0.005,
+    "ball_radius": 0.025
+   },
+   "changed_px": 4352,
+   "changed_pct": 0.753
+  },
+  {
+   "a": {
+    "max_force": 0.003,
+    "ball_radius": 0.025
+   },
+   "b": {
+    "max_force": 0.005,
+    "ball_radius": 0.05
+   },
+   "changed_px": 4580,
+   "changed_pct": 0.793
+  },
+  {
+   "a": {
+    "max_force": 0.003,
+    "ball_radius": 0.025
+   },
+   "b": {
+    "max_force": 0.008,
+    "ball_radius": 0.025
+   },
+   "changed_px": 4401,
+   "changed_pct": 0.762
+  },
+  {
+   "a": {
+    "max_force": 0.003,
+    "ball_radius": 0.025
+   },
+   "b": {
+    "max_force": 0.008,
+    "ball_radius": 0.05
+   },
+   "changed_px": 5040,
+   "changed_pct": 0.873
+  },
+  {
+   "a": {
+    "max_force": 0.003,
+    "ball_radius": 0.05
+   },
+   "b": {
+    "max_force": 0.005,
+    "ball_radius": 0.025
+   },
+   "changed_px": 4627,
+   "changed_pct": 0.801
+  },
+  {
+   "a": {
+    "max_force": 0.003,
+    "ball_radius": 0.05
+   },
+   "b": {
+    "max_force": 0.005,
+    "ball_radius": 0.05
+   },
+   "changed_px": 3894,
+   "changed_pct": 0.674
+  },
+  {
+   "a": {
+    "max_force": 0.003,
+    "ball_radius": 0.05
+   },
+   "b": {
+    "max_force": 0.008,
+    "ball_radius": 0.025
+   },
+   "changed_px": 4683,
+   "changed_pct": 0.811
+  },
+  {
+   "a": {
+    "max_force": 0.003,
+    "ball_radius": 0.05
+   },
+   "b": {
+    "max_force": 0.008,
+    "ball_radius": 0.05
+   },
+   "changed_px": 4703,
+   "changed_pct": 0.814
+  },
+  {
+   "a": {
+    "max_force": 0.005,
+    "ball_radius": 0.025
+   },
+   "b": {
+    "max_force": 0.005,
+    "ball_radius": 0.05
+   },
+   "changed_px": 4087,
+   "changed_pct": 0.708
+  },
+  {
+   "a": {
+    "max_force": 0.005,
+    "ball_radius": 0.025
+   },
+   "b": {
+    "max_force": 0.008,
+    "ball_radius": 0.025
+   },
+   "changed_px": 1456,
+   "changed_pct": 0.252
+  },
+  {
+   "a": {
+    "max_force": 0.005,
+    "ball_radius": 0.025
+   },
+   "b": {
+    "max_force": 0.008,
+    "ball_radius": 0.05
+   },
+   "changed_px": 4309,
+   "changed_pct": 0.746
+  },
+  {
+   "a": {
+    "max_force": 0.005,
+    "ball_radius": 0.05
+   },
+   "b": {
+    "max_force": 0.008,
+    "ball_radius": 0.025
+   },
+   "changed_px": 4426,
+   "changed_pct": 0.766
+  },
+  {
+   "a": {
+    "max_force": 0.005,
+    "ball_radius": 0.05
+   },
+   "b": {
+    "max_force": 0.008,
+    "ball_radius": 0.05
+   },
+   "changed_px": 3386,
+   "changed_pct": 0.586
+  },
+  {
+   "a": {
+    "max_force": 0.008,
+    "ball_radius": 0.025
+   },
+   "b": {
+    "max_force": 0.008,
+    "ball_radius": 0.05
+   },
+   "changed_px": 4319,
+   "changed_pct": 0.748
+  }
+ ]
+}

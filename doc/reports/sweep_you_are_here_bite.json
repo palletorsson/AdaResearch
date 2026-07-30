@@ -1,0 +1,79 @@
+{
+ "sweep": "you_are_here",
+ "peak_changed_pct": 0.839,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "show_ring": true,
+    "pride_gradient": true
+   },
+   "b": {
+    "show_ring": true,
+    "pride_gradient": false
+   },
+   "changed_px": 3625,
+   "changed_pct": 0.628
+  },
+  {
+   "a": {
+    "show_ring": true,
+    "pride_gradient": true
+   },
+   "b": {
+    "show_ring": false,
+    "pride_gradient": true
+   },
+   "changed_px": 4641,
+   "changed_pct": 0.803
+  },
+  {
+   "a": {
+    "show_ring": true,
+    "pride_gradient": true
+   },
+   "b": {
+    "show_ring": false,
+    "pride_gradient": false
+   },
+   "changed_px": 4848,
+   "changed_pct": 0.839
+  },
+  {
+   "a": {
+    "show_ring": true,
+    "pride_gradient": false
+   },
+   "b": {
+    "show_ring": false,
+    "pride_gradient": true
+   },
+   "changed_px": 4848,
+   "changed_pct": 0.839
+  },
+  {
+   "a": {
+    "show_ring": true,
+    "pride_gradient": false
+   },
+   "b": {
+    "show_ring": false,
+    "pride_gradient": false
+   },
+   "changed_px": 4448,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "show_ring": false,
+    "pride_gradient": true
+   },
+   "b": {
+    "show_ring": false,
+    "pride_gradient": false
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  }
+ ]
+}

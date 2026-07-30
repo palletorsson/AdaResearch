@@ -1,0 +1,107 @@
+{
+ "sweep": "gradient_descent_visualization",
+ "peak_changed_pct": 8.595,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "basin": "bowl"
+   },
+   "b": {
+    "basin": "valley"
+   },
+   "changed_px": 35657,
+   "changed_pct": 6.173
+  },
+  {
+   "a": {
+    "basin": "bowl"
+   },
+   "b": {
+    "basin": "plural"
+   },
+   "changed_px": 45929,
+   "changed_pct": 7.952
+  },
+  {
+   "a": {
+    "basin": "bowl"
+   },
+   "b": {
+    "basin": "plateau"
+   },
+   "changed_px": 46192,
+   "changed_pct": 7.997
+  },
+  {
+   "a": {
+    "basin": "bowl"
+   },
+   "b": {
+    "basin": "scarp"
+   },
+   "changed_px": 23134,
+   "changed_pct": 4.005
+  },
+  {
+   "a": {
+    "basin": "valley"
+   },
+   "b": {
+    "basin": "plural"
+   },
+   "changed_px": 49049,
+   "changed_pct": 8.492
+  },
+  {
+   "a": {
+    "basin": "valley"
+   },
+   "b": {
+    "basin": "plateau"
+   },
+   "changed_px": 49645,
+   "changed_pct": 8.595
+  },
+  {
+   "a": {
+    "basin": "valley"
+   },
+   "b": {
+    "basin": "scarp"
+   },
+   "changed_px": 26331,
+   "changed_pct": 4.559
+  },
+  {
+   "a": {
+    "basin": "plural"
+   },
+   "b": {
+    "basin": "plateau"
+   },
+   "changed_px": 17105,
+   "changed_pct": 2.961
+  },
+  {
+   "a": {
+    "basin": "plural"
+   },
+   "b": {
+    "basin": "scarp"
+   },
+   "changed_px": 43453,
+   "changed_pct": 7.523
+  },
+  {
+   "a": {
+    "basin": "plateau"
+   },
+   "b": {
+    "basin": "scarp"
+   },
+   "changed_px": 44227,
+   "changed_pct": 7.657
+  }
+ ]
+}

@@ -1,0 +1,107 @@
+{
+ "sweep": "neural_networks_vr",
+ "peak_changed_pct": 2.881,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "topology": "graded"
+   },
+   "b": {
+    "topology": "flat"
+   },
+   "changed_px": 16252,
+   "changed_pct": 2.814
+  },
+  {
+   "a": {
+    "topology": "graded"
+   },
+   "b": {
+    "topology": "deep"
+   },
+   "changed_px": 10344,
+   "changed_pct": 1.791
+  },
+  {
+   "a": {
+    "topology": "graded"
+   },
+   "b": {
+    "topology": "widened"
+   },
+   "changed_px": 14943,
+   "changed_pct": 2.587
+  },
+  {
+   "a": {
+    "topology": "graded"
+   },
+   "b": {
+    "topology": "pinched"
+   },
+   "changed_px": 12239,
+   "changed_pct": 2.119
+  },
+  {
+   "a": {
+    "topology": "flat"
+   },
+   "b": {
+    "topology": "deep"
+   },
+   "changed_px": 14454,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "topology": "flat"
+   },
+   "b": {
+    "topology": "widened"
+   },
+   "changed_px": 16640,
+   "changed_pct": 2.881
+  },
+  {
+   "a": {
+    "topology": "flat"
+   },
+   "b": {
+    "topology": "pinched"
+   },
+   "changed_px": 13972,
+   "changed_pct": 2.419
+  },
+  {
+   "a": {
+    "topology": "deep"
+   },
+   "b": {
+    "topology": "widened"
+   },
+   "changed_px": 14228,
+   "changed_pct": 2.463
+  },
+  {
+   "a": {
+    "topology": "deep"
+   },
+   "b": {
+    "topology": "pinched"
+   },
+   "changed_px": 11568,
+   "changed_pct": 2.003
+  },
+  {
+   "a": {
+    "topology": "widened"
+   },
+   "b": {
+    "topology": "pinched"
+   },
+   "changed_px": 6175,
+   "changed_pct": 1.069
+  }
+ ]
+}

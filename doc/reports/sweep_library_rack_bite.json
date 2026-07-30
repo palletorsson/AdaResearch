@@ -1,0 +1,147 @@
+{
+ "sweep": "library_rack",
+ "peak_changed_pct": 0.0,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "none"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "label"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "none"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "fixture"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "none"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "hood"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "none"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "cordon"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "label"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "fixture"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "label"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "hood"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "label"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "cordon"
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "fixture"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "hood"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "fixture"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "cordon"
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "hood"
+   },
+   "b": {
+    "collection": "lab",
+    "layout": "rack_layout.json",
+    "guard": "cordon"
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  }
+ ]
+}
