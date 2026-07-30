@@ -1,0 +1,68 @@
+{
+ "sweep": "ecosystem_simulation",
+ "peak_changed_pct": 4.448,
+ "subject_pct": 7.984,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "quota": "tended"
+   },
+   "b": {
+    "quota": "barren"
+   },
+   "changed_px": 15259,
+   "changed_pct": 2.642
+  },
+  {
+   "a": {
+    "quota": "tended"
+   },
+   "b": {
+    "quota": "hunted"
+   },
+   "changed_px": 18347,
+   "changed_pct": 3.176
+  },
+  {
+   "a": {
+    "quota": "tended"
+   },
+   "b": {
+    "quota": "fallow"
+   },
+   "changed_px": 24050,
+   "changed_pct": 4.164
+  },
+  {
+   "a": {
+    "quota": "barren"
+   },
+   "b": {
+    "quota": "hunted"
+   },
+   "changed_px": 20383,
+   "changed_pct": 3.529
+  },
+  {
+   "a": {
+    "quota": "barren"
+   },
+   "b": {
+    "quota": "fallow"
+   },
+   "changed_px": 25693,
+   "changed_pct": 4.448
+  },
+  {
+   "a": {
+    "quota": "hunted"
+   },
+   "b": {
+    "quota": "fallow"
+   },
+   "changed_px": 23690,
+   "changed_pct": 4.101
+  }
+ ]
+}

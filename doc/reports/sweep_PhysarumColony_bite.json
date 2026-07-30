@@ -1,0 +1,68 @@
+{
+ "sweep": "PhysarumColony",
+ "peak_changed_pct": 0.613,
+ "subject_pct": 0.431,
+ "verdict": "SUBJECT NOT DETECTED - only 0.43% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "anchorage": "triad"
+   },
+   "b": {
+    "anchorage": "pair"
+   },
+   "changed_px": 2626,
+   "changed_pct": 0.455
+  },
+  {
+   "a": {
+    "anchorage": "triad"
+   },
+   "b": {
+    "anchorage": "ring"
+   },
+   "changed_px": 3118,
+   "changed_pct": 0.54
+  },
+  {
+   "a": {
+    "anchorage": "triad"
+   },
+   "b": {
+    "anchorage": "scattered"
+   },
+   "changed_px": 3272,
+   "changed_pct": 0.566
+  },
+  {
+   "a": {
+    "anchorage": "pair"
+   },
+   "b": {
+    "anchorage": "ring"
+   },
+   "changed_px": 3091,
+   "changed_pct": 0.535
+  },
+  {
+   "a": {
+    "anchorage": "pair"
+   },
+   "b": {
+    "anchorage": "scattered"
+   },
+   "changed_px": 3304,
+   "changed_pct": 0.572
+  },
+  {
+   "a": {
+    "anchorage": "ring"
+   },
+   "b": {
+    "anchorage": "scattered"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  }
+ ]
+}

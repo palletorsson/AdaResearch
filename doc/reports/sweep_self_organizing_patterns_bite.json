@@ -1,0 +1,38 @@
+{
+ "sweep": "self_organizing_patterns",
+ "peak_changed_pct": 8.55,
+ "subject_pct": 7.777,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "cue": "trace"
+   },
+   "b": {
+    "cue": "neighbour"
+   },
+   "changed_px": 26972,
+   "changed_pct": 4.67
+  },
+  {
+   "a": {
+    "cue": "trace"
+   },
+   "b": {
+    "cue": "slope"
+   },
+   "changed_px": 44303,
+   "changed_pct": 7.67
+  },
+  {
+   "a": {
+    "cue": "neighbour"
+   },
+   "b": {
+    "cue": "slope"
+   },
+   "changed_px": 49385,
+   "changed_pct": 8.55
+  }
+ ]
+}

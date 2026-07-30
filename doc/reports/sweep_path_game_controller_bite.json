@@ -1,7 +1,8 @@
 {
  "sweep": "path_game_controller",
  "peak_changed_pct": 0.0,
- "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
@@ -72,7 +73,7 @@
     "win_on_all_befriended": true,
     "badge_size": 0.48
    },
-   "changed_px": 0,
+   "changed_px": 1,
    "changed_pct": 0.0
   },
   {
@@ -84,7 +85,7 @@
     "win_on_all_befriended": false,
     "badge_size": 0.15
    },
-   "changed_px": 2,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
@@ -120,7 +121,7 @@
     "win_on_all_befriended": false,
     "badge_size": 0.15
    },
-   "changed_px": 2,
+   "changed_px": 1,
    "changed_pct": 0.0
   },
   {
@@ -132,7 +133,7 @@
     "win_on_all_befriended": false,
     "badge_size": 0.3
    },
-   "changed_px": 0,
+   "changed_px": 1,
    "changed_pct": 0.0
   },
   {
@@ -144,7 +145,7 @@
     "win_on_all_befriended": false,
     "badge_size": 0.48
    },
-   "changed_px": 0,
+   "changed_px": 1,
    "changed_pct": 0.0
   },
   {
@@ -156,7 +157,7 @@
     "win_on_all_befriended": false,
     "badge_size": 0.3
    },
-   "changed_px": 2,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
@@ -168,7 +169,7 @@
     "win_on_all_befriended": false,
     "badge_size": 0.48
    },
-   "changed_px": 2,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {

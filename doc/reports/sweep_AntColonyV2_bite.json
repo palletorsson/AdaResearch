@@ -1,0 +1,68 @@
+{
+ "sweep": "AntColonyV2",
+ "peak_changed_pct": 3.752,
+ "subject_pct": 3.755,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "anchorage": "pair"
+   },
+   "b": {
+    "anchorage": "triad"
+   },
+   "changed_px": 21624,
+   "changed_pct": 3.744
+  },
+  {
+   "a": {
+    "anchorage": "pair"
+   },
+   "b": {
+    "anchorage": "ring"
+   },
+   "changed_px": 21670,
+   "changed_pct": 3.752
+  },
+  {
+   "a": {
+    "anchorage": "pair"
+   },
+   "b": {
+    "anchorage": "scattered"
+   },
+   "changed_px": 21634,
+   "changed_pct": 3.745
+  },
+  {
+   "a": {
+    "anchorage": "triad"
+   },
+   "b": {
+    "anchorage": "ring"
+   },
+   "changed_px": 613,
+   "changed_pct": 0.106
+  },
+  {
+   "a": {
+    "anchorage": "triad"
+   },
+   "b": {
+    "anchorage": "scattered"
+   },
+   "changed_px": 2035,
+   "changed_pct": 0.352
+  },
+  {
+   "a": {
+    "anchorage": "ring"
+   },
+   "b": {
+    "anchorage": "scattered"
+   },
+   "changed_px": 2344,
+   "changed_pct": 0.406
+  }
+ ]
+}

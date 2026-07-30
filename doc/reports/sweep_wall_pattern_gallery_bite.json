@@ -1,7 +1,8 @@
 {
  "sweep": "wall_pattern_gallery",
  "peak_changed_pct": 0.0,
- "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
@@ -72,7 +73,7 @@
     "cluster_size": 3.0,
     "tile_scale": 2.0
    },
-   "changed_px": 0,
+   "changed_px": 1,
    "changed_pct": 0.0
   },
   {
@@ -84,7 +85,7 @@
     "cluster_size": 3.0,
     "tile_scale": 4.0
    },
-   "changed_px": 0,
+   "changed_px": 1,
    "changed_pct": 0.0
   },
   {
@@ -96,7 +97,7 @@
     "cluster_size": 4.8,
     "tile_scale": 2.0
    },
-   "changed_px": 0,
+   "changed_px": 1,
    "changed_pct": 0.0
   },
   {
@@ -144,7 +145,7 @@
     "cluster_size": 4.8,
     "tile_scale": 4.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
@@ -168,7 +169,7 @@
     "cluster_size": 4.8,
     "tile_scale": 4.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
@@ -180,7 +181,7 @@
     "cluster_size": 4.8,
     "tile_scale": 4.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   }
  ]

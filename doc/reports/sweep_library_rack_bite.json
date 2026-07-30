@@ -1,16 +1,17 @@
 {
  "sweep": "library_rack",
  "peak_changed_pct": 0.0,
- "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "none"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "label"
    },
@@ -19,12 +20,12 @@
   },
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "none"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "fixture"
    },
@@ -33,12 +34,12 @@
   },
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "none"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "hood"
    },
@@ -47,12 +48,12 @@
   },
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "none"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "cordon"
    },
@@ -61,12 +62,12 @@
   },
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "label"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "fixture"
    },
@@ -75,12 +76,12 @@
   },
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "label"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "hood"
    },
@@ -89,26 +90,26 @@
   },
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "label"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "cordon"
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "fixture"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "hood"
    },
@@ -117,30 +118,30 @@
   },
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "fixture"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "cordon"
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
    "a": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "hood"
    },
    "b": {
-    "collection": "lab",
+    "collection": "color",
     "layout": "rack_layout.json",
     "guard": "cordon"
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   }
  ]

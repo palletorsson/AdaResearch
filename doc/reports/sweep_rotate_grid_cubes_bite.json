@@ -1,7 +1,8 @@
 {
  "sweep": "rotate_grid_cubes",
  "peak_changed_pct": 0.0,
- "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
@@ -108,7 +109,7 @@
     "use_animation": false,
     "rot_amount": 56.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
@@ -144,7 +145,7 @@
     "use_animation": false,
     "rot_amount": 56.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
@@ -168,7 +169,7 @@
     "use_animation": false,
     "rot_amount": 56.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   },
   {
@@ -180,7 +181,7 @@
     "use_animation": false,
     "rot_amount": 56.0
    },
-   "changed_px": 1,
+   "changed_px": 0,
    "changed_pct": 0.0
   }
  ]
