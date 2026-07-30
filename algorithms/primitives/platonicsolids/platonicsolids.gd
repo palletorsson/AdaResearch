@@ -13,8 +13,55 @@ extends Node3D
 # PlatonicSolids.gd - Queer-themed geometric primitives in Godot 4
 # Based on Ada Research VR project structure
 
+## STAGE-2 DNA PROMOTION (2026-07-29).
+##
+## Before this the artifact had zero exports: nine hand-built polyhedra that ALWAYS
+## arrived carrying their own room with them — a rainbow floor plane, four floating
+## banners and a ring of six pride-coloured lights — whether the map that placed them
+## wanted a room or a specimen. Two things were hard-coded that are really arguments:
+##
+##   staging   whether the geometry brings its own room   pride_room · lit · bare
+##   palette   whose colours the geometry is carrying     pride · trans · mono
+##
+## staging is the question the @identity dodges: is the politics in the ROOM (a floor,
+## banners, a light ring the map cannot refuse) or in the OBJECTS (nine coloured solids
+## standing in whatever space the map already built)? `bare` puts the claim entirely on
+## the vertices; `lit` keeps the coloured light and drops the scenery.
+##
+## palette is the artifact's own declared critical_parameter, which had never been
+## reachable. `mono` is the honest counterfactual to the truth statement "geometry does
+## not belong to neutrality" — the same nine solids, the same six lights, the same floor
+## bands, drained to one grey. Neutrality is a value you can select and look at.
+##
+## staging=pride_room, palette=pride is the pre-promotion behaviour EXACTLY, and it is
+## the default, so the 6 existing placements are unchanged.
+##
+## Usage in map_data.json:
+##   "platonicsolids#staging:bare"
+##   "platonicsolids#staging:lit#palette:trans"
+
+## Does the geometry bring its own room? pride_room = rainbow floor + banners + light
+## ring (the legacy default); lit = the coloured light ring only, the map keeps its own
+## floor; bare = nine specimens and nothing else.
+@export_enum("pride_room", "lit", "bare") var staging: String = "pride_room"
+## Whose colours the solids, the floor bands and the lights are carrying.
+@export_enum("pride", "trans", "mono") var palette: String = "pride"
+
 # Constants for the Platonic solids
 const PHI = 1.618033988749895  # Golden ratio, used for dodecahedron and icosahedron
+
+# Neutrality, held at the same structure: six entries so the light ring and the floor
+# banding keep their shape and only the colour is gone.
+const MONO_COLORS := [
+	Color(0.62, 0.62, 0.62),
+	Color(0.62, 0.62, 0.62),
+	Color(0.62, 0.62, 0.62),
+	Color(0.62, 0.62, 0.62),
+	Color(0.62, 0.62, 0.62),
+	Color(0.62, 0.62, 0.62)
+]
+
+var _built: bool = false
 
 # Pride flag colors
 var pride_colors = [
@@ -51,16 +98,48 @@ var positions = [
 func _ready() -> void:
 	create_queer_environment()
 	create_all_solids()
+	_built = true
+
+# --- DNA (stage 2) -----------------------------------------------------------
+
+## The active palette. pride is the six-colour flag (legacy), trans the five-colour
+## flag, mono the six-entry grey that keeps the structure and removes the claim.
+func _palette() -> Array:
+	if palette == "trans":
+		return trans_colors
+	if palette == "mono":
+		return MONO_COLORS
+	return pride_colors
+
+## Colour for solid N. Indices were written against the six-entry pride array, so they
+## wrap — the five-colour trans flag reuses its first colour for the sixth solid.
+func _solid_color(index: int) -> Color:
+	var pal: Array = _palette()
+	return pal[index % pal.size()]
+
+## The banners keep speaking trans unless neutrality is selected, in which case there is
+## nothing left for them to say.
+func _banner_colors() -> Array:
+	if palette == "mono":
+		return MONO_COLORS
+	return trans_colors
 
 func create_queer_environment() -> void:
-	# Create rainbow floor
-	create_rainbow_floor()
-	
-	# Create floating pride banners
-	create_floating_banners()
-	
-	# Add colorful lighting
-	create_colorful_lighting()
+	match staging:
+		"bare":
+			# The solids stand in the map's own room. No floor plane, no banners, no lights.
+			pass
+		"lit":
+			create_colorful_lighting()
+		_:
+			# Create rainbow floor
+			create_rainbow_floor()
+
+			# Create floating pride banners
+			create_floating_banners()
+
+			# Add colorful lighting
+			create_colorful_lighting()
 
 func create_rainbow_floor() -> void:
 	var floor = MeshInstance3D.new()
@@ -93,13 +172,14 @@ func apply_rainbow_to_mesh(mesh_instance: MeshInstance3D) -> void:
 	# Get vertices and create color array
 	var vertices = arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array
 	var colors = PackedColorArray()
-	
+	var pal: Array = _palette()
+
 	for i in range(vertices.size()):
 		var vertex = vertices[i]
 		var x_pos = vertex.x
 		# Map X position to rainbow color
-		var color_index = int((x_pos + 5) / 1.67) % pride_colors.size()
-		colors.append(pride_colors[color_index])
+		var color_index = int((x_pos + 5) / 1.67) % pal.size()
+		colors.append(pal[color_index])
 	
 	arrays[Mesh.ARRAY_COLOR] = colors
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
@@ -123,8 +203,9 @@ func create_pride_banner(pos: Vector3) -> void:
 	quad_mesh.size = Vector2(1.5, 1)
 	banner.mesh = quad_mesh
 	
+	var pal: Array = _palette()
 	var material = StandardMaterial3D.new()
-	material.albedo_color = pride_colors[randi() % pride_colors.size()]
+	material.albedo_color = pal[randi() % pal.size()]
 	material.emission_enabled = true
 	material.emission = material.albedo_color * 0.3
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -143,8 +224,9 @@ func create_trans_banner(pos: Vector3) -> void:
 	quad_mesh.size = Vector2(1.2, 0.8)
 	banner.mesh = quad_mesh
 	
+	var pal: Array = _banner_colors()
 	var material = StandardMaterial3D.new()
-	material.albedo_color = trans_colors[randi() % trans_colors.size()]
+	material.albedo_color = pal[randi() % pal.size()]
 	material.emission_enabled = true
 	material.emission = material.albedo_color * 0.2
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -156,18 +238,19 @@ func create_trans_banner(pos: Vector3) -> void:
 
 func create_colorful_lighting() -> void:
 	# Create multiple colored lights
-	for i in range(pride_colors.size()):
+	var pal: Array = _palette()
+	for i in range(pal.size()):
 		var light = OmniLight3D.new()
 		light.name = "PrideLight_" + str(i)
 		add_child(light)
-		
-		light.light_color = pride_colors[i]
+
+		light.light_color = pal[i]
 		light.light_energy = 0.4
 		light.omni_range = 8.0
 		light.omni_attenuation = 0.5
-		
+
 		# Position lights in a circle around the scene
-		var angle = (i / float(pride_colors.size())) * 2 * PI
+		var angle = (i / float(pal.size())) * 2 * PI
 		light.position = Vector3(cos(angle) * 6, 3, sin(angle) * 6)
 
 # Create all custom primitives
@@ -264,7 +347,7 @@ func create_diamond():
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = st.commit()
 	mesh_instance.name = "Diamond"
-	apply_queer_material(mesh_instance, pride_colors[0])
+	apply_queer_material(mesh_instance, _solid_color(0))
 	return mesh_instance
 
 # Create triangular prism
@@ -307,7 +390,7 @@ func create_triangular_prism():
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = st.commit()
 	mesh_instance.name = "TriangularPrism"
-	apply_queer_material(mesh_instance, pride_colors[1])
+	apply_queer_material(mesh_instance, _solid_color(1))
 	return mesh_instance
 
 # Create octahedron (8 faces, 6 vertices, 12 edges)
@@ -344,7 +427,7 @@ func create_octahedron():
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = st.commit()
 	mesh_instance.name = "Octahedron"
-	apply_queer_material(mesh_instance, pride_colors[2])
+	apply_queer_material(mesh_instance, _solid_color(2))
 	return mesh_instance
 
 # Create rough rock (irregular polyhedron)
@@ -387,7 +470,7 @@ func create_rough_rock():
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = st.commit()
 	mesh_instance.name = "RoughRock"
-	apply_queer_material(mesh_instance, pride_colors[3])
+	apply_queer_material(mesh_instance, _solid_color(3))
 	return mesh_instance
 
 # Create crystal cluster
@@ -410,7 +493,7 @@ func create_crystal_cluster():
 		)
 		cluster.add_child(crystal)
 	
-	apply_queer_material(cluster.get_child(0), pride_colors[4])
+	apply_queer_material(cluster.get_child(0), _solid_color(4))
 	return cluster
 
 func create_single_crystal(size: float):
@@ -475,7 +558,7 @@ func create_bipyramid():
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = st.commit()
 	mesh_instance.name = "Bipyramid"
-	apply_queer_material(mesh_instance, pride_colors[5])
+	apply_queer_material(mesh_instance, _solid_color(5))
 	return mesh_instance
 
 # Create truncated tetrahedron
@@ -511,7 +594,7 @@ func create_truncated_tetrahedron():
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = st.commit()
 	mesh_instance.name = "TruncatedTetrahedron"
-	apply_queer_material(mesh_instance, pride_colors[1])
+	apply_queer_material(mesh_instance, _solid_color(1))
 	return mesh_instance
 
 # Create geode (hollow sphere with crystals inside)
@@ -547,7 +630,7 @@ func create_geode():
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = st.commit()
 	mesh_instance.name = "Geode"
-	apply_queer_material(mesh_instance, pride_colors[2])
+	apply_queer_material(mesh_instance, _solid_color(2))
 	return mesh_instance
 
 # Create crystal shard (elongated irregular crystal)
@@ -584,7 +667,7 @@ func create_crystal_shard():
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = st.commit()
 	mesh_instance.name = "CrystalShard"
-	apply_queer_material(mesh_instance, pride_colors[4])
+	apply_queer_material(mesh_instance, _solid_color(4))
 	return mesh_instance
 
 func apply_queer_material(mesh_instance: MeshInstance3D, base_color: Color) -> void:
@@ -612,5 +695,31 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Config from map_data.json tokens: #staging:bare#palette:trans
+##
+## GUARDED. Only rebuilds when a value actually CHANGED and _ready has already built
+## once — an unguarded rebuild here would tear down and re-add every child of every
+## shipped placement for no reason, which is how promotions break maps.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var changed: bool = false
+	if config.has("staging"):
+		var want_staging: String = str(config["staging"])
+		if want_staging != staging:
+			staging = want_staging
+			changed = true
+	if config.has("palette"):
+		var want_palette: String = str(config["palette"])
+		if want_palette != palette:
+			palette = want_palette
+			changed = true
+	if changed and _built:
+		_rebuild()
+
+func _rebuild() -> void:
+	var kids: Array = get_children()
+	for child in kids:
+		if not child.owner:
+			remove_child(child)
+			child.queue_free()
+	create_queer_environment()
+	create_all_solids()

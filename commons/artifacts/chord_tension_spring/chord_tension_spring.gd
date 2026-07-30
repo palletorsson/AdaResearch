@@ -19,6 +19,9 @@
 #   Western common-practice norms. Blues, jazz, and many non-Western
 #   traditions treat "dissonant" intervals as stable or desirable.
 #   The springs show ONE theory of tension, not a universal law.
+#   Since 2026-07-29 that is a knob, not a disclaimer: consonance_theory
+#   swaps the table (western / blues / ratio / flat). Under "flat" the
+#   springs make no claim at all and nothing ever resolves.
 #
 extends Node3D
 class_name ChordTensionSpring
@@ -66,6 +69,53 @@ const CONSONANCE: Array[float] = [
 	0.10,  # 11: major 7th (leading tone tension)
 ]
 
+# ── DNA axis 1: which theory of tension the springs obey ──
+# The QFEP audit at the top of this file says the springs "show ONE theory of
+# tension, not a universal law". Until now that sentence was a comment and the
+# table above was the law. These tables make the sentence turnable: swap the
+# theory and the same tritone that screamed under `western` goes slack.
+
+# Blues / jazz practice: the dominant seventh IS home, the flat third is sweet,
+# the tritone is a colour rather than a crisis. Nothing resolves to the major 7.
+const CONSONANCE_BLUES: Array[float] = [
+	1.0,   # 0: unison
+	0.10,  # 1: minor 2nd
+	0.35,  # 2: major 2nd
+	0.80,  # 3: minor 3rd — the blue third, stable
+	0.55,  # 4: major 3rd
+	0.75,  # 5: perfect 4th
+	0.55,  # 6: tritone — colour, not crisis
+	0.90,  # 7: perfect 5th
+	0.40,  # 8: minor 6th
+	0.60,  # 9: major 6th
+	0.85,  # 10: minor 7th — the dominant is home
+	0.10,  # 11: major 7th — the one that will not sit still
+]
+
+# Pure ratio simplicity: consonance ranked only by how small the whole-number
+# frequency ratio is. No culture, just the overtone series.
+const CONSONANCE_RATIO: Array[float] = [
+	1.0,   # 0: 1:1
+	0.12,  # 1: 16:15
+	0.30,  # 2: 9:8
+	0.50,  # 3: 6:5
+	0.60,  # 4: 5:4
+	0.80,  # 5: 4:3
+	0.18,  # 6: 45:32
+	0.90,  # 7: 3:2
+	0.40,  # 8: 8:5
+	0.45,  # 9: 5:3
+	0.32,  # 10: 16:9
+	0.16,  # 11: 15:8
+]
+
+# The null theory: no interval is more consonant than any other. Dissonance is
+# entirely learned, so the springs never single anyone out. Everything hums at
+# the same middling strain — including the tritone, including the unison.
+const CONSONANCE_FLAT: Array[float] = [
+	0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
+]
+
 # Spring physics constants
 const SPRING_K_MIN := 0.5      # Weakest spring (most dissonant)
 const SPRING_K_MAX := 30.0     # Strongest spring (most consonant)
@@ -93,8 +143,20 @@ const PRESETS := {
 	"tritone":   [0, 6],          # C F# (maximum tension)
 }
 
+# ═══════════════════════════════════════════
+#  DNA (stage 2 — variation)
+# ═══════════════════════════════════════════
+# consonance_theory: which table the springs obey. "western" = the
+#   common-practice table above, i.e. exactly the pre-promotion behaviour.
+# opening_chord: what the artifact says before anyone touches it. "maj7" =
+#   the pre-promotion chord (C E G B, the hard-coded node_pitches below).
+@export_enum("western", "blues", "ratio", "flat") var consonance_theory: String = "western"
+@export_enum("maj7", "major", "minor", "dom7", "min7", "dim", "aug", "sus4", "sus2", "tritone") var opening_chord: String = "maj7"
+
 # ── State ──
 var _xr_active: bool = false
+var _consonance: Array[float] = CONSONANCE
+var _built: bool = false
 var node_pitches: Array[int] = [0, 4, 7, 11]  # Semitone values (C, E, G, B = Cmaj7)
 var node_positions: Array[Vector3] = []         # Current 3D positions
 var node_velocities: Array[Vector3] = []        # Physics velocities
@@ -138,6 +200,7 @@ signal node_moved(index: int, new_pitch: int)
 
 func _ready() -> void:
 	_xr_active = XRServer.primary_interface != null
+	_consonance = _consonance_table(consonance_theory)
 	_create_base_plate()
 	_create_nodes()
 	_create_spring_pairs()
@@ -145,8 +208,22 @@ func _ready() -> void:
 	_create_preset_buttons()
 	_create_labels()
 	_setup_audio()
+	if opening_chord != "maj7":
+		_apply_preset(opening_chord)
 	_update_rest_positions()
 	_snap_nodes_to_rest()
+	_built = true
+
+func _consonance_table(theory: String) -> Array[float]:
+	match theory:
+		"blues":
+			return CONSONANCE_BLUES
+		"ratio":
+			return CONSONANCE_RATIO
+		"flat":
+			return CONSONANCE_FLAT
+		_:
+			return CONSONANCE
 
 # ═══════════════════════════════════════════
 #  CONSTRUCTION
@@ -445,7 +522,7 @@ func _calculate_chord_tension() -> float:
 	for i in node_pitches.size():
 		for j in range(i + 1, node_pitches.size()):
 			var interval := absi(node_pitches[j] - node_pitches[i]) % 12
-			total_dissonance += 1.0 - CONSONANCE[interval]
+			total_dissonance += 1.0 - _consonance[interval]
 			pair_count += 1
 	
 	return total_dissonance / pair_count if pair_count > 0 else 0.0
@@ -514,7 +591,7 @@ func _node_tension(index: int) -> float:
 		if j == index:
 			continue
 		var interval := absi(node_pitches[j] - node_pitches[index]) % 12
-		tension += 1.0 - CONSONANCE[interval]
+		tension += 1.0 - _consonance[interval]
 		count += 1
 	return tension / count if count > 0 else 0.0
 
@@ -530,7 +607,7 @@ func _update_spring_visuals() -> void:
 		var pos_a := node_positions[i]
 		var pos_b := node_positions[j]
 		var interval := absi(node_pitches[j] - node_pitches[i]) % 12
-		var consonance := CONSONANCE[interval]
+		var consonance: float = _consonance[interval]
 		
 		# Build spring coil mesh
 		var mesh := ImmediateMesh.new()
@@ -795,4 +872,20 @@ func get_pitches() -> Array[int]:
 	return node_pitches.duplicate()
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	# Guarded: touch nothing unless a value actually changed, and never rebuild
+	# the chord before _ready has built the nodes once (_ready applies
+	# opening_chord itself if config arrived first).
+	var rebuild_chord := false
+	if config_data.has("consonance_theory"):
+		var theory: String = str(config_data["consonance_theory"])
+		if theory != consonance_theory:
+			consonance_theory = theory
+			_consonance = _consonance_table(theory)
+	if config_data.has("opening_chord"):
+		var chord: String = str(config_data["opening_chord"])
+		if chord != opening_chord and PRESETS.has(chord):
+			opening_chord = chord
+			rebuild_chord = true
+	if rebuild_chord and _built:
+		_apply_preset(opening_chord)
+		_snap_nodes_to_rest()

@@ -5,9 +5,9 @@
 # essence: 30 PSO particles on 4 switchable fitness landscapes — convergence (corporate), spread (ecological), novelty (artistic), ridge (meritocratic) — same agents, different power structures
 # desire: to make the learner feel the moment the swarm reorganizes when you switch landscapes, and realize that "optimal" was never neutral
 # critical_parameter: mandate — switching it does not change the particles, only what counts as success, and the swarm obeys
-# triggers: pressing CONVERGE makes the swarm collapse to center; pressing SPREAD makes it explode outward; pressing NOVELTY makes it seek edges and gaps
+# triggers: pressing CONVERGE makes the swarm collapse to center; pressing SPREAD makes it explode outward; pressing NOVELTY makes it seek the unvisited; the ridge mandate funnels it onto one diagonal path
 # emerges: the transition animations between landscapes — particles hesitate, reorient, sometimes oscillate before committing to the new definition of success
-# needs: [has] three landscape buttons via ArtifactControls; [has] inertia slider; [has] terrain recolor; [missing] no history trace; no fitness graph
+# needs: [has] landscape buttons via ArtifactControls; [has] inertia slider; [has] terrain recolor; [has] addressable mandate axis; [missing] no history trace; no fitness graph
 # relationships: placed in SwarmIntelligence_Particle_Swarm_Optimization alongside self_organizing_patterns; responds to the critical.md question "whose fitness function?"
 # truth: the swarm always optimizes — the question is never whether to optimize but who wrote the objective function
 #

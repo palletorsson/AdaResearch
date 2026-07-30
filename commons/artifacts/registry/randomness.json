@@ -5304,6 +5304,26 @@
    "qfep_connection": "Even 'pure' randomness arrives pre-domesticated: velocity damped by 0.99 each frame and a bounce wall at radius seven. The chaos on display is E_flux in a padded cell — actually pure would mean particles leaving."
   },
   "perlin_noise": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "generator": [
+      "simplex",
+      "perlin",
+      "value",
+      "cellular"
+     ],
+     "readout": [
+      "relief",
+      "plate",
+      "column"
+     ]
+    },
+    "default": "generator=simplex, readout=relief - both are exactly what the shipped code did (NoiseVisualizer hard-coded FastNoiseLite.TYPE_SIMPLEX and lifted a uniform cube to its sample), so the 7 existing placements render identically",
+    "shares_vocabulary_with": "simplex_noise - readout is the same axis with the same three values and the same default on both, so the pair can be compared instead of merely contrasted",
+    "was": "no exports on the root at all - the sweep refused it as NO TURNABLE KNOBS. The two decisions that carry the argument sat one node down as constants: which basis fills the field, and whether a sample is read as elevation or as measurement. Note that the artifact called Perlin Noise has been drawing SIMPLEX noise since it was written; the promotion makes that a declared choice (generator=perlin is now available) rather than silently correcting it and rewriting seven maps."
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Interactive Perlin noise generation and visualization",
@@ -10596,6 +10616,25 @@
   "simplex_noise": {
    "category": "procedural",
    "complexity": "intermediate",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "readout": [
+      "relief",
+      "plate",
+      "column"
+     ],
+     "octaves": [
+      1,
+      2,
+      4,
+      6
+     ]
+    },
+    "default": "readout=relief, octaves=4 - relief is the legacy cube.position.y = value line and 4 was the hard-coded fractal_octaves, so all 8 existing placements render exactly as before",
+    "was": "no exports on the root at all: the whole parameter space lived in a 2D Control panel that the grid strips out of map placements, so every placement was the same 20x20 field of half-metre cubes displaced in y and tinted pink-to-teal, and map_data could not say otherwise."
+   },
    "description": "Interactive Simplex noise generation and visualization for high-quality procedural content",
    "dev_themes": [
     "probability",

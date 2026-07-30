@@ -18,6 +18,39 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 class_name VectorMagnitudeDemo
 
+## DNA (stage 2 - variation, promoted 2026-07-29)
+##   decomposition - how the three RGB component arrows are drawn. The @identity
+##                   says the formula shows "the decomposition path your
+##                   commitment took" - but the shipped drawing is three
+##                   independent projections from the origin, not a path.
+##   metric        - which norm the instrument reads. |V| was hard-coded to
+##                   vec.length(); the Euclidean answer is a choice, not a fact
+##                   about vectors, and this axis lets the bench say so.
+## Vocabulary is shared with the sibling vector_normalize_demo where the
+## question is the same: "none" means the same thing on both benches - the claim
+## is left to the numbers, with no supporting geometry.
+## Both defaults reproduce the pre-promotion artifact exactly.
+
+const DECOMPOSITIONS: Array[String] = ["star", "chain", "none"]
+const METRICS: Array[String] = ["euclidean", "taxicab", "chebyshev"]
+
+## How the X/Y/Z component arrows relate to each other.
+##   star  - all three leave the origin; the components read as independent
+##           coordinates measured off the same corner (shipped)
+##   chain - head to tail; x from the origin, y from x's tip, z from y's tip, so
+##           the chain arrives exactly on V's tip and the decomposition becomes
+##           a walked route rather than three separate readings
+##   none  - no component arrows; magnitude claimed only by the arrow and the
+##           numbers
+@export_enum("star", "chain", "none") var decomposition: String = "star"
+
+## Which norm the readouts compute.
+##   euclidean - sqrt(x^2 + y^2 + z^2), the Pythagorean answer (shipped)
+##   taxicab   - |x| + |y| + |z|; under decomposition=chain this is literally
+##               the length of the path the components walk
+##   chebyshev - max(|x|, |y|, |z|); only the most committed axis counts
+@export_enum("euclidean", "taxicab", "chebyshev") var metric: String = "euclidean"
+
 var vector_v: Node3D
 var component_x: Node3D
 var component_y: Node3D
@@ -107,6 +140,25 @@ func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary
 
 # Sync the X/Y/Z component vectors to match the main vector's current value
 func _update_components(vec: Vector3):
+	var show_components: bool = decomposition != "none"
+	_set_arrow_visible(component_x, show_components)
+	_set_arrow_visible(component_y, show_components)
+	_set_arrow_visible(component_z, show_components)
+	if not show_components:
+		return
+
+	# Where each component arrow BEGINS. "star" leaves all three at the origin,
+	# which is where spawn_vector() put them, so this is the shipped layout.
+	var start_y := Vector3.ZERO
+	var start_z := Vector3.ZERO
+	if decomposition == "chain":
+		start_y = Vector3(vec.x, 0, 0)
+		start_z = Vector3(vec.x, vec.y, 0)
+	if component_y and component_y.position != start_y:
+		component_y.position = start_y
+	if component_z and component_z.position != start_z:
+		component_z.position = start_z
+
 	# Update component vectors to show decomposition
 	_update_vector_fast(component_x, Vector3(vec.x, 0, 0), _cached_comp_x)
 	_update_vector_fast(component_y, Vector3(0, vec.y, 0), _cached_comp_y)
@@ -114,6 +166,9 @@ func _update_components(vec: Vector3):
 
 # Rebuild the info panel text showing the magnitude formula step by step
 func _update_info(vec: Vector3):
+	if metric != "euclidean":
+		_update_info_alt_metric(vec)
+		return
 	var magnitude = vec.length()
 	var builder := []
 	builder.append("V = (%.2f, %.2f, %.2f)" % [vec.x, vec.y, vec.z])
@@ -125,7 +180,7 @@ func _update_info(vec: Vector3):
 	info_label.text = "\n".join(builder)
 
 func _update_length_label(vec: Vector3):
-	var magnitude = vec.length()
+	var magnitude: float = _magnitude(vec)
 	length_label.text = "|V| = %.2f" % magnitude
 	# Position at midpoint of vector, offset toward player (+Z)
 	length_label.position = vec * 0.5 * SCENE_SCALE + Vector3(0, 0.05, 0.08)
@@ -155,5 +210,51 @@ func _exit_tree():
 			node.queue_free()
 	_created_nodes.clear()
 
+# -- DNA plumbing --------------------------------------------------------------
+
+## The length of vec under the declared metric. "euclidean" is vec.length(),
+## i.e. every readout is bit-identical to the pre-promotion build.
+func _magnitude(vec: Vector3) -> float:
+	if metric == "taxicab":
+		return absf(vec.x) + absf(vec.y) + absf(vec.z)
+	if metric == "chebyshev":
+		return maxf(absf(vec.x), maxf(absf(vec.y), absf(vec.z)))
+	return vec.length()
+
+## Info panel text for the non-Pythagorean norms. Never reached while
+## metric == "euclidean", so the shipped derivation is left exactly as written.
+func _update_info_alt_metric(vec: Vector3) -> void:
+	var builder := []
+	builder.append("V = (%.2f, %.2f, %.2f)" % [vec.x, vec.y, vec.z])
+	builder.append("")
+	if metric == "taxicab":
+		builder.append("|V|1 = |x| + |y| + |z|")
+		builder.append("|V|1 = %.2f + %.2f + %.2f" % [absf(vec.x), absf(vec.y), absf(vec.z)])
+	else:
+		builder.append("|V|inf = max(|x|, |y|, |z|)")
+		builder.append("|V|inf = max(%.2f, %.2f, %.2f)" % [absf(vec.x), absf(vec.y), absf(vec.z)])
+	builder.append("|V| = %.3f" % _magnitude(vec))
+	info_label.text = "\n".join(builder)
+
+func _set_arrow_visible(arrow: Node3D, want: bool) -> void:
+	if arrow and arrow.visible != want:
+		arrow.visible = want
+
+## Grid config arrives deferred, after _ready(). Nothing here rebuilds the
+## scene: _process() re-derives every arrow and readout from these two values on
+## the next frame, so a placement that passes no config (or a config naming
+## neither axis) is left exactly as built.
+## Deliberately does NOT chain to the base apply_grid_config - this demo builds
+## inline in _ready() rather than in build_scene(), so the base's rebuild() path
+## would blank it.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	if config_data == null or config_data.is_empty():
+		return
+	if config_data.has("decomposition"):
+		var new_decomp: String = str(config_data["decomposition"]).strip_edges().to_lower()
+		if DECOMPOSITIONS.has(new_decomp) and new_decomp != decomposition:
+			decomposition = new_decomp
+	if config_data.has("metric"):
+		var new_metric: String = str(config_data["metric"]).strip_edges().to_lower()
+		if METRICS.has(new_metric) and new_metric != metric:
+			metric = new_metric

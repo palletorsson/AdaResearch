@@ -6238,6 +6238,25 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.292842Z",
         "derived_from": "aabb_size + category"
+      },
+      "dna": {
+        "promoted": "2026-07-29",
+        "stage": "2 - variation",
+        "axes": {
+          "decomposition": [
+            "star",
+            "chain",
+            "none"
+          ],
+          "metric": [
+            "euclidean",
+            "taxicab",
+            "chebyshev"
+          ]
+        },
+        "default": "decomposition=star, metric=euclidean - the shipped three RGB component arrows all leaving the origin, with the Pythagorean derivation on the panel and |V| = vec.length() on the floating label, so all 6 existing placements are unchanged",
+        "was": "no exports of its own: the decomposition was hard-coded as three origin-anchored projections in _update_components(), the norm was hard-coded as vec.length() in two places, and apply_grid_config() was an empty pass",
+        "note": "shares vocabulary with its sibling vector_normalize_demo - 'none' means the same thing on both benches, the claim left to the numbers with no supporting geometry. metric=taxicab is the reading of decomposition=chain: the length of the path the components walk"
       }
     },
     "vector_normalize_demo": {

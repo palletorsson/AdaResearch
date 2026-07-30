@@ -18,6 +18,41 @@ class_name SoftStageDashboard
 # --- Configuration ---
 @export var panel_size: Vector2 = Vector2(1.2, 0.9)
 
+## --- DNA (stage 2, promoted 2026-07-29) ---
+##
+## STAGE-2 DNA PROMOTION. The sweep refused this artifact for having no turnable
+## knobs: panel_size was the only export, and a size is not an argument. The two
+## constants that actually carry the argument were buried in the builder —
+##
+##   report    WHICH managers the wall is a witness to
+##   mounting  HOW the readout attaches to the room it reports on
+##
+## report was hard-coded as three equal columns: ecosystem, hazards, capability,
+## co-equal by construction, at a third of the panel each. That is a claim — that
+## the world's state is three systems of the same weight — and every room made it
+## whether or not the room was about all three. Narrowed to one manager, the panel
+## becomes a monitor for THIS room's concern and the column takes the full width.
+##
+## mounting was not a constant so much as an absence. The docstring says
+## "wall-mounted", and the geometry is a quad at the placement origin with nothing
+## holding it: a floating readout, which is the same sin the cabinet grammar's first
+## rule forbids. lectern gives it a slanted face on legs you read down at; kiosk
+## stands it on a pedestal at reading height. wall is the shipped no-body case.
+##
+## report=all + mounting=wall reproduces the shipped panel exactly — the column
+## slots, the divider positions and the label wrap width all come out at the old
+## hard-coded panel_size.x / 3 — so the 7 existing placements are untouched.
+##
+## Usage in map_data.json:
+##   "soft_stage_dashboard#report:hazards"
+##   "soft_stage_dashboard#report:capability#mounting:lectern"
+
+## Which managers get a column. "all" is the shipped three-column layout.
+@export_enum("all", "ecosystem", "hazards", "capability") var report: String = "all"
+
+## How the panel meets the room. "wall" is the shipped bare quad with no body.
+@export_enum("wall", "lectern", "kiosk") var mounting: String = "wall"
+
 # --- Colors ---
 const COL_BG := Color(0.05, 0.05, 0.08)
 const COL_FRAME := Color(0.15, 0.2, 0.35)
@@ -65,6 +100,16 @@ var _start_time: float = 0.0
 var _current_stage_name: String = "—"
 var _current_stage_order: int = 0
 
+## Everything the builder makes hangs off this, so mounting can tilt or raise the
+## whole face without touching the artifact's own transform (which the grid owns).
+## For mounting=wall it stays at identity, which is exactly where the children were
+## before this node existed.
+var _face: Node3D = null
+## Label wrap width in metres — derived from the number of active columns. At
+## report=all this comes out at panel_size.x / 3 - 0.06, the old hard-coded value.
+var _label_width_m: float = 0.0
+var _built: bool = false
+
 
 func _ready() -> void:
 	_start_time = Time.get_ticks_msec() / 1000.0
@@ -74,6 +119,25 @@ func _ready() -> void:
 	_build_signal_log()
 	_connect_all_manager_signals()
 	_refresh_all()
+	_built = true
+
+
+## Which manager columns are live, in order. Named short because the column
+## builders are keyed by these.
+func _active_columns() -> Array[String]:
+	var cols: Array[String] = []
+	match report:
+		"ecosystem":
+			cols.append("eco")
+		"hazards":
+			cols.append("haz")
+		"capability":
+			cols.append("cap")
+		_:
+			cols.append("eco")
+			cols.append("haz")
+			cols.append("cap")
+	return cols
 
 
 # ---------------------------------------------------------------------------
@@ -81,6 +145,16 @@ func _ready() -> void:
 # ---------------------------------------------------------------------------
 
 func _build_panel() -> void:
+	# The face carries everything. mounting=wall leaves it at identity, which is where
+	# the panel's children sat before this node existed.
+	_face = Node3D.new()
+	_face.name = "Face"
+	add_child(_face)
+	_apply_mounting()
+
+	var slot_count: int = _active_columns().size()
+	_label_width_m = panel_size.x / float(slot_count) - 0.06
+
 	var mi := MeshInstance3D.new()
 	var quad := QuadMesh.new()
 	quad.size = panel_size
@@ -90,7 +164,7 @@ func _build_panel() -> void:
 	mat.roughness = 0.85
 	mat.metallic = 0.1
 	mi.material_override = mat
-	add_child(mi)
+	_face.add_child(mi)
 
 	# Frame edges
 	_add_frame_edge(Vector3(0, panel_size.y / 2.0, 0.001), Vector3(panel_size.x + 0.02, 0.015, 0.002))
@@ -98,16 +172,54 @@ func _build_panel() -> void:
 	_add_frame_edge(Vector3(-panel_size.x / 2.0, 0, 0.001), Vector3(0.015, panel_size.y + 0.02, 0.002))
 	_add_frame_edge(Vector3(panel_size.x / 2.0, 0, 0.001), Vector3(0.015, panel_size.y + 0.02, 0.002))
 
-	# Column dividers — two vertical lines at 1/3 and 2/3
-	var third := panel_size.x / 3.0
+	# Column dividers — one between each pair of live columns. At three columns these
+	# land on 1/3 and 2/3, exactly where they were hard-coded; at one column there are
+	# none to draw.
+	var slot := panel_size.x / float(slot_count)
 	var body_top := panel_size.y / 2.0 - 0.08
 	var body_bot := -panel_size.y / 2.0 + 0.12
 	var body_h := body_top - body_bot
-	_add_divider(Vector3(-panel_size.x / 2.0 + third, (body_top + body_bot) / 2.0, 0.001), Vector3(0.004, body_h, 0.001))
-	_add_divider(Vector3(-panel_size.x / 2.0 + third * 2.0, (body_top + body_bot) / 2.0, 0.001), Vector3(0.004, body_h, 0.001))
+	for i in range(1, slot_count):
+		_add_divider(
+			Vector3(-panel_size.x / 2.0 + slot * float(i), (body_top + body_bot) / 2.0, 0.001),
+			Vector3(0.004, body_h, 0.001))
 
 	# Horizontal divider above signal log
 	_add_divider(Vector3(0, -panel_size.y / 2.0 + 0.12, 0.001), Vector3(panel_size.x - 0.04, 0.004, 0.001))
+
+
+## The body the readout stands on.
+## wall    — no body at all: the shipped quad, hanging where it was placed.
+## lectern — a slanted reading face on splayed legs, met by walking up to it.
+## kiosk   — upright on a pedestal, the panel's bottom edge at chest height.
+func _apply_mounting() -> void:
+	match mounting:
+		"lectern":
+			_face.position = Vector3(0, 0.95, 0)
+			_face.rotation_degrees = Vector3(-32.0, 0, 0)
+			_add_support(Vector3(-panel_size.x * 0.34, 0.45, 0.06), Vector3(0.05, 0.90, 0.05))
+			_add_support(Vector3(panel_size.x * 0.34, 0.45, 0.06), Vector3(0.05, 0.90, 0.05))
+			_add_support(Vector3(0, 0.02, 0.10), Vector3(panel_size.x * 0.80, 0.04, 0.34))
+		"kiosk":
+			_face.position = Vector3(0, 1.10 + panel_size.y / 2.0, 0)
+			_add_support(Vector3(0, 0.55, -0.03), Vector3(panel_size.x * 0.40, 1.10, 0.16))
+			_add_support(Vector3(0, 0.03, -0.03), Vector3(panel_size.x * 0.66, 0.06, 0.36))
+
+
+## A structural piece of the mounting — parented to the artifact, NOT to the face, so
+## it stays upright when the face tilts.
+func _add_support(pos: Vector3, size: Vector3) -> void:
+	var mi := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = size
+	mi.mesh = box
+	mi.position = pos
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = COL_FRAME * 0.7
+	mat.roughness = 0.9
+	mat.metallic = 0.2
+	mi.material_override = mat
+	add_child(mi)
 
 
 func _add_frame_edge(pos: Vector3, size: Vector3) -> void:
@@ -122,7 +234,7 @@ func _add_frame_edge(pos: Vector3, size: Vector3) -> void:
 	mat.emission = COL_FRAME * 0.4
 	mat.emission_energy_multiplier = 0.3
 	mi.material_override = mat
-	add_child(mi)
+	_face.add_child(mi)
 
 
 func _add_divider(pos: Vector3, size: Vector3) -> void:
@@ -134,7 +246,7 @@ func _add_divider(pos: Vector3, size: Vector3) -> void:
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = COL_DIVIDER
 	mi.material_override = mat
-	add_child(mi)
+	_face.add_child(mi)
 
 
 # ---------------------------------------------------------------------------
@@ -142,7 +254,10 @@ func _add_divider(pos: Vector3, size: Vector3) -> void:
 # ---------------------------------------------------------------------------
 
 func _build_header() -> void:
-	_title_label = _make_label("SOFT STAGE DASHBOARD", 36, COL_TITLE,
+	var title: String = "SOFT STAGE DASHBOARD"
+	if report != "all":
+		title = "SOFT STAGE — %s" % report.to_upper()
+	_title_label = _make_label(title, 36, COL_TITLE,
 		Vector3(-panel_size.x / 2.0 + 0.04, panel_size.y / 2.0 - 0.035, 0.003),
 		HORIZONTAL_ALIGNMENT_LEFT)
 
@@ -156,33 +271,47 @@ func _build_header() -> void:
 # ---------------------------------------------------------------------------
 
 func _build_columns() -> void:
-	var third := panel_size.x / 3.0
+	var cols: Array[String] = _active_columns()
+	var slot := panel_size.x / float(cols.size())
 	var col_left := -panel_size.x / 2.0 + 0.04
-	var col_mid := col_left + third
-	var col_right := col_left + third * 2.0
 	var top := panel_size.y / 2.0 - 0.08
 
-	# --- ECOSYSTEM column (left) ---
-	_eco_header = _make_label("ECOSYSTEM", 22, COL_ECO, Vector3(col_left, top, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_eco_terrain = _make_label("Terrain: —", 18, COL_VALUE, Vector3(col_left, top - 0.04, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_eco_ambient = _make_label("Ambient: —", 18, COL_VALUE, Vector3(col_left, top - 0.065, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_eco_density = _make_label("Density: —", 18, COL_VALUE, Vector3(col_left, top - 0.09, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_eco_kingdoms = _make_label("Kingdoms: —", 18, COL_VALUE, Vector3(col_left, top - 0.13, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_eco_flags = _make_label("Flags: —", 16, COL_VALUE, Vector3(col_left, top - 0.17, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	# At three columns the slot is panel_size.x / 3, so these x values are identical to
+	# the ones that were written out by hand.
+	for i in range(cols.size()):
+		var x: float = col_left + slot * float(i)
+		match cols[i]:
+			"eco":
+				_build_eco_column(x, top)
+			"haz":
+				_build_haz_column(x, top)
+			"cap":
+				_build_cap_column(x, top)
 
-	# --- HAZARDS column (center) ---
-	_haz_header = _make_label("HAZARDS", 22, COL_HAZ, Vector3(col_mid, top, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_haz_behavior = _make_label("Behavior: —", 18, COL_VALUE, Vector3(col_mid, top - 0.04, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_haz_concurrent = _make_label("Max Concurrent: —", 18, COL_VALUE, Vector3(col_mid, top - 0.065, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_haz_types = _make_label("Types: —", 16, COL_VALUE, Vector3(col_mid, top - 0.11, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_haz_personalities = _make_label("Personalities: —", 16, COL_VALUE, Vector3(col_mid, top - 0.30, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
 
-	# --- CAPABILITY column (right) ---
-	_cap_header = _make_label("CAPABILITY", 22, COL_CAP, Vector3(col_right, top, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_cap_level = _make_label("Level: —", 20, COL_VALUE, Vector3(col_right, top - 0.04, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_cap_verbs = _make_label("Hand Verbs: —", 16, COL_VALUE, Vector3(col_right, top - 0.09, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_cap_movement = _make_label("Movement: —", 16, COL_VALUE, Vector3(col_right, top - 0.30, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
-	_cap_modes = _make_label("Modes: —", 16, COL_VALUE, Vector3(col_right, top - 0.37, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+func _build_eco_column(col: float, top: float) -> void:
+	_eco_header = _make_label("ECOSYSTEM", 22, COL_ECO, Vector3(col, top, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_eco_terrain = _make_label("Terrain: —", 18, COL_VALUE, Vector3(col, top - 0.04, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_eco_ambient = _make_label("Ambient: —", 18, COL_VALUE, Vector3(col, top - 0.065, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_eco_density = _make_label("Density: —", 18, COL_VALUE, Vector3(col, top - 0.09, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_eco_kingdoms = _make_label("Kingdoms: —", 18, COL_VALUE, Vector3(col, top - 0.13, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_eco_flags = _make_label("Flags: —", 16, COL_VALUE, Vector3(col, top - 0.17, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+
+
+func _build_haz_column(col: float, top: float) -> void:
+	_haz_header = _make_label("HAZARDS", 22, COL_HAZ, Vector3(col, top, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_haz_behavior = _make_label("Behavior: —", 18, COL_VALUE, Vector3(col, top - 0.04, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_haz_concurrent = _make_label("Max Concurrent: —", 18, COL_VALUE, Vector3(col, top - 0.065, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_haz_types = _make_label("Types: —", 16, COL_VALUE, Vector3(col, top - 0.11, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_haz_personalities = _make_label("Personalities: —", 16, COL_VALUE, Vector3(col, top - 0.30, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+
+
+func _build_cap_column(col: float, top: float) -> void:
+	_cap_header = _make_label("CAPABILITY", 22, COL_CAP, Vector3(col, top, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_cap_level = _make_label("Level: —", 20, COL_VALUE, Vector3(col, top - 0.04, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_cap_verbs = _make_label("Hand Verbs: —", 16, COL_VALUE, Vector3(col, top - 0.09, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_cap_movement = _make_label("Movement: —", 16, COL_VALUE, Vector3(col, top - 0.30, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
+	_cap_modes = _make_label("Modes: —", 16, COL_VALUE, Vector3(col, top - 0.37, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
 
 
 # ---------------------------------------------------------------------------
@@ -202,7 +331,8 @@ func _append_log(manager_short: String, signal_name: String, detail: String) -> 
 	_log_entries.append(entry)
 	if _log_entries.size() > MAX_LOG:
 		_log_entries = _log_entries.slice(_log_entries.size() - MAX_LOG)
-	_log_label.text = "\n".join(_log_entries)
+	if is_instance_valid(_log_label):
+		_log_label.text = "\n".join(_log_entries)
 
 
 # ---------------------------------------------------------------------------
@@ -312,10 +442,17 @@ func _refresh_all() -> void:
 
 
 func _refresh_header() -> void:
+	if not is_instance_valid(_stage_label):
+		return
 	_stage_label.text = "Stage: %d / %s" % [_current_stage_order, _current_stage_name]
 
 
 func _refresh_ecosystem() -> void:
+	# A column the current `report` did not build has no labels to write into. The
+	# manager signals stay connected either way, so the log still records everything
+	# that happens — only the readout narrows.
+	if not is_instance_valid(_eco_header):
+		return
 	var eco = get_node_or_null("/root/EcosystemManager")
 	if not eco:
 		_eco_header.text = "ECOSYSTEM (not loaded)"
@@ -336,6 +473,8 @@ func _refresh_ecosystem() -> void:
 
 
 func _refresh_hazards() -> void:
+	if not is_instance_valid(_haz_header):
+		return
 	var haz = get_node_or_null("/root/HazardManager")
 	if not haz:
 		_haz_header.text = "HAZARDS (not loaded)"
@@ -359,6 +498,8 @@ func _refresh_hazards() -> void:
 
 
 func _refresh_capability() -> void:
+	if not is_instance_valid(_cap_header):
+		return
 	var cap = get_node_or_null("/root/CatalystCapabilityManager")
 	if not cap:
 		_cap_header.text = "CAPABILITY (not loaded)"
@@ -404,9 +545,11 @@ func _make_label(text: String, size: int, color: Color, pos: Vector3, align: int
 	lbl.horizontal_alignment = align
 	lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 	lbl.modulate = color
-	lbl.width = (panel_size.x / 3.0 - 0.06) / 0.001  # Wrap within column
+	# Wrap within column. At report=all this is panel_size.x / 3 - 0.06, the value that
+	# used to be written here directly.
+	lbl.width = _label_width_m / 0.001
 	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
-	add_child(lbl)
+	_face.add_child(lbl)
 	return lbl
 
 
@@ -419,11 +562,65 @@ func _short_name(hazard_type: String) -> String:
 	return hazard_type
 
 
+## Rebuild the face for a changed report or mounting. The manager signals are NOT
+## reconnected — they are bound to methods on this node, which survives — so this
+## cannot double-connect. The log's accumulated entries survive too and are reprinted.
+func _rebuild() -> void:
+	for c in get_children():
+		c.queue_free()
+	_face = null
+	_title_label = null
+	_stage_label = null
+	_eco_header = null
+	_eco_terrain = null
+	_eco_ambient = null
+	_eco_density = null
+	_eco_kingdoms = null
+	_eco_flags = null
+	_haz_header = null
+	_haz_behavior = null
+	_haz_concurrent = null
+	_haz_types = null
+	_haz_personalities = null
+	_cap_header = null
+	_cap_level = null
+	_cap_verbs = null
+	_cap_movement = null
+	_cap_modes = null
+	_log_label = null
+
+	_build_panel()
+	_build_header()
+	_build_columns()
+	_build_signal_log()
+	_refresh_all()
+	if _log_entries.size() > 0 and is_instance_valid(_log_label):
+		_log_label.text = "\n".join(_log_entries)
+
+
 ## Grid system integration
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("panel_scale"):
 		var s := float(config_data["panel_scale"])
 		scale = Vector3(s, s, s)
+
+	# The grid calls this DEFERRED, after _ready has already built the panel once, so
+	# the rebuild is gated twice: only on a value that actually changed, and only once
+	# there is something built to replace.
+	var wants_rebuild: bool = false
+	if config_data.has("report"):
+		var r: String = str(config_data["report"])
+		if r != report:
+			report = r
+			wants_rebuild = true
+	if config_data.has("mounting"):
+		var m: String = str(config_data["mounting"])
+		if m != mounting:
+			mounting = m
+			wants_rebuild = true
+	if wants_rebuild and _built:
+		_rebuild()
+
 	if config_data.has("show_log") and not config_data["show_log"]:
 		if _log_label:
 			_log_label.visible = false

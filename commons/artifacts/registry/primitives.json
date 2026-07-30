@@ -911,6 +911,24 @@
    }
   },
   "animatedcubebuilder": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "order": [
+      "ascend",
+      "descend",
+      "together"
+     ],
+     "closure": [
+      "strata",
+      "scaffold",
+      "solid"
+     ]
+    },
+    "default": "order=ascend, closure=strata - ascend is the shipped chain (vertices at 0.5s, edges at 0.2s, triangles at 0.15s, unchanged timings) and strata is the shipped ending, where nothing is hidden because create_final_mesh() has been commented out for years; the 6 existing placements are byte-for-byte the same animation",
+    "was": "no exports at all - the sweep refused it as NO TURNABLE KNOBS. Its own @identity names the animation sequence as its critical parameter, but that sequence was welded into a state machine that could only run one direction and could only end one way. order=descend runs the same machine backwards and argues the opposite thesis (a solid DECOMPOSES into faces, edges, corners) instead of the shipped one (dimension ACCUMULATES); order=together removes the dimensional narrative entirely, which is the null case. closure=solid restores the dead create_final_mesh() lineage as a declared choice."
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Animated construction sequence that steps from vertices to edges to full cube mesh with grab handles.",
@@ -4213,7 +4231,25 @@
     "derived_at": "2026-04-29T09:39:46.188276Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "Eight grab spheres, one per corner, and the cube turns out to be a treaty among vertices: drag one and the faces re-triangulate around your decision. Rigidity revealed as a default, not a property."
+   "qfep_connection": "Eight grab spheres, one per corner, and the cube turns out to be a treaty among vertices: drag one and the faces re-triangulate around your decision. Rigidity revealed as a default, not a property.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "handles": [
+      "corners",
+      "top",
+      "diagonal"
+     ],
+     "triangulation": [
+      "fixed",
+      "shortest"
+     ]
+    },
+    "default": "handles=corners, triangulation=fixed - all eight spheres live and every quad split on the author's a-c diagonal, which is the exact historical triangle list, so all 6 existing placements are unchanged",
+    "was": "no axes of its own: the treaty was hard-coded to eight signatories in a for i in range(8), and each face carried a fixed seam written out twice as a literal triangle list in create_vr_cube() and update_cube_mesh()",
+    "note": "triangulation is DEFORMATION-VISIBLE ONLY - at rest the cube is square and both diagonals are equal, so a still capture of an untouched cube scores the two modes identical. The axis bites when a corner is dragged, which a still cannot show; judge it from a deformed frame or not at all."
+   }
   },
   "cube_with_shader": {
    "category": "unknown",
@@ -15255,6 +15291,27 @@
    "qfep_connection": "The pyramid with handles: reshape the base, drag the apex, watch the volume answer. Solid geometry made clay — the subject confirmed by deformation, the walker learning a shape by breaking and remaking it."
   },
   "pyramidlong": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "stature": [
+      "mound",
+      "even",
+      "spire",
+      "needle"
+     ],
+     "apex_stance": [
+      "centred",
+      "edge",
+      "corner",
+      "beyond"
+     ]
+    },
+    "default": "stature=spire, apex_stance=centred - spire returns the literal 2.8 the artifact shipped with rather than a computed ratio, and centred is the original (0, height, 0), so the five vertices and the six-face table are bit-for-bit what they were and the 6 existing placements are unchanged.",
+    "was": "No exports at all - the sweep refused it as NO TURNABLE KNOBS. pyramid_height 2.8, base_width 0.8 and base_length 0.8 were private vars, and the apex was hard-coded to (0, pyramid_height, 0). The @identity block already named the constant that mattered - 'critical_parameter: pyramid_height = 2.8 - taller than wide' - but it could not be turned, so every placement showed the same pink spire.",
+    "note": "Hand promotion. stature is not a size knob: the base never moves, only the proportion above it, which is exactly the claim in this artifact's truth line - same topology, different story. mound is half the base, even squares the profile, needle doubles the spire again. apex_stance is borrowed verbatim from the pyramid sibling promoted the same day, so the two read as one family and a leaning spire can be compared with a leaning mound. base_sides was deliberately NOT taken here: the sibling already owns that axis, and this artifact's own hidden constant is the aspect ratio."
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Procedurally models a long rectangular pyramid primitive with computed faces and materials.",
@@ -18287,6 +18344,31 @@
    "qfep_connection": "Six loose grabbable points and a ladder printed on the label: two make a line, three a triangle, four a tetrahedron. Dimension is not a container you enter but a count of commitments between neighbours."
   },
   "snap_octahedron_puzzle": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "solid": [
+      "loose",
+      "closed",
+      "scattered",
+      "short"
+     ],
+     "dual": [
+      "off",
+      "around",
+      "inside",
+      "both"
+     ]
+    },
+    "default": "solid=loose, dual=off - loose leaves the six points on the exact .tscn transforms and off adds no cube at all, so both defaults take the pre-promotion code path and all 9 existing placements render unchanged",
+    "was": "zero declared axes: every position frozen in snap_octahedron_puzzle.tscn - six points hovering near, but not on, the answer. The solved octahedron existed only as a transient side-effect of a player finishing it, and the cube this thing is the dual OF was asserted by the label and never drawn",
+    "note": "declared by hand 2026-07-29 - both axes were already written into the script (@export_enum solid and dual, with their own DNA comment blocks) and the registry had never been told, so the sweep could not reach them. solid is shared verbatim with snap_tetrahedron_puzzle: siblings with one geometry problem at two counts",
+    "axis_notes": {
+     "solid": "how much of the order is pre-given. short (five vertices built, the apex absent, the twelve-edge outline drawn as dashed ghosts around a 0.40 m aperture) is the value that earns the axis - a form that cannot be closed",
+     "dual": "which side of the octahedron-cube duality is actually drawn. both nests the circumscribing and inscribed cubes at once, turning duality from a pair into a ladder"
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Interactive puzzle where connecting 6 snap points forms an octahedron that spawns a walkable prism.",

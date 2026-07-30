@@ -2363,6 +2363,26 @@
    }
   },
   "example_2_5_fluid_resistance_vr": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "mass_spread": [
+      "ladder",
+      "uniform",
+      "extreme"
+     ],
+     "medium": [
+      "basin",
+      "layered",
+      "ambient"
+     ]
+    },
+    "default": "mass_spread=ladder, medium=basin - the shipped code path exactly (masses 0.6/1.0/1.4/2.0/2.6 at the same five spawn points, one translucent box of depth 0.45 with the same material and label), so every existing placement is unchanged; no map carries a #mass_spread: or #medium: token",
+    "was": "zero exports. Three sliders that turn the LAW (drag, gravity, depth) and nothing that turns the EXPERIMENT: the five masses and the single box of fluid were hard-coded, so the demo's own claim - heavier objects fall faster through the same fluid - had no control to be tested against",
+    "note": "Declared by hand 2026-07-29; the runner refused it for NO TURNABLE KNOBS. mass_spread=uniform is the control group: five IDENTICAL bodies descend together, proving the separation was mass and not the medium. medium asks whether resistance is a place you enter (basin, with a surface to cross) or a condition you are in (ambient, no boundary, drag from the first frame); layered gives the fluid an inside, so terminal velocity stops being a property of the object and becomes a property of where in the medium it is.",
+    "sweep_note": "NOT REACHABLE BY THE CURRENT SWEEP HARNESS, and that is a fact about the scene shape, not about the axes. This scene's root is an unscripted Node3D (the whole NOC forces family is root -> FishTank -> Demo) and both the harness and the grid call apply_grid_config on the ROOT only, so it never arrives at this script. The axes ARE reachable from a map token, via the config_<key> metadata the grid writes onto the root before the scene enters the tree - the script reads it in _ready. If a sweep of this token renders identical frames, that is the harness meeting an unscripted root; judge it from a map capture."
+   },
    "capacity": "FEEL that drag is the medium's memory of your velocity — the faster you move, the harder the world pushes back",
    "category": "unknown",
    "complexity": "beginner",

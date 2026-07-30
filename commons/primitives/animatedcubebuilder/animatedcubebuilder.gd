@@ -12,7 +12,35 @@ extends Node3D
 # relationships: depends on triangle (faces) and line (edges) concepts; precursor to animating fractals
 # truth: dimension accumulates — points make edges, edges make faces, faces make solids
 
+# STAGE-2 DNA PROMOTION (2026-07-29). The artifact had no exports: the whole
+# argument — "dimension accumulates: points make edges, edges make faces" — was
+# frozen in a hard-coded state machine that could only run one way and could only
+# end one way. Its own @identity names the animation sequence as its critical
+# parameter, so that is what gets lifted:
+#
+#   order    the direction the build argues in   ascend · descend · together
+#   closure  what stands when the build ends     strata · scaffold · solid
+#
+# order=ascend is the shipped path (vertices → edges → triangles) and
+# closure=strata is the shipped ending (nothing is hidden; all three layers are
+# left standing, because create_final_mesh() was commented out years ago). Both
+# defaults reproduce the existing behaviour exactly, timings included.
+#
+# descend runs the same machine backwards — faces, then edges, then corners — and
+# argues the opposite: a solid DECOMPOSES into lower-dimensional elements.
+# together reveals everything at once and argues nothing about dimension at all,
+# which is the useful null case for the sweep.
+#
+# Usage in map_data.json:
+#   "animatedcubebuilder#order:descend"
+#   "animatedcubebuilder#closure:solid"
+
 const HANDLE_SCENE := preload("res://commons/primitives/point/grab_sphere_point.tscn")
+
+## DNA axis: the direction the construction runs.
+@export var order: String = "ascend"
+## DNA axis: what remains visible once the build completes.
+@export var closure: String = "strata"
 
 # Animation states
 enum BuildState {
@@ -27,6 +55,13 @@ enum BuildState {
 var current_state = BuildState.WAITING
 var animation_step = 0
 var cube_size = 1.0
+
+# The build read as an ordered list of phases instead of a hard-wired chain, so
+# the same machine can run either direction. Populated by start_animation().
+var _phases: Array = ["vertices", "edges", "triangles"]
+var _phase_index: int = 0
+var _triangles_built: bool = false
+var _built: bool = false
 
 # Cube vertices (8 corners)
 var vertices = [
@@ -101,6 +136,7 @@ func _ready():
 	# Start after a brief delay to allow VR user to focus
 	await get_tree().create_timer(initial_delay).timeout
 	start_animation()
+	_built = true
 
 func setup_scene():
 	# Pre-create all visual elements (invisible initially)
@@ -193,6 +229,11 @@ func create_line_mesh(start: Vector3, end: Vector3) -> MeshInstance3D:
 	return mesh_instance
 
 func create_triangle_meshes():
+	# order=descend needs the faces before the 3 s timer in setup_scene fires, so
+	# this can now be called early; the flag keeps it from building 12 more later.
+	if _triangles_built:
+		return
+	_triangles_built = true
 	for triangle in triangles:
 		var mesh_instance = MeshInstance3D.new()
 		var st = SurfaceTool.new()
@@ -291,9 +332,94 @@ func create_final_mesh():
 	add_child(final_cube_mesh)
 
 func start_animation():
-	current_state = BuildState.SHOWING_VERTICES
+	_phases = _phase_order()
+	_phase_index = 0
 	animation_step = 0
 	current_step_time = 0.0
+	if _phases.is_empty():
+		# order=together — no dimensional narrative, the cube simply is
+		create_triangle_meshes()
+		for sphere in vertex_spheres:
+			sphere.visible = true
+		for line in edge_lines:
+			line.visible = true
+		for triangle in triangle_meshes:
+			triangle.visible = true
+		current_state = BuildState.COMPLETE
+		_finish()
+		return
+	_enter_phase()
+
+
+## DNA axis order, read as a phase list. ascend is the shipped chain.
+func _phase_order() -> Array:
+	match order:
+		"descend":
+			return ["triangles", "edges", "vertices"]
+		"together":
+			return []
+		_:
+			return ["vertices", "edges", "triangles"]
+
+
+func _state_for(phase: String) -> int:
+	match phase:
+		"edges":
+			return BuildState.SHOWING_EDGES
+		"triangles":
+			return BuildState.SHOWING_TRIANGLES
+		_:
+			return BuildState.SHOWING_VERTICES
+
+
+func _enter_phase() -> void:
+	var phase: String = str(_phases[_phase_index])
+	if phase == "triangles":
+		create_triangle_meshes()
+	animation_step = 0
+	current_step_time = 0.0
+	current_state = _state_for(phase)
+
+
+func _advance_phase() -> void:
+	animation_step_completed.emit(str(_phases[_phase_index]) + "_complete")
+	_phase_index += 1
+	if _phase_index >= _phases.size():
+		animation_step = 0
+		current_step_time = 0.0
+		current_state = BuildState.COMPLETE
+		_finish()
+		return
+	_enter_phase()
+
+
+## DNA axis closure — what the finished build leaves standing.
+func _finish() -> void:
+	match closure:
+		"scaffold":
+			# The diagram without its surface: corners and edges only.
+			for triangle in triangle_meshes:
+				if is_instance_valid(triangle):
+					triangle.visible = false
+		"solid":
+			# The lineage that was commented out: the scaffold dissolves into one
+			# shaded mesh. The vertex handles stay, so the solid can still be
+			# deformed by its corners — _update_geometry_from_handles already
+			# rebuilds the final mesh when it is visible.
+			if not is_instance_valid(final_cube_mesh):
+				create_final_mesh()
+			for line in edge_lines:
+				if is_instance_valid(line):
+					line.visible = false
+			for triangle in triangle_meshes:
+				if is_instance_valid(triangle):
+					triangle.visible = false
+			if is_instance_valid(final_cube_mesh):
+				final_cube_mesh.visible = true
+		_:
+			# strata — the shipped ending: nothing is hidden, all three layers are
+			# left standing and the cube is its own exploded diagram.
+			pass
 
 func _process(delta):
 	current_step_time += delta
@@ -324,11 +450,7 @@ func animate_vertices(_delta):
 		current_step_time = 0.0
 		
 		if animation_step >= vertices.size():
-			# Move to next phase
-			current_state = BuildState.SHOWING_EDGES
-			animation_step = 0
-			current_step_time = 0.0
-			animation_step_completed.emit("vertices_complete")
+			_advance_phase()
 	
 	# Note: Blinking animation removed since grab spheres handle their own appearance
 
@@ -342,10 +464,7 @@ func animate_edges(_delta):
 		current_step_time = 0.0
 		
 		if animation_step >= edges.size():
-			current_state = BuildState.SHOWING_TRIANGLES
-			animation_step = 0
-			current_step_time = 0.0
-			animation_step_completed.emit("edges_complete")
+			_advance_phase()
 
 func animate_triangles(_delta):
 	# Show triangles progressively
@@ -357,9 +476,7 @@ func animate_triangles(_delta):
 		current_step_time = 0.0
 		
 		if animation_step >= triangles.size():
-			current_state = BuildState.COMPLETE
-			current_step_time = 0.0
-			animation_step_completed.emit("triangles_complete")
+			_advance_phase()
 
 func animate_final_mesh(_delta):
 	# Wait a moment, then transition to final mesh
@@ -386,24 +503,35 @@ func animate_complete_rotation(delta):
 func restart_animation():
 	# Hide everything and restart
 	for sphere in vertex_spheres:
-		sphere.visible = false
+		if is_instance_valid(sphere):
+			sphere.visible = false
 	for line in edge_lines:
-		line.visible = false
+		if is_instance_valid(line):
+			line.visible = false
 	for triangle in triangle_meshes:
-		triangle.visible = false
-	final_cube_mesh.visible = false
-	
+		if is_instance_valid(triangle):
+			triangle.visible = false
+	# final_cube_mesh only exists under closure=solid
+	if is_instance_valid(final_cube_mesh):
+		final_cube_mesh.visible = false
+
 	start_animation()
 
 func skip_to_final():
 	current_state = BuildState.COMPLETE
 	for sphere in vertex_spheres:
-		sphere.visible = false
+		if is_instance_valid(sphere):
+			sphere.visible = false
 	for line in edge_lines:
-		line.visible = false
+		if is_instance_valid(line):
+			line.visible = false
 	for triangle in triangle_meshes:
-		triangle.visible = false
-	final_cube_mesh.visible = true
+		if is_instance_valid(triangle):
+			triangle.visible = false
+	if not is_instance_valid(final_cube_mesh):
+		create_final_mesh()
+	if is_instance_valid(final_cube_mesh):
+		final_cube_mesh.visible = true
 
 func set_animation_speed(speed_multiplier: float):
 	step_duration = 0.5 / speed_multiplier
@@ -425,19 +553,27 @@ func get_current_phase() -> String:
 			return "waiting"
 
 func get_progress_percentage() -> float:
-	match current_state:
-		BuildState.SHOWING_VERTICES:
-			return (animation_step / float(vertices.size())) * 0.25
-		BuildState.SHOWING_EDGES:
-			return 0.25 + (animation_step / float(edges.size())) * 0.25
-		BuildState.SHOWING_TRIANGLES:
-			return 0.5 + (animation_step / float(triangles.size())) * 0.25
-		BuildState.SHOWING_FINAL_MESH:
-			return 0.75 + (current_step_time / step_duration) * 0.25
-		BuildState.COMPLETE:
-			return 1.0
+	# Phase-index based, so it stays honest whichever direction order runs.
+	if current_state == BuildState.COMPLETE:
+		return 1.0
+	if _phases.is_empty() or current_state == BuildState.WAITING:
+		return 0.0
+	var share: float = 1.0 / float(_phases.size())
+	var items: int = _phase_item_count(str(_phases[_phase_index]))
+	var within: float = 0.0
+	if items > 0:
+		within = clamp(float(animation_step) / float(items), 0.0, 1.0)
+	return clamp(share * (float(_phase_index) + within), 0.0, 1.0)
+
+
+func _phase_item_count(phase: String) -> int:
+	match phase:
+		"edges":
+			return edges.size()
+		"triangles":
+			return triangles.size()
 		_:
-			return 0.0
+			return vertices.size()
 
 # Grab sphere interaction functions
 func _handles_changed() -> bool:
@@ -588,3 +724,22 @@ func _rebuild_final_mesh() -> void:
 		st.add_vertex(v2)
 
 	final_cube_mesh.mesh = st.commit()
+
+
+## Guarded: only restart when a declared axis actually changed AND the first build
+## has already run. Restarting unconditionally here would reset the animation of
+## every shipped placement each time the grid hands it a config.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var changed: bool = false
+	if config_data.has("order"):
+		var o: String = str(config_data["order"]).to_lower()
+		if o != order:
+			order = o
+			changed = true
+	if config_data.has("closure"):
+		var c: String = str(config_data["closure"]).to_lower()
+		if c != closure:
+			closure = c
+			changed = true
+	if changed and _built and is_inside_tree():
+		restart_animation()

@@ -658,6 +658,26 @@
   "additive_wave_demo": {
    "category": "waves",
    "complexity": "intermediate",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "waveform": [
+      "sine",
+      "square",
+      "sawtooth",
+      "triangle",
+      "clear"
+     ],
+     "components": [
+      "ladder",
+      "overlay",
+      "hidden"
+     ]
+    },
+    "default": "waveform=sine, components=ladder - sine writes the same [1,0,0,0,0] amplitudes the sliders were already initialised with, and ladder is the legacy -0.35 - h*0.15 stack, so all 9 existing placements render exactly as before",
+    "was": "five NodePath exports and nothing turnable: every placement showed one green sine, four dead slider tracks and the label f(t) = 1.0 sin(wt). The Fourier claim was written on the label and never shown, because the only way to see a second harmonic was to be in VR with a hand on a slider."
+   },
    "description": "Interactive demonstration of additive wave synthesis — layer sine waves of different frequencies and amplitudes to build complex waveforms. Visualizes Fourier's fundamental insight that any shape can be constructed from simple oscillations.",
    "dev_themes": [
     "commons",
@@ -13199,6 +13219,26 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "regime": [
+      "ringing",
+      "underdamped",
+      "critical",
+      "overdamped"
+     ],
+     "trace": [
+      "off",
+      "phase",
+      "wave"
+     ]
+    },
+    "default": "regime=ringing, trace=off - ringing is a no-op that leaves damping_c at its shipped 0.2 and the damping slider at its shipped 0..2 range, and trace=off builds no mesh, so the 7 existing placements gain nothing and lose nothing",
+    "was": "a demo whose own truth line names three regimes - ringing, critical, sluggish - while its slider topped out at c=2.0 against a critical damping of 6.32, so only the first was reachable; and a 300-sample phase-space trail collected every physics frame and never drawn",
+    "note": "declared by hand 2026-07-29 - the artifact exposed only three NodePaths, so the stage-2 sweep found no turnable knobs and declined it. regime is set as a damping RATIO (zeta = c / c_crit), so it survives changes to k and m, and it widens the damping slider so the named state is holdable by hand rather than only settable from a map token."
    }
   },
   "spring_network": {

@@ -7409,6 +7409,33 @@
     "music_theory",
     "physics"
    ],
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "consonance_theory": [
+      "western",
+      "blues",
+      "ratio",
+      "flat"
+     ],
+     "opening_chord": [
+      "maj7",
+      "major",
+      "minor",
+      "dom7",
+      "min7",
+      "dim",
+      "aug",
+      "sus4",
+      "sus2",
+      "tritone"
+     ]
+    },
+    "default": "consonance_theory=western, opening_chord=maj7 - the hard-coded CONSONANCE table and the hard-coded node_pitches [0,4,7,11], so all 6 existing placements show the same Cmaj7 at the same tension as before",
+    "was": "zero exports, and a QFEP audit in its own header admitting the consonance table 'shows ONE theory of tension, not a universal law' - the admission was a comment, the table was the law",
+    "note": "consonance_theory is the axis the file asked for: under blues the dominant seventh goes slack and the major seventh is the one that will not sit still; under flat no interval is privileged and the springs stop arguing at all"
+   },
    "include_in_map_data": true,
    "lookup_name": "chord_tension_spring",
    "map_ready": true,

@@ -10,8 +10,6 @@ class_name AdditiveWaveDemo
 ## Sliders control amplitudes of harmonics 1–5; preset detection identifies
 ## square, sawtooth, and triangle waves by their harmonic signatures.
 
-## Path to the fundamental frequency slider in the scene tree
-
 # @identity
 # essence: f(x) = sum(a_n * sin(n * omega * x)) — Fourier additive synthesis
 # desire: Stack harmonics with VR sliders and watch complex waveforms build from pure sines
@@ -22,6 +20,43 @@ class_name AdditiveWaveDemo
 # relationships: depends on fundamental + harmonics; contrasts with timbre_sculptor (visual vs audible synthesis); unlocks Fourier intuition
 # truth: Any periodic function is a sum of sines; complexity is superposition of simplicity.
 
+## STAGE-2 DNA PROMOTION (2026-07-29). Before this the demo had five NodePath
+## exports and nothing else turnable: every one of its 9 placements showed the
+## identical frame — one green sine, the label "f(t) = 1.0·sin(ωt)", four dead
+## slider tracks. The Fourier claim ("any shape is a sum of sines") was written on
+## the label and never shown, because the only way to see a second harmonic was to
+## be in VR with your hand on a slider. A still of this artifact argued nothing.
+##
+## Two axes, both lifted from constants that were already in this file:
+##
+##   waveform    WHICH sum the demo stands at    sine · square · sawtooth · triangle · clear
+##               (the amplitude tables in set_preset, previously reachable only by a
+##               caller nobody wrote)
+##   components  HOW the parts are shown         ladder · overlay · hidden
+##               (the -0.35 - h*0.15 vertical offset in _draw_component_waves)
+##
+## The two axes argue different things. `waveform` decides whether the visitor
+## meets synthesis at its start (a bare sine, build it yourself) or at its end (a
+## sawtooth, already assembled — complexity as the normal case). `components`
+## decides whether the harmonics are an INGREDIENT LIST hung below the result
+## (ladder), a literal SUPERPOSITION drawn on the same axis so the sum is visibly
+## the lines added (overlay), or withheld so only the result shows (hidden) — the
+## black-box reading, where a waveform is a shape and not a sum.
+##
+## waveform=sine + components=ladder is exactly the pre-promotion behaviour and is
+## the default, so all 9 existing placements are untouched.
+##
+## Usage in map_data.json:
+##   "additive_wave_demo"
+##   "additive_wave_demo#waveform:sawtooth"
+##   "additive_wave_demo#waveform:square#components:overlay"
+
+## Which harmonic signature the demo stands at when a visitor arrives.
+@export_enum("sine", "square", "sawtooth", "triangle", "clear") var waveform: String = "sine"
+## How the individual harmonics are drawn against the sum.
+@export_enum("ladder", "overlay", "hidden") var components: String = "ladder"
+
+## Path to the fundamental frequency slider in the scene tree
 @export var fundamental_slider_path: NodePath = "ControlPanel/FundamentalSlider"
 ## Path to the 2nd harmonic slider
 @export var harmonic2_slider_path: NodePath = "ControlPanel/Harmonic2Slider"
@@ -55,6 +90,11 @@ var _time: float = 0.0
 
 ## Dirty flag — set when harmonic parameters change so labels are rebuilt
 var _dirty: bool = true
+
+## True once _ready has built the meshes. apply_grid_config must not touch the
+## visualization before that: the ImmediateMesh objects do not exist yet, and a
+## rebuild from an empty state is how shipped placements get broken.
+var _built: bool = false
 
 ## Cached ImmediateMesh objects (reused each frame instead of allocating new ones)
 var _combined_im: ImmediateMesh
@@ -93,6 +133,11 @@ func _ready() -> void:
 
 	_setup_sliders()
 	_setup_component_meshes()
+	# DNA axes. waveform=sine writes exactly the amplitudes the sliders were just
+	# given ([1,0,0,0,0]), so the default path is a no-op on the legacy look.
+	show_components = components != "hidden"
+	set_preset(waveform)
+	_built = true
 	_update_visualization()
 
 ## Connects slider nodes to harmonic amplitude controls
@@ -195,7 +240,9 @@ func _draw_component_waves() -> void:
 		im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 
 		var color = harmonic_colors[h]
-		color.a = 0.4
+		# overlay draws the parts ON the sum, so they must be fainter than the
+		# ladder's already-faint 0.4 or the result is unreadable through them
+		color.a = 0.28 if components == "overlay" else 0.4
 
 		for i in range(WAVE_POINTS):
 			var t = float(i) / (WAVE_POINTS - 1)
@@ -206,10 +253,18 @@ func _draw_component_waves() -> void:
 			var y = harmonic_amplitudes[h] * sin(phase * (h + 1))
 
 			im.surface_set_color(color)
-			# Offset each harmonic vertically — tighter spacing to keep compact
-			im.surface_add_vertex(Vector3(x, y * 0.2 - 0.35 - h * 0.15, 0.1))
+			im.surface_add_vertex(_component_vertex(x, y, h))
 
 		im.surface_end()
+
+## Where one harmonic's sample sits, per the `components` axis.
+## ladder  — stacked below the sum, an ingredient list (legacy: y*0.2 - 0.35 - h*0.15)
+## overlay — drawn at the sum's own scale and on its own axis, so the combined
+##           wave is visibly these lines added rather than a shape beside them
+func _component_vertex(x: float, y: float, h: int) -> Vector3:
+	if components == "overlay":
+		return Vector3(x, y * 0.3, 0.02)
+	return Vector3(x, y * 0.2 - 0.35 - h * 0.15, 0.1)
 
 ## Computes the sum of all harmonics at the given phase angle
 func _calculate_wave_value(phase: float) -> float:
@@ -307,6 +362,29 @@ func toggle_components() -> void:
 	show_components = not show_components
 	_dirty = true
 
-## Grid system integration
+## Grid system integration.
+## Guarded: nothing is redrawn unless a value actually changed AND _ready has already
+## built the meshes once. An unguarded rebuild here would break the placements this
+## promotion exists to leave alone.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	var changed: bool = false
+	if config_data.has("waveform"):
+		var w: String = str(config_data["waveform"])
+		if w != waveform:
+			waveform = w
+			changed = true
+	if config_data.has("components"):
+		var c: String = str(config_data["components"])
+		if c != components:
+			components = c
+			changed = true
+	if not changed or not _built:
+		return
+	show_components = components != "hidden"
+	set_preset(waveform)
+	if not show_components and component_meshes:
+		for child in component_meshes.get_children():
+			var m: MeshInstance3D = child as MeshInstance3D
+			if m:
+				m.visible = false
+	_update_visualization()

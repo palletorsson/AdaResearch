@@ -109,6 +109,26 @@
 				"approach_dir": "front",
 				"derived_at": "2026-04-29T09:39:46.231769Z",
 				"derived_from": "aabb_size + category"
+			},
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"report": [
+						"all",
+						"ecosystem",
+						"hazards",
+						"capability"
+					],
+					"mounting": [
+						"wall",
+						"lectern",
+						"kiosk"
+					]
+				},
+				"default": "report=all, mounting=wall - the shipped three-column layout at a third of the panel each, and no body under the quad. The column x positions, the divider positions and the label wrap width all fall out of the general code at panel_size.x / 3, so the 7 existing placements are unchanged.",
+				"was": "three co-equal columns hard-coded at a third of the panel each, so every room made the same claim about the world - that ecosystem, hazards and capability weigh the same - whether or not the room was about all three; and a quad floating at the placement origin with nothing holding it, despite a docstring calling it wall-mounted",
+				"note": "declared by hand 2026-07-29 - the sweep refused this artifact because panel_size was its only export and a size is not an argument. The argument-carrying constants were inside the builder: which managers get a column, and what body the readout has. Manager signals stay connected in every report mode, so the signal log still records all three - only the readout narrows."
 			}
 		},
 		"progression_driver": {

@@ -19,12 +19,58 @@
 
 extends Node3D
 
+## STAGE-2 DNA PROMOTION (2026-07-29).
+##
+## The three sliders on the rack turn the LAW (drag, gravity, depth). Nothing could turn
+## the EXPERIMENT. Two things were hard-coded that carry the whole argument:
+##
+##   mass_spread  the bodies dropped into the fluid   ladder · uniform · extreme
+##   medium       what the fluid IS                   basin · layered · ambient
+##
+## mass_spread is the demo's own claim, made falsifiable. "Heavier objects fall faster
+## through the same fluid" is only visible against a control: `uniform` drops five
+## IDENTICAL bodies, so they descend together and the separation you saw before is
+## proved to have been mass, not the medium. `extreme` splits the five into two castes
+## and states the same claim in its harshest reading — mass as privilege.
+##
+## medium asks whether resistance is a place you enter or a condition you are in.
+## `basin` is a box with a surface: there is a before and an after, and the drag arrows
+## switch on at the boundary. `layered` gives the fluid an inside — the lower half is
+## denser, so terminal velocity stops being a property of the object and becomes a
+## property of where in the medium the object is. `ambient` removes the boundary: no
+## surface, no entry, drag everywhere from the first frame, nothing to fall INTO.
+##
+## mass_spread=ladder, medium=basin is the pre-promotion behaviour EXACTLY — same five
+## masses, same spawn points, same single box, same material — and it is the default, so
+## the 6 existing placements are unchanged.
+##
+## Usage in map_data.json:
+##   "example_2_5_fluid_resistance_vr#mass_spread:uniform"
+##   "example_2_5_fluid_resistance_vr#medium:layered#mass_spread:extreme"
+
+## The bodies dropped into the fluid. ladder = the graded 0.6..2.6 ramp (legacy
+## default); uniform = five identical bodies, the control that proves mass did it;
+## extreme = three light and two heavy, two castes in one medium.
+@export_enum("ladder", "uniform", "extreme") var mass_spread: String = "ladder"
+## What the fluid is. basin = one box with a surface to cross (legacy default);
+## layered = a denser lower half, so depth changes the law; ambient = no boundary at
+## all, drag everywhere, nothing to enter.
+@export_enum("basin", "layered", "ambient") var medium: String = "basin"
+
 const DEFAULT_GRAVITY := 0.9
 const DEFAULT_DRAG_COEFF := 0.8
 const DEFAULT_FLUID_DEPTH := 0.45
 const ARROW_LENGTH_SCALE := 0.6
 const MIN_ARROW_LENGTH := 0.08
 const MAX_ARROW_LENGTH := 0.9
+
+# The three mass populations. Same length and same spawn points in every case, so only
+# the masses differ — which is the point of having a control at all.
+const MASS_LADDER := [0.6, 1.0, 1.4, 2.0, 2.6]
+const MASS_UNIFORM := [1.4, 1.4, 1.4, 1.4, 1.4]
+const MASS_EXTREME := [0.4, 0.5, 0.6, 2.8, 3.4]
+# How much thicker the lower half of a layered medium is.
+const LAYER_DENSITY := 2.5
 
 var movers: Array[Mover] = []
 var mover_labels: Dictionary = {}
@@ -43,9 +89,23 @@ var _gravity_slider: Node3D
 var _depth_slider: Node3D
 
 var fluid_volume: MeshInstance3D
+var fluid_volume_lower: MeshInstance3D
 var auto_reset_timer: Timer
+var _built: bool = false
+
+# Where the five bodies are released. Identical across every mass_spread, so the only
+# difference between the populations is what they weigh.
+var spawn_positions: Array = [
+	Vector3(-0.3, 0.35, 0.0),
+	Vector3(-0.15, 0.38, 0.0),
+	Vector3(0.0, 0.4, 0.0),
+	Vector3(0.15, 0.42, 0.0),
+	Vector3(0.3, 0.44, 0.0)
+]
 
 func _ready() -> void:
+	_read_grid_config_meta()
+
 	# Scale down for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -53,7 +113,45 @@ func _ready() -> void:
 	_create_panel()
 	spawn_movers()
 	setup_auto_reset()
+	_built = true
 	print("Example 2.5: Fluid resistance")
+
+# --- DNA (stage 2) -----------------------------------------------------------
+
+## THE ONLY PATH THAT REACHES THIS SCRIPT FROM A MAP.
+##
+## This scene's root is an UNSCRIPTED Node3D — the whole NOC forces family is shaped
+## root -> FishTank -> Demo, and this script sits on the grandchild. The grid calls
+## apply_grid_config() on the ROOT, which has no such method, so that call never arrives
+## here. What the grid DOES do unconditionally is write every #key:value token onto the
+## root as `config_<key>` metadata, and it does so BEFORE the scene enters the tree —
+## so the metadata is already in place when this _ready() runs. Walk up and read it.
+##
+## Costs nothing when no token is present: the exports keep their defaults and not a
+## single existing placement changes.
+func _read_grid_config_meta() -> void:
+	var node: Node = self
+	while node != null:
+		if node.has_meta("config_mass_spread"):
+			mass_spread = str(node.get_meta("config_mass_spread"))
+		if node.has_meta("config_medium"):
+			medium = str(node.get_meta("config_medium"))
+		node = node.get_parent()
+
+## The masses this placement drops. See MASS_LADDER / MASS_UNIFORM / MASS_EXTREME.
+func _masses() -> Array:
+	if mass_spread == "uniform":
+		return MASS_UNIFORM
+	if mass_spread == "extreme":
+		return MASS_EXTREME
+	return MASS_LADDER
+
+## Drag is not one number once the medium has an inside. In a layered medium the lower
+## half resists more, so the same body has two terminal velocities depending on depth.
+func _drag_coefficient_at(world_position: Vector3) -> float:
+	if medium == "layered" and world_position.y < fluid_surface_y - fluid_depth * 0.5:
+		return drag_coefficient * LAYER_DENSITY
+	return drag_coefficient
 
 func setup_auto_reset() -> void:
 	auto_reset_timer = Timer.new()
@@ -86,31 +184,62 @@ func _input(event: InputEvent) -> void:
 			KEY_SPACE:
 				spread_movers()
 
-func create_fluid_volume() -> void:
-	fluid_volume = MeshInstance3D.new()
-	var mesh: BoxMesh = BoxMesh.new()
-	mesh.size = Vector3(0.9, fluid_depth, 0.9)
-	fluid_volume.mesh = mesh
-	fluid_volume.position = Vector3(0, fluid_surface_y - fluid_depth * 0.5, 0)
+## The visible box. In a basin it IS the fluid; in a layered medium it is the thin half.
+func _upper_size() -> Vector3:
+	if medium == "layered":
+		return Vector3(0.9, fluid_depth * 0.5, 0.9)
+	return Vector3(0.9, fluid_depth, 0.9)
 
-	# Use Ada accent_blue tinted translucent material
+func _upper_position() -> Vector3:
+	if medium == "layered":
+		return Vector3(0, fluid_surface_y - fluid_depth * 0.25, 0)
+	return Vector3(0, fluid_surface_y - fluid_depth * 0.5, 0)
+
+func _surface_label_text() -> String:
+	if medium == "ambient":
+		return "No surface — medium everywhere"
+	if medium == "layered":
+		return "Fluid surface (dense below)"
+	return "Fluid surface"
+
+## Ada accent_blue tinted translucent fluid. alpha/energy are the only things that
+## differ between a layer and the whole basin.
+func _fluid_material(alpha: float, energy: float) -> StandardMaterial3D:
 	var material := StandardMaterial3D.new()
-	material.albedo_color = Color(0.20, 0.55, 0.95, 0.20)
+	material.albedo_color = Color(0.20, 0.55, 0.95, alpha)
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.roughness = 0.6
 	material.metallic = 0.0
 	material.emission_enabled = true
 	material.emission = Color(0.20, 0.55, 0.95)
-	material.emission_energy_multiplier = 0.25
+	material.emission_energy_multiplier = energy
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
-	fluid_volume.material_override = material
+	return material
 
-	add_child(fluid_volume)
+func create_fluid_volume() -> void:
+	if medium != "ambient":
+		fluid_volume = MeshInstance3D.new()
+		var mesh: BoxMesh = BoxMesh.new()
+		mesh.size = _upper_size()
+		fluid_volume.mesh = mesh
+		fluid_volume.position = _upper_position()
+		fluid_volume.material_override = _fluid_material(0.20, 0.25)
+		add_child(fluid_volume)
+
+	if medium == "layered":
+		# The dense half. Same water, twice the resistance — depth becomes a law.
+		fluid_volume_lower = MeshInstance3D.new()
+		var lower_mesh: BoxMesh = BoxMesh.new()
+		lower_mesh.size = Vector3(0.9, fluid_depth * 0.5, 0.9)
+		fluid_volume_lower.mesh = lower_mesh
+		fluid_volume_lower.position = Vector3(0, fluid_surface_y - fluid_depth * 0.75, 0)
+		fluid_volume_lower.material_override = _fluid_material(0.45, 0.5)
+		add_child(fluid_volume_lower)
 
 	# Surface label — clean, non-billboard
 	var surface_label := Label3D.new()
 	surface_label.name = "FluidSurfaceLabel"
-	surface_label.text = "Fluid surface"
+	surface_label.text = _surface_label_text()
 	surface_label.font_size = 14
 	surface_label.pixel_size = 0.001
 	surface_label.modulate = Color(0.20, 0.55, 0.95, 1.0)
@@ -141,21 +270,16 @@ func _create_panel() -> void:
 func spawn_movers() -> void:
 	clear_existing_movers()
 
-	var configs: Array = [
-		{ "mass": 0.6, "position": Vector3(-0.3, 0.35, 0.0) },
-		{ "mass": 1.0, "position": Vector3(-0.15, 0.38, 0.0) },
-		{ "mass": 1.4, "position": Vector3(0.0, 0.4, 0.0) },
-		{ "mass": 2.0, "position": Vector3(0.15, 0.42, 0.0) },
-		{ "mass": 2.6, "position": Vector3(0.3, 0.44, 0.0) }
-	]
+	var masses: Array = _masses()
 
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 
-	for config in configs:
+	for i in range(spawn_positions.size()):
+		var spawn_point: Vector3 = spawn_positions[i]
 		var mover := Mover.new()
-		mover.mass = float(config["mass"])
-		mover.position_v = config["position"]
+		mover.mass = float(masses[i])
+		mover.position_v = spawn_point
 		mover.velocity = Vector3.ZERO
 		mover.acceleration = Vector3.ZERO
 		mover.bounce_damping = 0.4
@@ -170,7 +294,7 @@ func spawn_movers() -> void:
 		mover.set_color(random_color)
 
 		movers.append(mover)
-		mover_initial_positions[mover] = config["position"]
+		mover_initial_positions[mover] = spawn_point
 
 		var arrow := create_drag_arrow()
 		mover.add_child(arrow)
@@ -239,12 +363,15 @@ func compute_drag_force(mover: Mover) -> Vector3:
 	if speed < 0.01:
 		return Vector3.ZERO
 
-	var drag_mag: float = drag_coefficient * speed * speed
+	var drag_mag: float = _drag_coefficient_at(mover.position_v) * speed * speed
 	var drag_force = -mover.velocity.normalized() * drag_mag
 
 	return drag_force
 
 func is_inside_fluid(position: Vector3) -> bool:
+	if medium == "ambient":
+		# No boundary: there is no outside to be in. Drag from the first frame.
+		return true
 	var bottom: float = fluid_surface_y - fluid_depth
 	return position.y <= fluid_surface_y and position.y >= bottom
 
@@ -280,13 +407,17 @@ func update_drag_visual(mover: Mover, drag_force: Vector3) -> void:
 	arrow.transform = Transform3D(basis, Vector3.ZERO)
 
 func update_fluid_volume() -> void:
-	if not is_instance_valid(fluid_volume):
-		return
+	if is_instance_valid(fluid_volume):
+		var mesh: Mesh = fluid_volume.mesh
+		if mesh is BoxMesh:
+			(mesh as BoxMesh).size = _upper_size()
+		fluid_volume.position = _upper_position()
 
-	var mesh := fluid_volume.mesh
-	if mesh is BoxMesh:
-		(mesh as BoxMesh).size = Vector3(0.9, fluid_depth, 0.9)
-	fluid_volume.position = Vector3(0, fluid_surface_y - fluid_depth * 0.5, 0)
+	if is_instance_valid(fluid_volume_lower):
+		var lower_mesh: Mesh = fluid_volume_lower.mesh
+		if lower_mesh is BoxMesh:
+			(lower_mesh as BoxMesh).size = Vector3(0.9, fluid_depth * 0.5, 0.9)
+		fluid_volume_lower.position = Vector3(0, fluid_surface_y - fluid_depth * 0.75, 0)
 
 	var surface_label := get_node("FluidSurfaceLabel") if has_node("FluidSurfaceLabel") else null
 	if surface_label and surface_label is Label3D:
@@ -329,5 +460,48 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Config from map_data.json tokens: #mass_spread:uniform#medium:layered
+##
+## GUARDED. Rebuilds only what actually CHANGED, and only after _ready has built once.
+## An unguarded respawn here would re-drop the movers of every shipped placement — and
+## rebuilding the medium mid-flight would strand them outside their own fluid.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var respawn: bool = false
+	var remake_medium: bool = false
+
+	if config.has("mass_spread"):
+		var want_spread: String = str(config["mass_spread"])
+		if want_spread != mass_spread:
+			mass_spread = want_spread
+			respawn = true
+
+	if config.has("medium"):
+		var want_medium: String = str(config["medium"])
+		if want_medium != medium:
+			medium = want_medium
+			remake_medium = true
+
+	if not _built:
+		return
+	if remake_medium:
+		_rebuild_medium()
+	if respawn:
+		spawn_movers()
+
+func _rebuild_medium() -> void:
+	if is_instance_valid(fluid_volume):
+		remove_child(fluid_volume)
+		fluid_volume.queue_free()
+	fluid_volume = null
+
+	if is_instance_valid(fluid_volume_lower):
+		remove_child(fluid_volume_lower)
+		fluid_volume_lower.queue_free()
+	fluid_volume_lower = null
+
+	if has_node("FluidSurfaceLabel"):
+		var old_label: Node = get_node("FluidSurfaceLabel")
+		remove_child(old_label)
+		old_label.queue_free()
+
+	create_fluid_volume()

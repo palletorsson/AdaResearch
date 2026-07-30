@@ -2,6 +2,27 @@
  "_comment": "Panel Bridge — 2D-in-3D VR panel system for loom simulator and pattern maker.",
  "artifacts": {
   "panel_bridge_loom": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "threading_draw": [
+      "straight",
+      "point",
+      "block",
+      "broken"
+     ],
+     "treadling_order": [
+      "straight",
+      "point",
+      "block",
+      "broken"
+     ]
+    },
+    "default": "threading_draw=straight, treadling_order=straight - the draft exactly as loom_draft_data.json wrote it. The straight/straight case returns from _apply_draw_axes() before the data store is touched at all, so not one cell is rewritten and the 6 existing placements show the same 4-shaft twill they always did.",
+    "was": "No exports at all - the sweep refused it as NO TURNABLE KNOBS. _ready() loaded example 0, the shipped 4-shaft twill sample, and every placement in the project showed the same cloth. The four sample drafts sat in a private examples table reachable only by pressing 1-4 on a desktop keyboard, which no map placement can do.",
+    "note": "Hand promotion. The constants worth lifting were not in the panel chrome but in the draft the panels display, and a weaving draft has exactly two orders in it: the order the warps are drawn onto the shafts and the order the picks press the treadles. Both axes rewrite only their own one-hot matrix; the tie-up and the yarn colours are never touched, and the column period is read off the loaded draft (4 shafts used of 6 treadles wired) rather than assumed. point in the warp is a herringbone, point in both is a diamond twill - same tie-up, same threads, a different cloth. It makes the drawdown argue what the description only asserts: the diagonal is not IN the tie-up, it is in the order of the draw. TRAP HANDLED: apply_grid_config() already existed for the capture audit loop and writes its config dict out as the draft data, so an axis-only token would have blanked the drawdown; axis keys are now peeled off first and an axis-only config never reaches that path."
+   },
    "name": "Panel Bridge — Loom Simulator",
    "lookup_name": "panel_bridge_loom",
    "description": "Three interactive VR panels displaying a weaving draft: threading, tie-up, treadling, and computed drawdown grids. Loaded from Panel Layout JSON exported by the web loom simulator. Click cells to edit the draft; drawdown recomputes in real-time.",

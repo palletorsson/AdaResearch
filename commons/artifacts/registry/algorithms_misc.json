@@ -6074,9 +6074,28 @@
    "qfep_connection": "Dijkstra run at human speed, frontier and visited cells kept in distinct colors: the cheapest path is assembled only after the algorithm has publicly paid for every cell it considered."
   },
   "platonicsolids": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "staging": [
+      "pride_room",
+      "lit",
+      "bare"
+     ],
+     "palette": [
+      "pride",
+      "trans",
+      "mono"
+     ]
+    },
+    "default": "staging=pride_room, palette=pride - the shipped code path exactly (10x10 rainbow floor, four banners, six-light ring, pride colours on all nine solids), so the 6 existing placements are unchanged",
+    "was": "zero exports. Nine hand-built polyhedra that always dragged their own room in with them - a rainbow floor plane, four floating banners and a ring of six coloured lights - no matter what room the map had already built; and a declared critical_parameter (the pride_colors array) that no map could reach",
+    "note": "Declared by hand 2026-07-29; the runner refused it for NO TURNABLE KNOBS. staging asks where the politics lives - in the ROOM the artifact imposes, or in the VERTICES it colours. palette=mono is the honest counterfactual to the artifact's own truth statement 'geometry does not belong to neutrality': same nine solids, same six lights, same floor banding, drained to one grey, so neutrality becomes a value you can select and look at."
+   },
    "category": "unknown",
    "complexity": "beginner",
-   "description": "Lays out pride-themed platonic solids amid rainbow flooring, banners, and colorful lighting.",
+   "description": "Lays out pride-themed platonic solids amid rainbow flooring, banners, and colorful lighting. DNA: staging selects whether the artifact brings its own room (pride_room = rainbow floor + banners + light ring, lit = the coloured light ring only, bare = nine specimens and nothing else); palette selects whose colours the solids, floor bands and lights carry (pride/trans/mono). Use #staging: and #palette:.",
    "dev_themes": [
     "algorithms",
     "misc"
@@ -6677,6 +6696,26 @@
     21.0,
     50.0
    ],
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "banding": [
+      "roygbiv",
+      "six",
+      "continuous",
+      "two"
+     ],
+     "substance": [
+      "light",
+      "glass",
+      "solid"
+     ]
+    },
+    "default": "banding=roygbiv, substance=light - seven bands at the hard-coded 0.8 thickness and the same unshaded alpha material, so all 5 existing placements are pixel-identical",
+    "was": "zero exports: a fixed ROYGBIV double arc, Newton's seven bands hard-coded as if the spectrum had seams",
+    "note": "total arc width is held constant across banding, so the knob argues about how many names the spectrum gets, not how big it is; substance turns an optical event with no location into an arch that could hold a shadow, which contradicts the artifact's own truth line on purpose"
+   },
    "include_in_map_data": true,
    "lookup_name": "rainbow",
    "map_ready": true,

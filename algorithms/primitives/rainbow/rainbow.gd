@@ -13,6 +13,21 @@ extends Node3D
 # Local debug flag to gate prints (default off)
 @export var debug: bool = false
 
+# ═══════════════════════════════════════════
+#  DNA (stage 2 — variation)
+# ═══════════════════════════════════════════
+# banding: how many colours the spectrum is cut into. Newton cut it into seven
+#   to make it rhyme with the diatonic scale; the light itself has no seams.
+#   The arc keeps the SAME total width under every setting — only the
+#   quantisation changes, so the knob argues about naming, not size.
+#   "roygbiv" = the pre-promotion seven bands.
+# substance: what the rainbow is made of. "light" = the pre-promotion
+#   material — unshaded, transparent, an optical event with no location.
+#   "glass"/"solid" reify it into a thing that could hold a shadow, which
+#   contradicts the truth line above. That contradiction is the point.
+@export_enum("roygbiv", "six", "continuous", "two") var banding: String = "roygbiv"
+@export_enum("light", "glass", "solid") var substance: String = "light"
+
 # Rainbow parameters
 const RAINBOW_RADIUS = 15.0
 const RAINBOW_HEIGHT = 8.0
@@ -34,23 +49,77 @@ var rainbow_colors = [
 	Color(0.5, 0.0, 1.0, 1.0)     # Violet
 ]
 
+var _arc_roots: Array[Node3D] = []
+var _built: bool = false
+
 func _ready() -> void:
-	# Create the primary rainbow
-	create_rainbow(Vector3.ZERO, 1.0, false)
-	
-	# Create the secondary rainbow (larger, fainter, reversed colors)
-	create_rainbow(Vector3(0, 1, 0), SECONDARY_FADE, true)
-	
+	_build_arcs()
+
 	# Add some atmospheric effects
 	create_atmosphere()
-	
+	_built = true
+
+func _build_arcs() -> void:
+	rainbow_colors = _band_colors(banding)
+
+	# Create the primary rainbow
+	create_rainbow(Vector3.ZERO, 1.0, false)
+
+	# Create the secondary rainbow (larger, fainter, reversed colors)
+	create_rainbow(Vector3(0, 1, 0), SECONDARY_FADE, true)
+
+func _band_colors(mode: String) -> Array:
+	match mode:
+		"six":
+			# The modern convention: indigo dropped. Newton's seventh band was
+			# fitted to the octave, not to the eye.
+			return [
+				Color(1.0, 0.0, 0.0, 1.0),
+				Color(1.0, 0.5, 0.0, 1.0),
+				Color(1.0, 1.0, 0.0, 1.0),
+				Color(0.0, 1.0, 0.0, 1.0),
+				Color(0.0, 0.0, 1.0, 1.0),
+				Color(0.5, 0.0, 1.0, 1.0),
+			]
+		"two":
+			# Many languages cut the spectrum into a warm half and a cool half
+			# and stop there. Fewer names, same light.
+			return [
+				Color(1.0, 0.3, 0.0, 1.0),
+				Color(0.15, 0.15, 0.9, 1.0),
+			]
+		"continuous":
+			# No seams at all — the spectrum as it physically is, cut only by
+			# the resolution of the mesh.
+			var out: Array = []
+			var count: int = 48
+			for i in range(count):
+				var t: float = float(i) / float(count - 1)
+				out.append(Color.from_hsv(t * 0.78, 1.0, 1.0, 1.0))
+			return out
+		_:
+			return [
+				Color(1.0, 0.0, 0.0, 1.0),    # Red
+				Color(1.0, 0.5, 0.0, 1.0),    # Orange
+				Color(1.0, 1.0, 0.0, 1.0),    # Yellow
+				Color(0.0, 1.0, 0.0, 1.0),    # Green
+				Color(0.0, 0.0, 1.0, 1.0),    # Blue
+				Color(0.3, 0.0, 0.5, 1.0),    # Indigo
+				Color(0.5, 0.0, 1.0, 1.0)     # Violet
+			]
+
+func _band_thickness() -> float:
+	# The arc's total width is held at the pre-promotion 7 x 0.8, whatever the
+	# band count. Seven bands reproduces RAINBOW_THICKNESS exactly.
+	return (RAINBOW_THICKNESS * 7.0) / float(maxi(1, rainbow_colors.size()))
 
 
 func create_rainbow(offset: Vector3, alpha_multiplier: float, reverse_colors: bool) -> void:
 	var rainbow_node = Node3D.new()
 	rainbow_node.name = "Rainbow_" + str(randf())
 	add_child(rainbow_node)
-	
+	_arc_roots.append(rainbow_node)
+
 	# Create each color band of the rainbow
 	for color_index in range(rainbow_colors.size()):
 		var color_band = create_color_band(color_index, alpha_multiplier, reverse_colors, offset)
@@ -71,8 +140,9 @@ func create_color_band(color_index: int, alpha_multiplier: float, reverse_colors
 	var indices = PackedInt32Array()
 	
 	# Calculate radius for this color band
-	var inner_radius = RAINBOW_RADIUS + (color_index * RAINBOW_THICKNESS) + (offset.length() * SECONDARY_OFFSET)
-	var outer_radius = inner_radius + RAINBOW_THICKNESS
+	var band_t: float = _band_thickness()
+	var inner_radius = RAINBOW_RADIUS + (color_index * band_t) + (offset.length() * SECONDARY_OFFSET)
+	var outer_radius = inner_radius + band_t
 	
 	# Get the color for this band
 	var actual_color_index = color_index if not reverse_colors else (rainbow_colors.size() - 1 - color_index)
@@ -120,18 +190,33 @@ func create_color_band(color_index: int, alpha_multiplier: float, reverse_colors
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh_instance.mesh = array_mesh
 	
+	mesh_instance.material_override = _make_band_material()
+	
+	return mesh_instance
+
+func _make_band_material() -> StandardMaterial3D:
 	# Create material with transparency
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color.WHITE
 	material.vertex_color_use_as_albedo = true
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	material.no_depth_test = false
-	material.flags_unshaded = true
-	
-	mesh_instance.material_override = material
-	
-	return mesh_instance
+	match substance:
+		"solid":
+			# An arch, not an event: opaque, lit, casting and taking shadow.
+			material.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+			material.metallic = 0.0
+			material.roughness = 0.6
+		"glass":
+			# Halfway: still see-through, but it has a surface that catches light.
+			material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			material.metallic = 0.35
+			material.roughness = 0.15
+		_:
+			# "light" — the pre-promotion material, unshaded and alpha-blended.
+			material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			material.flags_unshaded = true
+	return material
 
 func create_atmosphere() -> void:
 	# Add some atmospheric particles/effects
@@ -185,4 +270,26 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Guarded: only rebuild the arcs when a value actually changed, and only
+	# after _ready has built them once. If config arrives first, _ready picks
+	# the new values up on its own pass.
+	var changed := false
+	if config.has("banding"):
+		var mode: String = str(config["banding"])
+		if mode != banding:
+			banding = mode
+			changed = true
+	if config.has("substance"):
+		var subst: String = str(config["substance"])
+		if subst != substance:
+			substance = subst
+			changed = true
+	if changed and _built:
+		_rebuild_arcs()
+
+func _rebuild_arcs() -> void:
+	for arc in _arc_roots:
+		if is_instance_valid(arc):
+			arc.queue_free()
+	_arc_roots.clear()
+	_build_arcs()

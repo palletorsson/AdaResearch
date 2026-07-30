@@ -243,6 +243,9 @@ func _build_all() -> void:
 	_spawn_attractors()
 	_spawn_agents()
 	_reset_axis_state()
+	# Bake the readouts once more now the order parameter has been measured, so
+	# the boards are correct at frame zero instead of at the first 0.25 s refresh.
+	_update_labels()
 	# Fill the ImmediateMesh surfaces NOW. Two reasons: auto-grounding measures
 	# the AABB the moment the build returns and empty surfaces measure zero, and
 	# the capturer shoots at ~1.1 s, so the axis has to be legible from the
@@ -283,17 +286,17 @@ func _measure_order() -> void:
 		Mode.PHASE_TRANSITION:
 			var total_spin: float = 0.0
 			for a in _agents:
-				var ag: AgentState = a
-				total_spin += ag.spin
+				var spin_agent: AgentState = a
+				total_spin += spin_agent.spin
 			_order_parameter = absf(total_spin) / maxf(float(_agents.size()), 1.0)
 		Mode.ATTRACTOR_BASINS:
 			var near: int = 0
 			for a in _agents:
-				var ag: AgentState = a
-				ag.basin_id = _nearest_basin(ag.pos)
-				if ag.basin_id >= 0:
-					var attr: Dictionary = _attractors[ag.basin_id]
-					if ag.pos.distance_to(attr["pos"]) < 1.5:
+				var basin_agent: AgentState = a
+				basin_agent.basin_id = _nearest_basin(basin_agent.pos)
+				if basin_agent.basin_id >= 0:
+					var attr: Dictionary = _attractors[basin_agent.basin_id]
+					if basin_agent.pos.distance_to(attr["pos"]) < 1.5:
 						near += 1
 			_order_parameter = float(near) / maxf(float(_agents.size()), 1.0)
 		_:
@@ -689,6 +692,8 @@ func _spawn_attractors() -> void:
 		})
 	# Bounded: grid_resolution^2 cells, no convergence loop. Complete before the
 	# first frame, which is why slope needs no pre-roll.
+	if _attractors.is_empty():
+		return
 	_compute_basin_grid()
 
 
@@ -1008,9 +1013,18 @@ func _draw_stigmergy_field() -> void:
 	_field_im.clear_surfaces()
 
 	var max_val := 0.01
+	var live := 0
 	for x in range(grid_resolution):
 		for y in range(grid_resolution):
-			max_val = maxf(max_val, _stigmergy_grid[x][y])
+			var v: float = _stigmergy_grid[x][y]
+			max_val = maxf(max_val, v)
+			if v >= 0.01:
+				live += 1
+	# _draw_all now runs once at build time, when the field is still empty.
+	# surface_begin/surface_end with nothing between them is an empty surface —
+	# leave the mesh cleared instead.
+	if live == 0:
+		return
 
 	var cell_w := field_size / float(grid_resolution)
 	var half := field_size * 0.5
@@ -1159,6 +1173,11 @@ func _draw_basin_coloring() -> void:
 				continue
 
 			var col: Color = BASIN_COLORS[basin_id % BASIN_COLORS.size()]
+			# Flat and SATURATED, not the palette's 0.35 tint. The whole of
+			# slope's difference from trace is a graded dim heatmap against four
+			# solid colour regions, and a 35%-alpha wash over black would have
+			# put the two values back in the same picture.
+			col.a = BASIN_FILL_ALPHA
 
 			# Darken cells near boundaries between basins
 			var on_boundary := false
@@ -1175,7 +1194,10 @@ func _draw_basin_coloring() -> void:
 						break
 
 			if on_boundary:
-				col = col.lerp(Color(1.0, 1.0, 1.0, 0.6), 0.5)
+				# One cell wide (0.15 m at the default resolution) — the hard
+				# Voronoi seam where two basins meet.
+				col = col.lerp(Color(1.0, 1.0, 1.0, 1.0), 0.55)
+				col.a = BASIN_SEAM_ALPHA
 
 			var wx := -half + gx * cell_w
 			var wy := -half + gy * cell_w
@@ -1216,7 +1238,12 @@ func _draw_flow_arrows() -> void:
 	_flow_im.clear_surfaces()
 	_flow_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	var step := maxi(grid_resolution / 12, 1)
+	# Full grid resolution — 40 x 40 = 1600 arrows at the default, where it used
+	# to be every third cell (14 x 14 = 196). A sparse scatter of arrows over a
+	# coloured field is a decoration; a field of them is the landscape, which is
+	# what `slope` means. Bounded at ~1600 glyphs whatever grid_resolution is set
+	# to, so a large configured grid cannot turn this into a stall.
+	var step := maxi(grid_resolution / 40, 1)
 	var arrow_len := field_size / float(grid_resolution) * step * 0.6
 
 	for gx in range(0, grid_resolution, step):
@@ -1235,8 +1262,10 @@ func _draw_flow_arrows() -> void:
 			var base_r := world - perp * arrow_len * 0.25
 
 			var basin_id: int = _basin_grid[gx][gy]
-			var col: Color = BASIN_COLORS[basin_id % BASIN_COLORS.size()]
-			col.a = 0.55
+			# Ink, not tint. The basin fill under these arrows is now saturated,
+			# so a 0.55-alpha arrow in the SAME hue would be invisible.
+			var col: Color = BASIN_COLORS[basin_id % BASIN_COLORS.size()].darkened(0.7)
+			col.a = 0.9
 
 			_flow_im.surface_set_color(col)
 			_flow_im.surface_add_vertex(Vector3(tip.x, tip.y, z))
@@ -1287,11 +1316,14 @@ func _draw_order_bar() -> void:
 
 # --- Phase transition graph (order parameter vs temperature) ---
 
+## The gadget that only `neighbour` builds: a 2.0 x 4.8 m plotted graph two
+## metres to the LEFT of the field, where trace and slope have nothing at all.
+## It used to bail out entirely until two samples had accumulated, which meant
+## the geometry that distinguishes this value was missing from the first frames.
+## Background and temperature bar now draw unconditionally; only the plotted line
+## waits for a second sample, and `_reset_axis_state` hands it the first one.
 func _draw_phase_graph() -> void:
 	_graph_im.clear_surfaces()
-	if _order_history.size() < 2:
-		return
-
 	_graph_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	# Graph area
@@ -1315,7 +1347,7 @@ func _draw_phase_graph() -> void:
 	# Plot order parameter history as line segments (as thin quads)
 	var n := _order_history.size()
 	var line_w := 0.02
-	for i in range(n - 1):
+	for i in range(maxi(n - 1, 0)):
 		var x0 := gx + float(i) / float(n) * gw
 		var x1 := gx + float(i + 1) / float(n) * gw
 		var y0 := gy + _order_history[i] * gh
@@ -1354,7 +1386,9 @@ func _draw_phase_graph() -> void:
 
 func _update_labels() -> void:
 	var mode_names := ["Stigmergy", "Phase Transition", "Attractor Basins"]
-	var mode_text := "Mode: %s" % mode_names[_mode]
+	# Name the cue, not just the mode — the header is the one board that reads at
+	# capture distance, and the axis value should be legible there.
+	var mode_text := "Cue: %s — %s" % [cue, mode_names[_mode]]
 
 	var info_text := ""
 	var stats_text := ""
@@ -1399,13 +1433,35 @@ func _update_labels() -> void:
 # apply_grid_config
 # =========================================================================
 
+## Called by GridInteractablesComponent via call_deferred, AFTER _ready(). It has
+## to be safe to call with keys that change nothing — curation_station hands every
+## curated artifact {"emissive": false} one line after framing its labels, and
+## that used to tear down and respawn the whole simulation.
+##
+## The old `mode` key is GONE, not aliased. No map in the repo carried it (all
+## nine placements are bare tokens or layout hints), and keeping a second
+## spelling for the thing `cue` selects is how one word comes to name two axes.
 func apply_grid_config(config: Dictionary) -> void:
+	# Snapshot every axis and every key that changes GEOMETRY.
+	var before_cue: String = cue
+	var before_agents: int = agent_count
+	var before_res: int = grid_resolution
+	var before_field: float = field_size
+	var before_attractors: int = num_attractors
+
+	if config.has("cue"):
+		cue = _pick_axis(str(config["cue"]), CUES, cue)
 	if config.has("agent_count"):
-		agent_count = int(config["agent_count"])
+		agent_count = clampi(int(config["agent_count"]), 4, 400)
 	if config.has("grid_resolution"):
-		grid_resolution = int(config["grid_resolution"])
+		grid_resolution = clampi(int(config["grid_resolution"]), 8, 160)
 	if config.has("field_size"):
-		field_size = float(config["field_size"])
+		field_size = clampf(float(config["field_size"]), 1.0, 24.0)
+	if config.has("num_attractors"):
+		num_attractors = clampi(int(config["num_attractors"]), 1, BASIN_COLORS.size())
+
+	# Live parameters — these feed _process, so they apply IN PLACE and never
+	# justify a rebuild.
 	if config.has("agent_speed"):
 		agent_speed = float(config["agent_speed"])
 	if config.has("deposit_rate"):
@@ -1418,13 +1474,43 @@ func apply_grid_config(config: Dictionary) -> void:
 		coupling_strength = float(config["coupling_strength"])
 	if config.has("noise_level"):
 		noise_level = float(config["noise_level"])
-	if config.has("num_attractors"):
-		num_attractors = int(config["num_attractors"])
-	if config.has("mode"):
-		var m: String = str(config["mode"]).to_upper()
-		match m:
-			"STIGMERGY": _mode = Mode.STIGMERGY
-			"PHASE_TRANSITION": _mode = Mode.PHASE_TRANSITION
-			"ATTRACTOR_BASINS": _mode = Mode.ATTRACTOR_BASINS
+	# Applied here, BEFORE the early returns. An accepted key that does nothing
+	# because the rebuild it relied on was removed is the failure this ordering
+	# exists to prevent.
+	if config.has("emissive"):
+		_emissive = _coerce_bool(config["emissive"], _emissive)
+		_apply_emissive()
 
-	_reset_simulation()
+	if not _built:
+		return
+	if cue == before_cue \
+			and agent_count == before_agents \
+			and grid_resolution == before_res \
+			and is_equal_approx(field_size, before_field) \
+			and num_attractors == before_attractors:
+		return
+
+	_rebuild_now()
+	print("[SelfOrganizingPatterns] Config applied — cue=%s" % [cue])
+
+
+## Accept an axis value only if it names something we actually build. A typo
+## falls back to the shipped look rather than half-resolving.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+
+## Map tokens arrive as strings. bool("false") is TRUE, which silently inverts
+## the meaning of every negated flag, so the coercion is spelled out.
+func _coerce_bool(raw, fallback: bool) -> bool:
+	if raw is bool:
+		return true if raw else false
+	if raw is int or raw is float:
+		return float(raw) != 0.0
+	var s: String = str(raw).to_lower().strip_edges()
+	if s == "true" or s == "1" or s == "yes" or s == "on":
+		return true
+	if s == "false" or s == "0" or s == "no" or s == "off" or s == "":
+		return false
+	return fallback

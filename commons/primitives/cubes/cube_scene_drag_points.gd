@@ -4,6 +4,45 @@ extends Node3D
 @export var base_color: Color = Color(1.0, 0.4, 0.7)  # Pink cube color
 @export var hover_color: Color = Color(0.4, 0.8, 1.0)
 
+## DNA (stage 2 - variation, promoted 2026-07-29)
+##   handles       - which vertices get a vote. The blurb calls this cube "a
+##                   treaty among vertices"; a treaty is defined by who signs it,
+##                   and that was hard-coded to all eight.
+##   triangulation - which diagonal splits each quad face. The blurb claims "the
+##                   faces re-triangulate around your decision" - they did not:
+##                   every face carried a fixed seam baked in at author time.
+## Both defaults reproduce the pre-promotion artifact exactly.
+
+const HANDLE_MODES: Array[String] = ["corners", "top", "diagonal"]
+const TRIANGULATIONS: Array[String] = ["fixed", "shortest"]
+
+## Which corners are draggable.
+##   corners  - all eight; every vertex signs (shipped)
+##   top      - the four upper corners; the solid can only be warped from above
+##   diagonal - two opposite corners; the minimal treaty, two vertices decide
+@export_enum("corners", "top", "diagonal") var handles: String = "corners"
+
+## How each square face is cut into two triangles.
+##   fixed    - the author's diagonal, always a-c; the seam is remembered, and a
+##              dragged corner creases along a line chosen before you arrived
+##              (shipped)
+##   shortest - the shorter diagonal wins, re-picked every rebuild; the seam
+##              follows your deformation instead of preceding it
+## At rest the cube is square and both diagonals are equal, so the two modes are
+## identical until a corner is dragged.
+@export_enum("fixed", "shortest") var triangulation: String = "fixed"
+
+# Each face as a quad in winding order. Splitting [a,b,c,d] on the a-c diagonal
+# reproduces the historical hard-coded triangle list exactly.
+const FACE_QUADS: Array = [
+	[0, 1, 2, 3],   # front
+	[5, 4, 7, 6],   # back
+	[4, 0, 3, 7],   # left
+	[1, 5, 6, 2],   # right
+	[3, 2, 6, 7],   # top
+	[4, 5, 1, 0]    # bottom
+]
+
 var is_hovered: bool = false
 var mesh_instance: MeshInstance3D
 var grab_spheres: Array[Node3D] = []
@@ -48,21 +87,8 @@ func create_vr_cube():
 	current_vertices = original_vertices.duplicate()
 	
 	# Cube faces (each face made of 2 triangles)
-	var faces = [
-		# Front face
-		[0, 1, 2], [0, 2, 3],
-		# Back face
-		[5, 4, 7], [5, 7, 6],
-		# Left face
-		[4, 0, 3], [4, 3, 7],
-		# Right face
-		[1, 5, 6], [1, 6, 2],
-		# Top face
-		[3, 2, 6], [3, 6, 7],
-		# Bottom face
-		[4, 5, 1], [4, 1, 0]
-	]
-	
+	var faces: Array = _current_faces(current_vertices)
+
 	# Add faces with normals and UVs
 	for face in faces:
 		add_triangle_with_normal_and_uv(st, current_vertices, face)
@@ -114,6 +140,10 @@ func create_grab_spheres():
 		
 		print("Created sphere ", i, " at position ", current_vertices[i])
 
+	# All eight spheres always exist so grab_spheres stays index-aligned with
+	# current_vertices; the handles axis only decides which ones are live.
+	_apply_handle_visibility()
+
 func _on_sphere_picked_up(vertex_index: int, _pickable = null):
 	print("Sphere ", vertex_index, " picked up")
 
@@ -154,21 +184,8 @@ func update_cube_mesh():
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
 	# Cube faces using updated vertices
-	var faces = [
-		# Front face
-		[0, 1, 2], [0, 2, 3],
-		# Back face
-		[5, 4, 7], [5, 7, 6],
-		# Left face
-		[4, 0, 3], [4, 3, 7],
-		# Right face
-		[1, 5, 6], [1, 6, 2],
-		# Top face
-		[3, 2, 6], [3, 6, 7],
-		# Bottom face
-		[4, 5, 1], [4, 1, 0]
-	]
-	
+	var faces: Array = _current_faces(current_vertices)
+
 	# Add faces with updated vertices
 	for face in faces:
 		add_triangle_with_normal_and_uv(st, current_vertices, face)
@@ -269,6 +286,84 @@ signal cube_activated()
 # Helper function to position cube in VR space
 func set_vr_position(pos: Vector3):
 	position = pos
+
+# -- DNA plumbing ------------------------------------------------------------
+
+## The corner indices that carry a live grab sphere under the current handles
+## mode. "corners" returns all eight, which is what shipped.
+func _handle_indices() -> Array:
+	if handles == "top":
+		return [2, 3, 6, 7]
+	if handles == "diagonal":
+		return [0, 6]
+	return [0, 1, 2, 3, 4, 5, 6, 7]
+
+## Hide and un-collide the corners that do not sign this treaty. With
+## handles == "corners" every sphere is shown and enabled, i.e. untouched.
+func _apply_handle_visibility() -> void:
+	var active: Array = _handle_indices()
+	for i in range(grab_spheres.size()):
+		var sphere: Node3D = grab_spheres[i]
+		if not is_instance_valid(sphere):
+			continue
+		var live: bool = active.has(i)
+		sphere.visible = live
+		var collider: CollisionShape3D = sphere.get_node_or_null("CollisionShape3D")
+		if collider:
+			collider.disabled = not live
+		if not live and i < current_vertices.size():
+			# A dormant corner stops voting: park it back on its own vertex so
+			# _process() never reads a stale offset from it.
+			sphere.position = current_vertices[i]
+
+## Split every quad face into two triangles. Under "fixed" the diagonal is
+## always a-c, which reproduces the historical triangle list exactly.
+func _current_faces(verts: Array) -> Array:
+	var out: Array = []
+	for quad in FACE_QUADS:
+		var a: int = quad[0]
+		var b: int = quad[1]
+		var c: int = quad[2]
+		var d: int = quad[3]
+		var split_bd: bool = false
+		if triangulation == "shortest" and verts.size() > d:
+			var len_ac: float = verts[a].distance_to(verts[c])
+			var len_bd: float = verts[b].distance_to(verts[d])
+			split_bd = len_bd < len_ac
+		if split_bd:
+			out.append([b, c, d])
+			out.append([b, d, a])
+		else:
+			out.append([a, b, c])
+			out.append([a, c, d])
+	return out
+
+## Grid config arrives deferred and may land either side of the deferred
+## setup_complete_cube(). Nothing is torn down here: a value is only written
+## when it differs, and the scene is only touched once the build has run - so a
+## placement passing no config (or a config naming neither axis) is untouched.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data == null or config_data.is_empty():
+		return
+	var handles_changed: bool = false
+	var mesh_changed: bool = false
+	if config_data.has("handles"):
+		var new_handles: String = str(config_data["handles"]).strip_edges().to_lower()
+		if HANDLE_MODES.has(new_handles) and new_handles != handles:
+			handles = new_handles
+			handles_changed = true
+	if config_data.has("triangulation"):
+		var new_tri: String = str(config_data["triangulation"]).strip_edges().to_lower()
+		if TRIANGULATIONS.has(new_tri) and new_tri != triangulation:
+			triangulation = new_tri
+			mesh_changed = true
+	if not is_ready_complete:
+		# The deferred build has not happened yet; it will read the new values.
+		return
+	if handles_changed:
+		_apply_handle_visibility()
+	if mesh_changed:
+		update_cube_mesh()
 
 # Test function to manually move a corner and see deformation
 func test_deform_corner(corner_index: int, new_pos: Vector3):
