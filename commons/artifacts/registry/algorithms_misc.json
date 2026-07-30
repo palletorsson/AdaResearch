@@ -1429,6 +1429,16 @@
    "qfep_connection": "Reynolds' three commandments — separate, align, cohere — and nothing else. No leader, no plan, no bird knows the flock exists, and the flock exists. The chapter's founding demonstration that coordination is not commanded but *emergent*: intelligence as a property of the between."
   },
   "boid_manager": {
+   "dna": {
+    "axes": {
+    "accord": [
+    "school",
+    "orb",
+    "lane",
+    "lattice"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "f_i = Σ(neighbor_j)[separate(i,j) + align(vel_j) + cohere(pos_j)] — three weighted averages over a local neighborhood",
@@ -2604,6 +2614,16 @@
    "qfep_connection": "Every point in the plane carries one number: how far to the nearest surface, negative once you are inside. Sphere-tracing turns looking into a chain of safe steps, and smooth-min quietly abolishes the seam where two shapes were supposed to end."
   },
   "ecosystem_simulation": {
+   "dna": {
+    "axes": {
+    "quota": [
+    "tended",
+    "barren",
+    "hunted",
+    "fallow"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Predator-prey ecosystem dynamics with emergent population behaviors",
@@ -7416,6 +7436,15 @@
    }
   },
   "self_organizing_patterns": {
+   "dna": {
+    "axes": {
+    "cue": [
+    "trace",
+    "neighbour",
+    "slope"
+    ]
+    }
+   },
    "category": "emergence",
    "complexity": "intermediate",
    "description": "Stigmergy, phase transitions, and attractor basin visualization — 3 modes: stigmergy field with deposit/evaporation heatmap, Ising-like phase transition with order parameter sweep, Voronoi-colored attractor basins with flow field arrows",

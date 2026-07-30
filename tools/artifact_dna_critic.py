@@ -61,6 +61,38 @@ def load_img(p: Path, box=None):
     return list(im.resize((160, 160)).getdata())
 
 
+def load_rgb(p: Path, box=None):
+    from PIL import Image
+    im = Image.open(p).convert("RGB")
+    if box is not None:
+        im = im.crop(box)
+    return list(im.resize((160, 160)).getdata())
+
+
+def focus_rgb(a: list, b: list) -> float:
+    """Hottest-5% change measured PER CHANNEL rather than on luminance.
+
+    THE CRITIC IS COLOUR-BLIND, and it costs it twins. Everything above converts to
+    "L" first, so a hue change at constant brightness reads as nothing. AntColonyV2
+    paints pale green anchor discs on pale tan ground: to the eye the four anchorage
+    values are obviously different, and in luminance `pair` vs `ring` measures 5.52%
+    — under the twin bar — while per channel it is 12.06%. Measured across both swarm
+    artifacts the luminance number is about HALF the per-channel one, systematically.
+
+    This is used ONLY to veto a false twin, never to score. Switching the verdict
+    itself to per-channel would roughly double every number in the project's history
+    and invalidate thresholds calibrated on luminance across six sequences. So the
+    verdict stays comparable and the twin check stops accusing colour of being
+    nothing.
+    """
+    if not a or len(a) != len(b):
+        return 0.0
+    d = [max(abs(x[0] - y[0]), abs(x[1] - y[1]), abs(x[2] - y[2])) for x, y in zip(a, b)]
+    d.sort(reverse=True)
+    top = max(1, len(d) // 20)
+    return sum(d[:top]) / (255.0 * top)
+
+
 def diff(a: list[int], b: list[int]) -> tuple[float, float]:
     """Returns (frame, focus), both normalised 0..1.
 
@@ -217,9 +249,14 @@ def main() -> int:
                     f1, f2 = diff(cache[xid], cache[yid])
                 fr.append(f1)
                 fo.append(f2)
-                # Remember WHICH pair, so twins can be named below.
+                # Remember WHICH pair, so twins can be named below. A candidate twin
+                # is re-measured PER CHANNEL before being called one — see focus_rgb.
+                rgbf = 1.0
+                if f2 < TWIN_FOCUS and bx and byy:
+                    px2, py2 = mdir / f"{xid}.png", mdir / f"{yid}.png"
+                    rgbf = focus_rgb(load_rgb(px2, box), load_rgb(py2, box))
                 pair_focus.append((f2, str(x.get("dna", {}).get(axis, "?")),
-                                   str(y.get("dna", {}).get(axis, "?"))))
+                                   str(y.get("dna", {}).get(axis, "?")), rgbf))
             frame = sum(fr) / len(fr)
             focus = sum(fo) / len(fo)
 
@@ -230,8 +267,14 @@ def main() -> int:
             # whole score coming from the fifth. A five-value axis that is really a
             # two-value axis is a false declaration, and averaging hid it. Reported, not
             # scored: a twin is a design fault for a human to judge, not a verdict.
-            twins = sorted((p for p in pair_focus if p[0] < TWIN_FOCUS),
+            # A twin must be dim in BOTH luminance and colour. Anything the eye can
+            # see is not a twin, whatever the greyscale says.
+            twins = sorted((p for p in pair_focus
+                            if p[0] < TWIN_FOCUS and p[3] < TWIN_FOCUS),
                            key=lambda p: p[0])
+            colour_only = sorted((p for p in pair_focus
+                                  if p[0] < TWIN_FOCUS and p[3] >= TWIN_FOCUS),
+                                 key=lambda p: p[0])
             # Did the artifact draw ANYTHING? Checked before any verdict, because a
             # verdict on an empty picture is a statement about the harness, not the axis.
             seen = {str(e["id"]) for pair in pairs for e in pair}
@@ -253,8 +296,11 @@ def main() -> int:
             report.append({"artifact": prop, "axis": axis, "frame": round(frame, 5),
                            "focus": round(focus, 5), "verdict": verdict,
                            "subject": round(subject, 5), "pairs": len(pairs),
-                           "twins": [{"a": a, "b": b, "focus": round(f, 5)}
-                                     for f, a, b in twins]})
+                           "twins": [{"a": a, "b": b, "focus": round(f, 5),
+                                      "rgb": round(g, 5)} for f, a, b, g in twins],
+                           "colour_only": [{"a": a, "b": b, "focus": round(f, 5),
+                                            "rgb": round(g, 5)}
+                                           for f, a, b, g in colour_only]})
 
     inert = [r for r in report if r["verdict"] == "INERT"]
     weak = [r for r in report if r["verdict"] == "WEAK"]
@@ -272,6 +318,19 @@ def main() -> int:
         for r in blank:
             print(f"  {r['artifact']}.{r['axis']}"
                   f"  subject {r['subject']*100:.2f}% of frame")
+    colourful = [r for r in report if r.get("colour_only")]
+    if colourful:
+        n = sum(len(r["colour_only"]) for r in colourful)
+        print("\nCOLOUR-ONLY — pairs the greyscale verdict would call twins but the eye"
+              " would not. The change is in HUE at roughly constant brightness, which"
+              " luminance cannot see: AntColonyV2's pale-green anchor discs on pale tan"
+              " measure 5.5% in luminance and 12.1% per channel. NOT twins:")
+        for r in colourful:
+            for t in r["colour_only"]:
+                print(f"  {r['artifact']}.{r['axis']}  {t['a']} vs {t['b']}"
+                      f"  (focus {t['focus']*100:.2f}%, colour {t['rgb']*100:.2f}%)")
+        print(f"  {n} pair(s) rescued from a false twin verdict")
+
     twinned = [r for r in report if r.get("twins")]
     if twinned:
         n = sum(len(r["twins"]) for r in twinned)
@@ -284,7 +343,7 @@ def main() -> int:
         for r in twinned:
             for t in r["twins"]:
                 print(f"  {r['artifact']}.{r['axis']}  {t['a']} == {t['b']}"
-                      f"  (focus {t['focus']*100:.2f}%)")
+                      f"  (focus {t['focus']*100:.2f}%, colour {t['rgb']*100:.2f}%)")
         print(f"  {n} twin pair(s) across {len(twinned)} axes")
     if inert:
         print("\nINERT — these knobs are not connected to anything you can see:")

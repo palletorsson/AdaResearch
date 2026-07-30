@@ -841,6 +841,16 @@
    }
   },
   "boids_aquarium": {
+   "dna": {
+    "axes": {
+    "accord": [
+    "school",
+    "orb",
+    "lane",
+    "lattice"
+    ]
+    }
+   },
    "name": "Boids Aquarium",
    "lookup_name": "boids_aquarium",
    "description": "A 1m glass cube containing a school of 30 boids demonstrating emergent flocking behavior. Three simple rules (separation, alignment, cohesion) create lifelike collective motion.",
@@ -1088,6 +1098,16 @@
    }
   },
   "AntColonyV2": {
+   "dna": {
+    "axes": {
+    "anchorage": [
+    "pair",
+    "triad",
+    "ring",
+    "scattered"
+    ]
+    }
+   },
    "lookup_name": "AntColonyV2",
    "name": "AntColonyV2",
    "description": "ant.move() = gradient_ascent(pheromone_grid) + wander; pheromone_grid *= decay + diffuse — ant and environment co-evolve",
@@ -1205,6 +1225,16 @@
    }
   },
   "fitness_landscape_politics": {
+   "dna": {
+    "axes": {
+    "mandate": [
+    "converge",
+    "spread",
+    "novelty",
+    "ridge"
+    ]
+    }
+   },
    "name": "Fitness Landscape Politics",
    "lookup_name": "fitness_landscape_politics",
    "description": "30 PSO particles on 3 switchable fitness landscapes: convergence (corporate — minimize distance), spread (ecological — maximize diversity), novelty (artistic — seek the unvisited). Same agents, different power structures, different 'success.'",
@@ -1332,6 +1362,16 @@
    }
   },
   "PhysarumColony": {
+   "dna": {
+    "axes": {
+    "anchorage": [
+    "triad",
+    "pair",
+    "ring",
+    "scattered"
+    ]
+    }
+   },
    "lookup_name": "PhysarumColony",
    "name": "PhysarumColony",
    "description": "trail(x,y) = deposit(agent_positions) * diffuse - evaporate — no neurons, no memory, just chemistry",

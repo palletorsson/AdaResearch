@@ -43,6 +43,18 @@ REG_DIR = REPO / "commons" / "artifacts" / "registry"
 
 
 def find_entry(token: str) -> tuple[Path, dict] | None:
+    """The registry entry for a token, preferring one that actually names a scene.
+
+    A token can appear in MORE THAN ONE registry file, and one of them can be a stub.
+    boids_aquarium is in both substrate_vectors.json (scene: null) and
+    swarmintelligence.json (the real entry). Taking the first alphabetical match found
+    the stub and failed with "no script at None" — which reads like the artifact has no
+    script, when the artifact is fine and the registry simply has two entries for it.
+
+    So collect every match and prefer one whose scene resolves. Ties keep the old
+    alphabetical order, so nothing that worked before changes.
+    """
+    hits: list[tuple[Path, dict]] = []
     for rp in sorted(REG_DIR.glob("*.json")):
         try:
             data = json.loads(rp.read_text(encoding="utf-8"))
@@ -50,8 +62,16 @@ def find_entry(token: str) -> tuple[Path, dict] | None:
             continue
         arts = data.get("artifacts", data) if isinstance(data, dict) else data
         if isinstance(arts, dict) and token in arts and isinstance(arts[token], dict):
-            return rp, arts[token]
-    return None
+            hits.append((rp, arts[token]))
+    if not hits:
+        return None
+    for rp, entry in hits:
+        if str(entry.get("scene") or entry.get("scene_path") or "").strip():
+            if len(hits) > 1:
+                print("  (%s appears in %d registries; using %s, the one with a scene)"
+                      % (token, len(hits), rp.name))
+            return rp, entry
+    return hits[0]
 
 
 def derive(token: str, entry: dict, axes: list[str], drop: dict[str, set]) -> dict:
