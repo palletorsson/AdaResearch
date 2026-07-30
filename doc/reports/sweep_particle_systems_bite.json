@@ -1,0 +1,107 @@
+{
+ "sweep": "particle_systems",
+ "peak_changed_pct": 0.996,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "cast": "all"
+   },
+   "b": {
+    "cast": "fountain"
+   },
+   "changed_px": 750,
+   "changed_pct": 0.13
+  },
+  {
+   "a": {
+    "cast": "all"
+   },
+   "b": {
+    "cast": "fire"
+   },
+   "changed_px": 5120,
+   "changed_pct": 0.886
+  },
+  {
+   "a": {
+    "cast": "all"
+   },
+   "b": {
+    "cast": "sparks"
+   },
+   "changed_px": 468,
+   "changed_pct": 0.081
+  },
+  {
+   "a": {
+    "cast": "all"
+   },
+   "b": {
+    "cast": "snow"
+   },
+   "changed_px": 466,
+   "changed_pct": 0.081
+  },
+  {
+   "a": {
+    "cast": "fountain"
+   },
+   "b": {
+    "cast": "fire"
+   },
+   "changed_px": 5755,
+   "changed_pct": 0.996
+  },
+  {
+   "a": {
+    "cast": "fountain"
+   },
+   "b": {
+    "cast": "sparks"
+   },
+   "changed_px": 425,
+   "changed_pct": 0.074
+  },
+  {
+   "a": {
+    "cast": "fountain"
+   },
+   "b": {
+    "cast": "snow"
+   },
+   "changed_px": 410,
+   "changed_pct": 0.071
+  },
+  {
+   "a": {
+    "cast": "fire"
+   },
+   "b": {
+    "cast": "sparks"
+   },
+   "changed_px": 5409,
+   "changed_pct": 0.936
+  },
+  {
+   "a": {
+    "cast": "fire"
+   },
+   "b": {
+    "cast": "snow"
+   },
+   "changed_px": 5395,
+   "changed_pct": 0.934
+  },
+  {
+   "a": {
+    "cast": "sparks"
+   },
+   "b": {
+    "cast": "snow"
+   },
+   "changed_px": 17,
+   "changed_pct": 0.003
+  }
+ ]
+}

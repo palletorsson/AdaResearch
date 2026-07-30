@@ -1,0 +1,343 @@
+{
+ "sweep": "plus_line_puzzle",
+ "peak_changed_pct": 3.832,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "relation",
+    "stock": "crossed"
+   },
+   "changed_px": 3682,
+   "changed_pct": 0.637
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "targets",
+    "stock": "stacked"
+   },
+   "changed_px": 339,
+   "changed_pct": 0.059
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "targets",
+    "stock": "crossed"
+   },
+   "changed_px": 3682,
+   "changed_pct": 0.637
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "angle",
+    "stock": "stacked"
+   },
+   "changed_px": 21728,
+   "changed_pct": 3.762
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "angle",
+    "stock": "crossed"
+   },
+   "changed_px": 22125,
+   "changed_pct": 3.831
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "stacked"
+   },
+   "changed_px": 586,
+   "changed_pct": 0.101
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "crossed"
+   },
+   "changed_px": 3770,
+   "changed_pct": 0.653
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "targets",
+    "stock": "stacked"
+   },
+   "changed_px": 3739,
+   "changed_pct": 0.647
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "targets",
+    "stock": "crossed"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "angle",
+    "stock": "stacked"
+   },
+   "changed_px": 21988,
+   "changed_pct": 3.807
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "angle",
+    "stock": "crossed"
+   },
+   "changed_px": 21569,
+   "changed_pct": 3.734
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "stacked"
+   },
+   "changed_px": 3834,
+   "changed_pct": 0.664
+  },
+  {
+   "a": {
+    "proof": "relation",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "crossed"
+   },
+   "changed_px": 349,
+   "changed_pct": 0.06
+  },
+  {
+   "a": {
+    "proof": "targets",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "targets",
+    "stock": "crossed"
+   },
+   "changed_px": 3739,
+   "changed_pct": 0.647
+  },
+  {
+   "a": {
+    "proof": "targets",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "angle",
+    "stock": "stacked"
+   },
+   "changed_px": 21736,
+   "changed_pct": 3.763
+  },
+  {
+   "a": {
+    "proof": "targets",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "angle",
+    "stock": "crossed"
+   },
+   "changed_px": 22133,
+   "changed_pct": 3.832
+  },
+  {
+   "a": {
+    "proof": "targets",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "stacked"
+   },
+   "changed_px": 363,
+   "changed_pct": 0.063
+  },
+  {
+   "a": {
+    "proof": "targets",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "crossed"
+   },
+   "changed_px": 3830,
+   "changed_pct": 0.663
+  },
+  {
+   "a": {
+    "proof": "targets",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "angle",
+    "stock": "stacked"
+   },
+   "changed_px": 21988,
+   "changed_pct": 3.807
+  },
+  {
+   "a": {
+    "proof": "targets",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "angle",
+    "stock": "crossed"
+   },
+   "changed_px": 21569,
+   "changed_pct": 3.734
+  },
+  {
+   "a": {
+    "proof": "targets",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "stacked"
+   },
+   "changed_px": 3834,
+   "changed_pct": 0.664
+  },
+  {
+   "a": {
+    "proof": "targets",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "crossed"
+   },
+   "changed_px": 349,
+   "changed_pct": 0.06
+  },
+  {
+   "a": {
+    "proof": "angle",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "angle",
+    "stock": "crossed"
+   },
+   "changed_px": 873,
+   "changed_pct": 0.151
+  },
+  {
+   "a": {
+    "proof": "angle",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "stacked"
+   },
+   "changed_px": 21387,
+   "changed_pct": 3.703
+  },
+  {
+   "a": {
+    "proof": "angle",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "crossed"
+   },
+   "changed_px": 21684,
+   "changed_pct": 3.754
+  },
+  {
+   "a": {
+    "proof": "angle",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "stacked"
+   },
+   "changed_px": 21798,
+   "changed_pct": 3.774
+  },
+  {
+   "a": {
+    "proof": "angle",
+    "stock": "crossed"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "crossed"
+   },
+   "changed_px": 21259,
+   "changed_pct": 3.681
+  },
+  {
+   "a": {
+    "proof": "invariant",
+    "stock": "stacked"
+   },
+   "b": {
+    "proof": "invariant",
+    "stock": "crossed"
+   },
+   "changed_px": 3541,
+   "changed_pct": 0.613
+  }
+ ]
+}

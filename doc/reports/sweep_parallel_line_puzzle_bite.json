@@ -1,0 +1,187 @@
+{
+ "sweep": "parallel_line_puzzle",
+ "peak_changed_pct": 1.807,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "pair_pose": "upright",
+    "start_state": "parallel"
+   },
+   "b": {
+    "pair_pose": "upright",
+    "start_state": "crossed"
+   },
+   "changed_px": 10346,
+   "changed_pct": 1.791
+  },
+  {
+   "a": {
+    "pair_pose": "upright",
+    "start_state": "parallel"
+   },
+   "b": {
+    "pair_pose": "oblique",
+    "start_state": "parallel"
+   },
+   "changed_px": 923,
+   "changed_pct": 0.16
+  },
+  {
+   "a": {
+    "pair_pose": "upright",
+    "start_state": "parallel"
+   },
+   "b": {
+    "pair_pose": "oblique",
+    "start_state": "crossed"
+   },
+   "changed_px": 10345,
+   "changed_pct": 1.791
+  },
+  {
+   "a": {
+    "pair_pose": "upright",
+    "start_state": "parallel"
+   },
+   "b": {
+    "pair_pose": "lying",
+    "start_state": "parallel"
+   },
+   "changed_px": 923,
+   "changed_pct": 0.16
+  },
+  {
+   "a": {
+    "pair_pose": "upright",
+    "start_state": "parallel"
+   },
+   "b": {
+    "pair_pose": "lying",
+    "start_state": "crossed"
+   },
+   "changed_px": 10349,
+   "changed_pct": 1.792
+  },
+  {
+   "a": {
+    "pair_pose": "upright",
+    "start_state": "crossed"
+   },
+   "b": {
+    "pair_pose": "oblique",
+    "start_state": "parallel"
+   },
+   "changed_px": 10427,
+   "changed_pct": 1.805
+  },
+  {
+   "a": {
+    "pair_pose": "upright",
+    "start_state": "crossed"
+   },
+   "b": {
+    "pair_pose": "oblique",
+    "start_state": "crossed"
+   },
+   "changed_px": 643,
+   "changed_pct": 0.111
+  },
+  {
+   "a": {
+    "pair_pose": "upright",
+    "start_state": "crossed"
+   },
+   "b": {
+    "pair_pose": "lying",
+    "start_state": "parallel"
+   },
+   "changed_px": 10409,
+   "changed_pct": 1.802
+  },
+  {
+   "a": {
+    "pair_pose": "upright",
+    "start_state": "crossed"
+   },
+   "b": {
+    "pair_pose": "lying",
+    "start_state": "crossed"
+   },
+   "changed_px": 653,
+   "changed_pct": 0.113
+  },
+  {
+   "a": {
+    "pair_pose": "oblique",
+    "start_state": "parallel"
+   },
+   "b": {
+    "pair_pose": "oblique",
+    "start_state": "crossed"
+   },
+   "changed_px": 10429,
+   "changed_pct": 1.806
+  },
+  {
+   "a": {
+    "pair_pose": "oblique",
+    "start_state": "parallel"
+   },
+   "b": {
+    "pair_pose": "lying",
+    "start_state": "parallel"
+   },
+   "changed_px": 565,
+   "changed_pct": 0.098
+  },
+  {
+   "a": {
+    "pair_pose": "oblique",
+    "start_state": "parallel"
+   },
+   "b": {
+    "pair_pose": "lying",
+    "start_state": "crossed"
+   },
+   "changed_px": 10439,
+   "changed_pct": 1.807
+  },
+  {
+   "a": {
+    "pair_pose": "oblique",
+    "start_state": "crossed"
+   },
+   "b": {
+    "pair_pose": "lying",
+    "start_state": "parallel"
+   },
+   "changed_px": 10411,
+   "changed_pct": 1.802
+  },
+  {
+   "a": {
+    "pair_pose": "oblique",
+    "start_state": "crossed"
+   },
+   "b": {
+    "pair_pose": "lying",
+    "start_state": "crossed"
+   },
+   "changed_px": 502,
+   "changed_pct": 0.087
+  },
+  {
+   "a": {
+    "pair_pose": "lying",
+    "start_state": "parallel"
+   },
+   "b": {
+    "pair_pose": "lying",
+    "start_state": "crossed"
+   },
+   "changed_px": 10421,
+   "changed_pct": 1.804
+  }
+ ]
+}

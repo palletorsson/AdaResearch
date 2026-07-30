@@ -1,0 +1,187 @@
+{
+ "sweep": "vector_normalize_demo",
+ "peak_changed_pct": 2.591,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "input_mode": "long",
+    "reference_mode": "sphere"
+   },
+   "b": {
+    "input_mode": "long",
+    "reference_mode": "rings"
+   },
+   "changed_px": 13450,
+   "changed_pct": 2.329
+  },
+  {
+   "a": {
+    "input_mode": "long",
+    "reference_mode": "sphere"
+   },
+   "b": {
+    "input_mode": "short",
+    "reference_mode": "sphere"
+   },
+   "changed_px": 10952,
+   "changed_pct": 1.896
+  },
+  {
+   "a": {
+    "input_mode": "long",
+    "reference_mode": "sphere"
+   },
+   "b": {
+    "input_mode": "short",
+    "reference_mode": "rings"
+   },
+   "changed_px": 13583,
+   "changed_pct": 2.352
+  },
+  {
+   "a": {
+    "input_mode": "long",
+    "reference_mode": "sphere"
+   },
+   "b": {
+    "input_mode": "unit",
+    "reference_mode": "sphere"
+   },
+   "changed_px": 11050,
+   "changed_pct": 1.913
+  },
+  {
+   "a": {
+    "input_mode": "long",
+    "reference_mode": "sphere"
+   },
+   "b": {
+    "input_mode": "unit",
+    "reference_mode": "rings"
+   },
+   "changed_px": 14410,
+   "changed_pct": 2.495
+  },
+  {
+   "a": {
+    "input_mode": "long",
+    "reference_mode": "rings"
+   },
+   "b": {
+    "input_mode": "short",
+    "reference_mode": "sphere"
+   },
+   "changed_px": 13415,
+   "changed_pct": 2.323
+  },
+  {
+   "a": {
+    "input_mode": "long",
+    "reference_mode": "rings"
+   },
+   "b": {
+    "input_mode": "short",
+    "reference_mode": "rings"
+   },
+   "changed_px": 656,
+   "changed_pct": 0.114
+  },
+  {
+   "a": {
+    "input_mode": "long",
+    "reference_mode": "rings"
+   },
+   "b": {
+    "input_mode": "unit",
+    "reference_mode": "sphere"
+   },
+   "changed_px": 13495,
+   "changed_pct": 2.336
+  },
+  {
+   "a": {
+    "input_mode": "long",
+    "reference_mode": "rings"
+   },
+   "b": {
+    "input_mode": "unit",
+    "reference_mode": "rings"
+   },
+   "changed_px": 2165,
+   "changed_pct": 0.375
+  },
+  {
+   "a": {
+    "input_mode": "short",
+    "reference_mode": "sphere"
+   },
+   "b": {
+    "input_mode": "short",
+    "reference_mode": "rings"
+   },
+   "changed_px": 13101,
+   "changed_pct": 2.268
+  },
+  {
+   "a": {
+    "input_mode": "short",
+    "reference_mode": "sphere"
+   },
+   "b": {
+    "input_mode": "unit",
+    "reference_mode": "sphere"
+   },
+   "changed_px": 1204,
+   "changed_pct": 0.208
+  },
+  {
+   "a": {
+    "input_mode": "short",
+    "reference_mode": "sphere"
+   },
+   "b": {
+    "input_mode": "unit",
+    "reference_mode": "rings"
+   },
+   "changed_px": 14738,
+   "changed_pct": 2.552
+  },
+  {
+   "a": {
+    "input_mode": "short",
+    "reference_mode": "rings"
+   },
+   "b": {
+    "input_mode": "unit",
+    "reference_mode": "sphere"
+   },
+   "changed_px": 13568,
+   "changed_pct": 2.349
+  },
+  {
+   "a": {
+    "input_mode": "short",
+    "reference_mode": "rings"
+   },
+   "b": {
+    "input_mode": "unit",
+    "reference_mode": "rings"
+   },
+   "changed_px": 2072,
+   "changed_pct": 0.359
+  },
+  {
+   "a": {
+    "input_mode": "unit",
+    "reference_mode": "sphere"
+   },
+   "b": {
+    "input_mode": "unit",
+    "reference_mode": "rings"
+   },
+   "changed_px": 14964,
+   "changed_pct": 2.591
+  }
+ ]
+}

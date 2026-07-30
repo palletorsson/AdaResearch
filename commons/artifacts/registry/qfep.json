@@ -291,7 +291,9 @@
     },
     "default": "posture=line, emphasis=none - line runs the original centring loop verbatim and emphasis=none leaves highlighted_term empty, so all 13 existing placements render exactly as before",
     "was": "one hard-coded horizontal row of TextMesh with nothing lit: the script's own critical_parameter (highlighted_term, which term the equation is read through) was reachable only from code that never called it, and the posture of the line was not a parameter at all",
-    "note": "declared by hand 2026-07-29 - the sweep refused it as NO TURNABLE KNOBS because the five existing exports (animate, pulse_speed, glow_intensity, font_size, depth) had no apply_grid_config to reach them, and none of them changes what the formula argues. The axis is named posture, not layout, because curation_station already owns the key `layout` with an overlapping vocabulary (row/corner/ring)"
+    "note": "declared by hand 2026-07-29 - the sweep refused it as NO TURNABLE KNOBS because the five existing exports (animate, pulse_speed, glow_intensity, font_size, depth) had no apply_grid_config to reach them, and none of them changes what the formula argues. The axis is named posture, not layout, because curation_station already owns the key `layout` with an overlapping vocabulary (row/corner/ring)",
+    "framing": 0.72,
+    "framing_note": "emphasis lights one term inside a whole equation, so fitting the entire formula renders the lit glyph too small to read — 2.22% at default framing. 0.72 moves in far enough to see which term is lit while still holding the posture values, which change the whole layout."
    },
    "dev_themes": [
     "qfep",
@@ -4506,13 +4508,13 @@
   "edge_of_chaos_unlocked": {
    "dna": {
     "axes": {
-    "tenure": [
-    "unlocked",
-    "clamped",
-    "withheld",
-    "frozen",
-    "chaos"
-    ]
+     "tenure": [
+      "unlocked",
+      "clamped",
+      "withheld",
+      "frozen",
+      "chaos"
+     ]
     }
    },
    "name": "Edge of Chaos Unlocked",
@@ -4759,12 +4761,12 @@
   "snap_tetra_puzzle": {
    "dna": {
     "axes": {
-    "solid": [
-    "loose",
-    "closed",
-    "scattered",
-    "short"
-    ]
+     "solid": [
+      "loose",
+      "closed",
+      "scattered",
+      "short"
+     ]
     }
    },
    "name": "Snap Tetra Puzzle",
@@ -4839,12 +4841,12 @@
   "snap_cube_puzzle": {
    "dna": {
     "axes": {
-    "solid": [
-    "loose",
-    "closed",
-    "scattered",
-    "short"
-    ]
+     "solid": [
+      "loose",
+      "closed",
+      "scattered",
+      "short"
+     ]
     }
    },
    "name": "Snap Cube Puzzle",
@@ -4957,12 +4959,12 @@
   "shannon_workbench": {
    "dna": {
     "axes": {
-    "evidence": [
-    "sample",
-    "none",
-    "anecdote",
-    "census"
-    ]
+     "evidence": [
+      "sample",
+      "none",
+      "anecdote",
+      "census"
+     ]
     }
    },
    "name": "Shannon Workbench",
@@ -5168,13 +5170,13 @@
   "qfep_balance_workbench": {
    "dna": {
     "axes": {
-    "settling": [
-    "edge",
-    "order",
-    "entropy",
-    "integration",
-    "synthesis"
-    ]
+     "settling": [
+      "edge",
+      "order",
+      "entropy",
+      "integration",
+      "synthesis"
+     ]
     }
    },
    "name": "QFEP Balance Workbench",
@@ -5219,12 +5221,12 @@
   "microstate_counter": {
    "dna": {
     "axes": {
-    "macrostate": [
-    "uniform",
-    "corner",
-    "layered",
-    "spilled"
-    ]
+     "macrostate": [
+      "uniform",
+      "corner",
+      "layered",
+      "spilled"
+     ]
     }
    },
    "lookup_name": "microstate_counter",
@@ -5273,13 +5275,13 @@
   "possibility_space_cloud": {
    "dna": {
     "axes": {
-    "occupancy": [
-    "breath",
-    "pinched",
-    "packed",
-    "unboxed",
-    "widened"
-    ]
+     "occupancy": [
+      "breath",
+      "pinched",
+      "packed",
+      "unboxed",
+      "widened"
+     ]
     }
    },
    "lookup_name": "possibility_space_cloud",
@@ -5328,12 +5330,12 @@
   "entropy_fan": {
    "dna": {
     "axes": {
-    "prospect": [
-    "breath",
-    "thread",
-    "fan",
-    "pruned"
-    ]
+     "prospect": [
+      "breath",
+      "thread",
+      "fan",
+      "pruned"
+     ]
     }
    },
    "lookup_name": "entropy_fan",

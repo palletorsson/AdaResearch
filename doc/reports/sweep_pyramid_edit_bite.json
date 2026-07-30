@@ -1,0 +1,67 @@
+{
+ "sweep": "pyramid_edit",
+ "peak_changed_pct": 0.099,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "constraint": "free"
+   },
+   "b": {
+    "constraint": "symmetric"
+   },
+   "changed_px": 574,
+   "changed_pct": 0.099
+  },
+  {
+   "a": {
+    "constraint": "free"
+   },
+   "b": {
+    "constraint": "apex_only"
+   },
+   "changed_px": 574,
+   "changed_pct": 0.099
+  },
+  {
+   "a": {
+    "constraint": "free"
+   },
+   "b": {
+    "constraint": "base_only"
+   },
+   "changed_px": 574,
+   "changed_pct": 0.099
+  },
+  {
+   "a": {
+    "constraint": "symmetric"
+   },
+   "b": {
+    "constraint": "apex_only"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "constraint": "symmetric"
+   },
+   "b": {
+    "constraint": "base_only"
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "constraint": "apex_only"
+   },
+   "b": {
+    "constraint": "base_only"
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  }
+ ]
+}

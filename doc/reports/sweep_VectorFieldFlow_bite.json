@@ -1,0 +1,343 @@
+{
+ "sweep": "VectorFieldFlow",
+ "peak_changed_pct": 2.823,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "spiral",
+    "lattice": "polar"
+   },
+   "changed_px": 10477,
+   "changed_pct": 1.814
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "orbit",
+    "lattice": "square"
+   },
+   "changed_px": 12973,
+   "changed_pct": 2.246
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "orbit",
+    "lattice": "polar"
+   },
+   "changed_px": 11921,
+   "changed_pct": 2.064
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "sink",
+    "lattice": "square"
+   },
+   "changed_px": 13750,
+   "changed_pct": 2.381
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "sink",
+    "lattice": "polar"
+   },
+   "changed_px": 12197,
+   "changed_pct": 2.112
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "square"
+   },
+   "changed_px": 16308,
+   "changed_pct": 2.823
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "polar"
+   },
+   "changed_px": 13676,
+   "changed_pct": 2.368
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "orbit",
+    "lattice": "square"
+   },
+   "changed_px": 11798,
+   "changed_pct": 2.043
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "orbit",
+    "lattice": "polar"
+   },
+   "changed_px": 8691,
+   "changed_pct": 1.505
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "sink",
+    "lattice": "square"
+   },
+   "changed_px": 10714,
+   "changed_pct": 1.855
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "sink",
+    "lattice": "polar"
+   },
+   "changed_px": 8811,
+   "changed_pct": 1.525
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "square"
+   },
+   "changed_px": 13743,
+   "changed_pct": 2.379
+  },
+  {
+   "a": {
+    "field": "spiral",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "polar"
+   },
+   "changed_px": 10932,
+   "changed_pct": 1.893
+  },
+  {
+   "a": {
+    "field": "orbit",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "orbit",
+    "lattice": "polar"
+   },
+   "changed_px": 9683,
+   "changed_pct": 1.676
+  },
+  {
+   "a": {
+    "field": "orbit",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "sink",
+    "lattice": "square"
+   },
+   "changed_px": 13396,
+   "changed_pct": 2.319
+  },
+  {
+   "a": {
+    "field": "orbit",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "sink",
+    "lattice": "polar"
+   },
+   "changed_px": 11858,
+   "changed_pct": 2.053
+  },
+  {
+   "a": {
+    "field": "orbit",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "square"
+   },
+   "changed_px": 15853,
+   "changed_pct": 2.745
+  },
+  {
+   "a": {
+    "field": "orbit",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "polar"
+   },
+   "changed_px": 13258,
+   "changed_pct": 2.295
+  },
+  {
+   "a": {
+    "field": "orbit",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "sink",
+    "lattice": "square"
+   },
+   "changed_px": 11002,
+   "changed_pct": 1.905
+  },
+  {
+   "a": {
+    "field": "orbit",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "sink",
+    "lattice": "polar"
+   },
+   "changed_px": 9160,
+   "changed_pct": 1.586
+  },
+  {
+   "a": {
+    "field": "orbit",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "square"
+   },
+   "changed_px": 14070,
+   "changed_pct": 2.436
+  },
+  {
+   "a": {
+    "field": "orbit",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "polar"
+   },
+   "changed_px": 11112,
+   "changed_pct": 1.924
+  },
+  {
+   "a": {
+    "field": "sink",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "sink",
+    "lattice": "polar"
+   },
+   "changed_px": 6678,
+   "changed_pct": 1.156
+  },
+  {
+   "a": {
+    "field": "sink",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "square"
+   },
+   "changed_px": 14719,
+   "changed_pct": 2.548
+  },
+  {
+   "a": {
+    "field": "sink",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "polar"
+   },
+   "changed_px": 11818,
+   "changed_pct": 2.046
+  },
+  {
+   "a": {
+    "field": "sink",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "square"
+   },
+   "changed_px": 12819,
+   "changed_pct": 2.219
+  },
+  {
+   "a": {
+    "field": "sink",
+    "lattice": "polar"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "polar"
+   },
+   "changed_px": 9837,
+   "changed_pct": 1.703
+  },
+  {
+   "a": {
+    "field": "source",
+    "lattice": "square"
+   },
+   "b": {
+    "field": "source",
+    "lattice": "polar"
+   },
+   "changed_px": 10988,
+   "changed_pct": 1.902
+  }
+ ]
+}

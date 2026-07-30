@@ -15134,7 +15134,8 @@
     },
     "default": "constraint=free - the constraint code never runs and no handle position is ever written back, which is exactly the pre-promotion behaviour, so the 11 existing placements are unchanged.",
     "was": "No exports and no apply_grid_config at all - the sweep refused it as NO TURNABLE KNOBS. Five handles, every one of them independent, in every placement. The artifact's own @identity listed 'missing symmetry-lock toggle' under needs, so the axis was already named in the file; it just was not reachable from a map.",
-    "note": "Hand promotion. The truth line says a pyramid is just a parameterisation; the axis adds that a parameterisation is defined by what it forbids. symmetric mirrors the moved base corner into the other three and pins the apex to the centre axis, so dragging can never leave the family of right pyramids; apex_only freezes the base and stages the truth line literally; base_only nails the apex and deforms the footprint under it."
+    "note": "Hand promotion. The truth line says a pyramid is just a parameterisation; the axis adds that a parameterisation is defined by what it forbids. symmetric mirrors the moved base corner into the other three and pins the apex to the centre axis, so dragging can never leave the family of right pyramids; apex_only freezes the base and stages the truth line literally; base_only nails the apex and deforms the footprint under it.",
+    "sweep_note": "0.10% — INTERACTION-DEPENDENT, not inert. `constraint` governs which degrees of freedom the grab handles offer, so it only manifests when a hand drags one. A still shows the same pyramid under every value because nothing has been dragged. Judge this axis in a map, not from a sheet."
    },
    "category": "unknown",
    "complexity": "beginner",

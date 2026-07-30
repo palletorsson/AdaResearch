@@ -1,0 +1,187 @@
+{
+ "sweep": "mass_spring_damper",
+ "peak_changed_pct": 8.662,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "spread": "regimes",
+    "regime": "all"
+   },
+   "b": {
+    "spread": "regimes",
+    "regime": "underdamped"
+   },
+   "changed_px": 50032,
+   "changed_pct": 8.662
+  },
+  {
+   "a": {
+    "spread": "regimes",
+    "regime": "all"
+   },
+   "b": {
+    "spread": "sweep",
+    "regime": "all"
+   },
+   "changed_px": 24829,
+   "changed_pct": 4.299
+  },
+  {
+   "a": {
+    "spread": "regimes",
+    "regime": "all"
+   },
+   "b": {
+    "spread": "sweep",
+    "regime": "underdamped"
+   },
+   "changed_px": 49123,
+   "changed_pct": 8.505
+  },
+  {
+   "a": {
+    "spread": "regimes",
+    "regime": "all"
+   },
+   "b": {
+    "spread": "stiffness",
+    "regime": "all"
+   },
+   "changed_px": 10449,
+   "changed_pct": 1.809
+  },
+  {
+   "a": {
+    "spread": "regimes",
+    "regime": "all"
+   },
+   "b": {
+    "spread": "stiffness",
+    "regime": "underdamped"
+   },
+   "changed_px": 49932,
+   "changed_pct": 8.645
+  },
+  {
+   "a": {
+    "spread": "regimes",
+    "regime": "underdamped"
+   },
+   "b": {
+    "spread": "sweep",
+    "regime": "all"
+   },
+   "changed_px": 48118,
+   "changed_pct": 8.331
+  },
+  {
+   "a": {
+    "spread": "regimes",
+    "regime": "underdamped"
+   },
+   "b": {
+    "spread": "sweep",
+    "regime": "underdamped"
+   },
+   "changed_px": 2355,
+   "changed_pct": 0.408
+  },
+  {
+   "a": {
+    "spread": "regimes",
+    "regime": "underdamped"
+   },
+   "b": {
+    "spread": "stiffness",
+    "regime": "all"
+   },
+   "changed_px": 46796,
+   "changed_pct": 8.102
+  },
+  {
+   "a": {
+    "spread": "regimes",
+    "regime": "underdamped"
+   },
+   "b": {
+    "spread": "stiffness",
+    "regime": "underdamped"
+   },
+   "changed_px": 2424,
+   "changed_pct": 0.42
+  },
+  {
+   "a": {
+    "spread": "sweep",
+    "regime": "all"
+   },
+   "b": {
+    "spread": "sweep",
+    "regime": "underdamped"
+   },
+   "changed_px": 47060,
+   "changed_pct": 8.148
+  },
+  {
+   "a": {
+    "spread": "sweep",
+    "regime": "all"
+   },
+   "b": {
+    "spread": "stiffness",
+    "regime": "all"
+   },
+   "changed_px": 24550,
+   "changed_pct": 4.25
+  },
+  {
+   "a": {
+    "spread": "sweep",
+    "regime": "all"
+   },
+   "b": {
+    "spread": "stiffness",
+    "regime": "underdamped"
+   },
+   "changed_px": 48036,
+   "changed_pct": 8.316
+  },
+  {
+   "a": {
+    "spread": "sweep",
+    "regime": "underdamped"
+   },
+   "b": {
+    "spread": "stiffness",
+    "regime": "all"
+   },
+   "changed_px": 45919,
+   "changed_pct": 7.95
+  },
+  {
+   "a": {
+    "spread": "sweep",
+    "regime": "underdamped"
+   },
+   "b": {
+    "spread": "stiffness",
+    "regime": "underdamped"
+   },
+   "changed_px": 2762,
+   "changed_pct": 0.478
+  },
+  {
+   "a": {
+    "spread": "stiffness",
+    "regime": "all"
+   },
+   "b": {
+    "spread": "stiffness",
+    "regime": "underdamped"
+   },
+   "changed_px": 46675,
+   "changed_pct": 8.081
+  }
+ ]
+}
