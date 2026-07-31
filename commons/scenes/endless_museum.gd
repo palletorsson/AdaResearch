@@ -116,6 +116,7 @@ func _load_museums() -> void:
 				"museum": p.get("museum", ""), "w": int(p.get("w", 15)),
 				"h": int(p.get("h", 30)), "tile": p.get("tile", []),
 				"walk_rule": p.get("walk_rule", ""),
+				"color": String(p.get("color", "#888888")),
 				"em_order": int(p.get("em_order", 99))})
 	# the dealing order is DATA (em_order on the pattern, a proposal not a
 	# ruling); alphabetical keys are only the tiebreak. --em-first rotates a
@@ -135,7 +136,7 @@ func _load_museums() -> void:
 func _load_pool() -> void:
 	# the registry decides what is ALIVE (map_ready + scene on disk); the order
 	# mode decides how the living are dealt
-	var live: Dictionary = {}  # lookup -> scene
+	var live: Dictionary = {}  # lookup -> {scene, fp}
 	var dir := DirAccess.open(REGISTRY_DIR)
 	if dir == null:
 		return
@@ -153,12 +154,13 @@ func _load_pool() -> void:
 			var a: Dictionary = arts[lookup]
 			var scene: String = String(a.get("scene", ""))
 			if scene != "" and a.get("map_ready", false) and ResourceLoader.exists(scene):
-				live[String(lookup)] = scene
+				live[String(lookup)] = {"scene": scene, "fp": _footprint_of(a)}
 	if _order_mode == "spine" and _load_spine_pool(live):
 		return
 	# v1 fallback: alphabetical, then seeded shuffle
 	for lookup in live:
-		_pool.append({"lookup": lookup, "scene": live[lookup]})
+		_pool.append({"lookup": lookup, "scene": live[lookup]["scene"],
+			"fp": live[lookup]["fp"], "sequence": ""})
 	_pool.sort_custom(func(a, b): return String(a["lookup"]) < String(b["lookup"]))
 	var rng := RandomNumberGenerator.new()
 	rng.seed = _seed
@@ -185,7 +187,9 @@ func _load_spine_pool(live: Dictionary) -> bool:
 	for row in rows:
 		var lookup := String((row as Dictionary).get("lookup", ""))
 		if live.has(lookup):
-			_pool.append({"lookup": lookup, "scene": live[lookup]})
+			_pool.append({"lookup": lookup, "scene": live[lookup]["scene"],
+				"fp": live[lookup]["fp"],
+				"sequence": String((row as Dictionary).get("sequence", ""))})
 		else:
 			skipped += 1
 	if _pool.is_empty():
@@ -193,6 +197,42 @@ func _load_spine_pool(live: Dictionary) -> bool:
 	print("[endless_museum] pool: SPINE ORDER, %d of %d curriculum artifacts alive (%d not map_ready/on disk)" % [
 		_pool.size(), rows.size(), skipped])
 	return true
+
+## Widest horizontal footprint dimension declared for an artifact (cells).
+func _footprint_of(entry: Dictionary) -> int:
+	var params: Dictionary = entry.get("parameters", {})
+	var fp: Variant = params.get("footprint", null)
+	if fp is Array and (fp as Array).size() >= 3:
+		return maxi(1, maxi(int((fp as Array)[0]), int((fp as Array)[2])))
+	return 1
+
+## Deal the next artifact for a slot rank, spine order preserved up to a local
+## 16-deep swap: the hero plinth prefers the chapter's large piece, a podium
+## needs a compact one, a floor slot takes anything short of a giant — so a
+## building never perches on a pedestal and giants wait for the plinth.
+func _pick_pool(rank: int) -> Dictionary:
+	var n := _pool.size()
+	if n == 0:
+		return {}
+	var want_min := 1
+	var want_max := 99
+	match rank:
+		0: want_min = 2
+		1: want_max = 1
+		2: want_max = 2
+	for off in range(mini(16, n)):
+		var idx := (_pool_i + off) % n
+		var fp := int(_pool[idx].get("fp", 1))
+		if fp >= want_min and fp <= want_max:
+			if off > 0:
+				var cur := _pool_i % n
+				var tmp: Variant = _pool[cur]
+				_pool[cur] = _pool[idx]
+				_pool[idx] = tmp
+			break
+	var e: Dictionary = _pool[_pool_i % n]
+	_pool_i += 1
+	return e
 
 func _setup_world() -> void:
 	var env := WorldEnvironment.new()
@@ -319,11 +359,23 @@ func _build_segment() -> void:
 				slots.append({"x": x, "y": z, "top": 0.8, "rank": 0})
 	slots.sort_custom(func(a, b): return int(a["rank"]) < int(b["rank"]))
 	var placed := 0
+	var seg_seq := ""
 	for s in slots:
 		if placed >= MAX_ARTIFACTS_PER_SEGMENT or _pool.is_empty():
 			break
-		var entry: Dictionary = _pool[_pool_i % _pool.size()]
-		_pool_i += 1
+		var entry: Dictionary = _pick_pool(int(s["rank"]))
+		if entry.is_empty():
+			break
+		# chapter alignment: a museum houses ONE sequence. When the spine order
+		# crosses into the next sequence mid-museum (and this museum already
+		# holds a real showing), the chapter opener is handed back and the NEXT
+		# museum opens with it — the book's chapters get buildings.
+		var sq := String(entry.get("sequence", ""))
+		if seg_seq == "":
+			seg_seq = sq
+		elif sq != seg_seq and sq != "" and placed >= 4:
+			_pool_i -= 1
+			break
 		var ps: PackedScene = load(String(entry["scene"])) as PackedScene
 		if ps == null:
 			continue
@@ -337,20 +389,39 @@ func _build_segment() -> void:
 	# museum banner at the threshold — the canonical TextScreen (framed panel,
 	# baked albedo, headless-safe). Properties set before add_child so the one
 	# _ready() rebuild builds the right sign.
+	# each museum wears its own colour: the pattern's hex tints the banner title
+	# and an ember strip across the threshold floor
+	var accent := Color.html(String(spec.get("color", "#888888")))
 	var banner: Node3D = TextScreenRes.new()
 	banner.mode = TextScreenRes.Mode.SCREEN
 	banner.title = String(spec["label"])
-	banner.body = String(spec["museum"])
+	# the banner names the building AND the chapter it houses
+	banner.body = ("%s\n\n%s" % [spec["museum"], seg_seq]) if seg_seq != "" else String(spec["museum"])
+	banner.title_color = accent.lightened(0.35)
 	banner.width_m = 2.8
 	# the banner hangs in the vestibule, over the museum's entry
 	banner.position = Vector3(w / 2.0, 2.45, VESTIBULE_H - 0.45)
 	banner.rotation_degrees = Vector3(0, 180, 0)
 	seg.add_child(banner)
-	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h), "index": _seg_index})
-	_next_z += float(h)
+	var ember := MeshInstance3D.new()
+	var ebm := BoxMesh.new()
+	ebm.size = Vector3(w - 2.0, 0.02, 0.08)
+	ember.mesh = ebm
+	var emat := StandardMaterial3D.new()
+	emat.albedo_color = accent
+	emat.emission_enabled = true
+	emat.emission = accent
+	emat.emission_energy_multiplier = 1.6
+	ember.material_override = emat
+	ember.position = Vector3(w / 2.0, 0.02, VESTIBULE_H - 0.15)
+	seg.add_child(ember)
+	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H), "index": _seg_index})
+	_next_z += float(h) + float(VESTIBULE_H)
 	_seg_index += 1
-	print("[endless_museum] seg %d = %s (%s) placed %d artifacts, z %.0f..%.0f" % [
-		_seg_index - 1, spec["key"], spec["museum"], placed, _segments[-1]["z0"], _segments[-1]["z1"]])
+	_prev_w = w
+	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d, z %.0f..%.0f" % [
+		_seg_index - 1, spec["key"], spec["museum"], seg_seq if seg_seq != "" else "-",
+		placed, _segments[-1]["z0"], _segments[-1]["z1"]])
 
 func _process(_delta: float) -> void:
 	if _cam == null or _shot_path != "":

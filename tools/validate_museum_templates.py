@@ -132,6 +132,56 @@ def check(key: str, p: dict) -> list[str]:
     return issues
 
 
+LOBBY_W = 17
+VEST_H = 4
+
+
+def chain_check(pats: dict) -> int:
+    """Every museum's exit must reach every museum's entry through the vestibule.
+
+    Models the scene's lobby EXACTLY as endless_museum.gd builds it: VEST_H open
+    rows of LOBBY_W, side walls at x=0 and x=LOBBY_W-1, an entry-edge strip
+    sealing x >= prev_w-1 and an exit-edge strip sealing x >= next_w-1. This
+    check exists because the strip logic shipped once with prev_w never set —
+    the seal covered the full width and every museum-to-museum crossing was
+    walled off, and no per-template validation could see it.
+    """
+    mus = {k: p for k, p in pats.items() if isinstance(p, dict) and p.get("museum")}
+    bad = 0
+    for ka, a in sorted(mus.items()):
+        for kb, b in sorted(mus.items()):
+            wa, wb = int(a["w"]), int(b["w"])
+            exit_cells = {x for x, c in enumerate([str(c) for c in a["tile"][-1]]) if c in STAND}
+            entry_cells = {x for x, c in enumerate([str(c) for c in b["tile"][0]]) if c in STAND}
+            # lobby grid: rows 0..VEST_H-1
+            open_col = [[True] * LOBBY_W for _ in range(VEST_H)]
+            for zr in range(VEST_H):
+                open_col[zr][0] = open_col[zr][LOBBY_W - 1] = False
+            for x in range(wa - 1, LOBBY_W):
+                open_col[0][x] = False
+            for x in range(wb - 1, LOBBY_W):
+                open_col[VEST_H - 1][x] = False
+            starts = [(0, x) for x in exit_cells if x < LOBBY_W and open_col[0][x]]
+            goals = {(VEST_H - 1, x) for x in entry_cells if x < LOBBY_W and open_col[VEST_H - 1][x]}
+            seen, q = set(starts), deque(starts)
+            ok = False
+            while q:
+                y, x = q.popleft()
+                if (y, x) in goals:
+                    ok = True
+                    break
+                for yy, xx in ((y - 1, x), (y + 1, x), (y, x - 1), (y, x + 1)):
+                    if 0 <= yy < VEST_H and 0 <= xx < LOBBY_W and (yy, xx) not in seen and open_col[yy][xx]:
+                        seen.add((yy, xx))
+                        q.append((yy, xx))
+            if not ok:
+                print(f"CHAIN FAIL {ka} -> {kb}: exit gap {sorted(exit_cells)} cannot reach entry gap {sorted(entry_cells)}")
+                bad += 1
+    n = len(mus)
+    print(f"chain: {n * n - bad}/{n * n} ordered museum pairs pass the vestibule")
+    return bad
+
+
 def selftest() -> int:
     good = {"w": 13, "h": 24, "tile": []}
     t = [["4"] * 13 for _ in range(24)]
@@ -182,6 +232,7 @@ def main() -> int:
             print(f"      - {i}")
         bad += 1 if issues else 0
     print(f"\n{bad} failing museum template(s)")
+    bad += chain_check(pats)
     return bad
 
 
