@@ -529159,6 +529159,3287 @@
     ]
    }
   },
+  "hangar_barrier_fence": {
+   "classes": {
+    "MeshInstance3D": 22
+   },
+   "element_count": 22,
+   "elements": [
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@211",
+     "pos": [
+      0.261,
+      0.749,
+      0.037
+     ],
+     "size": [
+      0.02,
+      0.284,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@210",
+     "pos": [
+      0.0,
+      0.699,
+      0.037
+     ],
+     "size": [
+      0.015,
+      0.384,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@209",
+     "pos": [
+      -0.261,
+      0.777,
+      0.037
+     ],
+     "size": [
+      0.01,
+      0.227,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@208",
+     "pos": [
+      -1.139,
+      0.749,
+      0.037
+     ],
+     "size": [
+      0.02,
+      0.284,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@207",
+     "pos": [
+      -1.4,
+      0.699,
+      0.037
+     ],
+     "size": [
+      0.015,
+      0.384,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@206",
+     "pos": [
+      -1.661,
+      0.777,
+      0.037
+     ],
+     "size": [
+      0.01,
+      0.227,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@205",
+     "pos": [
+      0.0,
+      0.035,
+      0.031
+     ],
+     "size": [
+      4.2,
+      0.07,
+      0.006
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@204",
+     "pos": [
+      0.0,
+      0.792,
+      0.045
+     ],
+     "size": [
+      2.94,
+      0.176,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@202",
+     "pos": [
+      1.4,
+      0.55,
+      0.016
+     ],
+     "size": [
+      1.258,
+      0.018,
+      0.018
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@201",
+     "pos": [
+      1.4,
+      0.55,
+      0.0
+     ],
+     "size": [
+      1.31,
+      0.946,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@199",
+     "pos": [
+      0.0,
+      0.55,
+      0.016
+     ],
+     "size": [
+      1.258,
+      0.018,
+      0.018
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@198",
+     "pos": [
+      0.0,
+      0.55,
+      0.0
+     ],
+     "size": [
+      1.31,
+      0.946,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@196",
+     "pos": [
+      -1.4,
+      0.55,
+      0.016
+     ],
+     "size": [
+      1.258,
+      0.018,
+      0.018
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@195",
+     "pos": [
+      -1.4,
+      0.55,
+      0.0
+     ],
+     "size": [
+      1.31,
+      0.946,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@194",
+     "pos": [
+      2.1,
+      0.55,
+      0.0
+     ],
+     "size": [
+      0.09,
+      1.1,
+      0.09
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@193",
+     "pos": [
+      2.1,
+      0.015,
+      0.0
+     ],
+     "size": [
+      0.22,
+      0.03,
+      0.22
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@192",
+     "pos": [
+      0.7,
+      0.55,
+      0.0
+     ],
+     "size": [
+      0.09,
+      1.1,
+      0.09
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@191",
+     "pos": [
+      0.7,
+      0.015,
+      0.0
+     ],
+     "size": [
+      0.22,
+      0.03,
+      0.22
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@190",
+     "pos": [
+      -0.7,
+      0.55,
+      0.0
+     ],
+     "size": [
+      0.09,
+      1.1,
+      0.09
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@189",
+     "pos": [
+      -0.7,
+      0.015,
+      0.0
+     ],
+     "size": [
+      0.22,
+      0.03,
+      0.22
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@188",
+     "pos": [
+      -2.1,
+      0.55,
+      0.0
+     ],
+     "size": [
+      0.09,
+      1.1,
+      0.09
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@187",
+     "pos": [
+      -2.1,
+      0.015,
+      0.0
+     ],
+     "size": [
+      0.22,
+      0.03,
+      0.22
+     ]
+    }
+   ],
+   "measured_at": "2026-07-31T10:07:30Z",
+   "scene": "res://commons/artifacts/hangar_barrier_fence/hangar_barrier_fence.tscn",
+   "truncated": false,
+   "union_aabb": {
+    "center": [
+     0.0,
+     0.55,
+     0.0
+    ],
+    "size": [
+     4.42,
+     1.1,
+     0.22
+    ]
+   }
+  },
+  "hangar_cabinet_cluster": {
+   "classes": {
+    "MeshInstance3D": 41
+   },
+   "element_count": 41,
+   "elements": [
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@170",
+     "pos": [
+      0.126,
+      1.161,
+      0.334
+     ],
+     "size": [
+      0.013,
+      0.774,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@169",
+     "pos": [
+      0.042,
+      1.299,
+      0.334
+     ],
+     "size": [
+      0.02,
+      0.498,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@168",
+     "pos": [
+      -0.042,
+      1.211,
+      0.334
+     ],
+     "size": [
+      0.015,
+      0.675,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@167",
+     "pos": [
+      -0.126,
+      1.349,
+      0.334
+     ],
+     "size": [
+      0.01,
+      0.399,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@166",
+     "pos": [
+      0.0,
+      0.03,
+      0.324
+     ],
+     "size": [
+      1.824,
+      0.06,
+      0.006
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@165",
+     "pos": [
+      0.547,
+      0.15,
+      0.34
+     ],
+     "size": [
+      0.547,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@164",
+     "pos": [
+      0.0,
+      0.15,
+      0.34
+     ],
+     "size": [
+      0.547,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@163",
+     "pos": [
+      -0.547,
+      0.15,
+      0.34
+     ],
+     "size": [
+      0.547,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@162",
+     "pos": [
+      0.852,
+      0.02,
+      0.24
+     ],
+     "size": [
+      0.072,
+      0.04,
+      0.072
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@161",
+     "pos": [
+      0.372,
+      0.02,
+      0.24
+     ],
+     "size": [
+      0.072,
+      0.04,
+      0.072
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@160",
+     "pos": [
+      0.612,
+      0.025,
+      0.0
+     ],
+     "size": [
+      0.564,
+      0.05,
+      0.564
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@159",
+     "pos": [
+      0.612,
+      0.142,
+      0.332
+     ],
+     "size": [
+      0.204,
+      0.142,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@158",
+     "pos": [
+      0.612,
+      0.596,
+      0.326
+     ],
+     "size": [
+      0.337,
+      0.022,
+      0.012
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@157",
+     "pos": [
+      0.612,
+      0.492,
+      0.326
+     ],
+     "size": [
+      0.337,
+      0.022,
+      0.012
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@156",
+     "pos": [
+      0.612,
+      0.388,
+      0.326
+     ],
+     "size": [
+      0.337,
+      0.022,
+      0.012
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@155",
+     "pos": [
+      0.612,
+      0.284,
+      0.326
+     ],
+     "size": [
+      0.337,
+      0.022,
+      0.012
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@154",
+     "pos": [
+      0.612,
+      0.71,
+      0.31
+     ],
+     "size": [
+      0.468,
+      1.164,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@153",
+     "pos": [
+      0.612,
+      0.71,
+      0.0
+     ],
+     "size": [
+      0.6,
+      1.42,
+      0.6
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@152",
+     "pos": [
+      0.24,
+      0.02,
+      0.24
+     ],
+     "size": [
+      0.072,
+      0.04,
+      0.072
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@151",
+     "pos": [
+      -0.24,
+      0.02,
+      0.24
+     ],
+     "size": [
+      0.072,
+      0.04,
+      0.072
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@150",
+     "pos": [
+      0.0,
+      0.025,
+      0.0
+     ],
+     "size": [
+      0.564,
+      0.05,
+      0.564
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@149",
+     "pos": [
+      0.0,
+      0.19,
+      0.332
+     ],
+     "size": [
+      0.204,
+      0.19,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@147",
+     "pos": [
+      0.0,
+      1.406,
+      0.372
+     ],
+     "size": [
+      0.218,
+      0.026,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@146",
+     "pos": [
+      0.0,
+      1.464,
+      0.372
+     ],
+     "size": [
+      0.234,
+      0.032,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@145",
+     "pos": [
+      0.0,
+      1.406,
+      0.35
+     ],
+     "size": [
+      0.26,
+      0.161,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@144",
+     "pos": [
+      0.138,
+      1.406,
+      0.35
+     ],
+     "size": [
+      0.016,
+      0.161,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@143",
+     "pos": [
+      -0.138,
+      1.406,
+      0.35
+     ],
+     "size": [
+      0.016,
+      0.161,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@142",
+     "pos": [
+      0.0,
+      1.318,
+      0.35
+     ],
+     "size": [
+      0.291,
+      0.016,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@141",
+     "pos": [
+      0.0,
+      1.494,
+      0.35
+     ],
+     "size": [
+      0.291,
+      0.016,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@140",
+     "pos": [
+      0.0,
+      0.95,
+      0.31
+     ],
+     "size": [
+      0.468,
+      1.558,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@139",
+     "pos": [
+      0.0,
+      0.95,
+      0.0
+     ],
+     "size": [
+      0.6,
+      1.9,
+      0.6
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@138",
+     "pos": [
+      -0.372,
+      0.02,
+      0.24
+     ],
+     "size": [
+      0.072,
+      0.04,
+      0.072
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@137",
+     "pos": [
+      -0.852,
+      0.02,
+      0.24
+     ],
+     "size": [
+      0.072,
+      0.04,
+      0.072
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@136",
+     "pos": [
+      -0.612,
+      0.025,
+      0.0
+     ],
+     "size": [
+      0.564,
+      0.05,
+      0.564
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@135",
+     "pos": [
+      -0.612,
+      0.16,
+      0.332
+     ],
+     "size": [
+      0.204,
+      0.16,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@134",
+     "pos": [
+      -0.612,
+      0.672,
+      0.326
+     ],
+     "size": [
+      0.337,
+      0.022,
+      0.012
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@133",
+     "pos": [
+      -0.612,
+      0.555,
+      0.326
+     ],
+     "size": [
+      0.337,
+      0.022,
+      0.012
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@132",
+     "pos": [
+      -0.612,
+      0.437,
+      0.326
+     ],
+     "size": [
+      0.337,
+      0.022,
+      0.012
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@131",
+     "pos": [
+      -0.612,
+      0.32,
+      0.326
+     ],
+     "size": [
+      0.337,
+      0.022,
+      0.012
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@130",
+     "pos": [
+      -0.612,
+      0.8,
+      0.31
+     ],
+     "size": [
+      0.468,
+      1.312,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@129",
+     "pos": [
+      -0.612,
+      0.8,
+      0.0
+     ],
+     "size": [
+      0.6,
+      1.6,
+      0.6
+     ]
+    }
+   ],
+   "measured_at": "2026-07-31T10:07:29Z",
+   "scene": "res://commons/artifacts/hangar_cabinet_cluster/hangar_cabinet_cluster.tscn",
+   "truncated": false,
+   "union_aabb": {
+    "center": [
+     0.0,
+     0.95,
+     0.037
+    ],
+    "size": [
+     1.824,
+     1.9,
+     0.675
+    ]
+   }
+  },
+  "hangar_podium": {
+   "classes": {
+    "MeshInstance3D": 19
+   },
+   "element_count": 19,
+   "elements": [
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@21",
+     "pos": [
+      0.173,
+      0.614,
+      0.374
+     ],
+     "size": [
+      0.013,
+      0.382,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@20",
+     "pos": [
+      0.058,
+      0.682,
+      0.374
+     ],
+     "size": [
+      0.02,
+      0.246,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@19",
+     "pos": [
+      -0.058,
+      0.639,
+      0.374
+     ],
+     "size": [
+      0.015,
+      0.333,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@18",
+     "pos": [
+      -0.173,
+      0.707,
+      0.374
+     ],
+     "size": [
+      0.01,
+      0.197,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@17",
+     "pos": [
+      0.0,
+      0.035,
+      0.424
+     ],
+     "size": [
+      0.84,
+      0.07,
+      0.006
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@16",
+     "pos": [
+      0.173,
+      0.69,
+      0.373
+     ],
+     "size": [
+      0.173,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@15",
+     "pos": [
+      0.0,
+      0.69,
+      0.373
+     ],
+     "size": [
+      0.173,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@14",
+     "pos": [
+      -0.173,
+      0.69,
+      0.373
+     ],
+     "size": [
+      0.173,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@13",
+     "pos": [
+      -0.282,
+      1.03,
+      0.0
+     ],
+     "size": [
+      0.035,
+      0.06,
+      0.6
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@12",
+     "pos": [
+      0.282,
+      1.03,
+      0.0
+     ],
+     "size": [
+      0.035,
+      0.06,
+      0.6
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@11",
+     "pos": [
+      0.0,
+      1.03,
+      -0.282
+     ],
+     "size": [
+      0.6,
+      0.06,
+      0.035
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@10",
+     "pos": [
+      0.0,
+      1.03,
+      0.282
+     ],
+     "size": [
+      0.6,
+      0.06,
+      0.035
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@9",
+     "pos": [
+      0.0,
+      0.96,
+      0.0
+     ],
+     "size": [
+      0.6,
+      0.08,
+      0.6
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@8",
+     "pos": [
+      0.0,
+      0.51,
+      -0.371
+     ],
+     "size": [
+      0.533,
+      0.64,
+      0.022
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@7",
+     "pos": [
+      0.0,
+      0.51,
+      0.371
+     ],
+     "size": [
+      0.533,
+      0.64,
+      0.022
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@6",
+     "pos": [
+      -0.371,
+      0.51,
+      0.0
+     ],
+     "size": [
+      0.022,
+      0.64,
+      0.533
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@5",
+     "pos": [
+      0.371,
+      0.51,
+      0.0
+     ],
+     "size": [
+      0.022,
+      0.64,
+      0.533
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@4",
+     "pos": [
+      0.0,
+      0.51,
+      0.0
+     ],
+     "size": [
+      0.72,
+      0.82,
+      0.72
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@3",
+     "pos": [
+      0.0,
+      0.05,
+      0.0
+     ],
+     "size": [
+      0.84,
+      0.1,
+      0.84
+     ]
+    }
+   ],
+   "measured_at": "2026-07-31T10:07:26Z",
+   "scene": "res://commons/artifacts/hangar_podium/hangar_podium.tscn",
+   "truncated": false,
+   "union_aabb": {
+    "center": [
+     0.0,
+     0.53,
+     0.004
+    ],
+    "size": [
+     0.84,
+     1.06,
+     0.847
+    ]
+   }
+  },
+  "hangar_step_base": {
+   "classes": {
+    "MeshInstance3D": 16
+   },
+   "element_count": 16,
+   "elements": [
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@186",
+     "pos": [
+      0.0,
+      0.105,
+      1.04
+     ],
+     "size": [
+      0.7,
+      0.125,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@185",
+     "pos": [
+      0.416,
+      0.171,
+      1.014
+     ],
+     "size": [
+      0.02,
+      0.066,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@184",
+     "pos": [
+      0.0,
+      0.159,
+      1.014
+     ],
+     "size": [
+      0.015,
+      0.089,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@183",
+     "pos": [
+      -0.416,
+      0.177,
+      1.014
+     ],
+     "size": [
+      0.01,
+      0.053,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@182",
+     "pos": [
+      0.0,
+      0.03,
+      1.004
+     ],
+     "size": [
+      2.0,
+      0.06,
+      0.006
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@181",
+     "pos": [
+      0.3,
+      0.125,
+      1.013
+     ],
+     "size": [
+      0.3,
+      0.04,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@180",
+     "pos": [
+      0.0,
+      0.125,
+      1.013
+     ],
+     "size": [
+      0.3,
+      0.04,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@179",
+     "pos": [
+      -0.3,
+      0.125,
+      1.013
+     ],
+     "size": [
+      0.3,
+      0.04,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@178",
+     "pos": [
+      0.0,
+      0.188,
+      1.01
+     ],
+     "size": [
+      2.0,
+      0.125,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@177",
+     "pos": [
+      0.0,
+      0.185,
+      0.975
+     ],
+     "size": [
+      1.88,
+      0.05,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@176",
+     "pos": [
+      0.0,
+      0.23,
+      0.0
+     ],
+     "size": [
+      1.88,
+      0.04,
+      1.88
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@175",
+     "pos": [
+      0.0,
+      0.125,
+      -0.985
+     ],
+     "size": [
+      1.88,
+      0.205,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@174",
+     "pos": [
+      0.0,
+      0.125,
+      0.985
+     ],
+     "size": [
+      1.88,
+      0.205,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@173",
+     "pos": [
+      -0.985,
+      0.125,
+      0.0
+     ],
+     "size": [
+      0.03,
+      0.205,
+      1.88
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@172",
+     "pos": [
+      0.985,
+      0.125,
+      0.0
+     ],
+     "size": [
+      0.03,
+      0.205,
+      1.88
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@171",
+     "pos": [
+      0.0,
+      0.125,
+      0.0
+     ],
+     "size": [
+      1.88,
+      0.25,
+      1.88
+     ]
+    }
+   ],
+   "measured_at": "2026-07-31T10:07:30Z",
+   "scene": "res://commons/artifacts/hangar_step_base/hangar_step_base.tscn",
+   "truncated": false,
+   "union_aabb": {
+    "center": [
+     0.0,
+     0.125,
+     0.02
+    ],
+    "size": [
+     2.0,
+     0.25,
+     2.04
+    ]
+   }
+  },
+  "hangar_supply_pile": {
+   "classes": {
+    "MeshInstance3D": 19
+   },
+   "element_count": 19,
+   "elements": [
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@89",
+     "pos": [
+      -0.05,
+      0.236,
+      0.62
+     ],
+     "size": [
+      0.28,
+      0.4,
+      0.28
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@88",
+     "pos": [
+      -0.05,
+      0.018,
+      0.62
+     ],
+     "size": [
+      0.26,
+      0.036,
+      0.26
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@86",
+     "pos": [
+      0.27,
+      0.212,
+      0.16
+     ],
+     "size": [
+      0.087,
+      0.237,
+      0.126
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@84",
+     "pos": [
+      0.35,
+      0.492,
+      0.21
+     ],
+     "size": [
+      0.159,
+      0.348,
+      0.061
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@82",
+     "pos": [
+      0.48,
+      0.745,
+      0.2
+     ],
+     "size": [
+      0.176,
+      0.193,
+      0.082
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@81",
+     "pos": [
+      0.55,
+      0.83,
+      0.18
+     ],
+     "size": [
+      0.044,
+      0.06,
+      0.044
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@80",
+     "pos": [
+      0.55,
+      0.75,
+      0.18
+     ],
+     "size": [
+      0.187,
+      0.07,
+      0.187
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@79",
+     "pos": [
+      0.55,
+      0.36,
+      0.18
+     ],
+     "size": [
+      0.22,
+      0.72,
+      0.22
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@78",
+     "pos": [
+      0.0,
+      0.03,
+      0.294
+     ],
+     "size": [
+      0.62,
+      0.06,
+      0.006
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@77",
+     "pos": [
+      0.04,
+      1.585,
+      0.06
+     ],
+     "size": [
+      0.446,
+      0.03,
+      0.446
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@76",
+     "pos": [
+      0.04,
+      1.43,
+      0.06
+     ],
+     "size": [
+      0.433,
+      0.34,
+      0.433
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@75",
+     "pos": [
+      -0.06,
+      1.245,
+      0.05
+     ],
+     "size": [
+      0.537,
+      0.03,
+      0.52
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@74",
+     "pos": [
+      -0.06,
+      1.07,
+      0.05
+     ],
+     "size": [
+      0.523,
+      0.38,
+      0.507
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@72",
+     "pos": [
+      0.018,
+      0.67,
+      0.218
+     ],
+     "size": [
+      0.375,
+      0.109,
+      0.046
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@71",
+     "pos": [
+      0.05,
+      0.865,
+      -0.04
+     ],
+     "size": [
+      0.61,
+      0.03,
+      0.575
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@70",
+     "pos": [
+      0.05,
+      0.67,
+      -0.04
+     ],
+     "size": [
+      0.597,
+      0.42,
+      0.562
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@68",
+     "pos": [
+      0.021,
+      0.23,
+      0.299
+     ],
+     "size": [
+      0.433,
+      0.12,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@67",
+     "pos": [
+      0.0,
+      0.445,
+      0.0
+     ],
+     "size": [
+      0.672,
+      0.03,
+      0.635
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@66",
+     "pos": [
+      0.0,
+      0.23,
+      0.0
+     ],
+     "size": [
+      0.659,
+      0.46,
+      0.622
+     ]
+    }
+   ],
+   "measured_at": "2026-07-31T10:07:28Z",
+   "scene": "res://commons/artifacts/hangar_supply_pile/hangar_supply_pile.tscn",
+   "truncated": false,
+   "union_aabb": {
+    "center": [
+     0.162,
+     0.8,
+     0.216
+    ],
+    "size": [
+     0.996,
+     1.6,
+     1.088
+    ]
+   }
+  },
+  "hangar_wall_panel": {
+   "classes": {
+    "MeshInstance3D": 40
+   },
+   "element_count": 40,
+   "elements": [
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@65",
+     "pos": [
+      0.576,
+      1.631,
+      0.135
+     ],
+     "size": [
+      0.013,
+      1.211,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@64",
+     "pos": [
+      0.192,
+      1.846,
+      0.135
+     ],
+     "size": [
+      0.02,
+      0.78,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@63",
+     "pos": [
+      -0.192,
+      1.708,
+      0.135
+     ],
+     "size": [
+      0.015,
+      1.055,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@62",
+     "pos": [
+      -0.576,
+      1.924,
+      0.135
+     ],
+     "size": [
+      0.01,
+      0.624,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@61",
+     "pos": [
+      0.0,
+      0.04,
+      0.095
+     ],
+     "size": [
+      2.4,
+      0.08,
+      0.006
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@60",
+     "pos": [
+      0.4,
+      2.236,
+      0.135
+     ],
+     "size": [
+      0.4,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@59",
+     "pos": [
+      0.0,
+      2.236,
+      0.135
+     ],
+     "size": [
+      0.4,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@58",
+     "pos": [
+      -0.4,
+      2.236,
+      0.135
+     ],
+     "size": [
+      0.4,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@57",
+     "pos": [
+      0.528,
+      0.894,
+      0.15
+     ],
+     "size": [
+      0.537,
+      0.02,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@56",
+     "pos": [
+      0.528,
+      0.783,
+      0.15
+     ],
+     "size": [
+      0.537,
+      0.02,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@55",
+     "pos": [
+      0.528,
+      0.673,
+      0.15
+     ],
+     "size": [
+      0.537,
+      0.02,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@54",
+     "pos": [
+      0.528,
+      0.562,
+      0.15
+     ],
+     "size": [
+      0.537,
+      0.02,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@53",
+     "pos": [
+      0.528,
+      0.728,
+      0.125
+     ],
+     "size": [
+      0.624,
+      0.52,
+      0.04
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@51",
+     "pos": [
+      0.96,
+      2.288,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@50",
+     "pos": [
+      0.96,
+      1.794,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@49",
+     "pos": [
+      0.96,
+      1.3,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@48",
+     "pos": [
+      0.96,
+      0.806,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@47",
+     "pos": [
+      0.96,
+      0.312,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@45",
+     "pos": [
+      -0.96,
+      2.288,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@44",
+     "pos": [
+      -0.96,
+      1.794,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@43",
+     "pos": [
+      -0.96,
+      1.3,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@42",
+     "pos": [
+      -0.96,
+      0.806,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@41",
+     "pos": [
+      -0.96,
+      0.312,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@39",
+     "pos": [
+      0.96,
+      0.312,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@38",
+     "pos": [
+      0.576,
+      0.312,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@37",
+     "pos": [
+      0.192,
+      0.312,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@36",
+     "pos": [
+      -0.192,
+      0.312,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@35",
+     "pos": [
+      -0.576,
+      0.312,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@34",
+     "pos": [
+      -0.96,
+      0.312,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@32",
+     "pos": [
+      0.96,
+      2.288,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@31",
+     "pos": [
+      0.576,
+      2.288,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@30",
+     "pos": [
+      0.192,
+      2.288,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@29",
+     "pos": [
+      -0.192,
+      2.288,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@28",
+     "pos": [
+      -0.576,
+      2.288,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@27",
+     "pos": [
+      -0.96,
+      2.288,
+      0.125
+     ],
+     "size": [
+      0.044,
+      0.044,
+      0.026
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@26",
+     "pos": [
+      0.564,
+      1.914,
+      0.09
+     ],
+     "size": [
+      0.984,
+      1.084,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@25",
+     "pos": [
+      0.564,
+      0.686,
+      0.09
+     ],
+     "size": [
+      0.984,
+      1.084,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@24",
+     "pos": [
+      -0.564,
+      1.914,
+      0.09
+     ],
+     "size": [
+      0.984,
+      1.084,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@23",
+     "pos": [
+      -0.564,
+      0.686,
+      0.09
+     ],
+     "size": [
+      0.984,
+      1.084,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@22",
+     "pos": [
+      0.0,
+      1.3,
+      0.0
+     ],
+     "size": [
+      2.4,
+      2.6,
+      0.15
+     ]
+    }
+   ],
+   "measured_at": "2026-07-31T10:07:27Z",
+   "scene": "res://commons/artifacts/hangar_wall_panel/hangar_wall_panel.tscn",
+   "truncated": false,
+   "union_aabb": {
+    "center": [
+     0.0,
+     1.3,
+     0.043
+    ],
+    "size": [
+     2.4,
+     2.6,
+     0.235
+    ]
+   }
+  },
+  "hangar_worktable": {
+   "classes": {
+    "MeshInstance3D": 38
+   },
+   "element_count": 38,
+   "elements": [
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@128",
+     "pos": [
+      0.336,
+      0.864,
+      0.426
+     ],
+     "size": [
+      0.013,
+      0.052,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@127",
+     "pos": [
+      0.112,
+      0.874,
+      0.426
+     ],
+     "size": [
+      0.02,
+      0.034,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@126",
+     "pos": [
+      -0.112,
+      0.868,
+      0.426
+     ],
+     "size": [
+      0.015,
+      0.046,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@125",
+     "pos": [
+      -0.336,
+      0.877,
+      0.426
+     ],
+     "size": [
+      0.01,
+      0.027,
+      0.004
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@124",
+     "pos": [
+      0.0,
+      0.035,
+      0.404
+     ],
+     "size": [
+      1.6,
+      0.07,
+      0.006
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@123",
+     "pos": [
+      0.367,
+      0.85,
+      0.413
+     ],
+     "size": [
+      0.367,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@122",
+     "pos": [
+      0.0,
+      0.85,
+      0.413
+     ],
+     "size": [
+      0.367,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@121",
+     "pos": [
+      -0.367,
+      0.85,
+      0.413
+     ],
+     "size": [
+      0.367,
+      0.05,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@120",
+     "pos": [
+      -0.192,
+      1.035,
+      -0.34
+     ],
+     "size": [
+      0.03,
+      0.17,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@118",
+     "pos": [
+      -0.192,
+      1.079,
+      -0.318
+     ],
+     "size": [
+      0.353,
+      0.042,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@117",
+     "pos": [
+      -0.192,
+      1.14,
+      -0.318
+     ],
+     "size": [
+      0.353,
+      0.042,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "QuadMesh",
+     "name": "@MeshInstance3D@116",
+     "pos": [
+      -0.192,
+      1.214,
+      -0.318
+     ],
+     "size": [
+      0.378,
+      0.052,
+      0.0
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@115",
+     "pos": [
+      -0.192,
+      1.12,
+      -0.34
+     ],
+     "size": [
+      0.42,
+      0.26,
+      0.03
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@114",
+     "pos": [
+      0.031,
+      1.12,
+      -0.34
+     ],
+     "size": [
+      0.025,
+      0.26,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@113",
+     "pos": [
+      -0.415,
+      1.12,
+      -0.34
+     ],
+     "size": [
+      0.025,
+      0.26,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@112",
+     "pos": [
+      -0.192,
+      0.977,
+      -0.34
+     ],
+     "size": [
+      0.47,
+      0.025,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@111",
+     "pos": [
+      -0.192,
+      1.263,
+      -0.34
+     ],
+     "size": [
+      0.47,
+      0.025,
+      0.05
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@110",
+     "pos": [
+      0.16,
+      0.963,
+      0.0
+     ],
+     "size": [
+      0.18,
+      0.024,
+      0.12
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@109",
+     "pos": [
+      0.14,
+      1.001,
+      0.06
+     ],
+     "size": [
+      0.07,
+      0.1,
+      0.07
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "CylinderMesh",
+     "name": "@MeshInstance3D@108",
+     "pos": [
+      0.02,
+      1.001,
+      0.18
+     ],
+     "size": [
+      0.07,
+      0.1,
+      0.07
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@107",
+     "pos": [
+      -0.58,
+      1.001,
+      -0.176
+     ],
+     "size": [
+      0.24,
+      0.1,
+      0.24
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@106",
+     "pos": [
+      0.5,
+      0.836,
+      0.342
+     ],
+     "size": [
+      0.21,
+      0.018,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@105",
+     "pos": [
+      0.5,
+      0.781,
+      0.324
+     ],
+     "size": [
+      0.386,
+      0.163,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@104",
+     "pos": [
+      0.5,
+      0.638,
+      0.342
+     ],
+     "size": [
+      0.21,
+      0.018,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@103",
+     "pos": [
+      0.5,
+      0.582,
+      0.324
+     ],
+     "size": [
+      0.386,
+      0.163,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@102",
+     "pos": [
+      0.5,
+      0.44,
+      0.342
+     ],
+     "size": [
+      0.21,
+      0.018,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@101",
+     "pos": [
+      0.5,
+      0.384,
+      0.324
+     ],
+     "size": [
+      0.386,
+      0.163,
+      0.02
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@100",
+     "pos": [
+      0.5,
+      0.582,
+      0.0
+     ],
+     "size": [
+      0.42,
+      0.595,
+      0.624
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@99",
+     "pos": [
+      0.0,
+      0.925,
+      0.0
+     ],
+     "size": [
+      1.6,
+      0.05,
+      0.8
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@98",
+     "pos": [
+      0.0,
+      0.209,
+      0.0
+     ],
+     "size": [
+      1.39,
+      0.04,
+      0.04
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@97",
+     "pos": [
+      -0.78,
+      0.85,
+      0.0
+     ],
+     "size": [
+      0.04,
+      0.1,
+      0.73
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@96",
+     "pos": [
+      0.78,
+      0.85,
+      0.0
+     ],
+     "size": [
+      0.04,
+      0.1,
+      0.73
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@95",
+     "pos": [
+      0.0,
+      0.85,
+      -0.38
+     ],
+     "size": [
+      1.53,
+      0.1,
+      0.04
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@94",
+     "pos": [
+      0.0,
+      0.85,
+      0.38
+     ],
+     "size": [
+      1.53,
+      0.1,
+      0.04
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@93",
+     "pos": [
+      0.73,
+      0.45,
+      0.33
+     ],
+     "size": [
+      0.07,
+      0.9,
+      0.07
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@92",
+     "pos": [
+      0.73,
+      0.45,
+      -0.33
+     ],
+     "size": [
+      0.07,
+      0.9,
+      0.07
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@91",
+     "pos": [
+      -0.73,
+      0.45,
+      0.33
+     ],
+     "size": [
+      0.07,
+      0.9,
+      0.07
+     ]
+    },
+    {
+     "class": "MeshInstance3D",
+     "material": "StandardMaterial3D",
+     "mesh": "BoxMesh",
+     "name": "@MeshInstance3D@90",
+     "pos": [
+      -0.73,
+      0.45,
+      -0.33
+     ],
+     "size": [
+      0.07,
+      0.9,
+      0.07
+     ]
+    }
+   ],
+   "measured_at": "2026-07-31T10:07:28Z",
+   "scene": "res://commons/artifacts/hangar_worktable/hangar_worktable.tscn",
+   "truncated": false,
+   "union_aabb": {
+    "center": [
+     0.0,
+     0.638,
+     0.014
+    ],
+    "size": [
+     1.6,
+     1.276,
+     0.828
+    ]
+   }
+  },
   "hardware_cross_section": {
    "classes": {
     "MeshInstance3D": 69.0
@@ -1164886,13 +1168167,13 @@
   },
   "weather_vector_field": {
    "classes": {
-    "GPUParticles3D": 7,
-    "Label3D": 20,
-    "MeshInstance3D": 100,
-    "MultiMeshInstance3D": 5,
-    "OmniLight3D": 1
+    "GPUParticles3D": 7.0,
+    "Label3D": 20.0,
+    "MeshInstance3D": 100.0,
+    "MultiMeshInstance3D": 5.0,
+    "OmniLight3D": 1.0
    },
-   "element_count": 133,
+   "element_count": 133.0,
    "elements": [
     {
      "class": "Label3D",
@@ -1166064,7 +1169345,7 @@
     },
     {
      "class": "MultiMeshInstance3D",
-     "instances": 80,
+     "instances": 80.0,
      "mesh": "SphereMesh",
      "name": "StreamlineMM",
      "pos": [
@@ -1166631,7 +1169912,7 @@
     },
     {
      "class": "MultiMeshInstance3D",
-     "instances": 144,
+     "instances": 144.0,
      "mesh": "CylinderMesh",
      "name": "FieldHeadMM",
      "pos": [
@@ -1166647,7 +1169928,7 @@
     },
     {
      "class": "MultiMeshInstance3D",
-     "instances": 144,
+     "instances": 144.0,
      "mesh": "CylinderMesh",
      "name": "FieldShaftMM",
      "pos": [
@@ -1166695,7 +1169976,7 @@
     },
     {
      "class": "MultiMeshInstance3D",
-     "instances": 100,
+     "instances": 100.0,
      "mesh": "SphereMesh",
      "name": "@MultiMeshInstance3D@21",
      "pos": [
@@ -1166711,7 +1169992,7 @@
     },
     {
      "class": "MultiMeshInstance3D",
-     "instances": 100,
+     "instances": 100.0,
      "mesh": "SphereMesh",
      "name": "DottedLine",
      "pos": [
@@ -1167000,10 +1170281,10 @@
   },
   "wedge_skill_pickup": {
    "classes": {
-    "MeshInstance3D": 13,
-    "OmniLight3D": 1
+    "MeshInstance3D": 13.0,
+    "OmniLight3D": 1.0
    },
-   "element_count": 14,
+   "element_count": 14.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1167246,10 +1170527,10 @@
   },
   "wedge_slide": {
    "classes": {
-    "Label3D": 9,
-    "MeshInstance3D": 63
+    "Label3D": 9.0,
+    "MeshInstance3D": 63.0
    },
-   "element_count": 72,
+   "element_count": 72.0,
    "elements": [
     {
      "class": "Label3D",
@@ -1168418,10 +1171699,10 @@
   },
   "wfc": {
    "classes": {
-    "DirectionalLight3D": 1,
-    "MeshInstance3D": 256
+    "DirectionalLight3D": 1.0,
+    "MeshInstance3D": 256.0
    },
-   "element_count": 257,
+   "element_count": 257.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1172453,10 +1175734,10 @@
   },
   "wfc_3d_demo": {
    "classes": {
-    "DirectionalLight3D": 1,
-    "Label3D": 1
+    "DirectionalLight3D": 1.0,
+    "Label3D": 1.0
    },
-   "element_count": 2,
+   "element_count": 2.0,
    "elements": [
     {
      "class": "Label3D",
@@ -1172507,13 +1175788,13 @@
   },
   "wfc_dungeon_generator": {
    "classes": {
-    "CSGBox3D": 535,
-    "CSGCylinder3D": 21,
-    "DirectionalLight3D": 2,
-    "MeshInstance3D": 162,
-    "OmniLight3D": 4
+    "CSGBox3D": 535.0,
+    "CSGCylinder3D": 21.0,
+    "DirectionalLight3D": 2.0,
+    "MeshInstance3D": 162.0,
+    "OmniLight3D": 4.0
    },
-   "element_count": 724,
+   "element_count": 724.0,
    "elements": [
     {
      "class": "DirectionalLight3D",
@@ -1178312,9 +1181593,9 @@
   },
   "wfc_tile_mosaic": {
    "classes": {
-    "MeshInstance3D": 1
+    "MeshInstance3D": 1.0
    },
-   "element_count": 1,
+   "element_count": 1.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1178351,10 +1181632,10 @@
   },
   "wiki_fragment": {
    "classes": {
-    "Label3D": 4,
-    "MeshInstance3D": 1
+    "Label3D": 4.0,
+    "MeshInstance3D": 1.0
    },
-   "element_count": 5,
+   "element_count": 5.0,
    "elements": [
     {
      "class": "Label3D",
@@ -1178455,9 +1181736,9 @@
   },
   "windmill_floor": {
    "classes": {
-    "MeshInstance3D": 1
+    "MeshInstance3D": 1.0
    },
-   "element_count": 1,
+   "element_count": 1.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1178493,9 +1181774,9 @@
   },
   "wireworld_circuit": {
    "classes": {
-    "MeshInstance3D": 1
+    "MeshInstance3D": 1.0
    },
-   "element_count": 1,
+   "element_count": 1.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1178532,9 +1181813,9 @@
   },
   "wood_cube": {
    "classes": {
-    "MeshInstance3D": 2
+    "MeshInstance3D": 2.0
    },
-   "element_count": 2,
+   "element_count": 2.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1178586,10 +1181867,10 @@
   },
   "work_energy_demo": {
    "classes": {
-    "Label3D": 4,
-    "MeshInstance3D": 18
+    "Label3D": 4.0,
+    "MeshInstance3D": 18.0
    },
-   "element_count": 22,
+   "element_count": 22.0,
    "elements": [
     {
      "class": "Label3D",
@@ -1178954,11 +1182235,11 @@
   },
   "world_map_tablet": {
    "classes": {
-    "Label3D": 1,
-    "MeshInstance3D": 4,
-    "OmniLight3D": 1
+    "Label3D": 1.0,
+    "MeshInstance3D": 4.0,
+    "OmniLight3D": 1.0
    },
-   "element_count": 6,
+   "element_count": 6.0,
    "elements": [
     {
      "class": "Label3D",
@@ -1179072,9 +1182353,9 @@
   },
   "worley_noise": {
    "classes": {
-    "MeshInstance3D": 1
+    "MeshInstance3D": 1.0
    },
-   "element_count": 1,
+   "element_count": 1.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1179111,11 +1182392,11 @@
   },
   "x_translation_cube": {
    "classes": {
-    "Label3D": 6,
-    "MeshInstance3D": 16,
-    "MultiMeshInstance3D": 1
+    "Label3D": 6.0,
+    "MeshInstance3D": 16.0,
+    "MultiMeshInstance3D": 1.0
    },
-   "element_count": 23,
+   "element_count": 23.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1179354,7 +1182635,7 @@
     },
     {
      "class": "MultiMeshInstance3D",
-     "instances": 4,
+     "instances": 4.0,
      "mesh": "BoxMesh",
      "name": "@MultiMeshInstance3D@605",
      "pos": [
@@ -1179499,10 +1182780,10 @@
   },
   "xyz_coordinates": {
    "classes": {
-    "CSGCylinder3D": 3,
-    "Label3D": 3
+    "CSGCylinder3D": 3.0,
+    "Label3D": 3.0
    },
-   "element_count": 6,
+   "element_count": 6.0,
    "elements": [
     {
      "class": "Label3D",
@@ -1179613,10 +1182894,10 @@
   },
   "y_oscillation_cube": {
    "classes": {
-    "Label3D": 3,
-    "MeshInstance3D": 9
+    "Label3D": 3.0,
+    "MeshInstance3D": 9.0
    },
-   "element_count": 12,
+   "element_count": 12.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1179829,11 +1183110,11 @@
   },
   "y_translation_cube": {
    "classes": {
-    "Label3D": 6,
-    "MeshInstance3D": 16,
-    "MultiMeshInstance3D": 1
+    "Label3D": 6.0,
+    "MeshInstance3D": 16.0,
+    "MultiMeshInstance3D": 1.0
    },
-   "element_count": 23,
+   "element_count": 23.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1180072,7 +1183353,7 @@
     },
     {
      "class": "MultiMeshInstance3D",
-     "instances": 4,
+     "instances": 4.0,
      "mesh": "BoxMesh",
      "name": "@MultiMeshInstance3D@634",
      "pos": [
@@ -1180217,9 +1183498,9 @@
   },
   "you_are_here": {
    "classes": {
-    "MeshInstance3D": 2
+    "MeshInstance3D": 2.0
    },
-   "element_count": 2,
+   "element_count": 2.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1180272,11 +1183553,11 @@
   },
   "z_translation_cube": {
    "classes": {
-    "Label3D": 6,
-    "MeshInstance3D": 16,
-    "MultiMeshInstance3D": 1
+    "Label3D": 6.0,
+    "MeshInstance3D": 16.0,
+    "MultiMeshInstance3D": 1.0
    },
-   "element_count": 23,
+   "element_count": 23.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1180515,7 +1183796,7 @@
     },
     {
      "class": "MultiMeshInstance3D",
-     "instances": 4,
+     "instances": 4.0,
      "mesh": "BoxMesh",
      "name": "@MultiMeshInstance3D@645",
      "pos": [
@@ -1180660,9 +1183941,9 @@
   },
   "zelda_tilemap": {
    "classes": {
-    "MeshInstance3D": 3600
+    "MeshInstance3D": 3600.0
    },
-   "element_count": 3600,
+   "element_count": 3600.0,
    "elements": [
     {
      "class": "MeshInstance3D",
@@ -1187083,10 +1190364,10 @@
   },
   "zelda_tiles_3d": {
    "classes": {
-    "MeshInstance3D": 2,
-    "Sprite3D": 1
+    "MeshInstance3D": 2.0,
+    "Sprite3D": 1.0
    },
-   "element_count": 3,
+   "element_count": 3.0,
    "elements": [
     {
      "class": "Sprite3D",
@@ -1187151,10 +1190432,10 @@
   },
   "zigzagprofile": {
    "classes": {
-    "Label3D": 12,
-    "MeshInstance3D": 25
+    "Label3D": 12.0,
+    "MeshInstance3D": 25.0
    },
-   "element_count": 37,
+   "element_count": 37.0,
    "elements": [
     {
      "class": "MeshInstance3D",

@@ -49,6 +49,15 @@ POSTURE_WANTS = {
     # uniform. A specimen's companion is chosen per ARTIFACT — stable (the same
     # body always gets the same neighbour) but varied across a map.
     "pedestal": ("hangar_cabinet_cluster", "hangar_podium", "hangar_step_base"),
+    # MEASURED 2026-07-31, and the measurement disqualified two of them AS
+    # COMPANIONS. step_base is 2.00 x 2.04 m and needs a 3x3 clearing; fence is
+    # 4.42 m and needs five cells in a row. A companion stands BESIDE a body, so
+    # its clearing always contains that body — these two can never satisfy the
+    # rule they are named in, and the corpus confirms it: zero placements over
+    # 40 maps. They are room-scale furniture, not body-scale. Kept, not deleted:
+    # the preference is still the right answer, and if placement ever gains an
+    # offset (stand the step in FRONT of the platform, not beside it) they
+    # become placeable. Deleting them would hide that.
     "platform": "hangar_step_base",     # a staged body — a step to come up to it
     "monument": "hangar_barrier_fence",  # architecture — stand back from it
     "floor": None,                      # the ground itself: leave it clear
@@ -108,6 +117,64 @@ def measured_sizes():
         return out
     except Exception:
         return {}
+
+
+def prop_extent(tok):
+    """(width, depth) of a prop in metres, or None if it was never measured.
+
+    Palle's ruling 2026-07-31, after looking at four furnished versions of the
+    gate: probe the props and block unmeasured ones. The pass judged ARTIFACTS
+    by their probed size all along — that is how the beacon check works — but
+    had never measured the things it places itself, so it could not know a
+    barrier fence is 4.4 m wide and was dropping it into a one-metre cell.
+    """
+    try:
+        el = json.loads((ROOT / "commons/data/artifact_elements.json")
+                        .read_text(encoding="utf-8")).get("artifacts", {})
+    except Exception:
+        return None
+    a = el.get(tok)
+    s = (a or {}).get("union_aabb", {}).get("size")
+    if not s or len(s) < 3:
+        return None
+    return (max(0.2, float(s[0])), max(0.2, float(s[2])))
+
+
+_EXTENTS = {}
+
+
+def prop_cells(tok, rot=0):
+    """How far a prop reaches from its own cell, in cells each side."""
+    if tok not in _EXTENTS:
+        _EXTENTS[tok] = prop_extent(tok)
+    e = _EXTENTS[tok]
+    if e is None:
+        return None
+    w, d = e
+    if rot in (90, 270):
+        w, d = d, w
+    # A cell is 1 m and props sit centred in it. Demanding a whole extra cell
+    # for a four-centimetre overhang is not the FIT law, it is arithmetic with
+    # no eye: the first run of this rejected hangar_supply_pile (1.09 m deep)
+    # everywhere. Anything up to a cell plus SLACK stands in one cell.
+    SLACK = 0.2
+    return (int(math.ceil(max(0.0, w - 1.0 - SLACK) / 2.0 - 1e-9)),
+            int(math.ceil(max(0.0, d - 1.0 - SLACK) / 2.0 - 1e-9)))
+
+
+def prop_fits(tok, cell, rot, ok):
+    """FIT, for furniture. The law the rooms already obey, applied to what we
+    put in them: a prop that overhangs its cell must have the cells it needs,
+    or it does not go in. Unmeasured is never placed."""
+    span = prop_cells(tok, rot)
+    if span is None:
+        return False
+    ex, ez = span
+    for dx in range(-ex, ex + 1):
+        for dz in range(-ez, ez + 1):
+            if (dx or dz) and not ok((cell[0] + dx, cell[1] + dz)):
+                return False
+    return True
 
 
 def seen_from(cell, facing, bodies_xy, sizes, solid, limit=14):
@@ -286,9 +353,15 @@ def inspect(md, name):
             opens = [d for d in DIRS if (x + d[0], z + d[1]) in floor
                      and not wall_between(WL, c, (x + d[0], z + d[1]))]
             face = opens[0] if opens else (route_dir(c) or (0, 1))
+            corner_pick = CORNER_CYCLE[len([q for q in props if q["kind"] == "corner"]) % 2]
+            if not prop_fits(corner_pick, c, 0, free):
+                corner_pick = next((w for w in CORNER_CYCLE + (REST,)
+                                    if prop_fits(w, c, 0, free)), None)
+            if corner_pick is None:
+                continue                       # a dead corner too tight to fill
             props.append({"facing": list(face), "eye": list(back_off(c, face, 2)),
                           "cell": list(c), "why": "dead corner (3 sides closed, nothing in it)",
-                          "place": CORNER_CYCLE[len([q for q in props if q["kind"] == "corner"]) % 2],
+                          "place": corner_pick,
                           "layer": "interactables", "kind": "corner"})
             continue
 
@@ -304,6 +377,11 @@ def inspect(md, name):
                 key = (nb, d)
                 if key in seen_wall_runs: continue
                 seen_wall_runs.add(key)
+                wrot = {(0, 1): 0, (1, 0): 90, (0, -1): 180, (-1, 0): 270}[d]
+                # the panel runs ALONG the wall, so it needs the cells beside
+                # it — a 2.4 m panel at the end of a run would hang off it
+                if not prop_fits(SURFACE, c, wrot, free):
+                    continue
                 props.append({"facing": list(d), "eye": list(back_off(c, d, 3)),
                               "cell": list(c), "why": "bare wall (%d cells of blank surface)" % run,
                               "place": SURFACE, "layer": "interactables", "kind": "wall",
@@ -338,10 +416,23 @@ def inspect(md, name):
                 tok = str(I[b[1]][b[0]]).strip().split(":")[0]
                 pos = POSTURES.get(tok, "pedestal")
                 want = POSTURE_WANTS.get(pos, REST)
-                if isinstance(want, tuple):
-                    want = want[sum(ord(ch) for ch in tok) % len(want)]
                 if want is None:
                     break                      # the honest answer is nothing
+                # FIT, applied to furniture. The posture says what KIND of
+                # companion the body wants; the room says which of them will
+                # actually stand there. Preference order first, then whatever
+                # fits — and if nothing fits, nothing goes in. A step_base is
+                # 2.0 x 2.0 m and needs a 3x3 clearing; a podium needs its own
+                # cell. Before the props were measured, all of them were
+                # assumed to be cell-sized.
+                cand = list(want) if isinstance(want, tuple) else [want]
+                if len(cand) > 1:              # stable per artifact, varied per map
+                    r = sum(ord(ch) for ch in tok) % len(cand)
+                    cand = cand[r:] + cand[:r]
+                cand += [w for w in (REST, CORNER) if w not in cand]
+                want = next((w for w in cand if prop_fits(w, c, 0, free)), None)
+                if want is None:
+                    break                      # measured, and none of them fit
                 bf = (b[0] - x, b[1] - z)
                 props.append({"facing": list(bf), "eye": list(back_off(c, bf, 2)),
                               "cell": list(c),
@@ -484,6 +575,10 @@ def apply(md, props, budget):
     S, U, I, WL = grids(md)
     placed = []
     for p in props[:budget]:
+        # the last gate: a prop nobody measured never enters a map (`el` is a
+        # utility token, not an artifact, and has no body to measure)
+        if p["layer"] == "interactables" and prop_cells(p["place"]) is None:
+            continue
         x, z = p["cell"]
         if p.get("kind") == "vista" and p.get("at_wall"):
             wx, wz = p["at_wall"]
