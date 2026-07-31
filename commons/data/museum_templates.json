@@ -1,6 +1,6 @@
 {
- "_readme": "Principal spatial templates extracted from real museum floor plans (multi-agent extraction 2026-07-21, 8 museums, 8/8 agents clean). Each template abstracts the museum's principal idea into the /template-maps cell vocabulary; tiles are merged into template_patterns.json (mode stamp) for the editor and map making. Provenance: literature+abstraction \u2014 templates PROPOSE (P-10); numbers carry their sources. Validation: dims/tokens/top-to-bottom walkability/stop pockets, results per entry.",
- "extracted": "2026-07-21",
+ "_readme": "Principal spatial templates extracted from real museum floor plans (multi-agent extraction 2026-07-21, 8 museums, 8/8 agents clean). Each template abstracts the museum's principal idea into the /template-maps cell vocabulary; tiles are merged into template_patterns.json (mode stamp) for the editor and map making. Provenance: literature+abstraction — templates PROPOSE (P-10); numbers carry their sources. Validation: dims/tokens/top-to-bottom walkability/stop pockets, results per entry.",
+ "extracted": "2026-07-21 (8 museums) + 2026-07-31 (6 more, multi-agent; legacy tiles repaired for the collision walker; gate = tools/validate_museum_templates.py)",
  "museums": [
   {
    "museum": "Uffizi Gallery, Florence",
@@ -55,7 +55,7 @@
    "museum": "Solomon R. Guggenheim Museum, New York",
    "architect": "Frank Lloyd Wright, 1959",
    "circulation_type": "forced single path (continuous spiral ramp; abstracted as switchback serpentine)",
-   "mechanism": "By collapsing all circulation into one gently sloped descending ramp, the plan removes route choice entirely \u2014 flow is automatic \u2014 while shallow web-wall bays create stop pockets just off the moving path and the open central void lets visitors preview and re-encounter works across the atrium before and after passing them.",
+   "mechanism": "By collapsing all circulation into one gently sloped descending ramp, the plan removes route choice entirely — flow is automatic — while shallow web-wall bays create stop pockets just off the moving path and the open central void lets visitors preview and re-encounter works across the atrium before and after passing them.",
    "numbers": [
     {
      "name": "ramp length",
@@ -93,7 +93,7 @@
    ],
    "template_key": "guggenheim-serpentine",
    "walk_rule": "Enter at the top (the elevator drop-off) and walk one un-branching serpentine: each 3-wide lane runs the full width, turns through a 3-cell gap at the alternating end of each partition, and empties onto the rotunda floor at the bottom where the hero stands on the atrium axis.",
-   "pacing_rule": "Movement never pauses the route \u2014 art bays are recessed into the solid partition stretches as stop pockets beside the flow, while the aligned see-through void windows (c6-c8) form the atrium axis that promises the hero podium from up to 27 cells away and re-shows passed works across lanes.",
+   "pacing_rule": "Movement never pauses the route — art bays are recessed into the solid partition stretches as stop pockets beside the flow, while the aligned see-through void windows (c6-c8) form the atrium axis that promises the hero podium from up to 27 cells away and re-shows passed works across lanes.",
    "validation": {
     "issues": [],
     "slots": 19,
@@ -104,12 +104,12 @@
    "museum": "Neue Nationalgalerie, Berlin",
    "architect": "Ludwig Mies van der Rohe, 1968",
    "circulation_type": "free-plan matrix",
-   "mechanism": "By clearing the entire 50 m span of structure and putting art on freestanding walls and suspended panels, the plan makes flow and seeing the same act \u2014 the visitor self-routes through a matrix of view-objects, and no wall ever hides the next work for long.",
+   "mechanism": "By clearing the entire 50 m span of structure and putting art on freestanding walls and suspended panels, the plan makes flow and seeing the same act — the visitor self-routes through a matrix of view-objects, and no wall ever hides the next work for long.",
    "numbers": [
     {
      "name": "upper hall footprint",
-     "value": "50.40 \u00d7 50.40 m",
-     "source_note": "WikiArquitectura \u2014 glazed square hall, unobstructed floor plan"
+     "value": "50.40 × 50.40 m",
+     "source_note": "WikiArquitectura — glazed square hall, unobstructed floor plan"
     },
     {
      "name": "hall ceiling height",
@@ -119,17 +119,17 @@
     {
      "name": "planning module",
      "value": "3.6 m square grid",
-     "source_note": "ArchEyes \u2014 dimensional grid of the pavilion"
+     "source_note": "ArchEyes — dimensional grid of the pavilion"
     },
     {
      "name": "roof cantilever beyond columns",
      "value": "18 m",
-     "source_note": "ArchEyes / RTF \u2014 8 cruciform columns, two per side, avoiding corners"
+     "source_note": "ArchEyes / RTF — 8 cruciform columns, two per side, avoiding corners"
     },
     {
      "name": "upper exhibition hall area",
-     "value": "2,683 m\u00b2",
-     "source_note": "Wikipedia \u2014 upper story serves as entrance and primary special-exhibit gallery"
+     "value": "2,683 m²",
+     "source_note": "Wikipedia — upper story serves as entrance and primary special-exhibit gallery"
     }
    ],
    "sources": [
@@ -152,8 +152,8 @@
   {
    "museum": "Sir John Soane's Museum, 13 Lincoln's Inn Fields, London",
    "architect": "Sir John Soane, 1792-1824 (house rebuilt in three campaigns; museum arranged until his death 1837)",
-   "circulation_type": "cabinet \u2014 a dense wunderkammer loop of tiny interconnected rooms threaded on narrow passages, with one end-stopped axial vista to the deepest point",
-   "mechanism": "Soane resolves flow versus seeing by making every wall of the narrow path itself the display and letting the eye outrun the body \u2014 layered apertures (colonnade screens, floor cuts to the crypt, folding picture-planes) show objects several rooms ahead, so walking is compressed to a shuffle while seeing is multiplied in depth.",
+   "circulation_type": "cabinet — a dense wunderkammer loop of tiny interconnected rooms threaded on narrow passages, with one end-stopped axial vista to the deepest point",
+   "mechanism": "Soane resolves flow versus seeing by making every wall of the narrow path itself the display and letting the eye outrun the body — layered apertures (colonnade screens, floor cuts to the crypt, folding picture-planes) show objects several rooms ahead, so walking is compressed to a shuffle while seeing is multiplied in depth.",
    "numbers": [
     {
      "name": "Picture Room plan",
@@ -168,7 +168,7 @@
     {
      "name": "equivalent gallery the Picture Room replaces",
      "value": "45 ft x 20 ft (13.7 x 6.1 m)",
-     "source_note": "Soane's own claim in the General Description \u2014 the folding planes triple the hang"
+     "source_note": "Soane's own claim in the General Description — the folding planes triple the hang"
     },
     {
      "name": "house frontage (No. 13)",
@@ -202,7 +202,7 @@
    "museum": "Museo di Castelvecchio, Verona",
    "architect": "Carlo Scarpa, 1959-1973",
    "circulation_type": "forced single path: end-stopped enfilade with off-axis display (loop at building scale)",
-   "mechanism": "Aligned door openings fuse five rooms into one long axial vista that promises the terminus (flow), while every sculpture is displaced off that axis with its own facing direction \u2014 a network of gazes that pulls the walker sideways into stops \u2014 and the axis itself is end-stopped at the Cangrande hinge, where a single hero on a raised plinth owns a whole bay and is circled rather than passed.",
+   "mechanism": "Aligned door openings fuse five rooms into one long axial vista that promises the terminus (flow), while every sculpture is displaced off that axis with its own facing direction — a network of gazes that pulls the walker sideways into stops — and the axis itself is end-stopped at the Cangrande hinge, where a single hero on a raised plinth owns a whole bay and is circled rather than passed.",
    "numbers": [
     {
      "name": "entrance approach corridor length",
@@ -248,9 +248,9 @@
    }
   },
   {
-   "museum": "Louvre \u2014 Grande Galerie, Paris",
-   "architect": "Louis M\u00e9tezeau & Jacques II Androuet du Cerceau, 1595\u20131607 (bay rhythm: Percier & Fontaine, 1805\u20131810; skylights: Lefuel, 1860s)",
-   "circulation_type": "forced single path \u2014 continuous axial promenade with walk-past wall hang, rhythmed by bays",
+   "museum": "Louvre — Grande Galerie, Paris",
+   "architect": "Louis Métezeau & Jacques II Androuet du Cerceau, 1595–1607 (bay rhythm: Percier & Fontaine, 1805–1810; skylights: Lefuel, 1860s)",
+   "circulation_type": "forced single path — continuous axial promenade with walk-past wall hang, rhythmed by bays",
    "mechanism": "A single very long, 13 m-wide axis keeps everyone flowing toward an endless vanishing point, while nine column-framed bays with overhead skylights pinch the walk into regular stopping pockets where the continuous wall hang can be faced one painting at a time.",
    "numbers": [
     {
@@ -266,7 +266,7 @@
     {
      "name": "gallery width",
      "value": "13 m",
-     "source_note": "Wikipedia: 'The gallery is 13 meters wide' \u2014 template width copies this 1:1"
+     "source_note": "Wikipedia: 'The gallery is 13 meters wide' — template width copies this 1:1"
     },
     {
      "name": "number of bays",
@@ -275,8 +275,8 @@
     },
     {
      "name": "construction period",
-     "value": "1595\u20131607",
-     "source_note": "Wikipedia: eastern half M\u00e9tezeau, western half du Cerceau"
+     "value": "1595–1607",
+     "source_note": "Wikipedia: eastern half Métezeau, western half du Cerceau"
     }
    ],
    "sources": [
@@ -287,7 +287,7 @@
    ],
    "template_key": "grande-galerie-axial",
    "walk_rule": "Enter on axis and drift down the wide central lane toward the hero visible from the first step; at each bay, step sideways into the wall pocket to face a slot, then rejoin the flow, finally rounding the end-stopped hero to exit.",
-   "pacing_rule": "Paired column cells pinch the 13-cell width every 4 rows into nine bays, and each bay's midpoint row carries a facing pair of wall slots \u2014 a metronome of stop-beats under one uninterrupted 33-cell sightline.",
+   "pacing_rule": "Paired column cells pinch the 13-cell width every 4 rows into nine bays, and each bay's midpoint row carries a facing pair of wall slots — a metronome of stop-beats under one uninterrupted 33-cell sightline.",
    "validation": {
     "issues": [],
     "slots": 19,
@@ -297,8 +297,8 @@
   {
    "museum": "21st Century Museum of Contemporary Art, Kanazawa",
    "architect": "SANAA (Kazuyo Sejima + Ryue Nishizawa), 2004",
-   "circulation_type": "free-plan matrix \u2014 independent room-boxes floating in a multi-entry, non-hierarchical circulation field",
-   "mechanism": "Flow and seeing never compete because they occupy different spaces: movement is free in the daylight corridor-streets between boxes, while each artwork gets a sealed room individually tuned (size 18\u2013324 m\u00b2, height 4\u201312 m, light) to seeing it, entered and exited at the visitor's choice.",
+   "circulation_type": "free-plan matrix — independent room-boxes floating in a multi-entry, non-hierarchical circulation field",
+   "mechanism": "Flow and seeing never compete because they occupy different spaces: movement is free in the daylight corridor-streets between boxes, while each artwork gets a sealed room individually tuned (size 18–324 m², height 4–12 m, light) to seeing it, entered and exited at the visitor's choice.",
    "numbers": [
     {
      "name": "building diameter",
@@ -307,12 +307,12 @@
     },
     {
      "name": "gallery room sizes",
-     "value": "18\u2013324 m\u00b2",
+     "value": "18–324 m²",
      "source_note": "15 exhibition galleries of deliberately varied proportion; WikiArquitectura"
     },
     {
      "name": "gallery ceiling heights",
-     "value": "4\u201312 m",
+     "value": "4–12 m",
      "source_note": "each box tuned to its work; tallest 12 m box sits mid-field; archiweb.cz / architecturalmoleskine"
     },
     {
@@ -336,7 +336,7 @@
    ],
    "template_key": "kanazawa-room-matrix",
    "walk_rule": "Enter anywhere along the open top edge; parallel streets (west 3-wide, central 3-wide, east lane) and full-width cross streets loop around sealed room-boxes, and the central street's promised hero room dead-ends, sending the walker back into the field to choose an exit route.",
-   "pacing_rule": "Seeing is quantized into rooms \u2014 pace is the number of boxes you elect to enter and leave through the street field, not distance walked; corridor-hung slots give the streets themselves exhibition weight between stops.",
+   "pacing_rule": "Seeing is quantized into rooms — pace is the number of boxes you elect to enter and leave through the street field, not distance walked; corridor-hung slots give the streets themselves exhibition weight between stops.",
    "validation": {
     "issues": [],
     "slots": 9,
@@ -346,8 +346,8 @@
   {
    "museum": "Sainsbury Wing, National Gallery, London",
    "architect": "Robert Venturi & Denise Scott Brown (VSBA, with Sheppard Robson), 1991",
-   "circulation_type": "enfilade \u2014 three parallel lines of galleries off a skewed axis; the central line is a true on-axis enfilade with false-perspective diminishing arches, the side lines have offset doorways that deliberately interrupt the vistas",
-   "mechanism": "The central nave-like enfilade makes one long promise \u2014 Cima's altarpiece glimpsed through five diminishing arches at the deepest point pulls flow forward \u2014 while the flanking rooms, entered through offset doors that break the lateral sightlines, decompress into small domestic-scale chambers where stopping and seeing individual panels is the default.",
+   "circulation_type": "enfilade — three parallel lines of galleries off a skewed axis; the central line is a true on-axis enfilade with false-perspective diminishing arches, the side lines have offset doorways that deliberately interrupt the vistas",
+   "mechanism": "The central nave-like enfilade makes one long promise — Cima's altarpiece glimpsed through five diminishing arches at the deepest point pulls flow forward — while the flanking rooms, entered through offset doors that break the lateral sightlines, decompress into small domestic-scale chambers where stopping and seeing individual panels is the default.",
    "numbers": [
     {
      "name": "principal gallery rooms",
@@ -385,11 +385,324 @@
    ],
    "template_key": "sainsbury-false-perspective-enfilade",
    "walk_rule": "Enter on-axis at the top and the hero is already visible 28 cells away through every door gap; the 3-wide central nave carries the flow straight to the raised hero chamber, while offset side doors peel viewers into 3-cell-wide cabinet rooms and return them to the axis one bay deeper.",
-   "pacing_rule": "Cross walls every 5-6 rows frame the vista and the door gaps narrow as you go (5, 5, 3, 3 cells) \u2014 a false perspective that makes the hero feel farther then suddenly near \u2014 with the final threshold stepping up onto a platform where the 3s altarpiece slot is end-stopped by the terminal wall and the exit turns off-axis, exactly as the wing hands you sideways to the bridge.",
+   "pacing_rule": "Cross walls every 5-6 rows frame the vista and the door gaps narrow as you go (5, 5, 3, 3 cells) — a false perspective that makes the hero feel farther then suddenly near — with the final threshold stepping up onto a platform where the 3s altarpiece slot is end-stopped by the terminal wall and the exit turns off-axis, exactly as the wing hands you sideways to the bridge.",
    "validation": {
     "issues": [],
     "slots": 14,
     "ok": true
+   }
+  },
+  {
+   "museum": "Altes Museum, Berlin",
+   "architect": "Karl Friedrich Schinkel (designed 1822/23, built 1825-1830)",
+   "circulation_type": "central rotunda hub with wrapping perimeter galleries",
+   "mechanism": "A Pantheon-derived rotunda sits at the dead center of a symmetrical rectangle, and everything else — vestibule, stair hall, wing galleries — is reached from it and returns to it. The rotunda resolves flow vs seeing by separating them in time: the wings are for walking and looking along walls, the rotunda is for stopping, recalibrating, and choosing the next wing. Arrival is a rite of passage down the axis; orientation is never lost because the hub is always one door away.",
+   "numbers": [
+    {
+     "name": "building footprint",
+     "value": "87 m x 55 m (ground area 4,785 m2)",
+     "source_note": "German Wikipedia, Altes Museum — Baubeschreibung"
+    },
+    {
+     "name": "rotunda height and ring",
+     "value": "23 m high, ringed by 20 Corinthian columns",
+     "source_note": "German Wikipedia; Google Arts & Culture confirms 23 m over two stories, Schinkel labeled it 'Pantheon' in his drawings"
+    },
+    {
+     "name": "portico colonnade",
+     "value": "18 fluted Ionic columns facing the Lustgarten",
+     "source_note": "English and German Wikipedia; SMB museum profile"
+    },
+    {
+     "name": "internal courtyards",
+     "value": "2 light courts flanking the rotunda symmetrically",
+     "source_note": "German Wikipedia (zwei Innenhoefe); Studio Matrx plan analysis"
+    },
+    {
+     "name": "inauguration",
+     "value": "3 August 1830 (construction 1825-1828)",
+     "source_note": "English Wikipedia; ArchEyes"
+    }
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Altes_Museum",
+    "https://de.wikipedia.org/wiki/Altes_Museum",
+    "https://archeyes.com/altes-museum-karl-friedrich-schinkel/",
+    "https://www.studiomatrx.org/architecture-canon/altes-museum",
+    "https://www.smb.museum/en/museums-institutions/altes-museum/about-us/profile/"
+   ],
+   "template_key": "altes-rotunda-hub",
+   "walk_rule": "The walker enters at the top gap onto the x=7 axis, crosses the vestibule and the screen-wall door at row 5, passes the stair-hall antechamber into the rotunda's north door at row 10, and from the rotunda's four doors (rows 10/18 at x=7, row 14 at x=4/x=10) makes out-and-back loops into the flanking wing corridors before leaving by the south door and the bottom gap.",
+   "pacing_rule": "Stopping concentrates inside the rotunda ring (the hero at 14,7 and the four 1s statue niches against the chamfered corners) and at the 2s podiums pressed against the wing outer walls, while the x=7 spine and the row-14 cross-axis stay entirely slot-free, so a pausing viewer never blocks the through-path.",
+   "validation": {
+    "issues": [],
+    "slots": 15,
+    "ok": true,
+    "gate": "tools/validate_museum_templates.py (orchestrator re-check)"
+   }
+  },
+  {
+   "museum": "Guggenheim Museum Bilbao",
+   "architect": "Frank Gehry (1997)",
+   "circulation_type": "atrium radial",
+   "mechanism": "A 45 m light-filled atrium is the fixed center of gravity: galleries do not chain into each other, they radiate off the atrium, and the visitor returns to the lit center after every room, so orientation is never lost and each gallery is a fresh departure rather than a link in a corridor. Flow and seeing are resolved by separation of duties — the atrium carries all movement while the pockets hold all looking — and one exceptional elongated gallery (the 130 m boat gallery) breaks the radial rhythm to give a single oversized work a space scaled to it alone.",
+   "numbers": [
+    {
+     "name": "atrium_height_m",
+     "value": "45",
+     "source_note": "Central atrium 'The Flower' is ~45 m tall, roughly 1.5x the height of Wright's New York rotunda (Archeyes / museum guides)"
+    },
+    {
+     "name": "gallery_count",
+     "value": "19",
+     "source_note": "Nineteen galleries: ten classical orthogonal plans with stone finishes, nine irregular organic volumes clad in titanium (Wikipedia)"
+    },
+    {
+     "name": "boat_gallery_dimensions_m",
+     "value": "130 x 30",
+     "source_note": "Largest gallery (Arcelor Gallery, formerly Fish Gallery) measures 130 m x 30 m, column-free, housing Serra's The Matter of Time in gallery 104 (Wikipedia / guggenheim-bilbao.eus)"
+    },
+    {
+     "name": "building_area_m2",
+     "value": "24000 total / 11000 exhibition",
+     "source_note": "24,000 m2 built area with 11,000 m2 of exhibition space across the 19 galleries on three floors around the atrium (Wikipedia / Inexhibit)"
+    },
+    {
+     "name": "serra_installation",
+     "value": "8 sculptures, 1034 t steel",
+     "source_note": "The Matter of Time (1994-2005): eight weathering-steel torqued pieces installed permanently in gallery 104 in 2005; Snake made for the 1997 opening (guggenheim-bilbao.eus)"
+    },
+    {
+     "name": "opening_date",
+     "value": "1997-10-19",
+     "source_note": "Museum opened 19 October 1997 (Dezeen)"
+    }
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Guggenheim_Museum_Bilbao",
+    "https://www.guggenheim-bilbao.eus/en/the-collection/works/the-matter-of-time",
+    "https://archeyes.com/the-guggenheim-museum-bilbao-by-frank-gehry-a-symphony-of-shapes/",
+    "https://www.dezeen.com/2022/05/18/frank-gehry-guggenheim-museum-bilbao-deconstructivism/",
+    "https://www.inexhibit.com/mymuseum/guggenheim-museum-bilbao/"
+   ],
+   "template_key": "bilbao-atrium-radial",
+   "walk_rule": "Enter the top gap into the lobby, pass the center door into the 5-cell-wide atrium shaft and ride it south, stepping through single-cell side doors (rows 6/11/16 left, 7/12/17 right) into 3x4 gallery pockets and back to the shaft each time, then take the narrow row-19 door into the 13-cell-wide boat gallery, weave among its podiums past the central hero, and leave through the terrace to the bottom gap.",
+   "pacing_rule": "All stopping happens one door off the spine — inside the six radiating pockets and around the flanked hero in the long gallery — while the atrium shaft itself holds no slots, so the lit center always carries through-flow and every pause is a fresh departure that never dams the walk.",
+   "validation": {
+    "issues": [],
+    "slots": 16,
+    "ok": true,
+    "gate": "tools/validate_museum_templates.py (orchestrator re-check)"
+   }
+  },
+  {
+   "museum": "Chichu Art Museum, Naoshima",
+   "architect": "Tadao Ando",
+   "circulation_type": "buried single-file descent — dark 1-wide corridors linking isolated one-work cells",
+   "mechanism": "THE BURIED CELL: the museum is sunk into the hilltop so that almost everything is wall and passage, and each of its very few works occupies its own sealed room. Long, deliberately dark and narrow approach corridors decompress the eye between rooms, so arrival in each lit chamber lands as an event. The passage is the frame; the collection is barely a handful of works by exactly three artists.",
+   "numbers": [
+    {
+     "name": "permanent artists",
+     "value": "3 (Monet, De Maria, Turrell)",
+     "source_note": "Benesse Art Site official page: permanent collection is exactly three artists, each with a dedicated architecturally-integrated space"
+    },
+    {
+     "name": "built area",
+     "value": "2,700 m2",
+     "source_note": "ArchEyes project sheet lists total built area 2,700 m2 (29,060 sq ft), designed 2000-2004, completed 2004"
+    },
+    {
+     "name": "Monet paintings shown",
+     "value": "5 Water Lilies canvases in one room",
+     "source_note": "Benesse Art Site: five works from the Water Lilies series in the single Monet gallery, lit only by natural light"
+    },
+    {
+     "name": "Monet room floor",
+     "value": "~700,000 Bianco Carrara marble cubes of 2 cm",
+     "source_note": "Harper's Bazaar Arabia / Benesse blog on the Monet room: hand-set 2 cm white Carrara marble cubes, roughly 700,000 pieces"
+    },
+    {
+     "name": "De Maria sphere",
+     "value": "2.2 m diameter granite sphere + 27 gilded wooden forms",
+     "source_note": "Artchive entry for Time/Timeless/No Time (2004): 86 3/4 in (220 cm) polished granite sphere, 27 gold-leafed geometric forms, one monumental room"
+    }
+   ],
+   "sources": [
+    "https://benesse-artsite.jp/en/art/chichu.html",
+    "https://archeyes.com/chichu-art-museum-by-tadao-ando-light-and-space/",
+    "https://www.artchive.com/artwork/time-timeless-no-time-walter-de-maria-2004/",
+    "https://www.harpersbazaararabia.com/culture/art/art-exhibitions/claude-monet-at-the-chichu-art-museum-benesse-art-site-naoshima",
+    "https://artsandculture.google.com/story/chichu-art-museum-invisible-architecture-tadao-ando-architect-associates/kgUBINjNbw6Nfg?hl=en"
+   ],
+   "template_key": "chichu-buried-cells",
+   "walk_rule": "Follow the single 1-wide corridor of \"1\" cells through the dark; each time a 1-cell doorway opens in the \"4\" wall, step off the spine into the cell, circle its lone slot, and return to the spine before descending further.",
+   "pacing_rule": "Long wall-bound compression between rooms, one work per release — the corridor stretches (4+ cells of pure passage) must always be longer than the room they deliver you into, except the final hero chamber.",
+   "validation": {
+    "issues": [],
+    "slots": 5,
+    "ok": true,
+    "gate": "tools/validate_museum_templates.py (orchestrator re-check)"
+   }
+  },
+  {
+   "museum": "Dia:Beacon, New York",
+   "architect": "OpenOffice (Alan Koch, Lyn Rice, Galia Solomonoff, Linda Taalman) with artist Robert Irwin, 2003 — conversion of a 1929 Nabisco box-printing factory",
+   "circulation_type": "field of bays — free drift across a single-story daylight shed on a column grid, no prescribed route",
+   "mechanism": "A vast one-level factory floor is kept as one continuous space under sawtooth skylights, structured only by the regular rhythm of freestanding columns. Each column-bounded bay is given whole to a single artist, so scale itself becomes the curator: you drift laterally between parallel bays rather than following a sequence. Partial divider stubs mark where one artist ends and another begins without ever closing a room.",
+   "numbers": [
+    {
+     "name": "gallery space (Riggio Galleries)",
+     "value": "240,000 sq ft",
+     "source_note": "Dia Art Foundation opening press release: nearly 300,000 sq ft building with 240,000 sq ft of gallery space named for Leonard and Louise Riggio"
+    },
+    {
+     "name": "exhibition space (Wikipedia figure)",
+     "value": "160,000 sq ft (15,000 m2)",
+     "source_note": "Wikipedia 'Dia Beacon' — figure for exhibition area; differs from Dia's 240,000 sq ft gallery-space claim, both retained"
+    },
+    {
+     "name": "skylights",
+     "value": "more than 34,000 sq ft",
+     "source_note": "original 1929 factory skylight area, retained to make Dia:Beacon a 'daylight museum' (Dia press / Wikipedia)"
+    },
+    {
+     "name": "factory built",
+     "value": "1929",
+     "source_note": "built by Nabisco as a box-printing plant on the Hudson; museum opened May 2003"
+    },
+    {
+     "name": "site",
+     "value": "31 acres",
+     "source_note": "Wikipedia: museum occupies thirty-one acres near the Hudson River, adjacent to ninety acres of riverfront parkland"
+    },
+    {
+     "name": "Warhol Shadows installation",
+     "value": "approx. 350 linear feet",
+     "source_note": "Wikipedia: the 1978-79 multipart work shown as a single installation — example of one bay = one monumental work"
+    }
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Dia_Beacon",
+    "https://www.diaart.org/about/press/dia-art-foundation-opens-new-museum-to-house-renowned-collection",
+    "https://www.diaart.org/about/press/diabeacon-riggio-galleries-a-museum-for-dias-collection-celebrates-successful-first-year-in-hudson-valley/type/text",
+    "https://www.diaart.org/visit/visit-our-locations-sites/dia-beacon-beacon-united-states",
+    "https://www.smithsonianmag.com/arts-culture/beacon-of-light-89019529/"
+   ],
+   "template_key": "dia-beacon-field",
+   "walk_rule": "Enter on the center line and drift sideways between column strips: each strip of '1' floor bounded by the x=3/7/11 column rhythm is one artist's bay, and you cross freely between them anywhere a divider stub does not block.",
+   "pacing_rule": "No sequence — long slow parallel drifts down open bays with lateral crossings, pausing longest in the single hero bay where one monumental work owns the entire strip.",
+   "validation": {
+    "issues": [],
+    "slots": 17,
+    "ok": true,
+    "gate": "tools/validate_museum_templates.py (orchestrator re-check)"
+   }
+  },
+  {
+   "museum": "Jewish Museum Berlin",
+   "architect": "Daniel Libeskind",
+   "circulation_type": "zigzag switchback crossed by a straight sealed void axis",
+   "mechanism": "Libeskind's 'Between the Lines' plan is two lines: a tortuous zigzag you walk and a straight line you cannot enter. Where they intersect, sealed concrete voids cut through every floor — unlit, unheated shafts the visitor keeps colliding with but can never occupy. The walk is organized by what it is denied: circulation bends around absence, and the absence is the exhibit.",
+   "numbers": [
+    {
+     "name": "voids intersecting the zigzag",
+     "value": "5",
+     "source_note": "jmberlin.de Libeskind Building page: five voids at the intersections of the zigzag line and the invisible straight line, cutting basement to roof, raw concrete, unlit and unheated"
+    },
+    {
+     "name": "underground axes",
+     "value": "3",
+     "source_note": "Axis of Continuity, Axis of Exile, Axis of the Holocaust cross on the lower level (jmberlin.de); the Holocaust axis ends at a dead end, the Voided Void tower"
+    },
+    {
+     "name": "Garden of Exile stelae",
+     "value": "49",
+     "source_note": "7-by-7 square of concrete stelae on slanting ground; 48 filled with Berlin soil, the 49th central one with soil from Jerusalem (jmberlin.de)"
+    },
+    {
+     "name": "stairs on the Axis of Continuity",
+     "value": "82",
+     "source_note": "jmberlin.de: 82 stairs lead from the Axis of Continuity up to the core exhibition"
+    },
+    {
+     "name": "faces in Shalekhet (Fallen Leaves), Memory Void",
+     "value": ">10,000",
+     "source_note": "Menashe Kadishman's 2001 installation: more than 10,000 open-mouthed faces cut from heavy iron plates cover the Memory Void floor; visitors walk on them (jmberlin.de Shalekhet page)"
+    },
+    {
+     "name": "competition win / opening",
+     "value": "1989 / 2001",
+     "source_note": "Libeskind won the competition in 1989; the museum opened in the fall of 2001 (jmberlin.de)"
+    }
+   ],
+   "sources": [
+    "https://www.jmberlin.de/en/libeskind-building",
+    "https://www.jmberlin.de/en/shalekhet-fallen-leaves",
+    "https://www.dezeen.com/2022/05/20/daniel-libeskind-jewish-museum-deconstructivist-architecture/",
+    "https://www.jmberlin.de/en/exhibition-libeskind-between-the-lines"
+   ],
+   "template_key": "libeskind-void-axis",
+   "walk_rule": "Walk the switchbacks: each full-width wall forces a hard turn, the three sealed void chambers on the central columns are never enterable — pass them along their flanking corridors, let the dead-end pockets beside each void deliver you to a slot facing blank wall, and cross the void line only at the open turn rows.",
+   "pacing_rule": "Long quiet flank runs beside sealed voids alternate with abrupt forced turns; slots stay sparse (about one per fifteen walkable cells) and cluster at void walls and dead ends, so absence sets the rhythm and the single hero is met against the largest void.",
+   "validation": {
+    "issues": [],
+    "slots": 12,
+    "ok": true,
+    "gate": "tools/validate_museum_templates.py (orchestrator re-check)"
+   }
+  },
+  {
+   "museum": "Louisiana Museum of Modern Art, Humlebæk",
+   "architect": "Jørgen Bo & Vilhelm Wohlert (with Claus Wohlert from the East Wing), 1958–1998",
+   "circulation_type": "pavilion chain — discrete gallery pavilions strung on a landscape walk, joined by narrow glass links",
+   "mechanism": "Louisiana is not one building but a chain: discrete whitewashed gallery pavilions set into a coastal park, joined by narrow glazed corridors so that the walk between rooms is itself part of the museum. Each glass link empties the eye onto landscape before the next room begins, so every pavilion is entered fresh, and the 1991 underground Graphics Wing finally closed the chain into a ring. The hero moment is earned at the end of the walk — the Giacometti gallery opening onto the lake.",
+   "numbers": [
+    {
+     "name": "original wing opened",
+     "value": "1958 — three pavilions joined by glass corridors (North Wing)",
+     "source_note": "Wikipedia + louisiana.dk architecture page: the 1958 core was the villa, glass corridors and three pavilions, incl. the Giacometti and Jorn halls"
+    },
+    {
+     "name": "ring completed",
+     "value": "1991 — underground East (Graphics) Wing closed the circuit",
+     "source_note": "louisiana.dk architecture-and-history: East Wing 1991 completed the circular configuration, kept underground to preserve the park profile"
+    },
+    {
+     "name": "expansion span",
+     "value": "7 expansion phases, 1958–1998, all by Bo & Wohlert (~33 years, incl. Children's Wing 1994–98)",
+     "source_note": "louisiana.dk + Architects' Journal: the same architects carried all seven extensions, Claus Wohlert joining from the East Wing"
+    },
+    {
+     "name": "visitors 2024",
+     "value": "715,820 — Denmark's most visited museum",
+     "source_note": "louisiana.dk about page / Copenhagen Post 2024 museum statistics; >700,000 annually, Scandinavia's most visited modern-art museum"
+    },
+    {
+     "name": "first-year visitors",
+     "value": "200,000 in 1958 vs. founder Knud W. Jensen's expected 40,000",
+     "source_note": "Wikipedia, founding history of Knud W. Jensen's museum"
+    },
+    {
+     "name": "rafter module",
+     "value": "laminated timber roof beams at 1.2 m centres, glazed between as clerestory",
+     "source_note": "John Pardey, 'Great Detail', Architects' Journal, on the 1958 wing's construction grammar"
+    }
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Louisiana_Museum_of_Modern_Art",
+    "https://louisiana.dk/en/museum/architecture-and-history/",
+    "https://louisiana.dk/en/louisiana-info/",
+    "https://www.architectsjournal.co.uk/buildings/great-detail-john-pardey-on-wohlert-and-bos-louisiana-museum",
+    "https://cphpost.dk/2026-06-02/news/round-up/museums-see-more-visitors-for-third-year-in-a-row-2/"
+   ],
+   "template_key": "louisiana-pavilion-chain",
+   "walk_rule": "Alternate walled pavilion chambers with 1-wide glass-link corridors that jog sideways between them, so the walker crosses an empty slotless passage and changes heading before every new room.",
+   "pacing_rule": "Room, breath, room — each pavilion is a dense cluster of works, each link is deliberately empty, and the single hero plinth waits in the last pavilion, earned by the whole walk.",
+   "validation": {
+    "issues": [],
+    "slots": 14,
+    "ok": true,
+    "gate": "tools/validate_museum_templates.py (orchestrator re-check)"
    }
   }
  ]

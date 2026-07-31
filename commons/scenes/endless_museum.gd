@@ -38,6 +38,14 @@ const WALK_SPEED := 4.0
 const BUILD_AHEAD_M := 24.0
 const KEEP_BEHIND_M := 70.0
 const MAX_ARTIFACTS_PER_SEGMENT := 8
+# THE VESTIBULE (v3). Collision exposed what the gliding camera never felt:
+# each template's exit gap and the next template's entry gap sit at different x,
+# so the chain was walkable per-template but not BETWEEN templates. Every
+# segment now opens with a short lobby the width of the widest template —
+# closing strips seal width jumps — so any exit gap funnels into any entry gap.
+# Real museums have these rooms too; the banner hangs there.
+const VESTIBULE_H := 4
+const LOBBY_W := 17
 
 var _museums: Array = []          # [{key,label,museum,w,h,tile,walk_rule}]
 var _pool: Array = []             # [{lookup, scene}]
@@ -52,6 +60,8 @@ var _test_frames: int = 0
 var _segments: Array = []         # [{node, z0, z1, index}]
 var _next_z: float = 0.0
 var _seg_index: int = 0
+var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
+var _first_key: String = ""       # --em-first=<key> rotates the dealing order
 var _player: CharacterBody3D
 var _cam: Camera3D
 var _yaw: float = 0.0
@@ -88,6 +98,8 @@ func _parse_args() -> void:
 			_shot_segments = int(a.substr(14))
 		elif a == "--em-test-collision":
 			_test_collision = true
+		elif a.begins_with("--em-first="):
+			_first_key = a.substr(11)
 
 func _load_museums() -> void:
 	var f := FileAccess.open(TEMPLATES, FileAccess.READ)
@@ -103,8 +115,22 @@ func _load_museums() -> void:
 			_museums.append({"key": key, "label": p.get("label", key),
 				"museum": p.get("museum", ""), "w": int(p.get("w", 15)),
 				"h": int(p.get("h", 30)), "tile": p.get("tile", []),
-				"walk_rule": p.get("walk_rule", "")})
-	_museums.sort_custom(func(a, b): return String(a["key"]) < String(b["key"]))
+				"walk_rule": p.get("walk_rule", ""),
+				"em_order": int(p.get("em_order", 99))})
+	# the dealing order is DATA (em_order on the pattern, a proposal not a
+	# ruling); alphabetical keys are only the tiebreak. --em-first rotates a
+	# chosen museum to the front for proof shots.
+	_museums.sort_custom(func(a, b):
+		if int(a["em_order"]) != int(b["em_order"]):
+			return int(a["em_order"]) < int(b["em_order"])
+		return String(a["key"]) < String(b["key"]))
+	if _first_key != "":
+		for i in range(_museums.size()):
+			if String(_museums[i]["key"]) == _first_key:
+				var head: Array = _museums.slice(i)
+				head.append_array(_museums.slice(0, i))
+				_museums = head
+				break
 
 func _load_pool() -> void:
 	# the registry decides what is ALIVE (map_ready + scene on disk); the order
@@ -241,30 +267,56 @@ func _build_segment() -> void:
 	var solid := StaticBody3D.new()
 	solid.name = "Collision"
 	seg.add_child(solid)
+	# — the vestibule: an open lobby joining the previous museum's exit gap to
+	# this one's entry gap. Closing strips seal the width jump on both edges
+	# (a fully sealed strip at the very first segment, where nothing is behind).
+	var pw: int = _prev_w if _prev_w > 0 else 1
+	var wall_col := Color(0.32, 0.32, 0.36)
+	for zr in range(VESTIBULE_H):
+		for x in range(LOBBY_W):
+			_box(seg, Vector3(x + 0.5, -0.1, zr + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16))
+	for zr in range(VESTIBULE_H):
+		for sx in [0, LOBBY_W - 1]:
+			_box(seg, Vector3(sx + 0.5, 1.5, zr + 0.5), Vector3(1, 3.0, 1), wall_col)
+			_add_col(solid, Vector3(sx + 0.5, 1.5, zr + 0.5), Vector3(1, 3.0, 1))
+	for x in range(pw - 1, LOBBY_W):        # seal beyond the previous tile's width
+		_box(seg, Vector3(x + 0.5, 1.5, 0.5), Vector3(1, 3.0, 1), wall_col)
+		_add_col(solid, Vector3(x + 0.5, 1.5, 0.5), Vector3(1, 3.0, 1))
+	for x in range(w - 1, LOBBY_W):         # seal beyond this tile's width
+		_box(seg, Vector3(x + 0.5, 1.5, VESTIBULE_H - 0.5), Vector3(1, 3.0, 1), wall_col)
+		_add_col(solid, Vector3(x + 0.5, 1.5, VESTIBULE_H - 0.5), Vector3(1, 3.0, 1))
+	# outer skin: an implicit wall just beyond both side columns of the tile, so
+	# free-plan templates with a walkable rim (Kanazawa, Neue Nationalgalerie)
+	# cannot leak the walker off the edge of the world
+	for y_skin in range(tile.size()):
+		for sx2 in [-1, w]:
+			_box(seg, Vector3(sx2 + 0.5, 1.5, y_skin + VESTIBULE_H + 0.5), Vector3(1, 3.0, 1), wall_col)
+			_add_col(solid, Vector3(sx2 + 0.5, 1.5, y_skin + VESTIBULE_H + 0.5), Vector3(1, 3.0, 1))
 	# collect slots first so the artifact budget prefers hero > podium > floor
 	var slots: Array = []
 	for y in range(tile.size()):
 		var row: Array = tile[y]
+		var z := y + VESTIBULE_H
 		for x in range(row.size()):
 			var c := String(row[x])
 			match c:
 				"1", "1s":
-					_box(seg, Vector3(x + 0.5, -0.1, y + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19))
+					_box(seg, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19))
 				"2", "2s":
-					_box(seg, Vector3(x + 0.5, 0.1, y + 0.5), Vector3(1, 0.6, 1), Color(0.23, 0.23, 0.28))
-					_add_col(solid, Vector3(x + 0.5, 0.1, y + 0.5), Vector3(1, 0.6, 1))
+					_box(seg, Vector3(x + 0.5, 0.1, z + 0.5), Vector3(1, 0.6, 1), Color(0.23, 0.23, 0.28))
+					_add_col(solid, Vector3(x + 0.5, 0.1, z + 0.5), Vector3(1, 0.6, 1))
 				"3s":
-					_box(seg, Vector3(x + 0.5, 0.3, y + 0.5), Vector3(1, 1.0, 1), Color(0.35, 0.27, 0.16))
-					_add_col(solid, Vector3(x + 0.5, 0.3, y + 0.5), Vector3(1, 1.0, 1))
+					_box(seg, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1), Color(0.35, 0.27, 0.16))
+					_add_col(solid, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1))
 				"4":
-					_box(seg, Vector3(x + 0.5, 1.5, y + 0.5), Vector3(1, 3.0, 1), Color(0.32, 0.32, 0.36))
-					_add_col(solid, Vector3(x + 0.5, 1.5, y + 0.5), Vector3(1, 3.0, 1))
+					_box(seg, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1), wall_col)
+					_add_col(solid, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1))
 			if c == "1s":
-				slots.append({"x": x, "y": y, "top": 0.0, "rank": 2})
+				slots.append({"x": x, "y": z, "top": 0.0, "rank": 2})
 			elif c == "2s":
-				slots.append({"x": x, "y": y, "top": 0.4, "rank": 1})
+				slots.append({"x": x, "y": z, "top": 0.4, "rank": 1})
 			elif c == "3s":
-				slots.append({"x": x, "y": y, "top": 0.8, "rank": 0})
+				slots.append({"x": x, "y": z, "top": 0.8, "rank": 0})
 	slots.sort_custom(func(a, b): return int(a["rank"]) < int(b["rank"]))
 	var placed := 0
 	for s in slots:
@@ -290,7 +342,8 @@ func _build_segment() -> void:
 	banner.title = String(spec["label"])
 	banner.body = String(spec["museum"])
 	banner.width_m = 2.8
-	banner.position = Vector3(w / 2.0, 2.45, 0.4)
+	# the banner hangs in the vestibule, over the museum's entry
+	banner.position = Vector3(w / 2.0, 2.45, VESTIBULE_H - 0.45)
 	banner.rotation_degrees = Vector3(0, 180, 0)
 	seg.add_child(banner)
 	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h), "index": _seg_index})
@@ -380,11 +433,12 @@ func _take_proof_shot() -> void:
 	# stand at the first segment's entry (or --em-shot-at=<z>), look down the
 	# corridor, settle, save
 	var spec: Dictionary = _museums[0]
-	_player.position = Vector3(float(spec["w"]) / 2.0, 0.0, _shot_z)
+	# negative --em-shot-at means "the banner shot": stand at the lobby's mouth
+	# and tilt up at the vestibule sign instead of down the axis
+	var z: float = _shot_z if _shot_z >= 0.0 else 0.7
+	_player.position = Vector3(float(spec["w"]) / 2.0, 0.0, z)
 	_player.rotation = Vector3(0.0, PI, 0.0)  # scene +z runs away from entry; face along it
-	# standing before the threshold (negative z), tilt up at the banner instead
-	# of down the axis
-	_cam.rotation = Vector3(-0.05 if _shot_z >= 0.0 else 0.10, 0.0, 0.0)
+	_cam.rotation = Vector3(-0.05 if _shot_z >= 0.0 else 0.18, 0.0, 0.0)
 	_shoot_deferred()
 
 func _shoot_deferred() -> void:
