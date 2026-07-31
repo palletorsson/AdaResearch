@@ -495,27 +495,69 @@ func _create_history_panel() -> void:
 
 
 ## A screwed-down cover where a screen seat would be. The seat still exists — the
-## rebate, the plate, the two bolt lines — the instrument simply declines to fill
-## it, which is a different statement from never having had one. No emissive lip,
-## no header stencil: everything this seat contributed to the face's light is
-## gone, which is exactly the read.
+## rebate, the plate, the bolt lines — the instrument simply declines to fill it,
+## which is a different statement from never having had one.
+##
+## THE PLATE HAS TO READ AS A PLATE (2026-07-31 twin repair). It used to be cut
+## from the shell material, 8 mm thick, set flush in the rebate. On the face that
+## is a dark rectangle 0.37 × 0.18 m — and a SEATED screen at lit=false is also a
+## dark rectangle 0.37 × 0.18 m, because the pocket, the unlit display face and the
+## anthracite glass are all near-black and the only bright things the pocket adds
+## (a 5 mm ember lip, a 17 mm header stencil, 20 mm text) are three pixels apiece
+## once the critic has resized the machine to 160 × 160. So `tally` (lower seat
+## plated) and `ledger` (lower seat = the SEQUENCE pocket) measured 1.96% apart:
+## one picture wearing two rung names, on an axis whose entire claim at that step
+## is WHETHER THE RECORD IS THERE. A closure that cannot be seen is not a closure.
+##
+## So the cover is now a cover. It laps 56 mm wider than the opening it closes —
+## a plate that overlaps its hole, the way a real blank does, not a filler cut to
+## fit — stands 30 mm proud of the shell over its own shadow gap, and is painted in
+## the machine's OWN accent, the same word the ember lines are struck in. That is
+## the honest statement: the seat is not missing, it is SEALED, by the same hand
+## that built the machine. A 0.40 × 0.17 m field of accent where the record would
+## be is a different picture from a black pocket at any resolution a human or a
+## critic will ever look at it.
+##
+## STILL NO EMISSIVE LIP AND NO HEADER STENCIL. The plate is paint on steel: it
+## emits nothing, it has no tag naming what it covers, and everything this seat
+## contributed to the face's LIGHT is still gone. That was always the read and it
+## is unchanged. What changed is that you can now see the seat is shut.
+##
+## THE LAP IS ALL WIDTH, AND THAT IS ARITHMETIC, not taste. The face has room
+## sideways and none vertically: the seat bands are 0.36 and 0.55 and the readout's
+## own rebate starts at 0.64, so the cover grows by 56 mm across (0.399 m, inside
+## the 0.44 shell) and only 16 mm up (0.166 m, rebate 0.180). That makes oracle's
+## two plates stack 0.270–0.450 and 0.460–0.640 — touching nothing, intersecting
+## nothing. Same painted area as the old flush patch, differently shaped. And the
+## 30 mm standoff sits well behind the keypad wedge (z 0.208), so the machine's
+## AABB is IDENTICAL at every rung: the sweep frames all five renders the same way
+## and the whole difference is on the face, with no crop shift doing the work.
 func _blank_seat(y: float, size: Vector2) -> void:
-	var w: float = size.x + 0.026
-	var h: float = size.y + 0.030
-	var shell: StandardMaterial3D = HangarKit.finish_body(finish, color_body, wear)
+	var w: float = size.x + 0.056
+	var h: float = size.y + 0.016
 	var steel: StandardMaterial3D = HangarKit.worn_metal(color_body.lightened(0.10))
 	var rebate: StandardMaterial3D = HangarKit.painted_metal(
 		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
-	# the shadow rebate, so the plate reads as ADDED rather than as bare shell
+	# The seal. wear is passed as 0.0 ON PURPOSE: painted_metal darkens the albedo by
+	# wear × 0.35, and G4-palette wants every albedo within 0.02 of a canon colour —
+	# at wear 0.10 the accent drifts 0.03 off canon and the plate becomes a near-miss
+	# orange, which is the exact failure ("a different manufacturer") the rule exists
+	# to catch. The roughness carries the age instead.
+	var seal: StandardMaterial3D = HangarKit.painted_metal(color_accent, 0.0, 0.12, 0.58)
+	# the shadow gap, so the plate reads as something laid ON the shell
 	_cab.add_child(HangarKit.box(
-		Vector3(0.0, y, _face_z + 0.001), Vector3(w + 0.012, h + 0.012, 0.004), rebate))
+		Vector3(0.0, y, _face_z + 0.002), Vector3(w + 0.014, h + 0.014, 0.006), rebate))
+	# the cover: 26 mm of plate, front face 30 mm proud of the shell
 	_cab.add_child(HangarKit.box(
-		Vector3(0.0, y, _face_z + 0.004), Vector3(w, h, 0.008), shell))
+		Vector3(0.0, y, _face_z + 0.017), Vector3(w, h, 0.026), seal))
+	# strap across the middle — what the bolt rows are actually pulling down
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, y, _face_z + 0.035), Vector3(w + 0.012, 0.030, 0.012), steel))
 	for sx in [-1.0, 1.0]:
 		_cab.add_child(HangarKit.bolts(
-			Vector3(float(sx) * (w * 0.5 - 0.015), y - h * 0.5 + 0.018, _face_z + 0.010),
-			Vector3(float(sx) * (w * 0.5 - 0.015), y + h * 0.5 - 0.018, _face_z + 0.010),
-			3, 0.005, steel))
+			Vector3(float(sx) * (w * 0.5 - 0.016), y - h * 0.5 + 0.016, _face_z + 0.032),
+			Vector3(float(sx) * (w * 0.5 - 0.016), y + h * 0.5 - 0.016, _face_z + 0.032),
+			4, 0.007, steel))
 
 
 ## disclosure:origin — the register window across the top of the face. Seated like

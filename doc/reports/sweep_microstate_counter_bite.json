@@ -1,0 +1,68 @@
+{
+ "sweep": "microstate_counter",
+ "peak_changed_pct": 1.831,
+ "subject_pct": 7.959,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "macrostate": "uniform"
+   },
+   "b": {
+    "macrostate": "corner"
+   },
+   "changed_px": 9124,
+   "changed_pct": 1.58
+  },
+  {
+   "a": {
+    "macrostate": "uniform"
+   },
+   "b": {
+    "macrostate": "layered"
+   },
+   "changed_px": 9558,
+   "changed_pct": 1.655
+  },
+  {
+   "a": {
+    "macrostate": "uniform"
+   },
+   "b": {
+    "macrostate": "spilled"
+   },
+   "changed_px": 10577,
+   "changed_pct": 1.831
+  },
+  {
+   "a": {
+    "macrostate": "corner"
+   },
+   "b": {
+    "macrostate": "layered"
+   },
+   "changed_px": 3091,
+   "changed_pct": 0.535
+  },
+  {
+   "a": {
+    "macrostate": "corner"
+   },
+   "b": {
+    "macrostate": "spilled"
+   },
+   "changed_px": 9953,
+   "changed_pct": 1.723
+  },
+  {
+   "a": {
+    "macrostate": "layered"
+   },
+   "b": {
+    "macrostate": "spilled"
+   },
+   "changed_px": 10344,
+   "changed_pct": 1.791
+  }
+ ]
+}

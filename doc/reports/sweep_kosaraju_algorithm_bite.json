@@ -1,343 +1,68 @@
 {
  "sweep": "kosaraju_algorithm",
- "peak_changed_pct": 3.101,
+ "peak_changed_pct": 2.914,
+ "subject_pct": 1.711,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "mutuality": "pockets",
-    "step_by_step": true
+    "mutuality": "pockets"
    },
    "b": {
-    "mutuality": "pockets",
-    "step_by_step": false
+    "mutuality": "none"
    },
-   "changed_px": 11446,
-   "changed_pct": 1.982
+   "changed_px": 16829,
+   "changed_pct": 2.914
   },
   {
    "a": {
-    "mutuality": "pockets",
-    "step_by_step": true
+    "mutuality": "pockets"
    },
    "b": {
-    "mutuality": "none",
-    "step_by_step": true
+    "mutuality": "split"
    },
-   "changed_px": 10766,
-   "changed_pct": 1.864
+   "changed_px": 12117,
+   "changed_pct": 2.098
   },
   {
    "a": {
-    "mutuality": "pockets",
-    "step_by_step": true
+    "mutuality": "pockets"
    },
    "b": {
-    "mutuality": "none",
-    "step_by_step": false
+    "mutuality": "total"
    },
-   "changed_px": 10766,
-   "changed_pct": 1.864
+   "changed_px": 14618,
+   "changed_pct": 2.531
   },
   {
    "a": {
-    "mutuality": "pockets",
-    "step_by_step": true
+    "mutuality": "none"
    },
    "b": {
-    "mutuality": "split",
-    "step_by_step": true
-   },
-   "changed_px": 6793,
-   "changed_pct": 1.176
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "split",
-    "step_by_step": false
-   },
-   "changed_px": 6880,
-   "changed_pct": 1.191
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": true
-   },
-   "changed_px": 9099,
-   "changed_pct": 1.575
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": false
-   },
-   "changed_px": 9238,
-   "changed_pct": 1.599
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "none",
-    "step_by_step": true
-   },
-   "changed_px": 17910,
-   "changed_pct": 3.101
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "none",
-    "step_by_step": false
-   },
-   "changed_px": 17911,
-   "changed_pct": 3.101
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "split",
-    "step_by_step": true
-   },
-   "changed_px": 12660,
-   "changed_pct": 2.192
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "split",
-    "step_by_step": false
-   },
-   "changed_px": 12801,
-   "changed_pct": 2.216
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": true
-   },
-   "changed_px": 15939,
-   "changed_pct": 2.76
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": false
-   },
-   "changed_px": 15948,
-   "changed_pct": 2.761
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "none",
-    "step_by_step": false
-   },
-   "changed_px": 11,
-   "changed_pct": 0.002
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "split",
-    "step_by_step": true
-   },
-   "changed_px": 12984,
-   "changed_pct": 2.248
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "split",
-    "step_by_step": false
-   },
-   "changed_px": 12986,
-   "changed_pct": 2.248
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": true
-   },
-   "changed_px": 15549,
-   "changed_pct": 2.692
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": false
-   },
-   "changed_px": 15562,
-   "changed_pct": 2.694
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "split",
-    "step_by_step": true
+    "mutuality": "split"
    },
    "changed_px": 12985,
    "changed_pct": 2.248
   },
   {
    "a": {
-    "mutuality": "none",
-    "step_by_step": false
+    "mutuality": "none"
    },
    "b": {
-    "mutuality": "split",
-    "step_by_step": false
+    "mutuality": "total"
    },
-   "changed_px": 12987,
-   "changed_pct": 2.248
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": true
-   },
-   "changed_px": 15550,
+   "changed_px": 15549,
    "changed_pct": 2.692
   },
   {
    "a": {
-    "mutuality": "none",
-    "step_by_step": false
+    "mutuality": "split"
    },
    "b": {
-    "mutuality": "total",
-    "step_by_step": false
+    "mutuality": "total"
    },
-   "changed_px": 15563,
-   "changed_pct": 2.694
-  },
-  {
-   "a": {
-    "mutuality": "split",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "split",
-    "step_by_step": false
-   },
-   "changed_px": 625,
-   "changed_pct": 0.108
-  },
-  {
-   "a": {
-    "mutuality": "split",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": true
-   },
-   "changed_px": 10728,
-   "changed_pct": 1.857
-  },
-  {
-   "a": {
-    "mutuality": "split",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": false
-   },
-   "changed_px": 10733,
+   "changed_px": 10729,
    "changed_pct": 1.858
-  },
-  {
-   "a": {
-    "mutuality": "split",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": true
-   },
-   "changed_px": 10757,
-   "changed_pct": 1.862
-  },
-  {
-   "a": {
-    "mutuality": "split",
-    "step_by_step": false
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": false
-   },
-   "changed_px": 10763,
-   "changed_pct": 1.863
-  },
-  {
-   "a": {
-    "mutuality": "total",
-    "step_by_step": true
-   },
-   "b": {
-    "mutuality": "total",
-    "step_by_step": false
-   },
-   "changed_px": 629,
-   "changed_pct": 0.109
   }
  ]
 }

@@ -63,8 +63,22 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 def registry() -> dict:
+    """Every artifact entry, preferring the one that can actually be built.
+
+    A lookup name can appear in more than one file here, and not every file is an artifact
+    registry: substrate_vectors.json is a feature-weight table keyed by the same names. Under
+    last-write-wins a body-less entry displaced the real one and this checker then read ZERO
+    declared axes for armadillo_eggling — reporting a fact about file ordering as a fact about
+    the artifact, which is the exact disease this tool exists to cure. artifact_dna_research.py
+    already carries this guard; it belongs here too.
+    """
     out: dict = {}
-    for rp in (REPO / "commons" / "artifacts" / "registry").glob("*.json"):
+
+    def buildable(e: dict) -> bool:
+        return bool(str(e.get("scene", "") or e.get("scene_path", "")).strip()
+                    or str(e.get("delegate_to", "")).strip())
+
+    for rp in sorted((REPO / "commons" / "artifacts" / "registry").glob("*.json")):
         try:
             data = json.loads(rp.read_text(encoding="utf-8"))
         except Exception:
@@ -72,8 +86,12 @@ def registry() -> dict:
         arts = data.get("artifacts", data) if isinstance(data, dict) else data
         if isinstance(arts, dict):
             for tok, e in arts.items():
-                if isinstance(e, dict):
-                    out[tok] = (e, rp.name)
+                if not isinstance(e, dict):
+                    continue
+                prev = out.get(tok)
+                if prev is not None and buildable(prev[0]) and not buildable(e):
+                    continue
+                out[tok] = (e, rp.name)
     return out
 
 

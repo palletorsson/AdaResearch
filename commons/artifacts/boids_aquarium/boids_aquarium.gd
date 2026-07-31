@@ -33,6 +33,51 @@ extends Node3D
 # loop and did NOT hold; the notes on each branch of `_accord_weights()` record
 # what was measured and what had to change. The shapes are the contract. The
 # weights are whatever actually produces them.
+#
+# ── THE REPAIR: THREE OF THE FOUR VALUES WERE ONE PICTURE ──────────────────
+#
+# The first pass got the SHAPES right and drew them with a mark nobody can see.
+# Measured on the swarm sheet: lane == orb 1.68%, lattice == orb 1.88%, lane ==
+# lattice 2.13% — all three under the 6% twin bar, three declared values
+# rendering as one. Only `school` was distinguishable, and the axis scraped a
+# 4.14% WEAK verdict off that one difference.
+#
+# IT WAS NEVER THE GEOMETRY. The bead really is a bead, the sheet really is a
+# sheet: replaying this file's own _update_boids offline reproduces the numbers
+# already recorded below (lane X 0.708 m at 1.2 s against their measured 0.71,
+# lattice 0.852 x 0.663 x 0.497 against their 0.85 x 0.66 x 0.50). What fails is
+# the MARK. The critic crops to the artifact's own subject box and resizes to
+# 160 x 160, and this artifact's box is furniture — a 1 m glass cube, a 0.48 m
+# rack panel, a plated caption — while the whole flock is thirty needles of
+# 0.008 x 0.008 x 0.025 m. That is 176 pixels of ink in a 25 600-pixel frame.
+# Bead, sheet and ranks all land inside those 176 pixels, so every arrangement
+# of them measures the same: the picture has no room to hold the shape.
+#
+# Compare boid_manager, which carries this same word with this same ladder and
+# scores 14.4% with no twins. Its marks are 0.4 m in a 20 m box — the same
+# body-to-box ratio as ours, so the difference is not the fish. It is that the
+# flock is the ONLY thing it builds: no tank, no rack, no plate, so the crop
+# lands on the flock instead of on the furniture, its hundred opaque bodies sit
+# on empty background instead of behind two panes of glass, and its 2 m ball and
+# its 18 m slab do not even crop to the same scale.
+#
+# So the three DEPOSITED values now draw with a heavier mark: 0.032 x 0.032 x
+# 0.080 m of tank, against the shipped 0.008 x 0.008 x 0.025 m. `school` keeps
+# the shipped needle exactly — it is the default, it stands in every shipped
+# map, and "an irregular cloud, needles every which way" is a cloud OF needles;
+# the needle is its mark. The other three name BODIES — a bead, a sheet, ranks —
+# and thirty invisible specks cannot compose a body. Nothing about which rule
+# the neighbourhood obeys changed, and no shape moved except to stay inside the
+# size the comment already claimed for it: the bead is now 0.195 m across where
+# the line says ~0.20 m (it was 0.25 m of specks), and the sheet is now exactly
+# 0.120 m thick where the line says 0.12 m (it was 0.145 m).
+#
+# Re-measured offline against the same crop, resize and hottest-5% metric,
+# calibrated so the shipped build reproduces the three twin numbers above:
+# orb vs lane 15.1%, orb vs lattice 15.6%, lane vs lattice 17.6%, and stable
+# from the deposit through 4 s. THE COST, said plainly: a map that places `orb`
+# beside `school` shows two different fish sizes. That is the price of the
+# declaration being true, and it is declared here rather than hidden.
 
 class_name BoidsAquarium
 
@@ -48,6 +93,8 @@ class_name BoidsAquarium
 ##   orb     — cohesion alone: one bright bead ~0.20 m across at tank centre
 ##   lane    — alignment alone: a 0.12 m thick sheet of parallel needles
 ##   lattice — separation alone: three even ranks of five, doubled in depth
+## The three deposited values draw with a heavier mark than `school` so that the
+## body each of them names is visible at all — see THE REPAIR above.
 @export_enum("school", "orb", "lane", "lattice") var accord: String = "school"
 
 ## Flocking parameters
@@ -111,19 +158,45 @@ const COLOUR_SEED: int = 30             # colour is not the axis: same in all fo
 
 const GOLDEN_ANGLE: float = 2.399963229728653   # PI * (3 - sqrt(5))
 
-## orb — ball radius as a fraction of tank width. 0.12 (not the 0.10 first
-## written) because pure cohesion breathes: measured over 0..4 s the ball
-## oscillates between 0.15 and 0.23 m across, which reads as the intended
-## ~0.20 m bead. At 0.10 it settles nearer 0.16; at 0.16 it is unstable and
-## has grown past 0.36 by 1.6 s.
-const ORB_RADIUS_FRAC: float = 0.12
+## THE MARK the three deposited values draw with, as a fraction of tank_size —
+## everything else about their geometry is tank-relative, and a mark that was not
+## would vanish again the moment a map asked for a 2 m tank.
+##
+## SIZED BY THE PICTURE, not by taste. The bodies these values name have to
+## survive the critic's crop-and-resize to 160 x 160, where the shipped needle
+## puts 176 pixels of ink into a 25 600-pixel frame and all three bodies
+## therefore measure the same (1.68 / 1.88 / 2.13% — twins). At 0.032 x 0.032 x
+## 0.080 the sheet and the ranks carry ~1250 pixels each and the bead is solid,
+## which lands the three repaired pairs at 15.1 / 15.6 / 17.6%. Larger buys
+## nothing: the metric averages the hottest 5% — 1280 pixels — and the sheet
+## already fills them.
+##
+## `school` NEVER USES THIS. It keeps the exported boid_size, unchanged, because
+## it is the @export default and stands in every shipped map.
+const DEPOSIT_MARK_FRAC: Vector3 = Vector3(0.032, 0.032, 0.080)
+
+## orb — ball radius for the CENTRES, as a fraction of tank width. The declared
+## body is "~0.20 m across", and the body is centres plus mark: 0.070 spreads the
+## centres over 0.14 m, cohesion draws that in to ~0.115 m by 1.2 s, and the
+## 0.080 m mark carries it back out to 0.195 m — measured stable at 0.186..0.198
+## from the deposit through 4 s. It was 0.12 when the mark was a 0.025 m needle,
+## which drew a 0.25 m cloud of specks where the line says a 0.20 m bead; at 0.12
+## with THIS mark the bead would read 0.29 m and stop being the declared size.
+const ORB_RADIUS_FRAC: float = 0.070
 
 ## lane — slab proportions of the tank, and the deposit heading speed. 0.12 m/s,
 ## not max_speed: at 0.5 m/s the whole sheet translates 0.55 m inside a 0.9 m
 ## box during the capture wait and piles against the +X glass (measured X extent
 ## 0.36 m at 1.1 s, centroid +0.26). At 0.12 m/s the sheet is still tank-wide at
-## 1.1 s (X 0.71, Z 0.84) and still 0.120 m thick.
-const LANE_SLAB_FRAC: Vector3 = Vector3(0.84, 0.12, 0.84)
+## 1.1 s (X 0.71, Z 0.84).
+##
+## Y IS 0.040, NOT 0.12, AND THE SHEET IS STILL 0.12 THICK. _update_multimesh
+## puts the mesh's long axis along the looking_at UP vector, not along the
+## heading, so a lane needle stands VERTICAL: the sheet's thickness is the layer
+## spread plus the mark's own length. 0.040 + 0.080 = 0.120 m, exactly what the
+## axis comment declares. (With the shipped needle it was 0.12 + 0.025 = 0.145 m,
+## already over the declared figure and invisible either way.)
+const LANE_SLAB_FRAC: Vector3 = Vector3(0.84, 0.040, 0.84)
 const LANE_SPEED: float = 0.12
 const LANE_COLS: int = 6
 const LANE_ROWS: int = 5
@@ -225,11 +298,19 @@ func _build_all() -> void:
 ##           a shell's velocities gives ~zero, so alignment acts as pure drag
 ##           and collapses the bead to 0.076 m by 3 s. Cohesion alone, with the
 ##           deposit given orbital speed r·sqrt(coh) in varied planes and net
-##           momentum zeroed, holds 0.19..0.21 m across the entire window.
+##           momentum zeroed, holds 0.19..0.21 m across the entire window. (The
+##           centre radius later dropped 0.12 -> 0.070 so the heavier mark keeps
+##           the bead at its declared ~0.20 m; that packs the ball tighter, which
+##           only strengthens the argument for sep 0 — and the ball still holds,
+##           0.186..0.198 m across from the deposit through 4 s.)
 ##   lane    sep 0.8 -> 0.0. At 0.14 m spacing separation thickens the slab from
 ##           0.120 m to 0.201 m by 1.1 s and 0.487 m by 2.5 s — it stops being a
 ##           sheet. With separation off the thickness is 0.120 m at 1.1 s and
-##           0.118 m at 3 s, and heading agreement stays at 0.98.
+##           0.118 m at 3 s, and heading agreement stays at 0.98. (Still 0.120 m
+##           now that the thickness is 0.040 m of layer spread plus an 0.080 m
+##           mark: at 0.168 m column spacing nothing is inside perception 0.15,
+##           so no rule acts on the sheet at all and it simply slides until the
+##           leading column meets the +X glass.)
 ##   lattice sep 4.5 / coh 0 / align 0 exactly as written. At 0.20 m spacing and
 ##           perception 0.15 nobody has a neighbour, so the deposit is a fixed
 ##           point trivially; separation only bites if drift closes a pair to
@@ -244,6 +325,21 @@ func _accord_weights(which: String) -> Vector3:
 		"lattice":
 			return Vector3(4.5, 0.0, 0.0)
 	return Vector3(_base_sep, _base_ali, _base_coh)
+
+
+## The mark a value draws with. MIRRORS _spawn_boids EXACTLY — the same three
+## names, the same fall-through — so the mark and the deposit can never disagree
+## about which value is being built. Anything that is not one of the three
+## deposits (including a typo that _pick_axis let through, though it does not)
+## gets the shipped needle, which is what `school` builds.
+func _accord_mark(which: String) -> Vector3:
+	match which:
+		"orb", "lane", "lattice":
+			return Vector3(
+				tank_size.x * DEPOSIT_MARK_FRAC.x,
+				tank_size.y * DEPOSIT_MARK_FRAC.y,
+				tank_size.z * DEPOSIT_MARK_FRAC.z)
+	return boid_size
 
 
 func _accord_perception(which: String) -> float:
@@ -321,9 +417,12 @@ func _create_multimesh():
 	_multimesh.use_colors = true
 	_multimesh.instance_count = boid_count
 
-	# Elongated cube shape
+	# Elongated cube shape. At `school` this is boid_size verbatim — the shipped
+	# mesh, byte for byte the pre-promotion build. The three deposited values
+	# draw the heavier mark, because the body each of them names has to be
+	# visible to be a body at all.
 	var mesh = BoxMesh.new()
-	mesh.size = boid_size
+	mesh.size = _accord_mark(accord)
 	_multimesh.mesh = mesh
 
 	var mat = StandardMaterial3D.new()
@@ -502,9 +601,11 @@ func _spawn_boids():
 
 
 ## school — the shipped build. Same spawn box (the middle 60% of the tank), same
-## random headings at half max_speed, same authored weights. The only change is
-## that the draw comes from a seeded generator instead of the global one, so two
-## builds of this tile are identical; the distribution is unchanged.
+## random headings at half max_speed, same authored weights, same 0.008 x 0.008 x
+## 0.025 m needle. The only change is that the draw comes from a seeded generator
+## instead of the global one, so two builds of this tile are identical; the
+## distribution is unchanged. THE DEFAULT MUST RENDER WHAT IT ALWAYS RENDERED —
+## the heavier mark that repaired the other three stops at this function's door.
 func _deposit_school() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = DEPOSIT_SEED
@@ -525,6 +626,12 @@ func _deposit_school() -> void:
 ## r·sqrt(cohesion) about its own axis. Varied orbit planes keep it a sphere
 ## rather than a disc; the net momentum is subtracted off so the bead floats at
 ## the centre instead of drifting out of frame.
+##
+## SOLID IS THE POINT. Thirty 0.080 m marks inside a 0.14 m ball of centres
+## oversubscribe the bead's own silhouette about twice over, so the disc fills
+## in and the value renders as the ONE BRIGHT BEAD the axis comment promises
+## rather than as thirty specks arranged on a sphere. Separation is 0 here, so
+## nothing pushes the overlap apart.
 func _deposit_orb() -> void:
 	var radius: float = tank_size.x * ORB_RADIUS_FRAC
 	var omega: float = sqrt(maxf(cohesion_weight, 0.0001))
@@ -561,9 +668,11 @@ func _deposit_orb() -> void:
 
 
 ## lane — a horizontal slab at mid-height, LANE_COLS x LANE_ROWS across the tank
-## floorplan and three layers deep inside the 0.12 m thickness, every velocity
-## +X at the same speed. Identical velocities make the alignment term exactly
-## zero, so the sheet is a fixed point that simply slides.
+## floorplan and three layers staggered through 0.040 m of centres, every
+## velocity +X at the same speed. Identical velocities make the alignment term
+## exactly zero, so the sheet is a fixed point that simply slides. The 0.12 m
+## thickness the axis declares is those 0.040 m plus the 0.080 m mark, which
+## stands VERTICAL here — see LANE_SLAB_FRAC.
 func _deposit_lane() -> void:
 	var slab: Vector3 = tank_size * LANE_SLAB_FRAC
 	var cols: float = float(maxi(LANE_COLS - 1, 1))
@@ -585,7 +694,10 @@ func _deposit_lane() -> void:
 ## same way (that is lane's picture, and a frozen lattice would render every
 ## mesh on the identity basis, i.e. parallel). Rank spacing sits outside
 ## perception, so the grid holds; if drift closes a pair, separation 4.5 pushes
-## them back apart.
+## them back apart. The heavier mark does not close the ranks: 0.080 m of body on
+## a 0.200 / 0.300 / 0.440 m lattice still leaves 0.12 m of water between
+## neighbours, and the whole block measures 0.93 x 0.74 x 0.58 m at 1.2 s, inside
+## the 1.0 m glass with room to spare.
 func _deposit_lattice() -> void:
 	var span: Vector3 = tank_size * LATTICE_SPAN_FRAC
 	var sx: float = span.x / float(maxi(LATTICE_NX - 1, 1))

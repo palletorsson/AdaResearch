@@ -10,43 +10,24 @@
   {
    "artifact": "lab_room",
    "axis": "premises",
-   "frame": 0.13265,
-   "focus": 0.35765,
+   "frame": 0.12248,
+   "focus": 0.3543,
    "verdict": "bites",
-   "subject": 0.10336,
+   "subject": 0.10332,
    "pairs": 24,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "lab_room",
    "axis": "witness",
-   "frame": 0.02568,
-   "focus": 0.16752,
+   "frame": 0.05593,
+   "focus": 0.31881,
    "verdict": "bites",
-   "subject": 0.10336,
+   "subject": 0.10332,
    "pairs": 24,
-   "twins": [
-    {
-     "a": "none",
-     "b": "port",
-     "focus": 0.00625
-    },
-    {
-     "a": "none",
-     "b": "port",
-     "focus": 0.01161
-    },
-    {
-     "a": "none",
-     "b": "port",
-     "focus": 0.0136
-    },
-    {
-     "a": "none",
-     "b": "port",
-     "focus": 0.01561
-    }
-   ]
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "library_rack",
@@ -56,171 +37,161 @@
    "verdict": "NO RENDER",
    "subject": 0.0,
    "pairs": 10,
-   "twins": [
+   "twins": [],
+   "colour_only": [
     {
      "a": "cordon",
      "b": "fixture",
-     "focus": 0.0
+     "focus": 0.0,
+     "rgb": 1.0
     },
     {
      "a": "cordon",
      "b": "hood",
-     "focus": 0.0
+     "focus": 0.0,
+     "rgb": 1.0
     },
     {
      "a": "cordon",
      "b": "label",
-     "focus": 0.0
+     "focus": 0.0,
+     "rgb": 1.0
     },
     {
      "a": "fixture",
      "b": "hood",
-     "focus": 0.0
+     "focus": 0.0,
+     "rgb": 1.0
     },
     {
      "a": "fixture",
      "b": "label",
-     "focus": 0.0
+     "focus": 0.0,
+     "rgb": 1.0
     },
     {
      "a": "hood",
      "b": "label",
-     "focus": 0.0
+     "focus": 0.0,
+     "rgb": 1.0
     },
     {
      "a": "cordon",
      "b": "none",
-     "focus": 0.0549
+     "focus": 0.0549,
+     "rgb": 1.0
     },
     {
      "a": "fixture",
      "b": "none",
-     "focus": 0.0549
+     "focus": 0.0549,
+     "rgb": 1.0
     },
     {
      "a": "hood",
      "b": "none",
-     "focus": 0.0549
+     "focus": 0.0549,
+     "rgb": 1.0
     },
     {
      "a": "label",
      "b": "none",
-     "focus": 0.0549
+     "focus": 0.0549,
+     "rgb": 1.0
     }
    ]
   },
   {
    "artifact": "prng_crank_machine",
    "axis": "disclosure",
-   "frame": 0.01482,
-   "focus": 0.11023,
-   "verdict": "WEAK",
+   "frame": 0.02693,
+   "focus": 0.2534,
+   "verdict": "bites",
    "subject": 0.08164,
    "pairs": 10,
-   "twins": [
+   "twins": [],
+   "colour_only": [
     {
      "a": "ledger",
-     "b": "tally",
-     "focus": 0.01963
-    },
-    {
-     "a": "oracle",
-     "b": "tally",
-     "focus": 0.0475
+     "b": "origin",
+     "focus": 0.05317,
+     "rgb": 0.06861
     }
    ]
   },
   {
    "artifact": "floating_sphere_field",
    "axis": "density",
-   "frame": 0.02932,
-   "focus": 0.06613,
+   "frame": 0.0293,
+   "focus": 0.06584,
    "verdict": "WEAK",
    "subject": 0.00828,
    "pairs": 6,
-   "twins": [
+   "twins": [],
+   "colour_only": [
     {
      "a": "dense",
      "b": "scarce",
-     "focus": 0.03823
+     "focus": 0.03807,
+     "rgb": 0.06783
     },
     {
      "a": "fog",
      "b": "scarce",
-     "focus": 0.05248
+     "focus": 0.0521,
+     "rgb": 0.09295
+    },
+    {
+     "a": "dense",
+     "b": "fog",
+     "focus": 0.05975,
+     "rgb": 0.10703
     }
    ]
   },
   {
    "artifact": "exit_sign",
    "axis": "support",
-   "frame": 0.14552,
-   "focus": 0.48902,
+   "frame": 0.1491,
+   "focus": 0.49242,
    "verdict": "bites",
    "subject": 0.10531,
    "pairs": 6,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "tt",
    "axis": "support",
-   "frame": 0.20253,
-   "focus": 0.50346,
+   "frame": 0.16037,
+   "focus": 0.48747,
    "verdict": "bites",
    "subject": 0.11582,
    "pairs": 6,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "geodesic_dome",
    "axis": "subdivision",
-   "frame": 0.01778,
-   "focus": 0.02799,
-   "verdict": "INERT",
-   "subject": 0.06176,
+   "frame": 0.09548,
+   "focus": 0.47871,
+   "verdict": "bites",
+   "subject": 0.05988,
    "pairs": 6,
-   "twins": [
-    {
-     "a": "v1",
-     "b": "v3",
-     "focus": 0.0
-    },
-    {
-     "a": "v1",
-     "b": "v4",
-     "focus": 0.0
-    },
-    {
-     "a": "v3",
-     "b": "v4",
-     "focus": 0.0
-    },
-    {
-     "a": "v1",
-     "b": "v2",
-     "focus": 0.05599
-    },
-    {
-     "a": "v2",
-     "b": "v3",
-     "focus": 0.05599
-    },
-    {
-     "a": "v2",
-     "b": "v4",
-     "focus": 0.05599
-    }
-   ]
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "gallery_marker_facade",
    "axis": "mode",
-   "frame": 0.11656,
-   "focus": 0.37499,
+   "frame": 0.18425,
+   "focus": 0.52042,
    "verdict": "bites",
    "subject": 0.10645,
    "pairs": 6,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   }
  ]
 }

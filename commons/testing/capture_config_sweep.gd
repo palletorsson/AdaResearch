@@ -141,6 +141,14 @@ func _run() -> void:
 		# a config key) create their labels after the first call, and an unframed label
 		# added later would otherwise survive into the capture.
 		LabelFramer.frame_labels(inst)
+		# AND THE CHROME AGAIN, for exactly the same reason. This was called once, before
+		# the settle, and the omission bought one artifact a fake score:
+		# pca_visualization builds its debug CanvasLayer late, so the panel was suppressed
+		# on the four tiles that rebuild and NOT on the default one. A 450 x 800 dark
+		# rectangle in one tile of five made the axis measure 11.6% while the four clouds
+		# it was supposed to be comparing were mutually identical at ~1%. The verdict was
+		# about a debug panel the player never sees, and it read as a passing axis.
+		_suppress_chrome(inst)
 
 		# RESCUE: some artifacts deliberately build NOTHING in _ready(). library_rack
 		# says so in its own comment — it has nothing to build until a `collection`
@@ -155,6 +163,7 @@ func _run() -> void:
 			inst.call("apply_grid_config", params)
 			await create_timer(SETTLE).timeout
 			LabelFramer.frame_labels(inst)
+			_suppress_chrome(inst)
 
 		var aabb := _subtree_aabb(inst)
 		var c := aabb.get_center()

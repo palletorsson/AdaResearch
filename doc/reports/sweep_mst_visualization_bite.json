@@ -1,343 +1,68 @@
 {
  "sweep": "mst_visualization",
- "peak_changed_pct": 64.923,
- "verdict": "BITES",
+ "peak_changed_pct": 0.165,
+ "subject_pct": 0.118,
+ "verdict": "SUBJECT NOT DETECTED - only 0.12% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": true
+    "backbone": "picked"
    },
    "b": {
-    "backbone": "picked",
-    "use_euclidean_weights": false
+    "backbone": "bare"
    },
-   "changed_px": 374998,
-   "changed_pct": 64.923
+   "changed_px": 703,
+   "changed_pct": 0.122
   },
   {
    "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": true
+    "backbone": "picked"
    },
    "b": {
-    "backbone": "bare",
-    "use_euclidean_weights": true
+    "backbone": "refused"
    },
-   "changed_px": 374998,
-   "changed_pct": 64.923
+   "changed_px": 850,
+   "changed_pct": 0.147
   },
   {
    "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": true
+    "backbone": "picked"
    },
    "b": {
-    "backbone": "bare",
-    "use_euclidean_weights": false
+    "backbone": "forest"
    },
-   "changed_px": 374998,
-   "changed_pct": 64.923
+   "changed_px": 883,
+   "changed_pct": 0.153
   },
   {
    "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": true
+    "backbone": "bare"
    },
    "b": {
-    "backbone": "refused",
-    "use_euclidean_weights": true
-   },
-   "changed_px": 374998,
-   "changed_pct": 64.923
-  },
-  {
-   "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "refused",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 374998,
-   "changed_pct": 64.923
-  },
-  {
-   "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": true
-   },
-   "changed_px": 374998,
-   "changed_pct": 64.923
-  },
-  {
-   "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 374998,
-   "changed_pct": 64.923
-  },
-  {
-   "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "bare",
-    "use_euclidean_weights": true
-   },
-   "changed_px": 393,
-   "changed_pct": 0.068
-  },
-  {
-   "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "bare",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 326,
-   "changed_pct": 0.056
-  },
-  {
-   "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "refused",
-    "use_euclidean_weights": true
-   },
-   "changed_px": 163,
-   "changed_pct": 0.028
-  },
-  {
-   "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "refused",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 95,
-   "changed_pct": 0.016
-  },
-  {
-   "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": true
-   },
-   "changed_px": 1028,
-   "changed_pct": 0.178
-  },
-  {
-   "a": {
-    "backbone": "picked",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 1028,
-   "changed_pct": 0.178
-  },
-  {
-   "a": {
-    "backbone": "bare",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "bare",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 117,
-   "changed_pct": 0.02
-  },
-  {
-   "a": {
-    "backbone": "bare",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "refused",
-    "use_euclidean_weights": true
+    "backbone": "refused"
    },
    "changed_px": 402,
    "changed_pct": 0.07
   },
   {
    "a": {
-    "backbone": "bare",
-    "use_euclidean_weights": true
+    "backbone": "bare"
    },
    "b": {
-    "backbone": "refused",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 419,
-   "changed_pct": 0.073
-  },
-  {
-   "a": {
-    "backbone": "bare",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": true
+    "backbone": "forest"
    },
    "changed_px": 738,
    "changed_pct": 0.128
   },
   {
    "a": {
-    "backbone": "bare",
-    "use_euclidean_weights": true
+    "backbone": "refused"
    },
    "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 738,
-   "changed_pct": 0.128
-  },
-  {
-   "a": {
-    "backbone": "bare",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "refused",
-    "use_euclidean_weights": true
-   },
-   "changed_px": 381,
-   "changed_pct": 0.066
-  },
-  {
-   "a": {
-    "backbone": "bare",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "refused",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 416,
-   "changed_pct": 0.072
-  },
-  {
-   "a": {
-    "backbone": "bare",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": true
-   },
-   "changed_px": 722,
-   "changed_pct": 0.125
-  },
-  {
-   "a": {
-    "backbone": "bare",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 722,
-   "changed_pct": 0.125
-  },
-  {
-   "a": {
-    "backbone": "refused",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "refused",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 124,
-   "changed_pct": 0.021
-  },
-  {
-   "a": {
-    "backbone": "refused",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": true
+    "backbone": "forest"
    },
    "changed_px": 955,
    "changed_pct": 0.165
-  },
-  {
-   "a": {
-    "backbone": "refused",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 955,
-   "changed_pct": 0.165
-  },
-  {
-   "a": {
-    "backbone": "refused",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": true
-   },
-   "changed_px": 935,
-   "changed_pct": 0.162
-  },
-  {
-   "a": {
-    "backbone": "refused",
-    "use_euclidean_weights": false
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 935,
-   "changed_pct": 0.162
-  },
-  {
-   "a": {
-    "backbone": "forest",
-    "use_euclidean_weights": true
-   },
-   "b": {
-    "backbone": "forest",
-    "use_euclidean_weights": false
-   },
-   "changed_px": 4,
-   "changed_pct": 0.001
   }
  ]
 }

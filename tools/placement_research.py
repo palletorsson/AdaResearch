@@ -144,6 +144,17 @@ class Room:
     teleporter_row: int = 0
     teleporter_col: int = 6
 
+    def __post_init__(self) -> None:
+        # Map JSON stores dimensions as floats (e.g. depth: 20.0); these fields
+        # feed range() and grid indexing, which require ints. Coerce here so every
+        # construction path — room_from_map, defaults, future callers — is safe.
+        self.width = int(self.width)
+        self.depth = int(self.depth)
+        self.spawn_row = int(self.spawn_row)
+        self.spawn_col = int(self.spawn_col)
+        self.teleporter_row = int(self.teleporter_row)
+        self.teleporter_col = int(self.teleporter_col)
+
     def cells(self) -> list[tuple[int, int]]:
         return [(r, c) for r in range(self.depth) for c in range(self.width)]
 

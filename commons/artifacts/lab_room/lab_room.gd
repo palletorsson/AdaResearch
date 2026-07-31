@@ -87,10 +87,21 @@ class_name LabRoom
 #
 #     none (0 m²)  <  port (~2 m²)  <  sash (~11 m²)  <  pane (~30 m²)
 #
+# The ladder orders GLAZED AREA, not how loud the rung is. `port` is the quietest
+# boundary and the heaviest hardware: 2.07 m² of light inside ~10 m² of opaque
+# surround, hood and sill. That is not a contradiction, it is what rationing looks
+# like when a building means it.
+#
 #   none — sealed. What happens here leaves as a report. You cannot check it.
 #   port — a 0.9 m square in the observation wall plus one lit, framed aperture
 #          in the east wall. Sight is rationed AND positioned: there is exactly
-#          one place you may look from, and the building chose it.
+#          one place you may look from, and the building chose it. Both apertures
+#          are built on their OUTSIDE face too — a 2.60 × 2.80 m dark surround on
+#          the observation wall, a 2.40 × 2.00 m one on the east wall, each with a
+#          projecting hood and sill and an emissive pane in the opening, and the
+#          observation port set 2.4 m off centre. See _build_witness_port_station:
+#          until it existed, neither aperture reached the face a viewer stands on
+#          and this rung measured as a twin of `none`.
 #   sash — a 5.0 × 2.2 m picture window trimmed into an otherwise solid wall.
 #          The view is published: defined, framed, and shaped by whoever cut it.
 #   pane — the entire +Z wall is one sheet of glass. Continuous exposure; the
@@ -145,8 +156,10 @@ class_name LabRoom
 ## AXIS 2 — how much of the observation boundary is glazed, i.e. whether what happens
 ## in this room can be checked from outside it. One ordered ladder, monotone in glazed
 ## area: none < port < sash < pane. Writes south_wall_is_glass, show_back_window,
-## back_window_size, show_observation_window, window_wall and window_size; an explicit
-## token for any of those still wins.
+## back_window_size, back_window_offset_x, show_observation_window, window_wall and
+## window_size; an explicit token for any of those still wins. `port` additionally
+## builds the exterior surround, hood, sill and light of its two apertures
+## (_build_witness_port_station) — geometry no other rung reaches.
 ## none (sealed) | port (rationed) | sash (published) | pane (LEGACY default: exposed).
 @export_enum("none", "port", "sash", "pane") var witness: String = "pane"
 
@@ -522,9 +535,17 @@ const WITNESSES := {
 	# RATIONED. A 0.9 m square light in the observation wall, and one 1.4 × 0.9
 	# backlit pane in a dark metal frame on the east wall. Two small authorised
 	# sightlines instead of a boundary you can see through.
+	#
+	# back_offset_x pushes the observation-wall port 2.4 m off centre. That is the
+	# "AND positioned" half of the rung: a port on the axis of symmetry is a
+	# decision nobody made, and the doc has always said the building chose where
+	# you may look. It also cuts the doorway properly — a 0.9 m window centred at
+	# x=0 is narrower than the 1.4 m door, so neither the door_in_win_x branch nor
+	# either side-strip branch fired and this rung alone built a wall with no
+	# opening behind its own sliding door.
 	"port": {
 		"glass_wall": false, "back_window": true, "solid_back": false,
-		"back_size": Vector2(0.9, 0.9),
+		"back_size": Vector2(0.9, 0.9), "back_offset_x": 2.4,
 		"port": true, "port_wall": "east", "port_size": Vector2(1.4, 0.9),
 	},
 	# PUBLISHED. The 5.0 × 2.2 picture window, trimmed, in an otherwise solid
@@ -875,6 +896,8 @@ func _apply_witness() -> void:
 	if s.has("back_size"):
 		var bs: Vector2 = s["back_size"]
 		back_window_size = bs
+	if s.has("back_offset_x"):
+		back_window_offset_x = float(s["back_offset_x"])
 	if s.has("port_wall"):
 		window_wall = str(s["port_wall"])
 	if s.has("port_size"):
@@ -1805,6 +1828,13 @@ func _build_walls() -> void:
 	if show_observation_window:
 		_build_observation_window(walls)
 
+	# AXIS 2, rung `port` ONLY: the OUTSIDE faces of the two authorised sightlines.
+	# Gated on the axis value itself, not on show_observation_window, so `pane`
+	# (the export default, all 41 placements) and the two labs that switch the
+	# observation window on by token build byte-identically to before.
+	if witness == "port":
+		_build_witness_port_station(walls)
+
 
 const WALL_BAND_SHADER := preload("res://commons/artifacts/lab_room/lab_wall_bands.gdshader")
 
@@ -2067,6 +2097,208 @@ func _build_observation_window(parent: Node3D) -> void:
 	rf.material_override = frame_mat
 	rf.position = Vector3(half_w + frame_thickness * 0.5, 0.0, 0.0)
 	frame_root.add_child(rf)
+
+
+# One dark-metal / lit plate of the port station. Kept tiny so the station
+# below reads as a list of measurements rather than forty lines of BoxMesh
+# boilerplate. No randomness, no deferral: it adds one MeshInstance3D and
+# returns.
+func _port_plate(parent: Node3D, plate_name: String, size: Vector3, pos: Vector3, mat: Material) -> void:
+	var mi := MeshInstance3D.new()
+	mi.name = plate_name
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = pos
+	parent.add_child(mi)
+
+
+## AXIS 2, rung `port` — build the OUTSIDE of the two apertures the rung declares.
+##
+## WHY THIS EXISTS. `port` and `none` were measured as the same picture at all four
+## premises values (0.62 / 1.16 / 1.36 / 1.56 % focus — the twin bar is 6 %). The
+## cause was not the declaration, it was that neither aperture was ever built on the
+## face a viewer stands on:
+##
+##   * the east aperture is _build_observation_window, which insets its glass by
+##     WALL_THICKNESS + half its own thickness — i.e. INSIDE the room. The east wall
+##     is a solid unbroken box, so from outside the room the "one lit, framed
+##     aperture in the east wall" is behind 5 cm of opaque wall and contributes
+##     exactly zero pixels.
+##   * the observation-wall port is a real hole, but its pane is
+##     Color(0.78, 0.86, 0.94, 0.30) — 30 % alpha, near-white, over a near-white
+##     wall. 0.81 m² of almost no contrast on a ~53 m² projected silhouette.
+##
+## So the whole rung came to about one per cent of a picture, and `port` read as
+## `none`. Nothing here changes what `port` MEANS. The doc above has always said
+## "a 0.9 m square in the observation wall plus one lit, framed aperture in the east
+## wall. Sight is rationed AND positioned: there is exactly one place you may look
+## from, and the building chose it." This builds the three words that were declared
+## and never drawn — LIT, FRAMED, and the building CHOOSING the place:
+##
+##   LIT      an opaque emissive pane behind each aperture (energy 3.2, cold white),
+##            so the aperture is a light source rather than a pale smear. This is
+##            what _build_observation_window's own comment already claims its glass
+##            does ("reads as a backlit observation pane") at 0.45 energy behind an
+##            opaque wall, where nobody could see it.
+##   FRAMED   a heavy dark surround built as four plates around each opening:
+##            2.60 × 2.80 m on the observation wall (6.47 m² of plate around a
+##            0.81 m² light) and 2.40 × 2.00 m on the east wall (3.54 m² around a
+##            1.26 m² light). Mass, not hue — the surround has to survive a resize
+##            to 160 × 160 and it has to survive `theatre`, whose walls are already
+##            dark.
+##   CHOSEN   a hood and a sill bracketing each aperture, projecting 0.55 m and
+##            0.34 m out of the wall plane. They break the room's silhouette, which
+##            is the one difference no downsample can average away, and they are the
+##            literal architecture of "there is exactly one place you may look
+##            from": a shelf to lean on and a cowl to cut the daylight.
+##
+## GLAZED AREA IS UNCHANGED, so the ladder in the header still holds: 0.81 + 1.26 =
+## 2.07 m², the ~2 m² the rung has always claimed. What grew is the OPAQUE building
+## around the glass, which is the correct way for a rationed boundary to get louder.
+##
+## Reached only from _build_walls under `witness == "port"`. `none`, `sash` and the
+## `pane` export default never call it.
+func _build_witness_port_station(parent: Node3D) -> void:
+	var hw: float = room_width * 0.5
+	var hd: float = room_depth * 0.5
+
+	# Dark machined surround. Not keyed to premises on purpose: witness owns the
+	# boundary hardware, premises owns the room's surfaces, and a surround that
+	# recoloured per register would put the two axes back on the same pixels —
+	# exactly the confound the header's "WHY NOT A THIRD AXIS" note refuses.
+	var frame_mat := StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.075, 0.078, 0.092)
+	frame_mat.roughness = 0.50
+	frame_mat.metallic = 0.35
+
+	# The light in the aperture. Opaque and emissive: against `chamber`'s 0.96
+	# walls it reads as a hole with a light behind it, and against `theatre`'s
+	# 0.22 walls it is the brightest thing on the building.
+	var lit_mat := StandardMaterial3D.new()
+	lit_mat.albedo_color = Color(0.86, 0.93, 1.00)
+	lit_mat.roughness = 0.25
+	lit_mat.metallic = 0.0
+	lit_mat.emission_enabled = true
+	lit_mat.emission = Color(0.78, 0.90, 1.00)
+	lit_mat.emission_energy_multiplier = 3.2
+
+	var plate_t: float = 0.10
+
+	# ── The observation-wall port (+Z) ───────────────────────────────
+	# Aperture geometry recomputed with _build_back_solid_with_window's own clamps
+	# so the surround can never sit somewhere the hole is not. Same arithmetic,
+	# deliberately duplicated rather than shared, because that builder also has to
+	# serve `sash` and must not grow a parameter for this.
+	var aw: float = clamp(back_window_size.x, 0.5, max(0.5, room_width - 0.6))
+	var ah: float = clamp(back_window_size.y, 0.5, max(0.5, room_height - 1.0))
+	var ay: float = room_height * 0.5
+	var max_off: float = max(0.0, (room_width - aw) * 0.5 - 0.1)
+	var ax: float = clamp(back_window_offset_x, -max_off, max_off)
+
+	# Surround extent. Grown from the aperture, then clamped to the wall so an
+	# unusually small or squat room cannot push a plate off the building.
+	var mat_w: float = min(aw + 1.70, room_width - 0.40)
+	var mat_h: float = min(ah + 1.90, room_height - 0.40)
+	mat_h = min(mat_h, (ay - 0.10) * 2.0)
+	mat_h = min(mat_h, (room_height - ay - 0.10) * 2.0)
+	var side_w: float = max(0.0, (mat_w - aw) * 0.5)
+	var band_h: float = max(0.0, (mat_h - ah) * 0.5)
+	# Keep the whole surround on the wall even when the port is pushed far off centre.
+	ax = clamp(ax, -(hw - mat_w * 0.5), hw - mat_w * 0.5)
+
+	var z_plate: float = hd + plate_t * 0.5   # flat against the outer wall face
+
+	if band_h > 0.001:
+		_port_plate(parent, "PortSurroundTop",
+			Vector3(mat_w, band_h, plate_t),
+			Vector3(ax, ay + ah * 0.5 + band_h * 0.5, z_plate), frame_mat)
+		_port_plate(parent, "PortSurroundBottom",
+			Vector3(mat_w, band_h, plate_t),
+			Vector3(ax, ay - ah * 0.5 - band_h * 0.5, z_plate), frame_mat)
+	if side_w > 0.001:
+		_port_plate(parent, "PortSurroundLeft",
+			Vector3(side_w, ah, plate_t),
+			Vector3(ax - aw * 0.5 - side_w * 0.5, ay, z_plate), frame_mat)
+		_port_plate(parent, "PortSurroundRight",
+			Vector3(side_w, ah, plate_t),
+			Vector3(ax + aw * 0.5 + side_w * 0.5, ay, z_plate), frame_mat)
+
+	# Hood and sill. Width is capped at the surround so they never overhang it.
+	var brow_w: float = min(aw + 0.70, mat_w)
+	_port_plate(parent, "PortHood",
+		Vector3(brow_w, 0.14, 0.55),
+		Vector3(ax, ay + ah * 0.5 + 0.07, hd + 0.30), frame_mat)
+	_port_plate(parent, "PortSill",
+		Vector3(brow_w, 0.16, 0.34),
+		Vector3(ax, ay - ah * 0.5 - 0.08, hd + 0.17), frame_mat)
+
+	# The light itself, sunk 8 cm behind the wall's outer face so it is seen
+	# THROUGH the hole. Clear of BackWindowGlass (z 3.4625‥3.4875 at stock
+	# dimensions) and of the wall strips (3.45‥3.50), so nothing z-fights.
+	var lit_w: float = max(0.1, aw - 0.04)
+	var lit_h: float = max(0.1, ah - 0.04)
+	_port_plate(parent, "PortLight",
+		Vector3(lit_w, lit_h, 0.04),
+		Vector3(ax, ay, hd - 0.08), lit_mat)
+
+	# ── The east-wall aperture (±X) ──────────────────────────────────
+	# Only the two side walls get an exterior face. window_wall is written "east"
+	# by this rung, and a map that moves it to "north"/"south" is putting the port
+	# on a wall the +Z builders already own — in that case the interior overlay
+	# still builds and this half stays out of the way rather than stacking plates
+	# on top of the picture window.
+	if window_wall != "east" and window_wall != "west":
+		return
+
+	var side_sign: float = 1.0 if window_wall == "east" else -1.0
+	var pw: float = window_size.x          # extent along Z
+	var ph: float = window_size.y          # extent along Y
+	var py: float = room_height * 0.5      # same eye height _build_observation_window uses
+
+	var smat_w: float = min(pw + 1.00, room_depth - 0.40)
+	var smat_h: float = min(ph + 1.10, room_height - 0.40)
+	smat_h = min(smat_h, (py - 0.10) * 2.0)
+	smat_h = min(smat_h, (room_height - py - 0.10) * 2.0)
+	var s_side: float = max(0.0, (smat_w - pw) * 0.5)
+	var s_band: float = max(0.0, (smat_h - ph) * 0.5)
+
+	var x_plate: float = side_sign * (hw + plate_t * 0.5)
+
+	if s_band > 0.001:
+		_port_plate(parent, "EastPortSurroundTop",
+			Vector3(plate_t, s_band, smat_w),
+			Vector3(x_plate, py + ph * 0.5 + s_band * 0.5, 0.0), frame_mat)
+		_port_plate(parent, "EastPortSurroundBottom",
+			Vector3(plate_t, s_band, smat_w),
+			Vector3(x_plate, py - ph * 0.5 - s_band * 0.5, 0.0), frame_mat)
+	if s_side > 0.001:
+		_port_plate(parent, "EastPortSurroundNear",
+			Vector3(plate_t, ph, s_side),
+			Vector3(x_plate, py, -(pw * 0.5 + s_side * 0.5)), frame_mat)
+		_port_plate(parent, "EastPortSurroundFar",
+			Vector3(plate_t, ph, s_side),
+			Vector3(x_plate, py, pw * 0.5 + s_side * 0.5), frame_mat)
+
+	# The east wall is an unbroken box — there is no hole to look through, and this
+	# rung does not cut one (cutting it would change how the room is BUILT, not how
+	# it reads). The lit pane therefore sits 4 cm proud of the wall, recessed inside
+	# the 10 cm surround: a backlit panel set into heavy framing, which is what
+	# _build_observation_window has always claimed its interior twin is.
+	var e_lit_h: float = max(0.1, ph - 0.04)
+	var e_lit_w: float = max(0.1, pw - 0.04)
+	_port_plate(parent, "EastPortLight",
+		Vector3(0.04, e_lit_h, e_lit_w),
+		Vector3(side_sign * (hw + 0.04), py, 0.0), lit_mat)
+
+	var e_brow_w: float = min(pw + 0.60, smat_w)
+	_port_plate(parent, "EastPortHood",
+		Vector3(0.50, 0.14, e_brow_w),
+		Vector3(side_sign * (hw + 0.28), py + ph * 0.5 + 0.07, 0.0), frame_mat)
+	_port_plate(parent, "EastPortSill",
+		Vector3(0.32, 0.16, e_brow_w),
+		Vector3(side_sign * (hw + 0.19), py - ph * 0.5 - 0.08, 0.0), frame_mat)
 
 
 func _build_back_solid_with_window(parent: Node3D) -> void:

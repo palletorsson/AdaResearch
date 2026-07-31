@@ -34,9 +34,15 @@ const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 ##           1 → 3 → 1 on the 9 s cosine, the tree rebuilding over the 0.95 m
 ##           rise whenever it changes, the whole fan turning slowly on its
 ##           0.4 m base. The count of futures is whatever the timer says.
-##   thread  pinned at branch 1: a single 0.95 m stem of four nodes rising from
-##           the 0.045 m purple root sphere to one 0.03 m cyan leaf. Silhouette
-##           0.06 m wide. FUTURES = 1, S = 0.00.
+##   thread  pinned at branch 1, and latched in the STAGING as well as in the
+##           tree: one unbroken 0.95 m stem of constant 0.022 m gauge — no node
+##           spheres on the way up, because a branch that divides into one is not
+##           a branch point — rising from the 0.045 m purple root sphere to one
+##           0.03 m cyan leaf. Nothing turns and nothing orbits, so the readout
+##           board needs none of the 0.70 m stand-off the spinning canopy demands
+##           and stands in at x 0.36. Built width 1.04 m against breath's 1.38 m.
+##           FUTURES = 1, S = 0.00, and the readout says LATCHED rather than
+##           reporting a passing count.
 ##   fan     pinned at branch 3: the whole tree at once — 81 leaf spheres in the
 ##           crown at the top of the 0.95 m rise, 120 branch tubes tapering
 ##           0.018 → 0.008 m. FUTURES = 81, S = 4.39.
@@ -49,6 +55,31 @@ const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 ## The three pinned values also latch the branch factor — see _process. Without
 ## the latch the cosine would overwrite them inside 0.25 s and all four values
 ## would render the same breathing tree.
+##
+## WHY `thread` WAS REBUILT — breath and thread measured 5.56% focus, a twin.
+##
+## The latch was doing its job and the axis was still lying. `breath` STARTS at
+## branch 1 (_start_branch), and capture_config_sweep settles 1.1 s and then
+## waits two frames plus 0.1 s before it saves the png — so the still is taken at
+## t ≈ 1.25 s, where the 9 s cosine has reached phase 0.179 and
+## 1 + round(0.179 * 2) is still 1. Branch 2 does not arrive until t = 1.5 s.
+## The default's photograph was therefore the identical four-node stem `thread`
+## pins, and the only differences left in frame were a rotation about the stem's
+## own axis (invisible on an axial stem) and a title tint. The distinction
+## breath-vs-thread was purely TEMPORAL, and a still cannot photograph a tense.
+##
+## So the latched state now shows its latch in the standing geometry, in both
+## directions at once:
+##   - the stem gets NARROWER and simpler, since that is what the value means:
+##     0.022 m constant gauge, unbroken, no beads (breath's stem is 0.036 m at
+##     the base tapering to 0.016 m, with three 0.044 m node spheres on it);
+##   - the instrument closes in 0.34 m, because BOARD_X exists only to keep the
+##     canopy from ploughing through the panel and a thread has no canopy.
+## That second move is what carries the measurement: the 0.556 x 0.358 m board
+## lands with only 39% of its area over where it stood, ~2000 px of a 160x160
+## crop changing between lit panel and background, against a hottest-5% pool of
+## 1280 px. The tree change is honest but small — 0.95 m of hairline is only
+## ~250 px, which is why it cannot be the whole answer at this framing.
 @export_enum("breath", "thread", "fan", "pruned") var prospect: String = "breath"
 
 ## Accepted spellings. A typo has to fall back to the shipped look rather than
@@ -62,6 +93,13 @@ const PRUNE_ROW: int = 2
 const CAP_COLOR: Color = Color(1.0, 0.68, 0.22)   # amber — a cut, not a future
 const CAP_RADIUS: float = 0.03
 const CAP_THICKNESS: float = 0.006
+
+## `thread`: the stem is built by _grow_thread, not by walking _grow_branch with
+## branch 1. One tube, constant gauge, root to leaf — thinner than the 0.018 m
+## _grow_branch starts at, because the narrowest standing state should read as
+## the narrowest thing the artifact can draw.
+const THREAD_RADIUS: float = 0.011      # 0.022 m of silhouette, the whole way up
+const THREAD_LEAF_R: float = 0.03       # the one future, same size as any leaf
 
 ## No randf/randi is read during the build; the seed is fixed anyway so that any
 ## later use cannot make two placements of the same map differ.
@@ -80,6 +118,15 @@ var _readout: Label3D
 const BOARD_X: float = 0.70
 const BOARD_HALF_W: float = 0.278
 const NODE_REACH: float = 0.374
+
+## …and 0.374 m of reach is a fact about a TURNING CANOPY. Under `thread` there is
+## no canopy and no turn: _pinned freezes _fan_root's rotation, branch 1 puts every
+## node on the axis (frac is 0 when n is 1), and across the board's y band
+## 0.681–1.039 the only thing standing there is the 0.011 m stem. The 0.70 m
+## stand-off is then 0.34 m of clearance held for a sweep that never happens.
+## 0.36 puts the panel's inner edge at 0.082, still 0.071 m clear of the stem's
+## surface — close, deliberately, so the pair reads as one stem and one reading.
+const BOARD_X_THREAD: float = 0.36
 
 var _screen: Node3D               # TextScreen carrying the readout on a real board
 var _t: float = 0.0
@@ -205,6 +252,13 @@ func _start_branch() -> int:
 # It moves onto a TextScreen standing BESIDE the tree, at the height where the
 # branching happens, so the crown is visible for the first time.
 
+## Where the board stands is a consequence of what the tree does, not a per-value
+## decoration: 0.70 m buys clearance for the turning canopy, and only `thread`
+## has no canopy to clear. breath / fan / pruned all keep the shipped 0.70.
+func _board_x() -> float:
+	return BOARD_X_THREAD if prospect == "thread" else BOARD_X
+
+
 func _build_readout_screen() -> void:
 	# Configure BEFORE add_child — TextScreen's setters rebuild only when already
 	# in-tree, so driving them after the add costs one rebuild each.
@@ -219,7 +273,7 @@ func _build_readout_screen() -> void:
 	# _fan_root spins) the nodes passed THROUGH the readout on every turn. Two solid
 	# things cannot occupy one place, and a still catches it at an arbitrary phase, so
 	# it read as a glitch rather than as an instrument beside a tree.
-	ts.position = Vector3(BOARD_X, 0.86, 0.02)
+	ts.position = Vector3(_board_x(), 0.86, 0.02)
 	_screen = ts
 	_own(ts)
 
@@ -247,7 +301,15 @@ func _update_readout() -> void:
 	elif _branch_now > 1:
 		regime = "FAN OPENING — possibility multiplying"
 
+	# `thread` asserts its count; breath merely happens to be at 1 as the cosine
+	# passes through. Same number, different claim, so it must not be the same
+	# sentence. Guarded on the value so breath's board is byte-identical.
+	if prospect == "thread":
+		regime = "LATCHED — one path, no future opens"
+
 	var head: String = "FUTURES = %d   (branch %d)" % [futures, _branch_now]
+	if prospect == "thread":
+		head = "FUTURES = 1   (branch 1, latched)"
 	if _prune:
 		head = "FUTURES = %d of %d   (branch %d)" % [futures, _max_futures, _branch_now]
 	var body: String = "S = log(futures) = %.2f\n%s" % [s_val, regime]
@@ -323,7 +385,10 @@ func _rebuild_fan(branch: int) -> void:
 	_prune_parent = 0
 	# grow recursively; each level spreads laterally as it climbs.
 	# Leaves are COUNTED as they are built, so a pruned tree reports what it has.
-	_grow_branch(root_pos, 0, branch, 0.0, fan_spread)
+	if prospect == "thread":
+		_grow_thread(root_pos)
+	else:
+		_grow_branch(root_pos, 0, branch, 0.0, fan_spread)
 	_leaf_count = maxi(_leaf_count, 1)
 
 	# what an unpruned tree of this branch factor would have held: branch^levels
@@ -336,6 +401,21 @@ func _rebuild_fan(branch: int) -> void:
 
 	# tag the freshly-made materials so a later emissive:false can dim them in place
 	_tag_emission_bases()
+
+
+## `thread` — the whole 0.95 m rise as ONE tube, not four segments beaded with
+## node spheres. _grow_branch with branch 1 still emits a node at every level
+## because it cannot tell a branch point from a waypoint; here there is nothing to
+## mark, so the stem is unbroken and untapered and the only two bodies on it are
+## the root that was and the single leaf that will be. Silhouette 0.022 m of stem
+## between a 0.09 m root sphere and a 0.06 m leaf, against the fan's 0.68 m crown.
+func _grow_thread(from_pos: Vector3) -> void:
+	var top: Vector3 = from_pos + Vector3(0.0, span_height, 0.0)
+	_fan_root.add_child(_cylinder_between(from_pos, top, THREAD_RADIUS, _glow_mat(path_color, 1.6)))
+	var leaf: MeshInstance3D = _sphere(top, THREAD_LEAF_R, _glow_mat(leaf_color, 2.0))
+	leaf.set_meta("is_leaf", true)     # _process still pulses the one future
+	_fan_root.add_child(leaf)
+	_leaf_count = 1
 
 
 func _grow_branch(from_pos: Vector3, level: int, branch: int, center_x: float, spread: float) -> void:

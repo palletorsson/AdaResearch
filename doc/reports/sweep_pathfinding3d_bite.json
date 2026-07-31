@@ -1,343 +1,68 @@
 {
  "sweep": "pathfinding3d",
- "peak_changed_pct": 35.385,
+ "peak_changed_pct": 14.73,
+ "subject_pct": 13.748,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": true
+    "frontier": "unsearched"
    },
    "b": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": false
+    "frontier": "route"
    },
-   "changed_px": 186004,
-   "changed_pct": 32.203
+   "changed_px": 62669,
+   "changed_pct": 10.85
   },
   {
    "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": true
+    "frontier": "unsearched"
    },
    "b": {
-    "frontier": "route",
-    "allow_diagonal_movement": true
+    "frontier": "expanded"
    },
-   "changed_px": 186881,
-   "changed_pct": 32.355
+   "changed_px": 68078,
+   "changed_pct": 11.786
   },
   {
    "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": true
+    "frontier": "unsearched"
    },
    "b": {
-    "frontier": "route",
-    "allow_diagonal_movement": false
+    "frontier": "flooded"
    },
-   "changed_px": 187038,
-   "changed_pct": 32.382
+   "changed_px": 85083,
+   "changed_pct": 14.73
   },
   {
    "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": true
+    "frontier": "route"
    },
    "b": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": true
-   },
-   "changed_px": 189875,
-   "changed_pct": 32.873
-  },
-  {
-   "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 188670,
-   "changed_pct": 32.664
-  },
-  {
-   "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": true
-   },
-   "changed_px": 204383,
-   "changed_pct": 35.385
-  },
-  {
-   "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 202934,
-   "changed_pct": 35.134
-  },
-  {
-   "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "route",
-    "allow_diagonal_movement": true
-   },
-   "changed_px": 6446,
-   "changed_pct": 1.116
-  },
-  {
-   "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "route",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 6957,
-   "changed_pct": 1.204
-  },
-  {
-   "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": true
-   },
-   "changed_px": 35632,
-   "changed_pct": 6.169
-  },
-  {
-   "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 29651,
-   "changed_pct": 5.133
-  },
-  {
-   "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": true
-   },
-   "changed_px": 72338,
-   "changed_pct": 12.524
-  },
-  {
-   "a": {
-    "frontier": "unsearched",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 66137,
-   "changed_pct": 11.45
-  },
-  {
-   "a": {
-    "frontier": "route",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "route",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 3751,
-   "changed_pct": 0.649
-  },
-  {
-   "a": {
-    "frontier": "route",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": true
+    "frontier": "expanded"
    },
    "changed_px": 33657,
    "changed_pct": 5.827
   },
   {
    "a": {
-    "frontier": "route",
-    "allow_diagonal_movement": true
+    "frontier": "route"
    },
    "b": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 28584,
-   "changed_pct": 4.949
-  },
-  {
-   "a": {
-    "frontier": "route",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": true
+    "frontier": "flooded"
    },
    "changed_px": 71476,
    "changed_pct": 12.375
   },
   {
    "a": {
-    "frontier": "route",
-    "allow_diagonal_movement": true
+    "frontier": "expanded"
    },
    "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 65950,
-   "changed_pct": 11.418
-  },
-  {
-   "a": {
-    "frontier": "route",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": true
-   },
-   "changed_px": 33862,
-   "changed_pct": 5.863
-  },
-  {
-   "a": {
-    "frontier": "route",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 27542,
-   "changed_pct": 4.768
-  },
-  {
-   "a": {
-    "frontier": "route",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": true
-   },
-   "changed_px": 71483,
-   "changed_pct": 12.376
-  },
-  {
-   "a": {
-    "frontier": "route",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 65137,
-   "changed_pct": 11.277
-  },
-  {
-   "a": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 9470,
-   "changed_pct": 1.64
-  },
-  {
-   "a": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": true
+    "frontier": "flooded"
    },
    "changed_px": 52835,
    "changed_pct": 9.147
-  },
-  {
-   "a": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 56553,
-   "changed_pct": 9.791
-  },
-  {
-   "a": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": true
-   },
-   "changed_px": 59404,
-   "changed_pct": 10.285
-  },
-  {
-   "a": {
-    "frontier": "expanded",
-    "allow_diagonal_movement": false
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 50914,
-   "changed_pct": 8.815
-  },
-  {
-   "a": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": true
-   },
-   "b": {
-    "frontier": "flooded",
-    "allow_diagonal_movement": false
-   },
-   "changed_px": 10309,
-   "changed_pct": 1.785
   }
  ]
 }

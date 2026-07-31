@@ -1,343 +1,68 @@
 {
  "sweep": "karger_algorithm",
- "peak_changed_pct": 2.784,
+ "peak_changed_pct": 2.771,
+ "subject_pct": 3.535,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.4
+    "bottleneck": "mixed"
    },
    "b": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.8
-   },
-   "changed_px": 586,
-   "changed_pct": 0.101
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "throat",
-    "bounding_size": 0.4
+    "bottleneck": "throat"
    },
    "changed_px": 15613,
    "changed_pct": 2.703
   },
   {
    "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.4
+    "bottleneck": "mixed"
    },
    "b": {
-    "bottleneck": "throat",
-    "bounding_size": 0.8
-   },
-   "changed_px": 15613,
-   "changed_pct": 2.703
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "braid",
-    "bounding_size": 0.4
+    "bottleneck": "braid"
    },
    "changed_px": 729,
    "changed_pct": 0.126
   },
   {
    "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.4
+    "bottleneck": "mixed"
    },
    "b": {
-    "bottleneck": "braid",
-    "bounding_size": 0.8
+    "bottleneck": "severed"
    },
-   "changed_px": 729,
-   "changed_pct": 0.126
+   "changed_px": 13890,
+   "changed_pct": 2.405
   },
   {
    "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.4
+    "bottleneck": "throat"
    },
    "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.4
-   },
-   "changed_px": 15675,
-   "changed_pct": 2.714
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.8
-   },
-   "changed_px": 15675,
-   "changed_pct": 2.714
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "throat",
-    "bounding_size": 0.4
-   },
-   "changed_px": 15948,
-   "changed_pct": 2.761
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "throat",
-    "bounding_size": 0.8
-   },
-   "changed_px": 15948,
-   "changed_pct": 2.761
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "braid",
-    "bounding_size": 0.4
-   },
-   "changed_px": 237,
-   "changed_pct": 0.041
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "braid",
-    "bounding_size": 0.8
-   },
-   "changed_px": 237,
-   "changed_pct": 0.041
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.4
-   },
-   "changed_px": 16029,
-   "changed_pct": 2.775
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.8
-   },
-   "changed_px": 16029,
-   "changed_pct": 2.775
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "throat",
-    "bounding_size": 0.8
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "braid",
-    "bounding_size": 0.4
+    "bottleneck": "braid"
    },
    "changed_px": 16008,
    "changed_pct": 2.771
   },
   {
    "a": {
-    "bottleneck": "throat",
-    "bounding_size": 0.4
+    "bottleneck": "throat"
    },
    "b": {
-    "bottleneck": "braid",
-    "bounding_size": 0.8
+    "bottleneck": "severed"
    },
-   "changed_px": 16008,
-   "changed_pct": 2.771
+   "changed_px": 12408,
+   "changed_pct": 2.148
   },
   {
    "a": {
-    "bottleneck": "throat",
-    "bounding_size": 0.4
+    "bottleneck": "braid"
    },
    "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.4
+    "bottleneck": "severed"
    },
-   "changed_px": 2528,
-   "changed_pct": 0.438
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.8
-   },
-   "changed_px": 2528,
-   "changed_pct": 0.438
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "braid",
-    "bounding_size": 0.4
-   },
-   "changed_px": 16008,
-   "changed_pct": 2.771
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "braid",
-    "bounding_size": 0.8
-   },
-   "changed_px": 16008,
-   "changed_pct": 2.771
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.4
-   },
-   "changed_px": 2528,
-   "changed_pct": 0.438
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.8
-   },
-   "changed_px": 2528,
-   "changed_pct": 0.438
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "braid",
-    "bounding_size": 0.8
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.4
-   },
-   "changed_px": 16082,
-   "changed_pct": 2.784
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.8
-   },
-   "changed_px": 16082,
-   "changed_pct": 2.784
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.4
-   },
-   "changed_px": 16082,
-   "changed_pct": 2.784
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "bounding_size": 0.8
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.8
-   },
-   "changed_px": 16082,
-   "changed_pct": 2.784
-  },
-  {
-   "a": {
-    "bottleneck": "severed",
-    "bounding_size": 0.4
-   },
-   "b": {
-    "bottleneck": "severed",
-    "bounding_size": 0.8
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 14218,
+   "changed_pct": 2.462
   }
  ]
 }

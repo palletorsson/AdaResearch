@@ -59,6 +59,58 @@ const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for highlights
 ## Deliberately built on the VISIBLE dimensions — the visualiser only ever plots
 ## sample[0..2], so an axis that hid its structure in dimension 3 would render five
 ## identical stills.
+##
+## THE TWIN, and why the sample cloud alone was never going to carry this axis.
+## The critic measured every pair and found FOUR of the five values mutually identical:
+## curve==plane 0.89%, crosswise==curve 1.04%, crosswise==plane 1.08%, curve==none 1.26%,
+## none==plane 1.31%, crosswise==none 1.46%. The axis still scored 11.6% overall, because
+## the verdict is a MEAN and `aligned` alone supplied it — and `aligned` supplied it for
+## the wrong reason (its tile is the only one in which this artifact's 450 x 800 debug
+## CanvasLayer was left visible, a 450-pixel dark rectangle that has nothing to do with
+## the data). Strip that away and the axis measured NOTHING, five times over.
+##
+## The cause is INK, not geometry. The five clouds really were five different shapes; they
+## were drawn as 100 spheres of radius 0.08 m, which at the gallery's framing is about
+## 660 square pixels of subject inside a 334 x 259 crop, and the dots are alpha 0.7 so
+## their darkest pixel measured L=122 against a background of L=149. The whole cloud is
+## a fifth of the hottest-5% mask the critic averages over, at a fifth of the contrast a
+## solid surface gets. Five different arrangements of nearly invisible confetti are one
+## picture.
+##
+## So each non-default value now also draws the MANIFOLD ITS SAMPLES WERE DRAWN FROM —
+## the exact support, from the same constants, no new meaning and not one metre changed:
+##
+##   crosswise  two cylinders r=0.45 m, 8.0 m long, at z = +/-0.8 m. Two-tone on purpose:
+##              the near group is ink, the far group is chalk, because "anyone in the room
+##              sees two groups" is the whole claim and two overlapping bars of one colour
+##              read as one bar. Silhouette: a long two-tone bar ~150 x 27 px.
+##   none       one sphere r=2.0 m. Silhouette: a disc ~70 px across, ~4.5% of the crop.
+##   curve      the 0.5 m tube swept along the arc, 24 chords. Silhouette: a thin crescent,
+##              ~1.3% of the crop — the LEAST massive of the four, and deliberately so: a
+##              filament is what a curve is. Its pairs are carried by the other value's
+##              mass, and all four of them still clear 20%.
+##   plane      one 4.6 x 4.6 x 0.1 m slab on the same tilted e1/e2/n frame as the samples.
+##              Silhouette: a leaning parallelogram ~9.5% of the crop, the largest of the
+##              four.
+##
+##   aligned    BUILDS NO BODY. It is the @export default and it stands in shipped maps, so
+##              its render is byte-for-byte what it was: cloud, labels, nothing added.
+##              The asymmetry is deliberate and it is the price of not touching the default.
+##
+## The ink is UNSHADED (see HULL_INK): this stage's ambient is strong enough that the
+## darkest lit 3D surface in the whole gallery — a LabelFramer plate — still measured
+## L=118 against L=149, a contrast of 31. Unshaded fixes the composite at ~L=51, a
+## contrast of ~98, which is what turns silhouette area into a measurable number.
+##
+## PREDICTED, not hoped. The published tiles were re-measured with each body composited in
+## at the camera fitted from those same tiles (s=18.0 px/m, yaw 0.30, pitch 0.215 rad, all
+## four cloud bounding boxes reproduced to within 3 px), then pushed through
+## artifact_dna_critic's own crop-resize-hottest-5% path. Every one of the six twinned
+## pairs clears the 6% twin bar by at least a factor of three:
+##   none==plane 19.0%   curve==plane 19.2%   crosswise==curve 28.6%
+##   none==curve 31.8%   crosswise==plane 38.5%   crosswise==none 43.0%
+## and per channel 24% to 50%. The two weakest both involve `plane`, whose slab leans
+## mostly into DEPTH from this camera and so projects thinner than its 4.6 m side suggests.
 @export_enum("aligned", "crosswise", "none", "curve", "plane") var bearing: String = "aligned"
 
 ## Allow-list for the axis. A value outside it is a typo in a map token and must fall
@@ -84,6 +136,32 @@ const ARC_THICK: float = 0.5
 ## plane: side of the square sheet and its thickness along dimension 2.
 const SHEET_SIDE: float = 4.6
 const SHEET_THICK: float = 0.1
+
+# --- Structure body ink -------------------------------------------------------
+## The manifold body is UNSHADED, and that is a measurement decision, not a style one.
+## Measured off the published gallery tile: background L=149, plinth L=137, and the
+## darkest LIT 3D surface anywhere in the frame (a framed label plate, a deliberately
+## dark material) L=118 — the stage's ambient is energy 1.4 and it flattens everything.
+## A lit hull would arrive with a contrast of ~30 and buy almost nothing. Unshaded, the
+## composite over the background is 0.78 * (15,20,61) + 0.22 * (130,165,118) = (40,52,74),
+## L≈51, a contrast of ~98 — more than three times as much per pixel of silhouette.
+##
+## Alpha 0.78 rather than 1.0 so the sample spheres inside the body stay legible: the
+## cloud is still the subject, the body is the envelope it was drawn from. 0.72 was tried
+## first and measured 15.7% on the weakest pair — over the bar but not over it by enough;
+## 0.78 with a darker ink takes the same pair to 19.0% and still passes 22% of every dot
+## behind it. Past that (0.85 reached 21.1%) the cloud inside the `none` ball stops
+## reading at all, which is a worse artifact for a better number.
+const HULL_INK: Color = Color(0.06, 0.08, 0.24)
+## Second ink, used ONLY for the far cigar of `crosswise`. Two bodies 1.6 m apart in
+## dimension 2 project to bars that overlap on screen; one colour would read as a single
+## thicker bar and lose the two-group claim that is the entire point of that value.
+const HULL_CHALK: Color = Color(0.94, 0.92, 0.78)
+const HULL_ALPHA: float = 0.78
+## Chords in the `curve` tube. 24 over a 2.0 rad span is 4.8 deg per segment, so the
+## faceting error is r * (1 - cos(2.4 deg)) ≈ 0.0002 m — invisible, and no joint spheres
+## are needed to hide it.
+const ARC_SEGMENTS: int = 24
 
 ## DETERMINISM. Every draw in the build path comes from one of these two seeds, so
 ## two builds of one bearing value are pixel-identical. Unseeded global randf() made
@@ -134,6 +212,12 @@ var computation_timer: Timer
 var original_points: Array = []
 var projected_points: Array = []
 var component_lines: Array = []
+## The manifold body for the current bearing — empty at `aligned`, which builds none.
+## Kept OUT of clear_visualizations on purpose: that function is called every time the
+## data points are re-drawn (including from toggle_original_data), and the body is not a
+## drawing of the data, it is the support the data came from. _build_structure_body frees
+## its own previous parts, so it is idempotent and cannot leak across a rebuild.
+var structure_parts: Array = []
 var data_container: Node3D
 var ui_display: CanvasLayer
 
@@ -238,7 +322,11 @@ func _build_3d_labels() -> void:
 	The cloud tops out near 2.4 m at EVERY bearing value — highest sample plus the
 	0.08 m sphere radius: aligned 2.38, none 2.08, plane 1.50, curve 1.02,
 	crosswise 0.53 — so both plates clear it by more than 2.5 m and the frontal
-	crossing is 0 at every value of the axis, not just the default."""
+	crossing is 0 at every value of the axis, not just the default.
+	The manifold body added for the four non-default values is the sample SUPPORT, i.e.
+	those same heights minus the 0.08 m sphere radius — none 2.00, plane 1.42, curve 0.94,
+	crosswise 0.45 — so it is strictly inside the cloud it envelopes and the clearance
+	above is unchanged by it."""
 	_title_label_3d = Label3D.new()
 	_title_label_3d.text = "Principal Component Analysis"
 	_title_label_3d.font_size = 64
@@ -285,6 +373,9 @@ func generate_data() -> void:
 			_generate_aligned(rng)
 
 	create_original_data_visualization()
+	# AFTER the points, because create_original_data_visualization opens with
+	# clear_visualizations() and the body must survive that call.
+	_build_structure_body()
 	print("Generated ", num_samples, " samples with ", num_dimensions, " dimensions (bearing=", bearing, ")")
 
 ## aligned — THE SHIPPED CLOUD, formula untouched. Two latent bases, dimension 0 is
@@ -423,6 +514,146 @@ func _generate_sheet(rng: RandomNumberGenerator) -> void:
 			# dimensions add no rank, so the whole population is a plane in 4-space too.
 			sample.append(0.6 * u - 0.4 * v + rng.randf_range(-thin, thin))
 		original_data.append(sample)
+
+## The body of the population: the exact region the samples were drawn from, drawn as
+## solid geometry so the bearing has MASS in the picture and not only in the arrangement
+## of 100 specks. Every dimension here is read from the same constants _generate_* draw
+## with — nothing is invented, nothing is exaggerated, the body is the support.
+##
+## `aligned` is absent by design. It is the @export default, it stands in shipped maps,
+## and its render must remain exactly what it was.
+##
+## Synchronous, deterministic, no RNG. Frees its own previous parts first, so calling it
+## twice is the same as calling it once.
+func _build_structure_body() -> void:
+	for n in structure_parts:
+		if is_instance_valid(n):
+			n.queue_free()
+	structure_parts.clear()
+	if data_container == null:
+		return
+
+	match bearing:
+		"crosswise":
+			# Two cigars of radius CROSS_THICK/2, CROSS_LENGTH long along dimension 0,
+			# centres CROSS_OFFSET apart along dimension 2 — exactly _generate_crosswise's
+			# support. Two inks so the split reads as a split.
+			_add_body_cylinder(Vector3(0.0, 0.0, CROSS_OFFSET * 0.5),
+				CROSS_THICK * 0.5, CROSS_LENGTH, HULL_INK)
+			_add_body_cylinder(Vector3(0.0, 0.0, -CROSS_OFFSET * 0.5),
+				CROSS_THICK * 0.5, CROSS_LENGTH, HULL_CHALK)
+		"none":
+			# The isotropic ball itself. A disc from every angle, which is the honest
+			# picture of a population with no ranked direction.
+			_add_body_ball(BALL_DIAMETER * 0.5, HULL_INK)
+		"curve":
+			_add_body_arc_tube()
+		"plane":
+			_add_body_sheet()
+
+## One cigar, laid along dimension 0 (world X).
+func _add_body_cylinder(centre: Vector3, radius: float, length: float, ink: Color) -> void:
+	var mi := MeshInstance3D.new()
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = radius
+	mesh.bottom_radius = radius
+	mesh.height = length
+	mesh.radial_segments = 20
+	mesh.rings = 1
+	mi.mesh = mesh
+	# CylinderMesh runs along its local +Y. Basis columns are (x_axis, y_axis, z_axis)
+	# and must satisfy x cross y = z; here y_axis is world X, so the cigar lies along
+	# dimension 0 like the samples do.
+	mi.transform = Transform3D(
+		Basis(Vector3(0.0, -1.0, 0.0), Vector3(1.0, 0.0, 0.0), Vector3(0.0, 0.0, 1.0)),
+		centre)
+	mi.material_override = _structure_material(ink)
+	data_container.add_child(mi)
+	structure_parts.append(mi)
+
+## The isotropic ball, radius = BALL_DIAMETER / 2.
+func _add_body_ball(radius: float, ink: Color) -> void:
+	var mi := MeshInstance3D.new()
+	var mesh := SphereMesh.new()
+	mesh.radius = radius
+	mesh.height = radius * 2.0
+	mesh.radial_segments = 32
+	mesh.rings = 16
+	mi.mesh = mesh
+	mi.position = Vector3.ZERO
+	mi.material_override = _structure_material(ink)
+	data_container.add_child(mi)
+	structure_parts.append(mi)
+
+## The tube swept along the arc — same span, same radius, same recentring as
+## _generate_arc, so the body sits on the samples rather than near them.
+func _add_body_arc_tube() -> void:
+	var span: float = ARC_LENGTH / ARC_RADIUS
+	var y_mid: float = ARC_RADIUS * (1.0 + cos(span * 0.5)) * 0.5
+	var tube_r: float = ARC_THICK * 0.5
+	var prev: Vector3 = Vector3.ZERO
+	for i in range(ARC_SEGMENTS + 1):
+		var t: float = -span * 0.5 + span * float(i) / float(ARC_SEGMENTS)
+		var p: Vector3 = Vector3(ARC_RADIUS * sin(t), ARC_RADIUS * cos(t) - y_mid, 0.0)
+		if i > 0:
+			_add_body_chord(prev, p, tube_r)
+		prev = p
+
+## One chord of the arc tube, from a to b.
+func _add_body_chord(a: Vector3, b: Vector3, radius: float) -> void:
+	var d: Vector3 = b - a
+	var ln: float = d.length()
+	if ln < 0.0001:
+		return
+	var y_axis: Vector3 = d / ln
+	# Any vector not parallel to the chord will do; the arc lies in the dimension 0/1
+	# plane, so +Z is safe, and the guard covers a chord that ever turns to face it.
+	var helper: Vector3 = Vector3(0.0, 0.0, 1.0)
+	if absf(y_axis.z) > 0.9:
+		helper = Vector3(1.0, 0.0, 0.0)
+	var x_axis: Vector3 = helper.cross(y_axis).normalized()
+	var z_axis: Vector3 = x_axis.cross(y_axis)
+	var mi := MeshInstance3D.new()
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = radius
+	mesh.bottom_radius = radius
+	mesh.height = ln
+	mesh.radial_segments = 12
+	mesh.rings = 1
+	mi.mesh = mesh
+	mi.transform = Transform3D(Basis(x_axis, y_axis, z_axis), (a + b) * 0.5)
+	mi.material_override = _structure_material(HULL_INK)
+	data_container.add_child(mi)
+	structure_parts.append(mi)
+
+## The sheet, on the SAME orthonormal frame _generate_sheet scatters into: e1 across
+## dimension 0, e2 leaning out of the vertical, and SHEET_THICK along the normal. The
+## columns already satisfy e1 cross e2 = n, so the box is the samples' box.
+func _add_body_sheet() -> void:
+	var mi := MeshInstance3D.new()
+	var mesh := BoxMesh.new()
+	mesh.size = Vector3(SHEET_SIDE, SHEET_SIDE, SHEET_THICK)
+	mi.mesh = mesh
+	mi.transform = Transform3D(
+		Basis(Vector3(1.0, 0.0, 0.0), Vector3(0.0, 0.6, 0.8), Vector3(0.0, -0.8, 0.6)),
+		Vector3.ZERO)
+	mi.material_override = _structure_material(HULL_INK)
+	data_container.add_child(mi)
+	structure_parts.append(mi)
+
+## Unshaded translucent ink — see HULL_INK for why unshaded and why 0.72.
+##
+## Deliberately NOT wired to `_emissive`. That key means "this artifact should not glow",
+## and _apply_emissive_now walks the three point/rod arrays; the body is neither a glow
+## nor a data point, it is flat ink standing in for a volume, and switching it to a lit
+## material under curation would hand the twin straight back.
+func _structure_material(ink: Color) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(ink.r, ink.g, ink.b, HULL_ALPHA)
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return m
 
 func create_original_data_visualization() -> void:
 	"""Create 3D visualization of original data (first 3 dimensions)"""
@@ -955,7 +1186,12 @@ func clear_visualizations() -> void:
 	"""Clear all visualization elements.
 
 	is_instance_valid guards throughout: after a bearing rebuild the whole
-	Data_Container has already gone, so these references can be dangling."""
+	Data_Container has already gone, so these references can be dangling.
+
+	The bearing's manifold body is NOT cleared here. This runs at the head of every
+	create_original_data_visualization, including the one toggle_original_data fires, and
+	the body is not a drawing of the data — it is the region the data was drawn from.
+	_build_structure_body frees its own parts, so nothing leaks."""
 	for point in original_points:
 		if is_instance_valid(point):
 			point.queue_free()
@@ -1218,6 +1454,8 @@ func _rebuild_now() -> void:
 	original_points.clear()
 	projected_points.clear()
 	component_lines.clear()
+	# The body went with Data_Container, so these refs are dangling too.
+	structure_parts.clear()
 
 	# The pipeline was running against the old cloud
 	is_computing = false

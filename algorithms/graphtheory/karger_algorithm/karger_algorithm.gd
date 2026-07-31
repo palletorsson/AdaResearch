@@ -37,10 +37,22 @@ extends Node3D
 ##   braid     near-complete, 24 edges, a solid woven disc. No cheap cut exists;
 ##             the cut edges fan out around one vertex instead of crossing a
 ##             waist, and the random bet is hopeless.
-##   severed   the same two 4-cliques with NO edge between them. Two 0.22 m arcs
-##             with a 0.12 m gap; every panel finishes at cut size 0. This is the
-##             value that earns the axis: the cut was never something the
-##             algorithm made, only something it found.
+##   severed   the same two 4-cliques with NO edge between them, and now the
+##             layout says so instead of whispering it. The two lobes are pulled
+##             out to +/-0.294 m, leaving a 0.420 m void between the nearest
+##             vertices, and each component is floored with a filled 0.336 m
+##             territory disc in its own partition colour — two islands with
+##             0.252 m of nothing between them, not a ring with two edges
+##             missing. Every panel finishes at cut size 0. This is the value
+##             that earns the axis: the cut was never something the algorithm
+##             made, only something it found.
+##
+## `severed` used to be `throat` with two hairline bridges deleted and its lobes
+## nudged 1 cm: 14 edges against 12, 0.549 m against 0.560 m overall. At the
+## critic's 160x160 those bridges are 0.3 px wide and that nudge is under a pixel,
+## so the two opposite claims — flow is barely possible / flow is impossible —
+## measured 4.48% apart and were one picture. The separation now lives in mass and
+## position, the two things that survive the downsample.
 ##
 ## This axis is read at the top of _generate_graph, so setting the @export before
 ## _ready() is enough — the sweep never calls apply_grid_config.
@@ -49,14 +61,29 @@ extends Node3D
 const BOTTLENECKS: PackedStringArray = ["mixed", "throat", "braid", "severed"]
 
 ## Dumbbell geometry, as fractions of the ring radius passed to _vertex_pos, so
-## the main graph (r = 0.28) and the four 0.18 m panels (r = 0.072) read the same
-## shape at both scales.
-##   throat  : lobe d = 0.224 m, waist gap = 0.100 m, overall 0.549 m
-##   severed : lobe d = 0.218 m, gap      = 0.123 m, overall 0.560 m
+## the main graph (r = 0.28) and the four panels read the same shape at both
+## scales.
+##   throat  : lobe d = 0.224 m, waist gap  = 0.100 m, overall 0.549 m
+##   severed : lobe d = 0.168 m, vertex gap = 0.420 m, island d = 0.336 m,
+##             void between islands = 0.252 m, overall 0.924 m
+## `throat` is the shipped narrow place and is not touched. `severed` is small
+## lobes flung wide: the same eight vertices, but the picture is two objects.
 const THROAT_LOBE_R: float = 0.40
 const THROAT_LOBE_CX: float = 0.58
-const SEVERED_LOBE_R: float = 0.39
-const SEVERED_LOBE_CX: float = 0.61
+const SEVERED_LOBE_R: float = 0.30
+const SEVERED_LOBE_CX: float = 1.05
+
+## The filled territory under each severed component, as a fraction of r, and how
+## far under the graph plane it sits (also a fraction of r, so it scales with the
+## panels). 0.60 makes the disc twice the clique's own ring radius: unmistakably a
+## ground the component stands on, not a halo around it.
+const SEVERED_ISLAND_R: float = 0.60
+const SEVERED_ISLAND_DROP: float = 0.02
+
+## Flung that wide, a severed panel graph would be 0.238 m across and hang off its
+## 0.18 m card. Panels draw the same shape 38% smaller so it stays on the card;
+## the main graph, which is what the critic actually resolves, keeps full size.
+const SEVERED_PANEL_FIT: float = 0.62
 
 ## The pixel critic must never read noise as signal: two builds of one axis value
 ## have to be identical. _generate_graph reseeds from this before it draws a
@@ -149,6 +176,12 @@ const COL_PANEL_BG := Color(0.08, 0.09, 0.14, 0.6)
 const COL_CHART_BG := Color(0.06, 0.07, 0.11, 0.5)
 const COL_CHART_BAR := Color(0.3, 0.75, 0.9)
 const COL_CHART_THEORY := Color(0.95, 0.5, 0.2)
+## `severed` only. Saturated and OPAQUE — the shared material has transparency
+## disabled, and the point of the discs is unambiguous mass, not a tint. Keyed to
+## COL_VERTEX_A / COL_VERTEX_B so each island is the colour of the partition that
+## stands on it: vertex 0 is in the left lobe, so left is always the A side.
+const COL_ISLAND_A := Color(0.09, 0.46, 0.22)
+const COL_ISLAND_B := Color(0.15, 0.18, 0.62)
 
 
 func _ready() -> void:
@@ -653,6 +686,14 @@ func _rebuild_graph_mesh() -> void:
 
 	var half := bounding_size * 0.5
 
+	# `severed` ONLY — every other value falls straight through to the shipped
+	# draw order, so `mixed` builds exactly what it built before this branch
+	# existed. Drawn first so the graph lands on top of its own ground.
+	if bottleneck == "severed":
+		_graph_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		_add_severed_islands(_graph_im, 0.0, 0.0, GRAPH_RADIUS)
+		_graph_im.surface_end()
+
 	# Draw edges
 	_graph_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	for ei in range(_edge_count):
@@ -711,7 +752,9 @@ func _rebuild_panel_meshes() -> void:
 			continue
 
 		var state: Dictionary = _run_states[p]
-		var panel_r := PANEL_SIZE * 0.4
+		var panel_r: float = PANEL_SIZE * 0.4
+		if bottleneck == "severed":
+			panel_r = PANEL_SIZE * 0.4 * SEVERED_PANEL_FIT
 
 		# Panel background
 		im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -723,6 +766,13 @@ func _rebuild_panel_meshes() -> void:
 		_add_quad(im, Vector3(-PANEL_SIZE * 0.5, -PANEL_SIZE * 0.45, 0.001),
 				  Vector3(PANEL_SIZE, 0.0, 0.0), Vector3(0.0, PANEL_SIZE * 0.75, 0.0), bgc)
 		im.surface_end()
+
+		# Same two territories on the card, 38% down. Four panels x two islands is
+		# eight more coloured patches that only `severed` has.
+		if bottleneck == "severed":
+			im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+			_add_severed_islands(im, 0.0, 0.0, panel_r)
+			im.surface_end()
 
 		# Draw edges
 		im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -871,6 +921,51 @@ func _add_quad(im: ImmediateMesh, origin: Vector3, right: Vector3, up: Vector3, 
 	im.surface_add_vertex(c)
 	im.surface_set_color(col)
 	im.surface_add_vertex(d)
+
+## A filled disc lying flat in the XZ plane, as a fan from the centre.
+##
+## The sweep camera sits ~33 degrees above the horizon, so a horizontal disc
+## projects to an ellipse about half as tall as it is wide — still the only
+## primitive in this artifact with real AREA. Every line here is 3 mm wide, which
+## is a third of a pixel once the critic resizes the frame to 160x160; area is
+## what survives that, and area is what tells two graphs apart.
+##
+## Both windings are emitted. The shared material culls back faces and this
+## artifact's only other flat-in-XZ primitive (_add_line_ribbon) relies on Godot's
+## clockwise-front convention to face upward; a disc that guessed wrong would be
+## invisible from the one angle the sweep uses, and six triangles cost nothing.
+func _add_disc_fan(im: ImmediateMesh, centre: Vector3, radius: float, col: Color, segments: int = 24) -> void:
+	for s in range(segments):
+		var a0: float = TAU * float(s) / float(segments)
+		var a1: float = TAU * float(s + 1) / float(segments)
+		var p0: Vector3 = centre + Vector3(cos(a0) * radius, 0.0, sin(a0) * radius)
+		var p1: Vector3 = centre + Vector3(cos(a1) * radius, 0.0, sin(a1) * radius)
+		im.surface_set_color(col)
+		im.surface_add_vertex(centre)
+		im.surface_set_color(col)
+		im.surface_add_vertex(p0)
+		im.surface_set_color(col)
+		im.surface_add_vertex(p1)
+		im.surface_set_color(col)
+		im.surface_add_vertex(centre)
+		im.surface_set_color(col)
+		im.surface_add_vertex(p1)
+		im.surface_set_color(col)
+		im.surface_add_vertex(p0)
+
+
+## The two territories of `severed`, at whatever scale the caller draws its graph.
+## Dropped a hair below the graph plane so the edges and vertices still read on
+## top of their own ground instead of z-fighting with it.
+func _add_severed_islands(im: ImmediateMesh, cx: float, cz: float, r: float) -> void:
+	var island_r: float = SEVERED_ISLAND_R * r
+	var dy: float = -SEVERED_ISLAND_DROP * r
+	for side_i in range(2):
+		var side: float = -1.0 if side_i == 0 else 1.0
+		var centre: Vector3 = Vector3(cx + side * SEVERED_LOBE_CX * r, dy, cz)
+		var col: Color = COL_ISLAND_A if side_i == 0 else COL_ISLAND_B
+		_add_disc_fan(im, centre, island_r, col)
+
 
 func _add_line_ribbon(im: ImmediateMesh, a: Vector3, b: Vector3, width: float, col: Color) -> void:
 	# Flat ribbon in XZ plane

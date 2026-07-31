@@ -94,15 +94,17 @@ def _overlaps(rect, placed, pad=1):
 
 
 def _place_rooms(sizes, rng):
-    """place each room at the candidate (seeded-shuffled every-3rd grid) that
-    maximises min-distance to the placed centres, >= SPACING apart (relaxing)."""
+    """place each room at the candidate (seeded-shuffled every-3rd grid) whose
+    min-distance to the placed centres is CLOSEST TO SPACING (target-seeking —
+    the slider is the artifact distance, not just a floor), never closer than
+    SPACING - 4."""
     cands = [(ax, ay) for ay in range(1, CANVAS, 3) for ax in range(1, CANVAS, 3)]
     rng.shuffle(cands)
     placed, centers, rooms = [], [], []
     for rs in sizes:
         best = None
-        for thresh in (float(SPACING), SPACING - 2.0, SPACING - 4.0, 0.0):
-            pick, pick_d, pick_c = None, -1.0, None
+        for floor_d in (SPACING - 4.0, SPACING - 6.0, 0.0):
+            pick, pick_err, pick_c = None, float("inf"), None
             for (ax, ay) in cands:
                 x1, y1 = ax + rs - 1, ay + rs - 1
                 if ax < 1 or ay < 1 or x1 > CANVAS - 2 or y1 > CANVAS - 2:
@@ -111,9 +113,10 @@ def _place_rooms(sizes, rng):
                     continue
                 cen = (ay + rs // 2, ax + rs // 2)
                 d = (min(math.hypot(cen[0] - pc[0], cen[1] - pc[1])
-                         for pc in centers) if centers else float("inf"))
-                if d >= thresh and d > pick_d:
-                    pick, pick_d, pick_c = (ax, ay, x1, y1), d, cen
+                         for pc in centers) if centers else float(SPACING))
+                err = abs(d - float(SPACING))
+                if d >= max(floor_d, 0.0) and err < pick_err:
+                    pick, pick_err, pick_c = (ax, ay, x1, y1), err, cen
             if pick:
                 best = (pick, pick_c)
                 break

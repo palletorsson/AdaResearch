@@ -10,8 +10,8 @@
   {
    "artifact": "PhysarumColony",
    "axis": "anchorage",
-   "frame": 0.03728,
-   "focus": 0.16297,
+   "frame": 0.03699,
+   "focus": 0.16261,
    "verdict": "bites",
    "subject": 0.00387,
    "pairs": 6,
@@ -21,38 +21,19 @@
   {
    "artifact": "boids_aquarium",
    "axis": "accord",
-   "frame": 0.01671,
-   "focus": 0.04143,
+   "frame": 0.01941,
+   "focus": 0.08607,
    "verdict": "WEAK",
-   "subject": 0.09914,
+   "subject": 0.09926,
    "pairs": 6,
-   "twins": [
-    {
-     "a": "lane",
-     "b": "orb",
-     "focus": 0.01678,
-     "rgb": 0.0295
-    },
-    {
-     "a": "lattice",
-     "b": "orb",
-     "focus": 0.0188,
-     "rgb": 0.03001
-    },
-    {
-     "a": "lane",
-     "b": "lattice",
-     "focus": 0.02126,
-     "rgb": 0.03549
-    }
-   ],
+   "twins": [],
    "colour_only": []
   },
   {
    "artifact": "boid_manager",
    "axis": "accord",
-   "frame": 0.03619,
-   "focus": 0.14401,
+   "frame": 0.0362,
+   "focus": 0.144,
    "verdict": "bites",
    "subject": 0.02125,
    "pairs": 6,
@@ -62,59 +43,21 @@
   {
    "artifact": "AntColonyV2",
    "axis": "anchorage",
-   "frame": 0.02326,
-   "focus": 0.0326,
-   "verdict": "WEAK",
-   "subject": 0.0377,
+   "frame": 0.03563,
+   "focus": 0.13303,
+   "verdict": "bites",
+   "subject": 0.03691,
    "pairs": 6,
-   "twins": [
-    {
-     "a": "ring",
-     "b": "triad",
-     "focus": 0.00808,
-     "rgb": 0.03766
-    },
-    {
-     "a": "scattered",
-     "b": "triad",
-     "focus": 0.01029,
-     "rgb": 0.04483
-    },
-    {
-     "a": "ring",
-     "b": "scattered",
-     "focus": 0.01124,
-     "rgb": 0.04529
-    }
-   ],
-   "colour_only": [
-    {
-     "a": "pair",
-     "b": "ring",
-     "focus": 0.05522,
-     "rgb": 0.12055
-    },
-    {
-     "a": "pair",
-     "b": "triad",
-     "focus": 0.05528,
-     "rgb": 0.11947
-    },
-    {
-     "a": "pair",
-     "b": "scattered",
-     "focus": 0.05551,
-     "rgb": 0.12077
-    }
-   ]
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "self_organizing_patterns",
    "axis": "cue",
-   "frame": 0.10206,
-   "focus": 0.27607,
+   "frame": 0.10121,
+   "focus": 0.27449,
    "verdict": "bites",
-   "subject": 0.07957,
+   "subject": 0.07922,
    "pairs": 3,
    "twins": [],
    "colour_only": []
@@ -122,8 +65,8 @@
   {
    "artifact": "fitness_landscape_politics",
    "axis": "mandate",
-   "frame": 0.05673,
-   "focus": 0.24608,
+   "frame": 0.05672,
+   "focus": 0.24605,
    "verdict": "bites",
    "subject": 0.03605,
    "pairs": 6,
@@ -133,8 +76,8 @@
   {
    "artifact": "ecosystem_simulation",
    "axis": "quota",
-   "frame": 0.03631,
-   "focus": 0.2008,
+   "frame": 0.03629,
+   "focus": 0.20074,
    "verdict": "bites",
    "subject": 0.08402,
    "pairs": 6,

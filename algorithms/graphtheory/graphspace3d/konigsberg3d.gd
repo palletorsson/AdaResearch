@@ -60,10 +60,30 @@ class_name Konigsberg3D
 #             open Eulerian walk exists whose only legal start and finish are
 #             those two red ends.
 #   circuit   Two arches added — the Kneiphof–Vorstadt span plus a second
-#             Altstadt–Löbenicht crossing standing 3 m north of the Grüne
-#             Brücke. Nine bridges, every degree even, all four platforms green,
-#             and the arch field over the river is visibly denser than the
-#             shipped set.
+#             Altstadt–Löbenicht crossing standing 3 m north of the Grüne Brücke
+#             AND 4.5 m above it: a VIADUCT, 3 m wide and 0.5 m thick, apex 6.5 m
+#             over the water on two 2.1 m river piers, flying clear over both
+#             the Grüne Brücke and the Kneiphof-Steg. Nine bridges, every degree
+#             even, all four platforms green, and the arch field over the river
+#             is visibly denser than the shipped set.
+#
+#             WHY IT IS A VIADUCT AND NOT A SECOND LOW ARCH — the repair, stated
+#             rather than hidden. `walk` and `circuit` measured 5.03% focus
+#             against each other: TWINS, under the 6% bar, an axis declaring four
+#             things and showing three. The ninth bridge was drawn at the same
+#             1.5 m rise as the Grüne Brücke and shifted only 3 m sideways, and
+#             3 m of lateral is 10 screen pixels in the critic's crop: the two
+#             decks fused into one thicker band and the whole difference between
+#             an open walk and a closed circuit collapsed onto two platforms
+#             changing colour — about 400 pixels at a 40/255 delta. The rendered
+#             sheets say so plainly. Height was the axis with room in it: the
+#             crop is 531 x 166 px resized to 160 x 160, so a metre of world
+#             HEIGHT is worth three times a metre of world WIDTH, and 4.5 m of
+#             rise plus a heavier deck plus two piers puts roughly 1,500 px of
+#             new stone where `walk` has open air and water. The meaning is
+#             untouched — nine bridges, all degrees even, the same edge set the
+#             spec named. Only the drawing of the ninth bridge changed, from a
+#             span hidden inside another span to one that is plainly there.
 #   severed   Löbenicht is cut loose: every bridge that touched it is gone and
 #             the 8 m platform stands alone in open water. This is the value
 #             that earns the axis. Its degrees are all EVEN — parity says yes
@@ -89,6 +109,27 @@ const PARITIES: PackedStringArray = ["blocked", "walk", "circuit", "severed"]
 
 ## The landmass `severed` cuts loose — Löbenicht, index 1 in the topology below.
 const SEVERED_NODE: int = 1
+
+## THE NINTH BRIDGE — `circuit` only. Metres.
+##
+## Every one of the seven 1736 spans omits these keys and therefore takes the
+## @export defaults (bridge_arch_height 1.5, bridge_width 1.5, bridge_thickness
+## 0.15, no piers), so `blocked`, `walk` and `severed` build byte-for-byte what
+## they built before. Only the crossing that closes the tour is a viaduct.
+##
+## 4.5 m of rise is not a free choice: the theorem caption's plate spans y
+## 5.09..5.71 and a nameplate must clear its own apex by 1.0 m, so the apex has
+## to sit either under 5.0 m — where it would be indistinguishable from the arch
+## it parallels — or over 5.85 m. 4.5 m puts the apex at 6.5 m, 0.79 m above the
+## theorem plate, and its own nameplate at 7.5 m, 1.8 m clear of any other plate.
+const CIRCUIT_SPAN_RISE: float = 4.5
+const CIRCUIT_SPAN_WIDTH: float = 3.0
+const CIRCUIT_SPAN_THICKNESS: float = 0.5
+## A 30 m deck standing 6.5 m over open water is not self-supporting, and the two
+## piers are also where the value's mass lives: they stand in the river at x=±5,
+## 6.65 m from the water surface to the deck underside, in the one part of the
+## frame that is otherwise nothing but water.
+const CIRCUIT_SPAN_PIERS: int = 2
 
 ## Metres a genuinely parallel pair of nameplates is fanned apart, perpendicular
 ## to the bridge they name. There really are two bridges there, so the caption
@@ -206,6 +247,12 @@ func _setup_konigsberg_topology() -> void:
 			"historical_name": bridge.name,
 			"construction_year": bridge.built,
 			"lateral": float(bridge.get("lateral", 0.0)),
+			# Per-span geometry, defaulted to the @export values. A table entry
+			# that names none of these draws precisely what it always drew.
+			"arch": float(bridge.get("arch", bridge_arch_height)),
+			"deck_w": float(bridge.get("width", bridge_width)),
+			"deck_t": float(bridge.get("thickness", bridge_thickness)),
+			"piers": int(bridge.get("piers", 0)),
 			"bridge_id": i
 		}
 		edges.append(edge_data)
@@ -220,12 +267,21 @@ func _setup_konigsberg_topology() -> void:
 
 ## THE AXIS BUILDER. Returns the bridge set `parity` names.
 ##
-## `lateral` is metres the span is shifted sideways, perpendicular to the line
-## between the two landmasses it joins. Every historical bridge carries 0.0, so
-## `blocked` builds exactly the geometry this artifact shipped with — the value
-## exists for `circuit`, whose second Altstadt–Löbenicht crossing would otherwise
-## be drawn straight through the Grüne Brücke and add no visible density at all,
-## which is precisely the inert-branch failure this loop exists to catch.
+## PER-SPAN GEOMETRY KEYS, all optional, all defaulting to the @export values so
+## that a table entry without them draws exactly what this artifact shipped with:
+##
+##   lateral    metres the span is shifted sideways, perpendicular to the line
+##              between the two landmasses it joins.
+##   arch       metres the span rises at its midpoint (default bridge_arch_height).
+##   width      deck width in metres (default bridge_width).
+##   thickness  deck thickness in metres (default bridge_thickness).
+##   piers      how many stone piers carry the deck down to the water (default 0).
+##
+## `lateral` was the first attempt at making `circuit`'s ninth bridge visible and
+## IT WAS NOT ENOUGH — 3 m sideways is ten pixels in the critic's crop, the two
+## decks fused, and `walk` vs `circuit` measured 5.03% focus: a twin. The other
+## four keys exist because of that measurement. Height and mass are what the crop
+## can see; sideways is what it cannot.
 func _bridge_table() -> Array:
 	# The seven bridges of 1736, with historical names.
 	var table: Array = [
@@ -246,11 +302,19 @@ func _bridge_table() -> Array:
 			table.append({"from": 2, "to": 3, "name": "Kneiphof-Steg", "built": 1737, "lateral": 0.0})
 		"circuit":
 			table.append({"from": 2, "to": 3, "name": "Kneiphof-Steg", "built": 1737, "lateral": 0.0})
-			# A second 30 m Altstadt–Löbenicht crossing, standing 3 m north of
-			# the Grüne Brücke so it reads as a second bridge rather than a
-			# repaint of the first. 3 m keeps both ends inside the 4 m platform
-			# radius, so it still lands on land. Nine bridges, every degree even.
-			table.append({"from": 0, "to": 1, "name": "Zweite Grüne Brücke", "built": 1737, "lateral": 3.0})
+			# A second 30 m Altstadt–Löbenicht crossing, 3 m north of the Grüne
+			# Brücke and 4.5 m above it. 3 m of lateral keeps both ends inside the
+			# 4 m platform radius so it still lands on land; the rise, the 3 m
+			# deck and the two piers are what make it READ as a second bridge
+			# instead of thickening the first — see the twin measurement above.
+			# Nine bridges, every degree even.
+			table.append({
+				"from": 0, "to": 1, "name": "Zweite Grüne Brücke", "built": 1737,
+				"lateral": 3.0,
+				"arch": CIRCUIT_SPAN_RISE,
+				"width": CIRCUIT_SPAN_WIDTH,
+				"thickness": CIRCUIT_SPAN_THICKNESS,
+				"piers": CIRCUIT_SPAN_PIERS})
 		"severed":
 			# Cut Löbenicht loose. DERIVED from the node index, not a hard-coded
 			# list of names, so it stays true if the table above is ever edited.
@@ -552,7 +616,12 @@ func _bridge_spans() -> Array:
 			to_pos += shift
 		var lo: int = mini(int(edge.a), int(edge.b))
 		var hi: int = maxi(int(edge.a), int(edge.b))
-		spans.append({"a": from_pos, "b": to_pos, "pair": "%d-%d" % [lo, hi]})
+		spans.append({
+			"a": from_pos, "b": to_pos, "pair": "%d-%d" % [lo, hi],
+			# The span's OWN rise, so its nameplate can stand above its own apex
+			# rather than above an average one. Every 1736 span reports
+			# bridge_arch_height here and nothing moves.
+			"rise": float(edge.get("arch", bridge_arch_height))})
 	return spans
 
 ## Unit vector at right angles to a span, in the horizontal plane.
@@ -582,6 +651,14 @@ func _horizontal_perp(d: Vector3) -> Vector3:
 ##
 ## The lowest plate any value produces has its underside at 3.945 m, still 0.44 m
 ## above the 3.5 m arch apexes, so no nameplate crosses the body at any value.
+##
+##  3. OWN APEX. Each plate stands 1.0 m above the rise of ITS OWN span, not above
+##     bridge_arch_height. Identical for all eight 1736-rise spans; it matters for
+##     `circuit`'s viaduct, whose deck peaks at 6.5 m and whose plate therefore
+##     sits at 7.5 m — 1.79 m above the theorem plate's top, far outside the merge
+##     window, and the only thing in the piece taller than the theorem. Reading
+##     the artifact's own rise rather than the export is what keeps that plate off
+##     the deck it names.
 func _nameplate_positions(spans: Array) -> Array:
 	var out: Array = []
 	out.resize(spans.size())
@@ -622,16 +699,21 @@ func _nameplate_positions(spans: Array) -> Array:
 				var mid2: Vector3 = (a + b) * 0.5
 				var fan: float = (float(k) - float(m - 1) * 0.5) * PARALLEL_FAN
 				var pos: Vector3 = mid2 + _horizontal_perp(b - a) * fan
-				pos.y = mid2.y + bridge_arch_height + 1.0 - float(tier) * COINCIDENT_TIER
+				var rise: float = float(spans[idx2].get("rise", bridge_arch_height))
+				pos.y = mid2.y + rise + 1.0 - float(tier) * COINCIDENT_TIER
 				out[idx2] = pos
 
 	return out
 
 func _create_arched_bridge(from_pos: Vector3, to_pos: Vector3, edge: Dictionary, bridge_index: int) -> void:
-	"""Create an arched stone bridge"""
+	"""Create an arched stone bridge, at its own rise, width and thickness"""
 	var segments = 12
-	var arch_height = bridge_arch_height
-	
+	# PER SPAN, not per artifact. Absent keys report the @export values, so the
+	# seven 1736 arches are unchanged; only `circuit`'s ninth bridge asks for more.
+	var arch_height: float = float(edge.get("arch", bridge_arch_height))
+	var deck_w: float = float(edge.get("deck_w", bridge_width))
+	var deck_t: float = float(edge.get("deck_t", bridge_thickness))
+
 	for i in range(segments):
 		var t1 = float(i) / float(segments)
 		var t2 = float(i + 1) / float(segments)
@@ -642,7 +724,7 @@ func _create_arched_bridge(from_pos: Vector3, to_pos: Vector3, edge: Dictionary,
 		var segment = CSGBox3D.new()
 		segment.name = "BridgeSegment_" + edge.historical_name + "_" + str(i)
 		var seg_distance = p1.distance_to(p2)
-		segment.size = Vector3(bridge_width, bridge_thickness, seg_distance)
+		segment.size = Vector3(deck_w, deck_t, seg_distance)
 		
 		var mid = (p1 + p2) * 0.5
 		var dir = (p2 - p1).normalized()
@@ -659,6 +741,53 @@ func _create_arched_bridge(from_pos: Vector3, to_pos: Vector3, edge: Dictionary,
 
 		add_child(segment)
 		_created.append(segment)
+
+	_create_span_piers(from_pos, to_pos, edge)
+
+## Stone piers carrying a high span down to the water. `piers` defaults to 0, so
+## every 1736 arch builds nothing here and `blocked`, `walk` and `severed` are
+## untouched. Only `circuit`'s viaduct asks for them — a 30 m deck whose apex is
+## 6.5 m over the Pregel is not going to stand on its abutments alone, and the two
+## piers are also where the value's visible mass sits: 2.1 m square, from the
+## water surface up to the deck underside, in the stretch of frame that is
+## otherwise nothing but river.
+func _create_span_piers(from_pos: Vector3, to_pos: Vector3, edge: Dictionary) -> void:
+	var count: int = int(edge.get("piers", 0))
+	if count <= 0:
+		return
+	var arch_height: float = float(edge.get("arch", bridge_arch_height))
+	var deck_w: float = float(edge.get("deck_w", bridge_width))
+	var deck_t: float = float(edge.get("deck_t", bridge_thickness))
+	# Masonry piers are at least as broad as the deck they carry. 0.7 x a 3 m deck
+	# is 2.1 m square, which is both plausible and, in a frame where a metre of
+	# height is worth three metres of width, worth ~100 more pixels than a spindly
+	# one. Nothing else stands in this stretch of river to hide them.
+	var side: float = deck_w * 0.7
+
+	for i in range(count):
+		# Evenly spaced along the span, endpoints excluded — the abutments are the
+		# landmasses themselves.
+		var t: float = float(i + 1) / float(count + 1)
+		var top: Vector3 = _bridge_arch_point(from_pos, to_pos, arch_height, t)
+		var head: float = top.y - deck_t * 0.5
+		var height: float = head - water_level
+		if height <= 0.1:
+			continue
+
+		var pier := CSGBox3D.new()
+		pier.name = "BridgePier_" + str(edge.historical_name) + "_" + str(i)
+		pier.size = Vector3(side, height, side)
+		pier.position = Vector3(top.x, water_level + height * 0.5, top.z)
+
+		var stone_material := StandardMaterial3D.new()
+		stone_material.albedo_color = Color(0.66, 0.66, 0.58)
+		stone_material.roughness = 0.85
+		stone_material.metallic = 0.1
+		pier.material_override = stone_material
+		pier.use_collision = true
+
+		add_child(pier)
+		_created.append(pier)
 
 func _bridge_arch_point(start: Vector3, end: Vector3, height: float, t: float) -> Vector3:
 	"""Calculate point on bridge arch"""

@@ -1,343 +1,68 @@
 {
  "sweep": "rhizomatic_structure",
  "peak_changed_pct": 2.161,
+ "subject_pct": 1.38,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "mutuality": "pockets",
-    "num_branches": 25.0
+    "mutuality": "pockets"
    },
    "b": {
-    "mutuality": "pockets",
-    "num_branches": 50.0
+    "mutuality": "none"
    },
-   "changed_px": 8869,
-   "changed_pct": 1.535
+   "changed_px": 3674,
+   "changed_pct": 0.636
   },
   {
    "a": {
-    "mutuality": "pockets",
-    "num_branches": 25.0
+    "mutuality": "pockets"
    },
    "b": {
-    "mutuality": "none",
-    "num_branches": 25.0
+    "mutuality": "split"
    },
-   "changed_px": 2986,
-   "changed_pct": 0.517
+   "changed_px": 9080,
+   "changed_pct": 1.572
   },
   {
    "a": {
-    "mutuality": "pockets",
-    "num_branches": 25.0
+    "mutuality": "pockets"
    },
    "b": {
-    "mutuality": "none",
-    "num_branches": 50.0
+    "mutuality": "total"
    },
-   "changed_px": 8687,
-   "changed_pct": 1.504
+   "changed_px": 6276,
+   "changed_pct": 1.087
   },
   {
    "a": {
-    "mutuality": "pockets",
-    "num_branches": 25.0
+    "mutuality": "none"
    },
    "b": {
-    "mutuality": "split",
-    "num_branches": 25.0
-   },
-   "changed_px": 8878,
-   "changed_pct": 1.537
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "split",
-    "num_branches": 50.0
-   },
-   "changed_px": 8878,
-   "changed_pct": 1.537
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 25.0
-   },
-   "changed_px": 4789,
-   "changed_pct": 0.829
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 50.0
-   },
-   "changed_px": 9766,
-   "changed_pct": 1.691
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "none",
-    "num_branches": 25.0
-   },
-   "changed_px": 10411,
-   "changed_pct": 1.802
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "none",
-    "num_branches": 50.0
-   },
-   "changed_px": 527,
-   "changed_pct": 0.091
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "split",
-    "num_branches": 25.0
-   },
-   "changed_px": 10979,
-   "changed_pct": 1.901
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "split",
-    "num_branches": 50.0
-   },
-   "changed_px": 10979,
-   "changed_pct": 1.901
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 25.0
-   },
-   "changed_px": 11283,
-   "changed_pct": 1.953
-  },
-  {
-   "a": {
-    "mutuality": "pockets",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 50.0
-   },
-   "changed_px": 4472,
-   "changed_pct": 0.774
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "none",
-    "num_branches": 50.0
-   },
-   "changed_px": 10125,
-   "changed_pct": 1.753
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "split",
-    "num_branches": 25.0
-   },
-   "changed_px": 10514,
-   "changed_pct": 1.82
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "split",
-    "num_branches": 50.0
-   },
-   "changed_px": 10514,
-   "changed_pct": 1.82
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 25.0
-   },
-   "changed_px": 3019,
-   "changed_pct": 0.523
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 50.0
-   },
-   "changed_px": 11684,
-   "changed_pct": 2.023
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "split",
-    "num_branches": 25.0
+    "mutuality": "split"
    },
    "changed_px": 10700,
    "changed_pct": 1.852
   },
   {
    "a": {
-    "mutuality": "none",
-    "num_branches": 50.0
+    "mutuality": "none"
    },
    "b": {
-    "mutuality": "split",
-    "num_branches": 50.0
-   },
-   "changed_px": 10700,
-   "changed_pct": 1.852
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 25.0
-   },
-   "changed_px": 11012,
-   "changed_pct": 1.907
-  },
-  {
-   "a": {
-    "mutuality": "none",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 50.0
+    "mutuality": "total"
    },
    "changed_px": 4689,
    "changed_pct": 0.812
   },
   {
    "a": {
-    "mutuality": "split",
-    "num_branches": 25.0
+    "mutuality": "split"
    },
    "b": {
-    "mutuality": "split",
-    "num_branches": 50.0
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "mutuality": "split",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 25.0
-   },
-   "changed_px": 12103,
-   "changed_pct": 2.095
-  },
-  {
-   "a": {
-    "mutuality": "split",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 50.0
+    "mutuality": "total"
    },
    "changed_px": 12481,
    "changed_pct": 2.161
-  },
-  {
-   "a": {
-    "mutuality": "split",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 25.0
-   },
-   "changed_px": 12103,
-   "changed_pct": 2.095
-  },
-  {
-   "a": {
-    "mutuality": "split",
-    "num_branches": 50.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 50.0
-   },
-   "changed_px": 12481,
-   "changed_pct": 2.161
-  },
-  {
-   "a": {
-    "mutuality": "total",
-    "num_branches": 25.0
-   },
-   "b": {
-    "mutuality": "total",
-    "num_branches": 50.0
-   },
-   "changed_px": 12168,
-   "changed_pct": 2.107
   }
  ]
 }

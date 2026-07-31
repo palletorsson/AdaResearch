@@ -282,7 +282,16 @@ def main() -> int:
             # Judged on FOCUS. A knob that is connected to something changes its hottest
             # pixels a lot even when the frame barely moves; a knob connected to nothing
             # is flat everywhere.
-            if subject < BLANK_SUBJECT:
+            # NO RENDER needs BOTH: nothing to see AND nothing changing. Subject alone
+            # is not enough, and using it alone produced two false verdicts the moment
+            # the capturer started suppressing debug chrome — enhanced_kmeans measured
+            # 13.88% focus (a strong bite) on a subject of 0.10%, and mst_visualization
+            # 7.47% on 0.02%. Their debug panels had been padding the subject count;
+            # without them a sparse scatter of small points is a legitimately tiny
+            # subject that still changes a lot. A frame that truly rendered nothing has
+            # near-zero focus too — library_rack sits at 2.20% with frame == focus,
+            # which is the uniform-difference signature of an empty picture.
+            if subject < BLANK_SUBJECT and focus < INERT_FOCUS:
                 verdict = "NO RENDER"
             elif focus < INERT_FOCUS:
                 verdict = "INERT"

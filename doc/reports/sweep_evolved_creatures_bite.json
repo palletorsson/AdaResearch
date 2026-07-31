@@ -1,7 +1,8 @@
 {
  "sweep": "evolved_creatures",
- "peak_changed_pct": 0.47,
- "verdict": "faint - under 2% of the frame moved",
+ "peak_changed_pct": 0.471,
+ "subject_pct": 0.268,
+ "verdict": "SUBJECT NOT DETECTED - only 0.27% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
@@ -10,8 +11,8 @@
    "b": {
     "selection": "uniform"
    },
-   "changed_px": 1654,
-   "changed_pct": 0.286
+   "changed_px": 1665,
+   "changed_pct": 0.288
   },
   {
    "a": {
@@ -20,8 +21,8 @@
    "b": {
     "selection": "culled"
    },
-   "changed_px": 1161,
-   "changed_pct": 0.201
+   "changed_px": 1165,
+   "changed_pct": 0.202
   },
   {
    "a": {
@@ -30,8 +31,8 @@
    "b": {
     "selection": "runaway"
    },
-   "changed_px": 2272,
-   "changed_pct": 0.393
+   "changed_px": 2285,
+   "changed_pct": 0.396
   },
   {
    "a": {
@@ -40,7 +41,7 @@
    "b": {
     "selection": "split"
    },
-   "changed_px": 2145,
+   "changed_px": 2141,
    "changed_pct": 0.371
   },
   {
@@ -50,8 +51,8 @@
    "b": {
     "selection": "culled"
    },
-   "changed_px": 1097,
-   "changed_pct": 0.19
+   "changed_px": 1087,
+   "changed_pct": 0.188
   },
   {
    "a": {
@@ -60,7 +61,7 @@
    "b": {
     "selection": "runaway"
    },
-   "changed_px": 2642,
+   "changed_px": 2638,
    "changed_pct": 0.457
   },
   {
@@ -70,7 +71,7 @@
    "b": {
     "selection": "split"
    },
-   "changed_px": 2588,
+   "changed_px": 2586,
    "changed_pct": 0.448
   },
   {
@@ -80,8 +81,8 @@
    "b": {
     "selection": "runaway"
    },
-   "changed_px": 1767,
-   "changed_pct": 0.306
+   "changed_px": 1778,
+   "changed_pct": 0.308
   },
   {
    "a": {
@@ -90,8 +91,8 @@
    "b": {
     "selection": "split"
    },
-   "changed_px": 1496,
-   "changed_pct": 0.259
+   "changed_px": 1500,
+   "changed_pct": 0.26
   },
   {
    "a": {
@@ -100,8 +101,8 @@
    "b": {
     "selection": "split"
    },
-   "changed_px": 2714,
-   "changed_pct": 0.47
+   "changed_px": 2721,
+   "changed_pct": 0.471
   }
  ]
 }

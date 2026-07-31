@@ -69,7 +69,8 @@ const COLOR_BOUNDARY := Color(0.9, 0.2, 0.9)    # Magenta for boundary
 #   blobs  two rectangular clouds, 4.0 x 5.0 m each, centres 2.0 m apart in x.
 #          The shipped case, unchanged. `class_separation` and `data_noise` still
 #          govern it; the other four values replace them with an explicit layout.
-#   block  one filled 6.0 x 5.0 m field, the two classes meeting along a
+#   block  one filled 6.0 x 5.0 m field — an even 12 x 10 lattice at 0.5 m pitch,
+#          120 cells, every one occupied — the two classes meeting along a
 #          diagonal through the middle. Same extent, no gap: the thing being
 #          maximised has nowhere to sit.
 #   rings  a small disc of one class ringed by an annulus of the other.
@@ -103,6 +104,17 @@ const DATA_SEED: int = 20260730
 # shipped blobs case already sits exactly on it (2.0 + data_noise 0.5).
 const FIELD_W: float = 6.0
 const FIELD_H: float = 5.0
+
+# block: the field is FILLED by a lattice, not sampled by a scatter. BLOCK_FILL
+# is the floor on how many cells that lattice holds (the sample-count exports can
+# only push it up, never below a filled read); BLOCK_JITTER is the wobble applied
+# to each occupied cell so the fill reads as a population and not as graph paper.
+# A floor of 110 over 6.0 x 5.0 m resolves to a 12 x 10 lattice, 120 cells at
+# exactly 0.500 x 0.500 m pitch, dots 0.2 m across — dense enough to read as one
+# slab, open enough to count. The jitter is capped at 16% of the pitch so a map
+# author who raises the sample counts densifies the field instead of smearing it.
+const BLOCK_FILL: int = 110
+const BLOCK_JITTER: float = 0.08
 
 # rings: polar radii before the field fit. Generated at mean radius 3.0 with a
 # 0.6 m wall, then scaled so the outer edge lands on the field rectangle — which
@@ -306,17 +318,47 @@ func _layout_blobs() -> void:
 ## block — one filled field, split corner to corner. Same footprint as blobs,
 ## no gap anywhere along the seam: whatever the SMO loop converges on, there is
 ## no margin for it to sit in.
+##
+## The fill is a LATTICE, and that is the repair for a false declaration. This
+## function used to draw `total` uniform points as
+## `randf_range(-hx, hx), randf_range(-hy, hy)` — which is the draw order and the
+## ranges `_layout_skew` uses for its 95-point majority, out of the same `_rng` at
+## the same fixed seed. The two values therefore came out of the generator as the
+## SAME 95 positions and rendered as one picture; `block` and `skew` were one
+## value wearing two names.
+##
+## A lattice is also the truer reading of the word already written above: a
+## filled field. A hundred uniform draws leave clumps and holes and a ragged
+## seam; an evenly occupied field has no hole for a margin to hide in anywhere,
+## and the diagonal the two classes meet along reads as an actual edge. Cell
+## centres decide the label, so the seam stays straight; the jitter only touches
+## where the dot sits inside its cell.
 func _layout_block(total: int) -> void:
 	var hx: float = FIELD_W * 0.5
 	var hy: float = FIELD_H * 0.5
-	for i in range(total):
-		var x: float = _rng.randf_range(-hx, hx)
-		var y: float = _rng.randf_range(-hy, hy)
-		training_data.append(Vector2(x, y))
-		# Diagonal through the middle, in normalised field coordinates so it runs
-		# corner to corner rather than at 45 degrees in a non-square field.
-		var side: float = (y / hy) - (x / hx)
-		training_labels.append(1 if side >= 0.0 else -1)
+
+	# Cells sized to keep the pitch near-square across a 6.0 x 5.0 m field.
+	var target: int = maxi(total, BLOCK_FILL)
+	var cols: int = maxi(2, int(ceil(sqrt(float(target) * FIELD_W / FIELD_H))))
+	var rows: int = maxi(2, int(ceil(float(target) / float(cols))))
+	var step_x: float = FIELD_W / float(cols)
+	var step_y: float = FIELD_H / float(rows)
+	var jitter: float = minf(BLOCK_JITTER, minf(step_x, step_y) * 0.16)
+
+	for j in range(rows):
+		for i in range(cols):
+			var cx: float = -hx + (float(i) + 0.5) * step_x
+			var cy: float = -hy + (float(j) + 0.5) * step_y
+			# Diagonal through the middle, in normalised field coordinates so it
+			# runs corner to corner rather than at 45 degrees in a non-square
+			# field. Taken from the cell centre, not the jittered dot, so the
+			# seam is a clean staircase instead of a fringe.
+			var side: float = (cy / hy) - (cx / hx)
+			training_data.append(Vector2(
+				cx + _rng.randf_range(-jitter, jitter),
+				cy + _rng.randf_range(-jitter, jitter)
+			))
+			training_labels.append(1 if side >= 0.0 else -1)
 
 ## rings — 40% of the population in a central disc, 60% on a wall around it.
 ## Generated in polar form at mean radius 3.0 with a 0.6 m wall, then scaled onto

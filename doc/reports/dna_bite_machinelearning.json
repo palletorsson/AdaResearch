@@ -10,165 +10,134 @@
   {
    "artifact": "gradient_descent_visualization",
    "axis": "basin",
-   "frame": 0.07208,
-   "focus": 0.23186,
+   "frame": 0.07205,
+   "focus": 0.23181,
    "verdict": "bites",
    "subject": 0.0734,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "evolved_creatures",
    "axis": "selection",
-   "frame": 0.0277,
-   "focus": 0.12921,
+   "frame": 0.02784,
+   "focus": 0.12928,
    "verdict": "bites",
    "subject": 0.00297,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "non_teleological_evolution",
    "axis": "selection",
-   "frame": 0.07756,
-   "focus": 0.55814,
+   "frame": 0.08237,
+   "focus": 0.58238,
    "verdict": "bites",
    "subject": 0.04437,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "evolvingflowers",
    "axis": "selection",
-   "frame": 0.03186,
-   "focus": 0.16284,
+   "frame": 0.03185,
+   "focus": 0.16278,
    "verdict": "bites",
-   "subject": 0.0368,
+   "subject": 0.03684,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "pca_visualization",
    "axis": "bearing",
-   "frame": 0.0944,
-   "focus": 0.11623,
-   "verdict": "WEAK",
-   "subject": 0.59094,
+   "frame": 0.02641,
+   "focus": 0.1474,
+   "verdict": "bites",
+   "subject": 0.0432,
    "pairs": 10,
-   "twins": [
-    {
-     "a": "curve",
-     "b": "plane",
-     "focus": 0.00893
-    },
-    {
-     "a": "crosswise",
-     "b": "curve",
-     "focus": 0.01044
-    },
-    {
-     "a": "crosswise",
-     "b": "plane",
-     "focus": 0.01078
-    },
-    {
-     "a": "curve",
-     "b": "none",
-     "focus": 0.01262
-    },
-    {
-     "a": "none",
-     "b": "plane",
-     "focus": 0.01309
-    },
-    {
-     "a": "crosswise",
-     "b": "none",
-     "focus": 0.0146
-    }
-   ]
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "loss_function_comparator",
    "axis": "tail",
-   "frame": 0.04212,
-   "focus": 0.33817,
+   "frame": 0.04672,
+   "focus": 0.35183,
    "verdict": "bites",
    "subject": 0.03383,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "enhanced_kmeans",
    "axis": "cohort",
-   "frame": 0.10369,
-   "focus": 0.26506,
+   "frame": 0.0345,
+   "focus": 0.13876,
    "verdict": "bites",
-   "subject": 0.28184,
+   "subject": 0.00105,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "svm_visualization",
    "axis": "cohort",
-   "frame": 0.09233,
-   "focus": 0.20095,
+   "frame": 0.03214,
+   "focus": 0.17542,
    "verdict": "bites",
-   "subject": 0.43258,
+   "subject": 0.03543,
    "pairs": 10,
-   "twins": [
-    {
-     "a": "block",
-     "b": "skew",
-     "focus": 0.05979
-    }
-   ]
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "random_forest_visualization",
    "axis": "cohort",
-   "frame": 0.09509,
-   "focus": 0.28176,
+   "frame": 0.03227,
+   "focus": 0.1992,
    "verdict": "bites",
-   "subject": 0.50465,
+   "subject": 0.04422,
    "pairs": 10,
-   "twins": [
-    {
-     "a": "braid",
-     "b": "skew",
-     "focus": 0.01805
-    }
-   ]
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "neural_network_visualization",
    "axis": "topology",
-   "frame": 0.03552,
-   "focus": 0.19583,
+   "frame": 0.03555,
+   "focus": 0.19611,
    "verdict": "bites",
-   "subject": 0.01793,
+   "subject": 0.01805,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "neural_networks_vr",
    "axis": "topology",
-   "frame": 0.03488,
-   "focus": 0.1537,
+   "frame": 0.03474,
+   "focus": 0.15218,
    "verdict": "bites",
-   "subject": 0.01836,
+   "subject": 0.01828,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "computer_vision_vr",
    "axis": "detection",
-   "frame": 0.0362,
-   "focus": 0.18442,
+   "frame": 0.03622,
+   "focus": 0.18444,
    "verdict": "bites",
    "subject": 0.01867,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   }
  ]
 }

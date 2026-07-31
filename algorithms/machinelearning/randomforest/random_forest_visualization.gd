@@ -44,11 +44,25 @@ const COLOR_SPECIAL := Color(1.0, 0.85, 0.2)    # Golds for highlights
 #          should be able to make and previously could not.
 #   braid  the 8 m cube filled with eight alternating 1.0 m slabs of the two
 #          classes along x, so every split available to a tree cuts through both
-#          classes at once.
+#          classes at once. The four positive slabs are DRAWN: unshaded green
+#          1.0 x 8.0 x 8.0 m volumes centred at x = -3.5, -1.5, +0.5, +2.5, so
+#          half the cube's projected area is banded and the interleaving is
+#          legible from every capture angle.
 #   skew   95 points of one class through the 8 m cube and 5 of the other in a
 #          single 1.5 m corner: a five-tree majority vote reaches 95 percent by
 #          never once predicting the minority, and the still shows the corner it
-#          wrote off.
+#          wrote off — one unshaded green 1.5 m volume centred on
+#          (+3.25, +3.25, +3.25), the single marked region in an otherwise bare cube.
+#
+# WHY THE TWO ARE DRAWN AND NOT ONLY SAMPLED. braid and skew measured 1.80 percent
+# apart — a twin. Both spend the same 100 spheres of radius 0.06 m across the same
+# 8 m cube, and a 0.12 m sphere is about two pixels once the critic crops to the
+# artifact's own box and resizes to 160 x 160. Eight 1.0 m slabs at 12 points each,
+# and five points in a 1.5 m corner, were both below the resolution of the picture
+# that judges them. The volumes above add no data and change no label: they render
+# the region structure the samples already carry, in the artifact's own bounding
+# box, at a mass that survives the downsample. `block` — the shipped value — draws
+# no volume at all and is byte-for-byte the render it always was.
 #
 # Reachable by setting the @export BEFORE _ready() — _ready() calls _build_all()
 # synchronously and the whole 8 m cube of points is in frame at once. The trees
@@ -74,6 +88,14 @@ const BRAID_SLABS: int = 8              # 8 slabs across 8 m = 1.0 m each
 const SKEW_CORNER: float = 1.5          # edge of the corner the vote writes off
 const SKEW_MAJORITY: int = 95
 const SKEW_MINORITY: int = 5
+
+# --- Cohort region volumes ---------------------------------------------------
+# The class regions braid and skew declare, drawn at a size the still can hold.
+# Unshaded on purpose: a headless capture cannot be relied on for lighting, and an
+# unshaded albedo is the same mass in every rig. Alpha keeps the spheres inside
+# readable through the volume, so the scatter is never replaced, only banded.
+const BRAID_SLAB_ALPHA: float = 0.32
+const SKEW_CORNER_ALPHA: float = 0.55
 
 # --- Determinism -------------------------------------------------------------
 # Every draw in this file is seeded from a constant. Two builds of one cohort
@@ -121,6 +143,8 @@ const NODE_LABEL_OUTLINE: int = 2
 # Data structures
 var training_data: Array = []
 var training_labels: Array = []
+# The cohort's region volumes. Empty for block (the shipped look), blobs and rings.
+var _cohort_regions: Array[Node3D] = []
 var feature_names: Array = ["Feature_A", "Feature_B", "Feature_C", "Feature_D"]
 var decision_trees: Array = []
 var bootstrap_samples: Array = []
@@ -486,6 +510,7 @@ func generate_training_data() -> void:
 			_gen_block()
 
 	create_data_visualization()
+	_build_cohort_regions()
 	print("Generated ", training_data.size(), " training samples with ", num_features,
 		" features — cohort=", cohort)
 
@@ -609,6 +634,86 @@ func _rand_direction() -> Vector3:
 func _rand_in_ball(radius: float) -> Vector3:
 	var t: float = pow(_rng.randf(), 1.0 / 3.0)
 	return _rand_direction() * radius * t
+
+
+## Draw the class regions the cohort declares. Synchronous, no RNG (so the shipped
+## `block` draw order is untouched), and every volume sits INSIDE the existing 8 m
+## cube so the artifact's AABB — and therefore its auto-grounding — is unchanged.
+## block, blobs and rings build nothing here: block must render exactly as shipped,
+## and blobs and rings already carry their shape in the scatter itself.
+func _build_cohort_regions() -> void:
+	_clear_cohort_regions()
+	match cohort:
+		"braid":
+			_build_braid_slabs()
+		"skew":
+			_build_skew_corner()
+
+
+## The four positive slabs of the braid, as volumes. Slab s spans x from
+## -4 + s to -3 + s; the even slabs carry label 1, so the drawn bands are
+## x in [-4,-3], [-2,-1], [0,1], [2,3] — 1.0 m thick, the full 8.0 m of y and z.
+## Half the cube's projected area is green and half is bare at every angle, which
+## is the claim the value makes: no axis-aligned cut isolates a class.
+func _build_braid_slabs() -> void:
+	var slab_width: float = (CUBE_HALF * 2.0) / float(BRAID_SLABS)
+	var span: float = CUBE_HALF * 2.0
+	for s in range(BRAID_SLABS):
+		if s % 2 != 0:
+			continue
+		var centre_x: float = -CUBE_HALF + (float(s) + 0.5) * slab_width
+		var slab: MeshInstance3D = _make_region(
+			Vector3(slab_width, span, span),
+			Vector3(centre_x, 0.0, 0.0),
+			COLOR_POSITIVE, BRAID_SLAB_ALPHA)
+		slab.name = "Braid_Slab_" + str(s)
+		_own(slab)
+		_cohort_regions.append(slab)
+
+
+## The 1.5 m corner the majority vote writes off, centred at (+3.25, +3.25, +3.25)
+## — the corner's own centre, since it runs from +2.5 to +4.0 on all three axes.
+## Denser than the braid slabs because it is one small mark instead of half a cube.
+func _build_skew_corner() -> void:
+	var centre: float = CUBE_HALF - SKEW_CORNER * 0.5
+	var box: MeshInstance3D = _make_region(
+		Vector3(SKEW_CORNER, SKEW_CORNER, SKEW_CORNER),
+		Vector3(centre, centre, centre),
+		COLOR_POSITIVE, SKEW_CORNER_ALPHA)
+	box.name = "Skew_Written_Off_Corner"
+	_own(box)
+	_cohort_regions.append(box)
+
+
+## One translucent unshaded volume. Shadows off: a region marker must not darken
+## the scatter it is describing.
+func _make_region(size: Vector3, at: Vector3, tint: Color, alpha: float) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = size
+	mi.mesh = box
+
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.albedo_color = Color(tint.r, tint.g, tint.b, alpha)
+	mi.material_override = mat
+
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	mi.position = at
+	return mi
+
+
+## Free exactly the volumes this script made, and drop the ownership record so
+## _rebuild_now never revisits a corpse — same contract as clear_data_points.
+func _clear_cohort_regions() -> void:
+	for n in _cohort_regions:
+		if is_instance_valid(n):
+			_owned.erase(n)
+			if n.get_parent() == self:
+				remove_child(n)
+			n.queue_free()
+	_cohort_regions.clear()
 
 func create_data_visualization() -> void:
 	"""Create 3D visualization of training data"""
@@ -1115,6 +1220,8 @@ func _rebuild_now() -> void:
 	bootstrap_samples.clear()
 	tree_visualizations.clear()
 	data_points.clear()
+	# Dropped, not freed: the loop below owns every one of these already.
+	_cohort_regions.clear()
 
 	for c in _owned:
 		if is_instance_valid(c):

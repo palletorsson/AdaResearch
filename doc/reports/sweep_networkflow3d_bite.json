@@ -1,343 +1,68 @@
 {
  "sweep": "networkflow3d",
- "peak_changed_pct": 86.968,
- "verdict": "BITES",
+ "peak_changed_pct": 0.586,
+ "subject_pct": 0.46,
+ "verdict": "SUBJECT NOT DETECTED - only 0.46% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": true
+    "bottleneck": "mixed"
    },
    "b": {
-    "bottleneck": "mixed",
-    "gravity_effect": false
+    "bottleneck": "throat"
    },
-   "changed_px": 501952,
-   "changed_pct": 86.903
+   "changed_px": 2661,
+   "changed_pct": 0.461
   },
   {
    "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": true
+    "bottleneck": "mixed"
    },
    "b": {
-    "bottleneck": "throat",
-    "gravity_effect": true
+    "bottleneck": "braid"
    },
-   "changed_px": 501872,
-   "changed_pct": 86.889
+   "changed_px": 1249,
+   "changed_pct": 0.216
   },
   {
    "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": true
+    "bottleneck": "mixed"
    },
    "b": {
-    "bottleneck": "throat",
-    "gravity_effect": false
+    "bottleneck": "severed"
    },
-   "changed_px": 501872,
-   "changed_pct": 86.889
+   "changed_px": 2248,
+   "changed_pct": 0.389
   },
   {
    "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": true
+    "bottleneck": "throat"
    },
    "b": {
-    "bottleneck": "braid",
-    "gravity_effect": true
-   },
-   "changed_px": 501292,
-   "changed_pct": 86.789
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "braid",
-    "gravity_effect": false
-   },
-   "changed_px": 501292,
-   "changed_pct": 86.789
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": true
-   },
-   "changed_px": 502328,
-   "changed_pct": 86.968
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": false
-   },
-   "changed_px": 502297,
-   "changed_pct": 86.963
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "throat",
-    "gravity_effect": true
-   },
-   "changed_px": 2579,
-   "changed_pct": 0.447
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "throat",
-    "gravity_effect": false
-   },
-   "changed_px": 2579,
-   "changed_pct": 0.447
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "braid",
-    "gravity_effect": true
-   },
-   "changed_px": 731,
-   "changed_pct": 0.127
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "braid",
-    "gravity_effect": false
-   },
-   "changed_px": 731,
-   "changed_pct": 0.127
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": true
-   },
-   "changed_px": 2578,
-   "changed_pct": 0.446
-  },
-  {
-   "a": {
-    "bottleneck": "mixed",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": false
-   },
-   "changed_px": 2606,
-   "changed_pct": 0.451
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "throat",
-    "gravity_effect": false
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "braid",
-    "gravity_effect": true
+    "bottleneck": "braid"
    },
    "changed_px": 2682,
    "changed_pct": 0.464
   },
   {
    "a": {
-    "bottleneck": "throat",
-    "gravity_effect": true
+    "bottleneck": "throat"
    },
    "b": {
-    "bottleneck": "braid",
-    "gravity_effect": false
-   },
-   "changed_px": 2682,
-   "changed_pct": 0.464
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": true
+    "bottleneck": "severed"
    },
    "changed_px": 3383,
    "changed_pct": 0.586
   },
   {
    "a": {
-    "bottleneck": "throat",
-    "gravity_effect": true
+    "bottleneck": "braid"
    },
    "b": {
-    "bottleneck": "severed",
-    "gravity_effect": false
-   },
-   "changed_px": 3411,
-   "changed_pct": 0.591
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "braid",
-    "gravity_effect": true
-   },
-   "changed_px": 2682,
-   "changed_pct": 0.464
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "braid",
-    "gravity_effect": false
-   },
-   "changed_px": 2682,
-   "changed_pct": 0.464
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": true
-   },
-   "changed_px": 3383,
-   "changed_pct": 0.586
-  },
-  {
-   "a": {
-    "bottleneck": "throat",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": false
-   },
-   "changed_px": 3411,
-   "changed_pct": 0.591
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "braid",
-    "gravity_effect": false
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": true
+    "bottleneck": "severed"
    },
    "changed_px": 3026,
    "changed_pct": 0.524
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": false
-   },
-   "changed_px": 3054,
-   "changed_pct": 0.529
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": true
-   },
-   "changed_px": 3026,
-   "changed_pct": 0.524
-  },
-  {
-   "a": {
-    "bottleneck": "braid",
-    "gravity_effect": false
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": false
-   },
-   "changed_px": 3054,
-   "changed_pct": 0.529
-  },
-  {
-   "a": {
-    "bottleneck": "severed",
-    "gravity_effect": true
-   },
-   "b": {
-    "bottleneck": "severed",
-    "gravity_effect": false
-   },
-   "changed_px": 21,
-   "changed_pct": 0.004
   }
  ]
 }

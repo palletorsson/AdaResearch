@@ -41,9 +41,12 @@ class_name QueerMorphologySpecimen
 ##            discarded lid are left, and the body is free-standing at 0.22 m
 ##            across with its subsurface scatter at full: the thing outside the
 ##            vitrine is bigger than the thing inside it
-##   clouded  jar and lid stay sealed, but the single body is not built — 90
-##            spheres of 0.012 m fill the full 0.27 m interior in the specimen's
-##            own violet, so the volume is occupied and the individual is gone
+##   clouded  jar and lid stay sealed, but the single body is not built — 160
+##            grains of 0.018 m radius (0.036 m across) fill the full 0.27 m
+##            interior and its full 0.36 m height in the specimen's own violet,
+##            so the volume is occupied and the individual is gone. The grains
+##            are built SOLID and at CLOUD_EMISSION_GAIN so the occupation
+##            actually reads: see _create_suspension.
 ##
 ## Read at the TOP of _ready() before the builders run, so setting the export and
 ## adding to the tree gives the right still on frame 1. Deliberately NOT routed
@@ -65,9 +68,22 @@ const CRACK_LID_OFFSET: float = 0.19   # lid displaced this far +X along the ped
 const CRACK_PROUD: float = 0.05        # specimen standing this far above the cut rim
 const CRACK_FLUID_H: float = 0.28      # shortened fluid column — the meniscus shows
 const ESCAPED_DIAMETER: float = 0.22   # free-standing body, nearly double
-const CLOUD_COUNT: int = 90
-const CLOUD_RADIUS: float = 0.012
+## The suspension. WAS 90 grains of 0.012 m, and `clouded` photographed as the
+## shipped `jarred` look (5.5% apart — a twin): the grains were transparent
+## geometry suspended inside transparent fluid inside transparent glass, three
+## alpha layers of violet-on-green that blend to the same haze whether the violet
+## is one body or ninety crumbs. 160 grains of 0.018 m project 0.163 m² into a
+## 0.27 x 0.36 m column of 0.098 m² — ~81% coverage, against the single body's
+## 0.011 m² disc at mid-jar. Seven times the violet, and it is opaque.
+const CLOUD_COUNT: int = 160
+const CLOUD_RADIUS: float = 0.018
 const CLOUD_SEED: int = 20260729       # fixed — the same suspension every run
+
+## The grains sit behind the fluid's front face and the glass (~0.6 transmission
+## between them), so they are lit through two veils the single body is not judged
+## against. Emission runs at this multiple of the single body's for the occupied
+## volume to carry to a camera outside the jar. 1.0 — no change — everywhere else.
+const CLOUD_EMISSION_GAIN: float = 3.0
 
 ## The museum plate. 0.30 m wide gives a 0.336 x 0.222 m board once TextScreen
 ## adds its 0.018 m bezel; centred at 0.63 it spans y 0.519–0.741, entirely above
@@ -126,6 +142,11 @@ var _control_panel: Node3D
 var _built: bool = false
 var _created: Array[Node] = []
 var _emissive: bool = true
+
+# Emission multiplier for the specimen material. 1.0 for every value that builds
+# a single body — so `jarred`, `cracked` and `escaped` keep the exact energies
+# they shipped with. Only `clouded` raises it, in _create_suspension.
+var _emission_gain: float = 1.0
 
 # State descriptions for different parameter regions
 const STATES = {
@@ -213,6 +234,7 @@ func _ready():
 ## path waits for physics or for a deferred call.
 func _build_all() -> void:
 	becoming = _pick_axis(becoming, BECOMINGS, "jarred")
+	_emission_gain = 1.0          # only _create_suspension raises it
 	_create_jar()
 	_create_fluid()
 	_create_specimen()
@@ -413,14 +435,28 @@ func _create_specimen():
 
 ## The violet the specimen is made of. Shared by the single body and by the
 ## `clouded` suspension, so λ's hue shift and φ's scatter still drive both.
-func _make_specimen_material() -> StandardMaterial3D:
+##
+## `solid` is for the suspension only. A body suspended in the fluid can afford
+## to be alpha-blended — there is one of it, and its silhouette is the picture.
+## A cloud cannot: transparent grains inside the transparent fluid inside the
+## transparent glass are sorted per-object (every AABB centre sits at the same
+## point, y≈0.2) and blend down to the same violet-green wash the single body
+## makes. Opaque grains draw in the opaque pass instead, before anything
+## transparent, and depth-reject the fluid's rear face — so the occupation is
+## covered by one fluid layer and one glass layer rather than by four.
+## Default `false` keeps every single-body value on the exact shipped material.
+func _make_specimen_material(solid: bool = false) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = specimen_color
-	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	if solid:
+		m.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+		m.cull_mode = BaseMaterial3D.CULL_BACK
+	else:
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		m.cull_mode = BaseMaterial3D.CULL_DISABLED
 	m.emission_enabled = _emissive
 	m.emission = specimen_color
-	m.emission_energy_multiplier = 0.2 if _emissive else 0.0
+	m.emission_energy_multiplier = (0.2 * _emission_gain) if _emissive else 0.0
 	m.roughness = 0.3
 	m.metallic = 0.1
 	m.subsurf_scatter_enabled = true
@@ -428,18 +464,25 @@ func _make_specimen_material() -> StandardMaterial3D:
 	return m
 
 
-## `clouded` — the body has stopped being one body. CLOUD_COUNT spheres of
-## CLOUD_RADIUS fill the full 0.27 m interior width of the sealed jar in the
-## specimen's own violet: the volume is still occupied, the individual is gone.
-## One MultiMesh, one fixed seed — the same suspension every run.
+## `clouded` — the body has stopped being one body. CLOUD_COUNT grains of
+## CLOUD_RADIUS fill the full 0.27 m interior width of the sealed jar, and its
+## full 0.36 m of interior height, in the specimen's own violet: the volume is
+## still occupied, the individual is gone. One MultiMesh, one fixed seed — the
+## same suspension every run.
+##
+## Solid and at CLOUD_EMISSION_GAIN. The grains stand where the fluid stands, so
+## unless they are opaque and lit hard enough to carry through the glass, "the
+## volume is occupied" is a claim the render does not make: the jar just looks
+## full of fluid, which is what `jarred` looks like too.
 func _create_suspension() -> void:
-	_specimen_material = _make_specimen_material()
+	_emission_gain = CLOUD_EMISSION_GAIN
+	_specimen_material = _make_specimen_material(true)
 
 	var sphere := SphereMesh.new()
 	sphere.radius = CLOUD_RADIUS
 	sphere.height = CLOUD_RADIUS * 2.0
-	sphere.radial_segments = 8
-	sphere.rings = 6
+	sphere.radial_segments = 10
+	sphere.rings = 8
 
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
@@ -624,7 +667,9 @@ func _apply_lambda():
 		_specimen_material.albedo_color = color
 		_specimen_material.emission = color
 		_specimen_material.emission_enabled = _emissive
-		_specimen_material.emission_energy_multiplier = lerpf(0.1, 0.4, lambda) if _emissive else 0.0
+		# _emission_gain is 1.0 for every value that builds a single body.
+		_specimen_material.emission_energy_multiplier = \
+			(lerpf(0.1, 0.4, lambda) * _emission_gain) if _emissive else 0.0
 
 	_update_state_label()
 
@@ -791,7 +836,8 @@ func _apply_emissive() -> void:
 	if not _specimen_material:
 		return
 	_specimen_material.emission_enabled = _emissive
-	_specimen_material.emission_energy_multiplier = lerpf(0.1, 0.4, lambda) if _emissive else 0.0
+	_specimen_material.emission_energy_multiplier = \
+		(lerpf(0.1, 0.4, lambda) * _emission_gain) if _emissive else 0.0
 
 
 ## Synchronous rebuild. Frees ONLY the nodes this script added as direct

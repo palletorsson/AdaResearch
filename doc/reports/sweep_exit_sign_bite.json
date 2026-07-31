@@ -1,343 +1,68 @@
 {
  "sweep": "exit_sign",
  "peak_changed_pct": 13.366,
+ "subject_pct": 10.27,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "support": "none",
-    "width": 0.225
+    "support": "none"
    },
    "b": {
-    "support": "none",
-    "width": 0.45
+    "support": "bracket"
    },
-   "changed_px": 28008,
-   "changed_pct": 4.849
+   "changed_px": 6642,
+   "changed_pct": 1.15
   },
   {
    "a": {
-    "support": "none",
-    "width": 0.225
+    "support": "none"
    },
    "b": {
-    "support": "bracket",
-    "width": 0.225
+    "support": "frame"
    },
-   "changed_px": 8531,
-   "changed_pct": 1.477
-  },
-  {
-   "a": {
-    "support": "none",
-    "width": 0.225
-   },
-   "b": {
-    "support": "bracket",
-    "width": 0.45
-   },
-   "changed_px": 27175,
-   "changed_pct": 4.705
-  },
-  {
-   "a": {
-    "support": "none",
-    "width": 0.225
-   },
-   "b": {
-    "support": "frame",
-    "width": 0.225
-   },
-   "changed_px": 40603,
-   "changed_pct": 7.03
-  },
-  {
-   "a": {
-    "support": "none",
-    "width": 0.225
-   },
-   "b": {
-    "support": "frame",
-    "width": 0.45
-   },
-   "changed_px": 37517,
-   "changed_pct": 6.495
-  },
-  {
-   "a": {
-    "support": "none",
-    "width": 0.225
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.225
-   },
-   "changed_px": 54147,
-   "changed_pct": 9.374
-  },
-  {
-   "a": {
-    "support": "none",
-    "width": 0.225
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.45
-   },
-   "changed_px": 54190,
-   "changed_pct": 9.382
-  },
-  {
-   "a": {
-    "support": "none",
-    "width": 0.45
-   },
-   "b": {
-    "support": "bracket",
-    "width": 0.225
-   },
-   "changed_px": 30178,
-   "changed_pct": 5.225
-  },
-  {
-   "a": {
-    "support": "none",
-    "width": 0.45
-   },
-   "b": {
-    "support": "bracket",
-    "width": 0.45
-   },
-   "changed_px": 6637,
-   "changed_pct": 1.149
-  },
-  {
-   "a": {
-    "support": "none",
-    "width": 0.45
-   },
-   "b": {
-    "support": "frame",
-    "width": 0.225
-   },
-   "changed_px": 51508,
-   "changed_pct": 8.918
-  },
-  {
-   "a": {
-    "support": "none",
-    "width": 0.45
-   },
-   "b": {
-    "support": "frame",
-    "width": 0.45
-   },
-   "changed_px": 28378,
+   "changed_px": 28379,
    "changed_pct": 4.913
   },
   {
    "a": {
-    "support": "none",
-    "width": 0.45
+    "support": "none"
    },
    "b": {
-    "support": "gantry",
-    "width": 0.225
+    "support": "gantry"
    },
-   "changed_px": 68672,
-   "changed_pct": 11.889
+   "changed_px": 71166,
+   "changed_pct": 12.321
   },
   {
    "a": {
-    "support": "none",
-    "width": 0.45
+    "support": "bracket"
    },
    "b": {
-    "support": "gantry",
-    "width": 0.45
+    "support": "frame"
    },
-   "changed_px": 71162,
-   "changed_pct": 12.32
-  },
-  {
-   "a": {
-    "support": "bracket",
-    "width": 0.225
-   },
-   "b": {
-    "support": "bracket",
-    "width": 0.45
-   },
-   "changed_px": 29216,
-   "changed_pct": 5.058
-  },
-  {
-   "a": {
-    "support": "bracket",
-    "width": 0.225
-   },
-   "b": {
-    "support": "frame",
-    "width": 0.225
-   },
-   "changed_px": 38634,
-   "changed_pct": 6.689
-  },
-  {
-   "a": {
-    "support": "bracket",
-    "width": 0.225
-   },
-   "b": {
-    "support": "frame",
-    "width": 0.45
-   },
-   "changed_px": 39331,
-   "changed_pct": 6.809
-  },
-  {
-   "a": {
-    "support": "bracket",
-    "width": 0.225
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.225
-   },
-   "changed_px": 55280,
-   "changed_pct": 9.571
-  },
-  {
-   "a": {
-    "support": "bracket",
-    "width": 0.225
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.45
-   },
-   "changed_px": 54972,
-   "changed_pct": 9.517
-  },
-  {
-   "a": {
-    "support": "bracket",
-    "width": 0.45
-   },
-   "b": {
-    "support": "frame",
-    "width": 0.225
-   },
-   "changed_px": 50515,
-   "changed_pct": 8.746
-  },
-  {
-   "a": {
-    "support": "bracket",
-    "width": 0.45
-   },
-   "b": {
-    "support": "frame",
-    "width": 0.45
-   },
-   "changed_px": 28199,
+   "changed_px": 28198,
    "changed_pct": 4.882
   },
   {
    "a": {
-    "support": "bracket",
-    "width": 0.45
+    "support": "bracket"
    },
    "b": {
-    "support": "gantry",
-    "width": 0.225
+    "support": "gantry"
    },
-   "changed_px": 67677,
-   "changed_pct": 11.717
-  },
-  {
-   "a": {
-    "support": "bracket",
-    "width": 0.45
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.45
-   },
-   "changed_px": 69892,
+   "changed_px": 69891,
    "changed_pct": 12.1
   },
   {
    "a": {
-    "support": "frame",
-    "width": 0.225
+    "support": "frame"
    },
    "b": {
-    "support": "frame",
-    "width": 0.45
-   },
-   "changed_px": 49144,
-   "changed_pct": 8.508
-  },
-  {
-   "a": {
-    "support": "frame",
-    "width": 0.225
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.225
-   },
-   "changed_px": 76515,
-   "changed_pct": 13.247
-  },
-  {
-   "a": {
-    "support": "frame",
-    "width": 0.225
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.45
-   },
-   "changed_px": 74512,
-   "changed_pct": 12.9
-  },
-  {
-   "a": {
-    "support": "frame",
-    "width": 0.45
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.225
-   },
-   "changed_px": 74401,
-   "changed_pct": 12.881
-  },
-  {
-   "a": {
-    "support": "frame",
-    "width": 0.45
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.45
+    "support": "gantry"
    },
    "changed_px": 77203,
    "changed_pct": 13.366
-  },
-  {
-   "a": {
-    "support": "gantry",
-    "width": 0.225
-   },
-   "b": {
-    "support": "gantry",
-    "width": 0.45
-   },
-   "changed_px": 18346,
-   "changed_pct": 3.176
   }
  ]
 }

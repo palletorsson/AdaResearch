@@ -1,343 +1,68 @@
 {
  "sweep": "KonigsbergBridge",
- "peak_changed_pct": 28.711,
+ "peak_changed_pct": 7.882,
+ "subject_pct": 7.784,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "parity": "blocked",
-    "historical_mode": true
+    "parity": "blocked"
    },
    "b": {
-    "parity": "blocked",
-    "historical_mode": false
+    "parity": "walk"
    },
-   "changed_px": 165797,
-   "changed_pct": 28.704
+   "changed_px": 40250,
+   "changed_pct": 6.968
   },
   {
    "a": {
-    "parity": "blocked",
-    "historical_mode": true
+    "parity": "blocked"
    },
    "b": {
-    "parity": "walk",
-    "historical_mode": true
+    "parity": "circuit"
    },
-   "changed_px": 160246,
-   "changed_pct": 27.743
+   "changed_px": 45529,
+   "changed_pct": 7.882
   },
   {
    "a": {
-    "parity": "blocked",
-    "historical_mode": true
+    "parity": "blocked"
    },
    "b": {
-    "parity": "walk",
-    "historical_mode": false
+    "parity": "severed"
    },
-   "changed_px": 165833,
-   "changed_pct": 28.711
+   "changed_px": 43166,
+   "changed_pct": 7.473
   },
   {
    "a": {
-    "parity": "blocked",
-    "historical_mode": true
+    "parity": "walk"
    },
    "b": {
-    "parity": "circuit",
-    "historical_mode": true
+    "parity": "circuit"
    },
-   "changed_px": 160283,
-   "changed_pct": 27.75
+   "changed_px": 23455,
+   "changed_pct": 4.061
   },
   {
    "a": {
-    "parity": "blocked",
-    "historical_mode": true
+    "parity": "walk"
    },
    "b": {
-    "parity": "circuit",
-    "historical_mode": false
-   },
-   "changed_px": 165783,
-   "changed_pct": 28.702
-  },
-  {
-   "a": {
-    "parity": "blocked",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": true
-   },
-   "changed_px": 163162,
-   "changed_pct": 28.248
-  },
-  {
-   "a": {
-    "parity": "blocked",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": false
-   },
-   "changed_px": 165139,
-   "changed_pct": 28.591
-  },
-  {
-   "a": {
-    "parity": "blocked",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "walk",
-    "historical_mode": true
-   },
-   "changed_px": 33003,
-   "changed_pct": 5.714
-  },
-  {
-   "a": {
-    "parity": "blocked",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "walk",
-    "historical_mode": false
-   },
-   "changed_px": 2757,
-   "changed_pct": 0.477
-  },
-  {
-   "a": {
-    "parity": "blocked",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "circuit",
-    "historical_mode": true
-   },
-   "changed_px": 33852,
-   "changed_pct": 5.861
-  },
-  {
-   "a": {
-    "parity": "blocked",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "circuit",
-    "historical_mode": false
-   },
-   "changed_px": 5585,
-   "changed_pct": 0.967
-  },
-  {
-   "a": {
-    "parity": "blocked",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": true
-   },
-   "changed_px": 30886,
-   "changed_pct": 5.347
-  },
-  {
-   "a": {
-    "parity": "blocked",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": false
-   },
-   "changed_px": 7775,
-   "changed_pct": 1.346
-  },
-  {
-   "a": {
-    "parity": "walk",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "walk",
-    "historical_mode": false
-   },
-   "changed_px": 33178,
-   "changed_pct": 5.744
-  },
-  {
-   "a": {
-    "parity": "walk",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "circuit",
-    "historical_mode": true
-   },
-   "changed_px": 3932,
-   "changed_pct": 0.681
-  },
-  {
-   "a": {
-    "parity": "walk",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "circuit",
-    "historical_mode": false
-   },
-   "changed_px": 33698,
-   "changed_pct": 5.834
-  },
-  {
-   "a": {
-    "parity": "walk",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": true
+    "parity": "severed"
    },
    "changed_px": 8598,
    "changed_pct": 1.489
   },
   {
    "a": {
-    "parity": "walk",
-    "historical_mode": true
+    "parity": "circuit"
    },
    "b": {
-    "parity": "severed",
-    "historical_mode": false
+    "parity": "severed"
    },
-   "changed_px": 32011,
-   "changed_pct": 5.542
-  },
-  {
-   "a": {
-    "parity": "walk",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "circuit",
-    "historical_mode": true
-   },
-   "changed_px": 33886,
-   "changed_pct": 5.867
-  },
-  {
-   "a": {
-    "parity": "walk",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "circuit",
-    "historical_mode": false
-   },
-   "changed_px": 2834,
-   "changed_pct": 0.491
-  },
-  {
-   "a": {
-    "parity": "walk",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": true
-   },
-   "changed_px": 31113,
-   "changed_pct": 5.387
-  },
-  {
-   "a": {
-    "parity": "walk",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": false
-   },
-   "changed_px": 6735,
-   "changed_pct": 1.166
-  },
-  {
-   "a": {
-    "parity": "circuit",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "circuit",
-    "historical_mode": false
-   },
-   "changed_px": 33345,
-   "changed_pct": 5.773
-  },
-  {
-   "a": {
-    "parity": "circuit",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": true
-   },
-   "changed_px": 8674,
-   "changed_pct": 1.502
-  },
-  {
-   "a": {
-    "parity": "circuit",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": false
-   },
-   "changed_px": 32637,
-   "changed_pct": 5.65
-  },
-  {
-   "a": {
-    "parity": "circuit",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": true
-   },
-   "changed_px": 31544,
-   "changed_pct": 5.461
-  },
-  {
-   "a": {
-    "parity": "circuit",
-    "historical_mode": false
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": false
-   },
-   "changed_px": 6892,
-   "changed_pct": 1.193
-  },
-  {
-   "a": {
-    "parity": "severed",
-    "historical_mode": true
-   },
-   "b": {
-    "parity": "severed",
-    "historical_mode": false
-   },
-   "changed_px": 27407,
-   "changed_pct": 4.745
+   "changed_px": 24096,
+   "changed_pct": 4.172
   }
  ]
 }

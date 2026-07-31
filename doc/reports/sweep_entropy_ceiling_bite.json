@@ -1,0 +1,68 @@
+{
+ "sweep": "entropy_ceiling",
+ "peak_changed_pct": 0.779,
+ "subject_pct": 11.102,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "headroom": "pinned"
+   },
+   "b": {
+    "headroom": "cropped"
+   },
+   "changed_px": 886,
+   "changed_pct": 0.153
+  },
+  {
+   "a": {
+    "headroom": "pinned"
+   },
+   "b": {
+    "headroom": "raised"
+   },
+   "changed_px": 4457,
+   "changed_pct": 0.772
+  },
+  {
+   "a": {
+    "headroom": "pinned"
+   },
+   "b": {
+    "headroom": "smooth"
+   },
+   "changed_px": 4220,
+   "changed_pct": 0.731
+  },
+  {
+   "a": {
+    "headroom": "cropped"
+   },
+   "b": {
+    "headroom": "raised"
+   },
+   "changed_px": 3682,
+   "changed_pct": 0.637
+  },
+  {
+   "a": {
+    "headroom": "cropped"
+   },
+   "b": {
+    "headroom": "smooth"
+   },
+   "changed_px": 3790,
+   "changed_pct": 0.656
+  },
+  {
+   "a": {
+    "headroom": "raised"
+   },
+   "b": {
+    "headroom": "smooth"
+   },
+   "changed_px": 4502,
+   "changed_pct": 0.779
+  }
+ ]
+}

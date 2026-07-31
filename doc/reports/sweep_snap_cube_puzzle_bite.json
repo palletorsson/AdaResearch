@@ -1,0 +1,68 @@
+{
+ "sweep": "snap_cube_puzzle",
+ "peak_changed_pct": 7.717,
+ "subject_pct": 8.262,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "solid": "loose"
+   },
+   "b": {
+    "solid": "closed"
+   },
+   "changed_px": 43432,
+   "changed_pct": 7.519
+  },
+  {
+   "a": {
+    "solid": "loose"
+   },
+   "b": {
+    "solid": "scattered"
+   },
+   "changed_px": 44572,
+   "changed_pct": 7.717
+  },
+  {
+   "a": {
+    "solid": "loose"
+   },
+   "b": {
+    "solid": "short"
+   },
+   "changed_px": 43320,
+   "changed_pct": 7.5
+  },
+  {
+   "a": {
+    "solid": "closed"
+   },
+   "b": {
+    "solid": "scattered"
+   },
+   "changed_px": 13071,
+   "changed_pct": 2.263
+  },
+  {
+   "a": {
+    "solid": "closed"
+   },
+   "b": {
+    "solid": "short"
+   },
+   "changed_px": 1945,
+   "changed_pct": 0.337
+  },
+  {
+   "a": {
+    "solid": "scattered"
+   },
+   "b": {
+    "solid": "short"
+   },
+   "changed_px": 11705,
+   "changed_pct": 2.026
+  }
+ ]
+}

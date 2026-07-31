@@ -1,7 +1,8 @@
 {
  "sweep": "enhanced_kmeans",
- "peak_changed_pct": 27.551,
- "verdict": "BITES",
+ "peak_changed_pct": 0.283,
+ "subject_pct": 0.162,
+ "verdict": "SUBJECT NOT DETECTED - only 0.16% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
@@ -10,8 +11,8 @@
    "b": {
     "cohort": "block"
    },
-   "changed_px": 159054,
-   "changed_pct": 27.537
+   "changed_px": 1306,
+   "changed_pct": 0.226
   },
   {
    "a": {
@@ -20,8 +21,8 @@
    "b": {
     "cohort": "rings"
    },
-   "changed_px": 159072,
-   "changed_pct": 27.54
+   "changed_px": 1322,
+   "changed_pct": 0.229
   },
   {
    "a": {
@@ -30,8 +31,8 @@
    "b": {
     "cohort": "braid"
    },
-   "changed_px": 159137,
-   "changed_pct": 27.551
+   "changed_px": 1387,
+   "changed_pct": 0.24
   },
   {
    "a": {
@@ -40,8 +41,8 @@
    "b": {
     "cohort": "skew"
    },
-   "changed_px": 158975,
-   "changed_pct": 27.523
+   "changed_px": 1225,
+   "changed_pct": 0.212
   },
   {
    "a": {
@@ -50,8 +51,8 @@
    "b": {
     "cohort": "rings"
    },
-   "changed_px": 1557,
-   "changed_pct": 0.27
+   "changed_px": 1554,
+   "changed_pct": 0.269
   },
   {
    "a": {
@@ -60,8 +61,8 @@
    "b": {
     "cohort": "braid"
    },
-   "changed_px": 1638,
-   "changed_pct": 0.284
+   "changed_px": 1632,
+   "changed_pct": 0.283
   },
   {
    "a": {
@@ -70,7 +71,7 @@
    "b": {
     "cohort": "skew"
    },
-   "changed_px": 1452,
+   "changed_px": 1448,
    "changed_pct": 0.251
   },
   {

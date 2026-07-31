@@ -11,133 +11,140 @@
    "artifact": "graphspace",
    "axis": "siting",
    "frame": 0.1526,
-   "focus": 0.37867,
+   "focus": 0.37866,
    "verdict": "bites",
    "subject": 0.87418,
    "pairs": 10,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "KonigsbergBridge",
    "axis": "parity",
-   "frame": 0.06974,
-   "focus": 0.19727,
+   "frame": 0.03445,
+   "focus": 0.15266,
    "verdict": "bites",
-   "subject": 0.23316,
+   "subject": 0.02918,
    "pairs": 6,
-   "twins": [
-    {
-     "a": "circuit",
-     "b": "walk",
-     "focus": 0.05027
-    }
-   ]
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "pathfinding3d",
    "axis": "frontier",
-   "frame": 0.14227,
-   "focus": 0.369,
+   "frame": 0.10326,
+   "focus": 0.30177,
    "verdict": "bites",
-   "subject": 0.32434,
+   "subject": 0.14055,
    "pairs": 6,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "rhizomatic_structure",
    "axis": "mutuality",
-   "frame": 0.03591,
-   "focus": 0.13418,
+   "frame": 0.03593,
+   "focus": 0.13423,
    "verdict": "bites",
    "subject": 0.01324,
    "pairs": 6,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "networkflow3d",
    "axis": "bottleneck",
-   "frame": 0.04403,
-   "focus": 0.1804,
-   "verdict": "bites",
-   "subject": 0.87203,
+   "frame": 0.03035,
+   "focus": 0.0869,
+   "verdict": "WEAK",
+   "subject": 0.0043,
    "pairs": 6,
-   "twins": []
-  },
-  {
-   "artifact": "topological_sort",
-   "axis": "precedence",
-   "frame": 0.04611,
-   "focus": 0.23423,
-   "verdict": "bites",
-   "subject": 0.02035,
-   "pairs": 10,
-   "twins": []
-  },
-  {
-   "artifact": "tarjan_algorithm",
-   "axis": "mutuality",
-   "frame": 0.06671,
-   "focus": 0.30821,
-   "verdict": "bites",
-   "subject": 0.01648,
-   "pairs": 6,
-   "twins": []
-  },
-  {
-   "artifact": "kosaraju_algorithm",
-   "axis": "mutuality",
-   "frame": 0.06328,
-   "focus": 0.29825,
-   "verdict": "bites",
-   "subject": 0.01762,
-   "pairs": 6,
-   "twins": []
-  },
-  {
-   "artifact": "mst_visualization",
-   "axis": "backbone",
-   "frame": 0.13731,
-   "focus": 0.168,
-   "verdict": "bites",
-   "subject": 0.65422,
-   "pairs": 6,
-   "twins": []
-  },
-  {
-   "artifact": "karger_algorithm",
-   "axis": "bottleneck",
-   "frame": 0.0722,
-   "focus": 0.38927,
-   "verdict": "bites",
-   "subject": 0.03293,
-   "pairs": 6,
-   "twins": [
+   "twins": [],
+   "colour_only": [
     {
-     "a": "severed",
-     "b": "throat",
-     "focus": 0.04483
+     "a": "braid",
+     "b": "mixed",
+     "focus": 0.05631,
+     "rgb": 0.12383
     }
    ]
   },
   {
+   "artifact": "topological_sort",
+   "axis": "precedence",
+   "frame": 0.04767,
+   "focus": 0.2441,
+   "verdict": "bites",
+   "subject": 0.02656,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "tarjan_algorithm",
+   "axis": "mutuality",
+   "frame": 0.06236,
+   "focus": 0.29592,
+   "verdict": "bites",
+   "subject": 0.01625,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "kosaraju_algorithm",
+   "axis": "mutuality",
+   "frame": 0.05383,
+   "focus": 0.25456,
+   "verdict": "bites",
+   "subject": 0.01891,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "mst_visualization",
+   "axis": "backbone",
+   "frame": 0.02945,
+   "focus": 0.07472,
+   "verdict": "WEAK",
+   "subject": 0.00016,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "karger_algorithm",
+   "axis": "bottleneck",
+   "frame": 0.07717,
+   "focus": 0.46812,
+   "verdict": "bites",
+   "subject": 0.03363,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
    "artifact": "push_relabel_algorithm",
    "axis": "relief",
-   "frame": 0.09487,
-   "focus": 0.32738,
+   "frame": 0.09334,
+   "focus": 0.33854,
    "verdict": "bites",
    "subject": 0.04063,
    "pairs": 6,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "edmonds_algorithm",
    "axis": "coupling",
-   "frame": 0.05603,
-   "focus": 0.26854,
+   "frame": 0.0521,
+   "focus": 0.25722,
    "verdict": "bites",
    "subject": 0.01391,
    "pairs": 6,
-   "twins": []
+   "twins": [],
+   "colour_only": []
   }
  ]
 }

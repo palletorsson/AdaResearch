@@ -1,21 +1,68 @@
 {
  "sweep": "push_relabel_algorithm",
- "peak_changed_pct": 6.356,
+ "peak_changed_pct": 6.179,
+ "subject_pct": 4.273,
  "verdict": "BITES",
  "variants": [
   {
-   "params": {
-    "relief": "scarp"
+   "a": {
+    "relief": "flat"
    },
-   "changed_px": 27092,
-   "changed_pct": 4.69
+   "b": {
+    "relief": "terraced"
+   },
+   "changed_px": 28556,
+   "changed_pct": 4.944
   },
   {
-   "params": {
+   "a": {
+    "relief": "flat"
+   },
+   "b": {
+    "relief": "scarp"
+   },
+   "changed_px": 23208,
+   "changed_pct": 4.018
+  },
+  {
+   "a": {
+    "relief": "flat"
+   },
+   "b": {
     "relief": "shaft"
    },
-   "changed_px": 36711,
-   "changed_pct": 6.356
+   "changed_px": 26032,
+   "changed_pct": 4.507
+  },
+  {
+   "a": {
+    "relief": "terraced"
+   },
+   "b": {
+    "relief": "scarp"
+   },
+   "changed_px": 26100,
+   "changed_pct": 4.519
+  },
+  {
+   "a": {
+    "relief": "terraced"
+   },
+   "b": {
+    "relief": "shaft"
+   },
+   "changed_px": 35691,
+   "changed_pct": 6.179
+  },
+  {
+   "a": {
+    "relief": "scarp"
+   },
+   "b": {
+    "relief": "shaft"
+   },
+   "changed_px": 31412,
+   "changed_pct": 5.438
   }
  ]
 }

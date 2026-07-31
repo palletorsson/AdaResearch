@@ -1,6 +1,7 @@
 {
  "sweep": "lab_room",
  "peak_changed_pct": 10.177,
+ "subject_pct": 10.365,
  "verdict": "BITES",
  "variants": [
   {
@@ -12,8 +13,32 @@
     "premises": "chamber",
     "witness": "none"
    },
-   "changed_px": 35756,
-   "changed_pct": 6.19
+   "changed_px": 35887,
+   "changed_pct": 6.213
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "changed_px": 41865,
+   "changed_pct": 7.248
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "changed_px": 30661,
+   "changed_pct": 5.308
   },
   {
    "a": {
@@ -24,7 +49,7 @@
     "premises": "workshop",
     "witness": "pane"
    },
-   "changed_px": 44125,
+   "changed_px": 44122,
    "changed_pct": 7.639
   },
   {
@@ -36,8 +61,32 @@
     "premises": "workshop",
     "witness": "none"
    },
-   "changed_px": 44291,
-   "changed_pct": 7.668
+   "changed_px": 44286,
+   "changed_pct": 7.667
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "changed_px": 46357,
+   "changed_pct": 8.026
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "changed_px": 43305,
+   "changed_pct": 7.497
   },
   {
    "a": {
@@ -48,7 +97,7 @@
     "premises": "theatre",
     "witness": "pane"
    },
-   "changed_px": 56280,
+   "changed_px": 56284,
    "changed_pct": 9.744
   },
   {
@@ -60,8 +109,32 @@
     "premises": "theatre",
     "witness": "none"
    },
-   "changed_px": 56354,
+   "changed_px": 56357,
    "changed_pct": 9.757
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 57752,
+   "changed_pct": 9.999
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 55081,
+   "changed_pct": 9.536
   },
   {
    "a": {
@@ -72,7 +145,7 @@
     "premises": "ruin",
     "witness": "pane"
    },
-   "changed_px": 58780,
+   "changed_px": 58781,
    "changed_pct": 10.177
   },
   {
@@ -86,6 +159,54 @@
    },
    "changed_px": 58553,
    "changed_pct": 10.137
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 58746,
+   "changed_pct": 10.171
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 57512,
+   "changed_pct": 9.957
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "changed_px": 22545,
+   "changed_pct": 3.903
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "changed_px": 8021,
+   "changed_pct": 1.389
   },
   {
    "a": {
@@ -117,6 +238,30 @@
     "witness": "none"
    },
    "b": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "changed_px": 46063,
+   "changed_pct": 7.975
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "changed_px": 44142,
+   "changed_pct": 7.642
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "none"
+   },
+   "b": {
     "premises": "theatre",
     "witness": "pane"
    },
@@ -134,6 +279,30 @@
    },
    "changed_px": 43101,
    "changed_pct": 7.462
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 46096,
+   "changed_pct": 7.981
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 43081,
+   "changed_pct": 7.459
   },
   {
    "a": {
@@ -161,6 +330,330 @@
   },
   {
    "a": {
+    "premises": "chamber",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 45411,
+   "changed_pct": 7.862
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 43296,
+   "changed_pct": 7.496
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "changed_px": 26373,
+   "changed_pct": 4.566
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "pane"
+   },
+   "changed_px": 46291,
+   "changed_pct": 8.014
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "none"
+   },
+   "changed_px": 46291,
+   "changed_pct": 8.014
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "changed_px": 31355,
+   "changed_pct": 5.428
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "changed_px": 46381,
+   "changed_pct": 8.03
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "pane"
+   },
+   "changed_px": 45826,
+   "changed_pct": 7.934
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "none"
+   },
+   "changed_px": 45958,
+   "changed_pct": 7.957
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 30147,
+   "changed_pct": 5.219
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 45921,
+   "changed_pct": 7.95
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "pane"
+   },
+   "changed_px": 44975,
+   "changed_pct": 7.787
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "none"
+   },
+   "changed_px": 45798,
+   "changed_pct": 7.929
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 30791,
+   "changed_pct": 5.331
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 45862,
+   "changed_pct": 7.94
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "pane"
+   },
+   "changed_px": 43905,
+   "changed_pct": 7.601
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "none"
+   },
+   "changed_px": 43896,
+   "changed_pct": 7.6
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "changed_px": 46381,
+   "changed_pct": 8.03
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "changed_px": 42228,
+   "changed_pct": 7.311
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "pane"
+   },
+   "changed_px": 42982,
+   "changed_pct": 7.441
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "none"
+   },
+   "changed_px": 43099,
+   "changed_pct": 7.462
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 46482,
+   "changed_pct": 8.047
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 41569,
+   "changed_pct": 7.197
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "pane"
+   },
+   "changed_px": 42726,
+   "changed_pct": 7.397
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "none"
+   },
+   "changed_px": 43194,
+   "changed_pct": 7.478
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 45884,
+   "changed_pct": 7.944
+  },
+  {
+   "a": {
+    "premises": "chamber",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 42087,
+   "changed_pct": 7.287
+  },
+  {
+   "a": {
     "premises": "workshop",
     "witness": "pane"
    },
@@ -170,6 +663,30 @@
    },
    "changed_px": 19913,
    "changed_pct": 3.448
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "changed_px": 32965,
+   "changed_pct": 5.707
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "changed_px": 20644,
+   "changed_pct": 3.574
   },
   {
    "a": {
@@ -201,6 +718,30 @@
     "witness": "pane"
    },
    "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 46221,
+   "changed_pct": 8.002
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 42271,
+   "changed_pct": 7.318
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "pane"
+   },
+   "b": {
     "premises": "ruin",
     "witness": "pane"
    },
@@ -218,6 +759,54 @@
    },
    "changed_px": 46666,
    "changed_pct": 8.079
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 48209,
+   "changed_pct": 8.346
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 46597,
+   "changed_pct": 8.067
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "changed_px": 23930,
+   "changed_pct": 4.143
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "changed_px": 7117,
+   "changed_pct": 1.232
   },
   {
    "a": {
@@ -249,6 +838,30 @@
     "witness": "none"
    },
    "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 46141,
+   "changed_pct": 7.988
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 43727,
+   "changed_pct": 7.57
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "none"
+   },
+   "b": {
     "premises": "ruin",
     "witness": "pane"
    },
@@ -269,6 +882,234 @@
   },
   {
    "a": {
+    "premises": "workshop",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 48350,
+   "changed_pct": 8.371
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 47144,
+   "changed_pct": 8.162
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "changed_px": 26861,
+   "changed_pct": 4.65
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "pane"
+   },
+   "changed_px": 45317,
+   "changed_pct": 7.846
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "none"
+   },
+   "changed_px": 45998,
+   "changed_pct": 7.964
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 31191,
+   "changed_pct": 5.4
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 46075,
+   "changed_pct": 7.977
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "pane"
+   },
+   "changed_px": 47804,
+   "changed_pct": 8.276
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "none"
+   },
+   "changed_px": 47190,
+   "changed_pct": 8.17
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 34081,
+   "changed_pct": 5.9
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 47229,
+   "changed_pct": 8.177
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "pane"
+   },
+   "changed_px": 43938,
+   "changed_pct": 7.607
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "none"
+   },
+   "changed_px": 44019,
+   "changed_pct": 7.621
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 46205,
+   "changed_pct": 7.999
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 43021,
+   "changed_pct": 7.448
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "pane"
+   },
+   "changed_px": 47249,
+   "changed_pct": 8.18
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "none"
+   },
+   "changed_px": 47259,
+   "changed_pct": 8.182
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 48384,
+   "changed_pct": 8.377
+  },
+  {
+   "a": {
+    "premises": "workshop",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 46871,
+   "changed_pct": 8.115
+  },
+  {
+   "a": {
     "premises": "theatre",
     "witness": "pane"
    },
@@ -278,6 +1119,30 @@
    },
    "changed_px": 25271,
    "changed_pct": 4.375
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 37517,
+   "changed_pct": 6.495
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 25085,
+   "changed_pct": 4.343
   },
   {
    "a": {
@@ -306,6 +1171,54 @@
   {
    "a": {
     "premises": "theatre",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 44229,
+   "changed_pct": 7.657
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 41751,
+   "changed_pct": 7.228
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "changed_px": 24110,
+   "changed_pct": 4.174
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 8313,
+   "changed_pct": 1.439
+  },
+  {
+   "a": {
+    "premises": "theatre",
     "witness": "none"
    },
    "b": {
@@ -329,6 +1242,138 @@
   },
   {
    "a": {
+    "premises": "theatre",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 43225,
+   "changed_pct": 7.484
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 40360,
+   "changed_pct": 6.988
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "changed_px": 27398,
+   "changed_pct": 4.743
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "pane"
+   },
+   "changed_px": 45536,
+   "changed_pct": 7.884
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "none"
+   },
+   "changed_px": 43946,
+   "changed_pct": 7.608
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 27378,
+   "changed_pct": 4.74
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 43996,
+   "changed_pct": 7.617
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "pane"
+   },
+   "changed_px": 41879,
+   "changed_pct": 7.251
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "none"
+   },
+   "changed_px": 40179,
+   "changed_pct": 6.956
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 43186,
+   "changed_pct": 7.477
+  },
+  {
+   "a": {
+    "premises": "theatre",
+    "witness": "sash"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 32704,
+   "changed_pct": 5.662
+  },
+  {
+   "a": {
     "premises": "ruin",
     "witness": "pane"
    },
@@ -338,6 +1383,66 @@
    },
    "changed_px": 16034,
    "changed_pct": 2.776
+  },
+  {
+   "a": {
+    "premises": "ruin",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 27676,
+   "changed_pct": 4.792
+  },
+  {
+   "a": {
+    "premises": "ruin",
+    "witness": "pane"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 18733,
+   "changed_pct": 3.243
+  },
+  {
+   "a": {
+    "premises": "ruin",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "changed_px": 21976,
+   "changed_pct": 3.805
+  },
+  {
+   "a": {
+    "premises": "ruin",
+    "witness": "none"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 8084,
+   "changed_pct": 1.4
+  },
+  {
+   "a": {
+    "premises": "ruin",
+    "witness": "port"
+   },
+   "b": {
+    "premises": "ruin",
+    "witness": "sash"
+   },
+   "changed_px": 25360,
+   "changed_pct": 4.391
   }
  ]
 }
