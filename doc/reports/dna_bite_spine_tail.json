@@ -1,0 +1,157 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "spine-tail-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "lambda_slider",
+   "axis": "calibration",
+   "frame": 0.03166,
+   "focus": 0.37616,
+   "verdict": "bites",
+   "subject": 0.11648,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "phi_slider",
+   "axis": "calibration",
+   "frame": 0.0756,
+   "focus": 0.61595,
+   "verdict": "bites",
+   "subject": 0.46105,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "qfep_formula_3d",
+   "axis": "emphasis",
+   "frame": 0.01141,
+   "focus": 0.07138,
+   "verdict": "WEAK",
+   "subject": 0.03828,
+   "pairs": 24,
+   "twins": [
+    {
+     "a": "QFE",
+     "b": "lambda",
+     "focus": 0.0214,
+     "rgb": 0.03036
+    },
+    {
+     "a": "lambda",
+     "b": "none",
+     "focus": 0.02473,
+     "rgb": 0.03389
+    },
+    {
+     "a": "F",
+     "b": "QFE",
+     "focus": 0.02711,
+     "rgb": 0.03548
+    },
+    {
+     "a": "QFE",
+     "b": "none",
+     "focus": 0.02861,
+     "rgb": 0.03681
+    },
+    {
+     "a": "QFE",
+     "b": "lambda",
+     "focus": 0.03852,
+     "rgb": 0.0508
+    },
+    {
+     "a": "F",
+     "b": "none",
+     "focus": 0.03862,
+     "rgb": 0.04924
+    },
+    {
+     "a": "F",
+     "b": "none",
+     "focus": 0.04487,
+     "rgb": 0.05599
+    },
+    {
+     "a": "F",
+     "b": "lambda",
+     "focus": 0.04541,
+     "rgb": 0.05921
+    }
+   ],
+   "colour_only": [
+    {
+     "a": "QFE",
+     "b": "lambda",
+     "focus": 0.05202,
+     "rgb": 0.07336
+    },
+    {
+     "a": "QFE",
+     "b": "lambda",
+     "focus": 0.05583,
+     "rgb": 0.07381
+    }
+   ]
+  },
+  {
+   "artifact": "qfep_formula_3d",
+   "axis": "posture",
+   "frame": 0.03217,
+   "focus": 0.27004,
+   "verdict": "bites",
+   "subject": 0.03828,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "schrodinger_box",
+   "axis": "remainder",
+   "frame": 0.08562,
+   "focus": 0.44518,
+   "verdict": "bites",
+   "subject": 0.14695,
+   "pairs": 30,
+   "twins": [
+    {
+     "a": "core",
+     "b": "seam",
+     "focus": 0.03723,
+     "rgb": 0.04675
+    }
+   ],
+   "colour_only": []
+  },
+  {
+   "artifact": "schrodinger_box",
+   "axis": "vantage",
+   "frame": 0.13141,
+   "focus": 0.42227,
+   "verdict": "bites",
+   "subject": 0.14695,
+   "pairs": 15,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "rhizomatic_structure",
+   "axis": "mutuality",
+   "frame": 0.03591,
+   "focus": 0.13417,
+   "verdict": "bites",
+   "subject": 0.01324,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  }
+ ]
+}

@@ -30,26 +30,21 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from check_dna_declarations import check_token  # noqa: E402
+from check_dna_declarations import check_token, registry  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
 ENC = REPO.parent / "ada_encyclopedia" / "public"
 SWEEP_OUT = REPO / "ada_run" / "sweep"
 
 
-def registry() -> dict:
-    out: dict = {}
-    for rp in (REPO / "commons" / "artifacts" / "registry").glob("*.json"):
-        try:
-            data = json.loads(rp.read_text(encoding="utf-8"))
-        except Exception:
-            continue
-        arts = data.get("artifacts", data) if isinstance(data, dict) else data
-        if isinstance(arts, dict):
-            for tok, e in arts.items():
-                if isinstance(e, dict):
-                    out[tok] = e
-    return out
+# registry() is IMPORTED, not redefined. A lookup name can appear in more than one file
+# under commons/artifacts/registry, and not all of them are artifact registries —
+# substrate_vectors.json is a feature-weight table keyed by the same names. This file used
+# to carry its own last-write-wins copy, so a body-less entry displaced the real one and
+# four already-promoted qfep artifacts were skipped here as "no declared dna.axes" while
+# the gate reported them declared. That is a fact about file ordering presented as a fact
+# about the artifact — the same disease the declaration checker exists to cure, so it gets
+# the same cure: one implementation, in the module that already got it right.
 
 
 def sweep(token: str, axes: dict, cap: int) -> list[dict]:
@@ -138,10 +133,12 @@ def main() -> int:
     for token in tokens:
         if only and token not in only:
             continue
-        e = reg.get(token)
-        if not e:
+        found = reg.get(token)
+        if not found:
             print(f"  {token}: not in registry")
             continue
+        # The shared registry() returns (entry, source_filename); this file wants the entry.
+        e = found[0] if isinstance(found, tuple) else found
         axes = ((e.get("dna") or {}).get("axes") or {})
         if not axes:
             print(f"  {token}: no declared dna.axes — skipped (never swept on raw exports)")
