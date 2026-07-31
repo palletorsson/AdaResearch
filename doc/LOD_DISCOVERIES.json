@@ -462,6 +462,12 @@
       "topic": "breath-harvest-commits",
       "insight": "A breath that WRITES doc/content must git-commit it in the same session; the 07-20 chamber blurbs were written but left untracked, so the pipeline's committed HEAD was one clean-checkout from a 6-sequence stage-2 regression. Harvest phase should add+commit, not just write.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-07-31T09:32:05.824017+00:00",
+      "topic": "artifact dna declarations",
+      "insight": "A promotion NOTE is not a promotion: lambda_slider carries a full 07-27 STAGE-2 write-up for a calibration axis (optimum/band/dispute/gap/none) that the file never implements - no export, no match block, no config hook. check_dna_declarations reported it under the heading 'the axes exist but the sweep can never reach them', a claim it had never checked, which invites the opposite of the right repair. Now two buckets: promoted-in-code-undeclared (declare it) vs promotion-note-with-no-axis (implement or retract it).",
+      "lod": 3
     }
   ]
 }
