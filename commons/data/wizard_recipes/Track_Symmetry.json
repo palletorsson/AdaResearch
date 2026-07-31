@@ -76,7 +76,8 @@
    "enabled": true,
    "plan": "auto",
    "kin_fill": true
-  }
+  },
+  "canon_date": "2026-07-24"
  },
  "score_soft": 0.593,
  "metrics": {
@@ -92,6 +93,7 @@
  "pathfinder": {
   "ok": true,
   "reach": 0.99,
-  "tail": "OK    Track_Symmetry  (1580/1588 reachable, 24 artifacts, 1 teleport(s))\n  Rule 2 [WARN] Teleport at (6,161) \u2014 row z=162 has no floor cubes to catch player\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
- }
+  "tail": "OK    Track_Symmetry  (1580/1588 reachable, 24 artifacts, 1 teleport(s))\n  Rule 2 [WARN] Teleport at (6,161) — row z=162 has no floor cubes to catch player\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ },
+ "canon_pin_note": "The grammar this recipe was composed under (first commit of this file). Ops introduced after this date do not run unless the spec names them."
 }

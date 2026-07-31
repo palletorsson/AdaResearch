@@ -80,7 +80,8 @@
     "hangar_supply_pile"
    ],
    "kin": []
-  }
+  },
+  "canon_date": "2026-07-26"
  },
  "score_soft": 0.456,
  "metrics": {
@@ -97,6 +98,7 @@
  "pathfinder": {
   "ok": true,
   "reach": 0.89,
-  "tail": "OK    Trial_harvest24  (421/473 reachable, 23 artifacts, 1 teleport(s))\n  Hazards: 5 cell(s) \u2014 toxic x5 [(2,41), (4,41), (3,42), (2,43), (4,43)]\n  Path spawn->teleport avoids all hazard cells\n  Rule 2 [WARN] Teleport at (6,50) \u2014 row z=51 has no floor cubes to catch player\n  Rule 4 [WARN] Artifact 'branching_growth_algorithm' at (3,36) h=3 unreachable\n  Rule 4 [WARN] Artifact '2d_in_3d_randomness_vis' at (6,36) h=3 unreachable\n  Rule 4 [WARN] Artifact 'GaussianBlurShader' at (9,36) h=3 unreachable\n  Rule 4 [WARN] Artifact 'mold_network' at (3,42) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
- }
+  "tail": "OK    Trial_harvest24  (421/473 reachable, 23 artifacts, 1 teleport(s))\n  Hazards: 5 cell(s) — toxic x5 [(2,41), (4,41), (3,42), (2,43), (4,43)]\n  Path spawn->teleport avoids all hazard cells\n  Rule 2 [WARN] Teleport at (6,50) — row z=51 has no floor cubes to catch player\n  Rule 4 [WARN] Artifact 'branching_growth_algorithm' at (3,36) h=3 unreachable\n  Rule 4 [WARN] Artifact '2d_in_3d_randomness_vis' at (6,36) h=3 unreachable\n  Rule 4 [WARN] Artifact 'GaussianBlurShader' at (9,36) h=3 unreachable\n  Rule 4 [WARN] Artifact 'mold_network' at (3,42) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ },
+ "canon_pin_note": "The grammar this recipe was composed under (first commit of this file). Ops introduced after this date do not run unless the spec names them."
 }

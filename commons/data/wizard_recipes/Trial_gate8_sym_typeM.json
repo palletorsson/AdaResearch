@@ -94,7 +94,8 @@
     "mill_alhambra_p6m": "floor",
     "pattern_atlas_gallery": "floor"
    }
-  }
+  },
+  "canon_date": "2026-07-24"
  },
  "score_soft": 0.619,
  "metrics": {
@@ -112,5 +113,6 @@
   "ok": true,
   "reach": 0.99
  },
- "note": "round 8 \u2014 type routing with MEASURED postures (probe truth feeds the classifier)"
+ "note": "round 8 — type routing with MEASURED postures (probe truth feeds the classifier)",
+ "canon_pin_note": "The grammar this recipe was composed under (first commit of this file). Ops introduced after this date do not run unless the spec names them."
 }

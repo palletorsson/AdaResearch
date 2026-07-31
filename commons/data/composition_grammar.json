@@ -11,14 +11,16 @@
     "narrative",
     "rhythm"
    ],
-   "note": "narrative (threshold, hero, kin ascending) edges crescendo in r1+r2"
+   "note": "narrative (threshold, hero, kin ascending) edges crescendo in r1+r2",
+   "introduced": "2026-07-24"
   },
   {
    "n": 2,
    "op": "footprint",
    "what": "measured union-AABBs from the probe floor",
    "source": "commons/data/artifact_elements.json",
-   "note": "never registry guesses; probe truth only"
+   "note": "never registry guesses; probe truth only",
+   "introduced": "2026-07-24"
   },
   {
    "n": 2.5,
@@ -32,7 +34,8 @@
    ],
    "ruling": "Palle r2: templates earlier — YES, decisive; typology dominated the ranking (courtyard swept top 9)",
    "track_note": "track_13 (Palle 2026-07-24): x fixed 13, z as long as needed — concatenated authored 13x7 segments (commons/data/wizard_track_templates.json, role grammar shared with template_patterns.json). INVERTS op 3: rooms are authored, the artifact fits the room (FIT law at slot). The auto-plan grows FROM the order (segment chosen per artifact as it comes — order survives exactly, no misfits by construction). Kin-fill: spare slots take registry-category relatives of the cast. Arrival ops are template properties (gate_in = threshold+prologue, yard_seg = parapet). SEAM LAW: segment rows z0/z6 hold only walk or void, with the center columns x5-7 walkable — learned twice (yard wall row cut the track at reach 0.22; chamber's full-width room made z0 a dead pocket).",
-   "harvest_note": "2026-07-25: the wizard's first 10 segments were invented while the project already held ~1,990 maps, template_patterns.json, 13 zone_grammar archetypes, staging_dna and 45 curated clusters. Harvest closes that gap: 112 candidate windows from 120 hand maps; 8 written; first composed track used h_structure_examples_1 alongside the authored segments (reach 0.91)."
+   "harvest_note": "2026-07-25: the wizard's first 10 segments were invented while the project already held ~1,990 maps, template_patterns.json, 13 zone_grammar archetypes, staging_dna and 45 curated clusters. Harvest closes that gap: 112 candidate windows from 120 hand maps; 8 written; first composed track used h_structure_examples_1 alongside the authored segments (reach 0.91).",
+   "introduced": "2026-07-24"
   },
   {
    "n": 3,
@@ -43,13 +46,15 @@
     "sdf_disc",
     "sdf_blob"
    ],
-   "note": "SDF beats rect ~2x on fit (r1); grow clearance until area lands in the band"
+   "note": "SDF beats rect ~2x on fit (r1); grow clearance until area lands in the band",
+   "introduced": "2026-07-24"
   },
   {
    "n": 4,
    "op": "walls",
    "what": "thin wall segments + doors (layers.walls: nesw lower=wall, UPPER=door)",
-   "note": "one door per room toward the hall; wp on door pair when heights differ"
+   "note": "one door per room toward the hall; wp on door pair when heights differ",
+   "introduced": "2026-07-24"
   },
   {
    "n": 4.3,
@@ -58,7 +63,8 @@
    "strategies": [
     "state_from_role"
    ],
-   "note": "the artifact's own @identity IS the logic — 'Closed, it is wall. Open, it is corridor. Half-open, it is invitation.' So: the arrival threshold's mouth = corridor (1.0, you must pass), side-room doors = invitation (0.45), the quarantine's view notch = boundary (0.0). Token: lab_sliding_door:<rot>#panels_open_amount:<v>, rot from the cell toward what it opens onto. NAME COLLISION (the hangar mistake's twin): 'sliding_door' is registered by BOTH commons/artifacts/sliding_door (the lab door) and commons/primitives/translation (a teaching demo that renders an orange 'Slide ->' panel) — the primitive wins resolution, so an alias lab_sliding_door was added to registry/lab.json as the unambiguous handle. Verified by capture: dark frame, two near-white panels, centre seam, accent stripe. SIGNS: exit_sign is the door's declared partner (cluster_with) and its truth is 'the sign is the PROMISE that there IS a way out' — so every opening is NAMED by the artifact behind it (exit_sign:<rot>:2.0#text:<NAME>#sign_color:<c>), mounted on the wall BESIDE the frame at head height, never floating: green for egress, red for QUARANTINE, accent-blue for a named room. 8 doors / 8 signs on the test gate."
+   "note": "the artifact's own @identity IS the logic — 'Closed, it is wall. Open, it is corridor. Half-open, it is invitation.' So: the arrival threshold's mouth = corridor (1.0, you must pass), side-room doors = invitation (0.45), the quarantine's view notch = boundary (0.0). Token: lab_sliding_door:<rot>#panels_open_amount:<v>, rot from the cell toward what it opens onto. NAME COLLISION (the hangar mistake's twin): 'sliding_door' is registered by BOTH commons/artifacts/sliding_door (the lab door) and commons/primitives/translation (a teaching demo that renders an orange 'Slide ->' panel) — the primitive wins resolution, so an alias lab_sliding_door was added to registry/lab.json as the unambiguous handle. Verified by capture: dark frame, two near-white panels, centre seam, accent stripe. SIGNS: exit_sign is the door's declared partner (cluster_with) and its truth is 'the sign is the PROMISE that there IS a way out' — so every opening is NAMED by the artifact behind it (exit_sign:<rot>:2.0#text:<NAME>#sign_color:<c>), mounted on the wall BESIDE the frame at head height, never floating: green for egress, red for QUARANTINE, accent-blue for a named room. 8 doors / 8 signs on the test gate.",
+   "introduced": "2026-07-25"
   },
   {
    "n": 4.6,
@@ -68,13 +74,15 @@
     "board+words+subs",
     "hazard_sealed_only"
    ],
-   "note": "grammar read from the corpus, never invented: an[:rot|:seq] briefing board, 3t:<TEXT> a word standing in space, sub:<key> whose LINES live in a top-level 'subtitles' dict (Point_Line is the reference), h:fire|electric|toxic|vacuum|death. PLACEMENT: the board stands at the arrival (the corridor briefs you before it shows you anything); words name the service bays and the hero; every named door carries a sub trigger whose text is the artifact's OWN registry description — the corridor says what the consort says about itself; and HAZARD goes only inside the sealed quarantine — danger seen from the parapet, unreachable by construction. A composed map must never put a hazard on the walk it composed. Gate: board + 2 words + 6 subtitles + 12 toxic cells, reach 0.92. Track: board + LOADING/QUARANTINE + 3 subtitles + 5 toxic, reach 0.89."
+   "note": "grammar read from the corpus, never invented: an[:rot|:seq] briefing board, 3t:<TEXT> a word standing in space, sub:<key> whose LINES live in a top-level 'subtitles' dict (Point_Line is the reference), h:fire|electric|toxic|vacuum|death. PLACEMENT: the board stands at the arrival (the corridor briefs you before it shows you anything); words name the service bays and the hero; every named door carries a sub trigger whose text is the artifact's OWN registry description — the corridor says what the consort says about itself; and HAZARD goes only inside the sealed quarantine — danger seen from the parapet, unreachable by construction. A composed map must never put a hazard on the walk it composed. Gate: board + 2 words + 6 subtitles + 12 toxic cells, reach 0.92. Track: board + LOADING/QUARANTINE + 3 subtitles + 5 toxic, reach 0.89.",
+   "introduced": "2026-07-26"
   },
   {
    "n": 5,
    "op": "templates_fixed",
    "what": "the quarantine yard and other set pieces",
-   "note": "r3: yard INTEGRATED as a composition slot, not an island across a runway"
+   "note": "r3: yard INTEGRATED as a composition slot, not an island across a runway",
+   "introduced": "2026-07-24"
   },
   {
    "n": 6,
@@ -85,7 +93,8 @@
     "procession",
     "terrace"
    ],
-   "note": "procession scored only after r2 gave elevation a metric terrace added 2026-07-25: three levels (1/2/3) along the walk, so rises of TWO steps occur — which is what a lift is for. The climb chooser now picks by rise: 1 step = wp:<yaw> aligned wedge, 2+ = l:<rise> platform lift on the low cell (a prism spanning two cubes reads as a ramp you cannot walk). Both are pathfinder-modelled — the lift only since the validator learned it (probe: a 2-step rise with l:2 scored 28/64 before, 64/64 after)."
+   "note": "procession scored only after r2 gave elevation a metric terrace added 2026-07-25: three levels (1/2/3) along the walk, so rises of TWO steps occur — which is what a lift is for. The climb chooser now picks by rise: 1 step = wp:<yaw> aligned wedge, 2+ = l:<rise> platform lift on the low cell (a prism spanning two cubes reads as a ramp you cannot walk). Both are pathfinder-modelled — the lift only since the validator learned it (probe: a 2-step rise with l:2 scored 28/64 before, 64/64 after).",
+   "introduced": "2026-07-24"
   },
   {
    "n": 6.5,
@@ -98,13 +107,15 @@
     "carve+deck",
     "causeway"
    ],
-   "note": "deck rises one step, aligned wedges at BOTH ends (LIFT law — a one-wedge bridge scored reach 0.51), hb railings on the void flanks (first use of hb in 1,987 maps). Preconditions beat reverts: check the climbs are placeable and the chain is WALL-FREE before mutating — the first carve landed against a chamber's north wall segment and severed the track (the SEAM law's cousin: consult layers.walls, not just floor). CORRECTION 2026-07-25: I built decks-and-wedges on the belief that 'bridges have no code'. They do, and the pathfinder models them natively: br:AXIS:LENGTH (transparent grid walkway over void, 24 corpus uses) and tc:DIST:AXIS[:auto] (transport cube ferry, 481 uses, modelled as a bidirectional tc_adj edge pos<->pos±dist). Default is now style='br'; 'tc' ferries; 'deck' keeps the raised-deck+wedge build. All three verified at reach 0.97 on the same track. BR IDIOM (learned from Brouwer_Intuitionism, the only corpus map using br): the token sits ON a void cell, spans void, and the pathfinder walks its cells AT HEIGHT 1 — so a br between procession-raised (h2) floors is a climb off the deck and severs (reach 0.51 twice). br now requires ground-level ends; tc jumps lip-to-lip and only requires equal heights. The landmark is also forbidden from filling a span's gorge. jp added 2026-07-25: jump pads are ONE-WAY in the pathfinder (jp_edges), so the composer lays a pad on EACH lip aiming at the other — two-way by construction, and it reads as a designed leap. reach 0.96. The wizard now uses every transport primitive the grid has except the lift (dead parameter)."
+   "note": "deck rises one step, aligned wedges at BOTH ends (LIFT law — a one-wedge bridge scored reach 0.51), hb railings on the void flanks (first use of hb in 1,987 maps). Preconditions beat reverts: check the climbs are placeable and the chain is WALL-FREE before mutating — the first carve landed against a chamber's north wall segment and severed the track (the SEAM law's cousin: consult layers.walls, not just floor). CORRECTION 2026-07-25: I built decks-and-wedges on the belief that 'bridges have no code'. They do, and the pathfinder models them natively: br:AXIS:LENGTH (transparent grid walkway over void, 24 corpus uses) and tc:DIST:AXIS[:auto] (transport cube ferry, 481 uses, modelled as a bidirectional tc_adj edge pos<->pos±dist). Default is now style='br'; 'tc' ferries; 'deck' keeps the raised-deck+wedge build. All three verified at reach 0.97 on the same track. BR IDIOM (learned from Brouwer_Intuitionism, the only corpus map using br): the token sits ON a void cell, spans void, and the pathfinder walks its cells AT HEIGHT 1 — so a br between procession-raised (h2) floors is a climb off the deck and severs (reach 0.51 twice). br now requires ground-level ends; tc jumps lip-to-lip and only requires equal heights. The landmark is also forbidden from filling a span's gorge. jp added 2026-07-25: jump pads are ONE-WAY in the pathfinder (jp_edges), so the composer lays a pad on EACH lip aiming at the other — two-way by construction, and it reads as a designed leap. reach 0.96. The wizard now uses every transport primitive the grid has except the lift (dead parameter).",
+   "introduced": "2026-07-25"
   },
   {
    "n": 7,
    "op": "paths",
    "what": "connective tissue LAST — and cared for",
-   "note": "r3: width-2 passages with width-3 pulse; longest-naked-run penalised (tissue metric)"
+   "note": "r3: width-2 passages with width-3 pulse; longest-naked-run penalised (tissue metric)",
+   "introduced": "2026-07-24"
   },
   {
    "n": 8,
@@ -117,7 +128,8 @@
     "compression+parapet",
     "compression+prologue+parapet"
    ],
-   "note": "r5: story metric = mean(pinch, release, prologue, overlook); the threshold costs compact — the search arbitrates. r6: parapet GUARANTEED by side-search s→w→n (east = teleporter's), all-or-nothing landing, approach from existing floor only — 54/54 requested, 0 misses."
+   "note": "r5: story metric = mean(pinch, release, prologue, overlook); the threshold costs compact — the search arbitrates. r6: parapet GUARANTEED by side-search s→w→n (east = teleporter's), all-or-nothing landing, approach from existing floor only — 54/54 requested, 0 misses.",
+   "introduced": "2026-07-24"
   },
   {
    "n": 9,
@@ -127,7 +139,8 @@
     "search+hangar",
     "search+cluster"
    ],
-   "note": "candidate = a straight 3-cell run (floor or void) with walkable standoff on one side; score = 0.4 late-in-walk + 0.4 open-front (the gaze law) + 0.2 dead-back (seals nothing); REACHABILITY IS A VETO not a term — a candidate that would strand the teleporter landing or any artifact is dropped, so the wall can never break the path. Dressing = cluster token rotated to face the standoff; flanks take small kin of the cast. GOTCHA the veto taught: the teleporter stands on VOID by law, so it is never in the walkable set — the target is its LANDING (first version rejected all 427 candidates by asking the impossible). CORRECTION (Palle: 'but did you find the hangar wall system?') — v1 used the Wall Hangar EDITOR's curated cluster files (station_* pieces). THE HANGAR WALL SYSTEM is commons/artifacts/hangar_* with the kit _hangar/hangar_kit.gd: hangar_wall_panel (the backing wall that stands ON the floor, plane facing +Z — so no h4 cubes: the panel IS the wall) plus hangar_podium / worktable / supply_pile / barrier_fence / cabinet_cluster / step_base as the props, all map_ready and — until now — placed in ZERO maps. style='hangar' (default) composes panel run + props in front + kin one row further into the standoff; style='cluster' keeps the old curated-cluster behaviour."
+   "note": "candidate = a straight 3-cell run (floor or void) with walkable standoff on one side; score = 0.4 late-in-walk + 0.4 open-front (the gaze law) + 0.2 dead-back (seals nothing); REACHABILITY IS A VETO not a term — a candidate that would strand the teleporter landing or any artifact is dropped, so the wall can never break the path. Dressing = cluster token rotated to face the standoff; flanks take small kin of the cast. GOTCHA the veto taught: the teleporter stands on VOID by law, so it is never in the walkable set — the target is its LANDING (first version rejected all 427 candidates by asking the impossible). CORRECTION (Palle: 'but did you find the hangar wall system?') — v1 used the Wall Hangar EDITOR's curated cluster files (station_* pieces). THE HANGAR WALL SYSTEM is commons/artifacts/hangar_* with the kit _hangar/hangar_kit.gd: hangar_wall_panel (the backing wall that stands ON the floor, plane facing +Z — so no h4 cubes: the panel IS the wall) plus hangar_podium / worktable / supply_pile / barrier_fence / cabinet_cluster / step_base as the props, all map_ready and — until now — placed in ZERO maps. style='hangar' (default) composes panel run + props in front + kin one row further into the standoff; style='cluster' keeps the old curated-cluster behaviour.",
+   "introduced": "2026-07-25"
   },
   {
    "n": 9.5,
@@ -136,7 +149,8 @@
    "strategies": [
     "tower+lit"
    ],
-   "note": "el was used 193 times in hand maps and NEVER by the wizard; the landmark scores on floor-cells-within-2 (visibility) x mid-walk position (homing). Cheapest legibility per cell in VR."
+   "note": "el was used 193 times in hand maps and NEVER by the wizard; the landmark scores on floor-cells-within-2 (visibility) x mid-walk position (homing). Cheapest legibility per cell in VR.",
+   "introduced": "2026-07-25"
   },
   {
    "n": 9.7,
@@ -145,7 +159,8 @@
    "strategies": [
     "off_spine_pockets"
    ],
-   "note": "Palle: 'close the score points gap too' (779 corpus uses, the largest gap). The rule comes from what a score cube IS: the spine is the task, sp marks what the walk does NOT require. Candidates are cells 2+ steps off the spine (BFS depth from the walk), ranked by enclosure — never on the line, never required to finish. A first attempt used local maxima of walk distance: right for pockets in a gate, found NOTHING in a linear band; depth-off-spine works in both. Gate 5 cubes (incl. one offered on the parapet), track 4."
+   "note": "Palle: 'close the score points gap too' (779 corpus uses, the largest gap). The rule comes from what a score cube IS: the spine is the task, sp marks what the walk does NOT require. Candidates are cells 2+ steps off the spine (BFS depth from the walk), ranked by enclosure — never on the line, never required to finish. A first attempt used local maxima of walk distance: right for pockets in a gate, found NOTHING in a linear band; depth-off-spine works in both. Gate 5 cubes (incl. one offered on the parapet), track 4.",
+   "introduced": "2026-07-26"
   },
   {
    "n": 10,
@@ -159,7 +174,8 @@
    "tool": "tools/walk_polish.py",
    "note": "every other op composes in PLAN (top-down, metric); this one composes in FIRST PERSON. It BFS-walks the finished map in encounter order and asks what only exists while standing somewhere: dead corner (3 sides closed, nothing in it) / bare wall (>=4 blank cells) / dark stretch (>=9 cells from a light) / a body with nowhere to work at it. Places one small prop per finding from what the project already has (hangar podium, worktable, supply pile, wall panel, el). STRUCTURE IS NEVER TOUCHED — by op 10 the frame, walls and path are verified. TWO LESSONS from its first run: the naive pass proposed a bench at EVERY cell around a body and a panel at EVERY cell of a wall — cell enumeration is plan-thinking; an occupant places ONE rest, on the side you arrive from, and spaces panels >=4 apart. And the pass is a MEASURE OF THE PIPELINE: Thread_Gate v6 (composed before doors/lights/signs existed) wants 12 things; a freshly composed terrace gate wants 4 — the later ops already did the work. POSTURE ROUTING added 2026-07-26: what a body wants beside it is decided by its staging posture (classify_postures on the measured floor), not by geometry — table wants a worktable, platform a step_base, monument/pit a barrier_fence, and floor/float want NOTHING (you do not put a crate on terrain you walk across, or prop up a thing that hovers). That 'nothing' is the part a checklist can never say. Because pedestal is half the corpus (1326/2660), one answer there would be a new uniform, so a specimen's companion is chosen per artifact — stable per body, varied across the map. Gate result: 12 clones became 11 props in a 5-kind mix (podium 3, supply pile 2, step base 2, cabinet 2, wall panel 2), and the hero's beam now correctly asks for nothing. RUNG 2 — JUDGE BY VIEW (2026-07-26): the pass now looks forward along the ROUTE (spawn->exit path, not BFS order) and measures what fills a 45-degree cone using probe-measured sizes, the same arithmetic as tools/gaze_ride.py. A body counts as seen above 8 degrees; five consecutive steps with nothing above that is a BLANK VISTA. Three failures taught the shape: (1) BFS order is a frontier, not a walk — a run counter incremented in BFS order never forms a run, and the check reported nothing on ten maps; (2) solid() also reports the world's EDGE, which is not a surface you can hang a panel on; (3) requiring a wall was the real blocker — instrumenting showed that when a step IS blank there is usually NO wall ahead, because dull views are empty rather than walled. So a blank vista has two cures: facing a wall, give the wall a surface; facing open space, put a light IN the view, four steps ahead, something to walk toward. Fires where it should: Corridor_VFM_03_Motion 6, Track_Symmetry 4, MissionAnts 3, the gate 1, and ZERO on the dense terrace gate — corridors are what have blank walks. EYE SHOTS 2026-07-27: every finding is now also a CAMERA STATION. `walk_polish.py --shots <file>` writes {cell, facing, y, tag, why} per finding and `commons/testing/capture_eye_stations.gd` stands there at eye height 1.65 with a 90 deg FOV, so a claim the pass reasons to can be SEEN. Three things the first pictures settled that no amount of cell-reasoning would have: (1) the vista finding was CONFIRMED, and the picture added the reason — the dull walk faces off the map EDGE into the biome void, so a light 4 steps ahead lands outside the room; (2) the eye station must STAND BACK from what it judges — a camera on the finding cell is pressed against the wall it is about, and the frame is one grey plane, so wall/vista eyes retreat 3 cells and rest eyes 2, as far as the floor allows; (3) the pass measures relations between cells and is blind to how big a body READS in its room — a 0.82 m artifact alone on a 13-wide plaza is correctly reported as 'standing alone', but the honest complaint from the eye is scale, not loneliness. TWO INSTRUMENT TRAPS, both hit: hosting the map in lab_desktop silently kept the host's DEFAULT map (25 shots of Point_One labelled Track_Symmetry) — use the catalog's load_map_fresh and hide the overlays, as capture_multi_angle does; and a yaw is only meaningful inside one convention (the grid's prop rotation and Godot's camera yaw differ by 180 deg), so the station file carries the FACING VECTOR and the engine that owns the camera does the trigonometry: yaw = atan2(-dx, -dz). STANDING GATE 2026-07-27: Thread_Gate v7 is furnished by this op (Palle's ruling) — 12 edits, structure and walls byte-identical to v6. The composer now CALLS the pass (spec.dwell.enabled, wizard_compose.run_dwell imports walk_polish rather than copying it) so a recipe can regenerate a furnished map: one composer, one memory. The hook is inert without a dwell block — proved by replaying Thread_Gate's spec through the pre-hook composer and diffing map_data (identical). CHECK 6 'never announced' 2026-07-27, and the metric it replaced. The pass was blind to SCALE, so the first attempt measured how big a body READS: silhouette size over the width of its room (presence = 7.15*size / room_radius), small-in-a-wide-room = lost. It fired on 24 bodies in 11 maps, almost all auto-generated Archetype_* rooms — a tidy story. An EYE SHOT killed it before it shipped: Archetype_Cathedral's library_rack scored 0.24, among the worst in the corpus, and the picture showed it perfectly legible — a small bright body at the end of a long nave, dead on the axis, the only colour in a grey corridor. ANGULAR SIZE IS NOT PRESENCE; being on the walk is. The shipped check asks the question the pass could already ask: walking the ROUTE, does the body ever fill 8 deg of the forward cone? If never, you only meet it by arriving, and it gets a beacon (`el`). It declines for anything smaller than a neighbour within 6 cells (a detail is meant to be found up close) and fires ZERO times on the cathedral that falsified its predecessor. AND A DEFECT THE PROMOTION EXPOSED: the dark-stretch check read `if lights and free(c)`, so a map with NO placed lights was judged perfectly lit. Thread_Gate v6 had zero `el`; the dwell pass placed the first one and the next run demanded 22 more — adding a light made the map worse and the pass stopped converging on its own output. A stretch cannot be dark relative to a scheme that does not exist: darkness is now judged only where the map has an idiom to be far from (>=3 lights). The furnished gate fell from 24 wants to 2. ONE BODY 2026-07-31: the pass and its camera now read the Vitruvian block of commons/data/museum_principles.json (the museum line's table of body constants, which cites capture_eye_stations.gd as the source of eye 1.65 and fov 90). Four tools holding private copies of the same body is how they drift — the pass had invented CONE=45 independently of fov=90. Reading the table reproduces the corpus byte-for-byte, which is the proof the constants already agreed. TWO MODELS, ONE BODY: the canon's PROMISE_M=8 m is size-independent; the pass's MIN_DEG=8 deg is the same promise scaled by size (r* = 7.15 x size) and they agree exactly at a 1.12 m body — the corpus's metre scale. Neither was derived from the other, so keep both: the day they disagree is a finding. AND: FURNITURE IS NOT A BODY. The pass was furnishing its own furniture — the promoted gate still wanted two things and both were about props the pass had placed (a podium beside a supply pile, a beacon over a cabinet). Not convergence, deceleration. hangar_* tokens now answer findings without generating them, while still counting as something to LOOK at for the vista check. The furnished gate falls to ZERO wants; the 40-map corpus loses exactly one finding (555 -> 554), so nothing real was suppressed.",
    "eye": "commons/testing/capture_eye_stations.gd",
-   "standing_gate": "Thread_Gate v7 (furnished)"
+   "standing_gate": "Thread_Gate v7 (furnished)",
+   "introduced": "2026-07-27"
   }
  ],
  "interfaces": {
@@ -306,7 +322,12 @@
    "found": "2026-07-27",
    "what": "Replaying Thread_Gate's own recipe through today's composer does NOT reproduce the promoted map: ops added after v6 (doors + exit signs, h:toxic hazard) default to ENABLED, adding 36 utility and 24 interactable cells. The gate has been advertised as regenerable since v4.",
    "why": "The project's additive discipline — a map without the new layer must be untouched — was applied to MAP DATA and never to the GRAMMAR. A new op that defaults on rewrites every old recipe.",
-   "fix": "New ops default OFF and are switched on by the spec (as op 10 dwell now is); or recipes pin the canon version they were composed under and the composer replays that version's defaults."
+   "fix": "New ops default OFF and are switched on by the spec (as op 10 dwell now is); or recipes pin the canon version they were composed under and the composer replays that version's defaults.",
+   "resolved": "2026-07-31",
+   "how": "Every op now records the DATE IT ENTERED THIS CANON (recovered from git), and a recipe pins the canon date it was composed under. op_active() runs an op only if the RECIPE named it or it predates the pin. The subtlety that made the first attempt inert: every spec is DEFAULT_SPEC updated with the recipe, and each new op had been added to DEFAULT_SPEC with enabled=true — so every op looked explicitly asked for, in recipes written before it existed. That IS the drift mechanism. main() now records which keys the recipe itself carried, and only those count as the spec speaking.",
+   "result": "28 recipes have a map: 6 reproduce it EXACTLY (was 3), 21 improved. Thread_Gate went from 67 wrong cells to 0 — it is regenerable again, the claim it had carried untruthfully since v4. The gate was then REGENERATED from its own recipe, which changed 8 cells: all `wp`, the wedge-yaw fix. The shipped standing gate had still carried the misalignment Palle reported.",
+   "residual": "What the pin does NOT and SHOULD NOT undo, in two clean classes. (1) WITHIN-OP FIXES: Trial_gate4_85's whole residual is 7 `wp` cells — the wedge fix. A time capsule pins WHICH OPS RUN, not the bugs inside them, or pinning would freeze every defect forever. (2) DATA DRIFT: track-mode maps (Trial_service 148 structure cells, Trial_gate8_sym_type 322) differ because the harvested segment library changed under them. A recipe pins the GRAMMAR, not the CORPUS the grammar reads — harvest pool, registry, measured sizes. That is the next layer of the same debt, now named. Plus early rounds (gate2/gate3) whose ops were later rewritten wholesale by the REACH law, which we would never want undone."
   }
- ]
+ ],
+ "introduced_readme": "Each op records the DATE IT ENTERED THIS CANON, recovered from git. A recipe pinned to a canon date replays only the grammar that existed then: ops invented later are off unless the spec asks for them by name. Without this a recipe is not a time capsule — every new op silently rewrote every old recipe, and Thread_Gate, advertised as regenerable since v4, had stopped reproducing."
 }

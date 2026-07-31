@@ -61,7 +61,8 @@
     "hangar_supply_pile"
    ],
    "kin": []
-  }
+  },
+  "canon_date": "2026-07-25"
  },
  "score_soft": 0.525,
  "metrics": {
@@ -78,6 +79,7 @@
  "pathfinder": {
   "ok": true,
   "reach": 0.97,
-  "tail": "OK    Trial_span_br  (461/476 reachable, 18 artifacts, 1 teleport(s))\n  Rule 2 [WARN] Teleport at (6,53) \u2014 row z=54 has no floor cubes to catch player\n  Rule 4 [WARN] Artifact 'mold_network' at (3,45) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
- }
+  "tail": "OK    Trial_span_br  (461/476 reachable, 18 artifacts, 1 teleport(s))\n  Rule 2 [WARN] Teleport at (6,53) — row z=54 has no floor cubes to catch player\n  Rule 4 [WARN] Artifact 'mold_network' at (3,45) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ },
+ "canon_pin_note": "The grammar this recipe was composed under (first commit of this file). Ops introduced after this date do not run unless the spec names them."
 }

@@ -53,3 +53,20 @@ operation added since v6 (doors, exit signs, the hazard vent) defaults to ENABLE
 spec through today's composer produces a map with sixty cells the promoted gate never had. The recipe now
 says so in writing. A recipe is a time capsule only if new operations are gated off by default; that
 discipline held for the map layers and was never applied to the grammar itself.
+
+**v7.1 — the recipe is true again.** The debt v7 wrote down is paid. Every operation now records the
+date it entered the canon, and a recipe pins the grammar it was composed under: an op invented later
+does not run unless the spec names it. The first attempt at this gate was inert, and the reason it was
+inert is the disease itself — every spec is the default spec updated with the recipe, and each new
+operation had been added to the defaults switched on, so every op looked explicitly asked for even in
+recipes written before it existed. Only what the recipe itself carries counts as the recipe speaking.
+
+Replaying this gate's own recipe now reproduces this map exactly, a claim it had carried untruthfully
+since v4. Regenerating from it changed eight cells, and all eight were wedges: the standing gate had
+still been shipping the misalignment reported at the step edges, `wp` with no yaw at both ends of a
+climb instead of a directed wedge on the low cell. The pin holds which operations run; it does not
+freeze the bugs inside them, or nothing could ever be repaired.
+
+Across the recipe shelf, six of twenty-eight now reproduce their map exactly and twenty-one improved.
+What remains is honest and named: within-op fixes we want to keep, and the corpus the grammar reads —
+the harvest pool, the registry, the measured floor — which no recipe pins yet.

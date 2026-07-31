@@ -77,7 +77,8 @@
     "hangar_supply_pile"
    ],
    "kin": []
-  }
+  },
+  "canon_date": "2026-07-26"
  },
  "score_soft": 0.621,
  "metrics": {
@@ -94,6 +95,7 @@
  "pathfinder": {
   "ok": true,
   "reach": 0.92,
-  "tail": "OK    Trial_voice_gate  (337/366 reachable, 32 artifacts, 1 teleport(s))\n  Hazards: 12 cell(s) \u2014 toxic x12 [(36,5), (37,5), (36,6), (39,6), (38,7), (39,7), (37,8), (38,8), (38,9), (36,10), (36,11), (37,11)]\n  Rule 3 [WARN] Teleport at (45,8) is NOT reachable from spawn via walking\n  Rule 4 [WARN] Artifact 'mold_network' at (39,8) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
- }
+  "tail": "OK    Trial_voice_gate  (337/366 reachable, 32 artifacts, 1 teleport(s))\n  Hazards: 12 cell(s) — toxic x12 [(36,5), (37,5), (36,6), (39,6), (38,7), (39,7), (37,8), (38,8), (38,9), (36,10), (36,11), (37,11)]\n  Rule 3 [WARN] Teleport at (45,8) is NOT reachable from spawn via walking\n  Rule 4 [WARN] Artifact 'mold_network' at (39,8) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ },
+ "canon_pin_note": "The grammar this recipe was composed under (first commit of this file). Ops introduced after this date do not run unless the spec names them."
 }

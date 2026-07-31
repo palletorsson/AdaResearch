@@ -34,7 +34,8 @@
   "dwell": {
    "enabled": true,
    "budget": 14
-  }
+  },
+  "canon_date": "2026-07-24"
  },
  "score_soft": 0.8,
  "metrics": {
@@ -58,5 +59,6 @@
   "placed": 12,
   "note": "v7: the occupant pass furnished the standing gate — 11 interactables + 1 light. Structure and walls are byte-identical to v6; op 10 never touches the frame."
  },
- "regeneration_warning": "This recipe no longer reproduces the map on disk BIT-FOR-BIT, and that drift predates the dwell hook: ops added after v6 was promoted (doors + exit signs, h:toxic hazard) default to ENABLED, so replaying an old spec through today's composer adds 36 utility and 24 interactable cells the promoted map never had. A recipe is not a time capsule unless new ops are gated off by default. Verified 2026-07-27 by replaying this spec through the pre-hook composer."
+ "regeneration_warning": "This recipe no longer reproduces the map on disk BIT-FOR-BIT, and that drift predates the dwell hook: ops added after v6 was promoted (doors + exit signs, h:toxic hazard) default to ENABLED, so replaying an old spec through today's composer adds 36 utility and 24 interactable cells the promoted map never had. A recipe is not a time capsule unless new ops are gated off by default. Verified 2026-07-27 by replaying this spec through the pre-hook composer.",
+ "canon_pin_note": "The grammar this recipe was composed under (first commit of this file). Ops introduced after this date do not run unless the spec names them."
 }

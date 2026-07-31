@@ -516,6 +516,8 @@ def compose(spec):
         if 0 <= notch[0] < W and 0 <= notch[1] < D:
             _door_list.append((notch, (notch[0] - 1, notch[1]), "boundary"))
             _names[tuple(notch)] = "QUARANTINE"
+    _dspec = dict(_dspec or {})
+    _dspec["enabled"] = op_active(spec, "doors", key="doors")
     stages.append(place_doors(I, U, S, W, D, _door_list, _dspec, _names))
 
     # 4.6 VOICE + HAZARD — the gap Palle named: annotation, text, subtitles, hazard
@@ -535,6 +537,8 @@ def compose(spec):
         _hero_room = next((r for r in rooms if r[0] == hero), None)
         if _hero_room:
             _words.append(((_hero_room[2][0], _hero_room[2][1] + 1), str(hero).replace("_", " ")))
+    _vspec = dict(_vspec or {})
+    _vspec["enabled"] = op_active(spec, "voice_hazard", key="voice")
     stages.append(place_voice(S, U, W, D, _vspec, _board, 90,
                               _words, [(nb, k) for _b, nb, k in door_info], _subs))
     _hz = []
@@ -544,7 +548,8 @@ def compose(spec):
                 if 0 <= _x < W and 0 <= _z < D and S[_z][_x] == "1" and (_x, _z) != yard_c:
                     _hz.append((_x, _z))
     stages.append(place_hazard(S, U, W, D, _hz[:12], (spec.get("hazard") or {}).get("kind", "toxic"),
-                               spec.get("hazard") or {}))
+                               dict(spec.get("hazard") or {},
+                                    enabled=op_active(spec, "voice_hazard", key="hazard"))))
 
     # 5 TEMPLATES_FIXED — the yard as a composition slot
     stages.append({"op": "templates_fixed", "enabled": yard_on,
@@ -658,7 +663,7 @@ def compose(spec):
     stages.append(place_spans(S, U, I, WL, W, D, floor, spawn_a, [a for _, _, a, _ in rooms],
                               hall if isinstance(hall, set) else set(hall),
                               passage if isinstance(passage, set) else set(passage),
-                              enabled=_sp.get("enabled", True),
+                              enabled=op_active(spec, "spans"),
                               railings=_sp.get("railings", True),
                               style=_sp.get("style", "br")))
     _lm = spec.get("landmark") or {}
@@ -666,22 +671,23 @@ def compose(spec):
     _avoid = [tuple(c) for c in (_span_stage.get("chasm") or [])] + \
              [tuple(c) for c in (_span_stage.get("deck") or [])]
     stages.append(place_landmark(S, W, D, floor, dist_map,
-                                 enabled=_lm.get("enabled", True),
+                                 enabled=op_active(spec, "landmark_lights", key="landmark"),
                                  height=int(_lm.get("height", 4)),
                                  avoid=_avoid))
     _li = spec.get("lights") or {}
     stages.append(place_lights(U, W, D, floor, dist_map, spawn_a, tp,
                                every=int(_li.get("every", 7)),
-                               enabled=_li.get("enabled", True)))
+                               enabled=op_active(spec, "landmark_lights", key="lights")))
     # 9.7 REWARD — score points where the walk never has to go
-    _rw = spec.get("reward") or {}
+    _rw = dict(spec.get("reward") or {})
+    _rw["enabled"] = op_active(spec, "reward", key="reward")
     _extras = []
     _par = next((s for s in stages if s.get("op") == "arrival"), {}).get("parapet") or []
     if _par: _extras.append(tuple(_par[len(_par) // 2]))
     stages.append(place_rewards(S, U, W, D, floor, dist_map, hall, _extras, _rw))
     # 9 WALL HANGAR PRINCIPAL — the last operation
     pw = spec.get("principal_wall") or {}
-    if pw.get("enabled", True):
+    if op_active(spec, "wall_hangar", key="principal_wall"):
         kin_pool = list(pw.get("kin") or [])
         if not kin_pool:
             cats = _registry_categories()
@@ -721,6 +727,59 @@ def compose(spec):
     stages.append({"op": "final", "W": W, "D": D, "metrics": m["parts"], "score_soft": m["soft"],
                    "weights": MW})
     return data, stages
+
+
+# ---------- THE TIME CAPSULE ----------
+# A recipe claims to regenerate its map. That claim was false: every operation
+# added to the grammar arrived switched ON, so replaying a recipe written in
+# July's grammar composed it in today's. Thread_Gate, advertised as regenerable
+# since v4, had quietly stopped reproducing — a replay of its own spec added 36
+# utility and 24 interactable cells (doors, exit signs, a hazard vent) that the
+# promoted map never had.
+#
+# The project's additive discipline already says it: a map without the new layer
+# must be untouched. That was enforced for map DATA and never for the GRAMMAR.
+# So a recipe pins the canon it was composed under, and an op invented after
+# that pin does not run unless the spec names it. Explicit always wins — that is
+# how a pinned recipe can still adopt one new op (the promoted gate pins
+# 2026-07-24 and asks for dwell by name) without adopting all of them.
+_OP_INTRODUCED = None
+
+
+def op_introduced():
+    global _OP_INTRODUCED
+    if _OP_INTRODUCED is None:
+        try:
+            canon = json.loads((ROOT / "commons/data/composition_grammar.json")
+                               .read_text(encoding="utf-8"))
+            _OP_INTRODUCED = {o["op"]: o.get("introduced", "")
+                              for o in canon.get("operations", [])}
+        except Exception:
+            _OP_INTRODUCED = {}
+    return _OP_INTRODUCED
+
+
+def op_active(spec, op, key=None, default=True):
+    """Does this operation belong to THIS recipe's grammar?
+
+    The subtlety that made the first version of this gate inert: every spec is
+    DEFAULT_SPEC updated with the recipe, and each new op was added to
+    DEFAULT_SPEC with enabled=true. So every op looked explicitly asked for,
+    including in recipes written before it existed — which is precisely how the
+    drift happened. Only keys the RECIPE ITSELF carried count as the spec
+    speaking; the rest are today's defaults, and the pin overrules them.
+    """
+    k = key or op
+    blk = spec.get(k)
+    said = spec.get("_recipe_keys")
+    if isinstance(blk, dict) and "enabled" in blk and (said is None or k in said):
+        return bool(blk["enabled"])                    # the recipe speaks: obey it
+    pin = str(spec.get("canon_date") or "").strip()
+    if pin:
+        intro = op_introduced().get(op, "")
+        if intro and intro > pin:
+            return False                               # invented after this recipe
+    return default
 
 
 # ---------- OP 10: DWELL, THE OCCUPANT PASS ----------
@@ -1460,10 +1519,16 @@ def main():
     ap.add_argument("--pathfind", action="store_true")
     a = ap.parse_args()
     spec = dict(DEFAULT_SPEC)
+    raw = {}
     if a.spec_file:
-        spec.update(json.loads(pathlib.Path(a.spec_file).read_text(encoding="utf-8")))
+        raw = json.loads(pathlib.Path(a.spec_file).read_text(encoding="utf-8"))
     elif a.spec:
-        spec.update(json.loads(a.spec))
+        raw = json.loads(a.spec)
+    spec.update(raw)
+    # WHAT THE RECIPE ITSELF SAID, kept apart from what today's defaults say.
+    # op_active needs the difference: a block that only exists because
+    # DEFAULT_SPEC grew a new op is not the recipe asking for that op.
+    spec["_recipe_keys"] = sorted(raw.keys())
     data, stages = compose(spec)
     result = {"spec": spec, "stages": stages}
     if a.save:
@@ -1477,8 +1542,12 @@ def main():
             result["pathfinder"] = pathfind(name)
         rec = ROOT / "commons/data/wizard_recipes"
         rec.mkdir(exist_ok=True)
+        # PIN THE GRAMMAR. Without this the recipe means "compose this spec in
+        # whatever grammar exists when you read me", which is not a recipe.
+        spec.setdefault("canon_date", datetime.date.today().isoformat())
         (rec / f"{name}.json").write_text(json.dumps({
-            "name": name, "date": datetime.date.today().isoformat(), "spec": spec,
+            "name": name, "date": datetime.date.today().isoformat(),
+            "spec": {k: v for k, v in spec.items() if not k.startswith("_")},
             "score_soft": stages[-1]["score_soft"], "metrics": stages[-1]["metrics"],
             "pathfinder": result.get("pathfinder")}, indent=1), encoding="utf-8")
     else:
@@ -1799,7 +1868,8 @@ def compose_track(spec):
     stages.append({"op": "service", "placed": len(service_placed), "items": service_placed,
                    "why": ("back-of-house dressing declared by the segments: cable trays along the "
                            "walk, ceiling vents overhead, hangar props against the wall")})
-    _dspec = spec.get("doors") or {}
+    _dspec = dict(spec.get("doors") or {})
+    _dspec["enabled"] = op_active(spec, "doors", key="doors")
     stages.append(place_doors(I, U, S, W, D,
                               [(b, nb, "invitation") for b, nb, _k in door_info], _dspec,
                               {tuple(b): str(k).replace("_", " ") for b, _nb, k in door_info}))
@@ -1820,11 +1890,14 @@ def compose_track(spec):
             if 0 <= _x < W and 0 <= _z < D and S[_z][_x] in ("1", "2") and not str(U[_z][_x]).strip():
                 _words.append(((_x, _z), _w))
                 break
+    _vspec = dict(_vspec or {})
+    _vspec["enabled"] = op_active(spec, "voice_hazard", key="voice")
     stages.append(place_voice(S, U, W, D, _vspec, _board, 0, _words,
                               [(nb, k) for _b, nb, k in door_info], _subs))
     _hz = [(x, z) for (x, z) in yardc if S[z][x] == "1"][:12]
     stages.append(place_hazard(S, U, W, D, _hz, (spec.get("hazard") or {}).get("kind", "toxic"),
-                               spec.get("hazard") or {}))
+                               dict(spec.get("hazard") or {},
+                                    enabled=op_active(spec, "voice_hazard", key="hazard"))))
     stages.append({"op": "templates_fixed", "enabled": bool(anti and yardc),
                    "yard": {"center": None, "r": 0, "cells": cl(yardc)} if yardc else None})
     profile = [{"i": i, "name": a, "h": (2 if sl["seg"] in lifted else 1), "art_h": round(union(a)[2], 2)}
@@ -1863,7 +1936,7 @@ def compose_track(spec):
     stages.append(place_spans(S, U, I, WL, W, D, floor, spawn, [a for _, _, a, _ in rooms],
                               hallc,
                               set(),
-                              enabled=_sp.get("enabled", True),
+                              enabled=op_active(spec, "spans"),
                               railings=_sp.get("railings", True),
                               style=_sp.get("style", "br")))
     _lm = spec.get("landmark") or {}
@@ -1871,18 +1944,19 @@ def compose_track(spec):
     _avoid = [tuple(c) for c in (_span_stage.get("chasm") or [])] + \
              [tuple(c) for c in (_span_stage.get("deck") or [])]
     stages.append(place_landmark(S, W, D, floor, dist_map,
-                                 enabled=_lm.get("enabled", True),
+                                 enabled=op_active(spec, "landmark_lights", key="landmark"),
                                  height=int(_lm.get("height", 4)),
                                  avoid=_avoid))
     _li = spec.get("lights") or {}
     stages.append(place_lights(U, W, D, floor, dist_map, spawn, tp,
                                every=int(_li.get("every", 7)),
-                               enabled=_li.get("enabled", True)))
-    _rw = spec.get("reward") or {}
+                               enabled=op_active(spec, "landmark_lights", key="lights")))
+    _rw = dict(spec.get("reward") or {})
+    _rw["enabled"] = op_active(spec, "reward", key="reward")
     stages.append(place_rewards(S, U, W, D, floor, dist_map, hallc, [], _rw))
     # 9 WALL HANGAR PRINCIPAL — the last operation
     pw = spec.get("principal_wall") or {}
-    if pw.get("enabled", True):
+    if op_active(spec, "wall_hangar", key="principal_wall"):
         kin_pool = list(pw.get("kin") or [])
         if not kin_pool:
             cats = _registry_categories()
