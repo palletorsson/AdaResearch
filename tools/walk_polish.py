@@ -430,12 +430,42 @@ def inspect(md, name):
                     r = sum(ord(ch) for ch in tok) % len(cand)
                     cand = cand[r:] + cand[:r]
                 cand += [w for w in (REST, CORNER) if w not in cand]
-                want = next((w for w in cand if prop_fits(w, c, 0, free)), None)
+                # WHERE it stands, not only what it is. A companion was only
+                # ever tried on the walker's own cell, unrotated — which is why
+                # step_base and barrier_fence were dead vocabulary: at distance
+                # 1 their clearing always contained the body they accompany.
+                # Two things fix it. The prop FACES the body, so a long thin
+                # thing (the 4.4 m fence) lays its length ACROSS the approach
+                # and needs no depth at all; and a prop deeper than one cell
+                # STEPS BACK along the approach until the body is clear. A step
+                # base two cells out still touches the platform — its near edge
+                # is a metre from the body's centre — it is adjacent in metres,
+                # not in cells.
+                bf = (b[0] - x, b[1] - z)
+                rot = {(0, 1): 0, (1, 0): 90, (0, -1): 180, (-1, 0): 270}[bf]
+                want, at = None, None
+                for w_tok in cand:
+                    span = prop_cells(w_tok, rot)
+                    if span is None:
+                        continue
+                    deep = span[0] if bf[1] == 0 else span[1]
+                    for k in range(1, deep + 2):
+                        cell = (b[0] - bf[0] * k, b[1] - bf[1] * k)
+                        if not free(cell) or cell not in floor:
+                            break              # the approach runs out
+                        if not prop_fits(w_tok, cell, rot, free):
+                            continue
+                        ex, ez = span
+                        if (abs(b[0] - cell[0]) <= ex and abs(b[1] - cell[1]) <= ez):
+                            continue           # it would stand ON the body
+                        want, at = w_tok, cell
+                        break
+                    if want:
+                        break
                 if want is None:
                     break                      # measured, and none of them fit
-                bf = (b[0] - x, b[1] - z)
-                props.append({"facing": list(bf), "eye": list(back_off(c, bf, 2)),
-                              "cell": list(c),
+                props.append({"facing": list(bf), "eye": list(back_off(at, bf, 2)),
+                              "cell": list(at), "rot": rot,
                               "why": "%s is a %s standing alone — wants %s" % (tok, pos, want.replace("hangar_", "")),
                               "place": want, "layer": "interactables", "kind": "rest",
                               "beside": tok, "posture": pos})
@@ -626,6 +656,11 @@ def apply(md, props, budget):
             placed.append(p)
             continue
         if p["layer"] == "utilities":
+            # a claim is a claim whichever layer you are writing. Lights were
+            # exempt, so an `el` could land in a cell a wall panel's body
+            # already occupied — invisible in the data, a light inside a panel
+            # in the world.
+            if (x, z) in claimed: continue
             if str(U[z][x]).strip(): continue
             U[z][x] = p["place"]
         else:

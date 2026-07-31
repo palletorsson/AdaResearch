@@ -94,3 +94,15 @@ pile then landed inside it. A placed prop now reserves the cells its body occupi
 pass is running.
 
 Ten props, none overhanging. Pathfinder unchanged: 235 of 262, the mold still overlooked by design.
+
+**v7.3 — the step comes to the platform.** Two of the seven props had never once been placed, and the
+reason was not that they were wrong for the job. A companion was only ever tried on the walker's own
+cell, unrotated, and at that distance a two-metre step base always covers the platform it is meant to
+serve. Now a companion faces the body — so the four-metre fence lays its length across the approach and
+needs no depth at all — and a prop deeper than one cell steps back along the approach until the body is
+clear. A step base two cells out still touches the platform: its near edge is a metre from the body's
+centre. Adjacency is in metres, not in cells.
+
+This gate had been making do. Its platform got a podium because a podium fits anywhere; now it gets the
+step the posture asked for in the first place, one cell further out. Ten props, none overhanging,
+pathfinder unchanged.
