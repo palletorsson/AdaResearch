@@ -20,7 +20,8 @@ class_name LambdaSlider
 # truth: lambda is the entropy drive — the dial between crystallization and dissolution that every living system must negotiate
 
 # ─────────────────────────────────────────────────────────────────────────────
-# STAGE-2 DNA PROMOTION (2026-07-27) — ONE AXIS, TWO FILES. phi_slider.gd carries
+# STAGE-2 DNA PROMOTION (noted 2026-07-27, implemented 2026-07-31) —
+# ONE AXIS, TWO FILES. phi_slider.gd carries
 # the same `calibration` token with the same five values. The pair is the QFEP
 # formula's own parameters made grabbable; it would be incoherent for them to
 # speak different vocabularies about the same question.
@@ -84,6 +85,22 @@ signal slider_released()
 		lambda = clamp(v, 0.0, 1.0)
 		_update_visuals()
 		emit_signal("lambda_changed", lambda)
+
+## THE AXIS — what the scale claims about where the right value lies (see the
+## promotion note above). optimum is the legacy lineage and paints the answer on;
+## the other four inscribe the scale plate instead. Every region they bracket,
+## flag or cut is read out of is_at_edge() and the shipped default — never
+## invented here.
+@export_enum("optimum", "band", "dispute", "gap", "none") var calibration: String = "optimum"
+
+## Read out of the code, not invented: is_at_edge() spans λ 0.3..0.5, and the
+## shipped default (default_position in _build_slider, _get_lambda_color's pivot)
+## sits at 0.4.
+const CALIB_LO := 0.3
+const CALIB_HI := 0.5
+const CALIB_APEX := 0.4
+const CALIB_NEUTRAL := Color(0.50, 0.51, 0.53)
+const CALIB_PLATE := Color(0.14, 0.15, 0.17)
 
 ## Housing — cabinet grammar, VERTICAL dialect (body = "scale lectern").
 ## This was the purest case of the pattern the grammar exists to fix: a bare rail
@@ -318,23 +335,33 @@ func _build_slider() -> void:
 		_handle.released.connect(_on_slider_released)
 
 func _build_visuals() -> void:
-	# Build the rail
-	_rail_mesh = MeshInstance3D.new()
-	var rail_box = BoxMesh.new()
-	rail_box.size = Vector3(rail_length, rail_height, rail_depth)
-	_rail_mesh.mesh = rail_box
-	_rail_mesh.position = Vector3(rail_length / 2, 0, 0)
-	
-	# Rail material with gradient texture
-	_rail_material = StandardMaterial3D.new()
-	_rail_material.albedo_color = Color(0.3, 0.3, 0.3)
-	_rail_material.metallic = 0.3
-	_rail_material.roughness = 0.7
-	_rail_mesh.material_override = _rail_material
-	_stage().add_child(_rail_mesh)
-	
-	# Build gradient overlay on rail
-	_build_rail_gradient()
+	if calibration == "gap":
+		# the rail in two spans — the scale cannot hold the position it recommends
+		_build_rail_cut()
+	else:
+		# Build the rail
+		_rail_mesh = MeshInstance3D.new()
+		var rail_box = BoxMesh.new()
+		rail_box.size = Vector3(rail_length, rail_height, rail_depth)
+		_rail_mesh.mesh = rail_box
+		_rail_mesh.position = Vector3(rail_length / 2, 0, 0)
+
+		# Rail material with gradient texture
+		_rail_material = StandardMaterial3D.new()
+		_rail_material.albedo_color = Color(0.3, 0.3, 0.3)
+		_rail_material.metallic = 0.3
+		_rail_material.roughness = 0.7
+		_rail_mesh.material_override = _rail_material
+		_stage().add_child(_rail_mesh)
+
+	# The colour argument. optimum is the legacy lineage — ten gradient boxes,
+	# segment for segment, and no scale plate. The other four withhold the painted
+	# answer and inscribe the plate instead.
+	match calibration:
+		"band", "dispute", "gap", "none":
+			_build_calibration(calibration)
+		_:
+			_build_rail_gradient()
 	
 	# Build the handle visual - attach to handle so it moves with grab
 	_handle_mesh = MeshInstance3D.new()
@@ -398,8 +425,99 @@ func _build_rail_gradient() -> void:
 		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		mat.albedo_color.a = 0.6
 		segment.material_override = mat
-		
+
 		_stage().add_child(segment)
+
+## ── THE SCALE PLATE ──────────────────────────────────────────────────────────
+## The working face the four non-legacy calibrations inscribe. optimum never
+## builds it: with the question settled there is nothing to argue.
+
+func _build_calibration(mode: String) -> void:
+	# the even coat: the legacy segments' geometry with the colour argument
+	# withheld; gap omits the segments whose centre falls inside the region the
+	# scale cannot hold
+	var segment_count = 10
+	var segment_width = rail_length / segment_count
+	for i in range(segment_count):
+		var t = (float(i) + 0.5) / float(segment_count)
+		if mode == "gap" and t > CALIB_LO and t < CALIB_HI:
+			continue
+		_calib_box(Vector3(segment_width * (i + 0.5), 0, rail_depth * 0.3),
+			Vector3(segment_width * 0.9, rail_height * 1.1, rail_depth * 0.5),
+			_calib_mat(CALIB_NEUTRAL, 0.12, 0.6))
+	# the plate itself — cut with the rail under gap
+	if mode == "gap":
+		_calib_plate(0.0, CALIB_LO)
+		_calib_plate(CALIB_HI, 1.0)
+	else:
+		_calib_plate(0.0, 1.0)
+	if mode == "band":
+		# correctness as a tolerance: the region admitted whole, its width shown,
+		# no apex inside it
+		_calib_box(Vector3(rail_length * (CALIB_LO + CALIB_HI) * 0.5, rail_height * 1.2, rail_depth * 0.75),
+			Vector3(rail_length * (CALIB_HI - CALIB_LO), rail_height * 2.4, rail_depth * 0.35),
+			_calib_mat(COLOR_EDGE, 0.5, 0.35))
+		_calib_post(CALIB_LO, rail_height * 3.5, COLOR_EDGE)
+		_calib_post(CALIB_HI, rail_height * 3.5, COLOR_EDGE)
+	elif mode == "dispute":
+		# three schools, three optima, none dominant — each candidate flagged in
+		# the scale's own colour at that position, at equal height
+		for s in [CALIB_LO, CALIB_APEX, CALIB_HI]:
+			_calib_post(s, rail_height * 6.0, _get_lambda_color(s))
+			_calib_box(Vector3(rail_length * s, rail_height * 6.0 + 0.014, rail_depth * 0.75),
+				Vector3(0.026, 0.020, 0.012), _calib_mat(_get_lambda_color(s), 1.2, 1.0))
+	elif mode == "none":
+		# an even ruler: a tick at every tenth, every position equally warranted
+		for i in range(11):
+			_calib_post(float(i) / 10.0, rail_height * 1.8, CALIB_NEUTRAL.lightened(0.25))
+	# gap adds nothing further: the hole is the inscription
+
+## gap's rail: two spans and a hole where is_at_edge() says the right value
+## lives. The EDGE word-mark keeps its position and ends up labelling rail that
+## is not there.
+func _build_rail_cut() -> void:
+	_rail_material = StandardMaterial3D.new()
+	_rail_material.albedo_color = Color(0.3, 0.3, 0.3)
+	_rail_material.metallic = 0.3
+	_rail_material.roughness = 0.7
+	for span in [[0.0, CALIB_LO], [CALIB_HI, 1.0]]:
+		var piece = MeshInstance3D.new()
+		var box = BoxMesh.new()
+		box.size = Vector3(rail_length * (span[1] - span[0]), rail_height, rail_depth)
+		piece.mesh = box
+		piece.position = Vector3(rail_length * (span[0] + span[1]) * 0.5, 0, 0)
+		piece.material_override = _rail_material
+		_stage().add_child(piece)
+
+func _calib_plate(t0: float, t1: float) -> void:
+	_calib_box(Vector3(rail_length * (t0 + t1) * 0.5, -rail_height * 1.3, rail_depth * 0.1),
+		Vector3(rail_length * (t1 - t0) + 0.02, rail_height * 0.7, rail_depth * 1.7),
+		_calib_mat(CALIB_PLATE, 0.0, 1.0))
+
+func _calib_post(t: float, h: float, color: Color) -> void:
+	_calib_box(Vector3(rail_length * t, h * 0.5, rail_depth * 0.75),
+		Vector3(0.008, h, 0.008), _calib_mat(color, 0.8, 1.0))
+
+func _calib_box(pos: Vector3, size: Vector3, mat: StandardMaterial3D) -> void:
+	var mi = MeshInstance3D.new()
+	var bm = BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.position = pos
+	mi.material_override = mat
+	_stage().add_child(mi)
+
+func _calib_mat(color: Color, emissive_energy: float, alpha: float) -> StandardMaterial3D:
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	if emissive_energy > 0.0:
+		mat.emission_enabled = true
+		mat.emission = color
+		mat.emission_energy_multiplier = emissive_energy
+	if alpha < 1.0:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.albedo_color.a = alpha
+	return mat
 
 func _build_scale_labels() -> void:
 	# Order label (λ=0)

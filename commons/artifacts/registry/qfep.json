@@ -3,7 +3,23 @@
   "lambda_slider": {
    "name": "Lambda Slider",
    "lookup_name": "lambda_slider",
-   "description": "QFEP λ parameter controller. The entropy drive dial: λ=0 (pure order) → λ=0.4 (edge of chaos) → λ=1 (dissolution). Grab and slide to tune how much a system values disorder vs order. Life exists at λ ≈ 0.3-0.5.",
+   "description": "QFEP λ parameter controller. The entropy drive dial: λ=0 (pure order) → λ=0.4 (edge of chaos) → λ=1 (dissolution). Grab and slide to tune how much a system values disorder vs order. Life exists at λ ≈ 0.3-0.5. DNA: calibration selects what the scale claims about where the right value lies (optimum = the painted apex, band = a tolerance, dispute = three schools, gap = the rail cut at the recommendation, none = an even ruler). Use #calibration:band.",
+   "dna": {
+    "promoted": "2026-07-31",
+    "stage": "2 - variation",
+    "axes": {
+     "calibration": [
+      "optimum",
+      "band",
+      "dispute",
+      "gap",
+      "none"
+     ]
+    },
+    "default": "calibration=optimum - the legacy lineage segment for segment: ten gradient boxes at their old sizes, positions, colours, emission 0.3 and alpha 0.6, the rail in its old grey, and no scale plate. All existing placements untouched.",
+    "was": "one fixed gradient rail with the answer painted on in green - the note describing this axis shipped 2026-07-27 with no implementation; the write-up landed, the export did not",
+    "note": "The regions the variants bracket, flag and cut are read out of is_at_edge() (0.3-0.5) and the shipped default (0.4), never invented. Shared token with phi_slider - one axis, two files."
+   },
    "scene": "res://commons/interfaces/qfep/lambda_slider.tscn",
    "category": "qfep",
    "interaction": "grab_slide",
@@ -131,7 +147,23 @@
   "phi_slider": {
    "name": "Phi Slider",
    "lookup_name": "phi_slider",
-   "description": "QFEP φ parameter controller. Rate of entropy change sensitivity: φ<0 (resists change) → φ=0 (neutral) → φ>0 (embraces change). Positive φ is the queer signature—valuing becoming over being.",
+   "description": "QFEP φ parameter controller. Rate of entropy change sensitivity: φ<0 (resists change) → φ=0 (neutral) → φ>0 (embraces change). Positive φ is the queer signature—valuing becoming over being. DNA: calibration selects what the scale claims about where the right value lies (optimum = the painted gradient, band = the queer-signature region as a tolerance, dispute = three schools, gap = the rail cut over the whole recommendation, none = an even ruler). Use #calibration:band.",
+   "dna": {
+    "promoted": "2026-07-31",
+    "stage": "2 - variation",
+    "axes": {
+     "calibration": [
+      "optimum",
+      "band",
+      "dispute",
+      "gap",
+      "none"
+     ]
+    },
+    "default": "calibration=optimum - the legacy lineage segment for segment: ten gradient boxes, the grey rail, no scale plate. All existing placements untouched.",
+    "was": "one fixed purple-to-gold gradient rail with the answer painted on",
+    "note": "Regions read out of has_queer_signature() (phi > 0.2), the shipped default (phi = 0.3) and get_state_description()'s Queer Signature register, never invented. Shared token with lambda_slider - one axis, two files; the design argument lives in lambda_slider.gd's note."
+   },
    "scene": "res://commons/interfaces/qfep/phi_slider.tscn",
    "category": "qfep",
    "interaction": "grab_slide",

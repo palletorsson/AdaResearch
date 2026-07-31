@@ -1,79 +1,108 @@
 {
  "sweep": "phi_slider",
- "peak_changed_pct": 6.405,
+ "peak_changed_pct": 3.787,
+ "subject_pct": 6.325,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "show_particles": true,
-    "show_label": true
+    "calibration": "optimum"
    },
    "b": {
-    "show_particles": true,
-    "show_label": false
+    "calibration": "band"
    },
-   "changed_px": 36630,
-   "changed_pct": 6.342
+   "changed_px": 21875,
+   "changed_pct": 3.787
   },
   {
    "a": {
-    "show_particles": true,
-    "show_label": true
+    "calibration": "optimum"
    },
    "b": {
-    "show_particles": false,
-    "show_label": true
+    "calibration": "dispute"
    },
-   "changed_px": 995,
-   "changed_pct": 0.172
+   "changed_px": 20973,
+   "changed_pct": 3.631
   },
   {
    "a": {
-    "show_particles": true,
-    "show_label": true
+    "calibration": "optimum"
    },
    "b": {
-    "show_particles": false,
-    "show_label": false
+    "calibration": "gap"
    },
-   "changed_px": 36359,
-   "changed_pct": 6.295
+   "changed_px": 15795,
+   "changed_pct": 2.735
   },
   {
    "a": {
-    "show_particles": true,
-    "show_label": false
+    "calibration": "optimum"
    },
    "b": {
-    "show_particles": false,
-    "show_label": true
+    "calibration": "none"
    },
-   "changed_px": 36994,
-   "changed_pct": 6.405
+   "changed_px": 19801,
+   "changed_pct": 3.428
   },
   {
    "a": {
-    "show_particles": true,
-    "show_label": false
+    "calibration": "band"
    },
    "b": {
-    "show_particles": false,
-    "show_label": false
+    "calibration": "dispute"
    },
-   "changed_px": 343,
-   "changed_pct": 0.059
+   "changed_px": 9216,
+   "changed_pct": 1.596
   },
   {
    "a": {
-    "show_particles": false,
-    "show_label": true
+    "calibration": "band"
    },
    "b": {
-    "show_particles": false,
-    "show_label": false
+    "calibration": "gap"
    },
-   "changed_px": 36653,
-   "changed_pct": 6.346
+   "changed_px": 15800,
+   "changed_pct": 2.735
+  },
+  {
+   "a": {
+    "calibration": "band"
+   },
+   "b": {
+    "calibration": "none"
+   },
+   "changed_px": 7515,
+   "changed_pct": 1.301
+  },
+  {
+   "a": {
+    "calibration": "dispute"
+   },
+   "b": {
+    "calibration": "gap"
+   },
+   "changed_px": 14775,
+   "changed_pct": 2.558
+  },
+  {
+   "a": {
+    "calibration": "dispute"
+   },
+   "b": {
+    "calibration": "none"
+   },
+   "changed_px": 6478,
+   "changed_pct": 1.122
+  },
+  {
+   "a": {
+    "calibration": "gap"
+   },
+   "b": {
+    "calibration": "none"
+   },
+   "changed_px": 14043,
+   "changed_pct": 2.431
   }
  ]
 }

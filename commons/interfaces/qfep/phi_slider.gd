@@ -9,6 +9,32 @@ extends Node3D
 
 class_name PhiSlider
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-07-31) — the other file of lambda_slider's ONE
+# AXIS, TWO FILES pairing; the full design argument lives in that file's note.
+# Same `calibration` token, same five values: what the scale claims about where
+# the right value lies.
+#
+#   optimum  the legacy lineage, segment for segment: ten gradient boxes at
+#            their old sizes and colours, the grey rail, no scale plate. The
+#            painted answer — purple is wrong, gold is right.
+#   band     the claim as a tolerance: has_queer_signature()'s region (φ > 0.2)
+#            admitted whole, its width shown, no apex inside it.
+#   dispute  three schools, none dominant: the neutral school (φ = 0), the
+#            shipped default (φ = 0.3), and the far register get_state_description
+#            names "Queer Signature" (marked at its midpoint, φ = 0.75).
+#   gap      the rail cut over the whole recommended region. For φ the
+#            recommendation is one-sided, so the cut takes the scale's entire
+#            positive-beyond-0.2 reach and EMBRACE labels rail that is not there.
+#   none     an even ruler. Every position equally warranted — which for THIS
+#            parameter is itself the loudest claim, since the artifact's truth
+#            line says positive φ is the point.
+#
+# Regions are READ OUT of has_queer_signature(), get_state_description() and the
+# shipped default — never invented here. calibration=optimum leaves all shipped
+# placements untouched.
+# ─────────────────────────────────────────────────────────────────────────────
+
 # @identity
 # essence: slider_position -> phi in [-1,1]; color_gradient(purple->gray->gold)
 # desire: grab the becoming dial and choose: resist change or embrace it
@@ -34,6 +60,21 @@ signal slider_released()
 		phi = clamp(v, -1.0, 1.0)
 		_update_visuals()
 		emit_signal("phi_changed", phi)
+
+## THE AXIS — what the scale claims about where the right value lies (see the
+## promotion note above; the design argument lives in lambda_slider.gd).
+@export_enum("optimum", "band", "dispute", "gap", "none") var calibration: String = "optimum"
+
+## Rail positions in t = (φ+1)/2 space, read out of the code, not invented:
+## has_queer_signature() opens at φ 0.2 → t 0.6; the shipped default φ 0.3 sits
+## at t 0.65; get_state_description's "Queer Signature" register (φ ≥ 0.5) has
+## its midpoint at φ 0.75 → t 0.875; neutral φ 0 sits at t 0.5.
+const CALIB_QUEER := 0.6
+const CALIB_APEX := 0.65
+const CALIB_NEUTRAL_T := 0.5
+const CALIB_FAR := 0.875
+const CALIB_NEUTRAL := Color(0.50, 0.51, 0.53)
+const CALIB_PLATE := Color(0.14, 0.15, 0.17)
 
 ## Visual size of the slider rail
 @export var rail_length: float = 0.5
@@ -144,23 +185,34 @@ func _build_slider() -> void:
 		_handle.released.connect(_on_slider_released)
 
 func _build_visuals() -> void:
-	# Build the rail
-	_rail_mesh = MeshInstance3D.new()
-	var rail_box = BoxMesh.new()
-	rail_box.size = Vector3(rail_length, rail_height, rail_depth)
-	_rail_mesh.mesh = rail_box
-	_rail_mesh.position = Vector3(rail_length / 2, 0, 0)
-	
-	# Rail material
-	_rail_material = StandardMaterial3D.new()
-	_rail_material.albedo_color = Color(0.3, 0.3, 0.3)
-	_rail_material.metallic = 0.3
-	_rail_material.roughness = 0.7
-	_rail_mesh.material_override = _rail_material
-	add_child(_rail_mesh)
-	
-	# Build gradient overlay on rail
-	_build_rail_gradient()
+	if calibration == "gap":
+		# the rail stops where the recommendation begins — the scale cannot hold
+		# the region it recommends
+		_build_rail_cut()
+	else:
+		# Build the rail
+		_rail_mesh = MeshInstance3D.new()
+		var rail_box = BoxMesh.new()
+		rail_box.size = Vector3(rail_length, rail_height, rail_depth)
+		_rail_mesh.mesh = rail_box
+		_rail_mesh.position = Vector3(rail_length / 2, 0, 0)
+
+		# Rail material
+		_rail_material = StandardMaterial3D.new()
+		_rail_material.albedo_color = Color(0.3, 0.3, 0.3)
+		_rail_material.metallic = 0.3
+		_rail_material.roughness = 0.7
+		_rail_mesh.material_override = _rail_material
+		add_child(_rail_mesh)
+
+	# The colour argument. optimum is the legacy lineage — ten gradient boxes,
+	# segment for segment, and no scale plate. The other four withhold the painted
+	# answer and inscribe the plate instead.
+	match calibration:
+		"band", "dispute", "gap", "none":
+			_build_calibration(calibration)
+		_:
+			_build_rail_gradient()
 	
 	# Build the handle visual - attach to handle so it moves with grab
 	_handle_mesh = MeshInstance3D.new()
@@ -218,8 +270,99 @@ func _build_rail_gradient() -> void:
 		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		mat.albedo_color.a = 0.6
 		segment.material_override = mat
-		
+
 		add_child(segment)
+
+## ── THE SCALE PLATE ──────────────────────────────────────────────────────────
+## The working face the four non-legacy calibrations inscribe. optimum never
+## builds it. Mirrors lambda_slider's plate; regions are φ's own.
+
+func _build_calibration(mode: String) -> void:
+	# the even coat: the legacy segments' geometry with the colour argument
+	# withheld; gap omits every segment inside the recommended region
+	var segment_count = 10
+	var segment_width = rail_length / segment_count
+	for i in range(segment_count):
+		var t = (float(i) + 0.5) / float(segment_count)
+		if mode == "gap" and t > CALIB_QUEER:
+			continue
+		_calib_box(Vector3(segment_width * (i + 0.5), 0, rail_depth * 0.3),
+			Vector3(segment_width * 0.9, rail_height * 1.1, rail_depth * 0.5),
+			_calib_mat(CALIB_NEUTRAL, 0.12, 0.6))
+	# the plate itself — cut with the rail under gap, plus a bare end post where
+	# the scale claims to end with no rail to hold it
+	if mode == "gap":
+		_calib_plate(0.0, CALIB_QUEER)
+		_calib_post(1.0, rail_height * 3.0, CALIB_NEUTRAL.lightened(0.25))
+	else:
+		_calib_plate(0.0, 1.0)
+	if mode == "band":
+		# the claim as a tolerance: has_queer_signature()'s whole region, its
+		# width admitted, no apex inside it
+		_calib_box(Vector3(rail_length * (CALIB_QUEER + 1.0) * 0.5, rail_height * 1.2, rail_depth * 0.75),
+			Vector3(rail_length * (1.0 - CALIB_QUEER), rail_height * 2.4, rail_depth * 0.35),
+			_calib_mat(COLOR_EMBRACE, 0.5, 0.35))
+		_calib_post(CALIB_QUEER, rail_height * 3.5, COLOR_EMBRACE)
+		_calib_post(1.0, rail_height * 3.5, COLOR_EMBRACE)
+	elif mode == "dispute":
+		# three schools, three optima, none dominant — each candidate flagged in
+		# the scale's own colour at that position, at equal height
+		for s in [CALIB_NEUTRAL_T, CALIB_APEX, CALIB_FAR]:
+			var c = _get_phi_color(s * 2.0 - 1.0)
+			_calib_post(s, rail_height * 6.0, c)
+			_calib_box(Vector3(rail_length * s, rail_height * 6.0 + 0.014, rail_depth * 0.75),
+				Vector3(0.026, 0.020, 0.012), _calib_mat(c, 1.2, 1.0))
+	elif mode == "none":
+		# an even ruler: a tick at every tenth, every position equally warranted
+		for i in range(11):
+			_calib_post(float(i) / 10.0, rail_height * 1.8, CALIB_NEUTRAL.lightened(0.25))
+	# gap adds nothing further: the hole is the inscription
+
+## gap's rail: one span that stops at has_queer_signature()'s threshold. The
+## EMBRACE word-mark keeps its position at the far end and labels rail that is
+## not there.
+func _build_rail_cut() -> void:
+	_rail_material = StandardMaterial3D.new()
+	_rail_material.albedo_color = Color(0.3, 0.3, 0.3)
+	_rail_material.metallic = 0.3
+	_rail_material.roughness = 0.7
+	var piece = MeshInstance3D.new()
+	var box = BoxMesh.new()
+	box.size = Vector3(rail_length * CALIB_QUEER, rail_height, rail_depth)
+	piece.mesh = box
+	piece.position = Vector3(rail_length * CALIB_QUEER * 0.5, 0, 0)
+	piece.material_override = _rail_material
+	add_child(piece)
+
+func _calib_plate(t0: float, t1: float) -> void:
+	_calib_box(Vector3(rail_length * (t0 + t1) * 0.5, -rail_height * 1.3, rail_depth * 0.1),
+		Vector3(rail_length * (t1 - t0) + 0.02, rail_height * 0.7, rail_depth * 1.7),
+		_calib_mat(CALIB_PLATE, 0.0, 1.0))
+
+func _calib_post(t: float, h: float, color: Color) -> void:
+	_calib_box(Vector3(rail_length * t, h * 0.5, rail_depth * 0.75),
+		Vector3(0.008, h, 0.008), _calib_mat(color, 0.8, 1.0))
+
+func _calib_box(pos: Vector3, size: Vector3, mat: StandardMaterial3D) -> void:
+	var mi = MeshInstance3D.new()
+	var bm = BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.position = pos
+	mi.material_override = mat
+	add_child(mi)
+
+func _calib_mat(color: Color, emissive_energy: float, alpha: float) -> StandardMaterial3D:
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	if emissive_energy > 0.0:
+		mat.emission_enabled = true
+		mat.emission = color
+		mat.emission_energy_multiplier = emissive_energy
+	if alpha < 1.0:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.albedo_color.a = alpha
+	return mat
 
 func _build_scale_labels() -> void:
 	# Resist label (φ=-1)
