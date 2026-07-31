@@ -7,6 +7,17 @@
   },
   "artifacts": {
     "godel_statement_plaque": {
+      "dna": {
+       "axes": {
+       "outside": [
+       "quotation",
+       "margin",
+       "breach",
+       "omission",
+       "habitat"
+       ]
+       }
+      },
       "lookup_name": "godel_statement_plaque",
       "scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
       "class_name": "GodelStatementPlaque",
@@ -142,6 +153,17 @@
       "content": "text"
     },
     "russell_set_box": {
+      "dna": {
+       "axes": {
+       "outside": [
+       "quotation",
+       "margin",
+       "breach",
+       "omission",
+       "habitat"
+       ]
+       }
+      },
       "lookup_name": "russell_set_box",
       "scene": "res://commons/interfaces/foundations/russell_set_box.tscn",
       "class_name": "RussellSetBox",
@@ -411,6 +433,17 @@
       }
     },
     "escher_staircase": {
+      "dna": {
+       "axes": {
+       "seam": [
+       "none",
+       "hairline",
+       "gap",
+       "scaffold",
+       "field"
+       ]
+       }
+      },
       "lookup_name": "escher_staircase",
       "scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
       "class_name": "EscherStaircase",
@@ -547,6 +580,17 @@
       }
     },
     "florensky_sphere": {
+      "dna": {
+       "axes": {
+       "seam": [
+       "none",
+       "hairline",
+       "gap",
+       "scaffold",
+       "field"
+       ]
+       }
+      },
       "lookup_name": "florensky_sphere",
       "scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
       "class_name": "FlorenskySphere",

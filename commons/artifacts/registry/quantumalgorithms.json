@@ -114,6 +114,22 @@
       "qfep_connection": "Amplitudes kept as honest Vector2 pairs, then lerped between gate applications — the collapse the diagrams dramatize is here an animation variable, _gate_lerp running 0 to 1. Superposition becomes graspable exactly by betraying it: continuous interpolation of a jump that has no in-between."
     },
     "superposition_display": {
+      "dna": {
+       "axes": {
+       "remainder": [
+       "core",
+       "twin",
+       "seam",
+       "haze",
+       "witness"
+       ],
+       "vantage": [
+       "specimen",
+       "stele",
+       "chamber"
+       ]
+       }
+      },
       "name": "Superposition Display",
       "lookup_name": "superposition_display",
       "description": "Interactive visualization of quantum superposition |psi> = alpha|0> + beta|1> with VR slider to control the amplitude ratio between basis states.",
