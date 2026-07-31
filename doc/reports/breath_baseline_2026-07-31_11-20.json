@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-07-31T11:20:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "spine_sequences_scored": 24,
+    "mean_head": 6.083,
+    "complete": ["randomness"],
+    "at_stage_6_vr_testing": 23,
+    "note": "Unchanged from 07-24. All 23 non-complete spine sequences sit at stage-6 (vr_testing), a human-gated stage. Doc/Art/Map/Val OK across the board."
+  },
+  "heat_map_top_5": [
+    "museum 75 [active, 3 recent commits]",
+    "floor 65 [active, 1 recent commit]",
+    "garden voice metric 60 [structurally capped]",
+    "pipeline documentation head 60 [saturated]",
+    "breath-harvest-commits 60 [prop-006 recurrence]"
+  ],
+  "garden_health": {
+    "voice_coverage": 0.69,
+    "embodiment_rate": 0.31,
+    "phantom_limbs": 1049,
+    "note": "voice_coverage 0.64 -> 0.69 vs 07-24, driven by the DNA promotion waves, not by a voice pass. Still placement-scoped; not an autonomous lever."
+  },
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (grade_F 0, grade_C 182)",
+    "D_lab_progression": "PASS",
+    "overall": "PASS 4/4"
+  },
+  "dna_declaration_gate": {
+    "declared_axes": 238,
+    "broken": 0,
+    "unverifiable": 2,
+    "orphans_at_baseline": 6,
+    "note": "The orphan count moved 6 -> 2 DURING this baseline, between two runs minutes apart. A concurrent writer was declaring axes in four registry files at the same time as this breath. See discoveries."
+  },
+  "concurrent_writer": {
+    "detected": true,
+    "evidence": "commons/artifacts/registry/{algorithms_misc,commons_artifacts,machinelearning,swarmintelligence}.json went from clean to modified between two git status calls in the same breath; +51 lines of dna blocks appeared.",
+    "response": "This breath scoped every commit by path and touched no registry file."
+  }
+}

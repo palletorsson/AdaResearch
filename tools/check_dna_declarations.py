@@ -376,8 +376,37 @@ PROMOTION_MARK = re.compile(
     r"STAGE-2 DNA|DNA PROMOTION|stage 2, promoted|--- DNA \(stage 2", re.I)
 
 
-def undeclared_promotions(reg: dict) -> list[tuple[str, str]]:
-    """Artifacts whose SOURCE carries a promotion but whose registry says nothing.
+def code_axis_names(src: str) -> list[str]:
+    """The axis names a script actually implements, by the same standard as code_values.
+
+    Looking only for @export_enum was too narrow and made this tool lie in both
+    directions. Most promotions in this codebase declare `@export var evidence: String`
+    and branch on it in a `match` block — sine_wave_controller does exactly that, and the
+    enum-only search reported "no enum axis found" for a file whose axis was right there.
+    A string export ALONE is not an axis, though: finish, unit_code and a dozen other
+    cabinet-grammar fields are strings nobody sweeps. What makes a string export an axis
+    is that the builder BRANCHES on it, or that a map can set it through the config hook.
+    """
+    names: list[str] = []
+
+    def add(n: str) -> None:
+        if n not in names:
+            names.append(n)
+
+    for n in re.findall(r"@export_enum\([^)]*\)\s*var\s+(\w+)", src):
+        add(n)
+    for m in re.finditer(r"@export[^\n]*\bvar\s+(\w+)\s*:\s*String\b", src):
+        n = m.group(1)
+        a = re.escape(n)
+        if (re.search(r"^[ \t]*match\s+(?:self\.)?" + a + r"\s*:\s*$", src, re.M)
+                or re.search(r"config_" + a + r"\b", src)
+                or re.search(r"_pick_axis\([^)]*,\s*" + a + r"\s*\)", src)):
+            add(n)
+    return names
+
+
+def undeclared_promotions(reg: dict) -> tuple[list[tuple[str, str]], list[str]]:
+    """(orphans, note_only) — artifacts whose SOURCE claims a promotion the registry lacks.
 
     The rest of this tool reads declarations and asks whether the code backs
     them. That direction cannot see the opposite failure: axes written into a
@@ -386,17 +415,32 @@ def undeclared_promotions(reg: dict) -> list[tuple[str, str]]:
     the agenda looking un-promoted while its knobs already exist. Found this way
     after a run of promoting agents died mid-task, having written scripts but
     not registries.
+
+    A THIRD STATE, and the reason this returns two lists. lambda_slider carries a
+    forty-line STAGE-2 note dated 2026-07-27 describing a `calibration` axis with five
+    values and what each does with the part it cannot represent — and the file has no
+    such export, no match block, no config hook. The note is the whole promotion. Under
+    the old single-bucket report that file printed under the heading "the axes exist but
+    the sweep can never reach them", which is a claim this function had never checked and
+    which was false. Reporting an unimplemented note as an undeclared axis invites the
+    obvious fix — declare it — and that fix is the science_screen disease in the docstring
+    above: a registry naming values the code cannot reach. They are opposite repairs, so
+    they are counted apart.
     """
-    out: list[tuple[str, str]] = []
+    orphans: list[tuple[str, str]] = []
+    note_only: list[str] = []
     for tok, (entry, rf) in sorted(reg.items()):
         if isinstance(entry.get("dna"), dict):
             continue
         src_path, src = source_for(entry)
         if not src or not PROMOTION_MARK.search(src):
             continue
-        axes = re.findall(r"@export_enum\([^)]*\)\s*var\s+(\w+)", src)
-        out.append((tok, ", ".join(axes) if axes else "(promotion marker, no enum axis found)"))
-    return out
+        axes = code_axis_names(src)
+        if axes:
+            orphans.append((tok, ", ".join(axes)))
+        else:
+            note_only.append(tok)
+    return orphans, note_only
 
 
 def main() -> int:
@@ -444,12 +488,18 @@ def main() -> int:
         for r in unv:
             print(f"  {r['token']}.{r['axis']}: {r['detail']}")
 
-    orphans = undeclared_promotions(reg)
+    orphans, note_only = undeclared_promotions(reg)
     if orphans:
         print(f"\n{len(orphans)} promoted in code, undeclared in the registry "
               f"[the axes exist but the sweep can never reach them]:")
         for tok, axes in orphans:
             print(f"  {tok}: {axes}")
+    if note_only:
+        print(f"\n{len(note_only)} promotion NOTE with no axis in the file "
+              f"[the write-up landed, the export did not — do NOT declare these, "
+              f"implement or retract the note]:")
+        for tok in note_only:
+            print(f"  {tok}")
 
     return len({r["token"] for r in bad})
 
