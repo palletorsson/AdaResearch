@@ -1,23 +1,26 @@
 {
   "map_info": {
-    "name": "CatalystLab_07_Lease",
-    "lookup_name": "CatalystLab_07_Lease",
+    "name": "CatalystLab_08_PrompterBox",
+    "lookup_name": "CatalystLab_08_PrompterBox",
     "format": "json",
     "version": "1.0",
+    "description": "The prompter's box: the catalyst presented from below the stage floor. A flat flush hatch mid-stage and a raised plinth box at the footlights — walk near and the deck plate tips open on its strut, the crystal rises from the glow. The lease returns it beneath the floor.",
     "dimensions": {
       "width": 12,
       "depth": 10,
       "max_height": 5
     },
     "metadata": {
-      "source": "catalyst_lab_generator"
+      "source": "hand_authored",
+      "category": "test",
+      "theme": "prompter_box_theater"
     }
   },
   "layers": {
     "structure": [
       ["1","1","1","1","1","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","2","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1"],
@@ -35,18 +38,18 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," ","t:CatalystLab_08_PrompterBox"," "],
+      [" "," "," "," "," "," "," "," "," "," ","t:CatalystLab_01_Home"," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," ","catalyst_pedestal:0:0#sequence:primitives#lease_s:20"," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","catalyst_prompter_box:0:0#shape:flat#sequence:primitives#lease_s:20"," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","catalyst_vent:0:0#emit_interval_s:2.0#wave_size:5#start_delay_s:3.0#sequence:primitives"," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","catalyst_prompter_box:0:0#shape:plinth#always_open:true#sequence:primitives"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:4.0#sequence:primitives"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ],
@@ -69,7 +72,7 @@
     "show_grid": true,
     "background": {
       "type": "sky",
-      "color": [0.1,0.08,0.16]
+      "color": [0.06, 0.05, 0.1]
     },
     "grid_animation": {
       "enabled": false

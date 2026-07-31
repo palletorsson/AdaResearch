@@ -1068,6 +1068,61 @@
     "derived_from": "aabb_size + category"
    }
   },
+  "catalyst_prompter_box": {
+   "category": "tools",
+   "complexity": "simple",
+   "lookup_name": "catalyst_prompter_box",
+   "name": "Catalyst Prompter Box",
+   "description": "The catalyst presented from below: a one-meter floor hatch (one grid cell) whose diamond-plate lid tips open on a gas-strut angle when the player approaches. The crystal rises from the glowing recess; on pickup or walk-away the lid closes, and a timed lease returns the crystal beneath the floor. shape:flat is a flush hatch, shape:plinth a raised box.",
+   "interaction": "immersive",
+   "map_ready": true,
+   "include_in_map_data": true,
+   "dev_themes": [
+    "gameplay",
+    "hazards",
+    "catalyst"
+   ],
+   "map_sequences": [
+    "hazards",
+    "lab",
+    "testmaps"
+   ],
+   "qfep_connection": "The prompter is never seen from the audience — the understage feeds the player their lines. Same invitation as the pedestal, spoken by the floor instead of a cage.",
+   "tags": [
+    "tool",
+    "catalyst",
+    "hatch",
+    "prompter",
+    "floor",
+    "pickable",
+    "theater"
+   ],
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "spatial_needs": {
+    "platform": "floor",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 1,
+     "back": 0,
+     "left": 0,
+     "right": 0
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "becoming_catalyst",
+     "catalyst_pedestal"
+    ],
+    "preferred_zone": "any"
+   },
+   "scene": "res://commons/hazards/becoming_catalyst/catalyst_prompter_box.tscn"
+  },
   "wedge_skill_pickup": {
    "category": "tools",
    "complexity": "simple",

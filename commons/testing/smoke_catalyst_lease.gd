@@ -16,6 +16,7 @@ extends SceneTree
 
 const PEDESTAL_SCENE := preload("res://commons/hazards/becoming_catalyst/catalyst_pedestal.tscn")
 const VENT_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_vent.tscn")
+const BOX_SCENE := preload("res://commons/hazards/becoming_catalyst/catalyst_prompter_box.tscn")
 
 var _fails: int = 0
 
@@ -103,6 +104,25 @@ func _initialize() -> void:
 	mgr.set("_bracelet_activated", was_activated_3)
 	mgr.set("_bracelet_tracker", was_tracker)
 	mgr.call("save_state")
+
+	# 4 — prompter box (floor-hatch pedestal subclass): shape config
+	# rebuilds the body, and the pedestal lease plumbing is inherited.
+	var box: Node = BOX_SCENE.instantiate()
+	get_root().add_child(box)
+	await process_frame
+	box.call("apply_grid_config", {"shape": "plinth", "lease_s": "20", "sequence": "primitives"})
+	await process_frame
+	_check("prompter box takes plinth shape", String(box.get("shape")) == "plinth")
+	_check("prompter box keeps lease_s", float(box.get("_lease_s")) == 20.0)
+	_check("prompter box built a lid hinge", box.get("_hinge") != null)
+	var box_crystal: Node = box.get("_crystal")
+	if box_crystal == null:
+		_check("prompter box spawned a crystal", false)
+	else:
+		_check("prompter box crystal received lease_s", float(box_crystal.get("lease_s")) == 20.0)
+		# no camera in headless -> the proximity fallback shows the offer
+		_check("prompter box opens without a camera", bool(box.get("_lid_open")))
+	box.queue_free()
 
 	if _fails == 0:
 		print("PASS: catalyst timed lease")
