@@ -1,0 +1,188 @@
+{
+ "sweep": "VRAudioMonitor",
+ "peak_changed_pct": 3.761,
+ "subject_pct": 13.486,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "feed": "live",
+    "chassis": "cased"
+   },
+   "b": {
+    "feed": "live",
+    "chassis": "anonymous"
+   },
+   "changed_px": 1419,
+   "changed_pct": 0.246
+  },
+  {
+   "a": {
+    "feed": "live",
+    "chassis": "cased"
+   },
+   "b": {
+    "feed": "test",
+    "chassis": "cased"
+   },
+   "changed_px": 5500,
+   "changed_pct": 0.952
+  },
+  {
+   "a": {
+    "feed": "live",
+    "chassis": "cased"
+   },
+   "b": {
+    "feed": "test",
+    "chassis": "anonymous"
+   },
+   "changed_px": 6243,
+   "changed_pct": 1.081
+  },
+  {
+   "a": {
+    "feed": "live",
+    "chassis": "cased"
+   },
+   "b": {
+    "feed": "saturated",
+    "chassis": "cased"
+   },
+   "changed_px": 20224,
+   "changed_pct": 3.501
+  },
+  {
+   "a": {
+    "feed": "live",
+    "chassis": "cased"
+   },
+   "b": {
+    "feed": "saturated",
+    "chassis": "anonymous"
+   },
+   "changed_px": 20918,
+   "changed_pct": 3.622
+  },
+  {
+   "a": {
+    "feed": "live",
+    "chassis": "anonymous"
+   },
+   "b": {
+    "feed": "test",
+    "chassis": "cased"
+   },
+   "changed_px": 5608,
+   "changed_pct": 0.971
+  },
+  {
+   "a": {
+    "feed": "live",
+    "chassis": "anonymous"
+   },
+   "b": {
+    "feed": "test",
+    "chassis": "anonymous"
+   },
+   "changed_px": 4868,
+   "changed_pct": 0.843
+  },
+  {
+   "a": {
+    "feed": "live",
+    "chassis": "anonymous"
+   },
+   "b": {
+    "feed": "saturated",
+    "chassis": "cased"
+   },
+   "changed_px": 20577,
+   "changed_pct": 3.562
+  },
+  {
+   "a": {
+    "feed": "live",
+    "chassis": "anonymous"
+   },
+   "b": {
+    "feed": "saturated",
+    "chassis": "anonymous"
+   },
+   "changed_px": 19863,
+   "changed_pct": 3.439
+  },
+  {
+   "a": {
+    "feed": "test",
+    "chassis": "cased"
+   },
+   "b": {
+    "feed": "test",
+    "chassis": "anonymous"
+   },
+   "changed_px": 831,
+   "changed_pct": 0.144
+  },
+  {
+   "a": {
+    "feed": "test",
+    "chassis": "cased"
+   },
+   "b": {
+    "feed": "saturated",
+    "chassis": "cased"
+   },
+   "changed_px": 20995,
+   "changed_pct": 3.635
+  },
+  {
+   "a": {
+    "feed": "test",
+    "chassis": "cased"
+   },
+   "b": {
+    "feed": "saturated",
+    "chassis": "anonymous"
+   },
+   "changed_px": 21723,
+   "changed_pct": 3.761
+  },
+  {
+   "a": {
+    "feed": "test",
+    "chassis": "anonymous"
+   },
+   "b": {
+    "feed": "saturated",
+    "chassis": "cased"
+   },
+   "changed_px": 21712,
+   "changed_pct": 3.759
+  },
+  {
+   "a": {
+    "feed": "test",
+    "chassis": "anonymous"
+   },
+   "b": {
+    "feed": "saturated",
+    "chassis": "anonymous"
+   },
+   "changed_px": 21042,
+   "changed_pct": 3.643
+  },
+  {
+   "a": {
+    "feed": "saturated",
+    "chassis": "cased"
+   },
+   "b": {
+    "feed": "saturated",
+    "chassis": "anonymous"
+   },
+   "changed_px": 5517,
+   "changed_pct": 0.955
+  }
+ ]
+}

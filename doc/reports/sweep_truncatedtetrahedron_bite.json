@@ -1,0 +1,108 @@
+{
+ "sweep": "truncatedtetrahedron",
+ "peak_changed_pct": 10.592,
+ "subject_pct": 11.538,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "truncation": 0.1
+   },
+   "b": {
+    "truncation": 0.25
+   },
+   "changed_px": 8717,
+   "changed_pct": 1.509
+  },
+  {
+   "a": {
+    "truncation": 0.1
+   },
+   "b": {
+    "truncation": 0.5
+   },
+   "changed_px": 21281,
+   "changed_pct": 3.684
+  },
+  {
+   "a": {
+    "truncation": 0.1
+   },
+   "b": {
+    "truncation": 0.75
+   },
+   "changed_px": 38893,
+   "changed_pct": 6.734
+  },
+  {
+   "a": {
+    "truncation": 0.1
+   },
+   "b": {
+    "truncation": 1.0
+   },
+   "changed_px": 61177,
+   "changed_pct": 10.592
+  },
+  {
+   "a": {
+    "truncation": 0.25
+   },
+   "b": {
+    "truncation": 0.5
+   },
+   "changed_px": 18052,
+   "changed_pct": 3.125
+  },
+  {
+   "a": {
+    "truncation": 0.25
+   },
+   "b": {
+    "truncation": 0.75
+   },
+   "changed_px": 36916,
+   "changed_pct": 6.391
+  },
+  {
+   "a": {
+    "truncation": 0.25
+   },
+   "b": {
+    "truncation": 1.0
+   },
+   "changed_px": 58933,
+   "changed_pct": 10.203
+  },
+  {
+   "a": {
+    "truncation": 0.5
+   },
+   "b": {
+    "truncation": 0.75
+   },
+   "changed_px": 24639,
+   "changed_pct": 4.266
+  },
+  {
+   "a": {
+    "truncation": 0.5
+   },
+   "b": {
+    "truncation": 1.0
+   },
+   "changed_px": 48771,
+   "changed_pct": 8.444
+  },
+  {
+   "a": {
+    "truncation": 0.75
+   },
+   "b": {
+    "truncation": 1.0
+   },
+   "changed_px": 28771,
+   "changed_pct": 4.981
+  }
+ ]
+}

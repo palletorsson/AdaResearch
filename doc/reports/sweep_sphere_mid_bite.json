@@ -1,0 +1,344 @@
+{
+ "sweep": "sphere_mid",
+ "peak_changed_pct": 6.718,
+ "subject_pct": 7.358,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "coarse",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 12509,
+   "changed_pct": 2.166
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "mid",
+    "budget_bias": "even"
+   },
+   "changed_px": 22584,
+   "changed_pct": 3.91
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "mid",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 14800,
+   "changed_pct": 2.562
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "fine",
+    "budget_bias": "even"
+   },
+   "changed_px": 27223,
+   "changed_pct": 4.713
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "fine",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 37771,
+   "changed_pct": 6.539
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "even"
+   },
+   "changed_px": 38801,
+   "changed_pct": 6.718
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 37568,
+   "changed_pct": 6.504
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "mid",
+    "budget_bias": "even"
+   },
+   "changed_px": 23175,
+   "changed_pct": 4.012
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "mid",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 14858,
+   "changed_pct": 2.572
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "fine",
+    "budget_bias": "even"
+   },
+   "changed_px": 27380,
+   "changed_pct": 4.74
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "fine",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 35883,
+   "changed_pct": 6.212
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "even"
+   },
+   "changed_px": 37011,
+   "changed_pct": 6.408
+  },
+  {
+   "a": {
+    "resolution": "coarse",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 35892,
+   "changed_pct": 6.214
+  },
+  {
+   "a": {
+    "resolution": "mid",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "mid",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 25921,
+   "changed_pct": 4.488
+  },
+  {
+   "a": {
+    "resolution": "mid",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "fine",
+    "budget_bias": "even"
+   },
+   "changed_px": 24281,
+   "changed_pct": 4.204
+  },
+  {
+   "a": {
+    "resolution": "mid",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "fine",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 35958,
+   "changed_pct": 6.225
+  },
+  {
+   "a": {
+    "resolution": "mid",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "even"
+   },
+   "changed_px": 36119,
+   "changed_pct": 6.253
+  },
+  {
+   "a": {
+    "resolution": "mid",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 34919,
+   "changed_pct": 6.046
+  },
+  {
+   "a": {
+    "resolution": "mid",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "fine",
+    "budget_bias": "even"
+   },
+   "changed_px": 27765,
+   "changed_pct": 4.807
+  },
+  {
+   "a": {
+    "resolution": "mid",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "fine",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 33074,
+   "changed_pct": 5.726
+  },
+  {
+   "a": {
+    "resolution": "mid",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "even"
+   },
+   "changed_px": 34302,
+   "changed_pct": 5.939
+  },
+  {
+   "a": {
+    "resolution": "mid",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 33537,
+   "changed_pct": 5.806
+  },
+  {
+   "a": {
+    "resolution": "fine",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "fine",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 27725,
+   "changed_pct": 4.8
+  },
+  {
+   "a": {
+    "resolution": "fine",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "even"
+   },
+   "changed_px": 27273,
+   "changed_pct": 4.722
+  },
+  {
+   "a": {
+    "resolution": "fine",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 26515,
+   "changed_pct": 4.591
+  },
+  {
+   "a": {
+    "resolution": "fine",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "even"
+   },
+   "changed_px": 1589,
+   "changed_pct": 0.275
+  },
+  {
+   "a": {
+    "resolution": "fine",
+    "budget_bias": "latitude"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 10409,
+   "changed_pct": 1.802
+  },
+  {
+   "a": {
+    "resolution": "ultra",
+    "budget_bias": "even"
+   },
+   "b": {
+    "resolution": "ultra",
+    "budget_bias": "latitude"
+   },
+   "changed_px": 9754,
+   "changed_pct": 1.689
+  }
+ ]
+}

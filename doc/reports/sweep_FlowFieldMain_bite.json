@@ -1,0 +1,218 @@
+{
+ "sweep": "FlowFieldMain",
+ "peak_changed_pct": 1.268,
+ "subject_pct": 1.213,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "scenario": "tour"
+   },
+   "b": {
+    "scenario": "open"
+   },
+   "changed_px": 6011,
+   "changed_pct": 1.041
+  },
+  {
+   "a": {
+    "scenario": "tour"
+   },
+   "b": {
+    "scenario": "block"
+   },
+   "changed_px": 5500,
+   "changed_pct": 0.952
+  },
+  {
+   "a": {
+    "scenario": "tour"
+   },
+   "b": {
+    "scenario": "u_wall"
+   },
+   "changed_px": 6013,
+   "changed_pct": 1.041
+  },
+  {
+   "a": {
+    "scenario": "tour"
+   },
+   "b": {
+    "scenario": "zigzag"
+   },
+   "changed_px": 6025,
+   "changed_pct": 1.043
+  },
+  {
+   "a": {
+    "scenario": "tour"
+   },
+   "b": {
+    "scenario": "wind"
+   },
+   "changed_px": 5956,
+   "changed_pct": 1.031
+  },
+  {
+   "a": {
+    "scenario": "tour"
+   },
+   "b": {
+    "scenario": "noise"
+   },
+   "changed_px": 6138,
+   "changed_pct": 1.063
+  },
+  {
+   "a": {
+    "scenario": "open"
+   },
+   "b": {
+    "scenario": "block"
+   },
+   "changed_px": 4698,
+   "changed_pct": 0.813
+  },
+  {
+   "a": {
+    "scenario": "open"
+   },
+   "b": {
+    "scenario": "u_wall"
+   },
+   "changed_px": 3715,
+   "changed_pct": 0.643
+  },
+  {
+   "a": {
+    "scenario": "open"
+   },
+   "b": {
+    "scenario": "zigzag"
+   },
+   "changed_px": 4731,
+   "changed_pct": 0.819
+  },
+  {
+   "a": {
+    "scenario": "open"
+   },
+   "b": {
+    "scenario": "wind"
+   },
+   "changed_px": 6800,
+   "changed_pct": 1.177
+  },
+  {
+   "a": {
+    "scenario": "open"
+   },
+   "b": {
+    "scenario": "noise"
+   },
+   "changed_px": 6954,
+   "changed_pct": 1.204
+  },
+  {
+   "a": {
+    "scenario": "block"
+   },
+   "b": {
+    "scenario": "u_wall"
+   },
+   "changed_px": 5528,
+   "changed_pct": 0.957
+  },
+  {
+   "a": {
+    "scenario": "block"
+   },
+   "b": {
+    "scenario": "zigzag"
+   },
+   "changed_px": 6341,
+   "changed_pct": 1.098
+  },
+  {
+   "a": {
+    "scenario": "block"
+   },
+   "b": {
+    "scenario": "wind"
+   },
+   "changed_px": 7086,
+   "changed_pct": 1.227
+  },
+  {
+   "a": {
+    "scenario": "block"
+   },
+   "b": {
+    "scenario": "noise"
+   },
+   "changed_px": 6855,
+   "changed_pct": 1.187
+  },
+  {
+   "a": {
+    "scenario": "u_wall"
+   },
+   "b": {
+    "scenario": "zigzag"
+   },
+   "changed_px": 4571,
+   "changed_pct": 0.791
+  },
+  {
+   "a": {
+    "scenario": "u_wall"
+   },
+   "b": {
+    "scenario": "wind"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "scenario": "u_wall"
+   },
+   "b": {
+    "scenario": "noise"
+   },
+   "changed_px": 7264,
+   "changed_pct": 1.258
+  },
+  {
+   "a": {
+    "scenario": "zigzag"
+   },
+   "b": {
+    "scenario": "wind"
+   },
+   "changed_px": 6635,
+   "changed_pct": 1.149
+  },
+  {
+   "a": {
+    "scenario": "zigzag"
+   },
+   "b": {
+    "scenario": "noise"
+   },
+   "changed_px": 7325,
+   "changed_pct": 1.268
+  },
+  {
+   "a": {
+    "scenario": "wind"
+   },
+   "b": {
+    "scenario": "noise"
+   },
+   "changed_px": 7091,
+   "changed_pct": 1.228
+  }
+ ]
+}

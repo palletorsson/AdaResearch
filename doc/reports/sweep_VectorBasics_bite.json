@@ -1,0 +1,344 @@
+{
+ "sweep": "VectorBasics",
+ "peak_changed_pct": 1.265,
+ "subject_pct": 1.873,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "reading": "full",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "full",
+    "reference": "y"
+   },
+   "changed_px": 7198,
+   "changed_pct": 1.246
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "polar",
+    "reference": "x"
+   },
+   "changed_px": 2400,
+   "changed_pct": 0.416
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "polar",
+    "reference": "y"
+   },
+   "changed_px": 6770,
+   "changed_pct": 1.172
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "cartesian",
+    "reference": "x"
+   },
+   "changed_px": 6956,
+   "changed_pct": 1.204
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "cartesian",
+    "reference": "y"
+   },
+   "changed_px": 6956,
+   "changed_pct": 1.204
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "x"
+   },
+   "changed_px": 6940,
+   "changed_pct": 1.202
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "y"
+   },
+   "changed_px": 6939,
+   "changed_pct": 1.201
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "polar",
+    "reference": "x"
+   },
+   "changed_px": 6624,
+   "changed_pct": 1.147
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "polar",
+    "reference": "y"
+   },
+   "changed_px": 1035,
+   "changed_pct": 0.179
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "cartesian",
+    "reference": "x"
+   },
+   "changed_px": 7283,
+   "changed_pct": 1.261
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "cartesian",
+    "reference": "y"
+   },
+   "changed_px": 7283,
+   "changed_pct": 1.261
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "x"
+   },
+   "changed_px": 7308,
+   "changed_pct": 1.265
+  },
+  {
+   "a": {
+    "reading": "full",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "y"
+   },
+   "changed_px": 7308,
+   "changed_pct": 1.265
+  },
+  {
+   "a": {
+    "reading": "polar",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "polar",
+    "reference": "y"
+   },
+   "changed_px": 6353,
+   "changed_pct": 1.1
+  },
+  {
+   "a": {
+    "reading": "polar",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "cartesian",
+    "reference": "x"
+   },
+   "changed_px": 6362,
+   "changed_pct": 1.101
+  },
+  {
+   "a": {
+    "reading": "polar",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "cartesian",
+    "reference": "y"
+   },
+   "changed_px": 6362,
+   "changed_pct": 1.101
+  },
+  {
+   "a": {
+    "reading": "polar",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "x"
+   },
+   "changed_px": 6183,
+   "changed_pct": 1.07
+  },
+  {
+   "a": {
+    "reading": "polar",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "y"
+   },
+   "changed_px": 6181,
+   "changed_pct": 1.07
+  },
+  {
+   "a": {
+    "reading": "polar",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "cartesian",
+    "reference": "x"
+   },
+   "changed_px": 7118,
+   "changed_pct": 1.232
+  },
+  {
+   "a": {
+    "reading": "polar",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "cartesian",
+    "reference": "y"
+   },
+   "changed_px": 7118,
+   "changed_pct": 1.232
+  },
+  {
+   "a": {
+    "reading": "polar",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "x"
+   },
+   "changed_px": 7139,
+   "changed_pct": 1.236
+  },
+  {
+   "a": {
+    "reading": "polar",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "y"
+   },
+   "changed_px": 7139,
+   "changed_pct": 1.236
+  },
+  {
+   "a": {
+    "reading": "cartesian",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "cartesian",
+    "reference": "y"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "reading": "cartesian",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "x"
+   },
+   "changed_px": 455,
+   "changed_pct": 0.079
+  },
+  {
+   "a": {
+    "reading": "cartesian",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "y"
+   },
+   "changed_px": 506,
+   "changed_pct": 0.088
+  },
+  {
+   "a": {
+    "reading": "cartesian",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "x"
+   },
+   "changed_px": 455,
+   "changed_pct": 0.079
+  },
+  {
+   "a": {
+    "reading": "cartesian",
+    "reference": "y"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "y"
+   },
+   "changed_px": 506,
+   "changed_pct": 0.088
+  },
+  {
+   "a": {
+    "reading": "bare",
+    "reference": "x"
+   },
+   "b": {
+    "reading": "bare",
+    "reference": "y"
+   },
+   "changed_px": 54,
+   "changed_pct": 0.009
+  }
+ ]
+}
