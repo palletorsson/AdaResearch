@@ -1121,7 +1121,29 @@
     ],
     "preferred_zone": "any"
    },
-   "scene": "res://commons/hazards/becoming_catalyst/catalyst_prompter_box.tscn"
+   "scene": "res://commons/hazards/becoming_catalyst/catalyst_prompter_box.tscn",
+   "dna": {
+    "promoted": "2026-07-31",
+    "stage": "2 - variation",
+    "axes": {
+     "emergence": [
+      "hatch",
+      "doors",
+      "slide",
+      "vent"
+     ],
+     "shape": [
+      "flat",
+      "plinth"
+     ]
+    },
+    "fixture": {
+     "always_open": "true"
+    },
+    "default": "emergence=hatch, shape=flat - the rear-hinged deck plate is the shipped closure and flat the shipped body, so CatalystLab_08_PrompterBox (which sets shape explicitly and never sets emergence) renders identically",
+    "was": "a single rear-hinged lid was the only way the floor could open; the artifact could stage the box but not the floor parting or the vent, even though its own brief (the catalyst emerging from box, floor, vent) names all three",
+    "note": "emergence is the how-of-arrival axis: hatch = the box lid on its gas strut, doors = the floor parting as stage trap doors, slide = the plate slipping beneath the stage, vent = no lid at all, the crystal rising through a grate in a standing light shaft (kin of catalyst_vent). The fixture pins always_open so every tile shows the offer, not eight identical closed plates."
+   }
   },
   "wedge_skill_pickup": {
    "category": "tools",
