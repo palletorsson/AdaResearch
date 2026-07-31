@@ -2422,6 +2422,17 @@
    "qfep_connection": "Creatures evolving bodies and behaviors together — morphology and control co-adapting, gaits discovered rather than designed. Karl Sims' lineage: the search space widened until evolution invents not just answers but the bodies that carry them."
   },
   "evolving_flowers": {
+   "dna": {
+    "axes": {
+    "selection": [
+    "drift",
+    "uniform",
+    "culled",
+    "runaway",
+    "split"
+    ]
+    }
+   },
    "category": "machinelearning",
    "complexity": "beginner",
    "description": "Flowers evolving color, petal count, and shape through aesthetic selection — beauty as a fitness function. Interactive evolution where the user is the selection pressure.",

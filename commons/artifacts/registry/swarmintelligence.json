@@ -310,6 +310,16 @@
    }
   },
   "ant_colony_v2": {
+   "dna": {
+    "axes": {
+    "anchorage": [
+    "pair",
+    "triad",
+    "ring",
+    "scattered"
+    ]
+    }
+   },
    "name": "Ant Colony V2",
    "lookup_name": "ant_colony_v2",
    "description": "Improved ant colony simulation with updated agent behavior and visuals.",
@@ -429,6 +439,16 @@
    }
   },
   "physarum_colony": {
+   "dna": {
+    "axes": {
+    "anchorage": [
+    "triad",
+    "pair",
+    "ring",
+    "scattered"
+    ]
+    }
+   },
    "name": "Physarum Colony",
    "lookup_name": "physarum_colony",
    "description": "Physarum slime mold simulation demonstrating emergent network formation.",
