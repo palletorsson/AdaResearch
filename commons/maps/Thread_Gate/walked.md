@@ -70,3 +70,27 @@ freeze the bugs inside them, or nothing could ever be repaired.
 Across the recipe shelf, six of twenty-eight now reproduce their map exactly and twenty-one improved.
 What remains is honest and named: within-op fixes we want to keep, and the corpus the grammar reads —
 the harvest pool, the registry, the measured floor — which no recipe pins yet.
+
+**v7.2 — the furniture is measured.** Palle ruled by looking: four furnished versions of this gate,
+rendered from one camera, and the verdict was that the dial I had been turning was the wrong one. It
+was never how MUCH the pass places. It was that the pass had never measured what it places. It judged
+every artifact by its probed size — that is how it knows a body is never seen coming — and had never
+once measured its own furniture.
+
+Probed, the vocabulary reads: a wall panel 2.40 by 2.60, a cabinet 1.82 wide, a worktable 1.60, a step
+base two metres square, a barrier fence four and a half metres long. This gate was carrying four props
+that could not fit the cells they stood in, including two step bases in single cells and two cabinets
+side by side, each overhanging the other. FIT — the law the rooms have obeyed since round four — now
+applies to what goes in them: the footprint must be clear, or a smaller prop is chosen, or nothing goes
+in at all.
+
+Three lessons, and the third is the one worth keeping. The first cut of the arithmetic demanded a whole
+extra cell for a four-centimetre overhang and rejected the supply pile everywhere — a rule with no eye
+in it. Two props of the seven turn out to be unplaceable AS COMPANIONS, because a companion stands
+beside a body and their clearing always contains that body; they are room-scale, and they stay in the
+table because the preference is right and an offset placement would redeem them. And a footprint is
+invisible to a grid that stores one token per cell: the cabinet passed its own check, and the supply
+pile then landed inside it. A placed prop now reserves the cells its body occupies, for as long as the
+pass is running.
+
+Ten props, none overhanging. Pathfinder unchanged: 235 of 262, the mold still overlooked by design.

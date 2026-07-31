@@ -573,12 +573,51 @@ def inspect(md, name):
 
 def apply(md, props, budget):
     S, U, I, WL = grids(md)
+    D = len(S); W = max((len(r) for r in S), default=0)
+
+    # Cells already spoken for by a placed prop's BODY, not just its cell. A
+    # grid records one token per cell, so an overhang is invisible to the map
+    # itself: the cabinet at (26,14) passed its own check, and the supply pile
+    # then landed at (27,14), inside the cabinet. Claims make the footprint real
+    # for as long as the pass is running.
+    claimed = set()
+
+    def ok(c):
+        """A cell this prop may overhang into, judged on the grid AS IT IS NOW."""
+        x, z = c
+        if not (0 <= x < W and 0 <= z < D):
+            return False
+        if not (0 < h_at(S, x, z) <= 3):
+            return False
+        if c in claimed:
+            return False
+        return not str(I[z][x]).strip() and not str(U[z][x]).strip()
+
+    def claim(tok, cell, rot):
+        span = prop_cells(tok, rot)
+        if span is None:
+            return
+        ex, ez = span
+        for dx in range(-ex, ex + 1):
+            for dz in range(-ez, ez + 1):
+                claimed.add((cell[0] + dx, cell[1] + dz))
+
     placed = []
     for p in props[:budget]:
         # the last gate: a prop nobody measured never enters a map (`el` is a
         # utility token, not an artifact, and has no body to measure)
         if p["layer"] == "interactables" and prop_cells(p["place"]) is None:
             continue
+        # FIT again, HERE. Proposals are judged against the map as it was found,
+        # so two props proposed apart can still collide once both are placed —
+        # the gate shipped a 1.82 m cabinet overhanging the cell where a supply
+        # pile had just landed. Only apply() knows the grid as it actually is.
+        if p["layer"] == "interactables" and not p.get("at_wall"):
+            here = tuple(p["cell"])
+            if here in claimed or not prop_fits(p["place"], here, p.get("rot", 0),
+                                                lambda c: ok(c) or c == here):
+                continue
+            claim(p["place"], here, p.get("rot", 0))
         x, z = p["cell"]
         if p.get("kind") == "vista" and p.get("at_wall"):
             wx, wz = p["at_wall"]
