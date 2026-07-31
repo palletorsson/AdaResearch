@@ -233,151 +233,47 @@
   {
    "artifact": "grab_sphere_E",
    "axis": "grasp",
-   "frame": 0.03783,
-   "focus": 0.10824,
-   "verdict": "WEAK",
+   "frame": 0.08099,
+   "focus": 0.2926,
+   "verdict": "bites",
    "subject": 0.00605,
    "pairs": 10,
    "twins": [],
-   "colour_only": [
-    {
-     "a": "hollow",
-     "b": "swarm",
-     "focus": 0.0,
-     "rgb": 1.0
-    },
-    {
-     "a": "hollow",
-     "b": "socket",
-     "focus": 0.01067,
-     "rgb": 1.0
-    },
-    {
-     "a": "socket",
-     "b": "swarm",
-     "focus": 0.01067,
-     "rgb": 1.0
-    },
-    {
-     "a": "chorus",
-     "b": "hollow",
-     "focus": 0.01944,
-     "rgb": 1.0
-    },
-    {
-     "a": "chorus",
-     "b": "swarm",
-     "focus": 0.01944,
-     "rgb": 1.0
-    },
-    {
-     "a": "atom",
-     "b": "hollow",
-     "focus": 0.0549,
-     "rgb": 1.0
-    },
-    {
-     "a": "atom",
-     "b": "swarm",
-     "focus": 0.0549,
-     "rgb": 1.0
-    }
-   ]
+   "colour_only": []
   },
   {
    "artifact": "grab_sphere_F",
    "axis": "grasp",
-   "frame": 0.02511,
-   "focus": 0.07931,
-   "verdict": "WEAK",
+   "frame": 0.07201,
+   "focus": 0.27093,
+   "verdict": "bites",
    "subject": 0.00578,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "grab_sphere_lambda",
+   "axis": "grasp",
+   "frame": 0.03187,
+   "focus": 0.1562,
+   "verdict": "bites",
+   "subject": 0.00582,
    "pairs": 10,
    "twins": [
     {
      "a": "hollow",
-     "b": "swarm",
-     "focus": 0.0001,
-     "rgb": 0.00018
+     "b": "socket",
+     "focus": 0.01977,
+     "rgb": 0.03327
     }
    ],
    "colour_only": [
     {
      "a": "socket",
      "b": "swarm",
-     "focus": 0.04278,
-     "rgb": 0.09822
-    },
-    {
-     "a": "atom",
-     "b": "hollow",
-     "focus": 0.05496,
-     "rgb": 0.16359
-    },
-    {
-     "a": "atom",
-     "b": "swarm",
-     "focus": 0.05496,
-     "rgb": 0.16304
-    },
-    {
-     "a": "hollow",
-     "b": "socket",
-     "focus": 0.05903,
-     "rgb": 0.13566
-    }
-   ]
-  },
-  {
-   "artifact": "grab_sphere_lambda",
-   "axis": "grasp",
-   "frame": 0.03981,
-   "focus": 0.11029,
-   "verdict": "WEAK",
-   "subject": 0.00582,
-   "pairs": 10,
-   "twins": [],
-   "colour_only": [
-    {
-     "a": "hollow",
-     "b": "swarm",
-     "focus": 0.0,
-     "rgb": 1.0
-    },
-    {
-     "a": "hollow",
-     "b": "socket",
-     "focus": 0.01169,
-     "rgb": 1.0
-    },
-    {
-     "a": "socket",
-     "b": "swarm",
-     "focus": 0.01169,
-     "rgb": 1.0
-    },
-    {
-     "a": "chorus",
-     "b": "hollow",
-     "focus": 0.02089,
-     "rgb": 1.0
-    },
-    {
-     "a": "chorus",
-     "b": "swarm",
-     "focus": 0.02089,
-     "rgb": 1.0
-    },
-    {
-     "a": "atom",
-     "b": "hollow",
-     "focus": 0.0549,
-     "rgb": 1.0
-    },
-    {
-     "a": "atom",
-     "b": "swarm",
-     "focus": 0.0549,
-     "rgb": 1.0
+     "focus": 0.05925,
+     "rgb": 0.10233
     }
    ]
   }

@@ -130,6 +130,21 @@ func _ready() -> void:
 	print("RussellSetBox: Ready — 'Does this set contain itself?'")
 
 func apply_grid_config(config: Dictionary) -> void:
+	# GUARD FIRST, ON THE KEYS THIS ARTIFACT ACTUALLY CONSUMES. Everything below ends in
+	# an unconditional teardown that frees every child and resets _current_depth, so an
+	# unrelated key from any wrapper would discard the layers the player has opened.
+	# An is_empty() check is not enough — a config carrying only #mount: would still
+	# reach the teardown. The kin file godel_statement_plaque.gd guards the same way,
+	# on the one key it consumes; this one consumes six.
+	var consumed: PackedStringArray = ["outside", "size", "max_visible_depth",
+			"show_label", "outer_color", "inner_color"]
+	var touches_mine := false
+	for k in consumed:
+		if config.has(k):
+			touches_mine = true
+			break
+	if not touches_mine:
+		return
 	if config.has("outside"):
 		outside = Outside.normalise_outside(str(config["outside"]), outside)
 	if config.has("size"):

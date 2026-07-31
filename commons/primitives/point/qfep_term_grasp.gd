@@ -243,7 +243,10 @@ func _build_chorus() -> void:
 ## between them. The solid body is hidden rather than destroyed so the pickable
 ## keeps a valid surface to swap materials on when you grab it.
 func _build_hollow() -> void:
-	visible = false
+	# NOT `visible = false`: the rings/grains below are CHILDREN of this node, and
+	# is_visible_in_tree() walks ancestors, so hiding self hid them too — this value
+	# rendered an empty frame and measured 0 px against its sibling.
+	_efface_body()
 	var wire: StandardMaterial3D = _mat(_tint, 2.1, 1.0)
 	var t: float = _r * 0.090
 	for rot: Vector3 in [Vector3.ZERO, Vector3(90, 0, 0), Vector3(0, 0, 90),
@@ -269,7 +272,10 @@ func _build_hollow() -> void:
 ## outward, with nothing at the centre. Deterministic on purpose: a still has
 ## to be the same still twice.
 func _build_swarm() -> void:
-	visible = false
+	# NOT `visible = false`: the rings/grains below are CHILDREN of this node, and
+	# is_visible_in_tree() walks ancestors, so hiding self hid them too — this value
+	# rendered an empty frame and measured 0 px against its sibling.
+	_efface_body()
 	var grain := SphereMesh.new()
 	grain.radius = _r * 0.165
 	grain.height = _r * 0.330
@@ -367,3 +373,20 @@ func _fib_points(n: int, rad: float) -> Array:
 		var th: float = golden * float(i)
 		pts.append(Vector3(cos(th) * ring, y, sin(th) * ring) * rad)
 	return pts
+
+
+## Remove the solid pellet WITHOUT hiding the node, and WITHOUT touching its material.
+##
+## `hollow` and `swarm` are the two values whose whole argument is that there is nothing to
+## close your hand on. Both originally expressed that as `visible = false` on self — which
+## also hid every ring and grain parented to it, because Godot resolves visibility through
+## is_visible_in_tree(). Both values rendered an empty frame, and the sweep measured them as
+## identical to each other and reported the axis faint.
+##
+## `layers = 0` instead of a transparent material_override: VisualInstance3D.layers is
+## per-instance and does NOT propagate to children, so the rings and grains still draw. It
+## also leaves `mesh` and the material alone, which matters because grab_sphere.gd captures
+## _original_material via get_active_material(0) for the pickup highlight swap — a
+## material_override would have replaced exactly what that call returns.
+func _efface_body() -> void:
+	layers = 0
