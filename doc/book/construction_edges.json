@@ -1378,7 +1378,7 @@
    "gd": "algorithms\\emergentsystems\\selforganizingpatterns\\self_organization_principles.gd",
    "atoms": {
     "line": 12,
-    "text": 8
+    "cube": 2
    },
    "uses": [],
    "engine": {
@@ -1389,9 +1389,9 @@
     "stage_name": "3d",
     "classes_used": [
      "BaseMaterial3D",
+     "BoxMesh",
      "GDScript",
      "ImmediateMesh",
-     "Label3D",
      "Mesh",
      "MeshInstance3D",
      "Node",
@@ -1401,7 +1401,7 @@
     ]
    },
    "depth": 1,
-   "grade": 2
+   "grade": 3
   },
   "simulated_annealing": {
    "gd": "algorithms\\optimization\\simulatedannealing\\simulated_annealing_visualization.gd",
@@ -2764,8 +2764,7 @@
   "pulsar_visualizer": {
    "gd": "algorithms\\arrays\\pulsar\\pulsar_visualizer.gd",
    "atoms": {
-    "text": 6,
-    "plane": 1
+    "cube": 2
    },
    "uses": [
     "binary_table",
@@ -2778,11 +2777,9 @@
     "stage": 3,
     "stage_name": "3d",
     "classes_used": [
-     "BaseMaterial3D",
-     "Label3D",
+     "BoxMesh",
      "MeshInstance3D",
      "Node3D",
-     "QuadMesh",
      "StandardMaterial3D"
     ]
    },
@@ -3062,9 +3059,9 @@
    "atoms": {
     "touch": 4,
     "shader": 3,
-    "text": 7,
-    "cube": 4,
+    "cube": 6,
     "plane": 2,
+    "text": 1,
     "sphere": 1
    },
    "uses": [],
@@ -9085,8 +9082,8 @@
    "atoms": {
     "field": 6,
     "line": 2,
-    "text": 9,
-    "cube": 1,
+    "cube": 3,
+    "text": 1,
     "sphere": 1
    },
    "uses": [],
@@ -11536,6 +11533,85 @@
    },
    "depth": 2,
    "grade": 4
+  },
+  "mode_crown": {
+   "gd": "commons\\artifacts\\curator\\mode_crown.gd",
+   "atoms": {
+    "prism": 1,
+    "plane": 1,
+    "cube": 1,
+    "cylinder": 1
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 3,
+    "stage_name": "3d",
+    "classes_used": [
+     "BaseMaterial3D",
+     "BoxMesh",
+     "CylinderMesh",
+     "MeshInstance3D",
+     "Node3D",
+     "PrismMesh",
+     "QuadMesh",
+     "SpotLight3D",
+     "StandardMaterial3D"
+    ]
+   },
+   "depth": 1,
+   "grade": 3
+  },
+  "mode_dialogue": {
+   "gd": "commons\\artifacts\\curator\\mode_dialogue.gd",
+   "atoms": {
+    "cube": 2
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 3,
+    "stage_name": "3d",
+    "classes_used": [
+     "BoxMesh",
+     "MeshInstance3D",
+     "Node3D",
+     "SpotLight3D",
+     "StandardMaterial3D"
+    ]
+   },
+   "depth": 1,
+   "grade": 3
+  },
+  "mode_witness_wall": {
+   "gd": "commons\\artifacts\\curator\\mode_witness_wall.gd",
+   "atoms": {
+    "cube": 3
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 3,
+    "stage_name": "3d",
+    "classes_used": [
+     "BaseMaterial3D",
+     "BoxMesh",
+     "FileAccess",
+     "JSON",
+     "MeshInstance3D",
+     "Node3D",
+     "SpotLight3D",
+     "StandardMaterial3D"
+    ]
+   },
+   "depth": 1,
+   "grade": 3
   },
   "bst_visualization": {
    "gd": "algorithms\\datastructures\\binarysearchtree\\bst_visualization.gd",
@@ -18405,6 +18481,113 @@
    "depth": 1,
    "grade": 5
   },
+  "jspace_zoom_chamber": {
+   "gd": "commons\\artifacts\\jspace\\jspace_zoom_chamber.gd",
+   "atoms": {
+    "cylinder": 1,
+    "cube": 2
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 3,
+    "stage_name": "3d",
+    "classes_used": [
+     "BaseMaterial3D",
+     "BoxMesh",
+     "CylinderMesh",
+     "FileAccess",
+     "JSON",
+     "MeshInstance3D",
+     "Node3D",
+     "StandardMaterial3D"
+    ]
+   },
+   "depth": 1,
+   "grade": 3
+  },
+  "jspace_feature_field": {
+   "gd": "commons\\artifacts\\jspace\\jspace_feature_field.gd",
+   "atoms": {
+    "cube": 1
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 3,
+    "stage_name": "3d",
+    "classes_used": [
+     "BoxMesh",
+     "MeshInstance3D",
+     "Node3D",
+     "RandomNumberGenerator",
+     "StandardMaterial3D",
+     "Time"
+    ]
+   },
+   "depth": 1,
+   "grade": 3
+  },
+  "jspace_count_plates": {
+   "gd": "commons\\artifacts\\jspace\\jspace_count_plates.gd",
+   "atoms": {
+    "cube": 1,
+    "touch": 1,
+    "sphere": 1
+   },
+   "uses": [
+    "edge_zone_crystal"
+   ],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 5,
+    "stage_name": "physics",
+    "classes_used": [
+     "Area3D",
+     "BoxMesh",
+     "BoxShape3D",
+     "CollisionShape3D",
+     "MeshInstance3D",
+     "Node3D",
+     "SphereMesh",
+     "StandardMaterial3D"
+    ]
+   },
+   "depth": 1,
+   "grade": 3
+  },
+  "jspace_ring": {
+   "gd": "commons\\artifacts\\jspace\\jspace_ring.gd",
+   "atoms": {
+    "cylinder": 1,
+    "cube": 2
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 3,
+    "stage_name": "3d",
+    "classes_used": [
+     "BoxMesh",
+     "CylinderMesh",
+     "FileAccess",
+     "JSON",
+     "MeshInstance3D",
+     "Node3D",
+     "StandardMaterial3D"
+    ]
+   },
+   "depth": 1,
+   "grade": 3
+  },
   "lead_safety_door": {
    "gd": "commons\\artifacts\\lead_safety_door\\lead_safety_door.gd",
    "atoms": {
@@ -21168,8 +21351,8 @@
    "gd": "algorithms\\lsystems\\context_free_grammars\\ContextFreeGrammars.gd",
    "atoms": {
     "line": 8,
-    "text": 7,
-    "plane": 1
+    "plane": 1,
+    "cube": 2
    },
    "uses": [],
    "engine": {
@@ -21180,8 +21363,8 @@
     "stage_name": "ui",
     "classes_used": [
      "BaseMaterial3D",
+     "BoxMesh",
      "ImmediateMesh",
-     "Label3D",
      "Mesh",
      "MeshInstance3D",
      "Node3D",
@@ -21451,9 +21634,9 @@
   "grammar_provenance": {
    "gd": "commons\\artifacts\\grammar_provenance\\grammar_provenance.gd",
    "atoms": {
-    "text": 7,
     "line": 3,
-    "cylinder": 1
+    "cylinder": 1,
+    "cube": 2
    },
    "uses": [],
    "engine": {
@@ -21464,10 +21647,10 @@
     "stage_name": "3d",
     "classes_used": [
      "BaseMaterial3D",
+     "BoxMesh",
      "CylinderMesh",
      "Engine",
      "ImmediateMesh",
-     "Label3D",
      "Mesh",
      "MeshInstance3D",
      "Node",
@@ -23505,8 +23688,7 @@
    "atoms": {
     "physics_body": 4,
     "sphere": 4,
-    "text": 9,
-    "cube": 3,
+    "cube": 5,
     "field": 16,
     "cylinder": 1,
     "line": 3
@@ -23526,11 +23708,11 @@
      "Gradient",
      "ImmediateMesh",
      "Input",
-     "Label",
-     "Label3D",
      "Mesh",
      "MeshInstance3D",
-     "MultiMesh"
+     "MultiMesh",
+     "MultiMeshInstance3D",
+     "Node3D"
     ]
    },
    "depth": 1,
@@ -24500,6 +24682,34 @@
    "depth": 1,
    "grade": 6
   },
+  "museum_hall_shell": {
+   "gd": "commons\\artifacts\\museum\\museum_hall_shell.gd",
+   "atoms": {
+    "grid": 1,
+    "cube": 1,
+    "sphere": 1
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 3,
+    "stage_name": "3d",
+    "classes_used": [
+     "BaseMaterial3D",
+     "BoxMesh",
+     "GridMap",
+     "MeshInstance3D",
+     "MeshLibrary",
+     "Node3D",
+     "SphereMesh",
+     "StandardMaterial3D"
+    ]
+   },
+   "depth": 1,
+   "grade": 4
+  },
   "creature_gallery": {
    "gd": "commons\\scenes\\creature_gallery.gd",
    "atoms": {
@@ -25250,6 +25460,58 @@
    },
    "depth": 1,
    "grade": 3
+  },
+  "pattern_atlas_gallery": {
+   "gd": "commons\\artifacts\\pattern_atlas_gallery\\pattern_atlas_gallery.gd",
+   "atoms": {
+    "cube": 3,
+    "plane": 1,
+    "shader": 1
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 6,
+    "stage_name": "shaders",
+    "classes_used": [
+     "BoxMesh",
+     "MeshInstance3D",
+     "Node3D",
+     "QuadMesh",
+     "ShaderMaterial",
+     "StandardMaterial3D"
+    ]
+   },
+   "depth": 1,
+   "grade": 6
+  },
+  "mamma_monster_gallery": {
+   "gd": "commons\\artifacts\\mamma_monster_gallery\\mamma_monster_gallery.gd",
+   "atoms": {
+    "cube": 3,
+    "plane": 1,
+    "shader": 1
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 6,
+    "stage_name": "shaders",
+    "classes_used": [
+     "BoxMesh",
+     "MeshInstance3D",
+     "Node3D",
+     "QuadMesh",
+     "ShaderMaterial",
+     "StandardMaterial3D"
+    ]
+   },
+   "depth": 1,
+   "grade": 6
   },
   "pattern_loom": {
    "gd": "commons\\artifacts\\pattern_loom\\pattern_loom.gd",
@@ -38140,8 +38402,7 @@
    "gd": "commons\\artifacts\\shannon_workbench\\shannon_workbench.gd",
    "atoms": {
     "line": 5,
-    "text": 9,
-    "plane": 2,
+    "plane": 1,
     "sphere": 1,
     "cylinder": 3
    },
@@ -38158,13 +38419,13 @@
      "GeometryInstance3D",
      "ImmediateMesh",
      "Label",
-     "Label3D",
      "Mesh",
      "MeshInstance3D",
      "Node",
      "Node3D",
      "QuadMesh",
-     "RandomNumberGenerator"
+     "RandomNumberGenerator",
+     "SphereMesh"
     ]
    },
    "depth": 1,
@@ -44599,6 +44860,33 @@
    "depth": 1,
    "grade": 0
   },
+  "tutorial_wall": {
+   "gd": "commons\\artifacts\\tutorial_wall\\tutorial_wall.gd",
+   "atoms": {
+    "cube": 1
+   },
+   "uses": [],
+   "engine": {
+    "base": "Node3D",
+    "engine_depth": 3,
+    "script_hops": 0,
+    "stage": 3,
+    "stage_name": "3d",
+    "classes_used": [
+     "BoxMesh",
+     "DirAccess",
+     "FileAccess",
+     "JSON",
+     "Material",
+     "MeshInstance3D",
+     "Node",
+     "Node3D",
+     "ResourceLoader"
+    ]
+   },
+   "depth": 1,
+   "grade": 3
+  },
   "coin_flip": {
    "gd": "algorithms\\statistics\\01_coinflip\\CoinFlipVR.gd",
    "atoms": {
@@ -50009,11 +50297,11 @@
    "gd": "commons\\artifacts\\chord_tension_spring\\chord_tension_spring.gd",
    "atoms": {
     "field": 13,
-    "text": 8,
     "touch": 5,
     "cylinder": 1,
     "sphere": 1,
-    "cube": 1,
+    "text": 2,
+    "cube": 3,
     "line": 1
    },
    "uses": [],
@@ -50028,9 +50316,9 @@
      "AudioStreamGenerator",
      "AudioStreamGeneratorPlayback",
      "AudioStreamPlayer",
-     "BaseMaterial3D",
      "BoxMesh",
      "BoxShape3D",
+     "Button",
      "CollisionShape3D",
      "CylinderMesh",
      "ImmediateMesh",
@@ -51024,8 +51312,7 @@
   "timbre_sculptor": {
    "gd": "commons\\artifacts\\timbre_sculptor\\timbre_sculptor.gd",
    "atoms": {
-    "cube": 1,
-    "text": 5
+    "cube": 3
    },
    "uses": [],
    "engine": {
@@ -51040,13 +51327,12 @@
      "BoxMesh",
      "InputEvent",
      "InputEventKey",
-     "Label",
-     "Label3D",
      "MeshInstance3D",
      "Node3D",
      "Noise",
      "PackedScene",
-     "Panel"
+     "Panel",
+     "StandardMaterial3D"
     ]
    },
    "depth": 1,

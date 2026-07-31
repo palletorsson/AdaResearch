@@ -1,0 +1,22 @@
+{
+ "baseline_order": ["cell", "neighborhood", "rule", "life", "lambda",
+                    "universal", "growth", "design", "proof"],
+ "concepts": {
+  "cell":         {"cast": "grid_substrate_runner", "aliases": ["cell", "cells", "lattice", "grid", "substrate"]},
+  "neighborhood": {"cast": "hexagon_ca_vr", "aliases": ["neighbor", "neighbors", "neighborhood", "hexagon", "hexagonal", "adjacent"]},
+  "rule":         {"cast": "ca_screen", "aliases": ["rule", "rules", "wolfram", "lookup", "byte"]},
+  "contagion":    {"cast": "disease_spread_ca", "aliases": ["contagion", "infection", "infected", "epidemic", "disease", "sir"]},
+  "life":         {"cast": "game_of_life_petri", "aliases": ["life", "conway", "glider", "gliders", "petri", "alive"]},
+  "lambda":       {"cast": "self_organization_ca", "aliases": ["lambda", "langton", "edge of chaos", "critical band", "frozen"]},
+  "universal":    {"cast": "rule_30_110_gravity", "aliases": ["110", "turing", "universal", "computation", "compute"]},
+  "growth":       {"cast": "structure_growth", "aliases": ["seed", "grow", "grows", "grown", "growth"]},
+  "mold":         {"cast": "mold_network", "aliases": ["mold", "slime", "physarum", "plasmodium"]},
+  "design":       {"cast": "ca_rule_explorer", "aliases": ["design", "explorer", "toggle", "dial", "slider"]},
+  "proof":        {"cast": "ca_chair_test", "aliases": ["chair", "prove", "proof", "test", "exam"]}
+ },
+ "aside": ["persian_rug", "mirrored_cellular_automata", "crossway_ca",
+           "line_network_ca", "ca_columns", "ca_bridge", "sierpinski_pyramid",
+           "cellular_automata_3d_tree", "ca_growth_network", "lattice_gas_automata",
+           "volumetric_fog_ca", "decaying_bridge", "hexagon_cave_vr", "CA_sphere",
+           "the ca_showcase kin (avalanche, crack propagation, dendrite, percolation, ecosystem, recrystallization) — weather systems around the ordered spine"]
+}

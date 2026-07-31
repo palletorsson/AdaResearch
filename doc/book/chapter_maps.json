@@ -187,6 +187,7 @@
   "randomness": {
    "keep": [
     "Random_Definition",
+    "Random_Entropy",
     "Random_Cubes",
     "Random_Rotate_Random_XYZ",
     "Random_Walk",
@@ -202,7 +203,7 @@
     "Random_Pheromone",
     "Random_Game"
    ],
-   "total_maps": 13
+   "total_maps": 14
   },
   "noise": {
    "keep": [
@@ -259,8 +260,10 @@
     "LSystems_Competition",
     "LSystems_Living"
    ],
-   "drop": [],
-   "total_maps": 6
+   "drop": [
+    "Assemblage_Same_Desire"
+   ],
+   "total_maps": 7
   },
   "proceduralgeneration": {
    "keep": [

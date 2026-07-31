@@ -699,4 +699,13 @@ Palle, verbatim: "rule Trans_Pit: becoming_catalyst is the hero, run the dig."
 - The dig runs on transformation next; its report feeds the remaining rulings
   (distinct antis for the carousel-cake five, the chapter's other connective heroes).
 
-<!-- Next: R-031 — rule the dig's promotions/burials for transformation; then walked.md pages -->
+## R-031 — transformation's antis ruled from the dig (2026-07-16)
+
+Palle: "accept the pairings, write the walked pages." The carousel-cake five each
+get their own anti from the dig's promotions: Trans_Pit ⟷ invariants_demo (the
+soul pairing — the chapter's argument staged at its soul map), Trans_Rotation ⟷
+spin, Trans_AxisDecomposition ⟷ matrix_4x4_viewer, Trans_RotationSpectacle ⟷
+toruscylinder, Trans_Scale ⟷ righttriangle. 7/7 distinct antis, all from disk.
+walked.md pages ghost-drafted next under P-8 leads; friction pass to follow.
+
+<!-- Next: R-032 — friction pass on transformation's walked pages; the blank (counter to transform_composition) -->
