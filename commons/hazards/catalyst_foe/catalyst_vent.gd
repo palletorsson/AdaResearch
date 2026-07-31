@@ -61,6 +61,16 @@ var _started: bool = false       # flips true once start_delay elapses
 var _live_count: int = 0
 var _wave_mult_applied: bool = false
 
+# Lease wind-down — the vent is the catalyst's counterpart, so when the
+# timed lease returns the catalyst to its pedestal, the vent goes quiet
+# too (remaining wave paused, visual dims). A re-lease (pedestal
+# re-pickup) resumes the wave. Vents in maps with no lease never see
+# lease_started, so their behavior is untouched.
+var _lease_seen: bool = false
+var _lease_paused: bool = false
+var _dim_mats: Array[StandardMaterial3D] = []
+var _dim_originals: Array[float] = []   # matching emission/alpha energies
+
 
 ## The "many" critter stage (CA onward) doubles this vent's wave. Applied
 ## lazily on the first physics tick so play-time progression decides,
@@ -84,6 +94,45 @@ func _apply_stage_wave_mult() -> void:
 func _ready() -> void:
 	add_to_group("catalyst_vent")
 	_build_visual()
+	_connect_lease()
+
+
+# Listen to the lease clock (autoload). Guarded so probe/test scenes
+# without the manager keep working.
+func _connect_lease() -> void:
+	var mgr: Node = get_node_or_null("/root/CatalystCapabilityManager")
+	if mgr == null or not mgr.has_signal("lease_started"):
+		return
+	mgr.lease_started.connect(_on_lease_started)
+	mgr.lease_ended.connect(_on_lease_ended)
+
+
+func _on_lease_started(_seconds: float) -> void:
+	_lease_seen = true
+	if _lease_paused:
+		_lease_paused = false
+		_set_wound_down(false)
+
+
+func _on_lease_ended() -> void:
+	if not _lease_seen:
+		return
+	_lease_paused = true
+	_timer = 0.0
+	_set_wound_down(true)
+
+
+func _set_wound_down(down: bool) -> void:
+	for i in _dim_mats.size():
+		var mat: StandardMaterial3D = _dim_mats[i]
+		if mat == null:
+			continue
+		if mat.emission_enabled:
+			mat.emission_energy_multiplier = _dim_originals[i] * (0.15 if down else 1.0)
+		else:
+			var c: Color = mat.albedo_color
+			c.a = _dim_originals[i] * (0.3 if down else 1.0)
+			mat.albedo_color = c
 
 
 func _build_visual() -> void:
@@ -103,6 +152,8 @@ func _build_visual() -> void:
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	pillar.material_override = mat
 	add_child(pillar)
+	_dim_mats.append(mat)
+	_dim_originals.append(mat.albedo_color.a)
 	# Halo at base
 	var halo := MeshInstance3D.new()
 	var torus := TorusMesh.new()
@@ -116,6 +167,8 @@ func _build_visual() -> void:
 	halo_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	halo.material_override = halo_mat
 	add_child(halo)
+	_dim_mats.append(halo_mat)
+	_dim_originals.append(halo_mat.albedo_color.a)
 	# Dark orb at cube top
 	var orb := MeshInstance3D.new()
 	var sphere := SphereMesh.new()
@@ -130,11 +183,15 @@ func _build_visual() -> void:
 	orb_mat.emission_energy_multiplier = 0.55
 	orb.material_override = orb_mat
 	add_child(orb)
+	_dim_mats.append(orb_mat)
+	_dim_originals.append(orb_mat.emission_energy_multiplier)
 
 
 func _physics_process(delta: float) -> void:
 	_apply_stage_wave_mult()
 	if _emitted >= wave_size:
+		return
+	if _lease_paused:
 		return
 	# Wait until the player has actually picked up the catalyst before
 	# starting the warmup. The catalyst body adds itself to group

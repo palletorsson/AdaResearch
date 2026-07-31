@@ -51,6 +51,7 @@ var _all_display_modes: Array[String] = []  # All 11 modes (for display, locked 
 var _hinge: Node = null  # XRToolsInteractableHinge
 var _hinge_origin: Node3D = null
 var _mode_label: Label3D = null
+var _lease_label: Label3D = null
 var _bracelet_glow: OmniLight3D = null
 
 var _label_timer: float = 0.0
@@ -83,6 +84,7 @@ func _ready() -> void:
 	_build_ring()
 	_build_gem_container()
 	_build_mode_label()
+	_build_lease_label()
 	_build_glow()
 	_build_hinge()
 
@@ -251,6 +253,44 @@ func _build_mode_label() -> void:
 	_mode_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_mode_label.visible = false
 	add_child(_mode_label)
+
+func _build_lease_label() -> void:
+	# Countdown readout for the timed lease — sits under the ring, opposite
+	# the mode label. Driven by CatalystCapabilityManager (owner of the
+	# clock) via show_lease_tick(); invisible whenever no lease runs.
+	_lease_label = Label3D.new()
+	_lease_label.name = "LeaseLabel"
+	_lease_label.pixel_size = 0.0008
+	_lease_label.font_size = 40
+	_lease_label.outline_size = 4
+	_lease_label.position = Vector3(0, -0.045, 0)
+	_lease_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_lease_label.visible = false
+	add_child(_lease_label)
+
+
+## Show the remaining lease seconds on the wrist. Called once per whole
+## second by CatalystCapabilityManager while a lease runs; the color walks
+## calm white -> amber (last quarter) -> red (final 3s, with the haptics).
+func show_lease_tick(seconds_left: int, total_s: float) -> void:
+	if _lease_label == null:
+		return
+	_lease_label.text = str(seconds_left)
+	var frac: float = clampf(float(seconds_left) / maxf(total_s, 1.0), 0.0, 1.0)
+	var col: Color = Color(0.9, 0.95, 1.0, 0.95)
+	if seconds_left <= 3:
+		col = Color(1.0, 0.28, 0.22, 1.0)
+	elif frac < 0.25:
+		col = Color(1.0, 0.68, 0.18, 0.95)
+	_lease_label.modulate = col
+	_lease_label.visible = true
+
+
+## Hide the countdown (lease ended or crystal returned).
+func hide_lease_readout() -> void:
+	if _lease_label != null:
+		_lease_label.visible = false
+
 
 func _build_glow() -> void:
 	_bracelet_glow = OmniLight3D.new()

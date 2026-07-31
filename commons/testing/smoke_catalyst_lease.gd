@@ -15,6 +15,7 @@ extends SceneTree
 ## doesn't mutate the player save.
 
 const PEDESTAL_SCENE := preload("res://commons/hazards/becoming_catalyst/catalyst_pedestal.tscn")
+const VENT_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_vent.tscn")
 
 var _fails: int = 0
 
@@ -76,6 +77,32 @@ func _initialize() -> void:
 		_check("crystal received lease_s", float(crystal.get("lease_s")) == 20.0)
 		_check("crystal received sequence binding",
 			String(crystal.call("get_home_sequence")) == "primitives")
+
+	# 3 — vent wind-down: the counterpart goes quiet when the lease returns
+	# the catalyst, resumes on re-lease, and vents that never saw a lease
+	# are untouched by lease_ended (the negative case).
+	var was_activated_3: bool = mgr.get("_bracelet_activated")
+	var vent: Node = VENT_SCENE.instantiate()
+	get_root().add_child(vent)
+	await process_frame
+	mgr.call("begin_lease", 5.0)
+	_check("vent sees the lease start", bool(vent.get("_lease_seen")))
+	mgr.call("_tick_lease", 6.0)  # expire -> end_lease_now -> lease_ended
+	_check("lease end pauses the vent", bool(vent.get("_lease_paused")))
+	mgr.call("begin_lease", 5.0)
+	_check("re-lease resumes the vent", not bool(vent.get("_lease_paused")))
+	mgr.call("_tick_lease", 6.0)
+	# negative: a vent born after the lease ended must ignore lease_ended
+	var vent2: Node = VENT_SCENE.instantiate()
+	get_root().add_child(vent2)
+	await process_frame
+	mgr.call("end_lease_now")  # emits lease_ended with no lease running
+	_check("lease-naive vent ignores lease_ended", not bool(vent2.get("_lease_paused")))
+	vent.queue_free()
+	vent2.queue_free()
+	mgr.set("_bracelet_activated", was_activated_3)
+	mgr.set("_bracelet_tracker", was_tracker)
+	mgr.call("save_state")
 
 	if _fails == 0:
 		print("PASS: catalyst timed lease")

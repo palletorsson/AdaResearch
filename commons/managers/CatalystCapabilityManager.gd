@@ -341,6 +341,10 @@ func spawn_bracelet_on_controller(controller: XRController3D) -> void:
 	_bracelet_activated = true
 	# Remember which hand for re-spawning after scene transitions
 	_bracelet_tracker = controller.tracker if "tracker" in controller else controller.name
+	# A lease may already be running (bracelet respawns on map transition) —
+	# put the countdown straight back on the wrist.
+	if is_lease_running():
+		_lease_readout(int(ceil(_lease_left)))
 	save_state()
 
 	# Verify final state
@@ -363,6 +367,7 @@ func begin_lease(seconds: float) -> void:
 	_lease_left = seconds
 	_lease_last_whole = int(ceil(seconds)) + 1
 	lease_started.emit(seconds)
+	_lease_readout(int(ceil(seconds)))
 	print("CatalystCapabilityManager: Lease started — %.0fs on the catalyst" % seconds)
 
 func is_lease_running() -> bool:
@@ -407,11 +412,21 @@ func _tick_lease(delta: float) -> void:
 	var whole: int = int(ceil(maxf(_lease_left, 0.0)))
 	if whole != _lease_last_whole:
 		_lease_last_whole = whole
+		if whole > 0:
+			_lease_readout(whole)
 		# Final-seconds feedback: haptic ticks on the holding hand.
 		if whole <= 3 and whole > 0 and is_instance_valid(_bracelet_controller):
 			_bracelet_controller.trigger_haptic_pulse("haptic", 0.0, 0.1, 0.3, 0.0)
 	if _lease_left <= 0.0:
 		end_lease_now()
+
+
+## Push the remaining whole seconds to the bracelet's wrist readout.
+## No-op when no bracelet is up (it respawns on scene transitions and is
+## re-fed from the activate path).
+func _lease_readout(whole: int) -> void:
+	if is_instance_valid(_bracelet) and _bracelet.has_method("show_lease_tick"):
+		_bracelet.show_lease_tick(whole, _lease_total)
 
 ## Get the current bracelet instance (or null).
 func get_bracelet() -> Node:
