@@ -4,7 +4,7 @@
     "lookup_name": "CatalystLab_08_PrompterBox",
     "format": "json",
     "version": "1.0",
-    "description": "The prompter's box: the catalyst presented from below the stage floor. A flat flush hatch mid-stage and a raised plinth box at the footlights — walk near and the deck plate tips open on its strut, the crystal rises from the glow. The lease returns it beneath the floor.",
+    "description": "The prompter's box: the catalyst presented from below the stage floor, staged four ways. Hatch (the deck plate on its strut), doors (the floor parting as trap doors), slide (the plate slipping beneath the stage), vent (the crystal rising through a grate in a standing light shaft). Walk near and each floor speaks; the lease returns the crystal beneath it.",
     "dimensions": {
       "width": 12,
       "depth": 10,
@@ -45,11 +45,11 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","catalyst_prompter_box:0:0#shape:flat#sequence:primitives#lease_s:20"," "," "," "," "," "," "," "],
+      [" "," "," "," ","catalyst_prompter_box:0:0#emergence:hatch#shape:flat#sequence:primitives#lease_s:20"," "," ","catalyst_prompter_box:0:0#emergence:doors#shape:flat#always_open:true"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","catalyst_prompter_box:0:0#shape:plinth#always_open:true#sequence:primitives"," "," "," "," "],
+      [" "," "," "," ","catalyst_prompter_box:0:0#emergence:slide#shape:plinth#always_open:true"," "," ","catalyst_prompter_box:0:0#emergence:vent#shape:flat#always_open:true"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:4.0#sequence:primitives"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:4.0#sequence:primitives"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ],

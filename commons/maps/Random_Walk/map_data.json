@@ -89,7 +89,7 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" "," ","catalyst_pedestal:0:0#sequence:auto#lease_s:45"," "," "," "," "," "," ","catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto"," "," "," "],
+      [" "," ","catalyst_prompter_box:0:0#emergence:hatch#sequence:auto#lease_s:45"," "," "," "," "," "," ","catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto"," "," "," "],
       [" "," "," "," ","random_walk_terrarium:180:-0.3","random_walk_collection"," "," "," "," "," "," ","pixel_cloud"],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," ","lab_room#room_width:3.5#room_depth:3.5#room_height:3.0#show_observation_window:true#window_wall:east#accent_color:0.95,0.55,0.20#signage_top:RANDOM WALK LAB#signage_sub:Brownian sampling pavilion#annotation_top:every step is independent — the walk is the integral#annotation_bottom:dx_i ~ Normal(0, sigma) — sum to t = position at t#mounted_artifact_scene:res://commons/artifacts/monte_carlo_apparatus/monte_carlo_apparatus.tscn"," "," "," "," "],
