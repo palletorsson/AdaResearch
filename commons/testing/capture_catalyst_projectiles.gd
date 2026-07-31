@@ -18,6 +18,9 @@ const MODES := [
 const MODE_DIR := "res://commons/hazards/becoming_catalyst/modes/"
 const OUT_DIR := "user://catalyst_projectiles"
 const FLIGHT_FRAMES := 80   # ~1.33 s at 60 fps — past fractal's 1.0 s split
+const FOE_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn")
+const HIT_TIMEOUT_FRAMES := 130   # give slow/wandering projectiles time to arrive
+const AFTER_HIT_FRAMES := 30      # ~0.5 s for the impact effect to bloom
 
 func _initialize() -> void:
 	get_root().size = Vector2i(720, 720)
@@ -102,8 +105,91 @@ func _initialize() -> void:
 		arena.queue_free()
 		await process_frame
 
-	print("DONE: %d/%d projectiles captured -> %s" % [done, MODES.size(), OUT_DIR])
-	quit(0 if done == MODES.size() else 1)
+	# ── Stage two: impact — each mode fired at a live CatalystFoe ──────────
+	# Floor lives in the STAGE (not the arena) so it never bloats the
+	# framing AABB. Projectile mask is layer 2 only, so it flies over.
+	var floor_body := StaticBody3D.new()
+	var floor_shape := CollisionShape3D.new()
+	var floor_box := BoxShape3D.new()
+	floor_box.size = Vector3(14, 0.2, 8)
+	floor_shape.shape = floor_box
+	floor_body.add_child(floor_shape)
+	var floor_mesh := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = Vector3(14, 0.2, 8)
+	floor_mesh.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.075, 0.095, 0.13)
+	fmat.roughness = 0.85
+	floor_mesh.material_override = fmat
+	floor_body.add_child(floor_mesh)
+	floor_body.position = Vector3(2.5, -0.1, 0)
+	stage.add_child(floor_body)
+
+	var impact_done: int = 0
+	for mode_id in MODES:
+		var mode_script = load(MODE_DIR + "mode_%s.gd" % mode_id)
+		if mode_script == null:
+			continue
+		var arena := Node3D.new()
+		arena.name = "Impact_%s" % mode_id
+		get_root().add_child(arena)
+		current_scene = arena
+
+		var foe: Node3D = FOE_SCENE.instantiate()
+		arena.add_child(foe)
+		foe.global_position = Vector3(3.2, 0.6, 0)
+		# long settle: the foe's spawn dissolve-in particles must clear the
+		# air before the shot, or they dominate the framing AABB
+		for i in 70:
+			await process_frame
+		if not is_instance_valid(foe):
+			print("SKIP impact %s: foe died settling" % mode_id)
+			current_scene = null
+			arena.queue_free()
+			continue
+
+		var start := Vector3(0, 0.55, 0)
+		var focus: Vector3 = foe.global_position + Vector3(0, 0.2, 0)
+		var aim: Vector3 = (foe.global_position + Vector3(0, 0.15, 0) - start).normalized()
+		var proj = mode_script.call("create_projectile", start, aim)
+		arena.add_child(proj)
+		proj.global_position = start
+
+		var waited: int = 0
+		while waited < HIT_TIMEOUT_FRAMES:
+			await process_frame
+			waited += 1
+			if not is_instance_valid(proj) or bool(proj.get("has_hit")):
+				break
+		for i in AFTER_HIT_FRAMES:
+			await process_frame
+
+		paused = true
+		var bounds: AABB = _visual_aabb(arena)
+		var center: Vector3 = bounds.get_center()
+		# particles inflate the AABB and a fully-dissolved foe deflates it —
+		# clamp the shot to a portrait distance and fall back to where the
+		# foe stood
+		var radius: float = clampf(bounds.size.length() * 0.5, 0.3, 2.2)
+		if bounds.size.length() < 0.35 or center.distance_to(focus) > 4.0:
+			center = focus
+			radius = 1.0
+		var dist: float = clampf(radius * 2.2, 1.2, 5.5)
+		cam.global_position = center + Vector3(-0.45, 0.4, 1.0).normalized() * dist
+		cam.look_at(center, Vector3.UP)
+		await process_frame
+		await RenderingServer.frame_post_draw
+		get_root().get_texture().get_image().save_png("%s/impact_%s.png" % [OUT_DIR, mode_id])
+		print("impact %s captured (waited %d frames, r=%.2f)" % [mode_id, waited, radius])
+		impact_done += 1
+		paused = false
+		current_scene = null
+		arena.queue_free()
+		await process_frame
+
+	print("DONE: %d/%d flight, %d/%d impact -> %s" % [done, MODES.size(), impact_done, MODES.size(), OUT_DIR])
+	quit(0 if done == MODES.size() and impact_done == MODES.size() else 1)
 
 
 func _visual_aabb(root: Node) -> AABB:
