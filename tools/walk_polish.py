@@ -58,9 +58,43 @@ POSTURE_WANTS = {
 }
 CORNER_CYCLE = ("hangar_supply_pile", "hangar_cabinet_cluster")
 
+
+def is_furniture(tok):
+    """The pass's own vocabulary. Furniture ANSWERS findings; it must never
+    generate them. Left unguarded the pass furnishes its own furniture: after
+    the standing gate was promoted it still wanted two things, and both were
+    about props it had placed itself — a podium beside a supply pile, a beacon
+    over a cabinet. That is not convergence, only deceleration. A prop is still
+    something to LOOK at (it counts for the vista check); it is simply not a
+    body that can be lonely or overlooked."""
+    return tok.startswith("hangar_")
+
+# THE BODY THE PASS WALKS AS. These were private numbers until the museum line
+# wrote commons/data/museum_principles.json, whose Vitruvian block collects the
+# constants the pipeline already measures — and cites capture_eye_stations.gd,
+# this pass's own camera, as the source of two of them. Four tools each holding
+# their own copy of the same body is how they drift, so the pass reads the table.
+#
+# The two models turn out to describe the same body. The canon carries a fixed
+# PROMISE_M = 8 m (desire at distance); this pass asks whether a body fills
+# MIN_DEG = 8 deg of the view, which is the same promise scaled by size —
+# r* = 7.15 x size — and the two agree exactly at a 1.12 m body, the corpus's
+# metre scale. gaze_ride states the law they share: viewing distance scales
+# with size. Neither was derived from the other; keep both and note when they
+# stop agreeing, because that disagreement would be a finding.
+def body_constants():
+    try:
+        v = json.loads((ROOT / "commons/data/museum_principles.json")
+                       .read_text(encoding="utf-8")).get("vitruvian", {})
+        val = lambda k, d: float((v.get(k) or {}).get("value", d))
+        return val("fov_deg", 90.0) / 2.0, val("eye_height_m", 1.65), val("promise_m", 8.0)
+    except Exception:
+        return 45.0, 1.65, 8.0
+
+
+CONE, EYE_M, PROMISE_M = body_constants()   # half-angle of the forward view; eye; promise
 MIN_DEG = 8.0        # smaller than this in the cone and the eye does not count it
 VISTA = 5            # consecutive blank stations before the walk is dull
-CONE = 45.0          # half-angle of the forward view
 
 
 def measured_sizes():
@@ -200,7 +234,8 @@ def inspect(md, name):
              for x, c in enumerate(row) if str(c).strip()}
     lights = [c for c, t in utils.items() if t.startswith("el")]
     bodies = [(x, z) for z, row in enumerate(I) for x, c in enumerate(row)
-              if str(c).strip() and not str(c).strip().startswith(PRE)]
+              if str(c).strip() and not str(c).strip().startswith(PRE)
+              and not is_furniture(str(c).strip().split(":")[0])]
     POSTURES = postures()
 
     def solid(c):                      # a wall face or the world's edge
@@ -393,6 +428,8 @@ def inspect(md, name):
             if deg > announced.get((bx, bz), 0.0):
                 announced[(bx, bz)] = deg
     for (bx, bz), tok in bodies_xy.items():
+        if is_furniture(tok):
+            continue                       # scenery is found up close, by design
         if announced.get((bx, bz), 0.0) >= MIN_DEG:
             continue                       # you saw it coming: nothing to fix
         # A detail beside a larger body is meant to be discovered up close.

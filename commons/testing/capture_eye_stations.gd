@@ -25,14 +25,38 @@ extends SceneTree
 ## every shot faced the wrong way; the conversion belongs where the camera is.
 
 const MAP_CATALOG_SCENE: String = "res://commons/maps/catalog/MapCatalogDesktop3D.tscn"
-const CAMERA_FOV: float = 90.0
-const EYE_HEIGHT: float = 1.65        # a standing body, not a drone
+const PRINCIPLES: String = "res://commons/data/museum_principles.json"
+const FOV_FALLBACK: float = 90.0
+const EYE_FALLBACK: float = 1.65      # a standing body, not a drone
+
+## The body this camera stands as, read from the Vitruvian block of
+## museum_principles.json. That block cites THIS FILE as the source of both
+## numbers, which was true when it was written and would quietly stop being
+## true the moment either side moved. One body, one place to change it: the
+## table is the truth and the tools read it. Falls back to the literals so a
+## missing canon file degrades to the old behaviour rather than to no camera.
+static func _body(key: String, fallback: float) -> float:
+	var text: String = FileAccess.get_file_as_string(PRINCIPLES)
+	if text.is_empty():
+		return fallback
+	var parsed: Variant = JSON.parse_string(text)
+	if typeof(parsed) != TYPE_DICTIONARY:
+		return fallback
+	var vitruvian: Variant = (parsed as Dictionary).get("vitruvian", {})
+	if typeof(vitruvian) != TYPE_DICTIONARY:
+		return fallback
+	var entry: Variant = (vitruvian as Dictionary).get(key, null)
+	if typeof(entry) != TYPE_DICTIONARY:
+		return fallback
+	return float((entry as Dictionary).get("value", fallback))
 
 var _map_name: String = ""
 var _stations_path: String = ""
 var _outdir: String = "user://eye_shots"
 var _wait_seconds: float = 3.0
 var _settle: float = 0.35
+var _fov: float = FOV_FALLBACK
+var _eye: float = EYE_FALLBACK
 
 
 func _initialize() -> void:
@@ -59,6 +83,8 @@ func _initialize() -> void:
 		push_error("capture_eye_stations: --map and --stations are required")
 		quit(1)
 		return
+	_fov = _body("fov_deg", FOV_FALLBACK)
+	_eye = _body("eye_height_m", EYE_FALLBACK)
 	call_deferred("_run")
 
 
@@ -125,7 +151,7 @@ func _run() -> void:
 			catalog.set("_spin_speed", 0.0)
 		await process_frame
 	camera.projection = Camera3D.PROJECTION_PERSPECTIVE
-	camera.fov = CAMERA_FOV
+	camera.fov = _fov
 	camera.current = true
 
 	var total: float = _cell_pitch(catalog)
@@ -147,7 +173,7 @@ func _run() -> void:
 		var stack: int = int(d.get("y", 1))
 		var floor_y: float = 0.0 if stack <= 0 else float(stack - 1) * total + 0.5
 		camera.global_position = Vector3(float(cell[0]) * total,
-			floor_y + EYE_HEIGHT, float(cell[1]) * total)
+			floor_y + _eye, float(cell[1]) * total)
 		camera.rotation_degrees = Vector3(float(d.get("pitch", -4.0)), yaw, 0.0)
 
 		await create_timer(_settle).timeout
@@ -170,8 +196,8 @@ func _run() -> void:
 	var f: FileAccess = FileAccess.open(
 		absolute_out.path_join("%s_stations.json" % _map_name), FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify({"map": _map_name, "fov": CAMERA_FOV,
-			"eye_height": EYE_HEIGHT, "shots": report}, "\t"))
+		f.store_string(JSON.stringify({"map": _map_name, "fov": _fov,
+			"eye_height": _eye, "shots": report}, "\t"))
 		f.close()
 	print("capture_eye_stations: %d/%d shots -> %s" % [report.size(), stations.size(), absolute_out])
 	quit(0)
