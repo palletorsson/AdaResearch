@@ -111,6 +111,66 @@ class_name SuperpositionDisplay
 #     thing to hide: an occupant whose opacity is still trading is not a definite
 #     outcome, and the branch reading needs both branches definite.
 #
+# ─────────────────────────────────────────────────────────────────────────────
+# REPAIR (2026-07-31). THE REGISTER AXIS WAS FIFTEEN TIMES LOUDER THAN THE
+# ARGUMENT AXIS. A proportion fix. No word, no value and no claim changed.
+#
+# doc/reports/sweep_superposition_display_bite.json, measured on the build above:
+# hold `vantage` at chamber and the five `remainder` values differ from each
+# other by 0.71%-1.57% of frame — every pair UNDER the 2% bite floor. Vary
+# `vantage` instead and the same sweep moves 9%-13%. On a third of the family the
+# argument the artifact exists to make was not visible at all, and what the sheet
+# was actually reporting was the size of the room.
+#
+# THE MECHANISM IS NOT THE ONE IT LOOKS LIKE. `_shell` is a child of `_body`, so
+# the remainder geometry does ride the vantage scale — it is not left behind at
+# 1.0 while the diagram grows to 3.4. What it was left behind BY is the frame.
+# capture_config_sweep.gd fits its camera to each variant's bounding-box DIAGONAL
+# (`radius = aabb.size.length() * 0.5`), and at `chamber` that diagonal is the
+# ROOM's: 4.6 x 2.9 x 4.6 of slab is 7.3 m corner to corner, wrapped around a
+# remainder body at most 0.8 m wide before staging. So the shell was proportioned
+# to the DIAGRAM while the picture was proportioned to the ROOM, and the walls —
+# byte-identical across all five values — kept the rest of the frame. The five
+# variants were photographs of the same room with a small disagreement in it.
+#
+# TWO THINGS CHANGE, BOTH RATIOS.
+#
+#   1. `reach` — the remainder geometry now grows with the staging it stands in
+#      (specimen 1.0 · stele 1.2 · chamber 1.55), applied as one uniform scale on
+#      Shell. Uniform matters: layout and mass grow together, so every internal
+#      relation each value's comment claims — the halves held apart, the cut
+#      between them, the shell that clears the basis states, the wall neither
+#      cell can see across — is preserved exactly. The bound is the wall: at 1.55
+#      `twin`, the widest body, reaches 2.145 m against an inner wall face at
+#      2.23 m. Larger than that and the argument starts poking out of its own
+#      room, which would inflate the frame and hand the score back to `vantage`.
+#
+#   2. `chamber` loses DEPTH, 4.6 m to 2.6 m. The diagram is flat. Depth was
+#      contributing 42% of the room's squared diagonal — nearly half the framing
+#      cost — to hold nothing at all. Three walls, a floor, the basis states 2.2 m
+#      apart, and you inside them: every word `chamber` says is still true of a
+#      4.6 x 2.9 x 2.6 room. Width is untouched, because width is what the
+#      argument uses. The frame tightens from 7.30 m to 6.17 m.
+#
+# Together: 1.55² x 1.40 = 3.4x the changed area at chamber, which lifts the
+# quietest pair (core vs seam, 0.71%) over the floor and puts the loud ones at
+# 4-6% — the same band `remainder` already occupies at `specimen`.
+#
+# `haze` IS THE EXCEPTION AND SAYS WHY. It is the one value whose body was
+# already room-scale: its ghosts spread 2.3 m at chamber, which is the wall.
+# Giving it layout reach would push the cloud through the walls, grow the AABB,
+# and buy a score by rescaling the room — the exact fraud being repaired. So haze
+# takes reach in MASS only: the positions below are divided by reach so the cloud
+# lands where it always landed, and `_cloud_fit()` then seats it inside the
+# shallower room. What was invisible in haze was never the spread of its ghosts.
+# It was that each one rendered about eleven pixels wide.
+#
+# WHAT THIS DOES NOT TOUCH: the five words, the three words, the alias tables,
+# the formula, the ket labels, the colours, the oscillation, the slider, and what
+# any value MEANS. A remainder that could only be seen by standing close was
+# still making its argument. It was making it where the camera was not.
+# ─────────────────────────────────────────────────────────────────────────────
+
 # R1 — THE DEFAULT REPRODUCES THE SHIPPED BUILD EXACTLY. remainder=core and
 # vantage=specimen: _apply_staging() frees nothing (both refs are null), writes
 # three `visible = true` on nodes that are already visible, writes an identity
@@ -124,6 +184,20 @@ class_name SuperpositionDisplay
 # `pass` and now returns immediately unless the dictionary carries `remainder` or
 # `vantage` — which is why curation_station's {"emissive": false} call still does
 # exactly the nothing it did before.
+#
+# THE REPAIR DID NOT SPEND THIS. _reach() and _cloud_fit() are called from
+# _stage_remainder() and _stage_vantage() only, and both of those sit BELOW the
+# `remainder == "core" and vantage == "specimen"` return — the default still exits
+# before either is ever evaluated. The corpus census that found zero live
+# placements carrying any of these tokens therefore covers the repair too: every
+# shipped placement of this artifact renders the same pixels as before.
+#
+# AND THE NEGATIVE TEST IS STRONGER THAN THE DEFAULT. reach is 1.0 and _cloud_fit
+# is the identity at `specimen`, so ALL FIVE specimen variants — not just the
+# default pair — must come back pixel-identical to the sweep that measured the
+# fault: core/specimen, twin/specimen, seam/specimen, haze/specimen,
+# witness/specimen, whose ten pairwise deltas were 2.96%-5.71%. If any of those
+# ten numbers moves, the repair leaked out of the two vantages it was aimed at.
 #
 # WHAT IS FORECLOSED. `core` is now one opinion among five rather than the
 # unmarked way a superposition diagram looks, and that costs something real: the
@@ -353,15 +427,29 @@ func _stage_vantage() -> void:
 			# basis states 2.2 m apart at eye height in the middle of them. The
 			# control panel stays behind at hand height, unscaled, so there is
 			# something to stand at once you are inside.
+			#
+			# 2.6 m DEEP, NOT 4.6. See the REPAIR header. The diagram is flat, so
+			# the two metres of depth this room used to carry held nothing and cost
+			# 42% of the squared diagonal the sweep camera frames by — which is most
+			# of why `remainder` was unreadable in here. Width is left alone, because
+			# width is the dimension the argument uses. y drops 1.55 -> 1.45 so the
+			# tallest remainder body (`twin`, +1.29 m above centre at reach 1.55)
+			# clears the wall head instead of growing the room back through the roof.
 			_body.scale = Vector3.ONE * 3.4
-			_body.position = Vector3(0, 1.55, 0)
-			_slab(_stage, Vector3(4.6, 0.08, 4.6), Vector3(0, 0.04, 0), stone)
-			_slab(_stage, Vector3(4.6, 2.9, 0.14), Vector3(0, 1.45, -2.3), stone)
-			_slab(_stage, Vector3(0.14, 2.9, 4.6), Vector3(-2.3, 1.45, 0), stone)
-			_slab(_stage, Vector3(0.14, 2.9, 4.6), Vector3(2.3, 1.45, 0), stone)
+			_body.position = Vector3(0, 1.45, 0)
+			_slab(_stage, Vector3(4.6, 0.08, 2.6), Vector3(0, 0.04, 0), stone)
+			_slab(_stage, Vector3(4.6, 2.9, 0.14), Vector3(0, 1.45, -1.3), stone)
+			_slab(_stage, Vector3(0.14, 2.9, 2.6), Vector3(-2.3, 1.45, 0), stone)
+			_slab(_stage, Vector3(0.14, 2.9, 2.6), Vector3(2.3, 1.45, 0), stone)
 
 func _stage_remainder() -> void:
 	var signs: Array[float] = [-1.0, 1.0]
+	# THE REPAIR, in one line. UNIFORM, so layout and mass grow together and every
+	# internal relation the values claim below survives untouched — the halves held
+	# apart, the cut between them, the shell that clears the basis states. 1.0 at
+	# specimen, where nothing was wrong and so nothing may move.
+	var reach: float = _reach()
+	_shell.scale = Vector3.ONE * reach
 
 	match remainder:
 		"twin":
@@ -394,9 +482,15 @@ func _stage_remainder() -> void:
 			nothing.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			_slab(_shell, Vector3(0.28, 0.32, 0.12), Vector3(0, 0.02, -0.16), nothing)
 			var post: StandardMaterial3D = _surface(Color(0.86, 0.93, 1.00), 0.22, 0.4, 2.4)
+			# A HAIRLINE IS NOT AREA. The posts are 14 mm square: at diagram scale
+			# in a 1.2 m frame that is a readable bright line, and at chamber it was
+			# five pixels. Reach already lengthens them; this thickens them too, so
+			# what holds the halves apart is still visible from where the room puts
+			# you. Identity at specimen — the shipped post is exactly 0.014.
+			var post_t: float = 0.014 * reach
 			for py in signs:
 				for pz in signs:
-					_slab(_shell, Vector3(0.34, 0.014, 0.014),
+					_slab(_shell, Vector3(0.34, post_t, post_t),
 						Vector3(0, 0.02 + py * 0.17, -0.16 + pz * 0.055), post)
 
 		"haze":
@@ -406,31 +500,51 @@ func _stage_remainder() -> void:
 			var bar: StandardMaterial3D = _surface(Color(0.48, 0.50, 0.55), 0.8, 0.1, 0.0)
 			# The enclosure is the diagram's own extent plus a hand's width, so the
 			# cage is the boundary this picture already implies rather than a new one.
-			var hw: float = SEP + R_STATE + 0.05
-			var hh: float = 0.20
-			var hd: float = 0.15
-			var t2: float = 0.013
+			#
+			# HAZE OPTS OUT OF LAYOUT REACH, and it is the only value that does.
+			# Its body was already room-scale — at chamber the ghosts reach 2.3 m,
+			# which is the wall — so scaling the layout would push the cloud through
+			# the walls, grow the AABB, and buy a score by rescaling the room, which
+			# is the fraud this repair exists to remove. Dividing by reach cancels
+			# the Shell scale above, so hw/hh/hd land in world exactly where they
+			# always landed. What haze takes is MASS: t2 carries reach, so the bars
+			# thicken with the staging. Nothing here was ever too small a boundary.
+			# It was too fine a line to survive being photographed from a doorway.
+			var hw: float = (SEP + R_STATE + 0.05) / reach
+			var hh: float = 0.20 / reach
+			var hd: float = 0.15 / reach
+			var oy: float = 0.02 / reach
+			var t2: float = 0.013 * reach
 			for cy in signs:
 				for cz in signs:
-					_slab(_shell, Vector3(hw * 2.0, t2, t2), Vector3(0, 0.02 + cy * hh, cz * hd), bar)
+					_slab(_shell, Vector3(hw * 2.0, t2, t2), Vector3(0, oy + cy * hh, cz * hd), bar)
 				for cx in signs:
-					_slab(_shell, Vector3(t2, t2, hd * 2.0), Vector3(cx * hw, 0.02 + cy * hh, 0), bar)
+					_slab(_shell, Vector3(t2, t2, hd * 2.0), Vector3(cx * hw, oy + cy * hh, 0), bar)
 			for ex in signs:
 				for ez in signs:
-					_slab(_shell, Vector3(t2, hh * 2.0, t2), Vector3(ex * hw, 0.02, ez * hd), bar)
+					_slab(_shell, Vector3(t2, hh * 2.0, t2), Vector3(ex * hw, oy, ez * hd), bar)
 			var ghost_0: StandardMaterial3D = _surface(Color(COL_0.r, COL_0.g, COL_0.b, 0.50), 0.6, 0.0, 0.7)
 			ghost_0.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			var ghost_1: StandardMaterial3D = _surface(Color(COL_1.r, COL_1.g, COL_1.b, 0.42), 0.6, 0.0, 0.6)
 			ghost_1.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			var rng := RandomNumberGenerator.new()
 			rng.seed = 20260731
+			# Same seed, same four draws in the same order, so it stays the same
+			# cloud — thirty-four half-outcomes, not a new scatter. rad and gy are
+			# divided by reach and land where they always did; rr is NOT, so each
+			# ghost grows with the staging. That is the whole of haze's repair: at
+			# chamber a ghost was about eleven pixels across in a 760 px frame, and
+			# thirty-four invisible things look exactly like an axis doing nothing.
+			# The cap is deliberate — the largest ghost reaches 0.23 m against the
+			# basis states' 0.27 m, so a half-outcome never outweighs an outcome.
+			var cloud: Vector3 = _cloud_fit()
 			for i in range(34):
 				var ang: float = rng.randf() * TAU
-				var rad: float = 0.30 + rng.randf() * 0.34
-				var gy: float = 0.02 + (rng.randf() - 0.42) * 0.44
+				var rad: float = (0.30 + rng.randf() * 0.34) / reach
+				var gy: float = (0.02 + (rng.randf() - 0.42) * 0.44) / reach
 				var rr: float = 0.017 + rng.randf() * 0.026
-				_ball(_shell, rr, Vector3(cos(ang) * rad, gy, sin(ang) * rad),
-					ghost_0 if (i % 2 == 0) else ghost_1)
+				_ball(_shell, rr, Vector3(cos(ang) * rad * cloud.x, gy * cloud.y,
+					sin(ang) * rad * cloud.z), ghost_0 if (i % 2 == 0) else ghost_1)
 
 		"witness":
 			# There is no view from nowhere. The diagram grows a shell with no front
@@ -449,10 +563,58 @@ func _stage_remainder() -> void:
 			var plate: StandardMaterial3D = _surface(Color(0.94, 0.96, 0.99), 0.04, 1.0, 0.55)
 			_slab(_shell, Vector3(0.32, 0.30, 0.014), Vector3(0, 0.01, 0.02), plate)
 			var rim: StandardMaterial3D = _surface(Color(0.98, 0.88, 0.58), 0.28, 0.5, 1.8)
+			# The warm rim is the thing that says the opening is FOR you. It was
+			# 11 mm — the same hairline problem as seam's posts, and the same fix:
+			# reach lengthens it, this thickens it, and it is exactly 0.011 at
+			# specimen where it was already readable.
+			var rim_t: float = 0.011 * reach
 			for ry in signs:
-				_slab(_shell, Vector3(wh * 2.0, 0.011, 0.011), Vector3(0, 0.01 + ry * 0.20, 0.09), rim)
+				_slab(_shell, Vector3(wh * 2.0, rim_t, rim_t), Vector3(0, 0.01 + ry * 0.20, 0.09), rim)
 			for rx in signs:
-				_slab(_shell, Vector3(0.011, 0.40, 0.011), Vector3(rx * wh, 0.01, 0.09), rim)
+				_slab(_shell, Vector3(rim_t, 0.40, rim_t), Vector3(rx * wh, 0.01, 0.09), rim)
+
+# ── proportion ───────────────────────────────────────────────────────────────
+
+## HOW MUCH OF THE FRAME THE REMAINDER IS ALLOWED TO CLAIM. The measured repair:
+## see the REPAIR header. `remainder` is the argument axis and `vantage` is only
+## the register, but held at chamber the five remainder values differed from each
+## other by 0.71%-1.57% while vantage moved 9%-13% — the frame shouting over the
+## thing inside it. This is the missing proportion. The remainder geometry grows
+## with the staging it stands in, so the argument keeps its share of the picture
+## wherever the picture is taken from.
+##
+## The numbers are bounded by the walls, not chosen for taste. At chamber, 1.55
+## puts `twin` — the widest of the five bodies — at 2.145 m against an inner wall
+## face at 2.23 m. Past that the argument leaves its own room, the bounding box
+## grows, the camera pulls back, and the score goes straight back to `vantage`.
+## At stele, 1.2 keeps `seam`'s faces inside the slab they are cut from.
+##
+## 1.0 at specimen is load-bearing, not a default: specimen was never the problem,
+## and every specimen variant must render pixel-identical to the run that measured
+## the fault. That is the negative test.
+func _reach() -> float:
+	match vantage:
+		"stele":
+			return 1.2
+		"chamber":
+			return 1.55
+	return 1.0
+
+
+## `haze`'s cloud fitted to the room it is drifting in. Identity everywhere but
+## chamber, so specimen and stele keep the scatter they shipped with. At chamber
+## the room lost two metres of depth (see _stage_vantage), and a cloud that used
+## to have 4.6 m to spread through would now hang out through the back wall and
+## out the open front — geometry outside the room inflates the bounding box the
+## sweep frames by, which is the exact leak being repaired. 0.90 x 0.45 seats the
+## outermost ghost at 2.19 m against a 2.23 m wall and 1.21 m against a 1.23 m
+## one, so all five chamber variants finally share ONE frame and their deltas are
+## about the argument rather than about the camera.
+func _cloud_fit() -> Vector3:
+	if vantage == "chamber":
+		return Vector3(0.90, 1.0, 0.45)
+	return Vector3.ONE
+
 
 # ── small builders ───────────────────────────────────────────────────────────
 

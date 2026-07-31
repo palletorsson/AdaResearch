@@ -56,12 +56,29 @@ class_name GodelStatementPlaque
 #                              half the plate is left as ruled, bracketed, empty
 #                              metal. The system reaches this far. The rest is
 #                              measured and blank.
-#   breach     EXHIBITS it.    The body fails at the claim. The plate is in two
-#                              pieces, offset and out of true, the frame has lost
-#                              its bottom rail and sprung its right one, and
-#                              fragments hang at the foot of the break. The
-#                              sentence is untouched and still centred; the thing
-#                              carrying it has come apart.
+#   breach     EXHIBITS it.    The CERTIFICATION fails, not the body. Two plates of
+#                              the same stock, one above the other, rail-joined into
+#                              one apparatus. Each carries, in its lower band, the
+#                              seal the OTHER plate issued to it — two lit bars cross
+#                              the gap between them — beside an empty bracketed socket
+#                              where its own seal would sit, and a small issuing head
+#                              its own bar leaves from. Both bodies are square, framed
+#                              and intact. The one certificate neither can produce is
+#                              its own.
+#
+# THE 2026-07-31 REPAIR OF `breach`. This value used to crack the plate: two pieces
+# offset and out of true, the bottom rail gone, the right rail sprung, fragments at
+# the foot of the break. That staged incompleteness as DAMAGE, and damage is the
+# popular misreading of 1931 — the sentence that "broke mathematics", chipped bronze,
+# a catastrophe. The truth line at the head of this file says the opposite: completeness
+# and consistency are mutually exclusive, which is a theorem. An incomplete system is
+# not injured. It is working correctly and cannot certify itself. So the failure had to
+# move off the metal and onto the claim, and the honest exhibit of it is an object that
+# is in perfect order and still cannot complete itself on its own terms. Two plates,
+# each certifying the other, neither itself. The value keeps its name: a breach is a
+# failure to make good on an undertaking before it is ever a hole in a wall, and what
+# is breached here is the promise of self-certification. Nothing was renamed, so
+# russell_set_box.gd's word list is untouched and the pair still speak one vocabulary.
 #   omission   LEAVES A HOLE.  Eleven of the twelve edges of the plaque, in frame
 #                              brass, and no plaque. The boundary is built, the
 #                              body is not, and the sentence hangs in the empty
@@ -82,7 +99,9 @@ class_name GodelStatementPlaque
 # WHAT IT COST. The plaque can no longer be innocent about its own composure.
 # Under quotation the intact frame used to be simply how a plaque is made; now it
 # is legible as a CLAIM — nothing wrong here, the trouble is in the text — because
-# four other bodies stand next to it that do not make that claim. That is a real
+# four other bodies stand beside it that decline it: one measures the blank it stops
+# at, one cannot certify itself, one is not built at all inside its own boundary, and
+# one is a small lit island in a much larger place. That is a real
 # foreclosure and it cannot be undone by choosing the default. There is also a
 # reading this axis makes harder: the plaque as a neutral display surface that
 # happens to hold logic. It is now always saying something about its own footing.
@@ -116,8 +135,9 @@ signal paradox_triggered()
 
 ## THE AXIS — what this object does about its own outside (see the promotion note
 ## above). quotation is the legacy lineage: an intact, framed, numbered body with the
-## limit written on it. The other four give the outside a measured size, let it break
-## the body, leave the body unbuilt inside its own boundary, or build in it.
+## limit written on it. The other four give the outside a measured size, put the body
+## in a pair where neither half can certify itself, leave the body unbuilt inside its
+## own boundary, or build in it.
 @export_enum("quotation", "margin", "breach", "omission", "habitat") var outside: String = "quotation"
 
 ## THE VOCABULARY LIVES HERE, ONCE. russell_set_box.gd preloads this script and reads
@@ -277,60 +297,94 @@ func _build_margin() -> void:
 	outside_measure(gauge, width * 0.97, height * 0.85, face_z + 0.002,
 		Color(0.4, 0.35, 0.2).lightened(0.30), false)
 
-## THE BODY FAILS AT THE CLAIM. Two pieces of plate, offset and out of true, with the
-## room showing through the split; the frame has lost its bottom rail entirely and its
-## right rail has sprung outward; fragments hang at the foot of the break. The sentence,
-## the note and the index keep their exact positions — the argument is untouched and the
-## thing carrying it is not.
+## THE CLAIM THE OBJECT CANNOT MAKE ABOUT ITSELF. The shipped plate, intact and framed,
+## with the sentence, the note and the index exactly where they always were — and above
+## it a second plate of the same stock with the same frame, its inscription field raised,
+## ruled and EMPTY. Two brass rails join the pair into one apparatus. In the credential
+## band each plate turns toward the other: a lit seal (the certificate the other plate
+## issued), an empty bracketed socket (where its own would sit), and a small issuing head
+## from which its own bar leaves. The two bars cross the gap. Nothing here is cracked,
+## sprung or shed.
+##
+## WHY NOT A CRACK. Damage says incompleteness BROKE the object, which is the popular
+## misreading of 1931 and is contradicted by this file's own truth line: completeness and
+## consistency are mutually exclusive — a theorem, not a catastrophe. A formal system that
+## cannot prove its own consistency is not injured; it is in perfect working order and
+## still cannot close on itself. So the exhibit has to be an object that is intact and
+## nevertheless cannot finish itself on its own terms. Two plates certify each other and
+## neither certifies itself, and the reader can see both sockets standing open.
 func _build_breach() -> void:
-	# The split is 13% of the plate's width and the halves disagree by seven and a half
-	# degrees. Both numbers are deliberately past the point of looking like a chip or a
-	# seam: at the distance a capture frames this object from, a hairline crack is one
-	# pixel and reads as nothing, and a value that reads as nothing is not a value.
-	var half_w: float = width * 0.47
+	# The legacy body first, untouched — the sentence keeps its plate, and the argument
+	# is that this plate is FINE.
+	_create_plaque()
+
+	var face_z: float = depth * 0.5
+	# The twin stands a frame-and-a-bit above, far enough that the gap can hold the two
+	# crossing bars and close enough that the pair still frames as one object: the sweep
+	# camera fits by the bounding-box diagonal, so every centimetre of separation is paid
+	# for in the size of everything else in the shot.
+	var twin_y: float = height * 1.42
 	var body: StandardMaterial3D = outside_mat(plaque_color, 0.0, 0.3, 0.7)
+	var brass: StandardMaterial3D = outside_mat(Color(0.4, 0.35, 0.2), 0.0, 0.6, 0.4)
 
-	var left: MeshInstance3D = outside_box(
-		Vector3(-width * 0.29, height * 0.02, -0.004), Vector3(half_w, height, depth), body)
-	left.rotation_degrees.z = 3.0
-	add_child(left)
+	# ── the second plate: same stock, same frame, an inscription field and no inscription
+	add_child(outside_box(Vector3(0.0, twin_y, 0.0),
+		Vector3(width, height, depth), body))
+	add_child(outside_box(Vector3(0.0, twin_y, -depth * 0.3),
+		Vector3(width + 0.04, height + 0.04, depth * 0.5), brass))
+	var panel: StandardMaterial3D = outside_mat(plaque_color.lightened(0.18), 0.0, 0.25, 0.55)
+	var panel_y: float = twin_y + height * 0.06
+	add_child(outside_box(Vector3(0.0, panel_y, face_z + 0.003),
+		Vector3(width * 0.80, height * 0.52, 0.006), panel))
+	var rule: StandardMaterial3D = outside_mat(
+		Color(0.4, 0.35, 0.2).lightened(0.30), 0.35, 0.5, 0.45)
+	for ry in [-1.0, 1.0]:
+		add_child(outside_box(
+			Vector3(0.0, panel_y + ry * height * 0.28, face_z + 0.004),
+			Vector3(width * 0.80, 0.007, 0.007), rule))
 
-	var right: MeshInstance3D = outside_box(
-		Vector3(width * 0.31, -height * 0.05, 0.006), Vector3(half_w, height, depth), body)
-	right.rotation_degrees.z = -4.5
-	add_child(right)
+	# ── the rails that make the pair one apparatus rather than two objects ──
+	for sx in [-1.0, 1.0]:
+		add_child(outside_box(
+			Vector3(sx * (width * 0.5 + 0.028), twin_y * 0.5, -depth * 0.3),
+			Vector3(0.018, twin_y + height + 0.04, depth * 0.5), brass))
 
-	# the exposed interior of the break, catching the plaque's own glow colour
-	var lit: StandardMaterial3D = outside_mat(glow_color.darkened(0.35), 0.9, 0.1, 0.6)
-	var seam: MeshInstance3D = outside_box(
-		Vector3(width * 0.010, 0.0, -0.012), Vector3(0.012, height * 0.9, depth * 0.4), lit)
-	seam.rotation_degrees.z = -1.6
-	add_child(seam)
+	# ── each plate's credential band: seal in, socket empty, issuing head out ──
+	# Both bands face the gap — the shipped plate's along its top edge, the twin's along
+	# its bottom — so the pair present their credentials to each other. The strip chosen
+	# on the shipped plate is the one horizontal band that carries no label: above the
+	# sentence, below the top rail. The argument is added BESIDE the words, never over
+	# them.
+	var seal: StandardMaterial3D = outside_mat(glow_color, 1.2, 0.2, 0.35)
+	var socket: StandardMaterial3D = outside_mat(plaque_color.darkened(0.55), 0.0, 0.1, 0.9)
+	var bracket: StandardMaterial3D = outside_mat(
+		Color(0.4, 0.35, 0.2).lightened(0.20), 0.25, 0.5, 0.45)
+	var band: float = height * 0.36
+	for by in [band, twin_y - band]:
+		# the seal the OTHER plate issued — the only certificate this body carries
+		add_child(outside_box(Vector3(-width * 0.29, by, face_z + 0.006),
+			Vector3(0.076, 0.076, 0.012), seal))
+		# its own socket, bracketed and open
+		add_child(outside_box(Vector3(0.0, by, face_z + 0.002),
+			Vector3(0.076, 0.076, 0.005), socket))
+		for bx in [-1.0, 1.0]:
+			add_child(outside_box(Vector3(bx * 0.045, by, face_z + 0.005),
+				Vector3(0.011, 0.090, 0.009), bracket))
+		# the head its own certificate leaves from
+		add_child(outside_box(Vector3(width * 0.29, by, face_z + 0.006),
+			Vector3(0.050, 0.050, 0.011), seal))
 
-	# three rails of four — the bottom one is simply not there
-	var frame_mat: StandardMaterial3D = outside_mat(Color(0.4, 0.35, 0.2), 0.0, 0.6, 0.4)
-	var rail_t: float = 0.02
-	var fz: float = -depth * 0.3
-	add_child(outside_box(Vector3(0.0, height * 0.5 + rail_t * 0.5, fz),
-		Vector3(width + rail_t * 2.0, rail_t, depth * 0.5), frame_mat))
-	add_child(outside_box(Vector3(-(width * 0.5 + rail_t * 0.5), 0.0, fz),
-		Vector3(rail_t, height + rail_t * 2.0, depth * 0.5), frame_mat))
-	var sprung: MeshInstance3D = outside_box(
-		Vector3(width * 0.5 + rail_t * 1.6, -height * 0.02, fz + 0.014),
-		Vector3(rail_t, height + rail_t * 2.0, depth * 0.5), frame_mat)
-	sprung.rotation_degrees.z = -5.5
-	add_child(sprung)
-
-	# fragments at the foot of the break
-	var shards: Array = [
-		[Vector3(width * 0.33, -height * 0.59, depth * 1.1), Vector3(0.090, 0.048, 0.014), Vector3(12.0, 20.0, 31.0)],
-		[Vector3(-width * 0.23, -height * 0.63, depth * 1.7), Vector3(0.062, 0.040, 0.013), Vector3(20.0, -34.0, -17.0)],
-		[Vector3(width * 0.03, -height * 0.57, depth * 0.6), Vector3(0.075, 0.036, 0.012), Vector3(6.0, 9.0, 52.0)],
-	]
-	for s in shards:
-		var piece: MeshInstance3D = outside_box(s[0], s[1], body)
-		piece.rotation_degrees = s[2]
-		add_child(piece)
+	# ── the two certificates, crossing ──
+	# lower head (+x) → upper seal (−x), and upper head (+x) → lower seal (−x).
+	var span_x: float = width * 0.58
+	var span_y: float = twin_y - band * 2.0
+	var bar_len: float = sqrt(span_x * span_x + span_y * span_y)
+	var bar_deg: float = rad_to_deg(atan2(span_y, span_x))
+	for s in [-1.0, 1.0]:
+		var bar: MeshInstance3D = outside_box(Vector3(0.0, twin_y * 0.5, face_z + 0.009),
+			Vector3(bar_len, 0.017, 0.009), seal)
+		bar.rotation_degrees.z = s * bar_deg
+		add_child(bar)
 
 ## THE BOUNDARY BUILT, THE BODY NOT. Eleven of the plaque's twelve edges in frame brass
 ## and no plate at all, so the sentence hangs in an empty rectangle with the room showing

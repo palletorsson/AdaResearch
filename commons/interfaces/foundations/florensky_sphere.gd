@@ -84,15 +84,21 @@ enum LogicState { A, NOT_A, BOTH, NEITHER }
 #                            location, so it cannot be pointed at, refused, or
 #                            inhabited. It has been pushed below perception, into
 #                            colour, where §3 says power operates unexamined.
-#   hairline  BOUNDS it.     Assertion and negation become two visible hemispheres
-#                            and the contradiction is admitted to be exactly one
-#                            great circle wide — a sunk black groove between two
-#                            raised caps. Localised, survivable, and everywhere
-#                            else the object is consistent.
+#   hairline  BOUNDS it.     One great circle is scored: a dark incision on the
+#                            skin, two machined lips, and a neutral gauge collar
+#                            clamped on it that states how wide the admission is.
+#                            The skin itself is not divided and not recoloured —
+#                            it is the shipped double-faced sphere, oscillating
+#                            through assertion and negation on BOTH sides of the
+#                            mark. Localised, survivable, and everywhere else the
+#                            object is exactly as consistent as it ever was.
 #   gap       LEAVES A HOLE. The skin is built as an open shell missing a lune of
-#                            longitude, cut edges darkened. There is no material
-#                            where the contradiction is. The boundary refuses to
-#                            close rather than lie about closing.
+#                            longitude — front wall AND back wall, so a look
+#                            through the opening leaves the body instead of
+#                            meeting the far half of the same skin. Cut edges
+#                            darkened. There is no material where the
+#                            contradiction is. The boundary refuses to close
+#                            rather than lie about closing.
 #   scaffold  BUILDS THERE.  The same hole, rigged: rails down both cut meridians,
 #                            rungs across the opening, a deck seated inside it.
 #                            The limit as habitat — the thing the @identity means
@@ -117,6 +123,44 @@ enum LogicState { A, NOT_A, BOTH, NEITHER }
 # which colour means assertion and which negation, the collapse-and-return behaviour,
 # and every sentence on the three boards. This pass stages the argument; it does not
 # edit the logic.
+#
+# ── THE 2026-07-31 REPAIR ─────────────────────────────────────────────────────
+#
+# hairline USED TO BUILD BIVALENCE. It raised two opaque caps over the skin — the top
+# one in color_A, the bottom one in color_not_A — with the groove between them. A blue
+# hemisphere above a red hemisphere says: A is true up there, ¬A is true down there,
+# and everywhere else this object is consistent. That is the classical partition, and
+# it is the exact thing paraconsistency refuses. The truth line four screens up reads
+# "A and not-A can both be true"; the staging said they are each true somewhere else.
+# The value's job was only ever to give the contradiction an ADDRESS, not to resolve
+# it, so the caps are gone and what is left is the mark: an incision on one great
+# circle, its two lips, and a collar in neutral metal that states its width. The skin
+# under and over it is the shipped one, undivided, oscillating through both colours on
+# both sides. The @identity's own words for this value — "on one great circle" — are
+# now true of what gets built, which they were not before.
+#
+# WHY THE MARK NEEDED A COLLAR. Eight degrees of arc on a 0.6 m sphere is nine pixels
+# in a capture that fits the whole artifact — labels and all — by its bounding-box
+# diagonal. A mark that cannot be found is not an admission. The collar is neutral
+# machined metal, carries no truth value, and reaches no further out than the
+# explanation board already does, so the framing barely moves. It is the same gesture
+# as the plaque's datum rule and end stops: the width of the admission, stated.
+#
+# WHY gap OPENS THE BACK WALL TOO. The sweep measured none↔gap at 0.511% — a value a
+# still could not show. The recorded diagnosis was that the lune faced away from the
+# camera. It does not: the sweep camera sits at YAW 0.62 / PITCH -0.26 from the AABB
+# centre, whose direction is (0.5615, 0.2571, 0.7865), and in this file's own _sph
+# convention (azimuth = atan2(z, x)) that is 54.5° — three and a half degrees off
+# SEAM_OPEN_MID_DEG. The opening was already aimed at the lens, and the rendered tile
+# proves it: the two cut edges land at x/R = -0.70 and +0.78, exactly where azimuths
+# 10° and 106° project from 54.5°. The real cause is that this skin is TRANSPARENT and
+# CULL_DISABLED. Every ray through the opening still crossed the far half of the same
+# skin plus the emissive core, so the composite barely moved and a hole in a wall you
+# can see through is not a hole. Removing the same lune from the far wall is what makes
+# the absence an absence: the ray now leaves the body, the silhouette stops being a
+# disc, and the core is seen THROUGH the opening rather than merely behind it — which
+# is what the paragraph above always claimed. scaffold's rails, rungs and deck are
+# untouched: they are built from the near lune's meridians, which did not move.
 # ─────────────────────────────────────────────────────────────────────────────
 
 ## THE AXIS — where the contradiction is put (see the promotion note above).
@@ -133,14 +177,24 @@ enum LogicState { A, NOT_A, BOTH, NEITHER }
 ## the registry declaration from.
 const SEAMS: PackedStringArray = ["none", "hairline", "gap", "scaffold", "field"]
 
-## Half-width of the hairline rift, in degrees of arc. Small enough to read as a
-## groove rather than a band, large enough to survive a 512 px capture.
-const SEAM_RIFT_DEG := 4.0
+## Half-width of the hairline rift, in degrees of arc. Still one great circle, still a
+## groove rather than a band — 16° of arc is a twenty-second of the skin. The old value
+## was 4.0 with a comment claiming it survived a 512 px capture; it did not, because the
+## capture frames the sphere together with three text boards and fits the lot by the
+## bounding-box diagonal, which leaves the whole sphere about 120 px across and this
+## mark about four of them.
+const SEAM_RIFT_DEG := 8.0
 
-## The lune the open skin refuses to cover, and where its centre points. The centre
-## is chosen so the opening faces the capture camera and the VR approach direction
-## (spatial_needs.player_position = front): a hole aimed at the far side would be a
-## claim nobody could witness.
+## How far the gauge collar reaches past the skin, as a multiple of `radius`. Kept under
+## the width the explanation board already claims, so adding it moves the sweep camera by
+## a few per cent rather than reframing the shot.
+const SEAM_COLLAR_R := 1.50
+
+## The lune the open skin refuses to cover, and where its centre points. 58° is within
+## three and a half degrees of the sweep camera's own azimuth (see THE 2026-07-31 REPAIR
+## above) and faces the VR approach direction (spatial_needs.player_position = front), so
+## it stays. The lune is cut from the FAR wall as well — a transparent double-faced skin
+## hides a one-sided hole behind its own far half.
 const SEAM_OPEN_DEG := 96.0
 const SEAM_OPEN_MID_DEG := 58.0
 
@@ -155,6 +209,10 @@ const SEAM_FACET_LIFT := 1.10
 
 const SEAM_DARK := Color(0.02, 0.02, 0.03)
 const SEAM_BUILD := Color(0.58, 0.44, 0.24)
+## hairline's metal. Deliberately NEUTRAL — neither color_A nor color_not_A, and not
+## scaffold's brass either. A mark that took a side would be making the truth claim the
+## value exists to refuse.
+const SEAM_KERB := Color(0.66, 0.68, 0.72)
 
 # Internal
 var _sphere: MeshInstance3D
@@ -194,12 +252,20 @@ func _create_sphere() -> void:
 	# skin is an open shell missing a lune of longitude, so the boundary genuinely
 	# does not close and the core is visible through the absence. Every other value
 	# — none included — keeps the legacy SphereMesh exactly as it was.
+	#
+	# The lune is taken out of BOTH walls — [mid−h, mid+h] and its antipode — because
+	# this skin is transparent and double-faced, so a lune removed from the near wall
+	# alone is filled in by the far half of the same skin and the hole photographs as
+	# no hole at all (it measured 0.511%). What is left is two facing walls of 84° each;
+	# the near opening, and therefore every rail, rung and deck scaffold hangs in it,
+	# is exactly where it was.
 	if seam == "gap" or seam == "scaffold":
-		_sphere.mesh = _shell_mesh(radius,
-			0.0, PI,
-			deg_to_rad(SEAM_OPEN_MID_DEG + SEAM_OPEN_DEG * 0.5),
-			deg_to_rad(SEAM_OPEN_MID_DEG - SEAM_OPEN_DEG * 0.5 + 360.0),
-			maxi(detail / 2, 4), maxi(detail, 8))
+		var h: float = SEAM_OPEN_DEG * 0.5
+		var m: float = SEAM_OPEN_MID_DEG
+		_sphere.mesh = _shell_pair_mesh(radius, 0.0, PI,
+			deg_to_rad(m + h), deg_to_rad(m + 180.0 - h),
+			deg_to_rad(m + 180.0 + h), deg_to_rad(m + 360.0 - h),
+			maxi(detail / 2, 4), maxi(detail / 2, 8))
 	else:
 		var mesh = SphereMesh.new()
 		mesh.radius = radius
@@ -499,37 +565,77 @@ func _create_seam() -> void:
 			_build_field()
 
 ## hairline — the contradiction admitted, and bounded to one great circle.
-## Assertion and negation stop sharing every point of the skin and become two raised
-## caps in their own colours; between them a black groove, sunk below both, four
-## degrees of arc wide. The claim: it is real, it is exactly here, and the rest of
-## the surface is consistent.
+## A dark incision scored round the equator, a machined lip along each of its edges, and
+## a neutral gauge collar clamped on the same circle stating how wide the admission is.
+## NOTHING here touches the skin: no cap, no cut, no recolour, and not one gram of
+## color_A or color_not_A. The shipped double-faced sphere goes on oscillating through
+## assertion and negation ABOVE and BELOW the mark, which is the whole difference
+## between "the contradiction is located here" and "A holds up there and ¬A down here".
+## The second sentence is bivalence, it is what this artifact denies, and it is what two
+## coloured hemispheres used to say for it.
 func _build_hairline() -> void:
 	var rift: float = deg_to_rad(SEAM_RIFT_DEG)
-	var cap_a := MeshInstance3D.new()
-	cap_a.name = "SeamCapA"
-	cap_a.mesh = _shell_mesh(radius * 1.05, 0.0, PI * 0.5 - rift, 0.0, TAU, 12, 32)
-	cap_a.material_override = _seam_material(color_A, 0.85, true)
-	_add_seam_node(cap_a)
+	var eq: float = PI * 0.5
 
-	var cap_b := MeshInstance3D.new()
-	cap_b.name = "SeamCapNotA"
-	cap_b.mesh = _shell_mesh(radius * 1.05, PI * 0.5 + rift, PI, 0.0, TAU, 12, 32)
-	cap_b.material_override = _seam_material(color_not_A, 0.85, true)
-	_add_seam_node(cap_b)
-
+	# the incision — dark, opaque, hugging the skin, one great circle wide
 	var groove := MeshInstance3D.new()
 	groove.name = "SeamRift"
-	groove.mesh = _shell_mesh(radius * 1.015, PI * 0.5 - rift, PI * 0.5 + rift, 0.0, TAU, 2, 32)
+	groove.mesh = _shell_mesh(radius * 1.006, eq - rift, eq + rift, 0.0, TAU, 2, 48)
 	groove.material_override = _seam_material(SEAM_DARK, 1.0, false)
 	_add_seam_node(groove)
 
-## The two meridians where the skin was cut. Darkened so the opening reads as a cut
-## and not as an object that was never finished — gap and scaffold share them,
+	# its two lips, standing proud, so the cut has edges a still can find
+	var kerb: StandardMaterial3D = _seam_material(SEAM_KERB, 1.0, false)
+	kerb.metallic = 0.72
+	kerb.roughness = 0.30
+	var lip_w: float = deg_to_rad(1.8)
+	for i in range(2):
+		var t: float = (eq - rift) if i == 0 else (eq + rift)
+		var e := MeshInstance3D.new()
+		e.name = "SeamKerb_%d" % i
+		e.mesh = _shell_mesh(radius * 1.024, t - lip_w, t + lip_w, 0.0, TAU, 2, 48)
+		e.material_override = kerb
+		_add_seam_node(e)
+
+	# THE GAUGE COLLAR — the mark made big enough to be a mark. Two graphite flanges
+	# sprung from the two lips of the cut, each with a lit outer edge, and the incision
+	# itself showing in the slot between them: this far, no further, and here is the width
+	# of the admission. Neutral metal on purpose — a collar in either logical colour would
+	# hand a side back to a surface whose whole argument is that it holds both. The pair
+	# is also what makes the mark legible at capture distance: one flat ring seen from
+	# fifteen degrees above is a thin ellipse, two offset rings are a flange with a slot.
+	var flange_y: float = radius * sin(rift)
+	var flange_r0: float = radius * cos(rift) * 1.02
+	var graphite: StandardMaterial3D = _seam_material(SEAM_KERB.darkened(0.72), 1.0, false)
+	var rim_mat: StandardMaterial3D = _seam_material(SEAM_KERB.lightened(0.25), 1.0, false)
+	rim_mat.emission_enabled = true
+	rim_mat.emission = SEAM_KERB.lightened(0.25)
+	rim_mat.emission_energy_multiplier = 0.75
+	for i2 in range(2):
+		var fy: float = flange_y if i2 == 0 else -flange_y
+		var collar := MeshInstance3D.new()
+		collar.name = "SeamCollar_%d" % i2
+		collar.mesh = _ring_mesh(flange_r0, radius * SEAM_COLLAR_R, fy, 48)
+		collar.material_override = graphite
+		_add_seam_node(collar)
+
+		var rim := MeshInstance3D.new()
+		rim.name = "SeamCollarRim_%d" % i2
+		rim.mesh = _ring_mesh(radius * SEAM_COLLAR_R,
+			radius * (SEAM_COLLAR_R + 0.10), fy, 48)
+		rim.material_override = rim_mat
+		_add_seam_node(rim)
+
+## The meridians where the skin was cut — the two that bound the near opening and the
+## two that bound its antipode, because the lune is taken out of both walls. Darkened so
+## the opening reads as a cut and not as an object that was never finished; the far pair
+## is seen THROUGH the near opening, which is the point. gap and scaffold share them,
 ## because scaffold does not repair the hole, it moves into it.
 func _build_cut_edges() -> void:
 	var half: float = deg_to_rad(SEAM_OPEN_DEG * 0.5)
 	var mid: float = deg_to_rad(SEAM_OPEN_MID_DEG)
-	var edges: Array[float] = [mid - half, mid + half]
+	var edges: Array[float] = [mid - half, mid + half,
+		mid + PI - half, mid + PI + half]
 	for i in range(edges.size()):
 		var e := MeshInstance3D.new()
 		e.name = "SeamCut_%d" % i
@@ -660,6 +766,51 @@ func _shell_mesh(r: float, t0: float, t1: float, p0: float, p1: float, rings: in
 			idx.append(b)
 			idx.append(c)
 			idx.append(d)
+	var arr: Array = []
+	arr.resize(Mesh.ARRAY_MAX)
+	arr[Mesh.ARRAY_VERTEX] = verts
+	arr[Mesh.ARRAY_NORMAL] = norms
+	arr[Mesh.ARRAY_INDEX] = idx
+	var m := ArrayMesh.new()
+	m.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
+	return m
+
+## Two shell patches in ONE mesh — the same skin with a lune taken out of the near wall
+## and out of the wall behind it. Two surfaces rather than two nodes, so the single
+## material_override that carries the oscillation still reaches every triangle of the
+## skin and the animation code does not have to learn that the body has parts.
+func _shell_pair_mesh(r: float, t0: float, t1: float,
+		a0: float, a1: float, b0: float, b1: float,
+		rings: int, segs: int) -> ArrayMesh:
+	var m: ArrayMesh = _shell_mesh(r, t0, t1, a0, a1, rings, segs)
+	var second: ArrayMesh = _shell_mesh(r, t0, t1, b0, b1, rings, segs)
+	m.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, second.surface_get_arrays(0))
+	return m
+
+## A flat annulus in the XZ plane at height y — hairline's gauge collar, clamped on the
+## one great circle the value admits to, one flange per lip of the cut. Normals up; the
+## seam material is CULL_DISABLED like every other piece here, so the lower flange reads
+## from underneath as well.
+func _ring_mesh(r0: float, r1: float, y: float, segs: int) -> ArrayMesh:
+	var verts := PackedVector3Array()
+	var norms := PackedVector3Array()
+	var idx := PackedInt32Array()
+	for j in range(segs + 1):
+		var ph: float = TAU * float(j) / float(segs)
+		var cx: float = cos(ph)
+		var cz: float = sin(ph)
+		verts.append(Vector3(r0 * cx, y, r0 * cz))
+		norms.append(Vector3.UP)
+		verts.append(Vector3(r1 * cx, y, r1 * cz))
+		norms.append(Vector3.UP)
+	for j2 in range(segs):
+		var a: int = j2 * 2
+		idx.append(a)
+		idx.append(a + 1)
+		idx.append(a + 2)
+		idx.append(a + 1)
+		idx.append(a + 3)
+		idx.append(a + 2)
 	var arr: Array = []
 	arr.resize(Mesh.ARRAY_MAX)
 	arr[Mesh.ARRAY_VERTEX] = verts

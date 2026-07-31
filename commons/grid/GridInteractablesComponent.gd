@@ -112,6 +112,14 @@ const CONFIG_PARAM_NAMES = [
 	"diagram", "lines", "board_width", "board_height", "board_color",
 	# palm_scanner params
 	"scan_active", "mounting", "scan_hold_seconds", "auto_connect_door", "scan_dwell",
+	# "color" — the key registry `default_params` most often declares, and the one
+	# a map token uses to override it. It has to be listed or an ALL-DIGIT hex is
+	# misread as tutorial shorthand: "#color:112233" becomes tutorial_id "color"
+	# with rotation 112233, and the colour is lost. Hexes containing a letter
+	# ("FF6060", "4080FF") were never at risk because is_valid_float() rejects
+	# them, which is why this went unnoticed. No token anywhere in the corpus
+	# carries "#color:" today (2,826,608 cells scanned), so listing it moves no map.
+	"color",
 	# generic
 	"no_collider",
 ]
@@ -1150,12 +1158,37 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	# Connect signals if artifact has them
 	_connect_artifact_signals(artifact_object, lookup_name)
 	
-	# Merge delegated params (from delegate_to entries) into config_data —
-	# delegate_params first, then any per-token overrides win.
-	var delegate_params: Variant = artifact_info.get("__delegate_params__", null)
+	# Config precedence, weakest first:
+	#
+	#   1. registry `default_params`  — what the artifact ENTRY declares it is
+	#   2. `delegate_params`          — what a delegate_to entry asks of its host
+	#   3. `config_data`              — what THIS map token says, which always wins
+	#
+	# (1) is new here and is the whole of this repair. The registry declared
+	# default_params on exactly SEVEN of 2,691 artifacts and no loader had ever
+	# read them, so the declaration was dead data. The visible cost was the QFEP
+	# formula: grab_sphere_E / _F / _lambda / _phi are four registry names on ONE
+	# scene declaring four distinct colours, and with nothing consuming them all
+	# four stood in qfeplaboratory as identical pink pellets. E, F and λ are meant
+	# to be different terms of one equation.
+	#
+	# Routed through this channel and not through an artifact's DNA axis on
+	# purpose: an axis value would then also decide WHICH TERM the object is,
+	# which is not a staging choice but an identity one.
+	#
+	# GATED BY DATA. `default_params` absent (2,684 of 2,691 entries) leaves
+	# merged_config exactly as it was built before — {} plus delegate params plus
+	# token params — and _apply_artifact_config is called under exactly the same
+	# condition. Nothing without the new key can move.
 	var merged_config: Dictionary = {}
+	var default_params: Variant = artifact_info.get("default_params", null)
+	if default_params is Dictionary:
+		merged_config = (default_params as Dictionary).duplicate(true)
+	# Deep-duplicated on the way in, as before, so a nested value in a registry
+	# entry can never be mutated through the metadata we hand the artifact.
+	var delegate_params: Variant = artifact_info.get("__delegate_params__", null)
 	if delegate_params is Dictionary:
-		merged_config = (delegate_params as Dictionary).duplicate(true)
+		merged_config.merge((delegate_params as Dictionary).duplicate(true), true)
 	for k in config_data.keys():
 		merged_config[k] = config_data[k]
 	if not merged_config.is_empty():

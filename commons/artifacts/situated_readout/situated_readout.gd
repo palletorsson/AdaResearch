@@ -73,12 +73,16 @@ class_name SituatedReadout
 #                            meeting. The one thing both agree on — SUBJECT
 #                            #4729 — hangs in the hole with nothing behind it.
 #   survey    BUILDS THERE.  The face becomes the drawing the single panel could
-#                            not contain: a plan of all four stations, the
-#                            subject at the centre, four sight lines converging,
-#                            this station lit and haloed and the other three
-#                            drawn in their own colours. The verdict climbs into
-#                            the head of the panel. The field of positions
-#                            becomes what the readout is about.
+#                            not contain: the field of positions, drawn FROM this
+#                            one. The projection has an origin and the origin is
+#                            this instrument, sitting on the near edge half out
+#                            of its own picture. The other three recede by their
+#                            distance along this station's axis, foreshortened,
+#                            and tinted toward this station's verdict colour —
+#                            along with the ground they stand on. The subject
+#                            falls where it falls from here. The verdict climbs
+#                            into the head of the panel and the address line says
+#                            the drawing was surveyed from somewhere.
 #
 # address=footnote is the legacy lineage, statement for statement: the panel,
 # the four labels at their old positions in their old sizes, the same tint, and
@@ -103,6 +107,29 @@ class_name SituatedReadout
 # QUADRANT_VERDICTS — the counter-reading parallax prints and the four stations
 # survey draws are this artifact's own table, quoted, never invented. This pass
 # stages the curriculum's last claims; it does not edit them.
+#
+# ── THE 2026-07-31 REPAIR OF `survey` ─────────────────────────────────────────
+#
+# survey USED TO HAND OVER THE GOD-TRICK. It drew an orthographic plan: all four
+# stations laid out square on the panel, four sight lines converging on a subject mark
+# at the geometric centre, this station merely highlighted and haloed. That is a view
+# of the whole field from no station inside it — which is precisely the thing Haraway's
+# "situated knowledges" names as the enemy, and the thing this artifact's own truth line
+# denies in one sentence: objectivity is not a view from nowhere. A plan with a
+# you-are-here dot on it is still a plan from nowhere; the dot marks a position without
+# the drawing being made from it, and the highlight was doing the work a projection
+# refused to do.
+#
+# So the drawing acquired an origin, and the origin is this instrument. It stands on the
+# near edge of the field, half outside its own picture, because it is not in the picture
+# — it is where the picture is taken from. The other three are placed by their DEPTH
+# along this station's own axis and foreshortened accordingly, so the diagonal partner
+# (the reading that disagrees most, the one parallax quotes) lands small and far and
+# directly behind the subject, which is a true fact about standing here and is invisible
+# in a plan. Every one of them, and the ground they stand on, is tinted toward this
+# station's verdict colour: what a situated readout has of another station is not that
+# station, it is this station's version of it. The four positions, verdicts and colours
+# are still QUADRANT_VERDICTS, quoted; only the projection is new.
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Shared subject ID — every instance shows the SAME input, different output.
@@ -135,6 +162,15 @@ const ADDRESSES: PackedStringArray = ["erasure", "footnote", "witness", "paralla
 ## it is the reading that disagrees most: NW says ORDERLY at 87%, SE says
 ## IRRELEVANT at 22%, about the same subject, with no input between them.
 const OPPOSITE := {"NW": "SE", "NE": "SW", "SW": "NE", "SE": "NW"}
+
+## Where each station stands in the room, in units of half the room. Only `survey` reads
+## it, and only to work out where the other three fall FROM this one: the drawing needs
+## a viewpoint, and a viewpoint needs the plan it is a viewpoint ON. Consistent with
+## OPPOSITE — the diagonal partner is the one at twice the depth, straight ahead.
+const STATION_PLAN := {
+	"NW": Vector2(-1.0, 1.0), "NE": Vector2(1.0, 1.0),
+	"SW": Vector2(-1.0, -1.0), "SE": Vector2(1.0, -1.0),
+}
 
 var _subject_label: Label3D
 var _verdict_label: Label3D
@@ -471,49 +507,111 @@ func _build_parallax(key: String, verdict: Dictionary) -> void:
 	_staged.append(lbl_a)
 
 
-## SURVEY — the panel builds, at full size, the thing a single readout cannot
-## contain: the field of positions it is one of. A plan across the working face,
-## four stations in their own verdict colours, four sight lines converging on one
-## subject mark, this station lit and haloed. The verdict, its confidence and its
-## address are unchanged and climb into the head of the panel; the plan takes the
-## face. What the readout is ABOUT stops being #4729 and becomes where you can
-## stand to ask.
+## SURVEY — the field of positions, drawn FROM this one. The panel builds, at full size,
+## the thing a single readout cannot contain; but it builds it as a VIEW, not as a plan,
+## because a plan is a picture of the whole field from no station in it and a plan with a
+## you-are-here dot is still a picture from nowhere. So there is a horizon, a cone of
+## view opening from a standing line, and an origin — this instrument, on the near edge,
+## half out of its own drawing. The other three sit at their true depth along this
+## station's axis, foreshortened, tinted toward this station's colour; the ground carries
+## the same cast. The subject falls straight ahead, at the same depth as the two flanking
+## stations, with the diagonal partner small behind it — which is a fact about standing
+## HERE and is exactly what an orthographic plan cannot say. The verdict, its confidence
+## and its address are unchanged and climb into the head of the panel.
 func _build_survey(key: String, verdict: Dictionary) -> void:
 	var base_y: float = _panel_mesh.position.y
 	var cy: float = base_y - 0.10
+	var y0: float = cy - 0.205          # the standing line: where this station is
+	var vc: Color = verdict.color
 	_subject_label.position = Vector3(0, base_y + 0.375, 0.045)
 	_verdict_label.position = Vector3(0, base_y + 0.288, 0.045)
 	_confidence_label.position = Vector3(0, base_y + 0.186, 0.045)
 	_footer_label.position = Vector3(0, base_y - 0.400, 0.045)
+	# The address stops reporting a coordinate and starts reporting an authorship. Same
+	# quadrant, same numbers, read out of the same global_position — the drawing above it
+	# is the thing that changed, and the line now says who made it.
+	var here: Vector3 = global_position
+	_footer_label.text = "surveyed from %s (%.1f, %.1f)" % [key, here.x, here.z]
 
-	# the drawing ground and its frame
+	# the drawing ground, cast in this station's own colour — before a single line is
+	# drawn the sheet has already admitted whose sheet it is
 	_stage_box(Vector3(0, cy, 0.022), Vector3(0.96, 0.44, 0.005),
-		_stage_mat(Color(0.33, 0.34, 0.37), 0.10, 0.9))
-	var rule: StandardMaterial3D = _stage_mat(Color(0.72, 0.73, 0.76), 0.40, 0.6)
-	for sy in [-1.0, 1.0]:
-		_stage_box(Vector3(0, cy + sy * 0.22, 0.026), Vector3(0.96, 0.010, 0.006), rule)
-	for sx in [-1.0, 1.0]:
-		_stage_box(Vector3(sx * 0.475, cy, 0.026), Vector3(0.010, 0.44, 0.006), rule)
+		_stage_mat(vc.lerp(Color(0.26, 0.27, 0.30), 0.78), 0.12, 0.9))
 
-	# four stations, four sight lines, one subject
+	# horizon and standing line. A drawing with a horizon was made from a height and a
+	# place; a drawing with a neat rectangle round it was made from above and nowhere.
+	var rule: StandardMaterial3D = _stage_mat(vc.lightened(0.28), 0.55, 0.6)
+	_stage_box(Vector3(0, cy + 0.196, 0.026), Vector3(0.96, 0.009, 0.006), rule)
+	_stage_box(Vector3(0, y0 - 0.016, 0.026), Vector3(0.30, 0.011, 0.006), rule)
+
+	# depth → height and depth → scale. Both are the same one-point falloff, so a station
+	# twice as far away sits higher and reads smaller, which is what standing somewhere
+	# does to a field of positions and what a plan refuses to do to one.
+	var me: Vector2 = STATION_PLAN.get(key, Vector2(-1.0, 1.0))
+	var into: Vector2 = (-me).normalized()
+	var side := Vector2(-into.y, into.x)
+	# One falloff constant for both the near depth (√2 — the two flanking stations AND
+	# the subject, which really are the same distance out along this axis) and the far one
+	# (2√2 — the diagonal partner). Tuned so the two land far enough apart on the sheet to
+	# read as separate marks and still leave sky above the horizon.
+	var fall: float = 0.80
+	var subj_y: float = y0 + 0.36 * 1.4142 / (1.4142 + fall)
+
+	# the ground, receding: three transverse rungs narrowing with distance. A neat
+	# rectangle round a drawing says it was measured from above; rungs that close up as
+	# they climb say the sheet has a depth axis and the reader is standing at the bottom
+	# of it. They also give each station a line to stand on.
+	var rung: StandardMaterial3D = _stage_mat(vc.lightened(0.10), 0.28, 0.7)
+	for rd in [0.7071, 1.4142, 2.8284]:
+		_stage_box(Vector3(0, y0 + 0.36 * rd / (rd + fall), 0.024),
+			Vector3(0.92 * (1.45 / (rd + 1.45)), 0.006, 0.005), rung)
+
+	# the sight line this verdict came down — origin to subject, and no further. The
+	# station that stands directly behind the subject from here is left to say so by
+	# sitting on the same line, which is a fact about being at THIS address.
+	_stage_box(Vector3(0, (y0 + subj_y) * 0.5, 0.029),
+		Vector3(0.012, subj_y - y0, 0.005), _stage_mat(vc.lightened(0.30), 1.1, 0.5))
+
 	for k in ["NW", "NE", "SW", "SE"]:
 		var kk: String = str(k)
-		var vv: Dictionary = QUADRANT_VERDICTS[kk]
-		var c: Color = vv.color
-		var mine: bool = kk == key
-		var sx2: float = -0.24 if (kk == "NW" or kk == "SW") else 0.24
-		var sy2: float = 0.105 if (kk == "NW" or kk == "NE") else -0.105
-		var line: MeshInstance3D = _stage_box(
-			Vector3(sx2 * 0.5, cy + sy2 * 0.5, 0.028),
-			Vector3(0.262, (0.012 if mine else 0.006), 0.005),
-			_stage_mat((c.lightened(0.2) if mine else c.darkened(0.35)),
-				(1.0 if mine else 0.15), 0.6))
-		line.rotation.z = atan2(-sy2, -sx2)
-		if mine:
-			_stage_box(Vector3(sx2, cy + sy2, 0.027), Vector3(0.135, 0.135, 0.005),
-				_stage_mat(c, 0.30, 0.8))
-		var m: float = 0.078 if mine else 0.048
-		_stage_box(Vector3(sx2, cy + sy2, 0.034), Vector3(m, m, 0.010),
-			_stage_mat(c, (1.2 if mine else 0.50), 0.4))
-	_stage_box(Vector3(0, cy, 0.036), Vector3(0.046, 0.046, 0.012),
+		if kk == key:
+			continue
+		var op: Vector2 = STATION_PLAN[kk]
+		var r: Vector2 = op - me
+		var d: float = r.dot(into)
+		var sc: float = 1.45 / (d + 1.45)
+		var px: float = r.dot(side) * 0.42 * sc
+		var py: float = y0 + 0.36 * d / (d + fall)
+		if absf(px) > 0.001:
+			var dy: float = py - y0
+			var ray: MeshInstance3D = _stage_box(
+				Vector3(px * 0.5, (y0 + py) * 0.5, 0.027),
+				Vector3(sqrt(px * px + dy * dy), 0.006, 0.005),
+				_stage_mat(vc.lightened(0.10), 0.45, 0.6))
+			ray.rotation.z = atan2(dy, px)
+		# the other station, in its own verdict colour pulled toward THIS one and dimmed
+		# with distance. What a situated readout has of another station is not that
+		# station: it is this station's version of it, and the colour says so.
+		var ov: Dictionary = QUADRANT_VERDICTS[kk]
+		var oc: Color = ov.color
+		oc = oc.lerp(vc, 0.55).darkened(0.08 + 0.13 * d)
+		var mw: float = 0.10 * sc
+		_stage_box(Vector3(px, py, 0.031), Vector3(mw, mw * 0.62, 0.008),
+			_stage_mat(oc, 0.30 * sc, 0.55))
+
+	# the subject, where it falls from here
+	_stage_box(Vector3(0, subj_y, 0.034), Vector3(0.044, 0.030, 0.010),
 		_stage_mat(Color(0.93, 0.94, 0.96), 1.5, 0.3))
+
+	# ── the origin: this instrument, on the standing line, half out of the picture ──
+	# It is not drawn INSIDE the field with a halo round it, because it is not one of the
+	# things the drawing is of. It is what the drawing is from.
+	var body: StandardMaterial3D = _stage_mat(vc.darkened(0.55), 0.20, 0.7)
+	_stage_box(Vector3(0, y0 - 0.030, 0.030), Vector3(0.150, 0.030, 0.012), body)
+	_stage_box(Vector3(0, y0, 0.034), Vector3(0.112, 0.044, 0.014),
+		_stage_mat(vc.lightened(0.30), 1.5, 0.35))
+	_stage_box(Vector3(0, y0 + 0.032, 0.036), Vector3(0.034, 0.026, 0.016),
+		_stage_mat(Color(0.95, 0.96, 0.98), 1.9, 0.3))
+	for lx in [-1.0, 1.0]:
+		_stage_box(Vector3(lx * 0.052, y0 - 0.058, 0.028),
+			Vector3(0.014, 0.040, 0.010), body)

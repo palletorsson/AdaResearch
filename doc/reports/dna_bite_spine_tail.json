@@ -156,8 +156,8 @@
   {
    "artifact": "godel_statement_plaque",
    "axis": "outside",
-   "frame": 0.16034,
-   "focus": 0.47208,
+   "frame": 0.13917,
+   "focus": 0.45896,
    "verdict": "bites",
    "subject": 0.10973,
    "pairs": 10,
@@ -167,8 +167,8 @@
   {
    "artifact": "russell_set_box",
    "axis": "outside",
-   "frame": 0.14044,
-   "focus": 0.46643,
+   "frame": 0.1169,
+   "focus": 0.45337,
    "verdict": "bites",
    "subject": 0.07129,
    "pairs": 10,
@@ -178,10 +178,10 @@
   {
    "artifact": "florensky_sphere",
    "axis": "seam",
-   "frame": 0.04377,
-   "focus": 0.31757,
+   "frame": 0.05531,
+   "focus": 0.36526,
    "verdict": "bites",
-   "subject": 0.02926,
+   "subject": 0.0316,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -189,10 +189,10 @@
   {
    "artifact": "escher_staircase",
    "axis": "seam",
-   "frame": 0.06033,
-   "focus": 0.35448,
+   "frame": 0.07646,
+   "focus": 0.41673,
    "verdict": "bites",
-   "subject": 0.04199,
+   "subject": 0.04805,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -200,10 +200,10 @@
   {
    "artifact": "superposition_display",
    "axis": "remainder",
-   "frame": 0.06549,
-   "focus": 0.44214,
+   "frame": 0.08871,
+   "focus": 0.54302,
    "verdict": "bites",
-   "subject": 0.12957,
+   "subject": 0.13602,
    "pairs": 30,
    "twins": [],
    "colour_only": []
@@ -211,10 +211,10 @@
   {
    "artifact": "superposition_display",
    "axis": "vantage",
-   "frame": 0.14597,
-   "focus": 0.47854,
+   "frame": 0.16102,
+   "focus": 0.51977,
    "verdict": "bites",
-   "subject": 0.12957,
+   "subject": 0.13602,
    "pairs": 15,
    "twins": [],
    "colour_only": []
@@ -222,8 +222,8 @@
   {
    "artifact": "situated_readout",
    "axis": "address",
-   "frame": 0.10722,
-   "focus": 0.54285,
+   "frame": 0.12286,
+   "focus": 0.54912,
    "verdict": "bites",
    "subject": 0.11313,
    "pairs": 10,
@@ -244,8 +244,8 @@
   {
    "artifact": "grab_sphere_F",
    "axis": "grasp",
-   "frame": 0.07201,
-   "focus": 0.27093,
+   "frame": 0.0625,
+   "focus": 0.23059,
    "verdict": "bites",
    "subject": 0.00578,
    "pairs": 10,
@@ -255,27 +255,13 @@
   {
    "artifact": "grab_sphere_lambda",
    "axis": "grasp",
-   "frame": 0.03187,
-   "focus": 0.1562,
+   "frame": 0.06182,
+   "focus": 0.25139,
    "verdict": "bites",
    "subject": 0.00582,
    "pairs": 10,
-   "twins": [
-    {
-     "a": "hollow",
-     "b": "socket",
-     "focus": 0.01977,
-     "rgb": 0.03327
-    }
-   ],
-   "colour_only": [
-    {
-     "a": "socket",
-     "b": "swarm",
-     "focus": 0.05925,
-     "rgb": 0.10233
-    }
-   ]
+   "twins": [],
+   "colour_only": []
   }
  ]
 }
