@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://em_corridor_v1"]
+
+[ext_resource type="Script" path="res://commons/scenes/endless_museum.gd" id="1"]
+
+[node name="EndlessMuseum" type="Node3D"]
+script = ExtResource("1")
