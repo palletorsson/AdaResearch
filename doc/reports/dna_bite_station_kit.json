@@ -1,0 +1,44 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "station-kit-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "station_wall",
+   "axis": "upkeep",
+   "frame": 0.21259,
+   "focus": 0.49934,
+   "verdict": "bites",
+   "subject": 0.1159,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "station_pillar",
+   "axis": "upkeep",
+   "frame": 0.15134,
+   "focus": 0.53104,
+   "verdict": "bites",
+   "subject": 0.06789,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "station_crates",
+   "axis": "upkeep",
+   "frame": 0.19127,
+   "focus": 0.60877,
+   "verdict": "bites",
+   "subject": 0.13363,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  }
+ ]
+}

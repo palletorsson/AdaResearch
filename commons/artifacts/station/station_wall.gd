@@ -40,6 +40,23 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var screen_lines: Array = ["SET ONLINE", "LINK  OK"]
 ## Emissive accent band along the top, full wall width — runs edge-to-edge and continues across tiled sections.
 @export var lit_seam: bool = true
+
+## AXIS — WHICH MOMENT of the working life this run of wall is caught in. Adopted word for
+## word from [[station_pillar]] and [[station_crates]], which already share it: one kit, one
+## vocabulary, so a bay whose corners read "packed down" cannot have a wall that still reads
+## "in commission". curation_station passes its own #upkeep: down to everything it composes,
+## so a whole bay moves together.
+##
+##   service  in commission — the legacy lineage, byte for byte
+##   works    mid-job       — a board deck on trestles across the face, conduit, WORKS
+##   store    packed down   — the field sheeted and banded, the lit seam covered
+##   scrap    robbed        — half the panel field gone, studs bared, tape across the hole
+##
+## The lit seam is the pivot, exactly as the groove is on the pillar: it is the only
+## emissive surface on the piece and owns the brightest pixels in any frame the wall appears
+## in. `store` covers it, which is why that value reads from across a room.
+@export var upkeep: String = "service"
+const UPKEEPS: PackedStringArray = ["service", "works", "store", "scrap"]
 ## Caution-stripe band along the floor foot.
 @export var hazard_base: bool = false
 
@@ -114,6 +131,9 @@ func _read_metadata_overrides() -> void:
 			for ln in raw:
 				screen_lines.append(str(ln))
 	if has_meta("config_lit_seam"): lit_seam = _b(get_meta("config_lit_seam"))
+	if has_meta("config_upkeep"):
+		var _u: String = str(get_meta("config_upkeep")).strip_edges().to_lower()
+		upkeep = _u if UPKEEPS.has(_u) else upkeep
 	if has_meta("config_hazard_base"): hazard_base = _b(get_meta("config_hazard_base"))
 	if has_meta("config_stencil_text"): stencil_text = str(get_meta("config_stencil_text"))
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
@@ -193,9 +213,11 @@ func _build() -> void:
 			# ...with a slim warm light inside it.
 			add_child(_box(Vector3(sx, foot + (h - foot) * 0.5, FRONT_Z + 0.03), Vector3(0.018, (h - foot) * 0.7, 0.015), _emi(accent_color, 0.7)))
 
-	if lit_seam:
+	if lit_seam and upkeep != "store":
 		# Full slab width so the band reaches the wall ends (the caps) and butts
 		# continuously across tiled sections — no gap at the joins.
+		# `store` withholds it: the sheeting goes OVER the seam, so the run loses the only
+		# emissive surface it has. Same gate station_pillar puts on its lit groove.
 		add_child(_box(Vector3(0, h - RAIL_H - 0.04, FRONT_Z + 0.05), Vector3(w, 0.06, 0.025), _emi(accent_color, 0.8)))
 	if screen_slot:
 		_build_screen(w, h)
@@ -226,6 +248,18 @@ func _build() -> void:
 
 	# Solid in-game: a body collider covering the wall slab.
 	add_child(HangarKit.box_collider(Vector3(w, h, SLAB_DEPTH), Vector3(0, h * 0.5, 0)))
+
+	# UPKEEP dressing, appended LAST so every child index and position above is untouched
+	# on the legacy path. "service" falls through and adds nothing at all.
+	match upkeep:
+		"works":
+			_upkeep_works(w, h, foot)
+		"store":
+			_upkeep_store(w, h, foot)
+		"scrap":
+			_upkeep_scrap(w, h, foot)
+		_:
+			pass                                  # "service" — the legacy lineage
 
 
 # A thin recessed bevel border framing the slab face — four worn-metal trim bars set just inside
@@ -356,3 +390,78 @@ func _pc(s: String, fallback: Color) -> Color:
 	if p.size() < 3:
 		return fallback
 	return Color(float(p[0]), float(p[1]), float(p[2]), 1.0 if p.size() < 4 else float(p[3]))
+
+
+# ── UPKEEP ───────────────────────────────────────────────────────────────────
+# One axis, four moments, shared word for word with station_pillar.gd and
+# station_crates.gd. Built from HangarKit helpers so the family stays inside the
+# cabinet grammar.
+
+## WORKS — the bay mid-job. A scratch board deck on trestles stands off the face at working
+## height with a conduit run above it. The deck is the silhouette change: a horizontal mass
+## projecting 0.34 m into the room off a slab that otherwise has nothing in front of it.
+func _upkeep_works(w: float, h: float, foot: float) -> void:
+	var steel: StandardMaterial3D = HangarKit.worn_metal(panel_color.lightened(0.06))
+	var board: StandardMaterial3D = HangarKit.painted_metal(Color(0.55, 0.44, 0.28), 0.72)
+	var deck_y: float = foot + 0.86
+	var out: float = FRONT_Z + 0.34
+	add_child(_box(Vector3(0, deck_y, (out + FRONT_Z) * 0.5),
+		Vector3(minf(w * 0.82, 3.0), 0.05, 0.34), board))
+	for sx in [-1.0, 1.0]:
+		var lx: float = sx * minf(w * 0.34, 1.2)
+		add_child(_box(Vector3(lx, deck_y * 0.5, out - 0.05), Vector3(0.05, deck_y, 0.05), steel))
+		add_child(_box(Vector3(lx, deck_y * 0.5, FRONT_Z + 0.06), Vector3(0.05, deck_y, 0.05), steel))
+	# Conduit above the deck — a run of pipe on the face, the sign that the wall is opened.
+	add_child(_box(Vector3(0, deck_y + 0.62, FRONT_Z + 0.09),
+		Vector3(minf(w * 0.9, 3.4), 0.055, 0.055),
+		HangarKit.worn_metal(accent_color.darkened(0.3))))
+	var q: MeshInstance3D = HangarKit.stencil("WORKS", Vector2(minf(w * 0.24, 0.5), h * 0.06))
+	if q:
+		q.position = Vector3(w * 0.5 - minf(w * 0.22, 0.5), deck_y + 0.30, FRONT_Z + 0.07)
+		add_child(q)
+
+
+## STORE — the run packed down. Sheeting is pulled across the whole face and banded, which
+## covers the panel field, the three-colour bar and the lit seam together. The wall stops
+## being a surface that shows anything and becomes a wrapped volume.
+func _upkeep_store(w: float, h: float, foot: float) -> void:
+	var sheet: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.31, 0.33), 0.88)
+	sheet.roughness = 0.95
+	var top: float = h - 0.06
+	add_child(_box(Vector3(0, (foot + top) * 0.5, FRONT_Z + 0.055),
+		Vector3(w - 0.03, top - foot, 0.03), sheet))
+	# Bands: three horizontal straps in the safety orange the depot register already uses.
+	var strap: StandardMaterial3D = HangarKit.painted_metal(Color(0.86, 0.34, 0.11), 0.55)
+	for f in [0.24, 0.54, 0.84]:
+		add_child(_box(Vector3(0, foot + (top - foot) * f, FRONT_Z + 0.075),
+			Vector3(w - 0.01, 0.05, 0.012), strap))
+	var q: MeshInstance3D = HangarKit.stencil("PACKED", Vector2(minf(w * 0.26, 0.55), h * 0.06))
+	if q:
+		q.position = Vector3(-w * 0.5 + minf(w * 0.24, 0.55),
+			foot + (top - foot) * 0.68, FRONT_Z + 0.09)
+		add_child(q)
+
+
+## SCRAP — robbed. The right-hand half of the panel field is gone and the studs behind it are
+## bared, with tape across the opening. The slab is still there; what was ON it is not.
+func _upkeep_scrap(w: float, h: float, foot: float) -> void:
+	var dark: StandardMaterial3D = HangarKit.finish_body("terminal", body_color.darkened(0.55), 0.95)
+	var stud: StandardMaterial3D = HangarKit.worn_metal(panel_color.darkened(0.30))
+	var x0: float = 0.02
+	var x1: float = w * 0.5 - 0.03
+	var top: float = h - RAIL_H - 0.10
+	# The void: a recessed dark plate where the field was.
+	add_child(_box(Vector3((x0 + x1) * 0.5, (foot + top) * 0.5, FRONT_Z - 0.01),
+		Vector3(maxf(x1 - x0, 0.1), top - foot, 0.02), dark))
+	# Studs standing in it, evenly spaced — the structure the cladding was hiding.
+	var n: int = maxi(int((x1 - x0) / 0.42), 2)
+	for i in range(n + 1):
+		var sx: float = x0 + (x1 - x0) * (float(i) / float(n))
+		add_child(_box(Vector3(sx, (foot + top) * 0.5, FRONT_Z + 0.005),
+			Vector3(0.05, top - foot, 0.03), stud))
+	# Two tape runs across the opening, crossed, in the striped hazard material.
+	for a in [0.34, 0.66]:
+		var t: MeshInstance3D = _box(Vector3((x0 + x1) * 0.5, foot + (top - foot) * a,
+			FRONT_Z + 0.05), Vector3(maxf(x1 - x0, 0.1), 0.07, 0.008), HangarKit.striped_mat())
+		t.rotation_degrees = Vector3(0, 0, 7.0 if a < 0.5 else -7.0)
+		add_child(t)

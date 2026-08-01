@@ -3,6 +3,16 @@
   "description": "Modular grid-snapping curation-station kit — tiling walls, step-stages, plinths, pillars, and a composer that stages 1-5 artifacts on the 1 m grid. Shares the HangarKit sci-fi-lab look.",
   "artifacts": {
     "station_wall": {
+      "dna": {
+       "axes": {
+       "upkeep": [
+       "service",
+       "works",
+       "store",
+       "scrap"
+       ]
+       }
+      },
       "lookup_name": "station_wall",
       "scene": "res://commons/artifacts/station/station_wall.tscn",
       "class_name": "StationWall",
