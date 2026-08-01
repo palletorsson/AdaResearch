@@ -225,7 +225,79 @@ func _initialize() -> void:
 		arena.queue_free()
 		await process_frame
 
-	print("DONE: %d/%d flight, %d/%d impact -> %s" % [done, MODES.size(), impact_done, MODES.size(), OUT_DIR])
+	# ── Stage three: the conversion arc — foe → wary → neutral → curious →
+	# friend, one photograph per personality step. Straight-shooting modes
+	# only (one bolt = one step); fixed camera so the strip reads as one
+	# creature changing its mind.
+	var arc_done: int = 0
+	for mode_id in ["transformation", "forces"]:
+		var mode_script = load(MODE_DIR + "mode_%s.gd" % mode_id)
+		if mode_script == null:
+			continue
+		var arena := Node3D.new()
+		arena.name = "Arc_%s" % mode_id
+		get_root().add_child(arena)
+		current_scene = arena
+
+		var foe: Node3D = FOE_SCENE.instantiate()
+		arena.add_child(foe)
+		foe.global_position = Vector3(2.6, 0.6, 0)
+		for i in 70:
+			await process_frame
+		if not is_instance_valid(foe):
+			current_scene = null
+			arena.queue_free()
+			continue
+		foe.set_physics_process(false)
+		var focus: Vector3 = foe.global_position + Vector3(0, 0.25, 0)
+
+		var shoot_arc := func(step: int) -> void:
+			paused = true
+			cam.global_position = focus + Vector3(-0.35, 0.3, 1.0).normalized() * 1.9
+			cam.look_at(focus, Vector3.UP)
+			await process_frame
+			await RenderingServer.frame_post_draw
+			get_root().get_texture().get_image().save_png("%s/arc_%s_%d.png" % [OUT_DIR, mode_id, step])
+			paused = false
+
+		await shoot_arc.call(0)   # the settled foe, untouched
+
+		var start := Vector3(0, 0.55, 0)
+		for step in range(1, 5):
+			var hit_seen: Dictionary = {"hit": false}
+			for attempt in 2:
+				var aim: Vector3 = (foe.global_position + Vector3(0, 0.15, 0) - start).normalized()
+				var proj = mode_script.call("create_projectile", start, aim)
+				arena.add_child(proj)
+				proj.global_position = start
+				if proj.has_signal("projectile_hit"):
+					proj.projectile_hit.connect(func(_b, _p): hit_seen["hit"] = true)
+				var waited: int = 0
+				while waited < HIT_TIMEOUT_FRAMES:
+					await process_frame
+					waited += 1
+					if hit_seen["hit"] or not is_instance_valid(proj):
+						break
+				if hit_seen["hit"]:
+					break
+				if is_instance_valid(proj):
+					proj.queue_free()
+			# let the step's color/pose change and the kit's layers finish
+			for i in 45:
+				await process_frame
+			if not is_instance_valid(foe):
+				print("  arc %s: creature freed at step %d" % [mode_id, step])
+				break
+			await shoot_arc.call(step)
+			print("  arc %s step %d: personality=%s" % [mode_id, step, str(foe.get("_personality"))])
+
+		if is_instance_valid(foe):
+			arc_done += 1
+		current_scene = null
+		arena.queue_free()
+		await process_frame
+
+	print("DONE: %d/%d flight, %d/%d impact, %d/2 arcs -> %s" % [done, MODES.size(), impact_done, MODES.size(), arc_done, OUT_DIR])
 	quit(0 if done == MODES.size() and impact_done == MODES.size() else 1)
 
 
