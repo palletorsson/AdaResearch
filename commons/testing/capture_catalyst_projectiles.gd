@@ -20,7 +20,7 @@ const OUT_DIR := "user://catalyst_projectiles"
 const FLIGHT_FRAMES := 80   # ~1.33 s at 60 fps — past fractal's 1.0 s split
 const FOE_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn")
 const HIT_TIMEOUT_FRAMES := 130   # give slow/wandering projectiles time to arrive
-const AFTER_HIT_FRAMES := 30      # ~0.5 s for the impact effect to bloom
+const AFTER_HIT_FRAMES := 10      # ~0.17 s — mid-shockwave: ring expanding, flash fading, light lit
 
 func _initialize() -> void:
 	get_root().size = Vector2i(720, 720)

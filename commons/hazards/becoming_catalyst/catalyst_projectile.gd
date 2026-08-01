@@ -168,8 +168,11 @@ func _on_body_entered(body: Node3D) -> void:
 # EFFECTS
 # ═════════════════════════════════════════════════════════════════════════
 
+const ImpactKit := preload("res://commons/hazards/becoming_catalyst/catalyst_impact_kit.gd")
+
 func _impact_effect() -> void:
 	# Stop movement
+	var travel: Vector3 = linear_velocity
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	freeze = true
@@ -177,6 +180,15 @@ func _impact_effect() -> void:
 	# Hide mesh
 	if _mesh_instance:
 		_mesh_instance.visible = false
+
+	# Shared impact language — flash core, shockwave ring facing back along
+	# the flight line, ring spray, light pulse, haptic tick. Parented to the
+	# scene so it stays pinned at the contact point after this body frees.
+	var fx_parent: Node = get_tree().current_scene
+	if fx_parent == null:
+		fx_parent = get_parent()
+	var normal: Vector3 = -travel.normalized() if travel.length_squared() > 0.01 else -direction.normalized()
+	ImpactKit.burst(fx_parent, global_position, normal, color_primary, color_secondary, projectile_scale)
 
 	# Particle burst
 	var burst := GPUParticles3D.new()
