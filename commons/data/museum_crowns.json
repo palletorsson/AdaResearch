@@ -1,0 +1,71 @@
+{
+ "_readme": "THE EIGHT CROWNS — chapters whose champion template is a MUSEUM, ruled 2026-08-01 (Palle: 'adopt the 8 museum crowns') from the corpus-wide match (doc/reports/museum_match_board.png: 24 chapters x 5 museums, identical casts, same pathfinder gate, same judge — museums won these on the CLASSIC pre-patience score, so the wins owe nothing to the same-day patience ruling). Consumers: endless_museum.gd deals a crowned chapter into its crowned building; map building for these chapters should reach for the museum template first. Kanazawa's patience-only win on isosurfaces is NOT adopted — its baseline was never rescored under the ruled judge.",
+ "ruled": "2026-08-01",
+ "evidence": "doc/reports/museum_match_<seq>.json (match rows), doc/reports/map_tournament_<seq>.json (bred baselines, seed 46)",
+ "crowns": {
+  "primitives": {
+   "template": "sainsbury-false-perspective-enfilade",
+   "map": "Trial_sainsbury_primitives",
+   "score": 7.0,
+   "bred_champion": "derive",
+   "bred_score": 7.0,
+   "note": "a tie taken by the museum: the curriculum's first chapter opens under the deep-hero contract"
+  },
+  "change": {
+   "template": "grande-galerie-axial",
+   "map": "Trial_grande_change",
+   "score": 7.73,
+   "bred_champion": "rooms",
+   "bred_score": 6.83,
+   "note": "the largest margin in the match"
+  },
+  "forces": {
+   "template": "sainsbury-false-perspective-enfilade",
+   "map": "Trial_sainsbury_forces",
+   "score": 6.33,
+   "bred_champion": "erosion",
+   "bred_score": 6.13,
+   "note": "the first museum crown found, by the agent sweep"
+  },
+  "lsystems": {
+   "template": "grande-galerie-axial",
+   "map": "Trial_grande_lsystems",
+   "score": 6.7,
+   "bred_champion": "antrooms",
+   "bred_score": 6.1,
+   "note": ""
+  },
+  "isosurfaces": {
+   "template": "castelvecchio-endstopped-enfilade",
+   "map": "Trial_castelvecchio_isosurfaces",
+   "score": 7.6,
+   "bred_champion": "physarum",
+   "bred_score": 6.3,
+   "note": "four of five museums beat the bred field here — the register wants rooms and vistas"
+  },
+  "graphtheory": {
+   "template": "grande-galerie-axial",
+   "map": "Trial_grande_graphtheory",
+   "score": 6.5,
+   "bred_champion": "flock",
+   "bred_score": 6.08,
+   "note": ""
+  },
+  "foundationscrisis": {
+   "template": "grande-galerie-axial",
+   "map": "Trial_grande_foundationscrisis",
+   "score": 6.96,
+   "bred_champion": "derive",
+   "bred_score": 6.46,
+   "note": ""
+  },
+  "postfoundationscrisis": {
+   "template": "uffizi-spine-enfilade",
+   "map": "Trial_uffizi_postfoundationscrisis",
+   "score": 6.23,
+   "bred_champion": "erosion",
+   "bred_score": 5.9,
+   "note": "the spine takes the spine's terminal chapter"
+  }
+ }
+}

@@ -101,9 +101,14 @@ def experience_score(name):
     # contract (Sainsbury, Castelvecchio: bury the masterpiece, pull the
     # visitor through everything) is structurally unscoreable by it. patience
     # pays a LATE climax by its MAGNITUDE: how big the hero finally got, times
-    # how far into the walk the peak arrived. score2 = the same fitness with
-    # max(promise, patience) — either contract can win the hero point, never
-    # both. score2 PROPOSES; `score` remains the binding judge until ruled.
+    # how far into the walk the peak arrived.
+    #
+    # RULED IN 2026-08-01 (Palle: "rule patience in"): the binding score takes
+    # max(promise, patience) — either hero contract can win the point, never
+    # both. Corpus evidence: doc/reports/museum_match_board.png (24 chapters,
+    # 120 stampings). `score2` is kept as an alias of the ruled score for
+    # readers written during the proposal window; `score_promise_only` records
+    # what the pre-ruling judge would have said.
     total_steps = len(list(dt.STEP_RE.finditer(ride)))
     patience = 0.0
     if degs and total_steps > 1:
@@ -114,14 +119,15 @@ def experience_score(name):
     tl = dt.transform(name)
     cyc = tl["summary"] if tl else {"cycles": 0, "complete": 0, "runtime_s": 0}
     cyc_frac = (cyc["complete"] / cyc["cycles"]) if cyc["cycles"] else 0.0
-    score = 2 * tau + cov + promise + dolly + rank1 + 2 * cyc_frac
-    score2 = 2 * tau + cov + max(promise, patience) + dolly + rank1 + 2 * cyc_frac
+    score_promise_only = 2 * tau + cov + promise + dolly + rank1 + 2 * cyc_frac
+    score = 2 * tau + cov + max(promise, patience) + dolly + rank1 + 2 * cyc_frac
     detail = {"tau": round(tau, 2), "cov": round(cov, 2), "promise": promise,
               "patience": round(patience, 2),
               "dolly": round(dolly, 2), "rank1": rank1,
               "cycles": f"{cyc['complete']}/{cyc['cycles']}",
               "runtime_s": cyc.get("runtime_s", 0), "heroDeg": hd, "hero": hero_b,
-              "score": round(score, 2), "score2": round(score2, 2)}
+              "score": round(score, 2), "score2": round(score, 2),
+              "score_promise_only": round(score_promise_only, 2)}
     return score, detail
 
 

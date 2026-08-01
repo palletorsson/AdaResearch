@@ -35,6 +35,10 @@ extends Node3D
 const TEMPLATES := "res://commons/data/template_patterns.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
 const SPINE_ORDER := "res://commons/data/spine_artifact_order.json"
+# THE CROWNS (ruled 2026-08-01): chapters whose champion template is a museum.
+# A crowned chapter is dealt into its crowned building; uncrowned chapters
+# keep the em_order rotation.
+const CROWNS := "res://commons/data/museum_crowns.json"
 const TextScreenRes = preload("res://commons/ui/text_screen.gd")
 const EYE := 1.65
 const WALK_SPEED := 4.0
@@ -51,6 +55,8 @@ const VESTIBULE_H := 4
 const LOBBY_W := 17
 
 var _museums: Array = []          # [{key,label,museum,w,h,tile,walk_rule}]
+var _crowns: Dictionary = {}      # sequence -> crowned template key
+var _rot_i: int = 0               # rotation cursor for uncrowned chapters
 var _pool: Array = []             # [{lookup, scene}]
 var _pool_i: int = 0
 var _seed: int = 46
@@ -87,6 +93,7 @@ var _pitch: float = 0.0
 func _ready() -> void:
 	_parse_args()
 	_load_museums()
+	_load_crowns()
 	_load_pool()
 	if _museums.is_empty():
 		push_error("endless_museum: no museum-tagged templates in %s" % TEMPLATES)
@@ -151,6 +158,19 @@ func _load_museums() -> void:
 				head.append_array(_museums.slice(0, i))
 				_museums = head
 				break
+
+func _load_crowns() -> void:
+	var f := FileAccess.open(CROWNS, FileAccess.READ)
+	if f == null:
+		return
+	var data: Variant = JSON.parse_string(f.get_as_text())
+	if not (data is Dictionary):
+		return
+	var crowns: Dictionary = data.get("crowns", {})
+	for seq in crowns:
+		_crowns[String(seq)] = String((crowns[seq] as Dictionary).get("template", ""))
+	if not _crowns.is_empty():
+		print("[endless_museum] %d crowned chapters loaded" % _crowns.size())
 
 func _load_pool() -> void:
 	# the registry decides what is ALIVE (map_ready + scene on disk); the order
@@ -313,7 +333,23 @@ func _add_col(body: StaticBody3D, pos: Vector3, size: Vector3) -> void:
 	body.add_child(cs)
 
 func _build_segment() -> void:
-	var spec: Dictionary = _museums[_seg_index % _museums.size()]
+	# a crowned chapter gets its crowned building (the ruling made live);
+	# uncrowned chapters walk the em_order rotation. --em-first still forces
+	# the front for proof shots.
+	var spec: Dictionary = _museums[_rot_i % _museums.size()]
+	var next_seq := ""
+	if not _pool.is_empty():
+		next_seq = String(_pool[_pool_i % _pool.size()].get("sequence", ""))
+	var crowned := String(_crowns.get(next_seq, ""))
+	var use_crown := false
+	if crowned != "" and (_first_key == "" or _seg_index > 0):
+		for m in _museums:
+			if String(m["key"]) == crowned:
+				spec = m
+				use_crown = true
+				break
+	if not use_crown:
+		_rot_i += 1
 	var w: int = spec["w"]
 	var h: int = spec["h"]
 	var tile: Array = spec["tile"]
