@@ -64,7 +64,24 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
-    ]
+    ],
+    "biome": {
+      "_meta": {
+        "tick_seconds": 3
+      },
+      "rows": [
+        [" "," "," "," "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," ","::mute:on=catalyst:unmute/seed"," "," "],
+        [" "," "," "," "," ","flora:scatter:field","flora:scatter:seed:on=catalyst:claim"," ","flora:scatter:seed:on=catalyst:claim","flora:scatter:field"," "," "],
+        [" "," "," "," "," ","flora:scatter:field","flora:scatter:field","flora:scatter:field","flora:scatter:field","flora:scatter:field","flora:scatter:field"," "],
+        [" "," "," "," "," "," ","flora:scatter:field","flora:scatter:field","flora:scatter:field"," ","flora:scatter:field","flora:scatter:field"],
+        [" "," "," "," "," "," "," "," ","flora:scatter:field","flora:scatter:field"," "," "],
+        [" "," "," "," "," "," "," "," "," ","flora:scatter:field"," "," "]
+      ]
+    }
   },
   "settings": {
     "cube_size": 1,
@@ -72,7 +89,7 @@
     "show_grid": true,
     "background": {
       "type": "sky",
-      "color": [0.06, 0.05, 0.1]
+      "color": [0.06,0.05,0.1]
     },
     "grid_animation": {
       "enabled": false

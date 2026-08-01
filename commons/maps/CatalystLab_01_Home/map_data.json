@@ -61,7 +61,24 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "]
-    ]
+    ],
+    "biome": {
+      "_meta": {
+        "tick_seconds": 3
+      },
+      "rows": [
+        [" "," "," "," "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," ","::mute:on=catalyst:unmute/seed"," "," "," "," "," "],
+        [" "," "," "," "," "," ","flora:scatter:field"," "," "," "," "," "],
+        [" "," "," "," "," ","flora:scatter:field","flora:scatter:field","flora:scatter:field"," "," "," "," "],
+        [" "," "," "," ","flora:scatter:field","flora:scatter:field"," ","flora:scatter:field","flora:scatter:field"," "," "," "],
+        [" "," "," "," "," ","flora:scatter:field","flora:scatter:field","flora:scatter:field"," "," "," "," "],
+        [" "," "," "," "," "," ","flora:scatter:field"," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "," "," "," "],
+        [" "," "," "," "," "," "," "," "," "," "," "," "]
+      ]
+    }
   },
   "settings": {
     "cube_size": 1,
