@@ -475,49 +475,61 @@ def inspect(md, name):
     # incremented its run counter inside the BFS loop, so consecutive steps
     # never formed a run and it reported nothing on ten maps: a walker's
     # question must be asked in walking order.)
-    run_len, run_facing = 0, None
+    #
+    # ONE FINDING PER STRETCH. The second version emitted every VISTA steps and
+    # reset its counter, so a long dull walk became a finding every five paces —
+    # 85 of them on Auto_Trans_Translation, 71 on Auto_Point_Lines, drowning
+    # every other kind. A stretch of dullness is ONE thing wrong with the walk
+    # however far it runs; its length belongs in the description, not in the
+    # count. Emit when the run ENDS, not while it continues.
+    def close_vista(start_i, length, facing, wall_at):
+        if length < VISTA:
+            return
+        c = route[start_i]
+        # two cures, and which one depends on whether the view ends on anything.
+        # Facing a wall: give the wall a surface. Facing open space: put a light
+        # IN the view, something to walk toward.
+        if wall_at is not None and not str(I[wall_at[1]][wall_at[0]]).strip():
+            rot = {(0, 1): 0, (1, 0): 90, (0, -1): 180, (-1, 0): 270}[facing]
+            props.append({"cell": list(c), "kind": "vista", "facing": list(facing),
+                          "eye": list(back_off(c, facing, 3)),
+                          "why": "blank vista — %d steps facing a wall, nothing over %d deg in view"
+                                 % (length, int(MIN_DEG)),
+                          "place": SURFACE, "layer": "interactables",
+                          "rot": (rot + 180) % 360, "at_wall": list(wall_at)})
+            return
+        ahead = route[min(start_i + max(4, length // 2), len(route) - 1)]
+        if (ahead in floor and not str(I[ahead[1]][ahead[0]]).strip()
+                and not str(U[ahead[1]][ahead[0]]).strip()):
+            # the LIGHT goes into the stretch; the EYE stays where the walker
+            # first got bored, looking at what the light is meant to fix.
+            props.append({"cell": list(ahead), "kind": "vista",
+                          "eye": list(c), "facing": list(facing),
+                          "why": "blank walk — %d open steps with nothing over %d deg in view"
+                                 % (length, int(MIN_DEG)),
+                          "place": LIGHT, "layer": "utilities"})
+
+    run_len, run_facing, run_start, run_wall = 0, None, 0, None
     for i in range(len(route) - 1):
         c, nxt = route[i], route[i + 1]
         facing = (nxt[0] - c[0], nxt[1] - c[1])
-        if facing not in DIRS:
-            run_len, run_facing = 0, None
+        blank, wall_at = False, None
+        if facing in DIRS:
+            deg, wall_at = seen_from(c, facing, bodies_xy, SIZES, solid)
+            if wall_at is not None and not (0 <= wall_at[1] < len(I)
+                                            and 0 <= wall_at[0] < len(I[wall_at[1]])):
+                wall_at = None
+            blank = deg < MIN_DEG
+        if blank and facing == run_facing:
+            run_len += 1
+            run_wall = wall_at or run_wall
             continue
-        deg, wall_at = seen_from(c, facing, bodies_xy, SIZES, solid)
-        if wall_at is not None and not (0 <= wall_at[1] < len(I)
-                                        and 0 <= wall_at[0] < len(I[wall_at[1]])):
-            wall_at = None
-        if deg >= MIN_DEG:
-            run_len, run_facing = 0, facing
-            continue
-        run_len = run_len + 1 if facing == run_facing else 1
-        run_facing = facing
-        if run_len >= VISTA:
-            # A blank walk has two cures, and which one depends on whether the
-            # view ends on anything. Facing a wall: give the wall a surface.
-            # Facing open space: put a light IN the view — something to walk
-            # toward. (Requiring a wall was why this fired nowhere: when the
-            # view is dull it is usually dull because it is empty, not walled.)
-            if wall_at is not None and not str(I[wall_at[1]][wall_at[0]]).strip():
-                rot = {(0, 1): 0, (1, 0): 90, (0, -1): 180, (-1, 0): 270}[facing]
-                props.append({"cell": list(c), "kind": "vista", "facing": list(facing),
-                              "eye": list(back_off(c, facing, 3)),
-                              "why": "blank vista — %d steps facing a wall, nothing over %d deg in view"
-                                     % (run_len, int(MIN_DEG)),
-                              "place": SURFACE, "layer": "interactables",
-                              "rot": (rot + 180) % 360, "at_wall": list(wall_at)})
-                run_len = 0
-            else:
-                ahead = route[min(i + 4, len(route) - 1)]
-                if (ahead in floor and not str(I[ahead[1]][ahead[0]]).strip()
-                        and not str(U[ahead[1]][ahead[0]]).strip()):
-                    # the LIGHT goes ahead; the EYE stays where the walker is
-                    # bored, looking at the stretch the light is meant to fix.
-                    props.append({"cell": list(ahead), "kind": "vista",
-                                  "eye": list(c), "facing": list(facing),
-                                  "why": "blank walk — %d open steps with nothing over %d deg in view"
-                                         % (run_len, int(MIN_DEG)),
-                                  "place": LIGHT, "layer": "utilities"})
-                    run_len = 0
+        close_vista(run_start, run_len, run_facing, run_wall)
+        if blank:
+            run_len, run_facing, run_start, run_wall = 1, facing, i, wall_at
+        else:
+            run_len, run_facing, run_start, run_wall = 0, None, i, None
+    close_vista(run_start, run_len, run_facing, run_wall)
 
     # 6 NEVER ANNOUNCED — a body you only ever meet by arriving at it.
     #
