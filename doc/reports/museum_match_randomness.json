@@ -1,0 +1,405 @@
+{
+ "seq": "randomness",
+ "cast_source": "Trial_halls_randomness",
+ "bred_baseline": [
+  {
+   "recipe": "halls",
+   "status": "ok",
+   "map": "Trial_halls_randomness",
+   "tau": 0.56,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "9/12",
+   "runtime_s": 212.7,
+   "heroDeg": 53,
+   "hero": "random_walk_bench",
+   "score": 6.63
+  },
+  {
+   "recipe": "ants",
+   "status": "ok",
+   "map": "Trial_ants_randomness",
+   "tau": 0.09,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "11/12",
+   "runtime_s": 213.4,
+   "heroDeg": 113,
+   "hero": "random_walk_bench",
+   "score": 5.52
+  },
+  {
+   "recipe": "rooms",
+   "status": "ok",
+   "map": "Trial_rooms_randomness",
+   "tau": 0.44,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "10/13",
+   "runtime_s": 186.0,
+   "heroDeg": 53,
+   "hero": "random_walk_bench",
+   "score": 5.41
+  },
+  {
+   "recipe": "wfc",
+   "status": "ok",
+   "map": "Trial_wfc_randomness",
+   "tau": -0.09,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "11/13",
+   "runtime_s": 142.7,
+   "heroDeg": 74,
+   "hero": "random_walk_bench",
+   "score": 5.01
+  },
+  {
+   "recipe": "dla",
+   "status": "ok",
+   "map": "Trial_dla_randomness",
+   "tau": 0.24,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "6/8",
+   "runtime_s": 187.1,
+   "heroDeg": 53,
+   "hero": "seed_bench",
+   "score": 4.98
+  },
+  {
+   "recipe": "antrooms",
+   "status": "ok",
+   "map": "Trial_antrooms_randomness",
+   "tau": 0.24,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "6/8",
+   "runtime_s": 132.2,
+   "heroDeg": 53,
+   "hero": "seed_bench",
+   "score": 4.98
+  },
+  {
+   "recipe": "erosion",
+   "status": "ok",
+   "map": "Trial_erosion_randomness",
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/8",
+   "runtime_s": 265.7,
+   "heroDeg": 41,
+   "hero": "seed_bench",
+   "score": 4.75
+  },
+  {
+   "recipe": "derive",
+   "status": "ok",
+   "map": "Trial_derive_randomness",
+   "tau": 0.2,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "4/6",
+   "runtime_s": 85.7,
+   "heroDeg": 21,
+   "hero": "prng_crank_machine",
+   "score": 4.23
+  },
+  {
+   "recipe": "wanghall",
+   "status": "ok",
+   "map": "Trial_wanghall_randomness",
+   "tau": -0.18,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "9/12",
+   "runtime_s": 201.5,
+   "heroDeg": 113,
+   "hero": "random_walk_bench",
+   "score": 4.14
+  },
+  {
+   "recipe": "physarum",
+   "status": "ok",
+   "map": "Trial_physarum_randomness",
+   "tau": -0.05,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "6/8",
+   "runtime_s": 238.1,
+   "heroDeg": 41,
+   "hero": "seed_bench",
+   "score": 3.4
+  },
+  {
+   "recipe": "voronoi",
+   "status": "ok",
+   "map": "Trial_voronoi_randomness",
+   "tau": -0.52,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "6/8",
+   "runtime_s": 243.9,
+   "heroDeg": 16,
+   "hero": "seed_bench",
+   "score": 2.95
+  },
+  {
+   "recipe": "rd",
+   "status": "ok",
+   "map": "Trial_rd_randomness",
+   "tau": -0.36,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "6/8",
+   "runtime_s": 327.4,
+   "heroDeg": 31,
+   "hero": "seed_bench",
+   "score": 2.79
+  },
+  {
+   "recipe": "flock",
+   "status": "ok",
+   "map": "Trial_flock_randomness",
+   "tau": -0.33,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.67,
+   "rank1": 0.0,
+   "cycles": "4/7",
+   "runtime_s": 130.9,
+   "heroDeg": 18,
+   "hero": "info_board",
+   "score": 2.14
+  },
+  {
+   "recipe": "lsystem",
+   "status": "ok",
+   "map": "Trial_lsystem_randomness",
+   "tau": -0.52,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "4/7",
+   "runtime_s": 114.6,
+   "heroDeg": 16,
+   "hero": "info_board",
+   "score": 2.1
+  }
+ ],
+ "museum_rows": [
+  {
+   "museum": "uffizi-spine-enfilade",
+   "status": "ok",
+   "map": "Trial_uffizi_randomness",
+   "slots_used": 18,
+   "overflow_hung": 8,
+   "undealt": 0,
+   "tau": 0.52,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "12/12",
+   "runtime_s": 129.6,
+   "heroDeg": 45,
+   "hero": "random_walk_bench",
+   "score": 5.53
+  },
+  {
+   "museum": "grande-galerie-axial",
+   "status": "ok",
+   "map": "Trial_grande_randomness",
+   "slots_used": 19,
+   "overflow_hung": 7,
+   "undealt": 0,
+   "tau": 0.48,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "12/12",
+   "runtime_s": 128.5,
+   "heroDeg": 33,
+   "hero": "random_walk_bench",
+   "score": 5.47
+  },
+  {
+   "museum": "castelvecchio-endstopped-enfilade",
+   "status": "ok",
+   "map": "Trial_castelvecchio_randomness",
+   "slots_used": 9,
+   "overflow_hung": 17,
+   "undealt": 0,
+   "tau": 0.39,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "10/12",
+   "runtime_s": 113.0,
+   "heroDeg": 20,
+   "hero": "random_walk_bench",
+   "score": 4.45
+  },
+  {
+   "museum": "kanazawa-room-matrix",
+   "status": "ok",
+   "map": "Trial_kanazawa_randomness",
+   "slots_used": 9,
+   "overflow_hung": 17,
+   "undealt": 0,
+   "tau": 0.15,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.67,
+   "rank1": 0.0,
+   "cycles": "12/12",
+   "runtime_s": 130.6,
+   "heroDeg": 25,
+   "hero": "random_walk_bench",
+   "score": 3.97
+  },
+  {
+   "museum": "sainsbury-false-perspective-enfilade",
+   "status": "ok",
+   "map": "Trial_sainsbury_randomness",
+   "slots_used": 14,
+   "overflow_hung": 12,
+   "undealt": 0,
+   "tau": -0.02,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.8,
+   "rank1": 1.0,
+   "cycles": "11/12",
+   "runtime_s": 133.5,
+   "heroDeg": 74,
+   "hero": "random_walk_bench",
+   "score": 4.6
+  }
+ ],
+ "merged_leaderboard": [
+  {
+   "lineage": "bred",
+   "name": "halls",
+   "score": 6.63
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "uffizi-spine-enfilade",
+   "score": 5.53
+  },
+  {
+   "lineage": "bred",
+   "name": "ants",
+   "score": 5.52
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "grande-galerie-axial",
+   "score": 5.47
+  },
+  {
+   "lineage": "bred",
+   "name": "rooms",
+   "score": 5.41
+  },
+  {
+   "lineage": "bred",
+   "name": "wfc",
+   "score": 5.01
+  },
+  {
+   "lineage": "bred",
+   "name": "dla",
+   "score": 4.98
+  },
+  {
+   "lineage": "bred",
+   "name": "antrooms",
+   "score": 4.98
+  },
+  {
+   "lineage": "bred",
+   "name": "erosion",
+   "score": 4.75
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "sainsbury-false-perspective-enfilade",
+   "score": 4.6
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "castelvecchio-endstopped-enfilade",
+   "score": 4.45
+  },
+  {
+   "lineage": "bred",
+   "name": "derive",
+   "score": 4.23
+  },
+  {
+   "lineage": "bred",
+   "name": "wanghall",
+   "score": 4.14
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "kanazawa-room-matrix",
+   "score": 3.97
+  },
+  {
+   "lineage": "bred",
+   "name": "physarum",
+   "score": 3.4
+  },
+  {
+   "lineage": "bred",
+   "name": "voronoi",
+   "score": 2.95
+  },
+  {
+   "lineage": "bred",
+   "name": "rd",
+   "score": 2.79
+  },
+  {
+   "lineage": "bred",
+   "name": "flock",
+   "score": 2.14
+  },
+  {
+   "lineage": "bred",
+   "name": "lsystem",
+   "score": 2.1
+  }
+ ]
+}

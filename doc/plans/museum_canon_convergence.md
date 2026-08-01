@@ -83,11 +83,47 @@ space is drawn around, it is the *measuring device* the space is tested with.
 Gate F is a Vitruvian gate: architecture passes when the body it was derived
 from can traverse it.
 
-## 5. Concretely next (proposals, none binding)
+## 5. The match was run (2026-07-31, `tools/museum_match.py`)
 
-- **Tournament match**: stamp end-stopped/matrix/axial museum tiles onto 3
-  chapter casts; score with the existing fitness + walk_evaluator; let the
-  result outrank `em_order` for those chapters.
+Five museums vs the full bred field, three sequences, identical casts (read
+from the surviving bred champions), same pathfinder gate, same judge. Reports:
+`doc/reports/museum_match_{randomness,transformation,color}.json`.
+
+| seq | bred champion | best museum | museum rank in merged field |
+|---|---|---|---|
+| randomness | halls 6.63 | uffizi-spine 5.53 | 2nd of 18 |
+| transformation | wfc 6.61 | grande-galerie 6.27 | 3rd of 18 |
+| color | wfc 8.00 | kanazawa-matrix 7.00 | 2nd of 18 |
+
+What it says:
+
+- **Bred keeps all three crowns — on home rules.** The museums arrive with
+  zero tuning (cast dealt row-major into extracted slots) and still take
+  2nd/3rd/2nd, beating 10-12 bred recipes every time. Search that optimizes
+  the judge beats inheritance that never met the judge; not by much.
+- **Grande Galerie is the general-purpose program**: top-4 in all three
+  sequences (5.47 / 6.27 / 6.70). The axial rhythm is close to
+  register-neutral — which is presumably why the Louvre uses it for
+  everything.
+- **Kanazawa's tau = 1.0 on color**: the no-hierarchy room matrix, dealt
+  row-major, produces PERFECT encounter-order agreement — the anti-spine is
+  the best order-preserving architecture in the whole field, and color
+  (pattern/composition register) is its natural chapter.
+- **The judge has a curatorial position.** Sainsbury posted the largest hero
+  presence in every field (heroDeg 74/53/90, rank1 = 1.0 twice) and still
+  landed low, because `promise` pays only a hero visible by step 1 —
+  the integrated-hero contract. The literature's OTHER contract (bury the
+  masterpiece, withhold then pull) is structurally unscoreable by the current
+  metric. Castelvecchio (promise 0 in all three) has the same complaint. The
+  match's sharpest output is not a ranking but this: the edge fitness encodes
+  ONE of the two hero contracts as if it were the definition of composed.
+  A `patience` term (late hero climax weighted by its magnitude) would let
+  both contracts compete honestly.
+
+Register proposals from the match (propose, never bind): color -> kanazawa
+matrix, transformation -> grande-galerie axial, randomness -> uffizi spine.
+
+## 6. Remaining next (proposals, none binding)
 - **Seam gate for the spine**: a chain_check analogue for sequence map order —
   model the teleporter join, verify every consecutive map pair.
 - **Autopilot for composed maps**: lift `_walk_cells`/`_auto_plan`/`_run_autopilot`

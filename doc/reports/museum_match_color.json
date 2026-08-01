@@ -1,0 +1,405 @@
+{
+ "seq": "color",
+ "cast_source": "Trial_wfc_color",
+ "bred_baseline": [
+  {
+   "recipe": "wfc",
+   "status": "ok",
+   "map": "Trial_wfc_color",
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 133.2,
+   "heroDeg": 28,
+   "hero": "pattern_machine_c",
+   "score": 8.0
+  },
+  {
+   "recipe": "halls",
+   "status": "ok",
+   "map": "Trial_halls_color",
+   "tau": 0.8,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.8,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 208.5,
+   "heroDeg": 15,
+   "hero": "pattern_machine_c",
+   "score": 6.9
+  },
+  {
+   "recipe": "rd",
+   "status": "ok",
+   "map": "Trial_rd_color",
+   "tau": 0.6,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.88,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 279.4,
+   "heroDeg": 48,
+   "hero": "pattern_machine_c",
+   "score": 6.58
+  },
+  {
+   "recipe": "rooms",
+   "status": "ok",
+   "map": "Trial_rooms_color",
+   "tau": 0.6,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.8,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 199.3,
+   "heroDeg": 33,
+   "hero": "pattern_machine_c",
+   "score": 6.5
+  },
+  {
+   "recipe": "antrooms",
+   "status": "ok",
+   "map": "Trial_antrooms_color",
+   "tau": 0.6,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.5,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 126.4,
+   "heroDeg": 48,
+   "hero": "pattern_machine_c",
+   "score": 6.2
+  },
+  {
+   "recipe": "wanghall",
+   "status": "ok",
+   "map": "Trial_wanghall_color",
+   "tau": 0.4,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 195.0,
+   "heroDeg": 48,
+   "hero": "pattern_machine_c",
+   "score": 5.8
+  },
+  {
+   "recipe": "derive",
+   "status": "ok",
+   "map": "Trial_derive_color",
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 0.0,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 62.2,
+   "heroDeg": 127,
+   "hero": "pattern_machine_c",
+   "score": 5.67
+  },
+  {
+   "recipe": "physarum",
+   "status": "ok",
+   "map": "Trial_physarum_color",
+   "tau": 0.6,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.86,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 224.0,
+   "heroDeg": 52,
+   "hero": "pattern_machine_c",
+   "score": 5.56
+  },
+  {
+   "recipe": "dla",
+   "status": "ok",
+   "map": "Trial_dla_color",
+   "tau": 0.6,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 220.5,
+   "heroDeg": 18,
+   "hero": "pattern_machine_c",
+   "score": 5.2
+  },
+  {
+   "recipe": "ants",
+   "status": "ok",
+   "map": "Trial_ants_color",
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 167.7,
+   "heroDeg": 15,
+   "hero": "pattern_machine_c",
+   "score": 5.0
+  },
+  {
+   "recipe": "erosion",
+   "status": "ok",
+   "map": "Trial_erosion_color",
+   "tau": -0.2,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 245.5,
+   "heroDeg": 14,
+   "hero": "pattern_machine_c",
+   "score": 3.6
+  },
+  {
+   "recipe": "flock",
+   "status": "ok",
+   "map": "Trial_flock_color",
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 156.2,
+   "heroDeg": 19,
+   "hero": "pattern_machine_c",
+   "score": 3.5
+  },
+  {
+   "recipe": "lsystem",
+   "status": "ok",
+   "map": "Trial_lsystem_color",
+   "tau": -0.33,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.83,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 119.9,
+   "heroDeg": 16,
+   "hero": "info_board",
+   "score": 3.17
+  },
+  {
+   "recipe": "voronoi",
+   "status": "ok",
+   "map": "Trial_voronoi_color",
+   "tau": -1.0,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 200.7,
+   "heroDeg": 15,
+   "hero": "pattern_machine_c",
+   "score": 2.0
+  }
+ ],
+ "museum_rows": [
+  {
+   "museum": "uffizi-spine-enfilade",
+   "status": "ok",
+   "map": "Trial_uffizi_color",
+   "slots_used": 18,
+   "overflow_hung": 4,
+   "undealt": 0,
+   "tau": 0.2,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 80.3,
+   "heroDeg": 58,
+   "hero": "pattern_machine_c",
+   "score": 5.9
+  },
+  {
+   "museum": "grande-galerie-axial",
+   "status": "ok",
+   "map": "Trial_grande_color",
+   "slots_used": 19,
+   "overflow_hung": 3,
+   "undealt": 0,
+   "tau": 0.6,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 80.2,
+   "heroDeg": 44,
+   "hero": "pattern_machine_c",
+   "score": 6.7
+  },
+  {
+   "museum": "castelvecchio-endstopped-enfilade",
+   "status": "ok",
+   "map": "Trial_castelvecchio_color",
+   "slots_used": 9,
+   "overflow_hung": 13,
+   "undealt": 0,
+   "tau": 0.8,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 73.7,
+   "heroDeg": 26,
+   "hero": "pattern_machine_c",
+   "score": 5.6
+  },
+  {
+   "museum": "kanazawa-room-matrix",
+   "status": "ok",
+   "map": "Trial_kanazawa_color",
+   "slots_used": 9,
+   "overflow_hung": 13,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 78.0,
+   "heroDeg": 44,
+   "hero": "pattern_machine_c",
+   "score": 7.0
+  },
+  {
+   "museum": "sainsbury-false-perspective-enfilade",
+   "status": "ok",
+   "map": "Trial_sainsbury_color",
+   "slots_used": 14,
+   "overflow_hung": 8,
+   "undealt": 0,
+   "tau": 0.2,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 97.0,
+   "heroDeg": 90,
+   "hero": "pattern_machine_c",
+   "score": 5.4
+  }
+ ],
+ "merged_leaderboard": [
+  {
+   "lineage": "bred",
+   "name": "wfc",
+   "score": 8.0
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "kanazawa-room-matrix",
+   "score": 7.0
+  },
+  {
+   "lineage": "bred",
+   "name": "halls",
+   "score": 6.9
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "grande-galerie-axial",
+   "score": 6.7
+  },
+  {
+   "lineage": "bred",
+   "name": "rd",
+   "score": 6.58
+  },
+  {
+   "lineage": "bred",
+   "name": "rooms",
+   "score": 6.5
+  },
+  {
+   "lineage": "bred",
+   "name": "antrooms",
+   "score": 6.2
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "uffizi-spine-enfilade",
+   "score": 5.9
+  },
+  {
+   "lineage": "bred",
+   "name": "wanghall",
+   "score": 5.8
+  },
+  {
+   "lineage": "bred",
+   "name": "derive",
+   "score": 5.67
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "castelvecchio-endstopped-enfilade",
+   "score": 5.6
+  },
+  {
+   "lineage": "bred",
+   "name": "physarum",
+   "score": 5.56
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "sainsbury-false-perspective-enfilade",
+   "score": 5.4
+  },
+  {
+   "lineage": "bred",
+   "name": "dla",
+   "score": 5.2
+  },
+  {
+   "lineage": "bred",
+   "name": "ants",
+   "score": 5.0
+  },
+  {
+   "lineage": "bred",
+   "name": "erosion",
+   "score": 3.6
+  },
+  {
+   "lineage": "bred",
+   "name": "flock",
+   "score": 3.5
+  },
+  {
+   "lineage": "bred",
+   "name": "lsystem",
+   "score": 3.17
+  },
+  {
+   "lineage": "bred",
+   "name": "voronoi",
+   "score": 2.0
+  }
+ ]
+}
