@@ -18,6 +18,7 @@ extends Node3D
 class_name SimCube
 
 const CubeLib := preload("res://commons/grid/CubeWrapperLibrary.gd")
+const ArtifactIdentity := preload("res://commons/grid/artifact_identity.gd")
 const LabelFramer := preload("res://commons/grid/LabelFramer.gd")
 
 @export_enum("gridglass", "tank", "cage", "shadowbox", "openframe", "table_display_1m", "table_display_2m", "podium", "plinth", "frame", "pedestal") var family: String = "gridglass"
@@ -99,6 +100,7 @@ func _load_metrics(lookup: String) -> Dictionary:
 
 
 func _mount_artifact(lib, lookup: String) -> void:
+	var entry: Dictionary = {}
 	var dir := DirAccess.open("res://commons/artifacts/registry/")
 	if dir == null:
 		return
@@ -111,7 +113,8 @@ func _mount_artifact(lib, lookup: String) -> void:
 			if file:
 				var parsed = JSON.parse_string(file.get_as_text())
 				if parsed is Dictionary and parsed.get("artifacts", {}).has(lookup):
-					scene_path = str(parsed["artifacts"][lookup].get("scene", ""))
+					entry = parsed["artifacts"][lookup]
+					scene_path = str(entry.get("scene", ""))
 					break
 		f = dir.get_next()
 	if scene_path == "":
@@ -121,6 +124,8 @@ func _mount_artifact(lib, lookup: String) -> void:
 		return
 	var inst = scene.instantiate()
 	if inst is Node3D:
+		# STAMP BEFORE add_child — the entry was already read above and thrown away.
+		ArtifactIdentity.stamp(inst, lookup, entry)
 		add_child(inst)
 		if fit == "raw":
 			_seat_raw(lib, inst)

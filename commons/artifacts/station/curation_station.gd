@@ -2,6 +2,7 @@ extends Node3D
 class_name CurationStation
 
 const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+const ArtifactIdentity := preload("res://commons/grid/artifact_identity.gd")
 const StationStageScene := preload("res://commons/artifacts/station/station_stage.tscn")
 const StationPlinthScene := preload("res://commons/artifacts/station/station_plinth.tscn")
 const StationWallScene := preload("res://commons/artifacts/station/station_wall.tscn")
@@ -236,6 +237,10 @@ const DUTIES := {
 
 var _name_scene: Dictionary = {}
 var _name_disp: Dictionary = {}   # lookup_name -> human display name
+## lookup_name -> the artifact's own registry entry. Kept because the index used to hold
+## only the scene path, which is why a composed artifact could never receive the
+## default_params its registry entry declares.
+var _name_entry: Dictionary = {}
 var _plinth_tops: Array = []   # [{x, z, top_y}] per item, set during kit build
 var _built := false
 
@@ -364,6 +369,11 @@ func _assemble() -> void:
 		if inst != null:
 			if inst is Node3D:
 				(inst as Node3D).visible = false
+			# STAMP BEFORE add_child. The grid does this for every artifact a map places;
+			# a composer that skips it hands the artifact no identity and none of the
+			# defaults its registry entry declares, so a one-scene-many-names artifact
+			# cannot know which member to build and a declared colour never arrives.
+			ArtifactIdentity.stamp(inst, nm, _name_entry.get(nm, {}))
 			add_child(inst)
 			_make_inert(inst)
 			if hide_floating_labels:
@@ -851,6 +861,7 @@ func _build_name_index() -> void:
 				var ln := str(v.get("lookup_name", k))
 				_name_scene[ln] = str(v["scene"])
 				_name_disp[ln] = str(v.get("name", ln))
+				_name_entry[ln] = v
 
 
 # Layers an artifact KEEPS even when made inert, so its controls stay usable:
