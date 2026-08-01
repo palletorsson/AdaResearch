@@ -1,5 +1,5 @@
 {
- "_readme": "THE EIGHT CROWNS — chapters whose champion template is a MUSEUM, ruled 2026-08-01 (Palle: 'adopt the 8 museum crowns') from the corpus-wide match (doc/reports/museum_match_board.png: 24 chapters x 5 museums, identical casts, same pathfinder gate, same judge — museums won these on the CLASSIC pre-patience score, so the wins owe nothing to the same-day patience ruling). Consumers: endless_museum.gd deals a crowned chapter into its crowned building; map building for these chapters should reach for the museum template first. Kanazawa's patience-only win on isosurfaces is NOT adopted — its baseline was never rescored under the ruled judge.",
+ "_readme": "THE EIGHT CROWNS \u2014 chapters whose champion template is a MUSEUM, ruled 2026-08-01 (Palle: 'adopt the 8 museum crowns') from the corpus-wide match (doc/reports/museum_match_board.png: 24 chapters x 5 museums, identical casts, same pathfinder gate, same judge \u2014 museums won these on the CLASSIC pre-patience score, so the wins owe nothing to the same-day patience ruling). Consumers: endless_museum.gd deals a crowned chapter into its crowned building; map building for these chapters should reach for the museum template first. Kanazawa's patience-only win on isosurfaces is NOT adopted \u2014 its baseline was never rescored under the ruled judge. AUDITED under the ruled judge 2026-08-01: 7/8 crowns hold, primitives contested (see rescore report), zero new claims.",
  "ruled": "2026-08-01",
  "evidence": "doc/reports/museum_match_<seq>.json (match rows), doc/reports/map_tournament_<seq>.json (bred baselines, seed 46)",
  "crowns": {
@@ -9,7 +9,14 @@
    "score": 7.0,
    "bred_champion": "derive",
    "bred_score": 7.0,
-   "note": "a tie taken by the museum: the curriculum's first chapter opens under the deep-hero contract"
+   "note": "a tie taken by the museum: the curriculum's first chapter opens under the deep-hero contract",
+   "contested": {
+    "date": "2026-08-01",
+    "by": "bred derive under the ruled judge",
+    "derive_ruled": 7.26,
+    "sainsbury_ruled": 7.19,
+    "note": "the tie-crown tilts bred by 0.07 once derive gets its patience; ruling stands until re-ruled \u2014 see doc/reports/museum_match_rescore.json"
+   }
   },
   "change": {
    "template": "grande-galerie-axial",
@@ -41,7 +48,7 @@
    "score": 7.6,
    "bred_champion": "physarum",
    "bred_score": 6.3,
-   "note": "four of five museums beat the bred field here — the register wants rooms and vistas"
+   "note": "four of five museums beat the bred field here \u2014 the register wants rooms and vistas"
   },
   "graphtheory": {
    "template": "grande-galerie-axial",
