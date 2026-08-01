@@ -72,7 +72,10 @@ Godot 4 VR/desktop project. Algorithms taught through maps and interactable arti
 - `utilities`: spawn, teleporter, ramps, transport cubes, labels
 - `interactables`: artifacts by lookup name
 
-**Scale:** ~42 sequences, ~503 maps, ~752 artifacts, 24 spine sequences
+**Scale (measured 2026-08-01):** 83 sequence files, 2049 maps, 2671 registry entries across
+108 registry files, 24 spine sequences. The older figures here (42/503/752) were roughly a
+quarter of the truth, so any "sweep the corpus" or "rename everywhere" estimate made from
+them was off by 4x.
 
 ## CLI Tools
 
@@ -322,6 +325,44 @@ Returns underdeveloped maps, missing-map slots, unwalked maps, and recent VR fee
 - Include `apply_grid_config(config_data: Dictionary)`
 - Register in `commons/artifacts/registry/<category>.json`
 - Commit: `feat: add <token> artifact — description`
+
+**The registry files are token-keyed DICTS, often at indent 1 with tabs. Edit them
+surgically. One `json.dumps()` round-trip once reformatted 15,121 lines.**
+
+## Artifact DNA — an artifact is a FAMILY, not one object
+
+**184 of 2671 artifacts are "promoted": they declare `dna.axes` in the registry and carry
+one or two named axes with 3-6 values each. 258 axes are declared.** A new artifact that
+ships as a singleton is invisible to the sweep, the gallery and the bite reports.
+
+An axis is the thing the artifact ARGUES, not how it is mounted — `exhibit_furniture.house`
+(white_cube · wunderkammer · depot · forensic) or `godel_statement_plaque.outside`
+(quotation · margin · breach · omission · habitat). Rules learned the hard way:
+
+- **Visible in a STILL.** The evidence is one PNG per variant, so a rate, duration or decay
+  is invisible to it. `info_board` was swept across all five of its duration exports and
+  produced six identical tiles — a finished-looking experiment that answered nothing.
+- **It must BITE.** Under 3% change in the hottest 5% of pixels is decoration.
+- **Defaults are sacred.** These artifacts have up to 1077 live placements.
+
+**DERIVE the declaration, never transcribe it.** `science_screen` shipped a hand-typed block
+declaring `none|bezel|hooded|cabinet` against a code enum of `stand|wall|console|rig`. Nothing
+failed loudly: the sweep set an invalid value, the artifact fell back to its default, sixteen
+identical frames were published, and the critic reported the axis INERT at 0.69%. Every stage
+green, and the verdict was a fact about a typo. So the chain runs Scene → Registry for axes,
+the opposite direction from the content chain above.
+
+| Tool | Command | Purpose |
+|------|---------|---------|
+| **Declaration gate** | `python tools/check_dna_declarations.py` | Diffs every declared axis against its code. Exit code = broken count, so it gates. |
+| **Derive block** | `python tools/apply_dna_block.py --token=X --axes=a,b` | Writes the registry block FROM the code |
+| **Sweep + gallery** | `python tools/build_dna_gallery.py --slug=S --tokens=a,b` | One PNG per variant + manifest; refuses a broken axis |
+| **Bite critic** | `python tools/artifact_dna_critic.py --gallery=S` | Does each axis actually change the picture? |
+| **Batch compile** | `godot --headless --path . --xr-mode off --script res://commons/testing/check_compile.gd -- --files=res://a.gd,res://b.gd` | Parses N scripts in ONE boot |
+
+**KNOWN GAP, do not mistake it for done:** exactly ONE map (`Artist_Readymades`, six
+`request_note` tokens) places any artifact at a non-default value. The families exist in the
+source tree and on the test bench; outside that one map nobody has ever met a variant.
 
 ## Catalyst Bracelet System
 
