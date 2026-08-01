@@ -308,6 +308,20 @@ def inspect(md, name):
     def solid(c):                      # a wall face or the world's edge
         return h_at(S, *c) >= 4 or h_at(S, *c) < 0
 
+    def surface(c):
+        """A wall you can actually hang something on.
+
+        solid() answers "does the view stop here", and the world's edge stops a
+        view — which is right for judging a vista and wrong for judging a wall.
+        The bare-wall check trusted solid() and spent its findings on the map's
+        OUTER BOUNDARY: an eye shot of Cabinet_Gallery's "8 cells of blank
+        surface" showed three free-standing panels at the map edge with the
+        biome ring visible through the gaps between them. A surface must be a
+        real cell, in bounds, with a stack tall enough to be a wall.
+        """
+        return (0 <= c[1] < len(S) and 0 <= c[0] < len(S[c[1]])
+                and h_at(S, *c) >= 4)
+
     def free(c):
         return c in floor and c not in occupied and c not in utils
 
@@ -368,10 +382,10 @@ def inspect(md, name):
         # 2 BARE WALL — a run of >=4 wall cells with nothing standing against it
         for d, (ea, _eb) in DIRS.items():
             nb = (x + d[0], z + d[1])
-            if not solid(nb): continue
+            if not surface(nb): continue
             run, cur = 0, c
             perp = (d[1], d[0])
-            while free(cur) and solid((cur[0] + d[0], cur[1] + d[1])):
+            while free(cur) and surface((cur[0] + d[0], cur[1] + d[1])):
                 run += 1; cur = (cur[0] + perp[0], cur[1] + perp[1])
             if run >= 4:
                 key = (nb, d)
