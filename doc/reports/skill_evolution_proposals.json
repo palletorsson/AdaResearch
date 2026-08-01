@@ -496,6 +496,13 @@
     "2026-07-20T09:00",
     "2026-07-23T09:00",
     "2026-07-31 evening harvest (no breath ran; R-031 stranded 15 days)"
+   ],
+   "evidence_updates": [
+    {
+     "date": "2026-08-01T18:52:00",
+     "occurrence": 4,
+     "note": "FOURTH OCCURRENCE, and the first at kit scale. At 18:52 the working tree holds 33 modified and 147 untracked paths. Under commons/: 105 untracked Trial_castelvecchio_* map directories (one per sequence, from the museum-template work) and six modified .gd files. The three freshest were written at 17:44 -- station_luminaire.gd, catalyst_vent.gd, sliding_door.gd -- 8 minutes after the last commit of the day (f6759fc2c, 17:36) and 69 minutes before this harvest. station_luminaire.gd is not a fragment: it carries a complete stage-2 'upkeep' axis (service | works | store | scrap) whose header says in so many words that it is adopted word for word from station_pillar / station_crates / station_wall, 'the four of them are one promotion with four bodies'. The other three bodies were committed at 13:46 (8298befda). The uncommitted quarter is the one that makes the kit-wide claim true. NOT COMMITTED by this harvest: mode is evolve-only, the edits are another session's source changes, and no headless compile check was run on them. Reported as the first item for the next breath instead."
+    }
    ]
   },
   {
@@ -541,6 +548,10 @@
      "breath_ref": "no breath (evening harvest)",
      "kind": "confirming -- second occurrence, observed live",
      "note": "The concurrent writer was still active DURING this harvest. Commit 72f6e2965 landed at 17:13 while the pass was running; HEAD had been 13ebaf6a0 minutes earlier. Two git-status reads taken minutes apart both returned 181 dirty paths -- identical counts -- while HEAD moved between them, which is precisely why a single status read cannot tell stranded work from a live hand: the count is stable and the tree is not. This harvest followed the proposed rule (read twice, scope every write by explicit path, never -A) and wrote only doc/reports/improvement_trajectory.json and doc/reports/skill_evolution_proposals.json."
+    },
+    {
+     "date": "2026-08-01T18:52:00",
+     "note": "Follow-up to tonight's 17:19 harvest, which recorded a live concurrent writer (a commit landing at 17:13 mid-pass). Two git-status snapshots taken 4 minutes apart at 18:47 and 18:51 are byte-identical, and the newest file in the tree is 69 minutes old; the viewer heartbeats (ada_run/dr_viewer_alive.txt, hot_reload_alive.txt) are 3.3 and 11.8 days stale, so no Godot session holds the lock either. The concurrent session has STOPPED, and it stopped mid-promotion. This sharpens the proposal: the two-snapshot test distinguishes 'live, hands off' from 'abandoned, commit it', and 69 minutes of silence with a half-landed kit promotion is the second case. Without the test both look the same -- a dirty tree -- which is why prop-010 keeps recurring."
     }
    ]
   },
@@ -575,6 +586,31 @@
    ],
    "watch_item": "Face 2 (attempted item dropped from both buckets) stands at 2 occurrences: 2026-04-20 and 2026-07-31. If a third occurs, it earns promotion from a clause inside this proposal to its own proposal, because the fix for a dropped item (re-arm it) is different from the fix for a relabeled one (freeze the string).",
    "evidence_updates": []
+  },
+  {
+   "id": "prop-015",
+   "created": "2026-08-01T18:52:00",
+   "skill": "ada-breather",
+   "status": "proposed",
+   "evidence": "The proposal ledger is WRITE-ONLY. Sixteen proposals have been filed since 2026-04-20; all sixteen still read status 'proposed'. None has ever been applied, rejected or superseded. The cause is structural, not human neglect: the Read phase of SKILL.md loads doc/HEAT_MAP.json, doc/FOCUS_VECTOR.json, doc/LOD_TREE.json and doc/reports/breath_log.json -- doc/reports/skill_evolution_proposals.json is not on that list, so a breath cannot see its own accumulated findings even in principle. It writes to a file it never reads. THREE INDEPENDENT OCCURRENCES of the resulting cost, each a proposal firing after it had already been written down: (1) prop-006 (recent-commit doc-regression re-scan) was filed 2026-06-15. On 2026-07-20 six spine sequences were found silently regressed to stage-2 -- exactly the failure prop-006 describes -- and the breath re-derived the rule by hand, calling it a 'discovery'. It was then re-run manually on 07-23, 07-24 and 08-01. The rule sat on disk for 35 days before the breath that needed it rediscovered it. (2) prop-012 (concurrent-writer check) was filed 2026-07-31T11:50 after a second session wrote registry dna blocks mid-breath. The next afternoon, 2026-08-01T17:13, a commit landed mid-harvest from a concurrent session -- the identical collision, unmitigated, because nothing loads prop-012. (3) prop-010 (commit what you wrote) was filed 2026-07-23 and is at its fourth occurrence tonight: 111 uncommitted paths under commons/ (105 Trial_castelvecchio_* map directories, one per sequence) plus three GDScript files last written 17:44 -- station_luminaire.gd, catalyst_vent.gd, sliding_door.gd. station_luminaire.gd carries a full stage-2 'upkeep' promotion (service | works | store | scrap) explicitly written as the FOURTH BODY of a kit-wide axis whose first three landed as commits (station_pillar, station_crates, station_wall at 13:46, 8298befda). Three quarters of a finished promotion is in history and one quarter is loose on disk. SECONDARY EVIDENCE of the same wound: prop-003 has accumulated eighteen evidence_updates and prop-005 seven. The loop is very good at re-measuring an injury and has no mechanism for closing one. Distinct from prop-011 (lever registry), which is about CONTENT sources the Read phase cannot see; this one is about the loop's own PROCESS rules, which it also cannot see. They are the same shape of blindness pointed in two directions and should be applied together.",
+   "proposed_change": "Two edits to SKILL.md, neither of which requires the human to hand-merge sixteen backlogged rules. (1) READ PHASE: add doc/reports/skill_evolution_proposals.json to the loaded-file list, with the rule -- every proposal at status 'proposed' is a PROVISIONAL OPERATING RULE for this breath. Follow its proposed_change as written unless it contradicts SKILL.md itself (SKILL.md wins, and the conflict is logged). This gives the ledger force without the breather editing skill files, which the Anti-Patterns section forbids. Record which ones were followed in a new breath-log field `proposals_honored`, so a proposal that repeatedly changes nothing becomes visible as a candidate for rejection. (2) EVOLVE PHASE: define the status vocabulary explicitly -- proposed | applied | rejected | superseded -- state that only the human sets anything other than 'proposed', and require every BREATHE REPORT to print one line: 'proposals: N open, M older than 30 days'. The backlog then appears in the report the human already reads, instead of only inside a 136 KB JSON file nobody opens.",
+   "expected_improvement": "Converts a sixteen-item write-only ledger into sixteen active rules at zero human cost. Applied retroactively it would have caught the 2026-07-20 six-sequence documentation regression 35 days earlier (prop-006), scoped tonight's stranded kit promotion at the moment it appeared (prop-010), and put a concurrent-writer guard in front of the 08-01T17:13 collision (prop-012). It also gives the backlog a termination condition: a provisional rule that is honored for N breaths and never fires is evidence for rejection, which is currently unobtainable.",
+   "breath_refs": [
+    "2026-07-20T09:00",
+    "2026-07-23T09:00",
+    "2026-07-24T09:04",
+    "2026-07-31T11:20",
+    "2026-08-01T17:30 (evening harvest 1)",
+    "2026-08-01T18:52 (evening harvest 2)"
+   ],
+   "related_proposals": [
+    "prop-003",
+    "prop-005",
+    "prop-006",
+    "prop-010",
+    "prop-011",
+    "prop-012"
+   ]
   }
  ]
 }
