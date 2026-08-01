@@ -123,6 +123,16 @@ What it says:
 Register proposals from the match (propose, never bind): color -> kanazawa
 matrix, transformation -> grande-galerie axial, randomness -> uffizi spine.
 
+**RULED 2026-08-01** (Palle: "rule patience in and adopt the 8 museum
+crowns"): patience is in the binding score (`max(promise, patience)` hero
+point; pre-ruling number preserved as `score_promise_only`), and the eight
+classic-score crowns are adopted as `commons/data/museum_crowns.json` —
+walked live by the endless museum, which now opens with primitives inside
+the Sainsbury. Kanazawa's patience-only isosurfaces win was NOT adopted (its
+bred baseline was never rescored under the ruled judge). Standing caveat for
+every future tournament: bred baselines predate the ruling — rescore before
+comparing.
+
 ## 6. Remaining next (proposals, none binding)
 - **Seam gate for the spine**: a chain_check analogue for sequence map order —
   model the teleporter join, verify every consecutive map pair.
