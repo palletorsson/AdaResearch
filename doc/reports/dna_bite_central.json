@@ -10,210 +10,401 @@
   {
    "artifact": "exhibit_furniture",
    "axis": "guard",
-   "frame": 0.0316,
-   "focus": 0.3103,
+   "frame": 0.11356,
+   "focus": 0.33754,
    "verdict": "bites",
-   "pairs": 6
+   "subject": 0.13758,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "exhibit_furniture",
    "axis": "house",
-   "frame": 0.04139,
-   "focus": 0.36416,
+   "frame": 0.08648,
+   "focus": 0.2455,
    "verdict": "bites",
-   "pairs": 30
+   "subject": 0.13758,
+   "pairs": 30,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "exhibit_podium",
    "axis": "house",
-   "frame": 0.03447,
-   "focus": 0.36156,
+   "frame": 0.09326,
+   "focus": 0.33619,
    "verdict": "bites",
-   "pairs": 30
+   "subject": 0.13574,
+   "pairs": 30,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "exhibit_podium",
    "axis": "reserve",
-   "frame": 0.02956,
-   "focus": 0.31421,
+   "frame": 0.10013,
+   "focus": 0.36954,
    "verdict": "bites",
-   "pairs": 6
+   "subject": 0.13574,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "exhibit_vitrine",
    "axis": "enclosure",
-   "frame": 0.02795,
-   "focus": 0.2987,
+   "frame": 0.10612,
+   "focus": 0.35425,
    "verdict": "bites",
-   "pairs": 24
+   "subject": 0.13805,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "exhibit_vitrine",
    "axis": "guard",
-   "frame": 0.02269,
-   "focus": 0.27567,
+   "frame": 0.08102,
+   "focus": 0.35297,
    "verdict": "bites",
-   "pairs": 24
+   "subject": 0.13805,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "curation_station",
    "axis": "bay",
-   "frame": 0.0077,
-   "focus": 0.02534,
-   "verdict": "INERT",
-   "pairs": 24
+   "frame": 0.02096,
+   "focus": 0.12144,
+   "verdict": "bites",
+   "subject": 0.03648,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "gate",
+     "b": "none",
+     "focus": 0.04522,
+     "rgb": 0.13654
+    },
+    {
+     "a": "apse",
+     "b": "hall",
+     "focus": 0.04576,
+     "rgb": 0.07714
+    },
+    {
+     "a": "apse",
+     "b": "hall",
+     "focus": 0.05471,
+     "rgb": 0.14309
+    }
+   ]
   },
   {
    "artifact": "curation_station",
    "axis": "duty",
-   "frame": 0.00939,
-   "focus": 0.05826,
-   "verdict": "WEAK",
-   "pairs": 24
+   "frame": 0.03082,
+   "focus": 0.15721,
+   "verdict": "bites",
+   "subject": 0.03648,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "fire_hose_box",
    "axis": "statute",
-   "frame": 0.02633,
-   "focus": 0.26874,
+   "frame": 0.10146,
+   "focus": 0.34007,
    "verdict": "bites",
-   "pairs": 18
+   "subject": 0.1423,
+   "pairs": 18,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "fire_hose_box",
    "axis": "support",
-   "frame": 0.03062,
-   "focus": 0.29984,
+   "frame": 0.13498,
+   "focus": 0.38012,
    "verdict": "bites",
-   "pairs": 12
+   "subject": 0.1423,
+   "pairs": 12,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "fire_extinguisher",
    "axis": "statute",
-   "frame": 0.02345,
-   "focus": 0.237,
+   "frame": 0.10512,
+   "focus": 0.3718,
    "verdict": "bites",
-   "pairs": 18
+   "subject": 0.11309,
+   "pairs": 18,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "fire_extinguisher",
    "axis": "support",
-   "frame": 0.02741,
-   "focus": 0.2767,
+   "frame": 0.12993,
+   "focus": 0.38909,
    "verdict": "bites",
-   "pairs": 12
+   "subject": 0.11309,
+   "pairs": 12,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "info_board",
    "axis": "support",
-   "frame": 0.06388,
-   "focus": 0.33213,
+   "frame": 0.10574,
+   "focus": 0.35733,
    "verdict": "bites",
-   "pairs": 15
+   "subject": 0.18043,
+   "pairs": 15,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "info_board",
    "axis": "voice",
-   "frame": 0.07854,
-   "focus": 0.44982,
+   "frame": 0.15515,
+   "focus": 0.34631,
    "verdict": "bites",
-   "pairs": 30
+   "subject": 0.18043,
+   "pairs": 30,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "pick_up_cube",
    "axis": "custody",
-   "frame": 0.01707,
-   "focus": 0.18281,
-   "verdict": "local",
-   "pairs": 15
+   "frame": 0.08469,
+   "focus": 0.30927,
+   "verdict": "bites",
+   "subject": 0.08445,
+   "pairs": 15,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "none",
+     "b": "tally",
+     "focus": 0.05016,
+     "rgb": 0.10257
+    }
+   ]
   },
   {
    "artifact": "pick_up_cube",
    "axis": "stock",
-   "frame": 0.02685,
-   "focus": 0.31638,
+   "frame": 0.12433,
+   "focus": 0.33431,
    "verdict": "bites",
-   "pairs": 30
+   "subject": 0.08445,
+   "pairs": 30,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "station_pillar",
    "axis": "upkeep",
-   "frame": 0.03896,
-   "focus": 0.24803,
+   "frame": 0.06623,
+   "focus": 0.30774,
    "verdict": "bites",
-   "pairs": 6
+   "subject": 0.07496,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "station_crates",
    "axis": "upkeep",
-   "frame": 0.05405,
-   "focus": 0.40174,
+   "frame": 0.12345,
+   "focus": 0.37748,
    "verdict": "bites",
-   "pairs": 6
+   "subject": 0.14008,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "science_screen",
    "axis": "support",
-   "frame": 0.01782,
-   "focus": 0.19718,
-   "verdict": "local",
-   "pairs": 24
+   "frame": 0.10405,
+   "focus": 0.34261,
+   "verdict": "bites",
+   "subject": 0.11379,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "science_screen",
    "axis": "surface",
-   "frame": 0.01225,
-   "focus": 0.10991,
-   "verdict": "WEAK",
-   "pairs": 24
+   "frame": 0.07818,
+   "focus": 0.29,
+   "verdict": "bites",
+   "subject": 0.11379,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "plane",
+     "b": "tiles",
+     "focus": 0.0564,
+     "rgb": 0.16636
+    }
+   ]
   },
   {
    "artifact": "dark_sphere",
    "axis": "body",
-   "frame": 0.01793,
-   "focus": 0.21446,
-   "verdict": "local",
-   "pairs": 24
+   "frame": 0.09017,
+   "focus": 0.3705,
+   "verdict": "bites",
+   "subject": 0.07484,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "dark_sphere",
    "axis": "presence",
-   "frame": 0.01857,
-   "focus": 0.21207,
-   "verdict": "local",
-   "pairs": 24
+   "frame": 0.09934,
+   "focus": 0.38346,
+   "verdict": "bites",
+   "subject": 0.07484,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "catalyst_target",
    "axis": "mark",
-   "frame": 0.02044,
-   "focus": 0.2671,
+   "frame": 0.0856,
+   "focus": 0.39168,
    "verdict": "bites",
-   "pairs": 24
+   "subject": 0.05375,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "catalyst_target",
    "axis": "support",
-   "frame": 0.02263,
-   "focus": 0.28411,
+   "frame": 0.1127,
+   "focus": 0.38363,
    "verdict": "bites",
-   "pairs": 24
+   "subject": 0.05375,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "request_note",
    "axis": "mode",
-   "frame": 0.02741,
-   "focus": 0.30812,
+   "frame": 0.15109,
+   "focus": 0.36323,
    "verdict": "bites",
-   "pairs": 24
+   "subject": 0.08457,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
   },
   {
    "artifact": "request_note",
    "axis": "tone",
-   "frame": 0.00714,
-   "focus": 0.01238,
-   "verdict": "INERT",
-   "pairs": 24
+   "frame": 0.03831,
+   "focus": 0.07393,
+   "verdict": "WEAK",
+   "subject": 0.08457,
+   "pairs": 24,
+   "twins": [
+    {
+     "a": "bug",
+     "b": "question",
+     "focus": 0.00112,
+     "rgb": 0.00168
+    },
+    {
+     "a": "done",
+     "b": "question",
+     "focus": 0.00113,
+     "rgb": 0.0017
+    },
+    {
+     "a": "bug",
+     "b": "done",
+     "focus": 0.00137,
+     "rgb": 0.00404
+    }
+   ],
+   "colour_only": [
+    {
+     "a": "question",
+     "b": "request",
+     "focus": 0.00391,
+     "rgb": 0.12581
+    },
+    {
+     "a": "done",
+     "b": "question",
+     "focus": 0.01032,
+     "rgb": 0.19452
+    },
+    {
+     "a": "bug",
+     "b": "request",
+     "focus": 0.018,
+     "rgb": 0.3204
+    },
+    {
+     "a": "question",
+     "b": "request",
+     "focus": 0.03167,
+     "rgb": 0.29059
+    },
+    {
+     "a": "done",
+     "b": "question",
+     "focus": 0.03294,
+     "rgb": 0.09275
+    },
+    {
+     "a": "bug",
+     "b": "request",
+     "focus": 0.03441,
+     "rgb": 0.15657
+    },
+    {
+     "a": "done",
+     "b": "request",
+     "focus": 0.03851,
+     "rgb": 0.20424
+    },
+    {
+     "a": "done",
+     "b": "question",
+     "focus": 0.03995,
+     "rgb": 0.30887
+    },
+    {
+     "a": "bug",
+     "b": "done",
+     "focus": 0.05094,
+     "rgb": 0.19354
+    },
+    {
+     "a": "done",
+     "b": "request",
+     "focus": 0.05335,
+     "rgb": 0.205
+    }
+   ]
   }
  ]
 }

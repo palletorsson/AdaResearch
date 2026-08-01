@@ -10,10 +10,10 @@
   {
    "artifact": "lambda_slider",
    "axis": "calibration",
-   "frame": 0.03166,
-   "focus": 0.37616,
+   "frame": 0.02928,
+   "focus": 0.21775,
    "verdict": "bites",
-   "subject": 0.11648,
+   "subject": 0.11688,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -21,10 +21,10 @@
   {
    "artifact": "phi_slider",
    "axis": "calibration",
-   "frame": 0.0756,
-   "focus": 0.61595,
+   "frame": 0.0383,
+   "focus": 0.2554,
    "verdict": "bites",
-   "subject": 0.46105,
+   "subject": 0.48496,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -32,83 +32,125 @@
   {
    "artifact": "qfep_formula_3d",
    "axis": "emphasis",
-   "frame": 0.01141,
-   "focus": 0.07138,
+   "frame": 0.00707,
+   "focus": 0.04478,
    "verdict": "WEAK",
-   "subject": 0.03828,
+   "subject": 0.03957,
    "pairs": 24,
    "twins": [
     {
      "a": "QFE",
      "b": "lambda",
-     "focus": 0.0214,
+     "focus": 0.01036,
      "rgb": 0.03036
     },
     {
      "a": "lambda",
      "b": "none",
-     "focus": 0.02473,
+     "focus": 0.01176,
      "rgb": 0.03389
+    },
+    {
+     "a": "QFE",
+     "b": "none",
+     "focus": 0.01384,
+     "rgb": 0.03681
     },
     {
      "a": "F",
      "b": "QFE",
-     "focus": 0.02711,
+     "focus": 0.02008,
      "rgb": 0.03548
-    },
-    {
-     "a": "QFE",
-     "b": "none",
-     "focus": 0.02861,
-     "rgb": 0.03681
-    },
-    {
-     "a": "QFE",
-     "b": "lambda",
-     "focus": 0.03852,
-     "rgb": 0.0508
     },
     {
      "a": "F",
      "b": "none",
-     "focus": 0.03862,
+     "focus": 0.02407,
      "rgb": 0.04924
     },
     {
      "a": "F",
-     "b": "none",
-     "focus": 0.04487,
-     "rgb": 0.05599
+     "b": "lambda",
+     "focus": 0.03036,
+     "rgb": 0.05921
     },
     {
      "a": "F",
+     "b": "none",
+     "focus": 0.03196,
+     "rgb": 0.05599
+    },
+    {
+     "a": "QFE",
      "b": "lambda",
-     "focus": 0.04541,
-     "rgb": 0.05921
+     "focus": 0.03451,
+     "rgb": 0.0508
     }
    ],
    "colour_only": [
     {
      "a": "QFE",
      "b": "lambda",
-     "focus": 0.05202,
+     "focus": 0.02413,
      "rgb": 0.07336
+    },
+    {
+     "a": "lambda",
+     "b": "none",
+     "focus": 0.0379,
+     "rgb": 0.09273
+    },
+    {
+     "a": "F",
+     "b": "none",
+     "focus": 0.03812,
+     "rgb": 0.09155
+    },
+    {
+     "a": "lambda",
+     "b": "none",
+     "focus": 0.03873,
+     "rgb": 0.0996
+    },
+    {
+     "a": "F",
+     "b": "lambda",
+     "focus": 0.04267,
+     "rgb": 0.13268
+    },
+    {
+     "a": "F",
+     "b": "QFE",
+     "focus": 0.04326,
+     "rgb": 0.11387
+    },
+    {
+     "a": "QFE",
+     "b": "none",
+     "focus": 0.04497,
+     "rgb": 0.11585
     },
     {
      "a": "QFE",
      "b": "lambda",
-     "focus": 0.05583,
+     "focus": 0.04766,
      "rgb": 0.07381
+    },
+    {
+     "a": "F",
+     "b": "lambda",
+     "focus": 0.05842,
+     "rgb": 0.11286
     }
    ]
   },
   {
    "artifact": "qfep_formula_3d",
    "axis": "posture",
-   "frame": 0.03217,
-   "focus": 0.27004,
+   "frame": 0.03241,
+   "focus": 0.28492,
    "verdict": "bites",
-   "subject": 0.03828,
+   "subject": 0.03957,
    "pairs": 24,
    "twins": [],
    "colour_only": []
@@ -116,16 +158,16 @@
   {
    "artifact": "schrodinger_box",
    "axis": "remainder",
-   "frame": 0.08562,
-   "focus": 0.44518,
+   "frame": 0.06362,
+   "focus": 0.25709,
    "verdict": "bites",
-   "subject": 0.14695,
+   "subject": 0.14883,
    "pairs": 30,
    "twins": [
     {
      "a": "core",
      "b": "seam",
-     "focus": 0.03723,
+     "focus": 0.03782,
      "rgb": 0.04675
     }
    ],
@@ -134,10 +176,10 @@
   {
    "artifact": "schrodinger_box",
    "axis": "vantage",
-   "frame": 0.13141,
-   "focus": 0.42227,
+   "frame": 0.11504,
+   "focus": 0.33148,
    "verdict": "bites",
-   "subject": 0.14695,
+   "subject": 0.14883,
    "pairs": 15,
    "twins": [],
    "colour_only": []
@@ -145,21 +187,28 @@
   {
    "artifact": "rhizomatic_structure",
    "axis": "mutuality",
-   "frame": 0.03591,
-   "focus": 0.13417,
-   "verdict": "bites",
-   "subject": 0.01324,
+   "frame": 0.01269,
+   "focus": 0.12503,
+   "verdict": "local",
+   "subject": 0.01625,
    "pairs": 6,
    "twins": [],
-   "colour_only": []
+   "colour_only": [
+    {
+     "a": "none",
+     "b": "pockets",
+     "focus": 0.04129,
+     "rgb": 0.13751
+    }
+   ]
   },
   {
    "artifact": "godel_statement_plaque",
    "axis": "outside",
-   "frame": 0.13917,
-   "focus": 0.45896,
+   "frame": 0.14056,
+   "focus": 0.35617,
    "verdict": "bites",
-   "subject": 0.10973,
+   "subject": 0.11047,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -167,10 +216,10 @@
   {
    "artifact": "russell_set_box",
    "axis": "outside",
-   "frame": 0.1169,
-   "focus": 0.45337,
+   "frame": 0.16714,
+   "focus": 0.4452,
    "verdict": "bites",
-   "subject": 0.07129,
+   "subject": 0.07168,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -178,10 +227,10 @@
   {
    "artifact": "florensky_sphere",
    "axis": "seam",
-   "frame": 0.05531,
-   "focus": 0.36526,
+   "frame": 0.03473,
+   "focus": 0.30232,
    "verdict": "bites",
-   "subject": 0.0316,
+   "subject": 0.03867,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -189,10 +238,10 @@
   {
    "artifact": "escher_staircase",
    "axis": "seam",
-   "frame": 0.07646,
-   "focus": 0.41673,
+   "frame": 0.05225,
+   "focus": 0.33687,
    "verdict": "bites",
-   "subject": 0.04805,
+   "subject": 0.05094,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -200,10 +249,10 @@
   {
    "artifact": "superposition_display",
    "axis": "remainder",
-   "frame": 0.08871,
-   "focus": 0.54302,
+   "frame": 0.05442,
+   "focus": 0.29717,
    "verdict": "bites",
-   "subject": 0.13602,
+   "subject": 0.13699,
    "pairs": 30,
    "twins": [],
    "colour_only": []
@@ -211,10 +260,10 @@
   {
    "artifact": "superposition_display",
    "axis": "vantage",
-   "frame": 0.16102,
-   "focus": 0.51977,
+   "frame": 0.12879,
+   "focus": 0.33479,
    "verdict": "bites",
-   "subject": 0.13602,
+   "subject": 0.13699,
    "pairs": 15,
    "twins": [],
    "colour_only": []
@@ -222,8 +271,8 @@
   {
    "artifact": "situated_readout",
    "axis": "address",
-   "frame": 0.12286,
-   "focus": 0.54912,
+   "frame": 0.16712,
+   "focus": 0.38041,
    "verdict": "bites",
    "subject": 0.11313,
    "pairs": 10,
@@ -233,10 +282,10 @@
   {
    "artifact": "grab_sphere_E",
    "axis": "grasp",
-   "frame": 0.08099,
-   "focus": 0.2926,
+   "frame": 0.06047,
+   "focus": 0.2628,
    "verdict": "bites",
-   "subject": 0.00605,
+   "subject": 0.00773,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -244,10 +293,10 @@
   {
    "artifact": "grab_sphere_F",
    "axis": "grasp",
-   "frame": 0.0625,
-   "focus": 0.23059,
+   "frame": 0.04002,
+   "focus": 0.22477,
    "verdict": "bites",
-   "subject": 0.00578,
+   "subject": 0.00754,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -255,10 +304,10 @@
   {
    "artifact": "grab_sphere_lambda",
    "axis": "grasp",
-   "frame": 0.06182,
-   "focus": 0.25139,
+   "frame": 0.04235,
+   "focus": 0.23822,
    "verdict": "bites",
-   "subject": 0.00582,
+   "subject": 0.0077,
    "pairs": 10,
    "twins": [],
    "colour_only": []

@@ -10,10 +10,10 @@
   {
    "artifact": "GlassRack",
    "axis": "admission",
-   "frame": 0.07363,
-   "focus": 0.38062,
+   "frame": 0.05401,
+   "focus": 0.34928,
    "verdict": "bites",
-   "subject": 0.0609,
+   "subject": 0.06355,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -21,10 +21,10 @@
   {
    "artifact": "seismograph",
    "axis": "record",
-   "frame": 0.08185,
-   "focus": 0.52634,
+   "frame": 0.02986,
+   "focus": 0.18772,
    "verdict": "bites",
-   "subject": 0.1216,
+   "subject": 0.12164,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -32,16 +32,16 @@
   {
    "artifact": "chladni_plate",
    "axis": "deposit",
-   "frame": 0.02993,
-   "focus": 0.16505,
-   "verdict": "bites",
-   "subject": 0.06156,
+   "frame": 0.01414,
+   "focus": 0.14492,
+   "verdict": "local",
+   "subject": 0.06262,
    "pairs": 6,
    "twins": [
     {
      "a": "figure",
      "b": "none",
-     "focus": 0.02968,
+     "focus": 0.01931,
      "rgb": 0.03443
     }
    ],
@@ -50,10 +50,10 @@
   {
    "artifact": "foucault_pendulum",
    "axis": "interference",
-   "frame": 0.05955,
-   "focus": 0.38832,
+   "frame": 0.02624,
+   "focus": 0.18918,
    "verdict": "bites",
-   "subject": 0.03738,
+   "subject": 0.03812,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -61,21 +61,28 @@
   {
    "artifact": "Rack303Acid",
    "axis": "machinery",
-   "frame": 0.15745,
-   "focus": 0.48149,
+   "frame": 0.15283,
+   "focus": 0.36975,
    "verdict": "bites",
-   "subject": 0.09883,
+   "subject": 0.1068,
    "pairs": 10,
    "twins": [],
-   "colour_only": []
+   "colour_only": [
+    {
+     "a": "plate",
+     "b": "vacancy",
+     "focus": 0.04824,
+     "rgb": 0.14033
+    }
+   ]
   },
   {
    "artifact": "RackSineBasic",
    "axis": "machinery",
-   "frame": 0.12573,
-   "focus": 0.47567,
+   "frame": 0.09638,
+   "focus": 0.39535,
    "verdict": "bites",
-   "subject": 0.09137,
+   "subject": 0.1025,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -83,10 +90,10 @@
   {
    "artifact": "coupled_oscillator_lattice",
    "axis": "fabric",
-   "frame": 0.07073,
-   "focus": 0.19772,
+   "frame": 0.05134,
+   "focus": 0.1791,
    "verdict": "bites",
-   "subject": 0.03754,
+   "subject": 0.04035,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -94,10 +101,10 @@
   {
    "artifact": "sine_wall_corridor",
    "axis": "cut",
-   "frame": 0.03979,
-   "focus": 0.11258,
-   "verdict": "WEAK",
-   "subject": 0.0898,
+   "frame": 0.06202,
+   "focus": 0.20274,
+   "verdict": "bites",
+   "subject": 0.09109,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -105,10 +112,10 @@
   {
    "artifact": "bernini_columns",
    "axis": "colonnade",
-   "frame": 0.08221,
-   "focus": 0.27069,
+   "frame": 0.07412,
+   "focus": 0.24554,
    "verdict": "bites",
-   "subject": 0.06094,
+   "subject": 0.08465,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -116,10 +123,10 @@
   {
    "artifact": "kusama_sine",
    "axis": "obsession",
-   "frame": 0.03778,
-   "focus": 0.13798,
+   "frame": 0.03806,
+   "focus": 0.18628,
    "verdict": "bites",
-   "subject": 0.02039,
+   "subject": 0.02887,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -127,17 +134,17 @@
   {
    "artifact": "hallway_scene",
    "axis": "element",
-   "frame": 0.11108,
-   "focus": 0.29449,
+   "frame": 0.3389,
+   "focus": 0.47817,
    "verdict": "bites",
-   "subject": 0.9952,
+   "subject": 0.99727,
    "pairs": 6,
    "twins": [],
    "colour_only": [
     {
      "a": "braid",
      "b": "vault",
-     "focus": 0.0549,
+     "focus": 0.0,
      "rgb": 1.0
     }
    ]
@@ -145,10 +152,10 @@
   {
    "artifact": "sine_cylinder_staircase",
    "axis": "provision",
-   "frame": 0.07239,
-   "focus": 0.28468,
+   "frame": 0.05946,
+   "focus": 0.27182,
    "verdict": "bites",
-   "subject": 0.04813,
+   "subject": 0.06027,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -156,10 +163,10 @@
   {
    "artifact": "cable_builder",
    "axis": "slack",
-   "frame": 0.03029,
-   "focus": 0.1262,
+   "frame": 0.15189,
+   "focus": 0.21722,
    "verdict": "bites",
-   "subject": 0.01027,
+   "subject": 0.0166,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -167,10 +174,10 @@
   {
    "artifact": "line_builder_3d",
    "axis": "slack",
-   "frame": 0.02919,
-   "focus": 0.11537,
-   "verdict": "WEAK",
-   "subject": 0.01211,
+   "frame": 0.01856,
+   "focus": 0.20358,
+   "verdict": "local",
+   "subject": 0.01859,
    "pairs": 10,
    "twins": [],
    "colour_only": []
@@ -178,17 +185,17 @@
   {
    "artifact": "BigPipeSystem",
    "axis": "slack",
-   "frame": 0.06542,
-   "focus": 0.31686,
+   "frame": 0.04018,
+   "focus": 0.20452,
    "verdict": "bites",
-   "subject": 0.05547,
+   "subject": 0.05992,
    "pairs": 10,
    "twins": [],
    "colour_only": [
     {
      "a": "chord",
      "b": "spline",
-     "focus": 0.05511,
+     "focus": 0.04259,
      "rgb": 0.12192
     }
    ]
@@ -196,10 +203,10 @@
   {
    "artifact": "multimeter",
    "axis": "record",
-   "frame": 0.11027,
-   "focus": 0.5077,
+   "frame": 0.07393,
+   "focus": 0.35079,
    "verdict": "bites",
-   "subject": 0.05078,
+   "subject": 0.05145,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -207,10 +214,10 @@
   {
    "artifact": "atmosphericmonitoring",
    "axis": "record",
-   "frame": 0.15133,
-   "focus": 0.44242,
+   "frame": 0.06598,
+   "focus": 0.28076,
    "verdict": "bites",
-   "subject": 0.11391,
+   "subject": 0.12949,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -218,10 +225,10 @@
   {
    "artifact": "holographicdisplay",
    "axis": "record",
-   "frame": 0.02061,
-   "focus": 0.09045,
-   "verdict": "WEAK",
-   "subject": 0.0498,
+   "frame": 0.02457,
+   "focus": 0.16288,
+   "verdict": "bites",
+   "subject": 0.05277,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -229,10 +236,10 @@
   {
    "artifact": "WavePaintings",
    "axis": "display",
-   "frame": 0.11442,
-   "focus": 0.3073,
+   "frame": 0.10536,
+   "focus": 0.30757,
    "verdict": "bites",
-   "subject": 0.0625,
+   "subject": 0.06543,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -240,10 +247,10 @@
   {
    "artifact": "biomagneticresonator",
    "axis": "series",
-   "frame": 0.15263,
-   "focus": 0.6093,
+   "frame": 0.11222,
+   "focus": 0.4859,
    "verdict": "bites",
-   "subject": 0.05605,
+   "subject": 0.05762,
    "pairs": 6,
    "twins": [],
    "colour_only": []
@@ -251,10 +258,10 @@
   {
    "artifact": "samplevialrack",
    "axis": "admission",
-   "frame": 0.03977,
-   "focus": 0.31527,
+   "frame": 0.02979,
+   "focus": 0.24343,
    "verdict": "bites",
-   "subject": 0.01824,
+   "subject": 0.0198,
    "pairs": 12,
    "twins": [],
    "colour_only": []
@@ -262,17 +269,17 @@
   {
    "artifact": "samplevialrack",
    "axis": "inscription",
-   "frame": 0.01173,
-   "focus": 0.10788,
+   "frame": 0.01001,
+   "focus": 0.07687,
    "verdict": "WEAK",
-   "subject": 0.01824,
+   "subject": 0.0198,
    "pairs": 4,
    "twins": [],
    "colour_only": [
     {
      "a": "level",
      "b": "none",
-     "focus": 0.03665,
+     "focus": 0.02636,
      "rgb": 0.0682
     }
    ]
@@ -280,10 +287,10 @@
   {
    "artifact": "chemicalapparatus",
    "axis": "admission",
-   "frame": 0.06794,
-   "focus": 0.49584,
+   "frame": 0.03552,
+   "focus": 0.28735,
    "verdict": "bites",
-   "subject": 0.04816,
+   "subject": 0.05004,
    "pairs": 6,
    "twins": [],
    "colour_only": []

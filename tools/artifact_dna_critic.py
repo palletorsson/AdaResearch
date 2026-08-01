@@ -54,11 +54,33 @@ def _subject_bbox(p: Path):
 
 
 def load_img(p: Path, box=None):
-    from PIL import Image
-    im = Image.open(p).convert("L")
+    """Greyscale samples with each frame's OWN background neutralised.
+
+    THE BUG THIS FIXES, which contaminated every verdict this tool has produced.
+    The capture environment has not settled on the first tile of a sweep, so tile 1 comes
+    out at a different background tint from every later tile — measured at (148,174,149)
+    against (130,165,118), a whole-frame shift across 85-93% of the image. Because
+    apply_dna_block puts the axis DEFAULT leftmost, that tile is usually the baseline every
+    other value gets compared against, so a harness artefact 2.5-6x larger than the real
+    axis signal was being read as bite.
+
+    cabinet_sweep.py already knew: its own bite computation masks each image against its own
+    background for exactly this reason, and says so at cabinet_sweep.py:234. That fix never
+    reached this file, which is the one whose numbers get reported.
+
+    Fixing it in the CAPTURE was tried first and is the wrong place — three attempts moved
+    the tint from 148 to 137 to 135 to 146 without eliminating it, because the render target
+    converges over several frames rather than one. Neutralising per frame here is exact and
+    costs nothing.
+    """
+    from PIL import Image, ImageChops
+    im = Image.open(p).convert("RGB")
     if box is not None:
         im = im.crop(box)
-    return list(im.resize((160, 160)).getdata())
+    # The corner is background by construction — the subject is framed centrally.
+    bg = im.getpixel((3, 3))
+    im = ImageChops.difference(im, Image.new("RGB", im.size, bg))
+    return list(im.convert("L").resize((160, 160)).getdata())
 
 
 def load_rgb(p: Path, box=None):
