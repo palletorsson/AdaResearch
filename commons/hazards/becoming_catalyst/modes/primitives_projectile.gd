@@ -72,6 +72,14 @@ func _on_bouncy_hit(body: Node3D) -> void:
 	# Dispatch FIRST so transformation can never be skipped by a sparks
 	# spawn error (e.g. current_scene null during scene-tree teardown).
 	_dispatch_transformation(body)
+	projectile_hit.emit(body, global_position)
+	# The shared impact language fires here too — the ball survives to
+	# bounce on, but every connection still flashes, rings and ticks.
+	var fx_parent: Node = get_tree().current_scene
+	if fx_parent == null:
+		fx_parent = get_parent()
+	var n: Vector3 = -linear_velocity.normalized() if linear_velocity.length_squared() > 0.01 else Vector3.UP
+	ImpactKit.burst(fx_parent, global_position, n, color_primary, color_secondary, projectile_scale)
 	# Spark burst at the bounce point — every collision feels punchy.
 	_spawn_bounce_sparks()
 

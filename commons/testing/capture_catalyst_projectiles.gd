@@ -148,42 +148,79 @@ func _initialize() -> void:
 			current_scene = null
 			arena.queue_free()
 			continue
+		# Freeze the foe's locomotion so bouncing/jittering modes still
+		# connect — the conversion dispatch is a method call, not physics,
+		# so hit_by_catalyst_mode works on a statue.
+		foe.set_physics_process(false)
+		# chaos flies on random impulses — bring its statue close enough
+		# that the wander can't walk the shot wide
+		if mode_id == "chaos" and is_instance_valid(foe):
+			foe.global_position = Vector3(1.8, 0.6, 0)
+			await process_frame
 
 		var start := Vector3(0, 0.55, 0)
 		var focus: Vector3 = foe.global_position + Vector3(0, 0.2, 0)
-		var aim: Vector3 = (foe.global_position + Vector3(0, 0.15, 0) - start).normalized()
-		var proj = mode_script.call("create_projectile", start, aim)
-		arena.add_child(proj)
-		proj.global_position = start
-
+		var hit_seen: Dictionary = {"hit": false}
 		var waited: int = 0
-		while waited < HIT_TIMEOUT_FRAMES:
-			await process_frame
-			waited += 1
-			if not is_instance_valid(proj) or bool(proj.get("has_hit")):
+		# chaos and swarm are spray modes in real play — give them a volley
+		var volley: int = 3 if mode_id in ["chaos", "swarm"] else 1
+		for attempt in 2:
+			var projs: Array = []
+			for v in volley:
+				var aim: Vector3 = (foe.global_position + Vector3(0, 0.15, 0) - start).normalized()
+				var proj = mode_script.call("create_projectile", start, aim)
+				arena.add_child(proj)
+				proj.global_position = start
+				# signal-driven: bounce modes never set has_hit, but every
+				# mode emits projectile_hit on connection now
+				if proj.has_signal("projectile_hit"):
+					proj.projectile_hit.connect(func(_b, _p): hit_seen["hit"] = true)
+				projs.append(proj)
+				for i in 6:
+					await process_frame
+			waited = 0
+			while waited < HIT_TIMEOUT_FRAMES:
+				await process_frame
+				waited += 1
+				if hit_seen["hit"]:
+					break
+				var any_alive: bool = false
+				for proj in projs:
+					if is_instance_valid(proj) and not bool(proj.get("has_hit")):
+						any_alive = true
+				if not any_alive:
+					break
+			if hit_seen["hit"]:
 				break
-		for i in AFTER_HIT_FRAMES:
-			await process_frame
+			for proj in projs:
+				if is_instance_valid(proj):
+					proj.queue_free()
+			print("  %s attempt %d missed — retrying" % [mode_id, attempt + 1])
 
-		paused = true
-		var bounds: AABB = _visual_aabb(arena)
-		var center: Vector3 = bounds.get_center()
-		# particles inflate the AABB and a fully-dissolved foe deflates it —
-		# clamp the shot to a portrait distance and fall back to where the
-		# foe stood
-		var radius: float = clampf(bounds.size.length() * 0.5, 0.3, 2.2)
-		if bounds.size.length() < 0.35 or center.distance_to(focus) > 4.0:
-			center = focus
-			radius = 1.0
-		var dist: float = clampf(radius * 2.2, 1.2, 5.5)
-		cam.global_position = center + Vector3(-0.45, 0.4, 1.0).normalized() * dist
-		cam.look_at(center, Vector3.UP)
-		await process_frame
-		await RenderingServer.frame_post_draw
-		get_root().get_texture().get_image().save_png("%s/impact_%s.png" % [OUT_DIR, mode_id])
-		print("impact %s captured (waited %d frames, r=%.2f)" % [mode_id, waited, radius])
+		# Filmstrip: the SAME impact photographed at four moments — pause,
+		# shoot, unpause, let the effect run on, pause again. Fixed camera
+		# so the strip reads as one continuous event.
+		var strip_offsets: Array = [4, 6, 10, 14]   # cumulative: frames 4/10/20/34
+		var strip_frame: int = 0
+		var strip_idx: int = 0
+		for off in strip_offsets:
+			for i in int(off):
+				await process_frame
+			strip_frame += int(off)
+			paused = true
+			cam.global_position = focus + Vector3(-0.45, 0.35, 1.0).normalized() * 2.4
+			cam.look_at(focus, Vector3.UP)
+			await process_frame
+			await RenderingServer.frame_post_draw
+			var img: Image = get_root().get_texture().get_image()
+			img.save_png("%s/strip_%s_%d.png" % [OUT_DIR, mode_id, strip_idx])
+			if strip_idx == 2:   # frame 20 ≈ 0.33 s — the gallery still
+				img.save_png("%s/impact_%s.png" % [OUT_DIR, mode_id])
+			paused = false
+			strip_idx += 1
+
+		print("impact %s filmstrip captured (hit after %d frames)" % [mode_id, waited])
 		impact_done += 1
-		paused = false
 		current_scene = null
 		arena.queue_free()
 		await process_frame
