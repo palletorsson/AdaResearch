@@ -1,0 +1,85 @@
+diff --git a/commons/artifacts/station/station_luminaire.gd b/commons/artifacts/station/station_luminaire.gd
+index 55043c2eb..a91fe6d14 100644
+--- a/commons/artifacts/station/station_luminaire.gd
++++ b/commons/artifacts/station/station_luminaire.gd
+@@ -6,13 +6,52 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+ # @identity
+ # essence: the station kit's ONLY source of light — a painted-metal Dieter-Rams fixture that carries a REAL Godot light. Two modes via config `mode`: "task" = an aimed SpotLight3D on a gooseneck arm that leans out over a focal bay and throws a tight pool onto ONE thing; "area" = a soft OmniLight3D in a hung housing dropped from a thin rod that fills a whole bay. A foot base on the floor (origin at the floor centre), a stem/arm up to `height`, a head with an emissive lens AND a live light node. 1 cell = 1 m.
+ # desire: to throw attention onto one thing — the kit's first piece that acts on the OTHERS, not beside them. Every other station prop sits and holds; the luminaire reaches across the room and says "this one" by lighting it, so the bay reads as a serviced inhabited place with a real source casting real shadow, not a flat emissive diorama.
+-# critical_parameter: mode × intensity — whether it is a focused task spot on a gooseneck or a soft area omni in a hung can, and how hard it pushes light; the composer matches a task spot to a single plinth and an area omni to a whole stage / bench run.
++# critical_parameter: mode × intensity — whether it is a focused task spot on a gooseneck or a soft area omni in a hung can, and how hard it pushes light; the composer matches a task spot to a single plinth and an area omni to a whole stage / bench run; upkeep — WHICH MOMENT of the bay's working life this fixture is caught in (service | works | store | scrap), the kit-wide axis shared with [[station_pillar]], [[station_crates]] and [[station_wall]].
+ # triggers: _ready/_read_metadata_overrides/_build from DNA; apply_grid_config rebuilds at a new mode / height / colour / intensity / reach; the light node + lens emission ride the mode.
+-# emerges: a gooseneck leaning over a bay reads "aimed at this work"; a hung can dropped on a rod reads "overhead room light"; a lit lens + a real cast pool reads "this is the source, the rest is consequence"; warm vs cool reads "inhabited" vs "clinical"; a Rams accent bar + caution rim read "plant, maintained".
++# emerges: a gooseneck leaning over a bay reads "aimed at this work"; a hung can dropped on a rod reads "overhead room light"; a lit lens + a real cast pool reads "this is the source, the rest is consequence"; warm vs cool reads "inhabited" vs "clinical"; a Rams accent bar + caution rim read "plant, maintained"; an open bore with the lens on a trestle reads "being re-lamped"; a bagged head reads "not in commission"; an arm ending in wire tails with the shade on the floor reads "robbed".
+ # needs: a painted-metal foot/canopy mount [present]; a gooseneck arm (task) or a drop rod + hung housing (area) [present]; an emissive lens / diffuser [present]; a REAL light node — SpotLight3D aimed down the gooseneck (task) or OmniLight3D in the housing (area) [present]; optional warm/cool tint, Rams accent bar, grime band, stencil ID [optional].
+-# relationships: the overhead, room-acting cousin of the floor-standing display pieces — it lights the [[station_plinth]] / [[station_stage]] / [[station_bench]] that [[curation_station]] composes; the standalone real-source extraction of the underside ring-light look of [[station_gantry]]; shares the HangarKit / Dieter-Rams weathered painted-metal family with the whole station kit.
++# relationships: the overhead, room-acting cousin of the floor-standing display pieces — it lights the [[station_plinth]] / [[station_stage]] / [[station_bench]] that [[curation_station]] composes; the standalone real-source extraction of the underside ring-light look of [[station_gantry]]; shares the HangarKit / Dieter-Rams weathered painted-metal family with the whole station kit; KIN of [[station_pillar]], [[station_crates]] and [[station_wall]] — one `upkeep` vocabulary across the kit, the light telling the same time as the structure and the stuff.
+ # truth: a floor makes a place to stand and a wall makes it enclosed, but a light is what makes it usable and what chooses where the eye goes. The luminaire is the kit's first honest piece of infrastructure that acts on its neighbours — to aim a real source at one artifact is attention made visible, and a lit bay is never quite empty.
+ 
++# ─────────────────────────────────────────────────────────────────────────────
++# STAGE-2 DNA CONVERGENCE (2026-08-01) — the KIT axis, adopted word for word from
++# station_pillar.gd / station_crates.gd / station_wall.gd. Read one of those blocks
++# too; the four of them are one promotion with four bodies.
++#
++# This artifact's truth line ends "a lit bay is never quite empty" — a claim about
++# a room being INHABITED. But the fixture had no time of its own. Every one of its
++# 47 placements renders the same instant: commissioned, lamped, powered, aimed. A
++# light that can only ever be on cannot say anything about whether anyone is still
++# working here; it can only say the room was handed over.
++#
++#   upkeep   WHICH MOMENT of the working life   service · works · store · scrap
++#
++#   service  in commission — the legacy lineage, byte for byte
++#   works    mid-job       — lens out on a step trestle, open bore, gear tray, loom, WORKS
++#   store    packed down   — head bagged and banded, post sleeved, lens covered, SEALED
++#   scrap    robbed        — head cut off the arm, wire tails, the shade down on the floor
++#
++# The LENS is the pivot, exactly as the groove is on the pillar and the lit seam on
++# the wall: it is the only emissive surface on the piece and it owns the brightest
++# pixels in any frame the luminaire appears in. `works` moves it to a trestle,
++# `store` buries it under the bag and `scrap` leaves it broken on the floor — three
++# different places for the hottest thing in the shot, legible from across a room
++# rather than only under measurement.
++#
++# The REAL light rides the same gate. A bagged or robbed fixture that still threw a
++# full pool would be the one dishonest thing in the kit, so `_powered()` drops
++# light_energy to 0 for `store` and `scrap`. It is an APPEARANCE change (nothing
++# here is a hazard, a trigger or a traversal dependency), but it is the one value in
++# this promotion that reaches past the mesh, and an author who dims a bay's only
++# fixture is choosing to. `service` and `works` are both powered, so the default is
++# untouched and a map lit by luminaires stays lit.
++#
++# Deliberately NOT routed through upkeep: `height`, `arm_reach` and `mode`. The
++# composer matches those to the bay being lit, so a value that moved the envelope
++# would take the fixture out of the cell it was placed in. Upkeep dresses the
++# luminaire; it never re-sites it.
++# ─────────────────────────────────────────────────────────────────────────────
++
+ @export_group("Mode")
+ ## "task" = an aimed SpotLight3D on a gooseneck arm over a focal bay | "area" = a soft OmniLight3D in a hung housing on a drop rod.
+ @export var mode: String = "task"
+@@ -37,6 +76,24 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+ ## Casts real shadows. Off by default (headless/perf); on for hero stills.
+ @export var cast_shadows: bool = false
+ 
++@export_group("Upkeep")
++## THE AXIS — which moment of the bay's working life this fixture is caught in.
++## Adopted word for word from [[station_pillar]], [[station_crates]] and
++## [[station_wall]], which already share it: one kit, one vocabulary, so a bay whose
++## corners read "packed down" cannot have a light that still reads "in commission".
++##
++##   service  in commission — the legacy lineage, byte for byte
++##   works    mid-job       — lens out on a step trestle, open bore, gear tray, loom, WORKS
++##   store    packed down   — head bagged and banded, post sleeved, lens covered, SEALED
++##   scrap    robbed        — head cut off the arm, wire tails, the shade down on the floor
++##
++## The lens is the pivot, exactly as the groove is on the pillar: it is the only
++## emissive surface on the piece, and three of the four values put the frame's
++## hottest pixels somewhere else. Neither `height` nor `arm_reach` nor `mode` moves,
++## so a bay's lighting layout survives every value.
++@export var upkeep: String = "service"
++const UPKEEPS: PackedStringArray = ["service", "works", "store", "scrap"]
++
+ @export_group("Surface")
+ ## A Dieter-Rams three-colour accent bar on the housing / foot.
+ @export var three_bar: bool = true

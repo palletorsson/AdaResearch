@@ -1,0 +1,99 @@
+diff --git a/commons/hazards/catalyst_foe/catalyst_vent.gd b/commons/hazards/catalyst_foe/catalyst_vent.gd
+index 53541615c..dc752c922 100644
+--- a/commons/hazards/catalyst_foe/catalyst_vent.gd
++++ b/commons/hazards/catalyst_foe/catalyst_vent.gd
+@@ -1,7 +1,7 @@
+ # @identity
+ # essence: vent(rate, wave_size) -> [CatalystFoe ...] -- a corruption seam in the biome that emits foes
+ # desire: to be the spawn source of the catalyst tower-defense game in VR -- a place the angry come from, visible from far away
+-# critical_parameter: emit_interval_s + wave_size -- how fast and how many foes; once wave is spent, the vent goes quiet
++# critical_parameter: warning -- how much the vent tells you BEFORE it costs you anything (beacon | none | stain | cage | shroud); emit_interval_s + wave_size still set the tempo, but tempo is not what the room argues
+ # triggers: _physics_process() ticks the timer; emits one CatalystFoe on schedule until wave_size is reached; player can transform foes after they leave the vent
+ # emerges: a column of grey orbs marching one cell at a time toward the player -- the tower-defense rhythm
+ # needs: CatalystFoe scene [has at sibling]; world ref to add foes to [has via parent]; tall pillar visual so the vent reads at any camera angle [has]
+@@ -55,6 +55,38 @@ const SequenceBinding := preload("res://commons/hazards/catalyst_sequence_bindin
+ # `e:RATE:WAVE:DELAY:auto` utility token. Explicit default_foe_mode wins.
+ @export var bind_sequence: String = ""
+ 
++# ── DNA: warning ─────────────────────────────────────────────────────
++# STAGE 2. A vent is the only object in this world whose whole job is
++# CONSEQUENCE, and the interesting variable is not how fast it emits — a
++# still cannot see a rate — but how much the room tells you before the
++# emitting costs you anything. Three of these are three different claims
++# about whether the world is fair:
++#
++#   beacon  a four-metre pillar you can read from the doorway. The world
++#           warns you in advance and expects you to have looked.
++#   none    the orb alone, at ankle height, unlit from a distance. The
++#           rule is identical; nobody wrote it down.
++#   stain   a discolouration pressed into the floor and nothing above it.
++#           The warning exists but it is addressed to your feet: you can
++#           only read it from a place you are already standing.
++#   cage    bars and a hoop. Someone knew, filed it, fenced it — and the
++#           wave emits on exactly the same clock through the bars. A world
++#           that DOCUMENTS its hazards is not a world that contains them.
++#   shroud  an opaque cover over the seam. The world knows and has decided
++#           you should not. The quietest tile and the loudest claim.
++#
++# APPEARANCE ONLY, and deliberately so: emit_interval_s, wave_size,
++# start_delay_s, require_catalyst_armed, the spawn position and the lease
++# wind-down are byte-identical across all five. A vent that hides itself
++# is not a gentler vent. That is the point of the axis.
++#
++# `beacon` IS the legacy body: _build_beacon() adds pillar, halo, orb in
++# that order with every constant lifted unchanged from the original
++# _build_visual(), and registers the same three dim handles in the same
++# order, so the lease wind-down dims exactly what it dimmed before.
++const WARNING_VALUES: Array[String] = ["beacon", "none", "stain", "cage", "shroud"]
++@export_enum("beacon", "none", "stain", "cage", "shroud") var warning: String = "beacon"
++
+ var _emitted: int = 0
+ var _timer: float = 0.0          # accumulates dt
+ var _started: bool = false       # flips true once start_delay elapses
+@@ -135,7 +167,46 @@ func _set_wound_down(down: bool) -> void:
+ 			mat.albedo_color = c
+ 
+ 
++## Dispatch on `warning`. Rebuildable: a map sends its config through
++## call_deferred("apply_grid_config", …), i.e. AFTER _ready, so this has to
++## be able to run twice. It drops the previous body first (immediately —
++## remove_child before queue_free, because the sweep measures the AABB on
++## the very next frame) and resets the dim handles the lease holds.
+ func _build_visual() -> void:
++	for child in get_children():
++		if child.is_in_group("catalyst_vent_body"):
++			remove_child(child)
++			child.queue_free()
++	_dim_mats.clear()
++	_dim_originals.clear()
++	match warning:
++		"none":
++			# The rule without the notice. Just the seam itself.
++			_build_orb()
++		"stain":
++			_build_stain()
++			_build_orb()
++		"cage":
++			_build_halo()
++			_build_orb()
++			_build_cage()
++		"shroud":
++			_build_orb()
++			_build_shroud()
++		_:
++			# "beacon" — the legacy body, in the legacy order.
++			_build_beacon()
++
++
++## The original _build_visual(), unchanged: pillar, halo, orb, and the three
++## dim handles appended in that order.
++func _build_beacon() -> void:
++	_build_pillar()
++	_build_halo()
++	_build_orb()
++
++
++func _build_pillar() -> void:
+ 	# Tall translucent grey pillar — visible from any angle, reads as
+ 	# "this is where the angry come from".
+ 	var pillar := MeshInstance3D.new()
