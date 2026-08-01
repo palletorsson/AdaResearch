@@ -9,12 +9,32 @@ class_name LabMultimeter
 # @identity
 # essence: V(t) = dc_offset + ac_amplitude * sin(ac_frequency * t * TAU) + noise * randf()
 # desire: Read voltage on a multimeter whose needle oscillates with the measured AC signal
-# critical_parameter: ac_frequency — determines the oscillation rate of the measured voltage
-# triggers: time drives the AC sine wave; noise_level adds measurement uncertainty
+# critical_parameter: record — whether the meter can still show you the reading it took a minute ago
+# triggers: time drives the AC sine wave; noise_level adds measurement uncertainty; record decides whether the tape carries ink
 # emerges: the needle as wave visualizer — watching measurement oscillate reveals the signal nature
 # needs: VR observation [has], frequency/amplitude adjustment [missing]
-# relationships: depends on sine-driven needle deflection; contrasts with electronicscales (voltage vs mass oscillation); unlocks measurement-as-wave-observation
-# truth: Every AC measurement is reading the current value of an ongoing oscillation.
+# relationships: shares the `record` axis word for word with [[seismograph]], [[atmosphericmonitoring]] and [[holographicdisplay]]; contrasts with electronicscales (voltage vs mass oscillation)
+# truth: Every AC measurement is reading the current value of an ongoing oscillation — and a meter that prints is claiming that value will still be true tomorrow.
+
+# ── RECORD ───────────────────────────────────────────────────────────────────
+# THE AXIS, shared word for word with [[seismograph]], [[atmosphericmonitoring]] and
+# [[holographicdisplay]]: what this instrument KEEPS. Not how fast the needle swings — how
+# much of the reading's past is still on the machine when you walk up to it, and whether
+# anyone has been at it.
+#
+#   instant   the needle and the LCD, and nothing else. the measurement is NOW.  ← legacy
+#   window    a tape stands out of the case, inked only near the slot
+#   archive   the tape is inked end to end, and the run-out is fanfolded on the bench
+#   margin    the archive, READ: a scale ladder, a limit band, a hand's ring
+#
+# A hand meter with a paper tape is a printing/logging DMM — the same instrument, arguing
+# that a measurement is a thing you can carry away from the bench rather than a thing you
+# had to be present for.
+#
+# NOT TOUCHED: the measurement. _process, the four modes, the noise, the needle mapping and
+# the LED all run identically at every rung. The tape is drawn by replaying the SAME four
+# mode formulas backwards in time, so the printout cannot disagree with the needle above it.
+@export_enum("instant", "window", "archive", "margin") var record: String = "instant"
 
 @export_group("Measurement")
 @export var ac_frequency: float = 1.0  # Hz
@@ -37,6 +57,7 @@ var status_led: OmniLight3D
 
 func _ready() -> void:
 	_build_multimeter()
+	_build_record()
 
 func _process(delta: float) -> void:
 	time += delta
@@ -213,3 +234,187 @@ func set_amplitude(amp: float) -> void:
 
 func get_reading() -> float:
 	return current_reading
+
+
+# ── RECORD, BUILT ────────────────────────────────────────────────────────────
+# APPENDED. Every line below is gated behind `record != "instant"`, so the legacy lineage
+# adds no node, allocates no material and takes nothing from the global RNG — the tape's
+# measurement noise comes from its own seeded RandomNumberGenerator, so it can never shift
+# a draw _process would otherwise have made.
+
+# The tape rises out of a slot in the top of the case: time runs UP the tape (newest at the
+# slot, oldest at the top) and the reading deflects left and right, which is how a paper
+# tape recorder actually writes. The carrier is identical at window / archive / margin so
+# those three share one bounding box and the capture camera frames them the same way; only
+# the ink and the marks differ.
+const REC_TAPE_W := 0.055
+const REC_TAPE_Y0 := 0.192
+const REC_TAPE_Y1 := 0.393
+const REC_TAPE_Z := 0.004
+const REC_SWING := 0.021
+const REC_DOTS := 48
+const REC_WINDOW_DOTS := 11
+const REC_DT := 0.06
+
+const REC_PAPER := Color(0.93, 0.92, 0.86)
+const REC_INK := Color(0.10, 0.10, 0.12)
+const REC_RULE := Color(0.70, 0.68, 0.62)
+const REC_BAND := Color(0.86, 0.45, 0.06)
+const REC_MARK := Color(0.80, 0.10, 0.10)
+
+var _rec_root: Node3D = null
+
+
+## A map may set the rung with `#record:archive`. Only the record layer is rebuilt; the
+## body, LCD, gauge, needle, dial, LED and probe ports are never touched.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var raw: String = ""
+	if config_data.has("record"):
+		raw = str(config_data["record"])
+	elif has_meta("config_record"):
+		raw = str(get_meta("config_record"))
+	if raw == "":
+		return
+	var want: String = raw.strip_edges().to_lower()
+	if not (want in ["instant", "window", "archive", "margin"]):
+		push_warning("multimeter: unknown record rung '%s' — keeping '%s'" % [want, record])
+		return
+	if want == record:
+		return
+	record = want
+	if _rec_root != null:
+		_rec_root.queue_free()
+		_rec_root = null
+	_build_record()
+
+
+func _build_record() -> void:
+	if record == "instant":
+		return
+	_rec_root = Node3D.new()
+	_rec_root.name = "Record"
+	add_child(_rec_root)
+
+	var full: bool = record != "window"
+
+	# The slot the tape comes out of, and the tape.
+	_rec_box(Vector3(0.0, 0.182, REC_TAPE_Z), Vector3(0.064, 0.005, 0.014), Color(0.10, 0.10, 0.13))
+	_rec_box(Vector3(0.0, (REC_TAPE_Y0 + REC_TAPE_Y1) * 0.5, REC_TAPE_Z),
+		Vector3(REC_TAPE_W, REC_TAPE_Y1 - REC_TAPE_Y0 + 0.010, 0.0012), REC_PAPER)
+
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 4152026
+	var dots := PackedFloat32Array()
+	dots.resize(REC_DOTS)
+	for j in range(REC_DOTS):
+		dots[j] = _rec_deflection(-float(j) * REC_DT, rng)
+
+	if record == "margin":
+		_rec_furniture()
+
+	var step: float = (REC_TAPE_Y1 - REC_TAPE_Y0) / float(REC_DOTS - 1)
+	var count: int = REC_DOTS if full else REC_WINDOW_DOTS
+	var peak_j: int = 0
+	for j in range(count):
+		if absf(dots[j]) > absf(dots[peak_j]):
+			peak_j = j
+	for j in range(count):
+		_rec_box(Vector3(dots[j] * REC_SWING, REC_TAPE_Y0 + float(j) * step, REC_TAPE_Z + 0.0012),
+			Vector3(0.0038, 0.0042, 0.0008), REC_INK)
+
+	if full:
+		_rec_fanfold()
+	if record == "margin":
+		_rec_hand(dots[peak_j] * REC_SWING, REC_TAPE_Y0 + float(peak_j) * step)
+
+
+## WINDOW vs ARCHIVE, on the bench: a concertina of tape that has already run through. A
+## meter switched on a minute ago has none of this; one that has been logging all shift has
+## a pile of it. It lies on the bench beside the case rather than on the tape, so the tape
+## itself stays the same object at every inked rung.
+func _rec_fanfold() -> void:
+	for i in range(5):
+		var off: float = 0.004 if (i % 2) == 0 else -0.004
+		_rec_box(Vector3(0.085 + off, 0.0032 + float(i) * 0.0042, 0.006),
+			Vector3(0.052, 0.0028, 0.048), REC_PAPER.darkened(0.03 * float(i)))
+
+
+## MARGIN, part one: the tape printed to be read AGAINST. The tape runs upward and the pen
+## swings sideways, so the LIMITS are two vertical lines the ink is meant to stay between,
+## and the TIME marks are horizontal rules across it. Plus a printed header block at the
+## top of the run and a tick ladder up both edges.
+func _rec_furniture() -> void:
+	var mid: float = (REC_TAPE_Y0 + REC_TAPE_Y1) * 0.5
+	var span: float = REC_TAPE_Y1 - REC_TAPE_Y0
+	for s in [-1.0, 1.0]:
+		_rec_box(Vector3(s * 0.0155, mid, REC_TAPE_Z + 0.0009),
+			Vector3(0.0030, span, 0.0006), REC_BAND)
+	_rec_box(Vector3(0.0, mid, REC_TAPE_Z + 0.0008), Vector3(0.0010, span, 0.0006), REC_RULE)
+	for k in range(9):
+		var y: float = lerpf(REC_TAPE_Y0, REC_TAPE_Y1, float(k) / 8.0)
+		_rec_box(Vector3(-0.0235, y, REC_TAPE_Z + 0.0010), Vector3(0.009, 0.0018, 0.0006), REC_INK)
+		_rec_box(Vector3(0.0235, y, REC_TAPE_Z + 0.0010), Vector3(0.009, 0.0018, 0.0006), REC_INK)
+	for k in range(4):
+		var yb: float = lerpf(REC_TAPE_Y0 + 0.024, REC_TAPE_Y1 - 0.024, float(k) / 3.0)
+		_rec_box(Vector3(0.0, yb, REC_TAPE_Z + 0.0007), Vector3(REC_TAPE_W - 0.004, 0.0022, 0.0006), REC_RULE)
+	_rec_box(Vector3(0.0, REC_TAPE_Y1 + 0.0035, REC_TAPE_Z + 0.0010),
+		Vector3(REC_TAPE_W - 0.003, 0.0100, 0.0006), REC_BAND)
+
+
+## MARGIN, part two: the hand. Someone ringed the largest excursion on the tape and bracketed
+## it — the moment a printout stops being output and becomes evidence.
+func _rec_hand(px: float, py: float) -> void:
+	var ring := MeshInstance3D.new()
+	var torus := TorusMesh.new()
+	torus.inner_radius = 0.0085
+	torus.outer_radius = 0.0115
+	ring.mesh = torus
+	ring.position = Vector3(px, py, REC_TAPE_Z + 0.0022)
+	ring.rotation.x = PI / 2.0
+	ring.material_override = _rec_mat(REC_MARK)
+	_rec_root.add_child(ring)
+	for s in [-1.0, 1.0]:
+		_rec_box(Vector3(0.0, py + s * 0.018, REC_TAPE_Z + 0.0022),
+			Vector3(REC_TAPE_W - 0.002, 0.0022, 0.0006), REC_MARK)
+	_rec_box(Vector3(0.0255, py, REC_TAPE_Z + 0.0022), Vector3(0.0022, 0.036, 0.0006), REC_MARK)
+
+
+## The SAME four mode formulas _process runs, evaluated at a past time and normalised to the
+## needle's own full-scale deflection, so the tape agrees with the needle above it. `tt` is
+## negative: seconds before now. Noise comes from the caller's seeded generator.
+func _rec_deflection(tt: float, rng: RandomNumberGenerator) -> float:
+	var r: float = 0.0
+	match mode:
+		0:
+			r = ac_amplitude * sin(tt * ac_frequency * TAU) + dc_offset
+			r += (rng.randf() - 0.5) * noise_level
+		1:
+			r = dc_offset + (rng.randf() - 0.5) * noise_level * 0.5
+		2:
+			r = 1000.0 + 50.0 * sin(tt * 0.3) + rng.randf() * 10.0
+		3:
+			r = ac_frequency + (rng.randf() - 0.5) * 0.01
+	match mode:
+		0, 1:
+			return clampf(r / 10.0, -1.0, 1.0)
+		2:
+			return clampf(log(maxf(r, 1.0)) / 10.0, 0.0, 1.0) * 2.0 - 1.0
+		_:
+			return clampf(r / 5.0, 0.0, 1.0) * 2.0 - 1.0
+
+
+func _rec_mat(c: Color) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.85
+	return m
+
+
+func _rec_box(center: Vector3, size: Vector3, c: Color) -> void:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = _rec_mat(c)
+	mi.position = center
+	_rec_root.add_child(mi)

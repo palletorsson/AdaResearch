@@ -41,13 +41,57 @@ extends Node3D
 @export var show_connections: bool = false
 @export var max_displacement_color: float = 0.8
 
+@export_group("Fabric")
+## AXIS — WHAT STANDS FOR THE MEDIUM in the picture.
+##
+## This artifact's own truth statement says "a wave is not a particle traveling — it is
+## a pattern of agreement across coupled cells; the lattice IS the medium." The lattice
+## then draws 144 separate balls and nothing between them: every relationship the
+## sentence is about is invisible, and coupling_strength — the export the identity block
+## calls critical — only becomes legible after seconds of propagation, which a still
+## frame does not have. So the axis is not the coupling constant. It is which PART of
+## the medium the artifact is willing to draw.
+##
+##   nodes     the legacy lineage: 144 spheres, nothing between them. The parts are
+##             shown and the coupling is left to be inferred. What ships today.
+##   bonds     a rod on every nearest-neighbour pair, following the two cells it joins.
+##             The ball-and-stick model: the relations get a body, and the field of
+##             dots becomes a woven net covering roughly a third of the plane.
+##   sheet     the spheres go dark and a single continuous skin is stretched through
+##             them, coloured by the same displacement law. The medium as ONE thing
+##             rather than a set of things — the continuum reading of the same maths.
+##   boundary  only the perimeter cells are drawn; the hundred interior ones go out.
+##             The claim that a standing mode is made by its edges, and that most of
+##             a medium is the part you are asked to take on trust.
+##
+## Nothing here changes the integration, the coupling force, the excitation or the
+## displacement colouring. Every value reads the SAME oscillators[] array the physics
+## writes; they disagree only about what a medium looks like.
+@export var fabric: String = "nodes"
+const FABRICS: PackedStringArray = ["nodes", "bonds", "sheet", "boundary"]
+const BOND_THICKNESS := 0.035
+
 # Internal data
 var oscillators: Array[Dictionary] = []
 var time: float = 0.0
 var pulse_triggered: bool = false
 
+# Fabric bodies (built only for a non-default value; null on the legacy path)
+var _bond_pairs: Array[Vector2i] = []
+var _bond_mm: MultiMeshInstance3D = null
+var _sheet: MeshInstance3D = null
+var _sheet_mesh: ImmediateMesh = null
+
 func _ready() -> void:
+	# The grid sets config metadata BEFORE add_child, so a map token lands here.
+	# An unknown word keeps the default rather than emptying the lattice.
+	if has_meta("config_fabric"):
+		var token: String = str(get_meta("config_fabric")).strip_edges().to_lower()
+		fabric = token if FABRICS.has(token) else fabric
 	_build_lattice()
+	# FABRIC, applied LAST so every Oscillator_N above keeps its index and its name.
+	# "nodes" falls through and adds nothing at all.
+	_apply_fabric()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -225,6 +269,11 @@ func _update_visualization() -> void:
 					mat.emission = color * 0.5
 					mat.emission_energy_multiplier = displacement_normalized + 0.2
 
+	# The fabric bodies follow the same displacements the spheres just took. Gated on a
+	# non-default value: on the legacy path this is one string compare and nothing else.
+	if fabric != "nodes":
+		_update_fabric()
+
 func get_displacement_at(grid_x: int, grid_y: int) -> float:
 	"""Get displacement of oscillator at grid position"""
 	if grid_x >= 0 and grid_x < lattice_size.x and grid_y >= 0 and grid_y < lattice_size.y:
@@ -259,3 +308,182 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+
+# ── FABRIC ───────────────────────────────────────────────────────────────────
+# One axis, four answers to "what is the medium, in the picture". Every value reads the
+# oscillators[] array the integrator writes and adds nothing to it: the coupling force,
+# the excitation and the displacement colour law are untouched at all four.
+
+func _apply_fabric() -> void:
+	match fabric:
+		"bonds":
+			_build_bonds()
+		"sheet":
+			_veil_oscillators(false)
+			_build_sheet()
+		"boundary":
+			_veil_oscillators(true)
+		_:
+			pass                                  # "nodes" — the legacy lineage
+
+
+func _update_fabric() -> void:
+	match fabric:
+		"bonds":
+			_update_bonds()
+		"sheet":
+			_update_sheet()
+		_:
+			pass
+
+
+## Hide oscillator bodies with layers = 0, never visible = false. These spheres have no
+## children today, but visibility resolves through is_visible_in_tree() and the habit of
+## hiding a parent is how two values elsewhere in this corpus rendered empty frames.
+## layers is per-instance, does not propagate, and leaves mesh and material alone.
+## keep_edge = true keeps the perimeter ring (the "boundary" reading); false hides all.
+func _veil_oscillators(keep_edge: bool) -> void:
+	for x in range(lattice_size.x):
+		for y in range(lattice_size.y):
+			var edge: bool = (x == 0 or y == 0
+				or x == lattice_size.x - 1 or y == lattice_size.y - 1)
+			if keep_edge and edge:
+				continue
+			var idx: int = x * lattice_size.y + y
+			var child = get_node_or_null(NodePath("Oscillator_%d" % idx))
+			if child and child is VisualInstance3D:
+				(child as VisualInstance3D).layers = 0
+
+
+## BONDS — one rod per nearest-neighbour pair, in a single MultiMesh so 264 of them cost
+## one draw call. The pair list is the same adjacency the coupling force uses, restricted
+## to the four-neighbour cross; _get_neighbors() also returns diagonals at coupling_range
+## 1, and drawing those would claim a lattice the springs do not have.
+func _build_bonds() -> void:
+	_bond_pairs.clear()
+	for x in range(lattice_size.x):
+		for y in range(lattice_size.y):
+			var idx: int = x * lattice_size.y + y
+			if x + 1 < lattice_size.x:
+				_bond_pairs.append(Vector2i(idx, (x + 1) * lattice_size.y + y))
+			if y + 1 < lattice_size.y:
+				_bond_pairs.append(Vector2i(idx, idx + 1))
+	if _bond_pairs.is_empty():
+		return
+
+	var rod: CylinderMesh = CylinderMesh.new()
+	rod.top_radius = 1.0
+	rod.bottom_radius = 1.0
+	rod.height = 1.0
+	rod.radial_segments = 6
+	rod.rings = 0
+
+	var mm: MultiMesh = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = rod
+	mm.instance_count = _bond_pairs.size()
+
+	var mat: StandardMaterial3D = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.42, 0.45, 0.72)
+	mat.metallic = 0.0
+	mat.roughness = 0.9
+	mat.emission_enabled = true
+	mat.emission = Color(0.20, 0.22, 0.52)
+	mat.emission_energy_multiplier = 0.4
+
+	_bond_mm = MultiMeshInstance3D.new()
+	_bond_mm.name = "Bonds"
+	_bond_mm.multimesh = mm
+	_bond_mm.material_override = mat
+	add_child(_bond_mm)
+	_update_bonds()
+
+
+func _update_bonds() -> void:
+	if _bond_mm == null:
+		return
+	var mm: MultiMesh = _bond_mm.multimesh
+	if mm == null:
+		return
+	for k in range(_bond_pairs.size()):
+		var pair: Vector2i = _bond_pairs[k]
+		var a: Vector3 = _osc_point(pair.x)
+		var b: Vector3 = _osc_point(pair.y)
+		var span: Vector3 = b - a
+		var length: float = span.length()
+		if length < 0.0001:
+			continue
+		var axis: Vector3 = span / length
+		# Quaternion(from, to) is the shortest-arc rotation and is undefined for an
+		# exactly antiparallel pair. Bonds are near-horizontal by construction (the
+		# cells are 0.4 m apart in X or Z and displace only in Y), so this guard is
+		# for the pathological case only.
+		if absf(axis.y) > 0.999:
+			continue
+		var turn: Basis = Basis(Quaternion(Vector3.UP, axis))
+		var shape: Basis = Basis.from_scale(Vector3(BOND_THICKNESS, length, BOND_THICKNESS))
+		mm.set_instance_transform(k, Transform3D(turn * shape, a + span * 0.5))
+
+
+## SHEET — one continuous skin through the oscillator points, rebuilt each visual update.
+## Unshaded with vertex colour so it needs no normals and reads at any light angle, and
+## double-sided so it is still a surface when you walk under the lattice. The colour law
+## is copied verbatim from _update_visualization so the skin and the spheres would agree
+## if you ever showed both.
+func _build_sheet() -> void:
+	_sheet_mesh = ImmediateMesh.new()
+	_sheet = MeshInstance3D.new()
+	_sheet.name = "Sheet"
+	_sheet.mesh = _sheet_mesh
+
+	var mat: StandardMaterial3D = StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_sheet.material_override = mat
+
+	add_child(_sheet)
+	_update_sheet()
+
+
+func _update_sheet() -> void:
+	if _sheet_mesh == null:
+		return
+	if lattice_size.x < 2 or lattice_size.y < 2:
+		return
+	_sheet_mesh.clear_surfaces()
+	_sheet_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	for x in range(lattice_size.x - 1):
+		for y in range(lattice_size.y - 1):
+			var i00: int = x * lattice_size.y + y
+			var i10: int = (x + 1) * lattice_size.y + y
+			var i01: int = i00 + 1
+			var i11: int = i10 + 1
+			_sheet_vertex(i00)
+			_sheet_vertex(i10)
+			_sheet_vertex(i11)
+			_sheet_vertex(i00)
+			_sheet_vertex(i11)
+			_sheet_vertex(i01)
+	_sheet_mesh.surface_end()
+
+
+func _sheet_vertex(idx: int) -> void:
+	var shade: float = 0.0
+	if idx >= 0 and idx < oscillators.size():
+		var d: float = oscillators[idx].displacement
+		shade = clampf(absf(d) / maxf(max_displacement_color, 0.0001), 0.0, 1.0)
+	_sheet_mesh.surface_set_color(Color.from_hsv(0.6 - shade * 0.3, 0.8, 1.0))
+	_sheet_mesh.surface_add_vertex(_osc_point(idx))
+
+
+## The live world position of one oscillator: its equilibrium seat plus the displacement
+## the integrator wrote this frame. Exactly what _update_visualization gives its sphere.
+func _osc_point(idx: int) -> Vector3:
+	if idx < 0 or idx >= oscillators.size():
+		return Vector3.ZERO
+	var osc: Dictionary = oscillators[idx]
+	var seat: Vector3 = osc.position
+	var lift: float = osc.displacement
+	return seat + Vector3(0, lift, 0)

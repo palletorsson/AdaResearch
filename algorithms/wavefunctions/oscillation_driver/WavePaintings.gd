@@ -42,6 +42,32 @@ const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_po
 @export var paint_cycle_saturation: float = 0.75
 @export var paint_cycle_value: float = 0.95
 
+## AXIS — HOW MUCH ROOM THE RECORD IS GIVEN, against the machine that makes it.
+##
+## The artifact is called WavePaintings and its truth is about chaos as art, but what
+## the room actually contains is three machines and three modest boards behind them.
+## The identity block names num_pendulums and spacing as critical; those decide how many
+## machines there are, which is a fact about the apparatus. This axis decides whether
+## the by-product is treated as documentation, as work, or as nothing — and unlike the
+## paint itself, which needs minutes of chaotic swinging to appear, the answer is in the
+## frame the instant the scene loads.
+##
+##   backdrop  the legacy lineage: a 4 m board behind each rig at working height, framed
+##             thin and dark. A surface the machine happens to be pointed at.
+##   wall      the boards blown up to 8 m and butted edge to edge into one continuous
+##             24 m field standing on the floor, the three rigs small in front of it.
+##             The mural reading: the product is the room and the machines are staff.
+##   plate     the boards shrunk to 1.2 m panels lifted to eye height. The documentary
+##             reading: the trace as a modest framed print beside the instrument.
+##   none      no boards at all. The pendulums swing, the raycasts hit nothing, and the
+##             work exists only for as long as the motion lasts.
+##
+## The frames are opaque box geometry and scale with their board, so the value is legible
+## whether or not any paint has landed yet — which on a freshly loaded scene it has not.
+## The double-pendulum equations, the initial angles and the damping are untouched.
+@export var display: String = "backdrop"
+const DISPLAYS: PackedStringArray = ["backdrop", "wall", "plate", "none"]
+
 var pendulums: Array[Node3D] = []
 var middle_index: int = 1  # Index of middle pendulum
 
@@ -54,12 +80,20 @@ var _paint_surfaces: Array[Node] = []
 var _paint_time: float = 0.0
 
 func _ready() -> void:
+	# The grid sets config metadata BEFORE add_child, so a map token lands here.
+	# An unknown word keeps the default rather than striking the canvases.
+	if has_meta("config_display"):
+		var token: String = str(get_meta("config_display")).strip_edges().to_lower()
+		display = token if DISPLAYS.has(token) else display
 	_spawn_pendulums()
 	if enable_middle_interaction:
 		_setup_middle_grabbable()
 	_setup_camera()
 	_setup_environment()
 	_create_title()
+	# DISPLAY, applied LAST so the rigs, the canvases and their frames are all built
+	# exactly as before and only then restaged. "backdrop" falls through untouched.
+	_apply_display()
 
 func _spawn_pendulums() -> void:
 	var total_width = (num_pendulums - 1) * spacing
@@ -453,3 +487,47 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+
+# ── DISPLAY ──────────────────────────────────────────────────────────────────
+# One axis, four settlements of the same argument about what the by-product is worth.
+# Applied by moving and scaling the DrawingCanvas node itself: the frame built by
+# _add_canvas_frame() is a descendant of it, so a board and its frame always agree.
+
+func _apply_display() -> void:
+	match display:
+		"wall":
+			# 8 m boards at x = -8, 0, 8 meet exactly, and the bottom edge sits on the
+			# floor at y = 0.1 rather than floating at working height.
+			_restage_canvases(4.0, 4.1, -2.2)
+		"plate":
+			_restage_canvases(0.6, 1.6, -1.2)
+		"none":
+			_strike_canvases()
+		_:
+			pass                                  # "backdrop" — the legacy lineage
+
+
+func _restage_canvases(board_scale: float, height: float, depth: float) -> void:
+	for pendulum in pendulums:
+		var canvas: Node3D = pendulum.get_node_or_null("DrawingCanvas")
+		if canvas == null:
+			continue
+		# scale, not the basis: the board is rotated upright in DoublePendulum.tscn and
+		# assigning Node3D.scale keeps that rotation.
+		canvas.scale = Vector3.ONE * board_scale
+		canvas.position.y = height
+		canvas.position.z = depth
+
+
+## NONE — the boards removed outright rather than hidden. Hiding would have to happen on
+## the DrawingCanvas node, which is a parent, and visibility resolves through the tree:
+## the paint surface, its collision body and its frame would all go with it whether or
+## not that was meant. Freeing says what is meant. _paint_surfaces is cleared first so
+## _update_paint_colors has nothing stale to walk.
+func _strike_canvases() -> void:
+	_paint_surfaces.clear()
+	for pendulum in pendulums:
+		var canvas: Node3D = pendulum.get_node_or_null("DrawingCanvas")
+		if canvas != null:
+			canvas.queue_free()

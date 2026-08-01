@@ -9,12 +9,35 @@ class_name LabHolographicDisplay
 # @identity
 # essence: hologram(t) = content * (1 + scale_pulse * sin(2*TAU*t)) + bob * sin(1.5*TAU*t)
 # desire: Observe a floating holographic projection that bobs and pulses with subtle oscillation
-# critical_parameter: scan_frequency — controls the speed of the scanning line across the hologram
-# triggers: time drives vertical bob, scale pulse, scan line sweep, and flicker effects
+# critical_parameter: record — whether the projection is a live view or a long exposure
+# triggers: time drives vertical bob, scale pulse, scan line sweep, and flicker effects; record decides how much of the turn is drawn at once
 # emerges: the illusion of a sci-fi hologram from layered sine-driven animation
 # needs: VR observation [has], content swap [missing], glitch trigger [has]
-# relationships: depends on multi-sine animation layering; contrasts with microscope (hologram vs optical instrument); unlocks sci-fi lab aesthetic
-# truth: A hologram is light structured by interference — oscillation made visible as projection.
+# relationships: shares the `record` axis word for word with [[seismograph]], [[multimeter]] and [[atmosphericmonitoring]]; contrasts with microscope (hologram vs optical instrument)
+# truth: A hologram is light structured by interference — oscillation made visible as projection. A display that keeps nothing is a window; one that keeps its own past is an instrument.
+
+# ── RECORD ───────────────────────────────────────────────────────────────────
+# THE AXIS, shared word for word with [[seismograph]], [[multimeter]] and
+# [[atmosphericmonitoring]]: what this instrument KEEPS. The other three grow paper; this
+# one has no paper, so it keeps its record in the same medium it displays in — light. That
+# is the interesting case in the family, because it is the one where the record and the
+# reading are made of the same stuff and you have to be told which is which.
+#
+#   instant   one cube, the pose it is in now. a window.                     ← legacy
+#   window    a short wake — three dimmer copies trailing the live pose
+#   archive   the whole turn drawn at once: twelve poses, a shell of edges
+#   margin    the archive, READ: graticule rings, a tick bezel, two caliper marks
+#
+# It is a long exposure, not a motion blur: every pose in the shell is a pose the cube
+# genuinely holds, drawn from the same twelve edges and eight corners as the live one. The
+# wake rotates WITH the content (so `window` reads as trailing it); the graticule does not,
+# because the reader's marks belong to the room and not to the thing being measured.
+#
+# NOT TOUCHED: the projection. The rotation, bob, scale pulse, scan line, flicker, emitter
+# glow and projector phases all run identically at every rung, and every added node lives
+# outside HologramContent so _set_hologram_opacity cannot reach it and it cannot reach the
+# flicker.
+@export_enum("instant", "window", "archive", "margin") var record: String = "instant"
 
 @export_group("Hologram")
 @export var scan_frequency: float = 2.0  # Hz
@@ -37,13 +60,18 @@ var projector_lights: Array[SpotLight3D] = []
 
 func _ready() -> void:
 	_build_display()
+	_build_record()
 
 func _process(delta: float) -> void:
 	time += delta
-	
+
 	# Hologram rotation
 	if hologram_content:
 		hologram_content.rotation.y += rotation_speed * delta * TAU
+		# The wake follows the pose it is a wake OF. Null at record:instant, so the legacy
+		# lineage never reaches this. The graticule lives on a separate, unturned node.
+		if _rec_wake != null:
+			_rec_wake.rotation.y = hologram_content.rotation.y
 		
 		# Vertical bob
 		var bob = vertical_oscillation * sin(time * 1.5 * TAU)
@@ -252,3 +280,155 @@ func trigger_glitch() -> void:
 	flicker_intensity = 0.8
 	await get_tree().create_timer(0.3).timeout
 	flicker_intensity = original_flicker
+
+
+# ── RECORD, BUILT ────────────────────────────────────────────────────────────
+# APPENDED. Every line below is gated behind `record != "instant"`, so the legacy lineage
+# adds no node and allocates no material.
+
+## The poses drawn behind the live one, per rung. `window` is a wake of three; `archive` is
+## the whole turn, twelve poses at thirty degrees, which for a cube closes into a shell.
+const REC_WAKE_STEP := 18.0
+const REC_WAKE_POSES := 3
+const REC_TURN_POSES := 12
+const REC_CUBE := 0.08
+const REC_EDGE := 0.003
+const REC_MARK := Color(0.86, 0.45, 0.06)
+
+var _rec_wake: Node3D = null
+var _rec_marks: Node3D = null
+
+
+## A map may set the rung with `#record:archive`. Only the record layer is rebuilt; the base,
+## emitter ring, projectors, HologramContent and scan line are never touched.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var raw: String = ""
+	if config_data.has("record"):
+		raw = str(config_data["record"])
+	elif has_meta("config_record"):
+		raw = str(get_meta("config_record"))
+	if raw == "":
+		return
+	var want: String = raw.strip_edges().to_lower()
+	if not (want in ["instant", "window", "archive", "margin"]):
+		push_warning("holographicdisplay: unknown record rung '%s' — keeping '%s'" % [want, record])
+		return
+	if want == record:
+		return
+	record = want
+	if _rec_wake != null:
+		_rec_wake.queue_free()
+		_rec_wake = null
+	if _rec_marks != null:
+		_rec_marks.queue_free()
+		_rec_marks = null
+	_build_record()
+
+
+func _build_record() -> void:
+	if record == "instant":
+		return
+	_rec_wake = Node3D.new()
+	_rec_wake.name = "RecordWake"
+	_rec_wake.position = Vector3(0, 0.15, 0)
+	add_child(_rec_wake)
+
+	if record == "window":
+		# A wake: three poses the cube has just left, each dimmer than the one in front of it.
+		for i in range(REC_WAKE_POSES):
+			var fade: float = 1.0 - float(i) / float(REC_WAKE_POSES + 1)
+			_rec_cube(deg_to_rad(-REC_WAKE_STEP * float(i + 1)),
+				_rec_holo(0.30 * fade, 0.75 * fade))
+	else:
+		# The whole turn at once. Every pose is one the cube genuinely holds; drawn together
+		# they close into a shell, which is what a long exposure of a turning object is.
+		var mat: StandardMaterial3D = _rec_holo(0.22, 0.55)
+		for i in range(REC_TURN_POSES):
+			_rec_cube(TAU * float(i) / float(REC_TURN_POSES), mat)
+
+	if record == "margin":
+		_rec_graticule()
+
+
+## One pose of the cube: the same twelve edges and eight corners as the live one, built with
+## explicit axis rotations rather than look_at, so no node needs to be inside the tree first.
+func _rec_cube(yaw: float, mat: StandardMaterial3D) -> void:
+	var pose := Node3D.new()
+	pose.rotation.y = yaw
+	_rec_wake.add_child(pose)
+	var h: float = REC_CUBE * 0.5
+	for sa in [-1.0, 1.0]:
+		for sb in [-1.0, 1.0]:
+			# four edges along X, four along Y, four along Z
+			_rec_bar(pose, Vector3(0.0, sa * h, sb * h), Vector3(0.0, 0.0, PI / 2.0), mat)
+			_rec_bar(pose, Vector3(sa * h, 0.0, sb * h), Vector3.ZERO, mat)
+			_rec_bar(pose, Vector3(sa * h, sb * h, 0.0), Vector3(PI / 2.0, 0.0, 0.0), mat)
+
+
+func _rec_bar(parent: Node3D, pos: Vector3, rot: Vector3, mat: StandardMaterial3D) -> void:
+	var mi := MeshInstance3D.new()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = REC_EDGE
+	cyl.bottom_radius = REC_EDGE
+	cyl.height = REC_CUBE
+	cyl.radial_segments = 6
+	mi.mesh = cyl
+	mi.position = pos
+	mi.rotation = rot
+	mi.material_override = mat
+	parent.add_child(mi)
+
+
+## MARGIN: the reader's marks. Three graticule rings the shell can be measured against, a
+## tick bezel round the foot of it, and two caliper bars picking out one sector. These sit
+## on their own node and do NOT turn with the content — the marks belong to the room.
+func _rec_graticule() -> void:
+	_rec_marks = Node3D.new()
+	_rec_marks.name = "RecordMarks"
+	add_child(_rec_marks)
+	var mat: StandardMaterial3D = _rec_holo(0.55, 1.6, REC_MARK)
+	for y in [0.112, 0.150, 0.188]:
+		var ring := MeshInstance3D.new()
+		var torus := TorusMesh.new()
+		torus.inner_radius = 0.0665
+		torus.outer_radius = 0.0690
+		ring.mesh = torus
+		ring.position = Vector3(0, y, 0)
+		ring.material_override = mat
+		_rec_marks.add_child(ring)
+	for k in range(24):
+		var a: float = TAU * float(k) / 24.0
+		var tick := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = Vector3(0.011, 0.0018, 0.0018)
+		tick.mesh = bm
+		tick.position = Vector3(cos(a) * 0.077, 0.112, sin(a) * 0.077)
+		tick.rotation.y = -a
+		tick.material_override = mat
+		_rec_marks.add_child(tick)
+	for a2 in [0.0, PI * 0.5]:
+		var cal := MeshInstance3D.new()
+		var cb := BoxMesh.new()
+		cb.size = Vector3(0.036, 0.0030, 0.0030)
+		cal.mesh = cb
+		cal.position = Vector3(cos(a2) * 0.088, 0.112, sin(a2) * 0.088)
+		cal.rotation.y = -a2
+		cal.material_override = mat
+		_rec_marks.add_child(cal)
+
+
+## The hologram's own look — unshaded, alpha, emissive — at a given opacity and energy. Same
+## material family as _create_hologram_cube, so a recorded pose is made of the same light as
+## a live one. A fresh material each call: these must never be reached by the flicker, which
+## rewrites albedo alpha on HologramContent's children every frame.
+func _rec_holo(alpha: float, energy: float, tint: Color = Color(-1, -1, -1)) -> StandardMaterial3D:
+	var c: Color = hologram_color if tint.r < 0.0 else tint
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(c.r, c.g, c.b, alpha)
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return m

@@ -41,6 +41,33 @@ extends Node3D
 @export var animate_at_runtime: bool = false
 @export var animation_speed: float = 0.05  # Very slow animation
 
+## AXIS — WHAT THE WALL IS MADE OF, which is the same as asking what a wave IS.
+##
+## The corridor computes a 200 x 64 grid of samples and then hides that grid completely
+## under a continuous triangulated skin: you walk between two smooth solids and the sampling
+## that produced them is invisible. That is one answer, and it is the default. It is not the
+## only one, and the others are not decoration — each is a different claim about what the
+## thing standing there actually is.
+##
+##   skin      the legacy lineage, byte for byte — every quad emitted, a closed surface.
+##             The wave as an object: continuous, seamless, the arithmetic denied.
+##   ribs      only every other run of four columns survives, so the wall becomes ~25
+##             vertical fins with air between them. The wave as a FAMILY OF PROFILES — the
+##             same section repeated at intervals, which is how a wave is actually drawn.
+##             You can see the far wall through the near one, so the phase offset the
+##             corridor teaches becomes legible for the first time.
+##   strata    the same cut taken horizontally: bands of four rows, gaps between. The wave
+##             as a stack of contours, the way a curved surface is really fabricated.
+##   lattice   both cuts at once and almost nothing left: a cage of mullions and rails
+##             standing on the sample lines. The wave as its own measuring grid, with the
+##             surface withheld.
+##
+## Same vertices, same displacement function, same colours — the mathematics is not touched.
+## What changes is which quads are emitted, and therefore whether the corridor presents a
+## result or admits a method.
+@export_enum("skin", "ribs", "strata", "lattice") var cut: String = "skin"
+const FABRICS: PackedStringArray = ["skin", "ribs", "strata", "lattice"]
+
 var _left_wall: MeshInstance3D
 var _right_wall: MeshInstance3D
 var _floor: MeshInstance3D
@@ -53,9 +80,18 @@ var _floor_material: StandardMaterial3D
 var _last_signature: String = ""
 
 func _ready() -> void:
+	_read_dna_meta()
 	_ensure_nodes()
 	_build_corridor()
 	_update_process_state()
+
+
+## The grid sets `config_*` metadata BEFORE add_child, so this runs ahead of the build and an
+## unknown word keeps the default. No metadata, no change.
+func _read_dna_meta() -> void:
+	if has_meta("config_fabric"):
+		var f: String = str(get_meta("config_fabric")).strip_edges().to_lower()
+		cut = f if FABRICS.has(f) else cut
 
 func rebuild_corridor() -> void:
 	_ensure_nodes()
@@ -228,6 +264,10 @@ func _create_wall_mesh(side: int, half_length: float, half_width: float, half_he
 		var right_uvs: PackedVector2Array = uv_columns[col + 1]
 
 		for row in range(rows - 1):
+			# FABRIC gate. On "skin" this is always true and the vertex stream below is
+			# emitted in full, exactly as before.
+			if not _fabric_keeps(col, row):
+				continue
 			var v00: Vector3 = left_positions[row]
 			var v10: Vector3 = right_positions[row]
 			var v11: Vector3 = right_positions[row + 1]
@@ -305,7 +345,7 @@ func _evaluate_color(displacement: float) -> Color:
 	return color
 
 func _make_signature() -> String:
-	return str(columns, rows, corridor_length, corridor_width, corridor_height, base_frequency, base_amplitude, left_wall_frequency_multiplier, left_wall_amplitude_multiplier, phase, phase_offset_between_walls, wave_layers, bottom_color, mid_color, top_color, enable_collision, use_plush_shader)
+	return str(columns, rows, corridor_length, corridor_width, corridor_height, base_frequency, base_amplitude, left_wall_frequency_multiplier, left_wall_amplitude_multiplier, phase, phase_offset_between_walls, wave_layers, bottom_color, mid_color, top_color, enable_collision, use_plush_shader, cut)
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -332,4 +372,34 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Only the DNA axis is read here; every other key is ignored exactly as before. The grid
+	# calls this deferred, after _ready, so _read_dna_meta has normally applied the same
+	# value already and the guard below makes this a no-op.
+	if config.has("cut"):
+		var f: String = str(config["cut"]).strip_edges().to_lower()
+		var picked: String = f if FABRICS.has(f) else cut
+		if picked != cut:
+			cut = picked
+			rebuild_corridor()
+
+
+# ── FABRIC ───────────────────────────────────────────────────────────────────────────────
+# Appended LAST. The default "skin" falls through to `_` and keeps every quad, so the mesh
+# built on the legacy path is vertex-for-vertex what it was. Nothing here touches the
+# displacement function, the colour ramp or the sample grid — only which cells of that grid
+# are given a surface.
+
+## The moduli are in SAMPLE units, not metres, so a fin stays a fin whatever corridor_length
+## and columns are set to. At the shipped 8 m / 200 columns / 64 rows: twelve fins about
+## 24 cm wide, eight bands about 25 cm tall, and a lattice of 12 cm mullions around roughly
+## half-metre openings — all of them tens of pixels at the sweep's framing, not hairlines.
+func _fabric_keeps(col: int, row: int) -> bool:
+	match cut:
+		"ribs":
+			return (col % 16) < 6
+		"strata":
+			return (row % 8) < 4
+		"lattice":
+			return ((col % 15) < 3) or ((row % 12) < 3)
+		_:
+			return true

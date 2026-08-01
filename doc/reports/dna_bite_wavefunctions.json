@@ -1,0 +1,292 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "wavefunctions-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "GlassRack",
+   "axis": "admission",
+   "frame": 0.07363,
+   "focus": 0.38062,
+   "verdict": "bites",
+   "subject": 0.0609,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "seismograph",
+   "axis": "record",
+   "frame": 0.08185,
+   "focus": 0.52634,
+   "verdict": "bites",
+   "subject": 0.1216,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "chladni_plate",
+   "axis": "deposit",
+   "frame": 0.02993,
+   "focus": 0.16505,
+   "verdict": "bites",
+   "subject": 0.06156,
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "figure",
+     "b": "none",
+     "focus": 0.02968,
+     "rgb": 0.03443
+    }
+   ],
+   "colour_only": []
+  },
+  {
+   "artifact": "foucault_pendulum",
+   "axis": "interference",
+   "frame": 0.05955,
+   "focus": 0.38832,
+   "verdict": "bites",
+   "subject": 0.03738,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "Rack303Acid",
+   "axis": "machinery",
+   "frame": 0.15745,
+   "focus": 0.48149,
+   "verdict": "bites",
+   "subject": 0.09883,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "RackSineBasic",
+   "axis": "machinery",
+   "frame": 0.12573,
+   "focus": 0.47567,
+   "verdict": "bites",
+   "subject": 0.09137,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "coupled_oscillator_lattice",
+   "axis": "fabric",
+   "frame": 0.07073,
+   "focus": 0.19772,
+   "verdict": "bites",
+   "subject": 0.03754,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "sine_wall_corridor",
+   "axis": "cut",
+   "frame": 0.03979,
+   "focus": 0.11258,
+   "verdict": "WEAK",
+   "subject": 0.0898,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "bernini_columns",
+   "axis": "colonnade",
+   "frame": 0.08221,
+   "focus": 0.27069,
+   "verdict": "bites",
+   "subject": 0.06094,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "kusama_sine",
+   "axis": "obsession",
+   "frame": 0.03778,
+   "focus": 0.13798,
+   "verdict": "bites",
+   "subject": 0.02039,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "hallway_scene",
+   "axis": "element",
+   "frame": 0.11108,
+   "focus": 0.29449,
+   "verdict": "bites",
+   "subject": 0.9952,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "braid",
+     "b": "vault",
+     "focus": 0.0549,
+     "rgb": 1.0
+    }
+   ]
+  },
+  {
+   "artifact": "sine_cylinder_staircase",
+   "axis": "provision",
+   "frame": 0.07239,
+   "focus": 0.28468,
+   "verdict": "bites",
+   "subject": 0.04813,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "cable_builder",
+   "axis": "slack",
+   "frame": 0.03029,
+   "focus": 0.1262,
+   "verdict": "bites",
+   "subject": 0.01027,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "line_builder_3d",
+   "axis": "slack",
+   "frame": 0.02919,
+   "focus": 0.11537,
+   "verdict": "WEAK",
+   "subject": 0.01211,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "BigPipeSystem",
+   "axis": "slack",
+   "frame": 0.06542,
+   "focus": 0.31686,
+   "verdict": "bites",
+   "subject": 0.05547,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "chord",
+     "b": "spline",
+     "focus": 0.05511,
+     "rgb": 0.12192
+    }
+   ]
+  },
+  {
+   "artifact": "multimeter",
+   "axis": "record",
+   "frame": 0.11027,
+   "focus": 0.5077,
+   "verdict": "bites",
+   "subject": 0.05078,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "atmosphericmonitoring",
+   "axis": "record",
+   "frame": 0.15133,
+   "focus": 0.44242,
+   "verdict": "bites",
+   "subject": 0.11391,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "holographicdisplay",
+   "axis": "record",
+   "frame": 0.02061,
+   "focus": 0.09045,
+   "verdict": "WEAK",
+   "subject": 0.0498,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "WavePaintings",
+   "axis": "display",
+   "frame": 0.11442,
+   "focus": 0.3073,
+   "verdict": "bites",
+   "subject": 0.0625,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "biomagneticresonator",
+   "axis": "series",
+   "frame": 0.15263,
+   "focus": 0.6093,
+   "verdict": "bites",
+   "subject": 0.05605,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "samplevialrack",
+   "axis": "admission",
+   "frame": 0.03977,
+   "focus": 0.31527,
+   "verdict": "bites",
+   "subject": 0.01824,
+   "pairs": 12,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "samplevialrack",
+   "axis": "inscription",
+   "frame": 0.01173,
+   "focus": 0.10788,
+   "verdict": "WEAK",
+   "subject": 0.01824,
+   "pairs": 4,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "level",
+     "b": "none",
+     "focus": 0.03665,
+     "rgb": 0.0682
+    }
+   ]
+  },
+  {
+   "artifact": "chemicalapparatus",
+   "axis": "admission",
+   "frame": 0.06794,
+   "focus": 0.49584,
+   "verdict": "bites",
+   "subject": 0.04816,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  }
+ ]
+}

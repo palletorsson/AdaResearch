@@ -91,6 +91,34 @@ class_name FoucaultPendulum
 ## Height of the trail line above the canvas surface
 @export_range(0.001, 0.1, 0.001) var draw_height: float = 0.01
 
+@export_category("Staging")
+## AXIS — WHAT ELSE IS ALLOWED TO TOUCH THE SWING.
+##
+## This axis was not invented; it was already here, unnamed, spread across five
+## exports that the scene file flips as one gesture. foucault_pendulum.gd ships
+## gravity_spheres_enabled = true, num_gravity_spheres = 8, sphere_gravity_strength = 0.5
+## and show_frame = true; foucault_pendulum.tscn — the thing that actually renders —
+## sets all four the other way. That is one decision wearing four names, and the
+## decision is about the STATUS OF THE PROOF. Foucault's claim only works if nothing
+## but gravity and the turning floor is in contact with the wire. Everything below
+## either honours that or deliberately spoils it.
+##
+##   none        the scene's lineage, byte for byte: bare canvas, no rim, no bodies.
+##               The pendulum, the Earth, and a sheet of paper. Nothing to blame.
+##   fence       the canvas gains its 0.4 m rim: the trace is walled off from the
+##               room. Protection, and the first admission that the room is a threat.
+##   attractors  eight grabbable emissive masses ringed outside the rim, pulling on
+##               the bob by inverse square. The proof becomes an apparatus you may
+##               interfere with — and the rosette becomes an argument you can lose.
+##   swarm       sixteen smaller masses crowded ONTO the canvas itself. The signal
+##               is still there and can no longer be read out of the trace.
+##
+## The pivot is the ring of spheres: they are the only emissive bodies in the scene
+## and they double the artifact's footprint, so the value reads from across a room.
+## The precession mathematics — Ω × sin(latitude) — is untouched at every value.
+@export var interference: String = "none"
+const INTERFERENCES: PackedStringArray = ["none", "fence", "attractors", "swarm"]
+
 # State
 var theta: float = 0.0  # Swing angle
 var omega: float = 0.0  # Angular velocity
@@ -120,6 +148,12 @@ var _trail_mat: StandardMaterial3D
 var _gravity_sphere_mat: StandardMaterial3D
 
 func _ready() -> void:
+	# The grid sets config metadata BEFORE add_child, so an axis token from a map
+	# token lands here. An unknown word keeps the default.
+	if has_meta("config_interference"):
+		var token: String = str(get_meta("config_interference")).strip_edges().to_lower()
+		interference = token if INTERFERENCES.has(token) else interference
+
 	# Initialize state
 	theta = initial_amplitude
 	omega = 0.0
@@ -149,6 +183,10 @@ func _ready() -> void:
 	_create_labels()
 	_create_debug_visuals()
 	_update_pendulum_visual()
+
+	# INTERFERENCE, applied LAST so every child index above it is exactly where the
+	# legacy build put it. "none" falls through and adds nothing at all.
+	_apply_interference()
 
 	print("FoucaultPendulum ready - latitude: ", latitude, "° | precession = Earth × sin(lat)")
 
@@ -424,12 +462,15 @@ func _create_earth_ring() -> void:
 	# Compass markers removed - cleaner visualization
 
 
-func _create_gravity_spheres() -> void:
+## ring_gap defaults to the legacy 0.8, so the existing call site is unchanged. Only
+## interference = "swarm" passes anything else (a negative gap, which brings the masses
+## inside the canvas edge instead of standing them off it).
+func _create_gravity_spheres(ring_gap: float = 0.8) -> void:
 	if not gravity_spheres_enabled:
 		return
 
 	var SIMPLE_GRAB_SPHERE = load("res://commons/primitives/point/simple_grab_sphere.tscn")
-	var ring_radius = canvas_size / 2.0 + 0.8
+	var ring_radius = canvas_size / 2.0 + ring_gap
 
 	# Shared material for all gravity sphere visuals
 	_gravity_sphere_mat = StandardMaterial3D.new()
@@ -828,3 +869,46 @@ func clear_trail() -> void:
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	pass
+
+
+# ── INTERFERENCE ─────────────────────────────────────────────────────────────
+# One axis, four settings of a decision the scene file was already making across five
+# exports. Built entirely from the builders that were already here — _add_canvas_frame()
+# and _create_gravity_spheres() — because the point is to NAME the mode, not to invent
+# a new one. Nothing here touches the pendulum equation or the precession rate.
+
+func _apply_interference() -> void:
+	match interference:
+		"fence":
+			_stage_rim()
+		"attractors":
+			_stage_rim()
+			_stage_masses(8, 0.5, sphere_radius, 0.8)
+		"swarm":
+			_stage_rim()
+			_stage_masses(16, 0.35, 0.18, -1.4)
+		_:
+			pass                                  # "none" — the scene's lineage
+
+
+## The canvas rim. show_frame is false in the scene, so _add_canvas_frame() never ran
+## during _ready and calling it now simply appends the four walls. Guarded so a
+## placement that already asked for the frame does not get a second set on top.
+func _stage_rim() -> void:
+	if show_frame:
+		return
+	show_frame = true
+	_add_canvas_frame()
+
+
+## The attracting bodies. Guarded on an empty array for the same reason: a map that
+## already turned gravity_spheres_enabled on got its ring during _ready, and a second
+## ring would double every mass silently.
+func _stage_masses(count: int, pull: float, radius: float, ring_gap: float) -> void:
+	if not _gravity_spheres.is_empty():
+		return
+	gravity_spheres_enabled = true
+	num_gravity_spheres = count
+	sphere_gravity_strength = pull
+	sphere_radius = radius
+	_create_gravity_spheres(ring_gap)

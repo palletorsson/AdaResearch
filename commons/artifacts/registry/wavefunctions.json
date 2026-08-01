@@ -115,6 +115,17 @@
    }
   },
   "BigPipe": {
+   "dna": {
+    "axes": {
+    "slack": [
+    "spline",
+    "chord",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Large drain pipe system with segments. Turtle commands: f,l,r,u,d,s(s-bend). Use BigPipe#path:f,f,l,f,u,f",
@@ -212,6 +223,21 @@
    }
   },
   "BigPipeSystem": {
+   "dna": {
+     "fixture": {
+     "auto_build": true,
+     "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json"
+     },
+    "axes": {
+    "slack": [
+    "spline",
+    "chord",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Industrial drain pipe network built from modular segments — straights, corners, T-junctions, crosses, vertical bends. Pipes as frozen flow: the physical infrastructure that channels movement. WFC-adjacent: each segment constrains its neighbors.",
@@ -307,6 +333,17 @@
    "qfep_connection": "oscillation: the organ's logic at room scale — pipes whose lengths ARE their pitches; geometry as tuning, the building as instrument."
   },
   "BigPipe_CrossManifold": {
+   "dna": {
+    "axes": {
+    "slack": [
+    "spline",
+    "chord",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "expert",
    "description": "Central cross junction with four capped branches — distribution hub.",
@@ -397,6 +434,17 @@
    ]
   },
   "BigPipe_IndustrialBranch": {
+   "dna": {
+    "axes": {
+    "slack": [
+    "spline",
+    "chord",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Full demo of all pipe segments: S-bend, T-junction, cross, vertical up/down, end cap.",
@@ -485,6 +533,17 @@
    ]
   },
   "BigPipe_LBend": {
+   "dna": {
+    "axes": {
+    "slack": [
+    "spline",
+    "chord",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Right-angle corner routing with straight runs on each side.",
@@ -573,6 +632,17 @@
    ]
   },
   "BigPipe_Serpentine": {
+   "dna": {
+    "axes": {
+    "slack": [
+    "spline",
+    "chord",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Back-and-forth pipe runs for cooling or heating pattern.",
@@ -662,6 +732,17 @@
    ]
   },
   "BigPipe_StraightRun": {
+   "dna": {
+    "axes": {
+    "slack": [
+    "spline",
+    "chord",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Capped pipeline — simple industrial backbone.",
@@ -750,6 +831,17 @@
    ]
   },
   "BigPipe_TDistribution": {
+   "dna": {
+    "axes": {
+    "slack": [
+    "spline",
+    "chord",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Main line splits into two branches via T-junction.",
@@ -838,6 +930,17 @@
    ]
   },
   "BigPipe_VerticalBypass": {
+   "dna": {
+    "axes": {
+    "slack": [
+    "spline",
+    "chord",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Main line with vertical up-and-over bypass loop.",
@@ -1699,6 +1802,16 @@
    }
   },
   "GlassRack": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Modular laboratory glassware system. Configurable spiral condensers, wobbly tubes, flasks, junctions. Use #config:spiral_tube, #config:spiral_condenser, #config:distillation_rack, or #config:simple_tube. Turtle path commands: f,l,r,u,d,spiral,wobbly,flask,junction.",
@@ -1824,6 +1937,16 @@
    "qfep_connection": "oscillation: the glass rack chassis — the eurorack made walkable; modules at body height, patching as architecture."
   },
   "GlassRack_BranchingCondenser": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Y-pipe splits flow into two parallel spiral condensers, then recombines.",
@@ -1928,6 +2051,16 @@
    "qfep_connection": "An L-system bracket string — ypipe, [, l, spiral, ] — compiles into glassware: flow forks into two spiral condensers and is made to recombine at a second Y. Chemistry apparatus written in the same grammar as a tree, the ypipe standing where a plant would put branching."
   },
   "GlassRack_BreakingBadCoffee": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Multi-level cold drip coffee / distillation apparatus with metal frame.",
@@ -2032,6 +2165,16 @@
    "qfep_connection": "The one preset that abandons the turtle: vessels are placed by explicit coordinate on a three-level metal frame instead of grown from a path string. Pop-culture apparatus turns out to need scaffolding — where the sibling racks are grammar, this one is stagecraft."
   },
   "GlassRack_ComplexApparatus": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Complete reflux apparatus with boiling flask, condenser, collection vessel, and branching tubes.",
@@ -2136,6 +2279,16 @@
    "qfep_connection": "Reflux written as a parts list: flask, riser, tee-junction, condenser, each a JSON segment snapped to the next by ports. The instrument chemistry uses to separate mixtures is itself assembled from a mixture-free grammar — purification all the way down."
   },
   "GlassRack_DistillationRack": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Classic distillation setup with flask, spiral condenser, and collection vessel.",
@@ -2240,6 +2393,16 @@
    "qfep_connection": "An entire distillation rig in eight turtle words — flask, forward, up, spiral, down, forward, forward, flask — walked into glass. Separation by boiling point, science's great sorting ritual, encoded as a sentence a child's turtle could speak."
   },
   "GlassRack_DistillationY": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Simple Y-branch with two spiral condensers feeding into beakers.",
@@ -2344,6 +2507,16 @@
    "qfep_connection": "The config carries an ASCII schematic and legend beside the executable path string — the same apparatus written twice, once for the reader, once for the turtle. A beginner's Y-branch that admits what notation always is: a diagram for humans strapped to a tape for machines."
   },
   "GlassRack_FractionalDistillation": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Multi-stage distillation with reducers and collection points.",
@@ -2448,6 +2621,16 @@
    "qfep_connection": "Fractionation is the same turtle sentence grown longer: two spirals, two reducers, more stations where the mixture must declare itself. Finer separation costs more grammar — purity is bought one clause at a time."
   },
   "GlassRack_RefluxApparatus": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Flask with condenser and U-bend return for continuous reflux.",
@@ -2552,6 +2735,16 @@
    "qfep_connection": "Rise, condense, U-turn, descend: a vertical loop spelled as a one-way string of eight tokens. The turtle never repeats itself, yet what it builds is a circuit — the recursion belongs to the liquid, not to the notation."
   },
   "GlassRack_SbendManifold": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "expert",
    "description": "Multiple S-bends creating an offset distribution manifold.",
@@ -2658,6 +2851,16 @@
    "qfep_connection": "Two S-bends stagger the stream before a cross splits it into three dripping branches — distribution engineered as accumulated detour. Rated expert, but expert the way bureaucracy is: complexity made entirely of routing, with no new part anywhere in it."
   },
   "GlassRack_SimpleTube": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Basic straight tube with a bend.",
@@ -2762,6 +2965,16 @@
    "qfep_connection": "Four tokens — f, f, r, f — and the entire glassware grammar is already present: forward, forward, turn, forward, rendered in borosilicate with liquid flowing. The minimal utterance of a language whose longer sentences build distilleries."
   },
   "GlassRack_SpiralCondenser": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Standalone spiral condenser with inlet and outlet tubes.",
@@ -2866,6 +3079,16 @@
    "qfep_connection": "Inlet, six coiled turns, outlet — the condenser detached from any apparatus, coiling for no liquid in particular. The spiral's one trick is making a long path fit a short room, which is also what a curriculum does."
   },
   "GlassRack_SpiralTube": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Simple spiral glass tube — classic lab condenser coil.",
@@ -4270,6 +4493,17 @@
    }
   },
   "Rack303Acid": {
+   "dna": {
+    "axes": {
+    "machinery": [
+    "none",
+    "plate",
+    "vacancy",
+    "frame",
+    "works"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Roland TB-303 style acid bass synthesizer with cutoff and resonance knobs. The squelchy sound that defined acid house—filter sweeps turning simple waveforms into liquid screams. Resonance creates feedback peaks at the cutoff frequency.",
@@ -4378,6 +4612,17 @@
    "qfep_connection": "oscillation: the acid rack — a 303-style squelch line; resonance pushed until the filter itself becomes the melody. The wave bent into attitude."
   },
   "Rack808Drums": {
+   "dna": {
+    "axes": {
+    "machinery": [
+    "none",
+    "plate",
+    "vacancy",
+    "frame",
+    "works"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Deep 808 kick drum synthesizer with decay control and VU meter. The foundation of hip-hop and electronic music—sub-bass that you feel more than hear. Sine wave with pitch envelope creates that iconic 'boom'.",
@@ -4482,6 +4727,17 @@
    }
   },
   "RackAmbientDrone": {
+   "dna": {
+    "axes": {
+    "machinery": [
+    "none",
+    "plate",
+    "vacancy",
+    "frame",
+    "works"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Atmospheric ambient drone synthesizer with lissajous phase display. Slowly evolving textures—sound as environment rather than event. Multiple detuned oscillators create beating patterns; the lissajous shows phase relationships between channels.",
@@ -4590,6 +4846,17 @@
    }
   },
   "RackDX7Piano": {
+   "dna": {
+    "axes": {
+    "machinery": [
+    "none",
+    "plate",
+    "vacancy",
+    "frame",
+    "works"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Yamaha DX7 FM electric piano synthesizer with attack and release envelope controls. The sound of the 80s—FM synthesis creating bell-like tones impossible with analog. Frequency modulation: one oscillator modulating another's frequency.",
@@ -4699,6 +4966,17 @@
    "qfep_connection": "oscillation: the FM rack — sines modulating sines into a piano that never had strings; Fourier's theorem played as an instrument."
   },
   "RackMario": {
+   "dna": {
+    "axes": {
+    "machinery": [
+    "none",
+    "plate",
+    "vacancy",
+    "frame",
+    "works"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Mario-style pickup sound synthesizer with start/end frequency sweep controls. The iconic coin sound—a rapid frequency chirp that triggers dopamine. Demonstrates how frequency modulation over time creates recognizable timbres.",
@@ -4803,6 +5081,17 @@
    }
   },
   "RackMoogBass": {
+   "dna": {
+    "axes": {
+    "machinery": [
+    "none",
+    "plate",
+    "vacancy",
+    "frame",
+    "works"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "Classic Moog-style bass/lead synthesizer with ladder filter cutoff and resonance. The fat analog sound—oscillators through the famous 4-pole filter. Cutoff frequency determines which harmonics pass; resonance emphasizes the cutoff point.",
@@ -4911,6 +5200,17 @@
    "qfep_connection": "oscillation: the subtractive rack — rich harmonics carved down to a bass; sculpture's logic applied to spectra: remove until it sings."
   },
   "RackSineBasic": {
+   "dna": {
+    "axes": {
+    "machinery": [
+    "none",
+    "plate",
+    "vacancy",
+    "frame",
+    "works"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Basic sine wave synthesizer rack with frequency, amplitude, and duration controls. Includes waveform display. The purest sound—a single frequency oscillating smoothly. Grab sliders in VR to shape the wave, hear mathematics become music.",
@@ -6381,6 +6681,16 @@
    }
   },
   "WavePaintings": {
+   "dna": {
+    "axes": {
+    "display": [
+    "backdrop",
+    "wall",
+    "plate",
+    "none"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "Three pendulum-painting stations—grab the bob to swing it, watch oscillation become visible trace. Each pendulum paints on a wet canvas below, translating harmonic motion into color trails. The physics of swinging becomes the brush; chaos becomes art.",
@@ -6718,6 +7028,16 @@
    }
   },
   "atmosphericmonitoring": {
+   "dna": {
+    "axes": {
+    "record": [
+    "instant",
+    "window",
+    "archive",
+    "margin"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Three analog gauges at different frequencies: pressure (0.05 Hz slow drift), temperature (0.02 Hz), humidity (0.03 Hz). Demonstrates how multiple independent oscillations create complex patterns. Status lights indicate normal ranges. Real atmospheric data oscillates similarly.",
@@ -6833,6 +7153,16 @@
    "qfep_connection": "atmospheric monitoring — ambient readouts of the room's invisible weather; always present, never the lesson."
   },
   "bernini_columns": {
+   "dna": {
+    "axes": {
+    "colonnade": [
+    "grid",
+    "ring",
+    "aisle",
+    "pair"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Baroque architectural wave patterns",
@@ -6939,6 +7269,16 @@
    "qfep_connection": "oscillation: the Solomonic columns — Bernini's baroque twist as frozen oscillation; a sine wave carved in marble three centuries before Fourier named it."
   },
   "biomagneticresonator": {
+   "dna": {
+    "axes": {
+    "series": [
+    "stack",
+    "target",
+    "cage",
+    "terrace"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "Demonstrates standing waves with harmonic superposition. Core pulses at fundamental frequency while field rings show Σ(1/h)*sin(h*ω*t + φ)—each ring receives the sum of fundamental plus overtones. Adjustable harmonic count (1-8). Energy beams rotate with phase offsets.",
@@ -7047,6 +7387,17 @@
    "qfep_connection": "e_entropy: the biomagnetic resonator — a lab prop humming at the edge of plausibility; resonance as speculative instrument."
   },
   "cable_builder": {
+   "dna": {
+    "axes": {
+    "slack": [
+    "catenary",
+    "chord",
+    "spline",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Construct hanging cables between anchor points—watch them sag into catenaries, the natural curve of flexible lines under gravity. Engineering meets wave mathematics.",
@@ -7154,6 +7505,16 @@
    }
   },
   "chemicalapparatus": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "Chemistry station with bubbling liquids using sine-based animation. Flask and beaker liquids oscillate with phase offsets demonstrating wave relationships. Test tubes show wave propagation. Bunsen burner flame flickers using multi-frequency sine superposition for natural randomness.",
@@ -7270,6 +7631,16 @@
    "qfep_connection": "chemical apparatus — the lab's glassware chorus; set dressing for the experimental register."
   },
   "chladni_plate": {
+   "dna": {
+    "axes": {
+    "deposit": [
+    "scatter",
+    "figure",
+    "cast",
+    "none"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Vibrating metal plate with sand particles that migrate to nodal lines, forming standing wave patterns. Auto-cycles through modes showing different resonant geometries. Ernst Chladni's classic 18th-century experiment demonstrating that sound creates visible form.",
@@ -7671,6 +8042,16 @@
    }
   },
   "coupled_oscillator_lattice": {
+   "dna": {
+    "axes": {
+    "fabric": [
+    "nodes",
+    "bonds",
+    "sheet",
+    "boundary"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "12×12 oscillator grid",
@@ -8062,6 +8443,16 @@
    }
   },
   "dual_display_test": {
+   "dna": {
+    "axes": {
+    "record": [
+    "instant",
+    "window",
+    "archive",
+    "margin"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
@@ -8261,6 +8652,16 @@
    "qfep_connection": "electronic scales — measurement furniture for the lab register; never dominant."
   },
   "foucault_pendulum": {
+   "dna": {
+    "axes": {
+    "interference": [
+    "none",
+    "fence",
+    "attractors",
+    "swarm"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "A brass pendulum swings from high above, drawing rosette patterns on a cream canvas below. The swing plane slowly precesses—Foucault's elegant proof that Earth rotates beneath us. Dark ink traces accumulate into intricate spirograph-like figures over time.",
@@ -8718,6 +9119,16 @@
    }
   },
   "hallway_scene": {
+   "dna": {
+    "axes": {
+    "element": [
+    "braid",
+    "walls",
+    "vault",
+    "deck"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Populates a tunnel with sine-driven cylinder tubes and animates them through time.",
@@ -8959,6 +9370,16 @@
    }
   },
   "holographicdisplay": {
+   "dna": {
+    "axes": {
+    "record": [
+    "instant",
+    "window",
+    "archive",
+    "margin"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Holographic projector with sine-based effects. Scan line sweeps vertically using sin(t), content rotates and bobs, flicker effect at 15Hz creates subtle instability. Wireframe cube demonstrates 3D rotation. Projector lights pulse with phase offsets around the ring.",
@@ -9193,6 +9614,16 @@
    }
   },
   "kusama_sine": {
+   "dna": {
+    "axes": {
+    "obsession": [
+    "skin",
+    "none",
+    "air",
+    "obliteration"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Yayoi Kusama inspired sine wave patterns",
@@ -9432,6 +9863,20 @@
    "qfep_connection": "a laboratory table — the bench the experiments stand on; marks the inhabited workspace without asserting content."
   },
   "line_builder_3d": {
+   "dna": {
+     "fixture": {
+     "handle_seed": 7
+     },
+    "axes": {
+    "slack": [
+    "chord",
+    "spline",
+    "catenary",
+    "festoon",
+    "truss"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Draw curves in space—each line segment becomes a building block for wave forms. Connect points to see how discrete positions approximate continuous curves.",
@@ -10158,6 +10603,16 @@
    "qfep_connection": "Le Corbusier's Modulor figure — the human body turned into a measuring stick, proportion derived from a raised arm. Scale reference and quiet argument: that the primitives were never neutral, that someone's body is the ruler every 'universal' measure secretly is."
   },
   "multimeter": {
+   "dna": {
+    "axes": {
+    "record": [
+    "instant",
+    "window",
+    "archive",
+    "margin"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Digital multimeter with analog-style oscillating needle. Demonstrates AC voltage waveforms—the needle deflects following sin(t * frequency), showing how alternating current oscillates between positive and negative. Modes: AC voltage, DC voltage, resistance, frequency.",
@@ -11476,6 +11931,21 @@
    ]
   },
   "samplevialrack": {
+   "dna": {
+    "axes": {
+    "admission": [
+    "none",
+    "bench",
+    "residue",
+    "exhibit"
+    ],
+    "inscription": [
+    "none",
+    "level",
+    "chart"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "Six sample vials demonstrating phase relationships. Each vial glows with a sine wave offset by TAU/6 from its neighbor, creating a visible wave propagation effect. Modes: linear wave travel, radial expansion from center, random phases. Classic wave interference visualization.",
@@ -11691,6 +12161,16 @@
    }
   },
   "seismograph": {
+   "dna": {
+    "axes": {
+    "record": [
+    "instant",
+    "window",
+    "archive",
+    "margin"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Seismograph-style traveling-pen chart — draws the driving signal over time onto a scrolling paper strip, reading oscillation as a physical trace.",
@@ -11905,6 +12385,16 @@
    }
   },
   "sine_cylinder_staircase": {
+   "dna": {
+    "axes": {
+    "provision": [
+    "membrane",
+    "none",
+    "rail",
+    "posts"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Builds a helical staircase around a central column, modulating tread radius with a sine wave.",
@@ -12137,6 +12627,16 @@
    }
   },
   "sine_wall_corridor": {
+   "dna": {
+    "axes": {
+    "cut": [
+    "skin",
+    "ribs",
+    "strata",
+    "lattice"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "A passageway bounded by undulating walls—walking through is walking through a frozen wave. The body experiences wavelength as architectural scale.",

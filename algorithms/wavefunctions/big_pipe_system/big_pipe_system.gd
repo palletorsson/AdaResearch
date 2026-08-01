@@ -52,6 +52,35 @@ signal build_complete
 @export var samples_per_segment: int = 16
 @export var tube_sides: int = 16
 
+@export_group("DNA")
+## AXIS — SLACK: where the SHAPE of a run comes from, once the anchors are given.
+## Shared word for word with [[line_builder_3d]] and [[cable_builder]], the other two
+## builders in this tier. All three are handed a set of points and asked to make a run
+## between them; all three have to answer the same question — does the run admit that
+## it has weight? A cable sags and a pipe does not, and that difference is physics the
+## builder either honours, approximates, or ignores. One vocabulary, three homes.
+##
+## This artifact's home is `spline`: the whole third rewrite exists because bezier
+## handles at the turn vertices buy smooth corners for two lines instead of a hundred
+## lines of arc math. That is an approximation of a bend, drawn by the draughtsman.
+##
+##   chord     the handles are stripped. The run turns at a hard mitred angle, the
+##             elbow the rewrite was written to avoid. Weight and bending both denied.
+##   spline    THE LEGACY LINEAGE. corner_smoothness bezier handles at every turn
+##             vertex; the pipe swings through its corners in a long fair arc.
+##   catenary  the run is no longer level. Every span between anchors bellies downward
+##             by a third of its own length — a pipe carrying its own mass.
+##   festoon   the same belly, far deeper: the runs hang between their anchors in
+##             loops, a drain that has given up on being infrastructure.
+##   truss     the run refuses to hang and SHOWS what stops it: a post dropped from
+##             every anchor to a common base plane, a bottom chord joining the feet,
+##             and a zigzag web between. The pipe grows a gantry.
+##
+## Nothing here is a rate. The corner_smoothness / segment_length knobs above stay what
+## they were; this axis is about what the geometry ADMITS, not how fast anything moves.
+@export var slack: String = "spline"
+const SLACKS: PackedStringArray = ["chord", "spline", "catenary", "festoon", "truss"]
+
 # Turtle state
 var _pos: Vector3 = Vector3.ZERO
 var _forward: Vector3 = Vector3.FORWARD   # Godot: (0, 0, -1)
@@ -125,7 +154,21 @@ func clear() -> void:
 
 
 func apply_grid_config(_config: Dictionary) -> void:
-	pass
+	# LEGACY: this has always discarded everything the grid handed it, including the
+	# `#path:` token four maps in the corpus pass. That is left exactly as it was —
+	# see the report; it is a wiring bug, not something to quietly change inside a DNA
+	# pass. The one thing this now does is adopt a `slack` token, and re-emit ONLY if
+	# the system already has curves AND the value actually changed. With no curves
+	# (which is every placement today) it is a no-op.
+	if not _config.has("slack"):
+		return
+	var s: String = str(_config["slack"]).strip_edges().to_lower()
+	if not SLACKS.has(s) or s == slack:
+		return
+	slack = s
+	if _curves.size() > 0:
+		clear()
+		_emit_tubes()
 
 
 # ─── Turtle state ───────────────────────────────────────────────────
@@ -256,13 +299,29 @@ func _emit_tubes() -> void:
 	for c in _curves:
 		if c.point_count < 2:
 			continue
-		var mesh := _extrude_curve(c, pipe_radius, mat)
+		# SLACK: at the default ("spline") _slack_curve returns the very same Curve3D
+		# object, so this line extrudes exactly what it extruded before.
+		var mesh := _extrude_curve(_slack_curve(c), pipe_radius, mat)
 		if mesh == null:
 			continue
 		var mi := MeshInstance3D.new()
 		mi.mesh = mesh
 		mi.material_override = mat
 		_segments_root.add_child(mi)
+
+	# The gantry, APPENDED LAST so every pipe mesh above keeps its index and geometry.
+	# Only "truss" adds anything at all here.
+	if slack == "truss":
+		for c in _curves:
+			if c.point_count < 2:
+				continue
+			var tm := _truss_mesh(c)
+			if tm == null:
+				continue
+			var ti := MeshInstance3D.new()
+			ti.mesh = tm
+			ti.material_override = mat
+			_segments_root.add_child(ti)
 
 
 ## Extrude a circular profile along a Curve3D. Adapted from the project's
@@ -351,3 +410,115 @@ func _build_from_segments(segments: Array) -> void:
 			_curve.add_point(Vector3(float(pos_raw[0]), float(pos_raw[1]), float(pos_raw[2])))
 	_curves.append(_curve)
 	_emit_tubes()
+
+
+# ─── SLACK ──────────────────────────────────────────────────────────
+# Appended LAST. Nothing above was touched except the _slack_curve() call inside
+# _emit_tubes() and the truss block after its loop, both inert at the default: at
+# "spline" the extruder receives the identical Curve3D object and nothing extra is
+# added, so the legacy lineage renders the mesh it always rendered.
+
+
+## The curve the extruder actually gets. Assigned rather than returned per branch so
+## there is exactly one exit and no exhaustiveness question. `out` starts as the very
+## same Curve3D object, which is what "spline" — the legacy lineage — extrudes.
+func _slack_curve(src: Curve3D) -> Curve3D:
+	var out: Curve3D = src
+	match slack:
+		"chord":
+			out = _straighten(src)
+		"catenary":
+			out = _sag_curve(src, 0.35)
+		"festoon":
+			out = _sag_curve(src, 0.85)
+		"truss":
+			out = src             # the pipe keeps its fillets; the gantry is added after
+	return out
+
+
+## Same anchors, no bezier handles: the run turns at a hard mitred angle.
+func _straighten(src: Curve3D) -> Curve3D:
+	var out := Curve3D.new()
+	for i in range(src.point_count):
+		out.add_point(src.get_point_position(i))
+	return out
+
+
+## Resample the baked curve and bow each anchor-to-anchor span downward — zero at the
+## anchors, deepest at mid-span, depth = factor x the arc length of that span. Anchors
+## are located on the baked curve by arc offset, so this works on filleted corners and
+## on the handle-free branch curves alike.
+func _sag_curve(src: Curve3D, factor: float) -> Curve3D:
+	var n: int = src.point_count
+	if n < 2:
+		return src
+	if src.get_baked_length() < 0.0001:
+		return src
+	var out := Curve3D.new()
+	for i in range(n - 1):
+		var o0: float = src.get_closest_offset(src.get_point_position(i))
+		var o1: float = src.get_closest_offset(src.get_point_position(i + 1))
+		var span: float = o1 - o0
+		if span <= 0.0001:
+			continue
+		var steps: int = maxi(int(span / maxf(segment_length, 0.001) * 8.0), 8)
+		for k in range(steps + 1):
+			if out.point_count > 0 and k == 0:
+				continue
+			var t: float = float(k) / float(steps)
+			var p: Vector3 = src.sample_baked(o0 + span * t)
+			p.y -= factor * span * 4.0 * t * (1.0 - t)
+			out.add_point(p)
+	return out if out.point_count >= 2 else src
+
+
+## The gantry under a run: a post from every anchor down to a common base plane, a
+## bottom chord joining the feet, and a zigzag web between chord and pipe.
+func _truss_mesh(src: Curve3D) -> ArrayMesh:
+	var n: int = src.point_count
+	if n < 2:
+		return null
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var base_y: float = src.get_point_position(0).y
+	for i in range(n):
+		base_y = minf(base_y, src.get_point_position(i).y)
+	base_y -= maxf(segment_length, 0.5) * 1.1
+
+	var r: float = maxf(pipe_radius * 0.16, 0.04)
+	var feet := PackedVector3Array()
+	for i in range(n):
+		var p: Vector3 = src.get_point_position(i)
+		var foot := Vector3(p.x, base_y, p.z)
+		feet.append(foot)
+		_strut(st, p, foot, r)
+	for i in range(n - 1):
+		_strut(st, feet[i], feet[i + 1], r)
+		if i % 2 == 0:
+			_strut(st, src.get_point_position(i), feet[i + 1], r)
+		else:
+			_strut(st, feet[i], src.get_point_position(i + 1), r)
+
+	st.generate_normals()
+	return st.commit()
+
+
+## One straight round member, swept into a SurfaceTool the caller owns.
+func _strut(st: SurfaceTool, a: Vector3, b: Vector3, radius: float) -> void:
+	var delta: Vector3 = b - a
+	if delta.length_squared() < 0.0001:
+		return
+	var dir: Vector3 = delta.normalized()
+	var up := Vector3.UP
+	if absf(dir.dot(up)) > 0.99:
+		up = Vector3.RIGHT
+	var right: Vector3 = dir.cross(up).normalized()
+	var frame_up: Vector3 = right.cross(dir).normalized()
+	for k in range(tube_sides):
+		var a1: float = float(k) / float(tube_sides) * TAU
+		var a2: float = float(k + 1) / float(tube_sides) * TAU
+		var o1: Vector3 = (right * cos(a1) + frame_up * sin(a1)) * radius
+		var o2: Vector3 = (right * cos(a2) + frame_up * sin(a2)) * radius
+		st.add_vertex(a + o1); st.add_vertex(b + o1); st.add_vertex(b + o2)
+		st.add_vertex(a + o1); st.add_vertex(b + o2); st.add_vertex(a + o2)

@@ -39,6 +39,30 @@ class_name ChladniPlate
 @export var base_color: Color = Color(0.15, 0.15, 0.18)
 @export var plate_color: Color = Color(0.7, 0.7, 0.75)
 
+## AXIS — WHAT THE VIBRATION HAS LEFT ON THE PLATE by the moment you look at it.
+##
+## A Chladni plate is the same physics at every value here; what changes is which
+## instant of the demonstration the object is holding, and therefore what a
+## demonstration is understood to be FOR. The mode pair (m,n) is untouched — every
+## value below reads its figure out of the SAME _chladni_amplitude() the plate teaches.
+##
+##   scatter  the legacy lineage: 400 grains dropped at random, the sort not yet done.
+##            The picture is of a PROCESS, and it is mostly noise. This is what the
+##            plate has always shown, and what a still frame catches it doing.
+##   figure   the grains seeded ON the zero set: the nodal curves already drawn in
+##            sand, sharp, the antinodes swept bare. The picture is of a RESULT.
+##   cast     no sand at all — the same nodal curves lying IN the plate as dark
+##            engraved flecks that do not move and do not follow the mode when it
+##            cycles. A record of one mode, kept after the plate moved on.
+##   none     the plate stripped: it still vibrates, and nothing is there to say so.
+##            The claim that an apparatus without a medium demonstrates nothing.
+##
+## The pivot is the sand. It is the only bright, high-frequency thing on a small dark
+## object, so it owns the hot pixels of any frame the plate appears in — which is why
+## `figure` and `scatter` are the same 400 grains and still read as different objects.
+@export var deposit: String = "scatter"
+const DEPOSITS: PackedStringArray = ["scatter", "figure", "cast", "none"]
+
 ## Internal
 var particles: Array[Dictionary] = []
 var _multimesh_instance: MultiMeshInstance3D
@@ -59,9 +83,21 @@ var mode_pairs: Array = [
 @onready var label: Label3D = $Label
 
 func _ready() -> void:
+	_read_deposit_override()
 	_setup_materials()
 	_spawn_particles()
 	_update_label()
+	# DEPOSIT, applied LAST so every line above runs exactly as it always has and the
+	# RNG is consumed in the same order. "scatter" falls through and touches nothing.
+	_apply_deposit()
+
+
+func _read_deposit_override() -> void:
+	# The grid sets config metadata BEFORE add_child, so this lands before _spawn_particles.
+	# An unknown word keeps the default rather than blanking the plate.
+	if has_meta("config_deposit"):
+		var token: String = str(get_meta("config_deposit")).strip_edges().to_lower()
+		deposit = token if DEPOSITS.has(token) else deposit
 
 func _setup_materials() -> void:
 	# Plate material (metal)
@@ -221,3 +257,83 @@ func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])
+	# A late config (this method is call_deferred, so it lands after _ready) can still
+	# restage the sand. Gated on the key: a config without "deposit" is untouched.
+	if config_data.has("deposit"):
+		var token: String = str(config_data["deposit"]).strip_edges().to_lower()
+		deposit = token if DEPOSITS.has(token) else "scatter"
+		_apply_deposit()
+
+
+# ── DEPOSIT ──────────────────────────────────────────────────────────────────
+# One axis, four moments of the same demonstration. Every value reads the figure out
+# of _chladni_amplitude(), the equation the plate exists to teach; none of them change
+# it, the mode pair, or the cycling. What changes is which instant is on the table.
+
+func _apply_deposit() -> void:
+	match deposit:
+		"figure":
+			_seed_on_nodal_set()
+		"cast":
+			_engrave_nodal_set()
+		"none":
+			_strip_sand()
+		_:
+			pass                                  # "scatter" — the legacy lineage
+
+
+## FIGURE — the same 400 grains, moved to where the vibration would have driven them.
+## Rejection-sampled against the plate's own amplitude function, so the curve is the
+## real zero set of the current (m,n) and not a drawing of one. Velocities are zeroed:
+## the sand has arrived. It still obeys _update_particle afterwards, so when the mode
+## cycles it re-sorts — the figure is settled, not frozen.
+func _seed_on_nodal_set() -> void:
+	var half: float = maxf(plate_size * 0.5, 0.001)
+	var rest_y: float = plate_thickness / 2.0 + particle_size
+	for i in range(particles.size()):
+		var px: float = 0.0
+		var pz: float = 0.0
+		for _attempt in range(64):
+			px = randf_range(-half, half)
+			pz = randf_range(-half, half)
+			if absf(_chladni_amplitude(px / half, pz / half)) < 0.10:
+				break
+		var grain: Dictionary = particles[i]
+		grain.position = Vector3(px, rest_y, pz)
+		grain.velocity = Vector3.ZERO
+		_multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(px, rest_y, pz)))
+
+
+## CAST — the figure taken off the plate and put INTO it. The particle list is emptied,
+## so _process never touches these instances again: they are flattened, darkened and
+## pressed onto the surface as engraved flecks. A tighter tolerance than `figure` makes
+## a thinner, drawn line. When auto_cycle_modes moves to the next (m,n) the engraving
+## does NOT follow, which is the whole argument: a record outlives the state it records.
+func _engrave_nodal_set() -> void:
+	particles.clear()
+	var half: float = maxf(plate_size * 0.5, 0.001)
+	var ink_y: float = plate_thickness / 2.0 + particle_size * 0.35
+	var ink: StandardMaterial3D = StandardMaterial3D.new()
+	ink.albedo_color = Color(0.06, 0.05, 0.05)
+	ink.metallic = 0.15
+	ink.roughness = 0.85
+	_multimesh_instance.material_override = ink
+	var pressed: Basis = Basis.from_scale(Vector3(1.7, 0.28, 1.7))
+	for i in range(_multimesh.instance_count):
+		var px: float = 0.0
+		var pz: float = 0.0
+		for _attempt in range(96):
+			px = randf_range(-half, half)
+			pz = randf_range(-half, half)
+			if absf(_chladni_amplitude(px / half, pz / half)) < 0.05:
+				break
+		_multimesh.set_instance_transform(i, Transform3D(pressed, Vector3(px, ink_y, pz)))
+
+
+## NONE — the medium removed. instance_count is zeroed rather than hiding the
+## MultiMeshInstance3D, because visibility resolves through the tree and would take
+## the container with it. The plate still vibrates in _process; there is simply nothing
+## on it that can report the fact.
+func _strip_sand() -> void:
+	particles.clear()
+	_multimesh.instance_count = 0

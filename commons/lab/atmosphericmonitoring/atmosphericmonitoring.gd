@@ -9,12 +9,34 @@ class_name LabAtmosphericMonitoring
 # @identity
 # essence: reading(t) = base + variation * sin(frequency * t * TAU) + noise
 # desire: Watch laboratory instruments slowly drift through atmospheric measurements
-# critical_parameter: pressure_frequency — controls the speed of atmospheric drift cycles
-# triggers: time drives sinusoidal variation in pressure, temperature, humidity needles
+# critical_parameter: record — three needles show three instants; a chart shows that they are three DIFFERENT waves
+# triggers: time drives sinusoidal variation in pressure, temperature, humidity needles; record decides whether the chart carries their past
 # emerges: the feeling of a living laboratory where instruments never fully settle
 # needs: VR needle observation [has], alert threshold adjustment [missing]
-# relationships: depends on sine-driven gauge animation; contrasts with multimeter (AC measurement vs environmental monitoring); unlocks lab atmosphere
-# truth: The atmosphere is a superposition of slow oscillations that instruments make legible.
+# relationships: shares the `record` axis word for word with [[seismograph]], [[multimeter]] and [[holographicdisplay]]; contrasts with multimeter (AC measurement vs environmental monitoring)
+# truth: The atmosphere is a superposition of slow oscillations that instruments make legible — and a needle can only ever show you one instant of a superposition, which is to say none of it.
+
+# ── RECORD ───────────────────────────────────────────────────────────────────
+# THE AXIS, shared word for word with [[seismograph]], [[multimeter]] and
+# [[holographicdisplay]]: what this instrument KEEPS.
+#
+#   instant   three needles, and nothing else. the measurement is NOW.       ← legacy
+#   window    a chart card stands over the gauges, inked only at the pen end
+#   archive   the card is inked end to end, and the run-off is wound on a spool
+#   margin    the archive, READ: lane rules, normal-range rails, a scale, a hand's ring
+#
+# THIS ARTIFACT IS THE ARGUMENT FOR THE AXIS. Its own description says three independent
+# oscillations "create complex patterns" — but three needles can only ever show three
+# instants, and an instant of a superposition carries no information about superposition at
+# all. Standing at it, you cannot tell that pressure runs at 0.05 Hz and temperature at
+# 0.02. On the chart, over one span of the same paper, pressure draws six periods and
+# temperature two and a half, and the claim in the description becomes a thing you can see
+# without waiting. That is a difference in what the reading COMMITS TO, not in tempo.
+#
+# NOT TOUCHED: the three sine channels, their bases, variations, frequencies, the needle
+# mappings and the status-light thresholds. The chart is drawn by evaluating THE SAME three
+# functions at past times, so it cannot disagree with the needles above it.
+@export_enum("instant", "window", "archive", "margin") var record: String = "instant"
 
 @export_group("Pressure")
 @export var pressure_base: float = 1013.25  # hPa (standard atm)
@@ -41,6 +63,7 @@ var display_panel: MeshInstance3D
 
 func _ready() -> void:
 	_build_station()
+	_build_record()
 
 func _process(delta: float) -> void:
 	time += delta
@@ -269,3 +292,189 @@ func set_alert_conditions(pressure_alert: float, temp_alert: float, humidity_ale
 	pressure_variation = pressure_alert
 	temp_variation = temp_alert
 	humidity_variation = humidity_alert
+
+
+# ── RECORD, BUILT ────────────────────────────────────────────────────────────
+# APPENDED. Every line below is gated behind `record != "instant"`, so the legacy lineage
+# adds no node and allocates no material. Nothing here is random: the three traces are the
+# three sine channels themselves, evaluated backwards over one span of paper.
+
+# The card stands over the housing on two short posts, clear of the gauges (whose faces top
+# out at y = 0.195). It is the SAME card at window / archive / margin, so those three share
+# one bounding box; only the ink and the marks differ.
+const REC_CARD_W := 0.33
+const REC_CARD_H := 0.13
+const REC_CY := 0.325
+const REC_Z := 0.012
+const REC_X0 := -0.155
+const REC_X1 := 0.155
+const REC_SAMPLES := 78
+const REC_WINDOW_SAMPLES := 19
+## One span of paper, in seconds. Chosen so the three channels draw visibly different
+## period counts across the same width: 6.0 for pressure, 2.4 for temperature, 3.6 for
+## humidity. That ratio IS the artifact's lesson, standing still.
+const REC_SPAN := 120.0
+## Each channel gets its own lane at its own span, which is what a multi-channel chart
+## recorder does — a shared axis would flatten a 0.5 degree swing against a 5 hPa one and
+## draw three straight lines.
+const REC_LANE := 0.038
+const REC_LANE_AMP := 0.015
+
+const REC_PAPER := Color(0.93, 0.92, 0.86)
+const REC_RULE := Color(0.70, 0.68, 0.62)
+const REC_INK := Color(0.10, 0.10, 0.12)
+const REC_BAND := Color(0.86, 0.45, 0.06)
+const REC_MARK := Color(0.80, 0.10, 0.10)
+
+var _rec_root: Node3D = null
+
+
+## A map may set the rung with `#record:archive`. Only the record layer is rebuilt; the
+## housing, gauges, needles, display panel, status lights and grille are never touched.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var raw: String = ""
+	if config_data.has("record"):
+		raw = str(config_data["record"])
+	elif has_meta("config_record"):
+		raw = str(get_meta("config_record"))
+	if raw == "":
+		return
+	var want: String = raw.strip_edges().to_lower()
+	if not (want in ["instant", "window", "archive", "margin"]):
+		push_warning("atmosphericmonitoring: unknown record rung '%s' — keeping '%s'" % [want, record])
+		return
+	if want == record:
+		return
+	record = want
+	if _rec_root != null:
+		_rec_root.queue_free()
+		_rec_root = null
+	_build_record()
+
+
+func _build_record() -> void:
+	if record == "instant":
+		return
+	_rec_root = Node3D.new()
+	_rec_root.name = "Record"
+	add_child(_rec_root)
+
+	var full: bool = record != "window"
+
+	for s in [-1.0, 1.0]:
+		_rec_box(Vector3(s * 0.145, 0.256, REC_Z), Vector3(0.010, 0.014, 0.014), Color(0.22, 0.24, 0.27))
+	_rec_box(Vector3(0.0, REC_CY, REC_Z), Vector3(REC_CARD_W, REC_CARD_H, 0.002), REC_PAPER)
+
+	if record == "margin":
+		_rec_furniture()
+
+	# One lane per channel, in the accent colour its own gauge rim already wears, so a trace
+	# on the card and a needle on the housing are visibly the same instrument.
+	_rec_lane(REC_CY + REC_LANE, pressure_frequency, Color(0.2, 0.6, 1.0), full, record == "margin")
+	_rec_lane(REC_CY, temp_frequency, Color(1.0, 0.4, 0.2), full, false)
+	_rec_lane(REC_CY - REC_LANE, humidity_frequency, Color(0.2, 0.8, 0.4), full, false)
+
+	if full:
+		_rec_spool()
+
+
+## One channel's trace. `sin(tt * freq * TAU)` is exactly the term _process feeds its needle;
+## only the normalisation differs, and it differs per lane on purpose (see REC_LANE above).
+func _rec_lane(lane_y: float, freq: float, tint: Color, full: bool, ring_peak: bool) -> void:
+	var step: float = (REC_X1 - REC_X0) / float(REC_SAMPLES - 1)
+	var dt: float = REC_SPAN / float(REC_SAMPLES - 1)
+	var first: int = 0 if full else REC_SAMPLES - REC_WINDOW_SAMPLES
+	var peak_x: float = REC_X1
+	var peak_y: float = lane_y
+	var best: float = -1.0
+	for j in range(first, REC_SAMPLES):
+		# j counts from the OLD end; the pen is at the right, so sample j sits at
+		# tt = -(span - j*dt) seconds — zero at the right-hand edge.
+		var tt: float = -(REC_SPAN - float(j) * dt)
+		var v: float = sin(tt * freq * TAU)
+		var y: float = lane_y + v * REC_LANE_AMP
+		_rec_box(Vector3(REC_X0 + float(j) * step, y, REC_Z + 0.0018),
+			Vector3(0.0038, 0.0034, 0.0010), tint)
+		if absf(v) > best:
+			best = absf(v)
+			peak_x = REC_X0 + float(j) * step
+			peak_y = y
+	if ring_peak:
+		_rec_hand(peak_x, peak_y)
+
+
+## WINDOW vs ARCHIVE: the run-off. A station switched on two minutes ago has none of this;
+## one that has been logging has a wound spool of chart at the old end of the card, inside
+## the existing silhouette so the inked rungs keep one bounding box between them.
+func _rec_spool() -> void:
+	var mi := MeshInstance3D.new()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = 0.020
+	cyl.bottom_radius = 0.020
+	cyl.height = 0.026
+	cyl.radial_segments = 20
+	mi.mesh = cyl
+	mi.position = Vector3(-0.150, REC_CY, REC_Z + 0.006)
+	mi.rotation.x = PI / 2.0
+	mi.material_override = _rec_mat(REC_PAPER.darkened(0.06))
+	_rec_root.add_child(mi)
+	_rec_box(Vector3(-0.150, REC_CY, REC_Z + 0.020), Vector3(0.006, 0.006, 0.006), Color(0.25, 0.26, 0.29))
+
+
+## MARGIN, part one: the card printed to be read AGAINST. Rules between the lanes, time
+## rules down the span, a tick scale along the foot, and a pair of normal-range rails per
+## lane in the amber this project already uses for a threshold. The traces never leave the
+## rails, which is the same thing the three status lights are saying by staying green.
+func _rec_furniture() -> void:
+	for s in [-1.0, 1.0]:
+		_rec_box(Vector3(0.0, REC_CY + s * (REC_LANE * 0.5), REC_Z + 0.0012),
+			Vector3(REC_CARD_W - 0.012, 0.0016, 0.0008), REC_RULE)
+	for k in range(9):
+		var x: float = lerpf(REC_X0, REC_X1, float(k) / 8.0)
+		_rec_box(Vector3(x, REC_CY, REC_Z + 0.0012),
+			Vector3(0.0016, REC_CARD_H - 0.012, 0.0008), REC_RULE)
+		_rec_box(Vector3(x, REC_CY - REC_CARD_H * 0.5 - 0.006, REC_Z + 0.0016),
+			Vector3(0.0030, 0.012, 0.0008), REC_INK)
+	for lane in [REC_CY + REC_LANE, REC_CY, REC_CY - REC_LANE]:
+		for s2 in [-1.0, 1.0]:
+			_rec_box(Vector3(0.0, lane + s2 * 0.017, REC_Z + 0.0014),
+				Vector3(REC_CARD_W - 0.012, 0.0035, 0.0008), REC_BAND)
+
+
+## MARGIN, part two: the hand. Someone came back to the pressure lane, found its high and
+## ringed it — the moment a chart stops being output and becomes evidence.
+func _rec_hand(px: float, py: float) -> void:
+	var ring := MeshInstance3D.new()
+	var torus := TorusMesh.new()
+	torus.inner_radius = 0.0090
+	torus.outer_radius = 0.0125
+	ring.mesh = torus
+	ring.position = Vector3(px, py, REC_Z + 0.0030)
+	ring.rotation.x = PI / 2.0
+	ring.material_override = _rec_mat(REC_MARK)
+	_rec_root.add_child(ring)
+	var foot: float = REC_CY - REC_CARD_H * 0.5 + 0.010
+	_rec_box(Vector3(px, foot, REC_Z + 0.0030), Vector3(0.052, 0.0022, 0.0008), REC_MARK)
+	for s in [-1.0, 1.0]:
+		_rec_box(Vector3(px + s * 0.026, foot + 0.006, REC_Z + 0.0030),
+			Vector3(0.0022, 0.012, 0.0008), REC_MARK)
+	for k in range(3):
+		_rec_box(Vector3(px + 0.038, py + 0.009 - float(k) * 0.006, REC_Z + 0.0030),
+			Vector3(0.020, 0.0020, 0.0008), REC_MARK)
+
+
+func _rec_mat(c: Color) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.85
+	return m
+
+
+func _rec_box(center: Vector3, size: Vector3, c: Color) -> void:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = _rec_mat(c)
+	mi.position = center
+	_rec_root.add_child(mi)

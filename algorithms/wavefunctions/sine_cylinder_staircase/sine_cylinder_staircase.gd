@@ -28,13 +28,48 @@ extends Node3D
 @export var show_center_pole: bool = false
 @export var debug: bool = false
 
+## AXIS — WHAT THE STAIR PROVIDES so a body can use a formula.
+##
+## r(theta) = base + sine gives a helix of 80 sample points. It does not give a floor, a
+## handhold or a support; those have to be invented, and the invention is where the artifact
+## admits that a curve and a body want different things. Today's answer is the magenta
+## bridge planes: translucent, unshaded, floating 0.3 m above the treads — a patch so
+## obviously provisional that it reads as scaffolding left in place.
+##
+##   membrane   the legacy lineage, byte for byte — a translucent pink quad between each
+##              pair of facing tread edges. The gap is admitted and covered in a material
+##              nobody would build a stair from.
+##   none       nothing added. Eighty separate treads climbing through air: the sampled
+##              function, unassisted, and the gaps are simply the truth about sampling.
+##   rail       a continuous handrail helix on the outer edge at hand height, with a
+##              stanchion every sixth step. The stair is equipped rather than patched — the
+##              second curve is for the hand, and it is the only value that answers the body
+##              instead of the geometry.
+##   posts      a rod from every tread down to the ground. The gap is left open and the
+##              structure the helix would actually need is shown instead: the wave's own
+##              shadow, cast as eighty vertical lines.
+##
+## The helix, the modulation and the treads are identical in all four. What changes is what
+## the artifact is willing to add around a formula it cannot walk on.
+@export_enum("membrane", "none", "rail", "posts") var provision: String = "membrane"
+const PROVISIONS: PackedStringArray = ["membrane", "none", "rail", "posts"]
+
 var _mat_step: StandardMaterial3D
 var _mat_plane: StandardMaterial3D
 
 func _ready() -> void:
+	_read_dna_meta()
 	_mat_step = _make_step_mat()
 	_mat_plane = _make_plane_mat()
 	_build()
+
+
+## The grid sets `config_*` metadata BEFORE add_child, so this runs ahead of the build and an
+## unknown word keeps the default. No metadata, no change.
+func _read_dna_meta() -> void:
+	if has_meta("config_provision"):
+		var p: String = str(get_meta("config_provision")).strip_edges().to_lower()
+		provision = p if PROVISIONS.has(p) else provision
 
 # ----------------- Build -----------------
 func _build() -> void:
@@ -101,11 +136,27 @@ func _build() -> void:
 		spans.append(span)
 
 		# when we have current & previous, add the plane bridge between their facing edges
-		if show_planes and i > 0:
+		# (PROVISION gate: "membrane" is the default, so this condition is unchanged on the
+		# legacy path — the other three values withhold the patch and add their own answer
+		# in the appended block below.)
+		if show_planes and provision == "membrane" and i > 0:
 			_add_plane_bridge(roots[i - 1], spans[i - 1], roots[i], spans[i])
 
 	if show_center_pole:
 		_add_center_pole(float(STEP_COUNT - 1) * STEP_RISE + 1.0)
+
+	# PROVISION dressing, appended LAST so every child index and position above is untouched
+	# on the legacy path. "membrane" and "none" both fall through and add nothing at all —
+	# the difference between them was already made by the gate on the bridge planes.
+	match provision:
+		"rail":
+			for si in range(roots.size()):
+				_provision_rail(roots[si], spans[si], si)
+		"posts":
+			for si in range(roots.size()):
+				_provision_post(roots[si])
+		_:
+			pass
 
 # ----------------- Plane bridge (edge-to-edge) -----------------
 func _add_plane_bridge(a_root: Node3D, a_span: float, b_root: Node3D, b_span: float) -> void:
@@ -229,4 +280,59 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Only the DNA axis is read here; every other key is ignored exactly as before. The grid
+	# calls this deferred, after _ready, so _read_dna_meta has normally applied the same
+	# value already and the guard below makes this a no-op. _mat_step is the proof that
+	# _ready has run — rebuilding before it would build the stair with a null material.
+	if config.has("provision"):
+		var p: String = str(config["provision"]).strip_edges().to_lower()
+		var picked: String = p if PROVISIONS.has(p) else provision
+		if picked != provision:
+			provision = picked
+			if _mat_step != null:
+				_build()
+
+
+# ── PROVISION ────────────────────────────────────────────────────────────────────────────
+# Appended LAST. Both new values build in STAIRCASE-LOCAL space from the tread roots the
+# main loop already produced, so they cannot disturb the helix itself.
+
+## RAIL — a handrail segment on the outer edge of each tread at hand height, parented to the
+## tread root so it inherits the tread's radial/tangent basis and the segments chain into one
+## continuous curve. Every sixth tread also gets a stanchion, which is what makes it read as
+## a built handrail rather than a floating second helix.
+func _provision_rail(root: Node3D, span: float, index: int) -> void:
+	var out_x: float = STEP_WIDTH * 0.5 - 0.10
+	var bar := BoxMesh.new()
+	bar.size = Vector3(0.09, 0.09, maxf(span * 1.6, 0.2))
+	var mi := MeshInstance3D.new()
+	mi.name = "RailSegment"
+	mi.mesh = bar
+	mi.material_override = _mat_step
+	mi.position = Vector3(out_x, 0.95, 0.0)
+	root.add_child(mi)
+	if index % 6 == 0:
+		var stanchion := BoxMesh.new()
+		stanchion.size = Vector3(0.06, 0.95, 0.06)
+		var sm := MeshInstance3D.new()
+		sm.name = "RailStanchion"
+		sm.mesh = stanchion
+		sm.material_override = _mat_step
+		sm.position = Vector3(out_x, 0.475, 0.0)
+		root.add_child(sm)
+
+
+## POSTS — a rod from each tread down to the ground plane of the first tread. Added to the
+## staircase itself rather than to the tread root, because a post must stand vertical while
+## the tread is banked to the helix.
+func _provision_post(root: Node3D) -> void:
+	var base: float = -STEP_THICKNESS * 0.5
+	var h: float = maxf(root.position.y - base, 0.04)
+	var rod := BoxMesh.new()
+	rod.size = Vector3(0.10, h, 0.10)
+	var mi := MeshInstance3D.new()
+	mi.name = "ProvisionPost"
+	mi.mesh = rod
+	mi.material_override = _mat_step
+	mi.position = Vector3(root.position.x, base + h * 0.5, root.position.z)
+	add_child(mi)

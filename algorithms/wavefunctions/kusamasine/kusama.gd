@@ -28,6 +28,36 @@ extends Node3D
 @export var include_harmonic_clusters: bool = false
 @export var include_energy_streams: bool = false
 
+## AXIS — HOW FAR THE DOT HAS GONE. The artifact's own truth line says the dot is the
+## shortest wavelength of attention; Kusama's practice says the dot does not stop at the
+## edge of the object. This axis is the question of where it does stop.
+##
+## Every value here is built from the dot MultiMeshes that already exist. Nothing changes
+## about the sine geometry underneath — the petals, the core layers and the spirals are
+## computed identically in all four.
+##
+##   skin           the legacy lineage, byte for byte — dots on the core spheres, on every
+##                  petal layer and on every tendril segment, and nowhere else. A decorated
+##                  object: the pattern obeys the form's boundary.
+##   none           the three dot passes withheld. What is left is the sine geometry the
+##                  dots were covering — layered translucent spheres, six morphing petals,
+##                  three harmonic spirals — which almost nobody has ever seen.
+##   air            the dots leave the surface: a field of 240 of them fills the volume
+##                  around the sculpture. The Infinity Room read — the pattern is no longer
+##                  ON something, it is the medium the object is suspended in.
+##   obliteration   every surface stands down and only the repeated small elements remain —
+##                  roughly 560 dots plus the three cube spirals, all of them MultiMeshes and
+##                  so untouched — and the form is legible purely as its own constellation.
+##                  Kusama's word, and her claim: repetition does not decorate a body, it
+##                  dissolves one.
+##
+## `obliteration` sets layers = 0 on the mesh instances rather than visible = false. The dot
+## MultiMeshes are CHILDREN of those meshes and Godot resolves visibility through
+## is_visible_in_tree(), so hiding the parent would take the dots with it and render an
+## empty frame. Render layers are per-instance and do not propagate.
+@export_enum("skin", "none", "air", "obliteration") var obsession: String = "skin"
+const OBSESSIONS: PackedStringArray = ["skin", "none", "air", "obliteration"]
+
 # Time tracking for sine/cosine animations
 var time: float = 0.0
 var color_time: float = 0.0
@@ -79,6 +109,7 @@ const SAMPLE_RATE = 44100.0
 var audio_phase: float = 0.0
 
 func _ready() -> void:
+	_read_dna_meta()
 	detail_scale_clamped = clamp(detail_scale, 0.35, 1.3)
 	if abs(vertical_offset) > 0.001:
 		translate(Vector3(0, vertical_offset, 0))
@@ -87,6 +118,14 @@ func _ready() -> void:
 	
 	if generate_on_ready:
 		generate_ultra_vivid_sculpture()
+
+
+## The grid sets `config_*` metadata BEFORE add_child, so this runs ahead of the build and an
+## unknown word keeps the default. No metadata, no change.
+func _read_dna_meta() -> void:
+	if has_meta("config_obsession"):
+		var o: String = str(get_meta("config_obsession")).strip_edges().to_lower()
+		obsession = o if OBSESSIONS.has(o) else obsession
 
 func _setup_audio() -> void:
 	audio_player = AudioStreamPlayer3D.new()
@@ -207,6 +246,17 @@ func generate_ultra_vivid_sculpture() -> void:
 	
 	# Set up enhanced environment
 	setup_ultra_vivid_environment()
+
+	# OBSESSION, appended LAST so every child index and material above is untouched on the
+	# legacy path. "skin" and "none" both fall through and add nothing here — the difference
+	# between them was already made by the guard at the top of the three dot passes.
+	match obsession:
+		"air":
+			_obsession_air()
+		"obliteration":
+			_obsession_obliteration(self)
+		_:
+			pass
 
 func create_ultra_vivid_core():
 	var core = Node3D.new()
@@ -646,6 +696,8 @@ func create_harmonic_spiral(radius, harmonic_index):
 	return spiral
 
 func add_ultra_vivid_polka_dots(mesh_instance, base_color, density_factor, invert_colors) -> void:
+	if obsession == "none":
+		return
 	var mesh = mesh_instance.mesh
 	var aabb = mesh.get_aabb()
 	var mesh_size = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
@@ -706,6 +758,8 @@ func add_ultra_vivid_polka_dots(mesh_instance, base_color, density_factor, inver
 	mesh_instance.add_child(mmi)
 
 func add_harmonic_polka_dots(mesh_instance, base_color, density, petal_index, layer) -> void:
+	if obsession == "none":
+		return
 	var mesh = mesh_instance.mesh
 	var aabb = mesh.get_aabb()
 	var num_dots = max(8, int(round(25 * density * detail_scale_clamped)))
@@ -757,6 +811,8 @@ func add_harmonic_polka_dots(mesh_instance, base_color, density, petal_index, la
 	mesh_instance.add_child(mmi)
 
 func add_sine_wave_dots(mesh_instance, base_color, density, segment_index) -> void:
+	if obsession == "none":
+		return
 	var num_dots = max(6, int(round(20 * density * detail_scale_clamped)))
 
 	# Use MultiMesh for sine wave dots
@@ -1250,4 +1306,72 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Only the DNA axis is read here; every other key is ignored exactly as before. This
+	# records the value and does NOT rebuild: generate() routes through clear_children(),
+	# which frees every child including the AudioStreamPlayer3D that _setup_audio() made and
+	# never re-creates it. The real channel is _read_dna_meta(), which runs before the build.
+	if config.has("obsession"):
+		var o: String = str(config["obsession"]).strip_edges().to_lower()
+		obsession = o if OBSESSIONS.has(o) else obsession
+
+
+# ── OBSESSION ────────────────────────────────────────────────────────────────────────────
+# Appended LAST. Both builders work on what generate_ultra_vivid_sculpture() has already
+# made, so neither can disturb the sine geometry.
+
+## AIR — the dot field leaves the object. 240 dots on a deterministic golden-angle spiral
+## through a shell of radius ~2.4, sized by the same sine modulation the rest of the file
+## uses (no randf: this sequence teaches before pseudo-randomness exists). Held in ONE
+## MultiMesh, and MultiMeshInstance3D is not counted by the capture framer's AABB walk, so
+## the halo cannot quietly re-frame the shot against the other three values.
+func _obsession_air() -> void:
+	var count: int = 240
+	var dot_mesh := SphereMesh.new()
+	dot_mesh.radius = 0.07
+	dot_mesh.height = 0.14
+	dot_mesh.radial_segments = 8
+	dot_mesh.rings = 4
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = kusama_colors[1]
+	mat.roughness = 0.0
+	mat.metallic = 0.9
+	mat.metallic_specular = 1.0
+	mat.emission_enabled = true
+	mat.emission = kusama_colors[1] * 0.9
+	dot_mesh.material = mat
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = count
+	mm.mesh = dot_mesh
+
+	for i in range(count):
+		var t: float = float(i) / float(count)
+		var yy: float = 1.0 - 2.0 * t
+		var ring: float = sqrt(maxf(1.0 - yy * yy, 0.0))
+		var a: float = float(i) * 2.399963
+		var rad: float = 2.4 + sin(float(i) * 0.7) * 0.9
+		var s: float = 0.7 + sin(float(i) * 1.3) * 0.35
+		var xf := Transform3D()
+		xf.basis = Basis.IDENTITY.scaled(Vector3(s, s, s))
+		xf.origin = Vector3(cos(a) * ring * rad, yy * rad * 0.85, sin(a) * ring * rad)
+		mm.set_instance_transform(i, xf)
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "ObsessionAir_MM"
+	mmi.multimesh = mm
+	add_child(mmi)
+
+
+## OBLITERATION — the surfaces stand down and their dots stay. layers = 0, NOT
+## visible = false: every dot cloud in this artifact is a MultiMeshInstance3D CHILD of the
+## MeshInstance3D it decorates, and visibility resolves through is_visible_in_tree(), so
+## hiding a parent would hide its dots too and leave an empty frame. Render layers are
+## per-instance and do not propagate. MultiMeshInstance3D is a sibling class of
+## MeshInstance3D, not a subclass, so the `is` test below leaves the dots alone.
+func _obsession_obliteration(node: Node) -> void:
+	for child in node.get_children():
+		if child is MeshInstance3D:
+			(child as MeshInstance3D).layers = 0
+		_obsession_obliteration(child)

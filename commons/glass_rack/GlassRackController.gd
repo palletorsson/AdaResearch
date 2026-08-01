@@ -21,6 +21,41 @@ signal liquid_flow_stopped
 @export var show_liquid: bool = true
 @export var liquid_flow_speed: float = 1.0
 
+@export_group("DNA")
+## AXIS — WHAT THE GLASS ADMITS ABOUT ITSELF.
+##
+## Borosilicate is specified to be invisible: the whole point of the vessel is that you
+## look THROUGH it at the reaction and never at it. It never manages this. There is always
+## a rim, a meniscus, a reflection, a stain, a number scratched into the shoulder. This
+## axis decides how much of that the apparatus is allowed to show, which is the same
+## question as whether an instrument can be neutral.
+##
+##   none      the discipline's own picture of itself — clean glass, contents legible
+##             straight through, nothing recording that a hand was ever here. The legacy
+##             lineage, byte for byte.
+##   bench     mid-job — a retort stand with two boss clamps gripping the column, marker
+##             tape collars where somebody drew the level, a stirring rod, a scrawled
+##             plate taped to the front. The instrument is visibly being USED by someone.
+##   residue   the glass keeps the record — crust in every bottom, a tide ring at the old
+##             fill line, drips down the outside, and an etched band that has gone opaque.
+##             Transparency fails exactly where the work happened.
+##   exhibit   racked as evidence — a seal over every mouth, a numbered tag wired to every
+##             neck, a barcoded card on the front rail. Nobody is running this apparatus;
+##             it is being HELD, and the labels have become the readable part.
+##
+## The etched band is the pivot. It is the only dressing that destroys the transparency
+## the whole family is built on, which is why `residue` reads as an accusation and not as
+## dirt. Shared word for word with [[chemicalapparatus]] and [[samplevialrack]] — one
+## bench, one vocabulary, so a lab whose vials are sealed as evidence cannot have a
+## distillation rack that still reads as pristine stock.
+##
+## NAMED `admission` AND NOT `witness`: [[lab_room]] already declares a `witness` axis and
+## it means something else entirely — pane | none | port | sash, the aperture you look
+## into the room THROUGH. Config keys are one flat global namespace, so a map placing a
+## room and a rack and passing one word would be addressing two different arguments.
+@export var admission: String = "none"
+const ADMISSIONS: PackedStringArray = ["none", "bench", "residue", "exhibit"]
+
 # Materials
 var glass_material: StandardMaterial3D
 var liquid_material: StandardMaterial3D
@@ -31,6 +66,10 @@ func _ready() -> void:
 	segment_length = 0.3
 	_setup_materials()
 	super._ready()
+	# ADMISSION dressing, appended after the apparatus exists so every node index and
+	# transform above is untouched. "none" adds nothing at all and returns immediately.
+	_read_admission_meta()
+	_dress_admission()
 
 func _setup_materials() -> void:
 	# Glass material — enhanced borosilicate look
@@ -972,8 +1011,15 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("show_liquid"):
 		show_liquid = config["show_liquid"]
 
+	if config.has("admission"):
+		admission = _pick_admission(str(config["admission"]))
+
 	# Call base class for path/config handling
 	super.apply_grid_config(config)
+
+	# Re-dress last, after any rebuild the base class may have run. Idempotent: the old
+	# Admission node is dropped first, and "none" leaves nothing behind.
+	_dress_admission()
 
 func _get_config_directory() -> String:
 	return "res://commons/glass_rack/configs"
@@ -986,3 +1032,313 @@ func _get_config_directory() -> String:
 func build_apparatus() -> void:
 	# For backwards compatibility with old configs
 	pass
+
+# =============================================================================
+# ADMISSION — what the glass admits about itself
+# =============================================================================
+# Everything below is APPENDED. It runs after the apparatus is built, adds one
+# child named "Admission" and touches nothing that already exists. `admission ==
+# "none"` returns before that child is even created, so the legacy build is
+# reproduced node for node.
+
+const ADMISSION_ROOT := "Admission"
+
+
+func _read_admission_meta() -> void:
+	## The grid stamps config_<key> metadata BEFORE add_child, so this is readable
+	## from _ready(). An unknown word keeps the default rather than blanking the axis.
+	if has_meta("config_admission"):
+		admission = _pick_admission(str(get_meta("config_admission")))
+
+
+func _pick_admission(raw: String) -> String:
+	var w: String = raw.strip_edges().to_lower()
+	return w if ADMISSIONS.has(w) else admission
+
+
+func _dress_admission() -> void:
+	var old: Node = get_node_or_null(ADMISSION_ROOT)
+	if old:
+		remove_child(old)
+		old.queue_free()
+	if admission == "none":
+		return
+
+	var boxes: Array = _admission_vessel_boxes()
+	var whole: AABB = _admission_subtree_box(self)
+	if boxes.is_empty() or whole.size.length() < 0.001:
+		return
+
+	var root := Node3D.new()
+	root.name = ADMISSION_ROOT
+	add_child(root)
+
+	match admission:
+		"bench":
+			_admission_bench(root, boxes, whole)
+		"residue":
+			_admission_residue(root, boxes)
+		"exhibit":
+			_admission_exhibit(root, boxes, whole)
+		_:
+			pass
+
+
+## BENCH — the apparatus mid-job. A stand and two clamps hold the column from the
+## right, tape collars mark the levels somebody was watching, a rod stands in the
+## bottom vessel and a scrawled plate is taped to the front rail.
+func _admission_bench(root: Node3D, boxes: Array, whole: AABB) -> void:
+	var steel: StandardMaterial3D = _admission_mat(Color(0.60, 0.62, 0.66), 0.35, 0.85)
+	var tape: StandardMaterial3D = _admission_mat(Color(0.94, 0.92, 0.84), 0.85, 0.0)
+	var ink: StandardMaterial3D = _admission_mat(Color(0.10, 0.10, 0.13), 0.8, 0.0)
+
+	var y0: float = whole.position.y
+	var h: float = maxf(whole.size.y, 0.05)
+	var sx: float = whole.position.x + whole.size.x * 0.94
+	var sz: float = whole.get_center().z
+	var rod_r: float = maxf(h * 0.010, 0.003)
+
+	# Stand: a weighted base plate and a full-height rod at the right of the rack.
+	_admission_box(root, Vector3(sx - h * 0.03, y0 + h * 0.011, sz),
+		Vector3(h * 0.17, h * 0.022, h * 0.13), steel)
+	_admission_cyl(root, Vector3(sx, y0 + h * 0.5, sz), rod_r, h * 0.97, steel)
+
+	# Two boss clamps reaching in along -X to grip the vessel column. The reach is read
+	# off the vessels themselves, not guessed: the turtle builds some segments off-centre.
+	var reach: float = whole.position.x
+	for b0 in boxes:
+		var eb: AABB = b0
+		reach = maxf(reach, eb.end.x)
+	reach = minf(reach + h * 0.012, sx - h * 0.03)
+	for clamp_i in range(2):
+		var cy: float = y0 + h * (0.34 + 0.38 * float(clamp_i))
+		_admission_box(root, Vector3(sx, cy, sz), Vector3(rod_r * 4.0, h * 0.045, rod_r * 4.0), steel)
+		var arm_len: float = maxf(sx - reach, h * 0.04)
+		_admission_cyl_x(root, Vector3(sx - arm_len * 0.5, cy, sz), rod_r * 0.75, arm_len, steel)
+		# jaw — two short pads closing on the vessel
+		for jaw_i in range(2):
+			var jz: float = -1.0 + 2.0 * float(jaw_i)
+			_admission_box(root, Vector3(reach, cy, sz + jz * h * 0.045),
+				Vector3(h * 0.03, h * 0.020, h * 0.030), steel)
+
+	# Marker tape where somebody drew the level, on the two widest vessels.
+	var wide: Array = _admission_widest(boxes, 2)
+	for b in wide:
+		var vb: AABB = b
+		var r: float = _admission_radius(vb)
+		_admission_cyl(root, Vector3(vb.get_center().x, vb.position.y + vb.size.y * 0.58, vb.get_center().z),
+			r + maxf(r * 0.06, 0.0015), maxf(vb.size.y * 0.035, 0.004), tape)
+
+	# A stirring rod standing in the lowest vessel, leaning out of it.
+	var low: AABB = _admission_lowest(boxes)
+	var rod: MeshInstance3D = _admission_cyl(root,
+		Vector3(low.get_center().x - h * 0.02, low.position.y + h * 0.13, low.get_center().z),
+		rod_r * 0.55, h * 0.30, tape)
+	rod.rotation_degrees = Vector3(0, 0, 14.0)
+
+	# A scrawled plate taped to the front rail: pale card, two ink lines.
+	var cz: float = whole.end.z + h * 0.006
+	var cy2: float = y0 + h * 0.50
+	var cx: float = whole.position.x + whole.size.x * 0.20
+	_admission_box(root, Vector3(cx, cy2, cz), Vector3(h * 0.15, h * 0.10, h * 0.006), tape)
+	for i in range(2):
+		_admission_box(root, Vector3(cx, cy2 + h * (0.018 - 0.030 * float(i)), cz + h * 0.005),
+			Vector3(h * 0.11, h * 0.010, h * 0.003), ink)
+
+
+## RESIDUE — the glass keeps the record. Crust in every bottom, a tide ring at the
+## old fill line, drips down the outside, and an etched band that has gone opaque:
+## the transparency fails exactly where the work happened.
+func _admission_residue(root: Node3D, boxes: Array) -> void:
+	var crust: StandardMaterial3D = _admission_mat(Color(0.22, 0.17, 0.09), 0.97, 0.0)
+	var tide: StandardMaterial3D = _admission_mat(Color(0.38, 0.30, 0.16), 0.92, 0.0)
+	var frost: StandardMaterial3D = _admission_mat(Color(0.80, 0.82, 0.79), 1.0, 0.0)
+
+	for i in range(boxes.size()):
+		var b: AABB = boxes[i]
+		var r: float = _admission_radius(b)
+		var c: Vector3 = b.get_center()
+		var bh: float = maxf(b.size.y, 0.004)
+
+		# Dried crust settled in the bottom.
+		_admission_cyl(root, Vector3(c.x, b.position.y + bh * 0.055, c.z),
+			r * 0.84, bh * 0.11, crust)
+
+		# The tide line — where the level stood before it evaporated. Staggered per
+		# vessel so the rack reads as a history rather than a single event.
+		var tide_y: float = b.position.y + bh * (0.40 + 0.11 * float(i % 3))
+		_admission_cyl(root, Vector3(c.x, tide_y, c.z), r + maxf(r * 0.05, 0.0012),
+			maxf(bh * 0.028, 0.003), tide)
+
+		# The etched band: opaque, matte, and sitting on the widest part of the vessel.
+		# This is the value's whole argument — the instrument stops being see-through.
+		_admission_cyl(root, Vector3(c.x, c.y, c.z), r + maxf(r * 0.02, 0.0006),
+			bh * 0.24, frost)
+
+		# Drips running down the outside from the tide line to the foot.
+		var drop: float = tide_y - b.position.y
+		for d in range(2):
+			var a: float = 0.55 + 1.9 * float(d)
+			_admission_box(root, Vector3(c.x + cos(a) * r * 1.02, b.position.y + drop * 0.5,
+				c.z + sin(a) * r * 1.02), Vector3(r * 0.16, drop, r * 0.16), tide)
+
+
+## EXHIBIT — racked as evidence. A seal over every mouth, a numbered tag wired to
+## every neck, and a barcoded card on the front rail. The labels become the readable
+## part and the contents stop mattering.
+func _admission_exhibit(root: Node3D, boxes: Array, whole: AABB) -> void:
+	var card: StandardMaterial3D = _admission_mat(Color(0.91, 0.89, 0.81), 0.85, 0.0)
+	var ink: StandardMaterial3D = _admission_mat(Color(0.09, 0.09, 0.12), 0.8, 0.0)
+	var wire: StandardMaterial3D = _admission_mat(Color(0.58, 0.58, 0.62), 0.4, 0.8)
+	var seal: StandardMaterial3D = _admission_mat(Color(0.82, 0.30, 0.14), 0.7, 0.0)
+
+	for i in range(boxes.size()):
+		var b: AABB = boxes[i]
+		var r: float = _admission_radius(b)
+		var c: Vector3 = b.get_center()
+		var bh: float = maxf(b.size.y, 0.004)
+		var top: float = b.end.y
+
+		# Seal band over the mouth — this vessel is not to be opened.
+		_admission_cyl(root, Vector3(c.x, top - bh * 0.03, c.z), r * 0.42 + maxf(r * 0.05, 0.002),
+			maxf(bh * 0.05, 0.004), seal)
+
+		# Tag on a wire off the neck, hung on the +X side and facing the room.
+		var tw: float = maxf(r * 1.05, bh * 0.24)
+		var th: float = tw * 0.62
+		var tx: float = c.x + r + tw * 0.62
+		var ty: float = top - bh * 0.20
+		_admission_cyl_x(root, Vector3((c.x + r * 0.5 + tx) * 0.5, top - bh * 0.06, c.z),
+			maxf(r * 0.035, 0.0007), maxf(tx - c.x - r * 0.5, 0.004), wire)
+		_admission_box(root, Vector3(tx, ty, c.z), Vector3(tw, th, maxf(r * 0.06, 0.0015)), card)
+		for k in range(2):
+			_admission_box(root, Vector3(tx, ty + th * (0.22 - 0.42 * float(k)),
+				c.z + maxf(r * 0.05, 0.0012)),
+				Vector3(tw * 0.66, th * 0.13, maxf(r * 0.03, 0.0008)), ink)
+
+	# The accession card on the front rail, with its barcode.
+	var h: float = maxf(whole.size.y, 0.05)
+	var cz: float = whole.end.z + h * 0.006
+	var cy: float = whole.position.y + h * 0.44
+	_admission_box(root, Vector3(whole.get_center().x, cy, cz),
+		Vector3(h * 0.30, h * 0.11, h * 0.006), card)
+	for k in range(9):
+		var bx: float = whole.get_center().x + h * (-0.115 + 0.029 * float(k))
+		_admission_box(root, Vector3(bx, cy - h * 0.012, cz + h * 0.005),
+			Vector3(h * (0.006 if k % 2 == 0 else 0.012), h * 0.055, h * 0.003), ink)
+
+
+# ── Admission geometry helpers ──────────────────────────────────────────────────
+
+func _admission_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _admission_box(parent: Node3D, center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	parent.add_child(mi)
+	return mi
+
+
+func _admission_cyl(parent: Node3D, center: Vector3, radius: float, height: float, mat: Material) -> MeshInstance3D:
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = maxf(radius, 0.0004)
+	mesh.bottom_radius = maxf(radius, 0.0004)
+	mesh.height = maxf(height, 0.0006)
+	mesh.radial_segments = 16
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	parent.add_child(mi)
+	return mi
+
+
+func _admission_cyl_x(parent: Node3D, center: Vector3, radius: float, length: float, mat: Material) -> MeshInstance3D:
+	var mi: MeshInstance3D = _admission_cyl(parent, center, radius, length, mat)
+	mi.rotation_degrees = Vector3(0, 0, 90)
+	return mi
+
+
+## The radius a collar has to be to WRAP this vessel — the SMALLER horizontal extent,
+## not the larger. A flask segment is built with its neck lying along Z, so its box is
+## 0.12 x 0.16 and the larger extent describes the neck, not the belly: collars sized
+## from it stood off the glass as free-floating discs instead of banding it.
+func _admission_radius(b: AABB) -> float:
+	return maxf(minf(b.size.x, b.size.z) * 0.5, 0.002)
+
+
+func _admission_widest(boxes: Array, count: int) -> Array:
+	var pool: Array = boxes.duplicate()
+	var out: Array = []
+	while out.size() < count and not pool.is_empty():
+		var best: int = 0
+		for i in range(pool.size()):
+			var a: AABB = pool[i]
+			var b: AABB = pool[best]
+			if _admission_radius(a) > _admission_radius(b):
+				best = i
+		out.append(pool[best])
+		pool.remove_at(best)
+	return out
+
+
+func _admission_lowest(boxes: Array) -> AABB:
+	var best: AABB = boxes[0]
+	for b in boxes:
+		var vb: AABB = b
+		if vb.position.y < best.position.y:
+			best = vb
+	return best
+
+
+## One AABB per placed vessel/segment, in this node's own space. Works for both the
+## vessels-array configs and the turtle-path ones — both fill _segments_root.
+func _admission_vessel_boxes() -> Array:
+	var boxes: Array = []
+	if _segments_root == null:
+		return boxes
+	for child in _segments_root.get_children():
+		if child is Node3D:
+			var b: AABB = _admission_subtree_box(child as Node3D)
+			if b.size.length() > 0.0008:
+				boxes.append(b)
+	return boxes
+
+
+func _admission_subtree_box(from_node: Node3D) -> AABB:
+	var acc := AABB()
+	var have: bool = false
+	var stack: Array = [from_node]
+	while not stack.is_empty():
+		var cur = stack.pop_back()
+		if cur is MeshInstance3D:
+			var mi := cur as MeshInstance3D
+			if mi.mesh != null:
+				var wb: AABB = _admission_local_xform(mi) * mi.mesh.get_aabb()
+				acc = wb if not have else acc.merge(wb)
+				have = true
+		for ch in cur.get_children():
+			stack.append(ch)
+	return acc if have else AABB()
+
+
+## Transform of a descendant relative to THIS node, walked by hand so it is valid
+## during _ready() regardless of where the rack sits in the world.
+func _admission_local_xform(n: Node3D) -> Transform3D:
+	var t := Transform3D.IDENTITY
+	var cur: Node = n
+	while cur != null and cur != self:
+		if cur is Node3D:
+			t = (cur as Node3D).transform * t
+		cur = cur.get_parent()
+	return t

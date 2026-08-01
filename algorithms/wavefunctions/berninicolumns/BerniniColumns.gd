@@ -48,6 +48,34 @@ var columns = []
 @export var grid_spacing: float = 4.0  # Distance between columns
 var column_positions = []
 
+## AXIS — THE PLAN the columns stand in, and therefore what building this is.
+##
+## The word is adopted from [[room_shape_demonstrator]], which already asks the same
+## question of furniture (pair | head | circle | panopticon | vacant): how a set of identical
+## elements is disposed, and what that disposition does to the body that walks in. Same word,
+## same question, one scale up.
+##
+## A Solomonic column is a sine wound around a vertical axis; the spiral is the same in every
+## value here. What changes is how many of them there are and where they stand, which is the
+## only thing that decides whether the twist reads as a field, a canopy, a route or a
+## threshold.
+##
+##   grid    the legacy lineage, byte for byte — 3 x 3 equally spaced. A hypostyle field:
+##           no centre, no direction, nine equal columns and a body free to wander between
+##           them because nothing tells it where to go.
+##   ring    eight on a circle at the grid's corner radius, and nothing in the middle. The
+##           Baldacchino read: the colonnade is built around something that is not there, and
+##           the body's route is the circumference of an absence.
+##   aisle   two rows of four, one bay apart. A nave: the columns stop being objects and
+##           become a wall with holes in it, and the body is given exactly one direction.
+##   pair    two columns, one bay apart, alone. A threshold — the wave reduced to the two
+##           uprights of a door, which is the smallest arrangement that still asks a body to
+##           pass BETWEEN rather than AROUND.
+##
+## The spotlights follow the columns, so a colonnade is lit the way it is laid out.
+@export_enum("grid", "ring", "aisle", "pair") var colonnade: String = "grid"
+const PLANS: PackedStringArray = ["grid", "ring", "aisle", "pair"]
+
 func _generate_grid_positions() -> void:
 	"""Generate a 3x3 equally spaced grid of column positions"""
 	column_positions.clear()
@@ -63,9 +91,22 @@ func _generate_grid_positions() -> void:
 			)
 			column_positions.append(pos)
 
+	# PLAN, appended LAST so the 3 x 3 list above is built exactly as it always was. "grid"
+	# falls through to `_` and keeps it; the other three clear it and lay out their own.
+	match colonnade:
+		"ring":
+			_plan_ring()
+		"aisle":
+			_plan_aisle()
+		"pair":
+			_plan_pair()
+		_:
+			pass
+
 # -- Godot Lifecycle Functions --
 
 func _ready() -> void:
+	_read_dna_meta()
 	_setup_audio()
 	
 	# Generate equally spaced grid positions
@@ -312,4 +353,69 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Only the DNA axis is read here; every other key is ignored exactly as before.
+	#
+	# NOTE ON THE REAL CHANNEL: the grid instantiates BerniniScene.tscn, whose ROOT has no
+	# script — this script lives on the BerniniColumns child. So the grid's has_method()
+	# check fails on the root and this function is never reached from a map. The metadata
+	# channel is: the grid sets config_* on the root before add_child, and _read_dna_meta
+	# below reads it from the parent. This stays for the DNA-spec path, which calls it
+	# directly. It records the value; it does NOT rebuild, because there is no teardown for
+	# nine columns, nine spotlights and a running audio generator, and inventing one here
+	# would risk the built path for a case that cannot occur.
+	if config.has("colonnade"):
+		var v: String = str(config["colonnade"]).strip_edges().to_lower()
+		colonnade = v if PLANS.has(v) else colonnade
+
+
+## The grid sets `config_*` metadata BEFORE add_child, so this runs ahead of the build. It
+## looks at the PARENT as well as at itself: the metadata lands on BerniniScene, the scene
+## root, because that is the node the grid instantiated, and this script is one level down.
+## No metadata, no change — an unknown word keeps the default.
+func _read_dna_meta() -> void:
+	var raw: Variant = null
+	if has_meta("config_plan"):
+		raw = get_meta("config_plan")
+	else:
+		var host: Node = get_parent()
+		if host != null and host.has_meta("config_plan"):
+			raw = host.get_meta("config_plan")
+	if raw == null:
+		return
+	var v: String = str(raw).strip_edges().to_lower()
+	colonnade = v if PLANS.has(v) else colonnade
+
+
+# ── PLAN ─────────────────────────────────────────────────────────────────────────────────
+# Appended LAST. Each builder clears the 3 x 3 list and writes its own; "grid" never reaches
+# them, so the legacy lineage keeps the exact nine positions it always had. Everything
+# downstream — the columns, the spotlights, the audio voice count — reads column_positions,
+# so a colonnade is built, lit and voiced consistently.
+
+## RING — eight on a circle at the grid's corner radius, empty in the middle.
+func _plan_ring() -> void:
+	column_positions.clear()
+	var count: int = 8
+	var radius: float = grid_spacing * 1.414
+	for i in range(count):
+		var a: float = TAU * float(i) / float(count)
+		column_positions.append(Vector3(cos(a) * radius, 0.0, sin(a) * radius))
+
+
+## AISLE — two rows of four, one bay apart: a nave with a single direction through it.
+func _plan_aisle() -> void:
+	column_positions.clear()
+	var per_side: int = 4
+	var half: float = grid_spacing * 0.5
+	for i in range(per_side):
+		var z: float = (float(i) - float(per_side - 1) * 0.5) * grid_spacing
+		column_positions.append(Vector3(-half, 0.0, z))
+		column_positions.append(Vector3(half, 0.0, z))
+
+
+## PAIR — two columns, one bay apart: a threshold, and nothing else.
+func _plan_pair() -> void:
+	column_positions.clear()
+	var half: float = grid_spacing * 0.5
+	column_positions.append(Vector3(-half, 0.0, 0.0))
+	column_positions.append(Vector3(half, 0.0, 0.0))
