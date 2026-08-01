@@ -1,0 +1,415 @@
+{
+ "seq": "fractals",
+ "cast_source": "Trial_halls_fractals",
+ "bred_baseline": [
+  {
+   "recipe": "halls",
+   "status": "ok",
+   "map": "Trial_halls_fractals",
+   "tau": 0.67,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "9/9",
+   "runtime_s": 214.2,
+   "heroDeg": 48,
+   "hero": "fractal_arch_bench",
+   "score": 7.33
+  },
+  {
+   "recipe": "wfc",
+   "status": "ok",
+   "map": "Trial_wfc_fractals",
+   "tau": 0.2,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "10/10",
+   "runtime_s": 152.8,
+   "heroDeg": 72,
+   "hero": "recursive_tree_bench",
+   "score": 6.4
+  },
+  {
+   "recipe": "rooms",
+   "status": "ok",
+   "map": "Trial_rooms_fractals",
+   "tau": 0.44,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "9/9",
+   "runtime_s": 226.4,
+   "heroDeg": 36,
+   "hero": "fractal_arch_bench",
+   "score": 6.39
+  },
+  {
+   "recipe": "wanghall",
+   "status": "ok",
+   "map": "Trial_wanghall_fractals",
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "9/9",
+   "runtime_s": 192.7,
+   "heroDeg": 107,
+   "hero": "fractal_arch_bench",
+   "score": 6.17
+  },
+  {
+   "recipe": "physarum",
+   "status": "ok",
+   "map": "Trial_physarum_fractals",
+   "tau": 0.8,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 219.9,
+   "heroDeg": 27,
+   "hero": "menger_bench",
+   "score": 6.1
+  },
+  {
+   "recipe": "derive",
+   "status": "ok",
+   "map": "Trial_derive_fractals",
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.75,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 81.9,
+   "heroDeg": 42,
+   "hero": "menger_bench",
+   "score": 5.92
+  },
+  {
+   "recipe": "dla",
+   "status": "ok",
+   "map": "Trial_dla_fractals",
+   "tau": 0.6,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 236.9,
+   "heroDeg": 10,
+   "hero": "menger_bench",
+   "score": 5.2
+  },
+  {
+   "recipe": "ants",
+   "status": "ok",
+   "map": "Trial_ants_fractals",
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.8,
+   "rank1": 1.0,
+   "cycles": "8/8",
+   "runtime_s": 195.9,
+   "heroDeg": 111,
+   "hero": "recursive_tree_bench",
+   "score": 4.8
+  },
+  {
+   "recipe": "antrooms",
+   "status": "ok",
+   "map": "Trial_antrooms_fractals",
+   "tau": 0.4,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 142.9,
+   "heroDeg": 23,
+   "hero": "menger_bench",
+   "score": 4.8
+  },
+  {
+   "recipe": "erosion",
+   "status": "ok",
+   "map": "Trial_erosion_fractals",
+   "tau": 0.2,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 251.9,
+   "heroDeg": 27,
+   "hero": "menger_bench",
+   "score": 4.4
+  },
+  {
+   "recipe": "rd",
+   "status": "ok",
+   "map": "Trial_rd_fractals",
+   "tau": -0.4,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 318.3,
+   "heroDeg": 23,
+   "hero": "menger_bench",
+   "score": 4.2
+  },
+  {
+   "recipe": "voronoi",
+   "status": "ok",
+   "map": "Trial_voronoi_fractals",
+   "tau": -0.2,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 215.9,
+   "heroDeg": 18,
+   "hero": "menger_bench",
+   "score": 4.1
+  },
+  {
+   "recipe": "flock",
+   "status": "ok",
+   "map": "Trial_flock_fractals",
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.88,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 140.3,
+   "heroDeg": 27,
+   "hero": "menger_bench",
+   "score": 3.88
+  },
+  {
+   "recipe": "lsystem",
+   "status": "ok",
+   "map": "Trial_lsystem_fractals",
+   "tau": -0.33,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 111.3,
+   "heroDeg": 13,
+   "hero": "info_board",
+   "score": 3.33
+  }
+ ],
+ "museum_rows": [
+  {
+   "museum": "uffizi-spine-enfilade",
+   "status": "ok",
+   "map": "Trial_uffizi_fractals",
+   "slots_used": 18,
+   "overflow_hung": 7,
+   "undealt": 0,
+   "tau": 0.22,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.44,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "9/9",
+   "runtime_s": 94.7,
+   "heroDeg": 41,
+   "hero": "fractal_arch_bench",
+   "score": 4.94,
+   "score2": 4.94
+  },
+  {
+   "museum": "grande-galerie-axial",
+   "status": "ok",
+   "map": "Trial_grande_fractals",
+   "slots_used": 19,
+   "overflow_hung": 6,
+   "undealt": 0,
+   "tau": 0.72,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.17,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "9/9",
+   "runtime_s": 97.5,
+   "heroDeg": 30,
+   "hero": "fractal_arch_bench",
+   "score": 5.44,
+   "score2": 5.61
+  },
+  {
+   "museum": "castelvecchio-endstopped-enfilade",
+   "status": "ok",
+   "map": "Trial_castelvecchio_fractals",
+   "slots_used": 9,
+   "overflow_hung": 16,
+   "undealt": 0,
+   "tau": 0.39,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.19,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "9/9",
+   "runtime_s": 97.9,
+   "heroDeg": 18,
+   "hero": "fractal_arch_bench",
+   "score": 4.78,
+   "score2": 4.97
+  },
+  {
+   "museum": "kanazawa-room-matrix",
+   "status": "ok",
+   "map": "Trial_kanazawa_fractals",
+   "slots_used": 9,
+   "overflow_hung": 16,
+   "undealt": 0,
+   "tau": -0.06,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.12,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "9/9",
+   "runtime_s": 100.0,
+   "heroDeg": 30,
+   "hero": "fractal_arch_bench",
+   "score": 3.89,
+   "score2": 4.01
+  },
+  {
+   "museum": "sainsbury-false-perspective-enfilade",
+   "status": "ok",
+   "map": "Trial_sainsbury_fractals",
+   "slots_used": 14,
+   "overflow_hung": 11,
+   "undealt": 0,
+   "tau": 0.29,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "9/9",
+   "runtime_s": 107.7,
+   "heroDeg": 68,
+   "hero": "fractal_arch_bench",
+   "score": 5.57,
+   "score2": 6.08
+  }
+ ],
+ "merged_leaderboard": [
+  {
+   "lineage": "bred",
+   "name": "halls",
+   "score": 7.33
+  },
+  {
+   "lineage": "bred",
+   "name": "wfc",
+   "score": 6.4
+  },
+  {
+   "lineage": "bred",
+   "name": "rooms",
+   "score": 6.39
+  },
+  {
+   "lineage": "bred",
+   "name": "wanghall",
+   "score": 6.17
+  },
+  {
+   "lineage": "bred",
+   "name": "physarum",
+   "score": 6.1
+  },
+  {
+   "lineage": "bred",
+   "name": "derive",
+   "score": 5.92
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "sainsbury-false-perspective-enfilade",
+   "score": 5.57
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "grande-galerie-axial",
+   "score": 5.44
+  },
+  {
+   "lineage": "bred",
+   "name": "dla",
+   "score": 5.2
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "uffizi-spine-enfilade",
+   "score": 4.94
+  },
+  {
+   "lineage": "bred",
+   "name": "ants",
+   "score": 4.8
+  },
+  {
+   "lineage": "bred",
+   "name": "antrooms",
+   "score": 4.8
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "castelvecchio-endstopped-enfilade",
+   "score": 4.78
+  },
+  {
+   "lineage": "bred",
+   "name": "erosion",
+   "score": 4.4
+  },
+  {
+   "lineage": "bred",
+   "name": "rd",
+   "score": 4.2
+  },
+  {
+   "lineage": "bred",
+   "name": "voronoi",
+   "score": 4.1
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "kanazawa-room-matrix",
+   "score": 3.89
+  },
+  {
+   "lineage": "bred",
+   "name": "flock",
+   "score": 3.88
+  },
+  {
+   "lineage": "bred",
+   "name": "lsystem",
+   "score": 3.33
+  }
+ ]
+}

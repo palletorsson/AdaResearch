@@ -1,0 +1,415 @@
+{
+ "seq": "boolean_surfaces",
+ "cast_source": "Trial_halls_boolean_surfaces",
+ "bred_baseline": [
+  {
+   "recipe": "halls",
+   "status": "ok",
+   "map": "Trial_halls_boolean_surfaces",
+   "tau": 0.8,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 0.67,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 106.1,
+   "heroDeg": 15,
+   "hero": "csg_compose_workbench",
+   "score": 7.27
+  },
+  {
+   "recipe": "wfc",
+   "status": "ok",
+   "map": "Trial_wfc_boolean_surfaces",
+   "tau": 0.8,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 69.7,
+   "heroDeg": 23,
+   "hero": "csg_compose_workbench",
+   "score": 7.1
+  },
+  {
+   "recipe": "ants",
+   "status": "ok",
+   "map": "Trial_ants_boolean_surfaces",
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 0.0,
+   "rank1": 0.0,
+   "cycles": "2/2",
+   "runtime_s": 70.7,
+   "heroDeg": 3,
+   "hero": "csg_compose_workbench",
+   "score": 6.0
+  },
+  {
+   "recipe": "lsystem",
+   "status": "ok",
+   "map": "Trial_lsystem_boolean_surfaces",
+   "tau": 0.4,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 65.3,
+   "heroDeg": 27,
+   "hero": "csg_compose_workbench",
+   "score": 5.8
+  },
+  {
+   "recipe": "antrooms",
+   "status": "ok",
+   "map": "Trial_antrooms_boolean_surfaces",
+   "tau": 0.8,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.67,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 65.1,
+   "heroDeg": 27,
+   "hero": "csg_compose_workbench",
+   "score": 5.77
+  },
+  {
+   "recipe": "rooms",
+   "status": "ok",
+   "map": "Trial_rooms_boolean_surfaces",
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 64.5,
+   "heroDeg": 21,
+   "hero": "csg_compose_workbench",
+   "score": 5.0
+  },
+  {
+   "recipe": "wanghall",
+   "status": "ok",
+   "map": "Trial_wanghall_boolean_surfaces",
+   "tau": -0.4,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "5/5",
+   "runtime_s": 80.0,
+   "heroDeg": 18,
+   "hero": "csg_compose_workbench",
+   "score": 4.7
+  },
+  {
+   "recipe": "derive",
+   "status": "ok",
+   "map": "Trial_derive_boolean_surfaces",
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 39.0,
+   "heroDeg": 16,
+   "hero": "csg_compose_workbench",
+   "score": 4.5
+  },
+  {
+   "recipe": "flock",
+   "status": "ok",
+   "map": "Trial_flock_boolean_surfaces",
+   "tau": 0.2,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 59.9,
+   "heroDeg": 35,
+   "hero": "csg_compose_workbench",
+   "score": 4.4
+  },
+  {
+   "recipe": "dla",
+   "status": "ok",
+   "map": "Trial_dla_boolean_surfaces",
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 135.6,
+   "heroDeg": 15,
+   "hero": "csg_compose_workbench",
+   "score": 4.0
+  },
+  {
+   "recipe": "rd",
+   "status": "ok",
+   "map": "Trial_rd_boolean_surfaces",
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 170.2,
+   "heroDeg": 5,
+   "hero": "csg_compose_workbench",
+   "score": 4.0
+  },
+  {
+   "recipe": "voronoi",
+   "status": "ok",
+   "map": "Trial_voronoi_boolean_surfaces",
+   "tau": -0.33,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 89.8,
+   "heroDeg": 8,
+   "hero": "csg_compose_workbench",
+   "score": 3.33
+  },
+  {
+   "recipe": "physarum",
+   "status": "ok",
+   "map": "Trial_physarum_boolean_surfaces",
+   "tau": -0.4,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 136.0,
+   "heroDeg": 8,
+   "hero": "csg_compose_workbench",
+   "score": 3.2
+  },
+  {
+   "recipe": "erosion",
+   "status": "ok",
+   "map": "Trial_erosion_boolean_surfaces",
+   "tau": -0.67,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 120.6,
+   "heroDeg": 3,
+   "hero": "csg_compose_workbench",
+   "score": 2.17
+  }
+ ],
+ "museum_rows": [
+  {
+   "museum": "uffizi-spine-enfilade",
+   "status": "ok",
+   "map": "Trial_uffizi_boolean_surfaces",
+   "slots_used": 12,
+   "overflow_hung": 0,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.1,
+   "dolly": 0.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 57.4,
+   "heroDeg": 9,
+   "hero": "csg_compose_workbench",
+   "score": 5.0,
+   "score2": 5.1
+  },
+  {
+   "museum": "grande-galerie-axial",
+   "status": "ok",
+   "map": "Trial_grande_boolean_surfaces",
+   "slots_used": 12,
+   "overflow_hung": 0,
+   "undealt": 0,
+   "tau": 0.8,
+   "cov": 1.0,
+   "promise": 1.0,
+   "patience": 0.02,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 59.5,
+   "heroDeg": 6,
+   "hero": "csg_compose_workbench",
+   "score": 6.6,
+   "score2": 6.6
+  },
+  {
+   "museum": "castelvecchio-endstopped-enfilade",
+   "status": "ok",
+   "map": "Trial_castelvecchio_boolean_surfaces",
+   "slots_used": 9,
+   "overflow_hung": 3,
+   "undealt": 0,
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.07,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 62.6,
+   "heroDeg": 13,
+   "hero": "csg_compose_workbench",
+   "score": 4.0,
+   "score2": 4.07
+  },
+  {
+   "museum": "kanazawa-room-matrix",
+   "status": "ok",
+   "map": "Trial_kanazawa_boolean_surfaces",
+   "slots_used": 9,
+   "overflow_hung": 3,
+   "undealt": 0,
+   "tau": 0.6,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.16,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 59.7,
+   "heroDeg": 23,
+   "hero": "csg_compose_workbench",
+   "score": 5.2,
+   "score2": 5.36
+  },
+  {
+   "museum": "sainsbury-false-perspective-enfilade",
+   "status": "ok",
+   "map": "Trial_sainsbury_boolean_surfaces",
+   "slots_used": 12,
+   "overflow_hung": 0,
+   "undealt": 0,
+   "tau": 0.4,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.11,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/5",
+   "runtime_s": 68.6,
+   "heroDeg": 18,
+   "hero": "csg_compose_workbench",
+   "score": 4.8,
+   "score2": 4.91
+  }
+ ],
+ "merged_leaderboard": [
+  {
+   "lineage": "bred",
+   "name": "halls",
+   "score": 7.27
+  },
+  {
+   "lineage": "bred",
+   "name": "wfc",
+   "score": 7.1
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "grande-galerie-axial",
+   "score": 6.6
+  },
+  {
+   "lineage": "bred",
+   "name": "ants",
+   "score": 6.0
+  },
+  {
+   "lineage": "bred",
+   "name": "lsystem",
+   "score": 5.8
+  },
+  {
+   "lineage": "bred",
+   "name": "antrooms",
+   "score": 5.77
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "kanazawa-room-matrix",
+   "score": 5.2
+  },
+  {
+   "lineage": "bred",
+   "name": "rooms",
+   "score": 5.0
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "uffizi-spine-enfilade",
+   "score": 5.0
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "sainsbury-false-perspective-enfilade",
+   "score": 4.8
+  },
+  {
+   "lineage": "bred",
+   "name": "wanghall",
+   "score": 4.7
+  },
+  {
+   "lineage": "bred",
+   "name": "derive",
+   "score": 4.5
+  },
+  {
+   "lineage": "bred",
+   "name": "flock",
+   "score": 4.4
+  },
+  {
+   "lineage": "bred",
+   "name": "dla",
+   "score": 4.0
+  },
+  {
+   "lineage": "bred",
+   "name": "rd",
+   "score": 4.0
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "castelvecchio-endstopped-enfilade",
+   "score": 4.0
+  },
+  {
+   "lineage": "bred",
+   "name": "voronoi",
+   "score": 3.33
+  },
+  {
+   "lineage": "bred",
+   "name": "physarum",
+   "score": 3.2
+  },
+  {
+   "lineage": "bred",
+   "name": "erosion",
+   "score": 2.17
+  }
+ ]
+}

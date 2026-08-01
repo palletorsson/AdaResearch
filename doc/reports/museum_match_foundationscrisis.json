@@ -1,0 +1,415 @@
+{
+ "seq": "foundationscrisis",
+ "cast_source": "Trial_derive_foundationscrisis",
+ "bred_baseline": [
+  {
+   "recipe": "derive",
+   "status": "ok",
+   "map": "Trial_derive_foundationscrisis",
+   "tau": 0.67,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.62,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 82.1,
+   "heroDeg": 29,
+   "hero": "godel_sentence_machine",
+   "score": 6.46
+  },
+  {
+   "recipe": "erosion",
+   "status": "ok",
+   "map": "Trial_erosion_foundationscrisis",
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 0.5,
+   "rank1": 1.0,
+   "cycles": "6/6",
+   "runtime_s": 238.6,
+   "heroDeg": 39,
+   "hero": "info_board",
+   "score": 6.17
+  },
+  {
+   "recipe": "dla",
+   "status": "ok",
+   "map": "Trial_dla_foundationscrisis",
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 0.75,
+   "rank1": 0.0,
+   "cycles": "6/6",
+   "runtime_s": 234.7,
+   "heroDeg": 18,
+   "hero": "info_board",
+   "score": 5.42
+  },
+  {
+   "recipe": "rooms",
+   "status": "ok",
+   "map": "Trial_rooms_foundationscrisis",
+   "tau": 0.38,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.75,
+   "rank1": 1.0,
+   "cycles": "10/11",
+   "runtime_s": 174.7,
+   "heroDeg": 44,
+   "hero": "rhizome_bench",
+   "score": 5.33
+  },
+  {
+   "recipe": "halls",
+   "status": "ok",
+   "map": "Trial_halls_foundationscrisis",
+   "tau": 0.16,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "10/11",
+   "runtime_s": 219.8,
+   "heroDeg": 27,
+   "hero": "rhizome_bench",
+   "score": 5.15
+  },
+  {
+   "recipe": "wfc",
+   "status": "ok",
+   "map": "Trial_wfc_foundationscrisis",
+   "tau": 0.05,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "10/11",
+   "runtime_s": 151.3,
+   "heroDeg": 19,
+   "hero": "curvature_bench",
+   "score": 4.93
+  },
+  {
+   "recipe": "physarum",
+   "status": "ok",
+   "map": "Trial_physarum_foundationscrisis",
+   "tau": 0.47,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "6/6",
+   "runtime_s": 243.3,
+   "heroDeg": 18,
+   "hero": "info_board",
+   "score": 4.93
+  },
+  {
+   "recipe": "ants",
+   "status": "ok",
+   "map": "Trial_ants_foundationscrisis",
+   "tau": -0.05,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.83,
+   "rank1": 1.0,
+   "cycles": "11/11",
+   "runtime_s": 212.1,
+   "heroDeg": 101,
+   "hero": "rhizome_bench",
+   "score": 4.72
+  },
+  {
+   "recipe": "antrooms",
+   "status": "ok",
+   "map": "Trial_antrooms_foundationscrisis",
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.33,
+   "rank1": 0.0,
+   "cycles": "6/6",
+   "runtime_s": 160.7,
+   "heroDeg": 14,
+   "hero": "info_board",
+   "score": 4.5
+  },
+  {
+   "recipe": "wanghall",
+   "status": "ok",
+   "map": "Trial_wanghall_foundationscrisis",
+   "tau": -0.2,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "10/11",
+   "runtime_s": 207.4,
+   "heroDeg": 101,
+   "hero": "rhizome_bench",
+   "score": 4.42
+  },
+  {
+   "recipe": "flock",
+   "status": "ok",
+   "map": "Trial_flock_foundationscrisis",
+   "tau": 0.2,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "6/6",
+   "runtime_s": 130.5,
+   "heroDeg": 18,
+   "hero": "info_board",
+   "score": 4.4
+  },
+  {
+   "recipe": "rd",
+   "status": "ok",
+   "map": "Trial_rd_foundationscrisis",
+   "tau": -0.47,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "6/6",
+   "runtime_s": 319.4,
+   "heroDeg": 28,
+   "hero": "info_board",
+   "score": 3.57
+  },
+  {
+   "recipe": "voronoi",
+   "status": "ok",
+   "map": "Trial_voronoi_foundationscrisis",
+   "tau": -0.6,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.8,
+   "rank1": 0.0,
+   "cycles": "6/6",
+   "runtime_s": 205.4,
+   "heroDeg": 25,
+   "hero": "info_board",
+   "score": 2.6
+  },
+  {
+   "recipe": "lsystem",
+   "status": "ok",
+   "map": "Trial_lsystem_foundationscrisis",
+   "tau": -0.73,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "5/6",
+   "runtime_s": 119.3,
+   "heroDeg": 13,
+   "hero": "info_board",
+   "score": 2.2
+  }
+ ],
+ "museum_rows": [
+  {
+   "museum": "uffizi-spine-enfilade",
+   "status": "ok",
+   "map": "Trial_uffizi_foundationscrisis",
+   "slots_used": 14,
+   "overflow_hung": 0,
+   "undealt": 0,
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.08,
+   "dolly": 0.6,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 65.3,
+   "heroDeg": 22,
+   "hero": "godel_sentence_machine",
+   "score": 4.1,
+   "score2": 4.1
+  },
+  {
+   "museum": "grande-galerie-axial",
+   "status": "ok",
+   "map": "Trial_grande_foundationscrisis",
+   "slots_used": 14,
+   "overflow_hung": 0,
+   "undealt": 0,
+   "tau": 0.67,
+   "cov": 1.0,
+   "promise": 1.0,
+   "patience": 0.15,
+   "dolly": 0.62,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 67.3,
+   "heroDeg": 29,
+   "hero": "godel_sentence_machine",
+   "score": 6.96,
+   "score2": 6.96
+  },
+  {
+   "museum": "castelvecchio-endstopped-enfilade",
+   "status": "ok",
+   "map": "Trial_castelvecchio_foundationscrisis",
+   "slots_used": 9,
+   "overflow_hung": 5,
+   "undealt": 0,
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.02,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 72.0,
+   "heroDeg": 29,
+   "hero": "godel_sentence_machine",
+   "score": 5.5,
+   "score2": 5.5
+  },
+  {
+   "museum": "kanazawa-room-matrix",
+   "status": "ok",
+   "map": "Trial_kanazawa_foundationscrisis",
+   "slots_used": 9,
+   "overflow_hung": 5,
+   "undealt": 0,
+   "tau": -0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.29,
+   "dolly": 0.75,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 68.4,
+   "heroDeg": 28,
+   "hero": "godel_sentence_machine",
+   "score": 3.58,
+   "score2": 3.58
+  },
+  {
+   "museum": "sainsbury-false-perspective-enfilade",
+   "status": "ok",
+   "map": "Trial_sainsbury_foundationscrisis",
+   "slots_used": 14,
+   "overflow_hung": 0,
+   "undealt": 0,
+   "tau": -0.67,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.25,
+   "dolly": 0.57,
+   "rank1": 1.0,
+   "cycles": "3/4",
+   "runtime_s": 60.5,
+   "heroDeg": 42,
+   "hero": "godel_sentence_machine",
+   "score": 3.24,
+   "score2": 3.24
+  }
+ ],
+ "merged_leaderboard": [
+  {
+   "lineage": "MUSEUM",
+   "name": "grande-galerie-axial",
+   "score": 6.96
+  },
+  {
+   "lineage": "bred",
+   "name": "derive",
+   "score": 6.46
+  },
+  {
+   "lineage": "bred",
+   "name": "erosion",
+   "score": 6.17
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "castelvecchio-endstopped-enfilade",
+   "score": 5.5
+  },
+  {
+   "lineage": "bred",
+   "name": "dla",
+   "score": 5.42
+  },
+  {
+   "lineage": "bred",
+   "name": "rooms",
+   "score": 5.33
+  },
+  {
+   "lineage": "bred",
+   "name": "halls",
+   "score": 5.15
+  },
+  {
+   "lineage": "bred",
+   "name": "wfc",
+   "score": 4.93
+  },
+  {
+   "lineage": "bred",
+   "name": "physarum",
+   "score": 4.93
+  },
+  {
+   "lineage": "bred",
+   "name": "ants",
+   "score": 4.72
+  },
+  {
+   "lineage": "bred",
+   "name": "antrooms",
+   "score": 4.5
+  },
+  {
+   "lineage": "bred",
+   "name": "wanghall",
+   "score": 4.42
+  },
+  {
+   "lineage": "bred",
+   "name": "flock",
+   "score": 4.4
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "uffizi-spine-enfilade",
+   "score": 4.1
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "kanazawa-room-matrix",
+   "score": 3.58
+  },
+  {
+   "lineage": "bred",
+   "name": "rd",
+   "score": 3.57
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "sainsbury-false-perspective-enfilade",
+   "score": 3.24
+  },
+  {
+   "lineage": "bred",
+   "name": "voronoi",
+   "score": 2.6
+  },
+  {
+   "lineage": "bred",
+   "name": "lsystem",
+   "score": 2.2
+  }
+ ]
+}

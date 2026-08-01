@@ -224,13 +224,15 @@
    "tau": 0.2,
    "cov": 1.0,
    "promise": 0.5,
+   "patience": 0.61,
    "dolly": 1.0,
    "rank1": 1.0,
    "cycles": "5/5",
    "runtime_s": 80.3,
    "heroDeg": 58,
    "hero": "pattern_machine_c",
-   "score": 5.9
+   "score": 5.9,
+   "score2": 6.01
   },
   {
    "museum": "grande-galerie-axial",
@@ -242,13 +244,15 @@
    "tau": 0.6,
    "cov": 1.0,
    "promise": 0.5,
+   "patience": 0.23,
    "dolly": 1.0,
    "rank1": 1.0,
    "cycles": "5/5",
    "runtime_s": 80.2,
    "heroDeg": 44,
    "hero": "pattern_machine_c",
-   "score": 6.7
+   "score": 6.7,
+   "score2": 6.7
   },
   {
    "museum": "castelvecchio-endstopped-enfilade",
@@ -260,13 +264,15 @@
    "tau": 0.8,
    "cov": 1.0,
    "promise": 0.0,
+   "patience": 0.28,
    "dolly": 1.0,
    "rank1": 0.0,
    "cycles": "5/5",
    "runtime_s": 73.7,
    "heroDeg": 26,
    "hero": "pattern_machine_c",
-   "score": 5.6
+   "score": 5.6,
+   "score2": 5.88
   },
   {
    "museum": "kanazawa-room-matrix",
@@ -278,13 +284,15 @@
    "tau": 1.0,
    "cov": 1.0,
    "promise": 0.0,
+   "patience": 0.19,
    "dolly": 1.0,
    "rank1": 1.0,
    "cycles": "5/5",
    "runtime_s": 78.0,
    "heroDeg": 44,
    "hero": "pattern_machine_c",
-   "score": 7.0
+   "score": 7.0,
+   "score2": 7.19
   },
   {
    "museum": "sainsbury-false-perspective-enfilade",
@@ -296,13 +304,15 @@
    "tau": 0.2,
    "cov": 1.0,
    "promise": 0.0,
+   "patience": 0.95,
    "dolly": 1.0,
    "rank1": 1.0,
    "cycles": "5/5",
    "runtime_s": 97.0,
    "heroDeg": 90,
    "hero": "pattern_machine_c",
-   "score": 5.4
+   "score": 5.4,
+   "score2": 6.35
   }
  ],
  "merged_leaderboard": [

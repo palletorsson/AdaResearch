@@ -224,13 +224,15 @@
    "tau": 0.52,
    "cov": 1.0,
    "promise": 0.5,
+   "patience": 0.5,
    "dolly": 1.0,
    "rank1": 0.0,
    "cycles": "12/12",
    "runtime_s": 129.6,
    "heroDeg": 45,
    "hero": "random_walk_bench",
-   "score": 5.53
+   "score": 5.53,
+   "score2": 5.53
   },
   {
    "museum": "grande-galerie-axial",
@@ -242,13 +244,15 @@
    "tau": 0.48,
    "cov": 1.0,
    "promise": 0.5,
+   "patience": 0.18,
    "dolly": 1.0,
    "rank1": 0.0,
    "cycles": "12/12",
    "runtime_s": 128.5,
    "heroDeg": 33,
    "hero": "random_walk_bench",
-   "score": 5.47
+   "score": 5.47,
+   "score2": 5.47
   },
   {
    "museum": "castelvecchio-endstopped-enfilade",
@@ -260,13 +264,15 @@
    "tau": 0.39,
    "cov": 1.0,
    "promise": 0.0,
+   "patience": 0.21,
    "dolly": 1.0,
    "rank1": 0.0,
    "cycles": "10/12",
    "runtime_s": 113.0,
    "heroDeg": 20,
    "hero": "random_walk_bench",
-   "score": 4.45
+   "score": 4.45,
+   "score2": 4.67
   },
   {
    "museum": "kanazawa-room-matrix",
@@ -278,13 +284,15 @@
    "tau": 0.15,
    "cov": 1.0,
    "promise": 0.0,
+   "patience": 0.27,
    "dolly": 0.67,
    "rank1": 0.0,
    "cycles": "12/12",
    "runtime_s": 130.6,
    "heroDeg": 25,
    "hero": "random_walk_bench",
-   "score": 3.97
+   "score": 3.97,
+   "score2": 4.24
   },
   {
    "museum": "sainsbury-false-perspective-enfilade",
@@ -296,13 +304,15 @@
    "tau": -0.02,
    "cov": 1.0,
    "promise": 0.0,
+   "patience": 0.79,
    "dolly": 0.8,
    "rank1": 1.0,
    "cycles": "11/12",
    "runtime_s": 133.5,
    "heroDeg": 74,
    "hero": "random_walk_bench",
-   "score": 4.6
+   "score": 4.6,
+   "score2": 5.39
   }
  ],
  "merged_leaderboard": [

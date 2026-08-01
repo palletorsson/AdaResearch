@@ -96,16 +96,32 @@ def experience_score(name):
         dolly = 0.0
     hd = seen_deg.get(hero_b, 0)
     rank1 = 1.0 if seen_deg and hd == max(seen_deg.values()) else 0.0
+    # PATIENCE — the other hero contract. `promise` pays only a hero visible by
+    # step 1 (the integrated contract); the museum match showed the withheld
+    # contract (Sainsbury, Castelvecchio: bury the masterpiece, pull the
+    # visitor through everything) is structurally unscoreable by it. patience
+    # pays a LATE climax by its MAGNITUDE: how big the hero finally got, times
+    # how far into the walk the peak arrived. score2 = the same fitness with
+    # max(promise, patience) — either contract can win the hero point, never
+    # both. score2 PROPOSES; `score` remains the binding judge until ruled.
+    total_steps = len(list(dt.STEP_RE.finditer(ride)))
+    patience = 0.0
+    if degs and total_steps > 1:
+        peak_i = degs.index(max(degs))
+        peak_step = hero_track[peak_i][0]
+        patience = min(1.0, max(degs) / 90.0) * (peak_step / max(1, total_steps - 1))
     # desire cycles (P-3) via the forward transform
     tl = dt.transform(name)
     cyc = tl["summary"] if tl else {"cycles": 0, "complete": 0, "runtime_s": 0}
     cyc_frac = (cyc["complete"] / cyc["cycles"]) if cyc["cycles"] else 0.0
     score = 2 * tau + cov + promise + dolly + rank1 + 2 * cyc_frac
+    score2 = 2 * tau + cov + max(promise, patience) + dolly + rank1 + 2 * cyc_frac
     detail = {"tau": round(tau, 2), "cov": round(cov, 2), "promise": promise,
+              "patience": round(patience, 2),
               "dolly": round(dolly, 2), "rank1": rank1,
               "cycles": f"{cyc['complete']}/{cyc['cycles']}",
               "runtime_s": cyc.get("runtime_s", 0), "heroDeg": hd, "hero": hero_b,
-              "score": round(score, 2)}
+              "score": round(score, 2), "score2": round(score2, 2)}
     return score, detail
 
 

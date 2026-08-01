@@ -1,0 +1,355 @@
+{
+ "seq": "machinelearning",
+ "cast_source": "Trial_halls_machinelearning",
+ "bred_baseline": [
+  {
+   "recipe": "halls",
+   "status": "ok",
+   "map": "Trial_halls_machinelearning",
+   "tau": 0.67,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 189.2,
+   "heroDeg": 8,
+   "hero": "info_board",
+   "score": 7.33
+  },
+  {
+   "recipe": "wfc",
+   "status": "ok",
+   "map": "Trial_wfc_machinelearning",
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 117.6,
+   "heroDeg": 13,
+   "hero": "info_board",
+   "score": 6.5
+  },
+  {
+   "recipe": "rooms",
+   "status": "ok",
+   "map": "Trial_rooms_machinelearning",
+   "tau": 0.67,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.58,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 248.5,
+   "heroDeg": 28,
+   "hero": "info_board",
+   "score": 6.42
+  },
+  {
+   "recipe": "wanghall",
+   "status": "ok",
+   "map": "Trial_wanghall_machinelearning",
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 1.0,
+   "dolly": 0.5,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 208.2,
+   "heroDeg": 16,
+   "hero": "info_board",
+   "score": 6.17
+  },
+  {
+   "recipe": "erosion",
+   "status": "ok",
+   "map": "Trial_erosion_machinelearning",
+   "tau": 0.67,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.64,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 232.7,
+   "heroDeg": 19,
+   "hero": "info_board",
+   "score": 5.47
+  },
+  {
+   "recipe": "physarum",
+   "status": "ok",
+   "map": "Trial_physarum_machinelearning",
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.73,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 256.6,
+   "heroDeg": 39,
+   "hero": "info_board",
+   "score": 4.89
+  },
+  {
+   "recipe": "dla",
+   "status": "ok",
+   "map": "Trial_dla_machinelearning",
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 262.9,
+   "heroDeg": 5,
+   "hero": "info_board",
+   "score": 4.17
+  },
+  {
+   "recipe": "antrooms",
+   "status": "ok",
+   "map": "Trial_antrooms_machinelearning",
+   "tau": -0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 169.6,
+   "heroDeg": 19,
+   "hero": "info_board",
+   "score": 3.33
+  },
+  {
+   "recipe": "flock",
+   "status": "ok",
+   "map": "Trial_flock_machinelearning",
+   "tau": -0.33,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 211.3,
+   "heroDeg": 13,
+   "hero": "info_board",
+   "score": 3.33
+  },
+  {
+   "recipe": "lsystem",
+   "status": "ok",
+   "map": "Trial_lsystem_machinelearning",
+   "tau": -0.33,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.75,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 127.5,
+   "heroDeg": 16,
+   "hero": "info_board",
+   "score": 3.08
+  },
+  {
+   "recipe": "voronoi",
+   "status": "ok",
+   "map": "Trial_voronoi_machinelearning",
+   "tau": -0.67,
+   "cov": 1.0,
+   "promise": 0.0,
+   "dolly": 0.7,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 194.0,
+   "heroDeg": 11,
+   "hero": "info_board",
+   "score": 2.37
+  }
+ ],
+ "museum_rows": [
+  {
+   "museum": "uffizi-spine-enfilade",
+   "status": "ok",
+   "map": "Trial_uffizi_machinelearning",
+   "slots_used": 18,
+   "overflow_hung": 3,
+   "undealt": 0,
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.13,
+   "dolly": 0.8,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 82.0,
+   "heroDeg": 16,
+   "hero": "info_board",
+   "score": 4.97,
+   "score2": 4.97
+  },
+  {
+   "museum": "grande-galerie-axial",
+   "status": "ok",
+   "map": "Trial_grande_machinelearning",
+   "slots_used": 19,
+   "overflow_hung": 2,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 1.0,
+   "patience": 0.02,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 76.2,
+   "heroDeg": 14,
+   "hero": "info_board",
+   "score": 7.0,
+   "score2": 7.0
+  },
+  {
+   "museum": "castelvecchio-endstopped-enfilade",
+   "status": "ok",
+   "map": "Trial_castelvecchio_machinelearning",
+   "slots_used": 9,
+   "overflow_hung": 12,
+   "undealt": 0,
+   "tau": 0.67,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.15,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 68.4,
+   "heroDeg": 16,
+   "hero": "info_board",
+   "score": 4.83,
+   "score2": 4.98
+  },
+  {
+   "museum": "kanazawa-room-matrix",
+   "status": "ok",
+   "map": "Trial_kanazawa_machinelearning",
+   "slots_used": 9,
+   "overflow_hung": 12,
+   "undealt": 0,
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.11,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 73.3,
+   "heroDeg": 28,
+   "hero": "info_board",
+   "score": 4.67,
+   "score2": 4.78
+  },
+  {
+   "museum": "sainsbury-false-perspective-enfilade",
+   "status": "ok",
+   "map": "Trial_sainsbury_machinelearning",
+   "slots_used": 14,
+   "overflow_hung": 7,
+   "undealt": 0,
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.3,
+   "dolly": 0.75,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 92.0,
+   "heroDeg": 28,
+   "hero": "info_board",
+   "score": 4.75,
+   "score2": 5.05
+  }
+ ],
+ "merged_leaderboard": [
+  {
+   "lineage": "bred",
+   "name": "halls",
+   "score": 7.33
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "grande-galerie-axial",
+   "score": 7.0
+  },
+  {
+   "lineage": "bred",
+   "name": "wfc",
+   "score": 6.5
+  },
+  {
+   "lineage": "bred",
+   "name": "rooms",
+   "score": 6.42
+  },
+  {
+   "lineage": "bred",
+   "name": "wanghall",
+   "score": 6.17
+  },
+  {
+   "lineage": "bred",
+   "name": "erosion",
+   "score": 5.47
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "uffizi-spine-enfilade",
+   "score": 4.97
+  },
+  {
+   "lineage": "bred",
+   "name": "physarum",
+   "score": 4.89
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "castelvecchio-endstopped-enfilade",
+   "score": 4.83
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "sainsbury-false-perspective-enfilade",
+   "score": 4.75
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "kanazawa-room-matrix",
+   "score": 4.67
+  },
+  {
+   "lineage": "bred",
+   "name": "dla",
+   "score": 4.17
+  },
+  {
+   "lineage": "bred",
+   "name": "antrooms",
+   "score": 3.33
+  },
+  {
+   "lineage": "bred",
+   "name": "flock",
+   "score": 3.33
+  },
+  {
+   "lineage": "bred",
+   "name": "lsystem",
+   "score": 3.08
+  },
+  {
+   "lineage": "bred",
+   "name": "voronoi",
+   "score": 2.37
+  }
+ ]
+}
