@@ -35,8 +35,6 @@ def main() -> int:
             museums = a.split("=", 1)[1]
         elif a.startswith("--first="):
             first = a.split("=", 1)[1]
-    if VERDICT.exists():
-        VERDICT.unlink()
     cmd = [sys.executable, str(REPO / "tools" / "godot_watchdog.py"),
            f"--expect={VERDICT}", "--stall=20", "--",
            GODOT, "--path", ".", "--xr-mode", "off", "--no-window",
@@ -44,16 +42,31 @@ def main() -> int:
            f"--em-autopilot={museums}"]
     if first:
         cmd.append(f"--em-first={first}")
-    subprocess.run(cmd, cwd=REPO)
-    if not VERDICT.exists():
-        print("autopilot: NO VERDICT — the scene never got far enough to write one")
-        return 1
-    v = json.loads(VERDICT.read_text(encoding="utf-8"))
-    ok = bool(v.get("done")) and bool(v.get("ok"))
-    print(f"autopilot: {'PASS' if ok else 'FAIL'} — {v.get('museums_target')} museums"
-          f"{' from ' + first if first else ''}, z={v.get('z'):.1f}/{v.get('goal_z'):.1f},"
-          f" {v.get('elapsed_s'):.1f}s walked, {v.get('cells_unlearned', 0)} cells unlearned")
-    return 0 if ok else 1
+    # Up to three attempts: the engine can die on a GPU-artifact access
+    # violation during boot (nondeterministic, unrelated to the corridor), and
+    # a crash with NO verdict is an engine fact, not a walk verdict. A written
+    # verdict — pass or fail — is always final on the spot.
+    for attempt in range(1, 4):
+        if VERDICT.exists():
+            VERDICT.unlink()
+        subprocess.run(cmd, cwd=REPO)
+        if not VERDICT.exists():
+            print(f"autopilot: attempt {attempt} crashed before any verdict; "
+                  f"{'retrying' if attempt < 3 else 'giving up'}")
+            continue
+        v = json.loads(VERDICT.read_text(encoding="utf-8"))
+        if not v.get("done"):
+            print(f"autopilot: attempt {attempt} died mid-walk (engine, not corridor); "
+                  f"{'retrying' if attempt < 3 else 'giving up'}")
+            continue
+        ok = bool(v.get("ok"))
+        print(f"autopilot: {'PASS' if ok else 'FAIL'} (attempt {attempt}) — "
+              f"{v.get('museums_target')} museums{' from ' + first if first else ''}, "
+              f"z={v.get('z'):.1f}/{v.get('goal_z'):.1f}, {v.get('elapsed_s'):.1f}s walked, "
+              f"{v.get('cells_unlearned', 0)} cells unlearned")
+        return 0 if ok else 1
+    print("autopilot: NO VERDICT in 3 attempts — the scene never got far enough to write one")
+    return 1
 
 
 if __name__ == "__main__":

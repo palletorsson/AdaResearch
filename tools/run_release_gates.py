@@ -238,6 +238,59 @@ def build_report(
             }
         )
 
+        # E: every museum tile individually sound (dims/vocab/hero/pockets/BFS)
+        # and every ordered museum pair joinable through the vestibule model.
+        rc_mus, out_mus = run_cmd([sys.executable, "tools/validate_museum_templates.py"])
+        mus_failing = -1
+        mus_chain_pass = -1
+        mus_chain_total = -1
+        m = re.search(r"(\d+) failing museum template", out_mus)
+        if m:
+            mus_failing = int(m.group(1))
+        m = re.search(r"chain: (\d+)/(\d+)", out_mus)
+        if m:
+            mus_chain_pass, mus_chain_total = int(m.group(1)), int(m.group(2))
+        gates.append(
+            {
+                "id": "E",
+                "name": "Museum Template Integrity",
+                "pass": rc_mus == 0 and mus_failing == 0,
+                "metrics": {
+                    "failing_templates": mus_failing,
+                    "chain_pairs_pass": mus_chain_pass,
+                    "chain_pairs_total": mus_chain_total,
+                },
+            }
+        )
+
+        # F: the walkthrough — a CharacterBody3D physically walks three museums
+        # on a plan drawn from the stamped cells; a stall is a plan/physics
+        # disagreement. Runs Godot headless under the watchdog (~60 s); the
+        # wrapper judges by the verdict file, not the exit code. Serialize:
+        # nothing else may hold the Godot user:// lock while gates run.
+        rc_walk, out_walk = run_cmd([sys.executable, "tools/em_autopilot.py"])
+        walk_verdict: dict[str, Any] = {}
+        walk_verdict_path = REPO / "ada_run" / "em_autopilot.json"
+        if walk_verdict_path.exists():
+            try:
+                walk_verdict = json.loads(walk_verdict_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                walk_verdict = {}
+        gates.append(
+            {
+                "id": "F",
+                "name": "Museum Walkthrough (autopilot)",
+                "pass": rc_walk == 0,
+                "metrics": {
+                    "museums": int(walk_verdict.get("museums_target", -1)),
+                    "z_reached": round(float(walk_verdict.get("z", -1.0)), 1),
+                    "goal_z": round(float(walk_verdict.get("goal_z", -1.0)), 1),
+                    "walked_s": round(float(walk_verdict.get("elapsed_s", -1.0)), 1),
+                    "cells_unlearned": int(walk_verdict.get("cells_unlearned", -1)),
+                },
+            }
+        )
+
         pass_count, enabled_count, overall_pass, overall_status = apply_gate_toggles(
             gates, gate_enabled
         )
@@ -253,6 +306,8 @@ def build_report(
                 "artifact_audit": rc_art,
                 "validate_map_all": rc_map,
                 "audit_lab_chain": rc_lab,
+                "validate_museum_templates": rc_mus,
+                "em_autopilot": rc_walk,
             },
             "gates": gates,
             "raw": {
