@@ -115,8 +115,14 @@ func _dispatch_transformation(body: Node3D) -> void:
 ## is a group-miss no-op everywhere else — the additive gate.
 func _dispatch_biome_reaction() -> void:
 	var biome: Node = get_tree().get_first_node_in_group("biome_grid")
-	if biome != null and biome.has_method("react_at_world"):
+	if biome == null:
+		return
+	if biome.has_method("react_at_world"):
 		biome.react_at_world(global_position, "catalyst." + _infer_mode_id())
+	# …and the ground remembers the shot even where no cell was declared:
+	# a fading, mode-tinted stain marks the territory this mode has claimed.
+	if biome.has_method("mark_impact"):
+		biome.mark_impact(global_position, color_primary)
 
 
 ## Returns the projectile's mode id ("transformation", "swarm", …) by

@@ -158,6 +158,21 @@ var _presence_img: Image = null
 var _presence_tex: ImageTexture = null
 var _presence_mmi: MultiMeshInstance3D = null
 
+# ── impact marks: the ground remembers where you fired ──────────────────
+# A declared cell answers only if the map author declared it. But a biome
+# map's floor should register EVERY catalyst impact, declared or not —
+# otherwise a firefight over bare floor leaves the ground unchanged and
+# the mode's territory is invisible. mark_impact() deposits a transient,
+# mode-tinted source into the same presence field the declared cells feed;
+# it decays on the clock, so the stain fades unless you keep firing there.
+# Additive: no map data changes, and a map with no impacts is untouched.
+const IMPACT_FADE_S: float = 8.0      # seconds for one mark to fade out
+const IMPACT_MAX: int = 24            # oldest marks drop past this
+const IMPACT_STRENGTH: float = 0.55   # peak weight of a fresh mark
+const IMPACT_REPAINT_S: float = 0.4   # stain repaint cadence while fading
+var _impacts: Array = []              # [{col, row, color, born_s}]
+var _impact_repaint_accum: float = 0.0
+
 
 func initialize(grid_sys: Node3D, cube_size: float, gutter: float) -> void:
 	_grid_system = grid_sys
@@ -418,6 +433,49 @@ func cell_at_world(world_pos: Vector3) -> Vector2i:
 	return _world_to_cell(world_pos)
 
 
+## The ground remembers an impact. Called by the catalyst projectile on every
+## hit (declared cell or bare floor), so a mode's fire visibly claims
+## territory in the presence stain. `tint` is the mode's own color; the mark
+## fades over IMPACT_FADE_S unless refreshed by more fire on the same cell.
+func mark_impact(world_pos: Vector3, tint: Color) -> void:
+	if not _presence_enabled or _grid_cols == 0:
+		return
+	var cell: Vector2i = _world_to_cell(world_pos)
+	if cell.x < 0 or cell.y < 0 or cell.x >= _grid_cols or cell.y >= _grid_rows:
+		return
+	if _cell_height(cell.x, cell.y) <= 0.0:
+		return  # the void takes no stain
+	var now: float = float(Time.get_ticks_msec()) * 0.001
+	# a repeat hit on the same cell refreshes rather than stacks
+	for m in _impacts:
+		if int(m["col"]) == cell.x and int(m["row"]) == cell.y:
+			m["born_s"] = now
+			m["color"] = tint
+			_refresh_presence()
+			return
+	_impacts.append({"col": cell.x, "row": cell.y, "color": tint, "born_s": now})
+	while _impacts.size() > IMPACT_MAX:
+		_impacts.pop_front()
+	_stats["impacts_marked"] = int(_stats.get("impacts_marked", 0)) + 1
+	set_process(true)   # the fade needs the clock, even on a map with no tick cells
+	_refresh_presence()
+
+
+# Drop fully-faded marks; returns true if the set changed (so the caller
+# knows to repaint). Called from _process.
+func _age_impacts() -> bool:
+	if _impacts.is_empty():
+		return false
+	var now: float = float(Time.get_ticks_msec()) * 0.001
+	var before: int = _impacts.size()
+	var kept: Array = []
+	for m in _impacts:
+		if now - float(m["born_s"]) < IMPACT_FADE_S:
+			kept.append(m)
+	_impacts = kept
+	return _impacts.size() != before
+
+
 func _world_to_cell(world_pos: Vector3) -> Vector2i:
 	var local: Vector3 = to_local(world_pos) if is_inside_tree() else world_pos
 	var step: float = _cube_size + _gutter
@@ -434,6 +492,14 @@ func _process(delta: float) -> void:
 		_drain_build_queue()
 	if _living_ground:
 		_tick_living_ground(delta)
+	# impact marks fade: repaint while any is alive, once more when the last
+	# one expires, then the field is static again until the next hit
+	if not _impacts.is_empty():
+		_impact_repaint_accum += delta
+		var expired: bool = _age_impacts()
+		if expired or _impact_repaint_accum >= IMPACT_REPAINT_S:
+			_impact_repaint_accum = 0.0
+			_refresh_presence()
 	_tick_accum += delta
 	if _tick_accum >= _tick_seconds and not _tick_keys.is_empty():
 		_tick_accum = 0.0
@@ -1050,6 +1116,19 @@ func _refresh_presence() -> void:
 			"color": KINGDOM_COLORS.get(kingdom, KINGDOM_COLORS[""]),
 			"strength": strength,
 		})
+	# impact marks stain alongside the living cells, tinted by the firing
+	# mode and weighted by how recently they landed
+	if not _impacts.is_empty():
+		var now_s: float = float(Time.get_ticks_msec()) * 0.001
+		for m in _impacts:
+			var age: float = now_s - float(m["born_s"])
+			if age >= IMPACT_FADE_S:
+				continue
+			sources.append({
+				"col": int(m["col"]), "row": int(m["row"]),
+				"color": m["color"],
+				"strength": IMPACT_STRENGTH * (1.0 - age / IMPACT_FADE_S),
+			})
 	if sources.is_empty():
 		if _presence_mmi != null:
 			_presence_mmi.visible = false

@@ -72,6 +72,9 @@ func _on_bouncy_hit(body: Node3D) -> void:
 	# Dispatch FIRST so transformation can never be skipped by a sparks
 	# spawn error (e.g. current_scene null during scene-tree teardown).
 	_dispatch_transformation(body)
+	# the bounce path has its own handler, so it must call the biome hooks
+	# itself — every bounce claims the ground it touches
+	_dispatch_biome_reaction()
 	projectile_hit.emit(body, global_position)
 	# The shared impact language fires here too — the ball survives to
 	# bounce on, but every connection still flashes, rings and ticks.
