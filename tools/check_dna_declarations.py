@@ -443,6 +443,45 @@ def undeclared_promotions(reg: dict) -> tuple[list[tuple[str, str]], list[str]]:
     return orphans, note_only
 
 
+
+def untracked_sources(reg: dict) -> list:
+    """Declared axes whose implementing script is not IN THE REPOSITORY.
+
+    THE BLIND SPOT THIS CLOSES. Everything else in this file reads the WORKING TREE, so a
+    declaration verifies clean against code that exists on one machine and nowhere else.
+    That has now happened twice, from two different causes:
+
+      - a synth-rack promotion, 270 lines, landed inside addons/element_editor/, which
+        .gitignore excludes; the registry would have declared an axis whose code was not in
+        the repo, and the gate said 0 broken.
+      - grid_3d_capture's `bed` axis sat in tools/grid_editor/ and was simply never staged,
+        because the commit that shipped its declaration added commons/ and algorithms/ only.
+
+    A fresh clone in either case gets a declared axis with no dispatch behind it. `git
+    ls-files --error-unmatch` is the only question that distinguishes "present" from
+    "committed", so it is the one asked here.
+    """
+    import subprocess
+    out = []
+    for tok, (e, rf) in sorted(reg.items()):
+        if not ((e.get("dna") or {}).get("axes")):
+            continue
+        gd, src = source_for(e)
+        if gd is None or not src:
+            continue
+        rel = str(gd).replace("\\", "/")
+        if "AdaResearch_46/" in rel:
+            rel = rel.split("AdaResearch_46/", 1)[1]
+        r = subprocess.run(["git", "ls-files", "--error-unmatch", rel],
+                           capture_output=True, cwd=str(REPO))
+        if r.returncode != 0:
+            ig = subprocess.run(["git", "check-ignore", "-v", rel],
+                                capture_output=True, text=True, cwd=str(REPO))
+            why = ig.stdout.strip().split(":")[0:2] if ig.returncode == 0 else []
+            out.append((tok, rel, "gitignored by " + ":".join(why) if why else "never staged"))
+    return out
+
+
 def main() -> int:
     only = ""
     quiet = False
@@ -453,6 +492,10 @@ def main() -> int:
             quiet = True
 
     reg = registry()
+
+    # Asked BEFORE the value checks, because a declaration whose code is not in the
+    # repository is broken in a way no value comparison can see.
+    untracked = untracked_sources(reg)
     rows: list[dict] = []
     for tok, (entry, _rf) in sorted(reg.items()):
         if only and tok != only:
@@ -501,7 +544,13 @@ def main() -> int:
         for tok in note_only:
             print(f"  {tok}")
 
-    return len({r["token"] for r in bad})
+    if untracked:
+        print(f"\n{len(untracked)} DECLARED AXIS whose implementing script is NOT IN THE "
+              f"REPOSITORY [a fresh clone gets the declaration with no dispatch behind it]:")
+        for tok, rel, why in untracked:
+            print(f"  {tok:34s} {rel}  ({why})")
+
+    return len({r["token"] for r in bad}) + len(untracked)
 
 
 if __name__ == "__main__":
