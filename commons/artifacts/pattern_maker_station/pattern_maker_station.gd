@@ -60,6 +60,27 @@ const COL_COPPER := Color(0.75, 0.38, 0.13)   # Copper accent
 @export var stain_amount: float = 0.0   # Water/mineral staining
 @export var chip_amount: float = 0.0    # Missing tesserae / chipped areas
 
+# ── DNA ───────────────────────────────────────────────────────────────
+## AXIS — WHICH BOUNDARY THE FIELD ADMITS. The station's whole argument is that a 4x4
+## domain and one symmetry rule make a floor, and the floor it makes says nothing about
+## either: it arrives as a continuous surface with no seam, no unit and no edge, which is
+## exactly what a finished mosaic wants you to believe. What the carpet declares of its own
+## construction is a claim, and there are four available.
+##
+##   none      the legacy lineage, byte for byte — an unbroken field, the repeat denied
+##   edge      only the outer kerb: the field admits it is a made object with an end, and
+##             still says nothing about repeating
+##   cell      one unit cell framed and posted, once, among its copies — the source
+##             declared as a single thing the rest of the floor is a consequence of
+##   lattice   a batten on every unit boundary: the repeat made countable, the floor
+##             re-read as an array rather than a picture
+##
+## Shared word for word with [[vr_tile_editor]], the same species one room over (a domain
+## in the hands, a carpet underfoot). One question, one vocabulary: a floor that reads
+## "unbroken" in one station cannot mean something else in the next.
+@export_enum("none", "edge", "cell", "lattice") var boundary: String = "none"
+const BOUNDARIES: PackedStringArray = ["none", "edge", "cell", "lattice"]
+
 # ── Groups ───────────────────────────────────────────────────────────
 const GROUP_ORDER: Array = [
 	WallpaperGroups.Group.P1,   WallpaperGroups.Group.P2,
@@ -118,6 +139,9 @@ func _ready() -> void:
 	_build_touch_area()
 	_build_capture_camera()
 	_update_carpet()
+	# DNA: appended LAST, after the panel, the carpet and the camera, so every child index
+	# above it is what it was. "none" adds nothing.
+	_build_boundary()
 	print("[PatternMaker] Built — %dx%d domain, group %s, carpet %.1fm" % [
 		tile_size, tile_size,
 		WallpaperGroups.get_group_name(_current_group),
@@ -154,6 +178,14 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		stain_amount = clampf(float(config_data["stain_amount"]), 0.0, 1.0)
 	if config_data.has("chip_amount"):
 		chip_amount = clampf(float(config_data["chip_amount"]), 0.0, 1.0)
+	if config_data.has("boundary"):
+		var bnd_tok: String = str(config_data["boundary"]).strip_edges().to_lower()
+		boundary = bnd_tok if BOUNDARIES.has(bnd_tok) else boundary
+	# The boundary is the ONE key here that takes effect after _ready, because it is the one
+	# with a builder to call. Everything above it is stored and never read again — the grid
+	# calls this deferred, i.e. after _ready has already built from the export defaults. See
+	# the note above _build_boundary.
+	_build_boundary()
 
 # ═══════════════════════════════════════════════════════════════════
 # DATA
@@ -647,6 +679,110 @@ func _set_group_tag(text: String) -> void:
 	if _group_tag:
 		_group_tag.position = _group_tag_pos
 		_panel_root.add_child(_group_tag)
+
+# ═══════════════════════════════════════════════════════════════════
+# BOUNDARY — one axis, four answers to "what does this field admit"
+# ═══════════════════════════════════════════════════════════════════
+# All of it sits ON the carpet plane and touches nothing else: no material on the mosaic is
+# changed, no shader parameter is set, no collider is added. "none" returns before building.
+#
+# KNOWN, NOT FIXED HERE: apply_grid_config stores tile_size, carpet_size, wallpaper_group,
+# grout and the six aging amounts and then returns, while the grid calls it DEFERRED — after
+# _ready has already built the panel, the carpet and the shader from the export defaults. So
+# every one of those keys is inert from a map token today. Rebuilding the whole station on
+# config is a change to 26 live placements and belongs in its own pass.
+
+var _boundary_root: Node3D
+
+
+func _build_boundary() -> void:
+	if is_instance_valid(_boundary_root):
+		_boundary_root.queue_free()
+		_boundary_root = null
+	if boundary == "none":
+		return
+	var side: float = maxf(carpet_world_size, 0.2)
+	var reps: int = clampi(carpet_repeats, 1, 32)
+	var cell: float = side / float(reps)
+
+	var root := Node3D.new()
+	root.name = "Boundary"
+	root.position = Vector3(0, 0.006, 0)      # a hair over the carpet quad at y = 0.005
+	add_child(root)
+	_boundary_root = root
+
+	var stone := StandardMaterial3D.new()
+	stone.albedo_color = Color(0.87, 0.85, 0.79)
+	stone.roughness = 0.55
+	stone.metallic = 0.05
+
+	match boundary:
+		"edge":
+			_boundary_kerb(root, side, cell, stone)
+		"cell":
+			_boundary_cell(root, side, cell, reps, stone)
+		"lattice":
+			_boundary_lattice(root, side, cell, reps, stone)
+		_:
+			pass
+
+
+## EDGE — a kerb round the whole field, set just inside the edge so it lands on the mosaic
+## rather than floating off it. The rug admits it ends; it admits nothing else.
+func _boundary_kerb(root: Node3D, side: float, cell: float, mat: Material) -> void:
+	var k: float = cell * 0.30
+	var t: float = cell * 0.22
+	var e: float = side * 0.5 - k * 0.5
+	root.add_child(_bnd_box(Vector3(0, t * 0.5, -e), Vector3(side, t, k), mat))
+	root.add_child(_bnd_box(Vector3(0, t * 0.5, e), Vector3(side, t, k), mat))
+	root.add_child(_bnd_box(Vector3(-e, t * 0.5, 0), Vector3(k, t, side), mat))
+	root.add_child(_bnd_box(Vector3(e, t * 0.5, 0), Vector3(k, t, side), mat))
+
+
+## CELL — ONE unit cell framed and posted at the middle of the field. Aligned to a real
+## tile boundary (the shader repeats tile_scale times across UV, so the cell lines sit at
+## -side/2 + i * cell); a frame drawn on the geometric centre would straddle four cells
+## whenever the repeat count is even, which is a picture of a mistake.
+func _boundary_cell(root: Node3D, side: float, cell: float, reps: int, mat: Material) -> void:
+	var i0: int = reps / 2
+	var c: float = -side * 0.5 + (float(i0) + 0.5) * cell
+	var b: float = cell * 0.12
+	var t: float = cell * 0.25
+	var half: float = cell * 0.5
+	root.add_child(_bnd_box(Vector3(c, t * 0.5, c - half), Vector3(cell + b, t, b), mat))
+	root.add_child(_bnd_box(Vector3(c, t * 0.5, c + half), Vector3(cell + b, t, b), mat))
+	root.add_child(_bnd_box(Vector3(c - half, t * 0.5, c), Vector3(b, t, cell + b), mat))
+	root.add_child(_bnd_box(Vector3(c + half, t * 0.5, c), Vector3(b, t, cell + b), mat))
+	var p: float = cell * 0.18
+	var ph: float = cell * 0.55
+	for raw_sx in [-1.0, 1.0]:
+		var sx: float = float(raw_sx)
+		for raw_sz in [-1.0, 1.0]:
+			var sz: float = float(raw_sz)
+			root.add_child(_bnd_box(Vector3(c + sx * half, ph * 0.5, c + sz * half),
+				Vector3(p, ph, p), mat))
+
+
+## LATTICE — a batten on every internal unit boundary. The outer edge is left to `edge`, so
+## the two values stay separate claims instead of one accumulating decoration.
+func _boundary_lattice(root: Node3D, side: float, cell: float, reps: int, mat: Material) -> void:
+	var b: float = cell * 0.10
+	var t: float = cell * 0.12
+	for i in range(1, reps):
+		var p: float = -side * 0.5 + float(i) * cell
+		root.add_child(_bnd_box(Vector3(p, t * 0.5, 0), Vector3(b, t, side), mat))
+		root.add_child(_bnd_box(Vector3(0, t * 0.5, p), Vector3(side, t, b), mat))
+
+
+func _bnd_box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi
+
 
 func _plate(size: Vector3) -> Node3D:
 	var g := Node3D.new()

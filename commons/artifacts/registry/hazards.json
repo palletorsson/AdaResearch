@@ -76,6 +76,17 @@
    "qfep_connection": "A game is two truths and a verdict — can you still cross, and did you have to destroy anything to do it; the thumb answers the second."
   },
   "path_cube": {
+   "dna": {
+    "axes": {
+    "warning": [
+    "none",
+    "stain",
+    "cage",
+    "beacon",
+    "shroud"
+    ]
+    }
+   },
    "category": "hazards",
    "complexity": "beginner",
    "description": "Path-and-block game brick: a solid cube wall. Has a collider and is NOT path_passable, so the path watchdog routes around it. The foe's blocking primitive.",
@@ -113,6 +124,17 @@
    "qfep_connection": "The watchdog routes around it not because it is heavy but because it never joined the path_passable group: blockedness is a membership status wearing a material costume. Beside the wedge it shares size, shader, and floor — the wall is the rule it carries, nothing else."
   },
   "path_wedge": {
+   "dna": {
+    "axes": {
+    "warning": [
+    "none",
+    "stain",
+    "cage",
+    "beacon",
+    "shroud"
+    ]
+    }
+   },
    "category": "hazards",
    "complexity": "beginner",
    "description": "Path-and-block game brick: a walkable ramp. Tagged path_passable so the path watchdog routes THROUGH it — a cube the player can climb. The gate primitive.",
@@ -150,6 +172,17 @@
    "qfep_connection": "One diagonal face plus enrollment in path_passable turns the same footprint from sentence into gate: the pathfinder routes through, the body climbs. Passability is first declared in a group name and only then enacted in geometry — permission precedes the ramp."
   },
   "path_pyramid": {
+   "dna": {
+    "axes": {
+    "warning": [
+    "none",
+    "stain",
+    "cage",
+    "beacon",
+    "shroud"
+    ]
+    }
+   },
    "category": "hazards",
    "complexity": "beginner",
    "description": "Path-and-block game brick: a 1m-base pyramid mound that BLOCKS the path (you can't cross a peak). Supports the grid wireframe shader. The first primitive in the foe's progression.",
@@ -5519,6 +5552,17 @@
    "qfep_connection": "Six limbs, six constraint vocabularies — hinge, ball, slider, revolute, prismatic, fixed — one body forced to speak them all at once. A taxonomy walking: each joint's freedom is exactly what the others are forbidden."
   },
   "kaleidocycle_enemy": {
+   "dna": {
+    "axes": {
+    "warning": [
+    "none",
+    "stain",
+    "cage",
+    "beacon",
+    "shroud"
+    ]
+    }
+   },
    "category": "hazards",
    "complexity": "intermediate",
    "description": "Tumbling ring of tetrahedra with 4 attack modes. Rolls toward player while continuously rotating through itself. Each face color triggers different attack: Fire (red), Ice (blue), Spike (purple), Shield (gold).",
@@ -6194,6 +6238,17 @@
    "qfep_connection": "Sphere rolls, cube slams, torus spins, cylinder sweeps — each attack is what that genus affords and nothing else. Identity-as-topology made hostile: to survive it you must read shape as constraint, not costume."
   },
   "miura_crawler": {
+   "dna": {
+    "axes": {
+    "warning": [
+    "none",
+    "stain",
+    "cage",
+    "beacon",
+    "shroud"
+    ]
+    }
+   },
    "category": "hazards",
    "complexity": "intermediate",
    "description": "Miura-ori folding enemy - flat corrugated sheet that crawls like an inchworm. Lies flat and nearly invisible, pops up when player approaches, uses zigzag locomotion. Can squeeze through gaps when flattened.",
@@ -7962,6 +8017,17 @@
    "qfep_connection": "The standing wave partitions the room into lethal nodes and safe anti-nodes, and every eight seconds a new harmonic redraws the partition. Safety here is not a place but a solution to cos(n·pi·x/L) — and n keeps changing."
   },
   "scissor_stalker": {
+   "dna": {
+    "axes": {
+    "warning": [
+    "none",
+    "stain",
+    "cage",
+    "beacon",
+    "shroud"
+    ]
+    }
+   },
    "category": "hazards",
    "complexity": "intermediate",
    "description": "Spider-like enemy with Hoberman scissor linkage legs. Legs extend 3x their compact length for dramatic reach. Stalks with partially extended legs, pounces by rapidly extending, slams down to attack.",

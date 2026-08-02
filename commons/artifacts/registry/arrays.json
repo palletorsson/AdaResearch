@@ -3333,6 +3333,16 @@
    "qfep_connection": "Architecture as array: Italian facades — Villa San Michele, the Certosa — read as grids of repeating elements, windows and columns indexed across a wall. The chapter's reach into the built world, arguing that a building's rhythm is a data structure, a facade a 2D array of ornament that a grammar fills."
   },
   "vr_tile_editor": {
+   "dna": {
+    "axes": {
+    "boundary": [
+    "none",
+    "edge",
+    "cell",
+    "lattice"
+    ]
+    }
+   },
    "name": "VR Tile Editor",
    "lookup_name": "vr_tile_editor",
    "description": "VR workspace for designing tile patterns. Edit a grid at desk height, see it tile across a floor carpet in real-time. Cycle wallpaper groups with VR controllers.",
@@ -3441,6 +3451,16 @@
    "qfep_connection": "The pattern workshop at body scale — edit a tile grid at desk height and watch it tile across the floor around you. The chapter's truth made inhabitable: you design the fundamental domain in your hands and stand inside its repetition, seeing at once that the rule you performed on one tile has performed itself across a room."
   },
   "vr_tile_editor_mirror": {
+   "dna": {
+    "axes": {
+    "boundary": [
+    "none",
+    "edge",
+    "cell",
+    "lattice"
+    ]
+    }
+   },
    "name": "VR Tile Editor Mirror",
    "lookup_name": "vr_tile_editor_mirror",
    "description": "VR tile editor starting in kaleidoscope mirror mode. Design symmetric patterns and see them tile across a floor carpet.",
@@ -3768,6 +3788,16 @@
    }
   },
   "pattern_maker_station": {
+   "dna": {
+    "axes": {
+    "boundary": [
+    "none",
+    "edge",
+    "cell",
+    "lattice"
+    ]
+    }
+   },
    "name": "Pattern Maker Station",
    "lookup_name": "pattern_maker_station",
    "description": "Interactive wallpaper group station — paint a domain grid on an upright panel, choose from 17 symmetry groups, and watch the tiled result unfold on a large floor carpet in real time.",
@@ -4108,6 +4138,16 @@
    "qfep_connection": "A control panel that is itself a grid map: CRTs, VU meters, and knobs claim cells through the same occupancy logic that lays out rooms, and it accepts the web editor's layouts verbatim. Mission control turns out to be another floor plan — instruments are furniture that claims to be in charge."
   },
   "grid_3d_capture": {
+   "dna": {
+    "axes": {
+    "bed": [
+    "none",
+    "board",
+    "lattice",
+    "tray"
+    ]
+    }
+   },
    "name": "Grid Editor 3D Capture",
    "lookup_name": "grid_3d_capture",
    "description": "Procedural 3D builder for all grid editor subsets — chemical models, sticky notes, periodic table, glass racks, big pipes. Accepts subset and preset via config.",
@@ -4196,6 +4236,16 @@
    "qfep_connection": "Six subsets share one loader: the identical placement list rises as glassware, a playable synth rack, sticky notes, or a periodic table depending on a single subset string. The grid never learns what it carries — meaning lives entirely in the key, F_order as convention laid over indifferent cells."
   },
   "facade_builder": {
+   "dna": {
+    "axes": {
+    "armature": [
+    "none",
+    "datum",
+    "scaffold",
+    "gantry"
+    ]
+    }
+   },
    "name": "Facade Builder",
    "lookup_name": "facade_builder",
    "description": "Interactive architectural facade composer. Five presets (classical, gothic, palazzo, arcade, minimal) with configurable bays, stories, symmetry, and colors. Uses SpatialComposition zones and SurfaceTool geometry.",

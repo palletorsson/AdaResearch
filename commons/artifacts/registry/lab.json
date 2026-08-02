@@ -1527,6 +1527,17 @@
       }
     },
     "tech_crate": {
+      "dna": {
+       "axes": {
+       "consignment": [
+       "seal",
+       "breach",
+       "hold",
+       "manifest",
+       "bench"
+       ]
+       }
+      },
       "lookup_name": "tech_crate",
       "scene": "res://commons/artifacts/tech_crate/tech_crate.tscn",
       "class_name": "TechCrate",
@@ -9190,6 +9201,17 @@
       }
     },
     "catalyst_pickup": {
+      "dna": {
+       "axes": {
+       "offer": [
+       "plinth",
+       "vitrine",
+       "clamp",
+       "shrine",
+       "chute"
+       ]
+       }
+      },
       "lookup_name": "catalyst_pickup",
       "name": "catalyst_pickup",
       "category": "lab_prop",
@@ -9349,6 +9371,17 @@
       ]
     },
     "lab_sliding_door": {
+      "dna": {
+       "axes": {
+       "welcome": [
+       "slab",
+       "pane",
+       "caution",
+       "bolt",
+       "plate"
+       ]
+       }
+      },
       "lookup_name": "lab_sliding_door",
       "scene": "res://commons/artifacts/sliding_door/sliding_door.tscn",
       "class_name": "SlidingDoor",

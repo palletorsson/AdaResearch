@@ -42,6 +42,64 @@ enum State { MOVING_POSITIVE, WAIT_POSITIVE, MOVING_NEGATIVE, WAIT_NEGATIVE }
 ## Number of trail ghost positions to display
 @export_range(1, 20) var trail_count: int = 4
 
+# ── STAGE-2 DNA ───────────────────────────────────────────────────────────────
+# ONE BODY, FOUR NAMES. x_translation_cube, y_translation_cube, z_translation_cube and
+# axis_translation_cube are the same script and the same scene folder; the only thing that
+# differs between the four .tscn files is `axis` (0/1/2) and a colour. The family's real
+# axis was already here — it was just spelled into the lookup name instead of declared, so
+# the sweep could never turn it and the registry read as four singletons at 29 placements.
+#
+## AXIS — COURSE. Which run of space the displacement happens along, named for what the
+## motion MEANS to a standing body rather than for the letter of the coordinate. This is
+## the DNA name for `axis` above; set THIS, not `axis`.
+##
+##   lateral  across, at shoulder height — the rail lies flat, left to right. The cube
+##            passes the learner; nothing about it changes but where it is.
+##   lift     up and down. THE DEFAULT and the legacy lineage: the rail stands vertical,
+##            the cube rises and falls, and the two end markers sit above and below it.
+##   depth    toward and away. The rail runs into the picture, so the SAME displacement is
+##            read almost entirely as scale — which is the artifact's sharpest lesson and
+##            the reason z_translation_cube is the most-placed member of the family.
+##
+## The rail is 0.95 m long against a 0.15 m cube, so this axis swings the largest element
+## in the frame through 90°, and the live label and axis plate both change text with it.
+@export_enum("lateral", "lift", "depth") var course: String = "lift"
+const COURSES: PackedStringArray = ["lateral", "lift", "depth"]
+
+## AXIS — ACCOUNT. What the artifact leaves standing in the room as evidence that a
+## translation happened — the account it gives of its own operation. A still frame cannot
+## hold a motion, only what the motion deposits, so this is the axis that actually argues:
+## how much of the operation is admitted, and in what register — sampled, swept, terminal,
+## written, or withheld.
+##
+## (Named `account`, not `record`: five instrument artifacts — seismograph, multimeter,
+## holographicdisplay, atmosphericmonitoring, dual_display_test — already share a `record`
+## axis meaning how much history a readout keeps, on the values instant|window|archive|
+## margin. Same word, different question; two of those would have been a real collision.)
+##
+##   ghost     THE DEFAULT: the guide rail, a green and a red end marker, and four fading
+##             ghost cubes shrinking back along the path. The path SAMPLED — the legacy
+##             build, byte for byte.
+##   sweep     no rail, no ghosts: one continuous wireframe bar the full length of the
+##             travel, with the cube inside it. The path as a solid — every position the
+##             cube will ever occupy, held at once.
+##   terminus  no rail, no ghosts: two full-size cubes pinned at the two extremes and
+##             nothing in between. Before and after, the way a textbook figure states a
+##             translation — the claim that only the endpoints were ever the point.
+##   formula   the operation written out instead of drawn: a raised plate carrying
+##             "p'.y = p.y + d" and the interval d runs over, with the rail and the ghosts
+##             gone. The algebra as the account.
+##   none      the result only. A cube at a position, no rail, no markers, no ghosts, no
+##             labels. Nothing in the frame says it ever moved, which is exactly what a
+##             translation looks like once you stop watching.
+@export_enum("ghost", "sweep", "terminus", "formula", "none") var account: String = "ghost"
+const ACCOUNTS: PackedStringArray = ["ghost", "sweep", "terminus", "formula", "none"]
+
+# Set from `account` in _read_dna(); "ghost" leaves all three true, which is the legacy path.
+var _want_rail: bool = true
+var _want_trail: bool = true
+var _want_labels: bool = true
+
 var _cube_mesh: MeshInstance3D
 var _cube_material: ShaderMaterial
 var _label: Label3D
@@ -62,12 +120,46 @@ var _trail_history: Array[float] = []
 
 
 func _ready():
+	_read_dna()
 	_base_position = Vector3(cube_size / 2.0, cube_size / 2.0, cube_size / 2.0)
 	_create_cube()
 	_create_rail()
 	_create_labels()
 	_create_trail_ghosts()
 	_setup_controls()
+	# Appended LAST, so every node index and position above is untouched on the legacy
+	# path. "ghost" falls through both of these and adds nothing at all.
+	_build_account()
+	_add_travel_anchor()
+
+
+# The two DNA axes, read from the map's config_<key> metadata (GridInteractablesComponent
+# sets those BEFORE add_child, so this runs before anything is built) and normalised so an
+# unknown word keeps the default rather than silently rendering as one.
+func _read_dna() -> void:
+	if has_meta("config_course"):
+		var c: String = str(get_meta("config_course")).strip_edges().to_lower()
+		course = c if COURSES.has(c) else course
+	if has_meta("config_account"):
+		var r: String = str(get_meta("config_account")).strip_edges().to_lower()
+		account = r if ACCOUNTS.has(r) else account
+	# COURSE is the DNA name for `axis`; the three .tscn members carry it explicitly, so
+	# this reproduces each of them exactly.
+	match course:
+		"lateral": axis = Axis.X
+		"depth": axis = Axis.Z
+		_: axis = Axis.Y
+	# ACCOUNT decides which of the legacy pieces survive. "ghost" keeps all of them.
+	match account:
+		"sweep", "terminus", "formula":
+			_want_rail = false
+			_want_trail = false
+		"none":
+			_want_rail = false
+			_want_trail = false
+			_want_labels = false
+		_:
+			pass
 
 
 func _create_cube():
@@ -95,7 +187,7 @@ func _create_cube():
 
 
 func _create_rail():
-	if not show_rail:
+	if not show_rail or not _want_rail:
 		return
 
 	_rail = MeshInstance3D.new()
@@ -170,6 +262,8 @@ func _create_range_marker(color: Color) -> MeshInstance3D:
 
 
 func _create_labels():
+	if not _want_labels:
+		return
 	var axis_name = _get_axis_name()
 
 	# Real-time values label
@@ -210,7 +304,7 @@ func _create_labels():
 
 
 func _create_trail_ghosts():
-	if not show_trail:
+	if not show_trail or not _want_trail:
 		return
 
 	# Use MultiMesh for all trail ghosts in a single draw call
@@ -434,4 +528,160 @@ func reset() -> void:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	# WAS `pass`. Nothing a map wrote ever reached this artifact, which is the second
+	# reason the family shipped as four tokens: the only way to get a different axis was
+	# to author a different scene. GridInteractablesComponent sets config_<key> metadata
+	# BEFORE add_child, so _read_dna() in _ready() has normally already applied these; the
+	# guard below makes this a no-op in that (and in every legacy) case.
+	if config_data.is_empty():
+		return
+	for k in config_data.keys():
+		set_meta("config_%s" % str(k), config_data[k])
+	var was_course: String = course
+	var was_account: String = account
+	_read_dna()
+	if course == was_course and account == was_account:
+		return
+	for node in _created_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	_created_nodes.clear()
+	for c in get_children():
+		c.queue_free()
+	_trail_mm = null
+	_trail_mmi = null
+	_label = null
+	_formula_label = null
+	reset()
+	_create_cube()
+	_create_rail()
+	_create_labels()
+	_create_trail_ghosts()
+	_setup_controls()
+	_build_account()
+	_add_travel_anchor()
+
+
+# ── ACCOUNT ────────────────────────────────────────────────────────────────────
+# What the translation leaves behind. Appended after the legacy build; "ghost" is the
+# legacy build and adds nothing.
+func _build_account() -> void:
+	match account:
+		"sweep":
+			_account_sweep()
+		"terminus":
+			_account_terminus()
+		"formula":
+			_account_formula()
+		"none":
+			pass                                  # the result only — nothing to add
+		_:
+			pass                                  # "ghost" — the legacy lineage
+
+
+## SWEEP — the path as a solid. One wireframe bar the full length of the travel, the cube
+## sliding inside it. Where `ghost` samples four positions, this holds every position at
+## once: the orbit of the group action drawn as a body rather than as a history.
+func _account_sweep() -> void:
+	var span: float = travel_distance * 2.0 + cube_size
+	var thin: float = cube_size * 0.62
+	var size := Vector3(thin, thin, thin)
+	match axis:
+		Axis.X: size.x = span
+		Axis.Y: size.y = span
+		Axis.Z: size.z = span
+	var bar := MeshInstance3D.new()
+	bar.name = "SweepBar"
+	var box := BoxMesh.new()
+	box.size = size
+	bar.mesh = box
+	var mat := ShaderMaterial.new()
+	mat.shader = GRID_SHADER
+	mat.set_shader_parameter("modelColor", Color(cube_color.r * 0.18, cube_color.g * 0.18, cube_color.b * 0.18, 0.35))
+	mat.set_shader_parameter("wireframeColor", Color(cube_color.r, cube_color.g, cube_color.b, 0.85))
+	mat.set_shader_parameter("emissionColor", cube_color * 0.8)
+	mat.set_shader_parameter("width", 2.5)
+	mat.set_shader_parameter("blur", 0.5)
+	mat.set_shader_parameter("emission_strength", 0.3)
+	mat.set_shader_parameter("show_interior", false)
+	bar.material_override = mat
+	bar.position = _base_position
+	add_child(bar)
+	_created_nodes.append(bar)
+
+
+## TERMINUS — before and after, nothing between. Two solid cubes at the extremes of the
+## travel: the dim one is where the object was, the bright one where it ended up. This is
+## the figure a textbook draws, and its silence about the middle is the argument.
+func _account_terminus() -> void:
+	var offset: Vector3 = _get_axis_vector() * travel_distance
+	_terminus_cube(_base_position - offset, 0.12, "TerminusBefore")
+	_terminus_cube(_base_position + offset, 0.9, "TerminusAfter")
+
+
+func _terminus_cube(at: Vector3, energy: float, node_name: String) -> void:
+	var mi := MeshInstance3D.new()
+	mi.name = node_name
+	var box := BoxMesh.new()
+	box.size = Vector3(cube_size, cube_size, cube_size)
+	mi.mesh = box
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(cube_color.r, cube_color.g, cube_color.b, 1.0)
+	mat.roughness = 0.45
+	mat.emission_enabled = true
+	mat.emission = cube_color
+	mat.emission_energy_multiplier = energy
+	mi.material_override = mat
+	mi.position = at
+	add_child(mi)
+	_created_nodes.append(mi)
+
+
+## FORMULA — the operation written out instead of drawn. The rail and the ghosts are gone
+## and the displacement is stated: an update rule and the interval its parameter runs over.
+func _account_formula() -> void:
+	var letter: String = _get_axis_name().to_lower()
+	var plate := Label3D.new()
+	plate.name = "FormulaPlate"
+	plate.pixel_size = 0.0011
+	plate.font_size = 64
+	plate.outline_size = 8
+	# Deliberately ASCII: this plate is rendered by whatever font the runtime hands a
+	# Label3D, and an algebra glyph that falls back to a box is not the operation written
+	# out. The dot in "speed · dir" on the legacy formula label is the one non-ASCII
+	# character this artifact has ever proved it can draw.
+	plate.text = "p'.%s = p.%s + d\nd = -%.2f .. +%.2f" % [
+		letter, letter, travel_distance, travel_distance
+	]
+	plate.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	plate.modulate = Color(0.72, 0.88, 1.0)
+	plate.position = _base_position + Vector3(0.0, travel_distance * 0.55, cube_size * 1.2)
+	add_child(plate)
+	_created_nodes.append(plate)
+
+
+## The capture rig fits the frame by the subtree's bounding-box DIAGONAL, refitting for
+## every variant. `none` and `terminus` remove the rail, which is the longest thing here,
+## so without a constant-extent node the camera would move in for those two, every pixel
+## would shift, and the bite report would be a picture of a zoom rather than of the axis.
+##
+## layers = 0, NOT visible = false: a zero-layer VisualInstance3D is in no camera's cull
+## mask, draws nothing, and still reports its AABB. Its extent is exactly the rail's, so
+## on the legacy path it adds nothing to the bounding box either.
+func _add_travel_anchor() -> void:
+	var span: float = travel_distance * 2.0 + cube_size
+	var size := Vector3(cube_size, cube_size, cube_size)
+	match axis:
+		Axis.X: size.x = span
+		Axis.Y: size.y = span
+		Axis.Z: size.z = span
+	var anchor := MeshInstance3D.new()
+	anchor.name = "TravelAnchor"
+	var box := BoxMesh.new()
+	box.size = size
+	anchor.mesh = box
+	anchor.position = _base_position
+	anchor.layers = 0
+	anchor.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(anchor)
+	_created_nodes.append(anchor)

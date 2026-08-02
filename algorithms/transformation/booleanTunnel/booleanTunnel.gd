@@ -32,6 +32,34 @@ var teleport_scene: PackedScene = preload("res://commons/scenes/mapobjects/telep
 @export var burst_rotate_count: int = 3  # cubes per rotating burst
 @export var burst_flat_count: int = 3  # flat cubes between bursts
 
+# ── STAGE-2 DNA ───────────────────────────────────────────────────────────────
+## AXIS — ACCRUAL. How the local turn ADDS UP along the run. The tunnel's one claim is
+## that a rule applied per segment becomes architecture; this axis is the rule, and it is
+## the only thing here a still frame can hold, because the corridor never moves.
+##
+##   ramp      THE DEFAULT and the legacy lineage: every segment adds the same increment,
+##             so the angle is i·Δ and the twist runs away — 130° of turn by the far end.
+##             (Also the value that leaves `burst_mode` alone, whatever a map set it to.)
+##   burst     rotate for three, hold for three: twisted stretches alternating with
+##             straight ones. Accumulation with rests in it. Forces the existing
+##             burst_mode on; the geometry is the one that export already built.
+##   mirror    the increment reverses at the midpoint and the corridor unwinds back to
+##             zero. You end facing exactly as you started, having turned the whole way —
+##             a run that spends its transformation and returns the change.
+##   plateau   each increment is three-quarters of the last, so the turn converges on a
+##             limit (about 40°) instead of diverging. The corridor bends and then simply
+##             stops bending: accumulation with an asymptote.
+##   none      no rotation at all. A straight box run — repetition WITHOUT transformation,
+##             which is the thing the other four are all being measured against.
+##
+## The teleporter, its destination and the collision cubes are untouched by this: what
+## changes is which way the same fourteen boxes are turned.
+@export_enum("ramp", "burst", "mirror", "plateau", "none") var accrual: String = "ramp"
+const ACCRUALS: PackedStringArray = ["ramp", "burst", "mirror", "plateau", "none"]
+## Ratio each successive increment is multiplied by under `plateau`. 0.75 → the total turn
+## converges on 4·rotation_per_segment.
+const PLATEAU_RATIO := 0.75
+
 @export_group("End Teleporter")
 @export var enable_teleporter: bool = false  # add teleporter at tunnel end
 @export var teleport_destination: Vector3 = Vector3(0, 1, 0)  # where to send player
@@ -106,6 +134,7 @@ func apply_grid_config(config: Dictionary) -> void:
 
 func generate_tunnel() -> void:
 	_generated = true
+	_read_dna()
 	print("BooleanTunnel: Generating tunnel with settings:")
 	print("  - num_segments: %d" % num_segments)
 	print("  - burst_mode: %s" % burst_mode)
@@ -147,7 +176,20 @@ func generate_tunnel() -> void:
 				accumulated_angle_deg += rotation_per_segment
 		else:
 			angle_deg = i * rotation_per_segment
-		
+
+		# ACCRUAL — an OVERRIDE appended after the legacy angle is computed, so the
+		# ramp/burst path above is byte for byte what it always was. "ramp" and "burst"
+		# fall through (burst is the legacy burst_mode, which _read_dna turned on).
+		match accrual:
+			"mirror":
+				angle_deg = _angle_mirror(i)
+			"plateau":
+				angle_deg = _angle_plateau(i)
+			"none":
+				angle_deg = 0.0
+			_:
+				pass
+
 		var angle_rad = deg_to_rad(angle_deg)
 
 		# Position along z-axis
@@ -189,6 +231,75 @@ func generate_tunnel() -> void:
 	# Add teleporter at the end if enabled
 	if enable_teleporter:
 		_create_end_teleporter()
+
+	# Appended LAST, after every cube is placed: a zero-layer node that holds the
+	# bounding box at the run's real extent. See _add_run_anchor for why.
+	_add_run_anchor()
+
+
+# ── ACCRUAL ───────────────────────────────────────────────────────────────────
+# The axis is read from the map's config_<key> metadata (GridInteractablesComponent sets
+# it BEFORE add_child) and normalised, so an unknown word keeps the default instead of
+# silently rendering as one. Called from generate_tunnel, which is the single place both
+# the deferred default path and apply_grid_config go through.
+func _read_dna() -> void:
+	if has_meta("config_accrual"):
+		var a: String = str(get_meta("config_accrual")).strip_edges().to_lower()
+		accrual = a if ACCRUALS.has(a) else accrual
+	# `burst` IS the legacy burst_mode; the axis just names it. Nothing is turned OFF here,
+	# so a map that already set burst_mode:true keeps it under the default `ramp`.
+	if accrual == "burst":
+		burst_mode = true
+
+
+## MIRROR — the increment reverses at the midpoint, so the run winds up and unwinds back
+## to zero. The far end faces exactly as the near end does, having turned the whole way.
+func _angle_mirror(i: int) -> float:
+	var last: int = maxi(num_segments - 1, 1)
+	var half: float = float(last) * 0.5
+	var step: float = float(i) if float(i) <= half else float(last - i)
+	return step * rotation_per_segment * 2.0
+
+
+## PLATEAU — each increment is PLATEAU_RATIO of the one before, so the total turn is a
+## geometric series converging on rotation_per_segment / (1 - ratio). The corridor bends
+## and then stops bending.
+func _angle_plateau(i: int) -> float:
+	var total: float = 0.0
+	var step: float = rotation_per_segment
+	for _k in range(i):
+		total += step
+		step *= PLATEAU_RATIO
+	return total
+
+
+## The capture rig fits the frame by the subtree's bounding-box DIAGONAL, and it walks the
+## subtree for MeshInstance3D. This tunnel is built from CSGBox3D nested one level down
+## inside instanced scenes, so that walk finds NOTHING and falls back to a 1 m box — a
+## camera 5 m from the origin of a 42 m corridor, which is why the registry's measured
+## aabb_size for this artifact is literally [0, 0, 0]. Every accrual value would have been
+## photographed from inside the first cube.
+##
+## layers = 0, NOT visible = false: hiding a node hides its children with it, while a
+## zero-layer VisualInstance3D is in no camera's cull mask, draws nothing, and still
+## reports its AABB. The box is sized from num_segments and spacing alone, so it is
+## IDENTICAL for all five accrual values — which is the point: the bite report must be a
+## picture of the twist, not of a zoom.
+##
+## Its bottom sits exactly at y = 0 so GridInteractablesComponent._auto_ground_artifact
+## reads "already grounded" and leaves the tunnel where it has always stood.
+func _add_run_anchor() -> void:
+	var run: float = float(maxi(num_segments - 1, 0)) * spacing + 4.0
+	var anchor := MeshInstance3D.new()
+	anchor.name = "RunAnchor"
+	var box := BoxMesh.new()
+	box.size = Vector3(10.0, 10.0, run)
+	anchor.mesh = box
+	anchor.position = Vector3(0.0, 5.0, run * 0.5 - 0.5)
+	anchor.layers = 0
+	anchor.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(anchor)
+
 
 func _create_end_teleporter() -> void:
 	var teleporter = teleport_scene.instantiate()

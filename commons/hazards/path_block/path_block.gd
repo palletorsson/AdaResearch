@@ -33,6 +33,34 @@ class_name PathBlock
 @export var grid_wire_color: Color = Color(1.0, 0.2, 0.8)   # magenta, like the floor
 @export var grid_fill_color: Color = Color(0.68, 0.73, 0.85)
 
+## AXIS — WARNING: how much the block tells you BEFORE it costs you anything.
+## Adopted word for word from [[catalyst_vent]], which asks the same question of a
+## spawn seam: one vocabulary across the hazards, so a room whose vents are caged
+## cannot have blocks that say nothing. A block is the only object in this game whose
+## entire function is CONSEQUENCE — it edits the route the path watchdog is judging —
+## and the interesting variable is not what it does (that is fixed) but how much of it
+## is legible from the doorway.
+##
+##   none    the block alone, unannounced: grey wall, green ramp, and nothing else.
+##           THE LEGACY BODY, byte for byte — this is what every placement renders today.
+##   stain   a discolouration soaked into the floor around its foot and nothing above it.
+##           The warning exists but it is addressed to your feet: you can only read it
+##           from a cell you are already standing in.
+##   cage    a bolted bar frame with a filed yellow tag. Someone knew, catalogued it,
+##           fenced it — and the block walls the cell through the bars on exactly the
+##           same rule. A world that DOCUMENTS its obstacles has not removed any.
+##   beacon  a lit mast on the crown and a glowing outline at the foot: the verdict is
+##           broadcast as light, readable across a dark room before you commit to walking.
+##   shroud  a canvas drape strapped over it. You cannot tell wall from ramp until you
+##           touch it. The quietest tile and the loudest claim.
+##
+## APPEARANCE ONLY, and deliberately so. The collision shape, the size, the height and
+## the `path_passable` membership that decides whether the route may cross are
+## byte-identical across all five values. A block that hides itself is not a gentler
+## block — that is the whole point of the axis.
+const WARNING_VALUES: PackedStringArray = ["none", "stain", "cage", "beacon", "shroud"]
+@export_enum("none", "stain", "cage", "beacon", "shroud") var warning: String = "none"
+
 const PASSABLE_GROUP := "path_passable"
 const GRID_SHADER := preload("res://commons/resourses/shaders/Grid.gdshader")
 
@@ -66,6 +94,11 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_use_grid_shader"):
 		var v := str(get_meta("config_use_grid_shader")).to_lower()
 		use_grid_shader = v in ["true", "1", "yes", "on"]
+	# WARNING — normalised, and an unknown word keeps the default rather than
+	# blanking the dressing. Read LAST so nothing above it moves.
+	if has_meta("config_warning"):
+		var w: String = str(get_meta("config_warning")).strip_edges().to_lower()
+		warning = w if WARNING_VALUES.has(w) else warning
 
 
 func _build() -> void:
@@ -89,6 +122,21 @@ func _build() -> void:
 
 	add_child(mesh_inst)
 	add_child(coll)
+
+	# WARNING dressing, appended LAST so the mesh and the collider keep their
+	# child indices and the passable group is already decided above. "none"
+	# falls through and adds nothing at all — the legacy lineage.
+	match warning:
+		"stain":
+			_warn_stain()
+		"cage":
+			_warn_cage()
+		"beacon":
+			_warn_beacon()
+		"shroud":
+			_warn_shroud()
+		_:
+			pass
 
 
 func _make_cube(mi: MeshInstance3D, cs: CollisionShape3D) -> void:
@@ -159,4 +207,128 @@ func _mat(c: Color) -> StandardMaterial3D:
 	m.albedo_color = c
 	m.metallic = metallic
 	m.roughness = roughness
+	return m
+
+
+# ── WARNING ──────────────────────────────────────────────────────────────────
+# One axis, five values, the vocabulary shared with [[catalyst_vent]]. Every
+# builder below adds MeshInstance3D children only — never a collider, never a
+# group, never a size. Deterministic: no draw from the random stream, so five
+# variants of the same block differ only in what is on it.
+
+const WARN_STAIN_OUTER := Color(0.24, 0.19, 0.13)
+const WARN_STAIN_CORE := Color(0.09, 0.075, 0.055)
+const WARN_BAR := Color(0.52, 0.50, 0.44)
+const WARN_TAG := Color(0.86, 0.72, 0.12)
+const WARN_MAST := Color(0.38, 0.38, 0.40)
+const WARN_LAMP := Color(1.0, 0.62, 0.12)
+const WARN_CLOTH := Color(0.40, 0.38, 0.33)
+const WARN_STRAP := Color(0.15, 0.14, 0.13)
+
+
+## STAIN — the notice written on the ground. A wide dull discolouration soaked
+## around the block's foot with a darker core right under it: readable only from
+## a cell you already occupy, which is exactly one cell too late.
+func _warn_stain() -> void:
+	_warn_add(Vector3(0, 0.006, 0), Vector3(size * 1.9, 0.012, size * 1.9),
+		_warn_mat(WARN_STAIN_OUTER, 1.0, 0.0))
+	_warn_add(Vector3(0, 0.013, 0), Vector3(size * 1.24, 0.012, size * 1.24),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	# Two dry runs bled off one side — the stain has a direction, so it reads as
+	# something that happened here rather than a painted square.
+	_warn_add(Vector3(size * 0.86, 0.010, size * 0.18), Vector3(size * 0.62, 0.012, size * 0.17),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(-size * 0.72, 0.010, -size * 0.40), Vector3(size * 0.44, 0.012, size * 0.13),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+
+
+## CAGE — the notice as paperwork. Four corner posts, two rails and a filed
+## yellow tag. The cell is still walled on exactly the same rule; the bars only
+## record that somebody wrote it down.
+func _warn_cage() -> void:
+	# Posts sit just clear of the block's 0.92 m face, not out at the cell edge:
+	# the frame has to read as fencing THIS block, and a wider box would only
+	# zoom the sweep camera out and shrink the subject in every tile.
+	var hx: float = size * 0.74
+	var top: float = height * 1.26
+	var bot: float = 0.02
+	var bar: StandardMaterial3D = _warn_mat(WARN_BAR, 0.45, 0.55)
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			var px: float = float(sx) * hx
+			var pz: float = float(sz) * hx
+			_warn_add(Vector3(px, (bot + top) * 0.5, pz), Vector3(0.055, top - bot, 0.055), bar)
+	for ry in [top, height * 0.50]:
+		var y: float = float(ry)
+		for s in [-1.0, 1.0]:
+			var o: float = float(s) * hx
+			_warn_add(Vector3(0, y, o), Vector3(hx * 2.0 + 0.055, 0.042, 0.042), bar)
+			_warn_add(Vector3(o, y, 0), Vector3(0.042, 0.042, hx * 2.0 + 0.055), bar)
+	_warn_add(Vector3(hx + 0.03, height * 0.84, 0.0), Vector3(0.018, 0.15, 0.23),
+		_warn_mat(WARN_TAG, 0.7, 0.0))
+
+
+## BEACON — the notice as broadcast. A mast on the crown with a lit head, and a
+## glowing outline burnt around the foot: the verdict reaches the doorway.
+func _warn_beacon() -> void:
+	var mast_h: float = height * 0.85
+	var mast: StandardMaterial3D = _warn_mat(WARN_MAST, 0.4, 0.6)
+	var lamp: StandardMaterial3D = _warn_emissive(WARN_LAMP, 3.2)
+	_warn_add(Vector3(0, height + mast_h * 0.5, 0), Vector3(0.055, mast_h, 0.055), mast)
+	_warn_add(Vector3(0, height + mast_h + 0.06, 0), Vector3(0.20, 0.12, 0.20), lamp)
+	# A shade cap over the lamp so it reads as a fitting, not a floating cube.
+	_warn_add(Vector3(0, height + mast_h + 0.15, 0), Vector3(0.28, 0.045, 0.28), mast)
+	# The foot outline — four thin lit bars on the floor around the base.
+	var hx: float = size * 0.72
+	for s in [-1.0, 1.0]:
+		var o: float = float(s) * hx
+		_warn_add(Vector3(0, 0.014, o), Vector3(hx * 2.0, 0.02, 0.045), lamp)
+		_warn_add(Vector3(o, 0.014, 0), Vector3(0.045, 0.02, hx * 2.0), lamp)
+
+
+## SHROUD — the notice withheld. A canvas drape strapped over the block, so wall
+## and ramp share one silhouette and the rule is only discoverable by walking
+## into it. The block underneath is untouched.
+func _warn_shroud() -> void:
+	var cloth: StandardMaterial3D = _warn_mat(WARN_CLOTH, 0.95, 0.0)
+	var strap: StandardMaterial3D = _warn_mat(WARN_STRAP, 0.85, 0.1)
+	var w: float = size + 0.13
+	_warn_add(Vector3(0, height * 0.51, 0), Vector3(w, height * 1.02, w), cloth)
+	# The gather knotted at the top, and a skirt where the cloth breaks on the floor.
+	_warn_add(Vector3(0, height * 1.02 + 0.05, 0), Vector3(0.26, 0.10, 0.26), cloth)
+	_warn_add(Vector3(0, 0.035, 0), Vector3(w + 0.09, 0.07, w + 0.09), cloth)
+	# One strap around the waist.
+	var hw: float = w * 0.5
+	for s in [-1.0, 1.0]:
+		var o: float = float(s) * hw
+		_warn_add(Vector3(0, height * 0.58, o), Vector3(w + 0.012, 0.06, 0.014), strap)
+		_warn_add(Vector3(o, height * 0.58, 0), Vector3(0.014, 0.06, w + 0.012), strap)
+
+
+func _warn_add(center: Vector3, box_size: Vector3, mat: Material) -> void:
+	var bm := BoxMesh.new()
+	bm.size = box_size
+	var mi := MeshInstance3D.new()
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = center
+	mi.add_to_group("hazard_warning")
+	add_child(mi)
+
+
+func _warn_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _warn_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
 	return m

@@ -1,6 +1,9 @@
 extends Node3D
 class_name CatalystPickup
 
+# Preload (not the global class_name) so a freshly-created kit resolves headless too.
+const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
 # @identity
 # essence: a pedestal with a glowing token floating above it. The closing
 #   gesture of a lab chamber — the thing you walk up to AFTER understanding
@@ -73,6 +76,34 @@ class_name CatalystPickup
 ## via a Tween in _ready). Set false for static decorative versions.
 @export var pulsing: bool = true
 
+@export_group("DNA")
+## AXIS — ON WHAT TERMS THE REWARD IS OFFERED. `sequence_name` says WHICH catalyst;
+## `claimed` says whether it is still there. Neither says the thing a room actually
+## communicates before you reach: what this apparatus thinks its prize IS, and what it
+## expects of you. The same orb, the same completion event, five different institutions
+## around it — and a chamber that ends in a vending slot has taught something different
+## from a chamber that ends in a shrine, even when the code path is identical.
+##
+##   plinth   free-standing — the legacy lineage, byte for byte. A bare column, a lit
+##            ring, an orb floating in open air. Nothing between you and it; take it.
+##   vitrine  behind glass — four posts, a glazed case and a capping plate over the orb,
+##            with DO NOT HANDLE printed on the rail. The reward has become an EXHIBIT:
+##            the chamber went back to being a museum at the last moment.
+##   clamp    held by the machine — three worn-metal fingers rise off the pedestal rim
+##            and close on the orb, an interlock band burning at their root. It is not
+##            offered, it is GRIPPED; the apparatus must let go first.
+##   shrine   venerated — three stepped rings ring the foot, a stele stands behind the
+##            orb carrying the sequence's name, two embers flank it. Approach, don't grab.
+##            Knowledge as relic rather than tool.
+##   chute    vended — a dispenser cabinet wraps the pedestal top with a dark delivery
+##            slot, a catch tray and a DISPENSE readout below the orb. The reward is
+##            transactional: an output of a machine you fed, not a thing you understood.
+##
+## Appearance only. Nothing here adds a collider or touches take_catalyst(), so the grab
+## and the LabManager completion event are identical at every value.
+@export_enum("plinth", "vitrine", "clamp", "shrine", "chute") var offer: String = "plinth"
+const OFFERS: PackedStringArray = ["plinth", "vitrine", "clamp", "shrine", "chute"]
+
 # ── Internal state ────────────────────────────────────────────────────
 
 var _built: bool = false
@@ -127,6 +158,9 @@ func _read_metadata_overrides() -> void:
 		pedestal_height = float(str(get_meta("config_pedestal_height")))
 	if has_meta("config_orb_radius"):
 		orb_radius = float(str(get_meta("config_orb_radius")))
+	if has_meta("config_offer"):
+		var o: String = str(get_meta("config_offer")).strip_edges().to_lower()
+		offer = o if OFFERS.has(o) else offer
 
 
 func _parse_color(s: String, fallback: Color) -> Color:
@@ -236,6 +270,20 @@ func _build_pickup() -> void:
 		status.position = Vector3(0.0, pedestal_height * 0.32, pedestal_radius + 0.005)
 		add_child(status)
 
+	# OFFER dressing, appended LAST so every node built above keeps its index and
+	# position on the legacy path. "plinth" falls through and adds nothing at all.
+	match offer:
+		"vitrine":
+			_offer_vitrine()
+		"clamp":
+			_offer_clamp()
+		"shrine":
+			_offer_shrine()
+		"chute":
+			_offer_chute()
+		_:
+			pass                                  # "plinth" — the legacy lineage
+
 	_built = true
 
 
@@ -281,3 +329,147 @@ func take_catalyst() -> void:
 		child.queue_free()
 	_built = false
 	_build_pickup()
+
+
+# ── OFFER ────────────────────────────────────────────────────────────────────
+# One axis, five institutions around one orb. Built from HangarKit (worn_metal,
+# painted_metal, rams_body, emissive, stencil, readout, three_color_bar, box) so the
+# pedestal stays inside the cabinet grammar the lab props share. Nothing below adds a
+# collider or an animation: every value is a claim a still can hold.
+
+## VITRINE — behind glass. Four posts off a seating rail, a glazed case and a capping
+## plate over the orb, DO NOT HANDLE printed on the rail. The chamber graduates you and
+## then, at the last moment, puts the diploma in a display case.
+func _offer_vitrine() -> void:
+	var base: float = pedestal_height + 0.055
+	var orb_y: float = pedestal_height + orb_float_height
+	var half: float = maxf(pedestal_radius * 1.20, orb_radius * 2.6)
+	var case_h: float = maxf(orb_y + orb_radius * 2.2 - base, 0.22)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(pedestal_color.lightened(0.36))
+	var glass := StandardMaterial3D.new()
+	glass.albedo_color = Color(0.60, 0.69, 0.76, 0.20)
+	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass.roughness = 0.05
+	glass.metallic = 0.15
+	add_child(HangarKit.box(Vector3(0.0, base - 0.016, 0.0),
+		Vector3(half * 2.18, 0.032, half * 2.18), steel))
+	for sx in [1.0, -1.0]:
+		for sz in [1.0, -1.0]:
+			var px: float = sx * half
+			var pz: float = sz * half
+			add_child(HangarKit.box(Vector3(px, base + case_h * 0.5, pz),
+				Vector3(0.024, case_h, 0.024), steel))
+	add_child(HangarKit.box(Vector3(0.0, base + case_h * 0.5, 0.0),
+		Vector3(half * 2.0, case_h, half * 2.0), glass))
+	add_child(HangarKit.box(Vector3(0.0, base + case_h + 0.015, 0.0),
+		Vector3(half * 2.18, 0.030, half * 2.18), steel))
+	var q: MeshInstance3D = HangarKit.stencil("DO NOT HANDLE",
+		Vector2(half * 1.7, 0.026), Color(0.90, 0.91, 0.94))
+	if q:
+		q.position = Vector3(0.0, base - 0.016, half * 1.10 + 0.004)
+		add_child(q)
+
+
+## CLAMP — held by the machine. Three worn-metal fingers rise off the pedestal rim,
+## angle in and close their pads on the orb, with a red interlock band burning at their
+## root. The reward is not offered; the apparatus has it, and must let go first.
+func _offer_clamp() -> void:
+	var top: float = pedestal_height
+	var orb_y: float = pedestal_height + orb_float_height
+	var steel: StandardMaterial3D = HangarKit.worn_metal(pedestal_color.lightened(0.38))
+	var pad: StandardMaterial3D = HangarKit.painted_metal(Color(0.16, 0.17, 0.20), 0.40)
+	var r: float = pedestal_radius * 0.86
+	var post_h: float = maxf(orb_y - orb_radius - top - 0.02, 0.08)
+	for i in range(3):
+		var arm := Node3D.new()
+		arm.name = "ClampArm_%d" % i
+		arm.rotation.y = TAU * float(i) / 3.0
+		add_child(arm)
+		arm.add_child(HangarKit.box(Vector3(r, top + post_h * 0.5, 0.0),
+			Vector3(0.052, post_h, 0.052), steel))
+		var knuckle: MeshInstance3D = HangarKit.box(
+			Vector3(r * 0.72, top + post_h + 0.042, 0.0), Vector3(0.15, 0.036, 0.05), steel)
+		knuckle.rotation_degrees = Vector3(0.0, 0.0, 34.0)
+		arm.add_child(knuckle)
+		arm.add_child(HangarKit.box(Vector3(orb_radius + 0.026, orb_y - orb_radius * 0.15, 0.0),
+			Vector3(0.034, 0.058, 0.05), pad))
+	var band := MeshInstance3D.new()
+	band.name = "ClampInterlock"
+	var tm := TorusMesh.new()
+	tm.inner_radius = pedestal_radius * 0.98
+	tm.outer_radius = pedestal_radius * 1.24
+	band.mesh = tm
+	band.material_override = HangarKit.emissive(Color(0.92, 0.20, 0.12), 2.0)
+	band.position = Vector3(0.0, top + 0.058, 0.0)
+	add_child(band)
+
+
+## SHRINE — venerated. Three stepped rings around the foot, a stele standing behind the
+## orb with the sequence's name cut into it, two embers flanking at the step line. The
+## algorithm as relic: you are asked to approach it, not to pick it up.
+func _offer_shrine() -> void:
+	var stone: StandardMaterial3D = HangarKit.rams_body(pedestal_color.lightened(0.44), 0.20)
+	var trim: StandardMaterial3D = HangarKit.worn_metal(pedestal_color.lightened(0.24))
+	var radii: PackedFloat32Array = PackedFloat32Array([
+		pedestal_radius * 2.6, pedestal_radius * 2.05, pedestal_radius * 1.5])
+	for i in range(3):
+		var step := MeshInstance3D.new()
+		step.name = "ShrineStep_%d" % i
+		var cm := CylinderMesh.new()
+		cm.top_radius = radii[i]
+		cm.bottom_radius = radii[i]
+		cm.height = 0.055
+		cm.radial_segments = 28
+		step.mesh = cm
+		step.material_override = stone
+		step.position = Vector3(0.0, 0.0275 + 0.055 * float(i), 0.0)
+		add_child(step)
+	var st_h: float = pedestal_height * 0.62
+	var st_y: float = pedestal_height + orb_float_height + 0.02
+	var st_z: float = -pedestal_radius * 0.95
+	add_child(HangarKit.box(Vector3(0.0, st_y, st_z),
+		Vector3(pedestal_radius * 1.5, st_h, 0.045), trim))
+	var q: MeshInstance3D = HangarKit.stencil(sequence_name.to_upper(),
+		Vector2(pedestal_radius * 1.3, 0.05), accent_color.lightened(0.35))
+	if q:
+		q.position = Vector3(0.0, st_y + st_h * 0.28, st_z + 0.026)
+		add_child(q)
+	for s in [1.0, -1.0]:
+		var sf: float = s
+		add_child(HangarKit.box(Vector3(sf * pedestal_radius * 1.78, 0.195, 0.0),
+			Vector3(0.05, 0.075, 0.05), HangarKit.emissive(accent_color, 1.8)))
+
+
+## CHUTE — vended. A dispenser cabinet wraps the pedestal top: a dark delivery mouth, a
+## tilted catch tray, a DISPENSE readout and a Rams bar, with the orb sitting above the
+## machine like an output. The cabinet swallows the accent ring, which is the point —
+## the lit ring said "reward"; the slot says "transaction".
+func _offer_chute() -> void:
+	var top: float = pedestal_height
+	var body: StandardMaterial3D = HangarKit.painted_metal(pedestal_color.lightened(0.18), 0.35)
+	var trim: StandardMaterial3D = HangarKit.worn_metal(pedestal_color.lightened(0.36))
+	var w: float = pedestal_radius * 2.5
+	var d: float = pedestal_radius * 1.95
+	var cab_h: float = pedestal_height * 0.52
+	var cy: float = top - cab_h * 0.5 + 0.06
+	var fz: float = d * 0.5
+	add_child(HangarKit.box(Vector3(0.0, cy, 0.0), Vector3(w, cab_h, d), body))
+	add_child(HangarKit.box(Vector3(0.0, cy + cab_h * 0.5 + 0.013, 0.0),
+		Vector3(w * 1.06, 0.026, d * 1.06), trim))
+	add_child(HangarKit.box(Vector3(0.0, cy - cab_h * 0.22, fz + 0.005),
+		Vector3(w * 0.62, 0.075, 0.02),
+		HangarKit.painted_metal(Color(0.03, 0.035, 0.045), 0.6, 0.2, 0.9)))
+	var tray: MeshInstance3D = HangarKit.box(Vector3(0.0, cy - cab_h * 0.30, fz + 0.055),
+		Vector3(w * 0.66, 0.016, 0.10), trim)
+	tray.rotation_degrees = Vector3(-14.0, 0.0, 0.0)
+	add_child(tray)
+	var screen: Node3D = HangarKit.readout("DISPENSE", ["1 REMAINING"],
+		Vector2(w * 0.62, w * 0.26), Color(0.88, 0.86, 0.80),
+		Color(0.09, 0.09, 0.11), Color(0.09, 0.09, 0.11))
+	if screen:
+		screen.position = Vector3(0.0, cy + cab_h * 0.20, fz + 0.035)
+		add_child(screen)
+	var bar: Node3D = HangarKit.three_color_bar(w * 0.66, 0.030,
+		[accent_color, HangarKit.DISPLAY_DARK, pedestal_color.lightened(0.52)])
+	bar.position = Vector3(0.0, cy - cab_h * 0.44, fz + 0.02)
+	add_child(bar)

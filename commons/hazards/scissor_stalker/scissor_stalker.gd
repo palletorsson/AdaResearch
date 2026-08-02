@@ -44,6 +44,31 @@ enum State { COMPACT, STALK, POUNCE, ATTACK, RETRACT, DEAD }
 @export var joint_color: Color = Color(0.6, 0.25, 0.2, 1.0)
 @export var emission_color: Color = Color(0.9, 0.3, 0.15, 1.0)
 
+## AXIS — WARNING: how much the hazard tells you BEFORE it costs you anything.
+## Adopted word for word from [[catalyst_vent]], [[path_block]] and
+## [[kaleidocycle_enemy]] — one vocabulary across the hazards. The stalker is the
+## member of the family where the question is sharpest, because its reach is not
+## visible in its resting pose: a compact scissor linkage is three times shorter than
+## the same linkage extended, so what you can SEE of it is a systematic underestimate
+## of what it can touch. Whether the room corrects for that is the axis.
+##
+##   none    the stalker alone, unannounced — THE LEGACY BODY, byte for byte.
+##   stain   a dry discolouration soaked into the ground it has been working, and
+##           nothing above it: readable only from inside its reach.
+##   cage    a bolted bar frame and a filed yellow tag. Somebody catalogued it and
+##           fenced it; the pounce carries exactly as far as it always did.
+##   beacon  a lit mast standing at its back with a lamp head, plus a glowing outline
+##           on the floor at the radius nobody could otherwise guess.
+##   shroud  a canvas wrap strapped over the core. The eye goes out, the linkage stops
+##           reading as a mechanism, and the reach is unchanged.
+##
+## APPEARANCE ONLY. attack_damage, attack_radius, pounce_range, pounce_speed,
+## detection_radius, max_health, every duration and the collision sphere are
+## byte-identical across all five values. A hazard that hides itself is not a gentler
+## hazard — a shrouded stalker reaches exactly as far as a caged one.
+const WARNING_VALUES: PackedStringArray = ["none", "stain", "cage", "beacon", "shroud"]
+@export_enum("none", "stain", "cage", "beacon", "shroud") var warning: String = "none"
+
 # State
 var _health: float = 0.0
 var _state: State = State.COMPACT
@@ -78,6 +103,9 @@ func _ready() -> void:
 	_set_state(State.STALK)
 	_leg_extension = 0.5
 	print("ScissorStalker: READY at %s" % global_position)
+	# WARNING dressing, appended LAST so the body, the eye and every leg root keep
+	# their child indices. "none" adds nothing at all — the legacy lineage.
+	_build_warning()
 
 
 func _physics_process(delta: float) -> void:
@@ -510,6 +538,174 @@ func configure(config: Dictionary) -> void:
 	if config.has("damage"):
 		attack_damage = float(config["damage"])
 
+	# WARNING — read last, from the config dict or the config_<key> metadata the grid
+	# stamps on the root, and an unknown word keeps the default rather than blanking
+	# the dressing.
+	var w: String = ""
+	if config.has("warning"):
+		w = str(config["warning"])
+	elif has_meta("config_warning"):
+		w = str(get_meta("config_warning"))
+	w = w.strip_edges().to_lower()
+	if WARNING_VALUES.has(w):
+		warning = w
+	_build_warning()
+
 
 func apply_grid_config(config: Dictionary) -> void:
 	configure(config)
+
+
+# ── WARNING ──────────────────────────────────────────────────────────────────
+# One axis, five values, the vocabulary shared with [[catalyst_vent]],
+# [[path_block]] and [[kaleidocycle_enemy]]. Every builder below adds
+# MeshInstance3D children only — never a collider, never a group, never a distance
+# the combat code reads. Deterministic: nothing here draws from the random stream.
+
+const WARN_STAIN_OUTER := Color(0.24, 0.19, 0.13)
+const WARN_STAIN_CORE := Color(0.09, 0.075, 0.055)
+const WARN_BAR := Color(0.52, 0.50, 0.44)
+const WARN_TAG := Color(0.86, 0.72, 0.12)
+const WARN_MAST := Color(0.38, 0.38, 0.40)
+const WARN_LAMP := Color(1.0, 0.62, 0.12)
+const WARN_CLOTH := Color(0.40, 0.38, 0.33)
+const WARN_STRAP := Color(0.15, 0.14, 0.13)
+
+
+func _build_warning() -> void:
+	## Rebuildable: a map hands its config to apply_grid_config AFTER _ready, so this
+	## runs twice. Drop the previous dressing immediately (remove_child before
+	## queue_free — the sweep measures the AABB on the very next frame).
+	for child in get_children():
+		if child.is_in_group("hazard_warning"):
+			remove_child(child)
+			child.queue_free()
+	match warning:
+		"stain":
+			_warn_stain()
+		"cage":
+			_warn_cage()
+		"beacon":
+			_warn_beacon()
+		"shroud":
+			_warn_shroud()
+		_:
+			pass
+
+
+## The span the stalker actually occupies once it has relaxed — which is the pose a
+## still catches, since with no player in range it retracts to COMPACT within a few
+## seconds. Derived from the linkage rather than hardcoded: a scissor chain of
+## units_per_leg X-units at the compact pivot angle (0.39·PI half-angle).
+func _warn_reach() -> float:
+	return maxf(float(units_per_leg) * 2.0 * bar_length * sin(PI * 0.39), body_radius * 2.0)
+
+
+## The plane it stands on: the body sphere's underside at the compact height.
+func _warn_floor() -> float:
+	return -body_radius * 0.75
+
+
+## STAIN — the notice written on the ground. A wide dull discolouration under its
+## working radius with a darker core and two runs bled off one side.
+func _warn_stain() -> void:
+	var r: float = _warn_reach()
+	var y: float = _warn_floor()
+	_warn_add(Vector3(0, y + 0.006, 0), Vector3(r * 2.6, 0.012, r * 2.6),
+		_warn_mat(WARN_STAIN_OUTER, 1.0, 0.0))
+	_warn_add(Vector3(0, y + 0.013, 0), Vector3(r * 1.5, 0.012, r * 1.5),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(r * 1.05, y + 0.010, r * 0.24), Vector3(r * 0.78, 0.012, r * 0.20),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(-r * 0.86, y + 0.010, -r * 0.52), Vector3(r * 0.56, 0.012, r * 0.16),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+
+
+## CAGE — the notice as paperwork. Four posts, two rails, one filed yellow tag.
+func _warn_cage() -> void:
+	var r: float = _warn_reach()
+	var bot: float = _warn_floor()
+	var top: float = body_radius * 1.5 + r * 0.55
+	var hx: float = r * 1.18
+	var bar: StandardMaterial3D = _warn_mat(WARN_BAR, 0.45, 0.55)
+	var thick: float = maxf(r * 0.075, 0.03)
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			_warn_add(Vector3(float(sx) * hx, (bot + top) * 0.5, float(sz) * hx),
+				Vector3(thick, top - bot, thick), bar)
+	for ry in [top, bot + (top - bot) * 0.42]:
+		var y: float = float(ry)
+		for s in [-1.0, 1.0]:
+			var o: float = float(s) * hx
+			_warn_add(Vector3(0, y, o), Vector3(hx * 2.0 + thick, thick * 0.8, thick * 0.8), bar)
+			_warn_add(Vector3(o, y, 0), Vector3(thick * 0.8, thick * 0.8, hx * 2.0 + thick), bar)
+	_warn_add(Vector3(hx + thick * 0.6, bot + (top - bot) * 0.72, 0),
+		Vector3(0.016, r * 0.30, r * 0.44), _warn_mat(WARN_TAG, 0.7, 0.0))
+
+
+## BEACON — the notice as broadcast. A mast at its back with a lamp head on a shade,
+## and a lit outline on the floor at the reach you could not otherwise see.
+func _warn_beacon() -> void:
+	var r: float = _warn_reach()
+	var bot: float = _warn_floor()
+	var mast_h: float = r * 1.75
+	var mast: StandardMaterial3D = _warn_mat(WARN_MAST, 0.4, 0.6)
+	var lamp: StandardMaterial3D = _warn_emissive(WARN_LAMP, 3.2)
+	var thick: float = maxf(r * 0.075, 0.03)
+	var mx: float = -r * 0.88
+	_warn_add(Vector3(mx, bot + mast_h * 0.5, 0), Vector3(thick, mast_h, thick), mast)
+	_warn_add(Vector3(mx, bot + mast_h + r * 0.16, 0), Vector3(r * 0.38, r * 0.22, r * 0.38), lamp)
+	_warn_add(Vector3(mx, bot + mast_h + r * 0.32, 0), Vector3(r * 0.54, thick * 0.7, r * 0.54), mast)
+	for s in [-1.0, 1.0]:
+		var o: float = float(s) * r * 1.12
+		_warn_add(Vector3(0, bot + 0.012, o), Vector3(r * 2.24, 0.02, thick), lamp)
+		_warn_add(Vector3(o, bot + 0.012, 0), Vector3(thick, 0.02, r * 2.24), lamp)
+
+
+## SHROUD — the notice withheld. A canvas wrap strapped over the core: the eye is
+## covered, the linkage stops reading as a mechanism, the legs still reach.
+func _warn_shroud() -> void:
+	# Sized off the BODY, not the reach: the cloth covers the core and the legs go on
+	# reaching out from under it, which is the whole claim of this value.
+	var bot: float = _warn_floor()
+	var cloth: StandardMaterial3D = _warn_mat(WARN_CLOTH, 0.95, 0.0)
+	var strap: StandardMaterial3D = _warn_mat(WARN_STRAP, 0.85, 0.1)
+	var w: float = body_radius * 3.1
+	var top: float = body_radius * 1.55
+	var cy: float = (bot + top) * 0.5
+	_warn_add(Vector3(0, cy, 0), Vector3(w, top - bot, w), cloth)
+	_warn_add(Vector3(0, top + 0.035, 0), Vector3(w * 0.32, 0.07, w * 0.32), cloth)
+	_warn_add(Vector3(0, bot + 0.03, 0), Vector3(w + 0.09, 0.06, w + 0.09), cloth)
+	for s in [-1.0, 1.0]:
+		var o: float = float(s) * w * 0.5
+		_warn_add(Vector3(0, cy, o), Vector3(w + 0.012, (top - bot) * 0.22, 0.013), strap)
+		_warn_add(Vector3(o, cy, 0), Vector3(0.013, (top - bot) * 0.22, w + 0.012), strap)
+
+
+func _warn_add(center: Vector3, box_size: Vector3, mat: Material) -> void:
+	var bm: BoxMesh = BoxMesh.new()
+	bm.size = box_size
+	var mi: MeshInstance3D = MeshInstance3D.new()
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = center
+	mi.add_to_group("hazard_warning")
+	add_child(mi)
+
+
+func _warn_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _warn_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m

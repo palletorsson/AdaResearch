@@ -56,10 +56,43 @@ class_name TechCrate
 ## scrolling vent-panel scanline, pulsing LEDs). Off = flat StandardMaterial.
 @export var use_shader: bool = false
 
+@export_group("DNA")
+## AXIS — WHERE IN ITS LIFE AS FREIGHT this case has been caught. The @identity says a
+## tech crate is the lab's confession that its instruments were bought, not born. Then
+## the honest follow-up question is not what is inside: it is what HAPPENED to the case
+## after it arrived, because that is the part of the supply chain the room actually
+## witnessed. A crate is never neutral furniture; it is a stage of a transaction.
+##
+##   seal      still shut — the legacy lineage, byte for byte. Latched, lit, sealed lid.
+##             Whatever was paid for has not yet been touched.
+##   breach    opened — the lid is off its seat and tipped back on its rear edge, the
+##             cavity below it dark, a pale foam liner with a rectangular void where the
+##             instrument used to sit. The payload is now somewhere in the room.
+##   hold      impounded — two hazard tapes crossed over the front face, a HOLD patch,
+##             a seal wire through both latches, dust at the foot. Someone else's claim
+##             sits on this case and the lab cannot answer it.
+##   manifest  the case as a document — a big pale shipping label bolted to the front
+##             carrying the shipper, the route and the net weight, a handling line and a
+##             serial stencilled on the end. It admits where it came from and who sent it.
+##   bench     repurposed — a board top laid across the lid, a tool tray and a coiled
+##             cable on it, a strap hanging down the face. It has stopped being freight
+##             and become furniture; the transaction is old enough to be forgotten.
+##
+## The lid is the pivot: `breach` is the only value that takes it off, which is why that
+## one reads from across a room while the others argue on the front face.
+@export_enum("seal", "breach", "hold", "manifest", "bench") var consignment: String = "seal"
+const CONSIGNMENTS: PackedStringArray = ["seal", "breach", "hold", "manifest", "bench"]
+## Shipper printed on the label under `consignment = "manifest"`.
+@export var shipper_text: String = "VALLEY LABORATORIES"
+## Asset code stencilled on the end face under "manifest" (and on the HOLD patch).
+@export var asset_code: String = "TC-0417"
+
 # ── Constants ─────────────────────────────────────────────────────────
 
 ## The mesh factory that sweeps the beveled silhouette into a real solid.
 const MF := preload("res://commons/artifacts/shared/mesh_factory.gd")
+## Preload (not the global class_name) so a freshly-created kit resolves headless too.
+const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 const METAL_SHADER := preload("res://commons/artifacts/tech_crate/tech_crate_metal.gdshader")
 const PANEL_SHADER := preload("res://commons/artifacts/tech_crate/tech_crate_panel.gdshader")
 const PULSE_SHADER := preload("res://commons/artifacts/tech_crate/tech_crate_pulse.gdshader")
@@ -115,6 +148,13 @@ func _read_metadata_overrides() -> void:
 		lid_color = _parse_color(str(get_meta("config_lid_color")), lid_color)
 	if has_meta("config_accent_color"):
 		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
+	if has_meta("config_consignment"):
+		var _c: String = str(get_meta("config_consignment")).strip_edges().to_lower()
+		consignment = _c if CONSIGNMENTS.has(_c) else consignment
+	if has_meta("config_shipper_text"):
+		shipper_text = str(get_meta("config_shipper_text"))
+	if has_meta("config_asset_code"):
+		asset_code = str(get_meta("config_asset_code"))
 
 
 func _parse_color(raw: String, fallback: Color) -> Color:
@@ -149,7 +189,10 @@ func _build() -> void:
 	add_child(body)
 
 	# ── 2. Sealed inset lid cap on the top face ──────────────────────
-	_build_lid_cap(hw, hd, bv)
+	# `breach` is the ONE consignment value that takes the lid off its seat; every other
+	# value keeps it, so the default path builds exactly what it always built.
+	if consignment != "breach":
+		_build_lid_cap(hw, hd, bv)
 
 	# ── 3. Armored corner reinforcement caps at the four vertical edges
 	_build_corner_caps(hw, hd, bv)
@@ -165,6 +208,21 @@ func _build() -> void:
 	# ── 6. Recessed side grips ───────────────────────────────────────
 	if show_handles:
 		_build_side_grips(hw)
+
+	# ── 7. CONSIGNMENT dressing ──────────────────────────────────────
+	# Appended LAST so every child index and position above is untouched on the legacy
+	# path. "seal" falls through and adds nothing at all.
+	match consignment:
+		"breach":
+			_consignment_breach(hw, hd, bv, front_z)
+		"hold":
+			_consignment_hold(hw, hd, front_z)
+		"manifest":
+			_consignment_manifest(hw, hd, front_z)
+		"bench":
+			_consignment_bench(hw, hd)
+		_:
+			pass                                  # "seal" — the legacy lineage
 
 
 # A slightly-inset sealed box sitting on the TOP face — reads as a beveled lid.
@@ -473,3 +531,155 @@ func _make_metal_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D
 	m.roughness = rough
 	m.metallic = metal
 	return m
+
+
+# ── CONSIGNMENT ──────────────────────────────────────────────────────────────
+# One axis, five stages of a transaction. Built from HangarKit (painted_metal,
+# worn_metal, rams_body, striped_mat, stencil, brand_patch, bolts, three_color_bar,
+# grime_band) so the crate stays inside the cabinet grammar it shares with
+# station_crates and the rest of the hangar family.
+
+## BREACH — opened. The lid is off its seat and tipped back on its rear edge; under it a
+## dark cavity and a pale foam liner with a rectangular void cut in it, the shape of the
+## thing that is now somewhere in the room. The one value that changes the silhouette.
+func _consignment_breach(hw: float, hd: float, bv: float, front_z: float) -> void:
+	var inner_w: float = (crate_width - bv * 2.0) * 0.90
+	var inner_d: float = (crate_depth - bv * 2.0) * 0.86
+	add_child(HangarKit.box(Vector3(0.0, crate_height - 0.055, 0.0),
+		Vector3(inner_w, 0.11, inner_d),
+		HangarKit.painted_metal(Color(0.03, 0.035, 0.045), 0.6, 0.2, 0.9)))
+	# Foam liner: four pale bars leaving a rectangular void between them.
+	var foam: StandardMaterial3D = HangarKit.rams_body(Color(0.78, 0.77, 0.73), 0.25)
+	var fb: float = 0.085
+	var fy: float = crate_height - 0.026
+	add_child(HangarKit.box(Vector3(0.0, fy, (inner_d - fb) * 0.5), Vector3(inner_w, 0.055, fb), foam))
+	add_child(HangarKit.box(Vector3(0.0, fy, -(inner_d - fb) * 0.5), Vector3(inner_w, 0.055, fb), foam))
+	add_child(HangarKit.box(Vector3((inner_w - fb) * 0.5, fy, 0.0),
+		Vector3(fb, 0.055, inner_d - fb * 2.0), foam))
+	add_child(HangarKit.box(Vector3(-(inner_w - fb) * 0.5, fy, 0.0),
+		Vector3(fb, 0.055, inner_d - fb * 2.0), foam))
+	# The lid, hinged back off the rear rim.
+	var lid: MeshInstance3D = HangarKit.box(Vector3.ZERO,
+		Vector3((crate_width - bv * 2.0) * 0.94, 0.04, (crate_depth - bv * 2.0) * 0.92),
+		HangarKit.painted_metal(lid_color.lightened(0.10), 0.30))
+	lid.rotation_degrees = Vector3(-38.0, 0.0, 0.0)
+	lid.position = Vector3(0.0, crate_height + 0.075, -(hd - bv) + 0.167)
+	add_child(lid)
+	add_child(HangarKit.box(Vector3(0.0, crate_height + 0.006, -(hd - bv) + 0.02),
+		Vector3(inner_w * 0.34, 0.03, 0.06),
+		HangarKit.worn_metal(panel_color.lightened(0.30))))
+	var q: MeshInstance3D = HangarKit.stencil("OPENED", Vector2(0.24, 0.05),
+		Color(0.92, 0.90, 0.86))
+	if q:
+		q.position = Vector3(-crate_width * 0.30, crate_height * 0.20, front_z + 0.045)
+		add_child(q)
+
+
+## HOLD — impounded. Two hazard tapes crossed over the front face, a seal wire drawn
+## through both latch tabs, a HOLD patch carrying the asset code, and dust at the foot.
+## Someone else's claim sits on the case and the lab has no answer to it.
+func _consignment_hold(hw: float, hd: float, front_z: float) -> void:
+	var fz: float = front_z + 0.042
+	for a in [11.0, -11.0]:
+		var ang: float = a
+		var t: MeshInstance3D = HangarKit.box(Vector3(0.0, crate_height * 0.48, fz),
+			Vector3(crate_width * 0.98, 0.085, 0.008), HangarKit.striped_mat())
+		t.rotation_degrees = Vector3(0.0, 0.0, ang)
+		add_child(t)
+	add_child(HangarKit.box(Vector3(0.0, crate_height * 0.86, fz + 0.006),
+		Vector3(crate_width * 0.64, 0.012, 0.012),
+		HangarKit.worn_metal(Color(0.72, 0.72, 0.76))))
+	var q: MeshInstance3D = HangarKit.brand_patch("HOLD  " + asset_code,
+		Vector2(crate_width * 0.44, 0.085), Color(0.10, 0.10, 0.12), Color(0.95, 0.78, 0.10))
+	if q:
+		q.position = Vector3(0.0, crate_height * 0.20, fz + 0.010)
+		add_child(q)
+	var g: MeshInstance3D = HangarKit.grime_band(crate_width * 0.94, 0.09, fz,
+		body_color.lightened(0.30))
+	if g:
+		add_child(g)
+
+
+## MANIFEST — the case as a document. A pale shipping label bolted over the left panel
+## pocket carrying shipper, route and net weight, a handling line and a Rams bar on the
+## right, and the asset code stencilled on the end face. It admits where it came from.
+func _consignment_manifest(hw: float, hd: float, front_z: float) -> void:
+	var fz: float = front_z + 0.030
+	var lw: float = crate_width * 0.56
+	var lh: float = crate_height * 0.50
+	var lx: float = -crate_width * 0.16
+	var ly: float = crate_height * 0.52
+	var trim: StandardMaterial3D = HangarKit.worn_metal(panel_color.lightened(0.30))
+	add_child(HangarKit.box(Vector3(lx, ly, fz), Vector3(lw + 0.03, lh + 0.03, 0.014), trim))
+	add_child(HangarKit.box(Vector3(lx, ly, fz + 0.011),
+		Vector3(lw, lh, 0.008), HangarKit.rams_body(Color(0.87, 0.86, 0.81), 0.10)))
+	var q: MeshInstance3D = HangarKit.brand_patch(shipper_text, Vector2(lw * 0.92, lh * 0.30),
+		Color(0.11, 0.12, 0.15), Color(0.92, 0.93, 0.96))
+	if q:
+		q.position = Vector3(lx, ly + lh * 0.28, fz + 0.018)
+		add_child(q)
+	var r1: MeshInstance3D = HangarKit.stencil("ROUTE 07-B", Vector2(lw * 0.72, lh * 0.20),
+		Color(0.16, 0.16, 0.19))
+	if r1:
+		r1.position = Vector3(lx, ly - lh * 0.04, fz + 0.018)
+		add_child(r1)
+	var r2: MeshInstance3D = HangarKit.stencil("NET 84 KG", Vector2(lw * 0.58, lh * 0.18),
+		Color(0.16, 0.16, 0.19))
+	if r2:
+		r2.position = Vector3(lx, ly - lh * 0.30, fz + 0.018)
+		add_child(r2)
+	add_child(HangarKit.bolts(Vector3(lx - lw * 0.5 - 0.012, ly, fz + 0.020),
+		Vector3(lx + lw * 0.5 + 0.012, ly, fz + 0.020), 2, 0.013, trim))
+	var bar: Node3D = HangarKit.three_color_bar(crate_width * 0.22, 0.032,
+		[accent_color, HangarKit.DISPLAY_DARK, Color(0.82, 0.80, 0.75)])
+	bar.position = Vector3(crate_width * 0.34, crate_height * 0.66, fz + 0.006)
+	add_child(bar)
+	var up: MeshInstance3D = HangarKit.stencil("THIS WAY UP", Vector2(crate_width * 0.22, 0.048),
+		Color(0.86, 0.87, 0.90))
+	if up:
+		up.position = Vector3(crate_width * 0.34, crate_height * 0.42, fz + 0.006)
+		add_child(up)
+	var sc: MeshInstance3D = HangarKit.stencil(asset_code, Vector2(crate_depth * 0.40, 0.05),
+		Color(0.86, 0.87, 0.90))
+	if sc:
+		sc.position = Vector3(hw + 0.008, crate_height * 0.62, 0.0)
+		sc.rotation_degrees = Vector3(0.0, 90.0, 0.0)
+		add_child(sc)
+
+
+## BENCH — repurposed. A board top laid across the lid on two battens, a shallow tool
+## tray and a coiled cable on it, a strap hanging down the face and dust at the foot.
+## The case has stopped being freight; the transaction is old enough to be forgotten.
+func _consignment_bench(hw: float, hd: float) -> void:
+	var top_y: float = crate_height + 0.026
+	var steel: StandardMaterial3D = HangarKit.worn_metal(panel_color.lightened(0.26))
+	add_child(HangarKit.box(Vector3(0.0, top_y, 0.0),
+		Vector3(crate_width * 1.03, 0.048, crate_depth * 1.05),
+		HangarKit.painted_metal(Color(0.55, 0.44, 0.28), 0.72)))
+	for s in [1.0, -1.0]:
+		var sf: float = s
+		add_child(HangarKit.box(Vector3(sf * crate_width * 0.36, crate_height + 0.002, 0.0),
+			Vector3(0.05, 0.024, crate_depth * 0.90), steel))
+	var tray_y: float = top_y + 0.032
+	add_child(HangarKit.box(Vector3(-crate_width * 0.22, tray_y, -0.03),
+		Vector3(0.30, 0.016, 0.18), steel))
+	for s2 in [1.0, -1.0]:
+		var sf2: float = s2
+		add_child(HangarKit.box(Vector3(-crate_width * 0.22, tray_y + 0.022, -0.03 + sf2 * 0.088),
+			Vector3(0.30, 0.052, 0.014), steel))
+	var coil := MeshInstance3D.new()
+	coil.name = "CableCoil"
+	var tm := TorusMesh.new()
+	tm.inner_radius = 0.055
+	tm.outer_radius = 0.10
+	coil.mesh = tm
+	coil.material_override = HangarKit.painted_metal(Color(0.09, 0.09, 0.11), 0.5, 0.1, 0.85)
+	coil.position = Vector3(crate_width * 0.24, top_y + 0.045, 0.05)
+	add_child(coil)
+	add_child(HangarKit.box(Vector3(crate_width * 0.06, crate_height * 0.5, hd + 0.016),
+		Vector3(0.07, crate_height * 0.98, 0.012),
+		HangarKit.painted_metal(Color(0.24, 0.26, 0.30), 0.6)))
+	var g: MeshInstance3D = HangarKit.grime_band(crate_width * 0.94, 0.10, hd + 0.022,
+		body_color.lightened(0.30))
+	if g:
+		add_child(g)

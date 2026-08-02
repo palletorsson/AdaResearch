@@ -1,6 +1,22 @@
 {
  "artifacts": {
   "axis_translation_cube": {
+   "dna": {
+    "axes": {
+    "course": [
+    "lift",
+    "lateral",
+    "depth"
+    ],
+    "account": [
+    "ghost",
+    "sweep",
+    "terminus",
+    "formula",
+    "none"
+    ]
+    }
+   },
    "category": "transforms",
    "complexity": "advanced",
    "description": "Configurable axis translation demonstration. Set axis export to 0 (X), 1 (Y), or 2 (Z) to change which axis the cube translates along. Shows start → wait → end → wait pattern with trail ghosts and live labels.",
@@ -111,6 +127,17 @@
    }
   },
   "boolean_tunnel": {
+   "dna": {
+    "axes": {
+    "accrual": [
+    "ramp",
+    "burst",
+    "mirror",
+    "plateau",
+    "none"
+    ]
+    }
+   },
    "category": "transforms",
    "complexity": "beginner",
    "description": "Walk through a corridor built from repeated boolean cubes. Each segment rotates a little more than the last, so a local angular rule becomes an architectural twist you feel with your body. Burst and taper options show how composition changes the same base form into very different spatial experiences. It turns rotation into navigable structure.",
@@ -230,6 +257,17 @@
    }
   },
   "carousel_cake": {
+   "dna": {
+    "axes": {
+    "profile": [
+    "cake",
+    "ziggurat",
+    "column",
+    "spindle",
+    "flare"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Watch a stack of circular layers rotate at exponentially increasing speeds. Every layer obeys the same rule, but the multiplier compounds until the sculpture reads as interference, rhythm, and spectacle rather than a simple spin. The artifact makes scaling a motion parameter feel as dramatic as changing a shape. It stages rotation as geometric progression.",
@@ -1815,6 +1853,22 @@
    }
   },
   "x_translation_cube": {
+   "dna": {
+    "axes": {
+    "course": [
+    "lift",
+    "lateral",
+    "depth"
+    ],
+    "account": [
+    "ghost",
+    "sweep",
+    "terminus",
+    "formula",
+    "none"
+    ]
+    }
+   },
    "category": "transforms",
    "complexity": "beginner",
    "description": "An animated cube that moves only along the X axis. Ghosts and labels keep the motion explicit, so the learner can see that one coordinate changes while the others stay fixed. That isolation makes translation feel elementary instead of abstract. It is the cleanest single-axis version of state change in the sequence.",
@@ -1936,6 +1990,22 @@
    }
   },
   "y_translation_cube": {
+   "dna": {
+    "axes": {
+    "course": [
+    "lift",
+    "lateral",
+    "depth"
+    ],
+    "account": [
+    "ghost",
+    "sweep",
+    "terminus",
+    "formula",
+    "none"
+    ]
+    }
+   },
    "category": "transforms",
    "complexity": "beginner",
    "description": "An animated cube that moves only along the Y axis. Because the vertical coordinate changes alone, the artifact makes upward and downward displacement read differently from horizontal movement even though the operation is still translation. The result is a clean lesson in axis decomposition. It turns elevation into a coordinate fact.",
@@ -2058,6 +2128,22 @@
    }
   },
   "z_translation_cube": {
+   "dna": {
+    "axes": {
+    "course": [
+    "lift",
+    "lateral",
+    "depth"
+    ],
+    "account": [
+    "ghost",
+    "sweep",
+    "terminus",
+    "formula",
+    "none"
+    ]
+    }
+   },
    "category": "transforms",
    "complexity": "beginner",
    "description": "An animated cube that moves only along the Z axis. Depth is often the hardest coordinate to read in 3D space, so isolating this motion helps the learner separate forward-back displacement from lateral shift or lift. Ghosts and labels keep the change visible as the cube moves. It turns depth translation into something concrete.",

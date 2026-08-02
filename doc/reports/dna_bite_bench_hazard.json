@@ -1,0 +1,301 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "bench-hazard-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "mass_spring_bench",
+   "axis": "assay",
+   "frame": 0.01408,
+   "focus": 0.14286,
+   "verdict": "local",
+   "subject": 0.06637,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "membrane_bench",
+   "axis": "assay",
+   "frame": 0.05885,
+   "focus": 0.23322,
+   "verdict": "bites",
+   "subject": 0.10387,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "energy_landscape_bench",
+   "axis": "assay",
+   "frame": 0.02371,
+   "focus": 0.22926,
+   "verdict": "bites",
+   "subject": 0.06414,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "octopus_bench",
+   "axis": "assay",
+   "frame": 0.05987,
+   "focus": 0.27922,
+   "verdict": "bites",
+   "subject": 0.09023,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "grab_jelly_bench",
+   "axis": "assay",
+   "frame": 0.04343,
+   "focus": 0.31057,
+   "verdict": "bites",
+   "subject": 0.06957,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "rigidity_dial_bench",
+   "axis": "assay",
+   "frame": 0.03904,
+   "focus": 0.25454,
+   "verdict": "bites",
+   "subject": 0.11309,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "abject_bench",
+   "axis": "assay",
+   "frame": 0.03068,
+   "focus": 0.2246,
+   "verdict": "bites",
+   "subject": 0.10105,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "becoming_bench",
+   "axis": "assay",
+   "frame": 0.04037,
+   "focus": 0.29175,
+   "verdict": "bites",
+   "subject": 0.12211,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "path_cube",
+   "axis": "warning",
+   "frame": 0.07233,
+   "focus": 0.28306,
+   "verdict": "bites",
+   "subject": 0.15145,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "kaleidocycle_enemy",
+   "axis": "warning",
+   "frame": 0.07576,
+   "focus": 0.34792,
+   "verdict": "bites",
+   "subject": 0.11969,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "scissor_stalker",
+   "axis": "warning",
+   "frame": 0.07482,
+   "focus": 0.34316,
+   "verdict": "bites",
+   "subject": 0.05836,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "miura_crawler",
+   "axis": "warning",
+   "frame": 0.05907,
+   "focus": 0.32121,
+   "verdict": "bites",
+   "subject": 0.06512,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "grid_3d_capture",
+   "axis": "bed",
+   "frame": 0.0,
+   "focus": 0.0,
+   "verdict": "NO RENDER",
+   "subject": 0.0,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "board",
+     "b": "lattice",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "board",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "board",
+     "b": "tray",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "lattice",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "lattice",
+     "b": "tray",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "none",
+     "b": "tray",
+     "focus": 0.0,
+     "rgb": 1.0
+    }
+   ]
+  },
+  {
+   "artifact": "facade_builder",
+   "axis": "armature",
+   "frame": 0.10926,
+   "focus": 0.23476,
+   "verdict": "bites",
+   "subject": 0.11305,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "pattern_maker_station",
+   "axis": "boundary",
+   "frame": 0.02008,
+   "focus": 0.172,
+   "verdict": "bites",
+   "subject": 0.04906,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "vr_tile_editor",
+   "axis": "boundary",
+   "frame": 0.02078,
+   "focus": 0.11977,
+   "verdict": "WEAK",
+   "subject": 0.05977,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "lab_sliding_door",
+   "axis": "welcome",
+   "frame": 0.10751,
+   "focus": 0.64265,
+   "verdict": "bites",
+   "subject": 0.11582,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "tech_crate",
+   "axis": "consignment",
+   "frame": 0.04807,
+   "focus": 0.32873,
+   "verdict": "bites",
+   "subject": 0.11609,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "catalyst_pickup",
+   "axis": "offer",
+   "frame": 0.06777,
+   "focus": 0.39799,
+   "verdict": "bites",
+   "subject": 0.10145,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "z_translation_cube",
+   "axis": "account",
+   "frame": 0.04159,
+   "focus": 0.40044,
+   "verdict": "bites",
+   "subject": 0.03527,
+   "pairs": 3,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "z_translation_cube",
+   "axis": "course",
+   "frame": 0.07179,
+   "focus": 0.41544,
+   "verdict": "bites",
+   "subject": 0.03527,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "carousel_cake",
+   "axis": "profile",
+   "frame": 0.07497,
+   "focus": 0.27392,
+   "verdict": "bites",
+   "subject": 0.07187,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "boolean_tunnel",
+   "axis": "accrual",
+   "frame": 0.01447,
+   "focus": 0.11517,
+   "verdict": "WEAK",
+   "subject": 0.02207,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  }
+ ]
+}

@@ -43,6 +43,33 @@ enum State { DORMANT, ALERT, CRAWL, ATTACK, FLATTEN, DEAD }
 @export var valley_color: Color = Color(0.2, 0.35, 0.7, 1.0)
 @export var emission_color: Color = Color(0.9, 0.5, 0.2, 1.0)
 
+## AXIS — WARNING: how much the hazard tells you BEFORE it costs you anything.
+## Adopted word for word from [[catalyst_vent]], [[path_block]],
+## [[kaleidocycle_enemy]] and [[scissor_stalker]] — one vocabulary across the
+## hazards. The crawler is the family's limit case: its whole predation strategy is
+## to FLATTEN, and with no player in range that is the state it relaxes into within a
+## couple of seconds, so the resting pose of this creature is camouflage. What it
+## looks like is therefore never the warning. Whatever warning exists has to be
+## something the world put around it.
+##
+##   none    the sheet alone, unannounced — THE LEGACY BODY, byte for byte. Flat, it
+##           reads as a panel of floor with a diagram printed on it.
+##   stain   a dull discolouration soaked into the ground it has been crossing,
+##           spreading past the sheet's own footprint on every side.
+##   cage    a bolted bar frame and a filed yellow tag. Somebody catalogued it and
+##           fenced it, and it crawls under the bars on exactly the same gait.
+##   beacon  a lit mast at the sheet's edge with a lamp head, plus a glowing outline
+##           on the floor around a thing that is otherwise almost invisible.
+##   shroud  a fitted canvas cover over the sheet. The mountain/valley crease diagram
+##           — the only thing that gave it away as a mechanism — goes under cloth.
+##
+## APPEARANCE ONLY. attack_damage, attack_radius, attack_cooldown, crawl_speed,
+## detection_radius, max_health, the fold schedule and the collision box are
+## byte-identical across all five values. A hazard that hides itself is not a gentler
+## hazard.
+const WARNING_VALUES: PackedStringArray = ["none", "stain", "cage", "beacon", "shroud"]
+@export_enum("none", "stain", "cage", "beacon", "shroud") var warning: String = "none"
+
 # State
 var _health: float = 0.0
 var _state: State = State.DORMANT
@@ -77,6 +104,9 @@ func _ready() -> void:
 	_set_state(State.CRAWL)
 	_fold_amount = 0.7
 	print("MiuraCrawler: READY at %s" % global_position)
+	# WARNING dressing, appended LAST so the mesh root and every crease keep their
+	# child indices. "none" adds nothing at all — the legacy lineage.
+	_build_warning()
 
 
 func _physics_process(delta: float) -> void:
@@ -463,10 +493,186 @@ func configure(config: Dictionary) -> void:
 		crawl_speed = float(config["speed"])
 	if config.has("damage"):
 		attack_damage = float(config["damage"])
-	
+
 	if _geometry:
 		_rebuild_mesh()
+
+	# WARNING — read last, from the config dict or the config_<key> metadata the grid
+	# stamps on the root, and an unknown word keeps the default rather than blanking
+	# the dressing.
+	var w: String = ""
+	if config.has("warning"):
+		w = str(config["warning"])
+	elif has_meta("config_warning"):
+		w = str(get_meta("config_warning"))
+	w = w.strip_edges().to_lower()
+	if WARNING_VALUES.has(w):
+		warning = w
+	_build_warning()
 
 
 func apply_grid_config(config: Dictionary) -> void:
 	configure(config)
+
+
+# ── WARNING ──────────────────────────────────────────────────────────────────
+# One axis, five values, the vocabulary shared with [[catalyst_vent]],
+# [[path_block]], [[kaleidocycle_enemy]] and [[scissor_stalker]]. Every builder below
+# adds MeshInstance3D children only — never a collider, never a group, never a
+# distance the combat code reads. Deterministic: nothing here draws from the random
+# stream, so five variants of the same sheet differ only in what surrounds it.
+
+const WARN_STAIN_OUTER := Color(0.24, 0.19, 0.13)
+const WARN_STAIN_CORE := Color(0.09, 0.075, 0.055)
+const WARN_BAR := Color(0.52, 0.50, 0.44)
+const WARN_TAG := Color(0.86, 0.72, 0.12)
+const WARN_MAST := Color(0.38, 0.38, 0.40)
+const WARN_LAMP := Color(1.0, 0.62, 0.12)
+const WARN_CLOTH := Color(0.40, 0.38, 0.33)
+const WARN_STRAP := Color(0.15, 0.14, 0.13)
+
+
+func _build_warning() -> void:
+	## Rebuildable: a map hands its config to apply_grid_config AFTER _ready, so this
+	## runs twice. Drop the previous dressing immediately (remove_child before
+	## queue_free — the sweep measures the AABB on the very next frame).
+	for child in get_children():
+		if child.is_in_group("hazard_warning"):
+			remove_child(child)
+			child.queue_free()
+	match warning:
+		"stain":
+			_warn_stain()
+		"cage":
+			_warn_cage()
+		"beacon":
+			_warn_beacon()
+		"shroud":
+			_warn_shroud()
+		_:
+			pass
+
+
+## The sheet's half-extents. MiuraGeometry recentres its vertices every solve, so the
+## pattern sits symmetrically on the origin and these match the collision box the
+## crawler already builds — read from the same two exports, never hardcoded.
+func _warn_half_x() -> float:
+	return maxf(float(cols) * panel_width * 0.5, 0.05)
+
+
+func _warn_half_z() -> float:
+	return maxf(float(rows) * panel_height * 0.5, 0.05)
+
+
+## STAIN — the notice written on the ground. A dull discolouration spreading past the
+## sheet's own footprint, with a darker core and two runs bled off one side.
+func _warn_stain() -> void:
+	var hx: float = _warn_half_x()
+	var hz: float = _warn_half_z()
+	var y: float = -0.028
+	_warn_add(Vector3(0, y, 0), Vector3(hx * 3.4, 0.012, hz * 3.4),
+		_warn_mat(WARN_STAIN_OUTER, 1.0, 0.0))
+	_warn_add(Vector3(0, y + 0.007, 0), Vector3(hx * 2.3, 0.012, hz * 2.3),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(hx * 1.35, y + 0.004, hz * 0.45), Vector3(hx * 0.95, 0.012, hz * 0.34),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(-hx * 1.15, y + 0.004, -hz * 0.95), Vector3(hx * 0.70, 0.012, hz * 0.26),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+
+
+## CAGE — the notice as paperwork. Four posts, two rails, one filed yellow tag. The
+## sheet crawls under the bars on the gait it always had.
+func _warn_cage() -> void:
+	var hx: float = _warn_half_x()
+	var hz: float = _warn_half_z()
+	var r: float = maxf(hx, hz)
+	var bot: float = -0.03
+	var top: float = r * 0.95
+	var px: float = hx * 1.30
+	var pz: float = hz * 1.55
+	var bar: StandardMaterial3D = _warn_mat(WARN_BAR, 0.45, 0.55)
+	var thick: float = maxf(r * 0.09, 0.028)
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			_warn_add(Vector3(float(sx) * px, (bot + top) * 0.5, float(sz) * pz),
+				Vector3(thick, top - bot, thick), bar)
+	for ry in [top, bot + (top - bot) * 0.45]:
+		var y: float = float(ry)
+		for s in [-1.0, 1.0]:
+			_warn_add(Vector3(0, y, float(s) * pz),
+				Vector3(px * 2.0 + thick, thick * 0.8, thick * 0.8), bar)
+			_warn_add(Vector3(float(s) * px, y, 0),
+				Vector3(thick * 0.8, thick * 0.8, pz * 2.0 + thick), bar)
+	_warn_add(Vector3(px + thick * 0.6, bot + (top - bot) * 0.72, 0),
+		Vector3(0.016, r * 0.34, r * 0.50), _warn_mat(WARN_TAG, 0.7, 0.0))
+
+
+## BEACON — the notice as broadcast. A mast at the sheet's edge with a lamp head on a
+## shade, and a lit outline on the floor around a thing that is otherwise flat.
+func _warn_beacon() -> void:
+	var hx: float = _warn_half_x()
+	var hz: float = _warn_half_z()
+	var r: float = maxf(hx, hz)
+	var bot: float = -0.03
+	var mast_h: float = r * 2.1
+	var mast: StandardMaterial3D = _warn_mat(WARN_MAST, 0.4, 0.6)
+	var lamp: StandardMaterial3D = _warn_emissive(WARN_LAMP, 3.2)
+	var thick: float = maxf(r * 0.09, 0.028)
+	var mx: float = -hx * 1.05
+	_warn_add(Vector3(mx, bot + mast_h * 0.5, 0), Vector3(thick, mast_h, thick), mast)
+	_warn_add(Vector3(mx, bot + mast_h + r * 0.18, 0), Vector3(r * 0.42, r * 0.24, r * 0.42), lamp)
+	_warn_add(Vector3(mx, bot + mast_h + r * 0.36, 0), Vector3(r * 0.60, thick * 0.7, r * 0.60), mast)
+	for s in [-1.0, 1.0]:
+		_warn_add(Vector3(0, bot + 0.012, float(s) * hz * 1.5),
+			Vector3(hx * 2.5, 0.02, thick), lamp)
+		_warn_add(Vector3(float(s) * hx * 1.25, bot + 0.012, 0),
+			Vector3(thick, 0.02, hz * 3.0), lamp)
+
+
+## SHROUD — the notice withheld. A fitted canvas cover with short skirts down to the
+## floor: the mountain/valley crease diagram, the only thing that read as a mechanism,
+## goes under cloth. The sheet folds and crawls exactly as before.
+func _warn_shroud() -> void:
+	var hx: float = _warn_half_x()
+	var hz: float = _warn_half_z()
+	var cloth: StandardMaterial3D = _warn_mat(WARN_CLOTH, 0.95, 0.0)
+	var strap: StandardMaterial3D = _warn_mat(WARN_STRAP, 0.85, 0.1)
+	var w: float = hx * 2.0 + 0.10
+	var d: float = hz * 2.0 + 0.10
+	var lid: float = 0.075
+	_warn_add(Vector3(0, lid, 0), Vector3(w, 0.05, d), cloth)
+	for s in [-1.0, 1.0]:
+		_warn_add(Vector3(0, lid * 0.5 - 0.015, float(s) * d * 0.5), Vector3(w, lid + 0.03, 0.02), cloth)
+		_warn_add(Vector3(float(s) * w * 0.5, lid * 0.5 - 0.015, 0), Vector3(0.02, lid + 0.03, d), cloth)
+	_warn_add(Vector3(0, lid + 0.035, 0), Vector3(w * 0.26, 0.05, d * 0.26), cloth)
+	for s in [-1.0, 1.0]:
+		_warn_add(Vector3(0, lid + 0.026, float(s) * d * 0.28), Vector3(w + 0.012, 0.016, 0.05), strap)
+
+
+func _warn_add(center: Vector3, box_size: Vector3, mat: Material) -> void:
+	var bm: BoxMesh = BoxMesh.new()
+	bm.size = box_size
+	var mi: MeshInstance3D = MeshInstance3D.new()
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = center
+	mi.add_to_group("hazard_warning")
+	add_child(mi)
+
+
+func _warn_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _warn_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m

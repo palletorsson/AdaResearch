@@ -101,6 +101,22 @@ class_name TentaclePlacer
 @export_group("Debug")
 @export var debug_log: bool = false
 
+@export_group("Measurement")
+## NOT AN AXIS — the precondition for ever having one.
+##
+## This artifact's silhouette is a function of WALL-CLOCK TIME: _physics_process
+## exponentially chases the target toward its current goal every frame, so the arm a
+## still catches depends on how many physics ticks elapsed between load and shutter.
+## A DNA sweep renders each variant in its own process, which means the pose differs
+## between variants for reasons that have nothing to do with the axis — the sweep would
+## measure the arm's motion and report a confident BITE about the wrong thing. The same
+## failure a `randf()` in a build path causes, with the clock as the random source.
+##
+## With this true the chase and the goal queue are skipped and the target is pinned at
+## `rest_target`, so the chain solves to one reproducible pose every run. Default false
+## reproduces today's behaviour exactly — nothing placed in a map changes.
+@export var static_pose: bool = false
+
 # ── Constants ─────────────────────────────────────────────────────────
 
 const BONE_COUNT: int = 6
@@ -182,6 +198,11 @@ func _build_goal_queue() -> void:
 
 func _physics_process(delta: float) -> void:
 	if _target == null:
+		return
+	# Frozen for measurement: one pose, solved from a fixed target, every run.
+	if static_pose:
+		_target.position = rest_target
+		_solve_chain_manual()
 		return
 	# Determine current goal.
 	var goal_pos: Vector3
@@ -710,6 +731,9 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_debug_log"):
 		var d: String = str(get_meta("config_debug_log")).to_lower()
 		debug_log = d in ["true", "1", "yes", "on"]
+	if has_meta("config_static_pose"):
+		var sp: String = str(get_meta("config_static_pose")).to_lower()
+		static_pose = sp in ["true", "1", "yes", "on"]
 	if has_meta("config_show_pedestal"):
 		var p: String = str(get_meta("config_show_pedestal")).to_lower()
 		show_pedestal = p in ["true", "1", "yes", "on"]

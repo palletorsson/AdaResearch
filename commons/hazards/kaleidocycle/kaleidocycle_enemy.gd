@@ -45,6 +45,30 @@ const FIRE_BOLT_SCENE: PackedScene = preload("res://commons/hazards/armadillo_dr
 @export var spike_color: Color = Color(0.7, 0.2, 0.8, 1.0)
 @export var shield_color: Color = Color(1.0, 0.85, 0.2, 1.0)
 
+## AXIS — WARNING: how much the hazard tells you BEFORE it costs you anything.
+## Adopted word for word from [[catalyst_vent]] and [[path_block]]: one vocabulary
+## across the hazards, because a room cannot coherently cage its vents and leave its
+## enemies unannounced. The kaleidocycle is the sharpest case in the family — every
+## face is ALWAYS present, only visibility rotates, so nothing it does can be inferred
+## from the moment you are looking at. Whether the room admits that in advance is not
+## a property of the creature; it is a property of the world around it.
+##
+##   none    the ring alone, unannounced — THE LEGACY BODY, byte for byte.
+##   stain   a burn soaked into the floor where it has been working, and nothing
+##           above it. You can only read it standing where it already rolled.
+##   cage    a bolted bar frame and a filed yellow tag. Somebody catalogued this
+##           and fenced it, and it tumbles through the bars on exactly the same clock.
+##   beacon  a lit mast up through the ring's hollow centre with a lamp head, plus a
+##           glowing outline on the floor: readable from the doorway.
+##   shroud  a canvas wrap strapped over the whole cycle. The four faces are still
+##           all there. The world knows and has decided you should not.
+##
+## APPEARANCE ONLY. max_health, base_damage, roll_speed, detection_radius,
+## attack_radius, the collision sphere and every duration are byte-identical across
+## all five values. A hazard that hides itself is not a gentler hazard.
+const WARNING_VALUES: PackedStringArray = ["none", "stain", "cage", "beacon", "shroud"]
+@export_enum("none", "stain", "cage", "beacon", "shroud") var warning: String = "none"
+
 # State
 var _health: float = 0.0
 var _state: State = State.ROLL
@@ -72,6 +96,9 @@ func _ready() -> void:
 	add_to_group("enemy")
 	add_to_group("kaleidocycle_enemy")
 	print("KaleidocycleEnemy: READY at %s" % global_position)
+	# WARNING dressing, appended LAST so every node built above keeps its index.
+	# "none" adds nothing at all — the legacy lineage.
+	_build_warning()
 
 
 func _physics_process(delta: float) -> void:
@@ -436,10 +463,191 @@ func configure(config: Dictionary) -> void:
 		_health = max_health
 	if config.has("damage"):
 		base_damage = float(config["damage"])
-	
+
 	if _geometry:
 		_rebuild_mesh()
+
+	# WARNING — read last, from the config dict or the config_<key> metadata the
+	# grid stamps on the root, and an unknown word keeps the default rather than
+	# blanking the dressing.
+	var w: String = ""
+	if config.has("warning"):
+		w = str(config["warning"])
+	elif has_meta("config_warning"):
+		w = str(get_meta("config_warning"))
+	w = w.strip_edges().to_lower()
+	if WARNING_VALUES.has(w):
+		warning = w
+	_build_warning()
 
 
 func apply_grid_config(config: Dictionary) -> void:
 	configure(config)
+
+
+# ── WARNING ──────────────────────────────────────────────────────────────────
+# One axis, five values, the vocabulary shared with [[catalyst_vent]] and
+# [[path_block]]. Every builder below adds MeshInstance3D children only — never a
+# collider, never a group, never a radius the combat code reads. Deterministic:
+# nothing here draws from the random stream, so five variants of the same ring
+# differ only in what the world put around it.
+
+const WARN_STAIN_OUTER := Color(0.24, 0.19, 0.13)
+const WARN_STAIN_CORE := Color(0.09, 0.075, 0.055)
+const WARN_BAR := Color(0.52, 0.50, 0.44)
+const WARN_TAG := Color(0.86, 0.72, 0.12)
+const WARN_MAST := Color(0.38, 0.38, 0.40)
+const WARN_LAMP := Color(1.0, 0.62, 0.12)
+const WARN_CLOTH := Color(0.40, 0.38, 0.33)
+const WARN_STRAP := Color(0.15, 0.14, 0.13)
+
+
+func _build_warning() -> void:
+	## Rebuildable: a map hands its config to apply_grid_config AFTER _ready, so this
+	## runs twice. Drop the previous dressing immediately (remove_child before
+	## queue_free — the sweep measures the AABB on the very next frame).
+	for child in get_children():
+		if child.is_in_group("hazard_warning"):
+			remove_child(child)
+			child.queue_free()
+	var b: AABB = _warn_bounds()
+	match warning:
+		"stain":
+			_warn_stain(b)
+		"cage":
+			_warn_cage(b)
+		"beacon":
+			_warn_beacon(b)
+		"shroud":
+			_warn_shroud(b)
+		_:
+			pass
+
+
+## The ring's real extent, read from the solved tetrahedra rather than guessed, so the
+## dressing scales with segment_count and edge_length instead of drifting off a
+## hardcoded radius. Falls back to a nominal box if the solver has not run yet.
+func _warn_bounds() -> AABB:
+	if _geometry == null or _geometry.tetrahedra.is_empty():
+		var n: float = maxf(edge_length * float(segment_count) * 0.5, 0.2)
+		return AABB(Vector3(-n, -n * 0.6, -n), Vector3(n * 2.0, n * 1.2, n * 2.0))
+	var lo: Vector3 = Vector3(INF, INF, INF)
+	var hi: Vector3 = Vector3(-INF, -INF, -INF)
+	for tet in _geometry.tetrahedra:
+		for v in tet:
+			lo.x = minf(lo.x, v.x)
+			lo.y = minf(lo.y, v.y)
+			lo.z = minf(lo.z, v.z)
+			hi.x = maxf(hi.x, v.x)
+			hi.y = maxf(hi.y, v.y)
+			hi.z = maxf(hi.z, v.z)
+	return AABB(lo, hi - lo)
+
+
+## STAIN — the notice written on the ground. A dull discolouration soaked where the
+## ring has been rolling, with a darker core under it and two runs bled off one side.
+func _warn_stain(b: AABB) -> void:
+	var r: float = maxf(maxf(b.size.x, b.size.z) * 0.5, 0.05)
+	var y: float = b.position.y - 0.006
+	_warn_add(Vector3(b.get_center().x, y, b.get_center().z),
+		Vector3(r * 3.4, 0.012, r * 3.4), _warn_mat(WARN_STAIN_OUTER, 1.0, 0.0))
+	_warn_add(Vector3(b.get_center().x, y + 0.007, b.get_center().z),
+		Vector3(r * 2.1, 0.012, r * 2.1), _warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(b.get_center().x + r * 1.5, y + 0.004, b.get_center().z + r * 0.3),
+		Vector3(r * 1.1, 0.012, r * 0.30), _warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(b.get_center().x - r * 1.25, y + 0.004, b.get_center().z - r * 0.7),
+		Vector3(r * 0.8, 0.012, r * 0.22), _warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+
+
+## CAGE — the notice as paperwork. Four posts, two rails, one filed yellow tag. The
+## ring tumbles through the bars on exactly the clock it always did.
+func _warn_cage(b: AABB) -> void:
+	var r: float = maxf(maxf(b.size.x, b.size.z) * 0.5, 0.05)
+	var c: Vector3 = b.get_center()
+	var bot: float = b.position.y - 0.005
+	var top: float = b.position.y + b.size.y + r * 0.55
+	var hx: float = r * 1.36
+	var bar: StandardMaterial3D = _warn_mat(WARN_BAR, 0.45, 0.55)
+	var thick: float = maxf(r * 0.09, 0.025)
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			_warn_add(Vector3(c.x + float(sx) * hx, (bot + top) * 0.5, c.z + float(sz) * hx),
+				Vector3(thick, top - bot, thick), bar)
+	for ry in [top, bot + (top - bot) * 0.45]:
+		var y: float = float(ry)
+		for s in [-1.0, 1.0]:
+			var o: float = float(s) * hx
+			_warn_add(Vector3(c.x, y, c.z + o), Vector3(hx * 2.0 + thick, thick * 0.8, thick * 0.8), bar)
+			_warn_add(Vector3(c.x + o, y, c.z), Vector3(thick * 0.8, thick * 0.8, hx * 2.0 + thick), bar)
+	_warn_add(Vector3(c.x + hx + thick * 0.6, bot + (top - bot) * 0.72, c.z),
+		Vector3(0.016, r * 0.42, r * 0.62), _warn_mat(WARN_TAG, 0.7, 0.0))
+
+
+## BEACON — the notice as broadcast. A mast up through the ring's hollow centre with a
+## lamp head on a shade, and a lit outline burnt onto the floor around it.
+func _warn_beacon(b: AABB) -> void:
+	var r: float = maxf(maxf(b.size.x, b.size.z) * 0.5, 0.05)
+	var c: Vector3 = b.get_center()
+	var crown: float = b.position.y + b.size.y
+	var mast_h: float = r * 2.0
+	var mast: StandardMaterial3D = _warn_mat(WARN_MAST, 0.4, 0.6)
+	var lamp: StandardMaterial3D = _warn_emissive(WARN_LAMP, 3.2)
+	var thick: float = maxf(r * 0.10, 0.03)
+	_warn_add(Vector3(c.x, crown + mast_h * 0.5, c.z), Vector3(thick, mast_h, thick), mast)
+	_warn_add(Vector3(c.x, crown + mast_h + r * 0.20, c.z),
+		Vector3(r * 0.52, r * 0.30, r * 0.52), lamp)
+	_warn_add(Vector3(c.x, crown + mast_h + r * 0.42, c.z),
+		Vector3(r * 0.74, thick * 0.7, r * 0.74), mast)
+	var hx: float = r * 1.55
+	var y: float = b.position.y - 0.004
+	for s in [-1.0, 1.0]:
+		var o: float = float(s) * hx
+		_warn_add(Vector3(c.x, y, c.z + o), Vector3(hx * 2.0, 0.02, thick), lamp)
+		_warn_add(Vector3(c.x + o, y, c.z), Vector3(thick, 0.02, hx * 2.0), lamp)
+
+
+## SHROUD — the notice withheld. A canvas wrap strapped over the whole cycle: the four
+## faces are still all there, and you cannot see which one is up.
+func _warn_shroud(b: AABB) -> void:
+	var r: float = maxf(maxf(b.size.x, b.size.z) * 0.5, 0.05)
+	var c: Vector3 = b.get_center()
+	var cloth: StandardMaterial3D = _warn_mat(WARN_CLOTH, 0.95, 0.0)
+	var strap: StandardMaterial3D = _warn_mat(WARN_STRAP, 0.85, 0.1)
+	var w: float = r * 2.28
+	var h: float = b.size.y * 1.20 + 0.03
+	_warn_add(Vector3(c.x, c.y, c.z), Vector3(w, h, w), cloth)
+	_warn_add(Vector3(c.x, c.y + h * 0.5 + 0.03, c.z), Vector3(w * 0.30, 0.06, w * 0.30), cloth)
+	_warn_add(Vector3(c.x, b.position.y - 0.01, c.z), Vector3(w + 0.07, 0.05, w + 0.07), cloth)
+	for s in [-1.0, 1.0]:
+		var o: float = float(s) * w * 0.5
+		_warn_add(Vector3(c.x, c.y, c.z + o), Vector3(w + 0.01, h * 0.22, 0.012), strap)
+		_warn_add(Vector3(c.x + o, c.y, c.z), Vector3(0.012, h * 0.22, w + 0.01), strap)
+
+
+func _warn_add(center: Vector3, box_size: Vector3, mat: Material) -> void:
+	var bm: BoxMesh = BoxMesh.new()
+	bm.size = box_size
+	var mi: MeshInstance3D = MeshInstance3D.new()
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = center
+	mi.add_to_group("hazard_warning")
+	add_child(mi)
+
+
+func _warn_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _warn_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m
