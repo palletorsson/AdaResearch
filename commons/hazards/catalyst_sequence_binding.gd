@@ -83,3 +83,42 @@ static func resolve(sequence_token: String, tree: SceneTree) -> String:
 	if tok.is_empty() or tok == "auto":
 		return current_sequence(tree)
 	return tok
+
+
+# ── Which substrate channel each mode WRITES when it hits the grid ─────────
+#
+# The mutator family (commons/grid/mutators/) is five channels on one
+# MultiMesh, and each one already declares what it exists for. This table
+# says which mode speaks through which — so the colour gun recolours the
+# cubes, transformation scales and spins them, cellular flips them on and
+# off. The mode's algorithm is performed ON the world, not merely near it.
+#
+# The pairings follow each mutator's own stated desire, not taste:
+#   color       "colour is a function of position"        -> chromatic, chaos
+#   transform   rotate / scale / translate deltas         -> transformation,
+#                                                            forces, waveform
+#   visibility  "a place for cellular automata, fractals  -> cellular, fractal
+#                and walker trails to write"
+#   glyph       "lets the world UNFOLD — start blocky,    -> primitives,
+#                specifics arrive"                           branching
+#   part        "positions with names" (role tagging)     -> swarm
+#
+# Consumed by GridBiomeComponent when a map opts in with
+# `layers.biome._meta.catalyst_mutates: true`. No opt-in, no routing.
+const MUTATE_CHANNEL: Dictionary = {
+	"primitives":     "glyph",
+	"transformation": "transform",
+	"chromatic":      "color",
+	"forces":         "transform",
+	"waveform":       "transform",
+	"chaos":          "color",
+	"cellular":       "visibility",
+	"fractal":        "visibility",
+	"branching":      "glyph",
+	"swarm":          "part",
+}
+
+
+## The substrate channel a mode writes, or "" for editor tools / unknown ids.
+static func mutate_channel_for_mode(mode_id: String) -> String:
+	return String(MUTATE_CHANNEL.get(mode_id.strip_edges().to_lower(), ""))

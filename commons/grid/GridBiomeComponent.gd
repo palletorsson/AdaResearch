@@ -173,6 +173,10 @@ const IMPACT_REPAINT_S: float = 0.4   # stain repaint cadence while fading
 var _impacts: Array = []              # [{col, row, color, born_s}]
 var _impact_repaint_accum: float = 0.0
 
+# opt-in flag from layers.biome._meta.catalyst_mutates — see
+# _route_catalyst_mutation. Default false keeps every existing map untouched.
+var _catalyst_mutates: bool = false
+
 
 func initialize(grid_sys: Node3D, cube_size: float, gutter: float) -> void:
 	_grid_system = grid_sys
@@ -200,6 +204,8 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	_presence_enabled = bool(meta.get("presence", true))
 	_chunk_lod = bool(meta.get("chunk_lod", false))
 	_living_ground = bool(meta.get("living_ground", false))
+	# opt-in: catalyst hits advance their mode's substrate channel
+	_catalyst_mutates = bool(meta.get("catalyst_mutates", false))
 	_ground_pop = int(meta.get("living_ground_population", 12))
 	_build_budget = maxi(0, int(meta.get("build_budget", 0)))
 	_build_queue.clear()
@@ -424,7 +430,41 @@ func react(col: int, row: int, trigger: String) -> Array:
 # (projectile impact, brush stamp, the walking body) mapped to its cell.
 func react_at_world(world_pos: Vector3, trigger: String) -> Array:
 	var cell: Vector2i = _world_to_cell(world_pos)
-	return react(cell.x, cell.y, trigger)
+	var applied: Array = react(cell.x, cell.y, trigger)
+	# …and, when the map opts in, the firing mode also writes its own
+	# substrate channel — see _route_catalyst_mutation.
+	var routed: String = _route_catalyst_mutation(trigger)
+	if not routed.is_empty():
+		applied.append("mutate." + routed)
+	return applied
+
+
+# ── the catalyst writes the substrate in its own channel ──────────────────
+#
+# A declared cell answers a hit only where an author painted one, and it
+# answers in the map's vocabulary. This is the other half: EVERY mode has a
+# substrate channel it speaks through (CatalystSequenceBinding.MUTATE_CHANNEL
+# — colour gun recolours, transformation scales and spins, cellular flips
+# cubes on and off), and a hit anywhere on an opted-in map advances that
+# channel's mutator.
+#
+# GATED BY NEW DATA, as the grid contract requires: only a map that declares
+# `layers.biome._meta.catalyst_mutates: true` routes anything. Every existing
+# map is byte-identical in behaviour. And routing goes through the SAME
+# _route_mutate() the `mutate.<channel>` response uses, so there is one
+# mutation path in the project, not two.
+const CatalystBinding := preload("res://commons/hazards/catalyst_sequence_binding.gd")
+
+func _route_catalyst_mutation(trigger: String) -> String:
+	if not _catalyst_mutates or not trigger.begins_with("catalyst."):
+		return ""
+	var mode_id: String = trigger.substr(9)
+	var channel: String = CatalystBinding.mutate_channel_for_mode(mode_id)
+	if channel.is_empty():
+		return ""
+	_route_mutate(channel)
+	_stats["catalyst_mutations"] = int(_stats.get("catalyst_mutations", 0)) + 1
+	return channel
 
 
 # Public cell query for once-per-cell sources (friends, future walkers):
