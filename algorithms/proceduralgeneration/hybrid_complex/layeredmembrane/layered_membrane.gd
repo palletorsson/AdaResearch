@@ -3,12 +3,17 @@ extends Node3D
 # @identity
 # essence: N concentric SurfaceTool cylinders with sin() + Perlin displacement -> layered translucent membrane sculpture
 # desire: to peer into nested translucent layers and see color shift from purple to orange as depth increases — geology made of light
-# critical_parameter: undulation_amount — controls the amplitude of wave displacement; at 0 the layers are smooth cylinders, at high values they fold into biological forms
+# critical_parameter: registration — whether the fold in each shell lands on the fold in the
+#   one beneath it (unison), creeps past it (drift), shears (twist), alternates, or scatters.
+#   undulation_amount is the amplitude of that fold, and is deliberately NOT the axis: it is a
+#   volume knob, and five tiles of one object at five loudnesses is not a claim.
 # triggers: Space key regenerates with new noise seed; rotation animation slowly reveals the structure from all angles
 # emerges: subsurface scattering + alpha transparency creates the illusion of depth even on flat screens — layers glow from within
 # needs: SSS material [has]; rotation animation [has]; noise-driven displacement [has]; VR layer-peeling interaction [missing]
 # relationships: paired with cube_mound_scene and dome in PG_Sculpted_Forms; contrasts stacking (discrete) with folding (continuous)
-# truth: a membrane is a boundary that is also a surface — it separates inside from outside while being neither
+# truth: a membrane is a boundary that is also a surface — it separates inside from outside while being neither.
+#   Fifty shells sharpen the question: is this one boundary with thickness, or fifty surfaces in a pile?
+#   `registration` is that question made settable.
 
 # Layered Folded Membrane Generator
 # Creates a 3D structure of undulating membrane-like layers with color gradients
@@ -30,6 +35,51 @@ extends Node3D
 @export var specular: float = 0.5
 @export var noise_influence: float = 0.2
 
+# ── DNA ───────────────────────────────────────────────────────────────────────
+# THE AXIS — how the fold REGISTERS through the depth of the boundary.
+#
+# The identity says a membrane "is a boundary that is also a surface". Fifty shells
+# is that sentence made of geometry, and the question it silently answers is whether
+# those fifty are ONE thing with thickness or FIFTY things in a stack. The code already
+# takes a position: `layer_phase_offset = layer_index * 0.2` creeps the fold a little
+# further round with every shell, and the noise field is sampled one slice deeper each
+# time, so no two layers are the same surface. That creep was a hardcoded constant. It
+# is the argument, so it becomes the axis.
+#
+#   drift        the legacy lineage, byte for byte — 0.2 rad of creep per shell and a
+#                fresh noise slice each time. Fifty related-but-separate surfaces; the
+#                folds slide past one another and read as a soft, cloudy interference.
+#   unison       zero creep, ONE noise slice for every shell. All fifty folds land on
+#                top of each other: a single deep corrugation you can follow from the
+#                outer skin to the core. The boundary becomes one thing, thick.
+#   twist        creep raised to ~1.15 rad per shell, a full turn every five or six
+#                layers. The fold shears into a helix — a barber-pole cut through the
+#                stack, edges spiralling.
+#   alternation  odd shells a quarter-turn out of phase with even ones, and the noise
+#                slice flips between two values only. Adjacent surfaces cross instead of
+#                nesting: a chevron lattice, the silhouette visibly gridded.
+#   scatter      every shell an unrelated phase and an unrelated noise slice. No relation
+#                survives between neighbours; the stack stops being a boundary at all and
+#                becomes a fog of fifty independent skins.
+#
+# WHAT IS NOT THE AXIS. `undulation_amount` is the identity's stated critical_parameter
+# and it is a scalar amplitude — sweeping it would produce five tiles of the same object
+# at five loudnesses, which is a volume knob, not a claim. The rotation animation is
+# likewise out: a still cannot hold it. Nothing here changes the mathematics — the same
+# SurfaceTool cylinders, the same sin() + Perlin displacement, the same colour ramp. Only
+# the relationship BETWEEN layers moves.
+@export_enum("drift", "unison", "twist", "alternation", "scatter") var registration: String = "drift"
+## The allow-list a map token is checked against — the same five words the enum declares,
+## in the same spelling and the same order.
+const REGISTRATIONS: PackedStringArray = ["drift", "unison", "twist", "alternation", "scatter"]
+
+## Seed for the Perlin field. -1 keeps the legacy behaviour (a fresh randi() per build, so
+## every placement is a different membrane); any value >= 0 pins the field so the same
+## membrane comes back. The evidence loop needs this: a sweep of `registration` against an
+## unseeded noise field would compare five DIFFERENT membranes and report the difference
+## between random draws as the bite of the axis.
+@export var membrane_seed: int = -1
+
 # Internal variables
 var noise = FastNoiseLite.new()
 var membrane_container
@@ -37,7 +87,7 @@ var membrane_container
 func _ready() -> void:
 	# Set up noise generator
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
-	noise.seed = randi()
+	noise.seed = randi() if membrane_seed < 0 else membrane_seed
 	noise.frequency = 0.8
 	
 	# Create container for all membrane layers
@@ -83,7 +133,27 @@ func create_membrane_layer(current_radius, layer_index):
 	var layer_undulation = undulation_amount * (1.0 - layer_progress * 0.3)
 	var layer_height = height * (1.0 - layer_progress * 0.2)
 	var layer_phase_offset = layer_index * 0.2
-	
+
+	# ── AXIS: registration ── APPENDED BELOW the legacy values, never in place of them.
+	# `drift` has no case and falls through, so both variables keep exactly the numbers
+	# the line above computed and the default build is unchanged. layer_slice stands in
+	# for the bare layer_index the three noise lookups used to carry; at `drift` it is
+	# float(layer_index), so those lookups get the identical coordinate.
+	var layer_slice: float = float(layer_index)
+	match registration:
+		"unison":
+			layer_phase_offset = 0.0
+			layer_slice = 0.0
+		"twist":
+			layer_phase_offset = float(layer_index) * 1.15
+		"alternation":
+			layer_phase_offset = PI * 0.5 * float(int(layer_index) % 2)
+			layer_slice = float(int(layer_index) % 2)
+		"scatter":
+			var jitter: float = _layer_jitter(layer_index)
+			layer_phase_offset = jitter * TAU
+			layer_slice = jitter * 37.0
+
 	# Generate vertices
 	for h in range(height_points + 1):
 		var h_ratio = float(h) / height_points
@@ -96,7 +166,7 @@ func create_membrane_layer(current_radius, layer_index):
 			# Base radius calculation with undulation
 			var radius_variation = sin(angle * 3 + h_pos * 5 + layer_phase_offset) * layer_undulation * 0.3
 			radius_variation += sin(angle * 5 + h_pos * 3 - layer_phase_offset) * layer_undulation * 0.2
-			radius_variation += noise.get_noise_3d(cos(angle) * 2, sin(angle) * 2, h_pos + layer_index * 0.5) * layer_undulation * noise_influence
+			radius_variation += noise.get_noise_3d(cos(angle) * 2, sin(angle) * 2, h_pos + layer_slice * 0.5) * layer_undulation * noise_influence
 			
 			var vertex_radius = current_radius + radius_variation
 			
@@ -106,7 +176,7 @@ func create_membrane_layer(current_radius, layer_index):
 			var y = h_pos + sin(angle * 4 + layer_phase_offset) * layer_undulation * 0.15
 			
 			# Add some noise to y position
-			y += noise.get_noise_3d(x * 0.5, z * 0.5, layer_index * 0.3) * layer_undulation * 0.3
+			y += noise.get_noise_3d(x * 0.5, z * 0.5, layer_slice * 0.3) * layer_undulation * 0.3
 			
 			# Calculate normal (approximate)
 			var normal = Vector3(
@@ -119,7 +189,7 @@ func create_membrane_layer(current_radius, layer_index):
 			var vertex_color = inner_color.lerp(outer_color, layer_progress)
 			
 			# Add some color variation based on position
-			var color_noise = noise.get_noise_3d(x, y, z + layer_index) * 0.1
+			var color_noise = noise.get_noise_3d(x, y, z + layer_slice) * 0.1
 			vertex_color = vertex_color.lightened(color_noise)
 			
 			# Add vertex with position, normal, color, and UV
@@ -155,6 +225,17 @@ func create_membrane_layer(current_radius, layer_index):
 	mesh_instance.material_override = material
 	
 	return mesh_instance
+
+## A deterministic 0..1 jitter per layer, used only by `registration = scatter`.
+##
+## It does NOT touch the global RNG. A randf() here would be drawn fifty times inside the
+## build loop and shift every draw after it, so a pinned membrane_seed would stop
+## reproducing — the exact failure the seed exists to prevent. An integer hash gives the
+## same unrelatedness with no stream at all.
+func _layer_jitter(layer_index) -> float:
+	var h: int = (int(layer_index) * 1103515245 + 12345) & 0x7fffffff
+	h = (h ^ (h >> 13)) * 1274126177
+	return float((h & 0x7fffffff) % 100003) / 100003.0
 
 func create_membrane_material(layer_progress):
 	var material = StandardMaterial3D.new()
@@ -250,7 +331,7 @@ func regenerate() -> void:
 	add_child(membrane_container)
 	
 	# Set new seed for noise
-	noise.seed = randi()
+	noise.seed = randi() if membrane_seed < 0 else membrane_seed
 	
 	# Generate new membrane
 	generate_layered_membrane()
@@ -270,5 +351,29 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## A map may set #registration: and #membrane_seed:. GUARDED: a config that carries
+## neither key returns before touching anything, because apply_grid_config is called on
+## every placement and an unconditional rebuild here would free and re-lay fifty meshes
+## for a room that only wanted a rotation.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var before_registration: String = registration
+	var before_seed: int = membrane_seed
+	if config.has("registration"):
+		registration = _pick_axis(str(config["registration"]), REGISTRATIONS, registration)
+	if config.has("membrane_seed"):
+		membrane_seed = int(config["membrane_seed"])
+	if registration == before_registration and membrane_seed == before_seed:
+		return
+	if membrane_container == null:
+		return
+	for c in membrane_container.get_children():
+		membrane_container.remove_child(c)
+		c.queue_free()
+	if membrane_seed >= 0:
+		noise.seed = membrane_seed
+	generate_layered_membrane()
+
+## An unreadable token resolves to the value already in place rather than to silence.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback

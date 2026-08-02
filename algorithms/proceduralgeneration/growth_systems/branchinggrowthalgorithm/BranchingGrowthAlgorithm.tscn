@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8k2y3m4n5p6q"]
 
-[ext_resource type="Script" uid="uid://d3y4j5k6l7m8n" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithm/branching_growth_algorithm.gd" id="1_growth"]
-[ext_resource type="Script" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithm/BranchingUI.gd" id="2_ui"]
+[ext_resource type="Script" uid="uid://cdswj66fc5evr" path="res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/branching_growth_algorithm.gd" id="1_growth"]
+[ext_resource type="Script" uid="uid://bc0q6g8ig2is6" path="res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingUI.gd" id="2_ui"]
 
 [node name="BranchingGrowthAlgorithm" type="Node3D"]
 

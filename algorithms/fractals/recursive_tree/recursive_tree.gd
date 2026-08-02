@@ -32,10 +32,53 @@ extends Node3D
 @export var roughness := 0.7
 @export var emission_strength := 0.2
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA — axis: aftermath   (shared with branching_growth_algorithm and
+# space_colonization_algorithm: three different growth rules, one question)
+#
+# Growth is a process and a still cannot hold a process. What a still CAN hold is
+# what the growing left. This tree's growing is a recursion — a call that forks
+# into calls until the depth runs out — so what it leaves is a stack of
+# generations and a volume it happened to fill. The axis is how much of that the
+# finished sculpture is still willing to show.
+#
+#   form       the tree alone, in its own three reds. A result, not a record.
+#              (DEFAULT — today's picture, unchanged)
+#   strata     nothing added: every box repainted by the recursion depth that
+#              made it, trunk to canopy, so the call stack is legible as colour.
+#              Recursion as history rather than as shape.
+#   envelope   the tree plus a wire box on its own bounding volume — the reach
+#              the recursion turned out to have, drawn as a claim about extent.
+#   apparatus  the envelope plus a mark at the fork the trunk hands off to and
+#              at every terminal the recursion could not continue past. The
+#              sculpture staged as a demonstration of where the calls stopped.
+#
+# STRICTLY ADDITIVE and RNG-FREE. _apply_aftermath() runs AFTER generate_tree(),
+# reads the built scene graph, and returns immediately at `form`. It draws no
+# random number, so the seeded tree is bit-identical at every value.
+# ─────────────────────────────────────────────────────────────────────────────
+const AFTERMATH_VALUES := ["form", "strata", "envelope", "apparatus"]
+@export_enum("form", "strata", "envelope", "apparatus") var aftermath: String = "form"
+
+const AFT_WIRE := Color(0.45, 0.70, 1.0)
+const AFT_SHELL := Color(0.40, 0.64, 1.0, 0.14)
+const AFT_JOINT := Color(1.0, 0.90, 0.35)
+const AFT_TERMINAL := Color(0.30, 1.0, 0.62)
+const STRATA_BANDS := [
+	Color(0.16, 0.14, 0.38),   # trunk
+	Color(0.28, 0.46, 0.86),   # first fork
+	Color(0.35, 0.86, 0.72),   # second
+	Color(1.0, 0.86, 0.28),    # canopy
+]
+
 # Materials
 var primary_material: StandardMaterial3D
 var secondary_material: StandardMaterial3D
 var trunk_material: StandardMaterial3D
+
+# instance_id -> the material_override the box had at `form`. Only populated
+# when `strata` paints over them; empty at the default.
+var _original_mats: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
@@ -44,9 +87,13 @@ func _ready() -> void:
 	
 	# Create materials
 	create_materials()
-	
+
 	# Generate the tree
 	generate_tree()
+
+	# APPENDED LAST, after every randf()/randi() in generate_tree(). Reads the
+	# finished scene graph and draws nothing of its own at the default.
+	_apply_aftermath()
 
 # Creates materials for the tree
 func create_materials() -> void:
@@ -476,6 +523,7 @@ func rebuild_tree() -> void:
 	
 	# Generate new tree
 	generate_tree()
+	_apply_aftermath()
 
 # For the specific style in the image - call this instead of generate_tree()
 func generate_image_style_tree() -> void:
@@ -491,5 +539,230 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# aftermath — everything below is new and nothing above it moved.
+# ─────────────────────────────────────────────────────────────────────────────
+
+func _aftermath_key() -> String:
+	# Unknown word keeps the default. A typo in a map file should cost you the
+	# variant, not the object.
+	var key: String = str(aftermath).strip_edges().to_lower()
+	if AFTERMATH_VALUES.has(key):
+		return key
+	return "form"
+
+func _apply_aftermath() -> void:
+	var key: String = _aftermath_key()
+	if key == "form":
+		return
+
+	var boxes: Array = []
+	_collect_boxes(self, -1, Transform3D.IDENTITY, boxes)
+	if boxes.is_empty():
+		return
+
+	var deepest: int = -1
+	for b in boxes:
+		var d: int = int(b["depth"])
+		if d > deepest:
+			deepest = d
+
+	match key:
+		"strata":
+			_paint_strata(boxes, deepest)
+		"envelope":
+			_draw_wire(_growth_rings(boxes, deepest), [])
+		"apparatus":
+			var marks: Array = [
+				{"at": Vector3(0, trunk_height - trunk_width / 2.0, 0), "r": trunk_width * 0.9,
+					"c": AFT_JOINT},
+			]
+			for tip in boxes:
+				if int(tip["depth"]) == deepest:
+					var txf: Transform3D = tip["xf"]
+					marks.append({"at": txf.origin, "r": 0.55, "c": AFT_TERMINAL})
+			_draw_wire(_growth_rings(boxes, deepest), marks)
+
+## One bounding volume per recursion level: what the tree had reached after the
+## trunk, after the first fork, after the second, after the third. Nested cages
+## rather than a single outer box — one box is 12 hairlines on the silhouette,
+## covers under 1% of the frame, and would be reported as decoration. Four
+## nested cages with their corners tied together are a lattice, they cross the
+## canopy, and they say the thing the value is actually claiming: the reach was
+## not given, it accumulated.
+func _growth_rings(boxes: Array, deepest: int) -> Array:
+	var rings: Array = []
+	for d in range(-1, deepest + 1):
+		var upto: Array = []
+		for b in boxes:
+			if int(b["depth"]) <= d:
+				upto.append(b)
+		if not upto.is_empty():
+			rings.append(_bounds_of(upto))
+	return rings
+
+## Walks the built tree. `Branch_<depth>_<i>` names its own recursion level, so
+## the depth is read off the graph rather than re-derived. Trunk boxes stay at
+## -1: the trunk is what the recursion started from, not a generation of it.
+func _collect_boxes(node: Node, depth: int, xf: Transform3D, out: Array) -> void:
+	for child in node.get_children():
+		var cd: int = depth
+		var nm: String = String(child.name)
+		if nm.begins_with("Branch_"):
+			var parts: PackedStringArray = nm.split("_")
+			if parts.size() >= 2 and parts[1].is_valid_int():
+				cd = int(parts[1])
+			else:
+				cd = depth + 1
+		var cxf: Transform3D = xf
+		if child is Node3D:
+			cxf = xf * (child as Node3D).transform
+		if child is MeshInstance3D and not nm.begins_with("AftermathWire"):
+			out.append({"mi": child, "depth": cd, "xf": cxf})
+		_collect_boxes(child, cd, cxf, out)
+
+func _bounds_of(boxes: Array) -> AABB:
+	var acc := AABB()
+	var have: bool = false
+	for b in boxes:
+		var mi: MeshInstance3D = b["mi"]
+		var xf: Transform3D = b["xf"]
+		var ab: AABB = xf * mi.get_aabb()
+		acc = ab if not have else acc.merge(ab)
+		have = true
+	return acc
+
+func _paint_strata(boxes: Array, deepest: int) -> void:
+	var bands: Array = []
+	var span: int = maxi(1, deepest + 2)
+	for i in range(span):
+		var t: float = float(i) / float(maxi(1, span - 1)) * float(STRATA_BANDS.size() - 1)
+		var lo: int = clampi(int(floor(t)), 0, STRATA_BANDS.size() - 1)
+		var hi: int = clampi(lo + 1, 0, STRATA_BANDS.size() - 1)
+		var a: Color = STRATA_BANDS[lo]
+		var c: Color = a.lerp(STRATA_BANDS[hi], t - float(lo))
+		var m := StandardMaterial3D.new()
+		m.albedo_color = c
+		m.metallic = metallic
+		m.roughness = roughness
+		m.emission_enabled = true
+		m.emission = c
+		m.emission_energy_multiplier = emission_strength
+		bands.append(m)
+	for b in boxes:
+		var idx: int = clampi(int(b["depth"]) + 1, 0, bands.size() - 1)
+		var mi: MeshInstance3D = b["mi"]
+		# Remember what `form` looked like. Which boxes drew primary and which
+		# drew secondary was decided by a randf() at build time and cannot be
+		# re-derived, so switching back has to be a restore, not a rebuild.
+		if not _original_mats.has(mi.get_instance_id()):
+			_original_mats[mi.get_instance_id()] = mi.material_override
+		mi.material_override = bands[idx]
+
+func _corners_of(bounds: AABB) -> Array[Vector3]:
+	var lo: Vector3 = bounds.position
+	var hi: Vector3 = bounds.position + bounds.size
+	var out: Array[Vector3] = [
+		Vector3(lo.x, lo.y, lo.z), Vector3(hi.x, lo.y, lo.z),
+		Vector3(hi.x, hi.y, lo.z), Vector3(lo.x, hi.y, lo.z),
+		Vector3(lo.x, lo.y, hi.z), Vector3(hi.x, lo.y, hi.z),
+		Vector3(hi.x, hi.y, hi.z), Vector3(lo.x, hi.y, hi.z),
+	]
+	return out
+
+func _draw_wire(cages: Array, marks: Array) -> void:
+	var im := ImmediateMesh.new()
+	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	var edges: Array = [
+		[0, 1], [1, 2], [2, 3], [3, 0],
+		[4, 5], [5, 6], [6, 7], [7, 4],
+		[0, 4], [1, 5], [2, 6], [3, 7],
+	]
+	var prev_corners: Array[Vector3] = []
+	for cg in cages:
+		var bounds: AABB = cg
+		var corner: Array[Vector3] = _corners_of(bounds)
+		for e in edges:
+			im.surface_set_color(AFT_WIRE)
+			im.surface_add_vertex(corner[int(e[0])])
+			im.surface_set_color(AFT_WIRE)
+			im.surface_add_vertex(corner[int(e[1])])
+		# Tie each ring to the one before it, so the cages read as one expanding
+		# lattice rather than as four unrelated boxes.
+		if prev_corners.size() == 8:
+			for k in range(8):
+				im.surface_set_color(AFT_WIRE)
+				im.surface_add_vertex(prev_corners[k])
+				im.surface_set_color(AFT_WIRE)
+				im.surface_add_vertex(corner[k])
+		prev_corners = corner
+	var axes: Array[Vector3] = [Vector3.RIGHT, Vector3.UP, Vector3.BACK]
+	for mk in marks:
+		var at: Vector3 = mk["at"]
+		var r: float = float(mk["r"])
+		var c: Color = mk["c"]
+		for ax in axes:
+			im.surface_set_color(c)
+			im.surface_add_vertex(at - ax * r)
+			im.surface_set_color(c)
+			im.surface_add_vertex(at + ax * r)
+	im.surface_end()
+
+	var wire := MeshInstance3D.new()
+	wire.name = "AftermathWire"
+	wire.mesh = im
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	wire.material_override = mat
+	wire.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(wire)
+
+	# The outermost ring as a SOLID translucent block, under the lattice. Sixty
+	# hairlines are still only ~1% of the frame; the reach the recursion had is
+	# a volume, so it is drawn as one and the critic can see it.
+	if not cages.is_empty():
+		var outer: AABB = cages[cages.size() - 1]
+		var shell := MeshInstance3D.new()
+		shell.name = "AftermathWire"   # same name so _restyle() sweeps both
+		var box := BoxMesh.new()
+		box.size = outer.size
+		shell.mesh = box
+		shell.position = outer.get_center()
+		var smat := StandardMaterial3D.new()
+		smat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		smat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		smat.albedo_color = AFT_SHELL
+		smat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		shell.material_override = smat
+		shell.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		add_child(shell)
+
+## Puts the tree back to `form` — wire removed, materials restored — so the axis
+## can be changed on a standing tree without regrowing it. rebuild_tree() would
+## reshuffle every randf() and hand the caller a different tree than the one it
+## asked to restyle, which is a change of subject, not a change of staging.
+func _restyle() -> void:
+	# begins_with, not ==: Godot renames a second child sharing a name, so the
+	# translucent shell lands as "AftermathWire2" and an exact match leaks it.
+	for child in get_children():
+		if String(child.name).begins_with("AftermathWire"):
+			remove_child(child)
+			child.free()
+	for id in _original_mats.keys():
+		var mi = instance_from_id(int(id))
+		if mi is MeshInstance3D:
+			(mi as MeshInstance3D).material_override = _original_mats[id]
+	_original_mats.clear()
+	_apply_aftermath()
+
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Additive: a config without these keys leaves the artifact exactly as it was.
+	if config.has("aftermath"):
+		var key: String = str(config["aftermath"]).strip_edges().to_lower()
+		if AFTERMATH_VALUES.has(key) and key != aftermath:
+			aftermath = key
+			if is_inside_tree() and get_child_count() > 0:
+				_restyle()
+	if config.has("random_seed"):
+		random_seed = int(config["random_seed"])

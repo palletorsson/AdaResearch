@@ -7,7 +7,7 @@ extends Node3D
 # @identity
 # essence: sierpinski(v1,v2,v3,d) = 3 * sierpinski(corners, midpoints, d+1), skip center triangle. D = log(3)/log(2) ~ 1.585.
 # desire: To be walked through — 10m triangle rotated vertical, extruded per iteration, creating a fractal wall of triangular portals
-# critical_parameter: extrusion_height — each iteration extrudes deeper, turning the 2D fractal into a 3D walkable relief
+# critical_parameter: extrusion_height — each iteration extrudes deeper, turning the 2D fractal into a 3D walkable relief; excision — where the middle the algorithm refuses to build actually goes (absence | ghost | rubble | cast | negative)
 # triggers: subdivision_interval tick → all current triangles split into 3 → center removed → depth hue-shifts rainbow
 # emerges: The central voids become corridors — the removed triangles are the spaces you walk through
 # needs: VR walking [has via geometry], iteration control [missing]
@@ -25,6 +25,64 @@ extends Node3D
 @export var colorize_by_depth: bool = true  # Color triangles by subdivision depth
 @export var initial_rotation_degrees: float = 90.0  # Rotate triangle to stand vertical for walking through
 
+# ─────────────────────────────────────────────────────────────────────────────
+# DNA PROMOTION (2026-08-02).
+#
+# This artifact's own truth line is "removal creates structure — the shape that
+# taught mathematics that removal creates structure". Every iteration takes a
+# triangle, finds its middle, and does not build it. The gasket IS its own
+# discard: there is nothing in a Sierpinski triangle except the record of what
+# was thrown away.
+#
+# So the axis is not how deep it goes or how thick the slabs are. It is the one
+# question the algorithm never answers about itself:
+#
+#   excision   where the removed middle goes
+#
+#     absence | ghost | rubble | cast | negative
+#
+#   absence   nowhere. It was never made, and nobody asks. Every middle at every
+#             depth is simply skipped, which is the definition of the fractal and
+#             the legacy lineage, mesh for mesh.
+#   ghost     it stays exactly where it was, as a pale translucent pane. The
+#             silhouette closes up into a solid triangle and the holes are still
+#             legible through it — the hole remembering the triangle it was.
+#   rubble    it drops to the ground plane. Every middle from every depth lands
+#             flat at y = 0, so the rising relief stands on a dark carpet of its
+#             own offcuts, one per hole, all sizes mixed. What you cut away has
+#             to go somewhere.
+#   cast      it grows the other way. Each middle is built at MINUS its parent's
+#             extrusion height, so the complement rises downward as a second,
+#             solid relief. Two stepped forms nose to nose: the fractal and the
+#             mould it came out of, both real.
+#   negative  it is the ONLY thing built. The three corner triangles are computed
+#             and recursed exactly as before but never given a mesh, so what
+#             stands is the stack of discards alone — the offcut promoted to the
+#             work. Same recursion, opposite subject.
+#
+# THE MATHEMATICS DOES NOT MOVE. subdivide_triangle computes the same midpoints,
+# returns the same three corner triangles and recurses on the same set at every
+# value; D = log(3)/log(2) is untouched. This axis changes only which of the
+# pieces the algorithm produces get a body.
+#
+# WHAT IS DELIBERATELY NOT THE AXIS. subdivision_interval and max_iterations are
+# the tempting knobs and both are rates or dials, not claims — an interval is
+# invisible to a still, and "how many iterations" is a quantity, not an argument.
+# colorize_by_depth is a colour. extrusion_height is a distance.
+#
+# STRICTLY ADDITIVE. There is no RNG anywhere in this file, so there is no stream
+# to shift. `absence` adds nothing: the match block below falls through to `pass`,
+# and _emit_corner is a straight pass-through to the original builder for every
+# value except `negative`.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## THE AXIS — where the removed middle goes. `absence` is the legacy lineage.
+@export_enum("absence", "ghost", "rubble", "cast", "negative") var excision: String = "absence"
+
+## The allow-list a map token is checked against — the same five words the
+## @export_enum declares, same spelling, same order.
+const EXCISIONS: PackedStringArray = ["absence", "ghost", "rubble", "cast", "negative"]
+
 # Internal state
 var current_iteration: int = 0
 var subdivision_timer: float = 0.0
@@ -32,6 +90,7 @@ var is_subdividing: bool = false
 var current_triangles: Array = []  # Array of triangle data
 
 func _ready() -> void:
+	_read_dna_meta()
 	print("SierpinskiTriangle: Ready")
 	print("SierpinskiTriangle: Will subdivide to %d iterations" % max_iterations)
 
@@ -131,7 +190,7 @@ func subdivide_triangle(triangle: Dictionary) -> Array:
 		"depth": depth,
 		"y_offset": new_y_offset
 	}
-	create_triangle_mesh(t1)
+	_emit_corner(t1)
 	triangles.append(t1)
 
 	# Bottom-right triangle
@@ -142,7 +201,7 @@ func subdivide_triangle(triangle: Dictionary) -> Array:
 		"depth": depth,
 		"y_offset": new_y_offset
 	}
-	create_triangle_mesh(t2)
+	_emit_corner(t2)
 	triangles.append(t2)
 
 	# Top triangle
@@ -153,11 +212,37 @@ func subdivide_triangle(triangle: Dictionary) -> Array:
 		"depth": depth,
 		"y_offset": new_y_offset
 	}
-	create_triangle_mesh(t3)
+	_emit_corner(t3)
 	triangles.append(t3)
 
 	# Note: We intentionally skip the center triangle (m1, m2, m3)
 	# This is what creates the Sierpinski fractal pattern!
+
+	# EXCISION — where that skipped middle goes. Appended LAST, after the three
+	# corner triangles above have been created in their original order, so
+	# `absence` leaves every child index in this scene exactly where it was.
+	var middle: Dictionary = {
+		"v1": m1,
+		"v2": m2,
+		"v3": m3,
+		"depth": depth,
+		"y_offset": new_y_offset
+	}
+	match excision:
+		"ghost":
+			# In place, translucent: the hole keeps a pane of itself.
+			_excise_mesh(middle, new_y_offset, Color(0.86, 0.92, 1.0), 0.28)
+		"rubble":
+			# Dropped to the ground plane — the offcut pile under the relief.
+			_excise_mesh(middle, 0.0, Color(0.34, 0.32, 0.29), 1.0)
+		"cast":
+			# Grown the other way: the complement as a solid mirrored relief.
+			_excise_mesh(middle, -new_y_offset, Color(0.13, 0.15, 0.20), 1.0)
+		"negative":
+			# The only thing built. Wears the depth hue the corners would have had.
+			_excise_mesh(middle, new_y_offset, _depth_hue(depth), 1.0)
+		_:
+			pass                                   # "absence" — the legacy lineage
 
 	return triangles
 
@@ -346,3 +431,58 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+
+# ── DNA: THE EXCISION ────────────────────────────────────────────────────────
+
+## Read a map token / grid config value if the placer left one. An unknown word
+## keeps the default — a typo must not silently turn a gasket into a solid.
+func _read_dna_meta() -> void:
+	if has_meta("config_excision"):
+		var raw: String = str(get_meta("config_excision")).strip_edges().to_lower()
+		if EXCISIONS.has(raw):
+			excision = raw
+		else:
+			push_warning("SierpinskiTriangle: unknown excision '%s' — keeping '%s'" % [raw, excision])
+
+
+## The rainbow-by-depth hue create_triangle_mesh gives the kept corners, so
+## `negative` reads as the same object seen inside out rather than as a new one.
+func _depth_hue(depth: int) -> Color:
+	if colorize_by_depth:
+		return Color.from_hsv(float(depth) / float(max_iterations), 0.8, 0.9)
+	return Color(0.2, 0.6, 0.9)
+
+
+## Build the removed middle as a real slab, at whatever height this value sends
+## it to. Uses the SAME extruded-triangle geometry as the kept corners, so the
+## piece is exactly the one the algorithm declined to make — no new mathematics,
+## only a body for an existing result.
+func _excise_mesh(triangle: Dictionary, y: float, tint: Color, alpha: float) -> void:
+	var mesh_instance := MeshInstance3D.new()
+	mesh_instance.mesh = create_extruded_triangle_mesh(triangle)
+
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color(tint.r, tint.g, tint.b, alpha)
+	material.metallic = 0.0
+	material.roughness = 1.0
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	if alpha < 1.0:
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	else:
+		material.emission_enabled = true
+		material.emission = Color(tint.r, tint.g, tint.b) * 0.2
+		material.emission_energy_multiplier = 0.3
+	mesh_instance.material_override = material
+
+	mesh_instance.position.y = y
+	add_child(mesh_instance)
+
+
+## The kept corners' one gate. `negative` computes and recurses on all three
+## exactly as before and simply does not give them a body; every other value —
+## including the default — falls straight through to the original builder.
+func _emit_corner(triangle: Dictionary) -> void:
+	if excision == "negative":
+		return
+	create_triangle_mesh(triangle)

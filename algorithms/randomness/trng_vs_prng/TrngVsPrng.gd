@@ -7,15 +7,91 @@ extends Node3D
 # @identity
 # essence: two parallel machines side by side — one harvesting physical noise, one running an algorithm — both pretending to be random
 # desire: to expose pseudo-randomness as deterministic theatre, while showing what TRUE randomness actually feels like
-# critical_parameter: prng_seed — change it and the entire pseudo-stream is reborn the same way; nothing about the TRNG stream changes
+# critical_parameter: prng_seed — change it and the entire pseudo-stream is reborn the same way; nothing about the TRNG stream changes. disclosure — how much either side admits about where its numbers came from (oracle | tally | ledger | works | origin)
 # triggers: side-by-side bar charts, statistical comparison, entropy histories diverging in real time
-# emerges: the visual lie — a PRNG output is indistinguishable from TRNG until you reset the seed and see history repeat
+# emerges: the visual lie — a PRNG output is indistinguishable from TRNG until you reset the seed and see history repeat; at disclosure:oracle both panels are two rows of bars and nothing on the rig will tell you which one you could replay
 # needs: prng_seed[has] entropy_sources[has] statistical_comparison[has] entropy_history[has] vr_seed_dial[missing]
-# relationships: pairs with seed_replay_demo (PRNG determinism) and slot_machine (gambler's view of randomness)
+# relationships: pairs with seed_replay_demo (PRNG determinism) and slot_machine (gambler's view of randomness); shares the disclosure ladder with prng_crank_machine and coin_toss
 # truth: a pseudo-random number generator is determinism wearing a mask — the seed is the face underneath
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-08-02). The randomness family's ONE axis, adopted:
+#
+#   disclosure   oracle  <  tally  <  ledger  <  works  <  origin
+#
+# defined in prng_crank_machine.gd, already shared with coin_toss and
+# random_number_book_page_1955. This rig is that ladder staged as a COMPARISON: it
+# stands a true source next to a pseudo one and asks you to tell them apart. So
+# the axis is not "how much does the machine admit" but "how much does the rig let
+# you SEE about either side" — and the point of the low rungs is that with the
+# account withheld the two panels are indistinguishable, which is the artifact's
+# entire claim rather than a degradation of it.
+#
+#   oracle  Two rows of output bars, one per panel, in two identical vitrines.
+#           No source diagram, no algorithm pipeline, no statistics, no history,
+#           no captions. Twenty numbers on the left and twenty on the right, and
+#           NOTHING on the rig says one of them can be replayed tomorrow.
+#   tally   + the aggregate: the four-test comparison block returns (mean,
+#           variance, chi-square, runs), green bars against blue. The statistical
+#           alibi — "both are uniform" is a true sentence about a different
+#           question, and at this rung it is the only sentence available.
+#   ledger  + the per-sample record: the two entropy trails return, fifty
+#           segments each, the two histories running side by side over time.
+#   works   + the mechanism: the four-source entropy harvest on the left, the
+#           five-stage LCG pipeline with its arrows and state sphere on the
+#           right, and the two captions that name what each is doing. THE LEGACY
+#           RIG, byte for byte — this is the default.
+#   origin  + the substrate: a register wall behind the PRNG panel — the seed as
+#           thirty-two lit lamps, MSB left, the exact bit pattern the whole right
+#           side unrolls from — and, facing it across the rig, the TRNG's empty
+#           socket row: thirty-two dark sockets and no lamps, because that side
+#           has no seed to show. The asymmetry IS the teaching.
+#
+# HOW THE RUNGS WITHHOLD: by setting `layers = 0` on the VisualInstance3D, never
+# by not simulating. Every sample is still drawn, every statistic still computed,
+# every multimesh transform still written at every rung — so the mathematics is
+# untouched (it is curriculum) and, just as importantly, the artifact's bounding
+# box is identical at all five rungs, which means the capture camera does not move
+# between variants and the sweep measures the axis instead of its own framing.
+# `visible = false` would have done the first job and not the second.
+#
+# NOT PROMOTED: the sample rate (0.1 s), the buffer lengths, the frame colours.
+# A rate is invisible to a still. prng_seed is not promoted either — it changes
+# which numbers, not what is shown about them, and sweeping it would produce five
+# tiles of the same rig with different bar heights.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## The family's ladder, defined once in prng_crank_machine. Preloaded rather than
+## reached through class_name — class_name lookups are not reliable headless and
+## every frame of the evidence loop is rendered headless.
+const Disclosure = preload("res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd")
+
+## THE AXIS — how much this rig lets you see about where either stream came from.
+## Same five rungs, same order, same spellings as prng_crank_machine and coin_toss.
+## `works` is the legacy rig.
+@export_enum("oracle", "tally", "ledger", "works", "origin") var disclosure: String = "works"
+
+## The allow-list, in ladder order — the same five words the @export_enum declares.
+const DISCLOSURES: PackedStringArray = ["oracle", "tally", "ledger", "works", "origin"]
+
+## PIN. -1 (the default) is today's behaviour exactly: quantum_fluctuation() and
+## atmospheric_fluctuation() call the GLOBAL randf(), which Godot seeds from the OS
+## at startup, and system_timing_jitter() reads the wall clock — so the TRNG panel,
+## the four statistics and both entropy trails are different on every instantiation
+## and keep moving for as long as the artifact lives. That is correct for a true
+## random source and fatal for evidence: a disclosure sweep would render five
+## different rigs and report a confident bite that was entirely noise.
+##
+## Any value >= 0 seeds the global generator before _ready builds anything and
+## replaces the wall clock with a fixed t, so two photographs of this rig can be
+## compared. The TRNG side stays statistically true; it just stops being fresh.
+## The DNA fixture must set it.
+@export var stream_seed: int = -1
 
 var time := 0.0
 var sample_timer := 0.0
+## Frozen clock, used in place of Time.get_ticks_msec() when stream_seed >= 0.
+var _pinned: bool = false
 
 # Random number generators
 var prng_seed := 12345
@@ -67,12 +143,36 @@ const STAT_TEST_COUNT := 4
 const ENTROPY_HISTORY_COUNT := 50
 
 func _ready() -> void:
+	# The grid sets config_* metadata SYNCHRONOUSLY before add_child, so the meta
+	# read happens here, before any geometry exists.
+	_read_meta_overrides()
+	# BEFORE the first draw of any kind. seed() replaces the OS entropy Godot
+	# starts the global generator with; at the default (-1) this line does nothing
+	# and the stream is exactly what it always was.
+	if stream_seed >= 0:
+		seed(stream_seed)
 	initialize_generators()
 	_setup_visual_frames()
 	_setup_explanation_labels()
 	_setup_all_multimeshes()
+	# APPENDED LAST so every node index above is untouched on the legacy path.
+	_build_origin_register()
+	_apply_disclosure()
+	if stream_seed >= 0:
+		_prime_pinned()
 
 func _process(delta: float) -> void:
+	if _pinned:
+		# A pinned rig holds its samples: the buffers, the statistics and the
+		# trails were filled once in _ready and stay put, so two frames of this
+		# artifact are the same picture. The visualizers below still run — they
+		# only READ the buffers — so nothing about the drawing path changes.
+		visualize_true_random()
+		visualize_pseudo_random()
+		show_statistical_comparison()
+		demonstrate_entropy_visualization()
+		return
+
 	time += delta
 	sample_timer += delta
 
@@ -131,6 +231,10 @@ func atmospheric_fluctuation() -> float:
 	return fmod(sin(time * 1000.0 + randf() * 100.0), 1.0)
 
 func system_timing_jitter() -> float:
+	if _pinned:
+		# The wall clock is the one entropy source a seed cannot reach, so a pinned
+		# rig reads its own frozen t instead. Same shape of signal, reproducible.
+		return fmod(time * 3.0, 1.0)
 	return fmod(Time.get_ticks_msec() * 0.001, 1.0)
 
 func generate_pseudo_random() -> float:
@@ -310,7 +414,11 @@ func _mm_set(mmi: MultiMeshInstance3D, idx: int, xform: Transform3D, col: Color)
 # ── Visualization (MultiMesh updates only — zero allocations) ────────
 
 func visualize_true_random() -> void:
-	var entropy_values := [
+	# The four source spheres are sized from a FRESH draw every frame, which is
+	# correct for a live rig and fatal for a still: four of the sweep's variants
+	# would differ by four random radii before the axis said anything. A pinned rig
+	# reads the snapshot taken at the end of priming instead.
+	var entropy_values: Array = _entropy_snapshot if _pinned else [
 		quantum_fluctuation(),
 		thermal_fluctuation(),
 		atmospheric_fluctuation(),
@@ -475,10 +583,12 @@ func demonstrate_entropy_visualization() -> void:
 	var prng_xform := Transform3D(Basis().scaled(Vector3.ONE * prng_r * 2.0), Vector3(2, 0, 0))
 	_mm_set(mm_entropy_prng_sphere, 0, prng_xform, Color(0.2, 0.2, 1.0, 0.7))
 
-	# Update entropy history
-	entropy_history.append({"trng": trng_entropy, "prng": prng_entropy})
-	if entropy_history.size() > ENTROPY_HISTORY_COUNT:
-		entropy_history.remove_at(0)
+	# Update entropy history. A pinned rig does not extend it: the trail was filled
+	# during priming and must not keep growing a flat tail while the sweep settles.
+	if not _pinned:
+		entropy_history.append({"trng": trng_entropy, "prng": prng_entropy})
+		if entropy_history.size() > ENTROPY_HISTORY_COUNT:
+			entropy_history.remove_at(0)
 
 	# TRNG history line
 	var hist_count := maxi(0, entropy_history.size() - 1)
@@ -578,5 +688,203 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## LATENT BUG PAID (2026-08-02): this was `pass`. GridInteractablesComponent parsed
+## every `#token: value` on a trng_vs_prng placement, logged it, stashed it as
+## metadata and then nothing on this artifact read it back — so any map that tried
+## to configure this rig was configuring nothing, silently. It reads its metadata
+## now. The grid sets that metadata BEFORE add_child and calls this deferred, so
+## _ready does the read that decides what is shown; this is the re-read.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	var before: String = disclosure
+	_read_meta_overrides()
+	if disclosure != before:
+		# The register is the only rung that ADDS a body; build it if we just
+		# climbed to it, then re-mask. Everything else is a layer mask, so a rung
+		# change is free and needs no rebuild at all.
+		if _register_root == null:
+			_build_origin_register()
+		_apply_disclosure()
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_disclosure"):
+		disclosure = Disclosure.disclosure_name(str(get_meta("config_disclosure")))
+	if has_meta("config_stream_seed"):
+		stream_seed = int(str(get_meta("config_stream_seed")))
+
+
+## Rank of the current rung, 0..4. Every gate here is `_rung() >= n`.
+func _rung() -> int:
+	return int(Disclosure.DISCLOSURE_RUNGS.get(disclosure, 3))
+
+
+# ── DISCLOSURE ───────────────────────────────────────────────────────────────
+
+## Fixed sample cadence and count used when the rig is pinned — 0.1 s matches the
+## live collector's interval, and 240 steps is comfortably past the 50 the
+## statistics block needs before it will draw at all.
+const PIN_DT := 0.1
+const PIN_STEPS := 240
+
+## The four source values, frozen at the end of priming.
+var _entropy_snapshot: Array = [0.0, 0.0, 0.0, 0.0]
+## disclosure:origin — the seed register wall and its empty twin.
+var _register_root: Node3D = null
+
+
+## Fill the buffers ONCE, deterministically, then stop. Everything downstream of
+## this — the twenty bars per panel, the four statistics, the fifty-segment trails
+## — becomes a pure function of stream_seed rather than of how long the capture
+## happened to take.
+func _prime_pinned() -> void:
+	_pinned = true
+	for i in range(PIN_STEPS):
+		time += PIN_DT
+		collect_samples()
+		entropy_history.append({
+			"trng": calculate_entropy(trng_samples),
+			"prng": calculate_entropy(prng_samples),
+		})
+		if entropy_history.size() > ENTROPY_HISTORY_COUNT:
+			entropy_history.remove_at(0)
+	_entropy_snapshot = [
+		quantum_fluctuation(),
+		thermal_fluctuation(),
+		atmospheric_fluctuation(),
+		system_timing_jitter(),
+	]
+
+
+## Withhold by LAYER MASK, never by not computing. Every sample, statistic and
+## transform is produced at every rung; the rung decides only what the camera is
+## allowed to see. Two reasons, and the second is the one that matters for
+## evidence: the mathematics is curriculum and must not vary, and the artifact's
+## bounding box stays identical across all five rungs, so the capture camera does
+## not move and the sweep measures the axis instead of its own framing.
+func _apply_disclosure() -> void:
+	var r: int = _rung()
+	# tally — the aggregate: the four-test comparison block.
+	_mask(get_node_or_null("StatisticalComparison"), r >= 1)
+	# ledger — the per-sample record: the two entropy spheres and their trails.
+	_mask(get_node_or_null("EntropyVisualization"), r >= 2)
+	# works — the mechanism: the harvest on one side, the pipeline on the other,
+	# and the two captions that name what each is doing.
+	var mech: Array = [
+		mm_trng_sources, mm_trng_connections, mm_trng_combiner,
+		mm_prng_steps, mm_prng_arrows, mm_prng_state,
+		get_node_or_null("TrueRandomGenerator/TrngExplanation"),
+		get_node_or_null("PseudoRandomGenerator/PrngExplanation"),
+	]
+	for n in mech:
+		_mask(n, r >= 3)
+	# origin — the substrate: the register wall, and the socket row facing it.
+	_mask(_register_root, r >= 4)
+
+
+## layers = 0 on every VisualInstance3D in the subtree. NOT `visible = false`:
+## visibility propagates to children and, more to the point, this artifact is
+## measured by a capturer that fits the camera to the union of its meshes without
+## consulting visibility — so a masked node keeps its place in the bounding box
+## and every variant is photographed from the same spot.
+func _mask(n: Node, on: bool) -> void:
+	if n == null or not is_instance_valid(n):
+		return
+	if n is VisualInstance3D:
+		(n as VisualInstance3D).layers = 1 if on else 0
+	for c in n.get_children():
+		_mask(c, on)
+
+
+## disclosure:origin — THE REGISTER WALL.
+##
+## Thirty-two lamps across the top of the PRNG vitrine, MSB left: the seed, in
+## binary, the exact pattern the entire right-hand panel unrolls from. A set bit
+## stands tall and lit; a clear bit is a dark stub in its socket. Facing it across
+## the rig, in the same band of the TRNG vitrine, the same thirty-two sockets with
+## NO lamps in them at all — because that side has no seed, has never had one, and
+## could not be replayed by anyone.
+##
+## The asymmetry is the whole teaching, and it is the one thing the legacy rig
+## never says out loud: both panels currently show twenty bars each and the
+## captions assert a difference the geometry does not draw.
+func _build_origin_register() -> void:
+	if _rung() < 4:
+		return
+	if _register_root != null and is_instance_valid(_register_root):
+		return
+	_register_root = Node3D.new()
+	_register_root.name = "SeedRegister"
+	add_child(_register_root)
+
+	var lit := StandardMaterial3D.new()
+	lit.albedo_color = Color(0.35, 0.65, 1.0)
+	lit.emission_enabled = true
+	lit.emission = Color(0.35, 0.65, 1.0)
+	lit.emission_energy_multiplier = 3.0
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.10, 0.11, 0.15)
+	dark.metallic = 0.4
+	dark.roughness = 0.5
+	var sill := StandardMaterial3D.new()
+	sill.albedo_color = Color(0.30, 0.32, 0.38)
+	sill.metallic = 0.6
+	sill.roughness = 0.35
+	var absent := StandardMaterial3D.new()
+	absent.albedo_color = Color(0.55, 0.20, 0.16)
+	absent.emission_enabled = true
+	absent.emission = Color(0.75, 0.24, 0.16)
+	absent.emission_energy_multiplier = 1.2
+
+	# Both registers sit in the free band across the top of each vitrine, inside
+	# the frame that is already there, so nothing leaves the panel it belongs to.
+	# Built under ONE root (not under the two containers) so the layer mask reaches
+	# every piece from a single walk; the ±8 m panel offset is applied by hand.
+	var pitch := 0.18
+	var base_y := 2.20
+	var span: float = pitch * 31.0
+	for side in range(2):
+		var ox: float = 8.0 if side == 0 else -8.0     # 0 = pseudo (right), 1 = true (left)
+		var rail := Node3D.new()
+		rail.name = "Register_PRNG" if side == 0 else "Register_TRNG"
+		rail.position = Vector3(ox, 0, 0)
+		_register_root.add_child(rail)
+		# The sill the lamps stand on — full width, so an empty register still
+		# reads as a register rather than as nothing.
+		rail.add_child(_reg_box(Vector3(0, base_y - 0.09, -0.12),
+			Vector3(span + 0.24, 0.09, 0.09), sill))
+		for i in range(32):
+			var x: float = -span * 0.5 + float(i) * pitch
+			# The socket: identical on both sides. What differs is what is in it.
+			rail.add_child(_reg_box(Vector3(x, base_y - 0.01, -0.12),
+				Vector3(0.13, 0.07, 0.13), dark))
+			if side == 1:
+				continue                     # the true source has no seed to show
+			# MSB left. A pinned rig shows its actual seed; an unpinned one has no
+			# recorded seed at all and stands its lamps down — the honest picture,
+			# because randomize() cannot be read back.
+			var bit: int = 0
+			if stream_seed >= 0:
+				bit = (stream_seed >> (31 - i)) & 1
+			if bit == 1:
+				rail.add_child(_reg_box(Vector3(x, base_y + 0.32, -0.12),
+					Vector3(0.11, 0.62, 0.11), lit))
+			else:
+				rail.add_child(_reg_box(Vector3(x, base_y + 0.09, -0.12),
+					Vector3(0.11, 0.14, 0.11), dark))
+		if side == 1:
+			# A struck-through bar across the empty register: the row is not merely
+			# empty, it is CLOSED. Nothing will ever be written there.
+			rail.add_child(_reg_box(Vector3(0, base_y + 0.16, -0.11),
+				Vector3(span + 0.10, 0.07, 0.05), absent))
+
+
+func _reg_box(center: Vector3, size_vec: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size_vec
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi

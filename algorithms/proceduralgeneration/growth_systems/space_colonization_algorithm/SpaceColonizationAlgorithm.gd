@@ -36,6 +36,39 @@ extends Node3D
 @export var branch_color: Color = Color(0.6, 0.4, 0.2)
 @export var attraction_color: Color = Color(1, 0.3, 0.3, 0.5)
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA — axis: aftermath   (shared with branching_growth_algorithm and
+# recursive_tree: three different growth rules, one question)
+#
+# Growth is a process and a still cannot hold a process. What a still CAN hold is
+# what the growing left: the branches, the demand they were answering, the volume
+# they were allowed to fill. The axis is how much of the growing the finished
+# thing is still willing to show.
+#
+#   apparatus  demand and boundary and structure all at once — the growth staged
+#              as an experiment.  (DEFAULT, and it is what this artifact has
+#              always drawn: show_cube_guide and show_attraction_points both
+#              ship true, so today's frame IS the apparatus frame.)
+#   form       branches only. A result. The rig struck, the auxin cloud gone.
+#   field      branches plus the attraction points — the demand without the
+#              target volume that framed it.
+#   envelope   branches plus the target volume drawn SOLID and translucent —
+#              the permitted region without the demand inside it. A boundary
+#              and what filled it.
+#   strata     branches only, repainted by generation instead of by distance
+#              from the root, so every segment carries its date.
+#
+# STRICTLY ADDITIVE. `apparatus` puts both gates back to plain `true` and takes
+# the early return in _aftermath_tint(), so the default frame is the pre-DNA one.
+# The value is read AFTER growth and never enters the RNG path.
+# ─────────────────────────────────────────────────────────────────────────────
+const AFTERMATH_VALUES := ["apparatus", "form", "field", "envelope", "strata"]
+@export_enum("apparatus", "form", "field", "envelope", "strata") var aftermath: String = "apparatus"
+
+## Pins the attraction cloud so a sweep renders the SAME network five times.
+## -1 keeps the pre-DNA behaviour exactly: no seed() call, every run differs.
+@export var growth_seed: int = -1
+
 @export_group("Actions")
 @export var regenerate: bool = false:
 	set(value):
@@ -60,7 +93,11 @@ class GrowthNode:
 	var thickness: float = 1.0
 	var growth_direction: Vector3 = Vector3.ZERO
 	var influenced_by: int = 0
-	
+	# Generation, stamped once at creation. `strata` needs the age of every
+	# segment; walking parents per node per redraw would be O(n·depth) inside a
+	# function the animated path already calls every iteration.
+	var depth: int = 0
+
 	func _init(pos: Vector3, par: GrowthNode = null, thick: float = 1.0) -> void:
 		position = pos
 		parent = par
@@ -75,6 +112,7 @@ var all_nodes: Array[GrowthNode] = []
 var is_growing: bool = false
 var current_iteration: int = 0
 var growth_timer: float = 0.0
+var _aft: String = "apparatus"   # aftermath key, normalised once per redraw
 
 func _ready() -> void:
 	generate_structure()
@@ -88,6 +126,10 @@ func _process(delta: float) -> void:
 				is_growing = false
 
 func generate_structure() -> void:
+	# FIRST statement, ahead of generate_attraction_points()'s randf()/randi().
+	# At the default -1 no seed() runs and the stream is the pre-DNA one.
+	if growth_seed >= 0:
+		seed(growth_seed)
 	clear_structure()
 	current_iteration = 0
 	
@@ -293,6 +335,7 @@ func grow_iteration() -> bool:
 			var new_position = node.position + growth_dir * segment_length
 			var new_thickness = node.thickness * thickness_decay
 			var new_node = GrowthNode.new(new_position, node, new_thickness)
+			new_node.depth = node.depth + 1
 			
 			node.children.append(new_node)
 			new_leaf_nodes.append(new_node)
@@ -312,17 +355,36 @@ func grow_iteration() -> bool:
 
 func visualize_structure() -> void:
 	clear_visualization()
-	
+
+	# Both gates below pick up ONE extra term, and both extra terms are true at
+	# `apparatus` — so at the default the pair reduces to the pre-DNA `if show_*:`
+	# and the frame is unchanged. Every other value subtracts from it.
+	_aft = _aftermath_key()
+
 	# Draw cube guide
-	if show_cube_guide:
+	if show_cube_guide and _aft == "apparatus":
 		create_cube_guide()
-	
+
+	# `envelope` gets a SOLID translucent target volume rather than the shipped
+	# wire guide. The guide is twelve hairlines at alpha 0.2 — under 1% of the
+	# frame and below the critic's own subject threshold, so an envelope built
+	# from it would be indistinguishable from an axis that does nothing. The
+	# claim is a volume; draw a volume.
+	if _aft == "envelope":
+		_add_target_shell()
+
 	# Draw attraction points
-	if show_attraction_points:
+	if show_attraction_points and (_aft == "apparatus" or _aft == "field"):
 		draw_attraction_points()
-	
+
 	# Draw growth structure
 	draw_branches()
+
+	# The bounding hull of the target volume + the growth origin, on layers 0 so
+	# it draws nothing. It exists so `form` and `apparatus` report the SAME AABB:
+	# otherwise the capture rig refits per variant, the camera moves, every pixel
+	# changes, and the bite number is a picture of a zoom rather than of an axis.
+	_add_field_anchor()
 
 func create_cube_guide() -> void:
 	var cube_mesh = MeshInstance3D.new()
@@ -420,6 +482,10 @@ func create_branch_segment(node: GrowthNode) -> void:
 	# Color based on depth/distance from root
 	var depth_factor = clamp(node.position.distance_to(growth_origin) / 10.0, 0.0, 1.0)
 	material.albedo_color = branch_color.lerp(Color(0.3, 0.6, 0.3), depth_factor)
+	# Last word on colour, and a pass-through at every value but `strata`. The
+	# line above colours by DISTANCE from the root; strata colours by GENERATION,
+	# which is a different claim — how far is not the same as how long ago.
+	material.albedo_color = _aftermath_tint(node, material.albedo_color)
 	material.roughness = 0.8
 	mesh_instance.material_override = material
 
@@ -481,5 +547,74 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# aftermath — everything below is new and nothing above it moved.
+# ─────────────────────────────────────────────────────────────────────────────
+
+const STRATA_ROOT := Color(0.10, 0.13, 0.42)
+const STRATA_TIP := Color(1.0, 0.93, 0.30)
+const SHELL_COLOR := Color(0.40, 0.64, 1.0, 0.16)
+
+func _add_target_shell() -> void:
+	var shell := MeshInstance3D.new()
+	shell.name = "TargetShell"
+	var box := BoxMesh.new()
+	box.size = cube_size
+	shell.mesh = box
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.albedo_color = SHELL_COLOR
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	shell.material_override = mat
+	shell.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(shell)
+
+func _aftermath_key() -> String:
+	# Unknown word keeps the default. A typo in a map file should cost you the
+	# variant, not the object.
+	var key: String = str(aftermath).strip_edges().to_lower()
+	if AFTERMATH_VALUES.has(key):
+		return key
+	return "apparatus"
+
+func _aftermath_tint(node: GrowthNode, base: Color) -> Color:
+	if _aft != "strata":
+		return base
+	var span: float = maxf(1.0, float(current_iteration))
+	var t: float = clampf(float(node.depth) / span, 0.0, 1.0)
+	return STRATA_ROOT.lerp(STRATA_TIP, t)
+
+func _add_field_anchor() -> void:
+	# layers = 0, NOT visible = false: hiding a node hides its children too. A
+	# zero-layer VisualInstance3D is in no camera's cull mask and draws nothing,
+	# but it still reports an AABB, which is what holds the framing steady.
+	var half: Vector3 = cube_size * 0.5 + Vector3.ONE * distribution_thickness
+	var lo: Vector3 = Vector3(
+		minf(-half.x, growth_origin.x), minf(-half.y, growth_origin.y), minf(-half.z, growth_origin.z))
+	var hi: Vector3 = Vector3(
+		maxf(half.x, growth_origin.x), maxf(half.y, growth_origin.y), maxf(half.z, growth_origin.z))
+	var anchor := MeshInstance3D.new()
+	anchor.name = "FieldAnchor"
+	var box := BoxMesh.new()
+	box.size = hi - lo
+	anchor.mesh = box
+	anchor.position = (lo + hi) * 0.5
+	anchor.layers = 0
+	anchor.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(anchor)
+
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Additive: a config without these keys leaves the artifact exactly as it was.
+	var touched: bool = false
+	if config.has("aftermath"):
+		var key: String = str(config["aftermath"]).strip_edges().to_lower()
+		if AFTERMATH_VALUES.has(key):
+			aftermath = key
+			touched = true
+	if config.has("growth_seed"):
+		growth_seed = int(config["growth_seed"])
+	# Redraw, never regrow: regenerating would re-roll an unseeded cloud and hand
+	# the caller a different network than the one it just asked to restyle.
+	if touched and not all_nodes.is_empty():
+		visualize_structure()

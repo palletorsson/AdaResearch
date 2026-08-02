@@ -342,6 +342,20 @@
    }
   },
   "GaussianPaintSplatter": {
+   "dna": {
+     "fixture": {
+     "splatter_seed": 20260802
+     },
+    "axes": {
+    "refusal": [
+    "void",
+    "rim",
+    "echo",
+    "ghost",
+    "none"
+    ]
+    }
+   },
    "category": "emergence",
    "complexity": "advanced",
    "description": "Generates paint splatter patterns using Gaussian distribution, creating natural clustering around a center point with density falling off like a bell curve.",
@@ -2701,6 +2715,20 @@
    }
   },
   "env_one": {
+   "dna": {
+     "fixture": {
+     "kitbash_seed": 20260802
+     },
+    "axes": {
+    "disclosure": [
+    "oracle",
+    "tally",
+    "ledger",
+    "works",
+    "origin"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "A procedural environment generation algorithm using randomness for kitbashing",
@@ -3248,6 +3276,20 @@
    "qfep_connection": "The gaussian source itself — draws clustered around a mean, rare at the tails. Uniform chance says anywhere; gaussian chance says near here, mostly. The difference between noise and temperament."
   },
   "hardware_entropy_decay": {
+   "dna": {
+     "fixture": {
+     "entropy_seed": 20260802
+     },
+    "axes": {
+    "disclosure": [
+    "works",
+    "oracle",
+    "tally",
+    "ledger",
+    "origin"
+    ]
+    }
+   },
    "category": "randomness",
    "complexity": "advanced",
    "description": "Your VR movements become entropy. Controller velocity drives scratches, grip pressure accumulates grime, head rotation feeds weathering rate. Three display surfaces (cube, sphere, cylinder) decay in real-time from your hardware inputs via a custom procedural shader.",
@@ -8789,6 +8831,20 @@
    "qfep_connection": "A walk at 128x128 grain: one wanderer, tiny steps, no memory. The fine grid turns the walk's statistics visible — dense scribble near the origin, thinning frontier — chance accumulating into a shape no single step intended."
   },
   "random_walk_collection": {
+   "dna": {
+     "fixture": {
+     "walk_seed": 20260802
+     },
+    "axes": {
+    "residue": [
+    "path",
+    "head",
+    "tail",
+    "envelope",
+    "ensemble"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
@@ -11424,6 +11480,20 @@
    "qfep_connection": "The tessellation exists whole before the first cell appears: a shuffled walk path merely grants visibility, one space-filling polyhedron at a time, then loops and forgets. Discovery staged over a fully determined lattice — chance decides only the order of appearance, never what there is."
   },
   "trng_vs_prng": {
+   "dna": {
+     "fixture": {
+     "stream_seed": 20260802
+     },
+    "axes": {
+    "disclosure": [
+    "works",
+    "oracle",
+    "tally",
+    "ledger",
+    "origin"
+    ]
+    }
+   },
    "category": "primitives",
    "complexity": "intermediate",
    "description": "Interactive comparison between True Random Number Generators and Pseudo-Random Number Generators",

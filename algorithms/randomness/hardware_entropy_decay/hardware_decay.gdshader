@@ -25,7 +25,7 @@ uniform float decay_metallic : hint_range(0.0, 1.0) = 0.08;
 
 uniform float noise_scale : hint_range(1.0, 40.0) = 12.0;
 uniform float scratch_noise_scale : hint_range(10.0, 200.0) = 80.0;
-uniform float time_drift : hint_range(0.0, 1.0) = 0.05;          // Subtle time animation
+uniform float time_drift : hint_range(0.0, 1.0) = 0.05;          // Subtle time animation (set 0.0 to freeze the surface for a still — see hardware_entropy_decay.gd _pin_state)
 
 // --- Hash functions for procedural noise ---
 float hash21(vec2 p) {

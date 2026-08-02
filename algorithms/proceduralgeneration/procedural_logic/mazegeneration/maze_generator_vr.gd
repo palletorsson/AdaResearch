@@ -24,6 +24,62 @@ extends Node3D
 @export var add_ambient_light: bool = true
 @export var light_intensity: float = 0.4
 
+# ─────────────────────────────────────────────────────────────────────────────
+# DNA PROMOTION (2026-08-02).
+#
+# A maze is the one procedural object that everybody calls "random" and nobody
+# looks at twice. But a maze is not random — it is the FINGERPRINT of whatever
+# carved it. Depth-first backtracking makes long serpentine corridors and very
+# few dead ends, because it commits to a direction and only gives up when it is
+# cornered. Randomised Prim's grows outward from one seed and leaves a short,
+# bushy, dead-end-heavy warren, because every frontier wall is equally likely.
+# Binary tree carves north-or-east from every cell and therefore MUST leave one
+# complete corridor along the top row and one down the right-hand column, plus a
+# diagonal grain no other method has. Sidewinder closes horizontal runs and rises
+# once per run, so the top corridor is there but the right column is not, and the
+# grain is horizontal. And a labyrinth is not a maze at all: one path, no
+# branches, no choices — the shape a maker cuts when the point is the walking and
+# not the puzzle.
+#
+#   hand   whose hand cut these corridors
+#
+#     backtracker | prim | binary_tree | sidewinder | labyrinth
+#
+# All five leave exactly the same number of standing wall blocks on a 15x15 grid
+# (49 cells, 48 walls removed for a spanning tree; the labyrinth's snake removes
+# 48 too). Nothing about the amount of maze changes. What changes is the TEXTURE,
+# which is the whole claim: "procedurally generated" is not a description of a
+# thing, it is a refusal to name the hand.
+#
+# WHAT IS DELIBERATELY NOT THE AXIS. generation_speed is the obvious knob and it
+# is invisible to a still — a rate cannot be photographed. maze_width/height are
+# a dial, not a claim. The colours are colours.
+#
+# STRICTLY ADDITIVE. `backtracker` never enters any code added below: _ready's
+# branch tests `hand != "backtracker"` first and falls through to the original
+# start_generation()/_generate_instant() pair untouched, and the default rolls
+# randi() at exactly the same call sites in exactly the same order as before.
+# ─────────────────────────────────────────────────────────────────────────────
+@export_category("DNA")
+
+## THE AXIS — which maze-maker's hand cut these corridors. `backtracker` is the
+## legacy lineage and the only value that runs the original carving code.
+@export_enum("backtracker", "prim", "binary_tree", "sidewinder", "labyrinth") var hand: String = "backtracker"
+
+## The allow-list a map token is checked against — the same five words the
+## @export_enum above declares, in the same spelling and order. An unreadable
+## word keeps the default rather than leaving a room walled solid.
+const HANDS: PackedStringArray = ["backtracker", "prim", "binary_tree", "sidewinder", "labyrinth"]
+
+## Determinism. Every hand here draws from the global RNG, which Godot randomises
+## at startup — so before this existed, two boots of the same map produced two
+## different mazes and any before/after comparison was measuring the dice.
+## -1 keeps that behaviour EXACTLY (no seed call is made at all, so the stream is
+## byte-for-byte what it was); any value >= 0 pins the whole carve. The capture
+## harness sets this through the registry's dna.fixture so one axis is varied at
+## a time and the maze underneath holds still.
+@export var maze_seed: int = -1
+
 # Maze data
 var maze: Array = []
 var visited: Array = []
@@ -53,6 +109,12 @@ var floor_material: StandardMaterial3D
 var path_material: StandardMaterial3D
 
 func _ready() -> void:
+	# DNA first: a map token or a sweep fixture must be in hand before anything
+	# draws or builds. Both reads are no-ops when nothing was passed.
+	_read_dna_meta()
+	if maze_seed >= 0:
+		seed(maze_seed)
+
 	_create_materials()
 	_initialize_maze()
 	_create_floor_and_ceiling()
@@ -61,7 +123,13 @@ func _ready() -> void:
 	if add_ambient_light:
 		_setup_lighting()
 
-	if show_generation:
+	if hand != "backtracker":
+		# A non-default hand carves the whole maze at once: the still that this
+		# artifact is measured in cannot hold a process, only what the process
+		# left, and the alternative hands are claims about the finished corridor
+		# texture. The legacy pair below is not touched.
+		_carve_by_hand()
+	elif show_generation:
 		start_generation()
 	else:
 		_generate_instant()
@@ -382,3 +450,172 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+
+# ── DNA: THE FIVE HANDS ──────────────────────────────────────────────────────
+# Everything below this line is reached only when `hand` is not "backtracker".
+# Each carver writes into the SAME maze array and calls the SAME _remove_wall the
+# legacy generator uses, so the walls, colliders, entrance, exit and finalisation
+# are all shared — only the choice of which 48 walls to take differs.
+
+## Read a map token / grid config value if the placer left one. Unknown words keep
+## the default: a typo must not seal a room the map expects to be walkable.
+func _read_dna_meta() -> void:
+	if has_meta("config_hand"):
+		var raw: String = str(get_meta("config_hand")).strip_edges().to_lower()
+		if HANDS.has(raw):
+			hand = raw
+		else:
+			push_warning("maze_generator_vr: unknown hand '%s' — keeping '%s'" % [raw, hand])
+	if has_meta("config_maze_seed"):
+		maze_seed = int(str(get_meta("config_maze_seed")))
+
+
+func _carve_by_hand() -> void:
+	match hand:
+		"prim":
+			_carve_prim()
+		"binary_tree":
+			_carve_binary_tree()
+		"sidewinder":
+			_carve_sidewinder()
+		"labyrinth":
+			_carve_labyrinth()
+		_:
+			# Set to something unreadable by code rather than by a map token.
+			# Fall back to the legacy carve, which finishes the room itself.
+			_generate_instant()
+			return
+
+	generation_complete = true
+	_create_entrance_exit()
+	_finalize_visuals()
+
+
+## Every cell of the lattice, in row-major order. Cells live at ODD coordinates
+## between 1 and maze_width - 2 — the same lattice _get_unvisited_neighbors walks.
+func _cells() -> Array:
+	var out: Array = []
+	var y: int = 1
+	while y < maze_height - 1:
+		var x: int = 1
+		while x < maze_width - 1:
+			out.append(Vector2i(x, y))
+			x += 2
+		y += 2
+	return out
+
+
+## Open the single wall standing between two cells two steps apart.
+func _carve_between(a: Vector2i, b: Vector2i) -> void:
+	_remove_wall(a.x + (b.x - a.x) / 2, a.y + (b.y - a.y) / 2)
+
+
+func _in_lattice(c: Vector2i) -> bool:
+	return c.x >= 1 and c.x < maze_width - 1 and c.y >= 1 and c.y < maze_height - 1
+
+
+## PRIM — grow outward from one seed, and at every step open the frontier wall
+## the dice picked out of ALL of them. No commitment, no momentum: the maze comes
+## out short-limbed and bushy, thick with dead ends.
+func _carve_prim() -> void:
+	var reached: Dictionary = {}
+	var frontier: Array = []
+	var start: Vector2i = Vector2i(1, 1)
+	reached[start] = true
+	_push_frontier(start, reached, frontier)
+
+	while frontier.size() > 0:
+		var i: int = randi() % frontier.size()
+		var edge: Array = frontier[i]
+		frontier.remove_at(i)
+		var to: Vector2i = edge[1]
+		if reached.has(to):
+			continue
+		reached[to] = true
+		_carve_between(edge[0], to)
+		_push_frontier(to, reached, frontier)
+
+
+func _push_frontier(c: Vector2i, reached: Dictionary, frontier: Array) -> void:
+	for d in directions:
+		var step: Vector2i = d
+		var n: Vector2i = c + step
+		if _in_lattice(n) and not reached.has(n):
+			frontier.append([c, n])
+
+
+## BINARY TREE — the most brutally simple maze there is: at every cell, toss for
+## north or east and open that one wall. It cannot help itself. The cells on the
+## top row have no north, so they ALL go east and leave one unbroken corridor
+## across the top; the cells on the right column have no east, so they all go
+## north and leave one down the right-hand side. Everything else falls on a
+## diagonal grain. A maze that admits which way its maker was facing.
+func _carve_binary_tree() -> void:
+	for c in _cells():
+		var cell: Vector2i = c
+		var options: Array = []
+		if cell.y - 2 >= 1:
+			options.append(Vector2i(cell.x, cell.y - 2))
+		if cell.x + 2 < maze_width - 1:
+			options.append(Vector2i(cell.x + 2, cell.y))
+		if options.is_empty():
+			continue
+		var pick: Vector2i = options[randi() % options.size()]
+		_carve_between(cell, pick)
+
+
+## SIDEWINDER — run east while the coin says so, then close the run and rise ONCE
+## from a cell chosen anywhere along it. Long horizontal reaches with a single
+## riser each: the grain lies down flat. Like binary tree it leaves the top row
+## open end to end (nothing up there can rise), and unlike binary tree it leaves
+## the right column closed.
+func _carve_sidewinder() -> void:
+	var y: int = 1
+	while y < maze_height - 1:
+		var run: Array = []
+		var x: int = 1
+		while x < maze_width - 1:
+			var cell: Vector2i = Vector2i(x, y)
+			run.append(cell)
+			var at_east_edge: bool = x + 2 >= maze_width - 1
+			var at_top: bool = y - 2 < 1
+			if at_top:
+				if not at_east_edge:
+					_carve_between(cell, Vector2i(x + 2, y))
+			elif at_east_edge or (randi() % 2) == 0:
+				var pick: Vector2i = run[randi() % run.size()]
+				_carve_between(pick, Vector2i(pick.x, pick.y - 2))
+				run.clear()
+			else:
+				_carve_between(cell, Vector2i(x + 2, y))
+			x += 2
+		y += 2
+
+
+## LABYRINTH — the unicursal one, and the value that argues with the other four.
+## A single switchback path snakes every row end to end and drops to the next: no
+## junctions, no dead ends, nothing to solve. It takes 48 walls like the others
+## and rolls no dice at all. The classical labyrinth was never a puzzle — it is a
+## route you are meant to walk to the end of, and it looks nothing like the thing
+## the word "maze" now means.
+func _carve_labyrinth() -> void:
+	var path: Array = []
+	var y: int = 1
+	var flip: bool = false
+	while y < maze_height - 1:
+		var row: Array = []
+		var x: int = 1
+		while x < maze_width - 1:
+			row.append(Vector2i(x, y))
+			x += 2
+		if flip:
+			row.reverse()
+		path.append_array(row)
+		flip = not flip
+		y += 2
+
+	for i in range(path.size() - 1):
+		var a: Vector2i = path[i]
+		var b: Vector2i = path[i + 1]
+		_carve_between(a, b)

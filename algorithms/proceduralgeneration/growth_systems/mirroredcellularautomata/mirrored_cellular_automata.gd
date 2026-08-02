@@ -19,7 +19,13 @@ extends Node3D
 @export var auto_evolve: bool = true
 
 @export_category("Pattern Settings")
-@export_enum("Quad Mirror", "Eight-Way Mirror", "Rotational") var symmetry_type: int = 0
+@export_enum("Quad Mirror", "Eight-Way Mirror", "Rotational", "None") var symmetry_type: int = 0
+## Seed for the birth/death/fill draws. -1 keeps the legacy behaviour (randomize() on
+## every build, so every placement is a different mandala); any value >= 0 pins the
+## draws so the same field comes back. The DNA sweep needs this: without it, four
+## symmetry modes rendered from four different random fields, and the difference
+## between random draws would be reported as the bite of the axis.
+@export var pattern_seed: int = -1
 @export_range(0.0, 1.0) var random_fill_percent: float = 0.3
 @export_range(0.0, 1.0) var birth_probability: float = 0.2
 @export_range(0.0, 1.0) var death_probability: float = 0.1
@@ -46,7 +52,10 @@ var alive_colors = [
 var generation: int = 0
 
 func _ready() -> void:
-	randomize()
+	if pattern_seed < 0:
+		randomize()
+	else:
+		seed(pattern_seed)
 	half_size = grid_size / 2
 	cell_world_size = display_size / float(grid_size)
 
@@ -142,6 +151,19 @@ func generate_initial_pattern() -> void:
 			generate_octant_pattern()
 		2:
 			generate_rotational_pattern()
+		3:
+			generate_unmirrored_pattern()
+
+## symmetry_type 3 — no stencil at all: every one of the grid_size^2 cells is drawn on its
+## own account, at the same random_fill_percent the quadrant and octant modes use inside
+## their fragment. APPENDED as a fourth case; modes 0-2 are untouched, and update_grid's
+## if/elif chain already falls through to "enforce nothing" for any mode it does not name,
+## so the field also stays unmirrored as it evolves.
+func generate_unmirrored_pattern() -> void:
+	for y in range(grid_size):
+		for x in range(grid_size):
+			if randf() <= random_fill_percent:
+				grid[y][x] = 1
 
 func generate_quadrant_pattern() -> void:
 	for y in range(half_size):
@@ -202,6 +224,22 @@ func set_cell_with_symmetry(x: int, y: int, value: int) -> void:
 
 				if new_x >= 0 and new_x < grid_size and new_y >= 0 and new_y < grid_size:
 					grid[new_y][new_x] = value
+		_:
+			grid[y][x] = value
+
+## Re-lay the initial pattern under the CURRENT symmetry_type and pattern_seed, without
+## rebuilding the node. Nothing in the legacy path calls it — the wrapper scene's
+## apply_grid_config does, when a map hands it a new #stencil:.
+func regenerate_pattern() -> void:
+	if mesh_instance == null:
+		return
+	if pattern_seed >= 0:
+		seed(pattern_seed)
+	initialize_grid()
+	generate_initial_pattern()
+	generation = 0
+	update_timer = 0.0
+	_rebuild_mesh()
 
 func update_grid() -> void:
 	var new_grid = []

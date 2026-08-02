@@ -1,12 +1,12 @@
 # @identity
 # essence: gaussian sampling as paint — dots fall in a normal distribution around a safe zone
 # desire: see how often a sample lands far from center vs near center, mediated by stddev
-# critical_parameter: stddev — the standard deviation that controls splatter spread vs concentration
+# critical_parameter: refusal — what the plate does with the draws the safe zone throws away (void | rim | echo | ghost | none); stddev sets the spread those draws are taken from
 # triggers: timer ticks every splatter_update_interval; each tick samples (x,y) from gaussian and stamps a translucent dot
 # emerges: a painting that IS the gaussian PDF — densest at center, sparser at the tails, with edge detection tracing the boundary
 # needs: stddev slider [missing]; safe zone radius dial [missing]; clear-canvas button [missing]
-# relationships: kin to GaussianBlurCircle (gaussian as smear); contrast to BlueNoise (rejection-based) and probability_distributions_3d (3D variant)
-# truth: A bell curve drawn in the air, made visible by the dots that miss. Density is the proof of distribution.
+# relationships: kin to GaussianBlurCircle, which asks the same question one step later — that one carries `sitter` (what is put UNDER the kernel), this one carries `refusal` (which of the SAMPLES ever reach the plate); contrast to BlueNoise (rejection-based) and probability_distributions_3d (3D variant)
+# truth: A bell curve drawn in the air, made visible by the dots that miss. Density is the proof of distribution — and the hole in the middle is a decision, not a fact.
 
 extends MeshInstance3D
 class_name GaussianPaintSplatter
@@ -36,6 +36,114 @@ class_name GaussianPaintSplatter
 	Color(1.0, 0.4, 1.0, 0.6),  # Magenta
 ]
 
+# ─────────────────────────────────────────────────────────────────────────────
+# DNA PROMOTION (2026-08-02) — refusal
+#
+# This plate is a REJECTION SAMPLER and has been one since the day it was
+# written, without ever saying so. Look at what _add_gaussian_splatter actually
+# does: it draws a sample, measures it, and if the sample landed inside
+# safe_zone_radius it RETURNS — the draw was made, paid for, and thrown away.
+# The picture on the plate is therefore not the gaussian. It is the gaussian
+# minus its own densest region, and the part you cannot see is precisely the
+# part the distribution most wanted to put there.
+#
+# That is the axis. Not how big the hole is — a radius is a magnitude, and
+# "how much" is not an argument. What a sampler DOES with the draws it refuses
+# is an argument, and it is one every rejection method in the curriculum has to
+# answer and almost none of them answer out loud:
+#
+#   refusal   what becomes of a draw the safe zone will not accept
+#
+#     void   the draw vanishes. No mark, no tally, no trace — the plate cannot
+#            be told apart from a bell that simply had a hole in it, and a
+#            reader has no way to know a decision was ever made. THE LEGACY
+#            LINEAGE, byte for byte: this is the bare `return` that has always
+#            been on line 120, and it is what all eight rooms ship today.
+#     rim    the draw is pushed to the wall. It keeps its DIRECTION and loses
+#            its RADIUS, so every refusal lands on the boundary circle itself
+#            and the hole acquires a hard bright edge whose density is the
+#            tally of everything refused along that bearing. The count survives;
+#            the coordinate does not. This is what clamping looks like when you
+#            can finally see it, and clamping is everywhere in this repo.
+#     echo   the draw is returned through the boundary, mirrored: r becomes
+#            2R − r. Nothing is lost and nothing is invented — it is a bijection
+#            — but the refused mass piles into the annulus just outside the rim
+#            and doubles it. The plate now overstates the tails, which is the
+#            standard, quiet cost of reflecting at a wall.
+#     ghost  the draw is recorded where it fell, in its own pale ink. The hole
+#            fills with a grey bell and the plate admits, in one glance, both
+#            what it kept and what it refused. Maximum disclosure, and the only
+#            value at which the picture is honest about being a subtraction.
+#     none   nothing is refused. safe_zone_radius stops legislating, every draw
+#            is kept in the palette ink, and the plate shows one undivided
+#            gaussian — the control frame, and the thing the other four are all
+#            departures from.
+#
+# THE LADDER RUNS none · void < rim < echo < ghost, ordered by how much the
+# picture concedes about its own censorship: nothing, then the count, then the
+# shape displaced, then everything. `none` sits outside it because there is
+# nothing to concede when nothing was refused.
+#
+# WHAT IS DELIBERATELY NOT THE AXIS. splatter_update_interval is a RATE and
+# invisible to a still (info_board already burned a whole sweep proving that).
+# stddev and safe_zone_radius are the two tempting dials and both are
+# MAGNITUDES: sweeping stddev would publish five bells of five widths, which is
+# a picture of a number, not of a claim. dot_alpha and color_palette are "which
+# colour", which is never an argument. All four stay plain exports.
+#
+# NOT TOUCHED: the mathematics. The Box–Muller transform, the mean, the
+# standard deviation, the distance test against safe_zone_radius and the
+# blend-on-white compositing are identical at every value. This axis changes
+# only what happens on the far side of a test whose answer never moves.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## THE AXIS — what becomes of a draw the safe zone will not accept.
+## "void" is the legacy value: the bare `return` this artifact has always had.
+@export_enum("void", "rim", "echo", "ghost", "none") var refusal: String = "void"
+
+## The allow-list — the same five words in the same spelling as the
+## @export_enum above. A map token (#refusal:) is checked against this.
+const REFUSALS: PackedStringArray = ["void", "rim", "echo", "ghost", "none"]
+
+## The ink a refused draw is recorded in at `ghost`. Deliberately not from
+## color_palette: a refusal that came back in the same paint as an acceptance
+## would be a lie about the plate. Grey, low alpha, legible over white.
+const GHOST_INK: Color = Color(0.42, 0.44, 0.50, 0.30)
+
+# ── Determinism: the seed, and the bench-only prefill ────────────────────────
+# THIS ARTIFACT IS MADE OF RANDOM DRAWS, so an evidence sweep of an unseeded
+# plate renders five different splatters and reports the difference between the
+# splatters as the axis — a confident, entirely false bite that nothing
+# downstream can catch. Two exports close that, and both default to
+# "behave exactly as before".
+
+## Pins the streams this plate draws from. -1 = do not touch them, i.e. today:
+## randomize() at the top of _ready() and every sample off the global stream,
+## which is right in a room and useless on a bench. Any value >= 0 builds TWO
+## local generators instead — one for positions, one for palette picks.
+##
+## The split is not decoration. `rim` and `echo` KEEP a draw the other values
+## discard, so they consume one extra palette pick per refusal; on a single
+## stream that offset would shift every subsequent position and the five tiles
+## would again be five different splatters. With positions on their own
+## generator the sample sequence is identical at all five values and the only
+## thing that varies is what the plate did with it — which is the whole claim.
+@export var splatter_seed: int = -1
+
+## Bench-only. The timer stamps one dot every splatter_update_interval, so at
+## the moment the sweep photographs (~1.2 s) there are about twenty dots on a
+## 640x640 plate — 0.4% ink, a white square, and five identical white squares.
+## This lays the painting down synchronously at the end of _ready() instead, so
+## the axis has something to be visible in. 0 = today, and 0 is what every room
+## ships; the timer is untouched and keeps stamping afterwards either way.
+@export var preroll_splatters: int = 0
+
+## Positions, when splatter_seed >= 0. null = use the global stream (today).
+var _pos_rng: RandomNumberGenerator = null
+## Palette picks, when splatter_seed >= 0. Kept apart from _pos_rng on purpose;
+## see the note on splatter_seed above.
+var _hue_rng: RandomNumberGenerator = null
+
 # Internal variables
 var img: Image
 var texture: ImageTexture
@@ -54,6 +162,12 @@ func _ready() -> void:
 	_initialize_texture()
 	_setup_timer()
 	_setup_outline_mesh()
+	# APPENDED LAST, and only ever additive. randomize() above still runs at
+	# every value including the default, so a room's global stream is exactly
+	# where it always was; _setup_seeded_streams() draws nothing, and _preroll()
+	# returns immediately unless a bench asked for it.
+	_setup_seeded_streams()
+	_preroll()
 	print("GaussianPaintSplatter: Initialized with safe zone radius %.0f" % safe_zone_radius)
 
 # Initialize the image and texture
@@ -115,12 +229,41 @@ func _add_gaussian_splatter() -> void:
 	var splatter_pos := Vector2(x, y)
 	var dist_from_center := center.distance_to(splatter_pos)
 
+	# DRAW THE HUE BEFORE THE REFUSAL TEST, not after.
+	#
+	# The pick used to sit below this block, so `void` and `ghost` returned WITHOUT
+	# consuming a hue draw while `rim`, `echo` and `none` fell through and consumed one per
+	# refused sample. With a rejected fraction in the tens of percent the stream ends up
+	# offset by hundreds of draws, so every accepted dot is a DIFFERENT COLOUR between
+	# those two groups — same positions, different paint. The two-generator split pins
+	# positions and cannot pin that. The critic compares colour per pixel, so most of the
+	# measured void-to-rim change would have been a recolour rather than a rim, and the
+	# axis would have reported a confident bite for the wrong reason.
+	#
+	# Hoisted here, every value consumes exactly one hue draw per sample and the palette
+	# stream is identical across all five.
+	var color := color_palette[_hue_index(color_palette.size())]
+
 	# Skip if within safe zone
 	if dist_from_center < safe_zone_radius:
-		return
-
-	# Pick a random color from palette
-	var color := color_palette[randi() % color_palette.size()]
+		# ── THE AXIS ── the one branch point in this file, and it sits on the
+		# far side of a test whose answer never moves. `void` falls to the
+		# default arm and hits the same bare `return` this line has always
+		# been, having drawn nothing extra: the legacy stream, byte for byte.
+		match refusal_name():
+			"none":
+				pass  # nothing is refused — fall through and keep the draw
+			"rim":
+				splatter_pos = _rim_of(center, splatter_pos)
+			"echo":
+				splatter_pos = _echo_of(center, splatter_pos, dist_from_center)
+			"ghost":
+				_stamp_ghost(splatter_pos)
+				return
+			_:
+				return  # "void" — the legacy lineage
+		x = splatter_pos.x
+		y = splatter_pos.y
 
 	# Draw circular splatter
 	_draw_circle(int(x), int(y), dot_radius, color)
@@ -196,8 +339,11 @@ func _create_outline_mesh() -> void:
 
 # Generate Gaussian random number using Box-Muller transform
 func _random_gaussian(mean: float, stddev: float) -> float:
-	var u1 := randf()
-	var u2 := randf()
+	# _unit_draw() IS randf() whenever splatter_seed is -1, which is every room.
+	# Nothing is inserted before either call, so the order and the count of
+	# draws in this transform are exactly what they always were.
+	var u1 := _unit_draw()
+	var u2 := _unit_draw()
 
 	# Prevent log(0)
 	if u1 < 0.0001:
@@ -356,5 +502,123 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## KNOWN LIMITATION, stated rather than hidden: the scene root
+## (GaussianPaintSplatter.tscn) is a bare Node3D and this script lives on its
+## PaintSplatter child, so the grid — which calls apply_grid_config on the ROOT
+## — never reaches this method today. The sweep and the editor both set the
+## property directly on whichever node owns it, so the axis is fully reachable
+## there; a map token is not, until either the root gains a forwarder or the
+## script moves up. Moving it is not a promotion-sized change: this script
+## `extends MeshInstance3D` and owns the plate's mesh and material_override.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("refusal"):
+		var want: String = str(config["refusal"]).strip_edges().to_lower()
+		if REFUSALS.has(want):
+			refusal = want
+		else:
+			push_warning("gaussian_paint_splatter: unknown refusal '%s' — keeping '%s'" % [want, refusal])
+	if config.has("splatter_seed"):
+		splatter_seed = int(str(config["splatter_seed"]))
+		_setup_seeded_streams()
+	if config.has("preroll_splatters"):
+		preroll_splatters = int(str(config["preroll_splatters"]))
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE REFUSAL
+# ═════════════════════════════════════════════════════════════════════════════
+# One function per value that needs one. None of them touches the sampler, the
+# safe-zone test, the palette, the blend or the frame — they are only ever
+# reached after the plate has already decided it will not accept a draw.
+
+## The reader. Lower, strip, and fall back to the legacy value on anything
+## unrecognised: a typo must not fill in a hole eight rooms expect to be empty.
+func refusal_name() -> String:
+	var v: String = refusal.strip_edges().to_lower()
+	if REFUSALS.has(v):
+		return v
+	if v != "":
+		push_warning("gaussian_paint_splatter: unknown refusal '%s' — keeping 'void'" % v)
+	return "void"
+
+
+## RIM — the refused draw keeps its bearing and loses its radius, landing on the
+## boundary circle. The hole gets a hard bright edge and its density along any
+## bearing is the tally of what was thrown away there.
+func _rim_of(center: Vector2, p: Vector2) -> Vector2:
+	var dir := p - center
+	if dir.length_squared() < 0.000001:
+		dir = Vector2.RIGHT
+	return center + dir.normalized() * safe_zone_radius
+
+
+## ECHO — the refused draw is reflected through the boundary: r becomes 2R − r,
+## so a sample at the dead centre returns at 2R and one just inside the rim
+## returns just outside it. Nothing is lost, and the annulus R..2R carries twice
+## the mass it should — the standard quiet cost of bouncing at a wall.
+func _echo_of(center: Vector2, p: Vector2, d: float) -> Vector2:
+	var dir := p - center
+	if dir.length_squared() < 0.000001:
+		dir = Vector2.RIGHT
+	return center + dir.normalized() * (2.0 * safe_zone_radius - d)
+
+
+## GHOST — the refused draw is stamped where it actually fell, in GHOST_INK.
+## Draws no palette pick, so this value consumes exactly the stream `void`
+## consumes and the two plates are the same samples with one of them showing
+## its own subtraction.
+func _stamp_ghost(p: Vector2) -> void:
+	_draw_circle(int(p.x), int(p.y), dot_radius, GHOST_INK)
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# DETERMINISM
+# ═════════════════════════════════════════════════════════════════════════════
+
+## Builds the two local generators, or leaves both null. Null is the default and
+## the room behaviour: every call below falls straight through to the global
+## randf()/randi() this file has always used.
+func _setup_seeded_streams() -> void:
+	if splatter_seed < 0:
+		_pos_rng = null
+		_hue_rng = null
+		return
+	_pos_rng = RandomNumberGenerator.new()
+	_pos_rng.seed = splatter_seed
+	_hue_rng = RandomNumberGenerator.new()
+	# Disjoint from _pos_rng, and from anything else in the scene, so a palette
+	# pick can never move a position. Same trick random_walk_leash uses for its
+	# ghost walks.
+	_hue_rng.seed = splatter_seed * 7919 + 104729
+
+
+## One uniform draw for a POSITION. Identical to randf() unless seeded.
+func _unit_draw() -> float:
+	if _pos_rng != null:
+		return _pos_rng.randf()
+	return randf()
+
+
+## One palette index. Identical to randi() % n unless seeded.
+func _hue_index(n: int) -> int:
+	if n <= 0:
+		return 0
+	if _hue_rng != null:
+		return _hue_rng.randi() % n
+	return randi() % n
+
+
+## BENCH ONLY (preroll_splatters == 0 in every room, so this returns having done
+## nothing and having drawn nothing). Runs the timer's own tick body N times
+## synchronously — the identical sampler, the identical test, the identical
+## stamp — so the plate the sweep photographs is a finished painting instead of
+## twenty scattered dots. splatter_count is deliberately NOT advanced: the edge
+## detector fires on that counter, and its outline is drawn at the wrong scale
+## (see _create_outline_mesh), so waking it early would put a bug's picture in
+## the evidence.
+func _preroll() -> void:
+	if preroll_splatters <= 0:
+		return
+	for i in range(preroll_splatters):
+		_add_gaussian_splatter()
+	texture.update(img)

@@ -5,7 +5,7 @@ class_name GeneticProgramming
 # @identity
 # essence: population[i].fitness = f(genome) -> select, crossover, mutate, repeat — evolution without a designer
 # desire: to watch 3D creatures evolve in front of you, generation by generation, toward a fitness goal no individual understands
-# critical_parameter: mutation_rate — too low and evolution stagnates, too high and good solutions dissolve; 0.3 is the edge of chaos
+# critical_parameter: mutation_rate — too low and evolution stagnates, too high and good solutions dissolve; 0.3 is the edge of chaos (and INVISIBLE at auto_evolve:false, which is the default, because a still shows generation zero); alphabet — what the genome may say, which decides what evolution can ever reach (primitives | csg_tree | parametric | voxel); muster — how much of the population you are allowed to see (parade | champion | scatter)
 # triggers: auto_evolve ticks generations on a timer; evolve_one_generation allows manual stepping; fitness_function selects the selection pressure
 # emerges: creatures converge on similar body plans despite random initialization — convergent evolution from pure math
 # needs: population grid display [has]; fitness labels [has]; auto-evolve timer [has]; VR selection pressure picker [missing]
@@ -51,6 +51,124 @@ class_name GeneticProgramming
         if value:
             initialize_population()
             reset_evolution = false
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DNA PROMOTION (2026-08-02). SELECTION, NOT INVENTION.
+#
+# This file carries 27 exports, the largest knob surface in this pass, and 25 of
+# them are dials rather than claims. The job was to find which ones were already
+# an unnamed axis and give it a name. Two were.
+#
+# TWENTY-FIVE REJECTED, AND WHY:
+#   population_size, max_generations, mutation_rate, crossover_rate,
+#   elitism_count — the whole Evolution Settings group is INVISIBLE here, and not
+#     because it is subtle. auto_evolve defaults to FALSE, so what a still frame
+#     of this artifact shows is generation ZERO: twenty random genomes that have
+#     never been selected, crossed or mutated. mutation_rate is declared the
+#     critical_parameter in the identity block above and it does not touch a
+#     single pixel of the default frame. That is worth knowing and it is not an
+#     axis.
+#   fitness_function, target_volume, target_height, symmetry_weight,
+#   complexity_weight — these only sort the population, so at generation zero
+#     they reshuffle the same twenty creatures between the same twenty grid
+#     slots and rewrite the labels. A permutation is not a claim.
+#   smoothness_weight — declared and never read anywhere in this file. See the
+#     latent-bug note; it is dead, not swept.
+#   genome_complexity, max_depth, spacing, evolution_speed, auto_evolve,
+#   evolve_one_generation, reset_evolution — quantities, timers and buttons.
+#
+# TWO PROMOTED:
+#
+#   alphabet   what the genome is allowed to SAY
+#
+#     primitives | csg_tree | parametric | voxel
+#
+#   This is genome_type, which has been sitting here as an unnamed @export_enum
+#   of CamelCase ints since the file was written, and it is the deepest claim in
+#   genetic programming: evolution cannot find what its representation cannot
+#   express. Change the alphabet and you change the reachable universe, not the
+#   search. Twenty creatures built of loose primitives and twenty built from an
+#   L-system grammar are not the same population rendered differently — they are
+#   two different spaces of possible bodies, and no amount of fitness pressure
+#   moves one into the other.
+#     primitives  loose spheres, boxes, cylinders and tori scattered in a cloud —
+#                 body plans as heaps of parts. The legacy lineage.
+#     csg_tree    union/subtract/intersect operations. SEE THE LATENT BUG NOTE:
+#                 the phenotype builder for this branch is a stub and emits ONE
+#                 triangle per gene, so its tiles are a few floating shards, not
+#                 CSG solids. It is kept in the family because the branch exists
+#                 and a truthful tile of a stub is better than a hidden one.
+#     parametric  one continuous trigonometric surface per creature — ribboned
+#                 sheets, where the genome is nine frequencies and phases.
+#     voxel       a dense occupancy cloud, roughly 150 small cubes per creature
+#                 on an 8x8x8 grid: bodies as matter rather than as parts.
+#
+#   THE FIFTH BRANCH IS NOT IN THE FAMILY, ON PURPOSE. genome_type 4 (L-System)
+#   is the one I most wanted — a genome that is a SENTENCE rather than a bag of
+#   parts is the sharpest possible contrast to `primitives` — and it cannot ship
+#   until interpret_lsystem is repaired. It rotates the heading with
+#   `direction.rotated(Vector3.UP, angle)` while the heading IS Vector3.UP
+#   (lines 779 and 782), which is a no-op, so the turtle never turns: every
+#   segment goes straight up through the last one, and create_branch_segment's
+#   `look_at(end, Vector3.UP)` (line 804) then errors on a look direction
+#   parallel to its up vector, once per segment. With rule "FF+[+F-F-F]-[-F+F+F]"
+#   at up to 4 iterations that is 8^4 = 4096 cylinders per genome, built forty
+#   times over (once per fitness evaluation, once per visualisation): ~160,000
+#   MeshInstance3D and ~160,000 pushed errors for one tile. Adding it would have
+#   published a stack of overlapping cylinders as evidence and quite possibly
+#   stalled the capture. Declared as four values; the fifth is a repair, not a
+#   value. See the latent-bug note.
+#
+#   muster     how much of the population you are allowed to look at
+#
+#     parade | champion | scatter
+#
+#   This is the Visualization group's three booleans, which are only ever set as
+#   a group and have three meaningful combinations. The claim is epistemic and it
+#   is the one the truth line is about — "evolution does not design, it
+#   accumulates accidents that happen to survive". Nearly every published picture
+#   of an evolutionary run shows the winner. The accidents that did not survive
+#   are the actual mechanism and they are almost never in the frame.
+#     parade    all twenty ranked into a lattice, fittest first, each wearing its
+#               score. The legacy lineage. You can see the failures.
+#     champion  the single best genome alone at the origin with one large label.
+#               The standard scientific illustration, and the one that hides the
+#               nineteen bodies the result was selected out of.
+#     scatter   all twenty, unranked, strewn at random over the plot. The same
+#               population as `parade` with the league table taken away.
+#
+# STRICTLY ADDITIVE. Both appliers are match blocks whose default arm is `pass`,
+# so at alphabet="primitives" and muster="parade" not one property is written and
+# _ready runs exactly the sequence it ran before. The RNG is discussed on
+# population_seed below.
+# ─────────────────────────────────────────────────────────────────────────────
+@export_group("DNA")
+
+## THE AXIS — what the genome is allowed to say. Selects genome_type, which is
+## kept as the legacy int knob so nothing that already sets it breaks.
+@export_enum("primitives", "csg_tree", "parametric", "voxel") var alphabet: String = "primitives"
+
+## THE AXIS — how much of the population is shown. Selects the three
+## Visualization booleans, which are only ever meaningful as a group.
+@export_enum("parade", "champion", "scatter") var muster: String = "parade"
+
+## The allow-lists a map token is checked against — the same words the two
+## @export_enums declare, same spelling, same order.
+const ALPHABETS: PackedStringArray = ["primitives", "csg_tree", "parametric", "voxel"]
+const MUSTERS: PackedStringArray = ["parade", "champion", "scatter"]
+
+## Determinism, and the precondition for this artifact being measurable at all.
+## EVERY body in the initial population is rolled from the global RNG — gene
+## counts, gene types, positions, rotations, scales, voxel occupancy, L-system
+## rules — and Godot randomises that RNG at startup. So two boots of the same map
+## produced twenty entirely different creatures, and any two frames of this
+## artifact differed by 100% no matter what was or was not changed between them.
+## An axis swept against that measures the dice and reports a confident result.
+## -1 keeps the old behaviour EXACTLY (no seed call is made, so the stream is
+## untouched); any value >= 0 pins the population. Note this seeds the GLOBAL
+## stream, which is the only reach that covers the inner Gene/Genome classes too;
+## the capture harness sets it through the registry's dna.fixture.
+@export var population_seed: int = -1
 
 # Genome classes
 class Gene:
@@ -141,6 +259,13 @@ var evolution_timer: float = 0.0
 var fitness_history: Array[float] = []
 
 func _ready() -> void:
+    # DNA first: a map token or a sweep fixture must be in hand before the first
+    # genome is rolled. All four calls are no-ops at the defaults.
+    _read_dna_meta()
+    if population_seed >= 0:
+        seed(population_seed)
+    _apply_alphabet()
+    _apply_muster()
     initialize_population()
 
 func _process(delta: float) -> void:
@@ -745,3 +870,54 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
     pass
+
+
+# ── DNA: ALPHABET AND MUSTER ─────────────────────────────────────────────────
+
+## Read map tokens / grid config values if the placer left any. Unknown words
+## keep the default — a typo must not quietly hand a room a different species.
+func _read_dna_meta() -> void:
+    if has_meta("config_alphabet"):
+        var raw_a: String = str(get_meta("config_alphabet")).strip_edges().to_lower()
+        if ALPHABETS.has(raw_a):
+            alphabet = raw_a
+        else:
+            push_warning("GeneticProgramming: unknown alphabet '%s' — keeping '%s'" % [raw_a, alphabet])
+    if has_meta("config_muster"):
+        var raw_m: String = str(get_meta("config_muster")).strip_edges().to_lower()
+        if MUSTERS.has(raw_m):
+            muster = raw_m
+        else:
+            push_warning("GeneticProgramming: unknown muster '%s' — keeping '%s'" % [raw_m, muster])
+    if has_meta("config_population_seed"):
+        population_seed = int(str(get_meta("config_population_seed")))
+
+
+## alphabet -> genome_type. "primitives" is genome_type 0, which is what the
+## export already holds, so the default arm writes nothing at all.
+func _apply_alphabet() -> void:
+    match alphabet:
+        "csg_tree":
+            genome_type = 1
+        "parametric":
+            genome_type = 2
+        "voxel":
+            genome_type = 3
+        _:
+            pass                            # "primitives" — the legacy lineage
+
+
+## muster -> the three Visualization booleans. "parade" is the combination the
+## exports already hold, so the default arm leaves every one of them alone —
+## including any a scene or a placer set deliberately.
+func _apply_muster() -> void:
+    match muster:
+        "champion":
+            show_best_only = true
+            show_population = false
+        "scatter":
+            show_best_only = false
+            show_population = true
+            arrange_in_grid = false
+        _:
+            pass                            # "parade" — the legacy lineage

@@ -4,12 +4,16 @@ extends Node3D
 # @identity
 # essence: drop(N cubes) -> wait(settle) -> voxelize(positions) -> surface_mesh — physics simulation crystallized into static geometry
 # desire: to watch cubes rain down, pile up, and then see the pile freeze into a sculptural mound you can walk on
-# critical_parameter: num_cubes — more cubes create taller, more complex mounds; the ratio of num_cubes to spawn_radius determines pile density
+# critical_parameter: release — the shape the cubes were being HELD in at the moment of letting go
+#   (cylinder, ring, sheet, chute, rift). num_cubes and spawn_radius set how much and how wide;
+#   release sets what the heap will BE, and it is the only one a still can hold.
 # triggers: start_generation drops cubes; settling detection (all RigidBody3D.sleeping) triggers mesh generation; Space key restarts
 # emerges: the voxelized mesh smooths over individual cube positions, creating an organic-looking surface from discrete physics objects
 # needs: physics simulation [has]; voxel-to-mesh conversion [has]; trimesh collision [has]; VR cube dropping [missing]; real-time voxelization [missing]
 # relationships: paired with dome and layered_membrane in PG_Sculpted_Forms; contrasts accumulation (bottom-up) with subdivision (top-down)
-# truth: a mound is not designed — it is what gravity does to a collection of objects when you stop holding them up
+# truth: a mound is not designed — it is what gravity does to a collection of objects when you stop
+#   holding them up. Gravity is the same everywhere, so the shape you were holding them in is the
+#   whole of the design, and this artifact had it hardcoded and unnamed until now.
 
 @export var num_cubes: int = 20
 @export var cube_size: float = 1.0
@@ -18,6 +22,47 @@ extends Node3D
 @export var settle_time: float = 3.0
 @export var voxel_size: float = 0.5
 @export var generate_on_start: bool = true
+
+# ── DNA ───────────────────────────────────────────────────────────────────────
+# THE AXIS — the shape you were HOLDING the cubes in at the moment you let go.
+#
+# The identity's truth is that "a mound is not designed — it is what gravity does to a
+# collection of objects when you stop holding them up". That sentence hides one decision
+# it does not admit to: gravity is the same everywhere, so the only thing left that can
+# decide the landform is the geometry of the release. This artifact has always had a
+# release geometry — a disc of radius spawn_radius, two metres of height jitter, hardcoded
+# into drop_cubes — and has never called it a choice. It is the choice. So it becomes the
+# axis, and the family argues that accretion is not designed but its INTAKE is.
+#
+#   cylinder  the legacy lineage, byte for byte — a filled disc r <= spawn_radius, 2 m of
+#             height jitter. Reads as a squarish cloud that lands as one broad heap.
+#   ring      the same disc with its middle taken out (r in 0.8..1.0 of spawn_radius). An
+#             annulus of cubes; what lands is a crater with a bare centre.
+#   sheet     a wide flat square raft, 3 x spawn_radius across and 0.4 m thick. Falls as a
+#             single storey and spreads into a plateau rather than a peak.
+#   chute     one narrow throat, 0.35 x spawn_radius wide and six metres tall. Everything
+#             arrives through the same hole, so what lands is a cone from a point source.
+#   rift      a straight line four spawn_radii long and a metre deep. A wall of cubes; what
+#             lands is a ridge, not a mound.
+#
+# VISIBLE IN A STILL, AND THAT IS WHY IT IS THIS AND NOT THE MOUND. The mound is a
+# PROCESS — drop, settle, voxelise — that needs seconds of physics, and a capture at ~1.2 s
+# catches the cubes still in the air. What a still CAN hold is the falling cloud, and the
+# cloud is the release geometry in mid-flight. The same axis is what the finished mound is
+# made of, so the sweep and the room agree about what it means.
+#
+# NOT TOUCHED: gravity, the settle detection, the voxel grid, the surface extraction. The
+# mathematics is the curriculum. This changes only where the matter enters.
+@export_enum("cylinder", "ring", "sheet", "chute", "rift") var release: String = "cylinder"
+## The allow-list a map token is checked against — the same five words, same spelling,
+## same order as the enum above.
+const RELEASES: PackedStringArray = ["cylinder", "ring", "sheet", "chute", "rift"]
+
+## Seed for the spawn draws. -1 keeps the legacy behaviour (Godot randomises the global
+## stream at startup, so every drop is a different cloud); any value >= 0 pins it so the
+## same cloud comes back. Without this a sweep of `release` compares five different random
+## clouds and reports the difference between draws as the bite of the axis.
+@export var release_seed: int = -1
 
 var cubes: Array = []
 var state: String = "idle"  # idle, dropping, settling, generating, done
@@ -43,9 +88,13 @@ func start_generation() -> void:
 	timer = 0.0
 
 func drop_cubes() -> void:
+	# A pinned seed makes the whole drop reproducible. -1 leaves the global stream exactly
+	# as it was, so the default build draws the same numbers it always did.
+	if release_seed >= 0:
+		seed(release_seed)
 	for i in range(num_cubes):
 		var cube = RigidBody3D.new()
-		
+
 		# Random spawn position in cylinder above ground
 		var angle = randf() * TAU
 		var radius = randf() * spawn_radius
@@ -54,6 +103,13 @@ func drop_cubes() -> void:
 			spawn_height + randf() * 2.0,
 			sin(angle) * radius
 		)
+		# ── AXIS: release ── THE THREE DRAWS ABOVE HAPPEN FIRST AND UNCONDITIONALLY, for
+		# every value of the axis. _release_position re-reads those same three numbers as
+		# uniform deviates and re-shapes them; it never draws. That is what keeps the RNG
+		# stream identical across the family — a randf() inside a branch would shift every
+		# subsequent cube's colour and rotation and make two "identical" seeds diverge.
+		if release != "cylinder":
+			spawn_pos = _release_position(angle, radius, spawn_pos.y)
 		cube.position = spawn_pos
 		
 		# Random rotation
@@ -85,6 +141,39 @@ func drop_cubes() -> void:
 		cubes.append(cube)
 	
 	print("Cubes dropped! Waiting for settlement...")
+
+## Re-shape one already-drawn spawn into the geometry `release` names.
+##
+## It takes the three numbers drop_cubes has ALREADY drawn and reads them back as the
+## uniform deviates they are — angle as v in 0..1, radius as u in 0..1, the height jitter
+## as t in 0..1 — so every value of the axis consumes exactly the same three draws in
+## exactly the same order. `cylinder` never gets here; it is the untouched legacy path.
+func _release_position(angle: float, radius: float, base_y: float) -> Vector3:
+	var span: float = maxf(spawn_radius, 0.0001)
+	var u: float = clampf(radius / span, 0.0, 1.0)
+	var v: float = clampf(angle / TAU, 0.0, 1.0)
+	var t: float = clampf((base_y - spawn_height) * 0.5, 0.0, 1.0)
+
+	match release:
+		"ring":
+			# The disc with its middle taken out — an annulus in the outer fifth.
+			var r: float = spawn_radius * (0.8 + 0.2 * u)
+			return Vector3(cos(angle) * r, base_y, sin(angle) * r)
+		"sheet":
+			# A broad flat raft: a square three spawn_radii across, 0.4 m thick.
+			var half: float = spawn_radius * 1.5
+			return Vector3(half * (2.0 * u - 1.0),
+				spawn_height + t * 0.4,
+				half * (2.0 * v - 1.0))
+		"chute":
+			# One narrow throat, tall instead of wide. sqrt(u) keeps the cross-section
+			# evenly filled rather than crowding the axis.
+			var rc: float = spawn_radius * 0.35 * sqrt(u)
+			return Vector3(cos(angle) * rc, spawn_height + t * 6.0, sin(angle) * rc)
+		"rift":
+			# A line, not a disc: four spawn_radii long and a metre deep.
+			return Vector3(spawn_radius * 2.0 * (2.0 * v - 1.0), base_y, u - 0.5)
+	return Vector3(cos(angle) * radius, base_y, sin(angle) * radius)
 
 func _process(delta: float) -> void:
 	if state == "dropping":
@@ -324,5 +413,22 @@ func _exit_tree() -> void:
 	clear_cubes()
 	clear_generated_mesh()
 
+## A map may set #release: and #release_seed:. GUARDED — a config carrying neither key
+## returns before touching anything, so a placement that only wanted a rotation does not
+## re-drop two hundred rigid bodies.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var before_release: String = release
+	var before_seed: int = release_seed
+	if config.has("release"):
+		release = _pick_axis(str(config["release"]), RELEASES, release)
+	if config.has("release_seed"):
+		release_seed = int(config["release_seed"])
+	if release == before_release and release_seed == before_seed:
+		return
+	state = "idle"
+	start_generation()
+
+## An unreadable token resolves to the value already in place rather than to silence.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback

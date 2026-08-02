@@ -1,20 +1,98 @@
 # @identity
 # essence: Procedural kitbash environment — 30 modules (surrealist/mechanical/organic) placed randomly in 3D space, connected by pipes, beams, and floating bridges. Modular composition through randomized assembly.
 # desire: To be regenerated endlessly — connects to regenerate_emitters, clears all geometry, and rebuilds from scratch. Every instantiation is a unique surrealist landscape.
-# critical_parameter: generation_rules — "surrealist" spawns exquisite-corpse creatures and nonsensical machines, "mechanical" spawns joints and pipe systems, "organic" spawns coral and fluid vessels
+# critical_parameter: generation_rules — "surrealist" spawns exquisite-corpse creatures and nonsensical machines, "mechanical" spawns joints and pipe systems, "organic" spawns coral and fluid vessels; disclosure — how much the finished world admits about the draw that made it (oracle | tally | ledger | works | origin)
 # triggers: regenerate_requested signal → full scene rebuild; _ready → initial generation with random color theme selection
-# emerges: A different world every time — the same code produces industrial cathedrals, alien nurseries, or surrealist galleries depending on the random seed and theme
+# emerges: A different world every time — the same code produces industrial cathedrals, alien nurseries, or surrealist galleries depending on the random seed and theme; at disclosure:origin the seed that chose this one stands in the world as thirty-two lamps
 # needs: VR interaction [missing], module selection UI [missing], generation preview [missing]
-# relationships: The default environment artifact across data structures and geometry sequences — a procedural backdrop that gives each map a unique visual identity
+# relationships: The default environment artifact across data structures and geometry sequences — a procedural backdrop that gives each map a unique visual identity; shares the disclosure ladder with prng_crank_machine, coin_toss and trng_vs_prng
 # truth: Randomness is not absence of structure — it is structure deferred to the moment of instantiation, where every possible world gets exactly one chance to exist.
 
 extends Node3D
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-08-02). The randomness family's ONE axis, adopted:
+#
+#   disclosure   oracle  <  tally  <  ledger  <  works  <  origin
+#
+# defined in prng_crank_machine.gd, already shared with coin_toss,
+# random_number_book_page_1955 and trng_vs_prng. This is the most-placed untouched
+# artifact in the registry — 43 rooms — and it is made ENTIRELY of draws: thirty
+# positions, thirty rotations, thirty scales, fifteen connections, a colour theme,
+# five spotlights, a hundred motes. It shows you the result of all of that and not
+# one thing about it. So the family word lands here harder than anywhere: this
+# world's default rung is the BOTTOM one.
+#
+#   oracle  A world arrives. Modules, pipes, beams, lights, motes. Nothing says it
+#           was drawn rather than built, nothing says how many of what, nothing
+#           says where the boundary of the possible was. THE LEGACY ENVIRONMENT,
+#           byte for byte — this is the default, and all 43 placements keep it.
+#   tally   + the census: a bar chart at world scale standing inside the field,
+#           one column per module RECIPE, height proportional to how many of that
+#           kind the draw produced. How much of each was made. Never which.
+#   ledger  + the record: a rod dropped from every placed module to the floor
+#           plane, one per entry, so the scatter that the draw actually produced
+#           becomes a legible field of stems instead of an impression of clutter.
+#   works   + the mechanism: the sampling domain itself, drawn as a wireframe cage
+#           of exactly space_size with graduated ticks along one edge of each
+#           axis. The generator is "uniform inside this box", and at this rung the
+#           box is a thing you can walk to the corner of.
+#   origin  + the substrate: the seed, as thirty-two lamps along the south edge,
+#           MSB left — the number this entire world unrolls from. When no seed was
+#           pinned the sockets stand EMPTY and struck through, because randomize()
+#           cannot be read back: that world had an origin and nobody wrote it down,
+#           and it can never be visited again. The lamps are the honest report
+#           either way.
+#
+# NOT PROMOTED: generation_rules. It is a real fork in what gets built, but it is
+# the artifact's SUBJECT, not its argument about itself — and it is already an
+# export nothing reads (see apply_grid_config, which was `pass`). module_count and
+# space_size are quantities, not claims. The colour themes are "which colour",
+# which the promotion rules exclude by name.
+#
+# NOT TOUCHED: the generator. Every rung draws the same modules in the same places
+# from the same stream — the disclosure rig is built LAST, from recorded data,
+# with no randomness of its own, so a fixed kitbash_seed gives byte-identical
+# worlds at all five rungs and only the account over them changes.
+#
+# WHY THE RIG IS MULTIMESH: the DNA capturer fits its camera to the union of the
+# MeshInstance3D nodes it finds. Every piece of this account is drawn as MultiMesh
+# instead, so adding it cannot move the camera — the five variants are photographed
+# from exactly the same place and the sweep measures the axis rather than its own
+# framing.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## The family's ladder, defined once in prng_crank_machine. Preloaded rather than
+## reached through class_name — class_name lookups are not reliable headless and
+## every frame of the evidence loop is rendered headless.
+const Disclosure = preload("res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd")
 
 # Parameters for modular kitbashing generation
 @export var module_count: int = 30
 @export var space_size: Vector3 = Vector3(30, 15, 30)
 @export_dir var modules_path: String = "res://modules/"
 @export var generation_rules: String = "surrealist" # surrealist, mechanical, organic
+
+## THE AXIS — how much the finished world admits about the draw that made it. Same
+## five rungs, same order, same spellings as prng_crank_machine and coin_toss.
+## `oracle` is the legacy environment: it admits nothing, which is precisely what
+## the bottom rung of this ladder means.
+@export_enum("oracle", "tally", "ledger", "works", "origin") var disclosure: String = "oracle"
+
+## The allow-list, in ladder order — the same five words the @export_enum declares.
+const DISCLOSURES: PackedStringArray = ["oracle", "tally", "ledger", "works", "origin"]
+
+## PIN. -1 (the default) is today's behaviour exactly: _ready calls randomize() and
+## every one of the several hundred draws below comes out different on every
+## instantiation, in every one of the 43 rooms this stands in. That is the artifact
+## working as designed and it makes it UNMEASURABLE — a disclosure sweep would
+## render five completely different worlds and report a confident bite that was
+## entirely the kitbash.
+##
+## Any value >= 0 seeds the global generator instead, so the same number rebuilds
+## the same world. The DNA fixture must set it, and `origin` has something to show
+## only when it is set.
+@export var kitbash_seed: int = -1
 
 # Color themes inspired by the reference images
 @export var color_themes = [
@@ -45,6 +123,26 @@ var modules = []
 var placed_modules = []
 var color_theme = null
 
+## THE RECORD the disclosure rig is built from. Filled as the world is generated,
+## never read by the generator itself — so at `oracle` these arrays are written and
+## then nothing looks at them, which costs three appends per module and keeps the
+## account and the process completely separate.
+var _module_kinds: Array[int] = []      # recipe id per TEMPLATE in `modules`
+var _placed_kinds: Array[int] = []      # recipe id per PLACED module, in draw order
+var _placed_pos: Array[Vector3] = []    # where each draw landed, in draw order
+var _kind_base: int = 0                 # first recipe id the active rules can produce
+var _kind_span: int = 5                 # how many recipe buckets the census draws
+var _disclosure_root: Node3D = null
+
+
+## Rank of the current rung, 0..4. Every gate here is `_rung() >= n`.
+## NOTE the fallback: 0, not 3. The other members of this family default to
+## `works` because their legacy shows its mechanism; this one's legacy shows
+## nothing, so an unreadable word must land on `oracle` or it would silently
+## turn on an account in 43 rooms.
+func _rung() -> int:
+	return int(Disclosure.DISCLOSURE_RUNGS.get(disclosure, 0))
+
 
 # -- Regenerate handling --
 func regenerate_scene() -> void:
@@ -53,13 +151,17 @@ func regenerate_scene() -> void:
 	generate_space()
 	apply_lighting()
 	apply_atmosphere()
+	_build_disclosure()
 
 func _clear_current_geometry() -> void:
 	for module in placed_modules:
 		if module and is_instance_valid(module):
 			module.queue_free()
 	placed_modules.clear()
-	
+	# The record goes with the world it described.
+	_placed_kinds.clear()
+	_placed_pos.clear()
+
 	var to_remove: Array = []
 	for child in get_children():
 		if child is Camera3D:
@@ -112,13 +214,24 @@ var _initial_children: Array = []
 var _regenerate_connected: bool = false
 
 func _ready() -> void:
-	randomize()
+	# The grid sets config_* metadata SYNCHRONOUSLY before add_child, so the meta
+	# read happens here, before the first draw.
+	_read_meta_overrides()
+	# BEFORE anything draws. At the default (-1) this is the identical randomize()
+	# call that has always stood here and the whole stream below is untouched.
+	if kitbash_seed >= 0:
+		seed(kitbash_seed)
+	else:
+		randomize()
 	color_theme = color_themes[randi() % color_themes.size()]
 	load_or_create_modules()
 	generate_space()
 	apply_lighting()
 	apply_atmosphere()
 	connect_regenerate_signal()
+	# APPENDED LAST, after every draw the world is made of, and using none of its
+	# own. At `oracle` this builds nothing at all.
+	_build_disclosure()
 
 func load_or_create_modules() -> void:
 	# Try to load existing modules
@@ -137,15 +250,25 @@ func load_or_create_modules() -> void:
 		create_procedural_modules()
 
 func create_procedural_modules() -> void:
-	# Create module types based on the selected generation style
+	# Create module types based on the selected generation style.
+	# _kind_base/_kind_span tell the census which recipe buckets this run can
+	# produce at all, so a surrealist world draws five columns and not thirteen.
 	match generation_rules:
 		"surrealist":
+			_kind_base = 0
+			_kind_span = 5
 			create_surrealist_modules()
 		"mechanical":
+			_kind_base = 5
+			_kind_span = 4
 			create_mechanical_modules()
 		"organic":
+			_kind_base = 9
+			_kind_span = 4
 			create_organic_modules()
 		_:
+			_kind_base = 0
+			_kind_span = 13
 			create_mixed_modules()
 
 func create_surrealist_modules() -> void:
@@ -154,9 +277,13 @@ func create_surrealist_modules() -> void:
 		# Base objects
 		var module = Node3D.new()
 		module.name = "SurrealistModule_" + str(i)
-		
+
 		# Add some random geometry - mixing disparate elements is key to surrealism
-		match randi() % 5:
+		# The draw is lifted into a variable so the census can record WHICH recipe
+		# this template is. Exactly one randi() either way: the stream is untouched.
+		var kind: int = randi() % 5
+		_module_kinds.append(kind)
+		match kind:
 			0: # Stack of primitive shapes
 				add_stacked_primitives(module)
 			1: # Floating parts
@@ -175,8 +302,10 @@ func create_mechanical_modules() -> void:
 	for i in range(10):
 		var module = Node3D.new()
 		module.name = "MechanicalModule_" + str(i)
-		
-		match randi() % 4:
+
+		var kind: int = randi() % 4
+		_module_kinds.append(5 + kind)
+		match kind:
 			0: # Mechanical joint
 				add_mechanical_joint(module)
 			1: # Control panel
@@ -193,8 +322,10 @@ func create_organic_modules() -> void:
 	for i in range(10):
 		var module = Node3D.new()
 		module.name = "OrganicModule_" + str(i)
-		
-		match randi() % 4:
+
+		var kind: int = randi() % 4
+		_module_kinds.append(9 + kind)
+		match kind:
 			0: # Plant-like structure
 				add_plant_structure(module)
 			1: # Fluid-containing vessel
@@ -875,10 +1006,13 @@ func place_random_module() -> void:
 		push_error("No modules available!")
 		return
 		
-	var module_instance = modules[randi() % modules.size()].duplicate()
+	# Lifted into a variable so the record knows WHICH recipe was drawn. Exactly
+	# one randi() either way: the stream is untouched.
+	var pick: int = randi() % modules.size()
+	var module_instance = modules[pick].duplicate()
 	if not module_instance:
 		return
-		
+
 	# Position randomly in space
 	var position = Vector3(
 		randf_range(-space_size.x/2, space_size.x/2),
@@ -901,6 +1035,9 @@ func place_random_module() -> void:
 	
 	add_child(module_instance)
 	placed_modules.append(module_instance)
+	# THE RECORD. Written for every world, read only above `oracle`.
+	_placed_kinds.append(_module_kinds[pick] if pick < _module_kinds.size() else _kind_base)
+	_placed_pos.append(position)
 
 func connect_modules() -> void:
 	# Check if we have enough modules to connect
@@ -1355,5 +1492,239 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## LATENT BUG PAID (2026-08-02): this was `pass`. GridInteractablesComponent parsed
+## every `#token: value` on an env_one placement, logged it, stashed it as metadata
+## and then nothing on this artifact ever read it back — so across 43 rooms nobody
+## could configure this environment at all, silently. It reads its metadata now.
+## The grid sets that metadata BEFORE add_child and calls this deferred, so _ready
+## does the read that decides the world; this is the re-read for direct callers.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	var before: String = disclosure
+	_read_meta_overrides()
+	# Only the ACCOUNT is rebuilt, never the world: a rung change must not reroll
+	# 43 rooms' backdrops. A config that carries no disclosure key touches nothing.
+	if disclosure != before:
+		_build_disclosure()
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_disclosure"):
+		var raw: String = str(get_meta("config_disclosure")).strip_edges().to_lower()
+		disclosure = raw if DISCLOSURES.has(raw) else disclosure
+	if has_meta("config_kitbash_seed"):
+		kitbash_seed = int(str(get_meta("config_kitbash_seed")))
+	if has_meta("config_generation_rules"):
+		generation_rules = str(get_meta("config_generation_rules")).strip_edges().to_lower()
+
+
+# ── DISCLOSURE ───────────────────────────────────────────────────────────────
+# Four structures at world scale, each a rung. Every one of them is built from
+# the record the generator wrote (_placed_kinds, _placed_pos, kitbash_seed) with
+# no draws of its own, and every one is drawn as MultiMesh so it cannot move the
+# capture camera. Text is deliberately absent: the fitted camera for a 30 m field
+# stands ~140 m out, where a legible glyph would have to be two metres tall. An
+# account you cannot read from the viewing distance is not an account.
+
+## Accumulators, flushed into exactly two MultiMesh instances per build.
+var _disc_lit: Array = []
+var _disc_body: Array = []
+
+
+func _build_disclosure() -> void:
+	if _disclosure_root != null and is_instance_valid(_disclosure_root):
+		# remove first: queue_free is deferred, and a same-named sibling added
+		# before it runs would be auto-renamed.
+		remove_child(_disclosure_root)
+		_disclosure_root.queue_free()
+	_disclosure_root = null
+	_disc_lit.clear()
+	_disc_body.clear()
+
+	var r: int = _rung()
+	if r < 1:
+		return                          # oracle — the world admits nothing. The legacy.
+
+	_disclosure_root = Node3D.new()
+	_disclosure_root.name = "DisclosureRig"
+	add_child(_disclosure_root)
+
+	if r >= 1:
+		_disc_census()
+	if r >= 2:
+		_disc_drop_lines()
+	if r >= 3:
+		_disc_sample_cage()
+	if r >= 4:
+		_disc_seed_row()
+	_disc_flush()
+
+
+## One box for the rig to draw. `lit` picks the emissive material.
+func _disc_box(lit: bool, center: Vector3, size_vec: Vector3, col: Color) -> void:
+	var t := Transform3D(Basis.IDENTITY.scaled(size_vec), center)
+	if lit:
+		_disc_lit.append({"t": t, "c": col})
+	else:
+		_disc_body.append({"t": t, "c": col})
+
+
+func _disc_flush() -> void:
+	_disc_emit(_disc_lit, true, "DisclosureLit")
+	_disc_emit(_disc_body, false, "DisclosureBody")
+
+
+func _disc_emit(entries: Array, lit: bool, nm: String) -> void:
+	if entries.is_empty():
+		return
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.metallic = 0.2 if lit else 0.55
+	mat.roughness = 0.35 if lit else 0.6
+	# THE ACCOUNT IS NOT IN THE WEATHER. apply_lighting() gives this world an
+	# exponential fog at density 0.02, and the fitted camera for a 30 m field
+	# stands ~140 m out, where that fog is 94% opaque: every structure below would
+	# have been drawn perfectly and then washed to a flat grey, and the axis would
+	# have measured nothing while looking like it had been tested. A reading of a
+	# world is not subject to that world's atmosphere.
+	mat.disable_fog = true
+	if lit:
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.emission_enabled = true
+		mat.emission = Color(1, 1, 1)
+		mat.emission_energy_multiplier = 1.4
+	var mesh := BoxMesh.new()
+	mesh.size = Vector3.ONE
+	mesh.material = mat
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = mesh
+	mm.instance_count = entries.size()
+	for i in range(entries.size()):
+		var e: Dictionary = entries[i]
+		mm.set_instance_transform(i, e["t"])
+		mm.set_instance_color(i, e["c"])
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = nm
+	mmi.multimesh = mm
+	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_disclosure_root.add_child(mmi)
+
+
+## tally — THE CENSUS. One column per module recipe the active rules can produce,
+## standing on a rail inside the east wall of the field, height proportional to how
+## many of that kind the draw actually placed. The aggregate: how much of each was
+## made, and nothing about which one went where.
+func _disc_census() -> void:
+	var half: Vector3 = space_size * 0.5
+	var floor_y: float = -half.y
+	var n: int = maxi(_kind_span, 1)
+	var counts: Array[int] = []
+	var top: int = 1
+	for b in range(n):
+		var c: int = 0
+		for k in _placed_kinds:
+			if int(k) == _kind_base + b:
+				c += 1
+		counts.append(c)
+		top = maxi(top, c)
+
+	var pitch: float = 3.2
+	var x: float = half.x * 0.86
+	var z0: float = -pitch * float(n - 1) * 0.5
+	var body: Color = color_theme["metal"] if color_theme else Color(0.7, 0.7, 0.75)
+	var bar: Color = color_theme["secondary"] if color_theme else Color(0.9, 0.7, 0.1)
+
+	# The rail the columns stand on — present even where a column is zero, so an
+	# empty bucket reads as "none of these were drawn" and not as "no such recipe".
+	_disc_box(false, Vector3(x, floor_y + 0.35, 0.0),
+		Vector3(2.6, 0.7, pitch * float(n) + 1.2), body)
+	for b in range(n):
+		var z: float = z0 + pitch * float(b)
+		var h: float = 1.2 + 13.0 * (float(counts[b]) / float(top))
+		_disc_box(true, Vector3(x, floor_y + 0.7 + h * 0.5, z), Vector3(2.2, h, 2.2), bar)
+		# A cap block so the top of each column reads as a measured height.
+		_disc_box(false, Vector3(x, floor_y + 0.7 + h + 0.2, z), Vector3(2.6, 0.4, 2.6), body)
+
+
+## ledger — THE RECORD. One rod per placed module, dropped from where the draw put
+## it to the floor plane, with a pad where it lands. Thirty entries, in order,
+## every one of them visible at once: the scatter stops being an impression of
+## clutter and becomes a readable set of individual results.
+func _disc_drop_lines() -> void:
+	var half: Vector3 = space_size * 0.5
+	var floor_y: float = -half.y
+	var rod: Color = color_theme["accent"] if color_theme else Color(0.7, 0.1, 0.3)
+	var pad: Color = color_theme["metal"] if color_theme else Color(0.7, 0.7, 0.75)
+	for p in _placed_pos:
+		var pos: Vector3 = p
+		var h: float = maxf(pos.y - floor_y, 0.4)
+		_disc_box(true, Vector3(pos.x, floor_y + h * 0.5, pos.z), Vector3(0.72, h, 0.72), rod)
+		_disc_box(false, Vector3(pos.x, floor_y + 0.15, pos.z), Vector3(1.6, 0.3, 1.6), pad)
+
+
+## works — THE MECHANISM. The sampling domain, drawn: twelve edges of exactly the
+## box every position was drawn uniformly inside, with graduated ticks along one
+## edge of each axis. "Uniform in here" is the whole generator, and at this rung
+## it is an object with corners you could walk to.
+func _disc_sample_cage() -> void:
+	var half: Vector3 = space_size * 0.5
+	var t: float = 0.9
+	var edge: Color = color_theme["primary"] if color_theme else Color(0.1, 0.5, 0.8)
+	var tick: Color = color_theme["metal"] if color_theme else Color(0.7, 0.7, 0.75)
+	var signs: Array[float] = [-1.0, 1.0]
+	for sy in signs:
+		for sz in signs:
+			_disc_box(true, Vector3(0, half.y * sy, half.z * sz), Vector3(space_size.x, t, t), edge)
+	for sx in signs:
+		for sz2 in signs:
+			_disc_box(true, Vector3(half.x * sx, 0, half.z * sz2), Vector3(t, space_size.y, t), edge)
+	for sx2 in signs:
+		for sy2 in signs:
+			_disc_box(true, Vector3(half.x * sx2, half.y * sy2, 0), Vector3(t, t, space_size.z), edge)
+	# Ten graduations along one edge per axis — the measure the draw was uniform in.
+	for i in range(11):
+		var f: float = float(i) / 10.0
+		_disc_box(false, Vector3(lerpf(-half.x, half.x, f), -half.y, -half.z),
+			Vector3(0.45, 1.6, 1.6), tick)
+		_disc_box(false, Vector3(-half.x, lerpf(-half.y, half.y, f), -half.z),
+			Vector3(1.6, 0.45, 1.6), tick)
+		_disc_box(false, Vector3(-half.x, -half.y, lerpf(-half.z, half.z, f)),
+			Vector3(1.6, 1.6, 0.45), tick)
+
+
+## origin — THE SUBSTRATE. Thirty-two lamps along the south edge of the field, MSB
+## left: the seed this entire world unrolls from, standing in the world it made.
+##
+## When no seed was pinned there are no lamps — thirty-two empty sockets and a bar
+## struck across them. That is not a failure to display; it is the true state of
+## affairs. randomize() cannot be read back, so this world had an origin, nobody
+## wrote it down, and no one will ever see it again.
+func _disc_seed_row() -> void:
+	var half: Vector3 = space_size * 0.5
+	var floor_y: float = -half.y
+	var z: float = -half.z * 0.9
+	var pitch: float = (space_size.x * 0.86) / 32.0
+	var x0: float = -pitch * 31.0 * 0.5
+	var sill: Color = color_theme["metal"] if color_theme else Color(0.7, 0.7, 0.75)
+	var lamp: Color = Color(0.55, 0.85, 1.0)
+	var stub: Color = Color(0.14, 0.15, 0.20)
+
+	_disc_box(false, Vector3(0, floor_y + 0.4, z), Vector3(pitch * 33.0, 0.8, 2.0), sill)
+	for i in range(32):
+		var x: float = x0 + pitch * float(i)
+		_disc_box(false, Vector3(x, floor_y + 1.0, z), Vector3(pitch * 0.8, 0.5, 1.5), sill)
+		if kitbash_seed < 0:
+			continue                    # no seed was recorded; the sockets stay empty
+		# MSB left, so the row reads the way the number is written.
+		var bit: int = (kitbash_seed >> (31 - i)) & 1
+		if bit == 1:
+			_disc_box(true, Vector3(x, floor_y + 4.2, z), Vector3(pitch * 0.72, 6.0, 1.3), lamp)
+		else:
+			_disc_box(false, Vector3(x, floor_y + 1.75, z), Vector3(pitch * 0.72, 1.1, 1.3), stub)
+	if kitbash_seed < 0:
+		# The row is not merely empty, it is CLOSED. Nothing was ever written here.
+		_disc_box(true, Vector3(0, floor_y + 1.9, z + 0.2),
+			Vector3(pitch * 32.0, 0.55, 0.5), Color(0.85, 0.24, 0.14))

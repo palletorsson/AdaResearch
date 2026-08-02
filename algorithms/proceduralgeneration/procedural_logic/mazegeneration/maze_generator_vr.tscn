@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3mvr1kpma0e"]
 
-[ext_resource type="Script" path="res://algorithms/proceduralgeneration/mazegeneration/maze_generator_vr.gd" id="1_maze_vr"]
+[ext_resource type="Script" uid="uid://nil7nav52w5x" path="res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.gd" id="1_maze_vr"]
 
 [node name="MazeGeneratorVR" type="Node3D"]
 script = ExtResource("1_maze_vr")

@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjmsaxrj2l63r"]
+[gd_scene load_steps=4 format=3 uid="uid://bjmsaxrj2l63r"]
 
 [ext_resource type="PackedScene" uid="uid://bsgy6pwsopfjm" path="res://algorithms/proceduralgeneration/reactiondiffusion/turing_pattern.tscn" id="1_rljnx"]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.gd" id="2_inocl"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
 viewport_path = NodePath("SubViewport")
 
 [node name="TuringPattern" type="Node3D"]
+script = ExtResource("2_inocl")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 

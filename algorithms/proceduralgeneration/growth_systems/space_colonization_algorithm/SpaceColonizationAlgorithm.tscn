@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6j3y8m1n8p7q"]
 
-[ext_resource type="Script" uid="uid://btj2u837kku9k" path="res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationAlgorithm.gd" id="1_space"]
-[ext_resource type="Script" path="res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationUI.gd" id="2_ui"]
+[ext_resource type="Script" uid="uid://cv6vqggl63ges" path="res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.gd" id="1_space"]
+[ext_resource type="Script" uid="uid://bty5xnmscyuis" path="res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationUI.gd" id="2_ui"]
 
 [node name="SpaceColonizationAlgorithm" type="Node3D"]
 

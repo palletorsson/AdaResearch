@@ -139,6 +139,24 @@
    "qfep_connection": "Majority rule run five generations over random rock: solid survives with four neighbours, void turns solid at five. Only the rock gets instanced — the cave is never built, it is everywhere the multimesh declined to place a cube."
   },
   "GeneticProgramming": {
+   "dna": {
+     "fixture": {
+     "population_seed": 20260802
+     },
+    "axes": {
+    "alphabet": [
+    "primitives",
+    "csg_tree",
+    "parametric",
+    "voxel"
+    ],
+    "muster": [
+    "parade",
+    "champion",
+    "scatter"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Watch 3D creatures evolve generation by generation toward a fitness goal no individual understands. Population grid displays organisms with fitness labels. Auto-evolve ticks on a timer or step manually. Creatures converge on similar body plans despite random initialization — convergent evolution from pure math. Evolution does not design — it accumulates accidents that happen to survive.",
@@ -1156,6 +1174,20 @@
    }
   },
   "branching_growth_algorithm": {
+   "dna": {
+     "fixture": {
+     "growth_seed": 20260802
+     },
+    "axes": {
+    "aftermath": [
+    "form",
+    "field",
+    "envelope",
+    "apparatus",
+    "strata"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Interactive visualization of branching growth patterns and algorithmic plant generation",
@@ -2534,6 +2566,20 @@
    }
   },
   "cube_mound_scene": {
+   "dna": {
+     "fixture": {
+     "release_seed": 20260802
+     },
+    "axes": {
+    "release": [
+    "cylinder",
+    "ring",
+    "sheet",
+    "chute",
+    "rift"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Procedural mound built from stacked cubes — layered cellular logic deposits cubes where conditions permit, producing terrain that is both built and eroded.",
@@ -5407,6 +5453,21 @@
    "qfep_connection": "The recursive tree with dice in its grammar: every branch angle and length drawn from a distribution. Same rule, different tree each run — the fractal chapter shaking hands with the randomness chapter, determinism loosened just enough to look alive."
   },
   "genetic_programming": {
+   "dna": {
+    "axes": {
+    "alphabet": [
+    "primitives",
+    "csg_tree",
+    "parametric",
+    "voxel"
+    ],
+    "muster": [
+    "parade",
+    "champion",
+    "scatter"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "advanced",
    "description": "Genetic programming interface for evolving 3D shapes â€” populations of genomes (Primitives, CSG Trees, Parametric, Voxel, L-Systems) undergo selection, crossover, and mutation toward fitness goals like target volume, height, and symmetry. Visualizes the entire population in a grid with real-time evolution.",
@@ -6108,6 +6169,18 @@
    }
   },
   "julia_set": {
+   "dna": {
+    "axes": {
+    "page": [
+    "tour",
+    "basilica",
+    "rabbit",
+    "dendrite",
+    "spiral",
+    "dust"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "advanced",
    "description": "Complex plane fractal visualization of Julia sets",
@@ -6418,6 +6491,20 @@
    }
   },
   "layered_membrane": {
+   "dna": {
+     "fixture": {
+     "membrane_seed": 20260802
+     },
+    "axes": {
+    "registration": [
+    "drift",
+    "unison",
+    "twist",
+    "alternation",
+    "scatter"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Procedural membrane generation with layered structures",
@@ -7530,6 +7617,21 @@
    "qfep_connection": "The compute shader carves its torus out of a density field; the fallback just calls TorusMesh.new(). Same genus, opposite politics — one earns the hole, the other declares it."
   },
   "maze_generation": {
+   "dna": {
+     "framing": 0.45,
+     "fixture": {
+     "maze_seed": 20260802
+     },
+    "axes": {
+    "hand": [
+    "backtracker",
+    "prim",
+    "binary_tree",
+    "sidewinder",
+    "labyrinth"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "advanced",
    "description": "VR-scale walkable maze with recursive backtracking generation",
@@ -8022,6 +8124,20 @@
    }
   },
   "mirror_cellular_texture_for_3d": {
+   "dna": {
+     "framing": 0.55,
+     "fixture": {
+     "pattern_seed": 20260802
+     },
+    "axes": {
+    "stencil": [
+    "motif",
+    "quadrant",
+    "octant",
+    "none"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Interactive 3D cellular automata with mirroring and texture generation capabilities",
@@ -8900,6 +9016,21 @@
    }
   },
   "reaction_diffusion": {
+   "dna": {
+     "fixture": {
+     "field_seed": 20260802
+     },
+    "axes": {
+    "inoculation": [
+    "blot",
+    "lattice",
+    "point",
+    "rim",
+    "seam",
+    "dust"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Turing pattern generation using reaction-diffusion systems â€” the Gray-Scott model on a 2D grid producing spots, stripes, and labyrinthine patterns from two interacting chemicals.",
@@ -9389,6 +9520,16 @@
    }
   },
   "recursive_tree": {
+   "dna": {
+    "axes": {
+    "aftermath": [
+    "form",
+    "strata",
+    "envelope",
+    "apparatus"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "advanced",
    "description": "branch(pos, dir, len, depth) = cylinder(tapered) + branch_count * branch(end, rotated_dir, len * 0.7, depth+1)",
@@ -9846,6 +9987,17 @@
    }
   },
   "sierpinski_triangle": {
+   "dna": {
+    "axes": {
+    "excision": [
+    "absence",
+    "ghost",
+    "rubble",
+    "cast",
+    "negative"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "sierpinski(v1,v2,v3,d) = 3 * sierpinski(corners, midpoints, d+1), skip center triangle. D = log(3)/log(2) ~ 1.585.",
@@ -10125,6 +10277,21 @@
    "qfep_connection": "Pools as nodes, tubes as commitments, a viscosity float doing the deciding: infrastructure without an engineer, after Physarum. But the network is sculpted, not grown — a still life of an optimization, holding the pose of intelligence the organism actually performs."
   },
   "space_colonization_algorithm": {
+   "dna": {
+     "framing": 0.2,
+     "fixture": {
+     "growth_seed": 20260802
+     },
+    "axes": {
+    "aftermath": [
+    "apparatus",
+    "form",
+    "field",
+    "envelope",
+    "strata"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Growth algorithm that builds branching structures by attracting tips toward a cloud of auxin-like markers — Runions-style space colonisation producing tree/coral/blood-vessel topologies.",

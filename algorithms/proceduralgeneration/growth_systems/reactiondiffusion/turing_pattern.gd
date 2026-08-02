@@ -15,6 +15,18 @@ extends Node2D
 
 var width: int = 128
 var height: int = 128
+
+# ── DNA ───────────────────────────────────────────────────────────────────────
+# THE AXIS lives on the WRAPPER SCENE, 2d_in_3d_turing_pattern_reaction_diffusion.gd, which
+# is what the registry points at and therefore the only script the declaration can be read
+# from. This is its mechanism. Both spell the six words identically, and the wrapper is the
+# one vocabulary.
+@export_enum("blot", "lattice", "point", "rim", "seam", "dust") var inoculation: String = "blot"
+
+## Seed for the inoculation draws. -1 keeps the legacy behaviour (Godot randomises the global
+## stream at startup, so every placement nucleates somewhere new); any value >= 0 pins it.
+## `lattice`, `point`, `rim` and `seam` draw nothing at all and are reproducible regardless.
+@export var field_seed: int = -1
 var grid_a: Array = []
 var grid_b: Array = []
 var next_a: Array = []
@@ -128,7 +140,39 @@ func _initialize_grids() -> void:
 		next_a.append(nr_a)
 		next_b.append(nr_b)
 
+## WHERE THE DIFFERENCE COMES FROM. The field starts perfectly uniform — a = 1 everywhere,
+## b = 0 everywhere — and the Gray-Scott rule is identical in every cell. A uniform field
+## under a uniform rule stays uniform forever. Everything this artifact is famous for
+## depends on this one function breaking that symmetry, and it has always broken it in
+## exactly one way (five random blots) without ever calling that a choice.
+##
+## The match is APPENDED and `blot` falls through to the untouched legacy body, so the
+## default consumes the same three randi() draws per blob, in the same order, as before.
 func _add_random_seeds() -> void:
+	if field_seed >= 0:
+		seed(field_seed)
+	match inoculation:
+		"lattice":
+			_inoculate_lattice()
+		"point":
+			_inoculate_point()
+		"rim":
+			_inoculate_rim()
+		"seam":
+			_inoculate_seam()
+		"dust":
+			_inoculate_dust()
+		_:
+			_inoculate_blot()
+
+## One cell of the field handed over to B. Every inoculation below writes through here, so
+## they cannot drift in what "seeded" means.
+func _sow(px: int, py: int) -> void:
+	grid_b[py][px] = 1.0
+	grid_a[py][px] = 0.0
+
+## blot — the legacy lineage, byte for byte: five discs, random centres, random radii.
+func _inoculate_blot() -> void:
 	for i in range(5):
 		var cx := randi() % width
 		var cy := randi() % height
@@ -138,8 +182,53 @@ func _add_random_seeds() -> void:
 				var px := (cx + dx) % width
 				var py := (cy + dy) % height
 				if dx * dx + dy * dy < sz * sz:
-					grid_b[py][px] = 1.0
-					grid_a[py][px] = 0.0
+					_sow(px, py)
+
+## lattice — sixteen identical discs on a regular 4 x 4 grid. Order imposed on the initial
+## condition; the pattern still diverges, which is the point.
+func _inoculate_lattice() -> void:
+	var sz: int = 6
+	for i in range(4):
+		for j in range(4):
+			var cx: int = int(float(width) * (0.125 + 0.25 * float(i)))
+			var cy: int = int(float(height) * (0.125 + 0.25 * float(j)))
+			_disc(cx, cy, sz)
+
+## point — one disc at the centre. Every difference in the finished field descends from a
+## single origin.
+func _inoculate_point() -> void:
+	_disc(int(width / 2), int(height / 2), int(mini(width, height) / 6))
+
+## rim — a band along the left edge. Difference arrives from the boundary and invades.
+func _inoculate_rim() -> void:
+	var band: int = maxi(1, int(width / 10))
+	for y in range(height):
+		for x in range(band):
+			_sow(x, y)
+
+## seam — a straight diagonal crack across the field. One line, no centre.
+func _inoculate_seam() -> void:
+	var halfw: int = maxi(1, int(mini(width, height) / 26))
+	for y in range(height):
+		for x in range(width):
+			if absi(x - y) <= halfw:
+				_sow(x, y)
+
+## dust — every cell perturbed on its own account, 2% of the time. Difference is everywhere
+## and has no origin at all: the limit case, and the hardest one for "a pattern needs a
+## seed" to survive.
+func _inoculate_dust() -> void:
+	for y in range(height):
+		for x in range(width):
+			if randf() < 0.02:
+				_sow(x, y)
+
+## A filled disc, wrapped at the edges exactly as the legacy blot loop wraps.
+func _disc(cx: int, cy: int, sz: int) -> void:
+	for dx in range(-sz, sz):
+		for dy in range(-sz, sz):
+			if dx * dx + dy * dy < sz * sz:
+				_sow((cx + dx + width) % width, (cy + dy + height) % height)
 
 func _load_next_preset() -> void:
 	current_preset = (current_preset + 1) % presets.size()

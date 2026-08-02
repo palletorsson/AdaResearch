@@ -1,9 +1,9 @@
 # @identity
 # essence: S_hardware = f(velocity, grip, head_rotation) — your body is the entropy source
 # desire: move your hands fast, squeeze the grip, turn your head — and watch surfaces rust and corrode because of you
-# critical_parameter: velocity_to_scratch — how aggressively hand speed maps to scratch intensity on the shader
+# critical_parameter: velocity_to_scratch — how aggressively hand speed maps to scratch intensity on the shader; disclosure — how much of the entropy's origin the rig prints on its face (oracle | tally | ledger | works | origin)
 # triggers: _sample_hardware() reads XR controller velocity, grip pressure, head angular speed every frame
-# emerges: a feedback loop where curiosity (moving to look) accelerates the decay you came to observe
+# emerges: a feedback loop where curiosity (moving to look) accelerates the decay you came to observe; at disclosure:oracle the same loop runs and the bay is bolted shut over it
 # needs: XR controllers [has with fallback]; custom hardware_decay.gdshader [has]; VR RESET/PAUSE buttons [has]
 # relationships: depends on random_decay_multimesh (conceptual); contrasts with entropy_jar (physics-based vs shader-based decay)
 # truth: The observer is not separate from the system — every measurement is an intervention.
@@ -24,6 +24,56 @@ const DECAY_SHADER = preload("res://algorithms/randomness/hardware_entropy_decay
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-08-02). The randomness family's ONE axis, adopted:
+#
+#   disclosure   oracle  <  tally  <  ledger  <  works  <  origin
+#
+# defined in prng_crank_machine.gd, already shared with coin_toss and
+# random_number_book_page_1955. This rig's whole claim is that the entropy
+# degrading these three specimens came from the player's own body — which is a
+# claim about PROVENANCE, and provenance is what the family word already names.
+# An artifact whose truth line is "the observer is not separate from the system"
+# has exactly one interesting knob: how much of that relationship it prints.
+#
+#   oracle  Three specimens, visibly worn, on their columns. The service bay is
+#           closed floor-to-lintel with a bolted blank plate stencilled SEALED,
+#           and there is no source line. The surfaces are decaying and nothing
+#           on the rig will tell you why, or by whom. Wear as a fact of nature.
+#   tally   The board returns carrying the AGGREGATE only: how far gone each
+#           quantity is — scratches, grime, entropy, decay — and how long it has
+#           been running. The upper third of the seat, where the live inputs sat,
+#           stays plated over. The damage totalled, the cause withheld.
+#   ledger  + the live inputs: hand velocity, grip, head rotation, sample by
+#           sample. The shutter retracts. Now you can watch a number move when
+#           you move. Still nothing says what is producing those numbers.
+#   works   + the source line: [ VR HARDWARE ACTIVE ] or [ SIMULATED ENTROPY ].
+#           The rig names its own instrument, and admits when there is no player
+#           and it is feeding on a sine wave instead. THE LEGACY RIG, byte for
+#           byte — this is the default and 7 placements expect it.
+#   origin  + the transfer function: a plate on the control bay printing which
+#           channel drives which damage and by what coefficient, and three lit
+#           channel rails running the whole length of the rig from the input bay
+#           to the account bay. The rung at which "your movements become entropy"
+#           stops being a wall label and becomes three multiplications you could
+#           check.
+#
+# NOT PROMOTED, and it was the tempting one: the decay RATES. velocity_to_scratch
+# and its four siblings are the artifact's most obvious parameters and they are
+# invisible to a still — a rate only exists across frames, and the evidence loop
+# is one PNG per variant. panel_count is not promoted either: three specimens or
+# five is a quantity, not a claim.
+#
+# NOT TOUCHED: the shader, the sampling, the coefficients themselves. Every rung
+# decays identically from identical input. This axis changes the RECORD, never
+# the process it records.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## The family's ladder, defined once next door. Preloaded rather than reached
+## through class_name — class_name lookups are not reliable headless and every
+## frame of the evidence loop is rendered headless.
+const Disclosure = preload("res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd")
+
 # --- Export tunables ---
 @export_category("Decay Rates")
 @export var velocity_to_scratch: float = 0.35        ## How much controller speed feeds scratch intensity
@@ -32,6 +82,29 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var passive_decay_rate: float = 0.002         ## Background decay per second
 @export var interaction_decay_boost: float = 0.015    ## Extra decay when actively interacting
 @export var decay_smoothing: float = 3.5              ## Lerp speed for visual smoothing
+
+@export_category("Disclosure")
+## THE AXIS — how much of the entropy's origin this rig admits. Same five rungs,
+## same order, same spellings as prng_crank_machine and coin_toss. `works` is the
+## legacy rig.
+@export_enum("oracle", "tally", "ledger", "works", "origin") var disclosure: String = "works"
+
+## The allow-list, in ladder order — the same five words the @export_enum above
+## declares. What a map token is checked against.
+const DISCLOSURES: PackedStringArray = ["oracle", "tally", "ledger", "works", "origin"]
+
+## PIN. -1 (the default) is today's behaviour exactly: with no XR rig in the
+## scene the sampler falls back to wall-clock sines, so the readouts and the
+## shader's wear differ every time the artifact is instantiated and keep drifting
+## for as long as it lives. Any value >= 0 replaces that clock with a fixed state
+## derived from the seed and stops the accumulation, so two photographs of this
+## rig can actually be compared.
+##
+## Nothing here calls randf — the noise is the CLOCK, which is worse, because it
+## looks deterministic in the source. Without this pin a `disclosure` sweep would
+## measure four different states of decay and report a bite that is entirely the
+## sweep's own elapsed runtime. The DNA fixture must set it.
+@export var entropy_seed: int = -1
 
 @export_category("Display")
 @export var panel_count: int = 3                      ## Number of display panels (cube, sphere, cylinder)
@@ -94,19 +167,46 @@ var _source_pos: Vector3 = Vector3.ZERO
 var _active: bool = true
 var _paused: bool = false
 
+## Everything the AXIS owns: the readout plate and its board, the blank shutter,
+## the origin plate and its channel rails. A rung change frees exactly these and
+## builds them again — the specimens, the columns and the rig are not the account
+## and must survive a rung change untouched.
+var _axis_owned: Array[Node] = []
+var _built: bool = false
+## True when entropy_seed >= 0: the sampler is replaced by a fixed state.
+var _pinned: bool = false
+
+
+## Rank of the current rung, 0..4, read through the family's one table.
+func _rung() -> int:
+	return int(Disclosure.DISCLOSURE_RUNGS.get(disclosure, 3))
+
 
 func _ready() -> void:
+	# The grid sets config_* metadata SYNCHRONOUSLY before add_child, so the meta
+	# read happens here, before any geometry exists. apply_grid_config() arrives
+	# call_deferred — after this — and is a re-read, not the read.
+	_read_meta_overrides()
 	_build_pedestal()
 	_build_display_surfaces()
 	_build_title()
-	if show_readouts:
+	if show_readouts and _rung() >= 1:
 		_build_readout_panel()
 	_build_vr_controls()
 	_build_source_indicator()
 	_build_rig()
+	# APPENDED LAST so every child index and position above is untouched on the
+	# legacy path. At `works` both of these add nothing at all.
+	_build_disclosure_shutter()
+	_build_origin_panel()
+	if entropy_seed >= 0:
+		_pin_state()
+	_built = true
 
 
 func _process(delta: float) -> void:
+	if _pinned:
+		return   # a pinned rig holds its state so two frames can be compared
 	if _paused:
 		return
 
@@ -449,12 +549,14 @@ func _build_readout_panel() -> void:
 	back.material_override = back_mat
 	back.position = Vector3(panel_x, panel_cy, -0.012)
 	add_child(back)
+	_axis_owned.append(back)
 
 	# Anchor for the live baked text-block, sitting just in front of the plate.
 	_readout_anchor = Node3D.new()
 	_readout_anchor.name = "ReadoutBlock"
 	_readout_anchor.position = Vector3(panel_x, panel_cy, 0.004)
 	add_child(_readout_anchor)
+	_axis_owned.append(_readout_anchor)
 
 	# Seed with a placeholder so the board reads before the first update.
 	_rebuild_readout_block([
@@ -531,16 +633,22 @@ func _rebuild_readout_block(lines: Array) -> void:
 
 
 func _update_readouts() -> void:
+	if _readout_anchor == null:
+		return                     # disclosure:oracle — there is no board to write on
 	var max_vel := maxf(_left_velocity, _right_velocity)
 	var max_grip := maxf(_grip_left, _grip_right)
 
-	# Compose all readouts as lines on ONE surface. Values quantised so tiny
-	# per-frame jitter doesn't force a rebuild every frame (cache guard below).
+	# disclosure:tally — the three LIVE INPUT rows are withheld. They are blanked
+	# rather than removed: make_text_block skips an empty line without closing the
+	# gap, so every surviving row keeps the exact y it has on the legacy board and
+	# the tile difference is "these three rows are gone", not "the board reflowed".
+	# The shutter is built over precisely that band.
+	var live: bool = _rung() >= 2
 	var lines := [
-		"HARDWARE INPUTS", "",
-		"VELOCITY   %.2f m/s" % max_vel,
-		"GRIP       %.0f%%" % (max_grip * 100.0),
-		"HEAD ROT   %.2f r/s" % _head_angular_speed,
+		"HARDWARE INPUTS" if live else "", "",
+		("VELOCITY   %.2f m/s" % max_vel) if live else "",
+		("GRIP       %.0f%%" % (max_grip * 100.0)) if live else "",
+		("HEAD ROT   %.2f r/s" % _head_angular_speed) if live else "",
 		"SCRATCHES  %.0f%%" % (_display_scratch * 100.0),
 		"GRIME      %.0f%%" % (_display_grime * 100.0),
 		"ENTROPY    %.0f%%" % (_display_entropy * 100.0),
@@ -557,6 +665,13 @@ func _update_readouts() -> void:
 
 func _update_source_indicator() -> void:
 	if _source_anchor == null:
+		return
+	if _rung() < 3:
+		# disclosure:oracle|tally|ledger — the rig does not name its instrument.
+		# The anchor stays (the bay seat is still there); the board on it does not.
+		for child in _source_anchor.get_children():
+			child.queue_free()
+		_source_cache = ""
 		return
 
 	var txt := ""
@@ -617,6 +732,8 @@ func _reset() -> void:
 var _spin_time: float = 0.0
 
 func _physics_process(delta: float) -> void:
+	if _pinned:
+		return   # the specimens hold their pose too, or the pin is only half a pin
 	if _paused:
 		return
 	_spin_time += delta
@@ -633,8 +750,215 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## LATENT BUG PAID (2026-08-02): this was `pass`. GridInteractablesComponent parsed
+## every `#token: value` on a hardware_entropy_decay placement, logged it, stashed it
+## as metadata and then nothing on this artifact ever read it back — so any map that
+## tried to configure this rig was configuring nothing, silently. It reads its
+## metadata now. The grid sets that metadata BEFORE add_child and calls this method
+## deferred, so _ready does the read that decides geometry; this is the re-read.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	var before: String = disclosure
+	_read_meta_overrides()
+	if _built and disclosure != before:
+		_rebuild_axis()
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_disclosure"):
+		disclosure = Disclosure.disclosure_name(str(get_meta("config_disclosure")))
+	if has_meta("config_entropy_seed"):
+		entropy_seed = int(str(get_meta("config_entropy_seed")))
+
+
+## Free and rebuild EXACTLY what the axis owns. Called only when the rung actually
+## changed, so a config that carries no disclosure key never disturbs a rig that is
+## already standing (an unconditional rebuild here would free the readout board of
+## every placement that passes any token at all).
+func _rebuild_axis() -> void:
+	for n in _axis_owned:
+		if is_instance_valid(n):
+			n.queue_free()
+	_axis_owned.clear()
+	_readout_anchor = null
+	_readout_block = null
+	_readout_cache = ""
+	if show_readouts and _rung() >= 1:
+		_build_readout_panel()
+	_build_disclosure_shutter()
+	_build_origin_panel()
+	_source_cache = ""
+	_update_source_indicator()
+	if show_readouts and _rung() >= 1:
+		_update_readouts()
+
+
+## A fixed, reproducible state of wear. Reachable ONLY through entropy_seed >= 0,
+## so no shipped placement can enter it. The numbers are a plain hash of the seed
+## into 0..1 — arbitrary, but identical for identical seeds, which is the whole
+## requirement. _process and _physics_process return immediately in this mode, so
+## nothing drifts and nothing spins between one variant's frame and the next.
+func _pin_state() -> void:
+	_pinned = true
+	var s: float = float(absi(entropy_seed) % 1000) / 1000.0
+	_decay_amount = 0.20 + s * 0.45
+	_scratch_intensity = 0.30 + s * 0.40
+	_grime_buildup = 0.25 + s * 0.45
+	_entropy_rate = 0.15 + s * 0.50
+	_display_decay = _decay_amount
+	_display_scratch = _scratch_intensity
+	_display_grime = _grime_buildup
+	_display_entropy = _entropy_rate
+	_left_velocity = 0.8 + s
+	_right_velocity = 0.5 + s * 0.5
+	_head_angular_speed = 0.3 + s * 0.4
+	_grip_left = s
+	_grip_right = s * 0.7
+	_total_scratches = 2.0 + s * 3.0
+	_peak_velocity = 1.5 + s
+	_interaction_seconds = 30.0 + s * 60.0
+	for mat in _shader_materials:
+		mat.set_shader_parameter("decay_amount", _display_decay)
+		mat.set_shader_parameter("scratch_intensity", _display_scratch)
+		mat.set_shader_parameter("grime_buildup", _display_grime)
+		mat.set_shader_parameter("entropy_rate", _display_entropy)
+		mat.set_shader_parameter("touch_uv", _touch_uv)
+		# AND THE SHADER'S OWN CLOCK. hardware_decay.gdshader offsets both fbm
+		# fields by TIME * time_drift, so the specimens — the three largest bright
+		# objects in any frame of this rig — keep crawling even with every uniform
+		# above frozen. Five variants captured 1.2 s apart in one boot would each
+		# carry a different surface, and that difference would be scored as the
+		# disclosure axis. Zero stops the crawl; it is reachable only through the
+		# pin, so no placement ever sees a still surface.
+		mat.set_shader_parameter("time_drift", 0.0)
+	if show_readouts:
+		_update_readouts()
+	_update_source_indicator()
+
+
+# ── DISCLOSURE GEOMETRY ──────────────────────────────────────────────────────
+# Two builders, both no-ops at the legacy rung. The shutter SUBTRACTS (it plates
+# over the service bay below `ledger`); the origin plate ADDS (above `works`).
+# Neither touches the specimens, the columns, the shader or the sampling.
+
+## The service-bay shutter. A bolted blank plate hung in front of the readout
+## seat, sized to exactly the rows the rung withholds.
+##
+##   oracle  floor-to-lintel: the account is not merely absent, it is covered,
+##           and the cover is stencilled. This is the whole right-hand bay of the
+##           rig — the largest single surface change the artifact can make.
+##   tally   the top of the seat only, down to the last withheld input row, so
+##           the aggregate below it stays readable.
+func _build_disclosure_shutter() -> void:
+	var r: int = _rung()
+	if r >= 2:
+		return                                    # ledger and above: the seat is open
+	var span: float = float(panel_count) * panel_spacing
+	var readout_x: float = span * 0.5 + 0.85
+	var panel_cy: float = pedestal_height + 0.65
+	var top: float = panel_cy + 0.52
+	# The last withheld text row (HEAD ROT, index 4) plus half a line of margin.
+	# Line i sits at panel_cy + 0.370 - 0.066 * i — see BakedText.make_text_block.
+	var bottom: float = panel_cy + 0.370 - 0.066 * 4.0 - 0.033
+	var label: String = "AGGREGATE"
+	if r == 0:
+		bottom = 0.15                             # down to the plinth: the bay is sealed
+		label = "SEALED"
+	var h: float = maxf(top - bottom, 0.05)
+	var cy: float = (top + bottom) * 0.5
+
+	var node := Node3D.new()
+	node.name = "DisclosureShutter"
+	add_child(node)
+	_axis_owned.append(node)
+
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_panel: Color = pal["panel"]
+	var plate: StandardMaterial3D = HangarKit.painted_metal(Color(0.13, 0.13, 0.15), 0.5, 0.45, 0.6)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
+	node.add_child(HangarKit.box(Vector3(readout_x, cy, 0.055), Vector3(0.80, h, 0.035), plate))
+	# A lintel rail across the top — the shutter reads as DRAWN, not as a missing part.
+	node.add_child(HangarKit.box(Vector3(readout_x, top + 0.02, 0.062), Vector3(0.84, 0.05, 0.05), steel))
+	# Bolt rows down both edges.
+	for sx in [-0.36, 0.36]:
+		node.add_child(HangarKit.bolts(
+			Vector3(readout_x + sx, bottom + 0.06, 0.075),
+			Vector3(readout_x + sx, top - 0.06, 0.075),
+			maxi(int(h / 0.22), 2), 0.014, steel))
+	var q: MeshInstance3D = HangarKit.stencil(label, Vector2(0.34, 0.055))
+	if q:
+		q.position = Vector3(readout_x, minf(top - 0.10, cy + h * 0.5 - 0.10), 0.08)
+		node.add_child(q)
+
+
+## disclosure:origin — the transfer function, printed and drawn.
+##
+## A plate on the CONTROL bay (the input end of the rig) carrying the three
+## coefficients and the passive rate, plus three lit channel rails running the
+## whole width of the body from that bay to the service bay: input on the left,
+## account on the right, and the path between them made a physical object. This
+## is the rung at which the wall label "your VR movements become entropy" becomes
+## three multiplications a visitor could check against the readout.
+func _build_origin_panel() -> void:
+	if _rung() < 4:
+		return
+	var span: float = float(panel_count) * panel_spacing
+	var readout_x: float = span * 0.5 + 0.85
+	var control_x: float = -span * 0.5 - 0.8
+	var left: float = control_x - 0.42
+	var right: float = readout_x + 0.42
+	var body_top: float = pedestal_height + 0.96
+
+	var node := Node3D.new()
+	node.name = "OriginPanel"
+	add_child(node)
+	_axis_owned.append(node)
+
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_panel: Color = pal["panel"]
+	var face: StandardMaterial3D = HangarKit.painted_metal(Color(0.05, 0.055, 0.07), 0.35, 0.2, 0.55)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
+
+	# The plate, seated on the open face of the control bay above the keypad wedge.
+	var plate_cy: float = body_top - 0.21
+	node.add_child(HangarKit.box(Vector3(control_x, plate_cy, -0.185), Vector3(0.78, 0.44, 0.02),
+		HangarKit.painted_metal(col_panel, 0.3)))
+	node.add_child(HangarKit.box(Vector3(control_x, plate_cy, -0.175), Vector3(0.72, 0.38, 0.012), face))
+	node.add_child(HangarKit.bolts(
+		Vector3(control_x - 0.36, plate_cy - 0.19, -0.168),
+		Vector3(control_x + 0.36, plate_cy - 0.19, -0.168), 4, 0.013, steel))
+
+	var block: Node3D = BakedText.make_text_block([
+		"TRANSFER",
+		"VEL  x%.2f -> SCRATCH" % velocity_to_scratch,
+		"GRIP x%.2f -> GRIME" % grip_to_grime,
+		"HEAD x%.2f -> ENTROPY" % head_to_entropy,
+		"IDLE  %.3f /s" % passive_decay_rate,
+	], Color(0.72, 0.86, 0.74), 0.046, 0.62, 0.012, true)
+	if block:
+		block.position = Vector3(control_x, plate_cy, -0.166)
+		node.add_child(block)
+
+	# The three channels, drawn the full length of the body: input bay -> account
+	# bay, passing the front of every mullion. One colour per channel, matching the
+	# order printed on the plate above.
+	var rail_cols: Array[Color] = [Color(0.62, 0.80, 1.00), Color(0.80, 0.62, 0.30), Color(1.00, 0.46, 0.18)]
+	var rail_x0: float = left + 0.12
+	var rail_x1: float = right - 0.12
+	for i in range(3):
+		var ry: float = 0.30 + float(i) * 0.085
+		node.add_child(HangarKit.box(
+			Vector3((rail_x0 + rail_x1) * 0.5, ry, -0.19),
+			Vector3(rail_x1 - rail_x0, 0.045, 0.045),
+			HangarKit.emissive(rail_cols[i], 1.9)))
+		# A collar at each end so the rail reads as PLUGGED IN at both bays.
+		for cx2 in [rail_x0, rail_x1]:
+			node.add_child(HangarKit.box(Vector3(cx2, ry, -0.19), Vector3(0.07, 0.09, 0.09), steel))
+	var code: MeshInstance3D = HangarKit.stencil("CHANNELS", Vector2(0.30, 0.05))
+	if code:
+		code.position = Vector3(control_x + 0.55, 0.56, -0.17)
+		node.add_child(code)
 
 
 ## THE THREE-BAY RIG — the cabinet grammar in its widest vertical body.

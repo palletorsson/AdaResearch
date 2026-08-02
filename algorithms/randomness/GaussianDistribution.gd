@@ -1,4 +1,36 @@
-﻿class_name GaussianDistributionAlgorithm
+﻿# @identity
+# essence: gaussian sampling that raises the HOST MAP's floor — each draw picks a cell in an 8x8 region and lifts that cube by raise_amount, so height is a visit count
+# desire: stand in a room whose floor slowly grows a bell curve under you, made of the same cubes you were already walking on
+# critical_parameter: sigma — the standard deviation, which decides whether the mound is a spike or a swell; gaussian_seed pins which mound you get
+# triggers: a 0.1 s timer steps execute_step max_raises times; each step draws (x, z) by Box-Muller and raises one MultiMesh instance
+# emerges: a diffusion profile in the structure layer — tallest at the region centre, thinning outward, built entirely out of the map's own geometry
+# needs: a GridSystem in the scene with cubes already present in the region [required — this artifact places nothing itself]
+# relationships: the SOURCE end of the gaussian tier — GaussianPaintSplatter is the same draws landing on a plate (`refusal`), GaussianBlurCircle is the curve used as a kernel instead of a sampler (`sitter`); this one is neither, just the stream
+# truth: A distribution has no body. This artifact owns no mesh at all — it borrows the room's floor and writes the bell curve into somebody else's cubes.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# DNA — DELIBERATELY NOT PROMOTED (2026-08-02). A truthful null.
+#
+# This artifact renders NOTHING OF ITS OWN. There is not one MeshInstance3D in
+# gaussian_random.tscn and not one line here that creates geometry; every visible
+# effect is a write into the HOST MAP's structure MultiMesh, via a GridSystem
+# looked up from the scene tree. The registry has measured it and agrees:
+# aabb_size [0, 0, 0].
+#
+# So an evidence sweep of this token photographs an empty frame five times,
+# scores 0.00%, and reports whatever axis was declared as INERT. That verdict
+# would be a fact about the capture harness — which stages one artifact with no
+# map around it — and not a fact about the artifact. A fabricated axis here
+# would run the whole DNA loop green and publish a number that looks like
+# evidence and is not. It is the same class of failure the declaration gate was
+# built to catch, arriving from the other direction.
+#
+# The precondition for ever measuring it is a MAP-level sweep, and the
+# precondition for THAT is determinism, which is what gaussian_seed below is
+# for. The seed ships now so the measurement is possible later.
+# ─────────────────────────────────────────────────────────────────────────────
+
+class_name GaussianDistributionAlgorithm
 extends Node3D
 
 # Algorithm properties
@@ -28,6 +60,20 @@ var center_z: float
 var timer: Timer
 var is_running: bool = false
 
+# ── Determinism ──────────────────────────────────────────────────────────────
+# This algorithm is made of nothing but random draws, so two runs of the same
+# map grow two different mounds and no before/after comparison of a room that
+# contains one can mean anything. -1 = do not touch the stream, i.e. today
+# exactly: maxf(randf(), 1e-10) off the global generator, a fresh landscape
+# every launch, which is right in a room and useless to a measurement.
+#
+# Any value >= 0 builds a LOCAL generator instead and draws from that — never
+# seed() on the global stream, because this artifact shares a map with others
+# that draw too, and re-seeding the process to make one mound reproducible
+# would silently move every one of them.
+@export var gaussian_seed: int = -1
+var _rng: RandomNumberGenerator = null
+
 # Box-Muller spare value (persists across calls)
 var _has_spare: bool = false
 var _spare: float = 0.0
@@ -45,15 +91,21 @@ func _init() -> void:
 	max_steps = max_raises
 
 func _ready() -> void:
+	# APPENDED FIRST and draws nothing: _setup_seeded_stream() only constructs
+	# (or clears) a generator. The first sample is taken in execute_step, which
+	# the deferred start_algorithm below cannot reach before the timer's first
+	# 0.1 s tick, so nothing above or below this line shifts.
+	_setup_seeded_stream()
+
 	# Create timer for stepping
 	timer = Timer.new()
 	timer.wait_time = step_delay
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
-	
+
 	# Auto-connect to grid system
 	call_deferred("_find_and_connect_grid")
-	
+
 	if auto_start:
 		call_deferred("start_algorithm")
 
@@ -166,8 +218,10 @@ func _gaussian_random(mean: float, std_dev: float) -> float:
 		return _spare * std_dev + mean
 
 	_has_spare = true
-	var u := maxf(randf(), 1e-10)  # Avoid log(0)
-	var v := randf()
+	# _unit_draw() IS randf() whenever gaussian_seed is -1, which is every room.
+	# Same two calls, same order, same count.
+	var u := maxf(_unit_draw(), 1e-10)  # Avoid log(0)
+	var v := _unit_draw()
 	var mag := std_dev * sqrt(-2.0 * log(u))
 	_spare = mag * cos(2.0 * PI * v)
 	return mag * sin(2.0 * PI * v) + mean
@@ -247,4 +301,29 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("gaussian_seed"):
+		gaussian_seed = int(str(config["gaussian_seed"]))
+		_setup_seeded_stream()
+		# A seed that arrives after the algorithm has already stepped would
+		# otherwise pin only the tail of the mound. Start the draw sequence over
+		# so a pinned run is pinned from its first sample.
+		_has_spare = false
+		_spare = 0.0
+
+
+## Builds the local generator, or leaves it null. Null is the default and the
+## room behaviour: _unit_draw() falls straight through to the global randf() this
+## file has always used.
+func _setup_seeded_stream() -> void:
+	if gaussian_seed < 0:
+		_rng = null
+		return
+	_rng = RandomNumberGenerator.new()
+	_rng.seed = gaussian_seed
+
+
+## One uniform draw. Identical to randf() unless seeded.
+func _unit_draw() -> float:
+	if _rng != null:
+		return _rng.randf()
+	return randf()

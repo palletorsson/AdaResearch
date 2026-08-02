@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwq0sahysj06c"]
+[gd_scene load_steps=6 format=3 uid="uid://bwq0sahysj06c"]
 
 [ext_resource type="PackedScene" uid="uid://c6h2wjm2fvjsv" path="res://algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn" id="1_l6bsy"]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd" id="2_stncl"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
 viewport_path = NodePath("SubViewport")
@@ -10,6 +11,7 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="BoxMesh" id="BoxMesh_ac470"]
 
 [node name="MirroredCellularAutomata2" type="Node3D"]
+script = ExtResource("2_stncl")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(400, 400)

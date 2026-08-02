@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dng5gy1ajbf0t"]
 
-[ext_resource type="Script" uid="uid://b5g5o63xyd7jr" path="res://algorithms/proceduralgeneration/cubemound/cube_mound.gd" id="1"]
+[ext_resource type="Script" uid="uid://b5g5o63xyd7jr" path="res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound.gd" id="1"]
 
 [node name="CubeMound" type="Node3D"]
 script = ExtResource("1")
