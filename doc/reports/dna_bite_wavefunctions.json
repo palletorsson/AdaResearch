@@ -88,6 +88,96 @@
    "colour_only": []
   },
   {
+   "artifact": "RackAmbientDrone",
+   "axis": "machinery",
+   "frame": 0.12498,
+   "focus": 0.34554,
+   "verdict": "bites",
+   "subject": 0.10789,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "plate",
+     "b": "vacancy",
+     "focus": 0.04782,
+     "rgb": 0.13686
+    }
+   ]
+  },
+  {
+   "artifact": "RackDX7Piano",
+   "axis": "machinery",
+   "frame": 0.14884,
+   "focus": 0.35528,
+   "verdict": "bites",
+   "subject": 0.10723,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "plate",
+     "b": "vacancy",
+     "focus": 0.04823,
+     "rgb": 0.1398
+    }
+   ]
+  },
+  {
+   "artifact": "RackMoogBass",
+   "axis": "machinery",
+   "frame": 0.12744,
+   "focus": 0.36557,
+   "verdict": "bites",
+   "subject": 0.1068,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "plate",
+     "b": "vacancy",
+     "focus": 0.04807,
+     "rgb": 0.13979
+    }
+   ]
+  },
+  {
+   "artifact": "RackMario",
+   "axis": "machinery",
+   "frame": 0.16894,
+   "focus": 0.321,
+   "verdict": "bites",
+   "subject": 0.10742,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "plate",
+     "b": "vacancy",
+     "focus": 0.04703,
+     "rgb": 0.14207
+    }
+   ]
+  },
+  {
+   "artifact": "Rack808Drums",
+   "axis": "machinery",
+   "frame": 0.15042,
+   "focus": 0.37053,
+   "verdict": "bites",
+   "subject": 0.11273,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "plate",
+     "b": "vacancy",
+     "focus": 0.05255,
+     "rgb": 0.17028
+    }
+   ]
+  },
+  {
    "artifact": "coupled_oscillator_lattice",
    "axis": "fabric",
    "frame": 0.05134,
@@ -234,6 +324,24 @@
    "colour_only": []
   },
   {
+   "artifact": "dual_display_test",
+   "axis": "record",
+   "frame": 0.0151,
+   "focus": 0.1648,
+   "verdict": "local",
+   "subject": 0.03754,
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "archive",
+     "b": "margin",
+     "focus": 0.00717,
+     "rgb": 0.04887
+    }
+   ],
+   "colour_only": []
+  },
+  {
    "artifact": "WavePaintings",
    "axis": "display",
    "frame": 0.10536,
@@ -292,6 +400,28 @@
    "verdict": "bites",
    "subject": 0.05004,
    "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "wave_interference_tank",
+   "axis": "evidence",
+   "frame": 0.08175,
+   "focus": 0.34536,
+   "verdict": "bites",
+   "subject": 0.07418,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "sine_wave_controller",
+   "axis": "evidence",
+   "frame": 0.06141,
+   "focus": 0.34004,
+   "verdict": "bites",
+   "subject": 0.04016,
+   "pairs": 3,
    "twins": [],
    "colour_only": []
   }
