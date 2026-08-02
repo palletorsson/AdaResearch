@@ -27,6 +27,59 @@ class_name QfepReactorBench
 @export var readout_col: Color = Color(0.55, 0.98, 0.85)
 @export var label_col: Color = Color(0.92, 0.96, 1.0)
 
+## AXIS — COMPLEMENT: what this bench shows of the equation it does NOT run.
+##
+## The other three benches isolate a term; this one claims the whole formula, and its
+## title says so. Read the formula again and find what is missing anyway:
+##
+##     QFE = F − λE(S) + φΔE(S,t)
+##
+## S. The system. It appears twice, it is what every term is a term OF, and there is
+## no dial for it on this deck — three knobs for the weights and none for the thing
+## being weighed. The chamber holds fourteen abstract particles standing in for any
+## system whatsoever, which is the same move as having no system at all. Worse, the
+## three needles are ganged: one hidden sweep drives all of them, so the bench shows a
+## console you could set and is in fact a film you can only watch.
+##
+## So the complement here is not another term, it is the referent — and the axis is
+## the same question the other three benches answer: how much does the bench admit is
+## missing?
+##
+##   none       nothing — the legacy lineage, byte for byte. The whole formula, it says.
+##   ghost      two dead mounts on the deck: capped stubs, blanked grey face plates,
+##              unlit E and S tags. Provision was made for them and never fitted.
+##   supply     two lit tributary conduits rise off the deck and plug into the chamber's
+##              underside. The system is not in the glass; it is piped in from elsewhere.
+##   redaction  a bone-white plate across the skirt carrying the whole formula with
+##              (S) and (S,t) struck under black bars — the terms kept, their referent
+##              blacked out — and the terms it does run underlined in accent.
+##   quorum     two lit satellite dials, E and S, stand with the three and are linked
+##              into the chamber. Five instruments, and the formula is finally whole.
+##
+## Shared word for word with [[f_order_bench]], [[lambda_dial_bench]] and
+## [[phi_rate_bench]] — one equation, one vocabulary.
+@export_enum("none", "ghost", "supply", "redaction", "quorum") var complement: String = "none"
+const COMPLEMENTS: PackedStringArray = ["none", "ghost", "supply", "redaction", "quorum"]
+
+## Seed for the particles' chaos homes. −1 keeps today's behaviour (randomize on every
+## spawn); any value ≥ 0 makes the swarm reproducible, which is what a sweep needs —
+## otherwise five variants of an axis are also five different swarms, and at the sweep's
+## capture moment the swarm is most of the way to chaos, so that noise would be measured
+## as the axis.
+@export var chaos_seed: int = -1
+
+# The two things this bench does not put a dial on — glyph, and the family's colour.
+const COMP_A_GLYPH := "E"
+const COMP_A_COLOR := Color(0.98, 0.78, 0.42)
+const COMP_B_GLYPH := "S"
+const COMP_B_COLOR := Color(0.98, 0.55, 0.62)
+# Where the complement hardware stands: flank offset, deck height, forward offset.
+# Deliberately inside the existing silhouette (body 0.95 wide, readout panel top y 1.33)
+# so a variant is not also a different camera distance.
+const COMP_X := 0.40
+const COMP_Y := 0.615
+const COMP_Z := 0.0
+
 var _t: float = 0.0
 var _sweep: float = 0.5            # 0 = frozen, 0.5 = alive (edge), 1 = noise
 var _chamber_c := Vector3(0.0, 0.78, 0.0)
@@ -46,14 +99,36 @@ var _dial_r: float = 0.085
 
 
 func _ready() -> void:
-	_rng.randomize()
+	_read_dna_meta()
+	if chaos_seed < 0:
+		_rng.randomize()
+	else:
+		_rng.seed = chaos_seed
 	_build()
 	set_process(not Engine.is_editor_hint())
+
+
+# The grid sets `config_*` metadata BEFORE add_child, so this runs ahead of the first
+# build; apply_grid_config (deferred) covers the rebuild path. Unknown words keep the
+# default — an axis must never be able to blank an artifact by typo.
+func _read_dna_meta() -> void:
+	if has_meta("config_complement"):
+		var c_in: String = str(get_meta("config_complement")).strip_edges().to_lower()
+		complement = c_in if COMPLEMENTS.has(c_in) else complement
+	if has_meta("config_chaos_seed"):
+		chaos_seed = int(str(get_meta("config_chaos_seed")))
 
 
 func apply_grid_config(config: Dictionary) -> void:
 	if config.has("emissive"):
 		emissive = bool(config["emissive"])
+	if config.has("complement"):
+		var c_in: String = str(config["complement"]).strip_edges().to_lower()
+		complement = c_in if COMPLEMENTS.has(c_in) else complement
+	if config.has("chaos_seed"):
+		chaos_seed = int(str(config["chaos_seed"]))
+		if chaos_seed >= 0:
+			_rng.seed = chaos_seed
 	if config.has("sweep_rate"):
 		sweep_rate = clampf(float(config["sweep_rate"]), 0.05, 0.4)
 	if config.has("particle_count"):
@@ -119,6 +194,20 @@ func _build() -> void:
 
 	# Billboard title.
 	add_child(_billboard_label("QFEP REACTOR BENCH — THE WHOLE FORMULA", Vector3(0.0, 1.5, 0.0), 18, label_col))
+
+	# COMPLEMENT dressing, appended LAST so every child index and position above is
+	# untouched on the legacy path. "none" falls through and adds nothing at all.
+	match complement:
+		"ghost":
+			_comp_ghost()
+		"supply":
+			_comp_supply()
+		"redaction":
+			_comp_redaction()
+		"quorum":
+			_comp_quorum()
+		_:
+			pass                                  # "none" — the legacy lineage
 
 
 func _add_dial(center: Vector3, col: Color, text: String) -> MeshInstance3D:
@@ -214,3 +303,119 @@ func _process(delta: float) -> void:
 	if _verdict != null:
 		_verdict.text = _verdict_text()
 		_verdict.modulate = col
+
+
+# ── COMPLEMENT ───────────────────────────────────────────────────────────────
+# Five values, four builders, appended after everything else. The gestures are
+# identical across the four QFEP benches — only the anchors and the two absent
+# glyphs change — so a room of them reads as one instrument family taking one
+# position on its own isolation.
+
+# Where the missing referent would plug in: the underside of the glass chamber.
+func _comp_hub() -> Vector3:
+	return _chamber_c + Vector3(0.0, -0.10, 0.0)
+
+
+## Engraved text: NOT _billboard_label. Depth-tested and non-billboard so the black
+## redaction bars can actually cover it, and so LabelFramer leaves it alone (it frames
+## hanging billboards, and this text lies on a body already).
+func _comp_ink(text: String, pos: Vector3, font: int, col: Color) -> Label3D:
+	var l := Label3D.new()
+	l.text = text
+	l.font_size = font
+	l.modulate = col
+	l.outline_size = 0
+	l.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	l.no_depth_test = false
+	l.position = pos
+	return l
+
+
+## GHOST — provision, unfitted. A capped stub on the deck carrying a blanked face
+## plate with the tag on it, all unlit. Grey and not black on purpose: the capture
+## stage is near-black, and a black value is an invisible one.
+func _comp_ghost_one(sx: float, glyph: String) -> void:
+	var post_mat: StandardMaterial3D = _matte_mat(Color(0.34, 0.36, 0.42), 0.85, 0.3)
+	var face_mat: StandardMaterial3D = _matte_mat(Color(0.21, 0.22, 0.27), 0.95, 0.1)
+	add_child(_cylinder(Vector3(sx, COMP_Y + 0.15, COMP_Z), 0.05, 0.30, post_mat))
+	add_child(_torus(Vector3(sx, COMP_Y + 0.30, COMP_Z), 0.075, 0.016, post_mat))
+	add_child(_box(Vector3(sx, COMP_Y + 0.42, COMP_Z), Vector3(0.23, 0.27, 0.02), post_mat))
+	add_child(_box(Vector3(sx, COMP_Y + 0.42, COMP_Z + 0.016), Vector3(0.20, 0.24, 0.02), face_mat))
+	add_child(_comp_ink(glyph, Vector3(sx, COMP_Y + 0.42, COMP_Z + 0.035), 26, Color(0.52, 0.54, 0.60)))
+
+
+func _comp_ghost() -> void:
+	_comp_ghost_one(-COMP_X, COMP_A_GLYPH)
+	_comp_ghost_one(COMP_X, COMP_B_GLYPH)
+
+
+## SUPPLY — the referent is piped in. A lit conduit rises off the deck and elbows into
+## the chamber collar, in the colour the family gives it, tagged at the base.
+func _comp_supply_one(sx: float, glyph: String, col: Color) -> void:
+	var lit: StandardMaterial3D = _glow_mat(col, 1.6)
+	add_child(_torus(Vector3(sx, COMP_Y + 0.02, COMP_Z), 0.07, 0.018, _steel_mat(col.darkened(0.45))))
+	add_child(_cylinder(Vector3(sx, COMP_Y + 0.16, COMP_Z), 0.028, 0.28, lit))
+	add_child(_cylinder_between(Vector3(sx, COMP_Y + 0.28, COMP_Z), _comp_hub(), 0.026, lit))
+	add_child(_box(Vector3(sx, COMP_Y + 0.34, COMP_Z + 0.055), Vector3(0.13, 0.11, 0.015),
+		_matte_mat(Color(0.87, 0.86, 0.82), 0.55)))
+	add_child(_comp_ink(glyph, Vector3(sx, COMP_Y + 0.34, COMP_Z + 0.07), 20, Color(0.10, 0.11, 0.15)))
+
+
+func _comp_supply() -> void:
+	_comp_supply_one(-COMP_X, COMP_A_GLYPH, COMP_A_COLOR)
+	_comp_supply_one(COMP_X, COMP_B_GLYPH, COMP_B_COLOR)
+	# The intake collar rings the glass at the point of entry (r > the sphere's
+	# section there), rather than sitting inside it as a hidden disc.
+	add_child(_torus(_comp_hub(), 0.26, 0.022, _steel_mat(Color(0.55, 0.60, 0.72))))
+
+
+## REDACTION — the bench prints what it cut. A bone plate across the front skirt carries
+## the whole formula; the terms it runs are underlined in accent, and the two places
+## where the SYSTEM is named — (S) and (S,t) — go under matte-black bars.
+func _comp_formula_plate() -> void:
+	var py: float = 0.34
+	var pz: float = 0.29
+	var bone: StandardMaterial3D = _matte_mat(Color(0.87, 0.86, 0.82), 0.55)
+	var steel: StandardMaterial3D = _steel_mat(Color(0.42, 0.45, 0.52))
+	var bar: StandardMaterial3D = _matte_mat(Color(0.05, 0.05, 0.07), 0.98)
+	var ink: Color = Color(0.10, 0.11, 0.15)
+	add_child(_box(Vector3(0.0, py, pz - 0.012), Vector3(0.92, 0.28, 0.02), steel))
+	add_child(_box(Vector3(0.0, py, pz), Vector3(0.88, 0.24, 0.02), bone))
+	add_child(_comp_ink("QFE = F - λE", Vector3(-0.20, py, pz + 0.02), 13, ink))
+	add_child(_comp_ink("+ φΔE", Vector3(0.185, py, pz + 0.02), 13, ink))
+	# The terms it does run, underlined — the family's accent-box gesture.
+	var lit: StandardMaterial3D = _glow_mat(readout_col, 1.4)
+	add_child(_box(Vector3(-0.20, py - 0.075, pz + 0.011), Vector3(0.40, 0.012, 0.006), lit))
+	add_child(_box(Vector3(0.185, py - 0.075, pz + 0.011), Vector3(0.17, 0.012, 0.006), lit))
+	# The referent, struck out in both places it is named.
+	add_child(_box(Vector3(0.05, py, pz + 0.015), Vector3(0.12, 0.15, 0.012), bar))
+	add_child(_box(Vector3(0.355, py, pz + 0.015), Vector3(0.19, 0.15, 0.012), bar))
+
+
+func _comp_redaction() -> void:
+	_comp_formula_plate()
+
+
+## QUORUM — five instruments. Lit satellite dials for E and S stand with the three and
+## are linked into the chamber: the bench admits what its console left off.
+func _comp_quorum_one(sx: float, glyph: String, col: Color) -> void:
+	var steel: StandardMaterial3D = _steel_mat(Color(0.55, 0.60, 0.72))
+	add_child(_cylinder(Vector3(sx, COMP_Y + 0.24, COMP_Z), 0.035, 0.48, steel))
+	add_child(_box(Vector3(sx, COMP_Y + 0.50, COMP_Z), Vector3(0.20, 0.20, 0.015),
+		_matte_mat(Color(0.88, 0.90, 0.94), 0.4)))
+	var ring: MeshInstance3D = _torus(Vector3(sx, COMP_Y + 0.50, COMP_Z + 0.012), 0.115, 0.014,
+		_glow_mat(col, 2.0))
+	ring.rotation_degrees = Vector3(90.0, 0.0, 0.0)
+	add_child(ring)
+	var needle: MeshInstance3D = _box(Vector3(sx, COMP_Y + 0.548, COMP_Z + 0.03),
+		Vector3(0.014, 0.085, 0.012), _glow_mat(Color(1.0, 0.85, 0.40), 2.2))
+	needle.rotation_degrees = Vector3(0.0, 0.0, 22.0)
+	add_child(needle)
+	add_child(_comp_ink(glyph, Vector3(sx, COMP_Y + 0.455, COMP_Z + 0.03), 20, Color(0.10, 0.11, 0.15)))
+	add_child(_cylinder_between(Vector3(sx, COMP_Y + 0.50, COMP_Z),
+		_comp_hub() + Vector3(0.0, -0.02, 0.0), 0.014, _glow_mat(col, 1.2)))
+
+
+func _comp_quorum() -> void:
+	_comp_quorum_one(-COMP_X, COMP_A_GLYPH, COMP_A_COLOR)
+	_comp_quorum_one(COMP_X, COMP_B_GLYPH, COMP_B_COLOR)

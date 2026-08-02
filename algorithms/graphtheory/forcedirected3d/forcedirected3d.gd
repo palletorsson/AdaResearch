@@ -15,6 +15,73 @@ extends Node3D
 # relationships: Applies force physics to graph theory (forces as layout algorithm, not simulation). Contrasts with nbody_simulation (all-pairs gravity vs spring+repulsion). Lives in ForcesChaos.
 # truth: A good layout is a force equilibrium. The graph does not know its shape — physics finds it by minimizing energy.
 
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `mutuality`
+# ═══════════════════════════════════════════════════════════════════
+#
+# HOW MUCH MUTUAL REACHABILITY THE GRAPH HOLDS BEFORE THE PHYSICS EVER RUNS.
+# The word and the four values are taken WITHOUT CHANGE from tarjan_algorithm,
+# kosaraju_algorithm, rhizomatic_structure and network_analysis. Those answer it
+# by directed reachability or by a standing diagram; this one lets the answer be
+# FOUND — the layout is an equilibrium, so the connection pattern is not drawn,
+# it is the thing the springs and the repulsion negotiate over.
+#
+# THE AXIS IS THE EDGE SET, NOT THE STARTING POSITIONS. That distinction is the
+# whole design. `initial_distribution` already offers random / sphere / cube /
+# grid, and it would have been the obvious knob to promote — and it would have
+# been worthless, because this system CONVERGES: four starting arrangements of
+# the same graph are one object photographed four times. An edge set survives
+# settling. It survives more than that: it is legible at every instant of the
+# run, because 15 edges and 120 edges are two different pictures a tenth of a
+# second in.
+#
+#   pockets  the shipped random graph: every pair wired with probability 0.18,
+#            then a minimum spanning tree laid over the top to guarantee
+#            connectivity. ~28 edges, loose neighbourhoods, one loose blob.
+#   none     a pure binary tree — 15 edges over 16 nodes, every one a bridge, no
+#            cycle anywhere. With nothing pulling it closed, repulsion opens it
+#            into a spreading dendrite. This is the value that earns the axis: a
+#            graph with no mutual return path is the negative space a layout
+#            algorithm is usually hiding.
+#   split    two rings of eight, each node sprung to its three nearest ring
+#            neighbours, and EXACTLY ONE edge between the halves. Repulsion
+#            drives the halves apart and the single edge holds: a dumbbell.
+#   total    the complete graph on 16 nodes — all 120 pairs. Every spring pulls
+#            every pair to rest length at once, so the cloud collapses into a
+#            dense woven ball. Everything reaches everything, and it shows.
+@export_enum("pockets", "none", "split", "total") var mutuality: String = "pockets"
+
+## Allow-list. A typo in a map token falls back to the shipped random graph.
+const MUTUALITIES: PackedStringArray = ["pockets", "none", "split", "total"]
+
+## RNG SEED. -1 = randomize exactly as this artifact always has: the shipped
+## build draws node_count starting positions and node_count*(node_count-1)/2
+## edge coin-flips from the GLOBAL stream, so every launch is a different graph
+## and two renders of one setting are two different objects. Set a non-negative
+## number to pin it. The three non-default `mutuality` values seed themselves
+## (LAYOUT_SEED) whatever this says, because their edge sets are fixed and their
+## starting cloud has to be too.
+@export var layout_seed: int = -1
+
+## The seed the deterministic values use when layout_seed is left at -1.
+const LAYOUT_SEED: int = 20260802
+
+## `split` — how many ring neighbours each node is sprung to inside its half.
+const SPLIT_NEIGHBOURS: int = 3
+
+## Non-null only when a value needs repeatability; null keeps the global stream.
+var _rng: RandomNumberGenerator = null
+
+## Unrendered box (layers = 0) sized to the settled node cloud. Every AABB walk
+## in this project counts MeshInstance3D — and this artifact renders through
+## MultiMeshInstance3D exclusively, so the DNA sweep measured a 40 m graph as a
+## 1 m fallback box and put the camera 5.6 m from the origin, inside the cloud.
+## It is parented under nodes_container, NOT under the root: the grid's
+## auto-ground walk (GridInteractablesComponent._compute_local_aabb) looks at
+## direct children only, so a root-level anchor would start grounding an
+## artifact that has never been grounded and move it in all five of its maps.
+var _frame_anchor: MeshInstance3D = null
+
 @export_category("Graph Configuration")
 @export var node_count: int = 20
 @export var edge_probability: float = 0.15  # Probability of connection between nodes
@@ -125,6 +192,7 @@ var spatial_hash: Dictionary = {}
 var hash_cell_size: float = 10.0
 
 func _ready() -> void:
+	_open_rng()
 	setup_environment()
 	setup_containers()
 	setup_ui()
@@ -220,15 +288,23 @@ func initialize_graph() -> void:
 		nodes.append(node)
 		adjacency_list[i] = []
 	
+	# `mutuality` replaces the whole edge set; the shipped coin-flip graph below
+	# is left untouched so the default draws its RNG in exactly the old order.
+	if mutuality != "pockets":
+		_build_edges_for_mutuality()
+		calculate_node_degrees()
+		print("Created 3D graph with ", nodes.size(), " nodes and ", edges.size(), " edges")
+		return
+
 	# Create edges based on probability
 	for i in range(node_count):
 		for j in range(i + 1, node_count):
-			if randf() < edge_probability:
+			if _rf() < edge_probability:
 				create_edge(i, j)
-	
+
 	# Ensure graph connectivity
 	ensure_connectivity()
-	
+
 	# Calculate node degrees
 	calculate_node_degrees()
 	
@@ -239,14 +315,14 @@ func get_initial_position(node_id: int) -> Vector3:
 	match initial_distribution:
 		"random":
 			return Vector3(
-				randf_range(-layout_bounds.x/2, layout_bounds.x/2),
-				randf_range(-layout_bounds.y/2, layout_bounds.y/2),
-				randf_range(-layout_bounds.z/2, layout_bounds.z/2)
+				_rf_range(-layout_bounds.x/2, layout_bounds.x/2),
+				_rf_range(-layout_bounds.y/2, layout_bounds.y/2),
+				_rf_range(-layout_bounds.z/2, layout_bounds.z/2)
 			)
 		"sphere":
 			var radius = min(layout_bounds.x, layout_bounds.y, layout_bounds.z) * 0.4
-			var phi = randf() * 2.0 * PI
-			var theta = acos(1 - 2 * randf())
+			var phi = _rf() * 2.0 * PI
+			var theta = acos(1 - 2 * _rf())
 			return Vector3(
 				radius * sin(theta) * cos(phi),
 				radius * sin(theta) * sin(phi),
@@ -255,9 +331,9 @@ func get_initial_position(node_id: int) -> Vector3:
 		"cube":
 			var edge_length = min(layout_bounds.x, layout_bounds.y, layout_bounds.z) * 0.8
 			return Vector3(
-				randf_range(-edge_length/2, edge_length/2),
-				randf_range(-edge_length/2, edge_length/2),
-				randf_range(-edge_length/2, edge_length/2)
+				_rf_range(-edge_length/2, edge_length/2),
+				_rf_range(-edge_length/2, edge_length/2),
+				_rf_range(-edge_length/2, edge_length/2)
 			)
 		"grid":
 			var grid_size = int(ceil(pow(node_count, 1.0/3.0)))
@@ -345,6 +421,7 @@ func create_node_visuals() -> void:
 	_node_multimesh_instance.name = "NodeMultiMesh"
 	_node_multimesh_instance.multimesh = mm
 	nodes_container.add_child(_node_multimesh_instance)
+	_stand_frame_anchor()
 
 	# Set initial transforms and colors, create labels
 	_node_labels.clear()
@@ -634,6 +711,7 @@ func update_node_visuals() -> void:
 	"""Update node positions and colors via MultiMesh"""
 	if not _node_multimesh_instance:
 		return
+	_stand_frame_anchor()
 	var mm := _node_multimesh_instance.multimesh
 	for i in nodes.size():
 		var node := nodes[i]
@@ -859,4 +937,103 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Only the declared axis (and its seed) are read; every other key in a map
+	# token is ignored exactly as before.
+	if config.has("layout_seed"):
+		layout_seed = int(str(config["layout_seed"]))
+	if not config.has("mutuality"):
+		return
+	mutuality = str(config["mutuality"])
+	_open_rng()
+	reset_simulation()
+
+
+# ═══════════════════════════════════════════════════════════════════
+# `mutuality` — APPENDED LAST. Nothing above this line changed order.
+# ═══════════════════════════════════════════════════════════════════
+
+## Seeded only when repeatability is needed. At the shipped value with the
+## shipped seed this leaves _rng null, so every draw goes to the global stream
+## in exactly the old order.
+func _open_rng() -> void:
+	var want: String = String(mutuality).strip_edges().to_lower()
+	if not MUTUALITIES.has(want):
+		want = "pockets"
+	mutuality = want
+	if layout_seed < 0 and want == "pockets":
+		_rng = null
+		return
+	_rng = RandomNumberGenerator.new()
+	_rng.seed = layout_seed if layout_seed >= 0 else LAYOUT_SEED
+
+
+func _rf() -> float:
+	return _rng.randf() if _rng != null else randf()
+
+
+func _rf_range(a: float, b: float) -> float:
+	return _rng.randf_range(a, b) if _rng != null else randf_range(a, b)
+
+
+## The edge set that carries the claim. ensure_connectivity() is DELIBERATELY not
+## called for any of these: it lays a minimum spanning tree over whatever exists
+## without looking at the existing edges, which would add 15 chords to the tree
+## and quietly give `none` the cycles it exists to refuse.
+func _build_edges_for_mutuality() -> void:
+	match mutuality:
+		"none":
+			# A binary tree: node i hangs off (i-1)/2. node_count-1 edges, no cycle.
+			for i in range(1, node_count):
+				create_edge(int((i - 1) / 2), i)
+		"split":
+			var half: int = int(node_count / 2)
+			var rest: int = node_count - half
+			for k in range(1, SPLIT_NEIGHBOURS + 1):
+				if k * 2 < half:
+					for i in range(half):
+						create_edge(i, (i + k) % half)
+				if k * 2 < rest:
+					for i in range(rest):
+						create_edge(half + i, half + (i + k) % rest)
+			if half > 0 and rest > 0:
+				create_edge(0, half)          # the single thread between the halves
+		"total":
+			for i in range(node_count):
+				for j in range(i + 1, node_count):
+					create_edge(i, j)
+
+
+## Resize the unrendered framing box to the current node cloud. Cheap, and it
+## has to track: the cloud starts on a 20 m sphere shell and the four values
+## settle to four different extents, so a fixed box would frame the tightest
+## value from as far away as the loosest.
+func _stand_frame_anchor() -> void:
+	if nodes.is_empty():
+		return
+	# is_queued_for_deletion matters: reset_simulation() frees every child of
+	# nodes_container, and a deferred free is still "valid" for the rest of the
+	# frame — reusing it would leave the rebuilt graph with no anchor at all.
+	if (_frame_anchor == null or not is_instance_valid(_frame_anchor)
+			or _frame_anchor.is_queued_for_deletion()):
+		_frame_anchor = MeshInstance3D.new()
+		_frame_anchor.name = "FrameAnchor"
+		_frame_anchor.mesh = BoxMesh.new()
+		# NEVER visible = false: Godot visibility is hierarchical and the AABB
+		# walks ignore it anyway. layers = 0 renders nothing and still measures.
+		_frame_anchor.layers = 0
+		_frame_anchor.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		if nodes_container != null:
+			nodes_container.add_child(_frame_anchor)
+		else:
+			add_child(_frame_anchor)
+	var lo: Vector3 = nodes[0].position
+	var hi: Vector3 = nodes[0].position
+	for node in nodes:
+		lo = Vector3(minf(lo.x, node.position.x), minf(lo.y, node.position.y),
+			minf(lo.z, node.position.z))
+		hi = Vector3(maxf(hi.x, node.position.x), maxf(hi.y, node.position.y),
+			maxf(hi.z, node.position.z))
+	var pad := Vector3(2.0, 2.0, 2.0)      # node radius 0.5 plus the ID labels
+	var box: BoxMesh = _frame_anchor.mesh
+	box.size = (hi - lo) + pad * 2.0
+	_frame_anchor.position = (lo + hi) * 0.5

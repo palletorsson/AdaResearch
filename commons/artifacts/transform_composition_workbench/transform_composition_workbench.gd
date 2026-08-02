@@ -59,6 +59,42 @@ class_name TransformCompositionWorkbench
 @export var badge_color_commutes: Color = Color(0.40, 1.00, 0.55)
 @export var badge_color_noncommutes: Color = Color(1.00, 0.40, 0.40)
 
+@export_group("Workings")
+## AXIS — HOW MUCH OF ITS WORKING THE BENCH PUTS ON THE TABLE. Every value computes
+## the same two compositions; they differ in what the bench is willing to show of the
+## computing. The argument underneath is whether a transform is a THING you receive or
+## a SEQUENCE you go through — and the four values take that dispute seriously enough
+## to change the furniture.
+##
+##   outcome     the legacy lineage, byte for byte. Ghost in the middle, the two
+##               results on their columns, one gold arrow to each. A composition is a
+##               destination: you are handed where you ended up, and the arrow is a
+##               displacement, not a route.
+##   trace       the halfway states get built. A pale tinted tetrahedron stands at
+##               half-spread on each side — the shape AFTER T1 alone (left) and AFTER
+##               T2 alone (right) — each carrying its operator tag, and the direct
+##               arrows go dark while a two-segment arrow bends through the waypoint.
+##               Five shapes instead of three. This is the value that pays: on pair 2
+##               the two ENDPOINTS coincide and the badge says "commutes", but the two
+##               waypoints are visibly different objects. Even a commuting pair takes
+##               two different roads to the same place.
+##   operands    the ingredients laid out below the stage on a shelf: T1 alone acting
+##               on the base, then T2 alone acting on the base, each as a ghost→result
+##               couple with a gold link and a stencilled operator tag. The composition
+##               is taken apart into the two things it was made of; the stage above
+##               keeps showing what they make together.
+##   expression  the algebra promoted over the geometry. A wide dark board across the
+##               top of the stage writes both orderings out with the operators
+##               substituted — "T2∘T1 = S(×1.5) ∘ R_z(+60°)" — and a verdict line, and
+##               a small tag pins the expression for each column directly above the
+##               shape it names. Order becomes something WRITTEN, read right to left.
+##
+## The trajectory arrows are the pivot, the way the lit seam is on station_wall: they
+## are the brightest non-text pixels on the stage, and `trace` is the only value that
+## breaks them in two.
+@export_enum("outcome", "trace", "operands", "expression") var workings: String = "outcome"
+const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
+
 # ── Internal state ────────────────────────────────────────────────────
 
 const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
@@ -104,6 +140,10 @@ var _right_root: Node3D            # T1∘T2
 
 var _left_traj_root: Node3D
 var _right_traj_root: Node3D
+
+# WORKINGS dressing lives here and nowhere else — created last inside the stage so
+# every child index above it is untouched, and emptied on "outcome".
+var _workings_root: Node3D
 
 var _readout_root: Node3D
 var _readout_block_root: Node3D       # holds the rebuilt multi-line composition panel
@@ -291,6 +331,12 @@ func _build_stage() -> void:
 	_right_traj_root.name = "Trajectory_Right"
 	_stage_root.add_child(_right_traj_root)
 
+	# WORKINGS holder — added LAST so the five nodes above keep their indices and
+	# positions on the legacy path. Stays empty for "outcome".
+	_workings_root = Node3D.new()
+	_workings_root.name = "Workings"
+	_stage_root.add_child(_workings_root)
+
 
 func _refresh_stage() -> void:
 	# Wipe previous geometry.
@@ -352,6 +398,21 @@ func _refresh_stage() -> void:
 	var right_traj := _build_trajectory_arrow(ghost_centroid_disp, right_centroid_disp, color_right)
 	if right_traj:
 		_right_traj_root.add_child(right_traj)
+
+	# WORKINGS dressing, built LAST so nothing above it moves. "outcome" falls
+	# through and adds nothing at all — the legacy lineage.
+	if _workings_root != null:
+		for c in _workings_root.get_children():
+			c.queue_free()
+		match workings:
+			"trace":
+				_workings_trace(pair, t1, t2, base_centroid, ghost_centroid_disp)
+			"operands":
+				_workings_operands(pair, t1, t2, base_centroid)
+			"expression":
+				_workings_expression(pair, t1, t2)
+			_:
+				pass                                   # "outcome" — the legacy lineage
 
 
 # Build a Transform3D that:
@@ -751,3 +812,195 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("stage_display_scale"):
 		stage_display_scale = float(config_data["stage_display_scale"])
 		_refresh_all()
+	if config_data.has("workings"):
+		# Normalising read — an unknown word keeps the default rather than blanking
+		# the stage, so a typo in a map token can never publish an empty bench.
+		var _w: String = str(config_data["workings"]).strip_edges().to_lower()
+		if WORKINGS.has(_w):
+			workings = _w
+			_refresh_all()
+
+
+# ── WORKINGS ─────────────────────────────────────────────────────────────────
+# One axis, four values, all appended after the legacy stage is complete. Each
+# builder writes only into _workings_root (plus, for "trace", it drops the two
+# direct arrows out of every render layer — layers = 0 on the MeshInstance3D, NOT
+# visible = false, which would take the holder's whole subtree with it).
+
+
+## TRACE — the halfway states. The left column shows T2∘T1, so its waypoint is the
+## base after T1 ALONE; the right column shows T1∘T2, so its waypoint is the base
+## after T2 alone. Each stands at half spread with its operator tag, and the gold
+## arrow is rebuilt in two segments that bend through it. On pair 2 (rotation ×
+## uniform scale) the endpoints coincide — and the waypoints do not.
+func _workings_trace(pair: Dictionary, t1: Transform3D, t2: Transform3D,
+		base_centroid: Vector3, ghost_centroid_disp: Vector3) -> void:
+	# The direct ghost→result arrows are the claim "a composition is a displacement".
+	# Trace disputes that, so it retires them.
+	_hide_instances(_left_traj_root)
+	_hide_instances(_right_traj_root)
+
+	var half: float = stage_spread * 0.5
+	var steps: Array = [
+		{"xform": t1, "col": Vector3(-half, 0.0, 0.0), "tint": color_left,
+			"tag": str(pair["t1_short"]), "end": Vector3(-stage_spread, 0.0, 0.0),
+			"end_xform": t2 * t1},
+		{"xform": t2, "col": Vector3(half, 0.0, 0.0), "tint": color_right,
+			"tag": str(pair["t2_short"]), "end": Vector3(stage_spread, 0.0, 0.0),
+			"end_xform": t1 * t2},
+	]
+
+	for s in steps:
+		var mid_xform: Transform3D = s["xform"]
+		var col: Vector3 = s["col"]
+		var tint: Color = s["tint"]
+
+		# The waypoint shape — the same tetrahedron, held mid-computation. Transparent
+		# so it reads as a state passed through rather than a third answer.
+		var way := _build_tet_shape(Color(tint.r, tint.g, tint.b, 0.34), true)
+		way.transform = _stage_transform(mid_xform, col)
+		_workings_root.add_child(way)
+
+		# Two-segment arrow: ghost → waypoint → result. Same gold family as the
+		# direct arrow it replaces, so the eye follows a ROUTE, not a jump.
+		var mid_c: Vector3 = col + (mid_xform * base_centroid) * stage_display_scale
+		var end_c: Vector3 = (s["end"] as Vector3) + ((s["end_xform"] as Transform3D) * base_centroid) * stage_display_scale
+		var leg_a := _build_trajectory_arrow(ghost_centroid_disp, mid_c, tint)
+		if leg_a:
+			_workings_root.add_child(leg_a)
+		var leg_b := _build_trajectory_arrow(mid_c, end_c, tint)
+		if leg_b:
+			_workings_root.add_child(leg_b)
+
+		# Which single operation got you here.
+		var tag: Node3D = BakedText.make_tag(
+			str(s["tag"]), Color(0.92, 0.95, 1.0), 0.038,
+			Color(0.05, 0.06, 0.09), true, tint)
+		if tag:
+			tag.position = col + Vector3(0.0, 0.30, 0.02)
+			_workings_root.add_child(tag)
+
+
+## OPERANDS — the two transformations pulled out of the composition and shown acting
+## alone, on a shelf under the stage: ghost → gold link → result, twice, each under a
+## stencilled operator tag. The stage above still shows what they make together, so
+## the frame carries both the parts and the product.
+func _workings_operands(pair: Dictionary, t1: Transform3D, t2: Transform3D,
+		base_centroid: Vector3) -> void:
+	var shelf_y: float = -0.34
+	var s: float = stage_display_scale * 0.62
+	var gap: float = 0.13
+
+	# A thin shelf bar so the operands read as SET DOWN, not floating loose.
+	var bar := MeshInstance3D.new()
+	bar.name = "OperandShelf"
+	var bar_mesh := BoxMesh.new()
+	bar_mesh.size = Vector3(stage_spread * 2.0 + 0.22, 0.012, 0.05)
+	bar.mesh = bar_mesh
+	var bar_mat := StandardMaterial3D.new()
+	bar_mat.albedo_color = Color(0.16, 0.18, 0.24)
+	bar_mat.roughness = 0.8
+	bar.material_override = bar_mat
+	bar.position = Vector3(0.0, shelf_y - 0.09, -0.02)
+	bar.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_workings_root.add_child(bar)
+
+	var slots: Array = [
+		{"xform": t1, "cx": -stage_spread * 0.72, "tint": color_left, "tag": str(pair["t1_short"])},
+		{"xform": t2, "cx": stage_spread * 0.72, "tint": color_right, "tag": str(pair["t2_short"])},
+	]
+
+	for slot in slots:
+		var cx: float = slot["cx"]
+		var xf: Transform3D = slot["xform"]
+		var tint: Color = slot["tint"]
+
+		# The base, untouched.
+		var g := _build_tet_shape(color_ghost, true)
+		g.transform = Transform3D(Basis.IDENTITY.scaled(Vector3.ONE * s),
+			Vector3(cx - gap, shelf_y, 0.0))
+		_workings_root.add_child(g)
+
+		# The base after this ONE operation.
+		var r := _build_tet_shape(tint, false)
+		var r_basis: Basis = xf.basis.scaled(Vector3.ONE * s)
+		r.transform = Transform3D(r_basis, Vector3(cx + gap, shelf_y, 0.0) + xf.origin * s)
+		_workings_root.add_child(r)
+
+		# The single hop between them.
+		var link := _build_trajectory_arrow(
+			Vector3(cx - gap, shelf_y, 0.0) + base_centroid * s,
+			Vector3(cx + gap, shelf_y, 0.0) + (xf * base_centroid) * s,
+			tint)
+		if link:
+			_workings_root.add_child(link)
+
+		var tag: Node3D = BakedText.make_tag(
+			str(slot["tag"]), Color(0.92, 0.95, 1.0), 0.040,
+			Color(0.05, 0.06, 0.09), true, tint)
+		if tag:
+			tag.position = Vector3(cx, shelf_y - 0.16, 0.02)
+			_workings_root.add_child(tag)
+
+
+## EXPRESSION — the algebra promoted over the geometry. A wide dark board across the
+## top of the stage writes both orderings out with the operators substituted, plus a
+## verdict line; a small tag over each column pins that column's expression to the
+## shape it names. Composition stops being a picture and becomes notation you read
+## right to left.
+func _workings_expression(pair: Dictionary, t1: Transform3D, t2: Transform3D) -> void:
+	var t1s: String = str(pair["t1_short"])
+	var t2s: String = str(pair["t2_short"])
+
+	var base_c: Vector3 = _shape_centroid()
+	var d: float = ((t2 * t1) * base_c).distance_to((t1 * t2) * base_c)
+	var commutes: bool = d <= commutes_tolerance
+	var verdict: String = ("T2∘T1 = T1∘T2   this pair commutes" if commutes
+		else "T2∘T1 ≠ T1∘T2   order is the operation")
+
+	var bw: float = stage_spread * 2.0 + 0.30
+	var bh: float = 0.30
+
+	var plate: MeshInstance3D = BakedText.make_panel_mesh(
+		" ", Color(0.03, 0.05, 0.08), Color(0.03, 0.05, 0.08), Vector2(bw, bh))
+	if plate:
+		plate.name = "ExpressionPlate"
+		plate.position = Vector3(0.0, 0.66, -0.03)
+		_workings_root.add_child(plate)
+
+	var block: Node3D = BakedText.make_text_block(
+		["left   T2∘T1  =  %s ∘ %s" % [t2s, t1s],
+		 "right  T1∘T2  =  %s ∘ %s" % [t1s, t2s],
+		 verdict],
+		Color(0.90, 0.94, 1.0), 0.062, bw * 0.92, 0.016, true)
+	if block:
+		block.name = "ExpressionBlock"
+		block.position = Vector3(0.0, 0.66, -0.02)
+		_workings_root.add_child(block)
+
+	# The expression pinned over the object it names.
+	var left_tag: Node3D = BakedText.make_tag(
+		"%s ∘ %s" % [t2s, t1s], Color(0.92, 0.95, 1.0), 0.040,
+		Color(0.05, 0.06, 0.09), true, color_left)
+	if left_tag:
+		left_tag.position = Vector3(-stage_spread, 0.34, 0.02)
+		_workings_root.add_child(left_tag)
+
+	var right_tag: Node3D = BakedText.make_tag(
+		"%s ∘ %s" % [t1s, t2s], Color(0.92, 0.95, 1.0), 0.040,
+		Color(0.05, 0.06, 0.09), true, color_right)
+	if right_tag:
+		right_tag.position = Vector3(stage_spread, 0.34, 0.02)
+		_workings_root.add_child(right_tag)
+
+
+## Drop every VisualInstance3D under `root` out of all render layers. Per-instance,
+## so the mesh, the material and the subtree all survive — unlike `visible = false`,
+## which is hierarchical and would take the arrow holder's children with it.
+func _hide_instances(root: Node) -> void:
+	if root == null:
+		return
+	for n in root.get_children():
+		if n is VisualInstance3D:
+			(n as VisualInstance3D).layers = 0
+		_hide_instances(n)

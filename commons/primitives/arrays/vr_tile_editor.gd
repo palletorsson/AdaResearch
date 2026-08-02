@@ -33,6 +33,25 @@ extends Node3D
 @export var show_wall_preview: bool = true
 @export var wall_preview_size: Vector2 = Vector2(2.0, 2.0)
 
+@export_group("DNA")
+## AXIS — WHICH BOUNDARY THE FIELD ADMITS. You edit a 4x4 tile in your hands and the floor
+## under your feet becomes it, eight times over in each direction — and the floor arrives
+## seamless, as if it had always been that, with nothing in it to say where one copy ends.
+## That silence is the strongest claim the room makes and it is never argued for. What the
+## carpet declares about its own repetition is the axis.
+##
+##   none      the legacy lineage, byte for byte — an unbroken field, the repeat denied
+##   edge      only the outer kerb: the floor admits it is a made object with an end, and
+##             still says nothing about repeating
+##   cell      one unit cell framed and posted, once, among its copies — the tile you are
+##             holding, found in the floor and named
+##   lattice   a batten on every unit boundary: the floor re-read as the array it is
+##
+## Shared word for word with [[pattern_maker_station]], the same species one room over.
+## One question, one vocabulary.
+@export_enum("none", "edge", "cell", "lattice") var boundary: String = "none"
+const BOUNDARIES: PackedStringArray = ["none", "edge", "cell", "lattice"]
+
 # --- Internal ---
 
 var _puzzle: Node  ## PatternTilePuzzle instance
@@ -52,6 +71,9 @@ func _ready() -> void:
 		_create_wall_preview()
 	_create_labels()
 	_find_controllers()
+	# DNA: appended LAST, after the puzzle, the carpet, the wall preview and the labels, so
+	# every child index above it is what it was. "none" adds nothing.
+	_build_boundary()
 	call_deferred("_apply_initial_config")
 	call_deferred("_update_carpet_texture")
 
@@ -364,6 +386,123 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		if quad and quad.size != carpet_size:
 			quad.size = carpet_size
 
+	if config_data.has("boundary"):
+		var bnd_tok: String = str(config_data["boundary"]).strip_edges().to_lower()
+		boundary = bnd_tok if BOUNDARIES.has(bnd_tok) else boundary
+	# Rebuilt here as well as in _ready, because the grid calls this DEFERRED — a map token
+	# arrives after the carpet has already been laid.
+	_build_boundary()
+
 	# Refresh
 	_update_carpet_texture()
 	_update_mode_label()
+
+
+# ═══════════════════════════════════════════════════════════════════
+# BOUNDARY — one axis, four answers to "what does this field admit"
+# ═══════════════════════════════════════════════════════════════════
+# Laid on the carpet plane and touching nothing else: the tile texture, the puzzle, the wall
+# preview and the VR routing are untouched, and no collider is added — you can still walk
+# across your own floor. "none" returns before building anything.
+
+var _boundary_root: Node3D
+
+
+func _build_boundary() -> void:
+	if is_instance_valid(_boundary_root):
+		_boundary_root.queue_free()
+		_boundary_root = null
+	if boundary == "none":
+		return
+	var sx: float = maxf(carpet_size.x, 0.2)
+	var sz: float = maxf(carpet_size.y, 0.2)
+	var nx: int = clampi(carpet_repeats.x, 1, 32)
+	var nz: int = clampi(carpet_repeats.y, 1, 32)
+	var cx: float = sx / float(nx)
+	var cz: float = sz / float(nz)
+	var cell: float = minf(cx, cz)
+
+	var root := Node3D.new()
+	root.name = "Boundary"
+	root.position = carpet_offset + Vector3(0, 0.004, 0)
+	add_child(root)
+	_boundary_root = root
+
+	var stone := StandardMaterial3D.new()
+	stone.albedo_color = Color(0.87, 0.85, 0.79)
+	stone.roughness = 0.55
+	stone.metallic = 0.05
+
+	match boundary:
+		"edge":
+			_boundary_kerb(root, sx, sz, cell, stone)
+		"cell":
+			_boundary_cell(root, sx, sz, cx, cz, nx, nz, stone)
+		"lattice":
+			_boundary_lattice(root, sx, sz, cx, cz, nx, nz, stone)
+		_:
+			pass
+
+
+## EDGE — a kerb round the whole carpet, set just inside so it lands on the weave rather
+## than floating off it.
+func _boundary_kerb(root: Node3D, sx: float, sz: float, cell: float, mat: Material) -> void:
+	var k: float = cell * 0.30
+	var t: float = cell * 0.22
+	var ex: float = sx * 0.5 - k * 0.5
+	var ez: float = sz * 0.5 - k * 0.5
+	root.add_child(_bnd_box(Vector3(0, t * 0.5, -ez), Vector3(sx, t, k), mat))
+	root.add_child(_bnd_box(Vector3(0, t * 0.5, ez), Vector3(sx, t, k), mat))
+	root.add_child(_bnd_box(Vector3(-ex, t * 0.5, 0), Vector3(k, t, sz), mat))
+	root.add_child(_bnd_box(Vector3(ex, t * 0.5, 0), Vector3(k, t, sz), mat))
+
+
+## CELL — ONE unit cell framed and posted, aligned to a real tile boundary (the tiles run
+## from -side/2 in steps of one cell, so with an even repeat count the geometric centre is a
+## JOIN, and a frame drawn there would straddle four copies).
+func _boundary_cell(root: Node3D, sx: float, sz: float, cx: float, cz: float,
+		nx: int, nz: int, mat: Material) -> void:
+	var ax: float = -sx * 0.5 + (float(nx / 2) + 0.5) * cx
+	var az: float = -sz * 0.5 + (float(nz / 2) + 0.5) * cz
+	var cell: float = minf(cx, cz)
+	var b: float = cell * 0.12
+	var t: float = cell * 0.25
+	var hx: float = cx * 0.5
+	var hz: float = cz * 0.5
+	root.add_child(_bnd_box(Vector3(ax, t * 0.5, az - hz), Vector3(cx + b, t, b), mat))
+	root.add_child(_bnd_box(Vector3(ax, t * 0.5, az + hz), Vector3(cx + b, t, b), mat))
+	root.add_child(_bnd_box(Vector3(ax - hx, t * 0.5, az), Vector3(b, t, cz + b), mat))
+	root.add_child(_bnd_box(Vector3(ax + hx, t * 0.5, az), Vector3(b, t, cz + b), mat))
+	var p: float = cell * 0.18
+	var ph: float = cell * 0.55
+	for raw_ox in [-1.0, 1.0]:
+		var ox: float = float(raw_ox)
+		for raw_oz in [-1.0, 1.0]:
+			var oz: float = float(raw_oz)
+			root.add_child(_bnd_box(Vector3(ax + ox * hx, ph * 0.5, az + oz * hz),
+				Vector3(p, ph, p), mat))
+
+
+## LATTICE — a batten on every internal unit boundary. The outer edge is left to `edge`, so
+## the two values stay separate claims.
+func _boundary_lattice(root: Node3D, sx: float, sz: float, cx: float, cz: float,
+		nx: int, nz: int, mat: Material) -> void:
+	var cell: float = minf(cx, cz)
+	var b: float = cell * 0.10
+	var t: float = cell * 0.12
+	for i in range(1, nx):
+		root.add_child(_bnd_box(Vector3(-sx * 0.5 + float(i) * cx, t * 0.5, 0),
+			Vector3(b, t, sz), mat))
+	for j in range(1, nz):
+		root.add_child(_bnd_box(Vector3(0, t * 0.5, -sz * 0.5 + float(j) * cz),
+			Vector3(sx, t, b), mat))
+
+
+func _bnd_box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi

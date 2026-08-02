@@ -10,8 +10,38 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 # triggers: _ready/_read_metadata_overrides/_build from DNA; apply_grid_config rebuilds at a new length/style.
 # emerges: "line" = a hairline of light tying a set together; "path" = a dashed runner with chevrons that reads as a direction of travel; "threshold" = a crossing bar with ticks that says "you are entering". Direction turns a neutral strip into an arrow you walk.
 # needs: a recessed inlay channel set into the floor [present]; a flush emissive accent run [present]; per-style dressing — solid groove / dashed segments + chevrons / wide bar + end ticks [present]; an optional grime band where the inlay meets the floor [optional].
-# relationships: the BETWEEN-sibling of [[station_plinth]] (the plinth isolates a thing; the floorline connects two of them); routes the set the [[station_stage]] holds; laid + aimed by [[curation_station]]; the floor-bound complement of the overhead [[station_luminaire]].
+# relationships: the BETWEEN-sibling of [[station_plinth]] (the plinth isolates a thing; the floorline connects two of them); routes the set the [[station_stage]] holds; laid + aimed by [[curation_station]]; the floor-bound complement of the overhead [[station_luminaire]]; KIN of [[station_pillar]], [[station_crates]] and [[station_wall]] — one `upkeep` vocabulary across the kit, the route telling the same time as the structure.
 # truth: a floorline is a claim that meaning lives in the relation, not only the object. The ground that points is already an argument — it says these two belong to one walk, and the body agrees with its feet before the mind reads a word.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# This artifact's truth line says the ground that points is already an argument —
+# that a route is a claim about a walk somebody takes. But the route had no time.
+# Every one of its 19 placements renders the same instant: freshly inlaid, lit,
+# unobstructed, the walk always available. A path that can only be open cannot
+# say anything about a bay where the walk is shut.
+#
+#   upkeep   WHICH MOMENT of the working life   service · works · store · scrap
+#
+#   service  in commission — the legacy lineage, byte for byte
+#   works    mid-job       — a trestle barrier standing ACROSS the run, cable laid beside it, WORKS
+#   store    packed down   — a board runner sheeted over the whole strip and banded; the light is under it
+#   scrap    robbed        — the lit run lifted out, a dead channel, two cover plates leaning, tape across
+#
+# The lit run is the pivot, exactly as the groove is on the pillar and the seam is
+# on the wall: it is the only emissive surface the piece has and so owns the
+# brightest pixels in any frame it appears in. `store` covers it and `scrap`
+# rebuilds it as dead metal — the difference between a route that is on and a
+# route that is not, visible from across a room rather than only under measurement.
+#
+# What it cost: two guards inside `_build()`/`_build_threshold()` where there used
+# to be a straight `_emi()` call. Both are written so `service` evaluates to the
+# old expression, and the dressing is appended LAST so no child index above moves.
+#
+# Deliberately NOT routed through upkeep: `length_cells`, `width` and `direction`.
+# The composer lays a floorline to reach exactly between two bays and aims it; an
+# upkeep value that changed the run or the arrow would tear the route it was laid
+# to make. Upkeep dresses the strip; it never re-routes it.
+# ─────────────────────────────────────────────────────────────────────────────
 
 @export_group("Grid")
 ## Length of the run in 1 m cells along +X. The strip is laid centred on the floor; it joins one bay to the next.
@@ -28,6 +58,19 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var style: String = "line"
 ## Which way the relation points: 1 = chevrons toward +X, -1 = toward -X, 0 = no chevrons (a neutral join).
 @export var direction: int = 1
+
+## AXIS — WHICH MOMENT of the working life this run of floor is caught in. Adopted word for
+## word from [[station_pillar]], [[station_crates]] and [[station_wall]], which already share
+## it: one kit, one vocabulary, so a bay whose corners read "packed down" cannot have a route
+## through it that still reads "in commission". curation_station passes its own #upkeep: down
+## to everything it composes.
+##
+##   service  in commission — the legacy lineage, byte for byte
+##   works    mid-job       — a trestle barrier across the run, a cable laid beside it
+##   store    packed down   — a board runner sheeted over the whole strip and banded
+##   scrap    robbed        — the lit run lifted out, plates leaning, tape across the channel
+@export var upkeep: String = "service"
+const UPKEEPS: PackedStringArray = ["service", "works", "store", "scrap"]
 
 @export_group("Surface")
 @export var wear: float = 0.08
@@ -66,6 +109,9 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_proud"): proud = float(str(get_meta("config_proud")))
 	if has_meta("config_style"): style = str(get_meta("config_style")).to_lower()
 	if has_meta("config_direction"): direction = int(str(get_meta("config_direction")))
+	if has_meta("config_upkeep"):
+		var _u: String = str(get_meta("config_upkeep")).strip_edges().to_lower()
+		upkeep = _u if UPKEEPS.has(_u) else upkeep
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
 	if has_meta("config_grime"): grime = _b(get_meta("config_grime"))
 	if has_meta("config_body_color"): body_color = _pc(str(get_meta("config_body_color")), body_color)
@@ -84,7 +130,12 @@ func _build() -> void:
 
 	var body_mat := _mat(body_color)
 	var frame_mat := _mat(body_color.darkened(0.16))
-	var lit := _emi(accent_color, 0.7)
+	# `scrap` lifts the lit run out of the channel: the same geometry is rebuilt in dead worn
+	# metal, so the strip keeps its shape and loses its light. Every other value evaluates to
+	# the old expression, byte for byte.
+	var lit: Material = _emi(accent_color, 0.7)
+	if upkeep == "scrap":
+		lit = HangarKit.worn_metal(body_color.darkened(0.58))
 
 	# Recessed inlay channel: a slightly oversized darker frame set into the floor, with the proud body
 	# plate on top of it — so the strip reads as a channel cut into the ground (Rams "let the join show"),
@@ -100,6 +151,18 @@ func _build() -> void:
 		"path": _build_path(length, w, ph, lit)
 		"threshold": _build_threshold(length, w, ph, lit)
 		_: _build_line(length, w, ph, lit)
+
+	# UPKEEP dressing, appended LAST so every child index and position above is untouched
+	# on the legacy path. "service" falls through and adds nothing at all.
+	match upkeep:
+		"works":
+			_upkeep_works(length, w, ph)
+		"store":
+			_upkeep_store(length, w, ph)
+		"scrap":
+			_upkeep_scrap(length, w, ph)
+		_:
+			pass                                  # "service" — the legacy lineage
 
 
 func _build_line(length: float, w: float, ph: float, lit: Material) -> void:
@@ -134,7 +197,11 @@ func _build_threshold(length: float, w: float, ph: float, lit: Material) -> void
 	var field_w: float = maxf(w - FRAME_MARGIN * 2.0, 0.06)
 	add_child(_box(Vector3(0, ph + 0.004, 0), Vector3(length - 0.12, 0.014, field_w), lit))
 	# End ticks: short bright bars across the full width at each end of the bar.
-	var tick_mat := _emi(accent_color, 1.0)
+	# Dead under `scrap` for the same reason the run is: the ticks are part of the lit fitting
+	# that was lifted out. `service`, `works` and `store` evaluate to the old expression.
+	var tick_mat: Material = _emi(accent_color, 1.0)
+	if upkeep == "scrap":
+		tick_mat = HangarKit.worn_metal(body_color.darkened(0.5))
 	var ex: float = length * 0.5 - 0.04
 	add_child(_box(Vector3(ex, ph + 0.006, 0), Vector3(0.05, 0.018, w + 0.04), tick_mat))
 	add_child(_box(Vector3(-ex, ph + 0.006, 0), Vector3(0.05, 0.018, w + 0.04), tick_mat))
@@ -193,3 +260,89 @@ func _pc(s: String, fallback: Color) -> Color:
 	if p.size() < 3:
 		return fallback
 	return Color(float(p[0]), float(p[1]), float(p[2]), 1.0 if p.size() < 4 else float(p[3]))
+
+
+# ── UPKEEP ───────────────────────────────────────────────────────────────────
+# One axis, four moments, shared word for word with station_pillar.gd,
+# station_crates.gd and station_wall.gd. Built from HangarKit helpers so the
+# family stays inside the cabinet grammar. Every value dresses the run; none of
+# them moves it, re-lengths it or turns the arrow around.
+
+## WORKS — the route mid-job. A trestle barrier stands ACROSS the strip with a striped top
+## rail, and a cable is run down the side of the inlay. The barrier is the silhouette change:
+## a half-metre upright mass standing on a piece that is otherwise 2 cm of relief, and it
+## reads instantly as a walk you cannot take right now.
+func _upkeep_works(length: float, w: float, ph: float) -> void:
+	var steel: StandardMaterial3D = HangarKit.worn_metal(body_color.lightened(0.04))
+	var bx: float = -length * 0.16                 # the barrier stands short of centre
+	var leg_h: float = 0.50
+	var zleg: float = w * 0.5 + 0.07
+	for sz in [-1.0, 1.0]:
+		add_child(_box(Vector3(bx, ph + leg_h * 0.5, sz * zleg), Vector3(0.05, leg_h, 0.05), steel))
+		# a splayed foot so the trestle stands rather than floats
+		add_child(_box(Vector3(bx, ph + 0.02, sz * zleg), Vector3(0.30, 0.035, 0.07), steel))
+	# Striped top rail spanning the full crossing, plus a plain mid rail under it.
+	add_child(_box(Vector3(bx, ph + leg_h, 0), Vector3(0.07, 0.10, w + 0.30), HangarKit.striped_mat()))
+	add_child(_box(Vector3(bx, ph + leg_h * 0.58, 0), Vector3(0.05, 0.05, w + 0.24), steel))
+	# Cable run laid down the +Z side of the inlay — the sign that the strip is opened.
+	add_child(_box(Vector3(0, ph + 0.025, w * 0.5 + 0.12),
+		Vector3(length * 0.86, 0.05, 0.05),
+		HangarKit.worn_metal(accent_color.darkened(0.35))))
+	for f in [-0.3, 0.1, 0.4]:
+		add_child(_box(Vector3(length * f, ph + 0.012, w * 0.5 + 0.12),
+			Vector3(0.05, 0.026, 0.09), steel))
+	var q: MeshInstance3D = HangarKit.stencil("WORKS", Vector2(minf(length * 0.18, 0.5), 0.12))
+	if q:
+		q.position = Vector3(length * 0.28, ph + 0.012, 0)
+		q.rotation_degrees = Vector3(-90, 0, 0)    # laid flat, read from above
+		add_child(q)
+
+
+## STORE — the route packed down. A board runner is pulled over the whole strip and banded,
+## which covers the lit run, the dashes and the chevrons together. The floorline stops being
+## a surface that points anywhere and becomes a wrapped length. The cover overhangs by 9 cm
+## per side, more than the 6.5 cm of parallax the sweep camera's 15° elevation can see under
+## it, so nothing lit peeks out at the edge.
+func _upkeep_store(length: float, w: float, ph: float) -> void:
+	var sheet: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.31, 0.33), 0.88)
+	sheet.roughness = 0.95
+	var cy: float = ph + 0.040
+	add_child(_box(Vector3(0, cy, 0), Vector3(length + 0.14, 0.045, w + 0.18), sheet))
+	# Bands: three straps across the runner in the safety orange the depot register already uses.
+	var strap: StandardMaterial3D = HangarKit.painted_metal(Color(0.86, 0.34, 0.11), 0.55)
+	for f in [-0.32, 0.0, 0.32]:
+		add_child(_box(Vector3(length * f, cy + 0.030, 0),
+			Vector3(0.055, 0.014, w + 0.24), strap))
+	var q: MeshInstance3D = HangarKit.stencil("PACKED", Vector2(minf(length * 0.20, 0.55), 0.13))
+	if q:
+		q.position = Vector3(-length * 0.30, cy + 0.026, 0)
+		q.rotation_degrees = Vector3(-90, 0, 0)
+		add_child(q)
+
+
+## SCRAP — robbed. The lit fitting has already been lifted out of the channel by the guard in
+## _build(), so the run is dead metal in a bare inlay. What is added here is the evidence of
+## the lifting: two cover plates stood on edge against the side of the channel, hazard tape
+## across the opening, and the fixings left loose on the floor beside it.
+func _upkeep_scrap(length: float, w: float, ph: float) -> void:
+	var plate: StandardMaterial3D = HangarKit.worn_metal(body_color.darkened(0.22))
+	var plate_len: float = minf(length * 0.30, 0.62)
+	for sx in [-1.0, 1.0]:
+		var p: MeshInstance3D = _box(Vector3(sx * length * 0.24, ph + w * 0.44,
+			w * 0.5 + 0.20), Vector3(plate_len, 0.022, w * 0.92), plate)
+		p.rotation_degrees = Vector3(72, 0, 0)     # stood on edge, leaning off the channel
+		add_child(p)
+	# Tape across the opening, two runs, crossed off square.
+	for i in range(2):
+		var a: float = -0.14 if i == 0 else 0.16
+		var t: MeshInstance3D = _box(Vector3(length * a, ph + 0.030, 0),
+			Vector3(0.065, 0.012, w + 0.20), HangarKit.striped_mat())
+		t.rotation_degrees = Vector3(0, 9.0 if i == 0 else -9.0, 0)
+		add_child(t)
+	# The fixings, left on the floor beside the bare channel.
+	var loose: Node3D = HangarKit.bolts(
+		Vector3(-length * 0.34, ph + 0.014, -(w * 0.5 + 0.11)),
+		Vector3(length * 0.10, ph + 0.014, -(w * 0.5 + 0.11)),
+		5, 0.022, HangarKit.worn_metal(body_color.darkened(0.34)))
+	loose.rotation_degrees = Vector3(-90, 0, 0)    # bolts() lays caps facing +Z; face them up
+	add_child(loose)

@@ -6,6 +6,16 @@
 	"theoreticalGrounding": "A wallpaper group is not a label but a finite set of mirrors. Feed the mirrors almost nothing and they return a universe. The mill makes the multiplication mechanical and visible: the rotor's blade-count tracks the group's rotational order (2/3/4/6-fold), so cycling the group physically re-geometries the machine. The player is the feedstock source; the mirrors are the algorithm made apparatus.",
 	"artifacts": {
 		"pattern_machine_c": {
+			"dna": {
+			 "axes": {
+			 "exhibit": [
+			 "bolt",
+			 "unit",
+			 "operation",
+			 "catalogue"
+			 ]
+			 }
+			},
 			"lookup_name": "pattern_machine_c",
 			"name": "Kaleidoscope Mill",
 			"description": "Dark industrial frame on a bolted plinth: gantry columns, a glowing mill drum with spinning kaleidoscope mirror-wedge rotors, a warp-thread cage with a pulsing weave bar, an editable hopper grid on the head, palette + control button rows, an emissive output chute, and a live wallpaper-group carpet milled onto the floor. Touch-paint the hopper to feed the mill; the carpet re-tiles instantly. DNA: group (p1..p6m), palette, motif_seed, hopper_size, carpet params, rotor_speed.",

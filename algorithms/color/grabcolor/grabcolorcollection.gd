@@ -168,6 +168,46 @@ func _color_distance(c1: Color, c2: Color) -> float:
 	var db = c1.b - c2.b
 	return dr * dr + dg * dg + db * db
 
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `arrangement`
+# ═══════════════════════════════════════════════════════════════════
+#
+# WHAT SHAPE THE COLLECTION IS FILED IN — and therefore what it claims a palette
+# IS. Ten swatches are ten swatches whichever way they lie; the layout is the
+# only place this artifact makes an argument. The word and two of its values are
+# taken from particle_systems and scale_lines, which already carry
+# `arrangement`, so a third member joins an existing vocabulary rather than
+# inventing a synonym for "how the set is laid out".
+#
+#   grid      the shipped catalogue page: 5 x 2 flat on the XZ plane at 0.225 m
+#             pitch, palette order untouched, every swatch equally available.
+#             The claim is that a palette is a LIST — arbitrary, finite, filed.
+#             Byte for byte the legacy build.
+#   ramp      the ten sorted by luminance and laid in one line, each sheet
+#             raised by its own brightness so the row climbs 0.5 m from the
+#             darkest to the lightest. A staircase. The claim is that colour is
+#             really VALUE and hue is decoration.
+#   ring      the ten sorted by hue, stood on edge around a 0.42 m circle, each
+#             tile facing outward. The colour wheel as an object. The claim is
+#             that colour is a CYCLE with no beginning — the claim the 1990s web
+#             lexicon these swatches are named from cannot make.
+#   stack     one pile. All ten at the same spot, 12 mm apart in Y and fanned 5
+#             degrees each, so nine of them are visible only as coloured edges.
+#             The claim is that a palette is a DECK: one colour in play, the
+#             rest filed under it.
+#
+# Nothing here is time-dependent and nothing rolls: the palette is chosen by
+# name.hash() (see the note in _ready), so a still is repeatable at every value.
+@export_enum("grid", "ramp", "ring", "stack") var arrangement: String = "grid"
+
+## Allow-list. An unknown word in a map token keeps the shipped catalogue page.
+const ARRANGEMENTS: PackedStringArray = ["grid", "ramp", "ring", "stack"]
+
+const RAMP_RISE: float = 0.5           # ramp — height of the brightest sheet
+const RING_RADIUS: float = 0.42        # ring — radius of the wheel
+const STACK_STEP: float = 0.012        # stack — vertical pitch of the pile
+const STACK_FAN: float = 5.0           # stack — degrees of yaw per sheet
+
 @export var paper_spacing: float = 0.02
 @export var stack_height: float = 0.0
 @export var paper_scale: Vector3 = Vector3(1.0, 1.0, 1.0)
@@ -247,6 +287,9 @@ func create_grab_paper_stack() -> void:
 
 	# Create 10 papers in a simple XZ grid layout
 	var total_papers = 10
+	# `arrangement` re-files the same ten swatches. At "grid" this is [0..9] and
+	# _file_paper is never called, so the shipped page is untouched.
+	var order: Array = _filing_order(total_papers)
 	for i in range(total_papers):
 		var paper_instance = GRAB_PAPER_SCENE.instantiate()
 		paper_instance.name = "GrabPaper_%d" % i
@@ -261,7 +304,9 @@ func create_grab_paper_stack() -> void:
 		paper_instance.position = Vector3(x_pos, y_pos, z_pos)
 		paper_instance.scale = paper_scale
 
-		var color = get_color_from_current_palette(i)
+		var color = get_color_from_current_palette(int(order[i]))
+		if arrangement != "grid":
+			_file_paper(paper_instance, i, total_papers, cell_spacing, color)
 		set_paper_color(paper_instance, color)
 
 		add_child(paper_instance)
@@ -382,4 +427,77 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Only the declared axis is read; every other key in a map token is ignored.
+	if config.has("arrangement"):
+		arrangement = str(config["arrangement"])
+		_normalise_arrangement()
+		create_grab_paper_stack()
+
+
+# ═══════════════════════════════════════════════════════════════════
+# `arrangement` — APPENDED LAST. Nothing above this line moved.
+# ═══════════════════════════════════════════════════════════════════
+
+func _normalise_arrangement() -> void:
+	var want: String = String(arrangement).strip_edges().to_lower()
+	if not ARRANGEMENTS.has(want):
+		want = "grid"          # unknown word keeps the shipped catalogue page
+	arrangement = want
+
+
+## Which palette entry each sheet carries. Identity at "grid" — the shipped page
+## keeps the palette's own order, because its whole claim is that the order is
+## arbitrary.
+func _filing_order(count: int) -> Array:
+	_normalise_arrangement()
+	var order: Array = []
+	for i in range(count):
+		order.append(i)
+	if arrangement == "grid" or arrangement == "stack":
+		return order
+	var swatches: Array = []
+	for i in range(count):
+		var c: Color = get_color_from_current_palette(i)
+		swatches.append({"i": i, "h": c.h, "v": _value_of(c)})
+	if arrangement == "ramp":
+		swatches.sort_custom(func(a, b): return float(a["v"]) < float(b["v"]))
+	else:
+		swatches.sort_custom(func(a, b): return float(a["h"]) < float(b["h"]))
+	order.clear()
+	for s in swatches:
+		order.append(int(s["i"]))
+	return order
+
+
+## Rec. 709 luminance — the axis for `ramp`, so the staircase climbs by how
+## BRIGHT a swatch is rather than by where it happened to sit in the list.
+func _value_of(c: Color) -> float:
+	return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b
+
+
+## Where sheet `slot` stands under the current value. Never called at "grid".
+func _file_paper(paper: Node3D, slot: int, count: int, cell_spacing: float,
+		color: Color) -> void:
+	var t: float = float(slot) / float(max(1, count - 1))
+	match arrangement:
+		"ramp":
+			# The shipped 5 x 2 page kept exactly, so the artifact stays inside
+			# its two cells — but each sheet lifted by its own brightness. The
+			# page becomes a relief, darkest at the floor, lightest 0.5 m up.
+			var row: int = slot / grid_columns
+			var col: int = slot % grid_columns
+			paper.position = Vector3(
+				float(col) * cell_spacing,
+				stack_height + _value_of(color) * RAMP_RISE,
+				float(row) * cell_spacing)
+		"ring":
+			var angle: float = t * TAU * (float(count - 1) / float(count))
+			paper.position = Vector3(
+				0.45 + RING_RADIUS * sin(angle),
+				stack_height + RING_RADIUS,
+				0.1 - RING_RADIUS * cos(angle))
+			# Stand the flat sheet on edge, then turn it to face out of the ring.
+			paper.rotation = Vector3(PI * 0.5, angle, 0.0)
+		"stack":
+			paper.position = Vector3(0.45, stack_height + float(slot) * STACK_STEP, 0.1)
+			paper.rotation = Vector3(0.0, deg_to_rad(STACK_FAN) * float(slot), 0.0)

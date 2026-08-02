@@ -40,6 +40,41 @@ class_name GameOfLifePetri
 @export var dead_color: Color = Color(0.02, 0.05, 0.02)
 @export var dish_color: Color = Color(0.15, 0.15, 0.18)
 
+## AXIS — WHAT IS SOWN. B3/S23 is identical in every value; the dish is not. The
+## artifact's whole claim is that the rule does not decide the world, and it has always
+## had the evidence bolted to its own keypad (GLIDER / PULSAR / GUN / RANDOM / CLEAR)
+## while shipping under exactly one culture. This names the family the buttons already
+## describe.
+##
+##   mixed   the legacy lineage, byte for byte: a glider at the quarter mark and a
+##           pulsar at the centre, sown in that order. A traveller and a heartbeat
+##           sharing a dish.
+##   pulsar  the period-3 oscillator alone at centre — a big four-fold symmetric
+##           bloom breathing in place on an otherwise empty field. Order that stays
+##           put.
+##   gun     Gosper's glider gun against the left edge, which never stops: population
+##           climbs forever and a diagonal stream of gliders crosses the whole dish.
+##           The only value whose picture keeps getting fuller.
+##   soup    a seeded random field at 30% density — the entire dish speckled, which
+##           collapses within a few dozen generations into scattered still-lifes and
+##           blinkers. Order out of noise, and the messiest frame in the set.
+##   none    nothing sown. B3/S23 applied to an empty dish, forever, and the empty
+##           dish is the honest picture of that. The rule alone makes nothing.
+##
+## This is an initial-condition axis, which is the shape that failed on
+## reaction_diffusion — but Life has no attractor to fall into: a gun grows without
+## bound, a pulsar oscillates at period 3, an empty dish stays empty, and a soup
+## freezes into rubble. The five never converge on one picture, at any generation.
+@export_enum("mixed", "pulsar", "gun", "soup", "none") var culture: String = "mixed"
+const CULTURES: PackedStringArray = ["mixed", "pulsar", "gun", "soup", "none"]
+
+## Seed for the `soup` culture and the RANDOM key. -1 (the default) draws from the
+## global stream exactly as before — the legacy path makes no draw at all at build
+## time, so this cannot shift anything. Set it to any non-negative number and the same
+## soup is dealt every time, which is the precondition for a soup being MEASURABLE
+## rather than five different dishes wearing one label.
+@export var culture_seed: int = -1
+
 # Patterns
 const PATTERNS = {
 	"glider": [[0,1,0], [0,0,1], [1,1,1]],
@@ -83,6 +118,7 @@ var _generation_timer: float = 0.0
 var _generation: int = 0
 var _population: int = 0
 var _info_label: Label3D
+var _rng: RandomNumberGenerator = null
 
 # VR Controls
 var _speed_slider: Node
@@ -96,8 +132,7 @@ func _ready():
 	_create_labels()
 	_create_vr_controls()
 	_init_grid()
-	_spawn_pattern("glider", grid_size/4, grid_size/4)
-	_spawn_pattern("pulsar", grid_size/2, grid_size/2)
+	_sow()
 
 func _create_dish():
 	# Petri dish base
@@ -255,11 +290,45 @@ func _clear_grid():
 	_update_display()
 
 func _randomize_grid():
+	# Re-seeded at the top so one seed always deals the same dish; at culture_seed = -1
+	# _roll() falls straight through to randf() and this is the legacy behaviour.
+	if culture_seed >= 0:
+		if _rng == null:
+			_rng = RandomNumberGenerator.new()
+		_rng.seed = culture_seed
 	for y in range(grid_size):
 		for x in range(grid_size):
-			_grid[y][x] = randf() < 0.3
+			_grid[y][x] = _roll() < 0.3
 	_generation = 0
 	_update_display()
+
+
+## The single draw the build path can make. Default (-1) is the global stream, one
+## randf() per cell, in the same order as before.
+func _roll() -> float:
+	if culture_seed < 0:
+		return randf()
+	if _rng == null:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = culture_seed
+	return _rng.randf()
+
+
+## CULTURE — what goes into the dish. "mixed" reproduces the two hard-coded calls this
+## artifact has always made, in the same order, so the legacy dish is identical.
+func _sow() -> void:
+	match culture:
+		"pulsar":
+			_spawn_pattern("pulsar", grid_size/2, grid_size/2)
+		"gun":
+			_spawn_pattern("glider_gun", 5, grid_size/2)
+		"soup":
+			_randomize_grid()
+		"none":
+			_update_display()                 # an empty dish is the picture
+		_:
+			_spawn_pattern("glider", grid_size/4, grid_size/4)
+			_spawn_pattern("pulsar", grid_size/2, grid_size/2)
 
 func _spawn_pattern(pattern_name: String, cx: int, cy: int):
 	if not PATTERNS.has(pattern_name):
@@ -364,5 +433,19 @@ func reset():
 
 func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
+		if key == "culture" or key == "culture_seed":
+			continue                          # normalised below, never set raw
 		if key in self:
 			set(key, config_data[key])
+	# Parsed through str() first: a fixture that passes "7" rather than 7 would be
+	# rejected outright by set() on a typed int and the seed would silently not apply.
+	if config_data.has("culture_seed"):
+		culture_seed = int(str(config_data["culture_seed"]))
+	# Normalising read — an unknown word keeps the culture already sown rather than
+	# emptying the dish, so a typo in a map token cannot publish a blank petri.
+	if config_data.has("culture"):
+		var _c: String = str(config_data["culture"]).strip_edges().to_lower()
+		if CULTURES.has(_c):
+			culture = _c
+			_clear_grid()
+			_sow()

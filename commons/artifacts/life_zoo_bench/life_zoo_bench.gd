@@ -14,6 +14,21 @@ class_name LifeZooBench
 @export var still_color: Color = Color(0.45, 0.7, 1.0, 1.0)
 @export var osc_color: Color = Color(1.0, 0.75, 0.3, 1.0)
 @export var ship_color: Color = Color(0.4, 1.0, 0.55, 1.0)
+## What the zoo shows of the cells NOBODY lives in. A Life exhibit paints twelve live
+## cells and leaves six hundred and forty-eight dark, which quietly says the empty
+## lattice is scenery — but the rule runs there too, and the named creatures are the
+## handful of the state space anyone bothered to name.
+##   void    — the vacancy is unlit, indistinguishable from the room behind the bench.
+##   lattice — every site is a dim grey block: the state space is discrete, and mostly
+##             empty. The creatures sit ON something.
+##   census  — each empty site is tinted by its live-neighbour count, and the sites with
+##             exactly three go hot: those are the cells about to be born. The law is
+##             drawn where nothing is happening yet.
+##   wake    — every site that has EVER been alive keeps a stain in that creature's
+##             colour. The block leaves four cells, the blinker a smudge, the glider a
+##             diagonal streak across the plate: a long exposure of a still photograph.
+## Default `void` paints exactly what it painted before.
+@export_enum("void", "lattice", "census", "wake") var vacancy: String = "void"
 
 var _grid: Array = []
 var _tag: Array = []
@@ -25,6 +40,7 @@ var _accum: float = 0.0
 
 func _ready() -> void:
 	_rng.randomize()
+	vacancy = _norm_vacancy(vacancy)
 	_build()
 	set_process(not Engine.is_editor_hint())
 
@@ -34,6 +50,8 @@ func apply_grid_config(config: Dictionary) -> void:
 		emissive = bool(config["emissive"])
 	if config.has("step_time"):
 		step_time = float(config["step_time"])
+	if config.has("vacancy"):
+		vacancy = _norm_vacancy(str(config["vacancy"]))
 	for c in get_children():
 		c.queue_free()
 	_build()
@@ -152,6 +170,10 @@ func _step() -> void:
 	var tt := _tag
 	_tag = _ntag
 	_ntag = tt
+	# Appended, and only when something is going to read it: the wake needs a record of
+	# every cell that has ever been alive, and `void` must not pay for it.
+	if vacancy == "wake":
+		_mark_seen()
 
 
 func _color_for(tag: int) -> Color:
@@ -169,7 +191,7 @@ func _paint() -> void:
 	for r in range(rows):
 		for c in range(cols):
 			var i := r * cols + c
-			mm.set_instance_color(i, _color_for(_tag[r][c]) if _grid[r][c] == 1 else dead_color)
+			mm.set_instance_color(i, _color_for(_tag[r][c]) if _grid[r][c] == 1 else _dead_color_at(c, r))
 
 
 func _build() -> void:
@@ -206,3 +228,65 @@ func _process(delta: float) -> void:
 		_accum -= step_time
 		_step()
 	_paint()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# VACANCY — what the zoo shows of the cells nobody lives in
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# The plate is 660 sites and twelve of them are alive. A zoo that paints only the
+# twelve is making a claim without noticing: that the empty lattice is backdrop.
+# It is not. The rule is evaluated at every site every generation, the birth
+# condition fires in the vacancy, and the three named creatures are simply the
+# corner of the state space somebody bothered to name. Each value below is a true
+# statement about the same automaton — only the default is silent about it.
+#
+# Appended whole; `void` returns dead_color and nothing above this line moved.
+
+const VACANCY_VALUES: PackedStringArray = ["void", "lattice", "census", "wake"]
+## The discrete site, lit just enough to be a thing rather than a gap.
+const LATTICE_COLOR: Color = Color(0.19, 0.20, 0.24, 1.0)
+## Neighbour-count ramp: nothing nearby, something nearby, and exactly-three.
+const CENSUS_COLD: Color = Color(0.10, 0.11, 0.14, 1.0)
+const CENSUS_WARM: Color = Color(0.22, 0.30, 0.42, 1.0)
+const CENSUS_BIRTH: Color = Color(0.88, 0.32, 0.74, 1.0)
+
+## Every site that has ever held a live cell, by creature tag. Built lazily, so a
+## bench left at `void` never allocates it.
+var _seen: Array = []
+
+
+## An unknown word keeps the DEFAULT — a typo in a map token is inert, never a crash.
+func _norm_vacancy(v: String) -> String:
+	var s: String = v.strip_edges().to_lower()
+	return s if VACANCY_VALUES.has(s) else "void"
+
+
+func _mark_seen() -> void:
+	if _seen.size() != rows:
+		_seen = _blank(0)
+	for r in range(rows):
+		for c in range(cols):
+			if _grid[r][c] == 1:
+				_seen[r][c] = _tag[r][c]
+
+
+## The colour of an empty site. `void` returns exactly what the bench returned before.
+func _dead_color_at(c: int, r: int) -> Color:
+	match vacancy:
+		"lattice":
+			return LATTICE_COLOR
+		"census":
+			var n: int = _neighbors(c, r)
+			if n == 3:
+				# Three live neighbours and no cell: this site is alive next tick.
+				return CENSUS_BIRTH
+			if n <= 0:
+				return CENSUS_COLD
+			return CENSUS_COLD.lerp(CENSUS_WARM, clampf(float(n) / 8.0, 0.0, 1.0))
+		"wake":
+			if _seen.size() == rows:
+				var t: int = int(_seen[r][c])
+				if t > 0:
+					return _color_for(t).darkened(0.62)
+	return dead_color

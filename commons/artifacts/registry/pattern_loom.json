@@ -6,6 +6,16 @@
 	"theoreticalGrounding": "A pattern is produced, not given. The wallpaper group is the program; the loom is the press that runs it. loom_style (roller | warp | mirror) gives the same wallpaper engine three machine bodies.",
 	"artifacts": {
 		"pattern_loom": {
+			"dna": {
+			 "axes": {
+			 "colophon": [
+			 "none",
+			 "repeat",
+			 "symmetry",
+			 "catalogue"
+			 ]
+			 }
+			},
 			"lookup_name": "pattern_loom",
 			"name": "Pattern Loom",
 			"description": "Dark machine frame with emissive accents, glowing warp threads + a pulsing weave bar, and a wallpaper-textured cloth that scrolls out of the weave line. DNA: group (p1..p6m), palette, motif_seed, loom_style (roller carpet-press / warp tapestry / mirror twin-panel), density.",

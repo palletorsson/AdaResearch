@@ -1944,6 +1944,17 @@
    "qfep_connection": "F in blue, E(S) in red, two hundred samples deep at 0.05 s: the order–entropy negotiation flattened into traces you can watch cross. What the screen makes thinkable is phase relation — not how much order, but who answers whom, and how late."
   },
   "reactive_particle_field": {
+   "dna": {
+    "axes": {
+    "formation": [
+    "lattice",
+    "shell",
+    "ring",
+    "column",
+    "drift"
+    ]
+    }
+   },
    "name": "Reactive Particle Field",
    "lookup_name": "reactive_particle_field",
    "description": "A field of 100 particles that respond to lambda and phi. Low λ: ordered grid. Edge λ: swirling dance. High λ: chaotic swarm. Phi affects dynamics. The formula made physical.",
@@ -2188,6 +2199,17 @@
    "qfep_connection": "λ=0 made solid: a crystalline formation, pure order, frozen pattern. The cold end of the spectrum where F has won completely and E(S) is starved to nothing — perfect structure, perfect death. Beautiful and uninhabitable, the pole the edge-of-chaos rooms define themselves against."
   },
   "reactive_particles": {
+   "dna": {
+    "axes": {
+    "formation": [
+    "lattice",
+    "shell",
+    "ring",
+    "column",
+    "drift"
+    ]
+    }
+   },
    "name": "Reactive Particles",
    "lookup_name": "reactive_particles",
    "description": "Alias for reactive_particle_field. Particles that respond to λ and φ parameters.",
@@ -2404,6 +2426,17 @@
    "qfep_connection": "The λ=0 zone as a grown crystal — order so complete nothing can move. It states the equation's left boundary: maximal free energy, minimal entropy, a pattern that will never surprise you again. The chapter needs it visible so the aliveness of the middle can be felt as a departure from it."
   },
   "edge_particles": {
+   "dna": {
+    "axes": {
+    "formation": [
+    "lattice",
+    "shell",
+    "ring",
+    "column",
+    "drift"
+    ]
+    }
+   },
    "name": "Edge Particles",
    "lookup_name": "edge_particles",
    "description": "Particles at the edge of chaos (λ≈0.4). Dancing, self-organizing, alive.",
@@ -2516,6 +2549,17 @@
    "qfep_connection": "Particles at λ≈0.4 — dancing, self-organizing, alive. Not frozen like the crystal, not scattered like the chaos, but caught in the narrow band where order and freedom negotiate continuously. This is what the equation predicts life looks like: perpetual motion that neither settles nor flies apart."
   },
   "emergence_zone": {
+   "dna": {
+    "axes": {
+    "formation": [
+    "lattice",
+    "shell",
+    "ring",
+    "column",
+    "drift"
+    ]
+    }
+   },
    "name": "Emergence Zone",
    "lookup_name": "emergence_zone",
    "description": "A zone where complexity emerges. Particles self-organize at the edge of chaos.",
@@ -5462,6 +5506,17 @@
    }
   },
   "f_order_bench": {
+   "dna": {
+    "axes": {
+    "complement": [
+    "none",
+    "ghost",
+    "supply",
+    "redaction",
+    "quorum"
+    ]
+    }
+   },
    "lookup_name": "f_order_bench",
    "scene": "res://commons/artifacts/f_order_bench/f_order_bench.tscn",
    "class_name": "FOrderBench",
@@ -5546,6 +5601,17 @@
    }
   },
   "lambda_dial_bench": {
+   "dna": {
+    "axes": {
+    "complement": [
+    "none",
+    "ghost",
+    "supply",
+    "redaction",
+    "quorum"
+    ]
+    }
+   },
    "lookup_name": "lambda_dial_bench",
    "scene": "res://commons/artifacts/lambda_dial_bench/lambda_dial_bench.tscn",
    "class_name": "LambdaDialBench",
@@ -5588,6 +5654,17 @@
    }
   },
   "phi_rate_bench": {
+   "dna": {
+    "axes": {
+    "complement": [
+    "none",
+    "ghost",
+    "supply",
+    "redaction",
+    "quorum"
+    ]
+    }
+   },
    "lookup_name": "phi_rate_bench",
    "scene": "res://commons/artifacts/phi_rate_bench/phi_rate_bench.tscn",
    "class_name": "PhiRateBench",
@@ -5714,6 +5791,17 @@
    }
   },
   "qfep_reactor_bench": {
+   "dna": {
+    "axes": {
+    "complement": [
+    "none",
+    "ghost",
+    "supply",
+    "redaction",
+    "quorum"
+    ]
+    }
+   },
    "lookup_name": "qfep_reactor_bench",
    "scene": "res://commons/artifacts/qfep_reactor_bench/qfep_reactor_bench.tscn",
    "class_name": "QfepReactorBench",

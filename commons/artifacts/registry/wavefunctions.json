@@ -3410,6 +3410,17 @@
    }
   },
   "MarioSoundController": {
+   "dna": {
+    "axes": {
+    "machinery": [
+    "none",
+    "plate",
+    "vacancy",
+    "frame",
+    "works"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "waveform(t) = generator(p1, p2, p3, t) where generator in {sweep, noise, square, FM}",
@@ -8260,6 +8271,16 @@
    }
   },
   "double_helix_scene": {
+   "dna": {
+    "axes": {
+    "support": [
+    "monument",
+    "bench",
+    "vitrine",
+    "terrace"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "Oscillation-driven double-helix visualisation — two phase-offset sine waves trace intertwined curves that grow over time.",
@@ -10307,6 +10328,16 @@
    "qfep_connection": "A sci-fi kiosk that loads maps — sequence and algorithm filters on a VR station. The workshop's own control desk wandered into the exhibit: infrastructure made visible, the loader that assembles the rooms standing inside one of the rooms it assembles. The curriculum's plumbing, briefly on display."
   },
   "math_objects": {
+   "dna": {
+    "axes": {
+    "taxonomy": [
+    "table",
+    "ladder",
+    "stack",
+    "heap"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "A collection of parametric surfaces and curves—the geometric zoo of mathematical forms. Tori, helicoids, Möbius strips: shapes defined by equations rather than construction.",
@@ -10521,6 +10552,17 @@
    }
   },
   "modulor_man_demo": {
+   "dna": {
+    "axes": {
+    "measure": [
+    "body",
+    "scale",
+    "canon",
+    "module",
+    "crowd"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Le Corbusier Modulor-proportioned human figure used as a scale reference in line-builder and proportion-study scenes.",

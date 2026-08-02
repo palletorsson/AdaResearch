@@ -4117,6 +4117,16 @@
    "qfep_connection": "The pen holds no code — body and tip are bare meshes; the paper's raycast-and-texture surface does all the sensing and keeps every mark. Authorship migrates to the substrate, and the tool becomes an excuse to approach it."
   },
   "durer_scene": {
+   "dna": {
+    "axes": {
+    "apparatus": [
+    "finish",
+    "cage",
+    "block",
+    "veil"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "DÃ¼rer's Melencolia I elements: truncated rhombohedron polyhedron, magic square, compass, ladder, hourglass, bell, scales.",
@@ -5050,6 +5060,17 @@
    "qfep_connection": "A Label3D printing frames-per-second inside the very frames it counts. The render loop's E_flux budget — normally invisible overhead — stands in the world as an object taxed by its own reading."
   },
   "game_of_life_petri": {
+   "dna": {
+    "axes": {
+    "culture": [
+    "mixed",
+    "pulsar",
+    "gun",
+    "soup",
+    "none"
+    ]
+    }
+   },
    "category": "emergence",
    "complexity": "beginner",
    "description": "Conway's Game of Life presented as a laboratory petri dish — cellular automata as biological experiment. Watch gliders, oscillators, and still lifes emerge from simple birth/death rules in a circular containment vessel.",
@@ -11783,6 +11804,16 @@
    "qfep_connection": "The floor re-rolls its own heights every tick while collision updates on a slower interval, so what you see and what holds you are briefly two different terrains — chaos rationed to protect the frame rate and the ankles."
   },
   "random_walk_terrarium": {
+   "dna": {
+    "axes": {
+    "memory": [
+    "tail",
+    "none",
+    "chord",
+    "cloud"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "A contained ecosystem where random walkers create terrain — trails accumulate into landscapes, paths cross to form structures, and the terrarium slowly fills with the emergent geography of stochastic exploration.",
@@ -15629,6 +15660,16 @@
    "qfep_connection": "Genotype picker at the kiosk, phenotype grown live at origin — L-system, trajectory, pattern, reaction-diffusion, each substrate rebuilt on selection. The vr_preview caps admit the politics of rendering: the same DNA expresses differently depending on who is watching and how much compute they are owed."
   },
   "transform_composition_workbench": {
+   "dna": {
+    "axes": {
+    "workings": [
+    "outcome",
+    "trace",
+    "operands",
+    "expression"
+    ]
+    }
+   },
    "name": "Transform Composition Workbench",
    "lookup_name": "transform_composition_workbench",
    "description": "Interactive 3D workbench. A slider selects one of 4 transformation pairs; the same base tetrahedron is shown after T1∘T2 (left) and T2∘T1 (right). Order matters — except for pair 2 (rotation × uniform scale around origin) which commutes. Paired with /transform-composition-gallery.",

@@ -56,6 +56,44 @@ const WallpaperGroupsScript = preload("res://commons/primitives/arrays/wallpaper
 @export var hopper_size: int = 4
 ## Pick a fresh random group / motif each load (a map that pins one turns this off).
 @export var randomize_on_start: bool = true
+## Seed for that start-up roll. -1 keeps the shipped behaviour byte for byte: two draws off
+## the global stream, in this order, so every load is a different mill. Any value >= 0 rolls
+## from a private RandomNumberGenerator instead, so the same seed always returns the same
+## group and the same motif. A sweep, a capture diff or a screenshot regression needs that:
+## without it, four frames of this artifact are four different machines and any measured
+## difference is the dice, not the DNA.
+@export var variant_seed: int = -1
+
+## AXIS — WHAT THE MILL PUTS ON SHOW OF A CLOSED SET.
+##
+## There are exactly seventeen wallpaper groups and there will never be an eighteenth. So a
+## pattern mill is a machine for manufacturing something already completely enumerated, and
+## the only real choice it has is how much of that closure it admits to the person standing
+## in front of it. Each value is a different answer to "did you make this, or did you look
+## it up?".
+##
+##   bolt       the finished cloth and nothing else — the legacy lineage, byte for byte.
+##              The rule stays inside the machine; the carpet arrives as merchandise and
+##              invention is implied by silence.
+##   unit       the run admits it is one tile. The domain lattice is scored across the whole
+##              carpet, one domain is lifted bodily out of the field onto a pedestal leaving
+##              a dark hole behind it, and a sample plate stands that same domain up at
+##              reading height. The claim: 0.6 m of cloth was made and the rest is translation.
+##   operation  the cloth admits it is a group acting. Mirror axes as unbroken bars, glide
+##              axes as broken runs, and a rotation-centre marker standing proud at every
+##              lattice node whose sides count the fold order — a bar for 2, a triangle for
+##              3, a square for 4, a hexagon for 6.
+##   catalogue  the mill stops pretending. A rack runs the length of the production line
+##              carrying all seventeen groups, each swatch milled from this same hopper so
+##              they are genuinely comparable, the one in the machine lit and the other
+##              sixteen dark. Entry k of a closed set was selected; here is k, and here are
+##              the sixteen you did not pick.
+##
+## Shared word for word with [[pattern_mill]], which is the same argument in a smaller body.
+## Setting this pins randomize_on_start off, by the rule the file already follows for group
+## and motif_seed: a token that specifies the mill's DNA has stopped asking for a dice roll.
+@export var exhibit: String = "bolt"
+const EXHIBITS: PackedStringArray = ["bolt", "unit", "operation", "catalogue"]
 
 @export_group("Machine")
 @export var frame_color: Color = Color(0.10, 0.11, 0.14)      # dark industrial
@@ -125,11 +163,22 @@ const CORE_Y: float = 0.95                 # rotor / core height
 
 func _ready() -> void:
 	PUSH_BUTTON = load("res://commons/interactables/push_button.tscn")
+	_read_exhibit_overrides()
 	_group_index = _name_to_index(group)
 	if randomize_on_start:
-		_group_index = randi() % GROUP_NAMES.size()
-		group = GROUP_NAMES[_group_index]
-		motif_seed = 1 + randi() % 8
+		if variant_seed >= 0:
+			# Repeatable roll off a private stream: the same seed is the same mill, every
+			# load, so a capture measures the artifact instead of the dice.
+			var rng := RandomNumberGenerator.new()
+			rng.seed = variant_seed
+			_group_index = rng.randi() % GROUP_NAMES.size()
+			group = GROUP_NAMES[_group_index]
+			motif_seed = 1 + rng.randi() % 8
+		else:
+			# The shipped path, untouched: two draws off the global stream, in this order.
+			_group_index = randi() % GROUP_NAMES.size()
+			group = GROUP_NAMES[_group_index]
+			motif_seed = 1 + randi() % 8
 	_current_group = _index_to_enum(_group_index)
 	_init_hopper()
 
@@ -145,9 +194,10 @@ func _ready() -> void:
 	_build_capture_camera()
 	_update_carpet()
 	_build_control_plate()
+	_build_exhibit()
 
-	print("[PatternMachineC] Kaleidoscope Mill built — %dx%d hopper, group %s, carpet %.1fm" % [
-		hopper_size, hopper_size, GROUP_NAMES[_group_index], carpet_world_size])
+	print("[PatternMachineC] Kaleidoscope Mill built — %dx%d hopper, group %s, carpet %.1fm, exhibit %s" % [
+		hopper_size, hopper_size, GROUP_NAMES[_group_index], carpet_world_size, exhibit])
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -312,9 +362,13 @@ func _process(delta: float) -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	if config.has("group") or config.has("wallpaper_group") or config.has("motif_seed"):
+	if config.has("group") or config.has("wallpaper_group") or config.has("motif_seed") or config.has("exhibit"):
 		randomize_on_start = false
 	if config.has("randomize_on_start"): randomize_on_start = bool(config["randomize_on_start"])
+	if config.has("variant_seed"): variant_seed = int(config["variant_seed"])
+	if config.has("exhibit"):
+		var _e: String = str(config["exhibit"]).strip_edges().to_lower()
+		exhibit = _e if EXHIBITS.has(_e) else exhibit
 	if config.has("group"):
 		group = str(config["group"])
 		_group_index = _name_to_index(group)
@@ -993,3 +1047,300 @@ func _add_btn_label(btn: Node, text: String) -> void:
 	lbl.modulate = Color(0.85, 0.85, 0.88)
 	lbl.position = Vector3(0, 0, 0.06)
 	btn.add_child(lbl)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# EXHIBIT — what the mill puts on show of a closed set
+# ═══════════════════════════════════════════════════════════════════════════
+# Appended LAST in _ready(), after the carpet has been milled and the console built, so
+# every child index and every position above it is untouched on the legacy path. "bolt"
+# falls through and adds nothing at all.
+#
+# Everything below is placed INSIDE the extents the mill already occupies — the carpet
+# reaches x = ±carpet_world_size/2 and the operator step reaches z = 7.25, and no value
+# crosses either. That is deliberate: a capture is framed on the bounding box, so a value
+# that grew the box would reframe the shot and the reframing would be measured as evidence.
+# All four values share one box and differ only in what is standing inside it.
+
+func _build_exhibit() -> void:
+	match exhibit:
+		"unit":
+			_exhibit_unit()
+		"operation":
+			_exhibit_operation()
+		"catalogue":
+			_exhibit_catalogue()
+		_:
+			pass                                  # "bolt" — the legacy lineage
+
+
+## UNIT — the run admits it is one tile. The domain lattice is scored across the whole
+## carpet, one domain is lifted bodily out of the field onto a pedestal (leaving a dark hole
+## where it came from), and a sample plate stands that same domain up at reading height.
+## No new pattern is drawn: every mark points at the fact that the mill made one 0.6 m
+## fragment and the other eighty are translations of it.
+func _exhibit_unit() -> void:
+	var s: float = carpet_world_size
+	var reps: int = maxi(carpet_repeats, 1)
+	var step: float = s / float(reps)
+	var z0: float = 0.62
+	var x0: float = -s * 0.5
+	var bar: float = maxf(step * 0.09, 0.03)
+
+	# The lattice — a bar on every domain boundary, both directions. The two outermost bars
+	# are tucked half their own width inboard so the run's bounding box is exactly the box
+	# "bolt" already had, and the sweep is not handed a reframing to measure.
+	for i in range(reps + 1):
+		var t: float = float(i) * step
+		var lx: float = clampf(x0 + t, x0 + bar * 0.5, -x0 - bar * 0.5)
+		var lz: float = clampf(z0 + t, z0 + bar * 0.5, z0 + s - bar * 0.5)
+		_emissive_box(Vector3(bar, 0.008, s), Vector3(lx, 0.024, z0 + s * 0.5), core_color, 1.5)
+		_emissive_box(Vector3(s, 0.008, bar), Vector3(0.0, 0.024, lz), core_color, 1.5)
+
+	# One domain lifted out of the field, and the hole it left behind.
+	var ci: int = reps / 2
+	var ri: int = maxi(reps / 3, 1)
+	var cx: float = x0 + (float(ci) + 0.5) * step
+	var cz: float = z0 + (float(ri) + 0.5) * step
+	_box(Vector3(step - bar, 0.012, step - bar), Vector3(cx, 0.018, cz), Color(0.04, 0.04, 0.05), 0.0, 0.95)
+	_box(Vector3(step * 0.30, 0.30, step * 0.30), Vector3(cx, 0.15, cz), frame_color, 0.4, 0.6)
+	_emissive_box(Vector3(step + 0.04, 0.02, step + 0.04), Vector3(cx, 0.30, cz), accent_color, 2.2)
+	var tile: MeshInstance3D = _domain_quad(Vector2(step, step), reps, ci, ri)
+	tile.position = Vector3(cx, 0.32, cz)
+	tile.rotation_degrees = Vector3(-90.0, 0.0, 0.0)
+	add_child(tile)
+
+	# The sample plate — the same single domain, stood up beside the run so it can be read
+	# against the cloth it was taken from.
+	var px: float = x0 + step * 1.2
+	var pz: float = z0 + s * 0.28
+	var sw: float = minf(0.52, s * 0.10)
+	_box(Vector3(sw * 0.66, 0.03, 0.24), Vector3(px, 0.02, pz), frame_color, 0.4, 0.6)
+	_box(Vector3(0.06, 0.86, 0.06), Vector3(px, 0.43, pz), metal_color, 0.6, 0.4)
+	_emissive_box(Vector3(sw + 0.06, sw + 0.06, 0.012), Vector3(px, 1.12, pz - 0.014), accent_color, 1.6)
+	var sample: MeshInstance3D = _domain_quad(Vector2(sw, sw), reps, ci, ri)
+	sample.position = Vector3(px, 1.12, pz)
+	add_child(sample)
+
+
+## OPERATION — the cloth admits it is a group acting. Mirror axes as unbroken bars for any
+## group whose name carries an "m", glide axes as broken runs for any "g", and a
+## rotation-centre marker standing proud at every lattice node whose sides count the fold
+## order — the same number _rotor_fold_for_group hands the mirror wedges upstairs.
+##
+## This is the machine's own schematic and not a crystallographic plate: the axes are drawn
+## on the domain boundaries rather than at their true offsets, exactly as the rotor reads
+## its fold off the group NAME rather than off the group. Sharpening one and not the other
+## would make the body contradict itself.
+func _exhibit_operation() -> void:
+	var s: float = carpet_world_size
+	var reps: int = maxi(carpet_repeats, 1)
+	var step: float = s / float(reps)
+	var z0: float = 0.62
+	var x0: float = -s * 0.5
+	var gname: String = str(GROUP_NAMES[_group_index])
+	var fold: int = _rotor_fold_for_group(_group_index)
+	var has_mirror: bool = gname.find("m") >= 0
+	var has_glide: bool = gname.find("g") >= 0
+	var bar: float = maxf(step * 0.075, 0.028)
+
+	# Mirror axes — unbroken, because a reflection holds everywhere along its line.
+	if has_mirror:
+		for i in range(reps + 1):
+			var t: float = float(i) * step
+			var lx: float = clampf(x0 + t, x0 + bar * 0.5, -x0 - bar * 0.5)
+			var lz: float = clampf(z0 + t, z0 + bar * 0.5, z0 + s - bar * 0.5)
+			_emissive_box(Vector3(bar, 0.008, s), Vector3(lx, 0.024, z0 + s * 0.5), accent_color, 2.0)
+			_emissive_box(Vector3(s, 0.008, bar), Vector3(0.0, 0.024, lz), accent_color, 2.0)
+
+	# Glide axes — broken, because a glide is a reflection you have to walk into.
+	if has_glide:
+		var dash: float = step * 0.42
+		for i in range(reps):
+			var t2: float = (float(i) + 0.5) * step
+			for j in range(reps):
+				var u: float = (float(j) + 0.25) * step
+				_emissive_box(Vector3(bar * 0.8, 0.008, dash), Vector3(x0 + t2, 0.024, z0 + u), core_color, 1.8)
+				_emissive_box(Vector3(dash, 0.008, bar * 0.8), Vector3(x0 + u, 0.024, z0 + t2), core_color, 1.8)
+
+	# Rotation centres — one marker per lattice node, thinned out if the domains are fine
+	# enough that a marker on every node would close up into a solid sheet.
+	var stride: int = 1
+	if step < 0.24:
+		stride = 2
+	if step < 0.12:
+		stride = 4
+	var mr: float = maxf(step * 0.17, 0.05)
+	# A pure-rotation group — p1, p2, p3, p4, p6 — has no axes to draw at all, so the
+	# rotation centres ARE the whole argument. Set them denser and larger there rather than
+	# shipping those groups a run with almost nothing on it.
+	if not has_mirror and not has_glide:
+		stride = maxi(1, stride / 2)
+		mr *= 1.5
+	var i2: int = 0
+	while i2 <= reps:
+		var j2: int = 0
+		while j2 <= reps:
+			# Clamped inboard for the same reason as the lattice: a marker centred on the
+			# outer node would hang over the carpet edge and widen the bounding box.
+			var mx: float = clampf(x0 + float(i2) * step, x0 + mr, -x0 - mr)
+			var mz: float = clampf(z0 + float(j2) * step, z0 + mr, z0 + s - mr)
+			_rotation_marker(Vector3(mx, 0.055, mz), fold, mr)
+			j2 += stride
+		i2 += stride
+
+
+## CATALOGUE — the mill stops pretending. A rack runs the length of the production line
+## carrying all SEVENTEEN plane groups, each swatch milled from this same hopper so the
+## seventeen are genuinely comparable rather than decorative, the one currently in the
+## machine lit and the other sixteen dark. Nothing on this run was invented: entry k of a
+## closed set was selected, and the rack says which k and what the sixteen alternatives were.
+func _exhibit_catalogue() -> void:
+	var s: float = carpet_world_size
+	var z0: float = 0.62
+	var n: int = GROUP_NAMES.size()
+	# Set inboard of the carpet's own left edge — the rack must not widen the mill.
+	var x: float = -s * 0.5 + 0.16
+	var y: float = 1.00
+	var pitch: float = (s - 0.5) / float(n - 1)
+	var plate: float = pitch * 0.86
+
+	# Backing beam and two posts.
+	_box(Vector3(0.06, 0.06, s - 0.4), Vector3(x - 0.09, y - plate * 0.62, z0 + s * 0.5), frame_color, 0.4, 0.6)
+	for sz in [-1.0, 1.0]:
+		_box(Vector3(0.07, y, 0.07),
+			Vector3(x - 0.09, y * 0.5, z0 + s * 0.5 + sz * (s * 0.5 - 0.28)), frame_color, 0.4, 0.6)
+
+	for i in range(n):
+		var pz: float = z0 + 0.25 + float(i) * pitch
+		var lit: bool = i == _group_index
+		var swatch := MeshInstance3D.new()
+		var pm := PlaneMesh.new()
+		pm.size = Vector2(plate, plate)
+		pm.orientation = PlaneMesh.FACE_X
+		swatch.mesh = pm
+		swatch.position = Vector3(x, y, pz)
+		var m := StandardMaterial3D.new()
+		m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		m.roughness = 0.8
+		m.metallic = 0.0
+		# Double-sided: the rack reads from either side of the line, so the framing camera
+		# can stand wherever it likes without the swatches turning into blank card.
+		m.cull_mode = BaseMaterial3D.CULL_DISABLED
+		var tex: ImageTexture = _group_swatch_texture(i)
+		m.albedo_texture = tex
+		m.emission_enabled = true
+		m.emission = Color(1, 1, 1)
+		m.emission_texture = tex
+		m.emission_energy_multiplier = 1.6 if lit else 0.18
+		swatch.material_override = m
+		add_child(swatch)
+
+		# The selected entry gets a bright rim so "which one is in the machine" survives
+		# being read across five metres of carpet.
+		if lit:
+			var h: float = plate * 0.5 + 0.02
+			_emissive_box(Vector3(0.05, 0.03, plate + 0.06), Vector3(x, y + h, pz), core_color, 3.2)
+			_emissive_box(Vector3(0.05, 0.03, plate + 0.06), Vector3(x, y - h, pz), core_color, 3.2)
+			_emissive_box(Vector3(0.05, plate + 0.06, 0.03), Vector3(x, y, pz + h), core_color, 3.2)
+			_emissive_box(Vector3(0.05, plate + 0.06, 0.03), Vector3(x, y, pz - h), core_color, 3.2)
+
+		var lbl := Label3D.new()
+		lbl.text = str(GROUP_NAMES[i]).to_upper()
+		lbl.font_size = 22
+		lbl.pixel_size = 0.0021
+		lbl.modulate = core_color if lit else Color(0.62, 0.64, 0.70)
+		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		lbl.position = Vector3(x + 0.10, y + plate * 0.74, pz)
+		add_child(lbl)
+
+
+## A double-sided quad carrying exactly ONE domain of the milled carpet — the fragment the
+## mill actually made. uv1_scale crops the live carpet texture down to a single repeat and
+## uv1_offset picks which one, so the plate is guaranteed to be the same cloth rather than a
+## redrawing of it. Returned unparented; the caller places it.
+func _domain_quad(size: Vector2, reps: int, ci: int, ri: int) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var pm := PlaneMesh.new()
+	pm.size = size
+	pm.orientation = PlaneMesh.FACE_Z
+	mi.mesh = pm
+	var m := StandardMaterial3D.new()
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	m.roughness = 0.85
+	m.metallic = 0.0
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var f: float = 1.0 / float(maxi(reps, 1))
+	m.uv1_scale = Vector3(f, f, 1.0)
+	m.uv1_offset = Vector3(float(ci) * f, float(ri) * f, 0.0)
+	if _carpet_tex:
+		m.albedo_texture = _carpet_tex
+		m.emission_enabled = true
+		m.emission = Color(1, 1, 1)
+		m.emission_texture = _carpet_tex
+		m.emission_energy_multiplier = 0.35
+	else:
+		m.albedo_color = PALETTE[1]
+	mi.material_override = m
+	return mi
+
+
+## A crystallographic rotation-centre marker standing a few cm proud of the run: a lens for
+## a 2-fold, a triangle for 3, a square for 4, a hexagon for 6. Proud rather than painted so
+## the field of them survives the shallow angle a floor is photographed at.
+func _rotation_marker(pos: Vector3, fold: int, r: float) -> void:
+	if fold <= 2:
+		var lens: MeshInstance3D = _box(Vector3(r * 1.9, r * 0.55, r * 0.55), pos, core_color, 0.3, 0.4)
+		var lm: StandardMaterial3D = lens.material_override
+		lm.emission_enabled = true
+		lm.emission = core_color
+		lm.emission_energy_multiplier = 2.4
+		return
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = r
+	cm.bottom_radius = r
+	cm.height = r * 0.55
+	cm.radial_segments = fold
+	mi.mesh = cm
+	mi.position = pos
+	var m := StandardMaterial3D.new()
+	m.albedo_color = core_color
+	m.metallic = 0.3
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = core_color
+	m.emission_energy_multiplier = 2.4
+	mi.material_override = m
+	add_child(mi)
+
+
+## Mill the CURRENT hopper through group `gi` into a small swatch texture. The catalogue
+## uses this seventeen times so every plate on the rack is the same fragment under a
+## different program — which is the whole claim, and would be a lie if the swatches were
+## seventeen unrelated decorations.
+func _group_swatch_texture(gi: int) -> ImageTexture:
+	var reps: int = clampi(carpet_repeats, 2, 4)
+	var n: int = maxi(hopper_size, 1)
+	var size: int = reps * n
+	var genum: int = _index_to_enum(gi)
+	var img := Image.create(size, size, false, Image.FORMAT_RGBA8)
+	for py in size:
+		for px in size:
+			var ci: int = WallpaperGroupsScript.get_symmetric_color(px, py, n, _grid_data, genum)
+			var col: Color = PALETTE[ci] if ci >= 0 and ci < PALETTE.size() else PALETTE[0]
+			img.set_pixel(px, py, col)
+	return ImageTexture.create_from_image(img)
+
+
+## Metadata path for the two keys added with the exhibit axis, so a map token or a capture
+## fixture can reach them without going through apply_grid_config. Naming an exhibit pins
+## the start-up roll off, by the same rule the config path already applies to group and
+## motif_seed: a token that has specified the mill's DNA has stopped asking for dice.
+func _read_exhibit_overrides() -> void:
+	if has_meta("config_exhibit"):
+		var e: String = str(get_meta("config_exhibit")).strip_edges().to_lower()
+		if EXHIBITS.has(e):
+			exhibit = e
+			randomize_on_start = false
+	if has_meta("config_variant_seed"):
+		variant_seed = int(str(get_meta("config_variant_seed")))

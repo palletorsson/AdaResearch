@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ttcllidfkqhg"]
+[gd_scene load_steps=8 format=3 uid="uid://ttcllidfkqhg"]
 
 [ext_resource type="PackedScene" uid="uid://dli47lf48p833" path="res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.tscn" id="1_stwlu"]
+[ext_resource type="Script" path="res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.gd" id="2_support"]
 
 [sub_resource type="Curve" id="Curve_qmb18"]
 _data = [Vector2(0.3436123, 0.5995005), 0.0, 0.0, 0, 0, Vector2(0.7621145, 0.5074938), 0.0, 0.0, 0, 0, Vector2(0.95814973, 0.84845966), 0.0, 0.0, 0, 0]
@@ -25,6 +26,7 @@ bottom_radius = 2.0
 height = 0.5
 
 [node name="DoubleHelixScene" type="Node3D"]
+script = ExtResource("2_support")
 
 [node name="DoubleHelix" parent="." instance=ExtResource("1_stwlu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.586253, 0)

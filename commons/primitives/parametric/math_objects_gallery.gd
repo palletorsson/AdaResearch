@@ -17,6 +17,36 @@ extends Node3D
 @export var target_size: float = 0.18
 @export var base_height: float = 0.08
 
+## AXIS — WHAT ORDER THE GALLERY CLAIMS ITS OBJECTS HAVE. The thirty-three surfaces never
+## change: the same eleven families, the same three parameter variants each, the same
+## generators, the same hue walk, the same scale normalisation. What changes is whether the
+## display asserts that mathematics arrives pre-sorted, and whose sorting it is.
+##
+## Adopted word for word from [[combine_capsule]] and [[combine_sphere]], which already
+## share it. This is the same argument pointed at a different family — parametric surfaces
+## instead of primitives — so it gets the same four claims rather than a private vocabulary
+## that would make two halves of one grammar argue past each other.
+##
+##   table   the lattice — one row per surface family, one column per parameter variant,
+##           each row captioned with its name and its formula. The periodic-table claim:
+##           the order is IN the objects, position IS the parameter, and the gallery is
+##           merely reporting a structure that was already there.
+##   ladder  the cross-product spent as a single ascending file, each object a step higher
+##           and further along than the last. The claim that these thirty-three are a
+##           SEQUENCE with a direction, not a plane of independent choices.
+##   stack   one column on one footprint, every surface above the last. The claim that
+##           this is not thirty-three objects but ONE object described thirty-three times.
+##   heap    coordinates abandoned: the surfaces piled at the origin, uncaptioned. The
+##           claim that the ordering was ours all along and the mathematics never had it.
+##
+## The caption plates are the pivot. They are the only text in the frame and they are what
+## makes the table a table — the name, and the formula that generated the thing standing
+## under it. `heap` withholds them, which is why that value reads from across a room: a
+## Dini surface with its equation beside it is a result; the same mesh in an unlabelled
+## pile is just a shape somebody made.
+@export_enum("table", "ladder", "stack", "heap") var taxonomy: String = "table"
+const TAXONOMIES: PackedStringArray = ["table", "ladder", "stack", "heap"]
+
 @export var show_labels: bool = true
 @export var label_plate_width: float = 0.32
 @export var label_plate_height: float = 0.08
@@ -27,6 +57,10 @@ extends Node3D
 
 const LabelPlateScene = preload("res://commons/primitives/math_gallery/LabelPlate.tscn")
 const PickableScene = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
+
+## How many surfaces this build put out, so `ladder` can centre its run. Set at the top of
+## every _build_gallery; never read on the legacy "table" path.
+var _taxonomy_total: int = 33
 
 const OBJECTS := [
 	{
@@ -142,6 +176,22 @@ const OBJECTS := [
 ]
 
 func _ready() -> void:
+	var _t: String = str(taxonomy).strip_edges().to_lower()
+	taxonomy = _t if TAXONOMIES.has(_t) else "table"
+	_build_gallery()
+
+## The gallery had no config entry point at all, so a map token could never reach any of its
+## knobs. Reads the axis (and the legacy layout numbers) and rebuilds; an unknown word keeps
+## the lattice rather than emptying the room.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("taxonomy"):
+		var want: String = str(config_data["taxonomy"]).strip_edges().to_lower()
+		if TAXONOMIES.has(want):
+			taxonomy = want
+	if config_data.has("variations_per_object"):
+		variations_per_object = maxi(1, int(config_data["variations_per_object"]))
+	if config_data.has("show_labels"):
+		show_labels = bool(config_data["show_labels"])
 	_build_gallery()
 
 func _build_gallery() -> void:
@@ -153,18 +203,26 @@ func _build_gallery() -> void:
 	var width = float(cols - 1) * col_spacing
 	var depth = float(rows - 1) * row_spacing
 	var origin = Vector3(-width * 0.5, base_height, -depth * 0.5)
+	_taxonomy_total = rows * cols
 
 	for row in range(rows):
 		var obj_def = OBJECTS[row]
 		for col in range(cols):
 			var obj = _spawn_object(obj_def, col)
-			obj.position = origin + Vector3(col * col_spacing, 0.0, row * row_spacing)
+			var cell: Vector3 = origin + Vector3(col * col_spacing, 0.0, row * row_spacing)
+			var placed: Vector3 = _taxonomy_place(cell, row * cols + col)
+			obj.position = placed
+			# _snap_to_floor re-derives .y from the mesh AABB, so the lift has to survive
+			# that pass or ladder and stack would flatten back onto the table's plane.
+			obj.set_meta("taxonomy_lift", placed.y - cell.y)
 			add_child(obj)
 			call_deferred("_finalize_object", obj)
 
-		if show_labels:
+		# The caption is what makes the lattice a table. `heap` is the one value that
+		# withholds it — an unnamed pile of surfaces is the whole of that claim.
+		if show_labels and taxonomy != "heap":
 			var label = _make_label(obj_def)
-			label.position = origin + Vector3(width * 0.5, label_y_offset, row * row_spacing + label_z_offset)
+			label.position = _taxonomy_label(origin, width, row, cols)
 			add_child(label)
 
 func _spawn_object(obj_def: Dictionary, variation_idx: int) -> Node3D:
@@ -247,7 +305,9 @@ func _snap_to_floor(obj: Node3D) -> void:
 		return
 	var aabb = mesh.get_aabb()
 	var min_y = aabb.position.y * mesh.transform.basis.get_scale().y
-	obj.position.y = base_height - min_y * obj.scale.y
+	# The lift is 0 on the legacy path ("table"), so this line is unchanged there.
+	var lift: float = float(obj.get_meta("taxonomy_lift", 0.0))
+	obj.position.y = base_height - min_y * obj.scale.y + lift
 
 func _find_mesh(node: Node) -> MeshInstance3D:
 	if node is MeshInstance3D and node.mesh:
@@ -357,3 +417,59 @@ func _finalize_object(obj: Node3D) -> void:
 	_normalize_object_scale(obj)
 	_snap_to_floor(obj)
 	_update_pickable_collision(obj)
+
+
+# ── TAXONOMY ──────────────────────────────────────────────────────────────────
+# One axis, four claims about whether the family has an order. Shared word for word with
+# combine_capsule.gd and combine_sphere.gd, and APPENDED LAST so nothing above it moved:
+# "table" returns the cell the legacy loop already computed, coordinate for coordinate,
+# and every row keeps its caption at the legacy offset. The other three discard the cell
+# and re-site the object from its index alone.
+
+## Where a surface stands.
+func _taxonomy_place(cell: Vector3, index: int) -> Vector3:
+	match taxonomy:
+		"ladder":
+			# One ascending file. The eleven families and their three variants are spent as
+			# a single ordered run, lifted a step per object, so the gallery reads as a
+			# sequence going somewhere rather than a plane of independent choices.
+			var span: float = float(maxi(_taxonomy_total - 1, 1)) * col_spacing * 0.38
+			return Vector3(
+				-span * 0.5 + float(index) * col_spacing * 0.38,
+				cell.y + float(index) * row_spacing * 0.15,
+				0.0)
+		"stack":
+			# One column on one footprint: the same surface, described again and again.
+			return Vector3(0.0, cell.y + float(index) * row_spacing * 0.21, 0.0)
+		"heap":
+			# Coordinates abandoned. The scatter is a HASH of the index, never randf(): a
+			# random render path would make each boot a different pile, and the critic
+			# would be measuring that noise instead of this axis.
+			var a: float = _index_hash(index * 2 + 1) * TAU
+			var r: float = row_spacing * 0.82 * sqrt(_index_hash(index * 2 + 2))
+			return Vector3(cos(a) * r,
+				cell.y + _index_hash(index * 2 + 7) * row_spacing * 0.34,
+				sin(a) * r)
+		_:
+			return cell                    # "table" — the legacy lattice, untouched
+
+
+## Where a family's caption plate stands. `table` returns the legacy offset unchanged; the
+## other two follow their own arrangement so the name stays attached to what it names.
+func _taxonomy_label(origin: Vector3, width: float, row: int, cols: int) -> Vector3:
+	var lead: Vector3 = _taxonomy_place(origin + Vector3(0.0, 0.0, float(row) * row_spacing),
+		row * cols)
+	match taxonomy:
+		"ladder":
+			return lead + Vector3(0.0, label_y_offset - 0.14, label_z_offset)
+		"stack":
+			return lead + Vector3(width * 0.5 + 0.22, label_y_offset, 0.0)
+		_:
+			return origin + Vector3(width * 0.5, label_y_offset,
+				float(row) * row_spacing + label_z_offset)
+
+
+## Deterministic 0..1 from an integer. Same value every boot, every frame, every machine.
+func _index_hash(n: int) -> float:
+	var s: float = sin(float(n) * 12.9898 + 78.233) * 43758.5453
+	return s - floor(s)

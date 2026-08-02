@@ -75,6 +75,18 @@ enum DistType { UNIFORM, GAUSSIAN, POISSON, EXPONENTIAL }
 ## Whether to continuously generate samples automatically
 @export var auto_sample: bool = true
 
+## Seed for the sampler. -1 (the default) draws from the global stream exactly as
+## before — same calls, same order, byte-identical histogram behaviour.
+##
+## NOT AN AXIS, AND DELIBERATELY SO. This instrument builds its whole picture out of
+## unseeded draws while it runs, which means two captures of it are two different
+## histograms even with every knob identical: any axis declared here would be measured
+## against sampling noise and would report whatever the dice said. Set this
+## non-negative and CLEAR (or a config change) replays the same sample sequence, so a
+## future axis on this artifact can be measured rather than guessed at.
+@export var sample_seed: int = -1
+var _rng: RandomNumberGenerator = null
+
 ## Color of the histogram bars
 @export var color_bar: Color = Color(0.3, 0.7, 1.0)
 ## Color of the theoretical PDF curve overlay
@@ -289,6 +301,12 @@ func _create_vr_controls() -> void:
 
 ## Reset all bins, samples, and visuals to initial state.
 func _clear_samples(_button = null) -> void:
+	# Re-seeded here so CLEAR replays the same sample sequence. At sample_seed = -1
+	# this is skipped entirely and the global stream is untouched — the legacy path.
+	if sample_seed >= 0:
+		if _rng == null:
+			_rng = RandomNumberGenerator.new()
+		_rng.seed = sample_seed
 	_bins.clear()
 	_bins.resize(num_bins)
 	for i in range(num_bins):
@@ -334,11 +352,11 @@ func _add_sample() -> void:
 func _sample_distribution() -> float:
 	match distribution:
 		DistType.UNIFORM:
-			return randf()
+			return _rand()
 
 		DistType.GAUSSIAN:
-			var u1 := randf()
-			var u2 := randf()
+			var u1 := _rand()
+			var u2 := _rand()
 			var z := sqrt(-2.0 * log(u1 + 0.0001)) * cos(TAU * u2)
 			return clampf(gaussian_mean + z * gaussian_std, 0.0, 1.0)
 
@@ -348,15 +366,26 @@ func _sample_distribution() -> float:
 			var p := 1.0
 			while p > L:
 				k += 1
-				p *= randf()
+				p *= _rand()
 			return clampf(float(k - 1) / maxf(poisson_lambda * 3, 0.0001), 0.0, 1.0)
 
 		DistType.EXPONENTIAL:
-			var u := randf()
+			var u := _rand()
 			var val := -log(u + 0.0001) / maxf(exponential_rate, 0.0001)
 			return clampf(val / 2.0, 0.0, 1.0)
 
-	return randf()
+	return _rand()
+
+
+## The only draw in this artifact. sample_seed = -1 falls straight through to randf(),
+## same call, same order, same stream, so the legacy histogram is unchanged.
+func _rand() -> float:
+	if sample_seed < 0:
+		return randf()
+	if _rng == null:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = sample_seed
+	return _rng.randf()
 
 ## Animate falling markers downward and register them into histogram bins on landing.
 func _update_falling_samples(delta: float) -> void:
@@ -491,4 +520,8 @@ func sample() -> void:
 	_add_sample()
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	# Parsed through str() first: a fixture that passes "7" rather than 7 would be
+	# rejected outright by set() on a typed int and the seed would silently not apply.
+	if config_data.has("sample_seed"):
+		sample_seed = int(str(config_data["sample_seed"]))
+		_clear_samples()

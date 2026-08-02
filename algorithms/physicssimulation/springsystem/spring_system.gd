@@ -41,6 +41,42 @@ extends Node3D
 @export var auto_rotate: bool = true
 @export var auto_interaction: bool = true
 
+## AXIS — WHAT THE MEDIUM IS HELD UP BY.
+##
+## The truth this artifact carries is "a spring network is a medium; structure is
+## communication". A medium always stops somewhere, and where it stops is not part of the
+## medium — it is a decision someone made. The four fixed anchors have always been that
+## decision, and they have always been invisible: four dimmed dots in a cloud of twenty.
+## This axis builds the thing they are bolted to, so the boundary can be seen and argued
+## with.
+##
+## Every value is welded to the ground and untouched by the wind, the auto-impulses or
+## where the net happens to be swinging, which is the only way a still of a perpetually
+## perturbed system says anything about the axis rather than about the shutter.
+##
+##   none      no boundary at all: the net floats in the void. The legacy lineage, and a
+##             claim in its own right — that a medium can be had without an outside.
+##   gantry    an overhead beam on two legs spanning the whole net, with a plumb drop rod
+##             from a runner block down to every anchor. Held from ABOVE, industrially.
+##   wall      a ribbed back plane standing behind the net with a horizontal cantilever
+##             bracket reaching out to every anchor. Held from BEHIND, architecturally.
+##   hoop      a tension ring encircling the net on four legs, with a radial stay pulled
+##             in from the rim to every anchor. Held from AROUND: a drum head.
+##   mast      one central column with guy stays fanning DOWN to every anchor and out to
+##             ground plates. Held from a single point at the middle of itself.
+##
+## Appearance only. No mass, spring, stiffness, damping or anchor index is touched: the
+## anchors sit exactly where they always sat and the rig is built to meet them.
+@export_enum("none", "gantry", "wall", "hoop", "mast") var suspension: String = "none"
+const SUSPENSIONS: PackedStringArray = ["none", "gantry", "wall", "hoop", "mast"]
+
+## Seed for the per-mass jitter in initialize_system(), which decides both where the
+## masses sit AND — because springs are wired by proximity — the network's TOPOLOGY. Left
+## unseeded, five sweep variants are five different networks and the measurement is of the
+## noise. -1 draws from the global stream exactly as this artifact always has, so the
+## default lineage is unchanged; any value >= 0 makes the whole net reproducible.
+@export var seed_value: int = -1
+
 # System state
 var masses: Array = []
 var springs: Array = []
@@ -59,6 +95,9 @@ var system_container: Node3D
 # MultiMesh instances for batched rendering
 var _mass_multimesh_instance: MultiMeshInstance3D
 var _spring_multimesh_instance: MultiMeshInstance3D
+var _rig_root: Node3D = null
+var _rng := RandomNumberGenerator.new()
+var _seeded: bool = false
 
 # Vibrant queer color palette
 var queer_colors = [
@@ -173,10 +212,12 @@ class Spring:
 				material.emission_energy_multiplier = 1.5
 
 func _ready() -> void:
+	_seed_rng()
 	setup_environment()
 	initialize_system()
 	create_visuals()
 	setup_camera()
+	_build_suspension()   # APPENDED LAST — nothing above it moves
 
 func _process(delta: float) -> void:
 	simulate_physics(delta)
@@ -242,9 +283,9 @@ func initialize_system() -> void:
 		var y = i / grid_size
 		
 		var position = center_offset + Vector3(
-			x * spacing + randf_range(-0.5, 0.5),
-			randf_range(-1, 1),
-			y * spacing + randf_range(-0.5, 0.5)
+			x * spacing + _rg_randf_range(-0.5, 0.5),
+			_rg_randf_range(-1, 1),
+			y * spacing + _rg_randf_range(-0.5, 0.5)
 		)
 		
 		var mass = Mass.new(position, mass_value, mass_radius)
@@ -400,12 +441,12 @@ func handle_mouse_interaction() -> void:
 	# For now, we'll just apply a random force to simulate interaction
 	if Input.is_action_pressed("ui_accept"):  # Space bar
 		if masses.size() > 0:
-			var random_mass = masses[randi() % masses.size()]
+			var random_mass = masses[_rg_randi() % masses.size()]
 			if not random_mass.is_fixed:
 				var random_force = Vector3(
-					randf_range(-mouse_force_strength, mouse_force_strength),
-					randf_range(0, mouse_force_strength),
-					randf_range(-mouse_force_strength, mouse_force_strength)
+					_rg_randf_range(-mouse_force_strength, mouse_force_strength),
+					_rg_randf_range(0, mouse_force_strength),
+					_rg_randf_range(-mouse_force_strength, mouse_force_strength)
 				)
 				random_mass.apply_force(random_force)
 
@@ -449,15 +490,15 @@ func _apply_auto_force() -> void:
 	if masses.size() > 0:
 		var random_indices = []
 		for i in range(min(3, masses.size())):
-			random_indices.append(randi() % masses.size())
+			random_indices.append(_rg_randi() % masses.size())
 
 		for idx in random_indices:
 			var mass = masses[idx]
 			if not mass.is_fixed:
 				var random_force = Vector3(
-					randf_range(-mouse_force_strength, mouse_force_strength),
-					randf_range(-mouse_force_strength, mouse_force_strength),
-					randf_range(-mouse_force_strength, mouse_force_strength)
+					_rg_randf_range(-mouse_force_strength, mouse_force_strength),
+					_rg_randf_range(-mouse_force_strength, mouse_force_strength),
+					_rg_randf_range(-mouse_force_strength, mouse_force_strength)
 				)
 				mass.apply_force(random_force)
 
@@ -468,4 +509,276 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("suspension"):
+		var want: String = str(config["suspension"]).strip_edges().to_lower()
+		# An unknown word keeps the default. A typo must never publish a silent variant.
+		if SUSPENSIONS.has(want):
+			suspension = want
+	if config.has("seed_value"):
+		seed_value = int(config["seed_value"])
+	if not masses.is_empty():
+		_build_suspension()
+
+
+func _seed_rng() -> void:
+	_seeded = seed_value >= 0
+	if _seeded:
+		_rng.seed = seed_value
+
+
+# On the default (-1) these are the same global calls in the same order, so the legacy
+# stream is byte for byte what it was.
+func _rg_randf_range(a: float, b: float) -> float:
+	if _seeded:
+		return _rng.randf_range(a, b)
+	return randf_range(a, b)
+
+
+func _rg_randi() -> int:
+	if _seeded:
+		return _rng.randi()
+	return randi()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SUSPENSION — the boundary the medium is fastened to. Bolted to the ground,
+# built to meet the anchors exactly where initialize_system() left them, and
+# never touched again by wind, impulse or settling.
+# ═══════════════════════════════════════════════════════════════════════════
+const RG_STEEL := Color(0.44, 0.47, 0.53)
+const RG_DARK := Color(0.19, 0.20, 0.24)
+const RG_BOLT := Color(0.98, 0.74, 0.26)
+
+
+func _build_suspension() -> void:
+	if is_instance_valid(_rig_root):
+		_rig_root.queue_free()
+	_rig_root = null
+	if masses.is_empty():
+		return
+	var root := Node3D.new()
+	root.name = "Suspension"
+	add_child(root)
+	_rig_root = root
+
+	# Extent marker. The net is drawn entirely with MultiMeshInstance3D, which an AABB
+	# walk that counts MeshInstance3D cannot see — so a capture harness can frame this
+	# artifact as a one-metre box while it actually occupies ten. layers = 0 renders it
+	# to no camera, so the picture is unchanged and only the measurement is corrected.
+	# NEVER `visible = false` here: visibility is hierarchical and would take the rig
+	# down with it.
+	var lo: Vector3 = masses[0].position
+	var hi: Vector3 = masses[0].position
+	for m in masses:
+		var q: Vector3 = m.position
+		lo = Vector3(minf(lo.x, q.x), minf(lo.y, q.y), minf(lo.z, q.z))
+		hi = Vector3(maxf(hi.x, q.x), maxf(hi.y, q.y), maxf(hi.z, q.z))
+	var pad: float = mass_radius + 0.2
+	var marker: MeshInstance3D = _rg_box((lo + hi) * 0.5,
+		hi - lo + Vector3(pad, pad, pad) * 2.0, _rg_mat(RG_DARK, 0.9, 0.0))
+	marker.name = "ExtentMarker"
+	marker.layers = 0
+	root.add_child(marker)
+
+	if suspension == "none":
+		return
+
+	var pts: Array = []
+	for a in anchors:
+		pts.append(a.position)
+	if pts.is_empty():
+		# fixed_anchor_points off: no boundary exists to build, and inventing one would
+		# be a picture of a thing the simulation does not have.
+		return
+
+	match suspension:
+		"gantry":
+			_rg_gantry(root, pts, lo, hi)
+		"wall":
+			_rg_wall(root, pts, lo, hi)
+		"hoop":
+			_rg_hoop(root, pts, lo, hi)
+		"mast":
+			_rg_mast(root, pts, lo, hi)
+		_:
+			pass
+
+
+# ── GANTRY — held from above ──────────────────────────────────────────────
+func _rg_gantry(root: Node3D, pts: Array, lo: Vector3, hi: Vector3) -> void:
+	var steel: StandardMaterial3D = _rg_mat(RG_STEEL, 0.4, 0.7)
+	var dark: StandardMaterial3D = _rg_mat(RG_DARK, 0.7, 0.3)
+	var bolt: StandardMaterial3D = _rg_glow(RG_BOLT, 0.9)
+	var cx: float = (lo.x + hi.x) * 0.5
+	var z0: float = lo.z - 1.6
+	var z1: float = hi.z + 1.6
+	var beam_y: float = hi.y + 3.2
+
+	root.add_child(_rg_box(Vector3(cx, beam_y, (z0 + z1) * 0.5),
+		Vector3(0.62, 0.55, z1 - z0), steel))
+	root.add_child(_rg_box(Vector3(cx, beam_y + 0.34, (z0 + z1) * 0.5),
+		Vector3(0.95, 0.13, z1 - z0), dark))
+	for lz: float in [z0, z1]:
+		root.add_child(_rg_box(Vector3(cx, beam_y * 0.5, lz), Vector3(0.5, beam_y, 0.5), steel))
+		root.add_child(_rg_box(Vector3(cx, 0.16, lz), Vector3(1.7, 0.32, 1.7), dark))
+		var sgn: float = (-1.0 if lz < (z0 + z1) * 0.5 else 1.0)
+		root.add_child(_rg_link(Vector3(cx, beam_y - 0.4, lz + sgn * 0.25),
+			Vector3(cx, beam_y - 2.3, lz + sgn * 2.1), 0.11, steel))
+	# A runner block on the beam over every anchor, and a plumb rod down to it.
+	for p in pts:
+		var q: Vector3 = p
+		root.add_child(_rg_box(Vector3(cx, beam_y - 0.42, q.z), Vector3(0.5, 0.30, 0.5), dark))
+		root.add_child(_rg_link(Vector3(cx, beam_y - 0.55, q.z), q + Vector3(0.0, 0.22, 0.0),
+			0.075, steel))
+		root.add_child(_rg_box(q + Vector3(0.0, 0.30, 0.0), Vector3(0.26, 0.13, 0.26), bolt))
+
+
+# ── WALL — held from behind ───────────────────────────────────────────────
+func _rg_wall(root: Node3D, pts: Array, lo: Vector3, hi: Vector3) -> void:
+	var face: StandardMaterial3D = _rg_mat(Color(0.62, 0.61, 0.58), 0.85, 0.0)
+	var steel: StandardMaterial3D = _rg_mat(RG_STEEL, 0.4, 0.7)
+	var dark: StandardMaterial3D = _rg_mat(RG_DARK, 0.7, 0.3)
+	var bolt: StandardMaterial3D = _rg_glow(RG_BOLT, 0.9)
+	var wz: float = lo.z - 2.0
+	var cx: float = (lo.x + hi.x) * 0.5
+	var w: float = (hi.x - lo.x) + 4.0
+	var h: float = hi.y + 2.6
+
+	root.add_child(_rg_box(Vector3(cx, h * 0.5, wz), Vector3(w, h, 0.42), face))
+	root.add_child(_rg_box(Vector3(cx, 0.22, wz - 0.12), Vector3(w + 0.7, 0.44, 0.9), dark))
+	root.add_child(_rg_box(Vector3(cx, h - 0.2, wz + 0.06), Vector3(w, 0.34, 0.16), dark))
+	# Ribs proud of the face so the plane reads as built, not as a backdrop.
+	for i in range(7):
+		var rx: float = cx + (float(i) / 6.0 - 0.5) * w * 0.94
+		root.add_child(_rg_box(Vector3(rx, h * 0.5, wz + 0.26), Vector3(0.20, h - 0.6, 0.14), steel))
+	# A mounting plate on the wall and a cantilever bracket out to every anchor.
+	for p in pts:
+		var q: Vector3 = p
+		root.add_child(_rg_box(Vector3(q.x, q.y, wz + 0.30), Vector3(0.70, 0.70, 0.16), dark))
+		root.add_child(_rg_link(Vector3(q.x, q.y, wz + 0.36), q, 0.085, steel))
+		root.add_child(_rg_link(Vector3(q.x, q.y + 0.85, wz + 0.36),
+			Vector3(q.x, q.y + 0.10, (q.z + wz) * 0.5), 0.05, steel))
+		root.add_child(_rg_box(q, Vector3(0.26, 0.26, 0.13), bolt))
+
+
+# ── HOOP — held from around ───────────────────────────────────────────────
+func _rg_hoop(root: Node3D, pts: Array, lo: Vector3, hi: Vector3) -> void:
+	var steel: StandardMaterial3D = _rg_mat(RG_STEEL, 0.4, 0.7)
+	var dark: StandardMaterial3D = _rg_mat(RG_DARK, 0.7, 0.3)
+	var bolt: StandardMaterial3D = _rg_glow(RG_BOLT, 0.9)
+	var cx: float = (lo.x + hi.x) * 0.5
+	var cz: float = (lo.z + hi.z) * 0.5
+	var ry: float = 0.0
+	for p in pts:
+		ry += p.y
+	ry /= float(pts.size())
+	var rad: float = maxf(hi.x - cx, hi.z - cz) + 2.2
+
+	var seg: int = 32
+	for i in range(seg):
+		var a0: float = TAU * float(i) / float(seg)
+		var a1: float = TAU * float(i + 1) / float(seg)
+		root.add_child(_rg_link(
+			Vector3(cx + cos(a0) * rad, ry, cz + sin(a0) * rad),
+			Vector3(cx + cos(a1) * rad, ry, cz + sin(a1) * rad), 0.17, steel))
+	# Four legs to the ground with foot pads.
+	for i in range(4):
+		var a: float = TAU * float(i) / 4.0 + PI * 0.25
+		var fx: float = cx + cos(a) * rad
+		var fz: float = cz + sin(a) * rad
+		root.add_child(_rg_box(Vector3(fx, ry * 0.5, fz), Vector3(0.40, ry, 0.40), steel))
+		root.add_child(_rg_box(Vector3(fx, 0.15, fz), Vector3(1.4, 0.30, 1.4), dark))
+	# A radial stay pulled in from the rim to every anchor.
+	for p in pts:
+		var q: Vector3 = p
+		var d: Vector3 = Vector3(q.x - cx, 0.0, q.z - cz)
+		if d.length() < 0.01:
+			d = Vector3(1.0, 0.0, 0.0)
+		var rimv: Vector3 = Vector3(cx, ry, cz) + d.normalized() * rad
+		root.add_child(_rg_box(rimv, Vector3(0.40, 0.40, 0.40), dark))
+		root.add_child(_rg_link(rimv, q, 0.065, steel))
+		root.add_child(_rg_box(q, Vector3(0.24, 0.24, 0.24), bolt))
+
+
+# ── MAST — held from one point in the middle of itself ────────────────────
+func _rg_mast(root: Node3D, pts: Array, lo: Vector3, hi: Vector3) -> void:
+	var steel: StandardMaterial3D = _rg_mat(RG_STEEL, 0.4, 0.7)
+	var dark: StandardMaterial3D = _rg_mat(RG_DARK, 0.7, 0.3)
+	var bolt: StandardMaterial3D = _rg_glow(RG_BOLT, 0.9)
+	var cx: float = (lo.x + hi.x) * 0.5
+	var cz: float = (lo.z + hi.z) * 0.5
+	var top: float = hi.y + 4.0
+	var head: Vector3 = Vector3(cx, top, cz)
+	var reach: float = maxf(hi.x - cx, hi.z - cz) + 3.4
+
+	root.add_child(_rg_box(Vector3(cx, top * 0.5, cz), Vector3(0.62, top, 0.62), steel))
+	root.add_child(_rg_box(Vector3(cx, 0.20, cz), Vector3(2.2, 0.40, 2.2), dark))
+	root.add_child(_rg_box(head + Vector3(0.0, 0.18, 0.0), Vector3(1.5, 0.24, 1.5), dark))
+	# Collars up the column so it reads as a mast and not as a stick.
+	for i in range(4):
+		root.add_child(_rg_box(Vector3(cx, top * (0.2 + 0.2 * float(i)), cz),
+			Vector3(0.95, 0.15, 0.95), dark))
+	# A guy stay fanning down to every anchor.
+	for p in pts:
+		var q: Vector3 = p
+		root.add_child(_rg_link(head + Vector3(0.0, -0.10, 0.0), q, 0.065, steel))
+		root.add_child(_rg_box(q, Vector3(0.26, 0.26, 0.26), bolt))
+	# Ground guys, so the mast is answered by something.
+	for i in range(3):
+		var a: float = TAU * float(i) / 3.0 + 0.5
+		var gnd: Vector3 = Vector3(cx + cos(a) * reach, 0.18, cz + sin(a) * reach)
+		root.add_child(_rg_link(head + Vector3(0.0, -0.35, 0.0), gnd, 0.055, steel))
+		root.add_child(_rg_box(gnd, Vector3(0.9, 0.36, 0.9), dark))
+
+
+# ── Small builders (prefixed so nothing in the network can collide) ───────
+func _rg_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _rg_glow(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m
+
+
+func _rg_box(p: Vector3, s: Vector3, m: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(maxf(s.x, 0.01), maxf(s.y, 0.01), maxf(s.z, 0.01))
+	mi.mesh = bm
+	mi.material_override = m
+	mi.position = p
+	return mi
+
+
+# A cylinder spanning a to b, oriented by a hand-built Basis. look_at() needs the node in
+# the tree already, and these are built before they are parented.
+func _rg_link(a: Vector3, b: Vector3, r: float, m: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	var d: Vector3 = b - a
+	var span: float = d.length()
+	cm.top_radius = r
+	cm.bottom_radius = r
+	cm.height = maxf(span, 0.002)
+	mi.mesh = cm
+	mi.material_override = m
+	var dir: Vector3 = Vector3.UP
+	if span > 0.0001:
+		dir = d / span
+	var up: Vector3 = Vector3.UP
+	if absf(dir.dot(up)) > 0.99:
+		up = Vector3.RIGHT
+	var right: Vector3 = dir.cross(up).normalized()
+	var fwd: Vector3 = right.cross(dir).normalized()
+	mi.transform = Transform3D(Basis(right, dir, fwd), (a + b) * 0.5)
+	return mi

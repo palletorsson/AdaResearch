@@ -5,6 +5,34 @@ extends Node3D
 ## Usage in map: configurable_portal#width:2#height:3#dest_x:5#dest_y:1#dest_z:10
 ## Or to another map: configurable_portal#dest_map:Trans_Rotation_2
 
+# ─────────────────────────────────────────────────────────────────────────────
+#   tell   WHAT THE THRESHOLD DISCLOSES OF THE FAR SIDE   mark · none · ghost · exemplar
+#
+#   mark      the legacy lineage, byte for byte — a lit energy field and a name
+#             plate over the frame. It tells you THAT it goes, and what it is called.
+#   none      a sealed opening: the field dark and inert, the plate blank. You
+#             cannot tell from this side whether it goes anywhere at all.
+#   ghost     the far side as an apparition — a translucent vestibule standing out
+#             of the doorway on your side: floor, jambs and lintel of somewhere else
+#   exemplar  the far side built solid at the threshold: the first metre of the
+#             destination standing here, with a step, walls and something on its floor
+#
+# A door is the most-shared object in the corpus and the strongest axis measured so
+# far is lab_sliding_door.welcome, which asks this same question of a sliding door.
+# `tell` is the puzzle-family word — chair_assembly_puzzle and balance_puzzle carry
+# it too — because a portal IS a puzzle whose answer is a place: how much of the
+# other side you are allowed to know before you commit your body to it.
+#
+# Deliberately NOT routed through tell: the destination, the Area3D, the cooldown
+# and the teleport. Every value goes to exactly the same place at exactly the same
+# size. Only the disclosure changes — a sealed portal still works, it just lies.
+#
+# MEASUREMENT NOTE: the surface runs PinkTeleport.gdshader off TIME, so two captures
+# taken a second apart differ whatever the axis does. `still_surface` freezes the
+# phase (speeds and distortion to zero) so a sweep measures the axis instead of the
+# clock; it defaults false and changes nothing in a map.
+# ─────────────────────────────────────────────────────────────────────────────
+
 signal portal_entered(destination: Dictionary)
 
 @export_group("Size")
@@ -32,6 +60,23 @@ signal portal_entered(destination: Dictionary)
 @export var energy: float = 1.5
 @export var label_text: String = ""
 @export var show_frame: bool = true
+
+## AXIS — WHAT THE THRESHOLD DISCLOSES OF THE FAR SIDE. Shared word for word with
+## [[chair_assembly_puzzle]] and [[balance_puzzle]]: one vocabulary for how much of the
+## answer is shown in advance. The destination, the trigger volume and the teleport are
+## identical at every value.
+##
+##   mark      the legacy lineage — a lit field and a name plate: it goes, and it is called this
+##   none      sealed: a dark inert opening and a blank plate, telling you nothing
+##   ghost     a translucent vestibule of the far side standing out of the doorway
+##   exemplar  the first metre of the destination built solid on this side of the threshold
+@export var tell: String = "mark"
+const TELLS: PackedStringArray = ["mark", "none", "ghost", "exemplar"]
+
+## Freeze the surface animation (shader speeds + distortion to zero). Default false = the
+## legacy lineage. A still capture of an animated surface measures the clock, not the axis;
+## a sweep should set this so the frames it compares differ only by what was swept.
+@export var still_surface: bool = false
 
 @export_group("Behavior")
 @export var active: bool = true
@@ -101,6 +146,11 @@ func _build_portal():
 		material.set_shader_parameter("transparency", 0.6)
 		material.set_shader_parameter("rim_power", 2.0)
 		material.set_shader_parameter("distortion_strength", 0.05)
+		if still_surface:
+			# Same picture every capture: the surface keeps its look and loses its clock.
+			material.set_shader_parameter("portal_speed", 0.0)
+			material.set_shader_parameter("pulse_speed", 0.0)
+			material.set_shader_parameter("distortion_strength", 0.0)
 		_portal_mesh.material_override = material
 	else:
 		# Fallback material
@@ -110,9 +160,20 @@ func _build_portal():
 		mat.emission = portal_color_1
 		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		_portal_mesh.material_override = mat
-	
+
+	# TELL — `none` seals the opening: the field is replaced by a dark inert plate, so the
+	# threshold stops advertising that it works. Every other value keeps the surface above.
+	var sealed: bool = false
+	if tell == "none":
+		sealed = true
+		var sealed_mat = StandardMaterial3D.new()
+		sealed_mat.albedo_color = Color(0.045, 0.05, 0.06, 1.0)
+		sealed_mat.roughness = 0.95
+		sealed_mat.metallic = 0.0
+		_portal_mesh.material_override = sealed_mat
+
 	add_child(_portal_mesh)
-	
+
 	# Frame
 	if show_frame:
 		_build_frame()
@@ -123,12 +184,23 @@ func _build_portal():
 	_label.transform.origin = Vector3(0, portal_height + 0.2, 0)
 	_label.pixel_size = 0.005
 	_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_label.text = label_text if label_text != "" else destination_map
+	# A sealed threshold does not name where it goes, even when a map has told it.
+	_label.text = "" if sealed else (label_text if label_text != "" else destination_map)
 	_label.font_size = 32
 	_label.outline_size = 8
 	_label.modulate = Color.WHITE
 	add_child(_label)
-	
+
+	# TELL dressing, appended LAST so every child index and position above is untouched
+	# on the legacy path. "mark" falls through and adds nothing at all.
+	match tell:
+		"ghost":
+			_tell_ghost()
+		"exemplar":
+			_tell_exemplar()
+		_:
+			pass                                  # "mark" / "none" — handled above
+
 	print("ConfigurablePortal: Built portal %.1fx%.1f, dest=%s, map=%s" % [
 		portal_width, portal_height, destination_position, destination_map
 	])
@@ -330,9 +402,91 @@ func _find_grid_system() -> Node:
 			return grid
 	return null
 
+# ── TELL ─────────────────────────────────────────────────────────────────────
+# What the threshold discloses of the far side. Both values build OUT of the doorway
+# on the viewer's side rather than behind the surface — geometry built behind a
+# semi-transparent field is geometry nobody sees.
+
+## GHOST — the far side as an apparition. A translucent vestibule stands out of the opening:
+## a floor plate, two jambs and a lintel, in the portal's own light. The shape of a place,
+## with nothing in it — you are shown that there IS somewhere, and not what is there.
+func _tell_ghost() -> void:
+	var w: float = maxf(portal_width, 0.3)
+	var h: float = maxf(portal_height, 0.5)
+	var depth: float = maxf(w * 0.7, 0.6)
+
+	var glass = StandardMaterial3D.new()
+	glass.albedo_color = Color(portal_color_2.r, portal_color_2.g, portal_color_2.b, 0.22)
+	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass.emission_enabled = true
+	glass.emission = Color(portal_color_2.r, portal_color_2.g, portal_color_2.b, 1.0)
+	glass.emission_energy_multiplier = 0.55
+	glass.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	glass.cull_mode = BaseMaterial3D.CULL_DISABLED
+
+	add_child(_tell_box("Tell_ghost_floor", Vector3(0, 0.02, depth * 0.5),
+		Vector3(w * 0.94, 0.02, depth), glass))
+	for sx in [-1.0, 1.0]:
+		add_child(_tell_box("Tell_ghost_jamb_%d" % int(sx), Vector3(sx * w * 0.47, h * 0.42, depth * 0.5),
+			Vector3(0.02, h * 0.82, depth), glass))
+	add_child(_tell_box("Tell_ghost_lintel", Vector3(0, h * 0.84, depth * 0.5),
+		Vector3(w * 0.94, 0.02, depth), glass))
+	add_child(_tell_box("Tell_ghost_sill", Vector3(0, 0.05, depth),
+		Vector3(w * 0.98, 0.10, 0.03), glass))
+
+
+## EXEMPLAR — the far side built solid on this side of the threshold. The first metre of the
+## destination stands here in matte concrete: a step up, a floor, two walls, a lintel, and a
+## block sitting on it. Not a picture of somewhere else — a piece of it, standing in the room.
+func _tell_exemplar() -> void:
+	var w: float = maxf(portal_width, 0.3)
+	var h: float = maxf(portal_height, 0.5)
+	var depth: float = maxf(w * 0.7, 0.6)
+
+	var stone = StandardMaterial3D.new()
+	stone.albedo_color = Color(0.55, 0.55, 0.58, 1.0)
+	stone.roughness = 0.92
+	var trim = StandardMaterial3D.new()
+	trim.albedo_color = Color(0.40, 0.40, 0.43, 1.0)
+	trim.roughness = 0.9
+
+	add_child(_tell_box("Tell_exemplar_step", Vector3(0, 0.05, depth + 0.10),
+		Vector3(w * 0.98, 0.10, 0.20), trim))
+	add_child(_tell_box("Tell_exemplar_floor", Vector3(0, 0.09, depth * 0.5),
+		Vector3(w * 0.94, 0.18, depth), stone))
+	for sx in [-1.0, 1.0]:
+		add_child(_tell_box("Tell_exemplar_wall_%d" % int(sx),
+			Vector3(sx * w * 0.45, h * 0.45, depth * 0.5),
+			Vector3(0.09, h * 0.9, depth), stone))
+	add_child(_tell_box("Tell_exemplar_lintel", Vector3(0, h * 0.92, depth * 0.5),
+		Vector3(w + 0.10, 0.16, depth), stone))
+	# Something on that floor, so the far side reads as a place rather than a lining.
+	add_child(_tell_box("Tell_exemplar_block", Vector3(w * 0.12, 0.18 + h * 0.11, depth * 0.42),
+		Vector3(w * 0.3, h * 0.22, w * 0.26), trim))
+
+
+func _tell_box(nm: String, center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh = BoxMesh.new()
+	mesh.size = size
+	var mi = MeshInstance3D.new()
+	mi.name = nm
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi
+
+
 # Config API for map loading
 func apply_grid_config(config: Dictionary):
 	print("ConfigurablePortal: Applying config: %s" % str(config))
+
+	# AXIS — an unknown word keeps the current value rather than silently sealing a door.
+	if config.has("tell"):
+		var t: String = str(config["tell"]).strip_edges().to_lower()
+		if TELLS.has(t):
+			tell = t
+	if config.has("still_surface"):
+		still_surface = str(config["still_surface"]).to_lower() in ["true", "1", "yes", "on"]
 	
 	# Size
 	if config.has("width"):

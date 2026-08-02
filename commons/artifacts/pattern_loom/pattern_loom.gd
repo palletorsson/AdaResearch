@@ -44,6 +44,18 @@ const PatternSim = preload("res://commons/pattern_grammar/pattern_sim.gd")
 ## controls (group/palette/density/seed + preview). Default false keeps every
 ## existing loom variant pixel-identical.
 @export var interactive: bool = false
+## What the loom admits about where its pattern came from. The seventeen plane symmetry
+## groups are a CLOSED SET, so a loom is a machine for manufacturing something already
+## fully enumerated — and this is how much of that it prints.
+##   none      — seamless cloth. The pattern arrives as if it were invented here.
+##   repeat    — the lattice printed into the weave, and one block blown up on a card at
+##               the feed: a metre of fabric is one small square, copied.
+##   symmetry  — the group's translations, mirrors, glides and rotation centres drawn
+##               over the cloth. The rule, not the result.
+##   catalogue — a selvage of seventeen chips down BOTH edges of the bolt with this one
+##               lit, and the whole index on the card: entry N of a finished list.
+## Default `none` reproduces every existing loom placement exactly.
+@export_enum("none", "repeat", "symmetry", "catalogue") var colophon: String = "none"
 
 @export_group("Machine")
 @export var frame_color: Color = Color(0.12, 0.12, 0.15)
@@ -116,6 +128,10 @@ func _ready() -> void:
 		_build_console()
 		if dress_machine:
 			_build_cable_run_to_console()
+	# LAST, so nothing above it moves: the colophon reads the finished machine and adds
+	# a card at the feed. `none` builds nothing at all.
+	if colophon != "none":
+		_build_colophon_card()
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
@@ -126,6 +142,7 @@ func apply_grid_config(cfg: Dictionary) -> void:
 	if cfg.has("density"): density = float(cfg["density"])
 	if cfg.has("interactive"): interactive = _to_bool(cfg["interactive"])
 	if cfg.has("dress_machine"): dress_machine = _to_bool(cfg["dress_machine"])
+	if cfg.has("colophon"): colophon = _norm_colophon(str(cfg["colophon"]))
 	if cfg.has("scale"):
 		var s: float = float(cfg["scale"])
 		if s > 0.0: scale = Vector3.ONE * s
@@ -140,7 +157,7 @@ func apply_grid_config(cfg: Dictionary) -> void:
 
 
 func _read_overrides() -> void:
-	for k in ["group", "palette", "loom_style"]:
+	for k in ["group", "palette", "loom_style", "colophon"]:
 		if has_meta("config_%s" % k): set(k, str(get_meta("config_%s" % k)))
 	if has_meta("config_motif_seed"): motif_seed = int(str(get_meta("config_motif_seed")))
 	if has_meta("config_density"): density = float(str(get_meta("config_density")))
@@ -168,6 +185,7 @@ func _sync_indices() -> void:
 	palette = PALETTE_NAMES[_palette_index]
 	density = clampf(density, 0.1, 0.95)
 	motif_seed = clampi(motif_seed, 0, SEED_MAX)
+	colophon = _norm_colophon(colophon)
 
 
 # ── Wallpaper texture ──────────────────────────────────────────────────
@@ -182,6 +200,12 @@ func _render_pattern() -> void:
 		"tile_size": 16, "canvas_size": 256, "density": density,
 	}
 	var img: Image = PatternSim.render_to_image(cfg)
+	# The colophon is PRINTED IN THE CLOTH, not hung beside it: every material on the
+	# machine shares _carpet_tex, so marks drawn here land on the carpet, the banner,
+	# the drum, the preview plate and every repeat of the bolt at once. Skipped whole
+	# when colophon is none, so the default texture is byte-identical to before.
+	if colophon != "none":
+		_print_colophon(img)
 	if _carpet_tex:
 		_carpet_tex.update(img)          # in-place: all sharers re-paint, no re-link
 	else:
@@ -1128,3 +1152,321 @@ func _nudge_seed(dir: int) -> void:
 			and _seed_slider.has_method("set_normalized_value"):
 		_seed_slider.set_normalized_value(clampf(float(motif_seed) / float(SEED_MAX), 0.0, 1.0))
 	_render_pattern()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# COLOPHON — what the loom admits about where the pattern came from
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# A colophon is the tailpiece a printer puts on a book stating how the book was
+# made, and a woven bolt carries the same thing on its selvage: the mill's mark
+# and the colour chips. This loom's colophon is that claim one level down. The
+# seventeen plane symmetry groups were enumerated in 1891 and there is no
+# eighteenth — so a machine that "makes" p4m is running a catalogue entry, and
+# how much of that it prints on the goods is the argument:
+#
+#   none      the cloth arrives seamless — pattern as invention
+#   repeat    the lattice, everywhere, plus one block blown up — pattern as copy
+#   symmetry  the operations themselves — pattern as rule
+#   catalogue seventeen chips, one lit — pattern as lookup
+#
+# Everything below is appended: nothing above it moved, no draw order changed,
+# and `none` executes not one line of it.
+
+const COLOPHON_VALUES: PackedStringArray = ["none", "repeat", "symmetry", "catalogue"]
+## Must match the canvas_size / tile_size handed to PatternSim in _render_pattern.
+const COL_CANVAS: int = 256
+const COL_TILE: int = 16
+const COL_INK: Color = Color(0.97, 0.97, 0.99, 1.0)
+const COL_RULE: Color = Color(0.30, 0.85, 0.95, 1.0)
+const COL_MARK: Color = Color(1.00, 0.86, 0.25, 1.0)
+const COL_DARK: Color = Color(0.06, 0.06, 0.08, 1.0)
+const COL_BLANK: Color = Color(0.17, 0.18, 0.21, 1.0)
+
+
+## An unknown word keeps the DEFAULT rather than crashing or inventing a fifth value —
+## the same contract station_wall.upkeep uses, so a typo in a map token is inert.
+func _norm_colophon(v: String) -> String:
+	var s: String = v.strip_edges().to_lower()
+	return s if COLOPHON_VALUES.has(s) else "none"
+
+
+## Clipped fill, so a mark that runs off the canvas is trimmed instead of throwing.
+func _ink(img: Image, x: int, y: int, w: int, h: int, c: Color) -> void:
+	var mx: int = img.get_width()
+	var my: int = img.get_height()
+	var x0: int = clampi(x, 0, mx)
+	var y0: int = clampi(y, 0, my)
+	var x1: int = clampi(x + w, 0, mx)
+	var y1: int = clampi(y + h, 0, my)
+	if x1 <= x0 or y1 <= y0:
+		return
+	img.fill_rect(Rect2i(x0, y0, x1 - x0, y1 - y0), c)
+
+
+func _print_colophon(img: Image) -> void:
+	match colophon:
+		"repeat":
+			_print_repeat(img)
+		"symmetry":
+			_print_symmetry(img)
+		"catalogue":
+			_print_catalogue(img)
+
+
+## The lattice, printed into the weave. One cell is COL_TILE px of a canvas that tiles
+## across the whole bolt, so this lands on every repeat at once — the cloth stops being
+## a metre of fabric and becomes one small square, copied.
+func _print_repeat(img: Image) -> void:
+	var cells: int = COL_CANVAS / COL_TILE
+	for i in range(cells):
+		var p: int = i * COL_TILE
+		_ink(img, p, 0, 2, COL_CANVAS, COL_INK)
+		_ink(img, 0, p, COL_CANVAS, 2, COL_INK)
+	# The canvas edge — where the PRINTED IMAGE starts over, a coarser repeat than the
+	# lattice — in accent, so the two scales of copying are told apart.
+	_ink(img, 0, 0, 4, COL_CANVAS, COL_RULE)
+	_ink(img, 0, 0, COL_CANVAS, 4, COL_RULE)
+	_ink(img, COL_CANVAS - 4, 0, 4, COL_CANVAS, COL_RULE)
+	_ink(img, 0, COL_CANVAS - 4, COL_CANVAS, 4, COL_RULE)
+
+
+## A SCHEMATIC reading of the IUC name — not a proof. The leading digit is the highest
+## rotation order, "m" means the cell carries mirrors, "g" a glide, and the centred,
+## four- and six-fold groups also carry diagonal mirrors. Enough to draw the difference
+## between p1 (translation and nothing else) and p6m (mirrors everywhere).
+func _group_marks(g: String) -> Dictionary:
+	var rot: int = 1
+	for d in ["6", "4", "3", "2"]:
+		if g.contains(str(d)):
+			rot = int(str(d))
+			break
+	return {
+		"rot": rot,
+		"mirror": g.contains("m"),
+		"glide": g.contains("g"),
+		"diagonal": ["cm", "cmm", "p4m", "p4g", "p6m", "p3m1", "p31m"].has(g),
+	}
+
+
+## The operations, over the cloth. Every group gets its translation lattice; mirrors are
+## solid bars, glides are dashed (a mirror you have to walk along), rotation centres are
+## blocks sized by order. p1 shows the lattice alone, which is the honest picture of it.
+func _print_symmetry(img: Image) -> void:
+	var mk: Dictionary = _group_marks(group)
+	var cells: int = COL_CANVAS / COL_TILE
+	for j in range(cells + 1):
+		for i in range(cells + 1):
+			_ink(img, i * COL_TILE - 1, j * COL_TILE - 1, 3, 3, COL_RULE)
+	if bool(mk["mirror"]):
+		for i2 in range(cells):
+			var p: int = i2 * COL_TILE
+			_ink(img, p, 0, 3, COL_CANVAS, COL_MARK)
+			_ink(img, 0, p, COL_CANVAS, 3, COL_MARK)
+	if bool(mk["diagonal"]):
+		var t: int = 0
+		while t < COL_CANVAS:
+			_ink(img, t, t, 3, 3, COL_MARK)
+			_ink(img, t, COL_CANVAS - t - 3, 3, 3, COL_MARK)
+			t += 2
+	if bool(mk["glide"]):
+		for i3 in range(cells):
+			var q: int = i3 * COL_TILE + COL_TILE / 2
+			var y: int = 0
+			while y < COL_CANVAS:
+				_ink(img, q, y, 3, 6, COL_INK)
+				y += 12
+	var order: int = int(mk["rot"])
+	if order > 1:
+		var s: int = 3 + order
+		for j2 in range(cells + 1):
+			for i4 in range(cells + 1):
+				_ink(img, i4 * COL_TILE - s / 2, j2 * COL_TILE - s / 2, s, s, COL_INK)
+
+
+## The selvage. Real woven cloth carries the mill's chips down both edges; this bolt
+## carries the whole closed set — seventeen groups, sixteen dark, this one lit — so the
+## goods say which entry of the list they are.
+func _print_catalogue(img: Image) -> void:
+	var idx: int = GROUP_NAMES.find(group)
+	if idx < 0:
+		idx = 10
+	var n: int = GROUP_NAMES.size()
+	var strip: int = 34
+	var pitch: int = COL_CANVAS / n
+	var left: int = 0
+	var right: int = COL_CANVAS - strip
+	_ink(img, left, 0, strip, COL_CANVAS, COL_DARK)
+	_ink(img, right, 0, strip, COL_CANVAS, COL_DARK)
+	for i in range(n):
+		var y: int = i * pitch + 2
+		var lit: bool = i == idx
+		var c: Color = COL_RULE if lit else COL_BLANK
+		_ink(img, left + 6, y, strip - 12, pitch - 4, c)
+		_ink(img, right + 6, y, strip - 12, pitch - 4, c)
+		if lit:
+			_ink(img, left + 2, y - 3, strip - 4, 2, COL_INK)
+			_ink(img, left + 2, y + pitch - 3, strip - 4, 2, COL_INK)
+			_ink(img, right + 2, y - 3, strip - 4, 2, COL_INK)
+			_ink(img, right + 2, y + pitch - 3, strip - 4, 2, COL_INK)
+	_ink(img, strip, 0, 2, COL_CANVAS, COL_INK)
+	_ink(img, COL_CANVAS - strip - 2, 0, 2, COL_CANVAS, COL_INK)
+
+
+## The cloth is whichever child wears the wallpaper texture. Matched on the TEXTURE and
+## not on _carpet_mat because _build_fountain never assigns _carpet_mat (see the bug
+## note in the promotion report) and its rug would otherwise be invisible to this.
+func _find_cloth() -> MeshInstance3D:
+	if _carpet_tex == null:
+		return null
+	for c in get_children():
+		if c is MeshInstance3D:
+			var mi: MeshInstance3D = c as MeshInstance3D
+			var mat: Material = mi.material_override
+			if mat is StandardMaterial3D:
+				var sm: StandardMaterial3D = mat as StandardMaterial3D
+				if sm.albedo_texture == _carpet_tex:
+					return mi
+	return null
+
+
+## The card at the feed: what the cloth is printed with, blown up where a standing player
+## (and the capture camera, which sits off to +Z and 15 degrees up) can read it. Nearest-
+## neighbour and unshaded so the block stays crisp under any lighting.
+func _card_image() -> Image:
+	var cfg := {
+		"group": group, "palette": palette, "motif_seed": motif_seed,
+		"tile_size": COL_TILE, "canvas_size": COL_CANVAS, "density": density,
+	}
+	var src: Image = PatternSim.render_to_image(cfg)
+	var card: Image = Image.create(COL_CANVAS, COL_CANVAS, false, Image.FORMAT_RGBA8)
+	card.fill(COL_DARK)
+	if colophon == "catalogue":
+		_card_catalogue(card, src)
+	else:
+		_card_block(card, src)
+	return card
+
+
+## Four lattice cells at 4x — the block the whole bolt is copies of. Upscaled by hand
+## rather than by Image.get_region + resize, which was renamed under this project's feet.
+func _card_block(card: Image, src: Image) -> void:
+	var inset: int = 12
+	var span: int = COL_CANVAS - inset * 2
+	var block: int = COL_TILE * 4
+	for y in range(span):
+		var sy: int = clampi(int(float(y) / float(span) * float(block)), 0, COL_CANVAS - 1)
+		for x in range(span):
+			var sx: int = clampi(int(float(x) / float(span) * float(block)), 0, COL_CANVAS - 1)
+			card.set_pixel(inset + x, inset + y, src.get_pixel(sx, sy))
+	var pitch: int = span / 4
+	if colophon == "symmetry":
+		var mk: Dictionary = _group_marks(group)
+		for i in range(5):
+			var p: int = inset + i * pitch
+			if bool(mk["mirror"]):
+				_ink(card, p - 3, inset, 6, span, COL_MARK)
+				_ink(card, inset, p - 3, span, 6, COL_MARK)
+			_ink(card, p - 4, inset - 4, 8, 8, COL_RULE)
+		if bool(mk["glide"]):
+			for i2 in range(4):
+				var q: int = inset + i2 * pitch + pitch / 2
+				var y2: int = inset
+				while y2 < inset + span:
+					_ink(card, q - 2, y2, 5, 12, COL_INK)
+					y2 += 24
+		var order: int = int(mk["rot"])
+		if order > 1:
+			var s: int = 8 + order * 2
+			for j in range(5):
+				for i3 in range(5):
+					_ink(card, inset + i3 * pitch - s / 2, inset + j * pitch - s / 2,
+						s, s, COL_INK)
+	else:
+		# repeat: the same lattice the cloth carries, at readable size, with the two
+		# lattice vectors laid out from the corner.
+		for i4 in range(5):
+			var p2: int = inset + i4 * pitch
+			_ink(card, p2 - 2, inset, 4, span, COL_INK)
+			_ink(card, inset, p2 - 2, span, 4, COL_INK)
+		_ink(card, inset, inset, pitch, 9, COL_RULE)
+		_ink(card, inset, inset, 9, pitch, COL_RULE)
+		_ink(card, inset + pitch - 14, inset - 5, 14, 19, COL_RULE)
+		_ink(card, inset - 5, inset + pitch - 14, 19, 14, COL_RULE)
+	_ink(card, 0, 0, COL_CANVAS, 6, COL_RULE)
+	_ink(card, 0, COL_CANVAS - 6, COL_CANVAS, 6, COL_RULE)
+	_ink(card, 0, 0, 6, COL_CANVAS, COL_RULE)
+	_ink(card, COL_CANVAS - 6, 0, 6, COL_CANVAS, COL_RULE)
+
+
+## Seventeen chips: the whole plane-group catalogue, sixteen blanks and the one this
+## machine is running, printed with the actual goods.
+func _card_catalogue(card: Image, src: Image) -> void:
+	var idx: int = GROUP_NAMES.find(group)
+	if idx < 0:
+		idx = 10
+	var cols: int = 5
+	var cw: int = 44
+	var ch: int = 52
+	var ox: int = 14
+	var oy: int = 18
+	for i in range(GROUP_NAMES.size()):
+		var cx: int = ox + (i % cols) * (cw + 4)
+		var cy: int = oy + (i / cols) * (ch + 6)
+		if i == idx:
+			_ink(card, cx - 4, cy - 4, cw + 8, ch + 8, COL_INK)
+			for y in range(ch):
+				var sy: int = clampi(int(float(y) / float(ch) * float(COL_TILE * 2)),
+					0, COL_CANVAS - 1)
+				for x in range(cw):
+					var sx: int = clampi(int(float(x) / float(cw) * float(COL_TILE * 2)),
+						0, COL_CANVAS - 1)
+					card.set_pixel(cx + x, cy + y, src.get_pixel(sx, sy))
+		else:
+			_ink(card, cx, cy, cw, ch, COL_BLANK)
+			_ink(card, cx, cy, cw, 3, Color(0.28, 0.29, 0.33, 1.0))
+	_ink(card, 0, 0, COL_CANVAS, 6, COL_RULE)
+	_ink(card, 0, COL_CANVAS - 6, COL_CANVAS, 6, COL_RULE)
+
+
+## Stand the card at the OUTPUT end of the cloth, facing +Z and tilted back like a shade
+## card on an easel. Derived from the cloth's own bounds, so every loom_style puts it
+## where that machine's goods come out — the carpet's far edge, the banner's hem, the
+## rug's rim — and never behind the frame where the camera cannot see it.
+func _build_colophon_card() -> void:
+	var cloth: MeshInstance3D = _find_cloth()
+	var bounds: AABB = AABB(Vector3(-carpet_width * 0.5, 0.0, 0.0),
+		Vector3(carpet_width, 0.02, carpet_length))
+	if cloth != null and cloth.mesh != null:
+		bounds = cloth.transform * cloth.mesh.get_aabb()
+	var pw: float = clampf(bounds.size.x, 0.9, 1.6)
+	var ph: float = pw * 0.7
+	var cx: float = bounds.position.x + bounds.size.x * 0.5
+	var front: float = bounds.position.z + bounds.size.z
+	var base: float = bounds.position.y
+
+	var tex: ImageTexture = ImageTexture.create_from_image(_card_image())
+	var card: MeshInstance3D = MeshInstance3D.new()
+	card.name = "ColophonCard"
+	var pm: PlaneMesh = PlaneMesh.new()
+	pm.size = Vector2(pw, ph)
+	card.mesh = pm
+	card.rotation_degrees = Vector3(78, 0, 0)
+	card.position = Vector3(cx, base + ph * 0.48 + 0.04, front + 0.07)
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_texture = tex
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	card.material_override = m
+	add_child(card)
+
+	# Backing plate + two posts, so it reads as mounted stock and not a floating decal.
+	var back: MeshInstance3D = _box(Vector3(pw + 0.06, 0.02, ph + 0.06), Vector3.ZERO,
+		frame_color.darkened(0.3))
+	back.rotation_degrees = card.rotation_degrees
+	back.position = card.position + Vector3(0.0, -0.006, -0.022)
+	_box(Vector3(0.035, ph * 0.5, 0.035),
+		Vector3(cx - pw * 0.42, base + ph * 0.24, front + 0.09), frame_color)
+	_box(Vector3(0.035, ph * 0.5, 0.035),
+		Vector3(cx + pw * 0.42, base + ph * 0.24, front + 0.09), frame_color)

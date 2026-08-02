@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfkeatfaxb5qp"]
+[gd_scene load_steps=6 format=3 uid="uid://cfkeatfaxb5qp"]
 
 [ext_resource type="PackedScene" uid="uid://jhj23qqrld8p" path="res://commons/primitives/disks/grab_disk.tscn" id="1_disk"]
 [ext_resource type="Script" uid="uid://c6vr5mimwql4u" path="res://algorithms/color/color_mixing/color_display_disk.gd" id="2_display"]
+[ext_resource type="Script" path="res://algorithms/color/color_mixing/visual_color_mixing.gd" id="3_root"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_table"]
 albedo_color = Color(0.05, 0.05, 0.05, 1)
@@ -9,6 +10,7 @@ albedo_color = Color(0.05, 0.05, 0.05, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_white_bg"]
 
 [node name="VisualColorMixing" type="Node3D"]
+script = ExtResource("3_root")
 
 [node name="AdditiveTable" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)

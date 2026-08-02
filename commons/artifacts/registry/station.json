@@ -76,6 +76,16 @@
       }
     },
     "station_plinth": {
+      "dna": {
+       "axes": {
+       "upkeep": [
+       "service",
+       "works",
+       "store",
+       "scrap"
+       ]
+       }
+      },
       "lookup_name": "station_plinth",
       "scene": "res://commons/artifacts/station/station_plinth.tscn",
       "class_name": "StationPlinth",
@@ -106,6 +116,16 @@
       }
     },
     "station_micropod": {
+      "dna": {
+       "axes": {
+       "upkeep": [
+       "service",
+       "works",
+       "store",
+       "scrap"
+       ]
+       }
+      },
       "lookup_name": "station_micropod",
       "scene": "res://commons/artifacts/station/station_micropod.tscn",
       "class_name": "StationPlinth",
@@ -135,6 +155,16 @@
       }
     },
     "station_plinth_wide": {
+      "dna": {
+       "axes": {
+       "upkeep": [
+       "service",
+       "works",
+       "store",
+       "scrap"
+       ]
+       }
+      },
       "lookup_name": "station_plinth_wide",
       "scene": "res://commons/artifacts/station/station_plinth_wide.tscn",
       "class_name": "StationPlinth",
@@ -457,6 +487,16 @@
       }
     },
     "station_floorline": {
+      "dna": {
+       "axes": {
+       "upkeep": [
+       "service",
+       "works",
+       "store",
+       "scrap"
+       ]
+       }
+      },
       "lookup_name": "station_floorline",
       "scene": "res://commons/artifacts/station/station_floorline.tscn",
       "class_name": "StationFloorline",

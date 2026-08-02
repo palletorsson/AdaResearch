@@ -5909,6 +5909,16 @@
    }
   },
   "life_zoo_bench": {
+   "dna": {
+    "axes": {
+    "vacancy": [
+    "void",
+    "lattice",
+    "census",
+    "wake"
+    ]
+    }
+   },
    "lookup_name": "life_zoo_bench",
    "scene": "res://commons/artifacts/life_zoo_bench/life_zoo_bench.tscn",
    "class_name": "LifeZooBench",

@@ -43,6 +43,24 @@ extends Node3D
 @export var gradient_mode: int = 0 # 0: None, 1: Height (Y), 2: Generation
 @export var gradient: Gradient
 
+@export_group("Determinism")
+## Seed for the initial soup. A slime mould network is nothing but accumulated random
+## walks, so an unseeded run makes a DIFFERENT organism every boot — which means any
+## sweep of this artifact measures its own noise and reports it as a confident result.
+## -1 keeps the old behaviour exactly (randomize, a fresh organism each run); any value
+## >= 0 pins the soup so two runs are the same mould and a comparison means something.
+@export var growth_seed: int = -1
+
+@export_group("Capture")
+## Stand an INVISIBLE box (layers = 0, so it renders nothing and casts nothing) around
+## the whole grid volume. Every framing walk in this project — capture_multi_angle and
+## capture_config_sweep both — sizes the shot from MeshInstance3D nodes only, and this
+## artifact is built entirely of ONE MultiMeshInstance3D. With no MeshInstance3D anywhere
+## the walk falls back to a 1 m box at the origin and parks the camera about 5 m from a
+## corner of a 6 m cube, looking away from the growth. Default false: not one placement
+## changes. A capture harness sets it true via dna.fixture.
+@export var capture_anchor: bool = false
+
 # Internal state
 var current_state: PackedByteArray
 var next_state: PackedByteArray
@@ -128,6 +146,9 @@ func _ready() -> void:
 	_parse_rule(rule_string)
 	_initialize_grid()
 	_update_visuals()
+	# Appended last, builds nothing unless asked: see the capture_anchor note above.
+	if capture_anchor:
+		_add_capture_anchor()
 
 func _calculate_strides() -> void:
 	stride_y = grid_size.x
@@ -208,6 +229,13 @@ func _parse_range_string(s: String, target_array: Array[bool]) -> void:
 				target_array[val] = true
 
 func _initialize_grid() -> void:
+	# One generator for the whole soup, so growth_seed pins every draw below. -1
+	# randomizes exactly as the bare randf() calls used to.
+	var rng := RandomNumberGenerator.new()
+	if growth_seed >= 0:
+		rng.seed = growth_seed
+	else:
+		rng.randomize()
 	_calculate_strides()
 	current_state.resize(total_cells)
 	next_state.resize(total_cells)
@@ -224,13 +252,13 @@ func _initialize_grid() -> void:
 			for y in range(cy - range_ext, cy + range_ext + 1):
 				for x in range(cx - range_ext, cx + range_ext + 1):
 					if x >= 0 and x < grid_size.x and y >= 0 and y < grid_size.y and z >= 0 and z < grid_size.z:
-						if randf() > 0.5:
+						if rng.randf() > 0.5:
 							var idx = x + (y * stride_y) + (z * stride_z)
 							current_state[idx] = 1
 	
 	if randomize_on_start:
 		for i in range(total_cells):
-			if randf() < 0.1:
+			if rng.randf() < 0.1:
 				current_state[i] = 1
 
 	# Setup MultiMesh capacity
@@ -362,3 +390,28 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+
+## An invisible box the size of the simulated volume, so a framing walk that only knows
+## how to measure MeshInstance3D can still find out how big this thing is.
+##
+## layers = 0 and NOT visible = false: Godot visibility is hierarchical, so hiding a node
+## hides everything under it, while the render layer mask is per-instance and leaves the
+## mesh, the material and the bounds exactly where they are — which is the whole point,
+## because the bounds are what the camera is being told about.
+func _add_capture_anchor() -> void:
+	var span: Vector3 = Vector3(grid_size) * cell_size
+	var anchor := MeshInstance3D.new()
+	anchor.name = "CaptureAnchor"
+	var bm := BoxMesh.new()
+	bm.size = span
+	anchor.mesh = bm
+	# Cells are placed at Vector3(x, y, z) * cell_size from the node origin, so the
+	# volume runs 0 .. span and its centre is half a span out on every axis.
+	anchor.position = span * 0.5
+	anchor.layers = 0
+	add_child(anchor)
+	if Engine.is_editor_hint():
+		var root = get_tree().edited_scene_root
+		if root:
+			anchor.owner = root

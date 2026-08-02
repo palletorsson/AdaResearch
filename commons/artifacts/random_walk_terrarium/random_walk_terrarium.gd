@@ -77,6 +77,42 @@ enum WalkMode { WALK_2D, WALK_3D, LEVY_FLIGHT }
 		walk_mode = value
 		_reset_walkers()
 
+## AXIS — WHAT THE BOX KEEPS OF WHERE THE WALKER HAS BEEN. The walker itself keeps
+## nothing: that is the artifact's own truth statement, "no memory, no direction". So
+## every line in this tank is the OBSERVER'S memory, not the specimen's, and choosing
+## how much of it to draw is choosing what kind of object a random walk is.
+##
+##   tail    the legacy lineage, byte for byte: a fading line strip of the last
+##           `trail_length` positions per walker, alpha ramping from nothing to 0.6.
+##           A walk as a THREAD — recent past bright, older past forgotten at a fixed
+##           rate. The picture flatters the walker with a short-term memory it has not
+##           got.
+##   none    the strips go dark. Five glowing beads drifting in clear glass and no
+##           evidence of any of it. What the walker actually experiences: position,
+##           and nothing else. The most honest and the emptiest frame.
+##   chord   the path is thrown away and the DISPLACEMENT is drawn instead — one thick
+##           lit bar from the release point to each walker, plus a translucent shell at
+##           the root-mean-square radius, which is the one number the stats readout has
+##           been printing all along. The walk as a statistic: only the straight line
+##           from start to now survives, and the shell says how far a walk of this many
+##           steps is expected to get.
+##   cloud   every site any walker has stood on is stamped as a permanent bead and left
+##           there, uncapped by trail_length. The tank silts up with the region the
+##           walkers have swept. A walk as OCCUPANCY rather than route — the picture
+##           forgets the order and keeps the territory, which is the opposite trade to
+##           `chord`.
+##
+## SEE walk_seed. Without it the four values are four different walks and the sweep
+## measures noise; with it they are one walk shown four ways, which is the axis.
+@export_enum("tail", "none", "chord", "cloud") var memory: String = "tail"
+const MEMORIES: PackedStringArray = ["tail", "none", "chord", "cloud"]
+
+## Seed for the step generator. -1 (the default) draws from the global stream exactly
+## as before — same calls, same order, byte-identical behaviour. Set it non-negative
+## and every launch, every reset and every DNA variant replays the SAME walk, which is
+## the precondition for the `memory` axis measuring the drawing rather than the dice.
+@export var walk_seed: int = -1
+
 ## Colors assigned to each walker (wraps if fewer than num_walkers)
 @export var walker_colors: Array[Color] = [
 	Color(1.0, 0.3, 0.3),
@@ -104,6 +140,20 @@ var _info_label: Label3D
 var _stats_label: Label3D
 var _control_panel: Node3D
 var _reset_area: Node
+
+# Seeded stream — stays null on the default path so randf() is untouched.
+var _rng: RandomNumberGenerator = null
+
+# MEMORY dressing. All of it hangs off _mem_root under the tank, and none of it is
+# ever built while `memory` is "tail".
+const CLOUD_CAP := 4000
+const CHORD_THICK := 0.008
+var _mem_root: Node3D
+var _chord_nodes: Array[MeshInstance3D] = []
+var _shell: MeshInstance3D
+var _cloud_mm: MultiMesh
+var _cloud_count: int = 0
+var _cloud_step: int = -1
 
 
 func _ready():
@@ -420,6 +470,16 @@ func _create_vr_controls():
 func _reset_walkers():
 	if _walker_positions.is_empty():
 		return
+	# Re-seed at the top so a reset replays the SAME walk. At walk_seed = -1 this is
+	# skipped entirely and the global stream is untouched — the legacy path.
+	if walk_seed >= 0:
+		if _rng == null:
+			_rng = RandomNumberGenerator.new()
+		_rng.seed = walk_seed
+	_cloud_count = 0
+	_cloud_step = -1
+	if _cloud_mm:
+		_cloud_mm.visible_instance_count = 0
 	_total_steps = 0
 	for i in range(num_walkers):
 		_walker_positions[i] = Vector3(0, terrarium_size.y / 2.0, 0)
@@ -436,6 +496,7 @@ func _process(delta):
 		_step_all_walkers()
 
 	_update_trails()
+	_update_memory()
 	_update_stats()
 
 func _step_all_walkers():
@@ -459,13 +520,13 @@ func _step_all_walkers():
 func _generate_step() -> Vector3:
 	match walk_mode:
 		WalkMode.WALK_2D:
-			var angle = randf() * TAU
+			var angle = _rand() * TAU
 			return Vector3(cos(angle), 0, sin(angle)) * step_size
 
 		WalkMode.WALK_3D:
 			# Random direction on unit sphere
-			var theta = randf() * TAU
-			var phi = acos(2.0 * randf() - 1.0)
+			var theta = _rand() * TAU
+			var phi = acos(2.0 * _rand() - 1.0)
 			return Vector3(
 				sin(phi) * cos(theta),
 				sin(phi) * sin(theta),
@@ -474,20 +535,33 @@ func _generate_step() -> Vector3:
 
 		WalkMode.LEVY_FLIGHT:
 			# Lévy flight: occasional large jumps
-			var angle = randf() * TAU
-			var phi = acos(2.0 * randf() - 1.0)
+			var angle = _rand() * TAU
+			var phi = acos(2.0 * _rand() - 1.0)
 			var direction = Vector3(
 				sin(phi) * cos(angle),
 				sin(phi) * sin(angle),
 				cos(phi)
 			)
 			# Power-law step size
-			var u = randf()
+			var u = _rand()
 			var levy_step = step_size * pow(u + LEVY_OFFSET, LEVY_EXPONENT)
 			levy_step = minf(levy_step, step_size * LEVY_STEP_CAP)
 			return direction * levy_step
 
 	return Vector3.ZERO
+
+
+## THE ONLY DRAW IN THE BUILD PATH. walk_seed = -1 falls straight through to randf(),
+## same call, same order, same stream — so the legacy walk is unchanged. Any
+## non-negative seed makes the walk replayable, which is what lets four values of
+## `memory` be four drawings of ONE walk instead of four different walks.
+func _rand() -> float:
+	if walk_seed < 0:
+		return randf()
+	if _rng == null:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = walk_seed
+	return _rng.randf()
 
 func _reflect_boundaries(pos: Vector3) -> Vector3:
 	var half = terrarium_size / 2.0
@@ -551,4 +625,179 @@ func reset():
 	_reset_walkers()
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	var touched := false
+	if config_data.has("walk_seed"):
+		walk_seed = int(str(config_data["walk_seed"]))
+		touched = true
+	if config_data.has("memory"):
+		# Normalising read — an unknown word keeps the trail already drawn rather than
+		# blanking the tank, so a typo in a map token cannot publish an empty box.
+		var _m: String = str(config_data["memory"]).strip_edges().to_lower()
+		if MEMORIES.has(_m):
+			memory = _m
+			_clear_memory()
+			touched = true
+	if touched:
+		_reset_walkers()
+
+
+# ── MEMORY ───────────────────────────────────────────────────────────────────
+# One axis, four values, all of it hanging off a root that is never created while the
+# value is "tail". `_update_memory` returns on the first line in that case, so the
+# legacy path costs nothing and draws nothing new.
+
+
+## Tear down whatever the previous value built, so switching mid-session cannot leave
+## a chord and a cloud in the same tank.
+func _clear_memory() -> void:
+	_chord_nodes.clear()
+	_shell = null
+	_cloud_mm = null
+	_cloud_count = 0
+	_cloud_step = -1
+	if _mem_root:
+		_mem_root.get_parent().remove_child(_mem_root)
+		_mem_root.queue_free()
+		_mem_root = null
+
+
+func _memory_root() -> Node3D:
+	if _mem_root == null:
+		_mem_root = Node3D.new()
+		_mem_root.name = "Memory"
+		_stage().add_child(_mem_root)
+	return _mem_root
+
+
+func _update_memory() -> void:
+	if memory == "tail":
+		return
+	# The fading strip IS the default reading of history. Every other value disputes
+	# it, so the strips go quiet before anything else is drawn.
+	for im in _trail_ims:
+		if im:
+			im.clear_surfaces()
+	match memory:
+		"chord":
+			_memory_chord()
+		"cloud":
+			_memory_cloud()
+		_:
+			pass                              # "none" — the box keeps nothing
+
+
+## CHORD — the displacement instead of the path: a thick lit bar from the release
+## point to each walker, plus a translucent shell at the RMS radius the stats readout
+## has been printing all along.
+func _memory_chord() -> void:
+	var root: Node3D = _memory_root()
+	var origin: Vector3 = Vector3(0, terrarium_size.y / 2.0, 0)
+
+	if _chord_nodes.is_empty():
+		for i in range(num_walkers):
+			var c: Color = walker_colors[i % walker_colors.size()]
+			var mi := MeshInstance3D.new()
+			mi.name = "Chord%d" % i
+			var bm := BoxMesh.new()
+			bm.size = Vector3(CHORD_THICK, CHORD_THICK, 1.0)
+			mi.mesh = bm
+			mi.material_override = _lit_mat(c, 1.25, 1.0)
+			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			root.add_child(mi)
+			_chord_nodes.append(mi)
+
+		_shell = MeshInstance3D.new()
+		_shell.name = "RmsShell"
+		var sm := SphereMesh.new()
+		sm.radius = 1.0
+		sm.height = 2.0
+		sm.radial_segments = 24
+		sm.rings = 12
+		_shell.mesh = sm
+		_shell.material_override = _lit_mat(Color(0.65, 0.85, 1.0), 0.55, 0.16)
+		_shell.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		root.add_child(_shell)
+
+	var sum_sq: float = 0.0
+	for i in range(num_walkers):
+		if i >= _chord_nodes.size():
+			break
+		var v: Vector3 = _walker_positions[i] - origin
+		var d: float = v.length()
+		sum_sq += d * d
+		var mi: MeshInstance3D = _chord_nodes[i]
+		if d < 0.002:
+			mi.layers = 0
+			continue
+		mi.layers = 1
+		var zax: Vector3 = v / d
+		var up_ref: Vector3 = Vector3.UP
+		if absf(zax.dot(up_ref)) > 0.99:
+			up_ref = Vector3.RIGHT
+		var xax: Vector3 = up_ref.cross(zax).normalized()
+		var yax: Vector3 = zax.cross(xax).normalized()
+		mi.transform = Transform3D(Basis(xax, yax, zax * d), origin + v * 0.5)
+
+	if _shell:
+		var rms: float = sqrt(sum_sq / maxf(num_walkers, 1))
+		if rms < 0.004:
+			_shell.layers = 0
+		else:
+			_shell.layers = 1
+			_shell.transform = Transform3D(
+				Basis.IDENTITY.scaled(Vector3.ONE * rms), origin)
+
+
+## CLOUD — every site any walker has stood on, stamped once and left there. Stamped on
+## the STEP counter, not per frame, so a paused sim does not silt the tank up twice.
+func _memory_cloud() -> void:
+	var root: Node3D = _memory_root()
+	if _cloud_mm == null:
+		var bead := SphereMesh.new()
+		bead.radius = 0.010
+		bead.height = 0.020
+		bead.radial_segments = 8
+		bead.rings = 4
+		_cloud_mm = MultiMesh.new()
+		_cloud_mm.transform_format = MultiMesh.TRANSFORM_3D
+		_cloud_mm.use_colors = true
+		_cloud_mm.mesh = bead
+		_cloud_mm.instance_count = CLOUD_CAP
+		_cloud_mm.visible_instance_count = 0
+		var mmi := MultiMeshInstance3D.new()
+		mmi.name = "Cloud"
+		mmi.multimesh = _cloud_mm
+		var mat := StandardMaterial3D.new()
+		mat.vertex_color_use_as_albedo = true
+		mat.emission_enabled = true
+		mat.emission = Color.WHITE
+		mat.emission_energy_multiplier = 0.35
+		mmi.material_override = mat
+		mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		root.add_child(mmi)
+
+	if _total_steps == _cloud_step:
+		return
+	_cloud_step = _total_steps
+	for i in range(num_walkers):
+		if _cloud_count >= CLOUD_CAP:
+			break
+		_cloud_mm.set_instance_transform(_cloud_count,
+			Transform3D(Basis(), _walker_positions[i]))
+		_cloud_mm.set_instance_color(_cloud_count,
+			walker_colors[i % walker_colors.size()])
+		_cloud_count += 1
+	_cloud_mm.visible_instance_count = _cloud_count
+
+
+func _lit_mat(c: Color, energy: float, alpha: float) -> StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(c.r, c.g, c.b, alpha)
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.emission_enabled = true
+	mat.emission = c
+	mat.emission_energy_multiplier = energy
+	if alpha < 0.999:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return mat

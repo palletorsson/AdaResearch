@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3572lqu1prwv"]
+[gd_scene load_steps=3 format=3 uid="uid://c3572lqu1prwv"]
 
 [ext_resource type="PackedScene" uid="uid://dpk7m2xqh4n6r" path="res://algorithms/wavefunctions/line_builder_3d/modulor_man_interactive.tscn" id="1_modulor"]
+[ext_resource type="Script" path="res://algorithms/wavefunctions/line_builder_3d/modulor_man_demo.gd" id="2_measure"]
 
 [node name="ModulorManDemo" type="Node3D"]
+script = ExtResource("2_measure")
 
 [node name="ModulorMan" parent="." instance=ExtResource("1_modulor")]
 

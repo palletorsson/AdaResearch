@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=4 uid="uid://278bn6syps2c"]
+[gd_scene load_steps=23 format=4 uid="uid://278bn6syps2c"]
 
 [ext_resource type="Script" uid="uid://b6v47ymjr82hm" path="res://commons/scenes/demos/durer/DurerPolyhedron.gd" id="1_poly"]
 [ext_resource type="Script" uid="uid://6ayor0slbx72" path="res://commons/scenes/demos/durer/MagicSquare.gd" id="2_magic"]
+[ext_resource type="Script" path="res://commons/scenes/demos/durer/DurerScene.gd" id="3_root"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stone"]
 albedo_color = Color(0.55, 0.55, 0.6, 1)
@@ -140,6 +141,7 @@ volumetric_fog_density = 0.02
 volumetric_fog_albedo = Color(0.15, 0.12, 0.18, 1)
 
 [node name="DurerScene" type="Node3D"]
+script = ExtResource("3_root")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_melancholia")

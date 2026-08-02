@@ -1,0 +1,423 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "wave-two-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "transform_composition_workbench",
+   "axis": "workings",
+   "frame": 0.04104,
+   "focus": 0.25463,
+   "verdict": "bites",
+   "subject": 0.05383,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "durer_scene",
+   "axis": "apparatus",
+   "frame": 0.03121,
+   "focus": 0.217,
+   "verdict": "bites",
+   "subject": 0.02344,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "game_of_life_petri",
+   "axis": "culture",
+   "frame": 0.01522,
+   "focus": 0.10115,
+   "verdict": "WEAK",
+   "subject": 0.03816,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "gun",
+     "b": "pulsar",
+     "focus": 0.02632,
+     "rgb": 0.12297
+    },
+    {
+     "a": "mixed",
+     "b": "pulsar",
+     "focus": 0.05913,
+     "rgb": 0.13528
+    }
+   ]
+  },
+  {
+   "artifact": "mandelbrot_bench",
+   "axis": "ladder",
+   "frame": 0.02638,
+   "focus": 0.25219,
+   "verdict": "bites",
+   "subject": 0.05492,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "julia_bench",
+   "axis": "ladder",
+   "frame": 0.01397,
+   "focus": 0.20803,
+   "verdict": "local",
+   "subject": 0.05488,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "sierpinski_bench",
+   "axis": "ladder",
+   "frame": 0.02314,
+   "focus": 0.25825,
+   "verdict": "bites",
+   "subject": 0.06547,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "fractal_arch_bench",
+   "axis": "ladder",
+   "frame": 0.03062,
+   "focus": 0.27951,
+   "verdict": "bites",
+   "subject": 0.05086,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "mc_field_bench",
+   "axis": "workings",
+   "frame": 0.06653,
+   "focus": 0.39214,
+   "verdict": "bites",
+   "subject": 0.07371,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "sdf_sculpt_bench",
+   "axis": "workings",
+   "frame": 0.05618,
+   "focus": 0.39866,
+   "verdict": "bites",
+   "subject": 0.06609,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "colonization_bench",
+   "axis": "workings",
+   "frame": 0.08419,
+   "focus": 0.28624,
+   "verdict": "bites",
+   "subject": 0.05293,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "voronoi_bench",
+   "axis": "workings",
+   "frame": 0.06071,
+   "focus": 0.36377,
+   "verdict": "bites",
+   "subject": 0.09645,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "slime_bench",
+   "axis": "workings",
+   "frame": 0.07352,
+   "focus": 0.3757,
+   "verdict": "bites",
+   "subject": 0.09914,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "f_order_bench",
+   "axis": "complement",
+   "frame": 0.02984,
+   "focus": 0.28525,
+   "verdict": "bites",
+   "subject": 0.06828,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "lambda_dial_bench",
+   "axis": "complement",
+   "frame": 0.05452,
+   "focus": 0.24443,
+   "verdict": "bites",
+   "subject": 0.06586,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "phi_rate_bench",
+   "axis": "complement",
+   "frame": 0.04116,
+   "focus": 0.32356,
+   "verdict": "bites",
+   "subject": 0.06262,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "qfep_reactor_bench",
+   "axis": "complement",
+   "frame": 0.01122,
+   "focus": 0.15109,
+   "verdict": "local",
+   "subject": 0.06434,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "emergence_zone",
+   "axis": "formation",
+   "frame": 0.03508,
+   "focus": 0.25452,
+   "verdict": "bites",
+   "subject": 0.01793,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "chair_assembly_puzzle",
+   "axis": "tell",
+   "frame": 0.003,
+   "focus": 0.05417,
+   "verdict": "WEAK",
+   "subject": 0.00395,
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "exemplar",
+     "b": "mark",
+     "focus": 0.03614,
+     "rgb": 0.05602
+    }
+   ],
+   "colour_only": [
+    {
+     "a": "ghost",
+     "b": "none",
+     "focus": 0.00656,
+     "rgb": 1.0
+    },
+    {
+     "a": "mark",
+     "b": "none",
+     "focus": 0.00701,
+     "rgb": 1.0
+    },
+    {
+     "a": "exemplar",
+     "b": "none",
+     "focus": 0.01538,
+     "rgb": 1.0
+    },
+    {
+     "a": "ghost",
+     "b": "mark",
+     "focus": 0.024,
+     "rgb": 0.14997
+    }
+   ]
+  },
+  {
+   "artifact": "balance_puzzle",
+   "axis": "tell",
+   "frame": 0.00886,
+   "focus": 0.15405,
+   "verdict": "local",
+   "subject": 0.00566,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "configurable_portal",
+   "axis": "tell",
+   "frame": 0.17833,
+   "focus": 0.44361,
+   "verdict": "bites",
+   "subject": 0.12812,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "station_floorline",
+   "axis": "upkeep",
+   "frame": 0.06264,
+   "focus": 0.30121,
+   "verdict": "bites",
+   "subject": 0.02078,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "station_micropod",
+   "axis": "upkeep",
+   "frame": 0.10116,
+   "focus": 0.32997,
+   "verdict": "bites",
+   "subject": 0.10211,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "pattern_machine_c",
+   "axis": "exhibit",
+   "frame": 0.02459,
+   "focus": 0.19855,
+   "verdict": "bites",
+   "subject": 0.04379,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "pattern_mill",
+   "axis": "exhibit",
+   "frame": 0.01977,
+   "focus": 0.21432,
+   "verdict": "local",
+   "subject": 0.05742,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "pattern_loom",
+   "axis": "colophon",
+   "frame": 0.03886,
+   "focus": 0.2344,
+   "verdict": "bites",
+   "subject": 0.05781,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "visual_color_mixing",
+   "axis": "mixture",
+   "frame": 0.07204,
+   "focus": 0.32089,
+   "verdict": "bites",
+   "subject": 0.02672,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "modulor_man_demo",
+   "axis": "measure",
+   "frame": 0.03046,
+   "focus": 0.25853,
+   "verdict": "bites",
+   "subject": 0.04098,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "koch_curve",
+   "axis": "evidence",
+   "frame": 0.0,
+   "focus": 0.0,
+   "verdict": "NO RENDER",
+   "subject": 0.0,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "axiom",
+     "b": "longhand",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "axiom",
+     "b": "result",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "axiom",
+     "b": "trace",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "longhand",
+     "b": "result",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "longhand",
+     "b": "trace",
+     "focus": 0.0,
+     "rgb": 1.0
+    },
+    {
+     "a": "result",
+     "b": "trace",
+     "focus": 0.0,
+     "rgb": 1.0
+    }
+   ]
+  },
+  {
+   "artifact": "network_analysis",
+   "axis": "mutuality",
+   "frame": 0.03264,
+   "focus": 0.23516,
+   "verdict": "bites",
+   "subject": 0.0993,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "spring_system",
+   "axis": "suspension",
+   "frame": 0.04199,
+   "focus": 0.21728,
+   "verdict": "bites",
+   "subject": 0.04973,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  }
+ ]
+}

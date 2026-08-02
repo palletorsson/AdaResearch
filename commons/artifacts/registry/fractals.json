@@ -366,6 +366,17 @@
    }
   },
   "fractal_arch_bench": {
+   "dna": {
+    "axes": {
+    "ladder": [
+    "figure",
+    "series",
+    "seed",
+    "relief",
+    "section"
+    ]
+    }
+   },
    "lookup_name": "fractal_arch_bench",
    "scene": "res://commons/artifacts/fractal_arch_bench/fractal_arch_bench.tscn",
    "class_name": "FractalArchBench",
@@ -816,6 +827,17 @@
    }
   },
   "sierpinski_bench": {
+   "dna": {
+    "axes": {
+    "ladder": [
+    "figure",
+    "series",
+    "seed",
+    "relief",
+    "section"
+    ]
+    }
+   },
    "lookup_name": "sierpinski_bench",
    "scene": "res://commons/artifacts/sierpinski_bench/sierpinski_bench.tscn",
    "class_name": "SierpinskiBench",
@@ -1044,6 +1066,17 @@
    "qfep_connection": "Depth by depth the carving trades body for passage until the solid is mostly openings — then a duct housing clamps it and a shaft of fluid pours through, renaming the loss a function. The pathology fractals are famous for, area unbounded and volume gone, is exactly what a filter orders."
   },
   "mandelbrot_bench": {
+   "dna": {
+    "axes": {
+    "ladder": [
+    "figure",
+    "series",
+    "seed",
+    "relief",
+    "section"
+    ]
+    }
+   },
    "lookup_name": "mandelbrot_bench",
    "scene": "res://commons/artifacts/mandelbrot_bench/mandelbrot_bench.tscn",
    "class_name": "MandelbrotBench",
@@ -1090,6 +1123,18 @@
    "qfep_connection": "Each cell of the panel answers a single yes/no — does z² + c stay bounded? — and the black interior is every point whose answer never arrives. The infinitely intricate edge sits at furniture height: the catalogue of all Julia fates, parked on a lab bench."
   },
   "julia_bench": {
+   "dna": {
+    "axes": {
+    "ladder": [
+    "figure",
+    "series",
+    "seed",
+    "relief",
+    "section",
+    "figure"
+    ]
+    }
+   },
    "lookup_name": "julia_bench",
    "scene": "res://commons/artifacts/julia_bench/julia_bench.tscn",
    "class_name": "JuliaBench",

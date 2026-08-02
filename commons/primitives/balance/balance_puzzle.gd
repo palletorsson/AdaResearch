@@ -9,8 +9,31 @@ class_name BalancePuzzle
 # triggers: height_threshold reached AND held stable → piece count counts down → creature animation
 # emerges: the creature as reward for embodied patience; the stack as a meditation on balance under gravity
 # needs: [missing VR controls — all interaction is physics-based dropping and stacking]
-# relationships: intro artifact for primitives sequence; thematically connects physics to geometry
+# relationships: intro artifact for primitives sequence; thematically connects physics to geometry; shares the `tell` vocabulary with [[chair_assembly_puzzle]] and [[configurable_portal]]
 # truth: stability is not a property of any single piece — it emerges from the relationships between all
+
+# ─────────────────────────────────────────────────────────────────────────────
+#   tell   WHAT THE PUZZLE DISCLOSES OF ITS ANSWER   mark · none · ghost · exemplar
+#
+#   mark      the legacy lineage, byte for byte — a floating readout naming the
+#             height you need and how stable you currently are. A number, not a shape.
+#   none      nothing. A platform, a heap of blocks, and no statement of the goal
+#             at all: the purest reading of this artifact's own "stack freely".
+#   ghost     the goal as a VOLUME — a translucent cyan box standing on the platform
+#             up to height_threshold with a bright rim at the line itself
+#   exemplar  a finished stack, solid and opaque, standing on the floor beside the
+#             platform: one answer already built, while yours is still a pile
+#
+# The artifact's docstring says "No ghost guides. No templates. Stack freely." That
+# stays true of the DEFAULT, and the axis is what makes it a claim instead of an
+# accident — the same puzzle can now be asked with a template and answers differently.
+# Nothing about the physics, the threshold or the stability window changes at any
+# value, so no value makes the puzzle easier to PASS, only easier to read.
+#
+# SEEDING. The scatter rolled four unseeded randf() draws, which made every launch —
+# and every sweep variant — a different pile, so a measurement of this axis was a
+# measurement of the noise. `spawn_seed` fixes that; -1 keeps the old global stream.
+# ─────────────────────────────────────────────────────────────────────────────
 
 ## Balance Puzzle - The Sublime Through Physics
 ##
@@ -57,6 +80,32 @@ class_name BalancePuzzle
 ## Walker step frequency
 @export var walker_step_frequency: float = 3.0
 
+## AXIS — WHAT THE PUZZLE DISCLOSES OF ITS ANSWER before you have built one. Shared word for
+## word with [[chair_assembly_puzzle]] and [[configurable_portal]]. The threshold, the
+## stability window and the physics are identical at every value.
+##
+##   mark      the legacy lineage — a floating readout: the height needed, as a number
+##   none      nothing at all: a platform, a heap of blocks, no stated goal
+##   ghost     the goal as a volume — a translucent box up to the line, rim lit
+##   exemplar  a finished stack standing solid beside the platform: one answer, already built
+@export var tell: String = "mark"
+const TELLS: PackedStringArray = ["mark", "none", "ghost", "exemplar"]
+
+## Seed for the spawn scatter (which pieces are cubes, where they drop, how they face).
+## -1 = the legacy lineage: the global RNG, a different pile every launch. Any value >= 0
+## makes the pile reproducible — which is the precondition for measuring anything about
+## this artifact, because otherwise each capture is a different object.
+@export var spawn_seed: int = -1
+
+## Freeze the spawned pieces where they are dropped. Default false = the legacy lineage: they
+## are live rigid bodies and fall at once, which is the whole point in a map and useless in a
+## still — in a headless capture they fall past the platform for the whole settle and the
+## framing follows them down. A capture rig should set this; a map never needs to.
+@export var pieces_static: bool = false
+
+## Built in _spawn_pieces when spawn_seed >= 0; null means "use the global stream, as before".
+var _rng: RandomNumberGenerator = null
+
 ## Signals
 signal height_changed(current_height: float, threshold: float)
 signal stability_progress(progress: float)  # 0-1 progress toward stable
@@ -92,8 +141,19 @@ func _ready() -> void:
 	# Create platform
 	_create_platform()
 
-	# Create height indicator
-	_create_height_indicator()
+	# TELL — what the puzzle discloses of its answer. The wildcard arm is the legacy
+	# lineage: "mark" builds the readout exactly where and when it always did.
+	if not TELLS.has(tell):
+		tell = "mark"
+	match tell:
+		"none":
+			pass                                  # the puzzle states no goal at all
+		"ghost":
+			_tell_ghost()
+		"exemplar":
+			_tell_exemplar()
+		_:
+			_create_height_indicator()
 
 	# Spawn pieces
 	call_deferred("_spawn_pieces")
@@ -190,8 +250,16 @@ func _spawn_pieces() -> void:
 
 	var spawn_base = spawn_offset
 
+	# Seeded scatter when asked for. spawn_seed = -1 falls through to the global stream and
+	# draws in exactly the order it always did, so the legacy pile is unchanged.
+	if spawn_seed >= 0:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = spawn_seed
+	else:
+		_rng = null
+
 	for i in range(piece_count):
-		var is_cube = randf() < cube_ratio
+		var is_cube = _rf() < cube_ratio
 		var scene = _cube_scene if is_cube else _pyramid_scene
 
 		if not scene:
@@ -201,9 +269,9 @@ func _spawn_pieces() -> void:
 
 		# Randomize spawn position
 		var offset = Vector3(
-			randf_range(-0.1, 0.1),
+			_rf_range(-0.1, 0.1),
 			i * 0.12,  # Stack vertically to avoid overlap
-			randf_range(-0.1, 0.1)
+			_rf_range(-0.1, 0.1)
 		)
 
 		# Find GridScene to add pieces to (so they're grabbable)
@@ -216,7 +284,11 @@ func _spawn_pieces() -> void:
 		piece.global_position = global_position + spawn_base + offset
 
 		# Random rotation
-		piece.rotation_degrees.y = randf_range(0, 360)
+		piece.rotation_degrees.y = _rf_range(0, 360)
+
+		# Hold the piece where it was dropped for a still capture (default off).
+		if pieces_static and piece is RigidBody3D:
+			(piece as RigidBody3D).freeze = true
 
 		_pieces.append(piece)
 
@@ -491,3 +563,118 @@ func reset() -> void:
 
 	# Respawn
 	call_deferred("_spawn_pieces")
+
+
+# ── TELL ─────────────────────────────────────────────────────────────────────
+# What the puzzle discloses of its answer. Appended LAST; the default value ("mark")
+# is built by the wildcard arm in _ready and adds nothing here.
+
+## GHOST — the goal as a VOLUME rather than a number. A translucent cyan box stands on the
+## platform up to height_threshold, with a bright rim drawn at the line itself. You are shown
+## how tall, and how much room you have, and still not told what shape gets you there.
+func _tell_ghost() -> void:
+	var h: float = maxf(height_threshold, 0.05)
+	var w: float = maxf(platform_size.x, 0.05) * 0.86
+	var d: float = maxf(platform_size.z, 0.05) * 0.86
+
+	var fill := StandardMaterial3D.new()
+	fill.albedo_color = Color(0.0, 0.8, 1.0, 0.20)
+	fill.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	fill.emission_enabled = true
+	fill.emission = Color(0.0, 0.8, 1.0, 1.0)
+	fill.emission_energy_multiplier = 0.45
+	fill.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	fill.cull_mode = BaseMaterial3D.CULL_DISABLED
+	add_child(_tell_box("Tell_ghost_volume", Vector3(0, h * 0.5, 0), Vector3(w, h, d), fill))
+
+	var rim := StandardMaterial3D.new()
+	rim.albedo_color = Color(0.35, 1.0, 0.95, 1.0)
+	rim.emission_enabled = true
+	rim.emission = Color(0.2, 1.0, 0.9, 1.0)
+	rim.emission_energy_multiplier = 1.8
+	rim.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	var t: float = 0.014
+	add_child(_tell_box("Tell_ghost_rim_a", Vector3(0, h, d * 0.5), Vector3(w + t, t, t), rim))
+	add_child(_tell_box("Tell_ghost_rim_b", Vector3(0, h, -d * 0.5), Vector3(w + t, t, t), rim))
+	add_child(_tell_box("Tell_ghost_rim_c", Vector3(w * 0.5, h, 0), Vector3(t, t, d + t), rim))
+	add_child(_tell_box("Tell_ghost_rim_d", Vector3(-w * 0.5, h, 0), Vector3(t, t, d + t), rim))
+
+
+## EXEMPLAR — one answer, already built. A solid opaque stack stands on its own pad beside the
+## platform, tall enough to clear the threshold, blocks offset the way a hand stacks them. It
+## is not a template: nothing about it is checked, and the pile on the platform can be any
+## shape at all. It only says: something like this works, and it can be done.
+func _tell_exemplar() -> void:
+	var s: float = maxf(piece_scale, 0.02)
+	var x: float = maxf(platform_size.x, 0.05) * 0.5 + s * 1.9
+	var n: int = maxi(int(ceil((maxf(height_threshold, 0.05) + s) / s)), 3)
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.60, 0.54, 0.44)
+	mat.roughness = 0.85
+	var pad := StandardMaterial3D.new()
+	pad.albedo_color = platform_color.darkened(0.15)
+	pad.roughness = 0.9
+
+	add_child(_tell_box("Tell_exemplar_pad", Vector3(x, 0.012, 0),
+		Vector3(s * 2.4, 0.024, s * 2.4), pad))
+	for i in range(n):
+		var lean: float = float((i % 3) - 1) * s * 0.16      # hand-stacked, and deterministic
+		var blk: float = s * (0.94 if i % 2 == 0 else 1.0)
+		add_child(_tell_box("Tell_exemplar_%d" % i,
+			Vector3(x + lean, 0.024 + s * (float(i) + 0.5), lean * 0.5),
+			Vector3(blk, s, blk), mat))
+
+
+## Rebuild the disclosure after a live `tell` change (map token / apply_grid_config).
+func _rebuild_tell() -> void:
+	for c in get_children():
+		if str(c.name).begins_with("Tell_"):
+			remove_child(c)
+			c.queue_free()
+	if _height_indicator and is_instance_valid(_height_indicator):
+		_height_indicator.queue_free()
+	_height_indicator = null
+	match tell:
+		"none":
+			pass
+		"ghost":
+			_tell_ghost()
+		"exemplar":
+			_tell_exemplar()
+		_:
+			_create_height_indicator()
+
+
+func _tell_box(nm: String, center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.name = nm
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi
+
+
+## Seeded draws when spawn_seed >= 0, the global stream (and the legacy order) otherwise.
+func _rf() -> float:
+	return _rng.randf() if _rng != null else randf()
+
+
+func _rf_range(a: float, b: float) -> float:
+	return _rng.randf_range(a, b) if _rng != null else randf_range(a, b)
+
+
+## Config API for map loading. There was none before, so no map token could ever reach this
+## artifact's knobs — 33 placements, all of them the scene defaults.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("spawn_seed"):
+		spawn_seed = int(str(config_data["spawn_seed"]))
+	if config_data.has("pieces_static"):
+		pieces_static = str(config_data["pieces_static"]).to_lower() in ["true", "1", "yes", "on"]
+	if config_data.has("tell"):
+		var t: String = str(config_data["tell"]).strip_edges().to_lower()
+		if TELLS.has(t) and t != tell:
+			tell = t
+			_rebuild_tell()

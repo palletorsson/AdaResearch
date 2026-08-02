@@ -348,20 +348,26 @@ func _show_startup_info():
 
 # Standalone dev loop: tools/push_map_to_quest.ps1 adb-pushes a map to the headset and writes its
 # name to override_map/_start.txt in the app's files dir. If present, boot straight into that map
-# (the map DATA itself is picked up by GridDataComponent's override). Android only; empty on desktop.
+# (the map DATA itself is picked up by GridDataComponent's override).
+# On DESKTOP the same file works but is ONE-SHOT: consumed on read, so a
+# staged start map affects exactly one boot and can never go stale and
+# silently hijack later sessions. Android keeps it persistent — the push
+# tool owns that file's lifecycle there.
 func _pushed_start_map() -> String:
-	if not OS.has_feature("android"):
-		return ""
 	var rel := "override_map/_start.txt"
 	var candidates := ["user://" + rel]
-	var udir := OS.get_user_data_dir().replace("\\", "/")   # /data/user/0/<pkg>/files
-	var segs := udir.split("/", false)
-	var fi := segs.find("files")
-	if fi > 0:
-		candidates.append("/storage/emulated/0/Android/data/%s/files/%s" % [segs[fi - 1], rel])
+	if OS.has_feature("android"):
+		var udir := OS.get_user_data_dir().replace("\\", "/")   # /data/user/0/<pkg>/files
+		var segs := udir.split("/", false)
+		var fi := segs.find("files")
+		if fi > 0:
+			candidates.append("/storage/emulated/0/Android/data/%s/files/%s" % [segs[fi - 1], rel])
 	for c in candidates:
 		if FileAccess.file_exists(c):
-			return FileAccess.get_file_as_string(c).strip_edges()
+			var staged := FileAccess.get_file_as_string(c).strip_edges()
+			if not OS.has_feature("android"):
+				DirAccess.remove_absolute(ProjectSettings.globalize_path(c))
+			return staged
 	return ""
 
 

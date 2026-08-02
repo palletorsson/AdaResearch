@@ -340,6 +340,16 @@
    }
   },
   "mc_field_bench": {
+   "dna": {
+    "axes": {
+    "workings": [
+    "result",
+    "rule",
+    "trial",
+    "reject"
+    ]
+    }
+   },
    "lookup_name": "mc_field_bench",
    "scene": "res://commons/artifacts/mc_field_bench/mc_field_bench.tscn",
    "class_name": "McFieldBench",
@@ -428,6 +438,16 @@
    }
   },
   "sdf_sculpt_bench": {
+   "dna": {
+    "axes": {
+    "workings": [
+    "result",
+    "rule",
+    "trial",
+    "reject"
+    ]
+    }
+   },
    "lookup_name": "sdf_sculpt_bench",
    "scene": "res://commons/artifacts/sdf_sculpt_bench/sdf_sculpt_bench.tscn",
    "class_name": "SdfSculptBench",
@@ -516,6 +536,16 @@
    }
   },
   "wfc_tile_bench": {
+   "dna": {
+    "axes": {
+    "workings": [
+    "result",
+    "rule",
+    "trial",
+    "reject"
+    ]
+    }
+   },
    "lookup_name": "wfc_tile_bench",
    "scene": "res://commons/artifacts/wfc_tile_bench/wfc_tile_bench.tscn",
    "class_name": "WfcTileBench",
@@ -560,6 +590,16 @@
    }
   },
   "wfc_room_bench": {
+   "dna": {
+    "axes": {
+    "workings": [
+    "result",
+    "rule",
+    "trial",
+    "reject"
+    ]
+    }
+   },
    "lookup_name": "wfc_room_bench",
    "scene": "res://commons/artifacts/wfc_room_bench/wfc_room_bench.tscn",
    "class_name": "WfcRoomBench",
@@ -780,6 +820,16 @@
    }
   },
   "colonization_bench": {
+   "dna": {
+    "axes": {
+    "workings": [
+    "result",
+    "rule",
+    "trial",
+    "reject"
+    ]
+    }
+   },
    "lookup_name": "colonization_bench",
    "scene": "res://commons/artifacts/colonization_bench/colonization_bench.tscn",
    "class_name": "ColonizationBench",
@@ -1088,6 +1138,16 @@
    }
   },
   "slime_bench": {
+   "dna": {
+    "axes": {
+    "workings": [
+    "result",
+    "rule",
+    "trial",
+    "reject"
+    ]
+    }
+   },
    "lookup_name": "slime_bench",
    "scene": "res://commons/artifacts/slime_bench/slime_bench.tscn",
    "class_name": "SlimeBench",
@@ -1176,6 +1236,16 @@
    }
   },
   "voronoi_bench": {
+   "dna": {
+    "axes": {
+    "workings": [
+    "result",
+    "rule",
+    "trial",
+    "reject"
+    ]
+    }
+   },
    "lookup_name": "voronoi_bench",
    "scene": "res://commons/artifacts/voronoi_bench/voronoi_bench.tscn",
    "class_name": "VoronoiBench",

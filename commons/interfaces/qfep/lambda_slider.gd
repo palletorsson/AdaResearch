@@ -93,6 +93,17 @@ signal slider_released()
 ## invented here.
 @export_enum("optimum", "band", "dispute", "gap", "none") var calibration: String = "optimum"
 
+## THE VOCABULARY LIVES HERE, ONCE. phi_slider.gd preloads this script and reads
+## this list, normalise_calibration() and the plate builder below out of it, so the
+## two files cannot drift apart on what the five words are or what they inscribe.
+## The @export_enum line above is the one thing that has to be written out twice —
+## an annotation argument must be a literal — and normalise_calibration() is what
+## keeps that from mattering: a word in one annotation and not in this list falls
+## back to the legacy look instead of rendering something the registry never
+## declared. This list is also what tools/apply_dna_block.py derives the registry
+## declaration from.
+const CALIBRATIONS: PackedStringArray = ["optimum", "band", "dispute", "gap", "none"]
+
 ## Read out of the code, not invented: is_at_edge() spans λ 0.3..0.5, and the
 ## shipped default (default_position in _build_slider, _get_lambda_color's pivot)
 ## sits at 0.4.
@@ -101,6 +112,14 @@ const CALIB_HI := 0.5
 const CALIB_APEX := 0.4
 const CALIB_NEUTRAL := Color(0.50, 0.51, 0.53)
 const CALIB_PLATE := Color(0.14, 0.15, 0.17)
+
+## Face of the scale plate on the lectern's fascia. The rail is 20 mm of a 1.3 m
+## body, so an argument confined to the rail is a few pixels in any frame that
+## contains the instrument; the fascia is the only surface on this housing wide
+## enough to carry the claim AND clear of the λ readout and the rail itself. It is
+## also where an instrument's calibration certificate belongs.
+const CALIB_PLATE_W := 0.55
+const CALIB_PLATE_H := 0.20
 
 ## Housing — cabinet grammar, VERTICAL dialect (body = "scale lectern").
 ## This was the purest case of the pattern the grammar exists to fix: a bare rail
@@ -146,6 +165,16 @@ var _is_grabbed: bool = false
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 var _cab: Node3D     # the lectern
 var _rig: Node3D     # the rail assembly, lifted onto the shoulder
+## Every node `calibration` owns — the rail, the colour argument on it and the scale
+## plate. Tracked so a `#calibration:` token arriving after _ready() can free exactly
+## these and build the other lineage, touching neither the XR slider, the handle, the
+## word-marks, the particles nor the lectern.
+var _calib_nodes: Array[Node] = []
+var _built: bool = false
+
+## Front-to-back depth of the lectern. Named because the fascia mount has to land on
+## the same face _create_console() builds.
+const CONSOLE_DEPTH: float = 0.30
 
 # Glow parameters (like grab_sphere)
 const GLOW_EMISSION_ENERGY: float = 2.0
@@ -195,7 +224,7 @@ func _create_console() -> void:
 	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
 
 	var w: float = rail_length + 0.13
-	var d: float = 0.30
+	var d: float = CONSOLE_DEPTH
 	var h: float = deck_height
 	var face_z: float = d * 0.5
 
@@ -335,34 +364,8 @@ func _build_slider() -> void:
 		_handle.released.connect(_on_slider_released)
 
 func _build_visuals() -> void:
-	if calibration == "gap":
-		# the rail in two spans — the scale cannot hold the position it recommends
-		_build_rail_cut()
-	else:
-		# Build the rail
-		_rail_mesh = MeshInstance3D.new()
-		var rail_box = BoxMesh.new()
-		rail_box.size = Vector3(rail_length, rail_height, rail_depth)
-		_rail_mesh.mesh = rail_box
-		_rail_mesh.position = Vector3(rail_length / 2, 0, 0)
+	_build_rail_and_scale()
 
-		# Rail material with gradient texture
-		_rail_material = StandardMaterial3D.new()
-		_rail_material.albedo_color = Color(0.3, 0.3, 0.3)
-		_rail_material.metallic = 0.3
-		_rail_material.roughness = 0.7
-		_rail_mesh.material_override = _rail_material
-		_stage().add_child(_rail_mesh)
-
-	# The colour argument. optimum is the legacy lineage — ten gradient boxes,
-	# segment for segment, and no scale plate. The other four withhold the painted
-	# answer and inscribe the plate instead.
-	match calibration:
-		"band", "dispute", "gap", "none":
-			_build_calibration(calibration)
-		_:
-			_build_rail_gradient()
-	
 	# Build the handle visual - attach to handle so it moves with grab
 	_handle_mesh = MeshInstance3D.new()
 	var handle_sphere = SphereMesh.new()
@@ -402,6 +405,48 @@ func _build_visuals() -> void:
 	if show_particles:
 		_build_particles()
 
+	_built = true
+
+## THE RAIL AND THE COLOUR ARGUMENT ON IT — everything `calibration` owns, in one
+## place. Statement for statement what _build_visuals() used to open with, so
+## calibration=optimum still builds the grey rail and then _build_rail_gradient()
+## and nothing else; the only addition on that path is _own(), which appends to an
+## array and changes no geometry.
+func _build_rail_and_scale() -> void:
+	if calibration == "gap":
+		# the rail in two spans — the scale cannot hold the position it recommends
+		_build_rail_cut()
+	else:
+		# Build the rail
+		_rail_mesh = MeshInstance3D.new()
+		var rail_box = BoxMesh.new()
+		rail_box.size = Vector3(rail_length, rail_height, rail_depth)
+		_rail_mesh.mesh = rail_box
+		_rail_mesh.position = Vector3(rail_length / 2, 0, 0)
+
+		# Rail material with gradient texture
+		_rail_material = StandardMaterial3D.new()
+		_rail_material.albedo_color = Color(0.3, 0.3, 0.3)
+		_rail_material.metallic = 0.3
+		_rail_material.roughness = 0.7
+		_rail_mesh.material_override = _rail_material
+		_stage().add_child(_own(_rail_mesh))
+
+	# The colour argument. optimum is the legacy lineage — ten gradient boxes,
+	# segment for segment, and no scale plate. The other four withhold the painted
+	# answer and inscribe the plate instead.
+	match calibration:
+		"band", "dispute", "gap", "none":
+			_build_calibration(calibration)
+		_:
+			_build_rail_gradient()
+
+## Bookkeeping only — no geometry, no parenting. Returns what it is given so it can
+## be wrapped around an add_child argument without moving any code.
+func _own(n: Node3D) -> Node3D:
+	_calib_nodes.append(n)
+	return n
+
 func _build_rail_gradient() -> void:
 	# Create gradient segments on the rail
 	var segment_count = 10
@@ -426,7 +471,7 @@ func _build_rail_gradient() -> void:
 		mat.albedo_color.a = 0.6
 		segment.material_override = mat
 
-		_stage().add_child(segment)
+		_stage().add_child(_own(segment))
 
 ## ── THE SCALE PLATE ──────────────────────────────────────────────────────────
 ## The working face the four non-legacy calibrations inscribe. optimum never
@@ -445,12 +490,8 @@ func _build_calibration(mode: String) -> void:
 		_calib_box(Vector3(segment_width * (i + 0.5), 0, rail_depth * 0.3),
 			Vector3(segment_width * 0.9, rail_height * 1.1, rail_depth * 0.5),
 			_calib_mat(CALIB_NEUTRAL, 0.12, 0.6))
-	# the plate itself — cut with the rail under gap
-	if mode == "gap":
-		_calib_plate(0.0, CALIB_LO)
-		_calib_plate(CALIB_HI, 1.0)
-	else:
-		_calib_plate(0.0, 1.0)
+	# the plate itself, on the lectern's fascia — cut with the rail under gap
+	_build_scale_plate(mode)
 	if mode == "band":
 		# correctness as a tolerance: the region admitted whole, its width shown,
 		# no apex inside it
@@ -487,37 +528,69 @@ func _build_rail_cut() -> void:
 		piece.mesh = box
 		piece.position = Vector3(rail_length * (span[0] + span[1]) * 0.5, 0, 0)
 		piece.material_override = _rail_material
-		_stage().add_child(piece)
+		_stage().add_child(_own(piece))
 
-func _calib_plate(t0: float, t1: float) -> void:
-	_calib_box(Vector3(rail_length * (t0 + t1) * 0.5, -rail_height * 1.3, rail_depth * 0.1),
-		Vector3(rail_length * (t1 - t0) + 0.02, rail_height * 0.7, rail_depth * 1.7),
-		_calib_mat(CALIB_PLATE, 0.0, 1.0))
+## WHERE THE PLATE HANGS. On the lectern it is the fascia, in the clear band between
+## the three-colour bar at y=0.30 and the unit code at y=h-0.10: the working face of a
+## lectern is its front, it is the widest clean surface on this body, and it stands in
+## front of neither the rail nor the λ readout. With console_body off there is no
+## fascia, so the plate stands behind the rail the way phi_slider's does.
+func _calibration_mount() -> Node3D:
+	var mount := Node3D.new()
+	mount.name = "CalibrationPlate"
+	if console_body and _cab != null:
+		mount.position = Vector3(0.0, deck_height * 0.60, CONSOLE_DEPTH * 0.5 + 0.004)
+		_cab.add_child(_own(mount))
+	else:
+		mount.position = Vector3(rail_length * 0.5,
+			rail_height * 0.5 + CALIB_PLATE_H * 0.55, -rail_depth * 0.62)
+		_stage().add_child(_own(mount))
+	return mount
+
+## λ's numbers into the shared builder. The three schools are the same three optima
+## the rail flags — CALIB_LO / CALIB_APEX / CALIB_HI — and every colour is read out of
+## _get_lambda_color(), so the plate cannot say anything the rail does not.
+func _build_scale_plate(mode: String) -> void:
+	inscribe_scale_plate(_calibration_mount(), mode, CALIB_PLATE_W, CALIB_PLATE_H,
+		CALIB_LO, CALIB_HI, PackedFloat32Array([CALIB_LO, CALIB_APEX, CALIB_HI]),
+		PackedColorArray([_get_lambda_color(CALIB_LO), _get_lambda_color(CALIB_APEX),
+			_get_lambda_color(CALIB_HI)]),
+		COLOR_EDGE, CALIB_NEUTRAL, CALIB_PLATE)
 
 func _calib_post(t: float, h: float, color: Color) -> void:
 	_calib_box(Vector3(rail_length * t, h * 0.5, rail_depth * 0.75),
 		Vector3(0.008, h, 0.008), _calib_mat(color, 0.8, 1.0))
 
 func _calib_box(pos: Vector3, size: Vector3, mat: StandardMaterial3D) -> void:
-	var mi = MeshInstance3D.new()
-	var bm = BoxMesh.new()
-	bm.size = size
-	mi.mesh = bm
-	mi.position = pos
-	mi.material_override = mat
-	_stage().add_child(mi)
+	_stage().add_child(_own(calib_box(pos, size, mat)))
 
 func _calib_mat(color: Color, emissive_energy: float, alpha: float) -> StandardMaterial3D:
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = color
-	if emissive_energy > 0.0:
-		mat.emission_enabled = true
-		mat.emission = color
-		mat.emission_energy_multiplier = emissive_energy
-	if alpha < 1.0:
-		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		mat.albedo_color.a = alpha
-	return mat
+	return calib_mat(color, emissive_energy, alpha)
+
+## MAP CONFIG — `lambda_slider#calibration:dispute`. GridInteractablesComponent calls
+## this deferred, after _ready() has already built one lineage, so a word that changes
+## anything has to tear its own nodes down and build again. It frees only what _own()
+## recorded. A config key we do not own, or a word outside CALIBRATIONS, changes
+## nothing at all — which is why the tokens already in maps (#locked:, #value:) still
+## reach this method and still do exactly what they did before: nothing here.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("calibration"):
+		return
+	var before: String = calibration
+	calibration = normalise_calibration(str(config_data["calibration"]), calibration)
+	if calibration == before or not _built:
+		return
+	_rebuild_calibration()
+	print("LambdaSlider: calibration=%s" % calibration)
+
+func _rebuild_calibration() -> void:
+	for n in _calib_nodes:
+		if is_instance_valid(n):
+			if n.get_parent() != null:
+				n.get_parent().remove_child(n)
+			n.queue_free()
+	_calib_nodes.clear()
+	_build_rail_and_scale()
 
 func _build_scale_labels() -> void:
 	# Order label (λ=0)
@@ -635,6 +708,152 @@ func _get_lambda_color(value: float) -> Color:
 		# Edge to Chaos
 		var t = (value - 0.4) / 0.6
 		return COLOR_EDGE.lerp(COLOR_CHAOS, t)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE SHARED VOCABULARY. Everything below is static and phi_slider.gd calls it
+# through a preload of this file. One allow-list, one normaliser, one plate
+# builder, two instruments — because the pair are the same formula's parameters
+# and a scale plate that argued differently on each would be two axes wearing one
+# name. Each file supplies only what its own curriculum already states: where its
+# recommended region sits, which positions disagree, and what colour its scale
+# uses there.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## Accept a value only if it names something both files actually build. A typo in a
+## map token falls back to the shipped look rather than stranding a placement with a
+## scale that claims nothing — and it is what keeps the two @export_enum lines from
+## mattering if one of them ever drifts.
+static func normalise_calibration(raw: String, fallback: String = "optimum") -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if CALIBRATIONS.has(v) else fallback
+
+static func calib_mat(color: Color, emissive_energy: float, alpha: float) -> StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	if emissive_energy > 0.0:
+		mat.emission_enabled = true
+		mat.emission = color
+		mat.emission_energy_multiplier = emissive_energy
+	if alpha < 1.0:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.albedo_color.a = alpha
+	return mat
+
+## Builds a box; does NOT parent it. The caller owns where it goes, because one
+## slider hangs its plate on a lectern fascia and the other stands it behind a bare
+## rail.
+static func calib_box(pos: Vector3, size: Vector3, mat: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.position = pos
+	mi.material_override = mat
+	return mi
+
+## THE SCALE PLATE — the working face the four non-legacy calibrations inscribe, and
+## the one builder both sliders use.
+##
+## The mount's local frame IS the plate: x runs across the scale (t=0 at -w/2, t=1 at
+## +w/2, the same t the rail uses), y up its face, +z out of it.
+##
+## WHY A PLATE AND NOT MORE MARKS ON THE RAIL. The rail is 20 mm tall on a 1.3 m
+## instrument, and a capture frames an artifact by its bounding-box diagonal — so an
+## argument confined to the rail is a few pixels high in the only evidence this loop
+## has, and four different claims come out indistinguishable. The plate is the same
+## claim at a size a still can read. The rail keeps its own marks; they anchor the
+## plate's claim to the positions it is about.
+static func inscribe_scale_plate(mount: Node3D, mode: String, w: float, h: float,
+		lo: float, hi: float, marks: PackedFloat32Array,
+		mark_colors: PackedColorArray, claim: Color, neutral: Color,
+		ground: Color) -> void:
+	if mode == "optimum":
+		return
+
+	# WHERE THE PLATE IS WHOLE. gap is the value that cuts it: the plate is built as
+	# the pieces either side of the recommended region and the region itself is not
+	# built at all, so the scale physically cannot carry the position it recommends.
+	var spans: Array = [[0.0, 1.0]]
+	if mode == "gap":
+		spans = []
+		if lo > 0.002:
+			spans.append([0.0, lo])
+		if hi < 0.998:
+			spans.append([hi, 1.0])
+
+	var slab: StandardMaterial3D = calib_mat(ground, 0.0, 1.0)
+	var rule: StandardMaterial3D = calib_mat(neutral.lightened(0.20), 0.25, 1.0)
+	for span in spans:
+		var t0: float = float(span[0])
+		var t1: float = float(span[1])
+		if t1 - t0 < 0.004:
+			continue
+		mount.add_child(calib_box(
+			Vector3(((t0 + t1) * 0.5 - 0.5) * w, 0.0, 0.0),
+			Vector3((t1 - t0) * w, h, 0.006), slab))
+		# the datum the whole scale is read against
+		mount.add_child(calib_box(
+			Vector3(((t0 + t1) * 0.5 - 0.5) * w, -h * 0.36, 0.005),
+			Vector3((t1 - t0) * w, h * 0.05, 0.004), rule))
+
+	match mode:
+		"band":
+			# ONE claim, with its width admitted. The ground outside the tolerance is
+			# drawn dead — not wrong, just unwarranted — which is the whole difference
+			# between a band and a point.
+			var dead: StandardMaterial3D = calib_mat(neutral.darkened(0.20), 0.0, 1.0)
+			for outside in [[0.0, lo], [hi, 1.0]]:
+				var a: float = float(outside[0])
+				var b: float = float(outside[1])
+				if b - a < 0.004:
+					continue
+				mount.add_child(calib_box(
+					Vector3(((a + b) * 0.5 - 0.5) * w, h * 0.06, 0.005),
+					Vector3((b - a) * w, h * 0.74, 0.004), dead))
+			mount.add_child(calib_box(
+				Vector3(((lo + hi) * 0.5 - 0.5) * w, h * 0.06, 0.006),
+				Vector3((hi - lo) * w, h * 0.74, 0.005), calib_mat(claim, 0.55, 1.0)))
+			var brack: StandardMaterial3D = calib_mat(claim.lightened(0.45), 1.6, 1.0)
+			for f in [lo, hi]:
+				mount.add_child(calib_box(
+					Vector3((float(f) - 0.5) * w, 0.0, 0.008),
+					Vector3(w * 0.016, h, 0.006), brack))
+		"dispute":
+			# THREE claims and no arbiter. Each school holds the ground nearer to it
+			# than to its neighbours and its optimum stands as a bright post — three
+			# territories at equal strength, so the plate shows the disagreement
+			# rather than resolving it.
+			var edges := PackedFloat32Array()
+			edges.append(0.0)
+			for i in range(marks.size() - 1):
+				edges.append((marks[i] + marks[i + 1]) * 0.5)
+			edges.append(1.0)
+			for i in range(marks.size()):
+				var c: Color = claim
+				if i < mark_colors.size():
+					c = mark_colors[i]
+				var a2: float = edges[i]
+				var b2: float = edges[i + 1]
+				if b2 - a2 > 0.004:
+					mount.add_child(calib_box(
+						Vector3(((a2 + b2) * 0.5 - 0.5) * w, h * 0.06, 0.005),
+						Vector3((b2 - a2) * w, h * 0.74, 0.004),
+						calib_mat(c.darkened(0.50), 0.10, 1.0)))
+				mount.add_child(calib_box(
+					Vector3((marks[i] - 0.5) * w, 0.0, 0.008),
+					Vector3(w * 0.020, h, 0.006), calib_mat(c.lightened(0.25), 1.4, 1.0)))
+		"none":
+			# AN EVEN RULER. Twenty equal cells in one grey, alternating so the
+			# division reads, and no colour anywhere on the plate: every position
+			# equally warranted, nothing to find, you have to site yourself.
+			var cell: StandardMaterial3D = calib_mat(neutral.lightened(0.30), 0.25, 1.0)
+			for i in range(20):
+				if i % 2 == 1:
+					continue
+				mount.add_child(calib_box(
+					Vector3(((float(i) + 0.5) / 20.0 - 0.5) * w, h * 0.06, 0.005),
+					Vector3(w * 0.05, h * 0.74, 0.004), cell))
+		# gap inscribes nothing further: the hole is the inscription.
 
 # Public API
 

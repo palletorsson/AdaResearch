@@ -11,6 +11,33 @@ class_name FurnitureAssemblyPuzzle
 # relationships: extends TransformPuzzleBase; used in Trans_Scale as chair_assembly_puzzle artifact
 # truth: all furniture is transformation applied to a primitive — the cube is the universal raw material
 
+# ─────────────────────────────────────────────────────────────────────────────
+# ONE SCENE, FOUR REGISTRY NAMES. chair_assembly_puzzle.tscn is also registered as
+# shelf_assembly_puzzle, stool_assembly_puzzle and table_assembly_puzzle — one
+# script, one scene, four tokens that differ only by furniture_type. They are a
+# family and take ONE axis, so they are meant to measure alike.
+#
+#   tell   WHAT THE PUZZLE DISCLOSES OF ITS ANSWER   ghost · none · mark · exemplar
+#
+#   ghost     the legacy lineage, byte for byte — every piece pre-shown as a
+#             translucent cyan hologram at full size, in place, correctly rotated
+#   none      nothing: loose cubes on a workbench and no clue what they make
+#   mark      where, not what — a thin stake to each target with a bright head at
+#             the exact point; position disclosed, size and shape withheld
+#   exemplar  the answer stood up in solid wood at the targets, next to the cubes
+#             you must still transform to match it
+#
+# This is the puzzle's real argument, not the solving of it: a puzzle that shows
+# you the finished chair is a different teacher from one that shows you six glowing
+# boxes, and both are different from one that shows you nothing at all. `furniture_type`
+# says WHICH thing; `tell` says how much of it you are allowed to know in advance.
+#
+# Deliberately NOT routed through tell: the targets themselves, their tolerances,
+# and the snap logic. What has to be built and how close is close enough are the
+# same at every value — only the disclosure changes, so the axis cannot make the
+# puzzle easier to pass, just easier or harder to read.
+# ─────────────────────────────────────────────────────────────────────────────
+
 ## FurnitureAssemblyPuzzle - Assembly puzzles for furniture (chair, table, etc.)
 ##
 ## Inspired by Donald Judd's furniture: complex forms from simple rectangles.
@@ -32,6 +59,18 @@ enum FurnitureType {
 ## Furniture Configuration
 @export_group("Furniture Configuration")
 @export var furniture_type: FurnitureType = FurnitureType.CHAIR
+
+## AXIS — WHAT THE PUZZLE DISCLOSES OF ITS ANSWER before you have solved it. Shared word for
+## word with [[balance_puzzle]] and [[configurable_portal]]: one vocabulary for "how much of
+## the far side is shown in advance". Only the disclosure changes; the targets, the
+## tolerances and the snap are identical at every value.
+##
+##   ghost     the legacy lineage — every piece pre-shown as a translucent cyan hologram
+##   none      nothing at all — loose cubes and no clue what they make
+##   mark      where, not what — a stake to each target with a bright head at the point
+##   exemplar  the answer in solid wood, standing at the targets beside the raw cubes
+@export var tell: String = "ghost"
+const TELLS: PackedStringArray = ["ghost", "none", "mark", "exemplar"]
 @export var model_scale: float = 0.3  # Working scale (tabletop size)
 @export var final_scale: float = 1.0  # Real furniture size
 @export var grow_on_complete: bool = true
@@ -44,6 +83,11 @@ enum FurnitureType {
 @export var auto_spawn_pieces: bool = true  # Spawn pieces automatically
 @export var workbench_offset: Vector3 = Vector3(0.3, 0.1, 0.3)  # Where pieces start (centered on 1x1 platform)
 @export var extra_pieces: int = 3  # Extra cubes in case some fall off
+## Freeze the spawned cubes where they are laid out. Default false = the legacy lineage: the
+## pieces are live XR pickables and fall the moment they exist, which in a map is caught by
+## the floor and in a headless capture is not — they drop several metres in the settle and
+## drag the framing down with them. A capture rig should set this; a map never needs to.
+@export var pieces_static: bool = false
 
 ## Reward Configuration
 @export_group("Reward")
@@ -276,6 +320,10 @@ func _spawn_pieces() -> void:
 		if piece.has_method("set_scale_index"):
 			piece.set_scale_index(2)  # 1.0x
 
+		# Hold the piece on the bench for a still capture (default off — see pieces_static).
+		if pieces_static and piece is RigidBody3D:
+			(piece as RigidBody3D).freeze = true
+
 		# Register with puzzle system
 		register_piece(target.piece_id, piece)
 		furniture_pieces.append(piece)
@@ -296,6 +344,9 @@ func _spawn_pieces() -> void:
 
 		if piece.has_method("set_scale_index"):
 			piece.set_scale_index(2)
+
+		if pieces_static and piece is RigidBody3D:
+			(piece as RigidBody3D).freeze = true
 
 		# Register extra pieces with unique IDs
 		register_piece("extra_%d" % i, piece)
@@ -455,11 +506,24 @@ func _play_completion_sound() -> void:
 func apply_grid_config(config_data: Dictionary) -> void:
 	print("FurnitureAssemblyPuzzle: Applying config: %s" % config_data)
 
+	# AXIS — read BEFORE the furniture_type branch so a token that sets both rebuilds once.
+	# An unknown word keeps the current value rather than silently building a different puzzle.
+	var tell_changed: bool = false
+	if config_data.has("tell"):
+		var t: String = str(config_data["tell"]).strip_edges().to_lower()
+		if TELLS.has(t) and t != tell:
+			tell = t
+			tell_changed = true
+
 	if config_data.has("furniture_type"):
 		var new_type = _parse_furniture_type(config_data["furniture_type"])
 		if new_type != furniture_type:
 			furniture_type = new_type
 			_rebuild_for_new_type()
+			tell_changed = false          # that rebuild already re-ran the guides at the new tell
+
+	if tell_changed:
+		_rebuild_tell()
 
 
 ## Parse furniture type from string name or number
@@ -522,3 +586,106 @@ func _rebuild_for_new_type() -> void:
 		call_deferred("_spawn_pieces")
 
 	print("FurnitureAssemblyPuzzle: Rebuilt for %s" % get_furniture_type_name())
+
+
+# ── TELL ─────────────────────────────────────────────────────────────────────
+# What the puzzle discloses of its answer. Appended LAST, and the default value
+# calls straight through to the parent, so the legacy lineage runs the same code
+# it always did — the ghosts are built by TransformPuzzleBase, untouched.
+
+func _setup_ghost_guides() -> void:
+	_clear_tell_nodes()
+	match tell:
+		"none":
+			pass                                  # the workbench, and nothing else
+		"mark":
+			_tell_mark()
+		"exemplar":
+			_tell_exemplar()
+		_:
+			super()                               # "ghost" — the legacy lineage
+
+
+## Drop anything a previous tell built, so switching values in a live map does not stack
+## two disclosures on top of each other. Ghost guides are tracked separately, in ghost_guides.
+func _clear_tell_nodes() -> void:
+	if not ghost_container:
+		return
+	for c in ghost_container.get_children():
+		if str(c.name).begins_with("Tell_"):
+			ghost_container.remove_child(c)
+			c.queue_free()
+
+
+## MARK — where, not what. Each target gets its plan drawn on the ground as a bright outline
+## the size of the piece's footprint, and a thin stake standing up to a small bright head at
+## the exact target point. You are told where every piece goes and how high it sits; you are
+## told nothing about how big it is or which way round it faces.
+func _tell_mark() -> void:
+	if not ghost_container:
+		return
+	var lit := StandardMaterial3D.new()
+	lit.albedo_color = Color(ghost_color.r, ghost_color.g, ghost_color.b, 1.0)
+	lit.emission_enabled = true
+	lit.emission = Color(ghost_color.r, ghost_color.g, ghost_color.b, 1.0)
+	lit.emission_energy_multiplier = ghost_emission_energy * 1.6
+	lit.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	var stem_mat := StandardMaterial3D.new()
+	stem_mat.albedo_color = Color(0.10, 0.12, 0.15)
+	stem_mat.roughness = 0.85
+
+	for target in piece_targets:
+		var p: Vector3 = target.target_position
+		var holder := Node3D.new()
+		holder.name = "Tell_mark_" + target.piece_id
+		holder.position = Vector3(p.x, 0.0, p.z)
+		ghost_container.add_child(holder)
+		# The plan on the floor: four thin bars outlining the piece's footprint.
+		var fx: float = maxf(target.target_scale.x, 0.03)
+		var fz: float = maxf(target.target_scale.z, 0.03)
+		var t: float = 0.008
+		holder.add_child(_tell_box(Vector3(0, 0.003, fz * 0.5), Vector3(fx + t, 0.005, t), lit))
+		holder.add_child(_tell_box(Vector3(0, 0.003, -fz * 0.5), Vector3(fx + t, 0.005, t), lit))
+		holder.add_child(_tell_box(Vector3(fx * 0.5, 0.003, 0), Vector3(t, 0.005, fz + t), lit))
+		holder.add_child(_tell_box(Vector3(-fx * 0.5, 0.003, 0), Vector3(t, 0.005, fz + t), lit))
+		# The stake: a dark stem up to a small bright head sitting exactly at the target point.
+		var stem_h: float = maxf(p.y, 0.02)
+		holder.add_child(_tell_box(Vector3(0, stem_h * 0.5, 0), Vector3(0.007, stem_h, 0.007), stem_mat))
+		holder.add_child(_tell_box(Vector3(0, stem_h, 0), Vector3(0.032, 0.032, 0.032), lit))
+
+
+## EXEMPLAR — the answer stood up. Every target is built as a solid wood piece, in place, at
+## full size, using the very mesh the puzzle makes when a piece snaps. The finished furniture
+## stands there while the raw cubes still sit on the workbench beside it: you are shown the
+## whole answer and still have to perform the transformations that reach it.
+func _tell_exemplar() -> void:
+	if not ghost_container:
+		return
+	for target in piece_targets:
+		var solid: MeshInstance3D = _create_final_piece(target)
+		if not solid:
+			continue
+		solid.name = "Tell_exemplar_" + target.piece_id
+		ghost_container.add_child(solid)
+		solid.position = target.target_position
+		solid.rotation_degrees = target.target_rotation
+
+
+## Rebuild the disclosure after a live `tell` change (map token / apply_grid_config).
+func _rebuild_tell() -> void:
+	for ghost_id in ghost_guides.keys():
+		var ghost = ghost_guides[ghost_id]
+		if is_instance_valid(ghost):
+			ghost.queue_free()
+	ghost_guides.clear()
+	_setup_ghost_guides()
+
+
+func _tell_box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi

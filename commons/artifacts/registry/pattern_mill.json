@@ -6,6 +6,16 @@
 	"theoreticalGrounding": "A pattern is a program plus a fragment. The wallpaper group is the program; the mill is the press that runs it AND the editor that writes it. The fold-order rotors make the group's rotational order a visible, turning mechanism — cycling the group re-counts the blades, so the math is written into the machine's body.",
 	"artifacts": {
 		"pattern_mill": {
+			"dna": {
+			 "axes": {
+			 "exhibit": [
+			 "bolt",
+			 "unit",
+			 "operation",
+			 "catalogue"
+			 ]
+			 }
+			},
 			"lookup_name": "pattern_mill",
 			"name": "Pattern Mill",
 			"description": "Dark industrial frame with emissive accents, a glowing core and fold-order mirror rotors, a glowing warp cage, an editable touch-paint head grid, a press head on guide rods + pull lever, and a live wallpaper-group carpet feeding off a chute/tray plus a vertical proof sheet — both from one reusable texture. Touch-paint the head to edit; GROUP cycles all 17 groups and rebuilds the rotors to the new fold; SEED rerolls a procedural motif; CLEAR blanks it; PRESS punches the head down and re-stamps. DNA: group (p1..p6m), palette (bauhaus/escher/alhambra/tatami/pastel/memphis/persian/monochrome), motif_seed, density, motif_size, machine params.",

@@ -20,7 +20,35 @@ extends Node3D
 @export var obstacle_height: float = 3.0
 @export var obstacle_y_pos: float = 1.5
 
+## AXIS — WHAT THE APPARATUS DOES WITH A RESULT NOBODY SPECIFIED. Shared word for word
+## with [[mass_spring_bench]] and the rest of the soft-body bench family: one question,
+## one vocabulary, so a ride and a bench-top lattice can be compared without translating.
+##
+## The ride's own claim — "the soft bodies do not choose their shape, the rotation imposes
+## it" — is made by MOTION, and a still photograph of a carousel is a carousel at some
+## arbitrary phase. Every value below is therefore fixed to the ground and unaffected by
+## where the arms happen to be, which is the only way an axis on this artifact measures
+## itself rather than measuring the shutter.
+##
+##   none      the bare ride — the legacy lineage, byte for byte
+##   gauge     a graduated mast outside the obstacle ring, twinned across the diameter,
+##             each with a cantilever arm reaching in over the swept circle and a stylus
+##             dropped to flight height. The ride stops being a spectacle and reports a
+##             radius.
+##   control   one witness plinth carrying an empty wire cage at the size a body had
+##             BEFORE the ride, with a silhouette board behind it. The hanging shapes stop
+##             being shapes and become a difference from something.
+##   chart     twinned record boards on the perimeter, paper both sides, carrying the
+##             settling trace: an oscillation damping onto the rest line. The ride stops
+##             showing a state and starts keeping a history.
+##   vitrine   a glass case over the entire ride — posts at the corners, rails top and
+##             bottom, a capping plate, a caption rail. The demonstration stops being
+##             something you could climb into and becomes an exhibit.
+@export_enum("none", "gauge", "control", "chart", "vitrine") var assay: String = "none"
+const ASSAYS: PackedStringArray = ["none", "gauge", "control", "chart", "vitrine"]
+
 var ride_hub: RigidBody3D
+var _assay_root: Node3D = null
 
 # Shaders
 const SHADER_PINK_TARTAN = preload("res://commons/resourses/shaders/pinktartan.gdshader")
@@ -33,6 +61,7 @@ func _ready() -> void:
 	setup_lighting()
 	setup_ride()
 	setup_obstacles()
+	_build_assay()   # APPENDED LAST — nothing above it moves
 
 func create_shader_material(shader: Shader, params: Dictionary = {}) -> ShaderMaterial:
 	var mat = ShaderMaterial.new()
@@ -271,4 +300,294 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("assay"):
+		var want: String = str(config["assay"]).strip_edges().to_lower()
+		# An unknown word keeps the default. A typo must never publish a silent variant.
+		if ASSAYS.has(want):
+			assay = want
+	if is_inside_tree():
+		_build_assay()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ASSAY — the apparatus around the ride. All of it is bolted to the ground and
+# holds still while the hub turns, so a still photograph is of the axis and not
+# of the phase. Parented under one node so a rebuild frees exactly this.
+# ═══════════════════════════════════════════════════════════════════════════
+const AS_READ := Color(0.98, 0.74, 0.26)     # the instrument accent: readings and ink
+const AS_WIRE := Color(0.55, 0.88, 0.98)     # the reference standard's cool wire
+const AS_STEEL := Color(0.38, 0.41, 0.46)
+const AS_PAPER := Color(0.87, 0.86, 0.81)
+const AS_DARK := Color(0.17, 0.18, 0.22)
+# The apparatus stands one bay outside the obstacle ring, and the primary unit sits at
+# 40 deg — between the default capture camera and the ride, so nothing hides behind it.
+const AS_AZIMUTH := 0.6981317
+
+
+func _build_assay() -> void:
+	if is_instance_valid(_assay_root):
+		_assay_root.queue_free()
+	_assay_root = null
+	if assay == "none":
+		return
+	var root := Node3D.new()
+	root.name = "Assay"
+	add_child(root)
+	_assay_root = root
+	var outer: float = ride_radius + obstacle_radius_offset + 1.3
+	match assay:
+		"gauge":
+			_as_gauge(root, AS_AZIMUTH, outer)
+			_as_gauge(root, AS_AZIMUTH + PI, outer)
+		"control":
+			_as_control(root, AS_AZIMUTH, outer)
+		"chart":
+			_as_chart(root, AS_AZIMUTH, outer)
+			_as_chart(root, AS_AZIMUTH + PI, outer)
+		"vitrine":
+			_as_vitrine(root, outer + 0.4)
+		_:
+			pass
+
+
+# ── GAUGE — the ride reports a radius ─────────────────────────────────────
+func _as_gauge(root: Node3D, azimuth: float, at_r: float) -> void:
+	var steel: StandardMaterial3D = _as_mat(AS_STEEL, 0.35, 0.7)
+	var tick: StandardMaterial3D = _as_mat(Color(0.88, 0.88, 0.84), 0.5, 0.1)
+	var read: StandardMaterial3D = _as_glow(AS_READ, 1.0)
+	var inward: Vector3 = Vector3(-cos(azimuth), 0.0, -sin(azimuth))
+	var foot: Vector3 = Vector3(cos(azimuth) * at_r, 0.0, sin(azimuth) * at_r)
+	var top_y: float = 4.9
+
+	root.add_child(_as_box(foot + Vector3(0.0, 0.06, 0.0), Vector3(1.0, 0.12, 1.0), steel))
+	root.add_child(_as_box(foot + Vector3(0.0, top_y * 0.5, 0.0), Vector3(0.24, top_y, 0.24), steel))
+	# Graduations up the inward face — every fifth long and lit, the rest hairlines.
+	for i in range(21):
+		var gy: float = 0.35 + float(i) * 0.21
+		var major: bool = (i % 5) == 0
+		var gl: float = (0.42 if major else 0.20)
+		var gm: StandardMaterial3D = (read if major else tick)
+		root.add_child(_as_box(foot + inward * (0.14 + gl * 0.5) + Vector3(0.0, gy, 0.0),
+			_as_span(inward, gl, 0.045, 0.055), gm))
+	# The reading: a collar on the mast, an arm out over the swept circle, a lit tip and a
+	# stylus dropped from it to the height the bodies fly at.
+	var arm_y: float = 2.35
+	var reach: float = at_r - ride_radius - 0.4
+	var collar: Vector3 = foot + Vector3(0.0, arm_y, 0.0)
+	root.add_child(_as_box(collar, Vector3(0.42, 0.30, 0.42), _as_mat(AS_DARK, 0.6, 0.2)))
+	root.add_child(_as_box(collar + inward * (reach * 0.5), _as_span(inward, reach, 0.11, 0.11), read))
+	var tipv: Vector3 = collar + inward * reach
+	root.add_child(_as_sphere(tipv, 0.16, read))
+	root.add_child(_as_box(tipv + Vector3(0.0, -0.26, 0.0), Vector3(0.06, 0.52, 0.06), read))
+	root.add_child(_as_label("GAUGE", foot + Vector3(0.0, top_y + 0.35, 0.0), 26, AS_READ))
+
+
+# ── CONTROL — the shape before the ride happened to it ────────────────────
+func _as_control(root: Node3D, azimuth: float, at_r: float) -> void:
+	var pale: StandardMaterial3D = _as_mat(Color(0.80, 0.80, 0.76), 0.6, 0.0)
+	var wire: StandardMaterial3D = _as_glow(AS_WIRE, 1.0)
+	var steel: StandardMaterial3D = _as_mat(AS_STEEL, 0.4, 0.6)
+	var inward: Vector3 = Vector3(-cos(azimuth), 0.0, -sin(azimuth))
+	var foot: Vector3 = Vector3(cos(azimuth) * at_r, 0.0, sin(azimuth) * at_r)
+	var deck: float = 1.85
+
+	# Witness plinth: a small reference given a large pedestal, which is the whole point.
+	root.add_child(_as_box(foot + Vector3(0.0, 0.09, 0.0), Vector3(1.5, 0.18, 1.5), steel))
+	root.add_child(_as_box(foot + Vector3(0.0, deck * 0.5, 0.0), Vector3(0.9, deck, 0.9),
+		_as_mat(AS_DARK, 0.7, 0.1)))
+	root.add_child(_as_box(foot + Vector3(0.0, deck + 0.07, 0.0), Vector3(1.25, 0.14, 1.25), pale))
+	# Silhouette board behind it so the small cage reads against something.
+	root.add_child(_as_box(foot - inward * 0.62 + Vector3(0.0, deck + 0.95, 0.0),
+		_as_span(inward, 0.10, 1.7, 1.7), _as_mat(Color(0.24, 0.25, 0.29), 0.85, 0.0)))
+	root.add_child(_as_sphere(foot - inward * 0.55 + Vector3(0.0, deck + 0.95, 0.0),
+		soft_body_radius, _as_mat(Color(0.10, 0.10, 0.12), 0.95, 0.0)))
+
+	# Twelve edges of an undeformed body with nothing inside it.
+	var s: float = soft_body_radius
+	var c: Vector3 = foot + Vector3(0.0, deck + 0.22 + s, 0.0)
+	for sx: float in [-s, s]:
+		for sz: float in [-s, s]:
+			root.add_child(_as_box(c + Vector3(sx, 0.0, sz), Vector3(0.025, s * 2.0, 0.025), wire))
+	for sy: float in [-s, s]:
+		for sz2: float in [-s, s]:
+			root.add_child(_as_box(c + Vector3(0.0, sy, sz2), Vector3(s * 2.0, 0.025, 0.025), wire))
+		for sx2: float in [-s, s]:
+			root.add_child(_as_box(c + Vector3(sx2, sy, 0.0), Vector3(0.025, 0.025, s * 2.0), wire))
+	for cx: float in [-s, s]:
+		for cy: float in [-s, s]:
+			for cz: float in [-s, s]:
+				root.add_child(_as_sphere(c + Vector3(cx, cy, cz), 0.045, wire))
+	root.add_child(_as_label("CONTROL", c + Vector3(0.0, s + 0.4, 0.0), 26, AS_WIRE))
+
+
+# ── CHART — the ride keeps a history ──────────────────────────────────────
+func _as_chart(root: Node3D, azimuth: float, at_r: float) -> void:
+	var frame: StandardMaterial3D = _as_mat(Color(0.26, 0.27, 0.31), 0.7, 0.2)
+	var paper: StandardMaterial3D = _as_mat(AS_PAPER, 0.85, 0.0)
+	var rule: StandardMaterial3D = _as_mat(Color(0.58, 0.58, 0.54), 0.7, 0.0)
+	var ink: StandardMaterial3D = _as_glow(AS_READ, 1.1)
+	var inward: Vector3 = Vector3(-cos(azimuth), 0.0, -sin(azimuth))
+	var across: Vector3 = Vector3(-sin(azimuth), 0.0, cos(azimuth))
+	var foot: Vector3 = Vector3(cos(azimuth) * at_r, 0.0, sin(azimuth) * at_r)
+	var bw: float = 4.0
+	var bh: float = 2.3
+	var by: float = 1.35 + bh * 0.5
+
+	for lx: float in [-bw * 0.36, bw * 0.36]:
+		root.add_child(_as_box(foot + across * lx + Vector3(0.0, 0.68, 0.0),
+			Vector3(0.16, 1.36, 0.16), frame))
+	root.add_child(_as_box(foot + Vector3(0.0, by, 0.0),
+		_as_span(inward, 0.16, bw + 0.18, bh + 0.18), frame))
+	# Paper on BOTH faces, and the trace drawn on both — a record board that is blank from
+	# behind is a record only for whoever stands on the right side of it.
+	for face: float in [-1.0, 1.0]:
+		var fz: Vector3 = inward * (0.085 * face)
+		root.add_child(_as_box(foot + fz + Vector3(0.0, by, 0.0),
+			_as_span(inward, 0.02, bw, bh), paper))
+		var x0: float = -bw * 0.42
+		var x1: float = bw * 0.42
+		var y0: float = by - bh * 0.34
+		var y1: float = by + bh * 0.34
+		var pz: Vector3 = inward * (0.10 * face)
+		root.add_child(_as_box(foot + pz + Vector3(0.0, y0, 0.0),
+			_as_span(inward, 0.012, bw * 0.86, 0.03), rule))
+		root.add_child(_as_box(foot + across * x0 + pz + Vector3(0.0, by, 0.0),
+			_as_span(inward, 0.012, 0.03, bh * 0.70), rule))
+		for i in range(4):
+			root.add_child(_as_box(foot + pz + Vector3(0.0, lerpf(y0, y1, float(i + 1) / 5.0), 0.0),
+				_as_span(inward, 0.010, bw * 0.86, 0.012), rule))
+		# CLOSED FORM, not sampled from the running ride: a plot that came out different on
+		# every launch would be noise wearing the costume of a record.
+		var prev: Vector3 = Vector3.ZERO
+		for i in range(33):
+			var f: float = float(i) / 32.0
+			var v: float = exp(-3.2 * f) * cos(f * 14.0)
+			var p: Vector3 = foot + across * lerpf(x0, x1, f) + inward * (0.115 * face) \
+				+ Vector3(0.0, lerpf(y0, y1, 0.5 + v * 0.44), 0.0)
+			if i > 0:
+				root.add_child(_as_link(prev, p, 0.028, ink))
+			prev = p
+		root.add_child(_as_sphere(prev, 0.055, ink))
+	root.add_child(_as_label("CHART", foot + Vector3(0.0, by + bh * 0.5 + 0.3, 0.0), 26, AS_READ))
+
+
+# ── VITRINE — the ride becomes an exhibit ─────────────────────────────────
+func _as_vitrine(root: Node3D, half: float) -> void:
+	var post: StandardMaterial3D = _as_mat(Color(0.30, 0.32, 0.36), 0.35, 0.8)
+	var cap: StandardMaterial3D = _as_mat(AS_DARK, 0.7, 0.2)
+	var top: float = obstacle_height + 2.6
+	var c: Vector3 = Vector3(0.0, top * 0.5, 0.0)
+
+	root.add_child(_as_box(c, Vector3(half * 2.0, top, half * 2.0),
+		_as_glass(Color(0.72, 0.84, 0.95), 0.10)))
+	for px: float in [-half, half]:
+		for pz: float in [-half, half]:
+			root.add_child(_as_box(Vector3(px, top * 0.5, pz), Vector3(0.22, top, 0.22), post))
+	# Rails, not floors: a solid pan would hide the obstacle ring standing inside.
+	for ry: float in [0.09, top]:
+		for rz: float in [-half, half]:
+			root.add_child(_as_box(Vector3(0.0, ry, rz), Vector3(half * 2.0, 0.16, 0.16), post))
+		for rx: float in [-half, half]:
+			root.add_child(_as_box(Vector3(rx, ry, 0.0), Vector3(0.16, 0.16, half * 2.0), post))
+	root.add_child(_as_box(Vector3(0.0, top + 0.16, 0.0),
+		Vector3(half * 2.0 + 0.35, 0.2, half * 2.0 + 0.35), cap))
+	# Caption rail on the face nearest the default capture camera.
+	var cap_pos: Vector3 = Vector3(cos(AS_AZIMUTH), 0.0, sin(AS_AZIMUTH)) * (half + 0.14)
+	root.add_child(_as_box(cap_pos + Vector3(0.0, 0.62, 0.0), Vector3(2.4, 0.42, 0.08),
+		_as_mat(Color(0.13, 0.14, 0.17), 0.8, 0.0)))
+	root.add_child(_as_label("VITRINE", cap_pos + Vector3(0.0, 0.62, 0.10), 26,
+		Color(0.90, 0.92, 0.97)))
+
+
+# ── Small builders (prefixed so nothing in the ride can collide) ──────────
+# A box sized along an inward direction: thickness along `dir`, `w` across it, `h` up.
+func _as_span(dir: Vector3, thick: float, w: float, h: float) -> Vector3:
+	var ax: float = absf(dir.x)
+	var az: float = absf(dir.z)
+	if ax >= az:
+		return Vector3(thick, h, w)
+	return Vector3(w, h, thick)
+
+
+func _as_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _as_glow(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m
+
+
+func _as_glass(c: Color, alpha: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(c.r, c.g, c.b, alpha)
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	m.roughness = 0.08
+	m.metallic = 0.2
+	return m
+
+
+func _as_box(p: Vector3, s: Vector3, m: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = s
+	mi.mesh = bm
+	mi.material_override = m
+	mi.position = p
+	return mi
+
+
+func _as_sphere(p: Vector3, r: float, m: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = r
+	sm.height = r * 2.0
+	mi.mesh = sm
+	mi.material_override = m
+	mi.position = p
+	return mi
+
+
+# A cylinder spanning a to b, oriented by a hand-built Basis. look_at() needs the node in
+# the tree already, and these are built before they are parented.
+func _as_link(a: Vector3, b: Vector3, r: float, m: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	var d: Vector3 = b - a
+	var span: float = d.length()
+	cm.top_radius = r
+	cm.bottom_radius = r
+	cm.height = maxf(span, 0.002)
+	mi.mesh = cm
+	mi.material_override = m
+	var dir: Vector3 = Vector3.UP
+	if span > 0.0001:
+		dir = d / span
+	var up: Vector3 = Vector3.UP
+	if absf(dir.dot(up)) > 0.99:
+		up = Vector3.RIGHT
+	var right: Vector3 = dir.cross(up).normalized()
+	var fwd: Vector3 = right.cross(dir).normalized()
+	mi.transform = Transform3D(Basis(right, dir, fwd), (a + b) * 0.5)
+	return mi
+
+
+func _as_label(text: String, p: Vector3, size: int, c: Color) -> Label3D:
+	var l := Label3D.new()
+	l.text = text
+	l.font_size = size
+	l.pixel_size = 0.008
+	l.modulate = c
+	l.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	l.position = p
+	return l
