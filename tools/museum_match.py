@@ -187,7 +187,9 @@ def main() -> int:
         if not (isinstance(pat, dict) and pat.get("museum")):
             print(f"{mk:40} NOT A MUSEUM TEMPLATE")
             continue
-        name = f"Trial_{mk.split('-')[0]}_{args.seq}"
+        # full key in the name: an edited tile (kanazawa-matrix-vista) must not
+        # clobber its ancestor's trial (Trial_kanazawa_<seq>)
+        name = f"Trial_{mk.replace('-', '_')}_{args.seq}"
         shutil.rmtree(os.path.join(MAPS_DIR, name), ignore_errors=True)
         deal = stamp(mk, pat, champ, name)
         rc, pf = run([sys.executable, "tools/map_pathfinder.py", "check", name])

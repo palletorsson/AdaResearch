@@ -54,8 +54,8 @@ for i, (key, p) in enumerate(order):
     accent = hx(p.get("color", "#888888"))
     w, h, tile = int(p["w"]), int(p["h"]), p["tile"]
     slots = sum(1 for r in tile for c in r if str(c) in ("1s", "2s", "3s"))
-    d.text((cx0 + PAD, cy0), fit(d, f"{p.get('em_order', '?')}  {p.get('label', key)}", f_big, maxtext),
-           fill=accent, font=f_big)
+    head = ("CH" if p.get("challenger") else str(p.get("em_order", "?"))) + f"  {p.get('label', key)}"
+    d.text((cx0 + PAD, cy0), fit(d, head, f_big, maxtext), fill=accent, font=f_big)
     d.text((cx0 + PAD, cy0 + 18), fit(d, p.get("museum", ""), f_sm, maxtext), fill=(168, 170, 178), font=f_sm)
     d.text((cx0 + PAD, cy0 + 32), f"{w}x{h}  -  {slots} slots", fill=(120, 122, 130), font=f_sm)
     ox = cx0 + PAD + (tile_w - w * CELL) // 2
@@ -75,7 +75,7 @@ for i, (key, p) in enumerate(order):
                 d.rectangle([px + 1, py + 1, px + CELL - 2, py + CELL - 2], fill=mix)
             else:
                 d.rectangle([px, py, px + CELL - 1, py + CELL - 1], fill=COLORS.get(c, (25, 26, 30)))
-d.text((PAD, 6), "THE FOURTEEN MUSEUMS  -  template corpus in dealing order (em_order).   "
+d.text((PAD, 6), f"THE CORPUS - {len(order)} museum templates in dealing order (challengers last, marked CH).   "
         "dark = floor   grey = wall   light = podium   tinted = artifact slot   outlined = hero (3s)",
        fill=(200, 202, 210), font=f_sm)
 img.save(OUT)

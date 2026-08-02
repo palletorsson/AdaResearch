@@ -1,6 +1,6 @@
 {
  "_readme": "Principal spatial templates extracted from real museum floor plans (multi-agent extraction 2026-07-21, 8 museums, 8/8 agents clean). Each template abstracts the museum's principal idea into the /template-maps cell vocabulary; tiles are merged into template_patterns.json (mode stamp) for the editor and map making. Provenance: literature+abstraction — templates PROPOSE (P-10); numbers carry their sources. Validation: dims/tokens/top-to-bottom walkability/stop pockets, results per entry.",
- "extracted": "2026-07-21 (8 museums) + 2026-07-31 (6 more, multi-agent; legacy tiles repaired for the collision walker; gate = tools/validate_museum_templates.py)",
+ "extracted": "2026-07-21 (8 museums) + 2026-07-31 (6 more, multi-agent; legacy tiles repaired for the collision walker; gate = tools/validate_museum_templates.py) + 2026-08-02 wave 3 (Pompidou/Teshima/Mezquita extracted, first edited-lineage tiles as challengers)",
  "museums": [
   {
    "museum": "Uffizi Gallery, Florence",
@@ -703,6 +703,109 @@
     "slots": 14,
     "ok": true,
     "gate": "tools/validate_museum_templates.py (orchestrator re-check)"
+   }
+  },
+  {
+   "museum": "Mezquita-Catedral, Cordoba",
+   "architect": "Abd al-Rahman I (786) through al-Hakam II (961-976) and al-Mansur (987-988); cathedral crossing inserted from 1523 under Bishop Alonso Manrique",
+   "circulation_type": "isotropic hypostyle field — drift, no axis, no far wall",
+   "mechanism": "Hypostyle forest: 78 single free-standing columns on a strict every-2nd-cell grid fill the entire interior, so the columns ARE the experience — every aisle repeats every other aisle, orientation dissolves, and unlike Dia:Beacon's rhythm (columns organizing bays) density here is total. The one exception, the mihrab hero plinth, sits off-axis in the southeast of the field, discoverable only by drift; the twelve slots are embedded in the column grid like side chapels, breaking the beat without breaking the field.",
+   "numbers": [
+    "~850 columns stand today, of jasper, onyx, marble, granite and porphyry — Wikipedia (about 120 in Abd al-Rahman I's original 786 hall)",
+    "~1,250-1,300 columns at the mosque's maximum extent before the 16th-century cathedral crossing demolished part of the forest; the commonly cited surviving figure is 856 — Flickr/Socks Studio counts vs. Wikipedia's ~850",
+    "Footprint 180 x 130 m (590 x 425 ft) after all expansions — Wikipedia",
+    "19 aisles perpendicular to the qibla wall after al-Mansur's 987-988 lateral (eastward-only, river-blocked) expansion, up from the original 11 — Wikipedia; this eastward widening is why the mihrab is off the building's central axis",
+    "Mihrab of al-Hakam II completed 971, with Byzantine-influenced gold mosaics finished late 970/early 971 — Wikipedia",
+    "Two-tier arches throughout: lower horseshoe + upper semicircular, voussoirs alternating red brick and white stone — Wikipedia / Socks Studio"
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Mosque%E2%80%93Cathedral_of_C%C3%B3rdoba",
+    "https://socks-studio.com/2014/04/11/the-field-and-the-nave-the-mezquita-of-cordoba/",
+    "https://www.archnet.org/sites/2715",
+    "https://www.orangedonuttours.com/cordoba/city-guides/cordobas-forest-of-columns-spolia-geometry-and-power-inside-the-mezquita-catedral",
+    "https://cordobamosque.commons.gc.cuny.edu/history/"
+   ],
+   "template_key": "mezquita-hypostyle",
+   "walk_rule": "Enter and lose the door: every aisle repeats every other aisle, so walk by drift, not axis — pick any corridor, turn when a slot breaks the column rhythm, and let the off-axis hero (the mihrab) find you deep in the southeast of the field; the exit is just another gap in the wall, met the same way.",
+   "pacing_rule": "Metronomic: a column every second cell sets a constant beat with no crescendo and no vista; slots are rests scattered off-symmetry within the beat, the single hero is one held note — density never varies, so all pacing comes from the walker's own turns.",
+   "validation": {
+    "issues": [],
+    "slots": 13,
+    "ok": true,
+    "gate": "orchestrator re-check (wave 3)"
+   }
+  },
+  {
+   "museum": "Centre Pompidou, Paris",
+   "architect": "Renzo Piano & Richard Rogers (with Gianfranco Franchini; structure Peter Rice/Arup, gerberettes), 1977",
+   "circulation_type": "free-plan plateau — one uninterrupted loft floor, all circulation and servicing thrown to the perimeter; visitors drift freely across an open field with the hero at the integration core",
+   "mechanism": "PLATEAU LIBRE with an INTEGRATED hero. Everything that would interrupt the floor — structure, ducts, stairs, lifts, corridors — is exiled to the long edges as segmented servicing bays hugging the walls (the gerberette zone), leaving the interior a single column-free plateau. The one hero plinth is planted at the exact centre of the plan on the entry-exit axis: the point of maximum visual integration, seen straight down the spine from the entry gap, from the exit gap, and from ~87% of all floor cells (Hillier: occupancy follows visibility — the opposite pole from the Sainsbury's buried hero). Secondary slots sit on freestanding low podiums scattered in the free field, spine kept clear, never walling the hero off.",
+   "numbers": [
+    "48 m clear structural span per floor — no interior columns, achieved by 48-metre trusses on 800 mm spun-steel hollow columns (RSHP/Archeetect)",
+    "~7,500 m2 per free-plan floor plateau, arrangeable for any activity (Archeetect/Metalocus)",
+    "166 m x 60 m plan, 103,305 m2 total floor area over 7 above-ground levels — the 13x36 tile matches the 2.77:1 plan ratio (Wikipedia)",
+    "16,000 tons of steel with six 10-tonne cast-steel gerberettes per column carrying the perimeter servicing zone, thirteen structural bays — echoed as the segmented '2' bays along the tile's long walls (RSHP)",
+    "~50,000 m2 — half the site — surrendered to the public piazza, forcing the servicing to the building edge and the floors to total openness (RSHP)"
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Centre_Pompidou",
+    "https://rshp.com/projects/culture-and-leisure/centre-pompidou/",
+    "https://archeetect.com/the-centre-pompidou/",
+    "https://www.dezeen.com/2019/11/05/centre-pompidou-piano-rogers-high-tech-architecture/",
+    "https://www.metalocus.es/en/news/paris-architectural-masterpiece-center-pompidou-renzo-piano-and-richard-rogers"
+   ],
+   "template_key": "pompidou-plateau-libre",
+   "walk_rule": "Enter onto the open plateau and see the hero immediately, dead ahead down the clear central spine. Walk the free field in any order — servicing bays wall the edges, podium slots drift past on both flanks — but every path bends toward the centre, where the hero stands fully in the round before the spine releases you to the exit.",
+   "pacing_rule": "No enforced sequence: pacing is self-set on one open floor. The hero is met early by eye and late by body — visible from the threshold, reached mid-walk, re-seen from behind on the way out. Slot podiums alternate left-right at even intervals like structural bays, giving a loose rhythm without ever interrupting the plateau.",
+   "validation": {
+    "issues": [],
+    "slots": 15,
+    "ok": true,
+    "gate": "orchestrator re-check (wave 3)"
+   }
+  },
+  {
+   "museum": "Teshima Art Museum",
+   "architect": "Ryue Nishizawa (with artist Rei Naito), 2010",
+   "circulation_type": "single-thread approach into one continuous chamber",
+   "mechanism": "THE DROPLET — a long winding outdoor approach empties the visitor, then one continuous pillar-free concrete shell holds a single artwork that is the building itself; the museum reduced to a single held breath, the extreme end of the reduction axis (Chichu compresses to five works, Teshima to one)",
+   "numbers": [
+    {
+     "value": "40 x 60 m",
+     "note": "footprint of the freestanding concrete shell, no pillars (Benesse Art Site / ArchDaily)"
+    },
+    {
+     "value": "4.5 m",
+     "note": "maximum interior height of the shell at its crown (Benesse Art Site)"
+    },
+    {
+     "value": "25 cm",
+     "note": "shell thickness, poured continuously over ~22 hours onto a mortar-finished earth-mound formwork (Metalocus / ArchDaily)"
+    },
+    {
+     "value": "2",
+     "note": "oval oculi in the shell — no doors or windows; light, wind, rain and sound enter freely (Benesse Art Site)"
+    },
+    {
+     "value": "1",
+     "note": "artworks in the entire museum: Rei Naito's 'Matrix', water rising from the floor — the building and the work are one (Wikipedia / Benesse)"
+    }
+   ],
+   "sources": [
+    "https://benesse-artsite.jp/en/art/teshima-artmuseum.html",
+    "https://www.archdaily.com/151535/teshima-art-museum",
+    "https://en.wikipedia.org/wiki/Teshima_Art_Museum",
+    "https://www.metalocus.es/en/news/teshima-art-museum-ruye-nishizawa-detail",
+    "https://www.domusweb.it/en/architecture/2010/12/09/teshima-art-museum.html"
+   ],
+   "template_key": "teshima-droplet",
+   "walk_rule": "one path only: enter at the gap, serpentine the long outdoor approach for over half the tile's length, pass through the narrow neck into the droplet chamber, circle the single work, leave by the far gap",
+   "pacing_rule": "the approach is the decompression — no slots, no incident, just walking; then everything at once in one chamber and nothing after; slot density is the lowest in the corpus by design",
+   "validation": {
+    "issues": [],
+    "slots": 3,
+    "ok": true,
+    "gate": "orchestrator re-check (wave 3)"
    }
   }
  ]

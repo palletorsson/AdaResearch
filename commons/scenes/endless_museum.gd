@@ -138,6 +138,10 @@ func _load_museums() -> void:
 	for key in patterns:
 		var p: Dictionary = patterns[key]
 		if p.has("museum"):  # only the extracted museum templates
+			# challengers (edited-lineage tiles not yet adopted) stay out of the
+			# corridor rotation — they exist to be judged, not walked, until ruled
+			if p.get("challenger", false):
+				continue
 			_museums.append({"key": key, "label": p.get("label", key),
 				"museum": p.get("museum", ""), "w": int(p.get("w", 15)),
 				"h": int(p.get("h", 30)), "tile": p.get("tile", []),
