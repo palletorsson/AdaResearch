@@ -360,6 +360,49 @@ the opposite direction from the content chain above.
 | **Bite critic** | `python tools/artifact_dna_critic.py --gallery=S` | Does each axis actually change the picture? |
 | **Batch compile** | `godot --headless --path . --xr-mode off --script res://commons/testing/check_compile.gd -- --files=res://a.gd,res://b.gd` | Parses N scripts in ONE boot |
 
+### Before you believe an INERT verdict, check the harness
+
+Across nine promotion passes the critic has said INERT far more often about the CAPTURE than
+about the design. Every one of these was measured, not guessed:
+
+| symptom | cause | fix |
+|---|---|---|
+| all N frames identical, `focus ~= frame ~= 0.7%` | declared values are not the code's values | `check_dna_declarations.py` |
+| `NO RENDER`, subject 0.00% | `_ready()` is gated and builds nothing standalone | registry `dna.fixture` sets the gate |
+| two values `== 0.00%` to the byte | the geometry exists but is OCCLUDED or off-camera | change the fixture, not the axis |
+| subject under ~6% of frame | the AABB is inflated by one big or far-flung mesh | `dna.framing`, or a `layers = 0` anchor |
+| strong confident bite on a generative artifact | unseeded `randf` — five variants are five objects | seed export + `dna.fixture` pins it |
+| axis real in world space, invisible in frame | fit-by-DIAGONAL on a wide flat or thin subject | `dna.framing` below 1.0 |
+
+**Diagnose with numbers, not by squinting.** `subject %` (pixels differing from the corner
+background) separates "too small to measure" from "axis does nothing": `reaction_diffusion`
+filled 62% of frame and moved 15 grey levels — genuinely inert. `random_walk_collection`
+moved 174 grey levels across 0.06% of frame — a huge change, invisible. Same verdict, opposite
+problems.
+
+**`commons/testing/probe_aabb_hogs.gd`** ranks an artifact's meshes by world diagonal and
+prints the merged AABB; it needs a 0.35 s settle, because two process frames photographs a
+half-built artifact and reports an identical mesh count for every value.
+
+### Other things that cost a pass each
+
+- **Godot visibility is hierarchical.** `visible = false` on a node hides every descendant.
+  To hide one mesh and keep its children, use `layers = 0` (per-instance, does not propagate,
+  leaves mesh and material alone — `material_override` would break a pickup highlight swap).
+- **The capture AABB counts `MeshInstance3D` ONLY.** An artifact built from
+  `MultiMeshInstance3D` measures as a 1 m box. Add a `layers = 0` anchor sized to the real
+  extent — and do not overshoot, which is the same fault in the other direction.
+- **Check the .tscn root carries the script.** `GridInteractablesComponent` sets `config_*`
+  metadata and calls `apply_grid_config` on the ROOT; a scriptless root with logic on a child
+  makes the axis declared but unreachable from any map token.
+- **Check the file is tracked.** A promotion once landed 270 lines inside a gitignored addon;
+  the declaration would have shipped for code not in the repo, and the gate cannot see it
+  because it reads the working tree.
+- **One scene, many registry names is the corpus's most common hidden family** — found five
+  times (curation_station's three booleans, four grab spheres, the pickup cubes, the synth
+  racks, the translation cubes). Identical export counts across sibling tokens is the tell.
+  When a shared vocabulary is honest the siblings measure ALIKE, which is itself a check.
+
 **KNOWN GAP, do not mistake it for done:** exactly ONE map (`Artist_Readymades`, six
 `request_note` tokens) places any artifact at a non-default value. The families exist in the
 source tree and on the test bench; outside that one map nobody has ever met a variant.
