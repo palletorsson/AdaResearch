@@ -79,7 +79,16 @@ static func build(dna: CritterDNA, parent: Node3D, trait_mapper: CritterTraitMap
 	var mi := MeshInstance3D.new()
 	mi.name = "Body"
 	mi.mesh = mesh
-	mi.material_override = _skin(dna)
+	# THE BODY BREATHES. The DNA shader carries vertex animation the whole nature
+	# system already uses — breathing along the normal, body undulation scaled by
+	# mobility, tension shimmer from volatility — and CritterTraitMapper sets all
+	# of it per kingdom. The SDF builders were the only organisms handing back a
+	# plain StandardMaterial3D, so they were the only ones standing perfectly
+	# still. The shader is `cull_disabled`, which is the same double-siding the
+	# static skin needed ("never see-through"), so nothing regresses there.
+	# It is GPU/TIME-driven, so it costs no per-frame CPU and keeps animating even
+	# when chunk_lod freezes a distant organism's process_mode.
+	mi.material_override = _skin(dna, trait_mapper)
 	root.add_child(mi)
 
 	# eyes still read the head — two small spheres on the head bulge (they sit
@@ -110,7 +119,16 @@ static func _leg_nubs(dna: CritterDNA, spine: Array) -> Array:
 	return out
 
 
-static func _skin(dna: CritterDNA) -> StandardMaterial3D:
+## The living skin: the DNA shader when a mapper is available (it carries the
+## breathing / undulation / tension the rest of the nature system animates with),
+## falling back to the static StandardMaterial3D when it is not — probes and
+## tools may build a body without a mapper, and a still body beats no body.
+static func _skin(dna: CritterDNA, trait_mapper: CritterTraitMapper = null) -> Material:
+	if trait_mapper != null:
+		var shaded: ShaderMaterial = trait_mapper.create_part_material(
+			dna, CritterTraitMapper.PartType.TRUNK, 0)
+		if shaded != null and shaded.shader != null:
+			return shaded
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = dna.primary_color
 	mat.roughness = clampf(dna.roughness, 0.3, 0.95)
