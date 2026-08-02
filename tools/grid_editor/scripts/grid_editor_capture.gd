@@ -12,14 +12,63 @@ func _get_uvac_scene() -> PackedScene:
 
 @onready var subset_loader: GridEditorSubsetLoader = $SubsetLoader
 var elements_root: Node3D
+var _bed_root: Node3D
+
+# ── DNA ───────────────────────────────────────────────────────────────
+## AXIS — WHAT THE PLACEMENT FIELD IS LAID ON: what this loader admits about the grid
+## that put everything where it is. Six subsets share one placement list and one snapping
+## rule, and today the result hangs in the dark with no evidence that a grid was ever
+## involved — the elements simply ARE where the key said. That silence is a claim, and it
+## is only one of four an editor can make.
+##
+##   none      the legacy lineage, byte for byte — nothing under the set, the grid denied
+##   board     a plain backing slab the size of the occupied field: there is a ground, but
+##             it says nothing about cells
+##   lattice   a batten on EVERY cell line — the snapping grid itself made physical, so the
+##             set can be counted off the thing it was counted onto
+##   tray      a shallow case with a rim standing round the field: the set admitted as a
+##             bounded, carriable collection rather than an arrangement in free space
+##
+## Sized from the OCCUPIED cells plus half a cell of air, never from the subset's full
+## canvas. big_pipes runs at 2 m per cell on a 16x12 canvas, and a bed drawn on that would
+## be a 32 m slab standing round three pipes — the artifact's own framing destroyed by its
+## scenery, which is the failure this axis is most exposed to.
+@export_enum("none", "board", "lattice", "tray") var bed: String = "none"
+const BEDS: PackedStringArray = ["none", "board", "lattice", "tray"]
+
+## Build one subset preset in _ready() instead of waiting for a map to send config.
+## BOTH EMPTY BY DEFAULT, which is exactly today's behaviour: this scene stands empty until
+## apply_grid_config arrives, and every one of its 49 map placements sends #subset and
+## #preset in the token. They exist because a still-capture bench sets @export properties
+## before _ready and never calls apply_grid_config, so with no exports to set, this
+## artifact could only ever be photographed as an empty room.
+@export var demo_subset: String = ""
+@export var demo_preset: String = ""
 
 func _ready() -> void:
 	elements_root = Node3D.new()
 	elements_root.name = "Elements"
 	add_child(elements_root)
+	# Additive hook, gated by new data: with both fields empty (the shipped state) this is
+	# a no-op and the legacy path — nothing until config arrives — is untouched.
+	if demo_subset != "" and demo_preset != "":
+		apply_grid_config({"subset": demo_subset, "preset": demo_preset})
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	# DNA: the bed is rebuilt from scratch on every config and freed first, so a second
+	# call cannot leave two of them standing. Nothing is added here — see _build_bed, which
+	# runs LAST, after the elements and the CaptureCamera.
+	if is_instance_valid(_bed_root):
+		_bed_root.queue_free()
+		_bed_root = null
+	if config.has("bed"):
+		var bed_tok: String = str(config["bed"]).strip_edges().to_lower()
+		bed = bed_tok if BEDS.has(bed_tok) else bed
+	elif has_meta("config_bed"):
+		var bed_meta: String = str(get_meta("config_bed")).strip_edges().to_lower()
+		bed = bed_meta if BEDS.has(bed_meta) else bed
+
 	var subset_id: String = str(config.get("subset", "glass_rack"))
 	var placements: Array = config.get("placements", [])
 	var grid_dims = config.get("grid_size", [16, 12])
@@ -148,6 +197,10 @@ func apply_grid_config(config: Dictionary) -> void:
 
 	# Add CaptureCamera
 	_add_capture_camera(plane, gs, grid_dims)
+	# BED, appended LAST and parented to this node rather than to Elements, so every
+	# element index and the camera's content bounds (which walk Elements only) are exactly
+	# what they were. "none" adds nothing at all.
+	_build_bed(subset_id, plane, gs, placements)
 	print("grid_editor_capture: Built %d elements" % elements_root.get_child_count())
 
 
@@ -1287,3 +1340,197 @@ func _add_eurorack_capture_camera(plane: String, rack_width: float, rack_height:
 	fill_light.light_energy = 0.8
 	fill_light.rotation_degrees = Vector3(-20, -40, 0)
 	elements_root.add_child(fill_light)
+
+
+# ── BED ──────────────────────────────────────────────────────────────────────
+# One axis, four answers to "what is this set laid ON". Everything below is appended
+# after the elements and the camera; "none" returns before it builds anything, so the
+# legacy render is byte for byte what it was. No collider is ever added — a bed is a
+# thing to look at, not a thing to walk into.
+
+const BED_MARGIN := 0.5      # half a cell of air around the occupied field, in cells
+const BED_CLEAR := 0.10      # standoff from the element plane, in cells
+
+
+func _build_bed(subset_id: String, plane: String, gs: float, placements: Array) -> void:
+	if bed == "none":
+		return
+	var raw: Rect2 = _bed_cell_rect(placements)
+	if raw.size.x <= 0.0 or raw.size.y <= 0.0:
+		return
+	var field: Rect2 = raw.grow(BED_MARGIN)
+
+	var root := Node3D.new()
+	root.name = "Bed"
+	# The bed is built in its own flat 2D frame (u across, v up) and then turned onto the
+	# plane the subset uses. `back` is the direction AWAY from the elements: behind a
+	# wall-plane field, below a floor-plane one.
+	var u0: float = field.position.x * gs
+	var u1: float = (field.position.x + field.size.x) * gs
+	var v0: float = 0.0
+	var v1: float = 0.0
+	var back: float = -1.0
+	match plane:
+		"XY":
+			# rows run DOWN in XY: a node at row r sits at y = -r * gs.
+			v0 = -(field.position.y + field.size.y) * gs
+			v1 = -field.position.y * gs
+		"XZ":
+			# Lay the frame flat: rotating +90 about X sends local +Y to +Z (the row axis)
+			# and local +Z to -Y, so "behind" becomes "below" and `back` flips.
+			v0 = field.position.y * gs
+			v1 = (field.position.y + field.size.y) * gs
+			back = 1.0
+			root.rotation_degrees.x = 90.0
+			# big_pipes draws its cylinders on the cell centre line, not on the floor, so
+			# a bed at y=0 would saw through every pipe.
+			root.position.y = -PIPE_RADIUS * 1.2 if subset_id == "big_pipes" else 0.0
+		_:
+			v0 = field.position.y * gs
+			v1 = (field.position.y + field.size.y) * gs
+	add_child(root)
+	_bed_root = root
+
+	match bed:
+		"board":
+			_bed_board(root, u0, v0, u1, v1, gs, back)
+		"lattice":
+			_bed_lattice(root, u0, v0, u1, v1, gs, back)
+		"tray":
+			_bed_tray(root, u0, v0, u1, v1, gs, back)
+		_:
+			pass
+
+
+## The occupied field in CELL units, element footprints included (a 2x2 sticky note owns
+## four cells, and a bed cut to the anchor cells alone would slice through it).
+func _bed_cell_rect(placements: Array) -> Rect2:
+	var have := false
+	var c0: float = 0.0
+	var r0: float = 0.0
+	var c1: float = 0.0
+	var r1: float = 0.0
+	for entry in placements:
+		if not entry is Dictionary:
+			continue
+		var pos = entry.get("position", [0, 0])
+		if not pos is Array or pos.size() < 2:
+			continue
+		var w: float = 1.0
+		var h: float = 1.0
+		var element: Dictionary = subset_loader.get_element(str(entry.get("element", "")))
+		var sz = element.get("size", [1, 1])
+		if sz is Array and sz.size() >= 2:
+			w = maxf(float(sz[0]), 1.0)
+			h = maxf(float(sz[1]), 1.0)
+		var ec: float = float(pos[0])
+		var er: float = float(pos[1])
+		if not have:
+			c0 = ec
+			r0 = er
+			c1 = ec + w
+			r1 = er + h
+			have = true
+		else:
+			c0 = minf(c0, ec)
+			r0 = minf(r0, er)
+			c1 = maxf(c1, ec + w)
+			r1 = maxf(r1, er + h)
+	if not have:
+		return Rect2(0, 0, 0, 0)
+	return Rect2(c0, r0, c1 - c0, r1 - r0)
+
+
+## BOARD — a ground and nothing more. One slab the size of the field with a slim proud rim,
+## so it reads as a made panel rather than the wall of the room behind it.
+func _bed_board(root: Node3D, u0: float, v0: float, u1: float, v1: float, gs: float, back: float) -> void:
+	var w: float = u1 - u0
+	var h: float = v1 - v0
+	var t: float = maxf(gs * 0.18, 0.02)
+	var clear: float = gs * BED_CLEAR
+	var cu: float = (u0 + u1) * 0.5
+	var cv: float = (v0 + v1) * 0.5
+
+	var body := StandardMaterial3D.new()
+	body.albedo_color = Color(0.42, 0.41, 0.39)
+	body.roughness = 0.88
+	root.add_child(_bed_box(Vector3(cu, cv, back * (clear + t * 0.5)), Vector3(w, h, t), body))
+
+	var rim := StandardMaterial3D.new()
+	rim.albedo_color = Color(0.56, 0.55, 0.52)
+	rim.roughness = 0.55
+	rim.metallic = 0.25
+	var b: float = maxf(gs * 0.14, 0.015)
+	var rz: float = back * (clear * 0.6)
+	var rd: float = t * 0.5
+	root.add_child(_bed_box(Vector3(cu, v1 - b * 0.5, rz), Vector3(w, b, rd), rim))
+	root.add_child(_bed_box(Vector3(cu, v0 + b * 0.5, rz), Vector3(w, b, rd), rim))
+	root.add_child(_bed_box(Vector3(u0 + b * 0.5, cv, rz), Vector3(b, h, rd), rim))
+	root.add_child(_bed_box(Vector3(u1 - b * 0.5, cv, rz), Vector3(b, h, rd), rim))
+
+
+## LATTICE — no ground, only the lines. A batten on every cell boundary the field crosses,
+## which is why the line positions come off the UNGROWN field: the margin is half a cell,
+## so stepping from the padded corner would run every batten through the middle of a cell.
+func _bed_lattice(root: Node3D, u0: float, v0: float, u1: float, v1: float, gs: float, back: float) -> void:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.74, 0.75, 0.78)
+	mat.metallic = 0.45
+	mat.roughness = 0.42
+
+	var w: float = u1 - u0
+	var h: float = v1 - v0
+	var t: float = maxf(gs * 0.10, 0.012)
+	var d: float = maxf(gs * 0.10, 0.012)
+	var z: float = back * (gs * BED_CLEAR + d * 0.5)
+	var cu: float = (u0 + u1) * 0.5
+	var cv: float = (v0 + v1) * 0.5
+	var start_u: float = u0 + BED_MARGIN * gs
+	var start_v: float = v0 + BED_MARGIN * gs
+	# A wide canvas at a small cell size is thousands of boxes and a grey wash, not a grid.
+	var cols: int = mini(int(round((w - 2.0 * BED_MARGIN * gs) / gs)), 40)
+	var rows: int = mini(int(round((h - 2.0 * BED_MARGIN * gs) / gs)), 40)
+
+	for i in range(cols + 1):
+		root.add_child(_bed_box(Vector3(start_u + float(i) * gs, cv, z), Vector3(t, h, d), mat))
+	for j in range(rows + 1):
+		root.add_child(_bed_box(Vector3(cu, start_v + float(j) * gs, z), Vector3(w, t, d), mat))
+
+
+## TRAY — a base and four walls standing toward the viewer, so the set stops being an
+## arrangement in space and becomes a holding: something with an inside and an outside.
+func _bed_tray(root: Node3D, u0: float, v0: float, u1: float, v1: float, gs: float, back: float) -> void:
+	var w: float = u1 - u0
+	var h: float = v1 - v0
+	var t: float = maxf(gs * 0.12, 0.015)
+	var clear: float = gs * BED_CLEAR
+	var cu: float = (u0 + u1) * 0.5
+	var cv: float = (v0 + v1) * 0.5
+	var wall: float = maxf(gs * 0.16, 0.02)
+	var rise: float = maxf(gs * 0.60, 0.06)
+
+	var base := StandardMaterial3D.new()
+	base.albedo_color = Color(0.20, 0.20, 0.22)
+	base.roughness = 0.92
+	root.add_child(_bed_box(Vector3(cu, cv, back * (clear + t * 0.5)), Vector3(w, h, t), base))
+
+	var side := StandardMaterial3D.new()
+	side.albedo_color = Color(0.60, 0.60, 0.63)
+	side.roughness = 0.5
+	side.metallic = 0.3
+	# The walls run from the base face TOWARD the elements, i.e. against `back`.
+	var wz: float = back * (clear - rise * 0.5)
+	root.add_child(_bed_box(Vector3(cu, v1 - wall * 0.5, wz), Vector3(w, wall, rise), side))
+	root.add_child(_bed_box(Vector3(cu, v0 + wall * 0.5, wz), Vector3(w, wall, rise), side))
+	root.add_child(_bed_box(Vector3(u0 + wall * 0.5, cv, wz), Vector3(wall, h, rise), side))
+	root.add_child(_bed_box(Vector3(u1 - wall * 0.5, cv, wz), Vector3(wall, h, rise), side))
+
+
+func _bed_box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi
