@@ -525,6 +525,13 @@
      "breath_ref": "no breath (evening harvest)",
      "kind": "confirming -- strongest to date",
      "note": "34 commits landed between the 2026-07-31 breath's harvest (d785a9ed4, 07-31 11:32) and this evening pass: 22 on 07-31 after the harvest, 12 today. They carry six more museum templates plus two entirely new release gates (E: Museum Template Integrity, F: Museum Walkthrough autopilot), the shared catalyst impact language, nine thesis-artifact DNA promotions (declared axes 238 -> 242 -> 259), the dwell/FIT prop-measurement corrections, and a full CLAUDE.md rewrite. The breather participated in none of it. Not one of the four files the Read phase loads -- HEAT_MAP, FOCUS_VECTOR, LOD_TREE, breath_log -- registers any of this. The lever registry this proposal asks for would have surfaced doc/reports/artifact_dna_agenda.json and the museum template gate as live work on the first read."
+    },
+    {
+     "date": "2026-08-02T19:10:00",
+     "source": "evening-harvest evolve-only (no breath ran 08-01 or 08-02)",
+     "occurrence": 6,
+     "kind": "confirming -- and the first with a MEASURED before/after instead of a narrative",
+     "note": "The lever registered by last night's harvest (doc/reports/dna_coverage.json) was re-read tonight, exactly 24 hours later. It moved: declared families 185 -> 311 (+126), declared axes 259 -> 392 (+133), untouched-but-placed 1780 -> 1657 (-123), across twelve commits and zero breaths -- six DNA promotion tiers, a biome impact-stain system, a museum wave, two harness fixes. Every prior prop-011 note argued the blindness from the shape of the work; this one has both endpoints of a countable field, taken from a file that already exists and already sits in the repo. The Read phase loads HEAT_MAP, FOCUS_VECTOR, LOD_TREE and breath_log, so a breath firing tomorrow morning would open on 'pipeline saturated at 6.083, nothing autonomous to do' while the largest single day of DNA work on record sat one file read away. The registry is not a nice-to-have refinement: without it the loop is structurally incapable of noticing its own project's fastest-moving front."
     }
    ]
   },
@@ -552,6 +559,13 @@
     {
      "date": "2026-08-01T18:52:00",
      "note": "Follow-up to tonight's 17:19 harvest, which recorded a live concurrent writer (a commit landing at 17:13 mid-pass). Two git-status snapshots taken 4 minutes apart at 18:47 and 18:51 are byte-identical, and the newest file in the tree is 69 minutes old; the viewer heartbeats (ada_run/dr_viewer_alive.txt, hot_reload_alive.txt) are 3.3 and 11.8 days stale, so no Godot session holds the lock either. The concurrent session has STOPPED, and it stopped mid-promotion. This sharpens the proposal: the two-snapshot test distinguishes 'live, hands off' from 'abandoned, commit it', and 69 minutes of silence with a half-landed kit promotion is the second case. Without the test both look the same -- a dirty tree -- which is why prop-010 keeps recurring."
+    },
+    {
+     "date": "2026-08-02T19:10:00",
+     "source": "evening-harvest evolve-only",
+     "occurrence": 5,
+     "kind": "confirming -- and the FIRST pre-emptive detection (fired before any action was contemplated, not after)",
+     "note": "Two `git status --porcelain` snapshots six minutes apart: 431 paths / md5 a39dd9b0 at 18:52, 443 paths / md5 6ab4fb0c at 18:58. Sixteen .gd files carried mtimes between 18:49 and 18:57 -- pattern_loom, wfc_room_bench, phi_rate_bench, game_of_life_petri, KochCurve, NewtonCradle, revolving_joy_ride and others, spread across commons/artifacts, algorithms and commons/primitives. A DNA promotion wave was mid-flight while this harvest ran. On 07-31 the check fired mid-breath, one step from a wrong commit; on 08-01 it separated abandoned work from a live writer after the fact; tonight it ran FIRST and set the boundary for the whole session -- nothing under commons/ or algorithms/ was staged, edited, or treated as stranded. TWO SECOND-ORDER FINDINGS. (1) doc/reports/dna_coverage.json is modified and uncommitted at 18:38. Under prop-006/prop-010 alone that reads as stranded work to rescue; under the two-snapshot test it is the live writer's own output and must be left alone. The two rules genuinely conflict on this file and prop-012 is the tie-breaker -- worth stating explicitly in SKILL.md, because prop-010 is the more tempting read. (2) Instrument readings taken during a live write are not stable facts: tonight's declaration gate reports koch_curve.evidence as 'promoted in code, undeclared in the registry', which is not a defect but a writer between two edits. Any gate output captured inside a concurrent-writer window should be labelled as such rather than logged as a finding."
     }
    ]
   },
@@ -611,6 +625,36 @@
     "prop-011",
     "prop-012"
    ]
+  },
+  {
+   "id": "prop-016",
+   "created": "2026-08-02T19:10:00",
+   "skill": "ada-breather (Read + Evaluate phases) + tools/dna_coverage_census.py",
+   "status": "proposed",
+   "evidence": "The DNA census carries a counter that only grows, and it grew fastest on the day it was being actively fought. declared_but_never_swept: 11 on 2026-07-31, 30 at commit b17c0a771 on 08-02 13:59, 38 by 18:38. b17c0a771 is titled 'close the evidence gap on twelve declarations that had none' -- twelve were closed by hand that afternoon and the counter still finished the day 27 higher than it started, because 5385773b4 promoted thirty more artifacts at 17:57. Promotion outruns evidence, structurally: declaring an axis is a registry edit and takes seconds; proving it takes a Godot sweep. THREE INDEPENDENT OCCURRENCES of the resulting state (07-31 harvest 11, 08-01 harvest 11 flagged as 'a claim with no evidence under it', 08-02 38 after an explicit closing pass), and the HARM CASE is already in CLAUDE.md as the reason the declaration gate exists: science_screen shipped a hand-typed declaration whose values were not the code's values, the sweep set invalid values, the artifact fell back to its default, sixteen identical frames were published and the critic reported INERT at 0.69% -- every stage green over a verdict about a typo. lambda_slider (07-31) carried a full promotion write-up for an axis its file does not implement. Both were caught only because a human looked. A never-swept declaration is precisely that state, unresolved. TONIGHT'S SHAPE, checked rather than assumed: the 38 are NOT sibling tokens of a shared scene (the expected explanation) -- they span 35 distinct .tscn files, only dome_kit.tscn is shared, four ways -- and they carry 57 live placements a player can walk past. The gap is genuine, bounded and nameable. Note also what is NOT wrong: tools/check_dna_declarations.py ran clean tonight at 392 declared / 390 verified / 0 broken. The declaration gate is healthy. It proves an axis is REACHABLE from the registry; it cannot prove the axis changes the picture. Only a sweep can, and 38 axes have never had one.",
+   "proposed_change": "(1) LEVER REGISTRY (extends prop-011): register doc/reports/dna_coverage.json with TWO remaining-work fields, not one -- outside_system_placed (the coverage frontier, 1657 tonight) and declared_but_never_swept (the evidence debt, 38 tonight). A lever with only a growth number will always read as progress. (2) RATCHET RULE in Evaluate: compare declared_but_never_swept against the previous breath's reading. If it has GROWN, the breath's first item is to sweep the backlog down, before any new promotion. New declarations are cheap and self-reporting; evidence is neither. (3) NAME THE AUTONOMOUS LEVER: sweeping is headless work -- tools/build_dna_gallery.py then tools/artifact_dna_critic.py, one artifact at a time, under tools/godot_watchdog.py, serialized (never two Godot instances). That makes this the first genuinely autonomous content lever available on a saturated-pipeline day, which is the exact gap behind the 'saturated, nothing autonomous to do' verdict recorded on five of the last seven breaths. Sequence it AFTER a concurrent-writer check: a capture taken during a live .gd write photographs half-written code and fights for the user:// lock. (4) REPORTING RULE: never cite the declaration gate as evidence of bite. 'N axes verified' means reachable; 'N axes swept' means photographed; 'N axes BITE' means measured above 3%. Three different claims, and the loop has been quoting the first where it means the third.",
+   "expected_improvement": "Converts a growing unowned debt counter into a bounded closable queue (38 tokens / 34 scenes / 57 placements today) and gives the Evaluate phase a headless lever that does not need a human in a headset. Prevents the science_screen failure mode at its source: no declaration ships without a picture behind it, so a false axis is caught by the sweep rather than by a human happening to look.",
+   "breath_refs": [
+    "no breath 2026-08-02 (evening harvest)",
+    "no breath 2026-08-01 (evening harvest)",
+    "2026-07-31T11:20"
+   ],
+   "related_proposals": [
+    "prop-011 (lever registry -- this is a second field on that lever)",
+    "prop-015 (proposals are unread, so this one will also sit unless the ledger is loaded)",
+    "prop-009 (do not record success on a metric that cannot observe the work -- same family: do not record evidence a sweep never produced)"
+   ],
+   "measured_state_at_filing": {
+    "declared_but_never_swept": 38,
+    "distinct_scenes": 35,
+    "placements_behind_them": 57,
+    "declaration_gate": "392 declared / 390 verified / 0 broken / 2 unverifiable",
+    "largest_placement_holders": [
+     "y_translation_cube (8)",
+     "tentacle_grab_bench (6)",
+     "x_translation_cube (6)"
+    ]
+   }
   }
  ]
 }
