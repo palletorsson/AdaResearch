@@ -113,6 +113,17 @@
    "qfep_connection": "The flat diagrams of chance — scatter plots, walks, histograms — stood upright in the room. The board bridges the textbook and the terrarium: what the page could only plot, the space around you performs."
   },
   "GaussianBlurCircle": {
+   "dna": {
+    "axes": {
+    "sitter": [
+    "disc",
+    "edge",
+    "dot",
+    "lattice",
+    "field"
+    ]
+    }
+   },
    "category": "emergence",
    "complexity": "intermediate",
    "description": "Demonstrates Gaussian blur applied to a circular region, showing how the bell curve kernel creates smooth, natural edge falloff.",
@@ -2101,6 +2112,16 @@
    }
   },
   "dice_throw": {
+   "dna": {
+    "axes": {
+    "warrant": [
+    "tally",
+    "word",
+    "net",
+    "assay"
+    ]
+    }
+   },
    "category": "randomness",
    "complexity": "beginner",
    "description": "A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
@@ -4570,6 +4591,15 @@
    "qfep_connection": "The project's own name is fed through a terrain shader — the letters of ADA RESEARCH heave under animated noise and cycle hue like any landscape, TIME wrapped at the hour so precision never rots. Signage granted no exemption from the flux it advertises."
   },
   "noisetorus": {
+   "dna": {
+    "axes": {
+    "readout": [
+    "relief",
+    "plate",
+    "none"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "advanced",
    "description": "Shader-driven torus whose surface ripples with animated noise and hue shifting.",
@@ -5546,6 +5576,15 @@
    "qfep_connection": "The cloud negotiates its own density against an 11-millisecond frame budget, shedding particles whenever 90 fps is threatened. What reads as weather is a scheduler deciding how much sky you can afford — atmosphere as a performance contract."
   },
   "perlin_noise_terrain": {
+   "dna": {
+    "axes": {
+    "readout": [
+    "relief",
+    "plate",
+    "column"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Interactive 3D terrain generation using Perlin noise algorithms",
@@ -6946,6 +6985,19 @@
    }
   },
   "random_bell_curve": {
+   "dna": {
+     "fixture": {
+     "rng_seed": 20260802
+     },
+    "axes": {
+    "constitution": [
+    "skin",
+    "terrace",
+    "column",
+    "rib"
+    ]
+    }
+   },
    "category": "emergence",
    "complexity": "intermediate",
    "description": "Builds a 20x20 quad grid shaped into a 3D Gaussian bell curve with HeightMapShape3D collisions. Optional surface noise adds organic variation.",
@@ -7483,6 +7535,18 @@
    "qfep_connection": "Decay runs only while your hand closes on the paper: each frame one random prism in the 9×9 grid picks up a millimetre of drift and a degree of tilt. Entropy staged as consent — release the grab and the ruin pauses mid-sentence."
   },
   "random_edge_profile": {
+   "dna": {
+     "fixture": {
+     "profile_seed": 20260802
+     },
+    "axes": {
+    "readout": [
+    "relief",
+    "plate",
+    "column"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "A planar surface that generates random edge profiles and patterns",
@@ -7763,6 +7827,20 @@
    "qfep_connection": "Each dot lands at alpha 0.004 — individually almost nothing — so the bell curve exists only as accumulation. The Gaussian is a crowd phenomenon: a law legible in aggregate and deniable in every single event."
   },
   "random_number_book_page_1955": {
+   "dna": {
+     "fixture": {
+     "page_seed": 20260802
+     },
+    "axes": {
+    "disclosure": [
+    "works",
+    "oracle",
+    "tally",
+    "ledger",
+    "origin"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "beginner",
    "description": "A single page from the RAND Corporation 1955 random digit table. Numbers cascade live top-to-bottom. Touch any 5-digit number to freeze it in amber — the rest keep flowing.",
@@ -8594,6 +8672,20 @@
    "qfep_connection": "Four vocabularies of chance stand in parallel columns — uniform, Gaussian, exponential, Poisson — twenty fresh samples each, every frame. The distributions are compared not by formula but by posture: how each cloud of spheres carries its spread."
   },
   "random_walk_128": {
+   "dna": {
+     "fixture": {
+     "walk_seed": 20260802
+     },
+    "axes": {
+    "residue": [
+    "path",
+    "head",
+    "tail",
+    "envelope",
+    "ensemble"
+    ]
+    }
+   },
    "category": "primitives",
    "complexity": "beginner",
    "description": "Fine-grained random walk on 128x128 grid using tiny cubes",
@@ -8912,6 +9004,20 @@
    "qfep_connection": "The walk advances only while the paper is in your hand; set it down and the trace halts mid-drift. Which of seven walk grammars you are holding was itself drawn at random at startup — you read the trail to learn what kind of chance you've been carrying."
   },
   "random_walk_leash": {
+   "dna": {
+     "fixture": {
+     "walk_seed": 20260802
+     },
+    "axes": {
+    "residue": [
+    "tail",
+    "head",
+    "path",
+    "envelope",
+    "ensemble"
+    ]
+    }
+   },
    "category": "randomness",
    "complexity": "beginner",
    "description": "A glowing orb on a leash that tugs in random directions. Grab it in VR and feel the random walk through your hand. The orb pulses with each impulse. A trail traces the walk path. Stats track drift vs sqrt(N) theoretical scaling.",
@@ -11093,6 +11199,19 @@
    "qfep_connection": "The C64 one-liner, but with its coin rigged: the slash-or-backslash probability breathes between 0.2 and 0.8 on a slow sine as the maze writes itself row by row. The rule never changes — only the fairness of the coin, and that alone re-textures the whole labyrinth."
   },
   "ten_print_maze_3d": {
+   "dna": {
+     "fixture": {
+     "maze_seed": 20260802
+     },
+    "axes": {
+    "impression": [
+    "stroke",
+    "character",
+    "wall",
+    "tile"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",

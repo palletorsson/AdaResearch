@@ -50,6 +50,80 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var table_color: Color = Color(0.70, 0.68, 0.64)  # family panel grey (was dark brown, off-family)
 @export var felt_color: Color = Color(0.08, 0.35, 0.12)
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-08-02). THE KIN OF prng_crank_machine.
+#
+# The crank machine's axis is `disclosure`: how much a DETERMINISTIC source will
+# admit about where its numbers came from. A die is the other pole of the same
+# argument — the canonical FAIR source, trusted not because it explains itself
+# but because of two properties you can check with your eyes before it is
+# thrown: it is a CUBE (symmetric under 24 rotations, so no face is privileged)
+# and it CARRIES ITS OWN SAMPLE SPACE ON ITS SKIN (six faces, 1..6, all present).
+#
+# But this table does not actually show you either of those things. It shows you
+# a bar chart. That is a third, quite different argument — the empirical one, the
+# law of large numbers, "trust it because the frequencies converged" — and it is
+# the only warrant this artifact has ever offered in 19 rooms. The identity block
+# says the truth is "fairness is the symmetry of the generating process", and the
+# table has been arguing frequency at it the whole time.
+#
+#   warrant   what the table puts forward as the reason to trust the die
+#
+#     tally  the RECORD. Bare felt; the far-rail glass carries rolls, the running
+#            mean against the theoretical 3.50, and a six-row bar chart. Trust it
+#            because it came out even. THIS IS THE LEGACY LINEAGE, byte for byte.
+#     word   the ASSERTION. The felt is stamped with a house legend the way a
+#            casino layout is printed — FAIR / EACH FACE 1 IN 6 / NO RECORD KEPT —
+#            between routed rules, and the glass keeps the answer but drops every
+#            statistic. Nothing on the table lets you check anything. This is the
+#            loot box, the "provably fair" badge, the certified-RNG line in a EULA.
+#     net    the GEOMETRY. The die's own unfolded net printed across the play
+#            field: the 1-4-1 cross, six squares, twenty-one pips, laid out so you
+#            can count every face and see they are the same square six times, with
+#            OPPOSITE FACES SUM TO 7 under it. The cube stands on the flat map of
+#            itself. This is the warrant the identity block actually names.
+#     assay  the STAMP. A gauge cradle on the felt holding a reference die between
+#            two jaws under a dial, an inlaid inspection plate (SERIAL / TOLERANCE
+#            / EDGE), and the certificate in the glass. Somebody with authority
+#            measured this cube. You are trusting the stamp, not the die.
+#
+# WHAT IS DELIBERATELY NOT THE AXIS. balls_per_pip is the identity block's own
+# named critical_parameter and it is NOT promoted: the reward rain only exists
+# after a settled physical throw, so it is invisible to a still, and sweeping it
+# would publish six identical photographs of an empty table. Same for the
+# physics knobs (dice_mass, dice_bounce, ball_drop_height) — all of them are
+# tempo, none of them is an argument.
+#
+# WHAT IS FORECLOSED. There is no `none`. A table that offers no warrant at all
+# is not a quieter table, it is an unmarked one, and the die must still answer —
+# `_result_label` survives at every value, exactly as the crank machine still
+# emits its number at `oracle`. The absence case is `word`: a warrant made
+# entirely of a claim.
+#
+# NOT TOUCHED, AND NOT NEGOTIABLE: the throw. The die is the same cube with the
+# same pips, the same mass, the same felt friction and the same face-normal
+# read at every value. `_read_dice_result` is byte for byte what it was, the
+# counts still accumulate internally at every rung, and P(X=k) is still 1/6.
+# This axis changes what the TABLE SAYS about the die, never the die.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## THE AXIS — what this table offers as the reason to trust the die. Not a
+## ladder: four different kinds of warrant, not four amounts of one.
+## `tally` is the legacy default and the only value 19 live placements will see
+## unless a map asks for another by name.
+@export_enum("tally", "word", "net", "assay") var warrant: String = "tally"
+
+## The allow-list, same spelling and same order as the @export_enum above. This
+## is what `_pick_warrant` checks a map token against; an unreadable word falls
+## back to the legacy default rather than to a blank table.
+const WARRANTS: PackedStringArray = ["tally", "word", "net", "assay"]
+
+## Printing on the cloth. Casino felt is marked in chalk-white, not in the body
+## palette — the legend is ink on cloth, not another painted panel, so it stays
+## outside HangarKit.finish_palette on purpose and reads at maximum contrast
+## against felt_color at any finish.
+const CHALK := Color(0.88, 0.90, 0.86)
+
 # ── Internal ─────────────────────────────────────────────────────────────────
 var _dice_body: RigidBody3D
 var _dice_spawn_pos: Vector3
@@ -61,6 +135,9 @@ var _reward_balls: Array[RigidBody3D] = []
 var _is_rolling: bool = false
 var _settle_timer: float = 0.0
 var _last_result: int = 0
+## True once _ready has built the table. apply_grid_config arriving BEFORE this
+## is a value change with no geometry to answer it — _ready will use the new value.
+var _built: bool = false
 
 const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
 const HIGHLIGHT_RING_SCENE = preload("res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn")
@@ -82,6 +159,11 @@ const FACE_NORMALS := [
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	# The grid sets config_* metadata SYNCHRONOUSLY before add_child (see
+	# GridInteractablesComponent._apply_artifact_config), so the meta read has to
+	# happen here, before any geometry exists. apply_grid_config() arrives
+	# call_deferred — after this — and is the re-read, not the read.
+	_read_meta_overrides()
 	_create_table()
 	_create_rim()
 	_create_dice()
@@ -90,6 +172,12 @@ func _ready() -> void:
 	_create_console()
 
 	_dice_spawn_pos = Vector3(0, table_height + dice_size, 0)
+	# APPENDED LAST, and it must stay last: it prints onto a felt the table has
+	# already built and it repaints a stats label the console has already seated.
+	# At warrant:tally it creates no node and rewrites the stats text to the same
+	# string _create_labels set, so the default scene is untouched.
+	_create_warrant()
+	_built = true
 
 
 func _process(delta: float) -> void:
@@ -516,7 +604,7 @@ func _create_labels() -> void:
 	# Stats
 	_stats_label = Label3D.new()
 	_stats_label.name = "StatsLabel"
-	_stats_label.text = "Rolls: 0\n\nGrab & throw\nthe dice!"
+	_stats_label.text = _idle_stats_text()
 	_stats_label.pixel_size = 0.0012
 	_stats_label.font_size = 11
 	_stats_label.modulate = Color(0.8, 0.8, 0.85)
@@ -755,6 +843,12 @@ func _create_console() -> void:
 
 
 func _update_stats() -> void:
+	# warrant != tally — the record is precisely what this table is not offering,
+	# so the bar chart never comes back over the rung's own evidence. The counts
+	# in _roll_counts still accumulate; they are simply not published here.
+	if warrant != "tally":
+		_stats_label.text = _idle_stats_text()
+		return
 	if _total_rolls == 0:
 		return
 
@@ -830,7 +924,7 @@ func _reset_stats() -> void:
 	_total_rolls = 0
 	_roll_counts.fill(0)
 	_result_label.text = "?"
-	_stats_label.text = "Rolls: 0\n\nGrab & throw\nthe dice!"
+	_stats_label.text = _idle_stats_text()
 
 func _exit_tree() -> void:
 	for child in get_children():
@@ -838,5 +932,267 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## LATENT BUG PAID (2026-08-02): this was `pass`, exactly as
+## prng_crank_machine's was before its promotion. Every `#token: value` a map put
+## on a dice_throw placement was parsed, printed to the log by
+## GridInteractablesComponent and stashed as metadata — then silently discarded,
+## because nothing on this artifact ever read the metadata back. The registry now
+## derives its DNA block from this file, so a token that does nothing would be a
+## declaration that lies. It reads its metadata now.
+##
+## Ordering: the grid sets config_* metadata BEFORE add_child and calls this
+## method call_deferred, i.e. after _ready has already built the table. So _ready
+## does the real read; this is the re-read for direct callers (packaging, tools,
+## tests) and the path that makes a late value actually move the printing.
+##
+## THE SECOND EARLY RETURN IS LOAD-BEARING. curation_station.gd calls
+## apply_grid_config({"emissive": false}) on every artifact it curates, one line
+## after _hide_labels() has darkened the modulate and hidden the back-plates.
+## That dict carries no warrant key. An unconditional rebuild there would repaint
+## the stats label and re-add printing over framing that is never re-applied.
+## Unchanged warrant means touch nothing and say nothing.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var before: String = warrant
+
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	_read_meta_overrides()
+
+	if _built:
+		if warrant == before:
+			return                  # curation_station's {"emissive": false} lands here
+		_rebuild_warrant()
+		print("[DiceThrow] Config applied — warrant=%s" % [warrant])
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_warrant"):
+		# Fallback is the LEGACY value, not the current one: an unreadable word
+		# must not quietly strip the record from a table 19 rooms expect to keep it.
+		warrant = _pick_warrant(str(get_meta("config_warrant")))
+
+
+## The reader for a warrant token — lower, strip, and fall back on anything
+## unrecognised. Same rule and same shape as PrngCrankMachine._pick_axis; the two
+## machines are the family's pair on this subject and must not drift into two
+## habits for reading one map token.
+func _pick_warrant(raw: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	if WARRANTS.has(v):
+		return v
+	if v != "":
+		push_warning("dice_throw: unknown warrant '%s' — keeping 'tally'" % v)
+	return "tally"
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# WARRANT — what the table offers as the reason to trust the die
+#
+# Everything below is MESH ONLY. Not one node here carries a CollisionShape3D,
+# so the die falls through the same empty air onto the same felt at every value
+# and the physics the identity block is about is untouched (R5). The printing
+# sits 2-5 mm proud of the felt top and nothing stands higher than the die
+# already does, so the artifact's AABB is identical at all four values — the
+# sweep frames every tile the same way and no crop shift does the work.
+# ═════════════════════════════════════════════════════════════════════════════
+
+## Felt top in artifact-local Y. The table body is a StaticBody3D at
+## y = table_height carrying the felt mesh at local y = 0.016, 0.005 thick — so
+## the cloth surface is here, and every printed layer stacks upward from it.
+func _felt_y() -> float:
+	return table_height + 0.016 + 0.0025
+
+
+## The line the far-rail glass carries under the numeral. At `tally` this returns
+## the legacy string CHARACTER FOR CHARACTER, which is what keeps _create_labels
+## and _reset_stats byte-identical on the default path.
+func _idle_stats_text() -> String:
+	match warrant:
+		"word":
+			return "FAIR\n\nthe house\nsays so"
+		"net":
+			return "6 FACES\n1 CUBE\n24 ROTATIONS\n\nopposite faces\nsum to 7"
+		"assay":
+			return "SERIAL DT-05-1148\nTOL +/-0.0005 IN\nEDGE 0.750 IN\n\nINSPECTED\nAND STAMPED"
+		_:
+			return "Rolls: 0\n\nGrab & throw\nthe dice!"
+
+
+## THE MATCH BLOCK. Appended last in the file and called last in _ready, so
+## nothing above it moves. `tally` builds nothing: the bare felt and the running
+## bar chart ARE the shipped table.
+func _create_warrant() -> void:
+	match warrant:
+		"word":
+			_warrant_word(_warrant_root())
+		"net":
+			_warrant_net(_warrant_root())
+		"assay":
+			_warrant_assay(_warrant_root())
+		_:
+			pass
+	if _stats_label != null and is_instance_valid(_stats_label):
+		if _total_rolls > 0:
+			_update_stats()
+		else:
+			_stats_label.text = _idle_stats_text()
+
+
+## Frees only the printing and lays it down again. A full teardown is wrong here:
+## the die is an XRToolsPickable a hand may be holding and the console has already
+## re-seated the labels, so a rebuild that freed everything would drop a held
+## object on the floor to change a legend on the cloth.
+func _rebuild_warrant() -> void:
+	var old: Node = get_node_or_null("Warrant")
+	if old != null:
+		remove_child(old)           # leaves the tree synchronously — no double-render
+		old.queue_free()
+	_create_warrant()
+
+
+func _warrant_root() -> Node3D:
+	var n := Node3D.new()
+	n.name = "Warrant"
+	add_child(n)
+	return n
+
+
+## Chalk printing laid flat on the cloth, face up. Rotated -90 about X for the
+## same reason the console's name tag is: this is read by looking DOWN, the way a
+## table is read, not by facing it.
+func _print_on_felt(host: Node3D, text: String, size: Vector2,
+		x: float, z: float, lift: float = 0.003) -> void:
+	var q: MeshInstance3D = HangarKit.stencil(text, size, CHALK)
+	if q == null:
+		return
+	q.position = Vector3(x, _felt_y() + lift, z)
+	q.rotation_degrees = Vector3(-90, 0, 0)
+	host.add_child(q)
+
+
+## A routed rule in the cloth — a thin chalk line, the printed layout's own ruling.
+func _rule_on_felt(host: Node3D, width: float, x: float, z: float) -> void:
+	var mat: StandardMaterial3D = HangarKit.painted_metal(CHALK, 0.0, 0.0, 0.85)
+	host.add_child(HangarKit.box(
+		Vector3(x, _felt_y() + 0.0015, z), Vector3(width, 0.002, 0.005), mat))
+
+
+# ── word ─────────────────────────────────────────────────────────────────────
+## The assertion. House legend printed on the cloth between two rules, the way a
+## casino layout states its own terms, and nothing anywhere that lets you audit
+## it. The largest word on the table is the claim.
+func _warrant_word(host: Node3D) -> void:
+	_rule_on_felt(host, 0.62, 0.0, -0.205)
+	_print_on_felt(host, "EACH FACE 1 IN 6", Vector2(0.56, 0.062), 0.0, -0.145)
+	_rule_on_felt(host, 0.62, 0.0, -0.085)
+	# the claim itself, large, in the half of the cloth nearest the player
+	_print_on_felt(host, "FAIR", Vector2(0.30, 0.130), 0.0, 0.150, 0.004)
+	_print_on_felt(host, "NO RECORD KEPT", Vector2(0.34, 0.030), 0.0, 0.248)
+
+
+# ── net ──────────────────────────────────────────────────────────────────────
+## The geometry. The 1-4-1 cross: the band 2-3-5-4 across the cloth with 1 folded
+## up off face 3 and 6 folded down off it. Opposite faces land two apart in the
+## band (2/5, 3/4) and above/below (1/6), so the printing is a REAL net of this
+## die and not a decorative row of squares — you can fold it in your head and get
+## the cube that is standing on it.
+const NET_PITCH := 0.128
+const NET_FACE := 0.118
+
+func _warrant_net(host: Node3D) -> void:
+	var face_mat: StandardMaterial3D = HangarKit.painted_metal(CHALK, 0.0, 0.0, 0.80)
+	var y: float = _felt_y()
+	# band of four, left to right
+	var band := [2, 3, 5, 4]
+	for i in range(4):
+		var cx: float = (float(i) - 1.5) * NET_PITCH
+		_net_face(host, face_mat, int(band[i]), cx, 0.0, y)
+	# the two that fold off face 3 (band index 1)
+	var fold_x: float = -0.5 * NET_PITCH
+	_net_face(host, face_mat, 1, fold_x, -NET_PITCH, y)
+	_net_face(host, face_mat, 6, fold_x, NET_PITCH, y)
+	_print_on_felt(host, "OPPOSITE FACES SUM TO 7", Vector2(0.44, 0.036), 0.0, 0.240)
+
+
+## One printed face: a chalk square with its true pip pattern in the die's own
+## pip colour. Pip layout is the standard Western die — corners, edge midpoints,
+## centre — at 0.30 of the face from its middle.
+func _net_face(host: Node3D, face_mat: StandardMaterial3D, pips: int,
+		cx: float, cz: float, y: float) -> void:
+	host.add_child(HangarKit.box(
+		Vector3(cx, y + 0.002, cz), Vector3(NET_FACE, 0.002, NET_FACE), face_mat))
+	var o: float = NET_FACE * 0.30
+	var spots: Array = []
+	match pips:
+		1:
+			spots = [Vector2(0, 0)]
+		2:
+			spots = [Vector2(-o, o), Vector2(o, -o)]
+		3:
+			spots = [Vector2(-o, o), Vector2(0, 0), Vector2(o, -o)]
+		4:
+			spots = [Vector2(-o, -o), Vector2(-o, o), Vector2(o, -o), Vector2(o, o)]
+		5:
+			spots = [Vector2(-o, -o), Vector2(-o, o), Vector2(0, 0),
+				Vector2(o, -o), Vector2(o, o)]
+		6:
+			spots = [Vector2(-o, -o), Vector2(-o, 0), Vector2(-o, o),
+				Vector2(o, -o), Vector2(o, 0), Vector2(o, o)]
+	var ink: StandardMaterial3D = HangarKit.painted_metal(pip_color, 0.0, 0.0, 0.70)
+	for s in spots:
+		var p: Vector2 = s
+		host.add_child(HangarKit.box(
+			Vector3(cx + p.x, y + 0.0035, cz + p.y),
+			Vector3(NET_FACE * 0.15, 0.002, NET_FACE * 0.15), ink))
+
+
+# ── assay ────────────────────────────────────────────────────────────────────
+## The stamp. A gauge cradle standing on the cloth with a reference die clamped
+## between its jaws under a dial, and the inspection record inlaid flat beside
+## it. The warrant here is institutional: this cube was measured by someone whose
+## measurement you are agreeing to accept.
+func _warrant_assay(host: Node3D) -> void:
+	var y: float = _felt_y()
+	var steel: StandardMaterial3D = HangarKit.worn_metal(Color(0.62, 0.63, 0.66))
+	var dark: StandardMaterial3D = HangarKit.painted_metal(Color(0.09, 0.09, 0.105), wear, 0.4, 0.5)
+	var gx: float = 0.215
+	var gz: float = -0.145
+
+	# bed
+	host.add_child(HangarKit.box(
+		Vector3(gx, y + 0.009, gz), Vector3(0.170, 0.018, 0.062), dark))
+	# the two jaws the reference cube is held between — the caliper read
+	for sx in [-1.0, 1.0]:
+		host.add_child(HangarKit.box(
+			Vector3(gx + float(sx) * 0.052, y + 0.040, gz),
+			Vector3(0.011, 0.044, 0.062), steel))
+	# the reference die, clamped and pipped so it reads as a die and not a block
+	var ivory: StandardMaterial3D = HangarKit.painted_metal(Color(0.93, 0.93, 0.95), 0.0, 0.0, 0.35)
+	host.add_child(HangarKit.box(
+		Vector3(gx, y + 0.042, gz), Vector3(0.052, 0.052, 0.052), ivory))
+	var ink: StandardMaterial3D = HangarKit.painted_metal(pip_color, 0.0, 0.0, 0.70)
+	for s in [Vector2(-0.014, -0.014), Vector2(-0.014, 0.014), Vector2(0, 0),
+			Vector2(0.014, -0.014), Vector2(0.014, 0.014)]:
+		var p: Vector2 = s
+		host.add_child(HangarKit.box(
+			Vector3(gx + p.x, y + 0.0685, gz + p.y),
+			Vector3(0.009, 0.002, 0.009), ink))
+	# the dial, lit — the only emissive thing the gauge has, and the piece that
+	# says a reading was TAKEN rather than merely that a cube was held
+	host.add_child(HangarKit.box(
+		Vector3(gx, y + 0.030, gz - 0.042), Vector3(0.040, 0.040, 0.008),
+		HangarKit.emissive(Color(0.90, 0.92, 0.88), 1.4)))
+	host.add_child(HangarKit.box(
+		Vector3(gx, y + 0.030, gz - 0.047), Vector3(0.046, 0.046, 0.004), steel))
+
+	# the record, inlaid flat in the cloth — an opaque printed patch, not chalk:
+	# a plate screwed to the table, which is a different kind of statement from
+	# something painted on the cloth by the house
+	var plate: MeshInstance3D = HangarKit.brand_patch(
+		"SERIAL DT-05-1148   TOL +/-0.0005 IN",
+		Vector2(0.360, 0.052), Color(0.14, 0.15, 0.17), CHALK)
+	if plate:
+		plate.position = Vector3(-0.150, y + 0.003, -0.185)
+		plate.rotation_degrees = Vector3(-90, 0, 0)
+		host.add_child(plate)
+	_print_on_felt(host, "INSPECTED AND STAMPED 1148", Vector2(0.40, 0.032), 0.0, 0.240)

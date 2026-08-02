@@ -1,0 +1,197 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "randomness-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "dice_throw",
+   "axis": "warrant",
+   "frame": 0.011,
+   "focus": 0.09564,
+   "verdict": "WEAK",
+   "subject": 0.05496,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "GaussianBlurCircle",
+   "axis": "sitter",
+   "frame": 0.05492,
+   "focus": 0.26103,
+   "verdict": "bites",
+   "subject": 0.03219,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "random_bell_curve",
+   "axis": "constitution",
+   "frame": 0.03943,
+   "focus": 0.18732,
+   "verdict": "bites",
+   "subject": 0.04156,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "random_number_book_page_1955",
+   "axis": "disclosure",
+   "frame": 0.00274,
+   "focus": 0.02273,
+   "verdict": "INERT",
+   "subject": 0.10531,
+   "pairs": 10,
+   "twins": [
+    {
+     "a": "ledger",
+     "b": "oracle",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "origin",
+     "b": "tally",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "ledger",
+     "b": "origin",
+     "focus": 0.00503,
+     "rgb": 0.00774
+    },
+    {
+     "a": "ledger",
+     "b": "tally",
+     "focus": 0.00503,
+     "rgb": 0.00774
+    },
+    {
+     "a": "oracle",
+     "b": "origin",
+     "focus": 0.00503,
+     "rgb": 0.00774
+    },
+    {
+     "a": "oracle",
+     "b": "tally",
+     "focus": 0.00503,
+     "rgb": 0.00774
+    }
+   ],
+   "colour_only": [
+    {
+     "a": "ledger",
+     "b": "works",
+     "focus": 0.05161,
+     "rgb": 0.12679
+    },
+    {
+     "a": "oracle",
+     "b": "works",
+     "focus": 0.05161,
+     "rgb": 0.12679
+    },
+    {
+     "a": "origin",
+     "b": "works",
+     "focus": 0.05201,
+     "rgb": 0.12712
+    },
+    {
+     "a": "tally",
+     "b": "works",
+     "focus": 0.05201,
+     "rgb": 0.12712
+    }
+   ]
+  },
+  {
+   "artifact": "random_walk_128",
+   "axis": "residue",
+   "frame": 0.0474,
+   "focus": 0.23256,
+   "verdict": "bites",
+   "subject": 0.0652,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "random_walk_leash",
+   "axis": "residue",
+   "frame": 0.06101,
+   "focus": 0.29625,
+   "verdict": "bites",
+   "subject": 0.08742,
+   "pairs": 10,
+   "twins": [
+    {
+     "a": "head",
+     "b": "path",
+     "focus": 0.00102,
+     "rgb": 0.00354
+    }
+   ],
+   "colour_only": [
+    {
+     "a": "ensemble",
+     "b": "envelope",
+     "focus": 0.04209,
+     "rgb": 0.1221
+    }
+   ]
+  },
+  {
+   "artifact": "ten_print_maze_3d",
+   "axis": "impression",
+   "frame": 0.11131,
+   "focus": 0.33569,
+   "verdict": "bites",
+   "subject": 0.08012,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "perlin_noise_terrain",
+   "axis": "readout",
+   "frame": 0.11661,
+   "focus": 0.39848,
+   "verdict": "bites",
+   "subject": 0.09395,
+   "pairs": 3,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "noisetorus",
+   "axis": "readout",
+   "frame": 0.05008,
+   "focus": 0.40508,
+   "verdict": "bites",
+   "subject": 0.03066,
+   "pairs": 3,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "random_edge_profile",
+   "axis": "readout",
+   "frame": 0.0848,
+   "focus": 0.24191,
+   "verdict": "bites",
+   "subject": 0.12246,
+   "pairs": 3,
+   "twins": [],
+   "colour_only": []
+  }
+ ]
+}

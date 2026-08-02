@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://v2sxnnrp0n5l4"]
+[gd_scene load_steps=8 format=3 uid="uid://v2sxnnrp0n5l4"]
 
 [ext_resource type="Shader" uid="uid://7hapaspktawr" path="res://commons/resourses/shaders/noisePlanet2.gdshader" id="1_mkyck"]
 [ext_resource type="Shader" uid="uid://dp0xnebhlgdav" path="res://commons/resourses/shaders/noiseTorus.gdshader" id="1_t1bp6"]
+[ext_resource type="Script" path="res://algorithms/randomness/noisetorus/noisetorus.gd" id="3_ntdna"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t1bp6"]
 render_priority = 0
@@ -27,6 +28,7 @@ shader_parameter/hue_shift_speed = 0.05
 [sub_resource type="PrismMesh" id="PrismMesh_vkm8d"]
 
 [node name="Noisetorus" type="Node3D"]
+script = ExtResource("3_ntdna")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.888361, 0.459146, 0, -0.459146, 0.888361, 0, 0.700308, 1.51779)

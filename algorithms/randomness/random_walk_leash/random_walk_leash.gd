@@ -9,11 +9,11 @@
 # @identity
 # essence: F_tug = impulse_strength · random_unit_vector — stochastic forcing on a tethered body
 # desire: grab the orb and feel randomness pulling your hand — your arm is the integral of noise
-# critical_parameter: impulse_strength — the force per tug; too low and you feel nothing, too high and it escapes
+# critical_parameter: impulse_strength — the force per tug; too low and you feel nothing, too high and it escapes; residue — how much of the walk's own history the post keeps standing (head | tail | path | envelope | ensemble)
 # triggers: _impulse_timer fires every impulse_interval seconds, applying a random 3D impulse to the orb
-# emerges: RMS displacement tracks sqrt(N) — the fundamental diffusion law felt through proprioception
+# emerges: RMS displacement tracks sqrt(N) — the fundamental diffusion law felt through proprioception; at residue:envelope the leash sphere itself becomes visible and the law acquires a ceiling you can see
 # needs: XRToolsPickable grab [has], leash constraint [has], trail visualization [has]
-# relationships: contrasts with random_walk_terrarium (observed vs embodied); depends on entropy_axiom conceptually
+# relationships: contrasts with random_walk_terrarium (observed vs embodied); depends on entropy_axiom conceptually; shares the `residue` ladder word for word with [[random_walk_128]]
 # truth: To hold randomness on a leash is to feel that unpredictability has weight.
 
 extends Node3D
@@ -51,6 +51,108 @@ const POST_TAPER: float = 0.02
 @export var wear: float = 0.10
 @export var unit_code: String = "RW-10"
 
+# ─────────────────────────────────────────────────────────────────────────────
+# DNA PROMOTION (2026-08-02). THE RANDOM-WALK GROUP: random_walk_leash and
+# random_walk_128, the same process at two scales — one walk you hold, one walk
+# you stand on. They take the same axis word, the way prng_crank_machine and
+# coin_toss share `disclosure`.
+#
+# Randomness is the one subject on this curriculum you cannot photograph. A
+# distribution has no picture; only its LEAVINGS do. So the axis is not what the
+# walk is made of but what the apparatus KEEPS of it:
+#
+#   residue   how much of the walk's own history the machine leaves standing
+#
+#     head  <  tail  <  path  <  envelope  <  ensemble
+#
+#   head      the orb, and nothing else. No trail is drawn, no trail is even
+#             recorded. This is the claim that a random process IS a location:
+#             a number arrived, it is here now, and where it has been is not a
+#             fact anyone kept. Every RNG call in every program looks like this.
+#   tail      + a window. The last MAX_TRAIL frames of the orb's position, drawn
+#             as one line, the older end simply dropped off. The machine has a
+#             short memory and no archive — you can see the walk is moving and
+#             roughly how, and you cannot see how far it has come.
+#             THIS IS THE LEGACY LINEAGE, byte for byte: MAX_TRAIL has always
+#             been 200 and the trail has always forgotten.
+#   path      + the archive. The window is lifted; every point since spawn stays.
+#             The line closes on itself, crosses itself, thickens where the orb
+#             dithered. Now the walk is an OBJECT with an extent, and the fact
+#             that it is a tangle rather than a journey becomes visible.
+#   envelope  + the bound. A wire cage of radius leash_length hung off the
+#             gantry eye — the constraint the token has always named and the
+#             artifact has never shown. Until this rung the leash is a piece of
+#             string; at this rung it is a SPHERE, and you can see the walk
+#             pressing on it. This is what turns "it wanders" into "it wanders
+#             inside something", which is the whole difference between a random
+#             process and a bounded one.
+#   ensemble  + the counterfactual. Five more walks from the same eye under the
+#             same law, drawn dim, each ending in a small lit bead. This walk
+#             stops being THE walk and becomes ONE walk. The bright tangle is a
+#             sample; the pale ones are the rest of the distribution; the cage
+#             is what they all obey. Nothing here happened — that is the point.
+#
+# WHAT IS DELIBERATELY NOT THE AXIS. impulse_interval is the obvious knob and it
+# is a RATE: 0.3 s between tugs is invisible to a still frame, which is how
+# info_board burned a whole sweep on five duration exports and published six
+# identical tiles. impulse_strength is the declared critical_parameter and it is
+# likewise nearly invisible in a photograph — a harder tug makes the same tangle
+# slightly wider. Both stay plain exports. orb_color is a colour, and "which
+# colour" is not an argument.
+#
+# WHAT IS FORECLOSED. There is no rung showing nothing. `head` still shows the
+# orb, because an instrument with no output is not a quieter instrument, it is a
+# broken one. So this axis has no `none`, on purpose — same shape as disclosure.
+#
+# NOT TOUCHED: the physics. The impulse law, the leash constraint, the RMS
+# readout and the sqrt(N) claim on the sign band run identically at every rung.
+# This axis changes what the post KEEPS, never what the orb DOES.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## THE AXIS — how much of the walk's history this post leaves standing. One
+## ordered ladder, monotone: each rung shows everything the rung below shows,
+## plus one more kind of leaving. `tail` is the legacy default.
+@export_enum("head", "tail", "path", "envelope", "ensemble") var residue: String = "tail"
+
+## The allow-list, in ladder order — the same five words the @export_enum above
+## declares, same spelling, same sequence. RESIDUE_RUNGS is the same set carrying
+## its rank; every gate in this file is `_rung() >= n`.
+const RESIDUES: PackedStringArray = ["head", "tail", "path", "envelope", "ensemble"]
+
+## The ladder, as rank. The group's canonical table — random_walk_128 reads its
+## rung through THIS dictionary and THIS function, so the two artifacts cannot
+## drift into two vocabularies for one idea.
+const RESIDUE_RUNGS := {
+	"head": 0,      # the walker
+	"tail": 1,      # + a window            ← legacy default
+	"path": 2,      # + the whole record
+	"envelope": 3,  # + the bound it obeyed
+	"ensemble": 4,  # + the walks it did not take
+}
+
+# ── Determinism: the seed, and the bench-only history ────────────────────────
+# NO RNG IN THE RENDER PATH. A random walk is nothing but accumulated draws, so
+# an evidence sweep of an UNSEEDED walk would render five different walks and
+# report the difference between them as the axis — a strong, confident, entirely
+# false bite that nothing downstream could catch. Two exports close that, and
+# both default to "behave exactly as before".
+
+## Pins the global stream this artifact draws from. -1 = do not touch it, i.e.
+## today: a fresh unpredictable walk every launch, which is correct in a room and
+## useless on a bench. Any value >= 0 calls seed() once, before anything else in
+## _ready(), so every impulse from then on is reproducible.
+@export var walk_seed: int = -1
+
+## Bench-only. The orb's trail is accumulated by _physics_process at ~200 points
+## per second, so 1.1 s after spawn — which is exactly when the sweep photographs
+## it — there is a 4 cm scribble on a 1.5 m machine and head/tail/path are three
+## identical pictures. This lays down a history SYNTHETICALLY before the first
+## frame: the same law (a unit step in a random direction, clamped to the leash),
+## integrated without the solver, so the axis has something to keep. 0 = today,
+## and 0 is what every room ships. Non-zero also freezes the orb, so all five
+## rungs photograph the same head and only the leavings differ.
+@export var preroll_tugs: int = 0
+
 # ── Internal ────────────────────────────────────────────────────────────────
 var _orb_body: RigidBody3D
 var _orb_spawn_pos: Vector3
@@ -65,6 +167,27 @@ var _trail_points: Array[Vector3] = []
 var _trail_mesh: MeshInstance3D
 var _trail_material: StandardMaterial3D
 const MAX_TRAIL: int = 200
+## residue:path and above — the window is lifted. Not INFINITE: a bound of one
+## real-time hour of physics frames keeps a room that is left running overnight
+## from turning one ImmediateMesh into a memory leak. Nothing in a session will
+## ever reach it, so `path` reads as "keeps everything" and is safe.
+const MAX_TRAIL_LONG: int = 216000
+
+## residue:envelope|ensemble — the parts built by _build_residue(), freed as a
+## set when a late apply_grid_config moves the rung. Kept apart from the orb, the
+## leash and the cabinet, which no rung may touch.
+var _residue_nodes: Array[Node] = []
+## residue:ensemble — how many counterfactual walks hang beside the real one.
+const GHOST_WALKS: int = 5
+## Bench-only trail synthesis: step length as a fraction of leash_length. At 0.035
+## a 900-tug preroll has RMS ~0.9 x leash_length, so the tangle fills most of the
+## sphere without pinning itself to the boundary — which matters, because a walk
+## welded to the cage would make `envelope` look like it added nothing.
+const PREROLL_STEP_FRAC: float = 0.035
+
+## True once _ready() has finished building. apply_grid_config arriving BEFORE
+## this is a value change with no geometry to answer it — _ready will use it.
+var _built: bool = false
 
 # The service screen lives IN the cabinet's column (the 2026-07-20 interface
 # ruling): the readout is destroyed and rebuilt on every change, so the ANCHOR
@@ -87,6 +210,16 @@ const HIGHLIGHT_RING_SCENE = preload("res://addons/godot-xr-tools/objects/highli
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	# The grid sets config_* metadata SYNCHRONOUSLY before add_child, so the meta
+	# read must happen here, before any geometry exists — apply_grid_config()
+	# arrives call_deferred, i.e. after this, and is a re-read rather than the read.
+	_read_meta_overrides()
+	# THE SEED, BEFORE ANY OTHER LINE. Nothing above this point draws, so pinning
+	# here pins every impulse, every preroll step and every _apply_random_impulse
+	# for the life of the node. At the default of -1 this branch is not taken and
+	# not one draw is consumed, so the legacy stream is untouched to the bit.
+	if walk_seed >= 0:
+		seed(walk_seed)
 	# The anchor first: the cabinet's gantry EYE is built at exactly this point,
 	# and the drawn leash now starts here too, so constraint / string / housing
 	# are one place instead of three.
@@ -99,6 +232,12 @@ func _ready() -> void:
 	_create_labels()
 	_create_cabinet()
 	_create_vr_controls()
+	# APPENDED LAST, both of them, so every line above runs in its legacy order
+	# and consumes its legacy draws. At the shipped defaults (preroll_tugs 0,
+	# residue "tail") both calls return immediately having done nothing.
+	_preroll_walk()
+	_build_residue()
+	_built = true
 
 
 func _physics_process(delta: float) -> void:
@@ -353,6 +492,11 @@ func _update_leash_visual() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_trail() -> void:
+	# residue:head keeps nothing. The mesh is never made, and because _update_trail
+	# appends to _trail_points only AFTER its null-guard on this node, the history
+	# is not merely hidden — it is not recorded. That is the rung's whole claim.
+	if _rung() < 1:
+		return
 	_trail_mesh = MeshInstance3D.new()
 	_trail_mesh.name = "Trail"
 	_trail_material = StandardMaterial3D.new()
@@ -371,7 +515,10 @@ func _update_trail() -> void:
 
 	var orb_local := _orb_body.global_position - global_position
 	_trail_points.append(orb_local)
-	if _trail_points.size() > MAX_TRAIL:
+	# The window. residue:tail is MAX_TRAIL, which is the legacy number and the
+	# legacy behaviour; residue:path and up lift it.
+	var cap: int = _trail_cap()
+	while _trail_points.size() > cap:
 		_trail_points.pop_front()
 
 	if _trail_points.size() < 2:
@@ -734,5 +881,277 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+# THE RESIDUE LADDER
+# ═════════════════════════════════════════════════════════════════════════════
+
+## The group's canonical reader for a residue token, static so anything holding
+## the class can parse #residue: through one rule.
+##
+## random_walk_128 carries a COPY of RESIDUE_RUNGS rather than calling this, and
+## the reason is mechanical, not lazy: this file preloads two godot-xr-tools
+## scenes, so a parse-time dependency from 128 to here would drag the whole XR
+## addon into an artifact that has no grabbable in it and no reason to load one.
+## The two tables are kept identical by hand and each says so — the same
+## arrangement station_wall has with station_pillar over `upkeep`.
+##
+## An unreadable word resolves to the LEGACY default rather than to silence — a
+## typo must not quietly wipe the trail off a post that rooms expect to draw one.
+static func residue_name(raw: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	if RESIDUE_RUNGS.has(v):
+		return v
+	if v != "":
+		push_warning("residue: unknown rung '%s' — falling back to 'tail'" % v)
+	return "tail"
+
+
+## The house-pattern reader, instance-scoped and generic over an allow-list —
+## the shape apply_grid_config wires every axis through. Same rule as
+## residue_name: lower, strip, keep the fallback on anything unrecognised.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	if allowed.has(v):
+		return v
+	if v != "":
+		push_warning("random_walk_leash: unknown value '%s' — keeping '%s'" % [v, fallback])
+	return fallback
+
+
+## Rank of the current rung, 0..4. Every gate in this file is `_rung() >= n`.
+func _rung() -> int:
+	return int(RESIDUE_RUNGS.get(residue, 1))
+
+
+## How many trail points survive. MAX_TRAIL at `tail` — the legacy number, the
+## legacy forgetting. Lifted from `path` up.
+func _trail_cap() -> int:
+	if _rung() >= 2:
+		return MAX_TRAIL_LONG
+	return MAX_TRAIL
+
+
+## BENCH ONLY (preroll_tugs == 0 in every room, so this returns having done
+## nothing and having drawn nothing). Lays a history down before the first frame
+## so a still has something to photograph.
+##
+## This is the SAME LAW as _apply_random_impulse — a step in a uniformly random
+## direction with the walk_bias added to Y — integrated in position rather than
+## through the solver, and clamped to the leash exactly as _enforce_leash does.
+## It is a model of the walk, not a recording of one, and it exists because the
+## real trail after 1.1 s of physics is 4 cm wide on a 1.5 m machine, which would
+## have made head, tail and path three photographs of the same thing.
+##
+## The orb is frozen at the walk's end afterwards, so every rung photographs an
+## identical head and the only difference between tiles is the leavings.
+func _preroll_walk() -> void:
+	if preroll_tugs <= 0:
+		return
+	var step: float = maxf(leash_length, 0.001) * PREROLL_STEP_FRAC
+	var p: Vector3 = _orb_spawn_pos
+	for _i in range(preroll_tugs):
+		var d := Vector3(
+			randf_range(-1.0, 1.0),
+			randf_range(-1.0, 1.0) + walk_bias,
+			randf_range(-1.0, 1.0)
+		)
+		if d.length() < 0.0001:
+			d = Vector3.UP
+		p += d.normalized() * step
+		var off: Vector3 = p - _orb_spawn_pos
+		if off.length() > leash_length:
+			p = _orb_spawn_pos + off.normalized() * leash_length
+		if _trail_mesh != null:          # residue:head records nothing, by design
+			_trail_points.append(p)
+	var cap: int = _trail_cap()
+	while _trail_points.size() > cap:
+		_trail_points.pop_front()
+	if _orb_body != null and is_instance_valid(_orb_body):
+		_orb_body.position = p
+		_orb_body.freeze = true
+	_total_tugs = preroll_tugs
+	_displacement_sum = (p - _orb_spawn_pos) / maxf(step, 0.0001)
+
+
+## residue:envelope and up. Everything this builds is parented into _residue_nodes
+## so a late rung change can free exactly these and leave the orb, the leash, the
+## trail and the whole cabinet alone.
+func _build_residue() -> void:
+	var r: int = _rung()
+	if r < 3:
+		return
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_accent: Color = pal["accent"]
+	_build_leash_cage(col_accent)
+	if r >= 4:
+		_build_ghost_walks()
+
+
+## residue:envelope — THE BOUND. Five great-and-small circles of radius
+## leash_length hung on the gantry eye: an equator, two meridians and two
+## latitudes. A wire cage rather than a shell, because a shell would hide the
+## very tangle it is supposed to be bounding.
+##
+## The token has always said "leash" and the artifact has only ever shown a piece
+## of string. This is the rung where the constraint becomes a thing with a shape.
+func _build_leash_cage(col_accent: Color) -> void:
+	var rad: float = maxf(leash_length, 0.01)
+	var thick: float = maxf(rad * 0.014, 0.004)
+	var mat: StandardMaterial3D = HangarKit.emissive(col_accent, 1.4)
+	var cage := Node3D.new()
+	cage.name = "LeashEnvelope"
+	cage.position = _orb_spawn_pos
+	add_child(cage)
+	_residue_nodes.append(cage)
+	# equator + two meridians + two latitudes at +/- 30 degrees
+	var specs: Array = [
+		[rad, 0.0, 0.0, 0.0],                     # equator, TorusMesh already lies in XZ
+		[rad, PI / 2.0, 0.0, 0.0],                # meridian, XY plane
+		[rad, 0.0, PI / 2.0, 0.0],                # meridian, ZY plane
+		[rad * 0.866, 0.0, 0.0, rad * 0.5],       # upper latitude
+		[rad * 0.866, 0.0, 0.0, -rad * 0.5],      # lower latitude
+	]
+	for si in range(specs.size()):
+		var s: Array = specs[si]
+		var ring := MeshInstance3D.new()
+		var tm := TorusMesh.new()
+		tm.inner_radius = float(s[0]) - thick
+		tm.outer_radius = float(s[0]) + thick
+		tm.rings = 8
+		tm.ring_segments = 48
+		ring.mesh = tm
+		ring.material_override = mat
+		ring.rotation = Vector3(float(s[1]), 0.0, float(s[2]))
+		ring.position = Vector3(0.0, float(s[3]), 0.0)
+		cage.add_child(ring)
+
+
+## residue:ensemble — THE COUNTERFACTUAL. Five more walks from the same eye under
+## the same law, drawn dim, each terminating in a small lit bead so the endings
+## read even at tile resolution. The bright tangle stops being THE walk.
+##
+## THESE DRAW FROM THEIR OWN RandomNumberGenerator, NOT THE GLOBAL STREAM, and
+## that is not tidiness. Every global draw taken here would shift every later
+## global draw, so the REAL walk would differ between `ensemble` and every other
+## rung — the sweep would then be comparing two different walks and calling the
+## difference the axis. A private generator makes the ghosts free.
+func _build_ghost_walks() -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = int(walk_seed) * 7919 + 104729     # deterministic, and disjoint from global
+	var count: int = maxi(preroll_tugs, 240)
+	var step: float = maxf(leash_length, 0.001) * PREROLL_STEP_FRAC
+	var line_mat := StandardMaterial3D.new()
+	line_mat.albedo_color = Color(0.55, 0.70, 0.95, 0.30)
+	line_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	line_mat.emission_enabled = true
+	line_mat.emission = Color(0.30, 0.45, 0.75)
+	line_mat.emission_energy_multiplier = 0.9
+	line_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	var bead_mat := StandardMaterial3D.new()
+	bead_mat.albedo_color = Color(0.60, 0.78, 1.0)
+	bead_mat.emission_enabled = true
+	bead_mat.emission = Color(0.45, 0.65, 1.0)
+	bead_mat.emission_energy_multiplier = 2.0
+
+	var holder := Node3D.new()
+	holder.name = "WalkEnsemble"
+	add_child(holder)
+	_residue_nodes.append(holder)
+
+	for g in range(GHOST_WALKS):
+		var p: Vector3 = _orb_spawn_pos
+		var im := ImmediateMesh.new()
+		im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		im.surface_add_vertex(p)
+		for _i in range(count):
+			var d := Vector3(
+				rng.randf_range(-1.0, 1.0),
+				rng.randf_range(-1.0, 1.0) + walk_bias,
+				rng.randf_range(-1.0, 1.0)
+			)
+			if d.length() < 0.0001:
+				d = Vector3.UP
+			p += d.normalized() * step
+			var off: Vector3 = p - _orb_spawn_pos
+			if off.length() > leash_length:
+				p = _orb_spawn_pos + off.normalized() * leash_length
+			im.surface_add_vertex(p)
+		im.surface_end()
+		var ghost := MeshInstance3D.new()
+		ghost.name = "Ghost_%d" % g
+		ghost.mesh = im
+		ghost.material_override = line_mat
+		holder.add_child(ghost)
+		# the ending — a bead, because a 1 px line strip is not a claim at tile size
+		var bead := MeshInstance3D.new()
+		var sm := SphereMesh.new()
+		sm.radius = orb_radius * 0.34
+		sm.height = orb_radius * 0.68
+		sm.radial_segments = 12
+		sm.rings = 6
+		bead.mesh = sm
+		bead.material_override = bead_mat
+		bead.position = p
+		holder.add_child(bead)
+
+
+func _clear_residue() -> void:
+	for n in _residue_nodes:
+		if is_instance_valid(n):
+			remove_child(n)          # leaves the tree synchronously — no double render
+			n.queue_free()
+	_residue_nodes.clear()
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# CONFIG
+# ═════════════════════════════════════════════════════════════════════════════
+
+## LATENT BUG PAID (2026-08-02): this was `pass`. Every `#token: value` a map put
+## on a random_walk_leash placement was parsed, logged by
+## GridInteractablesComponent and stashed as metadata — then silently discarded,
+## because nothing on this artifact ever read the metadata back. A registry that
+## derives its DNA block from this file would have been declaring a knob that did
+## nothing. It reads its metadata now.
+##
+## THE EARLY RETURNS ARE LOAD-BEARING. curation_station calls
+## apply_grid_config({"emissive": false}) on every artifact it curates, one line
+## after it has already darkened and un-billboarded the labels. That dict carries
+## no residue key; an unconditional rebuild there would throw away framing that is
+## never re-applied. So: unchanged rung means touch nothing and say nothing.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var before_residue: String = residue
+
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	_read_meta_overrides()
+
+	if not _built:
+		return                       # nothing built yet; _ready will use these values
+	if residue == before_residue:
+		return                       # curation_station's {"emissive": false} lands here
+
+	# The trail node's very existence follows the rung, so it is repaired first.
+	if _rung() < 1:
+		if _trail_mesh != null and is_instance_valid(_trail_mesh):
+			_trail_mesh.queue_free()
+		_trail_mesh = null
+		_trail_points.clear()
+	elif _trail_mesh == null or not is_instance_valid(_trail_mesh):
+		_create_trail()
+	var cap: int = _trail_cap()
+	while _trail_points.size() > cap:
+		_trail_points.pop_front()
+
+	_clear_residue()
+	_build_residue()
+	print("[RandomWalkLeash] Config applied — residue=%s" % residue)
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_residue"):
+		residue = _pick_axis(str(get_meta("config_residue")), RESIDUES, "tail")
+	if has_meta("config_walk_seed"):
+		walk_seed = int(str(get_meta("config_walk_seed")))
+	if has_meta("config_preroll_tugs"):
+		preroll_tugs = int(str(get_meta("config_preroll_tugs")))

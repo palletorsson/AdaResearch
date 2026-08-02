@@ -14,6 +14,33 @@ extends Node3D
 # Demonstrates error as aesthetic and digital artifact generation
 # Optimized: uses MultiMesh instead of per-frame CSG node creation
 
+# ─────────────────────────────────────────────────────────────────────────────
+# DETERMINISM (2026-08-02). NOT A DNA AXIS — the precondition for ever having one.
+#
+# This artifact rolls randomness in its BUILD path and did so from three separate
+# unseeded streams: _rng.randomize() below, the GLOBAL randi() that fills the 8x8
+# data grid in initialize_digital_structures(), and the GLOBAL randf() that
+# decides which cells corrupt in propagate_corruption(). Godot 4 auto-seeds the
+# global generator at startup, so every launch produced a different field and no
+# two renders of this artifact were ever comparable.
+#
+# That is fatal for the evidence loop, which renders one still per variant: five
+# variants of an unseeded artifact are five different random objects, any sweep
+# over it measures the noise instead of the axis, and it reports a strong,
+# confident, entirely false BITE that nothing downstream can catch. So the seed
+# comes first and any axis comes after.
+#
+# -1 KEEPS TODAY EXACTLY: _rng.randomize() runs on the same line it always did,
+# the global stream is not touched, and not one draw moves. A non-negative value
+# pins BOTH streams before the first draw of either.
+# ─────────────────────────────────────────────────────────────────────────────
+## Pins every random draw this artifact makes. -1 = randomize per launch (the
+## shipped behaviour, and what all 5 placements get). Any value >= 0 reproduces
+## one exact field, which is what a still-image sweep or a regression capture
+## needs. Set from a map with `#dna_seed:20260802`, or from a registry
+## dna.fixture — write it as a JSON NUMBER, not a quoted string.
+@export var dna_seed: int = -1
+
 var time := 0.0
 var glitch_timer := 0.0
 var corruption_rate := 0.05
@@ -83,7 +110,20 @@ var _pixel_sort_randf := PackedFloat32Array()
 var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
-	_rng.randomize()
+	# The grid sets config_* metadata SYNCHRONOUSLY before add_child, so the seed
+	# has to be read HERE — before the first draw. apply_grid_config arrives
+	# call_deferred, i.e. after everything below has already rolled.
+	if has_meta("config_dna_seed"):
+		dna_seed = int(str(get_meta("config_dna_seed")))
+	if dna_seed >= 0:
+		# BOTH streams, because this file draws from both: seed() pins the global
+		# generator used by randi() in initialize_digital_structures and by randf()
+		# in propagate_corruption; _rng.seed pins the instance generator used by
+		# the noise and pixel-sort rerolls and by the error cascade.
+		seed(dna_seed)
+		_rng.seed = dna_seed
+	else:
+		_rng.randomize()
 	initialize_digital_structures()
 	_create_all_multimeshes()
 	# Pre-roll stable noise

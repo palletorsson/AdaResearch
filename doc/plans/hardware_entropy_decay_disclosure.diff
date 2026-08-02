@@ -1,0 +1,166 @@
+diff --git a/algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.gd b/algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.gd
+index 40795d39b..070754d4a 100644
+--- a/algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.gd
++++ b/algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.gd
+@@ -24,6 +24,54 @@ const DECAY_SHADER = preload("res://algorithms/randomness/hardware_entropy_decay
+ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+ 
++# ─────────────────────────────────────────────────────────────────────────────
++# STAGE-2 DNA PROMOTION (2026-08-02). The randomness family's ONE axis, adopted:
++#
++#   disclosure   oracle  <  tally  <  ledger  <  works  <  origin
++#
++# defined in prng_crank_machine.gd, already shared with coin_toss. This rig's
++# whole claim is that the entropy degrading these three specimens came from the
++# player's own body — which is a claim about PROVENANCE, and provenance is what
++# the family word already names. An artifact whose truth line is "the observer
++# is not separate from the system" has exactly one interesting knob: how much of
++# that relationship it is willing to print.
++#
++#   oracle  Three specimens, visibly worn, on their columns. The service bay is
++#           closed with a bolted blank plate and there is no source line. The
++#           surfaces are decaying and nothing on the rig will tell you why, or
++#           by whom. Wear as a fact of nature.
++#   tally   The board returns carrying the AGGREGATE only: how far gone each
++#           quantity is — decay, scratches, grime, entropy — and how long it has
++#           been running. The damage totalled, the cause withheld.
++#   ledger  + the live inputs: hand velocity, grip, head rotation, sample by
++#           sample. Now you can watch a number move when you move. Still nothing
++#           says what is producing those numbers.
++#   works   + the source line: [ VR HARDWARE ACTIVE ] or [ SIMULATED ENTROPY ].
++#           The rig names its own instrument, and admits when there is no player
++#           and it is feeding on a sine wave instead. THE LEGACY RIG, byte for
++#           byte.
++#   origin  + the transfer function, printed on the control bay: which channel
++#           drives which damage and by what coefficient, plus the passive rate
++#           that runs whether or not anyone is in the room. The rung at which
++#           "your movements become entropy" stops being a wall label and becomes
++#           three multiplications you could check.
++#
++# NOT PROMOTED, and it was the tempting one: the decay RATES. velocity_to_scratch
++# and its four siblings are the artifact's most obvious parameters and they are
++# invisible to a still — a rate only exists across frames, and the evidence loop
++# is one PNG per variant. panel_count is not promoted either: three specimens or
++# five is a quantity, not a claim.
++#
++# NOT TOUCHED: the shader, the sampling, the coefficients themselves. Every rung
++# decays identically from identical input. This axis changes the RECORD, never
++# the process it records.
++# ─────────────────────────────────────────────────────────────────────────────
++
++## The family's ladder, defined once next door. Preloaded rather than reached
++## through class_name — class_name lookups are not reliable headless and every
++## frame of the evidence loop is rendered headless.
++const Disclosure = preload("res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd")
++
+ # --- Export tunables ---
+ @export_category("Decay Rates")
+ @export var velocity_to_scratch: float = 0.35        ## How much controller speed feeds scratch intensity
+@@ -33,6 +81,29 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+ @export var interaction_decay_boost: float = 0.015    ## Extra decay when actively interacting
+ @export var decay_smoothing: float = 3.5              ## Lerp speed for visual smoothing
+ 
++@export_category("Disclosure")
++## THE AXIS — how much of the entropy's origin this rig admits. Same five rungs,
++## same order, same spellings as prng_crank_machine and coin_toss. `works` is the
++## legacy rig.
++@export_enum("oracle", "tally", "ledger", "works", "origin") var disclosure: String = "works"
++
++## The allow-list, in ladder order — the same five words the @export_enum above
++## declares. What a map token is checked against.
++const DISCLOSURES: PackedStringArray = ["oracle", "tally", "ledger", "works", "origin"]
++
++## PIN. -1 (the default) is today's behaviour exactly: with no XR rig in the
++## scene the sampler falls back to wall-clock sines, so the readouts and the
++## shader's wear differ every time the artifact is instantiated and keep drifting
++## for as long as it lives. Any value >= 0 replaces that clock with a fixed state
++## derived from the seed and stops the accumulation, so two photographs of this
++## rig can actually be compared.
++##
++## Nothing here calls randf — the noise is the CLOCK, which is worse, because it
++## looks deterministic in the source. Without this pin a `disclosure` sweep would
++## measure four different states of decay and report a bite that is entirely the
++## sweep's own elapsed runtime. The DNA fixture must set it.
++@export var entropy_seed: int = -1
++
+ @export_category("Display")
+ @export var panel_count: int = 3                      ## Number of display panels (cube, sphere, cylinder)
+ @export var panel_spacing: float = 1.4
+@@ -94,8 +165,26 @@ var _source_pos: Vector3 = Vector3.ZERO
+ var _active: bool = true
+ var _paused: bool = false
+ 
++## Everything the AXIS owns: the readout plate and its board, the blank cover,
++## the source anchor, the origin panel. A rung change frees exactly these and
++## builds them again — the specimens, the columns and the rig are not the
++## account and must survive a rung change untouched.
++var _axis_owned: Array[Node] = []
++var _built: bool = false
++## True when entropy_seed >= 0: the sampler is replaced by a fixed state.
++var _pinned: bool = false
++
++
++## Rank of the current rung, 0..4, read through the family's one table.
++func _rung() -> int:
++	return int(Disclosure.DISCLOSURE_RUNGS.get(disclosure, 3))
++
+ 
+ func _ready() -> void:
++	# The grid sets config_* metadata SYNCHRONOUSLY before add_child, so the meta
++	# read happens here, before any geometry exists. apply_grid_config() arrives
++	# call_deferred — after this — and is a re-read, not the read.
++	_read_meta_overrides()
+ 	_build_pedestal()
+ 	_build_display_surfaces()
+ 	_build_title()
+@@ -104,9 +193,49 @@ func _ready() -> void:
+ 	_build_vr_controls()
+ 	_build_source_indicator()
+ 	_build_rig()
++	_build_origin_panel()
++	if entropy_seed >= 0:
++		_pin_state()
++	_built = true
++
++
++## A fixed, reproducible state of wear. Reachable ONLY through entropy_seed >= 0,
++## so no shipped placement can enter it. The numbers are a plain hash of the seed
++## into 0..1 — arbitrary, but identical for identical seeds, which is the whole
++## requirement. _process returns immediately in this mode, so nothing drifts.
++func _pin_state() -> void:
++	_pinned = true
++	var s: float = float(absi(entropy_seed) % 1000) / 1000.0
++	_decay_amount = 0.20 + s * 0.45
++	_scratch_intensity = 0.30 + s * 0.40
++	_grime_buildup = 0.25 + s * 0.45
++	_entropy_rate = 0.15 + s * 0.50
++	_display_decay = _decay_amount
++	_display_scratch = _scratch_intensity
++	_display_grime = _grime_buildup
++	_display_entropy = _entropy_rate
++	_left_velocity = 0.8 + s
++	_right_velocity = 0.5 + s * 0.5
++	_head_angular_speed = 0.3 + s * 0.4
++	_grip_left = s
++	_grip_right = s * 0.7
++	_total_scratches = 2.0 + s * 3.0
++	_peak_velocity = 1.5 + s
++	_interaction_seconds = 30.0 + s * 60.0
++	for mat in _shader_materials:
++		mat.set_shader_parameter("decay_amount", _display_decay)
++		mat.set_shader_parameter("scratch_intensity", _display_scratch)
++		mat.set_shader_parameter("grime_buildup", _display_grime)
++		mat.set_shader_parameter("entropy_rate", _display_entropy)
++		mat.set_shader_parameter("touch_uv", _touch_uv)
++	if show_readouts:
++		_update_readouts()
++	_update_source_indicator()
+ 
+ 
+ func _process(delta: float) -> void:
++	if _pinned:
++		return   # a pinned rig holds its state so two frames can be compared
+ 	if _paused:
+ 		return
+ 
