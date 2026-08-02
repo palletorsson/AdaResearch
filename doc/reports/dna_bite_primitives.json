@@ -1,0 +1,211 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "primitives-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "laser_measure",
+   "axis": "claim",
+   "frame": 0.07622,
+   "focus": 0.39723,
+   "verdict": "bites",
+   "subject": 0.05258,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "grab_long_stick",
+   "axis": "office",
+   "frame": 0.02529,
+   "focus": 0.25204,
+   "verdict": "bites",
+   "subject": 0.0248,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "grab_rainbow_stick",
+   "axis": "office",
+   "frame": 0.01851,
+   "focus": 0.2048,
+   "verdict": "local",
+   "subject": 0.02496,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "pickup_cube_static",
+   "axis": "travel",
+   "frame": 0.1023,
+   "focus": 0.41762,
+   "verdict": "bites",
+   "subject": 0.15207,
+   "pairs": 15,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "rotating_cube",
+   "axis": "travel",
+   "frame": 0.11237,
+   "focus": 0.39496,
+   "verdict": "bites",
+   "subject": 0.10359,
+   "pairs": 15,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "transformation_cube",
+   "axis": "travel",
+   "frame": 0.1265,
+   "focus": 0.40064,
+   "verdict": "bites",
+   "subject": 0.1516,
+   "pairs": 15,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "draw_dot",
+   "axis": "retention",
+   "frame": 0.08414,
+   "focus": 0.3344,
+   "verdict": "bites",
+   "subject": 0.09199,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "draw_triangle_faces",
+   "axis": "retention",
+   "frame": 0.10124,
+   "focus": 0.39372,
+   "verdict": "bites",
+   "subject": 0.09051,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "mystic_writing_pad",
+   "axis": "retention",
+   "frame": 0.01079,
+   "focus": 0.13911,
+   "verdict": "local",
+   "subject": 0.06813,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "grab_sphere_point_snap",
+   "axis": "retention",
+   "frame": 0.07446,
+   "focus": 0.29678,
+   "verdict": "bites",
+   "subject": 0.10461,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "interactive_point_origin_force",
+   "axis": "retention",
+   "frame": 0.04646,
+   "focus": 0.31634,
+   "verdict": "bites",
+   "subject": 0.04203,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "capsule",
+   "axis": "facture",
+   "frame": 0.07892,
+   "focus": 0.28925,
+   "verdict": "bites",
+   "subject": 0.05867,
+   "pairs": 10,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "platonic_grabbables",
+   "axis": "facture",
+   "frame": 0.05209,
+   "focus": 0.20953,
+   "verdict": "bites",
+   "subject": 0.04914,
+   "pairs": 3,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "triangleprofiles",
+   "axis": "facture",
+   "frame": 0.01082,
+   "focus": 0.14762,
+   "verdict": "local",
+   "subject": 0.01641,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "cast",
+     "b": "facet",
+     "focus": 0.03431,
+     "rgb": 0.16751
+    },
+    {
+     "a": "cast",
+     "b": "shell",
+     "focus": 0.05437,
+     "rgb": 0.15592
+    }
+   ]
+  },
+  {
+   "artifact": "folded_strip",
+   "axis": "facture",
+   "frame": 0.0454,
+   "focus": 0.1816,
+   "verdict": "bites",
+   "subject": 0.02609,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "combine_capsule",
+   "axis": "taxonomy",
+   "frame": 0.01968,
+   "focus": 0.16043,
+   "verdict": "local",
+   "subject": 0.04781,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "combine_sphere",
+   "axis": "taxonomy",
+   "frame": 0.04316,
+   "focus": 0.20753,
+   "verdict": "bites",
+   "subject": 0.04402,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  }
+ ]
+}

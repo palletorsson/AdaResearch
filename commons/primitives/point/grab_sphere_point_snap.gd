@@ -32,6 +32,27 @@ extends Node3D
 @export var reference_frame_size: float = 0.5
 @export var show_reference_frame: bool = false
 
+## AXIS — WHAT A MARK PERSISTS AS once the hand that made it has gone. Adopted word for
+## word from [[mystic_writing_pad]] and shared with [[draw_dot]], [[draw_triangle_faces]]
+## and [[interactive_point_origin_force]]. This artifact is the one that already had an
+## opinion: snapping is a claim that a position must be LEGAL before it counts, and
+## `lattice` is that claim taking its place among four rivals rather than being the only
+## thing on offer. The ruling is drawn at this artifact's own grid_size, so the axis shows
+## the quantum the code actually rounds to.
+##
+##   none      the legacy lineage, byte for byte. Nothing stands here: at rest the artifact
+##             shows no mark, because it keeps none until a hand makes one
+##   trace     one stroke in the trail colour, left exactly where the hand went — the raw
+##             analogue path, admitted whole, nothing rounded away
+##   lattice   the ruling itself, at grid_size, with the same path snapped onto it. The
+##             argument the token's name already makes: legal positions, countable space
+##   archive   nine paths at once, all kept, all bright. Quantisation is a choice about what
+##             differences are worth keeping; this is the refusal to choose
+##   wax       a dark slab behind a pale sheet, the paths sunk between them and fading with
+##             age. The record is kept where rounding cannot reach it
+@export var retention: String = "none"
+const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
+
 # Data Table Display
 @export_group("Data Table")
 @export var show_data_table: bool = true
@@ -80,6 +101,11 @@ func _ready() -> void:
 		_grab_point.dropped.connect(_on_grab_point_dropped)
 	if _grab_point.has_signal("picked_up"):
 		_grab_point.picked_up.connect(_on_grab_point_picked_up)
+
+	# RETENTION last, so every child added above keeps its index. "none" is the legacy
+	# lineage and adds nothing at all.
+	_ret_read_config()
+	_ret_build()
 
 func _setup_trail() -> void:
 	_trail_mesh = ImmediateMesh.new()
@@ -287,3 +313,196 @@ func _update_data_table() -> void:
 	# Position near trail start, offset to the side and forward
 	var start_pos = _trail_points[0]
 	_data_table_label.global_position = start_pos + Vector3(0.15, data_table_height_offset - 0.1, 0.2)
+
+
+# ── RETENTION ────────────────────────────────────────────────────────────────
+# One axis, five claims about whether space remembers being touched, shared word for word
+# with mystic_writing_pad, draw_dot, draw_triangle_faces and interactive_point_origin_force.
+# Appended LAST: the trail, the reference frame and the data table are built above and none
+# of them move.
+#
+# APPEARANCE ONLY. snap_position_to_grid, snap_on_drop and the trail recording are not
+# touched by any value. `lattice` DRAWS the artifact's quantum; it does not change it, and
+# the ruling is read off grid_size rather than replacing it.
+
+const RET_DOT_R := 0.007
+const RET_SAMPLES := 50
+const RET_PLANE_Z := -0.12          # the depth the DrawSphere writes at
+
+var _ret_node: Node3D = null
+
+
+func _ret_read_config() -> void:
+	if has_meta("config_retention"):
+		var r: String = str(get_meta("config_retention")).strip_edges().to_lower()
+		retention = r if RETENTIONS.has(r) else retention
+
+
+## Gated on the key: a config that says nothing about retention gets no work at all.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("retention"):
+		return
+	var r: String = str(config_data["retention"]).strip_edges().to_lower()
+	if not RETENTIONS.has(r) or r == retention:
+		return
+	retention = r
+	_ret_build()
+
+
+func _ret_build() -> void:
+	if is_instance_valid(_ret_node):
+		_ret_node.queue_free()
+	_ret_node = null
+
+	match retention:
+		"none":
+			pass
+		"trace":
+			_ret_trace()
+		"lattice":
+			_ret_lattice()
+		"archive":
+			_ret_archive()
+		"wax":
+			_ret_wax()
+		_:
+			pass
+
+
+func _ret_root() -> Node3D:
+	if not is_instance_valid(_ret_node):
+		_ret_node = Node3D.new()
+		_ret_node.name = "RetentionRecord"
+		_ret_node.position = Vector3(0, 0, RET_PLANE_Z)
+		add_child(_ret_node)
+	return _ret_node
+
+
+## The ruling step — this artifact's OWN quantum, clamped only so a grid_size of 1 m does
+## not draw a single node and a grid_size of 1 mm does not draw ten thousand.
+func _ret_step() -> float:
+	return clampf(grid_size, 0.022, 0.075)
+
+
+## TRACE — the analogue path, admitted whole. Nothing rounded, nothing dropped.
+func _ret_trace() -> void:
+	_ret_stroke(0.77, 0.0, trail_color, 1.7, 0.0)
+
+
+## LATTICE — the ruling first, at grid_size, then the same hand snapped onto it. Regular
+## nodes where every other value shows wander; the path becomes a stair.
+func _ret_lattice() -> void:
+	var span: float = 0.16
+	var step: float = _ret_step()
+	var n: int = int(span * 2.0 / step) + 1
+	var grid := _ret_mm("LatticeNodes", _ret_emissive(Color(0.52, 0.62, 0.70), 0.5))
+	var gm: MultiMesh = grid.multimesh
+	gm.instance_count = n * n
+	var small: Basis = Basis.IDENTITY.scaled(Vector3.ONE * 0.55)
+	var k: int = 0
+	for cx in range(n):
+		for cy in range(n):
+			gm.set_instance_transform(k, Transform3D(small,
+				Vector3(-span + float(cx) * step, -span + float(cy) * step, 0.0)))
+			k += 1
+	_ret_root().add_child(grid)
+	_ret_stroke(0.77, 0.004, trail_color, 1.7, step)
+
+
+## ARCHIVE — nine paths kept at once, none dimmed. Everything worth keeping was kept, and
+## now no single decision is legible.
+func _ret_archive() -> void:
+	for i in range(9):
+		_ret_stroke(0.77 + 0.83 * float(i), 0.003 * float(i), trail_color, 1.4, 0.0)
+
+
+## WAX — the Wunderblock construction, borrowed from mystic_writing_pad: matte dark slab,
+## pale translucent sheet, the paths sunk between them and fading with age.
+func _ret_wax() -> void:
+	var span: float = 0.17
+	var root: Node3D = _ret_root()
+
+	var slab := MeshInstance3D.new()
+	slab.name = "WaxSlab"
+	var sm := BoxMesh.new()
+	sm.size = Vector3(span * 2.0, span * 2.0, 0.012)
+	slab.mesh = sm
+	var smat := StandardMaterial3D.new()
+	smat.albedo_color = Color(0.10, 0.085, 0.095)
+	smat.roughness = 0.95
+	smat.metallic = 0.0
+	slab.material_override = smat
+	slab.position = Vector3(0, 0, -0.011)
+	root.add_child(slab)
+
+	var warm := Color(0.95, 0.62, 0.35)
+	for i in range(5):
+		var f: float = float(5 - i) / 5.0
+		var c: Color = warm.lerp(Color(0.10, 0.085, 0.095), 1.0 - f)
+		_ret_stroke(0.77 + 1.7 * float(i), -0.003 + 0.0013 * float(i), c, 0.45 + 1.1 * f, 0.0)
+
+	var sheet := MeshInstance3D.new()
+	sheet.name = "ClearingSheet"
+	var shm := BoxMesh.new()
+	shm.size = Vector3(span * 2.0, span * 2.0, 0.004)
+	sheet.mesh = shm
+	var shmat := StandardMaterial3D.new()
+	shmat.albedo_color = Color(0.62, 0.65, 0.70, 0.30)
+	shmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	shmat.roughness = 0.25
+	shmat.metallic = 0.0
+	sheet.material_override = shmat
+	sheet.position = Vector3(0, 0, 0.009)
+	root.add_child(sheet)
+
+
+## One dot-stroke in the record plane. `step` > 0 snaps it onto the ruling — the same
+## rounding snap_position_to_grid does, done to a picture rather than to the live hand.
+func _ret_stroke(phase: float, z: float, c: Color, energy: float, step: float) -> void:
+	var span: float = 0.15
+	var mmi := _ret_mm("Stroke", _ret_emissive(c, energy))
+	var mm: MultiMesh = mmi.multimesh
+	mm.instance_count = RET_SAMPLES
+	for i in range(RET_SAMPLES):
+		var p: Vector3 = _ret_curve(float(i) / float(RET_SAMPLES - 1), phase, span)
+		if step > 0.0:
+			p = Vector3(round(p.x / step) * step, round(p.y / step) * step, 0.0)
+		p.z = z
+		mm.set_instance_transform(i, Transform3D(Basis(), p))
+	_ret_root().add_child(mmi)
+
+
+## A deterministic hand — no randf anywhere in the record path, so five variants differ by
+## the axis and by nothing else.
+func _ret_curve(u: float, phase: float, span: float) -> Vector3:
+	var a: float = u * TAU * 1.15 + phase
+	var x: float = span * ((u - 0.5) * 1.85 + 0.22 * sin(a * 1.6))
+	var y: float = span * 0.80 * sin(a * 0.95 + phase * 1.3) * (0.55 + 0.45 * sin(a * 0.42))
+	return Vector3(clampf(x, -span, span), clampf(y, -span, span), 0.0)
+
+
+func _ret_mm(nm: String, mat: Material) -> MultiMeshInstance3D:
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = nm
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	var dot := SphereMesh.new()
+	dot.radius = RET_DOT_R
+	dot.height = RET_DOT_R * 2.0
+	dot.radial_segments = 6
+	dot.rings = 3
+	mm.mesh = dot
+	mm.instance_count = 0
+	mmi.multimesh = mm
+	mmi.material_override = mat
+	return mmi
+
+
+func _ret_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	return m

@@ -48,6 +48,30 @@ class_name MysticWritingPad
 ## Ghosts run the spectrum by age instead of the warm wax tone.
 @export var pride_ghosts: bool = false
 
+## AXIS — WHAT A MARK PERSISTS AS once the hand that made it has gone. Shared word for
+## word with [[draw_dot]], [[grab_sphere_point_snap]], [[draw_triangle_faces]] and
+## [[interactive_point_origin_force]]: each of those puts a mark into space and then has
+## to decide what space does with it. This pad is where the vocabulary comes from, because
+## Freud's Wunderblock is the object that argues the answer is not one layer but two.
+##
+##   none      space does not keep it. The wax is bare black, only the live stroke exists,
+##             and the lift is a real erasure — an honest whiteboard, a present with no past
+##   trace     the mark stays ON THE SURFACE. Past strokes sit beside the live one in the
+##             same bright ink, on the sheet, never lifted — accumulation without depth
+##   lattice   a mark counts only where it is legal. A ruled dot-grid rules the whole slate
+##             and every stroke is quantised onto it: stair-stepped, right-angled, countable
+##   archive   nothing sinks past recall. Fourteen strokes at full brightness, none dimmed
+##             by age, until the slab is more mark than wax
+##   wax       the legacy lineage, byte for byte — a clean surface over a depth that keeps
+##             the lot, each older trace fainter than the last until the horizon takes it
+##
+## `wax` is this artifact's default because `wax` is what it already was. The other four
+## are the positions it argues against, made standable. Note the other four members of the
+## family default to `none`: at rest they show no mark at all, and that is a true statement
+## about them, not a shortfall.
+@export var retention: String = "wax"
+const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
+
 # ── State ─────────────────────────────────────────────────────────────
 
 const DOT_RADIUS := 0.009
@@ -112,6 +136,9 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_pride_ghosts"):
 		var s: String = str(get_meta("config_pride_ghosts")).to_lower()
 		pride_ghosts = s == "true" or s == "1" or s == "yes"
+	if has_meta("config_retention"):
+		var _r: String = str(get_meta("config_retention")).strip_edges().to_lower()
+		retention = _r if RETENTIONS.has(_r) else retention
 
 
 func _parse_color(raw: String, fallback: Color) -> Color:
@@ -199,14 +226,22 @@ func _build() -> void:
 	_dot_mesh.radial_segments = 6
 	_dot_mesh.rings = 3
 
-	# Pre-seed the wax with ghosts so the palimpsest is present on arrival.
-	var seed_n: int = maxi(0, mini(ghost_count, 5))
-	for i in range(seed_n):
-		_seed_phase += 1.7
-		var ghost := _make_stroke_mm("SeedGhost%d" % i, _ghost_material_for(seed_n - i, seed_n))
-		_fill_stroke(ghost, _new_coeffs(_seed_phase), 1.0, 0.014 + 0.002 * float(i))
-		_panel.add_child(ghost)
-		_ghosts.append(ghost)
+	# Pre-seed the slate so the retention regime is present on arrival — the axis decides
+	# WHERE the seeded strokes land and how they are graded. `wax` is the legacy path and
+	# runs the original six lines untouched; `_:` falls through to it.
+	match retention:
+		"none":
+			pass
+		"trace":
+			_ret_seed_surface()
+		"lattice":
+			_ret_seed_lattice()
+		"archive":
+			_ret_seed_archive()
+		"wax":
+			_ret_seed_wax()
+		_:
+			_ret_seed_wax()
 
 	# Begin a current trace, already partway written.
 	_begin_new_current()
@@ -257,18 +292,24 @@ func _process(delta: float) -> void:
 # Sink the current trace into the wax as a ghost, fade older ghosts by
 # age, drop the oldest past the horizon, and start a fresh surface.
 func _lift_sheet() -> void:
-	if ghost_persistence > 0.001 and _current_mm != null:
-		var keep := _make_stroke_mm("Ghost", _ghost_material_for(1, max(ghost_count, 1)))
-		_fill_stroke(keep, _coeffs, 1.0, 0.013)
+	# `none` is the only value where the lift is a real erasure: nothing is kept at all.
+	# Every other value keeps the stroke; they differ in WHERE it is kept and how it ages.
+	if retention != "none" and ghost_persistence > 0.001 and _current_mm != null:
+		var keep := _make_stroke_mm("Ghost", _ret_keep_material())
+		_fill_stroke(keep, _coeffs, 1.0, _ret_keep_depth())
 		_panel.add_child(keep)
 		_ghosts.append(keep)
 		# Re-grade every ghost by recency: newest brightest, oldest dimmest.
 		var n := _ghosts.size()
 		for i in range(n):
-			var mat := _ghost_material_for(n - i, max(ghost_count, 1))
+			# `archive` refuses the grading — nothing is allowed to get fainter with age.
+			var rec: int = n - i
+			if retention == "archive":
+				rec = max(ghost_count, 1)
+			var mat := _ghost_material_for(rec, max(ghost_count, 1))
 			(_ghosts[i] as MultiMeshInstance3D).material_override = mat
 		# Drop anything past the wax's horizon.
-		while _ghosts.size() > ghost_count:
+		while _ghosts.size() > _ret_horizon():
 			var old: MultiMeshInstance3D = _ghosts.pop_front()
 			if is_instance_valid(old):
 				old.queue_free()
@@ -385,3 +426,115 @@ func _matte(c: Color) -> StandardMaterial3D:
 	m.roughness = 0.8
 	m.metallic = 0.0
 	return m
+
+
+# ── RETENTION ────────────────────────────────────────────────────────────────
+# One axis, five claims about whether space remembers being touched. Appended LAST so
+# every child index and stroke depth above it is untouched on the legacy path — `wax`
+# calls _ret_seed_wax(), which is the original seed loop moved here word for word.
+
+## WAX — the legacy lineage. Pre-seed the depth with ghosts so the palimpsest is already
+## there when you arrive, each one fainter than the one after it.
+func _ret_seed_wax() -> void:
+	var seed_n: int = maxi(0, mini(ghost_count, 5))
+	for i in range(seed_n):
+		_seed_phase += 1.7
+		var ghost := _make_stroke_mm("SeedGhost%d" % i, _ghost_material_for(seed_n - i, seed_n))
+		_fill_stroke(ghost, _new_coeffs(_seed_phase), 1.0, 0.014 + 0.002 * float(i))
+		_panel.add_child(ghost)
+		_ghosts.append(ghost)
+
+
+## TRACE — the mark stays where it was made, on the celluloid, in the same bright ink as
+## the live stroke. Four earlier strokes crowd the front of the sheet: the surface never
+## clears, so there is nothing underneath and nothing to lift. Reads bright and cyan.
+func _ret_seed_surface() -> void:
+	for i in range(4):
+		_seed_phase += 1.7
+		var s := _make_stroke_mm("SurfaceTrace%d" % i, _emissive(ink_color, 1.5 + 0.25 * float(i)))
+		_fill_stroke(s, _new_coeffs(_seed_phase), 1.0, 0.030 + 0.0015 * float(i))
+		_panel.add_child(s)
+		_ghosts.append(s)
+
+
+## LATTICE — a mark only counts where it is legal. The whole slate is ruled with a regular
+## field of pale nodes, and every stroke is quantised onto them, so the wandering
+## handwriting becomes a stair of right angles. The dominant read is the RULING: a field of
+## regular pinpricks where the other values show wandering line.
+func _ret_seed_lattice() -> void:
+	var step: float = 0.055
+	var hw: float = board_width * 0.46
+	var hh: float = board_height * 0.44
+	var cols: int = int(hw * 2.0 / step) + 1
+	var rows: int = int(hh * 2.0 / step) + 1
+	var grid := _make_stroke_mm("LatticeNodes", _emissive(Color(0.46, 0.58, 0.66), 0.55))
+	var gm: MultiMesh = grid.multimesh
+	gm.instance_count = cols * rows
+	var k: int = 0
+	# 0.85, not 0.5: the pad is 1.4 m tall, so a fitted 760 px shot gives roughly 500 px
+	# per metre and a half-size dot lands at 4 px. A ruling nobody can see is not a ruling.
+	var small: Basis = Basis.IDENTITY.scaled(Vector3.ONE * 0.85)
+	for cx in range(cols):
+		for cy in range(rows):
+			var gx: float = -hw + float(cx) * step
+			var gy: float = -hh + float(cy) * step
+			gm.set_instance_transform(k, Transform3D(small, Vector3(gx, gy, 0.012)))
+			k += 1
+	_panel.add_child(grid)
+	# Four strokes snapped onto the ruling — same handwriting, made countable.
+	for i in range(4):
+		_seed_phase += 1.7
+		var s := _make_stroke_mm("SnappedTrace%d" % i, _ghost_material_for(4 - i, 4))
+		_ret_fill_quantised(s, _new_coeffs(_seed_phase), step, 0.018 + 0.002 * float(i))
+		_panel.add_child(s)
+		_ghosts.append(s)
+
+
+## ARCHIVE — nothing sinks past recall and nothing is allowed to fade. Fourteen strokes at
+## full brightness, layered through the depth of the slab, until there is more mark than
+## wax and the near-black ground has effectively disappeared.
+func _ret_seed_archive() -> void:
+	var n: int = 14
+	for i in range(n):
+		_seed_phase += 1.7
+		var s := _make_stroke_mm("ArchiveTrace%d" % i, _ghost_material_for(n, n))
+		_fill_stroke(s, _new_coeffs(_seed_phase), 1.0, 0.010 + 0.0011 * float(i))
+		_panel.add_child(s)
+		_ghosts.append(s)
+
+
+## Where a lifted stroke is KEPT. Every value but `trace` keeps it in the wax, behind the
+## sheet, at the legacy depth. `trace` keeps it on the front of the sheet instead.
+func _ret_keep_depth() -> float:
+	return 0.031 if retention == "trace" else 0.013
+
+
+## What a lifted stroke is kept AS. `trace` keeps it in live ink because it never went
+## under; everything else grades it as a ghost, exactly as before.
+func _ret_keep_material() -> StandardMaterial3D:
+	if retention == "trace":
+		return _emissive(ink_color, 1.8)
+	return _ghost_material_for(1, max(ghost_count, 1))
+
+
+## How far back the depth still holds. `archive` refuses a horizon.
+func _ret_horizon() -> int:
+	return 64 if retention == "archive" else ghost_count
+
+
+## _fill_stroke's curve, snapped to the ruling before it is written — the same hand,
+## admitted only at legal positions.
+func _ret_fill_quantised(mm_inst: MultiMeshInstance3D, coeffs: Array, step: float, z: float) -> void:
+	var mm: MultiMesh = mm_inst.multimesh
+	var n: int = maxi(2, stroke_points)
+	mm.instance_count = n
+	var hw: float = board_width * 0.42
+	var hh: float = board_height * 0.40
+	for i in range(n):
+		var u: float = float(i) / float(stroke_points)
+		var a: float = u * TAU * 1.6
+		var x: float = lerpf(-hw, hw, u) * 0.65 + hw * 0.5 * sin(a * coeffs[0] + coeffs[2])
+		var y: float = hh * sin(a * coeffs[1] + coeffs[3]) * (0.6 + 0.4 * sin(a * 0.5 + coeffs[3]))
+		var qx: float = round(clampf(x, -hw, hw) / step) * step
+		var qy: float = round(clampf(y, -hh, hh) / step) * step
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(qx, qy, z)))

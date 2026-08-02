@@ -50,6 +50,26 @@ const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_po
 ]
 @export var wireframe_color: Color = Color(0.9, 0.9, 0.9, 0.8)
 
+## AXIS — WHAT A MARK PERSISTS AS once the hand that made it has gone. Adopted word for
+## word from [[mystic_writing_pad]] and shared with [[draw_dot]],
+## [[grab_sphere_point_snap]] and [[interactive_point_origin_force]]. Here the mark is a
+## LOOP, and this artifact's own truth is that a surface is not a thing but an agreement
+## among boundary points — so each value is a different answer to how long an agreement
+## holds after the parties have gone.
+##
+##   none      the legacy lineage, byte for byte. Nothing stands here: at rest there are no
+##             points, no path and no faces, because nobody has agreed to anything yet
+##   trace     one open path with its points on it — the loop unclosed. The marks are kept
+##             and the agreement is not made; a boundary with no surface
+##   lattice   the ruling at grid_size with the path snapped onto it. A vertex counts only
+##             at a legal position, so the agreement is between LAWFUL points or none
+##   archive   six closed faces at once, filled, overlapping, every colour in the palette.
+##             Every agreement ever made, kept, until no single one can be read
+##   wax       a dark slab behind a pale sheet with faint warm loops sunk between them —
+##             the faces are gone from the surface and the boundary is still down there
+@export var retention: String = "none"
+const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
+
 var _grab_point: Node3D
 var _draw_sphere: Node3D
 var _is_grabbed: bool = false
@@ -100,6 +120,11 @@ func _ready() -> void:
 
 	set_process(true)
 	print("DrawTriangleFaces: Ready! Pick up the sphere and start drawing.")
+
+	# RETENTION last, so every child added above keeps its index. "none" is the legacy
+	# lineage and adds nothing at all.
+	_ret_read_config()
+	_ret_build()
 
 func _setup_line_visualization() -> void:
 	# Completed lines
@@ -678,3 +703,279 @@ func get_stats() -> Dictionary:
 		"triangles": completed_triangles.size(),
 		"current_path_length": current_path.size()
 	}
+
+
+# ── RETENTION ────────────────────────────────────────────────────────────────
+# One axis, five claims about whether space remembers being touched, shared word for word
+# with mystic_writing_pad, draw_dot, grab_sphere_point_snap and
+# interactive_point_origin_force. Appended LAST: the lines, the active-line preview and the
+# snap indicator are built above and none of them move.
+#
+# APPEARANCE ONLY. The record is a separate subtree and never enters placed_points,
+# current_path or completed_triangles — undo, snapping, loop closing and fan triangulation
+# behave exactly as they did, and a variant cannot be grabbed, edited or triangulated.
+
+const RET_DOT_R := 0.009
+const RET_PLANE_Z := -0.12          # the depth the DrawSphere writes at
+const RET_RING_N := 5
+
+var _ret_node: Node3D = null
+
+
+func _ret_read_config() -> void:
+	if has_meta("config_retention"):
+		var r: String = str(get_meta("config_retention")).strip_edges().to_lower()
+		retention = r if RETENTIONS.has(r) else retention
+
+
+## Gated on the key: a config that says nothing about retention gets no work at all.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("retention"):
+		return
+	var r: String = str(config_data["retention"]).strip_edges().to_lower()
+	if not RETENTIONS.has(r) or r == retention:
+		return
+	retention = r
+	_ret_build()
+
+
+func _ret_build() -> void:
+	if is_instance_valid(_ret_node):
+		_ret_node.queue_free()
+	_ret_node = null
+
+	match retention:
+		"none":
+			pass
+		"trace":
+			_ret_trace()
+		"lattice":
+			_ret_lattice()
+		"archive":
+			_ret_archive()
+		"wax":
+			_ret_wax()
+		_:
+			pass
+
+
+func _ret_root() -> Node3D:
+	if not is_instance_valid(_ret_node):
+		_ret_node = Node3D.new()
+		_ret_node.name = "RetentionRecord"
+		_ret_node.position = Vector3(0, 0, RET_PLANE_Z)
+		add_child(_ret_node)
+	return _ret_node
+
+
+## TRACE — the boundary kept, the agreement never made. An open path with its vertices
+## standing on it: five points, four edges, no fill.
+func _ret_trace() -> void:
+	var pts: Array = _ret_ring(0.4, 0.135, 0.0)
+	_ret_edges(pts, false, line_color, 0.009, 0.0)
+	_ret_nodes(pts, point_color, 0.004)
+
+
+## LATTICE — the ruling at grid_size, and the loop admitted only at its nodes. Regular
+## pinpricks and right angles where every other value shows free wander.
+func _ret_lattice() -> void:
+	var span: float = 0.16
+	# grid_size is this artifact's own quantum (0.1 in the shipped scene); it is clamped
+	# only so a 1 m or 1 mm setting does not draw one bar or ten thousand.
+	var step: float = clampf(grid_size, 0.04, 0.09)
+	var n: int = int(span * 2.0 / step) + 1
+	var rule: StandardMaterial3D = _ret_emissive(Color(0.46, 0.56, 0.66), 0.45)
+	var root: Node3D = _ret_root()
+	for c in range(n):
+		var o: float = -span + float(c) * step
+		root.add_child(_ret_bar(Vector3(0, o, -0.004), Vector3(span * 2.0, 0.0022, 0.0022), 0.0, rule))
+		root.add_child(_ret_bar(Vector3(o, 0, -0.004), Vector3(span * 2.0, 0.0022, 0.0022), PI * 0.5, rule))
+	var grid := _ret_mm("LatticeNodes", _ret_emissive(Color(0.62, 0.72, 0.80), 0.7), RET_DOT_R * 0.62)
+	var gm: MultiMesh = grid.multimesh
+	gm.instance_count = n * n
+	var k: int = 0
+	for cx in range(n):
+		for cy in range(n):
+			gm.set_instance_transform(k, Transform3D(Basis(),
+				Vector3(-span + float(cx) * step, -span + float(cy) * step, -0.002)))
+			k += 1
+	root.add_child(grid)
+	var pts: Array = _ret_ring(0.4, 0.135, step)
+	_ret_edges(pts, true, line_color, 0.009, 0.004)
+	_ret_nodes(pts, snap_indicator_color, 0.008)
+
+
+## One thin ruling bar in the record plane, rotated about Z. Used for the lattice's ruled
+## lines; the loop's own edges go through _ret_edges.
+func _ret_bar(at: Vector3, size: Vector3, rot_z: float, mat: Material) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.name = "Rule"
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.position = at
+	mi.rotation = Vector3(0, 0, rot_z)
+	mi.material_override = mat
+	return mi
+
+
+## ARCHIVE — six closed faces at once, filled, in every colour the palette holds. Each was
+## a real agreement; kept all together they cancel into a single unreadable stack.
+func _ret_archive() -> void:
+	for i in range(6):
+		var c: Color = line_color
+		if triangle_colors.size() > 0:
+			c = triangle_colors[i % triangle_colors.size()]
+		var pts: Array = _ret_ring(0.4 + 0.61 * float(i), 0.085 + 0.011 * float(i), 0.0)
+		_ret_face(pts, c, 0.002 * float(i))
+		_ret_edges(pts, true, wireframe_color, 0.005, 0.002 * float(i) + 0.001)
+
+
+## WAX — the Wunderblock construction, borrowed from mystic_writing_pad: matte dark slab,
+## pale translucent sheet, four loops sunk between them and fading with age. Nothing is on
+## the surface; the boundaries are all underneath it.
+func _ret_wax() -> void:
+	var span: float = 0.17
+	var root: Node3D = _ret_root()
+
+	var slab := MeshInstance3D.new()
+	slab.name = "WaxSlab"
+	var sm := BoxMesh.new()
+	sm.size = Vector3(span * 2.0, span * 2.0, 0.012)
+	slab.mesh = sm
+	var smat := StandardMaterial3D.new()
+	smat.albedo_color = Color(0.10, 0.085, 0.095)
+	smat.roughness = 0.95
+	smat.metallic = 0.0
+	slab.material_override = smat
+	slab.position = Vector3(0, 0, -0.011)
+	root.add_child(slab)
+
+	var warm := Color(0.95, 0.62, 0.35)
+	for i in range(4):
+		var f: float = float(4 - i) / 4.0
+		var c: Color = warm.lerp(Color(0.10, 0.085, 0.095), 1.0 - f)
+		var pts: Array = _ret_ring(0.4 + 1.37 * float(i), 0.075 + 0.018 * float(i), 0.0)
+		_ret_edges(pts, true, c, 0.007, -0.003 + 0.0015 * float(i))
+		_ret_nodes(pts, c, -0.003 + 0.0015 * float(i))
+
+	var sheet := MeshInstance3D.new()
+	sheet.name = "ClearingSheet"
+	var shm := BoxMesh.new()
+	shm.size = Vector3(span * 2.0, span * 2.0, 0.004)
+	sheet.mesh = shm
+	var shmat := StandardMaterial3D.new()
+	shmat.albedo_color = Color(0.62, 0.65, 0.70, 0.30)
+	shmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	shmat.roughness = 0.25
+	shmat.metallic = 0.0
+	sheet.material_override = shmat
+	sheet.position = Vector3(0, 0, 0.009)
+	root.add_child(sheet)
+
+
+## A deterministic closed loop in the record plane — no randf anywhere in the record path,
+## so five variants differ by the axis and by nothing else. `step` > 0 snaps the vertices
+## onto the ruling, the same rounding snap_position_to_grid does to a live hand.
+func _ret_ring(phase: float, radius: float, step: float) -> Array:
+	var pts: Array = []
+	for i in range(RET_RING_N):
+		var a: float = TAU * float(i) / float(RET_RING_N) + phase
+		var r: float = radius * (0.74 + 0.26 * sin(a * 2.0 + phase * 1.7))
+		var p: Vector3 = Vector3(cos(a) * r, sin(a) * r, 0.0)
+		if step > 0.0:
+			p = Vector3(round(p.x / step) * step, round(p.y / step) * step, 0.0)
+		pts.append(p)
+	return pts
+
+
+func _ret_edges(pts: Array, closed: bool, c: Color, t: float, z: float) -> void:
+	var mat: StandardMaterial3D = _ret_emissive(c, 1.6)
+	var last: int = pts.size() if closed else pts.size() - 1
+	for i in range(last):
+		var a: Vector3 = pts[i]
+		var b: Vector3 = pts[(i + 1) % pts.size()]
+		var d: Vector3 = b - a
+		var length: float = d.length()
+		if length < 0.0005:
+			continue
+		var mi := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = Vector3(length, t, t)
+		mi.mesh = bm
+		mi.position = (a + b) * 0.5 + Vector3(0, 0, z)
+		mi.rotation = Vector3(0, 0, atan2(d.y, d.x))
+		mi.material_override = mat
+		_ret_root().add_child(mi)
+
+
+func _ret_nodes(pts: Array, c: Color, z: float) -> void:
+	var mmi := _ret_mm("Vertices", _ret_emissive(c, 1.8), RET_DOT_R)
+	var mm: MultiMesh = mmi.multimesh
+	mm.instance_count = pts.size()
+	for i in range(pts.size()):
+		var p: Vector3 = pts[i]
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(p.x, p.y, z)))
+	_ret_root().add_child(mmi)
+
+
+## Fan-triangulate a kept loop into a filled face — the same construction
+## _create_triangles_from_path uses, run over the record's own points.
+func _ret_face(pts: Array, c: Color, z: float) -> void:
+	if pts.size() < 3:
+		return
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var v0: Vector3 = Vector3(pts[0].x, pts[0].y, z)
+	for i in range(1, pts.size() - 1):
+		var v1: Vector3 = Vector3(pts[i].x, pts[i].y, z)
+		var v2: Vector3 = Vector3(pts[i + 1].x, pts[i + 1].y, z)
+		st.set_normal(Vector3.BACK)
+		st.set_color(c)
+		st.add_vertex(v0)
+		st.set_normal(Vector3.BACK)
+		st.set_color(c)
+		st.add_vertex(v1)
+		st.set_normal(Vector3.BACK)
+		st.set_color(c)
+		st.add_vertex(v2)
+	var mi := MeshInstance3D.new()
+	mi.name = "Face"
+	mi.mesh = st.commit()
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = c
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = c * 0.5
+	mat.roughness = 1.0
+	mat.metallic = 0.0
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mi.material_override = mat
+	_ret_root().add_child(mi)
+
+
+func _ret_mm(nm: String, mat: Material, r: float) -> MultiMeshInstance3D:
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = nm
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	var dot := SphereMesh.new()
+	dot.radius = r
+	dot.height = r * 2.0
+	dot.radial_segments = 6
+	dot.rings = 3
+	mm.mesh = dot
+	mm.instance_count = 0
+	mmi.multimesh = mm
+	mmi.material_override = mat
+	return mmi
+
+
+func _ret_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	return m

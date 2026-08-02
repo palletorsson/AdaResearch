@@ -74,6 +74,31 @@ const MODE_PALETTES := {
 # the editor on a per-instance basis.
 @export var mode: String = ""
 
+## AXIS — WHAT A MARK PERSISTS AS once the hand that made it has gone. Adopted word for
+## word from [[mystic_writing_pad]] and shared with [[draw_dot]],
+## [[grab_sphere_point_snap]] and [[draw_triangle_faces]]. The mark this artifact makes is
+## the LINE TO ORIGIN it inherits from interactive_point_origin — a measurement, drawn
+## while held and hidden the instant you let go. So the question the family asks lands
+## here as: does a reading survive the reader?
+##
+## The record is a DIAGRAM in the artifact's own local space, not a live line to world
+## zero: a kept measurement runs to a small marker beside the point, so the record stays a
+## hand-sized thing wherever the point is standing. It never touches the live
+## line-to-origin, the morph, the attraction field or the projectile fire.
+##
+##   none      the legacy lineage, byte for byte. Let go and the reading is gone; the point
+##             is a point again and space is as it was
+##   trace     one dotted measurement stands after the hand leaves, ending in its marker —
+##             the reading kept exactly as taken
+##   lattice   a cubic field of pale nodes around the point, and the measurement admitted
+##             only through them: a stair, not a diagonal. A reading must be legal to count
+##   archive   seven readings kept at once, fanned to the same marker from seven past
+##             positions. Every measurement ever made, and no way to say which was yours
+##   wax       a dark plate under the point behind a pale sheet, with faint warm arcs of
+##             past positions sunk between them — kept where the surface cannot show it
+@export var retention: String = "none"
+const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
+
 # ── Morph state ──────────────────────────────────────────────────────────
 @export var morph_speed: float = 1.4              # seconds 0 → 1
 @export var morph_engage_threshold: float = 0.5   # attraction + projectile fire above this
@@ -137,6 +162,10 @@ func _ready() -> void:
 		grabbed.connect(_on_grabbed_any)
 	if has_signal("released") and not released.is_connected(_on_released_any):
 		released.connect(_on_released_any)
+	# RETENTION last, so the shader install, the mode palette and the signal wiring above
+	# are untouched. "none" is the legacy lineage and adds nothing at all.
+	_ret_read_config()
+	_ret_build()
 
 
 # Replace the base class's _glow_material with our shader material so the
@@ -441,6 +470,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		# Re-apply if we're already inside _ready / past the initial
 		# call. _apply_mode is safe to call multiple times.
 		_apply_mode(mode)
+	if config_data.has("retention"):
+		var r: String = str(config_data["retention"]).strip_edges().to_lower()
+		if RETENTIONS.has(r) and r != retention:
+			retention = r
+			_ret_build()
 
 
 # Apply a catalyst-mode palette to every colour-bearing channel the
@@ -533,3 +567,215 @@ func _palette_from_color(c: Color) -> Array:
 		clamp(c.b * 0.4 + 0.6, 0.0, 1.0),
 		c.a)
 	return [deeper, c, brighter]
+
+
+# ── RETENTION ────────────────────────────────────────────────────────────────
+# One axis, five claims about whether space remembers being touched, shared word for word
+# with mystic_writing_pad, draw_dot, grab_sphere_point_snap and draw_triangle_faces.
+# Appended LAST so the force shader, the mode palette and the grab wiring above are
+# untouched, and built only in-game (the editor-hint return in _ready is above this).
+#
+# APPEARANCE ONLY, and that matters more here than anywhere else in the family: this is an
+# XRToolsPickable. Nothing below reads or writes a collision layer, a mask, a mass, the
+# grab driver, the morph, the attraction query or the projectile spawn. It adds
+# MeshInstance3D children and nothing else, so what the artifact DOES is identical at
+# every value. The record takes the mode palette's line colour, so a #mode:chaos point
+# keeps a red record and a #mode:branching point keeps a green one.
+
+const RET_DOT_R := 0.006
+const RET_MARK := Vector3(-0.19, -0.13, 0.06)   # the datum the kept measurement runs to
+const RET_STEP := 0.062                          # the lattice quantum
+
+var _ret_node: Node3D = null
+
+
+func _ret_read_config() -> void:
+	if has_meta("config_retention"):
+		var r: String = str(get_meta("config_retention")).strip_edges().to_lower()
+		retention = r if RETENTIONS.has(r) else retention
+
+
+func _ret_build() -> void:
+	if Engine.is_editor_hint():
+		return
+	if is_instance_valid(_ret_node):
+		_ret_node.queue_free()
+	_ret_node = null
+
+	match retention:
+		"none":
+			pass
+		"trace":
+			_ret_trace()
+		"lattice":
+			_ret_lattice()
+		"archive":
+			_ret_archive()
+		"wax":
+			_ret_wax()
+		_:
+			pass
+
+
+func _ret_root() -> Node3D:
+	if not is_instance_valid(_ret_node):
+		_ret_node = Node3D.new()
+		_ret_node.name = "RetentionRecord"
+		add_child(_ret_node)
+	return _ret_node
+
+
+## TRACE — one kept reading. A dotted run from the point to its datum, and the datum left
+## standing as a small cube: the measurement survives the measurer.
+func _ret_trace() -> void:
+	_ret_run(Vector3.ZERO, RET_MARK, line_color, 1.7, 20)
+	_ret_datum(RET_MARK, line_color)
+
+
+## LATTICE — a cubic field of pale nodes around the point, and the reading admitted only
+## through them: the diagonal becomes a stair. A position had to be legal before it counted.
+func _ret_lattice() -> void:
+	var nodes := _ret_mm("LatticeNodes", _ret_emissive(Color(0.52, 0.62, 0.70), 0.5), RET_DOT_R * 0.6)
+	var nm: MultiMesh = nodes.multimesh
+	nm.instance_count = 4 * 4 * 4
+	var k: int = 0
+	for ix in range(4):
+		for iy in range(4):
+			for iz in range(4):
+				nm.set_instance_transform(k, Transform3D(Basis(), Vector3(
+					(float(ix) - 2.0) * RET_STEP,
+					(float(iy) - 2.0) * RET_STEP,
+					(float(iz) - 2.0) * RET_STEP)))
+				k += 1
+	_ret_root().add_child(nodes)
+	# The stair: one axis at a time, node to node, from the point to the datum.
+	var q: Vector3 = Vector3(
+		round(RET_MARK.x / RET_STEP) * RET_STEP,
+		round(RET_MARK.y / RET_STEP) * RET_STEP,
+		round(RET_MARK.z / RET_STEP) * RET_STEP)
+	var corner_a: Vector3 = Vector3(q.x, 0.0, 0.0)
+	var corner_b: Vector3 = Vector3(q.x, q.y, 0.0)
+	_ret_run(Vector3.ZERO, corner_a, line_color, 1.7, 7)
+	_ret_run(corner_a, corner_b, line_color, 1.7, 6)
+	_ret_run(corner_b, q, line_color, 1.7, 5)
+	_ret_datum(q, line_color)
+
+
+## ARCHIVE — seven readings kept at once, fanned to the same datum from seven past
+## positions. Nothing was discarded, so nothing can be attributed.
+func _ret_archive() -> void:
+	for i in range(7):
+		var a: float = -0.5 + 0.9 * float(i)
+		var from: Vector3 = Vector3(sin(a) * 0.115, cos(a * 0.8) * 0.10, sin(a * 1.3) * 0.085)
+		_ret_run(from, RET_MARK, line_color, 1.4, 14)
+	_ret_datum(RET_MARK, line_color)
+
+
+## WAX — the Wunderblock construction turned flat, because a hand-held point leaves its
+## record in the ground it stood over: a matte dark plate under the artifact, a pale
+## translucent sheet above it, and four faint warm arcs of past positions sunk between.
+func _ret_wax() -> void:
+	var root: Node3D = _ret_root()
+	var y: float = -0.115
+
+	var slab := MeshInstance3D.new()
+	slab.name = "WaxPlate"
+	var cm := CylinderMesh.new()
+	cm.top_radius = 0.155
+	cm.bottom_radius = 0.155
+	cm.height = 0.012
+	cm.radial_segments = 32
+	slab.mesh = cm
+	var smat := StandardMaterial3D.new()
+	smat.albedo_color = Color(0.10, 0.085, 0.095)
+	smat.roughness = 0.95
+	smat.metallic = 0.0
+	slab.material_override = smat
+	slab.position = Vector3(0, y, 0)
+	root.add_child(slab)
+
+	var warm := Color(0.95, 0.62, 0.35)
+	for i in range(4):
+		var f: float = float(4 - i) / 4.0
+		var c: Color = warm.lerp(Color(0.10, 0.085, 0.095), 1.0 - f)
+		var arc := _ret_mm("SunkArc%d" % i, _ret_emissive(c, 0.45 + 1.2 * f), RET_DOT_R * 0.9)
+		var am: MultiMesh = arc.multimesh
+		am.instance_count = 22
+		var r: float = 0.045 + 0.028 * float(i)
+		var ph: float = 0.7 * float(i)
+		for j in range(22):
+			var t: float = float(j) / 21.0
+			var ang: float = ph + t * TAU * 0.62
+			am.set_instance_transform(j, Transform3D(Basis(), Vector3(
+				cos(ang) * r, y + 0.009 + 0.0015 * float(i), sin(ang) * r)))
+		root.add_child(arc)
+
+	var sheet := MeshInstance3D.new()
+	sheet.name = "ClearingSheet"
+	var pm := CylinderMesh.new()
+	pm.top_radius = 0.155
+	pm.bottom_radius = 0.155
+	pm.height = 0.004
+	pm.radial_segments = 32
+	sheet.mesh = pm
+	var pmat := StandardMaterial3D.new()
+	pmat.albedo_color = Color(0.62, 0.65, 0.70, 0.30)
+	pmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	pmat.roughness = 0.25
+	pmat.metallic = 0.0
+	sheet.material_override = pmat
+	sheet.position = Vector3(0, y + 0.022, 0)
+	root.add_child(sheet)
+
+
+## A kept measurement, rendered as the points it is made of — no randf anywhere in the
+## record path, so five variants differ by the axis and by nothing else.
+func _ret_run(from: Vector3, to: Vector3, c: Color, energy: float, samples: int) -> void:
+	var n: int = maxi(samples, 2)
+	var mmi := _ret_mm("KeptRun", _ret_emissive(c, energy), RET_DOT_R)
+	var mm: MultiMesh = mmi.multimesh
+	mm.instance_count = n
+	for i in range(n):
+		var t: float = float(i) / float(n - 1)
+		mm.set_instance_transform(i, Transform3D(Basis(), from.lerp(to, t)))
+	_ret_root().add_child(mmi)
+
+
+## The datum a kept measurement runs to — a small cube, so the record has an end and reads
+## as a reading rather than as decoration.
+func _ret_datum(at: Vector3, c: Color) -> void:
+	var mi := MeshInstance3D.new()
+	mi.name = "Datum"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(0.024, 0.024, 0.024)
+	mi.mesh = bm
+	mi.position = at
+	mi.material_override = _ret_emissive(c, 2.0)
+	_ret_root().add_child(mi)
+
+
+func _ret_mm(nm: String, mat: Material, r: float) -> MultiMeshInstance3D:
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = nm
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	var dot := SphereMesh.new()
+	dot.radius = r
+	dot.height = r * 2.0
+	dot.radial_segments = 6
+	dot.rings = 3
+	mm.mesh = dot
+	mm.instance_count = 0
+	mmi.multimesh = mm
+	mmi.material_override = mat
+	return mmi
+
+
+func _ret_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	return m

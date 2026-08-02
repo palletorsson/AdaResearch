@@ -22,6 +22,31 @@ extends Node3D
 @export_group("Grid Settings")
 @export var spacing: float = 3.0
 
+## AXIS — WHAT ORDER THE SWEEP CLAIMS ITS FAMILY HAS. The members never change: the same
+## height × radial_segments pairs are built, in the same order, with the same colours.
+## What changes is whether the display asserts that the family has a structure, and whose
+## structure it is. Adopted word for word from [[combine_sphere]] — this is the same
+## apparatus pointed at a different primitive, so it gets the same vocabulary rather than
+## a private one that would make two halves of one grammar argue past each other.
+##
+##   table    the lattice — two independent axes, position IS the parameter, every
+##            member captioned with the numbers that made it. The periodic-table claim:
+##            the order is in the objects and the display merely reports it.
+##   ladder   the cross-product collapsed to one ascending file, each member a step
+##            higher than the last. The claim that the family is a SEQUENCE with a
+##            direction and not a plane of independent choices.
+##   stack    one column, every member on the same footprint. The claim that these are
+##            not many objects but ONE object described at many resolutions.
+##   heap     coordinates abandoned: the members piled at the origin, uncaptioned. The
+##            claim that the ordering was ours all along and the objects never had it.
+##
+## The captions are the pivot. They are the only text in the frame and they are what makes
+## the table a table; `heap` withholds them, which is why that value reads from across a
+## room. It bites hardest here because a capsule's height is a LENGTH — take the numbers
+## away and the one axis you could only ever have read off the label is gone.
+@export_enum("table", "ladder", "stack", "heap") var taxonomy: String = "table"
+const TAXONOMIES: PackedStringArray = ["table", "ladder", "stack", "heap"]
+
 @export_group("Visual Settings")
 @export var use_wireframe: bool = false
 @export var metallic: float = 0.15
@@ -42,6 +67,9 @@ var capsule_instances: Array[MeshInstance3D] = []
 var grid_shader: Shader
 
 func _ready():
+	var _t: String = str(taxonomy).strip_edges().to_lower()
+	taxonomy = _t if TAXONOMIES.has(_t) else "table"
+
 	if not use_parametric_grid:
 		grid_shader = load(GRID_SHADER_PATH)
 		if not grid_shader:
@@ -64,7 +92,7 @@ func generate_capsule_grid():
 		var x_pos = 0.0
 		for segments in radial_segments_values:
 			var ratio = 0.0 if total <= 1 else float(index) / float(total - 1)
-			create_capsule_at_position(Vector3(x_pos, 0, z_pos), height_value, segments, ratio)
+			create_capsule_at_position(_taxonomy_place(Vector3(x_pos, 0, z_pos), index), height_value, segments, ratio)
 			index += 1
 			x_pos += spacing
 		z_pos += spacing
@@ -115,7 +143,11 @@ func create_capsule_at_position(pos: Vector3, height_value: float, segments: int
 	# Set sorting offset to help with depth issues
 	mesh_instance.sorting_offset = 1.0
 
-	create_label_for_capsule(pos + Vector3(0, 1.6, 0), height_value, segments)
+	# The caption is what makes the lattice a table. `heap` is the one value that withholds
+	# it — a pile of unnamed bodies is the whole of that claim. Every other value, `table`
+	# included, keeps the legacy caption at the legacy offset.
+	if taxonomy != "heap":
+		create_label_for_capsule(pos + Vector3(0, 1.6, 0), height_value, segments)
 	add_child(mesh_instance)
 	capsule_instances.append(mesh_instance)
 
@@ -182,3 +214,37 @@ func update_colors():
 
 func get_capsule_count() -> int:
 	return capsule_instances.size()
+
+
+# ── TAXONOMY ─────────────────────────────────────────────────────────────────
+# One axis, four claims about whether the family has an order. Shared word for word with
+# combine_sphere.gd. Appended LAST so nothing above it moved: `table` returns the cell the
+# legacy loop already computed, coordinate for coordinate, and every member keeps its
+# caption. The other three discard the cell and re-site the member from its index alone.
+
+## Where a member of the sweep stands.
+func _taxonomy_place(cell: Vector3, index: int) -> Vector3:
+	match taxonomy:
+		"ladder":
+			# One ascending file. The two axes of the cross-product are spent as a single
+			# ordered run, lifted a step per member, so the family reads as a sequence
+			# going somewhere rather than a plane of independent choices.
+			return Vector3(float(index) * spacing * 0.62, float(index) * spacing * 0.17, 0.0)
+		"stack":
+			# One column on one footprint: the same object, described again and again.
+			return Vector3(0.0, float(index) * spacing * 0.34, 0.0)
+		"heap":
+			# Coordinates abandoned. The scatter is a HASH of the index, never randf():
+			# a random render path would make each sweep frame a different pile, and the
+			# critic would be measuring the noise instead of the axis.
+			var a: float = _index_hash(index * 2 + 1) * TAU
+			var r: float = spacing * 0.55 * sqrt(_index_hash(index * 2 + 2))
+			return Vector3(cos(a) * r, _index_hash(index * 2 + 7) * spacing * 0.24, sin(a) * r)
+		_:
+			return cell                    # "table" — the legacy lattice, untouched
+
+
+## Deterministic 0..1 from an integer. Same value every boot, every frame, every machine.
+func _index_hash(n: int) -> float:
+	var s: float = sin(float(n) * 12.9898 + 78.233) * 43758.5453
+	return s - floor(s)

@@ -1913,6 +1913,17 @@
    }
   },
   "capsule": {
+   "dna": {
+    "axes": {
+    "facture": [
+    "cast",
+    "facet",
+    "armature",
+    "section",
+    "wear"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Grid-shaded capsule primitive with glowing wireframe overlay.",
@@ -2411,6 +2422,16 @@
    "qfep_connection": "lambda_edge: strange attractors traced live — deterministic rules whose futures diverge from any measurable present. The room where F = ma stops promising prediction."
   },
   "combine_capsule": {
+   "dna": {
+    "axes": {
+    "taxonomy": [
+    "table",
+    "ladder",
+    "stack",
+    "heap"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Arranges capsule meshes in a matrix while iterating through height and radial segment combinations.",
@@ -2714,6 +2735,16 @@
    "qfep_connection": "Four nodes named cylinder, plane, sphere, and torus all instance the identical walled-cube scene — the names are aspiration, the geometry never differentiates. A layout rig where the labels promise a taxonomy the mesh refuses to deliver."
   },
   "combine_sphere": {
+   "dna": {
+    "axes": {
+    "taxonomy": [
+    "table",
+    "ladder",
+    "stack",
+    "heap"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Builds a grid of spheres varying ring and radial segment settings with optional hemisphere alternation.",
@@ -5461,6 +5492,17 @@
    "qfep_connection": "A line that exists only as a relation: the cylinder is rebuilt sixty times a second between ForceOne and ForceTwo, and moving either endpoint redraws the connection. The segment owns no position of its own."
   },
   "draw_dot": {
+   "dna": {
+    "axes": {
+    "retention": [
+    "none",
+    "trace",
+    "lattice",
+    "archive",
+    "wax"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space",
@@ -5698,6 +5740,17 @@
    "qfep_connection": "oscillation: a dot that draws its own history — motion smeared into a time-domain trace; the simplest possible oscilloscope."
   },
   "draw_triangle_faces": {
+   "dna": {
+    "axes": {
+    "retention": [
+    "none",
+    "trace",
+    "lattice",
+    "archive",
+    "wax"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "fan_triangulate(loop) → colored mesh face — closed point loops become surfaces",
@@ -6452,6 +6505,16 @@
    "qfep_connection": "Named cube, drawn as a four-segment sphere, colliding as a box — three descriptions of one body, and the physics engine reads only the third. Falling is the single thing it does, and it does that with no script at all: gravity as the one behavior that never needed authoring."
   },
   "folded_strip": {
+   "dna": {
+    "axes": {
+    "facture": [
+    "facet",
+    "cast",
+    "armature",
+    "shell"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "triangle_strip(24) — alternating-height vertices forming a pleated ribbon of connected faces",
@@ -8382,6 +8445,17 @@
    "qfep_connection": "A StaticBody welded to the tip and suddenly the endpoint has consequences: it can be in the way. The difference between a coordinate and a thing turns out to be one collision shape, 0.05 meters across."
   },
   "grab_long_stick": {
+   "dna": {
+    "axes": {
+    "office": [
+    "reach",
+    "rule",
+    "lever",
+    "pointer",
+    "baton"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "grab_long_stick",
@@ -8602,6 +8676,17 @@
    "qfep_connection": "Six vertices, eight faces — the cube's dual, the solid you get by putting a point on each of the cube's faces. Grabbable proof that the Platonic solids come in pairs that trade places, symmetry hiding inside symmetry."
   },
   "grab_rainbow_stick": {
+   "dna": {
+    "axes": {
+    "office": [
+    "reach",
+    "rule",
+    "lever",
+    "pointer",
+    "baton"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "grab_rainbow_stick",
@@ -8925,6 +9010,17 @@
    "qfep_connection": "One sphere wearing both instruments at once — an emission tint declaring what it is, a coordinate label declaring where it is. The point as complete record: quality and address, color and number, carried in a single grip."
   },
   "grab_sphere_point_snap": {
+   "dna": {
+    "axes": {
+    "retention": [
+    "none",
+    "trace",
+    "lattice",
+    "archive",
+    "wax"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "snap(position) = round(position / grid_size) * grid_size — discretise continuous space",
@@ -10098,6 +10194,17 @@
    "qfep_connection": "Three orthogonal golden rectangles pinned at their corners — the roundest the Platonic family ever gets, and it gets there by leaning on an irrational number it can never fully spend."
   },
   "interactive_point_origin_force": {
+   "dna": {
+    "axes": {
+    "retention": [
+    "none",
+    "trace",
+    "lattice",
+    "archive",
+    "wax"
+    ]
+    }
+   },
    "category": "primitives",
    "complexity": "intermediate",
    "description": "Force-catalyst variant of interactive_point_origin. Starts as a plain point; on pickup a vertex shader morphs the surface into a pulsing 'force field' shell. While held with the morph engaged, nearby RigidBody3D objects feel an inverse-square pull toward the artifact. With both hands closed (the OrbGestureDetector two-hand gesture), the artifact spits a luminous projectile ball forward.",
@@ -10549,6 +10656,22 @@
    "qfep_connection": "Perimeter grows by four-thirds per recursion while the triangle stays put, and the ImmediateMesh of bare line pairs renders that honestly: the infinite coastline is always shown at some finite depth d. The parameter is the confession — infinity is a budget of segments the recursion spends."
   },
   "laser_measure": {
+   "dna": {
+     "fixture": {
+     "max_range": 0.25,
+     "tick_interval_m": 0.05
+     },
+     "framing": 0.7,
+    "axes": {
+    "claim": [
+    "metric",
+    "none",
+    "figure",
+    "tolerance",
+    "datum"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Handheld laser distance measurement tool with LCD display",
@@ -12883,6 +13006,18 @@
    "qfep_connection": "All lines running to one point — the vanishing point, perspective's single law. The Renaissance's most consequential primitive: the discovery that depth on a flat surface is just convergence, that space can be faked by a ruler aimed at infinity. The line taught to lie about distance, and the whole illusion of the third dimension riding on that one honest trick."
   },
   "pickup_cube_combo": {
+   "dna": {
+    "axes": {
+    "travel": [
+    "none",
+    "seat",
+    "spindle",
+    "rail",
+    "gimbal",
+    "armature"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "A pickup cube that moves, rotates, and scales simultaneously.",
@@ -12986,6 +13121,18 @@
    "qfep_connection": "Translation, rotation, and scale run simultaneously on the visual child while the wrapper zeroes its own motion and strips the inner collision so your body can enter it. Composition is the lesson — S as a product of maps — and the score registers the instant you step inside the product."
   },
   "pickup_cube_rotating": {
+   "dna": {
+    "axes": {
+    "travel": [
+    "none",
+    "seat",
+    "spindle",
+    "rail",
+    "gimbal",
+    "armature"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Pickup cube that rotates continuously — wraps pick_up_cube.gd and disables internal collision so the player can walk into the pickup area freely.",
@@ -13091,6 +13238,18 @@
    "qfep_connection": "oscillation: a pickup cube in rotation — periodic motion in the hand; frequency you can grip."
   },
   "pickup_cube_scaling": {
+   "dna": {
+    "axes": {
+    "travel": [
+    "none",
+    "seat",
+    "spindle",
+    "rail",
+    "gimbal",
+    "armature"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "A pickup cube that pulsates in size.",
@@ -13194,6 +13353,18 @@
    "qfep_connection": "The cube breathes: scale oscillates while position and rotation stay pinned, isolating one column of the transform matrix as rhythm. The detection box never changes size while the visuals pulse — what you collect is the invariant, not the throb."
   },
   "pickup_cube_static": {
+   "dna": {
+    "axes": {
+    "travel": [
+    "none",
+    "seat",
+    "spindle",
+    "rail",
+    "gimbal",
+    "armature"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "A static pickup cube that can be collected.",
@@ -13299,6 +13470,18 @@
    "qfep_connection": "a pickup cube, still — the baseline state; hold it to feel zero oscillation."
   },
   "pickup_cube_transforming": {
+   "dna": {
+    "axes": {
+    "travel": [
+    "none",
+    "seat",
+    "spindle",
+    "rail",
+    "gimbal",
+    "armature"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "A pickup cube that moves up and down.",
@@ -13589,6 +13772,15 @@
    "qfep_connection": "A finite family passed hand to hand: the five closed solids share a shelf with a grab-trihedron that geometry refuses to close, and the snap code treats the legitimate and the impossible exactly alike."
   },
   "platonic_grabbables": {
+   "dna": {
+    "axes": {
+    "facture": [
+    "plate",
+    "cast",
+    "armature"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Compact table of all 5 platonic solids, 3 grabbable copies each. Tetrahedron, cube, octahedron, dodecahedron, icosahedron.",
@@ -17348,6 +17540,18 @@
    "qfep_connection": "Same factory, one boolean flipped: the arrangement is no longer authored but settled, each rock's rest pose an unrepeatable negotiation with its neighbours. The physics solver, not the artist, signs the pile."
   },
   "rotating_cube": {
+   "dna": {
+    "axes": {
+    "travel": [
+    "none",
+    "seat",
+    "spindle",
+    "rail",
+    "gimbal",
+    "armature"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "A mysterious rotating cube that triggers the first learning sequence",
@@ -21084,6 +21288,18 @@
    "qfep_connection": "Fifteen degrees and twelve centimetres per step, compounded — a helix is just a loop that refuses to close. The rainbow gradient indexes every copy, so repetition stays countable even as it becomes architecture."
   },
   "transformation_cube": {
+   "dna": {
+    "axes": {
+    "travel": [
+    "none",
+    "seat",
+    "spindle",
+    "rail",
+    "gimbal",
+    "armature"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "A mysterious rotating cube that triggers the first learning sequence",
@@ -21663,6 +21879,16 @@
    "qfep_connection": "Drag three endpoints until the sides are equal — an equilateral triangle, discovered rather than drawn. The puzzle where the hand meets the plane's first enclosure and learns that 'equilateral' is a *condition* satisfied, three lengths agreeing, the simplest fairness a shape can hold."
   },
   "triangleprofiles": {
+   "dna": {
+    "axes": {
+    "facture": [
+    "facet",
+    "cast",
+    "armature",
+    "shell"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Folded pink zigzag profile built from alternating peaks with drag points to edit the pleated surface.",
@@ -22851,6 +23077,17 @@
    "qfep_connection": "'You are here' is what a civilisation writes when it renders every body as a coordinate it has already labelled. The friendliest face of algorithmic capture."
   },
   "mystic_writing_pad": {
+   "dna": {
+    "axes": {
+    "retention": [
+    "wax",
+    "none",
+    "trace",
+    "lattice",
+    "archive"
+    ]
+    }
+   },
    "category": "primitives",
    "complexity": "beginner",
    "description": "Freud's Mystic Writing-Pad (Wunderblock, 1925) as the trace apparatus: a red-framed magic slate where a stylus writes a bright trace of points on a clearing sheet, and every lift sinks the trace into the wax below as a faint warm ghost. The surface forgets; the depth remembers. Derrida's model of the trace, made a thing you stand before.",

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cn3s0pq4b086c"]
+[gd_scene load_steps=5 format=3 uid="uid://cn3s0pq4b086c"]
 
 [ext_resource type="Script" uid="uid://bhnul8r75lwqb" path="res://commons/primitives/prismes/rotation.gd" id="1_f0bor"]
+[ext_resource type="Script" path="res://commons/primitives/capsule/capsule.gd" id="2_facture"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_matvd"]
 albedo_color = Color(0.5176471, 0.5254902, 0.47843137, 1)
@@ -12,6 +13,7 @@ radial_segments = 5
 rings = 5
 
 [node name="capsule" type="Node3D"]
+script = ExtResource("2_facture")
 
 [node name="capsule" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_matvd")

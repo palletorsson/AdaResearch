@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ssh07babupc5"]
+[gd_scene load_steps=4 format=3 uid="uid://ssh07babupc5"]
 
 [ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://2ga0rsmpymgc" path="res://commons/primitives/cubes/animation/RotationTween.gd" id="2_rotation"]
+[ext_resource type="Script" path="res://commons/primitives/cubes/cube_bearing.gd" id="3_bearing"]
 
 [node name="RotatingCube" instance=ExtResource("1_base")]
 
-[node name="RotationTween" type="Node" parent="." index="1"]
+[node name="Travel" type="Node3D" parent="." index="1"]
+script = ExtResource("3_bearing")
+
+[node name="RotationTween" type="Node" parent="." index="2"]
 script = ExtResource("2_rotation")

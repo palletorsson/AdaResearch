@@ -21,6 +21,30 @@ extends Node3D
 @export var reference_frame_size: float = 0.5
 @export var show_reference_frame: bool = true
 
+## AXIS — WHAT A MARK PERSISTS AS once the hand that made it has gone. The word is adopted
+## from [[mystic_writing_pad]] and shared with [[grab_sphere_point_snap]],
+## [[draw_triangle_faces]] and [[interactive_point_origin_force]]: all five put a mark into
+## space and then have to say what space does with it. draw_dot is the bare case — a hand,
+## a sample, a line — so the regime it stands in is the whole argument.
+##
+## The record is built INSIDE the reference frame, at the same plane and inside its
+## bounds, so choosing a value changes what is in the frame and never how big the artifact
+## is. Marks are drawn as dot-clouds, not as continuous line, because this artifact's own
+## truth statement is that a curve is only ever a dense set of point samples.
+##
+##   none      the legacy lineage, byte for byte. The frame is empty: at rest this artifact
+##             shows no mark, and it never claimed to. Space keeps nothing you did not just do
+##   trace     one stroke hangs in the frame in the ink colour, exactly where it was drawn —
+##             the mark stays put and stays visible
+##   lattice   a ruled field of pale nodes fills the frame and the stroke is quantised onto
+##             it: stair-stepped, right-angled. A position had to be legal before it counted
+##   archive   nine strokes at once, every one kept at full brightness, overlapping into a
+##             thicket. Nothing is discarded, so nothing can be read
+##   wax       a dark slab behind a pale translucent sheet, with faint warm strokes sunk
+##             between them. The surface is clean; the record is underneath, at an angle
+@export var retention: String = "none"
+const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
+
 var _grab_point: Node3D
 var _draw_sphere: Node3D
 var _trail_mesh: ImmediateMesh
@@ -257,7 +281,12 @@ func _ready() -> void:
 	if _grab_point.has_signal("dropped"):
 		if not _grab_point.is_connected("dropped", _on_grab_point_dropped):
 			_grab_point.dropped.connect(_on_grab_point_dropped)
-	
+
+	# RETENTION last, so every child added above keeps its index. "none" is the legacy
+	# lineage and adds nothing at all.
+	_ret_read_config()
+	_ret_build()
+
 func _process(delta: float) -> void:
 	if not is_instance_valid(_draw_sphere):
 		return
@@ -446,9 +475,202 @@ func _on_grab_point_dropped(_pickable) -> void:
 	var trace_data = get_node_or_null("/root/TraceData")
 	if trace_data:
 		trace_data.add_trace(_trail_points)
-	
+
 	if _progress_indicator:
 		_progress_indicator.visible = false
-		
+
 	if auto_clear_on_drop:
 		clear_trail()
+
+
+# ── RETENTION ────────────────────────────────────────────────────────────────
+# One axis, five claims about whether space remembers being touched, shared word for word
+# with mystic_writing_pad, grab_sphere_point_snap, draw_triangle_faces and
+# interactive_point_origin_force. Appended LAST: the live trail, the reference frame, the
+# progress indicator and the data table are all built above and none of them move.
+#
+# APPEARANCE ONLY. Nothing here touches the trail recording, the grab point, the unlock
+# threshold or TraceData — a variant changes what a standing visitor SEES the space has
+# kept, never what the hand does or what gets saved when it lets go.
+
+# Dot size is a legibility decision, not a taste one: the record sits inside a 0.5 m
+# reference frame, so a dot below ~1 cm renders under 10 px in a fitted 760 px shot and a
+# whole stroke disappears into the noise floor the bite critic measures against.
+const RET_DOT_R := 0.010
+const RET_SAMPLES := 54
+
+var _ret_node: Node3D = null
+
+
+func _ret_read_config() -> void:
+	if has_meta("config_retention"):
+		var r: String = str(get_meta("config_retention")).strip_edges().to_lower()
+		retention = r if RETENTIONS.has(r) else retention
+
+
+## Gated on the key: a map that says nothing about retention gets no call at all, so a
+## config carrying only other keys cannot disturb the legacy path.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("retention"):
+		return
+	var r: String = str(config_data["retention"]).strip_edges().to_lower()
+	if not RETENTIONS.has(r) or r == retention:
+		return
+	retention = r
+	_ret_build()
+
+
+func _ret_build() -> void:
+	if is_instance_valid(_ret_node):
+		_ret_node.queue_free()
+	_ret_node = null
+
+	match retention:
+		"none":
+			pass
+		"trace":
+			_ret_trace()
+		"lattice":
+			_ret_lattice()
+		"archive":
+			_ret_archive()
+		"wax":
+			_ret_wax()
+		_:
+			pass
+
+
+## The record plane — a container sitting exactly where the reference frame does, so the
+## record is INSIDE the frame the artifact already draws and the silhouette is unchanged.
+func _ret_root() -> Node3D:
+	if not is_instance_valid(_ret_node):
+		_ret_node = Node3D.new()
+		_ret_node.name = "RetentionRecord"
+		_ret_node.position = reference_frame_position
+		add_child(_ret_node)
+	return _ret_node
+
+
+## TRACE — one stroke, left where the hand left it, in the ink the hand writes with.
+func _ret_trace() -> void:
+	_ret_stroke(1.31, 0.0, trail_color, 1.6, 0.0)
+
+
+## LATTICE — the ruling first (a regular field of pale nodes over the whole plane), then
+## the same handwriting admitted onto it. The ruling is the dominant read: regular
+## pinpricks where every other value shows wander.
+func _ret_lattice() -> void:
+	var span: float = reference_frame_size * 0.44
+	var step: float = 0.042
+	var n: int = int(span * 2.0 / step) + 1
+	var grid := _ret_mm("LatticeNodes", _ret_emissive(Color(0.52, 0.60, 0.68), 0.5))
+	var gm: MultiMesh = grid.multimesh
+	gm.instance_count = n * n
+	var small: Basis = Basis.IDENTITY.scaled(Vector3.ONE * 0.5)
+	var k: int = 0
+	for cx in range(n):
+		for cy in range(n):
+			gm.set_instance_transform(k, Transform3D(small,
+				Vector3(-span + float(cx) * step, -span + float(cy) * step, 0.0)))
+			k += 1
+	_ret_root().add_child(grid)
+	_ret_stroke(1.31, 0.0, trail_color, 1.6, step)
+
+
+## ARCHIVE — nine strokes kept at once, none dimmed by age. The frame fills; the individual
+## mark stops being findable. Total retention and total illegibility are the same picture.
+func _ret_archive() -> void:
+	for i in range(9):
+		_ret_stroke(1.31 + 0.83 * float(i), 0.004 * float(i), trail_color, 1.35, 0.0)
+
+
+## WAX — the Wunderblock construction, borrowed straight from mystic_writing_pad: a matte
+## dark slab, a pale translucent sheet in front of it, and the strokes sunk BETWEEN them,
+## each older one fainter. The surface reads clean; the record is underneath.
+func _ret_wax() -> void:
+	var span: float = reference_frame_size * 0.46
+	var root: Node3D = _ret_root()
+
+	var slab := MeshInstance3D.new()
+	slab.name = "WaxSlab"
+	var sm := BoxMesh.new()
+	sm.size = Vector3(span * 2.0, span * 2.0, 0.014)
+	slab.mesh = sm
+	var smat := StandardMaterial3D.new()
+	smat.albedo_color = Color(0.10, 0.085, 0.095)
+	smat.roughness = 0.95
+	smat.metallic = 0.0
+	slab.material_override = smat
+	slab.position = Vector3(0, 0, -0.012)
+	root.add_child(slab)
+
+	var warm := Color(0.95, 0.62, 0.35)
+	for i in range(5):
+		var f: float = float(5 - i) / 5.0
+		var c: Color = warm.lerp(Color(0.10, 0.085, 0.095), 1.0 - f)
+		_ret_stroke(1.31 + 1.7 * float(i), -0.004 + 0.0016 * float(i), c, 0.45 + 1.1 * f, 0.0)
+
+	var sheet := MeshInstance3D.new()
+	sheet.name = "ClearingSheet"
+	var shm := BoxMesh.new()
+	shm.size = Vector3(span * 2.0, span * 2.0, 0.004)
+	sheet.mesh = shm
+	var shmat := StandardMaterial3D.new()
+	shmat.albedo_color = Color(0.62, 0.65, 0.70, 0.30)
+	shmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	shmat.roughness = 0.25
+	shmat.metallic = 0.0
+	sheet.material_override = shmat
+	sheet.position = Vector3(0, 0, 0.010)
+	root.add_child(sheet)
+
+
+## One dot-stroke in the record plane. `step` > 0 quantises it onto the ruling.
+func _ret_stroke(phase: float, z: float, c: Color, energy: float, step: float) -> void:
+	var span: float = reference_frame_size * 0.42
+	var mmi := _ret_mm("Stroke", _ret_emissive(c, energy))
+	var mm: MultiMesh = mmi.multimesh
+	mm.instance_count = RET_SAMPLES
+	for i in range(RET_SAMPLES):
+		var p: Vector3 = _ret_curve(float(i) / float(RET_SAMPLES - 1), phase, span)
+		if step > 0.0:
+			p = Vector3(round(p.x / step) * step, round(p.y / step) * step, 0.0)
+		p.z = z
+		mm.set_instance_transform(i, Transform3D(Basis(), p))
+	_ret_root().add_child(mmi)
+
+
+## A deterministic hand — no randf anywhere in the record path, so five variants differ by
+## the axis and by nothing else.
+func _ret_curve(u: float, phase: float, span: float) -> Vector3:
+	var a: float = u * TAU * 1.15 + phase
+	var x: float = span * ((u - 0.5) * 1.85 + 0.22 * sin(a * 1.6))
+	var y: float = span * 0.80 * sin(a * 0.95 + phase * 1.3) * (0.55 + 0.45 * sin(a * 0.42))
+	return Vector3(clampf(x, -span, span), clampf(y, -span, span), 0.0)
+
+
+func _ret_mm(nm: String, mat: Material) -> MultiMeshInstance3D:
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = nm
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	var dot := SphereMesh.new()
+	dot.radius = RET_DOT_R
+	dot.height = RET_DOT_R * 2.0
+	dot.radial_segments = 6
+	dot.rings = 3
+	mm.mesh = dot
+	mm.instance_count = 0
+	mmi.multimesh = mm
+	mmi.material_override = mat
+	return mmi
+
+
+func _ret_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	return m

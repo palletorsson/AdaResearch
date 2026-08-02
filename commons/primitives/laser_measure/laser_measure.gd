@@ -59,6 +59,52 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export var lcd_frame_color: Color = Color(0.18, 0.16, 0.13) # dark frame (matches handle)
 @export var lcd_text_color: Color = Color(0.4, 1.0, 0.55)    # bright green digits
 
+@export_category("Claim")
+## AXIS — WHAT THE INSTRUMENT COMMITS TO when it answers. A measuring tool is the thing
+## by which this world claims to know its own dimensions, so the interesting question is
+## not how far it reaches or in which unit it prints, but how much it is willing to say.
+## Five values, five different claims about whether measurement is perception or
+## bookkeeping, and every one of them legible in a single still:
+##
+##   none       a beam and nothing else. The screen bay is closed with a blind cover, the
+##              ruler is not fitted, and nothing is written onto the world at all. The
+##              tool points; the number is somebody else's business. Perception.
+##   figure     a bare quantity. The bay is refitted as one large window carrying a single
+##              numeral — no unit, no target named, no graduation anywhere on the beam.
+##              A number belonging to no system.
+##   metric     THE LEGACY LINEAGE, byte for byte: number and unit on the fitted screen,
+##              the target named under it, unit ticks stepping along the beam, a tag
+##              riding the hit point. The quantity belongs to a system, and the system is
+##              inscribed on the world.
+##   tolerance  the number carries its error. A translucent envelope sleeves the beam for
+##              its whole length between two bound lines, every tick becomes a bracketed
+##              PAIR straddling its nominal place, and the screen reads with a +/- band.
+##              The instrument admits it can be wrong.
+##   datum      the reading is booked against a reference. A datum board stands at the
+##              emitter carrying the zero every entry is measured FROM, each tick gains a
+##              numbered station plate on a stalk off the beam, and the screen becomes a
+##              log under a datum header. Bookkeeping.
+##
+## The RULER is the pivot, the way the lit seam is on [[station_wall]]: it is the only
+## thing this artifact writes onto the world outside its own body. The two values that
+## withhold it (none, figure) read from across a room; the two that elaborate it
+## (tolerance, datum) reward the arm's length a handheld tool is met at anyway.
+##
+## Nothing here is a rate, a speed or a decay — the evidence for this axis is one frame
+## per value, and a frame cannot see scan_frequency.
+@export_enum("none", "figure", "metric", "tolerance", "datum") var claim: String = "metric"
+const CLAIMS: PackedStringArray = ["none", "figure", "metric", "tolerance", "datum"]
+## Envelope half-width as a fraction of reach — what `tolerance` draws as the +/- sleeve.
+const CLAIM_BAND: float = 0.004
+## A record has a finite page: `datum` books this many stations and leaves the rest of
+## the beam unentered.
+const CLAIM_STATIONS: int = 16
+
+var _claim_root: Node3D                          # everything the axis ADDS, freed on reapply
+var _claim_hidden: Array[MeshInstance3D] = []    # everything the axis MUTES (layers = 0)
+var _claim_freed_lcd: bool = false               # `none` freed the readout holder
+var _claim_freed_inline: bool = false            # `none`/`figure` freed the hit-point tag
+
 var raycast: RayCast3D
 var laser_beam: MeshInstance3D
 var laser_material: StandardMaterial3D
@@ -98,6 +144,7 @@ func _ready():
 		setup_lcd_screen()       # proper LCD panel on the handle
 	setup_display()
 	update_display(0.0, "", false)
+	_apply_claim()               # APPENDED LAST — "metric" adds nothing above this line
 
 func setup_raycast():
 	raycast = find_child("RayCast3D", true, false)
@@ -500,6 +547,11 @@ func update_display(distance: float, target: String, is_active: bool):
 		else:
 			lines.append("No target")
 
+	# CLAIM — what the instrument commits to IN WRITING. "metric" never enters here, so
+	# the default readout is still composed exactly as it was before the axis existed.
+	if claim != "metric":
+		lines = _claim_readout(distance, is_active)
+
 	# Cache guard — rebuild the board mesh only when the text (or active state) changes.
 	var key := "%s|%s|%d" % ["\n".join(PackedStringArray(lines)), active_color, int(is_active)]
 	if key == _lcd_cache_key:
@@ -520,6 +572,10 @@ func update_display(distance: float, target: String, is_active: bool):
 	else:
 		max_w = 0.03
 		line_h = 0.012
+	# One numeral, one window: `figure` gives the whole face to the quantity.
+	if claim == "figure" and _lcd_screen:
+		line_h = lcd_size.y * 0.72
+		max_w = lcd_size.x * 1.02
 	lcd_board = BakedText.make_text_block(lines, col, line_h, max_w, line_h * 0.3, true)
 	if lcd_board:
 		_lcd_board_holder.add_child(lcd_board)
@@ -550,6 +606,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		damage_amount = float(config_data["damage_amount"])
 	if config_data.has("cooldown"):
 		damage_cooldown = float(config_data["cooldown"])
+	# CLAIM — appended after the damage keys so every one of them behaves as it did.
+	if config_data.has("claim"):
+		claim = _claim_token(str(config_data["claim"]))
+		if is_inside_tree():
+			_apply_claim()
 
 
 func _is_player_body(obj: Node) -> bool:
@@ -573,3 +634,274 @@ func _is_player_body(obj: Node) -> bool:
 			return true
 		node = node.get_parent()
 	return false
+
+
+# ── CLAIM ────────────────────────────────────────────────────────────────────────────
+# One axis, five commitments, built AFTER everything else so the default value adds
+# nothing and removes nothing. Appearance only: the raycast, the collision shapes, the
+# grab points, the pickup layer and the damage path are never touched here — this is a
+# grabbable tool and the XR interaction system must find it exactly where it left it.
+
+
+## Normalise a token, keeping the default on a word the code cannot reach. Same guard
+## station_wall puts on `upkeep`: an unknown value must fall back, never render blank.
+func _claim_token(v: String) -> String:
+	var t: String = v.strip_edges().to_lower()
+	return t if CLAIMS.has(t) else "metric"
+
+
+func _apply_claim() -> void:
+	# Put back whatever a previous pass moved, THEN dress. On the default path both the
+	# restore and the match are empty, so "metric" builds precisely what this artifact
+	# built before the axis existed.
+	_claim_restore()
+	claim = _claim_token(claim)
+	match claim:
+		"none":
+			_claim_none()
+		"figure":
+			_claim_figure()
+		"tolerance":
+			_claim_tolerance()
+		"datum":
+			_claim_datum()
+		_:
+			pass                                  # "metric" — the legacy lineage
+
+
+## Undo the previous value. Every branch is guarded by state only a non-default value can
+## set, so the first call from _ready() on the default touches nothing at all.
+func _claim_restore() -> void:
+	var touched: bool = false
+	if _claim_root != null and is_instance_valid(_claim_root):
+		_claim_root.queue_free()
+		touched = true
+	_claim_root = null
+	if not _claim_hidden.is_empty():
+		for mi in _claim_hidden:
+			if is_instance_valid(mi):
+				mi.layers = 1
+		_claim_hidden.clear()
+		touched = true
+	if _claim_freed_lcd:
+		_claim_freed_lcd = false
+		setup_display()
+		touched = true
+	if _claim_freed_inline:
+		_claim_freed_inline = false
+		setup_inline_readout()
+		touched = true
+	if touched:
+		_lcd_cache_key = ""
+		_inline_cache_key = ""
+
+
+func _claim_hold() -> Node3D:
+	if _claim_root == null or not is_instance_valid(_claim_root):
+		_claim_root = Node3D.new()
+		_claim_root.name = "ClaimDressing"
+		add_child(_claim_root)
+	return _claim_root
+
+
+## layers = 0, NEVER visible = false. Godot resolves visibility through the whole subtree,
+## so a hidden parent takes its children with it; and the tick meshes have their `visible`
+## flag rewritten by update_tick_marks on every scan anyway, which would undo a hide on
+## the next frame. The render layer is per-instance and nothing else in this file reads it.
+func _claim_mute(mi: MeshInstance3D) -> void:
+	if mi == null or not is_instance_valid(mi):
+		return
+	mi.layers = 0
+	_claim_hidden.append(mi)
+
+
+func _claim_mute_ruler() -> void:
+	for tm in _tick_meshes:
+		_claim_mute(tm)
+
+
+## Free the tag that rides the hit point. update_inline_readout and hide_inline_readout
+## both return early on a null holder, so the number simply stops being written onto the
+## world — no per-frame branch, no cost.
+func _claim_drop_inline() -> void:
+	if _inline_board_holder != null and is_instance_valid(_inline_board_holder):
+		_inline_board_holder.queue_free()
+	_inline_board_holder = null
+	_claim_freed_inline = true
+
+
+## NONE — the instrument that answers nothing. The screen bay is closed with a blind cover
+## bolted at four corners (a bay with no instrument fitted, not a broken one), the ruler is
+## unfitted, and the hit-point tag is gone. What is left is a beam and a hand.
+func _claim_none() -> void:
+	var hold: Node3D = _claim_hold()
+	_claim_mute_ruler()
+	_claim_mute(_lcd_frame)
+	_claim_mute(_lcd_screen)
+	# The readout holder is the only thing update_display writes into; freeing it makes
+	# that function return at its first line, so no board can be rebuilt behind the cover.
+	if _lcd_board_holder != null and is_instance_valid(_lcd_board_holder):
+		_lcd_board_holder.queue_free()
+	_lcd_board_holder = null
+	lcd_board = null
+	_claim_freed_lcd = true
+	_claim_drop_inline()
+	var panel_y: float = handle_radius + 0.001
+	var cw: float = lcd_size.x + 0.006
+	var cl: float = lcd_size.y + 0.006
+	_claim_box(hold, Vector3(0.0, panel_y + 0.0012, 0.015), Vector3(cw, 0.0035, cl),
+		_claim_solid(lcd_frame_color))
+	var head: StandardMaterial3D = _claim_solid(lcd_frame_color.lightened(0.28))
+	for bx in [-(cw * 0.5 - 0.005), cw * 0.5 - 0.005]:
+		for bz in [0.015 - (cl * 0.5 - 0.005), 0.015 + (cl * 0.5 - 0.005)]:
+			_claim_box(hold, Vector3(bx, panel_y + 0.0032, bz), Vector3(0.004, 0.002, 0.004), head)
+
+
+## FIGURE — a quantity and nothing else. The fitted screen is replaced by one window of
+## roughly two and a half times its lit area, carrying a single large numeral with no unit
+## and no target under it; the beam loses its graduations and the hit point loses its tag.
+## Nothing outside the instrument's own face says anything.
+func _claim_figure() -> void:
+	var hold: Node3D = _claim_hold()
+	_claim_mute_ruler()
+	_claim_mute(_lcd_frame)
+	_claim_mute(_lcd_screen)
+	_claim_drop_inline()
+	var panel_y: float = handle_radius + 0.001
+	var w: float = lcd_size.x * 1.10
+	var l: float = lcd_size.y * 2.20
+	_claim_box(hold, Vector3(0.0, panel_y, 0.015), Vector3(w + 0.004, 0.002, l + 0.004),
+		_claim_solid(lcd_frame_color))
+	var lit: StandardMaterial3D = _claim_lit(lcd_bg_color, 0.6)
+	_claim_box(hold, Vector3(0.0, panel_y + 0.0016, 0.015), Vector3(w, 0.0012, l), lit)
+	_lcd_cache_key = ""
+
+
+## TOLERANCE — the reading with its doubt attached. A translucent envelope sleeves the beam
+## end to end between two lit bound lines, and every tick of the ruler is doubled into a
+## bracket straddling its nominal place: the mark stops being a point on a scale and becomes
+## the width of the uncertainty about that point.
+func _claim_tolerance() -> void:
+	var hold: Node3D = _claim_hold()
+	var span: float = maxf(max_range, 0.05)
+	var half: float = _claim_band()
+	var sleeve := StandardMaterial3D.new()
+	sleeve.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	sleeve.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	sleeve.albedo_color = Color(laser_color.r, laser_color.g, laser_color.b, 0.20)
+	sleeve.emission_enabled = true
+	sleeve.emission = laser_color
+	sleeve.emission_energy_multiplier = 0.45
+	_claim_box(hold, Vector3(0.0, 0.0, -span * 0.5), Vector3(half * 2.0, half * 2.0, span), sleeve)
+	var edge: StandardMaterial3D = _claim_lit(laser_color, 1.4)
+	for sy in [-half, half]:
+		_claim_box(hold, Vector3(0.0, sy, -span * 0.5),
+			Vector3(laser_thickness * 2.0, laser_thickness * 2.0, span), edge)
+	var brk: StandardMaterial3D = _claim_lit(laser_hit_color, 1.8)
+	for tm in _tick_meshes:
+		var z: float = tm.position.z
+		for dz in [-half, half]:
+			_claim_box(hold, Vector3(0.0, 0.0, z + dz),
+				Vector3(tick_size * 1.7, tick_size * 0.5, laser_thickness * 2.0), brk)
+	_lcd_cache_key = ""
+
+
+## DATUM — the reading booked against a reference. A survey board stands at the emitter
+## carrying the zero line every entry is measured FROM, so the tool stops answering "how
+## far" and starts answering "how far from HERE" while bringing the here with it. Each tick
+## the ruler already carries gains a station plate on a stalk. The page is finite: after
+## CLAIM_STATIONS entries the beam runs on unbooked.
+func _claim_datum() -> void:
+	var hold: Node3D = _claim_hold()
+	var paper: StandardMaterial3D = _claim_solid(Color(0.88, 0.86, 0.80))
+	var ink: StandardMaterial3D = _claim_solid(Color(0.10, 0.10, 0.12))
+	var z0: float = -handle_length * 0.5 - 0.006
+	var pw: float = handle_radius * 4.4
+	var ph: float = handle_radius * 3.0
+	var cy: float = handle_radius * 2.4 + ph * 0.5
+	_claim_box(hold, Vector3(0.0, cy, z0), Vector3(pw, ph, 0.004), paper)
+	_claim_box(hold, Vector3(0.0, cy, z0 - 0.0025), Vector3(pw * 0.86, 0.004, 0.002), ink)
+	_claim_box(hold, Vector3(0.0, cy + ph * 0.27, z0 - 0.0025), Vector3(pw * 0.55, 0.003, 0.002), ink)
+	_claim_box(hold, Vector3(0.0, cy - ph * 0.30, z0 - 0.0025), Vector3(pw * 0.40, 0.003, 0.002), ink)
+	# A post carrying the board down to the barrel, so it reads as fitted, not floating.
+	_claim_box(hold, Vector3(0.0, handle_radius * 1.7, z0), Vector3(0.006, handle_radius * 1.6, 0.005),
+		_claim_solid(guard_color))
+	# The index mark ON the zero — the only lit thing on the board.
+	_claim_box(hold, Vector3(0.0, cy - ph * 0.5 - 0.003, z0 + 0.002), Vector3(pw * 0.30, 0.005, 0.006),
+		_claim_lit(laser_hit_color, 1.6))
+	var n: int = mini(_tick_meshes.size(), CLAIM_STATIONS)
+	for i in range(n):
+		var z: float = _tick_meshes[i].position.z
+		var sy: float = tick_size * 2.6
+		_claim_box(hold, Vector3(0.0, sy * 0.5, z), Vector3(0.0022, sy, 0.0022), ink)
+		_claim_box(hold, Vector3(0.0, sy + tick_size * 0.9, z),
+			Vector3(tick_size * 2.4, tick_size * 1.8, 0.0025), paper)
+		_claim_box(hold, Vector3(0.0, sy + tick_size * 0.9, z - 0.0016),
+			Vector3(tick_size * 1.5, tick_size * 0.35, 0.0016), ink)
+	_lcd_cache_key = ""
+
+
+## The envelope half-width in metres: a fixed fraction of reach, floored so it is never
+## thinner than the beam it sleeves. At the shipped 50 m reach that is a 0.2 m band; on a
+## bench-length reach the floor takes over and it stays visible.
+func _claim_band() -> float:
+	return maxf(maxf(max_range, 0.05) * CLAIM_BAND, laser_thickness * 4.0)
+
+
+## The lines the screen prints for a non-default claim. Never reached by "metric".
+func _claim_readout(distance: float, is_active: bool) -> Array:
+	var value: float = distance
+	var suffix: String = unit
+	match unit:
+		"cm":
+			value = distance * 100.0
+		"units":
+			suffix = "u"
+	var digits: String = ("%." + str(decimal_places) + "f") % value
+	var reading: String = "--- %s" % suffix
+	if is_active:
+		reading = "%s %s" % [digits, suffix]
+	match claim:
+		"figure":
+			var bare: String = "----"
+			if is_active:
+				bare = digits
+			return [bare]
+		"tolerance":
+			var band: float = _claim_band()
+			if unit == "cm":
+				band = band * 100.0
+			return [reading, ("+/- %." + str(decimal_places) + "f") % band]
+		"datum":
+			return ["DATUM 0.00", reading]
+	return [reading]
+
+
+# ── Local builders ───────────────────────────────────────────────────────────────────
+func _claim_box(parent: Node3D, center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	parent.add_child(mi)
+	return mi
+
+
+func _claim_solid(c: Color) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.metallic = 0.5
+	m.roughness = 0.42
+	return m
+
+
+func _claim_lit(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.albedo_color = c
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m

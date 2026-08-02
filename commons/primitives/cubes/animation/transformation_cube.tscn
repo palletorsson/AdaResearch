@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://182r446nhgrj"]
+[gd_scene load_steps=4 format=3 uid="uid://182r446nhgrj"]
 
 [ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_g6u51"]
 [ext_resource type="Script" uid="uid://djyrr6lleolqm" path="res://commons/primitives/cubes/animation/TransformationTween.gd" id="2_57w8d"]
+[ext_resource type="Script" path="res://commons/primitives/cubes/cube_bearing.gd" id="3_bearing"]
 
 [node name="CubeWithTransformation" instance=ExtResource("1_g6u51")]
 
 [node name="CubeBaseStaticBody3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="TransformationTween" type="Node" parent="." index="1"]
+[node name="Travel" type="Node3D" parent="." index="1"]
+script = ExtResource("3_bearing")
+
+[node name="TransformationTween" type="Node" parent="." index="2"]
 script = ExtResource("2_57w8d")
