@@ -1033,7 +1033,11 @@
       "iris",
       "daisy",
       "allium",
-      "crown_imperial"
+      "crown_imperial",
+      "fritillaria",
+      "orchid",
+      "corydalis",
+      "clover"
      ]
     },
     "default": "species=generic - preset = \"\", which is what BotanicalFlower._ready() has always seen from this wrapper, so it builds straight from DEFAULT_CONFIG and all 9 existing placements render the same five-petal pink bloom as before; every one of those placements is a bare token with no config, and apply_grid_config now returns without rebuilding when neither the species nor an override key is present",

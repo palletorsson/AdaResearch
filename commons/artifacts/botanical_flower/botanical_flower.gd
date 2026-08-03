@@ -48,18 +48,31 @@ const BOTANICAL_FLOWER := preload("res://commons/flora/botanical_flower.tscn")
 #   daisy           composite head, thirteen white ray florets, yellow disk, 0.10 m
 #   allium          umbel, twenty near-scaleless heads on a single 0.35 m scape
 #   crown_imperial  cyme of five pendant orange bells at 0.5 m — the tall one
+#   fritillaria     the chequered bell, one nodding head on a slender 0.30 m stem
+#   orchid          bilateral, lipped, the flower that evolved to look like an insect
+#   corydalis       a spurred raceme — the tube is the flower, the mouth is a door
+#   clover          a head of ~40 florets read as one bloom; the composite argument
+#                   again, made by a plant nobody calls a flower
 #
-# Six of the nine, chosen to span the space rather than to be pretty: single vs
-# inflorescence, radial vs bilateral, open vs bell vs composite, 0.10 m to 0.50 m.
-# The other three (fritillaria, orchid, corydalis) still work if a map names them —
-# the export hint is an editor affordance, not a gate — they are simply not part of
-# the declared sweep because they sit close to values already in it.
-@export_enum("generic", "bluebell", "iris", "daisy", "allium", "crown_imperial") var species: String = "generic"
+# ALL NINE, PLUS GENERIC. The first pass declared six of the nine, "chosen to span
+# the space rather than to be pretty" — a reasonable call that was wrong for one
+# reason: the three it left out are the three that make the axis argue. fritillaria
+# is the only chequered surface in the set, orchid the only zygomorphic flower whose
+# shape is a lie told to a pollinator, and clover the only member most people would
+# not call a flower at all. Dropping them for being "close to values already in it"
+# measured distance in parameter space, where they do sit near their neighbours, and
+# the axis is not about parameter space. Nine species sat in the source tree that no
+# player has ever met; six of nine is still six species nobody has met.
+# Kept on ONE line deliberately: the declaration gate reads the export hint with a
+# line-oriented parser, so a parenthesised continuation here is valid GDScript that
+# the gate cannot see — it reported NO EXPORT and the sweep refused to run.
+@export_enum("generic", "bluebell", "iris", "daisy", "allium", "crown_imperial", "fritillaria", "orchid", "corydalis", "clover") var species: String = "generic"
 
 ## Allow-list. An unknown word falls back to `generic` rather than stranding a placement
 ## with an empty pot. Kept in step with the export hint above — the declaration gate reads
 ## the hint, and this is what the code actually tests against.
-const SPECIES: PackedStringArray = ["generic", "bluebell", "iris", "daisy", "allium", "crown_imperial"]
+const SPECIES: PackedStringArray = ["generic", "bluebell", "iris", "daisy", "allium",
+	"crown_imperial", "fritillaria", "orchid", "corydalis", "clover"]
 
 var _flower: BotanicalFlower = null
 
@@ -86,8 +99,9 @@ func _ready() -> void:
 func _preset_for(species_name: String) -> String:
 	var want: String = species_name.strip_edges().to_lower()
 	if not SPECIES.has(want):
-		# Not in the declared six, but the generator may still know it (fritillaria,
-		# orchid, corydalis). Only fall back to generic if nothing knows the word.
+		# Not in the declared ten, but the generator may still learn presets this
+		# wrapper has not caught up with. Only fall back to generic if nothing knows
+		# the word — a map naming a real preset should get it, declared or not.
 		if BotanicalFlower.PRESETS.has(want):
 			return want
 		return ""
