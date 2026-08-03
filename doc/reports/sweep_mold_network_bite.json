@@ -1,0 +1,80 @@
+{
+ "sweep": "mold_network",
+ "peak_changed_pct": 76.982,
+ "subject_pct": 76.982,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "paused": true,
+    "randomize_on_start": true
+   },
+   "b": {
+    "paused": true,
+    "randomize_on_start": false
+   },
+   "changed_px": 342481,
+   "changed_pct": 59.294
+  },
+  {
+   "a": {
+    "paused": true,
+    "randomize_on_start": true
+   },
+   "b": {
+    "paused": false,
+    "randomize_on_start": true
+   },
+   "changed_px": 369650,
+   "changed_pct": 63.998
+  },
+  {
+   "a": {
+    "paused": true,
+    "randomize_on_start": true
+   },
+   "b": {
+    "paused": false,
+    "randomize_on_start": false
+   },
+   "changed_px": 368725,
+   "changed_pct": 63.837
+  },
+  {
+   "a": {
+    "paused": true,
+    "randomize_on_start": false
+   },
+   "b": {
+    "paused": false,
+    "randomize_on_start": true
+   },
+   "changed_px": 444647,
+   "changed_pct": 76.982
+  },
+  {
+   "a": {
+    "paused": true,
+    "randomize_on_start": false
+   },
+   "b": {
+    "paused": false,
+    "randomize_on_start": false
+   },
+   "changed_px": 428305,
+   "changed_pct": 74.153
+  },
+  {
+   "a": {
+    "paused": false,
+    "randomize_on_start": true
+   },
+   "b": {
+    "paused": false,
+    "randomize_on_start": false
+   },
+   "changed_px": 86007,
+   "changed_pct": 14.89
+  }
+ ]
+}

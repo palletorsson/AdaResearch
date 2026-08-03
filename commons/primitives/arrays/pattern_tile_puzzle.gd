@@ -102,6 +102,92 @@ var _current_lattice_index: int = 0
 	Color(0.6, 0.3, 0.5)      # Dusty purple
 ]
 
+# --- DNA (stage 2, promoted 2026-08-03) ------------------------------------
+# TWO HARD-CODED CONSTANTS THAT WERE ALREADY A PARAMETER SPACE.
+#
+# 1. `_initialize_grid_data()` filled every cell with 0. Not "a default pattern"
+#    — no pattern. Every photograph this artifact has ever produced shows an
+#    empty grid above an empty carpet, and the whole argument (a small decision
+#    amplified by a symmetry rule) is invisible until a player picks up a cube.
+#    A weaving draft is the unit a textile tradition actually transmits: not the
+#    cloth, the instruction for it. `motif` decides whether the loom arrives
+#    empty or arrives carrying an inherited draft you are expected to edit —
+#    which is a claim about authorship, not a decoration.
+#
+# 2. The eight-colour `palette` is commented "like yarn colors" and is one fixed
+#    dye range: cream, deep red, navy, gold, forest, brown, near-black, dusty
+#    purple. The same modulo arithmetic reads as a kilim, an indigo resist, a
+#    madder ground, a draft notated on paper, or a screen, depending only on
+#    which eight colours the array holds. `dyelot` names that choice. It is the
+#    same question platonicsolids.palette asks and cannot borrow the word,
+#    because `palette` is already this file's export name for the array itself.
+#
+# BOTH DEFAULTS ARE THE SHIPPED BUILD LITERALLY: motif=blank writes 0 into every
+# cell exactly as the old loop did, and dyelot=natural never touches the palette
+# array at all (DYELOTS has no "natural" key — the lookup misses and returns).
+#
+# SIX TOKENS SHARE THIS SCENE (pattern_tile_puzzle, _4x4, _mirror, _8x8, _brick,
+# _herringbone) and they differ by `config: {tile_size, repeat_mode}`. The two
+# axes are DECLARED on pattern_tile_puzzle only — the 33-placement member — but
+# they live on the shared script, so the siblings inherit the knobs and, setting
+# neither, keep their defaults and their appearance. `motif` is written as a
+# function of (x, y, tile_size) so it holds at the family's 4 and 8 alike.
+#
+# NOT PROMOTED: repeat_mode / wallpaper_group. They are the artifact's own
+# critical_parameter and they are real, but they are already how this family
+# spells its members apart in the registry `config` block; declaring them as a
+# sweep axis on the base token would measure the siblings, not a variation
+# within one. They also carry an enum type the declaration gate cannot read.
+# ---------------------------------------------------------------------------
+
+## AXIS 1 — the draft the tile arrives carrying.
+## blank (legacy default) | checker | cross | twill | houndstooth
+@export var motif: String = "blank"
+
+## AXIS 2 — the dye range the eight yarns come from.
+## natural (legacy default) | indigo | madder | mono | screen
+@export var dyelot: String = "natural"
+
+## A 4x4 houndstooth draft in palette indices, the smallest classic that needs a
+## real bitmap rather than arithmetic. Tiled modulo 4 so it holds at any N.
+const HOUNDSTOOTH_4 := [
+	[0, 6, 6, 6],
+	[0, 0, 6, 6],
+	[6, 6, 0, 0],
+	[6, 0, 0, 6],
+]
+
+## Eight yarns per dye range, same slots as the shipped palette: index 0 is the
+## GROUND (the colour an unedited tile is woven in), 1-7 the figures. There is
+## deliberately no "natural" key — that value is the untouched export default.
+const DYELOTS := {
+	# Resist-dyed blues. Dark ground, white the absence of dye, not a colour.
+	"indigo": [
+		Color(0.09, 0.13, 0.30), Color(0.94, 0.94, 0.90), Color(0.20, 0.30, 0.55),
+		Color(0.42, 0.55, 0.72), Color(0.05, 0.07, 0.16), Color(0.62, 0.72, 0.82),
+		Color(0.14, 0.20, 0.40), Color(0.80, 0.85, 0.88),
+	],
+	# Madder root, weld and walnut: the warm end of a plant dyer's shelf.
+	"madder": [
+		Color(0.72, 0.45, 0.22), Color(0.62, 0.13, 0.10), Color(0.88, 0.72, 0.38),
+		Color(0.35, 0.16, 0.10), Color(0.84, 0.56, 0.28), Color(0.48, 0.28, 0.16),
+		Color(0.20, 0.10, 0.07), Color(0.92, 0.84, 0.68),
+	],
+	# The draft as notation rather than cloth: paper, graphite, ink.
+	"mono": [
+		Color(0.97, 0.97, 0.96), Color(0.10, 0.10, 0.11), Color(0.62, 0.62, 0.63),
+		Color(0.36, 0.36, 0.37), Color(0.82, 0.82, 0.82), Color(0.22, 0.22, 0.23),
+		Color(0.50, 0.50, 0.51), Color(0.74, 0.74, 0.75),
+	],
+	# The un-tradition. Primaries at full saturation on black, sRGB's own idea
+	# of a palette, owing nothing to any dye that ever existed.
+	"screen": [
+		Color(0.04, 0.04, 0.05), Color(1.00, 0.13, 0.20), Color(0.13, 0.85, 1.00),
+		Color(1.00, 0.92, 0.10), Color(0.20, 1.00, 0.35), Color(1.00, 0.45, 0.00),
+		Color(0.70, 0.20, 1.00), Color(1.00, 1.00, 1.00),
+	],
+}
+
 ## Current selected color index
 @export var selected_color: int = 1
 
@@ -191,6 +277,10 @@ func _ready() -> void:
 	_cube_scene = load("res://commons/primitives/arrays/pattern_tile_cube.tscn")
 	_setup_snap_audio()
 
+	# Before anything reads `palette`: the cells, the spawner rings, the cubes
+	# and the preview texture all sample it. At dyelot=natural this is a no-op.
+	_apply_dyelot()
+
 	_initialize_grid_data()
 	_create_editor_grid()
 	_create_preview()
@@ -220,8 +310,45 @@ func _initialize_grid_data() -> void:
 	for y in range(tile_size):
 		var row = []
 		for x in range(tile_size):
-			row.append(0)  # Default to first color
+			row.append(_motif_value(x, y))  # motif=blank writes 0, as it always did
 		_grid_data.append(row)
+
+
+## The colour index one source cell starts life holding, per the `motif` axis.
+## The `_:` branch is `blank` and returns 0 for every cell — literally the old
+## `row.append(0)`, so an artifact carrying no motif token is byte-identical.
+func _motif_value(x: int, y: int) -> int:
+	var n: int = tile_size
+	match motif:
+		"checker":
+			# The simplest draft there is: alternate ground and figure.
+			return 1 if (x + y) % 2 == 0 else 0
+		"cross":
+			# One centred axis each way — the sampler's registration mark, and
+			# the draft that makes a mirror rule most obviously a mirror.
+			return 2 if (x == n / 2 or y == n / 2) else 0
+		"twill":
+			# 2/2 twill: two up, two down, stepped one per row. The diagonal is
+			# not drawn, it falls out of the arithmetic.
+			return 1 if ((x + y) % 4) < 2 else 0
+		"houndstooth":
+			return int(HOUNDSTOOTH_4[y % 4][x % 4])
+		_:
+			return 0
+
+
+## Swap the eight yarns for another dye range. dyelot=natural is not a key in
+## DYELOTS, so it returns before touching anything and the shipped palette
+## literal stands — which is what every existing placement gets.
+func _apply_dyelot() -> void:
+	if not DYELOTS.has(dyelot):
+		return
+	var yarns: Array = DYELOTS[dyelot]
+	var swapped: Array[Color] = []
+	for c in yarns:
+		swapped.append(c)
+	palette = swapped
+	_cell_materials.clear()
 
 
 func _create_editor_grid() -> void:
@@ -1566,6 +1693,25 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		if parsed_group >= 0:
 			wallpaper_group = parsed_group as WallpaperGroups.Group
 			symmetry_mode = SymmetryMode.WALLPAPER  # Auto-switch to wallpaper mode
+
+	# DNA axes — see the block at the top of this file. Both are guarded twice:
+	# the key must be present AND the value must differ, so a placement that
+	# names neither (every one of the 33 today) can never trigger a teardown.
+	# Known limit, stated rather than hidden: changing dyelot mid-life repaints
+	# the editor cells and the preview, but colour cubes already sitting loose on
+	# their pedestals keep the dye they were spawned with until they respawn.
+	if config_data.has("dyelot"):
+		var new_dyelot: String = str(config_data["dyelot"]).to_lower().strip_edges()
+		if new_dyelot != dyelot:
+			dyelot = new_dyelot
+			_apply_dyelot()
+			needs_rebuild = true
+
+	if config_data.has("motif"):
+		var new_motif: String = str(config_data["motif"]).to_lower().strip_edges()
+		if new_motif != motif:
+			motif = new_motif
+			needs_rebuild = true
 
 	# Check for cursor settings
 	if config_data.has("cursor_enabled"):

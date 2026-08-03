@@ -73,6 +73,23 @@
    }
   },
   "integral_area": {
+   "dna": {
+    "axes": {
+    "curve": [
+    "hump",
+    "wave",
+    "ramp",
+    "spike",
+    "step"
+    ],
+    "tally": [
+    "strips",
+    "blocks",
+    "column",
+    "antiderivative"
+    ]
+    }
+   },
    "name": "Integral Area",
    "lookup_name": "integral_area",
    "description": "Area under a curve as accumulation, animated. A sweep marker progresses left to right; vertical strips light up as they enter the swept region. The definite integral made visible: the headline accumulation artifact for the change sequence.",
@@ -109,6 +126,23 @@
    }
   },
   "derivative_pair": {
+   "dna": {
+    "axes": {
+    "curve": [
+    "wave",
+    "hump",
+    "ramp",
+    "spike",
+    "step"
+    ],
+    "panels": [
+    "stacked",
+    "overlaid",
+    "tower",
+    "phase"
+    ]
+    }
+   },
    "name": "Derivative Pair",
    "lookup_name": "derivative_pair",
    "description": "Two stacked curves with a shared vertical sweep line. f on top, f' below. Shows the derivative as a function in its own right.",

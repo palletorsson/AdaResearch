@@ -1,0 +1,188 @@
+{
+ "sweep": "line_network_ca",
+ "peak_changed_pct": 1.45,
+ "subject_pct": 0.832,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.01
+   },
+   "b": {
+    "demo_mode": true,
+    "line_width": 0.02
+   },
+   "changed_px": 6116,
+   "changed_pct": 1.059
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.01
+   },
+   "b": {
+    "demo_mode": true,
+    "line_width": 0.032
+   },
+   "changed_px": 8378,
+   "changed_pct": 1.45
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.01
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.01
+   },
+   "changed_px": 3780,
+   "changed_pct": 0.654
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.01
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.02
+   },
+   "changed_px": 3780,
+   "changed_pct": 0.654
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.01
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.032
+   },
+   "changed_px": 3780,
+   "changed_pct": 0.654
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.02
+   },
+   "b": {
+    "demo_mode": true,
+    "line_width": 0.032
+   },
+   "changed_px": 6925,
+   "changed_pct": 1.199
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.02
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.01
+   },
+   "changed_px": 3620,
+   "changed_pct": 0.627
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.02
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.02
+   },
+   "changed_px": 3620,
+   "changed_pct": 0.627
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.02
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.032
+   },
+   "changed_px": 3620,
+   "changed_pct": 0.627
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.032
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.01
+   },
+   "changed_px": 4805,
+   "changed_pct": 0.832
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.032
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.02
+   },
+   "changed_px": 4805,
+   "changed_pct": 0.832
+  },
+  {
+   "a": {
+    "demo_mode": true,
+    "line_width": 0.032
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.032
+   },
+   "changed_px": 4805,
+   "changed_pct": 0.832
+  },
+  {
+   "a": {
+    "demo_mode": false,
+    "line_width": 0.01
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.02
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "demo_mode": false,
+    "line_width": 0.01
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.032
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "demo_mode": false,
+    "line_width": 0.02
+   },
+   "b": {
+    "demo_mode": false,
+    "line_width": 0.032
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

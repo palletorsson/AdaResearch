@@ -2383,6 +2383,30 @@
       }
     },
     "basis_vectors_rig": {
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "frame": [
+            "orthonormal",
+            "tilted",
+            "skewed",
+            "stretched",
+            "mirrored"
+          ],
+          "decomposition": [
+            "chain",
+            "star",
+            "box",
+            "none"
+          ]
+        },
+        "framing": 0.75,
+        "framing_note": "hint only, never applied to a placement: the housing is a 1.5 m square table and the phenomenon is a 0.6 m field of arrows in the well at its centre, so a fit-by-diagonal shot spends most of its pixels on rails, apron and legs while both axes argue inside the well. 0.75 is deliberately mild - the table still reads - and has not been checked against a capture in this pass.",
+        "default": "frame=orthonormal, decomposition=chain - orthonormal returns exactly the Basis.IDENTITY that _basis was welded to, and under any unit basis _resize_arrow's span comparison short-circuits before writing a single mesh property, so the three arrows are the shipped arrows at the shipped length; chain is the `_` branch of the match and rebuilds the identical three-segment staircase (ZERO->u, u->u+v, u+v->u+v+w) at the same 0.92-alpha axis colours in the same 3-instance MultiMesh buffer. All 24 maps that place this rig are unchanged - not one carries a #frame: or #decomposition: token, and apply_grid_config returns immediately on an empty config, only assigns when the word actually differs, and reaches _update_visualization only when something moved AND is_node_ready() AND the MultiMesh exists.",
+        "was": "no axis of its own: _basis was declared `var _basis: Basis = Basis.IDENTITY` and never given any other value at build time (the TILT/SPIN buttons and the T/Y keys reach _set_basis at runtime, which a still can never photograph), the staircase was three hard-coded _set_component_line calls in _update_component_lines, and apply_grid_config(config_data) was a single `pass`.",
+        "note": "hand promotion 2026-08-03 - the auto-runner refused this artifact for NO TURNABLE KNOBS. frame is the argument: a rig named `basis` that can only ever draw the identity basis presents as a fact about space what is a choice made about it. Each value drops exactly one property the identity silently bundles - tilted keeps all three and only moves the numbers (same point, different coordinates); skewed drops ORTHOGONALITY, so the staircase walks an oblique path and the `box` reading becomes a parallelepiped; stretched drops UNIT LENGTH and the arrows are drawn at their true magnitudes, which is why _resize_arrow exists at all - a rig that draws a 1.6-long basis vector as a unit arrow is lying about the one property its own name claims; mirrored drops RIGHT-HANDEDNESS and the k leg walks backward. decomposition takes the word and its values character for character from vector_magnitude_demo and example_1_5_vector_magnitude_vr, which ask the same question of the same three RGB legs against the same origin - the shared vocabulary is honest here because the geometry is the same geometry; the only difference is which answer shipped (chain here, star on 1.3, none on 1.5). The two axes read each other: `box` under `skewed` is the one frame in the family where the spanned solid visibly stops being a box."
+      },
       "category": "mathematics",
       "class_name": "BasisVectorsRig",
       "complexity": "intermediate",

@@ -8,7 +8,42 @@ const LSystemTurtle = preload("res://commons/lsystem_grammar/lsystem_turtle.gd")
 const PrimitiveStackScript = preload("res://commons/primitive_grammar/primitive_stack.gd")
 const NoiseDisplacePS = preload("res://commons/noise_grammar/noise_displace.gd")
 
+# --- DNA (stage 2, promoted 2026-08-03) ------------------------------------
+# WHAT WAS HARD-CODED. _build() laid every winner out one way and only one way:
+# `col = index % columns`, `row = index / columns`, x spread around zero, z
+# marching backwards, y flat at nought. Four columns of equal panels at equal
+# spacing at equal height. That grid is not neutral — it is the contact sheet,
+# the specimen rack, the spreadsheet. It says these thirteen things are
+# comparable units of the same kind, which is a claim, and it was the only claim
+# the artifact could make.
+#
+# `hang` lifts the arrangement into the axis, because how a selection is HUNG is
+# the curatorial argument a showroom of winners actually makes:
+#   grid   (legacy)  equal specimens in a rack — comparison is the point
+#   line             the modernist single hang, one row at eye level, air
+#                    around each: every winner is a work, not a data point
+#   salon            the 19th-century wall, tier on tier to the ceiling: the
+#                    hoard is the argument, quantity outranks any single item
+#   ring             a rotunda facing inward; half the winners have their backs
+#                    to you and the selection surrounds rather than presents
+# Layout only. Panel geometry, materials, labels, stars and the live-object
+# pedestal are untouched by this axis, so the change is purely where the same
+# bodies stand.
+#
+# WHY NOT `house`. exhibit_furniture.house (white_cube · wunderkammer · depot ·
+# forensic · didactic · derelict) was the word offered, and it does not fit. That
+# axis names which institution a BODY belongs to and spends itself on material —
+# oak and brass, ply and orange strap, brushed steel. This artifact's shipped
+# register is a dark slate rack carrying unshaded emissive image planes: a lit
+# screen in a dark room, which is not any of the six. Declaring house here would
+# force either a seventh word into a family vocabulary that was widened once
+# already by agreement, or a default of `white_cube` that repaints all eleven
+# placements. The default rule wins; the word is declined. See the registry note.
+# ---------------------------------------------------------------------------
+
 @export var manifest_path: String = "res://commons/generated/gallery_best_of/manifest.json"
+## AXIS — how the selection is hung. grid (legacy default) | line | salon | ring.
+@export var hang: String = "grid"
 @export var columns: int = 4
 @export var max_panel_width: float = 2.3
 @export var max_panel_height: float = 1.4
@@ -30,9 +65,16 @@ func _ready() -> void:
 	_build()
 
 
+## NOTE ON THE REBUILD BELOW. It is unconditional, and that is safe here rather
+## than by luck: GridInteractablesComponent only calls this method when a token
+## carries a NON-EMPTY config (`if not merged_config.is_empty()`), and all eleven
+## live placements are bare `gallery_winner_showcase:180:0.0`. So no shipped
+## placement reaches this function at all, and none can be torn down by it.
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("manifest"):
 		manifest_path = str(config_data["manifest"])
+	if config_data.has("hang"):
+		hang = str(config_data["hang"]).to_lower().strip_edges()
 	if config_data.has("columns"):
 		columns = max(1, int(config_data["columns"]))
 	if config_data.has("gap_x"):
@@ -89,13 +131,49 @@ func _build() -> void:
 
 	for index in _items.size():
 		var item: Dictionary = _items[index]
-		var col := index % columns
-		var row := index / columns
-		var x := (float(col) - float(columns - 1) * 0.5) * gap_x
-		var z := float(row) * gap_z
 		var panel := _build_panel(item)
-		panel.position = Vector3(x, 0.0, z)
+		panel.transform = _panel_transform(index, _items.size())
 		_content_root.add_child(panel)
+
+
+## Where one panel stands. The `hang` axis lives here and nowhere else, so no
+## value can change a panel's geometry, materials or labels by accident.
+##
+## The `_:` branch is `grid` and reproduces the shipped arithmetic literally —
+## same modulo, same integer division, same centring term, same flat y — so a
+## placement that names no hang is identical to the build before this axis
+## existed. All eleven live placements are bare `gallery_winner_showcase:180:0.0`
+## tokens carrying no config, which is exactly that branch.
+func _panel_transform(index: int, count: int) -> Transform3D:
+	match hang:
+		"line":
+			# One row, eye level, generous air. Spacing widens because a single
+			# line's whole claim is that each work gets its own space.
+			var lx: float = (float(index) - float(count - 1) * 0.5) * gap_x * 1.15
+			return Transform3D(Basis(), Vector3(lx, 0.0, 0.0))
+		"salon":
+			# The wall stacked to the ceiling. Rows go UP instead of back and the
+			# horizontal gap tightens: density is the argument.
+			var scol: int = index % columns
+			var srow: int = index / columns
+			var sx: float = (float(scol) - float(columns - 1) * 0.5) * gap_x * 0.74
+			var sy: float = float(srow) * 2.55
+			return Transform3D(Basis(), Vector3(sx, sy, 0.0))
+		"ring":
+			# A rotunda. Radius follows the count so the arc keeps the same
+			# panel-to-panel spacing the grid used; each panel turns to face the
+			# centre, which puts the far half of the selection back-on to you.
+			var radius: float = maxf(3.0, float(count) * gap_x / TAU)
+			var angle: float = TAU * float(index) / float(maxi(count, 1))
+			var pos := Vector3(sin(angle) * radius, 0.0, cos(angle) * radius)
+			return Transform3D(Basis(Vector3.UP, angle + PI), pos)
+		_:
+			# grid — the legacy lineage, byte for byte.
+			var col := index % columns
+			var row := index / columns
+			var x := (float(col) - float(columns - 1) * 0.5) * gap_x
+			var z := float(row) * gap_z
+			return Transform3D(Basis(), Vector3(x, 0.0, z))
 
 
 func _build_title() -> void:

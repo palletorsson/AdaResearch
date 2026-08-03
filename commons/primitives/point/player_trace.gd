@@ -31,6 +31,40 @@ extends Node3D
 ## Show where the writing began (start) and where the live nib is now (now).
 @export var show_endpoints: bool = true
 
+## STAGE-2 DNA — AXIS: retention (2026-08-03)
+##
+## WHAT SPACE DOES WITH THE MARK once the body that made it has walked on. The word is
+## taken character for character from [[draw_dot]] — which this artifact's own @identity
+## already names as its complement — and is shared with [[mystic_writing_pad]],
+## [[grab_sphere_point_snap]], [[draw_triangle_faces]] and
+## [[interactive_point_origin_force]]. All six put a mark into space and then have to say
+## what space keeps of it. The others are a HAND writing in a 0.5 m frame; this one is a
+## BODY writing at room scale, so the record lies on the ground plane rather than on a
+## drawing plane. Same five claims, same order, one storey down.
+##
+## The word fits without stretching because this artifact already named the question
+## itself: its critical_parameter is trail_max_points, "how much of the past is remembered
+## and drawn; the horizon of the biography". `lattice` is not a new idea here either — it
+## is seam_grid, the artifact's own quantisation seam, made standing-visible.
+##
+##   none      the legacy lineage, byte for byte. The frame is empty: at rest this
+##             recorder shows no path, and it never claimed to. What you did not just
+##             walk, the room does not hold
+##   trace     one walk stays on the floor, in the ink the body writes with, exactly
+##             where it was walked
+##   lattice   a ruled ground field of pale nodes, and the walk admitted onto it:
+##             stair-stepped, right-angled. A position had to be legal before it counted
+##   archive   nine walks kept at once, none dimmed by age, overlapping into a thicket.
+##             Nothing is discarded, so no single walk can be read
+##   wax       a dark slab under a pale translucent sheet with the walks sunk between
+##             them, older ones fainter. The floor reads clean; the record is underneath
+##
+## APPEARANCE ONLY, exactly as in draw_dot. Nothing below touches the live recording, the
+## XR origin, the seam measurements or clear_trail() — a variant changes what a standing
+## visitor sees the room has KEPT, never what the body writes while it walks.
+@export var retention: String = "none"
+const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
+
 # ── THE LINE SEAM ────────────────────────────────────────────────────────────
 # doc/CONSERVATION_OF_THE_IRREDUCIBLE.md, § the map of seams:
 #
@@ -105,16 +139,27 @@ func _ready() -> void:
 		push_warning("PlayerTrace: XROrigin3D not found at path: %s" % xr_origin_path)
 		# Try to find it automatically
 		_xr_origin = _find_xr_origin()
-		if not _xr_origin:
-			push_error("PlayerTrace: Could not find XROrigin3D. Trail will not work.")
-			set_process(false)
-			return
 
+	# BUILT BEFORE THE ORIGIN IS RESOLVED, and that ordering is the point. The old code
+	# returned here when no XROrigin3D existed, so the artifact rendered literally nothing
+	# — no trail container, no reference frame, no record. Every map that places this has a
+	# player, so those 20 placements never took that branch and are unaffected; the only
+	# caller that did was the capture bench, where an artifact that draws nothing until
+	# somebody walks photographs as an empty scene and any axis measures 0.00%.
 	_setup_trail()
 	if show_reference_frame:
 		_setup_reference_frame()
 	if show_endpoints:
 		_setup_endpoints()
+
+	_ret_read_config()
+	_ret_build()
+
+	if not _xr_origin:
+		push_warning("PlayerTrace: no XROrigin3D found — the recorder stands with its "
+			+ "frame and records nothing.")
+		set_process(false)
+		return
 
 	_last_global_position = _xr_origin.global_position
 	set_process(true)
@@ -463,3 +508,203 @@ func get_trail_length() -> float:
 func get_point_count() -> int:
 	"""Returns the number of points in the trail"""
 	return _trail_points.size()
+
+
+# ── RETENTION ────────────────────────────────────────────────────────────────
+# One axis, five claims about whether the room remembers being walked through, shared word
+# for word with draw_dot, mystic_writing_pad, grab_sphere_point_snap, draw_triangle_faces
+# and interactive_point_origin_force. Appended LAST: the trail, the reference frame and the
+# endpoint markers are all built above and none of them move.
+#
+# The record lies INSIDE the reference frame this artifact already draws, on the ground
+# plane at the same trace_height_offset the live trail uses, so choosing a value changes
+# what is in the frame and never how big the artifact is.
+#
+# Marks are dot-clouds, not continuous line, for two reasons. The artifact's own truth
+# statement is that a path is only ever a dense set of point samples — and a LINE_STRIP is
+# one pixel wide, which is how random_walk_collection moved 174 grey levels across 0.06% of
+# frame and was reported inert. Dot radius is a legibility decision, not a taste one: the
+# record sits in a 1 m frame, so 2 cm renders around 20 px in a fitted 760 px shot.
+
+const RET_DOT_R := 0.020
+const RET_SAMPLES := 64
+
+var _ret_node: Node3D = null
+
+
+func _ret_read_config() -> void:
+	if has_meta("config_retention"):
+		var r: String = str(get_meta("config_retention")).strip_edges().to_lower()
+		retention = r if RETENTIONS.has(r) else retention
+
+
+## Gated on the key AND on the value actually changing: a map that says nothing about
+## retention gets no rebuild at all, so a config carrying only other keys — or the same
+## value the artifact already has — cannot disturb the legacy path.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("retention"):
+		return
+	var r: String = str(config_data["retention"]).strip_edges().to_lower()
+	if not RETENTIONS.has(r) or r == retention:
+		return
+	retention = r
+	_ret_build()
+
+
+func _ret_build() -> void:
+	if is_instance_valid(_ret_node):
+		_ret_node.queue_free()
+	_ret_node = null
+
+	match retention:
+		"none":
+			pass
+		"trace":
+			_ret_trace()
+		"lattice":
+			_ret_lattice()
+		"archive":
+			_ret_archive()
+		"wax":
+			_ret_wax()
+		_:
+			pass
+
+
+## The record plane — a container on the floor of the reference frame, lifted by the same
+## trace_height_offset the live trail uses so kept and live marks sit at one height.
+func _ret_root() -> Node3D:
+	if not is_instance_valid(_ret_node):
+		_ret_node = Node3D.new()
+		_ret_node.name = "RetentionRecord"
+		_ret_node.position = Vector3(0.0, trace_height_offset, 0.0)
+		add_child(_ret_node)
+	return _ret_node
+
+
+## TRACE — one walk, left where the body left it, in the ink the body writes with.
+func _ret_trace() -> void:
+	_ret_stroke(1.31, 0.0, trail_color, 1.6, 0.0)
+
+
+## LATTICE — the ruling first (a regular field of pale nodes across the floor), then the
+## same walk admitted onto it. This is seam_grid standing still: regular pinpricks where
+## every other value shows wander.
+func _ret_lattice() -> void:
+	var span: float = reference_frame_size * 0.44
+	var step: float = 0.084
+	var n: int = int(span * 2.0 / step) + 1
+	var grid: MultiMeshInstance3D = _ret_mm("LatticeNodes",
+		_ret_emissive(Color(0.52, 0.60, 0.68), 0.5))
+	var gm: MultiMesh = grid.multimesh
+	gm.instance_count = n * n
+	var small: Basis = Basis.IDENTITY.scaled(Vector3.ONE * 0.5)
+	var k: int = 0
+	for cx in range(n):
+		for cz in range(n):
+			gm.set_instance_transform(k, Transform3D(small,
+				Vector3(-span + float(cx) * step, 0.0, -span + float(cz) * step)))
+			k += 1
+	_ret_root().add_child(grid)
+	_ret_stroke(1.31, 0.0, trail_color, 1.6, step)
+
+
+## ARCHIVE — nine walks kept at once, none dimmed by age. The floor fills; the individual
+## path stops being findable. Total retention and total illegibility are the same picture.
+func _ret_archive() -> void:
+	for i in range(9):
+		_ret_stroke(1.31 + 0.83 * float(i), 0.004 * float(i), trail_color, 1.35, 0.0)
+
+
+## WAX — the Wunderblock construction, borrowed straight from mystic_writing_pad and turned
+## through ninety degrees onto the floor: a matte dark slab, a pale translucent sheet over
+## it, and the walks sunk BETWEEN them, each older one fainter. The floor reads clean.
+func _ret_wax() -> void:
+	var span: float = reference_frame_size * 0.46
+	var root: Node3D = _ret_root()
+
+	var slab := MeshInstance3D.new()
+	slab.name = "WaxSlab"
+	var sm := BoxMesh.new()
+	sm.size = Vector3(span * 2.0, 0.014, span * 2.0)
+	slab.mesh = sm
+	var smat := StandardMaterial3D.new()
+	smat.albedo_color = Color(0.10, 0.085, 0.095)
+	smat.roughness = 0.95
+	smat.metallic = 0.0
+	slab.material_override = smat
+	slab.position = Vector3(0.0, -0.012, 0.0)
+	root.add_child(slab)
+
+	var warm: Color = Color(0.95, 0.62, 0.35)
+	var sunk: Color = Color(0.10, 0.085, 0.095)
+	for i in range(5):
+		var f: float = float(5 - i) / 5.0
+		var c: Color = warm.lerp(sunk, 1.0 - f)
+		_ret_stroke(1.31 + 1.7 * float(i), -0.004 + 0.0016 * float(i), c, 0.45 + 1.1 * f, 0.0)
+
+	var sheet := MeshInstance3D.new()
+	sheet.name = "ClearingSheet"
+	var shm := BoxMesh.new()
+	shm.size = Vector3(span * 2.0, 0.004, span * 2.0)
+	sheet.mesh = shm
+	var shmat := StandardMaterial3D.new()
+	shmat.albedo_color = Color(0.62, 0.65, 0.70, 0.30)
+	shmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	shmat.roughness = 0.25
+	shmat.metallic = 0.0
+	sheet.material_override = shmat
+	sheet.position = Vector3(0.0, 0.010, 0.0)
+	root.add_child(sheet)
+
+
+## One dot-walk in the record plane. `step` > 0 quantises it onto the ruling.
+func _ret_stroke(phase: float, y: float, c: Color, energy: float, step: float) -> void:
+	var span: float = reference_frame_size * 0.42
+	var mmi: MultiMeshInstance3D = _ret_mm("Walk", _ret_emissive(c, energy))
+	var mm: MultiMesh = mmi.multimesh
+	mm.instance_count = RET_SAMPLES
+	for i in range(RET_SAMPLES):
+		var u: float = float(i) / float(RET_SAMPLES - 1)
+		var p: Vector3 = _ret_curve(u, phase, span)
+		if step > 0.0:
+			p = Vector3(round(p.x / step) * step, 0.0, round(p.z / step) * step)
+		p.y = y
+		mm.set_instance_transform(i, Transform3D(Basis(), p))
+	_ret_root().add_child(mmi)
+
+
+## A deterministic walk — no randf anywhere in the record path, so five variants differ by
+## the axis and by nothing else.
+func _ret_curve(u: float, phase: float, span: float) -> Vector3:
+	var a: float = u * TAU * 1.15 + phase
+	var x: float = span * ((u - 0.5) * 1.85 + 0.22 * sin(a * 1.6))
+	var z: float = span * 0.80 * sin(a * 0.95 + phase * 1.3) * (0.55 + 0.45 * sin(a * 0.42))
+	return Vector3(clampf(x, -span, span), 0.0, clampf(z, -span, span))
+
+
+func _ret_mm(nm: String, mat: Material) -> MultiMeshInstance3D:
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = nm
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	var dot := SphereMesh.new()
+	dot.radius = RET_DOT_R
+	dot.height = RET_DOT_R * 2.0
+	dot.radial_segments = 6
+	dot.rings = 3
+	mm.mesh = dot
+	mm.instance_count = 0
+	mmi.multimesh = mm
+	mmi.material_override = mat
+	return mmi
+
+
+func _ret_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	return m

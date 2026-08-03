@@ -1393,6 +1393,28 @@
 	"size_group": "compact"
    },
    "qfep_connection": "The simplest demonstration of F generating E(S): one rule F->F[+F]F[-F]F unfolds a single line into a complex branching tree. Minimal description, maximum emergent structure.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ],
+     "habit": [
+      "planar",
+      "fanned",
+      "whorled",
+      "spiral"
+     ]
+    },
+    "default": "evidence=result, habit=planar - a deliberate no-op on both axes. result draws only the last generation, which is the single string the shipped rewrite loop left in _current_string; planar sets the roll to exactly 0.0 and the roll is then skipped by an `if roll_rad != 0.0` rather than applied as a zero rotation, so the turtle runs the shipped instruction sequence and no float is touched. With one column the layout shift is skipped outright, so the bounds, the centre and the scale factor are computed from the same numbers as before. All 7 existing placements draw the identical tree, and the Label3D keeps its shipped three lines - the two extra lines are appended only away from the defaults.",
+    "was": "six exports and every one a dial: iterations, base_angle, base_length, display_size and two colours. The rule itself, F->F[+F]F[-F]F, was a hard-coded _rules dictionary; the turtle only ever rotated about dir.cross(right), so the classic plant was a flat drawing; and every generation but the last was computed and thrown away inside the rewrite loop. apply_grid_config called _generate() unconditionally, so any unrelated key on a map token re-ran the whole rewrite - and two placements do pass unrelated layout keys.",
+    "note": "hand promotion 2026-08-03, refused by the runner for NO TURNABLE KNOBS: the exports were there but every one was a scalar dial, nothing the artifact argues. evidence lifts the derivation the code already computes and discards - trace nests the earlier generations inside the finished plant at one origin, longhand lays generation 1..N side by side at one scale, axiom draws ONE application of the production, the rule as a picture instead of its limit. Generation 0 is never selected by any value: a single bare segment carries no picture, and after the bounds-fit it would be a hairline filling the frame. habit lifts the roll the turtle never had - 0 / 30 / 90 / 137.5 degrees applied to the branching plane at each push, planar being the shipped flat drawing and spiral the golden angle.",
+    "kin": "lsystem_editor.grammar (koch|sierpinski|dragon|plant|bush|fern|binary_tree) was DECLINED here rather than reused. It is a real axis and it asks a real question - which grammar - but this artifact's whole claim is that ONE rule makes a plant, and swapping its rule for six others would make it a second editor with the same seven pictures. The editor varies the grammar and holds the drawing fixed; the tree holds the grammar and varies what is shown of it. Different question, different word. evidence is the corpus family word (19 declarations, result|trace|longhand|axiom character for character) and this artifact measures alike with them: the question is whether the working is on show or only the answer."
+   },
    "scene": "res://commons/artifacts/lsystem_tree/lsystem_tree.tscn",
    "tags": [
 	"l_system",

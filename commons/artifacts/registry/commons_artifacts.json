@@ -10721,6 +10721,26 @@
     "commons",
     "mixed"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "notice": [
+      "count",
+      "none",
+      "gauge",
+      "slots",
+      "barrier"
+     ]
+    },
+    "default": "notice=count - the shipped Label3D printing 'Collect N more (x/N)', the only thing this scene has ever said. The axis adds exactly one line to the legacy path (label.visible = is_open or notice == 'count'), which evaluates true always at the default and restates the label's own default visibility, so both existing placements render unchanged in every frame",
+    "was": "a singleton with three exports, none of them an argument: required_pickups is the SIZE of the demand, gate_color and gate_open_color are its livery. The design question the artifact had never been asked is how a rule announces itself on the wall that enforces it - and it had answered it once, by accident, in digits",
+    "kin": "deliberately NOT the readout ladder shared by line / line_interface / xyz_slider_plate. That word is honest about a continuous value you are setting, and its fourth rung 'lattice' means the privileged whole-number set drawn standing; a count has no privileged subset, so the rung collapses and the family's fourth claim would have to be faked. This artifact also owns a BARRIER, which no measuring instrument does, and the barrier can be the readout",
+    "fixture": {
+     "required_pickups": 5
+    },
+    "fixture_note": "the demand defaults to 1, and at 1 the countable values degenerate - slots is a single socket and barrier is a single band indistinguishable from the shipped box. Five is the smallest demand at which 'countable vacancies' and 'a banded wall' are things a still can show. This stages the bench only; no map is changed"
+   },
    "footprint": [
     1.0,
     1.0,

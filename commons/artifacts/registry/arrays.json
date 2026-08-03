@@ -113,9 +113,43 @@
     "derived_at": "2026-04-29T09:39:46.049800Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "Pattern-making as play: paint a small tile, watch it repeat across a carpet, adjust, repeat. Handmade meets computational — the room where the abstract truth (a pattern is a tiled array) becomes a thing your hands discover by doing, the carpet answering every edit instantly."
+   "qfep_connection": "Pattern-making as play: paint a small tile, watch it repeat across a carpet, adjust, repeat. Handmade meets computational — the room where the abstract truth (a pattern is a tiled array) becomes a thing your hands discover by doing, the carpet answering every edit instantly.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "motif": [
+      "blank",
+      "checker",
+      "cross",
+      "twill",
+      "houndstooth"
+     ],
+     "dyelot": [
+      "natural",
+      "indigo",
+      "madder",
+      "mono",
+      "screen"
+     ]
+    },
+    "default": "motif=blank, dyelot=natural - _motif_value() returns 0 for every cell, which is literally the old `row.append(0)`, and DYELOTS has no `natural` key so _apply_dyelot() returns before touching the palette literal. The 33 existing placements render byte for byte as before. Their tokens carry config (#p4m, #cursor, :270) so apply_grid_config DOES run for them, but neither key is present, so the has()+differs guard never fires a rebuild.",
+    "was": "an empty grid over an empty carpet in one fixed set of eight yarns - the artifact argued that a small decision is amplified by a symmetry rule, and then shipped with no decision made and one dye range to make it in, so every photograph of it showed the amplifier with nothing in it",
+    "note": "Both axes live on the SHARED script behind six registry tokens (pattern_tile_puzzle, _4x4, _mirror, _8x8, _brick, _herringbone), which differ only by config {tile_size, repeat_mode}. They are declared HERE, on the 33-placement member, and the siblings inherit the knobs, set neither, and keep their appearance. motif is written as a function of (x, y, tile_size) so it holds at the family's 4 and 8 alike. NOT promoted: repeat_mode / wallpaper_group - real, and the artifact's own critical_parameter, but they are already how this family spells its members apart, so sweeping them would measure the siblings rather than a variation within one."
+   }
   },
   "pattern_tile_4x4": {
+   "dna": {
+    "axes": {
+    "motif": [
+    "blank",
+    "checker",
+    "cross",
+    "twill",
+    "houndstooth"
+    ]
+    }
+   },
    "name": "4x4 Pattern Tile",
    "lookup_name": "pattern_tile_4x4",
    "description": "Basic 4x4 tile pattern editor. Simple repeat mode.",
@@ -233,6 +267,17 @@
    "qfep_connection": "The atom of pattern: a 4×4 grid you paint, set to repeat. The smallest complete lesson in the chapter — a tile is a tiny 2D array, and tiling is that array copied across the plane, so a whole carpet is one small list of cells, addressed modulo its size."
   },
   "pattern_tile_mirror": {
+   "dna": {
+    "axes": {
+    "motif": [
+    "blank",
+    "checker",
+    "cross",
+    "twill",
+    "houndstooth"
+    ]
+    }
+   },
    "name": "Mirror Pattern Tile",
    "lookup_name": "pattern_tile_mirror",
    "description": "4x4 tile with mirror symmetry (kaleidoscope effect).",
@@ -351,6 +396,17 @@
    "qfep_connection": "The 4×4 tile under mirror symmetry — paint one quadrant and the kaleidoscope fills the rest. The array meeting the symmetry chapter: reflection is an index map, (n−1−x), and applying it turns a quarter of decisions into a whole of pattern. Economy of authorship, wired into the grid."
   },
   "pattern_tile_8x8": {
+   "dna": {
+    "axes": {
+    "motif": [
+    "blank",
+    "checker",
+    "cross",
+    "twill",
+    "houndstooth"
+    ]
+    }
+   },
    "name": "8x8 Pattern Tile",
    "lookup_name": "pattern_tile_8x8",
    "description": "Larger 8x8 tile for more complex patterns.",
@@ -465,6 +521,17 @@
    "qfep_connection": "The same puzzle engine as the 4×4 carpet, with tile_size raised to 8 and the symmetry left at SIMPLE: sixty-four authored cells instead of sixteen, so amplification falls exactly as authorship rises. The knob it turns is the ratio between what the hand decides and what the repeat rule multiplies — a bigger source tile is a weaker kaleidoscope."
   },
   "pattern_tile_brick": {
+   "dna": {
+    "axes": {
+    "motif": [
+    "blank",
+    "checker",
+    "cross",
+    "twill",
+    "houndstooth"
+    ]
+    }
+   },
    "name": "Brick Pattern Tile",
    "lookup_name": "pattern_tile_brick",
    "description": "Tile with brick/half-drop offset. Classic masonry pattern.",
@@ -583,6 +650,17 @@
    "qfep_connection": "The 4×4 tile with a half-drop offset — masonry's oldest trick, each row shifted so the seams don't line up. The array learning to lie about its own grid: an offset is just index arithmetic, (x + row·k) mod n, and out of that modular shift comes the whole visual strength of a brick wall."
   },
   "pattern_tile_herringbone": {
+   "dna": {
+    "axes": {
+    "motif": [
+    "blank",
+    "checker",
+    "cross",
+    "twill",
+    "houndstooth"
+    ]
+    }
+   },
    "name": "Herringbone Pattern Tile",
    "lookup_name": "pattern_tile_herringbone",
    "description": "Tile with herringbone weave pattern.",

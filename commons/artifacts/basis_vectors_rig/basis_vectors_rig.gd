@@ -49,6 +49,40 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var axis_length: float = 0.6
 @export var arrow_thickness: float = 0.01  # Thin like y_oscillation_cube
 
+## WHICH BASIS THE RIG ACTUALLY DRAWS.
+## _basis was welded to Basis.IDENTITY, so the bench could only ever show the one
+## frame in which "basis" looks like a fact about space rather than a choice made
+## about it. Each value drops exactly one of the three properties the identity
+## quietly bundles together, and the staircase re-derives itself from the drop.
+##   orthonormal - Basis.IDENTITY: axis-aligned, unit, right-handed (shipped)
+##   tilted      - the TILT preset, identity rotated 30 deg about X. Still
+##                 orthonormal: same point, different numbers.
+##   skewed      - j leaned 35 deg toward i. ORTHOGONALITY dropped; the
+##                 decomposition walks an oblique path to the same point.
+##   stretched   - i x1.6, k x0.6. UNIT LENGTH dropped; the arrows are drawn at
+##                 their true magnitudes, so the frame's own ruler is visible.
+##   mirrored    - k negated. RIGHT-HANDEDNESS dropped; the z leg walks backward.
+@export_enum("orthonormal", "tilted", "skewed", "stretched", "mirrored") var frame: String = "orthonormal"
+
+## How the components are shown between origin and point. The word and its four
+## values are taken character for character from vector_magnitude_demo and
+## example_1_5_vector_magnitude_vr, which ask the same question of the same three
+## RGB legs. Here the shipped answer is `chain`, not `star`.
+##   chain - legs walked tip to tail, origin -> x -> y -> point (shipped)
+##   star  - all three legs leaving the origin: the terms, not the path
+##   box   - the twelve edges of the solid the components span, plus its diagonal
+##   none  - no legs: the claim left to the arrows and the readout
+@export_enum("chain", "star", "box", "none") var decomposition: String = "chain"
+
+## Allow-lists. Written as bare array literals, NOT PackedStringArray([...]):
+## a constructor call is not a constant expression in GDScript, so the wrapped
+## form fails to parse the whole script — "Assigned value for constant FRAMES
+## isn't a constant expression". The declaration gate reads source text and
+## passed this happily; only the compiler catches it, which is why a compile
+## check belongs in the loop and not just a text check.
+const FRAMES: Array[String] = ["orthonormal", "tilted", "skewed", "stretched", "mirrored"]
+const DECOMPOSITIONS: Array[String] = ["chain", "star", "box", "none"]
+
 ## Target point to decompose
 @export var target_point: Vector3 = Vector3(0.35, 0.45, 0.25):
 	set(value):
@@ -90,6 +124,7 @@ var _basis: Basis = Basis.IDENTITY
 var _time: float = 0.0
 
 func _ready():
+	_basis = _basis_for(frame)
 	_init_material_templates()
 	if table_body:
 		_create_table()
@@ -100,6 +135,23 @@ func _ready():
 	_create_labels()
 	_create_vr_controls()
 	_update_visualization()
+
+## The five frames, as three columns each. `orthonormal` returns exactly the
+## Basis.IDENTITY the rig was born with, so a placement that names no frame gets
+## the shipped geometry and the shipped numbers.
+func _basis_for(frame_name: String) -> Basis:
+	match frame_name:
+		"tilted":
+			return Basis(Vector3.RIGHT, deg_to_rad(30))
+		"skewed":
+			var lean: float = deg_to_rad(35.0)
+			return Basis(Vector3(1, 0, 0), Vector3(sin(lean), cos(lean), 0), Vector3(0, 0, 1))
+		"stretched":
+			return Basis(Vector3(1.6, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, 0.6))
+		"mirrored":
+			return Basis(Vector3(1, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, -1))
+		_:
+			return Basis.IDENTITY
 
 # Base materials shared across arrows and glow shells via .duplicate()
 func _init_material_templates():
@@ -585,19 +637,109 @@ func _orient_arrow(arrow: Node3D, direction: Vector3):
 
 	arrow.look_at(arrow.global_position + direction, up)
 	arrow.rotate_object_local(Vector3.RIGHT, -PI/2)
+	_resize_arrow(arrow, direction.length())
+
+## Draws the arrow at the basis vector's TRUE magnitude. Under every orthonormal
+## frame the span is axis_length, the meta comparison short-circuits and not one
+## property is written — the shipped arrows are the shipped arrows. Only a
+## non-unit column (frame=stretched) ever reaches the resize, which is the point:
+## a rig that draws a 1.6-long basis vector as a unit arrow is lying about the
+## one property its own name claims.
+func _resize_arrow(arrow: Node3D, span: float) -> void:
+	if is_equal_approx(float(arrow.get_meta("span", axis_length)), span):
+		return
+	arrow.set_meta("span", span)
+
+	var shaft: MeshInstance3D = arrow.get_node_or_null("Shaft") as MeshInstance3D
+	if shaft and shaft.mesh is CylinderMesh:
+		var shaft_mesh: CylinderMesh = shaft.mesh as CylinderMesh
+		shaft_mesh.height = span
+		shaft.position = Vector3(0, span * 0.5, 0)
+
+	var head: MeshInstance3D = arrow.get_node_or_null("Head") as MeshInstance3D
+	if head:
+		head.position = Vector3(0, span, 0)
+
+	var glow: MeshInstance3D = arrow.get_node_or_null("Glow") as MeshInstance3D
+	if glow and glow.mesh is CylinderMesh:
+		var glow_mesh: CylinderMesh = glow.mesh as CylinderMesh
+		glow_mesh.height = span
+		glow.position = Vector3(0, span * 0.5, 0)
+
+	var axis_lbl: Node3D = arrow.get_node_or_null("AxisLabel") as Node3D
+	if axis_lbl:
+		axis_lbl.position = Vector3(0, span + 0.04, 0.06)
+	var unit_lbl: Node3D = arrow.get_node_or_null("UnitLabel") as Node3D
+	if unit_lbl:
+		unit_lbl.position = Vector3(0, span - 0.04, 0.05)
 
 func _update_component_lines(coords: Vector3):
-	var p0 = Vector3.ZERO
-	var p1 = _basis.x * coords.x
-	var p2 = p1 + _basis.y * coords.y
-	var p3 = p2 + _basis.z * coords.z
+	var u: Vector3 = _basis.x * coords.x
+	var v: Vector3 = _basis.y * coords.y
+	var w: Vector3 = _basis.z * coords.z
 
 	# Full axis hue, slight transparency so the legs read as measurement rather than
 	# structure. `color_i * 0.6` scaled the ALPHA channel too, which is why these were
 	# both dark and see-through.
-	_set_component_line(0, p0, p1, Color(color_i.r, color_i.g, color_i.b, 0.92))
-	_set_component_line(1, p1, p2, Color(color_j.r, color_j.g, color_j.b, 0.92))
-	_set_component_line(2, p2, p3, Color(color_k.r, color_k.g, color_k.b, 0.92))
+	var col_i: Color = Color(color_i.r, color_i.g, color_i.b, 0.92)
+	var col_j: Color = Color(color_j.r, color_j.g, color_j.b, 0.92)
+	var col_k: Color = Color(color_k.r, color_k.g, color_k.b, 0.92)
+
+	var seg_a: Array[Vector3] = []
+	var seg_b: Array[Vector3] = []
+	var seg_c: Array[Color] = []
+
+	match decomposition:
+		"star":
+			# The three terms of the sum, each leaving the origin.
+			seg_a.assign([Vector3.ZERO, Vector3.ZERO, Vector3.ZERO])
+			seg_b.assign([u, v, w])
+			seg_c.assign([col_i, col_j, col_k])
+		"box":
+			# The solid the components span — a rectangular box under an
+			# orthogonal frame, a parallelepiped under a skewed one, which is
+			# where the two axes read each other. Plus the body diagonal, the
+			# only rod ever drawn from origin straight to the point.
+			var faint_i: Color = Color(col_i.r, col_i.g, col_i.b, 0.45)
+			var faint_j: Color = Color(col_j.r, col_j.g, col_j.b, 0.45)
+			var faint_k: Color = Color(col_k.r, col_k.g, col_k.b, 0.45)
+			seg_a.assign([
+				Vector3.ZERO, v, w, v + w,
+				Vector3.ZERO, u, w, u + w,
+				Vector3.ZERO, u, v, u + v,
+				Vector3.ZERO,
+			])
+			seg_b.assign([
+				u, v + u, w + u, v + w + u,
+				v, u + v, w + v, u + w + v,
+				w, u + w, v + w, u + v + w,
+				u + v + w,
+			])
+			seg_c.assign([
+				col_i, faint_i, faint_i, faint_i,
+				col_j, faint_j, faint_j, faint_j,
+				col_k, faint_k, faint_k, faint_k,
+				Color(color_point.r, color_point.g, color_point.b, 0.9),
+			])
+		"none":
+			pass
+		_:
+			# chain — the shipped staircase, origin -> x -> y -> point.
+			seg_a.assign([Vector3.ZERO, u, u + v])
+			seg_b.assign([u, u + v, u + v + w])
+			seg_c.assign([col_i, col_j, col_k])
+
+	# Never shrink below the three instances the rig has always allocated, so the
+	# chain / star / none paths keep the buffer exactly as _create_component_lines
+	# built it and only `box` ever reallocates.
+	var needed: int = maxi(seg_a.size(), 3)
+	if _component_mm.instance_count != needed:
+		_component_mm.instance_count = needed
+	for i in range(needed):
+		if i < seg_a.size():
+			_set_component_line(i, seg_a[i], seg_b[i], seg_c[i])
+		else:
+			_set_component_line(i, Vector3.ZERO, Vector3.ZERO, Color.TRANSPARENT)
 
 # Positions a MultiMesh instance as a cylinder between start and end
 func _set_component_line(index: int, start: Vector3, end: Vector3, color: Color):
@@ -669,5 +811,31 @@ func rotate_basis(axis: Vector3, angle: float):
 	_basis = _basis.rotated(axis.normalized(), angle)
 	_update_visualization()
 
+## Grid config arrives DEFERRED, after _ready() has already built the table, the
+## arrows and the staircase. Nothing here rebuilds anything: both axes are read
+## by _update_visualization(), which re-derives the arrows and the legs from the
+## nodes that already exist. A placement that passes no config, or a config
+## naming neither axis, never reaches the update at all and is left exactly as
+## built — which is what the 18 shipped placements pass.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	if config_data == null or config_data.is_empty():
+		return
+	var moved: bool = false
+
+	if config_data.has("frame"):
+		var new_frame: String = str(config_data["frame"]).strip_edges().to_lower()
+		if FRAMES.has(new_frame) and new_frame != frame:
+			frame = new_frame
+			_basis = _basis_for(frame)
+			moved = true
+
+	if config_data.has("decomposition"):
+		var new_decomp: String = str(config_data["decomposition"]).strip_edges().to_lower()
+		if DECOMPOSITIONS.has(new_decomp) and new_decomp != decomposition:
+			decomposition = new_decomp
+			moved = true
+
+	# Only after _ready has built once: _update_visualization dereferences the
+	# arrows and the MultiMesh, and an early config would hit nulls.
+	if moved and is_node_ready() and _component_mm != null:
+		_update_visualization()

@@ -1,0 +1,80 @@
+{
+ "sweep": "random_decay_multimesh",
+ "peak_changed_pct": 0.0,
+ "subject_pct": 67.533,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "a": {
+    "decay_active": true,
+    "movement_xy_only": true
+   },
+   "b": {
+    "decay_active": true,
+    "movement_xy_only": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "decay_active": true,
+    "movement_xy_only": true
+   },
+   "b": {
+    "decay_active": false,
+    "movement_xy_only": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "decay_active": true,
+    "movement_xy_only": true
+   },
+   "b": {
+    "decay_active": false,
+    "movement_xy_only": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "decay_active": true,
+    "movement_xy_only": false
+   },
+   "b": {
+    "decay_active": false,
+    "movement_xy_only": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "decay_active": true,
+    "movement_xy_only": false
+   },
+   "b": {
+    "decay_active": false,
+    "movement_xy_only": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "decay_active": false,
+    "movement_xy_only": true
+   },
+   "b": {
+    "decay_active": false,
+    "movement_xy_only": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}
