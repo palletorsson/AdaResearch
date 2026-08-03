@@ -13,8 +13,27 @@ extends Node3D
 ## trace  — how much of the sampling is admitted. The signal has always been drawn as
 ##          20 discrete spheres; whether that discreteness is confessed (stems), merely
 ##          shown (samples) or hidden behind a continuum (ribbon) is the argument.
+## waveform — WHICH signal is on the bench. See FourierTransform.gd for the argument. The
+##          match in generate_signal_at_time already held square, triangle and sawtooth; the
+##          only thing that could select them was a suppressed UI slider, so every placement
+##          has always shown a sine. impulse and noise are new, and they are the two that
+##          make the axis argue: both are unremarkable in time and loud across every bin.
 var domain: String = "time"
 var trace: String = "samples"
+var waveform: String = "sine"
+
+## The value name -> the signal_type int the match below has always spoken.
+const WAVEFORMS := {
+	"sine": 0,
+	"square": 1,
+	"triangle": 2,
+	"sawtooth": 3,
+	"impulse": 4,
+	"noise": 5,
+}
+## Duty cycle of the impulse train, as a fraction of one period. Wide enough that the
+## 0.1-spaced FFT sampling lands on a pulse, narrow enough to read as a spike.
+const IMPULSE_DUTY: float = 0.12
 
 var time_domain_points: Array[CSGSphere3D] = []
 var frequency_domain_bars: Array[CSGBox3D] = []
@@ -199,6 +218,26 @@ func set_domain_mode(value: String) -> void:
 	if is_node_ready():
 		_apply_domain()
 
+func set_waveform_mode(value: String) -> void:
+	var wanted: String = value.strip_edges()
+	if wanted == "" or wanted == waveform or not WAVEFORMS.has(wanted):
+		return
+	waveform = wanted
+	signal_type = int(WAVEFORMS[wanted])
+	if not is_node_ready():
+		return
+	# The geometry does not change with the waveform — only the heights do — so this
+	# refreshes rather than rebuilds. The frequency side is stale the moment the signal
+	# changes, so recompute it wherever it is currently on show.
+	update_time_domain_signal()
+	if domain != "time":
+		compute_fft()
+
+func _hash_noise(x: float) -> float:
+	## A hash, not randf(). randf() would give the same variant a different picture on every
+	## capture, which turns a still-based comparison into a comparison of two random objects.
+	return 2.0 * fposmod(sin(x * 127.1) * 43758.5453, 1.0) - 1.0
+
 func set_trace_mode(value: String) -> void:
 	var wanted: String = value.strip_edges()
 	if wanted == "" or wanted == trace:
@@ -220,7 +259,12 @@ func generate_signal_at_time(t: float) -> float:
 			signal_value = 2.0 * abs(2.0 * (omega * t / (2.0 * PI) - floor(omega * t / (2.0 * PI) + 0.5))) - 1.0
 		3:  # Sawtooth wave
 			signal_value = 2.0 * (omega * t / (2.0 * PI) - floor(omega * t / (2.0 * PI) + 0.5))
-	
+		4:  # Impulse train — flat almost everywhere, one narrow pulse per period
+			var cycles = omega * t / (2.0 * PI)
+			signal_value = 1.0 if (cycles - floor(cycles)) < IMPULSE_DUTY else 0.0
+		5:  # Noise — no period. Deterministic in t so a sweep can reproduce a frame.
+			signal_value = _hash_noise(t)
+
 	# Add harmonics
 	if harmonics > 1:
 		for h in range(2, harmonics + 1):

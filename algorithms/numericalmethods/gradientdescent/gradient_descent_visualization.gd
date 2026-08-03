@@ -32,6 +32,9 @@ const COL_MINIMUM   := Color(0.2, 0.9, 0.4, 1.0)
 const COL_HESSIAN_P := Color(0.1, 0.6, 0.9, 0.9)   # positive eigenvalue
 const COL_HESSIAN_N := Color(0.9, 0.2, 0.2, 0.9)   # negative eigenvalue
 const COL_GRID      := Color(0.3, 0.3, 0.4, 0.3)
+## `axiom` only. The gradient field belongs to no runner, so it may not wear a
+## runner's colour — an instrument white-blue, the law having no team.
+const COL_FIELD     := Color(0.75, 0.78, 0.92, 1.0)
 const COL_LR_COLORS : Array = [
 	Color(0.9, 0.2, 0.2), Color(0.2, 0.8, 0.3), Color(0.2, 0.5, 0.9),
 	Color(0.9, 0.6, 0.1), Color(0.7, 0.2, 0.8),
@@ -61,6 +64,41 @@ const FN_PLATEAU: int = 3
 const FN_SCARP: int   = 4
 
 const BASINS: PackedStringArray = ["bowl", "valley", "plural", "plateau", "scarp"]
+
+# ── the evidence axis ──────────────────────────────────────────────────
+# `basin` settled WHAT is being descended. This settles what the artifact puts
+# in the frame as proof that a descent happened at all — and the shipped answer
+# was the maximal one, hard-coded: four trails, four markers and four live
+# gradient arrows, always, with no way for a map to ask for less or for more.
+#
+#   result    the four markers where the runners currently stand. No trails, no
+#             arrows: an optimizer is a POSITION, the answer with no working.
+#   trace     + the paths. Descent becomes a HISTORY — which is where SGD's
+#             zig-zag, Momentum's overshoot and Adam's straight run live; none
+#             of that is legible from a marker.
+#   longhand  + the local gradient at each runner, the quantity every step is
+#             actually computed from. THE SHIPPED PICTURE, unchanged.
+#   axiom     the instance gives way to the rule: the runners go, and -grad f is
+#             sampled over the whole field. Nobody is descending; the law is
+#             just standing there, and on `plateau` it visibly has nothing to
+#             say while on `scarp` the arrows either side of the face point at
+#             each other. This value is where the two axes finally argue.
+#
+# The word and the four values are the `evidence` family's, taken character for
+# character from example_1_7/1_9 and example_2_8/2_9 (which took them in turn
+# from koch_curve and box_counting_dimension). The family asks one question of a
+# thing in motion: what do you offer as PROOF that a law is moving it?
+#
+# THE DEFAULT DIFFERS FROM THE FAMILY'S and that is a fact about this artifact
+# rather than a drift in the word. The motion demos ship as `result` — a bare
+# ball, all their exhibits withheld. This one ships with its working already on
+# the table, so its shipped value is `longhand`, and a map that asks the Motion
+# 101 demos and this one for `longhand` still gets four answers to one question.
+const EVIDENCE: PackedStringArray = ["result", "trace", "longhand", "axiom"]
+
+## `axiom` grid resolution — 8 spans, so 9 x 9 = 81 samples, the same lattice
+## _init_hessian() reads the curvature on. One field, sampled two ways.
+const FIELD_RES: int = 8
 
 ## basin name -> function_preset index. One table so the word and the int cannot
 ## drift; every route (sweep @export, map token, VR FUNCTION button) goes through it.
@@ -103,6 +141,10 @@ const SCARP_SEAM: float = 0.00002
 ## _sync_basin_from_exports(); a scene or inspector that sets this and leaves
 ## `basin` at its default still wins, so nothing shipped changes shape.
 @export var function_preset: int = 0  # 0=bowl 1=valley 2=plural 3=plateau 4=scarp
+## Stage-2 DNA axis — how much of the descent is drawn. Costs no rebuild: every
+## value is a branch inside the per-frame ImmediateMesh pass, so a map or the
+## sweep can move it and the standing body is never touched.
+@export_enum("result", "trace", "longhand", "axiom") var evidence: String = "longhand"
 @export var learning_rate: float = 0.05
 @export var momentum_beta: float = 0.9
 @export var adam_beta1: float = 0.9
@@ -228,6 +270,7 @@ func _build_all() -> void:
 ## renamed to match — so a scene or an inspector that already asked for
 ## Rosenbrock keeps Rosenbrock instead of being quietly reset to the bowl.
 func _sync_basin_from_exports() -> void:
+	evidence = _pick_axis(evidence, EVIDENCE, "longhand")
 	basin = _pick_axis(basin, BASINS, "bowl")
 	if basin != "bowl":
 		function_preset = int(BASIN_PRESET.get(basin, FN_BOWL))
@@ -1257,8 +1300,13 @@ func _emit_surface_quad(x0: float, x1: float, z0: float, z1: float) -> void:
 	_surface_im.surface_set_normal(n)
 	_surface_im.surface_add_vertex(Vector3(x0, y01, z1))
 
+## The paths. `result` is the answer without the working and `axiom` has no
+## runner to have a history, so both leave the trail mesh empty — cleared and
+## never begun, rather than begun and left with no vertices.
 func _draw_optimizer_trails() -> void:
 	_trails_im.clear_surfaces()
+	if evidence == "result" or evidence == "axiom":
+		return
 	_trails_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	for opt in _optimizers:
@@ -1276,28 +1324,86 @@ func _draw_optimizer_trails() -> void:
 func _draw_optimizer_markers() -> void:
 	_arrows_im.clear_surfaces()
 	_markers_im.clear_surfaces()
-	_markers_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	for opt in _optimizers:
-		var pos: Vector2 = opt.pos
-		var y := minf(_eval(pos) * _y_scale + 0.1, 4.1)
-		var col: Color = opt.color
-		_im_diamond(_markers_im, Vector3(pos.x, y, pos.y), 0.15, col)
+	# The four runners themselves. Present at every value except `axiom`, where
+	# the whole claim is that no particular descent is being shown.
+	if evidence != "axiom":
+		_markers_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		for opt in _optimizers:
+			var pos: Vector2 = opt.pos
+			var y := minf(_eval(pos) * _y_scale + 0.1, 4.1)
+			var col: Color = opt.color
+			_im_diamond(_markers_im, Vector3(pos.x, y, pos.y), 0.15, col)
+		_markers_im.surface_end()
 
-	_markers_im.surface_end()
+	if evidence == "longhand":
+		# Draw gradient arrows at current positions — the quantity each step is
+		# computed from, in each runner's own colour. The shipped behaviour.
+		_arrows_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		for opt in _optimizers:
+			if opt.converged:
+				continue
+			var pos: Vector2 = opt.pos
+			var grad := _gradient(pos)
+			var dir := -grad.normalized()
+			var y := minf(_eval(pos) * _y_scale + 0.15, 4.15)
+			var tip := Vector3(pos.x + dir.x * 0.4, y, pos.y + dir.y * 0.4)
+			var base := Vector3(pos.x, y, pos.y)
+			_im_line_3d(_arrows_im, base, tip, opt.color as Color, 0.02)
+		_arrows_im.surface_end()
+	elif evidence == "axiom":
+		_draw_gradient_field()
 
-	# Draw gradient arrows at current positions
+
+## `axiom`: -grad f sampled on the 9 x 9 lattice, with no runner anywhere.
+##
+## Direction is normalised, because the direction is the local truth the update
+## rule consumes. LENGTH carries log|grad f| instead, and that is what makes the
+## value argue rather than decorate: on `plateau` every arrow collapses toward
+## the 0.12 floor because the surface has nothing to say, while on `scarp` the
+## two columns either side of the face point AT EACH OTHER — the honest local
+## derivative of a bowl on both sides, one of which is a lie about the cliff
+## standing between them.
+func _draw_gradient_field() -> void:
 	_arrows_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-	for opt in _optimizers:
-		if opt.converged:
-			continue
-		var pos: Vector2 = opt.pos
-		var grad := _gradient(pos)
-		var dir := -grad.normalized()
-		var y := minf(_eval(pos) * _y_scale + 0.15, 4.15)
-		var tip := Vector3(pos.x + dir.x * 0.4, y, pos.y + dir.y * 0.4)
-		var base := Vector3(pos.x, y, pos.y)
-		_im_line_3d(_arrows_im, base, tip, opt.color as Color, 0.02)
+
+	var dx: float = (_x_range.y - _x_range.x) / float(FIELD_RES)
+	var dz: float = (_z_range.y - _z_range.x) / float(FIELD_RES)
+
+	# One pass for the scale, so the ladder is relative to THIS surface. Without
+	# it Rosenbrock's 10^4 gradients and the plateau's 0.08 share a ruler and one
+	# of the two is a flat field of minimum-length stubs for the wrong reason.
+	var g_max: float = 0.0
+	var mags: Array[float] = []
+	for i in range(FIELD_RES + 1):
+		for j in range(FIELD_RES + 1):
+			var px: float = _x_range.x + float(i) * dx
+			var pz: float = _z_range.x + float(j) * dz
+			var m: float = _gradient(Vector2(px, pz)).length()
+			mags.append(m)
+			if m > g_max:
+				g_max = m
+	var denom: float = log(1.0 + maxf(g_max, 0.001))
+
+	var k: int = 0
+	for i2 in range(FIELD_RES + 1):
+		for j2 in range(FIELD_RES + 1):
+			var px2: float = _x_range.x + float(i2) * dx
+			var pz2: float = _z_range.x + float(j2) * dz
+			var p := Vector2(px2, pz2)
+			var grad := _gradient(p)
+			var mag: float = mags[k]
+			k += 1
+			if grad.length_squared() < 1e-12:
+				continue
+			var dir := -grad.normalized()
+			var t: float = clampf(log(1.0 + mag) / denom, 0.0, 1.0)
+			var arrow_len: float = 0.12 + 0.28 * t
+			var y: float = minf(_eval(p) * _y_scale + 0.15, 4.15)
+			var base := Vector3(p.x, y, p.y)
+			var tip := Vector3(p.x + dir.x * arrow_len, y, p.y + dir.y * arrow_len)
+			_im_line_3d(_arrows_im, base, tip, COL_FIELD, 0.02)
+
 	_arrows_im.surface_end()
 
 func _draw_convergence_trails() -> void:
@@ -1540,13 +1646,26 @@ func _update_labels() -> void:
 
 	match _mode:
 		Mode.OPTIMIZERS:
-			info_text = "f(x,y) = %s  |  lr=%.4f  b=%.2f  step=%d" % [_fn_name(), learning_rate, momentum_beta, _step_count]
-			for opt in _optimizers:
-				var status := "converged" if opt.converged else "f=%.4f" % [opt.value as float]
-				info_text += "\n%s: (%.2f, %.2f) %s" % [opt.name, (opt.pos as Vector2).x, (opt.pos as Vector2).y, status]
-			legend_text = "Red=SGD  Green=Momentum  Blue=Nesterov  Gold=Adam"
-			for opt2 in _optimizers:
-				legend_entries.append({"label": str(opt2.name).to_upper(), "color": opt2.color as Color})
+			if evidence == "axiom":
+				# The runners are still stepping under the hood, but none of them
+				# is in the frame. A readout rolling off four positions nobody can
+				# see, under a key strip naming four colours nobody can see, would
+				# be the label contradicting the picture.
+				# ASCII only: this string is baked by HangarKit.readout, and the
+				# em-dash the title uses never reaches the baker (the console
+				# title path returns early), so it is untested in this font.
+				info_text = "f(x,y) = %s  |  -grad f on a %d x %d lattice\nno optimizer placed - direction is the local truth,\nlength is log|grad f| relative to this surface" % [
+					_fn_name(), FIELD_RES + 1, FIELD_RES + 1]
+				legend_text = "the rule, not the run"
+				legend_entries.append({"label": "-GRAD f", "color": COL_FIELD})
+			else:
+				info_text = "f(x,y) = %s  |  lr=%.4f  b=%.2f  step=%d" % [_fn_name(), learning_rate, momentum_beta, _step_count]
+				for opt in _optimizers:
+					var status := "converged" if opt.converged else "f=%.4f" % [opt.value as float]
+					info_text += "\n%s: (%.2f, %.2f) %s" % [opt.name, (opt.pos as Vector2).x, (opt.pos as Vector2).y, status]
+				legend_text = "Red=SGD  Green=Momentum  Blue=Nesterov  Gold=Adam"
+				for opt2 in _optimizers:
+					legend_entries.append({"label": str(opt2.name).to_upper(), "color": opt2.color as Color})
 
 		Mode.CONVERGENCE:
 			info_text = "Adam on %s  |  b1=%.2f  b2=%.3f  step=%d" % [_fn_name(), adam_beta1, adam_beta2, _step_count]
@@ -1697,6 +1816,14 @@ func apply_grid_config(config: Dictionary) -> void:
 	var before_b1: float = adam_beta1
 	var before_b2: float = adam_beta2
 	var before_ss: float = step_speed
+
+	# ── Stage-2 DNA axis — `#evidence:axiom` ───────────────────────────────
+	# Deliberately NOT part of the rebuild test below. Every value of `evidence`
+	# is a branch in the per-frame draw, so the standing body is correct for all
+	# four already; rebuilding for it would free and rebuild an 8 m console to
+	# change which ImmediateMesh gets vertices next frame.
+	if config.has("evidence"):
+		evidence = _pick_axis(str(config["evidence"]), EVIDENCE, evidence)
 
 	# ── Stage-2 DNA axis — `#basin:plateau` ────────────────────────────────
 	if config.has("basin"):

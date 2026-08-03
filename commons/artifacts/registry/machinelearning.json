@@ -5273,6 +5273,8 @@
   },
   "pca_visualization": {
    "dna": {
+    "promoted": "2026-07-30",
+    "stage": "2 - variation",
     "axes": {
     "bearing": [
     "aligned",
@@ -5281,7 +5283,10 @@
     "curve",
     "plane"
     ]
-    }
+    },
+    "default": "bearing=aligned - aligned BUILDS NO MANIFOLD BODY. It is the @export default and the only value that adds no geometry, so both existing placements (Grown_DNA_Learning, ML_Gradient_Landscape) render exactly what they rendered before: the sample cloud, the principal-component rods, the two 3D label plates, nothing else. The one honest caveat is that the cloud is now drawn from a seeded RandomNumberGenerator (DATA_SEED) instead of the global unseeded randf(), so a given placement no longer matches any one pre-change run - but pre-change it matched no run either, since the cloud was redrawn differently on every load. Same generator code path, same distribution, same visual character; what changed is that it is now reproducible, which is the precondition for the still being evidence at all.",
+    "was": "no axis of its own. The cloud generator was a single hard-coded correlated-Gaussian draw, so PCA - an algorithm whose entire claim is that it finds the direction structure actually runs in - could only ever be shown one structure. Every placement and every capture met the same axis-aligned blob and the found principal components were a foregone conclusion.",
+    "note": "CAPTURE HAZARD, verified still present: setup_ui() builds a 450 x 800 screen-space Panel on a CanvasLayer during _build_all(), late enough that a single chrome-suppression pass misses it. In an earlier gallery that dark rectangle occupied one tile of five and measured the axis at 11.6% while the four clouds being compared were mutually identical - a number about the overlay, not the artifact. The capturer now suppresses chrome twice. The panel is safe to suppress: _build_3d_labels() builds the player-facing readout as billboarded 3D label plates (title at y=6.0, live stats at y=5.0), so nothing a player needs lives only on the CanvasLayer."
    },
    "category": "machinelearning",
    "complexity": "advanced",

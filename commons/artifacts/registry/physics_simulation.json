@@ -9734,7 +9734,7 @@
    "capacity": "WITNESS that three bodies under gravity have no formula — determinism and predictability are not the same thing",
    "category": "physics",
    "complexity": "advanced",
-   "description": "The infamous three-body problem: three gravitationally interacting masses with no closed-form solution. Tiny changes in initial conditions lead to wildly divergent trajectories — the original exemplar of deterministic chaos. DNA: configuration selects the initial conditions — pinwheel (the legacy start), the two famous periodic exceptions (figure_eight choreography, Lagrange's rotating triangle), hierarchical (tight binary plus distant third) and near_collision (nearly collinear, one body usually ejected). Use #configuration:.",
+   "description": "The infamous three-body problem: three gravitationally interacting masses with no closed-form solution. Tiny changes in initial conditions lead to wildly divergent trajectories — the original exemplar of deterministic chaos. DNA: configuration selects the initial conditions — pinwheel (the legacy start), the two famous periodic exceptions (figure_eight choreography, Lagrange's rotating triangle), hierarchical (tight binary plus distant third) and near_collision (nearly collinear, one body usually ejected). evidence selects what is drawn OF the motion, independently of which one starts - result (bodies alone), trace (the shipped fading trails), longhand (no history, but every pair connected with a crossbar sized by the force and the resultant drawn on each body) and axiom (the law on a slate, plus the barycentre and its straight track, the one predictable thing in the room). Use #configuration: and #evidence:.",
    "dna": {
     "promoted": "2026-07-29",
     "stage": "2 - variation",
@@ -9745,10 +9745,20 @@
       "lagrange",
       "hierarchical",
       "near_collision"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
      ]
     },
-    "default": "configuration=pinwheel - a deliberate no-op that restores the positions and velocities authored in threebodyproblem.tscn, so all 5 existing placements are byte-identical to before the promotion",
-    "was": "zero exports: three bodies frozen at one set of initial conditions in the .tscn, so the artifact could only ever show chaos and never the periodic solutions it argues against"
+    "default": "configuration=pinwheel, evidence=trace - a deliberate no-op on both axes. pinwheel restores the positions and velocities authored in threebodyproblem.tscn; trace is the shipped exhibit (trails on, 200 fading samples per body) and its branch of _apply_evidence is the single assignment trails_enabled = true, building no node at all. So all 5 existing placements are byte-identical, scene tree and capture AABB included",
+    "was": "zero exports: three bodies frozen at one set of initial conditions in the .tscn, so the artifact could only ever show chaos and never the periodic solutions it argues against",
+    "deepened": "2026-08-03 - added `evidence`. configuration says which universe starts; it says nothing about what the room is allowed to see of it, and that was frozen just as hard - three spheres and their fading trails, always. result is the bodies alone, position with no history: the answer with the working thrown away. trace is the shipped trails. longhand drops the history for the instant's working - a line between every pair carrying a crossbar sized by G m m / r^2, and on each body the resultant of the two pulls it is actually under, so the three separate attractions and their sum are on the geometry at once. axiom lets the instance give way to the rule: trails off, a slate carrying the law and Poincare's 1890 result, and the barycentre with its own track - which is a straight line however violent the dance, because total momentum is conserved. The one predictable thing in an exhibit whose whole claim is unpredictability. The physics is untouched in all four: _apply_gravitational_forces, _update_bodies and the integrator never see this axis.",
+    "independence": "the two axes are genuinely orthogonal - every configuration can be shown four ways and every way applies to all five configurations. They do interact honestly at axiom: figure_eight and lagrange have zero total momentum, so their barycentre track is a stationary point, while pinwheel and near_collision drift and draw the line. That is the axiom doing its job, not the axes colliding.",
+    "kin": "`evidence` with exactly result/trace/longhand/axiom is the family word, taken character for character from example_2_8_two_body_attraction_vr, example_2_9_n_body_attraction_vr, koch_curve, wave_interference_tank and the other siblings that already ask this question. This artifact is the direct successor of example_2_8 (two bodies -> three), so it should answer it in the same words. Note the default differs: those artifacts ship at result, this one has always drawn its trails and so ships at trace.",
+    "framing_note": "the overlay is built lazily and only outside trace/result, and the barycentre track is capped at 150 samples (BARY_TRACK_MAX) so it can never outgrow the bodies' own sprawl and starve the capture framing."
    },
    "dev_category": "physics_fields",
    "dev_themes": [

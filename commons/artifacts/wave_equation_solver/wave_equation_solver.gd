@@ -6,6 +6,56 @@ class_name WaveEquationSolver
 ## and viscous damping. Starts with a Gaussian pulse that propagates and
 ## reflects off the clamped edges like a struck drumhead.
 
+# ═══════════════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `boundary`
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# WHAT MAKES THIS A PHYSICAL CLAIM RATHER THAN A FORMULA.
+#
+# Everything this artifact exported was a dial on the same one experiment —
+# membrane size, grid resolution, height scale, wave speed, damping, pulse
+# amplitude and width. Not one of them changes what the solver is solving. The
+# equation u_tt = c²∇²u is identical on a drumhead, on an open pond, in an
+# anechoic tank and on a torus; the thing that distinguishes them is the
+# BOUNDARY CONDITION, and this solver had exactly one, welded twice into the
+# source: `for j in range(1, grid_res - 1)` leaves the edge at zero forever, and
+# _create_frame() builds four clamped bars around it to say so. That was never
+# offered as a choice.
+#
+#   boundary
+#     fixed       u = 0 on the rim. THE SHIPPED BUILD, byte for byte — the same
+#                 interior-only stencil and the same four brown clamped bars. A
+#                 struck drumhead: the crest comes back INVERTED off the edge.
+#     free        du/dn = 0. The rim is unheld; the edge row copies its neighbour
+#                 so the membrane can rise at its own border. Reflection WITHOUT
+#                 inversion — an open pipe end, a plate resting on corner posts.
+#                 The frame goes with it: four corner posts, no rail.
+#     absorbing   a sponge layer six cells deep tapering to 0.80 per substep, so
+#                 the wave leaves and does not come back. The claim that the
+#                 membrane is a window onto something larger rather than a closed
+#                 room. Drawn as the matte gutter that would do it in the world.
+#     periodic    opposite edges are the same edge; the stencil wraps. A wave
+#                 crossing the right rim arrives at the left. No frame at all —
+#                 flat coloured pairs instead, the topologist's identification
+#                 marks, because there is nothing here to clamp.
+#
+# WHAT A STILL SEES. Two things, and they are not the same thing. The FIELD
+# difference is real but time-dependent: at t = 0 all four are the identical
+# Gaussian and only diverge once the pulse has crossed to the rim, so a capture
+# taken early would photograph four identical drumheads. That is why the
+# boundary is also built into the FURNITURE, which is static and true at every
+# instant — a ring of upstanding bars, four corner posts, a wide dark gutter, or
+# two colour-paired flat strips. The value is legible in the frame whether or
+# not the wave has arrived yet, and once it has, the edge behaviour confirms it.
+@export_enum("fixed", "free", "absorbing", "periodic") var boundary: String = "fixed"
+
+## Allow-list. An unknown word in a map token falls back to the shipped clamped
+## drumhead rather than stranding a placement with a solver it cannot run.
+const BOUNDARIES: PackedStringArray = ["fixed", "free", "absorbing", "periodic"]
+## Depth of the absorbing sponge, in cells, and the per-substep floor at the rim.
+const SPONGE_CELLS: int = 6
+const SPONGE_FLOOR: float = 0.80
+
 # --- Configuration ---
 
 @export var membrane_size: float = 0.8
@@ -42,11 +92,14 @@ var _info_label: Label3D
 var _control_panel: Node3D
 var _damping_slider: Node
 var _speed_slider: Node
+## Built only for boundary != "fixed"; null on every shipped placement.
+var _boundary_label: Label3D = null
 
 var RackTpl = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
 
 func _ready() -> void:
+	_read_grid_config_meta()
 	_dx = membrane_size / float(grid_res - 1)
 	_init_grids()
 	_apply_gaussian_pulse(0.5, 0.5, initial_amplitude, initial_sigma)
@@ -87,6 +140,13 @@ func _apply_gaussian_pulse(cx: float, cy: float, amp: float, sigma: float) -> vo
 # --- Wave equation integration (finite differences) ---
 
 func _step_wave() -> void:
+	# `periodic` cannot be expressed as an edge treatment applied after an
+	# interior-only sweep — the wrap is in the stencil itself — so it takes its
+	# own loop rather than pretending to be a special case of this one.
+	if boundary == "periodic":
+		_step_wave_periodic()
+		return
+
 	var c2: float = wave_speed * wave_speed
 	var dt2: float = _dt * _dt
 	var dx2: float = _dx * _dx
@@ -109,8 +169,79 @@ func _step_wave() -> void:
 
 	# Boundary stays at zero (already initialized to 0)
 
+	var u_old: PackedFloat32Array = _u
+
+	if boundary == "free":
+		# du/dn = 0: the rim takes its neighbour's value, so the edge is free to
+		# rise. The interior sweep above already read those edge cells, which is
+		# what makes the reflection non-inverting.
+		u_new = _apply_free_edges(u_new)
+	elif boundary == "absorbing":
+		# A sponge on BOTH levels — tapering only the new one leaves the previous
+		# frame's energy to be re-injected by the leapfrog and the layer barely
+		# bites.
+		u_new = _apply_sponge(u_new)
+		u_old = _apply_sponge(u_old)
+
+	_u_prev = u_old
+	_u = u_new
+
+
+## Wrapped stencil: the right rim's neighbour is the left rim. Every cell is
+## interior, so there is no edge treatment at all — which is the claim.
+func _step_wave_periodic() -> void:
+	var c2: float = wave_speed * wave_speed
+	var dt2: float = _dt * _dt
+	var dx2: float = _dx * _dx
+	var factor: float = c2 * dt2 / dx2
+	var damp: float = 1.0 - damping
+
+	var n: int = grid_res
+	var u_new: PackedFloat32Array = PackedFloat32Array()
+	u_new.resize(n * n)
+
+	for j in range(n):
+		var jp: int = (j + 1) % n
+		var jm: int = (j - 1 + n) % n
+		for i in range(n):
+			var ip: int = (i + 1) % n
+			var im: int = (i - 1 + n) % n
+			var idx: int = j * n + i
+			var laplacian: float = (
+				_u[j * n + ip] + _u[j * n + im]
+				+ _u[jp * n + i] + _u[jm * n + i]
+				- 4.0 * _u[idx]
+			)
+			u_new[idx] = damp * (2.0 * _u[idx] - _u_prev[idx] + factor * laplacian)
+
 	_u_prev = _u
 	_u = u_new
+
+
+## Returns a copy — PackedFloat32Array is a value type, so a helper that mutated
+## its argument would quietly do nothing to the caller's array.
+func _apply_free_edges(arr: PackedFloat32Array) -> PackedFloat32Array:
+	var n: int = grid_res
+	for i in range(n):
+		arr[i] = arr[n + i]
+		arr[(n - 1) * n + i] = arr[(n - 2) * n + i]
+	for j in range(n):
+		arr[j * n + 0] = arr[j * n + 1]
+		arr[j * n + n - 1] = arr[j * n + n - 2]
+	return arr
+
+
+func _apply_sponge(arr: PackedFloat32Array) -> PackedFloat32Array:
+	var n: int = grid_res
+	for j in range(n):
+		for i in range(n):
+			var d: int = mini(mini(i, j), mini(n - 1 - i, n - 1 - j))
+			if d >= SPONGE_CELLS:
+				continue
+			var t: float = float(d) / float(SPONGE_CELLS)
+			var f: float = SPONGE_FLOOR + (1.0 - SPONGE_FLOOR) * t
+			arr[j * n + i] = arr[j * n + i] * f
+	return arr
 
 
 func _update_courant() -> void:
@@ -119,11 +250,33 @@ func _update_courant() -> void:
 
 # --- Frame (clamped boundary visual) ---
 
+## The rim is the boundary condition made furniture. `fixed` is the shipped build
+## unchanged; the other three replace it with what would actually hold — or not
+## hold — the membrane under that condition.
 func _create_frame() -> void:
 	_frame_node = Node3D.new()
 	_frame_node.name = "Frame"
 	add_child(_frame_node)
 
+	var want: String = String(boundary).strip_edges().to_lower()
+	if not BOUNDARIES.has(want):
+		want = "fixed"
+	boundary = want
+
+	if want == "free":
+		_build_frame_free()
+	elif want == "absorbing":
+		_build_frame_absorbing()
+	elif want == "periodic":
+		_build_frame_periodic()
+	else:
+		_build_frame_fixed()
+
+	_build_boundary_caption()
+
+
+## Byte for byte what shipped: four clamped bars around a drumhead pinned at u = 0.
+func _build_frame_fixed() -> void:
 	var half: float = membrane_size / 2.0
 	var bar_thickness: float = 0.008
 	var bar_height: float = 0.015
@@ -148,6 +301,112 @@ func _create_frame() -> void:
 		bar.material_override = frame_mat
 		bar.position = side[0]
 		_frame_node.add_child(bar)
+
+
+## Nothing runs along the rim, because nothing holds it. Four corner posts carry
+## the sheet and every edge between them is free to move.
+func _build_frame_free() -> void:
+	var half: float = membrane_size / 2.0
+
+	var post_mat: StandardMaterial3D = StandardMaterial3D.new()
+	post_mat.albedo_color = Color(0.35, 0.25, 0.18)
+	post_mat.roughness = 0.9
+
+	var corners: Array = [
+		Vector3(-half, 0, -half), Vector3(half, 0, -half),
+		Vector3(-half, 0, half), Vector3(half, 0, half),
+	]
+	for c in corners:
+		var post: MeshInstance3D = MeshInstance3D.new()
+		var cyl: CylinderMesh = CylinderMesh.new()
+		cyl.top_radius = 0.009
+		cyl.bottom_radius = 0.011
+		cyl.height = 0.05
+		post.mesh = cyl
+		post.material_override = post_mat
+		post.position = c + Vector3(0, -0.01, 0)
+		_frame_node.add_child(post)
+
+
+## A matte gutter the depth of the sponge layer. The membrane is a window onto a
+## larger sheet and the surround is where the energy goes to not come back.
+func _build_frame_absorbing() -> void:
+	var half: float = membrane_size / 2.0
+	var band: float = _dx * float(SPONGE_CELLS)
+	var outer: float = membrane_size + band * 2.0
+
+	var foam: StandardMaterial3D = StandardMaterial3D.new()
+	foam.albedo_color = Color(0.09, 0.08, 0.10)
+	foam.roughness = 1.0
+	foam.metallic = 0.0
+
+	var sides: Array = [
+		[Vector3(0, -0.002, -half - band * 0.5), Vector3(outer, 0.006, band)],
+		[Vector3(0, -0.002, half + band * 0.5), Vector3(outer, 0.006, band)],
+		[Vector3(-half - band * 0.5, -0.002, 0), Vector3(band, 0.006, membrane_size)],
+		[Vector3(half + band * 0.5, -0.002, 0), Vector3(band, 0.006, membrane_size)],
+	]
+	for side in sides:
+		var plate: MeshInstance3D = MeshInstance3D.new()
+		var box: BoxMesh = BoxMesh.new()
+		box.size = side[1]
+		plate.mesh = box
+		plate.material_override = foam
+		plate.position = side[0]
+		_frame_node.add_child(plate)
+
+
+## No rim at all. Two colour-paired strips instead — the identification marks that
+## say this edge IS that edge, which is the only honest thing to draw when the
+## domain has no border.
+func _build_frame_periodic() -> void:
+	var half: float = membrane_size / 2.0
+	var strip: float = 0.02
+
+	var mat_x: StandardMaterial3D = StandardMaterial3D.new()
+	mat_x.albedo_color = Color(0.20, 0.85, 0.95)
+	mat_x.emission_enabled = true
+	mat_x.emission = Color(0.20, 0.85, 0.95)
+	mat_x.emission_energy_multiplier = 0.9
+
+	var mat_z: StandardMaterial3D = StandardMaterial3D.new()
+	mat_z.albedo_color = Color(0.95, 0.30, 0.80)
+	mat_z.emission_enabled = true
+	mat_z.emission = Color(0.95, 0.30, 0.80)
+	mat_z.emission_energy_multiplier = 0.9
+
+	var sides: Array = [
+		[Vector3(-half - strip * 0.5, -0.001, 0), Vector3(strip, 0.004, membrane_size), mat_x],
+		[Vector3(half + strip * 0.5, -0.001, 0), Vector3(strip, 0.004, membrane_size), mat_x],
+		[Vector3(0, -0.001, -half - strip * 0.5), Vector3(membrane_size, 0.004, strip), mat_z],
+		[Vector3(0, -0.001, half + strip * 0.5), Vector3(membrane_size, 0.004, strip), mat_z],
+	]
+	for side in sides:
+		var plate: MeshInstance3D = MeshInstance3D.new()
+		var box: BoxMesh = BoxMesh.new()
+		box.size = side[1]
+		plate.mesh = box
+		plate.material_override = side[2]
+		plate.position = side[0]
+		_frame_node.add_child(plate)
+
+
+## Names the condition, and only when there is a choice to name. The shipped
+## reading builds no caption, so its two labels read exactly as they always did.
+func _build_boundary_caption() -> void:
+	if boundary == "fixed":
+		return
+	_boundary_label = Label3D.new()
+	_boundary_label.name = "BoundaryLabel"
+	_boundary_label.text = "boundary: " + boundary
+	_boundary_label.font_size = 14
+	_boundary_label.pixel_size = 0.001
+	_boundary_label.position = Vector3(0, height_scale * initial_amplitude + 0.015, 0)
+	_boundary_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_boundary_label.modulate = Color(0.95, 0.80, 0.55, 0.95)
+	_boundary_label.outline_size = 2
+	_boundary_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_frame_node.add_child(_boundary_label)
 
 
 # --- Surface mesh ---
@@ -357,7 +616,22 @@ func _update_info() -> void:
 		]
 
 
+## Grid config arrives twice and by two routes: GridInteractablesComponent sets
+## config_<key> metadata on the instantiated root and then calls apply_grid_config(),
+## and the capture harness calls apply_grid_config() before the scene enters the
+## tree. Reading the metadata on the way in means the rim is built once, correctly,
+## instead of built clamped and then torn down. Costs nothing when no token is
+## present: the export keeps its default and no existing placement changes.
+func _read_grid_config_meta() -> void:
+	var node: Node = self
+	while node != null:
+		if node.has_meta("config_boundary"):
+			boundary = str(node.get_meta("config_boundary"))
+		node = node.get_parent()
+
+
 ## Grid system integration — accept configuration from map data.
+## Token form: #boundary:free  ·  #boundary:absorbing  ·  #boundary:periodic
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("wave_speed"):
 		wave_speed = float(config_data["wave_speed"])
@@ -367,3 +641,26 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		height_scale = float(config_data["height_scale"])
 	if config_data.has("initial_amplitude"):
 		initial_amplitude = float(config_data["initial_amplitude"])
+
+	# GUARDED ON CHANGE, deliberately. The grid reaches this twice for one
+	# placement and a placement carrying any other token arrives with no
+	# `boundary` key at all; an unguarded rebuild would tear the rim down and
+	# raise it again on both of those, for nothing. `_frame_node != null` is the
+	# "_ready has already built once" test — before that, _ready does this itself.
+	if config_data.has("boundary"):
+		var b: String = str(config_data["boundary"]).strip_edges().to_lower()
+		if BOUNDARIES.has(b) and b != boundary:
+			boundary = b
+			if _frame_node != null:
+				_rebuild_frame()
+
+
+func _rebuild_frame() -> void:
+	if _frame_node != null:
+		# Out of the tree first — queue_free() alone leaves the old rim parented
+		# until the end of the frame and the new "Frame" would be auto-renamed.
+		remove_child(_frame_node)
+		_frame_node.queue_free()
+		_frame_node = null
+	_boundary_label = null   # parented to the frame; freed with it
+	_create_frame()

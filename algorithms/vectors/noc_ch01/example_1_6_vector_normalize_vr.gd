@@ -37,6 +37,14 @@ const MAT_NORMALIZED := preload("res://commons/resourses/materials/noc_vr/noc_vr
 #     unit    the same direction at |V| = 0.15 exactly. The two arrows land on
 #             top of each other and the readout says 0.150 → 1.000: the fixed
 #             point, where the operation does nothing at all.
+#     zero    |V| = 0. Added 2026-08-03, and it exposes behaviour the source
+#             already had and the declaration never named: _process guards on
+#             `magnitude > 0.01`, so at the origin BOTH arrows disappear and the
+#             readout goes on promising "mag: 0.000 → 1.000". That promise is the
+#             one place normalization is a lie — the origin has no direction, and
+#             the operation is undefined there, not equal to one. The shipped
+#             label says otherwise in every reading; here you can see it say so
+#             with nothing to point at.
 #
 #   reference_mode  what "length one" is measured against. The shipped demo has
 #                   no reference geometry whatsoever — the claim that the short
@@ -48,13 +56,35 @@ const MAT_NORMALIZED := preload("res://commons/resourses/materials/noc_vr/noc_vr
 #     sphere  the translucent unit shell as well as the rings: the set of all
 #             vectors of length one, as a place rather than an outline.
 #
-# Both defaults reproduce the pre-promotion artifact exactly. `none` builds not a
-# single node, and `long` leaves whatever vector the scene shipped with untouched.
-const INPUT_MODES: PackedStringArray = ["long", "short", "unit"]
+#   preimage  what normalization THROWS AWAY, drawn. reference_mode shows where
+#             every vector lands; this shows what lands there. Independent of both
+#             other axes: the target geometry and the single input vector do not
+#             determine the fibre, and the fibre does not move when either changes.
+#
+#     none    nothing. THE SHIPPED BUILD — not one node is constructed.
+#     ray     the whole ray {tV : t > 0} through the shipped direction, drawn at
+#             full length past the unit radius, with a bright bead where the input
+#             sits on it and a second bead at the unit radius where it lands.
+#             Every vector on that line normalizes to the same point, so the line
+#             IS the equivalence class the operation collapses.
+#             It is also this bench's answer to a shipped quirk: _update_arrow
+#             scales a 0.1 m cylinder by the length, so an arrow of length L
+#             renders as a 0.1·L nub at the midpoint of the span, and `input_mode`
+#             therefore moves two small stubs. The bead moves along a fixed
+#             full-length ruler instead, which is the same fact made legible.
+#     field   twelve fixed directions at assorted magnitudes, each with its image
+#             on the unit radius. The whole map from space onto the shell, at once:
+#             lengths differ, destinations are all the same distance out.
+#
+# Every default reproduces the pre-promotion artifact exactly. `none` (twice) builds
+# not a single node, and `long` leaves whatever vector the scene shipped with alone.
+const INPUT_MODES: PackedStringArray = ["long", "short", "unit", "zero"]
 const REFERENCE_MODES: PackedStringArray = ["sphere", "rings", "none"]
+const PREIMAGES: PackedStringArray = ["none", "ray", "field"]
 
-@export_enum("long", "short", "unit") var input_mode: String = "long"
+@export_enum("long", "short", "unit", "zero") var input_mode: String = "long"
 @export_enum("sphere", "rings", "none") var reference_mode: String = "none"
+@export_enum("none", "ray", "field") var preimage: String = "none"
 
 @export var vector: Vector3 = Vector3(0.25, 0.2, 0)
 
@@ -80,6 +110,20 @@ var _shipped_vector: Vector3 = Vector3(0.25, 0.2, 0)
 ## is ever constructed.
 var _ref_parts: Array[Node3D] = []
 
+## Nodes built by preimage. Empty on the shipped path, for the same reason.
+var _pre_parts: Array[Node3D] = []
+## The bead marking where the input sits on its own ray. Moved per frame under
+## `ray`; null under every other reading, including all three placements.
+var _input_bead: MeshInstance3D = null
+## The shipped direction, held so the ray does not swing when input_mode changes
+## the magnitude — and so `zero`, which has no direction of its own, still has a
+## fibre to be missing from.
+var _ray_dir: Vector3 = Vector3.RIGHT
+
+## How far out the ray is drawn: comfortably past the unit radius, so the bead at
+## |V| = 0.320 is on the ruler rather than off the end of it.
+const RAY_TIP: float = UNIT_LEN * 2.4
+
 func _ready() -> void:
 	_read_grid_config_meta()
 	_shipped_vector = vector
@@ -87,6 +131,7 @@ func _ready() -> void:
 	_setup_environment()
 	_spawn_arrows()
 	_apply_reference()
+	_apply_preimage()
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -158,6 +203,12 @@ func _process(_delta: float) -> void:
 
 	_status_label.text = "Normalize | mag: %.3f → 1.000" % magnitude
 
+	# Where the input currently sits on its own equivalence class. At |V| = 0 the
+	# bead is at the origin: on the ray, with no direction, which is exactly the
+	# case the readout above is lying about.
+	if _input_bead != null:
+		_input_bead.position = _ray_dir * minf(magnitude, RAY_TIP)
+
 func _update_arrow(arrow: MeshInstance3D, origin: Vector3, vec: Vector3) -> void:
 	var length := vec.length()
 	if length < 0.01:
@@ -192,6 +243,8 @@ func _read_grid_config_meta() -> void:
 			input_mode = str(node.get_meta("config_input_mode"))
 		if node.has_meta("config_reference_mode"):
 			reference_mode = str(node.get_meta("config_reference_mode"))
+		if node.has_meta("config_preimage"):
+			preimage = str(node.get_meta("config_preimage"))
 		node = node.get_parent()
 
 
@@ -207,11 +260,14 @@ func apply_grid_config(config: Dictionary) -> void:
 
 	var was_input: String = input_mode
 	var was_reference: String = reference_mode
+	var was_preimage: String = preimage
 
 	if config.has("input_mode"):
 		input_mode = str(config["input_mode"]).strip_edges().to_lower()
 	if config.has("reference_mode"):
 		reference_mode = str(config["reference_mode"]).strip_edges().to_lower()
+	if config.has("preimage"):
+		preimage = str(config["preimage"]).strip_edges().to_lower()
 
 	# Before _ready() the arrows do not exist yet and _ready() will do all of this
 	# itself, with the values just set.
@@ -223,6 +279,8 @@ func apply_grid_config(config: Dictionary) -> void:
 		_sync_controllers()
 	if reference_mode != was_reference:
 		_apply_reference()
+	if preimage != was_preimage:
+		_apply_preimage()
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -232,6 +290,11 @@ func apply_grid_config(config: Dictionary) -> void:
 ## One direction, three magnitudes. Everything is expressed against _shipped_vector
 ## so the direction is literally the shipped one and cannot drift.
 func _input_vector() -> Vector3:
+	# The origin has no direction, so this one is answered before the direction is
+	# asked for. _process's `magnitude > 0.01` guard then hides both arrows on its
+	# own — the behaviour was always there, it had just never been reachable.
+	if input_mode == "zero":
+		return Vector3.ZERO
 	var dir: Vector3 = _shipped_vector.normalized()
 	if dir.length() < 0.001:
 		return _shipped_vector
@@ -329,3 +392,116 @@ func _ref_ring(rot: Vector3) -> MeshInstance3D:
 	mi.material_override = mat
 	mi.rotation_degrees = rot
 	return mi
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PREIMAGE
+# ═══════════════════════════════════════════════════════════════════════════
+
+const PRE_RAY := Color(0.70, 0.74, 0.86)
+const PRE_INPUT := Color(1.0, 0.36, 0.72)
+const PRE_IMAGE := Color(1.0, 0.82, 0.45)
+const FIELD_COUNT: int = 12
+
+
+func _apply_preimage() -> void:
+	for part in _pre_parts:
+		if is_instance_valid(part):
+			part.queue_free()
+	_pre_parts.clear()
+	_input_bead = null
+
+	var want: String = String(preimage).strip_edges().to_lower()
+	if not PREIMAGES.has(want):
+		want = "none"                       # an unknown word keeps the bare shipped scene
+	preimage = want
+
+	if want == "none":
+		return                              # the legacy lineage: two arrows and a readout
+
+	var dir: Vector3 = _shipped_vector.normalized()
+	if dir.length() < 0.001:
+		dir = Vector3.RIGHT
+	_ray_dir = dir
+
+	var root := Node3D.new()
+	root.name = "Preimage_%s" % want
+	root.position = _center
+	add_child(root)
+	_pre_parts.append(root)
+
+	if want == "ray":
+		root.add_child(_pre_rod(dir * RAY_TIP, 0.0026, PRE_RAY, 0.30))
+		# Where the whole ray lands. Fixed at the unit radius, because that is the
+		# claim: every point on the line above maps to this one point.
+		root.add_child(_pre_bead(dir * UNIT_LEN, 0.0105, PRE_IMAGE))
+		_input_bead = _pre_bead(Vector3.ZERO, 0.0135, PRE_INPUT)
+		root.add_child(_input_bead)
+		return
+
+	# field — twelve directions, twelve different magnitudes, twelve images that
+	# are all the same distance out. Deterministic by index: no randf, so the
+	# variant is the same object every time it is photographed.
+	for i in range(FIELD_COUNT):
+		var d: Vector3 = _field_dir(i)
+		var m: float = 0.045 + 0.032 * float(i % 5)
+		root.add_child(_pre_rod(d * m, 0.0016, PRE_RAY, 0.18))
+		root.add_child(_pre_bead(d * UNIT_LEN, 0.0075, PRE_IMAGE))
+
+
+## A Fibonacci spiral on the sphere — even coverage without a random number, so
+## `field` photographs identically every run.
+func _field_dir(i: int) -> Vector3:
+	var y: float = 1.0 - (float(i) + 0.5) * (2.0 / float(FIELD_COUNT))
+	var r: float = sqrt(maxf(0.0, 1.0 - y * y))
+	var t: float = float(i) * 2.399963
+	return Vector3(cos(t) * r, y, sin(t) * r)
+
+
+## A rod from the parent's origin out to `vec`. The basis is built by hand rather
+## than with look_at: look_at works in GLOBAL space and needs the node in the tree,
+## and these are oriented at build time in the artifact's own frame, where a map
+## may have placed the whole bench at any transform.
+func _pre_rod(vec: Vector3, radius: float, col: Color, emit: float) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = radius
+	cyl.bottom_radius = radius
+	cyl.height = 1.0
+	mi.mesh = cyl
+	mi.material_override = _pre_mat(col, emit)
+
+	var l: float = vec.length()
+	if l < 0.001:
+		mi.visible = false
+		return mi
+	var yv: Vector3 = vec / l
+	var ref: Vector3 = Vector3.UP
+	if absf(yv.dot(ref)) > 0.999:
+		ref = Vector3.RIGHT
+	var xv: Vector3 = ref.cross(yv).normalized()
+	var zv: Vector3 = xv.cross(yv)
+	mi.transform = Transform3D(Basis(xv, yv * l, zv), vec * 0.5)
+	return mi
+
+
+func _pre_bead(pos: Vector3, radius: float, col: Color) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var s := SphereMesh.new()
+	s.radius = radius
+	s.height = radius * 2.0
+	mi.mesh = s
+	mi.material_override = _pre_mat(col, 1.0)
+	mi.position = pos
+	return mi
+
+
+func _pre_mat(col: Color, emit: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = col
+	m.roughness = 0.6
+	if emit > 0.0:
+		m.emission_enabled = true
+		m.emission = col
+		m.emission_energy_multiplier = emit
+	return m

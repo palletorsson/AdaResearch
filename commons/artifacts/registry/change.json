@@ -486,6 +486,29 @@
    }
   },
   "zeno_staircase": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "tick": [
+      "once",
+      "coarse",
+      "fine",
+      "dense",
+      "limit"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand"
+     ]
+    },
+    "default": "tick=fine, evidence=longhand - fine maps to samples=9 and longhand draws the amber curve, the staircase, the secant and its tag, which is the shipped build line for line; the dot radius is now min(0.008, tick_pitch*0.45) and at nine samples the cap is 0.044, so the 0.008 constant is untouched. Zero placements in any map_data.json (the only other file naming this token is its own dressing room), so nothing standing changes either way.",
+    "was": "samples/span/amp and three colours were @export, but the ONLY route to them was an apply_grid_config that assigned the variable after _ready had already built with 9 and never rebuilt - the knob turned and nothing moved. The artifact ends on 'shrink the frame and the staircase gets finer; it never becomes the curve' and no placement could test the sentence.",
+    "note": "tick is the halving argument as one ladder, x3 either side of the shipped nine: once=1 (the whole motion as a single frozen frame), coarse=3, fine=9, dense=27, limit=81 - where the eye stops being able to tell and the record is STILL a staircase. It moves the secant too, since the secant is a chord over one frame: at limit it lies visually along the tangent while remaining, by construction, not it. evidence is what the machine puts in the frame for you to check its record against: result = the staircase alone, which looks perfectly correct because there is nothing in shot it could be wrong about; trace = + the true continuous curve; longhand = + the extended secant and its tag. The caption plate is present at every value of both axes, so a measured bite is a bite in the drawing and never in the label.",
+    "kin": "evidence is the family word (example_1_7 / 1_9 / 2_8 / 2_9, koch_curve, box_counting_dimension, sine_wave_controller), taken character for character. sine_wave_controller is the precedent for a three-value member: there is no fourth thing to withhold here, since the rule is already stated in words on the plate at every value. THE DEFAULT DIFFERS FROM THE FAMILY'S - the motion demos ship as `result` with every exhibit withheld, this one ships with its whole working already on the table - and that is a fact about the artifact, not a drift in the word.",
+    "still_note": "tick is the strong axis in pixels: once vs limit is 1 step against 81 and changes the picture wholesale. evidence is the sharper claim but the THINNER measurement - the amber curve it withholds is 180 segments at 4 mm on a 1.0 x 0.44 m panel, so expect result-vs-trace to land near the 3% line and crop-recheck before believing an INERT verdict on it."
+   },
    "category": "change",
    "complexity": "intermediate",
    "description": "The change (calculus) seam. Motion is continuous; the machine reads at frame ticks and holds between (Zeno's arrow, frozen then jump). The amber curve vs the blue staircase; the 'instantaneous' rate it reports is a secant over one frozen frame, not the tangent.",

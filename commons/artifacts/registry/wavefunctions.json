@@ -5831,17 +5831,30 @@
    "dna": {
     "promoted": "2026-07-29",
     "stage": "2 - variation",
+    "deepened": "2026-08-03",
     "axes": {
      "surface": [
       "glass",
       "nodal",
       "lobed",
       "wire"
+     ],
+     "mode": [
+      "l3_m2",
+      "l1_m0",
+      "l2_m0",
+      "l2_m1",
+      "l4_m4",
+      "l5_m2"
      ]
     },
-    "default": "surface=glass - the shared unit sphere under the shared blue glass material, assigned and never mutated, so all 4 maps (8 placed cells) are unchanged",
-    "was": "no exports: a plain translucent ball with a lit point orbiting outside it. The artifact is named after Y_l^m and never drew one - the mode existed only as the ratio of two orbit speeds, traced out over time and therefore invisible to a still.",
-    "note": "surface asks what a spherical harmonic IS on the object claiming to be one: a field painted on a fixed sphere (nodal), a shape the sphere is deformed into (lobed), or only the coordinate cage the mode divides (wire). A second axis for the mode itself (l, m) was deliberately NOT declared: at surface=glass nothing in the frame depends on l or m, so a still-based critic would report it INERT and the verdict would be about the coupling, not the design. harmonic_l / harmonic_m ship as plain exports instead."
+    "default": "surface=glass, mode=l3_m2 - the shared unit sphere under the shared blue glass material, assigned and never mutated, and l3_m2 sets exactly the harmonic_l=3 / harmonic_m=2 the exports already carried. No map passes any config on this token, so all 4 maps (8 placed cells) render byte for byte as before.",
+    "was": "no exports: a plain translucent ball with a lit point orbiting outside it. The artifact is named after Y_l^m and never drew one - the mode existed only as the ratio of two orbit speeds, traced out over time and therefore invisible to a still. After the first pass it could draw a harmonic, but only ever the SAME one: l and m were plain ints nobody set.",
+    "note": "surface asks what a spherical harmonic IS on the object claiming to be one: a field painted on a fixed sphere (nodal), a shape the sphere is deformed into (lobed), or only the coordinate cage the mode divides (wire). mode asks WHICH one, over real (l, m) pairs - the dipole, two readings of degree 2 that separate l from m, a sectoral l=m, and a fine high-degree band. l1_m0 vs l4_m4 is the argument: l counts sign changes, m counts how many of them run around the equator.",
+    "coupling": "mode is only visible at surface != glass, which is what glass means. That is why it was withheld in the first pass and why it is safe now: build_dna_gallery sweeps the first TWO declared axes as a cross product, and surface is declared first, so mode is always measured AT nodal/lobed/wire and never alone. At the default --max=9 the sweep is surface(4) x mode(first 2) = 8 frames; --max=24 gives the full 4 x 6. Expect the two surface=glass frames of any mode pair to be identical - that is the axis reporting itself honestly, not an inert one.",
+    "measured": "mean |Y| difference between any two declared pairs runs 0.41-0.75 on a [-1,1] field over a 144-point theta/phi grid; the lobed radius differs by 0.16-0.51 on a unit sphere; the wire cage changes latitude and meridian counts for every pair except l2_m0 vs l2_m1, which share a cage and differ only in field.",
+    "framing": 0.35,
+    "framing_why": "the 2026-07-29 sweep reported subject_pct 2.647 - the body carrying BOTH axes was under 3 percent of the frame, and every surface pair scored 1.9-2.5 percent because of it, not because the axis is weak. The capture AABB counts MeshInstance3D only: that is the unit sphere plus the 0.1 m orbiting point at radius 2, so one small far-flung mesh sets the fit radius to 3.6 when the subject's is 1. 0.35 undoes roughly that inflation (subject to about 14 percent) and still keeps the orbiting point inside the frame at every phase, so nothing enters or leaves between variants. Capture-bench only - no placement is affected."
    },
    "category": "waves",
    "complexity": "advanced",
@@ -8871,11 +8884,20 @@
    "dna": {
     "promoted": "2026-07-29",
     "stage": "2 - variation",
+    "deepened": "2026-08-03",
     "axes": {
      "domain": [
       "time",
       "frequency",
       "both"
+     ],
+     "waveform": [
+      "sine",
+      "square",
+      "impulse",
+      "triangle",
+      "sawtooth",
+      "noise"
      ],
      "trace": [
       "samples",
@@ -8883,9 +8905,11 @@
       "ribbon"
      ]
     },
-    "default": "domain=time, trace=samples - the frequency bars have always been built and immediately hidden, and the time signal has always been 20 discrete spheres, so all 4 existing placements are unchanged",
-    "was": "no exports on the scene root: an artifact named after a transform that showed only one side of it, because the Compute FFT button that reveals the other side is a Control node map placements suppress as demo chrome",
-    "note": "domain asks which side of the transform is standing in the room; trace asks how much of the sampling is admitted (markers only, stems down to the zero line, or a filled continuum with no markers at all). The same question additive_wave_demo asks from the synthesis side."
+    "default": "domain=time, trace=samples, waveform=sine - the frequency bars have always been built and immediately hidden, the time signal has always been 20 discrete spheres, and sine is signal_type 0, which is both the SignalTypeSlider default and the SignalGenerator export default. No map passes any config on this token, so all 4 existing placements are unchanged.",
+    "was": "no exports on the scene root: an artifact named after a transform that showed only one side of it, because the Compute FFT button that reveals the other side is a Control node map placements suppress as demo chrome. After the first pass both sides could be shown, but only ever of the SAME signal: generate_signal_at_time already held square, triangle and sawtooth, and the only thing that could select them was the same suppressed UI.",
+    "note": "domain asks which side of the transform is standing in the room; trace asks how much of the sampling is admitted (markers only, stems down to the zero line, or a filled continuum with no markers at all); waveform asks what is being transformed, which is the question that makes the other two worth asking - a bench that can only transform one signal cannot show that different signals have different spectra, and that is the entire content of the idea. impulse and noise are the two new shapes: both unremarkable in the time picture and loud across every bin, which is the uncertainty argument stated as a pair of tiles.",
+    "sweep": "axes are declared domain, waveform, trace deliberately - build_dna_gallery sweeps the first TWO as a cross product, so the default --max=9 gives domain(3) x waveform(sine, square, impulse) = 9 frames, both sides of the transform against the three most-separated signals. trace was measured in the 2026-07-29 pass and needs a dedicated run to be re-measured.",
+    "measured": "simulated on the shipped sampling (freq 1.1, amp 1.1, 20 points at 0.5, 16 bins at 0.1) before the code was written. Frequency-bar peaks in world units: sine 3.4, square 5.0, impulse 15.0, triangle 26.8, sawtooth 1.2, noise 9.6. Time-domain sample heights are distinct patterns at every phase tested; impulse in particular is a flat zero line with one to three spikes. noise uses a hash of t, not randf(), so a variant renders the same picture twice."
    },
    "category": "waves",
    "complexity": "expert",

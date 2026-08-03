@@ -3876,15 +3876,29 @@
   },
   "gradient_descent_visualization": {
    "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
     "axes": {
-    "basin": [
-    "bowl",
-    "valley",
-    "plural",
-    "plateau",
-    "scarp"
-    ]
-    }
+     "basin": [
+      "bowl",
+      "valley",
+      "plural",
+      "plateau",
+      "scarp"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "default": "basin=bowl, evidence=longhand - longhand is the four trails, the four markers and the four live gradient arrows, i.e. the shipped OPTIMIZERS picture branch for branch; the arrow block is the original code moved under an `if` and nothing else. All 5 existing placements (Cabinet_Gallery, Disposition_Test_Rooms, Grown_DNA_Algorithms, MachineLearning_Evolving_Creatures, ML_Evolution) are plain tokens with no config, so they get exactly what they got before.",
+    "was": "basin was promoted earlier and lifted function_preset out of apply_grid_config-only reach. What was still hard-coded was the DISCLOSURE: trails, markers and per-runner gradient arrows were drawn unconditionally, so no map could ask this artifact for the answer without the working, or for the rule without the run.",
+    "note": "evidence is what the artifact offers as proof that a descent happened. result = the four markers alone, an optimizer as a POSITION. trace = + the paths, where SGD's zig-zag, Momentum's overshoot and Adam's straight run actually live - none of that is legible from a marker. longhand = + the local gradient at each runner. axiom = the runners go and -grad f is sampled on the same 9 x 9 lattice the HESSIAN mode reads curvature on, direction normalised (the direction is the local truth the update rule consumes) and length carrying log|grad f| scaled to THIS surface. axiom is where the two axes argue: on plateau every arrow collapses toward the length floor because the surface has nothing to say, and on scarp the columns either side of the face point at each other - both derivatives honest about the bowl, one of them a lie about the cliff between them. The readout and key strip switch with it, because a legend naming four colours none of which is in frame is the label contradicting the picture.",
+    "kin": "evidence is taken character for character from the family (example_1_7 / 1_9 / 2_8 / 2_9, koch_curve, box_counting_dimension, three_body_problem) - one question asked of a thing in motion: what do you put in the frame as PROOF that a law is moving it? THE DEFAULT DIFFERS FROM THE FAMILY'S. The motion demos ship as `result`, a bare ball with every exhibit withheld; this one ships with its whole working already on the table, so it ships as `longhand`. A map that asks all of them for `longhand` still gets one vocabulary and several answers, which is the test of the shared word.",
+    "still_note": "evidence needs no rebuild - all four values are branches inside the per-frame ImmediateMesh pass, so apply_grid_config sets the word and never touches the standing 8 m console. Sweeping evidence on the DEFAULT basin (bowl) understates it: bowl's four runners converge to nearly the same short path, so result-vs-trace is small there. Sweep it on `valley` or `plural`, where the trails are long and separate, or measure the pair basin=scarp x evidence=axiom, which is the strongest single frame this artifact can produce.",
+    "framing_note": "the axis lives in the 8 x 8 m field on the deck, not on the console body, so a fit-by-diagonal that includes the legs and the bay will shrink the field to a fraction of frame. Check subject % before reading any verdict on either axis."
    },
    "category": "algorithms",
    "complexity": "intermediate",
@@ -7500,13 +7514,18 @@
   },
   "self_organizing_patterns": {
    "dna": {
+    "promoted": "2026-07-30",
+    "stage": "2 - variation",
     "axes": {
     "cue": [
     "trace",
     "neighbour",
     "slope"
     ]
-    }
+    },
+    "default": "cue=trace - trace resolves through _mode_for_cue() to STIGMERGY, which is the mode _mode was hard-pinned to before the promotion, so all 10 existing placements open on the deposit heatmap they already opened on. Draws come off one seeded _rng (BUILD_SEED) rather than the global stream, and seed()/randomize() is never called, so the artifact neither consumes nor reseeds the process-wide RNG other artifacts in the same map are drawing from.",
+    "was": "no axis of its own. _mode was pinned to STIGMERGY and the other two modes were reachable only by pressing MODE in the headset - an artifact built to argue that order has three possible sources shipped exactly one of them to every map and every capture. The MODE button now walks `cue` rather than going behind it, so the headset and the map token cannot disagree about what is on screen.",
+    "note": "NOT the reaction_diffusion inert class. The three values are not three parameter settings of one field - they change which readout is built and where. `neighbour` clears the centre plate and adds a 2.0 x 4.8 m phase graph at x -5.5..-3.5, two metres of geometry no other value builds and on the opposite side of the body; `trace` and `slope` build the right-hand order bar that `neighbour` removes. The differences are gross layout, not fine texture, so they survive a still. A fourth no-medium value (all coupling off, empty field) was considered and cut: a blank plate is how a render scores INERT, and it is not an argument."
    },
    "category": "emergence",
    "complexity": "intermediate",

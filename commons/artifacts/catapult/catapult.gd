@@ -42,6 +42,39 @@ var max_live_projectiles: int = 5
 ##   gravity:    only the given; the throw is left unstated
 @export_enum("sum", "components", "velocity", "gravity") var vectors: String = "sum"
 
+## throw — the initial condition the machine is BUILT to deliver. foresight and
+## vectors both draw the same arc in different amounts; until this axis existed
+## there was only ever one arc to draw. Every catapult in the world stood at
+## 50 deg / 9.0 m/s, so the artifact's own claim — that you compose the parabola
+## by writing direction and magnitude — was never once demonstrated by a placement.
+## The four non-default values are a 2x2 around the shipped throw: two turn the
+## DIRECTION at unchanged magnitude, two turn the MAGNITUDE at unchanged direction.
+##   balanced: a deliberate NO-OP. Leaves default_angle_deg / default_force exactly
+##             as the scene (or a map's #angle:/#force: config) set them.
+##   mortar:   75 deg, same force. Steep and near — the arm stands almost upright
+##             and most of the throw is spent going up and coming back.
+##   flat:     20 deg, same force. A low line, and SHORTER than balanced: with
+##             mortar it brackets the 45 deg optimum from both sides.
+##   heavy:    same 50 deg aim, 13 m/s. Identical direction, more magnitude, and
+##             the range goes as v^2 — twice the arc for half again the speed.
+##   weak:     same 50 deg aim, 5 m/s. The other half of the same lesson.
+@export_enum("balanced", "mortar", "flat", "heavy", "weak") var throw: String = "balanced"
+
+## [angle_deg, force] per throw. "balanced" is absent ON PURPOSE — it means "use
+## whatever the scene/config authored", which is how the 4 shipped placements stay
+## byte-identical. Values sit inside the shipped 10..80 deg / 3..16 m/s limits, so
+## nothing is clamped away and the sliders can still walk anywhere from here.
+const THROWS := {
+	"mortar": [75.0, 9.0],
+	"flat": [20.0, 9.0],
+	"heavy": [50.0, 13.0],
+	"weak": [50.0, 5.0],
+}
+
+## Force the counterweight block was modelled against. At this force the block is
+## its shipped size, so `balanced` never touches the geometry.
+const THROW_REFERENCE_FORCE: float = 9.0
+
 # Colors
 var frame_color: Color = Color(0.32, 0.22, 0.14)        # wood-brown frame
 var metal_color: Color = Color(0.25, 0.27, 0.30)        # metal fittings
@@ -65,6 +98,7 @@ const ARROW_THICKNESS: float = 0.018
 var _arm_pivot: Node3D = null            # rotates to show launch angle
 var _arm_tip: Node3D = null              # marker at end of arm (basket origin)
 var _basket: Node3D = null
+var _counterweight: MeshInstance3D = null   # scaled by the `throw` axis only
 var _velocity_arrow: Node3D = null
 var _gravity_arrow: Node3D = null
 var _vx_arrow: Node3D = null            # built lazily, only for vectors = components
@@ -98,8 +132,9 @@ signal fired(launch_velocity: Vector3)
 # ═════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
-	_angle_deg = clamp(default_angle_deg, min_angle_deg, max_angle_deg)
-	_force = clamp(default_force, min_force, max_force)
+	# At throw = "balanced" this is exactly the two clamps that stood here before
+	# the axis existed, so the shipped placements build unchanged.
+	_apply_throw()
 
 	_projectile_container = Node3D.new()
 	_projectile_container.name = "Projectiles"
@@ -236,6 +271,10 @@ func _build_arm() -> void:
 	weight.material_override = _make_material(counterweight_color, 0.0, 0.55, 0.5)
 	weight.position = Vector3(0.0, 0.0, -0.40)
 	_arm_pivot.add_child(weight)
+	_counterweight = weight
+	# The counterweight is machine build, not aim: it follows the `throw` axis and
+	# is left alone by the FORCE slider. At `balanced` it is never touched at all.
+	_apply_counterweight_scale()
 
 	# Tip marker (basket origin) at the end of the long beam
 	_arm_tip = Node3D.new()
@@ -528,6 +567,35 @@ func _apply_angle_to_arm() -> void:
 		return
 	# Rotating about X by -angle lifts local +Z up toward +Y.
 	_arm_pivot.rotation = Vector3(deg_to_rad(-_angle_deg) + _rest_angle_offset, 0.0, 0.0)
+
+
+## Write the chosen initial condition into the live angle/force.
+##
+## "balanced" is the else-branch and is the two clamps _ready always did, reading
+## default_angle_deg / default_force — which _apply_throw never overwrites. So a
+## map that switches to `mortar` and back to `balanced` lands on the authored
+## throw again, and a map that says nothing gets the shipped 50 deg / 9.0 m/s.
+func _apply_throw() -> void:
+	if THROWS.has(throw):
+		var entry: Array = THROWS[throw]
+		_angle_deg = clamp(float(entry[0]), min_angle_deg, max_angle_deg)
+		_force = clamp(float(entry[1]), min_force, max_force)
+	else:
+		_angle_deg = clamp(default_angle_deg, min_angle_deg, max_angle_deg)
+		_force = clamp(default_force, min_force, max_force)
+	_apply_counterweight_scale()
+
+
+## Size the counterweight block against the throw it is built to deliver: mass
+## goes as volume, so the edge scales with the cube root of the force ratio.
+## Guarded on THROWS so `balanced` — including a placement that overrides the
+## force through config — leaves the block at the size it was modelled.
+func _apply_counterweight_scale() -> void:
+	if _counterweight == null or not THROWS.has(throw):
+		return
+	var ratio: float = maxf(_force, 0.1) / THROW_REFERENCE_FORCE
+	var edge: float = pow(ratio, 1.0 / 3.0)
+	_counterweight.scale = Vector3(edge, edge, edge)
 
 
 func _refresh_visuals() -> void:
@@ -913,6 +981,21 @@ func apply_grid_config(config: Dictionary) -> void:
 		var vmode: String = str(config["vectors"])
 		if vmode in ["sum", "components", "velocity", "gravity"]:
 			vectors = vmode
+	# `throw` is read after angle/force above, so an explicit #throw: wins over an
+	# explicit #angle:/#force: in the same token. Unknown strings are dropped.
+	var touched_raw_launch: bool = config.has("angle") or config.has("default_angle")
+	if config.has("force") or config.has("default_force"):
+		touched_raw_launch = true
+	if config.has("throw"):
+		var t: String = str(config["throw"])
+		if t != throw and (t == "balanced" or THROWS.has(t)):
+			throw = t
+			_apply_throw()
+	elif touched_raw_launch and THROWS.has(throw):
+		# A named throw is already in force and this config only moved the raw
+		# angle/force defaults; the branches above wrote them into _angle_deg /
+		# _force, so put the throw back on top.
+		_apply_throw()
 
 	# If already built, push the new values into the live scene. This is a
 	# redraw, not a rebuild — no node is freed and none is created unless the

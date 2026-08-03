@@ -42,10 +42,47 @@ extends Node3D
 #   wire  — the theta/phi cage alone, l latitudes and 2m meridians. The coordinate system
 #           without the field: what the mode divides, before it says anything.
 @export_enum("glass", "nodal", "lobed", "wire") var surface: String = "glass"
-## Degree and order of the harmonic the patterned surfaces draw. Not declared as an axis:
-## at surface=glass nothing in the frame depends on them, so a still cannot measure them.
+## Degree and order of the harmonic the patterned surfaces draw. Set by `mode` below; a map
+## may still override either directly, and an explicit override wins over the named pair.
 @export var harmonic_l: int = 3
 @export var harmonic_m: int = 2
+
+# -----------------------------------------------------------------------------
+# DEEPENED 2026-08-03 — the second axis: mode
+# -----------------------------------------------------------------------------
+# The first pass gave the object a body and left it with ONE harmonic. harmonic_l/harmonic_m
+# shipped as plain ints nobody set, and the only "mode" a visitor was ever told about was the
+# ratio orbit_speed_phi / orbit_speed_theta — a spherical Lissajous figure traced out over
+# time, and therefore invisible to a still by construction. The recurrence in
+# _assoc_legendre has always been general in l and m; only the declaration was singular.
+# An artifact named after Y_l^m that can draw exactly one Y_l^m is the first finding again,
+# one level in.
+#
+#   l3_m2 — the shipped pair, byte for byte.
+#   l1_m0 — the dipole. One nodal circle at the equator; the smallest thing the word means.
+#   l2_m0 — zonal: three latitude bands, no dependence on longitude anywhere on the sphere.
+#   l2_m1 — same degree, one unit of order: the bands break into four lobes. l sets how many
+#           times the field changes sign at all; m sets how much of that runs around.
+#   l4_m4 — sectoral: every sign change runs around the equator, none across it. The
+#           complement of l2_m0, and the pair of them is the whole argument about l vs m.
+#   l5_m2 — high degree, low order; fine banding, still resolvable by the 48x96 mesh.
+#
+# The pairs are separated in world space, not by eye: mean |Y| difference over a 144-point
+# grid runs 0.41-0.75 on a [-1,1] field, and the lobed radius differs by 0.16-0.51 on a unit
+# sphere. At surface=glass the frame depends on neither, which is exactly what glass claims.
+const MODES := {
+	"l3_m2": [3, 2],
+	"l1_m0": [1, 0],
+	"l2_m0": [2, 0],
+	"l2_m1": [2, 1],
+	"l4_m4": [4, 4],
+	"l5_m2": [5, 2],
+}
+@export_enum("l3_m2", "l1_m0", "l2_m0", "l2_m1", "l4_m4", "l5_m2") var mode: String = "l3_m2"
+
+## A map that names harmonic_l or harmonic_m directly outranks the named pair — otherwise
+## _ready would silently reset it to the mode's l/m and the override would look ignored.
+var _harmonic_override: bool = false
 
 const SPHERE_RINGS: int = 48
 const SPHERE_SEGMENTS: int = 96
@@ -91,11 +128,22 @@ var trail_index: int = 0
 var time: float = 0.0
 
 func _ready() -> void:
+	# Default mode is l3_m2, which sets exactly the l and m the exports already carried, so a
+	# placement that says nothing is untouched by this line.
+	if not _harmonic_override:
+		_apply_mode()
 	_create_spheres()
 	_create_trail()
 	_setup_audio()
 	_setup_controls()
 	print("SphericalHarmonics: Ready - Mario Mode Activated! (Optimized)")
+
+func _apply_mode() -> void:
+	if not MODES.has(mode):
+		return
+	var lm: Array = MODES[mode]
+	harmonic_l = int(lm[0])
+	harmonic_m = int(lm[1])
 
 func _create_spheres() -> void:
 	# Large sphere (center) - body chosen by the `surface` axis
@@ -496,12 +544,21 @@ func apply_grid_config(config: Dictionary) -> void:
 		if wanted != "" and wanted != surface:
 			surface = wanted
 			dirty = true
+	# mode BEFORE the raw l/m, so a map that names both gets the override it asked for.
+	if config.has("mode"):
+		var wanted_mode: String = str(config["mode"]).strip_edges()
+		if wanted_mode != "" and wanted_mode != mode and MODES.has(wanted_mode):
+			mode = wanted_mode
+			_apply_mode()
+			dirty = true
 	if config.has("harmonic_l"):
+		_harmonic_override = true
 		var wanted_l: int = int(config["harmonic_l"])
 		if wanted_l > 0 and wanted_l != harmonic_l:
 			harmonic_l = wanted_l
 			dirty = true
 	if config.has("harmonic_m"):
+		_harmonic_override = true
 		var wanted_m: int = int(config["harmonic_m"])
 		if wanted_m >= 0 and wanted_m != harmonic_m:
 			harmonic_m = wanted_m
