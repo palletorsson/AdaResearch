@@ -1528,15 +1528,15 @@
     },
     "tech_crate": {
       "dna": {
-       "axes": {
-       "consignment": [
-       "seal",
-       "breach",
-       "hold",
-       "manifest",
-       "bench"
-       ]
-       }
+        "axes": {
+          "consignment": [
+            "seal",
+            "breach",
+            "hold",
+            "manifest",
+            "bench"
+          ]
+        }
       },
       "lookup_name": "tech_crate",
       "scene": "res://commons/artifacts/tech_crate/tech_crate.tscn",
@@ -9202,15 +9202,15 @@
     },
     "catalyst_pickup": {
       "dna": {
-       "axes": {
-       "offer": [
-       "plinth",
-       "vitrine",
-       "clamp",
-       "shrine",
-       "chute"
-       ]
-       }
+        "axes": {
+          "offer": [
+            "plinth",
+            "vitrine",
+            "clamp",
+            "shrine",
+            "chute"
+          ]
+        }
       },
       "lookup_name": "catalyst_pickup",
       "name": "catalyst_pickup",
@@ -9248,10 +9248,7 @@
         "sequence_completion"
       ],
       "spatial_needs": {
-        "footprint_cells": [
-          1,
-          1
-        ],
+        "footprint_cells": 1,
         "height_cells": 1,
         "cluster_with": [
           "lab_room",
@@ -9372,15 +9369,15 @@
     },
     "lab_sliding_door": {
       "dna": {
-       "axes": {
-       "welcome": [
-       "slab",
-       "pane",
-       "caution",
-       "bolt",
-       "plate"
-       ]
-       }
+        "axes": {
+          "welcome": [
+            "slab",
+            "pane",
+            "caution",
+            "bolt",
+            "plate"
+          ]
+        }
       },
       "lookup_name": "lab_sliding_door",
       "scene": "res://commons/artifacts/sliding_door/sliding_door.tscn",

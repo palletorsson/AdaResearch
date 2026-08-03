@@ -817,13 +817,13 @@
    "dna": {
     "framing": 0.55,
     "axes": {
-    "grasp": [
-    "atom",
-    "socket",
-    "chorus",
-    "hollow",
-    "swarm"
-    ]
+     "grasp": [
+      "atom",
+      "socket",
+      "chorus",
+      "hollow",
+      "swarm"
+     ]
     }
    },
    "name": "F Term Sphere",
@@ -946,13 +946,13 @@
    "dna": {
     "framing": 0.55,
     "axes": {
-    "grasp": [
-    "atom",
-    "socket",
-    "chorus",
-    "hollow",
-    "swarm"
-    ]
+     "grasp": [
+      "atom",
+      "socket",
+      "chorus",
+      "hollow",
+      "swarm"
+     ]
     }
    },
    "name": "E Term Sphere",
@@ -1075,13 +1075,13 @@
    "dna": {
     "framing": 0.55,
     "axes": {
-    "grasp": [
-    "atom",
-    "socket",
-    "chorus",
-    "hollow",
-    "swarm"
-    ]
+     "grasp": [
+      "atom",
+      "socket",
+      "chorus",
+      "hollow",
+      "swarm"
+     ]
     }
    },
    "name": "Lambda Term Sphere",
@@ -1203,13 +1203,13 @@
   "grab_sphere_phi": {
    "dna": {
     "axes": {
-    "grasp": [
-    "atom",
-    "socket",
-    "chorus",
-    "hollow",
-    "swarm"
-    ]
+     "grasp": [
+      "atom",
+      "socket",
+      "chorus",
+      "hollow",
+      "swarm"
+     ]
     }
    },
    "name": "Phi Term Sphere",
@@ -1946,13 +1946,13 @@
   "reactive_particle_field": {
    "dna": {
     "axes": {
-    "formation": [
-    "lattice",
-    "shell",
-    "ring",
-    "column",
-    "drift"
-    ]
+     "formation": [
+      "lattice",
+      "shell",
+      "ring",
+      "column",
+      "drift"
+     ]
     }
    },
    "name": "Reactive Particle Field",
@@ -2143,10 +2143,7 @@
    },
    "spatial_needs": {
     "platform": "none",
-    "footprint_cells": [
-     1.0,
-     1.0
-    ],
+    "footprint_cells": 1,
     "clearance": {
      "front": 1,
      "back": 1,
@@ -2201,13 +2198,13 @@
   "reactive_particles": {
    "dna": {
     "axes": {
-    "formation": [
-    "lattice",
-    "shell",
-    "ring",
-    "column",
-    "drift"
-    ]
+     "formation": [
+      "lattice",
+      "shell",
+      "ring",
+      "column",
+      "drift"
+     ]
     }
    },
    "name": "Reactive Particles",
@@ -2428,13 +2425,13 @@
   "edge_particles": {
    "dna": {
     "axes": {
-    "formation": [
-    "lattice",
-    "shell",
-    "ring",
-    "column",
-    "drift"
-    ]
+     "formation": [
+      "lattice",
+      "shell",
+      "ring",
+      "column",
+      "drift"
+     ]
     }
    },
    "name": "Edge Particles",
@@ -2551,13 +2548,13 @@
   "emergence_zone": {
    "dna": {
     "axes": {
-    "formation": [
-    "lattice",
-    "shell",
-    "ring",
-    "column",
-    "drift"
-    ]
+     "formation": [
+      "lattice",
+      "shell",
+      "ring",
+      "column",
+      "drift"
+     ]
     }
    },
    "name": "Emergence Zone",
@@ -5508,13 +5505,13 @@
   "f_order_bench": {
    "dna": {
     "axes": {
-    "complement": [
-    "none",
-    "ghost",
-    "supply",
-    "redaction",
-    "quorum"
-    ]
+     "complement": [
+      "none",
+      "ghost",
+      "supply",
+      "redaction",
+      "quorum"
+     ]
     }
    },
    "lookup_name": "f_order_bench",
@@ -5603,13 +5600,13 @@
   "lambda_dial_bench": {
    "dna": {
     "axes": {
-    "complement": [
-    "none",
-    "ghost",
-    "supply",
-    "redaction",
-    "quorum"
-    ]
+     "complement": [
+      "none",
+      "ghost",
+      "supply",
+      "redaction",
+      "quorum"
+     ]
     }
    },
    "lookup_name": "lambda_dial_bench",
@@ -5656,13 +5653,13 @@
   "phi_rate_bench": {
    "dna": {
     "axes": {
-    "complement": [
-    "none",
-    "ghost",
-    "supply",
-    "redaction",
-    "quorum"
-    ]
+     "complement": [
+      "none",
+      "ghost",
+      "supply",
+      "redaction",
+      "quorum"
+     ]
     }
    },
    "lookup_name": "phi_rate_bench",
@@ -5793,13 +5790,13 @@
   "qfep_reactor_bench": {
    "dna": {
     "axes": {
-    "complement": [
-    "none",
-    "ghost",
-    "supply",
-    "redaction",
-    "quorum"
-    ]
+     "complement": [
+      "none",
+      "ghost",
+      "supply",
+      "redaction",
+      "quorum"
+     ]
     }
    },
    "lookup_name": "qfep_reactor_bench",

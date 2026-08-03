@@ -140,21 +140,21 @@
   },
   "GeneticProgramming": {
    "dna": {
-     "fixture": {
+    "fixture": {
      "population_seed": 20260802
-     },
+    },
     "axes": {
-    "alphabet": [
-    "primitives",
-    "csg_tree",
-    "parametric",
-    "voxel"
-    ],
-    "muster": [
-    "parade",
-    "champion",
-    "scatter"
-    ]
+     "alphabet": [
+      "primitives",
+      "csg_tree",
+      "parametric",
+      "voxel"
+     ],
+     "muster": [
+      "parade",
+      "champion",
+      "scatter"
+     ]
     }
    },
    "category": "unknown",
@@ -1175,17 +1175,17 @@
   },
   "branching_growth_algorithm": {
    "dna": {
-     "fixture": {
+    "fixture": {
      "growth_seed": 20260802
-     },
+    },
     "axes": {
-    "aftermath": [
-    "form",
-    "field",
-    "envelope",
-    "apparatus",
-    "strata"
-    ]
+     "aftermath": [
+      "form",
+      "field",
+      "envelope",
+      "apparatus",
+      "strata"
+     ]
     }
    },
    "category": "unknown",
@@ -1224,10 +1224,7 @@
    ],
    "spatial_needs": {
     "platform": "none",
-    "footprint_cells": [
-     4,
-     4
-    ],
+    "footprint_cells": 16,
     "clearance": {
      "front": 1,
      "back": 1,
@@ -2567,17 +2564,17 @@
   },
   "cube_mound_scene": {
    "dna": {
-     "fixture": {
+    "fixture": {
      "release_seed": 20260802
-     },
+    },
     "axes": {
-    "release": [
-    "cylinder",
-    "ring",
-    "sheet",
-    "chute",
-    "rift"
-    ]
+     "release": [
+      "cylinder",
+      "ring",
+      "sheet",
+      "chute",
+      "rift"
+     ]
     }
    },
    "category": "unknown",
@@ -5455,17 +5452,17 @@
   "genetic_programming": {
    "dna": {
     "axes": {
-    "alphabet": [
-    "primitives",
-    "csg_tree",
-    "parametric",
-    "voxel"
-    ],
-    "muster": [
-    "parade",
-    "champion",
-    "scatter"
-    ]
+     "alphabet": [
+      "primitives",
+      "csg_tree",
+      "parametric",
+      "voxel"
+     ],
+     "muster": [
+      "parade",
+      "champion",
+      "scatter"
+     ]
     }
    },
    "category": "procedural",
@@ -6171,14 +6168,14 @@
   "julia_set": {
    "dna": {
     "axes": {
-    "page": [
-    "tour",
-    "basilica",
-    "rabbit",
-    "dendrite",
-    "spiral",
-    "dust"
-    ]
+     "page": [
+      "tour",
+      "basilica",
+      "rabbit",
+      "dendrite",
+      "spiral",
+      "dust"
+     ]
     }
    },
    "category": "unknown",
@@ -6492,17 +6489,17 @@
   },
   "layered_membrane": {
    "dna": {
-     "fixture": {
+    "fixture": {
      "membrane_seed": 20260802
-     },
+    },
     "axes": {
-    "registration": [
-    "drift",
-    "unison",
-    "twist",
-    "alternation",
-    "scatter"
-    ]
+     "registration": [
+      "drift",
+      "unison",
+      "twist",
+      "alternation",
+      "scatter"
+     ]
     }
    },
    "category": "unknown",
@@ -7618,18 +7615,18 @@
   },
   "maze_generation": {
    "dna": {
-     "framing": 0.45,
-     "fixture": {
+    "framing": 0.45,
+    "fixture": {
      "maze_seed": 20260802
-     },
+    },
     "axes": {
-    "hand": [
-    "backtracker",
-    "prim",
-    "binary_tree",
-    "sidewinder",
-    "labyrinth"
-    ]
+     "hand": [
+      "backtracker",
+      "prim",
+      "binary_tree",
+      "sidewinder",
+      "labyrinth"
+     ]
     }
    },
    "category": "unknown",
@@ -8125,17 +8122,17 @@
   },
   "mirror_cellular_texture_for_3d": {
    "dna": {
-     "framing": 0.55,
-     "fixture": {
+    "framing": 0.55,
+    "fixture": {
      "pattern_seed": 20260802
-     },
+    },
     "axes": {
-    "stencil": [
-    "motif",
-    "quadrant",
-    "octant",
-    "none"
-    ]
+     "stencil": [
+      "motif",
+      "quadrant",
+      "octant",
+      "none"
+     ]
     }
    },
    "category": "unknown",
@@ -9017,18 +9014,18 @@
   },
   "reaction_diffusion": {
    "dna": {
-     "fixture": {
+    "fixture": {
      "field_seed": 20260802
-     },
+    },
     "axes": {
-    "inoculation": [
-    "blot",
-    "lattice",
-    "point",
-    "rim",
-    "seam",
-    "dust"
-    ]
+     "inoculation": [
+      "blot",
+      "lattice",
+      "point",
+      "rim",
+      "seam",
+      "dust"
+     ]
     }
    },
    "category": "procedural",
@@ -9522,12 +9519,12 @@
   "recursive_tree": {
    "dna": {
     "axes": {
-    "aftermath": [
-    "form",
-    "strata",
-    "envelope",
-    "apparatus"
-    ]
+     "aftermath": [
+      "form",
+      "strata",
+      "envelope",
+      "apparatus"
+     ]
     }
    },
    "category": "unknown",
@@ -9989,13 +9986,13 @@
   "sierpinski_triangle": {
    "dna": {
     "axes": {
-    "excision": [
-    "absence",
-    "ghost",
-    "rubble",
-    "cast",
-    "negative"
-    ]
+     "excision": [
+      "absence",
+      "ghost",
+      "rubble",
+      "cast",
+      "negative"
+     ]
     }
    },
    "category": "unknown",
@@ -10278,18 +10275,18 @@
   },
   "space_colonization_algorithm": {
    "dna": {
-     "framing": 0.2,
-     "fixture": {
+    "framing": 0.2,
+    "fixture": {
      "growth_seed": 20260802
-     },
+    },
     "axes": {
-    "aftermath": [
-    "apparatus",
-    "form",
-    "field",
-    "envelope",
-    "strata"
-    ]
+     "aftermath": [
+      "apparatus",
+      "form",
+      "field",
+      "envelope",
+      "strata"
+     ]
     }
    },
    "category": "unknown",

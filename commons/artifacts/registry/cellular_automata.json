@@ -3748,12 +3748,12 @@
   "mirrored_cellular_automata": {
    "dna": {
     "axes": {
-    "stencil": [
-    "motif",
-    "quadrant",
-    "octant",
-    "none"
-    ]
+     "stencil": [
+      "motif",
+      "quadrant",
+      "octant",
+      "none"
+     ]
     }
    },
    "category": "emergence",
@@ -3905,10 +3905,7 @@
    },
    "spatial_needs": {
     "platform": "none",
-    "footprint_cells": [
-     2,
-     2
-    ],
+    "footprint_cells": 4,
     "clearance": {
      "front": 1,
      "back": 1,
@@ -5911,12 +5908,12 @@
   "life_zoo_bench": {
    "dna": {
     "axes": {
-    "vacancy": [
-    "void",
-    "lattice",
-    "census",
-    "wake"
-    ]
+     "vacancy": [
+      "void",
+      "lattice",
+      "census",
+      "wake"
+     ]
     }
    },
    "lookup_name": "life_zoo_bench",

@@ -695,10 +695,7 @@
    },
    "spatial_needs": {
     "platform": "none",
-    "footprint_cells": [
-     1.0,
-     1.0
-    ],
+    "footprint_cells": 1,
     "clearance": {
      "front": 1,
      "back": 1,
@@ -1386,12 +1383,12 @@
   "math_objects_gallery": {
    "dna": {
     "axes": {
-    "taxonomy": [
-    "table",
-    "ladder",
-    "stack",
-    "heap"
-    ]
+     "taxonomy": [
+      "table",
+      "ladder",
+      "stack",
+      "heap"
+     ]
     }
    },
    "lookup_name": "math_objects_gallery",
