@@ -1,0 +1,68 @@
+{
+ "sweep": "pattern_maker_station",
+ "peak_changed_pct": 2.573,
+ "subject_pct": 4.62,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "boundary": "none"
+   },
+   "b": {
+    "boundary": "edge"
+   },
+   "changed_px": 6566,
+   "changed_pct": 1.137
+  },
+  {
+   "a": {
+    "boundary": "none"
+   },
+   "b": {
+    "boundary": "cell"
+   },
+   "changed_px": 1486,
+   "changed_pct": 0.257
+  },
+  {
+   "a": {
+    "boundary": "none"
+   },
+   "b": {
+    "boundary": "lattice"
+   },
+   "changed_px": 10973,
+   "changed_pct": 1.9
+  },
+  {
+   "a": {
+    "boundary": "edge"
+   },
+   "b": {
+    "boundary": "cell"
+   },
+   "changed_px": 7037,
+   "changed_pct": 1.218
+  },
+  {
+   "a": {
+    "boundary": "edge"
+   },
+   "b": {
+    "boundary": "lattice"
+   },
+   "changed_px": 14859,
+   "changed_pct": 2.573
+  },
+  {
+   "a": {
+    "boundary": "cell"
+   },
+   "b": {
+    "boundary": "lattice"
+   },
+   "changed_px": 10846,
+   "changed_pct": 1.878
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+{
+ "sweep": "facade_builder",
+ "peak_changed_pct": 9.203,
+ "subject_pct": 11.079,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "armature": "none"
+   },
+   "b": {
+    "armature": "datum"
+   },
+   "changed_px": 32629,
+   "changed_pct": 5.649
+  },
+  {
+   "a": {
+    "armature": "none"
+   },
+   "b": {
+    "armature": "scaffold"
+   },
+   "changed_px": 51856,
+   "changed_pct": 8.978
+  },
+  {
+   "a": {
+    "armature": "none"
+   },
+   "b": {
+    "armature": "gantry"
+   },
+   "changed_px": 51683,
+   "changed_pct": 8.948
+  },
+  {
+   "a": {
+    "armature": "datum"
+   },
+   "b": {
+    "armature": "scaffold"
+   },
+   "changed_px": 48154,
+   "changed_pct": 8.337
+  },
+  {
+   "a": {
+    "armature": "datum"
+   },
+   "b": {
+    "armature": "gantry"
+   },
+   "changed_px": 48329,
+   "changed_pct": 8.367
+  },
+  {
+   "a": {
+    "armature": "scaffold"
+   },
+   "b": {
+    "armature": "gantry"
+   },
+   "changed_px": 53154,
+   "changed_pct": 9.203
+  }
+ ]
+}

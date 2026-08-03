@@ -1,0 +1,68 @@
+{
+ "sweep": "holographicdisplay",
+ "peak_changed_pct": 1.981,
+ "subject_pct": 4.94,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "window"
+   },
+   "changed_px": 9765,
+   "changed_pct": 1.691
+  },
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "archive"
+   },
+   "changed_px": 10794,
+   "changed_pct": 1.869
+  },
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 11442,
+   "changed_pct": 1.981
+  },
+  {
+   "a": {
+    "record": "window"
+   },
+   "b": {
+    "record": "archive"
+   },
+   "changed_px": 5714,
+   "changed_pct": 0.989
+  },
+  {
+   "a": {
+    "record": "window"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 5756,
+   "changed_pct": 0.997
+  },
+  {
+   "a": {
+    "record": "archive"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 4283,
+   "changed_pct": 0.742
+  }
+ ]
+}

@@ -1,0 +1,80 @@
+{
+ "sweep": "ten_print_maze_3d",
+ "peak_changed_pct": 7.786,
+ "subject_pct": 7.81,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "character"
+   },
+   "changed_px": 12348,
+   "changed_pct": 2.138
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "wall"
+   },
+   "changed_px": 27548,
+   "changed_pct": 4.769
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile"
+   },
+   "changed_px": 44145,
+   "changed_pct": 7.643
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "wall"
+   },
+   "changed_px": 31463,
+   "changed_pct": 5.447
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile"
+   },
+   "changed_px": 42219,
+   "changed_pct": 7.309
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "wall"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile"
+   },
+   "changed_px": 44974,
+   "changed_pct": 7.786
+  }
+ ]
+}

@@ -1,0 +1,80 @@
+{
+ "sweep": "station_luminaire",
+ "peak_changed_pct": 0.34,
+ "subject_pct": 2.051,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "warm": true,
+    "cast_shadows": true
+   },
+   "b": {
+    "warm": true,
+    "cast_shadows": false
+   },
+   "changed_px": 643,
+   "changed_pct": 0.111
+  },
+  {
+   "a": {
+    "warm": true,
+    "cast_shadows": true
+   },
+   "b": {
+    "warm": false,
+    "cast_shadows": true
+   },
+   "changed_px": 1746,
+   "changed_pct": 0.302
+  },
+  {
+   "a": {
+    "warm": true,
+    "cast_shadows": true
+   },
+   "b": {
+    "warm": false,
+    "cast_shadows": false
+   },
+   "changed_px": 1966,
+   "changed_pct": 0.34
+  },
+  {
+   "a": {
+    "warm": true,
+    "cast_shadows": false
+   },
+   "b": {
+    "warm": false,
+    "cast_shadows": true
+   },
+   "changed_px": 1904,
+   "changed_pct": 0.33
+  },
+  {
+   "a": {
+    "warm": true,
+    "cast_shadows": false
+   },
+   "b": {
+    "warm": false,
+    "cast_shadows": false
+   },
+   "changed_px": 1693,
+   "changed_pct": 0.293
+  },
+  {
+   "a": {
+    "warm": false,
+    "cast_shadows": true
+   },
+   "b": {
+    "warm": false,
+    "cast_shadows": false
+   },
+   "changed_px": 239,
+   "changed_pct": 0.041
+  }
+ ]
+}

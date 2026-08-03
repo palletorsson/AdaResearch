@@ -1,0 +1,68 @@
+{
+ "sweep": "sine_cylinder_staircase",
+ "peak_changed_pct": 5.437,
+ "subject_pct": 5.609,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "provision": "membrane"
+   },
+   "b": {
+    "provision": "none"
+   },
+   "changed_px": 15697,
+   "changed_pct": 2.718
+  },
+  {
+   "a": {
+    "provision": "membrane"
+   },
+   "b": {
+    "provision": "rail"
+   },
+   "changed_px": 21297,
+   "changed_pct": 3.687
+  },
+  {
+   "a": {
+    "provision": "membrane"
+   },
+   "b": {
+    "provision": "posts"
+   },
+   "changed_px": 26533,
+   "changed_pct": 4.594
+  },
+  {
+   "a": {
+    "provision": "none"
+   },
+   "b": {
+    "provision": "rail"
+   },
+   "changed_px": 22139,
+   "changed_pct": 3.833
+  },
+  {
+   "a": {
+    "provision": "none"
+   },
+   "b": {
+    "provision": "posts"
+   },
+   "changed_px": 15642,
+   "changed_pct": 2.708
+  },
+  {
+   "a": {
+    "provision": "rail"
+   },
+   "b": {
+    "provision": "posts"
+   },
+   "changed_px": 31403,
+   "changed_pct": 5.437
+  }
+ ]
+}

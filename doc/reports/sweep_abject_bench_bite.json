@@ -1,0 +1,108 @@
+{
+ "sweep": "abject_bench",
+ "peak_changed_pct": 3.546,
+ "subject_pct": 9.927,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "gauge"
+   },
+   "changed_px": 5807,
+   "changed_pct": 1.005
+  },
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "control"
+   },
+   "changed_px": 7639,
+   "changed_pct": 1.323
+  },
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "chart"
+   },
+   "changed_px": 10651,
+   "changed_pct": 1.844
+  },
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 12481,
+   "changed_pct": 2.161
+  },
+  {
+   "a": {
+    "assay": "gauge"
+   },
+   "b": {
+    "assay": "control"
+   },
+   "changed_px": 6433,
+   "changed_pct": 1.114
+  },
+  {
+   "a": {
+    "assay": "gauge"
+   },
+   "b": {
+    "assay": "chart"
+   },
+   "changed_px": 9816,
+   "changed_pct": 1.699
+  },
+  {
+   "a": {
+    "assay": "gauge"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 19315,
+   "changed_pct": 3.344
+  },
+  {
+   "a": {
+    "assay": "control"
+   },
+   "b": {
+    "assay": "chart"
+   },
+   "changed_px": 10606,
+   "changed_pct": 1.836
+  },
+  {
+   "a": {
+    "assay": "control"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 20482,
+   "changed_pct": 3.546
+  },
+  {
+   "a": {
+    "assay": "chart"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 19240,
+   "changed_pct": 3.331
+  }
+ ]
+}

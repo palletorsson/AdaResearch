@@ -1,0 +1,128 @@
+{
+ "sweep": "maze_generation",
+ "peak_changed_pct": 23.351,
+ "subject_pct": 27.775,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "backtracker"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "prim"
+   },
+   "changed_px": 134874,
+   "changed_pct": 23.351
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "backtracker"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "binary_tree"
+   },
+   "changed_px": 131798,
+   "changed_pct": 22.818
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "backtracker"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "sidewinder"
+   },
+   "changed_px": 133428,
+   "changed_pct": 23.1
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "backtracker"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "labyrinth"
+   },
+   "changed_px": 130054,
+   "changed_pct": 22.516
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "prim"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "binary_tree"
+   },
+   "changed_px": 24413,
+   "changed_pct": 4.227
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "prim"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "sidewinder"
+   },
+   "changed_px": 27555,
+   "changed_pct": 4.771
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "prim"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "labyrinth"
+   },
+   "changed_px": 23356,
+   "changed_pct": 4.044
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "binary_tree"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "sidewinder"
+   },
+   "changed_px": 22473,
+   "changed_pct": 3.891
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "binary_tree"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "labyrinth"
+   },
+   "changed_px": 12342,
+   "changed_pct": 2.137
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "hand": "sidewinder"
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "hand": "labyrinth"
+   },
+   "changed_px": 21533,
+   "changed_pct": 3.728
+  }
+ ]
+}

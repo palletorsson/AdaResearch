@@ -1,0 +1,128 @@
+{
+ "sweep": "random_walk_collection",
+ "peak_changed_pct": 0.0,
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "path"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "head"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "path"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "tail"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "path"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "envelope"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "path"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "ensemble"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "head"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "tail"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "head"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "envelope"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "head"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "ensemble"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "tail"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "envelope"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "tail"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "ensemble"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "envelope"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "ensemble"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

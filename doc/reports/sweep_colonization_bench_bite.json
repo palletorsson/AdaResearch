@@ -1,0 +1,68 @@
+{
+ "sweep": "colonization_bench",
+ "peak_changed_pct": 3.438,
+ "subject_pct": 4.953,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "workings": "result"
+   },
+   "b": {
+    "workings": "rule"
+   },
+   "changed_px": 9515,
+   "changed_pct": 1.647
+  },
+  {
+   "a": {
+    "workings": "result"
+   },
+   "b": {
+    "workings": "trial"
+   },
+   "changed_px": 15748,
+   "changed_pct": 2.726
+  },
+  {
+   "a": {
+    "workings": "result"
+   },
+   "b": {
+    "workings": "reject"
+   },
+   "changed_px": 9985,
+   "changed_pct": 1.729
+  },
+  {
+   "a": {
+    "workings": "rule"
+   },
+   "b": {
+    "workings": "trial"
+   },
+   "changed_px": 19859,
+   "changed_pct": 3.438
+  },
+  {
+   "a": {
+    "workings": "rule"
+   },
+   "b": {
+    "workings": "reject"
+   },
+   "changed_px": 12898,
+   "changed_pct": 2.233
+  },
+  {
+   "a": {
+    "workings": "trial"
+   },
+   "b": {
+    "workings": "reject"
+   },
+   "changed_px": 18478,
+   "changed_pct": 3.199
+  }
+ ]
+}

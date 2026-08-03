@@ -1,0 +1,108 @@
+{
+ "sweep": "boolean_tunnel",
+ "peak_changed_pct": 2.101,
+ "subject_pct": 2.119,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "accrual": "ramp"
+   },
+   "b": {
+    "accrual": "burst"
+   },
+   "changed_px": 11515,
+   "changed_pct": 1.994
+  },
+  {
+   "a": {
+    "accrual": "ramp"
+   },
+   "b": {
+    "accrual": "mirror"
+   },
+   "changed_px": 11643,
+   "changed_pct": 2.016
+  },
+  {
+   "a": {
+    "accrual": "ramp"
+   },
+   "b": {
+    "accrual": "plateau"
+   },
+   "changed_px": 10705,
+   "changed_pct": 1.853
+  },
+  {
+   "a": {
+    "accrual": "ramp"
+   },
+   "b": {
+    "accrual": "none"
+   },
+   "changed_px": 12135,
+   "changed_pct": 2.101
+  },
+  {
+   "a": {
+    "accrual": "burst"
+   },
+   "b": {
+    "accrual": "mirror"
+   },
+   "changed_px": 6222,
+   "changed_pct": 1.077
+  },
+  {
+   "a": {
+    "accrual": "burst"
+   },
+   "b": {
+    "accrual": "plateau"
+   },
+   "changed_px": 5311,
+   "changed_pct": 0.919
+  },
+  {
+   "a": {
+    "accrual": "burst"
+   },
+   "b": {
+    "accrual": "none"
+   },
+   "changed_px": 6646,
+   "changed_pct": 1.151
+  },
+  {
+   "a": {
+    "accrual": "mirror"
+   },
+   "b": {
+    "accrual": "plateau"
+   },
+   "changed_px": 6370,
+   "changed_pct": 1.103
+  },
+  {
+   "a": {
+    "accrual": "mirror"
+   },
+   "b": {
+    "accrual": "none"
+   },
+   "changed_px": 5415,
+   "changed_pct": 0.938
+  },
+  {
+   "a": {
+    "accrual": "plateau"
+   },
+   "b": {
+    "accrual": "none"
+   },
+   "changed_px": 6788,
+   "changed_pct": 1.175
+  }
+ ]
+}

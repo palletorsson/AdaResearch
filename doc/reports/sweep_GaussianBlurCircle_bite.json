@@ -1,0 +1,108 @@
+{
+ "sweep": "GaussianBlurCircle",
+ "peak_changed_pct": 2.491,
+ "subject_pct": 2.989,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "sitter": "disc"
+   },
+   "b": {
+    "sitter": "edge"
+   },
+   "changed_px": 11130,
+   "changed_pct": 1.927
+  },
+  {
+   "a": {
+    "sitter": "disc"
+   },
+   "b": {
+    "sitter": "dot"
+   },
+   "changed_px": 5543,
+   "changed_pct": 0.96
+  },
+  {
+   "a": {
+    "sitter": "disc"
+   },
+   "b": {
+    "sitter": "lattice"
+   },
+   "changed_px": 8175,
+   "changed_pct": 1.415
+  },
+  {
+   "a": {
+    "sitter": "disc"
+   },
+   "b": {
+    "sitter": "field"
+   },
+   "changed_px": 14388,
+   "changed_pct": 2.491
+  },
+  {
+   "a": {
+    "sitter": "edge"
+   },
+   "b": {
+    "sitter": "dot"
+   },
+   "changed_px": 8397,
+   "changed_pct": 1.454
+  },
+  {
+   "a": {
+    "sitter": "edge"
+   },
+   "b": {
+    "sitter": "lattice"
+   },
+   "changed_px": 9782,
+   "changed_pct": 1.694
+  },
+  {
+   "a": {
+    "sitter": "edge"
+   },
+   "b": {
+    "sitter": "field"
+   },
+   "changed_px": 13219,
+   "changed_pct": 2.289
+  },
+  {
+   "a": {
+    "sitter": "dot"
+   },
+   "b": {
+    "sitter": "lattice"
+   },
+   "changed_px": 5180,
+   "changed_pct": 0.897
+  },
+  {
+   "a": {
+    "sitter": "dot"
+   },
+   "b": {
+    "sitter": "field"
+   },
+   "changed_px": 13414,
+   "changed_pct": 2.322
+  },
+  {
+   "a": {
+    "sitter": "lattice"
+   },
+   "b": {
+    "sitter": "field"
+   },
+   "changed_px": 13486,
+   "changed_pct": 2.335
+  }
+ ]
+}

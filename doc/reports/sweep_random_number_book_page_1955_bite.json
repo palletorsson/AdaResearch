@@ -1,0 +1,128 @@
+{
+ "sweep": "random_number_book_page_1955",
+ "peak_changed_pct": 0.052,
+ "subject_pct": 10.211,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "changed_px": 255,
+   "changed_pct": 0.044
+  },
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "changed_px": 298,
+   "changed_pct": 0.052
+  },
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 255,
+   "changed_pct": 0.044
+  },
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 298,
+   "changed_pct": 0.052
+  },
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "changed_px": 215,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 215,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 215,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "page_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "b": {
+    "page_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 215,
+   "changed_pct": 0.037
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+{
+ "sweep": "multimeter",
+ "peak_changed_pct": 5.895,
+ "subject_pct": 4.881,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "window"
+   },
+   "changed_px": 32040,
+   "changed_pct": 5.547
+  },
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "archive"
+   },
+   "changed_px": 33900,
+   "changed_pct": 5.869
+  },
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 34051,
+   "changed_pct": 5.895
+  },
+  {
+   "a": {
+    "record": "window"
+   },
+   "b": {
+    "record": "archive"
+   },
+   "changed_px": 25266,
+   "changed_pct": 4.374
+  },
+  {
+   "a": {
+    "record": "window"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 26103,
+   "changed_pct": 4.519
+  },
+  {
+   "a": {
+    "record": "archive"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 5029,
+   "changed_pct": 0.871
+  }
+ ]
+}

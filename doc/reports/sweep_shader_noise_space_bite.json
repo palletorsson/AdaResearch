@@ -1,0 +1,80 @@
+{
+ "sweep": "shader_noise_space",
+ "peak_changed_pct": 22.744,
+ "subject_pct": 50.229,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "color_cycling": true,
+    "cloud_density_animation": true
+   },
+   "b": {
+    "color_cycling": true,
+    "cloud_density_animation": false
+   },
+   "changed_px": 92364,
+   "changed_pct": 15.991
+  },
+  {
+   "a": {
+    "color_cycling": true,
+    "cloud_density_animation": true
+   },
+   "b": {
+    "color_cycling": false,
+    "cloud_density_animation": true
+   },
+   "changed_px": 123444,
+   "changed_pct": 21.372
+  },
+  {
+   "a": {
+    "color_cycling": true,
+    "cloud_density_animation": true
+   },
+   "b": {
+    "color_cycling": false,
+    "cloud_density_animation": false
+   },
+   "changed_px": 131370,
+   "changed_pct": 22.744
+  },
+  {
+   "a": {
+    "color_cycling": true,
+    "cloud_density_animation": false
+   },
+   "b": {
+    "color_cycling": false,
+    "cloud_density_animation": true
+   },
+   "changed_px": 31010,
+   "changed_pct": 5.369
+  },
+  {
+   "a": {
+    "color_cycling": true,
+    "cloud_density_animation": false
+   },
+   "b": {
+    "color_cycling": false,
+    "cloud_density_animation": false
+   },
+   "changed_px": 43190,
+   "changed_pct": 7.477
+  },
+  {
+   "a": {
+    "color_cycling": false,
+    "cloud_density_animation": true
+   },
+   "b": {
+    "color_cycling": false,
+    "cloud_density_animation": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

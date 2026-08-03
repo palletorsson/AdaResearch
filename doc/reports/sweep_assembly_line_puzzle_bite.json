@@ -1,0 +1,80 @@
+{
+ "sweep": "assembly_line_puzzle",
+ "peak_changed_pct": 2.987,
+ "subject_pct": 2.357,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "require_color_match": true,
+    "sandbox_mode": true
+   },
+   "b": {
+    "require_color_match": true,
+    "sandbox_mode": false
+   },
+   "changed_px": 17038,
+   "changed_pct": 2.95
+  },
+  {
+   "a": {
+    "require_color_match": true,
+    "sandbox_mode": true
+   },
+   "b": {
+    "require_color_match": false,
+    "sandbox_mode": true
+   },
+   "changed_px": 696,
+   "changed_pct": 0.12
+  },
+  {
+   "a": {
+    "require_color_match": true,
+    "sandbox_mode": true
+   },
+   "b": {
+    "require_color_match": false,
+    "sandbox_mode": false
+   },
+   "changed_px": 17038,
+   "changed_pct": 2.95
+  },
+  {
+   "a": {
+    "require_color_match": true,
+    "sandbox_mode": false
+   },
+   "b": {
+    "require_color_match": false,
+    "sandbox_mode": true
+   },
+   "changed_px": 17254,
+   "changed_pct": 2.987
+  },
+  {
+   "a": {
+    "require_color_match": true,
+    "sandbox_mode": false
+   },
+   "b": {
+    "require_color_match": false,
+    "sandbox_mode": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "require_color_match": false,
+    "sandbox_mode": true
+   },
+   "b": {
+    "require_color_match": false,
+    "sandbox_mode": false
+   },
+   "changed_px": 17254,
+   "changed_pct": 2.987
+  }
+ ]
+}

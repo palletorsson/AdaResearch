@@ -1,0 +1,108 @@
+{
+ "sweep": "grab_jelly_bench",
+ "peak_changed_pct": 4.993,
+ "subject_pct": 6.668,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "gauge"
+   },
+   "changed_px": 8616,
+   "changed_pct": 1.492
+  },
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "control"
+   },
+   "changed_px": 11387,
+   "changed_pct": 1.971
+  },
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "chart"
+   },
+   "changed_px": 7750,
+   "changed_pct": 1.342
+  },
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 20441,
+   "changed_pct": 3.539
+  },
+  {
+   "a": {
+    "assay": "gauge"
+   },
+   "b": {
+    "assay": "control"
+   },
+   "changed_px": 14728,
+   "changed_pct": 2.55
+  },
+  {
+   "a": {
+    "assay": "gauge"
+   },
+   "b": {
+    "assay": "chart"
+   },
+   "changed_px": 14322,
+   "changed_pct": 2.48
+  },
+  {
+   "a": {
+    "assay": "gauge"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 27185,
+   "changed_pct": 4.707
+  },
+  {
+   "a": {
+    "assay": "control"
+   },
+   "b": {
+    "assay": "chart"
+   },
+   "changed_px": 14768,
+   "changed_pct": 2.557
+  },
+  {
+   "a": {
+    "assay": "control"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 28842,
+   "changed_pct": 4.993
+  },
+  {
+   "a": {
+    "assay": "chart"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 26562,
+   "changed_pct": 4.599
+  }
+ ]
+}

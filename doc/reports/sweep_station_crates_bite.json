@@ -6,339 +6,63 @@
  "variants": [
   {
    "a": {
-    "upkeep": "service",
-    "hazard_labels": true
+    "upkeep": "service"
    },
    "b": {
-    "upkeep": "service",
-    "hazard_labels": false
+    "upkeep": "store"
    },
-   "changed_px": 1057,
-   "changed_pct": 0.183
+   "changed_px": 78862,
+   "changed_pct": 13.653
   },
   {
    "a": {
-    "upkeep": "service",
-    "hazard_labels": true
+    "upkeep": "service"
    },
    "b": {
-    "upkeep": "store",
-    "hazard_labels": true
+    "upkeep": "scrap"
    },
-   "changed_px": 78816,
-   "changed_pct": 13.645
+   "changed_px": 75069,
+   "changed_pct": 12.997
   },
   {
    "a": {
-    "upkeep": "service",
-    "hazard_labels": true
+    "upkeep": "service"
    },
    "b": {
-    "upkeep": "store",
-    "hazard_labels": false
+    "upkeep": "works"
    },
-   "changed_px": 78816,
-   "changed_pct": 13.645
+   "changed_px": 63725,
+   "changed_pct": 11.033
   },
   {
    "a": {
-    "upkeep": "service",
-    "hazard_labels": true
+    "upkeep": "store"
    },
    "b": {
-    "upkeep": "scrap",
-    "hazard_labels": true
+    "upkeep": "scrap"
    },
-   "changed_px": 75067,
-   "changed_pct": 12.996
-  },
-  {
-   "a": {
-    "upkeep": "service",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "scrap",
-    "hazard_labels": false
-   },
-   "changed_px": 75067,
-   "changed_pct": 12.996
-  },
-  {
-   "a": {
-    "upkeep": "service",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": true
-   },
-   "changed_px": 63813,
-   "changed_pct": 11.048
-  },
-  {
-   "a": {
-    "upkeep": "service",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": false
-   },
-   "changed_px": 63813,
-   "changed_pct": 11.048
-  },
-  {
-   "a": {
-    "upkeep": "service",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "store",
-    "hazard_labels": true
-   },
-   "changed_px": 79055,
-   "changed_pct": 13.687
-  },
-  {
-   "a": {
-    "upkeep": "service",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "store",
-    "hazard_labels": false
-   },
-   "changed_px": 79055,
-   "changed_pct": 13.687
-  },
-  {
-   "a": {
-    "upkeep": "service",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "scrap",
-    "hazard_labels": true
-   },
-   "changed_px": 75253,
-   "changed_pct": 13.029
-  },
-  {
-   "a": {
-    "upkeep": "service",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "scrap",
-    "hazard_labels": false
-   },
-   "changed_px": 75253,
-   "changed_pct": 13.029
-  },
-  {
-   "a": {
-    "upkeep": "service",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": true
-   },
-   "changed_px": 63533,
-   "changed_pct": 10.999
-  },
-  {
-   "a": {
-    "upkeep": "service",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": false
-   },
-   "changed_px": 63533,
-   "changed_pct": 10.999
-  },
-  {
-   "a": {
-    "upkeep": "store",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "store",
-    "hazard_labels": false
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "upkeep": "store",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "scrap",
-    "hazard_labels": true
-   },
-   "changed_px": 80224,
+   "changed_px": 80225,
    "changed_pct": 13.889
   },
   {
    "a": {
-    "upkeep": "store",
-    "hazard_labels": true
+    "upkeep": "store"
    },
    "b": {
-    "upkeep": "scrap",
-    "hazard_labels": false
-   },
-   "changed_px": 80224,
-   "changed_pct": 13.889
-  },
-  {
-   "a": {
-    "upkeep": "store",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": true
+    "upkeep": "works"
    },
    "changed_px": 76913,
    "changed_pct": 13.316
   },
   {
    "a": {
-    "upkeep": "store",
-    "hazard_labels": true
+    "upkeep": "scrap"
    },
    "b": {
-    "upkeep": "works",
-    "hazard_labels": false
+    "upkeep": "works"
    },
-   "changed_px": 76913,
-   "changed_pct": 13.316
-  },
-  {
-   "a": {
-    "upkeep": "store",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "scrap",
-    "hazard_labels": true
-   },
-   "changed_px": 80224,
-   "changed_pct": 13.889
-  },
-  {
-   "a": {
-    "upkeep": "store",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "scrap",
-    "hazard_labels": false
-   },
-   "changed_px": 80224,
-   "changed_pct": 13.889
-  },
-  {
-   "a": {
-    "upkeep": "store",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": true
-   },
-   "changed_px": 76913,
-   "changed_pct": 13.316
-  },
-  {
-   "a": {
-    "upkeep": "store",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": false
-   },
-   "changed_px": 76913,
-   "changed_pct": 13.316
-  },
-  {
-   "a": {
-    "upkeep": "scrap",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "scrap",
-    "hazard_labels": false
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "upkeep": "scrap",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": true
-   },
-   "changed_px": 60113,
-   "changed_pct": 10.407
-  },
-  {
-   "a": {
-    "upkeep": "scrap",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": false
-   },
-   "changed_px": 60113,
-   "changed_pct": 10.407
-  },
-  {
-   "a": {
-    "upkeep": "scrap",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": true
-   },
-   "changed_px": 60113,
-   "changed_pct": 10.407
-  },
-  {
-   "a": {
-    "upkeep": "scrap",
-    "hazard_labels": false
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": false
-   },
-   "changed_px": 60113,
-   "changed_pct": 10.407
-  },
-  {
-   "a": {
-    "upkeep": "works",
-    "hazard_labels": true
-   },
-   "b": {
-    "upkeep": "works",
-    "hazard_labels": false
-   },
-   "changed_px": 2,
-   "changed_pct": 0.0
+   "changed_px": 60115,
+   "changed_pct": 10.408
   }
  ]
 }

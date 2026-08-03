@@ -1,0 +1,68 @@
+{
+ "sweep": "foucault_pendulum",
+ "peak_changed_pct": 4.501,
+ "subject_pct": 3.594,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "interference": "none"
+   },
+   "b": {
+    "interference": "fence"
+   },
+   "changed_px": 16345,
+   "changed_pct": 2.83
+  },
+  {
+   "a": {
+    "interference": "none"
+   },
+   "b": {
+    "interference": "attractors"
+   },
+   "changed_px": 25999,
+   "changed_pct": 4.501
+  },
+  {
+   "a": {
+    "interference": "none"
+   },
+   "b": {
+    "interference": "swarm"
+   },
+   "changed_px": 17684,
+   "changed_pct": 3.062
+  },
+  {
+   "a": {
+    "interference": "fence"
+   },
+   "b": {
+    "interference": "attractors"
+   },
+   "changed_px": 23589,
+   "changed_pct": 4.084
+  },
+  {
+   "a": {
+    "interference": "fence"
+   },
+   "b": {
+    "interference": "swarm"
+   },
+   "changed_px": 1734,
+   "changed_pct": 0.3
+  },
+  {
+   "a": {
+    "interference": "attractors"
+   },
+   "b": {
+    "interference": "swarm"
+   },
+   "changed_px": 23703,
+   "changed_pct": 4.104
+  }
+ ]
+}

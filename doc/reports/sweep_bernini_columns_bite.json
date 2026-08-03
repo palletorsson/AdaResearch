@@ -1,0 +1,68 @@
+{
+ "sweep": "bernini_columns",
+ "peak_changed_pct": 9.629,
+ "subject_pct": 8.118,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "colonnade": "grid"
+   },
+   "b": {
+    "colonnade": "ring"
+   },
+   "changed_px": 52908,
+   "changed_pct": 9.16
+  },
+  {
+   "a": {
+    "colonnade": "grid"
+   },
+   "b": {
+    "colonnade": "aisle"
+   },
+   "changed_px": 55615,
+   "changed_pct": 9.629
+  },
+  {
+   "a": {
+    "colonnade": "grid"
+   },
+   "b": {
+    "colonnade": "pair"
+   },
+   "changed_px": 54342,
+   "changed_pct": 9.408
+  },
+  {
+   "a": {
+    "colonnade": "ring"
+   },
+   "b": {
+    "colonnade": "aisle"
+   },
+   "changed_px": 44695,
+   "changed_pct": 7.738
+  },
+  {
+   "a": {
+    "colonnade": "ring"
+   },
+   "b": {
+    "colonnade": "pair"
+   },
+   "changed_px": 46113,
+   "changed_pct": 7.984
+  },
+  {
+   "a": {
+    "colonnade": "aisle"
+   },
+   "b": {
+    "colonnade": "pair"
+   },
+   "changed_px": 47666,
+   "changed_pct": 8.252
+  }
+ ]
+}

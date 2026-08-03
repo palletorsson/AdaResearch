@@ -1,187 +1,108 @@
 {
  "sweep": "godel_statement_plaque",
- "peak_changed_pct": 10.228,
+ "peak_changed_pct": 12.314,
+ "subject_pct": 10.745,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "grabbable": true,
-    "width": 0.3
+    "outside": "quotation"
    },
    "b": {
-    "grabbable": true,
-    "width": 0.6
+    "outside": "margin"
    },
-   "changed_px": 50088,
-   "changed_pct": 8.672
+   "changed_px": 36750,
+   "changed_pct": 6.363
   },
   {
    "a": {
-    "grabbable": true,
-    "width": 0.3
+    "outside": "quotation"
    },
    "b": {
-    "grabbable": true,
-    "width": 0.96
+    "outside": "breach"
    },
-   "changed_px": 59078,
+   "changed_px": 65114,
+   "changed_pct": 11.273
+  },
+  {
+   "a": {
+    "outside": "quotation"
+   },
+   "b": {
+    "outside": "omission"
+   },
+   "changed_px": 59076,
    "changed_pct": 10.228
   },
   {
    "a": {
-    "grabbable": true,
-    "width": 0.3
+    "outside": "quotation"
    },
    "b": {
-    "grabbable": false,
-    "width": 0.3
+    "outside": "habitat"
    },
-   "changed_px": 694,
-   "changed_pct": 0.12
+   "changed_px": 51031,
+   "changed_pct": 8.835
   },
   {
    "a": {
-    "grabbable": true,
-    "width": 0.3
+    "outside": "margin"
    },
    "b": {
-    "grabbable": false,
-    "width": 0.6
+    "outside": "breach"
+   },
+   "changed_px": 71127,
+   "changed_pct": 12.314
+  },
+  {
+   "a": {
+    "outside": "margin"
+   },
+   "b": {
+    "outside": "omission"
+   },
+   "changed_px": 60403,
+   "changed_pct": 10.458
+  },
+  {
+   "a": {
+    "outside": "margin"
+   },
+   "b": {
+    "outside": "habitat"
+   },
+   "changed_px": 58939,
+   "changed_pct": 10.204
+  },
+  {
+   "a": {
+    "outside": "breach"
+   },
+   "b": {
+    "outside": "omission"
+   },
+   "changed_px": 67056,
+   "changed_pct": 11.609
+  },
+  {
+   "a": {
+    "outside": "breach"
+   },
+   "b": {
+    "outside": "habitat"
+   },
+   "changed_px": 68406,
+   "changed_pct": 11.843
+  },
+  {
+   "a": {
+    "outside": "omission"
+   },
+   "b": {
+    "outside": "habitat"
    },
    "changed_px": 50088,
    "changed_pct": 8.672
-  },
-  {
-   "a": {
-    "grabbable": true,
-    "width": 0.3
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.96
-   },
-   "changed_px": 59078,
-   "changed_pct": 10.228
-  },
-  {
-   "a": {
-    "grabbable": true,
-    "width": 0.6
-   },
-   "b": {
-    "grabbable": true,
-    "width": 0.96
-   },
-   "changed_px": 32270,
-   "changed_pct": 5.587
-  },
-  {
-   "a": {
-    "grabbable": true,
-    "width": 0.6
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.3
-   },
-   "changed_px": 49696,
-   "changed_pct": 8.604
-  },
-  {
-   "a": {
-    "grabbable": true,
-    "width": 0.6
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.6
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "grabbable": true,
-    "width": 0.6
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.96
-   },
-   "changed_px": 32270,
-   "changed_pct": 5.587
-  },
-  {
-   "a": {
-    "grabbable": true,
-    "width": 0.96
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.3
-   },
-   "changed_px": 59004,
-   "changed_pct": 10.215
-  },
-  {
-   "a": {
-    "grabbable": true,
-    "width": 0.96
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.6
-   },
-   "changed_px": 32270,
-   "changed_pct": 5.587
-  },
-  {
-   "a": {
-    "grabbable": true,
-    "width": 0.96
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.96
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "grabbable": false,
-    "width": 0.3
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.6
-   },
-   "changed_px": 49696,
-   "changed_pct": 8.604
-  },
-  {
-   "a": {
-    "grabbable": false,
-    "width": 0.3
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.96
-   },
-   "changed_px": 59004,
-   "changed_pct": 10.215
-  },
-  {
-   "a": {
-    "grabbable": false,
-    "width": 0.6
-   },
-   "b": {
-    "grabbable": false,
-    "width": 0.96
-   },
-   "changed_px": 32270,
-   "changed_pct": 5.587
   }
  ]
 }

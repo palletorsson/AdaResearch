@@ -1,0 +1,68 @@
+{
+ "sweep": "atmosphericmonitoring",
+ "peak_changed_pct": 12.871,
+ "subject_pct": 12.587,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "window"
+   },
+   "changed_px": 74250,
+   "changed_pct": 12.855
+  },
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "archive"
+   },
+   "changed_px": 74292,
+   "changed_pct": 12.862
+  },
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 74342,
+   "changed_pct": 12.871
+  },
+  {
+   "a": {
+    "record": "window"
+   },
+   "b": {
+    "record": "archive"
+   },
+   "changed_px": 2274,
+   "changed_pct": 0.394
+  },
+  {
+   "a": {
+    "record": "window"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 8816,
+   "changed_pct": 1.526
+  },
+  {
+   "a": {
+    "record": "archive"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 7457,
+   "changed_pct": 1.291
+  }
+ ]
+}

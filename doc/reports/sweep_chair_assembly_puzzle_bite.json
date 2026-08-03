@@ -1,0 +1,68 @@
+{
+ "sweep": "chair_assembly_puzzle",
+ "peak_changed_pct": 0.345,
+ "subject_pct": 0.301,
+ "verdict": "SUBJECT NOT DETECTED - only 0.30% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "tell": "ghost"
+   },
+   "b": {
+    "tell": "none"
+   },
+   "changed_px": 1563,
+   "changed_pct": 0.271
+  },
+  {
+   "a": {
+    "tell": "ghost"
+   },
+   "b": {
+    "tell": "mark"
+   },
+   "changed_px": 1942,
+   "changed_pct": 0.336
+  },
+  {
+   "a": {
+    "tell": "ghost"
+   },
+   "b": {
+    "tell": "exemplar"
+   },
+   "changed_px": 1995,
+   "changed_pct": 0.345
+  },
+  {
+   "a": {
+    "tell": "none"
+   },
+   "b": {
+    "tell": "mark"
+   },
+   "changed_px": 906,
+   "changed_pct": 0.157
+  },
+  {
+   "a": {
+    "tell": "none"
+   },
+   "b": {
+    "tell": "exemplar"
+   },
+   "changed_px": 1740,
+   "changed_pct": 0.301
+  },
+  {
+   "a": {
+    "tell": "mark"
+   },
+   "b": {
+    "tell": "exemplar"
+   },
+   "changed_px": 1802,
+   "changed_pct": 0.312
+  }
+ ]
+}

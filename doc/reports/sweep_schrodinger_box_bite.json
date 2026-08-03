@@ -1,107 +1,1268 @@
 {
  "sweep": "schrodinger_box",
- "peak_changed_pct": 14.462,
+ "peak_changed_pct": 15.762,
+ "subject_pct": 14.467,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "remainder": "core"
+    "remainder": "core",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "twin"
+    "remainder": "core",
+    "vantage": "stele"
    },
-   "changed_px": 78602,
-   "changed_pct": 13.608
+   "changed_px": 82801,
+   "changed_pct": 14.335
   },
   {
    "a": {
-    "remainder": "core"
+    "remainder": "core",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "seam"
+    "remainder": "core",
+    "vantage": "chamber"
    },
-   "changed_px": 17693,
-   "changed_pct": 3.063
+   "changed_px": 87544,
+   "changed_pct": 15.157
   },
   {
    "a": {
-    "remainder": "core"
+    "remainder": "core",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "haze"
+    "remainder": "twin",
+    "vantage": "specimen"
    },
-   "changed_px": 81871,
-   "changed_pct": 14.174
+   "changed_px": 78697,
+   "changed_pct": 13.625
   },
   {
    "a": {
-    "remainder": "core"
+    "remainder": "core",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "witness"
+    "remainder": "twin",
+    "vantage": "stele"
    },
-   "changed_px": 47534,
-   "changed_pct": 8.23
+   "changed_px": 79292,
+   "changed_pct": 13.728
   },
   {
    "a": {
-    "remainder": "twin"
+    "remainder": "core",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "seam"
+    "remainder": "twin",
+    "vantage": "chamber"
    },
-   "changed_px": 80951,
+   "changed_px": 86311,
+   "changed_pct": 14.943
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "changed_px": 17759,
+   "changed_pct": 3.075
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "changed_px": 84662,
+   "changed_pct": 14.658
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "changed_px": 87561,
+   "changed_pct": 15.159
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "changed_px": 81903,
+   "changed_pct": 14.18
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 81953,
+   "changed_pct": 14.189
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 87516,
+   "changed_pct": 15.152
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 47542,
+   "changed_pct": 8.231
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 89294,
+   "changed_pct": 15.459
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 87630,
+   "changed_pct": 15.171
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "changed_px": 85439,
+   "changed_pct": 14.792
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "twin",
+    "vantage": "specimen"
+   },
+   "changed_px": 72628,
+   "changed_pct": 12.574
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "changed_px": 46514,
+   "changed_pct": 8.053
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "changed_px": 84569,
+   "changed_pct": 14.641
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "changed_px": 83298,
+   "changed_pct": 14.421
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "changed_px": 2787,
+   "changed_pct": 0.483
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "changed_px": 86467,
+   "changed_pct": 14.97
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "changed_px": 54828,
+   "changed_pct": 9.492
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 43020,
+   "changed_pct": 7.448
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 87875,
+   "changed_pct": 15.214
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 91040,
+   "changed_pct": 15.762
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 7459,
+   "changed_pct": 1.291
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 88064,
+   "changed_pct": 15.247
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "twin",
+    "vantage": "specimen"
+   },
+   "changed_px": 72393,
+   "changed_pct": 12.533
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "changed_px": 69066,
+   "changed_pct": 11.957
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "changed_px": 13687,
+   "changed_pct": 2.37
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "changed_px": 82069,
+   "changed_pct": 14.209
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "changed_px": 86811,
+   "changed_pct": 15.03
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "changed_px": 1307,
+   "changed_pct": 0.226
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "changed_px": 71694,
+   "changed_pct": 12.412
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 71265,
+   "changed_pct": 12.338
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 6360,
+   "changed_pct": 1.101
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 87892,
+   "changed_pct": 15.217
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 87953,
+   "changed_pct": 15.227
+  },
+  {
+   "a": {
+    "remainder": "core",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 4449,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "changed_px": 54079,
+   "changed_pct": 9.363
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "changed_px": 65939,
+   "changed_pct": 11.416
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "changed_px": 80952,
    "changed_pct": 14.015
   },
   {
    "a": {
-    "remainder": "twin"
+    "remainder": "twin",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "haze"
+    "remainder": "seam",
+    "vantage": "stele"
    },
-   "changed_px": 39864,
-   "changed_pct": 6.902
+   "changed_px": 72744,
+   "changed_pct": 12.594
   },
   {
    "a": {
-    "remainder": "twin"
+    "remainder": "twin",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "witness"
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "changed_px": 72051,
+   "changed_pct": 12.474
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "changed_px": 39796,
+   "changed_pct": 6.89
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 57283,
+   "changed_pct": 9.917
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 72456,
+   "changed_pct": 12.544
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
    },
    "changed_px": 80851,
    "changed_pct": 13.998
   },
   {
    "a": {
-    "remainder": "seam"
+    "remainder": "twin",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "haze"
+    "remainder": "witness",
+    "vantage": "stele"
    },
-   "changed_px": 81613,
-   "changed_pct": 14.13
+   "changed_px": 72341,
+   "changed_pct": 12.524
   },
   {
    "a": {
-    "remainder": "seam"
+    "remainder": "twin",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "witness"
+    "remainder": "witness",
+    "vantage": "chamber"
    },
-   "changed_px": 52911,
+   "changed_px": 72381,
+   "changed_pct": 12.531
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "changed_px": 67230,
+   "changed_pct": 11.64
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "changed_px": 80675,
+   "changed_pct": 13.967
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "changed_px": 47282,
+   "changed_pct": 8.186
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "changed_px": 69014,
+   "changed_pct": 11.948
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "changed_px": 47711,
+   "changed_pct": 8.26
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 31253,
+   "changed_pct": 5.411
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 69121,
+   "changed_pct": 11.967
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 82135,
+   "changed_pct": 14.22
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 46779,
+   "changed_pct": 8.099
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 69111,
+   "changed_pct": 11.965
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "changed_px": 80430,
+   "changed_pct": 13.925
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "changed_px": 85733,
+   "changed_pct": 14.843
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "changed_px": 13692,
+   "changed_pct": 2.37
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "changed_px": 70947,
+   "changed_pct": 12.283
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 69511,
+   "changed_pct": 12.034
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 13545,
+   "changed_pct": 2.345
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 86589,
+   "changed_pct": 14.991
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 86217,
+   "changed_pct": 14.927
+  },
+  {
+   "a": {
+    "remainder": "twin",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 13505,
+   "changed_pct": 2.338
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "changed_px": 85175,
+   "changed_pct": 14.746
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "changed_px": 82268,
+   "changed_pct": 14.243
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "changed_px": 81571,
+   "changed_pct": 14.122
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 82077,
+   "changed_pct": 14.21
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 82875,
+   "changed_pct": 14.348
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 52910,
    "changed_pct": 9.16
   },
   {
    "a": {
-    "remainder": "haze"
+    "remainder": "seam",
+    "vantage": "specimen"
    },
    "b": {
-    "remainder": "witness"
+    "remainder": "witness",
+    "vantage": "stele"
    },
-   "changed_px": 83535,
+   "changed_px": 89523,
+   "changed_pct": 15.499
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 81899,
+   "changed_pct": 14.179
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "changed_px": 87839,
+   "changed_pct": 15.208
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "changed_px": 55361,
+   "changed_pct": 9.585
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 42883,
+   "changed_pct": 7.424
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 88313,
+   "changed_pct": 15.29
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 91040,
+   "changed_pct": 15.762
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 8431,
+   "changed_pct": 1.46
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 88581,
+   "changed_pct": 15.336
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "changed_px": 71776,
+   "changed_pct": 12.427
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 71330,
+   "changed_pct": 12.349
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 6340,
+   "changed_pct": 1.098
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 87892,
+   "changed_pct": 15.217
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 88071,
+   "changed_pct": 15.248
+  },
+  {
+   "a": {
+    "remainder": "seam",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 4664,
+   "changed_pct": 0.807
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "changed_px": 36927,
+   "changed_pct": 6.393
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 72299,
+   "changed_pct": 12.517
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 83534,
    "changed_pct": 14.462
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 55398,
+   "changed_pct": 9.591
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 72414,
+   "changed_pct": 12.537
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "changed_px": 71366,
+   "changed_pct": 12.356
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 84168,
+   "changed_pct": 14.572
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 43599,
+   "changed_pct": 7.548
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 71551,
+   "changed_pct": 12.388
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "changed_px": 87892,
+   "changed_pct": 15.217
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 88221,
+   "changed_pct": 15.274
+  },
+  {
+   "a": {
+    "remainder": "haze",
+    "vantage": "chamber"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 6358,
+   "changed_pct": 1.101
+  },
+  {
+   "a": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "changed_px": 86546,
+   "changed_pct": 14.984
+  },
+  {
+   "a": {
+    "remainder": "witness",
+    "vantage": "specimen"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 85153,
+   "changed_pct": 14.743
+  },
+  {
+   "a": {
+    "remainder": "witness",
+    "vantage": "stele"
+   },
+   "b": {
+    "remainder": "witness",
+    "vantage": "chamber"
+   },
+   "changed_px": 86882,
+   "changed_pct": 15.042
   }
  ]
 }

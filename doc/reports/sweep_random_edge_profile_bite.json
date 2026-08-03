@@ -1,0 +1,44 @@
+{
+ "sweep": "random_edge_profile",
+ "peak_changed_pct": 12.44,
+ "subject_pct": 12.104,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "relief"
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "plate"
+   },
+   "changed_px": 71853,
+   "changed_pct": 12.44
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "relief"
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column"
+   },
+   "changed_px": 40627,
+   "changed_pct": 7.034
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "plate"
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column"
+   },
+   "changed_px": 70654,
+   "changed_pct": 12.232
+  }
+ ]
+}

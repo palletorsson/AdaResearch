@@ -1,0 +1,68 @@
+{
+ "sweep": "chladni_plate",
+ "peak_changed_pct": 1.847,
+ "subject_pct": 5.358,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "deposit": "scatter"
+   },
+   "b": {
+    "deposit": "figure"
+   },
+   "changed_px": 3309,
+   "changed_pct": 0.573
+  },
+  {
+   "a": {
+    "deposit": "scatter"
+   },
+   "b": {
+    "deposit": "cast"
+   },
+   "changed_px": 10666,
+   "changed_pct": 1.847
+  },
+  {
+   "a": {
+    "deposit": "scatter"
+   },
+   "b": {
+    "deposit": "none"
+   },
+   "changed_px": 3310,
+   "changed_pct": 0.573
+  },
+  {
+   "a": {
+    "deposit": "figure"
+   },
+   "b": {
+    "deposit": "cast"
+   },
+   "changed_px": 7955,
+   "changed_pct": 1.377
+  },
+  {
+   "a": {
+    "deposit": "figure"
+   },
+   "b": {
+    "deposit": "none"
+   },
+   "changed_px": 937,
+   "changed_pct": 0.162
+  },
+  {
+   "a": {
+    "deposit": "cast"
+   },
+   "b": {
+    "deposit": "none"
+   },
+   "changed_px": 7178,
+   "changed_pct": 1.243
+  }
+ ]
+}

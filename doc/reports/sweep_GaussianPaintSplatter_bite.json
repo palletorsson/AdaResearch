@@ -1,0 +1,128 @@
+{
+ "sweep": "GaussianPaintSplatter",
+ "peak_changed_pct": 0.209,
+ "subject_pct": 11.466,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "void"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "rim"
+   },
+   "changed_px": 1192,
+   "changed_pct": 0.206
+  },
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "void"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "echo"
+   },
+   "changed_px": 1207,
+   "changed_pct": 0.209
+  },
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "void"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "ghost"
+   },
+   "changed_px": 1203,
+   "changed_pct": 0.208
+  },
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "void"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "none"
+   },
+   "changed_px": 1203,
+   "changed_pct": 0.208
+  },
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "rim"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "echo"
+   },
+   "changed_px": 191,
+   "changed_pct": 0.033
+  },
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "rim"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "ghost"
+   },
+   "changed_px": 187,
+   "changed_pct": 0.032
+  },
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "rim"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "none"
+   },
+   "changed_px": 187,
+   "changed_pct": 0.032
+  },
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "echo"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "ghost"
+   },
+   "changed_px": 198,
+   "changed_pct": 0.034
+  },
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "echo"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "none"
+   },
+   "changed_px": 198,
+   "changed_pct": 0.034
+  },
+  {
+   "a": {
+    "splatter_seed": 20260802,
+    "refusal": "ghost"
+   },
+   "b": {
+    "splatter_seed": 20260802,
+    "refusal": "none"
+   },
+   "changed_px": 97,
+   "changed_pct": 0.017
+  }
+ ]
+}

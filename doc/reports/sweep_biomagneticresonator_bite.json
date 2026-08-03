@@ -1,0 +1,68 @@
+{
+ "sweep": "biomagneticresonator",
+ "peak_changed_pct": 6.312,
+ "subject_pct": 5.127,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "series": "stack"
+   },
+   "b": {
+    "series": "target"
+   },
+   "changed_px": 19913,
+   "changed_pct": 3.448
+  },
+  {
+   "a": {
+    "series": "stack"
+   },
+   "b": {
+    "series": "cage"
+   },
+   "changed_px": 29303,
+   "changed_pct": 5.073
+  },
+  {
+   "a": {
+    "series": "stack"
+   },
+   "b": {
+    "series": "terrace"
+   },
+   "changed_px": 36459,
+   "changed_pct": 6.312
+  },
+  {
+   "a": {
+    "series": "target"
+   },
+   "b": {
+    "series": "cage"
+   },
+   "changed_px": 25319,
+   "changed_pct": 4.383
+  },
+  {
+   "a": {
+    "series": "target"
+   },
+   "b": {
+    "series": "terrace"
+   },
+   "changed_px": 35016,
+   "changed_pct": 6.062
+  },
+  {
+   "a": {
+    "series": "cage"
+   },
+   "b": {
+    "series": "terrace"
+   },
+   "changed_px": 31384,
+   "changed_pct": 5.434
+  }
+ ]
+}

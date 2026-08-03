@@ -1,0 +1,158 @@
+{
+ "sweep": "julia_set",
+ "peak_changed_pct": 0.383,
+ "subject_pct": 0.27,
+ "verdict": "SUBJECT NOT DETECTED - only 0.27% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "page": "tour"
+   },
+   "b": {
+    "page": "basilica"
+   },
+   "changed_px": 1777,
+   "changed_pct": 0.308
+  },
+  {
+   "a": {
+    "page": "tour"
+   },
+   "b": {
+    "page": "rabbit"
+   },
+   "changed_px": 1872,
+   "changed_pct": 0.324
+  },
+  {
+   "a": {
+    "page": "tour"
+   },
+   "b": {
+    "page": "dendrite"
+   },
+   "changed_px": 1877,
+   "changed_pct": 0.325
+  },
+  {
+   "a": {
+    "page": "tour"
+   },
+   "b": {
+    "page": "spiral"
+   },
+   "changed_px": 1721,
+   "changed_pct": 0.298
+  },
+  {
+   "a": {
+    "page": "tour"
+   },
+   "b": {
+    "page": "dust"
+   },
+   "changed_px": 2214,
+   "changed_pct": 0.383
+  },
+  {
+   "a": {
+    "page": "basilica"
+   },
+   "b": {
+    "page": "rabbit"
+   },
+   "changed_px": 1578,
+   "changed_pct": 0.273
+  },
+  {
+   "a": {
+    "page": "basilica"
+   },
+   "b": {
+    "page": "dendrite"
+   },
+   "changed_px": 1781,
+   "changed_pct": 0.308
+  },
+  {
+   "a": {
+    "page": "basilica"
+   },
+   "b": {
+    "page": "spiral"
+   },
+   "changed_px": 1208,
+   "changed_pct": 0.209
+  },
+  {
+   "a": {
+    "page": "basilica"
+   },
+   "b": {
+    "page": "dust"
+   },
+   "changed_px": 2141,
+   "changed_pct": 0.371
+  },
+  {
+   "a": {
+    "page": "rabbit"
+   },
+   "b": {
+    "page": "dendrite"
+   },
+   "changed_px": 1293,
+   "changed_pct": 0.224
+  },
+  {
+   "a": {
+    "page": "rabbit"
+   },
+   "b": {
+    "page": "spiral"
+   },
+   "changed_px": 1713,
+   "changed_pct": 0.297
+  },
+  {
+   "a": {
+    "page": "rabbit"
+   },
+   "b": {
+    "page": "dust"
+   },
+   "changed_px": 1783,
+   "changed_pct": 0.309
+  },
+  {
+   "a": {
+    "page": "dendrite"
+   },
+   "b": {
+    "page": "spiral"
+   },
+   "changed_px": 1843,
+   "changed_pct": 0.319
+  },
+  {
+   "a": {
+    "page": "dendrite"
+   },
+   "b": {
+    "page": "dust"
+   },
+   "changed_px": 1367,
+   "changed_pct": 0.237
+  },
+  {
+   "a": {
+    "page": "spiral"
+   },
+   "b": {
+    "page": "dust"
+   },
+   "changed_px": 2100,
+   "changed_pct": 0.364
+  }
+ ]
+}

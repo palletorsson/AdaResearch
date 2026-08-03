@@ -1,0 +1,80 @@
+{
+ "sweep": "VectorThrowing",
+ "peak_changed_pct": 1.562,
+ "subject_pct": 1.183,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "enable_drones": true,
+    "enable_scoring": true
+   },
+   "b": {
+    "enable_drones": true,
+    "enable_scoring": false
+   },
+   "changed_px": 3145,
+   "changed_pct": 0.544
+  },
+  {
+   "a": {
+    "enable_drones": true,
+    "enable_scoring": true
+   },
+   "b": {
+    "enable_drones": false,
+    "enable_scoring": true
+   },
+   "changed_px": 9015,
+   "changed_pct": 1.561
+  },
+  {
+   "a": {
+    "enable_drones": true,
+    "enable_scoring": true
+   },
+   "b": {
+    "enable_drones": false,
+    "enable_scoring": false
+   },
+   "changed_px": 9025,
+   "changed_pct": 1.562
+  },
+  {
+   "a": {
+    "enable_drones": true,
+    "enable_scoring": false
+   },
+   "b": {
+    "enable_drones": false,
+    "enable_scoring": true
+   },
+   "changed_px": 8846,
+   "changed_pct": 1.532
+  },
+  {
+   "a": {
+    "enable_drones": true,
+    "enable_scoring": false
+   },
+   "b": {
+    "enable_drones": false,
+    "enable_scoring": false
+   },
+   "changed_px": 8696,
+   "changed_pct": 1.506
+  },
+  {
+   "a": {
+    "enable_drones": false,
+    "enable_scoring": true
+   },
+   "b": {
+    "enable_drones": false,
+    "enable_scoring": false
+   },
+   "changed_px": 692,
+   "changed_pct": 0.12
+  }
+ ]
+}

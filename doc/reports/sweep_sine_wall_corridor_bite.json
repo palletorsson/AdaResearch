@@ -1,0 +1,68 @@
+{
+ "sweep": "sine_wall_corridor",
+ "peak_changed_pct": 7.408,
+ "subject_pct": 8.913,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "cut": "skin"
+   },
+   "b": {
+    "cut": "ribs"
+   },
+   "changed_px": 42786,
+   "changed_pct": 7.408
+  },
+  {
+   "a": {
+    "cut": "skin"
+   },
+   "b": {
+    "cut": "strata"
+   },
+   "changed_px": 37211,
+   "changed_pct": 6.442
+  },
+  {
+   "a": {
+    "cut": "skin"
+   },
+   "b": {
+    "cut": "lattice"
+   },
+   "changed_px": 41389,
+   "changed_pct": 7.166
+  },
+  {
+   "a": {
+    "cut": "ribs"
+   },
+   "b": {
+    "cut": "strata"
+   },
+   "changed_px": 30401,
+   "changed_pct": 5.263
+  },
+  {
+   "a": {
+    "cut": "ribs"
+   },
+   "b": {
+    "cut": "lattice"
+   },
+   "changed_px": 29652,
+   "changed_pct": 5.134
+  },
+  {
+   "a": {
+    "cut": "strata"
+   },
+   "b": {
+    "cut": "lattice"
+   },
+   "changed_px": 30719,
+   "changed_pct": 5.318
+  }
+ ]
+}

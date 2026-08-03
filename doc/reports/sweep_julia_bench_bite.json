@@ -1,0 +1,158 @@
+{
+ "sweep": "julia_bench",
+ "peak_changed_pct": 1.46,
+ "subject_pct": 5.142,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "series"
+   },
+   "changed_px": 6654,
+   "changed_pct": 1.152
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "seed"
+   },
+   "changed_px": 6423,
+   "changed_pct": 1.112
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "relief"
+   },
+   "changed_px": 8354,
+   "changed_pct": 1.446
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 5534,
+   "changed_pct": 0.958
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "figure"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "seed"
+   },
+   "changed_px": 7162,
+   "changed_pct": 1.24
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "relief"
+   },
+   "changed_px": 7104,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 7341,
+   "changed_pct": 1.271
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "figure"
+   },
+   "changed_px": 6654,
+   "changed_pct": 1.152
+  },
+  {
+   "a": {
+    "ladder": "seed"
+   },
+   "b": {
+    "ladder": "relief"
+   },
+   "changed_px": 8021,
+   "changed_pct": 1.389
+  },
+  {
+   "a": {
+    "ladder": "seed"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 4234,
+   "changed_pct": 0.733
+  },
+  {
+   "a": {
+    "ladder": "seed"
+   },
+   "b": {
+    "ladder": "figure"
+   },
+   "changed_px": 6423,
+   "changed_pct": 1.112
+  },
+  {
+   "a": {
+    "ladder": "relief"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 8434,
+   "changed_pct": 1.46
+  },
+  {
+   "a": {
+    "ladder": "relief"
+   },
+   "b": {
+    "ladder": "figure"
+   },
+   "changed_px": 8354,
+   "changed_pct": 1.446
+  },
+  {
+   "a": {
+    "ladder": "section"
+   },
+   "b": {
+    "ladder": "figure"
+   },
+   "changed_px": 5534,
+   "changed_pct": 0.958
+  }
+ ]
+}

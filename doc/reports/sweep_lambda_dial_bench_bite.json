@@ -1,0 +1,108 @@
+{
+ "sweep": "lambda_dial_bench",
+ "peak_changed_pct": 3.347,
+ "subject_pct": 6.15,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "complement": "none"
+   },
+   "b": {
+    "complement": "ghost"
+   },
+   "changed_px": 19334,
+   "changed_pct": 3.347
+  },
+  {
+   "a": {
+    "complement": "none"
+   },
+   "b": {
+    "complement": "supply"
+   },
+   "changed_px": 18157,
+   "changed_pct": 3.144
+  },
+  {
+   "a": {
+    "complement": "none"
+   },
+   "b": {
+    "complement": "redaction"
+   },
+   "changed_px": 18637,
+   "changed_pct": 3.227
+  },
+  {
+   "a": {
+    "complement": "none"
+   },
+   "b": {
+    "complement": "quorum"
+   },
+   "changed_px": 19221,
+   "changed_pct": 3.328
+  },
+  {
+   "a": {
+    "complement": "ghost"
+   },
+   "b": {
+    "complement": "supply"
+   },
+   "changed_px": 5747,
+   "changed_pct": 0.995
+  },
+  {
+   "a": {
+    "complement": "ghost"
+   },
+   "b": {
+    "complement": "redaction"
+   },
+   "changed_px": 7970,
+   "changed_pct": 1.38
+  },
+  {
+   "a": {
+    "complement": "ghost"
+   },
+   "b": {
+    "complement": "quorum"
+   },
+   "changed_px": 5245,
+   "changed_pct": 0.908
+  },
+  {
+   "a": {
+    "complement": "supply"
+   },
+   "b": {
+    "complement": "redaction"
+   },
+   "changed_px": 7209,
+   "changed_pct": 1.248
+  },
+  {
+   "a": {
+    "complement": "supply"
+   },
+   "b": {
+    "complement": "quorum"
+   },
+   "changed_px": 5658,
+   "changed_pct": 0.98
+  },
+  {
+   "a": {
+    "complement": "redaction"
+   },
+   "b": {
+    "complement": "quorum"
+   },
+   "changed_px": 7675,
+   "changed_pct": 1.329
+  }
+ ]
+}

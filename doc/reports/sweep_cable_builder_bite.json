@@ -1,0 +1,108 @@
+{
+ "sweep": "cable_builder",
+ "peak_changed_pct": 1.443,
+ "subject_pct": 1.099,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "slack": "catenary"
+   },
+   "b": {
+    "slack": "chord"
+   },
+   "changed_px": 2766,
+   "changed_pct": 0.479
+  },
+  {
+   "a": {
+    "slack": "catenary"
+   },
+   "b": {
+    "slack": "spline"
+   },
+   "changed_px": 3120,
+   "changed_pct": 0.54
+  },
+  {
+   "a": {
+    "slack": "catenary"
+   },
+   "b": {
+    "slack": "festoon"
+   },
+   "changed_px": 3858,
+   "changed_pct": 0.668
+  },
+  {
+   "a": {
+    "slack": "catenary"
+   },
+   "b": {
+    "slack": "truss"
+   },
+   "changed_px": 7461,
+   "changed_pct": 1.292
+  },
+  {
+   "a": {
+    "slack": "chord"
+   },
+   "b": {
+    "slack": "spline"
+   },
+   "changed_px": 2991,
+   "changed_pct": 0.518
+  },
+  {
+   "a": {
+    "slack": "chord"
+   },
+   "b": {
+    "slack": "festoon"
+   },
+   "changed_px": 4016,
+   "changed_pct": 0.695
+  },
+  {
+   "a": {
+    "slack": "chord"
+   },
+   "b": {
+    "slack": "truss"
+   },
+   "changed_px": 7619,
+   "changed_pct": 1.319
+  },
+  {
+   "a": {
+    "slack": "spline"
+   },
+   "b": {
+    "slack": "festoon"
+   },
+   "changed_px": 4059,
+   "changed_pct": 0.703
+  },
+  {
+   "a": {
+    "slack": "spline"
+   },
+   "b": {
+    "slack": "truss"
+   },
+   "changed_px": 7684,
+   "changed_pct": 1.33
+  },
+  {
+   "a": {
+    "slack": "festoon"
+   },
+   "b": {
+    "slack": "truss"
+   },
+   "changed_px": 8337,
+   "changed_pct": 1.443
+  }
+ ]
+}

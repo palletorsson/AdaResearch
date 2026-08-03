@@ -1,0 +1,128 @@
+{
+ "sweep": "trng_vs_prng",
+ "peak_changed_pct": 5.321,
+ "subject_pct": 5.873,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "changed_px": 30733,
+   "changed_pct": 5.321
+  },
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "changed_px": 28627,
+   "changed_pct": 4.956
+  },
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 20688,
+   "changed_pct": 3.582
+  },
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 20653,
+   "changed_pct": 3.576
+  },
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "changed_px": 2412,
+   "changed_pct": 0.418
+  },
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 10522,
+   "changed_pct": 1.822
+  },
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 19470,
+   "changed_pct": 3.371
+  },
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 8110,
+   "changed_pct": 1.404
+  },
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 17640,
+   "changed_pct": 3.054
+  },
+  {
+   "a": {
+    "stream_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "b": {
+    "stream_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 9920,
+   "changed_pct": 1.717
+  }
+ ]
+}

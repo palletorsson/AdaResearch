@@ -1,0 +1,68 @@
+{
+ "sweep": "visual_color_mixing",
+ "peak_changed_pct": 2.798,
+ "subject_pct": 2.473,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "mixture": "bench"
+   },
+   "b": {
+    "mixture": "light"
+   },
+   "changed_px": 15559,
+   "changed_pct": 2.694
+  },
+  {
+   "a": {
+    "mixture": "bench"
+   },
+   "b": {
+    "mixture": "pigment"
+   },
+   "changed_px": 14921,
+   "changed_pct": 2.583
+  },
+  {
+   "a": {
+    "mixture": "bench"
+   },
+   "b": {
+    "mixture": "retina"
+   },
+   "changed_px": 16162,
+   "changed_pct": 2.798
+  },
+  {
+   "a": {
+    "mixture": "light"
+   },
+   "b": {
+    "mixture": "pigment"
+   },
+   "changed_px": 4531,
+   "changed_pct": 0.784
+  },
+  {
+   "a": {
+    "mixture": "light"
+   },
+   "b": {
+    "mixture": "retina"
+   },
+   "changed_px": 8558,
+   "changed_pct": 1.482
+  },
+  {
+   "a": {
+    "mixture": "pigment"
+   },
+   "b": {
+    "mixture": "retina"
+   },
+   "changed_px": 8603,
+   "changed_pct": 1.489
+  }
+ ]
+}

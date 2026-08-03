@@ -1,0 +1,68 @@
+{
+ "sweep": "dual_display_test",
+ "peak_changed_pct": 1.778,
+ "subject_pct": 3.443,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "window"
+   },
+   "changed_px": 10268,
+   "changed_pct": 1.778
+  },
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "archive"
+   },
+   "changed_px": 10127,
+   "changed_pct": 1.753
+  },
+  {
+   "a": {
+    "record": "instant"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 10129,
+   "changed_pct": 1.754
+  },
+  {
+   "a": {
+    "record": "window"
+   },
+   "b": {
+    "record": "archive"
+   },
+   "changed_px": 2386,
+   "changed_pct": 0.413
+  },
+  {
+   "a": {
+    "record": "window"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 2670,
+   "changed_pct": 0.462
+  },
+  {
+   "a": {
+    "record": "archive"
+   },
+   "b": {
+    "record": "margin"
+   },
+   "changed_px": 398,
+   "changed_pct": 0.069
+  }
+ ]
+}

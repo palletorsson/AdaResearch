@@ -1,0 +1,68 @@
+{
+ "sweep": "combine_sphere",
+ "peak_changed_pct": 4.889,
+ "subject_pct": 4.28,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "taxonomy": "table"
+   },
+   "b": {
+    "taxonomy": "ladder"
+   },
+   "changed_px": 12625,
+   "changed_pct": 2.186
+  },
+  {
+   "a": {
+    "taxonomy": "table"
+   },
+   "b": {
+    "taxonomy": "stack"
+   },
+   "changed_px": 15955,
+   "changed_pct": 2.762
+  },
+  {
+   "a": {
+    "taxonomy": "table"
+   },
+   "b": {
+    "taxonomy": "heap"
+   },
+   "changed_px": 28122,
+   "changed_pct": 4.869
+  },
+  {
+   "a": {
+    "taxonomy": "ladder"
+   },
+   "b": {
+    "taxonomy": "stack"
+   },
+   "changed_px": 6771,
+   "changed_pct": 1.172
+  },
+  {
+   "a": {
+    "taxonomy": "ladder"
+   },
+   "b": {
+    "taxonomy": "heap"
+   },
+   "changed_px": 25111,
+   "changed_pct": 4.347
+  },
+  {
+   "a": {
+    "taxonomy": "stack"
+   },
+   "b": {
+    "taxonomy": "heap"
+   },
+   "changed_px": 28236,
+   "changed_pct": 4.889
+  }
+ ]
+}

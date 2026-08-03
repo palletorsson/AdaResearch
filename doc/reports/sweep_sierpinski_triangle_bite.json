@@ -1,0 +1,108 @@
+{
+ "sweep": "sierpinski_triangle",
+ "peak_changed_pct": 6.135,
+ "subject_pct": 5.659,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "excision": "absence"
+   },
+   "b": {
+    "excision": "ghost"
+   },
+   "changed_px": 33451,
+   "changed_pct": 5.791
+  },
+  {
+   "a": {
+    "excision": "absence"
+   },
+   "b": {
+    "excision": "rubble"
+   },
+   "changed_px": 31983,
+   "changed_pct": 5.537
+  },
+  {
+   "a": {
+    "excision": "absence"
+   },
+   "b": {
+    "excision": "cast"
+   },
+   "changed_px": 35438,
+   "changed_pct": 6.135
+  },
+  {
+   "a": {
+    "excision": "absence"
+   },
+   "b": {
+    "excision": "negative"
+   },
+   "changed_px": 33494,
+   "changed_pct": 5.799
+  },
+  {
+   "a": {
+    "excision": "ghost"
+   },
+   "b": {
+    "excision": "rubble"
+   },
+   "changed_px": 8248,
+   "changed_pct": 1.428
+  },
+  {
+   "a": {
+    "excision": "ghost"
+   },
+   "b": {
+    "excision": "cast"
+   },
+   "changed_px": 20937,
+   "changed_pct": 3.625
+  },
+  {
+   "a": {
+    "excision": "ghost"
+   },
+   "b": {
+    "excision": "negative"
+   },
+   "changed_px": 33655,
+   "changed_pct": 5.827
+  },
+  {
+   "a": {
+    "excision": "rubble"
+   },
+   "b": {
+    "excision": "cast"
+   },
+   "changed_px": 19641,
+   "changed_pct": 3.4
+  },
+  {
+   "a": {
+    "excision": "rubble"
+   },
+   "b": {
+    "excision": "negative"
+   },
+   "changed_px": 34157,
+   "changed_pct": 5.914
+  },
+  {
+   "a": {
+    "excision": "cast"
+   },
+   "b": {
+    "excision": "negative"
+   },
+   "changed_px": 32700,
+   "changed_pct": 5.661
+  }
+ ]
+}

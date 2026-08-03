@@ -1,0 +1,108 @@
+{
+ "sweep": "spring_system",
+ "peak_changed_pct": 5.285,
+ "subject_pct": 4.624,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "suspension": "none"
+   },
+   "b": {
+    "suspension": "gantry"
+   },
+   "changed_px": 11505,
+   "changed_pct": 1.992
+  },
+  {
+   "a": {
+    "suspension": "none"
+   },
+   "b": {
+    "suspension": "wall"
+   },
+   "changed_px": 25761,
+   "changed_pct": 4.46
+  },
+  {
+   "a": {
+    "suspension": "none"
+   },
+   "b": {
+    "suspension": "hoop"
+   },
+   "changed_px": 12570,
+   "changed_pct": 2.176
+  },
+  {
+   "a": {
+    "suspension": "none"
+   },
+   "b": {
+    "suspension": "mast"
+   },
+   "changed_px": 8118,
+   "changed_pct": 1.405
+  },
+  {
+   "a": {
+    "suspension": "gantry"
+   },
+   "b": {
+    "suspension": "wall"
+   },
+   "changed_px": 29810,
+   "changed_pct": 5.161
+  },
+  {
+   "a": {
+    "suspension": "gantry"
+   },
+   "b": {
+    "suspension": "hoop"
+   },
+   "changed_px": 16636,
+   "changed_pct": 2.88
+  },
+  {
+   "a": {
+    "suspension": "gantry"
+   },
+   "b": {
+    "suspension": "mast"
+   },
+   "changed_px": 12966,
+   "changed_pct": 2.245
+  },
+  {
+   "a": {
+    "suspension": "wall"
+   },
+   "b": {
+    "suspension": "hoop"
+   },
+   "changed_px": 30529,
+   "changed_pct": 5.285
+  },
+  {
+   "a": {
+    "suspension": "wall"
+   },
+   "b": {
+    "suspension": "mast"
+   },
+   "changed_px": 28405,
+   "changed_pct": 4.918
+  },
+  {
+   "a": {
+    "suspension": "hoop"
+   },
+   "b": {
+    "suspension": "mast"
+   },
+   "changed_px": 14454,
+   "changed_pct": 2.502
+  }
+ ]
+}

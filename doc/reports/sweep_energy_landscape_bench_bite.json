@@ -1,0 +1,108 @@
+{
+ "sweep": "energy_landscape_bench",
+ "peak_changed_pct": 3.164,
+ "subject_pct": 6.115,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "gauge"
+   },
+   "changed_px": 2560,
+   "changed_pct": 0.443
+  },
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "control"
+   },
+   "changed_px": 3973,
+   "changed_pct": 0.688
+  },
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "chart"
+   },
+   "changed_px": 8049,
+   "changed_pct": 1.394
+  },
+  {
+   "a": {
+    "assay": "none"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 11799,
+   "changed_pct": 2.043
+  },
+  {
+   "a": {
+    "assay": "gauge"
+   },
+   "b": {
+    "assay": "control"
+   },
+   "changed_px": 4854,
+   "changed_pct": 0.84
+  },
+  {
+   "a": {
+    "assay": "gauge"
+   },
+   "b": {
+    "assay": "chart"
+   },
+   "changed_px": 9132,
+   "changed_pct": 1.581
+  },
+  {
+   "a": {
+    "assay": "gauge"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 17525,
+   "changed_pct": 3.034
+  },
+  {
+   "a": {
+    "assay": "control"
+   },
+   "b": {
+    "assay": "chart"
+   },
+   "changed_px": 9339,
+   "changed_pct": 1.617
+  },
+  {
+   "a": {
+    "assay": "control"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 18278,
+   "changed_pct": 3.164
+  },
+  {
+   "a": {
+    "assay": "chart"
+   },
+   "b": {
+    "assay": "vitrine"
+   },
+   "changed_px": 17709,
+   "changed_pct": 3.066
+  }
+ ]
+}

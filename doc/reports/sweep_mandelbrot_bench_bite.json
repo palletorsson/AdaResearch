@@ -1,0 +1,108 @@
+{
+ "sweep": "mandelbrot_bench",
+ "peak_changed_pct": 2.266,
+ "subject_pct": 5.197,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "series"
+   },
+   "changed_px": 11524,
+   "changed_pct": 1.995
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "seed"
+   },
+   "changed_px": 9333,
+   "changed_pct": 1.616
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "relief"
+   },
+   "changed_px": 13090,
+   "changed_pct": 2.266
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 6865,
+   "changed_pct": 1.189
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "seed"
+   },
+   "changed_px": 11435,
+   "changed_pct": 1.98
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "relief"
+   },
+   "changed_px": 10025,
+   "changed_pct": 1.736
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 11533,
+   "changed_pct": 1.997
+  },
+  {
+   "a": {
+    "ladder": "seed"
+   },
+   "b": {
+    "ladder": "relief"
+   },
+   "changed_px": 11786,
+   "changed_pct": 2.041
+  },
+  {
+   "a": {
+    "ladder": "seed"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 7996,
+   "changed_pct": 1.384
+  },
+  {
+   "a": {
+    "ladder": "relief"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 12258,
+   "changed_pct": 2.122
+  }
+ ]
+}

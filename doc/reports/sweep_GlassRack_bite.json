@@ -1,0 +1,68 @@
+{
+ "sweep": "GlassRack",
+ "peak_changed_pct": 5.402,
+ "subject_pct": 4.615,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "admission": "none"
+   },
+   "b": {
+    "admission": "bench"
+   },
+   "changed_px": 28145,
+   "changed_pct": 4.873
+  },
+  {
+   "a": {
+    "admission": "none"
+   },
+   "b": {
+    "admission": "residue"
+   },
+   "changed_px": 10693,
+   "changed_pct": 1.851
+  },
+  {
+   "a": {
+    "admission": "none"
+   },
+   "b": {
+    "admission": "exhibit"
+   },
+   "changed_px": 21113,
+   "changed_pct": 3.655
+  },
+  {
+   "a": {
+    "admission": "bench"
+   },
+   "b": {
+    "admission": "residue"
+   },
+   "changed_px": 28741,
+   "changed_pct": 4.976
+  },
+  {
+   "a": {
+    "admission": "bench"
+   },
+   "b": {
+    "admission": "exhibit"
+   },
+   "changed_px": 31201,
+   "changed_pct": 5.402
+  },
+  {
+   "a": {
+    "admission": "residue"
+   },
+   "b": {
+    "admission": "exhibit"
+   },
+   "changed_px": 22412,
+   "changed_pct": 3.88
+  }
+ ]
+}

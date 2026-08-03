@@ -1,0 +1,188 @@
+{
+ "sweep": "path_watchdog",
+ "peak_changed_pct": 0.0,
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 2.5
+   },
+   "b": {
+    "restart_on_timeout": true,
+    "grace_seconds": 5.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 2.5
+   },
+   "b": {
+    "restart_on_timeout": true,
+    "grace_seconds": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 2.5
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 2.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 2.5
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 5.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 2.5
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 5.0
+   },
+   "b": {
+    "restart_on_timeout": true,
+    "grace_seconds": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 5.0
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 2.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 5.0
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 5.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 5.0
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 8.0
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 2.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 8.0
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 5.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": true,
+    "grace_seconds": 8.0
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": false,
+    "grace_seconds": 2.5
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 5.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": false,
+    "grace_seconds": 2.5
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "restart_on_timeout": false,
+    "grace_seconds": 5.0
+   },
+   "b": {
+    "restart_on_timeout": false,
+    "grace_seconds": 8.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

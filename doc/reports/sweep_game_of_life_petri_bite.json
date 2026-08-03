@@ -1,187 +1,108 @@
 {
  "sweep": "game_of_life_petri",
- "peak_changed_pct": 4.551,
- "verdict": "BITES",
+ "peak_changed_pct": 0.918,
+ "subject_pct": 3.545,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
-    "dish_size": 0.4,
-    "grid_size": 32.0
+    "culture": "mixed"
    },
    "b": {
-    "dish_size": 0.4,
-    "grid_size": 64.0
+    "culture": "pulsar"
    },
-   "changed_px": 2832,
-   "changed_pct": 0.49
+   "changed_px": 786,
+   "changed_pct": 0.136
   },
   {
    "a": {
-    "dish_size": 0.4,
-    "grid_size": 32.0
+    "culture": "mixed"
    },
    "b": {
-    "dish_size": 0.8,
-    "grid_size": 32.0
+    "culture": "gun"
    },
-   "changed_px": 24574,
-   "changed_pct": 4.255
+   "changed_px": 1224,
+   "changed_pct": 0.212
   },
   {
    "a": {
-    "dish_size": 0.4,
-    "grid_size": 32.0
+    "culture": "mixed"
    },
    "b": {
-    "dish_size": 0.8,
-    "grid_size": 64.0
+    "culture": "soup"
    },
-   "changed_px": 24175,
-   "changed_pct": 4.185
+   "changed_px": 5304,
+   "changed_pct": 0.918
   },
   {
    "a": {
-    "dish_size": 0.4,
-    "grid_size": 32.0
+    "culture": "mixed"
    },
    "b": {
-    "dish_size": 1.28,
-    "grid_size": 32.0
+    "culture": "none"
    },
-   "changed_px": 26213,
-   "changed_pct": 4.538
+   "changed_px": 1582,
+   "changed_pct": 0.274
   },
   {
    "a": {
-    "dish_size": 0.4,
-    "grid_size": 32.0
+    "culture": "pulsar"
    },
    "b": {
-    "dish_size": 1.28,
-    "grid_size": 64.0
+    "culture": "gun"
    },
-   "changed_px": 25819,
-   "changed_pct": 4.47
+   "changed_px": 567,
+   "changed_pct": 0.098
   },
   {
    "a": {
-    "dish_size": 0.4,
-    "grid_size": 64.0
+    "culture": "pulsar"
    },
    "b": {
-    "dish_size": 0.8,
-    "grid_size": 32.0
+    "culture": "soup"
    },
-   "changed_px": 24518,
-   "changed_pct": 4.245
+   "changed_px": 4773,
+   "changed_pct": 0.826
   },
   {
    "a": {
-    "dish_size": 0.4,
-    "grid_size": 64.0
+    "culture": "pulsar"
    },
    "b": {
-    "dish_size": 0.8,
-    "grid_size": 64.0
+    "culture": "none"
    },
-   "changed_px": 23913,
-   "changed_pct": 4.14
+   "changed_px": 973,
+   "changed_pct": 0.168
   },
   {
    "a": {
-    "dish_size": 0.4,
-    "grid_size": 64.0
+    "culture": "gun"
    },
    "b": {
-    "dish_size": 1.28,
-    "grid_size": 32.0
+    "culture": "soup"
    },
-   "changed_px": 26287,
-   "changed_pct": 4.551
+   "changed_px": 4766,
+   "changed_pct": 0.825
   },
   {
    "a": {
-    "dish_size": 0.4,
-    "grid_size": 64.0
+    "culture": "gun"
    },
    "b": {
-    "dish_size": 1.28,
-    "grid_size": 64.0
+    "culture": "none"
    },
-   "changed_px": 25707,
-   "changed_pct": 4.451
+   "changed_px": 847,
+   "changed_pct": 0.147
   },
   {
    "a": {
-    "dish_size": 0.8,
-    "grid_size": 32.0
+    "culture": "soup"
    },
    "b": {
-    "dish_size": 0.8,
-    "grid_size": 64.0
+    "culture": "none"
    },
-   "changed_px": 2107,
-   "changed_pct": 0.365
-  },
-  {
-   "a": {
-    "dish_size": 0.8,
-    "grid_size": 32.0
-   },
-   "b": {
-    "dish_size": 1.28,
-    "grid_size": 32.0
-   },
-   "changed_px": 13290,
-   "changed_pct": 2.301
-  },
-  {
-   "a": {
-    "dish_size": 0.8,
-    "grid_size": 32.0
-   },
-   "b": {
-    "dish_size": 1.28,
-    "grid_size": 64.0
-   },
-   "changed_px": 13015,
-   "changed_pct": 2.253
-  },
-  {
-   "a": {
-    "dish_size": 0.8,
-    "grid_size": 64.0
-   },
-   "b": {
-    "dish_size": 1.28,
-    "grid_size": 32.0
-   },
-   "changed_px": 13079,
-   "changed_pct": 2.264
-  },
-  {
-   "a": {
-    "dish_size": 0.8,
-    "grid_size": 64.0
-   },
-   "b": {
-    "dish_size": 1.28,
-    "grid_size": 64.0
-   },
-   "changed_px": 12147,
-   "changed_pct": 2.103
-  },
-  {
-   "a": {
-    "dish_size": 1.28,
-    "grid_size": 32.0
-   },
-   "b": {
-    "dish_size": 1.28,
-    "grid_size": 64.0
-   },
-   "changed_px": 2322,
-   "changed_pct": 0.402
+   "changed_px": 4718,
+   "changed_pct": 0.817
   }
  ]
 }

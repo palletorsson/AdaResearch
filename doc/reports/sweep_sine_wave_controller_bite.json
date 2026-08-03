@@ -1,0 +1,38 @@
+{
+ "sweep": "sine_wave_controller",
+ "peak_changed_pct": 3.964,
+ "subject_pct": 3.777,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "trace"
+   },
+   "changed_px": 22803,
+   "changed_pct": 3.948
+  },
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "longhand"
+   },
+   "changed_px": 22894,
+   "changed_pct": 3.964
+  },
+  {
+   "a": {
+    "evidence": "trace"
+   },
+   "b": {
+    "evidence": "longhand"
+   },
+   "changed_px": 5097,
+   "changed_pct": 0.882
+  }
+ ]
+}

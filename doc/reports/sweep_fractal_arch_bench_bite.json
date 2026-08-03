@@ -1,0 +1,108 @@
+{
+ "sweep": "fractal_arch_bench",
+ "peak_changed_pct": 1.572,
+ "subject_pct": 4.638,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "series"
+   },
+   "changed_px": 5794,
+   "changed_pct": 1.003
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "seed"
+   },
+   "changed_px": 7301,
+   "changed_pct": 1.264
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "relief"
+   },
+   "changed_px": 9078,
+   "changed_pct": 1.572
+  },
+  {
+   "a": {
+    "ladder": "figure"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 3204,
+   "changed_pct": 0.555
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "seed"
+   },
+   "changed_px": 5282,
+   "changed_pct": 0.914
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "relief"
+   },
+   "changed_px": 8532,
+   "changed_pct": 1.477
+  },
+  {
+   "a": {
+    "ladder": "series"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 4724,
+   "changed_pct": 0.818
+  },
+  {
+   "a": {
+    "ladder": "seed"
+   },
+   "b": {
+    "ladder": "relief"
+   },
+   "changed_px": 8954,
+   "changed_pct": 1.55
+  },
+  {
+   "a": {
+    "ladder": "seed"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 6334,
+   "changed_pct": 1.097
+  },
+  {
+   "a": {
+    "ladder": "relief"
+   },
+   "b": {
+    "ladder": "section"
+   },
+   "changed_px": 8650,
+   "changed_pct": 1.498
+  }
+ ]
+}

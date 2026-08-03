@@ -1,0 +1,80 @@
+{
+ "sweep": "mirror_cellular_texture_for_3d",
+ "peak_changed_pct": 0.494,
+ "subject_pct": 15.262,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "pattern_seed": 20260802,
+    "stencil": "motif"
+   },
+   "b": {
+    "pattern_seed": 20260802,
+    "stencil": "quadrant"
+   },
+   "changed_px": 2852,
+   "changed_pct": 0.494
+  },
+  {
+   "a": {
+    "pattern_seed": 20260802,
+    "stencil": "motif"
+   },
+   "b": {
+    "pattern_seed": 20260802,
+    "stencil": "octant"
+   },
+   "changed_px": 2821,
+   "changed_pct": 0.488
+  },
+  {
+   "a": {
+    "pattern_seed": 20260802,
+    "stencil": "motif"
+   },
+   "b": {
+    "pattern_seed": 20260802,
+    "stencil": "none"
+   },
+   "changed_px": 2805,
+   "changed_pct": 0.486
+  },
+  {
+   "a": {
+    "pattern_seed": 20260802,
+    "stencil": "quadrant"
+   },
+   "b": {
+    "pattern_seed": 20260802,
+    "stencil": "octant"
+   },
+   "changed_px": 2227,
+   "changed_pct": 0.386
+  },
+  {
+   "a": {
+    "pattern_seed": 20260802,
+    "stencil": "quadrant"
+   },
+   "b": {
+    "pattern_seed": 20260802,
+    "stencil": "none"
+   },
+   "changed_px": 2229,
+   "changed_pct": 0.386
+  },
+  {
+   "a": {
+    "pattern_seed": 20260802,
+    "stencil": "octant"
+   },
+   "b": {
+    "pattern_seed": 20260802,
+    "stencil": "none"
+   },
+   "changed_px": 2244,
+   "changed_pct": 0.389
+  }
+ ]
+}

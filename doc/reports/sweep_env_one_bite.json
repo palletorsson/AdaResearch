@@ -1,0 +1,128 @@
+{
+ "sweep": "env_one",
+ "peak_changed_pct": 7.132,
+ "subject_pct": 7.294,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "changed_px": 12685,
+   "changed_pct": 2.196
+  },
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 24147,
+   "changed_pct": 4.181
+  },
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "works"
+   },
+   "changed_px": 39725,
+   "changed_pct": 6.878
+  },
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 41196,
+   "changed_pct": 7.132
+  },
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 13790,
+   "changed_pct": 2.387
+  },
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "works"
+   },
+   "changed_px": 30846,
+   "changed_pct": 5.34
+  },
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 32398,
+   "changed_pct": 5.609
+  },
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "works"
+   },
+   "changed_px": 18202,
+   "changed_pct": 3.151
+  },
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 19812,
+   "changed_pct": 3.43
+  },
+  {
+   "a": {
+    "kitbash_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "kitbash_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 2068,
+   "changed_pct": 0.358
+  }
+ ]
+}

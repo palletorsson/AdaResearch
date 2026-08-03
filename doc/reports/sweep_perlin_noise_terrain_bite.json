@@ -1,0 +1,38 @@
+{
+ "sweep": "perlin_noise_terrain",
+ "peak_changed_pct": 8.396,
+ "subject_pct": 9.113,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "readout": "relief"
+   },
+   "b": {
+    "readout": "plate"
+   },
+   "changed_px": 25525,
+   "changed_pct": 4.419
+  },
+  {
+   "a": {
+    "readout": "relief"
+   },
+   "b": {
+    "readout": "column"
+   },
+   "changed_px": 48495,
+   "changed_pct": 8.396
+  },
+  {
+   "a": {
+    "readout": "plate"
+   },
+   "b": {
+    "readout": "column"
+   },
+   "changed_px": 45001,
+   "changed_pct": 7.791
+  }
+ ]
+}

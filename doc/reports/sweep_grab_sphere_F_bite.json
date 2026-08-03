@@ -1,0 +1,108 @@
+{
+ "sweep": "grab_sphere_F",
+ "peak_changed_pct": 1.016,
+ "subject_pct": 0.648,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "grasp": "atom"
+   },
+   "b": {
+    "grasp": "socket"
+   },
+   "changed_px": 1603,
+   "changed_pct": 0.278
+  },
+  {
+   "a": {
+    "grasp": "atom"
+   },
+   "b": {
+    "grasp": "chorus"
+   },
+   "changed_px": 5268,
+   "changed_pct": 0.912
+  },
+  {
+   "a": {
+    "grasp": "atom"
+   },
+   "b": {
+    "grasp": "hollow"
+   },
+   "changed_px": 1797,
+   "changed_pct": 0.311
+  },
+  {
+   "a": {
+    "grasp": "atom"
+   },
+   "b": {
+    "grasp": "swarm"
+   },
+   "changed_px": 2820,
+   "changed_pct": 0.488
+  },
+  {
+   "a": {
+    "grasp": "socket"
+   },
+   "b": {
+    "grasp": "chorus"
+   },
+   "changed_px": 5272,
+   "changed_pct": 0.913
+  },
+  {
+   "a": {
+    "grasp": "socket"
+   },
+   "b": {
+    "grasp": "hollow"
+   },
+   "changed_px": 1302,
+   "changed_pct": 0.225
+  },
+  {
+   "a": {
+    "grasp": "socket"
+   },
+   "b": {
+    "grasp": "swarm"
+   },
+   "changed_px": 2586,
+   "changed_pct": 0.448
+  },
+  {
+   "a": {
+    "grasp": "chorus"
+   },
+   "b": {
+    "grasp": "hollow"
+   },
+   "changed_px": 5371,
+   "changed_pct": 0.93
+  },
+  {
+   "a": {
+    "grasp": "chorus"
+   },
+   "b": {
+    "grasp": "swarm"
+   },
+   "changed_px": 5870,
+   "changed_pct": 1.016
+  },
+  {
+   "a": {
+    "grasp": "hollow"
+   },
+   "b": {
+    "grasp": "swarm"
+   },
+   "changed_px": 2595,
+   "changed_pct": 0.449
+  }
+ ]
+}

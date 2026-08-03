@@ -1,0 +1,92 @@
+{
+ "sweep": "grid_3d_capture",
+ "peak_changed_pct": 4.008,
+ "subject_pct": 3.823,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "none"
+   },
+   "b": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "board"
+   },
+   "changed_px": 17521,
+   "changed_pct": 3.033
+  },
+  {
+   "a": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "none"
+   },
+   "b": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "lattice"
+   },
+   "changed_px": 18559,
+   "changed_pct": 3.213
+  },
+  {
+   "a": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "none"
+   },
+   "b": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "tray"
+   },
+   "changed_px": 23150,
+   "changed_pct": 4.008
+  },
+  {
+   "a": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "board"
+   },
+   "b": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "lattice"
+   },
+   "changed_px": 11247,
+   "changed_pct": 1.947
+  },
+  {
+   "a": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "board"
+   },
+   "b": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "tray"
+   },
+   "changed_px": 12157,
+   "changed_pct": 2.105
+  },
+  {
+   "a": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "lattice"
+   },
+   "b": {
+    "demo_subset": "lab_items_horizontal",
+    "demo_preset": "bench_quickstart",
+    "bed": "tray"
+   },
+   "changed_px": 12912,
+   "changed_pct": 2.235
+  }
+ ]
+}

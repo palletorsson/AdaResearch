@@ -1,187 +1,108 @@
 {
  "sweep": "florensky_sphere",
- "peak_changed_pct": 5.46,
+ "peak_changed_pct": 3.193,
+ "subject_pct": 3.408,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.15
+    "seam": "none"
    },
    "b": {
-    "allow_observation": true,
-    "radius": 0.3
+    "seam": "hairline"
    },
-   "changed_px": 23686,
-   "changed_pct": 4.101
+   "changed_px": 14910,
+   "changed_pct": 2.581
   },
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.15
+    "seam": "none"
    },
    "b": {
-    "allow_observation": true,
-    "radius": 0.48
+    "seam": "gap"
    },
-   "changed_px": 31537,
-   "changed_pct": 5.46
+   "changed_px": 9135,
+   "changed_pct": 1.582
   },
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.15
+    "seam": "none"
    },
    "b": {
-    "allow_observation": false,
-    "radius": 0.15
+    "seam": "scaffold"
    },
-   "changed_px": 942,
-   "changed_pct": 0.163
+   "changed_px": 11918,
+   "changed_pct": 2.063
   },
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.15
+    "seam": "none"
    },
    "b": {
-    "allow_observation": false,
-    "radius": 0.3
+    "seam": "field"
    },
-   "changed_px": 23684,
-   "changed_pct": 4.1
+   "changed_px": 11846,
+   "changed_pct": 2.051
   },
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.15
+    "seam": "hairline"
    },
    "b": {
-    "allow_observation": false,
-    "radius": 0.48
+    "seam": "gap"
    },
-   "changed_px": 31539,
-   "changed_pct": 5.46
+   "changed_px": 18444,
+   "changed_pct": 3.193
   },
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.3
+    "seam": "hairline"
    },
    "b": {
-    "allow_observation": true,
-    "radius": 0.48
+    "seam": "scaffold"
    },
-   "changed_px": 24215,
-   "changed_pct": 4.192
+   "changed_px": 18309,
+   "changed_pct": 3.17
   },
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.3
+    "seam": "hairline"
    },
    "b": {
-    "allow_observation": false,
-    "radius": 0.15
+    "seam": "field"
    },
-   "changed_px": 23653,
-   "changed_pct": 4.095
+   "changed_px": 18045,
+   "changed_pct": 3.124
   },
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.3
+    "seam": "gap"
    },
    "b": {
-    "allow_observation": false,
-    "radius": 0.3
+    "seam": "scaffold"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 8087,
+   "changed_pct": 1.4
   },
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.3
+    "seam": "gap"
    },
    "b": {
-    "allow_observation": false,
-    "radius": 0.48
+    "seam": "field"
    },
-   "changed_px": 24205,
-   "changed_pct": 4.191
+   "changed_px": 14345,
+   "changed_pct": 2.484
   },
   {
    "a": {
-    "allow_observation": true,
-    "radius": 0.48
+    "seam": "scaffold"
    },
    "b": {
-    "allow_observation": false,
-    "radius": 0.15
+    "seam": "field"
    },
-   "changed_px": 31495,
-   "changed_pct": 5.453
-  },
-  {
-   "a": {
-    "allow_observation": true,
-    "radius": 0.48
-   },
-   "b": {
-    "allow_observation": false,
-    "radius": 0.3
-   },
-   "changed_px": 24191,
-   "changed_pct": 4.188
-  },
-  {
-   "a": {
-    "allow_observation": true,
-    "radius": 0.48
-   },
-   "b": {
-    "allow_observation": false,
-    "radius": 0.48
-   },
-   "changed_px": 1,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "allow_observation": false,
-    "radius": 0.15
-   },
-   "b": {
-    "allow_observation": false,
-    "radius": 0.3
-   },
-   "changed_px": 23655,
-   "changed_pct": 4.095
-  },
-  {
-   "a": {
-    "allow_observation": false,
-    "radius": 0.15
-   },
-   "b": {
-    "allow_observation": false,
-    "radius": 0.48
-   },
-   "changed_px": 31499,
-   "changed_pct": 5.453
-  },
-  {
-   "a": {
-    "allow_observation": false,
-    "radius": 0.3
-   },
-   "b": {
-    "allow_observation": false,
-    "radius": 0.48
-   },
-   "changed_px": 24179,
-   "changed_pct": 4.186
+   "changed_px": 15488,
+   "changed_pct": 2.681
   }
  ]
 }

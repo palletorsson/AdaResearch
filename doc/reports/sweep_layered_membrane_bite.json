@@ -1,0 +1,128 @@
+{
+ "sweep": "layered_membrane",
+ "peak_changed_pct": 4.033,
+ "subject_pct": 5.334,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "drift"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "unison"
+   },
+   "changed_px": 22612,
+   "changed_pct": 3.915
+  },
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "drift"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "twist"
+   },
+   "changed_px": 11339,
+   "changed_pct": 1.963
+  },
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "drift"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "alternation"
+   },
+   "changed_px": 11460,
+   "changed_pct": 1.984
+  },
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "drift"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "scatter"
+   },
+   "changed_px": 23292,
+   "changed_pct": 4.033
+  },
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "unison"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "twist"
+   },
+   "changed_px": 8829,
+   "changed_pct": 1.529
+  },
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "unison"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "alternation"
+   },
+   "changed_px": 6878,
+   "changed_pct": 1.191
+  },
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "unison"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "scatter"
+   },
+   "changed_px": 8010,
+   "changed_pct": 1.387
+  },
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "twist"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "alternation"
+   },
+   "changed_px": 4539,
+   "changed_pct": 0.786
+  },
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "twist"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "scatter"
+   },
+   "changed_px": 6058,
+   "changed_pct": 1.049
+  },
+  {
+   "a": {
+    "membrane_seed": 20260802,
+    "registration": "alternation"
+   },
+   "b": {
+    "membrane_seed": 20260802,
+    "registration": "scatter"
+   },
+   "changed_px": 5110,
+   "changed_pct": 0.885
+  }
+ ]
+}

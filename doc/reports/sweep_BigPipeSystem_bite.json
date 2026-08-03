@@ -1,0 +1,148 @@
+{
+ "sweep": "BigPipeSystem",
+ "peak_changed_pct": 5.249,
+ "subject_pct": 5.723,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "spline"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "chord"
+   },
+   "changed_px": 13637,
+   "changed_pct": 2.361
+  },
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "spline"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "catenary"
+   },
+   "changed_px": 20011,
+   "changed_pct": 3.465
+  },
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "spline"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "festoon"
+   },
+   "changed_px": 28413,
+   "changed_pct": 4.919
+  },
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "spline"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "truss"
+   },
+   "changed_px": 30319,
+   "changed_pct": 5.249
+  },
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "chord"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "catenary"
+   },
+   "changed_px": 15037,
+   "changed_pct": 2.603
+  },
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "chord"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "festoon"
+   },
+   "changed_px": 24245,
+   "changed_pct": 4.198
+  },
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "chord"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "truss"
+   },
+   "changed_px": 29019,
+   "changed_pct": 5.024
+  },
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "catenary"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "festoon"
+   },
+   "changed_px": 20458,
+   "changed_pct": 3.542
+  },
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "catenary"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "truss"
+   },
+   "changed_px": 29641,
+   "changed_pct": 5.132
+  },
+  {
+   "a": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "festoon"
+   },
+   "b": {
+    "auto_build": true,
+    "config_file": "res://algorithms/wavefunctions/big_pipe_system/configs/serpentine.json",
+    "slack": "truss"
+   },
+   "changed_px": 27473,
+   "changed_pct": 4.756
+  }
+ ]
+}

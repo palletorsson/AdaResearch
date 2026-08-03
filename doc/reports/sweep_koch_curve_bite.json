@@ -1,0 +1,68 @@
+{
+ "sweep": "koch_curve",
+ "peak_changed_pct": 0.0,
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "trace"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "longhand"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "axiom"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "evidence": "trace"
+   },
+   "b": {
+    "evidence": "longhand"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "evidence": "trace"
+   },
+   "b": {
+    "evidence": "axiom"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "evidence": "longhand"
+   },
+   "b": {
+    "evidence": "axiom"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

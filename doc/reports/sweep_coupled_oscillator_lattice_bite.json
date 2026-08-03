@@ -1,0 +1,68 @@
+{
+ "sweep": "coupled_oscillator_lattice",
+ "peak_changed_pct": 3.949,
+ "subject_pct": 3.606,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "fabric": "nodes"
+   },
+   "b": {
+    "fabric": "bonds"
+   },
+   "changed_px": 16630,
+   "changed_pct": 2.879
+  },
+  {
+   "a": {
+    "fabric": "nodes"
+   },
+   "b": {
+    "fabric": "sheet"
+   },
+   "changed_px": 21806,
+   "changed_pct": 3.775
+  },
+  {
+   "a": {
+    "fabric": "nodes"
+   },
+   "b": {
+    "fabric": "boundary"
+   },
+   "changed_px": 6036,
+   "changed_pct": 1.045
+  },
+  {
+   "a": {
+    "fabric": "bonds"
+   },
+   "b": {
+    "fabric": "sheet"
+   },
+   "changed_px": 22810,
+   "changed_pct": 3.949
+  },
+  {
+   "a": {
+    "fabric": "bonds"
+   },
+   "b": {
+    "fabric": "boundary"
+   },
+   "changed_px": 18005,
+   "changed_pct": 3.117
+  },
+  {
+   "a": {
+    "fabric": "sheet"
+   },
+   "b": {
+    "fabric": "boundary"
+   },
+   "changed_px": 21901,
+   "changed_pct": 3.792
+  }
+ ]
+}

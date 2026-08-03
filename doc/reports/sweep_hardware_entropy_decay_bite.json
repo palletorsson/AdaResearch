@@ -1,0 +1,128 @@
+{
+ "sweep": "hardware_entropy_decay",
+ "peak_changed_pct": 4.53,
+ "subject_pct": 5.685,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "changed_px": 26164,
+   "changed_pct": 4.53
+  },
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "changed_px": 26006,
+   "changed_pct": 4.502
+  },
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 24158,
+   "changed_pct": 4.182
+  },
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "works"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 24178,
+   "changed_pct": 4.186
+  },
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "changed_px": 202,
+   "changed_pct": 0.035
+  },
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 6853,
+   "changed_pct": 1.186
+  },
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "oracle"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 9989,
+   "changed_pct": 1.729
+  },
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "changed_px": 6883,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "tally"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 10065,
+   "changed_pct": 1.743
+  },
+  {
+   "a": {
+    "entropy_seed": 20260802,
+    "disclosure": "ledger"
+   },
+   "b": {
+    "entropy_seed": 20260802,
+    "disclosure": "origin"
+   },
+   "changed_px": 3196,
+   "changed_pct": 0.553
+  }
+ ]
+}

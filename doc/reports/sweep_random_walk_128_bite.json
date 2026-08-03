@@ -1,0 +1,128 @@
+{
+ "sweep": "random_walk_128",
+ "peak_changed_pct": 5.394,
+ "subject_pct": 6.466,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "path"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "head"
+   },
+   "changed_px": 11053,
+   "changed_pct": 1.914
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "path"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "tail"
+   },
+   "changed_px": 11672,
+   "changed_pct": 2.021
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "path"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "envelope"
+   },
+   "changed_px": 20197,
+   "changed_pct": 3.497
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "path"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "ensemble"
+   },
+   "changed_px": 31157,
+   "changed_pct": 5.394
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "head"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "tail"
+   },
+   "changed_px": 2691,
+   "changed_pct": 0.466
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "head"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "envelope"
+   },
+   "changed_px": 19553,
+   "changed_pct": 3.385
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "head"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "ensemble"
+   },
+   "changed_px": 29908,
+   "changed_pct": 5.178
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "tail"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "envelope"
+   },
+   "changed_px": 20151,
+   "changed_pct": 3.489
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "tail"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "ensemble"
+   },
+   "changed_px": 30310,
+   "changed_pct": 5.248
+  },
+  {
+   "a": {
+    "walk_seed": 20260802,
+    "residue": "envelope"
+   },
+   "b": {
+    "walk_seed": 20260802,
+    "residue": "ensemble"
+   },
+   "changed_px": 19909,
+   "changed_pct": 3.447
+  }
+ ]
+}

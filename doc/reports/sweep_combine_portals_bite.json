@@ -1,0 +1,344 @@
+{
+ "sweep": "combine_portals",
+ "peak_changed_pct": 7.132,
+ "subject_pct": 6.142,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "table",
+    "portal_count": 20.0
+   },
+   "changed_px": 194,
+   "changed_pct": 0.034
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "portal_count": 10.0
+   },
+   "changed_px": 2023,
+   "changed_pct": 0.35
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "portal_count": 20.0
+   },
+   "changed_px": 194,
+   "changed_pct": 0.034
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "stack",
+    "portal_count": 10.0
+   },
+   "changed_px": 33940,
+   "changed_pct": 5.876
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "stack",
+    "portal_count": 20.0
+   },
+   "changed_px": 16205,
+   "changed_pct": 2.806
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 10.0
+   },
+   "changed_px": 28420,
+   "changed_pct": 4.92
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 20.0
+   },
+   "changed_px": 35428,
+   "changed_pct": 6.134
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "portal_count": 10.0
+   },
+   "changed_px": 1433,
+   "changed_pct": 0.248
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "portal_count": 20.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "stack",
+    "portal_count": 10.0
+   },
+   "changed_px": 33093,
+   "changed_pct": 5.729
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "stack",
+    "portal_count": 20.0
+   },
+   "changed_px": 14318,
+   "changed_pct": 2.479
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 10.0
+   },
+   "changed_px": 26503,
+   "changed_pct": 4.588
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 20.0
+   },
+   "changed_px": 33224,
+   "changed_pct": 5.752
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "portal_count": 20.0
+   },
+   "changed_px": 1775,
+   "changed_pct": 0.307
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "stack",
+    "portal_count": 10.0
+   },
+   "changed_px": 33722,
+   "changed_pct": 5.838
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "stack",
+    "portal_count": 20.0
+   },
+   "changed_px": 15906,
+   "changed_pct": 2.754
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 10.0
+   },
+   "changed_px": 24207,
+   "changed_pct": 4.191
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 20.0
+   },
+   "changed_px": 31617,
+   "changed_pct": 5.474
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "stack",
+    "portal_count": 10.0
+   },
+   "changed_px": 34054,
+   "changed_pct": 5.896
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "stack",
+    "portal_count": 20.0
+   },
+   "changed_px": 15845,
+   "changed_pct": 2.743
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 10.0
+   },
+   "changed_px": 28164,
+   "changed_pct": 4.876
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 20.0
+   },
+   "changed_px": 35352,
+   "changed_pct": 6.12
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "stack",
+    "portal_count": 20.0
+   },
+   "changed_px": 26679,
+   "changed_pct": 4.619
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 10.0
+   },
+   "changed_px": 41192,
+   "changed_pct": 7.132
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 20.0
+   },
+   "changed_px": 41108,
+   "changed_pct": 7.117
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 10.0
+   },
+   "changed_px": 33474,
+   "changed_pct": 5.795
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "portal_count": 20.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 20.0
+   },
+   "changed_px": 36903,
+   "changed_pct": 6.389
+  },
+  {
+   "a": {
+    "taxonomy": "heap",
+    "portal_count": 10.0
+   },
+   "b": {
+    "taxonomy": "heap",
+    "portal_count": 20.0
+   },
+   "changed_px": 21257,
+   "changed_pct": 3.68
+  }
+ ]
+}

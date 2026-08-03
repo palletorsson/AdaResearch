@@ -1,0 +1,68 @@
+{
+ "sweep": "sdf_sculpt_bench",
+ "peak_changed_pct": 4.843,
+ "subject_pct": 6.216,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "workings": "result"
+   },
+   "b": {
+    "workings": "rule"
+   },
+   "changed_px": 6685,
+   "changed_pct": 1.157
+  },
+  {
+   "a": {
+    "workings": "result"
+   },
+   "b": {
+    "workings": "trial"
+   },
+   "changed_px": 18696,
+   "changed_pct": 3.237
+  },
+  {
+   "a": {
+    "workings": "result"
+   },
+   "b": {
+    "workings": "reject"
+   },
+   "changed_px": 21720,
+   "changed_pct": 3.76
+  },
+  {
+   "a": {
+    "workings": "rule"
+   },
+   "b": {
+    "workings": "trial"
+   },
+   "changed_px": 24320,
+   "changed_pct": 4.211
+  },
+  {
+   "a": {
+    "workings": "rule"
+   },
+   "b": {
+    "workings": "reject"
+   },
+   "changed_px": 27971,
+   "changed_pct": 4.843
+  },
+  {
+   "a": {
+    "workings": "trial"
+   },
+   "b": {
+    "workings": "reject"
+   },
+   "changed_px": 26929,
+   "changed_pct": 4.662
+  }
+ ]
+}
