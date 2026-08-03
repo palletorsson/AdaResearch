@@ -1,68 +1,344 @@
 {
  "sweep": "kusama_sine",
- "peak_changed_pct": 2.594,
- "subject_pct": 2.638,
+ "peak_changed_pct": 2.48,
+ "subject_pct": 2.48,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "obsession": "skin"
+    "obsession": "skin",
+    "generate_on_ready": true
    },
    "b": {
-    "obsession": "none"
+    "obsession": "skin",
+    "generate_on_ready": false
    },
-   "changed_px": 5467,
-   "changed_pct": 0.947
+   "changed_px": 13122,
+   "changed_pct": 2.272
   },
   {
    "a": {
-    "obsession": "skin"
+    "obsession": "skin",
+    "generate_on_ready": true
    },
    "b": {
-    "obsession": "air"
+    "obsession": "none",
+    "generate_on_ready": true
    },
-   "changed_px": 6604,
-   "changed_pct": 1.143
+   "changed_px": 945,
+   "changed_pct": 0.164
   },
   {
    "a": {
-    "obsession": "skin"
+    "obsession": "skin",
+    "generate_on_ready": true
    },
    "b": {
-    "obsession": "obliteration"
+    "obsession": "none",
+    "generate_on_ready": false
    },
-   "changed_px": 13697,
-   "changed_pct": 2.371
+   "changed_px": 13122,
+   "changed_pct": 2.272
   },
   {
    "a": {
-    "obsession": "none"
+    "obsession": "skin",
+    "generate_on_ready": true
    },
    "b": {
-    "obsession": "air"
+    "obsession": "air",
+    "generate_on_ready": true
    },
-   "changed_px": 3726,
-   "changed_pct": 0.645
+   "changed_px": 2704,
+   "changed_pct": 0.468
   },
   {
    "a": {
-    "obsession": "none"
+    "obsession": "skin",
+    "generate_on_ready": true
    },
    "b": {
-    "obsession": "obliteration"
+    "obsession": "air",
+    "generate_on_ready": false
    },
-   "changed_px": 13972,
-   "changed_pct": 2.419
+   "changed_px": 13122,
+   "changed_pct": 2.272
   },
   {
    "a": {
-    "obsession": "air"
+    "obsession": "skin",
+    "generate_on_ready": true
    },
    "b": {
-    "obsession": "obliteration"
+    "obsession": "obliteration",
+    "generate_on_ready": true
    },
-   "changed_px": 14981,
-   "changed_pct": 2.594
+   "changed_px": 12792,
+   "changed_pct": 2.215
+  },
+  {
+   "a": {
+    "obsession": "skin",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": false
+   },
+   "changed_px": 13122,
+   "changed_pct": 2.272
+  },
+  {
+   "a": {
+    "obsession": "skin",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "none",
+    "generate_on_ready": true
+   },
+   "changed_px": 12872,
+   "changed_pct": 2.229
+  },
+  {
+   "a": {
+    "obsession": "skin",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "none",
+    "generate_on_ready": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "obsession": "skin",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "air",
+    "generate_on_ready": true
+   },
+   "changed_px": 14324,
+   "changed_pct": 2.48
+  },
+  {
+   "a": {
+    "obsession": "skin",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "air",
+    "generate_on_ready": false
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "obsession": "skin",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": true
+   },
+   "changed_px": 2177,
+   "changed_pct": 0.377
+  },
+  {
+   "a": {
+    "obsession": "skin",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "obsession": "none",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "none",
+    "generate_on_ready": false
+   },
+   "changed_px": 12872,
+   "changed_pct": 2.229
+  },
+  {
+   "a": {
+    "obsession": "none",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "air",
+    "generate_on_ready": true
+   },
+   "changed_px": 3159,
+   "changed_pct": 0.547
+  },
+  {
+   "a": {
+    "obsession": "none",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "air",
+    "generate_on_ready": false
+   },
+   "changed_px": 12872,
+   "changed_pct": 2.229
+  },
+  {
+   "a": {
+    "obsession": "none",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": true
+   },
+   "changed_px": 13120,
+   "changed_pct": 2.271
+  },
+  {
+   "a": {
+    "obsession": "none",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": false
+   },
+   "changed_px": 12872,
+   "changed_pct": 2.229
+  },
+  {
+   "a": {
+    "obsession": "none",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "air",
+    "generate_on_ready": true
+   },
+   "changed_px": 14324,
+   "changed_pct": 2.48
+  },
+  {
+   "a": {
+    "obsession": "none",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "air",
+    "generate_on_ready": false
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "obsession": "none",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": true
+   },
+   "changed_px": 2177,
+   "changed_pct": 0.377
+  },
+  {
+   "a": {
+    "obsession": "none",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "obsession": "air",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "air",
+    "generate_on_ready": false
+   },
+   "changed_px": 14324,
+   "changed_pct": 2.48
+  },
+  {
+   "a": {
+    "obsession": "air",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": true
+   },
+   "changed_px": 14049,
+   "changed_pct": 2.432
+  },
+  {
+   "a": {
+    "obsession": "air",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": false
+   },
+   "changed_px": 14324,
+   "changed_pct": 2.48
+  },
+  {
+   "a": {
+    "obsession": "air",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": true
+   },
+   "changed_px": 2178,
+   "changed_pct": 0.377
+  },
+  {
+   "a": {
+    "obsession": "air",
+    "generate_on_ready": false
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": false
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "obsession": "obliteration",
+    "generate_on_ready": true
+   },
+   "b": {
+    "obsession": "obliteration",
+    "generate_on_ready": false
+   },
+   "changed_px": 2177,
+   "changed_pct": 0.377
   }
  ]
 }

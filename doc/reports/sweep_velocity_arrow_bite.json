@@ -1,0 +1,188 @@
+{
+ "sweep": "velocity_arrow",
+ "peak_changed_pct": 0.465,
+ "subject_pct": 0.27,
+ "verdict": "SUBJECT NOT DETECTED - only 0.27% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.45
+   },
+   "b": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.9
+   },
+   "changed_px": 1406,
+   "changed_pct": 0.243
+  },
+  {
+   "a": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.45
+   },
+   "b": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.45
+   },
+   "changed_px": 1567,
+   "changed_pct": 0.271
+  },
+  {
+   "a": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.45
+   },
+   "b": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.9
+   },
+   "changed_px": 1899,
+   "changed_pct": 0.329
+  },
+  {
+   "a": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.45
+   },
+   "b": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.45
+   },
+   "changed_px": 2077,
+   "changed_pct": 0.36
+  },
+  {
+   "a": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.45
+   },
+   "b": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.9
+   },
+   "changed_px": 2347,
+   "changed_pct": 0.406
+  },
+  {
+   "a": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.9
+   },
+   "b": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.45
+   },
+   "changed_px": 1852,
+   "changed_pct": 0.321
+  },
+  {
+   "a": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.9
+   },
+   "b": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.9
+   },
+   "changed_px": 1838,
+   "changed_pct": 0.318
+  },
+  {
+   "a": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.9
+   },
+   "b": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.45
+   },
+   "changed_px": 2291,
+   "changed_pct": 0.397
+  },
+  {
+   "a": {
+    "track_radius_x": 0.7,
+    "track_radius_z": 0.9
+   },
+   "b": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.9
+   },
+   "changed_px": 2340,
+   "changed_pct": 0.405
+  },
+  {
+   "a": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.45
+   },
+   "b": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.9
+   },
+   "changed_px": 1971,
+   "changed_pct": 0.341
+  },
+  {
+   "a": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.45
+   },
+   "b": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.45
+   },
+   "changed_px": 1994,
+   "changed_pct": 0.345
+  },
+  {
+   "a": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.45
+   },
+   "b": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.9
+   },
+   "changed_px": 2556,
+   "changed_pct": 0.443
+  },
+  {
+   "a": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.9
+   },
+   "b": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.45
+   },
+   "changed_px": 2472,
+   "changed_pct": 0.428
+  },
+  {
+   "a": {
+    "track_radius_x": 1.4,
+    "track_radius_z": 0.9
+   },
+   "b": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.9
+   },
+   "changed_px": 2318,
+   "changed_pct": 0.401
+  },
+  {
+   "a": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.45
+   },
+   "b": {
+    "track_radius_x": 2.24,
+    "track_radius_z": 0.9
+   },
+   "changed_px": 2684,
+   "changed_pct": 0.465
+  }
+ ]
+}

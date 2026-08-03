@@ -1,0 +1,80 @@
+{
+ "sweep": "riemann_pi",
+ "peak_changed_pct": 0.354,
+ "subject_pct": 0.354,
+ "verdict": "SUBJECT NOT DETECTED - only 0.35% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "animate_horizon": true,
+    "enable_auto_travel": true
+   },
+   "b": {
+    "animate_horizon": true,
+    "enable_auto_travel": false
+   },
+   "changed_px": 2043,
+   "changed_pct": 0.354
+  },
+  {
+   "a": {
+    "animate_horizon": true,
+    "enable_auto_travel": true
+   },
+   "b": {
+    "animate_horizon": false,
+    "enable_auto_travel": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "animate_horizon": true,
+    "enable_auto_travel": true
+   },
+   "b": {
+    "animate_horizon": false,
+    "enable_auto_travel": false
+   },
+   "changed_px": 2020,
+   "changed_pct": 0.35
+  },
+  {
+   "a": {
+    "animate_horizon": true,
+    "enable_auto_travel": false
+   },
+   "b": {
+    "animate_horizon": false,
+    "enable_auto_travel": true
+   },
+   "changed_px": 2043,
+   "changed_pct": 0.354
+  },
+  {
+   "a": {
+    "animate_horizon": true,
+    "enable_auto_travel": false
+   },
+   "b": {
+    "animate_horizon": false,
+    "enable_auto_travel": false
+   },
+   "changed_px": 38,
+   "changed_pct": 0.007
+  },
+  {
+   "a": {
+    "animate_horizon": false,
+    "enable_auto_travel": true
+   },
+   "b": {
+    "animate_horizon": false,
+    "enable_auto_travel": false
+   },
+   "changed_px": 2020,
+   "changed_pct": 0.35
+  }
+ ]
+}

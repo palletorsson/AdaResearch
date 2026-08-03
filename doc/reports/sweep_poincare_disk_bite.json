@@ -1,0 +1,80 @@
+{
+ "sweep": "poincare_disk",
+ "peak_changed_pct": 0.116,
+ "subject_pct": 8.808,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "show_triangle": true,
+    "animate_geodesics": true
+   },
+   "b": {
+    "show_triangle": true,
+    "animate_geodesics": false
+   },
+   "changed_px": 290,
+   "changed_pct": 0.05
+  },
+  {
+   "a": {
+    "show_triangle": true,
+    "animate_geodesics": true
+   },
+   "b": {
+    "show_triangle": false,
+    "animate_geodesics": true
+   },
+   "changed_px": 382,
+   "changed_pct": 0.066
+  },
+  {
+   "a": {
+    "show_triangle": true,
+    "animate_geodesics": true
+   },
+   "b": {
+    "show_triangle": false,
+    "animate_geodesics": false
+   },
+   "changed_px": 672,
+   "changed_pct": 0.116
+  },
+  {
+   "a": {
+    "show_triangle": true,
+    "animate_geodesics": false
+   },
+   "b": {
+    "show_triangle": false,
+    "animate_geodesics": true
+   },
+   "changed_px": 667,
+   "changed_pct": 0.115
+  },
+  {
+   "a": {
+    "show_triangle": true,
+    "animate_geodesics": false
+   },
+   "b": {
+    "show_triangle": false,
+    "animate_geodesics": false
+   },
+   "changed_px": 382,
+   "changed_pct": 0.066
+  },
+  {
+   "a": {
+    "show_triangle": false,
+    "animate_geodesics": true
+   },
+   "b": {
+    "show_triangle": false,
+    "animate_geodesics": false
+   },
+   "changed_px": 285,
+   "changed_pct": 0.049
+  }
+ ]
+}

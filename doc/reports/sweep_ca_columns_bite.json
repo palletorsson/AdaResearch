@@ -1,0 +1,80 @@
+{
+ "sweep": "ca_columns",
+ "peak_changed_pct": 59.842,
+ "subject_pct": 49.119,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "continuous_mode": true,
+    "use_gradient": true
+   },
+   "b": {
+    "continuous_mode": true,
+    "use_gradient": false
+   },
+   "changed_px": 318752,
+   "changed_pct": 55.186
+  },
+  {
+   "a": {
+    "continuous_mode": true,
+    "use_gradient": true
+   },
+   "b": {
+    "continuous_mode": false,
+    "use_gradient": true
+   },
+   "changed_px": 315687,
+   "changed_pct": 54.655
+  },
+  {
+   "a": {
+    "continuous_mode": true,
+    "use_gradient": true
+   },
+   "b": {
+    "continuous_mode": false,
+    "use_gradient": false
+   },
+   "changed_px": 326898,
+   "changed_pct": 56.596
+  },
+  {
+   "a": {
+    "continuous_mode": true,
+    "use_gradient": false
+   },
+   "b": {
+    "continuous_mode": false,
+    "use_gradient": true
+   },
+   "changed_px": 345645,
+   "changed_pct": 59.842
+  },
+  {
+   "a": {
+    "continuous_mode": true,
+    "use_gradient": false
+   },
+   "b": {
+    "continuous_mode": false,
+    "use_gradient": false
+   },
+   "changed_px": 258287,
+   "changed_pct": 44.717
+  },
+  {
+   "a": {
+    "continuous_mode": false,
+    "use_gradient": true
+   },
+   "b": {
+    "continuous_mode": false,
+    "use_gradient": false
+   },
+   "changed_px": 342771,
+   "changed_pct": 59.344
+  }
+ ]
+}

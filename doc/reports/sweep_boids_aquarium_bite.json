@@ -1,68 +1,344 @@
 {
  "sweep": "boids_aquarium",
- "peak_changed_pct": 2.456,
+ "peak_changed_pct": 2.414,
  "subject_pct": 10.784,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "accord": "school"
+    "accord": "school",
+    "boid_count": 10.0
    },
    "b": {
-    "accord": "orb"
+    "accord": "school",
+    "boid_count": 105.0
    },
-   "changed_px": 11829,
-   "changed_pct": 2.048
+   "changed_px": 1108,
+   "changed_pct": 0.192
   },
   {
    "a": {
-    "accord": "school"
+    "accord": "school",
+    "boid_count": 10.0
    },
    "b": {
-    "accord": "lane"
+    "accord": "orb",
+    "boid_count": 10.0
    },
-   "changed_px": 14160,
-   "changed_pct": 2.452
+   "changed_px": 856,
+   "changed_pct": 0.148
   },
   {
    "a": {
-    "accord": "school"
+    "accord": "school",
+    "boid_count": 10.0
    },
    "b": {
-    "accord": "lattice"
+    "accord": "orb",
+    "boid_count": 105.0
    },
-   "changed_px": 14188,
-   "changed_pct": 2.456
+   "changed_px": 1055,
+   "changed_pct": 0.183
   },
   {
    "a": {
-    "accord": "orb"
+    "accord": "school",
+    "boid_count": 10.0
    },
    "b": {
-    "accord": "lane"
+    "accord": "lane",
+    "boid_count": 10.0
    },
-   "changed_px": 3920,
-   "changed_pct": 0.679
+   "changed_px": 1458,
+   "changed_pct": 0.252
   },
   {
    "a": {
-    "accord": "orb"
+    "accord": "school",
+    "boid_count": 10.0
    },
    "b": {
-    "accord": "lattice"
+    "accord": "lane",
+    "boid_count": 105.0
    },
-   "changed_px": 3953,
-   "changed_pct": 0.684
+   "changed_px": 4656,
+   "changed_pct": 0.806
   },
   {
    "a": {
-    "accord": "lane"
+    "accord": "school",
+    "boid_count": 10.0
    },
    "b": {
-    "accord": "lattice"
+    "accord": "lattice",
+    "boid_count": 10.0
    },
-   "changed_px": 6237,
-   "changed_pct": 1.08
+   "changed_px": 1379,
+   "changed_pct": 0.239
+  },
+  {
+   "a": {
+    "accord": "school",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 105.0
+   },
+   "changed_px": 10725,
+   "changed_pct": 1.857
+  },
+  {
+   "a": {
+    "accord": "school",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "orb",
+    "boid_count": 10.0
+   },
+   "changed_px": 1749,
+   "changed_pct": 0.303
+  },
+  {
+   "a": {
+    "accord": "school",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "orb",
+    "boid_count": 105.0
+   },
+   "changed_px": 1930,
+   "changed_pct": 0.334
+  },
+  {
+   "a": {
+    "accord": "school",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lane",
+    "boid_count": 10.0
+   },
+   "changed_px": 2314,
+   "changed_pct": 0.401
+  },
+  {
+   "a": {
+    "accord": "school",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lane",
+    "boid_count": 105.0
+   },
+   "changed_px": 5415,
+   "changed_pct": 0.938
+  },
+  {
+   "a": {
+    "accord": "school",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 10.0
+   },
+   "changed_px": 2232,
+   "changed_pct": 0.386
+  },
+  {
+   "a": {
+    "accord": "school",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 105.0
+   },
+   "changed_px": 11355,
+   "changed_pct": 1.966
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "orb",
+    "boid_count": 105.0
+   },
+   "changed_px": 908,
+   "changed_pct": 0.157
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "lane",
+    "boid_count": 10.0
+   },
+   "changed_px": 1847,
+   "changed_pct": 0.32
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "lane",
+    "boid_count": 105.0
+   },
+   "changed_px": 4804,
+   "changed_pct": 0.832
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 10.0
+   },
+   "changed_px": 1829,
+   "changed_pct": 0.317
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 105.0
+   },
+   "changed_px": 11098,
+   "changed_pct": 1.921
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lane",
+    "boid_count": 10.0
+   },
+   "changed_px": 1965,
+   "changed_pct": 0.34
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lane",
+    "boid_count": 105.0
+   },
+   "changed_px": 4861,
+   "changed_pct": 0.842
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 10.0
+   },
+   "changed_px": 2000,
+   "changed_pct": 0.346
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 105.0
+   },
+   "changed_px": 11229,
+   "changed_pct": 1.944
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "lane",
+    "boid_count": 105.0
+   },
+   "changed_px": 4282,
+   "changed_pct": 0.741
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 10.0
+   },
+   "changed_px": 2278,
+   "changed_pct": 0.394
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 105.0
+   },
+   "changed_px": 11521,
+   "changed_pct": 1.995
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 10.0
+   },
+   "changed_px": 5352,
+   "changed_pct": 0.927
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "boid_count": 105.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 105.0
+   },
+   "changed_px": 13946,
+   "changed_pct": 2.414
+  },
+  {
+   "a": {
+    "accord": "lattice",
+    "boid_count": 10.0
+   },
+   "b": {
+    "accord": "lattice",
+    "boid_count": 105.0
+   },
+   "changed_px": 11381,
+   "changed_pct": 1.97
   }
  ]
 }

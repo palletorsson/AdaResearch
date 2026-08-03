@@ -1,0 +1,38 @@
+{
+ "sweep": "angle_sum_triangle",
+ "peak_changed_pct": 0.656,
+ "subject_pct": 0.378,
+ "verdict": "SUBJECT NOT DETECTED - only 0.38% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "size": 0.2
+   },
+   "b": {
+    "size": 0.4
+   },
+   "changed_px": 2628,
+   "changed_pct": 0.455
+  },
+  {
+   "a": {
+    "size": 0.2
+   },
+   "b": {
+    "size": 0.64
+   },
+   "changed_px": 3312,
+   "changed_pct": 0.573
+  },
+  {
+   "a": {
+    "size": 0.4
+   },
+   "b": {
+    "size": 0.64
+   },
+   "changed_px": 3788,
+   "changed_pct": 0.656
+  }
+ ]
+}

@@ -1,0 +1,108 @@
+{
+ "sweep": "grab_sphere_phi",
+ "peak_changed_pct": 0.245,
+ "subject_pct": 0.211,
+ "verdict": "SUBJECT NOT DETECTED - only 0.21% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "grasp": "atom"
+   },
+   "b": {
+    "grasp": "socket"
+   },
+   "changed_px": 516,
+   "changed_pct": 0.089
+  },
+  {
+   "a": {
+    "grasp": "atom"
+   },
+   "b": {
+    "grasp": "chorus"
+   },
+   "changed_px": 1218,
+   "changed_pct": 0.211
+  },
+  {
+   "a": {
+    "grasp": "atom"
+   },
+   "b": {
+    "grasp": "hollow"
+   },
+   "changed_px": 581,
+   "changed_pct": 0.101
+  },
+  {
+   "a": {
+    "grasp": "atom"
+   },
+   "b": {
+    "grasp": "swarm"
+   },
+   "changed_px": 945,
+   "changed_pct": 0.164
+  },
+  {
+   "a": {
+    "grasp": "socket"
+   },
+   "b": {
+    "grasp": "chorus"
+   },
+   "changed_px": 927,
+   "changed_pct": 0.16
+  },
+  {
+   "a": {
+    "grasp": "socket"
+   },
+   "b": {
+    "grasp": "hollow"
+   },
+   "changed_px": 312,
+   "changed_pct": 0.054
+  },
+  {
+   "a": {
+    "grasp": "socket"
+   },
+   "b": {
+    "grasp": "swarm"
+   },
+   "changed_px": 808,
+   "changed_pct": 0.14
+  },
+  {
+   "a": {
+    "grasp": "chorus"
+   },
+   "b": {
+    "grasp": "hollow"
+   },
+   "changed_px": 896,
+   "changed_pct": 0.155
+  },
+  {
+   "a": {
+    "grasp": "chorus"
+   },
+   "b": {
+    "grasp": "swarm"
+   },
+   "changed_px": 1415,
+   "changed_pct": 0.245
+  },
+  {
+   "a": {
+    "grasp": "hollow"
+   },
+   "b": {
+    "grasp": "swarm"
+   },
+   "changed_px": 796,
+   "changed_pct": 0.138
+  }
+ ]
+}

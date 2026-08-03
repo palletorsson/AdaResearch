@@ -1,0 +1,344 @@
+{
+ "sweep": "cube_projectile_spawner",
+ "peak_changed_pct": 0.0,
+ "subject_pct": 15.859,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "none",
+    "spawn_range": 15.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "stain",
+    "spawn_range": 7.5
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "stain",
+    "spawn_range": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "cage",
+    "spawn_range": 7.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "cage",
+    "spawn_range": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 7.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "stain",
+    "spawn_range": 7.5
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "stain",
+    "spawn_range": 15.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "cage",
+    "spawn_range": 7.5
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "cage",
+    "spawn_range": 15.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 7.5
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "none",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 15.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "stain",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "stain",
+    "spawn_range": 15.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "stain",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "cage",
+    "spawn_range": 7.5
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "stain",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "cage",
+    "spawn_range": 15.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "stain",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 7.5
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "stain",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 15.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "stain",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "cage",
+    "spawn_range": 7.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "stain",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "cage",
+    "spawn_range": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "stain",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 7.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "stain",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "cage",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "cage",
+    "spawn_range": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "cage",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 7.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "cage",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "cage",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 7.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "cage",
+    "spawn_range": 15.0
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "warning": "beacon",
+    "spawn_range": 7.5
+   },
+   "b": {
+    "warning": "beacon",
+    "spawn_range": 15.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

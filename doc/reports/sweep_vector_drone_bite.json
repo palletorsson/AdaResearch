@@ -1,0 +1,188 @@
+{
+ "sweep": "vector_drone",
+ "peak_changed_pct": 0.004,
+ "subject_pct": 0.002,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 3.0
+   },
+   "b": {
+    "enable_kamikaze": true,
+    "acceleration": 6.0
+   },
+   "changed_px": 17,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 3.0
+   },
+   "b": {
+    "enable_kamikaze": true,
+    "acceleration": 9.6
+   },
+   "changed_px": 20,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 3.0
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 3.0
+   },
+   "changed_px": 19,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 3.0
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 6.0
+   },
+   "changed_px": 19,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 3.0
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 9.6
+   },
+   "changed_px": 20,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 6.0
+   },
+   "b": {
+    "enable_kamikaze": true,
+    "acceleration": 9.6
+   },
+   "changed_px": 19,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 6.0
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 3.0
+   },
+   "changed_px": 18,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 6.0
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 6.0
+   },
+   "changed_px": 18,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 6.0
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 9.6
+   },
+   "changed_px": 19,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 9.6
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 3.0
+   },
+   "changed_px": 17,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 9.6
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 6.0
+   },
+   "changed_px": 21,
+   "changed_pct": 0.004
+  },
+  {
+   "a": {
+    "enable_kamikaze": true,
+    "acceleration": 9.6
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 9.6
+   },
+   "changed_px": 22,
+   "changed_pct": 0.004
+  },
+  {
+   "a": {
+    "enable_kamikaze": false,
+    "acceleration": 3.0
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 6.0
+   },
+   "changed_px": 20,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "enable_kamikaze": false,
+    "acceleration": 3.0
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 9.6
+   },
+   "changed_px": 21,
+   "changed_pct": 0.004
+  },
+  {
+   "a": {
+    "enable_kamikaze": false,
+    "acceleration": 6.0
+   },
+   "b": {
+    "enable_kamikaze": false,
+    "acceleration": 9.6
+   },
+   "changed_px": 21,
+   "changed_pct": 0.004
+  }
+ ]
+}

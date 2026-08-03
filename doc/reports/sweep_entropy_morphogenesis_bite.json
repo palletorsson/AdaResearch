@@ -1,0 +1,80 @@
+{
+ "sweep": "entropy_morphogenesis",
+ "peak_changed_pct": 0.411,
+ "subject_pct": 9.303,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "generate_collision": true,
+    "show_wireframe": true
+   },
+   "b": {
+    "generate_collision": true,
+    "show_wireframe": false
+   },
+   "changed_px": 2250,
+   "changed_pct": 0.39
+  },
+  {
+   "a": {
+    "generate_collision": true,
+    "show_wireframe": true
+   },
+   "b": {
+    "generate_collision": false,
+    "show_wireframe": true
+   },
+   "changed_px": 2265,
+   "changed_pct": 0.392
+  },
+  {
+   "a": {
+    "generate_collision": true,
+    "show_wireframe": true
+   },
+   "b": {
+    "generate_collision": false,
+    "show_wireframe": false
+   },
+   "changed_px": 1983,
+   "changed_pct": 0.343
+  },
+  {
+   "a": {
+    "generate_collision": true,
+    "show_wireframe": false
+   },
+   "b": {
+    "generate_collision": false,
+    "show_wireframe": true
+   },
+   "changed_px": 2289,
+   "changed_pct": 0.396
+  },
+  {
+   "a": {
+    "generate_collision": true,
+    "show_wireframe": false
+   },
+   "b": {
+    "generate_collision": false,
+    "show_wireframe": false
+   },
+   "changed_px": 2265,
+   "changed_pct": 0.392
+  },
+  {
+   "a": {
+    "generate_collision": false,
+    "show_wireframe": true
+   },
+   "b": {
+    "generate_collision": false,
+    "show_wireframe": false
+   },
+   "changed_px": 2374,
+   "changed_pct": 0.411
+  }
+ ]
+}

@@ -1,0 +1,188 @@
+{
+ "sweep": "destructibles_test_scene",
+ "peak_changed_pct": 0.189,
+ "subject_pct": 2.458,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 0.75
+   },
+   "b": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 1.5
+   },
+   "changed_px": 726,
+   "changed_pct": 0.126
+  },
+  {
+   "a": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 0.75
+   },
+   "b": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 0.75
+   },
+   "changed_px": 565,
+   "changed_pct": 0.098
+  },
+  {
+   "a": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 0.75
+   },
+   "b": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 1.5
+   },
+   "changed_px": 903,
+   "changed_pct": 0.156
+  },
+  {
+   "a": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 0.75
+   },
+   "b": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 0.75
+   },
+   "changed_px": 507,
+   "changed_pct": 0.088
+  },
+  {
+   "a": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 0.75
+   },
+   "b": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 1.5
+   },
+   "changed_px": 1089,
+   "changed_pct": 0.189
+  },
+  {
+   "a": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 1.5
+   },
+   "b": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 0.75
+   },
+   "changed_px": 720,
+   "changed_pct": 0.125
+  },
+  {
+   "a": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 1.5
+   },
+   "b": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 1.5
+   },
+   "changed_px": 675,
+   "changed_pct": 0.117
+  },
+  {
+   "a": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 1.5
+   },
+   "b": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 0.75
+   },
+   "changed_px": 729,
+   "changed_pct": 0.126
+  },
+  {
+   "a": {
+    "num_balls": 2.5,
+    "ball_spawn_height": 1.5
+   },
+   "b": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 1.5
+   },
+   "changed_px": 819,
+   "changed_pct": 0.142
+  },
+  {
+   "a": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 0.75
+   },
+   "b": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 1.5
+   },
+   "changed_px": 920,
+   "changed_pct": 0.159
+  },
+  {
+   "a": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 0.75
+   },
+   "b": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 0.75
+   },
+   "changed_px": 672,
+   "changed_pct": 0.116
+  },
+  {
+   "a": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 0.75
+   },
+   "b": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 1.5
+   },
+   "changed_px": 1048,
+   "changed_pct": 0.181
+  },
+  {
+   "a": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 1.5
+   },
+   "b": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 0.75
+   },
+   "changed_px": 873,
+   "changed_pct": 0.151
+  },
+  {
+   "a": {
+    "num_balls": 5.0,
+    "ball_spawn_height": 1.5
+   },
+   "b": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 1.5
+   },
+   "changed_px": 971,
+   "changed_pct": 0.168
+  },
+  {
+   "a": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 0.75
+   },
+   "b": {
+    "num_balls": 8.0,
+    "ball_spawn_height": 1.5
+   },
+   "changed_px": 1012,
+   "changed_pct": 0.175
+  }
+ ]
+}

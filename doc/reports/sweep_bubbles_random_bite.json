@@ -1,0 +1,80 @@
+{
+ "sweep": "bubbles_random",
+ "peak_changed_pct": 0.687,
+ "subject_pct": 3.697,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "enable_bubble_lights": true,
+    "use_synthesized_sounds": true
+   },
+   "b": {
+    "enable_bubble_lights": true,
+    "use_synthesized_sounds": false
+   },
+   "changed_px": 3720,
+   "changed_pct": 0.644
+  },
+  {
+   "a": {
+    "enable_bubble_lights": true,
+    "use_synthesized_sounds": true
+   },
+   "b": {
+    "enable_bubble_lights": false,
+    "use_synthesized_sounds": true
+   },
+   "changed_px": 3114,
+   "changed_pct": 0.539
+  },
+  {
+   "a": {
+    "enable_bubble_lights": true,
+    "use_synthesized_sounds": true
+   },
+   "b": {
+    "enable_bubble_lights": false,
+    "use_synthesized_sounds": false
+   },
+   "changed_px": 2994,
+   "changed_pct": 0.518
+  },
+  {
+   "a": {
+    "enable_bubble_lights": true,
+    "use_synthesized_sounds": false
+   },
+   "b": {
+    "enable_bubble_lights": false,
+    "use_synthesized_sounds": true
+   },
+   "changed_px": 3430,
+   "changed_pct": 0.594
+  },
+  {
+   "a": {
+    "enable_bubble_lights": true,
+    "use_synthesized_sounds": false
+   },
+   "b": {
+    "enable_bubble_lights": false,
+    "use_synthesized_sounds": false
+   },
+   "changed_px": 3966,
+   "changed_pct": 0.687
+  },
+  {
+   "a": {
+    "enable_bubble_lights": false,
+    "use_synthesized_sounds": true
+   },
+   "b": {
+    "enable_bubble_lights": false,
+    "use_synthesized_sounds": false
+   },
+   "changed_px": 3250,
+   "changed_pct": 0.563
+  }
+ ]
+}

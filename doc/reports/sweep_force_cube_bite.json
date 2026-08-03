@@ -1,0 +1,38 @@
+{
+ "sweep": "force_cube",
+ "peak_changed_pct": 3.809,
+ "subject_pct": 2.956,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "push": 0.0
+   },
+   "b": {
+    "push": 0.5
+   },
+   "changed_px": 16602,
+   "changed_pct": 2.874
+  },
+  {
+   "a": {
+    "push": 0.0
+   },
+   "b": {
+    "push": 1.0
+   },
+   "changed_px": 22000,
+   "changed_pct": 3.809
+  },
+  {
+   "a": {
+    "push": 0.5
+   },
+   "b": {
+    "push": 1.0
+   },
+   "changed_px": 17229,
+   "changed_pct": 2.983
+  }
+ ]
+}

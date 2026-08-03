@@ -1,0 +1,188 @@
+{
+ "sweep": "slope_tangent_demo",
+ "peak_changed_pct": 0.316,
+ "subject_pct": 0.344,
+ "verdict": "SUBJECT NOT DETECTED - only 0.34% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "samples": 48.0,
+    "amplitude": 0.3
+   },
+   "b": {
+    "samples": 48.0,
+    "amplitude": 0.6
+   },
+   "changed_px": 1823,
+   "changed_pct": 0.316
+  },
+  {
+   "a": {
+    "samples": 48.0,
+    "amplitude": 0.3
+   },
+   "b": {
+    "samples": 96.0,
+    "amplitude": 0.3
+   },
+   "changed_px": 74,
+   "changed_pct": 0.013
+  },
+  {
+   "a": {
+    "samples": 48.0,
+    "amplitude": 0.3
+   },
+   "b": {
+    "samples": 96.0,
+    "amplitude": 0.6
+   },
+   "changed_px": 1816,
+   "changed_pct": 0.314
+  },
+  {
+   "a": {
+    "samples": 48.0,
+    "amplitude": 0.3
+   },
+   "b": {
+    "samples": 153.6,
+    "amplitude": 0.3
+   },
+   "changed_px": 115,
+   "changed_pct": 0.02
+  },
+  {
+   "a": {
+    "samples": 48.0,
+    "amplitude": 0.3
+   },
+   "b": {
+    "samples": 153.6,
+    "amplitude": 0.6
+   },
+   "changed_px": 1815,
+   "changed_pct": 0.314
+  },
+  {
+   "a": {
+    "samples": 48.0,
+    "amplitude": 0.6
+   },
+   "b": {
+    "samples": 96.0,
+    "amplitude": 0.3
+   },
+   "changed_px": 1817,
+   "changed_pct": 0.315
+  },
+  {
+   "a": {
+    "samples": 48.0,
+    "amplitude": 0.6
+   },
+   "b": {
+    "samples": 96.0,
+    "amplitude": 0.6
+   },
+   "changed_px": 174,
+   "changed_pct": 0.03
+  },
+  {
+   "a": {
+    "samples": 48.0,
+    "amplitude": 0.6
+   },
+   "b": {
+    "samples": 153.6,
+    "amplitude": 0.3
+   },
+   "changed_px": 1820,
+   "changed_pct": 0.315
+  },
+  {
+   "a": {
+    "samples": 48.0,
+    "amplitude": 0.6
+   },
+   "b": {
+    "samples": 153.6,
+    "amplitude": 0.6
+   },
+   "changed_px": 91,
+   "changed_pct": 0.016
+  },
+  {
+   "a": {
+    "samples": 96.0,
+    "amplitude": 0.3
+   },
+   "b": {
+    "samples": 96.0,
+    "amplitude": 0.6
+   },
+   "changed_px": 1810,
+   "changed_pct": 0.313
+  },
+  {
+   "a": {
+    "samples": 96.0,
+    "amplitude": 0.3
+   },
+   "b": {
+    "samples": 153.6,
+    "amplitude": 0.3
+   },
+   "changed_px": 48,
+   "changed_pct": 0.008
+  },
+  {
+   "a": {
+    "samples": 96.0,
+    "amplitude": 0.3
+   },
+   "b": {
+    "samples": 153.6,
+    "amplitude": 0.6
+   },
+   "changed_px": 1809,
+   "changed_pct": 0.313
+  },
+  {
+   "a": {
+    "samples": 96.0,
+    "amplitude": 0.6
+   },
+   "b": {
+    "samples": 153.6,
+    "amplitude": 0.3
+   },
+   "changed_px": 1813,
+   "changed_pct": 0.314
+  },
+  {
+   "a": {
+    "samples": 96.0,
+    "amplitude": 0.6
+   },
+   "b": {
+    "samples": 153.6,
+    "amplitude": 0.6
+   },
+   "changed_px": 124,
+   "changed_pct": 0.021
+  },
+  {
+   "a": {
+    "samples": 153.6,
+    "amplitude": 0.3
+   },
+   "b": {
+    "samples": 153.6,
+    "amplitude": 0.6
+   },
+   "changed_px": 1812,
+   "changed_pct": 0.314
+  }
+ ]
+}

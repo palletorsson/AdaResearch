@@ -1,68 +1,344 @@
 {
  "sweep": "boid_manager",
- "peak_changed_pct": 3.685,
- "subject_pct": 2.968,
- "verdict": "BITES",
+ "peak_changed_pct": 1.455,
+ "subject_pct": 0.952,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
-    "accord": "school"
+    "accord": "school",
+    "emissive": true
    },
    "b": {
-    "accord": "orb"
+    "accord": "school",
+    "emissive": false
    },
-   "changed_px": 18527,
-   "changed_pct": 3.208
+   "changed_px": 4117,
+   "changed_pct": 0.713
   },
   {
    "a": {
-    "accord": "school"
+    "accord": "school",
+    "emissive": true
    },
    "b": {
-    "accord": "lane"
+    "accord": "orb",
+    "emissive": true
    },
-   "changed_px": 7676,
-   "changed_pct": 1.329
+   "changed_px": 6632,
+   "changed_pct": 1.148
   },
   {
    "a": {
-    "accord": "school"
+    "accord": "school",
+    "emissive": true
    },
    "b": {
-    "accord": "lattice"
+    "accord": "orb",
+    "emissive": false
    },
-   "changed_px": 6744,
-   "changed_pct": 1.168
+   "changed_px": 6597,
+   "changed_pct": 1.142
   },
   {
    "a": {
-    "accord": "orb"
+    "accord": "school",
+    "emissive": true
    },
    "b": {
-    "accord": "lane"
+    "accord": "lane",
+    "emissive": true
    },
-   "changed_px": 21134,
-   "changed_pct": 3.659
+   "changed_px": 8403,
+   "changed_pct": 1.455
   },
   {
    "a": {
-    "accord": "orb"
+    "accord": "school",
+    "emissive": true
    },
    "b": {
-    "accord": "lattice"
+    "accord": "lane",
+    "emissive": false
    },
-   "changed_px": 21287,
-   "changed_pct": 3.685
+   "changed_px": 8313,
+   "changed_pct": 1.439
   },
   {
    "a": {
-    "accord": "lane"
+    "accord": "school",
+    "emissive": true
    },
    "b": {
-    "accord": "lattice"
+    "accord": "lattice",
+    "emissive": true
    },
-   "changed_px": 10812,
-   "changed_pct": 1.872
+   "changed_px": 8298,
+   "changed_pct": 1.437
+  },
+  {
+   "a": {
+    "accord": "school",
+    "emissive": true
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": false
+   },
+   "changed_px": 8258,
+   "changed_pct": 1.43
+  },
+  {
+   "a": {
+    "accord": "school",
+    "emissive": false
+   },
+   "b": {
+    "accord": "orb",
+    "emissive": true
+   },
+   "changed_px": 6440,
+   "changed_pct": 1.115
+  },
+  {
+   "a": {
+    "accord": "school",
+    "emissive": false
+   },
+   "b": {
+    "accord": "orb",
+    "emissive": false
+   },
+   "changed_px": 6395,
+   "changed_pct": 1.107
+  },
+  {
+   "a": {
+    "accord": "school",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lane",
+    "emissive": true
+   },
+   "changed_px": 8235,
+   "changed_pct": 1.426
+  },
+  {
+   "a": {
+    "accord": "school",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lane",
+    "emissive": false
+   },
+   "changed_px": 8095,
+   "changed_pct": 1.401
+  },
+  {
+   "a": {
+    "accord": "school",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": true
+   },
+   "changed_px": 8127,
+   "changed_pct": 1.407
+  },
+  {
+   "a": {
+    "accord": "school",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": false
+   },
+   "changed_px": 8005,
+   "changed_pct": 1.386
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "emissive": true
+   },
+   "b": {
+    "accord": "orb",
+    "emissive": false
+   },
+   "changed_px": 1366,
+   "changed_pct": 0.236
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "emissive": true
+   },
+   "b": {
+    "accord": "lane",
+    "emissive": true
+   },
+   "changed_px": 4308,
+   "changed_pct": 0.746
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "emissive": true
+   },
+   "b": {
+    "accord": "lane",
+    "emissive": false
+   },
+   "changed_px": 4347,
+   "changed_pct": 0.753
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "emissive": true
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": true
+   },
+   "changed_px": 4418,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "emissive": true
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": false
+   },
+   "changed_px": 4418,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lane",
+    "emissive": true
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lane",
+    "emissive": false
+   },
+   "changed_px": 4223,
+   "changed_pct": 0.731
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": true
+   },
+   "changed_px": 4462,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "accord": "orb",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": false
+   },
+   "changed_px": 4339,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "emissive": true
+   },
+   "b": {
+    "accord": "lane",
+    "emissive": false
+   },
+   "changed_px": 3384,
+   "changed_pct": 0.586
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "emissive": true
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": true
+   },
+   "changed_px": 6192,
+   "changed_pct": 1.072
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "emissive": true
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": false
+   },
+   "changed_px": 6249,
+   "changed_pct": 1.082
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": true
+   },
+   "changed_px": 6228,
+   "changed_pct": 1.078
+  },
+  {
+   "a": {
+    "accord": "lane",
+    "emissive": false
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": false
+   },
+   "changed_px": 6058,
+   "changed_pct": 1.049
+  },
+  {
+   "a": {
+    "accord": "lattice",
+    "emissive": true
+   },
+   "b": {
+    "accord": "lattice",
+    "emissive": false
+   },
+   "changed_px": 3267,
+   "changed_pct": 0.566
   }
  ]
 }
