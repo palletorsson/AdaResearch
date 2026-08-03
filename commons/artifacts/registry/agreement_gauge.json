@@ -8,7 +8,7 @@
 		"agreement_gauge": {
 			"lookup_name": "agreement_gauge",
 			"name": "Agreement Gauge",
-			"description": "Dark slate plinth + brass rim + etched integer ground-lattice. Two grabbable arrows (a amber, b orange) from the origin; a dotted slerp arc with a live theta label between their tips. A floating formula slab renders the three-line self-substituting equation plus the |a||b|cos(theta) geometric form, both landing on the same value. A red->grey->green agreement rail carries a sliding puck driven to cos(theta) (pure transform, scale-pulse at the 90-degree zero crossing). A |b| dial isolates magnitude-scaling at fixed angle; a SNAP 90 button parks b perpendicular to a. The derived number (cyan-violet) is computed, not grabbable. DNA: initial_a, initial_b, bar_half_width, slider_min_mag, slider_max_mag.",
+			"description": "Dark slate plinth + brass rim + etched integer ground-lattice. Two grabbable arrows (a amber, b orange) from the origin; a dotted slerp arc with a live theta label between their tips. A floating formula slab renders the three-line self-substituting equation plus the |a||b|cos(theta) geometric form, both landing on the same value. A red->grey->green agreement rail carries a sliding puck driven to cos(theta) (pure transform, scale-pulse at the 90-degree zero crossing). A |b| dial isolates magnitude-scaling at fixed angle; a SNAP 90 button parks b perpendicular to a. The derived number (cyan-violet) is computed, not grabbable. DNA axes: opening (agreeing / strangers / opposing / parallel - the case the gauge is found in) and measure (cosine / projection / angle - what the rail claims to report). Further knobs: initial_a, initial_b, bar_half_width, slider_min_mag, slider_max_mag.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"scene": "res://commons/artifacts/agreement_gauge/agreement_gauge.tscn",
@@ -17,6 +17,17 @@
 			"map_sequences": ["forces"],
 			"footprint": [1, 2, 1],
 			"tags": ["vector", "dot_product", "angle", "machine", "vr", "vectors", "projection", "placeable"],
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"opening": ["agreeing", "strangers", "opposing", "parallel"],
+					"measure": ["cosine", "projection", "angle"]
+				},
+				"default": "opening=agreeing, measure=cosine - agreeing is not re-derived but hands back the two shipped Vector3 literals (0.9,0.55,0.2) and (0.35,0.85,0.6) verbatim, and cosine returns cos(theta) untouched with the shipped caption string, so all 4 existing placements open on exactly the pose and the reading they had before",
+				"was": "no @export of its own: the opening pose of the two arrows was two Vector3 literals and the rail was hard-wired to cos(theta), so every placement found the gauge in the same acute green case and the rail could only ever make one claim. The sweep saw no turnable knob (initial_a, initial_b, bar_half_width and the dial range were plain vars reachable only through apply_grid_config).",
+				"note": "opening turns which case the untouched machine argues - a is never moved and |b| is preserved, so the axis turns theta alone: 40 deg (shipped), 90 (dot exactly 0, puck on the grey notch), 140 (red, negative), 0 (peak |a||b|). measure turns what the rail claims to report, which is the artifact's own truth line put at risk: cosine is deaf to length, projection lets the |b| dial drag the puck, angle is linear in theta so the rail agrees with the cosine only at 0, 90 and 180. The caption names the active measure, so a still cannot misreport itself. Both words are chosen to transplant to the sibling length_lantern (same slate plinth, same brass rim, same control plate): the pose the machine is found in, and what its derived instrument reads."
+			},
 			"qfep_connection": "F_force: a.b = |a||b|cos(theta) is one scalar that says how much two directions agree — alignment made legible as a single red-to-green reading.",
 			"parameters": {
 				"initial_a": [0.9, 0.55, 0.2],

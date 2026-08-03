@@ -16,6 +16,45 @@ class_name HarmonicMotionDemo
 ## applications: simple harmonic motion, waves, springs and pendulums, Fourier's claim that any
 ##   signal is a sum of these, damping as energy leaving the system.
 
+# ── DNA (promoted 2026-08-03, stage 2) ───────────────────────────────────────
+# regime — how far the damping control reaches, and where it starts.
+#
+# The shipped bench mapped the DAMP slider onto lerp(0.0, 1.0, t) — an absolute
+# decay rate with no relation to the oscillator's own frequency. At the initial
+# omega = TAU (6.28 rad/s) that cap is a damping ratio of zeta = 0.16: every
+# position the slider could reach was underdamped, and the two regimes the
+# subject is actually taught for — critical and over — were off the end of the
+# hardware. Same fault class the spring_demo pass found (a 2.0 cap where
+# critical damping was 6.32). Here the range is expressed in units of omega, so
+# it stays honest when the FREQ slider moves.
+#   free        the shipped absolute 0..1 range, starting at 0. Undamped: the
+#               sine runs forever, the envelope never bites.
+#   underdamped span 0..omega, opens at zeta = 0.3. It rings and dies — the
+#               plucked string, the car with worn shocks.
+#   critical    span 0..2*omega, opens at zeta = 1. The fastest return to zero
+#               with no overshoot. One curve, no crossing.
+#   overdamped  span 0..4*omega, opens at zeta = 2. The restoring force loses to
+#               the drag; the mass crawls home and never oscillates at all.
+@export_enum("free", "underdamped", "critical", "overdamped") var regime: String = "free"
+
+# record — what evidence the bench keeps on screen. The shipped build drew both
+# the ideal curve (which ignores damping) and the lived trail (which does not),
+# which is the strongest reading but also the one that hides the difference by
+# overlaying it.
+#   both        curve + trail. The historical build.
+#   trace       only what actually happened. No prediction drawn ahead; the
+#               shape has to be inferred from the path already walked.
+#   prediction  only the ideal sine, drawn ahead of the bead. The equation as
+#               promise, with no record of whether it was kept.
+#   bare        neither. A bead on a track and four numbers.
+@export_enum("both", "trace", "prediction", "bare") var record: String = "both"
+
+const REGIME_VALUES := ["free", "underdamped", "critical", "overdamped"]
+const RECORD_VALUES := ["both", "trace", "prediction", "bare"]
+
+## The shipped absolute cap on the damping slider. Kept exactly for regime=free.
+const LEGACY_DAMPING_MAX: float = 1.0
+
 ## Slider paths
 @export var amplitude_slider_path: NodePath = "ControlPanel/AmplitudeSlider"
 @export var frequency_slider_path: NodePath = "ControlPanel/FrequencySlider"
@@ -64,6 +103,9 @@ func _ready() -> void:
 	_setup_materials()
 	_setup_sliders()
 	_setup_curve()
+	# DNA — with record=both this only re-asserts the visibility both meshes
+	# already had, so the default scene is untouched.
+	_apply_record()
 	_update_visualization()
 
 func _setup_materials() -> void:
@@ -96,7 +138,8 @@ func _setup_sliders() -> void:
 		],
 		[
 			{"type": "slider_h", "label": "PHASE", "default": 0.0},
-			{"type": "slider_h", "label": "DAMP", "default": 0.0},
+			# regime=free hands back 0.0 here — the shipped handle position.
+			{"type": "slider_h", "label": "DAMP", "default": _damping_start_norm()},
 		],
 		[{"type": "button", "label": "RESET"}],
 	])
@@ -123,6 +166,10 @@ func _setup_sliders() -> void:
 		var area = reset_btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			area.button_pressed.connect(func(_b): _update_visualization())
+
+	# The slider handle is only half the state; the field has to agree with it.
+	# For regime=free this is 0.0 * 1.0 = 0.0, the shipped value.
+	damping = _damping_start_norm() * _damping_span()
 
 func _setup_curve() -> void:
 	if sine_curve:
@@ -227,6 +274,11 @@ func _on_amplitude_changed(_value) -> void:
 func _on_frequency_changed(_value) -> void:
 	if frequency_slider:
 		frequency = lerp(0.2, 4.0, frequency_slider.get_normalized_value())
+		# Outside regime=free the damping slider is calibrated in units of omega,
+		# so a new frequency re-reads the same handle position as a new rate.
+		# regime=free is an absolute scale and is deliberately left alone.
+		if regime != "free" and damping_slider:
+			damping = lerp(0.0, _damping_span(), damping_slider.get_normalized_value())
 		_update_visualization()
 
 func _on_phase_changed(_value) -> void:
@@ -236,7 +288,8 @@ func _on_phase_changed(_value) -> void:
 
 func _on_damping_changed(_value) -> void:
 	if damping_slider:
-		damping = lerp(0.0, 1.0, damping_slider.get_normalized_value())
+		# regime=free returns LEGACY_DAMPING_MAX == 1.0, i.e. the shipped mapping.
+		damping = lerp(0.0, _damping_span(), damping_slider.get_normalized_value())
 		_update_visualization()
 
 # Public API
@@ -251,11 +304,78 @@ func reset() -> void:
 	if phase_slider:
 		phase_slider.set_normalized_value(0.0)
 	if damping_slider:
-		damping_slider.set_normalized_value(0.0)
+		# regime=free hands back 0.0, which is the shipped reset.
+		damping_slider.set_normalized_value(_damping_start_norm())
+	damping = _damping_start_norm() * _damping_span()
 
 func get_current_position() -> float:
 	var current_amp = amplitude * exp(-damping * time) if damping > 0 else amplitude
 	return current_amp * sin(TAU * frequency * time + deg_to_rad(phase))
 
+# ── DNA helpers ──────────────────────────────────────────────────────────────
+
+## The oscillator's own angular frequency — the yardstick every damping ratio is
+## measured against. zeta = damping / omega.
+func _omega() -> float:
+	return maxf(TAU * frequency, 0.0001)
+
+## How far the DAMP slider reaches, in decay-rate units.
+func _damping_span() -> float:
+	match regime:
+		"underdamped":
+			return _omega()
+		"critical":
+			return 2.0 * _omega()
+		"overdamped":
+			return 4.0 * _omega()
+		_:
+			return LEGACY_DAMPING_MAX
+
+## Where the DAMP handle sits when the bench opens, as a fraction of the span.
+## Chosen so each regime opens INSIDE the regime it is named for — an axis whose
+## values all start at zero would photograph four identical stills.
+func _damping_start_norm() -> float:
+	match regime:
+		"underdamped":
+			return 0.3   # zeta = 0.3 of a span of omega
+		"critical":
+			return 0.5   # zeta = 1.0 of a span of 2*omega
+		"overdamped":
+			return 0.5   # zeta = 2.0 of a span of 4*omega
+		_:
+			return 0.0
+
+## Pure visibility on the two evidence meshes; both stay built and stay updated,
+## so "both" is the historical scene and switching is instant.
+func _apply_record() -> void:
+	if trail_mesh:
+		trail_mesh.visible = (record == "both") or (record == "trace")
+	if sine_curve:
+		sine_curve.visible = (record == "both") or (record == "prediction")
+
+## Re-calibrate the damping control live and restart the trail so the new regime
+## is drawn from a clean history rather than spliced onto the old one.
+func _apply_regime() -> void:
+	if damping_slider and damping_slider.has_method("set_normalized_value"):
+		damping_slider.set_normalized_value(_damping_start_norm())
+	damping = _damping_start_norm() * _damping_span()
+	_update_visualization()
+
+## Guarded: nothing rebuilds unless a value actually changed, and nothing at all
+## happens before _ready has built the panel. An absent or unknown key leaves
+## the artifact exactly as it shipped.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	if config_data == null or config_data.is_empty():
+		return
+	if config_data.has("record"):
+		var r: String = str(config_data["record"])
+		if r in RECORD_VALUES and r != record:
+			record = r
+			if trail_mesh != null or sine_curve != null:
+				_apply_record()
+	if config_data.has("regime"):
+		var g: String = str(config_data["regime"])
+		if g in REGIME_VALUES and g != regime:
+			regime = g
+			if damping_slider != null:
+				_apply_regime()

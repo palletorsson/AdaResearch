@@ -17,12 +17,38 @@ extends Node3D
 
 const PRESETS_PATH = "res://commons/audio/presets/"
 
+# --- DNA (stage 2, promoted 2026-08-03) -------------------------------------
+# face: what the front panel claims the spectrum IS. The tuning maths never
+#   changes — station = round(angle / 40°), clarity = 1 - |offset| — but the
+#   panel's account of it does, and the account is the argument:
+#     scale   the shipped printed band 88 … 108 with a sliding needle. Stations
+#             are POINTS ON A CONTINUUM; the between is a real place with a
+#             number, and static is a position you can read off the dial.
+#     presets one lit lamp per station in a row, no scale, no needle. Stations
+#             are DISCRETE OBJECTS and the between does not appear on the face
+#             at all — you still hear it, and the panel denies it exists.
+#     list    the station names in a column, the tuned one lit. The spectrum is
+#             a CURATED MENU: tuning is choosing from what someone stocked, and
+#             the continuum has been replaced by nine proper nouns.
+#     void    no scale, no needle, no readout — only the two wheels and a dark
+#             display. There is NO MAP; the receiver tells you nothing and the
+#             only way to find a station is to listen for one.
+@export_enum("scale", "presets", "list", "void") var face: String = "scale"
+const FACE_MODES: Array = ["scale", "presets", "list", "void"]
+
 # Wheel controls
 @onready var tuning_wheel = $TuningWheel/HingeOrigin/InteractableHinge
 @onready var volume_wheel = $VolumeWheel/HingeOrigin/InteractableHinge
 @onready var station_display = $StationDisplay/Label3D
 @onready var volume_display = $VolumeDisplay/Label3D
 @onready var indicator_mesh = $FrequencyIndicator
+@onready var frequency_scale = $FrequencyScale
+
+# Face state (built only for the non-default values)
+var _face_root: Node3D = null
+var _preset_lamps: Array = []
+var _list_labels: Array = []
+var _built: bool = false
 
 # Soundscape player
 var soundscape_player: Node3D = null
@@ -65,8 +91,10 @@ signal volume_changed(volume_db: float)
 func _ready():
 	_setup_soundscape_player()
 	_connect_wheel_signals()
+	_build_face()
 	_update_display()
-	
+	_built = true
+
 	# Start with noise (between stations)
 	_play_noise()
 
@@ -169,11 +197,131 @@ func _apply_volume():
 	if soundscape_player:
 		soundscape_player.volume_adjustment = target_volume_db
 
+# ===== FACE =====
+
+func _build_face() -> void:
+	"""Build whatever the current face value needs, and put back what it doesn't.
+
+	face == "scale" adds NOTHING and hides NOTHING — the .tscn's own printed band
+	and needle are exactly what they always were, so every existing placement is
+	untouched."""
+	if _face_root != null:
+		_face_root.queue_free()
+	_face_root = null
+	_preset_lamps.clear()
+	_list_labels.clear()
+
+	# The printed band and its needle belong to "scale" alone. Both are leaf
+	# nodes with no children, so hiding them hides nothing else (visibility in
+	# Godot is hierarchical — this is the safe case for it).
+	var show_scale: bool = (face == "scale")
+	if frequency_scale != null:
+		frequency_scale.visible = show_scale
+	if indicator_mesh != null:
+		indicator_mesh.visible = show_scale
+
+	if face == "scale" or face == "void":
+		return
+
+	_face_root = Node3D.new()
+	_face_root.name = "FacePanel"
+	add_child(_face_root)
+
+	if face == "presets":
+		_build_preset_lamps()
+	elif face == "list":
+		_build_station_list()
+
+func _build_preset_lamps() -> void:
+	"""One lamp per station, in a row where the printed band used to be."""
+	var count: int = max(1, station_presets.size())
+	var span: float = 0.40
+	var lamp_mesh: BoxMesh = BoxMesh.new()
+	lamp_mesh.size = Vector3(span / float(count) * 0.68, 0.024, 0.012)
+	for i in range(count):
+		var lamp: MeshInstance3D = MeshInstance3D.new()
+		lamp.name = "StationLamp_%d" % i
+		lamp.mesh = lamp_mesh
+		lamp.material_override = _lamp_material(false)
+		var x: float = -span * 0.5 + span * (float(i) + 0.5) / float(count)
+		lamp.position = Vector3(x, 0.042, 0.044)
+		_face_root.add_child(lamp)
+		_preset_lamps.append(lamp)
+	_refresh_face_state()
+
+func _build_station_list() -> void:
+	"""The stations as a stocked list — nine proper nouns instead of a band."""
+	var count: int = station_presets.size()
+	if count == 0:
+		return
+	var top: float = 0.045
+	var step: float = 0.013
+	for i in range(count):
+		var row: Label3D = Label3D.new()
+		row.name = "StationRow_%d" % i
+		row.text = _station_label(i)
+		row.font_size = 18
+		row.pixel_size = 0.0003
+		row.outline_size = 2
+		row.position = Vector3(-0.12, top - step * float(i), 0.044)
+		_face_root.add_child(row)
+		_list_labels.append(row)
+	_refresh_face_state()
+
+func _lamp_material(lit: bool) -> StandardMaterial3D:
+	var mat: StandardMaterial3D = StandardMaterial3D.new()
+	mat.emission_enabled = true
+	_paint_lamp(mat, lit)
+	return mat
+
+func _paint_lamp(mat: StandardMaterial3D, lit: bool) -> void:
+	# Mutates in place: _refresh_face_state runs on every wheel move, and
+	# allocating nine materials per frame while tuning is not a look, it is litter.
+	if lit:
+		mat.albedo_color = Color(0.15, 0.85, 1.0, 1.0)
+		mat.emission = Color(0.15, 0.85, 1.0)
+		mat.emission_energy_multiplier = 2.2
+	else:
+		mat.albedo_color = Color(0.04, 0.09, 0.11, 1.0)
+		mat.emission = Color(0.0, 0.35, 0.5)
+		mat.emission_energy_multiplier = 0.25
+
+func _station_label(index: int) -> String:
+	if index < 0 or index >= station_presets.size():
+		return ""
+	return station_presets[index].replace(".json", "").replace("_", " ").to_upper()
+
+func _refresh_face_state() -> void:
+	"""Light whichever station is tuned. No-op for scale and void."""
+	for i in range(_preset_lamps.size()):
+		var lamp: MeshInstance3D = _preset_lamps[i]
+		if lamp == null:
+			continue
+		var mat: StandardMaterial3D = lamp.material_override as StandardMaterial3D
+		if mat == null:
+			continue
+		_paint_lamp(mat, i == current_station)
+	for i in range(_list_labels.size()):
+		var row: Label3D = _list_labels[i]
+		if row == null:
+			continue
+		if i == current_station:
+			row.modulate = Color(0.2, 1.0, 1.0, 1.0)
+		else:
+			row.modulate = Color(0.35, 0.45, 0.5, 1.0)
+
 func _update_display():
 	"""Update the station display"""
+	_refresh_face_state()
+
 	if not station_display:
 		return
-	
+
+	if face == "void":
+		# No map. The receiver reports nothing and you tune by ear alone.
+		station_display.text = ""
+		return
+
 	if current_station >= 0 and current_station < station_presets.size():
 		var preset_name = station_presets[current_station].replace(".json", "").replace("_", " ")
 		station_display.text = "📻 %s" % preset_name.to_upper()
@@ -225,3 +373,19 @@ func get_station_name() -> String:
 func get_station_count() -> int:
 	"""Get total number of stations"""
 	return station_presets.size()
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	# GUARDED. A map token that does not name `face` returns immediately, and the
+	# panel is only rebuilt when the value actually differs AND _ready has already
+	# built it once. GridInteractablesComponent calls this deferred, after _ready,
+	# so an unguarded rebuild would tear the face off all five shipped placements
+	# on their first frame in exchange for nothing.
+	if not config_data.has("face"):
+		return
+	var want: String = str(config_data["face"]).strip_edges().to_lower()
+	if not FACE_MODES.has(want) or want == face:
+		return
+	face = want
+	if _built:
+		_build_face()
+		_update_display()

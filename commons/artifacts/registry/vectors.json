@@ -290,6 +290,27 @@
         "math",
         "vectors"
       ],
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "construction": [
+            "parallelogram",
+            "chain",
+            "commute",
+            "bare"
+          ],
+          "pair": [
+            "oblique",
+            "orthogonal",
+            "parallel",
+            "opposed"
+          ]
+        },
+        "default": "construction=parallelogram, pair=oblique - parallelogram redraws both dotted closures and both '(copy)' labels from the same _update_dotted_lines() call as before, and oblique hands back the shipped b = (0.4, 1.6, 0.9), so every existing placement (5 tokens across 4 maps) is unchanged; the solid chained copies are not instantiated at all unless a map asks for chain or commute",
+        "was": "zero exports of its own and no apply_grid_config(): the two operands were literals inside build_scene() and the parallelogram closure was the only argument the bench could make, so no map could open on the right-angled, parallel or cancelling case that the addition lesson actually turns on",
+        "note": "hand promotion 2026-08-03 - the runner refused it for NO TURNABLE KNOBS. Shares its construction vocabulary with the sibling VectorSubtraction: 'parallelogram' and 'bare' mean the same thing on both benches, and 'chain' means the same walk. 'commute' is addition's answer to subtraction's 'reciprocal' - both routes drawn at once, except here they land on the same tip instead of opposite ones, which is the whole difference between the two operations."
+      },
       "footprint": [
         1,
         1,
@@ -4119,6 +4140,27 @@
         "procedural",
         "vr"
       ],
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "evidence": [
+            "result",
+            "trace",
+            "longhand",
+            "axiom"
+          ]
+        },
+        "fixture": {
+          "walk_seed": 7
+        },
+        "default": "evidence=result - the shipped ball and its rolling 200-frame trail, byte for byte, so all 4 existing placements are unchanged; outside the `result` branch not one exhibit node is ever constructed, and apply_grid_config returns without rebuilding unless the word actually moved",
+        "was": "no exports at all and an apply_grid_config that was a literal `pass`. A pink sphere doing a random walk inside an invisible box, with the acceleration it is drawn from, the 0.15 speed cap that clips it and the -0.8 bounce that turns it all hidden in the source - nothing a map could ask the demo to show instead.",
+        "note": "evidence is what the demo offers as PROOF that a law is moving the ball. A random walk has gravity's problem: the thing being taught is not a thing you can look at, and the only visible object - the ball - is the one part of the scene carrying no information about the rule. result = the state and nothing of the rule (where it is, where it just was). trace = the rolling window goes away and 900 steps are integrated forward at BUILD time through the same _walk_step() the running scene calls, laid down as a line strip - the same primitive the shipped trail uses, so what a viewer reads is the extent and not the rendering - and coloured through time, amber to blue, because a sliding window has no history to order and this does; with walk_seed pinned the ball then walks exactly along it, so the future is drawn before it happens. longhand = the working instead of the answer: the +/-0.02 uniform box a is drawn from, built at the ball at x4 magnification with the first forty real draws scattered inside it, the 0.15 cap as a ring at the same scale, and the tank the bounce acts on finally made visible as a wire box. axiom = the instance gives way to the rule: a slate plate behind the tank carrying `a = U(-0.02, 0.02)^3`, `v += a`, `p += v` and the uniform density itself as 200 draws filling its support, with the ball demoted to an example of it. All four run identical physics - _walk_step is the single copy of the law and no exhibit touches it.",
+        "kin": "the same word and the same four values as example_2_8_two_body_attraction_vr and example_2_9_n_body_attraction_vr, and the six artifacts that already say `evidence` about their own working (koch_curve, fibonacci_sequences, sine_wave_controller, wave_interference_tank among them). Taken character for character rather than as a synonym. Designed to serve the whole Motion 101 family: example_1_7 (velocity) and example_1_8 (velocity + constant acceleration) are the same scene with a different right-hand side and can take this word unchanged.",
+        "fixture_note": "the walk has always been drawn from the global unseeded generator, i.e. a different path every launch, and walk_seed = -1 preserves that as the shipped default. The fixture pins 7 so a sweep of `evidence` measures the axis and not which way the ball happened to go - unseeded, five variants would be five different walks and the critic would report a large confident bite that is entirely paintwork.",
+        "still_note": "the walk moves up to 0.15 per FRAME inside a 0.9 m tank, so even a young rolling trail is already a visible scribble and `result` will not read as a bare ball - the separation from `trace` is 200 flat-pink frames against 900 time-coloured ones, plus the fact that trace's path exists at frame zero while result's has to accumulate. If a sweep reports these two close, crop-recheck before believing it; longhand and axiom are unambiguous."
+      },
       "geometry_spec": {
         "mesh_type": "procedural_line",
         "topology": "non_manifold",

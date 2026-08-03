@@ -3762,7 +3762,30 @@
      16.0,
      11.0
     ],
-    "size_group": "world_scale"
+    "size_group": "world_scale",
+    "stance": "row | stack | ring | origin - where the four primitives stand relative to each other (default row)",
+    "workings": "outcome | trace | operands | expression - how much of the operation is drawn (default outcome)"
+   },
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "stance": [
+      "row",
+      "stack",
+      "ring",
+      "origin"
+     ],
+     "workings": [
+      "outcome",
+      "trace",
+      "operands",
+      "expression"
+     ]
+    },
+    "default": "stance=row, workings=outcome - the four primitives on the historical x = -6, -2, 2, 6 lineup with nothing drawn but the transformed result, which is exactly what the demo did before promotion, so the 4 existing placements are unchanged",
+    "was": "a lineup along X and a bare outcome, both hard-coded: the base positions were typed three times (setup, translation, shear) as literals, and there was no way to see the operand a matrix acts on, the path it sweeps, or the matrix itself - apply_grid_config was an empty pass",
+    "note": "stance says what the four dimensions ARE to each other (a vitrine row of separate exhibits, a ladder, an unranked cycle, or one shared vertex cloud at the origin - the artifact's own truth statement, staged). workings shares its word and its four values, in order, with transform_composition_workbench, vector_add and vector_sub"
    },
    "scene": "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn",
    "size_group": "world_scale",

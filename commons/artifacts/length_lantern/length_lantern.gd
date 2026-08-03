@@ -32,6 +32,26 @@ const Z_COLOR: Color = Color(0.4, 0.65, 1.0)
 const SLATE_COLOR: Color = Color(0.10, 0.11, 0.14)     # dark slate pedestal
 const BRASS_COLOR: Color = Color(0.72, 0.55, 0.22)     # brass rim + ground lattice
 
+# ── DNA axes (promoted 2026-08-03) ───────────────────────────────────────────
+# workings: how much of the construction the bench draws. The scaffolding was
+#   never optional before — the legs, the floor diagonal, the Pythagoras box and
+#   every midpoint label were hard-coded as the only way a magnitude could be
+#   shown. Shares its word and its four values, in order, with vector_add /
+#   vector_sub / transform_composition_workbench.
+#     outcome    — the lantern, the ruler and the number. Length asserted.
+#     trace      — the three legs chained tip-to-tail: the route to the tip.
+#     operands   — the legs plus the floor diagonal: what feeds the root.
+#     expression — legs, diagonal, box, every label (what this always drew).
+# norm: WHICH length. |v| is not one thing — the Euclidean diagonal is a choice,
+#   and the leg-chain the bench already draws is literally the taxicab route.
+#   Turning this makes the same grabbed tip report a different magnitude, and
+#   the ruler and lantern glow follow it.
+const WORKINGS_VALUES: Array = ["outcome", "trace", "operands", "expression"]
+const NORM_VALUES: Array = ["euclidean", "taxicab", "chebyshev"]
+
+@export_enum("outcome", "trace", "operands", "expression") var workings: String = "expression"
+@export_enum("euclidean", "taxicab", "chebyshev") var norm: String = "euclidean"
+
 # ── DNA knobs (overridable via apply_grid_config) ────────────────────────────
 var reach: float = 1.5            # logical half-extent the lantern can reach (axes length too)
 var max_magnitude: float = 2.6    # |v| at which the lantern is white-hot / ruler full
@@ -115,8 +135,8 @@ func build_scene() -> void:
 		"Length Lantern",
 		Vector3(0.0, 2.3, -0.9),
 		Vector2(2.4, 1.05),
-		"|v| = sqrt(x^2 + y^2 + z^2)",
-		"length = diagonal\nof the x,y,z box")
+		_norm_formula(),
+		_norm_caption())
 
 	if show_sliders:
 		_build_controls()
@@ -306,7 +326,7 @@ func _build_scaffold() -> void:
 	_x_label = _ll_label("x", X_COLOR, 16)
 	_y_label = _ll_label("y", Y_COLOR, 16)
 	_z_label = _ll_label("z", Z_COLOR, 16)
-	_diag_label = _ll_label("sqrt(x^2+z^2)", Color(0.9, 0.9, 0.95), 14)
+	_diag_label = _ll_label(_floor_expr(), Color(0.9, 0.9, 0.95), 14)
 	_scaffold_root.add_child(_x_label)
 	_scaffold_root.add_child(_y_label)
 	_scaffold_root.add_child(_z_label)
@@ -491,9 +511,65 @@ func _advance_resolve(delta: float) -> void:
 # PER-FRAME REFRESH — scaffold, box, diagonal, lantern glow, ruler
 # ═════════════════════════════════════════════════════════════════════════
 
+# ── The two DNA axes, read here and nowhere else ─────────────────────────────
+
+## |v| under the declared norm. euclidean returns exactly v.length().
+func _magnitude(v: Vector3) -> float:
+	if norm == "taxicab":
+		return absf(v.x) + absf(v.y) + absf(v.z)
+	if norm == "chebyshev":
+		return maxf(absf(v.x), maxf(absf(v.y), absf(v.z)))
+	return v.length()
+
+
+## The floor reach that feeds the final rise — the inner root under euclidean.
+func _floor_reach(v: Vector3) -> float:
+	if norm == "taxicab":
+		return absf(v.x) + absf(v.z)
+	if norm == "chebyshev":
+		return maxf(absf(v.x), absf(v.z))
+	return sqrt(v.x * v.x + v.z * v.z)
+
+
+func _floor_expr() -> String:
+	if norm == "taxicab":
+		return "|x|+|z|"
+	if norm == "chebyshev":
+		return "max(|x|,|z|)"
+	return "sqrt(x^2+z^2)"
+
+
+func _norm_formula() -> String:
+	if norm == "taxicab":
+		return "|v|_1 = |x| + |y| + |z|"
+	if norm == "chebyshev":
+		return "|v|_inf = max(|x|, |y|, |z|)"
+	return "|v| = sqrt(x^2 + y^2 + z^2)"
+
+
+func _norm_caption() -> String:
+	if norm == "taxicab":
+		return "length = the route\nwalked along the legs"
+	if norm == "chebyshev":
+		return "length = the longest\nsingle component"
+	return "length = diagonal\nof the x,y,z box"
+
+
+func _shows_legs() -> bool:
+	return workings != "outcome"
+
+
+func _shows_diagonal() -> bool:
+	return workings == "operands" or workings == "expression"
+
+
+func _shows_box() -> bool:
+	return workings == "expression"
+
+
 func _refresh(v: Vector3) -> void:
-	var mag: float = v.length()
-	var floor_diag: float = sqrt(v.x * v.x + v.z * v.z)
+	var mag: float = _magnitude(v)
+	var floor_diag: float = _floor_reach(v)
 	var is_degenerate: bool = mag < degenerate_threshold
 
 	_update_scaffold(v, floor_diag)
@@ -531,14 +607,41 @@ func _update_scaffold(v: Vector3, floor_diag: float) -> void:
 		_y_label.text = "y=%.2f" % v.y
 		_y_label.position = (Vector3(v.x, v.y * 0.5, v.z) + Vector3(0.06, 0.0, 0.0)) * SCENE_SCALE
 	if _diag_label:
-		_diag_label.text = "sqrt(x^2+z^2)=%.2f" % floor_diag
+		_diag_label.text = "%s=%.2f" % [_floor_expr(), floor_diag]
 		_diag_label.position = (z_end * 0.5 + Vector3(0.0, 0.04, 0.0)) * SCENE_SCALE
+
+	# workings gate — at "expression" (the default) every piece stays on, which
+	# is exactly what the bench drew before the promotion.
+	var legs_on: bool = _shows_legs()
+	var diag_on: bool = _shows_diagonal()
+	if not legs_on:
+		if _x_arrow:
+			_x_arrow.visible = false
+		if _y_arrow:
+			_y_arrow.visible = false
+		if _z_arrow:
+			_z_arrow.visible = false
+	if not diag_on and _diag_arrow:
+		_diag_arrow.visible = false
+	if _x_label:
+		_x_label.visible = legs_on
+	if _y_label:
+		_y_label.visible = legs_on
+	if _z_label:
+		_z_label.visible = legs_on
+	if _diag_label:
+		_diag_label.visible = diag_on
 
 
 ## Faint right-angle box from origin to the lantern — makes the Pythagoras
 ## construction explicit (the cuboid whose space-diagonal is v).
 func _update_box(v: Vector3) -> void:
 	if _box_mesh == null:
+		return
+	var box_on: bool = _shows_box()
+	if _box_lines:
+		_box_lines.visible = box_on
+	if not box_on:
 		return
 	_box_mesh.clear_surfaces()
 	var x: float = v.x
@@ -624,21 +727,31 @@ func _update_text(v: Vector3) -> void:
 	var ys: float = v.y * v.y
 	var zs: float = v.z * v.z
 	var sum_sq: float = xs + ys + zs
-	var mag: float = sqrt(sum_sq)
-	var floor_diag: float = sqrt(xs + zs)
+	var mag: float = _magnitude(v)
+	var floor_diag: float = _floor_reach(v)
 
 	if _info_label:
-		var lines := []
-		lines.append("x = %.2f" % v.x)
-		lines.append("y = %.2f" % v.y)
-		lines.append("z = %.2f" % v.z)
-		lines.append("----")
-		lines.append("x^2 = %.2f" % xs)
-		lines.append("y^2 = %.2f" % ys)
-		lines.append("z^2 = %.2f" % zs)
-		lines.append("sum = %.2f" % sum_sq)
-		lines.append("sqrt(x^2+z^2) = %.2f" % floor_diag)
-		lines.append("|v| = %.2f" % mag)
+		var lines: Array = []
+		if workings == "outcome":
+			# Length asserted: the number, nothing that made it.
+			lines.append("|v| = %.2f" % mag)
+		else:
+			lines.append("x = %.2f" % v.x)
+			lines.append("y = %.2f" % v.y)
+			lines.append("z = %.2f" % v.z)
+			if workings != "trace":
+				lines.append("----")
+				if norm == "euclidean":
+					lines.append("x^2 = %.2f" % xs)
+					lines.append("y^2 = %.2f" % ys)
+					lines.append("z^2 = %.2f" % zs)
+					lines.append("sum = %.2f" % sum_sq)
+				else:
+					lines.append("|x| = %.2f" % absf(v.x))
+					lines.append("|y| = %.2f" % absf(v.y))
+					lines.append("|z| = %.2f" % absf(v.z))
+				lines.append("%s = %.2f" % [_floor_expr(), floor_diag])
+			lines.append("|v| = %.2f" % mag)
 		_info_label.text = "\n".join(lines)
 
 	if _readout_label:
@@ -763,5 +876,27 @@ func apply_grid_config(config: Dictionary) -> void:
 		arrow_thickness = float(config["arrow_thickness"])
 	if config.has("snap_target") and config["snap_target"] is Vector3:
 		snap_target_logical = config["snap_target"]
+
+	# DNA axes. The info panel bakes its formula at build time, so a genuine
+	# change needs a rebuild — but ONLY when the value actually changed and the
+	# scene has already been built once. A token that names neither axis never
+	# reaches rebuild(), so the existing placements are untouched.
+	var restage: bool = false
+	if config.has("workings"):
+		var new_workings: String = str(config["workings"])
+		if new_workings != workings and new_workings in WORKINGS_VALUES:
+			workings = new_workings
+			restage = true
+	if config.has("norm"):
+		var new_norm: String = str(config["norm"])
+		if new_norm != norm and new_norm in NORM_VALUES:
+			norm = new_norm
+			restage = true
+
 	# Delegate scale_multiplier handling (and the rebuild if already built) to base.
+	var mult_before: float = scale_multiplier
 	super.apply_grid_config(config)
+	# If the base already rebuilt for a scale change, build_scene() has read the
+	# new axis values — do not rebuild twice.
+	if restage and _scene_built and is_equal_approx(mult_before, scale_multiplier):
+		rebuild()

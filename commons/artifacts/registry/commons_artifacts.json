@@ -6401,6 +6401,27 @@
     "mixed",
     "waves"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "regime": [
+      "free",
+      "underdamped",
+      "critical",
+      "overdamped"
+     ],
+     "record": [
+      "both",
+      "trace",
+      "prediction",
+      "bare"
+     ]
+    },
+    "default": "regime=free, record=both - free returns LEGACY_DAMPING_MAX = 1.0 so the DAMP slider maps through the identical lerp(0.0, 1.0, t) it always did, opens at 0.0 like the shipped panel spec, and both evidence meshes stay visible, so every existing placement (10 tokens across 8 maps, incl. the four WaveFunctions_Intro pages and VFM_06_Springs) renders exactly what it rendered before",
+    "was": "four NodePath exports and an apply_grid_config() whose body was `pass`. The DAMP slider was welded to an absolute 0..1 decay rate with no relation to the oscillator's own omega: at the initial omega = TAU that cap is zeta = 0.16, so every reachable position was underdamped and the critical and overdamped regimes - the two the subject is taught for - were off the end of the hardware. The reference curve and the lived trail were always drawn together, so the one place damping shows itself was overlaid by the undamped ideal.",
+    "note": "hand promotion 2026-08-03 - the runner refused it for NO TURNABLE KNOBS. Same fault class the spring_demo pass found (a damping slider capped at 2.0 where critical damping was 6.32); here the fix is to express the span in units of omega so it stays honest when the FREQ slider moves. Each regime also OPENS inside the regime it names - an axis where every value started at damping 0 would photograph four identical stills. record shares 'trace' and 'bare' with the vector-bench family."
+   },
    "include_in_map_data": true,
    "interaction": "grab",
    "interactions": [

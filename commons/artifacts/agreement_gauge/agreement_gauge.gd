@@ -31,9 +31,59 @@ const COLOR_RED: Color = Color(0.92, 0.22, 0.2)    # a.b < 0  — opposing
 const COLOR_GREY: Color = Color(0.55, 0.57, 0.6)   # a.b = 0  — perpendicular
 const COLOR_GREEN: Color = Color(0.3, 0.92, 0.4)   # a.b > 0  — agreeing
 
+# ═════════════════════════════════════════════════════════════════════════════
+# DNA (stage 2 — variation, promoted 2026-07-29)
+#
+#   opening — the case the gauge is FOUND in. The @identity names theta as the
+#     critical parameter, but every placement so far opened on the same acute
+#     pose, so the gauge always argued "agreeing" before anyone touched it. This
+#     axis turns which claim the untouched machine makes: green agreement, the
+#     grey notch of strangers, red opposition, or full parallel.
+#   measure — what the rail claims to report. The truth line says "the dot
+#     product does not measure length" — a claim you can only test if the rail
+#     can be made to break it. cosine is magnitude-blind (shipped); projection
+#     lets |b| drag the puck; angle is linear in theta, so the rail stops
+#     agreeing with the cosine it is supposed to be.
+#
+# Both defaults reproduce the pre-promotion artifact exactly: opening="agreeing"
+# returns the two shipped Vector3 literals verbatim and measure="cosine" feeds
+# the rail the same cos(theta) it always got, with the same caption string.
+#
+# `opening` and `measure` are the housing words this artifact shares with its
+# sibling length_lantern (same plinth, same plate, different question): the pose
+# the machine is found in, and what its derived instrument reads.
+# ═════════════════════════════════════════════════════════════════════════════
+
+const OPENINGS: Array[String] = ["agreeing", "strangers", "opposing", "parallel"]
+const MEASURES: Array[String] = ["cosine", "projection", "angle"]
+
+# The shipped opening pose. Kept as constants so "agreeing" can hand back the
+# exact literals rather than a re-derived approximation of them.
+const SHIPPED_A: Vector3 = Vector3(0.9, 0.55, 0.2)
+const SHIPPED_B: Vector3 = Vector3(0.35, 0.85, 0.6)
+
+## Which case the two arrows are parked in before anyone grabs them.
+##   agreeing  — theta ~40 deg, dot positive, puck well into the green (shipped)
+##   strangers — theta = 90 deg, dot exactly 0, puck parked on the grey notch
+##   opposing  — theta = 140 deg, dot negative, rail red
+##   parallel  — theta = 0 deg, dot at its peak |a||b|, rail fully green
+## Only b is moved; a keeps its pose and |b| is preserved in every case, so the
+## axis turns the ANGLE and nothing else.
+@export_enum("agreeing", "strangers", "opposing", "parallel") var opening: String = "agreeing"
+
+## What the red->grey->green rail reads.
+##   cosine     — cos(theta): pure agreement, blind to length. The |b| dial moves
+##                the digits and leaves the puck still. (shipped)
+##   projection — |b|cos(theta), the shadow b casts on a. Length now contaminates
+##                the reading and the |b| dial drags the puck.
+##   angle      — theta mapped straight onto the rail. Same zero at 90 deg, but
+##                everywhere else it disagrees with the cosine: the reading is
+##                linear in angle, and the dot product is not.
+@export_enum("cosine", "projection", "angle") var measure: String = "cosine"
+
 # ── DNA knobs (overridable via apply_grid_config) ────────────────────────────
-var initial_a: Vector3 = Vector3(0.9, 0.55, 0.2)
-var initial_b: Vector3 = Vector3(0.35, 0.85, 0.6)
+var initial_a: Vector3 = SHIPPED_A
+var initial_b: Vector3 = SHIPPED_B
 var bar_half_width: float = 0.55      # logical half-length of the agreement rail (m)
 var slider_min_mag: float = 0.2       # |b| dial range
 var slider_max_mag: float = 2.5
@@ -85,6 +135,12 @@ func build_scene() -> void:
 	_build_pedestal()
 	create_floor(2.4, Color(0.07, 0.08, 0.1, 1.0))
 	create_axes(1.0)
+
+	# Fold the opening axis into initial_b before the arrows are spawned. At the
+	# default the branch is not taken at all, so initial_b keeps whatever it
+	# holds — the shipped literal, or a value a placement handed us.
+	if opening != "agreeing":
+		initial_b = _b_for_opening(opening)
 
 	# Two and only two live, grabbable arrows from the origin.
 	vector_a = spawn_vector(Vector3.ZERO, initial_a, COLOR_A, "Vector a")
@@ -336,9 +392,28 @@ func _build_agreement_bar() -> void:
 	bar_root.add_child(bar_caption_label)
 
 
-## Drive the puck to cos(theta) in [-1,1] mapped onto the rail half-width, lerp
-## the rail color red->grey->green, and emit a tiny scale-pulse + haptic at the
-## zero crossing (theta = 90 deg).
+## What the rail reads, in [-1,1]. At measure="cosine" this is cos(theta)
+## returned untouched — the shipped behaviour to the bit.
+## _mag_a is unused by design: none of the three readings scale with |a| — the
+## rail reports what b does relative to a, never how long a is.
+func _rail_value(cos_theta: float, theta: float, _mag_a: float, mag_b: float) -> float:
+	if measure == "projection":
+		# |b| cos(theta): the length of b's shadow on a, full-scale at the top of
+		# the |b| dial's range. Now the dial moves the puck.
+		var full: float = maxf(0.001, slider_max_mag)
+		return clampf(mag_b * cos_theta / full, -1.0, 1.0)
+	if measure == "angle":
+		# theta laid straight along the rail: +1 at 0 deg, 0 at 90, -1 at 180.
+		# Same zero as the cosine, and different everywhere else.
+		return clampf(1.0 - 2.0 * theta / PI, -1.0, 1.0)
+	# "cosine" — magnitude-blind agreement: the rail is deliberately deaf to
+	# length, which is the claim the artifact's truth line makes.
+	return cos_theta
+
+
+## Drive the puck to the rail value in [-1,1] mapped onto the rail half-width,
+## lerp the rail color red->grey->green, and emit a tiny scale-pulse + haptic at
+## the zero crossing (theta = 90 deg in every measure).
 func _update_agreement_bar(cos_theta: float, delta: float) -> void:
 	if _bar_puck == null:
 		return
@@ -494,7 +569,7 @@ func _process(delta: float) -> void:
 
 	# Smooth, per-frame visuals.
 	_update_angle_arc(a_vec, b_vec)
-	_update_agreement_bar(cos_theta, delta)
+	_update_agreement_bar(_rail_value(cos_theta, theta, mag_a, mag_b), delta)
 
 	# Arc label rides the midpoint of the slerp arc.
 	if arc_label:
@@ -538,10 +613,17 @@ func _update_text(a_vec: Vector3, b_vec: Vector3, dot: float, mag_a: float, mag_
 	if arc_label:
 		arc_label.text = "theta = %.1f deg" % deg
 
-	# Bar caption with explicit sign.
+	# Bar caption with explicit sign. The caption names what the rail is reading,
+	# so a still of the gauge cannot misreport its own measure.
 	if bar_caption_label:
-		bar_caption_label.text = "alignment = cos theta = %+.2f" % cos_theta
-		bar_caption_label.modulate = _agreement_color(cos_theta)
+		var rail: float = _rail_value(cos_theta, theta, mag_a, mag_b)
+		if measure == "projection":
+			bar_caption_label.text = "projection = |b| cos theta = %+.2f" % (mag_b * cos_theta)
+		elif measure == "angle":
+			bar_caption_label.text = "opening = theta = %.1f deg" % deg
+		else:
+			bar_caption_label.text = "alignment = cos theta = %+.2f" % cos_theta
+		bar_caption_label.modulate = _agreement_color(rail)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -584,9 +666,62 @@ func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary
 # GRID CONFIG — scale_multiplier (super) + DNA knobs
 # ═════════════════════════════════════════════════════════════════════════════
 
+## Build b for a named opening. a is never touched and |b| is preserved, so the
+## axis turns the angle alone. "agreeing" hands back the shipped literal rather
+## than a re-derived value, so the default is exact.
+func _b_for_opening(mode: String) -> Vector3:
+	if mode == "agreeing":
+		return SHIPPED_B
+	var a_dir: Vector3 = initial_a.normalized()
+	var mag_b: float = SHIPPED_B.length()
+	if a_dir.length() < 0.5 or mag_b < 0.001:
+		return SHIPPED_B
+	# Gram-Schmidt: the component of the shipped b perpendicular to a, so the new
+	# pose stays in the plane the two arrows already spanned.
+	var perp: Vector3 = SHIPPED_B - a_dir * SHIPPED_B.dot(a_dir)
+	if perp.length() < 0.001:
+		var helper: Vector3 = Vector3.UP
+		if absf(a_dir.dot(helper)) > 0.99:
+			helper = Vector3.RIGHT
+		perp = a_dir.cross(helper)
+	perp = perp.normalized()
+	var deg: float = 90.0
+	if mode == "opposing":
+		deg = 140.0
+	elif mode == "parallel":
+		deg = 0.0
+	var rad: float = deg_to_rad(deg)
+	return (a_dir * cos(rad) + perp * sin(rad)) * mag_b
+
+
+## Reseat the already-built b arrow onto the current opening. No teardown: the
+## arrows exist, only the tip moves.
+func _reseat_opening() -> void:
+	if vector_b == null or not is_instance_valid(vector_b):
+		return
+	initial_b = _b_for_opening(opening)
+	_update_vector_fast(vector_b, initial_b, _cached_b)
+	if _mag_dial and _mag_dial.has_method("set_normalized_value"):
+		var norm: float = inverse_lerp(slider_min_mag, slider_max_mag, clampf(initial_b.length(), slider_min_mag, slider_max_mag))
+		_mag_dial.call("set_normalized_value", norm)
+
+
 func apply_grid_config(config: Dictionary) -> void:
 	if config == null:
 		return
+	# Declared axes. Guarded: do nothing unless the value is legal AND actually
+	# moved, and only touch nodes if the scene has already been built.
+	if config.has("opening"):
+		var new_opening: String = str(config["opening"]).strip_edges().to_lower()
+		if OPENINGS.has(new_opening) and new_opening != opening:
+			opening = new_opening
+			if _scene_built:
+				_reseat_opening()
+	if config.has("measure"):
+		var new_measure: String = str(config["measure"]).strip_edges().to_lower()
+		if MEASURES.has(new_measure) and new_measure != measure:
+			# Read fresh every frame — nothing to rebuild or move.
+			measure = new_measure
 	# DNA knobs first, so a rebuild triggered by scale picks them up.
 	if config.has("initial_a") and config["initial_a"] is Vector3:
 		initial_a = config["initial_a"]

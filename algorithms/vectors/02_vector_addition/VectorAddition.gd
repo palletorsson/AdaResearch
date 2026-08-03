@@ -6,15 +6,59 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 # critical_parameter: piston_gadget — dragging either vector updates the sum in real time, making addition tactile rather than symbolic
 # triggers: VectorWorkbench spawns scene → vectors initialized → _process updates sum_vector each frame as a.target + b.target
 # emerges: the parallelogram — dotted lines project a and b's paths, framing the sum vector as their shared diagonal
-# needs: VR grab to drag vector tips [missing], component readout labels [has], real-time sum update [has]
+# needs: VR grab to drag vector tips [missing], component readout labels [has], real-time sum update [has], a construction axis that picks WHICH argument for a+b is drawn [has, 2026-08-03], a pair axis that opens the bench on the degenerate cases — right-angled, parallel, cancelling [has, 2026-08-03]. Missing: an in-world switch so a walker can change case without a map edit.
 # relationships: prerequisite to VectorSubtraction (subtraction is addition of negative); foundational to VectorForces where vectors combine as physical forces
 # truth: Vector addition is not about arrows — it is about the fact that two displacements taken sequentially are equivalent to one displacement.
 
 const PistonGadgetScript = preload("res://algorithms/vectors/shared/gadgets/piston_gadget.gd")
 
+# ── DNA (promoted 2026-08-03, stage 2) ───────────────────────────────────────
+# construction — which argument for a + b the bench actually draws. The shipped
+# build asserted exactly one: two dotted lines closing the parallelogram, with a
+# "(copy)" label floating at each midpoint. Shares its vocabulary with the
+# sibling VectorSubtraction (flip / chain / parallelogram / bare).
+#   parallelogram  the historical build. Both dotted closures, both copy labels,
+#                  no solid copies. The sum is the shared diagonal of the figure
+#                  a and b span.
+#   chain          one walk. A solid copy of b is chained onto a's tip and the
+#                  dotted lines go down: addition is "go out along a, then keep
+#                  going along b", and the tip you land on is the answer.
+#   commute        both walks at once — b chained at a's tip AND a chained at
+#                  b's tip. The two routes are different journeys that end on the
+#                  same point, which is what a + b = b + a actually claims.
+#   bare           a, b and a + b. No copies, no dotted lines. The claim is left
+#                  to the three arrows and the numbers.
+@export_enum("parallelogram", "chain", "commute", "bare") var construction: String = "parallelogram"
+
+# pair — what relation b starts in to a, i.e. which CASE of addition the bench
+# opens on. The shipped pair was one arbitrary oblique b; the three degenerate
+# cases that carry the lesson were unreachable from any map token.
+#   oblique     the shipped b = (0.4, 1.6, 0.9). Generic: a full parallelogram,
+#               a sum shorter than |a| + |b| and longer than either.
+#   orthogonal  b perpendicular to a at the same length. The parallelogram is a
+#               rectangle and |a + b|^2 = |a|^2 + |b|^2 — Pythagoras is not a
+#               separate fact, it is the right-angled case of this one.
+#   parallel    b is a multiple of a. The figure collapses to a segment and
+#               addition degenerates into scaling.
+#   opposed     b points back down a. The sum nearly vanishes: cancellation, the
+#               reason a ball under two forces can sit still.
+@export_enum("oblique", "orthogonal", "parallel", "opposed") var pair: String = "oblique"
+
+const CONSTRUCTION_VALUES := ["parallelogram", "chain", "commute", "bare"]
+const PAIR_VALUES := ["oblique", "orthogonal", "parallel", "opposed"]
+
+# The shipped operands. a never changes; pair only re-aims b, so the axis reads
+# as "what b is to a" rather than as two unrelated numbers.
+const A_START := Vector3(1.8, 0.6, -0.2)
+const B_START := Vector3(0.4, 1.6, 0.9)
+
 var vector_a: Node3D
 var vector_b: Node3D
 var sum_vector: Node3D
+# Solid chained copies. Built only when construction asks for them, so the
+# default tree is byte-for-byte the pre-promotion tree.
+var chain_b_at_a: Node3D = null
+var chain_a_at_b: Node3D = null
 var info_label: Label
 var readout_label: Label3D
 var magnitude_slider: Node3D
@@ -36,6 +80,8 @@ var _slider_max_mag: float = 3.0
 var _cached_vector_a_nodes: Dictionary = {}
 var _cached_vector_b_nodes: Dictionary = {}
 var _cached_sum_vector_nodes: Dictionary = {}
+var _cached_chain_b_nodes: Dictionary = {}
+var _cached_chain_a_nodes: Dictionary = {}
 
 # Shared resources for dots
 static var _dot_mesh: SphereMesh
@@ -52,11 +98,20 @@ func build_scene() -> void:
 	# walk-inside at 5.0). base_scale() == 0.5 * scale_multiplier.
 	scale = base_scale()
 
+	# The base rebuild() frees every child, so drop the lazily-built chain copies
+	# before they become dangling references. _apply_construction() re-makes them
+	# below if this build still wants them.
+	chain_b_at_a = null
+	chain_a_at_b = null
+	_cached_chain_b_nodes.clear()
+	_cached_chain_a_nodes.clear()
+
 	create_axes(1.5)
 
-	# Vectors from origin
-	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.8, 0.6, -0.2), Color(0.9, 0.4, 0.3, 1.0), "Vector a")
-	vector_b = spawn_vector(Vector3.ZERO, Vector3(0.4, 1.6, 0.9), Color(0.3, 0.8, 0.9, 1.0), "Vector b")
+	# Vectors from origin. pair decides where b starts; "oblique" is B_START, the
+	# shipped value, so the default build is unchanged.
+	vector_a = spawn_vector(Vector3.ZERO, A_START, Color(0.9, 0.4, 0.3, 1.0), "Vector a")
+	vector_b = spawn_vector(Vector3.ZERO, _partner_vector(), Color(0.3, 0.8, 0.9, 1.0), "Vector b")
 	sum_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.55, 1.0, 0.4, 1.0), "a + b", false)
 
 	# Piston gadget — a small physics mechanism (RigidBody3D + SliderJoint3D).
@@ -104,6 +159,10 @@ func build_scene() -> void:
 	if magnitude_slider and magnitude_slider.has_signal("slider_moved"):
 		magnitude_slider.connect("slider_moved", Callable(self, "_on_magnitude_slider_moved"))
 
+	# DNA — with construction=parallelogram this only re-asserts the visibility
+	# every node already had, and builds nothing extra.
+	_apply_construction()
+
 func _on_magnitude_slider_moved(_position) -> void:
 	if magnitude_slider == null:
 		return
@@ -123,9 +182,25 @@ func _process(delta: float) -> void:
 	var result = a + b
 
 	_update_vector_fast(sum_vector, result, _cached_sum_vector_nodes)
-	_update_dotted_lines(a, b, result)
+	if _shows_parallelogram():
+		_update_dotted_lines(a, b, result)
+	else:
+		# _update_single_dotted_line_multimesh force-shows the multimesh, so the
+		# readings that refuse the dotted closure must keep it down here too.
+		if dotted_line_a:
+			dotted_line_a.visible = false
+		if dotted_line_b:
+			dotted_line_b.visible = false
 	if piston_gadget:
 		piston_gadget.update_from_vectors(a, b)
+
+	# Solid chained copies — only exist when construction asked for them.
+	if is_instance_valid(chain_b_at_a):
+		chain_b_at_a.position = a * SCENE_SCALE
+		_update_vector_fast(chain_b_at_a, b, _cached_chain_b_nodes)
+	if is_instance_valid(chain_a_at_b):
+		chain_a_at_b.position = b * SCENE_SCALE
+		_update_vector_fast(chain_a_at_b, a, _cached_chain_a_nodes)
 
 	# Update Pedagogical Labels
 	# label_b_copy sits at the midpoint of the dotted line extending from a
@@ -144,9 +219,114 @@ func _update_info(a: Vector3, b: Vector3, result: Vector3) -> void:
 	builder.append("b = (%.2f, %.2f, %.2f)" % [b.x, b.y, b.z])
 	builder.append("a + b = (%.2f, %.2f, %.2f)" % [result.x, result.y, result.z])
 	builder.append("|a + b| = %.2f" % result.length())
+	if construction == "commute":
+		builder.append("b + a = (%.2f, %.2f, %.2f)  (same tip)" % [result.x, result.y, result.z])
 	info_label.text = "\n".join(builder)
 	if readout_label:
 		readout_label.text = "a + b = (%.2f, %.2f, %.2f)\n|a + b| = %.2f" % [result.x, result.y, result.z, result.length()]
+
+# ── DNA helpers ──────────────────────────────────────────────────────────────
+
+## Where b starts, given the case this bench is arguing. Everything is derived
+## from A_START so the relation is exact rather than eyeballed; "oblique" hands
+## back the shipped constant untouched.
+func _partner_vector() -> Vector3:
+	match pair:
+		"orthogonal":
+			# Any perpendicular will do; cross with UP gives a b that lies out to
+			# the side rather than straight up, so the rectangle reads in a still.
+			var perp: Vector3 = A_START.cross(Vector3.UP)
+			if perp.length() < 0.001:
+				perp = A_START.cross(Vector3.FORWARD)
+			return perp.normalized() * B_START.length()
+		"parallel":
+			# Short of 1.0 so the two arrows stay tellable apart along one line.
+			return A_START * 0.85
+		"opposed":
+			# Not exactly -a: a sum of literally zero has no arrow to look at.
+			return A_START * -0.85
+		_:
+			return B_START
+
+## The dotted closure belongs to the reading that argues from the figure.
+func _shows_parallelogram() -> bool:
+	return construction == "parallelogram"
+
+## Solid copy of b chained onto a's tip — addition as one walk.
+func _shows_chain_b() -> bool:
+	return construction == "chain" or construction == "commute"
+
+## Solid copy of a chained onto b's tip — the other walk, same destination.
+func _shows_chain_a() -> bool:
+	return construction == "commute"
+
+## Built lazily, so no shipped placement ever gains a node it did not have.
+func _ensure_chain_b() -> void:
+	if is_instance_valid(chain_b_at_a):
+		return
+	chain_b_at_a = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.3, 0.8, 0.9, 0.55), "b@a", false)
+	_cache_vector_nodes(chain_b_at_a, _cached_chain_b_nodes)
+
+func _ensure_chain_a() -> void:
+	if is_instance_valid(chain_a_at_b):
+		return
+	chain_a_at_b = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.9, 0.4, 0.3, 0.55), "a@b", false)
+	_cache_vector_nodes(chain_a_at_b, _cached_chain_a_nodes)
+
+## Pure visibility on the historical nodes; the chained copies are the only new
+## geometry, and they are not instantiated unless a map asks for them.
+func _apply_construction() -> void:
+	var show_par: bool = _shows_parallelogram()
+	if dotted_line_a:
+		dotted_line_a.visible = show_par
+	if dotted_line_b:
+		dotted_line_b.visible = show_par
+	if label_a_copy:
+		label_a_copy.visible = show_par
+	if label_b_copy:
+		label_b_copy.visible = show_par
+	if _shows_chain_b():
+		_ensure_chain_b()
+	if is_instance_valid(chain_b_at_a):
+		chain_b_at_a.visible = _shows_chain_b()
+	if _shows_chain_a():
+		_ensure_chain_a()
+	if is_instance_valid(chain_a_at_b):
+		chain_a_at_b.visible = _shows_chain_a()
+
+## Re-aims b live. The tips stay draggable afterwards — pair sets the opening
+## case, it does not lock the bench.
+func _apply_pair() -> void:
+	if vector_b == null:
+		return
+	_update_vector_fast(vector_b, _partner_vector(), _cached_vector_b_nodes)
+
+## Does NOT skip the base: scale_multiplier still rebuilds through build_scene(),
+## which reads both axes on the way past. Both are also applied live, and an
+## absent or unknown key leaves the artifact exactly as it was built.
+func apply_grid_config(config: Dictionary) -> void:
+	if config == null or config.is_empty():
+		return
+	var construction_changed: bool = false
+	var pair_changed: bool = false
+	if config.has("construction"):
+		var c: String = str(config["construction"])
+		if c in CONSTRUCTION_VALUES and c != construction:
+			construction = c
+			construction_changed = true
+	if config.has("pair"):
+		var p: String = str(config["pair"])
+		if p in PAIR_VALUES and p != pair:
+			pair = p
+			pair_changed = true
+	super.apply_grid_config(config)
+	# Only act once _ready (or the base rebuild) has actually built the scene.
+	if not _scene_built:
+		return
+	if construction_changed:
+		_apply_construction()
+	if pair_changed:
+		_apply_pair()
 
 func _create_dotted_line_multimesh(color: Color = Color(0.7, 0.7, 0.7, 0.5)) -> MultiMeshInstance3D:
 	var mmi = MultiMeshInstance3D.new()

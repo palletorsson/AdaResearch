@@ -24,8 +24,22 @@
 				"degenerate_threshold": 0.18,
 				"show_sliders": true,
 				"arrow_thickness": 0.014,
+				"workings": "outcome | trace | operands | expression - how much of the construction the bench draws (default expression)",
+				"norm": "euclidean | taxicab | chebyshev - which length |v| reports (default euclidean)",
 				"footprint": [1, 2, 1],
 				"size_group": "small"
+			},
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"workings": ["outcome", "trace", "operands", "expression"],
+					"norm": ["euclidean", "taxicab", "chebyshev"]
+				},
+				"default": "workings=expression, norm=euclidean - the full construction (three legs chained tip-to-tail, the floor diagonal, the right-angle box, every midpoint label, the squares-and-sum column) reporting sqrt(x^2+y^2+z^2), which is exactly what the bench drew before promotion, so the 4 existing placements are unchanged",
+				"was": "the scaffolding hard-coded as the only way a magnitude could be shown, and the Euclidean norm hard-coded as the only thing length could mean - reach, max_magnitude, degenerate_threshold, show_sliders and arrow_thickness were reachable from a map token, but none of them was an argument, and none was exported, so the stage-2 sweep saw no knobs at all",
+				"shared_with": "vector_add / vector_sub / transform_composition_workbench - the same axis word and the same four values in the same order, so a room cannot show a sum as a walked route and a magnitude as a bare number. agreement_gauge is the housing sibling (same slate plinth, brass rim, etched lattice) and should measure alike if that vocabulary is honest",
+				"note": "norm is a thesis axis, not a unit: the leg-chain the bench already draws IS the taxicab route, so taxicab makes the drawing and the number agree, and chebyshev reduces |v| to the longest single component. The euclidean path returns v.length() and sqrt(x^2+z^2) unchanged"
 			},
 			"size_group": "small",
 			"spatial_profile": {

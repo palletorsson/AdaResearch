@@ -1023,6 +1023,25 @@
     "morphology",
     "growth"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "species": [
+      "generic",
+      "bluebell",
+      "iris",
+      "daisy",
+      "allium",
+      "crown_imperial"
+     ]
+    },
+    "default": "species=generic - preset = \"\", which is what BotanicalFlower._ready() has always seen from this wrapper, so it builds straight from DEFAULT_CONFIG and all 9 existing placements render the same five-petal pink bloom as before; every one of those placements is a bare token with no config, and apply_grid_config now returns without rebuilding when neither the species nor an override key is present",
+    "was": "no exports at all. The wrapper instantiated the generator and forwarded seven config keys, and the nine species already sitting in BotanicalFlower.PRESETS - bluebell, iris, fritillaria, allium, orchid, corydalis, daisy, crown_imperial, clover, each a full 25-key parameter set from Swedish botanical illustrations - were unreachable from any map token, because `preset` was assigned AFTER the generator's _ready had already built, and the rebuild was gated on some other key riding along with it",
+    "note": "species is whether this flower has a NAME. It is not a colour swatch: a preset is a claim about what a flower IS - bluebell is a raceme of six pendant bells on an arched stem, allium is twenty tiny heads on one umbel, daisy is a composite where the petals are ray florets around a disk, crown_imperial is a 0.5 m cyme against generic's 0.25 m single bloom. The artifact's own truth statement (a flower is not its petals, it is the parameters that decided how many petals to grow) is exactly what the axis argues, because `generic` is not the absence of a species - it is the position that a flower can be fully specified without being named. Six of the nine presets are declared, chosen to span single vs inflorescence, radial vs bilateral, open vs bell vs composite, and 0.10 m to 0.50 m; fritillaria, orchid and corydalis still build if a map names them, since the export hint is an editor affordance rather than a gate.",
+    "declined": "a second axis. inflorescence, phyllotaxis and symmetry are all real arguments but every one of them is SET BY the presets, so a second axis would fight the first and the sweep would measure the collision. BotanicalFlower.create_garden() (count / radius / base_seed) is genuinely orthogonal - specimen vs population, which is the claim a species name quietly makes - but any non-default value spills far outside the artifact's 1-cell footprint, so it is a map-layer decision rather than an axis.",
+    "footprint_note": "crown_imperial is 0.5 m tall against generic's 0.25 m and allium spreads a 20-head umbel; the declared values stay inside the measured spatial_needs, but a sweep gallery should frame on the tallest rather than on the default."
+   },
    "geometry_spec": {
     "mesh_type": "delegated_scene",
     "topology": "manifold_closed",

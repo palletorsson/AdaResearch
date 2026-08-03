@@ -15,6 +15,45 @@ extends Node3D
 # relationships: depends on threaded audio generation; contrasts with SoundscapeRadioRack (generative vs preset ambience); unlocks algorithmic composition
 # truth: Silence is not the absence of sound — it is the space between algorithmically chosen events.
 
+# --- DNA (stage 2, promoted 2026-08-03) -------------------------------------
+# chance: what a piece named after the composer who handed his scores to the
+#   I Ching actually surrenders to the dice IN THE OBJECT YOU CAN SEE. The
+#   honest answer today is: nothing. The permanent body is seven glowing orbs
+#   whose hue is a deterministic spectral fan (0.55 + i/n) at one fixed radius
+#   of 0.45 m. The only randomness in the scene lives in the 20-particle
+#   loading halo, and that halo deletes itself the moment generation finishes.
+#   So "none" is both the shipped value and the finding. Turning the axis hands
+#   the constellation's colour, its sizes, or both to an RNG the composition
+#   cannot argue back to.
+# ensemble: where the sources stand in relation to the body standing among
+#   them. A ring is an environment you are inside; a line is a score read left
+#   to right; a column is a stack of layers made vertical; a cluster is ONE
+#   object that happens to make every sound; a shell puts voices overhead and
+#   underfoot, so the composition has no floor to stand the listener on.
+@export_enum("none", "hue", "size", "all") var chance: String = "none"
+@export_enum("ring", "line", "column", "cluster", "shell") var ensemble: String = "ring"
+
+# Support knobs, NOT axes.
+#   chance_seed pins the dice so a sweep photographs one constellation per
+#     value instead of a fresh object every boot (0 = the shipped randomize()).
+#   progress_display and audio_mode exist for a capture fixture. The loading
+#     bar and its particle halo are transient — they fade and queue_free on
+#     completion — so they are in every still and in almost none of the lived
+#     minutes, and they inflate the AABB from ~4 m to ~16 m, shrinking the
+#     permanent constellation to a speck in frame. audio_mode = "silent" skips
+#     the generation thread only; the players and orbs are still built.
+@export var chance_seed: int = 0
+@export_enum("bar", "none") var progress_display: String = "bar"
+@export_enum("generate", "silent") var audio_mode: String = "generate"
+
+const ORB_RADIUS: float = 0.45
+const ORB_RING_RADIUS: float = 2.2
+const CHANCE_MODES: Array = ["none", "hue", "size", "all"]
+const ENSEMBLE_MODES: Array = ["ring", "line", "column", "cluster", "shell"]
+
+var _axis_rng: RandomNumberGenerator = null
+var _built: bool = false
+
 const NUM_BUSES = 4
 var bus_names = ["Master", "Reverb", "Delay", "LowPass"]
 
@@ -89,7 +128,8 @@ func _ready() -> void:
 	setup_audio_buses()
 	setup_players()
 	setup_visualizers()
-	create_3d_loading_bar()
+	if progress_display != "none":
+		create_3d_loading_bar()
 	add_to_group("audio_emitters")
 	stop_requested = false
 	
@@ -100,7 +140,9 @@ func _ready() -> void:
 	sound_generation_complete.connect(_on_generation_complete)
 	
 	# Start generation in background thread
-	start_sound_generation()
+	if audio_mode != "silent":
+		start_sound_generation()
+	_built = true
 
 func _ensure_rng() -> RandomNumberGenerator:
 	if rng == null:
@@ -542,33 +584,115 @@ func setup_players() -> void:
 		effect_players.append(player)
 
 func setup_visualizers() -> void:
+	# First build only. Clearing precreated_sounds is a SOUND concern and it must
+	# not travel with a later visual rebuild — apply_grid_config calls
+	# _build_visualizers() directly so that changing an axis at spawn cannot
+	# throw away audio the generation thread has already finished.
+	precreated_sounds.clear()
+	_build_visualizers()
+
+func _build_visualizers() -> void:
 	# Rebuild small transparent spheres for each audio source.
 	if visualizer_root:
 		visualizer_root.queue_free()
 	visualizer_root = null
 	visualizer_infos.clear()
-	precreated_sounds.clear()
-	precreated_sounds.clear()
 	visualizer_root = Node3D.new()
 	visualizer_root.name = "AudioVisualizerRoot"
 	visualizer_root.position = Vector3.ZERO
 	add_child(visualizer_root)
-	
-	if drone_player:
-		add_visualizer_for_player(drone_player, Vector3(-1.5, 0.0, 0.0), Color(0.45, 0.15, 0.8, 0.6))
-	if ambient_player:
-		add_visualizer_for_player(ambient_player, Vector3(1.5, 0.0, 0.0), Color(0.1, 0.6, 0.95, 0.6))
-	
-	if effect_players.size() == 0:
+
+	# Reset the dice, so the same seed always yields the same constellation and
+	# a rebuild is a re-reading of the score rather than a new composition.
+	_axis_rng = null
+
+	if ensemble == "ring":
+		# The shipped figure, kept verbatim: the two named voices flank the body
+		# on X, the effect players stand on a 2.2 m circle around it.
+		if drone_player:
+			add_visualizer_for_player(drone_player, Vector3(-1.5, 0.0, 0.0), Color(0.45, 0.15, 0.8, 0.6))
+		if ambient_player:
+			add_visualizer_for_player(ambient_player, Vector3(1.5, 0.0, 0.0), Color(0.1, 0.6, 0.95, 0.6))
+
+		if effect_players.size() == 0:
+			return
+
+		var radius: float = ORB_RING_RADIUS
+		for i in range(effect_players.size()):
+			var angle: float = TAU * float(i) / max(1.0, float(effect_players.size()))
+			var pos: Vector3 = Vector3(cos(angle) * radius, 0.0, sin(angle) * radius)
+			var hue: float = fposmod(0.55 + float(i) / max(1.0, float(effect_players.size())), 1.0)
+			var color: Color = Color.from_hsv(hue, 0.75, 1.0, 0.6)
+			add_visualizer_for_player(effect_players[i], pos, color)
 		return
-	
-	var radius = 2.2
+
+	# Every other ensemble treats the sources as ONE ordered company, so the
+	# drone and the city ambience take their place in the same figure as the
+	# effects instead of standing apart from it.
+	# Two parallel typed arrays rather than one array of pairs: a pair would come
+	# back out as Variant and land on a typed parameter unchecked.
+	var company: Array[AudioStreamPlayer] = []
+	var company_colors: Array[Color] = []
+	if drone_player:
+		company.append(drone_player)
+		company_colors.append(Color(0.45, 0.15, 0.8, 0.6))
+	if ambient_player:
+		company.append(ambient_player)
+		company_colors.append(Color(0.1, 0.6, 0.95, 0.6))
 	for i in range(effect_players.size()):
-		var angle = TAU * float(i) / max(1.0, float(effect_players.size()))
-		var pos = Vector3(cos(angle) * radius, 0.0, sin(angle) * radius)
-		var hue = fposmod(0.55 + float(i) / max(1.0, float(effect_players.size())), 1.0)
-		var color = Color.from_hsv(hue, 0.75, 1.0, 0.6)
-		add_visualizer_for_player(effect_players[i], pos, color)
+		var h: float = fposmod(0.55 + float(i) / max(1.0, float(effect_players.size())), 1.0)
+		company.append(effect_players[i])
+		company_colors.append(Color.from_hsv(h, 0.75, 1.0, 0.6))
+
+	var count: int = company.size()
+	for i in range(count):
+		add_visualizer_for_player(company[i], _ensemble_position(i, count), company_colors[i])
+
+func _ensemble_position(index: int, count: int) -> Vector3:
+	var n: float = max(1.0, float(count))
+	var t: float = float(index)
+	match ensemble:
+		"line":
+			# A score: every voice in a row, read left to right.
+			return Vector3((t - (n - 1.0) * 0.5) * 1.1, 0.0, 0.0)
+		"column":
+			# A stack of layers — the mix stood on end.
+			return Vector3(0.0, t * 0.9, 0.0)
+		"cluster":
+			# One body that happens to make every sound. Golden-angle offsets
+			# inside 0.35 m so the orbs read as a clump and not as a point.
+			var a: float = t * 2.399963
+			var r: float = 0.35 * sqrt(t / n)
+			return Vector3(cos(a) * r, r * 0.4, sin(a) * r)
+		"shell":
+			# Fibonacci sphere: sources overhead and underfoot, no floor.
+			var y: float = 1.0 - 2.0 * (t + 0.5) / n
+			var rad: float = sqrt(max(0.0, 1.0 - y * y))
+			var phi: float = t * 2.399963
+			return Vector3(cos(phi) * rad * ORB_RING_RADIUS, y * ORB_RING_RADIUS, sin(phi) * rad * ORB_RING_RADIUS)
+	# Unreachable for "ring" (handled above); any unknown value falls back to it.
+	var angle: float = TAU * t / n
+	return Vector3(cos(angle) * ORB_RING_RADIUS, 0.0, sin(angle) * ORB_RING_RADIUS)
+
+# --- the dice ---------------------------------------------------------------
+func _chance_rng() -> RandomNumberGenerator:
+	if _axis_rng == null:
+		_axis_rng = RandomNumberGenerator.new()
+		if chance_seed == 0:
+			_axis_rng.randomize()
+		else:
+			_axis_rng.seed = chance_seed
+	return _axis_rng
+
+func _chance_color(base: Color) -> Color:
+	if chance == "hue" or chance == "all":
+		return Color.from_hsv(_chance_rng().randf(), 0.75, 1.0, base.a)
+	return base
+
+func _chance_radius() -> float:
+	if chance == "size" or chance == "all":
+		return _chance_rng().randf_range(0.18, 0.85)
+	return ORB_RADIUS
 
 func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, color: Color) -> void:
 	if not player:
@@ -578,8 +702,11 @@ func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, col
 	var holder = Node3D.new()
 	holder.position = position
 	visualizer_root.add_child(holder)
-	
-	var base_radius = 0.45
+
+	# chance = "none" returns the passed colour and 0.45 unchanged, so the ring
+	# the five shipped placements stand in is bit-for-bit what it always was.
+	var draw_color: Color = _chance_color(color)
+	var base_radius: float = _chance_radius()
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = SphereMesh.new()
 	mesh.radius = base_radius
@@ -589,20 +716,20 @@ func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, col
 	mesh_instance.scale = Vector3.ONE
 	
 	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(color.r, color.g, color.b, 0.35)
+	material.albedo_color = Color(draw_color.r, draw_color.g, draw_color.b, 0.35)
 	material.emission_enabled = true
-	material.emission = color * 1.3
+	material.emission = draw_color * 1.3
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.roughness = 0.25
 	material.metallic = 0.05
 	mesh_instance.material_override = material
-	
+
 	holder.add_child(mesh_instance)
-	
+
 	visualizer_infos.append({
 		"player": player,
 		"mesh": mesh_instance,
-		"color": color,
+		"color": draw_color,
 		"radius": base_radius,
 		"level": 0.0
 	})
@@ -1277,4 +1404,33 @@ func shutdown_audio() -> void:
 	visualizer_infos.clear()
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# GUARDED. A map that names neither axis changes nothing here, and nothing is
+	# rebuilt until _ready has stood the constellation up once. GridInteractables-
+	# Component calls this deferred, i.e. after _ready, so an unguarded rebuild
+	# would tear down and re-make the visualizers of all five shipped placements
+	# on the frame they spawn — for no change at all.
+	var rebuild: bool = false
+
+	if config.has("chance"):
+		var want_chance: String = str(config["chance"]).strip_edges().to_lower()
+		if CHANCE_MODES.has(want_chance) and want_chance != chance:
+			chance = want_chance
+			rebuild = true
+
+	if config.has("ensemble"):
+		var want_ensemble: String = str(config["ensemble"]).strip_edges().to_lower()
+		if ENSEMBLE_MODES.has(want_ensemble) and want_ensemble != ensemble:
+			ensemble = want_ensemble
+			rebuild = true
+
+	if config.has("chance_seed"):
+		var want_seed: int = int(config["chance_seed"])
+		if want_seed != chance_seed:
+			chance_seed = want_seed
+			rebuild = true
+
+	# _build_visualizers, NOT setup_visualizers: the latter also clears
+	# precreated_sounds, which would silence an artifact that had already
+	# finished generating.
+	if rebuild and _built:
+		_build_visualizers()

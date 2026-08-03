@@ -1461,6 +1461,34 @@
    }
   },
   "DualBallFMController": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "evidence": [
+      "result",
+      "trace",
+      "sources",
+      "longhand"
+     ],
+     "regime": [
+      "midpoint",
+      "bell",
+      "electric_piano",
+      "brass",
+      "metallic"
+     ]
+    },
+    "fixture": {
+     "evidence": "longhand"
+    },
+    "default": "evidence=result, regime=midpoint - the shipped build exactly (two ValueMapper3D cages with their balls parked where _create_point() puts them, the blue/orange recolour, the 25 cm preview cube, the title label; outside the `result` branch not one scope node is ever constructed and `midpoint` returns before touching a ball), so all 7 live appearances are unchanged - 4 direct grid tokens and 3 memberships in a curation_station roster. No map carries an #evidence: or #regime: token today",
+    "was": "zero exports, and a still-frame problem sharper than most: the whole subject is a SOUND and the only thing ever drawn about it was a 25 cm cube whose hue is mod_ratio/8, saturation mod_index/10 and value carrier_freq/2000 - three of six parameters encoded as a colour nobody can decode. The waveform itself is evaluated 88,200 times per press inside _generate_fm_sound(), packed into bytes and never shown once. Meanwhile four complete six-parameter patches sat in the file as set_bell_preset / set_electric_piano_preset / set_brass_preset / set_metallic_preset with NOTHING in the repo calling them",
+    "note": "evidence is how much of the FM arithmetic the rig puts on the table. result = the colour cube alone, the legacy lineage. trace = one scope lane above the rig carrying out(t) = sin(2*PI*fc*t + m(t))*env(t). sources = the two operand oscillators without the answer - the modulator m(t) = I*e^(-t/tau)*sin(2*PI*R*fc*t) in the modulator ball's orange and the bare unmodulated carrier in the carrier ball's blue. longhand = both operands printed above a rule with the output below as the sum, each lane captioned with the term it draws, the output lane drawn in the exact timbre colour the preview cube shows so the top rung ties back to result. Every lane comes from _fm_sample(), which is _generate_fm_sound()'s inner loop with the byte packing removed, so a lane cannot drift from the sound it claims to be. regime turns which patch the rig is HOLDING: midpoint is the shipped state, every ball at the geometric centre of its own cage (1050 Hz, ratio 4.25, index 5.0) - not a sound anyone designed but the average of a slider - and the other four call this file's own preset functions unchanged. regime moves both balls inside their wireframe cages, recolours the cube and reshapes every scope lane; the audio path, the sample generator and the grab interaction are untouched",
+    "kin": "`evidence` with these four values is what wave_interference_tank, sine_wave_controller, koch_curve, fibonacci_sequences and the example_2_8 / example_2_9 pair already call this question, and the script parses a token through WaveInterferenceTank.evidence_name() rather than keeping a second alias table. `regime` with a named-state vocabulary is spring_demo's and VectorForces' word for the same move - which operating state of one machine is on display",
+    "fixture_note": "regime is legible at evidence=result only through a 25 cm cube's hue in a 1.9 m rig, which is how a real axis gets reported inert. The fixture pins evidence=longhand so a regime sweep is measured with the waveform on the table; cabinet_sweep merges variant params OVER the fixture, so the evidence sweep still sets its own value per variant",
+    "reads": "the .tscn root carries the script, so apply_grid_config reaches it directly. That method existed as `pass` and silently discarded every key handed to it; it now stores config as config_<key> metadata and re-reads. Both rebuilds are gated on is_node_ready() AND a changed word, so a placement carrying no token - including the curation_station roster path, which forwards the station's own keys - never triggers a teardown. ValueMapper3D.set_values() moves the point WITHOUT emitting values_changed, so _apply_regime pulls the values back through get_values() on the same frame instead of waiting for the mapper's _process to notice"
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "Two-handed FM synthesis controller using ValueMapper3D balls. Blue ball controls carrier (frequency, attack, decay); orange ball controls modulator (ratio, index, decay). Classic FM synthesis—one oscillator modulating another's phase to create bells, metallic textures, electric pianos, brass. Presets for common FM patches.",
@@ -5666,6 +5694,21 @@
    }
   },
   "SoundscapeRadioRack": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "face": [
+      "scale",
+      "presets",
+      "list",
+      "void"
+     ]
+    },
+    "default": "face=scale - the printed band 88 … 108 and its sliding needle are the .tscn's own nodes, and scale is the only value that adds nothing and hides nothing, so all 5 existing placements render exactly as they shipped",
+    "was": "a hand-built front panel with no exports the sweep could turn: a Label3D reading '88 | 92 | 96 | 100 | 104 | 108' and a 1 cm needle box, both hard-coded in the scene, plus a display whose only vocabulary was a fake FM number. The tuning maths (station = round(angle / 40°), clarity = 1 - |offset|) was already an argument about continuum versus discrete stations, and the panel could only ever tell one side of it. apply_grid_config() did not exist.",
+    "note": "the axis does not touch the tuning maths — station index, clarity threshold and the audio are identical across all four values. What changes is the panel's ACCOUNT of the spectrum: a continuum you can read a number off (scale), a row of discrete lamps where the between does not appear at all though you still hear it (presets), a stocked menu of nine proper nouns (list), or no map whatsoever, wheels and a dark display, find a station by ear (void). Same signal, four claims about what a station is."
+   },
    "capacity": "TUNE between soundscape stations by turning a VR wheel — feeling the analog transition from signal to noise",
    "category": "waves",
    "complexity": "beginner",
@@ -9554,6 +9597,36 @@
    "qfep_connection": "a holographic display — the lab's window into fields; renders the invisible for the eye, a container for other content."
   },
   "john_cage_tech_noir": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "chance": [
+      "none",
+      "hue",
+      "size",
+      "all"
+     ],
+     "ensemble": [
+      "ring",
+      "line",
+      "column",
+      "cluster",
+      "shell"
+     ]
+    },
+    "default": "chance=none, ensemble=ring - none returns the passed colour and the 0.45 m radius unchanged, and ring is the shipped figure kept verbatim (drone at x=-1.5, ambience at x=+1.5, five effect players on a 2.2 m circle at hue 0.55 + i/n), so all 5 existing placements are bit-for-bit what they were",
+    "was": "no exports at all. The permanent body — seven glowing orbs, one per audio source — had its hue fixed by a deterministic spectral fan and its radius fixed at 0.45, and its layout hard-coded in setup_visualizers(). apply_grid_config() was 'pass'.",
+    "note": "the finding is the default. A piece named after the composer who handed his scores to the I Ching surrenders NOTHING visible to chance: the only randomness in the scene is the 20-particle loading halo, which deletes itself the moment generation completes. chance=none is therefore both the shipped value and the diagnosis, and turning the axis is the question 'what would it mean for this machine to actually roll the dice on what you see'. ensemble is orthogonal to it and asks where the sources stand in relation to the body among them: inside an environment (ring), along a score read left to right (line), up a stack of layers (column), collapsed into one object that happens to make every sound (cluster), or overhead and underfoot with no floor (shell).",
+    "fixture": {
+     "progress_display": "none",
+     "audio_mode": "silent",
+     "chance_seed": 20260803
+    },
+    "fixture_note": "WITHOUT THIS FIXTURE THE SWEEP MEASURES THE WRONG OBJECT. The loading bar sits at (0, 2, -5) and scatters 20 particles on a radius of 5-8 m, so the merged AABB is ~16 m and the 4.4 m constellation the axes actually move is a speck in frame — and the bar is transient anyway (it fades and queue_frees on completion), so it is in every still and in almost none of the lived minutes. progress_display=none photographs the permanent body. audio_mode=silent skips the generation thread only (players and orbs are still built) because this artifact is in the known headless-hang class — a threaded synthesiser that never yields. chance_seed pins the dice so each value renders ONE constellation rather than a new object per boot.",
+    "sibling_note": "tech_noir_audio is a second registry token pointing at this same scene (res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn) with no map_sequences. It inherits the code but not this declaration.",
+    "framing": 0.8
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Procedurally composes endless techno-noir ambience with city drones, random effects, and a loading-bar visualizer.",
@@ -13789,6 +13862,23 @@
    }
   },
   "tech_noir_audio": {
+   "dna": {
+    "axes": {
+    "chance": [
+    "none",
+    "hue",
+    "size",
+    "all"
+    ],
+    "ensemble": [
+    "ring",
+    "line",
+    "column",
+    "cluster",
+    "shell"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "John Cage inspired algorithmic audio composition",
@@ -15263,6 +15353,24 @@
    }
   },
   "wave_interference_3d": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "evidence": [
+      "result",
+      "trace",
+      "sources",
+      "longhand"
+     ]
+    },
+    "default": "evidence=result - the shipped build byte for byte (the 16x16 relief, the two red source markers, the three-slider rack and nothing else; outside the `result` branch not one node is ever constructed), so all 10 live appearances are unchanged - 4 direct grid tokens `wave_interference_3d:0:-0.5` and 6 as the `mount:` of an exhibit_furniture plinth. No map carries an #evidence: token today",
+    "was": "zero exports. The two addends live in _animate_grid() for exactly one line - sin(k*d1 - w*t) + sin(k*d2 - w*t) - computed 256 times a frame, added, and thrown away. Only the sum was ever built into geometry, so the artifact could show that interference HAPPENED and never that it was addition that did it",
+    "note": "evidence is how much of the interference arithmetic the grid puts on the table, one ordered ladder monotone in disclosure. result = the summed relief alone, the legacy lineage. trace = a chart plate behind the grid carrying the centre row's height as a curve with its zero line, read back off the spheres the relief already placed, so fringe spacing becomes something you count instead of infer from a relief seen at an angle. sources = the two families of expanding crest rings, blue from source A and orange from source B, drawn flat under the relief - where two rings cross, the relief above has a peak. longhand = the sum written out: both addend fields as flat colour plates on the same ground plan as the relief, a plus between them and a rule below, with the relief beyond as the answer. All four run identical mathematics; _animate_grid, the sliders, the palette and the sphere positions are untouched. What changes is what the room is allowed to see",
+    "kin": "the word and its four values are taken character for character from wave_interference_tank, this artifact's 2D sibling, and the script calls WaveInterferenceTank.evidence_name() rather than keeping a second alias table - so `pattern`, `fronts` and `terms` can never mean two different rungs in the two twins. sine_wave_controller, koch_curve, fibonacci_sequences and the example_2_8 / example_2_9 pair already say `evidence` about their own working",
+    "reads": "the .tscn root carries the script, so apply_grid_config reaches it directly from a grid token. That method existed as `pass` and silently discarded every key handed to it; it now stores config as config_<key> metadata and re-reads. The rebuild is gated on is_node_ready() AND a changed word, so a placement carrying no token - and the exhibit_furniture plinth path, which passes none - never triggers a teardown",
+    "framing_note": "the whole artifact is 0.27 m across with 3 mm spheres, so every rung draws its lines as flat RIBBONS rather than 1 px LINE_STRIPs; the first arrangement also stacked the longhand plates directly over the relief, which hid the answer from every elevated camera, and they now sit behind it in -Z"
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Two wave sources on a 16x16 sphere grid. Each sphere rises and falls as the sum of two circular sine waves. Constructive interference builds peaks; destructive interference flattens nodes. Adjust frequency, source separation, and amplitude to reshape the pattern.",

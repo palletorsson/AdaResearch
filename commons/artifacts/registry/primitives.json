@@ -3329,6 +3329,25 @@
    "tags": [
     "primitive"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "frame": [
+      "diagonal",
+      "upright",
+      "oblique"
+     ],
+     "stock": [
+      "stacked",
+      "crossed",
+      "scattered"
+     ]
+    },
+    "default": "frame=diagonal, stock=stacked - diagonal hands back the four shipped corner literals (0,0.2,-0.2), (0,-0.2,0.2), (0,-0.2,-0.2), (0,0.2,0.2) verbatim instead of re-deriving them, and stacked returns the two parallel lines at x=0.2, y=-0.25/-0.4 verbatim, so every existing placement (4 map tokens, incl. the tagged one in Point_Line_Context) opens in exactly the layout it had before",
+    "was": "no exports of its own: four target corners and two starting segments written as literal arrays in _init(), and no apply_grid_config(). The subclass differs from plus_line_puzzle ONLY in those corner literals - both call FormConstraint.cross_constraints() - so the X was shipped as if it were a different figure when it is the same relation at a different angle",
+    "note": "frame is the argument axis: upright turns the same four points 45 degrees so the finished figure is a plus, made from the same two lines under the same perpendicular + intersect-at-centres test, and oblique parks them 20 degrees off so neither name is available and only the relation is left. stock is the family word shared with plus_line_puzzle (same three layouts, same coordinates) and with triangle_line_puzzle (same word, its own three values) - what the unassembled parts give away before you touch them. Script confirmed on the .tscn ROOT node (CrossLinePuzzle), not on a child, so both axes are reachable from a map token."
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",
