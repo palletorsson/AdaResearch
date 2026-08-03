@@ -213,7 +213,7 @@ def selftest() -> int:
 
 
 def main() -> int:
-    if "--selftest" in sys.argv:
+    if "--selftest" in sys.argv or "--self-test" in sys.argv:
         return selftest()
     src = PATTERNS
     for a in sys.argv[1:]:

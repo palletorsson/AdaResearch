@@ -482,6 +482,86 @@ def untracked_sources(reg: dict) -> list:
     return out
 
 
+PROBE = REPO / "tools" / "_dna_gate_selftest_probe.gd"
+
+PROBE_SRC = '''extends Node3D
+# transient self-test probe for check_dna_declarations.py — safe to delete
+@export var housing: String = "stand"
+
+func _build() -> void:
+\tmatch housing:
+\t\t"stand":
+\t\t\tpass
+\t\t"wall":
+\t\t\tpass
+'''
+
+
+def selftest() -> int:
+    """The negative control, made a fixture (2026-08-03, after 85d9f5cc4's manual one).
+
+    The gate that asked git shipped with three bugs that reading did not catch and a
+    hand-run fault-injection did. An instrument nobody has watched fail has not been
+    tested — so this watches it fail, every time, without touching the user's index or
+    the real registry: a throwaway probe script (untracked by construction) and
+    synthetic registry entries exercise the real code paths, then the probe is removed.
+
+    Controls (each asserts the gate's behaviour, not its implementation):
+      A  clean declaration        -> every axis "ok"          (no false alarms)
+      B  value the code lacks     -> MISMATCH                 (the science_screen disease)
+      C  axis with no @export     -> NO_EXPORT                (the unreachable-knob class)
+      D  untracked source file    -> untracked_sources flags  (the 85d9f5cc4 blind spot)
+      E  tracked source file      -> untracked_sources silent (no false alarms from git)
+    """
+    results: list[tuple[str, bool, str]] = []
+
+    def control(name: str, ok: bool, detail: str) -> None:
+        results.append((name, ok, detail))
+        print(f"  {'PASS' if ok else 'FAIL'}  {name}: {detail}")
+
+    print("self-test: injecting faults the gate must catch (and cleans it must not flag)")
+    try:
+        PROBE.write_text(PROBE_SRC, encoding="utf-8")
+        probe_scene = "res://tools/_dna_gate_selftest_probe.gd"
+
+        entry_clean = {"scene": probe_scene,
+                       "dna": {"axes": {"housing": ["stand", "wall"]}}}
+        rows = check_token("probe", entry_clean)
+        control("A clean declaration passes", bool(rows) and all(r["status"] == "ok" for r in rows),
+                f"statuses {[r['status'] for r in rows]}")
+
+        entry_bad = {"scene": probe_scene,
+                     "dna": {"axes": {"housing": ["stand", "niche"]}}}
+        rows = check_token("probe", entry_bad)
+        control("B undeclarable value -> MISMATCH",
+                any(r["status"] == "MISMATCH" for r in rows),
+                f"statuses {[r['status'] for r in rows]}")
+
+        entry_noexp = {"scene": probe_scene,
+                       "dna": {"axes": {"surface": ["flat", "curved"]}}}
+        rows = check_token("probe", entry_noexp)
+        control("C missing export -> NO_EXPORT",
+                any(r["status"] == "NO_EXPORT" for r in rows),
+                f"statuses {[r['status'] for r in rows]}")
+
+        flagged = untracked_sources({"probe": (entry_clean, "selftest")})
+        control("D untracked source is flagged", len(flagged) == 1,
+                f"{len(flagged)} flagged (probe is untracked by construction)")
+
+        tracked = {"scene": "res://commons/grid/GridSystem.gd",
+                   "dna": {"axes": {"anything": ["a"]}}}
+        flagged = untracked_sources({"tracked": (tracked, "selftest")})
+        control("E tracked source is not flagged", len(flagged) == 0,
+                f"{len(flagged)} flagged (GridSystem.gd is committed)")
+    finally:
+        if PROBE.exists():
+            PROBE.unlink()
+
+    ok = sum(1 for _, r, _ in results if r)
+    print(f"self-test: {ok}/{len(results)} controls passed")
+    return 0 if ok == len(results) else 1
+
+
 def main() -> int:
     only = ""
     quiet = False
@@ -490,6 +570,8 @@ def main() -> int:
             only = a.split("=", 1)[1]
         elif a == "--quiet":
             quiet = True
+        elif a in ("--self-test", "--selftest"):
+            return selftest()
 
     reg = registry()
 
