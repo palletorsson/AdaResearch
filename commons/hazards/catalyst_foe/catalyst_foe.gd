@@ -77,6 +77,56 @@ const MODE_BY_ID: Dictionary = {
 }
 
 
+# ── Stage-2 DNA axes ────────────────────────────────────────────────
+# Two things about this creature were already parameters and were already
+# reachable — but only through apply_grid_config string keys nobody could
+# see from the registry, so the auto-research sweep read the file, found no
+# @export, and refused it as having no turnable knobs. These two declarations
+# are the reach. Neither is new behaviour: both delegate to the code paths
+# `initial_state` and `critter_stage` have driven since May.
+#
+# NOTHING about the catalyst system itself is touched here — not the
+# bracelet, not the lease clock, not the sequence binding table. These axes
+# move the FOE: what body it wears, and where on the arc you meet it.
+#
+# Both default to "curriculum", the sentinel meaning *do not seed* — ask
+# HazardManager and soft_stages.json, exactly as before. A map that says
+# nothing gets the creature it got yesterday, to the pixel.
+
+## Which body the foe wears — the evolving pink critter's growth stages,
+## normally derived from the spine position via soft_stages order.
+##
+## This is the artifact's "biome-borne" claim made photographable: the same
+## enemy is a grey lab cube in the pre-colour sequences, a hovering pink mote
+## once colour arrives, an air-serpent under wavefunctions, an eight-legged
+## octapod under randomness, and simply bigger from fractals on. One creature,
+## one curriculum, five silhouettes.
+##
+## "many" (order 9, cellular) is deliberately absent: it differs from octapod
+## only in wave_mult — how many the VENT emits — which no single still of one
+## creature can show. A rate is not an axis.
+const BODY_ORDER: Dictionary = {
+	"cube":    0.0,   # soft_stages order <= 4 — the legacy grey lab cube
+	"mote":    5.0,   # after colour — legless hovering blob, pops on contact
+	"serpent": 6.0,   # wavefunctions — swims through the air in a sine
+	"octapod": 7.0,   # randomness — lands, grows 8 legs, the spider silhouette
+	"grand":  10.0,   # fractals onward — the same critter, 2.8x
+}
+@export_enum("curriculum", "cube", "mote", "serpent", "octapod", "grand") var body: String = "curriculum"
+
+## Where on the phase-shift arc this foe is MET. The artifact's own truth line
+## is "the catalyst doesn't kill — it phase-shifts"; until now the whole arc was
+## something you had to shoot your way to, and a map could only ever place the
+## angry end of it. Pinning the phase lets a room stage the argument instead of
+## only the fight: a settled friend standing beside a foe says the thing the
+## sequence spends ten minutes proving.
+##
+## Visible in a still, which is the point — the arc is a colour progression by
+## design (near-black foe, red wary, tan neutral, amber curious, lineage-hue
+## friend plus its badge), so every value is a different photograph.
+@export_enum("curriculum", "foe", "wary", "neutral", "curious", "friend") var phase: String = "curriculum"
+
+
 # ── Visual ──────────────────────────────────────────────────────────
 const FRIEND_HUES: Array[Color] = [
 	Color(0.93, 0.28, 0.60),  # pink
@@ -169,6 +219,11 @@ var _blown_up: bool = false
 func _critter_stage() -> Dictionary:
 	if _critter_stage_cache.is_empty():
 		var order: float = _critter_stage_order
+		# DNA axis `body` — a named stage stands in for the order number. The
+		# explicit `critter_stage` float still wins: it is finer-grained, and the
+		# vents that carry it were tuned against exact orders.
+		if order < 0.0 and BODY_ORDER.has(body):
+			order = float(BODY_ORDER[body])
 		if order < 0.0:
 			var hm: Node = get_node_or_null("/root/HazardManager")
 			if hm != null and hm.has_method("get_current_stage_order"):
@@ -432,6 +487,13 @@ func _rebuild_critter_visuals() -> void:
 
 func _on_ready() -> void:
 	add_to_group("catalyst_foe")
+	# DNA axis `phase` — pin the arc position this foe is met at. Seeded HERE
+	# rather than in _ready so it runs before the deferred HazardManager query,
+	# the same window `initial_state` uses. "curriculum" seeds nothing at all,
+	# which is why every existing placement is untouched.
+	if phase != "curriculum" and not _personality_seeded and PERSONALITY_ARC.has(phase):
+		set_personality(phase)
+		_personality_seeded = true
 	# If apply_grid_config seeded a personality BEFORE _ready (which is
 	# the order when the map composer or capture rig calls it right
 	# after instantiate), the visuals couldn't apply yet (_custom_mat
@@ -1372,6 +1434,36 @@ func apply_grid_config(config: Dictionary) -> void:
 		_critter_stage_cache = {}
 		if _mesh_root != null:
 			_rebuild_critter_visuals()
+
+	# ── Stage-2 DNA axes ────────────────────────────────────────────
+	# Both rebuild ONLY when the value actually changed AND the body has
+	# already been built. An unguarded rebuild here would throw away the
+	# critter every time any other system handed this foe a config dict.
+
+	# body — #body:octapod. Delegates to the same stage table `critter_stage`
+	# drives; the float key still wins if a vent set one.
+	if config.has("body"):
+		var body_val: String = String(config.get("body", "")).to_lower().strip_edges()
+		var body_known: bool = body_val == "curriculum" or BODY_ORDER.has(body_val)
+		if body_known and body_val != body:
+			body = body_val
+			_critter_stage_cache = {}
+			if _mesh_root != null:
+				_rebuild_critter_visuals()
+
+	# phase — #phase:friend. The arc position this foe is met at. Same seeding
+	# contract as initial_state below, which stays and still wins: maps already
+	# carry that key and a promotion may not renumber them.
+	if config.has("phase"):
+		var phase_val: String = String(config.get("phase", "")).to_lower().strip_edges()
+		if phase_val == "curriculum" or PERSONALITY_ARC.has(phase_val):
+			phase = phase_val
+		if phase != "curriculum" and phase != _personality:
+			set_personality(phase)
+			_apply_state_visuals_for_personality(phase)
+			if phase == "friend":
+				_build_friend_badge()
+			_personality_seeded = true
 
 	# initial_state — personality seed. Parent's set_personality fires
 	# behaviour-flag dispatch; we add visual sync. Sets _personality_seeded

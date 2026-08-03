@@ -9959,6 +9959,31 @@
    "qfep_connection": "Twenty segments sampling one sine — no segment is the creature, the phase relation is. Being detected ramps its frequency toward resonance, and at the peak the wave discharges: attention literally raises its energy state."
   },
   "catalyst_foe": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "body": [
+      "curriculum",
+      "cube",
+      "mote",
+      "serpent",
+      "octapod",
+      "grand"
+     ],
+     "phase": [
+      "curriculum",
+      "foe",
+      "wary",
+      "neutral",
+      "curious",
+      "friend"
+     ]
+    },
+    "default": "body=curriculum, phase=curriculum - both are the sentinel meaning DO NOT SEED: the stage still comes from HazardManager/soft_stages.json and the personality still comes from the deferred curriculum query, so the 11 map cells naming this token render exactly what they rendered before the promotion",
+    "was": "the foe's body was whatever the spine position happened to make it, and every placement met it at the angry end of the arc — the two parameters existed as apply_grid_config string keys (critter_stage, initial_state) that no registry reader could see, so the sweep read the script, found no @export, and refused it as having no turnable knobs",
+    "note": "the catalyst system itself is untouched — no bracelet, no lease clock, no sequence binding. 'curriculum' and the first explicit value of each axis photograph alike in a probe with no HazardManager (the query falls back to order 0 / personality foe); that redundancy is the sentinel's meaning made visible, not a dud value. The cellular stage 'many' is deliberately not an axis value: it differs from octapod only in how many the VENT emits, which one still of one creature cannot show."
+   },
    "category": "hazards",
    "complexity": "intermediate",
    "lookup_name": "catalyst_foe",

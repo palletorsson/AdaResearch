@@ -5516,6 +5516,27 @@
     "interactive",
     "vr"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "reveal": [
+      "hand",
+      "reach",
+      "joint",
+      "dof"
+     ]
+    },
+    "fixture": {
+     "hand_phase": 0.9
+    },
+    "default": "reveal=hand - the shipped scene byte for byte: the orbiting green marker, five loose pink bodies, the grey plate and the two billboard labels, so all 3 existing placements are unchanged. Outside the `hand` branch not one node is built and no grab is ever staged; apply_grid_config returns without rebuilding unless the word actually moved, and the live per-frame half returns on its first line because both handles are null.",
+    "was": "no exports at all and an apply_grid_config that was a literal `pass`. Five rigid bodies, a green marker on a circular path, and the entire subject of the example - `if distance < 0.15`, the anchor node, the Generic6DOFJoint3D, three linear limits enabled and three rotations left alone - living in the source where no headset can reach it.",
+    "note": "reveal is what the grab is allowed to show of itself, and the three non-default values are the three things a grab actually is. reach = the THRESHOLD: attempt_grab()'s 0.15 m as a wire bubble riding the marker, with a live line to every body coloured by the real comparison the real loop makes and the nearest distance read out. It is worth watching because the shipped orbit carries the hand well above the pile the bodies settle into, so the honest verdict is usually `no` - the demo advertises a grab it can only make in the first frames. joint = the CONSTRAINT: the demo takes one grab through its own unmodified attempt_grab() at build time, and what grab_start() built is drawn - node_a, which is NOT the hand but an anchor node spawned beside it, node_b, which is the body, and the live link between them. dof = what the constraint LEAVES: three barred axes for the three linear limits grab_start() enables, three open rings for the three rotations it never touches. The name says six degrees of freedom and the picture says which three the code takes. Nothing here reaches into grab_start, the range test or the physics; the exhibits draw what the shipped code built.",
+    "kin": "the `evidence` family (example_1_8, example_1_9, example_2_8, example_2_9, koch_curve, sine_wave_controller and the rest) asks what a demo offers as PROOF of its law. This deliberately does NOT reuse that word: those artifacts have one law and four ways of showing it, whereas a grab has three separate hidden pieces - whether, what holds, what remains free - and `reveal` names which piece is on the geometry rather than how much of one law is shown. If a sibling physics-library demo is promoted later, reach/joint/dof is the vocabulary to reuse.",
+    "fixture_note": "the marker's path has always been driven straight off the wall clock (Time.get_ticks_msec), so where the hand is depends on how long the process took to boot and every still of this artifact is a different still. hand_phase = -1 preserves that as the shipped default; the fixture pins the orbit at phase 0.9 s and holds it, so a sweep of `reveal` measures the axis instead of measuring boot time. Unpinned, four variants are four hand positions and the critic reports a confident bite that is entirely paintwork.",
+    "still_note": "the bodies are RigidBody3D under normal gravity and fall about 0.45 m onto the plate within the first second, so by capture time four of them are lying on the ground in every mode. In joint and dof the fifth is held aloft by the staged Generic6DOFJoint3D, which is itself a visible one-body-up, four-bodies-down difference before any diagram is counted. reach adds geometry at the hand (a 0.15 m bubble, roughly a third of the 0.9 m plate) rather than at the bodies, so it separates from joint/dof by WHERE the new pixels are, not just how many."
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",

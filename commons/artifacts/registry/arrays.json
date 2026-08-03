@@ -4528,6 +4528,22 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.049800Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "notation": [
+      "label",
+      "none",
+      "tape",
+      "tally",
+      "plate"
+     ]
+    },
+    "default": "notation=label - the pink billboarded [i] built inside the cube loop, the same node in the same place as before, so the 4 existing placements are unchanged",
+    "was": "a row of four pickup cubes each wearing a pink [i] in the air, which asserted that an index is a tag the object carries and hid that this is one answer among several",
+    "note": "DERIVED from algorithms/arrays/column_3_z.gd, not composed here - the notation export, the NOTATIONS list and the apply_grid_config handling were already in the script and the registry had never been told, so the sweep could not reach the axis. Count, origin and spacing are identical across all five values; only the notation is dressed on afterwards, inside the row's existing X/Z envelope."
    }
   },
   "grid_2d_4x4": {

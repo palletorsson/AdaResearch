@@ -43,6 +43,35 @@ class_name DomeKit
 
 const SUBDIVISIONS: PackedStringArray = ["v1", "v2", "v3", "v4"]
 
+## Stage-2 DNA axis — WHAT THE DOME IS MADE OF.
+##
+## `subdivision` argues about resolution; this one argues about substance, and it
+## is the older quarrel. A geodesic is one of three things depending on who you
+## ask: an assembly of members (the engineer's answer, and the only one this
+## artifact could make until now), a continuous surface the triangles happen to
+## approximate (the shell answer), or a set of connectors with sticks between them
+## (the kit answer — what a dome supplier actually sells you is the hubs).
+##
+## The room already teaches the members: strut_inventory racks them, dome_builder
+## raises them. What it could never say is that the same derivation lands on a
+## SKIN if you fill the faces instead of edging them — that the curve was never in
+## the struts, it was in the subdivision, and the struts are one choice of how to
+## make it stand up.
+##
+## Same radius, same hemisphere cut, same frequency. Only what occupies the
+## geometry changes, so this axis is orthogonal to `subdivision` by construction:
+## every value reads at every frequency.
+##
+## strut is the shipped path, called through the identical code, so the default is
+## the dome that is already standing in the maps.
+##
+## Applies to the DOME station only. The builder is mid-assembly — "half raised"
+## is a claim about members going up one at a time, and a shell has no half-raised
+## state to show. Cladding the frame there would be a different sentence.
+@export_enum("strut", "panel", "clad", "node") var member: String = "strut"
+
+const MEMBERS: PackedStringArray = ["strut", "panel", "clad", "node"]
+
 const SHADER_PATH := "res://commons/resourses/shaders/Grid.gdshader"
 const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 
@@ -340,11 +369,85 @@ func _build_dome() -> void:
 	var root := Node3D.new()
 	root.position = Vector3(0.0, 0.06, 0.0)
 	_own(root)
-	for e in _edges(_geo_faces(n), true):
-		root.add_child(_strut(e[0] * r, e[1] * r, rad, mat))
+	var tris: Array = _geo_faces(n)
+	# DNA axis `member`. The strut branch is the shipped call, unchanged and
+	# reached by the default — the frame is built by the same loop over the same
+	# edge list it has always been built by.
+	if member == "strut" or member == "clad":
+		for e in _edges(tris, true):
+			root.add_child(_strut(e[0] * r, e[1] * r, rad, mat))
+	if member == "panel" or member == "clad":
+		root.add_child(_shell(tris, r, _witness_mat() if member == "clad" else mat))
+	if member == "node":
+		# The kit's other half: the hubs, with nothing between them. A dome you
+		# could order — the curve is entirely in where the connectors sit.
+		for v in _hub_points(tris):
+			var hub_at: Vector3 = v
+			root.add_child(_hub(hub_at * r, rad * 3.0, mat))
+
+
+# The upper-hemisphere vertices, deduplicated — the connector set. Same 3-decimal
+# key the edge dedup uses, so a hub lands exactly where struts would have met.
+func _hub_points(tris: Array) -> Array:
+	var seen := {}
+	var out := []
+	for t in tris:
+		for i in 3:
+			var p: Vector3 = t[i]
+			if p.y < -0.01:
+				continue
+			var k := "%.3f,%.3f,%.3f" % [p.x, p.y, p.z]
+			if seen.has(k):
+				continue
+			seen[k] = true
+			out.append(p)
+	return out
 
 
 # --- pieces ---------------------------------------------------------------
+
+# The dome as a SURFACE: the same triangles the struts edge, filled.
+#
+# Every face is emitted twice, the second time reversed. Grid.gdshader declares
+# `cull_back`, and a one-sided shell would vanish the moment the camera saw the
+# inside of the far wall — which, on a hemisphere you can walk into, is most of it.
+# Flat normals on purpose: the facets ARE the argument, and smoothing them would
+# quietly claim the dome is a sphere.
+func _shell(tris: Array, r: float, mat: Material) -> MeshInstance3D:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for t in tris:
+		var a: Vector3 = t[0]
+		var b: Vector3 = t[1]
+		var c: Vector3 = t[2]
+		if a.y < -0.01 or b.y < -0.01 or c.y < -0.01:
+			continue
+		var nrm: Vector3 = ((a + b + c) / 3.0).normalized()
+		for p in [a, b, c]:
+			st.set_normal(nrm)
+			st.add_vertex((p as Vector3) * r)
+		for p2 in [c, b, a]:
+			st.set_normal(-nrm)
+			st.add_vertex((p2 as Vector3) * r)
+	var mi := MeshInstance3D.new()
+	mi.mesh = st.commit()
+	mi.material_override = mat
+	return mi
+
+
+# One connector: a small sphere where struts would have met.
+func _hub(at: Vector3, radius: float, mat: Material) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var sph := SphereMesh.new()
+	sph.radius = radius
+	sph.height = radius * 2.0
+	sph.radial_segments = 8
+	sph.rings = 4
+	mi.mesh = sph
+	mi.position = at
+	mi.material_override = mat
+	return mi
+
 
 # A strut between two points: one cylinder, oriented so its Y axis runs the edge.
 func _strut(p1: Vector3, p2: Vector3, radius: float, mat: Material) -> MeshInstance3D:
@@ -445,12 +548,14 @@ func _rebuild_now() -> void:
 	_build_all()
 
 
-## Grid config. Keys: "station", "label", "note", and the DNA axis "subdivision".
+## Grid config. Keys: "station", "label", "note", and the DNA axes
+## "subdivision" and "member".
 func apply_grid_config(config_data: Dictionary) -> void:
 	var before_station: String = station
 	var before_label: String = kit_label
 	var before_note: String = kit_note
 	var before_subdivision: String = subdivision
+	var before_member: String = member
 
 	if config_data.has("station"):
 		station = str(config_data["station"])
@@ -461,16 +566,21 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# Stage-2 DNA axis — #subdivision:v3
 	if config_data.has("subdivision"):
 		subdivision = _pick_axis(str(config_data["subdivision"]), SUBDIVISIONS, subdivision)
+	# Stage-2 DNA axis — #member:panel
+	if config_data.has("member"):
+		member = _pick_axis(str(config_data["member"]), MEMBERS, member)
 
 	if not _built:
 		# _ready has not run yet; it will build with the values just resolved.
 		return
 	if (station == before_station and kit_label == before_label
-			and kit_note == before_note and subdivision == before_subdivision):
+			and kit_note == before_note and subdivision == before_subdivision
+			and member == before_member):
 		# Nothing geometric changed. curation_station hands every artifact it curates
 		# {"emissive": false} one line after framing our labels — rebuilding here would
 		# throw that framing away, and it is never re-applied. Say nothing, touch nothing.
 		return
 
 	_rebuild_now()
-	print("[DomeKit] Config applied — station=%s, subdivision=%s" % [station, subdivision])
+	print("[DomeKit] Config applied — station=%s, subdivision=%s, member=%s"
+		% [station, subdivision, member])

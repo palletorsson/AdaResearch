@@ -510,14 +510,25 @@
   },
   "geodesic_dome": {
    "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
     "axes": {
      "subdivision": [
       "v2",
       "v1",
       "v3",
       "v4"
+     ],
+     "member": [
+      "strut",
+      "panel",
+      "clad",
+      "node"
      ]
-    }
+    },
+    "default": "subdivision=v2, member=strut - v2 is the halving the shipped code always called and strut runs that identical loop over the identical edge list, so the 39 map cells naming this token stand exactly the dome they stood before",
+    "was": "subdivision was declared 2026-07-29 but the entry was never given the rest of its block; member is new — the dome could only ever be an assembly of cylinders, so the room could teach that the curve is derived and never that the struts are one choice of how to hold it",
+    "note": "member argues substance where subdivision argues resolution, and the two are orthogonal by construction: same radius, same hemisphere cut, every member value reads at every frequency. Applies to the DOME station only — the builder station is mid-assembly, and 'half raised' is a claim about members going up one at a time that a shell has no version of. The shell emits both windings because Grid.gdshader is cull_back and a one-sided hemisphere disappears from the inside."
    },
    "name": "Geodesic Dome",
    "lookup_name": "geodesic_dome",

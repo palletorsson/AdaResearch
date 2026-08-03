@@ -1344,9 +1344,32 @@
     "exercise_5_9_angle_between": {
       "name": "Angle Between Vectors",
       "lookup_name": "exercise_5_9_angle_between",
-      "description": "Exercise exploring angle calculations between steering vectors.",
+      "description": "Two thin arrows rise from a common centre in the XY plane with a pink figure drawn between them and a live degree readout above; two 3D sliders turn each arrow independently. DNA axes: opening (agreeing / strangers / opposing / parallel - the case the pair is found in, the same word and the same four values as the sibling agreement_gauge) and figure (arc / wedge / chord / none - what the angle is drawn as, where chord is the difference vector steering code actually computes).",
       "scene": "res://algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.tscn",
       "category": "steering",
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "opening": [
+            "agreeing",
+            "strangers",
+            "opposing",
+            "parallel"
+          ],
+          "figure": [
+            "arc",
+            "wedge",
+            "chord",
+            "none"
+          ]
+        },
+        "default": "opening=agreeing, figure=arc - _opening_angle() returns the shipped literal PI / 3.0 for agreeing (angle_a stays 0.0), and the arc branch is the shipped _update_arc(center, 0.12, angle_a, angle_b) call reached through the match default, so the 3 existing placements draw the same 60-degree pair and the same 20-segment line strip they always did. The wedge and chord meshes are only ever built when a map asks for them",
+        "was": "two float @exports (angle_a, angle_b) with no enum shape, an apply_grid_config() whose body was `pass`, and one welded figure: a 20-segment arc of radius 0.12 was the only thing 'the angle between' could look like. The stage-2 sweep read no turnable knob. Every placement opened on the same acute pair, and the three cases the exercise exists to teach - perpendicular, obtuse, coincident - were reachable only by a player dragging a slider",
+        "shared_with": "agreement_gauge - `opening` is that artifact's word with that artifact's four values in the same order, because it is literally the same question asked of the same pair of directions. A room can now set the gauge and the exercise to the same case and the two will mean the same thing by it; if the vocabulary is honest they should MEASURE alike",
+        "note": "hand promotion 2026-08-03 - the runner refused it for NO TURNABLE KNOBS. opening turns theta alone: agreeing 60 deg (shipped), strangers 90 (dot exactly zero), opposing 120 (dot negative), parallel 0 (the arrows superimpose, the figure collapses to a point and the readout still answers). figure is the axis that puts the exercise's own title at risk - arc says the angle is a rotation, wedge says it is an area, none says it is only a digit, and chord draws the tip-to-tip segment, which IS the difference vector; no steering routine ever takes an arc, so chord is the reading the chapter actually uses in code. Under chord the readout gains a |b - a| line so a still cannot misreport which claim is on screen. The two angle sliders stay live under every value: opening sets the case the exercise is found in, it does not lock it",
+        "gotcha": "the angle sliders round to step_size 0.01, so the shipped PI / 3.0 has always been stored as 1.05 after ParameterController3D.set_value re-emits. The promotion routes opening through the same set_value path, so it inherits that rounding rather than introducing a second convention"
+      },
       "tags": [
         "steering",
         "angle",
