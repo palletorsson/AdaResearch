@@ -75,6 +75,62 @@ func _run() -> void:
 	var cam: Camera3D = vp.get_node("Cam")
 
 	var packed_cache: Dictionary = {}   # scene path -> PackedScene (multi-scene sweeps)
+
+	# ── The camera must not move between variants. ───────────────────────────────
+	#
+	# Framing each variant to its OWN AABB looks obviously right and is the single
+	# worst measurement bug this rig has had. Most axes ADD or REMOVE geometry, so
+	# a value that builds less is photographed from closer, and two frames taken
+	# from different distances are not comparable pixel to pixel at all.
+	#
+	# example_1_3's construction axis is the case that exposed it. `chain` and
+	# `parallelogram` build genuinely different figures and measured 0.045% apart —
+	# indistinguishable — while `flip`, which is their union, measured 12.8% from
+	# both. The tell was the subject share: 92.9% for chain and parallelogram
+	# against 29.0% for flip at identical framing. They were not similar pictures.
+	# They were the same picture at three magnifications, and every "faint axis"
+	# verdict on an add-geometry axis in this corpus is suspect for the same reason.
+	#
+	# So: measure every variant first, union the boxes, and place the camera ONCE.
+	# The pre-pass uses a shorter settle than the render pass — 0.35 s is the
+	# documented minimum for an artifact's geometry to exist (probe_aabb_hogs), and
+	# the full SETTLE is only needed for the picture to be clean, not for the box
+	# to be right.
+	var union: AABB = AABB()
+	var have_union: bool = false
+	if bool(spec.get("fixed_camera", true)) and variants.size() > 1:
+		for v in variants:
+			var pv: Dictionary = v
+			var pscene: String = str(pv.get("scene", scene_path))
+			if not ResourceLoader.exists(pscene):
+				continue
+			if not packed_cache.has(pscene):
+				packed_cache[pscene] = load(pscene)
+			var probe: Node = (packed_cache[pscene] as PackedScene).instantiate()
+			var plookup: String = str(pv.get("artifact", ""))
+			if plookup != "":
+				probe.set_meta("artifact_lookup_name", plookup)
+			var pparams: Dictionary = pv.get("params", {})
+			for key in pparams.keys():
+				var ph: Node = _holder_of(probe, String(key))
+				if ph != null:
+					ph.set(key, pparams[key])
+			vp.add_child(probe)
+			_suppress_chrome(probe)
+			await create_timer(0.35).timeout
+			if _subtree_aabb(probe).size.length() < 0.001 and probe.has_method("apply_grid_config"):
+				probe.call("apply_grid_config", pparams)
+				await create_timer(0.35).timeout
+			LabelFramer.frame_labels(probe)
+			var box: AABB = _subtree_aabb(probe)
+			if box.size.length() > 0.001:
+				union = box if not have_union else union.merge(box)
+				have_union = true
+			probe.queue_free()
+			await process_frame
+		if have_union:
+			print("fixed camera: union AABB size ", union.size, " centre ", union.get_center())
+
 	var shot := 0
 	for v in variants:
 		var variant: Dictionary = v
@@ -165,7 +221,9 @@ func _run() -> void:
 			LabelFramer.frame_labels(inst)
 			_suppress_chrome(inst)
 
-		var aabb := _subtree_aabb(inst)
+		# The union box when we have one, this variant's own only as a fallback for
+		# single-variant sweeps and for a pre-pass that measured nothing.
+		var aabb: AABB = union if have_union else _subtree_aabb(inst)
 		var c := aabb.get_center()
 		var radius: float = maxf(aabb.size.length() * 0.5, 0.2)
 		# PAD frames the WHOLE artifact, which is wrong when the axis lives in a
