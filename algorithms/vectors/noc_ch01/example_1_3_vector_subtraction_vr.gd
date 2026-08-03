@@ -96,7 +96,19 @@ var _want_neg_tip: bool = false
 var _want_dots: bool = false
 
 const DNA_DOTS: int = 18
-const DNA_ROD: float = 0.006
+## 6 mm rods and 7 mm dots were legible at arm's length in the headset and almost
+## nothing in a fitted still: swept side by side, `chain` and `parallelogram` differed
+## by 0.045% of the frame — two genuinely different figures (the chained copy against
+## the origin copy plus its dotted closure) that no one could tell apart. A framing
+## hint of 0.55 brought that to 0.127%, still too close to read.
+##
+## Doubling them is free of regression risk, which is worth stating: `bare` is the
+## default and the only value any placement uses, and `bare` builds not one of these
+## nodes. Nothing shipped can change. The three constructions are new geometry that
+## has never been placed, so their line weight is still a design decision, not a
+## legacy one.
+const DNA_ROD: float = 0.012
+const DNA_DOT: float = 0.013
 const DNA_CHALK := Color(0.88, 0.90, 0.95)
 const DNA_INK := Color(1.0, 0.50, 0.65)
 const DNA_AMBER := Color(1.0, 0.85, 0.35)
@@ -386,7 +398,7 @@ func _dna_dot_run(c: Color) -> Array[MeshInstance3D]:
 	var out: Array[MeshInstance3D] = []
 	var mat: StandardMaterial3D = _dna_mat(c, 0.6)
 	var mesh := BoxMesh.new()
-	mesh.size = Vector3(0.007, 0.007, 0.007)
+	mesh.size = Vector3(DNA_DOT, DNA_DOT, DNA_DOT)
 	for i in range(DNA_DOTS):
 		var mi := MeshInstance3D.new()
 		mi.mesh = mesh
