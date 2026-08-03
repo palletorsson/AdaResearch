@@ -1,6 +1,6 @@
 {
  "sweep": "grab_long_stick",
- "peak_changed_pct": 1.742,
+ "peak_changed_pct": 0.663,
  "subject_pct": 2.255,
  "verdict": "faint - under 2% of the frame moved",
  "variants": [
@@ -11,7 +11,17 @@
    "b": {
     "office": "rule"
    },
-   "changed_px": 2317,
+   "changed_px": 2139,
+   "changed_pct": 0.37
+  },
+  {
+   "a": {
+    "office": "reach"
+   },
+   "b": {
+    "office": "lever"
+   },
+   "changed_px": 2319,
    "changed_pct": 0.401
   },
   {
@@ -19,20 +29,10 @@
     "office": "reach"
    },
    "b": {
-    "office": "lever"
-   },
-   "changed_px": 8818,
-   "changed_pct": 1.527
-  },
-  {
-   "a": {
-    "office": "reach"
-   },
-   "b": {
     "office": "pointer"
    },
-   "changed_px": 2341,
-   "changed_pct": 0.405
+   "changed_px": 2087,
+   "changed_pct": 0.361
   },
   {
    "a": {
@@ -41,8 +41,8 @@
    "b": {
     "office": "baton"
    },
-   "changed_px": 4980,
-   "changed_pct": 0.862
+   "changed_px": 2684,
+   "changed_pct": 0.465
   },
   {
    "a": {
@@ -51,8 +51,8 @@
    "b": {
     "office": "lever"
    },
-   "changed_px": 10060,
-   "changed_pct": 1.742
+   "changed_px": 3617,
+   "changed_pct": 0.626
   },
   {
    "a": {
@@ -61,8 +61,8 @@
    "b": {
     "office": "pointer"
    },
-   "changed_px": 2979,
-   "changed_pct": 0.516
+   "changed_px": 2918,
+   "changed_pct": 0.505
   },
   {
    "a": {
@@ -71,8 +71,8 @@
    "b": {
     "office": "baton"
    },
-   "changed_px": 5654,
-   "changed_pct": 0.979
+   "changed_px": 3216,
+   "changed_pct": 0.557
   },
   {
    "a": {
@@ -81,8 +81,8 @@
    "b": {
     "office": "pointer"
    },
-   "changed_px": 9404,
-   "changed_pct": 1.628
+   "changed_px": 2762,
+   "changed_pct": 0.478
   },
   {
    "a": {
@@ -91,8 +91,8 @@
    "b": {
     "office": "baton"
    },
-   "changed_px": 9347,
-   "changed_pct": 1.618
+   "changed_px": 3828,
+   "changed_pct": 0.663
   },
   {
    "a": {
@@ -101,8 +101,8 @@
    "b": {
     "office": "baton"
    },
-   "changed_px": 5256,
-   "changed_pct": 0.91
+   "changed_px": 2911,
+   "changed_pct": 0.504
   }
  ]
 }

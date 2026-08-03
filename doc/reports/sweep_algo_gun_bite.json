@@ -1,0 +1,188 @@
+{
+ "sweep": "algo_gun",
+ "peak_changed_pct": 0.037,
+ "subject_pct": 0.037,
+ "verdict": "SUBJECT NOT DETECTED - only 0.04% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 1.5
+   },
+   "b": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 3.0
+   },
+   "changed_px": 211,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 1.5
+   },
+   "b": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 4.8
+   },
+   "changed_px": 211,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 1.5
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 1.5
+   },
+   "changed_px": 211,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 1.5
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 3.0
+   },
+   "changed_px": 211,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 1.5
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 4.8
+   },
+   "changed_px": 212,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 3.0
+   },
+   "b": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 4.8
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 3.0
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 1.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 3.0
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 3.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 3.0
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 4.8
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 4.8
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 1.5
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 4.8
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 3.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": true,
+    "agent_detection_radius": 4.8
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 4.8
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 1.5
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 3.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 1.5
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 4.8
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 3.0
+   },
+   "b": {
+    "can_capture_grid_agents": false,
+    "agent_detection_radius": 4.8
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

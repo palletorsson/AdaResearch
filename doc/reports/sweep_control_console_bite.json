@@ -1,0 +1,80 @@
+{
+ "sweep": "control_console",
+ "peak_changed_pct": 8.386,
+ "subject_pct": 4.84,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "face_to_origin": true,
+    "has_door": true
+   },
+   "b": {
+    "face_to_origin": true,
+    "has_door": false
+   },
+   "changed_px": 375,
+   "changed_pct": 0.065
+  },
+  {
+   "a": {
+    "face_to_origin": true,
+    "has_door": true
+   },
+   "b": {
+    "face_to_origin": false,
+    "has_door": true
+   },
+   "changed_px": 48431,
+   "changed_pct": 8.385
+  },
+  {
+   "a": {
+    "face_to_origin": true,
+    "has_door": true
+   },
+   "b": {
+    "face_to_origin": false,
+    "has_door": false
+   },
+   "changed_px": 48438,
+   "changed_pct": 8.386
+  },
+  {
+   "a": {
+    "face_to_origin": true,
+    "has_door": false
+   },
+   "b": {
+    "face_to_origin": false,
+    "has_door": true
+   },
+   "changed_px": 48431,
+   "changed_pct": 8.385
+  },
+  {
+   "a": {
+    "face_to_origin": true,
+    "has_door": false
+   },
+   "b": {
+    "face_to_origin": false,
+    "has_door": false
+   },
+   "changed_px": 48438,
+   "changed_pct": 8.386
+  },
+  {
+   "a": {
+    "face_to_origin": false,
+    "has_door": true
+   },
+   "b": {
+    "face_to_origin": false,
+    "has_door": false
+   },
+   "changed_px": 379,
+   "changed_pct": 0.066
+  }
+ ]
+}

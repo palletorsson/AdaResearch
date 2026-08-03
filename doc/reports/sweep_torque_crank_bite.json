@@ -1,0 +1,344 @@
+{
+ "sweep": "torque_crank",
+ "peak_changed_pct": 7.757,
+ "subject_pct": 10.963,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "outcome",
+    "leverage": 0.5
+   },
+   "changed_px": 27755,
+   "changed_pct": 4.805
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "trace",
+    "leverage": 0.0
+   },
+   "changed_px": 1012,
+   "changed_pct": 0.175
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "trace",
+    "leverage": 0.5
+   },
+   "changed_px": 28076,
+   "changed_pct": 4.861
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "operands",
+    "leverage": 0.0
+   },
+   "changed_px": 1018,
+   "changed_pct": 0.176
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "operands",
+    "leverage": 0.5
+   },
+   "changed_px": 28200,
+   "changed_pct": 4.882
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.0
+   },
+   "changed_px": 43626,
+   "changed_pct": 7.553
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.5
+   },
+   "changed_px": 43481,
+   "changed_pct": 7.528
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "trace",
+    "leverage": 0.0
+   },
+   "changed_px": 28621,
+   "changed_pct": 4.955
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "trace",
+    "leverage": 0.5
+   },
+   "changed_px": 514,
+   "changed_pct": 0.089
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "operands",
+    "leverage": 0.0
+   },
+   "changed_px": 28625,
+   "changed_pct": 4.956
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "operands",
+    "leverage": 0.5
+   },
+   "changed_px": 659,
+   "changed_pct": 0.114
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.0
+   },
+   "changed_px": 31699,
+   "changed_pct": 5.488
+  },
+  {
+   "a": {
+    "workings": "outcome",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.5
+   },
+   "changed_px": 31762,
+   "changed_pct": 5.499
+  },
+  {
+   "a": {
+    "workings": "trace",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "trace",
+    "leverage": 0.5
+   },
+   "changed_px": 28937,
+   "changed_pct": 5.01
+  },
+  {
+   "a": {
+    "workings": "trace",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "operands",
+    "leverage": 0.0
+   },
+   "changed_px": 11,
+   "changed_pct": 0.002
+  },
+  {
+   "a": {
+    "workings": "trace",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "operands",
+    "leverage": 0.5
+   },
+   "changed_px": 29078,
+   "changed_pct": 5.034
+  },
+  {
+   "a": {
+    "workings": "trace",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.0
+   },
+   "changed_px": 44801,
+   "changed_pct": 7.756
+  },
+  {
+   "a": {
+    "workings": "trace",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.5
+   },
+   "changed_px": 44652,
+   "changed_pct": 7.731
+  },
+  {
+   "a": {
+    "workings": "trace",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "operands",
+    "leverage": 0.0
+   },
+   "changed_px": 28941,
+   "changed_pct": 5.011
+  },
+  {
+   "a": {
+    "workings": "trace",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "operands",
+    "leverage": 0.5
+   },
+   "changed_px": 383,
+   "changed_pct": 0.066
+  },
+  {
+   "a": {
+    "workings": "trace",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.0
+   },
+   "changed_px": 32108,
+   "changed_pct": 5.559
+  },
+  {
+   "a": {
+    "workings": "trace",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.5
+   },
+   "changed_px": 32171,
+   "changed_pct": 5.57
+  },
+  {
+   "a": {
+    "workings": "operands",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "operands",
+    "leverage": 0.5
+   },
+   "changed_px": 29082,
+   "changed_pct": 5.035
+  },
+  {
+   "a": {
+    "workings": "operands",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.0
+   },
+   "changed_px": 44805,
+   "changed_pct": 7.757
+  },
+  {
+   "a": {
+    "workings": "operands",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.5
+   },
+   "changed_px": 44656,
+   "changed_pct": 7.731
+  },
+  {
+   "a": {
+    "workings": "operands",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.0
+   },
+   "changed_px": 32205,
+   "changed_pct": 5.576
+  },
+  {
+   "a": {
+    "workings": "operands",
+    "leverage": 0.5
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.5
+   },
+   "changed_px": 32268,
+   "changed_pct": 5.587
+  },
+  {
+   "a": {
+    "workings": "expression",
+    "leverage": 0.0
+   },
+   "b": {
+    "workings": "expression",
+    "leverage": 0.5
+   },
+   "changed_px": 5201,
+   "changed_pct": 0.9
+  }
+ ]
+}

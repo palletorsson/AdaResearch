@@ -1,0 +1,108 @@
+{
+ "sweep": "three_body_problem",
+ "peak_changed_pct": 4.113,
+ "subject_pct": 2.317,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "configuration": "pinwheel"
+   },
+   "b": {
+    "configuration": "figure_eight"
+   },
+   "changed_px": 22595,
+   "changed_pct": 3.912
+  },
+  {
+   "a": {
+    "configuration": "pinwheel"
+   },
+   "b": {
+    "configuration": "lagrange"
+   },
+   "changed_px": 23757,
+   "changed_pct": 4.113
+  },
+  {
+   "a": {
+    "configuration": "pinwheel"
+   },
+   "b": {
+    "configuration": "hierarchical"
+   },
+   "changed_px": 23185,
+   "changed_pct": 4.014
+  },
+  {
+   "a": {
+    "configuration": "pinwheel"
+   },
+   "b": {
+    "configuration": "near_collision"
+   },
+   "changed_px": 20031,
+   "changed_pct": 3.468
+  },
+  {
+   "a": {
+    "configuration": "figure_eight"
+   },
+   "b": {
+    "configuration": "lagrange"
+   },
+   "changed_px": 17151,
+   "changed_pct": 2.969
+  },
+  {
+   "a": {
+    "configuration": "figure_eight"
+   },
+   "b": {
+    "configuration": "hierarchical"
+   },
+   "changed_px": 17052,
+   "changed_pct": 2.952
+  },
+  {
+   "a": {
+    "configuration": "figure_eight"
+   },
+   "b": {
+    "configuration": "near_collision"
+   },
+   "changed_px": 11916,
+   "changed_pct": 2.063
+  },
+  {
+   "a": {
+    "configuration": "lagrange"
+   },
+   "b": {
+    "configuration": "hierarchical"
+   },
+   "changed_px": 19119,
+   "changed_pct": 3.31
+  },
+  {
+   "a": {
+    "configuration": "lagrange"
+   },
+   "b": {
+    "configuration": "near_collision"
+   },
+   "changed_px": 15643,
+   "changed_pct": 2.708
+  },
+  {
+   "a": {
+    "configuration": "hierarchical"
+   },
+   "b": {
+    "configuration": "near_collision"
+   },
+   "changed_px": 14164,
+   "changed_pct": 2.452
+  }
+ ]
+}

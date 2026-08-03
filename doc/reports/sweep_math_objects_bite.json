@@ -1,0 +1,344 @@
+{
+ "sweep": "math_objects",
+ "peak_changed_pct": 0.262,
+ "subject_pct": 0.134,
+ "verdict": "SUBJECT NOT DETECTED - only 0.13% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "table",
+    "show_labels": false
+   },
+   "changed_px": 509,
+   "changed_pct": 0.088
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "show_labels": true
+   },
+   "changed_px": 1511,
+   "changed_pct": 0.262
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "show_labels": false
+   },
+   "changed_px": 1505,
+   "changed_pct": 0.261
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "show_labels": true
+   },
+   "changed_px": 1447,
+   "changed_pct": 0.251
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "show_labels": false
+   },
+   "changed_px": 1448,
+   "changed_pct": 0.251
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": true
+   },
+   "changed_px": 1270,
+   "changed_pct": 0.22
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": false
+   },
+   "changed_px": 1264,
+   "changed_pct": 0.219
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "show_labels": true
+   },
+   "changed_px": 1499,
+   "changed_pct": 0.26
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "show_labels": false
+   },
+   "changed_px": 1488,
+   "changed_pct": 0.258
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "show_labels": true
+   },
+   "changed_px": 1425,
+   "changed_pct": 0.247
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "show_labels": false
+   },
+   "changed_px": 1429,
+   "changed_pct": 0.247
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": true
+   },
+   "changed_px": 1261,
+   "changed_pct": 0.218
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": false
+   },
+   "changed_px": 1259,
+   "changed_pct": 0.218
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "show_labels": false
+   },
+   "changed_px": 419,
+   "changed_pct": 0.073
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "show_labels": true
+   },
+   "changed_px": 1486,
+   "changed_pct": 0.257
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "show_labels": false
+   },
+   "changed_px": 1485,
+   "changed_pct": 0.257
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": true
+   },
+   "changed_px": 1402,
+   "changed_pct": 0.243
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": false
+   },
+   "changed_px": 1420,
+   "changed_pct": 0.246
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "show_labels": true
+   },
+   "changed_px": 1480,
+   "changed_pct": 0.256
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "show_labels": false
+   },
+   "changed_px": 1480,
+   "changed_pct": 0.256
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": true
+   },
+   "changed_px": 1393,
+   "changed_pct": 0.241
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": false
+   },
+   "changed_px": 1410,
+   "changed_pct": 0.244
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "show_labels": false
+   },
+   "changed_px": 468,
+   "changed_pct": 0.081
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": true
+   },
+   "changed_px": 1323,
+   "changed_pct": 0.229
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": false
+   },
+   "changed_px": 1343,
+   "changed_pct": 0.233
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": true
+   },
+   "changed_px": 1352,
+   "changed_pct": 0.234
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "show_labels": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": false
+   },
+   "changed_px": 1372,
+   "changed_pct": 0.238
+  },
+  {
+   "a": {
+    "taxonomy": "heap",
+    "show_labels": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "show_labels": false
+   },
+   "changed_px": 381,
+   "changed_pct": 0.066
+  }
+ ]
+}

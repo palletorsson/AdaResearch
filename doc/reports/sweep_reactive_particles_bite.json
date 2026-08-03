@@ -1,0 +1,108 @@
+{
+ "sweep": "reactive_particles",
+ "peak_changed_pct": 1.567,
+ "subject_pct": 0.849,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "formation": "lattice"
+   },
+   "b": {
+    "formation": "shell"
+   },
+   "changed_px": 8240,
+   "changed_pct": 1.427
+  },
+  {
+   "a": {
+    "formation": "lattice"
+   },
+   "b": {
+    "formation": "ring"
+   },
+   "changed_px": 7886,
+   "changed_pct": 1.365
+  },
+  {
+   "a": {
+    "formation": "lattice"
+   },
+   "b": {
+    "formation": "column"
+   },
+   "changed_px": 8200,
+   "changed_pct": 1.42
+  },
+  {
+   "a": {
+    "formation": "lattice"
+   },
+   "b": {
+    "formation": "drift"
+   },
+   "changed_px": 8762,
+   "changed_pct": 1.517
+  },
+  {
+   "a": {
+    "formation": "shell"
+   },
+   "b": {
+    "formation": "ring"
+   },
+   "changed_px": 7964,
+   "changed_pct": 1.379
+  },
+  {
+   "a": {
+    "formation": "shell"
+   },
+   "b": {
+    "formation": "column"
+   },
+   "changed_px": 8199,
+   "changed_pct": 1.419
+  },
+  {
+   "a": {
+    "formation": "shell"
+   },
+   "b": {
+    "formation": "drift"
+   },
+   "changed_px": 9049,
+   "changed_pct": 1.567
+  },
+  {
+   "a": {
+    "formation": "ring"
+   },
+   "b": {
+    "formation": "column"
+   },
+   "changed_px": 7859,
+   "changed_pct": 1.361
+  },
+  {
+   "a": {
+    "formation": "ring"
+   },
+   "b": {
+    "formation": "drift"
+   },
+   "changed_px": 8533,
+   "changed_pct": 1.477
+  },
+  {
+   "a": {
+    "formation": "column"
+   },
+   "b": {
+    "formation": "drift"
+   },
+   "changed_px": 8565,
+   "changed_pct": 1.483
+  }
+ ]
+}

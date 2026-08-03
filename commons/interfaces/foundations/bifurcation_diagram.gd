@@ -34,6 +34,14 @@ signal regime_changed(regime: String)
 @export var r_min: float = 2.5
 @export var r_max: float = 4.0
 
+## WHICH CLAIM about the map is on the wall. Each value crops the r axis onto one
+## qualitative behaviour class; "all" leaves r_min/r_max exactly as exported.
+@export_enum("all", "stable", "cascade", "chaos", "period3") var regime: String = "all"
+## WHAT COUNTS AS THE PICTURE. The diagram normally throws the first iterations away and
+## draws only where the orbit ends up; transient draws the whole orbit, approach draws
+## only the discarded run-in.
+@export_enum("attractor", "transient", "approach") var trace: String = "attractor"
+
 ## Resolution
 @export var r_steps: int = 200       # Points along r axis
 @export var iterations: int = 100    # Iterations per r value
@@ -57,8 +65,16 @@ var _points_multimesh: MultiMeshInstance3D
 var _highlight_plane: MeshInstance3D
 var _r_label: Label3D
 var _regime_label: Label3D
+var _r_min_label: Label3D
+var _r_max_label: Label3D
+var _edge_label: Label3D
 var _axis_labels: Array[Label3D] = []
 var _total_points: int = 0
+var _built: bool = false
+# The z scatter was an unseeded randf_range, so no two runs of the same diagram were the
+# same cloud. Same range, same look, now reproducible — a variant sweep can only compare
+# frames that are comparable.
+var _rng := RandomNumberGenerator.new()
 
 # Key r values for regime transitions
 const R_STABLE = 3.0
@@ -68,18 +84,80 @@ const R_CHAOS_START = 3.57
 const R_WINDOW_START = 3.83
 const R_WINDOW_END = 3.86
 
+const REGIMES := ["all", "stable", "cascade", "chaos", "period3"]
+const TRACES := ["attractor", "transient", "approach"]
+# The r window each regime crops to. "all" is absent on purpose: it means "do not touch
+# r_min/r_max", which is how the four maps that place this artifact keep their exact framing.
+const REGIME_WINDOWS := {
+	"stable": [2.5, R_STABLE],
+	"cascade": [R_STABLE, R_CHAOS_START],
+	"chaos": [R_CHAOS_START, 4.0],
+	"period3": [3.82, 3.87],
+}
+
 func _ready() -> void:
+	_apply_regime()
 	_generate_bifurcation_data()
 	_create_axes()
 	_create_highlight()
 	_create_labels()
+	_built = true
 	print("BifurcationDiagram: Ready — walk through the edge of chaos")
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	var changed: bool = false
+	if config_data.has("regime"):
+		var want_regime: String = str(config_data["regime"])
+		if REGIMES.has(want_regime) and want_regime != regime:
+			regime = want_regime
+			changed = true
+	if config_data.has("trace"):
+		var want_trace: String = str(config_data["trace"])
+		if TRACES.has(want_trace) and want_trace != trace:
+			trace = want_trace
+			changed = true
+	if config_data.has("current_r"):
+		set_r_value(float(config_data["current_r"]))
+	# Nothing to do if nothing moved, and nothing to rebuild before _ready has built
+	# once — the new values are simply what _ready will build with.
+	if not changed or not _built:
+		return
+	_apply_regime()
+	_rebuild_points()
+	_refresh_labels()
+	_update_highlight()
+
+func _apply_regime() -> void:
+	if regime == "all" or not REGIME_WINDOWS.has(regime):
+		return
+	var span_r: Array = REGIME_WINDOWS[regime]
+	r_min = float(span_r[0])
+	r_max = float(span_r[1])
+	current_r = clamp(current_r, r_min, r_max)
+
+func _rebuild_points() -> void:
+	var old: MultiMeshInstance3D = _points_multimesh
+	if old != null and is_instance_valid(old):
+		remove_child(old)
+		old.queue_free()
+	_points_multimesh = null
+	_generate_bifurcation_data()
+
+func _keeps_iteration(j: int) -> bool:
+	match trace:
+		"transient":
+			return true
+		"approach":
+			return j < skip_transient
+		_:
+			return j >= skip_transient
 
 func _generate_bifurcation_data() -> void:
 	# Collect all points first
 	var all_points: Array[Vector3] = []
 	var all_colors: Array[Color] = []
-	
+	_rng.seed = 20260803
+
 	for i in range(r_steps):
 		var r = r_min + (float(i) / float(r_steps - 1)) * (r_max - r_min)
 		var x = 0.5  # Initial condition
@@ -88,11 +166,11 @@ func _generate_bifurcation_data() -> void:
 		for j in range(iterations):
 			x = r * x * (1.0 - x)
 			
-			if j >= skip_transient:
+			if _keeps_iteration(j):
 				# Map to 3D position
 				var pos_x = (r - r_min) / (r_max - r_min) * width - width / 2
 				var pos_y = x * height - height / 2
-				var pos_z = randf_range(-depth/2, depth/2) * 0.1  # Slight z variation
+				var pos_z = _rng.randf_range(-depth/2, depth/2) * 0.1  # Slight z variation
 				
 				all_points.append(Vector3(pos_x, pos_y, pos_z))
 				all_colors.append(_get_color_for_r(r))
@@ -143,8 +221,9 @@ func _get_color_for_r(r: float) -> Color:
 		# Window of order within chaos
 		return edge_color
 	else:
-		# Chaos
-		var t = (r - R_CHAOS_START) / (r_max - R_CHAOS_START)
+		# Chaos. maxf guards a cropped window whose r_max sits on the chaos onset —
+		# without it the divisor is zero and every point in that frame is a NaN colour.
+		var t = (r - R_CHAOS_START) / maxf(r_max - R_CHAOS_START, 0.0001)
 		return edge_color.lerp(chaos_color, t)
 
 func _create_axes() -> void:
@@ -209,19 +288,19 @@ func _create_labels() -> void:
 	add_child(_regime_label)
 	
 	# Axis labels
-	var r_min_label = Label3D.new()
-	r_min_label.text = "r=%.1f" % r_min
-	r_min_label.font_size = 16
-	r_min_label.position = Vector3(-width/2, -height/2 - 0.15, 0)
-	r_min_label.modulate = Color(0.7, 0.7, 0.7)
-	add_child(r_min_label)
-	
-	var r_max_label = Label3D.new()
-	r_max_label.text = "r=%.1f" % r_max
-	r_max_label.font_size = 16
-	r_max_label.position = Vector3(width/2, -height/2 - 0.15, 0)
-	r_max_label.modulate = Color(0.7, 0.7, 0.7)
-	add_child(r_max_label)
+	_r_min_label = Label3D.new()
+	_r_min_label.text = _r_axis_text(r_min)
+	_r_min_label.font_size = 16
+	_r_min_label.position = Vector3(-width/2, -height/2 - 0.15, 0)
+	_r_min_label.modulate = Color(0.7, 0.7, 0.7)
+	add_child(_r_min_label)
+
+	_r_max_label = Label3D.new()
+	_r_max_label.text = _r_axis_text(r_max)
+	_r_max_label.font_size = 16
+	_r_max_label.position = Vector3(width/2, -height/2 - 0.15, 0)
+	_r_max_label.modulate = Color(0.7, 0.7, 0.7)
+	add_child(_r_max_label)
 	
 	# Title
 	var title = Label3D.new()
@@ -235,19 +314,50 @@ func _create_labels() -> void:
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(title)
 	
-	# Edge of chaos marker
-	var edge_label = Label3D.new()
-	edge_label.text = "← EDGE OF CHAOS"
-	edge_label.font_size = 14
-	edge_label.position = Vector3(
-		(R_CHAOS_START - r_min) / (r_max - r_min) * width - width/2 + 0.3,
+	# Edge of chaos marker. Held as a member now so a cropped r window can move it — or
+	# hide it, when the chaos onset is not inside the window on the wall at all.
+	_edge_label = Label3D.new()
+	_edge_label.text = "← EDGE OF CHAOS"
+	_edge_label.font_size = 14
+	_edge_label.modulate = edge_color
+	_edge_label.outline_size = 3
+	_edge_label.outline_modulate = Color.BLACK
+	add_child(_edge_label)
+	_place_edge_label()
+
+func _r_axis_text(value: float) -> String:
+	# One decimal is what the diagram has always printed, and on the default 2.5..4.0 span
+	# that is what this still returns. A cropped window can be narrower than a tenth of r,
+	# where "r=3.8" at both ends of the period-3 window would read as a bug.
+	if (r_max - r_min) < 0.5:
+		return "r=%.2f" % value
+	return "r=%.1f" % value
+
+func _place_edge_label() -> void:
+	if _edge_label == null:
+		return
+	# The marker is a claim about a specific r. If that r is off the cropped axis the
+	# honest thing is to withhold it rather than park it past the end of the plot.
+	var inside: bool = R_CHAOS_START >= r_min and R_CHAOS_START <= r_max
+	_edge_label.visible = inside
+	if not inside:
+		return
+	var frac: float = (R_CHAOS_START - r_min) / maxf(r_max - r_min, 0.0001)
+	_edge_label.position = Vector3(
+		frac * width - width/2 + 0.3,
 		-height/2 - 0.25,
 		0
 	)
-	edge_label.modulate = edge_color
-	edge_label.outline_size = 3
-	edge_label.outline_modulate = Color.BLACK
-	add_child(edge_label)
+
+func _refresh_labels() -> void:
+	# Only ever reached from apply_grid_config after the r window actually moved; on the
+	# shipped default nothing calls this and the labels stay exactly as _create_labels
+	# wrote them.
+	if _r_min_label != null:
+		_r_min_label.text = _r_axis_text(r_min)
+	if _r_max_label != null:
+		_r_max_label.text = _r_axis_text(r_max)
+	_place_edge_label()
 
 func _update_highlight() -> void:
 	if not _highlight_plane:

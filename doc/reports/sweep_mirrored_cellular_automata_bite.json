@@ -1,0 +1,68 @@
+{
+ "sweep": "mirrored_cellular_automata",
+ "peak_changed_pct": 0.119,
+ "subject_pct": 4.397,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "stencil": "motif"
+   },
+   "b": {
+    "stencil": "quadrant"
+   },
+   "changed_px": 645,
+   "changed_pct": 0.112
+  },
+  {
+   "a": {
+    "stencil": "motif"
+   },
+   "b": {
+    "stencil": "octant"
+   },
+   "changed_px": 630,
+   "changed_pct": 0.109
+  },
+  {
+   "a": {
+    "stencil": "motif"
+   },
+   "b": {
+    "stencil": "none"
+   },
+   "changed_px": 639,
+   "changed_pct": 0.111
+  },
+  {
+   "a": {
+    "stencil": "quadrant"
+   },
+   "b": {
+    "stencil": "octant"
+   },
+   "changed_px": 685,
+   "changed_pct": 0.119
+  },
+  {
+   "a": {
+    "stencil": "quadrant"
+   },
+   "b": {
+    "stencil": "none"
+   },
+   "changed_px": 651,
+   "changed_pct": 0.113
+  },
+  {
+   "a": {
+    "stencil": "octant"
+   },
+   "b": {
+    "stencil": "none"
+   },
+   "changed_px": 679,
+   "changed_pct": 0.118
+  }
+ ]
+}

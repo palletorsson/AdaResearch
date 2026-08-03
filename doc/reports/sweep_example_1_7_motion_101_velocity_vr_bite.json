@@ -1,0 +1,68 @@
+{
+ "sweep": "example_1_7_motion_101_velocity_vr",
+ "peak_changed_pct": 5.961,
+ "subject_pct": 4.986,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "trace"
+   },
+   "changed_px": 9921,
+   "changed_pct": 1.718
+  },
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "longhand"
+   },
+   "changed_px": 8090,
+   "changed_pct": 1.401
+  },
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "axiom"
+   },
+   "changed_px": 30610,
+   "changed_pct": 5.3
+  },
+  {
+   "a": {
+    "evidence": "trace"
+   },
+   "b": {
+    "evidence": "longhand"
+   },
+   "changed_px": 14226,
+   "changed_pct": 2.463
+  },
+  {
+   "a": {
+    "evidence": "trace"
+   },
+   "b": {
+    "evidence": "axiom"
+   },
+   "changed_px": 34431,
+   "changed_pct": 5.961
+  },
+  {
+   "a": {
+    "evidence": "longhand"
+   },
+   "b": {
+    "evidence": "axiom"
+   },
+   "changed_px": 32881,
+   "changed_pct": 5.693
+  }
+ ]
+}

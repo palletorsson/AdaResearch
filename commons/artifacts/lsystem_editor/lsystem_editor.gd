@@ -16,6 +16,30 @@ extends Node3D
 
 class_name LSystemEditor
 
+## STAGE-2 DNA PROMOTION (2026-08-03). The knobs were already here — the registry
+## had simply never been told, so the sweep refused the artifact and no map could
+## reach the thing it is for. The seven grammars sat behind an integer `preset`
+## with no names attached, and a map token carries STRINGS, so `preset:5` arrived
+## as "5", was rejected by the typed int property, and silently rendered as Plant.
+##
+##   grammar  which rewriting system is on the plinth
+##            koch · sierpinski · dragon · plant · bush · fern · binary_tree
+##   depth    how many rewrites are shown before the turtle draws
+##            0 (the grammar's own depth) · 2 · 3 · 4 · 6
+##
+## grammar=plant, depth=0 is exactly what the scene shipped (preset 3, whose own
+## depth is 5), so the 4 existing placements are untouched.
+##
+## depth is the second axis because it is the argument this artifact already makes
+## in the registry: "the iteration count is like λ — more iterations reveal more
+## detail at the edge of legibility". At depth 2 you can read the production rule
+## off the drawing; at depth 6 you can only read the plant. Same grammar, and the
+## rule has become invisible inside its own output.
+##
+## Usage in map_data.json:
+##   "lsystem_editor#grammar:dragon"
+##   "lsystem_editor#depth:2"
+
 ## Display settings
 @export var display_size: float = 1.0
 @export var line_color: Color = Color(0.3, 0.8, 0.3)
@@ -42,6 +66,26 @@ class_name LSystemEditor
 		_apply_preset()
 		_sync_preset_slider()
 
+## DNA axis: which rewriting system is on the plinth. The names the seven presets
+## always had, made reachable — a map token is a string, so the integer could not
+## be addressed from map_data.json at all.
+@export_enum("koch", "sierpinski", "dragon", "plant", "bush", "fern", "binary_tree") var grammar: String = "plant"
+
+## DNA axis: how many rewrites the turtle draws. 0 means "the grammar's own
+## depth", which is what every preset has always used — the shipped behaviour.
+@export_range(0, 10) var depth: int = 0
+
+## grammar name -> the PRESETS index it has always been.
+const GRAMMAR_INDEX = {
+	"koch": 0,
+	"sierpinski": 1,
+	"dragon": 2,
+	"plant": 3,
+	"bush": 4,
+	"fern": 5,
+	"binary_tree": 6,
+}
+
 const PRESETS = {
 	0: ["F", {"F": "F+F-F-F+F"}, 90.0, 4, "Koch Curve"],
 	1: ["F-G-G", {"F": "F-G+F+G-F", "G": "GG"}, 120.0, 5, "Sierpinski"],
@@ -63,6 +107,9 @@ var _preset_slider: Node
 var _gen_slider: Node
 var _angle_slider: Node
 var _control_panel: Node3D
+## True once _ready has built the body. Guards the config hook from rebuilding a
+## body that does not exist yet, and from rebuilding one that has not changed.
+var _built: bool = false
 
 
 func _ready():
@@ -70,7 +117,8 @@ func _ready():
 	_create_base()
 	_create_labels()
 	_create_vr_controls()
-	_apply_preset()
+	_built = true
+	_resolve_grammar()
 
 func _create_display():
 	_immediate_mesh = ImmediateMesh.new()
@@ -169,14 +217,28 @@ func _on_angle_slider_moved(_position):
 		var norm = _angle_slider.get_normalized_value()
 		angle_degrees = 5.0 + norm * 85.0
 
+## Point `preset` at whatever `grammar` names, then build once. Assigning preset
+## runs its setter, which already calls _apply_preset — so the branch exists to
+## avoid building the tree twice, not to skip building it.
+func _resolve_grammar() -> void:
+	var idx: int = int(GRAMMAR_INDEX.get(grammar, preset))
+	if idx != preset:
+		preset = idx
+	else:
+		_apply_preset()
+
 func _apply_preset():
 	if preset >= 0 and preset < PRESETS.size():
 		var p = PRESETS[preset]
 		axiom = p[0]
 		_rules = p[1].duplicate()
 		angle_degrees = p[2]
-		generations = mini(p[3], 10)
-	
+		# depth 0 = the grammar's own depth, which is what shipped.
+		var g: int = mini(p[3], 10)
+		if depth > 0:
+			g = clampi(depth, 1, 10)
+		generations = g
+
 	_generate()
 	call_deferred("_sync_sliders_deferred")
 
@@ -314,7 +376,27 @@ func set_rules(new_axiom: String, new_rules: Dictionary, new_angle: float = 25.0
 func get_string() -> String:
 	return _current_string
 
+## Guarded on both counts: a DNA key rebuilds only when its value actually
+## CHANGED, and only after _ready has built the tree once. A placement that
+## passes neither key gets exactly the behaviour it had before this axis existed.
+## Both axes parse from strings, because a map token carries strings.
 func apply_grid_config(config_data: Dictionary):
+	var re_apply: bool = false
 	for key in config_data:
-		if key in self:
-			set(key, config_data[key])
+		var k: String = str(key)
+		if k == "grammar":
+			var g: String = str(config_data[key]).to_lower()
+			if GRAMMAR_INDEX.has(g) and g != grammar:
+				grammar = g
+				re_apply = true
+			continue
+		if k == "depth":
+			var d: int = clampi(int(config_data[key]), 0, 10)
+			if d != depth:
+				depth = d
+				re_apply = true
+			continue
+		if k in self:
+			set(k, config_data[key])
+	if re_apply and _built:
+		_resolve_grammar()

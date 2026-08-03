@@ -1,0 +1,80 @@
+{
+ "sweep": "pollock_painting_in_3d",
+ "peak_changed_pct": 5.733,
+ "subject_pct": 7.182,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "place_on_floor": true,
+    "simulate_brush_motion": true
+   },
+   "b": {
+    "place_on_floor": true,
+    "simulate_brush_motion": false
+   },
+   "changed_px": 55,
+   "changed_pct": 0.01
+  },
+  {
+   "a": {
+    "place_on_floor": true,
+    "simulate_brush_motion": true
+   },
+   "b": {
+    "place_on_floor": false,
+    "simulate_brush_motion": true
+   },
+   "changed_px": 33115,
+   "changed_pct": 5.733
+  },
+  {
+   "a": {
+    "place_on_floor": true,
+    "simulate_brush_motion": true
+   },
+   "b": {
+    "place_on_floor": false,
+    "simulate_brush_motion": false
+   },
+   "changed_px": 33115,
+   "changed_pct": 5.733
+  },
+  {
+   "a": {
+    "place_on_floor": true,
+    "simulate_brush_motion": false
+   },
+   "b": {
+    "place_on_floor": false,
+    "simulate_brush_motion": true
+   },
+   "changed_px": 33116,
+   "changed_pct": 5.733
+  },
+  {
+   "a": {
+    "place_on_floor": true,
+    "simulate_brush_motion": false
+   },
+   "b": {
+    "place_on_floor": false,
+    "simulate_brush_motion": false
+   },
+   "changed_px": 33116,
+   "changed_pct": 5.733
+  },
+  {
+   "a": {
+    "place_on_floor": false,
+    "simulate_brush_motion": true
+   },
+   "b": {
+    "place_on_floor": false,
+    "simulate_brush_motion": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

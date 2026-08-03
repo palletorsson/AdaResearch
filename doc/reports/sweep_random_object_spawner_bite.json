@@ -1,0 +1,38 @@
+{
+ "sweep": "random_object_spawner",
+ "peak_changed_pct": 1.847,
+ "subject_pct": 2.296,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "cube_size": 0.5
+   },
+   "b": {
+    "cube_size": 1.0
+   },
+   "changed_px": 10668,
+   "changed_pct": 1.847
+  },
+  {
+   "a": {
+    "cube_size": 0.5
+   },
+   "b": {
+    "cube_size": 1.6
+   },
+   "changed_px": 6527,
+   "changed_pct": 1.13
+  },
+  {
+   "a": {
+    "cube_size": 1.0
+   },
+   "b": {
+    "cube_size": 1.6
+   },
+   "changed_px": 7529,
+   "changed_pct": 1.303
+  }
+ ]
+}

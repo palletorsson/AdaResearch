@@ -1,0 +1,68 @@
+{
+ "sweep": "harmonic_motion_demo",
+ "peak_changed_pct": 0.155,
+ "subject_pct": 0.535,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "regime": "free"
+   },
+   "b": {
+    "regime": "underdamped"
+   },
+   "changed_px": 869,
+   "changed_pct": 0.15
+  },
+  {
+   "a": {
+    "regime": "free"
+   },
+   "b": {
+    "regime": "critical"
+   },
+   "changed_px": 897,
+   "changed_pct": 0.155
+  },
+  {
+   "a": {
+    "regime": "free"
+   },
+   "b": {
+    "regime": "overdamped"
+   },
+   "changed_px": 839,
+   "changed_pct": 0.145
+  },
+  {
+   "a": {
+    "regime": "underdamped"
+   },
+   "b": {
+    "regime": "critical"
+   },
+   "changed_px": 502,
+   "changed_pct": 0.087
+  },
+  {
+   "a": {
+    "regime": "underdamped"
+   },
+   "b": {
+    "regime": "overdamped"
+   },
+   "changed_px": 438,
+   "changed_pct": 0.076
+  },
+  {
+   "a": {
+    "regime": "critical"
+   },
+   "b": {
+    "regime": "overdamped"
+   },
+   "changed_px": 454,
+   "changed_pct": 0.079
+  }
+ ]
+}

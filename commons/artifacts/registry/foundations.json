@@ -728,6 +728,29 @@
       }
     },
     "bifurcation_diagram": {
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "regime": [
+            "all",
+            "stable",
+            "cascade",
+            "chaos",
+            "period3"
+          ],
+          "trace": [
+            "attractor",
+            "transient",
+            "approach"
+          ]
+        },
+        "default": "regime=all, trace=attractor - all is the one value absent from REGIME_WINDOWS, and _apply_regime returns immediately on it, so r_min=2.5 and r_max=4.0 stay exactly as exported and the whole diagram is framed as it always was; attractor is the `_:` branch of _keeps_iteration, which is the shipped `j >= skip_transient` test. apply_grid_config rebuilds only when a value it recognises actually differs AND _ready has already built once, so the 8 cells across four maps (Crisis_Synthesis, Crisis_Synthesis_composed, Corridor_Crisis_Synthesis, Trial_eye_Crisis_Synthesis) rebuild nothing and render the same picture. One deliberate difference: the z scatter was an unseeded randf_range, so every launch was a different cloud; it is now the same range from a seeded RNG. The jitter is +/-0.025 m of depth on a 4 x 2 m plot, invisible in a still, and without it no two frames of a sweep would be comparable.",
+        "was": "r_min=2.5 and r_max=4.0 were @export but nothing read them from a map, so every placement showed the same full sweep; skip_transient=50 silently threw the first fifty iterations away with no way to ask for them. The artifact's whole argument - that r selects a qualitative regime - was the one thing a map could not say.",
+        "note": "regime crops the r axis onto one claim about the same map, because WHICH WINDOW you are shown is the argument. stable = 2.5..3.0, one line, no branching, the map before it has anything to say; cascade = 3.0..3.57, the period-doubling ladder where Feigenbaum's constant is legible as the shrinking of each rung; chaos = 3.57..4.0, the band, plus the period-3 window sitting inside it as a stripe of order; period3 = 3.82..3.87, that window filling the whole plot, where the eye finds three clean branches inside what was called chaos - the strongest thing the diagram can say. trace is which part of each orbit counts as the picture: attractor draws only where the orbit ended up (the shipped diagram), transient draws every iteration including the run-in (the tree with a haze over it - the arriving), approach draws ONLY the fifty discarded iterations and no tree at all, which is the diagram's own waste product held up as the image.",
+        "kin": "regime is the family word (harmonic_motion_demo, spring_demo, mass_spring_damper, VectorForces, homogeneous_coordinates, DualBallFMController) and it is used for exactly the family's question - which qualitative behaviour class is on show. The `all` value is taken from mass_spring_damper character for character, and means the same thing there and here: do not crop, this is the shipped uncropped view. The other four values cannot be shared, because a damping ladder and a logistic cascade have different classes - underdamped is not a thing the logistic map can be - and inventing a mapping between them would make an incomparable family look comparable. trace is the LOOSE family word (spring_demo: off/phase/wave; fourier_transform: samples/stems/ribbon) meaning which drawing of the data is shown, and it is taken in that loose sense. It is deliberately NOT `evidence`, whose ladder (result/trace/longhand/axiom) is fixed character for character across fourteen artifacts and means how much of the working is admitted alongside the result: approach withholds the result and shows only the working, which is the inverse of the last rung of that ladder and would corrupt the word.",
+        "still_note": "regime is a strong axis in pixels - the four crops share almost no ink, since the point cloud is redrawn over a different domain and _get_color_for_r re-ramps across it. trace is strong at approach (the tree vanishes; only the run-in haze remains) and thinner at transient, where the haze is added over an unchanged tree; the added points are 50 of every 100 iterations though, so it should still clear the 3% line. The MultiMesh caveat applies: the capture AABB counts MeshInstance3D only and every point here lives in a MultiMeshInstance3D, so the only mesh instances are the two thin axis bars and the highlight plane - check the framing before believing any subject-percentage figure."
+      },
       "lookup_name": "bifurcation_diagram",
       "scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn",
       "class_name": "BifurcationDiagram",

@@ -1,0 +1,80 @@
+{
+ "sweep": "tessellation_lattice_demo",
+ "peak_changed_pct": 54.123,
+ "subject_pct": 40.389,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "loop_walk": true,
+    "show_all_at_start": true
+   },
+   "b": {
+    "loop_walk": true,
+    "show_all_at_start": false
+   },
+   "changed_px": 233285,
+   "changed_pct": 40.389
+  },
+  {
+   "a": {
+    "loop_walk": true,
+    "show_all_at_start": true
+   },
+   "b": {
+    "loop_walk": false,
+    "show_all_at_start": true
+   },
+   "changed_px": 192583,
+   "changed_pct": 33.342
+  },
+  {
+   "a": {
+    "loop_walk": true,
+    "show_all_at_start": true
+   },
+   "b": {
+    "loop_walk": false,
+    "show_all_at_start": false
+   },
+   "changed_px": 213275,
+   "changed_pct": 36.924
+  },
+  {
+   "a": {
+    "loop_walk": true,
+    "show_all_at_start": false
+   },
+   "b": {
+    "loop_walk": false,
+    "show_all_at_start": true
+   },
+   "changed_px": 276723,
+   "changed_pct": 47.909
+  },
+  {
+   "a": {
+    "loop_walk": true,
+    "show_all_at_start": false
+   },
+   "b": {
+    "loop_walk": false,
+    "show_all_at_start": false
+   },
+   "changed_px": 304534,
+   "changed_pct": 52.724
+  },
+  {
+   "a": {
+    "loop_walk": false,
+    "show_all_at_start": true
+   },
+   "b": {
+    "loop_walk": false,
+    "show_all_at_start": false
+   },
+   "changed_px": 312614,
+   "changed_pct": 54.123
+  }
+ ]
+}

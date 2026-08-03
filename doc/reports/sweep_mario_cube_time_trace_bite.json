@@ -1,0 +1,188 @@
+{
+ "sweep": "mario_cube_time_trace",
+ "peak_changed_pct": 1.271,
+ "subject_pct": 4.465,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": true
+   },
+   "b": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": false
+   },
+   "changed_px": 7343,
+   "changed_pct": 1.271
+  },
+  {
+   "a": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": true
+   },
+   "b": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": true
+   },
+   "changed_px": 7184,
+   "changed_pct": 1.244
+  },
+  {
+   "a": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": true
+   },
+   "b": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": false
+   },
+   "changed_px": 7341,
+   "changed_pct": 1.271
+  },
+  {
+   "a": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": true
+   },
+   "b": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": true
+   },
+   "changed_px": 7308,
+   "changed_pct": 1.265
+  },
+  {
+   "a": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": true
+   },
+   "b": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": false
+   },
+   "changed_px": 7319,
+   "changed_pct": 1.267
+  },
+  {
+   "a": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": false
+   },
+   "b": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": true
+   },
+   "changed_px": 2998,
+   "changed_pct": 0.519
+  },
+  {
+   "a": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": false
+   },
+   "b": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": false
+   },
+   "changed_px": 1578,
+   "changed_pct": 0.273
+  },
+  {
+   "a": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": false
+   },
+   "b": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": true
+   },
+   "changed_px": 2489,
+   "changed_pct": 0.431
+  },
+  {
+   "a": {
+    "trail_max_points": 500.0,
+    "fade_trail_over_time": false
+   },
+   "b": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": false
+   },
+   "changed_px": 1553,
+   "changed_pct": 0.269
+  },
+  {
+   "a": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": true
+   },
+   "b": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": false
+   },
+   "changed_px": 3008,
+   "changed_pct": 0.521
+  },
+  {
+   "a": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": true
+   },
+   "b": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": true
+   },
+   "changed_px": 2195,
+   "changed_pct": 0.38
+  },
+  {
+   "a": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": true
+   },
+   "b": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": false
+   },
+   "changed_px": 2885,
+   "changed_pct": 0.499
+  },
+  {
+   "a": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": false
+   },
+   "b": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": true
+   },
+   "changed_px": 2730,
+   "changed_pct": 0.473
+  },
+  {
+   "a": {
+    "trail_max_points": 1000.0,
+    "fade_trail_over_time": false
+   },
+   "b": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": false
+   },
+   "changed_px": 984,
+   "changed_pct": 0.17
+  },
+  {
+   "a": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": true
+   },
+   "b": {
+    "trail_max_points": 1600.0,
+    "fade_trail_over_time": false
+   },
+   "changed_px": 2592,
+   "changed_pct": 0.449
+  }
+ ]
+}

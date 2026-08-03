@@ -1,0 +1,80 @@
+{
+ "sweep": "octapod_crawler",
+ "peak_changed_pct": 8.295,
+ "subject_pct": 7.68,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "start_dormant": true,
+    "hatch_on_damage": true
+   },
+   "b": {
+    "start_dormant": true,
+    "hatch_on_damage": false
+   },
+   "changed_px": 216,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "start_dormant": true,
+    "hatch_on_damage": true
+   },
+   "b": {
+    "start_dormant": false,
+    "hatch_on_damage": true
+   },
+   "changed_px": 47914,
+   "changed_pct": 8.295
+  },
+  {
+   "a": {
+    "start_dormant": true,
+    "hatch_on_damage": true
+   },
+   "b": {
+    "start_dormant": false,
+    "hatch_on_damage": false
+   },
+   "changed_px": 47914,
+   "changed_pct": 8.295
+  },
+  {
+   "a": {
+    "start_dormant": true,
+    "hatch_on_damage": false
+   },
+   "b": {
+    "start_dormant": false,
+    "hatch_on_damage": true
+   },
+   "changed_px": 47908,
+   "changed_pct": 8.294
+  },
+  {
+   "a": {
+    "start_dormant": true,
+    "hatch_on_damage": false
+   },
+   "b": {
+    "start_dormant": false,
+    "hatch_on_damage": false
+   },
+   "changed_px": 47908,
+   "changed_pct": 8.294
+  },
+  {
+   "a": {
+    "start_dormant": false,
+    "hatch_on_damage": true
+   },
+   "b": {
+    "start_dormant": false,
+    "hatch_on_damage": false
+   },
+   "changed_px": 17,
+   "changed_pct": 0.003
+  }
+ ]
+}

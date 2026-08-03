@@ -4541,6 +4541,27 @@
     "size_group": "compact"
    },
    "qfep_connection": "Fields as invisible structure â€” order you can't see until you probe it. The hidden F that shapes everything.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "law": [
+      "gravity",
+      "point_charge",
+      "dipole",
+      "vortex"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "sources",
+      "longhand"
+     ]
+    },
+    "default": "law=point_charge, evidence=result - point_charge is the shipped FieldType default and the string maps onto that same enum member, so _calculate_field runs the identical inverse-square branch; evidence=result builds no Evidence node at all. Neither key is passed by any of the 6 existing placements, and apply_grid_config only assigns law when the value both validates and differs, so those rooms are byte-identical.",
+    "was": "field_type was the @identity's declared critical_parameter, a live @export with a working setter and four VR buttons wired to it - and unreachable from a map token, because apply_grid_config's whole body was `pass`. Every room got POINT_CHARGE. The evidence apparatus was written on 2026-08-02 and never declared, so the sweep could not turn it either.",
+    "note": "hand promotion 2026-08-03 - the runner refused this token for NO TURNABLE KNOBS, which was a fact about the registry: the evidence axis was already implemented in the script (result | trace | sources | longhand, taken character for character from wave_interference_tank) and the registry had never been told. Derived, not transcribed. This pass adds `law` and the config hook that reaches it. NOT named `field` although VectorFieldFlow declares an axis by that name - its values are shapes one synthetic flow is bent into, these are four named physical laws with four different falloffs, and only vortex/orbit and point_charge/sink even loosely correspond. field_strength and source_position remain unread by design: dials on a law, not a choice of law, and a still cannot tell a stronger field from a nearer one."
+   },
    "scene": "res://commons/artifacts/force_field_visualizer/force_field_visualizer.tscn",
    "sequence": "forces",
    "tags": [
@@ -8389,6 +8410,32 @@
     "size_group": "compact"
    },
    "qfep_connection": "Rewrite rules are deterministic (F) yet produce organic complexity. The iteration count is like Î» â€” more iterations reveal more detail at the edge of legibility.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "grammar": [
+      "koch",
+      "sierpinski",
+      "dragon",
+      "plant",
+      "bush",
+      "fern",
+      "binary_tree"
+     ],
+     "depth": [
+      0,
+      2,
+      3,
+      4,
+      6
+     ]
+    },
+    "default": "grammar=plant, depth=0 - plant is PRESETS index 3, which is the value lsystem_editor.tscn has always written on the root, and depth 0 means 'use the grammar's own depth', which is the mini(p[3], 10) the shipped _apply_preset always ran. _ready now calls _resolve_grammar instead of _apply_preset, and with grammar=plant that resolves to the same index and calls the same function - so the 4 existing placements draw the identical Plant at generation 5.",
+    "was": "the seven grammars were an @export_enum INT called preset, with a working setter and a VR slider wired to it, and the registry had never been told. Worse, the integer was unreachable from a map token even by hand: map_data.json config values arrive as STRINGS, so 'lsystem_editor#preset:5' set a typed int property from \"5\", was rejected, and silently rendered Plant. Four maps, one grammar. depth did not exist at all - generations was pinned to the preset's own number.",
+    "note": "hand promotion 2026-08-03, the botanical_flower case: the runner refused this token for NO TURNABLE KNOBS and the axis was already sitting in the source. Derived from PRESETS, not transcribed - the seven names are the preset labels lowercased with the spaces closed up. `preset` is deliberately NOT declared alongside `grammar`: they are the same axis addressed twice, and declaring both would sweep the same seven pictures under two names. preset stays as the VR slider's live variable and the keyboard shortcut's target. angle_degrees is not an axis either - it is a dial ON a grammar, and every preset already carries its own angle.",
+    "kin": "space_filling_curve_gallery.depth asks the same question in the same sequence, but names its values (sketch|sparse|standard|fine) because it draws one fixed curve; here the honest units are the rewrites themselves, since depth 0 has to mean 'whatever this particular grammar's own depth is' and the seven differ (4, 5, 10, 5, 4, 5, 6)."
+   },
    "scene": "res://commons/artifacts/lsystem_editor/lsystem_editor.tscn",
    "sequence": "lsystems",
    "tags": [

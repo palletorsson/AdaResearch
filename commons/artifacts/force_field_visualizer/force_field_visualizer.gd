@@ -26,6 +26,17 @@
 #   product below them).
 # emerges: at `result` the field is a texture you accept; at `longhand` it is a multiplication you
 #   can check, because both factors are visible side by side and the arrow below is their product.
+#
+# DNA AXIS — law: which of the four force laws the grid is a picture of. The @identity above has
+#   named field_type critical since the file was written and the enum has always been live; what
+#   was missing was any way for a map to say it, because apply_grid_config threw the key away.
+#   gravity is uniform (position tells you nothing), point_charge is 1/r² from one well, dipole
+#   is a SUM of two, vortex is curl with nothing entering or leaving. Deliberately not the word
+#   `field` — see the block above the export for why the neighbouring VectorFieldFlow axis is a
+#   different question wearing a similar name.
+# emerges: the two axes are orthogonal on purpose — `law` changes what is true of the space and
+#   `evidence` changes how much of the working is admitted, so the 4x4 grid asks whether a law
+#   is easier to read when the instrument shows more of itself.
 
 extends Node3D
 
@@ -76,6 +87,48 @@ var _evidence_built: bool = false
 		# legacy path never enters this branch at all.
 		if _evidence_built:
 			_rebuild_evidence()
+
+## AXIS — WHICH LAW the space obeys. field_type has always been the @identity's declared
+## critical_parameter ("each is a different spatial grammar") and has always been a live
+## @export with a working setter — it was simply unreachable from a map token, because
+## apply_grid_config discarded every key it was handed. This is the word-shaped face of that
+## enum, so a token can name a law the way it names anything else.
+##
+##   gravity        F = (0, -g, 0). Constant everywhere: no source, no falloff, no centre.
+##                  Every arrow the same length pointing the same way — the only rung where
+##                  position carries no information at all
+##   point_charge   F = k·r̂/r². One source, radial, inverse-square. The legacy default
+##   dipole         F₊ + F₋. Two sources 0.2 m apart with opposite sign, so the picture is
+##                  a SUM and the cancelling mid-line is drawn by arithmetic, not by a rule
+##   vortex         tangent(r) · profile(|r|). Curl: nothing flows in or out, the arrows
+##                  close on themselves and the source is an axis rather than a well
+##
+## NOT the word `field`, though [[VectorFieldFlow]] carries an axis by that name. Its four
+## values (spiral · orbit · sink · source) are shapes ONE synthetic flow can be bent into;
+## these four are named physical laws that fall off differently — and only two of them even
+## have a counterpart over there, since a uniform field and a superposition have no shape-word
+## in that list. Sharing the word while diverging on every value is the half-measure that
+## makes a family look comparable when it is not.
+@export_enum("gravity", "point_charge", "dipole", "vortex") var law: String = "point_charge":
+	set(value):
+		law = value
+		# `as FieldType` mirrors the VR button handler below, which is the one place this
+		# file already narrows an int to the enum.
+		var picked: int = int(FIELD_LAWS.get(value, FieldType.POINT_CHARGE))
+		field_type = picked as FieldType
+
+## Allow-list, same contract as EVIDENCES: a typo falls back to the shipped law.
+const LAWS: PackedStringArray = ["gravity", "point_charge", "dipole", "vortex"]
+
+## The word → enum table. CUSTOM is deliberately absent: _calculate_field's `_:` branch
+## returns Vector3.ZERO for it, which hides every arrow, so declaring it would put a blank
+## rung in the sweep and call it a law.
+const FIELD_LAWS := {
+	"gravity": FieldType.GRAVITY,
+	"point_charge": FieldType.POINT_CHARGE,
+	"dipole": FieldType.DIPOLE,
+	"vortex": FieldType.VORTEX,
+}
 
 ## AXIS — HOW MUCH OF THE ARITHMETIC the grid puts on the table. Adopted word for word from
 ## [[wave_interference_tank]], which carries the same four rungs for superposition; the pair
@@ -462,15 +515,29 @@ func set_strength(s: float) -> void:
 func move_source(pos: Vector3) -> void:
 	source_position = pos
 
-## LATENT BUG, still only PARTLY closed here (was force_field_visualizer.gd:399, the whole body
-## was `pass`). The artifact advertised a configuration hook and silently discarded every key a
-## map handed it, so field_type / field_strength / source_position — the three things the
-## @identity calls critical — were unreachable from a map token even though all three are live
-## @exports with working setters. Reading `evidence` is what this promotion needs; the other keys
-## are DELIBERATELY still unread, because wiring field_type from a token would change which law a
-## given room teaches and that is a curriculum decision, not a DNA one. Reported, not silently
-## widened.
+## LATENT BUG, now closed for the two keys that are axes (was force_field_visualizer.gd:399,
+## the whole body was `pass`). The artifact advertised a configuration hook and silently
+## discarded every key a map handed it, so field_type / field_strength / source_position — the
+## three things the @identity calls critical — were unreachable from a map token even though all
+## three are live @exports with working setters.
+##
+## The 2026-08-02 pass read `evidence` and left field_type unread on the grounds that changing
+## which law a room teaches is a curriculum decision. That was half right and is revised here: it
+## IS a curriculum decision, which is exactly why it belongs to whoever writes the map token
+## rather than to nobody. Nothing changes for a room that does not name it — `law` defaults to
+## point_charge, the shipped enum default, and none of the 6 existing placements passes the key.
+##
+## field_strength and source_position stay unread. They are dials on the same law rather than a
+## choice between laws, they already have VR controls a visitor can move, and a still cannot tell
+## a stronger field from a nearer one. Reported, not silently widened.
 func apply_grid_config(config_data: Dictionary) -> void:
+	# LAW FIRST. Setting it rebuilds the apparatus only when one is already standing, and at
+	# this point the default rung has built none — so the streamlines and rings below get
+	# integrated against the final law instead of the old one and then thrown away.
+	if config_data.has("law"):
+		var picked: String = str(config_data["law"]).strip_edges().to_lower()
+		if LAWS.has(picked) and picked != law:
+			law = picked
 	if config_data.has("evidence"):
 		var word: String = str(config_data["evidence"]).strip_edges().to_lower()
 		evidence = word if EVIDENCES.has(word) else evidence

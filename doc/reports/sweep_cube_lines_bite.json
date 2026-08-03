@@ -1,0 +1,108 @@
+{
+ "sweep": "cube_lines",
+ "peak_changed_pct": 1.731,
+ "subject_pct": 1.687,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "disclosure": "frame"
+   },
+   "b": {
+    "disclosure": "visible"
+   },
+   "changed_px": 3019,
+   "changed_pct": 0.523
+  },
+  {
+   "a": {
+    "disclosure": "frame"
+   },
+   "b": {
+    "disclosure": "silhouette"
+   },
+   "changed_px": 5548,
+   "changed_pct": 0.961
+  },
+  {
+   "a": {
+    "disclosure": "frame"
+   },
+   "b": {
+    "disclosure": "plan"
+   },
+   "changed_px": 7220,
+   "changed_pct": 1.25
+  },
+  {
+   "a": {
+    "disclosure": "frame"
+   },
+   "b": {
+    "disclosure": "corner"
+   },
+   "changed_px": 7947,
+   "changed_pct": 1.376
+  },
+  {
+   "a": {
+    "disclosure": "visible"
+   },
+   "b": {
+    "disclosure": "silhouette"
+   },
+   "changed_px": 2916,
+   "changed_pct": 0.505
+  },
+  {
+   "a": {
+    "disclosure": "visible"
+   },
+   "b": {
+    "disclosure": "plan"
+   },
+   "changed_px": 7710,
+   "changed_pct": 1.335
+  },
+  {
+   "a": {
+    "disclosure": "visible"
+   },
+   "b": {
+    "disclosure": "corner"
+   },
+   "changed_px": 9999,
+   "changed_pct": 1.731
+  },
+  {
+   "a": {
+    "disclosure": "silhouette"
+   },
+   "b": {
+    "disclosure": "plan"
+   },
+   "changed_px": 4843,
+   "changed_pct": 0.838
+  },
+  {
+   "a": {
+    "disclosure": "silhouette"
+   },
+   "b": {
+    "disclosure": "corner"
+   },
+   "changed_px": 7153,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "disclosure": "plan"
+   },
+   "b": {
+    "disclosure": "corner"
+   },
+   "changed_px": 2324,
+   "changed_pct": 0.402
+  }
+ ]
+}

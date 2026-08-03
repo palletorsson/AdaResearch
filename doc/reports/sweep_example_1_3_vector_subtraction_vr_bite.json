@@ -1,0 +1,68 @@
+{
+ "sweep": "example_1_3_vector_subtraction_vr",
+ "peak_changed_pct": 0.965,
+ "subject_pct": 11.906,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "construction": "bare"
+   },
+   "b": {
+    "construction": "flip"
+   },
+   "changed_px": 5571,
+   "changed_pct": 0.965
+  },
+  {
+   "a": {
+    "construction": "bare"
+   },
+   "b": {
+    "construction": "chain"
+   },
+   "changed_px": 4453,
+   "changed_pct": 0.771
+  },
+  {
+   "a": {
+    "construction": "bare"
+   },
+   "b": {
+    "construction": "parallelogram"
+   },
+   "changed_px": 5508,
+   "changed_pct": 0.954
+  },
+  {
+   "a": {
+    "construction": "flip"
+   },
+   "b": {
+    "construction": "chain"
+   },
+   "changed_px": 1684,
+   "changed_pct": 0.292
+  },
+  {
+   "a": {
+    "construction": "flip"
+   },
+   "b": {
+    "construction": "parallelogram"
+   },
+   "changed_px": 272,
+   "changed_pct": 0.047
+  },
+  {
+   "a": {
+    "construction": "chain"
+   },
+   "b": {
+    "construction": "parallelogram"
+   },
+   "changed_px": 1847,
+   "changed_pct": 0.32
+  }
+ ]
+}

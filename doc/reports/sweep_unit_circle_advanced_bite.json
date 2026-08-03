@@ -1,0 +1,80 @@
+{
+ "sweep": "unit_circle_advanced",
+ "peak_changed_pct": 4.445,
+ "subject_pct": 4.518,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "use_color_wheel": true,
+    "color_platforms_from_wheel": true
+   },
+   "b": {
+    "use_color_wheel": true,
+    "color_platforms_from_wheel": false
+   },
+   "changed_px": 24796,
+   "changed_pct": 4.293
+  },
+  {
+   "a": {
+    "use_color_wheel": true,
+    "color_platforms_from_wheel": true
+   },
+   "b": {
+    "use_color_wheel": false,
+    "color_platforms_from_wheel": true
+   },
+   "changed_px": 25677,
+   "changed_pct": 4.445
+  },
+  {
+   "a": {
+    "use_color_wheel": true,
+    "color_platforms_from_wheel": true
+   },
+   "b": {
+    "use_color_wheel": false,
+    "color_platforms_from_wheel": false
+   },
+   "changed_px": 25633,
+   "changed_pct": 4.438
+  },
+  {
+   "a": {
+    "use_color_wheel": true,
+    "color_platforms_from_wheel": false
+   },
+   "b": {
+    "use_color_wheel": false,
+    "color_platforms_from_wheel": true
+   },
+   "changed_px": 963,
+   "changed_pct": 0.167
+  },
+  {
+   "a": {
+    "use_color_wheel": true,
+    "color_platforms_from_wheel": false
+   },
+   "b": {
+    "use_color_wheel": false,
+    "color_platforms_from_wheel": false
+   },
+   "changed_px": 902,
+   "changed_pct": 0.156
+  },
+  {
+   "a": {
+    "use_color_wheel": false,
+    "color_platforms_from_wheel": true
+   },
+   "b": {
+    "use_color_wheel": false,
+    "color_platforms_from_wheel": false
+   },
+   "changed_px": 117,
+   "changed_pct": 0.02
+  }
+ ]
+}

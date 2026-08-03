@@ -1,44 +1,218 @@
 {
  "sweep": "random_edge_profile",
- "peak_changed_pct": 12.44,
- "subject_pct": 12.104,
+ "peak_changed_pct": 9.365,
+ "subject_pct": 7.219,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
     "profile_seed": 20260802,
-    "readout": "relief"
+    "readout": "relief",
+    "point_count": 2.5
    },
    "b": {
     "profile_seed": 20260802,
-    "readout": "plate"
+    "readout": "relief",
+    "point_count": 5.0
    },
-   "changed_px": 71853,
-   "changed_pct": 12.44
+   "changed_px": 7658,
+   "changed_pct": 1.326
   },
   {
    "a": {
     "profile_seed": 20260802,
-    "readout": "relief"
+    "readout": "relief",
+    "point_count": 2.5
    },
    "b": {
     "profile_seed": 20260802,
-    "readout": "column"
+    "readout": "plate",
+    "point_count": 2.5
    },
-   "changed_px": 40627,
-   "changed_pct": 7.034
+   "changed_px": 35605,
+   "changed_pct": 6.164
   },
   {
    "a": {
     "profile_seed": 20260802,
-    "readout": "plate"
+    "readout": "relief",
+    "point_count": 2.5
    },
    "b": {
     "profile_seed": 20260802,
-    "readout": "column"
+    "readout": "plate",
+    "point_count": 5.0
    },
-   "changed_px": 70654,
-   "changed_pct": 12.232
+   "changed_px": 35590,
+   "changed_pct": 6.162
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "relief",
+    "point_count": 2.5
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 2.5
+   },
+   "changed_px": 36953,
+   "changed_pct": 6.398
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "relief",
+    "point_count": 2.5
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 5.0
+   },
+   "changed_px": 28731,
+   "changed_pct": 4.974
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "relief",
+    "point_count": 5.0
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "plate",
+    "point_count": 2.5
+   },
+   "changed_px": 38428,
+   "changed_pct": 6.653
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "relief",
+    "point_count": 5.0
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "plate",
+    "point_count": 5.0
+   },
+   "changed_px": 38277,
+   "changed_pct": 6.627
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "relief",
+    "point_count": 5.0
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 2.5
+   },
+   "changed_px": 39509,
+   "changed_pct": 6.84
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "relief",
+    "point_count": 5.0
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 5.0
+   },
+   "changed_px": 28365,
+   "changed_pct": 4.911
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "plate",
+    "point_count": 2.5
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "plate",
+    "point_count": 5.0
+   },
+   "changed_px": 35373,
+   "changed_pct": 6.124
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "plate",
+    "point_count": 2.5
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 2.5
+   },
+   "changed_px": 54090,
+   "changed_pct": 9.365
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "plate",
+    "point_count": 2.5
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 5.0
+   },
+   "changed_px": 42729,
+   "changed_pct": 7.398
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "plate",
+    "point_count": 5.0
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 2.5
+   },
+   "changed_px": 54052,
+   "changed_pct": 9.358
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "plate",
+    "point_count": 5.0
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 5.0
+   },
+   "changed_px": 42696,
+   "changed_pct": 7.392
+  },
+  {
+   "a": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 2.5
+   },
+   "b": {
+    "profile_seed": 20260802,
+    "readout": "column",
+    "point_count": 5.0
+   },
+   "changed_px": 39846,
+   "changed_pct": 6.899
   }
  ]
 }

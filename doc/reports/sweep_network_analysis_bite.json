@@ -1,8 +1,8 @@
 {
  "sweep": "network_analysis",
- "peak_changed_pct": 11.098,
- "subject_pct": 9.032,
- "verdict": "BITES",
+ "peak_changed_pct": 1.662,
+ "subject_pct": 4.27,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
@@ -11,8 +11,8 @@
    "b": {
     "mutuality": "none"
    },
-   "changed_px": 64103,
-   "changed_pct": 11.098
+   "changed_px": 5558,
+   "changed_pct": 0.962
   },
   {
    "a": {
@@ -21,8 +21,8 @@
    "b": {
     "mutuality": "split"
    },
-   "changed_px": 25748,
-   "changed_pct": 4.458
+   "changed_px": 7518,
+   "changed_pct": 1.302
   },
   {
    "a": {
@@ -31,8 +31,8 @@
    "b": {
     "mutuality": "total"
    },
-   "changed_px": 48541,
-   "changed_pct": 8.404
+   "changed_px": 9600,
+   "changed_pct": 1.662
   },
   {
    "a": {
@@ -41,8 +41,8 @@
    "b": {
     "mutuality": "split"
    },
-   "changed_px": 64028,
-   "changed_pct": 11.085
+   "changed_px": 4511,
+   "changed_pct": 0.781
   },
   {
    "a": {
@@ -51,8 +51,8 @@
    "b": {
     "mutuality": "total"
    },
-   "changed_px": 58534,
-   "changed_pct": 10.134
+   "changed_px": 7161,
+   "changed_pct": 1.24
   },
   {
    "a": {
@@ -61,8 +61,8 @@
    "b": {
     "mutuality": "total"
    },
-   "changed_px": 50714,
-   "changed_pct": 8.78
+   "changed_px": 9003,
+   "changed_pct": 1.559
   }
  ]
 }

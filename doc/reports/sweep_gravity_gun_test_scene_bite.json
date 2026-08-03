@@ -1,0 +1,188 @@
+{
+ "sweep": "gravity_gun_test_scene",
+ "peak_changed_pct": 0.001,
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 5.0
+   },
+   "b": {
+    "randomize_colors": true,
+    "spawn_count": 10.0
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 5.0
+   },
+   "b": {
+    "randomize_colors": true,
+    "spawn_count": 16.0
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 5.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 5.0
+   },
+   "changed_px": 4,
+   "changed_pct": 0.001
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 5.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 10.0
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 5.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 16.0
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 10.0
+   },
+   "b": {
+    "randomize_colors": true,
+    "spawn_count": 16.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 10.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 5.0
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 10.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 10.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 10.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 16.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 16.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 5.0
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 16.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 10.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": true,
+    "spawn_count": 16.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 16.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": false,
+    "spawn_count": 5.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 10.0
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": false,
+    "spawn_count": 5.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 16.0
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "randomize_colors": false,
+    "spawn_count": 10.0
+   },
+   "b": {
+    "randomize_colors": false,
+    "spawn_count": 16.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

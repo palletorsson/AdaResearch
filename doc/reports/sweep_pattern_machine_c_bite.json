@@ -1,68 +1,344 @@
 {
  "sweep": "pattern_machine_c",
- "peak_changed_pct": 1.918,
- "subject_pct": 4.133,
+ "peak_changed_pct": 1.462,
+ "subject_pct": 4.137,
  "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
-    "exhibit": "bolt"
+    "exhibit": "bolt",
+    "randomize_on_start": true
    },
    "b": {
-    "exhibit": "unit"
+    "exhibit": "bolt",
+    "randomize_on_start": false
    },
-   "changed_px": 10003,
-   "changed_pct": 1.732
+   "changed_px": 5541,
+   "changed_pct": 0.959
   },
   {
    "a": {
-    "exhibit": "bolt"
+    "exhibit": "bolt",
+    "randomize_on_start": true
    },
    "b": {
-    "exhibit": "operation"
+    "exhibit": "unit",
+    "randomize_on_start": true
    },
-   "changed_px": 9046,
-   "changed_pct": 1.566
+   "changed_px": 7181,
+   "changed_pct": 1.243
   },
   {
    "a": {
-    "exhibit": "bolt"
+    "exhibit": "bolt",
+    "randomize_on_start": true
    },
    "b": {
-    "exhibit": "catalogue"
+    "exhibit": "unit",
+    "randomize_on_start": false
    },
-   "changed_px": 11077,
-   "changed_pct": 1.918
+   "changed_px": 7254,
+   "changed_pct": 1.256
   },
   {
    "a": {
-    "exhibit": "unit"
+    "exhibit": "bolt",
+    "randomize_on_start": true
    },
    "b": {
-    "exhibit": "operation"
+    "exhibit": "operation",
+    "randomize_on_start": true
    },
-   "changed_px": 6008,
-   "changed_pct": 1.04
+   "changed_px": 7508,
+   "changed_pct": 1.3
   },
   {
    "a": {
-    "exhibit": "unit"
+    "exhibit": "bolt",
+    "randomize_on_start": true
    },
    "b": {
-    "exhibit": "catalogue"
+    "exhibit": "operation",
+    "randomize_on_start": false
    },
-   "changed_px": 8278,
-   "changed_pct": 1.433
+   "changed_px": 7558,
+   "changed_pct": 1.309
   },
   {
    "a": {
-    "exhibit": "operation"
+    "exhibit": "bolt",
+    "randomize_on_start": true
    },
    "b": {
-    "exhibit": "catalogue"
+    "exhibit": "catalogue",
+    "randomize_on_start": true
    },
-   "changed_px": 8108,
-   "changed_pct": 1.404
+   "changed_px": 6661,
+   "changed_pct": 1.153
+  },
+  {
+   "a": {
+    "exhibit": "bolt",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": false
+   },
+   "changed_px": 6736,
+   "changed_pct": 1.166
+  },
+  {
+   "a": {
+    "exhibit": "bolt",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "unit",
+    "randomize_on_start": true
+   },
+   "changed_px": 7228,
+   "changed_pct": 1.251
+  },
+  {
+   "a": {
+    "exhibit": "bolt",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "unit",
+    "randomize_on_start": false
+   },
+   "changed_px": 3964,
+   "changed_pct": 0.686
+  },
+  {
+   "a": {
+    "exhibit": "bolt",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "operation",
+    "randomize_on_start": true
+   },
+   "changed_px": 6680,
+   "changed_pct": 1.157
+  },
+  {
+   "a": {
+    "exhibit": "bolt",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "operation",
+    "randomize_on_start": false
+   },
+   "changed_px": 4556,
+   "changed_pct": 0.789
+  },
+  {
+   "a": {
+    "exhibit": "bolt",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": true
+   },
+   "changed_px": 5987,
+   "changed_pct": 1.037
+  },
+  {
+   "a": {
+    "exhibit": "bolt",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": false
+   },
+   "changed_px": 1360,
+   "changed_pct": 0.235
+  },
+  {
+   "a": {
+    "exhibit": "unit",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "unit",
+    "randomize_on_start": false
+   },
+   "changed_px": 4692,
+   "changed_pct": 0.812
+  },
+  {
+   "a": {
+    "exhibit": "unit",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "operation",
+    "randomize_on_start": true
+   },
+   "changed_px": 7364,
+   "changed_pct": 1.275
+  },
+  {
+   "a": {
+    "exhibit": "unit",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "operation",
+    "randomize_on_start": false
+   },
+   "changed_px": 7324,
+   "changed_pct": 1.268
+  },
+  {
+   "a": {
+    "exhibit": "unit",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": true
+   },
+   "changed_px": 8243,
+   "changed_pct": 1.427
+  },
+  {
+   "a": {
+    "exhibit": "unit",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": false
+   },
+   "changed_px": 8357,
+   "changed_pct": 1.447
+  },
+  {
+   "a": {
+    "exhibit": "unit",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "operation",
+    "randomize_on_start": true
+   },
+   "changed_px": 6666,
+   "changed_pct": 1.154
+  },
+  {
+   "a": {
+    "exhibit": "unit",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "operation",
+    "randomize_on_start": false
+   },
+   "changed_px": 4641,
+   "changed_pct": 0.803
+  },
+  {
+   "a": {
+    "exhibit": "unit",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": true
+   },
+   "changed_px": 8026,
+   "changed_pct": 1.39
+  },
+  {
+   "a": {
+    "exhibit": "unit",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": false
+   },
+   "changed_px": 5194,
+   "changed_pct": 0.899
+  },
+  {
+   "a": {
+    "exhibit": "operation",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "operation",
+    "randomize_on_start": false
+   },
+   "changed_px": 3826,
+   "changed_pct": 0.662
+  },
+  {
+   "a": {
+    "exhibit": "operation",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": true
+   },
+   "changed_px": 6920,
+   "changed_pct": 1.198
+  },
+  {
+   "a": {
+    "exhibit": "operation",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": false
+   },
+   "changed_px": 7854,
+   "changed_pct": 1.36
+  },
+  {
+   "a": {
+    "exhibit": "operation",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": true
+   },
+   "changed_px": 8442,
+   "changed_pct": 1.462
+  },
+  {
+   "a": {
+    "exhibit": "operation",
+    "randomize_on_start": false
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": false
+   },
+   "changed_px": 5787,
+   "changed_pct": 1.002
+  },
+  {
+   "a": {
+    "exhibit": "catalogue",
+    "randomize_on_start": true
+   },
+   "b": {
+    "exhibit": "catalogue",
+    "randomize_on_start": false
+   },
+   "changed_px": 5032,
+   "changed_pct": 0.871
   }
  ]
 }

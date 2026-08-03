@@ -1,0 +1,68 @@
+{
+ "sweep": "catapult",
+ "peak_changed_pct": 0.104,
+ "subject_pct": 0.281,
+ "verdict": "SUBJECT NOT DETECTED - only 0.28% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "foresight": "parabola"
+   },
+   "b": {
+    "foresight": "apex"
+   },
+   "changed_px": 599,
+   "changed_pct": 0.104
+  },
+  {
+   "a": {
+    "foresight": "parabola"
+   },
+   "b": {
+    "foresight": "landing"
+   },
+   "changed_px": 472,
+   "changed_pct": 0.082
+  },
+  {
+   "a": {
+    "foresight": "parabola"
+   },
+   "b": {
+    "foresight": "none"
+   },
+   "changed_px": 321,
+   "changed_pct": 0.056
+  },
+  {
+   "a": {
+    "foresight": "apex"
+   },
+   "b": {
+    "foresight": "landing"
+   },
+   "changed_px": 455,
+   "changed_pct": 0.079
+  },
+  {
+   "a": {
+    "foresight": "apex"
+   },
+   "b": {
+    "foresight": "none"
+   },
+   "changed_px": 293,
+   "changed_pct": 0.051
+  },
+  {
+   "a": {
+    "foresight": "landing"
+   },
+   "b": {
+    "foresight": "none"
+   },
+   "changed_px": 162,
+   "changed_pct": 0.028
+  }
+ ]
+}

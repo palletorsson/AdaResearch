@@ -1,0 +1,68 @@
+{
+ "sweep": "VectorForces",
+ "peak_changed_pct": 0.318,
+ "subject_pct": 0.354,
+ "verdict": "SUBJECT NOT DETECTED - only 0.35% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "regime": "crosswind"
+   },
+   "b": {
+    "regime": "freefall"
+   },
+   "changed_px": 1527,
+   "changed_pct": 0.264
+  },
+  {
+   "a": {
+    "regime": "crosswind"
+   },
+   "b": {
+    "regime": "stalemate"
+   },
+   "changed_px": 1630,
+   "changed_pct": 0.282
+  },
+  {
+   "a": {
+    "regime": "crosswind"
+   },
+   "b": {
+    "regime": "liftoff"
+   },
+   "changed_px": 1834,
+   "changed_pct": 0.318
+  },
+  {
+   "a": {
+    "regime": "freefall"
+   },
+   "b": {
+    "regime": "stalemate"
+   },
+   "changed_px": 556,
+   "changed_pct": 0.096
+  },
+  {
+   "a": {
+    "regime": "freefall"
+   },
+   "b": {
+    "regime": "liftoff"
+   },
+   "changed_px": 860,
+   "changed_pct": 0.149
+  },
+  {
+   "a": {
+    "regime": "stalemate"
+   },
+   "b": {
+    "regime": "liftoff"
+   },
+   "changed_px": 574,
+   "changed_pct": 0.099
+  }
+ ]
+}

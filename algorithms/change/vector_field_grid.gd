@@ -24,6 +24,12 @@ extends Node3D
 class_name VectorFieldGrid
 
 @export_category("Field Settings")
+# WHICH RULE the field states. cells is the shipped stream function Ψ = sin(kx+t)cos(kz+t);
+# the other four are the classical linear phase portraits sampled on the same lattice.
+@export_enum("cells", "orbit", "sink", "saddle", "shear") var field: String = "cells"
+# WHAT THE TINT MEANS. magnitude is the shipped |v| ramp; direction paints the heading,
+# banded quantises magnitude into four classes, uniform withholds colour entirely.
+@export_enum("magnitude", "direction", "banded", "uniform") var coding: String = "magnitude"
 @export var arrow_color: Color = Color(0.85, 0.85, 1.0, 1.0)
 @export var arrow_color_hot: Color = Color(1.0, 0.55, 0.25, 1.0)
 @export var grid_cols: int = 12
@@ -31,6 +37,9 @@ class_name VectorFieldGrid
 @export var spacing: float = 0.22
 @export var arrow_base_scale: float = 0.18
 @export var phase_speed: float = 0.4
+
+const FIELDS: Array[String] = ["cells", "orbit", "sink", "saddle", "shear"]
+const CODINGS: Array[String] = ["magnitude", "direction", "banded", "uniform"]
 
 var _arrows: Array = []
 var _t: float = 0.0
@@ -47,6 +56,17 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		grid_rows = int(config_data["grid_rows"])
 	if config_data.has("spacing"):
 		spacing = float(config_data["spacing"])
+	# field and coding are read fresh every frame by _update_arrows, so they need no
+	# rebuild and are safe to apply before or after _ready. An unknown value is ignored
+	# rather than assigned, so a typo cannot blank the field.
+	if config_data.has("field"):
+		var want_field: String = str(config_data["field"])
+		if FIELDS.has(want_field):
+			field = want_field
+	if config_data.has("coding"):
+		var want_coding: String = str(config_data["coding"])
+		if CODINGS.has(want_coding):
+			coding = want_coding
 
 
 func _process(delta: float) -> void:
@@ -75,19 +95,55 @@ func _build_grid() -> void:
 			_arrows.append({"node": arrow, "x": x, "z": z, "mat": mat})
 
 
+func _field_vector(x: float, z: float) -> Vector3:
+	# k is the shipped wavenumber of the stream function; the linear fields reuse it as
+	# their gain so every value of `field` spans the same magnitude range (|v| ≤ ~3.5)
+	# and the colour ramp below means the same thing across the whole axis.
+	var k: float = 2.5
+	match field:
+		"orbit":
+			# ẋ = (-z, x) — a centre. Closed circles: kept at the radius you arrived with.
+			return Vector3(-z, 0.0, x) * k
+		"sink":
+			# ẋ = -p — a stable node. Every trajectory ends at the origin.
+			return Vector3(-x, 0.0, -z) * k
+		"saddle":
+			# ẋ = (x, -z) — one hyperbolic point, the cell the default field tiles.
+			return Vector3(x, 0.0, -z) * k
+		"shear":
+			# ẋ = (z, 0) — parallel layers sliding past each other at different speeds.
+			return Vector3(z, 0.0, 0.0) * k
+		_:
+			# v = (∂Ψ/∂z, -∂Ψ/∂x) where Ψ = sin(x*k + t)cos(z*k + t)
+			var phase: float = _t
+			var psi_dz: float = -sin(x * k + phase) * sin(z * k + phase) * k
+			var psi_dx: float = cos(x * k + phase) * cos(z * k + phase) * k
+			return Vector3(psi_dz, 0.0, -psi_dx)
+
+
+func _tint_for(dir: Vector3, t_mag: float) -> Color:
+	match coding:
+		"direction":
+			# Heading, not speed — the optical-flow convention.
+			var hue: float = fposmod(atan2(dir.z, dir.x), TAU) / TAU
+			return Color.from_hsv(hue, 0.65, 1.0)
+		"banded":
+			# Four classes instead of a continuum: the choropleth claim.
+			var band: float = floor(clamp(t_mag, 0.0, 0.999) * 4.0) / 3.0
+			return arrow_color.lerp(arrow_color_hot, band)
+		"uniform":
+			# No colour channel at all — length alone carries the magnitude.
+			return arrow_color
+		_:
+			return arrow_color.lerp(arrow_color_hot, t_mag)
+
+
 func _update_arrows() -> void:
 	for entry in _arrows:
 		var arrow: MeshInstance3D = entry["node"]
 		var x: float = entry["x"]
 		var z: float = entry["z"]
-		# v = (∂Ψ/∂z, -∂Ψ/∂x) where Ψ = sin(x*k + t)cos(z*k + t)
-		var k: float = 2.5
-		var phase := _t
-		var psi_dz: float = -sin(x * k + phase) * sin(z * k + phase) * k
-		var psi_dx: float = cos(x * k + phase) * cos(z * k + phase) * k
-		var vx: float = psi_dz
-		var vz: float = -psi_dx
-		var v := Vector3(vx, 0.0, vz)
+		var v: Vector3 = _field_vector(x, z)
 		var mag: float = v.length()
 		if mag < 0.001:
 			continue
@@ -97,7 +153,7 @@ func _update_arrows() -> void:
 		# Tint with magnitude.
 		var mat: StandardMaterial3D = entry["mat"]
 		var t_mag: float = clamp(mag / 3.5, 0.0, 1.0)
-		var col := arrow_color.lerp(arrow_color_hot, t_mag)
+		var col: Color = _tint_for(dir, t_mag)
 		mat.albedo_color = col
 		mat.emission = col
 		mat.emission_energy_multiplier = 1.0 + t_mag * 1.5

@@ -1,68 +1,344 @@
 {
  "sweep": "sine_wall_corridor",
- "peak_changed_pct": 7.408,
- "subject_pct": 8.913,
+ "peak_changed_pct": 5.783,
+ "subject_pct": 8.926,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "cut": "skin"
+    "cut": "skin",
+    "enable_collision": true
    },
    "b": {
-    "cut": "ribs"
+    "cut": "skin",
+    "enable_collision": false
    },
-   "changed_px": 42786,
-   "changed_pct": 7.408
+   "changed_px": 3,
+   "changed_pct": 0.001
   },
   {
    "a": {
-    "cut": "skin"
+    "cut": "skin",
+    "enable_collision": true
    },
    "b": {
-    "cut": "strata"
+    "cut": "ribs",
+    "enable_collision": true
    },
-   "changed_px": 37211,
-   "changed_pct": 6.442
+   "changed_px": 33335,
+   "changed_pct": 5.771
   },
   {
    "a": {
-    "cut": "skin"
+    "cut": "skin",
+    "enable_collision": true
    },
    "b": {
-    "cut": "lattice"
+    "cut": "ribs",
+    "enable_collision": false
    },
-   "changed_px": 41389,
-   "changed_pct": 7.166
+   "changed_px": 33393,
+   "changed_pct": 5.781
   },
   {
    "a": {
-    "cut": "ribs"
+    "cut": "skin",
+    "enable_collision": true
    },
    "b": {
-    "cut": "strata"
+    "cut": "strata",
+    "enable_collision": true
    },
-   "changed_px": 30401,
-   "changed_pct": 5.263
+   "changed_px": 26254,
+   "changed_pct": 4.545
   },
   {
    "a": {
-    "cut": "ribs"
+    "cut": "skin",
+    "enable_collision": true
    },
    "b": {
-    "cut": "lattice"
+    "cut": "strata",
+    "enable_collision": false
    },
-   "changed_px": 29652,
-   "changed_pct": 5.134
+   "changed_px": 26247,
+   "changed_pct": 4.544
   },
   {
    "a": {
-    "cut": "strata"
+    "cut": "skin",
+    "enable_collision": true
    },
    "b": {
-    "cut": "lattice"
+    "cut": "lattice",
+    "enable_collision": true
    },
-   "changed_px": 30719,
-   "changed_pct": 5.318
+   "changed_px": 31261,
+   "changed_pct": 5.412
+  },
+  {
+   "a": {
+    "cut": "skin",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": false
+   },
+   "changed_px": 31253,
+   "changed_pct": 5.411
+  },
+  {
+   "a": {
+    "cut": "skin",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "ribs",
+    "enable_collision": true
+   },
+   "changed_px": 33342,
+   "changed_pct": 5.773
+  },
+  {
+   "a": {
+    "cut": "skin",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "ribs",
+    "enable_collision": false
+   },
+   "changed_px": 33400,
+   "changed_pct": 5.783
+  },
+  {
+   "a": {
+    "cut": "skin",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "strata",
+    "enable_collision": true
+   },
+   "changed_px": 26254,
+   "changed_pct": 4.545
+  },
+  {
+   "a": {
+    "cut": "skin",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "strata",
+    "enable_collision": false
+   },
+   "changed_px": 26246,
+   "changed_pct": 4.544
+  },
+  {
+   "a": {
+    "cut": "skin",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": true
+   },
+   "changed_px": 31255,
+   "changed_pct": 5.411
+  },
+  {
+   "a": {
+    "cut": "skin",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": false
+   },
+   "changed_px": 31248,
+   "changed_pct": 5.41
+  },
+  {
+   "a": {
+    "cut": "ribs",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "ribs",
+    "enable_collision": false
+   },
+   "changed_px": 16,
+   "changed_pct": 0.003
+  },
+  {
+   "a": {
+    "cut": "ribs",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "strata",
+    "enable_collision": true
+   },
+   "changed_px": 29478,
+   "changed_pct": 5.104
+  },
+  {
+   "a": {
+    "cut": "ribs",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "strata",
+    "enable_collision": false
+   },
+   "changed_px": 29471,
+   "changed_pct": 5.102
+  },
+  {
+   "a": {
+    "cut": "ribs",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": true
+   },
+   "changed_px": 29669,
+   "changed_pct": 5.137
+  },
+  {
+   "a": {
+    "cut": "ribs",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": false
+   },
+   "changed_px": 29679,
+   "changed_pct": 5.138
+  },
+  {
+   "a": {
+    "cut": "ribs",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "strata",
+    "enable_collision": true
+   },
+   "changed_px": 29502,
+   "changed_pct": 5.108
+  },
+  {
+   "a": {
+    "cut": "ribs",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "strata",
+    "enable_collision": false
+   },
+   "changed_px": 29493,
+   "changed_pct": 5.106
+  },
+  {
+   "a": {
+    "cut": "ribs",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": true
+   },
+   "changed_px": 29660,
+   "changed_pct": 5.135
+  },
+  {
+   "a": {
+    "cut": "ribs",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": false
+   },
+   "changed_px": 29666,
+   "changed_pct": 5.136
+  },
+  {
+   "a": {
+    "cut": "strata",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "strata",
+    "enable_collision": false
+   },
+   "changed_px": 50,
+   "changed_pct": 0.009
+  },
+  {
+   "a": {
+    "cut": "strata",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": true
+   },
+   "changed_px": 30349,
+   "changed_pct": 5.254
+  },
+  {
+   "a": {
+    "cut": "strata",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": false
+   },
+   "changed_px": 30348,
+   "changed_pct": 5.254
+  },
+  {
+   "a": {
+    "cut": "strata",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": true
+   },
+   "changed_px": 30320,
+   "changed_pct": 5.249
+  },
+  {
+   "a": {
+    "cut": "strata",
+    "enable_collision": false
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": false
+   },
+   "changed_px": 30314,
+   "changed_pct": 5.248
+  },
+  {
+   "a": {
+    "cut": "lattice",
+    "enable_collision": true
+   },
+   "b": {
+    "cut": "lattice",
+    "enable_collision": false
+   },
+   "changed_px": 9,
+   "changed_pct": 0.002
   }
  ]
 }

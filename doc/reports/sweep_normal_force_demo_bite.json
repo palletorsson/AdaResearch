@@ -1,0 +1,108 @@
+{
+ "sweep": "normal_force_demo",
+ "peak_changed_pct": 0.653,
+ "subject_pct": 3.759,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "incline": "flat"
+   },
+   "b": {
+    "incline": "gentle"
+   },
+   "changed_px": 3483,
+   "changed_pct": 0.603
+  },
+  {
+   "a": {
+    "incline": "flat"
+   },
+   "b": {
+    "incline": "slope"
+   },
+   "changed_px": 3526,
+   "changed_pct": 0.61
+  },
+  {
+   "a": {
+    "incline": "flat"
+   },
+   "b": {
+    "incline": "steep"
+   },
+   "changed_px": 3771,
+   "changed_pct": 0.653
+  },
+  {
+   "a": {
+    "incline": "flat"
+   },
+   "b": {
+    "incline": "cliff"
+   },
+   "changed_px": 3658,
+   "changed_pct": 0.633
+  },
+  {
+   "a": {
+    "incline": "gentle"
+   },
+   "b": {
+    "incline": "slope"
+   },
+   "changed_px": 2339,
+   "changed_pct": 0.405
+  },
+  {
+   "a": {
+    "incline": "gentle"
+   },
+   "b": {
+    "incline": "steep"
+   },
+   "changed_px": 2542,
+   "changed_pct": 0.44
+  },
+  {
+   "a": {
+    "incline": "gentle"
+   },
+   "b": {
+    "incline": "cliff"
+   },
+   "changed_px": 2652,
+   "changed_pct": 0.459
+  },
+  {
+   "a": {
+    "incline": "slope"
+   },
+   "b": {
+    "incline": "steep"
+   },
+   "changed_px": 2104,
+   "changed_pct": 0.364
+  },
+  {
+   "a": {
+    "incline": "slope"
+   },
+   "b": {
+    "incline": "cliff"
+   },
+   "changed_px": 1932,
+   "changed_pct": 0.334
+  },
+  {
+   "a": {
+    "incline": "steep"
+   },
+   "b": {
+    "incline": "cliff"
+   },
+   "changed_px": 2162,
+   "changed_pct": 0.374
+  }
+ ]
+}

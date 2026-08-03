@@ -249,6 +249,30 @@
    }
   },
   "vector_field_grid": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "field": [
+      "cells",
+      "orbit",
+      "sink",
+      "saddle",
+      "shear"
+     ],
+     "coding": [
+      "magnitude",
+      "direction",
+      "banded",
+      "uniform"
+     ]
+    },
+    "default": "field=cells, coding=magnitude - cells is the `_:` branch of the match, which is the shipped stream function v=(dPsi/dz, -dPsi/dx) with Psi=sin(kx+t)cos(kz+t) and k=2.5, unchanged line for line; magnitude is the `_:` branch of the tint, the shipped arrow_color->arrow_color_hot lerp on |v|/3.5. Neither branch is reachable unless a map names a value, and apply_grid_config ignores any word not in FIELDS/CODINGS, so a typo falls back to the shipped look rather than blanking the field. Nothing rebuilds: both are read fresh every frame by _update_arrows, so the 35 cells across seven maps (Flow_Field, Flow_Particle_Pulse, VFM_Field, Trial_rooms_change, Trial_gate8_cha_size, Trial_gate8_cha_type, Zone_TemporalStorage) build and animate exactly as before.",
+    "was": "one field and one colour rule, both hard-coded in the body of _field_vector and _update_arrows. grid_cols/grid_rows/spacing were already @export and already honoured by apply_grid_config, so the only thing a map could say about a field was how densely to sample it - never which field it was, or what the colour meant.",
+    "note": "field is WHICH RULE the plane obeys. cells is a tiled lattice of saddles - the default is already a field of the third value, repeated; orbit is a centre (closed circles, nothing enters or leaves), sink is a stable node (every trajectory ends at the origin), saddle is the single hyperbolic point the default tiles, shear is parallel layers sliding at different speeds. All four linear fields reuse the stream function's own k=2.5 as their gain, so |v| spans the same range at every value and the colour ramp keeps meaning one thing across the axis. coding is WHAT THE TINT CLAIMS: magnitude is a continuum, direction paints the heading as hue (the optical-flow convention, and the one value where speed is not in the colour at all), banded quantises |v| into four classes (the choropleth claim - a legend where there was a ramp), uniform withholds colour entirely so arrow LENGTH is the only channel left.",
+    "kin": "field is taken from VectorFieldFlow (vectors.json) and the two values it shares - orbit and sink - name the same phase portrait character for character. It is NOT the same list: spiral and source are absent, and cells, saddle and shear are new. source is absent for a measurement reason, not a taxonomic one - the arrow here is a headless BoxMesh oriented by looking_at, so reversing the sign of the field produces a pixel-identical still under the default coding, and a source would ship as a duplicate frame of sink. coding is taken from cube_lines (primitives.json), where it asks the same question - what does the colour encode - and shares uniform meaning the same withholding. force_field_visualizer, promoted in this same batch, deliberately did NOT take the word field for its four physical laws; that refusal and this reuse are consistent: over there the values are named force laws that fall off differently, here as there they are shapes a synthetic flow is bent into.",
+    "still_note": "field is the strong axis: cells is a tiled swirl, sink is a starburst, shear is eight parallel rows, and the arrow orientations differ everywhere at once. coding is the thinner measurement - the subject is 96 arrows of 2.5 cm x 18 cm on an otherwise empty plane, so the changed pixels are the arrows only; expect dilution and crop-recheck before believing an INERT verdict on it. direction is the value most likely to bite, since it replaces a two-colour ramp with the full hue circle."
+   },
    "name": "Vector Field Grid",
    "lookup_name": "vector_field_grid",
    "description": "Regular grid of arrows over a plane, each pointing along a stream function flow direction. Arrow length and color reflect magnitude.",

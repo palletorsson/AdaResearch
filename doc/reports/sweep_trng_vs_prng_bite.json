@@ -1,7 +1,7 @@
 {
  "sweep": "trng_vs_prng",
- "peak_changed_pct": 5.321,
- "subject_pct": 5.873,
+ "peak_changed_pct": 3.012,
+ "subject_pct": 5.864,
  "verdict": "BITES",
  "variants": [
   {
@@ -13,8 +13,8 @@
     "stream_seed": 20260802,
     "disclosure": "oracle"
    },
-   "changed_px": 30733,
-   "changed_pct": 5.321
+   "changed_px": 16901,
+   "changed_pct": 2.926
   },
   {
    "a": {
@@ -25,8 +25,8 @@
     "stream_seed": 20260802,
     "disclosure": "tally"
    },
-   "changed_px": 28627,
-   "changed_pct": 4.956
+   "changed_px": 14507,
+   "changed_pct": 2.512
   },
   {
    "a": {
@@ -37,8 +37,8 @@
     "stream_seed": 20260802,
     "disclosure": "ledger"
    },
-   "changed_px": 20688,
-   "changed_pct": 3.582
+   "changed_px": 6412,
+   "changed_pct": 1.11
   },
   {
    "a": {
@@ -49,8 +49,8 @@
     "stream_seed": 20260802,
     "disclosure": "origin"
    },
-   "changed_px": 20653,
-   "changed_pct": 3.576
+   "changed_px": 529,
+   "changed_pct": 0.092
   },
   {
    "a": {
@@ -61,8 +61,8 @@
     "stream_seed": 20260802,
     "disclosure": "tally"
    },
-   "changed_px": 2412,
-   "changed_pct": 0.418
+   "changed_px": 2394,
+   "changed_pct": 0.414
   },
   {
    "a": {
@@ -73,8 +73,8 @@
     "stream_seed": 20260802,
     "disclosure": "ledger"
    },
-   "changed_px": 10522,
-   "changed_pct": 1.822
+   "changed_px": 10489,
+   "changed_pct": 1.816
   },
   {
    "a": {
@@ -85,8 +85,8 @@
     "stream_seed": 20260802,
     "disclosure": "origin"
    },
-   "changed_px": 19470,
-   "changed_pct": 3.371
+   "changed_px": 17396,
+   "changed_pct": 3.012
   },
   {
    "a": {
@@ -97,8 +97,8 @@
     "stream_seed": 20260802,
     "disclosure": "ledger"
    },
-   "changed_px": 8110,
-   "changed_pct": 1.404
+   "changed_px": 8095,
+   "changed_pct": 1.401
   },
   {
    "a": {
@@ -109,8 +109,8 @@
     "stream_seed": 20260802,
     "disclosure": "origin"
    },
-   "changed_px": 17640,
-   "changed_pct": 3.054
+   "changed_px": 15002,
+   "changed_pct": 2.597
   },
   {
    "a": {
@@ -121,8 +121,8 @@
     "stream_seed": 20260802,
     "disclosure": "origin"
    },
-   "changed_px": 9920,
-   "changed_pct": 1.717
+   "changed_px": 6907,
+   "changed_pct": 1.196
   }
  ]
 }

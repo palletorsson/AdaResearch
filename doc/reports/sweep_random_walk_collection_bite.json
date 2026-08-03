@@ -1,8 +1,8 @@
 {
  "sweep": "random_walk_collection",
- "peak_changed_pct": 0.0,
- "subject_pct": 0.0,
- "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "peak_changed_pct": 0.002,
+ "subject_pct": 0.062,
+ "verdict": "SUBJECT NOT DETECTED - only 0.06% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
@@ -25,7 +25,7 @@
     "walk_seed": 20260802,
     "residue": "tail"
    },
-   "changed_px": 0,
+   "changed_px": 1,
    "changed_pct": 0.0
   },
   {
@@ -37,8 +37,8 @@
     "walk_seed": 20260802,
     "residue": "envelope"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 5,
+   "changed_pct": 0.001
   },
   {
    "a": {
@@ -49,8 +49,8 @@
     "walk_seed": 20260802,
     "residue": "ensemble"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 9,
+   "changed_pct": 0.002
   },
   {
    "a": {
@@ -61,7 +61,7 @@
     "walk_seed": 20260802,
     "residue": "tail"
    },
-   "changed_px": 0,
+   "changed_px": 1,
    "changed_pct": 0.0
   },
   {
@@ -73,8 +73,8 @@
     "walk_seed": 20260802,
     "residue": "envelope"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 5,
+   "changed_pct": 0.001
   },
   {
    "a": {
@@ -85,8 +85,8 @@
     "walk_seed": 20260802,
     "residue": "ensemble"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 9,
+   "changed_pct": 0.002
   },
   {
    "a": {
@@ -97,8 +97,8 @@
     "walk_seed": 20260802,
     "residue": "envelope"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 6,
+   "changed_pct": 0.001
   },
   {
    "a": {
@@ -109,8 +109,8 @@
     "walk_seed": 20260802,
     "residue": "ensemble"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 10,
+   "changed_pct": 0.002
   },
   {
    "a": {
@@ -121,8 +121,8 @@
     "walk_seed": 20260802,
     "residue": "ensemble"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 4,
+   "changed_pct": 0.001
   }
  ]
 }

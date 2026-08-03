@@ -609,6 +609,31 @@
     "lsystems"
    ],
    "name": "Branching Coral",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "growth_form": [
+      "staghorn",
+      "fan",
+      "table",
+      "whip",
+      "brain"
+     ],
+     "condition": [
+      "living",
+      "bleached",
+      "fluorescent",
+      "encrusted"
+     ]
+    },
+    "default": "growth_form=staghorn, condition=living - staghorn IS the shipped build, value for value: its rules are the old CORAL_RULES strings unchanged, angle_scale and decay_scale are 1.0 so current_angle stays base_angle and decay stays length_decay, and spread 0.6 / out 0.3 / lift 1.0 are the literals that were baked into _grow_shoot's shoot_angle and base_dir. living returns [base_color, Color(0.8, 0.35, 0.3), tip_color], the third of which was a local named mid_color inside _draw_coral. So both existing placements (LSystems_Competition at (6,4), LSystems_Living at (2,6), plus the three curation_station rosters that list the token) draw the identical colony.",
+    "was": "no enum export at all. One grammar: CORAL_RULES was a const read directly by _grow_shoot, the fork angle was base_angle alone, the shoot fan was the literals 0.6 and 0.3, and the depth ramp was base_color -> a local mid_color -> tip_color. Every knob that existed (iterations, num_shoots, base_angle, length_decay, display_size) turned the SIZE of one fixed coral; nothing turned the coral into a different coral. apply_grid_config also called _generate() unconditionally, so any config pass redrew the mesh.",
+    "note": "growth_form is the grammar, not the scale - a different production read by the same turtle, off a differently tilted holdfast. fan drops the roll symbols so branching stays in the shoot's own plane and the shoots barely spread (one surface held into the current); table tilts the holdfast almost flat and throws the shoots right around, growing sideways for light instead of upward for height; whip runs long between rare forks; brain pushes the fork angle past 60 degrees, which folds each branch back over itself so the colony closes into a mound instead of opening into a thicket. condition turns what the colour gradient REPORTS. In this artifact the purple-brown-to-pink ramp is a readout of recursion depth - a segment's colour says how deep in the grammar it sits. bleached does not reshape one branch; it deletes that readout, so the colony is still there and no longer says where it is. fluorescent and encrusted re-key the same three stops without touching the geometry, which makes the pair separable: growth_form moves the lines, condition moves only their colour.",
+    "kin": "growth_form, not form. branching_growth_algorithm, recursive_tree and space_colonization_algorithm already spend the bare word `form` as a VALUE of their staging axis `aftermath`, and reusing it as an axis NAME here would have made the family's vocabulary ambiguous in the one place it is meant to be shared. No sibling in the corpus declares growth_form or condition, so both words are new rather than borrowed-and-bent.",
+    "fixture_note": "no fixture is needed. The colony was already fully determined - _ready seeds the rng at 77 and every shoot reseeds to 77 + shoot_idx * 13 before it draws - so two values of an axis differ by the axis and nothing else. The literal 77 is now the var _base_seed, which also makes the pre-existing but dead `seed` config key actually reach the geometry (it used to set _rng.seed only to have _grow_shoot overwrite it on the next line); no placed token passes seed, so nothing shipped moves.",
+    "reads": "the .tscn root is the scripted node (branching_coral.gd, class_name BranchingCoral) so both axes are reachable from a map token and from the sweep. apply_grid_config accepts growth_form (or form) and condition, IGNORES an unknown value instead of assigning it - a silent fallback to the default is how a sweep publishes N identical frames and calls the axis inert - and rebuilds only when a value actually changed AND _ready has already built once."
+   },
    "scene": "res://commons/artifacts/branching_coral/branching_coral.tscn",
    "tags": [
 	"color",

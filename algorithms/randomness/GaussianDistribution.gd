@@ -28,6 +28,41 @@
 # The precondition for ever measuring it is a MAP-level sweep, and the
 # precondition for THAT is determinism, which is what gaussian_seed below is
 # for. The seed ships now so the measurement is possible later.
+#
+# SECOND LOOK, 2026-08-03 — CONCURS, and records why, so this is not re-opened a
+# third time from scratch.
+#
+# The brief for the re-examination put the live question well: a bell curve
+# artifact that shows only the heights it produced never shows the bell, and the
+# corpus already owns a word for that — `evidence`, on 18 artifacts, and in its
+# distribution dialect (none | anecdote | sample | census) on the two nearest
+# neighbours, galton_board and shannon_workbench. If the premise held, the axis
+# would be sitting there ready-made.
+#
+# The premise does not hold HERE, and that is the whole answer. galton_board
+# drops beads down a pegboard and the pile at the bottom is a by-product, so
+# there is a real difference between showing the pile and showing the curve. This
+# algorithm raises one cube per draw inside an 8x8 region: each cube IS a bin and
+# its height IS that bin's count. The mound is not the output of a histogram, it
+# is the histogram, at 1:1, and the visitor is standing in it. Adding a drawn
+# curve on a plate above the floor would not disclose a hidden step; it would put
+# a picture of the room next to the room, and it would spend the artifact's one
+# stated truth — that a distribution has no body — to do it.
+#
+# The axis that IS right, when it can be measured, is `distribution`
+# (gaussian | uniform | bimodal | heavy_tail): what SHAPE of chance the floor is
+# a record of, defaulting to gaussian, which is the Box-Muller pair below
+# unchanged. That axis changes the artifact's argument from "here is the normal
+# distribution" to "the shape of chance was a choice somebody made", and it is
+# plainly visible — as a spike, a plateau, two mounds or a spire with a long
+# skirt — in any still OF A ROOM. In a still of this artifact ALONE it is
+# invisible, because there is no room and therefore no floor and therefore no
+# mound; every value photographs the same empty frame. So the blocker is not the
+# design and never was. It is that the sweep stages one artifact with no map
+# around it, and this artifact is only ever visible through a map.
+#
+# Declining is the cheap half. The standing request, written down here so it is
+# not lost: a map-level variant sweep. gaussian_seed exists to make it honest.
 # ─────────────────────────────────────────────────────────────────────────────
 
 class_name GaussianDistributionAlgorithm

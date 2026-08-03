@@ -1,68 +1,344 @@
 {
  "sweep": "coupled_oscillator_lattice",
- "peak_changed_pct": 3.949,
- "subject_pct": 3.606,
+ "peak_changed_pct": 4.394,
+ "subject_pct": 3.65,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "fabric": "nodes"
+    "fabric": "nodes",
+    "excitation_mode": "Sine"
    },
    "b": {
-    "fabric": "bonds"
+    "fabric": "nodes",
+    "excitation_mode": "Pulse"
    },
-   "changed_px": 16630,
-   "changed_pct": 2.879
+   "changed_px": 12854,
+   "changed_pct": 2.225
   },
   {
    "a": {
-    "fabric": "nodes"
+    "fabric": "nodes",
+    "excitation_mode": "Sine"
    },
    "b": {
-    "fabric": "sheet"
+    "fabric": "bonds",
+    "excitation_mode": "Sine"
    },
-   "changed_px": 21806,
-   "changed_pct": 3.775
+   "changed_px": 16715,
+   "changed_pct": 2.894
   },
   {
    "a": {
-    "fabric": "nodes"
+    "fabric": "nodes",
+    "excitation_mode": "Sine"
    },
    "b": {
-    "fabric": "boundary"
+    "fabric": "bonds",
+    "excitation_mode": "Pulse"
    },
-   "changed_px": 6036,
-   "changed_pct": 1.045
+   "changed_px": 20532,
+   "changed_pct": 3.555
   },
   {
    "a": {
-    "fabric": "bonds"
+    "fabric": "nodes",
+    "excitation_mode": "Sine"
    },
    "b": {
-    "fabric": "sheet"
+    "fabric": "sheet",
+    "excitation_mode": "Sine"
    },
-   "changed_px": 22810,
+   "changed_px": 21796,
+   "changed_pct": 3.774
+  },
+  {
+   "a": {
+    "fabric": "nodes",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "sheet",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 22834,
+   "changed_pct": 3.953
+  },
+  {
+   "a": {
+    "fabric": "nodes",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Sine"
+   },
+   "changed_px": 5950,
+   "changed_pct": 1.03
+  },
+  {
+   "a": {
+    "fabric": "nodes",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 9438,
+   "changed_pct": 1.634
+  },
+  {
+   "a": {
+    "fabric": "nodes",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "bonds",
+    "excitation_mode": "Sine"
+   },
+   "changed_px": 21324,
+   "changed_pct": 3.692
+  },
+  {
+   "a": {
+    "fabric": "nodes",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "bonds",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 19233,
+   "changed_pct": 3.33
+  },
+  {
+   "a": {
+    "fabric": "nodes",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "sheet",
+    "excitation_mode": "Sine"
+   },
+   "changed_px": 22739,
+   "changed_pct": 3.937
+  },
+  {
+   "a": {
+    "fabric": "nodes",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "sheet",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 22190,
+   "changed_pct": 3.842
+  },
+  {
+   "a": {
+    "fabric": "nodes",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Sine"
+   },
+   "changed_px": 9394,
+   "changed_pct": 1.626
+  },
+  {
+   "a": {
+    "fabric": "nodes",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 7599,
+   "changed_pct": 1.316
+  },
+  {
+   "a": {
+    "fabric": "bonds",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "bonds",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 22539,
+   "changed_pct": 3.902
+  },
+  {
+   "a": {
+    "fabric": "bonds",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "sheet",
+    "excitation_mode": "Sine"
+   },
+   "changed_px": 22812,
    "changed_pct": 3.949
   },
   {
    "a": {
-    "fabric": "bonds"
+    "fabric": "bonds",
+    "excitation_mode": "Sine"
    },
    "b": {
-    "fabric": "boundary"
+    "fabric": "sheet",
+    "excitation_mode": "Pulse"
    },
-   "changed_px": 18005,
-   "changed_pct": 3.117
+   "changed_px": 25380,
+   "changed_pct": 4.394
   },
   {
    "a": {
-    "fabric": "sheet"
+    "fabric": "bonds",
+    "excitation_mode": "Sine"
    },
    "b": {
-    "fabric": "boundary"
+    "fabric": "boundary",
+    "excitation_mode": "Sine"
    },
-   "changed_px": 21901,
+   "changed_px": 18165,
+   "changed_pct": 3.145
+  },
+  {
+   "a": {
+    "fabric": "bonds",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 20648,
+   "changed_pct": 3.575
+  },
+  {
+   "a": {
+    "fabric": "bonds",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "sheet",
+    "excitation_mode": "Sine"
+   },
+   "changed_px": 25003,
+   "changed_pct": 4.329
+  },
+  {
+   "a": {
+    "fabric": "bonds",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "sheet",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 23035,
+   "changed_pct": 3.988
+  },
+  {
+   "a": {
+    "fabric": "bonds",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Sine"
+   },
+   "changed_px": 19724,
+   "changed_pct": 3.415
+  },
+  {
+   "a": {
+    "fabric": "bonds",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 17044,
+   "changed_pct": 2.951
+  },
+  {
+   "a": {
+    "fabric": "sheet",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "sheet",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 8506,
+   "changed_pct": 1.473
+  },
+  {
+   "a": {
+    "fabric": "sheet",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Sine"
+   },
+   "changed_px": 21904,
    "changed_pct": 3.792
+  },
+  {
+   "a": {
+    "fabric": "sheet",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 22234,
+   "changed_pct": 3.849
+  },
+  {
+   "a": {
+    "fabric": "sheet",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Sine"
+   },
+   "changed_px": 22252,
+   "changed_pct": 3.852
+  },
+  {
+   "a": {
+    "fabric": "sheet",
+    "excitation_mode": "Pulse"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 22142,
+   "changed_pct": 3.833
+  },
+  {
+   "a": {
+    "fabric": "boundary",
+    "excitation_mode": "Sine"
+   },
+   "b": {
+    "fabric": "boundary",
+    "excitation_mode": "Pulse"
+   },
+   "changed_px": 4649,
+   "changed_pct": 0.805
   }
  ]
 }

@@ -1,0 +1,68 @@
+{
+ "sweep": "wave_interference_3d",
+ "peak_changed_pct": 1.187,
+ "subject_pct": 2.819,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "trace"
+   },
+   "changed_px": 6056,
+   "changed_pct": 1.048
+  },
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "sources"
+   },
+   "changed_px": 1408,
+   "changed_pct": 0.244
+  },
+  {
+   "a": {
+    "evidence": "result"
+   },
+   "b": {
+    "evidence": "longhand"
+   },
+   "changed_px": 3005,
+   "changed_pct": 0.52
+  },
+  {
+   "a": {
+    "evidence": "trace"
+   },
+   "b": {
+    "evidence": "sources"
+   },
+   "changed_px": 5694,
+   "changed_pct": 0.986
+  },
+  {
+   "a": {
+    "evidence": "trace"
+   },
+   "b": {
+    "evidence": "longhand"
+   },
+   "changed_px": 6855,
+   "changed_pct": 1.187
+  },
+  {
+   "a": {
+    "evidence": "sources"
+   },
+   "b": {
+    "evidence": "longhand"
+   },
+   "changed_px": 3624,
+   "changed_pct": 0.627
+  }
+ ]
+}

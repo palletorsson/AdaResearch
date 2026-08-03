@@ -1,0 +1,80 @@
+{
+ "sweep": "random_space",
+ "peak_changed_pct": 0.911,
+ "subject_pct": 3.381,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "enable_animation": true,
+    "enable_lod": true
+   },
+   "b": {
+    "enable_animation": true,
+    "enable_lod": false
+   },
+   "changed_px": 8,
+   "changed_pct": 0.001
+  },
+  {
+   "a": {
+    "enable_animation": true,
+    "enable_lod": true
+   },
+   "b": {
+    "enable_animation": false,
+    "enable_lod": true
+   },
+   "changed_px": 5262,
+   "changed_pct": 0.911
+  },
+  {
+   "a": {
+    "enable_animation": true,
+    "enable_lod": true
+   },
+   "b": {
+    "enable_animation": false,
+    "enable_lod": false
+   },
+   "changed_px": 5262,
+   "changed_pct": 0.911
+  },
+  {
+   "a": {
+    "enable_animation": true,
+    "enable_lod": false
+   },
+   "b": {
+    "enable_animation": false,
+    "enable_lod": true
+   },
+   "changed_px": 5262,
+   "changed_pct": 0.911
+  },
+  {
+   "a": {
+    "enable_animation": true,
+    "enable_lod": false
+   },
+   "b": {
+    "enable_animation": false,
+    "enable_lod": false
+   },
+   "changed_px": 5262,
+   "changed_pct": 0.911
+  },
+  {
+   "a": {
+    "enable_animation": false,
+    "enable_lod": true
+   },
+   "b": {
+    "enable_animation": false,
+    "enable_lod": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

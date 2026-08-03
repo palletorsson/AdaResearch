@@ -3256,6 +3256,35 @@
    "name": "Complexity Pattern",
    "lookup_name": "complexity_pattern",
    "description": "Game of Life cellular automata at edge of chaos. Self-organizing complexity.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "rule": [
+      "life",
+      "highlife",
+      "seeds",
+      "replicator",
+      "maze",
+      "coral"
+     ],
+     "readout": [
+      "relief",
+      "plate",
+      "column"
+     ]
+    },
+    "default": "rule=life, readout=relief - life is [[3], [2, 3]], which is B3/S23, which is the `neighbors == 2 or neighbors == 3` that _step_simulation wrote out by hand; relief keeps the shipped 0.5 x cell_size body and the shipped 1.5 lift on a living cell, and is the only readout that leaves mesh.position alone. Neither key is passed by either of the 2 existing placements, and apply_grid_config rebuilds only when a value both validates and differs, so those two rooms are unchanged.",
+    "was": "no axis at all - the runner refused this token for NO TURNABLE KNOBS. The five exports are grid_size, cell_size, update_interval and two colours: dimensions and decoration. The two decisions that carry the argument were hard-coded one function down, the transition rule in _step_simulation and the elevation in _update_visuals, and there was no apply_grid_config, so a map token could not reach anything.",
+    "note": "hand promotion 2026-08-03. The @identity names the critical_parameter as initial density (~0.4), and density is the WRONG knob here on both counts: under Life every starting density converges to the same sparse litter of still lifes within twenty generations, so five densities photograph as five indistinguishable fields - the reaction_diffusion failure exactly. The quantity that actually carries lambda is a property of the RULE TABLE, not of the soup. So the axis is the law: life sits at the edge, seeds sprays, replicator fills with periodic fractal texture, maze and coral freeze into standing structure. The artifact stops asserting 'edge of chaos' and starts showing what the two sides of it look like. NOT named `generator` although perlin_noise declares that word for the same slot - a noise basis is sampled once and has no history, these are transition rules whose whole content is what they do to their own output over time.",
+    "shares_vocabulary_with": "perlin_noise, simplex_noise, mandelbrot_set, perlin_noise_terrain, random_edge_profile - readout is relief|plate|column on all of them, same three words, same meaning, and relief is the default on all of them because each shipped code path lifts its sample. This field can therefore be compared with those five rather than merely contrasted.",
+    "fixture": {
+     "pattern_seed": 20260803,
+     "warmup": 80
+    },
+    "fixture_note": "the field is GENERATIVE and slow. pattern_seed pins the soup, without which six rule variants are six different random starts and the sweep measures the RNG instead of the law. warmup runs 80 generations before the first frame, without which every variant photographs the same undifferentiated 40% soup - no rule has spoken yet at generation 0. Both default to 0 in code, which is the shipped behaviour (fresh randomness, player meets the soup and watches it organise), so they are fixture knobs and not axes.",
+    "measurement_risk": "the subject is a 0.64 x 0.64 slab about 0.02 thick, so a fit-by-diagonal camera will under-frame it. If the critic reports faint on both axes, check subject % before believing it and add a framing hint rather than re-cutting the axis."
+   },
    "scene": "res://commons/interfaces/qfep/complexity_pattern.tscn",
    "category": "qfep",
    "interaction": "observe",

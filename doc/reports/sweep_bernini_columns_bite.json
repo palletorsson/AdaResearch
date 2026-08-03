@@ -1,68 +1,344 @@
 {
  "sweep": "bernini_columns",
- "peak_changed_pct": 9.629,
- "subject_pct": 8.118,
+ "peak_changed_pct": 6.481,
+ "subject_pct": 5.204,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "colonnade": "grid"
+    "colonnade": "grid",
+    "rotate_columns": true
    },
    "b": {
-    "colonnade": "ring"
+    "colonnade": "grid",
+    "rotate_columns": false
    },
-   "changed_px": 52908,
-   "changed_pct": 9.16
+   "changed_px": 3760,
+   "changed_pct": 0.651
   },
   {
    "a": {
-    "colonnade": "grid"
+    "colonnade": "grid",
+    "rotate_columns": true
    },
    "b": {
-    "colonnade": "aisle"
+    "colonnade": "ring",
+    "rotate_columns": true
    },
-   "changed_px": 55615,
-   "changed_pct": 9.629
+   "changed_px": 24749,
+   "changed_pct": 4.285
   },
   {
    "a": {
-    "colonnade": "grid"
+    "colonnade": "grid",
+    "rotate_columns": true
    },
    "b": {
-    "colonnade": "pair"
+    "colonnade": "ring",
+    "rotate_columns": false
    },
-   "changed_px": 54342,
-   "changed_pct": 9.408
+   "changed_px": 25992,
+   "changed_pct": 4.5
   },
   {
    "a": {
-    "colonnade": "ring"
+    "colonnade": "grid",
+    "rotate_columns": true
    },
    "b": {
-    "colonnade": "aisle"
+    "colonnade": "aisle",
+    "rotate_columns": true
    },
-   "changed_px": 44695,
-   "changed_pct": 7.738
+   "changed_px": 34718,
+   "changed_pct": 6.011
   },
   {
    "a": {
-    "colonnade": "ring"
+    "colonnade": "grid",
+    "rotate_columns": true
    },
    "b": {
-    "colonnade": "pair"
+    "colonnade": "aisle",
+    "rotate_columns": false
    },
-   "changed_px": 46113,
-   "changed_pct": 7.984
+   "changed_px": 34669,
+   "changed_pct": 6.002
   },
   {
    "a": {
-    "colonnade": "aisle"
+    "colonnade": "grid",
+    "rotate_columns": true
    },
    "b": {
-    "colonnade": "pair"
+    "colonnade": "pair",
+    "rotate_columns": true
    },
-   "changed_px": 47666,
-   "changed_pct": 8.252
+   "changed_px": 31602,
+   "changed_pct": 5.471
+  },
+  {
+   "a": {
+    "colonnade": "grid",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": false
+   },
+   "changed_px": 31517,
+   "changed_pct": 5.457
+  },
+  {
+   "a": {
+    "colonnade": "grid",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "ring",
+    "rotate_columns": true
+   },
+   "changed_px": 26148,
+   "changed_pct": 4.527
+  },
+  {
+   "a": {
+    "colonnade": "grid",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "ring",
+    "rotate_columns": false
+   },
+   "changed_px": 24731,
+   "changed_pct": 4.282
+  },
+  {
+   "a": {
+    "colonnade": "grid",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "aisle",
+    "rotate_columns": true
+   },
+   "changed_px": 34640,
+   "changed_pct": 5.997
+  },
+  {
+   "a": {
+    "colonnade": "grid",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "aisle",
+    "rotate_columns": false
+   },
+   "changed_px": 34654,
+   "changed_pct": 6.0
+  },
+  {
+   "a": {
+    "colonnade": "grid",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": true
+   },
+   "changed_px": 31562,
+   "changed_pct": 5.464
+  },
+  {
+   "a": {
+    "colonnade": "grid",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": false
+   },
+   "changed_px": 31509,
+   "changed_pct": 5.455
+  },
+  {
+   "a": {
+    "colonnade": "ring",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "ring",
+    "rotate_columns": false
+   },
+   "changed_px": 3271,
+   "changed_pct": 0.566
+  },
+  {
+   "a": {
+    "colonnade": "ring",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "aisle",
+    "rotate_columns": true
+   },
+   "changed_px": 37418,
+   "changed_pct": 6.478
+  },
+  {
+   "a": {
+    "colonnade": "ring",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "aisle",
+    "rotate_columns": false
+   },
+   "changed_px": 37356,
+   "changed_pct": 6.467
+  },
+  {
+   "a": {
+    "colonnade": "ring",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": true
+   },
+   "changed_px": 31520,
+   "changed_pct": 5.457
+  },
+  {
+   "a": {
+    "colonnade": "ring",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": false
+   },
+   "changed_px": 31497,
+   "changed_pct": 5.453
+  },
+  {
+   "a": {
+    "colonnade": "ring",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "aisle",
+    "rotate_columns": true
+   },
+   "changed_px": 37437,
+   "changed_pct": 6.481
+  },
+  {
+   "a": {
+    "colonnade": "ring",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "aisle",
+    "rotate_columns": false
+   },
+   "changed_px": 37369,
+   "changed_pct": 6.47
+  },
+  {
+   "a": {
+    "colonnade": "ring",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": true
+   },
+   "changed_px": 31519,
+   "changed_pct": 5.457
+  },
+  {
+   "a": {
+    "colonnade": "ring",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": false
+   },
+   "changed_px": 31530,
+   "changed_pct": 5.459
+  },
+  {
+   "a": {
+    "colonnade": "aisle",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "aisle",
+    "rotate_columns": false
+   },
+   "changed_px": 3420,
+   "changed_pct": 0.592
+  },
+  {
+   "a": {
+    "colonnade": "aisle",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": true
+   },
+   "changed_px": 28451,
+   "changed_pct": 4.926
+  },
+  {
+   "a": {
+    "colonnade": "aisle",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": false
+   },
+   "changed_px": 28486,
+   "changed_pct": 4.932
+  },
+  {
+   "a": {
+    "colonnade": "aisle",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": true
+   },
+   "changed_px": 28441,
+   "changed_pct": 4.924
+  },
+  {
+   "a": {
+    "colonnade": "aisle",
+    "rotate_columns": false
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": false
+   },
+   "changed_px": 28462,
+   "changed_pct": 4.928
+  },
+  {
+   "a": {
+    "colonnade": "pair",
+    "rotate_columns": true
+   },
+   "b": {
+    "colonnade": "pair",
+    "rotate_columns": false
+   },
+   "changed_px": 933,
+   "changed_pct": 0.162
   }
  ]
 }

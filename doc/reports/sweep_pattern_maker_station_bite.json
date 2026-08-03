@@ -1,68 +1,344 @@
 {
  "sweep": "pattern_maker_station",
- "peak_changed_pct": 2.573,
- "subject_pct": 4.62,
+ "peak_changed_pct": 3.462,
+ "subject_pct": 4.654,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "boundary": "none"
+    "boundary": "none",
+    "use_gpu_tiling": true
    },
    "b": {
-    "boundary": "edge"
+    "boundary": "none",
+    "use_gpu_tiling": false
    },
-   "changed_px": 6566,
-   "changed_pct": 1.137
+   "changed_px": 14954,
+   "changed_pct": 2.589
   },
   {
    "a": {
-    "boundary": "none"
+    "boundary": "none",
+    "use_gpu_tiling": true
    },
    "b": {
-    "boundary": "cell"
+    "boundary": "edge",
+    "use_gpu_tiling": true
    },
-   "changed_px": 1486,
-   "changed_pct": 0.257
+   "changed_px": 6240,
+   "changed_pct": 1.08
   },
   {
    "a": {
-    "boundary": "none"
+    "boundary": "none",
+    "use_gpu_tiling": true
    },
    "b": {
-    "boundary": "lattice"
+    "boundary": "edge",
+    "use_gpu_tiling": false
    },
-   "changed_px": 10973,
-   "changed_pct": 1.9
+   "changed_px": 17419,
+   "changed_pct": 3.016
   },
   {
    "a": {
-    "boundary": "edge"
+    "boundary": "none",
+    "use_gpu_tiling": true
    },
    "b": {
-    "boundary": "cell"
+    "boundary": "cell",
+    "use_gpu_tiling": true
    },
-   "changed_px": 7037,
+   "changed_px": 798,
+   "changed_pct": 0.138
+  },
+  {
+   "a": {
+    "boundary": "none",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "cell",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 15133,
+   "changed_pct": 2.62
+  },
+  {
+   "a": {
+    "boundary": "none",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": true
+   },
+   "changed_px": 10660,
+   "changed_pct": 1.846
+  },
+  {
+   "a": {
+    "boundary": "none",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 16204,
+   "changed_pct": 2.805
+  },
+  {
+   "a": {
+    "boundary": "none",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "edge",
+    "use_gpu_tiling": true
+   },
+   "changed_px": 18179,
+   "changed_pct": 3.147
+  },
+  {
+   "a": {
+    "boundary": "none",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "edge",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 7003,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "boundary": "none",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "cell",
+    "use_gpu_tiling": true
+   },
+   "changed_px": 15207,
+   "changed_pct": 2.633
+  },
+  {
+   "a": {
+    "boundary": "none",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "cell",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 868,
+   "changed_pct": 0.15
+  },
+  {
+   "a": {
+    "boundary": "none",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": true
+   },
+   "changed_px": 18413,
+   "changed_pct": 3.188
+  },
+  {
+   "a": {
+    "boundary": "none",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 12569,
+   "changed_pct": 2.176
+  },
+  {
+   "a": {
+    "boundary": "edge",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "edge",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 11442,
+   "changed_pct": 1.981
+  },
+  {
+   "a": {
+    "boundary": "edge",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "cell",
+    "use_gpu_tiling": true
+   },
+   "changed_px": 7036,
    "changed_pct": 1.218
   },
   {
    "a": {
-    "boundary": "edge"
+    "boundary": "edge",
+    "use_gpu_tiling": true
    },
    "b": {
-    "boundary": "lattice"
+    "boundary": "cell",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 18358,
+   "changed_pct": 3.178
+  },
+  {
+   "a": {
+    "boundary": "edge",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": true
    },
    "changed_px": 14859,
    "changed_pct": 2.573
   },
   {
    "a": {
-    "boundary": "cell"
+    "boundary": "edge",
+    "use_gpu_tiling": true
    },
    "b": {
-    "boundary": "lattice"
+    "boundary": "lattice",
+    "use_gpu_tiling": false
    },
-   "changed_px": 10846,
+   "changed_px": 18626,
+   "changed_pct": 3.225
+  },
+  {
+   "a": {
+    "boundary": "edge",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "cell",
+    "use_gpu_tiling": true
+   },
+   "changed_px": 17672,
+   "changed_pct": 3.06
+  },
+  {
+   "a": {
+    "boundary": "edge",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "cell",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 7869,
+   "changed_pct": 1.362
+  },
+  {
+   "a": {
+    "boundary": "edge",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": true
+   },
+   "changed_px": 19998,
+   "changed_pct": 3.462
+  },
+  {
+   "a": {
+    "boundary": "edge",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 17090,
+   "changed_pct": 2.959
+  },
+  {
+   "a": {
+    "boundary": "cell",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "cell",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 14429,
+   "changed_pct": 2.498
+  },
+  {
+   "a": {
+    "boundary": "cell",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": true
+   },
+   "changed_px": 10845,
    "changed_pct": 1.878
+  },
+  {
+   "a": {
+    "boundary": "cell",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 16257,
+   "changed_pct": 2.815
+  },
+  {
+   "a": {
+    "boundary": "cell",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": true
+   },
+   "changed_px": 18330,
+   "changed_pct": 3.173
+  },
+  {
+   "a": {
+    "boundary": "cell",
+    "use_gpu_tiling": false
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 12661,
+   "changed_pct": 2.192
+  },
+  {
+   "a": {
+    "boundary": "lattice",
+    "use_gpu_tiling": true
+   },
+   "b": {
+    "boundary": "lattice",
+    "use_gpu_tiling": false
+   },
+   "changed_px": 6597,
+   "changed_pct": 1.142
   }
  ]
 }

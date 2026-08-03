@@ -1,0 +1,38 @@
+{
+ "sweep": "example_3_3_pointing_in_the_direction_of_motion_vr",
+ "peak_changed_pct": 1.432,
+ "subject_pct": 2.928,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "thrust_magnitude": 0.025
+   },
+   "b": {
+    "thrust_magnitude": 0.05
+   },
+   "changed_px": 8249,
+   "changed_pct": 1.428
+  },
+  {
+   "a": {
+    "thrust_magnitude": 0.025
+   },
+   "b": {
+    "thrust_magnitude": 0.08
+   },
+   "changed_px": 1154,
+   "changed_pct": 0.2
+  },
+  {
+   "a": {
+    "thrust_magnitude": 0.05
+   },
+   "b": {
+    "thrust_magnitude": 0.08
+   },
+   "changed_px": 8270,
+   "changed_pct": 1.432
+  }
+ ]
+}

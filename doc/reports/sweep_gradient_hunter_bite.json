@@ -1,0 +1,188 @@
+{
+ "sweep": "gradient_hunter",
+ "peak_changed_pct": 0.359,
+ "subject_pct": 0.735,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 1.5
+   },
+   "b": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 3.0
+   },
+   "changed_px": 1445,
+   "changed_pct": 0.25
+  },
+  {
+   "a": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 1.5
+   },
+   "b": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 1.5
+   },
+   "changed_px": 2071,
+   "changed_pct": 0.359
+  },
+  {
+   "a": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 1.5
+   },
+   "b": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 3.0
+   },
+   "changed_px": 1780,
+   "changed_pct": 0.308
+  },
+  {
+   "a": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 1.5
+   },
+   "b": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 1.5
+   },
+   "changed_px": 1750,
+   "changed_pct": 0.303
+  },
+  {
+   "a": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 1.5
+   },
+   "b": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 3.0
+   },
+   "changed_px": 1751,
+   "changed_pct": 0.303
+  },
+  {
+   "a": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 3.0
+   },
+   "b": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 1.5
+   },
+   "changed_px": 1332,
+   "changed_pct": 0.231
+  },
+  {
+   "a": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 3.0
+   },
+   "b": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 3.0
+   },
+   "changed_px": 693,
+   "changed_pct": 0.12
+  },
+  {
+   "a": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 3.0
+   },
+   "b": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 1.5
+   },
+   "changed_px": 671,
+   "changed_pct": 0.116
+  },
+  {
+   "a": {
+    "sample_radius": 0.4,
+    "anneal_timeout": 3.0
+   },
+   "b": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 3.0
+   },
+   "changed_px": 672,
+   "changed_pct": 0.116
+  },
+  {
+   "a": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 1.5
+   },
+   "b": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 3.0
+   },
+   "changed_px": 926,
+   "changed_pct": 0.16
+  },
+  {
+   "a": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 1.5
+   },
+   "b": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 1.5
+   },
+   "changed_px": 1377,
+   "changed_pct": 0.238
+  },
+  {
+   "a": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 1.5
+   },
+   "b": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 3.0
+   },
+   "changed_px": 1378,
+   "changed_pct": 0.239
+  },
+  {
+   "a": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 3.0
+   },
+   "b": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 1.5
+   },
+   "changed_px": 706,
+   "changed_pct": 0.122
+  },
+  {
+   "a": {
+    "sample_radius": 0.8,
+    "anneal_timeout": 3.0
+   },
+   "b": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 3.0
+   },
+   "changed_px": 707,
+   "changed_pct": 0.122
+  },
+  {
+   "a": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 1.5
+   },
+   "b": {
+    "sample_radius": 1.28,
+    "anneal_timeout": 3.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  }
+ ]
+}

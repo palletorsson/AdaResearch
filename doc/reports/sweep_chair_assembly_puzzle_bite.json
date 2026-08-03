@@ -1,68 +1,344 @@
 {
  "sweep": "chair_assembly_puzzle",
- "peak_changed_pct": 0.345,
- "subject_pct": 0.301,
- "verdict": "SUBJECT NOT DETECTED - only 0.30% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "peak_changed_pct": 2.036,
+ "subject_pct": 1.909,
+ "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "tell": "ghost"
+    "tell": "ghost",
+    "grow_on_complete": true
    },
    "b": {
-    "tell": "none"
+    "tell": "ghost",
+    "grow_on_complete": false
    },
-   "changed_px": 1563,
-   "changed_pct": 0.271
+   "changed_px": 0,
+   "changed_pct": 0.0
   },
   {
    "a": {
-    "tell": "ghost"
+    "tell": "ghost",
+    "grow_on_complete": true
    },
    "b": {
-    "tell": "mark"
+    "tell": "none",
+    "grow_on_complete": true
    },
-   "changed_px": 1942,
-   "changed_pct": 0.336
+   "changed_px": 11027,
+   "changed_pct": 1.909
   },
   {
    "a": {
-    "tell": "ghost"
+    "tell": "ghost",
+    "grow_on_complete": true
    },
    "b": {
-    "tell": "exemplar"
+    "tell": "none",
+    "grow_on_complete": false
    },
-   "changed_px": 1995,
-   "changed_pct": 0.345
+   "changed_px": 11030,
+   "changed_pct": 1.91
   },
   {
    "a": {
-    "tell": "none"
+    "tell": "ghost",
+    "grow_on_complete": true
    },
    "b": {
-    "tell": "mark"
+    "tell": "mark",
+    "grow_on_complete": true
    },
-   "changed_px": 906,
-   "changed_pct": 0.157
+   "changed_px": 11762,
+   "changed_pct": 2.036
   },
   {
    "a": {
-    "tell": "none"
+    "tell": "ghost",
+    "grow_on_complete": true
    },
    "b": {
-    "tell": "exemplar"
+    "tell": "mark",
+    "grow_on_complete": false
    },
-   "changed_px": 1740,
-   "changed_pct": 0.301
+   "changed_px": 11762,
+   "changed_pct": 2.036
   },
   {
    "a": {
-    "tell": "mark"
+    "tell": "ghost",
+    "grow_on_complete": true
    },
    "b": {
-    "tell": "exemplar"
+    "tell": "exemplar",
+    "grow_on_complete": true
    },
-   "changed_px": 1802,
-   "changed_pct": 0.312
+   "changed_px": 11028,
+   "changed_pct": 1.909
+  },
+  {
+   "a": {
+    "tell": "ghost",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": false
+   },
+   "changed_px": 11028,
+   "changed_pct": 1.909
+  },
+  {
+   "a": {
+    "tell": "ghost",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "none",
+    "grow_on_complete": true
+   },
+   "changed_px": 11025,
+   "changed_pct": 1.909
+  },
+  {
+   "a": {
+    "tell": "ghost",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "none",
+    "grow_on_complete": false
+   },
+   "changed_px": 11028,
+   "changed_pct": 1.909
+  },
+  {
+   "a": {
+    "tell": "ghost",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "mark",
+    "grow_on_complete": true
+   },
+   "changed_px": 11760,
+   "changed_pct": 2.036
+  },
+  {
+   "a": {
+    "tell": "ghost",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "mark",
+    "grow_on_complete": false
+   },
+   "changed_px": 11760,
+   "changed_pct": 2.036
+  },
+  {
+   "a": {
+    "tell": "ghost",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": true
+   },
+   "changed_px": 11026,
+   "changed_pct": 1.909
+  },
+  {
+   "a": {
+    "tell": "ghost",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": false
+   },
+   "changed_px": 11026,
+   "changed_pct": 1.909
+  },
+  {
+   "a": {
+    "tell": "none",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "none",
+    "grow_on_complete": false
+   },
+   "changed_px": 3,
+   "changed_pct": 0.001
+  },
+  {
+   "a": {
+    "tell": "none",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "mark",
+    "grow_on_complete": true
+   },
+   "changed_px": 2007,
+   "changed_pct": 0.347
+  },
+  {
+   "a": {
+    "tell": "none",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "mark",
+    "grow_on_complete": false
+   },
+   "changed_px": 2007,
+   "changed_pct": 0.347
+  },
+  {
+   "a": {
+    "tell": "none",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": true
+   },
+   "changed_px": 10664,
+   "changed_pct": 1.846
+  },
+  {
+   "a": {
+    "tell": "none",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": false
+   },
+   "changed_px": 10664,
+   "changed_pct": 1.846
+  },
+  {
+   "a": {
+    "tell": "none",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "mark",
+    "grow_on_complete": true
+   },
+   "changed_px": 2010,
+   "changed_pct": 0.348
+  },
+  {
+   "a": {
+    "tell": "none",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "mark",
+    "grow_on_complete": false
+   },
+   "changed_px": 2010,
+   "changed_pct": 0.348
+  },
+  {
+   "a": {
+    "tell": "none",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": true
+   },
+   "changed_px": 10667,
+   "changed_pct": 1.847
+  },
+  {
+   "a": {
+    "tell": "none",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": false
+   },
+   "changed_px": 10667,
+   "changed_pct": 1.847
+  },
+  {
+   "a": {
+    "tell": "mark",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "mark",
+    "grow_on_complete": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "tell": "mark",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": true
+   },
+   "changed_px": 11480,
+   "changed_pct": 1.988
+  },
+  {
+   "a": {
+    "tell": "mark",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": false
+   },
+   "changed_px": 11480,
+   "changed_pct": 1.988
+  },
+  {
+   "a": {
+    "tell": "mark",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": true
+   },
+   "changed_px": 11480,
+   "changed_pct": 1.988
+  },
+  {
+   "a": {
+    "tell": "mark",
+    "grow_on_complete": false
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": false
+   },
+   "changed_px": 11480,
+   "changed_pct": 1.988
+  },
+  {
+   "a": {
+    "tell": "exemplar",
+    "grow_on_complete": true
+   },
+   "b": {
+    "tell": "exemplar",
+    "grow_on_complete": false
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
   }
  ]
 }

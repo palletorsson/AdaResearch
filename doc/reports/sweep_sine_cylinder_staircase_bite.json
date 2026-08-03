@@ -1,68 +1,344 @@
 {
  "sweep": "sine_cylinder_staircase",
- "peak_changed_pct": 5.437,
- "subject_pct": 5.609,
+ "peak_changed_pct": 3.288,
+ "subject_pct": 5.111,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "provision": "membrane"
+    "provision": "membrane",
+    "show_planes": true
    },
    "b": {
-    "provision": "none"
+    "provision": "membrane",
+    "show_planes": false
    },
-   "changed_px": 15697,
-   "changed_pct": 2.718
+   "changed_px": 5999,
+   "changed_pct": 1.039
   },
   {
    "a": {
-    "provision": "membrane"
+    "provision": "membrane",
+    "show_planes": true
    },
    "b": {
-    "provision": "rail"
+    "provision": "none",
+    "show_planes": true
    },
-   "changed_px": 21297,
-   "changed_pct": 3.687
+   "changed_px": 5999,
+   "changed_pct": 1.039
   },
   {
    "a": {
-    "provision": "membrane"
+    "provision": "membrane",
+    "show_planes": true
    },
    "b": {
-    "provision": "posts"
+    "provision": "none",
+    "show_planes": false
    },
-   "changed_px": 26533,
-   "changed_pct": 4.594
+   "changed_px": 5999,
+   "changed_pct": 1.039
   },
   {
    "a": {
-    "provision": "none"
+    "provision": "membrane",
+    "show_planes": true
    },
    "b": {
-    "provision": "rail"
+    "provision": "rail",
+    "show_planes": true
    },
-   "changed_px": 22139,
-   "changed_pct": 3.833
+   "changed_px": 10308,
+   "changed_pct": 1.785
   },
   {
    "a": {
-    "provision": "none"
+    "provision": "membrane",
+    "show_planes": true
    },
    "b": {
-    "provision": "posts"
+    "provision": "rail",
+    "show_planes": false
    },
-   "changed_px": 15642,
-   "changed_pct": 2.708
+   "changed_px": 10308,
+   "changed_pct": 1.785
   },
   {
    "a": {
-    "provision": "rail"
+    "provision": "membrane",
+    "show_planes": true
    },
    "b": {
-    "provision": "posts"
+    "provision": "posts",
+    "show_planes": true
    },
-   "changed_px": 31403,
-   "changed_pct": 5.437
+   "changed_px": 18990,
+   "changed_pct": 3.288
+  },
+  {
+   "a": {
+    "provision": "membrane",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": false
+   },
+   "changed_px": 18990,
+   "changed_pct": 3.288
+  },
+  {
+   "a": {
+    "provision": "membrane",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "none",
+    "show_planes": true
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "provision": "membrane",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "none",
+    "show_planes": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "provision": "membrane",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "rail",
+    "show_planes": true
+   },
+   "changed_px": 5387,
+   "changed_pct": 0.933
+  },
+  {
+   "a": {
+    "provision": "membrane",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "rail",
+    "show_planes": false
+   },
+   "changed_px": 5387,
+   "changed_pct": 0.933
+  },
+  {
+   "a": {
+    "provision": "membrane",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": true
+   },
+   "changed_px": 14057,
+   "changed_pct": 2.434
+  },
+  {
+   "a": {
+    "provision": "membrane",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": false
+   },
+   "changed_px": 14057,
+   "changed_pct": 2.434
+  },
+  {
+   "a": {
+    "provision": "none",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "none",
+    "show_planes": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "provision": "none",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "rail",
+    "show_planes": true
+   },
+   "changed_px": 5387,
+   "changed_pct": 0.933
+  },
+  {
+   "a": {
+    "provision": "none",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "rail",
+    "show_planes": false
+   },
+   "changed_px": 5387,
+   "changed_pct": 0.933
+  },
+  {
+   "a": {
+    "provision": "none",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": true
+   },
+   "changed_px": 14057,
+   "changed_pct": 2.434
+  },
+  {
+   "a": {
+    "provision": "none",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": false
+   },
+   "changed_px": 14057,
+   "changed_pct": 2.434
+  },
+  {
+   "a": {
+    "provision": "none",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "rail",
+    "show_planes": true
+   },
+   "changed_px": 5387,
+   "changed_pct": 0.933
+  },
+  {
+   "a": {
+    "provision": "none",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "rail",
+    "show_planes": false
+   },
+   "changed_px": 5387,
+   "changed_pct": 0.933
+  },
+  {
+   "a": {
+    "provision": "none",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": true
+   },
+   "changed_px": 14057,
+   "changed_pct": 2.434
+  },
+  {
+   "a": {
+    "provision": "none",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": false
+   },
+   "changed_px": 14057,
+   "changed_pct": 2.434
+  },
+  {
+   "a": {
+    "provision": "rail",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "rail",
+    "show_planes": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "provision": "rail",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": true
+   },
+   "changed_px": 18232,
+   "changed_pct": 3.157
+  },
+  {
+   "a": {
+    "provision": "rail",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": false
+   },
+   "changed_px": 18232,
+   "changed_pct": 3.157
+  },
+  {
+   "a": {
+    "provision": "rail",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": true
+   },
+   "changed_px": 18232,
+   "changed_pct": 3.157
+  },
+  {
+   "a": {
+    "provision": "rail",
+    "show_planes": false
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": false
+   },
+   "changed_px": 18232,
+   "changed_pct": 3.157
+  },
+  {
+   "a": {
+    "provision": "posts",
+    "show_planes": true
+   },
+   "b": {
+    "provision": "posts",
+    "show_planes": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
   }
  ]
 }

@@ -1,68 +1,344 @@
 {
  "sweep": "grabcolorcollection",
- "peak_changed_pct": 11.979,
+ "peak_changed_pct": 12.004,
  "subject_pct": 9.676,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "arrangement": "grid"
+    "arrangement": "grid",
+    "paper_spacing": 0.01
    },
    "b": {
-    "arrangement": "ramp"
+    "arrangement": "grid",
+    "paper_spacing": 0.02
    },
-   "changed_px": 32354,
-   "changed_pct": 5.601
+   "changed_px": 613,
+   "changed_pct": 0.106
   },
   {
    "a": {
-    "arrangement": "grid"
+    "arrangement": "grid",
+    "paper_spacing": 0.01
    },
    "b": {
-    "arrangement": "ring"
+    "arrangement": "ramp",
+    "paper_spacing": 0.01
    },
-   "changed_px": 30945,
+   "changed_px": 32355,
+   "changed_pct": 5.602
+  },
+  {
+   "a": {
+    "arrangement": "grid",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 32355,
+   "changed_pct": 5.602
+  },
+  {
+   "a": {
+    "arrangement": "grid",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "ring",
+    "paper_spacing": 0.01
+   },
+   "changed_px": 30946,
    "changed_pct": 5.358
   },
   {
    "a": {
-    "arrangement": "grid"
+    "arrangement": "grid",
+    "paper_spacing": 0.01
    },
    "b": {
-    "arrangement": "stack"
+    "arrangement": "ring",
+    "paper_spacing": 0.02
    },
-   "changed_px": 69188,
-   "changed_pct": 11.979
+   "changed_px": 30946,
+   "changed_pct": 5.358
   },
   {
    "a": {
-    "arrangement": "ramp"
+    "arrangement": "grid",
+    "paper_spacing": 0.01
    },
    "b": {
-    "arrangement": "ring"
+    "arrangement": "stack",
+    "paper_spacing": 0.01
+   },
+   "changed_px": 69211,
+   "changed_pct": 11.983
+  },
+  {
+   "a": {
+    "arrangement": "grid",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 69211,
+   "changed_pct": 11.983
+  },
+  {
+   "a": {
+    "arrangement": "grid",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.01
+   },
+   "changed_px": 29854,
+   "changed_pct": 5.169
+  },
+  {
+   "a": {
+    "arrangement": "grid",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 29854,
+   "changed_pct": 5.169
+  },
+  {
+   "a": {
+    "arrangement": "grid",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "ring",
+    "paper_spacing": 0.01
+   },
+   "changed_px": 30981,
+   "changed_pct": 5.364
+  },
+  {
+   "a": {
+    "arrangement": "grid",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "ring",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 30982,
+   "changed_pct": 5.364
+  },
+  {
+   "a": {
+    "arrangement": "grid",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.01
+   },
+   "changed_px": 69335,
+   "changed_pct": 12.004
+  },
+  {
+   "a": {
+    "arrangement": "grid",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 69335,
+   "changed_pct": 12.004
+  },
+  {
+   "a": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "ring",
+    "paper_spacing": 0.01
    },
    "changed_px": 25422,
    "changed_pct": 4.401
   },
   {
    "a": {
-    "arrangement": "ramp"
+    "arrangement": "ramp",
+    "paper_spacing": 0.01
    },
    "b": {
-    "arrangement": "stack"
+    "arrangement": "ring",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 25423,
+   "changed_pct": 4.401
+  },
+  {
+   "a": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.01
    },
    "changed_px": 67163,
    "changed_pct": 11.628
   },
   {
    "a": {
-    "arrangement": "ring"
+    "arrangement": "ramp",
+    "paper_spacing": 0.01
    },
    "b": {
-    "arrangement": "stack"
+    "arrangement": "stack",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 67163,
+   "changed_pct": 11.628
+  },
+  {
+   "a": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "ring",
+    "paper_spacing": 0.01
+   },
+   "changed_px": 25422,
+   "changed_pct": 4.401
+  },
+  {
+   "a": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "ring",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 25423,
+   "changed_pct": 4.401
+  },
+  {
+   "a": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.01
+   },
+   "changed_px": 67163,
+   "changed_pct": 11.628
+  },
+  {
+   "a": {
+    "arrangement": "ramp",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 67163,
+   "changed_pct": 11.628
+  },
+  {
+   "a": {
+    "arrangement": "ring",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "ring",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "arrangement": "ring",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.01
    },
    "changed_px": 59029,
    "changed_pct": 10.22
+  },
+  {
+   "a": {
+    "arrangement": "ring",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 59029,
+   "changed_pct": 10.22
+  },
+  {
+   "a": {
+    "arrangement": "ring",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.01
+   },
+   "changed_px": 59030,
+   "changed_pct": 10.22
+  },
+  {
+   "a": {
+    "arrangement": "ring",
+    "paper_spacing": 0.02
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 59030,
+   "changed_pct": 10.22
+  },
+  {
+   "a": {
+    "arrangement": "stack",
+    "paper_spacing": 0.01
+   },
+   "b": {
+    "arrangement": "stack",
+    "paper_spacing": 0.02
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
   }
  ]
 }

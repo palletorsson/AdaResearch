@@ -1,0 +1,68 @@
+{
+ "sweep": "length_lantern",
+ "peak_changed_pct": 0.075,
+ "subject_pct": 4.335,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "workings": "outcome"
+   },
+   "b": {
+    "workings": "trace"
+   },
+   "changed_px": 212,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "workings": "outcome"
+   },
+   "b": {
+    "workings": "operands"
+   },
+   "changed_px": 250,
+   "changed_pct": 0.043
+  },
+  {
+   "a": {
+    "workings": "outcome"
+   },
+   "b": {
+    "workings": "expression"
+   },
+   "changed_px": 433,
+   "changed_pct": 0.075
+  },
+  {
+   "a": {
+    "workings": "trace"
+   },
+   "b": {
+    "workings": "operands"
+   },
+   "changed_px": 40,
+   "changed_pct": 0.007
+  },
+  {
+   "a": {
+    "workings": "trace"
+   },
+   "b": {
+    "workings": "expression"
+   },
+   "changed_px": 223,
+   "changed_pct": 0.039
+  },
+  {
+   "a": {
+    "workings": "operands"
+   },
+   "b": {
+    "workings": "expression"
+   },
+   "changed_px": 185,
+   "changed_pct": 0.032
+  }
+ ]
+}

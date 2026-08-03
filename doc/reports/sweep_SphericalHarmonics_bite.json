@@ -1,0 +1,68 @@
+{
+ "sweep": "SphericalHarmonics",
+ "peak_changed_pct": 13.328,
+ "subject_pct": 19.219,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "surface": "glass"
+   },
+   "b": {
+    "surface": "nodal"
+   },
+   "changed_px": 72591,
+   "changed_pct": 12.568
+  },
+  {
+   "a": {
+    "surface": "glass"
+   },
+   "b": {
+    "surface": "lobed"
+   },
+   "changed_px": 71675,
+   "changed_pct": 12.409
+  },
+  {
+   "a": {
+    "surface": "glass"
+   },
+   "b": {
+    "surface": "wire"
+   },
+   "changed_px": 76975,
+   "changed_pct": 13.327
+  },
+  {
+   "a": {
+    "surface": "nodal"
+   },
+   "b": {
+    "surface": "lobed"
+   },
+   "changed_px": 62933,
+   "changed_pct": 10.896
+  },
+  {
+   "a": {
+    "surface": "nodal"
+   },
+   "b": {
+    "surface": "wire"
+   },
+   "changed_px": 76984,
+   "changed_pct": 13.328
+  },
+  {
+   "a": {
+    "surface": "lobed"
+   },
+   "b": {
+    "surface": "wire"
+   },
+   "changed_px": 43238,
+   "changed_pct": 7.486
+  }
+ ]
+}

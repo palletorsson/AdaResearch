@@ -1,80 +1,400 @@
 {
  "sweep": "ten_print_maze_3d",
- "peak_changed_pct": 7.786,
- "subject_pct": 7.81,
+ "peak_changed_pct": 7.438,
+ "subject_pct": 7.456,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
     "maze_seed": 20260802,
-    "impression": "stroke"
+    "impression": "stroke",
+    "show_marker_disks": true
    },
    "b": {
     "maze_seed": 20260802,
-    "impression": "character"
+    "impression": "stroke",
+    "show_marker_disks": false
    },
-   "changed_px": 12348,
-   "changed_pct": 2.138
+   "changed_px": 201,
+   "changed_pct": 0.035
   },
   {
    "a": {
     "maze_seed": 20260802,
-    "impression": "stroke"
+    "impression": "stroke",
+    "show_marker_disks": true
    },
    "b": {
     "maze_seed": 20260802,
-    "impression": "wall"
+    "impression": "character",
+    "show_marker_disks": true
    },
-   "changed_px": 27548,
-   "changed_pct": 4.769
+   "changed_px": 17809,
+   "changed_pct": 3.083
   },
   {
    "a": {
     "maze_seed": 20260802,
-    "impression": "stroke"
+    "impression": "stroke",
+    "show_marker_disks": true
    },
    "b": {
     "maze_seed": 20260802,
-    "impression": "tile"
+    "impression": "character",
+    "show_marker_disks": false
    },
-   "changed_px": 44145,
-   "changed_pct": 7.643
+   "changed_px": 18045,
+   "changed_pct": 3.124
   },
   {
    "a": {
     "maze_seed": 20260802,
-    "impression": "character"
+    "impression": "stroke",
+    "show_marker_disks": true
    },
    "b": {
     "maze_seed": 20260802,
-    "impression": "wall"
+    "impression": "wall",
+    "show_marker_disks": true
    },
-   "changed_px": 31463,
-   "changed_pct": 5.447
+   "changed_px": 27896,
+   "changed_pct": 4.83
   },
   {
    "a": {
     "maze_seed": 20260802,
-    "impression": "character"
+    "impression": "stroke",
+    "show_marker_disks": true
    },
    "b": {
     "maze_seed": 20260802,
-    "impression": "tile"
+    "impression": "wall",
+    "show_marker_disks": false
    },
-   "changed_px": 42219,
-   "changed_pct": 7.309
+   "changed_px": 28085,
+   "changed_pct": 4.862
   },
   {
    "a": {
     "maze_seed": 20260802,
-    "impression": "wall"
+    "impression": "stroke",
+    "show_marker_disks": true
    },
    "b": {
     "maze_seed": 20260802,
-    "impression": "tile"
+    "impression": "tile",
+    "show_marker_disks": true
    },
-   "changed_px": 44974,
-   "changed_pct": 7.786
+   "changed_px": 42239,
+   "changed_pct": 7.313
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": false
+   },
+   "changed_px": 42392,
+   "changed_pct": 7.339
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": true
+   },
+   "changed_px": 17997,
+   "changed_pct": 3.116
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": false
+   },
+   "changed_px": 17897,
+   "changed_pct": 3.099
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": true
+   },
+   "changed_px": 28085,
+   "changed_pct": 4.862
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": false
+   },
+   "changed_px": 27941,
+   "changed_pct": 4.837
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": true
+   },
+   "changed_px": 42392,
+   "changed_pct": 7.339
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "stroke",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": false
+   },
+   "changed_px": 42330,
+   "changed_pct": 7.329
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": false
+   },
+   "changed_px": 637,
+   "changed_pct": 0.11
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": true
+   },
+   "changed_px": 30520,
+   "changed_pct": 5.284
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": false
+   },
+   "changed_px": 30701,
+   "changed_pct": 5.315
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": true
+   },
+   "changed_px": 39274,
+   "changed_pct": 6.8
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": false
+   },
+   "changed_px": 39429,
+   "changed_pct": 6.826
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": true
+   },
+   "changed_px": 30746,
+   "changed_pct": 5.323
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": false
+   },
+   "changed_px": 30616,
+   "changed_pct": 5.301
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": true
+   },
+   "changed_px": 39437,
+   "changed_pct": 6.828
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "character",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": false
+   },
+   "changed_px": 39361,
+   "changed_pct": 6.815
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": false
+   },
+   "changed_px": 200,
+   "changed_pct": 0.035
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": true
+   },
+   "changed_px": 42811,
+   "changed_pct": 7.412
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": false
+   },
+   "changed_px": 42961,
+   "changed_pct": 7.438
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": true
+   },
+   "changed_px": 42961,
+   "changed_pct": 7.438
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "wall",
+    "show_marker_disks": false
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": false
+   },
+   "changed_px": 42903,
+   "changed_pct": 7.428
+  },
+  {
+   "a": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": true
+   },
+   "b": {
+    "maze_seed": 20260802,
+    "impression": "tile",
+    "show_marker_disks": false
+   },
+   "changed_px": 193,
+   "changed_pct": 0.033
   }
  ]
 }

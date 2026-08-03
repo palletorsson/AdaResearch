@@ -1,68 +1,344 @@
 {
  "sweep": "foucault_pendulum",
- "peak_changed_pct": 4.501,
- "subject_pct": 3.594,
- "verdict": "BITES",
+ "peak_changed_pct": 1.182,
+ "subject_pct": 3.452,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
-    "interference": "none"
+    "interference": "none",
+    "show_frame": true
    },
    "b": {
-    "interference": "fence"
+    "interference": "none",
+    "show_frame": false
    },
-   "changed_px": 16345,
-   "changed_pct": 2.83
+   "changed_px": 5514,
+   "changed_pct": 0.955
   },
   {
    "a": {
-    "interference": "none"
+    "interference": "none",
+    "show_frame": true
    },
    "b": {
-    "interference": "attractors"
+    "interference": "fence",
+    "show_frame": true
    },
-   "changed_px": 25999,
-   "changed_pct": 4.501
+   "changed_px": 256,
+   "changed_pct": 0.044
   },
   {
    "a": {
-    "interference": "none"
+    "interference": "none",
+    "show_frame": true
    },
    "b": {
-    "interference": "swarm"
+    "interference": "fence",
+    "show_frame": false
    },
-   "changed_px": 17684,
-   "changed_pct": 3.062
+   "changed_px": 70,
+   "changed_pct": 0.012
   },
   {
    "a": {
-    "interference": "fence"
+    "interference": "none",
+    "show_frame": true
    },
    "b": {
-    "interference": "attractors"
+    "interference": "attractors",
+    "show_frame": true
    },
-   "changed_px": 23589,
-   "changed_pct": 4.084
+   "changed_px": 1302,
+   "changed_pct": 0.225
   },
   {
    "a": {
-    "interference": "fence"
+    "interference": "none",
+    "show_frame": true
    },
    "b": {
-    "interference": "swarm"
+    "interference": "attractors",
+    "show_frame": false
    },
-   "changed_px": 1734,
-   "changed_pct": 0.3
+   "changed_px": 1314,
+   "changed_pct": 0.227
   },
   {
    "a": {
-    "interference": "attractors"
+    "interference": "none",
+    "show_frame": true
    },
    "b": {
-    "interference": "swarm"
+    "interference": "swarm",
+    "show_frame": true
    },
-   "changed_px": 23703,
-   "changed_pct": 4.104
+   "changed_px": 1633,
+   "changed_pct": 0.283
+  },
+  {
+   "a": {
+    "interference": "none",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": false
+   },
+   "changed_px": 1640,
+   "changed_pct": 0.284
+  },
+  {
+   "a": {
+    "interference": "none",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "fence",
+    "show_frame": true
+   },
+   "changed_px": 5351,
+   "changed_pct": 0.926
+  },
+  {
+   "a": {
+    "interference": "none",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "fence",
+    "show_frame": false
+   },
+   "changed_px": 5488,
+   "changed_pct": 0.95
+  },
+  {
+   "a": {
+    "interference": "none",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "attractors",
+    "show_frame": true
+   },
+   "changed_px": 6200,
+   "changed_pct": 1.073
+  },
+  {
+   "a": {
+    "interference": "none",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "attractors",
+    "show_frame": false
+   },
+   "changed_px": 6201,
+   "changed_pct": 1.074
+  },
+  {
+   "a": {
+    "interference": "none",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": true
+   },
+   "changed_px": 6829,
+   "changed_pct": 1.182
+  },
+  {
+   "a": {
+    "interference": "none",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": false
+   },
+   "changed_px": 6813,
+   "changed_pct": 1.18
+  },
+  {
+   "a": {
+    "interference": "fence",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "fence",
+    "show_frame": false
+   },
+   "changed_px": 229,
+   "changed_pct": 0.04
+  },
+  {
+   "a": {
+    "interference": "fence",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "attractors",
+    "show_frame": true
+   },
+   "changed_px": 1323,
+   "changed_pct": 0.229
+  },
+  {
+   "a": {
+    "interference": "fence",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "attractors",
+    "show_frame": false
+   },
+   "changed_px": 1315,
+   "changed_pct": 0.228
+  },
+  {
+   "a": {
+    "interference": "fence",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": true
+   },
+   "changed_px": 1637,
+   "changed_pct": 0.283
+  },
+  {
+   "a": {
+    "interference": "fence",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": false
+   },
+   "changed_px": 1621,
+   "changed_pct": 0.281
+  },
+  {
+   "a": {
+    "interference": "fence",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "attractors",
+    "show_frame": true
+   },
+   "changed_px": 1302,
+   "changed_pct": 0.225
+  },
+  {
+   "a": {
+    "interference": "fence",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "attractors",
+    "show_frame": false
+   },
+   "changed_px": 1312,
+   "changed_pct": 0.227
+  },
+  {
+   "a": {
+    "interference": "fence",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": true
+   },
+   "changed_px": 1632,
+   "changed_pct": 0.283
+  },
+  {
+   "a": {
+    "interference": "fence",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": false
+   },
+   "changed_px": 1639,
+   "changed_pct": 0.284
+  },
+  {
+   "a": {
+    "interference": "attractors",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "attractors",
+    "show_frame": false
+   },
+   "changed_px": 911,
+   "changed_pct": 0.158
+  },
+  {
+   "a": {
+    "interference": "attractors",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": true
+   },
+   "changed_px": 2516,
+   "changed_pct": 0.436
+  },
+  {
+   "a": {
+    "interference": "attractors",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": false
+   },
+   "changed_px": 2519,
+   "changed_pct": 0.436
+  },
+  {
+   "a": {
+    "interference": "attractors",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": true
+   },
+   "changed_px": 2512,
+   "changed_pct": 0.435
+  },
+  {
+   "a": {
+    "interference": "attractors",
+    "show_frame": false
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": false
+   },
+   "changed_px": 2514,
+   "changed_pct": 0.435
+  },
+  {
+   "a": {
+    "interference": "swarm",
+    "show_frame": true
+   },
+   "b": {
+    "interference": "swarm",
+    "show_frame": false
+   },
+   "changed_px": 341,
+   "changed_pct": 0.059
   }
  ]
 }

@@ -1,68 +1,344 @@
 {
  "sweep": "facade_builder",
- "peak_changed_pct": 9.203,
- "subject_pct": 11.079,
+ "peak_changed_pct": 6.326,
+ "subject_pct": 9.488,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "armature": "none"
+    "armature": "none",
+    "symmetry": "None"
    },
    "b": {
-    "armature": "datum"
+    "armature": "none",
+    "symmetry": "Bilateral"
    },
-   "changed_px": 32629,
-   "changed_pct": 5.649
+   "changed_px": 0,
+   "changed_pct": 0.0
   },
   {
    "a": {
-    "armature": "none"
+    "armature": "none",
+    "symmetry": "None"
    },
    "b": {
-    "armature": "scaffold"
+    "armature": "datum",
+    "symmetry": "None"
    },
-   "changed_px": 51856,
-   "changed_pct": 8.978
+   "changed_px": 9673,
+   "changed_pct": 1.675
   },
   {
    "a": {
-    "armature": "none"
+    "armature": "none",
+    "symmetry": "None"
    },
    "b": {
-    "armature": "gantry"
+    "armature": "datum",
+    "symmetry": "Bilateral"
    },
-   "changed_px": 51683,
-   "changed_pct": 8.948
+   "changed_px": 9673,
+   "changed_pct": 1.675
   },
   {
    "a": {
-    "armature": "datum"
+    "armature": "none",
+    "symmetry": "None"
    },
    "b": {
-    "armature": "scaffold"
+    "armature": "scaffold",
+    "symmetry": "None"
    },
-   "changed_px": 48154,
-   "changed_pct": 8.337
+   "changed_px": 27701,
+   "changed_pct": 4.796
   },
   {
    "a": {
-    "armature": "datum"
+    "armature": "none",
+    "symmetry": "None"
    },
    "b": {
-    "armature": "gantry"
+    "armature": "scaffold",
+    "symmetry": "Bilateral"
    },
-   "changed_px": 48329,
-   "changed_pct": 8.367
+   "changed_px": 27701,
+   "changed_pct": 4.796
   },
   {
    "a": {
-    "armature": "scaffold"
+    "armature": "none",
+    "symmetry": "None"
    },
    "b": {
-    "armature": "gantry"
+    "armature": "gantry",
+    "symmetry": "None"
    },
-   "changed_px": 53154,
-   "changed_pct": 9.203
+   "changed_px": 16807,
+   "changed_pct": 2.91
+  },
+  {
+   "a": {
+    "armature": "none",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 16807,
+   "changed_pct": 2.91
+  },
+  {
+   "a": {
+    "armature": "none",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "datum",
+    "symmetry": "None"
+   },
+   "changed_px": 9673,
+   "changed_pct": 1.675
+  },
+  {
+   "a": {
+    "armature": "none",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "datum",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 9673,
+   "changed_pct": 1.675
+  },
+  {
+   "a": {
+    "armature": "none",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "scaffold",
+    "symmetry": "None"
+   },
+   "changed_px": 27701,
+   "changed_pct": 4.796
+  },
+  {
+   "a": {
+    "armature": "none",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "scaffold",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 27701,
+   "changed_pct": 4.796
+  },
+  {
+   "a": {
+    "armature": "none",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "None"
+   },
+   "changed_px": 16807,
+   "changed_pct": 2.91
+  },
+  {
+   "a": {
+    "armature": "none",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 16807,
+   "changed_pct": 2.91
+  },
+  {
+   "a": {
+    "armature": "datum",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "datum",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "armature": "datum",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "scaffold",
+    "symmetry": "None"
+   },
+   "changed_px": 28175,
+   "changed_pct": 4.878
+  },
+  {
+   "a": {
+    "armature": "datum",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "scaffold",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 28175,
+   "changed_pct": 4.878
+  },
+  {
+   "a": {
+    "armature": "datum",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "None"
+   },
+   "changed_px": 23165,
+   "changed_pct": 4.011
+  },
+  {
+   "a": {
+    "armature": "datum",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 23165,
+   "changed_pct": 4.011
+  },
+  {
+   "a": {
+    "armature": "datum",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "scaffold",
+    "symmetry": "None"
+   },
+   "changed_px": 28175,
+   "changed_pct": 4.878
+  },
+  {
+   "a": {
+    "armature": "datum",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "scaffold",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 28175,
+   "changed_pct": 4.878
+  },
+  {
+   "a": {
+    "armature": "datum",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "None"
+   },
+   "changed_px": 23165,
+   "changed_pct": 4.011
+  },
+  {
+   "a": {
+    "armature": "datum",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 23165,
+   "changed_pct": 4.011
+  },
+  {
+   "a": {
+    "armature": "scaffold",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "scaffold",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "armature": "scaffold",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "None"
+   },
+   "changed_px": 36537,
+   "changed_pct": 6.326
+  },
+  {
+   "a": {
+    "armature": "scaffold",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 36537,
+   "changed_pct": 6.326
+  },
+  {
+   "a": {
+    "armature": "scaffold",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "None"
+   },
+   "changed_px": 36537,
+   "changed_pct": 6.326
+  },
+  {
+   "a": {
+    "armature": "scaffold",
+    "symmetry": "Bilateral"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 36537,
+   "changed_pct": 6.326
+  },
+  {
+   "a": {
+    "armature": "gantry",
+    "symmetry": "None"
+   },
+   "b": {
+    "armature": "gantry",
+    "symmetry": "Bilateral"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
   }
  ]
 }

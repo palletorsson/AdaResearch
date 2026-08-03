@@ -1,0 +1,68 @@
+{
+ "sweep": "VectorMotion",
+ "peak_changed_pct": 4.128,
+ "subject_pct": 3.294,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "drive": "constant"
+   },
+   "b": {
+    "drive": "central"
+   },
+   "changed_px": 16292,
+   "changed_pct": 2.821
+  },
+  {
+   "a": {
+    "drive": "constant"
+   },
+   "b": {
+    "drive": "inertial"
+   },
+   "changed_px": 17331,
+   "changed_pct": 3.001
+  },
+  {
+   "a": {
+    "drive": "constant"
+   },
+   "b": {
+    "drive": "resisted"
+   },
+   "changed_px": 19752,
+   "changed_pct": 3.42
+  },
+  {
+   "a": {
+    "drive": "central"
+   },
+   "b": {
+    "drive": "inertial"
+   },
+   "changed_px": 23843,
+   "changed_pct": 4.128
+  },
+  {
+   "a": {
+    "drive": "central"
+   },
+   "b": {
+    "drive": "resisted"
+   },
+   "changed_px": 21609,
+   "changed_pct": 3.741
+  },
+  {
+   "a": {
+    "drive": "inertial"
+   },
+   "b": {
+    "drive": "resisted"
+   },
+   "changed_px": 21287,
+   "changed_pct": 3.685
+  }
+ ]
+}
