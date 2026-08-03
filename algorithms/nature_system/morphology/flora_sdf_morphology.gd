@@ -50,9 +50,19 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 
 	var k: float = trunk_r * 1.1   # small: branches weld at joints, keep identity
 	var leaf_k: float = trunk_r * 4.0
+	# Keep the canopy UP so the brown trunk still reads. Drop leaf blobs on the
+	# low forks (bottom third of the tree height) — those dragged the canopy
+	# centroid down until the green mass swallowed the trunk. The remaining
+	# upper tips define a crown that sits above a visible stem.
+	var top_y: float = 0.0
+	for lf in leaves:
+		top_y = maxf(top_y, (lf["c"] as Vector3).y)
+	var crown_floor: float = top_y * 0.45
+	var upper: Array = leaves.filter(func(lf): return (lf["c"] as Vector3).y >= crown_floor)
+	if upper.size() >= 2:
+		leaves = upper
 	# a solid canopy, not a shell of merged tip-blobs with windows: add ONE
-	# central fill blob at the leaves' centroid, sized to their spread, so the
-	# interior is full mass. The tip blobs then just give the outline its lumps.
+	# central fill blob at the (upper) leaves' centroid, sized to their spread.
 	if leaves.size() >= 2:
 		var cen := Vector3.ZERO
 		for lf in leaves:
@@ -61,44 +71,29 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 		var spread: float = 0.0
 		for lf in leaves:
 			spread = maxf(spread, (lf["c"] as Vector3).distance_to(cen))
-		leaves.append({"c": cen, "r": maxf(spread * 0.85, trunk_r * 4.0)})
+		leaves.append({"c": cen, "r": maxf(spread * 0.8, trunk_r * 3.5)})
 
-	# bounds from the skeleton (needed BEFORE the field, so the grid clamp below
-	# can be computed from the real sample step)
-	var lo := Vector3(1e9, 0.0, 1e9)
-	var hi := Vector3(-1e9, 0.0, -1e9)
+	# DECLARE the trunk skeleton as capsules; SdfMesher.mesh_primitives clamps
+	# every branch radius to the sample grid (a depth-4 twig is ~0.21 of the
+	# trunk — below one cell the marching field never crosses zero and the branch
+	# vanishes, the "partly-invisible body") and caps the resolution. Both laws
+	# are the mesher's now, not this builder's — the tree can no longer forget the
+	# clamp the way it once did.
+	var trunk_prims: Array = []
 	for c in caps:
-		lo = lo.min(c["a"]).min(c["b"]); hi = hi.max(c["a"]).max(c["b"])
-	var pad := Vector3.ONE * (trunk_r * 3.0)
-
-	# CLAMP EVERY RADIUS TO THE GRID — the same law CreatureSdfMorphology already
-	# follows. Branch radius decays 0.68 per fork, so a depth-4 twig is ~0.21 of
-	# the trunk; below one sample cell the marching field never crosses zero there
-	# and the feature is simply not meshed — the "partly-invisible body". That is
-	# why lowering this builder's LOD used to thin the trunk to a hairline. With
-	# the clamp the thinnest branch is always ~1.6 cells wide, so the tree keeps
-	# its whole skeleton at a coarser resolution and can afford a cheaper tier.
-	var span: Vector3 = (hi + pad) - (lo - pad)
-	var res: int = RES_BY_LOD[lod]
-	var step: float = maxf(span.x, maxf(span.y, span.z)) / float(res)
-	var min_r: float = step * 1.6
-	for c in caps:
-		c["ra"] = maxf(float(c["ra"]), min_r)
-		c["rb"] = maxf(float(c["rb"]), min_r)
-
-	var field := func(p: Vector3) -> float:
-		var d: float = 1e9
-		for c in caps:
-			d = Mesher.smin(d, Mesher.sd_capsule_tapered(p, c["a"], c["b"], c["ra"], c["rb"]), k)
-		return d
-
-	var mesh: ArrayMesh = Mesher.mesh_field(field, lo - pad, hi + pad, RES_BY_LOD[lod])
+		trunk_prims.append({"kind": "capsule", "a": c["a"], "b": c["b"],
+			"ra": float(c["ra"]), "rb": float(c["rb"])})
+	var mesh: ArrayMesh = Mesher.mesh_primitives(trunk_prims, k, RES_BY_LOD[lod])
 	if mesh != null:
 		var mi := MeshInstance3D.new()
 		mi.name = "Trunk"
 		mi.mesh = mesh
 		var mat := StandardMaterial3D.new()
-		mat.albedo_color = dna.primary_color
+		# BARK, explicitly — the tree recipe's primary_color is foliage-green for
+		# some seeds, which rendered the trunk green. A trunk is bark; derive a
+		# brown from the DNA's primary hue so seeds still vary, but never green.
+		var pc: Color = dna.primary_color
+		mat.albedo_color = Color(0.34, 0.24, 0.16).lerp(Color(pc.r, pc.g * 0.5, pc.b * 0.4), 0.4)
 		mat.roughness = 0.9
 		mat.cull_mode = BaseMaterial3D.CULL_DISABLED  # never see-through
 		mi.material_override = mat
@@ -106,17 +101,10 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 
 	# canopy: soft leaf blobs at the tips, their own SDF (green), lightly blended
 	if not leaves.is_empty():
-		var leaf_field := func(p: Vector3) -> float:
-			var d: float = 1e9
-			for lf in leaves:
-				d = Mesher.smin(d, Mesher.sd_sphere(p, lf["c"], lf["r"]), leaf_k)
-			return d
-		var llo := Vector3(1e9, 1e9, 1e9)
-		var lhi := Vector3(-1e9, -1e9, -1e9)
+		var leaf_prims: Array = []
 		for lf in leaves:
-			llo = llo.min(lf["c"] - Vector3.ONE * lf["r"])
-			lhi = lhi.max(lf["c"] + Vector3.ONE * lf["r"])
-		var leaf_mesh: ArrayMesh = Mesher.mesh_field(leaf_field, llo, lhi, RES_BY_LOD[lod])
+			leaf_prims.append({"kind": "sphere", "c": lf["c"], "r": float(lf["r"])})
+		var leaf_mesh: ArrayMesh = Mesher.mesh_primitives(leaf_prims, leaf_k, RES_BY_LOD[lod])
 		if leaf_mesh != null:
 			var lmi := MeshInstance3D.new()
 			lmi.name = "Canopy"

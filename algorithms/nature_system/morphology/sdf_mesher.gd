@@ -69,6 +69,83 @@ static func smin(a: float, b: float, k: float) -> float:
 	return lerpf(b, a, h) - k * h * (1.0 - h)
 
 
+# ── the two laws every SDF body must obey, enforced HERE so no builder can
+#    forget them (the tree once did — b3178bc31 — because the clamp lived in a
+#    morphology class, not the mesher). Declare primitives, call mesh_primitives,
+#    and both laws apply for free. ──
+#
+#   RES_CAP  — marching tetrahedra cost ~res^3, so an uncapped LOD is a map-load
+#              freeze (four separate perf commits capped it per-body). This
+#              ceiling catches any body, present or future, that asks for more.
+#              A biome cell's body is ~half a metre read from standing height;
+#              res 34 is indistinguishable from res 52 at that range.
+#   MIN_CELLS — a feature thinner than the sample grid never crosses zero and is
+#              simply not meshed (the "partly-invisible body" bug). Every radius
+#              is clamped to at least this many cells so nothing can drop out.
+const RES_CAP: int = 34
+const MIN_CELLS: float = 1.6
+
+
+# The declarative path: hand a list of primitives + a blend, get one clamped,
+# capped, watertight mesh. Primitive dicts:
+#   {"kind":"sphere",   "c":Vector3, "r":float}
+#   {"kind":"capsule",  "a":Vector3, "b":Vector3, "ra":float, "rb":float?}   (rb defaults to ra)
+#   {"kind":"ellipsoid","c":Vector3, "r":Vector3}
+static func mesh_primitives(prims: Array, smooth_k: float, res: int) -> ArrayMesh:
+	if prims.is_empty():
+		return null
+	# bounds from the primitives (with their radii), so the sample volume and
+	# the grid step are derived from the real body — the clamp needs the step.
+	var lo := Vector3(1e9, 1e9, 1e9)
+	var hi := Vector3(-1e9, -1e9, -1e9)
+	for p in prims:
+		var pts: Array = []
+		var rad := Vector3.ZERO
+		match String(p.get("kind", "")):
+			"sphere":
+				pts = [p["c"]]; rad = Vector3.ONE * float(p["r"])
+			"capsule":
+				pts = [p["a"], p["b"]]; rad = Vector3.ONE * maxf(float(p["ra"]), float(p.get("rb", p["ra"])))
+			"ellipsoid":
+				pts = [p["c"]]; rad = p["r"]
+		for pt in pts:
+			lo = lo.min(pt - rad); hi = hi.max(pt + rad)
+	res = clampi(res, 8, RES_CAP)             # LAW 1: the cost ceiling
+	var pad: Vector3 = (hi - lo) * 0.08 + Vector3.ONE * 0.001
+	lo -= pad; hi += pad
+	var span: Vector3 = hi - lo
+	var step: float = maxf(span.x, maxf(span.y, span.z)) / float(res)
+	var min_r: float = step * MIN_CELLS       # LAW 2: nothing thinner than the grid
+	# clamp every radius, then build the smin field over the clamped primitives
+	var clamped: Array = []
+	for p in prims:
+		var q: Dictionary = p.duplicate()
+		match String(p.get("kind", "")):
+			"sphere":
+				q["r"] = maxf(float(p["r"]), min_r)
+			"capsule":
+				q["ra"] = maxf(float(p["ra"]), min_r)
+				q["rb"] = maxf(float(p.get("rb", p["ra"])), min_r)
+			"ellipsoid":
+				var r: Vector3 = p["r"]
+				q["r"] = Vector3(maxf(r.x, min_r), maxf(r.y, min_r), maxf(r.z, min_r))
+		clamped.append(q)
+	var field := func(pt: Vector3) -> float:
+		var d: float = 1e9
+		for q in clamped:
+			var dq: float = 1e9
+			match String(q["kind"]):
+				"sphere":
+					dq = sd_sphere(pt, q["c"], q["r"])
+				"capsule":
+					dq = sd_capsule_tapered(pt, q["a"], q["b"], q["ra"], q["rb"])
+				"ellipsoid":
+					dq = sd_ellipsoid(pt, q["c"], q["r"])
+			d = smin(d, dq, smooth_k)
+		return d
+	return mesh_field(field, lo, hi, res)
+
+
 # ── the mesher ──
 #
 # field: Callable(Vector3) -> float, negative INSIDE the body.
@@ -88,7 +165,7 @@ const _CUBE_OFF: Array = [
 
 
 static func mesh_field(field: Callable, aabb_min: Vector3, aabb_max: Vector3, res: int) -> ArrayMesh:
-	res = clampi(res, 8, 48)
+	res = clampi(res, 8, RES_CAP)   # the cost ceiling applies to raw-field callers too
 	var size: Vector3 = aabb_max - aabb_min
 	var longest: float = maxf(size.x, maxf(size.y, size.z))
 	var step: float = longest / float(res)

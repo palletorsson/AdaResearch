@@ -33,46 +33,30 @@ static func build(dna: CritterDNA, parent: Node3D, trait_mapper: CritterTraitMap
 	if spine.size() < 2:
 		return root
 
-	# body radius sets the blend amount and the sample padding
+	# body radius sets the blend amount
 	var max_r: float = 0.0
 	for s in spine:
 		max_r = maxf(max_r, float((s as Dictionary)["radius"]))
 	if max_r <= 0.0:
 		max_r = 0.05
 	var head_c: Vector3 = spine[0]["position"]
-
-	# bounds first, so we can size the grid step and forbid any feature thinner
-	# than it can resolve (that was the "partly invisible" bug — the thin neck
-	# and tail fell below one grid cell and simply weren't meshed).
+	var head_r: float = float(spine[0]["radius"]) * 1.35   # a rounded head bulge
 	var legs: Array = _leg_nubs(dna, spine)
-	var lo := Vector3(1e9, 1e9, 1e9)
-	var hi := Vector3(-1e9, -1e9, -1e9)
-	for s in spine:
-		lo = lo.min(s["position"]); hi = hi.max(s["position"])
+	var smooth_k: float = max_r * 0.9
+
+	# DECLARE the body as primitives; SdfMesher.mesh_primitives clamps every
+	# radius to the sample grid and caps the resolution — the two laws that used
+	# to live here and that the tree builder once forgot. This body cannot forget
+	# them because it no longer owns them.
+	var prims: Array = [{"kind": "sphere", "c": head_c, "r": head_r}]
+	for i in range(spine.size() - 1):
+		prims.append({"kind": "capsule",
+			"a": spine[i]["position"], "b": spine[i + 1]["position"],
+			"ra": float(spine[i]["radius"]), "rb": float(spine[i + 1]["radius"])})
 	for leg in legs:
-		lo = lo.min(leg["b"]); hi = hi.max(leg["b"])
-	var res: int = RES_BY_LOD[lod]
-	var span: Vector3 = (hi - lo) + Vector3.ONE * max_r * 4.0
-	var step: float = maxf(span.x, maxf(span.y, span.z)) / float(res)
-	# EVERY radius clamped to at least ~1.6 cells → always captured, never a gap
-	var min_r: float = step * 1.6
-	var head_r: float = maxf(float(spine[0]["radius"]) * 1.35, min_r * 1.3)
-	var smooth_k: float = maxf(max_r, min_r) * 0.9
-
-	var field := func(p: Vector3) -> float:
-		var d: float = Mesher.sd_sphere(p, head_c, head_r)
-		for i in range(spine.size() - 1):
-			var a: Vector3 = spine[i]["position"]
-			var b: Vector3 = spine[i + 1]["position"]
-			var ra: float = maxf(float(spine[i]["radius"]), min_r)
-			var rb: float = maxf(float(spine[i + 1]["radius"]), min_r)
-			d = Mesher.smin(d, Mesher.sd_capsule_tapered(p, a, b, ra, rb), smooth_k)
-		for leg in legs:
-			d = Mesher.smin(d, Mesher.sd_capsule(p, leg["a"], leg["b"], maxf(float(leg["r"]), min_r)), smooth_k * 0.7)
-		return d
-
-	var pad: Vector3 = Vector3.ONE * (max_r * 2.0 + head_r)
-	var mesh: ArrayMesh = Mesher.mesh_field(field, lo - pad, hi + pad, res)
+		prims.append({"kind": "capsule", "a": leg["a"], "b": leg["b"],
+			"ra": float(leg["r"]), "rb": float(leg["r"])})
+	var mesh: ArrayMesh = Mesher.mesh_primitives(prims, smooth_k, RES_BY_LOD[lod])
 	if mesh == null:
 		return root
 

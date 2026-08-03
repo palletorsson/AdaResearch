@@ -27,6 +27,16 @@ ENC = os.path.normpath(os.path.join(ROOT, "..", "ada_encyclopedia"))
 MANIFEST = os.path.join(ENC, "public", "biome_gallery.json")
 IMG_DIR = os.path.join(ENC, "public", "biome-gallery", "ex")
 LEDGER = os.path.join(ROOT, "doc", "reports", "biome_research.json")
+COST = os.path.join(ROOT, "doc", "reports", "biome_cost.json")  # probe_biome_cost.gd output
+COST_WARN_MS = 100.0   # a specimen slower than this is a latent map-load freeze
+
+
+def _costs():
+    """slug -> build_ms, from probe_biome_cost.gd. Empty if never run."""
+    if not os.path.isfile(COST):
+        return {}
+    d = json.load(open(COST, encoding="utf-8"))
+    return {s: v.get("build_ms") for s, v in d.get("specimens", {}).items()}
 
 # which tool can improve a specimen, by token shape
 def _improver(token):
@@ -78,19 +88,31 @@ def _save_ledger(led):
 def cmd_agenda(_args):
     inv = _inventory()
     led = _load_ledger()["reviewed"]
+    costs = _costs()
     rows = []
     for slug, spec in inv.items():
         j = led.get(slug)
         score = j["score"] if j else None
-        rows.append((score if score is not None else -1, slug, spec, j))
-    # unreviewed (-1) first, then lowest score
+        # priority: a costly specimen (latent freeze) OR a weak/unreviewed one
+        ms = costs.get(slug)
+        cost_bad = ms is not None and ms > COST_WARN_MS
+        rows.append((score if score is not None else -1, slug, spec, j, ms, cost_bad))
+    # unreviewed (-1) first, then lowest score; costly ones flagged inline
     rows.sort(key=lambda r: (r[0], r[1]))
-    print("BIOME RESEARCH AGENDA — weakest first (%d specimens)\n" % len(rows))
-    for score, slug, spec, j in rows:
+    print("BIOME RESEARCH AGENDA — weakest first (%d specimens)" % len(rows))
+    if costs:
+        slow = sorted(((costs[s], s) for s in costs if costs[s] > COST_WARN_MS), reverse=True)
+        if slow:
+            print("COST WATCH (build > %dms — latent map-load freeze):" % COST_WARN_MS)
+            for ms, s in slow:
+                print("   %-20s %.0f ms  -> %s" % (s, ms, _improver(inv.get(s, {}).get("token", ""))))
+    print()
+    for score, slug, spec, j, ms, cost_bad in rows:
         tag = "  ? " if score < 0 else ("%d/5" % score)
+        cflag = (" [%.0fms!]" % ms) if cost_bad else (" [%.0fms]" % ms if ms is not None else "")
         note = (" — " + j["note"]) if j and j.get("note") else ""
-        print("[%s] %-24s %s" % (tag, slug, spec["token"]))
-        if score < 0 or score <= 3:
+        print("[%s]%s %-24s %s" % (tag, cflag, slug, spec["token"]))
+        if score < 0 or score <= 3 or cost_bad:
             print("       improve: %s%s" % (_improver(spec["token"]), note))
 
 
@@ -124,6 +146,14 @@ def cmd_summary(_args):
     weakest = sorted((led[s]["score"], s) for s in inv if s in led)[:3]
     if weakest:
         print("  weakest reviewed: %s" % ", ".join("%s(%d)" % (s, sc) for sc, s in weakest))
+    costs = _costs()
+    if costs:
+        slow = [(costs[s], s) for s in costs if costs[s] and costs[s] > COST_WARN_MS]
+        print("  COST: %d measured, %d over %dms%s" % (
+            len(costs), len(slow), COST_WARN_MS,
+            (" (%s)" % ", ".join("%s %.0fms" % (s, ms) for ms, s in sorted(slow, reverse=True))) if slow else ""))
+    else:
+        print("  COST: not measured — run probe_biome_cost.gd (look-health is only half the story)")
 
 
 def cmd_sheet(args):

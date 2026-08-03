@@ -376,14 +376,16 @@ const FD_FAMILIES: Array = ["alien_lumen", "button_dome", "fairy_ring", "parasol
 ## sample cells (the law CreatureSdfMorphology already followed), so the skeleton
 ## survives a coarser field and the tree takes the cap too. Any NEW SDF substrate
 ## must still be captured before it joins.
-const BIOME_SDF_MAX_LOD_FUNGUS: int = 1
-const BIOME_SDF_MAX_LOD_FLORA: int = 1
-## The creature body carries the highest RES_BY_LOD of the three SDF builders
-## ([24,32,42,52] vs the mushroom's [16,22,30,38]), which is why it measured
-## 429ms per cell — the last uncapped monster. CreatureSdfMorphology already
-## clamps every radius to ~1.6 sample cells, so the coarser field cannot drop the
-## thin neck or tail; the cap is safe for the same reason it now is for flora.
-const BIOME_SDF_MAX_LOD_FAUNA: int = 1
+## ONE cap for every SDF body (was three identical per-substrate constants —
+## fungus/flora/fauna each capped in its own commit, the whack-a-mole this
+## consolidates). All three clamp their radii to the sample grid, so the coarser
+## field never drops a thin feature; lod 1 is captured-indistinguishable from
+## lod 3 at a biome cell's read distance. SdfMesher.RES_CAP is the hard ceiling
+## underneath this — a body that ever slips past this tuning still cannot blow up.
+const BIOME_SDF_MAX_LOD: int = 1
+const BIOME_SDF_MAX_LOD_FUNGUS: int = BIOME_SDF_MAX_LOD
+const BIOME_SDF_MAX_LOD_FLORA: int = BIOME_SDF_MAX_LOD
+const BIOME_SDF_MAX_LOD_FAUNA: int = BIOME_SDF_MAX_LOD
 
 const SF_FAMILIES: Array = ["gravity_droop", "inflate_bloat", "squash_settle", "wilt_collapse", "wind_lean"]
 const FD_VARIANTS_PER_FAMILY: int = 12

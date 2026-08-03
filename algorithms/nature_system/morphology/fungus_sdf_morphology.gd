@@ -33,20 +33,16 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 	var cap_r: float = clampf(dna.part_width, 0.3, 1.0) * scale * 0.18
 	var cap_dome: float = cap_r * clampf(0.35 + dna.part_curve * 0.9, 0.3, 1.3)
 	var cap_c := Vector3(0.0, stem_h, 0.0)
-	var stem_a := Vector3.ZERO
-	var stem_b := cap_c
 	var k: float = cap_r * 0.5   # blend cap into stem
 
-	var field := func(p: Vector3) -> float:
-		var d_stem: float = Mesher.sd_capsule_tapered(p, stem_a, stem_b, stem_r, stem_top_r)
-		# cap = a dome: an ellipsoid wide in XZ, short in Y, sitting on the stem
-		var d_cap: float = Mesher.sd_ellipsoid(p, cap_c + Vector3(0, cap_dome * 0.2, 0),
-			Vector3(cap_r, cap_dome, cap_r))
-		return Mesher.smin(d_stem, d_cap, k)
-
-	var lo := Vector3(-cap_r, -stem_r, -cap_r) - Vector3.ONE * cap_r * 0.5
-	var hi := Vector3(cap_r, stem_h + cap_dome, cap_r) + Vector3.ONE * cap_r * 0.5
-	var mesh: ArrayMesh = Mesher.mesh_field(field, lo, hi, RES_BY_LOD[lod])
+	# stem capsule + cap dome (ellipsoid), declared so the mesher applies the
+	# grid clamp + resolution cap centrally.
+	var prims: Array = [
+		{"kind": "capsule", "a": Vector3.ZERO, "b": cap_c, "ra": stem_r, "rb": stem_top_r},
+		{"kind": "ellipsoid", "c": cap_c + Vector3(0, cap_dome * 0.2, 0),
+			"r": Vector3(cap_r, cap_dome, cap_r)},
+	]
+	var mesh: ArrayMesh = Mesher.mesh_primitives(prims, k, RES_BY_LOD[lod])
 	if mesh == null:
 		return root
 
