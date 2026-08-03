@@ -20,6 +20,11 @@ extends Node3D
 @export var wing_tint_speed: float = 0.8  # How fast wings absorb entropy color
 @export var entropy_search_radius: float = 50.0  # Max distance to look for entropy nodes
 
+## STAGE-2 DNA support (2026-08-03). 0 = shipped behaviour exactly: every random
+## draw below goes to the global RNG, so each butterfly is genuinely its own.
+## The spawner sets this per-butterfly when its swarm_seed is non-zero.
+@export var rng_seed: int = 0
+
 var move_direction: Vector3
 var move_timer: float = 0.0
 var center_node: Node3D
@@ -37,24 +42,52 @@ var _current_entropy_color: Color = Color.WHITE
 var _target_wing_color: Color = Color.WHITE
 var _wing_material: StandardMaterial3D
 var _has_been_grabbed: bool = false
+var _rng: RandomNumberGenerator = null
+
+
+## Every random draw in this script routes through these three. With rng_seed
+## left at 0 they call the same global functions the shipped code called, in the
+## same order, so nothing about an unseeded butterfly changes.
+func _rf(a: float, b: float) -> float:
+	if _rng != null:
+		return _rng.randf_range(a, b)
+	return randf_range(a, b)
+
+
+func _rfu() -> float:
+	if _rng != null:
+		return _rng.randf()
+	return randf()
+
+
+func _ri(n: int) -> int:
+	if n <= 0:
+		return 0
+	if _rng != null:
+		return _rng.randi() % n
+	return randi() % n
 
 
 func _ready() -> void:
+	if rng_seed != 0:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = rng_seed
+
 	center_node = get_node(area_center) if area_center else self
 
 	if use_random_sitting_points:
 		for i in range(num_random_sitting_points):
 			var random_point: Vector3 = center_node.position + Vector3(
-				randf_range(-area_size.x / 2, area_size.x / 2),
-				randf_range(-area_size.y / 2, area_size.y / 2),
-				randf_range(-area_size.z / 2, area_size.z / 2)
+				_rf(-area_size.x / 2, area_size.x / 2),
+				_rf(-area_size.y / 2, area_size.y / 2),
+				_rf(-area_size.z / 2, area_size.z / 2)
 			)
 			random_sitting_points.append(random_point)
 
 	position = center_node.position + Vector3(
-		randf_range(-area_size.x / 2, area_size.x / 2),
-		randf_range(-area_size.y / 2, area_size.y / 2),
-		randf_range(-area_size.z / 2, area_size.z / 2)
+		_rf(-area_size.x / 2, area_size.x / 2),
+		_rf(-area_size.y / 2, area_size.y / 2),
+		_rf(-area_size.z / 2, area_size.z / 2)
 	)
 
 	change_direction()
@@ -136,9 +169,9 @@ func _process(delta: float) -> void:
 
 		if move_timer <= 0:
 			# Decide: seek entropy or wander?
-			if _entropy_nodes.size() > 0 and randf() < entropy_seek_chance:
+			if _entropy_nodes.size() > 0 and _rfu() < entropy_seek_chance:
 				_seek_entropy_point()
-			elif (sitting_points.size() > 0 or random_sitting_points.size() > 0) and randf() < 0.3:
+			elif (sitting_points.size() > 0 or random_sitting_points.size() > 0) and _rfu() < 0.3:
 				choose_sitting_point()
 			else:
 				change_direction()
@@ -148,7 +181,7 @@ func _process(delta: float) -> void:
 
 func _seek_entropy_point() -> void:
 	# Pick a random entropy_axiom node
-	var target_node: Node3D = _entropy_nodes[randi() % _entropy_nodes.size()]
+	var target_node: Node3D = _entropy_nodes[_ri(_entropy_nodes.size())]
 
 	# Sample a random point along the entropy gradient
 	# The axiom runs along local Z with grid_size_z * base_spacing extent
@@ -168,15 +201,15 @@ func _seek_entropy_point() -> void:
 		grid_y = int(target_node.get("grid_size_y"))
 
 	# Pick a random Z slice (biased slightly toward higher entropy = more interesting)
-	var z_float: float = randf()
+	var z_float: float = _rfu()
 	z_float = pow(z_float, 0.7)  # Slight bias toward chaos end
 	var z_index: int = int(z_float * (grid_z - 1))
 	var entropy_factor: float = float(z_index) / float(grid_z - 1)
 	var curved_entropy: float = pow(entropy_factor, 2.0)
 
 	# Compute a point position in the entropy grid (matching axiom's generation)
-	var x_index: int = randi() % grid_x
-	var y_index: int = randi() % grid_y
+	var x_index: int = _ri(grid_x)
+	var y_index: int = _ri(grid_y)
 	var base_pos: Vector3 = Vector3(
 		(x_index - grid_x / 2.0) * spacing,
 		(y_index - grid_y / 2.0) * spacing,
@@ -192,7 +225,7 @@ func _seek_entropy_point() -> void:
 	target_sit_position = target_global
 	var to_target: Vector3 = target_sit_position - global_position
 	if to_target.length() < 0.1:
-		to_target = Vector3(randf_range(-1, 1), 0.1, randf_range(-1, 1))
+		to_target = Vector3(_rf(-1, 1), 0.1, _rf(-1, 1))
 	move_direction = to_target.normalized()
 	move_timer = to_target.length() / speed
 
@@ -217,25 +250,88 @@ func on_released() -> void:
 		change_direction()
 
 
+## STAGE-2 DNA (2026-08-03). Place this butterfly at a chosen moment of the
+## wander→seek→land cycle instead of at the start of it.
+##
+## The spawner NEVER calls this at arrival == "scatter", which is the shipped
+## default, so the path every existing placement takes is untouched by all of it.
+## `t` is where along the order→chaos gradient this butterfly belongs, 0 = order.
+func stage_arrival(state: String, t: float) -> void:
+	_find_entropy_nodes()
+
+	var f: float = clampf(t, 0.0, 1.0)
+	var target: Vector3 = _entropy_point_at(f)
+	var hue: float = lerpf(0.66, 0.0, pow(f, 2.0))
+	_target_wing_color = Color.from_hsv(hue, 0.6, 1.0)
+	_seeking_entropy = true
+	target_sit_position = target
+
+	if state == "landed":
+		global_position = target
+		is_sitting = true
+		sitting_timer = entropy_sit_duration
+		if _wing_material:
+			_wing_material.albedo_color = _target_wing_color
+		if has_node("AnimationPlayer"):
+			$AnimationPlayer.stop()
+		return
+
+	# "gathering": caught in transit, already turned toward the gradient with the
+	# tint half absorbed — the bias readable as direction rather than position.
+	global_position = global_position.lerp(target, 0.55)
+	var to_target: Vector3 = target - global_position
+	if to_target.length() > 0.001:
+		move_direction = to_target.normalized()
+		move_timer = to_target.length() / speed
+		point_in_direction(move_direction)
+	if _wing_material:
+		_wing_material.albedo_color = Color.WHITE.lerp(_target_wing_color, 0.45)
+
+
+## A point at fraction `f` along the entropy gradient this butterfly can see.
+func _entropy_point_at(f: float) -> Vector3:
+	if _entropy_nodes.size() > 0:
+		var node: Node3D = _entropy_nodes[_ri(_entropy_nodes.size())]
+		var grid_z: int = 40
+		var spacing: float = 0.2
+		if node.get("grid_size_z"):
+			grid_z = int(node.get("grid_size_z"))
+		if node.get("base_spacing"):
+			spacing = float(node.get("base_spacing"))
+		var z_index: int = int(f * float(max(1, grid_z - 1)))
+		var base_pos: Vector3 = Vector3(0.0, 0.0, float(z_index) * spacing)
+		var p: Vector3 = node.global_transform * base_pos
+		p.y += 0.05
+		return p
+
+	# No axiom in this room — Museum_Wings places the swarm alone. The gradient
+	# is then virtual, running along the wander volume's own +Z, which is the
+	# axis entropy_axiom itself is built on. Reached only from stage_arrival, so
+	# a swarm left at "scatter" never consults it.
+	var origin: Node3D = center_node if center_node else self
+	var span: float = area_size.z * 0.5
+	return origin.global_position + origin.global_transform.basis.z * ((f - 0.5) * span)
+
+
 func change_direction() -> void:
 	var horizontal_direction: Vector3 = Vector3(
-		randf_range(-1, 1), randf_range(-0.3, 0.3), randf_range(-1, 1)
+		_rf(-1, 1), _rf(-0.3, 0.3), _rf(-1, 1)
 	).normalized()
 	move_direction = horizontal_direction
 	point_in_direction(horizontal_direction)
-	move_timer = randf_range(min_move_time, max_move_time)
+	move_timer = _rf(min_move_time, max_move_time)
 
 
 func choose_sitting_point() -> void:
 	var target_point: Vector3
 	if sitting_points.size() > 0:
-		var sit_node: Node3D = get_node(sitting_points[randi() % sitting_points.size()]) as Node3D
+		var sit_node: Node3D = get_node(sitting_points[_ri(sitting_points.size())]) as Node3D
 		if sit_node:
 			target_point = sit_node.position
 		else:
 			return
 	elif random_sitting_points.size() > 0:
-		target_point = random_sitting_points[randi() % random_sitting_points.size()]
+		target_point = random_sitting_points[_ri(random_sitting_points.size())]
 	else:
 		return
 	target_sit_position = target_point

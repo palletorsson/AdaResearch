@@ -2592,6 +2592,22 @@
    }
   },
   "entropy_jar": {
+   "dna": {
+    "axes": {
+    "found_state": [
+    "sorted",
+    "stirred",
+    "mixed",
+    "shelled"
+    ],
+    "readout": [
+    "figures",
+    "number",
+    "verdict",
+    "none"
+    ]
+    }
+   },
    "category": "randomness",
    "complexity": "beginner",
    "description": "A glass jar of red and blue particles on a pedestal. Grab and shake to mix them — they never unmix. Live Shannon entropy readout tracks disorder. The second law of thermodynamics felt physically through VR interaction.",
@@ -7160,6 +7176,26 @@
    "qfep_connection": "The bell made object: samples piling into the curve that chance keeps its accounts in. No single draw knows about the bell; the bell knows about all of them."
   },
   "random_butterflies": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "arrival": [
+      "scatter",
+      "gathering",
+      "landed"
+     ]
+    },
+    "default": "arrival=scatter - the shipped path exactly: butterflies spawn at uniformly random points in the wander volume with white wings and nothing is staged. The spawner only calls stage_arrival() when arrival is NOT scatter, so all 10 existing placements (Museum_Wings, Random_Entropy, the three Spaceform rooms, the Random_Definition family, Corridor_randomness, Curation_Bay_randomness_4, Furnished_CAP_1, TemplateMap_Descent13) render byte-identically to before.",
+    "was": "three exports, all budget - butterfly_scene, spawn_interval, max_butterflies. Nothing the artifact argued was settable, so the swarm had only ever been found mid-wander.",
+    "argues": "a random walker in a room with an entropy gradient is not uniformly distributed. scatter shows the process (chance looking like chance), landed shows the result (the distribution collapsed onto the attractor), gathering shows both at once as direction rather than position.",
+    "fixture": {
+     "initial_count": 8,
+     "swarm_seed": 1337
+    },
+    "fixture_note": "shipped behaviour spawns ONE butterfly at _ready and one more every 10s, so a 0.35s still holds a single speck and no arrival value is distinguishable from another - a distribution of one sample is not a distribution. swarm_seed pins the whole swarm so the three variants are the same eight butterflies photographed at three moments, not three different swarms. Both stay at their shipped defaults (1 and 0) outside the bench.",
+    "declined": "a second axis on what the wing tint ENCODES. Under the default arrival=scatter the wings are white - tinting only accumulates while sitting - so a tint axis swept from defaults would measure inert, and pinning arrival=landed in the fixture is impossible while arrival is itself the axis. Also declined: spawn_interval, entropy_seek_chance, wing_tint_speed. Every one is a rate and a rate cannot be photographed."
+   },
    "category": "emergence",
    "complexity": "advanced",
    "description": "Entropy-seeking butterfly swarm: wander randomly then land on entropy_axiom grid points, wings tinting blue-to-red along the order-chaos gradient. Grab and release to send to a new entropy point.",

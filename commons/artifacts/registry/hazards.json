@@ -3910,6 +3910,28 @@
    "qfep_connection": "The feet sit at the four corners and none is told about the others: each simply steps when the body's drift stretches it past its threshold. Whatever reads as a trot is a settlement among four independent deadlines — the vertebrate gait recovered as emergence, not choreography."
   },
   "fractal_hydra": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "start_depth": [
+      0,
+      1,
+      2,
+      3
+     ]
+    },
+    "default": "start_depth=0 - the crown builder at depth 0 emits exactly the two calls _on_ready() used to make by hand, angles -0.5 then 0.5, base_head_size, depth 0, in that order, so the head materials land in the same slots too. The 1 existing placement passes no start_depth, and apply_grid_config regrows only when the value both parses and differs, so that room is unchanged.",
+    "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS. Six exports existed and all six were quantities: a ceiling, three lengths, a speed and a damage number. The decision that carries the argument, how far the branching has already gone, was a pair of literal _add_head calls in _on_ready.",
+    "note": "hand promotion 2026-08-03. max_depth WAS already an export and is deliberately still not declared: it is a ceiling on splitting, splitting only happens under damage, and every value of it builds the identical two heads at spawn. Four values, four identical photographs - a time-domain knob wearing the costume of a shape knob, and the exact finished-looking-experiment-that-answers-nothing this loop is supposed to refuse. start_depth is the same quantity made PRESENT: the crown is pre-grown by replaying the cut itself (SPLIT_RATIO 0.6, SPLIT_SPREAD 0.4, shared as constants with _on_damaged so the two paths cannot drift), giving 2 / 4 / 8 / 16 heads at 0.15 / 0.09 / 0.054 / 0.032 radius. Only the surviving generation is instantiated - the intermediate parents die the instant they split, and building them would leave hidden meshes inflating the capture AABB. The Label3D reads HEADS: n, DEPTH: d, so the frame carries its own caption.",
+    "fixture": {
+     "patrol_speed": 0.0,
+     "detection_radius": 0.0
+    },
+    "fixture_note": "this is a CharacterBody3D that patrols from wherever it is dropped, at 1.2 m/s, from its first physics frame. Left alone it walks out of a fixed camera during the settle and the axis is measured against a moving subject. patrol_speed 0 parks it (velocity goes to zero, the leg animation stops) and detection_radius 0 keeps it out of DETECT/CHASE. Both are base-class exports defaulting to the shipped values, so they are fixture knobs and not axes.",
+    "measurement_risk": "16 heads at depth 3 overlap: the split spread of 0.4 rad applied twice brings sibling branches back onto the same angle, so the visible count is lower than the head count. That is faithful - the live hydra does the same after two cuts - but do not read a smaller-than-expected difference between depth 2 and depth 3 as a dead axis. Check subject % and the label text before believing any faint verdict.",
+    "shares_vocabulary_with": "nothing yet. `depth` is a common word in the fractals sequence but no sibling declares it as an axis, and start_depth means something narrower than depth-of-recursion: cuts already suffered. Taking a borrowed word here would have been a false claim of comparability."
+   },
    "category": "hazards",
    "complexity": "beginner",
    "description": "Central body with branching heads on cylinder necks. Damage splits a head into two half-size copies — fractal branching up to depth 3. More heads means more attacks but less damage each. Cut one head, two grow back.",
@@ -4123,6 +4145,36 @@
    "qfep_connection": "Six faces, one weakness: the lid. The state machine grants it anger — DETECT, CHARGE — but its topology sealed its fate in advance; power sits unevenly on a body's surfaces, and the player learns to read bodies for their unguarded plane."
   },
   "gradient_hunter": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "stencil": [
+      "ring",
+      "pair",
+      "axial",
+      "shell",
+      "swarm"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "default": "stencil=ring, evidence=longhand - ring runs the same formula the mesh builder used to inline, over the same sample_count of 6, so _offsets[i] is the position the sphere was already given, and ring is also the only value that still ORBITS in _process_visual, which is the shipped animation untouched. evidence=longhand shows the body, the legs, the probes, the gradient arrow and the loss/lr label - everything _build_mesh has just created, visible - and adds no geometry, so _apply_evidence is a pure no-op on that rung. All three placements (Chamber_ML, Hazards_Zoo_6, and the curation_station collection in Curation_Bay_hazards_10) are bare tokens with no config, and apply_grid_config only assigns when the word is in the allow-list AND differs from the word already held, so nothing is rebuilt for them.",
+    "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS. Eleven exports existed and every one was a quantity or a dimension: a learning rate, a radius, two annealing numbers, and five sizes of body part. The decision that carries the argument - WHICH POINTS THE ESTIMATE IS TAKEN FROM - was the same `angle = i/sample_count * TAU` formula written out longhand in three separate places (the mesh builder, the orbit animation and _compute_gradient), and the class had no apply_grid_config of its own, so the base forwarded health and speed and a map token could reach nothing else.",
+    "note": "hand promotion 2026-08-03. This creature's own critical_parameter is `_sample_positions / _gradient_dir - 6-point gradient estimate determines movement`, and the six points on a horizontal circle were never a fact about gradient descent. A gradient is never measured, only INFERRED from a finite set of probes, and the choice of probes is the whole of what the optimiser can know: pair is one central difference and can only see along a line; axial is the textbook coordinate-wise partials and nothing between them; shell is twelve icosahedron vertices and the only value that admits the Y this creature has always had and thrown away in _process_chase; swarm is nine golden-angle points at mixed radii, not a stencil at all but a population. All deterministic - no randf anywhere in the resolution - so five variants are five pictures of one creature rather than five creatures. sample_count stays exported and undeclared: it is a count on the ring and a derived fact everywhere else, and four counts of the same circle is a picture of the same estimator four times.",
+    "shares_vocabulary_with": "gradient_descent_visualization, promoted the same day - `evidence` with these four rungs, character for character, and behind it the wider motion family (koch_curve, box_counting_dimension, three_body_problem). Same question, and here it is asked of a PREDATOR rather than a diagram: the loss function is the space between it and you. `stencil` is deliberately a NEW word and shares nothing. The nearest neighbours would have been `basin` from the same artifact, which is a property of the landscape rather than of the sampler, and `frame` from basis_vectors_rig / xyz_coordinates, which is about which directions are agreed rather than which are probed. Borrowing either would have claimed a comparability that does not exist.",
+    "fixture": {
+     "detection_radius": 0.0,
+     "patrol_speed": 0.0
+    },
+    "fixture_note": "this is a CharacterBody3D that starts in PATROL and walks its corners from the first physics frame, and the sweep now uses ONE camera for the whole run, so an unpinned creature drifts inside a fixed frame and the diff measures displacement instead of the axis. detection_radius 0 keeps it out of DETECT/CHASE with no player in the scene. patrol_speed 0 only bites because _on_ready's write of 1.2 was changed to fire only when the property still holds HazardCreatureBase's 1.8 - an unguarded write there discards anything set before add_child, which is exactly how the sweep applies values. Both are base-class exports at their shipped values in every real room, so they are fixture knobs and not axes.",
+    "measurement_risk": "trace -> longhand is the weakest step on the evidence axis and may read faint. With no player in the world _gradient_dir stays ZERO, so the arrow keeps its build position at the body centre and never orients, and the label reads loss=0.00, lr=3.0 - that rung is carried by a small cylinder and a line of text. result -> trace (the probes appear) and longhand -> axiom (spokes and chords, and the label switches to the update rule) are the steps that move pixels. Do not read a faint trace/longhand pair as a dead axis without looking at those two.",
+    "still_note": "every rung of both axes is standing geometry. The probes orbit under stencil=ring only, and that orbit is the shipped animation phase-locked to _state_time, which is identical across variants because each is instantiated fresh and captured after the same settle. Nothing else here is time-domain."
+   },
    "category": "hazards",
    "complexity": "advanced",
    "description": "Sleek predator with orbiting sample-point particles. Gradient descent pathfinding toward player — gets stuck in local minima, anneals out with random teleport. Machine learning as locomotion strategy.",
@@ -5673,6 +5725,30 @@
    "qfep_connection": "A closed kinematic chain where every attack face is always present, only rotated out of view: fire, ice, spike, and shield are one body's phases, not four weapons. When the shield face lands, invincibility arrives by pure topology of turn."
   },
   "kresling_spire": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "posture": [
+      "cycle",
+      "disc",
+      "half",
+      "tower"
+     ],
+     "warning": [
+      "none",
+      "stain",
+      "cage",
+      "beacon",
+      "shroud"
+     ]
+    },
+    "default": "posture=cycle, warning=none - cycle is the sentinel branch of _pin_twist(), which returns -1.0 and writes nothing at all, so the state machine keeps sole ownership of _twist and the shipped start pose (AIM at _twist 0.1) is untouched; warning=none is the `_:` arm of _build_warning() and adds no child. Neither key is named by any of the 7 existing placements, and configure() takes a word only when it validates AND differs, so a typo or a repeat leaves the fold and the dressing exactly where they were. Chamber_Forces, Corridor_Random_Game, ForcesArena, ForcesFoundations, ForcesSystems, Hazards_Zoo, Random_Game, TemplateMap_Descent13 and VectorApplied are byte-identical.",
+    "was": "declared nothing. Both axes were already written into kresling_spire.gd - warning on the hazard family pass, posture on 2026-08-03 - and the registry had never been told, so the runner refused the token for NO TURNABLE KNOBS while two working axes sat in the file. Derived from the source, not transcribed: WARNING_VALUES and POSTURES are the code's own constant lists.",
+    "note": "posture is WHICH OF ITS TWO BODIES the spire is wearing. The word is [[armadillo_eggling]]'s and the question is the same - a hazard that owns two bodies and a map that gets to say which one it stands in - but the values are deliberately NOT shared: a Kresling drum has no ball and no legs. _twist is the artifact's own declared critical_parameter, one DOF from 0 (tower) to 1 (disc), and the shipped spire never holds it still, which is precisely why a still cannot photograph the argument. cycle keeps the DISC-RISE-AIM-FIRE-COLLAPSE-RELOCATE schedule; disc pins the fold flat (a sniper firing off the floor says the rise was never the weapon); half holds the mid-fold a still would otherwise never catch; tower pins it extended, a permanent firing position. The pin is written AFTER the state machine each frame, so every combat number - fire_damage, fire_speed, shots_per_burst, fire_interval, optimal_range, detection_radius, disc_speed, max_health - is identical at all four values. warning is HOW MUCH THE HAZARD TELLS YOU BEFORE IT COSTS YOU ANYTHING, taken character for character from [[miura_crawler]], [[scissor_stalker]], [[kaleidocycle_enemy]] and [[path_block]]; the spire is the family's sniper case, the only member that never reaches you, so the only warning it could ever give is what it looks like from across the room. APPEARANCE ONLY - the builders add MeshInstance3D children, never a collider, never a group the combat code reads, never a distance.",
+    "still_note": "posture is the strong axis: disc is a hexagonal tile on the floor, tower is a mast, half is a twisted drum, and the silhouette differs at every value. warning is the same five-value scale the rest of the hazard family is measured on, sized from the exports rather than the live twist so the dressing never breathes with the fold.",
+    "kin": "warning shared with miura_crawler, scissor_stalker, kaleidocycle_enemy, path_block. posture shares the word with armadillo_eggling and nothing else."
+   },
    "category": "hazards",
    "complexity": "beginner",
    "description": "Kresling origami sniper tower - twisting cylinder that extends from compact disc to tall tower. Rolls as disc to reposition, rises by untwisting to snipe from elevation, collapses rapidly to relocate.",
@@ -5785,6 +5861,34 @@
    "qfep_connection": "In the Kresling fold rotation and translation are one motion: to rise and snipe it must untwist, to flee it must twist flat. It also enforces a standoff, backing away as you close, so the fight happens at the tower's chosen range, not yours."
   },
   "lifeform_walker": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "rule": [
+      "life",
+      "highlife",
+      "seeds",
+      "replicator",
+      "maze",
+      "coral"
+     ]
+    },
+    "default": "rule=life - life is [[3], [2, 3]], which is B3/S23, which is the `neighbors == 2 or neighbors == 3` that _step_ca wrote out by hand. The 1 existing placement passes no rule key, ca_seed defaults to 0 (the shipped unseeded randf soup, so every spawn still gets its own armour) and warmup defaults to 0 (all 36 cells sit on the alive material until the first tick half a second in, exactly as before). apply_grid_config regrows only when a value both validates and differs, so that room is unchanged.",
+    "was": "no axis at all - the runner refused this token for NO TURNABLE KNOBS. The exports were ca_rows, ca_cols, two tick rates, a cell size and four colours: dimensions and decoration. The transition rule, the one decision that decides what the armour looks like, was written out longhand inside _step_ca, and the base class's apply_grid_config only forwarded health and speed, so a map token could not reach it.",
+    "note": "hand promotion 2026-08-03. The @identity names the critical parameter as _grid state / _generation and _init_grid seeds at density 0.5 - and density is the wrong knob for the same reason complexity_pattern refused it hours earlier: under Life every starting density converges to the same sparse litter of still lifes, so five densities photograph as five indistinguishable torsos. What a still of this creature actually shows is HOW MUCH OF THE BODY IS ARMOURED, and that fraction is a property of the rule table, not of the soup - life and highlife decay to a few blocks, seeds sprays and empties, replicator fills to a periodic parity texture, maze and coral freeze into standing structure across most of the plate. The creature stops asserting Conway and starts showing what a different law would have armoured it with. Armour is also mechanical here, not only visual: _on_damaged reduces incoming damage by alive_count / 36, so the rule is simultaneously the defence budget.",
+    "shares_vocabulary_with": "complexity_pattern - `rule` with these six values, and the RULES table itself, are copied from it character for character. That artifact is this automaton as a flat field; this one wears it on a torso. Same question, same words, and the two SHOULD measure alike, which is the check on whether the borrowing was honest. Deliberately not a new word: inventing one would have hidden a real comparison.",
+    "fixture": {
+     "ca_seed": 20260803,
+     "warmup": 10,
+     "ca_tick_rate": 9999.0,
+     "ca_tick_rate_chase": 9999.0,
+     "patrol_speed": 0.0,
+     "detection_radius": 0.0
+    },
+    "fixture_note": "four separate reasons, all defaulting to shipped behaviour so none of them is an axis. ca_seed pins the soup, without which six rule variants are six different random torsos and the sweep measures the RNG. warmup runs 10 generations at build time, without which every variant photographs the same undifferentiated 50% soup - at generation 0 no rule has spoken. 10 and not complexity_pattern's 80 because this board is 6x6 and bounded: life empties it within a few dozen generations and _step_ca then reseeds, which would hand the still a fresh random soup and undo the point. The two tick rates park the automaton after warmup so the frame is exactly generation 10 and not whatever the settle timing lands on. patrol_speed and detection_radius park the creature itself, which otherwise walks out of a fixed camera at 1.8 m/s.",
+    "measurement_risk": "the axis lives in a 0.4 x 0.4 plate on a creature about 0.95 m tall, so a fit-by-diagonal camera gives the grid roughly a third of the frame height. Emissive green against near-black dead cells is high contrast, which should carry it, but if the critic reports faint check subject % and add a framing hint below 1.0 rather than re-cutting the axis."
+   },
    "category": "hazards",
    "complexity": "intermediate",
    "description": "Walking creature with a 6x6 Game of Life grid on its torso. Living cells provide armor; Conway's rules run each tick. Dead automaton reinitializes. The cellular automaton made corporeal.",
@@ -8596,6 +8700,22 @@
    "qfep_connection": "The trade is written into the state machine: as a ball it is fast and unhittable, deployed it is armed, shielded, and rooted — mobility and firepower held as strict complements, never both at once. Minimum surface for maximum volume, then the geometry cashes its efficiency in as armor."
   },
   "spring_hopper": {
+   "dna": {
+    "axes": {
+    "temper": [
+    "stock",
+    "fine",
+    "heavy",
+    "bound"
+    ],
+    "posture": [
+    "cycle",
+    "drawn",
+    "laden",
+    "solid"
+    ]
+    }
+   },
    "category": "hazards",
    "complexity": "intermediate",
    "description": "Coil spring creature that bounces rhythmically. Land on top when compressed to get launched upward — Hooke's law as creature.",

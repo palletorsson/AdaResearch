@@ -15,6 +15,61 @@ signal enemy_destroyed(enemy: Node3D)
 
 enum State { IDLE, WIND, BOUNCE, LAND, PATROL, DEAD }
 
+## --- DNA (stage 2, promoted 2026-08-03) ---
+##
+## This creature's own truth line is "F = -kx is life", and the two axes are k and x.
+##
+## AXIS 1 — TEMPER: the spring constant written into the body.
+## Before promotion `coil_turns = 6` was pure decoration: it set how many torus rings got
+## stacked and entered no calculation anywhere. Wire gauge was not even that — it was the
+## literal 0.75 inside `torus.inner_radius = coil_radius * 0.75`, a number with no name.
+## But k is not a slider on a real spring, it is a SHAPE (k = Gd^4 / 8D^3n): few thick turns
+## are stiff, many thin turns are soft, and you can read the constant off the object without
+## touching it. temper co-varies turn count, wire gauge, the compression floor and the bounce
+## the creature can actually produce, so the number and the silhouette stop disagreeing.
+##   stock  6 turns, gauge 0.75, floor 0.15 - the shipped lineage, and a pure no-op branch.
+##   fine   14 thin turns. Low k: a tall stack of hairs that gives way and throws high.
+##   heavy  4 fat turns. High k: barely yields, and what it stores it returns short.
+##   bound  5 turns so thick they overlap at rest. Solid length reached before any load
+##          arrives - a spring that cannot compress, which is to say not a spring.
+##
+## AXIS 2 — POSTURE: where on the F = -kx line this one is caught standing.
+## `_compression` is already the declared critical_parameter and already drives the whole
+## body (coil Y-scale 1.0 -> floor, head height, head squash/stretch), but nothing outside
+## the state machine could ever set it, so every spring_hopper in the corpus stands at the
+## same 0.05 idle wobble. posture pins the RESTING compression - the x the spring holds
+## while nothing is happening - and leaves WIND / BOUNCE / LAND to run from and return to
+## it. Height stops being a fact about the creature and becomes a fact about its load.
+##   cycle   sentinel: the state machine keeps sole ownership of _compression. Shipped.
+##   drawn   -0.25, in tension. Coil stretched, head drawn thin. Storing by being pulled.
+##   laden   0.40, standing under weight. Coil at two thirds, head level dropped.
+##   solid   0.90, crushed nearly to its floor. Maximum potential, nowhere left to go.
+## `cycle` is deliberately the only slack value: an "extended" rung would photograph as a
+## near-duplicate of cycle and buy a fifth frame that answers nothing.
+##
+## Both defaults are no-ops and the 5 existing placements (Chamber_SoftBodies, _p1, _p2,
+## _p3, Gallery_Hazards) are byte-identical to before.
+##
+## NOT declared, deliberately: bounce_period, launch_force and contact_damage are rates and
+## impulses, invisible to a still. And `regime` (spring_demo, mass_spring_damper,
+## harmonic_motion_demo: free/underdamped/critical/overdamped) was the obvious word to
+## borrow and would have been a lie - those three integrate an ODE with a damping term, and
+## this creature has no damping term and no integrator. Its compression is animated by a
+## state machine. Sharing their word would claim a comparability that does not exist.
+## `posture` is borrowed on purpose, from armadillo_eggling and kresling_spire in this same
+## registry: same question (which body is this creature holding), same sentinel-first shape
+## as kresling_spire's `cycle`, and the three measure alike.
+const TEMPERS: PackedStringArray = ["stock", "fine", "heavy", "bound"]
+const POSTURES: PackedStringArray = ["cycle", "drawn", "laden", "solid"]
+
+@export_enum("stock", "fine", "heavy", "bound") var temper: String = "stock"
+@export_enum("cycle", "drawn", "laden", "solid") var posture: String = "cycle"
+
+## Fixture knob, not an axis. 1.0 is the shipped fall. The sweep harness builds no floor,
+## so a CharacterBody3D left at 1.0 drops out of a fixed frame during the settle and the
+## diff measures displacement instead of the axis.
+@export var gravity_scale: float = 1.0
+
 @export_group("Geometry")
 @export var coil_radius: float = 0.18
 @export var coil_height: float = 0.5  # fully extended height
@@ -35,6 +90,16 @@ enum State { IDLE, WIND, BOUNCE, LAND, PATROL, DEAD }
 @export var head_color: Color = Color(0.9, 0.75, 0.2)
 @export var eye_color: Color = Color(0.1, 0.1, 0.1)
 @export var emission_color: Color = Color(1.0, 0.4, 0.2)
+
+# Shipped constants, now named so `stock` / `cycle` can restore them exactly.
+const STOCK_WIRE_RATIO: float = 0.75
+const STOCK_COIL_FLOOR: float = 0.15
+
+# Derived from temper / posture. These hold the shipped values until told otherwise.
+var _wire_ratio: float = STOCK_WIRE_RATIO
+var _coil_floor: float = STOCK_COIL_FLOOR
+var _rest: float = 0.0
+var _pinned: bool = false
 
 # State
 var _health: float = 0.0
@@ -66,7 +131,52 @@ var _base_material: StandardMaterial3D
 var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 9.8)
 
 
+## --- Genome resolution ---
+##
+## `stock` and `cycle` write nothing that was not already true, so an artifact that never
+## hears about either axis is unchanged.
+
+func _apply_temper() -> void:
+	match temper:
+		"fine":
+			coil_turns = 14
+			_wire_ratio = 0.90
+			_coil_floor = 0.10
+			bounce_height = 3.6
+		"heavy":
+			coil_turns = 4
+			_wire_ratio = 0.55
+			_coil_floor = 0.42
+			bounce_height = 1.6
+		"bound":
+			coil_turns = 5
+			_wire_ratio = 0.12
+			_coil_floor = 0.86
+			bounce_height = 0.5
+		_:
+			_wire_ratio = STOCK_WIRE_RATIO
+			_coil_floor = STOCK_COIL_FLOOR
+
+
+func _apply_posture() -> void:
+	match posture:
+		"drawn":
+			_rest = -0.25
+			_pinned = true
+		"laden":
+			_rest = 0.4
+			_pinned = true
+		"solid":
+			_rest = 0.9
+			_pinned = true
+		_:
+			_rest = 0.0
+			_pinned = false
+
+
 func _ready() -> void:
+	_apply_temper()
+	_apply_posture()
 	_health = max_health
 	_base_y = global_position.y
 	_create_materials()
@@ -87,7 +197,7 @@ func _physics_process(delta: float) -> void:
 
 	# Apply gravity when airborne
 	if not is_on_floor():
-		velocity.y -= _gravity * delta
+		velocity.y -= _gravity * gravity_scale * delta
 	else:
 		# Track ground level
 		_base_y = global_position.y
@@ -118,9 +228,13 @@ func _process_idle(delta: float) -> void:
 	velocity.x = 0.0
 	velocity.z = 0.0
 
-	# Gentle wobble
+	# Gentle wobble. A pinned posture stands dead still instead — a spring holding a load
+	# does not breathe, and a still frame of a wobbling subject depends on capture timing.
 	_bounce_phase += delta * 2.0
-	_compression = 0.1 * sin(_bounce_phase) * 0.5 + 0.05
+	if _pinned:
+		_compression = _rest
+	else:
+		_compression = 0.1 * sin(_bounce_phase) * 0.5 + 0.05
 
 	var dist: float = _get_player_distance()
 	if dist <= detection_radius:
@@ -131,16 +245,16 @@ func _process_wind(_delta: float) -> void:
 	velocity.x = 0.0
 	velocity.z = 0.0
 
-	# Compress over 0.5 seconds
+	# Compress over 0.5 seconds, from wherever the load leaves it standing
 	var t: float = clamp(_state_time / 0.5, 0.0, 1.0)
-	_compression = lerp(0.0, 1.0, ease(t, 2.0))
+	_compression = lerp(_rest, 1.0, ease(t, 2.0))
 
 	if t >= 1.0:
 		# Check if player is on top for launch
 		if _check_player_on_top():
 			_launch_player()
 		# Release! Transition to BOUNCE
-		_compression = 0.0
+		_compression = _rest
 		velocity.y = sqrt(2.0 * _gravity * bounce_height)
 		_set_state(State.BOUNCE)
 
@@ -165,9 +279,9 @@ func _process_land(_delta: float) -> void:
 	velocity.x = 0.0
 	velocity.z = 0.0
 
-	# Impact squash then spring back over 0.3s
+	# Impact squash then spring back over 0.3s, settling onto the resting load
 	var t: float = clamp(_state_time / 0.3, 0.0, 1.0)
-	_compression = lerp(0.8, 0.0, ease(t, 0.3))
+	_compression = lerp(0.8, _rest, ease(t, 0.3))
 
 	if t >= 1.0:
 		# Try to damage player on contact
@@ -183,9 +297,9 @@ func _process_land(_delta: float) -> void:
 func _process_patrol(delta: float) -> void:
 	_patrol_timer += delta
 
-	# Gentle idle compression while patrolling
+	# Gentle idle compression while patrolling, about whatever it is standing under
 	_bounce_phase += delta * 3.0
-	_compression = 0.05 + 0.08 * sin(_bounce_phase)
+	_compression = _rest + 0.05 + 0.08 * sin(_bounce_phase)
 
 	var dist: float = _get_player_distance()
 
@@ -331,7 +445,7 @@ func _build_mesh() -> void:
 		var ring: MeshInstance3D = MeshInstance3D.new()
 		ring.name = "CoilRing_%d" % i
 		var torus: TorusMesh = TorusMesh.new()
-		torus.inner_radius = coil_radius * 0.75
+		torus.inner_radius = coil_radius * _wire_ratio
 		torus.outer_radius = coil_radius
 		torus.rings = 16
 		torus.ring_segments = 8
@@ -383,8 +497,9 @@ func _update_mesh(_delta: float) -> void:
 	if not is_instance_valid(_mesh_root):
 		return
 
-	# Coil compression: scale Y of the coil root
-	var coil_scale_y: float = lerp(1.0, 0.15, clamp(_compression, -0.3, 1.0))
+	# Coil compression: scale Y of the coil root. The floor is the spring's SOLID LENGTH —
+	# turns touching, nothing left to give. It is a temper property, not a magic number.
+	var coil_scale_y: float = lerp(1.0, _coil_floor, clamp(_compression, -0.3, 1.0))
 	_coil_root.scale.y = coil_scale_y
 
 	# Head follows top of coil

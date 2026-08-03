@@ -24,25 +24,55 @@ extends Node3D
 @export var brush_radius: float = 0.045
 @export var brush_hover_height: float = 0.055
 
+# DNA — support. Pollock's break was not a mark, it was a POSTURE: the canvas came off
+# the easel and went on the studio floor, and the body walked around a thing it could
+# no longer face. This artifact shipped that decision as a hard-coded `place_on_floor`
+# rotation of (-90, 180, 0) at y = 0.02 and nothing else. The axis restores the ladder
+# the drip argued against — the floor the body stands over, the table it leans across,
+# the easel it was supposed to sit at, the wall the finished picture ends up on.
+# `floor` is the shipped value in every respect, down to the same two numbers.
+@export_group("Support")
+## The allow-list apply_grid_config validates a map token against. Kept identical to the
+## @export_enum above and to the registry's dna.axes.support — the three lists are the
+## same list, and a value that appears in only two of them is the science_screen fault.
+const SUPPORTS := ["floor", "table", "easel", "wall"]
+@export_enum("floor", "table", "easel", "wall") var support: String = "floor"
+@export var table_height: float = 0.78
+@export var easel_lean_degrees: float = 18.0
+@export var easel_center_height: float = 1.45
+@export var wall_center_height: float = 1.65
+
+# 0 means "leave the 2D painter alone", which is what shipped: paint_dripping_2d calls
+# rng.randomize() and every boot is a different painting. That is correct in a room and
+# ruinous in a sweep, where four postures would also be four different paintings and the
+# measurement would be about the paint. A non-zero seed repaints the canvas once,
+# deterministically, so the frames differ only in the axis. Set from dna.fixture.
+@export var paint_seed: int = 0
+
 @onready var sprite_3d: Sprite3D = $Sprite3D
 @onready var sub_viewport: SubViewport = $SubViewport
 
 var _paint_2d: Node = null
 var _brush_cursor: MeshInstance3D = null
 var _brush_tween: Tween = null
+var _built: bool = false
 
 
 func _ready() -> void:
 	sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	await get_tree().process_frame
 
-	_configure_floor_layout()
+	_paint_2d = sub_viewport.get_node_or_null("PollockPainting2D")
+	_apply_paint_seed()
+
+	_configure_support_layout()
 	sprite_3d.texture = sub_viewport.get_texture()
 	sprite_3d.pixel_size = pixel_size
 	_setup_sprite_material()
 	_create_frame_panels()
 	_connect_stroke_signal()
 	_create_brush_cursor()
+	_built = true
 
 
 func _setup_sprite_material() -> void:
@@ -54,11 +84,38 @@ func _setup_sprite_material() -> void:
 	sprite_3d.material_override = material
 
 
-func _configure_floor_layout() -> void:
-	if not place_on_floor:
+func _configure_support_layout() -> void:
+	# The shipped escape hatch, untouched: place_on_floor = false left the Sprite3D on
+	# whatever transform the scene gave it. It still does, as long as nobody asked for a
+	# different support — the two flags only meet on the default value.
+	if support == "floor" and not place_on_floor:
 		return
-	sprite_3d.rotation_degrees = Vector3(-90.0, 180.0, 0.0)
-	sprite_3d.position = Vector3(0.0, floor_height, 0.0)
+
+	var tilt: float = -90.0
+	var height: float = floor_height
+	match support:
+		"floor":
+			tilt = -90.0
+			height = floor_height
+		"table":
+			tilt = -90.0
+			height = table_height
+		"easel":
+			tilt = -easel_lean_degrees
+			height = easel_center_height
+		"wall":
+			tilt = 0.0
+			height = wall_center_height
+
+	sprite_3d.rotation_degrees = Vector3(tilt, 180.0, 0.0)
+	sprite_3d.position = Vector3(0.0, height, 0.0)
+
+
+func _apply_paint_seed() -> void:
+	if paint_seed == 0 or _paint_2d == null:
+		return
+	if _paint_2d.has_method("repaint_with_seed"):
+		_paint_2d.call("repaint_with_seed", paint_seed)
 
 
 func _create_frame_panels() -> void:
@@ -176,5 +233,45 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Only ever restages when a value BOTH validates AND differs from what is already
+## standing, and never before _ready has built once. The three shipped placements pass
+## neither key, so nothing in them re-runs.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+
+	var changed: bool = false
+
+	if config.has("support"):
+		var want: String = String(config["support"]).to_lower().strip_edges()
+		if want in SUPPORTS and want != support:
+			support = want
+			changed = true
+
+	if config.has("paint_seed"):
+		var want_seed: int = int(config["paint_seed"])
+		if want_seed != paint_seed:
+			paint_seed = want_seed
+			changed = true
+			_apply_paint_seed()
+
+	if changed and _built and is_inside_tree():
+		_restage()
+
+
+## Re-run the parts of _ready that depend on the support. The frame and backing panels
+## copy sprite_3d.transform at build time, so moving the canvas without rebuilding them
+## would leave the picture and its frame in two different rooms.
+func _restage() -> void:
+	_configure_support_layout()
+	for child in get_children():
+		if child is MeshInstance3D and child.name in ["BackingPanel", "FramePanel"]:
+			child.queue_free()
+	_create_frame_panels()
+	if _brush_cursor != null:
+		if _brush_tween and _brush_tween.is_running():
+			_brush_tween.kill()
+		_brush_cursor.global_position = _canvas_pixel_to_world(
+			Vector2(sub_viewport.size.x * 0.5, sub_viewport.size.y * 0.5),
+			brush_hover_height
+		)

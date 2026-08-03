@@ -17,6 +17,42 @@ class_name QFEPParticleChaos
 # relationships: represents E(S) term; contrasts ordered_grid (F term); paired with random_cubes; feeds into lambda spectrum
 # truth: entropy is not disorder but possibility — maximum spread means maximum freedom from constraint
 
+## --- DNA (stage 2, promoted 2026-08-03) ---
+##
+## AXIS — CONSTRAINT: which law the free cloud is made to obey.
+##
+## This artifact's whole claim is in its own truth line: "entropy is not disorder but
+## possibility — maximum spread means maximum freedom from constraint." And it argues that
+## claim by DELETION. Four lines of _build_particles() are the argument, and every one of
+## them is a removal: direction = (0,0,0) — no preferred heading; spread = 180 — the full
+## sphere; gravity = (0,0,0) — no field; attractor_interaction_enabled = false — nothing
+## pulling. The freedom is real, but it is invisible, because a player who has only ever
+## met the unconstrained ball has no second term to read it against. Freedom from what?
+##
+## So the axis puts the constraints BACK, one at a time, and names each one. Nothing here
+## is a parameter of the noise — the count, the speeds, the lifetime and the colour are
+## untouched by every value, and a finer or coarser cloud would be exactly the
+## reaction_diffusion failure: five frames that differ only in texture, which a still
+## cannot tell apart from five frames of nothing. What changes is the SILHOUETTE, because
+## what changes is the law:
+##
+##   none      the shipped lineage, byte for byte. Isotropic sphere. No field, no channel,
+##             no circulation, no dissipation. Entropy with nothing to push against.
+##   gravity   a field. One direction is now cheaper than the others, so the ball becomes
+##             a plume that falls — chaos is still total in x and z and broken in y.
+##   jet       a channel. The heading is dictated at birth (spread 12°), so the same
+##             random speeds make a narrow column. Freedom of magnitude, not of direction.
+##   vortex    a circulation. Emission on a thin horizontal annulus with a tangential
+##             acceleration: motion is bound to a circle, and the cloud reads as a disc.
+##   drag      dissipation. Damping bleeds the velocity away before the lifetime is out,
+##             so the cloud collapses toward its own emitter — the thermodynamic opposite
+##             of spread, and the one value where the particles are not free at all.
+##
+## `none` is the default and the default alone is what the three existing placements
+## (QFEP_E_Term, Corridor_QFEP_E_Term, Curation_Bay_qfeplaboratory_3) get.
+const CONSTRAINTS: PackedStringArray = ["none", "gravity", "jet", "vortex", "drag"]
+@export_enum("none", "gravity", "jet", "vortex", "drag") var constraint: String = "none"
+
 ## Particle count
 @export var particle_count: int = 200
 

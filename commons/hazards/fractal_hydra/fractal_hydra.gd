@@ -16,13 +16,46 @@ class_name FractalHydra
 ## bites independently. More heads = faster attacks but less damage each.
 ## Creature dies when ALL heads reach minimum size and are destroyed.
 
+## --- DNA (stage 2, promoted 2026-08-03) -------------------------------------
+## Axis:
+##   start_depth   how many times this hydra has ALREADY been cut when you meet it
+##
+## start_depth=0 is exactly what shipped: the two base-size heads at ±0.5 that
+## _on_ready() used to add by hand.
+##
+## WHY NOT max_depth, WHICH WAS ALREADY AN EXPORT. max_depth is a CEILING on
+## splitting, and splitting only happens under damage. A hydra with max_depth=0
+## and one with max_depth=3 build the identical two heads at spawn and stay
+## identical until somebody hits them — so four values of it are four identical
+## photographs. It is a time-domain knob wearing the costume of a shape knob,
+## and declaring it would have run the whole loop green on a verdict about
+## nothing. It stays exported and stays undeclared.
+##
+## start_depth is the same quantity made present. The crown is pre-grown by the
+## SAME rule the cut uses (each head becomes two at SPLIT_RATIO size, ±SPLIT_SPREAD
+## off the parent's angle), so a start_depth=2 hydra is geometrically the hydra
+## you would be facing after two cuts: 2 → 4 → 8 heads, each 0.6 of the last.
+## That is the artifact's whole argument standing still — the punishment for
+## attacking IS more attackers — and it is the difference between one silhouette
+## and another rather than a fact you can only learn by fighting.
+##
+## Map token:  "fractal_hydra#start_depth:2"
+## ---------------------------------------------------------------------------
+
 @export_group("Hydra")
 @export var max_depth: int = 3
+## DNA axis: cuts already suffered. 0 = the shipped pair of full-size heads.
+@export_range(0, 3) var start_depth: int = 0
 @export var base_head_size: float = 0.15
 @export var neck_length: float = 0.35
 @export var bite_range: float = 0.25
 @export var bite_speed: float = 3.0
 @export var base_bite_damage: float = 12.0
+
+## A cut head becomes two at this fraction of its size, this far off its angle.
+## Named so the pre-grown crown and the live split cannot drift apart.
+const SPLIT_RATIO: float = 0.6
+const SPLIT_SPREAD: float = 0.4
 
 # ── State ──────────────────────────────────────────────────────────────
 var _heads: Array[Dictionary] = []
@@ -36,6 +69,9 @@ var _label: Label3D = null
 var _total_bite_timer: float = 0.0
 var _leg_roots: Array[Node3D] = []
 var _walk_phase: float = 0.0
+## True once _on_ready has grown the crown. Guards the config hook from
+## regrowing a body that does not exist yet.
+var _built: bool = false
 
 
 func _on_ready() -> void:
@@ -46,9 +82,32 @@ func _on_ready() -> void:
 	contact_damage = 10.0
 	detection_radius = 8.0
 
-	# Start with 2 heads
-	_add_head(0.0, base_head_size, 0, -0.5)
-	_add_head(0.0, base_head_size, 0, 0.5)
+	_build_crown()
+	_built = true
+
+
+## Grow the crown to start_depth by replaying the cut. At start_depth 0 this is
+## literally the two shipped calls — angles -0.5 and 0.5, base_head_size, depth
+## 0, added in that order — so an untouched placement is unchanged. Each further
+## level applies the same transform _on_damaged applies to a head it splits, and
+## only the SURVIVING generation is instantiated: the intermediate parents are
+## dead the moment they split, so building them would leave hidden meshes in the
+## subtree that inflate the capture AABB for nothing.
+func _build_crown() -> void:
+	var angles: Array[float] = [-0.5, 0.5]
+	var size: float = base_head_size
+	var depth: int = 0
+	var grown: int = clampi(start_depth, 0, max_depth)
+	while depth < grown:
+		var wider: Array[float] = []
+		for a in angles:
+			wider.append(a - SPLIT_SPREAD)
+			wider.append(a + SPLIT_SPREAD)
+		angles = wider
+		size *= SPLIT_RATIO
+		depth += 1
+	for ang in angles:
+		_add_head(ang, size, depth, 0.0)
 
 
 func _create_materials() -> void:
@@ -270,9 +329,51 @@ func _on_damaged(_amount: float) -> void:
 	var parent_head: Dictionary = _heads[split_idx]
 	parent_head["alive"] = false
 
-	var new_size: float = parent_head["size"] * 0.6
+	var new_size: float = parent_head["size"] * SPLIT_RATIO
 	var new_depth: int = parent_head["depth"] + 1
 	var base_angle: float = parent_head["angle"]
 
-	_add_head(base_angle, new_size, new_depth, -0.4)
-	_add_head(base_angle, new_size, new_depth, 0.4)
+	_add_head(base_angle, new_size, new_depth, -SPLIT_SPREAD)
+	_add_head(base_angle, new_size, new_depth, SPLIT_SPREAD)
+
+
+## Tear the crown down and grow it again at the current start_depth. Only called
+## from apply_grid_config, and only when the value actually changed.
+func _regrow_crown() -> void:
+	for h in _heads:
+		var m: Node = h["mesh"]
+		var n: Node = h["neck"]
+		if is_instance_valid(m):
+			m.queue_free()
+		if is_instance_valid(n):
+			n.queue_free()
+	_heads.clear()
+	_head_mats.clear()
+	_build_crown()
+
+
+## Guarded on both counts: the crown is regrown only when start_depth actually
+## CHANGED, and only after _on_ready has grown it once. A placement that passes
+## no start_depth — which today is the single existing one — gets exactly the
+## behaviour it had before the axis existed. Everything else falls through to
+## the base configure(), unchanged.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var re_grow: bool = false
+	for key in config_data:
+		var k: String = str(key)
+		if k == "max_depth":
+			var m: int = clampi(int(config_data[key]), 0, 6)
+			if m != max_depth:
+				max_depth = m
+			continue
+		if k == "start_depth":
+			# Clamped against max_depth in _build_crown, not here, so a token
+			# that sets both keys behaves the same whichever order they arrive.
+			var d: int = clampi(int(config_data[key]), 0, 6)
+			if d != start_depth:
+				start_depth = d
+				re_grow = true
+			continue
+	super.apply_grid_config(config_data)
+	if re_grow and _built:
+		_regrow_crown()

@@ -14900,6 +14900,32 @@
    }
   },
   "xyz_coordinates": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "frame": [
+      "orthonormal",
+      "tilted",
+      "skewed",
+      "stretched",
+      "mirrored"
+     ],
+     "readout": [
+      "none",
+      "numeral",
+      "gradation",
+      "lattice"
+     ]
+    },
+    "default": "frame=orthonormal, readout=none - orthonormal returns Basis.IDENTITY, which _apply_frame writes into the CoordinateAxes node's transform as Transform3D(IDENTITY, ZERO), i.e. the transform that node already had, and moves the three billboard letters to (1.2,0,0)/(0,1.2,0)/(0,0,1.2), which is where create_axes literally put them; readout=none is the `_:` branch of _build_readout and adds no node at all. All 7 placements (Tutorial_Single, Tutorial_Row, Tutorial_2D_Build, Tutorial_2D_Color, Tutorial_App, Spine_Museum, Lab) are bare tokens with no config, and apply_grid_config only assigns when the word is in the allow-list AND differs from the value already held, so nothing is torn down for them.",
+    "was": "four exports and every one a dial on HANDLING - initial_scale, rotation_speed and two camera sensitivities - and not one about the coordinate system the gadget exists to argue about. The three rods were three literal CSGCylinder3D blocks with hard-coded rotations, and there was no apply_grid_config at all, so no map token could reach anything.",
+    "note": "frame is the argument. This artifact's own truth statement is that a coordinate system is a convention about shared directions and not a property of space, and until now it could draw exactly ONE convention - right angles, equal lengths, right-handed, aligned with the room - which is that claim's contradiction standing in seven rooms. Each value drops one property the identity silently bundles: tilted drops nothing but agreement with the walls (the rung the artifact's own `emerges` note is about, where 'X goes right' stops being true); skewed drops orthogonality; stretched drops unit length, so the same point in the world carries quite different numbers; mirrored drops right-handedness and Z points backward. The map is applied to the CoordinateAxes node, so the rods, the readout collars, the lattice and the invisible FrameAnchor all move as one system - the letters are moved by hand instead of re-parented, because moving them in the tree would change what GridInteractablesComponent._compute_local_aabb sees among the root's direct children and every live placement would ground differently.",
+    "kin": "frame is taken character for character from basis_vectors_rig (promoted the same day), which asks the same question of the same geometry: three coloured legs from one origin, and a name - `basis`, `coordinates` - claiming more than the drawing can support. The shared word is honest here because the geometry IS the geometry; the rig adds the linear-combination staircase, this one adds the graduations. Both ship orthonormal, so the family measures alike at its default. readout is taken character for character from xyz_slider_plate and line, which carry the same four rungs; those two are the plate and the segment, this is the frame they are read against.",
+    "pairs": "skewed x lattice is the strongest single frame this gadget can produce - a graduated oblique lattice is the one picture in which 'the grid' and 'the right angle' visibly come apart. Sweeping frame at readout=none understates it, because a bare rod carries no marks to shear.",
+    "still_note": "every rung of both axes is standing geometry under a standing linear map; nothing animates, so a still holds it. frame needs no rebuild at all (one transform write plus three label positions); readout rebuilds only its own Readout node.",
+    "framing_note": "the gadget is CSGCylinder3D and Label3D only, and both AABB walks in this repo type `is MeshInstance3D`, so an invisible layers=0 FrameAnchor already exists inside CoordinateAxes to give the capture something to measure. It is sized for the ORTHONORMAL frame; under stretched and mirrored it is carried by the same basis and grows with the rods, but check subject % before reading a verdict."
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Cartesian coordinate system, x y z godot",

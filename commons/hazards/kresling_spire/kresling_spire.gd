@@ -82,6 +82,37 @@ const FIRE_BOLT_SCENE: PackedScene = preload("res://commons/hazards/armadillo_dr
 const WARNING_VALUES: PackedStringArray = ["none", "stain", "cage", "beacon", "shroud"]
 @export_enum("none", "stain", "cage", "beacon", "shroud") var warning: String = "none"
 
+## AXIS — POSTURE: which of its two bodies the spire is wearing.
+##
+## The word is [[armadillo_eggling]]'s, and the question is the same one: a hazard that
+## owns two bodies, and a map that gets to say which one it stands in. The VALUES are not
+## shared, and should not be — a Kresling drum has no ball and no legs. What is shared is
+## the claim underneath. The eggling's `walker` opens the shell and still has no gun,
+## which says the deployment was never the weapon; this axis says it from the other side.
+##
+## _twist is the artifact's own declared critical_parameter, a single DOF running 0 (tall
+## tower) to 1 (flat disc), and the shipped spire never holds it still: it rises, fires,
+## collapses and rolls. That is the whole argument at rest — to twist IS to rise — and it
+## is invisible to any one still, because a still catches one moment of it.
+##
+##   cycle   THE LEGACY BODY, byte for byte. The state machine owns the fold: it starts
+##           deployed and aiming and thereafter runs DISC-RISE-AIM-FIRE-COLLAPSE-RELOCATE
+##           on exactly the schedule it always had.
+##   disc    the fold pinned flat — the mobile form, permanently. It still tracks, still
+##           bursts, still relocates; it simply never gets up. A sniper firing off the
+##           floor says the rise was never the weapon.
+##   half    pinned mid-fold, caught between the two bodies: a twisted drum that is
+##           neither a tile nor a mast. The state a still would otherwise never hold.
+##   tower   the fold pinned extended — always a firing position, never a floor plate.
+##           The standoff is permanent and legible from across the room.
+##
+## THE ROUTINE IS UNTOUCHED. The pin is written AFTER the state machine each frame, so
+## every state still runs and every combat number — fire_damage, fire_speed,
+## shots_per_burst, fire_interval, optimal_range, detection_radius, disc_speed,
+## max_health — is identical at all four values. Only the fold is held.
+const POSTURES: PackedStringArray = ["cycle", "disc", "half", "tower"]
+@export_enum("cycle", "disc", "half", "tower") var posture: String = "cycle"
+
 # State
 var _health: float = 0.0
 var _state: State = State.DISC
@@ -117,6 +148,13 @@ func _ready() -> void:
 	# Start extended for visibility during dev
 	_set_state(State.AIM)
 	_twist = 0.1
+	# POSTURE — a pinned body is shown pinned from the FIRST frame, never caught on its
+	# way there. `cycle` returns -1.0 and nothing below runs, so the shipped start pose
+	# (AIM at _twist 0.1) is untouched.
+	var pin: float = _pin_twist()
+	if pin >= 0.0:
+		_twist = pin
+		_update_mesh()
 	print("KreslingSpire: READY at %s" % global_position)
 	# WARNING dressing, appended LAST so the collision shape and the mesh root keep
 	# their child indices. "none" adds nothing at all — the legacy lineage.
@@ -144,7 +182,14 @@ func _physics_process(delta: float) -> void:
 			_process_relocate(delta)
 		State.DEAD:
 			_process_dead(delta)
-	
+
+	# POSTURE - held AFTER the state machine has written, so the routine (positioning,
+	# aim, burst, relocate, death) is byte-identical at every value and only the fold is
+	# fixed. `cycle` returns -1.0 and writes nothing at all.
+	var pin: float = _pin_twist()
+	if pin >= 0.0:
+		_twist = pin
+
 	_update_mesh()
 	
 	if _state != State.DEAD:
@@ -254,6 +299,21 @@ func _process_dead(delta: float) -> void:
 		# Reset instead of destroy for dev observation
 		_health = max_health
 		_set_state(State.DISC)
+
+
+## The fold value POSTURE holds, or -1.0 for "the state machine owns it" — which is the
+## default and the shipped behaviour. Kept as one sentinel-returning function so the two
+## call sites (first frame, every frame) can never disagree about what `cycle` means.
+func _pin_twist() -> float:
+	match posture:
+		"disc":
+			return 0.95
+		"half":
+			return 0.5
+		"tower":
+			return 0.05
+		_:
+			return -1.0
 
 
 func _set_state(new_state: State) -> void:
@@ -517,18 +577,43 @@ func _get_player_distance() -> float:
 
 
 func configure(config: Dictionary) -> void:
+	var pattern_changed: bool = false
 	if config.has("segments"):
-		radial_segments = int(config["segments"])
+		var want_segments: int = int(config["segments"])
+		if want_segments != radial_segments:
+			radial_segments = want_segments
+			pattern_changed = true
 	if config.has("layers"):
-		layers = int(config["layers"])
+		var want_layers: int = int(config["layers"])
+		if want_layers != layers:
+			layers = want_layers
+			pattern_changed = true
 	if config.has("health"):
 		max_health = float(config["health"])
 		_health = max_health
 	if config.has("damage"):
 		fire_damage = float(config["damage"])
 
-	if _geometry:
+	# GUARDED. This used to read `if _geometry: _rebuild_mesh()`, unconditionally, so ANY
+	# config dict — including an empty one, and including one that only names a warning —
+	# freed the mesh root and rebuilt every face of every shipped placement. Identical
+	# geometry, thrown away and remade, plus a spin angle silently reset to zero. Only a
+	# changed PATTERN rebuilds now; nothing else about the body moves.
+	if pattern_changed and _geometry:
 		_rebuild_mesh()
+
+	# POSTURE — which body it stands in. Only an understood word that DIFFERS is taken, so
+	# an absent key, a typo or a repeat of the current value leaves the fold exactly where
+	# the state machine had it. The pose is applied immediately rather than waited for,
+	# because a map that asks for a disc should not get a tower for one physics frame.
+	if config.has("posture"):
+		var want_posture: String = str(config["posture"]).strip_edges().to_lower()
+		if POSTURES.has(want_posture) and want_posture != posture:
+			posture = want_posture
+			var pin: float = _pin_twist()
+			if pin >= 0.0 and _geometry:
+				_twist = pin
+				_update_mesh()
 
 	# WARNING — read last, from the config dict or the config_<key> metadata the grid
 	# stamps on the root, and an unknown word keeps the default rather than blanking

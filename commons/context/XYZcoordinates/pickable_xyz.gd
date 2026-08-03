@@ -13,6 +13,10 @@ extends Node3D
 #   so the three had to speak one vocabulary or the family would have had three private ones.
 # truth: coordinate systems are conventions about shared directions, not properties of space itself — the XYZ gadget makes this visible by being rotatable
 #
+# DNA AXIS — frame: which of the identity basis's properties this gadget treats as a fact about
+#   space rather than a choice made about it. Kin to [[basis_vectors_rig]], same word, same five
+#   values, same three coloured legs on the same origin. See the block above the export.
+#
 # DNA AXIS — readout: whether this frame only NAMES directions or also MEASURES along them. The
 #   shipped gadget is three coloured rods and three letters: it says "this way is X" and nothing
 #   about how far. That is a real position to hold, and the rungs above it are three progressively
@@ -47,6 +51,39 @@ extends Node3D
 ## Allow-list — an unrecognised token falls back to the shipped bare frame.
 const READOUTS: PackedStringArray = ["none", "numeral", "gradation", "lattice"]
 
+## AXIS — WHICH PROPERTIES OF THE FRAME ARE FACTS, AND WHICH ARE CHOICES? Adopted character
+## for character from [[basis_vectors_rig]], which asks the same question of the same three
+## coloured legs standing on the same origin. This gadget's whole truth statement is that a
+## coordinate system is a convention, and until now it could only ever draw ONE convention:
+## three rods at right angles, all the same length, right-handed. It presented as a fact
+## about space the single choice it had been given. Each rung below drops exactly one
+## property the identity basis silently bundles.
+##
+##   orthonormal  Basis.IDENTITY — the shipped gadget, 7 rooms, byte for byte. Right angles,
+##                equal lengths, right-handed, aligned with the room
+##   tilted       a rigid 30° turn about the (1,1,1) diagonal. Nothing is dropped: still
+##                orthogonal, still unit, still right-handed — only no longer agreeing with
+##                the walls. This is the rung the artifact's own `emerges` note describes,
+##                the one where "X goes right" stops being true
+##   skewed       drops ORTHOGONALITY. Y leans 18° toward X and Z leans 27° toward Y; the
+##                rods still measure 1.2, and the lattice under `readout` becomes an oblique
+##                lattice, which is what a non-orthogonal basis actually costs you
+##   stretched    drops UNIT LENGTH. X at 1.45, Y at 0.55, Z at 1.0 — the same point in the
+##                world now has quite different numbers on it, and the gadget stops implying
+##                that one step along X and one step along Y are the same size step
+##   mirrored     drops RIGHT-HANDEDNESS. Z points backward. Every angle and every length is
+##                preserved and the space is still perfectly good; it is only no longer the
+##                one Godot's cross product assumes
+##
+## R2 note: every rung is a standing linear map on standing geometry. Nothing animates, so a
+## still can hold it. It reads against `readout`: `skewed` x `lattice` is the strongest single
+## frame this gadget can make, because a graduated oblique lattice is the one picture in which
+## "the grid" and "the right angle" visibly come apart.
+@export_enum("orthonormal", "tilted", "skewed", "stretched", "mirrored") var frame: String = "orthonormal"
+
+## Allow-list — an unrecognised token falls back to the shipped identity frame.
+const FRAMES: PackedStringArray = ["orthonormal", "tilted", "skewed", "stretched", "mirrored"]
+
 const AXIS_LEN := 1.2               # rod length, matching the label positions
 const RO_TICK_STEP := 0.15          # spacing of gradation collars
 const RO_LATTICE_DIV := 5           # grid lines per coordinate plane, per direction
@@ -57,6 +94,7 @@ var initial_camera_rotation: Basis
 
 var _axes_root: Node3D
 var _readout_root: Node3D
+var _axis_labels: Array[Label3D] = []
 
 func _ready():
 	# Scale down the gadget
@@ -64,21 +102,72 @@ func _ready():
 	create_axes()
 	# Appended LAST, after the three rods and their labels exist.
 	_build_readout()
+	# Identity under the default, so this line changes nothing for a shipped placement.
+	_apply_frame()
 
 
 ## Reachable configuration. THIS METHOD DID NOT EXIST — the gadget had no apply_grid_config at
 ## all, so a map token could not reach a single one of its exports, and the DNA sweep (which
 ## calls the method only `if art.has_method(...)`) would have silently photographed the default
 ## four times over and reported the axis INERT. Adding the hook is the precondition for this
-## artifact having DNA at all; it reads only `readout`, so no shipped placement changes.
+## artifact having DNA at all; it reads `readout` and `frame` and nothing else, so no shipped
+## placement changes. Both branches are CHANGE-GUARDED: a map token that names the value the gadget already has,
+## or names one that is not in the allow-list, tears nothing down. GridInteractablesComponent
+## calls this deferred, i.e. after _ready has built once, so a rebuild here is always a rebuild
+## of something that exists.
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("readout"):
 		var word: String = str(config_data["readout"]).strip_edges().to_lower()
-		readout = word if READOUTS.has(word) else readout
-		_rebuild_readout()
+		if READOUTS.has(word) and word != readout:
+			readout = word
+			_rebuild_readout()
+	if config_data.has("frame"):
+		var fw: String = str(config_data["frame"]).strip_edges().to_lower()
+		if FRAMES.has(fw) and fw != frame:
+			frame = fw
+			_apply_frame()
+
+
+# ── Frame axis ────────────────────────────────────────────────────────
+# The linear map the three rods are drawn under. Applied to the CoordinateAxes node, so the
+# rods, the readout collars, the lattice and the invisible capture anchor all move together
+# and stay in ONE coordinate system — which is the point. The three billboard letters are not
+# under that node (they are direct children of the root, where they shipped), so they are
+# repositioned by hand rather than moved in the tree: shifting them would change what
+# GridInteractablesComponent._compute_local_aabb sees among the root's direct children, and
+# all 7 live placements would ground differently.
+func _frame_basis() -> Basis:
+	match frame:
+		"tilted":
+			return Basis(Vector3(1, 1, 1).normalized(), deg_to_rad(30.0))
+		"skewed":
+			# unit columns, non-orthogonal: j leans 18 degrees into i, k leans 27 into j
+			return Basis(Vector3(1, 0, 0), Vector3(0.309, 0.951, 0), Vector3(0, 0.454, 0.891))
+		"stretched":
+			return Basis(Vector3(1.45, 0, 0), Vector3(0, 0.55, 0), Vector3(0, 0, 1.0))
+		"mirrored":
+			return Basis(Vector3(1, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, -1))
+		_:
+			return Basis.IDENTITY          # "orthonormal" — the shipped frame, unchanged
+
+
+func _apply_frame() -> void:
+	if _axes_root == null:
+		return
+	var m: Basis = _frame_basis()
+	_axes_root.transform = Transform3D(m, Vector3.ZERO)
+	for i in range(_axis_labels.size()):
+		if i >= RO_AXES.size():
+			break
+		var lab: Label3D = _axis_labels[i]
+		if not is_instance_valid(lab):
+			continue
+		var d: Vector3 = RO_AXES[i]["dir"]
+		lab.position = m * (d * AXIS_LEN)
 
 func create_axes():
 	# Create axes visualization to show X, Y, Z directions
+	_axis_labels.clear()
 	var axes = Node3D.new()
 	axes.name = "CoordinateAxes"
 	add_child(axes)
@@ -159,6 +248,8 @@ func add_axis_label(text: String, position: Vector3, color: Color):
 	label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label_3d.position = position
 	add_child(label_3d)
+	# Kept in X, Y, Z order so _apply_frame can move each letter to the end of its own rod.
+	_axis_labels.append(label_3d)
 
 
 # ── Readout axis ──────────────────────────────────────────────────────

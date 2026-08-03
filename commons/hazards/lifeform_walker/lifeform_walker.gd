@@ -13,13 +13,70 @@ class_name LifeformWalker
 ## Cellular Automata hazard — a walking creature with a 6×6 Game of Life grid
 ## on its torso. Living cells provide armor; dead cells expose weakness.
 ## CA rules run each tick, teaching local rules → global patterns.
+##
+## --- DNA (stage 2, promoted 2026-08-03) -------------------------------------
+## Axis:
+##   rule   which automaton governs the armour
+##
+## rule=life is exactly what shipped. `life` is [[3], [2, 3]] — B3/S23, which is
+## the `neighbors == 2 or neighbors == 3` that _step_ca() used to write out by
+## hand, so the default path is byte-for-byte the old one.
+##
+## WHY THE LAW AND NOT THE SOUP. The @identity names the critical parameter as
+## "_grid state / _generation", and the shipped _init_grid seeds at density 0.5.
+## Density is the wrong knob and complexity_pattern already refused it for the
+## same reason: under Life every starting density converges to the same sparse
+## litter of still lifes, so five densities photograph as five indistinguishable
+## torsos. What the still actually shows is HOW MUCH OF THE BODY IS ARMOURED,
+## and that fraction is a property of the rule table, not of the soup — life and
+## highlife decay to a few blocks, maze and coral freeze into standing structure
+## covering most of the plate, seeds sprays and empties, replicator fills to a
+## periodic parity texture. The creature stops asserting "Conway" and starts
+## showing what a different law would have armoured it with.
+##
+## THE WORD IS BORROWED ON PURPOSE. `rule` with exactly these six values is
+## complexity_pattern's axis, character for character, including the RULES table
+## below. That artifact is the same automaton as a flat field; this one wears it.
+## Same question, same vocabulary, and the two should measure ALIKE — which is
+## itself the check on whether the sharing was honest.
+##
+## ca_seed and warmup are NOT axes. They are fixture knobs, both defaulting to
+## the shipped behaviour (0 = fresh unseeded randomness at spawn, no generations
+## run before the first frame). Without a seed, six rule variants are six
+## different random torsos and the sweep measures the RNG; without a warmup
+## every variant photographs the same undifferentiated 50% soup, because at
+## generation 0 no rule has spoken yet.
+##
+## Map token:  "lifeform_walker#rule:maze"
+## ---------------------------------------------------------------------------
 
 @export_group("Cellular Automata")
+## DNA axis: which automaton governs the armour. "life" is B3/S23, the rule the
+## shipped code wrote out by hand.
+@export_enum("life", "highlife", "seeds", "replicator", "maze", "coral") var rule: String = "life"
 @export var ca_rows: int = 6
 @export var ca_cols: int = 6
 @export var ca_tick_rate: float = 0.5
 @export var ca_tick_rate_chase: float = 0.2
 @export var cell_size: float = 0.05
+
+## Fixture knob, not an axis. 0 = the shipped unseeded soup, so every existing
+## placement keeps its own fresh randomness on every spawn.
+@export var ca_seed: int = 0
+
+## Fixture knob, not an axis. Generations run at build time before the first
+## frame. 0 = shipped (the player meets the soup and watches it organise).
+@export var warmup: int = 0
+
+## birth neighbour counts, survival neighbour counts.
+const RULES = {
+	"life": [[3], [2, 3]],
+	"highlife": [[3, 6], [2, 3]],
+	"seeds": [[2], []],
+	"replicator": [[1, 3, 5, 7], [1, 3, 5, 7]],
+	"maze": [[3], [1, 2, 3, 4, 5]],
+	"coral": [[3], [4, 5, 6, 7, 8]],
+}
 
 @export_group("Appearance")
 @export var alive_color: Color = Color(0.2, 1.0, 0.3)
@@ -46,10 +103,41 @@ var _body_mat: StandardMaterial3D
 var _alive_mat: StandardMaterial3D
 var _dead_mat: StandardMaterial3D
 
+## Null unless ca_seed is set, in which case every draw comes from it.
+## Null is the shipped path: the global randf(), exactly as before.
+var _rng: RandomNumberGenerator = null
+## True once _on_ready has seeded the grid. Guards the config hook from
+## regrowing a body that does not exist yet.
+var _built: bool = false
+
 
 func _on_ready() -> void:
 	add_to_group("ca_enemy")
+	_seed_rng()
 	_init_grid()
+	for _i in range(maxi(warmup, 0)):
+		_step_ca()
+	# Only reachable with warmup > 0, which no existing placement sets. The
+	# shipped creature leaves all 36 cells on the alive material until the first
+	# tick lands half a second later, and that is preserved.
+	if warmup > 0:
+		_update_cell_visuals()
+	_built = true
+
+
+func _seed_rng() -> void:
+	if ca_seed == 0:
+		_rng = null
+		return
+	_rng = RandomNumberGenerator.new()
+	_rng.seed = ca_seed
+
+
+## The shipped call when unseeded, so nothing about the default path changes.
+func _roll() -> float:
+	if _rng != null:
+		return _rng.randf()
+	return randf()
 
 
 func _init_grid() -> void:
@@ -57,7 +145,7 @@ func _init_grid() -> void:
 	for r in range(ca_rows):
 		var row: Array = []
 		for c in range(ca_cols):
-			row.append(randf() > 0.5)
+			row.append(_roll() > 0.5)
 		_grid.append(row)
 	_count_alive()
 
@@ -150,6 +238,12 @@ func _process_visual(delta: float) -> void:
 
 
 func _step_ca() -> void:
+	# The transition rule. "life" is [[3], [2, 3]] — B3/S23, which is the
+	# `neighbors == 2 or neighbors == 3` this function used to write out by hand,
+	# so the default path is the shipped one exactly.
+	var law: Array = RULES.get(rule, RULES["life"])
+	var birth: Array = law[0]
+	var survive: Array = law[1]
 	var new_grid: Array = []
 	for r in range(ca_rows):
 		var row: Array = []
@@ -157,9 +251,9 @@ func _step_ca() -> void:
 			var neighbors: int = _count_neighbors(r, c)
 			var alive: bool = _grid[r][c]
 			if alive:
-				row.append(neighbors == 2 or neighbors == 3)
+				row.append(survive.has(neighbors))
 			else:
-				row.append(neighbors == 3)
+				row.append(birth.has(neighbors))
 		new_grid.append(row)
 	_grid = new_grid
 	_generation += 1
@@ -210,6 +304,53 @@ func _update_cell_visuals() -> void:
 
 	if _label:
 		_label.text = "Gen: %d | Alive: %d" % [_generation, _alive_count]
+
+
+## Re-seed the automaton under the current axis value and repaint the torso.
+## Only called from apply_grid_config, and only when a value actually changed.
+## The 36 cell meshes are NOT rebuilt — the plate's geometry does not depend on
+## the rule, only on ca_rows/ca_cols, which this hook does not touch.
+func _regrow() -> void:
+	_generation = 0
+	_ca_timer = 0.0
+	_seed_rng()
+	_init_grid()
+	for _i in range(maxi(warmup, 0)):
+		_step_ca()
+	_update_cell_visuals()
+
+
+## Guarded on both counts: the automaton is re-seeded only when a key's value
+## actually CHANGED, and only after _on_ready has grown it once. A placement
+## that passes none of these keys — which today is the single existing one —
+## gets exactly the behaviour it had before the axis existed. Values arrive as
+## strings from a map token, so each is parsed and validated before it is let
+## through. Unrecognised keys fall to the base configure(), unchanged.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var re_grow: bool = false
+	for key in config_data:
+		var k: String = str(key)
+		if k == "rule":
+			var r: String = str(config_data[key]).to_lower()
+			if RULES.has(r) and r != rule:
+				rule = r
+				re_grow = true
+			continue
+		if k == "ca_seed":
+			var s: int = int(config_data[key])
+			if s != ca_seed:
+				ca_seed = s
+				re_grow = true
+			continue
+		if k == "warmup":
+			var w: int = maxi(int(config_data[key]), 0)
+			if w != warmup:
+				warmup = w
+				re_grow = true
+			continue
+	super.apply_grid_config(config_data)
+	if re_grow and _built:
+		_regrow()
 
 
 ## Armor effect — alive cells reduce damage taken.

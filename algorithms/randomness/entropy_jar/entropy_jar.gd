@@ -48,6 +48,42 @@ class_name EntropyJar
 # ── Shake Detection ─────────────────────────────────────────────────────────
 @export var shake_threshold: float = 1.5  ## velocity magnitude to count as shake
 
+# ── STAGE-2 DNA (promoted 2026-08-03) ───────────────────────────────────────
+## The jar had fourteen exports and not one of them was an argument: radii,
+## masses, colours, a shake threshold — the SIZE of the thing and the livery of
+## the thing. The second law is not a claim about size. It is a claim about
+## which state you are standing in front of, and the jar had only ever been
+## found in one: red below, blue above, the low-entropy beginning, waiting for
+## you to spend it. That is a strong position and it is not the only one.
+##
+##   sorted   red below, blue above. The beginning. Nothing has happened yet.
+##   stirred  the two bodies interpenetrating at the interface. Mid-sentence.
+##   mixed    uniform. You arrived too late; the arrow already ran, and the
+##            jar's whole point is that you cannot put it back.
+##   shelled  sorted RADIALLY — a red core inside a blue shell. Visibly as
+##            ordered as `sorted`, and the readout says MAXIMUM ENTROPY,
+##            because the measurement bins VERTICALLY. The order is real and
+##            the instrument cannot see it. Entropy is relative to the
+##            coarse-graining you happened to choose.
+@export_enum("sorted", "stirred", "mixed", "shelled") var found_state: String = "sorted"
+
+## And the second argument: whether the second law arrives as a measured
+## number, as a verdict in words, or as nothing but the jar.
+##   figures  S = 0.00 and the shake/status block (shipped)
+##   number   the bare figure, no commentary
+##   verdict  the words only — the law stated, not computed
+##   none     no instrument at all; the jar has to carry it alone
+@export_enum("figures", "number", "verdict", "none") var readout: String = "figures"
+
+## 0 keeps the shipped behaviour exactly: particle placement draws on the global
+## RNG, so every jar in every map is genuinely a different jar. Any non-zero
+## value pins it, which is what the DNA bench needs — otherwise five variants
+## are five different jars and the axis cannot be measured at all.
+@export var particle_seed: int = 0
+
+const FOUND_STATES := ["sorted", "stirred", "mixed", "shelled"]
+const READOUTS := ["figures", "number", "verdict", "none"]
+
 # ── Internal ────────────────────────────────────────────────────────────────
 var _jar_body: RigidBody3D
 var _jar_spawn_pos: Vector3
@@ -61,6 +97,32 @@ var _prev_velocity: Vector3 = Vector3.ZERO
 var _shake_cooldown: float = 0.0
 var _initial_entropy: float = 0.0
 var _current_entropy: float = 0.0
+var _rng: RandomNumberGenerator = null
+var _built: bool = false
+
+
+## Every random draw that decides what the jar LOOKS like routes through these
+## two. With particle_seed left at 0 they call the same global functions the
+## shipped code called, in the same order, so an unseeded jar draws exactly the
+## sequence it always drew and nothing about the 18 existing placements moves.
+func _rfu() -> float:
+	if _rng != null:
+		return _rng.randf()
+	return randf()
+
+
+func _rf(a: float, b: float) -> float:
+	if _rng != null:
+		return _rng.randf_range(a, b)
+	return randf_range(a, b)
+
+
+func _reseed_rng() -> void:
+	if particle_seed != 0:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = particle_seed
+	else:
+		_rng = null
 
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
@@ -72,6 +134,7 @@ const HIGHLIGHT_RING_SCENE = preload("res://addons/godot-xr-tools/objects/highli
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	_reseed_rng()
 	_create_pedestal()
 	_create_jar()
 	_create_particles()
@@ -82,6 +145,7 @@ func _ready() -> void:
 	_initial_entropy = _measure_entropy()
 	_current_entropy = _initial_entropy
 	_update_display()
+	_built = true
 
 
 func _physics_process(delta: float) -> void:
@@ -270,9 +334,9 @@ func _create_particles() -> void:
 	# Group A — start in bottom half (red)
 	for i in range(particle_count):
 		var p := _create_single_particle(color_a, i)
-		var angle := randf() * TAU
-		var r := randf() * inner_r
-		var y := randf_range(-half_h, 0.0)
+		var angle: float = _rfu() * TAU
+		var r: float = _rfu() * inner_r
+		var y: float = _rf(-half_h, 0.0)
 		p.position = Vector3(cos(angle) * r, y, sin(angle) * r)
 		_jar_body.add_child(p)
 		_particles_a.append(p)
@@ -280,12 +344,17 @@ func _create_particles() -> void:
 	# Group B — start in top half (blue)
 	for i in range(particle_count):
 		var p := _create_single_particle(color_b, i)
-		var angle := randf() * TAU
-		var r := randf() * inner_r
-		var y := randf_range(0.0, half_h)
+		var angle: float = _rfu() * TAU
+		var r: float = _rfu() * inner_r
+		var y: float = _rf(0.0, half_h)
 		p.position = Vector3(cos(angle) * r, y, sin(angle) * r)
 		_jar_body.add_child(p)
 		_particles_b.append(p)
+
+	# These positions are provisional: _settle_specimen() re-places every
+	# particle through _place_particles() at the end of _ready, and THAT is what
+	# a still photograph shows. The draws above are kept verbatim so the global
+	# RNG stream is consumed in the shipped order.
 
 
 func _create_single_particle(base_color: Color, idx: int) -> RigidBody3D:
@@ -318,7 +387,7 @@ func _create_single_particle(base_color: Color, idx: int) -> RigidBody3D:
 
 	var mat := StandardMaterial3D.new()
 	# Slight color variation per particle
-	var hue_shift := randf_range(-0.03, 0.03)
+	var hue_shift: float = _rf(-0.03, 0.03)
 	mat.albedo_color = Color(
 		clamp(base_color.r + hue_shift, 0, 1),
 		clamp(base_color.g + hue_shift, 0, 1),
@@ -445,7 +514,30 @@ func _create_labels() -> void:
 	add_child(_stats_label)
 
 
+## The second axis: whether the law arrives as a measured number, as a verdict
+## in words, or as nothing but the jar. At the default "figures" both labels are
+## visible and both carry the shipped text, so this is a no-op for every map.
 func _update_display() -> void:
+	var show_number: bool = (readout == "figures" or readout == "number")
+	var show_words: bool = (readout == "figures" or readout == "verdict")
+
+	if _entropy_label:
+		_entropy_label.visible = show_number
+	if _stats_label:
+		_stats_label.visible = show_words
+
+	if _stats_label and readout == "verdict":
+		# The law stated, not computed — no figure anywhere on the plinth.
+		if _current_entropy > 0.85:
+			_stats_label.text = "MAXIMUM ENTROPY\n\nCannot unmix"
+		elif _current_entropy > 0.5:
+			_stats_label.text = "MIXING\n\nKeep shaking"
+		else:
+			_stats_label.text = "ORDERED\n\nGrab & shake\nthe jar!"
+		if _entropy_label:
+			_entropy_label.text = "S = %.2f" % _current_entropy
+		return
+
 	if _entropy_label:
 		_entropy_label.text = "S = %.2f" % _current_entropy
 		# Color shifts from cool blue (ordered) to warm red (mixed)
@@ -495,21 +587,60 @@ func _settle_specimen() -> void:
 		_jar_body.freeze = true
 	_seed_particles()
 
-## Place the particles inside the jar (A in the lower half, B in the upper) and
-## freeze them, so the specimen is still until shaken.
+## Place the particles inside the jar and freeze them, so the specimen is still
+## until shaken. WHERE they go is the `found_state` axis.
 func _seed_particles() -> void:
+	_place_particles()
+
+
+## THE AXIS. Which state of the second law you are standing in front of.
+##
+## Every branch draws in the shipped ORDER — group A fully, then group B, and
+## per particle angle, then radius, then height — so at found_state "sorted"
+## with particle_seed 0 the global RNG is consumed exactly as before and the
+## placement is identical, particle for particle.
+func _place_particles() -> void:
 	var inner_r: float = jar_radius - jar_wall_thickness - particle_radius
 	var half_h: float = jar_height / 2.0 - particle_radius * 2.0
-	var groups := [[_particles_a, -half_h, 0.0], [_particles_b, 0.0, half_h]]
-	for g in groups:
-		for p in g[0]:
-			if is_instance_valid(p):
-				p.freeze = true
-				p.linear_velocity = Vector3.ZERO
-				p.angular_velocity = Vector3.ZERO
-				var angle := randf() * TAU
-				var r := randf() * inner_r
-				p.position = Vector3(cos(angle) * r, randf_range(g[1], g[2]), sin(angle) * r)
+
+	match found_state:
+		"stirred":
+			# The two bodies interpenetrating at the interface. Each group still
+			# owns its half but reaches a third of the way into the other, so
+			# there is a band in the middle where the question is live.
+			_scatter(_particles_a, -half_h, half_h * 0.35, 0.0, inner_r)
+			_scatter(_particles_b, -half_h * 0.35, half_h, 0.0, inner_r)
+		"mixed":
+			# Uniform. You arrived too late; the arrow already ran.
+			_scatter(_particles_a, -half_h, half_h, 0.0, inner_r)
+			_scatter(_particles_b, -half_h, half_h, 0.0, inner_r)
+		"shelled":
+			# Sorted RADIALLY: a red core inside a blue shell. Both groups span
+			# the full height, so every vertical bin reads 50/50 and
+			# _measure_entropy() — which coarse-grains along Y and only along Y —
+			# reports MAXIMUM ENTROPY at a jar that is visibly, obviously sorted.
+			# The order is real. The instrument cannot see it.
+			_scatter(_particles_a, -half_h, half_h, 0.0, inner_r * 0.46)
+			_scatter(_particles_b, -half_h, half_h, inner_r * 0.74, inner_r)
+		_:
+			# "sorted" — SHIPPED. Red below, blue above. The low-entropy
+			# beginning, waiting for you to spend it.
+			_scatter(_particles_a, -half_h, 0.0, 0.0, inner_r)
+			_scatter(_particles_b, 0.0, half_h, 0.0, inner_r)
+
+
+## One group into a cylindrical annulus: height in [y_lo, y_hi], radius in
+## [r_lo, r_hi]. At r_lo = 0 the radius draw is `_rfu() * r_hi`, character for
+## character the expression the shipped code used.
+func _scatter(group: Array[RigidBody3D], y_lo: float, y_hi: float, r_lo: float, r_hi: float) -> void:
+	for p in group:
+		if is_instance_valid(p):
+			p.freeze = true
+			p.linear_velocity = Vector3.ZERO
+			p.angular_velocity = Vector3.ZERO
+			var angle: float = _rfu() * TAU
+			var r: float = r_lo + _rfu() * (r_hi - r_lo)
+			p.position = Vector3(cos(angle) * r, _rf(y_lo, y_hi), sin(angle) * r)
 
 
 func _on_jar_picked_up(_pickable) -> void:
@@ -558,28 +689,13 @@ func _reset_jar() -> void:
 		_jar_body.global_position = global_position + _jar_spawn_pos
 		_jar_body.global_rotation = Vector3.ZERO
 
-		# Re-separate particles: A in bottom, B in top
-		var inner_r := jar_radius - jar_wall_thickness - particle_radius
-		var half_h := jar_height / 2.0 - particle_radius * 2.0
-
-		for p in _particles_a:
+		# Restore the state the jar was FOUND in. At the default "sorted" this is
+		# the shipped behaviour exactly — A back to the bottom, B back to the top
+		# — and at any other value RESET still means "put it back how it was",
+		# which is the only reading that keeps the button honest.
+		_place_particles()
+		for p in (_particles_a + _particles_b):
 			if is_instance_valid(p):
-				p.freeze = true
-				p.linear_velocity = Vector3.ZERO
-				p.angular_velocity = Vector3.ZERO
-				var angle := randf() * TAU
-				var r := randf() * inner_r
-				p.position = Vector3(cos(angle) * r, randf_range(-half_h, 0.0), sin(angle) * r)
-				p.set_deferred("freeze", false)
-
-		for p in _particles_b:
-			if is_instance_valid(p):
-				p.freeze = true
-				p.linear_velocity = Vector3.ZERO
-				p.angular_velocity = Vector3.ZERO
-				var angle := randf() * TAU
-				var r := randf() * inner_r
-				p.position = Vector3(cos(angle) * r, randf_range(0.0, half_h), sin(angle) * r)
 				p.set_deferred("freeze", false)
 
 		_jar_body.set_deferred("freeze", false)
@@ -595,8 +711,42 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Map/bench entry point. The sweep sets the @exports directly before add_child
+## so _ready() builds with them; this is the path a map token takes, and the
+## rescue path the capture harness uses.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var restate: bool = false
+
+	if config.has("found_state"):
+		var v: String = str(config["found_state"])
+		if v in FOUND_STATES and v != found_state:
+			found_state = v
+			restate = true
+
+	if config.has("readout"):
+		var r: String = str(config["readout"])
+		if r in READOUTS and r != readout:
+			readout = r
+			restate = true
+
+	if config.has("particle_seed"):
+		var s: int = int(config["particle_seed"])
+		if s != particle_seed:
+			particle_seed = s
+			_reseed_rng()
+			restate = true
+
+	# THE GUARD THAT MATTERS. An unguarded re-place here would re-draw all 80
+	# particles in the 18 maps that place this jar with no config at all — a
+	# visible change to shipped rooms in exchange for nothing. Act only when a
+	# value actually moved, and only once _ready has built a jar to re-place.
+	# Before _ready the exports are simply left set, and _ready honours them.
+	if not restate or not _built:
+		return
+
+	_place_particles()
+	_current_entropy = _measure_entropy()
+	_update_display()
 
 
 ## THE SPECIMEN DOCK — a jar is a jar, so it gets the containment-tank idiom
