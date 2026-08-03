@@ -22,6 +22,69 @@ class_name DelaunayTriangulation3DCell
 @export var show_label: bool = true
 @export var use_grabbable_points: bool = true  # Enable draggable vertices
 
+# ═══════════════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `formation`
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# HOW THE SITES ARE ARRANGED BEFORE ANY TRIANGLE EXISTS. This artifact's truth
+# is that ONE constraint — no point inside any circumsphere — is enough to
+# produce the best possible triangulation. That is a claim about a rule holding
+# everywhere, and a rule that has only ever been shown on one input has not been
+# shown to hold everywhere; it has been shown once. The shipped point set is a
+# stack of jittered spherical shells, and every existing placement of this
+# artifact teaches "Delaunay looks like this" when it means "Delaunay of THAT".
+#
+# So the axis is the input, not the algorithm. Not one line of triangulate_points
+# or is_valid_triangle changes; the same circumsphere logic runs on five
+# different arrangements and produces five obviously different meshes, which is
+# the demonstration the singleton could not give.
+#
+# ADOPTED WORD FOR WORD from reactive_particles, reactive_particle_field,
+# edge_particles and emergence_zone in qfep.json, which ask exactly this of a
+# cloud of points — same spelling, same five values. The order is rotated so the
+# legacy arrangement leads, which is the same thing physarum_colony does to
+# ant_colony_v2's `anchorage`: the words and their meanings are shared, the
+# default is each artifact's own.
+#
+#   shell   the shipped set: `generations` nested spheres of falling radius,
+#           each jittered by `randomness`, plus a centre point. A hollow onion,
+#           and the triangulation is a crust.  (DEFAULT — unchanged)
+#   lattice the same number of sites on a regular cubic grid clipped to the same
+#           ball. Every circumsphere test near-degenerate, the mesh regular to
+#           the eye — the crystalline case the `randomness` slider points at
+#           from the other end.
+#   ring    the sites pressed into a flat annulus in the XZ plane. A three-
+#           dimensional rule applied to a two-dimensional input: the tetrahedra
+#           collapse to slivers and the mesh reads as a disc, not a solid.
+#   column  the sites stacked in a narrow shaft up the Y axis. Nearest neighbours
+#           are almost always the ones directly above and below, so the optimal
+#           triangulation degenerates to a chain — a spine instead of a body.
+#   drift   uniform scatter through the whole ball, no hierarchy at all. What the
+#           artifact's own critical_parameter describes at randomness = 1 and
+#           what the shipped generator cannot actually produce.
+#
+# EVERY FORMATION PLACES THE SAME NUMBER OF SITES inside the SAME cell_radius,
+# so the mesh complexity and the framed extent are comparable across the five and
+# the difference in the picture is the arrangement rather than the size or the
+# count.
+const FORMATIONS: PackedStringArray = ["shell", "lattice", "ring", "column", "drift"]
+@export_enum("shell", "lattice", "ring", "column", "drift") var formation: String = "shell"
+
+## SEED for the site scatter. Every formation, including the shipped one, places
+## its points with random draws, so an unseeded run is a DIFFERENT cell every
+## boot — different sites, different neighbours, different mesh. Five variants of
+## an unseeded run are five different objects, and the bite critic would read
+## that scatter as a confident result about `formation`.
+## -1 keeps the legacy behaviour EXACTLY: the bare global randf()/randf_range()
+## are used, in the same order, with no seed() call anywhere, precisely as they
+## always were. Any value >= 0 pins the sites so the five tiles differ only in
+## how the arrangement law placed them.
+@export var point_seed: int = -1
+
+## null unless point_seed >= 0. Null means "use the global randf()", which is
+## what every existing placement does.
+var _rng: RandomNumberGenerator = null
+
 @export var regenerate: bool = false:
 	set(value):
 		if value:
@@ -34,6 +97,13 @@ var current_points: Array = []  # Store points for retriangulation
 var grab_point_scene: PackedScene
 
 func _ready() -> void:
+	_read_dna()
+	# Built ONLY when point_seed >= 0. At the -1 default nothing is constructed
+	# and _rf()/_rf_range() fall through to the bare global calls, so the legacy
+	# stream is untouched — no seed() call is made anywhere on this path.
+	if point_seed >= 0:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = point_seed
 	# Load grabbable point scene (only at runtime, not in editor)
 	if not Engine.is_editor_hint() and use_grabbable_points:
 		grab_point_scene = load("res://commons/primitives/point/grab_sphere_point_with_text.tscn")
@@ -44,7 +114,9 @@ func generate_cell_body() -> void:
 	for child in get_children():
 		child.queue_free()
 
-	current_points = generate_hierarchical_points()
+	# FORMATION: the sites. "shell" calls generate_hierarchical_points() itself,
+	# which is what every existing placement gets.
+	current_points = _formation_points()
 	var mesh_data = create_delaunay_mesh(current_points)
 	mesh = mesh_data
 
@@ -168,8 +240,8 @@ func generate_hierarchical_points() -> Array:
 	
 	# Generation 0: Initial points on sphere
 	for i in range(initial_points):
-		var theta = randf() * TAU
-		var phi = acos(2.0 * randf() - 1.0)
+		var theta = _rf() * TAU
+		var phi = acos(2.0 * _rf() - 1.0)
 		var r = cell_radius
 		
 		var point = Vector3(
@@ -186,9 +258,9 @@ func generate_hierarchical_points() -> Array:
 		var points_this_gen = int(initial_points * pow(subdivision_factor, gen))
 		
 		for i in range(points_this_gen):
-			var theta = randf() * TAU
-			var phi = acos(2.0 * randf() - 1.0)
-			var r = layer_radius + randf_range(-randomness, randomness)
+			var theta = _rf() * TAU
+			var phi = acos(2.0 * _rf() - 1.0)
+			var r = layer_radius + _rf_range(-randomness, randomness)
 			
 			var point = Vector3(
 				r * sin(phi) * cos(theta),
@@ -301,4 +373,149 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	var was: String = formation
+	_read_dna()
+	if formation != was:
+		if point_seed >= 0:
+			_rng = RandomNumberGenerator.new()
+			_rng.seed = point_seed
+		generate_cell_body()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# formation — everything below is new and nothing above it moved.
+# ═══════════════════════════════════════════════════════════════════════════
+
+## Map tokens arrive as config_<key> metadata. An unreadable word keeps the
+## shipped onion rather than silently rendering as some other arrangement.
+func _read_dna() -> void:
+	if has_meta("config_formation"):
+		var v: String = str(get_meta("config_formation")).strip_edges().to_lower()
+		if FORMATIONS.has(v):
+			formation = v
+	if has_meta("config_point_seed"):
+		point_seed = int(str(get_meta("config_point_seed")))
+
+
+## The only random draws in this artifact. With no seed declared these ARE
+## `randf()` and `randf_range()` — the same global calls, in the same places,
+## the same number of times — so the legacy point set is reproduced exactly.
+func _rf() -> float:
+	if _rng != null:
+		return _rng.randf()
+	return randf()
+
+
+func _rf_range(from: float, to: float) -> float:
+	if _rng != null:
+		return _rng.randf_range(from, to)
+	return randf_range(from, to)
+
+
+## The sites. "shell" hands straight back to the untouched generator, so the four
+## existing placements build exactly what they always built. Every other law
+## places _shipped_site_count() points inside the same cell_radius.
+func _formation_points() -> Array:
+	var key: String = str(formation).strip_edges().to_lower()
+	if not FORMATIONS.has(key) or key == "shell":
+		return generate_hierarchical_points()
+
+	var n: int = _shipped_site_count()
+	var points: Array = []
+	match key:
+		"lattice":
+			points = _lattice_points(n)
+		"ring":
+			points = _ring_points(n)
+		"column":
+			points = _column_points(n)
+		"drift":
+			points = _drift_points(n)
+	points.append(Vector3.ZERO)
+	return points
+
+
+## How many sites generate_hierarchical_points() would have made, counted with
+## its own arithmetic so the alternatives stay comparable when initial_points,
+## generations or subdivision_factor are changed by a map token. The trailing
+## centre point is added by the caller, so it is not counted here.
+func _shipped_site_count() -> int:
+	var total: int = initial_points
+	for gen in range(1, generations):
+		total += int(initial_points * pow(subdivision_factor, gen))
+	return maxi(total, 4)
+
+
+## A regular cubic grid clipped to the ball. Walked from the centre outward so a
+## partial outer shell never leaves the cloud lopsided, and jittered by the same
+## `randomness` the shell generator uses, so the two are honest about sharing a
+## parameter.
+func _lattice_points(n: int) -> Array:
+	var side: int = int(ceil(pow(float(n) * 1.91, 1.0 / 3.0)))
+	side = maxi(side, 2)
+	var step: float = cell_radius * 2.0 / float(side - 1)
+	var candidates: Array = []
+	for ix in range(side):
+		for iy in range(side):
+			for iz in range(side):
+				var p := Vector3(
+					-cell_radius + float(ix) * step,
+					-cell_radius + float(iy) * step,
+					-cell_radius + float(iz) * step)
+				if p.length() <= cell_radius * 1.001:
+					candidates.append(p)
+	candidates.sort_custom(func(a, b): return a.length() < b.length())
+	var out: Array = []
+	for i in range(mini(n, candidates.size())):
+		var jitter := Vector3(
+			_rf_range(-randomness, randomness),
+			_rf_range(-randomness, randomness),
+			_rf_range(-randomness, randomness)) * 0.15
+		out.append(candidates[i] + jitter)
+	return out
+
+
+## A flat annulus in XZ. The inner radius is 40% of the outer so there is a hole
+## for the mesh to be a disc around rather than a filled plate.
+func _ring_points(n: int) -> Array:
+	var out: Array = []
+	for i in range(n):
+		var theta: float = float(i) / float(maxi(n, 1)) * TAU * 2.0 + _rf() * 0.35
+		var r: float = cell_radius * (0.4 + 0.6 * _rf())
+		var y: float = _rf_range(-randomness, randomness) * 0.25
+		out.append(Vector3(cos(theta) * r, y, sin(theta) * r))
+	return out
+
+
+## A narrow shaft up Y, full height, one twelfth of the radius wide. Nearest
+## neighbours become the sites directly above and below.
+func _column_points(n: int) -> Array:
+	var out: Array = []
+	var girth: float = cell_radius / 12.0
+	for i in range(n):
+		var t: float = float(i) / float(maxi(n - 1, 1))
+		var theta: float = _rf() * TAU
+		var r: float = girth * sqrt(_rf())
+		out.append(Vector3(
+			cos(theta) * r,
+			-cell_radius + t * cell_radius * 2.0,
+			sin(theta) * r))
+	return out
+
+
+## Uniform scatter through the ball. The cube-root of a uniform draw is what
+## makes it uniform by VOLUME — without it the sites pile up at the centre and
+## `drift` would quietly be a second, blurrier `shell`.
+func _drift_points(n: int) -> Array:
+	var out: Array = []
+	for i in range(n):
+		var theta: float = _rf() * TAU
+		var phi: float = acos(2.0 * _rf() - 1.0)
+		var r: float = cell_radius * pow(_rf(), 1.0 / 3.0)
+		out.append(Vector3(
+			r * sin(phi) * cos(theta),
+			r * sin(phi) * sin(theta),
+			r * cos(phi)))
+	return out

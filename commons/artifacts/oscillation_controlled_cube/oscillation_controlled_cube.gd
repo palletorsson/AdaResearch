@@ -30,6 +30,39 @@ const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 @export var pendulum_path: NodePath
 
+## AXIS — WHAT A STATE PERSISTS AS once the cube has left it. Not the mapping, not the
+## translation/rotation/scale channels, not the pendulum that drives them: that is what this
+## artifact TEACHES and it runs identically at every value. What the demonstration decides is
+## whether one oscillation driving three transforms is a present-tense fact — this height,
+## this heading, this size, now — or something that leaves a record.
+##
+## Adopted word for word — and value for value — from [[mystic_writing_pad]], where the
+## vocabulary comes from, and shared with its two siblings in this registry,
+## [[y_oscillation_cube]] and [[rotating_cube_demo]]. This one is the richest of the three,
+## because what it has to keep is not a position but a whole STATE: height, heading and size
+## together. A ghost here is the full transform, not a dot.
+##
+##   none      the legacy lineage, byte for byte — space does not keep it. The rail, the arc
+##             and the mapping panel stand, the cube runs all three channels at once, and
+##             nothing is left behind it. This artifact has never kept anything, and saying
+##             so is a true statement about it rather than a shortfall
+##   trace     the past stays ON THE SURFACE at one strength. Sixteen ghosts, every one the
+##             same ink, no fade — accumulation without depth
+##   lattice   a state counts only where it is legal. Nine rungs stand the full travel beside
+##             the rail and every ghost's height is quantised onto them, so the record is a
+##             stair of stations instead of a continuum
+##   archive   nothing sinks past recall. Twenty-four ghosts at full brightness, none dimmed
+##             by age, the whole swept envelope standing at once
+##   wax       a depth that keeps the lot, each older state fainter than the last, until the
+##             oldest is barely there
+##
+## STRICTLY ADDITIVE. "none" builds nothing and records nothing, so all five existing
+## placements render exactly as before; the recording hook in _on_oscillation_updated is one
+## integer compare on that path. Nothing here reads or writes translation_scale,
+## rotation_scale, scale_range, the pendulum connection or the colour feedback.
+@export_enum("none", "trace", "lattice", "archive", "wax") var retention: String = "none"
+const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
+
 var _cube_instance: Node3D
 var _cube_mesh: MeshInstance3D
 var _label: Label3D
@@ -51,9 +84,15 @@ func _ready():
 	_create_cube()
 	_create_label()
 	_create_guides()
-	
+
 	# Try to find and connect to pendulum
 	call_deferred("_connect_pendulum")
+
+	# DNA, LAST: the retention pass runs after the whole legacy build exists. "none" returns
+	# on the first line, so the shipped lineage keeps its exact children in their exact order.
+	var _r: String = str(retention).strip_edges().to_lower()
+	retention = _r if RETENTIONS.has(_r) else "none"
+	_apply_retention()
 
 func _connect_pendulum():
 	if pendulum_path:
@@ -259,6 +298,11 @@ func _on_oscillation_updated(y_offset: float, angular_velocity: float, amplitude
 	# Color feedback based on amplitude
 	_update_color_feedback(amplitude)
 
+	# RETENTION, LAST: _ret_stride is 0 on the legacy "none" path, so this is one integer
+	# compare per update and nothing else changes.
+	if _ret_stride > 0:
+		_ret_record(position.y - _base_position.y, _current_rotation, scale_factor)
+
 
 func _update_color_feedback(intensity: float):
 	if not _cube_mesh:
@@ -291,3 +335,164 @@ func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])
+	# Only a token that actually names the axis re-runs the pass; everything else keeps the
+	# behaviour this function has always had.
+	if config_data.has("retention"):
+		var _r: String = str(config_data["retention"]).strip_edges().to_lower()
+		retention = _r if RETENTIONS.has(_r) else "none"
+		_apply_retention()
+
+
+# ── RETENTION ────────────────────────────────────────────────────────────────
+# One axis, five moments, shared word for word with mystic_writing_pad.gd and with the two
+# sibling motion demos in this registry. Everything below runs AFTER the legacy _ready()
+# body; "none" returns on the first line and records nothing, so the shipped lineage is
+# untouched — same children, same order, same mapping panel, same colour feedback.
+#
+# THE COMPENSATING HOST. This artifact translates its OWN ROOT (_on_oscillation_updated
+# writes position.y), so a child added to it would ride the motion and record nothing. The
+# record therefore lives under one host node whose local Y is driven to the negative of the
+# live offset, which pins it in world space while the cube moves through it.
+
+## Frames between samples. 0 means "keep nothing" — the legacy `none` path.
+var _ret_stride: int = 0
+var _ret_tick: int = 0
+## Rung spacing in metres for `lattice`. 0.0 means "do not quantise".
+var _ret_snap_y: float = 0.0
+var _ret_host: Node3D = null
+var _ret_ghosts: Array[MeshInstance3D] = []
+
+const RET_TRACE_COUNT := 16
+const RET_ARCHIVE_COUNT := 24
+const RET_LATTICE_COUNT := 12
+const RET_WAX_COUNT := 10
+const RET_LATTICE_RUNGS := 9
+
+
+func _apply_retention() -> void:
+	if _ret_host != null and is_instance_valid(_ret_host):
+		remove_child(_ret_host)
+		_ret_host.queue_free()
+	_ret_host = null
+	_ret_ghosts.clear()
+	_ret_stride = 0
+	_ret_tick = 0
+	_ret_snap_y = 0.0
+	if retention == "none" or not RETENTIONS.has(retention):
+		return                       # the legacy lineage keeps nothing at all
+
+	var host := Node3D.new()
+	host.name = "RetentionRecord"
+	add_child(host)
+	_ret_host = host
+
+	# The band the record has to span in Y. The driver feeds y_offset in roughly [-0.3, 0.3]
+	# and the cube multiplies it by translation_scale, so one translation_scale brackets the
+	# travel with room either side — not the rail's own 2 x figure, which is drawn far taller
+	# than anything the cube has ever reached (see the note in _create_vertical_rail).
+	var travel: float = translation_scale
+	match retention:
+		"trace":
+			_ret_stride = 4
+			_ret_build_ghosts(host, RET_TRACE_COUNT, 0.30, 0.22, false)
+		"archive":
+			_ret_stride = 3
+			_ret_build_ghosts(host, RET_ARCHIVE_COUNT, 0.55, 0.55, false)
+		"lattice":
+			_ret_stride = 5
+			_ret_snap_y = travel / float(maxi(RET_LATTICE_RUNGS - 1, 1))
+			_ret_build_ghosts(host, RET_LATTICE_COUNT, 0.40, 0.30, false)
+			_ret_build_rule(host, travel)
+		"wax":
+			_ret_stride = 4
+			_ret_build_ghosts(host, RET_WAX_COUNT, 0.34, 0.45, true)
+		_:
+			pass
+
+
+## Builds the ghost stack. `graded` weights each ghost by age (the wax depth); otherwise every
+## ghost carries the same ink, which is what makes `trace` accumulation-without-depth and
+## `archive` a refusal to let anything sink.
+func _ret_build_ghosts(host: Node3D, count: int, alpha: float, emission: float, graded: bool) -> void:
+	for i in range(count):
+		var f: float = float(i) / float(maxi(count - 1, 1))
+		var a: float = alpha
+		var e: float = emission
+		if graded:
+			a = alpha * (1.0 - 0.88 * f)
+			e = emission * (1.0 - 0.85 * f)
+		var mi := MeshInstance3D.new()
+		var box := BoxMesh.new()
+		box.size = Vector3(cube_size, cube_size, cube_size)
+		mi.mesh = box
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(cube_color.r, cube_color.g, cube_color.b, maxf(a, 0.02))
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.emission_enabled = true
+		mat.emission = cube_color
+		mat.emission_energy_multiplier = maxf(e, 0.0)
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		mi.material_override = mat
+		mi.visible = false
+		host.add_child(mi)
+		_ret_ghosts.append(mi)
+
+
+## LATTICE only — the ruled ladder the heights are quantised onto, standing the full travel
+## on the far side of the cube from the guide rail. Without the drawing, quantisation looks
+## like a stutter; with it, it looks like a rule.
+func _ret_build_rule(host: Node3D, travel: float) -> void:
+	var ink := StandardMaterial3D.new()
+	ink.albedo_color = Color(0.72, 0.80, 0.88, 0.75)
+	ink.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	ink.emission_enabled = true
+	ink.emission = Color(0.55, 0.72, 0.88)
+	ink.emission_energy_multiplier = 0.45
+
+	var rx: float = -cube_size * 0.8
+	for k in range(RET_LATTICE_RUNGS):
+		var f: float = float(k) / float(maxi(RET_LATTICE_RUNGS - 1, 1))
+		var ry: float = -travel * 0.5 + travel * f
+		var major: bool = (k == 0) or (k == RET_LATTICE_RUNGS - 1) or (k * 2 == RET_LATTICE_RUNGS - 1)
+		var wide: float = cube_size * (0.70 if major else 0.42)
+		var bar := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = Vector3(wide, 0.005, 0.012)
+		bar.mesh = bm
+		bar.material_override = ink
+		bar.position = Vector3(rx - wide * 0.5, ry, 0)
+		host.add_child(bar)
+
+	var stile := MeshInstance3D.new()
+	var sm := BoxMesh.new()
+	sm.size = Vector3(0.007, travel, 0.012)
+	stile.mesh = sm
+	stile.material_override = ink
+	stile.position = Vector3(rx, 0, 0)
+	host.add_child(stile)
+
+
+## One sample. The host is pinned against the root's live translation first, so the record
+## stays where it was laid down; then the stack shifts by one and the newest ghost takes the
+## current state — height, heading and size together.
+func _ret_record(dy: float, rot: float, scale_factor: float) -> void:
+	if _ret_host == null or not is_instance_valid(_ret_host):
+		return
+	_ret_host.position.y = -dy
+	_ret_tick += 1
+	if _ret_stride <= 0 or (_ret_tick % _ret_stride) != 0:
+		return
+	var n: int = _ret_ghosts.size()
+	if n == 0:
+		return
+	for i in range(n - 1, 0, -1):
+		_ret_ghosts[i].transform = _ret_ghosts[i - 1].transform
+		_ret_ghosts[i].visible = _ret_ghosts[i - 1].visible
+	var g: MeshInstance3D = _ret_ghosts[0]
+	var y: float = dy
+	if _ret_snap_y > 0.0:
+		y = snappedf(y, _ret_snap_y)
+	g.position = Vector3(0, y, 0)
+	g.rotation = Vector3(0, rot, 0)
+	g.scale = Vector3.ONE * maxf(scale_factor, 0.01)
+	g.visible = true

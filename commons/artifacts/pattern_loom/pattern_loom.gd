@@ -56,6 +56,21 @@ const PatternSim = preload("res://commons/pattern_grammar/pattern_sim.gd")
 ##               lit, and the whole index on the card: entry N of a finished list.
 ## Default `none` reproduces every existing loom placement exactly.
 @export_enum("none", "repeat", "symmetry", "catalogue") var colophon: String = "none"
+## Which moment of its working life the machine is caught in. The word, the four values and
+## the unknown-word contract are taken verbatim from [[station_wall]] / [[station_pillar]] /
+## [[station_crates]], which already share `upkeep` across the curation kit — a bay whose
+## walls read "packed down" must not hold a loom that still reads "in commission".
+##   service  in commission — the legacy lineage, byte for byte
+##   works    mid-job       — a trestle deck stood off the flank, a conduit run over the head,
+##                            the cover panel leaned against the frame, WORKS on the deck
+##   store    packed down   — a sheet strapped over the head (which covers the accent rail and
+##                            the weave bar, the brightest pixels the loom owns) and the run's
+##                            output banded into finished bolts stacked on the floor
+##   scrap    robbed        — the flank cladding gone and the studs bared, the cover lying on
+##                            the floor where it was dropped, hazard tape crossed over the hole
+## The CLOTH is never covered by any of them: the carpet is what the artifact teaches.
+## Default `service` reproduces every existing loom placement exactly.
+@export_enum("service", "works", "store", "scrap") var upkeep: String = "service"
 
 @export_group("Machine")
 @export var frame_color: Color = Color(0.12, 0.12, 0.15)
@@ -128,10 +143,25 @@ func _ready() -> void:
 		_build_console()
 		if dress_machine:
 			_build_cable_run_to_console()
+	# Machine extent measured BEFORE the colophon card is added, so the upkeep dressing lands
+	# against the frame and not at the far end of a 2.6 m carpet run. On the default path the
+	# walk never runs at all.
+	var mb: AABB = _machine_bounds() if upkeep != "service" else AABB()
 	# LAST, so nothing above it moves: the colophon reads the finished machine and adds
 	# a card at the feed. `none` builds nothing at all.
 	if colophon != "none":
 		_build_colophon_card()
+	# LAST OF ALL, appended after the colophon for the same reason: every child index and
+	# position above is untouched. `service` falls through and adds nothing.
+	match upkeep:
+		"works":
+			_upkeep_works(mb)
+		"store":
+			_upkeep_store(mb)
+		"scrap":
+			_upkeep_scrap(mb)
+		_:
+			pass                                  # "service" — the legacy lineage
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
@@ -143,6 +173,7 @@ func apply_grid_config(cfg: Dictionary) -> void:
 	if cfg.has("interactive"): interactive = _to_bool(cfg["interactive"])
 	if cfg.has("dress_machine"): dress_machine = _to_bool(cfg["dress_machine"])
 	if cfg.has("colophon"): colophon = _norm_colophon(str(cfg["colophon"]))
+	if cfg.has("upkeep"): upkeep = _norm_upkeep(str(cfg["upkeep"]))
 	if cfg.has("scale"):
 		var s: float = float(cfg["scale"])
 		if s > 0.0: scale = Vector3.ONE * s
@@ -163,6 +194,9 @@ func _read_overrides() -> void:
 	if has_meta("config_density"): density = float(str(get_meta("config_density")))
 	if has_meta("config_interactive"): interactive = _to_bool(get_meta("config_interactive"))
 	if has_meta("config_dress_machine"): dress_machine = _to_bool(get_meta("config_dress_machine"))
+	# Normalising read: an unknown word leaves the shipped default standing rather than
+	# asking the match block below for a moment nothing in this file knows how to build.
+	if has_meta("config_upkeep"): upkeep = _norm_upkeep(str(get_meta("config_upkeep")))
 
 
 ## Coerce a config value (bool / int / string "true"/"1") to bool.
@@ -186,6 +220,7 @@ func _sync_indices() -> void:
 	density = clampf(density, 0.1, 0.95)
 	motif_seed = clampi(motif_seed, 0, SEED_MAX)
 	colophon = _norm_colophon(colophon)
+	upkeep = _norm_upkeep(upkeep)
 
 
 # ── Wallpaper texture ──────────────────────────────────────────────────
@@ -1470,3 +1505,246 @@ func _build_colophon_card() -> void:
 		Vector3(cx - pw * 0.42, base + ph * 0.24, front + 0.09), frame_color)
 	_box(Vector3(0.035, ph * 0.5, 0.035),
 		Vector3(cx + pw * 0.42, base + ph * 0.24, front + 0.09), frame_color)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# UPKEEP — which moment of its working life the machine is caught in
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# ADOPTED, NOT INVENTED. The word, the four values and the unknown-word contract come
+# verbatim from station_wall.gd / station_pillar.gd / station_crates.gd, where `upkeep`
+# already runs across seven pieces of the curation kit. A loom is the older machine in
+# the same room and it should not need a private synonym: a bay whose walls read "packed
+# down" cannot hold a loom that still reads "in commission".
+#
+# What the loom argues with it that a wall cannot. The colophon axis above is about the
+# CLOTH — how much of a closed set of seventeen the goods admit to. This one is about the
+# MACHINE, and it is the older argument: every textile in history came off a loom that was
+# oiled, opened, stopped, sheeted and eventually broken up, and the default sci-fi machine
+# here runs frictionlessly forever with nobody at it. `works`, `store` and `scrap` put the
+# labour back.
+#
+#   service  in commission — the legacy lineage, byte for byte; not one line below runs
+#   works    mid-job       — a trestle deck stood off the flank with tools on it, a conduit
+#                            run over the head, the cover panel leaned against the frame
+#   store    packed down   — a sheet strapped over the head and the run's output banded into
+#                            finished bolts stacked on the floor beside it
+#   scrap    robbed        — the flank cladding gone and the studs bared, the cover dropped
+#                            flat on the floor, hazard tape crossed over the hole
+#
+# THE PIVOT IS THE HEAD, exactly as the lit seam is the pivot on station_wall. Every one of
+# the six loom_style bodies puts its emissive accent rail and its weave bar at the top of
+# the frame, and those are the brightest pixels the loom owns in any capture. `store` puts
+# a sheet over precisely that, which is why it reads from across a room.
+#
+# THE CLOTH IS NEVER COVERED. The carpet / banner / bolt / rug is what the artifact teaches,
+# so _machine_bounds() excludes every mesh carrying the wallpaper texture and the dressing
+# is placed against the frame and on the floor beside the run. A packed-down loom still
+# shows you p4m — as finished stock, which is what packed down means for a textile.
+#
+# Everything below is appended: nothing above it moved, no draw order changed, and
+# `service` executes not one line of it.
+
+const UPKEEPS: PackedStringArray = ["service", "works", "store", "scrap"]
+const UPK_BOARD: Color = Color(0.55, 0.44, 0.28)   # scratch-board deck
+const UPK_STEEL: Color = Color(0.42, 0.44, 0.48)   # trestle legs / bared studs
+const UPK_SHEET: Color = Color(0.30, 0.31, 0.33)   # dust sheeting
+const UPK_STRAP: Color = Color(0.86, 0.34, 0.11)   # safety-orange banding
+const UPK_VOID: Color = Color(0.04, 0.04, 0.05)    # the dark where cladding was
+
+
+## An unknown word keeps the DEFAULT rather than crashing or inventing a fifth moment —
+## the same contract _norm_colophon and station_wall.upkeep use, so a typo in a map token
+## is inert instead of silently re-dressing a placement.
+func _norm_upkeep(v: String) -> String:
+	var s: String = v.strip_edges().to_lower()
+	return s if UPKEEPS.has(s) else "service"
+
+
+## The built machine's extent, EXCLUDING anything wearing the wallpaper texture. Six
+## loom_style bodies put their frame in six different places (a 1.2 m press, a 3 m upright,
+## a wall header, a floor spout), so the dressing is measured off the frame rather than
+## hardcoded against the roller. Called only when upkeep != "service".
+func _machine_bounds() -> AABB:
+	var acc: AABB = AABB()
+	var got: bool = false
+	for c in get_children():
+		if not (c is MeshInstance3D):
+			continue
+		var mi: MeshInstance3D = c as MeshInstance3D
+		if mi.mesh == null:
+			continue
+		var mat: Material = mi.material_override
+		if _carpet_tex != null and mat is StandardMaterial3D:
+			if (mat as StandardMaterial3D).albedo_texture == _carpet_tex:
+				continue                          # the cloth — never dressed over
+		var b: AABB = mi.transform * mi.mesh.get_aabb()
+		if got:
+			acc = acc.merge(b)
+		else:
+			acc = b
+			got = true
+	if not got:
+		acc = AABB(Vector3(-carpet_width * 0.5, 0.0, -0.2), Vector3(carpet_width, 1.2, 0.5))
+	return acc
+
+
+## Where the dressing stands: the +X flank (the side the capture camera is on), pushed back
+## along Z toward the machine's rear so it never lands on the carpet lane — and, when the
+## interactive console is out, kept clear of the lectern that already occupies that flank.
+## Returns [flank_x, centre_z, length_z, top_y].
+func _upk_station(mb: AABB) -> Array:
+	var fx: float = maxf(mb.position.x + mb.size.x, carpet_width * 0.5) + 0.10
+	var dz: float = clampf(mb.size.z + 0.40, 0.55, 1.00)
+	var cz: float = mb.position.z + mb.size.z * 0.30
+	if interactive:
+		cz = minf(cz, CON_FEED_Z - CON_D * 0.5 - dz * 0.5 - 0.06)
+	return [fx, cz, dz, maxf(mb.position.y + mb.size.y, 0.55)]
+
+
+## A short stencilled word standing on the flank, facing +X so it reads from the camera side.
+func _upk_stencil(text: String, pos: Vector3) -> void:
+	var q: Label3D = Label3D.new()
+	q.text = text
+	q.pixel_size = 0.0016
+	q.font_size = 28
+	q.modulate = UPK_STRAP
+	q.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	q.position = pos
+	q.rotation_degrees = Vector3(0, 90, 0)
+	add_child(q)
+
+
+## Diagonal hazard stripes — built per call, only on the `scrap` path.
+func _upk_tape_tex() -> ImageTexture:
+	var img: Image = Image.create(32, 32, false, Image.FORMAT_RGBA8)
+	for y in range(32):
+		for x in range(32):
+			var d: int = (x + y) % 16
+			img.set_pixel(x, y, UPK_STRAP if d < 8 else Color(0.08, 0.08, 0.09, 1.0))
+	return ImageTexture.create_from_image(img)
+
+
+func _upk_tape_bar(size: Vector3, pos: Vector3, rot: Vector3, tex: ImageTexture) -> void:
+	var mi: MeshInstance3D = MeshInstance3D.new()
+	var bm: BoxMesh = BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.position = pos
+	mi.rotation_degrees = rot
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_texture = tex
+	m.uv1_scale = Vector3(maxf(size.z, size.x) * 5.0, 1.0, 1.0)
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	m.roughness = 0.8
+	mi.material_override = m
+	add_child(mi)
+
+
+## WORKS — the loom mid-job. A scratch-board deck on trestle legs stands off the flank at
+## working height with tools laid on it, a conduit run crosses over the head, and the cover
+## panel that came off the side is leaned against the frame. The deck is the silhouette
+## change: a horizontal mass projecting 0.4 m into the room off a flank that had nothing.
+func _upkeep_works(mb: AABB) -> void:
+	var st: Array = _upk_station(mb)
+	var fx: float = st[0]
+	var cz: float = st[1]
+	var dz: float = st[2]
+	var top: float = st[3]
+
+	var deck_y: float = 0.86
+	_box(Vector3(0.42, 0.05, dz), Vector3(fx + 0.23, deck_y, cz), UPK_BOARD)
+	for sz in [-1.0, 1.0]:
+		var lz: float = cz + sz * dz * 0.36
+		_box(Vector3(0.05, deck_y, 0.05), Vector3(fx + 0.07, deck_y * 0.5, lz), UPK_STEEL)
+		_box(Vector3(0.05, deck_y, 0.05), Vector3(fx + 0.39, deck_y * 0.5, lz), UPK_STEEL)
+
+	# Tools laid out on the deck — three small blocks, the sign that someone is coming back.
+	_box(Vector3(0.22, 0.035, 0.05), Vector3(fx + 0.20, deck_y + 0.04, cz - dz * 0.24), UPK_STEEL.lightened(0.15))
+	_box(Vector3(0.07, 0.05, 0.16), Vector3(fx + 0.30, deck_y + 0.05, cz + dz * 0.06), UPK_STRAP.darkened(0.15))
+	_cyl(0.19, 0.022, Vector3(fx + 0.14, deck_y + 0.04, cz + dz * 0.28), UPK_STEEL).rotation_degrees = Vector3(90, 0, 0)
+
+	# Conduit run over the head — the sign that the machine is opened, not merely parked.
+	_cyl(dz + 0.80, 0.035, Vector3(fx + 0.06, top + 0.10, cz),
+		accent_color.darkened(0.35)).rotation_degrees = Vector3(90, 0, 0)
+
+	# The cover panel that came off, leaned against the frame.
+	var lean: MeshInstance3D = _box(Vector3(0.03, 0.86, dz * 0.62),
+		Vector3(fx + 0.13, 0.43, cz - dz * 0.04), UPK_STEEL.darkened(0.18))
+	lean.rotation_degrees = Vector3(0, 0, -13)
+
+	_upk_stencil("WORKS", Vector3(fx + 0.46, deck_y + 0.13, cz + dz * 0.34))
+
+
+## STORE — packed down. A sheet is pulled over the head and strapped, which covers the accent
+## rail and the weave bar together: the loom stops being a thing that glows and becomes a
+## wrapped volume. The run's output is not deleted, it is FINISHED — banded into three bolts
+## stacked on the floor at the flank, still carrying the wallpaper, because that is what
+## packed down means for a textile.
+func _upkeep_store(mb: AABB) -> void:
+	var st: Array = _upk_station(mb)
+	var fx: float = st[0]
+	var cz: float = st[1]
+	var top: float = st[3]
+
+	var drape: float = 0.34
+	var y0: float = maxf(top - drape, 0.10)
+	var cx: float = mb.position.x + mb.size.x * 0.5
+	var mz: float = mb.position.z + mb.size.z * 0.5
+	var sx: float = maxf(mb.size.x, carpet_width) + 0.14
+	var sz: float = maxf(mb.size.z, 0.30) + 0.14
+	var sh: float = maxf(top - y0, 0.16) + 0.06
+
+	_box(Vector3(sx, sh, sz), Vector3(cx, (y0 + top) * 0.5 + 0.03, mz), UPK_SHEET)
+	for f in [0.24, 0.54, 0.84]:
+		_box(Vector3(sx + 0.03, 0.045, sz + 0.03),
+			Vector3(cx, y0 + sh * f, mz), UPK_STRAP)
+
+	# Three finished bolts, banded and stood on end against the flank. Ranged along Z rather
+	# than piled outward along X on purpose: the run already owns that depth, so the dressing
+	# adds mass without widening the artifact's AABB and handing the sweep a re-frame to
+	# measure instead of a change.
+	var bl: float = minf(carpet_width, 1.05)
+	var stack: Array[Vector3] = [
+		Vector3(fx + 0.15, bl * 0.5, cz - 0.30),
+		Vector3(fx + 0.15, bl * 0.5, cz),
+		Vector3(fx + 0.15, bl * 0.5, cz + 0.30)]
+	for p in stack:
+		var roll: MeshInstance3D = _cyl(bl, 0.10, p, frame_color)
+		roll.material_override = _make_carpet_material(1.0, 2.0)
+		for by in [0.28, 0.74]:
+			_cyl(0.045, 0.112, Vector3(p.x, bl * by, p.z), UPK_STRAP)
+
+	_upk_stencil("PACKED", Vector3(fx + 0.30, bl + 0.14, cz))
+
+
+## SCRAP — robbed. The flank cladding is gone and the studs it was hiding stand bare in the
+## dark, the cover is lying flat on the floor where it was dropped, and two runs of hazard
+## tape are crossed over the opening. The frame is still there; what was ON it is not.
+func _upkeep_scrap(mb: AABB) -> void:
+	var st: Array = _upk_station(mb)
+	var fx: float = st[0]
+	var cz: float = st[1]
+	var dz: float = st[2]
+	var top: float = st[3]
+
+	var h: float = clampf(top - 0.12, 0.35, 1.15)
+	var yc: float = 0.08 + h * 0.5
+	_box(Vector3(0.03, h, dz), Vector3(fx + 0.02, yc, cz), UPK_VOID)
+
+	var n: int = maxi(int(dz / 0.28), 2)
+	for i in range(n + 1):
+		var zz: float = cz - dz * 0.5 + dz * (float(i) / float(n))
+		_box(Vector3(0.045, h, 0.045), Vector3(fx + 0.05, yc, zz), UPK_STEEL)
+
+	# The cover, dropped flat on the floor in the lane beside the run — forward along Z, which
+	# the artifact already occupies, rather than out along X, which it does not.
+	var cover: MeshInstance3D = _box(Vector3(0.03, 0.46, dz * 0.80),
+		Vector3(fx + 0.14, 0.03, cz + 0.85), UPK_STEEL.darkened(0.25))
+	cover.rotation_degrees = Vector3(0, 12, 90)
+
+	var tex: ImageTexture = _upk_tape_tex()
+	_upk_tape_bar(Vector3(0.012, 0.075, dz * 1.04), Vector3(fx + 0.09, 0.08 + h * 0.34, cz),
+		Vector3(10, 0, 0), tex)
+	_upk_tape_bar(Vector3(0.012, 0.075, dz * 1.04), Vector3(fx + 0.09, 0.08 + h * 0.68, cz),
+		Vector3(-10, 0, 0), tex)

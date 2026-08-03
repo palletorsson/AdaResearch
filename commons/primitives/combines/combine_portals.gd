@@ -29,10 +29,46 @@ func spine_hints() -> Dictionary:
 @export var portal_spacing: float = 4.5
 @export var base_path: NodePath = NodePath("Lowrestorus")
 
+## AXIS — WHAT ORDER THE SWEEP CLAIMS ITS FAMILY HAS. The members never change: the same
+## twenty tori are built, in the same order, with the same rings and the same ring_segments
+## on each. What changes is whether the display asserts that the family has a structure,
+## and whose structure it is. Adopted word for word from [[combine_sphere]] and
+## [[combine_capsule]], which sit in this same folder and are the same apparatus pointed at
+## a different primitive — one grammar, one vocabulary, so a room holding all three cannot
+## have two of them arguing taxonomy and the third arguing corridor.
+##
+##   table    the cross-product folded into a reading lattice — five across, four up,
+##            every member at eye level and comparable to its neighbour without walking.
+##            The periodic-table claim: the order is in the objects and the display
+##            merely reports it.
+##   ladder   one ascending file down +Z, each ring 4.5 m further away than the last.
+##            The claim that the family is a SEQUENCE with a direction — coarse to fine,
+##            near to far — and that you have to WALK it to have read it. THE LEGACY
+##            LINEAGE, coordinate for coordinate.
+##   stack    one column on one footprint, every ring through the same centre. The claim
+##            that these are not twenty objects but ONE ring described twenty times.
+##   heap     coordinates abandoned: the members piled at the origin on a hash of their
+##            own index. The claim that the ordering was ours all along and the rings
+##            never had it.
+##
+## THE EXTENT IS THE PIVOT HERE, where the captions are the pivot on combine_sphere. This
+## artifact's own spine_hints() call it "oversized" and "corridor_incompatible" because
+## `ladder` is ninety metres long: it is the one value you cannot see all of from anywhere,
+## and the other three are the same twenty rings brought into a single view. Choosing a
+## value chooses whether the resolution ladder is a thing you walk or a thing you read.
+@export_enum("table", "ladder", "stack", "heap") var taxonomy: String = "ladder"
+const TAXONOMIES: PackedStringArray = ["table", "ladder", "stack", "heap"]
+
+## Columns in `table`. Five across × four up covers the default twenty without a ragged
+## last row, and keeps the lattice wider than it is tall so it reads as a chart.
+const TAX_COLS := 5
+
 var _base_portal: MeshInstance3D
 var _base_mesh: TorusMesh
 
 func _ready() -> void:
+	var t: String = str(taxonomy).strip_edges().to_lower()
+	taxonomy = t if TAXONOMIES.has(t) else "ladder"
 	_base_portal = get_node_or_null(base_path) as MeshInstance3D
 	if _base_portal == null:
 		push_warning("CombinePortals: Base portal node not found at %s" % base_path)
@@ -69,7 +105,7 @@ func spawn_portals() -> void:
 		portal_instance.name = "Portal_%02d" % i
 
 		var transform := base_transform
-		transform.origin.z += float(i) * spacing
+		transform.origin += _taxonomy_offset(i, count, spacing)
 		portal_instance.transform = transform
 
 		var mesh_copy := _base_mesh.duplicate() as TorusMesh
@@ -87,3 +123,65 @@ func _clear_existing_portals() -> void:
 			continue
 		if child.name.begins_with("Portal_"):
 			child.queue_free()
+
+
+## Gated on the key: a map that says nothing about taxonomy gets no rebuild at all, so a
+## token carrying only other keys cannot disturb the corridor that is already standing.
+## This artifact had no apply_grid_config before, so `combine_portals#taxonomy:table` in a
+## map is the first configuration it has ever been able to hear.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("taxonomy"):
+		return
+	var want: String = str(config_data["taxonomy"]).strip_edges().to_lower()
+	if not TAXONOMIES.has(want) or want == taxonomy:
+		return
+	taxonomy = want
+	spawn_portals()
+
+
+# ── TAXONOMY ─────────────────────────────────────────────────────────────────
+# One axis, four claims about whether the family has an order. Shared word for word with
+# combine_sphere.gd and combine_capsule.gd. Appended LAST so nothing above it moved:
+# `ladder` returns the offset the legacy loop already applied — Vector3(0, 0, i * spacing),
+# the same float, in the same place in the same statement — and every portal keeps its
+# name, its mesh, its owner and its child index. The other three discard the file and
+# re-site the member from its index alone. NO MESH IS TOUCHED BY THIS AXIS: rings and
+# ring_segments are still start + i and start + 2i on every value, so what the corridor
+# teaches about resolution is identical in all four.
+
+## Where a member of the sweep stands, as an offset from the authored base transform.
+func _taxonomy_offset(index: int, count: int, spacing: float) -> Vector3:
+	match taxonomy:
+		"table":
+			# The file folded into a lattice. One cell is two spacings wide so the rings
+			# stand clear of each other instead of threading through their neighbours,
+			# and the grid is centred on the base so the chart faces you square.
+			var cell: float = spacing * 2.0
+			var cols: int = maxi(mini(TAX_COLS, count), 1)
+			var rows: int = int(ceil(float(count) / float(cols)))
+			var col: int = index % cols
+			var row: int = index / cols
+			return Vector3(
+				(float(col) - float(cols - 1) * 0.5) * cell,
+				(float(row) - float(rows - 1) * 0.5) * cell,
+				0.0)
+		"stack":
+			# One column on one footprint: the same ring, described again and again.
+			return Vector3(0.0, float(index) * spacing * 0.34, 0.0)
+		"heap":
+			# Coordinates abandoned. The scatter is a HASH of the index, never randf():
+			# a random render path would make each sweep frame a different pile, and the
+			# critic would be measuring the noise instead of the axis. The radius is
+			# scaled to the RING's girth rather than to combine_sphere's bead spacing —
+			# a pile has to be loose enough to read as a pile.
+			var a: float = _index_hash(index * 2 + 1) * TAU
+			var r: float = spacing * 1.6 * sqrt(_index_hash(index * 2 + 2))
+			return Vector3(cos(a) * r, _index_hash(index * 2 + 7) * spacing * 0.9, sin(a) * r)
+		_:
+			return Vector3(0.0, 0.0, float(index) * spacing)   # "ladder" — the legacy file
+
+
+## Deterministic 0..1 from an integer. Same value every boot, every frame, every machine.
+func _index_hash(n: int) -> float:
+	var s: float = sin(float(n) * 12.9898 + 78.233) * 43758.5453
+	return s - floor(s)

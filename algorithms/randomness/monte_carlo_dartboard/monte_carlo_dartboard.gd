@@ -8,11 +8,11 @@
 # @identity
 # essence: π ≈ 4 · (points inside circle / total points) — Monte Carlo integration
 # desire: throw darts at a board and watch π emerge from chaos — green inside, red outside, gold answer
-# critical_parameter: max_darts — more darts means tighter convergence; error scales as 1/sqrt(n)
+# critical_parameter: max_darts — more darts means tighter convergence; error scales as 1/sqrt(n); disclosure — how much of the sampling the cabinet lets you check the answer against (oracle | tally | ledger | works | origin)
 # triggers: _throw_dart() samples uniform (rx, ry) in [0,1]², tests dx²+dy² <= 0.25
-# emerges: the π estimate converges — randomness computes a transcendental number without algebra
+# emerges: the π estimate converges — randomness computes a transcendental number without algebra; at disclosure:oracle the same number arrives with the board wiped, and π stops being a measurement and becomes an announcement
 # needs: VR push buttons for THROW/AUTO/RESET [has]; dart visual markers [has]
-# relationships: contrasts with galton_board (integration vs distribution); feeds understanding of random sampling
+# relationships: contrasts with galton_board (integration vs distribution); feeds understanding of random sampling; shares the `disclosure` ladder word for word with [[prng_crank_machine]], [[coin_toss]], [[trng_vs_prng]] and [[hardware_entropy_decay]]
 # truth: Randomness is not the enemy of precision — given enough samples, it converges to any truth.
 
 extends Node3D
@@ -21,6 +21,100 @@ class_name MonteCarloDartboard
 
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DNA PROMOTION (2026-08-02) — disclosure
+#
+# ADOPTED, NOT INVENTED. The randomness registry already runs one ladder across
+# five machines — prng_crank_machine (which owns the table), coin_toss,
+# trng_vs_prng, hardware_entropy_decay, env_one — and this is the sixth. Same
+# five words, same order, same spellings, same default. The rungs are read
+# through prng_crank_machine's DISCLOSURE_RUNGS, not through a private copy,
+# because the exhibits family shipped `guard` as two disjoint word-lists on two
+# siblings and needed a whole convergence pass to reunite them.
+#
+#   disclosure    oracle  <  tally  <  ledger  <  works  <  origin
+#
+# WHY THIS QUESTION BELONGS ON THIS MACHINE. Monte Carlo is the one algorithm in
+# the tier whose ANSWER and whose EVIDENCE are separable objects. The number
+# 3.14 can be printed on a screen with nothing behind it, or it can be printed
+# next to fourteen hundred dots you can count yourself. Nothing about the
+# arithmetic changes; what changes is whether the visitor is a witness or an
+# audience. That is the whole content of "randomness computes a truth" — you
+# either watched it compute or you were told.
+#
+# WHAT THE RUNGS MEAN ON A DARTBOARD:
+#
+#   oracle  the aperture is a black square. No darts, no ring, no reference
+#           disc, no corner axes, no formula band — and the census screen says
+#           one line: PI ~ 3.141234. The machine still throws every dart and
+#           still counts every hit; it simply does not show you one of them.
+#           This is Monte Carlo as a verdict.
+#   tally   + the aggregate. The darts come back as a field of PALE UNIFORM
+#           marks — you can count them, you cannot tell which one scored — and
+#           the screen returns darts / inside / outside / ratio. The numbers
+#           claim a partition the picture does not show.
+#   ledger  + the per-trial record. Every dart takes its own verdict colour
+#           (green in, red out) and the inscribed circle is drawn, so each mark
+#           can be checked against the boundary that judged it. This is the rung
+#           where the picture becomes auditable: the ratio on the screen is now
+#           a claim you can falsify with your eyes.
+#   works   + the model. The filled reference disc, the (0,0)/(1,1) corner axes
+#           and the two-line formula band — area(circle)/area(square) = π/4 —
+#           plus actual π and the error on the screen. THE LEGACY LINEAGE,
+#           byte for byte: this is the artifact exactly as it has always shipped.
+#   origin  + the state that produced it, and this rung puts it on the BOARD,
+#           not on a label: every mark keeps its verdict hue and takes its draw
+#           index as brightness, so the first darts sit nearly black and the
+#           newest blaze. The scatter stops being a cloud that was always there
+#           and becomes a sequence being walked, in order, in front of you. A
+#           SOURCE plate on the service column names the generator and its seed.
+#           The darts stop being "random" and become entry 280 of a stream with
+#           an address.
+#
+# THE ASYMMETRY, DECLARED. On the prng the tally→ledger step is a whole pocket
+# appearing; on the coin it is a ribbon of letters; here it is COLOUR — 140
+# pale marks become 140 green-and-red ones with a ring through them. Different
+# organ, same step, and the three siblings never go quiet on the same rung.
+#
+# WHAT IS DELIBERATELY NOT THE AXIS. darts_per_second and max_darts are the
+# tempting knobs and both are TIME: the sweep photographs at a fixed wall-clock
+# moment ~0.5 s after the value is applied, so every rate renders as whatever
+# the harness's clock caught. preseed_darts is invisible for the same reason at
+# one remove. finish (rams | terminal) was the other candidate and it is a
+# COLOUR, not a claim.
+#
+# NOT TOUCHED, AND NOT NEGOTIABLE: the estimate. rx, ry are drawn the same way,
+# dx² + dy² <= 0.25 judges them the same way, _inside_count / _total_count is
+# accumulated the same way and π is printed at every rung including oracle.
+# There is no rung at which the machine reports nothing — an instrument that
+# says nothing is not a quieter instrument, it is a broken one — so this axis
+# has no `none`, exactly as the family's other five do not.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## The family's ladder, defined once in prng_crank_machine. Preloaded (not the
+## global class_name) because class_name lookups are not reliable headless and
+## every frame of the evidence loop is rendered headless.
+const Disclosure = preload("res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd")
+
+## THE AXIS — how much of its own sampling this cabinet lets you check. Same five
+## rungs, same order, same spellings as prng_crank_machine and coin_toss.
+## `works` is the legacy default.
+@export_enum("oracle", "tally", "ledger", "works", "origin") var disclosure: String = "works"
+
+## The allow-list, in ladder order — the same five words the @export_enum above
+## declares. This is what a map token (#disclosure:) is checked against.
+const DISCLOSURES: PackedStringArray = ["oracle", "tally", "ledger", "works", "origin"]
+
+## Rank of the current rung, 0..4, read through the family's one table. An
+## unreadable word resolves to the legacy rung rather than to silence.
+func _rung() -> int:
+	return int(Disclosure.DISCLOSURE_RUNGS.get(Disclosure.disclosure_name(disclosure), 3))
+
+
+## Neutral mark colour for `tally` — one pale dot per dart, countable and
+## unjudged. Not a palette choice: it is the ABSENCE of the verdict colours.
+const COLOR_UNJUDGED := Color(0.72, 0.74, 0.80)
 
 ## Housing finish — "rams" (light Braun default) or "terminal" (dark console).
 ## Every colour derives from HangarKit.finish_palette(), so one word re-skins
@@ -53,6 +147,22 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 ## and keeps tightening while you watch.
 @export var preseed_darts: int = 140
 
+# ── Determinism ──────────────────────────────────────────────────────────────
+# 140 preseeded darts off the global randf() means two launches of the same room
+# are two different dart fields — right in a room, and fatal to a measurement.
+# An evidence sweep renders each value in its OWN Godot process, so five
+# unseeded variants are five different scatters, and a critic comparing them
+# reports the SCATTER as a confident bite belonging to the axis. Seeded, the
+# five frames differ only where the rung differs.
+#
+# -1 = do not touch the stream, i.e. today exactly: randf() off the global
+# generator, a fresh board every launch. Any value >= 0 builds a LOCAL generator
+# and draws from that — never seed() on the global stream, because this cabinet
+# shares a map with artifacts that draw too and re-seeding the process to pin
+# one board would silently move every one of them.
+@export var dart_seed: int = -1
+var _rng: RandomNumberGenerator = null
+
 # ── Colors ───────────────────────────────────────────────────────────────────
 @export var color_board: Color = Color(0.15, 0.15, 0.18)
 @export var color_circle: Color = Color(0.1, 0.15, 0.35)
@@ -66,6 +176,11 @@ var _seeding: bool = false   # suppress per-dart readout rebuilds while pre-seed
 var _total_count: int = 0
 var _throw_timer: float = 0.0
 var _dart_meshes: Array[MeshInstance3D] = []
+# The last trial, for the `ledger` readout line. Written by _throw_dart from
+# values it has already drawn — this adds no call to the RNG.
+var _last_rx: float = 0.0
+var _last_ry: float = 0.0
+var _last_inside: bool = false
 
 # Integrated 2D-in-3D readout — the estimate panel (π + darts + hits + error),
 # consolidated onto ONE baked-text block that rebuilds only when its text changes.
@@ -89,12 +204,43 @@ var _readout_width: float = _READOUT_WIDTH
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	# APPENDED FIRST and draws nothing: _setup_seeded_stream() only constructs (or
+	# clears) a generator. The first sample is taken in _preseed() at the bottom of
+	# this list, so no draw above or below this line shifts on the default path.
+	_setup_seeded_stream()
+	_build_all()
+
+
+## The build sequence, lifted verbatim out of _ready so apply_grid_config can run
+## it again after a rung change. Order is unchanged and load-bearing:
+## _create_cabinet() retires the floating title/formula blocks _create_labels()
+## made and re-homes the readout into the column screen, and _preseed() must run
+## after the screen exists or the first 140 darts have nowhere to report.
+func _build_all() -> void:
 	_create_board()
 	_create_circle_overlay()
 	_create_labels()
 	_create_vr_controls()
 	_create_cabinet()
 	_preseed()
+
+
+## Builds the local generator, or leaves it null. Null is the default and the
+## room behaviour: _unit_draw() falls straight through to the global randf() this
+## file has always used.
+func _setup_seeded_stream() -> void:
+	if dart_seed < 0:
+		_rng = null
+		return
+	_rng = RandomNumberGenerator.new()
+	_rng.seed = dart_seed
+
+
+## One uniform draw. Identical to randf() unless seeded.
+func _unit_draw() -> float:
+	if _rng != null:
+		return _rng.randf()
+	return randf()
 
 
 ## ARRIVE WITH A SAMPLE ALREADY THROWN.
@@ -193,6 +339,10 @@ func _create_board() -> void:
 		add_child(frame)
 
 	# Corner axis tags: (0,0) → (1,1) coordinate display, as small integrated boards.
+	# THE MODEL'S FRAME. These name the unit square the integral is taken over, so
+	# they belong to `works` — below that rung there is no stated domain, only marks.
+	if _rung() < 3:
+		return
 	var corner_z := board_thickness / 2.0 + 0.012
 	var corner_positions := [
 		[Vector3(-board_size / 2.0 - 0.045, board_height - board_size / 2.0, corner_z), "(0,0)"],
@@ -208,6 +358,12 @@ func _create_board() -> void:
 
 
 func _create_circle_overlay() -> void:
+	# THE BOUNDARY THAT JUDGES. The ring is what makes a dart's colour checkable,
+	# so it arrives with the per-trial record at `ledger`. Below that the marks are
+	# on a blank square and the partition exists only as a number on the screen.
+	if _rung() < 2:
+		return
+
 	# Draw the inscribed circle using ImmediateMesh (line loop)
 	_circle_mesh = MeshInstance3D.new()
 	_circle_mesh.name = "CircleOverlay"
@@ -239,7 +395,11 @@ func _create_circle_overlay() -> void:
 	_circle_mesh.position = Vector3(0, board_height, board_thickness / 2.0 + 0.002)
 	add_child(_circle_mesh)
 
-	# Also draw a faint filled circle for reference
+	# Also draw a faint filled circle for reference.
+	# THE MODEL'S AREA, shaded — the thing whose ratio to the square IS π/4. That is
+	# the claim, not the record, so it waits for `works`.
+	if _rung() < 3:
+		return
 	var fill := MeshInstance3D.new()
 	var disc := CylinderMesh.new()
 	disc.top_radius = radius
@@ -267,9 +427,11 @@ func _throw_dart() -> void:
 	if _total_count >= max_darts:
 		return
 
-	# Random point in unit square [0,1] × [0,1], mapped to board
-	var rx := randf()
-	var ry := randf()
+	# Random point in unit square [0,1] × [0,1], mapped to board.
+	# _unit_draw() IS randf() whenever dart_seed is -1, which is every shipped
+	# room: same two calls, same order, same count.
+	var rx := _unit_draw()
+	var ry := _unit_draw()
 
 	# Check if inside inscribed circle (center 0.5, 0.5, radius 0.5)
 	var dx := rx - 0.5
@@ -279,6 +441,19 @@ func _throw_dart() -> void:
 	_total_count += 1
 	if inside:
 		_inside_count += 1
+	# The last trial, kept for the `ledger` line. Bookkeeping only — no draw.
+	_last_rx = rx
+	_last_ry = ry
+	_last_inside = inside
+
+	# THE MARKS. At `oracle` the machine throws, judges and counts exactly as
+	# always and simply does not paint the evidence: no marker is built, the
+	# aperture stays a black square, and π still appears on the screen. Every
+	# statistic above this line has already been accumulated.
+	if _rung() < 1:
+		if not _seeding:
+			_update_display()
+		return
 
 	# Map to board coordinates
 	var board_x := (rx - 0.5) * board_size
@@ -295,11 +470,28 @@ func _throw_dart() -> void:
 	marker.mesh = sphere
 
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color_inside if inside else color_outside
+	# THE VERDICT, or its absence. At `tally` every mark is the same pale colour:
+	# the field is countable and unjudged, which is exactly what "aggregate without
+	# account" looks like when the aggregate is a partition. From `ledger` up each
+	# dart wears the verdict that produced the number — the legacy line, unchanged.
+	mat.albedo_color = COLOR_UNJUDGED if _rung() < 2 else (color_inside if inside else color_outside)
 	mat.emission_enabled = true
 	mat.emission = mat.albedo_color
 	mat.emission_energy_multiplier = 0.5
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+
+	# ORIGIN — the stream's ORDER, written on the board. Hue still carries the
+	# verdict (in/out is not taken away), and brightness now carries the draw
+	# index: the first darts sit dark and the newest blaze, so the scatter reads
+	# as a SEQUENCE being walked rather than a cloud that was always there. This
+	# is the rung's real evidence; the SOURCE plate on the column only names what
+	# the board is already showing. Nothing here touches rx, ry or the verdict.
+	if _rung() >= 4:
+		var age: float = clampf(float(_total_count) / float(maxi(preseed_darts, 1)), 0.0, 1.0)
+		mat.albedo_color = mat.albedo_color.darkened(0.62 * (1.0 - age))
+		mat.emission = mat.albedo_color
+		mat.emission_energy_multiplier = lerpf(0.10, 1.30, age)
+
 	marker.material_override = mat
 
 	marker.position = Vector3(board_x, board_height + board_y, dart_z)
@@ -384,6 +576,54 @@ func _rebuild_readout(lines: Array) -> void:
 		_readout_root.add_child(_readout_block)
 
 
+## THE CENSUS, by rung. The ladder is monotone: every rung prints everything the
+## rung below prints and adds one more kind of account. π itself is on every rung
+## including `oracle` — see the header: no rung reports nothing.
+##
+## `works` returns the nine legacy lines in the legacy order with the legacy
+## format strings, so the shipped placements render character for character what
+## they rendered before this axis existed.
+func _readout_lines(pi_estimate: float, error: float, error_pct: float) -> Array:
+	var rung: int = _rung()
+
+	# oracle — the answer, and nothing to check it with.
+	var lines: Array = ["π ≈ %.6f" % pi_estimate]
+	if rung < 1:
+		return lines
+
+	# tally — the aggregate.
+	lines.append("")
+	lines.append("darts: %d" % _total_count)
+	lines.append("inside: %d" % _inside_count)
+	lines.append("outside: %d" % (_total_count - _inside_count))
+	lines.append("ratio: %.4f" % (float(_inside_count) / float(_total_count)))
+	if rung < 2:
+		return lines
+
+	# ledger — the per-trial record. The board carries the whole of it in colour;
+	# the screen carries the newest row, the one entry whose coordinates you could
+	# still walk over and verify against the ring.
+	if rung == 2:
+		lines.append("")
+		lines.append("last: (%.3f, %.3f)" % [_last_rx, _last_ry])
+		lines.append("      %s" % ("IN" if _last_inside else "OUT"))
+		return lines
+
+	# works — the model's claim about the tally. THE LEGACY LINEAGE, byte for byte.
+	lines.append("")
+	lines.append("actual π: %.6f" % PI)
+	lines.append("error: %.6f (%.2f%%)" % [error, error_pct])
+	if rung < 4:
+		return lines
+
+	# origin — the state that produced it. The estimate acquires an address.
+	lines.append("")
+	lines.append("source: %s" % ("prng seed" if dart_seed >= 0 else "engine rng"))
+	lines.append("seed: %s" % (str(dart_seed) if dart_seed >= 0 else "unpinned"))
+	lines.append("draw: %d" % (_total_count * 2))
+	return lines
+
+
 func _update_display() -> void:
 	if _total_count == 0:
 		return
@@ -392,18 +632,9 @@ func _update_display() -> void:
 	var error: float = absf(pi_estimate - PI)
 	var error_pct: float = error / PI * 100.0
 
-	# Every readout string, consolidated onto one panel.
-	var lines := [
-		"π ≈ %.6f" % pi_estimate,
-		"",
-		"darts: %d" % _total_count,
-		"inside: %d" % _inside_count,
-		"outside: %d" % (_total_count - _inside_count),
-		"ratio: %.4f" % (float(_inside_count) / float(_total_count)),
-		"",
-		"actual π: %.6f" % PI,
-		"error: %.6f (%.2f%%)" % [error, error_pct],
-	]
+	# Every readout string, consolidated onto one panel — as much of it as the
+	# rung admits. `works` returns the legacy nine lines verbatim.
+	var lines := _readout_lines(pi_estimate, error, error_pct)
 
 	# Color the whole readout by accuracy — green excellent, gold good, orange far.
 	if error_pct < 1.0:
@@ -501,26 +732,31 @@ func _create_cabinet() -> void:
 	above.position = Vector3(0.0, (win_top + body_top) / 2.0, bd / 2.0 - 0.010)
 	cab.add_child(above)
 
-	# FORMULA — signage in the below-window panel (was a floating block)
-	var f_band := MeshInstance3D.new()
-	var f_band_mesh := BoxMesh.new()
-	f_band_mesh.size = Vector3(board_size - 0.06, 0.11, 0.012)
-	f_band.mesh = f_band_mesh
-	f_band.material_override = dark
-	f_band.position = Vector3(0.0, win_bot - 0.12, bd / 2.0 + 0.012)
-	cab.add_child(f_band)
-	var f1: Node3D = BakedText.make_tag(
-		"PI/4 = AREA(CIRCLE) / AREA(SQUARE)", Color(0.62, 0.64, 0.72), 0.020,
-		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
-	if f1:
-		f1.position = Vector3(0.0, win_bot - 0.095, bd / 2.0 + 0.020)
-		cab.add_child(f1)
-	var f2: Node3D = BakedText.make_tag(
-		"PI ~ 4 x (INSIDE / TOTAL)", Color(0.85, 0.75, 0.35), 0.024,
-		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
-	if f2:
-		f2.position = Vector3(0.0, win_bot - 0.140, bd / 2.0 + 0.020)
-		cab.add_child(f2)
+	# FORMULA — signage in the below-window panel (was a floating block).
+	# THE MECHANISM STATED. This band is the model's own account of why the ratio
+	# is π/4 at all, so it is the `works` rung's signature and is absent below it:
+	# at `ledger` you can audit every dart and still not be told what the count is
+	# supposed to mean.
+	if _rung() >= 3:
+		var f_band := MeshInstance3D.new()
+		var f_band_mesh := BoxMesh.new()
+		f_band_mesh.size = Vector3(board_size - 0.06, 0.11, 0.012)
+		f_band.mesh = f_band_mesh
+		f_band.material_override = dark
+		f_band.position = Vector3(0.0, win_bot - 0.12, bd / 2.0 + 0.012)
+		cab.add_child(f_band)
+		var f1: Node3D = BakedText.make_tag(
+			"PI/4 = AREA(CIRCLE) / AREA(SQUARE)", Color(0.62, 0.64, 0.72), 0.020,
+			Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+		if f1:
+			f1.position = Vector3(0.0, win_bot - 0.095, bd / 2.0 + 0.020)
+			cab.add_child(f1)
+		var f2: Node3D = BakedText.make_tag(
+			"PI ~ 4 x (INSIDE / TOTAL)", Color(0.85, 0.75, 0.35), 0.024,
+			Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+		if f2:
+			f2.position = Vector3(0.0, win_bot - 0.140, bd / 2.0 + 0.020)
+			cab.add_child(f2)
 
 	# right service column
 	var col := MeshInstance3D.new()
@@ -676,6 +912,64 @@ func _create_cabinet() -> void:
 	if ped:
 		cab.add_child(ped)
 
+	# ── ORIGIN, appended LAST so every child index and position above is
+	# untouched at every other rung. `works` falls through and adds nothing.
+	if _rung() >= 4:
+		_disclosure_origin_plate(cab, colx, win_bot, face_z, dark, accent)
+
+
+## ORIGIN — the source plate. A small dark plate low on the service column,
+## under the vent, naming the stream the darts came out of: which generator, what
+## seed, how many draws have been taken. Nothing about the estimate changes; what
+## changes is that the estimate now has a provenance, and "random" stops being a
+## property of the darts and becomes a property of a machine somebody configured.
+##
+## Built from the same kit parts as the rest of the cabinet (dark plate, accent
+## hairline, baked tags) so the rung reads as a FACE OF THE VOLUME and not as a
+## label taped on — the cabinet-grammar rule the readout pocket exists to honour.
+func _disclosure_origin_plate(cab: Node3D, colx: float, win_bot: float,
+		face_z: float, dark: Material, accent: Material) -> void:
+	var plate_y: float = win_bot - 0.14
+	var plate := MeshInstance3D.new()
+	var plate_mesh := BoxMesh.new()
+	plate_mesh.size = Vector3(0.22, 0.115, 0.014)
+	plate.mesh = plate_mesh
+	plate.material_override = dark
+	plate.position = Vector3(colx, plate_y, face_z + 0.004)
+	cab.add_child(plate)
+
+	var hair := MeshInstance3D.new()
+	var hair_mesh := BoxMesh.new()
+	hair_mesh.size = Vector3(0.22, 0.004, 0.004)
+	hair.mesh = hair_mesh
+	hair.material_override = accent
+	hair.position = Vector3(colx, plate_y + 0.055, face_z + 0.012)
+	cab.add_child(hair)
+
+	var head: Node3D = BakedText.make_tag(
+		"SOURCE", Color(0.90, 0.92, 0.97), 0.017,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if head:
+		head.position = Vector3(colx, plate_y + 0.036, face_z + 0.014)
+		cab.add_child(head)
+
+	# Static claims only. This plate is built inside _create_cabinet, which runs
+	# BEFORE _preseed, so a live draw counter here would bake the string "0" and
+	# stay there — the count lives on the census screen, which rebuilds. What
+	# belongs on the plate is what does not move: the generator and its domain.
+	var origin_lines: Array = [
+		"PRNG SEED" if dart_seed >= 0 else "ENGINE RNG",
+		("SEED %d" % dart_seed) if dart_seed >= 0 else "SEED UNPINNED",
+		"UNIFORM [0,1]",
+	]
+	for i in range(origin_lines.size()):
+		var row: Node3D = BakedText.make_tag(
+			str(origin_lines[i]), Color(0.72, 0.68, 0.42), 0.015,
+			Color(0.06, 0.065, 0.08), false, Color(0, 0, 0, 0))
+		if row:
+			row.position = Vector3(colx, plate_y + 0.010 - float(i) * 0.022, face_z + 0.014)
+			cab.add_child(row)
+
 func _make_wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Material) -> MeshInstance3D:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -766,5 +1060,66 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## LATENT BUG PAID (2026-08-02): this was `pass`. Every `#token: value` a map put
+## on a monte_carlo_dartboard placement was parsed, logged by
+## GridInteractablesComponent, stashed as metadata — and then silently discarded,
+## because nothing on this artifact ever read it back. A declared axis with a
+## `pass` here is a declaration that lies, and the capture harness applies DNA
+## through exactly this method (commons/testing/capture_artifact_config.gd:108),
+## AFTER add_child, i.e. after _ready has already built the cabinet. So the rung
+## has to be able to arrive late and move the geometry.
+##
+## THE GUARD IS LOAD-BEARING. curation_station.gd calls
+## apply_grid_config({"emissive": false}) on every artifact it curates, one line
+## after it has hidden labels and darkened modulates. That dict carries no
+## disclosure key; an unconditional rebuild would throw that framing away on every
+## curated shelf. Unchanged rung means touch nothing.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var before: String = disclosure
+	var reseed: bool = false
+
+	if config.has("disclosure"):
+		# Fall back to the LEGACY rung, not the current value: an unreadable word
+		# must not quietly seal a machine four rooms expect open.
+		disclosure = Disclosure.disclosure_name(str(config["disclosure"]))
+	if config.has("dart_seed"):
+		var want: int = int(str(config["dart_seed"]))
+		if want != dart_seed:
+			dart_seed = want
+			reseed = true
+
+	if disclosure == before and not reseed:
+		return
+	_rebuild_now()
+	print("[MonteCarloDartboard] Config applied — disclosure=%s seed=%d" % [disclosure, dart_seed])
+
+
+## Tear down what this script built and build it again, INLINE. No call_deferred:
+## a deferred rebuild leaves the node empty for a frame, and _auto_ground_artifact
+## — which runs later in the same deferred queue — would measure a zero AABB and
+## leave the cabinet ungrounded. Every child of this node is script-built (the
+## .tscn holds only the root), so clearing them all is exactly the teardown.
+func _rebuild_now() -> void:
+	for c in get_children():
+		remove_child(c)          # leaves the tree synchronously — no double render
+		c.queue_free()
+	_dart_meshes.clear()
+	_inside_count = 0
+	_total_count = 0
+	_throw_timer = 0.0
+	_last_rx = 0.0
+	_last_ry = 0.0
+	_last_inside = false
+	# Cached refs point at freed nodes now; the readout path is null-guarded, so
+	# clearing these is what keeps a rung that drops a pocket from repainting into
+	# a corpse.
+	_readout_root = null
+	_readout_block = null
+	_readout_cache = ""
+	_readout_color = Color(0.85, 0.87, 0.95)
+	_readout_line_h = _READOUT_LINE_H
+	_readout_width = _READOUT_WIDTH
+	_circle_mesh = null
+	# Restart the draw sequence so a pinned board is pinned from its first dart.
+	_setup_seeded_stream()
+	_build_all()

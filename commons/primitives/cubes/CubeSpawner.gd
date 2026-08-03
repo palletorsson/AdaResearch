@@ -25,6 +25,48 @@ enum SpawnMode {
 @export var field_jitter_interval: float = 0.4
 @export var field_vertical_speed_variation: float = 0.2
 
+## AXIS — WARNING: how much the hazard tells you BEFORE it costs you anything. Adopted
+## word for word from [[kaleidocycle_enemy]], [[miura_crawler]], [[scissor_stalker]],
+## [[path_cube]], [[path_pyramid]] and [[path_wedge]]: one vocabulary across the hazards,
+## because a room cannot coherently cage its crawlers and leave the thing that shoots at
+## them unannounced. This is the sharpest case in the family for a different reason than
+## the kaleidocycle — the spawner is not the danger, it is the SOURCE of the danger, and
+## between two firings it is a box on the floor doing nothing at all. What the room says
+## about a box that is currently idle is not a property of the box.
+##
+##   none    the red emitter alone, with the plume and the label it always had —
+##           THE LEGACY BODY, byte for byte.
+##   stain   scorch soaked into the floor under the muzzle and two burn runs bled off
+##           one side, and nothing above it. You can only read it standing where it has
+##           already been firing.
+##   cage    a bolted bar frame and a filed yellow tag. Somebody catalogued this and
+##           fenced it, and it fires through the bars on exactly the same clock.
+##   beacon  a lit mast up out of the emitter with a lamp head, plus a glowing outline
+##           burnt onto the floor: readable from the doorway, before you are in range.
+##   shroud  a canvas wrap strapped over the whole emitter. The timer is still running
+##           underneath it. The world knows and has decided you should not.
+##
+## APPEARANCE ONLY. spawn_interval, projectile_speed, max_projectiles, target_prediction,
+## spawn_mode and every field_* number are byte-identical across all five values, and no
+## value adds or removes a collider. A hazard that hides itself is not a gentler hazard.
+@export_group("Warning")
+const WARNING_VALUES: PackedStringArray = ["none", "stain", "cage", "beacon", "shroud"]
+@export_enum("none", "stain", "cage", "beacon", "shroud") var warning: String = "none"
+
+@export_group("Determinism")
+## Seed for the falling-field spawn scatter. -1 = randomize on every boot, which is what
+## this spawner has always done and remains the default. Any value >= 0 makes the field
+## repeat exactly, so a capture, a regression shot or a bug report can be re-run and get
+## the same cubes in the same places.
+@export var field_seed: int = -1
+## Hold the idle animation still. Default false = the legacy behaviour: the emitter pulses
+## between 1.0 and 1.2 scale on a looping tween and the warning plume emits, both of which
+## land at an arbitrary phase in any single frame. Set true (a still capture wants
+## `{"idle_still": true}` as a dna.fixture) to skip both, so the frame shows the housing
+## and not what time it was. UNTYPED on purpose — a fixture that arrives as the string
+## "true" would be rejected by a typed bool before _ready and silently do nothing.
+@export var idle_still = false
+
 # Visual components
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -47,12 +89,24 @@ signal spawner_activated()
 signal spawner_deactivated()
 
 func _ready():
-	_rng.randomize()
+	# LEGACY STREAM PRESERVED: field_seed defaults to -1, so this is still the same
+	# unseeded randomize() call in the same place, drawing the same way.
+	if field_seed < 0:
+		_rng.randomize()
+	else:
+		_rng.seed = field_seed
+	var w: String = str(warning).strip_edges().to_lower()
+	warning = w if WARNING_VALUES.has(w) else "none"
 	_setup_spawner()
 	_find_player()
-	
+
 	if auto_start:
 		activate_spawner()
+
+	# WARNING dressing LAST, so every child added above keeps its index and the emitter,
+	# the timer, the marker, the plume, the two audio players and the label are all
+	# exactly where they were. "none" falls through and adds nothing at all.
+	_build_warning()
 
 func _setup_spawner():
 	"""Initialize the spawner components"""
@@ -155,17 +209,29 @@ func deactivate_spawner():
 
 func _play_warning_effects():
 	"""Play visual and audio warnings"""
+	# idle_still defaults to false, so this whole function is the legacy one.
+	if _still():
+		return
 	if warning_particles:
 		warning_particles.emitting = true
-	
+
 	if warning_sound:
 		warning_sound.play()
-	
+
 	# Pulsing animation
 	var tween = create_tween()
 	tween.set_loops()
 	tween.tween_property(mesh_instance, "scale", Vector3(1.2, 1.2, 1.2), 0.5)
 	tween.tween_property(mesh_instance, "scale", Vector3(1.0, 1.0, 1.0), 0.5)
+
+
+## Truthy for a bool `true`, an int 1 or the strings "true"/"1"/"yes"/"on". A fixture key
+## can arrive from JSON as any of those, and the one that arrives as a String is exactly
+## the one a typed bool would have thrown away without saying so.
+func _still() -> bool:
+	if idle_still is bool:
+		return idle_still
+	return str(idle_still).strip_edges().to_lower() in ["true", "1", "yes", "on"]
 
 func _stop_warning_effects():
 	"""Stop visual effects"""
@@ -318,6 +384,20 @@ func configure(config_data: Dictionary) -> void:
 		field_jitter_interval = max(0.05, _to_float(config_data["jitter_interval"], field_jitter_interval))
 	if config_data.has("vertical_variation"):
 		field_vertical_speed_variation = max(0.0, _to_float(config_data["vertical_variation"], field_vertical_speed_variation))
+
+	if config_data.has("field_seed"):
+		field_seed = int(_to_float(config_data["field_seed"], float(field_seed)))
+		if field_seed >= 0:
+			_rng.seed = field_seed
+
+	# WARNING last, and gated on the key: a config that says nothing about it cannot
+	# disturb the dressing already standing. An unrecognised word keeps the current
+	# value — a typo must not silently uncage a live hazard.
+	if config_data.has("warning"):
+		var w: String = str(config_data["warning"]).strip_edges().to_lower()
+		if WARNING_VALUES.has(w) and w != warning:
+			warning = w
+			_build_warning()
 
 func _to_float(value: Variant, fallback: float) -> float:
 	if value is float or value is int:

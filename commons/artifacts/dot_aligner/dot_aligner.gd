@@ -21,6 +21,28 @@ class_name DotAligner
 @export var friend_color: Color = Color(0.40, 0.92, 0.45) # befriended green
 @export var complexity: int = 6
 
+## AXIS — HOW MUCH OF THE ARITHMETIC THE BENCH DRAWS. Adopted word for word (and value
+## for value, in order) from [[transform_composition_workbench]] and shared across the
+## whole vector subject, so a room cannot show its sum as a walked route and its dot
+## product as a bare verdict.
+##
+##   outcome     the verdict alone. a, b and the angle arc leave the render layers; the
+##               turret, the lock beam and the foe remain. Point and it converts — how
+##               much the two directions agree is not your business.
+##   trace       the halfway state gets built: a's projection onto b as a fat bar lying
+##               along b, with a dashed drop line falling from a's tip onto it. This is
+##               where two directions stop being directions and become one length.
+##   operands    the legacy lineage, byte for byte — a and b drawn from the SHARED head
+##               with the angle arc swept between them. Both ingredients from one tail.
+##   expression  the algebra promoted over the geometry — a light board above the rig
+##               writing a·b = |a||b|cos θ with the numbers substituted, between two
+##               emissive rules in the accent colour.
+##
+## The two arrows are the pivot: they own the brightest non-beam pixels in any frame,
+## and outcome is the only value that takes them out.
+@export_enum("outcome", "trace", "operands", "expression") var workings: String = "operands"
+const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
+
 const MAX_ANGLE_DEG := 72.0
 const LOCK_DOT := 0.985   # cosθ above which the foe is converted
 
@@ -33,6 +55,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("seed"): seed = int(config_data["seed"])
 	if config_data.has("alignment"): alignment = clampf(float(config_data["alignment"]), 0.0, 1.0)
 	if config_data.has("complexity"): complexity = int(config_data["complexity"])
+	if config_data.has("workings"):
+		var _w: String = String(config_data["workings"]).strip_edges().to_lower()
+		workings = _w if WORKINGS.has(_w) else workings
 	apply_base_config(config_data)
 	color_a = _parse_color(config_data.get("color_a", color_a), color_a)
 	color_b = _parse_color(config_data.get("color_b", color_b), color_b)
@@ -82,9 +107,14 @@ func _build_demo() -> void:
 	rig.add_child(_sphere(barrel_end, 0.06, _glow_mat(accent, 2.0 if converted else 0.6)))
 
 	# --- the two vectors ---------------------------------------------------------
-	rig.add_child(_arrow(head, head + aim_dir * (reach * 0.9), 0.028, _glow_mat(accent, 1.4)))  # a = aim
-	rig.add_child(_arrow(head, foe_pos, 0.028, _glow_mat(color_b, 1.3)))                        # b = to foe
-	_add_arc(rig, head, aim_dir, dir_to_foe, 0.42, _glow_mat(accent, 1.6))
+	var arrow_a: Node3D = _arrow(head, head + aim_dir * (reach * 0.9), 0.028, _glow_mat(accent, 1.4))  # a = aim
+	var arrow_b: Node3D = _arrow(head, foe_pos, 0.028, _glow_mat(color_b, 1.3))                        # b = to foe
+	rig.add_child(arrow_a)
+	rig.add_child(arrow_b)
+	var arc_root := Node3D.new()
+	arc_root.name = "AngleArc"
+	rig.add_child(arc_root)
+	_add_arc(arc_root, head, aim_dir, dir_to_foe, 0.42, _glow_mat(accent, 1.6))
 
 	# --- the foe (red) -> friend (green) ----------------------------------------
 	var foe_tone: Color = foe_color.lerp(friend_color, lock)
@@ -107,6 +137,84 @@ func _build_demo() -> void:
 		friend_color.lerp(Color(0.6, 1.0, 0.75), 0.4) if converted else Color(0.55, 0.92, 1.0))
 
 	_settle(rig)
+
+	# WORKINGS dressing, appended AFTER _settle so the legacy geometry keeps the exact
+	# fit and placement it has today. "operands" falls through and adds nothing.
+	match _workings_value():
+		"outcome":
+			_workings_outcome(arrow_a, arrow_b, arc_root)
+		"trace":
+			_workings_trace(rig, head, aim_dir * (reach * 0.9), dir_to_foe)
+		"expression":
+			_workings_expression(rig, aim_dir * (reach * 0.9), dir_to_foe * reach, dot, theta_deg)
+		_:
+			pass                                   # "operands" — the legacy lineage
+
+
+# --- WORKINGS ---------------------------------------------------------------
+# One axis, four values, shared word for word with the rest of the vector subject.
+# Removal is always `layers = 0` on the MeshInstance3D leaves — never `visible = false`,
+# which in Godot takes a holder's whole subtree with it.
+
+func _workings_value() -> String:
+	var w: String = String(workings).strip_edges().to_lower()
+	return w if WORKINGS.has(w) else "operands"
+
+
+func _unlayer(n: Node) -> void:
+	if n is MeshInstance3D:
+		(n as MeshInstance3D).layers = 0
+	for child in n.get_children():
+		_unlayer(child)
+
+
+## OUTCOME — the verdict alone. The aim vector, the bearing vector and the whole angle
+## arc leave the render layers. What is left is a turret, a beam and a foe going green:
+## the conversion happens and the agreement that caused it is never shown.
+func _workings_outcome(arrow_a: Node3D, arrow_b: Node3D, arc_root: Node3D) -> void:
+	_unlayer(arrow_a)
+	_unlayer(arrow_b)
+	_unlayer(arc_root)
+
+
+## TRACE — the halfway state. a's projection onto b is built as a fat bar lying along b,
+## with a dashed drop line falling from a's tip onto its foot. |a|cos θ is the moment two
+## directions stop being directions and become one length; the arc only measures the
+## angle, this builds the number.
+func _workings_trace(rig: Node3D, head: Vector3, a_vec: Vector3, b_dir: Vector3) -> void:
+	var proj_len: float = a_vec.dot(b_dir)
+	var foot: Vector3 = head + b_dir * proj_len
+	var bar := _glow_mat(color_b.lerp(friend_color, 0.35), 2.0)
+	if absf(proj_len) > 0.02:
+		rig.add_child(_cylinder_between(head, foot, 0.048, bar))
+	rig.add_child(_sphere(foot, 0.058, bar))
+	rig.add_child(_dashed(head + a_vec, foot, 0.016, _glow_mat(Color(0.86, 0.90, 0.98), 1.1)))
+
+
+## EXPRESSION — the algebra promoted over the geometry. A light Braun plate above the rig
+## writes the identity out with the numbers substituted, held between two emissive rules
+## so the writing owns hot pixels of its own.
+func _workings_expression(rig: Node3D, a_vec: Vector3, b_vec: Vector3, dot: float, theta_deg: float) -> void:
+	var board := Node3D.new()
+	board.name = "WorkingsBoard"
+	board.position = Vector3(0.0, 1.98, 0.0)
+	rig.add_child(board)
+	board.add_child(_box(Vector3.ZERO, Vector3(1.72, 0.50, 0.03), _panel_mat(PANEL_LIGHT)))
+	board.add_child(_box(Vector3(0.0, 0.25, 0.02), Vector3(1.72, 0.030, 0.02), _glow_mat(accent, 1.9)))
+	board.add_child(_box(Vector3(0.0, -0.25, 0.02), Vector3(1.72, 0.030, 0.02), _glow_mat(accent, 1.9)))
+	var l := Label3D.new()
+	l.name = "Algebra"
+	l.text = "a · b  =  |a| |b| cos θ\n%.2f × %.2f × cos %d°  =  %.2f" % [
+		a_vec.length(), b_vec.length(), int(roundf(theta_deg)), dot * a_vec.length() * b_vec.length()]
+	l.font_size = 40
+	l.pixel_size = 0.0032
+	l.modulate = TEXT_DARK
+	l.outline_size = 6
+	l.outline_modulate = Color(0.90, 0.88, 0.84, 0.9)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	l.position = Vector3(0.0, 0.0, 0.03)
+	board.add_child(l)
 
 
 # --- toy-specific helpers ---------------------------------------------------

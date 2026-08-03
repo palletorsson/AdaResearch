@@ -31,6 +31,74 @@ const PILLAR_SCENE = preload("res://algorithms/fractals/pillar/pillarpart.tscn")
 @export var roof_overhang: float = 1.3  # How much wider the roof extends
 @export var use_golden_ratio: bool = true  # Use golden ratio or pure Fibonacci
 
+# ═══════════════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `profile`
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# THE SILHOUETTE THE EIGHT TIERS CUT. This artifact's whole claim is in its own
+# truth line: the pagoda is not a pagoda with phi applied to it, it is what phi
+# looks like when it tries to be architecture. But a claim about ONE ratio needs
+# something to be a claim AGAINST, and shipped as a singleton it has none — the
+# golden taper reads as "how pagodas are", not as a decision. So the axis is the
+# law that governs the descent, and the other four values are the arguments the
+# golden one was silently winning.
+#
+# ADOPTED WORD FOR WORD from carousel_cake, which is the same geometric object —
+# a stack of N layers of falling radius — asking the same question of it. Same
+# spelling, same five values, same order, same default, so a tiered stack in one
+# room and a tiered stack in another are measured on one scale.
+#
+#   cake      the shipped law, untouched: scale(n) = base / phi^(n/2), or the
+#             inverse-Fibonacci ratios when use_golden_ratio is off. Byte for
+#             byte the legacy pagoda.  (DEFAULT)
+#   ziggurat  a straight line from wide to narrow. No ratio at all — the taper
+#             an arithmetic mind reaches for, and the pre-Greek stack it built.
+#             Sides that read as one flat slope instead of a curve.
+#   column    no taper. Every tier the same width, eaves stacked like a shaft of
+#             identical roofs. The refusal to converge, and the thing phi is
+#             most obviously NOT.
+#   spindle   waisted — wide at the foot, pinched to a third at the fourth tier,
+#             wide again at the crown. Convergence abandoned in the middle and
+#             taken back up, which is what a stack looks like with no single law.
+#   flare     the shipped golden taper STANDING ON ITS HEAD: the same eight
+#             numbers in reverse, so the smallest tier is at the ground and the
+#             widest carries the finial. The identical ratio, the identical
+#             quantity of building, and an object that reads as top-heavy — phi
+#             shown to be a claim about DIRECTION and not only about proportion.
+#
+# EVERY VALUE KEEPS THE SAME TOTAL. The four non-default laws are normalised so
+# their tier scales SUM to the shipped sum, and tier height is derived from tier
+# scale, so all five pagodas are the same height and use the same quantity of
+# stone. Only the distribution moves. Without that, `column` would run 12 m tall
+# against the shipped 7.2 m and the bite critic would be reporting a size
+# difference and calling it a silhouette.
+#
+# STRICTLY ADDITIVE. _profile_scale() hands `cake` straight to the untouched
+# _get_tier_scale(), so the four existing placements build exactly what they
+# always built. There is no RNG anywhere in this artifact and no animation:
+# _ready ends in set_process(false).
+const PROFILES: PackedStringArray = ["cake", "ziggurat", "column", "spindle", "flare"]
+@export_enum("cake", "ziggurat", "column", "spindle", "flare") var profile: String = "cake"
+
+## Stand an INVISIBLE box (layers = 0) around the shipped envelope, so the
+## framing walk sizes all five shots identically. The heights already match, but
+## `column` is half the width of `cake` at its base, and a camera placed from
+## each variant's own AABB would push the narrow ones away and pull the wide ones
+## in — the bite report would then be partly a picture of the zoom.
+## Sized from the SHIPPED taper via _get_tier_scale, which no profile touches.
+## Default false — not one placement changes.
+@export var capture_anchor: bool = false
+
+## Ziggurat's narrow end, as a fraction of its wide end, before normalisation.
+const ZIGGURAT_NARROW := 0.2
+## Spindle's waist, as a fraction of its ends, before normalisation.
+const SPINDLE_WAIST := 0.3
+
+## Sum of the shipped tier scales. Every other law is rescaled to match it, so no
+## profile spends more building than `cake` does. -1.0 means "not computed yet";
+## it cannot be computed before _generate_fibonacci_sequence has run.
+var _shipped_sum: float = -1.0
+
 var _sim_root: Node3D
 var _status_label: Label3D
 var _tiers: Array = []
@@ -38,9 +106,13 @@ var _fibonacci_sequence: Array = []
 var _golden_ratio: float = (1.0 + sqrt(5.0)) / 2.0
 
 func _ready() -> void:
+	_read_dna()
 	_generate_fibonacci_sequence(num_tiers + 5)
 	_setup_environment()
 	_build_pagoda()
+	# APPENDED LAST. Builds nothing unless asked; see the capture_anchor note.
+	if capture_anchor:
+		_add_capture_anchor()
 	set_process(false)
 
 func _generate_fibonacci_sequence(count: int) -> void:
@@ -87,7 +159,9 @@ func _get_tier_scale(tier_index: int) -> float:
 
 func _create_tier(tier_index: int, y_position: float) -> Dictionary:
 	"""Create a single pagoda tier with roof"""
-	var scale_factor = _get_tier_scale(tier_index)
+	# PROFILE: the drawn tier scale. "cake" returns _get_tier_scale unchanged,
+	# which is what every existing placement gets.
+	var scale_factor = _profile_scale(tier_index)
 	var tier_container = Node3D.new()
 	tier_container.name = "Tier_%d" % tier_index
 	tier_container.position = Vector3(0, y_position, 0)
@@ -305,4 +379,105 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	var was: String = profile
+	_read_dna()
+	if profile != was and _sim_root != null:
+		rebuild_pagoda()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# profile — everything below is new and nothing above it moved.
+# ═══════════════════════════════════════════════════════════════════════════
+
+## Map tokens arrive as config_<key> metadata. An unreadable word keeps the
+## golden taper rather than rendering as a law nobody asked for.
+func _read_dna() -> void:
+	if has_meta("config_profile"):
+		var p: String = str(get_meta("config_profile")).strip_edges().to_lower()
+		if PROFILES.has(p):
+			profile = p
+	if has_meta("config_capture_anchor"):
+		var a: String = str(get_meta("config_capture_anchor")).strip_edges().to_lower()
+		capture_anchor = a == "true" or a == "1" or a == "yes"
+
+
+## The drawn scale for one tier. "cake" hands back _get_tier_scale(tier_index)
+## itself — the same float, from the same untouched function — so the shipped
+## pagoda is reproduced exactly. Every other law is normalised against
+## _shipped_total() so the stack keeps its height and its quantity of building.
+func _profile_scale(tier_index: int) -> float:
+	var key: String = str(profile).strip_edges().to_lower()
+	if not PROFILES.has(key) or key == "cake":
+		return _get_tier_scale(tier_index)
+
+	if key == "flare":
+		# The shipped numbers in reverse. Same set, same sum, upside down.
+		return _get_tier_scale(num_tiers - 1 - tier_index)
+
+	var raw: float = _profile_raw(key, tier_index)
+	var raw_sum: float = 0.0
+	for i in range(num_tiers):
+		raw_sum += _profile_raw(key, i)
+	if raw_sum <= 0.0:
+		return _get_tier_scale(tier_index)
+	return raw * _shipped_total() / raw_sum
+
+
+## The unnormalised shape of each law, in the range roughly 0..1.
+func _profile_raw(key: String, tier_index: int) -> float:
+	var t: float = float(tier_index) / float(maxi(num_tiers - 1, 1))
+	match key:
+		"ziggurat":
+			return lerpf(1.0, ZIGGURAT_NARROW, t)
+		"column":
+			return 1.0
+		"spindle":
+			# 1.0 at both ends, SPINDLE_WAIST at the middle.
+			return SPINDLE_WAIST + (1.0 - SPINDLE_WAIST) * absf(2.0 * t - 1.0)
+	return 1.0
+
+
+## Sum of the tier scales the shipped law produces. Cached: _get_tier_scale reads
+## _fibonacci_sequence when use_golden_ratio is off, so this cannot be computed
+## before _generate_fibonacci_sequence has run in _ready.
+func _shipped_total() -> float:
+	if _shipped_sum >= 0.0:
+		return _shipped_sum
+	var total: float = 0.0
+	for i in range(num_tiers):
+		total += _get_tier_scale(i)
+	_shipped_sum = total
+	return _shipped_sum
+
+
+## An invisible box over the shipped envelope. Sized from _get_tier_scale and
+## the tier-height formula in _create_tier — never from the built scene, because
+## a box measured from the scene would be a different box for each profile and
+## the five shots would be framed differently, which is the failure it exists to
+## prevent. The widest thing on a tier is its corner eave: offset 0.6 * scale
+## from the axis plus roughly half of its own 0.3 * scale body.
+func _add_capture_anchor() -> void:
+	if has_node("CaptureAnchor"):
+		return
+	var widest: float = 0.0
+	var stack_height: float = 0.0
+	for i in range(num_tiers):
+		var s: float = _get_tier_scale(i)
+		widest = maxf(widest, s * 0.85)
+		stack_height += tier_height * s / base_scale + 0.3
+	# The finial adds five stacked parts on top of the stack.
+	var finial_height: float = 0.0
+	for i in range(5):
+		finial_height += base_scale * 0.15 / pow(_golden_ratio, i * 0.7) * 0.8
+	var total_height: float = stack_height + finial_height + base_scale * 0.15
+
+	var anchor := MeshInstance3D.new()
+	anchor.name = "CaptureAnchor"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(widest * 2.0, total_height, widest * 2.0)
+	anchor.mesh = bm
+	anchor.position = Vector3(0.0, total_height * 0.5, 0.0)
+	anchor.layers = 0
+	add_child(anchor)

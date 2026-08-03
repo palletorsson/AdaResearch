@@ -22,6 +22,71 @@ extends Node3D
 @export var height_scale := 2.0
 @export var use_3d_height := true
 
+# ═══════════════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `readout`
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# WHAT THE ESCAPE COUNT IS CLAIMED TO BE. Every point of this artifact is one
+# number: how many squarings c survived before it ran away. The build already
+# makes a choice about that number and hides the choice in a bool — use_3d_height
+# spends it on ELEVATION, so the boundary of the set becomes a cliff and the room
+# reads the Mandelbrot set as terrain. Spend the same number differently and the
+# same computation is a different claim about what it computed.
+#
+# ONE WORD, SIX ARTIFACTS. `readout` and these three values are adopted verbatim
+# from perlin_noise, simplex_noise, perlin_noise_terrain and random_edge_profile,
+# which ask exactly this of a noise field. Same spelling, same order, same
+# default. Where they turn a sampled float into height, colour or a bar, this
+# turns an integer iteration count into the same three things — the claim is the
+# same claim, so the fractal can be COMPARED against the noise sequence instead of
+# merely walked past.
+#
+#   relief   the shipped landscape: one cube per c, lifted by its escape count,
+#            a hollow skin over a black plain where the set itself never escapes.
+#            Byte for byte the legacy build.  (DEFAULT)
+#   plate    every cube dropped to y = 0. The identical 10,000 samples in the
+#            identical order with the identical colours, spent entirely on hue:
+#            the flat plate the whole tradition of Mandelbrot images actually is,
+#            and the set reduced to a black island in it.
+#   column   the escape count as a FILLED bar. Each sampled c becomes a stack of
+#            cubes from the plane up to its own height, so what was a hollow skin
+#            becomes solid mass and the plain where the set lives reads as a hole
+#            punched through it. Sampled on every second row and column so the
+#            bars stand apart rather than fusing into one block.
+#
+# STRICTLY ADDITIVE, AND THE FIELD IS NOT TOUCHED. _apply_readout() is appended
+# to the END of _ready(), AFTER _generate_fractal() has run untouched, and it
+# reads the MultiMesh that function produced. No value re-runs the iteration: the
+# same c values are visited in the same order and get the same colours. Only what
+# is done with the returned count changes. `relief` returns immediately.
+const READOUTS: PackedStringArray = ["relief", "plate", "column"]
+@export_enum("relief", "plate", "column") var readout: String = "relief"
+
+## Stand an INVISIBLE box (layers = 0) around the sampled extent. It has to
+## exist twice over: this artifact is built ENTIRELY from a MultiMeshInstance3D
+## and the framing walk measures MeshInstance3D only, so with no anchor the
+## camera is placed from a 1 m fallback box and looks past a 9.6 m fractal; and
+## `plate` has no height at all while `relief` has 2 m of it, so a camera sized
+## per variant would frame three different crops and the bite report would be a
+## picture of the framing. Sized from resolution/point_size/height_scale, which
+## no readout touches, so all three are framed identically.
+## Default false — not one placement changes.
+@export var capture_anchor: bool = false
+
+## Untyped and NOT exported on purpose: sweep fixtures assign this directly
+## pre-_ready as the string "true", and a typed bool silently rejects that.
+##
+## false (the default, and what every existing placement gets) = today exactly:
+## _animate_fractal keeps breathing the whole instance +/- 5% on a 2 rad/s sine.
+## true parks the pulse at 1.0. A sweep should pin it — two captures of the SAME
+## readout taken a third of a second apart are two differently sized fractals,
+## and the critic would report the shutter as an axis.
+var freeze_pulse = false
+
+## Instances the `column` value builds. Parented UNDER fractal_multimesh_instance
+## so they inherit the pulse transform exactly as the shipped skin does.
+var _column_instance: MultiMeshInstance3D = null
+
 var time := 0.0
 
 # MultiMesh for GPU instancing
@@ -37,10 +102,14 @@ var is_generating := false
 var generation_progress := 0.0
 
 func _ready() -> void:
+	_read_dna()
 	_setup_mesh()
 	_setup_material()
 	_setup_multimesh()
 	_generate_fractal()
+	# APPENDED LAST, after the field has been sampled. Reads the MultiMesh
+	# _generate_fractal() just filled and returns immediately at `relief`.
+	_apply_readout()
 
 func _setup_mesh() -> void:
 	# Small cube for each point
@@ -144,6 +213,8 @@ func _animate_fractal() -> void:
 
 	# Gentle pulsing animation
 	var pulse = 1.0 + sin(time * 2.0) * 0.05
+	if freeze_pulse:
+		pulse = 1.0
 	fractal_multimesh_instance.scale = Vector3.ONE * pulse
 
 func _input(event: InputEvent) -> void:
@@ -195,4 +266,135 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	var was: String = readout
+	_read_dna()
+	if readout != was and fractal_multimesh != null:
+		# Re-sample from scratch so `plate` is not applied twice to an already
+		# flattened buffer. The iteration is deterministic, so this reproduces
+		# the same field it produced in _ready.
+		_generate_fractal()
+		_apply_readout()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# readout — everything below is new and nothing above it moved.
+# ═══════════════════════════════════════════════════════════════════════════
+
+## Map tokens arrive as config_<key> metadata. An unreadable word keeps the
+## shipped landscape rather than blanking a fractal four rooms expect to see.
+func _read_dna() -> void:
+	if has_meta("config_readout"):
+		var v: String = str(get_meta("config_readout")).strip_edges().to_lower()
+		if READOUTS.has(v):
+			readout = v
+	if has_meta("config_capture_anchor"):
+		capture_anchor = _truthy(get_meta("config_capture_anchor"))
+	if has_meta("config_freeze_pulse"):
+		freeze_pulse = _truthy(get_meta("config_freeze_pulse"))
+
+
+func _truthy(value) -> bool:
+	var s: String = str(value).strip_edges().to_lower()
+	return s == "true" or s == "1" or s == "yes"
+
+
+func _apply_readout() -> void:
+	if _column_instance != null and is_instance_valid(_column_instance):
+		_column_instance.queue_free()
+		_column_instance = null
+	fractal_multimesh_instance.layers = 1
+
+	var key: String = str(readout).strip_edges().to_lower()
+	if not READOUTS.has(key):
+		key = "relief"
+
+	match key:
+		"plate":
+			_flatten_to_plate()
+		"column":
+			_build_columns()
+			fractal_multimesh_instance.layers = 0
+
+	if capture_anchor:
+		_add_capture_anchor()
+
+
+## Drop every instance to the plane. The transforms are rewritten in place, so
+## the instance count, the ordering and every colour are the ones the iteration
+## produced — the only thing lost is the elevation the escape count was spent on.
+func _flatten_to_plate() -> void:
+	for idx in range(fractal_multimesh.instance_count):
+		var xform: Transform3D = fractal_multimesh.get_instance_transform(idx)
+		xform.origin.y = 0.0
+		fractal_multimesh.set_instance_transform(idx, xform)
+
+
+## The escape count as filled mass. Heights are READ BACK from the skin the
+## iteration already built rather than recomputed, so this is the same field: a
+## point standing at y = 1.4 in `relief` becomes a bar of cubes from 0 to 1.4.
+##
+## Every second row and column only. At full resolution the bars fuse into one
+## slab and the picture is a black box; halving the sample grid in both axes
+## leaves daylight between them and drops the instance count from a quarter of a
+## million to a few thousand.
+func _build_columns() -> void:
+	var step: float = maxf(point_size, 0.01)
+	var stride := 2
+	var positions: Array[Vector3] = []
+	var colors: Array[Color] = []
+
+	for idx in range(fractal_multimesh.instance_count):
+		# The generator walks y (outer) then x (inner), so index / resolution is
+		# the row and index % resolution the column.
+		var row: int = idx / resolution
+		var col: int = idx % resolution
+		if row % stride != 0 or col % stride != 0:
+			continue
+		var xform: Transform3D = fractal_multimesh.get_instance_transform(idx)
+		var tint: Color = fractal_multimesh.get_instance_color(idx)
+		var top: float = xform.origin.y
+		var levels: int = int(top / step)
+		# Always one cube, so the interior of the set (top = 0) still reads as a
+		# floor rather than as a hole with nothing in it.
+		for level in range(levels + 1):
+			positions.append(Vector3(xform.origin.x, float(level) * step, xform.origin.z))
+			colors.append(tint)
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = point_mesh
+	mm.instance_count = positions.size()
+	for i in range(positions.size()):
+		mm.set_instance_transform(i, Transform3D(Basis(), positions[i]))
+		mm.set_instance_color(i, colors[i])
+
+	_column_instance = MultiMeshInstance3D.new()
+	_column_instance.name = "MandelbrotColumns"
+	_column_instance.multimesh = mm
+	_column_instance.material_override = fractal_material
+	# Parented under the shipped instance so it inherits the breathing pulse.
+	# layers is per-instance and NOT hierarchical, which is why muting the parent
+	# above leaves this child drawing.
+	fractal_multimesh_instance.add_child(_column_instance)
+
+
+## An invisible box over the sampled extent. Sized from the sampling constants,
+## never from the built points: a box measured from the scene would be 2 m tall
+## for `relief` and paper-thin for `plate`, and the three shots would be framed
+## differently — which is the failure this exists to prevent.
+func _add_capture_anchor() -> void:
+	if has_node("CaptureAnchor"):
+		return
+	var span: float = float(resolution) * point_size * 1.2
+	var anchor := MeshInstance3D.new()
+	anchor.name = "CaptureAnchor"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(span, height_scale + point_size * 2.0, span)
+	anchor.mesh = bm
+	# Points run -span/2 .. +span/2 in X and Z, and 0 .. height_scale in Y.
+	anchor.position = Vector3(0.0, (height_scale + point_size * 2.0) * 0.5 - point_size, 0.0)
+	anchor.layers = 0
+	add_child(anchor)

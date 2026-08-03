@@ -31,7 +31,52 @@ const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosa
 @export_range(0.0, 0.1) var grout_width_fraction: float = 0.04
 @export_range(0.0, 1.0) var wear_level: float = 0.3
 
+## AXIS — WHICH STATE OF THE RECORD this floor is shown in. Tiles repeat; mosaics do not.
+## A mosaic is a grid its maker kept deviating from — for the setting-out, for a later
+## repair, for the line people walked, for what the ground finally kept — and the floor is
+## the document of those deviations, not the pattern. So the axis is not "which pattern"
+## (that is what the sibling floors are for) but WHAT THE FLOOR ADMITS ABOUT ITS OWN HISTORY.
+## Shared word for word with [[san_michele_mosaic_floor]], so two floors in the same room
+## cannot disagree about what state they are in.
+##
+##   design   as set out — the pattern with no deviation admitted. THE LEGACY LINEAGE,
+##            byte for byte: this value adds nothing at all.
+##   datum    the setting-out struck through — red-ochre guide lines showing: twelve radii
+##            from the centre punch, four concentric circles at the zone radii, and the
+##            generating Archimedean curve itself drawn as one thin line. The drawing under
+##            the floor, on top of the floor.
+##   repair   later hands — a whole 60-degree sector relaid in the wrong stone (a cool grey
+##            against the sand) at four times the tessera size, plus two small rectangular
+##            patches. The spiral runs into the sector and stops; nobody matched it.
+##   wear     the line people walked — a broad mottled band of bleached, dished surface
+##            crossing the disc, plus a rubbed-out ring at the centre where they stood. The
+##            spiral reads THROUGH the scour rather than under a blanket.
+##   loss     as excavated — six irregular lacunae down to the dark bedding, one of them
+##            biting the border at the rim, each ringed by its own broken edge.
+##
+## `wear_level` above is the SHADER's weathering (dust, fade, hairline cracks, everywhere at
+## once). `wear` here is GEOMETRY in one place: the traffic line. They are orthogonal and
+## the default of each is unchanged by the other.
+@export var condition: String = "design"
+const CONDITIONS: PackedStringArray = ["design", "datum", "repair", "wear", "loss"]
+
+## Seed for the irregularity `repair`, `wear` and `loss` need. NOTHING rolled in this
+## artifact before, so the honest default is a fixed number: every render of a value is the
+## same picture and the sweep measures the axis, not the noise. -1 randomises per build.
+## The stream is a LOCAL RandomNumberGenerator, so the global stream is never touched and
+## `design` never draws at all.
+@export var condition_seed: int = 20260802
+
+## Condition palette — the tones a conservator would name, not the mosaicist's.
+const COND_OCHRE := Color(0.60, 0.24, 0.16)    # sinopia: the red-ochre setting-out line
+const COND_STONE := Color(0.50, 0.49, 0.46)    # the wrong stone — a cool grey that does not match
+const COND_JOINT := Color(0.26, 0.24, 0.21)    # coarse mortar between relaid tesserae
+const COND_PALE := Color(0.91, 0.88, 0.83)     # bleached, dished, walked-out surface
+const COND_BED := Color(0.15, 0.13, 0.11)      # the bedding under a floor that is gone
+const COND_RUBBLE := Color(0.40, 0.36, 0.30)   # the broken edge around a lacuna
+
 var _mi: MeshInstance3D
+var _cond_mi: MeshInstance3D
 #var _body: StaticBody3D
 
 
@@ -49,6 +94,12 @@ func apply_grid_config(config: Dictionary) -> void:
 		border_bands.clear()
 		for v in bb:
 			border_bands.append(int(v))
+	# Condition, read the same way station_wall reads upkeep: normalise, and keep the
+	# current value on a word the artifact cannot build. An unknown token must never
+	# silently become a wildcard.
+	var cond: String = str(config.get("condition", condition)).strip_edges().to_lower()
+	condition = cond if CONDITIONS.has(cond) else condition
+	condition_seed = int(config.get("condition_seed", condition_seed))
 	_build()
 
 
@@ -321,6 +372,10 @@ func _build() -> void:
 		grout_verts.size() / 3,
 	])
 
+	# CONDITION, appended LAST so every vertex, surface, y-offset and child above is
+	# untouched on the legacy path. "design" adds no node at all.
+	_build_condition()
+
 
 func _add_ring_grout(verts: PackedVector3Array, radius: float, half_w: float, segments: int) -> void:
 	for seg in segments:
@@ -355,3 +410,335 @@ func _add_spiral_grout_segment(verts: PackedVector3Array, theta0: float, theta1:
 	verts.append(Vector3(ca1 * r1i, 0.001, sa1 * r1i))
 	verts.append(Vector3(ca1 * r1o, 0.001, sa1 * r1o))
 	verts.append(Vector3(ca0 * r0o, 0.001, sa0 * r0o))
+
+
+# ── CONDITION ────────────────────────────────────────────────────────────────
+# One axis, five states of the record, all of it drawn into ONE extra MeshInstance3D
+# standing 0.008 m above the floor plate — clear of the accent layer at 0.007, and never
+# outside the disc. That matters twice: the AABB (and so the sweep's framing) is identical
+# picture to picture, and the legacy mesh is not touched by a single vertex.
+
+func _build_condition() -> void:
+	if _cond_mi:
+		_cond_mi.queue_free()
+		_cond_mi = null
+
+	var ochre := PackedVector3Array()    # the setting-out struck in red
+	var stone := PackedVector3Array()    # relaid tesserae, the wrong stone
+	var joint := PackedVector3Array()    # mortar under and between them
+	var pale := PackedVector3Array()     # scoured, walked-out surface
+	var bed := PackedVector3Array()      # what is under a floor that is gone
+	var rubble := PackedVector3Array()   # the broken edge of a lacuna
+
+	var rng := RandomNumberGenerator.new()
+	if condition_seed < 0:
+		rng.randomize()
+	else:
+		rng.seed = condition_seed
+
+	match condition:
+		"design":
+			pass                                  # the legacy lineage — nothing is added
+		"datum":
+			_cond_datum(ochre)
+		"repair":
+			_cond_repair(stone, joint, rng)
+		"wear":
+			_cond_wear(pale, rng)
+		"loss":
+			_cond_loss(bed, rubble, rng)
+		_:
+			pass                                  # an unknown word reads as "design"
+
+	var arr := ArrayMesh.new()
+	_cond_surface(arr, rubble, COND_RUBBLE)
+	_cond_surface(arr, bed, COND_BED)
+	_cond_surface(arr, joint, COND_JOINT)
+	_cond_surface(arr, stone, COND_STONE)
+	_cond_surface(arr, pale, COND_PALE)
+	_cond_surface(arr, ochre, COND_OCHRE)
+	if arr.get_surface_count() == 0:
+		return
+
+	_cond_mi = MeshInstance3D.new()
+	_cond_mi.mesh = arr
+	_cond_mi.position = Vector3(0, 0.008, 0)
+	add_child(_cond_mi)
+
+
+## DATUM — the setting-out struck through the finished floor. Twelve radii from the centre
+## punch, the four circles the compass swung, and the generating Archimedean curve itself
+## drawn one tessera wide over the band it produced. Red ochre on sand: the drawing under
+## the floor, put back on top of it.
+func _cond_datum(v: PackedVector3Array) -> void:
+	var big_r: float = floor_radius
+	var y: float = 0.0009
+	var lw: float = maxf(big_r * 0.011, 0.004)
+	var inner: float = maxf(big_r - _cond_border_total(), 0.05)
+	var rose: float = inner * 0.08
+
+	for k in range(12):
+		var a: float = TAU * float(k) / 12.0
+		var dir: Vector2 = Vector2(cos(a), sin(a))
+		_cond_seg(v, dir * (rose * 0.6), dir * (big_r * 0.985), lw, y)
+
+	var rings: Array[float] = [rose, inner * 0.5, inner, big_r * 0.985]
+	for r in rings:
+		_cond_ring(v, r, lw * 0.8, 84, y)
+
+	var sb: float = (inner - rose) / maxf(num_rotations * TAU, 0.001)
+	var steps: int = maxi(int(num_rotations * 72.0), 24)
+	var dth: float = (num_rotations * TAU) / float(steps)
+	var prev: Vector2 = Vector2(rose, 0.0)
+	for s in range(1, steps + 1):
+		var th: float = float(s) * dth
+		var rr: float = rose + sb * th
+		var cur: Vector2 = Vector2(cos(th) * rr, sin(th) * rr)
+		_cond_seg(v, prev, cur, lw * 0.55, y)
+		prev = cur
+
+	_cond_disc(v, Vector2.ZERO, maxf(rose * 0.55, 0.012), 16, y)
+
+
+## REPAIR — later hands. A whole 60-degree sector is lifted and relaid in a cool grey that
+## does not match the sand, at four times the tessera size, in courses that follow the
+## SECTOR and not the spiral: the band runs into the patch and simply stops. Two small
+## rectangular patches sit elsewhere at their own angles, because nobody lined them up.
+func _cond_repair(stone: PackedVector3Array, joint: PackedVector3Array,
+		rng: RandomNumberGenerator) -> void:
+	var big_r: float = floor_radius
+	var lim: float = big_r * 0.94
+	var inner: float = maxf(big_r - _cond_border_total(), 0.05)
+
+	var a0: float = 0.92
+	var a1: float = 1.98
+	var r0: float = inner * 0.28
+	var r1: float = lim
+	for i in range(22):
+		var t0: float = lerpf(a0, a1, float(i) / 22.0)
+		var t1: float = lerpf(a0, a1, float(i + 1) / 22.0)
+		_cond_quad(joint,
+			Vector2(cos(t0) * r0, sin(t0) * r0),
+			Vector2(cos(t1) * r0, sin(t1) * r0),
+			Vector2(cos(t1) * r1, sin(t1) * r1),
+			Vector2(cos(t0) * r1, sin(t0) * r1), 0.0)
+
+	var cell: float = 0.042
+	var rows: int = maxi(int((r1 - r0) / cell), 2)
+	for ri in range(rows):
+		var rr0: float = r0 + (r1 - r0) * float(ri) / float(rows)
+		var rr1: float = r0 + (r1 - r0) * float(ri + 1) / float(rows)
+		var mid: float = (rr0 + rr1) * 0.5
+		var cols: int = maxi(int((a1 - a0) * mid / cell), 2)
+		for ci in range(cols):
+			var t0: float = lerpf(a0, a1, float(ci) / float(cols))
+			var t1: float = lerpf(a0, a1, float(ci + 1) / float(cols))
+			_cond_tessera_polar(stone, t0, t1, rr0, rr1, 0.0006)
+
+	_cond_patch_rect(stone, joint, Vector2(-big_r * 0.44, big_r * 0.14),
+		Vector2(big_r * 0.36, big_r * 0.24), rng.randf_range(-0.55, 0.55), lim)
+	_cond_patch_rect(stone, joint, Vector2(big_r * 0.12, -big_r * 0.54),
+		Vector2(big_r * 0.28, big_r * 0.20), rng.randf_range(-0.55, 0.55), lim)
+
+
+## WEAR — the line people walked. A broad band crossing the disc, mottled rather than
+## solid, so the spiral reads THROUGH the scour the way a rubbed floor does rather than
+## disappearing under a blanket. The centre, where a person on a round floor stands and
+## turns, is rubbed out on its own.
+func _cond_wear(pale: PackedVector3Array, rng: RandomNumberGenerator) -> void:
+	var big_r: float = floor_radius
+	var lim: float = big_r * 0.95
+	var y: float = 0.0003
+	var phi: float = 0.62
+	var dir: Vector2 = Vector2(cos(phi), sin(phi))
+	var nrm: Vector2 = Vector2(-dir.y, dir.x)
+	var half: float = big_r * 0.30
+	var step: float = 0.021
+	var tile: float = 0.016
+	var n: int = maxi(int(big_r * 2.0 / step), 8)
+	for ix in range(-n, n + 1):
+		for iz in range(-n, n + 1):
+			var p: Vector2 = Vector2(float(ix), float(iz)) * step
+			if p.length() > lim:
+				continue
+			var across: float = absf(p.dot(nrm))
+			var along: float = absf(p.dot(dir)) / maxf(lim, 0.01)
+			var band: float = half * (1.0 - 0.30 * along)
+			var take: float = 0.0
+			if across < band:
+				take = 1.0 - (across / maxf(band, 0.001)) * 0.75
+			if p.length() < big_r * 0.20:
+				take = maxf(take, 0.85)
+			if take <= 0.02:
+				continue
+			if rng.randf() > take:
+				continue
+			var h: float = tile * 0.5
+			_cond_quad(pale, p + Vector2(-h, -h), p + Vector2(h, -h),
+				p + Vector2(h, h), p + Vector2(-h, h), y)
+
+
+## LOSS — as excavated. Six irregular lacunae down to the dark bedding, each ringed by the
+## broken edge where the tesserae let go, and one more at the rim that has taken a bite out
+## of the border with it. Everything is clamped to the disc, so the floor loses area
+## without the artifact changing size.
+func _cond_loss(bed: PackedVector3Array, rubble: PackedVector3Array,
+		rng: RandomNumberGenerator) -> void:
+	var big_r: float = floor_radius
+	var lim: float = big_r * 0.99
+	for i in range(6):
+		var a: float = rng.randf_range(0.0, TAU)
+		var d: float = rng.randf_range(big_r * 0.12, big_r * 0.68)
+		var c: Vector2 = Vector2(cos(a), sin(a)) * d
+		var rad: float = rng.randf_range(big_r * 0.11, big_r * 0.26)
+		_cond_blob(rubble, c, rad * 1.16, 0.26, rng, 0.0, lim)
+		_cond_blob(bed, c, rad, 0.22, rng, 0.0006, lim)
+
+	var ra: float = rng.randf_range(0.0, TAU)
+	var rc: Vector2 = Vector2(cos(ra), sin(ra)) * (big_r * 0.86)
+	_cond_blob(rubble, rc, big_r * 0.34, 0.30, rng, 0.0, lim)
+	_cond_blob(bed, rc, big_r * 0.29, 0.26, rng, 0.0006, lim)
+
+
+# ── condition primitives ─────────────────────────────────────────────────────
+
+func _cond_border_total() -> float:
+	var total: float = 0.0
+	for bw in border_bands:
+		total += float(bw) * border_tile_size
+	return total
+
+
+func _cond_surface(arr: ArrayMesh, verts: PackedVector3Array, c: Color) -> void:
+	if verts.size() == 0:
+		return
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arr.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	arr.surface_set_material(arr.get_surface_count() - 1,
+		MosaicPalette.create_material(c, wear_level))
+
+
+func _cond_quad(v: PackedVector3Array, a: Vector2, b: Vector2, c: Vector2, d: Vector2,
+		y: float) -> void:
+	v.append(Vector3(a.x, y, a.y))
+	v.append(Vector3(b.x, y, b.y))
+	v.append(Vector3(c.x, y, c.y))
+	v.append(Vector3(a.x, y, a.y))
+	v.append(Vector3(c.x, y, c.y))
+	v.append(Vector3(d.x, y, d.y))
+
+
+func _cond_seg(v: PackedVector3Array, p0: Vector2, p1: Vector2, half_w: float,
+		y: float) -> void:
+	var d: Vector2 = p1 - p0
+	if d.length() < 0.00001:
+		return
+	var n: Vector2 = Vector2(-d.y, d.x).normalized() * half_w
+	_cond_quad(v, p0 - n, p1 - n, p1 + n, p0 + n, y)
+
+
+func _cond_ring(v: PackedVector3Array, radius: float, half_w: float, segs: int,
+		y: float) -> void:
+	var ri: float = maxf(radius - half_w, 0.0)
+	var ro: float = radius + half_w
+	for i in range(segs):
+		var a0: float = TAU * float(i) / float(segs)
+		var a1: float = TAU * float(i + 1) / float(segs)
+		_cond_quad(v,
+			Vector2(cos(a0) * ri, sin(a0) * ri),
+			Vector2(cos(a1) * ri, sin(a1) * ri),
+			Vector2(cos(a1) * ro, sin(a1) * ro),
+			Vector2(cos(a0) * ro, sin(a0) * ro), y)
+
+
+func _cond_disc(v: PackedVector3Array, centre: Vector2, radius: float, segs: int,
+		y: float) -> void:
+	for i in range(segs):
+		var a0: float = TAU * float(i) / float(segs)
+		var a1: float = TAU * float(i + 1) / float(segs)
+		v.append(Vector3(centre.x, y, centre.y))
+		v.append(Vector3(centre.x + cos(a0) * radius, y, centre.y + sin(a0) * radius))
+		v.append(Vector3(centre.x + cos(a1) * radius, y, centre.y + sin(a1) * radius))
+
+
+## An irregular lobe, every rim vertex clamped inside `lim` so a lacuna can eat the border
+## without ever growing the artifact's bounding box.
+func _cond_blob(v: PackedVector3Array, centre: Vector2, radius: float, jitter: float,
+		rng: RandomNumberGenerator, y: float, lim: float) -> void:
+	var segs: int = 18
+	var rs: Array[float] = []
+	for i in range(segs):
+		rs.append(radius * (1.0 - jitter + rng.randf() * jitter * 2.0))
+	var mid: Vector2 = _cond_clamp(centre, lim)
+	for i in range(segs):
+		var a0: float = TAU * float(i) / float(segs)
+		var a1: float = TAU * float(i + 1) / float(segs)
+		var p0: Vector2 = _cond_clamp(centre + Vector2(cos(a0), sin(a0)) * rs[i], lim)
+		var p1: Vector2 = _cond_clamp(
+			centre + Vector2(cos(a1), sin(a1)) * rs[(i + 1) % segs], lim)
+		v.append(Vector3(mid.x, y, mid.y))
+		v.append(Vector3(p0.x, y, p0.y))
+		v.append(Vector3(p1.x, y, p1.y))
+
+
+func _cond_clamp(p: Vector2, lim: float) -> Vector2:
+	if p.length() <= lim:
+		return p
+	return p.normalized() * lim
+
+
+## One relaid tessera in polar coordinates, inset so the coarse joint shows around it.
+func _cond_tessera_polar(v: PackedVector3Array, t0: float, t1: float, r0: float, r1: float,
+		y: float) -> void:
+	var mid: float = (r0 + r1) * 0.5
+	var ang_in: float = 0.006 / maxf(mid, 0.02)
+	var ta: float = t0 + ang_in
+	var tb: float = t1 - ang_in
+	var ra: float = r0 + 0.006
+	var rb: float = r1 - 0.006
+	if tb <= ta or rb <= ra:
+		return
+	_cond_quad(v,
+		Vector2(cos(ta) * ra, sin(ta) * ra),
+		Vector2(cos(tb) * ra, sin(tb) * ra),
+		Vector2(cos(tb) * rb, sin(tb) * rb),
+		Vector2(cos(ta) * rb, sin(ta) * rb), y)
+
+
+## A rectangular patch set at its own angle: bedding first, then coarse tesserae inset on
+## top. Skipped entirely if any corner would leave the disc.
+func _cond_patch_rect(stone: PackedVector3Array, joint: PackedVector3Array, centre: Vector2,
+		size: Vector2, rot: float, lim: float) -> void:
+	var ca: float = cos(rot)
+	var sa: float = sin(rot)
+	var hx: float = size.x * 0.5
+	var hz: float = size.y * 0.5
+	var local: Array[Vector2] = [
+		Vector2(-hx, -hz), Vector2(hx, -hz), Vector2(hx, hz), Vector2(-hx, hz)]
+	var world: Array[Vector2] = []
+	for p in local:
+		world.append(centre + Vector2(p.x * ca - p.y * sa, p.x * sa + p.y * ca))
+	for w in world:
+		if w.length() > lim:
+			return
+	_cond_quad(joint, world[0], world[1], world[2], world[3], 0.0)
+
+	var cell: float = 0.038
+	var nx: int = maxi(int(size.x / cell), 2)
+	var nz: int = maxi(int(size.y / cell), 2)
+	var inset: float = 0.006
+	for ix in range(nx):
+		for iz in range(nz):
+			var x0: float = -hx + size.x * float(ix) / float(nx) + inset
+			var x1: float = -hx + size.x * float(ix + 1) / float(nx) - inset
+			var z0: float = -hz + size.y * float(iz) / float(nz) + inset
+			var z1: float = -hz + size.y * float(iz + 1) / float(nz) - inset
+			if x1 <= x0 or z1 <= z0:
+				continue
+			_cond_quad(stone,
+				centre + Vector2(x0 * ca - z0 * sa, x0 * sa + z0 * ca),
+				centre + Vector2(x1 * ca - z0 * sa, x1 * sa + z0 * ca),
+				centre + Vector2(x1 * ca - z1 * sa, x1 * sa + z1 * ca),
+				centre + Vector2(x0 * ca - z1 * sa, x0 * sa + z1 * ca), 0.0006)

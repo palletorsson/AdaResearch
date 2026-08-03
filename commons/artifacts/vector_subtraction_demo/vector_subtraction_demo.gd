@@ -48,6 +48,31 @@ class_name VectorSubtractionDemo
 ## Color for info panel backgrounds
 @export var panel_color: Color = Color(0.06, 0.06, 0.08, 0.9)
 
+## AXIS — HOW MUCH OF THE ARITHMETIC THE BENCH DRAWS. Adopted word for word (and value
+## for value, in order) from [[transform_composition_workbench]] and shared across the
+## whole vector subject, so a room cannot show its sum as a walked route and its
+## difference as a bare answer.
+##
+##   outcome     the difference alone. A, B, −B and the tip-to-tail leg all leave the
+##               render layers with their labels; one green arrow reaches from the origin
+##               and nothing in the frame says which two positions made it.
+##   trace       the legacy lineage, byte for byte — the TRIANGLE rule this artifact was
+##               written to argue: A from the origin, −B standing on A's TIP, the result
+##               closing them. A − B is a walk you took.
+##   operands    the gap instead of the walk. The tip-to-tail leg retires and a bright
+##               arrow is drawn straight from B's TIP to A's TIP — the difference read as
+##               the directed distance between two positions — inside the dashed
+##               parallelogram that A and −B span.
+##   expression  the algebra promoted over the geometry. The side formula panel is joined
+##               by a board standing over the arrows, facing the player, writing
+##               A − B = A + (−B) with the components substituted, between two emissive
+##               rules in the result's green.
+##
+## The five arrows are the pivot: they are the only saturated things in the frame, and
+## outcome takes four of them out.
+@export_enum("outcome", "trace", "operands", "expression") var workings: String = "trace"
+const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
+
 var _arrow_a: Node3D
 var _arrow_b: Node3D
 var _arrow_neg_b: Node3D  # -B from origin
@@ -66,6 +91,10 @@ var _label_result: Label3D
 
 # Coordinate axes
 var _axes_container: Node3D
+
+# WORKINGS dressing lives here and nowhere else — created last in _ready() so the
+# legacy tree above it is untouched, cleared and refilled on every _update_vectors().
+var _workings_root: Node3D
 
 # VR Controls
 var _control_panel: Node3D
@@ -162,6 +191,11 @@ func _ready():
 	_create_handles()
 	_create_labels()
 	_create_vr_controls()
+	# WORKINGS holder — created LAST, so every node above keeps the index and the
+	# position it has today. Empty on the default; nothing above this line moves.
+	_workings_root = Node3D.new()
+	_workings_root.name = "Workings"
+	_add_tracked_child(_workings_root)
 	_update_vectors()
 
 func _init_shared_materials():
@@ -439,6 +473,10 @@ func _update_vectors():
 	# Update formula
 	_update_formula(neg_b, result)
 
+	# WORKINGS, applied LAST so nothing above it moves. "trace" restores every layer
+	# and builds nothing at all — the legacy lineage, byte for byte.
+	_apply_workings(neg_b, result)
+
 func _position_arrow(arrow: Node3D, start: Vector3, end: Vector3):
 	var direction = end - start
 	var length = direction.length()
@@ -505,4 +543,206 @@ func _exit_tree():
 	_created_nodes.clear()
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	if config_data.has("workings"):
+		var w: String = String(config_data["workings"]).strip_edges().to_lower()
+		workings = w if WORKINGS.has(w) else workings
+		if is_inside_tree():
+			_update_vectors()
+
+
+# --- WORKINGS ---------------------------------------------------------------
+# One axis, four values, shared word for word with the rest of the vector subject.
+# Every builder writes only into _workings_root; removal is always `layers = 0` on the
+# MeshInstance3D / Label3D leaves — never `visible = false`, which in Godot takes a
+# holder's whole subtree with it (and this artifact's arrows ARE holders).
+
+func _workings_value() -> String:
+	var w: String = String(workings).strip_edges().to_lower()
+	return w if WORKINGS.has(w) else "trace"
+
+
+func _set_layers(n: Node, bits: int) -> void:
+	if n is VisualInstance3D:
+		(n as VisualInstance3D).layers = bits
+	for child in n.get_children():
+		_set_layers(child, bits)
+
+
+func _apply_workings(neg_b: Vector3, result: Vector3) -> void:
+	if _workings_root == null:
+		return
+	for c in _workings_root.get_children():
+		_workings_root.remove_child(c)
+		c.queue_free()
+
+	var mode: String = _workings_value()
+
+	# Restore first, so a value change at runtime is reversible and the default is
+	# always exactly today's build.
+	for n in [_arrow_a, _arrow_b, _arrow_neg_b, _arrow_neg_b_tip,
+			_label_a, _label_b, _label_neg_b]:
+		if n != null:
+			_set_layers(n, 1)
+
+	match mode:
+		"outcome":
+			# The difference alone. Both operands, the negation and the tip-to-tail leg
+			# leave the render layers with their labels; A − B stands from the origin
+			# with nothing to say where it came from.
+			for n in [_arrow_a, _arrow_b, _arrow_neg_b, _arrow_neg_b_tip,
+					_label_a, _label_b, _label_neg_b]:
+				if n != null:
+					_set_layers(n, 0)
+		"operands":
+			# The gap, not the walk. The leg standing on A's tip retires and the
+			# difference is drawn where it actually lives: straight from B's TIP to A's
+			# TIP. The dashed sides close the parallelogram A and −B span.
+			if _arrow_neg_b_tip != null:
+				_set_layers(_arrow_neg_b_tip, 0)
+			_workings_root.add_child(_w_arrow(vector_b, vector_a, color_result, 0.010, 2.0))
+			var side: Color = Color(color_result.r, color_result.g, color_result.b, 0.5)
+			_workings_root.add_child(_w_dashed(vector_a, vector_a + neg_b, side))
+			_workings_root.add_child(_w_dashed(neg_b, vector_a + neg_b, side))
+			_workings_root.add_child(_w_dot(vector_b, color_b))
+			_workings_root.add_child(_w_dot(vector_a, color_a))
+		"expression":
+			_workings_root.add_child(_w_board(neg_b, result))
+		_:
+			pass                                   # "trace" — the legacy lineage
+
+
+## A solid emissive arrow between two points, in the artifact's own arrow idiom.
+func _w_arrow(from: Vector3, to: Vector3, color: Color, radius: float, energy: float) -> Node3D:
+	var root := Node3D.new()
+	var dir: Vector3 = to - from
+	var length: float = dir.length()
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy_multiplier = energy
+	if length < 0.001:
+		return root
+	var head_len: float = radius * 5.0
+	var shaft := MeshInstance3D.new()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = radius
+	cyl.bottom_radius = radius
+	cyl.height = maxf(length - head_len, 0.001)
+	shaft.mesh = cyl
+	shaft.material_override = mat
+	root.add_child(shaft)
+	var head := MeshInstance3D.new()
+	var cone := CylinderMesh.new()
+	cone.top_radius = 0.0
+	cone.bottom_radius = radius * 2.5
+	cone.height = head_len
+	head.mesh = cone
+	head.material_override = mat
+	root.add_child(head)
+	shaft.position = Vector3(0.0, maxf(length - head_len, 0.001) * 0.5, 0.0)
+	head.position = Vector3(0.0, length - head_len * 0.5, 0.0)
+	# Basis built by hand rather than look_at(): look_at() needs the node to already be
+	# inside the tree, and this arrow is assembled before it is parented.
+	root.transform = Transform3D(_w_basis_y_to(dir), from)
+	return root
+
+
+## A basis whose +Y runs along `dir` — the axis the local arrow meshes are built on.
+func _w_basis_y_to(dir: Vector3) -> Basis:
+	var y: Vector3 = dir.normalized()
+	if y.length() < 0.0001:
+		return Basis()
+	var ref: Vector3 = Vector3.UP if absf(y.dot(Vector3.UP)) < 0.985 else Vector3.RIGHT
+	var x: Vector3 = ref.cross(y).normalized()
+	var z: Vector3 = x.cross(y).normalized()
+	return Basis(x, y, z)
+
+
+## A dashed guide between two points — the parallelogram sides.
+func _w_dashed(from: Vector3, to: Vector3, color: Color) -> Node3D:
+	var root := Node3D.new()
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = Color(color.r, color.g, color.b, 1.0)
+	mat.emission_energy_multiplier = 0.9
+	var mesh := SphereMesh.new()
+	mesh.radius = 0.011
+	mesh.height = 0.022
+	mesh.radial_segments = 8
+	mesh.rings = 4
+	var n: int = 13
+	for i in range(n):
+		if i % 2 == 1:
+			continue
+		var dot := MeshInstance3D.new()
+		dot.mesh = mesh
+		dot.material_override = mat
+		dot.position = from.lerp(to, float(i) / float(n - 1))
+		root.add_child(dot)
+	return root
+
+
+func _w_dot(at: Vector3, color: Color) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var mesh := SphereMesh.new()
+	mesh.radius = 0.022
+	mesh.height = 0.044
+	mi.mesh = mesh
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy_multiplier = 1.4
+	mi.material_override = mat
+	mi.position = at
+	return mi
+
+
+## EXPRESSION — a board standing over the arrows facing the player, writing the identity
+## out with the components substituted, between two emissive rules in the result's green.
+func _w_board(neg_b: Vector3, result: Vector3) -> Node3D:
+	var board := Node3D.new()
+	board.name = "WorkingsBoard"
+	board.position = Vector3(0.0, max_vector_length + 0.52, 0.0)
+	var w: float = max_vector_length * 1.7
+	var h: float = w * 0.30
+	var plate := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = Vector3(w, h, 0.02)
+	plate.mesh = box
+	var pm := StandardMaterial3D.new()
+	pm.albedo_color = Color(0.81, 0.79, 0.75)
+	pm.roughness = 0.92
+	plate.material_override = pm
+	board.add_child(plate)
+	var rule_mat := StandardMaterial3D.new()
+	rule_mat.albedo_color = color_result
+	rule_mat.emission_enabled = true
+	rule_mat.emission = color_result
+	rule_mat.emission_energy_multiplier = 2.0
+	for sy in [1.0, -1.0]:
+		var rule := MeshInstance3D.new()
+		var rb := BoxMesh.new()
+		rb.size = Vector3(w, h * 0.06, 0.024)
+		rule.mesh = rb
+		rule.material_override = rule_mat
+		rule.position = Vector3(0.0, sy * h * 0.5, 0.006)
+		board.add_child(rule)
+	var l := Label3D.new()
+	l.name = "Algebra"
+	l.text = "A − B  =  A + (−B)\n(%+.2f, %+.2f, %+.2f) + (%+.2f, %+.2f, %+.2f)\n=  (%+.2f, %+.2f, %+.2f)" % [
+		vector_a.x, vector_a.y, vector_a.z, neg_b.x, neg_b.y, neg_b.z,
+		result.x, result.y, result.z]
+	l.font_size = 30
+	l.pixel_size = h / 300.0
+	l.modulate = Color(0.17, 0.17, 0.19)
+	l.outline_size = 5
+	l.outline_modulate = Color(0.90, 0.88, 0.84, 0.9)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	l.position = Vector3(0.0, 0.0, 0.02)
+	board.add_child(l)
+	return board

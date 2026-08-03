@@ -41,6 +41,31 @@ class_name DotProductProjector
 		if is_inside_tree():
 			_update_visualization()
 
+## AXIS — HOW MUCH OF THE ARITHMETIC THE BENCH DRAWS. Adopted word for word (and value
+## for value, in order) from [[transform_composition_workbench]] and shared across the
+## whole vector subject, so a room cannot show its sum as a walked route and its dot
+## product as a bare answer.
+##
+##   outcome     the number, as a length. A, the orange rejection arrow, the white drop
+##               line and the purple angle arc all leave the render layers; B stays as
+##               the axis the answer is measured on, with the green projection lying on
+##               it. You are handed how much, never what of.
+##   trace       the halfway states get BUILT. A fan of pale ghost copies of A rotates
+##               from B's direction up to A's, each dropping its own tick onto B, so the
+##               projection is seen collapsing as the angle opens — the limit cos θ walks
+##               through instead of the single value it arrives at.
+##   operands    the legacy lineage, byte for byte — A and B from the SHARED origin with
+##               the angle arc between them, the projection along B and the rejection
+##               standing off it. Both ingredients from one tail.
+##   expression  the algebra promoted over the geometry. The side formula panel is joined
+##               by a board standing over the arrows writing A·B = |A||B|cos θ with the
+##               numbers substituted, between two emissive rules in the projection green.
+##
+## The arc and the drop line are the construction; the two arrows are the ingredients;
+## the green bar is the answer. Each value keeps a different one of those three.
+@export_enum("outcome", "trace", "operands", "expression") var workings: String = "operands"
+const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
+
 # Sleek color palette
 var color_a: Color = Color(1.0, 0.35, 0.4)        # Coral - vector A
 var color_b: Color = Color(0.3, 0.5, 1.0)         # Blue - vector B
@@ -63,6 +88,10 @@ var _control_panel: Node3D
 var _ground: Node3D
 var _axes: Node3D
 
+# WORKINGS dressing lives here and nowhere else — created last in _ready() so the legacy
+# tree above it is untouched, cleared and refilled on every _update_visualization().
+var _workings_root: Node3D
+
 # Vector labels
 var _label_a: Label3D
 var _label_b: Label3D
@@ -82,6 +111,11 @@ func _ready():
 	_create_handles()
 	_create_labels()
 	_create_vr_controls()
+	# WORKINGS holder — created LAST, so every node above keeps the index and the
+	# position it has today. Empty on the default; nothing above this line moves.
+	_workings_root = Node3D.new()
+	_workings_root.name = "Workings"
+	add_child(_workings_root)
 	_update_visualization()
 
 func _create_arrows():
@@ -212,6 +246,10 @@ func _update_visualization():
 	# Update panels
 	_update_panels(dot, projection_length, angle_deg)
 
+	# WORKINGS, applied LAST so nothing above it moves. "operands" restores every layer
+	# and builds nothing at all — the legacy lineage, byte for byte.
+	_apply_workings(dot, projection, angle_deg)
+
 func _update_drop_line(a_tip: Vector3, proj: Vector3):
 	var perp = a_tip - proj
 	if perp.length() < 0.01:
@@ -338,3 +376,165 @@ func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])
+	# `workings` is a plain export with no setter (the vector_* ones rebuild themselves),
+	# so a config that only changes the axis has to ask for the rebuild explicitly.
+	if is_inside_tree():
+		_update_visualization()
+
+
+# --- WORKINGS ---------------------------------------------------------------
+# One axis, four values, shared word for word with the rest of the vector subject.
+# Every builder writes only into _workings_root; removal is always `layers = 0` on the
+# MeshInstance3D / Label3D leaves — never `visible = false`, which in Godot takes a
+# holder's whole subtree with it (and this artifact's arrows ARE holders).
+
+func _workings_value() -> String:
+	var w: String = String(workings).strip_edges().to_lower()
+	return w if WORKINGS.has(w) else "operands"
+
+
+func _set_layers(n: Node, bits: int) -> void:
+	if n is VisualInstance3D:
+		(n as VisualInstance3D).layers = bits
+	for child in n.get_children():
+		_set_layers(child, bits)
+
+
+func _apply_workings(dot: float, projection: Vector3, angle_deg: float) -> void:
+	if _workings_root == null:
+		return
+	for c in _workings_root.get_children():
+		_workings_root.remove_child(c)
+		c.queue_free()
+
+	# Restore first, so a value change at runtime is reversible and the default is
+	# always exactly today's build.
+	for n in [_arrow_a, _arrow_perpendicular, _drop_line, _angle_arc, _label_a, _label_angle]:
+		if n != null:
+			_set_layers(n, 1)
+
+	match _workings_value():
+		"outcome":
+			# The number, as a length. What was projected, what it cost to project it and
+			# the angle that decided the price all leave the frame; B stays as the ruler
+			# the answer lies on.
+			for n in [_arrow_a, _arrow_perpendicular, _drop_line, _angle_arc,
+					_label_a, _label_angle]:
+				if n != null:
+					_set_layers(n, 0)
+		"trace":
+			# The halfway states BUILT: ghost copies of A swept from B's direction round
+			# to A's, each dropping a tick onto B. The projection is watched collapsing.
+			_workings_trace(projection)
+		"expression":
+			_workings_root.add_child(_w_board(dot, projection.length(), angle_deg))
+		_:
+			pass                                   # "operands" — the legacy lineage
+
+
+## TRACE — the sweep. Six ghost copies of A stand between B's direction and A's own, each
+## with a tick where its tip falls onto B, so the run of ticks IS cos θ walking down from
+## 1 to whatever this angle allows. The single green bar is the last tick in that run.
+func _workings_trace(projection: Vector3) -> void:
+	var a_len: float = vector_a.length()
+	var b_dir: Vector3 = vector_b.normalized()
+	var a_dir: Vector3 = vector_a.normalized()
+	if a_len < 0.01 or vector_b.length() < 0.01:
+		return
+	var steps: int = 6
+	for i in range(steps + 1):
+		var t: float = float(i) / float(steps)
+		var ghost_dir: Vector3 = b_dir.slerp(a_dir, t).normalized()
+		var tip: Vector3 = ghost_dir * a_len
+		var fade: float = 0.18 + 0.42 * (1.0 - t)
+		var ghost := Color(color_a.r, color_a.g, color_a.b, fade)
+		if i < steps:
+			_workings_root.add_child(_w_rod(Vector3.ZERO, tip, 0.004, ghost, 0.5, true))
+		var foot: Vector3 = b_dir * tip.dot(b_dir)
+		_workings_root.add_child(_w_rod(foot, foot + Vector3(0.0, 0.055, 0.0), 0.008,
+			color_projection, 1.6, false))
+		if i < steps:
+			_workings_root.add_child(_w_rod(tip, foot, 0.0025,
+				Color(1.0, 1.0, 1.0, 0.22), 0.3, true))
+	_workings_root.add_child(_w_rod(Vector3.ZERO, projection, 0.016, color_projection, 2.2, false))
+
+
+## A straight rod between two points — ghost strokes, drop hairs and projection bars.
+func _w_rod(from: Vector3, to: Vector3, radius: float, color: Color,
+		energy: float, ghost: bool) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var dir: Vector3 = to - from
+	var length: float = maxf(dir.length(), 0.001)
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = radius
+	cyl.bottom_radius = radius
+	cyl.height = length
+	cyl.radial_segments = 8
+	mi.mesh = cyl
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	if ghost:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = Color(color.r, color.g, color.b, 1.0)
+	mat.emission_energy_multiplier = energy
+	mi.material_override = mat
+	mi.transform = Transform3D(_w_basis_y_to(dir), (from + to) * 0.5)
+	return mi
+
+
+## A basis whose +Y runs along `dir` — CylinderMesh is built on its own +Y.
+func _w_basis_y_to(dir: Vector3) -> Basis:
+	var y: Vector3 = dir.normalized()
+	if y.length() < 0.0001:
+		return Basis()
+	var ref: Vector3 = Vector3.UP if absf(y.dot(Vector3.UP)) < 0.985 else Vector3.RIGHT
+	var x: Vector3 = ref.cross(y).normalized()
+	var z: Vector3 = x.cross(y).normalized()
+	return Basis(x, y, z)
+
+
+## EXPRESSION — a board standing over the arrows facing the player, writing the identity
+## out with the numbers substituted, between two emissive rules in the projection green.
+func _w_board(dot: float, proj_len: float, angle_deg: float) -> Node3D:
+	var board := Node3D.new()
+	board.name = "WorkingsBoard"
+	board.position = Vector3(0.0, max_vector_length + 0.72, 0.0)
+	var w: float = max_vector_length * 1.9
+	var h: float = w * 0.28
+	var plate := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = Vector3(w, h, 0.02)
+	plate.mesh = box
+	var pm := StandardMaterial3D.new()
+	pm.albedo_color = Color(0.81, 0.79, 0.75)
+	pm.roughness = 0.92
+	plate.material_override = pm
+	board.add_child(plate)
+	var rule_mat := StandardMaterial3D.new()
+	rule_mat.albedo_color = color_projection
+	rule_mat.emission_enabled = true
+	rule_mat.emission = color_projection
+	rule_mat.emission_energy_multiplier = 2.2
+	for sy in [1.0, -1.0]:
+		var rule := MeshInstance3D.new()
+		var rb := BoxMesh.new()
+		rb.size = Vector3(w, h * 0.07, 0.024)
+		rule.mesh = rb
+		rule.material_override = rule_mat
+		rule.position = Vector3(0.0, sy * h * 0.5, 0.006)
+		board.add_child(rule)
+	var l := Label3D.new()
+	l.name = "Algebra"
+	l.text = "A · B  =  |A| |B| cos θ\n%.2f × %.2f × cos %.0f°  =  %.3f\nproj = %.3f" % [
+		vector_a.length(), vector_b.length(), angle_deg, dot, proj_len]
+	l.font_size = 30
+	l.pixel_size = h / 320.0
+	l.modulate = Color(0.17, 0.17, 0.19)
+	l.outline_size = 5
+	l.outline_modulate = Color(0.90, 0.88, 0.84, 0.9)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	l.position = Vector3(0.0, 0.0, 0.02)
+	board.add_child(l)
+	return board

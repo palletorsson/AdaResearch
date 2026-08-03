@@ -48,6 +48,40 @@ const FIRE_BOLT_SCENE: PackedScene = preload("res://commons/hazards/armadillo_dr
 @export var core_color: Color = Color(0.2, 0.22, 0.25, 1.0)
 @export var emission_color: Color = Color(1.0, 0.35, 0.1, 1.0)
 
+## AXIS — WARNING: how much the hazard tells you BEFORE it costs you anything.
+## Adopted word for word from [[miura_crawler]], [[scissor_stalker]],
+## [[kaleidocycle_enemy]] and [[path_block]] — one vocabulary across the hazards,
+## so the family measures on one scale instead of five private synonyms.
+##
+## The spire is the family's SNIPER case. Every other hazard in this vocabulary
+## has to reach you; this one never does. It backs off to optimal_range and
+## shoots from there, so the only thing that could ever have warned you is what
+## it looks like from across the room — and at rest it looks like a hexagonal
+## disc on the floor, one twist away from being a tower. The warning is the
+## difference between a floor tile and a firing position.
+##
+##   none    the shell alone, unannounced — THE LEGACY BODY, byte for byte. A
+##           low twisted drum with a lit muzzle platform on top.
+##   stain   scorch soaked into the ground it has been shooting over: a wide dull
+##           patch well past its own footprint, a darker core, and two burn runs
+##           bled off one side where the bolts land.
+##   cage    a bolted post-and-rail frame the height of the DEPLOYED tower, plus a
+##           filed yellow tag. Somebody catalogued the thing and fenced the volume
+##           it needs; it still rises and fires on exactly the same schedule.
+##   beacon  a lit mast beside it with a lamp head and a shade, plus a glowing
+##           outline burnt into the floor around a thing that is otherwise almost
+##           flat. The room announces the standoff.
+##   shroud  a canvas sleeve standing over the collapsed drum — taller than the
+##           disc, shorter than the tower. What it looks like at rest goes under
+##           cloth; when it untwists to fire, the platform clears the cover.
+##
+## APPEARANCE ONLY. fire_damage, fire_speed, shots_per_burst, fire_interval,
+## optimal_range, detection_radius, disc_speed, max_health, the twist schedule and
+## the collision capsule are byte-identical across all five values. A hazard that
+## hides itself is not a gentler hazard.
+const WARNING_VALUES: PackedStringArray = ["none", "stain", "cage", "beacon", "shroud"]
+@export_enum("none", "stain", "cage", "beacon", "shroud") var warning: String = "none"
+
 # State
 var _health: float = 0.0
 var _state: State = State.DISC
@@ -84,6 +118,9 @@ func _ready() -> void:
 	_set_state(State.AIM)
 	_twist = 0.1
 	print("KreslingSpire: READY at %s" % global_position)
+	# WARNING dressing, appended LAST so the collision shape and the mesh root keep
+	# their child indices. "none" adds nothing at all — the legacy lineage.
+	_build_warning()
 
 
 func _physics_process(delta: float) -> void:
@@ -489,10 +526,192 @@ func configure(config: Dictionary) -> void:
 		_health = max_health
 	if config.has("damage"):
 		fire_damage = float(config["damage"])
-	
+
 	if _geometry:
 		_rebuild_mesh()
+
+	# WARNING — read last, from the config dict or the config_<key> metadata the grid
+	# stamps on the root, and an unknown word keeps the default rather than blanking
+	# the dressing.
+	var w: String = ""
+	if config.has("warning"):
+		w = str(config["warning"])
+	elif has_meta("config_warning"):
+		w = str(get_meta("config_warning"))
+	w = w.strip_edges().to_lower()
+	if WARNING_VALUES.has(w):
+		warning = w
+	_build_warning()
 
 
 func apply_grid_config(config: Dictionary) -> void:
 	configure(config)
+
+
+# ── WARNING ──────────────────────────────────────────────────────────────────
+# One axis, five values, the vocabulary shared with [[miura_crawler]],
+# [[scissor_stalker]], [[kaleidocycle_enemy]] and [[path_block]]. Every builder below
+# adds MeshInstance3D children only — never a collider, never a group the combat code
+# reads, never a distance. Deterministic: nothing here draws from the random stream and
+# nothing here is animated, so five variants of the same spire differ only in what
+# stands around it.
+#
+# Sized from the EXPORTS, never from the live twist: _twist is a moving number (the
+# tower is a disc at rest and a mast when it fires) and dressing that breathed with it
+# would be an animation, not a still.
+
+const WARN_STAIN_OUTER := Color(0.24, 0.19, 0.13)
+const WARN_STAIN_CORE := Color(0.09, 0.075, 0.055)
+const WARN_BAR := Color(0.52, 0.50, 0.44)
+const WARN_TAG := Color(0.86, 0.72, 0.12)
+const WARN_MAST := Color(0.38, 0.38, 0.40)
+const WARN_LAMP := Color(1.0, 0.62, 0.12)
+const WARN_CLOTH := Color(0.40, 0.38, 0.33)
+const WARN_STRAP := Color(0.15, 0.14, 0.13)
+
+
+func _build_warning() -> void:
+	## Rebuildable: a map hands its config to apply_grid_config AFTER _ready, so this
+	## runs twice. Drop the previous dressing immediately (remove_child before
+	## queue_free — the sweep measures the AABB on the very next frame).
+	for child in get_children():
+		if child.is_in_group("hazard_warning"):
+			remove_child(child)
+			child.queue_free()
+	match warning:
+		"stain":
+			_warn_stain()
+		"cage":
+			_warn_cage()
+		"beacon":
+			_warn_beacon()
+		"shroud":
+			_warn_shroud()
+		_:
+			pass
+
+
+## The drum's half-width. KreslingGeometry centres its ring vertices on the origin at
+## every twist, so the footprint is the pattern radius plus a little slack — read from
+## the same export the shell is built from, never hardcoded.
+func _warn_half() -> float:
+	return maxf(radius * 1.15, 0.06)
+
+
+## The height the spire needs when it is UP. A Kresling layer can never be longer than
+## its diagonal edge, so edge_length * layers is the ceiling of the deployed tower —
+## the volume a cage has to enclose and a mast has to overlook.
+func _warn_top() -> float:
+	return maxf(edge_length * float(layers) * 0.92, radius * 2.4)
+
+
+## STAIN — the notice written on the ground. Scorch spreading well past the drum's own
+## footprint, a darker core, and two burn runs bled off one side.
+func _warn_stain() -> void:
+	var h: float = _warn_half()
+	var y: float = -0.028
+	_warn_add(Vector3(0, y, 0), Vector3(h * 3.6, 0.012, h * 3.6),
+		_warn_mat(WARN_STAIN_OUTER, 1.0, 0.0))
+	_warn_add(Vector3(0, y + 0.007, 0), Vector3(h * 2.4, 0.012, h * 2.4),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(h * 1.45, y + 0.004, h * 0.50), Vector3(h * 1.05, 0.012, h * 0.36),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(-h * 1.20, y + 0.004, -h * 1.00), Vector3(h * 0.75, 0.012, h * 0.28),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+
+
+## CAGE — the notice as paperwork. Four posts to the height of the deployed tower, two
+## rings of rails, one filed yellow tag. The drum rises inside the bars on the twist it
+## always had.
+func _warn_cage() -> void:
+	var h: float = _warn_half()
+	var bot: float = -0.03
+	var top: float = _warn_top()
+	var p: float = h * 1.30
+	var bar: StandardMaterial3D = _warn_mat(WARN_BAR, 0.45, 0.55)
+	var thick: float = maxf(radius * 0.30, 0.03)
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			_warn_add(Vector3(float(sx) * p, (bot + top) * 0.5, float(sz) * p),
+				Vector3(thick, top - bot, thick), bar)
+	for ry in [top, bot + (top - bot) * 0.45]:
+		var y: float = float(ry)
+		for s in [-1.0, 1.0]:
+			_warn_add(Vector3(0, y, float(s) * p),
+				Vector3(p * 2.0 + thick, thick * 0.8, thick * 0.8), bar)
+			_warn_add(Vector3(float(s) * p, y, 0),
+				Vector3(thick * 0.8, thick * 0.8, p * 2.0 + thick), bar)
+	_warn_add(Vector3(p + thick * 0.6, bot + (top - bot) * 0.62, 0),
+		Vector3(0.016, top * 0.30, h * 1.55), _warn_mat(WARN_TAG, 0.7, 0.0))
+
+
+## BEACON — the notice as broadcast. A mast beside the drum with a lamp head under a
+## shade, and a lit outline on the floor around a thing that is otherwise almost flat.
+func _warn_beacon() -> void:
+	var h: float = _warn_half()
+	var bot: float = -0.03
+	var top: float = _warn_top()
+	var mast_h: float = top * 1.15
+	var mast: StandardMaterial3D = _warn_mat(WARN_MAST, 0.4, 0.6)
+	var lamp: StandardMaterial3D = _warn_emissive(WARN_LAMP, 3.2)
+	var thick: float = maxf(radius * 0.30, 0.03)
+	var mx: float = -h * 1.30
+	_warn_add(Vector3(mx, bot + mast_h * 0.5, 0), Vector3(thick, mast_h, thick), mast)
+	_warn_add(Vector3(mx, bot + mast_h + h * 0.30, 0), Vector3(h * 0.72, h * 0.42, h * 0.72), lamp)
+	_warn_add(Vector3(mx, bot + mast_h + h * 0.60, 0), Vector3(h * 1.05, thick * 0.7, h * 1.05), mast)
+	for s in [-1.0, 1.0]:
+		_warn_add(Vector3(0, bot + 0.012, float(s) * h * 1.6),
+			Vector3(h * 3.2, 0.02, thick), lamp)
+		_warn_add(Vector3(float(s) * h * 1.6, bot + 0.012, 0),
+			Vector3(thick, 0.02, h * 3.2), lamp)
+
+
+## SHROUD — the notice withheld. A canvas sleeve standing over the collapsed drum,
+## taller than the disc and shorter than the tower: what the spire looks like at rest
+## goes under cloth, and only the firing form clears the cover. The twist, the range
+## and the burst are unchanged underneath.
+func _warn_shroud() -> void:
+	var h: float = _warn_half()
+	var cloth: StandardMaterial3D = _warn_mat(WARN_CLOTH, 0.95, 0.0)
+	var strap: StandardMaterial3D = _warn_mat(WARN_STRAP, 0.85, 0.1)
+	var w: float = h * 2.3
+	var lid: float = _warn_top() * 0.62
+	_warn_add(Vector3(0, lid, 0), Vector3(w, 0.05, w), cloth)
+	for s in [-1.0, 1.0]:
+		_warn_add(Vector3(0, lid * 0.5 - 0.015, float(s) * w * 0.5),
+			Vector3(w, lid + 0.03, 0.02), cloth)
+		_warn_add(Vector3(float(s) * w * 0.5, lid * 0.5 - 0.015, 0),
+			Vector3(0.02, lid + 0.03, w), cloth)
+	_warn_add(Vector3(0, lid + 0.035, 0), Vector3(w * 0.30, 0.05, w * 0.30), cloth)
+	for s in [-1.0, 1.0]:
+		_warn_add(Vector3(0, lid * 0.62 + float(s) * lid * 0.24, 0),
+			Vector3(w + 0.014, 0.020, w + 0.014), strap)
+
+
+func _warn_add(center: Vector3, box_size: Vector3, mat: Material) -> void:
+	var bm: BoxMesh = BoxMesh.new()
+	bm.size = box_size
+	var mi: MeshInstance3D = MeshInstance3D.new()
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = center
+	mi.add_to_group("hazard_warning")
+	add_child(mi)
+
+
+func _warn_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _warn_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m

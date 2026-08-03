@@ -34,6 +34,34 @@ class_name NewtonCradle
 @export var ball_color: Color = Color(0.85, 0.85, 0.9)
 @export var string_color: Color = Color(0.5, 0.5, 0.55, 0.8)
 
+## AXIS — WHAT THE APPARATUS SAYS WHEN NOTHING IS MOVING.
+##
+## A cradle at rest is five identical balls in a row: the entire demonstration is
+## invisible, and any axis pinned to the swing is one photograph taken five times. So the
+## claim is made in the hardware that survives the stopping — the demonstration outlives
+## the demonstration, or it does not.
+##
+##   none    the bare rig — the legacy lineage, byte for byte. Rest tells you nothing.
+##   catch   ARMED. A hooked fork on a bracket off the left post, out at the release
+##           point, with a trigger lever and a pull cord to the base. The initial
+##           condition is held by the apparatus, so you can read the drop with the
+##           balls hanging dead.
+##   chalk   DRAWN. A slate board a hand's width behind the swing plane, carrying both
+##           swept arcs scribed in chalk out to the release angle, the plumb rest line,
+##           and ONE IN — ONE OUT written across the top. The path is marked where it
+##           happened and stays after the motion has gone.
+##   scale   MEASURED. A graduated quadrant on each end pivot with the release tick lit
+##           and a pointer laid on it, plus a height rule up the right post with a lit
+##           index collar at the drop height. The demonstration becomes a reading.
+##   tally   COUNTED. A bead rail over the top bar with one bead pushed clear of four,
+##           and a slate on the base counting one lit pip IN against one lit pip OUT.
+##           The claim is written as a number and needs no motion at all.
+##
+## Appearance only: nothing here touches _angles, _angular_velocities or the collision
+## rule. The conservation law is taught by the same code in all five.
+@export_enum("none", "catch", "chalk", "scale", "tally") var standstill: String = "none"
+const STANDSTILLS: PackedStringArray = ["none", "catch", "chalk", "scale", "tally"]
+
 # State per ball: angle from vertical, angular velocity
 var _angles: Array[float] = []
 var _angular_velocities: Array[float] = []
@@ -43,6 +71,7 @@ var _balls: Array[MeshInstance3D] = []
 var _strings: Array[MeshInstance3D] = []
 var _pivot_y: float = 0.0
 var _info_label: Label3D
+var _standstill_root: Node3D = null
 
 
 func _ready() -> void:
@@ -52,6 +81,7 @@ func _ready() -> void:
 	_create_labels()
 	_create_vr_controls()
 	_release_left(1)  # Start with 1 ball pulled back
+	_build_standstill()   # APPENDED LAST — nothing above it moves
 
 func _create_frame() -> void:
 	# Top bar
@@ -296,4 +326,286 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("standstill"):
+		var want: String = str(config["standstill"]).strip_edges().to_lower()
+		# Unknown word keeps the default — a typo must never silently publish a variant.
+		if STANDSTILLS.has(want):
+			standstill = want
+	if _pivot_y > 0.0:
+		_build_standstill()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STANDSTILL — the apparatus that speaks with the balls hanging dead.
+# Everything below is additive dressing parented under one node, so a rebuild
+# frees exactly this and leaves the cradle untouched.
+# ═══════════════════════════════════════════════════════════════════════════
+const SS_RELEASE := 0.8                            # the angle _release_left pulls to
+const SS_INK := Color(0.98, 0.74, 0.26)            # the lit accent: readings and marks
+const SS_CHALK := Color(0.93, 0.93, 0.88)          # dry chalk on slate
+const SS_SLATE := Color(0.13, 0.14, 0.17)
+const SS_STEEL := Color(0.42, 0.45, 0.50)
+
+
+func _build_standstill() -> void:
+	if is_instance_valid(_standstill_root):
+		_standstill_root.queue_free()
+	_standstill_root = null
+	if standstill == "none":
+		return
+	var root := Node3D.new()
+	root.name = "Standstill"
+	add_child(root)
+	_standstill_root = root
+	match standstill:
+		"catch":
+			_ss_catch(root)
+		"chalk":
+			_ss_chalk(root)
+		"scale":
+			_ss_scale(root)
+		"tally":
+			_ss_tally(root)
+		_:
+			pass
+
+
+# ── CATCH — the release height held in hardware ───────────────────────────
+func _ss_catch(root: Node3D) -> void:
+	var steel: StandardMaterial3D = _ss_mat(SS_STEEL, 0.35, 0.7)
+	var lit: StandardMaterial3D = _ss_glow(SS_INK, 1.1)
+	var spacing: float = ball_radius * 2.0
+	var post_x: float = -((ball_count - 1) * spacing * 0.5 + spacing * 0.5 + 0.05 + 0.05)
+	var hold: Vector3 = _ss_ball_at(0, -SS_RELEASE)
+
+	# Collar clamped on the left post, and the bracket arm reaching out to the hold point.
+	var collar: Vector3 = Vector3(post_x, _pivot_y * 0.78, 0.0)
+	root.add_child(_ss_box(collar, Vector3(0.055, 0.075, 0.055), steel))
+	root.add_child(_ss_link(collar, hold + Vector3(-0.02, 0.055, 0.0), 0.012, steel))
+
+	# The fork: two prongs the ball rests between, and a lit seat plate under it.
+	for sz: float in [-0.062, 0.062]:
+		root.add_child(_ss_box(Vector3(hold.x + 0.03, hold.y - ball_radius * 0.55, sz),
+			Vector3(0.13, 0.016, 0.016), steel))
+	root.add_child(_ss_box(Vector3(hold.x + 0.03, hold.y - ball_radius - 0.012, 0.0),
+		Vector3(0.14, 0.012, 0.115), lit))
+
+	# Trigger lever off the collar and the pull cord dropped to the base.
+	var lever: Vector3 = collar + Vector3(0.09, 0.17, 0.10)
+	root.add_child(_ss_link(collar, lever, 0.010, steel))
+	root.add_child(_ss_sphere(lever, 0.028, lit))
+	root.add_child(_ss_link(lever, Vector3(lever.x, 0.03, lever.z), 0.0035, lit))
+	root.add_child(_ss_label("HOLD", Vector3(hold.x, hold.y + 0.19, 0.0), 13, SS_INK))
+
+
+# ── CHALK — the swept path drawn where it happened ────────────────────────
+func _ss_chalk(root: Node3D) -> void:
+	var slate: StandardMaterial3D = _ss_mat(SS_SLATE, 0.9, 0.0)
+	var frame: StandardMaterial3D = _ss_mat(Color(0.30, 0.26, 0.21), 0.8, 0.0)
+	var chalk: StandardMaterial3D = _ss_mat(SS_CHALK, 0.95, 0.0)
+	var spacing: float = ball_radius * 2.0
+	var half: float = (ball_count - 1) * spacing * 0.5
+	var bw: float = (half + string_length) * 2.0 + 0.34
+	var bh: float = _pivot_y + 0.30
+	var bz: float = -0.28                       # a hand's width behind the swing plane
+	var by: float = bh * 0.5 - 0.06
+
+	root.add_child(_ss_box(Vector3(0.0, by, bz - 0.022), Vector3(bw + 0.07, bh + 0.07, 0.022), frame))
+	root.add_child(_ss_box(Vector3(0.0, by, bz), Vector3(bw, bh, 0.018), slate))
+
+	# The two swept arcs, at the true swing radius about the true end pivots.
+	for s: float in [-1.0, 1.0]:
+		var pivot: Vector3 = Vector3(s * half, _pivot_y, bz + 0.012)
+		var prev: Vector3 = pivot + Vector3(0.0, -string_length, 0.0)
+		for i in range(1, 15):
+			var a: float = SS_RELEASE * (float(i) / 14.0) * s
+			var p: Vector3 = pivot + Vector3(sin(a) * string_length, -cos(a) * string_length, 0.0)
+			if i % 2 == 1:
+				root.add_child(_ss_link(prev, p, 0.0055, chalk))
+			prev = p
+		# The release stroke: a radial tick laid across the end of the arc.
+		var e: Vector3 = pivot + Vector3(sin(SS_RELEASE * s) * string_length,
+			-cos(SS_RELEASE * s) * string_length, 0.0)
+		var out: Vector3 = pivot + Vector3(sin(SS_RELEASE * s) * (string_length + 0.11),
+			-cos(SS_RELEASE * s) * (string_length + 0.11), 0.0)
+		root.add_child(_ss_link(e, out, 0.007, chalk))
+
+	# Plumb rest line down the middle, dashed.
+	for i in range(7):
+		var y0: float = _pivot_y - 0.06 - float(i) * 0.09
+		root.add_child(_ss_box(Vector3(0.0, y0, bz + 0.012), Vector3(0.008, 0.05, 0.006), chalk))
+	root.add_child(_ss_label("ONE IN — ONE OUT", Vector3(0.0, by + bh * 0.5 - 0.09, bz + 0.02),
+		20, SS_CHALK))
+
+
+# ── SCALE — the demonstration turned into a reading ───────────────────────
+func _ss_scale(root: Node3D) -> void:
+	var steel: StandardMaterial3D = _ss_mat(SS_STEEL, 0.35, 0.7)
+	var tick: StandardMaterial3D = _ss_mat(Color(0.88, 0.88, 0.84), 0.5, 0.1)
+	var lit: StandardMaterial3D = _ss_glow(SS_INK, 1.1)
+	var spacing: float = ball_radius * 2.0
+	var half: float = (ball_count - 1) * spacing * 0.5
+	var qz: float = -0.145
+	var rad: float = 0.30
+
+	for s: float in [-1.0, 1.0]:
+		var pivot: Vector3 = Vector3(s * half, _pivot_y, qz)
+		root.add_child(_ss_sphere(pivot, 0.026, steel))
+		# Quadrant plate behind the graduations so the ticks read against something.
+		root.add_child(_ss_box(pivot + Vector3(s * rad * 0.42, -rad * 0.52, -0.014),
+			Vector3(rad * 0.95, rad * 1.15, 0.012), _ss_mat(Color(0.20, 0.21, 0.25), 0.8, 0.0)))
+		for i in range(11):
+			var a: float = SS_RELEASE * (float(i) / 10.0) * s
+			var major: bool = (i % 5) == 0
+			var tl: float = (0.075 if major else 0.038)
+			var inner: Vector3 = pivot + Vector3(sin(a) * (rad - tl), -cos(a) * (rad - tl), 0.0)
+			var outer: Vector3 = pivot + Vector3(sin(a) * rad, -cos(a) * rad, 0.0)
+			var tr: float = (0.007 if major else 0.0045)
+			var tm: StandardMaterial3D = (lit if major else tick)
+			root.add_child(_ss_link(inner, outer, tr, tm))
+		# The pointer laid on the release graduation.
+		var tipv: Vector3 = pivot + Vector3(sin(SS_RELEASE * s) * (rad + 0.05),
+			-cos(SS_RELEASE * s) * (rad + 0.05), 0.0)
+		root.add_child(_ss_link(pivot, tipv, 0.010, lit))
+		root.add_child(_ss_sphere(tipv, 0.024, lit))
+
+	# Height rule up the right post with a lit index collar at the drop height.
+	var rx: float = half + spacing * 0.5 + 0.05 + 0.10
+	var drop: float = _ss_ball_at(0, -SS_RELEASE).y
+	root.add_child(_ss_box(Vector3(rx, (_pivot_y - 0.04) * 0.5 + 0.04, 0.0),
+		Vector3(0.045, _pivot_y - 0.08, 0.012), _ss_mat(Color(0.86, 0.86, 0.82), 0.6, 0.0)))
+	for i in range(13):
+		var gy: float = 0.06 + float(i) * ((_pivot_y - 0.14) / 12.0)
+		var wide: bool = (i % 4) == 0
+		var gin: float = (0.014 if wide else 0.020)
+		var gw: float = (0.040 if wide else 0.026)
+		root.add_child(_ss_box(Vector3(rx + gin, gy, 0.008), Vector3(gw, 0.007, 0.006), tick))
+	root.add_child(_ss_box(Vector3(rx, drop, 0.014), Vector3(0.075, 0.018, 0.030), lit))
+	root.add_child(_ss_link(Vector3(rx - 0.03, drop, 0.014), Vector3(rx - 0.20, drop, 0.014), 0.007, lit))
+	root.add_child(_ss_label("h 0.18", Vector3(rx + 0.03, drop + 0.10, 0.02), 13, SS_INK))
+
+
+# ── TALLY — the claim written as a count ──────────────────────────────────
+func _ss_tally(root: Node3D) -> void:
+	var steel: StandardMaterial3D = _ss_mat(SS_STEEL, 0.35, 0.7)
+	var slate: StandardMaterial3D = _ss_mat(SS_SLATE, 0.9, 0.0)
+	var dead: StandardMaterial3D = _ss_mat(Color(0.34, 0.35, 0.39), 0.7, 0.1)
+	var lit: StandardMaterial3D = _ss_glow(SS_INK, 1.2)
+	var chalk: StandardMaterial3D = _ss_mat(SS_CHALK, 0.95, 0.0)
+	var spacing: float = ball_radius * 2.0
+	var half: float = (ball_count - 1) * spacing * 0.5
+
+	# Bead rail over the top bar: one bead pushed clear of the other four.
+	var ry: float = _pivot_y + 0.11
+	var rail: float = half + 0.20
+	root.add_child(_ss_link(Vector3(-rail, ry, 0.0), Vector3(rail, ry, 0.0), 0.008, steel))
+	for sx: float in [-rail, rail]:
+		root.add_child(_ss_box(Vector3(sx, ry - 0.045, 0.0), Vector3(0.02, 0.09, 0.02), steel))
+	root.add_child(_ss_sphere(Vector3(-rail + 0.05, ry, 0.0), 0.030, lit))
+	for i in range(4):
+		root.add_child(_ss_sphere(Vector3(rail - 0.05 - float(i) * 0.065, ry, 0.0), 0.030, dead))
+
+	# Slate on the base, tilted up to the reader: one pip IN against one pip OUT.
+	var pw: float = half * 1.55
+	var plate := Node3D.new()
+	plate.position = Vector3(0.0, 0.20, 0.17)
+	plate.rotation_degrees = Vector3(-14.0, 0.0, 0.0)
+	root.add_child(plate)
+	plate.add_child(_ss_box(Vector3.ZERO, Vector3(pw + 0.035, 0.32, 0.014),
+		_ss_mat(Color(0.30, 0.26, 0.21), 0.8, 0.0)))
+	plate.add_child(_ss_box(Vector3(0.0, 0.0, 0.010), Vector3(pw, 0.285, 0.010), slate))
+	for side: float in [-1.0, 1.0]:
+		for i in range(ball_count):
+			var px: float = side * (pw * 0.27) + (float(i) - (ball_count - 1) * 0.5) * (pw * 0.062)
+			var on: bool = (side < 0.0 and i == 0) or (side > 0.0 and i == ball_count - 1)
+			var pm: StandardMaterial3D = (lit if on else dead)
+			plate.add_child(_ss_box(Vector3(px, -0.055, 0.017), Vector3(0.026, 0.026, 0.008), pm))
+	plate.add_child(_ss_box(Vector3(0.0, -0.055, 0.017), Vector3(0.055, 0.008, 0.008), chalk))
+	plate.add_child(_ss_box(Vector3(0.0, -0.040, 0.017), Vector3(0.055, 0.008, 0.008), chalk))
+	plate.add_child(_ss_label("IN", Vector3(-pw * 0.27, 0.055, 0.03), 15, SS_CHALK))
+	plate.add_child(_ss_label("OUT", Vector3(pw * 0.27, 0.055, 0.03), 15, SS_CHALK))
+	# Legs so the slate stands off the base plate rather than floating.
+	for sx2: float in [-pw * 0.36, pw * 0.36]:
+		root.add_child(_ss_link(Vector3(sx2, 0.02, 0.20), Vector3(sx2, 0.11, 0.175), 0.010, steel))
+
+
+# ── Small builders (prefixed so nothing in the cradle can collide) ────────
+func _ss_ball_at(index: int, angle: float) -> Vector3:
+	var spacing: float = ball_radius * 2.0
+	var base_x: float = -(ball_count - 1) * spacing * 0.5 + float(index) * spacing
+	return Vector3(base_x + sin(angle) * string_length,
+		_pivot_y - cos(angle) * string_length, 0.0)
+
+
+func _ss_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _ss_glow(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m
+
+
+func _ss_box(p: Vector3, s: Vector3, m: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = s
+	mi.mesh = bm
+	mi.material_override = m
+	mi.position = p
+	return mi
+
+
+func _ss_sphere(p: Vector3, r: float, m: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = r
+	sm.height = r * 2.0
+	mi.mesh = sm
+	mi.material_override = m
+	mi.position = p
+	return mi
+
+
+# A cylinder spanning a to b, oriented by a hand-built Basis. look_at() needs the node to
+# be in the tree already, and these are built before they are parented.
+func _ss_link(a: Vector3, b: Vector3, r: float, m: StandardMaterial3D) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	var d: Vector3 = b - a
+	var span: float = d.length()
+	cm.top_radius = r
+	cm.bottom_radius = r
+	cm.height = maxf(span, 0.002)
+	mi.mesh = cm
+	mi.material_override = m
+	var dir: Vector3 = Vector3.UP
+	if span > 0.0001:
+		dir = d / span
+	var up: Vector3 = Vector3.UP
+	if absf(dir.dot(up)) > 0.99:
+		up = Vector3.RIGHT
+	var right: Vector3 = dir.cross(up).normalized()
+	var fwd: Vector3 = right.cross(dir).normalized()
+	mi.transform = Transform3D(Basis(right, dir, fwd), (a + b) * 0.5)
+	return mi
+
+
+func _ss_label(text: String, p: Vector3, size: int, c: Color) -> Label3D:
+	var l := Label3D.new()
+	l.text = text
+	l.font_size = size
+	l.pixel_size = 0.002
+	l.modulate = c
+	l.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	l.position = p
+	return l

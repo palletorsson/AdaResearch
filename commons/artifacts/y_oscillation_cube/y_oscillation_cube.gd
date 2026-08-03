@@ -29,6 +29,38 @@ const GRID_SHADER = preload("res://commons/resourses/shaders/Grid.gdshader")
 @export var show_trail: bool = true
 @export var trail_count: int = 5
 
+## AXIS — WHAT A POSITION PERSISTS AS once the cube has left it. Not the amplitude, not the
+## frequency, not the sine: those are what this artifact TEACHES and they run identically at
+## every value. What the demonstration decides is whether an oscillation is a present-tense
+## fact — a cube, here, now — or something that leaves a record, and what kind of record a
+## space is willing to hold.
+##
+## Adopted word for word — and value for value — from [[mystic_writing_pad]], where the
+## vocabulary comes from, and shared with [[draw_dot]], [[grab_sphere_point_snap]],
+## [[draw_triangle_faces]] and [[interactive_point_origin_force]]. Each of those puts a mark
+## into space and has to decide what space does with it; a bouncing cube is the same
+## question asked of a body instead of a stylus. Its two siblings in this registry,
+## [[rotating_cube_demo]] and [[oscillation_controlled_cube]], take the same five words.
+##
+##   none      space does not keep it. The rail and the markers stand, the cube runs, and
+##             nothing at all is left behind it — a present with no past
+##   trace     the past stays ON THE SURFACE at one strength. Fourteen ghosts, every one the
+##             same size and the same ink, no fade — accumulation without depth
+##   lattice   a position counts only where it is legal. A ruled ladder of nine rungs stands
+##             the full amplitude beside the rail and every ghost is quantised onto it, so
+##             the trail is a stair of stations instead of a continuum
+##   archive   nothing sinks past recall. Twenty-four ghosts at full brightness, none dimmed
+##             by age, until the column is more ghost than air
+##   wax       the legacy lineage, byte for byte — five ghosts graded by age over a depth
+##             that keeps the lot, each older trace weighted differently from the last
+##
+## `wax` is this artifact's default because `wax` is what it already was: five graded ghosts
+## have shipped since it was written. The other four are the positions it argues against,
+## made standable. [[oscillation_controlled_cube]] defaults to `none` for the same reason —
+## it has never kept anything — and that is a true statement about it, not a shortfall.
+@export_enum("none", "trace", "lattice", "archive", "wax") var retention: String = "wax"
+const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
+
 var _cube_mesh: MeshInstance3D
 var _cube_material: ShaderMaterial
 var _label: Label3D
@@ -50,6 +82,11 @@ func _ready():
 	_create_rail()
 	_create_labels()
 	_create_trail_ghosts()
+	# DNA, LAST: the retention pass runs after the whole legacy build exists. "wax" returns
+	# on the first line, so the shipped lineage keeps its exact children in their exact order.
+	var _r: String = str(retention).strip_edges().to_lower()
+	retention = _r if RETENTIONS.has(_r) else "wax"
+	_apply_retention()
 
 
 func _create_cube():
@@ -214,7 +251,12 @@ func _process(delta):
 func _update_trail(current_y_offset: float):
 	if not show_trail:
 		return
-	
+
+	# RETENTION "lattice" only: a position counts where it is legal. _ret_quantise is 0.0 on
+	# every other value, so this compare is the whole cost on the legacy path.
+	if _ret_quantise > 0.0:
+		current_y_offset = snappedf(current_y_offset, _ret_quantise)
+
 	# Add current position to history
 	_trail_history.push_front(current_y_offset)
 	if _trail_history.size() > trail_count:
@@ -292,3 +334,132 @@ func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])
+	# Only a token that actually names the axis re-runs the pass; everything else keeps the
+	# behaviour this function has always had.
+	if config_data.has("retention"):
+		var _r: String = str(config_data["retention"]).strip_edges().to_lower()
+		retention = _r if RETENTIONS.has(_r) else "wax"
+		_apply_retention()
+
+
+# ── RETENTION ────────────────────────────────────────────────────────────────
+# One axis, five moments, shared word for word with mystic_writing_pad.gd and with the two
+# sibling motion demos in this registry. Everything below runs AFTER the legacy _ready()
+# body; "wax" returns on the first line, so the shipped lineage is untouched — same nodes,
+# same order, same materials, same alpha ramp.
+#
+# The rungs differ only in HOW MANY ghosts exist, how they are weighted, and whether the
+# positions they take are quantised. The cube, the rail, the markers, the labels, the sine
+# and the colour feedback are identical at every value.
+
+## Ladder rung spacing, in metres. 0.0 means "do not quantise" — every value but `lattice`.
+var _ret_quantise: float = 0.0
+## The ruled ladder built by `lattice`, freed before a rebuild.
+var _ret_rule: Node3D = null
+
+const RET_TRACE_COUNT := 14
+const RET_ARCHIVE_COUNT := 24
+const RET_LATTICE_COUNT := 9
+const RET_LATTICE_RUNGS := 9
+
+
+func _apply_retention() -> void:
+	if retention == "wax" or not RETENTIONS.has(retention):
+		return                       # the legacy lineage: five graded ghosts, as shipped
+
+	# Everything past here replaces the trail wholesale, so clear the shipped one first.
+	for ghost in _trail_ghosts:
+		if is_instance_valid(ghost):
+			remove_child(ghost)
+			ghost.queue_free()
+	_trail_ghosts.clear()
+	_trail_history.clear()
+	if _ret_rule != null and is_instance_valid(_ret_rule):
+		remove_child(_ret_rule)
+		_ret_rule.queue_free()
+	_ret_rule = null
+	_ret_quantise = 0.0
+
+	match retention:
+		"none":
+			trail_count = 0          # nothing is kept; the history stops growing too
+		"trace":
+			trail_count = RET_TRACE_COUNT
+			_ret_build_uniform_ghosts(RET_TRACE_COUNT, cube_size * 0.85, 0.30, 0.22, 2.0)
+		"archive":
+			trail_count = RET_ARCHIVE_COUNT
+			_ret_build_uniform_ghosts(RET_ARCHIVE_COUNT, cube_size * 0.90, 0.62, 0.55, 3.0)
+		"lattice":
+			trail_count = RET_LATTICE_COUNT
+			_ret_quantise = (amplitude * 2.0) / float(maxi(RET_LATTICE_RUNGS - 1, 1))
+			_ret_build_uniform_ghosts(RET_LATTICE_COUNT, cube_size * 0.80, 0.42, 0.30, 2.5)
+			_ret_build_rule()
+		_:
+			pass
+
+
+## Ghosts that are all the SAME: one size, one alpha, no ramp. `trace` uses this to say the
+## past sits beside the present rather than under it; `archive` uses it at full strength to
+## say nothing has sunk past recall.
+func _ret_build_uniform_ghosts(count: int, size: float, alpha: float, emission: float, width: float) -> void:
+	for i in range(count):
+		var ghost := MeshInstance3D.new()
+		var box := BoxMesh.new()
+		box.size = Vector3(size, size, size)
+		ghost.mesh = box
+		ghost.visible = false
+
+		var mat := ShaderMaterial.new()
+		mat.shader = GRID_SHADER
+		mat.set_shader_parameter("modelColor", Color(cube_color.r * 0.2, cube_color.g * 0.2, cube_color.b * 0.2, alpha))
+		mat.set_shader_parameter("wireframeColor", Color(cube_color.r, cube_color.g, cube_color.b, alpha))
+		mat.set_shader_parameter("emissionColor", Color(cube_color.r, cube_color.g, cube_color.b, alpha))
+		mat.set_shader_parameter("width", width)
+		mat.set_shader_parameter("blur", 0.4)
+		mat.set_shader_parameter("emission_strength", emission)
+		mat.set_shader_parameter("show_interior", false)
+		ghost.material_override = mat
+
+		add_child(ghost)
+		_trail_ghosts.append(ghost)
+
+
+## LATTICE only — the ruled ladder the positions are quantised onto. Nine rungs standing the
+## full amplitude beside the rail, plus the two end stops, so the stair the ghosts climb is
+## drawn as well as obeyed. Without the drawing, quantisation looks like a stutter; with it,
+## it looks like a rule.
+func _ret_build_rule() -> void:
+	var rule := Node3D.new()
+	rule.name = "RetentionRule"
+	add_child(rule)
+	_ret_rule = rule
+
+	var ink := StandardMaterial3D.new()
+	ink.albedo_color = Color(0.70, 0.78, 0.86, 0.75)
+	ink.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	ink.emission_enabled = true
+	ink.emission = Color(0.55, 0.70, 0.85)
+	ink.emission_energy_multiplier = 0.45
+
+	var rx: float = -cube_size * 0.85
+	for k in range(RET_LATTICE_RUNGS):
+		var f: float = float(k) / float(maxi(RET_LATTICE_RUNGS - 1, 1))
+		var ry: float = _base_y - amplitude + amplitude * 2.0 * f
+		var long_rung: bool = (k == 0) or (k == RET_LATTICE_RUNGS - 1) or (k * 2 == RET_LATTICE_RUNGS - 1)
+		var wide: float = cube_size * (0.80 if long_rung else 0.48)
+		var bar := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = Vector3(wide, 0.004, 0.010)
+		bar.mesh = bm
+		bar.material_override = ink
+		bar.position = Vector3(rx - wide * 0.5 + cube_size * 0.10, ry, 0)
+		rule.add_child(bar)
+
+	# The stile the rungs hang off, so the ladder reads as one object.
+	var stile := MeshInstance3D.new()
+	var sm := BoxMesh.new()
+	sm.size = Vector3(0.006, amplitude * 2.0, 0.010)
+	stile.mesh = sm
+	stile.material_override = ink
+	stile.position = Vector3(rx + cube_size * 0.10, _base_y, 0)
+	rule.add_child(stile)

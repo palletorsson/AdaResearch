@@ -102,6 +102,42 @@ const PRESET_COLORS := {
 @export_range(-40.0, 6.0, 0.5) var volume_db: float = -6.0
 @export_range(0.5, 20.0, 0.5) var morph_speed: float = 4.0  # How fast presets morph (higher = faster)
 
+## AXIS — HOW MUCH APPARATUS THIS ADMITS EXISTS BEHIND THE HAND. Not which timbre, not the
+## harmonic amplitudes, not the presets: those are what the artifact TEACHES and they stay
+## exactly as shipped at every value. What the sculptor SHOWS is whether additive synthesis
+## is eight numbers floating in a room, or a machine that happens to expose eight of them.
+##
+## Adopted word for word — and value for value — from [[MarioSoundController]] and the seven
+## promoted audio racks in this same registry (RackSineBasic, RackMoogBass, Rack303Acid,
+## Rack808Drums, RackDX7Piano, RackAmbientDrone, RackMario). This is the same claim pointed
+## at a different face: a panel of eight vertical sliders instead of a grabbed ball or a
+## preset rack. Same word, same five moments, so a lab holding a rack and this sculptor
+## cannot have one of them admitting a circuit while the other insists there is no machine.
+##
+##   none     the legacy lineage, byte for byte — the pale panel alone, edge on to nothing.
+##            A FACE with no body: the slider heights ARE the spectrum and the sound comes
+##            from wherever sound comes from.
+##   plate    one dark shell standing behind the pale panel, oversailing it on every side,
+##            with an edge lip and a lit strip along the foot. The instrument acquires a
+##            front, and therefore a back you are not shown.
+##   vacancy  the shell plus blanking covers over nine of twelve panel positions, standing
+##            proud in lighter metal with a screw at each end, the left-hand column left
+##            open where the eight harmonics live. What your hand can reach is the small
+##            fitted subset of what the format would accept.
+##   frame    no shell — two punched rack rails past the panel edges and two cross members
+##            over and under it, the room visible straight through the gap behind. One unit
+##            among many, rackable, made to be pulled and replaced.
+##   works    no shell either — three boards on standoffs behind and beside the panel,
+##            component blocks on their faces, wire runs crossing between them. The eight
+##            sliders are revealed as the near ends of something soldered.
+##
+## STRICTLY ADDITIVE. "none" builds nothing at all and is the default, so all four existing
+## placements render exactly as before. Nothing here reads or writes harmonic_amplitudes,
+## the presets, the morph, the audio or the displays — the body is staged AROUND the panel
+## and stops there.
+@export_enum("none", "plate", "vacancy", "frame", "works") var machinery: String = "none"
+const MACHINERIES: PackedStringArray = ["none", "plate", "vacancy", "frame", "works"]
+
 ## Internal state
 var harmonic_amplitudes: Array[float] = []  # Current amplitude for each harmonic
 var target_amplitudes: Array[float] = []     # Target (from preset morph)
@@ -145,6 +181,12 @@ func _ready() -> void:
 	_build_displays()
 	_setup_audio()
 	_sync_sliders_to_amplitudes()
+
+	# DNA, LAST: the machinery body is appended after every legacy child exists, so no node
+	# above it changes index, position or parent. "none" builds nothing at all.
+	var _m: String = str(machinery).strip_edges().to_lower()
+	machinery = _m if MACHINERIES.has(_m) else "none"
+	_build_machinery()
 
 # ═══════════════════════════════════════════
 #  CONSTRUCTION
@@ -466,4 +508,198 @@ func _exit_tree() -> void:
 			btn.pressed.disconnect(_on_preset_pressed)
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	# Was a no-op stub, so a map token could never reach anything on this artifact. It now
+	# reads exactly one key. An absent or unknown "machinery" leaves the shipped value alone,
+	# which keeps every existing placement on the legacy path.
+	if config_data.has("machinery"):
+		var want: String = str(config_data["machinery"]).strip_edges().to_lower()
+		if MACHINERIES.has(want) and want != machinery:
+			machinery = want
+			_build_machinery()
+
+
+# ── MACHINERY ────────────────────────────────────────────────────────────────
+# One axis, five moments, shared word for word with MarioSoundController and the seven
+# promoted audio racks. Everything below runs AFTER the legacy _ready() body and lives
+# inside one host node parented to this root (NOT to _components), so removing that single
+# node restores the shipped scene exactly. Nothing here reads or writes the harmonics, the
+# presets, the morph or the audio.
+
+const MACH_HOST := "TimbreMachinery"
+## The pale panel is 0.82 x 0.60 and sits at z = -0.008; the sliders, buttons and displays
+## stand in front of it at z = +0.02. The body therefore lives at negative z.
+const MACH_PANEL_W := 0.82
+const MACH_PANEL_H := 0.60
+const MACH_BACK := 0.030    # air between the panel's back face and the body
+const MACH_PLATE := 0.018   # shell thickness
+const MACH_COVER := 0.010   # blanking cover thickness, standing proud of the shell
+## How far the body oversails the panel on each side. Sized deliberately generous: the panel
+## is opaque and the sweep's camera sits at yaw 0.62 / pitch -0.26, so a body that only just
+## cleared the panel would be hidden behind it from three quarters of that view. At 0.16 the
+## shell reads as a 1.14 x 0.92 mass with a clear border showing all the way round.
+const MACH_MARGIN := 0.16
+
+var _mach_host: Node3D = null
+
+
+func _build_machinery() -> void:
+	if _mach_host != null and is_instance_valid(_mach_host):
+		remove_child(_mach_host)
+		_mach_host.queue_free()
+	_mach_host = null
+	if machinery == "none" or not MACHINERIES.has(machinery):
+		return                       # the legacy lineage builds nothing at all
+	var host := Node3D.new()
+	host.name = MACH_HOST
+	add_child(host)
+	_mach_host = host
+
+	var w: float = MACH_PANEL_W + MACH_MARGIN * 2.0
+	var h: float = MACH_PANEL_H + MACH_MARGIN * 2.0
+	var back: float = -MACH_BACK
+
+	match machinery:
+		"plate":
+			_machinery_plate(host, w, h, back)
+		"vacancy":
+			_machinery_plate(host, w, h, back)
+			_machinery_vacancy(host, w, h, back)
+		"frame":
+			_machinery_frame(host, w, h)
+		"works":
+			_machinery_works(host, w, h, back)
+		_:
+			pass
+
+
+## PLATE — the machine as a SURFACE. One dark shell filling the space behind the pale panel
+## and standing past it on every side, a lip proud of its edge, a lit strip along the foot.
+## The sculptor acquires a front, and therefore a back you are not shown.
+func _machinery_plate(host: Node3D, w: float, h: float, back: float) -> void:
+	var shell: StandardMaterial3D = _mach_mat(Color(0.125, 0.130, 0.150), 0.72, 0.25)
+	var lip: StandardMaterial3D = _mach_mat(Color(0.075, 0.078, 0.092), 0.62, 0.45)
+	_mach_box(host, Vector3(0, 0, back - MACH_PLATE * 0.5), Vector3(w, h, MACH_PLATE), shell)
+	_mach_box(host, Vector3(0, 0, back - MACH_PLATE - 0.005),
+		Vector3(w + 0.030, h + 0.030, 0.010), lip)
+	# The only emissive surface on the body, so it owns the brightest pixels in any frame the
+	# sculptor appears in — "there is a machine, and it is powered" from across a room.
+	_mach_box(host, Vector3(0, -h * 0.5 + 0.030, back + 0.006),
+		Vector3(w * 0.66, 0.009, 0.008), _mach_lit(Color(0.20, 0.85, 1.0)))
+
+
+## VACANCY — the machine as a FORMAT. Twelve panel positions in a 4 x 3 field; the left-hand
+## column stays open where the eight harmonic sliders live, and the other nine take blanking
+## covers in lighter metal with a screw at each end. What your hand can reach is shown as the
+## small fitted subset of what the frame would accept.
+func _machinery_vacancy(host: Node3D, w: float, h: float, back: float) -> void:
+	var cover: StandardMaterial3D = _mach_mat(Color(0.215, 0.225, 0.250), 0.55, 0.38)
+	var screw: StandardMaterial3D = _mach_mat(Color(0.42, 0.43, 0.46), 0.35, 0.75)
+	var cols: int = 4
+	var rows: int = 3
+	var gap: float = 0.012
+	var cw: float = w / float(cols)
+	var ch: float = h / float(rows)
+	var cn: float = back + MACH_COVER * 0.5
+	for gx in range(cols):
+		for gy in range(rows):
+			if gx == 0:
+				continue            # the harmonic column keeps its positions open
+			var u: float = -w * 0.5 + (float(gx) + 0.5) * cw
+			var v: float = -h * 0.5 + (float(gy) + 0.5) * ch
+			_mach_box(host, Vector3(u, v, cn), Vector3(cw - gap, ch - gap, MACH_COVER), cover)
+			for sx in [-1.0, 1.0]:
+				var sf: float = float(sx)
+				_mach_box(host, Vector3(u + sf * maxf(cw * 0.5 - gap - 0.014, 0.006), v,
+					cn + MACH_COVER * 0.5), Vector3(0.009, 0.009, 0.006), screw)
+
+
+## FRAME — the machine as INSTALLED EQUIPMENT. Two punched rails past the panel edges and two
+## cross members over and under it; the middle stays open, so the room shows through where a
+## shell would be. One unit among many, rackable, made to be pulled and replaced.
+func _machinery_frame(host: Node3D, w: float, h: float) -> void:
+	var rail: StandardMaterial3D = _mach_mat(Color(0.300, 0.310, 0.340), 0.42, 0.68)
+	var hole: StandardMaterial3D = _mach_mat(Color(0.045, 0.045, 0.055), 0.85, 0.10)
+	var rail_w: float = 0.050
+	var depth: float = 0.085
+	var cn: float = -0.042
+	for sx in [-1.0, 1.0]:
+		var sf: float = float(sx)
+		var ru: float = sf * (w * 0.5 + rail_w * 0.5 + 0.008)
+		_mach_box(host, Vector3(ru, 0, cn), Vector3(rail_w, h + 0.11, depth), rail)
+		for k in range(8):
+			var hv: float = -h * 0.5 + (float(k) + 0.5) * (h / 8.0)
+			_mach_box(host, Vector3(ru, hv, cn + depth * 0.5 - 0.005),
+				Vector3(0.016, 0.016, 0.010), hole)
+	var span: float = w + 2.0 * (rail_w + 0.014)
+	for sy in [-1.0, 1.0]:
+		var sg: float = float(sy)
+		_mach_box(host, Vector3(0, sg * (h * 0.5 + 0.040), cn),
+			Vector3(span, 0.040, depth * 0.85), rail)
+
+
+## WORKS — the machine as CIRCUITRY. Three boards on standoffs behind the panel, the outer
+## two set wide enough to stand clear of its edges, component blocks on their faces and wire
+## runs crossing between them. No shell at all: the eight sliders stop pretending the sound
+## comes from nowhere.
+func _machinery_works(host: Node3D, w: float, h: float, back: float) -> void:
+	var board: StandardMaterial3D = _mach_mat(Color(0.085, 0.230, 0.155), 0.62, 0.15)
+	var stand: StandardMaterial3D = _mach_mat(Color(0.380, 0.390, 0.420), 0.40, 0.72)
+	var part: StandardMaterial3D = _mach_mat(Color(0.100, 0.100, 0.120), 0.70, 0.20)
+	var wire: StandardMaterial3D = _mach_mat(Color(0.620, 0.360, 0.160), 0.55, 0.45)
+	var bn: float = back - 0.060
+	var bw: float = w * 0.29
+	var bh: float = h * 0.66
+	for i in range(3):
+		var off: float = -0.02
+		if i == 1:
+			off = 0.07
+		var bu: float = w * (-0.335 + 0.335 * float(i))
+		var bv: float = h * off
+		_mach_box(host, Vector3(bu, bv, bn), Vector3(bw, bh, 0.007), board)
+		for sx in [-1.0, 1.0]:
+			for sy in [-1.0, 1.0]:
+				var fx: float = float(sx)
+				var fy: float = float(sy)
+				_mach_box(host, Vector3(bu + fx * (bw * 0.5 - 0.018),
+					bv + fy * (bh * 0.5 - 0.018), bn + 0.026),
+					Vector3(0.013, 0.013, 0.050), stand)
+		for k in range(3):
+			var kv: float = bv + bh * (0.28 - 0.28 * float(k))
+			_mach_box(host, Vector3(bu - bw * 0.16 + bw * 0.16 * float(k), kv, bn + 0.015),
+				Vector3(bw * 0.34, h * 0.055, 0.021), part)
+	for wk in range(5):
+		var wv: float = -h * 0.5 + h * (0.13 + 0.185 * float(wk))
+		_mach_box(host, Vector3(0, wv, bn + 0.040), Vector3(w * 0.94, 0.007, 0.007), wire)
+	for px in [-1.0, 1.0]:
+		var pf: float = float(px)
+		_mach_box(host, Vector3(pf * (w * 0.5 + 0.016), 0, bn + 0.032),
+			Vector3(0.019, h * 0.92, 0.062), stand)
+
+
+# ── machinery helpers ────────────────────────────────────────────────────────
+
+func _mach_box(host: Node3D, centre: Vector3, size: Vector3, mat: Material) -> void:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = centre
+	host.add_child(mi)
+
+
+func _mach_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _mach_lit(c: Color) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = 2.4
+	return m

@@ -12,7 +12,20 @@
 # emerges: Superposition from dipole (two sources cancel/reinforce). Curl from vortex. Convergence from gravity.
 # needs: VR type buttons [has], strength slider [has], equation labels [has]. Could use: particle tracer following field lines.
 # relationships: Feeds into ForcesSystems (particles in fields). Contrasts with vector_fields (same concept, different rendering).
+#   Kin to [[wave_interference_tank]] and [[sine_wave_controller]] on the `evidence` axis — three
+#   instruments, one ladder, the same question about how much working an instrument shows.
 # truth: Motion is reading, not deciding. The field tells the particle where to go.
+#
+# DNA AXIS — evidence: how much of the field's arithmetic the grid puts on the table. The word and
+#   its four rungs are taken character for character from [[wave_interference_tank]], which asks the
+#   same question of a different phenomenon; a private synonym here would have split one family in
+#   two. The ladder is monotone in disclosure — result (the sampled arrows alone, the legacy
+#   default) < trace (the same arrows joined up into the paths a particle would take) < sources
+#   (the equipotential family the source emits, so you can see WHERE the arrows come from) <
+#   longhand (the two operands, |F| and F-hat, printed as separate plates above the grid, the
+#   product below them).
+# emerges: at `result` the field is a texture you accept; at `longhand` it is a multiplication you
+#   can check, because both factors are visible side by side and the arrow below is their product.
 
 extends Node3D
 
@@ -44,11 +57,62 @@ const BUTTON_LABEL_PIXEL_SIZE := 0.0008
 
 ## Field type
 enum FieldType { GRAVITY, POINT_CHARGE, DIPOLE, VORTEX, CUSTOM }
+
+# Declared ahead of field_type because that property's setter reads _evidence_built, and an
+# exported property can be assigned by the .tscn before this line would otherwise have run.
+# A typed bool is false from construction, so the legacy path is safe either way — this is
+# belt and braces, not a fix for a live bug.
+var _evidence_root: Node3D
+var _evidence_built: bool = false
+
 ## Which force field equation to visualize
 @export var field_type: FieldType = FieldType.POINT_CHARGE:
 	set(value):
 		field_type = value
 		_update_field()
+		# A new equation is a new set of streamlines and a new equipotential family, so any
+		# rung above `result` has to be rebuilt. Guarded on _evidence_built, which is false
+		# until _ready has finished — and permanently false on the default rung, so the
+		# legacy path never enters this branch at all.
+		if _evidence_built:
+			_rebuild_evidence()
+
+## AXIS — HOW MUCH OF THE ARITHMETIC the grid puts on the table. Adopted word for word from
+## [[wave_interference_tank]], which carries the same four rungs for superposition; the pair
+## (and [[sine_wave_controller]], on the shorter three-rung version) ask one question in three
+## bodies, so the words must not drift.
+##
+##   result    the 8x8 grid of scaled arrows alone — the shipped look, 6 rooms, byte for byte
+##   trace     25 streamlines seeded on a 5x5 lattice and integrated 45 steps each way, drawn
+##             as 6 mm emissive ribbons lying 8 mm over the base plate: the arrows joined up
+##             into the paths a particle would actually take, so the local samples become one
+##             continuous flow you can follow with a finger
+##   sources   the equipotential family, six closed rings widening outward around every live
+##             source (both of them under DIPOLE) — or, under GRAVITY where the source is a
+##             plane and not a point, six straight parallel rules. The arrows stop being a
+##             free-floating texture and acquire an origin
+##   longhand  the two operands printed flat above the grid as a pair of 0.8 m texture plates
+##             at y = 0.30 — MAGNITUDE on the left (log-scaled |F| through a black-orange-white
+##             ramp) and DIRECTION on the right (the same field's angle as hue) — with the
+##             product, the arrow grid itself, lying below them
+##
+## Rungs are APPEND-ONLY: everything hangs off one Evidence node added after the last legacy
+## child, so no index or position above it moves. `result` builds nothing, not even the root.
+@export_enum("result", "trace", "sources", "longhand") var evidence: String = "result"
+
+## Allow-list. A typo in a map token falls back to the shipped look rather than stranding a
+## placement with half an apparatus.
+const EVIDENCES: PackedStringArray = ["result", "trace", "sources", "longhand"]
+
+# --- Evidence apparatus (all null on the legacy default) ---
+const EV_STREAM_SEEDS := 5          # 5x5 lattice of streamline seeds
+const EV_STREAM_STEPS := 45         # integration steps each way from a seed
+const EV_STREAM_DT := 0.012         # metres advanced per step (direction is normalised)
+const EV_RIBBON_W := 0.003          # half-width of a streamline ribbon
+const EV_RING_RADII := [0.05, 0.10, 0.16, 0.23, 0.31, 0.40]
+const EV_RING_SEGMENTS := 72
+const EV_PLATE_RES := 64            # texture resolution of a longhand operand plate
+const EV_PLATE_Y := 0.30            # height the operand plates hang at
 
 ## Multiplier for field magnitude (0.1–5.0)
 @export_range(0.1, 5.0, 0.1) var field_strength: float = 1.0:
@@ -92,6 +156,9 @@ func _ready() -> void:
 	_create_labels()
 	_create_vr_controls()
 	_update_field()
+	# Appended LAST, after every legacy child exists and after the arrows have been oriented,
+	# so the default rung leaves the shipped tree untouched down to child order.
+	_build_evidence()
 
 func _exit_tree() -> void:
 	for node in _created_nodes:
@@ -395,5 +462,249 @@ func set_strength(s: float) -> void:
 func move_source(pos: Vector3) -> void:
 	source_position = pos
 
+## LATENT BUG, still only PARTLY closed here (was force_field_visualizer.gd:399, the whole body
+## was `pass`). The artifact advertised a configuration hook and silently discarded every key a
+## map handed it, so field_type / field_strength / source_position — the three things the
+## @identity calls critical — were unreachable from a map token even though all three are live
+## @exports with working setters. Reading `evidence` is what this promotion needs; the other keys
+## are DELIBERATELY still unread, because wiring field_type from a token would change which law a
+## given room teaches and that is a curriculum decision, not a DNA one. Reported, not silently
+## widened.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	if config_data.has("evidence"):
+		var word: String = str(config_data["evidence"]).strip_edges().to_lower()
+		evidence = word if EVIDENCES.has(word) else evidence
+		_rebuild_evidence()
+
+
+# ── Evidence axis ─────────────────────────────────────────────────────
+# Every rung's geometry hangs off one Evidence node and only there, so a changed token can drop
+# the whole apparatus and build a different one without touching an arrow.
+
+func _rebuild_evidence() -> void:
+	_teardown_evidence()
+	_build_evidence()
+
+
+func _teardown_evidence() -> void:
+	if is_instance_valid(_evidence_root):
+		_created_nodes.erase(_evidence_root)
+		remove_child(_evidence_root)
+		_evidence_root.queue_free()
+	_evidence_root = null
+	_evidence_built = false
+
+
+func _build_evidence() -> void:
+	match evidence:
+		"trace":
+			_ev_root()
+			_ev_streamlines()
+		"sources":
+			_ev_root()
+			_ev_equipotentials()
+		"longhand":
+			_ev_root()
+			_ev_operand_plates()
+		_:
+			return                                # "result" — the legacy lineage, nothing added
+	_evidence_built = true
+
+
+func _ev_root() -> void:
+	_evidence_root = Node3D.new()
+	_evidence_root.name = "Evidence"
+	add_child(_evidence_root)
+	_created_nodes.append(_evidence_root)
+
+
+## Unshaded emissive material for the drawn apparatus — the arrows are lit geometry, the working
+## is drawn ON TOP of the world rather than in it, which is the whole point of showing it.
+func _ev_line_material(tint: Color) -> StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = tint
+	mat.emission_enabled = true
+	mat.emission = tint
+	mat.emission_energy_multiplier = 1.6
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return mat
+
+
+## TRACE — the arrows joined up. Seeds on a 5x5 lattice, integrated both ways along the
+## normalised field so step length is uniform and a strong region does not eat the budget.
+func _ev_streamlines() -> void:
+	var im := ImmediateMesh.new()
+	var mi := MeshInstance3D.new()
+	mi.name = "Streamlines"
+	mi.mesh = im
+	mi.material_override = _ev_line_material(Color(0.55, 0.95, 1.0))
+	_evidence_root.add_child(mi)
+
+	var half: float = field_size * 0.5
+	var step: float = field_size / float(EV_STREAM_SEEDS + 1)
+	for j in range(EV_STREAM_SEEDS):
+		for i in range(EV_STREAM_SEEDS):
+			var seed_pos := Vector3(-half + step * float(i + 1), 0.0, -half + step * float(j + 1))
+			var back: Array[Vector3] = _ev_integrate(seed_pos, -1.0)
+			var fwd: Array[Vector3] = _ev_integrate(seed_pos, 1.0)
+			var path: Array[Vector3] = []
+			for k in range(back.size()):
+				path.append(back[back.size() - 1 - k])
+			path.append(seed_pos)
+			path.append_array(fwd)
+			_ev_ribbon(im, path, EV_RIBBON_W, 0.008)
+
+
+## March the normalised field from `start`; sign_dir = +1 downstream, -1 upstream. Stops at the
+## plate edge or wherever the field dies (the centre of a vortex, the surface of a charge).
+func _ev_integrate(start: Vector3, sign_dir: float) -> Array[Vector3]:
+	var out: Array[Vector3] = []
+	var p: Vector3 = start
+	var half: float = field_size * 0.5
+	for _s in range(EV_STREAM_STEPS):
+		var f: Vector3 = _calculate_field(p)
+		if f.length() < 0.0001:
+			break
+		p = p + f.normalized() * (EV_STREAM_DT * sign_dir)
+		# The y bound matters only under GRAVITY, whose streamlines are the one family that
+		# leaves the plate: they fall straight out of it, which is exactly what a uniform
+		# downward field does and is worth seeing rather than suppressing.
+		if absf(p.x) > half or absf(p.z) > half or absf(p.y) > half:
+			break
+		out.append(p)
+	return out
+
+
+## A flat ribbon along a polyline, lying `lift` above the base plate. Line primitives render one
+## pixel wide and would be measured as noise; a ribbon is geometry.
+func _ev_ribbon(im: ImmediateMesh, path: Array[Vector3], half_w: float, lift: float) -> void:
+	if path.size() < 2:
+		return
+	im.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
+	for i in range(path.size()):
+		var a: Vector3 = path[i]
+		var b: Vector3 = path[mini(i + 1, path.size() - 1)]
+		if i == path.size() - 1:
+			b = a + (a - path[i - 1])
+		var dir: Vector3 = b - a
+		dir.y = 0.0                               # a purely vertical run (GRAVITY) falls through
+		if dir.length() < 0.00001:                # to RIGHT, so its ribbon widens across Z
+			dir = Vector3.RIGHT
+		var perp: Vector3 = Vector3(-dir.z, 0.0, dir.x).normalized() * half_w
+		var base := Vector3(a.x, a.y + lift, a.z)
+		im.surface_add_vertex(base + perp)
+		im.surface_add_vertex(base - perp)
+	im.surface_end()
+
+
+## SOURCES — where the arrows come from. A point source emits a family of nested equipotential
+## rings; a uniform field's source is a plane, and in plan view a plane reads as parallel rules.
+func _ev_equipotentials() -> void:
+	var im := ImmediateMesh.new()
+	var mi := MeshInstance3D.new()
+	mi.name = "Equipotentials"
+	mi.mesh = im
+	mi.material_override = _ev_line_material(Color(1.0, 0.82, 0.42))
+	_evidence_root.add_child(mi)
+
+	var half: float = field_size * 0.5
+	if field_type == FieldType.GRAVITY or field_type == FieldType.CUSTOM:
+		for i in range(EV_RING_RADII.size()):
+			var z: float = -half + field_size * (float(i) + 0.5) / float(EV_RING_RADII.size())
+			var rule: Array[Vector3] = [Vector3(-half, 0.0, z), Vector3(half, 0.0, z)]
+			_ev_ribbon(im, rule, EV_RIBBON_W * 1.4, 0.006)
+		return
+
+	var centres: Array[Vector3] = [source_position]
+	if field_type == FieldType.DIPOLE:
+		centres.append(source_position + Vector3(0.2, 0, 0))
+	for c in centres:
+		for r in EV_RING_RADII:
+			var ring: Array[Vector3] = []
+			for s in range(EV_RING_SEGMENTS + 1):
+				var a: float = TAU * float(s) / float(EV_RING_SEGMENTS)
+				ring.append(c + Vector3(cos(a) * float(r), 0.0, sin(a) * float(r)))
+			_ev_ribbon(im, ring, EV_RIBBON_W * 1.4, 0.006)
+
+
+## LONGHAND — the multiplication written out. An arrow is |F| times F-hat, and the shipped grid
+## shows only the product; these two plates show the factors, printed flat above the field so the
+## product lies underneath them and can be read against both.
+func _ev_operand_plates() -> void:
+	var mag_img := Image.create(EV_PLATE_RES, EV_PLATE_RES, false, Image.FORMAT_RGB8)
+	var dir_img := Image.create(EV_PLATE_RES, EV_PLATE_RES, false, Image.FORMAT_RGB8)
+	var half: float = field_size * 0.5
+	var mags := PackedFloat32Array()
+	mags.resize(EV_PLATE_RES * EV_PLATE_RES)
+	var peak: float = 0.0
+	var idx: int = 0
+	for j in range(EV_PLATE_RES):
+		for i in range(EV_PLATE_RES):
+			var x: float = -half + field_size * (float(i) + 0.5) / float(EV_PLATE_RES)
+			var z: float = -half + field_size * (float(j) + 0.5) / float(EV_PLATE_RES)
+			var f: Vector3 = _calculate_field(Vector3(x, 0.0, z))
+			var m: float = f.length()
+			mags[idx] = m
+			idx += 1
+			peak = maxf(peak, m)
+			var ang: float = atan2(f.z, f.x)
+			var hue: float = fmod((ang + PI) / TAU, 1.0)
+			var sat: float = 0.85 if m > 0.00001 else 0.0
+			dir_img.set_pixel(i, j, Color.from_hsv(hue, sat, 1.0))
+	# Log scaling: an inverse-square field spans four decades, and a linear ramp would print one
+	# white dot on a black square. The ramp is black -> orange -> white, the same warm family the
+	# source marker already uses.
+	var denom: float = log(1.0 + peak)
+	idx = 0
+	for j in range(EV_PLATE_RES):
+		for i in range(EV_PLATE_RES):
+			var v: float = 0.0
+			if denom > 0.00001:
+				v = clampf(log(1.0 + mags[idx]) / denom, 0.0, 1.0)
+			idx += 1
+			var col: Color = Color(0.04, 0.02, 0.02).lerp(Color(1.0, 0.55, 0.12), minf(v * 2.0, 1.0))
+			if v > 0.5:
+				col = col.lerp(Color(1.0, 1.0, 0.95), (v - 0.5) * 2.0)
+			mag_img.set_pixel(i, j, col)
+
+	var dx: float = field_size * 0.62
+	_ev_plate(mag_img, Vector3(-dx, EV_PLATE_Y, 0.0), "|F|")
+	_ev_plate(dir_img, Vector3(dx, EV_PLATE_Y, 0.0), "F-hat")
+
+	var rule := Label3D.new()
+	rule.name = "LonghandRule"
+	rule.text = "F  =  |F|  x  F-hat"
+	rule.pixel_size = LABEL_PIXEL_SIZE
+	rule.font_size = 20
+	rule.position = Vector3(0, EV_PLATE_Y + 0.02, 0)
+	rule.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_evidence_root.add_child(rule)
+
+
+func _ev_plate(img: Image, at: Vector3, caption: String) -> void:
+	var tex := ImageTexture.create_from_image(img)
+	var quad := QuadMesh.new()
+	quad.size = Vector2(field_size, field_size)
+	var mi := MeshInstance3D.new()
+	mi.name = "Operand_%s" % caption
+	mi.mesh = quad
+	mi.rotation_degrees = Vector3(-90, 0, 0)      # lie flat, same plane as the field below
+	mi.position = at
+	var mat := StandardMaterial3D.new()
+	mat.albedo_texture = tex
+	mat.emission_enabled = true
+	mat.emission_texture = tex
+	mat.emission_energy_multiplier = 0.9
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	mi.material_override = mat
+	_evidence_root.add_child(mi)
+
+	var cap := Label3D.new()
+	cap.text = caption
+	cap.pixel_size = LABEL_PIXEL_SIZE
+	cap.font_size = 16
+	cap.position = at + Vector3(0, 0.02, field_size * 0.5 + 0.04)
+	cap.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_evidence_root.add_child(cap)

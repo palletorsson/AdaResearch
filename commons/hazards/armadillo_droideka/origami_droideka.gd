@@ -31,6 +31,45 @@ class_name OrigamiDroideka
 @export var split_open_dihedral_degrees: float = 4.0
 @export var split_jitter_degrees: float = 3.2
 
+## AXIS — WARNING: how much the hazard tells you BEFORE it costs you anything.
+## Adopted word for word from [[miura_crawler]], [[scissor_stalker]],
+## [[kaleidocycle_enemy]] and [[path_block]] — one vocabulary across the hazards,
+## so the family measures on one scale instead of five private synonyms.
+##
+## The droideka is the family's LOUD case, and that is exactly why the axis is
+## worth asking here. It is a metre-and-a-half pleated wheel with an orange core
+## and eighteen breathing pleats: it is already unmissable, so anything the room
+## adds is not information, it is INSTITUTION — somebody decided this thing needed
+## a fence, a lamp or a tarpaulin, and the decision is legible.
+##
+##   none    the wheel alone, unannounced — THE LEGACY BODY, byte for byte. Pale
+##           green pleats, an orange collar, a lit core at the hub.
+##   stain   a rolled rut in the ground beneath it, running the length of its
+##           approach: a long dark track, a darker centre worn into it, and two
+##           smears where it slewed. The floor remembers the weight.
+##   cage    a bolted post-and-rail crate hugging the wheel's thin axis, plus a
+##           filed yellow tag. Somebody catalogued it and fenced it, and it rolls
+##           and fires on exactly the same schedule inside the bars.
+##   beacon  a lit mast beside the hub with a lamp head and a shade, plus a glowing
+##           outline burnt into the floor around the wheel's footprint.
+##   shroud  a fitted canvas cover over the whole wheel with a ridged top and two
+##           straps. The pleats, the collar and the lit core — everything that read
+##           as a machine — go under cloth. It rolls out from under it unchanged.
+##
+## APPEARANCE ONLY. contact_damage, fire_damage, shots_per_burst, fire_interval,
+## roll_speed, detection_radius, max_health, the inflation schedule and the
+## collision/hurtbox are byte-identical across all five values. A hazard that hides
+## itself is not a gentler hazard.
+const WARNING_VALUES: PackedStringArray = ["none", "stain", "cage", "beacon", "shroud"]
+@export_enum("none", "stain", "cage", "beacon", "shroud") var warning: String = "none"
+
+## FIXTURE, not an axis. The inherited base calls _rng.randomize() in its _ready, so
+## every droideka that has ever spawned drew its DETECT-state sway from a different
+## stream. -1 keeps precisely that (randomize as before, unchanged for all 7 live
+## placements); any value >= 0 pins the stream so a sweep measures the axis and not
+## the noise.
+@export var rng_seed: int = -1
+
 var _inner_ring_top: MeshInstance3D = null
 var _inner_ring_bottom: MeshInstance3D = null
 var _outer_ring_top: MeshInstance3D = null
@@ -63,7 +102,14 @@ func _ready() -> void:
 	core_raise_height = 0.58
 
 	super._ready()
+	# Pin the inherited jitter stream only when asked. -1 is the shipped behaviour:
+	# the base already randomized it and this line does nothing.
+	if rng_seed >= 0:
+		_rng.seed = rng_seed
 	add_to_group("origami_enemy")
+	# WARNING dressing, appended LAST so the collision body, the hurtbox and the shell
+	# root keep their child indices. "none" adds nothing at all — the legacy lineage.
+	_build_warning()
 
 func _build_visual_rig() -> void:
 	var shell_material: StandardMaterial3D = _make_material(
@@ -392,3 +438,204 @@ func configure(config_data: Dictionary) -> void:
 
 	if split_before_config != split_faces_enabled and _shell_root != null:
 		_rebuild_visual_rig()
+
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	## The base routes apply_grid_config straight to configure(), and configure()
+	## returns early on an empty dictionary — so the WARNING read cannot live in
+	## there or a bare `{}` from the grid would skip the config_warning metadata.
+	## Same override shape as [[armadillo_eggling]].
+	super.apply_grid_config(config_data)
+	_read_warning(config_data)
+
+
+func _read_warning(config_data: Dictionary) -> void:
+	# Read last, from the config dict or the config_<key> metadata the grid stamps on
+	# the root, and an unknown word keeps the default rather than blanking the dressing.
+	var w: String = ""
+	if config_data.has("warning"):
+		w = str(config_data["warning"])
+	elif has_meta("config_warning"):
+		w = str(get_meta("config_warning"))
+	w = w.strip_edges().to_lower()
+	if WARNING_VALUES.has(w):
+		warning = w
+	_build_warning()
+
+
+# ── WARNING ──────────────────────────────────────────────────────────────────
+# One axis, five values, the vocabulary shared with [[miura_crawler]],
+# [[scissor_stalker]], [[kaleidocycle_enemy]] and [[path_block]]. Every builder below
+# adds MeshInstance3D children only — never a collider, never a group the combat code
+# reads, never a distance. Deterministic: nothing here draws from the random stream and
+# nothing here is animated, so five variants of the same wheel differ only in what
+# stands around it.
+#
+# Sized from the EXPORTS, never from the live inflation: _shell_root.scale breathes
+# with the pulse, and dressing that breathed with it would be an animation, not a still.
+
+const WARN_STAIN_OUTER := Color(0.24, 0.19, 0.13)
+const WARN_STAIN_CORE := Color(0.09, 0.075, 0.055)
+const WARN_BAR := Color(0.52, 0.50, 0.44)
+const WARN_TAG := Color(0.86, 0.72, 0.12)
+const WARN_MAST := Color(0.38, 0.38, 0.40)
+const WARN_LAMP := Color(1.0, 0.62, 0.12)
+const WARN_CLOTH := Color(0.40, 0.38, 0.33)
+const WARN_STRAP := Color(0.15, 0.14, 0.13)
+
+
+func _build_warning() -> void:
+	## Rebuildable: a map hands its config to apply_grid_config AFTER _ready, so this
+	## runs twice. Drop the previous dressing immediately (remove_child before
+	## queue_free — the sweep measures the AABB on the very next frame).
+	for child in get_children():
+		if child.is_in_group("hazard_warning"):
+			remove_child(child)
+			child.queue_free()
+	match warning:
+		"stain":
+			_warn_stain()
+		"cage":
+			_warn_cage()
+		"beacon":
+			_warn_beacon()
+		"shroud":
+			_warn_shroud()
+		_:
+			pass
+
+
+## Half the wheel across its face. The pleat tips reach shell_radius * 0.68 + half a
+## panel, scaled by the inflated radius — read from the same exports the shell is built
+## from, never hardcoded, so a configured wheel keeps its dressing fitted.
+func _warn_reach() -> float:
+	return maxf(shell_radius * inflated_radius_scale * 1.15, 0.12)
+
+
+## Half the wheel through the axle. A droideka is a disc: it is nearly twice as wide as
+## it is deep, and the crate and the cover have to be that shape or they read as boxes
+## that happen to contain something.
+func _warn_depth() -> float:
+	return maxf(shell_radius * 0.62, 0.08)
+
+
+## The floor. The wheel is built centred on the node origin (it rolls about it), so
+## the ground is a full radius BELOW the origin — not at y = 0 like a standing hazard.
+func _warn_ground() -> float:
+	return -_warn_reach()
+
+
+## STAIN — the notice written on the ground. A rolled rut running the length of its
+## approach, a worn darker centre, and two smears where it slewed. The floor keeps the
+## record of a thing that has been coming at people for a while.
+func _warn_stain() -> void:
+	var r: float = _warn_reach()
+	var d: float = _warn_depth()
+	var y: float = _warn_ground() + 0.008
+	_warn_add(Vector3(0, y, 0), Vector3(d * 3.0, 0.012, r * 5.2),
+		_warn_mat(WARN_STAIN_OUTER, 1.0, 0.0))
+	_warn_add(Vector3(0, y + 0.007, 0), Vector3(d * 1.5, 0.012, r * 4.6),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(d * 1.35, y + 0.004, r * 1.30), Vector3(d * 1.1, 0.012, r * 1.05),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(-d * 1.15, y + 0.004, -r * 1.55), Vector3(d * 0.8, 0.012, r * 0.75),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+
+
+## CAGE — the notice as paperwork. Four posts and two rings of rails hugging the thin
+## axis, one filed yellow tag. The wheel rolls out of it on the gait it always had.
+func _warn_cage() -> void:
+	var r: float = _warn_reach()
+	var d: float = _warn_depth()
+	var bot: float = _warn_ground() - 0.03
+	var top: float = _warn_ground() + r * 2.15
+	var px: float = r * 1.18
+	var pz: float = d * 2.10
+	var bar: StandardMaterial3D = _warn_mat(WARN_BAR, 0.45, 0.55)
+	var thick: float = maxf(r * 0.09, 0.03)
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			_warn_add(Vector3(float(sx) * px, (bot + top) * 0.5, float(sz) * pz),
+				Vector3(thick, top - bot, thick), bar)
+	for ry in [top, bot + (top - bot) * 0.45]:
+		var y: float = float(ry)
+		for s in [-1.0, 1.0]:
+			_warn_add(Vector3(0, y, float(s) * pz),
+				Vector3(px * 2.0 + thick, thick * 0.8, thick * 0.8), bar)
+			_warn_add(Vector3(float(s) * px, y, 0),
+				Vector3(thick * 0.8, thick * 0.8, pz * 2.0 + thick), bar)
+	_warn_add(Vector3(px + thick * 0.6, bot + (top - bot) * 0.70, 0),
+		Vector3(0.018, r * 0.42, d * 1.10), _warn_mat(WARN_TAG, 0.7, 0.0))
+
+
+## BEACON — the notice as broadcast. A mast beside the hub with a lamp head under a
+## shade, and a lit outline burnt into the floor around the wheel's footprint.
+func _warn_beacon() -> void:
+	var r: float = _warn_reach()
+	var d: float = _warn_depth()
+	var bot: float = _warn_ground() - 0.03
+	var mast_h: float = r * 2.60
+	var mast: StandardMaterial3D = _warn_mat(WARN_MAST, 0.4, 0.6)
+	var lamp: StandardMaterial3D = _warn_emissive(WARN_LAMP, 3.2)
+	var thick: float = maxf(r * 0.09, 0.03)
+	var mx: float = -r * 1.30
+	_warn_add(Vector3(mx, bot + mast_h * 0.5, 0), Vector3(thick, mast_h, thick), mast)
+	_warn_add(Vector3(mx, bot + mast_h + r * 0.18, 0), Vector3(r * 0.40, r * 0.24, r * 0.40), lamp)
+	_warn_add(Vector3(mx, bot + mast_h + r * 0.36, 0), Vector3(r * 0.58, thick * 0.7, r * 0.58), mast)
+	for s in [-1.0, 1.0]:
+		_warn_add(Vector3(0, bot + 0.012, float(s) * d * 2.4),
+			Vector3(r * 2.6, 0.02, thick), lamp)
+		_warn_add(Vector3(float(s) * r * 1.30, bot + 0.012, 0),
+			Vector3(thick, 0.02, d * 4.8), lamp)
+
+
+## SHROUD — the notice withheld. A fitted cover over the whole wheel with a ridged top
+## and two straps: the pleats, the collar and the lit core all go under cloth, and what
+## is left is a covered object of no obvious kind. It rolls out unchanged.
+func _warn_shroud() -> void:
+	var r: float = _warn_reach()
+	var d: float = _warn_depth()
+	var g: float = _warn_ground()
+	var cloth: StandardMaterial3D = _warn_mat(WARN_CLOTH, 0.95, 0.0)
+	var strap: StandardMaterial3D = _warn_mat(WARN_STRAP, 0.85, 0.1)
+	var w: float = r * 2.24
+	var dep: float = d * 2.70
+	var h: float = r * 2.12
+	var mid: float = g + h * 0.5
+	_warn_add(Vector3(0, g + h, 0), Vector3(w, 0.05, dep), cloth)
+	for s in [-1.0, 1.0]:
+		_warn_add(Vector3(0, mid, float(s) * dep * 0.5), Vector3(w, h, 0.025), cloth)
+		_warn_add(Vector3(float(s) * w * 0.5, mid, 0), Vector3(0.025, h, dep), cloth)
+	_warn_add(Vector3(0, g + h + 0.04, 0), Vector3(w * 0.24, 0.06, dep * 0.9), cloth)
+	for s in [-1.0, 1.0]:
+		_warn_add(Vector3(float(s) * w * 0.26, mid + h * 0.10, 0),
+			Vector3(0.05, h * 1.02, dep + 0.016), strap)
+
+
+func _warn_add(center: Vector3, box_size: Vector3, mat: Material) -> void:
+	var bm: BoxMesh = BoxMesh.new()
+	bm.size = box_size
+	var mi: MeshInstance3D = MeshInstance3D.new()
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = center
+	mi.add_to_group("hazard_warning")
+	add_child(mi)
+
+
+func _warn_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _warn_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m

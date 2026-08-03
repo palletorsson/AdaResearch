@@ -21,6 +21,87 @@ const GRID_SCALES := [2, 4, 8, 16, 32, 64]
 const SHAPE_SIZE := 6.0
 const POINT_COUNT := 8000
 
+# ═══════════════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `evidence`
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# WHAT A MEASUREMENT SHOWS OF ITS OWN PROCEDURE. This artifact is not a fractal;
+# it is an act of measuring one, and the number it prints (D = 1.585) is the
+# slope of a ladder of six coverings that the shipped build shows ONE RUNG AT A
+# TIME, on a two-second timer. So the still frame a room ever actually holds is a
+# single grid over a cloud plus an answer — the procedure asserted rather than
+# performed.
+#
+# That is the same question koch_curve and fibonacci_sequences already ask of
+# their own iteration, so this TAKES THEIR WORD AND THEIR FOUR VALUES verbatim
+# rather than inventing a synonym for it. Three fractal artifacts, one vocabulary:
+# a room can now ask "how much working is on show here" of all of them and get
+# answers on the same scale.
+#
+#   result    the shipped instrument: cloud, one grid at the scale the timer
+#             happens to be on, the log-log plot, D printed. Byte for byte the
+#             legacy build, timer and all.  (DEFAULT)
+#   trace     all SIX coverings at once, stacked 0.35 m apart up the Y axis over
+#             the same cloud — 2 boxes a side at the bottom, 64 at the top, cold
+#             blue to hot magenta. The ladder the slope is read off, standing up
+#             in the room instead of arriving one rung every two seconds.
+#   longhand  the counting written out. At 16 divisions every OCCUPIED cell is
+#             filled in as a warm tile, so N(e) stops being a printed integer and
+#             becomes a countable area — the cover itself, next to the number it
+#             produced. The empty cells stay as bare line.
+#   axiom     the gasket alone. Grid, plot, regression line, axis labels and the
+#             D readout all muted; what is left is the shape before anyone
+#             measured it, which is the thing the whole apparatus exists against.
+#
+# The three non-default values STOP THE TWO-SECOND CYCLE. An axis whose picture
+# is repainted by _process every two seconds is an axis no still can photograph;
+# `result` keeps the cycle exactly as shipped.
+#
+# STRICTLY ADDITIVE and RNG-FREE. _apply_evidence() is appended to the END of
+# _ready(), after every randi() in _generate_sierpinski_points() and after both
+# update passes, reads the finished scene graph, and returns immediately at
+# `result`. It draws no random number, so the cloud is identical at all four.
+const EVIDENCES: PackedStringArray = ["result", "trace", "longhand", "axiom"]
+@export_enum("result", "trace", "longhand", "axiom") var evidence: String = "result"
+
+## SEED for the chaos game. The gasket is drawn by 8000 accumulated random
+## halvings, so an unseeded run scatters 8000 points DIFFERENTLY every boot —
+## and the box counts, and therefore the printed D, move with them. Four variants
+## of an unseeded run are four different clouds, and the bite critic would read
+## that scatter as a confident result about `evidence`.
+## -1 keeps the legacy behaviour EXACTLY: the global randi() stream is used, with
+## no seed() call anywhere, precisely as it always was. Any value >= 0 pins the
+## cloud so the four tiles differ only in what is drawn OVER it.
+@export var shape_seed: int = -1
+
+## Stand an INVISIBLE box (layers = 0) around the union of every value's extent,
+## so the framing walk sizes all four shots identically. It has to exist: `axiom`
+## mutes the plot at x = 5..8 and `trace` adds 2.1 m of grids overhead, so a
+## camera placed from each variant's own AABB would frame four different crops
+## and the bite report would be a picture of the framing. Default false — not one
+## placement changes; a capture harness sets it true via dna.fixture.
+@export var capture_anchor: bool = false
+
+## The scale `longhand` fills in. Index 3 of GRID_SCALES = 16 divisions: fine
+## enough that the cover reads as a fractal and not as four big squares, coarse
+## enough that the tiles are individually countable, which is the entire point.
+const LONGHAND_SCALE_IDX := 3
+## Vertical pitch of the `trace` stack. Six rungs at 0.35 m clears the 0.03 m
+## point spheres and still fits under the title board at y = 5.5.
+const TRACE_STEP := 0.35
+const TRACE_BASE_Y := 0.06
+const TRACE_COLD := Color(0.24, 0.55, 1.0, 0.55)
+const TRACE_HOT := Color(1.0, 0.25, 0.72, 0.55)
+const LONGHAND_FILL := Color(1.0, 0.62, 0.18, 0.5)
+
+## Set by trace / longhand / axiom: the exhibit stands still.
+var _static_evidence := false
+## Grids built by `trace`, and the filled cover built by `longhand`.
+var _evidence_parts: Array[MeshInstance3D] = []
+
+## null unless shape_seed >= 0. Null means "use the global randi()", which is
+## what every existing placement does.
+var _rng: RandomNumberGenerator = null
 var _fractal_points: Array[Vector3] = []
 var _grid_lines: Array[MeshInstance3D] = []
 var _current_scale_idx := 0
@@ -40,6 +121,13 @@ const _DIMENSION_TAG_COLOR := Color(0.4, 1.0, 0.6)
 
 
 func _ready() -> void:
+	_read_dna()
+	# Built ONLY when shape_seed >= 0. At the -1 default nothing is constructed and
+	# _pick_vertex() falls through to the bare global randi(), so the legacy stream
+	# is untouched — no seed() call is made anywhere on this path.
+	if shape_seed >= 0:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = shape_seed
 	_generate_sierpinski_points()
 	_setup_point_cloud()
 	_setup_grid_display()
@@ -53,6 +141,10 @@ func _ready() -> void:
 	_update_grid_display()
 	_update_plot()
 
+	# APPENDED LAST. Reads the finished scene graph; draws no random number and
+	# returns immediately at `result`.
+	_apply_evidence()
+
 
 func _generate_sierpinski_points() -> void:
 	# Chaos game: Sierpinski triangle in XZ plane
@@ -64,11 +156,21 @@ func _generate_sierpinski_points() -> void:
 	var current := Vector3(0.0, 0.0, 0.0)
 	# Burn in
 	for _i in 100:
-		current = (current + vertices[randi() % 3]) * 0.5
+		current = (current + vertices[_pick_vertex()]) * 0.5
 
 	for _i in POINT_COUNT:
-		current = (current + vertices[randi() % 3]) * 0.5
+		current = (current + vertices[_pick_vertex()]) * 0.5
 		_fractal_points.append(current)
+
+
+## The chaos game's only draw. With no seed declared this IS `randi() % 3` — the
+## same global call, in the same place, the same number of times — so the legacy
+## point cloud is reproduced exactly. With a seed it comes off a private
+## generator instead, and the gasket is the same gasket at every capture.
+func _pick_vertex() -> int:
+	if _rng != null:
+		return _rng.randi() % 3
+	return randi() % 3
 
 
 func _setup_point_cloud() -> void:
@@ -171,6 +273,9 @@ func _rebuild_dimension_tag(text: String) -> void:
 
 
 func _process(delta: float) -> void:
+	# trace / longhand / axiom are exhibits, not a loop. Only `result` cycles.
+	if _static_evidence:
+		return
 	_display_timer += delta
 	if _display_timer >= 2.0:
 		_display_timer = 0.0
@@ -322,4 +427,197 @@ func _update_plot() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	var was: String = evidence
+	_read_dna()
+	if evidence != was:
+		_apply_evidence()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# evidence — everything below is new and nothing above it moved.
+# ═══════════════════════════════════════════════════════════════════════════
+
+## Map tokens arrive as config_<key> metadata. An unreadable word keeps the
+## shipped instrument rather than blanking a board four rooms expect to see.
+func _read_dna() -> void:
+	if has_meta("config_evidence"):
+		var v: String = str(get_meta("config_evidence")).strip_edges().to_lower()
+		if EVIDENCES.has(v):
+			evidence = v
+	if has_meta("config_shape_seed"):
+		shape_seed = int(str(get_meta("config_shape_seed")))
+	if has_meta("config_capture_anchor"):
+		var a: String = str(get_meta("config_capture_anchor")).strip_edges().to_lower()
+		capture_anchor = a == "true" or a == "1" or a == "yes"
+
+
+func _apply_evidence() -> void:
+	for part in _evidence_parts:
+		if is_instance_valid(part):
+			part.queue_free()
+	_evidence_parts.clear()
+
+	var key: String = str(evidence).strip_edges().to_lower()
+	if not EVIDENCES.has(key):
+		key = "result"
+
+	# Restore the shipped state first, so a value change at runtime is reversible.
+	_static_evidence = false
+	_set_muted(_grid_instance, false)
+	_set_muted(_plot_instance, false)
+	_mute_tags(false)
+
+	match key:
+		"trace":
+			_static_evidence = true
+			_build_trace_stack()
+		"longhand":
+			_static_evidence = true
+			_current_scale_idx = LONGHAND_SCALE_IDX
+			_update_grid_display()
+			_update_plot()
+			_build_longhand_cover()
+		"axiom":
+			_static_evidence = true
+			_set_muted(_grid_instance, true)
+			_set_muted(_plot_instance, true)
+			_mute_tags(true)
+
+	if capture_anchor:
+		_add_capture_anchor()
+
+
+## All six coverings at once, one above the other. Each rung is the same line
+## grid _update_grid_display() draws, at its own division count, lifted clear of
+## the cloud so the ladder reads as a ladder.
+func _build_trace_stack() -> void:
+	for i in GRID_SCALES.size():
+		var divisions: int = GRID_SCALES[i]
+		var box_size := SHAPE_SIZE / float(divisions)
+		var y := TRACE_BASE_Y + float(i) * TRACE_STEP
+		var tint: Color = TRACE_COLD.lerp(TRACE_HOT, float(i) / float(maxi(GRID_SCALES.size() - 1, 1)))
+
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = tint
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+
+		var im := ImmediateMesh.new()
+		im.surface_begin(Mesh.PRIMITIVE_LINES, mat)
+		var half := SHAPE_SIZE * 0.5
+		for j in divisions + 1:
+			var x := -half + j * box_size
+			im.surface_add_vertex(Vector3(x, y, -half))
+			im.surface_add_vertex(Vector3(x, y, half))
+		for j in divisions + 1:
+			var z := -half + j * box_size
+			im.surface_add_vertex(Vector3(-half, y, z))
+			im.surface_add_vertex(Vector3(half, y, z))
+		im.surface_end()
+
+		var mi := MeshInstance3D.new()
+		mi.name = "TraceRung_%d" % divisions
+		mi.mesh = im
+		mi.material_override = mat
+		add_child(mi)
+		_evidence_parts.append(mi)
+
+
+## N(e) as an area instead of an integer: every cell the gasket actually touches
+## at 16 divisions, filled in. Two triangles per occupied cell, laid at y = 0.02
+## so they sit over the 0.01 grid lines without fighting them for the depth test.
+func _build_longhand_cover() -> void:
+	var divisions: int = GRID_SCALES[LONGHAND_SCALE_IDX]
+	var box_size := SHAPE_SIZE / float(divisions)
+	var half := SHAPE_SIZE * 0.5
+
+	var occupied := {}
+	var offset := Vector3(half, 0.0, half)
+	for pt in _fractal_points:
+		var shifted := pt + offset
+		var ix := int(shifted.x / box_size)
+		var iz := int(shifted.z / box_size)
+		occupied[ix * 10000 + iz] = Vector2i(ix, iz)
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = LONGHAND_FILL
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+
+	var im := ImmediateMesh.new()
+	im.surface_begin(Mesh.PRIMITIVE_TRIANGLES, mat)
+	var inset := box_size * 0.06
+	for key in occupied:
+		var cell: Vector2i = occupied[key]
+		var x0 := -half + float(cell.x) * box_size + inset
+		var z0 := -half + float(cell.y) * box_size + inset
+		var x1 := x0 + box_size - inset * 2.0
+		var z1 := z0 + box_size - inset * 2.0
+		var y := 0.02
+		im.surface_add_vertex(Vector3(x0, y, z0))
+		im.surface_add_vertex(Vector3(x1, y, z0))
+		im.surface_add_vertex(Vector3(x1, y, z1))
+		im.surface_add_vertex(Vector3(x0, y, z0))
+		im.surface_add_vertex(Vector3(x1, y, z1))
+		im.surface_add_vertex(Vector3(x0, y, z1))
+	im.surface_end()
+
+	var mi := MeshInstance3D.new()
+	mi.name = "LonghandCover"
+	mi.mesh = im
+	mi.material_override = mat
+	add_child(mi)
+	_evidence_parts.append(mi)
+
+
+## layers = 0, never visible = false: the render layer mask is per-instance, so a
+## muted node stops drawing while everything parented under it is left alone.
+## Hiding a tag with `visible` would take its text mesh down with it and there
+## would be no way to bring one back without the other.
+func _set_muted(node: Node, muted: bool) -> void:
+	if node == null or not is_instance_valid(node):
+		return
+	if node is VisualInstance3D:
+		var vi: VisualInstance3D = node
+		vi.layers = 0 if muted else 1
+	for child in node.get_children():
+		_set_muted(child, muted)
+
+
+## Title, axis captions, scale board and D readout. The two rebuilt tags are
+## re-muted after every rebuild by _apply_evidence, which longhand calls into.
+func _mute_tags(muted: bool) -> void:
+	for child in get_children():
+		if child == _point_cloud or child == _grid_instance or child == _plot_instance:
+			continue
+		if _evidence_parts.has(child):
+			continue
+		if child.name == "CaptureAnchor":
+			continue
+		_set_muted(child, muted)
+
+
+## An invisible box over the union of every value's extent. The cloud spans
+## +/- 3 m; the plot instance sits at x = 5 and draws 3 m of axes up from y = 3;
+## the title board is at y = 5.5; `trace` reaches TRACE_BASE_Y + 5 * TRACE_STEP.
+## Fixed numbers, not measured ones — a box measured from the built scene would
+## be a different box for each value, which is the failure it exists to prevent.
+func _add_capture_anchor() -> void:
+	if has_node("CaptureAnchor"):
+		return
+	var x_min := -SHAPE_SIZE * 0.5 - 0.5
+	var x_max := 8.6
+	var y_min := -0.2
+	var y_max := 6.2
+	var z_half := SHAPE_SIZE * 0.5 + 0.5
+	var anchor := MeshInstance3D.new()
+	anchor.name = "CaptureAnchor"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(x_max - x_min, y_max - y_min, z_half * 2.0)
+	anchor.mesh = bm
+	anchor.position = Vector3((x_min + x_max) * 0.5, (y_min + y_max) * 0.5, 0.0)
+	anchor.layers = 0
+	add_child(anchor)
