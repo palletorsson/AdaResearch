@@ -3725,6 +3725,17 @@
    "qfep_connection": "iso_level 0.5 slices a four-octave noise field into matter and absence; every smooth wall is where a comparison changes its answer across eight corner samples. The glass-and-outline material confesses that the surface is not a thing but a decision boundary."
   },
   "monte_carlo_dartboard": {
+   "dna": {
+    "axes": {
+    "disclosure": [
+    "works",
+    "oracle",
+    "tally",
+    "ledger",
+    "origin"
+    ]
+    }
+   },
    "category": "randomness",
    "complexity": "intermediate",
    "description": "Throw darts at a square with an inscribed circle. The ratio of inside/outside hits converges to pi/4. Live counter shows estimate of pi improving with each dart. Green dots inside circle, red dots outside.",
@@ -10668,6 +10679,17 @@
    "qfep_connection": "Noise evaluated per-pixel at framerate: the GPU as noise organ, procedural texture with no texture stored. The room turns as you move because nothing in it is a picture — everything is a function, sampled where you look."
   },
   "shannon_entropy_meter": {
+   "dna": {
+    "axes": {
+    "disclosure": [
+    "works",
+    "oracle",
+    "tally",
+    "ledger",
+    "origin"
+    ]
+    }
+   },
    "category": "randomness",
    "complexity": "beginner",
    "description": "Wall-mounted Shannon entropy gauge — generates a random sequence, computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",

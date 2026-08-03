@@ -136,12 +136,32 @@
       "capacity": "FEEL that force and acceleration are the same shape by dragging an arrow and watching the ball respond proportionally",
       "category": "unknown",
       "complexity": "beginner",
-      "description": "Drag the force arrow longer and the ball accelerates harder. F = ma made visceral — magnitude is felt, not read. The ball's trajectory traces the force's history. Reset with R, freeze with Space. Contrasts with WorkEnergyDemo (same force, different measure); feeds into CombinedForcesDemo (multiple forces).",
+      "description": "Drag the force arrow longer and the ball accelerates harder. F = ma made visceral — magnitude is felt, not read. The ball's trajectory traces the force's history. Reset with R, freeze with Space. Contrasts with WorkEnergyDemo (same force, different measure); feeds into CombinedForcesDemo (multiple forces). DNA: measure selects which read-only companions stand beside the red force arrow (both = the legacy three, acceleration = force and a = F/m alone, velocity = force and v alone, none = the arrow and the ball with no receipt); body selects what the force is pushing (light 0.25 kg · standard 1.0 · heavy 4.0 · immovable 16.0, radius following mass^(1/3) so the bulk is visible). Use #measure: and #body:.",
       "dev_themes": [
         "linear_algebra",
         "math",
         "vectors"
       ],
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "measure": [
+            "both",
+            "acceleration",
+            "velocity",
+            "none"
+          ],
+          "body": [
+            "light",
+            "standard",
+            "heavy",
+            "immovable"
+          ]
+        },
+        "default": "measure=both, body=standard - the three arrows in their legacy order (force, velocity, acceleration), the nine-line readout, and the base class's 1.0 kg BALL_MASS ball, so the 5 existing placements render exactly what they rendered before",
+        "was": "no exports at all: three hard-coded create_force_vector() calls, and an acceleration divided by a const BALL_MASS = 1.0 that lived in the base class - the m in F = ma nailed shut, which the artifact's own @identity had listed as its missing piece"
+      },
       "footprint": [
         1,
         1,
@@ -166,7 +186,9 @@
           1,
           1
         ],
-        "size_group": "compact"
+        "size_group": "compact",
+        "measure": "both | acceleration | velocity | none - which companion arrows and readout blocks stand beside the force (default both)",
+        "body": "light | standard | heavy | immovable - the mass the force is pushing (default standard = the base class's 1.0 kg)"
       },
       "qfep_connection": "Classical F — force as deterministic law. Drag the arrow, the ball obeys. No randomness, no emergence. Pure Newtonian causality where every input produces a proportional output.",
       "scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
@@ -617,6 +639,26 @@
       }
     },
     "VectorCrossProduct": {
+      "dna": {
+        "promoted": "2026-07-29",
+        "stage": "2 - variation",
+        "axes": {
+          "span": [
+            "grid",
+            "solid",
+            "outline",
+            "none"
+          ],
+          "handedness": [
+            "right",
+            "left",
+            "both"
+          ]
+        },
+        "default": "span=grid, handedness=right - grid rebuilds the identical 10x10 ruled lattice from the same two loops over range(grid_n + 1), and right keeps cross = a.cross(b) with the paddle wheel fed (a, b) and the panel reading 'a x b', which is exactly the hard-coded build, so all 6 existing placements are unchanged; the mirror arrow is not built at all unless handedness=both is asked for",
+        "was": "zero exports and no apply_grid_config() of its own: the area figure was welded into _update_parallelogram as `var grid_n := 10` plus two line loops, and the operand order was welded into _process as `var cross = a.cross(b)`, so no map could say what |a x b| means or which way the perpendicular points",
+        "note": "hand promotion 2026-07-29 - the runner refused it for NO TURNABLE KNOBS. span changes what an AREA is claimed to be: a tally of cells (grid), an undivided face (solid), a boundary with an empty interior (outline), or a number with no figure behind it (none). handedness is the right-hand rule made reachable - left takes b x a, flipping the purple arrow to the other side of the plane and reversing the paddle wheel, and both draws the two perpendiculars nose to nose. Sibling of VectorSubtraction's order axis, same argument in the other product."
+      },
       "capacity": "FEEL that torque is not a force but the force's opinion about rotation, measured by how far off-center and how perpendicular it acts",
       "category": "unknown",
       "complexity": "intermediate",
@@ -1164,7 +1206,27 @@
     "VectorForces": {
       "category": "unknown",
       "complexity": "intermediate",
-      "description": "VectorForces",
+      "description": "VectorForces — Newton's second law as a live argument between forces. DNA: regime selects WHICH forces are in the room to disagree (crosswind = sideways thrust vs gravity, freefall = gravity alone, stalemate = thrust exactly cancels weight so the ball hangs, liftoff = thrust wins); diagram selects which of the six arrows the chart draws (taxonomy = all six, inputs = the three being summed, resultant = only the sum, kinematics = only what the sum produced). Use #regime: and #diagram:.",
+      "dna": {
+        "promoted": "2026-07-29",
+        "stage": "2 - variation",
+        "axes": {
+          "regime": [
+            "crosswind",
+            "freefall",
+            "stalemate",
+            "liftoff"
+          ],
+          "diagram": [
+            "taxonomy",
+            "inputs",
+            "resultant",
+            "kinematics"
+          ]
+        },
+        "default": "regime=crosswind, diagram=taxonomy - crosswind returns the hard-coded Vector3(2.5,0,0) thrust and taxonomy shows all six arrows, which is the pre-promotion scene exactly, so the 5 existing placements are unchanged",
+        "was": "zero exports: one fixed sideways thrust and one fixed set of six arrows, with the drag coefficient the @identity called critical unreachable from any map token"
+      },
       "dev_themes": [
         "linear_algebra",
         "math",
@@ -1667,6 +1729,26 @@
       ]
     },
     "VectorSubtraction": {
+      "dna": {
+        "promoted": "2026-07-29",
+        "stage": "2 - variation",
+        "axes": {
+          "construction": [
+            "flip",
+            "chain",
+            "parallelogram",
+            "bare"
+          ],
+          "order": [
+            "a_minus_b",
+            "b_minus_a",
+            "reciprocal"
+          ]
+        },
+        "default": "construction=flip, order=a_minus_b - flip leaves every piece of the shipped apparatus visible (-b from the origin, the -b copy chained at a's tip, both dotted parallelogram lines and their floating copy labels) and a_minus_b keeps head=a / tail=b, which is exactly the hard-coded build, so all 6 existing placements across 5 maps are unchanged; the dotted lines are only force-shown on the branch that already showed them, and the second difference arrow is not built at all unless order=reciprocal is asked for",
+        "was": "zero exports and an apply_grid_config() whose body was `pass`: the bench asserted THREE arguments for a - b at once (the origin-anchored -b, the tip-to-tail chain, and the dotted parallelogram closure) and welded the operand order into _process as `var diff = a - b`, with neither choice reachable from a map",
+        "note": "hand promotion 2026-07-29 - the runner refused it for NO TURNABLE KNOBS. construction changes what subtraction IS argued to be: relabeled addition seen from every side (flip), a single walk out along a and back along b (chain), the diagonal of a figure (parallelogram), or nothing but two tips and a number (bare). order is the artifact's own @identity critical_parameter made reachable: it said the negated vector 'shows why a-b != b-a', and reciprocal draws both differences nose to nose through the origin so anti-commutativity is a picture rather than a rule. Shares 'bare' with VectorBasics and 'chain' with vector_magnitude_demo - same meaning on all three benches."
+      },
       "category": "unknown",
       "complexity": "intermediate",
       "description": "VectorSubtraction",

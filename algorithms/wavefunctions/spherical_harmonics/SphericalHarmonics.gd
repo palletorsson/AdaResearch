@@ -24,6 +24,33 @@ extends Node3D
 # relationships: depends on spherical coordinate mapping; contrasts with lissajous_curves (sphere vs plane); unlocks 3D harmonic visualization
 # truth: Every function on a sphere decomposes into spherical harmonics, the way every signal decomposes into sines.
 
+# =============================================================================
+# DNA — stage 2, promoted 2026-07-29
+# =============================================================================
+# The artifact is named after Y_l^m and never drew one. The centre body was a plain
+# translucent ball — WavefunctionResources.get_unit_sphere() under a blue glass material —
+# and the harmonic existed only as the RATIO of two orbit speeds, traced out over time by
+# a point circling outside it. Standing in the room you see a ball, and the mode is an
+# argument you have to wait for.
+#
+# surface asks what a spherical harmonic IS on the object that claims to be one:
+#   glass — the pre-promotion body. The mode is implied by the orbit and nothing else.
+#   nodal — Y_l^m's sign painted onto the unit sphere: warm lobes, cool lobes, and the
+#           nodal lines between them. The harmonic as a field ON a fixed sphere.
+#   lobed — the radius driven by |Y_l^m|, the textbook balloon plot. The harmonic as a
+#           SHAPE, which is what most people picture and is a different claim.
+#   wire  — the theta/phi cage alone, l latitudes and 2m meridians. The coordinate system
+#           without the field: what the mode divides, before it says anything.
+@export_enum("glass", "nodal", "lobed", "wire") var surface: String = "glass"
+## Degree and order of the harmonic the patterned surfaces draw. Not declared as an axis:
+## at surface=glass nothing in the frame depends on them, so a still cannot measure them.
+@export var harmonic_l: int = 3
+@export var harmonic_m: int = 2
+
+const SPHERE_RINGS: int = 48
+const SPHERE_SEGMENTS: int = 96
+const CAGE_STEPS: int = 96
+
 @onready var large_sphere: MeshInstance3D
 @onready var small_sphere: MeshInstance3D
 @onready var audio_player: AudioStreamPlayer3D
@@ -71,13 +98,8 @@ func _ready() -> void:
 	print("SphericalHarmonics: Ready - Mario Mode Activated! (Optimized)")
 
 func _create_spheres() -> void:
-	# Large sphere (center) - uses shared glass material
-	large_sphere = MeshInstance3D.new()
-	large_sphere.mesh = WavefunctionResources.get_unit_sphere()
-	large_sphere.material_override = WavefunctionResources.get_glass_material(
-		Color(0.2, 0.3, 0.8), 0.3
-	)
-	add_child(large_sphere)
+	# Large sphere (center) - body chosen by the `surface` axis
+	_build_large_sphere()
 
 	# Small sphere (orbiting)
 	small_sphere = MeshInstance3D.new()
@@ -98,6 +120,159 @@ func _create_spheres() -> void:
 
 	# Labels
 	_create_labels()
+
+func _build_large_sphere() -> void:
+	if large_sphere == null:
+		large_sphere = MeshInstance3D.new()
+		large_sphere.name = "LargeSphere"
+		add_child(large_sphere)
+
+	match surface:
+		"nodal":
+			large_sphere.mesh = _build_harmonic_mesh(false)
+			large_sphere.material_override = _field_material(false)
+		"lobed":
+			large_sphere.mesh = _build_harmonic_mesh(true)
+			large_sphere.material_override = _field_material(false)
+		"wire":
+			large_sphere.mesh = _build_cage_mesh()
+			large_sphere.material_override = _field_material(true)
+		_:
+			# "glass" — the pre-promotion body, byte for byte. Note the mesh and material
+			# here are STATIC and shared across every wavefunction artifact; they are
+			# assigned, never mutated, and the variants above build their own.
+			large_sphere.mesh = WavefunctionResources.get_unit_sphere()
+			large_sphere.material_override = WavefunctionResources.get_glass_material(
+				Color(0.2, 0.3, 0.8), 0.3
+			)
+
+func _field_material(unshaded: bool) -> StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.albedo_color = Color(1, 1, 1, 1)
+	mat.metallic = 0.0
+	mat.roughness = 0.55
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	if unshaded:
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	else:
+		mat.emission_enabled = true
+		mat.emission = Color(0.35, 0.38, 0.5)
+		mat.emission_energy_multiplier = 0.5
+	return mat
+
+func _build_harmonic_mesh(deform: bool) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var peak: float = _harmonic_peak()
+	for ring in range(SPHERE_RINGS):
+		var t0: float = PI * float(ring) / float(SPHERE_RINGS)
+		var t1: float = PI * float(ring + 1) / float(SPHERE_RINGS)
+		for seg in range(SPHERE_SEGMENTS):
+			var p0: float = TAU * float(seg) / float(SPHERE_SEGMENTS)
+			var p1: float = TAU * float(seg + 1) / float(SPHERE_SEGMENTS)
+			_add_field_quad(st, t0, t1, p0, p1, deform, peak)
+	return st.commit()
+
+func _add_field_quad(st: SurfaceTool, t0: float, t1: float, p0: float, p1: float,
+		deform: bool, peak: float) -> void:
+	var a: Vector3 = _field_point(t0, p0, deform, peak)
+	var b: Vector3 = _field_point(t1, p0, deform, peak)
+	var c: Vector3 = _field_point(t1, p1, deform, peak)
+	var d: Vector3 = _field_point(t0, p1, deform, peak)
+	var ca: Color = _field_color(t0, p0, peak)
+	var cb: Color = _field_color(t1, p0, peak)
+	var cc: Color = _field_color(t1, p1, peak)
+	var cd: Color = _field_color(t0, p1, peak)
+	_emit_vertex(st, a, ca)
+	_emit_vertex(st, b, cb)
+	_emit_vertex(st, c, cc)
+	_emit_vertex(st, a, ca)
+	_emit_vertex(st, c, cc)
+	_emit_vertex(st, d, cd)
+
+func _emit_vertex(st: SurfaceTool, p: Vector3, col: Color) -> void:
+	# Normals set from the radial direction rather than generate_normals(), so the mesh
+	# does not depend on getting SurfaceTool's winding convention right.
+	st.set_color(col)
+	st.set_normal(p.normalized())
+	st.add_vertex(p)
+
+func _field_point(t: float, p: float, deform: bool, peak: float) -> Vector3:
+	var r: float = 1.0
+	if deform:
+		r = 0.15 + 0.85 * clampf(absf(_harmonic(t, p)) / peak, 0.0, 1.0)
+	return Vector3(r * sin(t) * cos(p), r * cos(t), r * sin(t) * sin(p))
+
+func _field_color(t: float, p: float, peak: float) -> Color:
+	var h: float = _harmonic(t, p) / peak
+	var mag: float = clampf(absf(h), 0.0, 1.0)
+	var warm := Color(0.96, 0.36, 0.20)
+	var cool := Color(0.13, 0.42, 0.95)
+	var base: Color = warm if h >= 0.0 else cool
+	return Color(0.04, 0.05, 0.11).lerp(base, 0.2 + 0.8 * mag)
+
+func _build_cage_mesh() -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_LINES)
+	var wire := Color(0.55, 0.85, 1.0)
+	var lat_count: int = maxi(harmonic_l, 1) + 2
+	var lon_count: int = maxi(harmonic_m, 1) * 2
+	for a in range(1, lat_count):
+		var t: float = PI * float(a) / float(lat_count)
+		for s in range(CAGE_STEPS):
+			var p0: float = TAU * float(s) / float(CAGE_STEPS)
+			var p1: float = TAU * float(s + 1) / float(CAGE_STEPS)
+			_emit_vertex(st, _unit_point(t, p0), wire)
+			_emit_vertex(st, _unit_point(t, p1), wire)
+	for b in range(lon_count):
+		var p: float = TAU * float(b) / float(lon_count)
+		for s in range(CAGE_STEPS):
+			var t0: float = PI * float(s) / float(CAGE_STEPS)
+			var t1: float = PI * float(s + 1) / float(CAGE_STEPS)
+			_emit_vertex(st, _unit_point(t0, p), wire)
+			_emit_vertex(st, _unit_point(t1, p), wire)
+	return st.commit()
+
+func _unit_point(t: float, p: float) -> Vector3:
+	return Vector3(sin(t) * cos(p), cos(t), sin(t) * sin(p))
+
+func _harmonic(t: float, p: float) -> float:
+	## Real form of Y_l^m up to normalisation: P_l^m(cos theta) * cos(m phi).
+	return _assoc_legendre(harmonic_l, harmonic_m, cos(t)) * cos(float(harmonic_m) * p)
+
+func _harmonic_peak() -> float:
+	## |cos(m phi)| tops out at 1, so the peak of |Y| is the peak of |P_l^m|.
+	var peak: float = 0.0001
+	for ring in range(SPHERE_RINGS + 1):
+		var t: float = PI * float(ring) / float(SPHERE_RINGS)
+		var v: float = absf(_assoc_legendre(harmonic_l, harmonic_m, cos(t)))
+		if v > peak:
+			peak = v
+	return peak
+
+func _assoc_legendre(degree: int, order: int, x: float) -> float:
+	## Standard three-term recurrence for the associated Legendre polynomial.
+	var m: int = clampi(order, 0, 8)
+	var l: int = maxi(degree, m)
+	var pmm: float = 1.0
+	if m > 0:
+		var somx2: float = sqrt(maxf(0.0, (1.0 - x) * (1.0 + x)))
+		var fact: float = 1.0
+		for i in range(m):
+			pmm *= -fact * somx2
+			fact += 2.0
+	if l == m:
+		return pmm
+	var pmmp1: float = x * (2.0 * float(m) + 1.0) * pmm
+	if l == m + 1:
+		return pmmp1
+	var pll: float = 0.0
+	for k in range(m + 2, l + 1):
+		pll = ((2.0 * float(k) - 1.0) * x * pmmp1 - (float(k) + float(m) - 1.0) * pmm) / float(k - m)
+		pmm = pmmp1
+		pmmp1 = pll
+	return pll
 
 func _create_labels() -> void:
 	var title = Label3D.new()
@@ -315,4 +490,24 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var dirty: bool = false
+	if config.has("surface"):
+		var wanted: String = str(config["surface"]).strip_edges()
+		if wanted != "" and wanted != surface:
+			surface = wanted
+			dirty = true
+	if config.has("harmonic_l"):
+		var wanted_l: int = int(config["harmonic_l"])
+		if wanted_l > 0 and wanted_l != harmonic_l:
+			harmonic_l = wanted_l
+			dirty = true
+	if config.has("harmonic_m"):
+		var wanted_m: int = int(config["harmonic_m"])
+		if wanted_m >= 0 and wanted_m != harmonic_m:
+			harmonic_m = wanted_m
+			dirty = true
+	# Rebuild ONLY when something changed and _ready has already built once. Called
+	# before _ready — the usual order from GridInteractablesComponent — the vars are set
+	# and _create_spheres() reads them, so no shipped placement is disturbed.
+	if dirty and is_node_ready() and large_sphere != null:
+		_build_large_sphere()

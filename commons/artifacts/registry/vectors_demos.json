@@ -243,10 +243,27 @@
 			"parameters": {
 				"seed": "Starting a and b (default 0)",
 				"op": "add or sub (default add)",
+				"workings": "outcome | trace | operands | expression - how much of the arithmetic the bench draws (default trace)",
 				"color_a": "vector a",
 				"color_b": "vector b",
 				"color_c": "the resultant",
 				"emissive": "Bool - lift glow (default true)"
+			},
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					]
+				},
+				"default": "workings=trace - the triangle rule the console has always drawn (a from the origin, b from a's tip, the resultant closing them, the component rectangle dashed underneath), so the 5 existing placements are unchanged",
+				"was": "the head-to-tail construction hard-coded as the only way a sum could be drawn - op, seed and the colours were reachable from a map token, but nothing about what the bench ARGUES was",
+				"shared_with": "transform_composition_workbench - the same axis word and the same four values in the same order, so a room cannot show a sum as a walked route and a composed transform as a bare answer",
+				"note": "the WORKINGS code lives in commons/artifacts/vector_op_console/vector_op_console.gd and reaches vector_sub through the same script"
 			},
 			"dev_themes": [
 				"vectors",
@@ -756,7 +773,25 @@
 			"lookup_name": "combined_forces_demo",
 			"scene": "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.tscn",
 			"name": "Combined Forces Demo",
-			"description": "Vector addition as force combination \u2014 multiple forces acting on a body, visualized as arrows that add head-to-tail. The resultant force emerges from superposition.",
+			"description": "Vector addition as force combination \u2014 multiple forces acting on a body, visualized as arrows that add head-to-tail. The resultant force emerges from superposition. DNA: composition sets the ANGLE the draggable forces start in (orthogonal = the legacy right angle, compounding = 25 degrees apart so the resultant is nearly the sum, opposing = 180 degrees so the resultant is zero and the ball does not move); force_count sets how many forces the body feels. Use #composition: and #force_count:.",
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"composition": [
+						"orthogonal",
+						"compounding",
+						"opposing"
+					],
+					"force_count": [
+						1,
+						2,
+						3
+					]
+				},
+				"default": "composition=orthogonal, force_count=2 - F1 = (1.5,0,0) and F2 = (0,1.5,0) are exactly the pre-promotion vectors, same colours and same info text, so all 5 existing placements are unchanged",
+				"was": "zero exports: two force arrows hard-coded to +X and +Y. Its own @identity already named both axes \u2014 'critical_parameter: the angle between F1 and F2' and 'Missing: third force for true superposition' \u2014 years before anything could turn them"
+			},
 			"category": "vectors",
 			"complexity": "beginner",
 			"tags": [
@@ -1079,7 +1114,28 @@
 			"lookup_name": "normal_force_demo",
 			"scene": "res://algorithms/vectors/07_vector_projection_reflection/NormalForceDemo.tscn",
 			"name": "Normal Force & Reflection Demo",
-			"description": "Vector projection and reflection \u2014 decompose velocity into normal and tangent components, then reflect. The math behind every bouncing ball and billiard shot.",
+			"description": "Vector projection and reflection \u2014 decompose velocity into normal and tangent components, then reflect. The math behind every bouncing ball and billiard shot. DNA: incline sets the tilt, which is the split between the force the surface answers and the force it does not (flat 0\u00b0 \u00b7 gentle 15\u00b0 \u00b7 slope 30\u00b0 \u00b7 steep 45\u00b0 \u00b7 cliff 60\u00b0); surface sets what the surface IS (plane = transparent mathematical sheet, slab = thin opaque solid, ramp = thick block of matter, absent = no object at all, only the normal). Use #incline: and #surface:.",
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"incline": [
+						"flat",
+						"gentle",
+						"slope",
+						"steep",
+						"cliff"
+					],
+					"surface": [
+						"plane",
+						"slab",
+						"ramp",
+						"absent"
+					]
+				},
+				"default": "incline=slope, surface=plane - slope resolves to exactly the hard-coded 30.0 degrees and plane is the original transparent PlaneMesh with no solid added, so the 5 existing placements render as before",
+				"was": "zero exports: a 30-degree transparent sheet, its angle reachable only by pressing the arrow keys at the desktop"
+			},
 			"category": "vectors",
 			"complexity": "intermediate",
 			"tags": [

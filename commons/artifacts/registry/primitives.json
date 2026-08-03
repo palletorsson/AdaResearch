@@ -9137,6 +9137,17 @@
    "qfep_connection": "Your analog hand against round(position / grid_size): the sphere follows you continuously, then clicks to the nearest lattice point, and the trail records which differences survived. Quantization felt as a series of small verdicts on your movement."
   },
   "grab_sphere_point_with_color": {
+   "dna": {
+    "axes": {
+    "grasp": [
+    "atom",
+    "socket",
+    "chorus",
+    "hollow",
+    "swarm"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Pickable point sphere that applies emission-tinted colors via the point_color helper.",

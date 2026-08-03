@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://db5t3cgp2x7l"]
+[gd_scene load_steps=4 format=3 uid="uid://db5t3cgp2x7l"]
 
 [ext_resource type="Script" uid="uid://cbx404agvki1t" path="res://algorithms/forces/example_2_9_n_body_attraction_vr.gd" id="1"]
 [ext_resource type="Script" uid="uid://t5l0d0bu80oa" path="res://core/fish_tank.gd" id="2"]
+[ext_resource type="Script" path="res://algorithms/forces/forces_demo_root.gd" id="3"]
 
 [node name="Example_2_9_NBodyAttraction" type="Node3D"]
+script = ExtResource("3")
 
 [node name="FishTank" type="Node3D" parent="."]
 script = ExtResource("2")

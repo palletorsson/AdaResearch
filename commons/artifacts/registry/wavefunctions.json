@@ -5785,6 +5785,21 @@
    }
   },
   "SphericalHarmonics": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "surface": [
+      "glass",
+      "nodal",
+      "lobed",
+      "wire"
+     ]
+    },
+    "default": "surface=glass - the shared unit sphere under the shared blue glass material, assigned and never mutated, so all 4 maps (8 placed cells) are unchanged",
+    "was": "no exports: a plain translucent ball with a lit point orbiting outside it. The artifact is named after Y_l^m and never drew one - the mode existed only as the ratio of two orbit speeds, traced out over time and therefore invisible to a still.",
+    "note": "surface asks what a spherical harmonic IS on the object claiming to be one: a field painted on a fixed sphere (nodal), a shape the sphere is deformed into (lobed), or only the coordinate cage the mode divides (wire). A second axis for the mode itself (l, m) was deliberately NOT declared: at surface=glass nothing in the frame depends on l or m, so a still-based critic would report it INERT and the verdict would be about the coupling, not the design. harmonic_l / harmonic_m ship as plain exports instead."
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "Waves on a sphere—the mathematical functions that describe electron orbitals, planetary magnetic fields, and 3D audio spatialization. These are the 3D cousins of sine waves, oscillating across spherical surfaces.",
@@ -8810,6 +8825,25 @@
    }
   },
   "fourier_transform": {
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "domain": [
+      "time",
+      "frequency",
+      "both"
+     ],
+     "trace": [
+      "samples",
+      "stems",
+      "ribbon"
+     ]
+    },
+    "default": "domain=time, trace=samples - the frequency bars have always been built and immediately hidden, and the time signal has always been 20 discrete spheres, so all 4 existing placements are unchanged",
+    "was": "no exports on the scene root: an artifact named after a transform that showed only one side of it, because the Compute FFT button that reveals the other side is a Control node map placements suppress as demo chrome",
+    "note": "domain asks which side of the transform is standing in the room; trace asks how much of the sampling is admitted (markers only, stems down to the zero line, or a filled continuum with no markers at all). The same question additive_wave_demo asks from the synthesis side."
+   },
    "category": "waves",
    "complexity": "expert",
    "description": "Frequency domain analysis and signal processing",

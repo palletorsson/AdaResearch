@@ -43,6 +43,16 @@
 				"placeable"
 			],
 			"qfep_connection": "F_force: a throw is an initial condition. You write direction and magnitude at release; gravity, constant and given, bends the rest. The parabola is the sum of what you give and what is given.",
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"foresight": ["parabola", "apex", "landing", "none"],
+					"vectors": ["sum", "components", "velocity", "gravity"]
+				},
+				"default": "foresight=parabola, vectors=sum - the full dotted arc plus one velocity arrow and the gravity arrow is exactly what the 4 existing placements draw today; the component arrows are not even instantiated at this value, so the scene tree and its capture AABB are unchanged",
+				"was": "the predicted parabola was always the whole flight path, and the throw was always drawn as a single arrow beside a single gravity arrow - both hard-coded in _update_trajectory and _update_vector_arrows with no way to say otherwise"
+			},
 			"parameters": {
 				"gravity": 9.8,
 				"default_angle": 50.0,

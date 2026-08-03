@@ -6,12 +6,49 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 # critical_parameter: DRAG_COEFFICIENT (0.8) — too high and the ball stops immediately; zero and it goes parabolic; the visible drag arrow shows the invisible resistance
 # triggers: catapult_gadget launches ball → each frame: compute gravity/thrust/drag vectors → sum to F_net → update RigidBody3D → render all 6 vectors simultaneously
 # emerges: the visible taxonomy of forces — five simultaneous arrows (gravity, thrust, drag, velocity, acceleration) let you watch how each contributes before they combine
-# needs: VR catapult launch [has via catapult_gadget], thrust magnitude control [missing], drag coefficient slider [missing]
+# needs: VR catapult launch [has via catapult_gadget], thrust magnitude control [has via dna regime], drag coefficient slider [missing]
 # relationships: the applied combination of VectorAddition (force superposition) and VectorDotProduct (drag opposes velocity direction); prerequisite to VectorTorque
 # truth: A force is a direction with a claim. When two forces disagree, the net force is the argument they settle at.
 
 const DRAG_COEFFICIENT := 0.8
 const CatapultGadgetScript = preload("res://algorithms/vectors/shared/gadgets/catapult_gadget.gd")
+
+# --- STAGE-2 DNA PROMOTION (2026-07-29) -------------------------------------
+# This bench had no exports at all: one fixed sideways thrust, one fixed set of
+# six arrows. But its own truth statement is "when two forces disagree, the net
+# force is the argument they settle at" — which means the interesting variable
+# is WHICH FORCES ARE IN THE ROOM, and WHICH OF THEM THE DIAGRAM CHOOSES TO DRAW.
+# Two axes, both defaulting to today's exact behaviour:
+#
+#   regime   who is arguing         crosswind · freefall · stalemate · liftoff
+#   diagram  what the chart shows   taxonomy · inputs · resultant · kinematics
+#
+# `diagram` is purely rhetorical — the physics is identical in all four; only the
+# drawn arrows change. That is the point: a force diagram is an argument about
+# what matters, not a readout.
+
+## DNA axis 1 — which forces are present to disagree. crosswind = the historical
+## sideways thrust fighting gravity; freefall = gravity alone; stalemate = thrust
+## exactly cancels weight (net zero, the ball hangs); liftoff = thrust wins.
+@export var regime: String = "crosswind"
+
+## DNA axis 2 — which of the six vectors the diagram draws. taxonomy = all six
+## (historical); inputs = only the forces being summed; resultant = only the sum;
+## kinematics = only what the sum produced (velocity, acceleration).
+@export var diagram: String = "taxonomy"
+
+const THRUST_CROSSWIND := Vector3(2.5, 0.0, 0.0)
+const GRAVITY_ACCEL := Vector3(0.0, -6.0, 0.0)
+const BALL_MASS := 1.2
+
+const DIAGRAM_SETS := {
+	"taxonomy": ["Gravity", "Thrust", "Drag", "Net Force", "Velocity", "Acceleration"],
+	"inputs": ["Gravity", "Thrust", "Drag"],
+	"resultant": ["Net Force"],
+	"kinematics": ["Velocity", "Acceleration"],
+}
+
+var _dna_built: bool = false
 
 var ball: RigidBody3D
 var gravity_vector: Node3D
@@ -39,11 +76,11 @@ func _ready() -> void:
 
 	create_axes(1.5)
 	_create_ground()
-	ball = create_ball(Vector3(0.0, 1.2, 0.0), 0.22, 1.2, Color(0.9, 0.5, 1.0, 1.0))
+	ball = create_ball(Vector3(0.0, 1.2, 0.0), 0.22, BALL_MASS, Color(0.9, 0.5, 1.0, 1.0))
 
 	# Force vectors: light blue gravity, warm thrust, cool drag, bright green net
-	gravity_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, -6.0, 0.0), Color(0.5, 0.75, 1.0, 1.0), "Gravity")
-	thrust_vector = spawn_vector(Vector3.ZERO, Vector3(2.5, 0.0, 0.0), Color(1.0, 0.55, 0.35, 1.0), "Thrust")
+	gravity_vector = spawn_vector(Vector3.ZERO, GRAVITY_ACCEL, Color(0.5, 0.75, 1.0, 1.0), "Gravity")
+	thrust_vector = spawn_vector(Vector3.ZERO, THRUST_CROSSWIND, Color(1.0, 0.55, 0.35, 1.0), "Thrust")
 	drag_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.65, 0.75, 1.0, 0.6), "Drag", false)
 	net_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.45, 1.0, 0.4, 0.9), "Net Force", false)
 	velocity_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.55, 0.95, 1.0, 0.8), "Velocity", false)
@@ -63,6 +100,54 @@ func _ready() -> void:
 	_cache_vector_nodes(net_vector, _cached_net_nodes)
 	_cache_vector_nodes(velocity_vector, _cached_velocity_nodes)
 	_cache_vector_nodes(accel_vector, _cached_accel_nodes)
+
+	_dna_built = true
+	_apply_dna()
+
+# --- DNA ---------------------------------------------------------------------
+
+## The thrust the chosen regime puts in the room. crosswind returns exactly the
+## historical constant, so the default is byte-for-byte the pre-promotion scene.
+func _thrust_for_regime() -> Vector3:
+	var mass: float = BALL_MASS
+	if ball:
+		mass = ball.mass
+	if regime == "freefall":
+		return Vector3.ZERO
+	if regime == "stalemate":
+		return -GRAVITY_ACCEL * mass
+	if regime == "liftoff":
+		return -GRAVITY_ACCEL * mass * 1.6
+	return THRUST_CROSSWIND
+
+## Push the two axes into the built scene. Nothing here rebuilds: the regime is
+## one endpoint move on the thrust arrow, the diagram is six visibility flags.
+func _apply_dna() -> void:
+	if thrust_vector:
+		_update_vector_fast(thrust_vector, _thrust_for_regime(), _cached_thrust_nodes)
+
+	var shown: Array = DIAGRAM_SETS["taxonomy"]
+	if DIAGRAM_SETS.has(diagram):
+		shown = DIAGRAM_SETS[diagram]
+
+	var arrows: Dictionary = {
+		"Gravity": gravity_vector,
+		"Thrust": thrust_vector,
+		"Drag": drag_vector,
+		"Net Force": net_vector,
+		"Velocity": velocity_vector,
+		"Acceleration": accel_vector,
+	}
+	for key in arrows.keys():
+		var arrow: Node3D = arrows[key]
+		if arrow == null:
+			continue
+		var wanted: bool = shown.has(key)
+		arrow.visible = wanted
+		if not wanted:
+			# Do not leave an invisible arrow grabbable in VR.
+			_disable_grab_sphere(arrow.get_node_or_null("lineContainer/GrabSphere"))
+			_disable_grab_sphere(arrow.get_node_or_null("lineContainer/GrabSphere2"))
 
 func _physics_process(delta: float) -> void:
 	if not ball:
@@ -190,5 +275,22 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Guarded: only touches the scene when a value actually CHANGED, and only after
+## _ready() has built once. Config can arrive before _ready — then the exports are
+## simply seeded and _ready applies them.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	var changed: bool = false
+	if config.has("regime"):
+		var new_regime: String = str(config["regime"])
+		if new_regime != regime:
+			regime = new_regime
+			changed = true
+	if config.has("diagram"):
+		var new_diagram: String = str(config["diagram"])
+		if new_diagram != diagram:
+			diagram = new_diagram
+			changed = true
+	if changed and _dna_built:
+		_apply_dna()

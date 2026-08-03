@@ -14,6 +14,25 @@ extends Node3D
 
 var signal_types = ["Sine Wave", "Square Wave", "Triangle Wave", "Sawtooth Wave"]
 
+# =============================================================================
+# DNA — stage 2, promoted 2026-07-29
+# =============================================================================
+# Two hard-coded facts in this artifact were secretly a parameter space.
+#
+# domain: create_frequency_domain_display() ended with set_frequency_domain_visible(false)
+#   and the only way back was the "Compute FFT" button — a Control node that map
+#   placements suppress as demo chrome. So the artifact named after a transform showed
+#   only one side of it, everywhere it has ever been placed. The axis makes that a
+#   choice: which domain is standing in the room, and whether the pair is shown at once.
+#
+# trace: the time-domain signal is 20 CSG spheres on a 0.5 grid — already a claim that a
+#   signal is a finite set of samples, made without saying so. samples leaves the claim
+#   implicit, stems draws each measurement down to the zero line and makes the sampling
+#   the subject, ribbon fills the gaps and hides it behind a continuum. The same question
+#   additive_wave_demo asks from the other direction: how much of the arithmetic is shown.
+@export_enum("time", "frequency", "both") var domain: String = "time"
+@export_enum("samples", "stems", "ribbon") var trace: String = "samples"
+
 func _ready() -> void:
 	# Connect UI signals
 	signal_type_slider.value_changed.connect(_on_signal_type_changed)
@@ -25,6 +44,7 @@ func _ready() -> void:
 	
 	# Initialize the signal generator
 	_update_signal_parameters()
+	_apply_dna()
 
 func _on_signal_type_changed(value) -> void:
 	var signal_type = signal_types[int(value)]
@@ -58,5 +78,28 @@ func _update_signal_parameters() -> void:
 		signal_generator.harmonics = int(harmonics_slider.value)
 		signal_generator.update_signal()
 
+func _apply_dna() -> void:
+	if signal_generator == null:
+		return
+	# Both setters are no-ops when the value already matches, so a default placement
+	# never touches the display the child built in its own _ready().
+	signal_generator.set_domain_mode(domain)
+	signal_generator.set_trace_mode(trace)
+
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var dirty: bool = false
+	if config.has("domain"):
+		var wanted_domain: String = str(config["domain"]).strip_edges()
+		if wanted_domain != "" and wanted_domain != domain:
+			domain = wanted_domain
+			dirty = true
+	if config.has("trace"):
+		var wanted_trace: String = str(config["trace"]).strip_edges()
+		if wanted_trace != "" and wanted_trace != trace:
+			trace = wanted_trace
+			dirty = true
+	# Only rebuild when a value actually changed AND _ready has already built once.
+	# Called before _ready (the usual case from GridInteractablesComponent), the vars
+	# are simply set and _ready's own _apply_dna() picks them up.
+	if dirty and is_node_ready():
+		_apply_dna()

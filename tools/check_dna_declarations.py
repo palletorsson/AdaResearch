@@ -95,16 +95,38 @@ def registry() -> dict:
     return out
 
 
-def source_for(entry: dict) -> tuple[Path | None, str]:
-    """The script a scene actually runs — read from the .tscn, not guessed from its name.
+def sources_for(entry: dict) -> list[tuple[Path, str]]:
+    """EVERY script the scene runs, the root's first.
 
     Swapping .tscn for .gd is right for most artifacts and wrong for the ones that matter:
     info_board.tscn runs AnnotationInfoBoard.gd, so the name-swap found a 27-line stub and
     reported the axis unreadable. The scene file names its own script; ask it.
+
+    WHY A LIST AND NOT ONE PATH. Asking the .tscn and taking the ROOT's script is right for
+    info_board and wrong for the NOC forces family, whose scenes are shaped
+
+        [Example_2_x]   <- forces_demo_root.gd, a pass-through that only forwards config down
+          └── FishTank
+                └── Demo   <- the @export and the axis live HERE
+
+    Resolving to the root alone read a script with no exports in it and reported two correct
+    declarations as NO_EXPORT. The reverse of the science_screen fault, and just as loud: a
+    fact about scene shape wearing the costume of a verdict about the registry. So offer
+    every script the scene lists, root first, and let the caller take the one that actually
+    declares the axis it is asking about.
     """
+    out: list[tuple[Path, str]] = []
+    seen: set[Path] = set()
+
+    def add(p: Path) -> None:
+        if p in seen or not p.exists():
+            return
+        seen.add(p)
+        out.append((p, p.read_text(encoding="utf-8", errors="replace")))
+
     sp = str(entry.get("scene_path") or entry.get("scene") or "")
     if not sp:
-        return None, ""
+        return out
     tscn = REPO / sp.replace("res://", "")
     if tscn.suffix == ".tscn" and tscn.exists():
         text = tscn.read_text(encoding="utf-8", errors="replace")
@@ -117,15 +139,26 @@ def source_for(entry: dict) -> tuple[Path | None, str]:
             rm = re.search(r'script\s*=\s*ExtResource\("([^"]+)"\)', root.group(1))
             if rm:
                 want = rm.group(1)
-        for path, rid in ids.items():
-            if want is None or rid == want:
-                gd = REPO / path.replace("res://", "")
-                if gd.exists():
-                    return gd, gd.read_text(encoding="utf-8", errors="replace")
-    gd = REPO / sp.replace("res://", "").replace(".tscn", ".gd")
-    if not gd.exists():
-        return gd, ""
-    return gd, gd.read_text(encoding="utf-8", errors="replace")
+        if want is not None:
+            for path, rid in ids.items():
+                if rid == want:
+                    add(REPO / path.replace("res://", ""))
+        for path in ids:
+            add(REPO / path.replace("res://", ""))
+    if not out:
+        add(REPO / sp.replace("res://", "").replace(".tscn", ".gd"))
+    return out
+
+
+def source_for(entry: dict) -> tuple[Path | None, str]:
+    """The scene's primary script — the root's if it has one. See sources_for()."""
+    srcs = sources_for(entry)
+    if srcs:
+        return srcs[0]
+    sp = str(entry.get("scene_path") or entry.get("scene") or "")
+    if not sp:
+        return None, ""
+    return REPO / sp.replace("res://", "").replace(".tscn", ".gd"), ""
 
 
 def _strings(blob: str) -> list[str]:
@@ -280,13 +313,24 @@ def check_token(tok: str, entry: dict) -> list[dict]:
     axes = ((entry.get("dna") or {}).get("axes") or {})
     if not axes:
         return []
-    gd, src = source_for(entry)
-    if not src:
+    all_srcs = sources_for(entry)
+    gd, base_src = source_for(entry)
+    if not base_src:
         return [{"token": tok, "axis": ax, "status": "NO_EXPORT",
                  "detail": f"source unreadable: {gd}"} for ax in axes]
 
     rows = []
     for ax, declared in axes.items():
+        # PER AXIS, not per scene: the knob may live on a script the scene runs BELOW its
+        # root behind a pass-through. Take the first script that actually exports it, and
+        # only fall back to the root's when nothing in the scene does — so a genuinely
+        # missing export still reports NO_EXPORT against the primary script.
+        src = base_src
+        for _cand_gd, cand_src in all_srcs:
+            if has_export(cand_src, ax):
+                src = cand_src
+                break
+
         dv = [str(v) for v in declared]
         if not has_export(src, ax):
             # The unreachable-critical_parameter class: a declared knob nobody can set.
@@ -466,19 +510,30 @@ def untracked_sources(reg: dict) -> list:
     for tok, (e, rf) in sorted(reg.items()):
         if not ((e.get("dna") or {}).get("axes")):
             continue
-        gd, src = source_for(e)
-        if gd is None or not src:
-            continue
-        rel = str(gd).replace("\\", "/")
-        if "AdaResearch_46/" in rel:
-            rel = rel.split("AdaResearch_46/", 1)[1]
-        r = subprocess.run(["git", "ls-files", "--error-unmatch", rel],
-                           capture_output=True, cwd=str(REPO))
-        if r.returncode != 0:
+        # EVERY script the scene runs, not just the primary one. A pass-through root that
+        # never got staged strands the axis just as completely as an unstaged demo script.
+        for gd, src in sources_for(e):
+            if not src:
+                continue
+            rel = str(gd).replace("\\", "/")
+            if "AdaResearch_46/" in rel:
+                rel = rel.split("AdaResearch_46/", 1)[1]
+            r = subprocess.run(["git", "ls-files", "--error-unmatch", rel],
+                               capture_output=True, cwd=str(REPO))
+            if r.returncode == 0:
+                continue
+            # check-ignore exits 0 on a NEGATED pattern too — `!*.gd` means the path is
+            # explicitly NOT ignored. Reading only the exit code labelled a merely-unstaged
+            # file "gitignored by .gitignore:304", which sends the reader to edit a
+            # .gitignore that is already correct. Ask what the matching pattern says.
             ig = subprocess.run(["git", "check-ignore", "-v", rel],
                                 capture_output=True, text=True, cwd=str(REPO))
-            why = ig.stdout.strip().split(":")[0:2] if ig.returncode == 0 else []
-            out.append((tok, rel, "gitignored by " + ":".join(why) if why else "never staged"))
+            why = ""
+            if ig.returncode == 0 and ig.stdout.strip():
+                parts = ig.stdout.strip().split("\t")[0].split(":")
+                if len(parts) >= 3 and not parts[2].lstrip().startswith("!"):
+                    why = "gitignored by " + ":".join(parts[0:2])
+            out.append((tok, rel, why or "never staged"))
     return out
 
 

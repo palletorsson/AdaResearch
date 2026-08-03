@@ -19,6 +19,69 @@ const PERCOLATION_THRESHOLD = 0.4  # Lower threshold to create more pathways
 const FLOW_RATE = 0.15
 const MAX_ITERATIONS = 500
 
+# ═══════════════════════════════════════════════════════════════════════════
+# STAGE-2 DNA PROMOTION (2026-08-03) — `occupation` and `inlet`
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# This artifact's own @identity block names PERCOLATION_THRESHOLD as its critical
+# parameter and then lists a threshold control under `needs` as MISSING. The number was
+# a const, so the one quantity the piece exists to argue about could not be argued with:
+# every placement, in every map, got p = 0.4 — comfortably above the 3D site-percolation
+# critical point p_c ~= 0.3116, which is to say every player who ever met this lattice met
+# a lattice that was always going to connect. The claim "below the threshold nothing
+# connects, above it everything does, and at the threshold the system decides" was
+# demonstrated only on its winning side.
+#
+#   occupation  HOW MUCH LATTICE THERE IS — p, the probability a site is open.
+#     sparse      0.20  well under p_c: isolated pockets, the flow dies near the top face
+#     critical    0.31  at p_c: the incipient cluster, fractal, the outcome genuinely open
+#     conductive  0.40  THE SHIPPED VALUE. above p_c; a network with room to walk in
+#     dense       0.60  everything connects and the paths stop being paths
+#     solid       0.80  a wall. percolation is trivial and the network is no longer one
+#
+#   inlet  WHERE THE FLOW ENTERS — which sites are seeded as SOURCE. This is a boundary
+#          condition, not a decoration: it is the difference between classical percolation
+#          (a front descending from a plane) and invasion from a single site.
+#     face   every open site on the +z face      THE SHIPPED VALUE. a rain front
+#     point  the open site nearest that face's centre. one injection, one dendrite
+#     seam   one row across the face. a line source, and a sheet of flow instead of a volume
+#     shell  every open site on ALL SIX faces. the flow arrives from outside, inward
+#
+# occupation=conductive, inlet=face is the pre-promotion behaviour EXACTLY — same 0.4,
+# same top-face seeding, same materials, same collision rule — and it is the default, so
+# every existing placement is unchanged.
+#
+# A WARNING THAT BELONGS IN THE CODE, not only in the registry: occupied (white) cubes
+# CARRY COLLISION and the player walks inside this lattice. `dense` and `solid` are honest
+# arguments and bad rooms; they are bench values. Nothing above `conductive` should be
+# placed in a walked map without checking the map still has a path through it.
+#
+# Usage in map_data.json:
+#   "percolationnetwork_ca#occupation:critical"
+#   "percolationnetwork_ca#occupation:sparse#inlet:point#lattice_seed:7"
+
+## How much lattice there is — the probability that a site is open. See the note above.
+@export_enum("sparse", "critical", "conductive", "dense", "solid") var occupation: String = "conductive"
+## Where the flow enters the lattice. See the note above.
+@export_enum("face", "point", "seam", "shell") var inlet: String = "face"
+## SEED for the lattice and for the flow jitter, both of which have always come from the
+## global unseeded randf(). -1 keeps that exactly: a new lattice every launch. Any other
+## value fixes it, which is what a sweep needs if it is to measure the axis and not the
+## dice — five variants of an unseeded lattice are five different objects.
+@export var lattice_seed: int = -1
+
+## Site-open probability per value of `occupation`. p_c(3D site) ~= 0.3116.
+const OCCUPATIONS := {
+	"sparse": 0.20,
+	"critical": 0.31,
+	"conductive": 0.40,
+	"dense": 0.60,
+	"solid": 0.80,
+}
+
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var _built: bool = false
+
 var grid: Array = []
 var flow_grid: Array = []
 var cube_nodes: Array = []  # Store individual cube nodes for collision
@@ -39,10 +102,13 @@ enum CellState {
 }
 
 func _ready() -> void:
+	_read_grid_config_meta()
+	_seed_rng()
 	setup_percolation_system()
 	initialize_lattice()
 	create_cube_collision_boxes()
 	start_percolation()
+	_built = true
 
 func setup_percolation_system() -> void:
 	# Initialize 3D arrays
@@ -67,18 +133,15 @@ func setup_percolation_system() -> void:
 
 func initialize_lattice() -> void:
 	# Create random occupied sites based on percolation threshold
+	var p: float = _site_probability()
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
 			for z in range(GRID_SIZE):
-				if randf() < PERCOLATION_THRESHOLD:  # Use threshold directly for pathways
+				if _rng.randf() < p:  # Use threshold directly for pathways
 					grid[x][y][z] = CellState.OCCUPIED
-	
-	# Set source points on top face (z = GRID_SIZE - 1)
-	for x in range(GRID_SIZE):
-		for y in range(GRID_SIZE):
-			if grid[x][y][GRID_SIZE - 1] == CellState.OCCUPIED:
-				grid[x][y][GRID_SIZE - 1] = CellState.SOURCE
-				flow_grid[x][y][GRID_SIZE - 1] = 1.0
+
+	# Set source points — the top face (z = GRID_SIZE - 1) unless `inlet` says otherwise
+	_seed_inlet()
 
 func create_cube_collision_boxes() -> void:
 	# Initialize cube nodes array
@@ -200,7 +263,7 @@ func propagate_flow_to_neighbors(new_flow: Array, x: int, y: int, z: int, curren
 			if neighbor_state == CellState.OCCUPIED:
 				new_flow[neighbor.x][neighbor.y][neighbor.z] = max(
 					new_flow[neighbor.x][neighbor.y][neighbor.z],
-					flow_amount * randf_range(0.7, 1.0)
+					flow_amount * _rng.randf_range(0.7, 1.0)
 				)
 
 func is_valid_position(x: int, y: int, z: int) -> bool:
@@ -464,5 +527,170 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+# ═══════════════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `occupation` and `inlet`
+# EVERYTHING BELOW THIS LINE IS APPENDED. Above it, four lines moved: the two
+# calls at the head of _ready(), the probability and the seeding in
+# initialize_lattice(), and randf_range -> _rng.randf_range in the propagator.
+# ═══════════════════════════════════════════════════════════════════════════
+
+## Read the #key:value tokens the grid writes onto the artifact as `config_<key>`
+## metadata before the scene enters the tree. This scene's ROOT carries the script, so
+## apply_grid_config() below is reached directly too — this exists for the ordering case:
+## the metadata is in place before _ready(), so a token builds the right lattice ONCE
+## instead of building the default and then tearing it down.
+##
+## Costs nothing when no token is present. The exports keep their defaults and not a
+## single existing placement changes.
+func _read_grid_config_meta() -> void:
+	var node: Node = self
+	while node != null:
+		if node.has_meta("config_occupation"):
+			occupation = str(node.get_meta("config_occupation"))
+		if node.has_meta("config_inlet"):
+			inlet = str(node.get_meta("config_inlet"))
+		if node.has_meta("config_lattice_seed"):
+			lattice_seed = int(str(node.get_meta("config_lattice_seed")))
+		node = node.get_parent()
+
+
+## Config from map_data.json tokens: #occupation:critical · #inlet:point#lattice_seed:7
+##
+## GUARDED ON CHANGE, deliberately. The grid reaches an artifact with whatever other keys
+## the token carries, and can reach it after _ready has already built. Rebuilding 5,832
+## cells and their collision bodies because a placement passed an unrelated key would be a
+## visible stutter for nothing, so nothing happens unless a value of ours actually moved.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var changed: bool = false
+
+	if config.has("occupation"):
+		var want_occupation: String = str(config["occupation"])
+		if want_occupation != occupation:
+			occupation = want_occupation
+			changed = true
+	if config.has("inlet"):
+		var want_inlet: String = str(config["inlet"])
+		if want_inlet != inlet:
+			inlet = want_inlet
+			changed = true
+	if config.has("lattice_seed"):
+		var want_seed: int = int(str(config["lattice_seed"]))
+		if want_seed != lattice_seed:
+			lattice_seed = want_seed
+			changed = true
+
+	if not changed:
+		return
+	# Before _ready() there is no lattice yet and _ready() will build it with these values.
+	if not _built:
+		return
+	_rebuild_lattice()
+
+
+func _seed_rng() -> void:
+	if lattice_seed < 0:
+		_rng.randomize()                 # the shipped behaviour: a new lattice every launch
+	else:
+		_rng.seed = lattice_seed
+
+
+## The site-open probability p this placement runs at. An unknown word keeps the shipped
+## 0.4 rather than stranding a placement with an empty or solid room.
+func _site_probability() -> float:
+	var want: String = String(occupation).strip_edges().to_lower()
+	if not OCCUPATIONS.has(want):
+		want = "conductive"
+	occupation = want
+	return float(OCCUPATIONS[want])
+
+
+## Mark the SOURCE sites — the boundary the flow is injected across.
+func _seed_inlet() -> void:
+	match inlet:
+		"point":
+			_seed_point()
+		"seam":
+			_seed_seam()
+		"shell":
+			_seed_shell()
+		_:
+			_seed_face()                 # the shipped behaviour: the whole +z face
+
+
+## An open site becomes a source. A closed one is left closed — the boundary cannot open
+## a site the lattice never gave it, which is what makes p and the inlet independent.
+func _mark_source(x: int, y: int, z: int) -> void:
+	if not is_valid_position(x, y, z):
+		return
+	if grid[x][y][z] == CellState.OCCUPIED:
+		grid[x][y][z] = CellState.SOURCE
+		flow_grid[x][y][z] = 1.0
+
+
+## THE SHIPPED INLET, unchanged: every open site on the top face.
+func _seed_face() -> void:
+	for x in range(GRID_SIZE):
+		for y in range(GRID_SIZE):
+			_mark_source(x, y, GRID_SIZE - 1)
+
+
+## One site. Invasion from a point rather than a front — what grows is a dendrite, and
+## whether it reaches the far face is a question about ONE cluster instead of all of them.
+func _seed_point() -> void:
+	var mid: int = int(GRID_SIZE / 2)
+	var best_x: int = -1
+	var best_y: int = -1
+	var best_d: float = 1.0e9
+	for x in range(GRID_SIZE):
+		for y in range(GRID_SIZE):
+			if grid[x][y][GRID_SIZE - 1] != CellState.OCCUPIED:
+				continue
+			var d: float = Vector2(float(x - mid), float(y - mid)).length()
+			if d < best_d:
+				best_d = d
+				best_x = x
+				best_y = y
+	if best_x >= 0:
+		_mark_source(best_x, best_y, GRID_SIZE - 1)
+
+
+## A line across the face. The front is one-dimensional, so the flow spreads as a sheet
+## and the lattice's anisotropy — which it should not have — becomes checkable by eye.
+func _seed_seam() -> void:
+	var mid: int = int(GRID_SIZE / 2)
+	for x in range(GRID_SIZE):
+		_mark_source(x, mid, GRID_SIZE - 1)
+
+
+## All six faces. The flow arrives from outside and works inward, so what is being asked
+## is not whether the lattice spans but whether anything in it stays dry.
+func _seed_shell() -> void:
+	for a in range(GRID_SIZE):
+		for b in range(GRID_SIZE):
+			_mark_source(a, b, 0)
+			_mark_source(a, b, GRID_SIZE - 1)
+			_mark_source(a, 0, b)
+			_mark_source(a, GRID_SIZE - 1, b)
+			_mark_source(0, a, b)
+			_mark_source(GRID_SIZE - 1, a, b)
+
+
+## Tear the lattice down and cast a new one. Only ever called from apply_grid_config, and
+## only when a value actually changed.
+func _rebuild_lattice() -> void:
+	if cube_nodes.size() == GRID_SIZE:
+		for x in range(GRID_SIZE):
+			for y in range(GRID_SIZE):
+				for z in range(GRID_SIZE):
+					var node: Node = cube_nodes[x][y][z]
+					if node != null and is_instance_valid(node):
+						node.queue_free()
+					cube_nodes[x][y][z] = null
+
+	iteration_count = 0
+	percolation_complete = false
+	_seed_rng()
+	setup_percolation_system()
+	initialize_lattice()
+	create_cube_collision_boxes()
+	start_percolation()

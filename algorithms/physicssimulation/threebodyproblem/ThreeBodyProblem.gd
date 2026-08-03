@@ -6,13 +6,75 @@ extends Node3D
 # critical_parameter: gravitational_constant (0.1) and initial conditions. Tiny changes in starting positions produce wildly different long-term behavior. This IS chaos.
 # triggers: Auto-start — bodies attract pairwise, trails trace history. Reset button → return to initial positions. Pause → freeze the dance. Mass slider → all masses change.
 # emerges: Figure-eight orbits (rare, unstable). Hierarchical pairs (two orbit closely, third orbits the pair). Ejection events (one body flung away). Sensitivity to initial conditions.
-# needs: VR UI buttons [has], trail visualization [has], auto-rotate for 3D perspective [has]. Missing: VR grabbable bodies to set initial conditions, Lyapunov exponent display.
+# needs: VR UI buttons [has], trail visualization [has], auto-rotate for 3D perspective [has], initial-condition families [has, configuration axis]. Missing: VR grabbable bodies to set initial conditions by hand, Lyapunov exponent display.
 # relationships: Extends exercise_1_8 (two-body attraction → three-body chaos). Pairs with nbody_simulation (3 → N). Gateway to chaos_attractor (strange attractors from deterministic ODEs).
 # truth: Three bodies under gravity have no formula. The future is computable but not predictable. Determinism and predictability are not the same thing.
 
 class_name ThreeBodyProblem
 
+# STAGE-2 DNA PROMOTION (2026-07-29). This artifact had zero exports. The three
+# bodies' initial conditions were frozen in the .tscn — one pinwheel, forever — so
+# the artifact could only ever make half its argument. Chaos is not the claim that
+# three bodies are always a mess; it is the claim that the SAME law produces a
+# rigid clockwork from one starting state and an ejection from a neighbouring one.
+# You cannot see that from a single initial condition.
+#
+#   configuration   the initial conditions   pinwheel · figure_eight · lagrange
+#                                            hierarchical · near_collision
+#
+# pinwheel is the default and is a deliberate NO-OP: it leaves the positions and
+# velocities authored in threebodyproblem.tscn exactly as they are, so the five
+# existing placements render identically to before the promotion.
+#
+# Two of the values are the famous exceptions — the periodic solutions that DO
+# have a closed form (Lagrange's rotating triangle, 1772; the Chenciner–Montgomery
+# figure-eight choreography, 2000). Standing them next to near_collision is the
+# whole point: determinism is constant across all five, predictability is not.
+#
+# Usage in map_data.json:
+#   "three_body_problem#configuration:figure_eight"
+
+## Which initial conditions the three bodies start from.
+@export_enum("pinwheel", "figure_eight", "lagrange", "hierarchical", "near_collision") var configuration: String = "pinwheel"
+
+## Initial [position, velocity] per body, in the order the CelestialBodies node
+## lists them. Tuned for this scene's G = 0.1 and body_mass = 1000.
+## "pinwheel" is absent ON PURPOSE — it means "use what the scene authored".
+const CONFIGURATIONS := {
+	# Chenciner-Montgomery choreography: all three chase each other around one
+	# figure-eight curve. Unit solution scaled to L = 6, v x sqrt(100 / 6).
+	"figure_eight": [
+		[Vector3(5.820, 0, -1.459), Vector3(1.903, 0, 1.765)],
+		[Vector3(-5.820, 0, 1.459), Vector3(1.903, 0, 1.765)],
+		[Vector3(0, 0, 0), Vector3(-3.806, 0, -3.530)],
+	],
+	# Lagrange's equilateral triangle, rotating rigidly. Circumradius 5,
+	# omega = sqrt(3 G m / a^3) with side a = 8.66.
+	"lagrange": [
+		[Vector3(0, 0, 5), Vector3(-3.398, 0, 0)],
+		[Vector3(-4.330, 0, -2.5), Vector3(1.699, 0, -2.943)],
+		[Vector3(4.330, 0, -2.5), Vector3(1.699, 0, 2.943)],
+	],
+	# A tight binary with a distant third orbiting the pair. Stable-looking, and
+	# the arrangement most real triple systems actually settle into.
+	"hierarchical": [
+		[Vector3(-1.5, 0, 0), Vector3(2.04, 0, 4.08)],
+		[Vector3(1.5, 0, 0), Vector3(2.04, 0, -4.08)],
+		[Vector3(0, 0, 12), Vector3(-4.08, 0, 0)],
+	],
+	# Nearly collinear, barely moving: they fall together, slingshot, and one is
+	# usually flung out of the frame. Sensitivity to initial conditions, visible.
+	"near_collision": [
+		[Vector3(-6, 0, 0.25), Vector3(0, 0, 0.55)],
+		[Vector3(0.4, 0, 0), Vector3(0, 0, 0)],
+		[Vector3(6, 0, -0.25), Vector3(0, 0, -0.55)],
+	],
+}
+
 var bodies = []
+# The initial conditions as authored in the scene file, captured before any DNA is
+# applied so "pinwheel" can always be restored to the byte.
+var _authored: Array = []
 var paused = false
 var trails_enabled = true
 var gravitational_constant = 0.1
@@ -94,10 +156,41 @@ func _initialize_bodies() -> void:
 	if not celestial:
 		return
 	bodies = celestial.get_children()
-	
+
+	# Remember what the scene authored, once, before any axis touches it.
+	if _authored.is_empty():
+		for body in bodies:
+			_authored.append([body.initial_position, body.initial_velocity])
+
+	_apply_configuration()
+
 	# Initialize each body
 	for body in bodies:
 		body.initialize()
+
+
+func _apply_configuration() -> void:
+	"""Write the chosen initial conditions onto the bodies.
+
+	pinwheel restores the scene-authored values, so it is behaviourally identical
+	to never having been promoted — including if a map switches away and back.
+	"""
+	if configuration == "pinwheel" or not CONFIGURATIONS.has(configuration):
+		for i in range(bodies.size()):
+			if i >= _authored.size():
+				continue
+			var pair: Array = _authored[i]
+			bodies[i].initial_position = pair[0]
+			bodies[i].initial_velocity = pair[1]
+		return
+
+	var table: Array = CONFIGURATIONS[configuration]
+	for i in range(bodies.size()):
+		if i >= table.size():
+			continue
+		var entry: Array = table[i]
+		bodies[i].initial_position = entry[0]
+		bodies[i].initial_velocity = entry[1]
 
 func _physics_process(delta: float) -> void:
 	if paused:
@@ -210,5 +303,21 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("configuration"):
+		return
+	var wanted: String = str(config_data["configuration"])
+	# Guarded: an unknown value, or the value already in force, changes nothing.
+	# Rebuilding unconditionally here would restart the simulation of every
+	# existing placement the moment any other config key arrived.
+	if wanted == configuration:
+		return
+	if wanted != "pinwheel" and not CONFIGURATIONS.has(wanted):
+		return
+	configuration = wanted
+	# Before _ready: the export is enough, _initialize_bodies will read it.
+	if bodies.is_empty():
+		return
+	_apply_configuration()
+	for body in bodies:
+		body.reset_to_initial()

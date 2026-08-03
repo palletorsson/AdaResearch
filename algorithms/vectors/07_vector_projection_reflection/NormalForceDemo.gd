@@ -16,6 +16,43 @@ extends "res://algorithms/vectors/shared/force_containment_base.gd"
 ## relationships: Applies vector_projection_demo concepts to physics. Feeds into fluid_resistance (another force decomposition). Lives in VectorOperations.
 ## truth: The surface does not push you up. It pushes you perpendicular to itself. Gravity does the rest.
 
+# --- STAGE-2 DNA PROMOTION (2026-07-29) -------------------------------------
+# This demo had no exports: one hard-coded 30 degree tilt and one hard-coded
+# transparent sheet. Both of those are secretly the argument. Its truth statement
+# is "the surface does not push you up, it pushes you perpendicular to itself" —
+# so the two things worth varying are HOW STEEP the surface is (which decides how
+# much of gravity the surface answers) and WHAT THE SURFACE IS (a mathematical
+# sheet you see through, a solid you cannot, or nothing at all — a normal
+# direction with no object under it).
+#
+#   incline  how steep      flat · gentle · slope · steep · cliff
+#   surface  what it is     plane · slab · ramp · absent
+#
+# incline=slope is exactly 30 degrees and surface=plane is exactly the old
+# transparent PlaneMesh, so the default reproduces the pre-promotion scene.
+
+## DNA axis 1 — the tilt of the surface, which is the split between the force the
+## surface answers and the force it does not. slope = the historical 30 degrees.
+@export var incline: String = "slope"
+
+## DNA axis 2 — what the surface is made of. plane = the historical transparent
+## mathematical sheet; slab = a thin opaque solid; ramp = a thick block of matter
+## whose top face is the surface; absent = no object at all, only the normal.
+@export var surface: String = "plane"
+
+const INCLINES := {
+	"flat": 0.0,
+	"gentle": 15.0,
+	"slope": 30.0,
+	"steep": 45.0,
+	"cliff": 60.0,
+}
+const SURFACE_BASE_POS := Vector3(0, -0.2, 0)
+const SURFACE_TINT := Color(0.7, 0.7, 0.3, 0.6)
+
+var _dna_built: bool = false
+var _surface_body: MeshInstance3D
+
 var gravity_vector: Node3D
 var normal_vector: Node3D
 var parallel_vector: Node3D
@@ -34,9 +71,18 @@ var surface_normal: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	super._ready()
+	surface_angle = _angle_for_incline()
 	_setup_demo()
 	_update_surface_normal()
+	_dna_built = true
 	print("NormalForceDemo: Ready - See force decomposition!")
+
+## The angle the chosen incline asks for. "slope" returns exactly the historical
+## 30.0, so the default leaves every existing placement identical.
+func _angle_for_incline() -> float:
+	if INCLINES.has(incline):
+		return float(INCLINES[incline])
+	return 30.0
 
 func _setup_demo() -> void:
 	"""Setup normal force demonstration"""
@@ -85,16 +131,73 @@ func _create_surface() -> void:
 	surface_plane.mesh = plane_mesh
 	
 	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color(0.7, 0.7, 0.3, 0.6)
+	mat.albedo_color = SURFACE_TINT
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	surface_plane.material_override = mat
-	
+
 	# Position and rotate surface
-	surface_plane.position = Vector3(0, -0.2, 0) * SCENE_SCALE
+	surface_plane.position = SURFACE_BASE_POS * SCENE_SCALE
 	surface_plane.rotation_degrees = Vector3(-surface_angle, 0, 0)
-	
+
 	add_child(surface_plane)
+	_build_surface_body()
+
+## DNA axis 2. surface=plane leaves the transparent sheet alone and adds nothing
+## (the historical scene). The other three hide the sheet and, for slab and ramp,
+## put an opaque solid in its place — matter instead of mathematics.
+func _build_surface_body() -> void:
+	if _surface_body != null and is_instance_valid(_surface_body):
+		if _surface_body.get_parent() == self:
+			remove_child(_surface_body)
+		_surface_body.queue_free()
+	_surface_body = null
+	if surface_plane == null:
+		return
+	var thickness: float = 0.0
+	if surface == "plane":
+		surface_plane.visible = true
+		return
+	elif surface == "absent":
+		surface_plane.visible = false
+		return
+	elif surface == "slab":
+		thickness = 0.04
+	elif surface == "ramp":
+		thickness = 0.30
+	else:
+		# Unknown value falls back to the historical sheet.
+		surface_plane.visible = true
+		return
+	surface_plane.visible = false
+	var box := BoxMesh.new()
+	box.size = Vector3(0.6, thickness, 0.6) * SCENE_SCALE
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(SURFACE_TINT.r, SURFACE_TINT.g, SURFACE_TINT.b, 1.0)
+	_surface_body = MeshInstance3D.new()
+	_surface_body.name = "SurfaceBody"
+	_surface_body.mesh = box
+	_surface_body.material_override = mat
+	add_child(_surface_body)
+	_place_surface_body(thickness)
+
+## Seat the solid so its TOP face sits where the mathematical sheet used to be —
+## the surface stays in the same place, it just acquires a body below it.
+func _place_surface_body(thickness: float) -> void:
+	if _surface_body == null or not is_instance_valid(_surface_body):
+		return
+	_surface_body.rotation_degrees = Vector3(-surface_angle, 0, 0)
+	var drop: float = thickness * 0.5 * SCENE_SCALE
+	var down: Vector3 = _surface_body.transform.basis.y * drop
+	_surface_body.position = SURFACE_BASE_POS * SCENE_SCALE - down
+
+## Current solid thickness, so a re-tilt can re-seat it without rebuilding.
+func _surface_body_thickness() -> float:
+	if surface == "ramp":
+		return 0.30
+	elif surface == "slab":
+		return 0.04
+	return 0.04
 
 func _update_surface_normal() -> void:
 	"""Calculate surface normal from angle"""
@@ -163,7 +266,9 @@ func _input(event: InputEvent) -> void:
 
 func _update_surface_angle() -> void:
 	"""Update surface angle and normal"""
-	surface_plane.rotation_degrees = Vector3(-surface_angle, 0, 0)
+	if surface_plane:
+		surface_plane.rotation_degrees = Vector3(-surface_angle, 0, 0)
+	_place_surface_body(_surface_body_thickness())
 	_update_surface_normal()
 	print("NormalForceDemo: Angle = %.1f°" % surface_angle)
 
@@ -178,5 +283,28 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Guarded: nothing is rebuilt unless a value actually CHANGED, and nothing is
+## touched before _ready() has built once (config can arrive first — then the
+## exports are seeded and _ready applies them).
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	var angle_changed: bool = false
+	var surface_changed: bool = false
+	if config.has("incline"):
+		var new_incline: String = str(config["incline"])
+		if new_incline != incline:
+			incline = new_incline
+			surface_angle = _angle_for_incline()
+			angle_changed = true
+	if config.has("surface"):
+		var new_surface: String = str(config["surface"])
+		if new_surface != surface:
+			surface = new_surface
+			surface_changed = true
+	if not _dna_built:
+		return
+	if surface_changed:
+		_build_surface_body()
+	if angle_changed:
+		_update_surface_angle()

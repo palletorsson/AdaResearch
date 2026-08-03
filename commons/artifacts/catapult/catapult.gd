@@ -27,6 +27,21 @@ var max_angle_deg: float = 80.0
 var projectile_lifetime: float = 6.0
 var max_live_projectiles: int = 5
 
+# ── DNA axes (stage 2) ──────────────────────────────────────────────────────
+## foresight — how much of the arc is handed to you BEFORE you fire.
+##   parabola: the whole dotted flight path (the arc is already written)
+##   apex:     only the peak of the throw is marked (the summit, not the route)
+##   landing:  only the impact ring on the floor (the target, not the flight)
+##   none:     nothing — aim from the vectors alone
+@export_enum("parabola", "apex", "landing", "none") var foresight: String = "parabola"
+
+## vectors — how "what you give" is drawn at the basket.
+##   sum:        one velocity arrow + the constant gravity arrow
+##   components: velocity split into its horizontal and vertical parts
+##   velocity:   only the throw; gravity is left unstated
+##   gravity:    only the given; the throw is left unstated
+@export_enum("sum", "components", "velocity", "gravity") var vectors: String = "sum"
+
 # Colors
 var frame_color: Color = Color(0.32, 0.22, 0.14)        # wood-brown frame
 var metal_color: Color = Color(0.25, 0.27, 0.30)        # metal fittings
@@ -52,6 +67,8 @@ var _arm_tip: Node3D = null              # marker at end of arm (basket origin)
 var _basket: Node3D = null
 var _velocity_arrow: Node3D = null
 var _gravity_arrow: Node3D = null
+var _vx_arrow: Node3D = null            # built lazily, only for vectors = components
+var _vy_arrow: Node3D = null
 var _trajectory_mesh: ImmediateMesh = null
 var _trajectory_instance: MeshInstance3D = null
 var _velocity_label: Label3D = null
@@ -520,34 +537,86 @@ func _refresh_visuals() -> void:
 	_update_readout()
 
 
+## The component arrows only exist when the `components` value asks for them, so
+## the default scene tree (and its capture AABB) is exactly the pre-promotion one.
+func _ensure_component_arrows() -> void:
+	if _vx_arrow != null:
+		return
+	_vx_arrow = _create_arrow("VxArrow", velocity_arrow_color)
+	add_child(_vx_arrow)
+	_vy_arrow = _create_arrow("VyArrow", Color(0.35, 0.75, 1.0))
+	add_child(_vy_arrow)
+
+
 func _update_vector_arrows() -> void:
 	var p0 := _basket_local_position()
 	var v0 := _launch_velocity()
+
+	var split: bool = vectors == "components"
+	var show_velocity: bool = vectors != "gravity"
+	var show_gravity: bool = vectors != "velocity"
+	if split:
+		_ensure_component_arrows()
 
 	# Velocity arrow: scaled down so it reads as a direction handle, not the
 	# full metric length (which can be long). 0.10 m per (m/s).
 	var vel_end := p0 + v0 * 0.10
 	if _velocity_arrow:
-		_position_arrow(_velocity_arrow, p0, vel_end)
+		if show_velocity and not split:
+			_position_arrow(_velocity_arrow, p0, vel_end)
+		else:
+			_velocity_arrow.visible = false
+
+	# Component arrows: the same throw, written as horizontal + vertical.
+	if _vx_arrow:
+		if split:
+			_position_arrow(_vx_arrow, p0, p0 + Vector3(0.0, 0.0, v0.z) * 0.10)
+		else:
+			_vx_arrow.visible = false
+	if _vy_arrow:
+		if split:
+			var vx_end := p0 + Vector3(0.0, 0.0, v0.z) * 0.10
+			_position_arrow(_vy_arrow, vx_end, vx_end + Vector3(0.0, v0.y, 0.0) * 0.10)
+		else:
+			_vy_arrow.visible = false
+
 	if _velocity_label:
-		_velocity_label.text = "v0 = %.1f m/s @ %d deg" % [_force, int(round(_angle_deg))]
-		_velocity_label.position = vel_end + Vector3(0.0, 0.12, 0.0)
+		if split:
+			_velocity_label.text = "vx = %.1f   vy = %.1f" % [v0.z, v0.y]
+			_velocity_label.position = vel_end + Vector3(0.0, 0.12, 0.0)
+			_velocity_label.visible = true
+		elif show_velocity:
+			_velocity_label.text = "v0 = %.1f m/s @ %d deg" % [_force, int(round(_angle_deg))]
+			_velocity_label.position = vel_end + Vector3(0.0, 0.12, 0.0)
+			_velocity_label.visible = true
+		else:
+			_velocity_label.visible = false
 
 	# Gravity arrow: constant downward, fixed visual length, drawn near basket.
 	var g_start := p0 + Vector3(0.25, 0.0, 0.0)
 	var g_end := g_start + Vector3(0.0, -0.45, 0.0)
 	if _gravity_arrow:
-		_position_arrow(_gravity_arrow, g_start, g_end)
+		if show_gravity:
+			_position_arrow(_gravity_arrow, g_start, g_end)
+		else:
+			_gravity_arrow.visible = false
 	if _gravity_label:
-		_gravity_label.text = "g = %.1f m/s^2" % gravity_magnitude
-		_gravity_label.position = g_end + Vector3(0.0, -0.10, 0.0)
+		if show_gravity:
+			_gravity_label.text = "g = %.1f m/s^2" % gravity_magnitude
+			_gravity_label.position = g_end + Vector3(0.0, -0.10, 0.0)
+			_gravity_label.visible = true
+		else:
+			_gravity_label.visible = false
 
 
-## Live predicted parabola via p(t) = p0 + v0*t + 0.5*g*t^2 (local space).
+## Live prediction via p(t) = p0 + v0*t + 0.5*g*t^2 (local space). How much of
+## that prediction is drawn is the `foresight` axis.
 func _update_trajectory() -> void:
 	if _trajectory_mesh == null:
 		return
 	_trajectory_mesh.clear_surfaces()
+	if foresight == "none":
+		return
 
 	var p0 := _basket_local_position()
 	var v0 := _launch_velocity()
@@ -556,8 +625,26 @@ func _update_trajectory() -> void:
 	# Floor in local space sits roughly at y = 0 (the machine base).
 	var floor_y := 0.0
 
-	# Dotted look: emit short LINE segments with gaps between samples.
 	_trajectory_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	match foresight:
+		"apex":
+			_emit_apex_marks(p0, v0, g)
+		"landing":
+			_emit_landing_ring(p0, v0, floor_y)
+		_:
+			_emit_dotted_arc(p0, v0, g, floor_y)
+	_trajectory_mesh.surface_end()
+
+
+func _emit_segment(a: Vector3, b: Vector3) -> void:
+	_trajectory_mesh.surface_set_color(trajectory_color)
+	_trajectory_mesh.surface_add_vertex(a)
+	_trajectory_mesh.surface_set_color(trajectory_color)
+	_trajectory_mesh.surface_add_vertex(b)
+
+
+## The whole flight path, dotted: short LINE segments with gaps between samples.
+func _emit_dotted_arc(p0: Vector3, v0: Vector3, g: Vector3, floor_y: float) -> void:
 	var steps := 64
 	var dt := 0.045
 	var prev := p0
@@ -567,15 +654,47 @@ func _update_trajectory() -> void:
 		var pos := p0 + v0 * t + 0.5 * g * t * t
 		var draw_segment := have_prev and (i % 2 == 0)  # skip every other = dotted
 		if draw_segment:
-			_trajectory_mesh.surface_set_color(trajectory_color)
-			_trajectory_mesh.surface_add_vertex(prev)
-			_trajectory_mesh.surface_set_color(trajectory_color)
-			_trajectory_mesh.surface_add_vertex(pos)
+			_emit_segment(prev, pos)
 		prev = pos
 		have_prev = true
 		if pos.y <= floor_y and t > dt:
 			break
-	_trajectory_mesh.surface_end()
+
+
+## Only the summit: a launch tick at the basket and a cross at the peak.
+func _emit_apex_marks(p0: Vector3, v0: Vector3, g: Vector3) -> void:
+	var dir := v0.normalized()
+	_emit_segment(p0, p0 + dir * 0.28)
+
+	var t_apex: float = maxf(v0.y / maxf(gravity_magnitude, 0.001), 0.0)
+	var apex: Vector3 = p0 + v0 * t_apex + 0.5 * g * t_apex * t_apex
+	var s := 0.16
+	_emit_segment(apex - Vector3(s, 0.0, 0.0), apex + Vector3(s, 0.0, 0.0))
+	_emit_segment(apex - Vector3(0.0, s, 0.0), apex + Vector3(0.0, s, 0.0))
+	_emit_segment(apex - Vector3(0.0, 0.0, s), apex + Vector3(0.0, 0.0, s))
+	# A plumb line down from the peak so its height is readable against the floor.
+	_emit_segment(apex, Vector3(apex.x, 0.0, apex.z))
+
+
+## Only the impact: a ring on the floor where the stone will land.
+func _emit_landing_ring(p0: Vector3, v0: Vector3, floor_y: float) -> void:
+	var gm: float = maxf(gravity_magnitude, 0.001)
+	var h: float = maxf(p0.y - floor_y, 0.0)
+	var t_land: float = (v0.y + sqrt(maxf(v0.y * v0.y + 2.0 * gm * h, 0.0))) / gm
+	var land := Vector3(p0.x + v0.x * t_land, floor_y, p0.z + v0.z * t_land)
+
+	var radius := 0.35
+	var segs := 28
+	var prev := Vector3.ZERO
+	for i in range(segs + 1):
+		var a: float = TAU * float(i) / float(segs)
+		var pt := land + Vector3(cos(a) * radius, 0.0, sin(a) * radius)
+		if i > 0:
+			_emit_segment(prev, pt)
+		prev = pt
+	# Crosshair inside the ring.
+	_emit_segment(land - Vector3(radius, 0.0, 0.0), land + Vector3(radius, 0.0, 0.0))
+	_emit_segment(land - Vector3(0.0, 0.0, radius), land + Vector3(0.0, 0.0, radius))
 
 
 func _update_readout() -> void:
@@ -784,7 +903,20 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("trajectory_color") and config["trajectory_color"] is Color:
 		trajectory_color = config["trajectory_color"]
 
-	# If already built, push the new values into the live scene.
+	# DNA axes. Only accept a value we actually know; an unknown string would
+	# silently fall through to the default branch and publish a lie.
+	if config.has("foresight"):
+		var f: String = str(config["foresight"])
+		if f in ["parabola", "apex", "landing", "none"]:
+			foresight = f
+	if config.has("vectors"):
+		var vmode: String = str(config["vectors"])
+		if vmode in ["sum", "components", "velocity", "gravity"]:
+			vectors = vmode
+
+	# If already built, push the new values into the live scene. This is a
+	# redraw, not a rebuild — no node is freed and none is created unless the
+	# `components` value asks for the two extra arrows.
 	if is_inside_tree() and _arm_pivot != null:
 		if _angle_slider and _angle_slider.has_method("set_range"):
 			_angle_slider.set_range(min_angle_deg, max_angle_deg)

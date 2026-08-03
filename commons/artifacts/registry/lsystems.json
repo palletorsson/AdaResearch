@@ -1593,6 +1593,16 @@
    ],
    "name": "Space-Filling Curve Gallery",
    "qfep_connection": "Space-filling curves achieve maximum E(S) coverage \u2014 a 1D line that touches every point in 2D space. The grammar that generates them is minimal (low F); the pattern they produce is total (high E(S)). Dimension-transcending order.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "comparison": ["grammars", "depths", "overlay", "single"],
+     "depth": ["sketch", "sparse", "standard", "fine"]
+    },
+    "default": "comparison=grammars, depth=standard - Hilbert at 4, Peano at 3, Moore at 3, side by side with separators and three captions, which is pixel-for-pixel the triptych the 4 existing placements already show",
+    "was": "the gallery was always three grammars at one fixed depth: the iteration counts 4/3/3, the three x offsets and the caption row were hard-coded inside _generate_texture and _add_labels"
+   },
    "scene": "res://commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn",
    "size_group": "large",
    "tags": [

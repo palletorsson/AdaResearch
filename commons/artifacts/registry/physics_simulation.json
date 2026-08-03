@@ -2173,6 +2173,32 @@
    "tags": [
     "physics"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ],
+     "mass_spread": [
+      "ladder",
+      "uniform",
+      "extreme"
+     ]
+    },
+    "fixture": {
+     "color_seed": 7
+    },
+    "default": "evidence=result, mass_spread=ladder - the shipped build exactly (masses 0.5/1.5/3.0 at the same three release points, the same orange weight arrows, and outside the `result` branch not one exhibit node is ever constructed), so all 5 existing placements are unchanged; no map carries an #evidence: or #mass_spread: token today",
+    "was": "zero exports. One slider that turns the LAW (gravity) and nothing that turns the DEMONSTRATION: the three masses were a literal array inside spawn_movers and the weight arrow was the only thing ever drawn, so the example's own claim - that F = mg cancels in F = ma and every mass falls at the same acceleration - was argued with the one quantity that does NOT cancel",
+    "note": "evidence is what the demo offers as PROOF. result = the shipped weight arrows, whose length is m*g and therefore three times longer on the heavy body: the forces, which differ. trace = the arrows go and the fall itself is drawn as three dotted columns with rungs across them at equal heights, the claim laid down before the drop. longhand = the working instead of the answer: each body keeps its weight arrow and gains a second arrow of IDENTICAL length beside it (the acceleration, after the division by m), with a flat ring under each body carrying its mass as area - so the cancellation is on the geometry. axiom = no arrows, a slate carrying F = m g and a = F/m = g, the rule these three happen to be an example of. mass_spread turns the population: uniform drops three identical bodies (the trivial case, against which the ladder means something) and extreme is 0.2 against 6.0, a thirtyfold ratio - the feather and the hammer. All four run identical physics; _physics_process, the gravity slider and the bounce are untouched.",
+    "kin": "both words are taken from the family rather than invented. `evidence` with these four values is what example_2_8_two_body_attraction_vr, example_2_9_n_body_attraction_vr, koch_curve, fibonacci_sequences, sine_wave_controller and wave_interference_tank already call this question; `mass_spread` with ladder/uniform/extreme is example_2_5_fluid_resistance_vr's. When a shared vocabulary is honest the siblings measure alike, which is itself a check.",
+    "fixture_note": "the three body colours have always been drawn from an unseeded rng.randomize(), a new set every launch. color_seed = -1 preserves that exactly and is the shipped default; the fixture pins 7 so a sweep measures the axes and not the paintwork.",
+    "reads": "this scene's root is an UNSCRIPTED Node3D (root -> FishTank -> Demo) and the grid calls apply_grid_config on the root only, so the axes are reached the way example_2_5 documents: the grid writes every #key:value onto the root as config_<key> metadata BEFORE the scene enters the tree, and _read_grid_config_meta() walks up and reads it in _ready. Deliberately independent of forces_demo_root.gd, which is not committed. The sweep harness reaches the exports directly - capture_config_sweep._holder_of() searches descendants for the property before setting it."
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",
@@ -2773,6 +2799,27 @@
    "tags": [
     "physics"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "fixture": {
+     "color_seed": 7
+    },
+    "default": "evidence=result - the shipped resultant arrows byte for byte, so all 5 existing placements are unchanged; outside the `result` branch not one exhibit node is ever constructed",
+    "was": "no exports at all: two bodies, one orange arrow each carrying the resultant of the attraction, and no way for a map to ask the demo to show its working instead of its answer",
+    "note": "evidence is what the demo offers as PROOF that a force is there - gravity has no appearance, so every demonstration of it must pick a fiction to draw and stand behind it. result = the resultant arrow (the answer, with the sum discarded). trace = the arrows go away and the orbit itself is drawn, integrated forward at build time through this scene's own law and Euler step, so the future is laid down before it happens. longhand = the working instead of the answer: r as a graduated rod with a tick every 5 cm, and a ring per body whose AREA is its mass. axiom = the instance gives way to the rule, a slate plate carrying F = G*m1*m2/r^2 and the 1/r^2 curve against its asymptote, with the bodies demoted to an example of it. All four run identical physics - calculate_attraction, the masses and the velocities are untouched. What changes is what the room is allowed to see.",
+    "kin": "the same word and the same four values as example_2_9_n_body_attraction_vr (its direct successor) and the six artifacts that already say `evidence` about their own working - koch_curve, fibonacci_sequences, sine_wave_controller, wave_interference_tank among them. Taken character for character rather than as a synonym.",
+    "fixture_note": "the two body colours have always been drawn from an unseeded rng.randomize(), i.e. a different pair every launch. color_seed = -1 preserves that exactly and is the shipped default; the fixture pins 7 so a sweep of `evidence` measures the axis and not the paintwork.",
+    "reads": "the script sits two levels down (root -> FishTank -> Demo) and both callers address the ROOT, so forces_demo_root.gd on the scene root turns grid tokens and sweep config into config_<key> metadata the demo reads on the way in."
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",
@@ -2885,6 +2932,24 @@
    "tags": [
     "physics"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "default": "evidence=result - the shipped resultant arrows byte for byte, so all 5 existing placements are unchanged; outside the `result` branch not one exhibit node is ever constructed",
+    "was": "no exports at all: six bodies, one arrow each carrying the resultant of every attraction acting on it, and no sign of the fifteen pair-pulls behind each one",
+    "note": "the same word, the same four values and the same question as example_2_8_two_body_attraction_vr, which this is the direct successor to - two demos arguing about the same law should not argue in two vocabularies. Where the pair parts company is `longhand`, and that is the point of the pair: with two bodies the resultant IS the single term, so the sum has nothing to show, while with six each arrow is fifteen pair-pulls added up and thrown away. Here every pair gets its own line, thickness and brightness scaled by that pair's force, so the O(n^2) in the docstring stops being a complexity class and becomes a thicket you can count. trace draws all six trajectories integrated forward through the scene's own O(n^2) sum - Poincare's point made photographable. axiom stands a plate carrying the law with its summation behind the swarm.",
+    "kin": "example_2_8_two_body_attraction_vr - same axis, same values, same question at a different count. Also the six artifacts that already say `evidence` about their own working.",
+    "fixture_note": "no fixture needed: the spawn is already seeded (rng.seed = 12345), so masses, positions, velocities and colours are identical in every frame of a sweep and only `evidence` moves. Its sibling 2.8 needs a color_seed pin because its colours are unseeded.",
+    "reads": "the script sits two levels down (root -> FishTank -> Demo) and both callers address the ROOT, so forces_demo_root.gd on the scene root turns grid tokens and sweep config into config_<key> metadata the demo reads on the way in."
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",
@@ -9648,7 +9713,22 @@
    "capacity": "WITNESS that three bodies under gravity have no formula — determinism and predictability are not the same thing",
    "category": "physics",
    "complexity": "advanced",
-   "description": "The infamous three-body problem: three gravitationally interacting masses with no closed-form solution. Tiny changes in initial conditions lead to wildly divergent trajectories — the original exemplar of deterministic chaos. Explore stable figure-eight orbits, Lagrange points, and the chaotic regime where prediction becomes impossible.",
+   "description": "The infamous three-body problem: three gravitationally interacting masses with no closed-form solution. Tiny changes in initial conditions lead to wildly divergent trajectories — the original exemplar of deterministic chaos. DNA: configuration selects the initial conditions — pinwheel (the legacy start), the two famous periodic exceptions (figure_eight choreography, Lagrange's rotating triangle), hierarchical (tight binary plus distant third) and near_collision (nearly collinear, one body usually ejected). Use #configuration:.",
+   "dna": {
+    "promoted": "2026-07-29",
+    "stage": "2 - variation",
+    "axes": {
+     "configuration": [
+      "pinwheel",
+      "figure_eight",
+      "lagrange",
+      "hierarchical",
+      "near_collision"
+     ]
+    },
+    "default": "configuration=pinwheel - a deliberate no-op that restores the positions and velocities authored in threebodyproblem.tscn, so all 5 existing placements are byte-identical to before the promotion",
+    "was": "zero exports: three bodies frozen at one set of initial conditions in the .tscn, so the artifact could only ever show chaos and never the periodic solutions it argues against"
+   },
    "dev_category": "physics_fields",
    "dev_themes": [
     "chaos",

@@ -1106,6 +1106,23 @@
    }
   },
   "box_counting_dimension": {
+   "dna": {
+    "axes": {
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    }
+   },
+   "name": "Box Counting Dimension",
+   "lookup_name": "box_counting_dimension",
+   "category": "fractals",
+   "sequence": "fractals",
+   "interaction": "observe_interact",
+   "artifact_type": "demonstration",
+   "qfep_connection": "Fractal dimension measures the complexity of a boundary — the self-similar structure at every scale.",
    "description": "Interactive box-counting dimension measurement on a Sierpinski triangle with log-log plot",
    "scene_path": "res://algorithms/fractals/box_counting_dimension/box_counting_dimension.tscn",
    "tags": [
@@ -2960,6 +2977,17 @@
    }
   },
   "delaunay_triangulation_3d_cell": {
+   "dna": {
+    "axes": {
+    "formation": [
+    "shell",
+    "lattice",
+    "ring",
+    "column",
+    "drift"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "delaunay_triangulation_3d_cell",
@@ -3990,6 +4018,17 @@
    "qfep_connection": "Faces are discarded and only edges survive, their thickness faked from barycentric distance in the fragment shader. A debug convention promoted to matter: the wireframe was always the diagram under the surface, here it is granted glow and bulk and asked to stand as the thing itself."
   },
   "fibonacci_pagoda": {
+   "dna": {
+    "axes": {
+    "profile": [
+    "cake",
+    "ziggurat",
+    "column",
+    "spindle",
+    "flare"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "tier_scale(n) = base_scale / phi^(n*0.5), stacking Fibonacci-ratioed tiers with golden finial",
@@ -6047,6 +6086,16 @@
    "qfep_connection": "The closing craft: modeling by writing functions — union as min, intersection as max, blending as soft algebra. Shape as sentence: say the field precisely enough and the surface is the proof."
   },
   "inverted_tree_cloud": {
+   "dna": {
+    "axes": {
+    "aftermath": [
+    "form",
+    "strata",
+    "envelope",
+    "apparatus"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "tree(depth) = trunk_down + branches_down(random_angle, shrink) + cube_cloud(orbit, fade_timeline)",
@@ -6669,6 +6718,15 @@
    "qfep_connection": "Water, oil and honey diffuse while a floating label reports the Shannon entropy of the mix — but the normalising ceiling is hard-coded for two species at 50/50, so three liquids can overflow the scale built to measure them. Irreversibility, metered by an instrument that undercounts it."
   },
   "mandelbrot_set": {
+   "dna": {
+    "axes": {
+    "readout": [
+    "relief",
+    "plate",
+    "column"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "advanced",
    "description": "Fractal visualization of the famous Mandelbrot set",
@@ -8841,6 +8899,34 @@
    "tags": [
     "procedural"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "occupation": [
+      "sparse",
+      "critical",
+      "conductive",
+      "dense",
+      "solid"
+     ],
+     "inlet": [
+      "face",
+      "point",
+      "seam",
+      "shell"
+     ]
+    },
+    "fixture": {
+     "lattice_seed": 7
+    },
+    "default": "occupation=conductive (p = 0.40), inlet=face - the shipped constant and the shipped top-face seeding exactly, same materials and same collision rule, so all 5 existing placements are unchanged; no map carries an #occupation: or #inlet: token today",
+    "was": "zero exports on the one artifact in the corpus whose whole subject is a number. Its own @identity block names PERCOLATION_THRESHOLD as the critical parameter and then lists a threshold control under `needs` as MISSING - the value was a const, so every player who ever met this lattice met p = 0.40, comfortably above the 3D site-percolation point p_c ~= 0.3116. The claim 'below the threshold nothing connects, above it everything does, and at the threshold the system decides' was only ever demonstrated on its winning side.",
+    "note": "occupation is p, how much lattice there is: sparse 0.20 (well under p_c - isolated pockets, the flow dies near the inlet face), critical 0.31 (at p_c - the incipient cluster, fractal, the outcome genuinely open), conductive 0.40 (the shipped value), dense 0.60 (everything connects and the paths stop being paths), solid 0.80 (a wall; percolation is trivial and the network is no longer one). inlet is the boundary condition - where the flow is injected: face = every open site on the +z face, the shipped rain front; point = the open site nearest that face's centre, so one dendrite grows and the question becomes about ONE cluster instead of all of them; seam = one row, a line source spreading as a sheet; shell = all six faces, flow arriving from outside inward, which asks not whether the lattice spans but whether anything in it stays dry. An inlet only ever marks sites the lattice already opened, so p and the boundary stay independent.",
+    "warning": "WHITE (occupied) CUBES CARRY COLLISION and the player walks inside this lattice. dense and solid are honest arguments and bad rooms - they are bench values. Nothing above conductive should be placed in a walked map without re-running the pathfinder on it.",
+    "fixture_note": "the lattice and the flow jitter have always come from the global unseeded randf(), so five variants of an unseeded lattice are five different objects rather than five values of one axis. lattice_seed = -1 preserves the shipped behaviour exactly and is the default; the fixture pins 7 so a sweep measures the axis and not the dice.",
+    "reads": "this scene's root carries the script, so apply_grid_config arrives directly; it is guarded on change (a rebuild recasts 5,832 cells and their collision bodies, which must not happen because a placement passed an unrelated key). _read_grid_config_meta also reads the config_<key> metadata the grid writes before the scene enters the tree, so a token builds the right lattice once instead of building the default and tearing it down."
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",
