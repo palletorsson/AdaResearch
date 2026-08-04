@@ -1558,6 +1558,30 @@
    "qfep_connection": "Each hand writes a spline ribbon that begins dying the moment it exists — trail_lifetime caps the drawing at the last 1.75 seconds of you. Gesture is archived at exactly the rate it is erased, so the only way to keep the trace alive is to keep moving."
   },
   "dark_side_prism": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "bands": [
+      "one",
+      "three",
+      "seven",
+      "continuum"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "default": "bands=seven, evidence=result - the two defaults together reproduce the shipped sculpture vertex for vertex. seven returns the SPECTRUM array itself, in order, so the fan loop still divides by size()-1 = 6 and every line ends where it always did; the incident beam stays overbright white because the monochromatic tint is reached only at bands=one. result is the early-return in _apply_evidence: no law node is ever constructed, the tree gains not one child, and the beams are painted by the same code path with the same three colour constants. apply_grid_config is guarded three ways - the key must be present, the value must be one the code can build, and it must differ from the current one - and it returns before repainting until _built is true, so the 2 placements (Corridor_Color_Nails, and the Curation_Bay_color_2 curation_station shelf) render exactly what they rendered before.",
+    "was": "No exports at all. The seven colours, the fan geometry and the absence of any normal or angle were locals inside _create_trace_beams, so every placement was the same picture and a map could say nothing about it. Refused by the runner for NO TURNABLE KNOBS.",
+    "note": "bands is the artifact's own dark spot: the fan has seven lines because Newton named seven, and he named seven to match the diatonic scale - a cultural fact wearing the costume of a physical one. one is the experimentum crucis (take one colour out of the fan, send it in again, and nothing further happens - the ray that will not split, drawn monochromatic on entry as well as exit so the frame does not claim white in and green out); three is the display's primaries taken from the same seven, so it reads as a SUBSET of Newton's and not a different palette; continuum is sixty-four samples through the same anchors, the seven revealed as a naming convention over a smooth ramp. evidence asks whether the law is in the frame at all: the shipped sculpture has no normal, no angle and no formula, so it shows the result and withholds the reason. trace draws the two surface normals dashed and the pair of arcs at the entry point - theta_1 between the incoming ray and the normal, theta_2 between the internal ray and the same normal, which is exactly the pair Snell relates. longhand measures every band: its own arc against the exit normal at its own radius, plus a rule at the end of the fan carrying a tick where each wavelength lands, so wavelength-dependence stops being a spray the viewer takes on trust. axiom withholds the rainbow and keeps the normals, the arcs and n1 sin(theta_1) = n2 sin(theta_2) in symbols - the album cover refused, the law kept.",
+    "kin": "evidence is the family word (26 artifacts: fibonacci_sequences, koch_curve, pythagorean_triangle_angles, gradient_descent_visualization, bouncing_ball and the rest) and the ladder is taken character for character in the family's own sense - how much of the working is admitted alongside the result, with axiom the symbolic assertion rather than the withheld one, exactly as pythagorean_triangle_angles uses it. bands is NOT shared with any sibling. The nearest words were rainbow.substance (light|glass|solid), which is what the arc is MADE of and not how finely it is divided, and vector_field_grid.coding (magnitude|direction|banded|uniform), whose banded/uniform pair is about a colour ramp's quantisation rather than about how many wavelengths a beam is claimed to contain. Neither is the same question, so neither word was borrowed.",
+    "still_note": "bands should bite hard: one draws two coloured lines where seven drew nine, continuum fills the same wedge solid. evidence is strongest at axiom (the fan, which is most of the ink, disappears and a formula appears) and at longhand (a rule and seven arcs added outside the existing silhouette); trace adds only four dashed normals and two arcs against a bloom-heavy black frame, so it is the value most likely to come in thin - if it does, check the framing before calling it inert, because the artifact adds its own WorldEnvironment with glow_bloom 0.5 and the added grey lines are deliberately unbloomed while the beams are overbright.",
+    "gotcha": "This scene adds its own Camera3D and WorldEnvironment in _ready. Both are embedded-chrome that GridInteractablesComponent._suppress_embedded_chrome handles; nothing here changes that, but a capture harness that does not suppress them will photograph through the artifact's own camera at (0, 0, 4) and no axis verdict from such a frame means anything."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Snell's law visualized — white beam enters prism, refracts into 7-color fan by wavelength-dependent angle",

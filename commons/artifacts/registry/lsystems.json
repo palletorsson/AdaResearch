@@ -1298,6 +1298,28 @@
 	"size_group": "compact"
    },
    "qfep_connection": "Architecture from grammar: the dungeon layout emerges from rewriting rules on the XZ plane. Rooms and corridors are emergent properties of the string \u2014 spatial E(S) from textual F-description.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "grammar": [
+      "warren",
+      "spiral",
+      "branch",
+      "meander"
+     ],
+     "depth": [
+      1,
+      2,
+      3,
+      4
+     ]
+    },
+    "default": "grammar=warren, depth=3 - warren is the pair of productions this file used to hold in two plain vars (axiom F, F -> F+RF-FF-FR+F, R -> RFRFRF) and _resolve_grammar writes them back verbatim, while depth 3 is the number the old `iterations` export shipped with. The turtle has no randomness at all, so identical inputs give an identical picture; apply_grid_config rebuilds only when a value actually changed and only after _ready has built once, and none of the placements (LSystems_Architecture, the two curation_station bays, the two Mission maps) sends any config. Nothing in the corpus moves.",
+    "was": "one grammar, hard-coded. `_axiom` and `_rules` were ordinary vars holding a single pair of productions with no export and no config key, so the only thing about this artifact that was ever variable was how many times its one grammar got rewritten - and the registry description ('corridors and rooms emerge from string rewriting') was describing a rewrite nobody could rewrite. `depth` is the old `iterations` export under the word the rest of the L-system family already uses.",
+    "note": "hand promotion 2026-08-03, the lsystem_editor case a second time: the runner refused this token for NO TURNABLE KNOBS while a whole parameter space sat in the source as two string literals. NOT SEEDED, and it does not need to be - grep the file for randf/randi/noise and there is nothing; the turtle is deterministic, so a variant is a fact and not a sample. The three new grammars were written against the turtle this file already interprets (F forward, R room at the current point, +/- 90 degrees, [ ] push/pop) and each argues a different PLAN TOPOLOGY, which is what a top-down floor plan is for: warren a dense net, spiral a coil of growing runs, branch the only one that touches the stack and comes out a corridor TREE, meander the quadratic-Koch single crenellated hall. depth is declared 1-4 and not 1-5 although the code range is 1-5: warren multiplies F sixfold per rewrite, so depth 5 is roughly 7,800 corridor slabs and 15,600 wall slabs as separate MeshInstance3D nodes, which is a capture-time hazard rather than a picture.",
+    "kin": "lsystem_editor.grammar and lsystem_editor.depth ask exactly these two questions in the same sequence and the words are taken from there unchanged. The VALUE lists are not shared and should not be: lsystem_editor's seven are botanical and fractal curves (koch, plant, fern), and naming a dungeon plan 'fern' would make two artifacts look like siblings that measure alike when they do not. space_filling_curve_gallery.depth names its samples (sketch|sparse|standard|fine) because it draws one fixed curve at four settings; here, as in lsystem_editor, the honest unit is the rewrite itself."
+   },
    "scene": "res://commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn",
    "tags": [
 	"2d",

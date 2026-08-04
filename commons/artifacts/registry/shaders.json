@@ -1219,6 +1219,29 @@
       "qfep_connection": "A real Camera3D flattens the live scene onto 640x480, and each filter mode confesses a different loss — depth keeps distance and discards color, silhouette keeps outline and discards everything else. Projection taught as the first lossy compression, with the discard menu made switchable."
     },
     "flashlight_demo": {
+      "dna": {
+       "promoted": "2026-08-04",
+       "stage": "2 - variation",
+       "axes": {
+        "ground": [
+         "white",
+         "swatch",
+         "relief",
+         "mirror",
+         "none"
+        ]
+       },
+       "default": "ground=white - _stage_ground() returns on its first line, before it has even looked the board up, so the shipped CSGBox3D keeps its authored size, transform and material and no node is added or hidden. Both reach-paths are untouched: a bare `flashlight_demo` token in Corridor_Color_Flashlight and a curation_station collection in Curation_Bay_color_4 (whose #with_wall / #with_pillars / #with_barrier flags are the station's, not this artifact's). Neither carries a `ground` key, and apply_grid_config returns on its first line for a config that does not name one. The new root script adds no geometry and starts no process at the default.",
+       "was": "the .tscn root carried NO SCRIPT AT ALL. flashlight_color.gd sits on four ColorSetter CHILDREN, and GridInteractablesComponent stamps config metadata and calls apply_grid_config on the ROOT - so even that script's two exports were unreachable from a map token, and its apply_grid_config is a bare `pass`, meaning every token a map ever wrote for this artifact was parsed, logged and silently discarded. The registry description is the string 'flashlight_demog', a typo, so the scene was the only source of truth.",
+       "note": "hand promotion 2026-08-04, refused by the runner as NO TURNABLE KNOBS. The scene is four pickable flashlights in a row at z=3 - red, green, blue and white - throwing 25-degree cones five metres across a nearly black room at one 6 x 4 board, wide enough by the time they land (2.3 m radius) that they overlap and the additive result is already on the wall. The hard-coded constant that carries the argument is the BOARD: it is white, 0.95 grey at roughness 0.9, and a white surface returns every wavelength it is offered, so nothing this artifact claims can ever be false on it. Its own @identity promises 'red light on a blue wall = black' and the shipped scene makes that impossible to witness. So the axis is not the lamps but what they are given to fall on. swatch divides the same board - same total width, height, depth and plane - into red, green, blue and white quarters, putting sixteen beam-on-surface pairs in one frame and the promised lesson finally in the room. relief keeps the white board and stands seven ribs in front of it; shadow_enabled is already true on every lamp, so the beams disclose SHAPE instead of hue and the shadows come out coloured, each one missing exactly one lamp. mirror keeps the board and makes it specular and dark: a mirror discloses the SOURCE, not the beam, so the pools vanish and four lamp reflections remain. none removes the board, because light with nothing to land on is not visible. Every value is standing geometry or an albedo and there is no randf anywhere in the scene, so N variants are N photographs of one room.",
+       "declined": "VOLUMETRIC FOG, which is the best remaining idea and is recorded rather than smuggled in: every lamp ships light_volumetric_fog_energy = 2.0 and the scene's WorldEnvironment never enables volumetric fog, so that setting is dead in every room. Turning it on would make the beams visible in the AIR - a striking picture, and a genuinely different claim, about the medium rather than the ground. One word cannot honestly cover both and this artifact's truth line is about the surface. Also declined: the four lamp COLOURS. Swapping red/green/blue for cyan/magenta/yellow photographs as a palette change, and the artifact is not about which hues are chosen but about whether choosing a hue reveals anything.",
+       "fixture": {
+        "capture_anchor": true
+       },
+       "fixture_note": "the lamp bodies are the ONLY MeshInstance3D in this scene - the board is a CSGBox3D, and the capture AABB counts MeshInstance3D and MultiMeshInstance3D only - so an unfixtured sweep frames four 4 cm cylinders and photographs none of the surface the axis is about. capture_anchor adds a layers = 0 box spanning lamps and board (6.4 x 4.4 x 5.8 at (0, 0.5, 0.6)), which both widens the frame and holds it FIXED while the board changes size or disappears. It is built only when the fixture asks, and is deliberately kept out of the restage list so a ground change cannot free it. Untyped so a fixture string survives assignment before _ready.",
+       "measurement_risk": "the sweep stages its own key and fill lights, and this scene ships its own WorldEnvironment (background 0.05, ambient energy 0.15) which will fight the bench's - so the dark room is very likely photographed LIT and the coloured pools washed out. Judge this axis on albedo and geometry, which survive any lighting: four coloured quarters where there was one white board, seven ribs standing off it, a near-black specular face, a wall present or absent. If mirror and none measure close to each other, that is the expected confusion (both go dark) and the board silhouette is what separates them; check subject % before reading either verdict.",
+       "scene_note": "the root script is NEW - flashlight_demo.gd added to the .tscn root, which previously had none. Nothing was moved off the ColorSetter children and their per-lamp colours are untouched."
+      },
       "category": "unknown",
       "complexity": "beginner",
       "description": "flashlight_demog",

@@ -312,6 +312,22 @@
       "interactions": [
         "click to cycle through meta-layers of representation"
       ],
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "presence": [
+            "pipe_and_words",
+            "pipe_only",
+            "words_only",
+            "empty_frame",
+            "picture_of_picture"
+          ]
+        },
+        "framing": 0.62,
+        "default": "presence=pipe_and_words - the frame, the canvas, the painted pipe at (0, 0.08, 0.04) and the sentence at font 28 below it, which is exactly what _ready built before this promotion; both existing placements carry no config, and apply_grid_config now ignores any config that does not name 'presence', so neither map changes by a pixel",
+        "was": "a fixed painting: frame + canvas + pipe + caption, with no way for a map to say which of the two terms is present. The gap between sign and signified was staged once and only once."
+      },
       "parameters": {
         "current_layer": "Current level of representation questioning (0-5)",
         "footprint": [
@@ -1035,6 +1051,23 @@
       "interactions": [
         "move to find the 'sweet spot' where illusion works"
       ],
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "disclosure": [
+            "marker",
+            "bare",
+            "seam",
+            "exploded",
+            "sealed"
+          ]
+        },
+        "framing": 0.42,
+        "default": "disclosure=marker - three beams with the z_gap of size*0.25 at the top joint, the caption, and the green sweet-spot bead at (0, 0, size*2.5) rendering as it always has; identical to the pre-promotion _ready, and both existing placements pass no config so nothing reaches the rebuild guard",
+        "was": "one fixed impossible object. The bead named the viewpoint that hides the break, and there was no way for a map to say whether the contradiction should be concealed, marked, dismantled or closed.",
+        "framing_note": "the bead sits 2.5 sizes out on +Z and dominates the capture AABB, which framed the triangle itself at roughly 4% of the frame. 0.42 pulls the camera in; the bead is still inside the 17 degree half-FOV, so marker vs bare remains readable."
+      },
       "parameters": {
         "size": "Triangle size",
         "auto_rotate": "Slowly rotate to reveal impossibility",

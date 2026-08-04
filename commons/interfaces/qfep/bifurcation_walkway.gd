@@ -20,6 +20,36 @@ signal regime_changed(regime: String)
 @export var r_min: float = 2.5
 @export var r_max: float = 4.0
 
+# --- DNA (stage 2, promoted 2026-08-03) ------------------------------------
+# This is bifurcation_diagram's mathematics built as architecture instead of as a chart,
+# and it had exactly one of everything: one r window, and one place for the cloud to be.
+#
+# regime — WHICH CLAIM about the map the corridor is. Taken from bifurcation_diagram
+# character for character, values and windows both, because it is the same question asked
+# of the same equation: which qualitative behaviour class are you shown. "all" is absent
+# from REGIME_WINDOWS on purpose - it means do not touch r_min/r_max. What differs from
+# the chart is what a crop DOES here: a cropped chart is a chart of less, but a cropped
+# corridor is twelve metres of one condition, a room rather than a transition. `stable`
+# is a corridor you can walk end to end while nothing happens, which is a thing the
+# walkway could never say and is the sharpest sentence in its vocabulary.
+#
+# occupancy — WHERE THE MATHEMATICS MEETS THE BODY. The artifact's thesis is that your
+# position IS the parameter, and the shipped build made one silent architectural choice
+# about that: the cloud hangs in the air at your own head height, so you walk through it
+# and displace it. The alternatives are not mountings, they are different relations.
+#   corridor  suspended in the air you walk through — the shipped build.
+#   mural     flattened onto the two side walls, alternating; the air is clear and you
+#             are a viewer again, walking past a chart. The corridor un-does itself.
+#   inlay     laid into the floor, with the population value mapped ACROSS the corridor
+#             instead of up it, so the cascade branches left and right under your feet
+#             and you cannot see the part you are standing on.
+#   vault     lifted overhead out of reach; you walk beneath the cascade.
+@export_enum("all", "stable", "cascade", "chaos", "period3") var regime: String = "all"
+@export_enum("corridor", "mural", "inlay", "vault") var occupancy: String = "corridor"
+
+const REGIMES := ["all", "stable", "cascade", "chaos", "period3"]
+const OCCUPANCIES := ["corridor", "mural", "inlay", "vault"]
+
 ## Resolution
 @export var num_columns: int = 120  # Vertical columns along the walkway
 @export var iterations_per_column: int = 80
@@ -43,19 +73,39 @@ const R_CHAOS := 3.57
 const R_WINDOW_START := 3.83
 const R_WINDOW_END := 3.86
 
+# The r window each regime crops to, identical to bifurcation_diagram's REGIME_WINDOWS.
+# "all" is absent on purpose: it means "do not touch r_min/r_max", which is how the two
+# maps that place this corridor keep their exact framing.
+const REGIME_WINDOWS := {
+	"stable": [2.5, R_STABLE],
+	"cascade": [R_STABLE, R_CHAOS],
+	"chaos": [R_CHAOS, 4.0],
+	"period3": [3.82, 3.87],
+}
+
 # Internal
 var _current_r: float = 2.5
 var _current_regime: String = "STABLE"
 var _floor_segments: Array[MeshInstance3D] = []
+var _marker_nodes: Array[Node3D] = []
+var _dots_instance: MultiMeshInstance3D
+# Reached only at occupancy == "vault". See _build_frame_anchor().
+var _frame_anchor: MeshInstance3D
 var _regime_label: Label3D
 var _r_label: Label3D
 var _title_label: Label3D
 var _player_in_walkway: bool = false
+var _built: bool = false
+# The z scatter was an unseeded randf(), so no two launches of the same corridor were the
+# same cloud. Same range, same look, now reproducible — a variant sweep can only compare
+# frames that are comparable.
+var _rng := RandomNumberGenerator.new()
 
 # Keyboard fallback
 var _keyboard_pos: float = 0.0
 
 func _ready() -> void:
+	_apply_regime()
 	_build_walkway_structure()
 	_generate_bifurcation_columns()
 	_build_floor_gradient()
@@ -64,7 +114,80 @@ func _ready() -> void:
 	_build_player_detection()
 
 	add_to_group("qfep_reactive")
+	_built = true
 	print("BifurcationWalkway: Walk through the phase transition")
+
+
+## Grid system integration.
+##
+## Guarded three ways: the key has to be present, the value has to be one the code can
+## actually build, and it has to differ from the current one — so a map token carrying
+## unrelated layout keys rebuilds nothing. _built stays false until _ready has run once,
+## which keeps a config applied early from freeing meshes that do not exist yet; the
+## exports alone are enough then, and _ready will build with them.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var changed: bool = false
+
+	if config_data.has("regime"):
+		var want_regime: String = str(config_data["regime"]).strip_edges().to_lower()
+		if want_regime != regime and REGIMES.has(want_regime):
+			regime = want_regime
+			changed = true
+
+	if config_data.has("occupancy"):
+		var want_occ: String = str(config_data["occupancy"]).strip_edges().to_lower()
+		if want_occ != occupancy and OCCUPANCIES.has(want_occ):
+			occupancy = want_occ
+			changed = true
+
+	if not changed or not _built:
+		return
+
+	_apply_regime()
+	_rebuild_data()
+
+
+## Crop the r axis onto one behaviour class. "all" and any unknown value leave the
+## exported r_min/r_max untouched, which is the whole of the default guarantee.
+func _apply_regime() -> void:
+	if regime == "all" or not REGIME_WINDOWS.has(regime):
+		return
+	var span_r: Array = REGIME_WINDOWS[regime]
+	r_min = float(span_r[0])
+	r_max = float(span_r[1])
+	_current_r = clampf(_current_r, r_min, r_max)
+
+
+## Only ever reached from apply_grid_config after a value actually moved. The walkway
+## shell, the walls, the labels and the player Area3D are untouched: they are the
+## architecture, and neither axis is about them.
+func _rebuild_data() -> void:
+	if _dots_instance != null and is_instance_valid(_dots_instance):
+		remove_child(_dots_instance)
+		_dots_instance.queue_free()
+	_dots_instance = null
+
+	if _frame_anchor != null and is_instance_valid(_frame_anchor):
+		remove_child(_frame_anchor)
+		_frame_anchor.queue_free()
+	_frame_anchor = null
+
+	for seg in _floor_segments:
+		if is_instance_valid(seg):
+			remove_child(seg)
+			seg.queue_free()
+	_floor_segments.clear()
+
+	for node in _marker_nodes:
+		if is_instance_valid(node):
+			remove_child(node)
+			node.queue_free()
+	_marker_nodes.clear()
+
+	_generate_bifurcation_columns()
+	_build_floor_gradient()
+	_build_regime_markers()
+	_update_display()
 
 # ---------------------------------------------------------------------------
 # Walkway structure — floor, walls, ceiling frame
@@ -116,9 +239,41 @@ func _build_walkway_structure() -> void:
 # Bifurcation data as floating dots along the corridor
 # ---------------------------------------------------------------------------
 
+## Where one dot sits, given how far along the corridor it is and what the orbit value is.
+##
+## The `_:` branch is `corridor`, and it is the shipped expression unchanged: the height
+## mapping and the +/- 0.6 * width scatter are what every existing placement has drawn.
+## Only the source of the scatter moved, from a global randf() to a seeded generator.
+func _dot_position(x_pos: float, x_val: float, j: int) -> Vector3:
+	# Which wall a mural dot lands on. Computed before the match so no local declaration
+	# sits in a pattern block, where `var` also means a binding pattern.
+	var side: float = -1.0
+	if (j % 2) == 0:
+		side = 1.0
+
+	match occupancy:
+		"mural":
+			# Flattened onto both side walls, alternating, just inside the glass.
+			return Vector3(x_pos, x_val * (wall_height - 0.5) + 0.25,
+					side * (walkway_width / 2.0 - 0.04))
+		"inlay":
+			# The population value branches ACROSS the corridor instead of up it, and the
+			# whole diagram lies in the floor you are standing on.
+			return Vector3(x_pos, 0.02 + _rng.randf() * 0.012,
+					(x_val - 0.5) * walkway_width * 0.9)
+		"vault":
+			# Lifted out of reach: you walk beneath the cascade.
+			return Vector3(x_pos, wall_height + 0.35 + x_val * 1.2,
+					(_rng.randf() - 0.5) * walkway_width * 0.6)
+		_:
+			return Vector3(x_pos, x_val * (wall_height - 0.5) + 0.25,
+					(_rng.randf() - 0.5) * walkway_width * 0.6)
+
+
 func _generate_bifurcation_columns() -> void:
 	var all_positions: Array[Vector3] = []
 	var all_colors: Array[Color] = []
+	_rng.seed = 20260803
 
 	for i in range(num_columns):
 		var t: float = float(i) / float(num_columns - 1)
@@ -129,11 +284,7 @@ func _generate_bifurcation_columns() -> void:
 		for j in range(iterations_per_column):
 			x = r * x * (1.0 - x)
 			if j >= skip_transient:
-				# Y = population value mapped to wall height
-				var y_pos: float = x * (wall_height - 0.5) + 0.25
-				# Z = slight scatter for depth
-				var z_pos: float = (randf() - 0.5) * walkway_width * 0.6
-				all_positions.append(Vector3(x_pos, y_pos, z_pos))
+				all_positions.append(_dot_position(x_pos, x, j))
 				all_colors.append(_get_color_for_r(r))
 
 	# Build MultiMesh
@@ -164,7 +315,37 @@ func _generate_bifurcation_columns() -> void:
 	mm_instance.material_override = mat
 
 	add_child(mm_instance)
+	_dots_instance = mm_instance
+	_build_frame_anchor()
 	print("BifurcationWalkway: %d bifurcation dots" % all_positions.size())
+
+
+## An invisible box that tells a capture where the cloud actually is.
+##
+## Every dot lives in a MultiMeshInstance3D, and the capture AABB counts MeshInstance3D
+## only — so the measured extent of this artifact comes from the floor slab and the two
+## wall planes, i.e. the corridor SHELL. At corridor, mural and inlay the cloud sits
+## inside that shell and the framing is honest. At vault it is lifted to wall_height +
+## 1.55, well above it, and a capture would frame the empty corridor and photograph the
+## axis as "the dots were deleted" instead of "the dots were lifted".
+##
+## So the anchor exists ONLY at vault. layers = 0 keeps it out of every render (and,
+## unlike visible = false, does not propagate to children or touch materials) while the
+## mesh still counts toward the AABB. Building it unconditionally would inflate the
+## framing of the three values that do not need it, which is the same fault reversed.
+func _build_frame_anchor() -> void:
+	if occupancy != "vault":
+		return
+	var anchor := MeshInstance3D.new()
+	anchor.name = "FrameAnchor"
+	var box := BoxMesh.new()
+	var top: float = wall_height + 1.75
+	box.size = Vector3(walkway_length, top, walkway_width)
+	anchor.mesh = box
+	anchor.position = Vector3(walkway_length / 2.0, top / 2.0, 0)
+	anchor.layers = 0
+	add_child(anchor)
+	_frame_anchor = anchor
 
 # ---------------------------------------------------------------------------
 # Floor gradient — glows the color of the current regime
@@ -211,6 +392,11 @@ func _build_regime_markers() -> void:
 	}
 
 	for r_val: float in markers:
+		# A cropped regime puts some thresholds outside the corridor entirely; drawing
+		# them anyway would hang a label in the air past the far end. At regime == "all"
+		# all three are inside 2.5..4.0 and nothing is skipped.
+		if r_val < r_min or r_val > r_max:
+			continue
 		var info: Array = markers[r_val]
 		var label_text: String = info[0]
 		var color: Color = info[1]
@@ -230,6 +416,7 @@ func _build_regime_markers() -> void:
 		mat.emission_energy_multiplier = 1.0
 		line.material_override = mat
 		add_child(line)
+		_marker_nodes.append(line)
 
 		# Marker label
 		var lbl := Label3D.new()
@@ -240,6 +427,7 @@ func _build_regime_markers() -> void:
 		lbl.outline_size = 4
 		lbl.outline_modulate = Color.BLACK
 		add_child(lbl)
+		_marker_nodes.append(lbl)
 
 # ---------------------------------------------------------------------------
 # Labels — current r, regime name, title

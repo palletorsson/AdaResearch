@@ -562,6 +562,31 @@
    "qfep_connection": "λ and φ under your hands, F = E − λS recomputed at every nudge: the free-energy principle demoted from law to console. 'You have earned the force' — yet the panel grants agency only over the knobs the framework already decided exist."
   },
   "bifurcation_walkway": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "regime": [
+      "all",
+      "stable",
+      "cascade",
+      "chaos",
+      "period3"
+     ],
+     "occupancy": [
+      "corridor",
+      "mural",
+      "inlay",
+      "vault"
+     ]
+    },
+    "default": "regime=all, occupancy=corridor - all is the one value absent from REGIME_WINDOWS and _apply_regime returns on it immediately, so r_min=2.5 and r_max=4.0 stay exactly as exported, all three regime markers stay inside the corridor and nothing is skipped by the new range guard. corridor is the `_:` branch of _dot_position and is the shipped expression character for character: y = x * (wall_height - 0.5) + 0.25, z scattered across +/- 0.6 * walkway_width. apply_grid_config is guarded three ways (key present, value buildable, value different) and returns before _rebuild_data until _built is true, so the 2 placements - QFEP_Lambda_Spectrum (token bifurcation_walkway:90:0:0.8) and Corridor_QFEP_Lambda_Spectrum - rebuild nothing. ONE DELIBERATE DIFFERENCE, the same one bifurcation_diagram took on 2026-08-03: the z scatter was a bare randf(), so every launch was a different cloud. It is now the identical range from a generator seeded 20260803. Statistically the same corridor, but comparable frame to frame, and without it a sweep of occupancy would be measuring the RNG.",
+    "was": "No axis exports at all - refused by the runner for NO TURNABLE KNOBS. walkway_length, r_min, r_max, num_columns and dot_size were @export but they are dimensions and resolution, not claims: no map could say anything about WHAT the corridor argues. The r window and the cloud's place in the architecture were both single hard-coded facts.",
+    "note": "regime crops the r axis onto one behaviour class, and the crop means something different in a corridor than in a chart. A cropped chart is a chart of less; a cropped corridor is twelve metres of one condition. stable = 2.5..3.0 is a corridor you can walk end to end while nothing whatever happens - the transition promised by the title refused, which is the sharpest sentence this artifact has. cascade = 3.0..3.57 puts the whole period-doubling ladder under a twelve-metre walk, so Feigenbaum's constant is legible as the rungs crowding toward the far end. chaos = 3.57..4.0 is the band with the period-3 window standing in it as a stripe of order. period3 = 3.82..3.87 fills the corridor with that window alone, three clean branches inside what the signage calls chaos. occupancy asks where the mathematics meets the body, which is this artifact's whole thesis and the one thing it could not vary: corridor suspends the cloud at head height so you walk THROUGH it and displace it; mural flattens it onto the two side walls and hands you back the chart you were supposed to have escaped, walking past rather than through; inlay drops it into the floor and maps the population value ACROSS the corridor instead of up it, so the cascade branches left and right beneath you and the part you stand on is the part you cannot see; vault lifts it overhead out of reach. Each is a different relation between a body and a parameter, not a different mounting.",
+    "kin": "regime is bifurcation_diagram's word, taken character for character - the same five values, the same four windows, the same meaning of `all`. That reuse is deliberate and checkable: this artifact and that one are the SAME equation drawn twice, once as a chart on a wall and once as architecture you walk, so if the shared word is honest the two should measure alike under it. Any large divergence in the bite numbers is a finding about the difference between reading a diagram and standing in one. regime is also the wider family word (harmonic_motion_demo, spring_demo, mass_spring_damper, VectorForces, homogeneous_coordinates, DualBallFMController) used for exactly the family's question. The sibling's SECOND axis, trace = attractor|transient|approach, was deliberately NOT taken: skip_transient is right there and it would have transferred mechanically, but it is the chart's question - which drawing of the data is shown - and repeating it here would have produced a second artifact that argues nothing a corridor argues. occupancy is a new word. The nearest existing ones were rejected on meaning: support (none|stand|frame|pylon) and admission (none|bench|residue|exhibit) are furniture words about how a prop is held, and reading this axis as mounting is precisely the error - a walkway's whole claim is embodiment, so where the data sits relative to the walking body IS its argument.",
+    "still_note": "occupancy should bite hardest - the point cloud is most of the ink and mural, inlay and vault each move all of it into a different half of the frame. regime is strong for the same reason bifurcation_diagram's is: the cloud is redrawn over a different domain and _get_color_for_r re-ramps across it, so the four crops share almost no ink. THE MULTIMESH CAVEAT APPLIES AND IS SEVERE HERE: every dot lives in a MultiMeshInstance3D, which the capture AABB does not count, so the measured extent comes only from the floor slab, the two wall planes, the 24 floor-gradient segments and the three marker bars. Those are the corridor SHELL and they do not move under either axis, so a subject-percentage computed from them will understate the change. The one place that was fatal rather than merely pessimistic is occupancy=vault, where the cloud is lifted to wall_height + 1.55, above every mesh instance in the scene: an unfixed capture would have framed the empty corridor and scored the axis as `the dots were deleted`. _build_frame_anchor adds a layers = 0 box covering the real extent, and ONLY at vault - building it for all four values would inflate the framing of the three that do not need it, which is the same fault reversed.",
+    "gotcha": "The r readout, the regime name and the floor colour all track a PLAYER who is not present during a headless capture; _process falls back to arrow keys, so a still is always taken at _current_r = r_min with the r and regime labels parked at the corridor entrance. That is time- and input-domain and neither axis touches it - both were chosen to be facts about built geometry, which is there whether or not anyone is walking. Note also that TWO different artifacts are called bifurcation_walkway in this repo: this corridor at commons/interfaces/qfep/, and an unregistered vertical display at commons/artifacts/bifurcation_walkway/ that still carries class_name BifurcationWalkway. Only this one is reachable from a map token; the promotion is on this one."
+   },
    "name": "Bifurcation Walkway",
    "lookup_name": "bifurcation_walkway",
    "description": "A corridor where your position = r parameter in the logistic map. Walk through the phase transition: stable → period doubling → chaos → windows of order. The bifurcation diagram made walkable.",
@@ -1328,6 +1353,33 @@
    "qfep_connection": "φ, the rate sensitivity, glowing magenta — the queer signature, the term that cares not about entropy but about its *rate of change*. Grab it and you hold the project's most particular idea: that what matters is not order or disorder but the system's stance toward becoming, φ>0 embracing change, φ<0 resisting it. The term that makes the equation about time, and desire."
   },
   "qfep_reactor": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "station": [
+      "edge",
+      "order",
+      "chaos"
+     ],
+     "readout": [
+      "none",
+      "numeral",
+      "gradation",
+      "lattice"
+     ]
+    },
+    "default": "station=edge, readout=numeral - the shipped orb line for line. station=edge holds current_lambda at 0.4, which is this file's own initialiser, so _update_visuals paints exactly the colour, light energy, particle velocity and spread it always painted; the core is the same smooth 32x16 sphere at radius 0.3, the cloud the same 0.35 m emission sphere, and the particle count is int(50 * 2.0 * 1.0), the same 100 the old line computed. readout=numeral builds the same Label3D - same text, font_size 32, position (0, 0.6, 0), billboard, modulate white at 0.8 - and rungs 2 and 3 are skipped, so no rule and no plane geometry is created at all. The five reach-paths are Corridor_QFEP_Sandbox (bare token), QFEP_Sandbox (qfep_reactor:0:1.5, which is rotation and y-offset shorthand, not config), MissionHall_Qfeplaboratory and Trial_wfc_qfeplaboratory (qfep_reactor->edge_of_chaos_unlocked, a transformation target), and Curation_Bay_qfeplaboratory_6 (inside a curation_station collection, whose #with_wall / #with_pillars / #with_barrier flags are the station's). None carries either key, and apply_grid_config returns without touching anything unless a token names a word the reactor does not already hold, so nothing rebuilds for any of them.",
+    "was": "no declared axis and nothing to declare - the runner's NO TURNABLE KNOBS was literally true. The file had ZERO @export and no apply_grid_config. Everything the description leads with (pulses, glows, blue to green to red) was computed every frame from current_lambda, a plain var, driven by a set_lambda() that nothing calls.",
+    "note": "hand promotion 2026-08-04. THE DRIVER IS DEAD. _connect_to_sliders() waits one frame and collects the group 'qfep_slider'; no file in the repository ever calls add_to_group('qfep_slider') - lambda_slider.gd and phi_slider.gd declare the signals and neither joins the group - so set_lambda and set_phi have never fired in any room and current_lambda has stood at 0.4 everywhere, forever. An orb whose entire claim is that the state MOVES has only ever drawn the middle state. That is the same disease edge_core was promoted for earlier the same day, found independently in a second file, and `station` is the same cure: where this reactor stands when nothing is driving it, which today is everywhere. Nothing about it is invented - COLOR_ORDER, COLOR_EDGE and COLOR_CHAOS are already constants in this file (they are the very ones edge_core's promotion copied out), and the three lambdas are read off this file's own branches: 0.05 is CRYSTALLINE by get_state_name() and below the 0.3 colour split, 0.4 is the shipped value, 0.95 is DISSOLUTION and above both the 0.7 pulse split and the 0.6 jitter split. Each station is also a FORM, not only a tint: order facets the orb to 7 segments and 4 rings (edge_core's numbers, so the pair crystallises alike), chaos shrinks the body to a 0.12x speck and takes the boundary off the cloud (emission radius 0.35 -> 0.85, three times the population). `readout` is the second question, about the placard rather than the body: numeral is the shipped label; gradation lays the lambda line under the orb with the edge band painted across 0.3..0.5, the interval is_at_edge() has always tested for and the artifact has never drawn; lattice raises that line into the lambda x phi plane this reactor is standing in, with the band as a REGION and a marker at its point. set_lambda() itself is untouched, so if a driver is ever wired up it overrides the colour exactly as before.",
+    "kin": "`station` (edge, order, chaos) is edge_core's word, its three values and its fallback rule, character for character, and reused on purpose: these are two bodies on ONE line - lambda, order against chaos - and they should measure alike, which is itself the check. edge_core's own note says station would fit fluid_form (phi>0) and rigid_sculpture (phi<0) as positions but not with this value list, because their line is phi; that reasoning is what licenses the reuse here and forbids it there. `readout` (none, numeral, gradation, lattice) is taken from commons/primitives/line/line.gd, its twin xyz_slider_plate.gd and qfep_calibrator, including the rank-ladder shape (each rung strictly additive over the one below) and the rule that an unrecognised word reads as numeral rather than none, so a typo cannot strip the placard off a live room. NOT REUSED: `calibration` (optimum, band, dispute, gap, none) belongs to lambda_slider and phi_slider and asks how a RAIL marks the right answer - the rule this artifact grows at rung 2 does mark a band, but the axis it belongs to is about which rung the placard is at, not about the marking; `formation` and `flux` are the neighbours' words for arrangement and for where a displacement is spent, and neither is a position on a line. NOTE also that qfep_reactor_bench is a DIFFERENT token with its own `complement` axis - nine of the eleven map hits for the string 'qfep_reactor' are that bench, not this orb.",
+    "declined": "THE PULSE AND THE GLOW, which are what the registry description leads with ('pulses and glows based on lambda and phi'). The evidence is one still PNG per value and a rate is invisible to it - info_board was swept across five duration exports and produced six identical tiles. pulse_speed, the breathing scale and the emission wobble are left exactly as written and none is declared. Every value above is form or place: facet count, cloud radius, a scale drawn or not drawn.",
+    "fixture": {
+     "freeze_time": 3.0
+    },
+    "fixture_note": "freeze_time pins pulse_phase and the chaos jitter so that three stations are three photographs of one instant instead of of three phases - the breath is about +/-10% of core scale and the pulse SPEED itself differs per station (1.0, 3.0, 5-7), so an unpinned sweep partly measures which frame the camera caught. It ships at -1.0, which is live time and the shipped behaviour, and is left UNTYPED on purpose because a typed float rejects the string a fixture passes before _ready. The jitter and the chaotic pulse term now draw from a seeded RandomNumberGenerator (JITTER_SEED) instead of the global randf, so chaos is one arrangement rather than a new object every boot; neither branch is reachable at the default lambda of 0.4.",
+    "measurement_risk": "On `station`, chaos shrinks the only MeshInstance3D in the scene from 0.3 to 0.036 m radius - the particle cloud is a GPUParticles3D and the capture AABB counts neither it nor the light - so a fit-by-diagonal camera will zoom hard on the speck and that frame is NOT comparable with edge's until subject % is checked. Read subject % before reading the verdict, and add a framing hint or a layers = 0 anchor if chaos measures as an implausible landslide. On `readout`, the rule and the plane are deliberately built inside the core's own vertical extent (|y| <= 0.28 against radius 0.3) and in front of it at z = 0.52, so the AABB grows sideways only and the artifact's seating on the floor is identical at every rung; but they are fine geometry beside a bright emissive orb and may need a framing hint the way line_interface did."
+   },
    "name": "QFEP Reactor",
    "lookup_name": "qfep_reactor",
    "description": "Central orb that visualizes the current QFEP state. Pulses and glows based on lambda and phi. Blue=order, green=edge of chaos, red=dissolution. The heart of the laboratory.",
@@ -2674,6 +2726,35 @@
    "lookup_name": "random_cubes",
    "description": "Chaotically arranged cubes representing high entropy. Random positions, rotations, scales.",
    "scene": "res://commons/interfaces/qfep/random_cubes.tscn",
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "macrostate": [
+      "uniform",
+      "corner",
+      "layered",
+      "spilled"
+     ],
+     "chance": [
+      "none",
+      "hue",
+      "size",
+      "all"
+     ]
+    },
+    "default": "macrostate=uniform, chance=all - uniform is the `_:` branch of _region_plan() and returns the one shipped region lo=(-r, 0, -r) hi=(r, r, r), so the three randf_range calls draw from the same ranges in the same order; chance=all draws size, hue and spin exactly as before; and the wire bounds frame is built ONLY when macrostate != uniform, so the default adds no node. All three placements (QFEP_E_Term, Corridor_QFEP_E_Term, Curation_Bay_qfeplaboratory_4) are bare tokens, and apply_grid_config returns before rebuilding unless a key is present AND its value differs AND _ready has already built. THE PILE WAS NEVER THE SAME TWICE: the artifact is unseeded by design, so `exact' here means the same code path and the same distribution, which is the strongest sense available. chance_seed defaults to 0, which keeps the global RNG - only the sweep's fixture pins it.",
+    "was": "six exports and no apply_grid_config, so nothing was reachable from a map token. Every export was a dimension, a rate or a colour: cube_count, spawn_radius, size_min, size_max, drift_speed, base_color. The two decisions that carry the argument - WHICH region the cubes occupy and WHAT is left to the dice - were written inline in the spawn loop.",
+    "note": "hand promotion 2026-08-04, refused by the runner as NO TURNABLE KNOBS. BOTH WORDS ARE BORROWED, neither invented. macrostate = uniform|corner|layered|spilled is microstate_counter's axis, character for character - the artifact in this same sequence whose entire job is to print log10(W) for exactly these four arrangements. Entropy is not a property of a pile, it is a count of the ways the pile could have been, and that count does not exist until you say which macrostate you are counting: the same twenty cubes crowded into one octant are just as randomly placed and have vastly fewer ways to be. chance = none|hue|size|all is john_cage_tech_noir's, and this artifact ships the opposite end of it - that piece surrenders NOTHING visible to chance and defaults to `none`; this one defaults to `all`. One borrowed question, two artifacts standing at its two ends, which is worth more than a private word at each.",
+    "orientation_caveat": "ORIENTATION RIDES WITH `all`. The borrowed chance list has no value for spin, and forking the list to add one would make the shared word a lie, so none/hue/size all stand their cubes axis-aligned and only `all` tumbles them. Stated because it is the single place the borrowed vocabulary does not cover this artifact exactly. Their angular velocity is zeroed too, not just their initial rotation: a value has to survive being stood in for ten minutes, not only photographed - a random spin would have eroded `aligned' within seconds.",
+    "frame_note": "THE WIRE BOX IS PART OF THE ARGUMENT AND ONLY THE NON-DEFAULT VALUES GET IT. The spawn volume is invisible in the shipped artifact, so `corner` without a frame is not the same pile confined but simply a smaller pile over there - which is size wearing a name - and `spilled` would have nothing to have spilled out of. microstate_counter draws its amber octant cage for the same stated reason. uniform draws no frame and is therefore untouched.",
+    "declined": "drift_speed, this file's own declared critical_parameter. At zero the chaos is frozen and above zero it is visibly restless - real, and invisible to a still PNG. info_board was swept across five duration exports and published six identical tiles. Rates stay exports.",
+    "fixture": {
+     "chance_seed": 20260804
+    },
+    "fixture_note": "WITHOUT chance_seed THE SWEEP MEASURES A DIFFERENT OBJECT PER FRAME. Every position, size, hue and velocity comes from an unseeded global randf, so four values of an axis would be four fresh piles and any difference measured would be the dice, not the axis. chance_seed pins the draw; it defaults to 0, which is the shipped unseeded path, so no placement is affected.",
+    "measurement_risk": "SPARSE SUBJECT. Twenty cubes of 0.05-0.15 m loose in a 2 x 1 x 2 m volume: the union AABB the sweep frames on is mostly empty air, so a faint verdict here should be crop-rechecked before it is believed (random_walk_collection moved 174 grey levels across 0.06% of frame and read the same as a genuinely inert axis). The wire frame on three of the four macrostate values helps - it puts a fixed, high-contrast reference in the same pixels. `spilled' was deliberately kept close (plume to 1.45r, not 3r) so the union does not shrink the other three values to specks."
+   },
    "category": "qfep",
    "interaction": "observe",
    "sequence": "qfeplaboratory",
@@ -3938,6 +4019,26 @@
    "lookup_name": "preserved_pattern",
    "description": "Static checkerboard that never changes. Conservative φ<0.",
    "scene": "res://commons/interfaces/qfep/preserved_pattern.tscn",
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "framing": 0.85,
+    "axes": {
+     "motif": [
+      "blank",
+      "checker",
+      "cross",
+      "twill",
+      "houndstooth"
+     ]
+    },
+    "default": "motif=checker - checker is the `_:` branch of _is_on() and returns `(x + z) % 2 == 0`, the shipped rule character for character, with the same two materials, the same 0.9/0.3/0.9 cell box and the same cell_size * 0.15 lift on the marked cells. All three placements (QFEP_Phi_Term, Corridor_QFEP_Phi_Term, Curation_Bay_qfeplaboratory_5) are bare tokens; apply_grid_config returns before rebuilding unless a key is present AND differs AND _ready has already built once, and a typo also lands on `_:`, so no room can be blanked by a bad word.",
+    "was": "three exports - grid_size, cell_size, pattern_color - and no apply_grid_config, so nothing was reachable from a map token. The decision that carries the argument was the literal `(x + z) % 2 == 0` inline in the build loop, under a comment reading Classic checkerboard - stable, predictable, preserved.",
+    "note": "hand promotion 2026-08-04, refused by the runner as NO TURNABLE KNOBS. The @identity names the critical_parameter as THE ABSENCE OF TIME - there is no _process, no delta, no becoming - and that cannot be an axis, because the evidence is one still PNG and a form that does not move photographs identically to one that does. So the axis is the other half of the claim. The artifact says phi<0 preserves a pattern at the cost of life and then never says WHICH pattern, as though there were only one - which is precisely the move a conservative order makes about its own conventions. The checkerboard is not the pattern; it is one inherited draft among several, frozen. Naming the choice is the promotion, and `blank` is the value that finishes the argument: the grid still perfectly regular, still immortal, with nothing left in it to preserve.",
+    "shares_vocabulary_with": "pattern_tile_puzzle (and the five sibling tokens on that scene: _4x4, _mirror, _8x8, _brick, _herringbone). `motif` = blank|checker|cross|twill|houndstooth, the same five words for the same question - which figure a square grid of cells carries - and the arithmetic is reproduced cell for cell, so the two artifacts measure ALIKE: checker is (x+z)%2==0, twill is (x+z)%4<2, cross is the centre row and column, houndstooth is the same 4x4 bitmap tiled. Only the DEFAULT differs, because the loom ships `blank` (it arrives empty, waiting to be edited) and this museum piece ships `checker` (the draft it will keep forever) - which is itself the difference between the two artifacts stated in one word. NOT `dyelot`, pattern_tile's second axis: this grid runs on two materials, not eight yarns, so there is nothing to re-dye.",
+    "not_shared_with": "random_cubes, its opposite number in this same batch, which took `macrostate` (uniform|corner|layered|spilled) from microstate_counter. The two ARE the two ends of one conceptual line - frozen order against high entropy - and putting them on one shared scale was the tempting move. Refused: the values of such a scale would be DEGREES OF NOISE, an amount wearing a name, and neither artifact's own hidden constant is an amount. One is a draft, the other is a region. A pattern has no macrostate and a loose pile has no motif; they are different terms of the formula (phi against E(S)) on different substrates. edge_core refused a shared word across terms yesterday on exactly this reasoning.",
+    "measurement_risk": "A THIN FLAT PLATE. The grid is 0.36 m across and about 0.03 m tall, so a fit-by-diagonal camera frames 0.51 m and the plate is foreshortened further by the sweep's slight downward angle - the classic wide-flat dilution case. framing 0.85 brings the fit to about 0.43 m, still wider than the 0.36 m plate so no corner is cropped. The axis lives in WHICH cells are lit and raised, which is the whole face of the subject rather than a detail inside it, so the bite should be strong; if it reads faint, crop-recheck before believing the verdict."
+   },
    "category": "qfep",
    "interaction": "observe",
    "sequence": "qfeplaboratory",

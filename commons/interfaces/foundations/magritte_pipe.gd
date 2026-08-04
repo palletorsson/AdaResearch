@@ -1,7 +1,7 @@
 # @identity
 # essence: sign != signified -- a procedural pipe mesh with label saying this is not a pipe
 # desire: a pipe you can see and inspect but that insists it is not what it appears to be
-# critical_parameter: layers array -- maps representation levels (paint, canvas, word, variable) as strata
+# critical_parameter: presence -- which of the two terms (the pipe, the words) is actually in the frame; layers array -- representation levels as strata
 # triggers: static display; player proximity reveals layer explanations; contradiction is always present
 # emerges: the gap between name and thing becomes tangible -- every data structure is a Magritte painting
 # needs: procedural pipe mesh [has]; label system [has]; layer explanation text [has]; VR interaction [missing]
@@ -37,6 +37,32 @@ signal layer_revealed(layer_name: String)
 ## Current layer of representation
 @export var current_layer: int = 0
 
+## DNA axis — what is actually standing inside the frame.
+## The whole subject of this object is the relation between a thing and its
+## name, so the only honest axis is which of the two is present. Not a mounting
+## style: each value is a different sentence about the gap.
+##   pipe_and_words     — the painting: a pipe, and under it the denial. The
+##                        contradiction fully staged, both terms in the room.
+##   pipe_only          — the picture with no caption. The treachery is still
+##                        there; nothing on the canvas admits it.
+##   words_only         — the denial over an empty canvas. A sign refusing a
+##                        referent that was never brought. The purest case:
+##                        "this is not a pipe" is TRUE and says nothing.
+##   empty_frame        — neither. The support alone: representation with
+##                        nothing represented, still hanging on the wall.
+##   picture_of_picture — Les Deux Mystères, 1966: the painting reappears inside
+##                        itself on a smaller canvas, with the pipe floating
+##                        outside it. The regress refuses to bottom out.
+@export_enum("pipe_and_words", "pipe_only", "words_only", "empty_frame", "picture_of_picture") var presence: String = "pipe_and_words"
+
+## The same list as the @export_enum above. The enum is what the editor and the
+## declaration gate read; this is what an incoming map token is checked against.
+const PRESENCES: Array[String] = ["pipe_and_words", "pipe_only", "words_only", "empty_frame", "picture_of_picture"]
+
+## Which values put a pipe on the canvas, and which put the sentence there.
+const PRESENCE_HAS_PIPE: Array[String] = ["pipe_and_words", "pipe_only", "picture_of_picture"]
+const PRESENCE_HAS_WORDS: Array[String] = ["pipe_and_words", "words_only", "picture_of_picture"]
+
 # The layers of representation
 var layers: Array[String] = [
 	"Ceci n'est pas une pipe.",           # This is not a pipe
@@ -60,19 +86,31 @@ var layer_explanations: Array[String] = [
 var _frame: MeshInstance3D
 var _canvas: MeshInstance3D
 var _pipe_model: Node3D
+var _inner_picture: Node3D
 var _text_label: Label3D
 var _explanation_label: Label3D
 var _interactable: Area3D
 var _animation_time: float = 0.0
+var _pipe_base_y: float = 0.08
+var _built: bool = false
 
 func _ready() -> void:
-	_create_frame()
-	_create_canvas()
-	_create_pipe()
-	_create_text()
+	_build_body()
+	# The click target is the frame, not the contents, so it survives every value
+	# and is built once — outside _build_body, which is what a rebuild replaces.
 	_create_interactable()
 	_update_display()
+	_built = true
 	print("MagrittePipe: Ready — 'The map is not the territory'")
+
+func _build_body() -> void:
+	_create_frame()
+	_create_canvas()
+	if presence in PRESENCE_HAS_PIPE:
+		_create_pipe()
+	if presence == "picture_of_picture":
+		_create_inner_picture()
+	_create_text()
 
 func _create_frame() -> void:
 	_frame = MeshInstance3D.new()
@@ -104,10 +142,22 @@ func _create_canvas() -> void:
 	add_child(_canvas)
 
 func _create_pipe() -> void:
-	_pipe_model = Node3D.new()
+	_pipe_model = _make_pipe_body()
 	_pipe_model.name = "PipeModel"
-	_pipe_model.position = Vector3(0, 0.08, 0.04)
-	
+	if presence == "picture_of_picture":
+		# The pipe floats clear of the inner canvas below it — the 1966 version,
+		# where the painted pipe and the pipe outside the painting share a wall.
+		_pipe_base_y = 0.155
+		_pipe_model.position = Vector3(0, _pipe_base_y, 0.055)
+		_pipe_model.scale = Vector3(0.8, 0.8, 0.8)
+	else:
+		_pipe_base_y = 0.08
+		_pipe_model.position = Vector3(0, _pipe_base_y, 0.04)
+	add_child(_pipe_model)
+
+func _make_pipe_body() -> Node3D:
+	var body := Node3D.new()
+
 	# Bowl of pipe
 	var bowl = MeshInstance3D.new()
 	var bowl_mesh = CylinderMesh.new()
@@ -123,7 +173,7 @@ func _create_pipe() -> void:
 	pipe_mat.metallic = 0.2
 	pipe_mat.roughness = 0.6
 	bowl.material_override = pipe_mat
-	_pipe_model.add_child(bowl)
+	body.add_child(bowl)
 	
 	# Stem of pipe
 	var stem = MeshInstance3D.new()
@@ -135,7 +185,7 @@ func _create_pipe() -> void:
 	stem.rotation.z = PI * 0.5
 	stem.position = Vector3(0.02, -0.02, 0)
 	stem.material_override = pipe_mat
-	_pipe_model.add_child(stem)
+	body.add_child(stem)
 	
 	# Mouthpiece
 	var mouth = MeshInstance3D.new()
@@ -147,25 +197,74 @@ func _create_pipe() -> void:
 	mouth.rotation.z = PI * 0.5 + PI * 0.15
 	mouth.position = Vector3(0.15, -0.04, 0)
 	mouth.material_override = pipe_mat
-	_pipe_model.add_child(mouth)
-	
-	add_child(_pipe_model)
+	body.add_child(mouth)
+
+	return body
+
+func _create_inner_picture() -> void:
+	# The painting hung inside itself. A smaller frame and canvas sunk into the
+	# big one, carrying the pipe again at scale — so the question "which of these
+	# is the pipe" gets one more turn and still has no floor.
+	_inner_picture = Node3D.new()
+	_inner_picture.name = "PictureOfPicture"
+	_inner_picture.position = Vector3(0, -0.055, 0.042)
+
+	var inner_frame := MeshInstance3D.new()
+	var inner_frame_mesh := BoxMesh.new()
+	inner_frame_mesh.size = Vector3(0.34, 0.26, 0.012)
+	inner_frame.mesh = inner_frame_mesh
+	var f_mat := StandardMaterial3D.new()
+	f_mat.albedo_color = frame_color.darkened(0.18)
+	f_mat.metallic = 0.1
+	f_mat.roughness = 0.8
+	inner_frame.material_override = f_mat
+	_inner_picture.add_child(inner_frame)
+
+	var inner_canvas := MeshInstance3D.new()
+	var inner_canvas_mesh := BoxMesh.new()
+	inner_canvas_mesh.size = Vector3(0.29, 0.21, 0.006)
+	inner_canvas.mesh = inner_canvas_mesh
+	inner_canvas.position = Vector3(0, 0, 0.008)
+	var c_mat := StandardMaterial3D.new()
+	c_mat.albedo_color = background_color.darkened(0.07)
+	c_mat.metallic = 0.0
+	c_mat.roughness = 1.0
+	inner_canvas.material_override = c_mat
+	_inner_picture.add_child(inner_canvas)
+
+	var small_pipe := _make_pipe_body()
+	small_pipe.name = "InnerPipe"
+	small_pipe.scale = Vector3(0.42, 0.42, 0.42)
+	small_pipe.position = Vector3(0, 0.035, 0.016)
+	_inner_picture.add_child(small_pipe)
+
+	add_child(_inner_picture)
 
 func _create_text() -> void:
 	if not show_text:
 		return
-	
-	# Main text (the famous phrase)
-	_text_label = Label3D.new()
-	_text_label.text = layers[0]
-	_text_label.font_size = 28
-	_text_label.position = Vector3(0, -0.15, 0.04)
-	_text_label.pixel_size = 0.001
-	_text_label.modulate = Color(0.15, 0.12, 0.1)
-	_text_label.outline_size = 0
-	_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_text_label)
-	
+
+	# Main text (the famous phrase). `pipe_only` and `empty_frame` are the two
+	# values that withhold it — the canvas keeps its picture, or keeps nothing,
+	# and says neither way what it is not.
+	if presence in PRESENCE_HAS_WORDS:
+		_text_label = Label3D.new()
+		_text_label.text = layers[0]
+		if presence == "picture_of_picture":
+			# The inscription belongs to the INNER painting: smaller, and sitting
+			# forward of the inner canvas so the small frame does not eat it.
+			_text_label.font_size = 14
+			_text_label.position = Vector3(0, -0.115, 0.060)
+		else:
+			_text_label.font_size = 28
+			_text_label.position = Vector3(0, -0.15, 0.04)
+		_text_label.pixel_size = 0.001
+		_text_label.modulate = Color(0.15, 0.12, 0.1)
+		_text_label.outline_size = 0
+		_text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		add_child(_text_label)
+
+
 	# Explanation (outside frame)
 	_explanation_label = Label3D.new()
 	_explanation_label.text = layer_explanations[0]
@@ -202,9 +301,12 @@ func _on_input_event(_camera: Node, event: InputEvent, _position: Vector3, _norm
 func _process(delta: float) -> void:
 	_animation_time += delta
 	
-	# Subtle floating animation for the pipe
+	# Subtle floating animation for the pipe. The base height used to be written
+	# here as a literal 0.08, which would have yanked the picture_of_picture pipe
+	# down onto the inner canvas on the first frame — the float now hovers around
+	# wherever _create_pipe actually put it.
 	if _pipe_model:
-		_pipe_model.position.y = 0.08 + sin(_animation_time * 0.8) * 0.005
+		_pipe_model.position.y = _pipe_base_y + sin(_animation_time * 0.8) * 0.005
 	
 	# On higher layers, the pipe becomes more abstract
 	if current_layer >= 3 and _pipe_model:
@@ -231,6 +333,45 @@ func advance_layer() -> void:
 	emit_signal("representation_questioned")
 	
 	print("MagrittePipe: Layer %d — '%s'" % [current_layer, layers[current_layer]])
+
+func normalise_presence(raw: String, fallback: String) -> String:
+	# An unrecognised string keeps whatever we already had rather than silently
+	# dropping to the default: a mistyped map token should not look like a
+	# working axis that happens to render the stock object.
+	return raw if raw in PRESENCES else fallback
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	# Deliberately narrow. This artifact had no apply_grid_config at all, so a
+	# blanket `for key in config_data: if key in self` would newly expose every
+	# inherited Node3D property (rotation, scale, visible) to whatever the grid
+	# happens to pass — new behaviour for two shipped placements. Only the axis
+	# is accepted; a config without it is a no-op, exactly as before.
+	if not config_data.has("presence"):
+		return
+	var before: String = presence
+	presence = normalise_presence(str(config_data["presence"]), before)
+	# Rebuild ONLY on a real change, and only once _ready has built. Guarding on
+	# _built is what keeps a config call during scene setup from tearing down
+	# geometry that does not exist yet.
+	if presence == before or not _built:
+		return
+	_rebuild_body()
+
+func _rebuild_body() -> void:
+	for old in [_frame, _canvas, _pipe_model, _inner_picture, _text_label, _explanation_label]:
+		if is_instance_valid(old):
+			if old.get_parent() != null:
+				old.get_parent().remove_child(old)
+			old.queue_free()
+	_frame = null
+	_canvas = null
+	_pipe_model = null
+	_inner_picture = null
+	_text_label = null
+	_explanation_label = null
+	_build_body()
+	_update_display()
+	print("MagrittePipe: presence=%s" % presence)
 
 func reset() -> void:
 	current_layer = 0

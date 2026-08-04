@@ -122,5 +122,18 @@ func _input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera_distance = min(50.0, camera_distance + 2.0)
 
+## Grid system integration hook — a PASS-THROUGH.
+##
+## This script is the scene ROOT, and the root is the only node a map token can
+## address: GridInteractablesComponent calls apply_grid_config here and nowhere
+## else. The knobs live one level down on TessellationLatticeWalk, so a config
+## hook that did nothing here (which is what this was) made every axis on the
+## child unreachable from every map in the corpus. Forward, and let the child do
+## its own change-guarding.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if lattice == null:
+		return
+	lattice.apply_grid_config(config)
+	if type_label != null and stats_label != null:
+		_update_ui()
+		_update_stats()

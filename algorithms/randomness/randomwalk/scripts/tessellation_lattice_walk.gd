@@ -3,6 +3,43 @@ extends Node3D
 
 ## A perfect space-filling tessellation revealed by random walk
 ## Creates a pre-computed lattice grid and reveals forms one at a time
+##
+## --- STAGE-2 DNA (promoted 2026-08-03) --------------------------------------
+## cell       cube | octahedron | rhombic_dodecahedron | truncated_octahedron
+## adjacency  face | edge | corner
+##
+## `cell` is the argument. Which polyhedron stands at every site decides whether
+## the volume reads as a solid block (cube), a gapped scatter of points
+## (octahedron), an interlocking crystal (rhombic dodecahedron) or a foam
+## (truncated octahedron) — and that is the whole claim the artifact makes about
+## space-filling. It was already in the source as `tessellation_type`, an INT
+## enum, and an int enum is unreachable from a map token: config values arrive
+## as STRINGS, so `tessellation_lattice_demo#tessellation_type:2` set a typed int
+## from "2", was rejected, and silently rendered the cube. Four buttons in a
+## desktop panel nobody sees in VR were the only way to reach the other three.
+## `cell` is the string face of the same enum, exactly as lsystem_editor's
+## `grammar` is the string face of its `preset`; `tessellation_type` stays as the
+## live internal variable the UI buttons and set_tessellation_type() drive.
+##
+## `adjacency` is the claim the registry description was already MAKING and the
+## code was not honouring: "how tiling geometry affects diffusion patterns". The
+## walk asked for six orthogonal neighbours no matter which solid was drawn, so
+## the diffusion never varied at all. face/edge/corner are the standard 6-, 18-
+## and 26-connectivities of a cubic lattice, all three connected, so the walk
+## stays a walk.
+##
+## HONEST CAVEAT on adjacency. A still cannot photograph a path. What it CAN
+## photograph is the colour field: every revealed cell is tinted by its index
+## along the walk, so a face walk lays down a layered, stringy gradient and a
+## corner walk a rounder one over the same 512 sites. That is a real difference
+## in the picture, but it is one step removed from the thing that changed. If
+## the critic reports adjacency faint, read that as a fact about the still.
+##
+## SEEDED. `random_seed` was already here and was already 0 (= do not seed) in
+## the only scene that uses this script, which means every render was a
+## different walk. Left at 0 so shipped placements are untouched; dna.fixture
+## pins it to 12345 for the sweep, or the lattice comparison would be three
+## different walks and the axis would be measuring noise.
 
 enum TessellationType {
 	CUBE,
@@ -13,6 +50,10 @@ enum TessellationType {
 
 ## Configuration
 @export_group("Lattice Properties")
+## DNA axis `cell` — which space-filling solid stands at every lattice site.
+@export_enum("cube", "octahedron", "rhombic_dodecahedron", "truncated_octahedron") var cell: String = "cube"
+## DNA axis `adjacency` — which sites the walk may step to (6 / 18 / 26 connectivity).
+@export_enum("face", "edge", "corner") var adjacency: String = "face"
 @export var tessellation_type: TessellationType = TessellationType.CUBE
 @export var grid_size: Vector3i = Vector3i(10, 10, 10)
 @export var cell_size: float = 2.0
@@ -43,9 +84,21 @@ var cell_mesh: Mesh
 var multimesh_instance: MultiMeshInstance3D
 var walk_timer: float = 0.0
 
+# Neighbour offsets for the current `adjacency`, rebuilt whenever a walk path is.
+var _offsets: Array = []
+
+# True once _ready has built the lattice once. apply_grid_config must not rebuild
+# before that — a rebuild on a scene that has not run _ready yet touches a null
+# multimesh and leaves the artifact blank in every map that placed it.
+var _built: bool = false
+
 func _ready() -> void:
 	if random_seed != 0:
 		seed(random_seed)
+
+	# `cell` decides the enum, not the other way round. With cell = "cube" this
+	# writes back the CUBE the enum already held, so nothing moves.
+	_resolve_cell()
 
 	print("=== Tessellation Lattice Walk ===")
 	print("Type: ", TessellationType.keys()[tessellation_type])
@@ -66,6 +119,58 @@ func _ready() -> void:
 
 	if show_all_at_start:
 		reveal_all()
+		# ...and STOP. reveal_all leaves current_walk_index at the end of the
+		# path, so the very next _process tick took the `elif loop_walk` branch,
+		# called reset_walk() and hid every cell it had just revealed — "show all
+		# at start" showed all for one frame. No shipped placement sets this flag
+		# (the only scene using this script leaves it false), so nothing in the
+		# corpus changes; the sweep fixture depends on it holding.
+		auto_walk = false
+
+	_built = true
+
+## `cell` (a string a map token can actually write) -> `tessellation_type`.
+## cell = "cube" resolves to CUBE, which is the value the enum already carried
+## and the only value tessellation_lattice_demo.tscn has ever used.
+func _resolve_cell() -> void:
+	match cell:
+		"cube":
+			tessellation_type = TessellationType.CUBE
+		"octahedron":
+			tessellation_type = TessellationType.OCTAHEDRON
+		"rhombic_dodecahedron":
+			tessellation_type = TessellationType.RHOMBIC_DODECAHEDRON
+		"truncated_octahedron":
+			tessellation_type = TessellationType.TRUNCATED_OCTAHEDRON
+
+## The offsets a walker may step along, per `adjacency`.
+## face = 6 (shared face, the shipped set), edge = 18 (face + edge),
+## corner = 26 (the full Moore neighbourhood). All three are connected.
+func _neighbour_offsets() -> Array:
+	var out: Array = []
+	if adjacency == "face":
+		return [
+			Vector3i(1, 0, 0),
+			Vector3i(-1, 0, 0),
+			Vector3i(0, 1, 0),
+			Vector3i(0, -1, 0),
+			Vector3i(0, 0, 1),
+			Vector3i(0, 0, -1)
+		]
+	var span: Array = [-1, 0, 1]
+	for dx in span:
+		for dy in span:
+			for dz in span:
+				var ix: int = int(dx)
+				var iy: int = int(dy)
+				var iz: int = int(dz)
+				if ix == 0 and iy == 0 and iz == 0:
+					continue
+				var manhattan: int = absi(ix) + absi(iy) + absi(iz)
+				if adjacency == "edge" and manhattan > 2:
+					continue
+				out.append(Vector3i(ix, iy, iz))
+	return out
 
 func _process(delta: float) -> void:
 	if auto_walk and walk_path.size() > 0:
@@ -447,6 +552,10 @@ func generate_walk_path() -> void:
 	"""Create a TRUE random walk path through the lattice (neighbor to neighbor)"""
 	walk_path.clear()
 
+	# Which sites count as neighbours is the `adjacency` axis; recomputed here so
+	# a rebuild picks up a changed value.
+	_offsets = _neighbour_offsets()
+
 	var visited = {}  # Track visited cells
 	var total_cells = lattice_positions.size()
 
@@ -492,15 +601,11 @@ func _get_unvisited_neighbors(index: int, visited: Dictionary) -> Array[int]:
 	var neighbors: Array[int] = []
 	var grid_pos = lattice_positions[index]
 
-	# Check all 6 orthogonal neighbors (up/down, left/right, forward/back)
-	var offsets = [
-		Vector3i(1, 0, 0),
-		Vector3i(-1, 0, 0),
-		Vector3i(0, 1, 0),
-		Vector3i(0, -1, 0),
-		Vector3i(0, 0, 1),
-		Vector3i(0, 0, -1)
-	]
+	# The neighbourhood is the `adjacency` axis. Default "face" returns exactly
+	# the six orthogonal offsets this function used to hard-code.
+	var offsets: Array = _offsets
+	if offsets.is_empty():
+		offsets = _neighbour_offsets()
 
 	for offset in offsets:
 		var neighbor_pos = grid_pos + offset
@@ -623,6 +728,12 @@ func resume_walk() -> void:
 
 func set_tessellation_type(type: TessellationType) -> void:
 	tessellation_type = type
+	# Keep the string face of the enum in step, so a later _resolve_cell()
+	# cannot silently undo what the desktop panel just did.
+	var names: Array = ["cube", "octahedron", "rhombic_dodecahedron", "truncated_octahedron"]
+	var idx: int = int(type)
+	if idx >= 0 and idx < names.size():
+		cell = str(names[idx])
 	create_cell_mesh()
 	setup_multimesh()
 	reset_walk()
@@ -642,5 +753,35 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Grid system integration hook.
+## GUARDED on both sides: rebuild only when a value actually CHANGED, and only
+## once _ready has built the lattice. A bare `tessellation_lattice_demo` token
+## sends nothing, changes nothing, and rebuilds nothing — the two shipped
+## placements are byte-identical to before this promotion.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var changed: bool = false
+
+	if config.has("cell"):
+		var c: String = str(config["cell"])
+		var known: Array = ["cube", "octahedron", "rhombic_dodecahedron", "truncated_octahedron"]
+		if known.has(c) and c != cell:
+			cell = c
+			changed = true
+
+	if config.has("adjacency"):
+		var a: String = str(config["adjacency"])
+		var modes: Array = ["face", "edge", "corner"]
+		if modes.has(a) and a != adjacency:
+			adjacency = a
+			changed = true
+
+	if not changed or not _built:
+		return
+
+	_resolve_cell()
+	create_cell_mesh()
+	generate_lattice()
+	setup_multimesh()
+	reset_walk()
+	if show_all_at_start:
+		reveal_all()

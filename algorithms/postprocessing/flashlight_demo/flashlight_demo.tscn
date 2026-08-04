@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dwj7igy7ibn87" path="res://algorithms/postprocessing/flashlight_demo/flashlight.tscn" id="1_flashlight"]
 [ext_resource type="Script" uid="uid://cqxta3kfrj1c2" path="res://algorithms/postprocessing/flashlight_demo/flashlight_color.gd" id="2_color"]
+[ext_resource type="Script" path="res://algorithms/postprocessing/flashlight_demo/flashlight_demo.gd" id="3_root"]
 
 [sub_resource type="Environment" id="Environment_Dark"]
 background_mode = 1
@@ -14,6 +15,7 @@ albedo_color = Color(0.95, 0.95, 0.95, 1)
 roughness = 0.9
 
 [node name="FlashlightDemo" type="Node3D" unique_id=1719341754]
+script = ExtResource("3_root")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1974253718]
 environment = SubResource("Environment_Dark")

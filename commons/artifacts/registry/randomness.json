@@ -11564,6 +11564,31 @@
     ],
     "size_group": "world_scale"
    },
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "cell": [
+      "cube",
+      "octahedron",
+      "rhombic_dodecahedron",
+      "truncated_octahedron"
+     ],
+     "adjacency": [
+      "face",
+      "edge",
+      "corner"
+     ]
+    },
+    "default": "cell=cube, adjacency=face - cube resolves to TessellationType.CUBE, which is the value the enum already held and the only one tessellation_lattice_demo.tscn has ever written; face returns the same six orthogonal offsets _get_unvisited_neighbors used to hard-code. Both apply_grid_config hooks (the root pass-through and the child) rebuild only on a CHANGED value and only after _ready, and neither of the 2 existing placements sends any config, so Mosaic_Pattern_Maker and TestMap_Unused_27 are byte-identical to before.",
+    "was": "the four space-filling solids were an int enum called tessellation_type, reachable only from four Buttons in a desktop CanvasLayer that VR never shows and the capture bench hides - a map token could not set it at all, because config values arrive as STRINGS and a typed int property rejects \"2\" silently. The walk's neighbourhood was six literal Vector3i offsets inside _get_unvisited_neighbors, identical for all four solids, so the registry's claim that this shows 'how tiling geometry affects diffusion patterns' was not true of the code.",
+    "fixture": {
+     "random_seed": 12345,
+     "show_all_at_start": true
+    },
+    "note": "hand promotion 2026-08-03 - the runner refused this token for NO TURNABLE KNOBS, and it was right about the ROOT: the scene root runs tessellation_demo_controller.gd, whose apply_grid_config was a bare `pass`, so every export on the TessellationLatticeWalk child was unreachable from any map token. The root now forwards. FIXTURE IS LOAD-BEARING, twice over. random_seed was 0 (= do not seed) and the walk calls randi(), so without pinning it three lattices would be three different walks and the comparison would measure noise. show_all_at_start matters because the reveal is TIME-DRIVEN at 10 cells/sec: at the bench's 1.1 s settle a still would catch about eleven cells out of 512 and every tile would look like the same handful of specks. Setting that flag also had to stop the auto-walk in code - reveal_all leaves the index at the end of the path, and the next _process tick took the loop_walk branch and hid everything it had just revealed. adjacency is the weaker of the two axes ON PURPOSE and its weakness is honest: a still cannot photograph a path, only the colour field the path leaves behind, since each revealed cell is tinted by its index along the walk. If the critic reports adjacency faint, that is a fact about the still, not about the axis. cell should be violent - it changes the shape of all 512 solids at once.",
+    "kin": "vector_field_visualizer.lattice is a different question wearing a similar word: there `lattice` is the scaffold a field is SAMPLED on (square | polar | hidden), a way of making the invisible visible. Here the tessellating solid IS the subject, not the scaffold, so it takes the code's own noun - cell_mesh, cell_size, 'Total Cells' - rather than borrowing a word that would imply the two artifacts measure alike."
+   },
    "scene": "res://algorithms/randomness/randomwalk/scenes/tessellation_lattice_demo.tscn",
    "sequence": "randomness",
    "tags": [

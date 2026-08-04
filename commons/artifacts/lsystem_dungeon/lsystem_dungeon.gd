@@ -10,12 +10,28 @@
 # @identity
 # essence: F → F+RF-FF-FR+F, R → RFRFRF — corridor grammar with room markers at 90° turns
 # desire: To generate a dungeon you can look down on — corridors and rooms from two rewriting rules
-# critical_parameter: iterations — controls dungeon complexity from a single corridor to a labyrinthine floor plan
-# triggers: Iteration 1 → simple L-shaped corridor; iteration 4 → dense maze with many rooms and walled passages
+# critical_parameter: grammar — which two rules are rewritten decides whether the plan is a net, a coil, a tree or one long crenellated hall
+# triggers: depth 1 → simple L-shaped corridor; depth 4 → dense maze with many rooms and walled passages
 # emerges: Spatial variety from two rules — rooms appear at grammatical intersections, not placed by a designer
-# needs: VR iteration control [missing], Label3D [has]
+# needs: VR depth control [missing], Label3D [has]
 # relationships: Feeds into LSystems_Architecture. Contrasts with CityGenerator (2D plan vs 3D growth). Bridges to proceduralgeneration.
 # truth: Two rules and a turtle — the dungeon writes itself.
+#
+# --- DNA (stage 2, promoted 2026-08-03) ------------------------------------
+# grammar  warren | spiral | branch | meander   the rewriting rules themselves
+# depth    1 .. 5                               how many times they are rewritten
+#
+# The rules were the ONE thing this artifact was about and the ONE thing nobody
+# could change: `_axiom` and `_rules` were plain vars holding a single pair of
+# productions, so every placement in the corpus drew the same floor plan at the
+# same iteration count. `depth` is the old `iterations` export renamed to the
+# word lsystem_editor and space_filling_curve_gallery already use for the same
+# quantity — a rewrite, not a size. `iterations` is still accepted as a config
+# key so nothing that spoke the old word breaks.
+#
+# NOT SEEDED, and it does not need to be: the turtle is fully deterministic.
+# There is no randf(), no randi() and no noise anywhere in this file, so two
+# renders of the same (grammar, depth) are the same picture byte for byte.
 
 extends Node3D
 
@@ -24,20 +40,44 @@ class_name LSystemDungeon
 ## Display scale — bounding box fits within this size
 @export var display_size: float = 0.7
 
-## L-system iteration count
-@export_range(1, 5) var iterations: int = 3
+## DNA axis `grammar` — which pair of productions the turtle rewrites.
+@export_enum("warren", "spiral", "branch", "meander") var grammar: String = "warren"
+
+## DNA axis `depth` — how many rewrite passes (was `iterations`)
+@export_range(1, 5) var depth: int = 3
 
 ## Colors
 @export var corridor_color: Color = Color(0.35, 0.3, 0.28)
 @export var room_color: Color = Color(0.5, 0.4, 0.35)
 @export var wall_color: Color = Color(0.2, 0.18, 0.16)
 
-# L-system config
+# The grammars, keyed by the value `grammar` takes. "warren" is the shipped pair,
+# transcribed from the two vars this file used to hold; the other three were
+# written against the same turtle (F forward, R room here, +/- 90 degrees,
+# [ ] push/pop) so that each argues a different plan topology:
+#   warren   a dense space-filling net, rooms at the turns          (default)
+#   spiral   runs of growing length, all turns one way — a coil
+#   branch   the only grammar that uses the stack: a corridor TREE
+#   meander  quadratic-Koch: one non-branching hall, crenellated
+const GRAMMARS := {
+	"warren": {"axiom": "F", "F": "F+RF-FF-FR+F", "R": "RFRFRF"},
+	"spiral": {"axiom": "F", "F": "FF+RF", "R": "R"},
+	"branch": {"axiom": "F", "F": "F[+RF][-RF]F", "R": "R"},
+	"meander": {"axiom": "F", "F": "F+RF-F-RF+F", "R": "R"}
+}
+
+# L-system config — filled from GRAMMARS by _resolve_grammar()
 var _axiom: String = "F"
 var _rules: Dictionary = {
 	"F": "F+RF-FF-FR+F",
 	"R": "RFRFRF"
 }
+
+# True once _ready has built the dungeon at least once. apply_grid_config must
+# never rebuild before that: a rebuild fired at config time on a scene that has
+# not run _ready yet frees geometry that does not exist and leaves the artifact
+# blank in every map that placed it.
+var _built: bool = false
 
 # Geometry containers
 var _dungeon_root: Node3D
@@ -52,6 +92,14 @@ func _ready() -> void:
 	_create_base()
 	_create_labels()
 	_generate_dungeon()
+	_built = true
+
+## Load `grammar`'s productions into _axiom / _rules.
+## grammar = "warren" restores exactly the pair this file used to hard-code.
+func _resolve_grammar() -> void:
+	var g: Dictionary = GRAMMARS.get(grammar, GRAMMARS["warren"])
+	_axiom = str(g.get("axiom", "F"))
+	_rules = {"F": str(g.get("F", "")), "R": str(g.get("R", ""))}
 
 func _create_base() -> void:
 	var base = MeshInstance3D.new()
@@ -89,6 +137,9 @@ func _generate_dungeon() -> void:
 	_dungeon_root = Node3D.new()
 	_dungeon_root.name = "DungeonGeometry"
 	add_child(_dungeon_root)
+
+	# Productions first — everything below reads _axiom / _rules.
+	_resolve_grammar()
 
 	_corridor_count = 0
 	_room_count = 0
@@ -224,7 +275,7 @@ func _generate_dungeon() -> void:
 func _produce_string() -> String:
 	var current = _axiom
 
-	for _i in range(iterations):
+	for _i in range(depth):
 		var next = ""
 		for c in current:
 			if _rules.has(c):
@@ -272,12 +323,35 @@ func _update_label() -> void:
 	if not _info_label:
 		return
 
-	_info_label.text = "L-System Dungeon\nIter: %d | Corridors: %d | Rooms: %d | Walls: %d" % [
-		iterations, _corridor_count, _room_count, _wall_count
+	_info_label.text = "L-System Dungeon\n%s | Depth: %d | Corridors: %d | Rooms: %d | Walls: %d" % [
+		grammar.capitalize(), depth, _corridor_count, _room_count, _wall_count
 	]
 
-## Grid system integration hook
+## Grid system integration hook.
+## GUARDED on both sides: rebuild only when a value actually CHANGED, and only
+## once _ready has built the dungeon. A bare token like `lsystem_dungeon` sends
+## nothing, changes nothing, and rebuilds nothing.
 func apply_grid_config(config_data: Dictionary) -> void:
-	if config_data.has("iterations"):
-		iterations = clampi(int(config_data["iterations"]), 1, 5)
+	var changed: bool = false
+
+	if config_data.has("grammar"):
+		var g: String = str(config_data["grammar"])
+		if GRAMMARS.has(g) and g != grammar:
+			grammar = g
+			changed = true
+
+	# `depth` is the axis; `iterations` is the word this export used to carry
+	# and is still honoured so older config never silently stops working.
+	var raw_depth: Variant = null
+	if config_data.has("depth"):
+		raw_depth = config_data["depth"]
+	elif config_data.has("iterations"):
+		raw_depth = config_data["iterations"]
+	if raw_depth != null:
+		var d: int = clampi(int(raw_depth), 1, 5)
+		if d != depth:
+			depth = d
+			changed = true
+
+	if changed and _built:
 		_generate_dungeon()
