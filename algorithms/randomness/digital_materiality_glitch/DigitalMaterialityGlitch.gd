@@ -41,6 +41,60 @@ extends Node3D
 ## dna.fixture — write it as a JSON NUMBER, not a quoted string.
 @export var dna_seed: int = -1
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA (promoted 2026-08-04). axis: pathology
+#
+# WHAT WAS ALREADY HERE, HARD-CODED. The scene is four Node3D groups pinned to
+# the arms of a 16 m cross — GlitchAesthetics at x=-8, DataCorruption at x=+8,
+# DigitalArtifacts at y=+8, ErrorPropagation at y=-8 — and every one of them is
+# always built and always shown. That arrangement is not a layout decision, it
+# is the argument: the piece is a VITRINE, a ledger of every digital pathology
+# side by side, and its own @identity says so ("a visual ledger of digital
+# pathologies"). Nothing in the file could ever say anything else.
+#
+# WHAT THE AXIS ADDS. `pathology` names ONE of the four and hides the other
+# three, turning the taxonomy into a claim about a single failure: transport
+# and compression (aesthetics), bit rot in the 8x8 store (corruption), the
+# display's own lies — scan lines, chromatic aberration, noise, overflow
+# (artifacts), or the spread of one error through its neighbours
+# (propagation). Same code, same seed, different thesis: a museum of faults
+# versus this fault.
+#
+# WHY NOT corruption_rate, WHICH LOOKS LIKE THE OBVIOUS KNOB. The evidence for
+# an axis here is ONE STILL PNG per value. corruption_rate, error_propagation_
+# speed and the glitch_timer interval are all rates: what they change is how
+# fast the picture arrives at a state, and a single frame taken at a fixed
+# settle cannot tell a fast run from a slow one that started earlier. Sweeping
+# a rate produces a finished-looking sheet that answers nothing, so it is not
+# declared. WHICH corruption is on show survives the still; how much of it
+# accrues per second does not.
+#
+# `all` IS THE SHIPPED VALUE and its branch returns before touching a node, so
+# the 5 grid placements and the Corridor_Random_Definition curation roster
+# render exactly what they rendered before.
+# ─────────────────────────────────────────────────────────────────────────────
+## Which digital failure the piece is about. `all` is the shipped vitrine —
+## every group visible. Any other value shows that group alone. Set from a map
+## with `digital_materiality_glitch#pathology:corruption`.
+@export_enum("all", "aesthetics", "corruption", "artifacts", "propagation") var pathology: String = "all"
+
+# The four groups, by the names the .tscn gives them. Derived FROM the scene,
+# not transcribed alongside it: a value that does not resolve to a node here
+# would silently render as the default and the sweep would report a fact about
+# this table instead of about the artifact.
+const PATHOLOGY_GROUPS := {
+	"aesthetics": "GlitchAesthetics",
+	"corruption": "DataCorruption",
+	"artifacts": "DigitalArtifacts",
+	"propagation": "ErrorPropagation",
+}
+const PATHOLOGIES := ["all", "aesthetics", "corruption", "artifacts", "propagation"]
+
+# True once something has been hidden, so `all` can stay a strict no-op on the
+# path every existing placement takes and still restore the vitrine if a map
+# switches back to it through apply_grid_config.
+var _pathology_hid: bool = false
+
 var time := 0.0
 var glitch_timer := 0.0
 var corruption_rate := 0.05
@@ -115,6 +169,10 @@ func _ready() -> void:
 	# call_deferred, i.e. after everything below has already rolled.
 	if has_meta("config_dna_seed"):
 		dna_seed = int(str(get_meta("config_dna_seed")))
+	# Same reason, same place: the grid stamps config_* metadata synchronously
+	# before add_child, so a map token's value is readable here.
+	if has_meta("config_pathology"):
+		pathology = _pick_axis(str(get_meta("config_pathology")), PATHOLOGIES, pathology)
 	if dna_seed >= 0:
 		# BOTH streams, because this file draws from both: seed() pins the global
 		# generator used by randi() in initialize_digital_structures and by randf()
@@ -129,6 +187,10 @@ func _ready() -> void:
 	# Pre-roll stable noise
 	_reroll_noise()
 	_reroll_pixel_sort()
+	# LAST, after the groups exist. Visibility only — every group is still built
+	# and still updated, so nothing here can change what a hidden group would
+	# have looked like had it been shown.
+	_apply_pathology()
 
 func _process(delta: float) -> void:
 	time += delta
@@ -615,5 +677,49 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+func _pick_axis(value: String, allowed: Array, fallback: String) -> String:
+	# An unknown value keeps the shipped default rather than half-applying. The
+	# science_screen failure was a registry naming values the code cannot reach;
+	# this makes that failure LOUD in the log instead of silently identical.
+	var v: String = value.strip_edges().to_lower()
+	if allowed.has(v):
+		return v
+	if v != "":
+		push_warning("digital_materiality_glitch: unknown value '%s'; keeping '%s'" % [value, fallback])
+	return fallback
+
+
+func _apply_pathology() -> void:
+	if pathology == "all":
+		if not _pathology_hid:
+			return  # THE SHIPPED PATH: not one node is touched
+		for group_name in PATHOLOGY_GROUPS.values():
+			var back: Node3D = get_node_or_null(NodePath(str(group_name))) as Node3D
+			if back != null:
+				back.visible = true
+		_pathology_hid = false
+		return
+	if not PATHOLOGY_GROUPS.has(pathology):
+		return
+	var keep: String = str(PATHOLOGY_GROUPS[pathology])
+	for group_name in PATHOLOGY_GROUPS.values():
+		var node: Node3D = get_node_or_null(NodePath(str(group_name))) as Node3D
+		if node != null:
+			node.visible = (str(group_name) == keep)
+	_pathology_hid = true
+
+
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# GUARDED THREE WAYS: the key has to be present, the value has to be one the
+	# code can build, and it has to DIFFER from what is already showing. This
+	# arrives call_deferred — after _ready has built everything — so an
+	# unconditional re-apply here is exactly what breaks shipped placements.
+	#
+	# dna_seed is deliberately NOT read here: by the time this runs, every draw
+	# it would pin has already been rolled. It is read from metadata in _ready,
+	# where it still means something.
+	if config.has("pathology"):
+		var want: String = _pick_axis(str(config["pathology"]), PATHOLOGIES, pathology)
+		if want != pathology:
+			pathology = want
+			_apply_pathology()

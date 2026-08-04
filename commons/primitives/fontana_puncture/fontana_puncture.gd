@@ -19,10 +19,65 @@ class_name FontanaPuncture
 
 # ── DNA ───────────────────────────────────────────────────────────────
 
+# --- DNA (stage 2, promoted 2026-08-03) -------------------------------------
+# THE PROBLEM. sphere_radius and sphere_offset are this artifact's own declared
+# critical_parameter ("sphere_radius vs cube_size ... sphere_offset slides the
+# carving off-centre"), and both were reachable only as raw floats nobody could
+# name. 37 placements, and every one of them shows the same 0.34. The artifact
+# argued that subtraction is generative and then shipped exactly one subtraction.
+#
+# breach — HOW FAR the void has eaten, as a ratio of cube_size. Not a size knob:
+#   cube_size is 0.5 at every value, so the object occupies the same cell and the
+#   same footprint. What changes is the TOPOLOGY of what survives, and the four
+#   values are the four topologically distinct states this geometry has, measured
+#   against the cube's own three critical distances (half-extent 0.5, edge-midpoint
+#   0.707, corner 0.866, all times cube_size):
+#     pierced  0.54  past the half-extent only — six round mouths in solid matter.
+#                    Fontana's buchi: the cube is dented through, not hollowed.
+#     opened   0.68  SHIPPED. Mouths of 0.46 m on a 0.5 m face, and still connected
+#                    (0.68 < 0.707) — a thin frame around a void that has won.
+#     severed  0.74  past the edge-midpoint: the twelve edges are cut and the cube
+#                    survives as eight disconnected corner pieces. A different
+#                    OBJECT, not a smoother one.
+#     husk     0.80  the corners down to a twentieth of the extent — matter as the
+#                    residue of its own absence, the limit before nothing renders.
+#   Deliberately stops short of 0.866: past that the cube is gone entirely and the
+#   frame would measure as NO RENDER, which is a fact about the capture, not the art.
+#
+# strike — WHERE the void struck. breach is the amount axis, strike is the
+#   direction axis, the same pairing sphere_mid established with
+#   resolution/budget_bias. Offsets are fractions of cube_size so they track the
+#   cube. centred says the void is the object's core; the other three say it is an
+#   event that happened at a place, and the matter is asymmetric proof of it. All
+#   three displaced values move on Y or on all three axes at once, so no single
+#   camera yaw can hide the axis behind the silhouette.
+#
+# WHY THIS PAIR AND NOT "one puncture or many". A second subtractive solid (a
+# slash, a scatter of punctures) is the obvious third axis and it is the one to
+# add next — but a taglio is a cut in ONE face, and the sweep photographs from one
+# fixed camera. Half the yaws would show an uncut cube and the critic would report
+# a fact about camera placement as a verdict on Fontana. Both axes shipped here are
+# spherically or vertically legible, so no frame can lie about them.
+const BREACH = {
+	"pierced": 0.54,
+	"opened": 0.68,
+	"severed": 0.74,
+	"husk": 0.80,
+}
+## The allow-list, and a match rather than a const Dictionary of Vector3s on
+## purpose: this file could not be compile-checked in the session that wrote it
+## (captures are serialised centrally), and a PackedStringArray plus a match is
+## the same shape the sibling capsule.gd already ships and Godot already parses.
+## Offsets are FRACTIONS of cube_size, applied in _cut_offset.
+const STRIKES: PackedStringArray = ["centred", "raised", "corner", "grazing"]
+
 @export_group("Form")
+@export_enum("pierced", "opened", "severed", "husk") var breach: String = "opened"
+@export_enum("centred", "raised", "corner", "grazing") var strike: String = "centred"
 @export var cube_size: float = 0.5
 ## Radius of the subtractive sphere. Default > cube_size*0.5 so the void
 ## breaches every face (the cube is "a bit smaller than the sphere").
+## A placement that sets this explicitly OVERRIDES breach — see _build.
 @export var sphere_radius: float = 0.34
 @export var sphere_offset: Vector3 = Vector3.ZERO
 
@@ -48,6 +103,11 @@ class_name FontanaPuncture
 
 var _built: bool = false
 var _combiner: CSGCombiner3D = null
+## A placement that names sphere_radius / sphere_offset directly keeps them. The
+## named axes are a vocabulary laid OVER the raw floats, never a replacement for
+## them, so no existing token can change meaning.
+var _radius_explicit: bool = false
+var _offset_explicit: bool = false
 
 
 func _ready() -> void:
@@ -59,7 +119,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	for k in config_data.keys():
 		set_meta("config_%s" % str(k), config_data[k])
 	_read_metadata_overrides()
-	if _built:
+	# Guarded: an empty dict is not a reason to tear the artifact down and build
+	# it again. Every real placement passes at least one key, so this preserves
+	# all 37 of them (including the eight that embed a live point, which need the
+	# rebuild) while removing the gratuitous churn of a no-op reconfigure.
+	if _built and config_data.size() > 0:
 		for c in get_children():
 			c.queue_free()
 		_built = false
@@ -68,10 +132,21 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
+	if has_meta("config_breach"):
+		var b: String = str(get_meta("config_breach")).strip_edges().to_lower()
+		if BREACH.has(b):
+			breach = b
+	if has_meta("config_strike"):
+		var s2: String = str(get_meta("config_strike")).strip_edges().to_lower()
+		if STRIKES.has(s2):
+			strike = s2
 	if has_meta("config_cube_size"):
 		cube_size = float(str(get_meta("config_cube_size")))
 	if has_meta("config_sphere_radius"):
 		sphere_radius = float(str(get_meta("config_sphere_radius")))
+		_radius_explicit = true
+	if has_meta("config_sphere_offset"):
+		_offset_explicit = true
 	if has_meta("config_cube_color"):
 		cube_color = _parse_color(str(get_meta("config_cube_color")), cube_color)
 	if has_meta("config_show_center_point"):
@@ -95,8 +170,45 @@ func _parse_color(raw: String, fallback: Color) -> Color:
 
 # ── Build ─────────────────────────────────────────────────────────────
 
+## Resolve the two named axes down to the two floats the CSG has always used.
+##
+## THE LEGACY SHORT-CIRCUIT, and why it is not merely belt-and-braces. The default
+## pair (breach="opened", strike="centred") returns sphere_radius and sphere_offset
+## UNTOUCHED rather than recomputing 0.68 * cube_size. Recomputing would be
+## bit-identical at the shipped cube_size of 0.5 — and wrong for any placement that
+## overrode cube_size alone, because such a map is asking for a 0.34 sphere in a
+## bigger cube and the ratio path would silently rescale the void. Nothing in the
+## corpus does that today; the point is that the guarantee does not depend on it.
+func _cut_radius() -> float:
+	if _radius_explicit or breach == "opened" or not BREACH.has(breach):
+		return sphere_radius
+	return float(BREACH[breach]) * cube_size
+
+
+## Offsets are FRACTIONS of cube_size so the wound tracks the cube it is in.
+func _strike_fraction(which: String) -> Vector3:
+	match which:
+		"raised":
+			return Vector3(0.0, 0.30, 0.0)
+		"corner":
+			return Vector3(0.24, 0.24, 0.24)
+		"grazing":
+			return Vector3(0.0, 0.48, 0.0)
+		_:
+			return Vector3.ZERO
+
+
+func _cut_offset() -> Vector3:
+	if _offset_explicit or strike == "centred" or not STRIKES.has(strike):
+		return sphere_offset
+	return _strike_fraction(strike) * cube_size
+
+
 func _build() -> void:
 	_built = true
+
+	var cut_r: float = _cut_radius()
+	var cut_off: Vector3 = _cut_offset()
 
 	# CSG: cube minus an (over-sized) sphere.
 	_combiner = CSGCombiner3D.new()
@@ -116,11 +228,11 @@ func _build() -> void:
 
 	var sph := CSGSphere3D.new()
 	sph.name = "Void"
-	sph.radius = sphere_radius
+	sph.radius = cut_r
 	sph.radial_segments = 28
 	sph.rings = 18
 	sph.operation = CSGShape3D.OPERATION_SUBTRACTION
-	sph.position = sphere_offset
+	sph.position = cut_off
 	_combiner.add_child(sph)
 
 	add_child(_combiner)
@@ -130,7 +242,9 @@ func _build() -> void:
 	if embed_artifact != "":
 		# Embed a LIVE artifact (e.g. interactive_point_origin_force) at the
 		# void centre — the cube is carved AROUND the real interactive point.
-		_embed_live_point()
+		# It rides the cut, so under `strike` the point that carved the void is
+		# still IN the void it carved rather than buried in the surviving matter.
+		_embed_live_point(cut_off)
 	elif show_center_point:
 		var glint := MeshInstance3D.new()
 		glint.name = "CenterPoint"
@@ -145,7 +259,7 @@ func _build() -> void:
 		gmat.emission_energy_multiplier = depth_energy
 		gmat.roughness = 0.2
 		glint.material_override = gmat
-		glint.position = sphere_offset
+		glint.position = cut_off
 		add_child(glint)
 
 	# Bake CSG -> static mesh next idle frame (CSG needs one tick to
@@ -158,7 +272,7 @@ func _build() -> void:
 # Instantiate a live artifact (looked up by name in the registry) at the
 # void centre, forwarding its mode config. Used to nest the real interactive
 # point inside the puncture it carved.
-func _embed_live_point() -> void:
+func _embed_live_point(at: Vector3) -> void:
 	var scene_path: String = _lookup_artifact_scene(embed_artifact)
 	if scene_path == "" or not ResourceLoader.exists(scene_path):
 		push_warning("FontanaPuncture: embed_artifact '%s' not found in registry" % embed_artifact)
@@ -172,7 +286,7 @@ func _embed_live_point() -> void:
 	if embed_mode != "" and pt.has_method("apply_grid_config"):
 		pt.set_meta("config_mode", embed_mode)
 	if pt is Node3D:
-		(pt as Node3D).position = sphere_offset
+		(pt as Node3D).position = at
 	add_child(pt)
 	if embed_mode != "" and pt.has_method("apply_grid_config"):
 		pt.call_deferred("apply_grid_config", {"mode": embed_mode})

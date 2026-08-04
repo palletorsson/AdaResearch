@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://brcmqgjbv0n8g"]
+[gd_scene load_steps=3 format=3 uid="uid://brcmqgjbv0n8g"]
+
+[ext_resource type="Script" path="res://algorithms/softbodies/advanced_concepts/breathing_room_scene.gd" id="1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bdrla"]
 size = Vector3(1, 4, 7)
@@ -7,6 +9,7 @@ subdivide_height = 6
 subdivide_depth = 6
 
 [node name="BreathingRoom" type="Node3D"]
+script = ExtResource("1")
 
 [node name="SoftBody3D" type="SoftBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3185759, 1.9500841, 0)

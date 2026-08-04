@@ -22,9 +22,25 @@ extends Node3D
 ## Deformable rounded cube with stress coloring, collision forces, and volume tracking
 
 # ── Modes ────────────────────────────────────────────────────────────
-enum Mode { STRAIN, COLLISION, VOLUME }
+# STAGE-2 DNA (promoted 2026-08-04, by hand). The three modes were already the
+# best thing in this file and they were unreachable: `_mode` was a private int
+# initialised to STRAIN, cycled only by a push_button the player has to find and
+# press, and apply_grid_config's `mode` key had no @export behind it, so the
+# declaration gate read NO EXPORT and the research runner refused the token for
+# having no turnable knobs. NONE is the fourth value and the only new one: the
+# specimen deforming with no instrument on it at all.
+enum Mode { STRAIN, COLLISION, VOLUME, NONE }
 
-const MODE_NAMES := ["Strain Energy", "Collision Forces", "Volume Preservation"]
+const MODE_NAMES := ["Strain Energy", "Collision Forces", "Volume Preservation", "No Readout"]
+
+## Allow-list. A typo in a map token keeps the shipped strain heatmap rather than
+## rendering a bare untouched body.
+const MEASURES: PackedStringArray = ["strain", "collision", "volume", "none"]
+
+## Which quantity the same deformation is read as: the energy stored per vertex,
+## the forces at contact, the volume it is failing to conserve — or nothing.
+## `strain` is `var _mode: int = Mode.STRAIN`, the shipped mode.
+@export_enum("strain", "collision", "volume", "none") var measure: String = "strain"
 
 # ── Cabinet grammar (HORIZONTAL dialect) ─────────────────────────────
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
@@ -146,6 +162,7 @@ var _time := 0.0
 
 
 func _ready() -> void:
+	_read_dna_meta()
 	_find_vr_controller()
 	_create_soft_body()
 	_create_mesh_instances()
@@ -495,8 +512,40 @@ func _create_controls() -> void:
 			btn_area.button_pressed.connect(func(_b): _cycle_mode())
 
 
+## GridInteractablesComponent sets `config_*` metadata on the ROOT before add_child,
+## and the sweep sets the export itself; both land before this runs. An unknown word
+## keeps the default. `measure` = "strain" resolves to Mode.STRAIN, which is what
+## `var _mode: int = Mode.STRAIN` already was.
+func _read_dna_meta() -> void:
+	if has_meta("config_measure"):
+		var m_in: String = str(get_meta("config_measure")).strip_edges().to_lower()
+		if MEASURES.has(m_in):
+			measure = m_in
+	_mode = _mode_from_word(measure)
+
+
+func _mode_from_word(word: String) -> int:
+	var out: int = Mode.STRAIN
+	match word.strip_edges().to_lower():
+		"collision":
+			out = Mode.COLLISION
+		"volume":
+			out = Mode.VOLUME
+		"none":
+			out = Mode.NONE
+	return out
+
+
+## The MODE button. Unchanged for the three reading modes — STRAIN → COLLISION →
+## VOLUME → STRAIN, exactly (_mode + 1) % 3 — so no shipped placement's keypad
+## behaves differently. From NONE, which no placement starts in, the first press
+## puts an instrument back on the specimen.
 func _cycle_mode() -> void:
-	_mode = (_mode + 1) % 3
+	if _mode == Mode.NONE:
+		_mode = Mode.STRAIN
+	else:
+		_mode = (_mode + 1) % 3
+	measure = MEASURES[_mode]
 	_init_mode()
 
 
@@ -528,6 +577,8 @@ func _init_mode() -> void:
 		Mode.VOLUME:
 			_mode_header = "VOLUME PRESERVATION"
 			_volume_history.clear()
+		Mode.NONE:
+			_mode_header = "NO READOUT"
 
 	# The mode name used to be a billboard overhead; it is now the HEADER strip
 	# of the readout sunk in the far rail. The Label3D survives in bare mode.
@@ -724,6 +775,12 @@ func _draw_all() -> void:
 		Mode.VOLUME:
 			_draw_volume_chart()
 			_draw_volume_wireframe()
+		Mode.NONE:
+			# The four ImmediateMeshes were cleared above and stay empty: the body
+			# still strains, collides and loses volume — the arithmetic upstream is
+			# untouched — and none of it is drawn. What a specimen looks like when
+			# nobody is reading it.
+			pass
 
 	if _hand_active:
 		_draw_squeeze_field()
@@ -924,6 +981,9 @@ func _refresh_readout(delta: float) -> void:
 			lines.append("TGT  %.0f%%" % (_volume_target_ratio * 100.0))
 			lines.append("CORR %.2f  P %.2f" % [
 				_volume_correction_strength, _soft_body.pressure_coefficient])
+		Mode.NONE:
+			# One line, not zero: HangarKit.readout() is never handed an empty body.
+			lines.append("VERTS %d" % _vertex_count)
 
 	var joined: String = _mode_header
 	for l in lines:
@@ -959,6 +1019,9 @@ func _update_labels() -> void:
 			var ratio := _current_volume / maxf(_rest_volume, 0.0001)
 			_label_info.text = "Volume: %.1f%%  Target: %.0f%%" % [ratio * 100.0, _volume_target_ratio * 100.0]
 			_label_detail.text = "Correction: %.2f  Pressure: %.2f" % [_volume_correction_strength, _soft_body.pressure_coefficient]
+		Mode.NONE:
+			_label_info.text = "No readout"
+			_label_detail.text = "Verts: %d" % _vertex_count
 
 
 # ── ImmediateMesh helpers ────────────────────────────────────────────
@@ -1324,12 +1387,23 @@ func _seat_specimen_on_deck() -> void:
 # ── Grid config ──────────────────────────────────────────────────────
 
 func apply_grid_config(config: Dictionary) -> void:
+	# `measure` is the declared axis; `mode` is the older key this file already
+	# answered to and is kept working, uppercase and all, so nothing that ever
+	# passed it breaks. An unknown word in either leaves the current mode alone.
+	if config.has("measure"):
+		var want: String = str(config["measure"]).strip_edges().to_lower()
+		if MEASURES.has(want):
+			measure = want
+			_mode = _mode_from_word(measure)
+
 	if config.has("mode"):
 		var m := str(config["mode"]).to_upper()
 		match m:
 			"STRAIN": _mode = Mode.STRAIN
 			"COLLISION": _mode = Mode.COLLISION
 			"VOLUME": _mode = Mode.VOLUME
+			"NONE": _mode = Mode.NONE
+		measure = MEASURES[_mode]
 
 	if config.has("stiffness"):
 		_stiffness = clampf(float(config["stiffness"]), 0.01, 1.0)

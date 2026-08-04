@@ -63,6 +63,41 @@ const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 @export_enum("none", "trace", "lattice", "archive", "wax") var retention: String = "none"
 const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
 
+## AXIS — FACES: which of the three the one oscillation is projected onto. The artifact's
+## own truth statement is that translation, rotation and scaling are "three faces of the
+## same oscillation projected onto different axes", and the shipped demonstration asserts
+## that by running all three at once — which is also the only way it has ever been seen, so
+## a viewer has no way to tell a claim about unity from a cube that simply does three
+## things. This axis is the contrast case: the same driver, the same signal, one face at a
+## time.
+##
+## It is legible in a STILL, which is why it is here and why the rate is not. Each value
+## stands or strikes a GUIDE — the vertical rail is the Y channel's own declaration, the
+## arc is the rotation channel's — and parks the channels it does not drive at their
+## neutral, so the cube's silhouette differs too: a face-on axis-aligned wireframe cube at
+## unit scale is a different picture from a rotated one, before you read a single label.
+##
+##   all       THE LEGACY BODY, byte for byte: rail, arc, panel, and all three channels
+##             live at once. Every existing placement renders exactly this
+##   height    the y_offset -> Y mapping alone. The rail stands; the arc is not drawn; the
+##             cube holds heading 0 and scale 1 and only rides up and down
+##   heading   the angular_velocity -> rotation mapping alone. The arc is drawn; the rail
+##             is not; the cube sits at its base height at unit scale and turns
+##   size      the amplitude -> scale mapping alone. Neither guide is drawn — scale never
+##             had one, which is itself the finding: the channel with no apparatus
+##
+## STRICTLY ADDITIVE and orthogonal to `retention`: the pendulum connection, the fallback
+## driver, translation_scale, rotation_scale, scale_range, the colour feedback and the
+## ghost machinery are all untouched. A parked channel is parked at the value it holds when
+## the oscillation is zero, never at some other number.
+const FACES: PackedStringArray = ["all", "height", "heading", "size"]
+@export_enum("all", "height", "heading", "size") var faces: String = "all"
+
+var _face_height: bool = true
+var _face_heading: bool = true
+var _face_size: bool = true
+var _faces_built: bool = false
+
 var _cube_instance: Node3D
 var _cube_mesh: MeshInstance3D
 var _label: Label3D
@@ -74,12 +109,17 @@ var _vertical_rail: MeshInstance3D
 var _rail_top_marker: MeshInstance3D
 var _rail_bottom_marker: MeshInstance3D
 var _rotation_arc: MeshInstance3D
+var _y_label: Label3D
 var _mapping_panel: Node3D
 
 var _base_position: Vector3
 var _current_rotation: float = 0.0
 
 func _ready():
+	# FACES, FIRST: the guide builders read these flags, so they have to be settled before
+	# anything is drawn. "all" leaves all three true, which is what the shipped body did
+	# unconditionally.
+	_settle_faces(faces)
 	_base_position = position
 	_create_cube()
 	_create_label()
@@ -93,6 +133,8 @@ func _ready():
 	var _r: String = str(retention).strip_edges().to_lower()
 	retention = _r if RETENTIONS.has(_r) else "none"
 	_apply_retention()
+
+	_faces_built = true
 
 func _connect_pendulum():
 	if pendulum_path:
@@ -159,6 +201,10 @@ func _create_guides():
 
 
 func _create_vertical_rail():
+	# The rail IS the Y channel's declaration. If nothing drives Y, nothing declares it.
+	if not _face_height:
+		return
+
 	var rail_height = translation_scale * 2.0 + cube_size
 	
 	_vertical_rail = MeshInstance3D.new()
@@ -197,6 +243,7 @@ func _create_vertical_rail():
 	y_label.position = Vector3(cube_size * 1.1, rail_height / 2.0, 0)
 	y_label.modulate = Color(0.4, 0.7, 0.9)
 	add_child(y_label)
+	_y_label = y_label      # held so a later faces change can take the rail down whole
 
 
 func _create_guide_marker(color: Color) -> MeshInstance3D:
@@ -217,6 +264,10 @@ func _create_guide_marker(color: Color) -> MeshInstance3D:
 
 
 func _create_rotation_arc():
+	# Same rule as the rail: the arc is the rotation channel's own apparatus.
+	if not _face_heading:
+		return
+
 	_rotation_arc = MeshInstance3D.new()
 	_rotation_arc.position.y = 0.01
 	add_child(_rotation_arc)
@@ -266,14 +317,20 @@ func _create_mapping_panel():
 
 func _on_oscillation_updated(y_offset: float, angular_velocity: float, amplitude: float):
 	# Translation: pendulum Y â†’ cube Y
-	position.y = _base_position.y + y_offset * translation_scale
-	
+	# FACES: a channel this value does not drive is held at the pose the oscillation gives
+	# it at zero — base height, heading 0, scale 1 — never at some other number. At "all"
+	# every branch below is the shipped one.
+	position.y = _base_position.y + (y_offset * translation_scale if _face_height else 0.0)
+
 	# Rotation: angular velocity â†’ rotation speed
-	_current_rotation += angular_velocity * rotation_scale * get_process_delta_time()
+	if _face_heading:
+		_current_rotation += angular_velocity * rotation_scale * get_process_delta_time()
+	else:
+		_current_rotation = 0.0
 	_cube_instance.rotation.y = _current_rotation
-	
+
 	# Scale: amplitude â†’ scale pulse
-	var scale_factor = lerp(scale_range.x, scale_range.y, amplitude)
+	var scale_factor = (lerp(scale_range.x, scale_range.y, amplitude) if _face_size else 1.0)
 	_cube_instance.scale = Vector3.ONE * cube_size * scale_factor
 	
 	# Update main label
@@ -290,7 +347,12 @@ func _on_oscillation_updated(y_offset: float, angular_velocity: float, amplitude
 			angular_velocity, rad_to_deg(fmod(_current_rotation, TAU)),
 			amplitude, scale_factor
 		]
-	
+		# FACES, AFTER: the legacy line above is left byte for byte, and only a non-default
+		# value replaces it — with the rows for the channels that are actually driven.
+		if faces != "all":
+			_breakdown_label.text = _faces_panel_text(
+				y_offset, angular_velocity, amplitude, scale_factor)
+
 	# Update rotation arc indicator
 	if _rotation_arc and show_guides:
 		_rotation_arc.rotation.y = _current_rotation
@@ -332,6 +394,9 @@ func _process(_delta):
 		_on_oscillation_updated(y_offset, ang_vel, amp)
 
 func apply_grid_config(config_data: Dictionary):
+	# Read BEFORE the blanket set() loop below, which would otherwise assign `faces`
+	# straight from the token and leave the guard with nothing to compare against.
+	var _prev_faces: String = faces
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])
@@ -341,6 +406,78 @@ func apply_grid_config(config_data: Dictionary):
 		var _r: String = str(config_data["retention"]).strip_edges().to_lower()
 		retention = _r if RETENTIONS.has(_r) else "none"
 		_apply_retention()
+	# GUARDED: the guides are only torn down and redrawn when the word actually names a
+	# DIFFERENT value, and only once _ready has drawn them a first time. A token that
+	# repeats the default, or misspells it, touches nothing.
+	if config_data.has("faces"):
+		var _f: String = str(config_data["faces"]).strip_edges().to_lower()
+		var _want: String = _f if FACES.has(_f) else "all"
+		if _want != _prev_faces:
+			_settle_faces(_want)
+			_redraw_faces()
+		else:
+			_settle_faces(_prev_faces)
+
+
+# ── FACES ────────────────────────────────────────────────────────────────────
+# One axis, four projections of the same driver. "all" is the shipped demonstration and
+# every branch here is a no-op at that value.
+
+## Settles the three flags. Kept apart from the redraw so _ready can call it BEFORE the
+## guides are built and apply_grid_config can call it after.
+func _settle_faces(value: String) -> void:
+	var v: String = str(value).strip_edges().to_lower()
+	faces = v if FACES.has(v) else "all"
+	_face_height = faces == "all" or faces == "height"
+	_face_heading = faces == "all" or faces == "heading"
+	_face_size = faces == "all" or faces == "size"
+
+
+## Takes the rail and the arc down and stands whichever the new value declares. Only ever
+## reached from apply_grid_config, and only when the value changed.
+func _redraw_faces() -> void:
+	if not _faces_built:
+		return
+	for n in [_vertical_rail, _rail_top_marker, _rail_bottom_marker, _y_label, _rotation_arc]:
+		if n != null and is_instance_valid(n):
+			remove_child(n)
+			n.queue_free()
+	_vertical_rail = null
+	_rail_top_marker = null
+	_rail_bottom_marker = null
+	_y_label = null
+	_rotation_arc = null
+	if show_guides:
+		_create_vertical_rail()
+		_create_rotation_arc()
+	# Park the channels this value no longer drives, so the still is not a photograph of
+	# whatever pose the last frame happened to leave behind.
+	if not _face_height:
+		position.y = _base_position.y
+	if not _face_heading:
+		_current_rotation = 0.0
+		if _cube_instance != null and is_instance_valid(_cube_instance):
+			_cube_instance.rotation.y = 0.0
+	if not _face_size and _cube_instance != null and is_instance_valid(_cube_instance):
+		_cube_instance.scale = Vector3.ONE * cube_size
+
+
+## The panel with only the rows this value drives — same glyphs, same %.2f columns and same
+## order as the legacy format string, so a reader can see it is the SAME panel with rows
+## withheld rather than a second, differently-worded one.
+func _faces_panel_text(y_offset: float, angular_velocity: float,
+		amplitude: float, scale_factor: float) -> String:
+	var arrow: String = "â†’"
+	var lines: PackedStringArray = ["MAPPINGS:"]
+	if _face_height:
+		lines.append("y_offset %.2f %s Y %.2f" % [y_offset, arrow,
+				position.y - _base_position.y])
+	if _face_heading:
+		lines.append("ang_vel %.2f %s Î¸ %.1fÂ°" % [angular_velocity, arrow,
+				rad_to_deg(fmod(_current_rotation, TAU))])
+	if _face_size:
+		lines.append("amplitude %.2f %s s %.2f" % [amplitude, arrow, scale_factor])
+	return "\n".join(lines)
 
 
 # ── RETENTION ────────────────────────────────────────────────────────────────

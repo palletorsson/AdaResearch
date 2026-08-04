@@ -540,6 +540,28 @@
    "description": "A corridor with soft body walls that rhythmically expand and contract.",
    "scene": "res://algorithms/softbodies/advanced_concepts/breathing_room.tscn",
    "category": "physics",
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "substance": [
+      "solid",
+      "flesh",
+      "glass",
+      "fabric"
+     ],
+     "aperture": [
+      "ajar",
+      "closed",
+      "narrow",
+      "wide"
+     ]
+    },
+    "default": "substance=solid, aperture=ajar - both are strict no-ops. `solid` returns from _apply_substance() before a StandardMaterial3D is constructed, so material_override stays unassigned and the slabs keep Godot's default grey; `ajar` returns from _apply_aperture() before either transform is read, so the authored x = -2.3185759 and x = +3.5541987 are untouched. All twelve appearances render exactly as before: the 5 grid tokens (SoftBodies_Obsticals, _p1, _p2, _p3, Corridor_SoftBodies_Obsticals), the 6 exhibit_furniture#mount:breathing_room slots in Trial_castelvecchio / grande / kanazawa / sainsbury / uffizi / wfc_softbodies, and the Curation_Bay_softbodies_0 roster. None carries a #substance: or #aperture: token, and a bare token leaves merged_config empty so apply_grid_config is never called at all.",
+    "was": "the .tscn root carried NO SCRIPT - two hand-authored SoftBody3D slabs with baked pinned points, no material override, and no breathing. The sinusoidal pressure loop the description promises lives in the sibling breathing_room.gd, which nothing in the repository loads.",
+    "declined": "breath_speed and breath_amplitude, the orphan script's named critical_parameter. They modulate pressure_coefficient over time, the evidence here is one still per value, and soft bodies are still settling at the 1.1 s capture settle - sweeping them would photograph the settle, not the axis.",
+    "note": "aperture is applied in _enter_tree, before the SoftBody3D children enter the tree and pin their empty-path attachments to world space. A value arriving later through apply_grid_config can still change substance but cannot move a live soft body."
+   },
    "include_in_map_data": true,
    "map_ready": true,
    "map_sequences": [
@@ -1467,6 +1489,20 @@
    "name": "Rounded SoftBody — Strain Energy",
    "lookup_name": "rounded_softbody_test",
    "description": "Deformable rounded cube with 3 modes: strain energy heatmap coloring by vertex displacement, collision-response force arrows with impact bursts, and volume preservation with real-time ratio chart. VR hand squeeze interaction pushes vertices. ImmediateMesh overlays for all visualizations.",
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "measure": [
+      "strain",
+      "collision",
+      "volume",
+      "none"
+     ]
+    },
+    "default": "measure=strain - _mode_from_word(\"strain\") returns Mode.STRAIN, which is exactly what `var _mode: int = Mode.STRAIN` already was, and the harness root forwards NOTHING at the default, so the 8 existing placements make one call fewer than before rather than one more. The MODE button still cycles STRAIN - COLLISION - VOLUME.",
+    "was": "Three modes reachable only by finding and pressing the MODE button in VR. No @export behind them, so the gate read NO EXPORT; and the scene root carried no script at all, so apply_grid_config on the root fell through and the research runner could resolve no .gd from the scene."
+   },
    "scene": "res://algorithms/softbodies/rounded_softbody_test.tscn",
    "category": "physics",
    "include_in_map_data": true,
@@ -1556,6 +1592,20 @@
    "name": "Rounded SoftBody — Compression Bench",
    "lookup_name": "rounded_softbody",
    "description": "Deformable rounded cube seated in a milled well on a terminal-finish compression bench (cabinet grammar, horizontal dialect). Strain-energy heatmap, collision-force arrows, and volume-preservation readout. The canon member; rounded_softbody_test is the bare harness.",
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "measure": [
+      "strain",
+      "collision",
+      "volume",
+      "none"
+     ]
+    },
+    "default": "measure=strain - the same @export on the same rounded_softbody.gd the harness token declares, resolving to Mode.STRAIN, which is what `var _mode: int = Mode.STRAIN` already was. Declared on both names because ONE SCRIPT SERVES BOTH: leaving it undeclared here left the axis promoted in code and unreachable by the sweep, which is the gate's own complaint. The 1 existing placement is untouched.",
+    "was": "The same three unreachable modes as rounded_softbody_test, behind a VR push_button and an apply_grid_config key with no export behind it."
+   },
    "scene": "res://algorithms/softbodies/rounded_softbody.tscn",
    "category": "physics",
    "include_in_map_data": true,

@@ -4150,6 +4150,24 @@
    "name": "Transforming Pattern",
    "lookup_name": "transforming_pattern",
    "description": "Constantly evolving wave pattern. Queer φ>0 signature.",
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "concert": [
+      "superposition",
+      "unison",
+      "front",
+      "ripple",
+      "solitary"
+     ]
+    },
+    "fixture": {
+     "phase_lock": 2.0
+    },
+    "default": "concert=superposition - the `_:` branch of _combined() is the three inline waves term for term, sin(t + x*0.8 + z*0.3) + cos(t*1.3 + x*0.4 - z*0.7) + sin(t*0.7 - x*0.5 + z*0.9) over 3, so the 1 existing placement moves cell for cell as it always has. phase_lock defaults to -1.0, which is the free-running clock; the fixture pins it only on the bench.",
+    "was": "One unnamed wave field, three incommensurate sines averaged inline in _process, driving height, scale, hue and spin. No exports reachable from a map token: there was no apply_grid_config at all."
+   },
    "scene": "res://commons/interfaces/qfep/transforming_pattern.tscn",
    "category": "qfep",
    "interaction": "observe",

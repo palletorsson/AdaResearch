@@ -10,11 +10,39 @@ extends Node3D
 # critical_parameter: ring_segments — tube cross-section resolution; at 4 it looks square, at 32 it looks round
 # triggers: grid config syntax (torus_radials_rings#config:16:8) or apply_grid_config() call at runtime
 # emerges: that the torus has a topology distinct from a sphere — it has a hole and cannot be flattened
-# needs: [missing VR controls — configured via map data; no live slider]
+# needs: the hole itself as a variable, so genus 1 is shown rather than asserted [has, 2026-08-03 — the `hole` axis]. Missing: VR controls — configured via map data, no live slider
 # relationships: used in combine_portals and diamondtoruscollection; shares config pattern with capsule
 # truth: the torus is topologically distinct from the sphere — its genus is 1, meaning it has exactly one hole
 
+# --- DNA (stage 2, promoted 2026-08-03) — axis `hole` ---
+#
+# WHAT WAS ALREADY HERE. rings and ring_segments were exported and reachable from a map
+# token (#config:16:8), and the whole corpus uses them: every one of the eleven
+# placements says either nothing or #config:8:4. Both are RESOLUTION — how finely the
+# same donut is cut into triangles. Nothing in this file ever varied the shape.
+#
+# WHAT THE HARD-CODED CONSTANTS WERE HIDING. inner_radius 0.3 and outer_radius 0.5 sat
+# as fixed numbers, and their RATIO is not a size setting: it is which torus this is.
+# Godot's TorusMesh derives tube radius = (outer - inner) / 2 and path radius =
+# (outer + inner) / 2 from that pair, and the classical family follows directly:
+#
+#   tube < path   ring torus     genus 1 — a hole you can see through
+#   tube = path   horn torus     the hole has closed to a single point
+#
+# The file's own truth statement is "the torus is topologically distinct from the sphere
+# — its genus is 1, meaning it has exactly one hole". Shipped, that is an assertion the
+# artifact makes and never tests. `hole` is the knob that tests it: walk the ratio and
+# the hole shuts while you watch, and the claim about genus acquires an edge case.
+#
+# OUTER RADIUS IS HELD AT 0.5 FOR EVERY VALUE, on purpose. If the silhouette grew too,
+# the axis would be measuring size and the argument would be lost inside it. Same
+# footprint, same one-cell spatial_needs, different topology.
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
+
+## Which torus this is — the ratio of tube to hole, not the resolution.
+## hoop = a wire ring, almost all hole. ring = the shipped donut. thick = the hole nearly
+## shut. horn = tube radius equals path radius, so the hole closes to a point.
+@export_enum("hoop", "ring", "thick", "horn") var hole: String = "ring"
 
 @export var base_color: Color = Color(0.5, 0.2, 0.35)  # Darker magenta for contrast
 @export var wireframe_color: Color = Color(1.0, 1.0, 1.0)  # White wireframe for contrast
@@ -23,15 +51,55 @@ const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/g
 @export var inner_radius: float = 0.3  # Radius of the hole (distance from center to tube center)
 @export var outer_radius: float = 0.5  # Outer radius (inner_radius + tube_radius)
 
+const HOLES: PackedStringArray = ["hoop", "ring", "thick", "horn"]
+
+## The one radius every value shares, so the axis moves the hole and not the size.
+const HOLE_OUTER: float = 0.5
+
+## `horn` wants inner_radius 0.0 exactly. It is held one millimetre off zero because
+## TorusMesh's own property hint starts at 0.001, and a value the engine might refuse
+## would leave the radii untouched — five identical frames and a false INERT verdict.
+## At 0.2% of the outer radius the hole is closed as far as any still can show.
+const HOLE_HORN_INNER: float = 0.001
+
 var _mesh_instance: MeshInstance3D
 
 func _ready():
+	# The radii come from `hole` FIRST, so an explicit #inner:/#outer: in a map token
+	# still wins below and in apply_grid_config. On the default this writes 0.3 / 0.5 —
+	# the same pair the .tscn already carries — so no shipped placement moves.
+	if has_meta("config_hole"):
+		hole = _pick_hole(str(get_meta("config_hole")))
+	hole = _pick_hole(hole)
+	_apply_hole_profile()
+
 	# Check for config metadata set by grid system
 	if has_meta("config_config"):
 		var config_str = str(get_meta("config_config"))
 		_parse_config_string(config_str)
 
 	_build_torus()
+
+## Named ratios, not sizes. Every value keeps outer_radius at HOLE_OUTER; only the hole
+## moves. The `_:` arm and the "ring" arm are deliberately the same numbers, so an
+## unrecognised string renders the shipped donut rather than nothing.
+func _apply_hole_profile() -> void:
+	outer_radius = HOLE_OUTER
+	match hole:
+		"hoop":
+			inner_radius = 0.45   # tube 0.025, path 0.475 — a wire, almost all hole
+		"ring":
+			inner_radius = 0.3    # tube 0.10,  path 0.40  — SHIPPED
+		"thick":
+			inner_radius = 0.12   # tube 0.19,  path 0.31  — the hole nearly shut
+		"horn":
+			inner_radius = HOLE_HORN_INNER  # tube = path — the hole closed to a point
+		_:
+			inner_radius = 0.3
+
+func _pick_hole(raw: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if HOLES.has(v) else "ring"
 
 # Parse config string like "16:8" for rings:ring_segments
 func _parse_config_string(config_str: String) -> void:
@@ -44,6 +112,18 @@ func _parse_config_string(config_str: String) -> void:
 
 # Called by grid system for #config syntax
 func apply_grid_config(config_data: Dictionary) -> void:
+	var before_hole: String = hole
+	var before_rings: int = rings
+	var before_segments: int = ring_segments
+	var before_inner: float = inner_radius
+	var before_outer: float = outer_radius
+
+	# `hole` is read FIRST and only when the caller actually named it, so an explicit
+	# #inner:/#outer: below still wins and a placement that never mentions the axis
+	# never has its radii rewritten.
+	if config_data.has("hole"):
+		hole = _pick_hole(str(config_data["hole"]))
+		_apply_hole_profile()
 	if config_data.has("config"):
 		_parse_config_string(str(config_data.config))
 	if config_data.has("rings"):
@@ -57,9 +137,19 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("outer"):
 		outer_radius = float(config_data.outer)
 
-	# Rebuild if already built
-	if _mesh_instance:
-		_build_torus()
+	# Rebuild ONLY after _ready has built once, and ONLY on a real change. The grid calls
+	# this deferred for every placement, several of them with a config that resolves to
+	# the values already in place; tearing the mesh down and rebuilding it identically is
+	# a cost every shipped map would pay for this axis existing.
+	if _mesh_instance == null:
+		return
+	var unchanged: bool = hole == before_hole and rings == before_rings
+	unchanged = unchanged and ring_segments == before_segments
+	unchanged = unchanged and is_equal_approx(inner_radius, before_inner)
+	unchanged = unchanged and is_equal_approx(outer_radius, before_outer)
+	if unchanged:
+		return
+	_build_torus()
 
 func _build_torus() -> void:
 	# Clean up existing mesh

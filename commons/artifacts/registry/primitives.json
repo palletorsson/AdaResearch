@@ -2071,6 +2071,30 @@
     "size_group": "compact"
    },
    "scene": "res://commons/primitives/capsule/capsule_radials_rings.tscn",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "cross_section": [
+      "triangular",
+      "square",
+      "hexagonal",
+      "octagonal",
+      "round"
+     ],
+     "caps": [
+      "pointed",
+      "chamfered",
+      "domed",
+      "smooth"
+     ]
+    },
+    "default": "cross_section=octagonal (radial_segments=8), caps=domed (rings=4) - the two literals capsule_radials_rings.gd and capsule_radials_rings.tscn have always authored, so the 15 placements are unchanged. The named axes only speak where the NUMERIC path was silent: _radial_explicit / _rings_explicit are set by #config, #radial, #rings and set_capsule_params, and the raw counts win. That matters here more than anywhere - 18 of this token's placements already pass #radial:3 or #radial:7 with #rings:3, and every one of them keeps its exact number.",
+    "was": "radial_segments=8 and rings=4 were this artifact's own declared critical_parameter, reachable only as bare integers through a #radial/#rings token with no vocabulary and no registry declaration. The exports existed; nothing named what they ARGUE.",
+    "note": "THIS IS NOT A RESOLUTION AXIS and the corpus proved it before the code did: maps were already placing this token at radial_segments=3, which is not a rough capsule but a triangular prism with a tent at each end - at 4 a square beam, at 6 a hexagonal barrel. It does not read as 'a capsule, less smooth' until somewhere around 12, which is why round is 24 and not 12. The artifact's own qfep_connection says it: 'turn the dial down and the body becomes a barrel.' A barrel is a different object. caps is the second constituent, and it argues with the artifact's own truth line - 'the capsule is the physicist's preferred solid, its hemispherical ends are differentiable at all points'. Godot spends rings on the hemispheres, so at rings=1 each hemisphere collapses to one band from equator to pole, i.e. a CONE with an apex: the exact point where the derivative does not exist. The truth line is not a property of capsules, it is a property of capsules built with enough rings, and nothing in the family could say so until now.",
+    "family": "does not collide with the sibling capsule token in the same directory, whose facture axis (cast|facet|armature|section|wear) asks how a made body is PRESENTED and whose header explicitly declares its own 5 segments and 5 rings legacy and never written to. The segment question was left vacant for this token; it takes it. The word resolution was considered and refused: sphere_mid owns it for the amount of a budget, and the honest reading here is identity of a solid, not amount of a budget.",
+    "corpus_note": "CLAUDE.md records a KNOWN GAP - 'exactly ONE map (Artist_Readymades, six request_note tokens) places any artifact at a non-default value.' That is now false in this token's favour: capsule_radials_rings has 18 live placements at #radial:3 / #radial:7. Worth correcting, because it is the only other place in the corpus where a player has ever met a variant."
+   },
    "size_group": "compact",
    "tags": [
     "primitive"
@@ -8628,6 +8652,24 @@
    "qfep_connection": "F_force: the probe — a graspable stick trailing a long cloth ribbon. It is how the hand asks a soft world questions: poke, drag, sweep, and the ribbon writes the answer in folds. The instrument of contact in the softbodies rooms; force made holdable."
   },
   "grab_octahedron": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "dual": [
+      "off",
+      "around",
+      "inside",
+      "both"
+     ]
+    },
+    "default": "dual=off - off adds no strut, leaves the mesh on the render layer it shipped on and never touches the collision shape, so all 11 placements take exactly the pre-promotion code path. apply_grid_config is new here and returns before rebuilding unless the value actually changed",
+    "was": "zero declared axes. The exports were alternate_material, four snap_to_shelf numbers, base_color and octahedron_scale - a material slot, a shelf behaviour and a size. The cube this solid is the dual OF was asserted by @identity, by the registry description and by Primitives_Ignorance/technical.md, and drawn nowhere; the eight face centres and six vertices that ARE that cube were already sitting in _octahedron_geometry() as numbers",
+    "note": "the word `dual` and its four values are taken VERBATIM from snap_octahedron_puzzle, promoted 2026-07-29 - same sequence, same solid, same question at a different level of assembly. Strut gauges are the sibling's 0.008 m and 0.005 m re-expressed as fractions of the circumradius (0.04 and 0.025), because this octahedron is 2.5x larger and copying the metres would have drawn a thinner cage and broken the measure-alike check that makes a shared vocabulary honest",
+    "axis_notes": {
+     "dual": "which side of the octahedron-cube duality is actually drawn. around is the circumscribing cube of half-side R, whose six face centres ARE the six vertices; inside is the inscribed cube of half-side R/3, whose eight corners ARE the eight face centres; both nests them and turns duality from a pair into a ladder. WHERE THIS DIVERGES FROM THE SIBLING: snap_octahedron_puzzle's octahedron is already a cage, so its inscribed cube is simply visible. This one is an opaque solid and an R/3 cube would be sealed inside it - the occlusion trap - so on inside and both the faces are withdrawn (layers = 0, which keeps the mesh in the capture AABB so framing does not jump) and the octahedron is drawn as its twelve edges. Which of the pair is solid and which is frame is the claim, not a second axis"
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "octahedron — 6 vertices, 12 edges, 8 triangular faces: dual of the cube, Platonic solid",
@@ -9562,6 +9604,28 @@
    "tags": [
     "primitive"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "figure": [
+      "wedge",
+      "corner",
+      "regular",
+      "inverted"
+     ],
+     "facets": [
+      "shown",
+      "hidden",
+      "only"
+     ]
+    },
+    "default": "figure=wedge, facets=shown - wedge returns the original four-vertex literal untouched and shown is the SimpleGrid material the artifact has always worn, so all 7 existing placements build the same mesh, the same convex hull and the same shader they did before",
+    "was": "the sweep refused it as NO TURNABLE KNOBS. base_color and trihedron_size were exported but the four vertices were a fixed literal and the face table a fixed three-triangle list, so 'trihedron' named a definition and showed one frozen instance of it. There was no apply_grid_config at all, and the artifact's own declared critical_parameter - the material toggle - is dead in the shipped scene because alternate_material is null in grab_trihedron.tscn, so pressing the button swaps nothing.",
+    "note": "figure keeps every value inside the same bounding box (non-default figures are centred and scaled to trihedron_size by _fit_to_box), so the axis is pure silhouette and the capture framing does not move between variants. corner is the trihedron the word actually means - three mutually perpendicular edges from the apex, the corner of a cube; regular is the Platonic tetrahedron; inverted meets the same three planes from the concave side. facets is reused character for character from sphere_low and sphere_high because it is the same question about the same SimpleGrid shader.",
+    "declined": "apex_stance (from pyramid) was offered by the family and refused: the shipped apex sits at xz (0,0) while the base centroid is at (0,-s/3), so it is neither centred nor over an edge nor over a corner, and reusing the word would have required a default value that lies about the geometry.",
+    "doc_discrepancy": "the description says '3 triangular faces and 1 quad base' and geometry_spec says topology manifold_closed. Neither is true of the shipped mesh: the base is a TRIANGLE and no base face is generated at all, so the solid is an open shell with V-E+F = 4-6+3 = 1. The @identity says the Euler relation emerges from holding it, and as shipped it does not. Left as found - closing the base would change all 7 placements, and it is a topology fix rather than an axis."
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",
@@ -20648,6 +20712,31 @@
    "qfep_connection": "Six rings by eight segments with the wireframe brightness pushed to 3.5 — the scaffolding lit harder than the surface it holds. A donut that leads with its own triangulation: the seams are the exhibit, smoothness merely their rumor."
   },
   "torus_radials_rings": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "hole": [
+      "hoop",
+      "ring",
+      "thick",
+      "horn"
+     ],
+     "ring_segments": [
+      3,
+      4,
+      8,
+      16,
+      32
+     ]
+    },
+    "default": "hole=ring, ring_segments=8 - ring writes inner_radius 0.3 and outer_radius 0.5, the exact pair torus_radials_rings.tscn already carries, and ring_segments is not touched by this promotion at all. All 11 placements render byte-identical; the nine that pass #config:8:4 still set their own segment count, and apply_grid_config now rebuilds only when a value actually changed instead of on every deferred call",
+    "was": "two exports, and both of them resolution: rings and ring_segments cut the SAME fixed donut into more or fewer triangles. inner_radius 0.3 and outer_radius 0.5 sat as hard-coded numbers nobody ever varied, and their ratio is not a size setting - it is which torus this is. The file's truth statement claims genus 1, one hole, and the artifact had no way to show the hole closing",
+    "axis_notes": {
+     "hole": "the ratio of tube radius to path radius, which Godot's TorusMesh derives from the inner/outer pair. hoop 0.45/0.5 is a wire; ring 0.3/0.5 is the shipped donut; thick 0.12/0.5 nearly shuts it; horn 0.001/0.5 makes tube = path and the hole closes to a single point. horn is the value that earns the axis - the genus claim printed in this file's own @identity meets the case where it stops holding. outer_radius is pinned at 0.5 for every value so the silhouette does not grow and the axis cannot be mistaken for scale",
+     "ring_segments": "the artifact's declared critical_parameter, exported since it shipped but never declared here, so the sweep could not reach it. Sample points along the tube cross-section: at 3 the tube is a triangular prism, at 32 it is round. A previously measured pairwise sweep of 2 vs 4 already moved 3.8% of frame"
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Configurable torus with rings and ring segments. Usage: torus_radials_rings:90:1:#inner:0.2#outer:0.6 or #config:16:8 for 16 rings and 8 ring segments.",
@@ -23127,6 +23216,29 @@
    ],
    "include_in_map_data": true,
    "lookup_name": "fontana_puncture",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "breach": [
+      "pierced",
+      "opened",
+      "severed",
+      "husk"
+     ],
+     "strike": [
+      "centred",
+      "raised",
+      "corner",
+      "grazing"
+     ]
+    },
+    "default": "breach=opened, strike=centred - the default pair is a SHORT-CIRCUIT, not a recomputation: _cut_radius() and _cut_offset() return the raw sphere_radius (0.34) and sphere_offset (ZERO) untouched at these values, so all 37 placements are bit-identical, including the 44 exhibit_furniture#mount:fontana_puncture plinth mounts and the 8 that embed interactive_point_origin_force. A placement that names sphere_radius or sphere_offset directly still wins over the named axis - the vocabulary is laid over the raw floats, never in place of them.",
+    "was": "sphere_radius and sphere_offset are this artifact's own declared critical_parameter and were reachable only as unnamed floats. 37 placements, every one showing the same 0.34 sphere: an artifact whose whole argument is that subtraction is generative, shipping exactly one subtraction.",
+    "note": "breach is not a size knob - cube_size stays 0.5 at every value, so the object keeps its cell and its footprint. The four values are the four topologically DISTINCT states of this geometry, cut against the cube's own critical distances (half-extent 0.5, edge-midpoint 0.707, corner 0.866 x cube_size): pierced 0.54 = six round mouths in solid matter (Fontana's buchi, dented through but not hollowed); opened 0.68 = shipped, 0.46 m mouths on a 0.5 m face and still connected, a thin frame; severed 0.74 = past the edge-midpoint, the twelve edges cut and the cube surviving as eight disconnected corner pieces, a different OBJECT not a smoother one; husk 0.80 = corners down to a twentieth of the extent. It stops short of 0.866 deliberately - past that the cube is gone and the frame measures NO RENDER, which is a fact about the capture and not about the art. strike is the paired direction axis (the same amount/direction split sphere_mid made with resolution/budget_bias); its three displaced values move on Y or on all three axes at once, so no single camera yaw can hide the axis behind the silhouette. The embedded point and the centre glint both ride the cut, so under strike the point that carved the void is still IN the void rather than buried in the surviving matter.",
+    "declined": "a third axis for WHAT the cutting tool is - a taglio (slash) against the buchi (holes) - is the obvious next promotion and is the artifact's own art-historical subject. It is not shipped because a slash is a cut in ONE face and the sweep photographs from a single fixed camera: half the yaws would show an uncut cube and the critic would report a fact about camera placement as a verdict on Fontana. Both axes shipped here are spherically or vertically legible, so no frame can lie about them.",
+    "rebuild_guard": "apply_grid_config previously tore down and rebuilt on ANY call. It now requires config_data.size() > 0, which preserves every real placement (all pass at least one key, and the 8 embedding ones need the rebuild) while removing the no-op reconfigure churn."
+   },
    "map_ready": true,
    "map_sequences": [
     "primitives"

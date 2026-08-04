@@ -28,14 +28,50 @@ extends Node3D
 @export var frame_emission_color: Color = Color(0.6, 0.8, 1.0, 1.0)
 @export var frame_emission_energy: float = 1.6
 
+# --- DNA (stage 2, promoted 2026-08-03) -------------------------------------
+# onset: WHERE along the corridor order gives way. pow(entropy_factor, 2.0) was
+#   a bare literal with the comment "for dramatic increase toward the end", and
+#   that exponent is not a styling choice - it is the artifact's whole claim
+#   about how entropy arrives. At "late" the lattice holds for two thirds of the
+#   walk and then collapses; at "even" disorder accrues at a constant rate and
+#   there is no moment; at "early" the grid is lost in the first few steps and
+#   the rest of the corridor is already cloud; at "phase" order holds, snaps
+#   through a narrow band and saturates - a transition rather than a slope. The
+#   same curve drives the hue ramp, so the colour moves with the drift.
+# bounds: what the container claims. The shipped frame is ONE box sized to the
+#   worst case, which quietly asserts that the ordered end lives in the same
+#   volume as the chaotic end - a fair reading of the truth line (the number of
+#   ways the system could be), but the only reading on offer. "slabs" draws the
+#   volume the points ACTUALLY occupy band by band, so the phase space is seen
+#   widening; "none" removes the claim entirely and leaves the points to argue
+#   alone.
+# random_seed is NOT an axis - it is the fixture knob. The jitter is drawn from
+#   the global unseeded RNG, so two renders of the same value are two different
+#   objects and any sweep of onset would be measuring the draw as much as the
+#   curve. 0 keeps the shipped unseeded behaviour; the gallery pins it.
+const ONSETS := ["late", "even", "early", "phase"]
+const BOUNDS_MODES := ["box", "none", "slabs"]
+const SLAB_COUNT := 8
+
+@export_enum("late", "even", "early", "phase") var onset: String = "late"
+@export_enum("box", "none", "slabs") var bounds: String = "box"
+@export var random_seed: int = 0
+
 var multimesh_instance: MultiMeshInstance3D
 var frame_root: Node3D
+
+# True once _ready has built. apply_grid_config must never rebuild before that,
+# and never when nothing changed - the 9 shipped placements must not be rebuilt
+# by this function merely existing.
+var _built: bool = false
+var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	add_to_group("entropy_axiom")
 	create_multimesh()
 	generate_entropy_grid()
 	create_bounds_frame()
+	_built = true
 
 func create_multimesh() -> void:
 	# Create MultiMeshInstance3D node
@@ -72,9 +108,30 @@ func create_multimesh() -> void:
 	material.emission_energy_multiplier = 0.8
 	multimesh_instance.material_override = material
 
+func _entropy_curve(factor: float) -> float:
+	# How the entropy factor rises with z. "late" is the shipped literal.
+	match onset:
+		"even":
+			return factor
+		"early":
+			return sqrt(factor)
+		"phase":
+			return smoothstep(0.4, 0.6, factor)
+	return pow(factor, 2.0)
+
+func _jitter(amount: float) -> float:
+	# random_seed = 0 keeps the shipped global-RNG draw untouched, so a placement
+	# that says nothing about the seed scatters exactly as it always has.
+	if random_seed != 0:
+		return _rng.randf_range(-amount, amount)
+	return randf_range(-amount, amount)
+
 func generate_entropy_grid() -> void:
 	var multimesh = multimesh_instance.multimesh
 	var instance_index = 0
+
+	if random_seed != 0:
+		_rng.seed = random_seed
 
 	for z in range(grid_size_z):
 		for y in range(grid_size_y):
@@ -82,8 +139,9 @@ func generate_entropy_grid() -> void:
 				# Calculate entropy factor (0.0 at z=0, 1.0 at z=max)
 				var entropy_factor = float(z) / float(grid_size_z - 1)
 
-				# Apply exponential curve for dramatic increase toward the end
-				var curved_entropy = pow(entropy_factor, 2.0)
+				# Apply the onset curve. "late" is pow(entropy_factor, 2.0) —
+				# the original exponential increase toward the end.
+				var curved_entropy = _entropy_curve(entropy_factor)
 
 				# Base grid position
 				var base_x = (x - grid_size_x / 2.0) * base_spacing
@@ -92,8 +150,8 @@ func generate_entropy_grid() -> void:
 
 				# Randomness scales from 0 (perfect order) to max (chaos)
 				var randomness_amount = lerp(min_randomness, max_randomness, curved_entropy)
-				var random_offset_x = randf_range(-randomness_amount, randomness_amount)
-				var random_offset_y = randf_range(-randomness_amount, randomness_amount)
+				var random_offset_x = _jitter(randomness_amount)
+				var random_offset_y = _jitter(randomness_amount)
 
 				# Final position
 				var position = Vector3(
@@ -127,16 +185,44 @@ func get_entropy_color(entropy_factor: float) -> Color:
 	return Color.from_hsv(hue, saturation, value)
 
 func create_bounds_frame() -> void:
-	if not show_bounds_frame:
+	# show_bounds_frame stays the master switch it always was; bounds says which
+	# claim the frame makes when it is on.
+	if not show_bounds_frame or bounds == "none":
 		return
 
 	frame_root = Node3D.new()
 	frame_root.name = "EntropyBoundsFrame"
 	add_child(frame_root)
 
+	if bounds == "slabs":
+		_build_slab_frames()
+		return
+
 	var min_corner = _get_bounds_min()
 	var max_corner = _get_bounds_max()
 	_build_frame_edges(min_corner, max_corner)
+
+func _build_slab_frames() -> void:
+	# One box per z-band, each only as wide as the drift the points at that band
+	# are actually allowed. The single shipped box is the union of these; drawn
+	# separately they show the accessible volume opening along the corridor.
+	var span: float = float(grid_size_z - 1) * base_spacing
+	for i in SLAB_COUNT:
+		var near_factor: float = float(i) / float(SLAB_COUNT)
+		var far_factor: float = float(i + 1) / float(SLAB_COUNT)
+		var drift: float = lerp(min_randomness, max_randomness, _entropy_curve(far_factor))
+		var pad: float = drift + point_radius + frame_padding
+		var min_corner := Vector3(
+			(0.0 - grid_size_x / 2.0) * base_spacing - pad,
+			(0.0 - grid_size_y / 2.0) * base_spacing - pad,
+			near_factor * span - point_radius - frame_padding
+		)
+		var max_corner := Vector3(
+			((grid_size_x - 1) - grid_size_x / 2.0) * base_spacing + pad,
+			((grid_size_y - 1) - grid_size_y / 2.0) * base_spacing + pad,
+			far_factor * span + point_radius + frame_padding
+		)
+		_build_frame_edges(min_corner, max_corner)
 
 func _get_bounds_min() -> Vector3:
 	var min_x = (0.0 - grid_size_x / 2.0) * base_spacing - max_randomness - point_radius - frame_padding
@@ -206,4 +292,40 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Guarded on both sides: a declared value has to actually differ, and _ready
+	# has to have built once. A placement token naming none of these never
+	# reaches _rebuild, so the 9 shipped placements are unaffected.
+	var changed: bool = false
+
+	if config.has("onset"):
+		var want_onset: String = str(config["onset"]).strip_edges().to_lower()
+		if ONSETS.has(want_onset) and want_onset != onset:
+			onset = want_onset
+			changed = true
+
+	if config.has("bounds"):
+		var want_bounds: String = str(config["bounds"]).strip_edges().to_lower()
+		if BOUNDS_MODES.has(want_bounds) and want_bounds != bounds:
+			bounds = want_bounds
+			changed = true
+
+	if config.has("random_seed"):
+		var want_seed: int = int(config["random_seed"])
+		if want_seed != random_seed:
+			random_seed = want_seed
+			changed = true
+
+	if changed and _built:
+		_rebuild()
+
+func _rebuild() -> void:
+	if is_instance_valid(multimesh_instance):
+		multimesh_instance.queue_free()
+	multimesh_instance = null
+	if is_instance_valid(frame_root):
+		frame_root.queue_free()
+	frame_root = null
+
+	create_multimesh()
+	generate_entropy_grid()
+	create_bounds_frame()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://cbd65o471w2rh"]
+[gd_scene load_steps=7 format=4 uid="uid://cbd65o471w2rh"]
 
 [ext_resource type="PackedScene" path="res://algorithms/softbodies/rounded_softbody.tscn" id="1_softbody"]
 [ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_collider"]
+[ext_resource type="Script" path="res://algorithms/softbodies/rounded_softbody_test.gd" id="3_harness"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_buc56"]
 albedo_color = Color(0.3, 0.8, 0.9, 1)
@@ -23,6 +24,7 @@ _surfaces = [{
 size = Vector3(2.3728027, 0.62976074, 2.3886719)
 
 [node name="RoundedSoftBodyTest" type="Node3D"]
+script = ExtResource("3_harness")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 5)

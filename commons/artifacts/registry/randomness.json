@@ -2287,6 +2287,26 @@
    "scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn",
    "sequence": "randomness",
    "size_group": "xlarge",
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "pathology": [
+      "all",
+      "aesthetics",
+      "corruption",
+      "artifacts",
+      "propagation"
+     ]
+    },
+    "fixture": {
+     "dna_seed": 20260804
+    },
+    "default": "pathology=all - the `all` branch of _apply_pathology returns before touching a node, so the four groups the .tscn pins to the arms of its 16 m cross stay exactly as visible as they always were. Every existing appearance is unchanged: the 5 grid tokens (Corridor_randomness, Dollhouse_Random_Definition, Random_Definition at digital_materiality_glitch:90:-0.4:0.1, and RoundTrip_Random_Definition / _v2 at :0:0.0) plus the curation_station roster in Corridor_Random_Definition. None of them carries a #pathology: token today, and merged_config stays empty for a bare token so apply_grid_config is never even called. dna_seed keeps its shipped -1 (randomize per launch); the fixture pins it for the sweep only, because the field, the corrupting cells and the noise are three random streams and five unseeded variants would be five different objects.",
+    "was": "always all four groups at once, unconditionally built and unconditionally shown - the taxonomy was hard-coded and the artifact could not make a claim about one pathology.",
+    "declined": "corruption_rate, error_propagation_speed and the 0.1 s glitch_timer interval are RATES. The evidence is one still per value, and a still cannot tell a fast run from a slow one photographed later - sweeping them would publish a finished-looking sheet that answers nothing.",
+    "known_gap": "the four groups sprawl across roughly 26 m with a lot of empty space between them, so any single-group value fills a corner of the union frame. If the sweep reports this faint rather than absent, the fix is dna.framing, not the axis."
+   },
    "tags": [
     "procedural"
    ],
@@ -2507,6 +2527,32 @@
     "probability",
     "procedural"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "onset": [
+      "late",
+      "even",
+      "early",
+      "phase"
+     ],
+     "bounds": [
+      "box",
+      "none",
+      "slabs"
+     ]
+    },
+    "default": "onset=late, bounds=box - late returns pow(entropy_factor, 2.0), the exact literal the corridor has always used, and box is the single worst-case frame drawn when show_bounds_frame is true, which it is in the shipped scene. Both branches are the pre-promotion code path called verbatim, so all 9 existing placements scatter and frame as before.",
+    "was": "the sweep refused it as NO TURNABLE KNOBS. It exported eleven numbers - grid sizes, spacing, radius, frame colours - and not one of them was the argument. The two things the artifact actually claims were literals: the exponent 2.0 that decides WHERE order gives way, sitting behind the comment 'for dramatic increase toward the end', and a single bounding box sized to the worst case. apply_grid_config existed as a bare pass, so no map token could reach anything.",
+    "note": "onset is the strongest still-visible axis this artifact has: the z-position at which the lattice stops reading as a lattice moves metres along an 8 m corridor, and the same curve drives the blue-to-red hue ramp, so drift and colour move together. bounds=slabs draws the volume the points at each z-band are actually permitted, so the phase space is seen opening rather than asserted once - the truth line, 'the number of ways a system can be', made a picture instead of a caption. show_bounds_frame remains the master switch above bounds.",
+    "fixture": {
+     "random_seed": 20260803
+    },
+    "fixture_reason": "the xy jitter is drawn from the global unseeded RNG, so without a pinned seed each variant is a different object and a sweep of onset would be measuring the draw as much as the curve. random_seed defaults to 0, which keeps the shipped unseeded behaviour for every real placement; only the bench pins it.",
+    "duplicate_token": "entropy_axiom is declared in TWO registry files with DIFFERENT scenes. algorithms_misc.json points at entropy_axiom.tscn (4000 separately instanced grab_sphere_point_with_color nodes); this entry points at entropy_axiom_multimesh.tscn. Registry files are loaded in directory order and last write wins, so randomness.json is the one that resolves and the MultiMesh scene is what every placement actually gets. The promotion is on entropy_axiom_multimesh.gd. The algorithms_misc.json entry and entropy_axiom.gd are left untouched and remain unreachable.",
+    "framing_note": "not measured - captures are serialized centrally and this promotion ran without one. The subject is roughly 2.1 x 2.1 x 7.9 m, a 4:1 corridor, so a fit-by-diagonal camera should be close to right and no dna.framing is declared. If the sweep comes back with the subject under ~6% of frame, that is the framing, not the axis. The scene also carries a Camera3D child at z=2.18 left over from its demo life."
+   },
    "geometry_spec": {
     "mesh_type": "instanced_particles",
     "topology": "scattered",
