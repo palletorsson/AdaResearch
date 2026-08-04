@@ -88,6 +88,74 @@ def factor(rows: list) -> list:
     return segs
 
 
+MIN_MOTIF_H = 2
+
+
+def split_nonconsecutive(segs: list) -> list:
+    """Second pass: split one-off stretches on blocks that recur NON-adjacently.
+
+    Step 1 only found consecutive repeats, and two buildings defeated it
+    entirely — bilbao-atrium-radial and mezquita-hypostyle came out as a single
+    30-row 'bay', which is not a brush, it is the tile again. Their rows DO
+    repeat (13 and 11 distinct rows), just never adjacently: a radial plan
+    alternates its motifs instead of running them. This finds the longest block
+    that occurs twice or more inside a one-off stretch and splits there, so the
+    motif becomes its own bay and the material between it stays honest.
+
+    Only splits — never edits a row — so the round-trip gate holds by
+    construction whatever this does.
+    """
+    out: list = []
+    for block, k in segs:
+        if k != 1 or len(block) < 2 * MIN_MOTIF_H:
+            out.append((block, k))
+            continue
+        pieces = [block]
+        changed = True
+        while changed:
+            changed = False
+            nxt: list = []
+            for piece in pieces:
+                n = len(piece)
+                found = None
+                for h in range(n // 2, MIN_MOTIF_H - 1, -1):
+                    for i in range(0, n - h + 1):
+                        motif = piece[i:i + h]
+                        j = i + h
+                        while j <= n - h:
+                            if piece[j:j + h] == motif:
+                                found = (i, j, h)
+                                break
+                            j += 1
+                        if found:
+                            break
+                    if found:
+                        break
+                if not found:
+                    nxt.append(piece)
+                    continue
+                i, j, h = found
+                for seg in (piece[:i], piece[i:i + h], piece[i + h:j],
+                            piece[j:j + h], piece[j + h:]):
+                    if seg:
+                        nxt.append(seg)
+                changed = True
+            pieces = nxt
+        out.extend((p, 1) for p in pieces)
+    return out
+
+
+def merge_runs(segs: list) -> list:
+    """Re-fold adjacent identical blocks the splitter left as separate segments."""
+    out: list = []
+    for block, k in segs:
+        if out and out[-1][0] == block:
+            out[-1] = (block, out[-1][1] + k)
+        else:
+            out.append((block, k))
+    return out
+
+
 def recompose(segs: list) -> list:
     out: list = []
     for block, k in segs:
@@ -119,7 +187,7 @@ def extract(mus: dict) -> tuple[dict, list]:
     failures: list = []
     for key in sorted(mus):
         tile = [list(r) for r in mus[key]["tile"]]
-        segs = factor(tile)
+        segs = merge_runs(split_nonconsecutive(factor(tile)))
         if recompose(segs) != tile:
             failures.append(key)
         chain = []
@@ -163,6 +231,62 @@ def extract(mus: dict) -> tuple[dict, list]:
         "museums": museums_out,
     }
     return payload, failures
+
+
+def usable(name: str, b: dict) -> bool:
+    """Is this bay a BRUSH, or only a bookkeeping fragment?
+
+    101 bays is a factoring; a palette is a vocabulary. A single row is real
+    (the open-floor row is the most-shared unit in the corpus) but nobody can
+    compose with it, and a bay with no slots and no reuse says nothing. So a
+    brush must be at least two rows deep AND either hold a slot or already be
+    shared between buildings.
+    """
+    return b["h"] >= 2 and (b["slots"] >= 1 or len(b["used_by"]) > 1)
+
+
+def emit_brushes(payload: dict, mus: dict) -> int:
+    """Merge usable bays into template_patterns.json as stamp patterns.
+
+    A bay is already in the pattern format — cells, w, h — so the painter needs
+    no new geometry code to stamp one: the vocabulary is what was missing, not
+    the machinery. Bays carry their lineage (from_museum, shared_with,
+    instances) so a chimera painted from two buildings can name both parents.
+    Additive: entries are keyed `bay:<name>` and carry bay=true, so every
+    consumer that filters on `museum` (the validator, the chain check, the
+    endless museum's dealing arc) is untouched.
+    """
+    data = json.loads(PATTERNS.read_text(encoding="utf-8"))
+    pats = data.setdefault("patterns", {})
+    kept = 0
+    for name, b in payload["bays"].items():
+        if not usable(name, b):
+            continue
+        owner = b["owner"]
+        src = mus.get(owner, {})
+        building = str(src.get("museum", owner)).split(",")[0]
+        others = [m for m in b["used_by"] if m != owner]
+        bits = [f'{b["h"]}x{b["w"]}']
+        if b["slots"]:
+            bits.append(f'{b["slots"]} slot' + ("s" if b["slots"] != 1 else ""))
+        if b["hero"]:
+            bits.append("hero")
+        if others:
+            bits.append(f"shared x{len(b['used_by'])}")
+        # ASCII separators only: a middle dot written here came back through the
+        # JSON round-trip as mojibake in the palette. Same class as the PIL
+        # em-dash fault — label text crosses too many encodings to be clever in.
+        pats[f"bay:{name}"] = {
+            "label": f'{building} bay - {" - ".join(bits)}',
+            "color": src.get("color", "#5a5a66"),
+            "w": b["w"], "h": b["h"], "mode": "stamp", "tile": b["rows"],
+            "bay": True, "from_museum": owner, "building": building,
+            "shared_with": others, "instances": b["instances"],
+            "slots": b["slots"], "hero": b["hero"],
+        }
+        kept += 1
+    PATTERNS.write_text(json.dumps(data, indent=1), encoding="utf-8")
+    return kept
 
 
 def selftest() -> int:
@@ -222,11 +346,18 @@ def main() -> int:
         print(f"\nROUND-TRIP FAILED for {len(failures)}: {failures}")
         return len(failures)
     print(f"\nround-trip: {len(mus)}/{len(mus)} museums recompose BYTE-IDENTICAL")
+    brushes = [n for n, b in bays.items() if usable(n, b)]
+    print(f"{len(brushes)}/{len(bays)} bays qualify as brushes "
+          f"(>=2 rows and either a slot or shared between buildings)")
     if "--dry-run" in sys.argv:
         print("(--dry-run: nothing written)")
         return 0
     OUT.write_text(json.dumps(payload, indent=1), encoding="utf-8")
     print(f"-> {OUT.relative_to(REPO)}")
+    if "--brushes" in sys.argv:
+        n = emit_brushes(payload, mus)
+        print(f"-> {n} bay brushes merged into "
+              f"{PATTERNS.relative_to(REPO)} (keys `bay:*`, additive)")
     return 0
 
 
