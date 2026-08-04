@@ -35,6 +35,13 @@ extends Node3D
 const TEMPLATES := "res://commons/data/template_patterns.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
 const SPINE_ORDER := "res://commons/data/spine_artifact_order.json"
+# DECLARED ORDER POLICIES (unification step 4): who decides the order of the
+# walk. Same row shape as the spine manifest, so --em-order=dig|size|text reads
+# them through one loader. `text` is the book's own order — the order the
+# writing first names each artifact, which measures tau -0.13 against the
+# curriculum: the page and the corridor genuinely disagree about what comes
+# first, and that disagreement is now walkable instead of theoretical.
+const ORDER_POLICIES := "res://commons/data/artifact_order_policies.json"
 # THE CROWNS (ruled 2026-08-01): chapters whose champion template is a museum.
 # A crowned chapter is dealt into its crowned building; uncrowned chapters
 # keep the em_order rotation.
@@ -200,6 +207,8 @@ func _load_pool() -> void:
 				live[String(lookup)] = {"scene": scene, "fp": _footprint_of(a)}
 	if _order_mode == "spine" and _load_spine_pool(live):
 		return
+	if _order_mode != "shuffle" and _load_policy_pool(live, _order_mode):
+		return
 	# v1 fallback: alphabetical, then seeded shuffle
 	for lookup in live:
 		_pool.append({"lookup": lookup, "scene": live[lookup]["scene"],
@@ -213,6 +222,39 @@ func _load_pool() -> void:
 		_pool[i] = _pool[j]
 		_pool[j] = tmp
 	print("[endless_museum] pool: shuffle, %d artifacts, seed %d" % [_pool.size(), _seed])
+
+## A DECLARED policy as the dealing order (step 4): dig, size, text — anything
+## commons/data/artifact_order_policies.json carries. Additive by construction:
+## spine and shuffle never reach here, an unknown policy name falls through to
+## the seeded shuffle rather than failing the walk, and every row keeps the
+## `why` that put it where it is.
+func _load_policy_pool(live: Dictionary, policy: String) -> bool:
+	var f := FileAccess.open(ORDER_POLICIES, FileAccess.READ)
+	if f == null:
+		push_warning("endless_museum: --em-order=%s but %s is missing (run tools/build_order_policies.py); falling back to shuffle" % [policy, ORDER_POLICIES])
+		return false
+	var data: Variant = JSON.parse_string(f.get_as_text())
+	if not (data is Dictionary):
+		return false
+	var all: Dictionary = (data as Dictionary).get("policies", {})
+	if not all.has(policy):
+		push_warning("endless_museum: no order policy `%s` (have %s); falling back to shuffle" % [policy, str(all.keys())])
+		return false
+	var rows: Array = all[policy]
+	var skipped := 0
+	for row in rows:
+		var lookup := String((row as Dictionary).get("lookup", ""))
+		if live.has(lookup):
+			_pool.append({"lookup": lookup, "scene": live[lookup]["scene"],
+				"fp": live[lookup]["fp"],
+				"sequence": String((row as Dictionary).get("sequence", ""))})
+		else:
+			skipped += 1
+	if _pool.is_empty():
+		return false
+	print("[endless_museum] pool: ORDER POLICY `%s`, %d of %d alive (%d not map_ready/on disk); opens with %s" % [
+		policy, _pool.size(), rows.size(), skipped, String(_pool[0]["lookup"])])
+	return true
 
 ## The curriculum as the dealing order. Reads the generated manifest and keeps
 ## only artifacts the registry says are alive, in manifest order — so the first
