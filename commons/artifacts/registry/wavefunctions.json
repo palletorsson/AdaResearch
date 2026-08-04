@@ -14415,7 +14415,28 @@
     "derived_at": "2026-04-29T09:39:46.306641Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "oscillation: the unit circle, annotated — sine and cosine read off a turning radius; the circle that secretly writes every wave."
+   "qfep_connection": "oscillation: the unit circle, annotated — sine and cosine read off a turning radius; the circle that secretly writes every wave.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "correspondence": [
+      "both",
+      "cosine",
+      "tangent",
+      "helix"
+     ]
+    },
+    "default": "correspondence=both - the `_` branch of _wave_value() returns sin(step_angle), which is the literal expression _create_bridge_step() used before, and _apply_correspondence() at \"both\" sets every rod visible, which is the state they were already created in. No tangent rod is constructed at all unless the value asks for one, so all 5 existing placements build the identical node tree.",
+    "was": "one reading, unnamed. The scene drew both projection rods and unrolled sin(theta) into a walkable bridge, and no placement could ask the circle for its other shadow, for the tangent that runs off to infinity at a quarter turn, or for the helix the two shadows are shadows OF.",
+    "fixture": {
+     "buildup": "complete",
+     "start_angle_deg": 50.0,
+     "wave_length": 8.0
+    },
+    "framing": 0.8,
+    "note": "The fixture is the whole reason this is measurable. The bridge lays one plank per frame and takes ~16 s to finish, so a still shot at t=1s catches 6% of the figure and the verdict becomes a fact about the shutter; `buildup: complete` builds all 400 planks in _ready. start_angle_deg=50 is there because the shipped angle 0 is degenerate — sin and tan are both zero there, so three of the four values would photograph identically. wave_length is shortened for the bench only: the shipped 28 m bridge against a 2.4 m circle is a wide flat subject and fit-by-diagonal reduces it to a line. Sibling token `unit_circle` runs this same scene and is deliberately NOT promoted here: it is include_in_map_data false and reaches no map."
+   }
   },
   "vr_map_loader_kiosk": {
    "category": "waves",
@@ -14857,6 +14878,31 @@
     "size_group": "world_scale"
    },
    "qfep_connection": "Waves propagating through 3D space — energy spreading from a source, dissipating as it expands. The inverse-square law as entropy increase: concentrated E(S) becoming diffuse, order radiating into the surrounding volume.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "falloff": [
+      "exponential",
+      "inverse_square",
+      "inverse_linear",
+      "lossless"
+     ],
+     "source": [
+      "center",
+      "corner",
+      "pair",
+      "line"
+     ]
+    },
+    "default": "falloff=exponential, source=center - a no-op on both, and provably so rather than approximately. _attenuation() falls through its match to `exp(-distance * wave_damping)`, the expression that was on that line before, and at a single source at the origin the new summation loop runs exactly one term, so displacement evaluates to `amplitude * sin(phase) * attenuation` and the colour intensity to `sin(phase)` - the two expressions it replaced, not near-copies of them. No node is added at the default, WaveSource is repositioned to (0, y, 0) which is where the .tscn already put it, and WaveRings keeps visible = true. All 7 maps that place this artifact are unchanged and no map carries a #falloff: or #source: token today",
+    "was": "nine exports, every one of them a rate or a size, and an apply_grid_config whose entire body was `pass`. The sweep refused it for NO TURNABLE KNOBS, and it was right for a reason worse than the count: three of those nine (frequency, amplitude, wave_speed) are OVERWRITTEN every frame by animate_controls() from the clock, so the .tscn's frequency = 0.9 and amplitude = 1.8 survive for one frame and then the artifact goes back to driving itself. There was nothing on this artifact a photograph could be a photograph of.",
+    "note": "the caution that shaped this promotion: propagation is time-domain and a still catches one arbitrary phase of a self-driving field. Sweeping frequency or speed would have produced four beautiful frames answering nothing - and worse than nothing here, because animate_controls would have erased the swept value before the shutter opened. So both axes are properties the FROZEN field has. `falloff` is the law energy obeys on the way out, and it is also this entry's oldest unpaid debt: the qfep_connection above has claimed the inverse-square law since the day it was written and the code has always run exp(-d * damping), which is not that law but absorption by a lossy medium. The axis is the difference between those two claims, made walkable. `source` is where the disturbance is born, and it settles the artifact's own truth line - `every point in a wave field is the sum of all waves that have reached it` - which was aspirational, because the arithmetic summed exactly one wave. At `pair` the sum has two terms and the superposition is real; at `line` the source is straight and the rings become plane fronts, the same law in the geometry that makes a swell instead of a ripple.",
+    "kin": "DELIBERATELY NOT `evidence`, although wave_interference_tank and wave_interference_3d are the obvious neighbours and wave_interference_3d calls the tank's evidence_name() so the twins cannot drift. Their rungs are result | trace | sources | longhand, where `sources` and `longhand` name the two addends being summed - and at this artifact's default there are no two addends, one pulse and one field and nothing added, so two of the four rungs would be unreachable. That is the same refusal wave_equation_solver's neighbour made, and taking a family word with a shortened value list is the exact failure check_dna_declarations exists to catch. NOT `law` either, which is force_field_visualizer's word: its four values are four different FIELDS (gravity, point_charge, dipole, vortex) and these four are four thinning laws of one field, so the answer sheets do not transfer even though both questions start `which law`. `boundary` (wave_equation_solver: fixed | free | absorbing | periodic) is the nearest true relative and asks what happens at the EDGE of the medium; `falloff` asks what happens on the way there. They compose rather than compete.",
+    "interaction": "the two axes are not independent in the photograph, and that is the interesting part rather than a flaw. At `line` the distance to the source is a coordinate, not a radius, so falloff stripes the floor front-to-back instead of ringing it; at `corner` inverse_square puts every surviving peak in one corner and leaves five sixths of the floor flat. The weakest pair is exponential x lossless at `center`: the shipped damping only takes the far rim down to 0.61, so those two frames differ by about a third of the displacement at the edge and not at all in the middle. The colour is the honest dilution to declare in advance - intensity is driven by sin(phase) alone and NOT by attenuation, so the yellow-and-blue rings are identical at all four falloff values and only the relief moves. Making colour attenuation-aware would have bitten far harder and would have changed the default frame, which is not a trade this pass is allowed to make.",
+    "capture_note": "this artifact draws its field with a MultiMeshInstance3D and everything else with CSG nodes, so per CLAUDE.md the capture AABB - which counts MeshInstance3D only - can measure a 11.6 m floor as a small box. If a sweep of this token comes back with the subject under a few percent of frame, that is the harness, not the axis. The fix is dna.framing (this subject is wide and flat, so fit-by-diagonal will undershoot), NOT a layers = 0 anchor: artifacts auto-ground base-to-floor from their AABB, so an anchor mesh would move the artifact vertically in all 7 shipped maps.",
+    "declined": "frequency, amplitude, wave_speed, wave_damping, grid_size, tile_size - dials, and the first three are erased by animate_controls before any shutter. floor_tilt_degrees is declared and never read by anything; it is dead, and lifting a dead export into an axis would have produced four identical frames with a green pipeline behind them."
+   },
    "scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn",
    "sequence": "wavefunctions",
    "tags": [

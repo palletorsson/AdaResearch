@@ -6611,6 +6611,24 @@
     },
     "tentacle_placer": {
       "lookup_name": "tentacle_placer",
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "posture": [
+            "cycle",
+            "sentry",
+            "stoop",
+            "coil",
+            "cast"
+          ]
+        },
+        "default": "posture=cycle - the sentinel. _is_pinned() is `static_pose or (posture != \"cycle\" and POSTURE_TARGETS.has(posture))`, and POSTURE_TARGETS has no `cycle` key, so at the default both terms are false and _physics_process runs the shipped goal-queue chase line for line. _ready seats the target with _pose_target(), which returns rest_target for `cycle` - the same Vector3(0, 6, 0) literal it used before. All 6 existing placements, including the one in the corpus that passes config (place_positions, sky_height, travel_speed, dwell_seconds, pyramid_size, pyramid_height, debug_log - none of them `posture`), are unchanged.",
+        "was": "eleven groups of exports and not one of them survives a still: travel_speed, dwell_seconds, arrive_threshold, pyramid_lifetime are rates and durations; radii and colours are size and paint. The one decision the artifact's own @identity calls its truth - that the arm places a finite number of objects and then RESTS, so a viewer meets the idle and not the ritual - was a hard-coded rest_target of Vector3(0, 6, 0), straight up, forever.",
+        "reads": "posture is what a finished machine does with its idleness. sentry stands at attention over work already done; stoop hangs over the row of pyramids it placed; coil folds six metres of arm into two and withdraws into itself; cast stays flung out at the room as though the work were not over. The placement ritual, the pyramids and the claw are identical in all five - only the body the arm settles into changes.",
+        "note": "posture is borrowed from spring_hopper, kresling_spire, armadillo_eggling, r_c and qfep_formula_3d in this corpus. Per that family's established convention the WORD and the `cycle` sentinel are shared while the value list is per-artifact (all five siblings already differ), and all of them measure alike: a whole-silhouette change. The sentinel is load-bearing here rather than cosmetic - this artifact's pose is a function of wall-clock time, so a sweep of a running tentacle measures the shutter, and only the four pinned values are photographable at all.",
+        "declined": "FABRIK_ITERATIONS was the obvious second axis and is a lie: _solve_chain_manual re-solves every physics frame FROM ITS PREVIOUS SOLUTION, so across a one-second settle even one iteration per frame accumulates sixty and every value converges to the same pose. max_joint_angle_deg is real in a bent posture but invisible at the default one, where the target sits at exactly the chain's 6.0m length and takes the unreachable straighten branch, which never calls _apply_joint_angle_limits."
+      },
       "scene": "res://commons/artifacts/tentacle_placer/tentacle_placer.tscn",
       "class_name": "TentaclePlacer",
       "name": "Tentacle Placer",

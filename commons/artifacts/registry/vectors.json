@@ -4479,6 +4479,31 @@
         "size_group": "compact"
       },
       "qfep_connection": "Pure F with dissipation — gravity is constant F, the wall's elasticity coefficient IS lambda. At e=1.0 energy is conserved forever. Below 1.0, each bounce leaks energy into the wall. Lambda controls how fast the system forgets its initial conditions.",
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "evidence": [
+            "result",
+            "trace",
+            "longhand",
+            "axiom"
+          ],
+          "regime": [
+            "stock",
+            "elastic",
+            "dead",
+            "inelastic"
+          ]
+        },
+        "default": "evidence=trace, regime=stock - a no-op on both. `trace` returns from _apply_evidence before a single node is constructed and leaves the shipped live trail visible, so the scene tree and the capture AABB are byte-identical to the pre-promotion build; `stock` puts elasticity back to the value the placement was authored with, which for every shipped placement is the export default 0.9, and it is the only regime value that touches nothing. All 9 maps that place this artifact are unchanged - 7 as direct grid tokens, 2 as a member of a curation_station cluster - and no map carries an #evidence: or #regime: token today",
+        "was": "six exports, all of them a size or a colour, and an apply_grid_config whose entire body was `pass`. The sweep refused it for NO TURNABLE KNOBS. Its own @identity names _elasticity as the critical_parameter and its qfep_connection is four sentences about lambda, and lambda was a float literal nobody could reach from a map and nothing anywhere DREW.",
+        "note": "the artifact ships with its history already on the table - 150 positions as a fading pink line - so it is BORN at `trace` and `result` is the value that takes something away: the ball and the box and nothing of where it has been. That is the same inversion three_body_problem made when it shipped at trace because it had always drawn its trails, and the opposite of its own Motion 101 neighbours (example_1_7, 1_8, 1_9), which ship at `result` because they keep no trail at all. Worth saying plainly: this trace is a PAST, the last 150 frames accumulated by watching, where 1_7's trace is a FUTURE integrated at build time before the ball has moved. Same word, same rung, honestly different tense, and the difference is a fact about the two artifacts rather than about the vocabulary. longhand puts the working beside the answer at the release state: g and v as arrows (x20 and x2, labelled, because g is 0.015 of a metre and at true scale would be a fifth of the ball's radius), the reflection drawn at the floor as an incoming and an outgoing speed arrow whose LENGTH RATIO is e, and the apex ladder h(n) = h0 e^(2n) predicted at build time from e alone - the squaring drawn twice, once as speed and once as height, which is the move bouncing_ball's promotion made one artifact along. axiom drops the history for the rule: a slate on the inside of the back wall carrying v += g, p += v, wall: v *= -e and the one line those three amount to.",
+        "kin": "`evidence` with exactly result/trace/longhand/axiom is the family word, taken character for character from example_1_7 / 1_8 / 1_9, exercise_1_8_solution_attraction_magnitude_vr (its own chapter, promoted this session), bouncing_ball, three_body_problem, koch_curve and wave_interference_tank. `regime` is bouncing_ball's word for the same question one artifact along - which RESTITUTION regime the box is in - and three of its four values are taken unchanged INCLUDING THE NUMBER: elastic is 1.0, dead is 0.0, and inelastic is 0.55, bouncing_ball's figure, so a map that asks both benches for `inelastic` gets one answer and not two. The fourth value could not be taken. bouncing_ball's is `mixed`, meaning its shipped population of six balls at randf_range(0.6, 0.95); there is exactly one ball here and no population, so `mixed` would name a state this code cannot enter - the exact mismatch check_dna_declarations exists to catch. `stock` (spring_hopper's word for as-shipped) stands in its place and does the same job: it is the value that leaves the authored float alone.",
+        "interaction": "the two axes are orthogonal in the code and NOT in the photograph, which is worth stating rather than discovering in a bite report. At evidence=result there is no history on screen, and a still catches one arbitrary instant of one small ball, so regime x result is close to inert and honestly so - the same interaction bouncing_ball declared. It bites everywhere else, and for two different reasons: at `trace` the trail IS the decay, so elastic fills the box with a tangle and dead leaves a single vertical stroke, but that frame depends on WHEN the shutter opened; at `longhand` the ladder is drawn from e directly at build time and does not, so elastic is seven rungs at one height and dead is seven rungs on the floor whatever the settle time. The declared order puts evidence first because build_dna_gallery trims value lists from the tail.",
+        "framing_note": "every exhibit is drawn inside the 0.9 m wireframe box that was already there - the ladder on the inside of the back wall, the slate on the back plane, the arrows magnified only as far as the box allows. Deliberately: an overlay wider or taller than the box would enlarge the union AABB the capturer fits its camera to and every frame including the default would re-zoom, which is the documented reason catapult's foresight axis scored 3.48 percent for turning a preview off.",
+        "declined": "ball_radius, box_size, gravity_strength and the two colours are dials. gravity_strength was the near miss: it is a real physical claim, but with the trail on, a heavier g and a shorter box look the same in a still, and with the trail off it is invisible - so it would have measured as a size."
+      },
       "scene": "res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.tscn",
       "size_group": "compact",
       "tags": [
@@ -4616,6 +4641,21 @@
         "size_group": "compact"
       },
       "qfep_connection": "F-feedback — the steering force depends on the gap between current and desired velocity. Close to the target, F diminishes. This is a self-regulating system: the closer you get, the gentler the approach. Negative feedback as navigation strategy.",
+      "dna": {
+        "promoted": "2026-08-04",
+        "stage": "2 - variation",
+        "axes": {
+          "evidence": [
+            "result",
+            "trace",
+            "longhand",
+            "axiom"
+          ]
+        },
+        "default": "evidence=result - the shipped build byte for byte: the ball, the glowing target on its sinusoid, the 200-frame rolling trail and the hairline connector. Outside the `result` branch not one exhibit node is ever constructed and _apply_evidence returns before it reaches the match; the rolling trail's visibility is only touched to switch it OFF for `trace` and is left true at every other value including this one. All 7 placements (VFM_03_Motion, Trial_eye_VFM_03_Motion, VectorAdvanced, Vectors_6, Vector_Exhibition, Vector_Exhibition_Placed, and Corridor_VFM_03_Motion via a curation_station collection whose #layout / #with_wall flags belong to the station) are bare tokens carrying no evidence key, and apply_grid_config returns without rebuilding unless the word moved.",
+        "was": "five exports that were all magnitudes (max_speed, max_force, ball_radius and two colours) and an apply_grid_config that was a literal `pass`. The arrival radius - the one line that makes this arrival and not seek - was the literal 0.15 written twice inside _process, and nothing in the room could see it: the shipped scene is pixel for pixel what a pure SEEK would also produce.",
+        "note": "The word is example_1_9's, taken character for character, as 1.7, 1.8 and exercise_1_8 took it: the noc_ch01 bench is one argument at several stages, and a map that asks the shelf for `longhand` should get several answers in one vocabulary. What the shared word has to carry here is a radius. trace integrates the whole chase forward at build time through the same _step() and _target_at() the running scene calls - there is no random number anywhere in this demo, so it can print its own future and be held to it. longhand gives the slowing radius a translucent shell and an equatorial ring that travel with the target, plus live magnified `v` and `desired` arrows, so `desired` can be watched shrinking as the ball enters the zone. axiom plots the ramp itself, |desired| against distance, with SEEK's flat line dashed over it; the wedge between the two curves is the entire content of the exercise. slowing_radius is now an export (default 0.15) so the exhibits draw the number the physics uses, not a second copy."
+      },
       "scene": "res://algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.tscn",
       "size_group": "compact",
       "tags": [

@@ -16520,9 +16520,34 @@
    "qfep_connection": "Six face weights drive six emission energies, so a loaded die and a fair one are visually distinct before any roll. The distribution stops hiding inside opaque physics and becomes light on the surface — a chart you can throw."
   },
   "queer_cylinder_target": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "face": [
+      "bullseye",
+      "bands",
+      "spokes",
+      "column"
+     ],
+     "flag": [
+      "progress",
+      "rainbow",
+      "trans",
+      "full",
+      "archery"
+     ]
+    },
+    "fixture": {
+     "breathing_phase": 2.0
+    },
+    "default": "face=bullseye, flag=progress - together these ARE the shipped object. bullseye is the `_:` branch of the match and runs the loop that used to be inline in _generate_rings, line for line: radius_step = max_radius / n, palette[0] outermost, a 1 mm z-offset per ring, cylinders rotated 90 degrees on X. progress returns the same eight Progress Pride colours in the same order the literal array carried. All 3 placements (ForcesArena and Forces_Drone_Game at rotations 90 and -90, VFM_08_Arena bare) pass no config key at all, and apply_grid_config returns before touching anything unless a word actually moved. Neither axis reaches the CollisionShape3D, the audio, the particles, the flash tween or the score: every arrangement is hit in exactly the same way.",
+    "was": "five magnitude exports (points_per_hit, breathing_speed, breathing_amount, target_radius and target_thickness - the last of which the build never read) and no apply_grid_config at all. Both of the lists that decide what this object IS were hard-coded, and the palette carried the comment `(removed outer yellow/orange/red)`: an editorial decision about which stripes it wears, left in a parenthesis.",
+    "note": "The identity block already claimed that 'the same geometry is two cultural objects depending on intent - flag when still, target when sighted' about a build that only ever produced one of the two. face makes the claim checkable rather than asserted: bands is the flag standing where the target stood, with no centre for the colours to converge on; spokes puts every colour the same distance from the middle so no ring is the bull and none the outer; column lays the face down into a ziggurat that faces nobody, which the truth line says a target cannot do. flag is the second hard-coded list: rainbow is the 1979 six-stripe the shipped palette is a revision of, trans is the only symmetric palette here (it has no outer), full restores what the source comment removed, and archery is the regulation FITA face - the object with the flag taken off it, which is the counterfactual the artifact needs. Ring count follows palette size, so flag changes the geometry and not only the colour. A new export, breathing_phase, defaults to -1.0 = the shipped random start phase per instance; dna.fixture pins it at 2.0 for the sweep, because otherwise the 2 percent breathing scale walks between frames and arrives in the critic numbers dressed as the axis."
+   },
    "category": "unknown",
    "complexity": "beginner",
-   "description": "queer_cylinder_target",
+   "description": "A target face built from Progress Pride stripes: eight concentric emissive disks, outermost first, each a millimetre in front of the last, breathing gently on a sine. Hits anywhere flash every ring white, fire a burst of coloured cubes and score - the same surface reads as a flag when still and as a target when sighted.",
    "dev_themes": [
     "core",
     "primitives"

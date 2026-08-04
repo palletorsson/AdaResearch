@@ -33,6 +33,22 @@
 			}
 		},
 		"pattern_artifact": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"group": ["unset", "p1", "p2", "pm", "pg", "cm", "pmm", "pmg", "pgg", "cmm", "p4", "p4m", "p4g", "p3", "p3m1", "p31m", "p6", "p6m"]
+				},
+				"fixture": {
+					"config_path": "res://commons/pattern_grammar/_staging/pt03_p4m_alhambra.json"
+				},
+				"default": "group=unset - _ready() still returns before building anything when neither a config_path nor a group is named, which is what every existing placement is: 10 bare `pattern_artifact` tokens across 6 maps (Symmetry_Group, Track_Symmetry x2, Trial_gate10_21, Trial_gate8_sym_size x2, Trial_gate8_sym_type x2, Trial_gate8_sym_typeM x2), not one of them passing a config. They render nothing today and render nothing after this change - byte for byte the same empty floor slot. apply_grid_config now returns without rebuilding unless a key it recognises arrived, ignores a group name that is not in the list rather than assigning it, and never rebuilds before _ready has built once (it used to _clear() and _build() unconditionally, which would have double-built any placement that ever did pass a config).",
+				"was": "no axis, and the seventeen groups one function call away. Every parameter came from a JSON file named by config_path, and config_path defaults to empty - so a map token could name this artifact but could never name a group, and PatternSim.GROUPS, the closed set of seventeen this artifact exists to display, was unreachable from map data entirely. The ten placed tokens are the proof: all bare, so all silent. An invisible artifact holding a 2x2 floor slot in six maps.",
+				"note": "group is DERIVED, not transcribed: the eighteen values are PatternSim.GROUPS in PatternSim's own IUC order with `unset` prepended, and PatternSim.group_enum() is the code that resolves each name. The seventeen are a CLOSED set - Fedorov: exactly seventeen ways a pattern can repeat in the plane, no eighteenth - so naming one is not a style choice, it is the whole claim a tile makes about which symmetries it obeys. `unset` is the eighteenth value and it is not a group: it is the shipped silence, declared because the export default has to be inside the declared list (the gate fails a default that is not) and because it is the state every map is actually in. When a group is named without a config the artifact builds from DEFAULT_DNA - PatternSim's own defaults (tile 32, seed 7, bauhaus, canvas 512) with one departure the staged corpus already made, a dot motif at radius 0.38 rather than a random one, because a random motif at density 0.5 buries the symmetry in noise and the symmetry is the only thing this axis is about.",
+				"measurement_risk": "READ THIS BEFORE BELIEVING A VERDICT. Without the fixture, the default frame renders NOTHING - the axis's own default is the blank state - and a blank against seventeen patterns would score an enormous bite that is a fact about an empty room. So dna.fixture supplies a tracked staged config (pt03_p4m_alhambra: dot motif, seed 3, alhambra palette, tile 32) and the sweep becomes a controlled experiment in which only the group varies. Two consequences to expect and not misread: (a) the `unset` and `p4m` frames are IDENTICAL by construction, because pt03's own group is p4m and unset means 'let the config decide'; (b) the neighbouring groups are genuinely close pictures - p3 against p31m, p4 against p4g - so a faint pair there is the mathematics, not a dead axis. Check p1 against p6m first, which is bare translation against six-fold rotation with mirrors.",
+				"declined": "palette (8 named palettes in PatternSim.PALETTES). It would be the strongest-biting and emptiest axis available: it repaints every pixel and says nothing about symmetry, which is a colour swatch, not an argument. Also declined: motif (random | dot), which is real - whether the group's symmetry is legible depends on the repeating unit having a form - but it is two-valued and it is a fact about the thing the group ACTS ON, so in one frame the two would fight and the critic would measure the collision. tile_size, canvas_size and quad_size are sizes.",
+				"placements": "10 tokens across 6 maps"
+			},
 			"lookup_name": "pattern_artifact",
 			"name": "Pattern Artifact",
 			"description": "Placeable wallpaper-pattern wrapper. Reads a JSON config (group, motif_seed, palette, tile_size) and renders the resulting pattern as a textured quad facing up — readable as floor tile, banner, or table-top.",

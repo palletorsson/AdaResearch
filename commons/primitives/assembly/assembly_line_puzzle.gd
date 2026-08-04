@@ -23,6 +23,39 @@ signal all_products_completed()
 ## SPHERE swaps the mesh on a grab_cube body (no dedicated grab_sphere yet).
 enum ShapeType { CUBE, PYRAMID, CYLINDER, DISC, SPHERE, WEDGE, CUBOID }
 
+## AXIS — WHAT THE LINE DISCLOSES OF ITS ANSWER before you have built one.
+## Borrowed character for character from [[chair_assembly_puzzle]],
+## [[table_assembly_puzzle]], [[shelf_assembly_puzzle]], [[stool_assembly_puzzle]],
+## [[balance_puzzle]] and [[configurable_portal]] — the same four values, the same
+## question, and this is the same kind of object as four of them: an assembly
+## puzzle whose shipped lineage is the translucent cyan hologram, so `ghost` is
+## the default here exactly as it is there. The slot positions, the match
+## tolerance, the snap and the conveyors are identical at every value; only what
+## stands at the station changes.
+##
+##   ghost     the legacy lineage — every slot pre-shown as a translucent tinted
+##             projection of the target. THE DEFAULT.
+##   none      nothing at all: two belts, a bare platform, no stated goal. A line
+##             that tells its worker nothing about what it is for.
+##   mark      where, not what — a small bright head at each slot point. The
+##             positions are given and the form is withheld.
+##   exemplar  the answer in solid: the same slot forms rendered opaque in their
+##             own colours, one finished product standing on the station already
+##             built.
+##
+## What this argues: a production line is a claim about how much of the plan the
+## worker is given, and this one shipped with exactly one answer — the full
+## specification, floating, permanently. The other three are the same line under
+## a different disclosure regime.
+##
+## NOT declared, deliberately: what is IN TRANSIT on the belt. spawn_interval,
+## input_speed and output_speed are rates, and the pieces they carry are spawned
+## by _process on a wall clock — a still catches whatever happened to be between
+## the rollers, so a "parts on the belt" axis would photograph as a fact about
+## the shutter. The station is the only part of this artifact that holds still.
+const TELLS: PackedStringArray = ["ghost", "none", "mark", "exemplar"]
+@export_enum("ghost", "none", "mark", "exemplar") var tell: String = "ghost"
+
 ## Configuration - loaded from JSON or set via export
 @export var category: String = "houses"
 @export var product_filter: String = ""  # Empty = build all in category
@@ -464,7 +497,45 @@ func _create_ghost_mesh(shape_type: ShapeType, custom_scale: Vector3 = Vector3.O
 	mat.emission_energy_multiplier = 0.5
 	mesh_instance.material_override = mat
 
+	_apply_tell(mesh_instance, col)
 	return mesh_instance
+
+
+## Restyle one slot projection for the `tell` axis. The slot's POSITION is never
+## touched — _check_slot_matches() reads _ghost_meshes[i].position for the snap
+## target, so the puzzle plays identically at every value; only what the player
+## is shown changes. "ghost" returns without doing anything, which is why the
+## shipped placements are byte-identical.
+func _apply_tell(mesh_instance: MeshInstance3D, col: Color) -> void:
+	match tell:
+		"none":
+			# layers = 0, not visible = false: render layers are per-instance and
+			# do not propagate to children, and the mesh and material are left
+			# alone. The slot still contributes its AABB, so a sweep frames every
+			# value from the same distance.
+			mesh_instance.layers = 0
+		"mark":
+			# Where, not what. One small bright head at the slot point; the form
+			# the slot wants is withheld.
+			var head := SphereMesh.new()
+			head.radius = shape_scale * 0.3
+			head.height = shape_scale * 0.6
+			mesh_instance.mesh = head
+			var mm := StandardMaterial3D.new()
+			mm.albedo_color = Color(1.0, 0.82, 0.2)
+			mm.emission_enabled = true
+			mm.emission = Color(1.0, 0.82, 0.2)
+			mm.emission_energy_multiplier = 1.6
+			mesh_instance.material_override = mm
+		"exemplar":
+			# The answer already built: same forms, solid, in their own colours.
+			var em := StandardMaterial3D.new()
+			em.albedo_color = Color(col.r, col.g, col.b, 1.0)
+			em.roughness = 0.55
+			em.metallic = 0.05
+			mesh_instance.material_override = em
+		_:
+			pass
 
 
 func _build_pyramid_mesh(size: float) -> ArrayMesh:
@@ -1028,6 +1099,16 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		elif raw is String: on = raw.to_lower() in ["true", "1", "sandbox", "free", "yes"]
 		if on != sandbox_mode:
 			sandbox_mode = on
+			needs_rebuild = true
+
+	# Disclosure axis. Guarded twice — an unknown token is ignored rather than
+	# blanking the station, and a value equal to the current one does NOT set
+	# needs_rebuild, so the six existing placements (none of which pass `tell`)
+	# never reach _rebuild() through this branch.
+	if config_data.has("tell"):
+		var t := str(config_data["tell"]).to_lower().strip_edges()
+		if TELLS.has(t) and t != tell:
+			tell = t
 			needs_rebuild = true
 
 	if config_data.has("palette") or config_data.has("palette_source"):

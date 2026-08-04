@@ -11,6 +11,54 @@ class_name QueerNoiseTerrain
 # relationships: precedes noise_terrain (terrain_generator.gd, time-animated); both are displayed in Noise_Perlin_Simplex map; domain warping connects to noisesphere concept; queer color scheme connects to QFEP
 # truth: domain warping is the act of sampling a function at a displaced location — when you warp the coordinate system with noise, you are not changing what the function computes but where it is asked
 
+## STAGE-2 DNA PROMOTION (2026-08-03). The artifact is NAMED for its noise, and the noise
+## it draws was a constant: FastNoiseLite.TYPE_SIMPLEX, set once in setup_noise_generators
+## and reachable from nowhere. The seven sliders that do exist live in a 2D ParameterUI
+## panel no VR placement ever touches, and are floats besides — sizes, not arguments. Two
+## axes, both resolved at build time and both complete in a single still frame:
+##
+##   generator  which basis fills the field         simplex · perlin · value · cellular
+##   legend     what the surface says its heights   contours · relief · mood
+##              MEAN
+##
+## generator is the SAME axis, with the same four values in the same order, as the
+## perlin_noise and simplex_noise siblings promoted 2026-07-29. The noise sequence is built
+## on comparing bases; if each artifact spells the comparison its own way there is nothing
+## to compare. cellular, not worley, for the same reason.
+##
+## legend is NOT the siblings' `readout`. There readout asks a geometric question — is the
+## field a relief, a plate or a column chart — and this artifact cannot answer it: it is a
+## 100 m walkable landscape with a ConcavePolygonShape3D under it, so plate and column would
+## change what the player STANDS ON, not what the field claims to be, and the word would
+## stop meaning one thing across the sequence. legend asks the question this artifact's own
+## truth statement raises instead: its @identity says the pink→purple→cyan palette "encodes
+## elevation as emotion rather than information". Both encodings are already in the file —
+## the heightmap shader with topographic contour lines, and the queer vertex-colour
+## material — and only a mouse click on a 2D button could choose between them.
+##
+## Usage in map_data.json:
+##   "noise_terrain#generator:cellular"
+##   "noise_terrain#legend:mood"
+
+## DNA axis: which noise basis fills the primary field. The detail layer stays Perlin and
+## the warp layer stays Cellular — those are the artifact's fixed second and third voices;
+## this is the one being sampled for height.
+@export_enum("simplex", "perlin", "value", "cellular") var generator: String = "simplex"
+
+## DNA axis: how the surface declares what its heights mean.
+##   contours  the shipped look — heightmap shader, topographic lines on (enable_contours
+##             true, contour_frequency 20.0, contour_strength 0.3): elevation as measurement
+##   relief    same shader, lines off: elevation as pure gradient, a landform with no key
+##   mood      the standard material — pink→purple→cyan vertex colours with emission, the
+##             palette the @identity calls emotion rather than information
+@export_enum("contours", "relief", "mood") var legend: String = "contours"
+
+## Not an axis — a PIN. Every generator here was seeded with randi(), so four sweep frames
+## would be four different landscapes and any bite number would be measuring the RNG. 0 is
+## the shipped behaviour (fresh terrain every run) and is what all 5 placements get; the
+## capture bench sets a number through dna.fixture.
+@export var noise_seed: int = 0
+
 # Terrain parameters
 @export var terrain_size: int = 100
 @export var terrain_resolution: int = 200
@@ -56,13 +104,56 @@ var animate_terrain: bool = true
 # Blob system
 var blob_spawner: NoiseBlobSpawner
 
+## Allow-lists. A typo in a map token falls back to the shipped value rather than stranding
+## a placement with a field nobody chose.
+const GENERATORS: PackedStringArray = ["simplex", "perlin", "value", "cellular"]
+const LEGENDS: PackedStringArray = ["contours", "relief", "mood"]
+
+## True once _ready has built the terrain. apply_grid_config must not regenerate before it.
+var _built: bool = false
+
 func _ready() -> void:
+	_apply_legend()
 	setup_noise_generators()
 	setup_materials()
 	setup_ui_connections()
 	update_ui_button_states()
 	setup_blob_system()
 	generate_terrain()
+	_built = true
+
+func _valid(value: String, allowed: PackedStringArray, fallback: String) -> String:
+	return value if allowed.has(value) else fallback
+
+func _noise_type_for(basis_name: String) -> int:
+	var chosen: String = _valid(basis_name, GENERATORS, "simplex")
+	if chosen == "perlin":
+		return FastNoiseLite.TYPE_PERLIN
+	if chosen == "value":
+		return FastNoiseLite.TYPE_VALUE
+	if chosen == "cellular":
+		return FastNoiseLite.TYPE_CELLULAR
+	return FastNoiseLite.TYPE_SIMPLEX
+
+## legend is stored as one word and spent on the two booleans the renderer already had.
+## contours reproduces the shipped pair exactly (shader on, lines on).
+func _apply_legend() -> void:
+	match _valid(legend, LEGENDS, "contours"):
+		"mood":
+			use_heightmap_shader = false
+		"relief":
+			use_heightmap_shader = true
+			enable_contours = false
+		_:
+			use_heightmap_shader = true
+			enable_contours = true
+
+## noise_seed 0 = the shipped randi() per generator. Non-zero pins all three so a sweep
+## photographs one landscape under four bases instead of four landscapes.
+func _seed_for(layer: int) -> int:
+	if noise_seed == 0:
+		return randi()
+	return noise_seed + layer * 7919
 
 func _process(delta: float) -> void:
 	time += delta
@@ -78,8 +169,8 @@ func setup_noise_generators() -> void:
 	if noise == null:
 		print("ERROR: Failed to create primary noise!")
 		return
-	noise.seed = randi()
-	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.seed = _seed_for(0)
+	noise.noise_type = _noise_type_for(generator)
 	noise.frequency = 0.008  # Lower frequency for smoother terrain
 	noise.fractal_octaves = octaves
 	noise.fractal_gain = 0.4  # Less gain for smoother transitions
@@ -90,7 +181,7 @@ func setup_noise_generators() -> void:
 	if secondary_noise == null:
 		print("ERROR: Failed to create secondary noise!")
 		return
-	secondary_noise.seed = randi()
+	secondary_noise.seed = _seed_for(1)
 	secondary_noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	secondary_noise.frequency = 0.03  # Smaller details
 	secondary_noise.fractal_octaves = 2  # Fewer octaves
@@ -100,7 +191,7 @@ func setup_noise_generators() -> void:
 	if bulge_noise == null:
 		print("ERROR: Failed to create bulge noise!")
 		return
-	bulge_noise.seed = randi()
+	bulge_noise.seed = _seed_for(2)
 	bulge_noise.noise_type = FastNoiseLite.TYPE_CELLULAR
 	bulge_noise.frequency = 0.01  # Lower frequency
 	bulge_noise.cellular_return_type = FastNoiseLite.RETURN_CELL_VALUE
@@ -571,4 +662,38 @@ func get_terrain_info() -> Dictionary:
 	}
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# GUARDED. Config can arrive before _ready (the grid stamps it on the node it is about
+	# to add) or after. Before the first build, assignment is enough — _ready reads the new
+	# values on its way through. After it, only a value that actually MOVED may pay for a
+	# 40,401-vertex regenerate. All 5 existing placements pass neither axis, so none of them
+	# rebuilds anything.
+	var field_changed: bool = false
+	var legend_changed: bool = false
+
+	if config.has("generator"):
+		var g: String = _valid(str(config["generator"]).to_lower(), GENERATORS, generator)
+		if g != generator:
+			generator = g
+			field_changed = true
+	if config.has("legend"):
+		var l: String = _valid(str(config["legend"]).to_lower(), LEGENDS, legend)
+		if l != legend:
+			legend = l
+			legend_changed = true
+	if config.has("noise_seed"):
+		var s: int = int(config["noise_seed"])
+		if s != noise_seed:
+			noise_seed = s
+			field_changed = true
+
+	if not _built:
+		return
+	if legend_changed:
+		_apply_legend()
+		if heightmap_material:
+			heightmap_material.set_shader_parameter("enable_contours", enable_contours)
+		update_ui_button_states()
+		apply_terrain_material()
+	if field_changed:
+		setup_noise_generators()
+		generate_terrain()

@@ -19,6 +19,58 @@ class_name TentaclePlacer
 
 # ── DNA ───────────────────────────────────────────────────────────────
 
+## AXIS — WHICH BODY THE ARM HOLDS. Borrowed word for word from
+## [[spring_hopper]], [[kresling_spire]], [[armadillo_eggling]] and [[r_c]] in
+## this same corpus: same question (which configuration is this thing holding),
+## same sentinel-first shape, and they measure alike — a whole-silhouette change
+## in every case. Per that family's convention the value LISTS differ per
+## artifact; only the word and the `cycle` sentinel are shared.
+##
+## `cycle` is the shipped behaviour and the only value that moves. The other
+## four pin the target at one named point and let the chain solve to it, which
+## is the ONLY way this artifact is photographable at all: its silhouette is a
+## function of wall-clock time (see the Measurement note on `static_pose`
+## below), so every sweep frame of a running tentacle differs from every other
+## for reasons that have nothing to do with any axis.
+##
+##   cycle    the shipped ritual — rise, render a cube, descend, place a
+##            pyramid, three times, then drift to `rest_target` and idle.
+##            Wall-clock dependent, exactly as it ships. THE DEFAULT.
+##   sentry   parked straight up at `rest_target`'s height. Where `cycle`
+##            ends, frozen: the arm at attention over work already done.
+##            Target 6.0m up = the chain's exact length, so this takes the
+##            unreachable branch and stands as a rigid vertical mast.
+##   stoop    tip low and thrown forward, the arm bent over the row of
+##            pyramids it placed. The machine still attending to its output.
+##   coil     folded back over its own pedestal — six metres of arm packed
+##            into two. Withdrawn from the room, occupying only itself.
+##   cast     thrown out low and far, near full extension. The work is
+##            finished and the arm has not come back.
+##
+## What this argues: this artifact places three objects and then idles forever,
+## so the idle IS the artifact — a viewer meets the pose, not the ritual. Whether
+## a finished machine stands at attention, hangs over its output, withdraws into
+## itself, or stays flung out at the room is the whole reading, and it was a
+## hard-coded Vector3(0, 6, 0).
+##
+## NOT declared, deliberately: travel_speed, dwell_seconds and pyramid_lifetime
+## are rates and durations, invisible to a still. FABRIK_ITERATIONS looked like
+## the obvious second axis (an under-solved chain visibly fails to reach) and is
+## a lie here: the solver re-solves every physics frame FROM ITS PREVIOUS
+## SOLUTION, so after a one-second settle even one iteration per frame has
+## accumulated sixty, and every value converges to the same pose.
+const POSTURES: PackedStringArray = ["cycle", "sentry", "stoop", "coil", "cast"]
+@export_enum("cycle", "sentry", "stoop", "coil", "cast") var posture: String = "cycle"
+
+## Artifact-local target point per pinned posture. `cycle` is absent on purpose —
+## it has no fixed point, which is what makes it the sentinel.
+const POSTURE_TARGETS := {
+	"sentry": Vector3(0.0, 6.0, 0.0),
+	"stoop": Vector3(0.0, 1.1, 2.7),
+	"coil": Vector3(0.0, 2.1, 0.4),
+	"cast": Vector3(0.0, 2.4, 5.2),
+}
+
 @export_group("Placements")
 ## Lab-local floor positions where pyramids are placed, in order.
 ## Y=0 puts the pyramid's BASE flush with the floor; with the default
@@ -169,14 +221,31 @@ func _ready() -> void:
 		_build_claw()
 	_build_goal_queue()
 	# Start the target at the rest pose so the first visible motion is
-	# the tip rising toward sky_0.
-	_target.position = rest_target
+	# the tip rising toward sky_0. With posture == "cycle" (the default)
+	# _pose_target() IS rest_target, so this line is unchanged for every
+	# shipped placement.
+	_target.position = _pose_target()
 	if debug_log:
 		print("[tentacle] _ready() — %d goals queued. travel_speed=%.2f"
 			% [_goals.size(), travel_speed])
 		for i in range(_goals.size()):
 			var g: Goal = _goals[i]
 			print("  goal[%d] %s @ %s" % [i, g.kind, g.pos])
+
+
+## The point the target is held at when the arm is pinned. Falls through to
+## `rest_target` for the sentinel `cycle` and for any unrecognised value, so a
+## typo can never silently move a shipped placement.
+func _pose_target() -> Vector3:
+	if posture != "cycle" and POSTURE_TARGETS.has(posture):
+		var p: Vector3 = POSTURE_TARGETS[posture]
+		return p
+	return rest_target
+
+
+## True when the chain solves to ONE point instead of walking the goal queue.
+func _is_pinned() -> bool:
+	return static_pose or (posture != "cycle" and POSTURE_TARGETS.has(posture))
 
 
 func _build_goal_queue() -> void:
@@ -199,9 +268,12 @@ func _build_goal_queue() -> void:
 func _physics_process(delta: float) -> void:
 	if _target == null:
 		return
-	# Frozen for measurement: one pose, solved from a fixed target, every run.
-	if static_pose:
-		_target.position = rest_target
+	# Frozen: one pose, solved from a fixed target, every run. Either because
+	# the measurement flag asked for it, or because `posture` names a pinned
+	# body. With posture == "cycle" and static_pose == false — the shipped
+	# combination — this is false and nothing below it changes.
+	if _is_pinned():
+		_target.position = _pose_target()
 		_solve_chain_manual()
 		return
 	# Determine current goal.
@@ -705,6 +777,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		set_meta("config_%s" % str(k), config_data[k])
 	_read_metadata_overrides()
 	_build_goal_queue()
+	# Seat the target immediately when a pinned posture was asked for, so the
+	# arm does not chase into position from wherever _ready() left it. Guarded
+	# twice: _target is null until _ready has built once, and the default
+	# posture ("cycle") is never pinned, so no shipped placement enters here.
+	if _target != null and _is_pinned():
+		_target.position = _pose_target()
 
 
 func _read_metadata_overrides() -> void:
@@ -731,6 +809,12 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_debug_log"):
 		var d: String = str(get_meta("config_debug_log")).to_lower()
 		debug_log = d in ["true", "1", "yes", "on"]
+	if has_meta("config_posture"):
+		var po: String = str(get_meta("config_posture")).to_lower().strip_edges()
+		# Only a value the code actually knows. An unrecognised token leaves
+		# `posture` at "cycle" rather than pinning the arm somewhere arbitrary.
+		if POSTURES.has(po):
+			posture = po
 	if has_meta("config_static_pose"):
 		var sp: String = str(get_meta("config_static_pose")).to_lower()
 		static_pose = sp in ["true", "1", "yes", "on"]

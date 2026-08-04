@@ -3664,6 +3664,31 @@
    }
   },
   "dna_specimen": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "becoming": [
+      "jarred",
+      "cracked",
+      "escaped",
+      "clouded"
+     ],
+     "handedness": [
+      "right",
+      "left"
+     ]
+    },
+    "fixture": {
+     "rotation_speed": 0.0
+    },
+    "fixture_why": "The helix turns at 0.2 rad/s, so a sweep photographs each value at whatever yaw the settle landed on. handedness is chirality and survives any yaw, but pinning to zero makes the four becoming frames differ by the rung alone. Costs about four degrees against the shipped look; no placement sees it.",
+    "default": "becoming=jarred, handedness=right - jarred restores and then touches nothing (the lid, the fluid mesh and the helix transform are put back exactly as the .tscn set them: lid at y 0.515, 0.38 m fluid column centred at 0.24, HelixContainer at y 0.275 scale 0.15), and right is the winding doublehelix.gd has always built (+i). All 5 existing placements pass neither key, so they render byte-identically.",
+    "was": "an export block written 2026-08-02 in the rescue batch and never implemented. `becoming` was declared with four documented rungs, four constants (BC_GRAIN_COUNT, BC_GRAIN_R, BC_GOLDEN) and four cache variables - and _ready called only _setup_materials and _setup_helix, so the axis existed as prose. Declaring it as found would have shipped four identical frames and an INERT verdict about a missing function. This pass writes the four rungs the comment describes and adds the axis the helix itself argues.",
+    "shares_vocabulary_with": "queer_morphology_specimen - `becoming` is the same word with the same four values in the same order. Both are jarred bodies asking how far out of the classifying container they have come, so the pair can be compared rather than merely contrasted.",
+    "handedness_note": "Not a style flip. B-DNA is right-handed, Z-DNA is left-handed, and the same sequence adopts both under different salt and strain - so a specimen jar that can only hold one is making a claim about which DNA counts as DNA. Implemented one node down in doublehelix.gd as a sign on the angle step (additive, default right, every other user of that scene untouched) and pushed through by the specimen's own export.",
+    "still_note": "every rung is meshes and transforms resolved during _ready - a moved lid, a shorter fluid cylinder, a doubled container, 220 grains on a golden-angle spiral with no randf in them. Nothing depends on the rotation or the emission pulse, so one frame is a complete account."
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "A detailed 3D model of a DNA double helix displayed as a museum specimen. The iconic twisted ladder of nucleotide base pairs — adenine-thymine, guanine-cytosine — rendered as a structural biology exhibit. Information encoded in molecular geometry.",

@@ -12,6 +12,18 @@ extends Node3D
 # relationships: depends on MultiMesh segment rendering; contrasts with UnitCircleTrig (buildup vs continuous trail); unlocks the circle-wave connection
 # truth: The unit circle is the Rosetta Stone of trigonometry — rotation on one side, oscillation on the other.
 
+# --- DNA ---------------------------------------------------------------------
+# correspondence: which relation between the angle and the pair of lengths is actually
+#   drawn and walked. "both" is the shipped figure — the vertical sine rod, the
+#   horizontal cosine rod, and a bridge whose planks unroll sin(theta).
+# buildup / start_angle_deg are BENCH knobs, not axes. The bridge lays itself one plank
+#   at a time over ~16 seconds, so a still photographed at t=1s shows 6% of the figure
+#   and the answer depends on the shutter. "complete" and a non-zero start angle let the
+#   camera see the whole claim; both defaults are the shipped behaviour.
+@export_enum("both", "cosine", "tangent", "helix") var correspondence: String = "both"
+@export_enum("progressive", "complete") var buildup: String = "progressive"
+@export var start_angle_deg: float = 0.0
+
 @export var radius: float = 1.0
 @export var rotation_speed: float = 0.8
 @export var samples_per_cycle: int = 100
@@ -47,15 +59,26 @@ var cosine_line: Node3D
 var _sine_cap: Node3D
 var _cos_cap: Node3D
 var _rotating_material: StandardMaterial3D
+var _tangent_line: Node3D = null
 
 # --- Shared mesh ---
 var _shared_box: BoxMesh
 
 func _ready() -> void:
+	angle = deg_to_rad(start_angle_deg)
 	_create_unit_circle_outline()
 	_create_rotator()
 	_create_projection_lines()
+	if correspondence == "tangent":
+		_create_tangent_line()
 	_add_axes()
+	_apply_correspondence()
+	# Left out of the default path deliberately: shipped placements got their first rod
+	# update from the first _process tick and nothing here should change that.
+	if buildup == "complete" or start_angle_deg != 0.0:
+		_update_rotator_and_indicators()
+	if buildup == "complete":
+		_build_all_steps()
 
 func _process(delta: float) -> void:
 	if finished:
@@ -152,6 +175,73 @@ func _update_rotator_and_indicators() -> void:
 	_update_line_node(_sine_cap, Vector3(x, 0, 0), p, 0.01)
 	_update_line_node(_cos_cap,  Vector3(0, y, 0), p, 0.01)
 
+	# The tangent segment: from the point on the circle to where the tangent line meets
+	# the x-axis at sec(theta). Its length IS tan(theta), which is why it has to be held
+	# back from the quarter turn where it runs to infinity.
+	if _tangent_line != null and _tangent_line.visible:
+		var c: float = cos(angle)
+		if absf(c) < 0.12:
+			c = 0.12 if c >= 0.0 else -0.12
+		_update_line_node(_tangent_line, p, Vector3(radius / c, 0, 0), line_thickness)
+
+# ============================================================================
+# Which correspondence is drawn
+# ============================================================================
+# The unit circle's whole content is that one angle names a pair of lengths. Which pair
+# you draw is a claim, not a detail: the shipped figure draws both projections and
+# unrolls the sine; cosine reads the same circle for its other shadow; tangent draws the
+# segment that runs to the x-axis and blows up at a quarter turn; helix stops unrolling
+# into a plane at all and lifts the bridge into the one curve both shadows come from.
+func _create_tangent_line() -> void:
+	if _tangent_line != null:
+		return
+	_tangent_line = _make_line_node(Vector3.ZERO, Vector3.ZERO, Color(1.0, 0.85, 0.45), line_thickness)
+	add_child(_tangent_line)
+
+func _apply_correspondence() -> void:
+	if sine_line == null:
+		return
+	var sine_on: bool = correspondence != "cosine" and correspondence != "tangent"
+	var cos_on: bool = correspondence != "tangent"
+	sine_line.visible = sine_on
+	_sine_cap.visible = sine_on
+	cosine_line.visible = cos_on
+	_cos_cap.visible = cos_on
+	if _tangent_line != null:
+		_tangent_line.visible = correspondence == "tangent"
+
+# The height each plank of the bridge is set to. The `_` branch is the shipped
+# sin(step_angle), so "both" and "helix" lay exactly the wave that shipped.
+func _wave_value(step_angle: float) -> float:
+	match correspondence:
+		"cosine":
+			return cos(step_angle)
+		"tangent":
+			return clampf(tan(step_angle), -2.5, 2.5)
+		_:
+			return sin(step_angle)
+
+func _build_all_steps() -> void:
+	var total: int = samples_per_cycle * num_cycles
+	while built_index < total - 1:
+		built_index += 1
+		var step_angle: float = float(built_index) / float(samples_per_cycle - 1) * TAU
+		_create_bridge_step(step_angle, built_index)
+	finished = true
+
+func _rebuild_bridge() -> void:
+	for child in get_children():
+		if String(child.name).begins_with("Platform_"):
+			child.queue_free()
+	built_index = -1
+	finished = false
+	if correspondence == "tangent":
+		_create_tangent_line()
+	_apply_correspondence()
+	_update_rotator_and_indicators()
+	if buildup == "complete":
+		_build_all_steps()
+
 # ============================================================================
 # Sine / Cosine projection lines
 # ============================================================================
@@ -214,8 +304,12 @@ func _add_axes() -> void:
 func _create_bridge_step(step_angle: float, idx: int) -> void:
 	var t: float = float(idx) / float(max(samples_per_cycle - 1, 1))
 	var x: float = start_x + t * wave_length
-	var y: float = sin(step_angle) * radius
+	var y: float = _wave_value(step_angle) * radius
 	var z: float = 0.0
+	if correspondence == "helix":
+		# Same y as the shipped wave, with the cosine added in z: the two shadows are
+		# one curve, and the bridge stops pretending the plane was ever necessary.
+		z = cos(step_angle) * radius
 
 	var node := Node3D.new()
 	node.name = "Platform_%d" % idx
@@ -224,6 +318,8 @@ func _create_bridge_step(step_angle: float, idx: int) -> void:
 	var mi := MeshInstance3D.new()
 	var bm := BoxMesh.new()
 	bm.size = platform_size
+	if correspondence == "helix":
+		bm.size = Vector3(platform_size.x, platform_size.y, platform_size.x)
 	mi.mesh = bm
 	var m := StandardMaterial3D.new()
 	if color_platforms_from_wheel and use_color_wheel:
@@ -244,7 +340,7 @@ func _create_bridge_step(step_angle: float, idx: int) -> void:
 		var body := StaticBody3D.new()
 		var shape := CollisionShape3D.new()
 		var box := BoxShape3D.new()
-		box.size = platform_size
+		box.size = bm.size
 		shape.shape = box
 		body.add_child(shape)
 		node.add_child(body)
@@ -262,4 +358,25 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Guarded twice over: nothing happens unless the key arrived, the value differs, and
+	# _ready has already built once. A map that says nothing about correspondence never
+	# reaches _rebuild_bridge() at all.
+	var changed: bool = false
+	if config.has("correspondence"):
+		var c: String = str(config["correspondence"])
+		if c != "" and c != correspondence:
+			correspondence = c
+			changed = true
+	if config.has("start_angle_deg"):
+		var a: float = float(config["start_angle_deg"])
+		if a != start_angle_deg:
+			start_angle_deg = a
+			angle = deg_to_rad(a)
+			changed = true
+	if config.has("buildup"):
+		var b: String = str(config["buildup"])
+		if b != "" and b != buildup:
+			buildup = b
+			changed = true
+	if changed and is_node_ready():
+		_rebuild_bridge()

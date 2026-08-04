@@ -11,6 +11,14 @@ extends Node3D
 # relationships: depends on MultiMesh height-field rendering; contrasts with wave_propagation_3d (continuous surface vs tile grid); unlocks topology intuition
 # truth: The sine function is universal — it generates different worlds depending on the coordinate system you wrap it in.
 
+# --- DNA ---------------------------------------------------------------------
+# manifold: which coordinate system the sine is wrapped onto. "cycle" is the shipped
+#   behaviour — the 5-second timer walks all five in turn. Every other value PINS one
+#   manifold and stops the timer, so the placement is one place instead of a carousel.
+# crossing: how the two sine directions meet. "product" is the shipped egg-crate.
+@export_enum("cycle", "plane", "cylinder", "sphere", "torus", "mobius") var manifold: String = "cycle"
+@export_enum("product", "sum", "radial", "single") var crossing: String = "product"
+
 var time = 0.0
 var grid_size = 25
 var instance_count: int
@@ -39,6 +47,38 @@ func _ready() -> void:
 	instance_count = grid_size * grid_size
 	create_multimesh_surface()
 	setup_materials()
+	_create_capture_anchor()
+	_apply_manifold()
+
+# The surface is a MultiMeshInstance3D and the four controls are CSG nodes, so this
+# artifact owns not one MeshInstance3D — a measuring camera reads it as a 1 m box and
+# frames a 10 m field as if it were a mug. This anchor is sized to the surface in its
+# widest topology (spherical, r = 3 + amplitude). layers = 0 means no camera in the game
+# ever draws it; it exists only to be measured.
+func _create_capture_anchor() -> void:
+	var anchor := MeshInstance3D.new()
+	anchor.name = "CaptureAnchor"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(11.0, 11.0, 11.0)
+	anchor.mesh = bm
+	anchor.layers = 0
+	add_child(anchor)
+
+func _apply_manifold() -> void:
+	match manifold:
+		"cylinder":
+			current_topology = TopologyMode.CYLINDRICAL
+		"sphere":
+			current_topology = TopologyMode.SPHERICAL
+		"torus":
+			current_topology = TopologyMode.TOROIDAL
+		"mobius":
+			current_topology = TopologyMode.MOBIUS_STRIP
+		_:
+			# "plane" and "cycle" both start flat — which is the value the shipped
+			# `current_topology` initialiser already held.
+			current_topology = TopologyMode.FLAT_SINE
+	topology_timer = 0.0
 
 func create_multimesh_surface() -> void:
 	# Create the MultiMeshInstance3D as a child of SineSurface
@@ -104,12 +144,13 @@ func setup_materials() -> void:
 
 func _process(delta: float) -> void:
 	time += delta
-	topology_timer += delta
 
-	# Switch topology modes
-	if topology_timer >= topology_interval:
-		topology_timer = 0.0
-		current_topology = (current_topology + 1) % TopologyMode.size()
+	# Switch topology modes — only while the manifold is left un-pinned.
+	if manifold == "cycle":
+		topology_timer += delta
+		if topology_timer >= topology_interval:
+			topology_timer = 0.0
+			current_topology = (current_topology + 1) % TopologyMode.size()
 
 	# Update parameters
 	frequency = 1.0 + sin(time * 0.3) * 0.5
@@ -131,6 +172,22 @@ func update_sine_surface() -> void:
 			update_toroidal_surface()
 		TopologyMode.MOBIUS_STRIP:
 			update_mobius_surface()
+
+# --- How the two sine directions meet -----------------------------------------
+# Every topology below modulated its surface with sin(f*a + phase) * sin(f*b + phase*k).
+# That product is one answer to "what happens where an x-wave crosses a z-wave", not the
+# only one, and the four answers look nothing alike: a field of bumps, a run of diagonal
+# ridges, concentric rings, or a plain corrugation that never crosses anything.
+func _wave(a: float, b: float, k: float) -> float:
+	match crossing:
+		"sum":
+			return (sin(frequency * a + phase) + sin(frequency * b + phase * k)) * 0.5
+		"radial":
+			return sin(frequency * sqrt(a * a + b * b) + phase)
+		"single":
+			return sin(frequency * a + phase)
+		_:
+			return sin(frequency * a + phase) * sin(frequency * b + phase * k)
 
 # --- Height-to-color gradient: blue (low) → cyan (mid) → orange (high) ---
 func height_to_color(height_value: float) -> Color:
@@ -162,7 +219,7 @@ func update_flat_sine_surface() -> void:
 			var x_pos = x_normalized * 5.0
 			var z_pos = z_normalized * 5.0
 
-			var height = amplitude * sin(frequency * x_normalized * PI + phase) * sin(frequency * z_normalized * PI + phase * 0.7)
+			var height = amplitude * _wave(x_normalized * PI, z_normalized * PI, 0.7)
 
 			multi_mesh.set_instance_transform(idx, Transform3D(Basis(), Vector3(x_pos, height, z_pos)))
 			multi_mesh.set_instance_color(idx, height_to_color(height))
@@ -175,7 +232,7 @@ func update_cylindrical_surface() -> void:
 			var u = (x / float(grid_size)) * 2.0 * PI
 			var v = (z - grid_size / 2.0) / (grid_size / 2.0) * 3.0
 
-			var radius = 3.0 + amplitude * sin(frequency * u + phase) * sin(frequency * v * 0.5 + phase)
+			var radius = 3.0 + amplitude * _wave(u, v * 0.5, 1.0)
 
 			var pos = Vector3(
 				radius * cos(u),
@@ -193,7 +250,7 @@ func update_spherical_surface() -> void:
 			var theta = (x / float(grid_size)) * 2.0 * PI
 			var phi = (z / float(grid_size)) * PI
 
-			var radius = 3.0 + amplitude * sin(frequency * theta + phase) * sin(frequency * phi + phase * 0.8)
+			var radius = 3.0 + amplitude * _wave(theta, phi, 0.8)
 
 			var pos = Vector3(
 				radius * sin(phi) * cos(theta),
@@ -212,7 +269,7 @@ func update_toroidal_surface() -> void:
 			var v = (z / float(grid_size)) * 2.0 * PI
 
 			var major_radius = 3.0
-			var minor_radius = 1.0 + amplitude * sin(frequency * u + phase) * sin(frequency * v + phase * 0.6)
+			var minor_radius = 1.0 + amplitude * _wave(u, v, 0.6)
 
 			var pos = Vector3(
 				(major_radius + minor_radius * cos(v)) * cos(u),
@@ -326,4 +383,16 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Guarded: only touch state when a value actually arrived AND actually differs.
+	# There is no build to redo — the surface is recomputed from scratch every frame —
+	# so the manifold switch only has to re-point current_topology and reset the timer.
+	if config.has("manifold"):
+		var m: String = str(config["manifold"])
+		if m != "" and m != manifold:
+			manifold = m
+			if is_node_ready():
+				_apply_manifold()
+	if config.has("crossing"):
+		var c: String = str(config["crossing"])
+		if c != "" and c != crossing:
+			crossing = c

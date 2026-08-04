@@ -6,11 +6,38 @@ class_name TransformComposition
 ## showing that matrix multiplication is non-commutative: R·T ≠ T·R.
 ## VR sliders control rotation angle and translation distance.
 ## Buttons toggle which result is visible. Animated step-through.
+##
+## --- DNA (stage 2, promoted 2026-08-03) ------------------------------------
+## STAGE-2 DNA. One axis: `pair`, WHICH TWO OPERATIONS ARE BEING COMPOSED.
+## The headline was hard-coded to one case — rotate against translate — and one
+## case cannot tell you whether the ≠ is a fact about composition or a fact about
+## these two operators. `rotate_scale` is the value that pays: a rotation about
+## the origin and a UNIFORM scale about the origin genuinely commute, the two
+## houses land on top of each other, and the headline flips to "=" on its own
+## because the code compares the two composed matrices rather than being told.
 
 # --- Configuration ---
 
 @export var rotation_angle: float = 45.0   # degrees around Y
 @export var translate_dist: float = 0.3    # along +X
+
+## AXIS — THE TWO OPERATIONS THE DEMONSTRATOR COMPOSES. Order A is always
+## "first then second"; order B is always the reverse. The four pairs are the
+## same four the transform_composition_workbench walks on its slider, so the two
+## siblings argue the same case on the same evidence.
+##   rotate_translate  rotate about Y, then translate along X. The shipped case:
+##                     the classic split, two houses in two different places.
+##   rotate_scale      rotate about Y, then scale uniformly about the origin.
+##                     THESE COMMUTE. The two finals coincide exactly — but the
+##                     two ghosts do not, so a still still shows two different
+##                     roads to one place.
+##   translate_scale   translate along X, then scale about the origin. Splits:
+##                     scaling after moving multiplies the offset.
+##   rotate_rotate     rotate about Y, then rotate about X. Splits — the
+##                     non-abelian core of SO(3), with no translation in sight.
+@export_enum("rotate_translate", "rotate_scale", "translate_scale", "rotate_rotate") var pair: String = "rotate_translate"
+
+const PAIR_NAMES: PackedStringArray = ["rotate_translate", "rotate_scale", "translate_scale", "rotate_rotate"]
 
 # --- Colors ---
 
@@ -50,6 +77,7 @@ var _shapes_mat: StandardMaterial3D
 var _axes_mesh: MeshInstance3D           # grid axes reference
 var _title_label: Label3D
 var _neq_label: Label3D
+var _subtitle_label: Label3D
 var _matrix_a_label: Label3D
 var _matrix_b_label: Label3D
 var _legend_label: Label3D
@@ -145,28 +173,29 @@ func _redraw() -> void:
 	var im = ImmediateMesh.new()
 	im.surface_begin(Mesh.PRIMITIVE_LINES)
 
-	var rad = deg_to_rad(rotation_angle * _anim_t)
-	var tx = translate_dist * _anim_t
+	var ops: Array = _pair_ops(_anim_t)
+	var xf_first: Transform3D = ops[0]
+	var xf_second: Transform3D = ops[1]
 
 	# --- Original house (white, always visible) ---
 	_draw_house(im, _house_verts, color_original, 1.0)
 
-	# --- Order A: Rotate first, then Translate ---
+	# --- Order A: first operation, then second ---
 	if _show_a:
-		var verts_a = _transform_verts(_house_verts, _make_rotate_y(rad))
-		# Ghost of intermediate step (rotated only)
+		var verts_a = _transform_verts(_house_verts, xf_first)
+		# Ghost of intermediate step (first operation only)
 		_draw_house(im, verts_a, color_order_a, 0.25)
-		# Final: translate the rotated result
-		var verts_a_final = _transform_verts(verts_a, _make_translate(Vector3(tx, 0, 0)))
+		# Final: apply the second operation to that result
+		var verts_a_final = _transform_verts(verts_a, xf_second)
 		_draw_house(im, verts_a_final, color_order_a, 0.9)
 
-	# --- Order B: Translate first, then Rotate ---
+	# --- Order B: second operation, then first ---
 	if _show_b:
-		var verts_b = _transform_verts(_house_verts, _make_translate(Vector3(tx, 0, 0)))
-		# Ghost of intermediate step (translated only)
+		var verts_b = _transform_verts(_house_verts, xf_second)
+		# Ghost of intermediate step (second operation only)
 		_draw_house(im, verts_b, color_order_b, 0.25)
-		# Final: rotate the translated result
-		var verts_b_final = _transform_verts(verts_b, _make_rotate_y(rad))
+		# Final: apply the first operation to that result
+		var verts_b_final = _transform_verts(verts_b, xf_first)
 		_draw_house(im, verts_b_final, color_order_b, 0.9)
 
 	im.surface_end()
@@ -188,6 +217,59 @@ func _draw_house(im: ImmediateMesh, verts: Array, col: Color, alpha: float) -> v
 # Transform helpers (manual 4x4 math for display clarity)
 # ------------------------------------------------------------------
 
+# ------------------------------------------------------------------
+# The pair — which two operations get composed
+# ------------------------------------------------------------------
+#
+# THE KNOB RULE: every operation reads the slider of its own KIND. Rotation
+# about Y is the ROT slider; translation along X is the DIST slider; rotation
+# about X (only ever the second operation) is the DIST slider read as degrees;
+# scale is the DIST slider read as an amount, 1.0 + dist. At the default pair
+# that is exactly what shipped — rotation_angle degrees about Y, then
+# translate_dist along X — so nothing about the six existing placements moves.
+# The cost, stated: on translate_scale both operations hang off DIST and the ROT
+# slider does nothing. That was the better trade — routing scale through ROT
+# instead HALVED the separation between the two orders, and the separation is
+# the entire evidence.
+
+func _pair_ops(t: float) -> Array:
+	var rad: float = deg_to_rad(rotation_angle * t)
+	var tx: float = translate_dist * t
+	match pair:
+		"rotate_scale":
+			return [_make_rotate_y(rad), _make_scale(1.0 + tx)]
+		"translate_scale":
+			return [_make_translate(Vector3(tx, 0, 0)), _make_scale(1.0 + tx)]
+		"rotate_rotate":
+			return [_make_rotate_y(rad), _make_rotate_x(deg_to_rad(translate_dist * 150.0 * t))]
+		_:
+			return [_make_rotate_y(rad), _make_translate(Vector3(tx, 0, 0))]
+
+
+## [sym_first, name_first, sym_second, name_second] for the labels.
+func _pair_words() -> Array:
+	match pair:
+		"rotate_scale":
+			return ["R", "Rotate", "S", "Scale"]
+		"translate_scale":
+			return ["T", "Translate", "S", "Scale"]
+		"rotate_rotate":
+			return ["Ry", "Rotate Y", "Rx", "Rotate X"]
+		_:
+			return ["R", "Rotate", "T", "Translate"]
+
+
+## Do the two operations actually commute? MEASURED, not declared — the two
+## composed matrices are compared at full magnitude. rotate_scale answers yes
+## (uniform scale is a multiple of the identity and both fix the origin); the
+## other three answer no, and so does rotate_scale's own ghost pair.
+func _pair_commutes() -> bool:
+	var ops: Array = _pair_ops(1.0)
+	var first: Transform3D = ops[0]
+	var second: Transform3D = ops[1]
+	return (second * first).is_equal_approx(first * second)
+
+
 func _make_rotate_y(rad: float) -> Transform3D:
 	var c = cos(rad)
 	var s = sin(rad)
@@ -195,6 +277,19 @@ func _make_rotate_y(rad: float) -> Transform3D:
 		Basis(Vector3(c, 0, s), Vector3(0, 1, 0), Vector3(-s, 0, c)),
 		Vector3.ZERO
 	)
+
+
+func _make_rotate_x(rad: float) -> Transform3D:
+	var c: float = cos(rad)
+	var s: float = sin(rad)
+	return Transform3D(
+		Basis(Vector3(1, 0, 0), Vector3(0, c, s), Vector3(0, -s, c)),
+		Vector3.ZERO
+	)
+
+
+func _make_scale(f: float) -> Transform3D:
+	return Transform3D(Basis.IDENTITY.scaled(Vector3(f, f, f)), Vector3.ZERO)
 
 
 func _make_translate(offset: Vector3) -> Transform3D:
@@ -269,6 +364,7 @@ func _build_labels() -> void:
 	subtitle.outline_size = 2
 	subtitle.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	add_child(subtitle)
+	_subtitle_label = subtitle
 
 	# Matrix A label (blue — Rotate then Translate)
 	_matrix_a_label = Label3D.new()
@@ -319,30 +415,75 @@ func _build_labels() -> void:
 	_info_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	add_child(_info_label)
 	_update_info()
+	_update_pair_labels()
+
+
+## The three texts that NAME the pair rather than measure it: the headline
+## relation, the subtitle and the colour legend. At the default pair every one
+## of them formats to the string that was hard-coded here before, character for
+## character \u2014 the \u2260 included, since rotate and translate do not commute.
+func _update_pair_labels() -> void:
+	var w: Array = _pair_words()
+	var s1: String = str(w[0])
+	var s2: String = str(w[2])
+	var commutes: bool = _pair_commutes()
+	if _neq_label:
+		_neq_label.text = "%s\u00b7%s %s %s\u00b7%s" % [
+			s1, s2, ("=" if commutes else "\u2260"), s2, s1
+		]
+		_neq_label.modulate = Color(0.4, 1.0, 0.55) if commutes else Color(1.0, 0.9, 0.3)
+	if _subtitle_label:
+		var sub: String = "Order matters in matrix multiplication"
+		if commutes:
+			sub = "These two commute \u2014 order makes no difference"
+		_subtitle_label.text = sub
+	if _legend_label:
+		_legend_label.text = "White = Original | Blue = %s then %s | Red = %s then %s" % [
+			s1, s2, s2, s1
+		]
 
 
 func _update_matrix_labels() -> void:
-	var rad = deg_to_rad(rotation_angle * _anim_t)
-	var tx = translate_dist * _anim_t
-	var rot = _make_rotate_y(rad)
-	var trans = _make_translate(Vector3(tx, 0, 0))
+	var ops: Array = _pair_ops(_anim_t)
+	var xf_first: Transform3D = ops[0]
+	var xf_second: Transform3D = ops[1]
+	var w: Array = _pair_words()
+	var s1: String = str(w[0])
+	var n1: String = str(w[1])
+	var s2: String = str(w[2])
+	var n2: String = str(w[3])
 
-	# Order A: Rotate first, then Translate => T * R
-	var composed_a = _compose_matrix(rot, trans)
+	# Order A: first, then second => second * first
+	var composed_a = _compose_matrix(xf_first, xf_second)
 	if _matrix_a_label:
-		_matrix_a_label.text = "T\u00b7R (Rotate then Translate):\n" + _format_matrix(composed_a)
+		_matrix_a_label.text = ("%s\u00b7%s (%s then %s):\n" % [s2, s1, n1, n2]) + _format_matrix(composed_a)
 
-	# Order B: Translate first, then Rotate => R * T
-	var composed_b = _compose_matrix(trans, rot)
+	# Order B: second, then first => first * second
+	var composed_b = _compose_matrix(xf_second, xf_first)
 	if _matrix_b_label:
-		_matrix_b_label.text = "R\u00b7T (Translate then Rotate):\n" + _format_matrix(composed_b)
+		_matrix_b_label.text = ("%s\u00b7%s (%s then %s):\n" % [s1, s2, n2, n1]) + _format_matrix(composed_b)
 
 
 func _update_info() -> void:
-	if _info_label:
-		_info_label.text = "Rotation: %.0f\u00b0 (Y-axis)   Translation: %.2f (X-axis)" % [
-			rotation_angle, translate_dist
-		]
+	if not _info_label:
+		return
+	match pair:
+		"rotate_scale":
+			_info_label.text = "Rotation: %.0f\u00b0 (Y-axis)   Scale: %.2f\u00d7" % [
+				rotation_angle, 1.0 + translate_dist
+			]
+		"translate_scale":
+			_info_label.text = "Translation: %.2f (X-axis)   Scale: %.2f\u00d7" % [
+				translate_dist, 1.0 + translate_dist
+			]
+		"rotate_rotate":
+			_info_label.text = "Rotation Y: %.0f\u00b0   Rotation X: %.0f\u00b0" % [
+				rotation_angle, translate_dist * 150.0
+			]
+		_:
+			_info_label.text = "Rotation: %.0f\u00b0 (Y-axis)   Translation: %.2f (X-axis)" % [
+				rotation_angle, translate_dist
+			]
 
 
 # ------------------------------------------------------------------
@@ -474,8 +615,20 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		rotation_angle = float(config_data["rotation_angle"])
 	if config_data.has("translate_dist"):
 		translate_dist = float(config_data["translate_dist"])
+	if config_data.has("pair"):
+		# An unrecognised name is IGNORED rather than assigned, so a typo falls
+		# back to the shipped rotate_translate instead of silently rendering it
+		# as something else.
+		var p: String = str(config_data["pair"]).strip_edges().to_lower()
+		if PAIR_NAMES.has(p):
+			pair = p
+	# Assigning is enough before _ready — it builds the labels and draws once.
+	# Only touch the built ones.
+	if not is_node_ready():
+		return
 	_sync_all_sliders()
 	_anim_t = 1.0
 	_animating = false
 	_update_info()
+	_update_pair_labels()
 	_redraw()

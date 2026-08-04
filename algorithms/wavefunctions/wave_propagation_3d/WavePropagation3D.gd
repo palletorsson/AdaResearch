@@ -21,6 +21,61 @@ extends Node3D
 @export var wave_speed: float = 0.6
 @export var wave_damping: float = 0.06  # Slightly less damping for larger visible area
 
+# ═══════════════════════════════════════════════════════════════════════════
+# DNA
+#
+# Everything above this line is a DIAL — a rate, a size, a tick. Worse, three of
+# them (frequency, amplitude, wave_speed) are overwritten every frame by
+# animate_controls() from the clock, so the .tscn's frequency = 0.9 survives for
+# exactly one frame. A still photograph of this artifact cannot be a photograph
+# of any of them.
+#
+# These two are not dials. They are the two facts about a wave that a single
+# frozen frame CAN carry: where the disturbance was born, and what happens to it
+# as it gets further from there.
+#
+#   falloff   the law the spreading obeys. The registry has always claimed this
+#             artifact is about "the inverse-square law as entropy increase" and
+#             the code has always run exp(-d * wave_damping), which is not the
+#             inverse-square law — it is absorption by a lossy medium. The axis
+#             is the difference between those claims, laid out as four fields:
+#             exponential (shipped, a medium that eats the wave), inverse_square
+#             (energy conserved and thinned over a growing sphere), inverse_linear
+#             (the same accounting in two dimensions, which is what a tile FLOOR
+#             actually is), lossless (nothing thins at all — the wave arrives at
+#             the rim as strong as it left). Read per frame in
+#             animate_3d_wave_propagation; no rebuild, no node.
+#
+#   source    where the wave is born, which is what decides whether it is a wave
+#             at all or a front. center is the shipped single point at the grid
+#             origin; corner puts the same point at one end so the whole floor is
+#             one sweeping quadrant; pair gives two points and the tile heights
+#             become a genuine SUM, which is what this artifact's own truth line
+#             has always claimed and its arithmetic has never done; line is a
+#             straight source and the rings become plane waves — the same law,
+#             the different geometry, and the reason a ripple tank and a beach
+#             look nothing alike.
+#
+# The two are orthogonal in the code and NOT in the photograph: at `line` the
+# distance to the source is a coordinate rather than a radius, so the falloff
+# stripes the floor front-to-back instead of ringing it, and inverse_square at
+# `corner` puts every visible peak in one corner. That is the interesting part.
+@export_enum("exponential", "inverse_square", "inverse_linear", "lossless") var falloff: String = "exponential"
+@export_enum("center", "corner", "pair", "line") var source: String = "center"
+
+## Allow-lists. An unknown word from a map token falls back to the shipped field
+## rather than leaving a placement with a flat floor.
+const FALLOFFS: PackedStringArray = ["exponential", "inverse_square", "inverse_linear", "lossless"]
+const SOURCES: PackedStringArray = ["center", "corner", "pair", "line"]
+
+## Where the disturbance is, in tile-plane coordinates. One entry at the origin is
+## the shipped state and reproduces `distance = pos2.length()` exactly.
+var wave_sources: Array[Vector2] = [Vector2.ZERO]
+## `line` measures distance to a STRAIGHT source, so it is a coordinate, not a radius.
+var line_source: bool = false
+## Extra markers built by pair / line. Empty on the shipped path.
+var source_markers: Array[Node3D] = []
+
 var time: float = 0.0
 var tile_positions: Array[Vector2] = []
 var tile_multimesh_instance: MultiMeshInstance3D
@@ -34,10 +89,13 @@ var base_tile_color := Color(0.15, 0.35, 0.65, 1.0)  # Darker blue base
 var peak_tile_color := Color(1.0, 0.9, 0.3, 1.0)  # Brighter yellow peak
 
 func _ready() -> void:
+	_read_grid_config_meta()
 	create_wave_surface()
 	create_wave_rings() # Enable rings for the soundscape
 	setup_materials()
 	setup_soundscape()
+	_normalize_falloff()
+	_apply_source()
 
 func setup_soundscape() -> void:
 	var WaveSoundscape = load("res://algorithms/wavefunctions/wave_propagation_3d/WaveSoundscapeComponent.gd")
@@ -137,15 +195,25 @@ func animate_3d_wave_propagation() -> void:
 		return
 	var instance_index = 0
 	var tile_half_height = tile_height * 0.5
+	var source_count: float = float(max(wave_sources.size(), 1))
 	for pos2 in tile_positions:
-		var distance = pos2.length()
-		var wave_phase = distance * frequency - wave_speed * time
-		var attenuation = exp(-distance * wave_damping)
-		var displacement = amplitude * sin(wave_phase) * attenuation
+		# SUPERPOSITION, and at the shipped `center` it is a sum of one term: the
+		# loop below evaluates to exactly `amplitude * sin(phase) * exp(-d * damping)`
+		# and `sin(phase)`, the two expressions that were here before.
+		var displacement: float = 0.0
+		var carrier: float = 0.0
+		for s: Vector2 in wave_sources:
+			var distance: float = _wave_distance(pos2, s)
+			var wave_phase: float = distance * frequency - wave_speed * time
+			var attenuation: float = _attenuation(distance)
+			displacement += amplitude * sin(wave_phase) * attenuation
+			carrier += sin(wave_phase)
+		carrier /= source_count
+		var wave_phase_intensity: float = carrier
 		var origin = Vector3(pos2.x, tile_half_height + displacement, pos2.y)
 		var transform = Transform3D(Basis.IDENTITY, origin)
 		tile_multimesh.set_instance_transform(instance_index, transform)
-		var intensity = clamp((sin(wave_phase) + 1.0) * 0.5, 0.0, 1.0)
+		var intensity = clamp((wave_phase_intensity + 1.0) * 0.5, 0.0, 1.0)
 		var color = base_tile_color.lerp(peak_tile_color, intensity)
 		tile_multimesh.set_instance_color(instance_index, color)
 		
@@ -226,5 +294,149 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+# ═══════════════════════════════════════════════════════════════════════════
+# FALLOFF · SOURCE
+# ═══════════════════════════════════════════════════════════════════════════
+
+## Grid config arrives twice and by two routes: GridInteractablesComponent sets
+## config_<key> metadata on the instantiated root and then calls apply_grid_config(),
+## and the capture harness calls apply_grid_config() before the scene is in the tree.
+## Reading the metadata on the way in means the field is built once, correctly.
+## Costs nothing when no token is present.
+## NEAREST CARRIER WINS, and each key stops on its own. `source` is a common enough
+## word that some other artifact's container could plausibly be carrying one; taking
+## the closest ancestor's value means a curation_station or a plinth cannot reach past
+## the thing it is actually holding. An unknown word is caught downstream anyway.
+func _read_grid_config_meta() -> void:
+	var node: Node = self
+	var got_falloff: bool = false
+	var got_source: bool = false
+	while node != null:
+		if not got_falloff and node.has_meta("config_falloff"):
+			falloff = str(node.get_meta("config_falloff"))
+			got_falloff = true
+		if not got_source and node.has_meta("config_source"):
+			source = str(node.get_meta("config_source"))
+			got_source = true
+		if got_falloff and got_source:
+			return
+		node = node.get_parent()
+
+
+## Config from map_data.json tokens: #falloff:inverse_square · #source:pair
+##
+## GUARDED ON CHANGE. A placement carrying any other token arrives here with neither
+## key, and the grid reaches this twice for one placement; rebuilding the markers on
+## both of those would tear down and re-raise geometry for nothing. `falloff` never
+## rebuilds anything at all — it is read per frame.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var was_falloff: String = falloff
+	var was_source: String = source
+
+	if config.has("falloff"):
+		falloff = str(config["falloff"])
+	if config.has("source"):
+		source = str(config["source"])
+
+	if falloff == was_falloff and source == was_source:
+		return
+
+	_normalize_falloff()
+
+	# Before _ready() the floor does not exist yet and _ready() will do this itself.
+	if tile_multimesh == null:
+		return
+
+	if source != was_source:
+		_apply_source()
+
+
+func _normalize_falloff() -> void:
+	var want: String = String(falloff).strip_edges().to_lower()
+	if not FALLOFFS.has(want):
+		want = "exponential"                 # an unknown word keeps the shipped medium
+	falloff = want
+
+
+## How much of the wave survives the trip out to `distance`.
+##
+## The default branch is the shipped expression, unchanged and unreachable by
+## rounding: at falloff = "exponential" this function IS exp(-d * wave_damping).
+func _attenuation(distance: float) -> float:
+	match falloff:
+		"inverse_square":
+			# Energy conserved, spread over a sphere of radius d. The rim goes quiet
+			# fast; every visible peak collapses toward the source.
+			return 1.0 / ((1.0 + distance) * (1.0 + distance))
+		"inverse_linear":
+			# The same accounting one dimension down — a circular front on a FLOOR,
+			# which is what these tiles actually are.
+			return 1.0 / (1.0 + distance)
+		"lossless":
+			# Nothing thins. The far rim moves exactly as hard as the source.
+			return 1.0
+	return exp(-distance * wave_damping)
+
+
+## Distance from a tile to the disturbance. A point source measures a radius; a line
+## source measures a coordinate, which is the whole difference between a ripple and
+## a swell.
+func _wave_distance(pos2: Vector2, s: Vector2) -> float:
+	if line_source:
+		return absf(pos2.y - s.y)
+	return (pos2 - s).length()
+
+
+## Where the wave is born. Rebuilds only the MARKERS — the tile field is unchanged
+## geometry and re-reads the source list every frame.
+func _apply_source() -> void:
+	var want: String = String(source).strip_edges().to_lower()
+	if not SOURCES.has(want):
+		want = "center"                      # an unknown word keeps the shipped field
+	source = want
+
+	for marker in source_markers:
+		if is_instance_valid(marker):
+			marker.queue_free()
+	source_markers.clear()
+
+	var span: float = (tile_size + tile_gutter) * float(grid_size - 1) * 0.5
+	var points: Array[Vector2] = []
+	line_source = false
+	match want:
+		"corner":
+			points.append(Vector2(-span, -span))
+		"pair":
+			points.append(Vector2(-span * 0.45, 0.0))
+			points.append(Vector2(span * 0.45, 0.0))
+		"line":
+			line_source = true
+			points.append(Vector2(0.0, -span))
+		_:
+			points.append(Vector2.ZERO)
+	wave_sources = points
+
+	var primary: Vector2 = wave_sources[0]
+	var source_node: CSGSphere3D = $WaveSource
+	source_node.position = Vector3(primary.x, source_node.position.y, primary.y)
+
+	# The concentric rings are a second drawing of a POINT source. They follow it,
+	# and a straight source has none to follow.
+	var rings: Node3D = $WaveRings
+	rings.position = Vector3(primary.x, rings.position.y, primary.y)
+	rings.visible = not line_source
+
+	if want == "pair":
+		var second := CSGSphere3D.new()
+		second.radius = 0.3
+		second.position = Vector3(wave_sources[1].x, source_node.position.y, wave_sources[1].y)
+		second.material_override = source_node.material_override
+		add_child(second)
+		source_markers.append(second)
+	elif want == "line":
+		var bar := CSGBox3D.new()
+		bar.size = Vector3(span * 2.0 + tile_size, 0.12, 0.24)
+		bar.position = Vector3(0.0, source_node.position.y, primary.y)
+		bar.material_override = source_node.material_override
+		add_child(bar)
+		source_markers.append(bar)

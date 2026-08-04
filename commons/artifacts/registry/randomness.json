@@ -4251,6 +4251,33 @@
    "qfep_connection": "The chapter's thesis as a place: a whole environment driven by configurable noise, walked from inside. Not an exhibit about noise — an exhibit *made of* it, where changing a parameter re-decides the room around you."
   },
   "noise_terrain": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "generator": [
+      "simplex",
+      "perlin",
+      "value",
+      "cellular"
+     ],
+     "legend": [
+      "contours",
+      "relief",
+      "mood"
+     ]
+    },
+    "fixture": {
+     "noise_seed": 20260803
+    },
+    "fixture_why": "MANDATORY for the sweep. All three FastNoiseLite layers were seeded with randi(), so four generator frames would be four different landscapes and any bite number would measure the RNG, not the basis (the generative-artifact trap in CLAUDE.md). noise_seed 0 keeps the shipped fresh-every-run behaviour, so this pin is capture-bench only and no placement sees it.",
+    "default": "generator=simplex, legend=contours - simplex is literally what setup_noise_generators hard-coded (FastNoiseLite.TYPE_SIMPLEX) and contours spends to use_heightmap_shader=true + enable_contours=true, the pair the file already shipped. noise_seed defaults to 0, which is the original randi(). All 5 existing placements pass no keys, so they generate exactly the terrain they generated before.",
+    "was": "an artifact named for its noise whose noise was a constant one line down, and seven float sliders in a 2D ParameterUI panel that no VR placement can touch. The runner refused it as NO TURNABLE KNOBS: the two decisions that carry the argument - which basis fills the field, and whether the surface reads as measurement or as mood - were unreachable from any map token.",
+    "shares_vocabulary_with": "perlin_noise, simplex_noise - `generator` is the same axis with the same four values in the same order and the same default. The noise sequence is built on comparing bases; spelling the comparison three ways would leave nothing to compare. cellular, not worley, for the same reason.",
+    "vocabulary_declined": "readout (relief|plate|column), which perlin_noise, simplex_noise, perlin_noise_terrain and random_edge_profile all carry. It does not fit here and taking the word would break it for them. There readout is a geometric question about a tabletop field; this artifact is a 100 m walkable landscape with a ConcavePolygonShape3D under it, so plate and column would change what the player STANDS ON rather than what the field claims to be. `legend` asks the question this artifact's own @identity raises instead - it says the pink-purple-cyan palette encodes elevation as emotion rather than information, and both encodings were already in the file with only a 2D button to choose between them.",
+    "still_note": "both axes are resolved during _ready and never move again: generator picks the noise type before the 40,401-vertex mesh is built, legend picks between the contour shader and the vertex-colour material at material time. The only animation on this artifact is an emission breathe on the standard material, so a single frame is a complete account of both.",
+    "framing_note": "the subject is 100 x 100 m and mostly flat. If the sweep reports a small subject share or a modest bite, that is a wide low landform against a diagonal-fitted frame, not an inert axis - compare the silhouettes, and expect cellular to be the loudest value by far."
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Interactive procedural terrain generation using various noise algorithms and height mapping",

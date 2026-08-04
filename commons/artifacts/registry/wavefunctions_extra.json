@@ -437,6 +437,29 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.319945Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "manifold": [
+      "cycle",
+      "plane",
+      "cylinder",
+      "sphere",
+      "torus",
+      "mobius"
+     ],
+     "crossing": [
+      "product",
+      "sum",
+      "radial",
+      "single"
+     ]
+    },
+    "default": "manifold=cycle, crossing=product - a deliberate no-op on both. cycle is the shipped 5-second carousel through all five topologies and leaves current_topology at FLAT_SINE where its initialiser already put it; product is the sin(f*a+phase)*sin(f*b+phase*k) that every topology function computed inline before _wave() existed. All 5 existing placements undulate exactly as they did.",
+    "was": "one carousel. The five coordinate systems were a timer, not a choice, so no placement was ever a cylinder — every placement was all five for five seconds each. The product of two sines was the only way the two directions were allowed to meet.",
+    "note": "Two things a capture has to get right here. The surface is a MultiMeshInstance3D and the four controls are CSG nodes, so nothing in this artifact was a MeshInstance3D and it measured 16.9 x 3.58 x 1.0 — the pillars, with the 10 m field reading as 1 m of depth. _create_capture_anchor() adds an 11 m box at layers = 0 so the measurement is of the space rather than its dials; no camera in the game draws it. And the instances all sit at the origin until the first _process tick positions them, so a shot taken before the settle photographs a dot. Sweep at the default manifold=cycle: the topology timer has not fired at 5 s, so the frame is the plane, which is where `crossing` is legible."
    }
   },
   "sine_wall": {

@@ -59,6 +59,15 @@ const GOLDEN_RATIO := 1.618033988749
 			vertical_offset = value
 			_queue_rebuild()
 
+## Which way the ladder turns. "right" is what this script has always built (the angle
+## advances with +i), and is the B-DNA of every existing placement; "left" advances with
+## -i, the mirror image, which is Z-DNA. Nothing else in the geometry changes.
+@export_enum("right", "left") var handedness: String = "right":
+	set(value):
+		if handedness != value:
+			handedness = value
+			_queue_rebuild()
+
 @export_group("Visuals")
 @export var strand_color_a: Color = Color(0.2, 0.85, 1.0, 1.0):
 	set(value):
@@ -164,7 +173,8 @@ func build_double_helix() -> void:
 	var total_steps: int = max(2, helix_turns * valid_points_per_turn)
 	var vertical_step: float = helix_height / float(total_steps - 1) if total_steps > 1 else 0.0
 	var start_height: float = -helix_height * 0.5 + vertical_offset
-	var angle_step: float = TWO_PI / float(valid_points_per_turn)
+	var hand_sign: float = -1.0 if handedness == "left" else 1.0
+	var angle_step: float = hand_sign * TWO_PI / float(valid_points_per_turn)
 
 	var positions_a: PackedVector3Array = PackedVector3Array()
 	var positions_b: PackedVector3Array = PackedVector3Array()
