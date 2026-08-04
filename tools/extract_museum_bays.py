@@ -168,14 +168,56 @@ def sig(block: list) -> str:
     return "/".join("|".join(str(c) for c in row) for row in block)
 
 
+def slot_types(block: list) -> list:
+    """Type every slot in a bay from the geometry alone (unification step 3).
+
+    A slot has been a RANK and nothing else — 1s/2s/3s, floor/podium/hero —
+    which is why nothing downstream can ask what a place is FOR. The role is
+    readable off the tile without inventing anything: a podium against a wall is
+    a vitrine and a podium in the open is a station; the same distinction on the
+    floor separates a wall hang from something you meet underfoot. Clearance is
+    the free ground within two cells, which is what decides whether a big
+    artifact fits — the size oracle's question, asked of the room instead of the
+    object.
+    """
+    h, w = len(block), len(block[0]) if block else 0
+    out = []
+    for y in range(h):
+        for x in range(w):
+            c = str(block[y][x])
+            if c not in SLOTS:
+                continue
+            walled = any(0 <= y + dy < h and 0 <= x + dx < w
+                         and str(block[y + dy][x + dx]) == "4"
+                         for dy, dx in ((-1, 0), (1, 0), (0, -1), (0, 1)))
+            if c == "3s":
+                role = "hero"
+            elif c == "2s":
+                role = "vitrine" if walled else "station"
+            else:
+                role = "wall_hang" if walled else "underfoot"
+            clear = sum(1 for dy in range(-2, 3) for dx in range(-2, 3)
+                        if 0 <= y + dy < h and 0 <= x + dx < w
+                        and str(block[y + dy][x + dx]) in ("1", "1s", "2", "2s"))
+            out.append({"x": x, "y": y, "cell": c, "role": role,
+                        "clearance": clear,
+                        "size_class": "open" if clear >= 17 else
+                                      ("medium" if clear >= 9 else "tight")})
+    return out
+
+
 def describe(block: list) -> dict:
     flat = [str(c) for row in block for c in row]
+    st = slot_types(block)
     return {
         "h": len(block), "w": len(block[0]) if block else 0,
         "slots": sum(1 for c in flat if c in SLOTS),
         "hero": any(c == "3s" for c in flat),
         "walls": sum(1 for c in flat if c == "4"),
         "void": sum(1 for c in flat if c in ("", " ")),
+        "slot_types": st,
+        "roles": {r: sum(1 for s in st if s["role"] == r)
+                  for r in sorted({s["role"] for s in st})},
     }
 
 

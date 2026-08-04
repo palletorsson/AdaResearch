@@ -38,7 +38,9 @@
    "slots": 0,
    "hero": false,
    "walls": 12,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "altes-rotunda-hub#b1": {
    "owner": "altes-rotunda-hub",
@@ -79,7 +81,9 @@
    "slots": 0,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "altes-rotunda-hub#b2": {
    "owner": "altes-rotunda-hub",
@@ -349,7 +353,119 @@
    "slots": 13,
    "hero": true,
    "walls": 68,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 13,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 5,
+     "y": 4,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 21,
+     "size_class": "open"
+    },
+    {
+     "x": 9,
+     "y": 4,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 21,
+     "size_class": "open"
+    },
+    {
+     "x": 1,
+     "y": 6,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 13,
+     "y": 6,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 5,
+     "y": 8,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 17,
+     "size_class": "open"
+    },
+    {
+     "x": 9,
+     "y": 8,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 17,
+     "size_class": "open"
+    },
+    {
+     "x": 7,
+     "y": 10,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 24,
+     "size_class": "open"
+    },
+    {
+     "x": 5,
+     "y": 12,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 17,
+     "size_class": "open"
+    },
+    {
+     "x": 9,
+     "y": 12,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 17,
+     "size_class": "open"
+    },
+    {
+     "x": 1,
+     "y": 14,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 13,
+     "y": 14,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "underfoot": 2,
+    "vitrine": 6,
+    "wall_hang": 4
+   }
   },
   "altes-rotunda-hub#b3": {
    "owner": "altes-rotunda-hub",
@@ -432,7 +548,28 @@
    "slots": 2,
    "hero": false,
    "walls": 18,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 3,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 13,
+     "y": 3,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "vitrine": 2
+   }
   },
   "bilbao-atrium-radial#b0": {
    "owner": "bilbao-atrium-radial",
@@ -532,7 +669,28 @@
    "slots": 2,
    "hero": false,
    "walls": 30,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 2,
+     "y": 2,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 12,
+     "y": 2,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 12,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 2
+   }
   },
   "bilbao-atrium-radial#b1": {
    "owner": "bilbao-atrium-radial",
@@ -615,7 +773,28 @@
    "slots": 2,
    "hero": false,
    "walls": 14,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 13,
+     "y": 2,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "wall_hang": 2
+   }
   },
   "bilbao-atrium-radial#b2": {
    "owner": "bilbao-atrium-radial",
@@ -732,7 +911,37 @@
    "slots": 3,
    "hero": false,
    "walls": 34,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 2,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 7,
+     "y": 3,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 25,
+     "size_class": "open"
+    },
+    {
+     "x": 13,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "underfoot": 1,
+    "wall_hang": 2
+   }
   },
   "bilbao-atrium-radial#b3": {
    "owner": "bilbao-atrium-radial",
@@ -832,7 +1041,54 @@
    "slots": 5,
    "hero": true,
    "walls": 21,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 5,
+     "y": 2,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 3,
+     "y": 3,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 7,
+     "y": 3,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 19,
+     "size_class": "open"
+    },
+    {
+     "x": 11,
+     "y": 3,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 9,
+     "y": 4,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 14,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "station": 2,
+    "underfoot": 2
+   }
   },
   "bilbao-atrium-radial#b4": {
    "owner": "bilbao-atrium-radial",
@@ -883,7 +1139,9 @@
    "slots": 0,
    "hero": false,
    "walls": 14,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "bilbao-atrium-radial#b5": {
    "owner": "bilbao-atrium-radial",
@@ -932,7 +1190,28 @@
    "slots": 2,
    "hero": false,
    "walls": 4,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 1,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 1,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 10,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 2
+   }
   },
   "castelvecchio-endstop-pinch#b0": {
    "owner": "castelvecchio-endstop-pinch",
@@ -1016,7 +1295,28 @@
    "slots": 2,
    "hero": false,
    "walls": 18,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 12,
+     "y": 2,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 2,
+     "y": 3,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 12,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "underfoot": 2
+   }
   },
   "castelvecchio-endstop-pinch#b1": {
    "owner": "castelvecchio-endstop-pinch",
@@ -1083,7 +1383,9 @@
    "slots": 0,
    "hero": false,
    "walls": 16,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "castelvecchio-endstop-pinch#b2": {
    "owner": "castelvecchio-endstop-pinch",
@@ -1133,7 +1435,29 @@
    "slots": 2,
    "hero": false,
    "walls": 4,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 1,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 10,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1
+   }
   },
   "castelvecchio-endstop-pinch#b3": {
    "owner": "castelvecchio-endstop-pinch",
@@ -1183,7 +1507,29 @@
    "slots": 2,
    "hero": false,
    "walls": 4,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 1,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 10,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1
+   }
   },
   "castelvecchio-endstop-pinch#b4": {
    "owner": "castelvecchio-endstop-pinch",
@@ -1250,7 +1596,29 @@
    "slots": 2,
    "hero": false,
    "walls": 6,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 2,
+     "y": 1,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 12,
+     "y": 2,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 12,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1
+   }
   },
   "castelvecchio-endstop-pinch#b5": {
    "owner": "castelvecchio-endstop-pinch",
@@ -1350,7 +1718,20 @@
    "slots": 1,
    "hero": true,
    "walls": 26,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 7,
+     "y": 2,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 24,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "hero": 1
+   }
   },
   "castelvecchio-endstop-pinch#b6": {
    "owner": "castelvecchio-endstop-pinch",
@@ -1384,7 +1765,9 @@
    "slots": 0,
    "hero": false,
    "walls": 12,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "castelvecchio-endstopped-enfilade#b0": {
    "owner": "castelvecchio-endstopped-enfilade",
@@ -1467,7 +1850,20 @@
    "slots": 1,
    "hero": true,
    "walls": 8,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 7,
+     "y": 1,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 19,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "hero": 1
+   }
   },
   "chichu-buried-cells#b0": {
    "owner": "chichu-buried-cells",
@@ -1500,7 +1896,9 @@
    "slots": 0,
    "hero": false,
    "walls": 13,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "chichu-buried-cells#b1": {
    "owner": "chichu-buried-cells",
@@ -1532,7 +1930,9 @@
    "slots": 0,
    "hero": false,
    "walls": 14,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "chichu-buried-cells#b2": {
    "owner": "chichu-buried-cells",
@@ -1598,7 +1998,9 @@
    "slots": 0,
    "hero": false,
    "walls": 24,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "chichu-buried-cells#b3": {
    "owner": "chichu-buried-cells",
@@ -1664,7 +2066,28 @@
    "slots": 2,
    "hero": false,
    "walls": 26,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 8,
+     "size_class": "tight"
+    },
+    {
+     "x": 11,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "underfoot": 2
+   }
   },
   "chichu-buried-cells#b4": {
    "owner": "chichu-buried-cells",
@@ -1713,7 +2136,29 @@
    "slots": 2,
    "hero": false,
    "walls": 12,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 8,
+     "size_class": "tight"
+    },
+    {
+     "x": 11,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1
+   }
   },
   "chichu-buried-cells#b5": {
    "owner": "chichu-buried-cells",
@@ -1745,7 +2190,9 @@
    "slots": 0,
    "hero": false,
    "walls": 10,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "chichu-buried-cells#b6": {
    "owner": "chichu-buried-cells",
@@ -1777,7 +2224,20 @@
    "slots": 1,
    "hero": true,
    "walls": 10,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 7,
+     "y": 0,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 4,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "hero": 1
+   }
   },
   "chichu-buried-cells#b7": {
    "owner": "chichu-buried-cells",
@@ -1809,7 +2269,9 @@
    "slots": 0,
    "hero": false,
    "walls": 13,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "dia-beacon-field#b0": {
    "owner": "dia-beacon-field",
@@ -1858,7 +2320,38 @@
    "slots": 3,
    "hero": false,
    "walls": 7,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 5,
+     "size_class": "tight"
+    },
+    {
+     "x": 2,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 7,
+     "size_class": "tight"
+    },
+    {
+     "x": 9,
+     "y": 1,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1,
+    "wall_hang": 1
+   }
   },
   "dia-beacon-field#b1": {
    "owner": "dia-beacon-field",
@@ -1958,7 +2451,45 @@
    "slots": 4,
    "hero": false,
    "walls": 15,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 9,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 13,
+     "size_class": "medium"
+    },
+    {
+     "x": 13,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 8,
+     "size_class": "tight"
+    },
+    {
+     "x": 9,
+     "y": 3,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 18,
+     "size_class": "open"
+    },
+    {
+     "x": 13,
+     "y": 4,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "underfoot": 2,
+    "wall_hang": 2
+   }
   },
   "dia-beacon-field#b2": {
    "owner": "dia-beacon-field",
@@ -2007,7 +2538,20 @@
    "slots": 1,
    "hero": false,
    "walls": 4,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 6,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "wall_hang": 1
+   }
   },
   "dia-beacon-field#b3": {
    "owner": "dia-beacon-field",
@@ -2056,7 +2600,29 @@
    "slots": 2,
    "hero": true,
    "walls": 9,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 5,
+     "y": 0,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 7,
+     "size_class": "tight"
+    },
+    {
+     "x": 13,
+     "y": 1,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 5,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "vitrine": 1
+   }
   },
   "dia-beacon-field#b4": {
    "owner": "dia-beacon-field",
@@ -2207,7 +2773,62 @@
    "slots": 6,
    "hero": false,
    "walls": 24,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 9,
+     "y": 1,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 18,
+     "size_class": "open"
+    },
+    {
+     "x": 2,
+     "y": 3,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 19,
+     "size_class": "open"
+    },
+    {
+     "x": 9,
+     "y": 5,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 23,
+     "size_class": "open"
+    },
+    {
+     "x": 10,
+     "y": 5,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 24,
+     "size_class": "open"
+    },
+    {
+     "x": 13,
+     "y": 5,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 14,
+     "size_class": "medium"
+    },
+    {
+     "x": 13,
+     "y": 7,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 2,
+    "underfoot": 2,
+    "wall_hang": 2
+   }
   },
   "grande-galerie-axial#b0": {
    "owner": "grande-galerie-axial",
@@ -2238,7 +2859,9 @@
    "slots": 0,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "grande-galerie-axial#b1": {
    "owner": "grande-galerie-axial",
@@ -2313,7 +2936,28 @@
    "slots": 2,
    "hero": false,
    "walls": 10,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 8,
+     "size_class": "tight"
+    },
+    {
+     "x": 11,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "wall_hang": 2
+   }
   },
   "grande-galerie-axial#b2": {
    "owner": "grande-galerie-axial",
@@ -2343,7 +2987,37 @@
    "slots": 3,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 8,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 5,
+     "size_class": "tight"
+    },
+    {
+     "x": 11,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "wall_hang": 2
+   }
   },
   "grande-galerie-axial#b3": {
    "owner": "grande-galerie-axial",
@@ -2403,7 +3077,9 @@
    "slots": 0,
    "hero": false,
    "walls": 8,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "grande-galerie-axial#b4": {
    "owner": "grande-galerie-axial",
@@ -2433,7 +3109,28 @@
    "slots": 2,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 11,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "wall_hang": 2
+   }
   },
   "grande-galerie-axial#b5": {
    "owner": "grande-galerie-axial",
@@ -2463,7 +3160,37 @@
    "slots": 3,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 4,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 5,
+     "size_class": "tight"
+    },
+    {
+     "x": 11,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "wall_hang": 2
+   }
   },
   "grande-galerie-axial#b6": {
    "owner": "grande-galerie-axial",
@@ -2538,7 +3265,28 @@
    "slots": 2,
    "hero": false,
    "walls": 10,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 8,
+     "size_class": "tight"
+    },
+    {
+     "x": 11,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "wall_hang": 2
+   }
   },
   "grande-galerie-axial#b7": {
    "owner": "grande-galerie-axial",
@@ -2628,7 +3376,20 @@
    "slots": 1,
    "hero": true,
    "walls": 15,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 7,
+     "y": 2,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 21,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "hero": 1
+   }
   },
   "guggenheim-serpentine#b0": {
    "owner": "guggenheim-serpentine",
@@ -2779,7 +3540,61 @@
    "slots": 6,
    "hero": false,
    "walls": 12,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 3,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 18,
+     "size_class": "open"
+    },
+    {
+     "x": 3,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 22,
+     "size_class": "open"
+    },
+    {
+     "x": 10,
+     "y": 3,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 23,
+     "size_class": "open"
+    },
+    {
+     "x": 4,
+     "y": 7,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 13,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 7,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 13,
+     "y": 7,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "vitrine": 4,
+    "wall_hang": 2
+   }
   },
   "guggenheim-serpentine#b1": {
    "owner": "guggenheim-serpentine",
@@ -2814,7 +3629,9 @@
    "slots": 0,
    "hero": false,
    "walls": 0,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "guggenheim-serpentine#b2": {
    "owner": "guggenheim-serpentine",
@@ -2897,7 +3714,20 @@
    "slots": 1,
    "hero": true,
    "walls": 0,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 7,
+     "y": 1,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 19,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "hero": 1
+   }
   },
   "kanazawa-matrix-vista#b0": {
    "owner": "kanazawa-matrix-vista",
@@ -3032,7 +3862,37 @@
    "slots": 3,
    "hero": false,
    "walls": 28,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 4,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 12,
+     "y": 4,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 14,
+     "y": 4,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "vitrine": 1,
+    "wall_hang": 2
+   }
   },
   "kanazawa-matrix-vista#b1": {
    "owner": "kanazawa-matrix-vista",
@@ -3285,7 +4145,71 @@
    "slots": 7,
    "hero": true,
    "walls": 54,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 11,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 2,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 4,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 8,
+     "y": 5,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 18,
+     "size_class": "open"
+    },
+    {
+     "x": 4,
+     "y": 9,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 14,
+     "y": 9,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 8,
+     "y": 12,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "station": 1,
+    "underfoot": 1,
+    "wall_hang": 4
+   }
   },
   "kanazawa-room-matrix#b0": {
    "owner": "kanazawa-room-matrix",
@@ -3385,7 +4309,37 @@
    "slots": 3,
    "hero": false,
    "walls": 26,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 11,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 2,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 4,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 10,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "wall_hang": 2
+   }
   },
   "kanazawa-room-matrix#b1": {
    "owner": "kanazawa-room-matrix",
@@ -3519,7 +4473,38 @@
    "slots": 3,
    "hero": true,
    "walls": 28,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 2,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 14,
+     "y": 2,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 8,
+     "y": 5,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "underfoot": 1,
+    "wall_hang": 1
+   }
   },
   "libeskind-void-axis#b0": {
    "owner": "libeskind-void-axis",
@@ -3602,7 +4587,28 @@
    "slots": 2,
    "hero": false,
    "walls": 19,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 2,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 11,
+     "size_class": "medium"
+    },
+    {
+     "x": 13,
+     "y": 2,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "wall_hang": 2
+   }
   },
   "libeskind-void-axis#b1": {
    "owner": "libeskind-void-axis",
@@ -3634,7 +4640,9 @@
    "slots": 0,
    "hero": false,
    "walls": 5,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "libeskind-void-axis#b2": {
    "owner": "libeskind-void-axis",
@@ -3666,7 +4674,28 @@
    "slots": 2,
    "hero": false,
    "walls": 5,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 9,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "vitrine": 2
+   }
   },
   "libeskind-void-axis#b3": {
    "owner": "libeskind-void-axis",
@@ -3732,7 +4761,28 @@
    "slots": 2,
    "hero": false,
    "walls": 16,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 2,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 6,
+     "size_class": "tight"
+    },
+    {
+     "x": 13,
+     "y": 2,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "wall_hang": 2
+   }
   },
   "libeskind-void-axis#b4": {
    "owner": "libeskind-void-axis",
@@ -3781,7 +4831,29 @@
    "slots": 2,
    "hero": true,
    "walls": 10,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 9,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 6,
+     "size_class": "tight"
+    },
+    {
+     "x": 5,
+     "y": 1,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 5,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "vitrine": 1
+   }
   },
   "libeskind-void-axis#b5": {
    "owner": "libeskind-void-axis",
@@ -3864,7 +4936,20 @@
    "slots": 1,
    "hero": false,
    "walls": 18,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 2,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "wall_hang": 1
+   }
   },
   "libeskind-void-axis#b6": {
    "owner": "libeskind-void-axis",
@@ -3896,7 +4981,28 @@
    "slots": 2,
    "hero": false,
    "walls": 5,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 5,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 9,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "vitrine": 2
+   }
   },
   "libeskind-void-axis#b7": {
    "owner": "libeskind-void-axis",
@@ -3962,7 +5068,20 @@
    "slots": 1,
    "hero": false,
    "walls": 17,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 13,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "wall_hang": 1
+   }
   },
   "louisiana-pavilion-chain#b0": {
    "owner": "louisiana-pavilion-chain",
@@ -4079,7 +5198,37 @@
    "slots": 3,
    "hero": false,
    "walls": 23,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 2,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 11,
+     "y": 2,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 7,
+     "y": 4,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 20,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "station": 2,
+    "underfoot": 1
+   }
   },
   "louisiana-pavilion-chain#b1": {
    "owner": "louisiana-pavilion-chain",
@@ -4111,7 +5260,9 @@
    "slots": 0,
    "hero": false,
    "walls": 14,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "louisiana-pavilion-chain#b2": {
    "owner": "louisiana-pavilion-chain",
@@ -4245,7 +5396,45 @@
    "slots": 4,
    "hero": false,
    "walls": 31,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 2,
+     "y": 3,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 16,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 3,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 21,
+     "size_class": "open"
+    },
+    {
+     "x": 4,
+     "y": 5,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 9,
+     "y": 5,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 20,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "station": 2,
+    "underfoot": 2
+   }
   },
   "louisiana-pavilion-chain#b3": {
    "owner": "louisiana-pavilion-chain",
@@ -4277,7 +5466,9 @@
    "slots": 0,
    "hero": false,
    "walls": 14,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "louisiana-pavilion-chain#b4": {
    "owner": "louisiana-pavilion-chain",
@@ -4411,7 +5602,45 @@
    "slots": 4,
    "hero": false,
    "walls": 31,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 3,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 21,
+     "size_class": "open"
+    },
+    {
+     "x": 11,
+     "y": 3,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 6,
+     "y": 5,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 8,
+     "y": 5,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 20,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "station": 2,
+    "underfoot": 2
+   }
   },
   "louisiana-pavilion-chain#b5": {
    "owner": "louisiana-pavilion-chain",
@@ -4511,7 +5740,37 @@
    "slots": 3,
    "hero": true,
    "walls": 28,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 2,
+     "y": 3,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 3,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 7,
+     "y": 4,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 14,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "underfoot": 2
+   }
   },
   "mezquita-hypostyle#b0": {
    "owner": "mezquita-hypostyle",
@@ -4545,7 +5804,9 @@
    "slots": 0,
    "hero": false,
    "walls": 14,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "mezquita-hypostyle#b1": {
    "owner": "mezquita-hypostyle",
@@ -4617,7 +5878,9 @@
    "slots": 0,
    "hero": false,
    "walls": 13,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "mezquita-hypostyle#b2": {
    "owner": "mezquita-hypostyle",
@@ -4651,7 +5914,29 @@
    "slots": 2,
    "hero": false,
    "walls": 7,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 12,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1
+   }
   },
   "mezquita-hypostyle#b3": {
    "owner": "mezquita-hypostyle",
@@ -4685,7 +5970,29 @@
    "slots": 2,
    "hero": false,
    "walls": 7,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 2,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 10,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1
+   }
   },
   "mezquita-hypostyle#b4": {
    "owner": "mezquita-hypostyle",
@@ -4719,7 +6026,29 @@
    "slots": 2,
    "hero": false,
    "walls": 7,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 6,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 14,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1
+   }
   },
   "mezquita-hypostyle#b5": {
    "owner": "mezquita-hypostyle",
@@ -4753,7 +6082,29 @@
    "slots": 2,
    "hero": false,
    "walls": 7,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 10,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1
+   }
   },
   "mezquita-hypostyle#b6": {
    "owner": "mezquita-hypostyle",
@@ -4863,7 +6214,54 @@
    "slots": 5,
    "hero": true,
    "walls": 26,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 2,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 14,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 12,
+     "y": 2,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 18,
+     "size_class": "open"
+    },
+    {
+     "x": 6,
+     "y": 4,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 4,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 10,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "station": 1,
+    "underfoot": 3
+   }
   },
   "mezquita-hypostyle#b7": {
    "owner": "mezquita-hypostyle",
@@ -4897,7 +6295,9 @@
    "slots": 0,
    "hero": false,
    "walls": 15,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "neue-nationalgalerie-free-plan#b0": {
    "owner": "neue-nationalgalerie-free-plan",
@@ -5014,7 +6414,37 @@
    "slots": 3,
    "hero": false,
    "walls": 8,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 5,
+     "y": 2,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 22,
+     "size_class": "open"
+    },
+    {
+     "x": 3,
+     "y": 5,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 5,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "wall_hang": 2
+   }
   },
   "neue-nationalgalerie-free-plan#b1": {
    "owner": "neue-nationalgalerie-free-plan",
@@ -5080,7 +6510,9 @@
    "slots": 0,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "neue-nationalgalerie-free-plan#b2": {
    "owner": "neue-nationalgalerie-free-plan",
@@ -5180,7 +6612,37 @@
    "slots": 3,
    "hero": true,
    "walls": 6,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 17,
+     "size_class": "open"
+    },
+    {
+     "x": 7,
+     "y": 2,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 24,
+     "size_class": "open"
+    },
+    {
+     "x": 10,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 17,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "wall_hang": 2
+   }
   },
   "neue-nationalgalerie-free-plan#b3": {
    "owner": "neue-nationalgalerie-free-plan",
@@ -5297,7 +6759,37 @@
    "slots": 3,
    "hero": false,
    "walls": 8,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 9,
+     "y": 3,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 22,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "wall_hang": 2
+   }
   },
   "pompidou-plateau-libre#b0": {
    "owner": "pompidou-plateau-libre",
@@ -5328,7 +6820,9 @@
    "slots": 0,
    "hero": false,
    "walls": 10,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "pompidou-plateau-libre#b1": {
    "owner": "pompidou-plateau-libre",
@@ -5358,7 +6852,9 @@
    "slots": 0,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "pompidou-plateau-libre#b2": {
    "owner": "pompidou-plateau-libre",
@@ -5388,7 +6884,28 @@
    "slots": 2,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 5,
+     "size_class": "tight"
+    },
+    {
+     "x": 9,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 5,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "station": 2
+   }
   },
   "pompidou-plateau-libre#b3": {
    "owner": "pompidou-plateau-libre",
@@ -5433,7 +6950,28 @@
    "slots": 2,
    "hero": false,
    "walls": 4,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 8,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 10,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "underfoot": 2
+   }
   },
   "pompidou-plateau-libre#b4": {
    "owner": "pompidou-plateau-libre",
@@ -5478,7 +7016,37 @@
    "slots": 3,
    "hero": true,
    "walls": 4,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 6,
+     "y": 0,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 9,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 10,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "underfoot": 2
+   }
   },
   "pompidou-plateau-libre#b5": {
    "owner": "pompidou-plateau-libre",
@@ -5508,7 +7076,28 @@
    "slots": 2,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 4,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 5,
+     "size_class": "tight"
+    },
+    {
+     "x": 8,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 5,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "underfoot": 2
+   }
   },
   "pompidou-plateau-libre#b6": {
    "owner": "pompidou-plateau-libre",
@@ -5553,7 +7142,28 @@
    "slots": 2,
    "hero": false,
    "walls": 4,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 3,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 9,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 10,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 2
+   }
   },
   "sainsbury-false-perspective-enfilade#b0": {
    "owner": "sainsbury-false-perspective-enfilade",
@@ -5585,7 +7195,28 @@
    "slots": 2,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 3,
+     "size_class": "tight"
+    },
+    {
+     "x": 13,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 3,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "wall_hang": 2
+   }
   },
   "sainsbury-false-perspective-enfilade#b1": {
    "owner": "sainsbury-false-perspective-enfilade",
@@ -5617,7 +7248,9 @@
    "slots": 0,
    "hero": false,
    "walls": 9,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "sainsbury-false-perspective-enfilade#b2": {
    "owner": "sainsbury-false-perspective-enfilade",
@@ -5666,7 +7299,20 @@
    "slots": 1,
    "hero": false,
    "walls": 7,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 13,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 6,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "wall_hang": 1
+   }
   },
   "sainsbury-false-perspective-enfilade#b3": {
    "owner": "sainsbury-false-perspective-enfilade",
@@ -5851,7 +7497,53 @@
    "slots": 5,
    "hero": false,
    "walls": 45,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 2,
+     "y": 0,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 5,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 16,
+     "size_class": "medium"
+    },
+    {
+     "x": 1,
+     "y": 5,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 9,
+     "y": 6,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 22,
+     "size_class": "open"
+    },
+    {
+     "x": 12,
+     "y": 6,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 17,
+     "size_class": "open"
+    }
+   ],
+   "roles": {
+    "station": 2,
+    "wall_hang": 3
+   }
   },
   "sainsbury-false-perspective-enfilade#b4": {
    "owner": "sainsbury-false-perspective-enfilade",
@@ -5934,7 +7626,28 @@
    "slots": 2,
    "hero": false,
    "walls": 21,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 5,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 15,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "wall_hang": 2
+   }
   },
   "sainsbury-false-perspective-enfilade#b5": {
    "owner": "sainsbury-false-perspective-enfilade",
@@ -6000,7 +7713,37 @@
    "slots": 3,
    "hero": true,
    "walls": 16,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 5,
+     "y": 1,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 11,
+     "size_class": "medium"
+    },
+    {
+     "x": 7,
+     "y": 1,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 9,
+     "y": 1,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "vitrine": 2
+   }
   },
   "soane-cabinet-vista#b0": {
    "owner": "soane-cabinet-vista",
@@ -6090,7 +7833,109 @@
    "slots": 12,
    "hero": false,
    "walls": 22,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 1,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 1,
+     "y": 2,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 2,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 1,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 3,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 9,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 4,
+     "y": 4,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 11,
+     "size_class": "medium"
+    },
+    {
+     "x": 8,
+     "y": 4,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 12,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "vitrine": 4,
+    "wall_hang": 8
+   }
   },
   "soane-cabinet-vista#b1": {
    "owner": "soane-cabinet-vista",
@@ -6240,7 +8085,134 @@
    "slots": 15,
    "hero": true,
    "walls": 37,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 1,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 0,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 1,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 1,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 1,
+     "y": 2,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 2,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 1,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 11,
+     "size_class": "medium"
+    },
+    {
+     "x": 3,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 18,
+     "size_class": "open"
+    },
+    {
+     "x": 9,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 18,
+     "size_class": "open"
+    },
+    {
+     "x": 11,
+     "y": 3,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 11,
+     "size_class": "medium"
+    },
+    {
+     "x": 1,
+     "y": 5,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 11,
+     "y": 5,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 1,
+     "y": 7,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 10,
+     "size_class": "medium"
+    },
+    {
+     "x": 6,
+     "y": 7,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 18,
+     "size_class": "open"
+    },
+    {
+     "x": 11,
+     "y": 7,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 10,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "vitrine": 4,
+    "wall_hang": 10
+   }
   },
   "soane-cabinet-vista#b2": {
    "owner": "soane-cabinet-vista",
@@ -6270,7 +8242,9 @@
    "slots": 0,
    "hero": false,
    "walls": 10,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "teshima-droplet#b0": {
    "owner": "teshima-droplet",
@@ -6302,7 +8276,9 @@
    "slots": 0,
    "hero": false,
    "walls": 7,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "teshima-droplet#b1": {
    "owner": "teshima-droplet",
@@ -6334,7 +8310,9 @@
    "slots": 0,
    "hero": false,
    "walls": 13,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "teshima-droplet#b2": {
    "owner": "teshima-droplet",
@@ -6366,7 +8344,9 @@
    "slots": 0,
    "hero": false,
    "walls": 13,
-   "void": 0
+   "void": 0,
+   "slot_types": [],
+   "roles": {}
   },
   "teshima-droplet#b3": {
    "owner": "teshima-droplet",
@@ -6602,7 +8582,38 @@
    "slots": 3,
    "hero": true,
    "walls": 82,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 12,
+     "y": 2,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 7,
+     "y": 5,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 24,
+     "size_class": "open"
+    },
+    {
+     "x": 4,
+     "y": 9,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 15,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "underfoot": 1,
+    "wall_hang": 1
+   }
   },
   "uffizi-spine-enfilade#b0": {
    "owner": "uffizi-spine-enfilade",
@@ -6702,7 +8713,55 @@
    "slots": 5,
    "hero": false,
    "walls": 24,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 6,
+     "y": 2,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 10,
+     "y": 2,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 18,
+     "size_class": "open"
+    },
+    {
+     "x": 1,
+     "y": 4,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 5,
+     "y": 4,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 4,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 12,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 1,
+    "underfoot": 1,
+    "vitrine": 2,
+    "wall_hang": 1
+   }
   },
   "uffizi-spine-enfilade#b1": {
    "owner": "uffizi-spine-enfilade",
@@ -6751,7 +8810,20 @@
    "slots": 1,
    "hero": false,
    "walls": 12,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 10,
+     "y": 1,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 7,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "vitrine": 1
+   }
   },
   "uffizi-spine-enfilade#b2": {
    "owner": "uffizi-spine-enfilade",
@@ -7004,7 +9076,95 @@
    "slots": 10,
    "hero": false,
    "walls": 44,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 6,
+     "y": 1,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 10,
+     "y": 1,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 17,
+     "size_class": "open"
+    },
+    {
+     "x": 4,
+     "y": 2,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 25,
+     "size_class": "open"
+    },
+    {
+     "x": 1,
+     "y": 4,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 6,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 10,
+     "y": 8,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 6,
+     "y": 9,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 20,
+     "size_class": "open"
+    },
+    {
+     "x": 4,
+     "y": 10,
+     "cell": "2s",
+     "role": "station",
+     "clearance": 25,
+     "size_class": "open"
+    },
+    {
+     "x": 1,
+     "y": 12,
+     "cell": "1s",
+     "role": "wall_hang",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 13,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 13,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "station": 2,
+    "underfoot": 2,
+    "vitrine": 4,
+    "wall_hang": 2
+   }
   },
   "uffizi-spine-enfilade#b3": {
    "owner": "uffizi-spine-enfilade",
@@ -7104,7 +9264,20 @@
    "slots": 1,
    "hero": true,
    "walls": 21,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 12,
+     "y": 2,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 14,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1
+   }
   },
   "uffizi-spine-ordered#b0": {
    "owner": "uffizi-spine-ordered",
@@ -7153,7 +9326,20 @@
    "slots": 1,
    "hero": false,
    "walls": 6,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 10,
+     "y": 1,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 8,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "vitrine": 1
+   }
   },
   "uffizi-spine-ordered#b1": {
    "owner": "uffizi-spine-ordered",
@@ -7185,7 +9371,20 @@
    "slots": 1,
    "hero": false,
    "walls": 2,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 8,
+     "y": 0,
+     "cell": "1s",
+     "role": "underfoot",
+     "clearance": 5,
+     "size_class": "tight"
+    }
+   ],
+   "roles": {
+    "underfoot": 1
+   }
   },
   "uffizi-spine-ordered#b2": {
    "owner": "uffizi-spine-ordered",
@@ -7285,7 +9484,36 @@
    "slots": 3,
    "hero": false,
    "walls": 21,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 8,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 1,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 3,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 15,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "vitrine": 3
+   }
   },
   "uffizi-spine-ordered#b3": {
    "owner": "uffizi-spine-ordered",
@@ -7385,7 +9613,36 @@
    "slots": 3,
    "hero": false,
    "walls": 21,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 8,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 9,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 1,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 3,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 15,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "vitrine": 3
+   }
   },
   "uffizi-spine-ordered#b4": {
    "owner": "uffizi-spine-ordered",
@@ -7553,7 +9810,45 @@
    "slots": 4,
    "hero": true,
    "walls": 39,
-   "void": 0
+   "void": 0,
+   "slot_types": [
+    {
+     "x": 8,
+     "y": 0,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 12,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 1,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 15,
+     "size_class": "medium"
+    },
+    {
+     "x": 10,
+     "y": 3,
+     "cell": "2s",
+     "role": "vitrine",
+     "clearance": 21,
+     "size_class": "open"
+    },
+    {
+     "x": 12,
+     "y": 6,
+     "cell": "3s",
+     "role": "hero",
+     "clearance": 14,
+     "size_class": "medium"
+    }
+   ],
+   "roles": {
+    "hero": 1,
+    "vitrine": 3
+   }
   }
  },
  "museums": {
