@@ -169,12 +169,65 @@ def stamp(museum_key: str, pat: dict, champ: str, name: str) -> dict:
             "undealt": len(overflow)}
 
 
+def judge_tile(tile_path: str, seq: str) -> int:
+    """Score ONE candidate tile against a chapter, and print JSON. --tile mode.
+
+    THE POINT (doc/plans/museum_template_editor.md, and the challengers round's
+    own lesson): an edit used to wait a day for the next match run, so the first
+    edited lineage was authored blind — and every one of those edits lost. The
+    judge is the answer to "is this better", and an editor that cannot ask it is
+    a drawing program. Nothing is written to the corpus: the trial map is built,
+    scored and removed, and the ancestor's own crown score comes back beside the
+    candidate's so the answer is a COMPARISON rather than a number.
+    """
+    cand = json.loads(open(tile_path, encoding="utf-8").read())
+    pat = cand.get("pattern") or next(iter(cand.get("patterns", {}).values()), None)
+    if not isinstance(pat, dict) or not pat.get("tile"):
+        print(json.dumps({"ok": False, "error": "no tile in candidate"}))
+        return 1
+    pat = dict(pat)
+    pat.setdefault("museum", "candidate")
+    champ, baseline = champion_of(seq)
+    name = "Trial_candidate_" + seq
+    shutil.rmtree(os.path.join(MAPS_DIR, name), ignore_errors=True)
+    try:
+        deal = stamp("candidate", pat, champ, name)
+        rc, pf = run([sys.executable, "tools/map_pathfinder.py", "check", name])
+        if rc != 0 or "0 FAIL" not in pf:
+            print(json.dumps({"ok": False, "error": "pathfinder fail"}))
+            return 1
+        s, detail = experience_score(name)
+        if s is None:
+            print(json.dumps({"ok": False, "error": f"score fail: {detail}"}))
+            return 1
+        crowns = {}
+        cp = os.path.join(ROOT, "commons", "data", "museum_crowns.json")
+        if os.path.isfile(cp):
+            crowns = json.loads(open(cp, encoding="utf-8").read()).get("crowns", {})
+        held = crowns.get(seq) or {}
+        print(json.dumps({
+            "ok": True, "seq": seq, "score": s, "detail": detail, "deal": deal,
+            "cast_source": champ,
+            "bred_best": ({"recipe": baseline[0]["recipe"], "score": baseline[0]["score"]}
+                          if baseline else None),
+            "crown": ({"template": held.get("template"), "score": held.get("score")}
+                      if held else None),
+        }))
+        return 0
+    finally:
+        shutil.rmtree(os.path.join(MAPS_DIR, name), ignore_errors=True)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--seq", required=True)
     ap.add_argument("--museums", default=",".join(DEFAULT_MUSEUMS))
+    ap.add_argument("--tile", help="judge ONE candidate tile (JSON) instead of the field")
     ap.add_argument("--keep-losers", action="store_true")
     args = ap.parse_args()
+
+    if args.tile:
+        return judge_tile(args.tile, args.seq)
 
     pats = json.loads(open(PATTERNS, encoding="utf-8").read())["patterns"]
     champ, baseline = champion_of(args.seq)
