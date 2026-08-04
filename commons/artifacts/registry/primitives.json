@@ -2542,6 +2542,30 @@
    "qfep_connection": "Height stretches the middle while segments sharpen the skin: one axis measures the world, the other measures how coarsely you agreed to describe it. The sweep lays both kinds of number side by side and lets neither pretend to be the other."
   },
   "combine_portals": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "taxonomy": [
+      "table",
+      "ladder",
+      "stack",
+      "heap"
+     ],
+     "refinement": [
+      "linear",
+      "fixed",
+      "doubling",
+      "inverted"
+     ]
+    },
+    "default": "taxonomy=ladder, refinement=linear - the legacy build statement for statement. `ladder` returns Vector3(0, 0, i * spacing), the same float in the same place as the original loop, and `linear` returns rings = start + i and ring_segments = start + 2i, the same two integers in the same order. All 4 existing placements are unchanged, and no map carries a #taxonomy: or #refinement: token today.",
+    "was": "the `taxonomy` axis was written into combine_portals.gd in an earlier pass and NEVER DECLARED here, so the sweep read the token as having no turnable knobs and refused it - a live axis invisible to every tool that reads the registry. Declared now by derivation from the @export_enum, not by transcription. `refinement` is new: rings = start + i and ring_segments = start + 2i were a statement written once, so a corridor whose own truth line is 'you choose how many polygons' could not be asked to choose differently.",
+    "note": "the two axes are a control pair and are strictly orthogonal in code - _taxonomy_offset touches only transform.origin and never a mesh, _refined_wires touches only rings/ring_segments and never a position. taxonomy varies WHERE the family stands with the meshes held; refinement varies WHAT the meshes are with the arrangement held. `inverted` is the built-in null: it is the same twenty meshes as `linear` in reverse order, so an identical multiset in a different direction, and if it does not read differently in a still then the coarse-to-fine story was never legible. `fixed` is the other null - twenty identical coarse rings, the corridor with its ladder removed.",
+    "kin": "`taxonomy` with exactly table/ladder/stack/heap is the folder's word, shared character for character with combine_sphere, combine_capsule, math_objects and math_objects_gallery - one grammar for the whole parameter-sweep family, so a room holding several of them cannot have two arguing taxonomy and a third arguing corridor. Note the default differs from its siblings: combine_sphere and combine_capsule ship at `table` because they were authored as lattices, and this one ships at `ladder` because it was authored as a ninety-metre corridor. `refinement` is a new word - the nearest neighbour is sphere_low's `grain` (meridian/parallel/even), but grain asks WHERE one object's budget goes and this asks HOW a series' budget grows, which is a different question and so takes a different word.",
+    "framing_note": "spine_hints() already tags this artifact `oversized` and `corridor_incompatible` because `ladder` runs ~90 m along +Z, and that is exactly the pivot of the taxonomy axis: it is the one value you cannot see all of from anywhere, and table/stack/heap are the same twenty rings brought into a single view. A sweep tile of `ladder` will therefore read as a receding tunnel rather than a chart, which is the argument, not a capture fault.",
+    "guard": "apply_grid_config is gated per key AND on _ready having resolved the base torus - it returns early when neither key is present, when the value is unrecognised, when the value already matches, and when _base_portal/_base_mesh are still null. So a token carrying only other keys, or a config applied before the node enters the tree, cannot rebuild a corridor that is already standing."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Duplicates a base torus to form a tunnel of portals that grow denser down the hallway.",

@@ -1523,6 +1523,32 @@
     "size_group": "world_scale"
    },
    "scene": "res://algorithms/fractals/cantorset/cantor_set.tscn",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "tick": [
+      "once",
+      "coarse",
+      "fine",
+      "dense",
+      "limit"
+     ],
+     "removal": [
+      "gone",
+      "ghost",
+      "scar"
+     ]
+    },
+    "fixture": {
+     "build_mode": "instant"
+    },
+    "default": "tick=limit, removal=gone - limit is TICK_LEVELS['limit'] = 5, the max_iterations this file has always shipped, so the number of rows, the y of every row (vertical_spacing * (max_iterations - level)) and the hue of every bar (level / max_iterations) are unchanged; gone draws nothing where the middle third was, which is exactly what the artifact has always done, since the middle was simply never created. apply_grid_config was a bare `pass` before this pass and is now guarded twice - a word is taken only when it validates AND differs, and _rebuild() fires only after _built - so the 5 existing placements pass no key, reach no rebuild, and grow and fall on their 2-second clock exactly as before.",
+    "was": "six @export knobs and not one categorical among them: iteration_interval, initial_bar_length, bar_thickness and vertical_spacing are a duration and three sizes, and max_iterations - the @identity's own declared critical_parameter - was unreachable from any map because apply_grid_config's whole body was `pass`. Every placement got five removals, on a two-second clock, with the deleted middles absent and unmarked. The runner refused the token for NO TURNABLE KNOBS, which was a fact about the kind of knob, not about the artifact.",
+    "note": "tick is the halving argument as one ladder, exactly the question zeno_staircase asks. removal is the question Zeno cannot ask: a staircase SUBDIVIDES and keeps everything, Cantor DELETES, and until now the deletion had no representation at all. gone is the shipped silence; ghost restores each removed middle as a pale full-thickness volume, so a row reads as the complete interval with its holes marked and the eye can see measure leaving; scar leaves a thin dark rod at 22 percent of bar depth where the bar used to be, so the row reads as a comb rather than as scattered dust. The thirds arithmetic is shared line for line between the grown and the instant build - offset = L/3, new_length = L/3 - so the axis can never be a fact about which builder ran.",
+    "kin": "tick is taken from zeno_staircase character for character (once | coarse | fine | dense | limit), the same ladder of subdivision named the same way. TWO THINGS DIFFER AND BOTH ARE FACTS ABOUT THE ARTIFACT, not drift in the word. The rungs are 1,2,3,4,5 rather than Zeno's 1,3,9,27,81; and the shipped value sits at the TOP of the ladder rather than in the middle, so this axis runs one way only - what the record LOSES as you coarsen it. A sixth row would be segments of 12 mm against the bar's own 300 mm depth, a picture of the mesh's minimum feature rather than of Cantor. removal is NOT a family word and deliberately not `evidence`: evidence values withhold parts of an artifact's own working (a caption, a secant, a source marker), while these values ADD back the thing the rule threw away. Withholding an explanation and drawing an absence are opposite moves.",
+    "still_note": "tick is the strong axis in pixels: once is two bars on a two-row ladder, limit is 32 segments on six rows, and the silhouette changes wholesale. removal is the thinner measurement - ghost adds 31 pale volumes spanning as much width as the survivors and should bite; scar adds 31 thin dark rods against a dark background, so crop-recheck that value before believing an INERT verdict on it. BOTH AXES ARE INVISIBLE WITHOUT THE FIXTURE, and this is the whole reason the token had no usable capture: the shipped artifact grows one row every 2 s and drops every bar with an unfrozen RigidBody3D, so at the sweep's settle there is a single bar in freefall, well below frame. dna.fixture sets build_mode=instant, which lays the completed ladder out frozen inside _ready by the identical thirds rule. This is the library_rack case - config the artifact needs SUPPLIED before any axis can be seen at all - and build_mode is deliberately NOT declared as an axis, because its `grow` value renders as one falling bar and would ship half the sheet as near-blank frames."
+   },
    "size_group": "world_scale",
    "tags": [
     "procedural"

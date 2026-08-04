@@ -59,6 +59,34 @@ func spine_hints() -> Dictionary:
 @export_enum("table", "ladder", "stack", "heap") var taxonomy: String = "ladder"
 const TAXONOMIES: PackedStringArray = ["table", "ladder", "stack", "heap"]
 
+## AXIS — THE RULE THAT GENERATES THE LADDER. `taxonomy` moves the rings around and swears
+## off their meshes; this is the complement, and it is the thing this file's own truth
+## statement is about. Every torus in the corridor got its wire count from one statement
+## written once and never varied — `rings = start + i`, `ring_segments = start + 2i` — so
+## the artifact could only ever argue that refinement is LINEAR and steady. It is not; a
+## polygon budget is spent under a rule, and the rule is the choice.
+##
+##   linear     start + i rings, start + 2i segments. The legacy statement, character for
+##              character: twenty even steps from a triangle to a smooth ring.
+##   fixed      every portal identical to the base. The null hypothesis the corridor was
+##              never made to face — twenty copies of the same coarse ring, no ladder at
+##              all, and the walk down +Z stops meaning anything.
+##   doubling   geometric: start × 2^i, clamped at REFINE_CAP. Coarse to smooth in five
+##              portals and then fifteen that are indistinguishable. The claim that
+##              refinement has diminishing returns and most of a budget buys nothing.
+##   inverted   the same twenty meshes as `linear` in reverse order. Identical multiset,
+##              opposite direction — proof that the ladder's DIRECTION is the display's
+##              claim and not a property of the tori.
+##
+## `inverted` is the control: if it does not read differently from `linear` in a still,
+## the corridor's coarse-to-fine story was never legible in the first place.
+@export_enum("linear", "fixed", "doubling", "inverted") var refinement: String = "linear"
+const REFINEMENTS: PackedStringArray = ["linear", "fixed", "doubling", "inverted"]
+
+## Ceiling on `doubling`. A TorusMesh at start=3 would reach 3 × 2^19 segments by the last
+## portal, which is not an argument, it is a hang.
+const REFINE_CAP: int = 96
+
 ## Columns in `table`. Five across × four up covers the default twenty without a ragged
 ## last row, and keeps the lattice wider than it is tall so it reads as a chart.
 const TAX_COLS := 5
@@ -69,6 +97,8 @@ var _base_mesh: TorusMesh
 func _ready() -> void:
 	var t: String = str(taxonomy).strip_edges().to_lower()
 	taxonomy = t if TAXONOMIES.has(t) else "ladder"
+	var r: String = str(refinement).strip_edges().to_lower()
+	refinement = r if REFINEMENTS.has(r) else "linear"
 	_base_portal = get_node_or_null(base_path) as MeshInstance3D
 	if _base_portal == null:
 		push_warning("CombinePortals: Base portal node not found at %s" % base_path)
@@ -92,12 +122,12 @@ func spawn_portals() -> void:
 	_clear_existing_portals()
 	_base_portal.visible = false
 
-	var count = max(portal_count, 1)
-	var spacing = max(portal_spacing, 0.1)
+	var count: int = maxi(portal_count, 1)
+	var spacing: float = maxf(portal_spacing, 0.1)
 	var base_transform := _base_portal.transform
 
-	var start_rings = max(_base_mesh.rings, 3)
-	var start_segments = max(_base_mesh.ring_segments, 3)
+	var start_rings: int = maxi(_base_mesh.rings, 3)
+	var start_segments: int = maxi(_base_mesh.ring_segments, 3)
 
 	for i in range(count):
 		var portal_instance := _base_portal.duplicate()
@@ -109,8 +139,9 @@ func spawn_portals() -> void:
 		portal_instance.transform = transform
 
 		var mesh_copy := _base_mesh.duplicate() as TorusMesh
-		mesh_copy.rings = start_rings + i
-		mesh_copy.ring_segments = start_segments + i * 2
+		var wires: Vector2i = _refined_wires(i, count, start_rings, start_segments)
+		mesh_copy.rings = wires.x
+		mesh_copy.ring_segments = wires.y
 		portal_instance.mesh = mesh_copy
 
 		if owner:
@@ -130,12 +161,26 @@ func _clear_existing_portals() -> void:
 ## This artifact had no apply_grid_config before, so `combine_portals#taxonomy:table` in a
 ## map is the first configuration it has ever been able to hear.
 func apply_grid_config(config_data: Dictionary) -> void:
-	if not config_data.has("taxonomy"):
+	var dirty: bool = false
+
+	if config_data.has("taxonomy"):
+		var want: String = str(config_data["taxonomy"]).strip_edges().to_lower()
+		if TAXONOMIES.has(want) and want != taxonomy:
+			taxonomy = want
+			dirty = true
+
+	if config_data.has("refinement"):
+		var want_r: String = str(config_data["refinement"]).strip_edges().to_lower()
+		if REFINEMENTS.has(want_r) and want_r != refinement:
+			refinement = want_r
+			dirty = true
+
+	if not dirty:
 		return
-	var want: String = str(config_data["taxonomy"]).strip_edges().to_lower()
-	if not TAXONOMIES.has(want) or want == taxonomy:
+	# Only after _ready has resolved the base: called earlier (the grid component can set
+	# config before add_child) the new value is simply left in the export for _ready to use.
+	if _base_portal == null or _base_mesh == null:
 		return
-	taxonomy = want
 	spawn_portals()
 
 
@@ -179,6 +224,31 @@ func _taxonomy_offset(index: int, count: int, spacing: float) -> Vector3:
 			return Vector3(cos(a) * r, _index_hash(index * 2 + 7) * spacing * 0.9, sin(a) * r)
 		_:
 			return Vector3(0.0, 0.0, float(index) * spacing)   # "ladder" — the legacy file
+
+
+# ── REFINEMENT ───────────────────────────────────────────────────────────────
+# The wire counts, as a rule instead of a statement. `linear` returns exactly what the
+# legacy loop assigned — start_rings + i and start_segments + i * 2, the same two integers
+# in the same order — so the corridor that has stood in four maps is untouched. The other
+# three keep the same twenty portals in the same twenty places (this axis never moves
+# anything) and disagree only about how the polygon budget is spent down the file.
+
+## Rings and ring_segments for the portal at `index`, as Vector2i(rings, ring_segments).
+func _refined_wires(index: int, count: int, start_rings: int, start_segments: int) -> Vector2i:
+	var step: int = index
+	match refinement:
+		"fixed":
+			step = 0
+		"inverted":
+			step = maxi(count - 1 - index, 0)
+		"doubling":
+			var factor: int = 1 << mini(index, 20)
+			return Vector2i(
+				mini(start_rings * factor, REFINE_CAP),
+				mini(start_segments * factor, REFINE_CAP))
+		_:
+			step = index   # "linear" — the legacy statement
+	return Vector2i(start_rings + step, start_segments + step * 2)
 
 
 ## Deterministic 0..1 from an integer. Same value every boot, every frame, every machine.

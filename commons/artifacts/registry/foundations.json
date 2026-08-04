@@ -1692,6 +1692,22 @@
       }
     },
     "constructive_proof": {
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "specimen": [
+            "built",
+            "outline",
+            "candidates",
+            "absent"
+          ]
+        },
+        "default": "specimen=built - the exact shipped picture. _build_solid() is _create_visual()'s old inline block moved into a function and nothing else: one BoxMesh at Vector3(0.3, 0.3, 0.3), one StandardMaterial3D at albedo (0.3, 0.6, 0.9), at the artifact's origin. It now hangs under a Specimen Node3D that sits at the origin with an identity transform, so the world position of the cube is unchanged; the arrow keeps the string '← Must BUILD it' character for character and the caption is identical at every value. All three placements (Brouwer_Intuitionism as a bare token, the curation_station collection in Curation_Bay_foundationscrisis_2, and exhibit_furniture#mount:constructive_proof in the six Trial_* museums) pass no key this reads - exhibit_furniture instantiates the mounted scene and forwards nothing - so nothing standing changes.",
+        "was": "no declared axis, and the runner refused the token for NO TURNABLE KNOBS: there were no @export lines at all. apply_grid_config accepted `color` and `size`, which are a tint and a dimension. The artifact's own critical_parameter is 'the witness - without an explicit construction, the proof is rejected', and the witness was a hard-coded 0.3 m cube that was always present, so the classical proof its caption names was the one thing the room could never be shown.",
+        "note": "specimen is what the proof puts forward in the place where x must be. built = the solid cube, blue, constructive: here is x. outline = the same cube as twelve edge bars in grey, the claim keeping its shape with nothing inside it. candidates = twenty-seven small grey cubes filling the same 0.3 m volume with none of them distinguished, existence over a finite domain where the proof will not say which. absent = a thin grey plate whose top face sits exactly where the solid cube's underside was and nothing above it, the reductio that refutes non-existence and produces nothing. Blue means produced and grey means claimed, which is the whole argument in one colour rule. Every value builds real MeshInstance3D geometry in the same slot, including absent - a value that measured zero AABB would be a fact about the capture rather than about the proof. The caption is deliberately NOT switched: it states both positions and stays true at every value, so a measured bite is a bite in the object. The arrow line does switch, because '← Must BUILD it' standing beside an empty plate is the label contradicting the picture.",
+        "kin": "`evidence` (result|trace|longhand|axiom, 19 declarations) was considered and DECLINED. It is the corpus's word for how much of the working is admitted alongside the result, and its rungs are a monotone disclosure ladder over an apparatus in motion. There is no working here and nothing in motion - one static claim - and the values are not more-or-less of one thing: candidates is not 'more working than outline', it is a different proof. Taking the word with a different question is the failure check_dna_declarations exists to catch. `witness` is the term of art and this artifact's own vocabulary, and was ALSO declined: lab_room already declares witness = pane|none|port|sash for an observation aperture, and one word covering two unrelated questions makes a shared vocabulary a lie. specimen is a new word and shares nothing; the nearest live neighbour is godel_statement_plaque.outside (quotation|margin|breach|omission|habitat), which asks where a statement stands relative to a system rather than what a proof produces."
+      },
       "lookup_name": "constructive_proof",
       "scene": "res://commons/artifacts/constructive_proof/constructive_proof.tscn",
       "class_name": "ConstructiveProof",

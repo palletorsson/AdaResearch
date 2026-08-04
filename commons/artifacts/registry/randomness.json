@@ -10545,7 +10545,32 @@
     "derived_at": "2026-04-29T09:39:46.247436Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "Sculpting by random modification: a form shaped by accepting the dice's suggestions. The sculptor keeps only the veto — chance proposes every stroke. Authorship as curation of accidents."
+   "qfep_connection": "Sculpting by random modification: a form shaped by accepting the dice's suggestions. The sculptor keeps only the veto — chance proposes every stroke. Authorship as curation of accidents.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "fixture": {
+     "sculpt_seed": 20260803
+    },
+    "axes": {
+     "substance": [
+      "mixed",
+      "glossy",
+      "fabric",
+      "granular"
+     ],
+     "hand": [
+      "composition",
+      "pour",
+      "drape",
+      "stipple",
+      "spatter"
+     ]
+    },
+    "default": "hand=composition, substance=mixed - the three existing placements are untouched: `composition` runs the same five sculpting moves in the same order create_composition() always ran them, and `substance` returns from _apply_substance() before touching a single material, leaving the curated palette exactly as create_materials() built it.",
+    "was": "One still-life with no knobs. Five sculpting moves ran unconditionally and the piece was their sum; the palette was eight hand-typed materials. The @identity had asked for a palette dial, a reseed and a gloss-to-fabric slider as [missing] since the file was written.",
+    "note": "`hand` is maze_generation's word — which procedure makes the form — with this artifact's own moves as its rungs. `substance` is rainbow's word — what the thing is made of — with a rung list this piece can actually be: a still-life of cloth and liquid has no 'light'. Colour is held constant across substance, so the axis is a claim about surface and nothing else. sculpt_seed defaults to 0 = unseeded, which is the shipped behaviour (a fresh composition every launch); the fixture pins it so a sweep photographs ONE object under two axes instead of nine different objects. AXIS ORDER IS DELIBERATE: build_dna_gallery trims the SECOND axis to fit the 9-frame cap, so substance leads with all four rungs and hand contributes composition|pour — 4x2=8 frames covering both — rather than hand taking all five and leaving substance unmeasured."
+   }
   },
   "shader_07_noise": {
    "category": "procedural",

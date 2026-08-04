@@ -1432,6 +1432,35 @@
     "size_group": "xlarge"
    },
    "qfep_connection": "Pure F — gravity pulls, floor reflects. The simplest possible physics: one force, one constraint. The bounce coefficient IS lambda: 1.0 = perfect (no energy loss), 0.0 = dead stop.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ],
+     "regime": [
+      "mixed",
+      "elastic",
+      "dead",
+      "inelastic"
+     ]
+    },
+    "fixture": {
+     "ball_seed": 7,
+     "evidence": "trace"
+    },
+    "default": "evidence=result, regime=mixed - a deliberate no-op on both. result returns from _apply_evidence before any node is constructed, so the scene tree and the capture AABB are byte-identical to the pre-promotion build; mixed is the only regime value that touches the random draw or the container materials, leaving randf_range(0.6, 0.95) per ball and floor 0.5 / ceiling 0.7 / walls 0.7 exactly as they were. ball_seed = -1 is the shipped unseeded global RNG. All 6 existing placements are unchanged, and no map carries an #evidence: or #regime: token today",
+    "was": "two exports, ball_count and spawn_height, and an apply_grid_config whose entire body was `pass`. The sweep refused it for NO TURNABLE KNOBS. Its own capacity line promises the player will SEE that the bounce coefficient controls how much energy survives each collision, and the coefficient was a literal randf_range(0.6, 0.95) inside _spawn_balls with no way to say otherwise - and nothing anywhere DREW it",
+    "note": "the caution that shaped this promotion: restitution is time-domain and a still catches one arbitrary instant of six balls in flight. Sweeping e alone would have produced a finished-looking experiment answering nothing. So the envelope is drawn instead, and PREDICTED at build time from each ball's own e rather than accumulated from watching - h(n) = h0 e^(2n) is on the geometry the moment the artifact exists, the same move catapult's `foresight` makes with the parabola. trace is that envelope, one polyline of seven apex rungs per ball in the ball's own colour. longhand is the working under it: at each ball's column the incoming and outgoing speed arrows, whose LENGTH RATIO is e, and above them the first two apex rungs, whose ratio is e squared - the squaring drawn twice, once as speed and once as height. axiom drops the six specimens for the rule: a slate carrying v' = -e v and h(n+1) = e^2 h(n), and the ticked ceiling at the release height, which is the one line the chamber cannot cross and only e = 1 gets to keep. The physics is Godot's in all four - no _integrate_forces, no per-frame code, gravity untouched.",
+    "kin": "`evidence` with exactly result/trace/longhand/axiom is the family word, taken character for character from example_2_3_gravity_scaled_by_mass_vr, three_body_problem, example_2_8, koch_curve, sine_wave_controller and wave_interference_tank. `regime` is mass_spring_damper's word one artifact along - that bench asks which DAMPING regime the row is in, this one asks which RESTITUTION regime. The value list is deliberately NOT shared: under/critical/overdamped are the three named cases of a second-order ODE and there is no critically-bouncing, so the values here are the textbook ones (elastic, inelastic, perfectly inelastic) plus the shipped population. Reusing a word whose answers do not transfer would have been the dishonest half of a shared vocabulary.",
+    "interaction": "the two axes are orthogonal in the code and NOT in the photograph, which is worth saying plainly rather than discovering in a bite report. regime turns a float on a PhysicsMaterial; at evidence=result that float has no geometry, and the capturer's 1.1 s settle catches the balls before the difference between e = 1 and e = 0 has had time to become a position. So regime x result is genuinely inert in a still and honestly so. It bites at every other evidence value, because the envelope is drawn from e directly: elastic is six flat lines, dead is six collapses, inelastic is six curves lying on top of each other. The declared order puts evidence first and mixed/elastic first within regime, because build_dna_gallery trims value lists from the TAIL to fit its cap and those are the pair the description itself contrasts.",
+    "fixture_note": "the radius, the restitution, the spawn point and the initial nudge have always come from an unseeded randf_range - six different balls every launch, which is the generative-artifact trap in CLAUDE.md's table. ball_seed = -1 preserves that exactly and is the shipped default; the fixture pins 7 so a sweep measures the axes and not the paintwork. The fixture also pins evidence=trace, which is a no-op whenever evidence is one of the swept axes (cabinet_sweep lets the variant's own params override the fixture) and is the difference between measuring regime and measuring nothing whenever it is not.",
+    "framing_note": "the chart is drawn on the back plane of the containment cube, inside the wireframe that was already there, and normalised to the tallest ball. Deliberately: an overlay wider or taller than the box would enlarge the union AABB the capturer fits its camera to, and every frame including result would re-zoom - which is the documented reason catapult's foresight axis scored 3.48 percent for turning a preview OFF. Here the box is the same size at all four values, so what the bite report measures is the drawing and not the camera."
+   },
    "scene": "res://algorithms/physicssimulation/bouncingball/bouncingball.tscn",
    "sequence": "forces",
    "size_group": "xlarge",
@@ -7779,6 +7808,37 @@
    }
   },
   "nbody_simulation": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "configuration": [
+      "cloud",
+      "disc",
+      "shells",
+      "binary",
+      "lattice"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "fixture": {
+     "spawn_seed": 20260804
+    },
+    "default": "configuration=cloud, evidence=longhand - both a deliberate no-op. `cloud` is the shipped spawn statement for statement (three randf_range for position over +/-spawn_radius, three for velocity over +/-random_velocity_range, in that order), and `longhand` calls _draw_force_lines untouched, the same top-20 strongest pairs with the same lerpf(0.4, 0.08) alpha ramp. Outside those two values not one exhibit node is ever constructed, so all 3 existing placements are unchanged.",
+    "was": "six exports, every one of them a NUMBER - how many bodies, how heavy, how fast, how strong the coupling. Nothing that turned the one thing gravity cannot derive for you: where the mass is at t = 0. Twenty bodies went into a uniform random cube in a literal loop, so an exhibit whose whole claim is that structure emerges from the law could only ever demonstrate it from one starting point, and could not show the case where the structure was supplied in advance.",
+    "seed_note": "the spawn has always been an unseeded global randf_range, i.e. a different galaxy every launch, and five variants of an unseeded generative artifact are five different objects rather than five views of one. spawn_seed = -1 preserves that exactly and is the shipped default; the fixture pins it so a sweep measures the axis and not the dice. Any value >= 0 pins, and the cast lives in apply_grid_config so a fixture may pass the number as a string.",
+    "note": "configuration turns the initial condition, which is the artifact's real frozen parameter. cloud = the shipped scatter, structure with no ancestry. disc = an annulus in XZ with tangential velocities, the galaxy - order supplied in advance as angular momentum, so what you watch is structure being defended rather than formed. shells = two concentric near-static spheres, the collapse classic, geometry with nothing holding it up. binary = two tight clumps with opposing drift, N=20 behaving as N=2 until the encounter, which is the hierarchical claim. lattice = a perfect cubic grid at zero velocity, the least stable arrangement in the set and the control against cloud: here gravity's job is destruction. All five are read at build time only; _attract, _process and the integrator are untouched by both axes.",
+    "kin": "`evidence` with exactly result/trace/longhand/axiom is the family word, taken character for character from example_2_8_two_body_attraction_vr, example_2_9_n_body_attraction_vr, three_body_problem, koch_curve and wave_interference_tank. Note the default differs from the 2.8/2.9 pair, which ship at `result`: this artifact has always drawn its force lines, so it ships at longhand, the same way three_body_problem ships at trace because it has always drawn its trails. `configuration` is three_body_problem's word, and this is its direct successor at N=20 - but its VALUES could not be taken, because figure_eight and lagrange are theorems about exactly three bodies and mean nothing at twenty. The question carries across; the answer sheet does not. That is a real divergence and is stated rather than papered over.",
+    "longhand_note": "at N=6 (example_2_9) longhand draws every one of the 15 pairs. At N=20 there are 190 and the shipped exhibit already picks the strongest 20 - so this is a FILTERED longhand, and the filter is the argument: not being able to draw the working is exactly what the O(n^2) claim means. Called out here because a shared vocabulary is only honest when the difference is named.",
+    "framing_note": "the bodies live in a MultiMesh and the AABB probe counts MeshInstance3D only, so the subject measured as a 1 m box under longhand (where the force lines happened to bound it) and as something else under result (where nothing is drawn). _build_extent_anchor adds a BoxMesh of side 2.2*spawn_radius on render layer 0 - present in every value, drawn in none of them, so all four evidence frames are framed alike and no existing placement gains a visible object.",
+    "still_note": "both axes are legible in a single frame BY CONSTRUCTION rather than by luck. configuration is a t=0 geometry (cube vs disc vs shells vs two clumps vs grid) and the bodies drift at ~0.002/frame against a 0.35 m radius, so a capture settle cannot wash it out. evidence's trace and axiom are integrated FORWARD at build time through the scene's own law and Euler step and drawn as static geometry, so they are complete at frame zero rather than accumulating - the mistake that makes a time-domain axis invisible to a still.",
+    "guard": "apply_grid_config is gated per key and on is_node_ready(). It returns early when none of the three keys is present, when a value is unrecognised, and when every value already matches; called before the node enters the tree it leaves the values in the exports for _ready to build with, rather than rebuilding a half-built artifact. Only a changed spawn_seed or configuration respawns the bodies; a changed evidence redraws only."
+   },
    "capacity": "WATCH emergent orbital structure arise from nothing but pairwise gravity",
    "category": "physics",
    "complexity": "advanced",

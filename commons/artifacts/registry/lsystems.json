@@ -1017,6 +1017,31 @@
    }
   },
   "genetic_tree_sculptor": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "pressure": [
+      "none",
+      "reach",
+      "spread",
+      "thicket",
+      "spare"
+     ]
+    },
+    "default": "pressure=none - a pure no-op. _evolve() returns on its first line when pressure is \"none\", so _dna is still CritterDNA.random_kingdom(0, dna_seed) with dna_seed at its shipped -1, which is byte-for-byte the old CritterDNA.random_kingdom(0) call (the parameter's own default is -1, so the same unseeded randomize runs). _build_ui builds the same eight-slider rack at the same position and rotation, the same pedestal, and _rebuild_tree calls TreeMorphology.build(_dna, _tree_root, _mapper, 2) unchanged. All five placements (LSystems_Living, Corridor_LSystems_Living, Curation_Bay_lsystems_2, AutoGenTest, AutoGenTest2) are bare tokens passing none of these keys, and apply_grid_config now regrows only when a value actually DIFFERS and only after _ready has built once - the shipped version regrew the whole tree on the mere presence of dna_seed.",
+    "was": "no axis and no exports at all - the runner refused this token for NO TURNABLE KNOBS. The entry claims 'genetic algorithm selection' and there was no selection in the script: _ready drew one unseeded random genome and built it, so the picture in every room was always generation 0 - the thing evolution starts from, standing in for the thing evolution produces. The eight sliders are a designer's hand, and a still cannot photograph a hand moving.",
+    "note": "pressure states in the geometry WHAT the genome was selected for, which is the argument the name has been making without evidence: selection is never for better, it is always for something, and one ancestor under four tastes grows four incompatible trees. reach = deep recursion, narrow forks, no droop. spread = wide forks, many branches, tropism. thicket = deep, many-forked, heavily leaved. spare = shallow, two-forked, bare, fast taper. Each is a seeded greedy hill-climb over the SAME eight genes the sliders expose - mutate, score, keep if better, `generations` times - so an evolved tree is always a tree a player could also have dialled by hand, and the search is deterministic given dna_seed. GENERATIONS IS DELIBERATELY NOT AN AXIS: convergence is asymptotic, a gen-20 and a gen-40 climb under one taste land on the same tree, and the upper rungs of a generation ladder would be identical frames dressed as an experiment. Its bottom rung is pressure=none already. REBUILD_COOLDOWN is not an axis either - a 0.3 s debounce is time-domain and invisible to a still.",
+    "kin": "`selection` (drift|uniform|culled|runaway|split, four declarations: evolved_creatures, evolving_flowers, evolvingflowers, non_teleological_evolution) was handed to this artifact and DECLINED. It asks the right question - what a pressure did, and whether any was applied - and its first rung, the unselected shipped default, maps onto this one exactly. But three of its five values are POPULATION pictures: culled is three survivors on a sixteen-plot grid with thirteen plots bare, split is two incompatible tastes filling opposite halves of a 20 m plane, uniform is sixteen copies of one optimum. This artifact is a workbench with ONE tree on a 0.6 m pedestal - its identity is 'design a tree's genome, watch it grow live' - and turning it into a bed of sixteen would make it a second evolving_flowers rather than a sculptor. Taking the word with a different value list is the exact failure check_dna_declarations exists to catch, so the word was left alone. pressure is a new word: same question asked of one genome instead of a population, and the two should NOT be expected to measure alike. lsystem_editor.grammar and lsystem_tree.evidence/habit were also considered and are about which rule is run and how much of it is shown, which this artifact does not vary at all.",
+    "fixture": {
+     "bench": "bare",
+     "dna_seed": 7,
+     "generations": 24
+    },
+    "fixture_note": "TWO things the sweep must be given or the axis is unmeasurable. bench=bare omits the eight-slider control rack; the rack sits at (0, 0.85, 1.2) rotated -25 degrees and the registry's own measurement of this token is aabb 4.91 x 22.68 x 0.08, i.e. a flat panel, so an AABB-fitted camera frames the furniture and photographs the tree at a few pixels. dna_seed=7 pins the ancestor: CritterDNA.random_kingdom(0) is unseeded by default, and five variants of an unseeded generative artifact are five different trees rather than five pictures of one search. bench is a String enum and not a bool on purpose - a typed bool export rejects a fixture string before _ready. generations=24 is the script default restated so the fixture reads as a complete statement of the bench.",
+    "measurement_risk": "TreeMorphology seeds its own rng from root.get_instance_id(), which differs per instantiation, and that seed gates leaf PRESENCE (rng.randf() < leaf_chance) and per-branch material variation. The branch skeleton is fully determined by the DNA and is clean; the foliage carries per-variant noise that no seed reachable from this artifact can pin. thicket and spare therefore push depth and fork count as hard as they push leaf_density, so both differ structurally and not only in leaves. Leaves are also batched into a MultiMeshInstance3D, which the capture AABB does not count - the frame is set by the branch tubes. Do not read a faint thicket/spare pair as a dead axis without looking at the silhouettes.",
+    "still_note": "every value is standing geometry decided before the first frame. The only motion in the artifact is the 0.3 s slider debounce in _process and the 0.3 s PLANT tween, neither of which runs with no player in the scene."
+   },
    "category": "procedural",
    "complexity": "advanced",
    "description": "Evolutionary L-system tree that uses genetic algorithm selection to sculpt tree forms \u2014 combines grammar-based growth with fitness-driven optimization.",

@@ -38,6 +38,33 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 @export var rain_count: int = 460        # rain streak particles — GPUParticles3D
 @export var cloud_count: int = 26         # cloud wisp quads — GPUParticles3D (fewer = no grey wall)
 
+# ─────────────────────────────────────────────────────────────────────
+#  STAGE-2 DNA — promoted 2026-08-03 (hand promotion; the runner refused
+#  this token for NO TURNABLE KNOBS, which was true of its *categorical*
+#  knobs: the four exports above are a size and three densities.)
+#
+#  weather  — which of the four regimes the chamber is found in. The
+#             modes were fully built already (MODE_VECTORS_A/B and the
+#             four palettes in _init_mode_palettes) and reachable only by
+#             pressing W in the room: _build_all ended on a hard-coded
+#             `_apply_mode(0)`, so every placement opened Calm.
+#  evidence — how much of the working is on the table beside the storm.
+#             The family word, taken character for character from
+#             force_field_visualizer / zeno_staircase / wave_interference_tank.
+#
+#  DELIBERATELY NOT `field` or `law`. Those two words name WHICH VECTOR
+#  FIELD is being drawn. Here the field is always the same one — A + B,
+#  one law, addition — and what the axis turns is the two summands and
+#  the weather that reads them. Reusing either word would claim this
+#  artifact argues about the rule, and it argues that the rule is fixed.
+# ─────────────────────────────────────────────────────────────────────
+
+const WEATHERS := ["calm", "breezy", "storm", "blizzard"]
+const EVIDENCES := ["result", "trace", "longhand"]
+
+@export_enum("calm", "breezy", "storm", "blizzard") var weather: String = "calm"
+@export_enum("result", "trace", "longhand") var evidence: String = "longhand"
+
 var world_scale: float = 1.0             # extra multiplier on SCENE_SCALE (derived)
 var domain_extent: float = 3.0           # half-extent in unit space (derived)
 
@@ -279,8 +306,62 @@ func _build_all() -> void:
 		"Vector addition\nForce superposition"
 	)
 
-	# Set initial mode
-	_apply_mode(0)
+	# Set initial mode. Default weather="calm" resolves to 0 — the value this
+	# line was hard-coded to before the promotion.
+	_apply_mode(_weather_index())
+
+	# Withhold whatever the `evidence` axis withholds. Default "longhand"
+	# shows everything, which is what shipped.
+	_apply_evidence()
+
+
+## The mode index for the current `weather` word. Unknown words fall back to
+## calm rather than blanking the chamber.
+func _weather_index() -> int:
+	var idx: int = WEATHERS.find(weather)
+	return idx if idx >= 0 else 0
+
+
+## How much of the working is on the table, in three tiers:
+##   result   — the storm and the three wind arrows, nothing else. No field
+##              grid, no parallelogram, no decomposition, no instruments.
+##   trace    — + the 144-arrow field grid: the field itself drawn out.
+##   longhand — + the parallelogram construction, the wind+gravity
+##              decomposition, and the four instruments. SHIPPED DEFAULT.
+##
+## Implemented by hiding, not by skipping the build: every per-frame driver in
+## _process writes into these nodes, and not building them would mean adding a
+## null guard to a dozen hot paths for no visual gain. The info panel and the
+## control rack are present at every value, so a still cannot misreport itself.
+func _apply_evidence() -> void:
+	var show_grid: bool = evidence != "result"
+	var show_working: bool = evidence == "longhand"
+
+	grid_visible = show_grid
+	if _arrow_shaft_mm:
+		_arrow_shaft_mm.visible = show_grid
+	if _arrow_head_mm:
+		_arrow_head_mm.visible = show_grid
+
+	if dotted_line_a:
+		dotted_line_a.visible = show_working
+	if dotted_line_b:
+		dotted_line_b.visible = show_working
+	if label_a_copy:
+		label_a_copy.visible = show_working
+	if label_b_copy:
+		label_b_copy.visible = show_working
+	if decomp_root:
+		decomp_root.visible = show_working
+	if _streamline_mm:
+		_streamline_mm.visible = show_working
+
+	if environment_root:
+		var instrument_names: Array[String] = ["Windsock", "Anemometer", "CompassRose"]
+		for inst_name in instrument_names:
+			var node: Node = environment_root.get_node_or_null(NodePath(inst_name))
+			if node is Node3D:
+				(node as Node3D).visible = show_working
 
 
 ## Derives world_scale, domain_extent, and grid_spacing from world_size.
@@ -1949,6 +2030,11 @@ func _create_dotted_line_multimesh(color: Color) -> MultiMeshInstance3D:
 
 
 func _update_dotted_lines(a: Vector3, b: Vector3, _result: Vector3) -> void:
+	# _update_single_dotted_line writes `visible` every frame, so hiding the
+	# parallelogram in _apply_evidence would be undone here on the next tick.
+	# At the default "longhand" this guard never fires.
+	if evidence != "longhand":
+		return
 	var sc := _sc()
 	# Line from tip of A to A+B (showing B's copy)
 	_update_single_dotted_line(dotted_line_b, a * sc, (a + b) * sc)
@@ -2121,7 +2207,10 @@ func _toggle_grid() -> void:
 
 
 func reset() -> void:
-	_apply_mode(0)
+	# Back to the weather this placement OPENS in — 0 (Calm) at the default, so
+	# the shipped rooms reset exactly as they did. `weather` is deliberately not
+	# written by _cycle_mode: it is the opening pose, not the live mode.
+	_apply_mode(_weather_index())
 	gravity_strength = 1.0
 	pressure_intensity = 0.5
 	pressure_time = 0.0
@@ -2174,7 +2263,13 @@ func _exit_tree() -> void:
 func apply_grid_config(config: Dictionary) -> void:
 	## Reads optional sizing/density knobs and rebuilds the station if any change.
 	## Keys: world_size (float metres), arrow_grid_size (int), rain_count (int),
-	## cloud_count (int). Called by the grid system after instantiation.
+	## cloud_count (int), weather (String), evidence (String).
+	## Called by the grid system after instantiation.
+	##
+	## GUARDED. The two DNA axes are only taken when the word validates AND
+	## differs, and neither one triggers the full station rebuild — weather is a
+	## palette+vector swap, evidence is a visibility pass. All 6 existing
+	## placements pass none of these keys and are untouched.
 	if config == null or config.is_empty():
 		return
 
@@ -2192,15 +2287,38 @@ func apply_grid_config(config: Dictionary) -> void:
 		cloud_count = max(0, int(config["cloud_count"]))
 		changed = true
 
-	if not changed:
+	var weather_changed := false
+	if config.has("weather"):
+		var w: String = str(config["weather"]).to_lower()
+		if WEATHERS.has(w) and w != weather:
+			weather = w
+			weather_changed = true
+
+	var evidence_changed := false
+	if config.has("evidence"):
+		var ev: String = str(config["evidence"]).to_lower()
+		if EVIDENCES.has(ev) and ev != evidence:
+			evidence = ev
+			evidence_changed = true
+
+	if not (changed or weather_changed or evidence_changed):
 		return
 
-	# Only rebuild if we're already in the tree (built once). Otherwise _ready
+	# Only act if we're already in the tree (built once). Otherwise _ready
 	# will pick up the new values when it runs.
 	if not is_inside_tree() or environment_root == null:
 		return
 
-	_rebuild_station()
+	# A sizing/density change rebuilds the whole station, and _build_all applies
+	# the new weather and evidence on its way through — no second pass needed.
+	if changed:
+		_rebuild_station()
+		return
+
+	if weather_changed:
+		_apply_mode(_weather_index())
+	if evidence_changed:
+		_apply_evidence()
 
 
 func _rebuild_station() -> void:

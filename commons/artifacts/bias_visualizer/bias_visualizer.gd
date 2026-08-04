@@ -4,13 +4,17 @@ class_name BiasVisualizer
 
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+## The family's canonical disclosure ladder, read from the file that owns it
+## rather than copied — the same link slot_machine.gd:81 makes, and for the same
+## reason: two artifacts asking one question must not drift into two vocabularies.
+const Disclosure = preload("res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd")
 
 # @identity
 # essence: embedding_space(words, gender_axis) -> proximity_reveals_prejudice
 # desire: see whose edge cases the training data forgot
-# critical_parameter: analogy_type — switches between gender-profession, gender-trait, and algorithmic redlining
+# critical_parameter: analogy_type — switches between gender-profession, gender-trait, and algorithmic redlining; disclosure — how much of the skew the case ADMITS on its face (oracle | tally | ledger | works | origin)
 # triggers: push-button selection cycles analogy modes; word proximity to gendered anchors shifts meaning
-# emerges: the uncomfortable recognition that "neutral" embeddings reproduce structural inequality
+# emerges: the uncomfortable recognition that "neutral" embeddings reproduce structural inequality; at disclosure:oracle the same prejudice is in the same twenty spheres and nothing on the case will tell you
 # needs: VR push buttons [has], rotation toggle [has], word grab interaction [missing]
 # relationships: unlocks critical algorithmic thinking; depends on foundations crisis (incompleteness); contrasts ordered_grid (perfect pattern vs biased pattern)
 # truth: classification systems do not describe the world — they encode whose categories get to count
@@ -52,6 +56,67 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 		analogy_type = clampi(value, 0, 2)
 		if is_inside_tree():  # Only update if node is ready
 			_show_analogy()
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA (promoted 2026-08-03) — `disclosure`, the family word, on the one
+# artifact in the corpus whose SUBJECT is what a system declines to say.
+#
+# The ladder is prng_crank_machine's, character for character, and it fits here
+# without bending, because this cabinet already contains all five rungs — it
+# just showed every one of them unconditionally, so the ladder was invisible:
+#
+#   oracle    the classification and nothing else. Twenty words, coloured by the
+#             gender the embedding assigned them, with no axis drawn, no lines,
+#             a dark screen and a blank label. This is the deployed condition —
+#             the output arrives, the skew is in it, and the machine does not
+#             mention it. The most important frame in the strip.
+#   tally   + the aggregate: the gender axis machined into the deck, MASC at one
+#             end and FEM at the other. Now you know the colours mean something
+#             and what the something is measured along.
+#   ledger  + the per-item record: the connection lines, each profession wired
+#             to the pole it got pulled toward, and the man/woman pairs.
+#   works   + the mechanism: the analogy screen — "man - woman + nurse = ?",
+#             the mode, the word count. The operation that produced the layout.
+#   origin  + the state that produced it: the interpretive caption. "Professions
+#             cluster by gender. Who was in the training data?" — the provenance
+#             question, and at the redlining rung the names (Noble, Benjamin).
+#
+# WHY THE DEFAULT IS `origin` AND NOT THE FAMILY'S LEGACY `works`. Every rung is
+# on the face of this artifact today, caption included, so `origin` IS its
+# legacy state and the only value that leaves the two shipped placements alone.
+# The ladder is monotone, so this reads correctly: the artifact ships fully
+# disclosed, and the axis is a study in taking that away. Note the consequence
+# for token parsing — an unreadable word here falls back to `origin`, NOT to the
+# family's `works`, because a typo must not silently strip the caption off a
+# wall two rooms already read.
+#
+# NOT TOUCHED: WORD_DATA, the embedding coordinates, the axis colouring, the
+# vitrine, the buttons. Every rung shows the same twenty words in the same
+# places. This axis changes what the case SAYS about the skew, never the skew.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## THE AXIS — how much of its own skew this case admits.
+@export_enum("oracle", "tally", "ledger", "works", "origin") var disclosure: String = "origin"
+
+## The allow-list, in ladder order — same words, same spelling, same sequence as
+## the @export_enum above and as prng_crank_machine's DISCLOSURES.
+const DISCLOSURES: PackedStringArray = ["oracle", "tally", "ledger", "works", "origin"]
+
+## Rank of the current rung, 0..4. Every gate below is `_rung() >= n`. The
+## fallback is 4, this artifact's legacy rung — see the note above.
+func _rung() -> int:
+	return int(Disclosure.DISCLOSURE_RUNGS.get(disclosure, 4))
+
+
+## Strip, lower, fall back to what is already set. Same shape as the reader every
+## other axis in the corpus wires apply_grid_config through.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	if allowed.has(v):
+		return v
+	if v != "":
+		push_warning("bias_visualizer: unknown disclosure '%s' — keeping '%s'" % [v, fallback])
+	return fallback
 
 ## Half-extent of the gender axis in authored units: man sits at -AXIS_HALF and
 ## woman at +AXIS_HALF, and every other word is placed between them by the
@@ -111,6 +176,7 @@ var _header_cache := ""
 var _control_panel: Node3D
 var _rotation_enabled: bool = false
 var _created_nodes: Array[Node] = []
+var _built: bool = false
 
 # The specimen turns, the case stays put. _process used to spin the artifact
 # ROOT, which would have carried the cabinet around with the cloud — so the
@@ -150,6 +216,10 @@ var _mount_z: float = 0.0       # z of the ledge slope at its mid-height
 
 
 func _ready():
+	_build_all()
+
+
+func _build_all() -> void:
 	_derive_dims()
 	_create_turntable()
 	_create_base()
@@ -160,6 +230,7 @@ func _ready():
 	# is the last thing BUILT and the last thing before the first refresh.
 	_create_cabinet()
 	_show_analogy()
+	_built = true
 
 ## Every dimension of the case comes from the artifact's own variables — the
 ## vitrine is sized by the cloud it has to enclose, never by typed-in numbers.
@@ -242,7 +313,13 @@ func _create_base():
 	rim.position = Vector3(0, 0.011, 0)
 	_spin.add_child(rim)
 
-	# the gender axis as a machined groove, masc -> fem
+	# disclosure:tally and above — the gender axis as a machined groove, masc ->
+	# fem. THE AGGREGATE: one line saying every word in the case is scored
+	# between two poles. At `oracle` the deck is blank and the colours mean
+	# whatever the viewer decides they mean.
+	if _rung() < 1:
+		return
+
 	_spin.add_child(HangarKit.box(Vector3(0, 0.010, 0),
 		Vector3(2.0 * (_r_spin - 0.06), 0.002, 0.006), steel))
 
@@ -272,7 +349,9 @@ func _create_base():
 func _rebuild_header(title: String, equation: String, explanation: String) -> void:
 	if not is_instance_valid(_analogy_screen) or not is_instance_valid(_caption_anchor):
 		return   # the cabinet owns these anchors and is built before the first refresh
-	var key := title + "|" + equation + "|" + explanation
+	# The rung is part of the key: two analogies can share a caption, but a rung
+	# change must always repaint even when the text is identical.
+	var key := disclosure + "|" + title + "|" + equation + "|" + explanation
 	if key == _header_cache:
 		return
 	_header_cache = key
@@ -286,13 +365,24 @@ func _rebuild_header(title: String, equation: String, explanation: String) -> vo
 	var pal: Dictionary = HangarKit.finish_palette(finish)
 	var analogy: Dictionary = ANALOGIES.get(analogy_type, ANALOGIES[0])
 	var shown: Array = analogy.get("words", [])
-	var screen: Node3D = HangarKit.readout(title, [
-			equation,
-			"MODE %d/3" % (analogy_type + 1),
-			"WORDS %d" % shown.size(),
-		], _screen_size, pal["screen"], pal["text"], pal["accent"], finish)
-	if screen:
-		_analogy_screen.add_child(screen)
+	# disclosure:works and above — THE MECHANISM: the analogy equation and the
+	# mode that produced this layout. Below it the pocket stays dark, which is
+	# the sealed-face idiom the family already uses (slot_machine.gd:676).
+	if _rung() >= 3:
+		var screen: Node3D = HangarKit.readout(title, [
+				equation,
+				"MODE %d/3" % (analogy_type + 1),
+				"WORDS %d" % shown.size(),
+			], _screen_size, pal["screen"], pal["text"], pal["accent"], finish)
+		if screen:
+			_analogy_screen.add_child(screen)
+
+	# disclosure:origin — THE STATE THAT PRODUCED IT. The interpretive caption is
+	# the only surface on this machine that asks where the numbers came from
+	# ("Who was in the training data?"), so it is the top rung and, because it is
+	# already on the face, the legacy default.
+	if _rung() < 4:
+		return
 
 	# Split on the authored newlines FIRST, then wrap each piece — handing an
 	# embedded newline to a single-line bake is what made the redlining caption
@@ -608,6 +698,10 @@ func _create_cabinet() -> void:
 
 
 func _show_analogy():
+	# The analogy_type setter fires this from outside the build, and _rebuild_now
+	# leaves the cloud null for the rest of its own call. Nothing to mask yet.
+	if _word_mm == null:
+		return
 	# Hide all: zero-scale transform and hide labels
 	for word in _word_nodes.keys():
 		var info = _word_nodes[word]
@@ -634,6 +728,12 @@ func _show_analogy():
 
 func _draw_connections(words: Array):
 	_connection_lines.clear_surfaces()
+	# disclosure:ledger and above — THE PER-ITEM RECORD: each profession drawn to
+	# the pole the embedding pulled it toward, plus the man/woman pairs. Below
+	# that rung the mesh instance still exists and simply carries no surface, so
+	# the cloud stands with its associations undrawn.
+	if _rung() < 2:
+		return
 	_connection_lines.surface_begin(Mesh.PRIMITIVE_LINES)
 	
 	var pairs = [["man", "woman"], ["he", "she"], ["king", "queen"]]
@@ -684,5 +784,59 @@ func _exit_tree():
 			node.queue_free()
 	_created_nodes.clear()
 
+
+## Map tokens: "bias_visualizer#disclosure:oracle", "bias_visualizer#analogy_type:2".
+##
+## LATENT BUG PAID. This was `pass`, so every `#key: value` a map put on a
+## placement was parsed, logged and stashed as metadata, then silently dropped.
+##
+## THE EARLY RETURNS ARE LOAD-BEARING. curation_station calls this with
+## {"emissive": false} on everything it curates, one line after it has darkened
+## and un-billboarded the labels; an unconditional rebuild would throw that
+## framing away and never get it back. Nothing built yet -> _ready is about to
+## use the values. Nothing changed -> touch nothing, say nothing.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	var before: String = disclosure
+
+	if config_data.has("disclosure"):
+		disclosure = _pick_axis(str(config_data["disclosure"]), DISCLOSURES, disclosure)
+	if config_data.has("analogy_type"):
+		# The setter repaints on its own when we are already in the tree, so this
+		# needs no rebuild — the cloud is built once and re-masked per analogy.
+		analogy_type = int(config_data["analogy_type"])
+
+	if not _built:
+		return
+	if disclosure == before:
+		return
+	_rebuild_now()
+	print("[BiasVisualizer] Config applied — disclosure=%s" % [disclosure])
+
+
+## Tear down what this script built and build it again INLINE. Not deferred: the
+## grid's auto-grounding pass runs later in the same deferred queue and would
+## measure an empty node, return early, and leave the case ungrounded.
+func _rebuild_now() -> void:
+	# Only the three nodes parented to SELF are removed; everything else in
+	# _created_nodes descends from the turntable and goes with it.
+	for node in _created_nodes:
+		if is_instance_valid(node) and node.get_parent() == self:
+			remove_child(node)      # leaves the tree synchronously — no double render
+			node.queue_free()
+	_created_nodes.clear()
+
+	# Cached refs now point at freed nodes. Clearing them is what stops a rung
+	# change from repainting into a corpse.
+	_spin = null
+	_cloud = null
+	_word_mm = null
+	_word_mmi = null
+	_connection_lines = null
+	_connection_instance = null
+	_control_panel = null
+	_analogy_screen = null
+	_caption_anchor = null
+	_word_nodes.clear()
+	_header_cache = ""
+	_built = false
+	_build_all()

@@ -1666,6 +1666,27 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.082521Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "disclosure": [
+      "oracle",
+      "tally",
+      "ledger",
+      "works",
+      "origin"
+     ],
+     "analogy_type": [
+      0,
+      1,
+      2
+     ]
+    },
+    "default": "disclosure=origin, analogy_type=0 - both existing placements are untouched. Every rung of this ladder is already on the face of the case (axis inlay, connection lines, analogy screen, interpretive caption), so `origin` IS the shipped state and the only value that changes nothing; analogy_type=0 is the export default the .tscn already sets.",
+    "was": "The case showed all five rungs unconditionally and apply_grid_config was `pass`, so every token a map put on a placement was parsed, logged and silently discarded. analogy_type existed as a working export but was never declared, which is why the runner reported NO TURNABLE KNOBS.",
+    "note": "`disclosure` is prng_crank_machine's ladder, read by preload from the file that owns it (the same link slot_machine makes) rather than copied — oracle < tally < ledger < works < origin, monotone. Read here: oracle = twenty words coloured by the gender the embedding gave them, with no axis drawn, no lines, a dark screen and a blank label — the deployed condition, where the skew arrives inside the output and the machine does not mention it. Then + the aggregate (the MASC/FEM axis machined into the deck), + the per-item record (each profession wired to the pole that pulled it), + the mechanism (man - woman + nurse = ?), + the origin (Who was in the training data?). NOTE the default departs from the family's legacy `works` because this artifact's legacy face carries the caption; an unreadable token therefore falls back to `origin`, not `works`, so a typo cannot strip the provenance question off a wall two rooms already read. analogy_type is declared as its int samples because cabinet_sweep coerces numerics and the gate range-checks them; the words behind them are Gender-Profession, Gender-Trait, Algorithmic Redlining."
    }
   },
   "big_o_race": {
@@ -11192,7 +11213,34 @@
   "polyhedron_nets_cube": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "Cube net visualization with fold animation. Configurable via #fold_duration, #fold_delay, #auto_fold.",
+   "description": "Cube net visualization with fold animation. DNA: net selects WHICH of the eleven distinct cube nets is unfolded — latin_cross (the shipped 1-4-1 band with both flaps on one square), staircase (2-2-2, three dominoes stepping), zed (1-4-1 with the flaps at opposite ends) and two_rows (3-3). fold selects where the fold has got to — animated (the shipped tween), closed, hinged, flat. Use #net: and #fold:. Also configurable via #fold_duration, #fold_delay, #auto_fold.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "fold": [
+      "animated",
+      "closed",
+      "hinged",
+      "flat"
+     ],
+     "net": [
+      "latin_cross",
+      "staircase",
+      "zed",
+      "two_rows"
+     ]
+    },
+    "fixture": {
+     "fold": "flat"
+    },
+    "default": "fold=animated, net=latin_cross - a no-op on both. latin_cross calls _create_cube_faces() untouched (same six faces, same five hinges, same TopHinge/BottomHinge/LeftHinge/RightHinge/BackHinge names, same 0.15 delay on the back flap) and the generic builder is never entered; animated falls to the `_:` arm of _apply_fold_mode, which is `if auto_fold: _play_fold_animation()` - character for character the line it replaced. All 7 existing placements animate exactly as before, scene tree and capture AABB included",
+    "was": "the exports EXISTED and the registry had never declared them - fold_duration, fold_delay, fold_hold, auto_fold, loop_fold, fold_progress, all reachable from a map token and none declared. That was the right call for the wrong reason: every one of them is a rate or a delay, and this loop's evidence is one still PNG per value, which cannot see a rate. A sweep over fold_duration would have published six identical cubes at six speeds - a finished-looking experiment answering nothing, which is exactly what info_board's five-duration sweep already cost this project. Underneath them the artifact drew ONE of the eleven cube nets, hard-coded face by face in _create_cube_faces",
+    "note": "`net` is the axis that carries the file's own truth line - a polyhedron is a flat thing that folded. Drawing a single net makes the fold look like a property of THAT shape rather than of the cube; standing a 2-2-2 staircase and a 3-3 double row beside the 1-4-1 cross is the statement that four different flat things close into the same solid and the solid does not remember which. `fold` is the state, not the rate: flat is the plan (surface area before volume), hinged at 0.45 is the only pose where the hinges themselves are visible as hinges, closed is the finished solid. animated is kept as the default because it is what shipped, and its still is repeatable rather than arbitrary - the tween is deterministic, so the capturer's 1.1 s settle always lands about a quarter of the way in.",
+    "derivation": "the four net values were NOT chosen by eye. Every 6-cell polyomino was enumerated, folded through the same hinge-sign rule this file uses, and checked for landing on six distinct cube faces; that recovered exactly the eleven known nets, which is simultaneously the proof that the generic folder is correct and the proof that the shipped latin_cross hierarchy it reproduces was correct. Two of the first candidate 2-3-1 layouts FAILED that check and were dropped rather than shipped - at fold=flat a broken net looks perfectly fine, and nobody would have caught it until someone set fold=closed in a map.",
+    "kin": "`closure` was considered and declined. animatedcubebuilder uses it for strata/scaffold/solid, which asks what the finished thing is MADE of; this asks how far along the folding is, and the value lists cannot transfer. Taking the word without the answers would have been the dishonest half of a shared vocabulary, so `fold` - the file's own language, and its declared critical_parameter - is used instead.",
+    "harness_note": "the fixture pins fold=flat. The eleven nets are only distinguishable from each other while FLAT: at fold=closed all four values are the same cube, which is the artifact's whole point and would read as an inert axis. cabinet_sweep lets a swept axis override the fixture, so this is a no-op whenever fold is one of the two axes picked (it is declared first, so it normally is) and is the difference between measuring net and measuring nothing whenever it is not. Note also that net changes the flat FOOTPRINT - a 3-3 double row is 5 squares wide against the cross's 4 - so part of any measured bite at fold=flat is the fixed camera fitting a wider union. That is honest: a different net genuinely is a different-shaped flat object."
+   },
    "dev_themes": [
     "commons",
     "mixed"

@@ -723,6 +723,22 @@
    }
   },
   "cloth_straps": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "suspension": [
+      "none",
+      "gantry",
+      "wall",
+      "hoop",
+      "mast"
+     ]
+    },
+    "default": "suspension=gantry - _rig_gantry() reruns the shipped setup_frame() arithmetic literally: same frame_width and frame_height expressions, same 0.5 thickness, same Color(0.5, 0.0, 0.1), same box sizes and positions, same CollisionShape3D per bar, same child order, same StaticBody3D named Frame. All 7 placements are bare cloth_straps tokens with no config, and GridInteractablesComponent only calls apply_grid_config when a token's config is non-empty, so none of them reaches that function at all. apply_grid_config additionally returns before touching anything when the value is unknown or unchanged, and never rebuilds the straps.",
+    "was": "one deep-red portal and only one - a top bar on two side posts with an open bottom, hard-coded in setup_frame(). A doorway, which is a claim: that the cloth is a threshold with a here and a there and that the point is to pass between them.",
+    "note": "the word and its five values are spring_system.suspension reused character for character - same question (what does a hanging body hang from, built to meet a rank that never moves), same four shapes plus none. NOT `support` (that axis is what a thing stands ON; nothing here stands on anything) and NOT `hang` (gallery_winner_showcase's axis is the arrangement of the hung objects; this one leaves the strap rank exactly where it was). strap_count is the @identity's critical_parameter and is deliberately NOT declared: with five suspension values the gallery's cap of 9 drops any second axis before it renders, so declaring it would add a ledger row no sweep ever measures. It stays a plain export the sweep can set before add_child, and apply_grid_config deliberately does not accept it: honouring a count change at runtime means respawning every SoftBody3D on a live placement."
+   },
    "name": "Cloth Straps",
    "lookup_name": "cloth_straps",
    "description": "Hanging soft body cloth straps that the player can walk through.",

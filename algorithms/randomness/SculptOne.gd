@@ -4,7 +4,7 @@
 # critical_parameter: noise — the FastNoiseLite seed that determines where each shape lands and how it deforms
 # triggers: _ready() builds materials, samples noise to place a curated palette of glossy/fabric/granular blobs
 # emerges: an Omoss-style still-life — pinks and yellows soft against glossy red and clear, a tactile composition rendered procedurally
-# needs: palette swap dial [missing]; reseed button [missing]; gloss-to-fabric ratio slider [missing]
+# needs: palette swap dial [has: substance]; reseed button [has: sculpt_seed]; gloss-to-fabric ratio slider [has: substance]
 # relationships: cousin of softbodies sequence (material as actor); contrast to deterministic still-lifes
 # truth: Materials are choices, not surfaces. Glossy plastic is a different randomness than woven cotton, even at the same noise seed.
 
@@ -12,6 +12,56 @@ extends Node3D
 
 # Liquid Fabric Composition inspired by Albert Omoss style
 # A 3D composition mixing glossy liquid surfaces with fabric-like materials
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA (promoted 2026-08-03) — two axes, both already in this file as
+# hard-coded constants, neither reachable from a map token until now.
+#
+#   hand        WHICH sculpting move constitutes the piece. create_composition()
+#               ran five moves unconditionally — pour a fluid mass, drape three
+#               cloth cones, stipple a bumped sphere, spatter drips, grow bubble
+#               extensions. Each is a different randomness doing a different
+#               thing to the same block, and the piece was the sum with no way
+#               to see any one of them. The word is maze_generation's `hand`:
+#               which procedure makes the form. Its value list is this
+#               artifact's own moves, the way maze_generation's is its own
+#               algorithms.
+#   substance   WHAT the piece is made of, colour held constant. Same word as
+#               rainbow's `substance` (light|glass|solid) and the same question;
+#               a different rung list, because a still-life of cloth and liquid
+#               has no "light" rung. This is the truth line above, turned into a
+#               knob: identical geometry rendered as one material register
+#               instead of a curated mix, so gloss and weave can be compared at
+#               the same seed rather than described.
+#
+# NOT TOUCHED: the geometry every move builds, the noise that deforms it, the
+# palette's hues. `substance` rewrites roughness/metallic/clearcoat/normal only
+# — every blob keeps the colour create_materials() gave it.
+#
+# THE SHARED NOISE. All four normal maps hold a reference to ONE FastNoiseLite
+# that create_materials() and create_fabric_layer() both mutate, and
+# NoiseTexture2D bakes late, so the maps see whatever state the build LEAVES.
+# That is pre-existing and deliberately left alone — but it means dropping the
+# drape move would silently change every fabric material too, so
+# create_composition() now pins that end state for every value of `hand`. The
+# axis moves the geometry; it must not move the surfaces underneath it.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## THE FIRST AXIS — which sculpting move makes the piece. "composition" is the
+## legacy value: all five moves, in the order they have always run.
+@export_enum("composition", "pour", "drape", "stipple", "spatter") var hand: String = "composition"
+
+## THE SECOND AXIS — what the piece is made of. "mixed" is the legacy value: the
+## curated palette untouched, gloss next to weave next to grain.
+@export_enum("mixed", "glossy", "fabric", "granular") var substance: String = "mixed"
+
+## 0 keeps the original behaviour — a fresh composition every launch, which is
+## what three rooms have always shown. A positive value pins the whole piece so
+## a sweep photographs ONE object under different axes instead of five objects.
+@export var sculpt_seed: int = 0
+
+const HANDS: PackedStringArray = ["composition", "pour", "drape", "stipple", "spatter"]
+const SUBSTANCES: PackedStringArray = ["mixed", "glossy", "fabric", "granular"]
 
 # Materials
 var materials = {
@@ -29,11 +79,32 @@ var materials = {
 var noise = FastNoiseLite.new()
 var rng = RandomNumberGenerator.new()
 
+## Everything this script adds to itself. The .tscn also carries a Camera3D that
+## this script must never free, so a rebuild tears down THIS list and nothing else.
+var _owned: Array[Node] = []
+var _built: bool = false
+
 func _ready() -> void:
+	_build_all()
+
+
+func _build_all() -> void:
+	# Seeded FIRST: create_materials() draws from it too.
+	if sculpt_seed > 0:
+		rng.seed = sculpt_seed
+	else:
+		rng.randomize()
 	# Set up scene
 	setup_environment()
 	create_materials()
 	create_composition()
+	_built = true
+
+
+## add_child + remember, so a rebuild can undo exactly what a build did.
+func _own(node: Node) -> void:
+	add_child(node)
+	_owned.append(node)
 
 
 func setup_environment() -> void:
@@ -69,8 +140,8 @@ func setup_environment() -> void:
 	
 	# Apply environment
 	environment.environment = env
-	add_child(environment)
-	
+	_own(environment)
+
 	# Add lighting
 	setup_lighting()
 
@@ -81,7 +152,7 @@ func setup_lighting() -> void:
 	key_light.light_energy = 2.0
 	key_light.shadow_enabled = true
 	key_light.rotation_degrees = Vector3(-45, 30, 0)
-	add_child(key_light)
+	_own(key_light)
 	
 	# Create rim light
 	var rim_light = DirectionalLight3D.new()
@@ -89,7 +160,7 @@ func setup_lighting() -> void:
 	rim_light.light_energy = 1.0
 	rim_light.shadow_enabled = false
 	rim_light.rotation_degrees = Vector3(-20, -140, 0)
-	add_child(rim_light)
+	_own(rim_light)
 	
 	# Create fill light
 	var fill_light = OmniLight3D.new()
@@ -98,11 +169,11 @@ func setup_lighting() -> void:
 	fill_light.shadow_enabled = true
 	fill_light.position = Vector3(-2, 0, 3)
 	fill_light.omni_range = 8.0
-	add_child(fill_light)
+	_own(fill_light)
 
 func create_materials() -> void:
 	# Initialize noise for materials
-	noise.seed = randi()
+	noise.seed = int(rng.randi())
 	noise.fractal_octaves = 4
 	noise.frequency = 0.1
 	
@@ -202,34 +273,113 @@ func create_materials() -> void:
 	materials.bubble_material.refraction_enabled = true
 	materials.bubble_material.refraction_scale = 0.05
 
+	# substance != "mixed" re-registers every one of the eight above. Colour is
+	# kept; only the surface is re-argued.
+	_apply_substance()
+
+
+## A dedicated noise for a substance normal map. NOT the shared `noise` object —
+## that one is mutated during the build and must be left exactly as the legacy
+## path leaves it (see the header note). Unseeded on purpose: a fixed normal map
+## across all four values keeps `substance` a claim about surface and nothing else.
+func _substance_normal(cellular: bool, bump: float) -> NoiseTexture2D:
+	var n := FastNoiseLite.new()
+	if cellular:
+		n.noise_type = FastNoiseLite.TYPE_CELLULAR
+		n.cellular_distance_function = FastNoiseLite.DISTANCE_EUCLIDEAN
+		n.cellular_jitter = 1.0
+		n.frequency = 10.0
+	else:
+		n.noise_type = FastNoiseLite.TYPE_SIMPLEX
+		n.frequency = 2.0
+	var tex := NoiseTexture2D.new()
+	tex.noise = n
+	tex.as_normal_map = true
+	tex.bump_strength = bump
+	return tex
+
+
+## Rewrite the whole palette into ONE material register. "mixed" returns before
+## touching anything, which is why the three shipped placements are untouched.
+func _apply_substance() -> void:
+	if substance == "mixed":
+		return
+	for key in materials.keys():
+		var raw = materials[key]
+		if not (raw is StandardMaterial3D):
+			continue
+		var m: StandardMaterial3D = raw
+		# The hue survives; everything that makes it a SUBSTANCE is replaced.
+		var albedo: Color = m.albedo_color
+		albedo.a = 1.0
+		m.albedo_color = albedo
+		m.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+		m.refraction_enabled = false
+		m.clearcoat_enabled = false
+		m.normal_enabled = false
+		m.normal_texture = null
+		match substance:
+			"glossy":
+				m.metallic = 0.2
+				m.roughness = 0.1
+				m.clearcoat_enabled = true
+				m.clearcoat = 1.0
+				m.clearcoat_roughness = 0.05
+			"fabric":
+				m.metallic = 0.0
+				m.roughness = 0.9
+				m.normal_enabled = true
+				m.normal_texture = _substance_normal(false, 2.0)
+			"granular":
+				m.metallic = 0.2
+				m.roughness = 0.7
+				m.normal_enabled = true
+				m.normal_texture = _substance_normal(true, 5.0)
+
+
 func create_composition() -> void:
 	# Root node for the composition
 	var composition = Node3D.new()
 	composition.name = "LiquidComposition"
-	add_child(composition)
-	
-	# Create base - fluid-like purple mass
+	_own(composition)
+
+	# PIN THE SHARED NOISE. create_fabric_layer() sets exactly this, three times,
+	# on the legacy path — so the state it leaves behind for the late-baking
+	# normal maps is unchanged here, and now it is the SAME state for every value
+	# of `hand`, including the ones that never drape a cloth. Without this line
+	# dropping the drape move would also change how every fabric material looks,
+	# and the axis would be measuring two things at once.
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.frequency = 2.0
+
+	# The block the sculptor works. Present under every hand — what varies is
+	# what is DONE to it, not whether there is anything there.
 	var base = create_fluid_mass(materials.glossy_purple, Vector3(0, 0, 0), Vector3(2.0, 0.8, 2.0))
 	composition.add_child(base)
-	
+
+	var every: bool = hand == "composition"
+
 	# Add fabric layers
-	create_fabric_layer(composition, materials.fabric_pink, Vector3(0, 0.4, 0), 0.8, 0.2)
-	create_fabric_layer(composition, materials.fabric_yellow, Vector3(0, 0.75, 0), 1.0, 0.15)
-	create_fabric_layer(composition, materials.fabric_purple, Vector3(0, 1.0, 0), 0.7, 0.2)
-	
+	if every or hand == "drape":
+		create_fabric_layer(composition, materials.fabric_pink, Vector3(0, 0.4, 0), 0.8, 0.2)
+		create_fabric_layer(composition, materials.fabric_yellow, Vector3(0, 0.75, 0), 1.0, 0.15)
+		create_fabric_layer(composition, materials.fabric_purple, Vector3(0, 1.0, 0), 0.7, 0.2)
+
 	# Add red glossy blob
-	var red_blob = create_fluid_mass(materials.glossy_red, Vector3(0.5, 1.2, -0.3), Vector3(0.7, 0.5, 0.7))
-	composition.add_child(red_blob)
-	
+	if every or hand == "pour":
+		var red_blob = create_fluid_mass(materials.glossy_red, Vector3(0.5, 1.2, -0.3), Vector3(0.7, 0.5, 0.7))
+		composition.add_child(red_blob)
+
 	# Add textured orange sphere at top
-	var orange_sphere = create_textured_sphere(materials.granular_orange, Vector3(-0.3, 1.8, 0.2), 0.5)
-	composition.add_child(orange_sphere)
-	
-	# Add clear drips
-	create_drip_elements(composition, 15)
-	
-	# Add green bubble extensions (similar to the green tentacle-like elements)
-	create_bubble_extensions(composition, Vector3(-0.3, 2.0, 0.2), 8)
+	if every or hand == "stipple":
+		var orange_sphere = create_textured_sphere(materials.granular_orange, Vector3(-0.3, 1.8, 0.2), 0.5)
+		composition.add_child(orange_sphere)
+
+	if every or hand == "spatter":
+		# Add clear drips
+		create_drip_elements(composition, 15)
+		# Add green bubble extensions (similar to the green tentacle-like elements)
+		create_bubble_extensions(composition, Vector3(-0.3, 2.0, 0.2), 8)
 
 func create_fluid_mass(material, position, scale_vec):
 	var fluid = Node3D.new()
@@ -245,18 +395,18 @@ func create_fluid_mass(material, position, scale_vec):
 	base_mesh.material_override = material
 	
 	# Add some deformations to make it look more fluid-like
-	var deform_count = randi() % 5 + 5
+	var deform_count = rng.randi() % 5 + 5
 	for i in range(deform_count):
 		var deform = MeshInstance3D.new()
 		var deform_mesh = SphereMesh.new()
-		deform_mesh.radius = randf_range(0.3, 0.7)
+		deform_mesh.radius = rng.randf_range(0.3, 0.7)
 		deform_mesh.height = deform_mesh.radius * 2
 		deform.mesh = deform_mesh
 		
 		# Random position on the surface
-		var angle = randf_range(0, TAU)
-		var elevation = randf_range(-1.0, 1.0)
-		var radius = randf_range(0.7, 1.1)
+		var angle = rng.randf_range(0, TAU)
+		var elevation = rng.randf_range(-1.0, 1.0)
+		var radius = rng.randf_range(0.7, 1.1)
 		deform.position = Vector3(
 			cos(angle) * radius * scale_vec.x,
 			elevation * scale_vec.y,
@@ -364,14 +514,14 @@ func create_textured_sphere(material, position, radius):
 	for i in range(bump_count):
 		var bump = MeshInstance3D.new()
 		var bump_mesh = SphereMesh.new()
-		var bump_size = randf_range(0.05, 0.15) * radius
+		var bump_size = rng.randf_range(0.05, 0.15) * radius
 		bump_mesh.radius = bump_size
 		bump_mesh.height = bump_size * 2.0
 		bump.mesh = bump_mesh
 		
 		# Position on sphere surface
-		var angle1 = randf_range(0, TAU)
-		var angle2 = randf_range(0, PI)
+		var angle1 = rng.randf_range(0, TAU)
+		var angle2 = rng.randf_range(0, PI)
 		var pos = Vector3(
 			sin(angle2) * cos(angle1),
 			sin(angle2) * sin(angle1),
@@ -390,30 +540,30 @@ func create_drip_elements(parent, count) -> void:
 		var drip = MeshInstance3D.new()
 		
 		# Create different drip shapes
-		var drip_type = randi() % 3
+		var drip_type = rng.randi() % 3
 		
 		match drip_type:
 			0:  # Droplet
 				var droplet_mesh = SphereMesh.new()
-				droplet_mesh.radius = randf_range(0.05, 0.15)
+				droplet_mesh.radius = rng.randf_range(0.05, 0.15)
 				droplet_mesh.height = droplet_mesh.radius * 2.0
 				drip.mesh = droplet_mesh
 			1:  # Elongated drip
 				var drip_mesh = CapsuleMesh.new()
-				drip_mesh.radius = randf_range(0.03, 0.08)
-				drip_mesh.height = randf_range(0.2, 0.5)
+				drip_mesh.radius = rng.randf_range(0.03, 0.08)
+				drip_mesh.height = rng.randf_range(0.2, 0.5)
 				drip.mesh = drip_mesh
 			2:  # Small puddle
 				var puddle_mesh = SphereMesh.new()
-				puddle_mesh.radius = randf_range(0.1, 0.2)
+				puddle_mesh.radius = rng.randf_range(0.1, 0.2)
 				puddle_mesh.height = puddle_mesh.radius * 0.5  # Flattened
 				drip.mesh = puddle_mesh
 				drip.rotation_degrees.x = 90  # Lie flat
 		
 		# Random position around the composition
-		var angle = randf_range(0, TAU)
-		var radius = randf_range(0.5, 1.5)
-		var height = randf_range(0.0, 1.5)
+		var angle = rng.randf_range(0, TAU)
+		var radius = rng.randf_range(0.5, 1.5)
+		var height = rng.randf_range(0.0, 1.5)
 		
 		drip.position = Vector3(
 			cos(angle) * radius,
@@ -427,12 +577,12 @@ func create_drip_elements(parent, count) -> void:
 func create_bubble_extensions(parent, origin_position, count) -> void:
 	for i in range(count):
 		var extension = Node3D.new()
-		var extension_length = randf_range(0.3, 0.8)
+		var extension_length = rng.randf_range(0.3, 0.8)
 		var segment_count = 5
 		
 		# Direction from origin with randomness
-		var angle_horizontal = randf_range(0, TAU)
-		var angle_vertical = randf_range(-PI/3, PI/3)
+		var angle_horizontal = rng.randf_range(0, TAU)
+		var angle_vertical = rng.randf_range(-PI/3, PI/3)
 		
 		var direction = Vector3(
 			cos(angle_horizontal) * cos(angle_vertical),
@@ -444,7 +594,7 @@ func create_bubble_extensions(parent, origin_position, count) -> void:
 		var prev_pos = origin_position
 		for j in range(segment_count):
 			var segment = MeshInstance3D.new()
-			var segment_size = randf_range(0.05, 0.1) * (1.0 - j / float(segment_count))
+			var segment_size = rng.randf_range(0.05, 0.1) * (1.0 - j / float(segment_count))
 			
 			var segment_mesh = SphereMesh.new()
 			segment_mesh.radius = segment_size
@@ -454,9 +604,9 @@ func create_bubble_extensions(parent, origin_position, count) -> void:
 			# Add some noise to the direction
 			var noise_factor = 0.3
 			var noise_direction = Vector3(
-				randf_range(-noise_factor, noise_factor),
-				randf_range(-noise_factor, noise_factor),
-				randf_range(-noise_factor, noise_factor)
+				rng.randf_range(-noise_factor, noise_factor),
+				rng.randf_range(-noise_factor, noise_factor),
+				rng.randf_range(-noise_factor, noise_factor)
 			)
 			
 			direction = (direction + noise_direction * 0.2).normalized()
@@ -476,7 +626,9 @@ func create_bubble_extensions(parent, origin_position, count) -> void:
 
 # Optional: add subtle animation
 func _process(delta: float) -> void:
-	var composition = get_node("LiquidComposition")
+	# _or_null: during a rebuild the composition is gone for the rest of the
+	# frame, and get_node() would log an error every one of them.
+	var composition = get_node_or_null("LiquidComposition")
 	if composition:
 		# Add very subtle movement
 		composition.rotate_y(delta * 0.05)
@@ -485,7 +637,59 @@ func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
+	_owned.clear()
 
 
+## Read an axis token the way the rest of the corpus does: strip, lower, and fall
+## back to what is already set rather than to silence. A typo must not quietly
+## empty a still-life that three rooms expect whole.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	if allowed.has(v):
+		return v
+	if v != "":
+		push_warning("sculpt_one: unknown value '%s' — keeping '%s'" % [v, fallback])
+	return fallback
+
+
+## Map tokens: "sculpt_one#hand:drape", "sculpt_one#substance:fabric",
+## "sculpt_one#sculpt_seed:20260803".
+##
+## THE TWO EARLY RETURNS ARE LOAD-BEARING. curation_station calls this with
+## {"emissive": false} on every artifact it curates — a dict carrying none of
+## these keys. An unconditional rebuild there would throw away the framing it
+## just applied. So: nothing built yet, do nothing (_ready is about to use the
+## values); nothing changed, do nothing and say nothing.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var before_hand: String = hand
+	var before_substance: String = substance
+	var before_seed: int = sculpt_seed
+
+	if config.has("hand"):
+		hand = _pick_axis(str(config["hand"]), HANDS, hand)
+	if config.has("substance"):
+		substance = _pick_axis(str(config["substance"]), SUBSTANCES, substance)
+	if config.has("sculpt_seed"):
+		sculpt_seed = int(config["sculpt_seed"])
+
+	if not _built:
+		return
+	if hand == before_hand and substance == before_substance and sculpt_seed == before_seed:
+		return
+	_rebuild_now()
+
+
+## Tear down exactly what this script built, then build it again INLINE. No
+## call_deferred: a deferred rebuild leaves the node empty for a frame, and the
+## grid's auto-grounding pass — later in the same deferred queue — would measure
+## a zero AABB and leave the piece floating.
+func _rebuild_now() -> void:
+	for c in _owned:
+		if is_instance_valid(c):
+			remove_child(c)
+			c.queue_free()
+	_owned.clear()
+	for key in materials.keys():
+		materials[key] = null
+	_built = false
+	_build_all()
