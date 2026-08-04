@@ -37,6 +37,55 @@ class_name Matrix4x4Viewer
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
+# ── DNA (stage 2 — variation) ────────────────────────────────────────
+# `pose` = WHICH transform the sixteen numbers are currently the truth of.
+#
+# The artifact ships showing the IDENTITY. _translate is zero, _rotate_y is
+# zero, _scale_uniform is one, and nothing moves them until a hand reaches the
+# slider pad — so every one of the six placements stands in its map arguing the
+# one case where the matrix says nothing: ones down the diagonal, zeros
+# everywhere else, a cube sitting square. The console is built to hold two
+# co-equal languages for one state and it has only ever been photographed
+# holding the empty sentence.
+#
+# The word and its six values are taken character for character from
+# invariants_demo, which asks the same question of a triangle
+# (none | translate | rotate | scale | shear | project) — and the two DO measure
+# alike on the first five: a placed SHEAR copy of either argues its case before
+# anyone touches a control. `project` is where they part, and the difference is
+# the whole reason this artifact exists rather than that one. invariants_demo's
+# project is a dot-product shadow — a 3-vector read. Here it is the FOURTH ROW
+# going non-zero, which is the one thing a 4x4 can say that a 3x3 cannot, and
+# the reason the homogeneous row is in the display at all. Godot's Transform3D
+# cannot hold a projective bottom row, so this value is carried where it is
+# actually visible: the corner divide on the wireframe, and the gray row's third
+# cell reading 6.00 instead of 0.00.
+#
+# NOT declared: `finish` and `plinth_height`. Both are already exported, both
+# change the picture, and both are facts about the cabinet rather than about the
+# transform — the housing grammar's business, not this axis's.
+#
+# ONE AXIS, NOT TWO. The obvious second — how much of the matrix is shown beside
+# the cube, the `workings` question transform_composition_workbench already
+# owns — is declined here because the evidence is one still: the sixteen cells
+# are Label3D glyphs at pixel_size 0.0016 inside a 0.5 m cabinet, and hiding or
+# revealing some of them moves a few hundred thin yellow pixels. That is an axis
+# a still cannot measure, and a finished-looking sheet of it would answer
+# nothing. dna.framing is set below 1.0 for the same reason, so that pose is
+# read on the two bays rather than on the plinth.
+@export_enum("none", "translate", "rotate", "scale", "shear", "project") var pose: String = "none"
+
+# What each non-identity pose sets. Each is inside the domain the body was sized
+# for in _compute_layout(), so no pose can put the specimen through its own
+# vitrine: TRAVEL is the sliders' own extreme, SCALE_MAX is the sweep the bay
+# width was derived from, and the shear and the divide both stay inside the
+# rotating cube's XZ diagonal.
+const POSE_ROTATE_DEG: float = 30.0
+const POSE_SHEAR: float = 0.8
+const POSE_PERSPECTIVE: float = 6.0
+
+var _built: bool = false
+
 # ── Housing finish ────────────────────────────────────────────────────
 ## "rams" (light Braun default) or "terminal" (dark console). One word drives
 ## every colour through HangarKit.finish_palette().
@@ -83,11 +132,21 @@ var _matrix_origin: Vector3 = Vector3.ZERO
 var _translate := Vector3.ZERO
 var _rotate_y: float = 0.0
 var _scale_uniform: float = 1.0
+# The two cells the sliders cannot reach. Both are ZERO in every shipped
+# placement, and every branch that reads them is guarded on that zero, so the
+# default build runs the pre-promotion code path exactly.
+var _shear: float = 0.0
+var _perspective: float = 0.0
 
 var _cube_root: Node3D
 var _edge_meshes: Array[MeshInstance3D] = []
 var _matrix_labels: Array[Label3D] = []
 var _panel: Node3D
+# The specimen's own coordinates, kept so the projective pose can re-place the
+# edges. A projective map is not a node transform; it has to move the corners.
+var _corners: Array = []
+var _edges: Array = []
+var _cube_projected: bool = false
 
 
 func _ready() -> void:
@@ -97,6 +156,11 @@ func _ready() -> void:
 	_build_panel()
 	_update_transform()
 	_create_cabinet()
+	# pose == "none" leaves the identity on show — the pre-promotion state, and
+	# what all six existing placements are built on.
+	if pose != "none":
+		_apply_pose()
+	_built = true
 
 
 # ═════════════════════════════════════════════════════════════════════
@@ -157,6 +221,9 @@ func _build_wireframe_cube() -> void:
 	mat.emission = Color(0.3, 0.85, 0.95)
 	mat.emission_energy_multiplier = 0.6
 
+	_corners = corners
+	_edges = edges
+
 	for edge in edges:
 		var a: Vector3 = corners[edge[0]]
 		var b: Vector3 = corners[edge[1]]
@@ -164,26 +231,35 @@ func _build_wireframe_cube() -> void:
 		var cyl := CylinderMesh.new()
 		cyl.top_radius = EDGE_RADIUS
 		cyl.bottom_radius = EDGE_RADIUS
-		cyl.height = a.distance_to(b)
 		mi.mesh = cyl
 		mi.material_override = mat
-
 		# Position at midpoint, orient along the edge direction
-		mi.position = (a + b) / 2.0
-		var dir: Vector3 = (b - a).normalized()
-		if dir.is_equal_approx(Vector3.UP):
-			pass  # default cylinder orientation
-		elif dir.is_equal_approx(Vector3.DOWN):
-			mi.rotation.z = PI
-		else:
-			var axis: Vector3 = Vector3.UP.cross(dir).normalized()
-			var angle: float = acos(clampf(Vector3.UP.dot(dir), -1.0, 1.0))
-			if axis.length() > 0.001:
-				mi.transform.basis = Basis(axis, angle)
-				mi.position = (a + b) / 2.0
-
+		_orient_edge(mi, a, b)
 		_cube_root.add_child(mi)
 		_edge_meshes.append(mi)
+
+
+## Seat one edge cylinder between two corners. Lifted out of _build_wireframe_cube
+## unchanged so the projective pose can re-seat the same twelve meshes on moved
+## corners — under a perspective divide the twelve edges are no longer the same
+## length, so re-placing them means re-sizing them too.
+func _orient_edge(mi: MeshInstance3D, a: Vector3, b: Vector3) -> void:
+	var cyl: CylinderMesh = mi.mesh as CylinderMesh
+	if cyl:
+		cyl.height = a.distance_to(b)
+	mi.transform = Transform3D.IDENTITY
+	mi.position = (a + b) / 2.0
+	var dir: Vector3 = (b - a).normalized()
+	if dir.is_equal_approx(Vector3.UP):
+		return  # default cylinder orientation
+	if dir.is_equal_approx(Vector3.DOWN):
+		mi.rotation.z = PI
+		return
+	var axis: Vector3 = Vector3.UP.cross(dir).normalized()
+	var angle: float = acos(clampf(Vector3.UP.dot(dir), -1.0, 1.0))
+	if axis.length() > 0.001:
+		mi.transform.basis = Basis(axis, angle)
+		mi.position = (a + b) / 2.0
 
 	# Reference axes at cube center (small colored lines). Length is derived from
 	# CUBE_SIZE so that at SCALE_MAX + full travel the indicators still clear the
@@ -310,6 +386,11 @@ func _update_transform() -> void:
 	var xform := Transform3D.IDENTITY
 	xform = xform.scaled(Vector3.ONE * _scale_uniform)
 	xform = xform.rotated(Vector3.UP, deg_to_rad(_rotate_y))
+	# The shear cell. Zero in every shipped placement, so the multiply is skipped
+	# and the basis is bit-for-bit the one the sliders have always produced.
+	if not is_zero_approx(_shear):
+		xform.basis = xform.basis * Basis(
+			Vector3(1.0, 0.0, 0.0), Vector3(_shear, 1.0, 0.0), Vector3(0.0, 0.0, 1.0))
 	xform.origin = _translate
 
 	# Apply to cube — one home coordinate, shared with _build_wireframe_cube()
@@ -327,7 +408,10 @@ func _update_transform() -> void:
 		basis[0].x, basis[1].x, basis[2].x, origin.x,
 		basis[0].y, basis[1].y, basis[2].y, origin.y,
 		basis[0].z, basis[1].z, basis[2].z, origin.z,
-		0.0, 0.0, 0.0, 1.0,
+		# The homogeneous row. Hard-coded 0,0,0,1 until this pass — which made the
+		# gray row decoration. _perspective is 0.0 in every shipped placement, so
+		# the row still reads 0.00 0.00 0.00 1.00 there.
+		0.0, 0.0, _perspective, 1.0,
 	]
 
 	# Color coding: rotation/scale = cyan, translation = green, bottom row = gray
@@ -348,6 +432,37 @@ func _update_transform() -> void:
 				_matrix_labels[i].modulate = color_translation
 			else:
 				_matrix_labels[i].modulate = color_rotation
+
+	# The projective member of the pose axis. A Transform3D has no fourth row, so
+	# it cannot carry this — the divide has to be done on the corners themselves.
+	# Guarded on BOTH sides: skipped entirely while _perspective is zero and no
+	# projected cube is standing, which is the whole of the shipped behaviour.
+	if not is_zero_approx(_perspective) or _cube_projected:
+		_reshape_cube()
+
+
+## Re-seat the twelve edges on corners run through the homogeneous divide.
+## w = 1 + p*z, and the corner is drawn at corner/w — so the far face shrinks and
+## the near face swells, which is the frustum the fourth row is FOR. With
+## _perspective back at zero this restores the twelve authored corners exactly.
+func _reshape_cube() -> void:
+	if _corners.is_empty() or _edge_meshes.size() != _edges.size():
+		return
+	var pts: Array = []
+	for c in _corners:
+		var v: Vector3 = c
+		if not is_zero_approx(_perspective):
+			var w: float = 1.0 + _perspective * v.z
+			# The divide is undefined at the vanishing plane; clamp well short of
+			# it so a bad value cannot throw an edge to infinity through the case.
+			if absf(w) < 0.4:
+				w = 0.4 if w >= 0.0 else -0.4
+			v = v / w
+		pts.append(v)
+	for i in _edges.size():
+		var pair: Array = _edges[i]
+		_orient_edge(_edge_meshes[i], pts[int(pair[0])], pts[int(pair[1])])
+	_cube_projected = not is_zero_approx(_perspective)
 
 
 # ═════════════════════════════════════════════════════════════════════
@@ -531,5 +646,42 @@ func _create_cabinet() -> void:
 			cab.add_child(ped)
 
 
+## Put the console into the pose the word names, and re-read the sixteen cells
+## from it. No node is built or freed here — the same twelve edges and sixteen
+## labels are re-seated, which is why this is safe to call after _ready.
+func _apply_pose() -> void:
+	_translate = Vector3.ZERO
+	_rotate_y = 0.0
+	_scale_uniform = 1.0
+	_shear = 0.0
+	_perspective = 0.0
+	match pose:
+		"translate":
+			# The sliders' own extreme, so the pose is a state a hand could reach.
+			_translate = Vector3(TRAVEL, TRAVEL, 0.0)
+		"rotate":
+			_rotate_y = POSE_ROTATE_DEG
+		"scale":
+			_scale_uniform = SCALE_MAX
+		"shear":
+			_shear = POSE_SHEAR
+		"project":
+			_perspective = POSE_PERSPECTIVE
+	_update_transform()
+
+
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# GUARDED TWICE. The word is taken only when it is one the code can build AND
+	# differs from what is already set, and the re-pose runs only after _ready has
+	# built once. All six existing placements pass no `pose` key, so they return on
+	# the first line and stand at the identity exactly as before.
+	if not config.has("pose"):
+		return
+	var want: String = str(config["pose"])
+	if want == pose:
+		return
+	if not (want in ["none", "translate", "rotate", "scale", "shear", "project"]):
+		return
+	pose = want
+	if _built:
+		_apply_pose()

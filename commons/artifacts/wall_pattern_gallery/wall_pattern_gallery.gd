@@ -25,6 +25,44 @@
 extends Node3D
 class_name WallPatternGallery
 
+# --- DNA (stage 2, promoted 2026-08-03) -------------------------------------
+# THE HARD-CODED THING THAT WAS SECRETLY AN ARGUMENT. `cluster_group_id` was
+# `group_index % GROUP_NAMES.size()` — the seventeen wallpaper groups dealt out in
+# IUC table order, one per cluster, forever, in every placement. That modulus is
+# the whole claim of the artifact and it was a literal. The seventeen are a CLOSED
+# set — Fedorov proved there are exactly seventeen ways a pattern can repeat in the
+# plane and no eighteenth — so how many of them a room uses is a mathematical
+# statement, not a decoration setting.
+#
+# census — HOW MANY OF THE SEVENTEEN LAWS THE ROOM USES.
+#     one     a single group on every surface of the whole walk. The palette and
+#             the domain motif still change cluster to cluster, because those are
+#             NOT clamped by this axis: the room keeps changing colour and keeps
+#             changing figure while the symmetry never moves. That is the artifact's
+#             own truth line put under load — "symmetry is not decoration" is only
+#             a claim until you hold the symmetry still and let the decoration run.
+#     pair    two groups alternating: the minimum at which a comparison exists.
+#     triad   three.
+#     chorus  SHIPPED. All seventeen, in IUC order, advancing every cluster_size
+#             rows and wrapping — bit-identical to the shipped modulus.
+#   The word and its four values are taken from paradox_stalker's `census`, same
+#   question (how many distinct members are standing in the room), resolved against
+#   this artifact's own material. It is a fair reuse and it is also a fair warning:
+#   its `chorus` is five bodies and this one's is seventeen groups, so the two
+#   artifacts will not measure alike in magnitude even though they measure alike in
+#   kind.
+#
+# WHAT IS DECLINED. A `surface` or coverage axis — walls only against the shipped
+# walls + ceiling + floor enclosure — is a real question this artifact could argue
+# and is not shipped: from one fixed camera, removing surfaces mostly changes how
+# much of the FRAME is lit, and the critic would read a fact about the camera as a
+# verdict on the design. tile_scale, emission_strength and grout_width are size and
+# palette knobs; cluster_size is the declared critical_parameter and stays a plain
+# named float rather than a vocabulary, because "how much space a symmetry occupies"
+# is a continuum and not a set of names.
+const CENSUS: PackedStringArray = ["one", "pair", "triad", "chorus"]
+
+@export_enum("one", "pair", "triad", "chorus") var census: String = "chorus"
 @export var cluster_size: int = 3
 @export var tile_scale: float = 4.0
 @export var emission_strength: float = 0.8
@@ -59,7 +97,16 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	_build_gallery()
 
+## Deliberately still assignment-only, with NO rebuild behind it. _ready waits
+## half a second before building, so config has always landed first; adding a
+## teardown here would be new behaviour for the seven existing placements and buy
+## nothing. An unrecognised census word is ignored rather than assigned, so a
+## typo falls back to the shipped chorus instead of silently rendering group 0.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("census"):
+		var c: String = str(config_data["census"]).strip_edges().to_lower()
+		if CENSUS.has(c):
+			census = c
 	if config_data.has("cluster_size"):
 		cluster_size = clampi(int(config_data["cluster_size"]), 1, 10)
 	if config_data.has("tile_scale"):
@@ -69,28 +116,62 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("grout_width"):
 		grout_width = clampf(float(config_data["grout_width"]), 0.0, 0.1)
 
+## How many of the seventeen this room is allowed to use. chorus returns
+## GROUP_NAMES.size(), which makes the modulus below the literal that shipped.
+func _census_limit() -> int:
+	match census:
+		"one":
+			return 1
+		"pair":
+			return 2
+		"triad":
+			return 3
+		_:
+			return GROUP_NAMES.size()
+
+
 func _build_gallery() -> void:
 	# Find GridSystem like the catalyst does
 	var grids := get_tree().get_nodes_in_group("grid_system")
+	var struct = null
+	if not grids.is_empty():
+		struct = grids[0].get("structure_component")
 	if grids.is_empty():
 		print("[WallPatternGallery] No grid_system found")
-		return
-
-	var grid: Node = grids[0]
-	var struct = grid.get("structure_component")
-	if not struct:
+	elif not struct:
 		print("[WallPatternGallery] No structure_component")
-		return
 
-	var positions: Array = struct.get("cube_positions")
+	var positions: Array = []
+	var cs: float = 1.0
+	var gt: float = 0.0
+	var grid_origin: Vector3 = Vector3.ZERO
+	if struct:
+		positions = struct.get("cube_positions")
+		cs = struct.get("cube_size")
+		gt = struct.get("gutter")
+		var grid: Node = grids[0]
+		grid_origin = grid.global_position if grid is Node3D else Vector3.ZERO
+
+	# STAND-IN. This artifact owns no geometry: it is an OPERATION on a host map's
+	# grid, so photographed alone it used to return here and render a black frame —
+	# which is a fact about the bench, not about the work. When there is no host it
+	# now raises a short corridor of its own and paints that instead. The branch
+	# cannot fire in any of the seven placements: every one of them is a token in a
+	# map, and a map always has a grid_system in the tree.
 	if positions.is_empty():
-		print("[WallPatternGallery] No cube_positions")
-		return
+		if struct:
+			# A real host that is simply empty. Return exactly as before — the
+			# stand-in is for having NO host, never for correcting one.
+			print("[WallPatternGallery] No cube_positions")
+			return
+		positions = _stand_in_positions()
+		cs = 1.0
+		gt = 0.0
+		grid_origin = Vector3.ZERO
+		_build_stand_in_cubes(positions, cs)
+		print("[WallPatternGallery] no host grid — raised a stand-in corridor of %d cubes" % positions.size())
 
-	var cs: float = struct.get("cube_size")
-	var gt: float = struct.get("gutter")
 	var total_size: float = cs + gt
-	var grid_origin: Vector3 = grid.global_position if grid is Node3D else Vector3.ZERO
 
 	# Collect ALL cubes (walls + ceiling + floor) grouped by Z
 	var z_groups: Dictionary = {}
@@ -113,7 +194,11 @@ func _build_gallery() -> void:
 	var z_count: int = 0
 
 	for z_val in z_values:
-		var cluster_group_id: int = group_index % GROUP_NAMES.size()
+		# census clamps the GROUP only. palette_id and the domain seed below are
+		# left on group_index exactly as they shipped — so at census=one the
+		# corridor keeps changing colour and motif while the symmetry holds still,
+		# and at chorus the modulus is the literal GROUP_NAMES.size() that shipped.
+		var cluster_group_id: int = group_index % _census_limit()
 		var palette_id: int = group_index % PALETTES.size()
 
 		# Create shared material for this cluster
@@ -138,6 +223,37 @@ func _build_gallery() -> void:
 
 	var num_groups := mini(group_index + 1, GROUP_NAMES.size())
 	print("[WallPatternGallery] Built %d clusters showing %d wallpaper groups on %d Z-rows" % [num_groups, mini(num_groups, GROUP_NAMES.size()), z_values.size()])
+
+## The corridor the artifact raises for itself when there is no host map: two
+## walls two cubes high, fifteen rows deep — five clusters at the default
+## cluster_size, which is the shortest walk in which `triad` and `chorus` are
+## still different rooms. Only ever reached with no grid_system in the tree.
+func _stand_in_positions() -> Array:
+	var out: Array = []
+	for z in range(0, 15):
+		for y in range(1, 3):
+			out.append(Vector3i(-2, y, z))
+			out.append(Vector3i(2, y, z))
+	return out
+
+
+## Plain grey cubes under the stand-in overlays, so the patterns sit on matter
+## rather than floating. Same construction the ceiling cubes already use.
+func _build_stand_in_cubes(positions: Array, cube_size: float) -> void:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.28, 0.29, 0.32)
+	mat.roughness = 0.85
+	for i in positions.size():
+		var gp: Vector3i = positions[i]
+		var cube := MeshInstance3D.new()
+		var box := BoxMesh.new()
+		box.size = Vector3(cube_size, cube_size, cube_size)
+		cube.mesh = box
+		cube.material_override = mat
+		cube.global_position = Vector3(float(gp.x), float(gp.y), float(gp.z)) * cube_size
+		cube.name = "StandIn_%d_%d_%d" % [gp.x, gp.y, gp.z]
+		add_child(cube)
+
 
 func _add_overlay(world_pos: Vector3, cube_size: float, material: ShaderMaterial, gp: Vector3i) -> void:
 	# Thin box slightly larger than cube face, offset outward
@@ -281,7 +397,11 @@ func _build_ceiling(grid_origin: Vector3, positions: Array, z_values: Array, z_g
 
 	# Also build floor cubes with patterns across the walkway
 	for z_val in z_values:
-		var cluster_group_id: int = group_index % GROUP_NAMES.size()
+		# census clamps the GROUP only. palette_id and the domain seed below are
+		# left on group_index exactly as they shipped — so at census=one the
+		# corridor keeps changing colour and motif while the symmetry holds still,
+		# and at chorus the modulus is the literal GROUP_NAMES.size() that shipped.
+		var cluster_group_id: int = group_index % _census_limit()
 		var palette_id: int = group_index % PALETTES.size()
 		var mat := _create_wallpaper_material(cluster_group_id, palette_id, group_index * 7 + 1)
 

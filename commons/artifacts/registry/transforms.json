@@ -2286,6 +2286,27 @@
    }
   },
   "matrix_4x4_viewer": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "pose": [
+      "none",
+      "translate",
+      "rotate",
+      "scale",
+      "shear",
+      "project"
+     ]
+    },
+    "framing": 0.72,
+    "default": "pose=none - the identity. _translate stays Vector3.ZERO, _rotate_y 0.0, _scale_uniform 1.0, and the two new cells _shear and _perspective are both 0.0, so every branch added in this pass is skipped: the basis multiply is guarded on is_zero_approx(_shear), the corner divide on is_zero_approx(_perspective) or a standing projected cube, and the homogeneous row still evaluates to 0.00 0.00 0.00 1.00. _ready calls _apply_pose only when pose != none. apply_grid_config was a bare `pass` and now returns on its first line unless a `pose` key is present, so all 6 existing placements build the identical console and stand at the identity exactly as before.",
+    "was": "four @export knobs, all of them cabinet: finish, wear, unit_code and plinth_height. Nothing about the transform was reachable from a map, and apply_grid_config's whole body was `pass` - so every placement stood in its map showing the ONE case where the matrix says nothing: ones down the diagonal, zeros everywhere else, a cube sitting square, until a hand reached the slider pad. A console built to hold two co-equal languages for one state, only ever photographed holding the empty sentence.",
+    "note": "The bottom row was hard-coded 0.0, 0.0, 0.0, 1.0 in the values array, which made the gray row decoration - a fourth row that could only ever say the same thing is not a fourth row. `project` is the value that pays for it: Godot's Transform3D cannot hold a projective bottom row, so the divide is done on the eight corners (w = 1 + p*z, corner drawn at corner/w) and the twelve edges are re-seated and re-sized on the result, while the third cell of the gray row reads 6.00. The other five values are reachable through the state the sliders already drive, each set to a value inside the domain _compute_layout sized the case for - TRAVEL is the sliders' own extreme and SCALE_MAX is the sweep the bay width was derived from - so no pose can put the specimen through its own vitrine.",
+    "kin": "pose is invariants_demo's word and its six values character for character (none | translate | rotate | scale | shear | project), and on the first five the two artifacts genuinely measure alike: a placed SHEAR copy of either argues its case before anyone touches a control, one on a triangle and one on a cube. THE SIXTH IS WHERE THEY PART AND THE DIFFERENCE IS DELIBERATE. invariants_demo's project is a dot-product shadow, a 3-vector read about alignment. Here project is the fourth row going non-zero - the one thing a 4x4 can say that a 3x3 cannot, and the reason this artifact carries a homogeneous row at all. Same word, same place in the list, a stronger reading of it; recorded here rather than renamed, because renaming would break a family term over a difference that is the point.",
+    "still_note": "ONE AXIS, NOT TWO, and the second was declined on the evidence rule. The obvious companion - how much of the matrix is shown beside the cube, the `workings` question transform_composition_workbench owns - is 16 Label3D cells at pixel_size 0.0016 inside a metre-wide cabinet; hiding or revealing some of them moves a few hundred thin yellow pixels, which a still cannot measure, and a sheet of it would look finished and answer nothing. THE SAME ARITHMETIC IS WHY framing IS SET TO 0.72. The body is roughly 1.06 x 1.59 with a 0.60 plinth hanging below the origin, the two bays occupy y 0.44 to 0.78, and the AABB centre the sweep aims at sits near y 0.20 - down in the apron. At the default distance the cube is about 0.1 m in a 2 m frame and the axis would be measured almost entirely on background. 0.72 crops the cap and the plinth foot and roughly doubles the bays' share of the frame. If the critic still returns a low focus number, crop-recheck the right bay and the cell grid before believing INERT: scale, shear and project change the silhouette of the specimen outright, and all six change every glyph in all sixteen cells.",
+    "placements": 6
+   },
    "name": "Matrix 4x4 Viewer",
    "lookup_name": "matrix_4x4_viewer",
    "description": "Interactive 4x4 transformation matrix viewer. A wireframe cube is transformed live by sliders controlling translate X/Y/Z, rotate Y, and uniform scale. The 4x4 matrix values update in real time as a color-coded Label3D grid — rotation/scale in cyan, translation in green, homogeneous row in gray.",

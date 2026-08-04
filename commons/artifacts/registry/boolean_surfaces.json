@@ -167,6 +167,34 @@
    }
   },
   "csg_compose_workbench": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "algebra": [
+      "triad",
+      "ordered",
+      "complete",
+      "atoms"
+     ],
+     "strike": [
+      "centred",
+      "raised",
+      "corner",
+      "grazing"
+     ]
+    },
+    "default": "algebra=triad, strike=corner - PRESERVES all seven placements exactly, and both defaults are short-circuits rather than recomputations. _recipe() at triad returns the same three dictionaries _build_presets used to hold inline, in the same order, with the same colours and the same labels; the bench width formula preset_spacing * (count + 0.2) evaluates at count=3 to preset_spacing * 3.2, the literal that shipped, and the layout formula (i - (count-1)/2) * preset_spacing evaluates to (i - 1) * preset_spacing, likewise the literal. strike=corner returns preset_offset (0.2, 0.1, 0.1) untouched instead of resolving a fraction of box_size. All seven placements are bare tokens passing no config keys at all, plus two reach-paths through curation_station whose #with_wall / #with_pillars / #with_barrier flags belong to the station and are never forwarded here. A placement that names preset_offset directly still wins over strike.",
+    "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS. Three exports existed and none of them was an argument: bench_color is palette, rotation_speed is a rate and invisible to a still, preset_spacing is the declared critical_parameter and a distance. The operator SET - the thing the artifact exists to hold - was a three-element literal array inside _build_presets, and the operand pair (box 0.45, sphere r 0.3 at (0.2, 0.1, 0.1)) was three more literals in the loop below it. apply_grid_config assigned preset_spacing with no rebuild behind it, so the one knob it exposed could not take effect after _ready.",
+    "note": "algebra is a NEW word. Nothing in the corpus asks what a closed operator set consists of; the nearest neighbours ask about one operation's depth (fontana_puncture's breach) or its exposition (workings). triad is Godot's three CSG primitives and the three the bracelet offers. ordered adds B - A beside A - B, and that pair is the entire proof that difference is the only non-commutative operator here - which is exactly the demonstration csg_difference_demo declined to swallow into its own workings and deferred to 'a second object beside this one'. This is that object. complete adds the symmetric difference, built as a nested (A union B) combiner minus a nested (A intersect B) combiner, and labelled longhand rather than as a symbol because the label IS the claim: XOR is derivable and is not a primitive of the tool. atoms drops the operators entirely for the three disjoint regions A-B, A intersect B, B-A that every one of them is a union of - three benches again, and the identical count is the point, since the room looks like the shipped one while arguing the opposite thing. strike is reused CHARACTER FOR CHARACTER from fontana_puncture and csg_difference_demo: same word, same four values, same question. The numbers are not theirs and cannot be - fontana's sphere is 1.36 half-extents, the demo's 1.10, this bench's 1.33 (r 0.3 against a 0.225 half-extent) - so the same fraction of box_size cuts a different topology in each, which is what makes the three comparable rather than merely identical. On this artifact it does something neither sibling can: one offset drives every operator on the bench at once, so the axis puts the bench's own claim (that these are one family) under load. At centred the union is a ball with eight box corners through it, the intersection is that ball flattened on six faces, and the difference breaches all six faces so the box survives as its twelve edges - three unmistakably different solids from a single placement of B.",
+    "declined": "workings (outcome | trace | operands | expression), the twelve-artifact family word, genuinely FITS this artifact and is still not shipped. The sibling already holds it: csg_difference_demo's promotion is precisely how much of ONE operation is drawn, and repeating it here across up to five presets would fill the frame with translucent ghosts and say the family's existing thing five times over. The hub's question is the set, the demo's question is the derivation; kept apart the two artifacts are comparable, merged one of them is redundant. Also declined: an axis over preset_spacing, the declared critical_parameter. It is a distance, and a distance is legible as a number - it does not need a vocabulary laid over it.",
+    "fixture": {
+     "rotation_speed": 0.0
+    },
+    "fixture_why": "Every preset root spins at 0.25 rad/s from the first frame, so without this the sweep photographs each variant at whatever yaw its settle happened to land on and the diff measures rotation instead of the axis. rotation_speed is a plain float export read only by _process, so pinning it to zero holds the presets at the yaw they have at spawn - the shipped look at t=0, not a new one. Numeric and not the string '0.0': the sweep assigns fixture values straight onto the property before _ready, where a String would be rejected by the typed float.",
+    "rebuild_guard": "apply_grid_config now stamps config into metadata, re-reads it, and returns early unless a value the build actually reads has changed - and returns immediately if _ready has not built yet. The old body assigned preset_spacing and had no rebuild at all, which worked only because config always arrives before _ready. All seven placements pass no keys, so the guard means none of them is even torn down.",
+    "still_note": "everything both axes build is standing CSG geometry resolved during _ready. There is no animation on this bench except the yaw the fixture pins, so a single frame is a complete account of both values."
+   },
    "name": "CSG Compose Workbench",
    "lookup_name": "csg_compose_workbench",
    "description": "Workbench holding all three CSG operators side by side. The introduction artifact for the csg-compose catalyst affordance.",

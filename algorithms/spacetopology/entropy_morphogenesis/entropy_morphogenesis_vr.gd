@@ -14,6 +14,75 @@ extends Node3D
 # Entropy S(t) drives the morphological parameters of the gyroid
 # Creates actual mesh geometry at a specific entropy state
 
+# --- DNA (stage 2 - variation), promoted 2026-08-03 -------------------------
+#
+# WHAT WAS ALREADY HERE AND WHAT NOBODY COULD REACH. This artifact has had a
+# clean parameter space since the day it was written — S in [0,1] driving
+# frequency, noise amplitude and threshold, and a `set_entropy()` that says so
+# in its own docstring. And `apply_grid_config()` was `pass`. Every knob was
+# exported to the inspector and NONE of them was reachable from a map token, so
+# all 7 placements (Topology_Entropy_Morphogenesis and its _p1.._p3,
+# Corridor_Topology_..., Morphogenesis_Intro, Curation_Bay_softbodies_4) render
+# the same gyroid at the same S. The promotion is mostly a matter of opening
+# the door that was already built.
+#
+# AXIS 1 - FOUND_STATE: which state of the second law you are standing in front
+# of. Borrowed word for word from [[entropy_jar]] in this same curriculum,
+# which asks exactly this question of a mixture instead of a form. Three of its
+# four values mean the same thing here and are taken unchanged:
+#
+#   sorted   S = 0.0. The crystal. Frequency at its floor, noise at 0.05, the
+#            triply-periodic surface legible cell by cell. Nothing has happened.
+#   stirred  SHIPPED (S = 0.3, whatever the scene loads). Noise is present and
+#            the periodicity still reads through it. Mid-sentence.
+#   mixed    S = 1.0. Frequency 1.6, noise 0.20, the sheets crumple and the
+#            passages stop lining up. You arrived after the arrow ran.
+#
+# entropy_jar's fourth value, `shelled`, is NOT taken. There it is a joke about
+# the jar's own instrument — order that is real and that the vertical binning
+# cannot see. This artifact has no instrument to fool: it reports nothing, it
+# only IS a shape. Borrowing the word would claim a comparability that does not
+# exist, so the list is an honest subset and the three shared values measure the
+# same question.
+#
+# AXIS 2 - LEVEL: where the surface is cut through the field. The truth line at
+# the top of this file says morphogenesis is what happens "when entropy finds a
+# THRESHOLD where disorder crystallizes into structure" — and that threshold has
+# been nailed to 0.0 in every placement, the one level at which a gyroid is a
+# minimal surface and its two labyrinths are congruent. Move it and the claim
+# changes: the same field, the same entropy, a different structure.
+#
+#   minimal    0.00  SHIPPED. Balanced. Half solid, half void, both labyrinths
+#                    connected. The triply-periodic MINIMAL surface proper.
+#   thickened -0.60  The solid phase swells to roughly three quarters. What was
+#                    a membrane becomes a block pierced by narrow tunnels.
+#   pinched   +0.60  The solid retreats to about a quarter: thin struts, wide
+#                    channels, still one connected labyrinth.
+#   broken    +0.95  Past the percolation point. The labyrinth is no longer a
+#                    labyrinth — it is isolated pockets. The topology breaks
+#                    without the entropy changing at all, which is the whole
+#                    argument: structure is a fact about where you cut.
+#
+# BOTH DEFAULTS ARE NO-OPS. `stirred` and `minimal` assign nothing whatsoever;
+# they fall through to `_:` and leave S and threshold_center exactly as the
+# scene loaded them. The 7 existing placements are byte-identical to before.
+#
+# NOT declared, deliberately: box_size and voxel_resolution are size and budget,
+# not argument; base_color/rim_color/metallic/roughness are livery; and
+# `regenerate_at_entropy` is an inspector button, not a state.
+#
+# FIELD_SEED is a fixture knob, not an axis. GyroidFieldGenerator does
+# `noise.seed = randi()`, so every gyroid in the corpus is genuinely a different
+# gyroid — correct in a map, fatal on the bench, where five variants would be
+# five different objects. 0 keeps the shipped randi(); any non-zero pins it.
+
+const FOUND_STATES: PackedStringArray = ["sorted", "stirred", "mixed"]
+const LEVELS: PackedStringArray = ["minimal", "thickened", "pinched", "broken"]
+
+@export_enum("sorted", "stirred", "mixed") var found_state: String = "stirred"
+@export_enum("minimal", "thickened", "pinched", "broken") var level: String = "minimal"
+@export var field_seed: int = 0
+
 # ---------------- Parameters (Entropy Engine) ----------------
 @export_group("Entropy (S) & Morphology")
 @export var S: float = 0.3:
@@ -59,12 +128,46 @@ var current_frequency: float
 var current_noise_amp: float
 var current_threshold: float
 
+# True once _ready has built a gyroid once. apply_grid_config must never
+# regenerate before there is something to regenerate.
+var _built: bool = false
+
+
+## AXIS 1. Writes S, and only for a value that is not the shipped one. The `_:`
+## branch is `stirred` and it assigns NOTHING — the scene's own S survives.
+func _apply_found_state() -> void:
+	match found_state:
+		"sorted":
+			S = 0.0
+		"mixed":
+			S = 1.0
+		_:
+			pass
+
+
+## AXIS 2. Where the field is cut. Same rule: `minimal` writes nothing, so a
+## placement that never hears about this axis keeps threshold_center at 0.0.
+func _apply_level() -> void:
+	match level:
+		"thickened":
+			threshold_center = -0.60
+		"pinched":
+			threshold_center = 0.60
+		"broken":
+			threshold_center = 0.95
+		_:
+			pass
+
+
 func _ready() -> void:
 	print("=== ENTROPY MORPHOGENESIS VR (Marching Cubes) ===")
+	_apply_found_state()
+	_apply_level()
 	print("  Entropy S = %.3f" % S)
 	_update_from_entropy()
 	_setup_generator()
 	_generate_gyroid()
+	_built = true
 	print("=== INITIALIZATION COMPLETE ===")
 
 func _update_from_entropy() -> void:
@@ -84,6 +187,11 @@ func _setup_generator() -> void:
 	gyroid_generator.noise_freq = 0.7
 	gyroid_generator.box_size = box_size
 	gyroid_generator.voxel_resolution = voxel_resolution
+
+	# 0 leaves the generator's own `noise.seed = randi()` alone — the shipped
+	# behaviour, one unrepeatable gyroid per placement.
+	if field_seed != 0 and gyroid_generator.noise != null:
+		gyroid_generator.noise.seed = field_seed
 
 	print("✓ Gyroid generator configured")
 	print("  S=%.2f → Freq:%.2f, Noise:%.3f, Threshold:%.2f" % [S, current_frequency, current_noise_amp, current_threshold])
@@ -171,5 +279,43 @@ func regenerate_now() -> void:
 	"""Manually trigger regeneration at current entropy"""
 	_regenerate()
 
+## Map/bench entry point. Until 2026-08-03 this was `pass`, so no map token had
+## ever reached a single one of the exports above.
+##
+## THE GUARD THAT MATTERS. Regenerating unconditionally here would rebuild a
+## 40x40x40 marching-cubes volume in all 7 shipped placements — and, because the
+## generator reseeds its noise on nothing, would hand them a DIFFERENT gyroid
+## than the one they had. Act only when a declared value actually moved, and
+## only once _ready has built a mesh to replace.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+
+	var restate: bool = false
+
+	if config.has("found_state"):
+		var v: String = str(config["found_state"]).strip_edges().to_lower()
+		if FOUND_STATES.has(v) and v != found_state:
+			found_state = v
+			restate = true
+
+	if config.has("level"):
+		var l: String = str(config["level"]).strip_edges().to_lower()
+		if LEVELS.has(l) and l != level:
+			level = l
+			restate = true
+
+	if config.has("field_seed"):
+		var sd: int = int(config["field_seed"])
+		if sd != field_seed:
+			field_seed = sd
+			restate = true
+
+	if not restate or not _built:
+		return
+
+	_apply_found_state()
+	_apply_level()
+	if field_seed != 0 and gyroid_generator != null and gyroid_generator.noise != null:
+		gyroid_generator.noise.seed = field_seed
+	_regenerate()

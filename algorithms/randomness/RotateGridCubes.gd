@@ -4,7 +4,7 @@
 # critical_parameter: PATTERN — the ordered list of (row_count, axis) bands that defines the cycle length
 # triggers: _ready() computes section starts and binds to the GridMultiMesh; tween animations apply rotation per section
 # emerges: a moving stripe of axis-aligned tilts that sweeps through the grid revealing structural anisotropy
-# needs: pattern editor [missing]; per-axis amount sliders [missing]; cycle pause control [missing]
+# needs: pattern editor [now `score`, five band lists]; per-axis amount sliders [missing]; cycle pause control [missing]
 # relationships: cousin of RotateScaleCubes (combined transforms); contrast to BlueNoise which redistributes positions, this redistributes orientations
 # truth: The grid is a stack of choices. Which axis turns where, in which order, IS the music — randomness lives in the score, not the dance.
 
@@ -19,6 +19,18 @@ class_name RotateGridCubes
 @export var rot_amount_y: float = 25.0
 @export var use_animation: bool = true
 @export var rotation_duration: float = 1.0
+
+# --- STAGE-2 DNA (promoted 2026-08-03) ---------------------------------------
+# The degrees were already exposed and they are the least interesting thing here.
+# What this artifact ARGUES is the SCORE: which rows turn, in what phrasing, and
+# in which direction that phrasing is read across the lattice. Both were const.
+#
+#   score  the ordered band list. "bands" is the shipped PATTERN const, byte for
+#          byte, so it is the default.
+#   grain  which coordinate the band index reads. "rows" is the
+#          int(round(pos.z)) this file has always used, so it is the default.
+@export_enum("bands", "alternate", "cascade", "solid", "sparse") var score: String = "bands"
+@export_enum("rows", "columns", "diagonal", "rings") var grain: String = "rows"
 
 @export_group("MultiMesh")
 @export var multimesh_path: NodePath = "../GridMultiMesh"
@@ -40,8 +52,26 @@ const PATTERN = [
 	[8, "flat"],  # 8 rows flat
 ]
 
+# The other four scores. Same grammar as PATTERN — [row_count, axis] bands — so
+# every one of them runs through the same _calculate_pattern / get_rotation_for_row
+# machinery and nothing below this line needed a special case.
+#   alternate  every other index tilts: the transformation as a high-frequency
+#              weave, no phrasing at all
+#   cascade    one index per axis, walking Z→Y→X→all: a continuous shear rather
+#              than a repetition
+#   solid      no flat rows anywhere: the null hypothesis, applied uniformly
+#   sparse     one tilt every eight: rotation as a rare event, a stitch
+const SCORE_ALTERNATE = [[1, "all"], [1, "flat"]]
+const SCORE_CASCADE = [[1, "z"], [1, "y"], [1, "x_neg"], [1, "all"]]
+const SCORE_SOLID = [[1, "all"]]
+const SCORE_SPARSE = [[1, "all"], [7, "flat"]]
+
+const SCORE_NAMES = ["bands", "alternate", "cascade", "solid", "sparse"]
+const GRAIN_NAMES = ["rows", "columns", "diagonal", "rings"]
+
 var _cycle_length: int = 0
 var _section_starts: Array[int] = []
+var _pattern: Array = PATTERN
 
 func _ready() -> void:
 	# Calculate cycle length and section starts
@@ -68,13 +98,42 @@ func _ready() -> void:
 			# Rotate collision cubes after a short delay
 			call_deferred("_rotate_collision_cubes")
 
+func _score_pattern() -> Array:
+	match score:
+		"alternate":
+			return SCORE_ALTERNATE
+		"cascade":
+			return SCORE_CASCADE
+		"solid":
+			return SCORE_SOLID
+		"sparse":
+			return SCORE_SPARSE
+		"bands", _:
+			return PATTERN
+
+
+## Which coordinate the band index reads. "rows" is int(round(pos.z)), the only
+## thing this file ever did, so the default is unchanged for every placement.
+func _index_for(pos: Vector3) -> int:
+	match grain:
+		"columns":
+			return int(round(pos.x))
+		"diagonal":
+			return int(round(pos.x + pos.z))
+		"rings":
+			return int(round(sqrt(pos.x * pos.x + pos.z * pos.z)))
+		"rows", _:
+			return int(round(pos.z))
+
+
 func _calculate_pattern() -> void:
+	_pattern = _score_pattern()
 	_cycle_length = 0
 	_section_starts.clear()
-	for section in PATTERN:
+	for section in _pattern:
 		_section_starts.append(_cycle_length)
 		_cycle_length += section[0]
-	print("RotateGridCubes: Pattern cycle = %d rows" % _cycle_length)
+	print("RotateGridCubes: score '%s' cycle = %d rows, grain '%s'" % [score, _cycle_length, grain])
 
 func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
 	if node is MultiMeshInstance3D:
@@ -100,7 +159,7 @@ func apply_rotation() -> void:
 	for i in range(multimesh.instance_count):
 		var transform = initial_transforms[i] if i < initial_transforms.size() else multimesh.get_instance_transform(i)
 		var pos = transform.origin
-		var rot = get_rotation_for_row(int(round(pos.z)))
+		var rot = get_rotation_for_row(_index_for(pos))
 
 		var rot_basis = Basis()
 		rot_basis = rot_basis.rotated(Vector3.BACK, deg_to_rad(rot.z))
@@ -138,7 +197,7 @@ func get_rotation_for_row(row: int) -> Vector3:
 		else:
 			section_idx = i
 	
-	var section_type = PATTERN[section_idx][1]
+	var section_type = _pattern[section_idx][1]
 	
 	match section_type:
 		"z":
@@ -159,7 +218,7 @@ func animate_rotation() -> void:
 		for i in range(multimesh.instance_count):
 			var transform = initial_transforms[i] if i < initial_transforms.size() else Transform3D()
 			var pos = transform.origin
-			var target_rot = get_rotation_for_row(int(round(pos.z)))
+			var target_rot = get_rotation_for_row(_index_for(pos))
 			var current_rot = target_rot * progress
 
 			var rot_basis = Basis()
@@ -185,7 +244,7 @@ func _rotate_collision_cubes() -> void:
 	for child in collision_parent.get_children():
 		if child is StaticBody3D:
 			var pos = child.position
-			var row = int(round(pos.z))
+			var row: int = _index_for(pos)
 			var rot = get_rotation_for_row(row)
 			
 			# Apply rotation to collision body
@@ -194,15 +253,51 @@ func _rotate_collision_cubes() -> void:
 	
 	print("RotateGridCubes: Rotated %d collision cubes" % rotated_count)
 
-# Simple config for map parameters
+# Simple config for map parameters.
+#
+# GUARDED (2026-08-03). This used to re-apply on every call whether or not any
+# value had changed, which re-fired the tween for placements that pass no keys
+# at all. Now it only re-applies when a value actually moved, and only once
+# _ready has found a host grid — so a shipped map that sets nothing gets exactly
+# the picture _ready built.
 func apply_grid_config(config: Dictionary) -> void:
+	var changed: bool = false
+
 	if config.has("rotation"):
-		rot_amount = float(config["rotation"])
+		var deg: float = float(config["rotation"])
+		if not is_equal_approx(deg, rot_amount):
+			rot_amount = deg
+			changed = true
 	if config.has("animate"):
-		use_animation = str(config["animate"]).to_lower() == "true"
+		var anim: bool = str(config["animate"]).to_lower() == "true"
+		if anim != use_animation:
+			use_animation = anim
+			changed = true
+	# The sweep sets exports by their own name, so accept that spelling too.
+	if config.has("use_animation"):
+		var anim2: bool = str(config["use_animation"]).to_lower() != "false"
+		if anim2 != use_animation:
+			use_animation = anim2
+			changed = true
 	if config.has("duration"):
-		rotation_duration = float(config["duration"])
-	
+		var dur: float = float(config["duration"])
+		if not is_equal_approx(dur, rotation_duration):
+			rotation_duration = dur
+			changed = true
+	if config.has("score"):
+		var s: String = str(config["score"])
+		if s != score and SCORE_NAMES.has(s):
+			score = s
+			_calculate_pattern()
+			changed = true
+	if config.has("grain"):
+		var g: String = str(config["grain"])
+		if g != grain and GRAIN_NAMES.has(g):
+			grain = g
+			changed = true
+
+	if not changed:
+		return
 	if multimesh and multimesh.instance_count > 0:
 		rotate_all_cubes()
 		_rotate_collision_cubes()

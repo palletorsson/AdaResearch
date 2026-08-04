@@ -383,9 +383,33 @@
    }
   },
   "entropy_morphogenesis": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "found_state": [
+      "sorted",
+      "stirred",
+      "mixed"
+     ],
+     "level": [
+      "minimal",
+      "thickened",
+      "pinched",
+      "broken"
+     ]
+    },
+    "fixture": {
+     "field_seed": 20260803
+    },
+    "framing": 0.85,
+    "default": "found_state=stirred, level=minimal - both are pure no-ops. `stirred` falls through to `_:` and never assigns S, `minimal` never assigns threshold_center, so the scene's own S (0.3) and threshold (0.0) survive untouched. The 7 existing placements (Topology_Entropy_Morphogenesis, _p1, _p2, _p3, Corridor_Topology_Entropy_Morphogenesis, Morphogenesis_Intro, Curation_Bay_softbodies_4) render byte-identically to before.",
+    "was": "A gyroid at one entropy value with a full inspector of exports and apply_grid_config() = pass, so no map token could reach a single knob. found_state opens the S scale that was already the declared critical_parameter; level opens threshold_center, which the artifact's own truth line names and which had been nailed to 0.0 everywhere. field_seed is a fixture knob, not an axis: GyroidFieldGenerator does noise.seed = randi(), so unpinned the sweep would photograph five different gyroids.",
+    "notes": "framing 0.85 because the volume is 5x10x5 - fit-by-diagonal (12.2) pulls the camera back for an extent that is never wider than 5. `shelled` from entropy_jar's list is deliberately absent: there it is a joke about the jar's vertical binning, and this artifact carries no instrument to fool."
+   },
    "category": "unknown",
    "complexity": "beginner",
-   "description": "entropy_morphogenesis",
+   "description": "A gyroid triply-periodic minimal surface built by marching cubes at one chosen entropy. S maps to frequency, noise amplitude and cut threshold together, so a single number decides whether the surface is a legible crystal or a crumpled labyrinth.",
    "dev_themes": [
     "geometry",
     "non_euclidean"

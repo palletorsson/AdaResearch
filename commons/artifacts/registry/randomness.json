@@ -10316,6 +10316,20 @@
     "2d",
     "procedural"
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "score": ["bands", "alternate", "cascade", "solid", "sparse"],
+     "grain": ["rows", "columns", "diagonal", "rings"]
+    },
+    "default": "score=bands, grain=rows - bands returns the untouched const PATTERN (6 Z / 4 flat / 6 Y / 4 flat / 6 X-neg / 4 flat / 6 all / 8 flat) and rows returns the int(round(pos.z)) index this file has always used, so all 6 placements render byte-for-byte as before; apply_grid_config now re-applies only when a value actually moved, so a map that passes no keys keeps exactly what _ready built",
+    "was": "one hard-coded const PATTERN of (row_count, axis) bands, indexed by the cube's z row. Only the DEGREES were exposed (rot_amount, rot_amount_y) - which is the least interesting thing about it. The @identity block already named the band list the critical_parameter and the code kept it const.",
+    "host": {"size": [16, 1, 26], "cell": 1.0},
+    "fixture": {"use_animation": false},
+    "host_note": "This artifact owns no geometry. It hunts a MultiMeshInstance3D through its `../GridMultiMesh` NodePath and rewrites the host grid's transforms - the same class as Random_Rotate_Random_XYZ and remove_random, which is why the runner first read it as having nothing to photograph. 26 rows deep shows the first three bands of the 44-row cycle mirrored about the centre; 16 wide keeps grain=columns and grain=rings legible.",
+    "fixture_note": "use_animation false so the still photographs the settled tilt rather than a frame of the 1 s tween."
+   },
    "qfep_connection": "Transformation modifies orientation across S while the grid itself remains stable. Patterned rotation makes state change legible as repetition and variation on a fixed lattice.",
    "gamwell_reference": "",
    "capacity": "READ patterned rotation across a fixed lattice and compare flat rows against tilted ones.",
@@ -13921,6 +13935,20 @@
    }
   },
   "ten_print_textile": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "odds": [0.0, 0.25, 0.5, 0.75, 1.0],
+     "alphabet": ["diagonals", "orthogonals", "blocks"]
+    },
+    "default": "odds=0.5, alphabet=diagonals - 0.5 is the literal `_rng.randf() < 0.5` fair coin and diagonals returns the same box at the same rotation.z = +/-PI*0.25, so all 7 placements weave exactly the cloth they wove before; apply_grid_config is now guarded and rebuilds only on a real change (it previously tore the loom down on every call, and on a pre-_ready call it built the bolt twice)",
+    "was": "a hard-coded fair coin between two hard-coded +/-45 degree bars. The only exports were cols and rows - the size of the bolt, not what it says.",
+    "fixture": {"weave_seed": 7, "weaving": false},
+    "fixture_note": "weave_seed pins the flip so five odds tiles differ by their bias and not by five different draws; weaving false freezes the scroll so a still is one cloth rather than one mid-scroll frame. Both default to the shipped behaviour (seed 0 = randomize, weaving on).",
+    "vocabulary_note": "alphabet is taken from GeneticProgramming.alphabet - the symbol set a generator draws from - which is precisely the question here. odds is a new word: bias was already spent on pixel_cloud for a spatial lean (rise/none/spire/sprawl) and chance on random_cubes for WHICH property is randomised, neither of which is the weighting of a coin. panel_bridge_loom's threading_draw / treadling_order were considered and declined: those name a deterministic weaving draft, and this loom's whole content is that there is no draft, only a flip.",
+    "declined": "scroll rate and row cadence (_step 0.18 s) are time-domain and invisible to a still; cols and rows are size."
+   },
    "lookup_name": "ten_print_textile",
    "scene": "res://commons/artifacts/ten_print_textile/ten_print_textile.tscn",
    "class_name": "TenPrintTextile",

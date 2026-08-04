@@ -24,6 +24,17 @@ class_name PatternTileCube
 ## Size of the cube in meters
 @export var cube_size: float = 0.04
 
+## Which craft's unit of colour this is. `pixel` is the shipped plain box — the screen's
+## own unit, with no lineage. The other four are the hand-held colour units this puzzle
+## inherits from and never admitted to: a cut stone, a threaded bead, a wound spool, a
+## moulded brick. Same 4 cm envelope, same collision shape, same colour — different trade.
+@export_enum("pixel", "tessera", "bead", "bobbin", "stud") var craft: String = "pixel"
+
+const _CRAFT_FORM: String = "CraftForm"
+
+## True once _ready has built at least once — apply_grid_config must not rebuild before it.
+var _built: bool = false
+
 ## Reference to parent puzzle (set automatically)
 var puzzle: PatternTilePuzzle = null
 
@@ -46,6 +57,141 @@ func _ready() -> void:
 	# Listen for drop event
 	dropped.connect(_on_dropped)
 	picked_up.connect(_on_picked_up)
+
+	if _mesh_instance == null:
+		_mesh_instance = get_node_or_null("MeshInstance3D")
+	_apply_craft()
+	_built = true
+
+
+## Map-token config. Only rebuilds when a value actually changed AND _ready has run once,
+## so the seven shipped placements (which pass no `craft`) never re-enter the builder.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var changed: bool = false
+
+	if config_data.has("craft"):
+		var v: String = str(config_data["craft"]).strip_edges().to_lower()
+		if v != "" and v != craft:
+			craft = v
+			changed = true
+
+	if config_data.has("color_index"):
+		var ci: int = int(config_data["color_index"])
+		if ci != color_index:
+			color_index = ci
+			changed = true
+
+	if changed and _built:
+		_apply_craft()
+
+
+## Swap the shipped box for another trade's unit of colour.
+## `pixel` returns before touching anything, so the default is the old code path exactly.
+func _apply_craft() -> void:
+	if _mesh_instance == null:
+		_mesh_instance = get_node_or_null("MeshInstance3D")
+
+	var stale: Node = get_node_or_null(_CRAFT_FORM)
+	var had_form: bool = stale != null
+	if had_form:
+		remove_child(stale)
+		stale.queue_free()
+
+	if craft == "pixel":
+		# Only un-hide what WE hid. A default cube is never written to at all.
+		if had_form and _mesh_instance != null:
+			_mesh_instance.layers = 1
+		return
+
+	var form: Node3D = Node3D.new()
+	form.name = _CRAFT_FORM
+	add_child(form)
+
+	var s: float = cube_size
+	var mat: StandardMaterial3D = _craft_material()
+
+	match craft:
+		"tessera":
+			# A cut stone, set flat in its bed and never quite square to the grid.
+			var slab: BoxMesh = BoxMesh.new()
+			slab.size = Vector3(s * 1.06, s * 0.42, s * 1.06)
+			var stone: MeshInstance3D = _add_part(form, slab, Vector3.ZERO, mat)
+			stone.rotation_degrees = Vector3(3.0, 9.0, -2.0)
+		"bead":
+			# A colour you thread rather than stack — the hole is the whole argument.
+			var ring: TorusMesh = TorusMesh.new()
+			ring.inner_radius = s * 0.16
+			ring.outer_radius = s * 0.55
+			_add_part(form, ring, Vector3.ZERO, mat)
+		"bobbin":
+			# The puzzle's palette calls itself "yarn colors"; this is what a yarn comes on.
+			var core: CylinderMesh = CylinderMesh.new()
+			core.top_radius = s * 0.3
+			core.bottom_radius = s * 0.3
+			core.height = s * 0.66
+			_add_part(form, core, Vector3.ZERO, mat)
+			var top_flange: CylinderMesh = CylinderMesh.new()
+			top_flange.top_radius = s * 0.55
+			top_flange.bottom_radius = s * 0.55
+			top_flange.height = s * 0.1
+			_add_part(form, top_flange, Vector3(0.0, s * 0.33, 0.0), mat)
+			var bottom_flange: CylinderMesh = CylinderMesh.new()
+			bottom_flange.top_radius = s * 0.55
+			bottom_flange.bottom_radius = s * 0.55
+			bottom_flange.height = s * 0.1
+			_add_part(form, bottom_flange, Vector3(0.0, -s * 0.33, 0.0), mat)
+		"stud":
+			# The moulded brick: a colour unit that declares which way is up.
+			var brick: BoxMesh = BoxMesh.new()
+			brick.size = Vector3(s, s * 0.6, s)
+			_add_part(form, brick, Vector3(0.0, -s * 0.2, 0.0), mat)
+			var knob: CylinderMesh = CylinderMesh.new()
+			knob.top_radius = s * 0.24
+			knob.bottom_radius = s * 0.24
+			knob.height = s * 0.2
+			_add_part(form, knob, Vector3(0.0, s * 0.2, 0.0), mat)
+		_:
+			# Unknown value: fall back to the shipped box rather than render nothing.
+			remove_child(form)
+			form.queue_free()
+			if had_form and _mesh_instance != null:
+				_mesh_instance.layers = 1
+			return
+
+	# Hide the shipped box without touching its material (material_override would break the
+	# pickup highlight swap) and without visible=false, which would hide descendants too.
+	if _mesh_instance != null:
+		_mesh_instance.layers = 0
+
+
+func _add_part(parent: Node3D, mesh: Mesh, pos: Vector3, mat: StandardMaterial3D) -> MeshInstance3D:
+	var mi: MeshInstance3D = MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.position = pos
+	mi.material_override = mat
+	parent.add_child(mi)
+	return mi
+
+
+## The colour the craft form should wear — the puzzle's palette entry when spawned by the
+## puzzle, otherwise whatever the scene's own baked material already shows.
+func _craft_material() -> StandardMaterial3D:
+	var col: Color = Color(0.8, 0.2, 0.15)
+	if _mesh_instance != null:
+		var ov: Material = _mesh_instance.material_override
+		if ov is StandardMaterial3D:
+			col = (ov as StandardMaterial3D).albedo_color
+		elif _mesh_instance.mesh != null and _mesh_instance.mesh.get_surface_count() > 0:
+			var sm: Material = _mesh_instance.mesh.surface_get_material(0)
+			if sm is StandardMaterial3D:
+				col = (sm as StandardMaterial3D).albedo_color
+	if puzzle and color_index >= 0 and color_index < puzzle.palette.size():
+		col = puzzle.palette[color_index]
+
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = col
+	m.roughness = 0.8
+	return m
 
 
 func setup(p_puzzle: PatternTilePuzzle, p_color_index: int, p_size: float = 0.04) -> void:
@@ -104,6 +250,10 @@ func _update_color() -> void:
 		mat.albedo_color = Color.WHITE
 	mat.roughness = 0.8
 	_mesh_instance.material_override = mat
+
+	# A craft form wears the colour instead of the hidden box; refresh it.
+	if craft != "pixel" and get_node_or_null(_CRAFT_FORM) != null:
+		_apply_craft()
 
 
 func _on_picked_up(_pickable) -> void:

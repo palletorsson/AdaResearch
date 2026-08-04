@@ -1,6 +1,21 @@
 {
  "artifacts": {
   "pattern_atlas_gallery": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "credit": [
+      "named",
+      "title_only",
+      "redacted",
+      "anonymous"
+     ]
+    },
+    "default": "credit=named - the tradition tag at y=0.42 and the makers tag at y=0.30 beneath every plate, built with make_tag's own default ink and ground, which is board for board what the gallery has always built; the 7 existing placements are untouched and the room keeps its 'the makers, named' headline",
+    "was": "the makers' names were unconditional captions, so the artifact could state its truth - a pattern reproduced without its makers is an enclosure - but had no way to stand the enclosure up beside the return and let a walker see the difference",
+    "refused": "colophon (pattern_loom) and exhibit (pattern_mill, pattern_machine_c) both ask how much of the RULE the goods admit to; three of their four values need each pattern's repeat period or plane symmetry group, which this gallery does not know for nineteen heterogeneous traditions and in several cases (kente strips, batik crackle, hitomezashi) does not have. Adopting either word would have meant inventing the measurements."
+   },
    "lookup_name": "pattern_atlas_gallery",
    "scene": "res://commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.tscn",
    "class_name": "PatternAtlasGallery",

@@ -20,7 +20,17 @@
 #   truth: the Greek key is a tiling problem — corners and straights compose the infinite band
 
 extends Node3D
-class_name TileMeanderFloor
+## NO class_name ON PURPOSE. This file was created by af84719a1 as a byte copy of
+## tile_meander_floor.gd — including its `class_name TileMeanderFloor` — so two files
+## declared one global class and Godot refused BOTH with "hides a global script class".
+## That is why tile_meander_floor rendered nothing in its 7 maps even before the
+## truncation, and why restoring it alone did not fix it.
+##
+## KNOWN GAP, not fixed here: what was copied was already the truncated 149-line
+## version, so this file has no _ready(), no _build() and no apply_grid_config()
+## either. Its own 10 placements render nothing and will keep rendering nothing until
+## someone writes the meander this token is supposed to be. Inventing one would be
+## guessing at content, which is a ruling and not a repair.
 
 const MosaicPalette = preload("res://commons/artifacts/pompeii_mosaic_floor/mosaic_palette.gd")
 

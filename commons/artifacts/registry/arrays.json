@@ -865,6 +865,22 @@
    "qfep_connection": "A yellow label trails 2.5 m overhead, rounding your continuous stride to [row, col] — you don't read the array, you are its index, discretized live without being asked. The script's own comments argue over which axis counts as the row: even the convention is a treaty, not a fact."
   },
   "pattern_tile_cube": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "craft": [
+      "pixel",
+      "tessera",
+      "bead",
+      "bobbin",
+      "stud"
+     ]
+    },
+    "default": "craft=pixel - _apply_craft() returns before touching anything, so the scene's baked BoxMesh (0.04 m, albedo 0.8/0.2/0.15, roughness 0.8) and its BoxShape3D are exactly what they were. The 7 existing placements pass no `craft` key, so apply_grid_config sets changed=false and never enters the builder; the puzzle-spawned cubes go through setup()/_create_visual() untouched as before.",
+    "was": "one plain 4 cm box, the same box whatever colour it carried - the artifact's own truth is 'a pixel is a decision', and it shipped the pixel with no ancestry at all, so every photograph of it was a photograph of a screen unit pretending to be a handmade one",
+    "note": "NOT one of the six tokens sharing pattern_tile_puzzle.tscn (pattern_tile_puzzle, _4x4, _mirror, _8x8, _brick, _herringbone) - this token has its own scene and its own script, and the .tscn root carries it, so the axis is reachable from a map token. The word is NEW on purpose: the puzzle's own axes (motif, dyelot) are about the pattern and the dye range, not the unit; `unit` is already spent on diamonds for which platonic solid gets stacked, and `facture` carries a fixed cast/facet/armature/shell vocabulary across capsule/folded_strip/triangleprofiles that these values would break. craft asks which trade's hand-held colour unit this is - cut stone, threaded bead, wound spool, moulded brick, or the screen's own lineage-free box. Every value stays inside the 4 cm envelope and the collision shape is never touched, so grab, snap and grid placement are unchanged."
+   },
    "name": "Pattern Tile Cube",
    "lookup_name": "pattern_tile_cube",
    "description": "Small grabbable color cube for pattern tile puzzle. Drag to grid cells to place colors.",

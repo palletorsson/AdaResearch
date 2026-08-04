@@ -4721,6 +4721,31 @@
    }
   },
   "sierpinski_pyramid": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "tick": [
+      "once",
+      "coarse",
+      "fine",
+      "dense",
+      "limit"
+     ],
+     "packing": [
+      "fused",
+      "contact",
+      "open",
+      "dust"
+     ]
+    },
+    "default": "tick=dense, packing=contact - dense is TICK_LEVELS['dense'] = 4, the depth this file has always shipped, so the recursion runs the same number of times, the initial extent size * pow(2, depth - 1) is unchanged and all 625 leaves land on the same coordinates; contact is PACKING_FILL['contact'] = 1.0, and _spawn_cube's line reduces to Vector3(size, size, size) * 1.0, byte for byte what it drew before. apply_grid_config was a bare `pass` and is now guarded twice - a word is taken only when it validates against the code's own table AND differs, and generate() fires only after _built - so the 6 existing placements pass no key, reach no assignment and never rebuild.",
+    "was": "three @export knobs and not one categorical among them: depth was an int, size a float, generate_on_ready a bool, and apply_grid_config's whole body was `pass`, so the @identity's own declared critical_parameter was unreachable from any map token. Every placement got depth 4, 625 cubes, each cube exactly the size of its lattice cell. The runner refused it for NO TURNABLE KNOBS, which was a fact about the KIND of knob, not about the artifact.",
+    "note": "tick is the recursion made sayable from a map. packing is the measure argument, and it is not a size knob: the extent, the lattice and the leaf COUNT are identical across all four values, and only the atom's claim on its own cell moves. The tetrix has Hausdorff dimension exactly 2 and therefore zero volume, so the shipped touching-cubes picture is a lie of thickness in one direction - open and dust withdraw it until the mountain resolves into the point set it actually is, and fused overshoots the other way until the finest holes close into carved rock.",
+    "kin": "tick is cantor_set's word and cantor_set's five rungs, character for character (once | coarse | fine | dense | limit), which cantor_set in turn took from zeno_staircase - the same ladder of recursive subtraction. ONE THING DIFFERS AND IT IS A FACT ABOUT THIS ARTIFACT: the shipped value sits at dense, one rung BELOW the top, because the @identity already names 3125 cubes as this pyramid's ceiling and that is exactly limit = 5, so this ladder still has a rung in both directions where Cantor's ran downward only. packing is deliberately NOT cantor_set's `removal`. Cantor's removed middles are a clean disjoint complement that can be ghosted or scarred back in; this recursion's declined positions are not - the five children's bounding volumes interpenetrate (at depth 4 the top child's half-extent is 2.25 against a lattice offset of 2.00), so there is no complement here to draw and a `removal` declaration would have promised a picture the geometry cannot deliver.",
+    "still_note": "tick is the strong axis in pixels: once is 5 cubes, limit is 3125, and under fit-to-AABB framing the silhouette holds roughly constant while the texture inside it changes wholesale - which is the point, since self-similarity is exactly the claim that the outline does not change. packing is the second-strongest: dust removes about 97 percent of the drawn volume at unchanged extent. COST WARNING for whoever runs the sweep: each leaf is a cube_scene instance carrying a StaticBody3D and a CollisionShape3D, so limit builds 3125 static bodies where the shipped depth builds 625. That is the one frame in this sheet that could trip the 16-second watchdog; if it does, the fix is the watchdog's grace, not a shorter ladder.",
+    "placements": 6
+   },
    "category": "emergence",
    "complexity": "advanced",
    "description": "Recursive Sierpinski Pyramid construction using cubes.",

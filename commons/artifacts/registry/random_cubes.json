@@ -1,6 +1,33 @@
 {
   "artifacts": {
     "r_c": {
+      "dna": {
+        "promoted": "2026-08-03",
+        "stage": "2 - variation",
+        "axes": {
+          "posture": [
+            "cycle",
+            "seated",
+            "leaving",
+            "sunken",
+            "arriving"
+          ],
+          "warning": [
+            "beacon",
+            "stain",
+            "cage",
+            "none"
+          ]
+        },
+        "fixture": {
+          "posture": "leaving",
+          "cycle_seed": 20260803
+        },
+        "default": "posture=cycle, warning=beacon - both no-ops. `cycle` takes the identical _ready path (_set_state(IDLE) then a deferred loop start) and is guarded out of _apply_posture entirely; `beacon` leaves the indicator rule as `is_visible and true` and builds no extra nodes. The 6 existing placements (Random_Game, _HumanoidWalker, _Hybrid, _Placed, _SimulatedAnnealing, TemplateMap_Descent13, all writing the token `r_c:0:0:1#4`) render byte-identically, and the numeric-shorthand span path still ends in _restart_cycle_loop() exactly as before.",
+        "was": "A cube that sank out and rose back in on randomised timing. Every export was a DURATION - waits, sink, rise, collider lead and lag - and a still cannot photograph a duration, so the runner correctly refused it as having no turnable knobs. posture lifts the CycleState enum, which already drives height, colour, indicator and collider together but could never be selected from outside the loop. warning names the answer the cube already shipped (a lit mote on its crown) and puts it in the hazard family's vocabulary.",
+        "notes": "The fixture pins posture=leaving because that is the one pose where all four warning values are photographically distinct: beacon lights the mote, stain marks the floor, cage stands the bars, none shows a bare cube. At a resting pose beacon and none are identical by construction - which is the axis's own point, not a harness fault. cycle_seed pins _rng, whose randomize() would otherwise make five variants five different moments. Map syntax: r_c:0:0:1#posture=sunken#warning=cage.",
+        "declined": "Every timing export (wait_min_seconds, wait_span_seconds, sink_duration, rise_duration, disable_collider_delay, enable_collider_delay) is time-domain and invisible to a still. sink_distance was considered and left out: on a 1 m cube it is a distance, and posture already photographs the two ends of the travel."
+      },
       "name": "Random Cycle Cube",
       "lookup_name": "r_c",
       "description": "Cube that sinks out and rises back in on randomized timing, with in/out state indicator and collider gating.",
