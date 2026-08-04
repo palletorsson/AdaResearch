@@ -22,6 +22,79 @@ class_name SlotMachine
 
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-08-03). Fourteen placements, and until now not one
+# turnable knob a map could reach: apply_grid_config() was a bare `pass`, so every
+# one of those fourteen rooms held the identical machine.
+#
+# The axis is the family's, not a new word. coin_toss, prng_crank_machine,
+# monte_carlo_dartboard, trng_vs_prng, shannon_entropy_meter and three more all
+# carry `disclosure` — how much of its own workings a chance apparatus admits —
+# and a slot machine is the sharpest case in the whole family, because a real one
+# is DESIGNED to sit on the bottom rung. The ladder, its five spellings and its
+# ranks are read out of prng_crank_machine.gd, the same way coin_toss reads them,
+# so the eight siblings cannot drift into eight vocabularies for one idea.
+#
+#   disclosure    oracle  <  tally  <  ledger  <  works  <  origin
+#
+# WHAT THE RUNGS MEAN ON A SLOT MACHINE. The FRONT result screen is on every rung:
+# the outcome is the one thing every slot machine gives you. What the ladder
+# governs is the SIDE face, where the machine keeps its account of itself.
+#
+#   oracle  the side face is a bolted blanking plate. No screen, no counts, no
+#           histogram, no theory line — the crown says LUCKY 7s, the window says
+#           what you got, and there is no surface anywhere on the body on which
+#           the machine's own distribution could be written. This is the casino
+#           machine, and it is the honest picture of what a slot machine IS.
+#   tally   a short screen returns, carrying the aggregate and nothing else:
+#           how many pulls, how many triples. Counts without account.
+#   ledger  the screen grows to full height and is drawn as RULED PAPER — six
+#           rules, one per symbol, present before a single lever pull. It carries
+#           the per-symbol record. An empty ledger is still ruled paper, and the
+#           ruling is what makes a record a promise rather than a surprise. (The
+#           step coin_toss makes with its empty ruled slots; same move, same rung.)
+#   works   the screen as it has ALWAYS SHIPPED — the counts, the histogram, and
+#           the model's claim about them: Theory 2.8%. Byte for byte the legacy
+#           artifact, and the default, so all fourteen placements are untouched.
+#   origin  + the state that produced it, printed on the front fascia where a real
+#           machine puts its payout table: 6^3 = 216 OUTCOMES, P(3 ALIKE) = 6/216,
+#           and on the side screen the raw draw the generator handed the reels.
+#           The odds stop being something you infer from a histogram and become
+#           something the machine says out loud.
+#
+# WHY THE RESTING FACES DIFFER AND NOT JUST THE ROLLING TEXT. The evidence for
+# this loop is one still per value, and a still catches the machine at zero pulls.
+# An axis that only changed what the stats read AFTER a spin would render five
+# identical frames — a finished-looking experiment answering nothing. So each rung
+# builds its own resting face: a blanked plate, a short screen, ruled paper, the
+# shipped invitation, the odds board. `works` alone is required to be identical to
+# what shipped; the other four are free to look like what they are.
+#
+# NOT TOUCHED: the reels, the spin, the deceleration cascade, the stop order, the
+# dot of randomness itself. A spin-speed or stop-delay knob would have been the
+# easy promotion; both are time-domain and invisible to the evidence.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## The family's ladder, defined once in the crank machine. Preloaded rather than
+## reached through class_name — class_name lookups are not reliable headless, and
+## every frame of the evidence loop is rendered headless.
+const Disclosure = preload("res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd")
+
+## THE AXIS — how much of its own odds this machine admits. Same five rungs, same
+## order, same spellings as coin_toss and prng_crank_machine. `works` is legacy.
+@export_enum("oracle", "tally", "ledger", "works", "origin") var disclosure: String = "works"
+
+## Rank of the current rung, 0..4, through the family's one table.
+func _rung() -> int:
+	return int(Disclosure.DISCLOSURE_RUNGS.get(disclosure, 3))
+
+## Pins the draw for a reproducible capture. 0 = the engine's global RNG, which is
+## exactly what shipped; any other value seeds a local generator instead. Set from
+## the registry's dna.fixture so a sweep that pulls the lever gets the same reels
+## every run rather than five different machines wearing one axis.
+@export var spin_seed: int = 0
+var _rng: RandomNumberGenerator = null
+
 ## Housing — cabinet grammar, VERTICAL dialect (body = "reel cabinet").
 ## This artifact was already A CABINET, which makes it the family's odd case: the
 ## body was right and the MANUFACTURER was wrong. Casino red with gold trim reads
@@ -86,6 +159,7 @@ var _result_label: Label3D
 var _stats_label: Label3D
 var _window_frame: Node3D
 var _cab: Node3D            # the Cabinet subtree the rules are scoped to
+var _built: bool = false    # _ready has run once; guards the config rebuild
 
 
 
@@ -96,6 +170,9 @@ var _cab: Node3D            # the Cabinet subtree the rules are scoped to
 func _ready() -> void:
 	_symbol_counts.resize(symbols_per_reel)
 	_symbol_counts.fill(0)
+	if spin_seed != 0:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = spin_seed
 
 	_resolve_palette()
 	_create_pedestal()
@@ -105,6 +182,7 @@ func _ready() -> void:
 	_create_labels()
 	_create_vr_controls()
 	_face_forward()
+	_built = true
 
 
 ## This machine was authored facing -Z while every other member of the family faces
@@ -484,12 +562,27 @@ func _pull_lever() -> void:
 
 	# Pick random results for each reel
 	for i in range(reel_count):
-		_reel_target_indices[i] = randi() % symbols_per_reel
+		_reel_target_indices[i] = _draw_index()
 		_reel_spinning[i] = true
 		_reel_stopping[i] = false
 		_reel_decel[i] = 0.0
 		# Add some offset so reels aren't synchronized
-		_reel_angles[i] += randf_range(0.5, 2.0)
+		_reel_angles[i] += _draw_offset()
+
+
+## The independent uniform trial, one per reel. spin_seed = 0 leaves the engine's
+## global RNG and the exact call order the machine has always used; a non-zero seed
+## routes the same two draws through a local generator instead.
+func _draw_index() -> int:
+	if _rng != null:
+		return _rng.randi() % symbols_per_reel
+	return randi() % symbols_per_reel
+
+
+func _draw_offset() -> float:
+	if _rng != null:
+		return _rng.randf_range(0.5, 2.0)
+	return randf_range(0.5, 2.0)
 
 
 func _begin_reel_stop(reel_idx: int) -> void:
@@ -573,20 +666,126 @@ func _seat_screen(size: Vector2, centre: Vector3, face_dir: Vector3) -> void:
 		centre + n * 0.010 + Vector3(0, h * 0.5 + 0.010, 0), lip_s, accent))
 
 
+## The side face's centre and the shipped screen size, in CABINET-LOCAL space.
+## One definition so the blanking plate, the short screen, the full screen and the
+## ruling cannot drift apart.
+func _side_centre() -> Vector3:
+	return Vector3(cabinet_width / 2.0, cabinet_height * 0.05, 0)
+
+
+## disclosure:oracle — the side face SEALED. Where the account screen sits on every
+## other rung there is a bolted plate: no pocket, no lit face, no glass, no ember
+## lip, and no label anywhere on the body. The machine gives a verdict and offers
+## no surface on which its own distribution could be checked.
+func _blank_side_face() -> void:
+	var host: Node3D = _cab if _cab != null else self
+	var dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(cabinet_color.lightened(0.10))
+	var w: float = cabinet_depth * 0.62
+	var h: float = 0.150
+	var c: Vector3 = _side_centre()
+	host.add_child(HangarKit.box(
+		c + Vector3(0.004, 0.0, 0.0), Vector3(0.012, h + 0.030, w + 0.026), dark))
+	for sy in [-1.0, 1.0]:
+		var y: float = sy * (h * 0.5 + 0.007)
+		host.add_child(HangarKit.bolts(
+			c + Vector3(0.011, y, -w * 0.5 - 0.004),
+			c + Vector3(0.011, y, w * 0.5 + 0.004), 3, 0.0055, steel))
+
+
+## disclosure:ledger — the record's RULING, six rules for six symbols, drawn on the
+## screen face before anything has been recorded on them.
+func _rule_side_face() -> void:
+	var host: Node3D = _cab if _cab != null else self
+	var rule: StandardMaterial3D = HangarKit.emissive(trim_color.darkened(0.30), 1.1)
+	var w: float = cabinet_depth * 0.62
+	var h: float = 0.150
+	var c: Vector3 = _side_centre()
+	for i in range(symbols_per_reel):
+		var t: float = float(i + 1) / float(symbols_per_reel + 1)
+		var y: float = h * 0.5 - h * t
+		host.add_child(HangarKit.box(
+			c + Vector3(0.014, y, 0.0), Vector3(0.003, 0.0024, w * 0.86), rule))
+
+
+## disclosure:origin — the payout table a real machine puts on the glass, saying
+## what the machine's own distribution IS rather than leaving it to be inferred
+## from a histogram. Seated on the front fascia in the clear band between the
+## window's top edge and the sign band in the cap.
+func _build_odds_board() -> void:
+	var host: Node3D = _cab if _cab != null else self
+	var dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	var accent: StandardMaterial3D = HangarKit.emissive(trim_color, 2.0)
+	var front_z: float = -cabinet_depth / 2.0
+	var w: float = cabinet_width * 0.74
+	var h: float = 0.072
+	var c: Vector3 = Vector3(0.0, cabinet_height * 0.215, front_z)
+	host.add_child(HangarKit.box(
+		c + Vector3(0.0, 0.0, -0.005), Vector3(w + 0.022, h + 0.016, 0.013), dark))
+	host.add_child(HangarKit.box(
+		c + Vector3(0.0, h * 0.5 + 0.009, -0.008), Vector3(w + 0.022, 0.005, 0.006), accent))
+
+	var outcomes: int = int(pow(float(symbols_per_reel), float(reel_count)))
+	var p_triple: float = float(symbols_per_reel) / float(max(outcomes, 1)) * 100.0
+	var top: MeshInstance3D = HangarKit.stencil(
+		"%d^%d = %d OUTCOMES" % [symbols_per_reel, reel_count, outcomes],
+		Vector2(w * 0.90, 0.024), trim_color.lightened(0.35))
+	if top:
+		top.position = c + Vector3(0.0, h * 0.24, -0.013)
+		top.rotation_degrees.y = 180.0
+		host.add_child(top)
+	var bot: MeshInstance3D = HangarKit.stencil(
+		"P 3 ALIKE = %d/%d = %.1f PCT" % [symbols_per_reel, outcomes, p_triple],
+		Vector2(w * 0.90, 0.022), trim_color.lightened(0.35))
+	if bot:
+		bot.position = c + Vector3(0.0, -h * 0.24, -0.013)
+		bot.rotation_degrees.y = 180.0
+		host.add_child(bot)
+
+
+## What the account screen says with nothing yet pulled. Each rung has its own
+## resting face; `works` is the shipped string, byte for byte.
+func _rest_text() -> String:
+	match _rung():
+		1:
+			return "PULLS 0\nTRIPLES 0"
+		2:
+			var ruled: String = "PULLS 0\n\nReel 1 record:\n"
+			for i in range(symbols_per_reel):
+				ruled += "%s: ...... 0\n" % SYMBOLS[i]
+			return ruled
+		4:
+			return "Pulls: 0\n\nPull the lever!\n\nSpace: %d^%d" % [symbols_per_reel, reel_count]
+		_:
+			return "Pulls: 0\n\nPull the lever!"
+
+
 func _create_labels() -> void:
-	var front_z: float = -cabinet_depth / 2.0 - 0.03
 	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var rung: int = _rung()
 	# The two readouts are SEATED in the body now, not hovering off it: the result
 	# in the front fascia below the window, the stats flush in the side face where
 	# they used to float 8 cm clear of the cabinet.
 	# Centres are CABINET-LOCAL: the Cabinet node sits at its own mid-height, so a
 	# world height of pedestal + cabinet_height * f is local cabinet_height * (f - 0.5).
+	#
+	# The FRONT result screen is on EVERY rung — the outcome is the one thing every
+	# slot machine gives you. The ladder governs the side face.
 	_seat_screen(Vector2(cabinet_width * 0.62, 0.080),
 		Vector3(0, cabinet_height * -0.28, -cabinet_depth / 2.0),
 		Vector3(0, 0, -1))
-	_seat_screen(Vector2(cabinet_depth * 0.62, 0.150),
-		Vector3(cabinet_width / 2.0, cabinet_height * 0.05, 0),
-		Vector3(1, 0, 0))
+	if rung == 0:
+		_blank_side_face()
+	else:
+		var side_h: float = 0.060 if rung == 1 else 0.150
+		_seat_screen(Vector2(cabinet_depth * 0.62, side_h), _side_centre(),
+			Vector3(1, 0, 0))
+		if rung == 2:
+			_rule_side_face()
+	if rung >= 4:
+		_build_odds_board()
 
 	# Result display — below window
 	_result_label = Label3D.new()
@@ -601,10 +800,13 @@ func _create_labels() -> void:
 	_result_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(_result_label)
 
-	# Stats panel — side of cabinet
+	# Stats panel — side of cabinet. disclosure:oracle keeps no account at all, so
+	# there is no screen to write one on and no label above it.
+	if rung == 0:
+		return
 	_stats_label = Label3D.new()
 	_stats_label.name = "StatsLabel"
-	_stats_label.text = "Pulls: 0\n\nPull the lever!"
+	_stats_label.text = _rest_text()
 	_stats_label.pixel_size = 0.0012
 	_stats_label.font_size = 10
 	_stats_label.modulate = pal["text"]
@@ -615,8 +817,9 @@ func _create_labels() -> void:
 
 
 func _update_stats() -> void:
-	if _total_spins == 0:
+	if _total_spins == 0 or _stats_label == null:
 		return
+	var rung: int = _rung()
 
 	var lines := "Pulls: %d\nTriples: %d (%.1f%%)\n\n" % [
 		_total_spins,
@@ -624,8 +827,15 @@ func _update_stats() -> void:
 		float(_triple_count) / float(_total_spins) * 100.0
 	]
 
-	# Expected triple rate: 6/216 = 2.78%
-	lines += "Theory: 2.8%%\n\n"
+	# disclosure:tally — the aggregate, and there it stops.
+	if rung <= 1:
+		_stats_label.text = lines
+		return
+
+	# Expected triple rate: 6/216 = 2.78%. disclosure:works and above — the model's
+	# claim about the tally. Below it the counts stand without a theory to meet.
+	if rung >= 3:
+		lines += "Theory: 2.8%%\n\n"
 
 	# Histogram of first reel
 	lines += "Reel 1 histogram:\n"
@@ -636,6 +846,15 @@ func _update_stats() -> void:
 		for j in range(bar_len):
 			bar += "|"
 		lines += "%s: %s %.0f%%\n" % [SYMBOLS[i], bar, pct]
+
+	# disclosure:origin — the draw itself, before the reels dressed it up.
+	if rung >= 4:
+		var draw: String = ""
+		for i in range(reel_count):
+			draw += str(_reel_target_indices[i])
+			if i < reel_count - 1:
+				draw += ", "
+		lines += "\nDraw: %s\nof 0..%d each\n" % [draw, symbols_per_reel - 1]
 
 	_stats_label.text = lines
 
@@ -716,9 +935,11 @@ func _reset_stats() -> void:
 	_total_spins = 0
 	_triple_count = 0
 	_symbol_counts.fill(0)
-	_result_label.text = "? ? ?"
-	_result_label.modulate = Color(1.0, 0.9, 0.8)
-	_stats_label.text = "Pulls: 0\n\nPull the lever!"
+	if _result_label:
+		_result_label.text = "? ? ?"
+		_result_label.modulate = Color(1.0, 0.9, 0.8)
+	if _stats_label:
+		_stats_label.text = _rest_text()
 	_auto_spin = false
 	_auto_timer = 0.0
 
@@ -728,5 +949,56 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Map tokens: "slot_machine#disclosure:oracle", "slot_machine#spin_seed:20260803".
+##
+## GUARDED, because fourteen rooms already hold this machine. The rebuild fires only
+## when a value actually CHANGED and only after _ready has built once — an
+## unconditional rebuild here would tear down and re-raise every shipped placement
+## for a config dictionary that named nothing this artifact owns. spin_seed never
+## rebuilds; it only decides which generator the next pull reads from.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var rebuild: bool = false
+	if config.has("disclosure"):
+		var d: String = Disclosure.disclosure_name(str(config["disclosure"]))
+		if d != disclosure:
+			disclosure = d
+			rebuild = true
+	if config.has("spin_seed"):
+		var s: int = int(str(config["spin_seed"]))
+		if s != spin_seed:
+			spin_seed = s
+			if spin_seed == 0:
+				_rng = null
+			else:
+				_rng = RandomNumberGenerator.new()
+				_rng.seed = spin_seed
+	if rebuild and _built and is_inside_tree():
+		_rebuild()
+
+
+## Tear the assembly down and raise it again on the new rung. Children are removed
+## from the tree BEFORE being freed, because queue_free() only schedules the free:
+## leaving them parented would hand _face_forward() a fistful of dying nodes to
+## re-seat, and the machine would come back inside out.
+func _rebuild() -> void:
+	for c in get_children():
+		remove_child(c)
+		c.queue_free()
+	_reel_nodes.clear()
+	_reel_angles.clear()
+	_reel_target_indices.clear()
+	_reel_spinning.clear()
+	_reel_stopping.clear()
+	_reel_stop_timers.clear()
+	_reel_decel.clear()
+	_result_label = null
+	_stats_label = null
+	_window_frame = null
+	_cab = null
+	_is_spinning = false
+	_auto_spin = false
+	_auto_timer = 0.0
+	_total_spins = 0
+	_triple_count = 0
+	_built = false
+	_ready()

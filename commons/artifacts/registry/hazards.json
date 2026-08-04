@@ -1549,6 +1549,33 @@
    "qfep_connection": "One rewrite rule — F becomes F[+F][-F]F — plus a bias term leaning each branch toward your position: it does not chase, it compiles toward you every three seconds. Pruning is the only counterargument the grammar understands."
   },
   "bricoleur_golem": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "salvage": [
+      "mixed",
+      "crates",
+      "pipes",
+      "stones",
+      "offcuts"
+     ],
+     "assembly": [
+      "figure",
+      "lashed",
+      "cairn",
+      "heap"
+     ]
+    },
+    "default": "salvage=mixed, assembly=figure - mixed is the shipped randi_range(0, 3) draw over box/sphere/cylinder/prism and figure returns the six SLOT_POSITIONS literals unchanged, so the 1 existing placement builds the same golem it always did; part_seed=0 keeps the unseeded global RNG, which is what shipped",
+    "was": "five exports and every one of them a duration or a multiplier - rebuild_time, rebuild_heal_pct, max_rebuilds, part_scatter_distance, exhausted_speed_mult. Nothing a still can see. The two decisions carrying the bricolage argument were literals in the body of _random_mesh() and a const array of six humanoid slot positions",
+    "reads": "salvage is WHAT IS AT HAND: a heterogeneous junk pile makes the improvisation visible, and each single-stock pile (crates, pipes, stones, offcuts) hands the bricoleur a warehouse instead, so the golem comes out looking designed. assembly is WHAT IS DONE WITH IT: figure forces found parts into a body plan they never had, lashed lets the joints show, cairn abandons anatomy for stacking, heap refuses to stand the parts up at all",
+    "fixture": {
+     "part_seed": 20260804
+    },
+    "fixture_note": "the shipped golem draws from the global RNG, so five unseeded variants are five different golems and any measured bite is noise. part_seed pins the stream for the gallery only; the default 0 is still the shipped behaviour",
+    "declined": "a colour axis. The six random hues are the same argument salvage already makes, one register down, and it would have cost a second knob to say it twice"
+   },
    "category": "hazards",
    "complexity": "beginner",
    "description": "Asymmetric golem built from mismatched primitives. Rebuilds itself from random parts after damage — each reconstruction unique. Exhausts after 3 rebuilds. Teaches bricolage: creation from whatever is at hand.",
@@ -6577,6 +6604,28 @@
    "qfep_connection": "Perlin's trick — randomness with spatial correlation — is what makes the danger legible at all: high red tiles announce themselves through their smooth neighborhoods. The field scrolls, so safety is a gradient you surf, not a place you reach."
   },
   "octapod_crawler": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "guise": [
+      "pod",
+      "stone",
+      "fruit",
+      "husk",
+      "bare"
+     ]
+    },
+    "default": "guise=pod - pod returns the shipped literals of _build_egg_plant() value for value: albedo (0.28, 0.35, 0.22), roughness 0.8, emission on, egg scale (1.0, 1.3, 1.0), five sepals tilted -0.3, six warts. The 1 existing placement gets the same dormant egg-plant, and only guise=bare touches the state machine (there is no shell to wait inside)",
+    "was": "twenty-eight exports, all of them rates, radii and durations - leap_speed, detect_pause, stun_duration, hatch_time. None of that survives a still photograph. The decision the header comment names as the whole point (is it a plant? an egg? food? danger?) was hard-coded inside _build_egg_plant()",
+    "reads": "guise is the category the creature presents BEFORE the relationship resolves it. pod is organic growth, stone is scenery, fruit is an invitation, husk is a thing that has already hatched so there is nothing left to fear, and bare refuses mimicry outright - the eight-legged animal standing in the open from the first frame. The hazard is identical in all five; only the claim about what it is changes",
+    "fixture": {
+     "pod_seed": 20260804
+    },
+    "fixture_note": "the six warts scatter from a randomize()d RNG, so two renders of the same guise differ. pod_seed pins the scatter for the gallery only; the default 0 hands back the shipped RNG untouched",
+    "declined": "leg_count and gait. leg_count is a real export and visible in world space, but the legs are hidden for as long as the default guise is intact, so a leg axis swept against the default fixture returns four identical photographs of an egg; the 8 legs also come from a fixed octapod_ik.tscn rig, so the export only indexes into it. Gait is time-domain and invisible to a still by construction",
+    "vocabulary_note": "catalyst_foe.body declares octapod among curriculum|cube|mote|serpent|octapod|grand, but that axis is one cube choosing which silhouette to wear - octapod_crawler is the referent of that value, not a member of the family. An axis called body here would mean this creature's own morphology, a different question, so the word is not reused"
+   },
    "category": "hazards",
    "complexity": "intermediate",
    "description": "Procedural 8-legged wall-crawling creature. Headcrab meets octopus. Patrols surfaces, detects player, chases and leaps. Can be stunned with fire. Future: befriend in lab, evolves through game.",
@@ -7231,6 +7280,35 @@
    "qfep_connection": "It cycles scale, rotation, translation — exactly the transformations that preserve its rectangle — while the creases smolder orange; the invariant is the shape, the hazard is the heat. An affine-identity lesson taught by a floor that kills you for standing on the proof."
   },
   "paradox_stalker": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "census": [
+      "one",
+      "pair",
+      "triad",
+      "chorus"
+     ],
+     "claim": [
+      "placard",
+      "glow",
+      "none",
+      "all"
+     ]
+    },
+    "default": "census=pair, claim=placard - PRESERVES every existing placement exactly. There are three reach-paths, not the one the runner counted: a bare token in Hazards_Zoo_6, a curation_station collection in Curation_Bay_hazards_17 (whose #with_wall / #with_pillars / #with_barrier flags are the station's, not this creature's), and `proximity_spawner#type:paradox_stalker` in Chamber_Foundations, where ProximitySpawner.configure forwards only type / spawn_radius / despawn_radius / respawn_delay and the spawned creature therefore takes the script defaults. census=pair is special-cased in _ghost_offsets to return the two literal vectors _build_mesh used to write inline, (+sep/2, 0, 0) and (-sep/2, 0, 0), rather than the ring formula evaluated at n=2, because sin(PI) is 1.2e-16 and the shipped placement is entitled to a clean zero; _chase_offset does the same for the chase targets, returning dir*r and -dir*r. claim=placard makes _create_materials emit exactly the two lines it used to hold - ghost_a_color with real_emission, ghost_b_color with BLACK, each at its own alpha - and _build_claim_marks builds the one Label3D with the same text, font_size 22, pixel_size 0.002, modulate and position (0, 1.0, 0.05). _refresh_claim reproduces the old swap block byte for byte at n=2: emission on the holder, 0.7/0.3 alpha, `REAL: A`/`REAL: B` on the billboard. _on_damaged's `randf() > 0.5` became `randf() > 1.0 / n`, which at n=2 is the same number. The one placement is a bare token with no config, and apply_grid_config only assigns when the word is in the allow-list AND differs from the word already held, so nothing is rebuilt for it.",
+    "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS. Eight exports existed: swap_interval, zeno_chance, lunge_speed, lunge_duration are all RATES or DURATIONS and invisible to a still; ghost_separation is a distance; the three Colors are palette. The class had no apply_grid_config of its own, so the base forwarded health and speed and a map token could reach nothing else. Two ghosts was written into _build_mesh three times over - two Node3Ds, two materials, two offsets - and never named.",
+    "note": "hand promotion 2026-08-03. The swap itself is the headline behaviour and it is time-domain: a still cannot photograph an alternation, so swap_interval was NOT promoted - an axis over it would have produced identical tiles and a confident verdict about the capture rather than the design. What a still CAN see is how many bodies are standing there and whether anything in the frame says which is real, and between them those two are the whole paradox. `census` runs one (nothing to alternate between, so no contradiction, and _on_damaged's 1/n coin resolves to `you always hit it`) - pair (the liar's minimum, shipped) - triad (a majority exists, so the contradiction becomes a VOTE, which is how formal systems usually escape one) - chorus (five: the question `which is real` has become a question about a crowd, which is not the same question). `claim` runs placard (glow + dim + billboard, the contradiction fully captioned, shipped) - glow (visible, unnamed) - none (identical bodies, no emission, no text: the liar taken at its word and photographically unresolvable) - all (every body lit and every placard reading REAL: the contradiction asserted out loud by everyone at once). The ring is a cosine, not a randf, so N variants are N photographs of one creature.",
+    "shares_vocabulary_with": "nothing, deliberately, on either axis. `claim` is NOT the furniture family's `tell` (mark|none|ghost|exemplar, on balance_puzzle / chair_assembly_puzzle and four siblings): that word asks how a puzzle reveals its SOLUTION, and this artifact has no solution state - the answer it would reveal changes every three seconds. Reusing the word would have put a creature with no target state in a family of puzzles that all have one, and the siblings would not have measured alike. `census` is a new word too; the nearest neighbour is the hazards family's `warning` (none|stain|cage|beacon|shroud), which is about telegraphing danger to the player and is a different question from how many claimants a self-referring thing fields. `census` does appear as a VALUE in two `evidence` and `vacancy` ladders elsewhere in the corpus; as an axis NAME it is unused, and no ladder is being borrowed.",
+    "fixture": {
+     "detection_radius": 0.0,
+     "patrol_speed": 0.0
+    },
+    "fixture_note": "a CharacterBody3D that starts in PATROL and walks its corners from the first physics frame; with one camera for the whole run an unpinned creature drifts inside a fixed frame and the diff measures displacement instead of the axis. Both are plain HazardCreatureBase exports and _on_ready here writes NEITHER (it only calls add_to_group), so no guard was needed - unlike qfep_calibrator, promoted the same day, whose _on_ready had to be guarded before its fixture could bite. detection_radius 0 also keeps the ghosts out of the CHASE branch of _process_visual, so the rest offsets stay where _build_mesh put them.",
+    "measurement_risk": "the humanoids are small - a 0.15 m torso, a 0.06 m head - against a merged AABB that is dominated by ghost_separation, so the SUBJECT PERCENTAGE is the number to check before believing any verdict here. On `census`, one->pair->triad->chorus changes the body count and the AABB width together, so the fitter will re-frame and the diff may understate; compare subject % across variants first. On `claim`, placard->glow is a single billboard disappearing and is the weakest step; glow->none is a colour change across every body (cyan becomes magenta) plus the emission going out, and placard->all is every body lighting plus N placards, and those two are the steps that move pixels. Do not read a faint placard/glow pair as a dead axis.",
+    "still_note": "everything both axes build is standing geometry, resolved in _create_materials and _build_mesh before the first physics frame. The swap fires at 3.0 s and the settle is shorter than that, so a capture photographs the build state: body 0 holds the claim in every variant. The lunge and the Zeno teleport need a player in the world and there is none on the bench."
+   },
    "category": "hazards",
    "complexity": "intermediate",
    "description": "Two overlapping ghost silhouettes that swap which is real every 3 seconds. 50% chance damage passes through the wrong ghost. Zeno's paradox: sometimes halves distance to player instead of closing it.",
@@ -7779,6 +7857,36 @@
    "qfep_connection": "E_entropy: the vent that answers approach — it spawns when the player comes near, so population is a function of attention. Nothing exists in the room until presence calls it out; the spawner makes observation itself a physical cause."
   },
   "qfep_calibrator": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "admits": [
+      "all",
+      "phi",
+      "delta_e",
+      "constraint",
+      "none"
+     ],
+     "readout": [
+      "none",
+      "numeral",
+      "gradation",
+      "lattice"
+     ]
+    },
+    "default": "admits=all, readout=numeral - PRESERVES every existing placement exactly. There are three reach-paths, not the one the runner counted: a bare token in Hazards_Zoo_7, a curation_station collection in Curation_Bay_hazards_11 (whose #with_wall / #with_pillars / #with_barrier flags are the station's, not this creature's), and `proximity_spawner#type:qfep_calibrator` in Chamber_QFEP, where ProximitySpawner.configure forwards only type / spawn_radius / despawn_radius / respawn_delay and the spawned creature therefore takes the script defaults. admits=all makes _build_beams call the same three blocks _build_mesh used to write out longhand, in the same order (phi, then delta_e, then constraint), with the same cylinders, tips, rotations and offsets, so _mesh_root ends up with the identical child list. readout=numeral builds the same Label3D with the same text, font_size 32, pixel_size 0.003, modulate and position (0, 0.7, 0), and rungs 2 and 3 are skipped so no gauge and no lattice geometry is created at all; the two loops added to _process_visual walk arrays that stay empty. The one placement is a bare token with no config, and apply_grid_config only assigns when the word is in the allow-list AND differs from the word already held, so nothing is rebuilt for it.",
+    "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS. Eleven exports existed and every one of them was a RATE, an AMPLITUDE or a DIMENSION: phi_frequency, delta_e_frequency, constraint_frequency, three amplitudes, beam_length, beam_radius, base_damage, base_detection, base_attack_range. Not one is legible in a still photograph, which is exactly why the sweep had nothing to turn. The class had no apply_grid_config of its own either, so the base forwarded health and speed and a map token could reach nothing else.",
+    "note": "hand promotion 2026-08-03. The oscillation and the spin ARE this creature's headline behaviour and both are time-domain, so neither was promoted - a still cannot photograph a frequency, and an axis over phi_frequency would have produced identical tiles and a confident INERT verdict about the capture rather than the design. What IS in the frame is the three beams (0.6 m each on a 0.9 m body) and the placard. `admits` asks which terms of E(S) = f(phi, delta_e, constraint) the instrument puts in the world - not how big they are but how many dimensions it claims the landscape has, which is a different theory per value rather than a different size. `readout` is the ordered evidence ladder for what it commits to about the numbers it is reading; rung 3 draws the parameter space as a unit cube with the three origin edges coloured gold/cyan/magenta and a marker at this instant's point, which is the one artifact in the corpus with a literal parameter space to put there. Everything both axes build is standing geometry with no randf in it, so N variants are N photographs of one creature.",
+    "shares_vocabulary_with": "`readout` is taken character for character from commons/primitives/line/line.gd and its twin commons/primitives/point/xyz_slider_plate.gd (none < numeral < gradation < lattice), including their fallback rule that an unrecognised word builds as numeral rather than none, so a typo cannot delete a placard from a live room. Same question, same monotone ladder, and the siblings should measure alike on the none->numeral step. NOT the noise family's readout (relief|plate|column), which is about how a scalar field is given a surface - this artifact has no field. `admits` is deliberately a NEW word and shares nothing: the nearest neighbours would have been `evidence` (result|trace|longhand|axiom), which asks what proof of a LAW is in frame, and `stencil` from gradient_hunter, which asks where an estimate is sampled from. Both are about the apparatus's method; this is about how many terms the theory has, and borrowing either would have claimed a comparability that does not exist.",
+    "fixture": {
+     "base_detection": 0.0,
+     "patrol_speed": 0.0
+    },
+    "fixture_note": "a CharacterBody3D that starts in PATROL and walks its corners from the first physics frame; with one camera for the whole run an unpinned creature drifts inside a fixed frame and the diff measures displacement instead of the axis. base_detection (NOT detection_radius) is the knob that bites, because _apply_parameter_effects rewrites detection_radius every frame as base_detection + _constraint * 5.0. patrol_speed 0 only bites because _on_ready's write of 1.5 was changed to fire only when the property still holds HazardCreatureBase's 1.8 - an unguarded write there discards anything set before add_child, which is exactly how the sweep applies values. Both are exports at their shipped values in the one real room, so they are fixture knobs and not axes.",
+    "measurement_risk": "on `readout`, none->numeral is a whole billboard appearing and will move pixels; numeral->gradation adds three 0.28 m tracks and is smaller; gradation->lattice adds a 0.3 m cube and is large again. On `admits`, all->phi / all->delta_e / all->constraint each delete two of three beams and all->none deletes all three, so every step is a big subtraction - if these read faint, suspect the framing (the merged AABB is dominated by the beams, so removing them shrinks the subject and the fitter may zoom in, making the remaining body fill more of the frame rather than less). Compare subject % across the variants before reading a verdict.",
+    "still_note": "everything both axes build is standing geometry. The body spin, the emission pulse, the beam-length scaling and the label's digits are all time-domain and all identical across variants, because each variant is instantiated fresh and captured after the same settle - they are shared background, not signal."
+   },
    "category": "hazards",
    "complexity": "advanced",
    "description": "Morphing dodecahedron with 3 parameter beams — phi (rotation speed), delta_e (damage), constraint (detection). Parameters oscillate, creating emergent behavior from their interaction. The QFEP laboratory's creature.",

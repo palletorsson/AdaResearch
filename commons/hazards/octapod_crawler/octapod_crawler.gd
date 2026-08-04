@@ -66,6 +66,28 @@ enum State {
 ## (6 bones, 0.12 spacing, spring_length=1.5, dual FABRIK chains).
 ## FABRIK3D targets SpringArm3D foot markers directly — no step gait.
 
+# --- DNA (promoted 2026-08-04, stage 2) ------------------------------------------------
+# Everything this creature exposed was a rate, a radius or a duration — invisible to a still.
+# The one decision that is entirely visible, and that the header comment states as the whole
+# point ("is it a plant? An egg? Food? Danger? The categories aren't fixed until the
+# relationship resolves"), was hard-coded inside _build_egg_plant(): a mossy-green pod with
+# five sepals and six warts. That is a claim about what the thing wants you to think it is.
+#
+# guise — the category the dormant creature presents. "pod" is the shipped disguise, colour
+#   for colour and count for count. "stone" reads mineral (grey, squat, no leaves, warty) —
+#   scenery, not life. "fruit" reads edible (glossy red-purple, a tight three-leaf calyx, no
+#   warts) — an invitation. "husk" reads already-dead (dry tan, flared spent sepals) — a thing
+#   that has already hatched, so there is nothing left to fear. "bare" refuses mimicry
+#   entirely: no pod at all, the eight-legged animal standing in the open from the first frame.
+#   Only the last one changes the state machine, and only because there is no shell to wait in.
+#
+# NOT promoted: leg_count and the gait. Both are real, and both are invisible here — the legs
+# are hidden for as long as the default guise is intact, so a leg axis swept against the
+# default fixture returns four identical photographs of an egg, and gait is time-domain
+# besides. See the registry note.
+@export_enum("pod", "stone", "fruit", "husk", "bare") var guise: String = "pod"
+@export var pod_seed: int = 0  ## 0 = the shipped randomized wart scatter; non-zero pins it for a still
+
 @export_group("Dormant")
 @export var start_dormant: bool = true  ## Start as egg-plant pod
 @export var hatch_radius: float = 2.5  ## Player distance to trigger hatching
@@ -114,6 +136,7 @@ var _egg_material: StandardMaterial3D = null
 var _leaf_meshes: Array[MeshInstance3D] = []
 var _leaf_material: StandardMaterial3D = null
 var _hatch_progress: float = 0.0   # 0→1 during HATCHING
+var _octapod_built: bool = false   # guards the guise rebuild — _ready has run once
 
 # ── Signals ────────────────────────────────────────────────────────────────
 signal enemy_destroyed(enemy: Node3D)
@@ -139,7 +162,11 @@ func _ready() -> void:
 	add_to_group("enemy")
 	add_to_group("critter")
 
-	if start_dormant:
+	_octapod_built = true
+
+	# guise "bare" has no shell to wait inside, so it can never be dormant.
+	# Every other guise takes the shipped branch untouched.
+	if start_dormant and guise != "bare":
 		_set_state(State.DORMANT)
 		_show_egg_plant(true)
 		_show_creature(false)
@@ -471,23 +498,99 @@ func _show_creature(visible_state: bool) -> void:
 # EGG-PLANT CONSTRUCTION
 # ═══════════════════════════════════════════════════════════════════════════
 
+## GUISE_POD is the shipped disguise, value for value — the literals that used to sit
+## inline in _build_egg_plant(). The other three are the alternative claims.
+const GUISE_POD: Dictionary = {
+	"albedo": Color(0.28, 0.35, 0.22),   # dark mossy green
+	"roughness": 0.8,
+	"glow": true,
+	"pod_scale": Vector3(1.0, 1.3, 1.0), # taller than wide, like an egg
+	"leaf_count": 5,
+	"leaf_tilt": -0.3,
+	"leaf_size": 1.0,
+	"bump_count": 6,
+	"bump_scale": 1.0,
+}
+
+const GUISE_STONE: Dictionary = {
+	"albedo": Color(0.44, 0.43, 0.40),   # dry grey mineral
+	"roughness": 0.95,
+	"glow": false,
+	"pod_scale": Vector3(1.18, 0.82, 1.08),  # squat, boulder-like
+	"leaf_count": 0,                     # nothing living about it
+	"leaf_tilt": -0.3,
+	"leaf_size": 1.0,
+	"bump_count": 11,
+	"bump_scale": 1.7,
+}
+
+const GUISE_FRUIT: Dictionary = {
+	"albedo": Color(0.46, 0.08, 0.24),   # ripe red-purple
+	"roughness": 0.22,                   # waxy, glossy
+	"glow": true,
+	"pod_scale": Vector3(1.02, 1.34, 1.02),
+	"leaf_count": 3,
+	"leaf_tilt": -0.95,                  # a tight calyx hugging the top
+	"leaf_size": 0.6,
+	"bump_count": 0,                     # smooth skin — edible
+	"bump_scale": 1.0,
+}
+
+const GUISE_HUSK: Dictionary = {
+	"albedo": Color(0.58, 0.50, 0.34),   # dried tan
+	"roughness": 0.97,
+	"glow": false,
+	"pod_scale": Vector3(0.9, 1.22, 0.9),  # shrunken
+	"leaf_count": 7,
+	"leaf_tilt": 0.62,                   # spent sepals flared open
+	"leaf_size": 1.45,
+	"bump_count": 3,
+	"bump_scale": 0.8,
+}
+
+
+## What the dormant creature presents itself AS. guise == "pod" returns the shipped
+## literal for every key, so the default build is the pre-promotion build.
+func _guise_trait(key: String) -> Variant:
+	var traits: Dictionary = GUISE_POD
+	match guise:
+		"stone":
+			traits = GUISE_STONE
+		"fruit":
+			traits = GUISE_FRUIT
+		"husk":
+			traits = GUISE_HUSK
+	if traits.has(key):
+		return traits[key]
+	return GUISE_POD.get(key, null)
+
+
 func _build_egg_plant() -> void:
+	# "bare" builds no disguise at all — the animal stands in the open.
+	if guise == "bare":
+		return
+
 	_egg_root = Node3D.new()
 	_egg_root.name = "EggPlantRoot"
 	add_child(_egg_root)
 
 	# Egg-plant material: muted green-purple organic, like a real eggplant/seed pod
 	_egg_material = StandardMaterial3D.new()
-	_egg_material.albedo_color = Color(0.28, 0.35, 0.22)  # Dark mossy green
-	_egg_material.roughness = 0.8
+	var pod_albedo: Color = _guise_trait("albedo")
+	_egg_material.albedo_color = pod_albedo
+	_egg_material.roughness = float(_guise_trait("roughness"))
 	_egg_material.metallic = 0.0
-	_egg_material.emission_enabled = true
+	_egg_material.emission_enabled = bool(_guise_trait("glow"))
 	_egg_material.emission = Color(0.15, 0.25, 0.1)  # Subtle inner glow
 	_egg_material.emission_energy_multiplier = 0.15
 
 	# Leaf material: slightly brighter green, veiny
 	_leaf_material = StandardMaterial3D.new()
 	_leaf_material.albedo_color = Color(0.22, 0.38, 0.15)  # Leaf green
+	if guise == "husk":
+		_leaf_material.albedo_color = Color(0.52, 0.44, 0.28)  # dry, spent
+	elif guise == "fruit":
+		_leaf_material.albedo_color = Color(0.17, 0.30, 0.12)  # darker calyx
 	_leaf_material.roughness = 0.7
 	_leaf_material.metallic = 0.0
 	_leaf_material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Visible from both sides
@@ -502,12 +605,15 @@ func _build_egg_plant() -> void:
 	egg_sphere.rings = 12
 	_egg_mesh.mesh = egg_sphere
 	_egg_mesh.material_override = _egg_material
-	_egg_mesh.scale = Vector3(1.0, 1.3, 1.0)  # Taller than wide, like an egg
+	var pod_scale: Vector3 = _guise_trait("pod_scale")
+	_egg_mesh.scale = pod_scale  # Taller than wide, like an egg
 	_egg_mesh.position.y = body_radius * 0.8  # Sit slightly above ground
 	_egg_root.add_child(_egg_mesh)
 
 	# Leaf-like sepals around the top — 5 petal structures wrapping the pod
-	var leaf_count: int = 5
+	var leaf_count: int = int(_guise_trait("leaf_count"))
+	var leaf_scale: float = float(_guise_trait("leaf_size"))
+	var leaf_tilt: float = float(_guise_trait("leaf_tilt"))
 	for i in range(leaf_count):
 		var angle: float = TAU * float(i) / float(leaf_count)
 		var leaf := MeshInstance3D.new()
@@ -515,7 +621,7 @@ func _build_egg_plant() -> void:
 
 		# Each leaf is a flattened box (like a thick petal/sepal)
 		var box := BoxMesh.new()
-		box.size = Vector3(body_radius * 0.9, body_radius * 1.4, 0.015)
+		box.size = Vector3(body_radius * 0.9 * leaf_scale, body_radius * 1.4 * leaf_scale, 0.015)
 		leaf.mesh = box
 		leaf.material_override = _leaf_material
 
@@ -528,20 +634,28 @@ func _build_egg_plant() -> void:
 		)
 		# Rotate to face outward and tilt up (cupping the egg)
 		leaf.rotation.y = -angle
-		leaf.rotation.x = -0.3  # Slight inward tilt
+		leaf.rotation.x = leaf_tilt  # Slight inward tilt
 
 		_egg_root.add_child(leaf)
 		_leaf_meshes.append(leaf)
 
 	# Small bumps/warts on the pod surface (organic texture)
-	var bump_count: int = 6
+	# pod_seed = 0 hands back the shipped _rng, randomize()d in _ready — a different
+	# scatter every launch. A non-zero seed pins it so the gallery measures the guise
+	# and not the wart lottery.
+	var pod_rng: RandomNumberGenerator = _rng
+	if pod_seed != 0:
+		pod_rng = RandomNumberGenerator.new()
+		pod_rng.seed = pod_seed
+	var bump_count: int = int(_guise_trait("bump_count"))
+	var bump_scale: float = float(_guise_trait("bump_scale"))
 	for i in range(bump_count):
-		var bump_angle: float = _rng.randf_range(0, TAU)
-		var bump_height: float = _rng.randf_range(0.3, 0.8)
+		var bump_angle: float = pod_rng.randf_range(0, TAU)
+		var bump_height: float = pod_rng.randf_range(0.3, 0.8)
 		var bump := MeshInstance3D.new()
 		bump.name = "Bump_%d" % i
 		var bump_sphere := SphereMesh.new()
-		bump_sphere.radius = body_radius * _rng.randf_range(0.12, 0.2)
+		bump_sphere.radius = body_radius * pod_rng.randf_range(0.12, 0.2) * bump_scale
 		bump_sphere.height = bump_sphere.radius * 2.0
 		bump.mesh = bump_sphere
 		bump.material_override = _egg_material
@@ -1010,6 +1124,45 @@ func configure(config_data: Dictionary) -> void:
 		hatch_radius = _cfg_float(config_data["hatch_radius"], hatch_radius)
 	if config_data.has("hatch_time"):
 		hatch_time = _cfg_float(config_data["hatch_time"], hatch_time)
+	if config_data.has("pod_seed"):
+		var seed_text: String = str(config_data["pod_seed"]).strip_edges()
+		if seed_text.is_valid_int():
+			pod_seed = int(seed_text)
+	if config_data.has("guise"):
+		var want_guise: String = str(config_data["guise"]).strip_edges().to_lower()
+		if want_guise in ["pod", "stone", "fruit", "husk", "bare"] and want_guise != guise:
+			guise = want_guise
+			# Guarded: only after _ready has built once, and only because the value
+			# changed. A map that passes no guise key never reaches this line, so the
+			# existing placement keeps its shipped pod.
+			if _octapod_built:
+				_rebuild_guise()
+
+## Swap the disguise on an already-built creature. Only reachable from
+## apply_grid_config when the declared value actually changed.
+func _rebuild_guise() -> void:
+	if is_instance_valid(_egg_root):
+		remove_child(_egg_root)
+		_egg_root.queue_free()
+	_egg_root = null
+	_egg_mesh = null
+	_egg_material = null
+	_leaf_material = null
+	_leaf_meshes.clear()
+
+	_build_egg_plant()
+
+	if guise == "bare":
+		_show_creature(true)
+		if _state == State.DORMANT or _state == State.HATCHING:
+			_set_state(State.IDLE)
+		return
+
+	if _state == State.DORMANT:
+		_show_egg_plant(true)
+		_show_creature(false)
+	else:
+		_show_egg_plant(false)
 
 func _cfg_float(value: Variant, fallback: float) -> float:
 	if value is float or value is int:

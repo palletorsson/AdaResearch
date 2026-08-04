@@ -6158,6 +6158,29 @@
    "qfep_connection": "The Windows Pipes screensaver reborn: a pipe growing by random turns, filling the volume with plumbing nobody designed. Idle-machine art — the desktop's oldest proof that a few dice and a growth rule can furnish a world."
   },
   "pixel_cloud": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "bias": [
+      "rise",
+      "none",
+      "spire",
+      "sprawl"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "fixture": {
+     "walk_seed": 20260802
+    },
+    "default": "bias=rise, evidence=result - the shipped build exactly: +Y weighted by upward_bias (3.0) and every other direction 1.0, one randf() per step in the same order, the path cubes and nothing beside them. walk_seed defaults to -1, which draws from the global stream as before, so the 8 existing placements keep rolling a fresh sculpture per launch; the fixture above is for the sweep only.",
+    "was": "grid_size, num_cubes, cube_spacing and upward_bias were @exports that apply_grid_config ignored (its body was `pass`), so no map token could reach the pull the @identity block names as the critical parameter; the refusals that shape a self-avoiding walk were discarded at build time and only the surviving path was ever shown."
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Builds an upward-biased self-avoiding random walk and places cubes along the path to form a pixel cloud sculpture.",
@@ -6593,6 +6616,23 @@
    "qfep_connection": "Pollock minus the body: a Timer fires every half second and gesture is a curve through random points with viscosity presets named Thin, Medium, Thick. The drip is simulated; the risk — an arm that could miss — is not, and max_splats = 5000 is the conservation policy the real canvas never signed."
   },
   "pollock_painting_in_3d": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "support": [
+      "floor",
+      "table",
+      "easel",
+      "wall"
+     ]
+    },
+    "fixture": {
+     "paint_seed": 20260803
+    },
+    "default": "support=floor - the shipped staging to the two numbers: rotation_degrees (-90, 180, 0) at y = floor_height (0.02), the same escape hatch when place_on_floor is false, and the frame and backing panels built off that same transform. The 3 existing placements pass no support key, so apply_grid_config returns on its first line and nothing restages.",
+    "was": "the canvas was hard-coded flat on the ground. Pollock's break was not a mark but a POSTURE - the canvas came off the easel and went on the studio floor, and the body walked around a thing it could no longer face - and this artifact shipped that decision as an un-turnable boolean. The axis restores the ladder the drip argued against: the floor stood over, the table leaned across, the easel it was supposed to sit at, the wall the finished picture ends up on. The word `support` is the art-historical term for the thing a painting is made on; the value list is NOT the one code_display and catalyst_target use for the same word, because theirs asks what furniture holds an instrument up and this asks which posture the body has to take."
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
@@ -10985,6 +11025,26 @@
    "qfep_connection": "Perlin's own second draft: the simplex grid replaces squares, fewer artifacts, better behavior in high dimensions. Standing beside its ancestor it teaches versioning as a mathematical practice — even noise gets revised."
   },
   "slot_machine": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "fixture": {
+     "spin_seed": 20260803
+    },
+    "axes": {
+     "disclosure": [
+      "oracle",
+      "tally",
+      "ledger",
+      "works",
+      "origin"
+     ]
+    },
+    "default": "disclosure=works - the shipped machine byte for byte: the seated side screen at its shipped 0.150 m, the counts, the Reel 1 histogram, the Theory 2.8% line, and the resting text 'Pulls: 0 / Pull the lever!'. All 14 existing placements are untouched, and apply_grid_config only rebuilds when a value actually changed and only after _ready has built once.",
+    "was": "a slot machine with no turnable knob at all - apply_grid_config was a bare `pass`, so all 14 rooms held one identical machine, and the odds it embodies (6^3 = 216, P(triple) = 6/216) were only ever inferable from a histogram nobody had pulled yet",
+    "note": "the family's word, not a new one: coin_toss, prng_crank_machine, monte_carlo_dartboard, trng_vs_prng, shannon_entropy_meter, hardware_entropy_decay, random_number_book_page_1955 and env_one all carry `disclosure`, and the ladder + its ranks are read out of prng_crank_machine.gd rather than copied. Each rung builds its own RESTING face (blanked plate / short screen / ruled paper / shipped screen / odds board) because the evidence is one still at zero pulls - a text-only ladder would render five identical frames. spin_seed=0 is the engine RNG exactly as shipped; the fixture pins it only for capture.",
+    "declines": "spin_speed, stop_delay and AUTO_INTERVAL are the obvious knobs and all three are time-domain, invisible to a still"
+   },
    "category": "randomness",
    "complexity": "beginner",
    "description": "A classic slot machine with 3 spinning reels. Pull the VR lever to spin — reels stop one by one, left to right. Tracks a histogram of symbol frequencies showing convergence to uniform distribution. Triple matches flash gold. AUTO mode for rapid sampling.",

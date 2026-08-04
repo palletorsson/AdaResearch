@@ -2787,6 +2787,17 @@
    "qfep_connection": "Cubes in chaotic disarray — high entropy as furniture, random positions and rotations and scales. The grid's own elements thrown to the λ=1 wind, order's vocabulary spoken as noise. Between this and the ordered_grid the whole spectrum stretches."
   },
   "particle_chaos": {
+   "dna": {
+    "axes": {
+    "constraint": [
+    "none",
+    "gravity",
+    "jet",
+    "vortex",
+    "drag"
+    ]
+    }
+   },
    "name": "Particle Chaos",
    "lookup_name": "particle_chaos",
    "description": "High-entropy particle system. Maximum spread, random velocities, dissolution.",
@@ -3516,6 +3527,25 @@
    }
   },
   "edge_core": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "framing": 0.45,
+    "axes": {
+     "station": [
+      "edge",
+      "order",
+      "chaos"
+     ]
+    },
+    "default": "station=edge - the lineage segment for segment: translucent green shell at 32 segments and 16 rings, alpha 0.3, the bright inner sphere at 0.4x radius, the 100-particle orbiting ring, and _process running exactly as it did (the freeze branch is false, and the three new null guards can only be true for a value that removes the mesh they guard). All three placements - QFEP_Edge_Of_Chaos, Corridor_QFEP_Edge_Of_Chaos, Curation_Bay_qfeplaboratory_6 - are bare tokens, and apply_grid_config returns unless a token names `station` AND the word differs, so nothing rebuilds for them.",
+    "was": "five exports, all dials on the SAME appearance: core radius, pulse speed, pulse amount, rotation speed, particle count. No apply_grid_config, so no map token could reach any of them.",
+    "note": "The artifact's claim is a claim about a POSITION - life is not at order or at chaos but at the narrow boundary - and it could only ever draw the answer. It carries a set_lambda() that shifts blue to green to red with distance from 0.4, and nothing in the repository calls it (qfep_reactor connects a slider to its own set_lambda, not to this one), so in every room the core stands green and alive for every value of lambda there is. You cannot see that the edge is NARROW if the two things it is narrow between are never present. The two tints are copied out of that dead function, not invented: order is the blue it lerps toward below 0.4, chaos the red above it. order crystallises the same anatomy - a 7-segment faceted shell you can count the sides of, twelve fixed nodes at exact intervals instead of an orbit, and _process returning immediately, so no pulse, no rotation, no shimmer. chaos removes the shell (the boundary goes first) and leaves a dim speck inside ninety seeded scattered points with nothing holding them.",
+    "declined": "THE PULSE, which is the tempting knob and the one the identity block names as critical. A rate is invisible to a still - info_board was swept across five duration exports and produced six identical tiles - so pulse_speed and pulse_amount stay exports and stay undeclared. Every value above is form: facet count, node count, a shell that is there or is not.",
+    "kin": "lambda_slider and phi_slider share `calibration` (optimum, band, dispute, gap, none) for how a RAIL marks the right answer. Not reused: this is not a rail and has no scale to mark. fluid_form (phi>0) and rigid_sculpture (phi<0) are bodies at positions the way this one is, and `station` would fit all three - but not one value list, because their line is phi (resist vs embrace change) and this one's is lambda (order vs chaos). Same question, different term of the formula; a shared word over two vocabularies would claim a kinship the geometry does not have.",
+    "still_note": "the scatter is seeded (SCATTER_SEED), so chaos is one arrangement rather than a new object per boot, and order is frozen, so its frame is deterministic. Only the default's pulse is still time-dependent at capture, and it is compared against two values that differ in structure and hue rather than in phase.",
+    "framing_note": "framing 0.45: the chaos cloud reaches about 1.15x core_radius, so the fixed camera unions to roughly a 1 m box and the 0.8 m shell would otherwise sit at about 5% of frame."
+   },
    "name": "Edge Core",
    "lookup_name": "edge_core",
    "description": "Central orb for edge of chaos. Pulsing, alive, responsive to λ.",
@@ -3640,6 +3670,24 @@
    "lookup_name": "rigid_sculpture",
    "description": "Static crystalline form for φ<0 zone. Resists change.",
    "scene": "res://commons/interfaces/qfep/rigid_sculpture.tscn",
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "formation": [
+      "lattice",
+      "shell",
+      "ring",
+      "column",
+      "drift"
+     ]
+    },
+    "default": "formation=ring - ring is the shipped arrangement line for line: the same (i/element_count)*TAU angle, the same size*0.6 radius, the same outward -angle turn, with the central octahedron and both caps untouched. It is also the _: fallthrough, so an unknown word renders the shipped sculpture rather than blanking it. The one existing placement (QFEP_Phi_Term) passes no keys, and apply_grid_config rebuilds only when a value both validates and differs, and only after _ready has built once, so that room is unchanged.",
+    "was": "one hard-coded ring of eight prisms around an octahedron, with no apply_grid_config at all - so nothing here was reachable from a map token. The three exports were size, element_count and a colour: dimensions and decoration. The decision that carries the argument, WHICH order this monument keeps, was written inline in the build loop under a comment that said perfect geometric arrangement.",
+    "note": "hand promotion 2026-08-04, refused by the runner as NO TURNABLE KNOBS. The @identity names the critical_parameter as the ABSENCE OF ANIMATION - and that cannot be an axis, because the evidence is one still PNG: a form that does not move and a form that does are the same photograph. So the axis is the other half of the claim. phi<0 does not merely resist change, it defends a particular order, and the five values are five orders worth defending: a centre held on all sides (ring), repetition without privilege (lattice), closure in every direction (shell), rank (column), and an order that has already weathered and holds its pose anyway (drift). drift is seeded per index, because the shipped code contains no randomness at all and an unseeded draw would make five variants of five objects.",
+    "shares_vocabulary_with": "reactive_particle_field, reactive_particles, edge_particles, emergence_zone (four registry tokens on one scene) and delaunay_triangulation_3d_cell - formation is lattice|shell|ring|column|drift on all of them, same five words, same question: where a set of small elements stands relative to one another. Only the default differs, because this artifact ships the ring and they ship the lattice, so this sculpture can be compared with those five rather than merely contrasted. NOT crystal_cluster's growth (scatter|druse|lattice|vein), which is the nearest artifact in the registry and was hand-promoted for the same reason: growth asks how a mineral GREW and its values are mineralogical events, whereas this is a made monument arguing about imposed order - and its shipped ring is not among growth's four values at all.",
+    "measurement_risk": "column and shell change the merged AABB (a 0.8 tall stack, a 0.48 sphere) where ring and lattice are flat and wide, so a fit-by-diagonal camera frames them differently. That is honest here - the formation really does change the shape - but do not read the reframing itself as the bite."
+   },
    "category": "qfep",
    "interaction": "observe",
    "sequence": "qfeplaboratory",
@@ -3755,6 +3803,27 @@
    "lookup_name": "fluid_form",
    "description": "Morphing iridescent form for φ>0 zone. Embraces becoming.",
    "scene": "res://commons/interfaces/qfep/fluid_form.tscn",
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "flux": [
+      "mixed",
+      "skin",
+      "sway",
+      "still"
+     ]
+    },
+    "default": "flux=mixed - mixed returns (noise_gain 1.0, sway_gain 0.3), which are the two constants the vertex function carried inline, so the shader computes exactly the code as written. flux needs no rebuild at all - it is two uniforms - and apply_grid_config returns untouched when a config carries none of its keys, which the one existing placement (QFEP_Phi_Term) does not. THE DEFAULT PRESERVES THE CODE PATH BUT NOT WHAT THAT ROOM LOOKED LIKE. See shader_fix; the change was unavoidable and is stated plainly rather than buried.",
+    "shader_fix": "THE SHADER DID NOT COMPILE, and had not since the file was written. Two fatal errors: fmod is not a function in Godot's shading language (that is GDScript's and HLSL's name for it - the shader language has mod, and fract is what this code wanted), and vec3(127.1, 311.7, 74.7, 1.0) passes four components to a three-component constructor. So the ShaderMaterial never built and the one shipped placement has been rendering an unshaded sphere, not the morphing iridescent form that the registry description, the artifact's name and its @identity block all describe. The hash line is now the one that works in marble_column.gdshader and random_animated.gdshader in this same repo. Fixing it changes that one room, from broken to intended. Leaving it broken was not an option: an axis living in a vertex shader that does not compile produces four identical frames and an INERT verdict that is a fact about the harness rather than about the design - the exact finished-looking experiment that answers nothing.",
+    "was": "a sphere plus a morphing shader, with no apply_grid_config at all, so nothing here was reachable from a map token - and the shader did not compile in the first place. The four exports were size, morph_speed, flow_intensity and a colour: dimensions, a rate and decoration.",
+    "note": "hand promotion 2026-08-04, refused by the runner as NO TURNABLE KNOBS. flow_intensity is this file's own declared critical_parameter and it is the WRONG axis: five intensities photograph as five degrees of lumpiness, which is size wearing a name; morph_speed is worse, because a rate is invisible to a still. The vertex function spends its displacement in two registers at a fixed 1.0 : 0.3 ratio - noise ALONG THE NORMAL, where the skin churns and the body keeps its shape, and one smooth wave through the WHOLE BODY, where the silhouette bends. mixed, skin and sway all spend the same flow_intensity and differ only in which register receives it, so the axis is emphatically not an amount. still spends none and is the control: the same form at phi = 0, which is the comparison the phi>0 / phi<0 pair exists to make. NOT named becoming, although queer_morphology_specimen owns that word for phi and sits in this artifact's own cluster_with list - its values (jarred, cracked, escaped, clouded) are about the JAR, the specimen's relation to the vitrine that classifies it, and this form has no jar. Same theme, different question, different word.",
+    "fixture": {
+     "freeze_time": 3.0
+    },
+    "fixture_note": "freeze_time pins the shader clock and stops the idle rotation so that every flux value is photographed at the same phase - without it the sweep partly measures which frame the camera happened to catch. It defaults to -1.0, which is live time and the shipped behaviour, and is left UNTYPED on purpose, because a typed float rejects the string a fixture passes before _ready. frag_time follows it into the fragment shader and falls through to TIME whenever freeze_time is negative, so the iridescence is untouched unless a capture asks otherwise.",
+    "family": "NOT one scene under many names, which was the first thing checked. fluid_form, rigid_sculpture and edge_core are three scenes, three scripts and three generators - a shader-morphed sphere; eleven MeshInstance3D built with SurfaceTool and no _process at all; two spheres plus a GPUParticles3D ring - with 4, 3 and 6 exports respectively. The identical-export-count tell is absent. They are a rhetorical pair (phi>0 against phi<0) plus a third object about lambda, and they honestly take three vocabularies. The real one-scene-many-names family sits next door in this registry: reactive_particle_field, reactive_particles, edge_particles and emergence_zone are four tokens on one .tscn."
+   },
    "category": "qfep",
    "interaction": "observe",
    "sequence": "qfeplaboratory",

@@ -6,6 +6,28 @@
  "theoreticalGrounding": "A launch is just a velocity you're given. v0 = forward*forward_force + up*up_force; gravity does the rest. Impulse made bodily.",
  "artifacts": {
   "force_pad": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "foresight": [
+      "parabola",
+      "apex",
+      "landing",
+      "none"
+     ],
+     "vectors": [
+      "sum",
+      "components",
+      "velocity",
+      "gravity"
+     ]
+    },
+    "default": "foresight=none, vectors=velocity - together these are the shipped pad exactly: the glowing plate, the neon frame, the three chevrons and ONE cyan launch-vector arrow, with no arc drawn anywhere. All 8 existing placements are untouched. apply_grid_config no longer frees every child and re-runs _ready() on any call - it rebuilds only when a value actually changed and only after the first build.",
+    "was": "a launch pad whose only exports were magnitudes - forward_force, up_force, cooldown_time. Turning them made the same pad throw you further; none of them was an argument, and the launch itself is an event no still can hold.",
+    "note": "catapult's two words reused character for character: foresight = how much of the ARC is handed to you before you fire, vectors = how 'what you give' is drawn at the launch point. Same machine at two scales - both hand a body a velocity and let gravity have it back. Only the DEFAULT differs, and it differs honestly: the catapult was born showing its whole parabola, the pad was born showing none of it. gravity_magnitude is a supporting export, not an axis - it is only ever read to DRAW the prediction, never applied to anybody.",
+    "declines": "forward_force / up_force / cooldown_time stay plain numeric exports - a bigger arrow is a size change, not a different claim"
+   },
    "lookup_name": "force_pad",
    "name": "Force Pad",
    "description": "1x1 m glowing launch pad. An Area3D on the player_body layer fires on contact, setting the player CharacterBody3D's velocity to forward+up. Pulsing surface, forward chevrons, live launch-vector arrow. DNA: forward_force (6), up_force (7), cooldown_time.",

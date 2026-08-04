@@ -10296,6 +10296,26 @@
    "qfep_connection": "F_force: the origin point that becomes a force field in the hand — picked up, its surface morphs to a pulsing shell that pushes nearby bodies. The coordinate origin revealed as an actor, not an address."
   },
   "interactive_point_origin": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "framing": 0.3,
+    "axes": {
+     "mark": [
+      "bead",
+      "crosshair",
+      "cage",
+      "halo"
+     ]
+    },
+    "default": "mark=bead - the lineage exactly: the 30 mm sphere point_mesh.gd writes into the host MeshInstance3D before this script's _ready runs, layers left at 1, and no Mark node allocated at all (_build_mark returns before it builds anything). Every placement is a bare token - Annotation_Demo and FoldStudio_Preview's @signature reference it directly, Corridor_Point_One and Curation_Bay_primitives_3 list it inside a curation_station - and apply_grid_config returns unless a token names `mark` AND the word differs from the one already held, so no shipped placement is ever torn down.",
+    "was": "twelve exports and not one about the point. Four haptic durations, two sound and glow settings, a line colour and width, an origin vector: dials on FEEDBACK and HANDLING, on the project's first primitive, whose whole subject is what a coordinate is. No apply_grid_config either, so no map token could reach anything.",
+    "note": "A position has no extension, and what stands in the room is a 60 mm ball with a light in it. The bead is a lie about size told so smoothly that the lesson is built on it. Each value re-tells it differently and drops something: crosshair drops the volume (three bars along X, Y, Z and nothing at the crossing - the position is the intersection of its coordinates, and what you see is a reach); cage drops the point itself (twelve edges of the cell and nothing inside, which is what a voxel world actually stores - an address with walls); halo drops the claim that the size is the thing's (a thin ring around a 4 mm speck: the mark declares itself a mark). All three are sized to the bead they replace, so this is a claim about form, not a size dial.",
+    "declined": "the LINE TO ORIGIN, which is this artifact's own named critical parameter, and `readout`, the family word xyz_slider_plate and line share for exactly this question. Both are invisible to the evidence. The line exists only while held and the label is visible=false until a hand closes on it, and the still is of an object nobody is holding. Worse for the line: the sweep bench parents the artifact straight under the viewport, so it stands ON the origin, `distance < 0.001` returns early, and four values of a tether axis would render the identical picture of no line - the 0.00%-to-the-byte failure with four values instead of two.",
+    "kin": "grab_sphere_F/E/lambda/phi carry `grasp` (atom, socket, chorus, hollow, swarm) on a 24 mm sphere in this same folder, and that is the neighbouring question - what your hand closes on. Deliberately NOT reused: those spheres stand for terms of a formula, things with no referent at all, and `chorus` puts the other three terms on a rail. A coordinate has a perfectly good referent, a place, so the question here is how a place is marked, not what a term is.",
+    "reach_note": "reachable from the two direct grid placements only. curation_station instantiates its children without forwarding a config token (the same wrapper gap reported on the grasp family), so the two listed inside a bay stay bead whatever a map says.",
+    "framing_note": "framing 0.3 because the subject is 6-12 cm and the capture's radius floor (0.2 m) frames it at about 8% of the frame - the documented dilution that reads as a faint axis. The Mark node hangs under the existing MeshInstance3D, not under the root, so the root's direct-children set that GridInteractablesComponent walks to ground the artifact is unchanged."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Pickable point that displays its position and draws a thin line to origin (0,0,0) when held.",

@@ -192,6 +192,25 @@ func _emit_stroke_path(points: Array, stroke_color: Color, stroke_width: float) 
 	var duration := clampf(float(packed_path.size()) * 0.03, 0.25, 2.4)
 	emit_signal("stroke_path_generated", packed_path, stroke_color, stroke_width, duration)
 
+## Repaint the canvas from a fixed seed, for the DNA sweep.
+##
+## THE HOOK WITHOUT A RECEIVER. pollock_painting_in_3d calls
+## `_paint_2d.call("repaint_with_seed", paint_seed)` behind a has_method() guard, and
+## until now nothing here answered it — the guard held, the call silently did nothing,
+## and four `support` variants would have been four different paintings. That turns an
+## axis about where the canvas LIES into a measurement of the paint.
+##
+## Nothing calls this unless the host's paint_seed is non-zero, and that defaults to 0,
+## so _ready's rng.randomize() and a fresh painting per launch are untouched in the
+## rooms this already stands in.
+func repaint_with_seed(new_seed: int) -> void:
+	if canvas == null:
+		return
+	rng.seed = new_seed
+	canvas.fill(background_color)
+	_create_initial_painting()
+	_update_texture()
+
 func apply_grid_config(config: Dictionary) -> void:
 	pass
 

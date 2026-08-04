@@ -34,6 +34,70 @@ class_name QFEPCalibrator
 @export var base_detection: float = 7.0
 @export var base_attack_range: float = 1.5
 
+
+# ── DNA (stage 2) ────────────────────────────────────────────────────────
+# --- DNA (stage 2, promoted 2026-08-03) ---
+# Everything this file already exported was a RATE or a LENGTH: phi_frequency,
+# beam_radius, base_damage. Not one of them is legible in a still photograph, which
+# is why the sweep refused this artifact for having no turnable knobs. What IS in the
+# frame is the beams — three of them, 0.6 m long on a 0.9 m creature — and the placard
+# under them. Both are claims about the theory, not about the model.
+@export_group("DNA")
+
+## AXIS — WHICH PARAMETERS DOES THE INSTRUMENT ADMIT IT HAS? The essence line of this
+## file is `E(S) = f(phi, delta_e, constraint)`, and the three beams are that equation
+## standing up in the world: one probe per term, gold, cyan, magenta. Three was never a
+## fact about Q-FEP. It was one instrument's account of how many dimensions the landscape
+## has, hard-coded three times over in _build_mesh. An instrument that carries a single
+## beam is not a smaller calibrator; it is a DIFFERENT THEORY, one that says the energy
+## of a situation is a function of exactly one thing.
+##
+##   all         gold, cyan and magenta. The shipped calibrator, byte for byte —
+##               E(S) = f(phi, delta_e, constraint), the whole declared parameter space
+##   phi         gold alone. Everything is rotation: form, speed, the ability to be hit
+##   delta_e     cyan alone. Everything is energy cost — the theory as a damage budget
+##   constraint  magenta alone. Everything is what may be detected and what may be reached
+##   none        the bare body and its two legs. An instrument that admits no parameters:
+##               it still moves, still spins, still hurts you, and shows no account of why
+##
+## Wholly deterministic — no randf reaches this branch — so five variants are five
+## photographs of one creature rather than five different creatures.
+@export_enum("all", "phi", "delta_e", "constraint", "none") var admits: String = "all"
+
+## AXIS — what the apparatus commits to about the parameter values it is reading. Taken
+## character for character from commons/primitives/line/line.gd and its twin
+## commons/primitives/point/xyz_slider_plate.gd, which own this vocabulary: one ordered
+## ladder, monotone in evidence, `none < numeral < gradation < lattice`. It fits here
+## without bending because the question is identical — what does the apparatus commit to
+## about the quantity it is showing you — and this artifact is the one in the corpus that
+## has a genuine parameter SPACE to draw at rung 3.
+##
+##   none       no placard at all. Three beams and no numbers: an instrument that reads
+##              itself and tells you nothing
+##   numeral    THE SHIPPED calibrator — `phi=0.50  de=0.50  C=0.50` on a billboard.
+##              A number, and no scale to put it on
+##   gradation  + a 0..1 track per admitted parameter with a marker riding it. The same
+##              number, now on a public scale, so a reading has a somewhere-to-be
+##   lattice    + the unit cube of the parameter space itself, its three edges from the
+##              origin coloured phi / delta_e / constraint, and a marker at this instant's
+##              point inside it. What is in frame stops being the reading and becomes the
+##              SPACE — the part that is true before the creature has measured anything
+##
+## Anything unrecognised builds as `numeral`, NOT as `none`: a typo must not silently
+## delete the readout from a live room. That rule is line.gd's too.
+@export_enum("none", "numeral", "gradation", "lattice") var readout: String = "numeral"
+
+## Allow-lists for the map-token path. An unrecognised token leaves the value alone.
+const ADMITS: PackedStringArray = ["all", "phi", "delta_e", "constraint", "none"]
+const READOUTS: PackedStringArray = ["none", "numeral", "gradation", "lattice"]
+const AXIS_NAMES: PackedStringArray = ["phi", "delta_e", "constraint"]
+
+const GAUGE_WIDTH: float = 0.28
+const GAUGE_BASE_Y: float = 0.84
+const GAUGE_STEP_Y: float = 0.05
+const LATTICE_SIZE: float = 0.3
+const LATTICE_Y: float = 1.0
+
 # Parameters (0..1 oscillating)
 var _phi: float = 0.5
 var _delta_e: float = 0.5
@@ -49,6 +113,14 @@ var _delta_e_mat: StandardMaterial3D = null
 var _constraint_beam: MeshInstance3D = null
 var _constraint_mat: StandardMaterial3D = null
 var _label: Label3D = null
+# Readout rungs 2 and 3. Empty under the shipped `numeral`, so the two loops that walk
+# them in _process_visual are no-ops for every existing placement.
+var _gauge_meshes: Array[MeshInstance3D] = []
+var _gauge_markers: Array[MeshInstance3D] = []
+var _gauge_params: PackedStringArray = PackedStringArray()
+var _lattice_meshes: Array[MeshInstance3D] = []
+var _lattice_marker: MeshInstance3D = null
+var _lattice_origin: Vector3 = Vector3.ZERO
 var _leg_roots: Array[Node3D] = []
 var _leg_meshes: Array[MeshInstance3D] = []
 var _walk_phase: float = 0.0
@@ -65,10 +137,23 @@ const CONSTRAINT_COLOR: Color = Color(0.9, 0.1, 0.85)  # Magenta
 const BODY_COLOR: Color = Color(0.3, 0.25, 0.5)        # Deep purple
 
 
+## HazardCreatureBase's own default patrol speed, and this creature's. The write below is
+## guarded against the first: exports are set on the instance BEFORE add_child (by the DNA
+## sweep, and by anything else that configures a scene pre-tree), so an unconditional
+## `patrol_speed = 1.5` here silently discards a supplied value. Nothing in the repo
+## supplies one today, so the single existing placement takes the branch and gets 1.5
+## exactly as before. chase_speed and detection_radius are NOT guarded because
+## _apply_parameter_effects overwrites both every frame from _phi / _constraint — to pin
+## this creature for a capture, set base_detection, not detection_radius.
+const BASE_PATROL_SPEED := 1.8
+const OWN_PATROL_SPEED := 1.5
+
+
 func _on_ready() -> void:
 	max_health = 90.0
 	_health = max_health
-	patrol_speed = 1.5
+	if is_equal_approx(patrol_speed, BASE_PATROL_SPEED):
+		patrol_speed = OWN_PATROL_SPEED
 	chase_speed = 2.5
 	contact_damage = base_damage
 	detection_radius = base_detection
@@ -108,6 +193,27 @@ func _build_mesh() -> void:
 	_body_mesh = _add_mesh(ico, _body_mat)
 	_body_mesh.name = "Body"
 
+	_build_beams()
+
+	# Build 2 legs
+	for i in range(2):
+		_build_leg(i)
+
+	_build_readout()
+
+
+## The parameter beams the instrument admits it has. Under the default `all` this is the
+## shipped body: the same three blocks, in the same order, with the same numbers.
+func _build_beams() -> void:
+	if _admits_parameter("phi"):
+		_build_phi_beam()
+	if _admits_parameter("delta_e"):
+		_build_delta_e_beam()
+	if _admits_parameter("constraint"):
+		_build_constraint_beam()
+
+
+func _build_phi_beam() -> void:
 	# Phi beam (gold) — extends upward-right
 	var phi_cyl := CylinderMesh.new()
 	phi_cyl.height = beam_length
@@ -128,6 +234,8 @@ func _build_mesh() -> void:
 	phi_tip_mi.position = Vector3(0.0, beam_length * 0.5, 0.0)
 	_phi_beam.add_child(phi_tip_mi)
 
+
+func _build_delta_e_beam() -> void:
 	# Delta_e beam (cyan) — extends upward-left
 	var de_cyl := CylinderMesh.new()
 	de_cyl.height = beam_length
@@ -148,6 +256,8 @@ func _build_mesh() -> void:
 	de_tip_mi.position = Vector3(0.0, beam_length * 0.5, 0.0)
 	_delta_e_beam.add_child(de_tip_mi)
 
+
+func _build_constraint_beam() -> void:
 	# Constraint beam (magenta) — extends backward
 	var c_cyl := CylinderMesh.new()
 	c_cyl.height = beam_length
@@ -167,20 +277,6 @@ func _build_mesh() -> void:
 	c_tip_mi.set_surface_override_material(0, _constraint_mat)
 	c_tip_mi.position = Vector3(0.0, beam_length * 0.5, 0.0)
 	_constraint_beam.add_child(c_tip_mi)
-
-	# Build 2 legs
-	for i in range(2):
-		_build_leg(i)
-
-	# Label
-	_label = Label3D.new()
-	_label.text = _get_param_text()
-	_label.font_size = 32
-	_label.pixel_size = 0.003
-	_label.modulate = Color(0.9, 0.9, 0.9, 0.9)
-	_label.position = Vector3(0, 0.7, 0)
-	_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_mesh_root.add_child(_label)
 
 
 func _build_leg(index: int) -> void:
@@ -206,6 +302,221 @@ func _build_leg(index: int) -> void:
 
 func _get_param_text() -> String:
 	return "phi=%.2f  de=%.2f  C=%.2f" % [_phi, _delta_e, _constraint]
+
+
+# ── DNA implementation ───────────────────────────────────────────────────
+# The admitted parameter set and the readout rung, and nothing else, live below here.
+
+
+## Does the instrument put this Q-FEP term in the world as a beam?
+func _admits_parameter(pname: String) -> bool:
+	if admits == "none":
+		return false
+	if admits == "phi" or admits == "delta_e" or admits == "constraint":
+		return admits == pname
+	return true  # "all", and anything unrecognised: never silently strip a live creature
+
+
+## The readout ladder as a rank, so each rung is strictly additive over the one below.
+## Anything unrecognised reads as `numeral` — line.gd's rule, and for the same reason:
+## a typo must not delete the placard from a room that has one.
+func _readout_rank() -> int:
+	match readout:
+		"none":
+			return 0
+		"gradation":
+			return 2
+		"lattice":
+			return 3
+		_:
+			return 1
+
+
+func _param_color(pname: String) -> Color:
+	match pname:
+		"phi":
+			return PHI_COLOR
+		"delta_e":
+			return DELTA_E_COLOR
+		_:
+			return CONSTRAINT_COLOR
+
+
+func _param_material(pname: String) -> StandardMaterial3D:
+	match pname:
+		"phi":
+			return _phi_mat
+		"delta_e":
+			return _delta_e_mat
+		_:
+			return _constraint_mat
+
+
+func _param_value(pname: String) -> float:
+	match pname:
+		"phi":
+			return _phi
+		"delta_e":
+			return _delta_e
+		_:
+			return _constraint
+
+
+## Rung 1 is the shipped Label3D, unchanged; rungs 2 and 3 add to it and never move it.
+func _build_readout() -> void:
+	var rank: int = _readout_rank()
+	if rank >= 1:
+		# Label
+		_label = Label3D.new()
+		_label.text = _get_param_text()
+		_label.font_size = 32
+		_label.pixel_size = 0.003
+		_label.modulate = Color(0.9, 0.9, 0.9, 0.9)
+		_label.position = Vector3(0, 0.7, 0)
+		_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		_mesh_root.add_child(_label)
+	if rank >= 2:
+		_build_gauges()
+	if rank >= 3:
+		_build_lattice()
+
+
+## One 0..1 track per ADMITTED parameter — the readout reports what the instrument
+## admits, so an instrument down to a single beam gets a single gauge.
+func _build_gauges() -> void:
+	var row: int = 0
+	for i in range(AXIS_NAMES.size()):
+		var pname: String = AXIS_NAMES[int(i)]
+		if not _admits_parameter(pname):
+			continue
+		var col: Color = _param_color(pname)
+		var y: float = GAUGE_BASE_Y + float(row) * GAUGE_STEP_Y
+		row += 1
+
+		var track_mesh := BoxMesh.new()
+		track_mesh.size = Vector3(GAUGE_WIDTH, 0.008, 0.006)
+		var track_mat: StandardMaterial3D = _make_material(col * 0.3, col * 0.15)
+		var track := MeshInstance3D.new()
+		track.mesh = track_mesh
+		track.set_surface_override_material(0, track_mat)
+		track.position = Vector3(0.0, y, 0.0)
+		_mesh_root.add_child(track)
+		_gauge_meshes.append(track)
+
+		var marker_mesh := BoxMesh.new()
+		marker_mesh.size = Vector3(0.022, 0.032, 0.014)
+		var marker := MeshInstance3D.new()
+		marker.mesh = marker_mesh
+		marker.set_surface_override_material(0, _param_material(pname))
+		marker.position = Vector3((_param_value(pname) - 0.5) * GAUGE_WIDTH, 0.0, 0.0)
+		track.add_child(marker)
+		_gauge_markers.append(marker)
+		_gauge_params.append(pname)
+
+
+## The parameter SPACE, drawn: a unit cube whose three edges from the origin corner carry
+## the three parameter colours, with a marker at this instant's point inside it. This is
+## the only rung that is true before the creature has measured anything.
+func _build_lattice() -> void:
+	var s: float = LATTICE_SIZE
+	_lattice_origin = Vector3(-s * 0.5, LATTICE_Y, -s * 0.5)
+	var neutral: StandardMaterial3D = _make_material(Color(0.5, 0.45, 0.65), Color(0.18, 0.16, 0.28))
+	for i in range(8):
+		var corner: int = int(i)
+		for bit in range(3):
+			var b: int = int(bit)
+			var j: int = corner | (1 << b)
+			if j == corner:
+				continue
+			var mat: StandardMaterial3D = neutral
+			if corner == 0:
+				var c: Color = _param_color(AXIS_NAMES[b])
+				mat = _make_material(c, c)
+			_add_lattice_edge(_lattice_origin + _lattice_corner(corner, s),
+					_lattice_origin + _lattice_corner(j, s), mat)
+
+	var marker_mesh := SphereMesh.new()
+	marker_mesh.radius = 0.024
+	marker_mesh.height = 0.048
+	var marker_mat: StandardMaterial3D = _make_material(Color(1.0, 1.0, 1.0), Color(0.9, 0.9, 1.0))
+	marker_mat.emission_energy_multiplier = 3.0
+	_lattice_marker = MeshInstance3D.new()
+	_lattice_marker.mesh = marker_mesh
+	_lattice_marker.set_surface_override_material(0, marker_mat)
+	_lattice_marker.position = _lattice_origin + Vector3(_phi, _delta_e, _constraint) * s
+	_mesh_root.add_child(_lattice_marker)
+	_lattice_meshes.append(_lattice_marker)
+
+
+func _lattice_corner(index: int, s: float) -> Vector3:
+	return Vector3(float(index & 1), float((index >> 1) & 1), float((index >> 2) & 1)) * s
+
+
+func _add_lattice_edge(a: Vector3, b: Vector3, mat: StandardMaterial3D) -> void:
+	var d: Vector3 = b - a
+	var thin: float = 0.005
+	var box := BoxMesh.new()
+	box.size = Vector3(maxf(absf(d.x), thin), maxf(absf(d.y), thin), maxf(absf(d.z), thin))
+	var mi := MeshInstance3D.new()
+	mi.mesh = box
+	mi.set_surface_override_material(0, mat)
+	mi.position = (a + b) * 0.5
+	_mesh_root.add_child(mi)
+	_lattice_meshes.append(mi)
+
+
+## Re-seat the beams on a new admitted set. Only the beams are touched — the body, the
+## legs and the readout are the same nodes throughout.
+func _rebuild_beams() -> void:
+	for beam in [_phi_beam, _delta_e_beam, _constraint_beam]:
+		if is_instance_valid(beam):
+			beam.queue_free()
+	_phi_beam = null
+	_delta_e_beam = null
+	_constraint_beam = null
+	_build_beams()
+
+
+func _rebuild_readout() -> void:
+	if is_instance_valid(_label):
+		_label.queue_free()
+	_label = null
+	for m in _gauge_meshes:
+		if is_instance_valid(m):
+			m.queue_free()   # markers are children of their track and go with it
+	_gauge_meshes.clear()
+	_gauge_markers.clear()
+	_gauge_params.clear()
+	for m in _lattice_meshes:
+		if is_instance_valid(m):
+			m.queue_free()
+	_lattice_meshes.clear()
+	_lattice_marker = null
+	_build_readout()
+
+
+## Reachable configuration. The base forwards health / speed / damage and knew nothing
+## about either axis, so a map token could not reach one. Both branches are CHANGE-GUARDED
+## and BUILD-GUARDED: a word outside the allow-list, a word the creature already holds, or
+## a call that arrives before _ready has built the body tears nothing down. Arriving early
+## is fine on its own — the export is assigned and _ready then builds with it.
+func apply_grid_config(config: Dictionary) -> void:
+	super.apply_grid_config(config)
+	if config.has("admits"):
+		var a: String = str(config["admits"]).strip_edges().to_lower()
+		if ADMITS.has(a) and a != admits:
+			admits = a
+			if _mesh_root != null:
+				_rebuild_beams()
+				# Rung 2 reports the admitted set, so it follows the beams.
+				if _readout_rank() >= 2:
+					_rebuild_readout()
+	if config.has("readout"):
+		var r: String = str(config["readout"]).strip_edges().to_lower()
+		if READOUTS.has(r) and r != readout:
+			readout = r
+			if _mesh_root != null:
+				_rebuild_readout()
 
 
 func _process_visual(delta: float) -> void:
@@ -254,6 +565,19 @@ func _process_visual(delta: float) -> void:
 	# Update label
 	if _label:
 		_label.text = _get_param_text()
+
+	# Readout rung 2 — markers ride the parameter they report. Empty under `numeral`,
+	# so this loop does nothing at all for every existing placement.
+	for i in range(_gauge_markers.size()):
+		var gi: int = int(i)
+		var marker: MeshInstance3D = _gauge_markers[gi]
+		if is_instance_valid(marker):
+			marker.position.x = (_param_value(_gauge_params[gi]) - 0.5) * GAUGE_WIDTH
+
+	# Readout rung 3 — the point this instant occupies in the parameter space.
+	if is_instance_valid(_lattice_marker):
+		_lattice_marker.position = _lattice_origin \
+				+ Vector3(_phi, _delta_e, _constraint) * LATTICE_SIZE
 
 
 func _update_beam(beam: MeshInstance3D, mat: StandardMaterial3D, param_val: float, base_color: Color) -> void:

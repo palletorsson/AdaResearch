@@ -264,8 +264,13 @@ func apply_grid_config(config: Dictionary) -> void:
 ## would leave the picture and its frame in two different rooms.
 func _restage() -> void:
 	_configure_support_layout()
+	# remove_child BEFORE queue_free: a queued node is still a child until the end of
+	# the frame, so _create_frame_panels would add a second "BackingPanel", Godot would
+	# rename it, and the NEXT restage would no longer recognise it — one orphan panel
+	# per switch, each in the posture it was built for.
 	for child in get_children():
 		if child is MeshInstance3D and child.name in ["BackingPanel", "FramePanel"]:
+			remove_child(child)
 			child.queue_free()
 	_create_frame_panels()
 	if _brush_cursor != null:
