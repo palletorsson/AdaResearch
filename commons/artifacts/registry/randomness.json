@@ -10092,6 +10092,24 @@
    }
   },
   "remove_random": {
+   "dna": {
+    "host": {"size": [8, 1, 8], "cell": 1.0},
+    "host_note": "aabb_size [0,0,0] - this artifact IS an operation on the host map grid, not an object. It hunts a MultiMeshInstance3D through get_parent() and rewrites its transforms, so standalone there is nothing to remove and nothing to photograph, and the loop declined it for having no body. The sweep now builds the grid it is looking for.",
+    "fixture": {"removal_speed": 40.0, "highlight_duration": 0.02, "localize_selection_to_artifact": false},
+    "fixture_note": "The removal is a coroutine paced by removal_speed, so at the 1.1 s settle almost nothing has been taken out and all four modes photographed as the same untouched grid (measured 0.05-0.26% apart). The fixture runs it ~40x so the SHAPE each mode carves is finished when the shutter opens. Capture bench only; the shipped speed of 1.0 is untouched.",
+    "host": {"size": [8, 1, 8], "cell": 1.0},
+    "host_note": "aabb_size [0,0,0] - this artifact IS an operation on the host map grid, not an object. It hunts a MultiMeshInstance3D through get_parent() and rewrites its transforms, so standalone there is nothing to remove and nothing to photograph; the loop declined it for having no body. The sweep now builds the grid it is looking for.",
+    "fixture": {"removal_speed": 40.0, "highlight_duration": 0.02, "localize_selection_to_artifact": false},
+    "fixture_note": "The removal is a coroutine paced by removal_speed, so at the 1.1 s settle almost nothing has been taken out and all four modes photograph as the same untouched grid (measured 0.05-0.26% apart). The fixture runs it ~40x so the SHAPE each mode carves is finished when the shutter opens. Capture bench only; the shipped speed of 1.0 is untouched.",
+    "axes": {
+    "selection_mode": [
+    "Range",
+    "Column",
+    "Row",
+    "All"
+    ]
+    }
+   },
    "category": "primitives",
    "complexity": "beginner",
    "description": "A demolition algorithm that randomly removes cubes from the grid",

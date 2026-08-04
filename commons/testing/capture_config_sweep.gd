@@ -57,6 +57,9 @@ func _run() -> void:
 	var framing_hint: float = float(spec.get("framing", 1.0))
 	if framing_hint > 0.05 and framing_hint < 20.0:
 		_framing = framing_hint
+	# dna.host from the registry, for artifacts that only exist as an operation on
+	# a host map's grid. Empty means the artifact stands alone, as before.
+	var host_spec: Dictionary = spec.get("host", {})
 	var scene_path: String = str(spec.get("scene", ""))
 	var out_dir: String = str(spec.get("out_dir", "res://ada_run/sweep"))
 	var variants: Array = spec.get("variants", [])
@@ -75,6 +78,10 @@ func _run() -> void:
 	var cam: Camera3D = vp.get_node("Cam")
 
 	var packed_cache: Dictionary = {}   # scene path -> PackedScene (multi-scene sweeps)
+	# One host for the whole sweep: the artifact is re-parented under it each
+	# variant, so every value acts on an identical grid and the only difference
+	# between frames is what the artifact did to it.
+	var host: Node3D = _build_host(vp, host_spec) if not host_spec.is_empty() else null
 
 	# ── The camera must not move between variants. ───────────────────────────────
 	#
@@ -115,14 +122,14 @@ func _run() -> void:
 				var ph: Node = _holder_of(probe, String(key))
 				if ph != null:
 					ph.set(key, pparams[key])
-			vp.add_child(probe)
+			(host if host != null else vp).add_child(probe)
 			_suppress_chrome(probe)
 			await create_timer(0.35).timeout
 			if _subtree_aabb(probe).size.length() < 0.001 and probe.has_method("apply_grid_config"):
 				probe.call("apply_grid_config", pparams)
 				await create_timer(0.35).timeout
 			LabelFramer.frame_labels(probe)
-			var box: AABB = _subtree_aabb(probe)
+			var box: AABB = _subtree_aabb(host) if host != null else _subtree_aabb(probe)
 			if box.size.length() > 0.001:
 				union = box if not have_union else union.merge(box)
 				have_union = true
@@ -176,7 +183,7 @@ func _run() -> void:
 				push_warning("capture_config_sweep: no node in %s exposes '%s' — "
 					+ "the value was not applied and this tile is not a variant."
 					% [inst.name, key])
-		vp.add_child(inst)
+		(host if host != null else vp).add_child(inst)
 		# Suppress demo chrome exactly as the grid does at spawn. Many algorithms/
 		# scenes were authored as standalone demos and build a screen-space
 		# CanvasLayer UI and/or their own Camera3D; GridInteractablesComponent hides
@@ -223,7 +230,7 @@ func _run() -> void:
 
 		# The union box when we have one, this variant's own only as a fallback for
 		# single-variant sweeps and for a pre-pass that measured nothing.
-		var aabb: AABB = union if have_union else _subtree_aabb(inst)
+		var aabb: AABB = union if have_union else _subtree_aabb(host if host != null else inst)
 		var c := aabb.get_center()
 		var radius: float = maxf(aabb.size.length() * 0.5, 0.2)
 		# PAD frames the WHOLE artifact, which is wrong when the axis lives in a
@@ -319,9 +326,79 @@ func _subtree_aabb(root_node: Node) -> AABB:
 			var wab: AABB = mi.global_transform * mi.get_aabb()
 			acc = wab if not have else acc.merge(wab)
 			have = true
+		elif n is MultiMeshInstance3D:
+			# A host grid IS a MultiMeshInstance3D, and so is any artifact drawn with
+			# one. Counting only MeshInstance3D measured those as a 1 m box, which is
+			# the documented cause of "subject under 6% of frame".
+			var mm := n as MultiMeshInstance3D
+			if mm.multimesh != null:
+				var wab2: AABB = mm.global_transform * mm.get_aabb()
+				acc = wab2 if not have else acc.merge(wab2)
+				have = true
 		for ch in n.get_children():
 			stack.append(ch)
 	return acc if have else AABB(Vector3(-0.5, 0, -0.5), Vector3.ONE)
+
+
+## ── The artifacts with no body of their own ──────────────────────────────────
+##
+## A whole class of artifact draws nothing and owns nothing. remove_random,
+## Random_Rotate_Random_XYZ and proximity_spawner all report aabb_size [0,0,0] in
+## the registry, because what they ARE is an operation on the host map's grid:
+## each one hunts a MultiMeshInstance3D through get_parent() and rewrites its
+## transforms. Photographed standalone there is no grid, so nothing happens and
+## nothing renders, and the loop declined them for "no body to photograph".
+##
+## That was a fact about the bench, not about the artifact. This builds the grid
+## they are looking for — a MultiMeshInstance3D named GridMultiMesh, the name
+## RemoveRandom searches for by default via its `../GridMultiMesh` NodePath — and
+## parents the artifact beside it, which is exactly the shape a real map gives
+## them. Declared per artifact as dna.host in the registry:
+##
+##   "host": {"size": [8, 1, 8], "cell": 1.0}
+##
+## Deterministic by construction: a plain lattice, no randomness, so the only
+## thing that moves between variants is what the artifact does to it.
+func _build_host(vp: SubViewport, host: Dictionary) -> Node3D:
+	var stage := Node3D.new()
+	stage.name = "Host"
+	vp.add_child(stage)
+
+	var size: Array = host.get("size", [8, 1, 8])
+	var nx: int = int(size[0]) if size.size() > 0 else 8
+	var ny: int = int(size[1]) if size.size() > 1 else 1
+	var nz: int = int(size[2]) if size.size() > 2 else 8
+	var cell: float = float(host.get("cell", 1.0))
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	var box := BoxMesh.new()
+	box.size = Vector3.ONE * (cell * 0.92)
+	mm.mesh = box
+	mm.instance_count = nx * ny * nz
+
+	var i: int = 0
+	for x in range(nx):
+		for y in range(ny):
+			for z in range(nz):
+				var p := Vector3(
+					(float(x) - float(nx - 1) * 0.5) * cell,
+					float(y) * cell,
+					(float(z) - float(nz - 1) * 0.5) * cell)
+				mm.set_instance_transform(i, Transform3D(Basis(), p))
+				i += 1
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "GridMultiMesh"
+	mmi.multimesh = mm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.62, 0.64, 0.70)
+	mat.roughness = 0.75
+	mmi.material_override = mat
+	stage.add_child(mmi)
+
+	print("host grid: %d x %d x %d cells at %.2f m" % [nx, ny, nz, cell])
+	return stage
 
 
 func _load_json(path: String) -> Dictionary:

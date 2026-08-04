@@ -173,13 +173,40 @@ def main() -> int:
             merged.update(v["params"])
             v["params"] = merged
 
+    # Host grid. A whole class of artifact draws nothing and owns nothing:
+    # remove_random, Random_Rotate_Random_XYZ and proximity_spawner all measure
+    # aabb_size [0,0,0], because what they ARE is an operation on the host map's
+    # grid — each hunts a MultiMeshInstance3D through get_parent() and rewrites
+    # its transforms. Photographed standalone there is no grid, nothing happens,
+    # and the loop declined them for "no body to photograph". That was a fact
+    # about the bench. dna.host builds the grid they are looking for.
+    host: dict = {}
+    if targets:
+        import glob as _g3
+        for _f in _g3.glob(str(REPO / "commons/artifacts/registry/*.json")):
+            try:
+                _reg = json.loads(Path(_f).read_text(encoding="utf-8")).get("artifacts", {})
+            except Exception:
+                continue
+            _e = _reg.get(targets[0][0])
+            if isinstance(_e, dict) and isinstance(_e.get("dna"), dict):
+                _h = _e["dna"].get("host")
+                if isinstance(_h, dict):
+                    host = _h
+                break
+    if host:
+        print(f"  host grid from registry: {host}")
+
     SPEC.parent.mkdir(exist_ok=True)
-    SPEC.write_text(json.dumps({
+    _spec = {
         "scene": targets[0][1],
         "out_dir": "res://ada_run/sweep",
         "framing": framing,
         "variants": variants,
-    }, indent=1), encoding="utf-8")
+    }
+    if host:
+        _spec["host"] = host
+    SPEC.write_text(json.dumps(_spec, indent=1), encoding="utf-8")
     if framing != 1.0:
         print(f"  framing hint from registry: x{framing}")
 
