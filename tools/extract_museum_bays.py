@@ -327,7 +327,10 @@ def emit_brushes(payload: dict, mus: dict) -> int:
             "slots": b["slots"], "hero": b["hero"],
         }
         kept += 1
-    PATTERNS.write_text(json.dumps(data, indent=1), encoding="utf-8")
+    # ensure_ascii=False so this file reads the same whether Python or the
+    # editor's API wrote it last: Python escapes an em-dash to — and
+    # JSON.stringify does not, which made 30 lines flip on every hand-off.
+    PATTERNS.write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding="utf-8")
     return kept
 
 
