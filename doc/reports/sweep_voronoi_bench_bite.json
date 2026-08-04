@@ -1,68 +1,344 @@
 {
  "sweep": "voronoi_bench",
- "peak_changed_pct": 6.262,
- "subject_pct": 9.376,
+ "peak_changed_pct": 2.967,
+ "subject_pct": 6.975,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "workings": "result"
+    "workings": "result",
+    "grid_size": 20.0
    },
    "b": {
-    "workings": "rule"
+    "workings": "result",
+    "grid_size": 40.0
    },
-   "changed_px": 14048,
-   "changed_pct": 2.432
+   "changed_px": 4717,
+   "changed_pct": 0.817
   },
   {
    "a": {
-    "workings": "result"
+    "workings": "result",
+    "grid_size": 20.0
    },
    "b": {
-    "workings": "trial"
+    "workings": "rule",
+    "grid_size": 20.0
    },
-   "changed_px": 26040,
-   "changed_pct": 4.508
+   "changed_px": 10523,
+   "changed_pct": 1.822
   },
   {
    "a": {
-    "workings": "result"
+    "workings": "result",
+    "grid_size": 20.0
    },
    "b": {
-    "workings": "reject"
+    "workings": "rule",
+    "grid_size": 40.0
    },
-   "changed_px": 28953,
-   "changed_pct": 5.013
+   "changed_px": 11040,
+   "changed_pct": 1.911
   },
   {
    "a": {
-    "workings": "rule"
+    "workings": "result",
+    "grid_size": 20.0
    },
    "b": {
-    "workings": "trial"
+    "workings": "trial",
+    "grid_size": 20.0
    },
-   "changed_px": 32455,
-   "changed_pct": 5.619
+   "changed_px": 12980,
+   "changed_pct": 2.247
   },
   {
    "a": {
-    "workings": "rule"
+    "workings": "result",
+    "grid_size": 20.0
    },
    "b": {
-    "workings": "reject"
+    "workings": "trial",
+    "grid_size": 40.0
    },
-   "changed_px": 35833,
-   "changed_pct": 6.204
+   "changed_px": 13018,
+   "changed_pct": 2.254
   },
   {
    "a": {
-    "workings": "trial"
+    "workings": "result",
+    "grid_size": 20.0
    },
    "b": {
-    "workings": "reject"
+    "workings": "reject",
+    "grid_size": 20.0
    },
-   "changed_px": 36170,
-   "changed_pct": 6.262
+   "changed_px": 7121,
+   "changed_pct": 1.233
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 40.0
+   },
+   "changed_px": 6415,
+   "changed_pct": 1.111
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "rule",
+    "grid_size": 20.0
+   },
+   "changed_px": 9669,
+   "changed_pct": 1.674
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "rule",
+    "grid_size": 40.0
+   },
+   "changed_px": 10366,
+   "changed_pct": 1.795
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 20.0
+   },
+   "changed_px": 12907,
+   "changed_pct": 2.235
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 40.0
+   },
+   "changed_px": 11855,
+   "changed_pct": 2.052
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 20.0
+   },
+   "changed_px": 7218,
+   "changed_pct": 1.25
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 40.0
+   },
+   "changed_px": 7458,
+   "changed_pct": 1.291
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "rule",
+    "grid_size": 40.0
+   },
+   "changed_px": 5469,
+   "changed_pct": 0.947
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 20.0
+   },
+   "changed_px": 16454,
+   "changed_pct": 2.849
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 40.0
+   },
+   "changed_px": 15625,
+   "changed_pct": 2.705
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 20.0
+   },
+   "changed_px": 11728,
+   "changed_pct": 2.03
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 40.0
+   },
+   "changed_px": 12522,
+   "changed_pct": 2.168
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 20.0
+   },
+   "changed_px": 15978,
+   "changed_pct": 2.766
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 40.0
+   },
+   "changed_px": 17139,
+   "changed_pct": 2.967
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 20.0
+   },
+   "changed_px": 13330,
+   "changed_pct": 2.308
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 40.0
+   },
+   "changed_px": 13580,
+   "changed_pct": 2.351
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 40.0
+   },
+   "changed_px": 4557,
+   "changed_pct": 0.789
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 20.0
+   },
+   "changed_px": 14621,
+   "changed_pct": 2.531
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 40.0
+   },
+   "changed_px": 15921,
+   "changed_pct": 2.756
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 20.0
+   },
+   "changed_px": 14307,
+   "changed_pct": 2.477
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 40.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 40.0
+   },
+   "changed_px": 15127,
+   "changed_pct": 2.619
+  },
+  {
+   "a": {
+    "workings": "reject",
+    "grid_size": 20.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 40.0
+   },
+   "changed_px": 5182,
+   "changed_pct": 0.897
   }
  ]
 }

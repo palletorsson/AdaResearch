@@ -89,7 +89,15 @@ def registry() -> dict:
     for rp in sorted((REPO / "commons" / "artifacts" / "registry").glob("*.json")):
         try:
             data = json.loads(rp.read_text(encoding="utf-8"))
-        except Exception:
+        except Exception as exc:
+            # SAY SO. A silent `continue` here drops every token in the file, and the
+            # runner then reports "not in any registry" — which is a claim about the
+            # corpus, not about a parse. Twenty-five artifacts came back that way in
+            # one batch while an agent was mid-write on a registry file; every one of
+            # them was present and fine a minute later. "Absent" and "unreadable" are
+            # different facts and the caller has to be able to tell them apart.
+            print(f"  ! registry unreadable, its tokens are INVISIBLE this run: "
+                  f"{rp.name} ({exc})")
             continue
         items = data.get("artifacts", data) if isinstance(data, dict) else data
         pairs: list[tuple[str, dict]] = []
@@ -325,6 +333,17 @@ def save_ledger(led: dict) -> None:
 def research(token: str, reg: dict, max_variants: int) -> int:
     entry = reg.get(token)
     if not entry:
+        # Distinguish absent from invisible. If the token appears in a registry file
+        # the loader could not parse, this is a transient fact about a concurrent
+        # write, not a fact about the corpus — and retrying is the right response,
+        # where for a genuinely absent token it is not.
+        import glob as _g
+        hits = [os.path.basename(p) for p in _g.glob(str(REPO / "commons/artifacts/registry/*.json"))
+                if f'"{token}"' in open(p, encoding="utf-8", errors="replace").read()]
+        if hits:
+            print(f"  {token}: named in {', '.join(hits)} but not loadable right now "
+                  f"— a registry file failed to parse this run; retry")
+            return 2
         print(f"  {token}: not in any registry")
         return 1
     gd = gd_for(entry)

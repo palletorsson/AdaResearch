@@ -1,0 +1,108 @@
+{
+ "sweep": "vector_field_grid",
+ "peak_changed_pct": 1.399,
+ "subject_pct": 1.22,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "field": "cells"
+   },
+   "b": {
+    "field": "orbit"
+   },
+   "changed_px": 7288,
+   "changed_pct": 1.262
+  },
+  {
+   "a": {
+    "field": "cells"
+   },
+   "b": {
+    "field": "sink"
+   },
+   "changed_px": 7715,
+   "changed_pct": 1.336
+  },
+  {
+   "a": {
+    "field": "cells"
+   },
+   "b": {
+    "field": "saddle"
+   },
+   "changed_px": 7964,
+   "changed_pct": 1.379
+  },
+  {
+   "a": {
+    "field": "cells"
+   },
+   "b": {
+    "field": "shear"
+   },
+   "changed_px": 5724,
+   "changed_pct": 0.991
+  },
+  {
+   "a": {
+    "field": "orbit"
+   },
+   "b": {
+    "field": "sink"
+   },
+   "changed_px": 8078,
+   "changed_pct": 1.399
+  },
+  {
+   "a": {
+    "field": "orbit"
+   },
+   "b": {
+    "field": "saddle"
+   },
+   "changed_px": 5053,
+   "changed_pct": 0.875
+  },
+  {
+   "a": {
+    "field": "orbit"
+   },
+   "b": {
+    "field": "shear"
+   },
+   "changed_px": 6829,
+   "changed_pct": 1.182
+  },
+  {
+   "a": {
+    "field": "sink"
+   },
+   "b": {
+    "field": "saddle"
+   },
+   "changed_px": 6756,
+   "changed_pct": 1.17
+  },
+  {
+   "a": {
+    "field": "sink"
+   },
+   "b": {
+    "field": "shear"
+   },
+   "changed_px": 7511,
+   "changed_pct": 1.3
+  },
+  {
+   "a": {
+    "field": "saddle"
+   },
+   "b": {
+    "field": "shear"
+   },
+   "changed_px": 7549,
+   "changed_pct": 1.307
+  }
+ ]
+}

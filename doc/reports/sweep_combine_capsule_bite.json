@@ -1,68 +1,344 @@
 {
  "sweep": "combine_capsule",
- "peak_changed_pct": 5.362,
- "subject_pct": 4.677,
- "verdict": "BITES",
+ "peak_changed_pct": 0.469,
+ "subject_pct": 0.261,
+ "verdict": "SUBJECT NOT DETECTED - only 0.26% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
-    "taxonomy": "table"
+    "taxonomy": "table",
+    "use_wireframe": true
    },
    "b": {
-    "taxonomy": "ladder"
+    "taxonomy": "table",
+    "use_wireframe": false
    },
-   "changed_px": 13159,
-   "changed_pct": 2.278
+   "changed_px": 0,
+   "changed_pct": 0.0
   },
   {
    "a": {
-    "taxonomy": "table"
+    "taxonomy": "table",
+    "use_wireframe": true
    },
    "b": {
-    "taxonomy": "stack"
+    "taxonomy": "ladder",
+    "use_wireframe": true
    },
-   "changed_px": 16254,
-   "changed_pct": 2.814
+   "changed_px": 2708,
+   "changed_pct": 0.469
   },
   {
    "a": {
-    "taxonomy": "table"
+    "taxonomy": "table",
+    "use_wireframe": true
    },
    "b": {
-    "taxonomy": "heap"
+    "taxonomy": "ladder",
+    "use_wireframe": false
    },
-   "changed_px": 30969,
-   "changed_pct": 5.362
+   "changed_px": 2708,
+   "changed_pct": 0.469
   },
   {
    "a": {
-    "taxonomy": "ladder"
+    "taxonomy": "table",
+    "use_wireframe": true
    },
    "b": {
-    "taxonomy": "stack"
+    "taxonomy": "stack",
+    "use_wireframe": true
    },
-   "changed_px": 7779,
-   "changed_pct": 1.347
+   "changed_px": 2145,
+   "changed_pct": 0.371
   },
   {
    "a": {
-    "taxonomy": "ladder"
+    "taxonomy": "table",
+    "use_wireframe": true
    },
    "b": {
-    "taxonomy": "heap"
+    "taxonomy": "stack",
+    "use_wireframe": false
    },
-   "changed_px": 27706,
-   "changed_pct": 4.797
+   "changed_px": 2145,
+   "changed_pct": 0.371
   },
   {
    "a": {
-    "taxonomy": "stack"
+    "taxonomy": "table",
+    "use_wireframe": true
    },
    "b": {
-    "taxonomy": "heap"
+    "taxonomy": "heap",
+    "use_wireframe": true
    },
-   "changed_px": 29898,
-   "changed_pct": 5.176
+   "changed_px": 1707,
+   "changed_pct": 0.296
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": false
+   },
+   "changed_px": 1707,
+   "changed_pct": 0.296
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "use_wireframe": true
+   },
+   "changed_px": 2708,
+   "changed_pct": 0.469
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "use_wireframe": false
+   },
+   "changed_px": 2708,
+   "changed_pct": 0.469
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "use_wireframe": true
+   },
+   "changed_px": 2145,
+   "changed_pct": 0.371
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "use_wireframe": false
+   },
+   "changed_px": 2145,
+   "changed_pct": 0.371
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": true
+   },
+   "changed_px": 1707,
+   "changed_pct": 0.296
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": false
+   },
+   "changed_px": 1707,
+   "changed_pct": 0.296
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "use_wireframe": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "use_wireframe": true
+   },
+   "changed_px": 2353,
+   "changed_pct": 0.407
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "use_wireframe": false
+   },
+   "changed_px": 2353,
+   "changed_pct": 0.407
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": true
+   },
+   "changed_px": 1931,
+   "changed_pct": 0.334
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": false
+   },
+   "changed_px": 1931,
+   "changed_pct": 0.334
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "use_wireframe": true
+   },
+   "changed_px": 2353,
+   "changed_pct": 0.407
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "use_wireframe": false
+   },
+   "changed_px": 2353,
+   "changed_pct": 0.407
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": true
+   },
+   "changed_px": 1931,
+   "changed_pct": 0.334
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": false
+   },
+   "changed_px": 1931,
+   "changed_pct": 0.334
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "use_wireframe": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": true
+   },
+   "changed_px": 1345,
+   "changed_pct": 0.233
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": false
+   },
+   "changed_px": 1345,
+   "changed_pct": 0.233
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": true
+   },
+   "changed_px": 1345,
+   "changed_pct": 0.233
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "use_wireframe": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": false
+   },
+   "changed_px": 1345,
+   "changed_pct": 0.233
+  },
+  {
+   "a": {
+    "taxonomy": "heap",
+    "use_wireframe": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "use_wireframe": false
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
   }
  ]
 }

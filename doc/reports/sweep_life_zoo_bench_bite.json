@@ -1,0 +1,344 @@
+{
+ "sweep": "life_zoo_bench",
+ "peak_changed_pct": 1.642,
+ "subject_pct": 7.942,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "void",
+    "cols": 30.0
+   },
+   "changed_px": 5939,
+   "changed_pct": 1.028
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "lattice",
+    "cols": 15.0
+   },
+   "changed_px": 3736,
+   "changed_pct": 0.647
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "lattice",
+    "cols": 30.0
+   },
+   "changed_px": 9482,
+   "changed_pct": 1.642
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "census",
+    "cols": 15.0
+   },
+   "changed_px": 3539,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "census",
+    "cols": 30.0
+   },
+   "changed_px": 8777,
+   "changed_pct": 1.52
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 15.0
+   },
+   "changed_px": 216,
+   "changed_pct": 0.037
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 30.0
+   },
+   "changed_px": 5994,
+   "changed_pct": 1.038
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "lattice",
+    "cols": 15.0
+   },
+   "changed_px": 9409,
+   "changed_pct": 1.629
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "lattice",
+    "cols": 30.0
+   },
+   "changed_px": 7486,
+   "changed_pct": 1.296
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "census",
+    "cols": 15.0
+   },
+   "changed_px": 8738,
+   "changed_pct": 1.513
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "census",
+    "cols": 30.0
+   },
+   "changed_px": 7247,
+   "changed_pct": 1.255
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 15.0
+   },
+   "changed_px": 6139,
+   "changed_pct": 1.063
+  },
+  {
+   "a": {
+    "vacancy": "void",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 30.0
+   },
+   "changed_px": 223,
+   "changed_pct": 0.039
+  },
+  {
+   "a": {
+    "vacancy": "lattice",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "lattice",
+    "cols": 30.0
+   },
+   "changed_px": 6150,
+   "changed_pct": 1.065
+  },
+  {
+   "a": {
+    "vacancy": "lattice",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "census",
+    "cols": 15.0
+   },
+   "changed_px": 3443,
+   "changed_pct": 0.596
+  },
+  {
+   "a": {
+    "vacancy": "lattice",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "census",
+    "cols": 30.0
+   },
+   "changed_px": 9104,
+   "changed_pct": 1.576
+  },
+  {
+   "a": {
+    "vacancy": "lattice",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 15.0
+   },
+   "changed_px": 3730,
+   "changed_pct": 0.646
+  },
+  {
+   "a": {
+    "vacancy": "lattice",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 30.0
+   },
+   "changed_px": 9413,
+   "changed_pct": 1.63
+  },
+  {
+   "a": {
+    "vacancy": "lattice",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "census",
+    "cols": 15.0
+   },
+   "changed_px": 9064,
+   "changed_pct": 1.569
+  },
+  {
+   "a": {
+    "vacancy": "lattice",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "census",
+    "cols": 30.0
+   },
+   "changed_px": 7198,
+   "changed_pct": 1.246
+  },
+  {
+   "a": {
+    "vacancy": "lattice",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 15.0
+   },
+   "changed_px": 9480,
+   "changed_pct": 1.641
+  },
+  {
+   "a": {
+    "vacancy": "lattice",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 30.0
+   },
+   "changed_px": 7481,
+   "changed_pct": 1.295
+  },
+  {
+   "a": {
+    "vacancy": "census",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "census",
+    "cols": 30.0
+   },
+   "changed_px": 6297,
+   "changed_pct": 1.09
+  },
+  {
+   "a": {
+    "vacancy": "census",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 15.0
+   },
+   "changed_px": 3510,
+   "changed_pct": 0.608
+  },
+  {
+   "a": {
+    "vacancy": "census",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 30.0
+   },
+   "changed_px": 8748,
+   "changed_pct": 1.515
+  },
+  {
+   "a": {
+    "vacancy": "census",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 15.0
+   },
+   "changed_px": 8790,
+   "changed_pct": 1.522
+  },
+  {
+   "a": {
+    "vacancy": "census",
+    "cols": 30.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 30.0
+   },
+   "changed_px": 7223,
+   "changed_pct": 1.251
+  },
+  {
+   "a": {
+    "vacancy": "wake",
+    "cols": 15.0
+   },
+   "b": {
+    "vacancy": "wake",
+    "cols": 30.0
+   },
+   "changed_px": 6194,
+   "changed_pct": 1.072
+  }
+ ]
+}

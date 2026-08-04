@@ -1,6 +1,6 @@
 {
  "sweep": "sierpinski_bench",
- "peak_changed_pct": 1.09,
+ "peak_changed_pct": 1.091,
  "subject_pct": 6.193,
  "verdict": "faint - under 2% of the frame moved",
  "variants": [
@@ -11,8 +11,8 @@
    "b": {
     "ladder": "series"
    },
-   "changed_px": 4248,
-   "changed_pct": 0.735
+   "changed_px": 3216,
+   "changed_pct": 0.557
   },
   {
    "a": {
@@ -21,8 +21,8 @@
    "b": {
     "ladder": "seed"
    },
-   "changed_px": 3726,
-   "changed_pct": 0.645
+   "changed_px": 2700,
+   "changed_pct": 0.467
   },
   {
    "a": {
@@ -31,8 +31,8 @@
    "b": {
     "ladder": "relief"
    },
-   "changed_px": 6106,
-   "changed_pct": 1.057
+   "changed_px": 5016,
+   "changed_pct": 0.868
   },
   {
    "a": {
@@ -41,8 +41,8 @@
    "b": {
     "ladder": "section"
    },
-   "changed_px": 2951,
-   "changed_pct": 0.511
+   "changed_px": 1927,
+   "changed_pct": 0.334
   },
   {
    "a": {
@@ -51,8 +51,8 @@
    "b": {
     "ladder": "seed"
    },
-   "changed_px": 4247,
-   "changed_pct": 0.735
+   "changed_px": 4250,
+   "changed_pct": 0.736
   },
   {
    "a": {
@@ -61,8 +61,8 @@
    "b": {
     "ladder": "relief"
    },
-   "changed_px": 6295,
-   "changed_pct": 1.09
+   "changed_px": 6299,
+   "changed_pct": 1.091
   },
   {
    "a": {
@@ -71,7 +71,7 @@
    "b": {
     "ladder": "section"
    },
-   "changed_px": 3770,
+   "changed_px": 3773,
    "changed_pct": 0.653
   },
   {
@@ -81,7 +81,7 @@
    "b": {
     "ladder": "relief"
    },
-   "changed_px": 4408,
+   "changed_px": 4409,
    "changed_pct": 0.763
   },
   {
@@ -101,7 +101,7 @@
    "b": {
     "ladder": "section"
    },
-   "changed_px": 4764,
+   "changed_px": 4766,
    "changed_pct": 0.825
   }
  ]

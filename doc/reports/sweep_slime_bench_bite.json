@@ -1,68 +1,344 @@
 {
  "sweep": "slime_bench",
- "peak_changed_pct": 6.106,
- "subject_pct": 9.615,
+ "peak_changed_pct": 2.702,
+ "subject_pct": 7.211,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "workings": "result"
+    "workings": "result",
+    "grid_size": 32.0
    },
    "b": {
-    "workings": "rule"
+    "workings": "result",
+    "grid_size": 64.0
    },
-   "changed_px": 9399,
-   "changed_pct": 1.627
+   "changed_px": 3006,
+   "changed_pct": 0.52
   },
   {
    "a": {
-    "workings": "result"
+    "workings": "result",
+    "grid_size": 32.0
    },
    "b": {
-    "workings": "trial"
+    "workings": "rule",
+    "grid_size": 32.0
    },
-   "changed_px": 25539,
-   "changed_pct": 4.422
+   "changed_px": 7758,
+   "changed_pct": 1.343
   },
   {
    "a": {
-    "workings": "result"
+    "workings": "result",
+    "grid_size": 32.0
    },
    "b": {
-    "workings": "reject"
+    "workings": "rule",
+    "grid_size": 64.0
    },
-   "changed_px": 28321,
-   "changed_pct": 4.903
+   "changed_px": 8474,
+   "changed_pct": 1.467
   },
   {
    "a": {
-    "workings": "rule"
+    "workings": "result",
+    "grid_size": 32.0
    },
    "b": {
-    "workings": "trial"
+    "workings": "trial",
+    "grid_size": 32.0
    },
-   "changed_px": 31428,
-   "changed_pct": 5.441
+   "changed_px": 10936,
+   "changed_pct": 1.893
   },
   {
    "a": {
-    "workings": "rule"
+    "workings": "result",
+    "grid_size": 32.0
    },
    "b": {
-    "workings": "reject"
+    "workings": "trial",
+    "grid_size": 64.0
    },
-   "changed_px": 34790,
-   "changed_pct": 6.023
+   "changed_px": 11251,
+   "changed_pct": 1.948
   },
   {
    "a": {
-    "workings": "trial"
+    "workings": "result",
+    "grid_size": 32.0
    },
    "b": {
-    "workings": "reject"
+    "workings": "reject",
+    "grid_size": 32.0
    },
-   "changed_px": 35266,
-   "changed_pct": 6.106
+   "changed_px": 5248,
+   "changed_pct": 0.909
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 64.0
+   },
+   "changed_px": 5819,
+   "changed_pct": 1.007
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "rule",
+    "grid_size": 32.0
+   },
+   "changed_px": 7825,
+   "changed_pct": 1.355
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "rule",
+    "grid_size": 64.0
+   },
+   "changed_px": 7368,
+   "changed_pct": 1.276
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 32.0
+   },
+   "changed_px": 10961,
+   "changed_pct": 1.898
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 64.0
+   },
+   "changed_px": 9891,
+   "changed_pct": 1.712
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 32.0
+   },
+   "changed_px": 5129,
+   "changed_pct": 0.888
+  },
+  {
+   "a": {
+    "workings": "result",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 64.0
+   },
+   "changed_px": 4397,
+   "changed_pct": 0.761
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "rule",
+    "grid_size": 64.0
+   },
+   "changed_px": 3262,
+   "changed_pct": 0.565
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 32.0
+   },
+   "changed_px": 15484,
+   "changed_pct": 2.681
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 64.0
+   },
+   "changed_px": 15608,
+   "changed_pct": 2.702
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 32.0
+   },
+   "changed_px": 9053,
+   "changed_pct": 1.567
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 64.0
+   },
+   "changed_px": 10217,
+   "changed_pct": 1.769
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 32.0
+   },
+   "changed_px": 15407,
+   "changed_pct": 2.667
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 64.0
+   },
+   "changed_px": 14971,
+   "changed_pct": 2.592
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 32.0
+   },
+   "changed_px": 10303,
+   "changed_pct": 1.784
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 64.0
+   },
+   "changed_px": 8965,
+   "changed_pct": 1.552
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "trial",
+    "grid_size": 64.0
+   },
+   "changed_px": 2744,
+   "changed_pct": 0.475
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 32.0
+   },
+   "changed_px": 12945,
+   "changed_pct": 2.241
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 64.0
+   },
+   "changed_px": 12693,
+   "changed_pct": 2.198
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 32.0
+   },
+   "changed_px": 12883,
+   "changed_pct": 2.23
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "grid_size": 64.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 64.0
+   },
+   "changed_px": 12232,
+   "changed_pct": 2.118
+  },
+  {
+   "a": {
+    "workings": "reject",
+    "grid_size": 32.0
+   },
+   "b": {
+    "workings": "reject",
+    "grid_size": 64.0
+   },
+   "changed_px": 2726,
+   "changed_pct": 0.472
   }
  ]
 }

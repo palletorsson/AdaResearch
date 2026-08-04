@@ -1,0 +1,104 @@
+{
+ "sweep": "remove_random",
+ "peak_changed_pct": 4.403,
+ "subject_pct": 4.669,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "Range"
+   },
+   "b": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "Column"
+   },
+   "changed_px": 15628,
+   "changed_pct": 2.706
+  },
+  {
+   "a": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "Range"
+   },
+   "b": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "Row"
+   },
+   "changed_px": 22254,
+   "changed_pct": 3.853
+  },
+  {
+   "a": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "Range"
+   },
+   "b": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "All"
+   },
+   "changed_px": 25432,
+   "changed_pct": 4.403
+  },
+  {
+   "a": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "Column"
+   },
+   "b": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "Row"
+   },
+   "changed_px": 12320,
+   "changed_pct": 2.133
+  },
+  {
+   "a": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "Column"
+   },
+   "b": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "All"
+   },
+   "changed_px": 17765,
+   "changed_pct": 3.076
+  },
+  {
+   "a": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "Row"
+   },
+   "b": {
+    "removal_speed": 40.0,
+    "highlight_duration": 0.02,
+    "localize_selection_to_artifact": false,
+    "selection_mode": "All"
+   },
+   "changed_px": 7072,
+   "changed_pct": 1.224
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+{
+ "sweep": "rounded_softbody_test",
+ "peak_changed_pct": 0.001,
+ "subject_pct": 5.848,
+ "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "variants": [
+  {
+   "a": {
+    "measure": "strain"
+   },
+   "b": {
+    "measure": "collision"
+   },
+   "changed_px": 3,
+   "changed_pct": 0.001
+  },
+  {
+   "a": {
+    "measure": "strain"
+   },
+   "b": {
+    "measure": "volume"
+   },
+   "changed_px": 3,
+   "changed_pct": 0.001
+  },
+  {
+   "a": {
+    "measure": "strain"
+   },
+   "b": {
+    "measure": "none"
+   },
+   "changed_px": 5,
+   "changed_pct": 0.001
+  },
+  {
+   "a": {
+    "measure": "collision"
+   },
+   "b": {
+    "measure": "volume"
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "measure": "collision"
+   },
+   "b": {
+    "measure": "none"
+   },
+   "changed_px": 6,
+   "changed_pct": 0.001
+  },
+  {
+   "a": {
+    "measure": "volume"
+   },
+   "b": {
+    "measure": "none"
+   },
+   "changed_px": 4,
+   "changed_pct": 0.001
+  }
+ ]
+}

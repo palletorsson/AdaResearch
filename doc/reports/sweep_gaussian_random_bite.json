@@ -1,0 +1,188 @@
+{
+ "sweep": "gaussian_random",
+ "peak_changed_pct": 0.0,
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "raise_amount": 0.025,
+    "max_raises": 100.0
+   },
+   "b": {
+    "raise_amount": 0.025,
+    "max_raises": 200.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.025,
+    "max_raises": 100.0
+   },
+   "b": {
+    "raise_amount": 0.05,
+    "max_raises": 100.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.025,
+    "max_raises": 100.0
+   },
+   "b": {
+    "raise_amount": 0.05,
+    "max_raises": 200.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.025,
+    "max_raises": 100.0
+   },
+   "b": {
+    "raise_amount": 0.08,
+    "max_raises": 100.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.025,
+    "max_raises": 100.0
+   },
+   "b": {
+    "raise_amount": 0.08,
+    "max_raises": 200.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.025,
+    "max_raises": 200.0
+   },
+   "b": {
+    "raise_amount": 0.05,
+    "max_raises": 100.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.025,
+    "max_raises": 200.0
+   },
+   "b": {
+    "raise_amount": 0.05,
+    "max_raises": 200.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.025,
+    "max_raises": 200.0
+   },
+   "b": {
+    "raise_amount": 0.08,
+    "max_raises": 100.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.025,
+    "max_raises": 200.0
+   },
+   "b": {
+    "raise_amount": 0.08,
+    "max_raises": 200.0
+   },
+   "changed_px": 2,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.05,
+    "max_raises": 100.0
+   },
+   "b": {
+    "raise_amount": 0.05,
+    "max_raises": 200.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.05,
+    "max_raises": 100.0
+   },
+   "b": {
+    "raise_amount": 0.08,
+    "max_raises": 100.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.05,
+    "max_raises": 100.0
+   },
+   "b": {
+    "raise_amount": 0.08,
+    "max_raises": 200.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.05,
+    "max_raises": 200.0
+   },
+   "b": {
+    "raise_amount": 0.08,
+    "max_raises": 100.0
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.05,
+    "max_raises": 200.0
+   },
+   "b": {
+    "raise_amount": 0.08,
+    "max_raises": 200.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "raise_amount": 0.08,
+    "max_raises": 100.0
+   },
+   "b": {
+    "raise_amount": 0.08,
+    "max_raises": 200.0
+   },
+   "changed_px": 1,
+   "changed_pct": 0.0
+  }
+ ]
+}

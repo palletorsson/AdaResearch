@@ -1,68 +1,344 @@
 {
  "sweep": "colonization_bench",
- "peak_changed_pct": 3.438,
- "subject_pct": 4.953,
- "verdict": "BITES",
+ "peak_changed_pct": 1.785,
+ "subject_pct": 4.518,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
-    "workings": "result"
+    "workings": "result",
+    "attractor_count": 60.0
    },
    "b": {
-    "workings": "rule"
+    "workings": "result",
+    "attractor_count": 120.0
    },
-   "changed_px": 9515,
-   "changed_pct": 1.647
+   "changed_px": 2916,
+   "changed_pct": 0.505
   },
   {
    "a": {
-    "workings": "result"
+    "workings": "result",
+    "attractor_count": 60.0
    },
    "b": {
-    "workings": "trial"
+    "workings": "rule",
+    "attractor_count": 60.0
    },
-   "changed_px": 15748,
-   "changed_pct": 2.726
+   "changed_px": 4028,
+   "changed_pct": 0.697
   },
   {
    "a": {
-    "workings": "result"
+    "workings": "result",
+    "attractor_count": 60.0
    },
    "b": {
-    "workings": "reject"
+    "workings": "rule",
+    "attractor_count": 120.0
    },
-   "changed_px": 9985,
-   "changed_pct": 1.729
+   "changed_px": 6550,
+   "changed_pct": 1.134
   },
   {
    "a": {
-    "workings": "rule"
+    "workings": "result",
+    "attractor_count": 60.0
    },
    "b": {
-    "workings": "trial"
+    "workings": "trial",
+    "attractor_count": 60.0
    },
-   "changed_px": 19859,
-   "changed_pct": 3.438
+   "changed_px": 3753,
+   "changed_pct": 0.65
   },
   {
    "a": {
-    "workings": "rule"
+    "workings": "result",
+    "attractor_count": 60.0
    },
    "b": {
-    "workings": "reject"
+    "workings": "trial",
+    "attractor_count": 120.0
    },
-   "changed_px": 12898,
-   "changed_pct": 2.233
+   "changed_px": 6667,
+   "changed_pct": 1.154
   },
   {
    "a": {
-    "workings": "trial"
+    "workings": "result",
+    "attractor_count": 60.0
    },
    "b": {
-    "workings": "reject"
+    "workings": "reject",
+    "attractor_count": 60.0
    },
-   "changed_px": 18478,
-   "changed_pct": 3.199
+   "changed_px": 2047,
+   "changed_pct": 0.354
+  },
+  {
+   "a": {
+    "workings": "result",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 120.0
+   },
+   "changed_px": 4966,
+   "changed_pct": 0.86
+  },
+  {
+   "a": {
+    "workings": "result",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "rule",
+    "attractor_count": 60.0
+   },
+   "changed_px": 6560,
+   "changed_pct": 1.136
+  },
+  {
+   "a": {
+    "workings": "result",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "rule",
+    "attractor_count": 120.0
+   },
+   "changed_px": 4010,
+   "changed_pct": 0.694
+  },
+  {
+   "a": {
+    "workings": "result",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "trial",
+    "attractor_count": 60.0
+   },
+   "changed_px": 6666,
+   "changed_pct": 1.154
+  },
+  {
+   "a": {
+    "workings": "result",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "trial",
+    "attractor_count": 120.0
+   },
+   "changed_px": 3760,
+   "changed_pct": 0.651
+  },
+  {
+   "a": {
+    "workings": "result",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 60.0
+   },
+   "changed_px": 4961,
+   "changed_pct": 0.859
+  },
+  {
+   "a": {
+    "workings": "result",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 120.0
+   },
+   "changed_px": 2055,
+   "changed_pct": 0.356
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "rule",
+    "attractor_count": 120.0
+   },
+   "changed_px": 3464,
+   "changed_pct": 0.6
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "trial",
+    "attractor_count": 60.0
+   },
+   "changed_px": 7781,
+   "changed_pct": 1.347
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "trial",
+    "attractor_count": 120.0
+   },
+   "changed_px": 10312,
+   "changed_pct": 1.785
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 60.0
+   },
+   "changed_px": 6075,
+   "changed_pct": 1.052
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 120.0
+   },
+   "changed_px": 8609,
+   "changed_pct": 1.49
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "trial",
+    "attractor_count": 60.0
+   },
+   "changed_px": 10301,
+   "changed_pct": 1.783
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "trial",
+    "attractor_count": 120.0
+   },
+   "changed_px": 7769,
+   "changed_pct": 1.345
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 60.0
+   },
+   "changed_px": 8596,
+   "changed_pct": 1.488
+  },
+  {
+   "a": {
+    "workings": "rule",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 120.0
+   },
+   "changed_px": 6053,
+   "changed_pct": 1.048
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "trial",
+    "attractor_count": 120.0
+   },
+   "changed_px": 2911,
+   "changed_pct": 0.504
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 60.0
+   },
+   "changed_px": 5800,
+   "changed_pct": 1.004
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 120.0
+   },
+   "changed_px": 8716,
+   "changed_pct": 1.509
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 60.0
+   },
+   "changed_px": 8712,
+   "changed_pct": 1.508
+  },
+  {
+   "a": {
+    "workings": "trial",
+    "attractor_count": 120.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 120.0
+   },
+   "changed_px": 5816,
+   "changed_pct": 1.007
+  },
+  {
+   "a": {
+    "workings": "reject",
+    "attractor_count": 60.0
+   },
+   "b": {
+    "workings": "reject",
+    "attractor_count": 120.0
+   },
+   "changed_px": 2917,
+   "changed_pct": 0.505
   }
  ]
 }

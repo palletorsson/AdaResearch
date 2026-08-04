@@ -1,0 +1,80 @@
+{
+ "sweep": "2d_in_3d_randomness_vis",
+ "peak_changed_pct": 0.097,
+ "subject_pct": 10.233,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "input_keyboard": true,
+    "input_gamepad": true
+   },
+   "b": {
+    "input_keyboard": true,
+    "input_gamepad": false
+   },
+   "changed_px": 549,
+   "changed_pct": 0.095
+  },
+  {
+   "a": {
+    "input_keyboard": true,
+    "input_gamepad": true
+   },
+   "b": {
+    "input_keyboard": false,
+    "input_gamepad": true
+   },
+   "changed_px": 552,
+   "changed_pct": 0.096
+  },
+  {
+   "a": {
+    "input_keyboard": true,
+    "input_gamepad": true
+   },
+   "b": {
+    "input_keyboard": false,
+    "input_gamepad": false
+   },
+   "changed_px": 562,
+   "changed_pct": 0.097
+  },
+  {
+   "a": {
+    "input_keyboard": true,
+    "input_gamepad": false
+   },
+   "b": {
+    "input_keyboard": false,
+    "input_gamepad": true
+   },
+   "changed_px": 473,
+   "changed_pct": 0.082
+  },
+  {
+   "a": {
+    "input_keyboard": true,
+    "input_gamepad": false
+   },
+   "b": {
+    "input_keyboard": false,
+    "input_gamepad": false
+   },
+   "changed_px": 494,
+   "changed_pct": 0.086
+  },
+  {
+   "a": {
+    "input_keyboard": false,
+    "input_gamepad": true
+   },
+   "b": {
+    "input_keyboard": false,
+    "input_gamepad": false
+   },
+   "changed_px": 487,
+   "changed_pct": 0.084
+  }
+ ]
+}
