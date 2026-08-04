@@ -48,8 +48,13 @@ func get_base_material() -> StandardMaterial3D:
 func get_tunnel_material(index: int) -> StandardMaterial3D:
 	return base_materials[index % base_materials.size()]
 
-func get_detail_material() -> StandardMaterial3D:
-	return base_materials[randi() % base_materials.size()]
+func get_detail_material(index: int = -1) -> StandardMaterial3D:
+	# index < 0 keeps the old unseeded pick for any caller that doesn't care;
+	# organic_space passes a draw from its own seeded RNG so a pinned space
+	# gets the same materials as well as the same shapes.
+	if index < 0:
+		return base_materials[randi() % base_materials.size()]
+	return base_materials[abs(index) % base_materials.size()]
 
 func get_membrane_material() -> StandardMaterial3D:
 	return base_materials[1] if base_materials.size() > 1 else base_materials[0]

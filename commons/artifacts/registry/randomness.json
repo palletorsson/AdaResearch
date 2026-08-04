@@ -12379,6 +12379,25 @@
    "scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
    "category": "randomness",
    "complexity": "beginner",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "comparison": [
+      "single",
+      "replicas",
+      "seeds",
+      "ladder"
+     ]
+    },
+    "default": "comparison=single - one column at the shipped origin_x (-col_w / 2.0, which is what the n-column formula collapses to at n == 1), no caption Label3D created at all, the headline reading the shipped 'SEED: %d', and the cubes coloured by _rng seeded to seed_value = 42, the number _current_seed was born with, consumed in the same row-major order. The 7 direct placements and the 85 exhibit_furniture#mount:seed_replay_demo mounts are all bare tokens - no map_data.json anywhere sends this artifact a config dict - and apply_grid_config, which was literally `pass` before today, now returns early unless a value differs AND _ready has already built.",
+    "was": "no axis, and apply_grid_config implemented as `pass`. Four exports and all four were grid geometry (cols, rows, cube size, gap). The seed itself was a plain var, not an export, so nothing outside the artifact could reach it.",
+    "note": "hand promotion 2026-08-03. THIS ARTIFACT'S SUBJECT IS THE SWEEP'S OWN METHODOLOGY, which is why the axis had to be about evidence and not about the seed. The shipped object asserts 'same seed, same grid' and photographs badly, because one grid is one grid: a still of a seeded 8x8 and a still of an UNSEEDED 8x8 are indistinguishable, so the picture contains no evidence for the claim written on it. comparison gives the claim a second panel. replicas runs the same seed twice side by side and the two grids are identical - the control, and the only value that shows the property the artifact is named for. seeds runs 42 against contrast_seed 137. ladder runs three consecutive seeds, because adjacent integers are not adjacent worlds and that is the fact a slider hides. Captions appear per column only when there is something to compare, so `single` gains no node. TWO VALUES WERE CONSIDERED AND DECLINED. `unseeded` - two grids from randomize(), differing despite the same label, the exact failure this corpus keeps hitting - is the best picture of the four and cannot be shipped: it would make one tile a sample instead of a fact, and CLAUDE.md's own gotcha table lists 'strong confident bite on a generative artifact = unseeded randf' as a harness misdiagnosis, so declaring a value that deliberately triggers it would poison the next reader's verdict. `blind` - one grid with the seed withheld - is a real argument but it compares nothing, and taking the word `comparison` for it would be the science_screen fault in slow motion. SEED IS NOT AN AXIS: a seed ladder is what the artifact already was.",
+    "fixture": {
+     "seed": 42
+    },
+    "kin": "distribution_comparator.comparison (rules|replicas|tails|counts) sits one entry away in this same file and `replicas` is taken from it character for character, meaning exactly what it means there: the same generator run again, as the control for a claim about difference. The two should measure alike and the shipped states rhyme - both artifacts had apply_grid_config as a no-op and a sign making a claim the machine could not evidence. The rest of the list differs because the claims differ: distribution_comparator asks which LAW produced a histogram, this one asks whether the same INPUT produces the same output. space_filling_curve_gallery.comparison (grammars|depths|overlay|single) is the third declaration of the word and `single` is taken from there unchanged - one panel, nothing beside it."
+   },
    "tags": [
     "seed",
     "prng",

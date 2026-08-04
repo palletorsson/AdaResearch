@@ -21,6 +21,45 @@ class_name OrganicVRSpace
 @export var tunnel_complexity: int = 5
 @export var material_variety: int = 4
 
+# ── DNA ───────────────────────────────────────────────────────────────
+#
+# formation — WHERE THE FORM CAME FROM. Every deformation sphere on the
+# shell and every detail bump on a tunnel picks CSG UNION or SUBTRACTION,
+# and that single coin flip is the whole argument of the piece: is an
+# organic space what accumulated, or what was eaten away? The shipped code
+# flips a coin (0.5 on the shell, 0.3 on the tunnel details) and so gets
+# both at once, which is a position — it just was never a stated one.
+#
+#   chance    the shipped coin flip: some bulges, some hollows
+#   erode     subtraction only — the truth line taken literally, form as
+#             the residue of removal: doorways, alcoves, a chewed shell
+#   accrete   union only — form as accumulation: a lumpy budding mass
+#   alternate neither chance nor doctrine but rhythm: even index adds,
+#             odd index carves, a shell that reads as patterned
+#
+# cast — WHO IS ON SHOW. The three surface-detail generators are three
+# different claims about what "organic" means: membranes (soft sheets),
+# crystals (mineral), growths (bulbous flesh). Shipped, all three run at
+# once. Word and "all"-plus-one-each shape borrowed verbatim from
+# particle_systems.cast, which asks the same question of its emitters.
+
+## Where the form came from: chance / erosion / accretion / rhythm.
+@export_enum("chance", "erode", "accrete", "alternate") var formation: String = "chance"
+## Which family of natural form fills the space.
+@export_enum("all", "membrane", "crystal", "growth") var cast: String = "all"
+## Pins the generator. 0 = a fresh space every run — what every existing
+## placement gets, and what the shipped code has always done.
+@export var form_seed: int = 0
+
+const FORMATIONS := ["chance", "erode", "accrete", "alternate"]
+const CASTS := ["all", "membrane", "crystal", "growth"]
+
+# Every draw in this file goes through here so a pinned form_seed makes the
+# space reproducible. Unpinned it is randomize()d, which is exactly the
+# global RNG's shipped behaviour.
+var _rng := RandomNumberGenerator.new()
+var _built: bool = false
+
 # Components
 var mesh_generator: OrganicMeshGenerator
 var lighting_system: OrganicLighting
@@ -51,6 +90,8 @@ func setup_components() -> void:
 func generate_organic_space() -> void:
 	print("Generating organic VR space...")
 
+	_seed_rng()
+
 	# Generate base shell using marching cubes-style approach
 	generate_base_shell()
 
@@ -68,6 +109,30 @@ func generate_organic_space() -> void:
 
 	# Add interactive elements
 	generate_interactive_elements()
+
+	_built = true
+
+
+func _seed_rng() -> void:
+	if form_seed != 0:
+		_rng.seed = form_seed
+	else:
+		_rng.randomize()
+
+
+# UNION or SUBTRACTION for one deformation, under the declared formation.
+# `coin_bias` is the shipped threshold at this call site, so "chance"
+# reproduces the old expression exactly.
+func _op_for(index: int, coin_bias: float) -> int:
+	match formation:
+		"erode":
+			return CSGShape3D.OPERATION_SUBTRACTION
+		"accrete":
+			return CSGShape3D.OPERATION_UNION
+		"alternate":
+			return CSGShape3D.OPERATION_UNION if index % 2 == 0 else CSGShape3D.OPERATION_SUBTRACTION
+		_:
+			return CSGShape3D.OPERATION_UNION if _rng.randf() > coin_bias else CSGShape3D.OPERATION_SUBTRACTION
 
 func generate_base_shell() -> void:
 	"""Create the main hollow shell using CSG operations"""
@@ -91,8 +156,8 @@ func apply_organic_deformation(shape: CSGShape3D) -> void:
 	var noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	noise.frequency = 0.1
-	noise.seed = randi()
-	
+	noise.seed = _rng.randi()
+
 	# Create displacement using vertex shader if available
 	# For now, use multiple CSG operations to approximate
 	for i in range(tunnel_complexity):
@@ -105,9 +170,9 @@ func apply_organic_deformation(shape: CSGShape3D) -> void:
 		)
 		
 		deform_sphere.position = offset
-		deform_sphere.radius = randf_range(2.0, 4.0)
-		deform_sphere.operation = CSGShape3D.OPERATION_UNION if randf() > 0.5 else CSGShape3D.OPERATION_SUBTRACTION
-		
+		deform_sphere.radius = _rng.randf_range(2.0, 4.0)
+		deform_sphere.operation = _op_for(i, 0.5)
+
 		shape.add_child(deform_sphere)
 
 func generate_tunnel_system() -> void:
@@ -148,7 +213,7 @@ func create_tunnel_segment(start: Vector3, end: Vector3, index: int) -> void:
 	"""Create a single tunnel segment with organic shape"""
 	var tunnel = CSGCylinder3D.new()
 	tunnel.height = start.distance_to(end)
-	tunnel.radius = randf_range(1.5, 3.0)
+	tunnel.radius = _rng.randf_range(1.5, 3.0)
 	
 	# Position and orient tunnel
 	tunnel.position = (start + end) * 0.5
@@ -165,16 +230,16 @@ func create_tunnel_segment(start: Vector3, end: Vector3, index: int) -> void:
 
 func add_tunnel_details(tunnel: CSGCylinder3D, index: int) -> void:
 	"""Add organic surface details to tunnels"""
-	var detail_count = randi_range(3, 8)
-	
+	var detail_count = _rng.randi_range(3, 8)
+
 	for i in range(detail_count):
 		var detail = CSGSphere3D.new()
-		detail.radius = randf_range(0.3, 0.8)
-		
+		detail.radius = _rng.randf_range(0.3, 0.8)
+
 		# Random position around tunnel surface
-		var angle = randf() * TAU
-		var height = randf_range(-tunnel.height * 0.4, tunnel.height * 0.4)
-		var radius_offset = tunnel.radius * randf_range(0.8, 1.2)
+		var angle = _rng.randf() * TAU
+		var height = _rng.randf_range(-tunnel.height * 0.4, tunnel.height * 0.4)
+		var radius_offset = tunnel.radius * _rng.randf_range(0.8, 1.2)
 		
 		detail.position = Vector3(
 			cos(angle) * radius_offset,
@@ -182,40 +247,46 @@ func add_tunnel_details(tunnel: CSGCylinder3D, index: int) -> void:
 			sin(angle) * radius_offset
 		)
 		
-		detail.operation = CSGShape3D.OPERATION_UNION if randf() > 0.3 else CSGShape3D.OPERATION_SUBTRACTION
-		detail.material = material_manager.get_detail_material()
+		detail.operation = _op_for(i, 0.3)
+		detail.material = material_manager.get_detail_material(_rng.randi())
 		
 		tunnel.add_child(detail)
 
 func generate_surface_details() -> void:
-	"""Add fine surface details and textures"""
+	"""Add fine surface details and textures.
+
+	`cast` decides who is on show. "all" runs the three generators together,
+	which is the shipped composition; each other value gives the space over
+	to one claim about what organic form is."""
 	# Create membrane-like structures
-	create_membrane_surfaces()
-	
+	if cast == "all" or cast == "membrane":
+		create_membrane_surfaces()
+
 	# Add crystalline formations
-	create_crystal_formations()
-	
+	if cast == "all" or cast == "crystal":
+		create_crystal_formations()
+
 	# Generate organic growths
-	create_organic_growths()
+	if cast == "all" or cast == "growth":
+		create_organic_growths()
 
 func create_membrane_surfaces() -> void:
 	"""Create thin membrane surfaces spanning spaces"""
-	for i in range(randi_range(3, 6)):
+	for i in range(_rng.randi_range(3, 6)):
 		var membrane = CSGCylinder3D.new()
 		membrane.height = 0.1  # Very thin
-		membrane.radius = randf_range(3.0, 6.0)
+		membrane.radius = _rng.randf_range(3.0, 6.0)
 
-		
 		# Random position and orientation
 		membrane.position = Vector3(
-			randf_range(-space_size.x * 0.3, space_size.x * 0.3),
-			randf_range(-space_size.y * 0.3, space_size.y * 0.3),
-			randf_range(-space_size.z * 0.3, space_size.z * 0.3)
+			_rng.randf_range(-space_size.x * 0.3, space_size.x * 0.3),
+			_rng.randf_range(-space_size.y * 0.3, space_size.y * 0.3),
+			_rng.randf_range(-space_size.z * 0.3, space_size.z * 0.3)
 		)
 		membrane.rotation = Vector3(
-			randf() * TAU,
-			randf() * TAU,
-			randf() * TAU
+			_rng.randf() * TAU,
+			_rng.randf() * TAU,
+			_rng.randf() * TAU
 		)
 		
 		membrane.material = material_manager.get_membrane_material()
@@ -223,12 +294,12 @@ func create_membrane_surfaces() -> void:
 
 func create_crystal_formations() -> void:
 	"""Add crystalline geometric structures"""
-	for i in range(randi_range(5, 10)):
+	for i in range(_rng.randi_range(5, 10)):
 		var crystal = CSGBox3D.new()
 		crystal.size = Vector3(
-			randf_range(0.5, 2.0),
-			randf_range(2.0, 5.0),
-			randf_range(0.5, 2.0)
+			_rng.randf_range(0.5, 2.0),
+			_rng.randf_range(2.0, 5.0),
+			_rng.randf_range(0.5, 2.0)
 		)
 		
 		# Cluster around certain points
@@ -239,14 +310,14 @@ func create_crystal_formations() -> void:
 		)
 		
 		crystal.position = cluster_center + Vector3(
-			randf_range(-2, 2),
-			randf_range(-2, 2),
-			randf_range(-2, 2)
+			_rng.randf_range(-2, 2),
+			_rng.randf_range(-2, 2),
+			_rng.randf_range(-2, 2)
 		)
 		crystal.rotation = Vector3(
-			randf() * TAU,
-			randf() * TAU,
-			randf() * TAU
+			_rng.randf() * TAU,
+			_rng.randf() * TAU,
+			_rng.randf() * TAU
 		)
 		
 		crystal.material = material_manager.get_crystal_material()
@@ -254,28 +325,28 @@ func create_crystal_formations() -> void:
 
 func create_organic_growths() -> void:
 	"""Add bulbous organic formations"""
-	for i in range(randi_range(8, 15)):
+	for i in range(_rng.randi_range(8, 15)):
 		var growth = CSGSphere3D.new()
-		growth.radius = randf_range(0.8, 2.5)
-		
+		growth.radius = _rng.randf_range(0.8, 2.5)
+
 		# Attach to walls/surfaces
 		var surface_normal = Vector3(
-			randf_range(-1, 1),
-			randf_range(-1, 1),
-			randf_range(-1, 1)
+			_rng.randf_range(-1, 1),
+			_rng.randf_range(-1, 1),
+			_rng.randf_range(-1, 1)
 		).normalized()
-		
-		growth.position = surface_normal * space_size.x * randf_range(0.3, 0.45)
+
+		growth.position = surface_normal * space_size.x * _rng.randf_range(0.3, 0.45)
 		growth.material = material_manager.get_organic_material()
-		
+
 		# Add smaller sub-growths
-		for j in range(randi_range(2, 5)):
+		for j in range(_rng.randi_range(2, 5)):
 			var sub_growth = CSGSphere3D.new()
-			sub_growth.radius = growth.radius * randf_range(0.3, 0.7)
+			sub_growth.radius = growth.radius * _rng.randf_range(0.3, 0.7)
 			sub_growth.position = Vector3(
-				randf_range(-1, 1),
-				randf_range(-1, 1),
-				randf_range(-1, 1)
+				_rng.randf_range(-1, 1),
+				_rng.randf_range(-1, 1),
+				_rng.randf_range(-1, 1)
 			).normalized() * growth.radius * 1.2
 			sub_growth.material = material_manager.get_organic_material()
 			growth.add_child(sub_growth)
@@ -314,12 +385,12 @@ func setup_atmospheric_lighting() -> void:
 func generate_interactive_elements() -> void:
 	"""Add interactive elements for the space"""
 	# Create floating orbs that can be interacted with
-	for i in range(randi_range(3, 7)):
+	for i in range(_rng.randi_range(3, 7)):
 		var orb = create_interactive_orb()
 		orb.position = Vector3(
-			randf_range(-space_size.x * 0.2, space_size.x * 0.2),
-			randf_range(-space_size.y * 0.2, space_size.y * 0.2),
-			randf_range(-space_size.z * 0.2, space_size.z * 0.2)
+			_rng.randf_range(-space_size.x * 0.2, space_size.x * 0.2),
+			_rng.randf_range(-space_size.y * 0.2, space_size.y * 0.2),
+			_rng.randf_range(-space_size.z * 0.2, space_size.z * 0.2)
 		)
 		environment_container.add_child(orb)
 
@@ -354,13 +425,23 @@ func create_interactive_orb() -> RigidBody3D:
 
 
 func regenerate_space() -> void:
-	"""Regenerate the entire space with new parameters"""
+	"""Regenerate the entire space with new parameters.
+
+	The container has to come BACK. The old body freed it and then called
+	generate_organic_space(), which adds every shape to
+	environment_container — a freed node. Nothing shipped ever called this
+	(the @identity line still reads "VR regenerate trigger [missing]"), so
+	the bug was never hit; it would be hit the moment a map handed over a
+	formation or cast, which is exactly what apply_grid_config now does."""
 	# Clear existing environment
-	if environment_container:
+	if is_instance_valid(environment_container):
 		environment_container.queue_free()
-	
+
 	# Regenerate with new seed
 	await get_tree().process_frame
+	environment_container = Node3D.new()
+	environment_container.name = "OrganicEnvironment"
+	add_child(environment_container)
 	generate_organic_space()
 
 func _exit_tree() -> void:
@@ -370,4 +451,29 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	"""Map-token config. Guarded on both sides: an unknown or unchanged value
+	is a no-op, and the rebuild only fires once the space has been built. The
+	thirteen maps that place this artifact pass no DNA keys at all, so they
+	take the early exit and get the space they have always had."""
+	var changed: bool = false
+
+	if config.has("formation"):
+		var want_formation: String = str(config["formation"])
+		if want_formation in FORMATIONS and want_formation != formation:
+			formation = want_formation
+			changed = true
+
+	if config.has("cast"):
+		var want_cast: String = str(config["cast"])
+		if want_cast in CASTS and want_cast != cast:
+			cast = want_cast
+			changed = true
+
+	if config.has("form_seed"):
+		var want_seed: int = int(config["form_seed"])
+		if want_seed != form_seed:
+			form_seed = want_seed
+			changed = true
+
+	if changed and _built:
+		regenerate_space()

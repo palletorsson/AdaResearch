@@ -16,6 +16,62 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export var ring_tube_radius: float = 0.008
 @export var gimbal_lock_threshold: float = 5.0  # degrees from 90
 
+# ── DNA (promoted 2026-08-03, stage 2) ───────────────────────────────────────
+# regime — WHERE ON THE APPROACH TO THE SINGULARITY THE RIG IS FOUND.
+#
+# The subject of this artifact is a CONFIGURATION, not a motion: at Y = +/-90 the
+# outer and inner rings come to lie in the same plane and the two angles X and Z
+# stop being independent. Three numbers, two freedoms. A state photographs — the
+# rings are visibly coplanar, the alarm board is lit, the status line has changed
+# its sentence, and the printed matrix has collapsed. But the shipped rig opens at
+# 0/0/0 and hands the whole finding to a VR slider, so the fact it exists to make
+# is one no still has ever contained.
+#
+# X = +30 and Z = -30 are held constant across the three non-default poses. The
+# same pair of angles, moved only in Y — which IS the demonstration. Away from the
+# singularity they bend the inner box two ways; at it they are one rotation twice.
+#   free         0 / 0 / 0. Identity. The rings sit on the world axes and each
+#                turns something different. The shipped opening.
+#   approaching  Y = 72. The rings are converging and the box has begun to twist
+#                the same way twice, but the alarm has not fired. What "nearly
+#                singular" looks like — the state people are actually in.
+#   locked       Y = 90. X and Z are the same rotation. GIMBAL LOCK is lit and the
+#                status line names the loss.
+#   past         Y = 118. Through the singularity and out the other side. The rings
+#                separate again and the alarm goes dark — the failure is a POINT,
+#                not a region, which is exactly why it ambushes people.
+@export_enum("free", "approaching", "locked", "past") var regime: String = "free"
+
+# evidence — HOW MUCH OF THE WORKING IS PRINTED BESIDE THE RINGS.
+#
+# The rig ships as a lecture: a header carrying the legend, a side panel with the
+# live Euler triple AND the 3x3 matrix they multiply out to, and a status line
+# telling you what to do next. Whether the collapse is ANNOUNCED IN WORDS or has to
+# be read off the geometry is a second question, and the corpus already has a word
+# for it. `trace` is deliberately not offered: a static orientation has no history
+# to draw, and a value that renders the same picture as its neighbour is a
+# finished-looking experiment that answers nothing.
+#   result    the rings, the box and the alarm. No header, no numbers, no
+#             instruction. You are shown a machine that has jammed, and left to
+#             work out from the hardware what it lost.
+#   longhand  header + Euler angles + the multiplied-out matrix + status line.
+#             The shipped build.
+#   axiom     the panel states the RULE instead of the reading — R = Rx.Ry.Rz and
+#             the condition under which it degenerates. No live numbers at all.
+@export_enum("result", "longhand", "axiom") var evidence: String = "longhand"
+
+const REGIMES: PackedStringArray = ["free", "approaching", "locked", "past"]
+const EVIDENCES: PackedStringArray = ["result", "longhand", "axiom"]
+
+## Pose per regime. `free` is deliberately ABSENT: at that word _apply_regime
+## returns before touching anything and angle_x/y/z keep the 0/0/0 they have always
+## opened at, so all 9 existing placements render exactly what they rendered before.
+const REGIME_ANGLES: Dictionary = {
+	"approaching": Vector3(30.0, 72.0, -30.0),
+	"locked": Vector3(30.0, 90.0, -30.0),
+	"past": Vector3(30.0, 118.0, -30.0),
+}
+
 # --- Euler angles (degrees) ---
 
 var angle_x: float = 0.0
@@ -50,6 +106,11 @@ var _lock_board: Node3D          # "GIMBAL LOCK!" flash board
 var _lock_mat: StandardMaterial3D  # cached material of the lock board face (for flash)
 var _info_board: Node3D          # status/info line under the rings
 var _info_anchor: Node3D         # fixed transform holding the info board
+# Every printed board hangs off _labels_root, so a change of `evidence` frees
+# exactly the printing and never touches the rings, the box or the sliders.
+var _labels_root: Node3D
+# _ready has built once. Nothing may rebuild before it.
+var _built: bool = false
 
 # Cache guards — rebuild a board only when its text actually changes
 var _readout_cache: String = ""
@@ -67,11 +128,24 @@ var _is_locked: bool = false
 
 
 func _ready() -> void:
+	_apply_regime()
 	_build_gimbal()
 	_build_inner_box()
 	_build_labels()
 	_build_vr_controls()
 	_update_gimbal()
+	_built = true
+
+
+## Seat the three Euler angles at the pose the regime names. At `free` this returns
+## before touching anything, which is why the default is a no-op.
+func _apply_regime() -> void:
+	if not REGIME_ANGLES.has(regime):
+		return
+	var pose: Vector3 = REGIME_ANGLES[regime]
+	angle_x = pose.x
+	angle_y = pose.y
+	angle_z = pose.z
 
 
 # ------------------------------------------------------------------
@@ -277,33 +351,45 @@ func _build_box_face_markers() -> void:
 # ------------------------------------------------------------------
 
 func _build_labels() -> void:
-	# \u2500\u2500 Title header board \u2014 title + subtitle + legend on ONE opaque plate \u2500\u2500
-	# One printed panel above the rig instead of three stacked floating labels.
-	var header_lines := [
-		"GIMBAL LOCK",
-		"Why Euler angles lose a degree of freedom",
-		"",
-		"X pitch = red   Y yaw = green   Z roll = blue",
-	]
-	var header := BakedText.make_text_block(
-		header_lines, Color(0.90, 0.92, 0.98), 0.052, 0.72, 0.020, true)
-	header.name = "HeaderBoard"
-	# A dark backing plate so the text reads as a display, not floating glyphs.
-	add_child(_make_backing_plate("HeaderPlate", Vector3(0, 0.66, -0.006),
-		Vector2(0.82, 0.30), Color(0.05, 0.06, 0.08)))
-	header.position = Vector3(0, 0.66, 0)
-	add_child(header)
+	# Every printed board hangs off ONE node so that changing `evidence` frees
+	# exactly the printing and never touches the rings, the box or the sliders.
+	# It sits at the origin, so every board keeps the world transform it had.
+	_labels_root = Node3D.new()
+	_labels_root.name = "Labels"
+	add_child(_labels_root)
 
-	# \u2500\u2500 Readout board \u2014 Euler angles + rotation matrix on ONE panel \u2500\u2500
-	# Fixed anchor to the left of the rig; the board is rebuilt (cache-guarded)
-	# only when the numbers change. Left of centre so it clears the rings.
-	_readout_anchor = Node3D.new()
-	_readout_anchor.name = "ReadoutAnchor"
-	_readout_anchor.position = Vector3(-0.62, 0.40, 0.02)
-	add_child(_readout_anchor)
-	# Static backing plate for the readout \u2014 persists across board rebuilds.
-	_readout_anchor.add_child(_make_backing_plate("ReadoutPlate", Vector3(0, 0, -0.006),
-		Vector2(0.44, 0.44), Color(0.04, 0.05, 0.07)))
+	# `result` prints nothing beside the rings. Only the alarm survives, because
+	# the alarm IS the result: the machine tells you it has jammed and no more.
+	var printed: bool = evidence != "result"
+
+	if printed:
+		# \u2500\u2500 Title header board \u2014 title + subtitle + legend on ONE opaque plate \u2500\u2500
+		# One printed panel above the rig instead of three stacked floating labels.
+		var header_lines := [
+			"GIMBAL LOCK",
+			"Why Euler angles lose a degree of freedom",
+			"",
+			"X pitch = red   Y yaw = green   Z roll = blue",
+		]
+		var header := BakedText.make_text_block(
+			header_lines, Color(0.90, 0.92, 0.98), 0.052, 0.72, 0.020, true)
+		header.name = "HeaderBoard"
+		# A dark backing plate so the text reads as a display, not floating glyphs.
+		_labels_root.add_child(_make_backing_plate("HeaderPlate", Vector3(0, 0.66, -0.006),
+			Vector2(0.82, 0.30), Color(0.05, 0.06, 0.08)))
+		header.position = Vector3(0, 0.66, 0)
+		_labels_root.add_child(header)
+
+		# \u2500\u2500 Readout board \u2014 Euler angles + rotation matrix on ONE panel \u2500\u2500
+		# Fixed anchor to the left of the rig; the board is rebuilt (cache-guarded)
+		# only when the numbers change. Left of centre so it clears the rings.
+		_readout_anchor = Node3D.new()
+		_readout_anchor.name = "ReadoutAnchor"
+		_readout_anchor.position = Vector3(-0.62, 0.40, 0.02)
+		_labels_root.add_child(_readout_anchor)
+		# Static backing plate for the readout \u2014 persists across board rebuilds.
+		_readout_anchor.add_child(_make_backing_plate("ReadoutPlate", Vector3(0, 0, -0.006),
+			Vector2(0.44, 0.44), Color(0.04, 0.05, 0.07)))
 
 	# \u2500\u2500 Lock warning board \u2014 the flashing "GIMBAL LOCK!" alert \u2500\u2500
 	# make_tag gives an opaque board; we grab its face material to pulse alpha.
@@ -313,7 +399,7 @@ func _build_labels() -> void:
 	if _lock_board:
 		_lock_board.name = "LockBoard"
 		_lock_board.position = Vector3(0, 0.05, 0)
-		add_child(_lock_board)
+		_labels_root.add_child(_lock_board)
 		# Cache the dark glass face material (emission disabled) so _process can
 		# pulse its alpha. The frame face also has emission off, so take the
 		# first non-emissive StandardMaterial3D found — either reads as the plate.
@@ -328,10 +414,28 @@ func _build_labels() -> void:
 		_set_lock_visible(false)
 
 	# \u2500\u2500 Info / status board \u2014 one line under the rig, rebuilt on state change \u2500\u2500
-	_info_anchor = Node3D.new()
-	_info_anchor.name = "InfoAnchor"
-	_info_anchor.position = Vector3(0, -0.02, 0.0)
-	add_child(_info_anchor)
+	if printed:
+		_info_anchor = Node3D.new()
+		_info_anchor.name = "InfoAnchor"
+		_info_anchor.position = Vector3(0, -0.02, 0.0)
+		_labels_root.add_child(_info_anchor)
+
+
+## Free the printing and raise it again at the current `evidence`. Only ever called
+## from apply_grid_config, and only after _ready has built once.
+func _rebuild_labels() -> void:
+	if is_instance_valid(_labels_root):
+		_labels_root.queue_free()
+	_labels_root = null
+	_readout_board = null
+	_readout_anchor = null
+	_lock_board = null
+	_lock_mat = null
+	_info_board = null
+	_info_anchor = null
+	_readout_cache = ""
+	_info_cache = ""
+	_build_labels()
 
 
 func _make_backing_plate(node_name: String, pos: Vector3, size: Vector2, col: Color) -> MeshInstance3D:
@@ -449,6 +553,31 @@ func _update_readout_board() -> void:
 	if not _readout_anchor:
 		return
 
+	var lines: Array = []
+	if evidence == "axiom":
+		# The rule, not the reading. Static, so the cache guard builds it once.
+		lines = [
+			"THE RULE",
+			"R = Rx . Ry . Rz",
+			"",
+			"at Y = +/- 90 deg",
+			"Rx and Rz turn",
+			"about ONE axis",
+			"",
+			"3 freedoms  ->  2",
+		]
+		var axiom_key := "\n".join(lines)
+		if axiom_key == _readout_cache:
+			return
+		_readout_cache = axiom_key
+		if _readout_board and is_instance_valid(_readout_board):
+			_readout_board.queue_free()
+		_readout_board = BakedText.make_text_block(
+			lines, Color(0.82, 0.88, 0.98), 0.036, 0.42, 0.010, true)
+		_readout_board.name = "ReadoutBoard"
+		_readout_anchor.add_child(_readout_board)
+		return
+
 	# Build the combined rotation matrix R = Rx * Ry * Rz
 	var rx = deg_to_rad(angle_x)
 	var ry = deg_to_rad(angle_y)
@@ -471,7 +600,7 @@ func _update_readout_board() -> void:
 	var m21 = cx * sy * sz + sx * cz
 	var m22 = cx * cy
 
-	var lines := [
+	lines = [
 		"EULER ANGLES",
 		"X pitch  %7.1f" % angle_x,
 		"Y yaw    %7.1f" % angle_y,
@@ -562,14 +691,48 @@ func _process(delta: float) -> void:
 # ------------------------------------------------------------------
 
 ## Accept configuration from map data.
+##
+## GUARDED, both ways. Nothing is rebuilt unless a value actually CHANGED, and
+## nothing is rebuilt before _ready has built once — the boards and the ring pivots
+## do not exist yet at that point, and an unguarded rebuild here would tear down and
+## re-raise the printing of every shipped placement on every load. When the hook
+## fires early the words are still recorded, and _ready builds straight into them.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.is_empty():
+		return
+
+	var pose_changed: bool = false
+
+	if config_data.has("regime"):
+		var want_regime: String = str(config_data["regime"]).strip_edges().to_lower()
+		# An unknown word keeps the default — a typo must never silently publish a
+		# variant, because a fallback frame looks exactly like a finding.
+		if REGIMES.has(want_regime) and want_regime != regime:
+			regime = want_regime
+			_apply_regime()
+			pose_changed = true
+
+	if config_data.has("evidence"):
+		var want_evidence: String = str(config_data["evidence"]).strip_edges().to_lower()
+		if EVIDENCES.has(want_evidence) and want_evidence != evidence:
+			evidence = want_evidence
+			if _built:
+				_rebuild_labels()
+				pose_changed = true
+
 	if config_data.has("angle_x"):
 		angle_x = float(config_data["angle_x"])
+		pose_changed = true
 	if config_data.has("angle_y"):
 		angle_y = float(config_data["angle_y"])
+		pose_changed = true
 	if config_data.has("angle_z"):
 		angle_z = float(config_data["angle_z"])
+		pose_changed = true
 	if config_data.has("gimbal_lock_threshold"):
 		gimbal_lock_threshold = float(config_data["gimbal_lock_threshold"])
-	_sync_all_sliders()
-	_update_gimbal()
+		pose_changed = true
+
+	if pose_changed and _built:
+		_sync_all_sliders()
+		_update_gimbal()

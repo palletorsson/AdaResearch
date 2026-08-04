@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cncrdl001001"]
 
-[ext_resource type="Script" path="res://algorithms/physicssimulation/newtoncradle/newtoncradle.gd" id="1_cradle"]
+[ext_resource type="Script" path="res://algorithms/physicssimulation/newtoncradle/NewtonCradle.gd" id="1_cradle"]
 
 [node name="NewtonCradle" type="Node3D"]
 script = ExtResource("1_cradle")

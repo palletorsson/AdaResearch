@@ -329,10 +329,13 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("standstill"):
 		var want: String = str(config["standstill"]).strip_edges().to_lower()
 		# Unknown word keeps the default — a typo must never silently publish a variant.
-		if STANDSTILLS.has(want):
+		# Rebuild ONLY on an actual change, and only once _ready has built: _pivot_y is
+		# 0.0 until then and every dimension of the dressing is measured off it. The
+		# unguarded version tore down and re-raised identical hardware on every load.
+		if STANDSTILLS.has(want) and want != standstill:
 			standstill = want
-	if _pivot_y > 0.0:
-		_build_standstill()
+			if _pivot_y > 0.0:
+				_build_standstill()
 
 
 # ═══════════════════════════════════════════════════════════════════════════

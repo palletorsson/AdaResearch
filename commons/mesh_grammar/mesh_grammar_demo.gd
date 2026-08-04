@@ -8,9 +8,134 @@ const GridMaterialFactory = preload("res://commons/primitives/shared/grid_materi
 @export var spacing: float = 1.2
 @export var object_height: float = 0.8
 
+# ═══════════════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `taxonomy` · `chapter`
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# AXIS 1 — WHAT ORDER THE GALLERY CLAIMS ITS FAMILY HAS. The members never change:
+# the same twenty recipes are built, in the same order, from the same seeds, with
+# the same colours and the same names. What changes is whether the display asserts
+# that the family HAS a structure, and whose structure it is.
+#
+# Adopted word for word and value for value from combine_capsule / combine_sphere /
+# combine_portals, and the placement arithmetic is theirs unchanged. This is the
+# same apparatus — a parameter sweep laid out as a gallery — pointed at a different
+# generator, so it gets the same vocabulary rather than a private one that would
+# make two halves of one grammar argue past each other.
+#
+#   table    the lattice — four columns, five rows, position IS the recipe's place
+#            in the taxonomy, every member captioned with its name. The
+#            periodic-table claim: the order is in the objects and the display
+#            merely reports it. THE SHIPPED BUILD.
+#   ladder   the grid collapsed to one ascending file, each member a step higher
+#            than the last. The claim that a grammar is a SEQUENCE going somewhere
+#            — seed, then one rule, then rules on rules — and not a plane.
+#   stack    one column on one footprint. The claim that these are not twenty
+#            objects but ONE object under twenty rules, interpenetrating.
+#   heap     coordinates abandoned and the captions withheld: a pile at the origin
+#            with nothing named. The claim that the classification was ours all
+#            along and the forms never carried it.
+#
+# The captions are the pivot, exactly as on the combine benches. They are the only
+# text in the frame and they are what makes the table a table; `heap` withholds
+# them, which is why that value reads from across a room. It bites hardest here,
+# because "Coral Fingers" and "Barnacle Sphere" are BLUE-GREY LUMPS without their
+# labels — the recipe that separates them was never in the picture to begin with.
+@export_enum("table", "ladder", "stack", "heap") var taxonomy: String = "table"
+const TAXONOMIES: PackedStringArray = ["table", "ladder", "stack", "heap"]
+
+# AXIS 2 — HOW MUCH OF THE GRAMMAR IS PUT UP. Derived, not invented: the twenty
+# recipes below are already grouped by the source's own row headers, four at a
+# time, and each header names a CLASS OF OPERATION — topology, organic, compound,
+# decoration, bridge. That grouping has always been load-bearing (it is why the
+# gallery is four columns wide) and has never been reachable from a map.
+#
+#   all          the shipped twenty, in the shipped order. A grammar as catalogue:
+#                here is everything the system can do, argue with it.
+#   topology     the four that only move faces — extrude, inset, split, and the
+#                bare seed they are all measured against.
+#   organic      the four that make a sphere behave like a body — nodule, coral,
+#                crumple, bud.
+#   compound     the four where rules act on the OUTPUT of rules, which is the
+#                only place a grammar stops being a filter and starts being a
+#                grammar.
+#   decoration   the four that add material the surface did not have — petals,
+#                scales, beads, barnacles.
+#   bridge       the two other systems wired in as operations (L-system, cellular
+#                automaton) plus the compounds that consume them.
+#
+# The word is deliberately NOT `exhibit` (pattern_mill's bolt/unit/operation/
+# catalogue). That axis asks how much of a CLOSED set of seventeen the goods put
+# up; this one asks which of five open classes of operation is on the table, and
+# `bolt` means nothing here. Borrowing the word while dropping half its list would
+# claim a comparability that does not exist.
+@export_enum("all", "topology", "organic", "compound", "decoration", "bridge") var chapter: String = "all"
+const CHAPTERS: PackedStringArray = ["all", "topology", "organic", "compound", "decoration", "bridge"]
+
+## The source's row headers, in source order. Four specimens each — the same four
+## that share a row in the shipped lattice.
+const CHAPTER_ORDER: PackedStringArray = ["topology", "organic", "compound", "decoration", "bridge"]
+const CHAPTER_SIZE: int = 4
+
+## Everything the gallery builds hangs here. Identity transform at the origin, so the
+## specimens keep the world positions they always had; it exists so a token arriving
+## after _ready can drop twenty grown meshes in one call instead of walking children.
+var _gallery_root: Node3D = null
+
 func _ready() -> void:
+	_read_grid_config_meta()
+	_normalise_dna()
 	_create_environment()
 	_create_floor()
+	_create_gallery()
+
+
+## Both words snapped to their allow-list once, here, so every downstream match
+## sees a legal value and a typo in a map token is inert rather than blank.
+func _normalise_dna() -> void:
+	var t: String = str(taxonomy).strip_edges().to_lower()
+	taxonomy = t if TAXONOMIES.has(t) else "table"
+	var c: String = str(chapter).strip_edges().to_lower()
+	chapter = c if CHAPTERS.has(c) else "all"
+
+
+## Grid config arrives twice and by two different routes: GridInteractablesComponent
+## sets config_<key> metadata on the instantiated root and then calls
+## apply_grid_config(), and the capture harness calls apply_grid_config() before the
+## scene enters the tree. Reading the metadata on the way in means the gallery is
+## built once, correctly, instead of built as `table`/`all` and then torn down.
+func _read_grid_config_meta() -> void:
+	var node: Node = self
+	while node != null:
+		if node.has_meta("config_taxonomy"):
+			taxonomy = str(node.get_meta("config_taxonomy"))
+		if node.has_meta("config_chapter"):
+			chapter = str(node.get_meta("config_chapter"))
+		node = node.get_parent()
+
+
+## Config from map_data.json tokens: #taxonomy:heap  ·  #chapter:decoration
+##
+## GUARDED ON CHANGE. All 7 existing placements arrive here with neither key, and
+## the grid reaches this twice for one placement; an unguarded rebuild would tear
+## down and re-grow twenty mesh-grammar specimens on both of those, for nothing.
+## Refuses to act at all before _ready has built once.
+func apply_grid_config(config_data: Dictionary) -> void:
+	var was_taxonomy: String = taxonomy
+	var was_chapter: String = chapter
+
+	if config_data.has("taxonomy"):
+		taxonomy = str(config_data["taxonomy"])
+	if config_data.has("chapter"):
+		chapter = str(config_data["chapter"])
+
+	_normalise_dna()
+
+	if taxonomy == was_taxonomy and chapter == was_chapter:
+		return
+	if _gallery_root == null or not is_instance_valid(_gallery_root):
+		return          # before _ready(); _ready() will build it with these values
+
 	_create_gallery()
 
 # ---------------------------------------------------------------------------
@@ -86,12 +211,22 @@ func _create_floor() -> void:
 # Gallery — one specimen per grammar recipe
 # ---------------------------------------------------------------------------
 func _create_gallery() -> void:
-	var specimens: Array[Dictionary] = []
+	# Everything the gallery builds hangs off one identity-transform node, so a
+	# rebuild can drop it in one call. The specimens keep the positions they always
+	# had — the root sits at the origin with no rotation and no scale.
+	if _gallery_root != null and is_instance_valid(_gallery_root):
+		remove_child(_gallery_root)          # out of the tree before the name is reused
+		_gallery_root.queue_free()
+	_gallery_root = Node3D.new()
+	_gallery_root.name = "Gallery"
+	add_child(_gallery_root)
+
+	var all_specs: Array[Dictionary] = []
 
 	# --- Row 1: Basic operations ---
 
 	# 1. Plain icosahedron (seed reference)
-	specimens.append({
+	all_specs.append({
 		"name": "Seed Icosahedron",
 		"seed": "icosahedron",
 		"color": Color(0.5, 0.6, 0.7),
@@ -100,7 +235,7 @@ func _create_gallery() -> void:
 	})
 
 	# 2. Extruded spire
-	specimens.append({
+	all_specs.append({
 		"name": "Extruded Spire",
 		"seed": "icosahedron",
 		"color": Color(0.9, 0.5, 0.2),
@@ -112,7 +247,7 @@ func _create_gallery() -> void:
 	})
 
 	# 3. Inset pattern
-	specimens.append({
+	all_specs.append({
 		"name": "Inset Pattern",
 		"seed": "icosahedron",
 		"color": Color(0.3, 0.8, 0.5),
@@ -123,7 +258,7 @@ func _create_gallery() -> void:
 	})
 
 	# 4. Subdivided sphere
-	specimens.append({
+	all_specs.append({
 		"name": "Subdivided",
 		"seed": "icosahedron",
 		"color": Color(0.4, 0.5, 0.9),
@@ -136,7 +271,7 @@ func _create_gallery() -> void:
 	# --- Row 2: Organic forms ---
 
 	# 5. Nodule sphere (ceramic photo 1)
-	specimens.append({
+	all_specs.append({
 		"name": "Nodule Sphere",
 		"seed": "sphere",
 		"color": Color(0.6, 0.65, 0.8),
@@ -147,7 +282,7 @@ func _create_gallery() -> void:
 	})
 
 	# 6. Coral fingers (ceramic photos 2-3)
-	specimens.append({
+	all_specs.append({
 		"name": "Coral Fingers",
 		"seed": "sphere",
 		"color": Color(0.55, 0.65, 0.85),
@@ -158,7 +293,7 @@ func _create_gallery() -> void:
 	})
 
 	# 7. Crumpled vessel (ceramic photo 4)
-	specimens.append({
+	all_specs.append({
 		"name": "Crumpled Form",
 		"seed": "sphere",
 		"color": Color(0.9, 0.85, 0.7),
@@ -169,7 +304,7 @@ func _create_gallery() -> void:
 	})
 
 	# 8. Budding sphere with openings (ceramic photo 5)
-	specimens.append({
+	all_specs.append({
 		"name": "Budding Sphere",
 		"seed": "sphere",
 		"color": Color(0.85, 0.8, 0.75),
@@ -183,7 +318,7 @@ func _create_gallery() -> void:
 	# --- Row 3: Compound forms ---
 
 	# 9. Multi-generation coral
-	specimens.append({
+	all_specs.append({
 		"name": "Branching Coral",
 		"seed": "icosahedron",
 		"color": Color(0.9, 0.4, 0.5),
@@ -195,7 +330,7 @@ func _create_gallery() -> void:
 	})
 
 	# 10. Inset + extrude (architectural)
-	specimens.append({
+	all_specs.append({
 		"name": "Inset Towers",
 		"seed": "cube",
 		"color": Color(0.8, 0.6, 0.3),
@@ -207,7 +342,7 @@ func _create_gallery() -> void:
 	})
 
 	# 11. Split + bulge (organic detail)
-	specimens.append({
+	all_specs.append({
 		"name": "Detailed Bulge",
 		"seed": "icosahedron",
 		"color": Color(0.7, 0.5, 0.8),
@@ -219,7 +354,7 @@ func _create_gallery() -> void:
 	})
 
 	# 12. Full noise crumple
-	specimens.append({
+	all_specs.append({
 		"name": "Noise Sculpture",
 		"seed": "sphere",
 		"color": Color(0.3, 0.7, 0.6),
@@ -232,7 +367,7 @@ func _create_gallery() -> void:
 	# --- Row 4: Decoration operations ---
 
 	# 13. Petal flower — petals radiating from upward faces
-	specimens.append({
+	all_specs.append({
 		"name": "Petal Flower",
 		"seed": "icosahedron",
 		"color": Color(0.95, 0.5, 0.6),
@@ -243,7 +378,7 @@ func _create_gallery() -> void:
 	})
 
 	# 14. Scale armor — overlapping pointed scales
-	specimens.append({
+	all_specs.append({
 		"name": "Scale Armor",
 		"seed": "sphere",
 		"color": Color(0.4, 0.7, 0.45),
@@ -255,7 +390,7 @@ func _create_gallery() -> void:
 	})
 
 	# 15. Riveted sphere — edge beads along boundary
-	specimens.append({
+	all_specs.append({
 		"name": "Riveted Sphere",
 		"seed": "sphere",
 		"color": Color(0.8, 0.65, 0.4),
@@ -268,7 +403,7 @@ func _create_gallery() -> void:
 	})
 
 	# 16. Scatter nodules — scattered sub-meshes across surface
-	specimens.append({
+	all_specs.append({
 		"name": "Barnacle Sphere",
 		"seed": "sphere",
 		"color": Color(0.6, 0.75, 0.8),
@@ -281,7 +416,7 @@ func _create_gallery() -> void:
 	# --- Row 5: Bridge operations + compound forms ---
 
 	# 17. L-system tree — fractal branching from upward faces
-	specimens.append({
+	all_specs.append({
 		"name": "L-System Tree",
 		"seed": "icosahedron",
 		"color": Color(0.45, 0.7, 0.35),
@@ -292,7 +427,7 @@ func _create_gallery() -> void:
 	})
 
 	# 18. CA growth — cellular automata tags faces, then extrude alive
-	specimens.append({
+	all_specs.append({
 		"name": "CA Growth",
 		"seed": "sphere",
 		"color": Color(0.7, 0.4, 0.8),
@@ -304,7 +439,7 @@ func _create_gallery() -> void:
 	})
 
 	# 19. Spike scatter — spiky sub-meshes across surface
-	specimens.append({
+	all_specs.append({
 		"name": "Spike Ball",
 		"seed": "icosahedron",
 		"color": Color(0.85, 0.35, 0.3),
@@ -315,7 +450,7 @@ func _create_gallery() -> void:
 	})
 
 	# 20. Petal rosette on bulge — compound decoration
-	specimens.append({
+	all_specs.append({
 		"name": "Blooming Bulge",
 		"seed": "sphere",
 		"color": Color(0.9, 0.75, 0.5),
@@ -326,6 +461,14 @@ func _create_gallery() -> void:
 		"generations": 1
 	})
 
+	# CHAPTER — which of the source's five row-headers is on the table. `all` keeps
+	# every member in source order, so the loop below sees exactly the array it always
+	# saw and the lattice below it is the shipped lattice.
+	var specimens: Array[Dictionary] = []
+	for i in range(all_specs.size()):
+		if _chapter_admits(i):
+			specimens.append(all_specs[i])
+
 	# Layout specimens in a grid
 	var cols: int = 4
 	for i in range(specimens.size()):
@@ -335,19 +478,89 @@ func _create_gallery() -> void:
 		var x: float = (col - (cols - 1) * 0.5) * spacing
 		var z: float = (row - 1.0) * spacing * 1.2
 
-		var node := _build_specimen(spec)
-		node.position = Vector3(x, object_height, z)
-		add_child(node)
+		var cell: Vector3 = Vector3(x, object_height, z)
+		var at: Vector3 = _taxonomy_place(cell, i)
 
-		# Label
+		var node := _build_specimen(spec)
+		node.position = at
+		_gallery_root.add_child(node)
+
+		# Label. `heap` withholds it — that is the whole of what `heap` claims, and it
+		# is where the axis bites hardest, because without its name a mesh-grammar
+		# specimen carries no trace at all of the recipe that made it.
+		if taxonomy == "heap":
+			continue
 		var label := Label3D.new()
 		label.text = spec["name"]
 		label.font_size = 32
 		label.pixel_size = 0.002
-		label.position = Vector3(x, 0.05, z + 0.45)
+		label.position = at + Vector3(0.0, 0.05 - object_height, 0.45)
 		label.rotation_degrees.x = -90
 		label.modulate = Color(0.7, 0.7, 0.8)
-		add_child(label)
+		_gallery_root.add_child(label)
+
+
+# ---------------------------------------------------------------------------
+# CHAPTER — which class of operation is exhibited
+# ---------------------------------------------------------------------------
+
+## The class a specimen belongs to, read off its position in the source array. The
+## row headers above group these four at a time and always have; this reads that
+## grouping rather than restating it, so a recipe added under a header joins its
+## chapter without a second list to keep in step.
+func _chapter_of(index: int) -> String:
+	var band: int = index / CHAPTER_SIZE
+	if band < 0 or band >= CHAPTER_ORDER.size():
+		return CHAPTER_ORDER[CHAPTER_ORDER.size() - 1]
+	return CHAPTER_ORDER[band]
+
+
+func _chapter_admits(index: int) -> bool:
+	if chapter == "all":
+		return true
+	return _chapter_of(index) == chapter
+
+
+# ---------------------------------------------------------------------------
+# TAXONOMY — what order the display claims the family has
+# ---------------------------------------------------------------------------
+
+## Where a member of the gallery stands. Appended after the fact so nothing above it
+## moved: `table` returns the cell the legacy loop already computed, coordinate for
+## coordinate. The other three discard the cell and re-site the member from its index
+## alone. The three formulas are combine_capsule's, unchanged, with object_height
+## added back so the specimens stand on the floor this scene draws and that one does
+## not.
+func _taxonomy_place(cell: Vector3, index: int) -> Vector3:
+	match taxonomy:
+		"ladder":
+			# One ascending file. The two axes of the lattice are spent as a single
+			# ordered run, lifted a step per member, so the grammar reads as a
+			# sequence going somewhere rather than a plane of independent choices.
+			return Vector3(float(index) * spacing * 0.62,
+				object_height + float(index) * spacing * 0.17, 0.0)
+		"stack":
+			# One column on one footprint: the same object, described again and again.
+			return Vector3(0.0, object_height + float(index) * spacing * 0.34, 0.0)
+		"heap":
+			# Coordinates abandoned. The scatter is a HASH of the index, never randf():
+			# a random render path would make each sweep frame a different pile, and the
+			# critic would be measuring the noise instead of the axis.
+			var a: float = _index_hash(index * 2 + 1) * TAU
+			var r: float = spacing * 0.55 * sqrt(_index_hash(index * 2 + 2))
+			return Vector3(cos(a) * r,
+				object_height + _index_hash(index * 2 + 7) * spacing * 0.24,
+				sin(a) * r)
+		_:
+			return cell                    # "table" — the legacy lattice, untouched
+
+
+## Deterministic 0..1 from an integer. Same value every boot, every frame, every
+## machine. Taken from combine_capsule so the two piles are the same pile.
+func _index_hash(n: int) -> float:
+	var s: float = sin(float(n) * 12.9898 + 78.233) * 43758.5453
+	return s - floor(s)
+
 
 # ---------------------------------------------------------------------------
 # Build a single specimen from recipe

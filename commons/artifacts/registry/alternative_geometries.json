@@ -1165,6 +1165,19 @@
    "qfep_connection": "Euclid fails here not by curving space but by bookkeeping: portals stitch disjoint rooms so corridors loop and interiors exceed their shells, and the manager quietly signals each crossing. Consistency turns out to be a rendering convention your walking body can be talked out of."
   },
   "organic_space": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "formation": ["chance", "erode", "accrete", "alternate"],
+     "cast": ["all", "membrane", "crystal", "growth"]
+    },
+    "default": "formation=chance, cast=all - reproduces the shipped build exactly. formation=chance calls the same coin flip at the same two thresholds the hard-coded expressions used (0.5 on the shell's deformation spheres, 0.3 on the tunnel details), and cast=all runs membranes, crystals and growths together as before, so all 13 existing placements are untouched.",
+    "was": "One hard-coded expression, twice: `OPERATION_UNION if randf() > 0.5 else OPERATION_SUBTRACTION` on the shell and the same at 0.3 on the tunnel details. The artifact's own truth line says organic form 'is what remains after noise has eaten away at geometry from within' — but the code was flipping a coin between eating away and piling on, and never said so. formation states the position; erode is the truth line taken literally, accrete is its opposite, alternate is neither chance nor doctrine but rhythm. cast was three generators that always all ran; the word and the all-plus-one-each shape are borrowed verbatim from particle_systems.cast, which asks the same question of its emitters.",
+    "fixture": {"form_seed": 20260803},
+    "fixture_note": "MANDATORY for the sweep. Every draw in this artifact was an unseeded global randf/randi, so without a pinned seed the N variants are N different caves and any bite number measures the RNG, not the axis (the trap CLAUDE.md names for generative artifacts). form_seed now routes all randomness through one RandomNumberGenerator; 0 keeps the shipped fresh-every-run behaviour, so this pin is capture-bench only and no placement sees it.",
+    "framing_note": "The subject is 25 m across (space_size 25,18,25 in the .tscn) and mostly hollow shell. If the sweep reports a small subject share, that is the shell's thin wall against a big frame, not an inert axis."
+   },
    "category": "unknown",
    "complexity": "expert",
    "description": "An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions",

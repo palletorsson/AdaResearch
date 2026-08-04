@@ -805,6 +805,26 @@
   "rotation_gimbal": {
    "category": "transforms",
    "complexity": "advanced",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "regime": [
+      "free",
+      "approaching",
+      "locked",
+      "past"
+     ],
+     "evidence": [
+      "result",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "default": "regime=free, evidence=longhand - free is the one word absent from REGIME_ANGLES, so _apply_regime() returns on its first line and angle_x/y/z keep the 0.0/0.0/0.0 they have always opened at; longhand builds the header plate, the Euler+matrix readout panel and the status line exactly as _build_labels() always built them. Both defaults are deliberate no-ops, so all 9 existing placements render what they rendered before, ring for ring and glyph for glyph.",
+    "was": "five float exports (three ring radii, a tube radius, a lock threshold) - every one of them a size, and none of them the subject. The three Euler angles were plain vars opening at 0/0/0, reachable only from a VR slider, so the singularity the artifact exists to demonstrate had never appeared in a single capture. The runner refused it for NO TURNABLE KNOBS and it was right: the knobs that existed could not change what it argued.",
+    "note": "hand promotion 2026-08-03. regime is the physics-family word (harmonic_motion_demo, spring_demo, bouncing_ball, mass_spring_damper) and fits for the same reason it fits there: the values name where you stand relative to a critical point, and the default is the value with no branch. Here X=+30 and Z=-30 are HELD across approaching/locked/past so only Y moves - two angles that bend the box two ways at 72 deg and one way at 90 deg. evidence takes the corpus's 31-use word but only three of its four values: `trace` is refused because a static orientation has no history to draw, and a value that photographs identically to its neighbour is the info_board failure. Neither axis is time-domain; both are legible in one still."
+   },
    "description": "Gimbal lock demonstrator with 3 nested rotation rings (X=red, Y=green, Z=blue). VR sliders control each Euler angle (0-360 degrees). When Y approaches 90 degrees, X and Z rings align and 'GIMBAL LOCK!' flashes — showing why Euler angles lose a degree of freedom and why quaternions matter. Displays live rotation matrix decomposition.",
    "dev_themes": [
     "geometry",

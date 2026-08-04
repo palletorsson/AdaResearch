@@ -7977,6 +7977,23 @@
    "capacity": "SEE that momentum transfers through a chain — the middle balls are messengers, not movers",
    "category": "physics",
    "complexity": "beginner",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "standstill": [
+      "none",
+      "catch",
+      "chalk",
+      "scale",
+      "tally"
+     ]
+    },
+    "default": "standstill=none - the one word _build_standstill() returns on before adding a single node, so the scene tree is the bare frame, five balls, five strings, the info label and the button panel, exactly as shipped. All 9 existing placements are untouched.",
+    "was": "eight exports - ball_count, ball_radius, string_length, ball_mass, gravity, damping and three colours. Sizes, rates and palette: not one of them changes what the cradle argues, and the runner refused the artifact for NO TURNABLE KNOBS.",
+    "note": "DERIVED from the @export_enum in NewtonCradle.gd, not transcribed - the code shipped the axis in last night's rescue batch and the registry never carried it, so the sweep could not reach it. Values are the code's STANDSTILLS array character for character. THE AXIS IS DELIBERATELY NOT THE SWING: five balls at rest are five identical balls in a row, and a still cannot photograph a rate, so the claim is made in the hardware that survives the stopping - a release catch, chalked arcs, a graduated quadrant, a bead tally. Appearance only: nothing here touches _angles, _angular_velocities or the collision rule, so the conservation law is taught by the same code in all five. A SECOND AXIS WAS DECLINED - see note_declined.",
+    "note_declined": "lift (one|two|three balls raised) was considered and refused. It is the demonstration - lift two and two leave - but it is not photographable: _release_left() sets the angle and _physics_process starts the swing on the next frame, and with string_length 0.6 the quarter period is 0.39 s, so by the time a capture settles the lifted ball is already at the bottom. A sweep of it would publish three finished-looking frames of a cradle mid-swing at three unrelated phases and call the scatter a finding. It would also be inert at the default: standstill=none draws no arcs and no pips, so the count would have nothing to write itself on."
+   },
    "description": "The iconic desktop physics demo: 5 pendulum balls suspended from a frame. Pull one back and release — momentum transfers through elastic collisions, ball-by-ball. Shows conservation of momentum and energy, elastic collision mechanics, and the satisfying click-clack of F=ma made tangible.",
    "dev_category": "physics_foundations",
    "dev_themes": [

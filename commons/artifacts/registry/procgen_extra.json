@@ -10017,6 +10017,33 @@
   "room_grammar": {
    "category": "procedural",
    "complexity": "intermediate",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "grammar": [
+      "organic",
+      "alternating",
+      "symmetric",
+      "golden",
+      "corridor"
+     ],
+     "depth": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "default": "grammar=organic, depth=5 - a no-op on both. organic returns the shipped direction rule verbatim (prefer the longer axis at a 1.3 tolerance, _rng.randf() > 0.5 when near square) and the shipped position rule verbatim (lo + _rng.randi_range(0, hi - lo)), so the RNG is consumed in the same order and the same amount and seed 73 draws the same partition it always drew; depth is the old split_depth export under the family's word, and 5 is the number it shipped with. None of the 8 placements passes a config dict at all - they are bare tokens or rotation/offset shorthand, which the grid routes to overrides and not to config_data - so _apply_artifact_config is never even called for them. apply_grid_config now regenerates only when a value actually DIFFERS and only after _ready has built once.",
+    "was": "no axis. The registry called this a shape grammar and the grammar was not a parameter: the split rule lived as three unnamed decisions inside _bsp_split (prefer the longer axis, 1.3 tolerance, cut anywhere in the legal band), and split_depth was a plain int export with no config key the map layer routes. The only thing about a shape grammar that was ever variable was the seed - which changes the sample, not the rule.",
+    "note": "hand promotion 2026-08-03, refused by the runner for NO TURNABLE KNOBS. The four new productions were written against the partition this file already draws (min_room_size still binds, walls and doors and the area-tint are untouched) and each argues a different BUILDING: alternating cuts strictly by recursion level, the textbook BSP, and comes out as nested bands; symmetric bisects the legal band and comes out equal-roomed, a barracks; golden cuts at 0.382 and comes out proportioned, a villa; corridor cuts hard against the minimum, shaving one min_room_size cell off every division, so the plan reads as a spine with cells hanging off it. Three of the five consume no RNG for the cut position, which is correct - a deterministic production is a fact rather than a sample. THE DEPTH LADDER WAS CHECKED, NOT ASSUMED: the partition was re-implemented in Python and run 400 times per rung, giving mean leaf counts 2.00 / 3.75 / 6.81 / 11.25 / 16.56 for depth 1..5 and zero identical partitions between adjacent rungs, so the ladder does not saturate against min_room_size before it runs out. Declared 1-5 and not 1-6 because 5 is the shipped value and the top of the @export_range. SEED IS DELIBERATELY NOT AN AXIS: a seed ladder is five samples of one rule, which is the picture this artifact already had and the reason it read as un-promoted.",
+    "fixture": {
+     "seed": 73
+    },
+    "kin": "lsystem_dungeon.grammar (warren|spiral|branch|meander) and lsystem_dungeon.depth (1-4) ask exactly these two questions of the other top-down plan generator in the corpus, and both WORDS are taken from there unchanged - which production is run, and how many times. The VALUE lists are not shared and must not be: lsystem_dungeon rewrites a string and its four values name turtle topologies, while this file recursively divides a rectangle and its five name where the knife goes. Calling a BSP production 'meander' would make two artifacts look like siblings that measure alike when the only thing they share is that the result is a floor plan. space_filling_curve_gallery.depth names its rungs (sketch|sparse|standard|fine) because it samples one fixed curve; here, as in lsystem_dungeon, the honest unit is the cut itself, so the rungs are integers."
+   },
    "description": "Shape grammar for architectural floor plans â€” binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.",
    "dev_themes": [
     "generation",

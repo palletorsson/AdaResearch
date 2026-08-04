@@ -6997,6 +6997,30 @@
    }
   },
   "air_music_display_case": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "house": [
+      "white_cube",
+      "wunderkammer",
+      "depot",
+      "forensic",
+      "didactic",
+      "derelict"
+     ],
+     "seal": [
+      "open",
+      "glazed",
+      "vented",
+      "sealed"
+     ]
+    },
+    "default": "house=wunderkammer + seal=open is the shipped case exactly. HOUSES[wunderkammer] holds this artifact's own literals - the frame falls through to the frame_color export, the plinth keeps (0.3, 0.18, 0.1) at roughness 0.8 / metallic 0, and the house declares no band - while seal=open builds no panes at all. All 9 placements render byte for byte what they rendered before.",
+    "was": "A fixed 0.5 m walnut-and-air vitrine: twelve cube_lines at one hard-coded brown, a plinth at three hard-coded material literals, and no glazing of any kind despite the description calling it a glass case.",
+    "note": "`house` is the family word, taken from exhibit_furniture (1077 placements) and exhibit_podium with all six values unchanged - a display case is display furniture. ONE DEPARTURE, deliberate: the legacy default here is wunderkammer, NOT the family's white_cube. This case shipped dark walnut and was never white; defaulting it to white_cube would repaint nine placements to prove a point about vocabulary. wunderkammer also carries no band and no plate here, because the shipped case has neither and a default may not grow one. `seal` is a NEW word, not `guard` and not `disclosure`: guard is one ordered ladder of apparatus between visitor and thing (none|label|fixture|frame|hood|cordon) and only two of its six rungs are buildable on a free-standing cube, while cube_lines - literally this case's Frame node - owns `disclosure` for how much of a SOLID is shown. Neither says the thing that matters here, which is that the contents are AUDIBLE through every value: the glazing is not a containment, it is a claim about containment, and that claim is the only part of this artifact a still can witness. DECLINED: audio_volume_db, the @identity file's declared critical_parameter and the honest centre of the artifact - one PNG per value would be four identical photographs of a silent case. MEASUREMENT WARNING for whoever reads the bite report: the embedded SystemsMusicTest instances a LoopVisualizer whose shader quad is a 6x6 PlaneMesh, 2.1 m after scaling, so the measured aabb_size is 2.1 x 0.66 x 2.1 for a 0.5 m case - the subject is about a quarter of the frame before framing is applied, hence framing 0.3. The same scene's SystemsMusicLooper calls randf() unseeded to fire notes; at four capture frames few or no notes have fired, but a small frame-to-frame difference in the visualizer is NOISE, not the axis.",
+    "framing": 0.3
+   },
    "category": "waves",
    "complexity": "beginner",
    "description": "A 1m glass museum display case with dark walnut wood frame, containing the Air Music spatial audio system. Minimalist Scandinavian design inspired by Ferm Living. Sound is subtle and ambient—notes triggered by movement through space, phasing loops creating evolving texture.",

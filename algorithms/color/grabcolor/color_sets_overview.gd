@@ -17,6 +17,65 @@ const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 const STICKER_SIZE := Vector2(0.195, 0.205)  # X and Z dimensions from grab_paper
 const STICKER_GAP := 0.02  # Gap between stickers
 
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `structure`
+# ═══════════════════════════════════════════════════════════════════
+#
+# WHERE A SET COMES FROM. The twelve grids on this rig are twelve cultural
+# memories: Frida Kahlo, Harlem Renaissance, Bauhaus, Stonewall, Rothko's
+# chapel. Each is a list somebody WROTE, and the list is the whole claim —
+# these colours belong together because a history put them together.
+#
+# The rival claim is older and louder: that a palette is not a memory at all
+# but a consequence, and the wheel already knows it. Give the wheel one hue and
+# it will hand you the rest by construction — the opposite, the neighbours, the
+# triangle, the ladder of one hue's own values. No history required, and none
+# admitted.
+#
+# `structure` is that argument, and the argument runs on the same rig. Every
+# non-named value keeps the palette's DOMINANT hue (the most saturated swatch
+# it owns) and each sticker's own saturation and value, then re-derives the
+# hues by geometry. So Frida Kahlo stays hot and Rothko stays dim — the light
+# survives, the history does not. Twelve sets remain twelve distinguishable
+# sets; what they lose is the reason they were ever those twelve colours.
+#
+#   named          the .tres entry read straight, in the order it was written.
+#                  Byte for byte the shipped build. The claim: a palette is a
+#                  LIST somebody is answerable for.
+#   complementary  two hues, h and h+180 degrees, six stickers each. The set
+#                  splits down the middle and argues with itself.
+#   analogous      one 60-degree arc centred on h. A set that agrees with
+#                  itself — the palette as a neighbourhood.
+#   triadic        three hues at 120 degrees, four stickers each. The wheel's
+#                  most-taught construction, a set by ruler and compass.
+#   monochrome     one hue, twelve times, separated only by the light each
+#                  sticker already had. The claim: hue was never the content;
+#                  value was.
+#
+# Deliberately NOT an axis: how the sets are LAID OUT. grabcolorcollection, the
+# sibling three files over in this same folder, already carries `arrangement`
+# (grid | ramp | ring | stack) for exactly that question, and its ramp and ring
+# already sort by luminance and by hue. A second word for the sibling's axis
+# would split one vocabulary in two.
+#
+# Also NOT an axis, and the one that hurts: what the sticker SAYS. This
+# artifact's truth is about the gap between a colour and its name, so
+# hex | name | both | none is the axis it deserves — and the rig is 6 m wide,
+# so a Label3D on a 0.195 m sticker is a few pixels in any still. The evidence
+# for stage 2 is one PNG per value; an axis that only a reader standing in the
+# room can see cannot be argued for with one.
+#
+# Nothing here rolls dice: the dominant swatch is chosen by max(s*v) over the
+# palette's own colours, so every value is repeatable in a still.
+@export_enum("named", "complementary", "analogous", "triadic", "monochrome") var structure: String = "named"
+
+## Allow-list. An unknown word in a map token keeps the shipped cultural sets.
+const STRUCTURES: PackedStringArray = ["named", "complementary", "analogous", "triadic", "monochrome"]
+
+const ANALOGOUS_ARC: float = 0.167   # 60 degrees of hue, as a 0..1 fraction
+const MIN_STRUCTURED_SAT: float = 0.35  # a grey swatch must still show its new hue
+const MIN_STRUCTURED_VAL: float = 0.18  # ... and must not be black while doing it
+
 @export var palette_resource: Resource
 @export var sets_to_show: int = 12
 @export var colors_per_set: int = 12
@@ -27,13 +86,20 @@ const STICKER_GAP := 0.02  # Gap between stickers
 
 var palette_keys: Array = []
 
+## True once _ready has built the rig once. apply_grid_config must not rebuild
+## before there is anything to rebuild — and must not rebuild at all when the
+## resource was missing and _ready bailed out.
+var _built: bool = false
+
 func _ready() -> void:
 	_ensure_palette_resource()
 	palette_keys = _collect_palette_keys()
+	structure = _normalised_structure(structure)
 	if palette_keys.is_empty():
 		push_warning("ColorSetsOverview: No color palettes available")
 		return
 	create_overview()
+	_built = true
 
 func _ensure_palette_resource() -> void:
 	if palette_resource != null:
@@ -69,17 +135,20 @@ func _get_palette_colors(palette_name: String) -> Array:
 	return result
 
 func create_overview() -> void:
-	# Clear existing children
+	# Clear existing children. remove_child before queue_free, so a rebuild does
+	# not leave the old grids in the tree for the rest of the frame — they would
+	# both collide with the new names and inflate the capture AABB.
 	for child in get_children():
 		if child.name.begins_with("PaletteSet_"):
+			remove_child(child)
 			child.queue_free()
-	
+
 	var num_sets = min(sets_to_show, palette_keys.size())
-	
+
 	for set_index in range(num_sets):
 		var palette_key = palette_keys[set_index]
-		var colors = _get_palette_colors(palette_key)
-		
+		var colors = _structured_colors(_get_palette_colors(palette_key))
+
 		# Calculate set position in grid - columns go in Z direction
 		var row = set_index / columns  # Row advances in X
 		var col = set_index % columns  # Column is in Z
@@ -198,4 +267,85 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Only the declared axis is read; every other key in a map token is ignored.
+	# GUARDED on both sides: nothing rebuilds unless the word actually changed,
+	# and nothing rebuilds before _ready has built once. A map that places this
+	# artifact with no #structure: token never reaches create_overview() twice.
+	if not config.has("structure"):
+		return
+	var want: String = _normalised_structure(str(config["structure"]))
+	if want == structure:
+		return
+	structure = want
+	if _built:
+		create_overview()
+
+
+# ═══════════════════════════════════════════════════════════════════
+# `structure` — APPENDED LAST. Nothing above this line moved except the one
+# call in create_overview() that routes the palette through _structured_colors,
+# which is the identity function at "named".
+# ═══════════════════════════════════════════════════════════════════
+
+func _normalised_structure(raw: String) -> String:
+	var want: String = String(raw).strip_edges().to_lower()
+	if not STRUCTURES.has(want):
+		return "named"    # an unknown word keeps the shipped cultural sets
+	return want
+
+
+## The twelve colours a set actually shows. IDENTITY at "named" — the shipped
+## build returns the .tres list unchanged, which is what keeps the 10 existing
+## placements pixel-for-pixel what they were.
+func _structured_colors(source: Array) -> Array:
+	if structure == "named" or source.is_empty():
+		return source
+
+	var base_hue: float = _dominant_color(source).h
+	var count: int = source.size()
+	var out: Array = []
+	for i in range(count):
+		var original: Color = source[i]
+		var t: float = 0.0
+		if count > 1:
+			t = float(i) / float(count - 1)
+
+		var hue: float = base_hue
+		match structure:
+			"complementary":
+				# Two lanes: the first half of the set, then its opposite.
+				var lane_two: int = int(float(i) * 2.0 / float(count))
+				hue = base_hue + 0.5 * float(lane_two)
+			"triadic":
+				var lane_three: int = int(float(i) * 3.0 / float(count))
+				hue = base_hue + float(lane_three) / 3.0
+			"analogous":
+				hue = base_hue + (t - 0.5) * ANALOGOUS_ARC
+			_:
+				# monochrome: one hue, and the light does all the work.
+				hue = base_hue
+
+		# The palette keeps its own light. Floors only so a near-grey or
+		# near-black swatch still SHOWS the hue it was just given — without
+		# them, monochrome on Rothko Chapel would be twelve black squares and
+		# the axis would read inert for a reason that is not about the axis.
+		var sat: float = maxf(original.s, MIN_STRUCTURED_SAT)
+		var val: float = clampf(original.v, MIN_STRUCTURED_VAL, 1.0)
+		out.append(Color.from_hsv(fposmod(hue, 1.0), sat, val, 1.0))
+	return out
+
+
+## The swatch a palette is most identifiable by — max saturation x value. Chosen
+## rather than colors[0] so the seed is a property of the SET, not of where the
+## author happened to start the list, and so it is stable if the list is
+## reordered. Deterministic: no dice anywhere in this artifact.
+func _dominant_color(source: Array) -> Color:
+	var best: Color = source[0]
+	var best_score: float = -1.0
+	for value in source:
+		var candidate: Color = value
+		var score: float = candidate.s * candidate.v
+		if score > best_score:
+			best_score = score
+			best = candidate
+	return best

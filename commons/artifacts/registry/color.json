@@ -3424,6 +3424,23 @@
    "qfep_connection": "f_order: additive mixing staged live — channels summing to hues before your eyes; RGB shown as the negotiation it is."
   },
   "color_sets_overview": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "structure": [
+      "named",
+      "complementary",
+      "analogous",
+      "triadic",
+      "monochrome"
+     ]
+    },
+    "default": "structure=named returns the .tres palette list unchanged - _structured_colors is the identity function at this value, so all 10 existing placements render the same twelve cultural sets, in the same order, with the same labels.",
+    "was": "Twelve palettes read straight out of color_palettes.tres and laid out as grabbable sticker grids. The .tres already held twenty named cultural sets (frida_kahlo, harlem_renaissance, bauhaus_palette, stonewall_freedom, rothko_chapel ...) and the registry declared none of it - the data was a parameter space nobody had turned.",
+    "note": "The axis is WHERE A SET COMES FROM: a history somebody is answerable for (named), or a construction the colour wheel hands you from one hue (the other four). Non-named values keep each palette's dominant hue (max s*v) and every sticker's own saturation and value, so the twelve sets stay twelve distinguishable sets - the light survives, the history does not. TWO AXES DECLINED. (1) Layout: the sibling three files over, grabcolorcollection, already carries `arrangement` (grid|ramp|ring|stack) and its ramp/ring already sort by luminance and hue; a second word for the sibling's axis would split one vocabulary in two. (2) What the sticker SAYS (hex|name|both|none) is the axis this artifact's truth statement deserves - and the rig is 6 m wide, so a Label3D on a 0.195 m sticker is a few pixels in any still. An axis only a reader standing in the room can see cannot be argued for with one PNG.",
+    "framing": 0.75
+   },
    "name": "Color Sets Overview",
    "lookup_name": "color_sets_overview",
    "description": "Interactive color set grabber — explore color families, hue relationships, and palette structures through physical manipulation.",

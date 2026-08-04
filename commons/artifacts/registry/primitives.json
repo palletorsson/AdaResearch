@@ -9987,6 +9987,24 @@
    "qfep_connection": "A cube stripped to four walls with corners mitred at 45° like picture framing, then rotated so the missing faces point sideways: enclosure along one axis, invitation along the other. A frame doesn't contain — it nominates a direction as the view."
   },
   "hole_with_cones": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "cordon": [
+      "cones",
+      "tape",
+      "barrier",
+      "none",
+      "covered"
+     ]
+    },
+    "default": "cordon=cones is a no-op. _build_scene still lays the ground with the hole, then places three traffic cones (same TAU/3 spacing, same PI/6 offset, same cone_distance, same rotation.y = angle + PI, same trafficcone.tscn), then builds the four ground collision boxes, in that order; the only change is that the cone call now sits behind `match cordon:` with cones as the first case and the export default. All 10 placements (10 direct interactable tokens in 10 maps by direct count, none of which passes a config key, plus one curation_station bay that names it in an artifacts list) are unchanged. apply_grid_config is NEW and reads exactly one key: it returns before touching anything unless `cordon` is present AND names a different value than the one already built - which matters because curation_station places this artifact in an Ontological-distance bay and calls apply_grid_config with framing keys this object has never heard of.",
+    "was": "four exported floats - ground size, hole radius, ground colour, cone distance - no apply_grid_config at all, so every config key a map could send was silently discarded, and the warning was welded to the pit: three cones or three cones.",
+    "note": "The hole is the artifact; the cones are the SPEECH ACT about the hole, and they were fused to it. A hazard is not what is missing but what the surrounding matter has been made to announce, and the object could make only one announcement. cones is the shipped site: portable, provisional, stackable, a warning that expects to be taken away again. tape draws the perimeter and stops nobody - a line, not an obstacle, the rest left to your judgement. barrier is the warning become a wall: it no longer addresses your judgement, it removes the choice, and safe and permitted stop being separate things. none is the control case - the danger entirely real and saying nothing, the floor reading as floor until you are in it, which is what proves the other four were speech rather than geometry. covered is the most common answer on a real site and the most double-edged: the pit is not declared but sealed, the ground reads whole, and the absence has been made invisible rather than safe. Marking and concealing turn out to be the same gesture taken one step further.",
+    "kin": "`warning` (force_vortex, path_cube, path_wedge and eight more: none|stain|cage|beacon|shroud) asks this exact question and was declined, because the list cannot transfer character for character: the shipped default here is a specific piece of real-world equipment, cones, which is not in that list, and the default has to reproduce the pre-change behaviour. Taking the word with a different list would put two incompatible value sets behind one name, which is the state `presence` got into. `guard` (library_rack, exhibit_vitrine, exhibit_furniture: none|label|fixture|hood|cordon) holds cordon as one of its VALUES, a vitrine's barrier among four other things a display can do; here the cordon is the whole speech act rather than one option inside it, so it is the axis name. Nearest in spirit is you_are_here's `deixis`, promoted the same day - both artifacts are about what a sign claims - and the values deliberately do not rhyme, because one addresses a body and the other marks a pit.",
+    "harness_note": "The subject is a 4 m ground plane and the cordon occupies the middle metre of it, so a whole-AABB fit will dilute the difference; if the tiles read faint, crop to the middle before calling the axis inert - none and cones differ by three cones on an otherwise identical 4 m square. covered is the one value that also changes the ground reading (the pit disappears) and is therefore the strongest tile; barrier is the next. tape and barrier carry no collision by design - they are declarations, and the artifact has always been an environment piece you can walk through the props of - while covered DOES add a collision plate, because a picture of sealed ground that you fall through would be lying in one sense and telling the truth in the other."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Ground plane with circular hole and 3 traffic cones around it. Construction site warning setup.",
@@ -21905,6 +21923,29 @@
    "qfep_connection": "Three points, and suddenly there is an *inside*: the first shape that encloses, the minimum fence. Drag its vertices through equilateral, right, and scalene and feel identity survive deformation — the triangle is where position becomes area, and the plane gets its atom."
   },
   "parasol_triangle": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "sidedness": [
+      "two_tone",
+      "flat",
+      "inverted",
+      "split"
+     ],
+     "convention": [
+      "none",
+      "normal",
+      "winding",
+      "both"
+     ]
+    },
+    "default": "sidedness=two_tone + convention=none is a no-op. _build_triangle still emits the front face v0,v1,v2 with triangle_color_front and normal +Z and then the back face v1,v0,v2 with triangle_color_back and normal -Z, in that order, through a _face() helper that makes exactly the set_color / set_normal / three add_vertex calls the inline code made; material, tilt, stick, node names and build order are untouched, and convention=none adds no child at all. All 8 placements (8 map_data.json files by direct count, none of which passes a config key) are unchanged. apply_grid_config keeps its old contract too: height, size, tilt and color still set the field and still rebuild nothing, exactly as before, so the only thing that can now tear a placed parasol down is a DNA axis whose value actually differs from the one already built.",
+    "was": "seven exported floats and colours, and no way to change what the object argues. The double-sided scheme - the artifact's entire subject - was hard-coded as two literal add_vertex runs, and apply_grid_config set four fields that no code ever re-read afterwards, so all eight placements were identical and could not have been otherwise.",
+    "note": "A triangle is three points IN AN ORDER, and that order is the only thing that gives a flat sheet a front and a back. This parasol exists to make that visible and could previously make the case one way only. sidedness is what the surface claims: two_tone is the shipped flag, flat withdraws the claim entirely (one neutral colour on both faces - what a triangle looks like when nobody has decided which way it faces, and the honest opposite of the artifact's own thesis), inverted keeps the geometry and reverses the naming, which is the point that front and back are a convention rather than a property, and split brings the two colours onto ONE face along the median so facing stops being a secret you have to walk around to learn. convention is the notation the claim is written in: graphics states orientation twice, as a surface normal and as a winding order, they encode the same fact, neither is visible, and the shipped parasol drew neither and asked you to take the colour on faith. normal stands the vector off the face; winding puts arrowheads on the rim in v0 -> v1 -> v2, which is the traversal that decided which face was the front in the first place; both lets the two languages be compared.",
+    "kin": "`facets` (grab_trihedron, sphere_high, sphere_low: shown|hidden|only) was considered and declined - it asks whether a tessellation is legible, not which side of a surface you are on. `handedness` (VectorCrossProduct: right|left|both) is closer in subject and still wrong: it names the chirality of a coordinate frame, and this sheet has no frame, only two faces. So both words are the artifact's own. `attach` (point: float|stake|plate) and `mode` (request_note: float|plate|stake|decal) govern how an object meets the world it sits in; the parasol's mounting is not in question here and neither list transfers.",
+    "harness_note": "All four sidedness values differ head-on by design - full pink, full neutral, full blue, and a half-and-half face - so a front-ish camera separates them; a rear-only angle would collapse two_tone and inverted into each other and read as a dead axis when the axis is the thing being photographed. convention=normal and convention=both stand an arrow about 0.32 x triangle_size off the plane, which grows the AABB along +Z and will pull a fit-by-diagonal camera back on those two tiles; the sheet is 0.51 x 0.51 x 0.01 measured, so consider dna.framing if the tiles disagree on scale."
+   },
    "category": "primitives",
    "complexity": "simple",
    "description": "A triangle mounted on a thin stick like a parasol. Double-sided (pink front, blue back) to show orientation. Place multiples for a forest of triangle flags.",
