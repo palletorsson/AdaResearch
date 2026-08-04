@@ -3512,6 +3512,31 @@
    "qfep_connection": "Rather than bring its own stage, it hunts the map's GridMultiMesh through the parent hierarchy and plays its array lessons on the floor already under your feet — corner, row, column, snake, spiral. Indexing taught by possession: the level geometry becomes the array being indexed."
   },
   "distribution_sampler": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "law": [
+      "uniform",
+      "gaussian",
+      "poisson",
+      "exponential"
+     ],
+     "evidence": [
+      "census",
+      "sample",
+      "anecdote",
+      "none"
+     ]
+    },
+    "fixture": {
+     "evidence": "census",
+     "auto_sample": false
+    },
+    "default": "law=gaussian, evidence=none - gaussian IS the export default of `distribution`, and at that word _ready assigns nothing at all, so anything the scene or a map already set survives; evidence=none constructs no generator and lays down no draws, leaving the histogram empty exactly as it has always been found. All 10 placements are bare or rotation/offset tokens, so none of them can reach either axis.",
+    "was": "a sampler whose four distributions were reachable only by pressing a VR button or a number key in-session, and whose histogram was always empty at the moment anyone looked - the axis existed in the code and nothing outside the room could turn it",
+    "note": "the fixture is the whole reason this is measurable: the histogram builds at 50 samples/second, so a still 0.35s after _ready catches an empty chart. evidence=census pre-seeds 1000 deterministic draws (its own generator, seeded by evidence_seed - the live sample_seed and the global stream are untouched) and auto_sample=false stops live unseeded draws polluting the frame. When `evidence` is itself swept the per-variant value overrides the fixture, which is why its list is declared richest-first: a 4x4 cross exceeds the sweep's default --max=9 and the sweeper trims from the END of each list, so an ascending list would have crossed all four laws against an empty chart. Same set, same code, informative under truncation - run --max=16 for the full cross. Deliberately not promoted: samples_per_second and auto_sample as axes (a rate is invisible to a still), and the per-law shape knobs, which tune ONE law rather than choosing between laws."
+   },
    "category": "emergence",
    "complexity": "beginner",
    "description": "Sample from various probability distributions — uniform, Gaussian, Poisson, exponential — and watch the histogram build in real-time. Compare theoretical curves with empirical results, experiencing the law of large numbers as shapes converge.",

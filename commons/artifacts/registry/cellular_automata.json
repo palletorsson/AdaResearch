@@ -3955,7 +3955,37 @@
     2,
     1,
     2
-   ]
+   ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "rule": [
+      "reinforce",
+      "explore",
+      "compact",
+      "strand"
+     ],
+     "wake": [
+      "hold",
+      "fade",
+      "none"
+     ]
+    },
+    "default": "rule=reinforce, wake=hold - reinforce is survive 4-6 / born 5-7 and hold is 10 states, which composes to \"4-6/5-7/10/M\", the exact string MoldNetwork.tscn already carries. And the composition does not even run at defaults: _ready writes rule_string ONLY when an axis is off its default, so at the shipped values not one byte is assigned and the scene's own field stands. apply_grid_config regrows only when a value both validates and differs, and none of the 27 placements passes a rule or wake key, so all 27 rooms are unchanged.",
+    "was": "no axis at all - the runner refused this token for NO TURNABLE KNOBS. The script has fifteen exports, but they are grid dimensions, cell size, tick rate, two colours and a gradient, and the one field that carries the whole argument, rule_string, is a single opaque slash-separated string set as a constant in the .tscn. apply_grid_config was literally `pass`, so a map token could not reach anything at all.",
+    "note": "hand promotion 2026-08-03. A slime mould is a law about how much company a filament needs. survive/born decides whether the colony commits to thick reinforced tube or pushes thin exploratory strand; the state count decides how much of everywhere-it-has-been is still standing, because a cell that fails survival does not vanish - it walks up the dying states, rendering the whole time and refusing rebirth until it reaches zero. So `wake` is simultaneously the visible mass of spent tissue and the refractory period behind the front, which is exactly the kept-versus-pruned question and is spatial, not temporal: at any fixed generation hold shows the accreted body and none shows only the live froth. NOT cell_size or grid_size, which are the artifact's size and not its argument. THE FRONT ADVANCES ONE CELL PER GENERATION UNDER EVERY VALUE (birth needs a live neighbour), so the silhouette stays the same size between values and only the texture and density of the shell change - which is what makes these four frames comparable pixel to pixel instead of the same picture at four magnifications.",
+    "shares_vocabulary_with": "complexity_pattern and lifeform_walker - `rule` is their word for exactly this slot, the transition law, and it is taken deliberately rather than invented. The VALUE LIST is NOT shared and cannot be: those two are 2D Life-family rules over 8 neighbours, this is a 3D Generations rule over 26, a different alphabet in which B3/S23 is instantly extinct. So the word carries across and the numbers must not - these three should NOT be compared as a family measurement.",
+    "rule_derivation": "the bands were derived, not guessed, because the failure mode of an invented CA rule is a blank frame that reads as an inert axis. The seed is a 7^3 block at density 0.5, so a dead cell one step outside a face sees Binomial(9, 0.5) live neighbours: P(born) is 0.73 for explore (3-6/4-7), 0.48 for reinforce (4-6/5-7, shipped), 0.25 for compact (5-7/6-8) and 0.41 for strand (2-4/5-6). All four keep the front moving, which is the check that none photographs as an empty grid. strand is the one that is not merely a density step: surviving only on 2-4 neighbours means cells die wherever they are crowded, so what persists is wiry and isolated rather than a shell. NOT MEASURED - no capture was run in this pass, and this arithmetic is the evidence offered in its place.",
+    "shared_script_warning": "CellularAutomata3D_Flexible.gd is shared. StructureGrowth.tscn authors \"6-8/6-8/3/M\" and biome_paint_dispatcher._spawn_fungus hands per-cell `rule=` overrides in before add_child. Composing rule_string unconditionally in _ready would have silently overwritten both - the biome's whole fungus kingdom included. That is why the compose is gated on an axis being off its default, and why any future edit here must keep that gate. SIDE EFFECT: check_dna_declarations now lists `structure_growth: rule, wake` as promoted-in-code-undeclared, because that scene runs the same script. Do NOT close that line by copying this block into structure_growth - its authored rule is the Builder rule \"6-8/6-8/3/M\" and these four bands were derived from the mould's seed density, so they would be a fake genome for it. If it deserves an axis it needs its own bands.",
+    "fixture": {
+     "growth_seed": 20260803,
+     "generation_interval": 0.01,
+     "max_generations": 14
+    },
+    "fixture_note": "three knobs, all already in the file, all defaulting to shipped behaviour so none of them is an axis. growth_seed pins the soup: it defaults to -1, which randomizes, and without it four rule variants are four different organisms and the sweep measures the RNG. The other two make the frame a KNOWN GENERATION rather than whatever the 1.1 s settle happens to land on - at the shipped 0.1 s interval the shot falls around generation 11 and moves with frame timing; at 0.01 s the automaton reaches generation 14, pauses, and then sits frozen for the rest of the settle, so every variant is photographed at the same age. 14 keeps the front around 10 cells from the centre of a 30-cell grid, well clear of the boundary layer _step refuses to touch.",
+    "measurement_risk": "capture_anchor is deliberately NOT in the fixture. It stands an invisible box around the whole 30^3 volume - a 6 m cube - while the growth at generation 14 spans maybe 2 m, so it would shrink the subject rather than frame it. The sweep's _subtree_aabb already measures MultiMeshInstance3D, so this artifact has a real box without it. The residual risk is that MultiMesh AABB covers the whole allocated buffer, and unset instances sit at the node origin, which is a CORNER of the volume - so the measured box may be inflated toward the corner and the mould framed off-centre. If the critic reports faint, check subject % and consider a framing hint before re-cutting either axis."
+   }
   },
   "percolation_ca": {
    "category": "emergence",
@@ -4932,6 +4962,21 @@
    "qfep_connection": "the substrate mount — a single cell that plays rule-patterns through the map's own floor grid; infrastructure that lets the room itself be the automaton, never dominant as an object."
   },
   "structure_growth": {
+   "dna": {
+    "axes": {
+    "rule": [
+    "reinforce",
+    "explore",
+    "compact",
+    "strand"
+    ],
+    "wake": [
+    "hold",
+    "fade",
+    "none"
+    ]
+    }
+   },
    "category": "emergence",
    "complexity": "beginner",
    "description": "3D structure growth simulation.",

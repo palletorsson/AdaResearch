@@ -283,6 +283,25 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.188276Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "repose": [
+      "dark",
+      "pilot",
+      "ghost",
+      "lit"
+     ]
+    },
+    "default": "repose=dark - the last line of _ready was `_blade_mesh.visible = false`, and the dark branch does exactly that and nothing else: blade_length, blade_emission, alpha 0.85, UNSHADED, hidden, hum at -80 dB, which is the state _build_blade already left behind. _ignite now sets length, emission, alpha and shading explicitly, and every one of those assignments is a no-op under dark because nothing has touched them - so a picked-up sword is identical to before under every value. apply_grid_config restyles only when a repose key both validates and differs, only after _ready, and never mid-swing; none of the 22 placements passes one, so all 22 keep a dark blade.",
+    "was": "no axis at all - the runner refused this token for NO TURNABLE KNOBS. The nine exports are two lengths, two radii, two colours, an emission scalar and three audio numbers: dimensions, decoration and sound. The one decision that decides what this object IS when you look at it - whether there is a line at all before a hand arrives - was a hard-coded `visible = false` with no way to reach it.",
+    "note": "hand promotion 2026-08-03. STANDALONE THIS ARTIFACT IS A HANDLE. Ignition is bound to the picked_up signal and there is no player during a capture, so every still ever taken of laser_sword shows a 14 cm cylinder and a copper disc inside a 0.95 m bounding box - about 1.8% of the frame at default framing, and the blade the whole piece is about is not in the picture. That is what made this token look unpromotable. The axis is that assumption itself: dark says direction is produced by a body and the object alone is only a grip; pilot says the tool idles, asserting its origin and no further; ghost draws the line full length but cold, geometry without commitment; lit says the vector is a fact about the world rather than about the arm. It is the request_note move - the promotion is about how the thing attaches to the world, not about its size - and the axis doubles as its own fixture, since three of its four values are the only way a blade has ever appeared in a still of this artifact.",
+    "declined_second_axis": "the blade taper (top_radius = blade_radius * 0.3, a tip on a directed segment) and the copper guard (the boundary where the body stops and the vector begins) are both real arguments and both were refused on measurement grounds. A guard axis is invisible at repose=dark, which is the default the cross-product pairs it with, and the guard is a 58 mm disc on a 950 mm subject - well under a percent of frame, the dilution class. A taper axis moves 2.4 mm against 8 mm at the far end of an 800 mm blade. Either would have produced a finished-looking row of near-identical tiles. One axis that bites is the honest result.",
+    "declined_time_domain": "swing speed modulating pitch and glow, and the layered hum itself, are the artifact's other live parameters and both are invisible to a still by construction: one is audio, the other depends on a hand moving the object. Named here so a later pass does not rediscover them and declare them.",
+    "framing": 0.65,
+    "framing_note": "arithmetic, not measured. The AABB is 0.06 x 0.95 x 0.06, diagonal 0.954, and capture_config_sweep fits by DIAGONAL - radius / tan(FOV/2) * PAD - which puts a thin tall subject at 2.96 m with a 1.81 m visible height, so the blade covers about 1.8% of the frame area and a real change reads as decoration. 0.65 brings the camera to 1.93 m for a 1.18 m visible height: the 0.95 m sword fills about 80% of frame height with margin, and the blade rises to roughly 4% of frame area. The camera is placed once from the union of all four variants, so the values stay comparable pixel to pixel."
    }
   },
   "grabbable_line": {
@@ -350,6 +369,25 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.188276Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "grain": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ]
+    },
+    "default": "grain=solid - PRESERVES all 16 placements exactly. _build_grain() returns on the first line when grain is solid: no node is added, no property is written, nothing is hidden, and _layout_parts() walks an empty array. The rod, the two endpoint beads, the label, the capsule collider and the glitch loop are the same objects in the same places as before promotion. The metadata read added to _ready only fires when a token carries #grain:, and apply_grid_config now returns without touching anything when the word has not moved - which is what cluster_resolver and curation_station hand it.",
+    "was": "one unbroken rod with two endpoint beads, in sixteen rooms, with no way to ask what a line is made of - which is the artifact's own truth line ('a line is one thing made of two points') standing as its own contradiction",
+    "note": "hand promotion 2026-08-03, after the runner refused it as having no turnable knobs. It has exports, but they are a length, a thickness, a radius and four resistance numbers: sizes self-cancel under an AABB-fitted camera and the resistance is a RATE - jitter, a detuning noise loop, haptics - which a still frame cannot photograph. So the sizes and the rate were demoted and the question underneath was built instead. Every rung is standing geometry with no randf in it, and every rung keeps the same +/-line_length/2 envelope, so only the mass inside the silhouette changes.",
+    "shares_vocabulary_with": "grain is taken character for character from cube_scene and prism_block - solid|split|quartered|lattice|shell, the project's one word for how finely a body is made of parts - and the five rungs land exactly on a 1-D body: split is one cut, quartered is three, lattice is eleven on a regular pitch, and shell is the boundary, which for a segment is literally its two endpoints (d[a,b] = {a,b}) as the cube's shell is its twelve edges. The siblings should measure alike on solid->split, which is one gap appearing in one body in both cases.",
+    "declined": "readout (none|numeral|gradation|lattice), carried by the siblings line, line_interface and xyz_slider_plate. Rungs 0 and 1 fit - this artifact prints '%.2fm' over its midpoint - but rung 3 does not. On line.gd, lattice means the privileged whole numbers on the LENGTH scale, because its resistance fires on the distance between two dragged handles. Here resistance fires on global_position: the whole numbers this artifact privileges are stations in the ROOM, not readings on a rule. Painting a hot collar on the length scale would put the law where it does not live, so the word was declined rather than half-taken.",
+    "measurement_risk": "a thin subject. The rod is 16 mm across on a 240 mm span while the two endpoint beads are 36 mm and emissive, so the beads own most of the bright pixels and every divided rung changes only the rod. Expect solid->split to read faint by dilution rather than by inertness; crop-recheck before believing it. shell (rod gone, beads only) and lattice (twelve ticks) are the rungs that change the silhouette, and they are the axis's real evidence."
    }
   },
   "code_evolution_screen": {
@@ -7054,6 +7092,23 @@
    "qfep_connection": "Handle height IS fold progress — an inverse_lerp puts topology in the wrist, and the cube unfolds exactly as far as you lower your hand. But release, and the 0.5 threshold decides for you: the continuum you were scrubbing snaps to flat or folded the moment the grip ends."
   },
   "folding_past": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "recession": [
+      "nested",
+      "collapsed",
+      "abreast",
+      "strata"
+     ]
+    },
+    "default": "recession=nested - a no-op. `nested` has no case in the match block: it IS the arrangement computed above it, line for line what shipped (frame_progress from the clock, scale = pow(scale_ratio, p * frame_count), z = z_base_offset - p * 4.5, alpha 0.9 -> 0.3), and _ready's new set_process(recession == 'nested') resolves to set_process(true) on an object that was already processing. apply_grid_config returns immediately unless a config actually names 'recession' and names something different. All 28 placements (29 tokens across 29 maps by direct count) pass no config at all, so every one of them animates exactly as before - same MultiMesh, same instance count, same AABB, same auto-ground lift.",
+    "was": "seven exports and not one of them an argument: frame_width, frame_height, frame_count, frame_thickness, cycle_duration, scale_ratio, z_base_offset, frame_color. Every one is a rate, a size or a colour - a map could make the fold faster, bigger or bluer, and could not make it say anything else. Two of them (cycle_duration, and scale_ratio only through the animation) are time-domain, which is why this loop's one-still-per-value evidence would have photographed six identical nests at six speeds. That is the info_board mistake, and it is what 'no turnable knobs' was actually reporting: there were knobs, and none of them turned toward a different claim.",
+    "note": "The axis is the file's own truth line made switchable. 'The past does not vanish - it recedes, each moment nesting inside the one that follows' is a CLAIM about the shape of time, and the artifact could only ever assert it. `abreast` stages the figure the nesting was built to refuse (succession without containment: the timeline, every moment the same size, none inside another). `strata` stages the third figure (deposition: the past underneath rather than behind, newest layer on top). `collapsed` drives the nest to its own limit - ten frames on the innermost term, one small dim rectangle with nothing legible behind it. Age still fades by index in all four, so what changes between the tiles is the arrangement and only the arrangement.",
+    "kin": "`fold` was considered and declined. polyhedron_nets_cube took it two batches ago for animated|closed|hinged|flat, and the value list cannot transfer: there is no hinge in this object and nothing closes into a solid, so `hinged` and `closed` would be values named after a mechanism the artifact does not have. Taking the word without its answers is the dishonest half of a shared vocabulary, so the word here is the file's own subject - recession - with its own four values. `posture` (qfep_formula_3d: line|stack|arc|ring) was declined for the same reason in reverse: it asks how terms are laid out, and this asks what shape TIME takes, which is not a layout question even though it is answered with a layout.",
+    "harness_note": "The subject is a MultiMeshInstance3D, which the capture's _get_combined_aabb does handle (unlike the MeshInstance3D-only case in CLAUDE.md) - but the frames sit at z = -8.0 to -12.5 with the node origin at 0, so the fitted AABB is a long box whose centre is ten metres from the origin. Check the first tile before trusting a low bite number, and reach for dna.framing rather than for a `layers = 0` anchor: grounding measures the same AABB, so an anchor would move all 28 shipped placements. `strata` stacks UPWARD from the nested base plane on purpose, so its min_y matches nested's and auto-ground lands it identically; `collapsed` is genuinely smaller and will ground lower, which is honest. One thing to expect before reading the numbers: capture_config_sweep places ONE camera from the union of all four variants, and `abreast` (about 2.8 frames wide) and `strata` (about 2.8 frames tall) both enlarge that union, so the `nested` and `collapsed` tiles will sit smaller in frame than a single-value capture would show. The silhouettes are different enough that this dilutes the bite rather than inventing one, but a low `collapsed` number should be crop-rechecked, not believed."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Animated accordion fold representing time/the past collapsing into the present.",
@@ -23169,6 +23224,33 @@
     1,
     1
    ],
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "walk_style": [
+      "meander",
+      "straight",
+      "spiral",
+      "arc"
+     ],
+     "line": [
+      "active",
+      "medial",
+      "passive"
+     ]
+    },
+    "default": "walk_style=meander, line=active - the shipped picture exactly. line=active takes the identical code path _walk_path always took and builds no extra geometry, and walk_style=meander is the branch the existing match already fell through to, so all 20 placements are bit-identical. None of the 20 passes a config key.",
+    "was": "walk_style was already an export and already this file's own declared critical_parameter, but as a free String nothing enumerated: the sweep read the artifact as having no turnable knob, no map ever named a value, and 20 placements all showed the same open ochre meander. The artifact argues a line is a biography and shipped exactly one biography. apply_grid_config also tore down and rebuilt on any call, including a call that changed nothing.",
+    "note": "walk_style says what the point DID - meander (three summed sines, no goal), straight (the collapsed route that learned nothing on the way), arc (one decision made once), spiral (the walk that keeps turning inside its own territory). line says what the resulting mark IS, taken from the Pedagogical Sketchbook's own opening taxonomy rather than invented: active is the line that goes for a walk, the only kind whose two ends are not the same place; medial is the line circumscribing a figure, the same walk closed on itself so it becomes a boundary instead of a journey - and because the walk's deviation is spent on the radius, a medial meander is not a circle, it is a walk that came back; passive is the line as a plane's edge, where the trail keeps its exact geometry and a surface is raised to the floor beneath it, so the same points read as the top edge of something. All three are one silhouette apart: open string, closed ring, filled field. Everything remains deterministic summed sines - no randf, no noise - which the Primitives sequence requires.",
+    "declined": "Speed, hold, loop and how-far-the-head-has-got are this artifact's most conspicuous parameters and all four are declined, because the evidence is ONE STILL and a still cannot tell 0.32 from 0.9. Promoting them would have produced a finished-looking experiment answering nothing. 'Is the point that made it still present' was declined for the opposite reason: the head is a 0.04 m sphere and removing it changes too few pixels to read as anything but noise. Both shipped axes are properties of the trail as a standing object, so they survive the shutter.",
+    "fixture": {
+     "walk_speed": "40.0",
+     "loop": "false"
+    },
+    "fixture_why": "A capture taken a third of a second after boot catches the walk barely started: the whole trail present but dim, the head at the far left. Running the walk to completion inside the settle and then not looping holds the finished line, fully lit, indefinitely - which is the axis's subject (the trail as a standing object) rather than an accident of shutter timing. loop is parsed from a string inside _read_metadata_overrides, never assigned to the typed bool export directly, which is the trap that eats fixture flags before _ready.",
+    "rebuild_guard": "apply_grid_config compares a signature of every value _build reads and returns early when they match, so a no-op reconfigure no longer restarts the walk. Animation values (walk_speed, hold_seconds, loop) are deliberately absent from that signature - _process honours them live and must not throw the geometry away mid-walk."
+   },
    "include_in_map_data": true,
    "lookup_name": "klee_walking_point",
    "map_ready": true,
@@ -23267,6 +23349,24 @@
    "qfep_connection": "The point given a radius and aimed at solid matter becomes the absence that defines the form. Subtraction as meaning - the first boolean."
   },
   "you_are_here": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "deixis": [
+      "words_and_mark",
+      "words_only",
+      "mark_only",
+      "arrow",
+      "plan_fragment"
+     ]
+    },
+    "default": "deixis=words_and_mark - a no-op. It builds the FloorText node (same TextMesh, same font 96, same pixel_size 0.004, same -PI/2 about X, same y = 0.012) and then the Ring node (same torus, same 48 rings, same y = 0.008), in that order, which is exactly what _build did before the split into _build_words / _build_ring; show_ring is still consulted, so a placement that had turned the ring off still has it off. apply_grid_config now compares the values the build reads before and after applying the config and returns without touching the tree when nothing moved, so curation_station's framing keys no longer tear the decal down and put an identical one back. All 28 placements (29 tokens across 29 maps by direct count) pass no config, so none of them changes by a pixel.",
+    "was": "the sentence and the mark welded together in one _build. text, text_color, font_size, text_scale, show_ring, ring_radius, ring_color and pride_gradient were all exported, and every one of them changed how the decal LOOKED; none of them changed what it claimed. show_ring came closest and is a bare bool that no registry declared, so the sweep could never reach it.",
+    "note": "Everything this object is made of is deixis: four words that mean nothing until a body stands over them. The wayfinding decal is a two-part speech act - a claim ('here') and a mark that gives the claim a referent - and the two halves were inseparable. words_only is the claim with nothing marked: still true, and it now says nothing, which is the purest case. mark_only is the corporate blue dot: you are located and nobody addresses you. arrow makes the pointing literal by pointing at the sentence, the only thing a sign like this can indicate. plan_fragment moves the whole scene inside a drawing of the room - walls, a partition, the doorway you came in through - which is the mall-map move, where finding yourself means finding your dot on someone else's plan. That last one is the value the artifact's own truth line was written for: 'the friendliest face of algorithmic capture'.",
+    "kin": "`presence` was considered and declined. magritte_pipe asks the same question two batches ago - which of the two terms, the sign or the thing, is actually in the frame - but its answers are pipe_and_words|pipe_only|words_only|empty_frame|picture_of_picture and a pipe is not a floor decal, so the list cannot transfer character for character. dark_sphere already holds `presence` with a third list (witness|hush|beacon|eclipse), which is the state a word gets into when it is reused for its shape instead of its answers. So the word here is the artifact's own: deixis, which is what a wayfinding sticker IS. Only the middle values rhyme with magritte's on purpose - words_only means the same thing in both files, a sign with its referent withheld.",
+    "harness_note": "Flat geometry lying on the floor: fit-by-diagonal will pull the camera far back for plan_fragment (about 4 x 2.9 m of bars) and close in for the others, so read the bite with that in mind and set dna.framing if the tiles disagree on scale. pride_gradient is deliberately NOT an axis - it is a hue cycle in _process, invisible to a still, and the ring and the new plan bars now share one material so it still tints every printed line."
+   },
    "category": "primitives",
    "complexity": "beginner",
    "description": "A text decal on the floor - YOU ARE HERE lying flat underfoot, the wayfinding locator. A flat indexical inscription you stand ON. TextMesh. pride_gradient reclaims the corporate blue dot.",

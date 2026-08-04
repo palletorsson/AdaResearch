@@ -1652,7 +1652,25 @@
     "derived_at": "2026-04-29T09:39:46.110524Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "A grabbable sphere that bursts into forty particles when a laser finds it — the primitive granted mortality. The one shape in the room you can destroy, its explosion a small argument that even ideal geometry, once embodied, can be undone."
+   "qfep_connection": "A grabbable sphere that bursts into forty particles when a laser finds it — the primitive granted mortality. The one shape in the room you can destroy, its explosion a small argument that even ideal geometry, once embodied, can be undone.",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "moment": [
+      "intact",
+      "fissured",
+      "burst",
+      "scattered"
+     ]
+    },
+    "default": "moment=intact - PRESERVES all 13 placements exactly. _build_moment() returns on its first line: no node is added, no property is written, nothing is hidden, and _is_exploding stays false, so the sphere is the same live target on collision layer 21 that it was before promotion. The metadata read added to _ready only fires when a token carries #moment:, and apply_grid_config (new - the artifact had none) returns without touching anything when the word has not moved, which is what cluster_resolver and curation_station hand it.",
+    "was": "one emissive ball that could only ever be photographed intact. Everything the artifact owns happens in a tenth of a second, once, and only after a laser ray touches it - which never happens during a capture - and then it queue_free()s itself, so in a live map the aftermath exists for one second and never again.",
+    "note": "hand promotion 2026-08-03, after the runner refused it as having no turnable knobs. Its four exports are a count, a speed, a duration and a colour; three describe particles that do not exist while the shutter is open, so sweeping any of them would have produced N identical photographs of an intact sphere and a confident INERT verdict about a design that was never in the frame. The axis is therefore not a parameter of the event but WHICH MOMENT OF THE EVENT IS STANDING IN THE ROOM. The explosion's own constants - explosion_particle_count pieces, the same 0.02 m fragment the live burst spawns - are lifted out of the tween nobody sees and set down as geometry that holds still. intact is the promise, fissured the flaw already in it (three dark seams girdling the ball; it still explodes), burst the event held at full throw, scattered the residue settled on the floor. The @identity's own emerges line says the reset 'reveals that destruction here is a demonstration, not a consequence'; a map can now put the room in any of four tenses instead of only the first.",
+    "still_note": "four silhouettes, not four scales: a solid ball, a ball with three dark great circles cut across it, a hollow sphere of forty points, a flat disc of dimmed debris. burst and scattered deliberately differ in KIND rather than radius, because an AABB-fitted camera normalises size and two fragment fields at two radii would photograph identically - the trap that makes a real axis read inert. No randf() anywhere in the frozen fields (Fibonacci sphere, golden-angle disc), so two captures of one value are two photographs of one object; the live explosion keeps its random directions untouched.",
+    "behaviour_change": "burst and scattered set _is_exploding at build time, so the existing guard at the top of hit_by_laser() makes them inert to the pointer - a thing that has already gone off does not go off again. intact and fissured are live targets and explode exactly as before. The collider is never altered at any value.",
+    "measurement_risk": "intact -> fissured is the quiet step: the silhouette is identical and only the skin changes, three 4 mm seams on a 200 mm ball. Expect it low and read it as a surface-level change rather than an inert axis; the axis's loud evidence is burst and scattered. If burst reads faint, check subject % first - the fragment shell is 0.56 m of mostly empty space and the fitter will pull back, shrinking every piece in frame."
+   }
   },
   "measurement_station_puzzle": {
    "category": "puzzles",

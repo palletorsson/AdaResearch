@@ -31,6 +31,32 @@ class_name LaserSword
 @export var hum_base_frequency: float = 120.0
 @export var swing_pitch_range: float = 0.6
 
+@export_group("DNA")
+## STAGE-2 DNA, hand promotion 2026-08-03.
+##
+## What the sword looks like when NOBODY IS HOLDING IT — which is what it looks like in
+## a map for all but a few seconds, and what it looks like in every still ever taken of
+## it. `_ready` ended with `_blade_mesh.visible = false`, hard-coded, so standing on its
+## plinth this artifact is a 14 cm handle and a copper disc; the 80 cm line the whole
+## piece is about exists only inside a fist. That is a real position — direction is
+## produced by a body — but it was an assumption nobody could argue with, and it is the
+## reason a capture of this token photographs almost nothing.
+##
+## So the axis is whether the line pre-exists the hand:
+##   dark   the object alone is only a grip; there is no line until someone takes it
+##   pilot  a stub burns at the guard — the tool idles, asserting its origin and nothing more
+##   ghost  the line is drawn full length but cold: geometry without commitment
+##   lit    it burns unattended; the vector is a fact about the world, not about the arm
+##
+## Picking it up still ignites a full blade under every value — _ignite() sets length,
+## emission and alpha explicitly now — so nothing about the held sword changes.
+@export_enum("dark", "pilot", "ghost", "lit") var repose: String = "dark"
+const REPOSE_KEYS: Array[String] = ["dark", "pilot", "ghost", "lit"]
+## Fraction of blade_length the `pilot` stub burns.
+const PILOT_FRACTION: float = 0.15
+## Alpha the `ghost` blade drops to; `lit`/`dark` keep the shipped 0.85.
+const GHOST_ALPHA: float = 0.30
+
 # Internal
 var _blade_mesh: MeshInstance3D
 var _blade_cylinder: CylinderMesh
@@ -43,6 +69,9 @@ var _is_held := false
 var _last_position: Vector3
 var _current_speed: float = 0.0
 var _blade_visible := false
+## True once _ready has built the body. apply_grid_config arrives deferred from
+## GridInteractablesComponent, so a restyle before the first build would act on nulls.
+var _built := false
 
 
 func _ready() -> void:
@@ -56,8 +85,11 @@ func _ready() -> void:
 	picked_up.connect(_on_sword_picked_up)
 	dropped.connect(_on_sword_dropped)
 
-	# Blade starts hidden
-	_blade_mesh.visible = false
+	# Blade starts as the repose axis says. At repose="dark", the default, this is the
+	# shipped `_blade_mesh.visible = false` and nothing else — the mesh already carries
+	# blade_length, blade_emission and alpha 0.85 from _build_blade().
+	_apply_repose()
+	_built = true
 
 
 func _process(delta: float) -> void:
@@ -202,20 +234,72 @@ func _generate_hum() -> AudioStreamWAV:
 
 # ── Ignition ─────────────────────────────────────────────────────────
 
+## In hand the sword is a sword under every repose value. The three assignments that were
+## not here before (length, emission, alpha) are no-ops at repose="dark", because nothing
+## has touched them — they exist so `pilot` and `ghost` come up to full when gripped.
 func _ignite() -> void:
 	_blade_visible = true
+	_style_blade(blade_length, blade_emission, 0.85, false)
 	_blade_mesh.visible = true
 	if _hum_player:
 		_hum_player.volume_db = hum_volume_db
 
 
+## Dropped, it returns to its repose — which at the default is exactly the old
+## hide-and-silence, emission reset included.
 func _extinguish() -> void:
 	_blade_visible = false
-	_blade_mesh.visible = false
-	if _hum_player:
-		_hum_player.volume_db = -80.0
-	if _blade_material:
-		_blade_material.emission_energy_multiplier = blade_emission
+	_apply_repose()
+
+
+## Blade geometry and material for a given burning length. `shaded` is the one thing only
+## `ghost` asks for — every other caller passes false, which puts the shipped UNSHADED
+## mode back, so no path can leave the material in a state _build_blade did not.
+func _style_blade(length: float, emission: float, alpha: float, shaded: bool) -> void:
+	if _blade_cylinder != null and _blade_mesh != null:
+		_blade_cylinder.height = length
+		_blade_mesh.position = Vector3(0, handle_length / 2.0 + length / 2.0 + 0.006, 0)
+	if _blade_material == null:
+		return
+	if shaded:
+		_blade_material.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
+	else:
+		_blade_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_blade_material.emission_energy_multiplier = emission
+	_blade_material.albedo_color = blade_color
+	_blade_material.albedo_color.a = alpha
+
+
+func _apply_repose() -> void:
+	if _blade_mesh == null:
+		return
+	match repose:
+		"lit":
+			_style_blade(blade_length, blade_emission, 0.85, false)
+			_blade_mesh.visible = true
+			if _hum_player:
+				_hum_player.volume_db = hum_volume_db
+		"pilot":
+			_style_blade(blade_length * PILOT_FRACTION, blade_emission, 0.85, false)
+			_blade_mesh.visible = true
+			if _hum_player:
+				_hum_player.volume_db = -80.0
+		"ghost":
+			# Cold: the line is drawn, not burning. Shaded rather than unshaded, so it
+			# takes the room's light like any other object instead of emitting its own —
+			# the difference between a line that is there and a line that is on.
+			_style_blade(blade_length, 0.0, GHOST_ALPHA, true)
+			_blade_mesh.visible = true
+			if _hum_player:
+				_hum_player.volume_db = -80.0
+		_:
+			# "dark", and anything unrecognised: the shipped behaviour, byte for byte —
+			# blade_length, blade_emission, alpha 0.85, unshaded, hidden, silent, which is
+			# exactly what _build_blade left behind and what `visible = false` did.
+			_style_blade(blade_length, blade_emission, 0.85, false)
+			_blade_mesh.visible = false
+			if _hum_player:
+				_hum_player.volume_db = -80.0
 
 
 # ── Pickup ───────────────────────────────────────────────────────────
@@ -251,3 +335,17 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			blade_color = c
 	if config_data.has("blade_emission"):
 		blade_emission = config_data["blade_emission"]
+	# The DNA axis. Restyles only when the value both validates and CHANGED, only after
+	# _ready has built the body, and never mid-swing — this arrives deferred, and none of
+	# the 22 existing placements passes a `repose` key, so all 22 keep a dark blade.
+	if config_data.has("repose"):
+		var r: String = _pick_axis(String(config_data["repose"]), REPOSE_KEYS, repose)
+		if r != repose:
+			repose = r
+			if _built and not _is_held:
+				_apply_repose()
+
+
+func _pick_axis(raw: String, allowed: Array[String], fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return v if allowed.has(v) else fallback

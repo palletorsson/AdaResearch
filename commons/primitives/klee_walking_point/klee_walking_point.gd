@@ -21,9 +21,53 @@ class_name KleeWalkingPoint
 
 # ── DNA ───────────────────────────────────────────────────────────────
 
+# --- DNA (stage 2, promoted 2026-08-03) -------------------------------------
+# THE PROBLEM. This is the project's founding image, in 20 maps, and every one of
+# the 20 is the same picture: an open ochre meander. walk_style was already an
+# export and already this file's own declared critical_parameter, but it was a
+# free String nothing enumerated, so the sweep read the artifact as having no
+# turnable knob and no map ever named a value. The artifact argues that a line is
+# a biography, and shipped exactly one biography.
+#
+# WHY THESE TWO AND NOT "how fast" or "how far". The evidence for an axis here is
+# ONE STILL. Speed, hold, the loop, and the lit-up-to-here head are all time —
+# a still cannot tell 0.32 from 0.9, so promoting them would produce a
+# finished-looking experiment answering nothing. Both axes below are properties
+# of the trail as a STANDING OBJECT: they survive the shutter.
+#
+# walk_style — WHAT THE WALK DID, the shape the line records. Unchanged in
+#   meaning from the four branches _walk_path has always had; the promotion only
+#   enumerates them so a map can name one:
+#     meander   SHIPPED. Three summed sines, no goal, no shortest path.
+#     straight  the collapsed line — the route that learned nothing on the way.
+#     arc       a single hump: one decision, made once.
+#     spiral    the walk that keeps turning inside its own territory.
+#
+# line — WHICH OF KLEE'S THREE LINE KINDS this is, taken from the Pedagogical
+#   Sketchbook's own opening taxonomy rather than invented here. walk_style says
+#   what the point DID; line says what the resulting mark IS, which is the
+#   distinction Klee spends page one making and which this artifact has until now
+#   only been able to state in half:
+#     active   SHIPPED. The line that goes for a walk. Open, unresolved, and the
+#              only kind whose two ends are not the same place.
+#     medial   the line circumscribing a figure — the same walk closed on itself,
+#              so it stops being a journey and becomes a boundary. The walk's own
+#              deviation survives as the wobble of the enclosure, which is the
+#              point: the medial line is not a circle, it is a walk that came back.
+#     passive  the line as a plane's edge — the trail keeps its exact geometry and
+#              a surface is raised to the floor beneath it, so the same points now
+#              read as the top edge of something rather than as a path. Nothing
+#              about the line changes; only what it is the boundary OF.
+#   All three are one silhouette apart: open string, closed ring, filled field.
+const WALK_STYLES: PackedStringArray = ["meander", "straight", "spiral", "arc"]
+const LINE_KINDS: PackedStringArray = ["active", "medial", "passive"]
+
 @export_group("Walk")
 ## "meander" (queer wander), "straight" (collapsed), "spiral", "arc".
-@export var walk_style: String = "meander"
+@export_enum("meander", "straight", "spiral", "arc") var walk_style: String = "meander"
+## Klee's three line kinds: the walk (active), the enclosure (medial), the
+## edge of a plane (passive). "active" is the shipped behaviour exactly.
+@export_enum("active", "medial", "passive") var line: String = "active"
 @export var walk_length: float = 1.6
 @export var walk_height: float = 0.6
 ## How many points the line is quantised into.
@@ -41,6 +85,8 @@ class_name KleeWalkingPoint
 @export var head_radius: float = 0.040
 @export var dim_energy: float = 0.10
 @export var lit_energy: float = 2.2
+## Only used at line == "passive": the plane the trail is the upper edge of.
+@export var plane_color: Color = Color(0.30, 0.26, 0.20)
 
 @export_group("Placement")
 ## When TRUE (default) the whole walk is shifted up so its LOWEST point
@@ -69,22 +115,61 @@ func _ready() -> void:
 	_build()
 
 
+## Guarded rebuild. This used to tear the artifact down and build it again on ANY
+## call, including a call that changed nothing — which on a placement that merely
+## re-announces its config restarted the walk from zero for no reason. It now
+## compares a signature of every value the build actually reads and returns early
+## when they are identical, so all 20 existing placements are untouched (none of
+## them names a key at all) and a real DNA change still rebuilds.
 func apply_grid_config(config_data: Dictionary) -> void:
+	var before: String = _config_signature()
 	for k in config_data.keys():
 		set_meta("config_%s" % str(k), config_data[k])
 	_read_metadata_overrides()
-	if _built:
-		for c in get_children():
-			c.queue_free()
-		_built = false
-		_dot_mats.clear()
-		_head = null
-		_build()
+	if not _built:
+		return
+	if _config_signature() == before:
+		return
+	for c in get_children():
+		c.queue_free()
+	_built = false
+	_dot_mats.clear()
+	_head = null
+	_build()
+
+
+## Every value _build() reads, in one string. Not the animation state — a change
+## of walk_speed or hold_seconds is honoured live by _process and must NOT throw
+## the geometry away mid-walk.
+func _config_signature() -> String:
+	return "%s|%s|%.4f|%.4f|%d|%.4f|%.4f|%s|%s|%s" % [
+		walk_style, line, walk_length, walk_height, trail_points,
+		trail_radius, head_radius, str(lift_to_floor),
+		str(trail_color), str(plane_color)]
 
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_walk_style"):
-		walk_style = str(get_meta("config_walk_style"))
+		var ws: String = str(get_meta("config_walk_style")).strip_edges().to_lower()
+		if WALK_STYLES.has(ws):
+			walk_style = ws
+	if has_meta("config_line"):
+		var lk: String = str(get_meta("config_line")).strip_edges().to_lower()
+		if LINE_KINDS.has(lk):
+			line = lk
+	if has_meta("config_plane_color"):
+		plane_color = _parse_color(str(get_meta("config_plane_color")), plane_color)
+	if has_meta("config_hold_seconds"):
+		hold_seconds = float(str(get_meta("config_hold_seconds")))
+	if has_meta("config_loop"):
+		# Parsed from a STRING on purpose. A typed bool export handed the token
+		# parser's "true" rejects it before _ready ever runs; the conversion has
+		# to happen here, where the value is still text.
+		var lp: String = str(get_meta("config_loop")).strip_edges().to_lower()
+		loop = lp == "true" or lp == "1" or lp == "yes"
+	if has_meta("config_lift_to_floor"):
+		var lf: String = str(get_meta("config_lift_to_floor")).strip_edges().to_lower()
+		lift_to_floor = lf == "true" or lf == "1" or lf == "yes"
 	if has_meta("config_walk_length"):
 		walk_length = float(str(get_meta("config_walk_length")))
 	if has_meta("config_walk_height"):
@@ -146,6 +231,13 @@ func _build() -> void:
 		add_child(dot)
 		_dot_mats.append(mat)
 
+	# passive: Klee's third line kind — the line as the EDGE OF A PLANE. The trail
+	# is not touched at all; a surface is raised underneath it, so exactly the same
+	# points now read as a boundary rather than as a path. Built after the lift, so
+	# the plane meets the floor instead of sinking through it.
+	if line == "passive":
+		_build_plane()
+
 	# Head: the active point itself, brighter + larger.
 	_head = MeshInstance3D.new()
 	_head.name = "Head"
@@ -174,6 +266,8 @@ func _build() -> void:
 # All deterministic (summed sines) — no randf, no noise — so this is
 # honest for sequence 1 (the grid is the only aesthetic this early).
 func _walk_path(style: String) -> PackedVector3Array:
+	if line == "medial":
+		return _medial_path(style)
 	var pts := PackedVector3Array()
 	var n: int = maxi(2, trail_points)
 	var half_l: float = walk_length * 0.5
@@ -198,6 +292,70 @@ func _walk_path(style: String) -> PackedVector3Array:
 					+ 0.18 * sin(11.0 * PI * t + 2.0))
 		pts.append(Vector3(x, y, 0.0))
 	return pts
+
+
+# The MEDIAL line: the same walk, closed on itself so it circumscribes a figure.
+# The walk's own deviation is kept and spent on the RADIUS, which is the whole
+# point — a medial meander is not a circle, it is a walk that came back, and it
+# still shows where it wandered. t runs i/n (not i/(n-1)) so the last point stops
+# one step short of the first and the ring closes without two dots in one place.
+# Deterministic summed sines, no randf and no noise: honest for sequence 1.
+func _medial_path(style: String) -> PackedVector3Array:
+	var pts := PackedVector3Array()
+	var n: int = maxi(3, trail_points)
+	var base_r: float = walk_length * 0.30
+	var amp: float = walk_height * 0.5
+	for i in range(n):
+		var t: float = float(i) / float(n)
+		var dev: float = 0.0
+		match style:
+			"straight":
+				dev = 0.0
+			"arc":
+				dev = amp * 0.5 * sin(TAU * t)
+			"spiral":
+				dev = amp * 0.7 * t
+			_:  # "meander" — the wander, now spent on the enclosure's radius
+				dev = amp * (0.35 * sin(3.0 * TAU * t)
+					+ 0.18 * sin(7.0 * TAU * t + 1.0))
+		var r: float = base_r + dev
+		var ang: float = t * TAU
+		pts.append(Vector3(r * cos(ang), r * sin(ang), 0.0))
+	return pts
+
+
+# The plane whose upper edge the trail is. One thin column per trail point, run
+# down to the floor: at 48 points the columns touch and read as a filled field,
+# and the eye stops seeing a line at all until it looks at the top of it.
+func _build_plane() -> void:
+	var n: int = _points.size()
+	if n < 2:
+		return
+	var base_y: float = 0.0
+	if not lift_to_floor:
+		var min_y: float = _points[0].y
+		for p in _points:
+			min_y = minf(min_y, p.y)
+		base_y = min_y - walk_height * 0.6
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = plane_color
+	mat.emission_enabled = true
+	mat.emission = plane_color
+	mat.emission_energy_multiplier = 0.22
+	mat.roughness = 0.9
+	var step: float = walk_length / float(maxi(1, n - 1))
+	for i in range(n):
+		var h: float = _points[i].y - base_y
+		if h <= 0.002:
+			continue
+		var col := MeshInstance3D.new()
+		col.name = "Plane%d" % i
+		var bm := BoxMesh.new()
+		bm.size = Vector3(step * 1.15, h, trail_radius * 0.8)
+		col.mesh = bm
+		col.material_override = mat
+		col.position = Vector3(_points[i].x, base_y + h * 0.5, -trail_radius * 1.2)
+		add_child(col)
 
 
 func _process(delta: float) -> void:

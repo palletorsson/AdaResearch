@@ -61,7 +61,73 @@ extends Node3D
 ## changes. A capture harness sets it true via dna.fixture.
 @export var capture_anchor: bool = false
 
+@export_group("DNA")
+## STAGE-2 DNA, hand promotion 2026-08-03, for the `mold_network` token.
+##
+## The rule string was the whole argument and it was a constant in the .tscn. A slime
+## mould is nothing but a law about how much company a filament needs — survive/born
+## decides whether the colony commits to thick reinforced tube or pushes thin
+## exploratory strand, and the state count decides how much of everywhere-it-has-been
+## is still standing. Both were unreachable: `rule_string` is one opaque field and
+## apply_grid_config was `pass`, so no map token could say what kind of mould it meant.
+##
+## `rule` is the family word, taken from complexity_pattern and lifeform_walker, which
+## both declare it for exactly this slot: the transition law. The VALUE LIST cannot be
+## shared with them — those are 2D Life-family rules over 8 neighbours, this is a 3D
+## Generations rule over 26, a different alphabet — so these three artifacts must NOT be
+## compared numerically. Same question, different automaton.
+##
+## STRUCTURE_GROWTH IS NOT PROMOTED, and the gate will tell you it is. Because these axes
+## live on a SHARED script, check_dna_declarations lists `structure_growth: rule, wake`
+## under "promoted in code, undeclared in the registry". Do not close that line by copying
+## this block into its registry entry. StructureGrowth.tscn authors "6-8/6-8/3/M" — the
+## Builder rule, three states — and these four bands are the mould's, derived from the
+## mould's seed density. Declaring them there would name values that do not describe that
+## artifact, which is precisely the failure the declaration gate exists to catch. If
+## structure_growth deserves an axis it needs its own bands, derived from its own code.
+##
+## NOTHING IS WRITTEN AT DEFAULTS. This script is shared: MoldNetwork.tscn authors
+## "4-6/5-7/10/M", StructureGrowth.tscn authors "6-8/6-8/3/M", and
+## biome_paint_dispatcher hands per-cell `rule=` overrides in before add_child.
+## Composing unconditionally would have overwritten all three. The composition runs only
+## when an axis is off its default — and for mold_network the default composition is
+## "4-6/5-7/10/M", the byte-identical string the scene already carries.
+@export_enum("reinforce", "explore", "compact", "strand") var rule: String = "reinforce"
+## How much of the exploratory front the mould keeps. A cell that fails survival does not
+## vanish: it walks up the dying states, rendering the whole time and refusing rebirth
+## until it reaches zero. So the state count is simultaneously the visible mass of spent
+## tissue and the refractory period behind the front.
+@export_enum("hold", "fade", "none") var wake: String = "hold"
+
+## survive/born bands. The front advances one cell per generation under EVERY rule here —
+## birth needs a live neighbour — so what these change is the texture and density of the
+## shell, not its radius, which is why the silhouette stays the same size between values
+## and the frames stay comparable.
+##
+## Derived, not guessed. The seed is a 7^3 block at density 0.5, so a dead cell one step
+## outside a face sees Binomial(9, 0.5) live neighbours: P(born) is 0.73 for explore,
+## 0.48 for reinforce, 0.25 for compact, 0.41 for strand. All four keep the front moving,
+## which is the check that none of them photographs as an empty grid.
+const RULE_BANDS := {
+	"reinforce": "4-6/5-7",  # shipped: survives with modest company, born only where thick
+	"explore": "3-6/4-7",    # commits on little evidence — a broad fuzzy web
+	"compact": "5-7/6-8",    # commits only where the mould is already thick — a tight mass
+	"strand": "2-4/5-6",     # dies wherever it is crowded — wiry isolated filaments
+}
+const WAKE_STATES := {
+	"hold": 10,  # shipped: eight generations of spent tissue still standing
+	"fade": 4,
+	"none": 2,   # no lingering at all — the object is only what is alive right now
+}
+const RULE_KEYS: Array[String] = ["reinforce", "explore", "compact", "strand"]
+const WAKE_KEYS: Array[String] = ["hold", "fade", "none"]
+
 # Internal state
+## True once _ready has built the grid once. apply_grid_config must not rebuild before
+## that: the 27 mold_network placements get their config through a call_deferred from
+## GridInteractablesComponent, and a rebuild racing the first build is how a shipped
+## room changes.
+var _dna_built: bool = false
 var current_state: PackedByteArray
 var next_state: PackedByteArray
 var time_accumulator: float = 0.0
@@ -81,6 +147,12 @@ var rule_neighborhood: String = "M"
 var neighbor_offsets: Array[int] = []
 
 func _ready() -> void:
+	# DNA axes, before anything reads rule_string. Silent at defaults — see the note on
+	# `rule` above: the scenes and the biome dispatcher author their own rule strings and
+	# an unconditional compose would overwrite every one of them.
+	if rule != "reinforce" or wake != "hold":
+		rule_string = _dna_rule_string()
+
 	# robustly find or create mesh instance
 	if not mesh_instance:
 		for child in get_children():
@@ -149,6 +221,7 @@ func _ready() -> void:
 	# Appended last, builds nothing unless asked: see the capture_anchor note above.
 	if capture_anchor:
 		_add_capture_anchor()
+	_dna_built = true
 
 func _calculate_strides() -> void:
 	stride_y = grid_size.x
@@ -187,8 +260,10 @@ func _process(delta: float) -> void:
 		time_accumulator = 0.0
 		_step()
 
-func _parse_rule(rule: String) -> void:
-	var parts = rule.split("/")
+## `spec`, not `rule`: `rule` is now a member (the DNA axis) and a parameter of that name
+## would shadow it.
+func _parse_rule(spec: String) -> void:
+	var parts = spec.split("/")
 	if parts.size() < 2:
 		push_error("Invalid rule format. Expected S/B/C/N or S/B")
 		return
@@ -388,8 +463,54 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## The two DNA axes, reachable from a map token. Everything else stays as it was: this
+## used to be `pass`, so no key any map passed did anything, and no shipped placement is
+## sending `rule` or `wake` today.
+##
+## Guarded twice over. A value only counts if it is one the code can actually build
+## (_pick_axis falls back to the current value, never to an invalid string), and the
+## regrow only happens when a value CHANGED and the first build has already finished —
+## GridInteractablesComponent calls this deferred, so an unguarded rebuild here would
+## restart the automaton in all 27 existing rooms.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var changed: bool = false
+	if config.has("rule"):
+		var r: String = _pick_axis(String(config["rule"]), RULE_KEYS, rule)
+		if r != rule:
+			rule = r
+			changed = true
+	if config.has("wake"):
+		var w: String = _pick_axis(String(config["wake"]), WAKE_KEYS, wake)
+		if w != wake:
+			wake = w
+			changed = true
+	if not changed or not _dna_built:
+		return
+	rule_string = _dna_rule_string()   # the setter re-parses
+	generation = 0
+	time_accumulator = 0.0
+	run_timer = 0.0
+	paused = false
+	_initialize_grid()
+	_update_visuals()
+
+
+func _dna_rule_string() -> String:
+	var bands: String = String(RULE_BANDS.get(rule, RULE_BANDS["reinforce"]))
+	var states: int = int(WAKE_STATES.get(wake, WAKE_STATES["hold"]))
+	# Moore is the only neighbourhood this file implements — _precompute_neighbor_offsets
+	# always builds the 26 offsets and _step never reads rule_neighborhood — so writing
+	# anything else in the fourth slot would be a claim the code does not honour.
+	return "%s/%d/M" % [bands, states]
+
+
+## An unrecognised value keeps the current one rather than silently becoming an invalid
+## rule string. That matters here: `_parse_rule` on nonsense pushes an error and leaves
+## the previous bands in place, which would look like a working axis producing identical
+## frames — the exact failure the declaration gate exists to catch.
+func _pick_axis(raw: String, allowed: Array[String], fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return v if allowed.has(v) else fallback
 
 
 ## An invisible box the size of the simulated volume, so a framing walk that only knows

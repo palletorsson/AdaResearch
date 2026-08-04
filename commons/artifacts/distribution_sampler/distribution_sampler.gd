@@ -7,7 +7,7 @@
 # @identity
 # essence: f(x|θ) — probability density function parameterized by distribution type
 # desire: switch between Uniform, Gaussian, Poisson, Exponential and watch falling particles build different shapes
-# critical_parameter: distribution — selects which PDF governs sampling; each has fundamentally different tail behavior
+# critical_parameter: law — which PDF governs the draw, each with fundamentally different tail behavior (uniform | gaussian | poisson | exponential); evidence — how many draws the histogram is standing on when you find it (none | anecdote | sample | census)
 # triggers: _sample_distribution() dispatches to Box-Muller (Gaussian), inverse CDF (Exponential), Knuth (Poisson)
 # emerges: the theoretical PDF curve overlays the histogram and they converge — shape is not noise, noise has shape
 # needs: VR push buttons for distribution switching [has]; falling-particle animation [has]; slider for params [missing]
@@ -84,8 +84,90 @@ enum DistType { UNIFORM, GAUSSIAN, POISSON, EXPONENTIAL }
 ## against sampling noise and would report whatever the dice said. Set this
 ## non-negative and CLEAR (or a config change) replays the same sample sequence, so a
 ## future axis on this artifact can be measured rather than guessed at.
+##
+## THAT FUTURE ARRIVED 2026-08-03 and took the other road: `evidence` below lays its
+## draws down from its OWN seeded generator (`evidence_seed`), which leaves this knob
+## and the live stream exactly as they were. sample_seed is still not an axis.
 @export var sample_seed: int = -1
 var _rng: RandomNumberGenerator = null
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA — promoted by hand 2026-08-03
+#
+# The note above is why this artifact was passed over twice. It is right that an
+# unseeded stream cannot be measured, and it is right that the histogram builds
+# over TIME — at 50 samples/second, a still taken 0.35 s after _ready catches a
+# machine with an empty chart and a handful of markers still in the air. So the
+# first knob this needed was not an axis at all.
+#
+#   law         WHICH RULE GOVERNS THE DRAW
+#               uniform · gaussian · poisson · exponential
+#   evidence    HOW MANY DRAWS THE HISTOGRAM STANDS ON WHEN YOU FIND IT
+#               none · anecdote · sample · census
+#
+# `law` is the @identity critical_parameter — "f(x|θ), each with fundamentally
+# different tail behaviour" — made reachable from a map token. The word is
+# shared with force_field_visualizer, which asks the same question of a field
+# (which law shapes what you are looking at); in probability the LAW of a random
+# variable is literally its distribution, so the word is not a metaphor here.
+# The four values are the four the code has always dispatched on.
+#
+# `evidence` is what makes `law` photographable, and it is the same ladder, word
+# for word, as galton_board and shannon_workbench: how much looking the picture
+# is standing on. As with those two, the rungs are qualitative and the counts
+# are this machine's own.
+#   none       0. The legacy lineage: bins empty, only the theory curve drawn.
+#              Every one of the 10 placements is here.
+#   anecdote   1. One bin at full height. A distribution "shown" by one draw.
+#   sample     25. Scattered single-count bars across 30 bins — the shape is
+#              not yet legible and the bars claim it is.
+#   census     1000. max_samples. The histogram closes on the curve drawn over
+#              it, which is the whole argument of the artifact.
+#
+# The pre-seeded draws run through the SAME _sample_distribution() the live
+# machine uses, in the same order — they are earlier draws, not different ones.
+# They come from a private generator seeded by `evidence_seed`, so at
+# evidence=none no RNG is constructed and the global stream is never touched:
+# frame one of an unconfigured placement is byte-identical to yesterday's.
+#
+# Deliberately NOT promoted: samples_per_second (a rate is invisible to a still
+# — the exact fault this artifact was already declining), auto_sample (same),
+# and gaussian_mean / gaussian_std / poisson_lambda / exponential_rate, which
+# are the operating knobs of ONE law rather than a choice between laws.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## AXIS 1 — which law governs the draw. "gaussian" is the shipped default, and
+## at that value nothing is assigned: the export default below already IS
+## DistType.GAUSSIAN, so a scene or map that set `distribution` directly keeps
+## whatever it set.
+@export_enum("uniform", "gaussian", "poisson", "exponential") var law: String = "gaussian"
+## AXIS 2 — how many draws the histogram stands on when you find it. Shared
+## vocabulary with galton_board and shannon_workbench. none = the legacy state:
+## an empty chart waiting for the sampler to fill it.
+@export_enum("none", "anecdote", "sample", "census") var evidence: String = "none"
+## Seed for the pre-seeded draws only, so a variant photographs the same
+## histogram twice. Off the default path entirely: at evidence=none nothing
+## reads it and no generator is built.
+@export var evidence_seed: int = 20260803
+
+## The axis words, mapped onto the enum the rest of the file already uses.
+const LAW_TYPES := {
+	"uniform": DistType.UNIFORM,
+	"gaussian": DistType.GAUSSIAN,     # the legacy lineage
+	"poisson": DistType.POISSON,
+	"exponential": DistType.EXPONENTIAL,
+}
+## The evidence ladder, as draws already made.
+const EVIDENCE_DRAWS := {
+	"none": 0,          # the legacy lineage — 10 placements, all of them
+	"anecdote": 1,
+	"sample": 25,
+	"census": 1000,     # = max_samples
+}
+## Set for the duration of _seed_evidence() and null everywhere else, so the
+## pre-seeded draws are deterministic without the live machine's stream — or the
+## global stream — changing at all.
+var _evidence_rng: RandomNumberGenerator = null
 
 ## Color of the histogram bars
 @export var color_bar: Color = Color(0.3, 0.7, 1.0)
@@ -128,6 +210,12 @@ var _axis_mat: StandardMaterial3D
 var _signal_connections: Array = []
 
 func _ready() -> void:
+	_read_meta_overrides()
+	# "gaussian" is the export default of `distribution`, so this is a genuine
+	# no-op at the default value — nothing is assigned and anything the .tscn or
+	# a map already set survives untouched.
+	if law != "gaussian":
+		distribution = int(LAW_TYPES.get(law, DistType.GAUSSIAN)) as DistType
 	_init_shared_resources()
 	_create_display()
 	_create_bars()
@@ -136,6 +224,7 @@ func _ready() -> void:
 	_create_labels()
 	_create_vr_controls()
 	_clear_samples()
+	_seed_evidence()
 
 ## Initialize reusable mesh and material resources.
 func _init_shared_resources() -> void:
@@ -380,6 +469,10 @@ func _sample_distribution() -> float:
 ## The only draw in this artifact. sample_seed = -1 falls straight through to randf(),
 ## same call, same order, same stream, so the legacy histogram is unchanged.
 func _rand() -> float:
+	# The pre-seeded history, when one is being laid down. Null at every other
+	# moment, including the whole of the default path.
+	if _evidence_rng != null:
+		return _evidence_rng.randf()
 	if sample_seed < 0:
 		return randf()
 	if _rng == null:
@@ -519,9 +612,83 @@ func clear() -> void:
 func sample() -> void:
 	_add_sample()
 
+# ═════════════════════════════════════════════════════════════════════
+# DNA — law and evidence
+# ═════════════════════════════════════════════════════════════════════
+
+## Lay down the draws this machine is found standing on. Returns before building
+## anything at evidence=none, which is the state every existing placement is in.
+func _seed_evidence() -> void:
+	var draws: int = mini(int(EVIDENCE_DRAWS.get(evidence, 0)), max_samples)
+	if draws <= 0:
+		return
+	_evidence_rng = RandomNumberGenerator.new()
+	_evidence_rng.seed = evidence_seed
+	for _i in draws:
+		var value: float = _sample_distribution()
+		var bin_idx: int = clampi(int(value * num_bins), 0, num_bins - 1)
+		_bins[bin_idx] += 1
+		_total_samples += 1
+	_evidence_rng = null
+	_update_bars()
+
+
+## Validate an axis value against the code's own list. An unknown word keeps the
+## current value rather than silently building something nobody asked for.
+func _axis_value(raw: String, allowed: Array, fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return v if allowed.has(v) else fallback
+
+
+## Map tokens arrive as `config_*` metadata BEFORE the node enters the tree
+## (GridInteractablesComponent sets the metas, then add_child), so reading them
+## here means _ready builds the asked-for variant in one pass.
+func _read_meta_overrides() -> void:
+	if has_meta("config_law"):
+		law = _axis_value(str(get_meta("config_law")), LAW_TYPES.keys(), law)
+	if has_meta("config_evidence"):
+		evidence = _axis_value(str(get_meta("config_evidence")),
+			EVIDENCE_DRAWS.keys(), evidence)
+	if has_meta("config_evidence_seed"):
+		evidence_seed = int(str(get_meta("config_evidence_seed")))
+
+
+## GUARDED. The grid calls this deferred, AFTER _ready has built the body, so a
+## rebuild here must be earned: nothing is cleared unless a value this artifact
+## owns actually differs from what it already built with.
 func apply_grid_config(config_data: Dictionary) -> void:
 	# Parsed through str() first: a fixture that passes "7" rather than 7 would be
 	# rejected outright by set() on a typed int and the seed would silently not apply.
 	if config_data.has("sample_seed"):
 		sample_seed = int(str(config_data["sample_seed"]))
 		_clear_samples()
+
+	var want_law: String = law
+	var want_evidence: String = evidence
+	var want_seed: int = evidence_seed
+	if config_data.has("law"):
+		want_law = _axis_value(str(config_data["law"]), LAW_TYPES.keys(), law)
+	if config_data.has("evidence"):
+		want_evidence = _axis_value(str(config_data["evidence"]),
+			EVIDENCE_DRAWS.keys(), evidence)
+	if config_data.has("evidence_seed"):
+		want_seed = int(str(config_data["evidence_seed"]))
+
+	if want_law == law and want_evidence == evidence and want_seed == evidence_seed:
+		return
+
+	var law_changed: bool = want_law != law
+	law = want_law
+	evidence = want_evidence
+	evidence_seed = want_seed
+	# Only when the law itself moved — otherwise a map that changes `evidence`
+	# alone would silently overwrite a `distribution` the scene had set.
+	# The setter clears the histogram and redraws the theory curve, which is
+	# exactly what a change of law should do.
+	if law_changed:
+		distribution = int(LAW_TYPES.get(law, distribution)) as DistType
+	# Before _ready has run there is nothing built to re-seed; _ready will.
+	if _bar_mm == null:
+		return
+	_clear_samples()
+	_seed_evidence()

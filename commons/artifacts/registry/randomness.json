@@ -12437,6 +12437,30 @@
    }
   },
   "distribution_comparator": {
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "comparison": [
+      "rules",
+      "replicas",
+      "tails",
+      "counts"
+     ],
+     "evidence": [
+      "sample",
+      "census",
+      "anecdote",
+      "none"
+     ]
+    },
+    "fixture": {
+     "evidence_seed": 20260803
+    },
+    "default": "comparison=rules, evidence=sample - rules rebuilds the shipped uniform/gaussian/exponential lineup in the same order with the same three colours (the palette is now keyed by law, and at rules that is the old positional blue/green/orange exactly), and evidence=sample is 1000 draws, the number _sample_count was born with. Every one of the 34 map placements is a bare token or a rotation/offset token - no config token in any map_data.json can reach these axes - so all of them render unchanged.",
+    "was": "three hard-coded columns and a hard-coded 1000 draws, with apply_grid_config() implemented as `pass`. The sign says ONE SOURCE - THREE RULES and the machine could never show the control for that claim: one rule three times, which is what replicas is.",
+    "note": "fixture pins the draw (evidence_seed defaults to -1 = randomize, the legacy stream); without it two frames of the same variant are two different histograms and the sweep measures the dice. The evidence list is declared richest-first ON PURPOSE: a 4x4 cross exceeds the sweep's default --max=9 and the sweeper trims from the END of each value list, so an ascending list would have crossed all four lineups against an empty chart and a one-draw chart. Same set, same code, informative under truncation - run --max=16 for the full cross. Deliberately not promoted: RESAMPLE and the exponential rate - a button press is time-domain and lambda only slides one column's mass along its own axis."
+   },
    "name": "Distribution Comparator",
    "lookup_name": "distribution_comparator",
    "description": "Side-by-side comparison of 3 probability distributions — Uniform (blue), Gaussian (green), Exponential (orange). Three columns of 16 histogram bars generated from the same sample count. Slider scales samples from 100 to 10000; resample button regenerates all three.",

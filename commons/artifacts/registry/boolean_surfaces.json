@@ -79,6 +79,33 @@
    "lookup_name": "csg_difference_demo",
    "description": "A box with a sphere subtracted. The operator that makes cavities and openings.",
    "scene": "res://algorithms/boolean_surfaces/csg_difference_demo.tscn",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "workings": [
+      "outcome",
+      "trace",
+      "operands",
+      "expression"
+     ],
+     "strike": [
+      "centred",
+      "raised",
+      "corner",
+      "grazing"
+     ]
+    },
+    "default": "workings=outcome, strike=corner - both defaults are short-circuits, not recomputations. outcome builds nothing beyond the single CSGCombiner the artifact always built, and corner returns the raw sphere_offset (0.3, 0.1, 0.3) untouched instead of resolving a fraction of box_size, so all 27 placements are bit-identical. None of the 27 passes a config key at all, and a placement that names sphere_offset directly still overrides strike.",
+    "was": "one carved box, rotating, with a Label3D reading 'A - B' and nothing else. sphere_offset is the artifact's own declared critical_parameter ('where the bite lands') and was reachable only as an unnamed Vector3; apply_grid_config assigned body_color and had no rebuild behind it, so the knob it did expose could not take effect after _ready.",
+    "note": "This is fontana_puncture's direct sibling - the same cube-minus-sphere, one as art and one as demonstration - so strike is reused from it word for word and value for value. What differs, said plainly: the NUMBERS are not fontana's and cannot be. Its sphere is 1.36 half-extents, this one's is 1.10, so the same fraction cuts a different topology; and its 'corner' is a body diagonal while the value shipped here is an XZ diagonal sitting low. The two agree on the word and the list and each resolves it against its own geometry, which is what makes them comparable rather than merely identical. workings is the axis a demonstration wants and an artwork does not: how much of the operation it is willing to show. outcome = only the answer; trace = the removed material (A intersect B) put back as a translucent ghost in the cavity it left, which is 'absence is constructive' rendered rather than asserted; operands = the uncut box and the subtracting sphere faint and in place; expression = the operands plus sphere_offset drawn as a rod between the two centres, with both terms labelled. Word and value list taken character for character from geometric_transformations, bounce_well, transform_composition_workbench and the vector_op console.",
+    "declined": "breach, fontana's amount axis, is NOT promoted here: the radius is fixed at 0.55 against a 1.0 box and this artifact's declared critical parameter is the offset, so a second amount axis would repeat the family's existing claim and add nothing a demo argues. The non-commutative B - A that the @identity asks for is a real third demonstration and belongs beside this object, not inside workings - B - A is not a different amount of showing, it is a different thing shown.",
+    "fixture": {
+     "rotation_speed": "0.0"
+    },
+    "fixture_why": "The rig spins at 0.35 rad/s, so the sweep photographs each variant at whatever yaw the settle happened to land on. Pinning it to zero costs about seven degrees against the shipped look and makes strike measurable instead of arbitrary; centred, raised and grazing move on Y and are legible from any yaw regardless.",
+    "rebuild_guard": "apply_grid_config now compares a signature of every value the build reads and returns early when nothing changed, so a placement re-announcing its config no longer rebuilds. The ghosts hang off a plain Node3D rig rather than the combiner: a CSGCombiner3D nested inside another combiner is a shape, not a container, and would have unioned the trace ghost back into the solid it comments on. The rig rotates about the same axis the combiner did (the offset is purely vertical), so the world transform is unchanged."
+   },
    "category": "boolean_surfaces",
    "sequence": "boolean_surfaces",
    "artifact_type": "boolean_surfaces",

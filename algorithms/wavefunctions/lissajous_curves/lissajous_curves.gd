@@ -16,6 +16,41 @@ extends Node3D
 # relationships: depends on ImmediateMesh trail rendering; contrasts with SphericalHarmonics (planar vs spherical oscillation); unlocks frequency ratio visualization
 # truth: The ratio of two frequencies determines whether a curve closes or wanders forever.
 
+# --- DNA (stage 2, promoted 2026-08-03) ---------------------------------------
+# Two axes, both readable in a single still.
+#
+#   ratio     Which figure the interference produces. This artifact's own truth
+#             line says the ratio decides whether the curve CLOSES or WANDERS,
+#             and the whole curve is generated as standing geometry (the full
+#             parameter sweep, every frame), not traced out over time — so the
+#             argument is already in the picture. SphericalHarmonics had to
+#             decline its orbit-ratio axis because a spherical Lissajous is
+#             drawn by a moving point; here there is nothing to wait for.
+#             1_phi_0 is the one value that does NOT close: an irrational ratio
+#             traced over six turns, densening instead of repeating. It carries
+#             a longer span and a matching sample count of its own, because
+#             non-closure is invisible inside a single period.
+#             The presets already in set_preset() bundled a characteristic
+#             phase with each ratio (a 1:1 at delta=0 is a straight diagonal,
+#             at delta=PI/2 a circle); the axis keeps that pairing verbatim.
+#
+#   evidence  How much of the construction is shown — the family word, used
+#             here in the family's ladder: result (the closed figure alone) <
+#             trace (+ the running tracer, the shipped build) < longhand (+ the
+#             two generating oscillations drawn beside it, the oscilloscope
+#             picture) < axiom (+ the parametric definition in words).
+#
+# Default is ratio=3_2_1, evidence=trace, which is the .tscn byte for byte.
+# ------------------------------------------------------------------------------
+
+## Which frequency ratio the two (three) oscillations stand in. The figure IS
+## the ratio: 1_1_0 a circle, 2_1_0 a figure eight, 5_4_0 a lattice, 1_phi_0 an
+## irrational ratio that never closes.
+@export_enum("3_2_1", "1_1_0", "2_1_0", "3_2_0", "5_4_0", "1_phi_0") var ratio: String = "3_2_1"
+
+## How much of the working is on show. See the DNA note above.
+@export_enum("trace", "result", "longhand", "axiom") var evidence: String = "trace"
+
 @export_group("Frequency Ratios")
 @export var freq_ratio_x: float = 3.0  # a in the equation
 @export var freq_ratio_y: float = 2.0  # b in the equation
@@ -44,6 +79,13 @@ extends Node3D
 @export var auto_rotate: bool = false
 @export var rotation_speed: float = 0.2
 
+const PHI: float = 1.6180339887498949
+
+# The allow-lists apply_grid_config validates a map token against. They must
+# stay identical to the @export_enum lists above.
+const RATIOS: Array[String] = ["3_2_1", "1_1_0", "2_1_0", "3_2_0", "5_4_0", "1_phi_0"]
+const EVIDENCE: Array[String] = ["trace", "result", "longhand", "axiom"]
+
 var time: float = 0.0
 var curve_points: PackedVector3Array = []
 var trail_points: Array[Vector3] = []
@@ -53,11 +95,33 @@ var curve_mesh: ImmediateMesh
 var curve_instance: MeshInstance3D
 var particle_instance: MeshInstance3D
 
+# Set by _apply_ratio(). Both are 1.0 for every rational ratio, which is what
+# this file has always done — one parameter period at num_points samples.
+var _turns: float = 1.0
+var _sample_scale: float = 1.0
+var _last_ratio: String = ""
+var _last_evidence: String = ""
+var _built: bool = false
+
 func _ready() -> void:
+	_apply_ratio()
+	_last_evidence = evidence
 	_setup_visualization()
 	_generate_full_curve()
+	_built = true
 
 func _process(delta: float) -> void:
+	# Only when the word actually moved — an inspector edit or a runtime swap.
+	# At map load and in the sweep both were already resolved in _ready, so
+	# neither branch fires and nothing is rebuilt.
+	if ratio != _last_ratio:
+		_apply_ratio()
+		if evidence == "axiom":
+			_setup_visualization()
+	if evidence != _last_evidence:
+		_last_evidence = evidence
+		_setup_visualization()
+
 	if Engine.is_editor_hint():
 		_generate_full_curve()
 		_update_curve_mesh()
@@ -74,7 +138,7 @@ func _process(delta: float) -> void:
 	_update_curve_mesh()
 
 	# Update particle position
-	if show_particle:
+	if _wants_particle():
 		_update_particle()
 
 	# Auto-rotate for better viewing
@@ -85,6 +149,7 @@ func _setup_visualization() -> void:
 	# Clear existing
 	for child in get_children():
 		child.queue_free()
+	particle_instance = null
 
 	# Create immediate mesh for curve
 	curve_mesh = ImmediateMesh.new()
@@ -104,7 +169,7 @@ func _setup_visualization() -> void:
 	add_child(curve_instance)
 
 	# Create particle
-	if show_particle:
+	if _wants_particle():
 		particle_instance = MeshInstance3D.new()
 		particle_instance.name = "Particle"
 		var sphere = SphereMesh.new()
@@ -123,12 +188,32 @@ func _setup_visualization() -> void:
 
 		add_child(particle_instance)
 
+	# evidence = axiom: the definition itself, written out beside the figure.
+	if evidence == "axiom":
+		var plate := Label3D.new()
+		plate.name = "Axiom"
+		plate.text = ("x = Ax * sin(a*t + d)\ny = Ay * sin(b*t)\nz = Az * sin(c*t)\n"
+			+ "a : b : c = %s : %s : %s" % [_fmt(freq_ratio_x), _fmt(freq_ratio_y), _fmt(freq_ratio_z)])
+		plate.font_size = 48
+		plate.pixel_size = 0.0035
+		plate.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		plate.modulate = Color(0.82, 0.88, 1.0)
+		plate.position = Vector3(0.0, amplitude_y + 0.8, 0.0)
+		add_child(plate)
+
+func _sample_count() -> int:
+	# num_points for every rational ratio — the shipped number. Only the
+	# irrational value asks for more, because it draws six turns, not one.
+	var n: int = int(round(float(num_points) * _sample_scale))
+	return maxi(n, 2)
+
 func _generate_full_curve() -> void:
 	curve_points.clear()
 
-	for i in range(num_points + 1):
-		var t = float(i) / float(num_points) * TAU
-		var point = _calculate_point(t)
+	var steps: int = _sample_count()
+	for i in range(steps + 1):
+		var t: float = float(i) / float(steps) * TAU * _turns
+		var point: Vector3 = _calculate_point(t)
 		curve_points.append(point)
 
 func _calculate_point(t: float) -> Vector3:
@@ -164,6 +249,35 @@ func _update_curve_mesh() -> void:
 		curve_mesh.surface_set_color(color)
 		curve_mesh.surface_add_vertex(point)
 
+	curve_mesh.surface_end()
+
+	# evidence = longhand: the two oscillations the figure is made of, drawn
+	# the way a scope shows them — x(t) below with time running down, y(t) to
+	# the left with time running out. Same t and same phase as the figure, so
+	# they stay in step with it as the phase drifts.
+	if evidence == "longhand":
+		_add_component_strip(true)
+		_add_component_strip(false)
+
+func _add_component_strip(is_x_component: bool) -> void:
+	if not curve_mesh:
+		return
+	var steps: int = _sample_count()
+	var span: float = 1.2
+	var col: Color = Color(0.55, 0.62, 0.72)
+	curve_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	for i in range(steps + 1):
+		var f: float = float(i) / float(steps)
+		var t: float = f * TAU * _turns
+		var p: Vector3 = Vector3.ZERO
+		if is_x_component:
+			p = Vector3(amplitude_x * sin(freq_ratio_x * t + phase_shift),
+				-(amplitude_y + 0.35) - f * span, 0.0)
+		else:
+			p = Vector3(-(amplitude_x + 0.35) - f * span,
+				amplitude_y * sin(freq_ratio_y * t), 0.0)
+		curve_mesh.surface_set_color(col)
+		curve_mesh.surface_add_vertex(p)
 	curve_mesh.surface_end()
 
 func _update_particle() -> void:
@@ -227,5 +341,101 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass
+# --- DNA axes -----------------------------------------------------------------
+
+func _wants_particle() -> bool:
+	# `result` is the closed figure with nothing riding it. Every other value
+	# keeps the tracer, which is what show_particle has always decided alone.
+	return show_particle and evidence != "result"
+
+
+func _fmt(v: float) -> String:
+	# Godot's sprintf has no %g, so whole numbers are printed whole by hand.
+	if is_equal_approx(v, round(v)):
+		return str(int(round(v)))
+	return "%.3f" % v
+
+
+func _apply_ratio() -> void:
+	_last_ratio = ratio
+	match ratio:
+		"1_1_0":
+			# A 1:1 with delta = 0 is a straight diagonal, so the circle needs
+			# its quarter-turn — the same pairing set_preset("circle") makes.
+			freq_ratio_x = 1.0
+			freq_ratio_y = 1.0
+			freq_ratio_z = 0.0
+			phase_shift = PI / 2.0
+			_turns = 1.0
+			_sample_scale = 1.0
+		"2_1_0":
+			freq_ratio_x = 2.0
+			freq_ratio_y = 1.0
+			freq_ratio_z = 0.0
+			phase_shift = 0.0
+			_turns = 1.0
+			_sample_scale = 1.0
+		"3_2_0":
+			freq_ratio_x = 3.0
+			freq_ratio_y = 2.0
+			freq_ratio_z = 0.0
+			phase_shift = 0.0
+			_turns = 1.0
+			_sample_scale = 1.0
+		"5_4_0":
+			freq_ratio_x = 5.0
+			freq_ratio_y = 4.0
+			freq_ratio_z = 0.0
+			phase_shift = 0.0
+			_turns = 1.0
+			_sample_scale = 1.0
+		"1_phi_0":
+			# The one incommensurable ratio. Over a single period it would be
+			# an unremarkable open arc; the curve only shows that it will never
+			# close by being allowed to run past the period and miss its own
+			# start. Six turns, and three times the samples to carry them.
+			freq_ratio_x = 1.0
+			freq_ratio_y = PHI
+			freq_ratio_z = 0.0
+			phase_shift = 0.0
+			_turns = 6.0
+			_sample_scale = 3.0
+		_:
+			# "3_2_1" — and anything unrecognised. These are the four numbers
+			# lissajous_curves.tscn has always carried, so the default writes
+			# what was already there and every shipped placement is untouched.
+			freq_ratio_x = 3.0
+			freq_ratio_y = 2.0
+			freq_ratio_z = 1.0
+			phase_shift = 0.0
+			_turns = 1.0
+			_sample_scale = 1.0
+
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	# Guarded twice: a word is taken only when it is one this file knows AND
+	# differs from what is already set, and nothing is rebuilt until _ready has
+	# built once. A bare token passes no keys at all and never reaches either.
+	var ratio_moved: bool = false
+	var evidence_moved: bool = false
+
+	if config_data.has("ratio"):
+		var want: String = str(config_data["ratio"])
+		if want in RATIOS and want != ratio:
+			ratio = want
+			ratio_moved = true
+	if config_data.has("evidence"):
+		var want_ev: String = str(config_data["evidence"])
+		if want_ev in EVIDENCE and want_ev != evidence:
+			evidence = want_ev
+			evidence_moved = true
+
+	if not _built:
+		return
+	if ratio_moved:
+		_apply_ratio()
+	if evidence_moved or (ratio_moved and evidence == "axiom"):
+		_last_evidence = evidence
+		_setup_visualization()
+	if ratio_moved or evidence_moved:
+		_generate_full_curve()

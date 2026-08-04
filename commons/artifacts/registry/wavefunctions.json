@@ -10148,6 +10148,29 @@
   "lissajous_curves": {
    "category": "waves",
    "complexity": "advanced",
+   "dna": {
+    "promoted": "2026-08-03",
+    "stage": "2 - variation",
+    "axes": {
+     "ratio": [
+      "3_2_1",
+      "1_1_0",
+      "2_1_0",
+      "3_2_0",
+      "5_4_0",
+      "1_phi_0"
+     ],
+     "evidence": [
+      "trace",
+      "result",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "default": "ratio=3_2_1, evidence=trace - the shipped scene byte for byte. The 3_2_1 branch of _apply_ratio writes freq_ratio_x=3, freq_ratio_y=2, freq_ratio_z=1, phase_shift=0, which are the four numbers lissajous_curves.tscn already stored, and it leaves _turns and _sample_scale at 1.0, so _generate_full_curve runs the identical i/num_points * TAU loop over the identical 500 samples. trace resolves _wants_particle() to plain show_particle, the export the file has always read alone, and adds no node: the component strips are only drawn under longhand and the Label3D only built under axiom. All 19 map files naming this token pass a bare token with no config, so apply_grid_config is never called; it is guarded twice regardless - a word is taken only when it is in RATIOS/EVIDENCE and differs, and nothing rebuilds until _ready has built once.",
+    "was": "a fixed 3:2:1 figure. The frequency ratio - the artifact's own declared critical_parameter, and the subject of its truth line - was reachable only from set_preset(), a public method no map token could call, so every one of the 19 placements showed the same curve.",
+    "note": "The ratio is visible in a still here, unlike SphericalHarmonics: _generate_full_curve sweeps the whole parameter range into standing geometry every frame, so the closed figure is the object, not something a tracer draws over time. 1_phi_0 carries its own six-turn span and 3x sample count because non-closure cannot appear inside one period."
+   },
    "description": "Parametric curves with particle tracer",
    "dev_themes": [
     "oscillation",
