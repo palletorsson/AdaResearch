@@ -275,6 +275,37 @@
    }
   },
   "partial_derivative_terrain": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "framing": 0.8,
+    "fixture": {
+     "phase": "oppose"
+    },
+    "axes": {
+     "phase": [
+      "traverse",
+      "agree",
+      "oppose",
+      "single"
+     ],
+     "asked": [
+      "both",
+      "partial_x",
+      "partial_y",
+      "gradient"
+     ]
+    },
+    "default": "phase=traverse, asked=both - traverse skips the station lookup entirely, so _update_arrows still computes sx = sin(_t*0.4)*0.7 and sz = cos(_t*0.6)*0.7 and the sample point still runs its Lissajous; it also holds both sign multipliers at +1, so the two bars keep the shipped abs() placement on the +x and +z side. both leaves the two arrows visible and builds no third. At this pair _build_dna() adds NO NODE and changes NO visibility flag - the ribbons and the signed placement exist only where phase names a station, and no map names one. All 25 placements carry the bare token with no config keys. grid_size and span keep their pre-promotion behaviour INCLUDING THE BROKEN PART OF IT: they are still assigned after _ready has already consumed them, so they still do nothing, and a map that has been quietly ignoring `span` does not start redrawing because this file was touched.",
+    "was": "seven exports - three colours and four numbers - and an apply_grid_config that took two of the numbers after _ready had already used them. The artifact's argument, that a surface carries two independent slopes at every point, was reachable only by standing in the room and waiting for the sample point to arrive somewhere interesting, and no still could hold it. The runner refused the token for NO TURNABLE KNOBS, which was true in the sense that mattered: nothing declared changed what the picture ARGUED.",
+    "finding": "THE SIGN HAS NEVER BEEN VISIBLE. _update_arrows draws clamp(abs(dx) * 6.0, 0.3, 2.0) and hangs the bar at origin + (0.25, 0, 0) unconditionally, and the same for dy on +z. A negative partial and a positive one of equal size have therefore rendered as the same picture since the file was written, which means the one thing this artifact has that the 1D case does not - two slopes that can disagree - has never been on screen. It could stay that way precisely because the sample point never stopped anywhere long enough to be looked at. THE SECOND FINDING IS ABOUT THE SURFACE AND IT KILLED THE OBVIOUS VALUE LIST: every critical point of f(x,y) = sin(1.5x)cos(1.5y)h + sin(x+y)(0.12h) lies ON THE BOUNDARY of the drawn terrain - a minimum at (-1.000, -0.031), a maximum at (+1.000, +0.031) and two saddles at (-0.031, -1.000) and (+0.031, +1.000). Borrowing slope_tangent_demo's crest and trough, or the saddle this pass was reasonably expected to declare, would have pinned the arrows over the edge of the mesh they measure. Measured on a 201x201 scan of the full domain and refined by descent on |grad f|^2, before declaring rather than after.",
+    "note": "phase is WHERE THE TWO SLOPES ARE READ, and the three stations are SIGN PATTERNS rather than critical points because that is what this surface can answer inside its own extent. agree (-0.525, +0.520) has fx +0.305 and fy +0.304: two arrows of the same length both pointing forward, the 1D story told twice. oppose (-0.550, -0.545) has fx +0.263 and fy -0.262: the same two lengths pointing OPPOSITE ways, which is the whole reason a derivative in more than one dimension is not one number. single (+0.170, +0.200) has fx +0.525 and fy 0.000, so one axis carries everything and the other reads its clamp minimum - ask the wrong variable and the surface tells you nothing. asked is this artifact's own truth statement made settable: you differentiate with respect to whichever axis you think to ask about. WHAT IS ADDED, AND ONLY OFF THE DEFAULT, following slope_tangent_demo's precedent exactly: at a named station the two SLICE RIBBONS appear - f(., y0) and f(x0, .), the curves the partials are literally the ordinary slopes OF, which nothing in this artifact had ever drawn - and each bar is placed on the side its sign points to.",
+    "kin": "phase is slope_tangent_demo's and velocity_arrow's word, the same question asked of the same kind of object - where on a moving thing is the rate read - and `traverse` is their name for the un-pinned shipped sweep, character for character. THE OTHER THREE VALUES ARE THIS SURFACE'S OWN, and the reason is in `finding` rather than in preference: this is bouncing_ball's move, take the word and refuse the value list where the object cannot answer it. `evidence` was considered for the second axis and NOT taken: the 22-sibling list is about how much of an artifact's working is shown, and this one's second question is which of two derivatives was asked for at all - a different question wearing a similar shape. `curve` (derivative_pair, integral_area) was not taken either: it names WHICH FUNCTION is drawn, and implementing five surfaces here would have produced a second vector_field_grid instead of promoting this one.",
+    "still_note": "READ THE SUBJECT SHARE BEFORE BELIEVING ANY NUMBER HERE. The terrain is 2 x 2 m and the two arrows are 4 cm bars 0.4 m long, so the moving ink was under 2 percent of a fit-to-AABB frame before this pass, and a low percentage would have been dilution rather than an inert axis - slope_tangent_demo's measured fault, one artifact over in the same sequence. That is why the ribbons exist: two 2 m x 5.6 cm strips are roughly 0.22 m2 against a 4 m2 terrain, an order of magnitude more ink than the bars, and they sit in completely different places at the three stations, which are 1.0 to 1.4 m apart on a 2 m field. framing is set to 0.8 rather than lower because the stations reach 0.55 m from centre and the ribbons run the full span; if the sheet still reads diluted the next lever is 0.7, not a redesign. traverse is the only nondeterministic tile in the sheet - the sample point's position depends on how many process frames the headless boot managed before the shutter - so two traverse frames are not comparable to each other and a large traverse-to-traverse difference is a clock, not a bite. Judge phase on the three pinned stations.",
+    "fixture_why": "phase=oppose, and it is not a claim that oppose is special. traverse is the one nondeterministic value in the file, so any sweep that varies `asked` alone would otherwise photograph it against a moving sample point and call the clock a bite. The sweep merges the fixture UNDER the swept params, so when phase IS the axis the swept value wins and this pin costs nothing. No placement passes phase, so no map ever sees it.",
+    "declines": "height_scale was the tempting numeric axis - the @identity names it the critical_parameter - and is declined for slope_tangent_demo's stated reason: a more pronounced terrain photographed at one station is a bigger picture of the same claim, not a different claim. The three colours stay plain exports; a recolour is not an argument. sample_speed is a rate and invisible to a still.",
+    "placements": 25
+   },
    "name": "Partial Derivative Terrain",
    "lookup_name": "partial_derivative_terrain",
    "description": "A wavy terrain. Two arrows ride a moving sample point, one for partial-x, one for partial-y. First map showing two-axis differentiation.",
@@ -404,6 +435,35 @@
    }
   },
   "particle_flow_swarm": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "framing": 0.6,
+    "fixture": {
+     "flow_seed": 1,
+     "warmup_steps": 25,
+     "time_scale": 0.0
+    },
+    "axes": {
+     "field": [
+      "cells",
+      "orbit",
+      "sink",
+      "saddle",
+      "shear"
+     ],
+     "trace": [
+      "points",
+      "wake",
+      "streamline"
+     ]
+    },
+    "default": "field=cells, trace=points - cells is the `_` branch of the match in _field_at and returns the shipped three lines unchanged, phase = _t * 0.4 and psi_dz/psi_dx exactly as written, so the flow is the same flow. points sets the tail length to 0, which makes _build_multimesh's instance_count particle_count * 1 - the shipped expression - and makes _instance_xf short-circuit to the literal Transform3D(Basis(), Vector3(x, 0.08, z)) rather than build a scaled Basis it does not need. flow_seed defaults to 0, and at 0 _spawn_particles issues the same two global randf_range calls in the same order, so the shipped unseeded cloud is bit-identical and two swarms in one room are still two different clouds (Trial_rooms_change places two). warmup_steps defaults to 0, so _ready is the shipped two lines, and time_scale defaults to 1.0, so _process is `_t += delta * 1.0` and the shipped body. All 26 maps place the token bare or as `mount:particle_flow_swarm` on an exhibit_furniture plinth; not one passes a config key, so the rebuild branch is unreachable from any map that exists.",
+    "was": "seven exports - two colours and five numbers - and an apply_grid_config that honoured exactly one of them, particle_count, by tearing down the MultiMesh and respawning. The field itself was three welded lines. The runner refused it for NO TURNABLE KNOBS and that was the right verdict on the question that matters: a map could set how MANY particles rode the flow and never which flow they rode, or what a particle was allowed to leave behind.",
+    "note": "field is taken from vector_field_grid (this same registry file, promoted 2026-08-03) - the word, the five values, the comments and the arithmetic, character for character, including reusing the shipped wavenumber k = 2.5 as the gain of the four linear fields so |v| spans one range across the whole axis and the speed tint keeps meaning one thing. That is not decoration: the two artifacts are DECLARED a pair in both their own headers, one drawing the field and the other riding it, and a map that says field:sink to the grid and nothing to the swarm has silently broken the exhibit. Sharing the word is what lets a map keep them one thing. trace is the swarm's OWN question, and it is the one the grid cannot ask, because a body has a history and an arrow does not: points is where the bodies are and nothing else; wake gives each head a short upstream tail, so local direction becomes visible without committing to global structure; streamline drops the head emphasis entirely and the particle stops being a body and becomes the field's integral curve - which is the object the grid of arrows only ever sampled. The tail is INTEGRATED BACKWARDS from the head with the same step_scale rather than recorded, so it needs no history buffer and is identical on frame one and frame one thousand; it is therefore a streamline of the instantaneous field, not a pathline, which coincide under the four steady fields and differ under cells, the only one that scrolls. A tail point that leaves the domain is parked at zero scale rather than wrapped, because the wrap-around is bookkeeping for keeping the plane populated and a wrapped tail would claim the particle crossed the far edge - and it keeps the measured AABB identical at every value, so the sweep's fixed camera cannot drift.",
+    "still_note": "MEASURED by re-implementing the integrator and the harness camera in Python, not guessed. The subject is 220 spheres of 25 mm radius lying on a horizontal plane, and the rig's pitch is -0.26 rad, so the plane is seen at 15 degrees and foreshortened by 0.26 - the same dilution vector_field_grid recorded for its arrows. At framing 1.0 the whole 15-tile cross peaks at 2.02%, which is a fact about the camera. framing 0.6 is the answer: subject 6.35% of frame, peak 5.73%, and every one of the ten field pairs in the default trace=points column at or above 2.63%. It cannot crop - the rig fits by bounding sphere and 0.6 is above 1/PAD = 0.53. THE FIXTURE IS THE OTHER HALF. Without it this artifact is three kinds of unrepeatable at once: the spawn is an unseeded global draw, the integrator advances once per FRAME rather than per second so the still is a fact about the machine's frame rate, and the field scrolls. flow_seed=1 pins the cloud, warmup_steps=25 runs the shipped integrator at a fixed 1/60 delta so the field has ACTED before the shutter, and time_scale=0.0 parks it there. 25 is not arbitrary: at 60 steps the sink has collapsed to a dot 0.16 of its starting radius, the particles have arrived, and there is genuinely no wake left to draw - (sink, points) and (sink, wake) measure 0.02% apart. At 25 they are 0.50% apart and every other pair is comfortable. That weakest pair is the axis telling the truth about a stagnation point, not the axis failing.",
+    "declines": "particle_color and hot_color stay plain exports - a recolour is not an argument. particle_count, domain_x and domain_z stay dials on the same picture. step_scale and k are the rate and the wavenumber: turning either makes the same flow faster or finer, and the first is invisible to a still by construction. The three fixture knobs (flow_seed, warmup_steps, time_scale) are bench instruments and deliberately NOT axes - each of them defaults to the value that reproduces the shipped artifact exactly."
+   },
    "name": "Particle Flow Swarm",
    "lookup_name": "particle_flow_swarm",
    "description": "Many small particles ride the same vector field shown in vector_field_grid. Pairs with the grid to demonstrate field effect on bodies.",

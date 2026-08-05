@@ -28,6 +28,76 @@ class_name FrictionRamp
 
 @export var block_size: Vector3 = Vector3(0.04, 0.03, 0.04)
 
+# ─────────────────────────────────────────────────────────────────────
+#  STAGE-2 DNA — promoted 2026-08-05 (hand promotion; the runner refused
+#  this token for NO TURNABLE KNOBS. It has five exports and every one of
+#  them is a length, an angle or a coefficient — a continuum, not a case.)
+#
+#  THE ARGUMENT IS THE THRESHOLD. The block holds while tan(θ) ≤ μ and
+#  releases the instant tan(θ) > μ, and either side of that line is a
+#  different picture: a blue STATIC block with the friction arrow exactly
+#  cancelling the pull, or a red SLIDING one with a pink net force. The
+#  two axes are the two sides of that inequality, so the sweep matrix is
+#  the threshold itself, running as a staircase across the sheet.
+#
+#  incline  — how steep. normal_force_demo's word, its five values and
+#             its INCLINES table character for character (0/15/30/45/60),
+#             because that artifact asks the same question of the same
+#             geometry: how much of gravity the surface answers. `slope`
+#             is exactly the 30.0 this file has always shipped.
+#  grip     — what the surface is. NOT normal_force_demo's `surface`,
+#             which asks what the surface IS MADE OF as a mathematical
+#             object (plane · slab · ramp · absent) and has no friction
+#             in it at all; taking that word with a coefficient ladder
+#             under it would be folding_past's fault. μ is a property of
+#             the pair of surfaces in contact, so the value both sets the
+#             coefficient and dresses the plate it belongs to.
+#
+#  MEASURED, and the staircase is monotone — STATIC cells per grip, over
+#  flat/gentle/slope/steep/cliff:
+#     ice 0.05      · . . . .      1     tan θ = 0, .268, .577, 1.0, 1.732
+#     polished 0.20 · . . . .      1
+#     grit 0.50     · · . . .      2     <- the shipped surface
+#     rubber 0.95   · · · . .      3
+#     pitch 1.40    · · · · .      4
+#  BOTH SIDES ARE REACHABLE BY HAND TOO, which is not true of every
+#  artifact with sliders: μ runs 0…1.5 and the angle slider 5°…60°, and
+#  tan(60°) = 1.732 is above the top of the μ range, so a VR player can
+#  drive the block into either state from the panel. `flat` is the one
+#  value below the slider's own 5° floor — reachable from a map token,
+#  not from the panel.
+# ─────────────────────────────────────────────────────────────────────
+
+const INCLINES := {
+	"flat": 0.0,
+	"gentle": 15.0,
+	"slope": 30.0,
+	"steep": 45.0,
+	"cliff": 60.0,
+}
+const GRIP_MU := {
+	"ice": 0.05,
+	"polished": 0.20,
+	"grit": 0.50,
+	"rubber": 0.95,
+	"pitch": 1.40,
+}
+# albedo, roughness, metallic. `grit` is listed for completeness and is never
+# read: at grit _style_ramp returns before touching the material, so the plate
+# keeps the three literal lines _create_ramp has always written.
+const GRIP_LOOK := {
+	"ice": [Color(0.72, 0.85, 0.95), 0.05, 0.0],
+	"polished": [Color(0.62, 0.64, 0.70), 0.15, 0.75],
+	"grit": [Color(0.35, 0.35, 0.40), 0.85, 0.1],
+	"rubber": [Color(0.30, 0.20, 0.18), 1.0, 0.0],
+	"pitch": [Color(0.10, 0.09, 0.08), 0.60, 0.0],
+}
+
+@export_enum("flat", "gentle", "slope", "steep", "cliff") var incline: String = "slope"
+@export_enum("ice", "polished", "grit", "rubber", "pitch") var grip: String = "grit"
+
+var _built: bool = false
+
 # --- Colors ---
 
 var color_ramp: Color = Color(0.35, 0.35, 0.4)
@@ -49,6 +119,7 @@ const G: float = 9.81
 # --- Nodes ---
 
 var _ramp_mesh: MeshInstance3D
+var _ramp_mat: StandardMaterial3D
 var _block_mesh: MeshInstance3D
 var _block_mat: StandardMaterial3D
 var _force_mesh: MeshInstance3D
@@ -65,13 +136,30 @@ var _signal_connections: Array = []
 
 
 func _ready() -> void:
+	ramp_angle_deg = _angle_for_incline()
 	_create_ramp()
 	_create_block()
 	_create_force_mesh()
 	_create_labels()
+	# AFTER the block, the material and the labels exist, because assigning
+	# friction_mu runs its setter, and the setter calls _update_physics_state()
+	# straight through to _block_mesh and _info_label. At the shipped `grit` this
+	# assignment never happens at all.
+	if grip != "grit" and GRIP_MU.has(grip):
+		friction_mu = float(GRIP_MU[grip])
 	_create_vr_controls()
 	_reset_block()
 	_update_physics_state()
+	_built = true
+
+
+## The angle this incline asks for. `slope` SHORT-CIRCUITS to the shipped
+## ramp_angle_deg rather than to the table's 30.0 — identical today, but a scene
+## that overrides the angle in the inspector is then not silently retuned.
+func _angle_for_incline() -> float:
+	if incline == "slope" or not INCLINES.has(incline):
+		return ramp_angle_deg
+	return float(INCLINES[incline])
 
 
 # ------------------------------------------------------------------
@@ -86,15 +174,37 @@ func _create_ramp() -> void:
 	_ramp_mesh.mesh = box
 
 	var mat = StandardMaterial3D.new()
-	mat.albedo_color = color_ramp
-	mat.roughness = 0.85
-	mat.metallic = 0.1
+	_ramp_mat = mat
+	_paint_ramp()
 	_ramp_mesh.material_override = mat
 
 	# Tilt around X axis so the ramp slopes downward along +Z (local)
 	# Pivot at lower edge: position center of ramp elevated
 	_update_ramp_transform()
 	add_child(_ramp_mesh)
+
+
+## What the plate is. A coefficient of friction is not a property of the block or
+## of the slope, it is a property of the two surfaces in contact, so the value that
+## sets μ also says what the player is looking at. The first three lines are the
+## ones _create_ramp has always written, and at the shipped `grit` _style_ramp
+## returns before touching any of them.
+func _paint_ramp() -> void:
+	if _ramp_mat == null:
+		return
+	_ramp_mat.albedo_color = color_ramp
+	_ramp_mat.roughness = 0.85
+	_ramp_mat.metallic = 0.1
+	_style_ramp(_ramp_mat)
+
+
+func _style_ramp(mat: StandardMaterial3D) -> void:
+	if grip == "grit" or not GRIP_LOOK.has(grip):
+		return
+	var look: Array = GRIP_LOOK[grip]
+	mat.albedo_color = look[0]
+	mat.roughness = float(look[1])
+	mat.metallic = float(look[2])
 
 
 func _update_ramp_transform() -> void:
@@ -409,14 +519,46 @@ func _exit_tree() -> void:
 			conn[0].disconnect(conn[1], conn[2])
 	_signal_connections.clear()
 
+## GUARDED. A declared value is taken only when it validates AND differs, and
+## nothing touches a mesh before _ready has built one — this used to run
+## _reset_block() straight into a null _block_mesh if it was ever called early.
+## All ten placements carry the bare token with no config keys, so none of them
+## reaches an assignment here.
+##
+## `incline` is read before the legacy numeric `angle`, and `grip` after the
+## legacy numeric `friction_mu`, so in the contradictory case of a map passing
+## both the pre-existing key still wins and no shipped placement can change.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.is_empty():
+		return
+
+	if config_data.has("incline"):
+		var inc: String = str(config_data["incline"]).to_lower()
+		if INCLINES.has(inc) and inc != incline:
+			incline = inc
+			ramp_angle_deg = float(INCLINES[inc])
+			if _built:
+				_update_ramp_transform()
+
 	if config_data.has("friction_mu"):
 		friction_mu = float(config_data["friction_mu"])
 	if config_data.has("angle"):
 		ramp_angle_deg = float(config_data["angle"])
-		_update_ramp_transform()
+		if _built:
+			_update_ramp_transform()
 	if config_data.has("block_size"):
 		var s = float(config_data["block_size"])
 		block_size = Vector3(s, s * 0.75, s)
+
+	if config_data.has("grip"):
+		var g: String = str(config_data["grip"]).to_lower()
+		if GRIP_MU.has(g) and g != grip:
+			grip = g
+			if _built:
+				_paint_ramp()
+				friction_mu = float(GRIP_MU[g])
+
+	if not _built:
+		return
 	_reset_block()
 	_update_physics_state()

@@ -21,6 +21,50 @@
 #
 # Works in both VR and desktop (flat screen) modes.
 # ===========================================================================
+#
+# ---------------------------------------------------------------------------
+# DNA PASS 2026-08-05 - DECLINED, WITH REASONS. Do not reopen without reading
+# these; the token was refused by the runner for NO TURNABLE KNOBS and was then
+# hand-examined for a roster axis (does the arena CHOOSE which creatures to
+# show?). It does not, and four separate things say so:
+#
+# 1. THE SPAWN LIST IS NOT DATA. _spawn_hazards() is ~110 lines of imperative
+#    instantiate-and-position with literal coordinates, and it ends by loading
+#    beast_demo.tscn and re-parenting a child out of another demo's world. The
+#    one real table in the file, force_configs, holds four ForceFields that
+#    differ only in `type` - which is the QFEP claim, and which belongs to
+#    force_field, not here. There is no roster to lift.
+#
+# 2. EVERY FAMILY IN THE ARENA IS ALREADY ITS OWN ARTIFACT. plasma_critter,
+#    stick_tool, octapod_crawler, three/four/six_leg_critter, edible_mushroom
+#    and force_field are all registry tokens with their own scenes, and
+#    octapod_crawler is already promoted with declared axes. A roster axis here
+#    would be a second, worse instrument for questions its members answer
+#    properly on their own bench.
+#
+# 3. A STILL CANNOT PHOTOGRAPH WHAT THIS ARENA ARGUES. Walk in = damage. Touch
+#    with the stick = fire torch. Approach = hatch. Bring a mushroom = transmute.
+#    Every claim in the truth line above is an interaction over time. And the
+#    subject is not even stable between frames: octapod_crawler and
+#    edible_mushroom both call randf() during setup and the arena instantiates
+#    three and six of them, so four sweep tiles would differ from each other
+#    whatever the axis did - the unseeded-generative false-bite failure.
+#
+# 4. IT IS A LEVEL, NOT AN OBJECT, AND THAT IS A FINDING RATHER THAN AN AXIS.
+#    _build_environment() adds a WorldEnvironment and two DirectionalLight3Ds;
+#    _build_ground() lays a 16 x 16 m collision slab. GridInteractablesComponent
+#    ._suppress_embedded_chrome hides an embedded CanvasLayer and Camera3D and
+#    NOTHING ELSE, so in the three maps that place this token (Random_Remove,
+#    Room_Random_Remove, Corridor_Random_Remove) the arena replaces the map's
+#    environment and lighting and drops a sixteen-metre floor through the grid.
+#    The registry agrees it should not be there - include_in_map_data: false,
+#    map_ready: false - and three maps place it anyway. That is the real work
+#    on this token, and it is not a DNA pass's to do.
+#
+# Also drifted, noted not fixed: the registry description says "a dark
+# atmospheric arena with moody lighting and fog", while this file sets
+# fog_enabled = false under a comment reading "well-lit test arena".
+# ---------------------------------------------------------------------------
 
 extends Node3D
 

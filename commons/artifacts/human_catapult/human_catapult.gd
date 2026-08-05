@@ -28,6 +28,52 @@ const SliderScene := "res://commons/interactables/slider_horizontal.tscn"
 # Player body lives on physics layer 20 → mask 524288 (same as jump_pad.gd).
 const PLAYER_MASK := 524288
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-08-05). Three placements, and every knob it had was
+# a MAGNITUDE — launch_force, launch_angle, gravity_magnitude. Numbers, not
+# arguments: turning them flings the same body further. The flight itself is an
+# EVENT and the evidence for this loop is one still, so the throw could never be
+# the axis. What a still CAN hold is what the machine SAYS before you commit.
+#
+# TWO AXES, BOTH THE CATAPULT'S WORDS, character for character — and force_pad
+# already seconded them, so this is the third member of one family, not a third
+# vocabulary:
+#
+#   foresight   how much of the ARC is handed to you before you fire
+#               parabola · apex · landing · none
+#   vectors     how "what you give" is drawn at the launch point
+#               sum · components · velocity · gravity
+#
+# Only the DEFAULT differs, and it differs honestly, because the three machines
+# shipped at different rungs of the same ladder. catapult was born showing the
+# whole parabola AND the gravity arrow (parabola/sum); force_pad was born showing
+# none of the arc and one arrow (none/velocity). This one was born in between —
+# the full predicted parabola and ONE velocity arrow, gravity left unstated — so
+# it ships parabola/velocity, which is exactly what _refresh() has always drawn.
+#
+# WHY THE WORD FITS HERE AND launch_arc REFUSED IT. launch_arc's parabola is a
+# strobe of a flight already completed, so there is nothing being foreseen. This
+# machine has a FIRE button and a basket you stand in, and the arc is drawn from
+# the basket before you press it. And because the payload is the PLAYER, the axis
+# stops being a display option and becomes a question about consent: at `none` you
+# climb into a cup and find out where you land; at `landing` the floor already
+# says; at `parabola` the whole flight is written before you move.
+#
+# NOT TOUCHED: the frame, the arm, the basket, the Area3D and its mask, the
+# sliders, the FIRE button, the velocity handed to the player body, the swing.
+# Nothing here changes where anybody flies — only what the machine admits first.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## catapult's ladder, same word and same four values. `parabola` is the shipped machine.
+@export_enum("parabola", "apex", "landing", "none") var foresight: String = "parabola"
+## catapult's second word, same four values. `velocity` — one arrow for the throw, with
+## gravity left unstated — is the single accent arrow this machine has always drawn.
+@export_enum("sum", "components", "velocity", "gravity") var vectors: String = "velocity"
+
+const FORESIGHTS: PackedStringArray = ["parabola", "apex", "landing", "none"]
+const VECTOR_DRAWINGS: PackedStringArray = ["sum", "components", "velocity", "gravity"]
+const GRAVITY_COLOR := Color(0.95, 0.45, 0.25)
+
 # ── DNA ────────────────────────────────────────────────────────────────
 ## Launch speed given to the player (m/s).
 @export var launch_force: float = 12.0
@@ -43,6 +89,9 @@ const PLAYER_MASK := 524288
 var _arm_pivot: Node3D
 var _basket: Node3D
 var _vel_arrow: Node3D
+var _vel_arrow_up: Node3D      # vectors:components — the vertical leg of v0
+var _grav_arrow: Node3D        # vectors:sum|gravity — the constant that takes you back
+var _built: bool = false
 var _traj_mesh: MeshInstance3D
 var _traj_mat: StandardMaterial3D
 var _readout: Label3D
@@ -65,15 +114,79 @@ func _ready() -> void:
 	_build_console()
 	_build_indicators()
 	_refresh()
+	_built = true
 
 
+## Map tokens: "human_catapult#foresight:landing", "human_catapult#vectors:components".
+##
+## GUARDED. The shipped version freed every child and re-ran _ready() on ANY call, even
+## one whose dictionary named nothing this machine owns — three placements torn down for
+## nothing, and a rebuild scheduled before the first build had happened at all. Worse, it
+## only queue_free()d the children (which detaches them at end of frame) and then
+## call_deferred("_ready"), so the new frame could be built while the old one was still
+## parented. Now children are removed before they are freed, and a rebuild happens only
+## when a value actually CHANGED and only after _ready has run once.
 func apply_grid_config(config: Dictionary) -> void:
-	if config.has("launch_force"): launch_force = float(config["launch_force"])
-	if config.has("launch_angle"): launch_angle = float(config["launch_angle"])
-	if config.has("gravity_magnitude"): gravity_magnitude = float(config["gravity_magnitude"])
-	for c in get_children(): c.queue_free()
-	_accent_mats.clear(); _player_node = null; _armed = false; _firing = false
-	call_deferred("_ready")
+	var rebuild: bool = false
+	if config.has("foresight"):
+		var f: String = _pick_axis(str(config["foresight"]), FORESIGHTS, foresight)
+		if f != foresight:
+			foresight = f
+			rebuild = true
+	if config.has("vectors"):
+		var v: String = _pick_axis(str(config["vectors"]), VECTOR_DRAWINGS, vectors)
+		if v != vectors:
+			vectors = v
+			rebuild = true
+	if config.has("launch_force"):
+		var lf: float = float(config["launch_force"])
+		if not is_equal_approx(lf, launch_force):
+			launch_force = lf
+			rebuild = true
+	if config.has("launch_angle"):
+		var la: float = float(config["launch_angle"])
+		if not is_equal_approx(la, launch_angle):
+			launch_angle = la
+			rebuild = true
+	if config.has("gravity_magnitude"):
+		var gm: float = float(config["gravity_magnitude"])
+		if not is_equal_approx(gm, gravity_magnitude):
+			gravity_magnitude = gm
+			rebuild = true
+	if rebuild and _built and is_inside_tree():
+		_rebuild()
+
+
+## An unreadable word keeps the current value rather than silently blanking a machine
+## three rooms expect to be drawing its arc.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	if allowed.has(v):
+		return v
+	if v != "":
+		push_warning("human_catapult: unknown value '%s' — keeping '%s'" % [v, fallback])
+	return fallback
+
+
+func _rebuild() -> void:
+	for c in get_children():
+		remove_child(c)
+		c.queue_free()
+	_accent_mats.clear()
+	_arm_pivot = null
+	_basket = null
+	_vel_arrow = null
+	_vel_arrow_up = null
+	_grav_arrow = null
+	_traj_mesh = null
+	_traj_mat = null
+	_readout = null
+	_player_node = null
+	_armed = false
+	_firing = false
+	_fire_t = 0.0
+	_built = false
+	_ready()
 
 
 # ── Build: heavy timber frame ──────────────────────────────────────────
@@ -227,9 +340,31 @@ func _make_button(pos: Vector3, color: Color, cb: Callable) -> void:
 
 # ── Indicators: launch-velocity arrow + predicted parabola ─────────────
 
+## vectors — how "what you give" is drawn at the basket. The fall-through branch is the
+## shipped machine exactly: ONE accent arrow, same colour, nothing else, built first.
 func _build_indicators() -> void:
-	_vel_arrow = _make_arrow(accent_color)
-	add_child(_vel_arrow)
+	match vectors:
+		"components":
+			# v0 = forward*cos(a) + up*sin(a) taken apart into the two legs the ANGLE
+			# slider trades between — the console's own arithmetic, drawn not asserted.
+			_vel_arrow = _make_arrow(accent_color)
+			add_child(_vel_arrow)
+			_vel_arrow_up = _make_arrow(accent_color.lightened(0.35))
+			add_child(_vel_arrow_up)
+		"sum":
+			# what you give AND the constant that will take it back.
+			_vel_arrow = _make_arrow(accent_color)
+			add_child(_vel_arrow)
+			_grav_arrow = _make_arrow(GRAVITY_COLOR)
+			add_child(_grav_arrow)
+		"gravity":
+			# only the given. A machine that shows what is already acting on you and
+			# says nothing about what it is about to add.
+			_grav_arrow = _make_arrow(GRAVITY_COLOR)
+			add_child(_grav_arrow)
+		_:
+			_vel_arrow = _make_arrow(accent_color)
+			add_child(_vel_arrow)
 	_traj_mesh = MeshInstance3D.new()
 	_traj_mat = StandardMaterial3D.new()
 	_traj_mat.albedo_color = accent_color
@@ -261,9 +396,39 @@ func _launch_dir_local() -> Vector3:
 func _refresh() -> void:
 	# Velocity arrow from the basket along the launch direction.
 	var origin := _basket_world_pos() - global_position + Vector3(0, 0.5, 0)
-	var dir := _launch_dir_local() * clampf(_force * 0.12, 0.4, 2.2)
-	_position_arrow(_vel_arrow, origin, dir)
-	# Predicted parabola p(t)=p0+v0*t+0.5*g*t^2 in local space.
+	if vectors == "components":
+		var a := deg_to_rad(_angle_deg)
+		var s: float = clampf(_force * 0.12, 0.4, 2.2)
+		_position_arrow(_vel_arrow, origin, Vector3(0.0, 0.0, cos(a)) * s)
+		_position_arrow(_vel_arrow_up, origin, Vector3(0.0, sin(a), 0.0) * s)
+	else:
+		var dir := _launch_dir_local() * clampf(_force * 0.12, 0.4, 2.2)
+		_position_arrow(_vel_arrow, origin, dir)
+	if is_instance_valid(_grav_arrow):
+		var g_len: float = clampf(gravity_magnitude * 0.06, 0.35, 1.1)
+		_position_arrow(_grav_arrow, origin + Vector3(0.0, 1.1, 0.0), Vector3.DOWN * g_len)
+	# foresight — how much of the flight is drawn before the FIRE button is pressed.
+	_traj_mesh.mesh = _foresight_mesh(origin)
+	var range_flat: float = (_force * _force) * sin(2.0 * deg_to_rad(_angle_deg)) / maxf(gravity_magnitude, 0.001)
+	_readout.text = "angle %d°   force %.0f m/s\nrange ~ %.0f m" % [int(round(_angle_deg)), _force, range_flat]
+
+
+func _foresight_mesh(origin: Vector3) -> Mesh:
+	match foresight:
+		"none":
+			return null
+		"apex":
+			return _apex_mesh(origin)
+		"landing":
+			return _landing_mesh(origin)
+		_:
+			return _arc_mesh(origin)
+
+
+## foresight:parabola — the whole flight, and the shipped arithmetic character for
+## character: p(t)=p0+v0*t+0.5*g*t^2 in local space, sampled every 0.08 s until it drops
+## below the machine's own floor or 4 s runs out.
+func _arc_mesh(origin: Vector3) -> Mesh:
 	var v0 := _launch_dir_local() * _force
 	var p0 := origin
 	var st := SurfaceTool.new()
@@ -275,10 +440,58 @@ func _refresh() -> void:
 			break
 		st.add_vertex(p)
 		t += 0.08
-	var m := st.commit()
-	_traj_mesh.mesh = m
-	var range_flat: float = (_force * _force) * sin(2.0 * deg_to_rad(_angle_deg)) / maxf(gravity_magnitude, 0.001)
-	_readout.text = "angle %d°   force %.0f m/s\nrange ~ %.0f m" % [int(round(_angle_deg)), _force, range_flat]
+	return st.commit()
+
+
+## foresight:apex — the summit only. How HIGH this throws you, and nothing at all about
+## where you come down: a cross at the peak with a plumb line so the height reads against
+## the floor of the room the machine stands in.
+func _apex_mesh(origin: Vector3) -> Mesh:
+	var v0 := _launch_dir_local() * _force
+	var g: float = maxf(gravity_magnitude, 0.001)
+	var t: float = maxf(v0.y / g, 0.0)
+	var apex: Vector3 = origin + v0 * t + Vector3(0.0, -0.5 * g * t * t, 0.0)
+	var s: float = 0.28
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_LINES)
+	st.add_vertex(origin)
+	st.add_vertex(origin + v0.normalized() * 0.5)
+	st.add_vertex(apex - Vector3(s, 0.0, 0.0))
+	st.add_vertex(apex + Vector3(s, 0.0, 0.0))
+	st.add_vertex(apex - Vector3(0.0, s, 0.0))
+	st.add_vertex(apex + Vector3(0.0, s, 0.0))
+	st.add_vertex(apex - Vector3(0.0, 0.0, s))
+	st.add_vertex(apex + Vector3(0.0, 0.0, s))
+	st.add_vertex(apex)
+	st.add_vertex(Vector3(apex.x, 0.0, apex.z))
+	return st.commit()
+
+
+## foresight:landing — the target only. A ring drawn on the floor where YOU come down,
+## and no account whatever of the flight in between. Solved from the same p(t) the arc
+## uses, so the ring and the arc can never disagree about where this throw ends.
+func _landing_mesh(origin: Vector3) -> Mesh:
+	var v0 := _launch_dir_local() * _force
+	var g: float = maxf(gravity_magnitude, 0.001)
+	var disc: float = v0.y * v0.y + 2.0 * g * maxf(origin.y, 0.0)
+	var t: float = (v0.y + sqrt(maxf(disc, 0.0))) / g
+	var hit: Vector3 = Vector3(origin.x + v0.x * t, 0.02, origin.z + v0.z * t)
+	var r: float = 0.7
+	var segs: int = 32
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_LINES)
+	var prev: Vector3 = hit + Vector3(r, 0.0, 0.0)
+	for i in range(1, segs + 1):
+		var ang: float = TAU * float(i) / float(segs)
+		var p: Vector3 = hit + Vector3(cos(ang) * r, 0.0, sin(ang) * r)
+		st.add_vertex(prev)
+		st.add_vertex(p)
+		prev = p
+	st.add_vertex(hit - Vector3(r * 0.5, 0.0, 0.0))
+	st.add_vertex(hit + Vector3(r * 0.5, 0.0, 0.0))
+	st.add_vertex(hit - Vector3(0.0, 0.0, r * 0.5))
+	st.add_vertex(hit + Vector3(0.0, 0.0, r * 0.5))
+	return st.commit()
 
 
 # ── Fire: launch the player ────────────────────────────────────────────

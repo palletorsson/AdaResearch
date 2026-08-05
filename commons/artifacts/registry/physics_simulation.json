@@ -7201,6 +7201,34 @@
    }
   },
   "friction_ramp": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "incline": [
+      "flat",
+      "gentle",
+      "slope",
+      "steep",
+      "cliff"
+     ],
+     "grip": [
+      "ice",
+      "polished",
+      "grit",
+      "rubber",
+      "pitch"
+     ]
+    },
+    "default": "incline=slope, grip=grit - slope SHORT-CIRCUITS: _angle_for_incline() hands back the shipped ramp_angle_deg rather than the table's 30.0, so a scene overriding the angle in the inspector is not retuned, and at the export default the two are the same 30.0 anyway. grit returns from _style_ramp before touching the material, so the plate is painted by the three literal lines _create_ramp has always written (albedo 0.35/0.35/0.40, roughness 0.85, metallic 0.1), and no assignment to friction_mu happens at all, so mu stays 0.5. tan(30) = 0.577 > 0.5, so the shipped still is the red SLIDING block with a pink net-force arrow that it has always been. apply_grid_config is now guarded three ways - is_empty returns early, a word is taken only when it validates AND differs, and nothing touches a mesh before _built - where it previously ran _reset_block() straight into a null _block_mesh if it was ever called before _ready. All ten placements carry the bare token with no config keys, so none of them reaches an assignment.",
+    "was": "five exports and every one of them a continuum: two lengths, an angle, a Vector3 and a coefficient. The @identity's declared critical_parameter is 'friction_mu and ramp_angle_deg - their ratio decides whether the block holds or releases', and that ratio was reachable only by standing at the panel and moving two VR sliders. The runner refused the token for NO TURNABLE KNOBS, which was a fact about the KIND of knob.",
+    "note": "THE THRESHOLD IS THE ARGUMENT, so the two axes are the two sides of tan(theta) vs mu and the sweep matrix IS the threshold - a monotone staircase of STATIC cells across flat/gentle/slope/steep/cliff, measured from tan(theta) = 0, 0.268, 0.577, 1.000, 1.732: ice(0.05) 1, polished(0.20) 1, grit(0.50) 2, rubber(0.95) 3, pitch(1.40) 4. Every cell is a wholesale picture change rather than a numeric one: the block's albedo and emission swap between blue 0.2/0.6/0.9 and red 0.9/0.3/0.2, the status Label3D reads STATIC in green or SLIDING in red, the pink net-force arrow exists only while sliding, and the plate - the largest surface in the artifact - is rotated by incline and dressed by grip. TWO STATIC VALUES ARE NOT THE SAME PICTURE, which was the design problem worth solving here: the static friction arrow draws the MOBILISED force mg sin(theta) and does not depend on mu at all, so rubber and pitch on a shallow slope would have been identical frames under a mu-only axis. Dressing the plate is what separates them, and it is not a recolour dressed up as an argument - mu is a property of the two surfaces IN CONTACT, not of the block and not of the slope, so the value that sets the coefficient is the value that says what the plate is.",
+    "kin": "incline is normal_force_demo's word, its five values and its INCLINES table character for character - 0 / 15 / 30 / 45 / 60 - because that artifact asks the same question of the same geometry: how much of gravity a tilted surface answers. The two should photograph alike at the same value, and a room can set both and expect them to agree. grip is deliberately NOT that artifact's second word `surface` (plane | slab | ramp | absent), which asks what the surface IS as an object - a mathematical sheet, a solid, nothing at all - and has no friction anywhere in it. Taking `surface` with a coefficient ladder underneath would be folding_past's fault: a word without its answers.",
+    "reachability": "CHECKED RATHER THAN ASSUMED, because three artifacts in this session promised cases their own controls had clamped away. The mu slider spans 0 to 1.5 and the angle slider 5 to 60 degrees, and tan(60 deg) = 1.732 sits ABOVE the top of the mu range, so a player at the panel can drive the block into either state by hand - the threshold is reachable from both sides without a map token. `flat` is the single declared value below the slider's own 5 degree floor: reachable from a map token, not from the panel. It is worth having anyway, because a level plate is the degenerate case where friction has nothing to resist - mg sin(0) = 0 falls under _draw_arrow's 0.002 length floor, so the orange friction arrow vanishes entirely and only gravity and the normal force are drawn.",
+    "still_note": "incline is the strong axis in pixels: the plate is 0.5 x 0.2 m and the largest mesh in the artifact, and rotating it from 0 to 60 degrees changes the silhouette wholesale, carrying the block, the four force arrows and the ramp's shadow with it. grip is the second: the plate's albedo runs from a pale 0.72/0.85/0.95 ice to a near-black 0.10/0.09/0.08 pitch over that same largest area, plus the block's blue-to-red swap and the status label wherever the pair crosses the threshold. DO NOT READ A VERDICT OFF THE FORCE ARROWS: they are ImmediateMesh PRIMITIVE_LINES and rasterise about one pixel wide, so they contribute almost nothing to a diff either way. The union AABB also includes the RackTemplates control panel at (0, -0.04, 0.2), which is roughly as large as the ramp itself, so the subject share is healthy but the ramp is only part of it. One small source of noise: while sliding, the block creeps down the plate at 0.01x scaled velocity, so its position depends slightly on how many physics frames the boot managed - millimetres on a 0.5 m ramp, well under the colour swap it rides on.",
+    "declines": "ramp_length, ramp_width and block_size stay plain exports: they are sizes, and a bigger ramp photographed at the same angle is a bigger picture of the same claim. friction_mu and ramp_angle_deg stay exports too and are deliberately left as the continuum underneath the two named ladders, so a map that wants an arbitrary angle still has one.",
+    "placements": 10
+   },
    "capacity": "FEEL how friction coefficient controls the balance between motion and resistance on an inclined plane",
    "category": "physics",
    "complexity": "beginner",

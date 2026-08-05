@@ -6683,6 +6683,23 @@
   "health_display": {
    "category": "unknown",
    "complexity": "beginner",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "readout": [
+      "none",
+      "numeral",
+      "gradation",
+      "lattice"
+     ]
+    },
+    "default": "readout=numeral - the shipped path exactly. _build_readout()'s `numeral` case is a bare pass: no rail is built, no node is added, no visibility is touched, and _update_display still runs the same `%d` of ceil(health) and the same three colour branches in the same order. The three placements (ForcesArena, Forces_Drone_Game x2) carry no #readout token, so _read_readout() finds no config_readout metadata on the root and leaves the export where it was. apply_grid_config returns before touching anything unless a call actually names `readout` AND names a value in the allow-list AND names a different rung AND arrives after _ready has built once.",
+    "was": "no export of any kind - the runner refused this token for NO TURNABLE KNOBS. Thirteen lines that pushed ceil(health) into a Label3D the .tscn already contained, plus an if/elif chain on two bare literals (health <= 1.0 red, <= 2.0 yellow). GameManager ships max_player_health = 100.0 and nothing in the project calls set_max_health, so those two verdicts own 2% of the range and have never fired in a live room: the panel has read a green 100 in every placement since it was written.",
+    "note": "SHARED WORD, NOT A NEW ONE. `readout` = none|numeral|gradation|lattice is taken verbatim from line_interface, xyz_slider_plate, xyz_coordinates, qfep_calibrator and qfep_reactor, where it already means 'what does this apparatus tell you about the value it holds'. The alias table is not copied either - gameplay_readout.readout_name() forwards to XYZSliderPlate.readout_name(), so `#readout: ticks` means the same rung on all seven artifacts and the lists cannot drift.",
+    "twin": "hits_reset_display is the same scene twice (same 1.0 x 0.2 x 0.1 frame, same subtracted well, same ValueLabel and TitleLabel, different accent colour and different arithmetic) and is declared with the same word and the same values on the same day. THEY SHOULD MEASURE ALIKE at rungs 0-2; that is the check on the shared vocabulary, not a coincidence to explain afterwards. At rung 3 they are deliberately MIRRORED - this panel paints its hot band over 0..1 of 100 and the twin paints its over 2..100 - because the two files really do privilege opposite ends of one number.",
+    "harness": "no fixture or framing hint needed, and the reason is measured rather than assumed. capture_multi_angle._get_combined_aabb counts CSGShape3D and Label3D as well as MeshInstance3D, and the registry's own measurements block already reads aabb_size [1.0, 0.2, 0.1] from the CSG frame, so this artifact frames. The `none` rung HIDES the ValueLabel rather than freeing it, precisely so the AABB is identical at all four values and the sweep's fixed camera does not move between variants. The rail is hung UNDER the panel (y 0.05..0.19) rather than on its face: the ValueLabel is a 48pt glyph at the default pixel_size, roughly 0.48 m tall on a 0.2 m panel, so anything drawn on the face would have been read as a change to the numeral instead of an addition beside it."
+   },
    "description": "Live health readout panel wired to GameManager.health_updated — shows current hit points on a Label3D and updates every frame the value changes.",
    "dev_themes": [
     "commons",
@@ -6893,6 +6910,23 @@
   "hits_reset_display": {
    "category": "unknown",
    "complexity": "beginner",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "readout": [
+      "none",
+      "numeral",
+      "gradation",
+      "lattice"
+     ]
+    },
+    "default": "readout=numeral - the shipped path exactly. _build_readout()'s `numeral` case is a bare pass: no rail is built, no node is added, no visibility is touched, and _update_display still computes the same max(0, max_player_health - health), prints the same '%d / %d' and takes the same three colour branches. The three placements (ForcesArena, Forces_Drone_Game x2, one of them at rotation 180) carry no #readout token, so _read_readout() finds no config_readout metadata on the root and leaves the export where it was. apply_grid_config is guarded identically to the twin's.",
+    "was": "no export of any kind - the runner refused this token for NO TURNABLE KNOBS. Sixteen lines that pushed a count into a Label3D the .tscn already contained. Its own comment says 'we already have a Health display (3 -> 0)' and its thresholds are written for a three-hit game, but GameManager ships max_player_health = 100.0 and nothing calls set_max_health, so this panel has read '0 / 100' in every room it has ever stood in and every hit after the second lands inside one undifferentiated red verdict. Reported, not fixed: correcting it would move three live placements.",
+    "note": "SHARED WORD, NOT A NEW ONE. `readout` = none|numeral|gradation|lattice is taken verbatim from line_interface, xyz_slider_plate, xyz_coordinates, qfep_calibrator and qfep_reactor. The alias table forwards to XYZSliderPlate.readout_name() through the shared body commons/visualaid/gameplay/gameplay_readout.gd, which also owns the rail geometry - written once so the two siblings cannot grow different scales out of the same word.",
+    "twin": "health_display is the same scene twice and is declared with the same word and the same values on the same day; they should MEASURE ALIKE at rungs 0-2. At rung 3 the evidence is deliberately MIRRORED: the twin counts down what remains and paints its hot band across 0..1 of a hundred-unit scale, this one counts up what has been taken and paints its across 2..100 - so 98% of everything this counter can display is already inside the terminal verdict, while the twin's fires only in the last 1%. Both rungs draw the same thing (the values at which the code changes its verdict); the asymmetry is the artifacts', not the vocabulary's, and it has been true since both were written and invisible from either panel.",
+    "harness": "as the twin: no fixture or framing hint. _get_combined_aabb counts the CSG frame and the Label3D, the registry's measurements block already reads a real 1.0 x 0.2 x 0.1 box, and `none` hides the ValueLabel rather than freeing it so the fixed sweep camera sees the same box at all four values. The index sits at the LEFT stop at rest here and at the RIGHT stop on the twin, which is the cheapest available check that the two panels were actually swept as different artifacts rather than as one scene under two names."
+   },
    "description": "Counter panel showing hits taken toward map reset — displays N / max, incrementing as the player accumulates damage from hazards.",
    "dev_themes": [
     "commons",

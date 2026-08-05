@@ -4108,6 +4108,32 @@
    "qfep_connection": "Porosity is set a nudge above the critical 0.593, so the seep from the top face is guaranteed yet never attributable to any single cell — crossing is a property of the network, not its members. Criticality as politics: the difference between sealed and leaking is a fraction of a percent of pores."
   },
   "persian_rug": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "stencil": [
+      "quadrant",
+      "motif",
+      "halfturn",
+      "none"
+     ],
+     "division": [
+      "frame",
+      "bands",
+      "medallion",
+      "none"
+     ]
+    },
+    "default": "stencil=quadrant, division=frame - the shipped rug, bit-identical rather than merely equivalent. quadrant is the fall-through arm of _enforce_symmetry and runs _enforce_quadrant, which is the original four writes in the original order; its seeding branch is the original `for x in range(width/2): for y in range(height/2)` loop character for character, so the randf() stream drawn under seed(12345) is consumed in the same order and produces the same 24576 draws. That mattered: reshaping the seed loop would have changed the RNG sequence and therefore the rug, in every placement, while every stage still ran green. division=frame is _is_border's original boolean expression, now reached after one integer compare against a mode resolved once per grid build rather than per cell. MEASURED: four placements, none passing a key - `persian_rug:0:-0.49` in CA_Introduction, bare `persian_rug` in Corridor_CA_Introduction and Disposition_Test_Hub, and the name inside curation_station's `#artifacts:` list in Curation_Bay_cellularautomata_0, where the trailing #with_wall/#with_pillars/#with_barrier keys belong to the STATION and never reach this token. The `:0:-0.49` form is artifact:rotation:y_offset, not config.",
+    "was": "the runner refused it as NO TURNABLE KNOBS and was right, though not for the obvious reason: this file already had a dozen @exports, and apply_grid_config was a literal `pass`, so not one of them could be reached from a map token and every rug in the project was the same rug. Meanwhile the two things the artifact actually argues were not exports at all - the symmetry was welded into _enforce_symmetry as a hard-coded four-fold mirror, and the border/field boundary was welded into _is_border as a hard-coded rectangle.",
+    "why_these_two": "both were derived from the file's own @identity, not invented for it. `truth` says symmetry imposed on local rules turns noise into ornament - and that claim could not be tested, because the symmetry could not be removed. `critical_parameter` names the two rulesets as the tension - but the SHAPE of the boundary between them, which is the thing that makes a carpet a carpet rather than a noise field, was not a parameter. stencil turns the first, division turns the second.",
+    "shares_vocabulary_with": "mirrored_cellular_automata - the word `stencil`, taken with its answers. `quadrant` and `none` are the same operations under the same names (four-fold mirror; no stencil, every cell drawn on its own account at the same density), and `motif` is the same idea of one small block broadcast outward. The two artifacts are the pair the @identity already names as contrasts, and on this question they measure alike.",
+    "value_declined": "`octant`, mirrored_cellular_automata's fourth. Its eight-fold stencil is the diagonal reflection grid[x][y], which only closes on a SQUARE grid; this rug is 256x384 and its footprint is [3,1,4] - a runner, taller than it is wide by design. Declaring octant would have named a mechanism this object lacks, which is folding_past's and bouncing_ball's fault exactly, and the sweep would have rendered it as the default. `halfturn` replaces it because 180-degree point symmetry IS native to a rectangle: the same regularity as quadrant with no mirror line anywhere in the cloth, which is the pmm/p2 distinction that ornament actually turns on.",
+    "division_is_this_artifact_own_word": "no sibling asks where two rulesets meet, so nothing was there to reuse. frame says ornament is BOUNDED, medallion says it RADIATES from a centre (the classic Persian centrepiece, the exact inverse of the frame), bands says it ACCUMULATES IN COURSES like a kilim, and none abolishes the inside/outside distinction altogether - the control, which asks whether the two-ruleset claim was load-bearing at all. Because _update_texture_slice also picks the ACTIVE COLOUR from _is_border, this axis moves the pink and the gold as well as the rules.",
+    "still_note": "the axis is legible in the very first frame and does not depend on capture timing: _initialize_grid applies the stencil to the seed before a single step runs, so a quadrant rug is symmetric at t=0 and a `none` rug never is. The automaton then re-enforces the stencil after every step, so the property holds as it evolves. The whole thing is deterministic at the default because random_seed ships false and the grid is seeded from seed(12345) - so two captures of the same value at the same settle time are the same image. apply_grid_config accepts random_seed through a _truthy() converter rather than assigning a fixture string to the typed bool.",
+    "declines": "the rule arrays (rule_border_born/survive/states and the inner set) stay plain exports and are NOT declared: they are the sibling family's `rule` question, and a Life-family rulestring axis on top of these two would be a third variable over the same picture. Also declined: step_interval, play_duration and pause_duration, which are rates and durations and invisible to a still - the info_board fault."
+   },
    "category": "emergence",
    "complexity": "intermediate",
    "description": "Persian Rug Cellular Automata.",
