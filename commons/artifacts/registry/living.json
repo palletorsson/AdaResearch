@@ -1,0 +1,170 @@
+{
+ "_readme": "LIVING registry \u2014 the biome's organisms as DNA-promoted specimens. Not scenes: each entry is a grammar token rendered by a morphology, so its axes are derived from the biome grammar + the preset families on disk (tools/promote_living_dna.py), not from @export vars. Swept and judged by the same DNA loop as the artifacts.",
+ "artifacts": {
+  "living_fungus_fruit": {
+   "name": "living_fungus_fruit",
+   "description": "the fruiting mushroom \u2014 FungusMorphology cap+stem+gills from a curated preset",
+   "biome_token": "fungus:dna:seed",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "derived_from": "fungus_presets/ families on disk + the t= ladder",
+    "axes": {
+     "family": [
+      "alien_lumen",
+      "button_dome",
+      "fairy_ring",
+      "parasol_tall",
+      "shelf_bracket"
+     ],
+     "tier": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+     ]
+    },
+    "note": "family is the mushroom's SPECIES (five curated bodies, 12 variants each); tier is how big it stands. The axis the loop should bite on is family."
+   }
+  },
+  "living_fungus_pose": {
+   "name": "living_fungus_pose",
+   "description": "the same mushroom under a soft-body pose (static, no physics)",
+   "biome_token": "fungus:softbody:seed",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "derived_from": "fungus_presets_softbody/ families on disk",
+    "axes": {
+     "pose": [
+      "gravity_droop",
+      "inflate_bloat",
+      "squash_settle",
+      "wilt_collapse",
+      "wind_lean"
+     ],
+     "tier": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+     ]
+    },
+    "note": "pose is what GRAVITY did to it \u2014 droop, bloat, squash, wilt, lean. A settled thing lies flat and level."
+   }
+  },
+  "living_fungus_colony": {
+   "name": "living_fungus_colony",
+   "description": "the fungus colony substrates \u2014 computed (CA voxel network) vs grown (mycelium filaments)",
+   "biome_token": "fungus:<algo>:seed",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "derived_from": "dispatcher algo branches",
+    "axes": {
+     "algo": [
+      "ca",
+      "dna",
+      "mycelium",
+      "sdf",
+      "softbody"
+     ],
+     "tier": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+     ]
+    },
+    "note": "the kingdom's argument: the same organism as a CA that is visibly COMPUTED, filaments visibly GROWN, a fruiting body, a posed body, or one continuous SDF skin."
+   }
+  },
+  "living_flora_tree": {
+   "name": "living_flora_tree",
+   "description": "the tree \u2014 L-system tubes vs one continuous SDF trunk",
+   "biome_token": "flora:<algo>:seed",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "derived_from": "dispatcher flora branches",
+    "axes": {
+     "algo": [
+      "lsystem",
+      "sdf"
+     ],
+     "tier": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+     ]
+    },
+    "note": "lsystem grows a branching grammar; sdf welds the same skeleton into one skin. Two ontologies of the same tree."
+   }
+  },
+  "living_flora_bloom": {
+   "name": "living_flora_bloom",
+   "description": "the botanical flower \u2014 species by tier",
+   "biome_token": "flora:scatter:seed",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "derived_from": "flower presets by intensity (biome_config)",
+    "axes": {
+     "tier": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+     ]
+    },
+    "note": "the tier ladder is really a SPECIES ladder here (bluebell -> orchid -> daisy); the gallery's flower strip found that. Whether tier should mean bigger or other is a ruling, not a default."
+   }
+  },
+  "living_fauna_body": {
+   "name": "living_fauna_body",
+   "description": "the creature \u2014 a continuous SDF grub, spine+head+legs smooth-unioned",
+   "biome_token": "fauna:dna:seed",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "derived_from": "CreatureSdfMorphology + the t= ladder",
+    "axes": {
+     "tier": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+     ]
+    },
+    "note": "position seeds the DNA, so every cell grows a different individual; tier is the only declared axis, and the loop should test whether it bites."
+   }
+  },
+  "living_ground_role": {
+   "name": "living_ground_role",
+   "description": "what a declared cell DOES \u2014 the grammar's role vocabulary",
+   "biome_token": "<kingdom>:<algo>:<role>",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "derived_from": "BiomeGridTokens.ROLES",
+    "axes": {
+     "role": [
+      "edge",
+      "field",
+      "halo",
+      "mute",
+      "seed"
+     ]
+    },
+    "note": "seed grows now; field waits to be claimed; halo spills wilderness past the rim; mute is the declared vacuum. The role is the cell's verb."
+   }
+  }
+ }
+}

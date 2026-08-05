@@ -114,6 +114,15 @@ def sources_for(entry: dict) -> list[tuple[Path, str]]:
     fact about scene shape wearing the costume of a verdict about the registry. So offer
     every script the scene lists, root first, and let the caller take the one that actually
     declares the axis it is asking about.
+
+    AND THE SCRIPTS THEY INHERIT FROM. draw_dot_time_domain.gd is 92 lines that open with
+    `extends "res://commons/primitives/point/draw_dot.gd"`, and every knob it exposes to a
+    map — the whole retention record, its RETENTIONS allow-list, its apply_grid_config — is
+    the parent's. Reading only the child's own file reported a working, reachable, already
+    implemented axis as NO_EXPORT, which is the same fault as the two above wearing a third
+    costume: a fact about WHERE a line of code is written, presented as a verdict about the
+    registry. Only `extends "res://..."` is followed; `extends SomeClassName` would need the
+    class_name index and has not been needed yet.
     """
     out: list[tuple[Path, str]] = []
     seen: set[Path] = set()
@@ -147,6 +156,14 @@ def sources_for(entry: dict) -> list[tuple[Path, str]]:
             add(REPO / path.replace("res://", ""))
     if not out:
         add(REPO / sp.replace("res://", "").replace(".tscn", ".gd"))
+    # Walk the inheritance chain of everything found so far. add() appends to `out`, so the
+    # index-based loop picks up grandparents too, and `seen` stops a cycle.
+    i = 0
+    while i < len(out):
+        src = out[i][1]
+        i += 1
+        for m in re.finditer(r'^extends\s+"([^"]+)"', src, re.M):
+            add(REPO / m.group(1).replace("res://", ""))
     return out
 
 
@@ -313,6 +330,18 @@ def check_token(tok: str, entry: dict) -> list[dict]:
     axes = ((entry.get("dna") or {}).get("axes") or {})
     if not axes:
         return []
+    # LIVING specimens (the biome's organisms) are not scenes: an entry with a
+    # `biome_token` is a grammar token (kingdom:algo:role) rendered by a
+    # morphology, so it has no .tscn and no @export to read. Its values are
+    # derived by tools/promote_living_dna.py from the grammar parser, the
+    # dispatcher's algo branches and the preset families on disk — a different
+    # authority, but still DERIVED, never transcribed. Report them as
+    # unverifiable-by-this-gate rather than a fake NO_EXPORT failure.
+    if entry.get("biome_token"):
+        derived = ((entry.get("dna") or {}).get("derived_from") or "promote_living_dna.py")
+        return [{"token": tok, "axis": ax, "status": "unverifiable",
+                 "detail": f"living specimen (no scene); derived from {derived}"}
+                for ax in axes]
     all_srcs = sources_for(entry)
     gd, base_src = source_for(entry)
     if not base_src:
