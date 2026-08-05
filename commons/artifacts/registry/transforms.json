@@ -1646,6 +1646,32 @@
    }
   },
   "translation_cube_demo": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "course": [
+      "lift_lateral",
+      "lateral_lift",
+      "lift_depth",
+      "lateral",
+      "free"
+     ],
+     "guide": [
+      "arrows",
+      "none",
+      "slot",
+      "rail",
+      "ghost"
+     ]
+    },
+    "default": "course=lift_lateral, guide=arrows - lift_lateral returns the shipped plan (leg 1 = +Y for target_y 0.25, leg 2 = outward for door_width + gap 0.52) and the generalised clamp in constrained_door reduces to the two hand-written clamps line for line: the projection onto +Y IS 'keep x and z, move y', the phase-2 band works out to the identical [start-0.54, start+0.02] on the left and [start-0.02, start+0.54] on the right, and the door mesh follows by the same two offsets with z always zero. guide=arrows routes straight back into _create_path_indicators, which now derives the four caption positions instead of holding them as literals and lands on the same four points to the digit, parents its nodes to the ROOT exactly as before, and adds no Guide node at all. All 5 placements (Trans_AxisDecomposition and its four generated twins) are the bare token `translation_cube_demo:180:0.5` with no config tail, so _read_dna finds no metadata and apply_grid_config is never called - and it returns on an empty dict, assigns only on a known-and-different word, and rebuilds only when something moved AND _ready has built once.",
+    "was": "six exports and every one a dimension - cube_size, door_width, door_height, door_depth, target_y, knob_height - and no categorical among them, which is why the runner refused it for NO TURNABLE KNOBS. The thing the artifact exists to argue was welded in two places at once: constrained_door's phase 1 wrote knob_pos.x and .z back to their start values and clamped .y, phase 2 pinned .y and .z and clamped .x, and the path arrows were four literal Vector3 pairs plus four literal caption positions. There was no apply_grid_config at all, so no map token could reach anything.",
+    "note": "hand promotion. course is the family word: x_/y_/z_translation_cube carry `course` for the same question in the same sequence and the same registry file. THE VALUE LIST IS DELIBERATELY NOT THEIRS. Their course is one axis - lateral | lift | depth - because their cube travels once; this door's declared critical_parameter is that permission arrives in an ORDER, so the family's three words survive here as the legs and each value names them in the sequence they unlock. Taking lateral|lift|depth unchanged would have been taking a word without its answers: three of this object's five pictures cannot be said in it. lateral_lift is the sharpest rung - identical doors, identical destination, only the order dealt the other way - and `free` is the negative case, both freedoms at once, which is the one value where nothing is forbidden and therefore nothing is felt. guide is the artifact's own @identity `needs` line ('missing visual axis indicator showing current allowed direction') made reachable; it is NOT cube_bearing's `travel`, which was checked first and refused - travel's answers are seat, spindle, gimbal and armature, and a door that neither rotates nor is clamped off a post has no honest picture for three of them.",
+    "pairs": "course reads best at guide=slot or guide=rail. At the default guide the only thing a course value moves is two 1-pixel emissive lines, two 4 cm cone heads and two 4 cm captions against a 1.5 m wireframe cube, so a sweep of course at guide=arrows UNDERSTATES it badly - the same shape as xyz_coordinates.frame swept at readout=none. The slot plate and the rail rods are the pixels; the constraint itself lives in _physics_process and no still can photograph it.",
+    "still_note": "guide is the axis that carries the frame: arrows is thin line work, slot is a 0.6 x 0.35 m dark plate per door with a bright routed channel, rail is two 1.8 cm rods with 5 cm end stops, ghost is two translucent full-size door panels standing clear of the frame, and none is an empty cube with two doors in it. Every value is standing geometry - nothing here is a rate, a duration or an animation.",
+    "placements": 5
+   },
    "category": "transforms",
    "complexity": "beginner",
    "description": "A door-like puzzle that only permits movement along the currently allowed axis. The constraint makes translation legible by preventing every other kind of displacement, so the learner feels direction as part of the operation rather than as an afterthought. Completing the upward motion before the sideways motion also makes order matter. It is translation reduced to rule and resistance.",

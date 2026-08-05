@@ -10436,6 +10436,29 @@
    }
   },
   "petri_dish_worms": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "assay": [
+      "none",
+      "gauge",
+      "control",
+      "chart",
+      "vitrine"
+     ]
+    },
+    "fixture": {
+     "spawn_seed": "7"
+    },
+    "default": "assay=none - the `_:` branch of _build_assay, which does not even create the Assay wrapper node, so the bare 0.16 m dish stands on nothing exactly as it did in all 5 rooms. Every rung builds under one Node3D appended AFTER the worms, so no legacy child index moves and _auto_ground_artifact - which types only the root's DIRECT children - cannot see any of it. All 5 placements are the bare token `petri_dish_worms:180:0.8`; the `#with_wall` tails that show up in a grep belong to the curation_station token that NAMES this artifact, not to this one.",
+    "was": "DERIVED, not composed. The axis, its allow-list, the five builders and the spawn_seed pin were already in commons/artifacts/petri_dish_worms/petri_dish_worms.gd and the registry had never been told, so the sweep could not reach any of it - the column_3_z case a second time. What this pass added is the declaration, the fixture, and a guard: apply_grid_config fired _respawn_worms and _rebuild_assay on the mere PRESENCE of a key, so a token restating the value the dish already held threw the population away; it now assigns only on a legal AND different value and refuses to touch anything before _ready has built once. _read_dna was added so a token that asks for an apparatus builds it once in _ready instead of building the bare dish and tearing it down a frame later.",
+    "note": "assay is the softbody bench family's word and its five values, character for character - abject_bench, becoming_bench, membrane_bench and eleven more already ask what apparatus a specimen is surrounded by, and a petri dish is the oldest member of that question even though it joined the word last. `control` is the rung that argues hardest: a second, identical, EMPTY dish standing 0.40 m away turns a thing you are watching into an experiment you could disagree with, and its content is an ABSENCE - WormContainer is not duplicated. The specimen is deliberately not routed through the axis: every rung spawns the same population with the same colours and the same sine, because a variant that changed the worms would be changing the answer rather than the showing.",
+    "still_note": "THE WRIGGLE IS NOT AN AXIS AND CANNOT BE. oscillation_speed, worm_speed and the sine phase are rates; a still frame holds none of them, and the artifact's own essence line is a function of t. assay is the honest axis here precisely because every rung is standing apparatus - a graduated post, a second dish, a ruled plate, a glass case - photographable while nothing moves. The chart's growth curve is a FIXED logistic for the same reason: a rung that rolled dice would make every capture a different picture.",
+    "fixture_note": "spawn_seed is a fixture and NOT an axis. This artifact draws six unseeded numbers per worm at spawn (angle, radius, heading, phase, speed jitter, hue) and one more per worm per frame while it crawls, so without a pin the five assay frames are five different populations in five different colours and the critic reads that noise as a confident bite. A seed ladder would be five samples of one rule, which is the picture the dish already had.",
+    "framing_note": "unchecked against a capture in this pass, and worth a look before any verdict is read as a fact about the axis. The subject is a 0.32 m dish; _setup_controls hangs a rack panel at (0, 0.5, 0.6), `control` puts a second dish 0.40 m to the right and `vitrine` a 0.42 m case around the first, so the union-of-variants camera is pulled well back from the dish that carries the worms.",
+    "placements": 5
+   },
    "category": "emergence",
    "complexity": "intermediate",
    "description": "Simulated worm-like organisms wriggling in a petri dish — simple steering behaviors and sinusoidal body motion create surprisingly lifelike movement. Emergence of biological-looking behavior from minimal procedural rules.",
@@ -14229,6 +14252,30 @@
     "emergence",
     "mixed"
    ],
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "regime": [
+      "spots",
+      "stripes",
+      "maze",
+      "mitosis",
+      "coral",
+      "waves"
+     ]
+    },
+    "fixture": {
+     "resolution": 40,
+     "pattern_seed": 20260804,
+     "warmup": 1600
+    },
+    "fixture_why": "MANDATORY, three separate reasons, and all three default to shipped behaviour in code so none of them is an axis. pattern_seed pins the five seeded blobs - _seed_random draws them with the global randi_range, so six regime frames would be six different inoculations and the bite number would measure the RNG, not the feed/kill pair (the generative-artifact trap). warmup runs the chemistry before the first frame: at the shipped 4 steps per frame a 0.35 s settle reaches step 84 and all six values photograph the same five undifferentiated blobs. resolution 40 rather than the shipped 64 is a TIME budget, not a look - this is an interpreted CPU Gray-Scott loop and 1600 steps at 64x64 is 6.5 M cell updates inside _ready, which blocks the boot past the capture watchdog; the code caps it at 4 M regardless of what a fixture asks for.",
+    "fixture_ladder": "Measured, not assumed. The update rule was re-implemented exactly (same 0.2/0.05 laplacian weights, same clamp, same 5-disc seeding) and run per preset at 32/40/48/64 cells and 300-6000 steps. The six regimes are indistinguishable below ~800 steps and fully settled by ~2000; at resolution 40 / 1600 steps the V-coverage reads spots 0.06, stripes 0.21, maze 0.16, mitosis 0.07, coral 0.03, waves 0.13, and every pair differs by at least 0.04 mean |dV| per cell (most by over 0.11). Two facts worth knowing before reading the sheet: at the shipped seeding (U=0.5, V=0.25 in five discs) the Coral preset very nearly dies out - it settles at 3% coverage - and the Spots preset stabilises as a handful of isolated dots rather than filling the field. Those are facts about the presets, not about the capture.",
+    "default": "regime=spots - spots is PRESETS[0], which is f=0.055 / k=0.062, which is the pattern_type the .tscn has always written on the root. _resolve_regime assigns pattern_type ONLY when the resolved index differs, so at the default not one byte is written and the setter never fires; _ready is otherwise the same six calls in the same order. pattern_seed and warmup both default to 0, which is the shipped fresh-every-launch inoculation and no pre-run at all, so a player still meets the blank field and watches it organise. apply_grid_config keeps its legacy write-through loop untouched and handles regime separately, guarded on the word being one PRESETS builds and on it differing; neither of the two curation bays nor the five museum trials that mount this artifact sends it, so all 14 rooms are unchanged.",
+    "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS, and the axis was already sitting in the source. The six-point phase space was an @export_enum INT called pattern_type with a working setter and a VR slider wired to it, and the registry had never been told. Worse, the integer was unreachable from a map token even by hand: map_data.json config values arrive as STRINGS and apply_grid_config's whole body was a blanket `if key in self: set(key, ...)`, so 'turing_pattern_generator#pattern_type:2' tried to write \"2\" into a typed int, was rejected, and silently rendered Spots. Fourteen placements, one regime.",
+    "note": "hand promotion 2026-08-04, the lsystem_editor case again. regime is the corpus's word for 'which named case of this system's parameter space is in force' (harmonic_motion_demo, mass_spring_damper, bouncing_ball, bifurcation_diagram) and the values are DERIVED from PRESETS - _regime_index reads the third column of the table, so the declared list cannot drift from the code the way science_screen's did. The axis is deliberately the named regime and NOT feed or kill as continuous floats: this loop's evidence is one still per value, a slider position is not a claim, and the whole teaching point of the @identity ('each preset is a point in that space') is that the interesting structure is a handful of named islands. CAUTION ON RECORD: reaction_diffusion, the GPU sibling this file's @identity names, was measured GENUINELY INERT - 62% of frame and 15 grey levels. That verdict was about a continuous parameter on an unwarmed field; the regimes here differ by a factor of seven in coverage once the chemistry has actually run."
+   },
    "include_in_map_data": true,
    "interaction": "observe",
    "interactions": [

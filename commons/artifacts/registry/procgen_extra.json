@@ -3453,6 +3453,35 @@
    }
   },
   "example_8_3_recursion_circles_vr": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "depth": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "packing": [
+      "fused",
+      "contact",
+      "open",
+      "dust"
+     ]
+    },
+    "fixture": {
+     "rotation_speed": "0.0"
+    },
+    "default": "depth=4, packing=fused - 4 is the number the old max_depth export shipped with, so _draw_circles still starts at (0,0,0) with radius 2.0 and level 4 and lays down the same 85 tori at the same centres; fused SHORT-CIRCUITS rather than recomputing, returning before it touches radius_reduction, so the 0.6 the .tscn writes on the root survives byte for byte (PACKING_R['fused'] is 0.6 and would have written the same number, but a placement that overrode the float alone would then have been silently rescaled). No RNG anywhere in the file - grep for randf/randi/noise returns nothing - so a variant is a fact and not a sample. All 5 placements are the bare token with no config tail, and apply_grid_config, which used to be a bare `pass`, now returns on an empty dict, assigns only on a legal AND different value, and rebuilds only after _ready has built once.",
+    "was": "five exports and not one categorical among them: max_depth, radius_reduction, rotation_speed, rotation_per_depth and pause_duration - three of those five are RATES, invisible to a still - and apply_grid_config's whole body was `pass`, so the runner refused it for NO TURNABLE KNOBS while the artifact's own declared critical_parameter sat in the source as an int nothing could reach. Every placement got depth 4 at reduction 0.6.",
+    "note": "hand promotion. depth is the L-system family's word (lsystem_editor, room_grammar, space_filling_curve_gallery) and this file's own - the export was max_depth, the caption already reads 'Depth: %d'. It is NOT `tick`: cantor_set, sierpinski_pyramid and zeno_staircase share tick | once, coarse, fine, dense, limit for a rewrite reapplied to a SET, and their top rung names an idealised limit object you can gesture at. Here the branch is 4-fold, the ring count is (4^d-1)/3 = 1, 5, 21, 85, 341, and `limit` would be 5,461 tori - a capture hazard, not a picture. Taking tick would have meant taking a word without its answers. packing is sierpinski_pyramid's and cantor_set's word and its four values in their order, and the geometry earns it: every child is EXACTLY internally tangent to its parent at any reduction (offset = R(1-r), child radius = rR, so the far edge lands on R), which means the outermost ring is 2.0 across at every rung and the ring count is 4^d at every rung - extent fixed, census fixed, only the claim on the neighbours moving, which is what packing means everywhere else it is used. contact = 0.50 is not a taste: it is the exact reduction at which the two in-plane children become tangent to each other (2*offset = 2*r), and it is also this file's own script default, from before the scene overrode it. ONE THING DIFFERS FROM THE KIN AND IT IS A FACT ABOUT THIS ARTIFACT: the shipped value is `fused`, the TOP rung, one past tangency - sierpinski ships at contact and has a rung above it, this one already ships overlapping, which is exactly where the moire in its own @identity comes from.",
+    "pairs": "depth=5 x packing=dust is the ONE cell in this sheet that is not a new picture. _draw_circles refuses any radius below 0.01, and at reduction 0.25 the fifth level is 2.0*0.25^4 = 0.0078, so it is culled and depth 5 renders identically to depth 4. Nothing is broken; the recursion has simply run out of visible scale, which is the honest bottom of a self-similar ladder. Every other rung of dust, and every rung of the other three packings, clears the cutoff.",
+    "still_note": "the tori tumble, so `rotation_speed: 0.0` is declared as a FIXTURE and not as an axis. The outermost ring's rate is rotation_speed*(1 + depth*rotation_per_depth), which means a depth sweep at a fixed settle time would compare five ring-counts at five different tumble PHASES and hand the critic pose difference dressed as axis difference. Frozen, both axes are standing geometry: depth changes the census inside a silhouette that by construction does not move, packing changes whether that census reads as interference, tree or dust.",
+    "kin": "fractal_recursion_circles is a SECOND registry name on this same scene (res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn, one placement, `fractal_recursion_circles:0:-0.5`). It is deliberately NOT declared: both axes are reachable from it through the identical script, and declaring them twice would sweep one set of pictures under two names, which is the mistake lsystem_editor.preset was kept out of the registry to avoid.",
+    "placements": 5
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "circle(center, r, d) = torus(r) + 4 * circle(center +/- offset, r * 0.5, d-1)",

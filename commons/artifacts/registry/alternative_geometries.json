@@ -1319,6 +1319,27 @@
    "qfep_connection": "A space that looks grown rather than built — chambers and passages with the irregular rightness of something that developed instead of being placed. The proof that 'organic' is not a texture but a *process*: authorless form has a feel, and the walker can tell."
   },
   "rhizomatic_maze_space": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "topology": [
+      "rhizome",
+      "tree",
+      "severed",
+      "plateau"
+     ]
+    },
+    "fixture": {
+     "layout_draw": "pinned"
+    },
+    "fixture_why": "MANDATORY for the sweep, and not an axis. The layout is drawn entirely from the UNSEEDED global randf/randi — generation_seed only ever fed the two FastNoiseLite fields, never the growth — so four topology frames would be four different mazes and any bite number would be measuring the RNG rather than the rule. This is the generative-artifact trap in CLAUDE.md. layout_draw defaults to `fresh`, which is the shipped every-launch-is-a-new-maze behaviour and is the artifact's point, so no placement ever sees the pin.",
+    "default": "topology=rhizome - the shipped network line for line. generate_primary_connections keeps the same three-nearest loop with the same randf() draw against the same branch_prob, generate_secondary_branches builds the same 250 nodes from the same three randf_range calls and hands over the same flat 0.7 width_multiplier, sever_network returns on its first line, and the seed ring keeps the identical layer_y expression. The tree, plateau and rupture code is reachable only from a non-default word, so the RNG consumes exactly the draws it always consumed in exactly the order it consumed them. MEASURED, not assumed: there are 14 mentions across 12 map files, not the 5 the promotion brief carried, and four reach-paths rather than one - bare tokens in PG_Mirrored_Patterns and its three parts and in ProceduralGeneration_Eight; a curation_station collection in Corridor_PG_Mirrored_Patterns whose #layout and #with_* flags belong to the station and not to this artifact; `exhibit_furniture#kind:floor_work#size:s#mount:rhizomatic_maze_space` in six museum trials, where the token is the furniture's mount value; and `rhizomatic_maze_space->layered_membrane` in Trial_rooms_proceduralgeneration, which is a transformation target and not a config. Not one of the fourteen carries a topology key, and apply_grid_config returns unless a token names a word this file knows AND that word differs from the one it holds AND _ready has already grown the maze once.",
+    "was": "thirteen float and int exports, none of which said what the artifact is FOR. The runner refused it as NO TURNABLE KNOBS because nothing enumerated: branch_probability could be turned from 0.7 to 0.8 but there was no way for a map to ask for the thing the name promises. An artifact called rhizomatic shipped exactly one topology, and — measured rather than assumed — it was mostly a TREE: the only rhizomatic operation in the file is the three-nearest-neighbour pass over about 20 seeds, while the 250 secondary branches each attach by exactly one edge and close no loop at all.",
+    "note": "The axis is Deleuze and Guattari's own opposition, not a dial. `tree` is a minimum spanning tree from the lowest seed with growth oriented away from the root and tunnel width tapering by depth, so hierarchy is visible as thickness — there is no critically-rhizomatic middle value, the way bouncing_ball found there is no critically-bouncing. `severed` is asignifying rupture performed ON a finished rhizome rather than a different way of growing one, and it recounts node degrees afterwards so the chamber pass cannot drop a nine-metre CSG sphere into the fissure it just opened. `plateau` keeps every seed the four levels would have made and puts them all on one, so the comparison is about arrangement and not about how much was grown.",
+    "declined": "branch_probability, growth_iterations, merge_threshold, chamber_probability, organic_distortion and tunnel_segments — six knobs that are already exports and all of them decline for the same reason: they change how MUCH tangle there is, not what the tangle claims. connection_probability and deadend_pruning are declined for a different reason worth recording: they are exported, they are set in the .tscn, and no line of code reads either of them.",
+    "still_note": "topology is resolved before a single tunnel mesh is built and never moves again, so one frame is a complete account of it. Expect plateau to be the loudest value by far — a 25 m tower collapsing to a flat mat is a silhouette change, not a texture one. tree and rhizome differ in loop structure and in tunnel thickness rather than in extent, so compare where routes close and how width falls off toward the periphery."
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems",

@@ -14,6 +14,13 @@ uniform vec4 base_pink : source_color = vec4(1.0, 0.6, 0.8, 1.0);
 uniform vec4 deep_pink : source_color = vec4(0.8, 0.2, 0.6, 1.0);
 uniform vec4 dark_corner : source_color = vec4(0.2, 0.1, 0.2, 1.0);
 
+// WHICH BASIS FILLS THE FIELD. 0 simplex, 1 perlin, 2 value, 3 cellular — the same four the
+// noise sequence's bench artifacts compare (perlin_noise, simplex_noise, noise_terrain),
+// asked here at room scale, where the field is the architecture rather than a tabletop.
+// 1 is the default because 1 is what this shader has always computed. Kept identical to
+// QueerNoiseShader.gdshader, which is the same shader on the room sphere.
+uniform int noise_basis : hint_range(0, 3) = 1;
+
 varying vec2 world_uv;
 varying vec3 world_position;
 
@@ -24,7 +31,14 @@ vec2 hash2(vec2 p) {
     return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
 }
 
-float noise2d(vec2 p) {
+float hash1(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+}
+
+// PERLIN — the shipped basis, unchanged. A random GRADIENT at each lattice corner, dotted
+// with the offset to it and smoothed between. Because the value is zero at every corner the
+// square lattice stays faintly latent in the result: smooth swells on a grid.
+float perlin2d(vec2 p) {
     vec2 i = floor(p);
     vec2 f = fract(p);
     vec2 u = f * f * (3.0 - 2.0 * f);
@@ -33,6 +47,68 @@ float noise2d(vec2 p) {
                    dot(hash2(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0)), u.x),
                mix(dot(hash2(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0)),
                    dot(hash2(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0)), u.x), u.y);
+}
+
+// VALUE — a random HEIGHT at each corner instead of a gradient, interpolated identically.
+// The field no longer passes through zero on the lattice, so cells become plateaus and the
+// grid stops being latent and becomes the picture. The blockiest of the four.
+float value2d(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    vec2 u = f * f * (3.0 - 2.0 * f);
+    float v = mix(mix(hash1(i + vec2(0.0, 0.0)), hash1(i + vec2(1.0, 0.0)), u.x),
+                  mix(hash1(i + vec2(0.0, 1.0)), hash1(i + vec2(1.0, 1.0)), u.x), u.y);
+    return (v - 0.5) * 0.770;
+}
+
+// SIMPLEX — the same gradient idea on a TRIANGULAR lattice, summed from three corners with a
+// radial falloff instead of interpolated from four. Perlin's square grid disappears and what
+// is left has no preferred direction; it is the busiest of the four at a given frequency.
+float simplex2d(vec2 p) {
+    float F2 = 0.366025403784439;
+    float G2 = 0.211324865405187;
+    vec2 i = floor(p + (p.x + p.y) * F2);
+    vec2 x0 = p - i + (i.x + i.y) * G2;
+    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+    vec2 x1 = x0 - i1 + G2;
+    vec2 x2 = x0 - 1.0 + 2.0 * G2;
+    vec3 t = max(0.5 - vec3(dot(x0, x0), dot(x1, x1), dot(x2, x2)), 0.0);
+    t = t * t;
+    t = t * t;
+    vec3 g = vec3(dot(hash2(i), x0),
+                  dot(hash2(i + i1), x1),
+                  dot(hash2(i + vec2(1.0, 1.0)), x2));
+    return dot(t, g) * 38.0;
+}
+
+// CELLULAR — Worley, and not a smooth field at all. Space is partitioned by scattered
+// feature points and every fragment reports the distance to its nearest one, so the result
+// has EDGES: the only basis of the four that admits it is made of cells.
+float cellular2d(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    float best = 8.0;
+    for (int y = -1; y <= 1; y++) {
+        for (int x = -1; x <= 1; x++) {
+            vec2 o = vec2(float(x), float(y));
+            vec2 feature = o + (hash2(i + o) * 0.5 + 0.5);
+            best = min(best, length(feature - f));
+        }
+    }
+    return (0.5 - best) * 0.827;
+}
+
+// The four are AMPLITUDE-MATCHED, not merely swapped in: measured over 30,000 samples each
+// returns mean |value| = 0.137, which is what the shipped perlin returns. Without those three
+// constants the sweep would mostly be reading which basis is BRIGHTER once the fbm below is
+// pushed through smoothstep(0.2, 0.8), and the axis would be about exposure instead of
+// about structure. Their own characters survive it: value is the smoothest field per unit
+// distance, simplex the busiest, cellular the only one with edges.
+float noise2d(vec2 p) {
+    if (noise_basis == 0) { return simplex2d(p); }
+    if (noise_basis == 2) { return value2d(p); }
+    if (noise_basis == 3) { return cellular2d(p); }
+    return perlin2d(p);
 }
 
 // Cloud-like fractal noise

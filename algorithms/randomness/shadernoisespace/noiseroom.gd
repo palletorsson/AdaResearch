@@ -3,12 +3,42 @@ extends Node3D
 # @identity
 # essence: GPU computes noise per-fragment in parallel — the room sphere and walls run independent shader noise loops animated by a time uniform, cycling color and density in real-time
 # desire: to be inside the noise — to stand inside a sphere where the walls are made of animated GPU hash functions and feel surrounded by the mathematics of structured randomness
-# critical_parameter: animation_speed — controls the rate at which the shader's time uniform advances, determining whether the noise feels like slow clouds or fast chaos
+# critical_parameter: generator (perlin) — which noise basis the fragment shader evaluates; the room is made of the field, so the basis is the architecture
 # triggers: toggling animation_enabled freezes the noise field, revealing its spatial structure without temporal motion; space bar toggles it; escape resets to original parameters
 # emerges: the two materials (room sphere vs walls) animate out of phase, creating a sense that the space itself is breathing — an undesigned emergent rhythm from two independent cycles
 # needs: animation_enabled toggle via spacebar [has]; no VR slider controls [missing]; color cycling and density animation are coupled to time only [has]
 # relationships: demonstrates GPU noise as distinct from CPU noise in noiselayers; pairs with shader_arch_gallery; shows what QueerNoiseShader.gdshader produces at room scale
 # truth: GPU noise is not one calculation but millions happening simultaneously — the shader room makes visible that what looks like a continuous field is massively parallel computation
+
+## GENERATOR — which basis fills the field. The same axis, the same four values in the same
+## order, as perlin_noise, simplex_noise and noise_terrain carry: the noise sequence is built
+## on comparing bases, and spelling the comparison a second way would leave nothing to
+## compare. What is different here is the scale of the question. On the bench a basis is a
+## tabletop of displaced cubes you look down at; in this room it is the walls, the ceiling and
+## the floor, so choosing one decides what the space you are standing inside is MADE of.
+##
+## The default is perlin and not simplex — the opposite of the bench artifacts — because that
+## is what this shader has always computed: hash2 returns a gradient per lattice corner and
+## noise2d dots it with the offset, which is Perlin's construction with a sine hash in place
+## of a permutation table.
+##
+##   simplex    the same gradient idea on a triangular lattice, three corners with a radial
+##              falloff. No preferred direction survives; the busiest of the four
+##   perlin     the shipped field. Smooth swells with the square lattice faintly latent
+##   value      a random height per corner rather than a gradient, so cells become plateaus
+##              and the grid stops being latent and becomes the picture
+##   cellular   Worley. Not a smooth field at all — space partitioned by feature points, and
+##              the only one of the four with edges in it
+@export_enum("simplex", "perlin", "value", "cellular") var generator: String = "perlin"
+const GENERATORS: PackedStringArray = ["simplex", "perlin", "value", "cellular"]
+
+## CAPTURE BENCH ONLY, and deliberately not an axis. Every visible parameter of this room is
+## driven off a clock in _process, so a still is taken at whatever moment the shutter happened
+## to fall. `frozen` leaves the .tscn's own authored uniforms in place and never advances
+## them, which makes four basis frames comparable instead of four different instants. It is a
+## String enum rather than a bool because the sweep sets exports from strings before _ready
+## and a typed bool silently rejects "true". No placement passes it.
+@export_enum("live", "frozen") var animation: String = "live"
 
 # Animation controls
 @export var animation_enabled: bool = true
@@ -36,7 +66,23 @@ func _ready() -> void:
 	"""Initialize the noise room animation system"""
 	_setup_materials()
 	_store_original_parameters()
+	_apply_generator()
+	if animation == "frozen":
+		animation_enabled = false
 	_setup_ui()
+
+
+## Writes the basis into both materials. At the default this writes 1 into a uniform whose
+## own default is already 1, so the room renders the field it has always rendered — the
+## perlin branch in the shader is the shipped noise2d body, unmoved.
+func _apply_generator() -> void:
+	var index: int = GENERATORS.find(generator)
+	if index < 0:
+		index = GENERATORS.find("perlin")
+	if room_material:
+		room_material.set_shader_parameter("noise_basis", index)
+	if wall_material:
+		wall_material.set_shader_parameter("noise_basis", index)
 
 func _setup_materials() -> void:
 	"""Find and setup shader materials"""
@@ -255,5 +301,15 @@ func get_animation_info() -> Dictionary:
 		"wall_material_active": wall_material != null
 	}
 
+## Gated on the key, on the word being one this file knows, and on it differing from the word
+## already held — so a map that says nothing about the generator (which is all five existing
+## placements) gets no call at all. Nothing is torn down here in any case: the basis is a
+## single int uniform, so switching it repaints the field without rebuilding the room.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if not config.has("generator"):
+		return
+	var g: String = str(config["generator"]).strip_edges().to_lower()
+	if not GENERATORS.has(g) or g == generator:
+		return
+	generator = g
+	_apply_generator()

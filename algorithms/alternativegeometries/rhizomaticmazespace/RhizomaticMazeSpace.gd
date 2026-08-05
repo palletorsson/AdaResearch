@@ -4,7 +4,7 @@ class_name RhizomaticMazeSpace
 # @identity
 # essence: growth_seeds -> RhizomaticMazeGenerator -> path_network -> organic tunnel meshes with noise displacement — Deleuze's rhizome as architecture
 # desire: to wander a non-hierarchical tunnel network where every path leads to more paths, with no center and no dead ends that feel final
-# critical_parameter: branch_probability (0.7) — controls how often paths fork; at 1.0 the network explodes, at 0 it is a single corridor
+# critical_parameter: topology (rhizome) — which connection rule builds the network; a rhizome is defined against a tree, so the rule is the argument
 # triggers: generate_rhizomatic_maze() builds the full system in 6 phases; regenerate_maze() creates a new seed and rebuilds everything
 # emerges: merge_threshold causes independent growth paths to fuse into loops, creating the non-hierarchical topology that defines a rhizome
 # needs: organic tunnel meshes [has]; trimesh collision [has]; navigation waypoints [has]; VR exploration [has]; growth animation [missing]
@@ -14,6 +14,36 @@ class_name RhizomaticMazeSpace
 ## 3D Rhizomatic Maze Generator for Godot 4 VR
 ## Creates interconnected organic tunnel networks with maze-like properties
 ## Builds on the existing marching cubes and rhizomatic cave systems
+
+## TOPOLOGY — the connection rule, which is this artifact's whole argument rather than a
+## setting on it. Deleuze and Guattari define the rhizome AGAINST the tree, so the values
+## are that opposition and the two operations the Introduction performs on it.
+##
+##   rhizome   the shipped network, unchanged: every seed reaches for its three nearest
+##             neighbours, so routes close into loops and there is no root and no last
+##             node. "Any point can be connected to anything other, and must be."
+##   tree      the figure it argues with. The seeds are joined by a minimum spanning tree
+##             from the lowest one, so the graph carries NO cycle: one origin, a strict
+##             descent, exactly one route between any two points. Growth is oriented away
+##             from the root and tunnel width tapers with depth, because in a tree
+##             thickness is the hierarchy — a trunk carries everything below it.
+##   severed   asignifying rupture. The rhizome is built in full and then cut: a fissure is
+##             opened through the middle and every tunnel crossing it is removed, so the
+##             network falls into fragments that are each still rhizomatic.
+##   plateau   "a continuous, self-vibrating region of intensities whose development avoids
+##             any orientation toward a culmination point." The four stacked levels collapse
+##             into one, connectivity rises, and the 25 m tower becomes a dense flat mat
+##             with no high point to be the goal of it.
+@export_enum("rhizome", "tree", "severed", "plateau") var topology: String = "rhizome"
+const TOPOLOGIES: PackedStringArray = ["rhizome", "tree", "severed", "plateau"]
+
+## CAPTURE BENCH ONLY, and deliberately not an axis. The layout has always been drawn from
+## the unseeded global RNG, so every launch of a map grows a different maze — that is the
+## artifact's point and it stays true at the default. `pinned` seeds the global RNG from
+## generation_seed so that a sweep's four frames differ by their TOPOLOGY and not by the
+## draw; without it, four values would be four different mazes and any bite number would be
+## measuring the RNG. No placement passes it.
+@export_enum("fresh", "pinned") var layout_draw: String = "fresh"
 
 @export var maze_size: Vector3 = Vector3(40, 20, 40)
 @export var path_width: float = 2.5
@@ -48,25 +78,34 @@ var navigation_nodes: Array[Vector3] = []
 var path_noise: FastNoiseLite
 var surface_noise: FastNoiseLite
 
+## True once _ready has grown the maze at least once, so apply_grid_config knows the
+## difference between "change the value" and "change it and rebuild".
+var _built: bool = false
+
 func _ready() -> void:
+	if layout_draw == "pinned":
+		seed(generation_seed if generation_seed >= 0 else 0)
 	setup_noise_systems()
 	setup_components()
 	generate_rhizomatic_maze()
+	_built = true
 
 func setup_noise_systems() -> void:
 	"""Initialize noise for organic path variation"""
-	var seed = generation_seed if generation_seed >= 0 else randi()
-	
+	# Named noise_seed, not seed: the local was shadowing the global seed() function, which
+	# _ready now calls to pin the layout draw for the capture bench.
+	var noise_seed: int = generation_seed if generation_seed >= 0 else randi()
+
 	# Path deformation noise
 	path_noise = FastNoiseLite.new()
-	path_noise.seed = seed
+	path_noise.seed = noise_seed
 	path_noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	path_noise.frequency = 0.05
 	#path_noise.amplitude = organic_distortion
-	
+
 	# Surface detail noise
 	surface_noise = FastNoiseLite.new()
-	surface_noise.seed = seed + 1000
+	surface_noise.seed = noise_seed + 1000
 	surface_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	surface_noise.frequency = 0.15
 
@@ -94,7 +133,8 @@ func setup_components() -> void:
 		"seed": generation_seed,
 		"iterations": growth_iterations,
 		"branch_prob": branch_probability,
-		"merge_threshold": merge_threshold
+		"merge_threshold": merge_threshold,
+		"topology": topology
 	})
 
 func generate_rhizomatic_maze() -> void:
@@ -125,9 +165,15 @@ func generate_network_structure() -> void:
 	"""Create the underlying rhizomatic network"""
 	# Create growth seeds across vertical layers
 	var growth_seeds: Array[Vector3] = []
-	
+
+	# A plateau keeps every seed the four layers would have produced and puts them all on
+	# ONE level, so the comparison is about arrangement and not about how much was grown.
+	var flat: bool = topology == "plateau"
+
 	for layer in range(vertical_layers):
-		var layer_y = (float(layer) / (vertical_layers - 1) - 0.5) * maze_size.y
+		var layer_y: float = 0.0
+		if not flat and vertical_layers > 1:
+			layer_y = (float(layer) / (vertical_layers - 1) - 0.5) * maze_size.y
 		var seeds_per_layer = 2 + layer * 2  # More seeds in upper layers
 		
 		for i in range(seeds_per_layer):
@@ -345,11 +391,18 @@ func add_surface_growths() -> void:
 func add_hanging_elements() -> void:
 	"""Add hanging organic elements like roots or tendrils"""
 	var hanging_count = randi_range(5, 12)
-	
+
+	# A plateau has no ceiling ten metres up to hang from. Left at the shipped height the
+	# tendrils would dangle in empty air above the mat and photograph as a fault in the
+	# build rather than as the value.
+	var ceiling_y: float = maze_size.y * 0.4
+	if topology == "plateau":
+		ceiling_y = 3.0
+
 	for i in range(hanging_count):
 		var hanging_pos = Vector3(
 			randf_range(-maze_size.x * 0.4, maze_size.x * 0.4),
-			maze_size.y * 0.4,  # Start from ceiling
+			ceiling_y,  # Start from ceiling
 			randf_range(-maze_size.z * 0.4, maze_size.z * 0.4)
 		)
 		
@@ -435,5 +488,43 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Gated three ways, because regrowing this artifact means tearing down 250-odd tunnels and
+## their trimesh collision: the key has to be present, the word has to be one this file
+## knows, and it has to differ from the word already held. A map that says nothing about
+## topology — which is all five existing placements — gets no call at all, and a config
+## carrying only other keys cannot disturb the maze that _ready already grew.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if not config.has("topology"):
+		return
+	var t: String = str(config["topology"]).strip_edges().to_lower()
+	if not TOPOLOGIES.has(t) or t == topology:
+		return
+	topology = t
+	if not _built:
+		return
+	_regrow()
+
+
+## Regrow under a new topology, keeping the seed. Distinct from regenerate_maze(), which
+## deliberately throws the seed away to give the player a different maze.
+func _regrow() -> void:
+	if is_instance_valid(environment_container):
+		environment_container.queue_free()
+	environment_container = null
+	if is_instance_valid(maze_generator):
+		maze_generator.queue_free()
+	if is_instance_valid(path_network):
+		path_network.queue_free()
+	if is_instance_valid(mesh_builder):
+		mesh_builder.queue_free()
+	if is_instance_valid(material_system):
+		material_system.queue_free()
+
+	path_meshes.clear()
+	navigation_nodes.clear()
+
+	if layout_draw == "pinned":
+		seed(generation_seed if generation_seed >= 0 else 0)
+	setup_noise_systems()
+	setup_components()
+	generate_rhizomatic_maze()

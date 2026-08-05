@@ -19,6 +19,14 @@
 #   use ideal harmonic ratios, which 12-TET approximates but doesn't match
 #   exactly (e.g., a 12-TET fifth is 700 cents vs. a pure 3:2 at ~702 cents).
 #
+#   Since 2026-08-04 both halves of that admission are knobs rather than
+#   disclaimers. `pitch_space` swaps the map (circle_of_fifths / chromatic /
+#   tonnetz / keyboard / helix) — five different claims about which notes are
+#   NEAR each other. `consonance_theory` swaps the weighting that decides which
+#   pairs get a line at all, and it is the same word, the same four values and
+#   the same tables as chord_tension_spring, which this file's @identity already
+#   names as its contrast piece.
+#
 extends Node3D
 class_name HarmonicDistanceTable
 
@@ -34,6 +42,12 @@ class_name HarmonicDistanceTable
 # truth: Consonance is the degree to which two pitches share the same overtone series.
 
 const _P = preload("res://commons/ui/ada_palette.gd")
+
+# The consonance tables are PRELOADED from the sibling, never copied. Nine
+# artifacts sharing one word and nine private copies of its numbers is how a
+# shared vocabulary drifts into nine vocabularies; chord_tension_spring owns
+# these four tables and this file reads them.
+const _CTS = preload("res://commons/artifacts/chord_tension_spring/chord_tension_spring.gd")
 
 # ── Circle of fifths order (clockwise from C) ──
 # This ordering places harmonically "close" keys adjacent
@@ -78,6 +92,29 @@ const SHARED_OVERTONES := {
 # Line base color (cyan from palette)
 const LINE_COLOR_BASE := Color(0.0, 0.78, 0.85)
 
+# ═══════════════════════════════════════════
+#  DNA (stage 2 — variation)
+# ═══════════════════════════════════════════
+# pitch_space: WHICH MAP OF PITCH the table asserts. The twelve notes are the
+#   same twelve notes and the same twelve overtone relations at every value;
+#   what changes is which of them the geometry puts side by side.
+#     circle_of_fifths — the shipped ring. Harmonic proximity IS adjacency.
+#     chromatic        — same ring, semitone order. The fifths become a star.
+#     tonnetz          — Euler/Riemann lattice: fifths across, major thirds up.
+#                        Proximity is two-dimensional and triads are triangles.
+#     keyboard         — the layout the hand knows. Pitch is a line, and the
+#                        black/white split is the structure that matters.
+#     helix            — Shepard: chroma goes round, height goes up. C and the
+#                        C above are the same note and are not the same note.
+# consonance_theory: which table decides who is CONNECTED, and how heavily.
+#   Same word, same values and same numbers as chord_tension_spring. "western"
+#   short-circuits to this file's own SHARED_OVERTONES, so it is a no-op.
+@export_enum("circle_of_fifths", "chromatic", "tonnetz", "keyboard", "helix") var pitch_space: String = "circle_of_fifths"
+@export_enum("western", "blues", "ratio", "flat") var consonance_theory: String = "western"
+
+const PITCH_SPACES: Array[String] = ["circle_of_fifths", "chromatic", "tonnetz", "keyboard", "helix"]
+const THEORIES: Array[String] = ["western", "blues", "ratio", "flat"]
+
 ## Configuration
 @export var circle_radius: float = 0.35   # Radius of the note circle
 @export var node_radius: float = 0.025     # Radius of each note sphere
@@ -90,6 +127,7 @@ var note_nodes: Array[Dictionary] = []  # {label, area, note_name, chromatic_idx
 var overtone_lines: Array[Dictionary] = []  # {mm_idx, from_idx, to_idx, shared}
 var active_tonal_center: int = -1  # Index into CIRCLE_OF_FIFTHS, -1 = none
 var selected_nodes: Array[int] = []  # Currently selected node indices (max 2)
+var _built: bool = false  # true once _ready has laid the table out at least once
 
 # Audio
 var _audio_players: Array[AudioStreamPlayer3D] = []
@@ -115,6 +153,137 @@ func _ready() -> void:
 	_build_overtone_lines()
 	_setup_audio()
 	_update_visual_state()
+	_built = true
+
+# ═══════════════════════════════════════════
+#  PITCH SPACE — where the twelve notes sit
+# ═══════════════════════════════════════════
+# Every layout returns twelve positions indexed by CIRCLE_OF_FIFTHS order, so the
+# note at index i is the same note in every value and only its coordinates move.
+# Every layout also fits inside circle_radius, so the base plate below them is
+# the same plate at every value: the frame does not move, the argument does.
+
+func _layout_positions() -> Array[Vector3]:
+	match pitch_space:
+		"chromatic":
+			return _pos_chromatic()
+		"tonnetz":
+			return _pos_tonnetz()
+		"keyboard":
+			return _pos_keyboard()
+		"helix":
+			return _pos_helix()
+		_:
+			return _pos_circle_of_fifths()
+
+# The shipped layout, character for character: index i is the i-th fifth and the
+# ring is walked clockwise from twelve o'clock.
+func _pos_circle_of_fifths() -> Array[Vector3]:
+	var out: Array[Vector3] = []
+	for i in range(12):
+		var a: float = -PI / 2.0 + (float(i) / 12.0) * TAU
+		out.append(Vector3(cos(a) * circle_radius, 0.02, sin(a) * circle_radius))
+	return out
+
+# Same ring, semitone order. The notes do not move — the LINES do: a fifth that
+# joined neighbours now leaps seven twelfths of a turn and the web becomes a star.
+func _pos_chromatic() -> Array[Vector3]:
+	var out: Array[Vector3] = []
+	for i in range(12):
+		var ci: int = CHROMATIC_NOTES.find(CIRCLE_OF_FIFTHS[i])
+		var a: float = -PI / 2.0 + (float(ci) / 12.0) * TAU
+		out.append(Vector3(cos(a) * circle_radius, 0.02, sin(a) * circle_radius))
+	return out
+
+# Euler/Riemann Tonnetz. Pitch class p sits at (col, row) with p = (7*col + 4*row)
+# mod 12 — a column step is a perfect fifth, a row step a major third. Four columns
+# by three rows covers all twelve pitch classes exactly once (checked: the set is
+# complete), and the half-column row stagger makes the triangles it is named for.
+# The far corner of that lattice lands at 2.18 units, so the step is scaled by
+# 1/2.18 and the extreme nodes touch the shipped ring.
+func _pos_tonnetz() -> Array[Vector3]:
+	var cell: Dictionary = {}
+	for row in range(3):
+		for col in range(4):
+			var p: int = (7 * col + 4 * row) % 12
+			cell[p] = Vector2(
+				float(col) - 1.5 + 0.5 * (float(row) - 1.0),
+				(float(row) - 1.0) * 0.866)
+	var step: float = circle_radius / 2.18
+	var out: Array[Vector3] = []
+	for i in range(12):
+		var ci: int = CHROMATIC_NOTES.find(CIRCLE_OF_FIFTHS[i])
+		var v: Vector2 = cell.get(ci, Vector2.ZERO)
+		out.append(Vector3(v.x * step, 0.02, v.y * step))
+	return out
+
+# Seven white keys in a row, five black keys set back between them. The claim is
+# that pitch is a line you walk with your hands and the seven/five split, not the
+# twelve, is the real structure.
+func _pos_keyboard() -> Array[Vector3]:
+	var white: Array = [0, 2, 4, 5, 7, 9, 11]
+	var gap: float = circle_radius * 2.0 / 7.0
+	var out: Array[Vector3] = []
+	for i in range(12):
+		var ci: int = CHROMATIC_NOTES.find(CIRCLE_OF_FIFTHS[i])
+		var wi: int = white.find(ci)
+		var x: float = 0.0
+		var z: float = 0.0
+		if wi >= 0:
+			x = (float(wi) - 3.0) * gap
+			z = circle_radius * 0.20
+		else:
+			var below: int = white.find(ci - 1)
+			x = (float(below) + 0.5 - 3.0) * gap
+			z = -circle_radius * 0.16
+		out.append(Vector3(x, 0.02, z))
+	return out
+
+# Shepard's pitch helix: chroma is the angle, height is the height. One turn per
+# octave, so the ring is still a ring and B is nevertheless eleven semitones above
+# C rather than one below it.
+func _pos_helix() -> Array[Vector3]:
+	var out: Array[Vector3] = []
+	for i in range(12):
+		var ci: int = CHROMATIC_NOTES.find(CIRCLE_OF_FIFTHS[i])
+		var a: float = -PI / 2.0 + (float(ci) / 12.0) * TAU
+		var lift: float = 0.02 + (float(ci) / 11.0) * circle_radius * 0.55
+		out.append(Vector3(cos(a) * circle_radius, lift, sin(a) * circle_radius))
+	return out
+
+# ═══════════════════════════════════════════
+#  CONSONANCE THEORY — who is connected
+# ═══════════════════════════════════════════
+# "western" returns this file's own hard-coded SHARED_OVERTONES untouched. The
+# other three read chord_tension_spring's tables and re-read them as harmonic
+# PROXIMITY on the same 0-16 scale the line weights already use. A line here joins
+# two pitch CLASSES, and a class is symmetric under inversion, so the pair
+# (interval, 12 - interval) is scored by whichever of the two the theory rates
+# higher — that is what keeps the blues claim about the dominant seventh alive in
+# a graph that cannot tell a minor seventh from a major second.
+
+func _consonance_table(theory: String) -> Array:
+	match theory:
+		"blues":
+			return _CTS.CONSONANCE_BLUES
+		"ratio":
+			return _CTS.CONSONANCE_RATIO
+		"flat":
+			return _CTS.CONSONANCE_FLAT
+		_:
+			return _CTS.CONSONANCE
+
+func _shared_for(interval_class: int) -> int:
+	if consonance_theory == "western":
+		return int(SHARED_OVERTONES.get(interval_class, 0))
+	var table: Array = _consonance_table(consonance_theory)
+	if interval_class < 0 or interval_class >= table.size():
+		return 0
+	var v: float = float(table[interval_class])
+	var inv: int = (12 - interval_class) % 12
+	if inv < table.size() and float(table[inv]) > v:
+		v = float(table[inv])
+	return int(round(v * 16.0))
 
 # ═══════════════════════════════════════════
 #  CONSTRUCTION
@@ -180,13 +349,15 @@ func _build_note_nodes() -> void:
 	_notes_mmi.material_override = mat
 	_nodes_container.add_child(_notes_mmi)
 
+	var positions: Array[Vector3] = _layout_positions()
 	for i in range(12):
 		var note_name = CIRCLE_OF_FIFTHS[i]
 		var chromatic_idx = CHROMATIC_NOTES.find(note_name)
 
-		# Position: circle layout, starting at top (12 o'clock), going clockwise
-		var angle = -PI / 2.0 + (float(i) / 12.0) * TAU
-		var pos = Vector3(cos(angle) * circle_radius, 0.02, sin(angle) * circle_radius)
+		# Position: whichever map of pitch space is in force. At the default that
+		# is the circle layout, starting at top (12 o'clock), going clockwise.
+		var pos: Vector3 = positions[i]
+		var angle: float = atan2(pos.z, pos.x)
 
 		_notes_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, pos))
 		_notes_mm.set_instance_color(i, DEFAULT_NODE_COLOR)
@@ -239,7 +410,7 @@ func _build_overtone_lines() -> void:
 			if interval > 6:
 				interval = 12 - interval  # Use shortest distance
 
-			var shared = SHARED_OVERTONES.get(interval, 0)
+			var shared: int = _shared_for(interval)
 			if shared < 2:
 				continue  # Don't show very weak connections
 			line_data_list.append({
@@ -455,6 +626,9 @@ func _process(delta: float) -> void:
 	_animate_nodes(delta)
 
 func _animate_nodes(delta: float) -> void:
+	# Nothing to animate between a teardown and the rebuild that follows it.
+	if _notes_mm == null or note_nodes.size() < 12:
+		return
 	# Gentle hover animation for selected nodes
 	for i in range(12):
 		var base_pos: Vector3 = note_nodes[i].base_pos
@@ -529,5 +703,45 @@ func clear_selection() -> void:
 	_stop_tone(1)
 	_update_visual_state()
 
+## Grid system integration — accept configuration from map data.
+##
+## Guarded twice. A word is taken only when this artifact actually BUILDS it and
+## when it DIFFERS from the word already held, and the table is only torn down
+## after _ready has laid it out once. That matters here: both curation bays that
+## show this artifact call apply_grid_config({"emissive": false}) immediately
+## after add_child, and none of the seven maps that show it sends either DNA key — so
+## nothing in the corpus rebuilds, exactly as when this body was `pass`.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	var changed: bool = false
+	if config_data.has("pitch_space"):
+		var s: String = str(config_data["pitch_space"])
+		if PITCH_SPACES.has(s) and s != pitch_space:
+			pitch_space = s
+			changed = true
+	if config_data.has("consonance_theory"):
+		var t: String = str(config_data["consonance_theory"])
+		if THEORIES.has(t) and t != consonance_theory:
+			consonance_theory = t
+			changed = true
+	if changed and _built:
+		_relay_table()
+
+## Tear the twelve nodes and the overtone web down and lay them out again. The
+## base plate, the title and the audio voices are children of `self` and are not
+## touched — the table stays the same table, the notes move on it.
+func _relay_table() -> void:
+	for n in _nodes_container.get_children():
+		n.queue_free()
+	for l in _lines_container.get_children():
+		l.queue_free()
+	note_nodes.clear()
+	overtone_lines.clear()
+	selected_nodes.clear()
+	active_tonal_center = -1
+	_notes_mm = null
+	_notes_mmi = null
+	_lines_mm = null
+	_lines_mmi = null
+	_build_note_nodes()
+	_build_overtone_lines()
+	_update_visual_state()

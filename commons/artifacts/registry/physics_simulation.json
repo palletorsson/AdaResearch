@@ -10084,6 +10084,34 @@
    }
   },
   "vector_fields": {
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "framing": 0.8,
+    "fixture": {
+     "seed_value": 7
+    },
+    "axes": {
+     "poles": [
+      "dipole",
+      "sink",
+      "source",
+      "binary"
+     ],
+     "coding": [
+      "magnitude",
+      "direction",
+      "banded",
+      "uniform"
+     ]
+    },
+    "default": "poles=dipole, coding=magnitude - dipole is the `_:` arm of _pole_spec, which returns the shipped pair in the shipped order: the attractor at (-1.5, 1.5, 0) with gravity +8 first, the repulsor at (1.5, 1.5, 0) with gravity -6 second, each with a 3.0 m SphereShape3D, gravity_point_unit_distance 2.0 and the same 0.25 red/blue emissive marker. coding=magnitude has no arm in the match at all, so the colour line stays the shipped Color.from_hsv(0.6 - clamp(mag/3, 0, 0.6), 0.8, 1.0). seed_value=0 short-circuits to the same global randf_range calls in the same order, so the 30 test particles scatter exactly as they always have. The five placements (Corridor_ForcesSystems, ForcesSystems, Forces_5, PhysicsSimulation_Vector_Fields, PhysicsSim_Fields) pass no config keys and are unchanged.",
+    "was": "apply_grid_config's whole body was `pass`. Four exports existed - grid_resolution, grid_spacing, arrow_scale, particle_count - and a map could reach none of them, which is what the runner's NO TURNABLE KNOBS was really reporting. All four are dials in any case: more arrows, bigger arrows, a wider lattice. The @identity names its own critical_parameter as the ratio of attractor gravity (+8) to repulsor gravity (-6), and there was no way to state that ratio, let alone remove one of its two terms.",
+    "note": "poles is WHAT MAKES THE FIELD, with the law held fixed: the superposition loop in _update_arrows is identical line for line at every value, and every source falls off as 1/d^2. What the axis turns is the census of sources, and for a point-source field that census is short and complete - sink is one attractor (everything converges), source is one repulsor (everything diverges), dipole is one of each, the shipped pair whose saddle between them the @identity already names, and binary is two attractors, a saddle of the opposite sense with two centres instead of one. No new numbers were invented: +8, -6 and x = +/-1.5 are the shipped ones, moved to the origin when there is only one source. NOT named `law` (force_field_visualizer) or `field` (vector_field_grid) - both of those name WHICH RULE the space obeys, and here the rule never changes; this is the mirror of force_vortex's `depiction`, one law arranged several ways, and the distinction is the whole point. coding is WHAT THE HUE CLAIMS: magnitude is the shipped continuum, direction paints heading as hue (azimuth only, because a hue circle cannot carry two angles), banded quantises |F| into four classes, uniform withholds colour entirely. Arrow LENGTH is scaled by mag at every value, so uniform withholds the colour without withholding the magnitude.",
+    "kin": "NOT a duplicate of vector_field_grid, which was the first thing checked: different scene (algorithms/change/vector_field_grid.tscn against algorithms/physicssimulation/vectorfields/vectorfields.tscn), different script, different dimension (a 2D plane of arrows over a stream function against a 5^3 = 125-arrow lattice), and a different mechanism - that one evaluates an analytic formula, this one superposes real Area3D gravity sources and advects 30 RigidBody3D particles through them. Its own @identity states the distinction already. coding is taken from it character for character, values and all, because it is the same question about the same kind of picture. `source` IS declared here although vector_field_grid explicitly refused that value, and the reason is a measurement fact rather than a taxonomic one: over there the arrow is a headless BoxMesh oriented by looking_at, so reversing the field's sign gives a pixel-identical still; here the arrow is a CylinderMesh with top_radius = 0, a cone with a point, and reversing it swaps apex for base at all 125 instances while the single marker flips red to blue. Same word, opposite verdict, for a reason about the mesh.",
+    "still_note": "poles is the strong axis - 125 cones reorient at once and the source markers change in number, position and colour. sink against source is the pair to watch: same positions, same |F| everywhere, therefore the same arrow colours under the default coding, and ONLY the cone apexes and one marker hue reverse. If that pair comes back near zero, crop before concluding anything. coding is the thinner measurement, arrows on empty space, and the dilution vector_field_grid warned about applies here too. dna.fixture pins seed_value so the 30 particles start in the same places at every value; without it the scatter is unseeded and five frames are five particle clouds, which is exactly the false-confident-bite trap. They still DIVERGE after the start, legitimately, because they are advected by the field the axis is changing - a small moving-dot component of the diff is signal, not noise. framing is 0.8 because PAD 1.9 on a roughly cubic 2.4 m lattice leaves the subject at about a third of the frame width.",
+    "declines": "grid_resolution, grid_spacing, arrow_scale and particle_count stay plain exports: denser, bigger, more is a change of sampling, not of claim. seed_value is a capture control rather than an axis, and it is deliberately absent from apply_grid_config so that no map can freeze a scatter that has always been random."
+   },
    "capacity": "SEE the force before the object arrives — the field exists everywhere, waiting",
    "category": "physics",
    "complexity": "intermediate",

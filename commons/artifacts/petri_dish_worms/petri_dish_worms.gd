@@ -102,13 +102,33 @@ var _speed_slider: Node = null
 @onready var medium: MeshInstance3D = $Medium
 @onready var worm_container: Node3D = $WormContainer
 
+## Set at the end of _ready. apply_grid_config refuses to tear anything down before it is
+## true, so a caller that hands the dict over by hand cannot spawn a second population on
+## top of the first.
+var _built: bool = false
+
 func _ready() -> void:
+	_read_dna()
 	_setup_dish()
 	_spawn_worms()
 	_setup_controls()
 	# Appended LAST so every legacy child index and position above it is untouched, and so a
 	# rung that wants to enclose the dish can see the finished dish.
 	_build_assay()
+	_built = true
+
+
+## The grid writes config_<key> onto the artifact ROOT before add_child and only calls
+## apply_grid_config deferred, i.e. AFTER _ready. Reading the metadata here means a token
+## that asks for an apparatus builds it once, instead of building the bare dish and then
+## tearing it down a frame later. A bare token sets no metadata and reaches nothing.
+func _read_dna() -> void:
+	if has_meta("config_spawn_seed"):
+		spawn_seed = int(str(get_meta("config_spawn_seed")))
+	if has_meta("config_assay"):
+		var word: String = str(get_meta("config_assay")).strip_edges().to_lower()
+		if ASSAYS.has(word):
+			assay = word
 
 
 ## The two draws this artifact makes. At spawn_seed = -1 both fall straight through to the
@@ -305,16 +325,39 @@ func _exit_tree() -> void:
 ## away, so nothing a map wrote on the token ever reached it. The other exports — num_worms,
 ## oscillation_speed, worm_speed and the rest — are STILL unread, deliberately: they are the
 ## simulation's parameters and wiring them from a token is a curriculum change, not a DNA one.
+## GUARDED, and the guard is the point. The first version of this hook fired _respawn_worms
+## and _rebuild_assay on the mere PRESENCE of a key, so a token restating the value the dish
+## already held threw the population away and rebuilt it. Now: return on an empty dict,
+## assign only when the incoming value is legal AND different, and touch nothing at all
+## before _ready has built once. None of the 5 existing placements passes any config, so
+## none of them reaches a teardown.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.is_empty():
+		return
+
+	var respawn: bool = false
+	var reassay: bool = false
+
 	if config_data.has("spawn_seed"):
 		# int(str(...)) because a token value arrives as a String and set()/assignment on a
 		# typed int would silently reject it, leaving the dish unseeded and the sweep noisy.
-		spawn_seed = int(str(config_data["spawn_seed"]))
-		_rng = null
-		_respawn_worms()
+		var s: int = int(str(config_data["spawn_seed"]))
+		if s != spawn_seed:
+			spawn_seed = s
+			_rng = null
+			respawn = true
+
 	if config_data.has("assay"):
 		var word: String = str(config_data["assay"]).strip_edges().to_lower()
-		assay = word if ASSAYS.has(word) else assay
+		if ASSAYS.has(word) and word != assay:
+			assay = word
+			reassay = true
+
+	if not _built:
+		return
+	if respawn:
+		_respawn_worms()
+	if reassay:
 		_rebuild_assay()
 
 

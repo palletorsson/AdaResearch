@@ -742,6 +742,33 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.273850Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "flesh": [
+      "soft",
+      "turgid",
+      "slack",
+      "firm"
+     ],
+     "occurrence": [
+      "scattered",
+      "troop",
+      "ring",
+      "clustered"
+     ]
+    },
+    "default": "flesh=soft, occurrence=scattered - identical to soft_mushroom, because this IS soft_mushroom: both tokens resolve to res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn. Declared on both so the sibling is not left as an axis the sweep can never reach.",
+    "was": "the same three unnamed SoftBody3D numbers and the same unexamined randf_range scatter - see soft_mushroom for the full note.",
+    "note": "ONE SCENE, TWO REGISTRY NAMES. soft_mushroom (10 maps) and soft_mushrooms (Gallery_PhysicsSimulation) are the same object under two lookup names; the two measured AABBs differ only because the field is randomly generated per capture. Kept in sync by hand: if one declaration changes, change both.",
+    "fixture": {
+     "rng_seed": 20260805,
+     "mushroom_count": 5,
+     "spawn_span": 4.0
+    },
+    "framing": 0.55
    }
   },
   "cloth_straps": {
@@ -2053,6 +2080,35 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.273850Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "flesh": [
+      "soft",
+      "turgid",
+      "slack",
+      "firm"
+     ],
+     "occurrence": [
+      "scattered",
+      "troop",
+      "ring",
+      "clustered"
+     ]
+    },
+    "default": "flesh=soft, occurrence=scattered - soft returns the shipped linear_stiffness 0.2 / damping 0.05 / pressure 0.5 value for value, and scattered draws the SAME two randf_range calls in the same order off the same global generator (rng_seed defaults to 0, which leaves the seeded generator null). The 10 map placements grow the garden they always grew.",
+    "was": "three unnamed SoftBody3D numbers and a for-loop over randf_range. The @identity truth says 'a mushroom cap does not decide its shape - the pin constraint, gravity and whatever bumps into it negotiate the form', and the tissue doing the negotiating was hard-coded at one setting. The scatter was not a decision at all: it is what a loop does when nobody asks, yet it is a claim about fungal ecology - that fruiting bodies come up independently - and it is not the only one fungi make.",
+    "note": "flesh is a MATERIAL property, not a time-domain one, but the sweep photographs at 1.1 s and a SoftBody3D at stiffness 0.05 with damping 0.05 is still moving then. The four values will differ in the frame - turgid holds a ball while slack has already collapsed - but the picture is a snapshot of a negotiation in progress, not four rest states. Deterministic under the fixture's seed, so the comparison is fair; it is simply earlier than rest. occurrence is a positional axis and is at rest immediately.",
+    "fixture": {
+     "rng_seed": 20260805,
+     "mushroom_count": 5,
+     "spawn_span": 4.0
+    },
+    "framing": 0.55,
+    "fixture_note": "rng_seed and spawn_span are bench knobs added for this, both defaulting to 0 = 'as shipped'. Without a seed, fifteen unseeded randf_range draws per variant make five variants five different gardens and the sweep measures noise - the documented failure for any generative artifact. Without spawn_span the field is the measured 19.45 x 20.07 m, which puts a 2 m cap at roughly 26 px in a 760 px frame: the caps become specks and an axis about cap SHAPE cannot be read at all.",
+    "open": "spatial_needs.footprint_cells is 9 while measured_footprint_cells is 420 - the registry books this 20 m field as a 3x3 prop. Not touched here; recorded so it is not lost."
    }
   },
   "frozen_glass_vessel": {

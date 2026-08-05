@@ -3827,6 +3827,29 @@
     "biology",
     "data_structures"
    ],
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "grammar": [
+      "landscape",
+      "open",
+      "enclave",
+      "chain",
+      "checker"
+     ]
+    },
+    "fixture": {
+     "mosaic_seed": 20260804,
+     "solve_attempts": 60
+    },
+    "fixture_why": "Both default to shipped behaviour in code, so neither is an axis. mosaic_seed pins the solve - the shipped seed is hash(global_position + get_instance_id()), and an instance id is different every launch, so five grammar frames would be five different draws and the bite number would measure the RNG. solve_attempts is the shipped max_attempts literal (10) made reachable, and it is here because of the defect below: within 10 attempts a sweep of five values has roughly a 40% chance that at least one tile is not a WFC solve at all but _fallback_grid's two-colour checkerboard. 60 attempts drops that to nil and costs nothing on average, because the loop stops at the first success.",
+    "default": "grammar=landscape - _grammar_table returns the shipped _adjacency dictionary ITSELF at this value, not a reconstruction of it, so the solver reads the same object, consumes the RNG in the same order and draws the same mosaic. mosaic_seed 0 keeps the shipped position+instance-id hash line character for character and solve_attempts 10 is the literal it replaced. apply_grid_config used to re-seed and re-solve on ANY call and is now guarded twice (a value must validate and differ, and _ready must have generated once) - the only call this artifact receives in the corpus is curation_station's {\"emissive\": false}, which arrives at the same position and the same instance id _ready saw, so it re-seeded to the identical number and redrew the identical mosaic; removing it changes no pixel in Curation_Bay_mosaicanalysis_1 and saves a whole solve. The other six placements are bare tokens or rotation shorthand and never reach apply_grid_config at all.",
+    "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS. Three exports existed and all three were dimensions: a world size, a grid size and a pixel scale. The artifact's own @identity names its critical parameter as 'the adjacency rules - water may only neighbor water or sand, never stone', and those rules were a literal Dictionary one screen down that no map token could reach. The registry description also called the output 'pre-generated', which is wrong: the WFC is solved live in _ready, every launch.",
+    "note": "hand promotion 2026-08-04. grammar is the corpus's word for the set of local rules that generates a global form (lsystem_editor, lsystem_architecture, room_grammar) and WFC's adjacency table is exactly that; the values are this system's own laws. They are arranged as a scale of constraint rather than as five flavours: open puts none (and the mosaic falls to salt-and-pepper, which is the artifact's own thesis stated in the negative - the coherence was never the algorithm, it was the rules), landscape is the shipped ecotone, enclave and chain are two different ways of being strict (broker every boundary through ground; or never jump a step in the terrain cycle), and checker is maximal constraint pointing the other way, forbidding a tile its own kind so no region can form at all. All five tables were checked symmetric, and all five were run through a faithful port of this exact solver before being declared.",
+    "finding": "THE SOLVER HAS A MEASURED DEFECT AND IT IS NOT FIXED HERE. _attempt_solve's entropy scan carries `if min_entropy == 999 and candidates.is_empty(): break` at the row level, which fires the moment ROW 0 is fully collapsed regardless of the other fifteen rows: candidates stays empty, the while loop continues, and the solve spins to max_iterations and reports failure. An attempt therefore only completes when the last cell to collapse happens to lie in row 0. Measured in a faithful port (16x16, one attempt each): landscape completes 31% of attempts, checker 38%, enclave 19%, open 12% - and open constrains NOTHING, which is the proof that the failure is structural and not about the rules. Every failure observed was the iteration cap with 15-22 cells still uncollapsed and ~4880 dead spins burnt; not one was a genuine contradiction. Within the shipped 10-attempt budget that is a ~3% chance of a checkerboard at the default and ~26% under open. Deleting that break is the fix and it is a one-line change to what seven maps draw, so it belongs to a deliberate decision, not to a DNA promotion.",
+    "declined": "A second axis over the TILE SET (which of the six terrains are in play). It is real and it would be visible, but the alphabet and the rules multiply into invalid pairs - a subset that drops PATH leaves STONE with no legal neighbour under chain, which the solver cannot satisfy and which lands the player on the fallback checkerboard. One axis that always solves beats two that sometimes do not."
+   },
    "geometry_spec": {
     "mesh_type": "texture_plane",
     "topology": "planar",

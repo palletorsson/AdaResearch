@@ -317,10 +317,27 @@
 			"parameters": {
 				"seed": "Starting a and b (default 0)",
 				"op": "forced to sub by the scene",
+				"workings": "outcome | trace | operands | expression - how much of the arithmetic the bench draws (default trace)",
 				"color_a": "vector a",
 				"color_b": "vector b",
 				"color_c": "the resultant",
 				"emissive": "Bool - lift glow (default true)"
+			},
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					]
+				},
+				"default": "workings=trace - trace is the fall-through arm of the match in _build_demo(), so it adds nothing at all and the 5 existing placements draw the identical triangle: a from the origin, the negated b from a's tip, the resultant closing them, the faint +b ghost at the shared tail and the dashed component rectangle underneath. NO SCRIPT CHANGE was made for this token - the code already honoured workings, only the declaration was missing",
+				"was": "declared nothing. vector_sub is vector_add's scene with one line changed (op = 1), so it inherited the workings code the moment vector_add was promoted on 2026-08-03 and has been able to answer this question ever since without anyone being able to see that it could. The stage-2 runner refused it for NO TURNABLE KNOBS because vector_sub.tscn has no sibling vector_sub.gd - the knobs all live in vector_op_console.gd, which the scene reaches by ExtResource",
+				"shared_with": "vector_add - the SAME SCRIPT, not merely the same word. commons/artifacts/vector_op_console/vector_op_console.gd is loaded by both vector_op_console.tscn and vector_sub.tscn; the second scene sets op = 1 and changes nothing else. The four values are therefore guaranteed to mean the same thing here as there, and the two tokens should MEASURE alike apart from the sign - which is itself the check on the vocabulary. Also shared with transform_composition_workbench, dot_aligner, projection_shadow, length_lantern, geometric_transformations and csg_difference_demo",
+				"note": "hand promotion 2026-08-05, registry-only. Subtraction is where the axis bites hardest: under operands the head-to-tail leg goes dark and MINUS b is redrawn from the shared origin, so the parallelogram is built on a and (-b) while the purple +b ghost still stands beside it - one still showing the flip and the shape at once, which the shipped triangle cannot do. Under outcome the ghost is unlayered too (_workings_outcome takes it explicitly), so a - b arrives with no evidence that anything was ever negated. Under expression the board writes the component difference with the MINUS sign substituted"
 			},
 			"dev_themes": [
 				"vectors",
@@ -611,6 +628,7 @@
 			"parameters": {
 				"seed": "Length jitter (default 0)",
 				"projection": "0..1 swings the object from perpendicular to along the rail - drives a*n_hat and the shadow length (default 0.7)",
+				"workings": "outcome | trace | operands | expression - how much of the arithmetic the bench draws (default trace)",
 				"complexity": "Detail (default 6)",
 				"color_a": "Rail / axis n_hat",
 				"color_b": "The vector a",
@@ -619,6 +637,23 @@
 				"emissive": "Bool - lift glow (default true)",
 				"sculpt_height": "Height in meters",
 				"sculpt_width": "Footprint width in meters"
+			},
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					]
+				},
+				"default": "workings=trace - trace is the fall-through arm of the match and runs no code at all, and the whole match sits AFTER _settle(rig) so the legacy fit and placement are computed from exactly the geometry that shipped. The one edit above that line wraps the sun and its three rays in an identity Node3D named SunLamp so the axis can reach the lamp in one call; _subtree_aabb recurses into Node3D children and does NOT apply their transform, and this holder is never moved, so the settled box is bit-identical. All 5 existing placements (MindMap_VectorForces, VFM_02_Operations, VFM_02_Operations_Folded, VFM_Operations_Playground, Vectors_Act2_VectorArithmetic) carry the bare token projection_shadow:0:0 with no config overrides",
+				"was": "no axis at all. What the bench draws OF the projection was welded: a sun above, three rays falling, an amber bar on the rail, a dashed drop. Every placement has argued that a projection is something a light DOES to an object - the one reading of proj_n(a) that makes it depend on where you put the lamp. The runner refused the artifact for NO TURNABLE KNOBS: seed, projection, complexity and the four colours were plain @exports the sweep could turn but that only resize and recolour one fixed picture",
+				"shared_with": "transform_composition_workbench's word with its four values in the same order, seconded here by its own bench-mates dot_aligner, vector_add and vector_sub. Projection IS the dot product wearing a different hat - proj_n(a) = (a·n_hat)n_hat - so it takes the dot's word rather than inventing a second vocabulary for the same question. Also shared with length_lantern, geometric_transformations and csg_difference_demo",
+				"note": "hand promotion 2026-08-05. Each value names something this object genuinely has, which is the test for borrowing a word: outcome unlayers a, the object cube, the whole lamp and the drop, leaving an amber length on a rail with nothing in frame to say what cast it; trace is the shipped act-of-casting; operands darkens the lamp and answers for it in geometry - n_hat redrawn as a unit arrow from the shared tail, the alpha arc swept between n_hat and a, and a right-angle gnomon planted where the drop meets the rail, so the shadow reads as a fact about an angle that would be the same length with the lamp switched off; expression writes (a.n_hat)n_hat = |a| cos alpha on a light board with the numbers substituted. Removal is layers = 0 on the MeshInstance3D leaves throughout, never visible = false",
+				"declined": "opening (agreement_gauge's word, which the bench-mate dot_aligner took on the same day). It does not belong here: the pose it names - the angle between the two vectors - is ALREADY the live projection slider, which sweeps perpendicular (0) to parallel (1) and is exported, config-reachable and under the player's hand. dot_aligner needed opening precisely because its alignment knob could not reach 90 or 180 degrees; this one can. A second word for a knob that exists would be a fake genome. The real gap opening would expose here is a NEGATIVE projection (the shadow landing behind the origin), which projection 0..1 cannot reach - worth a later pass as its own axis, not as a borrowed pose"
 			},
 			"dev_themes": [
 				"linear_algebra",
@@ -733,6 +768,8 @@
 			"parameters": {
 				"seed": "Foe bearing jitter (default 0)",
 				"alignment": "0..1 how closely the aim points at the foe - drives cos(theta), the beam, and the conversion (default 0.78)",
+				"opening": "agreeing | strangers | opposing | parallel - the case the pair is found in, i.e. the angle a and b meet at (default agreeing)",
+				"workings": "outcome | trace | operands | expression - how much of the arithmetic the bench draws (default operands)",
 				"complexity": "Angle-arc resolution (default 6)",
 				"color_a": "Steel rig / barrel",
 				"color_b": "The vectors a and b",
@@ -742,6 +779,29 @@
 				"emissive": "Bool - lift glow (default true)",
 				"sculpt_height": "Height in meters",
 				"sculpt_width": "Footprint width in meters"
+			},
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"opening": [
+						"agreeing",
+						"strangers",
+						"opposing",
+						"parallel"
+					],
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					]
+				},
+				"default": "opening=agreeing, workings=operands - agreeing does not name an angle at all: _miss_rotation() SHORT-CIRCUITS and hands back the shipped line (1.0 - alignment) * deg_to_rad(MAX_ANGLE_DEG) verbatim, so a map that overrides alignment alone still gets its own miss angle rather than a ratio re-derived from this one. Checked numerically at alignment 0.00 / 0.25 / 0.50 / 0.78 / 1.00: bit-identical to the shipped expression at every position. The readout gains its case line only when opening is NOT agreeing, so the monitor string is byte-identical too. operands is the fall-through arm of the workings match and adds nothing. All 5 existing placements (MindMap_VectorForces, Force_Props_Sandbox, VFM_02_Operations, VFM_Operations_Playground, Vectors_Act2_VectorArithmetic) carry the bare token dot_aligner:0:0 with no config overrides, so they run on both defaults and are unchanged",
+				"was": "workings was in the code but declared NOWHERE - it landed in the 2026-08-02 rescue batch and the ledger never learned about it, so a real second axis sat unmeasurable. opening did not exist: alignment 0..1 maps to a miss of 72..0 degrees, so cos(theta) had never left [0.31, 1.00] in any placement or at any slider position. The turret could only ever be found broadly agreeing and made to agree harder - the three cases the dot product exists to teach (the dot vanishing, the dot going negative, the dot at its ceiling) were unreachable from a map token AND from the player's hand",
+				"shared_with": "opening is agreement_gauge's word with agreement_gauge's four values in the same order, seconded by exercise_5_9_angle_between - it is literally the same question asked of the same pair of directions, so a room can set the gauge, the exercise and this turret to one case and the three should MEASURE alike. workings is transform_composition_workbench's word, shared across the whole vector subject with vector_add, vector_sub, projection_shadow, length_lantern, geometric_transformations and csg_difference_demo",
+				"note": "hand promotion 2026-08-05 - the runner refused it for NO TURNABLE KNOBS. ASKED THE GEOMETRY RATHER THAN ASSUMING: a rotation about UP is not the angle between the vectors, because b keeps a vertical component (dir_to_foe.y is 0.177 after normalising) that the spin never touches, so a rotation of phi leaves an angle of acos(y*y + (1-y*y)*cos phi). Rotating by a flat 90 degrees would have left cos(theta) = 0.031 and 'strangers' would have been a near-miss wearing an exact name; _miss_rotation() solves for the phi that makes each claim true instead. Measured: agreeing cos 0.963 / theta 15.6 (beam lit, foe warming green), strangers cos 0.0000 exactly / theta 90.0 (beam dead, foe full enemy-red, arc a right angle), opposing cos -0.766 / theta 140.0 (aim swung past the turret's own shoulder), parallel cos 1.0 / theta 0 (arrows superimpose, _add_arc returns early on a zero cross so the arc collapses to nothing, foe CONVERTS to green with the beam at full width). The slider stays live under all four: opening sets the case the turret is found in at the shipped rest and alignment shifts it by the same 72-degree span it has always driven",
+				"gotcha": "opening MOVES the two arrows and workings REMOVES them (outcome unlayers both plus the arc). The two axes therefore disturb the same brightest pixels by different means - opening should read as a large focus bite and outcome as a large frame bite, and if they score the same way something is wrong with the capture, not the design"
 			},
 			"dev_themes": [
 				"linear_algebra",
@@ -2204,6 +2264,28 @@
 			}
 		},
 		"calder_mobile": {
+			"dna": {
+				"promoted": "2026-08-04",
+				"stage": "2 - variation",
+				"axes": {
+					"lever": [
+						"solved",
+						"halved",
+						"inverted"
+					],
+					"evidence": [
+						"result",
+						"trace",
+						"longhand"
+					]
+				},
+				"default": "lever=solved, evidence=longhand - solved never enters the new branch at all: dl = arm*wr/total and dr = arm*wl/total are the shipped two lines and lp/rp the shipped two expressions, and no branch adds or removes an _rng draw, so the four placements (FormFinding_Equilibrium, Sky_Climb, Vectors_Act4b_Oscillation, Walk_grande_galerie_axial_text) and the sibling scene calder_object_mobile build the identical tree from the identical draw order. longhand keeps every gram tag and the plaque, and the plaque's second line still reads 'balanced: tau = w*d at every arm' because lever is solved. apply_grid_config no longer rebuilds on every call - only when a value both validates and CHANGED, and only after _ready has built once. Skipping that rebuild is byte-identical rather than merely equivalent, because _rng.seed = hash(seed) makes _build deterministic: the torn-down mobile always came back the same mobile.",
+				"was": "six exports - seed, use_objects, depth, span, leaf_prob, top_y - and every one a dial on the same sculpture: a different tree, a deeper tree, a longer rod. The one thing nothing could turn was the claim in the @identity, that every arm obeys tau = w*d. The artifact could not be photographed being wrong, and a claim that cannot fail is not visibly true either.",
+				"note": "lever is WHETHER THE LAW BINDS, not which law. solved is Calder's arithmetic, pivot placed so w_l*d_l = w_r*d_r and every rod dead level. halved cuts each rod in the middle - symmetry mistaken for balance, the mistake anyone makes who has not done the sum. inverted applies the law with the ratio reversed, the heavier child on the LONGER arm. The residual moment is not styled: the rod is hung by it, at asin(residual / (arm*W)), and the ladder falls out of the algebra rather than being chosen - halved leaves arm*(wr-wl)/2 and inverted leaves arm*(wr-wl), so the sign error leaves exactly twice the residual of the naive cut, in the same direction; sin(theta) doubles exactly and the angle a little more than doubles, since asin is convex. ONE HONEST PROXY, stated plainly so nobody mistakes it for physics: a rod whose loads hang on free wires carries cos(theta) in every moment term, so its only equilibrium is vertical with the heavy end straight down, and the true free-swing answer would fold the sculpture into a tangle at every non-default value. What is drawn is the residual normalised by the largest moment the arm could carry - zero exactly when the law is obeyed, which is why solved is untouched.",
+				"kin": "evidence is the family word taken character for character from the 34 siblings, THREE VALUES not four. There is no axiom tier because the plaque already IS the symbolic assertion - tau = w*d is printed on it at longhand - so a fourth value would be the third one minus its numbers, which is trace read backwards. The default is longhand rather than the motion demos' result, for weather_vector_field's stated reason: this artifact was born with its whole working on the table, a gram tag under every disc and a total on the plaque. NOT named `law`, although force_field_visualizer declares an axis by that word: over there the four values are four different force laws falling off differently, here there is one law and the question is whether it is solved, ignored or inverted. NOT `balance` either - that names the state, and lever names the mechanism that produces it.",
+				"still_note": "lever is the silhouette axis and should bite hard: every rod above the leaves rotates, so each disc moves in x AND y and the whole tree goes lopsided; inverted should measure at AT LEAST twice halved's displacement, in the same direction, so the two are ORDERED and not merely different - a pair that comes back unordered is a bug in the tilt, not a soft axis. evidence is the thin one: it removes a handful of Label3D gram tags and a four-line plaque from a 3.6 m sculpture, so expect dilution and crop-recheck before believing INERT. One coupling to know about: the plaque's own text changes with lever (balanced -> NOT balanced), so a diff along evidence at a non-default lever is not measuring evidence alone. Judge evidence at lever=solved.",
+				"declines": "use_objects stays a plain export and is deliberately NOT an axis: the corpus already ships that value as a separate token, calder_object_mobile.tscn, which sets use_objects=true, seed=13, depth=3 and has its own registry entry and its own placement in Sky_Climb. Declaring it here would sweep a family whose second member already has a name. seed, depth, span, leaf_prob and top_y stay dials - a different random tree is a different object, not a different argument."
+			},
 			"lookup_name": "calder_mobile",
 			"scene": "res://commons/artifacts/calder_mobile/calder_mobile.tscn",
 			"class_name": "CalderMobile",
@@ -2260,6 +2342,26 @@
 			"qfep_connection": "A hanging Calder mobile that actually balances \u2014 every arm obeying the lever law, torque answering torque all the way up the tree. The chapter of forces made into sculpture that hangs in equilibrium: not a picture of balance but balance itself, each branch a solved equation, the whole a mobile that would tip if a single mass were wrong."
 		},
 		"calder_object_mobile": {
+			"dna": {
+				"promoted": "2026-08-04",
+				"stage": "2 - variation",
+				"axes": {
+					"lever": [
+						"solved",
+						"halved",
+						"inverted"
+					],
+					"evidence": [
+						"result",
+						"trace",
+						"longhand"
+					]
+				},
+				"default": "lever=solved, evidence=longhand - the export defaults, untouched by this scene. calder_object_mobile.tscn sets use_objects=true, seed=13 and depth=3 and says nothing about either axis, so its one placement (Sky_Climb) builds the identical tree from the identical _rng draw order it always did.",
+				"was": "not a separate artifact at all - the same CalderMobile script under a second .tscn, which is this corpus's most common hidden family. Before this pass neither name could turn anything.",
+				"note": "declared here as well as on calder_mobile because they are ONE SCRIPT under TWO scene files, and an axis declared on only one of the pair is an axis half the maps cannot reach. The values are not copied - they are the same code, so the two tokens must measure ALIKE, and a sweep that says otherwise is reporting a fixture difference (use_objects=true, depth=3 here) rather than a difference of axis. See calder_mobile for the full note; the only thing that differs is what hangs on the arms, discs there and project primitives here, and that difference is already the reason these two names exist.",
+				"still_note": "depth=3 here against 4 on the sibling, so there are fewer arms and each tilt at halved/inverted is a larger share of a smaller tree. The leaf masses are the OBJECTS table (0.18 / 0.55 / 0.42 / 0.7 kg) rather than continuous disc areas, so the residual moments come in coarser steps and two arms can tilt identically - that is the mass table, not a dead axis."
+			},
 			"lookup_name": "calder_object_mobile",
 			"scene": "res://commons/artifacts/calder_mobile/calder_object_mobile.tscn",
 			"class_name": "CalderMobile",

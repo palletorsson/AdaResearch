@@ -43,7 +43,39 @@ class_name DotAligner
 @export_enum("outcome", "trace", "operands", "expression") var workings: String = "operands"
 const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
 
+## AXIS — THE CASE THE DOT PRODUCT IS FOUND IN. Adopted word for word (and value for value,
+## in order) from [[agreement_gauge]] and [[exercise_5_9_angle_between]], because it is
+## literally the same question asked of the same pair of directions: what angle do a and b
+## meet at, and therefore what does a·b say. A room can set the gauge, the exercise and this
+## turret to the same case and the three will mean the same thing by it.
+##
+## The whole content of the dot product is the cosine — its SIGN above all. This turret
+## shipped unable to show that. alignment ∈ [0,1] maps to a miss of 72°..0°, so cos θ has
+## never left [0.31, 1.00]: every placement has met an aligner that was already broadly
+## agreeing and could only agree harder. The three cases the operation exists to teach —
+## the dot vanishing, the dot going negative, the dot at its ceiling — were unreachable
+## from a map token AND from the slider.
+##
+##   agreeing    the shipped rest, ~16° off (the slider's law untouched). Broad agreement,
+##               beam lit, the foe already warming toward green.
+##   strangers   90°. a·b is EXACTLY zero — no agreement, and none against either. The
+##               beam dies, the foe stays enemy-red, the arc opens to a right angle.
+##   opposing    140°. a·b is NEGATIVE (−0.77): the aim points away past the turret's own
+##               shoulder. Mercy is not merely withheld, it is aimed elsewhere.
+##   parallel    0°. The arrows superimpose, the arc collapses to a point, cos θ = 1 and
+##               the foe converts. The aligner that cannot miss.
+##
+## The two arrows own the brightest non-beam pixels; opening is the axis that MOVES them
+## (outcome is the one that removes them), so the two axes disturb the frame differently.
+@export_enum("agreeing", "strangers", "opposing", "parallel") var opening: String = "agreeing"
+const OPENINGS: PackedStringArray = ["agreeing", "strangers", "opposing", "parallel"]
+## The angle a and b are opened to when the slider sits at its shipped rest. `agreeing` is
+## absent on purpose — it short-circuits to the shipped expression instead of naming a
+## number, so a map that overrides `alignment` alone still gets its own angle, not this one.
+const OPENING_DEG := {"strangers": 90.0, "opposing": 140.0, "parallel": 0.0}
+
 const MAX_ANGLE_DEG := 72.0
+const ALIGN_REST := 0.78  # the shipped default of `alignment`; the named cases are exact here
 const LOCK_DOT := 0.985   # cosθ above which the foe is converted
 
 
@@ -58,6 +90,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("workings"):
 		var _w: String = String(config_data["workings"]).strip_edges().to_lower()
 		workings = _w if WORKINGS.has(_w) else workings
+	if config_data.has("opening"):
+		var _o: String = String(config_data["opening"]).strip_edges().to_lower()
+		opening = _o if OPENINGS.has(_o) else opening
 	apply_base_config(config_data)
 	color_a = _parse_color(config_data.get("color_a", color_a), color_a)
 	color_b = _parse_color(config_data.get("color_b", color_b), color_b)
@@ -89,7 +124,7 @@ func _build_demo() -> void:
 	var reach: float = 1.15
 	var dir_to_foe: Vector3 = Vector3(cos(bearing), 0.18, sin(bearing)).normalized()  # vector b
 	var foe_pos: Vector3 = head + dir_to_foe * reach
-	var miss_angle: float = (1.0 - alignment) * deg_to_rad(MAX_ANGLE_DEG)
+	var miss_angle: float = _miss_rotation(dir_to_foe)
 	var aim_dir: Vector3 = dir_to_foe.rotated(Vector3.UP, miss_angle).normalized()    # vector a
 	var dot: float = clampf(aim_dir.dot(dir_to_foe), -1.0, 1.0)
 	var theta_deg: float = rad_to_deg(acos(dot))
@@ -133,7 +168,11 @@ func _build_demo() -> void:
 
 	# --- readout -> the monitor --------------------------------------------------
 	var status: String = "FRIEND" if converted else ("LOCKING" if dot > 0.7 else "SEEKING")
-	set_readout("DOT  a · b\n\ncos θ = %.3f\nθ = %d°\n\n%s" % [dot, int(roundf(theta_deg)), status],
+	# The monitor names the case whenever it is not the shipped one, so a still cannot
+	# misreport which claim is on screen. Under `agreeing` this is "" and the readout
+	# string is byte-identical to the one the 5 existing placements have always shown.
+	var case_line: String = "" if _opening_value() == "agreeing" else "\n[%s]" % _opening_value().to_upper()
+	set_readout("DOT  a · b\n\ncos θ = %.3f\nθ = %d°\n\n%s%s" % [dot, int(roundf(theta_deg)), status, case_line],
 		friend_color.lerp(Color(0.6, 1.0, 0.75), 0.4) if converted else Color(0.55, 0.92, 1.0))
 
 	_settle(rig)
@@ -149,6 +188,42 @@ func _build_demo() -> void:
 			_workings_expression(rig, aim_dir * (reach * 0.9), dir_to_foe * reach, dot, theta_deg)
 		_:
 			pass                                   # "operands" — the legacy lineage
+
+
+# --- OPENING ----------------------------------------------------------------
+# The case the pair is found in. Nothing here runs on the default: `agreeing` returns the
+# shipped line and every other branch is skipped.
+
+func _opening_value() -> String:
+	var o: String = String(opening).strip_edges().to_lower()
+	return o if OPENINGS.has(o) else "agreeing"
+
+
+## The rotation about UP that turns b into a.
+##
+## SHORT-CIRCUIT, NOT RE-DERIVATION. `agreeing` hands back the shipped expression verbatim
+## rather than routing it through the general law, so a map that overrides `alignment`
+## alone still gets its own miss angle and the 5 live placements are bit-identical.
+##
+## ASK THE GEOMETRY. For the three named cases a rotation is NOT the angle: b keeps a
+## vertical component (dir_to_foe.y ≈ 0.18 before normalising), and spinning about UP
+## leaves that component untouched, so a rotation of φ opens a true angle of
+## acos(y² + (1−y²)·cos φ). Rotating by 90° would leave cos θ = 0.03, not 0 — "strangers"
+## would be a near-miss wearing an exact name. So solve for the φ that makes each claim
+## exactly true instead of assuming the two quantities are the same one.
+##
+## The slider stays live under every value: it shifts the case by the same MAX_ANGLE_DEG
+## span it has always driven, and the named angle is exact at the shipped rest.
+func _miss_rotation(b_dir: Vector3) -> float:
+	var v: String = _opening_value()
+	if v == "agreeing":
+		return (1.0 - alignment) * deg_to_rad(MAX_ANGLE_DEG)
+	var target_deg: float = float(OPENING_DEG.get(v, 0.0)) + (ALIGN_REST - alignment) * MAX_ANGLE_DEG
+	var want: float = cos(deg_to_rad(clampf(target_deg, 0.0, 180.0)))
+	var flat: float = 1.0 - b_dir.y * b_dir.y
+	if flat < 0.0001:
+		return acos(clampf(want, -1.0, 1.0))
+	return acos(clampf((want - b_dir.y * b_dir.y) / flat, -1.0, 1.0))
 
 
 # --- WORKINGS ---------------------------------------------------------------

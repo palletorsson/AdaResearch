@@ -5754,6 +5754,24 @@
    "qfep_connection": "The hand becomes an instrument that leaves evidence: sampled positions accumulate into a trail, and six meters of accrued drawing throws the unlock. A curve confessed as dense point samples, with a door listening to how far you have moved."
   },
   "draw_dot_time_domain": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "retention": [
+      "none",
+      "trace",
+      "lattice",
+      "archive",
+      "wax"
+     ]
+    },
+    "default": "retention=none - NOTHING IN THIS ARTIFACT'S CODE CHANGED. The axis was already exported, already implemented and already reachable; the promotion is the declaration and a fix to the checker that could not see it. _ready calls super._ready(), which reaches _ret_read_config() and _ret_build() at the end of the parent's body, and \"none\" is the first case of that match and builds no record at all. MEASURED, not assumed: 8 mentions across 7 map files, not the 4 the promotion brief carried, by two reach-paths - bare tokens in WaveFunctions_Pendulum and its three parts, and three curation_station collections (Corridor_Point_One, Corridor_WaveFunctions_Pendulum, Curation_Bay_wavefunctions_3) whose #layout and #with_wall / #with_pillars / #with_barrier flags belong to the station and not to this artifact. None carries a retention key, and the inherited apply_grid_config returns on its first line unless a config actually carries one.",
+    "was": "refused by the runner as NO TURNABLE KNOBS, and that refusal was a fact about a line-oriented parser rather than about the artifact. This file is 92 lines beginning `extends \"res://commons/primitives/point/draw_dot.gd\"`, and its whole standing genome - the retention export, the RETENTIONS allow-list, the five _ret_* builders, the gated apply_grid_config - is the parent's. GDScript forbids redeclaring an inherited member, so the child cannot restate it and should not: the honest fix was to teach tools/check_dna_declarations.py to follow `extends \"res://...\"`, which it now does, and which closes the same gap for any artifact whose axis lives one class up.",
+    "shares_vocabulary_with": "draw_dot (the parent script), draw_triangle_faces, grab_sphere_point_snap, interactive_point_origin_force, player_trace, mystic_writing_pad, oscillation_controlled_cube - `retention` with the same five values in the same order and the same default. Here it is inherited rather than copied, so the sibling cannot drift: it is literally the same code.",
+    "declined": "time_axis_speed, sample_interval and lock_origin_on_ready - this file's own three exports, and all three declined. The first two are a rate and an interval, which one still cannot tell apart; that is the info_board result exactly. The third is invisible by construction. And the live trace itself is declined as a subject: with no player and no grab, the draw sphere never moves, so every sample lands on the same point and the +Z push draws them into a straight 0.2 m line - a degenerate figure that is the same figure at every value. The standing, photographable record in the reference frame is the parent's retention record, which is why that is the axis and the time axis is not.",
+    "still_note": "the record is built once in _ready inside the 0.5 m reference frame and never moves, so a still is a complete account of it. The child's _process advances the live trail along +Z but touches no part of the record."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Draw dot with time-domain trace along +Z.",

@@ -22,6 +22,26 @@ class_name CalderMobile
 @export_range(0.0, 1.0, 0.05) var leaf_prob: float = 0.34
 @export var top_y: float = 3.6                 # ceiling mount height
 
+## --- DNA (stage 2, promoted 2026-08-04) --------------------------------------------
+## lever — WHETHER THE LAW BINDS. The artifact's whole claim is that τ = w·d is solved at
+##   every arm, and the claim is checkable from a photograph, because a mobile that does
+##   not balance hangs crooked. `solved` is the shipped mobile, pivot placed so
+##   w_l·d_l = w_r·d_r and every rod dead level. `halved` ignores the law and cuts each
+##   rod in the middle — the mistake anyone makes who thinks symmetry is balance.
+##   `inverted` applies the law with the ratio the wrong way round, the heavier child on
+##   the LONGER arm. Both leave a residual moment, and the rod is then hung BY that
+##   residual instead of pretending it is zero: an honest lie the sculpture tells about
+##   itself. The residual is derived, not styled — see _build_subtree.
+## evidence — how much of the arithmetic stands beside the sculpture. Family word, taken
+##   character for character from force_field_visualizer / weather_vector_field / the 32
+##   others; three tiers, not four, because there is no symbolic-assertion-only state
+##   here that is not just the plaque.
+@export_enum("solved", "halved", "inverted") var lever: String = "solved"
+@export_enum("result", "trace", "longhand") var evidence: String = "longhand"
+
+const LEVERS := ["solved", "halved", "inverted"]
+const EVIDENCE := ["result", "trace", "longhand"]
+
 const PALETTE := [Color("cc1f1f"), Color("f0c020"), Color("2050c0"), Color("0a0a0a"), Color("f4f2ec")]
 const SHEET_T := 0.003                          # 3 mm aluminium sheet
 const DENSITY := 2700.0                         # kg/m³
@@ -43,12 +63,30 @@ func _ready() -> void:
 	_build()
 
 
+# Rebuild only when a value actually CHANGED, and only once _ready has built. The old
+# body rebuilt on every call including ones naming nothing this prop owns — harmless here
+# only because hash(seed) makes _build deterministic, so the torn-down mobile came back
+# identical. Skipping that work is therefore byte-identical, not merely equivalent.
 func apply_grid_config(config: Dictionary) -> void:
-	if config.has("seed"): seed = int(config["seed"])
-	if config.has("use_objects"): use_objects = bool(config["use_objects"])
-	if config.has("depth"): depth = int(config["depth"])
-	if config.has("emissive"): emissive = bool(config["emissive"])
-	_build()
+	var changed: bool = false
+	if config.has("seed") and int(config["seed"]) != seed:
+		seed = int(config["seed"]); changed = true
+	if config.has("use_objects") and bool(config["use_objects"]) != use_objects:
+		use_objects = bool(config["use_objects"]); changed = true
+	if config.has("depth") and int(config["depth"]) != depth:
+		depth = int(config["depth"]); changed = true
+	if config.has("emissive") and bool(config["emissive"]) != emissive:
+		emissive = bool(config["emissive"]); changed = true
+	if config.has("lever"):
+		var lv: String = str(config["lever"])
+		if LEVERS.has(lv) and lv != lever:
+			lever = lv; changed = true
+	if config.has("evidence"):
+		var ev: String = str(config["evidence"])
+		if EVIDENCE.has(ev) and ev != evidence:
+			evidence = ev; changed = true
+	if changed and is_node_ready():
+		_build()
 
 
 func _build() -> void:
@@ -65,13 +103,16 @@ func _build() -> void:
 	(sub["node"] as Node3D).position = Vector3(0, top_y, 0)
 	add_child(sub["node"])
 
-	# the plaque — the real measurement
-	_plaque = _billboard_label(
-		"ALEXANDER CALDER — mobile\nbalanced: τ = w·d at every arm\n%d %s · total %.2f kg\n%s" % [
-			_n_leaves, ("objects" if use_objects else "discs"), sub["mass"],
-			("project primitives" if use_objects else "sheet aluminium, 3 mm")],
-		Vector3(0, 0.2, 0.0), 26, Color(0.92, 0.93, 0.96))
-	add_child(_plaque)
+	# the plaque — the real measurement. Withheld below `longhand`: at `trace` the gram
+	# tags stay and the total does not, at `result` the sculpture stands on its own.
+	if evidence == "longhand":
+		_plaque = _billboard_label(
+			"ALEXANDER CALDER — mobile\n%s: τ = w·d at every arm\n%d %s · total %.2f kg\n%s" % [
+				("balanced" if lever == "solved" else "NOT balanced"),
+				_n_leaves, ("objects" if use_objects else "discs"), sub["mass"],
+				("project primitives" if use_objects else "sheet aluminium, 3 mm")],
+			Vector3(0, 0.2, 0.0), 26, Color(0.92, 0.93, 0.96))
+		add_child(_plaque)
 
 
 # Build a subtree hanging from this node's origin. Children are weighed first, then the
@@ -96,8 +137,29 @@ func _build_subtree(d: int, is_root: bool) -> Dictionary:
 	var arm: float = span * (0.7 + 0.35 * float(d)) * _rng.randf_range(0.85, 1.15)
 	var dl: float = arm * wr / total
 	var dr: float = arm * wl / total
-	var lp := pivot + Vector3(-dl, 0, 0)
-	var rp := pivot + Vector3(dr, 0, 0)
+	var lp: Vector3 = pivot + Vector3(-dl, 0, 0)
+	var rp: Vector3 = pivot + Vector3(dr, 0, 0)
+	if lever != "solved":
+		# The law disobeyed. Place the pivot by the wrong rule, then hang the rod BY what
+		# is left over rather than drawing it level anyway. A truly free arm swings until
+		# the heavy end is straight down (cos θ → 0 kills the moment, so the only
+		# equilibrium is vertical); that would fold the whole sculpture into a tangle, so
+		# the residual moment is drawn as an angle instead — sin θ = residual / (arm·W),
+		# the residual normalised by the largest moment this arm could carry. Zero
+		# residual is zero tilt, which is why `solved` never reaches this branch at all.
+		# The ladder is derived, not chosen: at `halved` the residual is arm·(wr−wl)/2 and
+		# at `inverted` it is arm·(wr−wl), so the sign error leaves exactly twice the
+		# residual of the naive middle-cut, in the same direction. sin θ doubles exactly;
+		# the angle a little more than doubles, because asin is convex.
+		if lever == "halved":
+			dl = arm * 0.5
+			dr = arm * 0.5
+		else:                                   # inverted — heavier child, LONGER arm
+			dl = arm * wl / total
+			dr = arm * wr / total
+		var tilt: float = asin(clampf((wr * dr - wl * dl) / (arm * total), -1.0, 1.0))
+		lp = pivot + Vector3(-dl * cos(tilt), dl * sin(tilt), 0)
+		rp = pivot + Vector3(dr * cos(tilt), -dr * sin(tilt), 0)
 	root.add_child(_wire(lp, rp))                                 # the balancing rod
 	root.add_child(_sphere(pivot, 0.022, _steel))                 # pivot bead
 	(left["node"] as Node3D).position = lp
@@ -129,7 +191,8 @@ func _make_shape_leaf(at: Vector3) -> Dictionary:
 	node.add_child(disc)
 	node.add_child(_wire(Vector3.ZERO, Vector3(0, -r * 0.5, 0)))  # short hanger
 	var mass: float = PI * r * r * SHEET_T * DENSITY
-	node.add_child(_leaf_tag("%.0f g" % (mass * 1000.0), Vector3(0, -r - 0.12, 0)))
+	if evidence != "result":
+		node.add_child(_leaf_tag("%.0f g" % (mass * 1000.0), Vector3(0, -r - 0.12, 0)))
 	_total_mass += mass; _n_leaves += 1
 	return {"node": node, "mass": mass}
 
@@ -153,7 +216,8 @@ func _make_object_leaf(at: Vector3) -> Dictionary:
 	else:
 		# fallback: a labelled cube
 		node.add_child(_box(Vector3(0, -drop - 0.18, 0), Vector3(0.22, 0.22, 0.22), _matte_mat(PALETTE[_rng.randi() % 3], 0.5)))
-	node.add_child(_leaf_tag("%s · %.0f g" % [pick[3], float(pick[1]) * 1000.0], Vector3(0, -drop - 0.42, 0)))
+	if evidence != "result":
+		node.add_child(_leaf_tag("%s · %.0f g" % [pick[3], float(pick[1]) * 1000.0], Vector3(0, -drop - 0.42, 0)))
 	_total_mass += float(pick[1]); _n_leaves += 1
 	return {"node": node, "mass": float(pick[1])}
 

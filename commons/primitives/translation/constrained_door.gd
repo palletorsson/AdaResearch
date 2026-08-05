@@ -1,14 +1,24 @@
 # Constrained Door - Two-phase axis-restricted movement
 # Uses a small grab cube as doorknob, door mesh follows as child
-# Phase 1: Slide up (Y axis only)
-# Phase 2: Slide sideways (X axis only)
+# Phase 1: slide along phase1_dir, for target_y
+# Phase 2: slide along phase2_dir, for target_x
+#
+# GENERALISED 2026-08-05 for translation_cube_demo's `course` axis. The two phases were
+# welded to +Y and +X: phase 1 wrote knob_pos.x/z back to their start values and clamped
+# knob_pos.y, phase 2 pinned y and z and clamped x. Those are the special case of a
+# projection onto a unit direction, and the direction is now a property.
+#
+# THE DEFAULTS ARE THE WELD. phase1_dir = +Y with span target_y and phase2_dir = +X with
+# span target_x reduce the code below, line for line, to the clamps it replaced — the
+# projection onto +Y IS "keep x and z, move y" — so a caller that sets nothing gets the
+# shipped door. phase_count = 2 and unconstrained = false are likewise the shipped gate.
 extends Node3D
 
 signal phase_changed(phase: int)
 signal goal_reached
 
-@export var target_y: float = 0.3  # How far up to slide
-@export var target_x: float = 0.0  # X distance to slide in phase 2
+@export var target_y: float = 0.3  # Signed span of phase 1, along phase1_dir
+@export var target_x: float = 0.0  # Signed span of phase 2, along phase2_dir
 @export var y_threshold: float = 0.08
 @export var x_threshold: float = 0.08
 @export var door_color: Color = Color(0.8, 0.3, 0.3)
@@ -17,6 +27,17 @@ signal goal_reached
 @export var door_depth: float = 0.04
 @export var knob_height: float = 0.6  # Height of doorknob on door
 @export var mirror_knob: bool = false  # Put knob on opposite side
+
+## Unit direction the knob is free to run in during phase 1. +Y is the shipped weld.
+@export var phase1_dir: Vector3 = Vector3(0.0, 1.0, 0.0)
+## Unit direction for phase 2. +X is the shipped weld.
+@export var phase2_dir: Vector3 = Vector3(1.0, 0.0, 0.0)
+## 2 = the shipped gate (phase 2 unlocks only when phase 1 completes). 1 = a single
+## permission, no gate: reaching the end of phase 1 IS the goal.
+@export var phase_count: int = 2
+## Both freedoms conceded at once — no gate, no projection, only a bounding box around
+## the same destination. The negative case the shipped door exists to argue against.
+@export var unconstrained: bool = false
 
 var _knob: RigidBody3D  # Small grab cube as doorknob
 var _door_mesh: MeshInstance3D  # Visual door
@@ -62,8 +83,7 @@ func _create_knob() -> void:
 
 	# Position knob on the door at handle height
 	# mirror_knob puts it on the opposite (left) side
-	var knob_x = door_width * 0.35 if not mirror_knob else -door_width * 0.35
-	_knob.position = Vector3(knob_x, knob_height, door_depth)
+	_knob.position = _knob_start()
 
 	# Lock rotation
 	_knob.lock_rotation = true
@@ -84,6 +104,28 @@ func _on_picked_up(_pickable) -> void:
 func _on_dropped(_pickable) -> void:
 	_is_grabbed = false
 
+## Where the knob rests before anything is grabbed. One place, so reset(), _create_knob()
+## and the constraint below cannot drift apart.
+func _knob_start() -> Vector3:
+	var knob_x: float = door_width * 0.35
+	if mirror_knob:
+		knob_x = -door_width * 0.35
+	return Vector3(knob_x, knob_height, door_depth)
+
+
+## Clamp a scalar run along one leg to [0, span] for a span of EITHER SIGN, with the two
+## slacks the shipped clamps used: `near` at the starting end, `far` past the target.
+## Phase 1 shipped (0.0, 0.05) — no give backwards, 5 cm of overshoot. Phase 2 shipped
+## (0.02, 0.02) — 2 cm at both ends.
+func _clamp_run(t: float, span: float, near: float, far: float) -> float:
+	var lo: float = -near
+	var hi: float = span + far
+	if span < 0.0:
+		lo = span - far
+		hi = near
+	return clampf(t, lo, hi)
+
+
 func _physics_process(_delta: float) -> void:
 	if not _knob:
 		return
@@ -93,47 +135,49 @@ func _physics_process(_delta: float) -> void:
 	_knob.angular_velocity = Vector3.ZERO
 
 	# Get knob position
-	var knob_pos = _knob.position
-	var start_knob_x = door_width * 0.35 if not mirror_knob else -door_width * 0.35
-	var start_knob_y = knob_height
-	var start_knob_z = door_depth
+	var knob_pos: Vector3 = _knob.position
+	var start: Vector3 = _knob_start()
 
-	match _current_phase:
-		1:  # Y axis only - SLIDE UP
-			# Lock X and Z
-			knob_pos.x = start_knob_x
-			knob_pos.z = start_knob_z
-			# Clamp Y
-			knob_pos.y = clamp(knob_pos.y, start_knob_y, start_knob_y + target_y + 0.05)
+	if unconstrained:
+		# No gate and no projection: the same destination, reachable any way at all.
+		var goal_off: Vector3 = phase1_dir * target_y + phase2_dir * target_x
+		var far: Vector3 = start + goal_off
+		knob_pos.x = clampf(knob_pos.x, minf(start.x, far.x) - 0.02, maxf(start.x, far.x) + 0.02)
+		knob_pos.y = clampf(knob_pos.y, minf(start.y, far.y) - 0.02, maxf(start.y, far.y) + 0.02)
+		knob_pos.z = clampf(knob_pos.z, minf(start.z, far.z) - 0.02, maxf(start.z, far.z) + 0.02)
+		if not _goal_reached and knob_pos.distance_to(far) < x_threshold:
+			_goal_reached = true
+			goal_reached.emit()
+	else:
+		match _current_phase:
+			1:  # phase1_dir only. At the +Y default this IS "lock X and Z, clamp Y".
+				var t: float = _clamp_run((knob_pos - start).dot(phase1_dir), target_y, 0.0, 0.05)
+				knob_pos = start + phase1_dir * t
 
-			# Check if reached Y target
-			var y_moved = knob_pos.y - start_knob_y
-			if y_moved >= target_y - y_threshold:
-				_transition_to_phase_2()
+				if absf(t) >= absf(target_y) - y_threshold:
+					if phase_count <= 1:
+						# One permission, no gate: the end of the first leg is the goal.
+						if not _goal_reached:
+							_goal_reached = true
+							goal_reached.emit()
+					else:
+						_transition_to_phase_2()
 
-		2:  # X axis only - SLIDE SIDEWAYS
-			# Lock Y at raised position and Z
-			knob_pos.y = start_knob_y + target_y
-			knob_pos.z = start_knob_z
-			# Allow X movement
-			var x_min = min(start_knob_x, start_knob_x + target_x) - 0.02
-			var x_max = max(start_knob_x, start_knob_x + target_x) + 0.02
-			knob_pos.x = clamp(knob_pos.x, x_min, x_max)
+			2:  # phase2_dir only, from the position phase 1 ended at.
+				var base2: Vector3 = start + phase1_dir * target_y
+				var u: float = _clamp_run((knob_pos - base2).dot(phase2_dir), target_x, 0.02, 0.02)
+				knob_pos = base2 + phase2_dir * u
 
-			# Check if goal reached
-			var x_moved = knob_pos.x - start_knob_x
-			if not _goal_reached and abs(x_moved - target_x) < x_threshold:
-				_goal_reached = true
-				goal_reached.emit()
+				if not _goal_reached and absf(u - target_x) < x_threshold:
+					_goal_reached = true
+					goal_reached.emit()
 
 	# Apply constrained position to knob
 	_knob.position = knob_pos
 
 	# Move door mesh to follow knob movement
-	var knob_offset_y = knob_pos.y - start_knob_y
-	var knob_offset_x = knob_pos.x - start_knob_x
-	_door_mesh.position.y = door_height / 2.0 + knob_offset_y
-	_door_mesh.position.x = knob_offset_x
+	var knob_offset: Vector3 = knob_pos - start
+	_door_mesh.position = Vector3(knob_offset.x, door_height / 2.0 + knob_offset.y, knob_offset.z)
 
 func _transition_to_phase_2() -> void:
 	if _current_phase == 2:
@@ -151,8 +195,7 @@ func reset() -> void:
 	_current_phase = 1
 	_goal_reached = false
 	if _knob:
-		var knob_x = door_width * 0.35 if not mirror_knob else -door_width * 0.35
-		_knob.position = Vector3(knob_x, knob_height, door_depth)
+		_knob.position = _knob_start()
 	if _door_mesh:
 		_door_mesh.position = Vector3(0, door_height / 2.0, 0)
 

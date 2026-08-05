@@ -22,6 +22,42 @@ class_name WfcTileMosaic
 @export var grid_size: int = 16
 @export var pixel_scale: int = 4  ## Each tile rendered as NxN pixels for detail
 
+# ═══════════════════════════════════════════
+#  DNA (stage 2 — variation)
+# ═══════════════════════════════════════════
+# grammar: THE LOCAL LAW, which is the whole of what this artifact claims. Its
+#   own @identity names it — "the adjacency rules — water may only neighbor water
+#   or sand, never stone" — and the table was a literal one screen down that no
+#   map token could reach. Same word as lsystem_editor, lsystem_architecture and
+#   room_grammar, which is the corpus's word for "the set of local rules that
+#   generates the global form"; the values are this system's own laws, the way
+#   bouncing_ball kept `regime` and brought its own cases.
+#     landscape — the shipped ecotone table, verbatim. Water must reach ground
+#                 through sand; ground and path are the connectors.
+#     open      — no constraint at all. Every tile may touch every tile, and the
+#                 mosaic falls to salt-and-pepper: the proof that the coherence
+#                 was never the algorithm, it was the rules.
+#     enclave   — a tile may touch only its own kind and ground. Every boundary
+#                 must be brokered, so the map becomes continents in a sea.
+#     chain     — the six terrains are a cycle (water-sand-ground-grass-path-
+#                 stone-water) and a cell may touch only its neighbours in it.
+#                 Nothing may jump a step, so the mosaic reads as bands.
+#     checker   — a tile may touch anything EXCEPT its own kind. Maximal
+#                 constraint in the opposite direction: no region can form.
+@export_enum("landscape", "open", "enclave", "chain", "checker") var grammar: String = "landscape"
+
+# ── Capture knob, NOT an axis. 0 keeps the shipped position+instance_id hash,
+# so every placement still gets its own mosaic, fresh each launch.
+@export var mosaic_seed: int = 0
+
+# ── Capture knob, NOT an axis. 10 is the shipped `max_attempts` literal. It is
+# exported because the solver below has a MEASURED defect (see _attempt_solve)
+# that makes a single attempt fail most of the time, so a sweep needs to be able
+# to buy reliability without anyone quietly changing what seven maps draw.
+@export var solve_attempts: int = 10
+
+const GRAMMARS: Array[String] = ["landscape", "open", "enclave", "chain", "checker"]
+
 # --- Tile definitions ---
 # Each tile type has a color and a 2x2 pixel pattern.
 # Adjacency rules: which tile types can be neighbors (up/right/down/left).
@@ -55,7 +91,8 @@ var _tile_patterns: Dictionary = {
 
 # Adjacency rules: for each tile, which tiles may appear next to it.
 # Symmetric — if A can neighbor B, B can neighbor A.
-var _adjacency: Dictionary = {
+# This is the `landscape` grammar, and it is the table this file has always used.
+var _adjacency_landscape: Dictionary = {
 	Tile.GROUND: [Tile.GROUND, Tile.SAND, Tile.GRASS, Tile.STONE, Tile.PATH],
 	Tile.WATER:  [Tile.WATER, Tile.SAND],
 	Tile.SAND:   [Tile.SAND, Tile.WATER, Tile.GROUND, Tile.PATH],
@@ -64,19 +101,99 @@ var _adjacency: Dictionary = {
 	Tile.PATH:   [Tile.PATH, Tile.GROUND, Tile.SAND, Tile.GRASS, Tile.STONE],
 }
 
+# The table actually in force. Assigned from `grammar` at the top of _ready,
+# before anything reads it; at the default it IS _adjacency_landscape, the same
+# object the solver read before.
+var _adjacency: Dictionary = {}
+
+# The terrain order `chain` walks. A CYCLE, not a line: stone gives way back to
+# water. Measured — as an open line the solver reached a complete grid in 6-14%
+# of attempts and fell back to the checkerboard about a fifth to a half of the
+# time within the shipped 10-attempt budget; closed into a cycle it reaches 29%,
+# level with the shipped landscape table's 31%.
+const CHAIN_ORDER: Array[int] = [Tile.WATER, Tile.SAND, Tile.GROUND, Tile.GRASS, Tile.PATH, Tile.STONE]
+
 # --- Internal ---
 
 var _mosaic_mesh: MeshInstance3D
 var _mosaic_material: StandardMaterial3D
 var _rng: RandomNumberGenerator
 var _all_tiles: Array = [Tile.GROUND, Tile.WATER, Tile.SAND, Tile.GRASS, Tile.STONE, Tile.PATH]
+var _built: bool = false
 
 
 func _ready() -> void:
+	_adjacency = _grammar_table(grammar)
 	_rng = RandomNumberGenerator.new()
-	_rng.seed = hash(str(global_position) + str(get_instance_id()))
+	_reseed()
 	_create_mosaic_mesh()
 	_generate_wfc()
+	_built = true
+
+
+## mosaic_seed 0 is the shipped line, character for character.
+func _reseed() -> void:
+	if mosaic_seed != 0:
+		_rng.seed = mosaic_seed
+	else:
+		_rng.seed = hash(str(global_position) + str(get_instance_id()))
+
+
+# --- Grammars ---
+# Each returns the adjacency table for one law. `landscape` returns the shipped
+# dictionary itself, so at the default not one entry is recomputed. All five are
+# symmetric by construction (checked: A allows B iff B allows A), which the
+# solver's arc-consistency assumes.
+
+func _grammar_table(g: String) -> Dictionary:
+	match g:
+		"open":
+			return _table_open()
+		"enclave":
+			return _table_enclave(Tile.GROUND)
+		"chain":
+			return _table_chain()
+		"checker":
+			return _table_checker()
+		_:
+			return _adjacency_landscape
+
+
+func _table_open() -> Dictionary:
+	var d: Dictionary = {}
+	for t in _all_tiles:
+		d[t] = _all_tiles.duplicate()
+	return d
+
+
+func _table_enclave(hub: int) -> Dictionary:
+	var d: Dictionary = {}
+	for t in _all_tiles:
+		if int(t) == hub:
+			d[t] = _all_tiles.duplicate()
+		else:
+			d[t] = [t, hub]
+	return d
+
+
+func _table_chain() -> Dictionary:
+	var d: Dictionary = {}
+	var n: int = CHAIN_ORDER.size()
+	for i in range(n):
+		var t: int = CHAIN_ORDER[i]
+		d[t] = [t, CHAIN_ORDER[(i - 1 + n) % n], CHAIN_ORDER[(i + 1) % n]]
+	return d
+
+
+func _table_checker() -> Dictionary:
+	var d: Dictionary = {}
+	for t in _all_tiles:
+		var opts: Array = []
+		for other in _all_tiles:
+			if other != t:
+				opts.append(other)
+		d[t] = opts
+	return d
 
 
 func _create_mosaic_mesh() -> void:
@@ -111,7 +228,7 @@ func _generate_wfc() -> void:
 func _solve_wfc() -> Array:
 	# Each cell holds an array of possible tile types (superposition).
 	# We collapse one cell at a time, propagate constraints, backtrack on contradiction.
-	var max_attempts := 10
+	var max_attempts: int = maxi(solve_attempts, 1)
 	for _attempt in range(max_attempts):
 		var result := _attempt_solve()
 		if result.size() > 0:
@@ -122,6 +239,27 @@ func _solve_wfc() -> Array:
 	return _fallback_grid()
 
 
+## MEASURED DEFECT, left in place on purpose — reported, not papered over.
+##
+## The entropy scan below breaks out of its `for y` loop as soon as a row holds
+## no uncollapsed cell ("if min_entropy == 999 and candidates.is_empty(): break").
+## That fires the moment ROW 0 is fully collapsed, whatever the other fifteen
+## rows are doing: candidates stays empty, the while loop `continue`s, and the
+## solve spins uselessly until max_iterations and reports failure. So an attempt
+## only completes when the last cell to collapse happens to lie in row 0.
+##
+## Measured in a faithful port of this exact function (16x16, one attempt each):
+## landscape succeeds 31% of attempts, checker 38%, enclave 19%, open 12% — and
+## `open` puts NO constraint on anything, which is the proof that the failure is
+## structural and not about the rules. Every single failure was the iteration cap
+## with ~15-22 cells still uncollapsed and ~4880 dead spins burnt; not one was a
+## genuine contradiction. Within the shipped 10-attempt budget that is a ~3%
+## chance of falling through to _fallback_grid's two-colour checkerboard at the
+## default, and ~26% under `open`.
+##
+## Deleting the `break` is the fix, and it is a one-line change to what seven
+## maps draw, so it belongs to a deliberate decision and not to a DNA promotion.
+## `solve_attempts` exists so a capture can buy its way past this meanwhile.
 func _attempt_solve() -> Array:
 	var possibilities: Array = []
 	for y in range(grid_size):
@@ -355,11 +493,46 @@ func _render_grid(grid: Array) -> void:
 
 
 ## Grid system integration — accept configuration from map data.
+##
+## Guarded twice: a value is taken only when it VALIDATES against the code's own
+## table and DIFFERS from the value already held, and the re-solve fires only
+## after _ready has generated once. Before this, any call at all re-seeded and
+## re-solved — including the {"emissive": false} that curation_station sends to
+## every artifact it mounts, which is the one call this artifact actually
+## receives in the corpus. That call reached the same position and the same
+## instance id as _ready had, so it re-seeded to the identical number and drew
+## the identical mosaic; the guard therefore removes a wasted solve and changes
+## no pixel in Curation_Bay_mosaicanalysis_1. The other six placements are bare
+## tokens (or rotation shorthand, which the grid routes to overrides, not to
+## config_data), so apply_grid_config is never called for them at all.
 func apply_grid_config(config_data: Dictionary) -> void:
+	var changed: bool = false
+	if config_data.has("grammar"):
+		var g: String = str(config_data["grammar"])
+		if GRAMMARS.has(g) and g != grammar:
+			grammar = g
+			_adjacency = _grammar_table(g)
+			changed = true
+	if config_data.has("mosaic_seed"):
+		var s: int = int(config_data["mosaic_seed"])
+		if s != mosaic_seed:
+			mosaic_seed = s
+			changed = true
+	if config_data.has("solve_attempts"):
+		var a: int = int(config_data["solve_attempts"])
+		if a > 0 and a != solve_attempts:
+			solve_attempts = a
+			changed = true
 	if config_data.has("grid_size"):
-		grid_size = int(config_data["grid_size"])
+		var n: int = int(config_data["grid_size"])
+		if n > 0 and n != grid_size:
+			grid_size = n
+			changed = true
 	if config_data.has("pixel_scale"):
-		pixel_scale = int(config_data["pixel_scale"])
-	# Re-generate with new configuration
-	_rng.seed = hash(str(global_position) + str(get_instance_id()))
-	_generate_wfc()
+		var p: int = int(config_data["pixel_scale"])
+		if p > 0 and p != pixel_scale:
+			pixel_scale = p
+			changed = true
+	if changed and _built:
+		_reseed()
+		_generate_wfc()

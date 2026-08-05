@@ -10767,6 +10767,29 @@
    }
   },
   "shader_noise_space": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "generator": [
+      "simplex",
+      "perlin",
+      "value",
+      "cellular"
+     ]
+    },
+    "fixture": {
+     "animation": "frozen"
+    },
+    "fixture_why": "Every visible parameter of this room is driven off a clock in _process — time, time_scale, cloud_density and both colours all move — so a still is taken at whatever instant the shutter happened to fall. `frozen` leaves the .tscn's own authored uniforms in place and never advances them, which makes four basis frames comparable instead of four different moments. It is a String enum, not a bool, because the sweep sets exports from strings before _ready and a typed bool silently rejects \"true\" — the trap that has eaten fixture flags twice. `live` is the default and is the shipped behaviour, so no placement sees the pin.",
+    "default": "generator=perlin - the perlin branch of the shader's dispatch is the shipped noise2d body, character for character (diffed against HEAD, not eyeballed), and _apply_generator writes 1 into a uniform whose own declared default is already 1. Note the default is perlin and NOT simplex, the opposite of the bench artifacts, because that is what this file has always computed: hash2 returns a gradient per lattice corner and the interpolation dots it with the offset, which is Perlin's construction with a sine hash instead of a permutation table. MEASURED, not assumed: there are 13 mentions across 11 map files, not the 5 the promotion brief carried, by three reach-paths - bare tokens in Noise_6_Wall, Corridor_Noise_6_Wall, Noise_Functions, TestMap_Unused_23 and Walk_grande_galerie_axial_text; `exhibit_furniture#kind:floor_work#size:l#mount:shader_noise_space` in six museum trials, where the token is the furniture's mount value and the # keys are the furniture's; and `perlin_noise->shader_noise_space` in Trial_erosion_noise, which is a transformation target and not a config. None carries a generator key, and apply_grid_config returns unless a token names a word this file knows AND that word differs from the one it holds.",
+    "was": "seven exports, every one of them a rate or a toggle on the animation loop, and the runner refused it as NO TURNABLE KNOBS. The decision that carries the argument was not an export at all: it was the body of a single function called noise2d, hard-coded to one basis in a room whose walls, ceiling and floor are made of nothing else.",
+    "shares_vocabulary_with": "perlin_noise, simplex_noise, noise_terrain - `generator` is the same axis with the same four values in the same order. The noise sequence is built on comparing bases; spelling the comparison a second way would leave nothing to compare. cellular, not worley, for the same reason. What differs here is the scale of the question: on the bench a basis is a tabletop of displaced cubes you look down at, and here it is the room you are standing inside.",
+    "amplitude_note": "The four bases are AMPLITUDE-MATCHED rather than merely swapped in. Measured over 30,000 samples each returns mean |value| = 0.137, which is what the shipped perlin returns; the three scaling constants in the shader (0.770, 38.0, 0.827) exist only for that. Without them the sweep would mostly have been reading which basis is BRIGHTER once the six-octave sum is pushed through smoothstep(0.2, 0.8), and the axis would have been about exposure instead of about structure. Their own characters survive the matching: measured local step per unit distance is 4.7% of mean for value, 8.4% perlin, 11.0% cellular, 13.9% simplex.",
+    "declined": "animation_speed (this file's own declared critical_parameter until now), time_scale_variation, color_cycle_speed and density_variation - four rates, all real, all audible in the room, and all invisible to one still. Promoting any of them would have produced the info_board result: a finished-looking experiment answering nothing. `octaves` was also declined despite simplex_noise carrying it as a numeric axis: the fbm here runs six octaves over a wall two metres from the eye, so the lower rungs would read as a blurrier wall rather than as a claim about self-similarity, and one honest axis is worth more than a second one that argues about resolution.",
+    "still_note": "the basis is a fragment-shader uniform, so it is resolved every frame and never settles into geometry — but it is also constant in time under the fixture, so one frame is a complete account. The subject is a closed 16 x 12 x 27 m box of CSGBox3D walls with cull_disabled, so the sweep's camera sits outside and photographs two or three wall faces filling the frame. That is the field at full size, which is the best case for measuring a basis; if the bite comes back small, suspect the clock, not the axis.",
+    "finding": "QueerNoiseShader.gdshader and WallNoiseShader.gdshader were BYTE-IDENTICAL, header comment included — the room-sphere shader carried the wall shader's filename at the top of the file. The @identity's claim that 'the two materials run independent shader noise loops' out of phase is one shader run twice with different uniform values and a 0.7x offset on time. Both files now carry the same dispatch so the room and its walls change basis together."
+   },
    "category": "procedural",
    "complexity": "advanced",
    "description": "Interactive shader-based noise space exploration with procedural textures and patterns",

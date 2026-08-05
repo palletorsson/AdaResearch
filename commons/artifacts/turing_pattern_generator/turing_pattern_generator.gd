@@ -22,6 +22,35 @@ class_name TuringPatternGenerator
 ## Simulation resolution
 @export var resolution: int = 64
 
+# ═══════════════════════════════════════════
+#  DNA (stage 2 — variation)
+# ═══════════════════════════════════════════
+# regime: WHICH NAMED POINT of the feed/kill phase space the chemistry sits at.
+#   The whole argument of this artifact is that spots, stripes and mazes are not
+#   six pictures but one law at six settings, and the six settings were already
+#   sitting in PRESETS below — reachable from a VR slider, and from a map token
+#   not at all. `pattern_type` is a typed INT and map_data.json config values
+#   arrive as STRINGS, so `turing_pattern_generator#pattern_type:2` set an int
+#   property from "2", was rejected, and silently rendered Spots (the same trap
+#   lsystem_editor was promoted out of on 2026-08-03). `regime` is that same
+#   choice as a word, DERIVED from PRESETS rather than transcribed: _regime_index
+#   reads the third column of the table, so the list cannot drift from the code.
+#   "spots" is PRESETS[0], which is the shipped pattern_type, so it is a no-op.
+@export_enum("spots", "stripes", "maze", "mitosis", "coral", "waves") var regime: String = "spots"
+
+# ── Capture knobs. NOT axes: both default to 0, which is shipped behaviour. ──
+# pattern_seed pins the five seeded blobs. Without it six regime frames are six
+#   different random inoculations and the sweep measures the RNG, not the law.
+# warmup runs N Gray-Scott steps inside _ready, before the first frame. Without
+#   it every value photographs the same five undifferentiated blobs: at step 0
+#   no feed/kill pair has said anything yet. Measured in a faithful port of this
+#   exact update rule — at resolution 40 the six regimes separate from ~1200
+#   steps and are fully settled by ~2000 (coverage 0.03 / 0.21 / 0.16 / 0.09 /
+#   0.03 / 0.13), while at the shipped 4 steps per frame a 0.35 s capture settle
+#   reaches step 84 and all six are indistinguishable.
+@export var pattern_seed: int = 0
+@export var warmup: int = 0
+
 ## Pattern presets
 @export_enum("Spots", "Stripes", "Maze", "Mitosis", "Coral", "Waves") var pattern_type: int = 0:
 	set(value):
@@ -60,6 +89,14 @@ const PRESETS = {
 	5: [0.014, 0.047, "Waves"],
 }
 
+## An uncapped warmup at resolution 64 is 4096 cells x N steps of interpreted
+## GDScript inside _ready, which blocks the boot and gets the run killed by the
+## 16-second capture watchdog. The budget is a real ceiling, not a formality:
+## 4 M cell-updates buys 2500 steps at resolution 40 and 976 at 64.
+const WARMUP_CELL_BUDGET: int = 4000000
+
+var _seed_rng: RandomNumberGenerator = null
+
 var _U: Array[Array] = []
 var _V: Array[Array] = []
 var _U_next: Array[Array] = []
@@ -85,7 +122,42 @@ func _ready():
 	_create_labels()
 	_create_vr_controls()
 	_init_simulation()
+	_resolve_regime()
 	_apply_preset()
+	_run_warmup()
+
+## Fold the DNA word back onto the integer the rest of the file (and the VR
+## preset slider) already speaks. At the default "spots" this resolves to 0,
+## which pattern_type already holds, so NOTHING is assigned and the setter does
+## not fire — the shipped path is byte for byte what it was.
+func _resolve_regime() -> void:
+	var idx: int = _regime_index(regime)
+	if idx != pattern_type:
+		pattern_type = idx
+
+## The value list is read out of PRESETS, never typed twice.
+func _regime_index(regime_name: String) -> int:
+	for key in PRESETS.keys():
+		if str(PRESETS[key][2]).to_lower() == regime_name:
+			return int(key)
+	return 0
+
+func _has_regime(regime_name: String) -> bool:
+	for key in PRESETS.keys():
+		if str(PRESETS[key][2]).to_lower() == regime_name:
+			return true
+	return false
+
+## Fixture only — warmup is 0 in every shipped placement, so a player still
+## meets the blank field and watches it organise.
+func _run_warmup() -> void:
+	if warmup <= 0:
+		return
+	var cells: int = maxi(resolution * resolution, 1)
+	var steps: int = mini(warmup, WARMUP_CELL_BUDGET / cells)
+	for _i in range(steps):
+		_simulation_step()
+	_update_texture()
 
 func _init_default_gradient():
 	if color_gradient == null:
@@ -240,12 +312,18 @@ func _init_simulation():
 	_seed_random()
 
 func _seed_random():
+	# pattern_seed 0 keeps the shipped global-RNG draws, in the same order and
+	# the same number, so an unpinned placement is inoculated exactly as before.
+	_seed_rng = null
+	if pattern_seed != 0:
+		_seed_rng = RandomNumberGenerator.new()
+		_seed_rng.seed = pattern_seed
 	var seed_size = resolution / 8
-	
+
 	for _i in range(5):
-		var cx = randi_range(seed_size, resolution - seed_size)
-		var cy = randi_range(seed_size, resolution - seed_size)
-		var size = randi_range(2, seed_size)
+		var cx = _seed_draw(seed_size, resolution - seed_size)
+		var cy = _seed_draw(seed_size, resolution - seed_size)
+		var size = _seed_draw(2, seed_size)
 		
 		for dy in range(-size, size + 1):
 			for dx in range(-size, size + 1):
@@ -255,6 +333,11 @@ func _seed_random():
 					if dx*dx + dy*dy <= size*size:
 						_U[y][x] = 0.5
 						_V[y][x] = 0.25
+
+func _seed_draw(lo: int, hi: int) -> int:
+	if _seed_rng != null:
+		return _seed_rng.randi_range(lo, hi)
+	return randi_range(lo, hi)
 
 func _apply_preset():
 	var preset = PRESETS.get(pattern_type, PRESETS[0])
@@ -341,7 +424,26 @@ func set_gradient(gradient: Gradient):
 func reset():
 	_init_simulation()
 
+## Grid system integration.
+##
+## The legacy path is untouched: any key naming a property is written straight
+## through, exactly as before, and it never rebuilt anything. `regime` is pulled
+## out of that loop because writing the word alone would leave feed and kill on
+## the old preset.
+##
+## The DNA path is guarded twice — the word must be one PRESETS actually builds,
+## and it must DIFFER from the word already held. It then moves feed and kill and
+## nothing else: the field is not re-seeded and no node is torn down, which is
+## what the VR preset slider already does. Neither curation bay that mounts this
+## artifact sends a regime key, so no shipped room moves.
 func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
+		if str(key) == "regime":
+			continue
 		if key in self:
 			set(key, config_data[key])
+	if config_data.has("regime"):
+		var want: String = str(config_data["regime"]).to_lower()
+		if _has_regime(want) and want != regime:
+			regime = want
+			pattern_type = _regime_index(want)

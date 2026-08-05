@@ -9,6 +9,12 @@ var network_nodes: Array[Dictionary] = []
 var connections: Array[Dictionary] = []
 var config: Dictionary = {}
 
+## Depth from the root, filled ONLY when topology is "tree". A rhizome has no depth to
+## measure — no root to measure it from — and that absence is exactly what the axis puts
+## on display, so nothing here is computed on the default path.
+var _depth: Dictionary = {}
+var _root_position: Vector3 = Vector3.ZERO
+
 func configure(params: Dictionary) -> void:
 	config = params
 
@@ -19,7 +25,8 @@ func generate_rhizomatic_network() -> Dictionary:
 	"""Generate the rhizomatic network structure"""
 	network_nodes.clear()
 	connections.clear()
-	
+	_depth.clear()
+
 	# Convert growth points to network nodes
 	for i in range(growth_points.size()):
 		network_nodes.append({
@@ -33,7 +40,8 @@ func generate_rhizomatic_network() -> Dictionary:
 	generate_primary_connections()
 	generate_secondary_branches()
 	prune_redundant_paths()
-	
+	sever_network()
+
 	return {
 		"nodes": network_nodes,
 		"connections": connections
@@ -41,33 +49,106 @@ func generate_rhizomatic_network() -> Dictionary:
 
 func generate_primary_connections() -> void:
 	"""Create main connecting paths between growth points"""
+	var topo: String = str(config.get("topology", "rhizome"))
+	if topo == "tree":
+		connect_as_tree()
+		return
+	# A plateau is dense as well as flat: more of every seed's neighbours are admitted, so
+	# the mat reads as a continuous region rather than a thin flattened tangle.
+	var neighbours: int = 5 if topo == "plateau" else 3
 	# Connect nearby nodes using Delaunay-like triangulation
 	for i in range(network_nodes.size()):
 		var node_a = network_nodes[i]
-		var closest_nodes = find_closest_nodes(node_a, 3)
-		
+		var closest_nodes = find_closest_nodes(node_a, neighbours)
+
 		for node_b in closest_nodes:
 			if randf() < config.get("branch_prob", 0.7):
 				create_connection(node_a, node_b, {"type": "primary", "width_multiplier": 1.0})
 
+## TREE — the figure a rhizome is defined AGAINST, built as a minimum spanning tree from the
+## lowest seed. Every node but the root reaches the network through exactly one parent, so
+## the graph carries no cycle: one origin, a strict descent, and between any two points
+## exactly one route. There is no randf() in here on purpose. A tree is not a matter of
+## chance; it is a rule about who is permitted to connect to whom, and that rule is the
+## thing the axis puts on trial.
+func connect_as_tree() -> void:
+	if network_nodes.size() < 2:
+		return
+
+	var root_index: int = 0
+	var lowest: float = network_nodes[0].position.y
+	for i in range(network_nodes.size()):
+		if network_nodes[i].position.y < lowest:
+			lowest = network_nodes[i].position.y
+			root_index = i
+	_root_position = network_nodes[root_index].position
+	_depth[network_nodes[root_index].id] = 0
+
+	var joined: Array[int] = [root_index]
+	var pending: Array[int] = []
+	for i in range(network_nodes.size()):
+		if i != root_index:
+			pending.append(i)
+
+	while pending.size() > 0:
+		var best_p: int = 0
+		var best_j: int = 0
+		var best_d: float = INF
+		for pi in range(pending.size()):
+			for ji in range(joined.size()):
+				var d: float = network_nodes[pending[pi]].position.distance_to(
+					network_nodes[joined[ji]].position)
+				if d < best_d:
+					best_d = d
+					best_p = pi
+					best_j = ji
+		var child_node: Dictionary = network_nodes[pending[best_p]]
+		var parent_node: Dictionary = network_nodes[joined[best_j]]
+		var child_depth: int = int(_depth.get(parent_node.id, 0)) + 1
+		_depth[child_node.id] = child_depth
+		create_connection(parent_node, child_node,
+			{"type": "primary", "width_multiplier": taper_for_depth(child_depth)})
+		joined.append(pending[best_p])
+		pending.remove_at(best_p)
+
+## In a tree, thickness IS the hierarchy: a trunk carries everything below it and a twig
+## carries only itself. The rhizome has no equivalent claim, which is why every connection
+## there keeps the flat 1.0 / 0.7 pair the file has always used.
+func taper_for_depth(depth: int) -> float:
+	return maxf(0.25, 0.95 * pow(0.86, float(depth)))
+
 func generate_secondary_branches() -> void:
 	"""Add secondary branching connections"""
 	var branch_count = config.get("iterations", 100)
-	
+	var topo: String = str(config.get("topology", "rhizome"))
+	var flat: bool = topo == "plateau"
+	var arboreal: bool = topo == "tree"
+
 	for i in range(branch_count):
 		# Pick random existing node
 		var source_node = network_nodes[randi() % network_nodes.size()]
-		
+
 		# Create new branch node nearby
-		var branch_direction = Vector3(
+		var branch_direction: Vector3 = Vector3(
 			randf_range(-1, 1),
 			randf_range(-0.5, 0.5),  # Less vertical variation
 			randf_range(-1, 1)
 		).normalized()
-		
+		if flat:
+			branch_direction.y = 0.0
+			branch_direction = branch_direction.normalized()
+		elif arboreal:
+			# Growth in a tree is ORIENTED: it leaves the root and does not come back.
+			var away: Vector3 = source_node.position - _root_position
+			if away.length() < 0.001:
+				away = Vector3.UP
+			branch_direction = (branch_direction + away.normalized() * 1.4).normalized()
+
 		var branch_distance = randf_range(3.0, 8.0)
-		var branch_pos = source_node.position + branch_direction * branch_distance
-		
+		var branch_pos: Vector3 = source_node.position + branch_direction * branch_distance
+		if flat:
+			branch_pos.y = source_node.position.y
+
 		# Add new node
 		var new_node = {
 			"id": network_nodes.size(),
@@ -76,9 +157,54 @@ func generate_secondary_branches() -> void:
 			"properties": {"type": "branch", "size": randf_range(0.5, 1.0)}
 		}
 		network_nodes.append(new_node)
-		
+
+		var width_multiplier: float = 0.7
+		if arboreal:
+			var branch_depth: int = int(_depth.get(source_node.id, 0)) + 1
+			_depth[new_node.id] = branch_depth
+			width_multiplier = taper_for_depth(branch_depth)
+
 		# Connect to source
-		create_connection(source_node, new_node, {"type": "branch", "width_multiplier": 0.7})
+		create_connection(source_node, new_node,
+			{"type": "branch", "width_multiplier": width_multiplier})
+
+## SEVERED — asignifying rupture. "A rhizome may be broken, shattered at a given spot, but it
+## will start up again on one of its old lines." The rhizome is grown IN FULL first and then
+## cut, because a rupture is an operation performed on a network and not a different way of
+## growing one: a fissure is opened through the middle and every tunnel that crosses it or
+## ends inside it is removed, leaving fragments that are each still rhizomatic. The node
+## degrees are recounted afterwards so the chamber pass does not put a nine-metre CSG sphere
+## in the gap it just opened. What a still cannot show is the second half of the principle,
+## the starting-up-again; this value claims only the break.
+func sever_network() -> void:
+	if str(config.get("topology", "rhizome")) != "severed":
+		return
+
+	var size: Vector3 = config.get("size", Vector3(40, 20, 40))
+	var half_fissure: float = maxf(2.0, size.x * 0.08)
+
+	var kept: Array[Dictionary] = []
+	for c in connections:
+		var conn: Dictionary = c
+		var a: Vector3 = conn["start"]
+		var b: Vector3 = conn["end"]
+		if absf(a.x) < half_fissure or absf(b.x) < half_fissure:
+			continue
+		if (a.x < 0.0) != (b.x < 0.0):
+			continue
+		kept.append(conn)
+	connections = kept
+
+	for i in range(network_nodes.size()):
+		network_nodes[i]["connections"] = []
+	for c in connections:
+		var conn: Dictionary = c
+		var start_id: int = int(conn["start_id"])
+		var end_id: int = int(conn["end_id"])
+		if start_id >= 0 and start_id < network_nodes.size():
+			network_nodes[start_id]["connections"].append(end_id)
+		if end_id >= 0 and end_id < network_nodes.size():
+			network_nodes[end_id]["connections"].append(start_id)
 
 func find_closest_nodes(target_node: Dictionary, count: int) -> Array:
 	"""Find closest nodes to target"""

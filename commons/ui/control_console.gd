@@ -9,6 +9,39 @@ class_name ControlConsole
 ##
 ## The plate gives the controls a home; the console gives the whole instrument one.
 ## add_* calls forward to the inner ControlPanel; the body sizes itself to the plate.
+##
+## --- DNA (stage 2, promoted 2026-08-05) ---
+##
+## STAGE-2 DNA PROMOTION. This file was full of knobs and had no ARGUMENT: twenty-one
+## exports, every one of them a dimension, a colour or a nudge (board_drop, board_out,
+## board_slide, board_face_drop — four separate ways to move the same plate a centimetre).
+## A size is not a claim. The two constants that carry one were:
+##
+##   mounting        HOW the controls meet the room they are controls FOR
+##   demo_apparatus  WHAT machine the console is the operator station OF
+##
+## mounting was not a constant so much as an assumption. The cabinet grammar
+## (commons/data/cabinet_grammar.json) opens by asking which plane an interface is read
+## on, and this file answered "a floor-standing cabinet" before the question was put — so
+## every workbench that composes this console inherited a full metal body with a door and
+## a vent grille, whether the room wanted an appliance or a reading stand. The word and
+## its three answers are taken CHARACTER FOR CHARACTER from soft_stage_dashboard, which
+## asks the same question of a readout, and the two measure alike: wall takes the body
+## away and leaves the face, lectern puts the face on legs, kiosk gives it a standing
+## body. Only the DEFAULT differs, and it differs because the shipped objects differ —
+## the dashboard shipped as a bare quad, this shipped as a cabinet.
+##
+## demo_apparatus was already an export and had never been declared, so the sweep could
+## not reach it: five values, a match block, and nothing in any registry saying so.
+##
+## mounting=kiosk + demo_apparatus=none is the shipped build, node for node — the CSG
+## base, the plinth, the door, the vent and no apparatus at all — so the four map
+## placements AND the fourteen workbench artifacts that compose this script
+## (shannon_workbench, halting_workbench, stretch_bench, …) are untouched.
+##
+## Usage in map_data.json:
+##   "control_console#mounting:lectern"
+##   "control_console#mounting:wall#demo_apparatus:monitor"
 
 const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 
@@ -21,6 +54,12 @@ const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 @export var board_width: float = 0.62                      # the control board on the slant — smaller than the body
 @export var body_height: float = 1.0                       # solid body up to here; the slant starts at this height
 @export var body_depth: float = 0.4                        # base footprint depth (~0.3–0.5 m)
+## DNA gene: how the console meets the room. "kiosk" is the shipped floor cabinet —
+## a solid body with a door and a vent, mass all the way down. "lectern" keeps the
+## same reading head and takes the cabinet away, leaving splayed legs and a foot: a
+## stand you walk up to, with nothing to store inside. "wall" removes the body
+## entirely and leaves the head as a fitting set into the architecture.
+@export_enum("kiosk", "lectern", "wall") var mounting: String = "kiosk"
 ## Desktop form: put the reading face at the node origin (short stand below) so
 ## the console drops into a table-height slot like the old flat plate.
 @export var face_to_origin: bool = false
@@ -46,6 +85,14 @@ var _content_added := false
 
 
 func _ready() -> void:
+	# The grid stamps `config_<key>` metadata BEFORE _ready and only calls
+	# apply_grid_config on a DEFERRED frame — which is after the demo has already
+	# been built. Both DNA genes are consumed during _ready, so a map token can
+	# only reach them from the metadata. Absent metadata leaves the exports alone.
+	if has_meta("config_mounting"):
+		mounting = str(get_meta("config_mounting")).to_lower()
+	if has_meta("config_demo_apparatus"):
+		demo_apparatus = str(get_meta("config_demo_apparatus")).to_lower()
 	_ensure_panel()
 	if auto_demo and not _content_added:
 		_build_demo()
@@ -76,6 +123,15 @@ func _build_demo() -> void:
 ## the DNA gallery (bars on the monitor, sphere in the cube, dots on the plan,
 ## a specimen in the jar).
 func _build_demo_apparatus() -> void:
+	# viz_floor defaults to -1.0, which is the DESKTOP assumption: a console dropped
+	# into a table-height slot has the room's floor a metre below its origin. A
+	# floor-standing console (face_to_origin off, the shipped form) already stands ON
+	# that floor at y=0, so the same -1.0 sinks every apparatus base a metre under it —
+	# the machine and its operator station would not share a ground. Derive it only
+	# when the caller has not said otherwise; capture_props_dna_gallery and
+	# interface_presets both set viz_floor explicitly and are unaffected.
+	if not face_to_origin and absf(viz_floor + 1.0) < 0.0001:
+		viz_floor = 0.0
 	match demo_apparatus:
 		"monitor":
 			var c := add_monitor(Vector2(0.7, 0.45))
@@ -128,6 +184,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("board_slide"): board_slide = float(config_data["board_slide"])
 	if config_data.has("board_face_drop"): board_face_drop = float(config_data["board_face_drop"])
 	if config_data.has("bezel"): bezel = float(config_data["bezel"])
+	if config_data.has("mounting"): mounting = str(config_data["mounting"]).to_lower()
 	if config_data.has("face_to_origin"): face_to_origin = bool(config_data["face_to_origin"])
 	if config_data.has("has_door"): has_door = bool(config_data["has_door"])
 	if config_data.has("has_vent"): has_vent = bool(config_data["has_vent"])
@@ -431,12 +488,15 @@ func _build_body() -> void:
 	# avoid a degenerate/inverted box — NOT a 0.2 clamp, which used to over-grow a
 	# short desktop body up over the board and swallow the controls.
 	var body_top: float = maxf(0.02, lf.y)
-	var base := CSGBox3D.new()
-	base.name = "Base"
-	base.size = Vector3(head_w, body_top + 0.02, body_depth)
-	base.position = Vector3(0.0, (body_top + 0.02) * 0.5, lf.z - body_depth * 0.5)
-	base.material = _mat(body_color, 0.5, 0.3)
-	body.add_child(base)
+	# mounting=kiosk is the shipped cabinet. lectern and wall build the same reading
+	# head and simply do not raise the mass under it.
+	if mounting == "kiosk":
+		var base := CSGBox3D.new()
+		base.name = "Base"
+		base.size = Vector3(head_w, body_top + 0.02, body_depth)
+		base.position = Vector3(0.0, (body_top + 0.02) * 0.5, lf.z - body_depth * 0.5)
+		base.material = _mat(body_color, 0.5, 0.3)
+		body.add_child(base)
 
 	var head := CSGBox3D.new()
 	head.name = "Head"
@@ -447,14 +507,46 @@ func _build_body() -> void:
 	body.add_child(head)
 
 	# Base plinth lip at the floor (dark trim) — aligned to the body's front.
-	var plinth := _box(Vector3(0.0, 0.025, lf.z - body_depth * 0.5), Vector3(head_w + 0.08, 0.05, body_depth + 0.06), _mat(trim_color, 0.6, 0.2))
-	plinth.name = "ConsolePlinth"
-	add_child(plinth)
+	# The plinth closes a STANDING body's silhouette; a lectern closes its own with a
+	# foot and a wall fitting never reaches the floor at all.
+	var plinth: MeshInstance3D = null
+	if mounting == "kiosk":
+		plinth = _box(Vector3(0.0, 0.025, lf.z - body_depth * 0.5), Vector3(head_w + 0.08, 0.05, body_depth + 0.06), _mat(trim_color, 0.6, 0.2))
+		plinth.name = "ConsolePlinth"
+		add_child(plinth)
+
+	# LECTERN — the reading head on splayed legs with a foot under it. Same face, same
+	# board, same reach band; what is gone is the cabinet, and with it the claim that an
+	# interface must also be a container. Legs go on `body` so they ride face_to_origin.
+	if mounting == "lectern":
+		var leg_mat := _mat(body_color, 0.5, 0.3)
+		for sgn in [-1.0, 1.0]:
+			var lx: float = float(sgn) * head_w * 0.34
+			var leg := _box(Vector3(lx, body_top * 0.5, lf.z - body_depth * 0.34), Vector3(0.05, body_top, 0.05), leg_mat)
+			leg.name = "LecternLeg"
+			body.add_child(leg)
+		var brace := _box(Vector3(0.0, body_top * 0.22, lf.z - body_depth * 0.34), Vector3(head_w * 0.62, 0.035, 0.035), leg_mat)
+		brace.name = "LecternBrace"
+		body.add_child(brace)
+		var foot := _box(Vector3(0.0, 0.02, lf.z - body_depth * 0.34), Vector3(head_w * 0.82, 0.04, body_depth * 0.66), _mat(trim_color, 0.6, 0.2))
+		foot.name = "LecternFoot"
+		body.add_child(foot)
+
+	# WALL — no body. A backplate flush behind the head, so the fitting reads as set
+	# INTO a surface rather than hovering in front of one.
+	if mounting == "wall":
+		var backplate := _box(Vector3.ZERO, Vector3(head_w + 0.06, head_l + 0.06, 0.02), _mat(trim_color, 0.6, 0.2))
+		backplate.name = "WallPlate"
+		backplate.position = head_c - face_n * (head_t * 0.5 + 0.011)
+		backplate.rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
+		body.add_child(backplate)
 
 	# ── Small decoration: a cabinet door (+ pull handle) on the front, and a
 	#    vent grille on the +X side. Added to `body` so they ride the face_to_origin
 	#    shift. Scaled by body_top so they fit a short desk OR a tall floor cabinet.
-	if has_door and body_top > 0.12:
+	#    Both belong to the cabinet: there is nothing behind a lectern's legs to
+	#    service, and nothing behind a wall fitting to open.
+	if mounting == "kiosk" and has_door and body_top > 0.12:
 		var dw: float = head_w * 0.66
 		var dh: float = maxf(0.08, body_top * 0.72)
 		var dcy: float = body_top * 0.47
@@ -464,7 +556,7 @@ func _build_body() -> void:
 		var handle := _box(Vector3(dw * 0.42, dcy, lf.z + 0.017), Vector3(0.012, dh * 0.5, 0.022), _mat(trim_color, 0.35, 0.45))
 		handle.name = "DoorHandle"
 		body.add_child(handle)
-	if has_vent and body_top > 0.12:
+	if mounting == "kiosk" and has_vent and body_top > 0.12:
 		var vx: float = head_w * 0.5 + 0.002
 		var vcy: float = body_top * 0.74
 		var vz: float = lf.z - body_depth * 0.42
@@ -490,7 +582,8 @@ func _build_body() -> void:
 	if face_to_origin:
 		var dy: float = head_c.y
 		body.position.y -= dy
-		plinth.position.y -= dy
+		if plinth != null:
+			plinth.position.y -= dy
 		_panel.position.y -= dy
 
 

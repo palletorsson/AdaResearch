@@ -17,6 +17,10 @@ signal resonance_updated(current_amplitude: float)
 # Visual properties
 @export var bar_color: Color = Color(0.8, 0.6, 1.0, 1.0)
 @export var glow_intensity: float = 2.0
+## The bar's actual dimensions (width across the row, thickness, length along Z).
+## The default is the size resonating_bar.tscn's own CollisionShape3D has always
+## declared; ResonatingMetallophone overrides the Z from the note's frequency.
+@export var bar_size: Vector3 = Vector3(0.08, 0.04, 0.3)
 
 # Internal state
 var is_resonating: bool = false
@@ -48,10 +52,24 @@ func _setup_visual() -> void:
 		mesh_instance.name = "MeshInstance3D"
 		add_child(mesh_instance)
 
-		# Create bar mesh
-		var box_mesh = BoxMesh.new()
-		box_mesh.size = Vector3(0.1, 0.05, 0.4)  # Thin bar shape
+	# THE BAR HAD NO MESH, EVER. resonating_bar.tscn carries a bare MeshInstance3D
+	# node with no `mesh` property, so the branch above never fired and `mesh` stayed
+	# null: every placement of resonating_metallophone has rendered a Label3D reading
+	# HIT THE BARS WITH THE STICK above eight invisible colliders. Build the box
+	# whenever it is missing, at the size the scene's own CollisionShape3D declares.
+	if mesh_instance.mesh == null:
+		var box_mesh := BoxMesh.new()
+		box_mesh.size = bar_size
 		mesh_instance.mesh = box_mesh
+
+	# The .tscn's BoxShape3D is a SHARED sub-resource: every instantiated bar points at
+	# the same object, so resizing it in place would resize the whole row to whichever
+	# bar was built last. Give this bar its own, matching what it now looks like.
+	var col := get_node_or_null("CollisionShape3D") as CollisionShape3D
+	if col != null:
+		var own_shape := BoxShape3D.new()
+		own_shape.size = bar_size
+		col.shape = own_shape
 
 	# Create glowing material
 	material = StandardMaterial3D.new()

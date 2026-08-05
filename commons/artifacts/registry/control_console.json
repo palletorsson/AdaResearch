@@ -30,6 +30,17 @@
 				"density": "low",
 				"reading_radius": 2,
 				"derived_from": "manual"
+			},
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"mounting": ["kiosk", "lectern", "wall"],
+					"demo_apparatus": ["none", "monitor", "cube", "plan", "jar"]
+				},
+				"default": "mounting=kiosk, demo_apparatus=none - the shipped build node for node: the CSG base box rising to the head's lower-front edge, the dark plinth lip, the cabinet door with its pull handle, the four vent slats, and no apparatus in front. Both new branches are additive `if mounting == \"kiosk\"` guards around code that is otherwise byte-identical, so the 4 map placements are unchanged AND so are the 14 workbench artifacts that compose this script directly (shannon_workbench, halting_workbench, stretch_bench, riemann_sum_workbench, ...), none of which sets mounting.",
+				"was": "a floor-standing metal cabinet, asserted before the question was asked. Twenty-one exports, every one of them a dimension, a colour or a nudge - four separate knobs (board_drop, board_out, board_slide, board_face_drop) for moving the same plate a centimetre - and not one of them asking whether an interface must also be a container. Every workbench that composes this console inherited a door and a vent grille whether or not the room wanted an appliance.",
+				"note": "mounting reuses soft_stage_dashboard's word and its three answers character for character; the two measure alike (wall removes the body, lectern puts the face on legs, kiosk gives it a standing body) and only the DEFAULT differs, because the dashboard shipped as a bare quad and this shipped as a cabinet. demo_apparatus was already an @export with a match block and had never been declared, so the sweep could not reach it. Its four non-none values now derive viz_floor from face_to_origin, because the -1.0 default is a DESKTOP assumption that sank every apparatus base a metre under a floor-standing console."
 			}
 		}
 	}

@@ -17,71 +17,87 @@ extends Node3D
 @export var arrow_scale: float = 0.18
 @export var particle_count: int = 30
 
+## --- DNA (stage 2, promoted 2026-08-04) --------------------------------------------
+## poles — WHAT MAKES THE FIELD. The law never changes: every arrow is the superposition
+##   of point sources falling off as 1/d², the same three lines of _update_arrows at every
+##   value. What changes is how many sources there are and which way they pull, and that
+##   is the whole taxonomy a two-body field has: one attractor (`sink`), one repulsor
+##   (`source`), one of each (`dipole`, the shipped pair), two alike (`binary`). The
+##   positions and the gravities are the shipped ones reused, not new numbers.
+## coding — WHAT THE ARROW COLOUR CLAIMS. Reused character for character from
+##   vector_field_grid, where it asks exactly this question of exactly this kind of
+##   picture. Arrow LENGTH already carries |F| at every value, so `uniform` withholds
+##   colour without withholding the magnitude.
+@export_enum("dipole", "sink", "source", "binary") var poles: String = "dipole"
+@export_enum("magnitude", "direction", "banded", "uniform") var coding: String = "magnitude"
+## 0 keeps the shipped unseeded scatter — any other value pins the 30 test particles so a
+## sweep photographs one field twice, not two particle clouds. See dna.fixture.
+@export var seed_value: int = 0
+
+const POLES := ["dipole", "sink", "source", "binary"]
+const CODINGS := ["magnitude", "direction", "banded", "uniform"]
+
 var arrow_multimesh: MultiMeshInstance3D
 var field_sources: Array[Area3D] = []
 var particles: Array[RigidBody3D] = []
+var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
+	if seed_value != 0:
+		_rng.seed = seed_value
 	_create_field_sources()
 	_create_arrow_grid()
 	_create_test_particles()
 
+# [ [position, gravity], ... ]. The `_:` arm is the shipped pair, so `dipole` builds the
+# attractor at (-1.5, 1.5, 0) with +8 and the repulsor at (1.5, 1.5, 0) with -6, in that
+# order, exactly as before. Every other value reuses those same two numbers.
+func _pole_spec() -> Array:
+	match poles:
+		"sink":
+			return [[Vector3(0, 1.5, 0), 8.0]]
+		"source":
+			return [[Vector3(0, 1.5, 0), -6.0]]
+		"binary":
+			return [[Vector3(-1.5, 1.5, 0), 8.0], [Vector3(1.5, 1.5, 0), 8.0]]
+	# dipole, and the fallback for any word the code does not know: an unrecognised value
+	# renders the shipped field rather than blanking it.
+	return [[Vector3(-1.5, 1.5, 0), 8.0], [Vector3(1.5, 1.5, 0), -6.0]]
+
 func _create_field_sources() -> void:
-	# Attractor (pulls inward)
-	var attractor := Area3D.new()
-	attractor.name = "Attractor"
-	attractor.gravity_space_override = Area3D.SPACE_OVERRIDE_COMBINE
-	attractor.gravity_point = true
-	attractor.gravity = 8.0
-	attractor.gravity_point_unit_distance = 2.0
-	var acol := CollisionShape3D.new()
-	var ashape := SphereShape3D.new()
-	ashape.radius = 3.0
-	acol.shape = ashape
-	attractor.add_child(acol)
-	attractor.position = Vector3(-1.5, 1.5, 0)
+	for entry in _pole_spec():
+		var spec: Array = entry
+		var pos: Vector3 = spec[0]
+		var g: float = spec[1]
+		var pull: bool = g > 0.0
 
-	# Visual marker
-	var amarker := MeshInstance3D.new()
-	var asphere := SphereMesh.new()
-	asphere.radius = 0.25
-	amarker.mesh = asphere
-	var amat := StandardMaterial3D.new()
-	amat.albedo_color = Color(1.0, 0.3, 0.3)
-	amat.emission_enabled = true
-	amat.emission = Color(1.0, 0.2, 0.2) * 1.5
-	amarker.material_override = amat
-	attractor.add_child(amarker)
-	add_child(attractor)
-	field_sources.append(attractor)
+		var area := Area3D.new()
+		area.name = "Attractor" if pull else "Repulsor"
+		area.gravity_space_override = Area3D.SPACE_OVERRIDE_COMBINE
+		area.gravity_point = true
+		area.gravity = g  # Negative = repulsion
+		area.gravity_point_unit_distance = 2.0
+		var col := CollisionShape3D.new()
+		var shape := SphereShape3D.new()
+		shape.radius = 3.0
+		col.shape = shape
+		area.add_child(col)
+		area.position = pos
 
-	# Repulsor (pushes outward)
-	var repulsor := Area3D.new()
-	repulsor.name = "Repulsor"
-	repulsor.gravity_space_override = Area3D.SPACE_OVERRIDE_COMBINE
-	repulsor.gravity_point = true
-	repulsor.gravity = -6.0  # Negative = repulsion
-	repulsor.gravity_point_unit_distance = 2.0
-	var rcol := CollisionShape3D.new()
-	var rshape := SphereShape3D.new()
-	rshape.radius = 3.0
-	rcol.shape = rshape
-	repulsor.add_child(rcol)
-	repulsor.position = Vector3(1.5, 1.5, 0)
-
-	var rmarker := MeshInstance3D.new()
-	var rsphere := SphereMesh.new()
-	rsphere.radius = 0.25
-	rmarker.mesh = rsphere
-	var rmat := StandardMaterial3D.new()
-	rmat.albedo_color = Color(0.3, 0.5, 1.0)
-	rmat.emission_enabled = true
-	rmat.emission = Color(0.2, 0.4, 1.0) * 1.5
-	rmarker.material_override = rmat
-	repulsor.add_child(rmarker)
-	add_child(repulsor)
-	field_sources.append(repulsor)
+		# Visual marker — red pulls, blue pushes, as shipped.
+		var marker := MeshInstance3D.new()
+		var ball := SphereMesh.new()
+		ball.radius = 0.25
+		marker.mesh = ball
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(1.0, 0.3, 0.3) if pull else Color(0.3, 0.5, 1.0)
+		mat.emission_enabled = true
+		mat.emission = (Color(1.0, 0.2, 0.2) if pull else Color(0.2, 0.4, 1.0)) * 1.5
+		marker.material_override = mat
+		area.add_child(marker)
+		add_child(area)
+		field_sources.append(area)
 
 func _create_arrow_grid() -> void:
 	arrow_multimesh = MultiMeshInstance3D.new()
@@ -137,25 +153,30 @@ func _create_test_particles() -> void:
 		rb.add_child(mesh_inst)
 
 		# Random position in the field
-		rb.position = Vector3(
-			randf_range(-1.5, 1.5),
-			randf_range(0.5, 2.5),
-			randf_range(-1.5, 1.5)
-		)
+		rb.position = _scatter()
 		rb.gravity_scale = 0.0  # Only affected by Area3D fields
 
 		add_child(rb)
 		particles.append(rb)
 
+# The shipped scatter when seed_value is 0 — the same global randf_range calls in the same
+# order, so every existing placement keeps the random cloud it has always had. A nonzero
+# seed swaps in a local RNG, which is what makes two sweep frames comparable: without it
+# five values of `poles` are five different particle clouds and the diff is noise.
+func _scatter() -> Vector3:
+	if seed_value == 0:
+		return Vector3(randf_range(-1.5, 1.5), randf_range(0.5, 2.5), randf_range(-1.5, 1.5))
+	return Vector3(
+		_rng.randf_range(-1.5, 1.5),
+		_rng.randf_range(0.5, 2.5),
+		_rng.randf_range(-1.5, 1.5)
+	)
+
 func _physics_process(_delta: float):
 	# Respawn escaped particles
 	for rb in particles:
 		if rb.position.length() > 5.0:
-			rb.position = Vector3(
-				randf_range(-1.5, 1.5),
-				randf_range(0.5, 2.5),
-				randf_range(-1.5, 1.5)
-			)
+			rb.position = _scatter()
 			rb.linear_velocity = Vector3.ZERO
 
 func _update_arrows() -> void:
@@ -199,8 +220,24 @@ func _update_arrows() -> void:
 				t.basis = t.basis.scaled(Vector3(1, mag, 1))
 				mm.set_instance_transform(idx, t)
 
-				# Color by magnitude
+				# Color by magnitude — or by whatever `coding` says the colour means.
+				# Arrow LENGTH is scaled by mag at every value, so nothing here removes
+				# the magnitude from the picture; it only changes what the hue claims.
 				var color := Color.from_hsv(0.6 - clamp(mag / 3.0, 0, 0.6), 0.8, 1.0)
+				match coding:
+					"direction":
+						# The optical-flow convention: hue IS the heading, and speed is
+						# not in the colour at all. Azimuth only — a hue circle cannot
+						# carry two angles, and the lattice is read from the side.
+						var d: Vector3 = field.normalized()
+						var az: float = (atan2(d.z, d.x) + PI) / TAU
+						color = Color.from_hsv(fposmod(az, 1.0), 0.8, 1.0)
+					"banded":
+						# A legend where there was a ramp: four classes of |F|.
+						var band: float = floor(clamp(mag / 3.0, 0.0, 0.999) * 4.0)
+						color = Color.from_hsv(0.6 - (band / 3.0) * 0.6, 0.8, 1.0)
+					"uniform":
+						color = Color.from_hsv(0.6, 0.8, 1.0)
 				mm.set_instance_color(idx, color)
 
 				idx += 1
@@ -211,5 +248,27 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+# Was `pass`, which is why the runner found no turnable knob: four exports existed and a
+# map could reach none of them. Still nothing rebuilds unless a word both VALIDATES and
+# DIFFERS, and never before _ready has built once — an unknown key is ignored, so a typo
+# falls back to the shipped field rather than blanking it.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var touched: bool = false
+	if config.has("coding"):
+		var c: String = str(config["coding"])
+		if CODINGS.has(c) and c != coding:
+			coding = c
+			touched = true
+	if config.has("poles"):
+		var p: String = str(config["poles"])
+		if POLES.has(p) and p != poles:
+			poles = p
+			touched = true
+			if is_node_ready():
+				for src in field_sources:
+					remove_child(src)
+					src.queue_free()
+				field_sources.clear()
+				_create_field_sources()
+	if touched and is_node_ready() and arrow_multimesh != null:
+		_update_arrows()

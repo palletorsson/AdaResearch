@@ -9404,6 +9404,29 @@
     "oscillation",
     "physics"
    ],
+   "dna": {
+    "promoted": "2026-08-04",
+    "stage": "2 - variation",
+    "axes": {
+     "pitch_space": [
+      "circle_of_fifths",
+      "chromatic",
+      "tonnetz",
+      "keyboard",
+      "helix"
+     ],
+     "consonance_theory": [
+      "western",
+      "blues",
+      "ratio",
+      "flat"
+     ]
+    },
+    "default": "pitch_space=circle_of_fifths, consonance_theory=western - a no-op on both. _pos_circle_of_fifths is the shipped expression character for character (angle = -PI/2 + i/12*TAU, Vector3(cos*circle_radius, 0.02, sin*circle_radius)) and _shared_for short-circuits to this file's own SHARED_OVERTONES before it ever touches a theory table, so the twelve nodes land on the same twelve coordinates and the same 36 lines are drawn at the same thickness. The base plate keeps its shipped circle_radius + 0.08 at every value, so even a non-default layout leaves the plate, the title and the audio voices alone. apply_grid_config was literally `pass` and now rebuilds only when a word validates against the code's own list AND differs AND _ready has built once - and neither key is sent by any of the seven maps that show it (five bare tokens plus two curation bays), so the bays' {\"emissive\": false} call still does nothing at all.",
+    "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS. Five exports existed and every one was a quantity: two radii, an octave, a tone duration and a volume. The two decisions that carry the argument were hard-coded: the CIRCLE_OF_FIFTHS ordering that decides which notes are drawn side by side, and the SHARED_OVERTONES table that decides which pairs get a line at all. apply_grid_config had an empty body, so a map token could reach neither.",
+    "note": "hand promotion 2026-08-04. The file's own QFEP audit says the circle of fifths 'is specific to Western tonal theory' and that 12-TET 'approximates but doesn't match' the ideal ratios - two admissions written as comments while the ordering and the table stayed law. pitch_space turns the first into a knob: the same twelve notes and the same twelve relations, re-mapped. Under chromatic the notes occupy the identical ring and only the LINES move, which is the cleanest statement of the axis - proximity is a claim, not a fact about the notes. tonnetz is the honest two-dimensional rival (4 columns of fifths x 3 rows of major thirds covers all twelve pitch classes exactly once, verified); keyboard is the layout the hand actually knows; helix is Shepard's, where B is eleven semitones above C rather than one below it. consonance_theory is chord_tension_spring's word, its four values and its four tables, PRELOADED from that file rather than copied - this artifact's @identity already names it as the contrast piece, and a shared vocabulary with two private copies of the numbers is two vocabularies waiting to happen. Because a line here joins two pitch CLASSES, each interval is scored by whichever of (interval, 12-interval) the theory rates higher, which is what keeps the blues claim about the dominant seventh alive in a graph that cannot tell a minor seventh from a major second. Under flat every pair scores alike and the web becomes the complete graph on twelve nodes at one uniform weight: no interval privileged, which is exactly what that theory says.",
+    "declined": "The audible half. This artifact's whole interaction is grabbing nodes to HEAR intervals, and base_octave, tone_duration and volume_db are all real, all reachable and all completely invisible to one still PNG - the info_board mistake. Also declined an axis over the 12-TET/just-intonation tuning itself: the frequencies would change and the picture would not, since every layout here places notes by ordinal position and not by pitch height."
+   },
    "include_in_map_data": true,
    "lookup_name": "harmonic_distance_table",
    "map_ready": true,
@@ -11829,6 +11852,27 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.306132Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "tuning": [
+      "pentatonic",
+      "equal",
+      "just",
+      "harmonic"
+     ]
+    },
+    "default": "tuning=pentatonic - TUNINGS[\"pentatonic\"] IS the shipped PENTATONIC_SCALE constant, referenced and not retyped, so every bar rings at exactly the frequency it always did and the sound of all 7 placements is unchanged. The APPEARANCE is not preserved, and could not be: see dna.was.",
+    "was": "eight identical boxes in a row, none of which was ever drawn. resonating_bar.tscn carries a bare MeshInstance3D with no `mesh` property, and ResonatingBar._setup_visual only built a BoxMesh when that node was MISSING - so the branch never fired, mesh stayed null, and the artifact rendered as a Label3D reading HIT THE BARS WITH THE STICK floating over eight invisible colliders. The registry's own measurement agrees: aabb_size [1.74, 0.1, 0.12] centred at (-0.32, 0.5, -0.29) is the grab stick and nothing else. The registry description meanwhile claimed 'each bar's length determines its pitch, shorter bars vibrate faster', which was false twice over - the bars had no length because they had no body, and pitch was a number handed to an audio generator.",
+    "note": "The mesh is now built whenever it is missing, and each bar gets its OWN BoxShape3D because the .tscn's is a shared sub-resource that would otherwise resize the whole row. Bar length comes from the physics of a free-free bar (f = k*h/L^2, so L goes as 1/sqrt(f)) with the lowest note keeping the shipped 0.30 m. AUDIBLE decay and ring are deliberately NOT an axis - a still cannot show them.",
+    "fixture": {
+     "visualizer_height": -1.0
+    },
+    "framing": 0.45,
+    "fixture_note": "The combined-wave display hangs 2.5 m above the bars and the grab stick is a 1.74 m rod offset to x=-0.5, so the fitted AABB is mostly empty air and the row of bars - the entire subject of this axis - lands at about a sixth of the frame. Dropping the visualizer to bar height lets the framing come in without cropping the row off the bottom. If the sweep still reports faint, suspect the framing before the design: the bars are 0.04 m thin and the sweep camera looks 34 degrees off their long axis.",
+    "open": "CombinedWaveVisualizer._find_resonating_bars scans get_parent().get_children() for ResonatingBar, but the bars live inside the 'Bars' container it is a sibling of - so it finds zero bars and the combined wave has never summed anything. Invisible to a still, left alone here, recorded so it is not lost."
    }
   },
   "rotating_cube_demo": {
