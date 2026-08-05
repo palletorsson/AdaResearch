@@ -14,7 +14,36 @@ extends Node3D
 # relationships: Sibling to recursive_chair; together they prove furniture is a family of subdivision strategies
 # truth: A table is a cube that kept its top layer and four corners — everything else was excess.
 
+# --- DNA (stage 2, promoted 2026-08-05) --------------------------------------
+# keep: WHICH CELLS of the subdivided bottom layer survive to become legs. The
+#   essence line is literally `keep(top_layer, corner_legs)` and the
+#   critical_parameter is named as "the top-layer vs bottom-layer role split" —
+#   but the split was four hard-coded corner tests inside _step_1, so the one
+#   choice this artifact declares as its own subject was the one thing no
+#   placement could vary. Every rung is the SAME 3x3x2 subdivision with a
+#   different survival rule, which is the sibling claim in the @identity
+#   ("furniture is a family of subdivision strategies") made testable:
+#     corners  — the four corner cells (what this always built).
+#     edges    — the four mid-edge cells: a trestle, legs under the middles.
+#     ring     — all eight perimeter cells: a plinth, the table as a solid base.
+#     pedestal — the centre cell alone: one column, cantilevered top.
+# assembly: how much of the derivation is standing. The four steps ran
+#   unconditionally, so the truth line ("everything else was excess") could only
+#   ever be shown as its finished result — the excess was never on view. The
+#   rungs are cumulative and are the artifact's own steps:
+#     cells    — step 1 only: the kept cells, still separate blocks in the air.
+#     slab     — + step 2: the nine top cells merged into one thin surface.
+#     legs     — + step 3: the leg cells stretched down to the floor.
+#     full     — + step 4: the apron braces (what this always built).
+#   `assembly` is cube_staircase's word, one folder over and one rung along the
+#   same sequence, with its terminal value `full` — the same question (how much
+#   of the built object is standing) with this object's own part names.
+const ASSEMBLY_VALUES: Array = ["cells", "slab", "legs", "full"]
+const KEEP_VALUES: Array = ["corners", "edges", "ring", "pedestal"]
+
 @export var table_size: float = 2.5
+@export_enum("cells", "slab", "legs", "full") var assembly: String = "full"
+@export_enum("corners", "edges", "ring", "pedestal") var keep: String = "corners"
 @export var show_animation: bool = true
 @export var step_delay: float = 0.4
 
@@ -32,6 +61,11 @@ var step: int = 0
 var timer: float = 0.0
 var is_animating: bool = false
 
+# True once _ready has built (or started building) once, so apply_grid_config
+# knows whether a changed value needs a rebuild or will be picked up by the
+# first build that has not happened yet.
+var _built: bool = false
+
 
 func _ready() -> void:
 	if show_animation:
@@ -39,6 +73,7 @@ func _ready() -> void:
 		_step_0_initial_cube()
 	else:
 		_build_instant()
+	_built = true
 
 
 func _process(delta: float) -> void:
@@ -54,10 +89,17 @@ func _process(delta: float) -> void:
 
 func _execute_step(s: int) -> void:
 	match s:
-		1: _step_1_first_subdivision()
-		2: _step_2_shape_tabletop()
-		3: _step_3_create_legs()
-		4: _step_4_add_supports()
+		1:
+			_step_1_first_subdivision()
+		2:
+			if _shows_slab():
+				_step_2_shape_tabletop()
+		3:
+			if _shows_legs():
+				_step_3_create_legs()
+		4:
+			if _shows_apron():
+				_step_4_add_supports()
 		_:
 			is_animating = false
 			print("Recursive table complete! Total parts: %d" % all_cubes.size())
@@ -66,9 +108,42 @@ func _execute_step(s: int) -> void:
 func _build_instant() -> void:
 	_step_0_initial_cube()
 	_step_1_first_subdivision()
-	_step_2_shape_tabletop()
-	_step_3_create_legs()
-	_step_4_add_supports()
+	if _shows_slab():
+		_step_2_shape_tabletop()
+	if _shows_legs():
+		_step_3_create_legs()
+	if _shows_apron():
+		_step_4_add_supports()
+
+
+# ── assembly gates ───────────────────────────────────────────────────────────
+# At "full" — the default, and the only thing this artifact could ever build —
+# all three return true, so every existing placement runs the identical steps in
+# the identical order over the identical geometry.
+
+func _shows_slab() -> bool:
+	return assembly != "cells"
+
+
+func _shows_legs() -> bool:
+	return assembly == "legs" or assembly == "full"
+
+
+func _shows_apron() -> bool:
+	return assembly == "full"
+
+
+## The keep rule: does this bottom-layer cell survive as a leg? At "corners" this
+## is the shipped test, character for character.
+func _is_leg_cell(x: int, z: int) -> bool:
+	match keep:
+		"edges":
+			return (x == 1) != (z == 1)
+		"ring":
+			return x != 1 or z != 1
+		"pedestal":
+			return x == 1 and z == 1
+	return (x == 0 or x == 2) and (z == 0 or z == 2)
 
 
 func _step_0_initial_cube() -> void:
@@ -110,8 +185,8 @@ func _step_1_first_subdivision() -> void:
 				# Determine role based on position
 				var role = "remove"
 
-				if y == 0:  # Bottom layer - legs at corners only
-					if (x == 0 or x == 2) and (z == 0 or z == 2):
+				if y == 0:  # Bottom layer - the cells the keep rule selects
+					if _is_leg_cell(x, z):
 						role = "leg_top"
 				elif y == 1:  # Top layer - entire tabletop
 					role = "tabletop"
@@ -192,6 +267,12 @@ func _step_3_create_legs() -> void:
 
 
 func _step_4_add_supports() -> void:
+	# A single central column has no second leg to brace against — an apron ring
+	# around it would be four bars floating in air, so there is nothing to add.
+	if keep == "pedestal":
+		print("Step 4: pedestal keeps no apron (one leg, nothing to brace)")
+		return
+
 	# Add cross supports between legs (apron) - thinner plastic
 	var apron_thickness = table_size * 0.025
 	var apron_height = table_size * 0.05
@@ -207,7 +288,23 @@ func _step_4_add_supports() -> void:
 				# Position apron just below tabletop
 				apron_y = tabletop_node.position.y - tabletop_box.size.y / 2.0 - apron_height
 
+	# SHORT-CIRCUIT at the shipped rule rather than deriving. The literal 0.35 is
+	# NOT where the corner legs actually stand — those sit at table_size / 3 —
+	# so deriving the inset for every keep would move the apron of the three
+	# existing placements by 0.017 * table_size. The other keeps have no shipped
+	# number to preserve, so they read theirs off the legs they actually have.
 	var leg_inset = table_size * 0.35
+	if keep != "corners":
+		var placed_legs = _find_cubes_by_role("leg")
+		if placed_legs.is_empty():
+			placed_legs = _find_cubes_by_role("leg_top")
+		var reach: float = 0.0
+		for cube_data in placed_legs:
+			var leg_node = cube_data.node as Node3D
+			if leg_node:
+				reach = maxf(reach, maxf(absf(leg_node.position.x), absf(leg_node.position.z)))
+		if reach > 0.001:
+			leg_inset = reach
 
 	# Front apron
 	_create_cube(
@@ -286,8 +383,11 @@ func reset() -> void:
 	step = 0
 	timer = 0.0
 
+	# Follow the flag in BOTH directions. Leaving is_animating true after a rebuild
+	# into the instant path would let _process re-run steps 1-4 from step 0 on top
+	# of an already-finished table and double every part.
+	is_animating = show_animation
 	if show_animation:
-		is_animating = true
 		_step_0_initial_cube()
 	else:
 		_build_instant()
@@ -298,5 +398,50 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Map tokens reach the DNA through here. Nothing is torn down unless a value
+## this table owns ACTUALLY changed and _ready has already built once — the bare
+## `recursive_table` tokens in Fractal_Recursion, Hangar_Fractals_Walk and
+## Proto_Fractal_Recursion never get past the first line.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config == null or config.is_empty():
+		return
+
+	var changed: bool = false
+
+	if config.has("keep"):
+		var want_keep: String = str(config["keep"]).strip_edges().to_lower()
+		if KEEP_VALUES.has(want_keep) and want_keep != keep:
+			keep = want_keep
+			changed = true
+
+	if config.has("assembly"):
+		var want: String = str(config["assembly"]).strip_edges().to_lower()
+		if ASSEMBLY_VALUES.has(want) and want != assembly:
+			assembly = want
+			changed = true
+
+	if config.has("table_size"):
+		var s: float = float(config["table_size"])
+		if s > 0.0 and not is_equal_approx(s, table_size):
+			table_size = s
+			changed = true
+
+	if config.has("step_delay"):
+		var d: float = maxf(0.0, float(config["step_delay"]))
+		if not is_equal_approx(d, step_delay):
+			step_delay = d
+			# Pure timing — nothing standing has to be torn down for it.
+
+	if config.has("show_animation"):
+		var raw: Variant = config["show_animation"]
+		var flag: bool = false
+		if raw is String:
+			flag = str(raw).strip_edges().to_lower() in ["true", "1", "yes"]
+		else:
+			flag = bool(raw)
+		if flag != show_animation:
+			show_animation = flag
+			changed = true
+
+	if changed and _built:
+		reset()

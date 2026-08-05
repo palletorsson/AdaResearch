@@ -3031,6 +3031,24 @@
         "size_group": "world_scale"
       },
       "scene": "res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.tscn",
+      "dna": {
+        "promoted": "2026-08-05",
+        "stage": "2 - variation",
+        "axes": {
+          "method": [
+            "all",
+            "instant",
+            "health",
+            "peel",
+            "cantor",
+            "voronoi",
+            "prism"
+          ]
+        },
+        "default": "method=all - _shows() returns true for every kind when method is \"all\", so all nine instantiate calls run at their nine unchanged positions with their unchanged captions: two simple cubes at x -2 and -1, two health cubes at 0 and 1, the tetrahedron / Cantor box / Voronoi sphere on the +1.5 row, two Voronoi planes on the +3.0 row at -20 degrees, and the prism window on the +4.5 row. The five throw balls, the stats label and the instruction plate are outside the axis entirely. All five placements (ForcesArena, Corridor_ForcesArena, Forces_Destruct, Curation_Bay_forces_6's station, and the bay's own token) are bare, and apply_grid_config - a bare `pass` before this pass - takes a word only when it validates AND differs, and respawns only after _ready has laid the bench out once.",
+        "was": "three exports, all of them about the throw balls: a count, a height and a spacing. The runner refused the token for NO TURNABLE KNOBS. The @identity essence line already read `impact -> destroy(method)` and the description already listed eight methods, but the list was not a parameter anywhere - it was the fixed LAYOUT of _spawn_destructibles(), nine unconditional instantiate calls. So the declaration was derived from the layout, which is the only categorical thing this file owns; there is no dispatch table here to read, and saying so is part of the finding.",
+        "note": "THE AXIS IS THE SPECIMENS, NOT THE BREAKING, and that is deliberate. Every destruction path in the eight destructible scripts is a body-entered handler that spawns RigidBody3D fragments with impulses and schedules them to fade and free; a still of any of it is an arbitrary instant of a physics run, and a still taken later is an empty floor. Pre-breaking them at build time would be five new static-aftermath renderers written across five files that other tokens also place - inventing artifacts, not promoting one. What a still does carry is the built form, which is what the truth line is about: 'how something breaks reveals how it was built'. KNOWN LIMITATION, not a defect to fix silently: a pinned method leaves its specimen at its bench coordinate (the prism window is 7.5 m along +z from the token's origin), because recentring would make `all` and `prism` disagree about where the prism is - a second, undeclared change riding along on the first. A map that wants a lone specimen should offset the token. TWO PRE-EXISTING DEFECTS FOUND WHILE READING, both left alone: (1) _setup_environment() is never called - every other scene in the vectors family calls it from its own _ready, this one does not, so the create_axes(2.0) and create_floor(15.0) in it are dead and the bench ships with no floor and no axes. It also means the framing is NOT dominated by a 15 m plane, which is why no `framing` hint is set here. (2) apply_grid_config overrides the base's without calling super, so scale_multiplier and laser_endpoints have never reached this token; that was preserved rather than repaired, because the curation bay that places it could be passing scale_multiplier and a bench that has never rescaled would suddenly rescale."
+      },
       "size_group": "world_scale",
       "tags": [
         "vector"

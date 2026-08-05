@@ -22,5 +22,21 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	update_evolutionary_algorithms(delta)
 
+## STAGE-2 DNA. The axis is `selection`, declared by this token and by
+## particle_randomness_evolutionary — which is the same scene under a second name — and
+## implemented in the parent, extrem_randomness.gd, because chapter five's update rule
+## lives there. The four values, and how they were measured, are documented on the axis
+## declaration in that file.
+##
+## Do not write the words that spell an export declaration into a comment here: the
+## declaration gate resolves an axis to the FIRST script in the scene that appears to
+## export it, and a prose mention in this file sent it to a script with no enum in it.
+##
+## This does NOT call super. The parent's hook also owns `chapter`, and this subclass
+## exists precisely to pin the chapter to evolution: forwarding it would let a map token
+## restage a DIFFERENT demo under a name that promises this one, and every chapter value
+## would still photograph identically because _ready overrides it a line later. So the
+## only key taken here is the axis this token actually declares.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("selection"):
+		_apply_selection(str(config["selection"]))

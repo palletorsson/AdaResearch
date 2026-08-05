@@ -1546,6 +1546,27 @@
    ]
   },
   "bubbles_random": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "assay": [
+      "none",
+      "gauge",
+      "control",
+      "chart",
+      "vitrine"
+     ]
+    },
+    "fixture": {
+     "bubble_seed": 7
+    },
+    "default": "assay=none is the export default and the `_:` branch of _build_assay, which does not even create the Assay wrapper node, so the bare dish stands on nothing exactly as it did in all 3 rooms. Every rung builds under one Node3D appended AFTER create_petri_dish, so no legacy child index moves and the grid's auto-grounding walk - which types only the root's DIRECT children - cannot see any of it. All 3 placements are bare rotation/offset tokens (Corridor_Random_Mushrooms `bubbles_random`, Random_Mushrooms `bubbles_random:0:-0.5:1.0`, TestMap_Unused_4 `bubbles_random:0:2`) and not one passes a config key. bubble_seed defaults to -1, at which _rf and _rf_range return the global randf and randf_range this artifact has always called - not a private generator that merely behaves like them - so the shipped cloud is drawn from the same stream in the same order and the same count.",
+    "was": "twenty-eight exported knobs and not one of them a claim: spawn_area_size, four min/max bounds, max_bubble_count, spawn_rate, three lifetime and fade durations, six light numbers, four dish dimensions, eight sound numbers. Every one is a magnitude, a rate or a colour. apply_grid_config existed and its entire body was `pass`, so every key a map could send was silently discarded, and the runner refused the token for NO TURNABLE KNOBS - which was a fact about the KIND of knob, not their number.",
+    "note": "assay is the softbody bench family's word and its five values character for character - seventeen artifacts already ask what apparatus a specimen is surrounded by, and petri_dish_worms, the corpus's other petri dish, joined the same word on 2026-08-05. This artifact's own truth line - `Randomness with a ceiling and a floor is still randomness. The dish is the constraint that lets the dispersion be read' - is that question stated from the inside, so a private synonym would have split one question across two vocabularies for no gain. `control` is the rung that argues hardest and argues harder here than for the worms: an empty second dish is the only thing that can turn a cloud of luck from a thing you are watching into an experiment you could disagree with. THE BUBBLES ARE NOT ROUTED THROUGH THE AXIS: every rung spawns the same cloud from the same draws in the same order, because a variant that changed the specimen would be changing the answer rather than the showing. Every apparatus dimension is petri_dish_worms' absolute number divided by its AS_DISH_R of 0.16 and multiplied by this dish's own radius, so the two dishes carry the same apparatus at their own sizes instead of one carrying a scale model of the other - which is what `the siblings measure alike' has to mean when the objects are 22x apart. The one place the rungs diverge is the chart's plotted line: the sibling draws a logistic because a worm population grows, and a bubble dish has no growth curve, so this plate carries a flat-topped histogram between a marked floor and a marked ceiling - the artifact's own thesis as a picture. Fixed, never sampled: a rung that rolled dice would make every capture a different frame.",
+    "fixture_note": "bubble_seed is a fixture and NOT an axis. This dish costs TEN unseeded draws per bubble (three position, one size, one rise speed, two wobble, two horizontal drift, one light ballot) plus one more consumed by the dead sound gate, and it spawns ten bubbles a second, so at the 1.1 s settle five sweep frames would be five different clouds and the critic would read that noise as a confident BITE on whatever axis happened to be varying. The two drift draws used to be made inside Bubble._init, which an inner class cannot route through the outer node's generator; they moved out to spawn_bubble at exactly the point in the sequence they were made from before - after wobble_speed, before the light ballot - so the -1 stream is unchanged.",
+    "declined": "constraint = none|gravity|jet|vortex|drag, particle_chaos's word, was considered and REFUSED. Its `none` means a cloud under no law at all, and this cloud already obeys one: buoyant ascent at 0.5-2.0 m/s with a sine wobble and a lateral drift. Adopting the list would mean either calling that shipped behaviour `none', which is not what the word means where it already lives, or forking the list with a sixth value - the folding_past fault, taking a word without its answers. The two artifacts would not have measured alike either: particle_chaos's `none` photographs as an isotropic burst, this one's would be a rising column. Also refused: spawn_rate, bubble_lifetime, bubble_fade_time and bubble_scale_down_rate (a rate and a duration are invisible to a still - the info_board fault), and the distribution behind the draws, which has nothing in frame to be read off. Not refused but not taken: the dish is 6 m of spawn box inside a 7 m round vessel with no collision between them, so bubbles already rise through their own glass at the corners. That is a defect to decide about, not an axis to declare."
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "A particle system that generates random bubble effects with dynamic spawning",
@@ -2924,6 +2945,24 @@
    ],
    "name": "Evolutionary Algorithms",
    "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "selection": [
+      "drift",
+      "uniform",
+      "culled",
+      "split"
+     ]
+    },
+    "fixture": {
+     "scatter_seed": 20260805
+    },
+    "default": "selection=culled - _winner_count() returns int(n * ELITE_FRACTION) with ELITE_FRACTION = 0.1, which is the shipped `int(particles.size() * 0.1)` unchanged, and the single-optimum path calls _evolve_toward(particles, target, delta) on the SAME array the old code sorted in place. Inside that loop nothing moved: the same beeline at 2.0 with the same +/-0.5 jitter, the same gold Color(1,0.8,0.2) at radius 0.08, the same 0.9 damping plus 0.5 follow plus 0.3 mutation, the same rank_ratio colour ramp and the same 0.05 - 0.02*rank radius, in the same order, so the random stream is consumed identically. The only new branch in it guards `randi() % winner_count` against drift's winner_count of 0. All placements of this token and of particle_randomness_evolutionary are bare, and apply_grid_config - a bare `pass` before this pass - takes only a word that validates AND differs, and never rebuilds anything.",
+    "was": "no exports of its own at all - a 12-line subclass whose whole body is `current_demo = 4; start_demo(4)`. The runner refused the token for NO TURNABLE KNOBS and it was right about the file: every knob chapter five has belongs to its parent, extrem_randomness.gd, and the one that decides the artifact's subject - who counts as fit - was the literal 0.1 inside update_evolutionary_algorithms.",
+    "note": "SHARED SCRIPT, TWO NAMES, plus a parent. particle_randomness_evolutionary is the SAME scene under a second lookup name and declares the same axis; extreme_randomness runs the same update rule at chapter=evolution, so `selection` reaches it too, but its declaration is left at `chapter` alone because chapter x selection would exceed the sweep's 9-variant cap. DO NOT DECLARE `chapter` ON THIS TOKEN: the export is real and the values are real, so the gate would pass it, but this subclass pins demo 4 in _ready AFTER super._ready() applies chapter - all six values would render the identical evolution demo and the sweep would publish six identical frames. The word `selection` is non_teleological_evolution's, and drift, uniform and split carry its meanings exactly. `runaway` is REFUSED: there it means the population standing at its own max_population ceiling with the field paved, and this population neither reproduces nor grows - it is a fixed 100 bodies - so runaway here could only be renamed to mean something else, which is the dishonest half of a shared vocabulary. The two files also disagree about which value is home, and the disagreement is the honest content of the pair: drift is the default there because that artifact has no fitness function, and culled is the default here because this one has had one all along. CAVEAT FOR THE CRITIC: the optimum orbits on Time.get_ticks_msec(), which the wall clock at capture leaves at an arbitrary phase, so the cloud's POSITION varies between frames of one sweep. That was left alone rather than normalised, because normalising it would change what five live placements do. The axis signature is the gold count (0 / 10 / 100) and the cluster shape (2.5 m diffuse / 0.18 m knot / 1.9 m streak / two knots 2.50 m apart), all of which the Python re-implementation showed stable across four wall-clock phases. No `framing` hint is set: the title and description Label3D plates pull the union box wide and dilute the subject, but the swarm sits off-centre at x -5..0, and a tighter shot risks cropping drift's cloud while leaving culled's knot central - a difference manufactured by the camera. Measure first, then set it."
+   },
    "sequence": "randomness",
    "tags": [
     "emergence",
@@ -5121,6 +5160,24 @@
    ],
    "name": "Particle Randomness - Evolutionary",
    "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "selection": [
+      "drift",
+      "uniform",
+      "culled",
+      "split"
+     ]
+    },
+    "fixture": {
+     "scatter_seed": 20260805
+    },
+    "default": "selection=culled - identical to evolutionary_algorithms, because this IS evolutionary_algorithms: both tokens point at the same evolutionary_algorithms.tscn. culled is the shipped top-tenth truncation, ELITE_FRACTION = 0.1, on the shipped single optimum. Its three placements (Corridor_randomness's curation station, TestMap_Unused_13, and the token itself) are bare and pass no keys.",
+    "was": "the second name on a scene with no exports of its own. Declared here as well as on evolutionary_algorithms because a family that shares one scene must share the declaration: an axis declared on one member is unreachable from every map that spells the other name - the fault that cost the bar_array family sixteen declarations.",
+    "note": "See evolutionary_algorithms for the values, the measurement, the refusal of `runaway`, and the warning against declaring `chapter` on this scene."
+   },
    "sequence": "randomness",
    "tags": [
     "emergence",
@@ -6322,7 +6379,31 @@
     "derived_at": "2026-04-29T09:39:46.246941Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "The Windows Pipes screensaver reborn: a pipe growing by random turns, filling the volume with plumbing nobody designed. Idle-machine art — the desktop's oldest proof that a few dice and a growth rule can furnish a world."
+   "qfep_connection": "The Windows Pipes screensaver reborn: a pipe growing by random turns, filling the volume with plumbing nobody designed. Idle-machine art — the desktop's oldest proof that a few dice and a growth rule can furnish a world.",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "residue": [
+      "head",
+      "tail",
+      "path",
+      "envelope",
+      "ensemble"
+     ]
+    },
+    "fixture": {
+     "walk_seed": 20260805,
+     "growth": "instant"
+    },
+    "fixture_why": "BOTH ENTRIES ARE MANDATORY and neither is an axis. walk_seed: the run is nothing but accumulated draws from an rng that _ready calls randomize() on, so five unseeded frames are five different pipes and any bite number would be measuring the generator rather than the rung — the generative-artifact trap in CLAUDE.md. -1 is the default and keeps randomize(), so no placement sees the pin. growth: the shipped walk lays one length every 0.08 s, i.e. 14.4 s for the full 180. The sweep settles 1.1 s (about thirteen lengths) and its fixed-camera AABB pre-pass settles 0.35 s (about four), which is why this artifact's measured aabb_size in this very file is [0.24, 0.24, 0.95] — the size of ONE segment. Without the pin the sheet would compare five pictures of a stub and the camera would be framed for a stub. `instant` lays the whole run inside _ready; `live` is the default and is the shipped screensaver. It is a String enum and not a bool because the sweep sets exports from JSON before _ready and a typed bool silently rejects a fixture string.",
+    "default": "residue=path - the shipped drawing, in the shipped order. At `path` the rung is 2, _create_next_segment calls exactly the two functions it always called (_add_segment then _add_joint), and none of _mark_head, _trim_tail, _refresh_rails or _build_ghosts is reached; the only work this promotion adds on that path is one append to a PackedVector3Array and one dictionary lookup per length. The turn rule was refactored to take its generator and position as arguments so the ensemble's counterfactuals can call the same function, and the draw order is unchanged: one randf() for the straight-ahead check, then one randi_range per shuffle swap, exactly as before. _add_segment now derives its basis from the span end-start rather than from the `direction` member, which is the identical vector at that point by construction. MEASURED, not assumed: 6 mentions across 5 map files - bare tokens in Randomness_Examples_of_Randomness, Room_Randomness_Examples_of_Randomness and Random_Rotate_Random_Y, `pipe_dream:0:5` and `pipe_dream:0:8` in Corridor_Randomness_Examples_of_Randomness (rotation and y-offset, which the grid consumes, not this artifact), and membership in two curation_station collections in Curation_Bay_randomness_7 and Corridor_Randomness_Examples_of_Randomness whose #layout and #with_* keys belong to the station. Not one of them carries a residue key, and apply_grid_config returns on its second line unless a token names this axis.",
+    "was": "eleven exports and not one of them turnable: pipe_radius, segment_length, max_segments, bounds_extent, turn_interval, continue_straight_chance, growth_tween_time and five colour and energy fields - how BIG and how FAST, never what the cube is left holding. apply_grid_config was a literal `pass`, so none of the eleven was reachable from a map token even as a number. The runner refused it as NO TURNABLE KNOBS on exactly that ground.",
+    "note": "The word is the group's, taken with its answers rather than borrowed as a label: head < tail < path < envelope < ensemble, the same five in the same order and the same meaning as random_walk_128, random_walk_leash and random_walk_collection. The one place this member differs is worth stating plainly - THE WINDOW AT `tail` IS CUT IN TIME here, not in space. The three siblings draw on pages and keep pixels, so `recently` had to be approximated by a disc around the walker; this record is a list of turns in the order they were taken, so the window is the real thing. The rungs stay strictly nested either way, so no rung invents pipe the run did not lay. `envelope` is the rung this artifact answers best and is why the word fits at all: the desire line says the pipe explores a sealed cube until the cube is full, bounds_extent is the cube it was ALLOWED, and the rails are the cube it USED - never the same box, and the tangle alone cannot say which.",
+    "declined": "joint - the turn rule (ball / bare / collar), and the strongest other candidate in the file. The sphere at each corner is what makes 180 loose cylinders read as continuous plumbing, and removing it reveals the pipe as sticks that merely overlap, which is a genuine argument about the object. It is declined for a CAMERA reason and not a design one: a corner is 0.34 m on an object whose fitted box is about 13 m across, so at the sweep's fit-by-diagonal framing four values would differ by a handful of pixels - the line_interface fault. It wants its own pass at dna.framing near 0.3 and cannot share a sheet with an axis whose whole subject is the extent of the tangle. Also declined: continue_straight_chance, the file's former declared critical_parameter, because inertia changes how much tangle there is and not what the tangle claims (the reason rhizomatic_maze_space declined its six growth floats); and turn_interval and growth_tween_time, which are rates and invisible to a still.",
+    "finding": "THE @identity WAS WRONG ABOUT THE ALGORITHM and the header is corrected in this pass rather than papered over. It called this `a self-avoiding 3D random walk ... never crossing itself`. It is not, and never was: _choose_next_direction refuses only the reverse direction and any step that would leave bounds_extent, there is no occupancy set anywhere in the file, and the run crosses itself freely. Making it genuinely self-avoiding would be a different artifact and a change to all five existing placements, so it is not done here.",
+    "still_note": "residue is resolved before each length is laid and the rungs differ in how much geometry exists, so one frame is a complete account. Expect head-vs-path to be the loudest pair by a distance - one 0.5 m sphere against a 13 m tangle is a silhouette, not a texture. envelope-vs-path is the pair to check second and the one most likely to read small: twelve rails at 0.034 m radius on a 13 m box is thin ink, so if it comes back under 1% compare the silhouettes before believing it. ensemble triples the ink inside the same cube and should be unmistakable."
+   }
   },
   "pixel_cloud": {
    "dna": {

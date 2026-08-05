@@ -9574,6 +9574,23 @@
     "size_group": "environment"
    },
    "scene": "res://algorithms/fractals/cubesubdivision/recursive_chair.tscn",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "removal": [
+      "gone",
+      "ghost",
+      "scar"
+     ]
+    },
+    "fixture": {
+     "build_mode": "instant"
+    },
+    "default": "removal=gone - the eleven deleted subcubes are not drawn, which is what this artifact has always done: _step_1_first_subdivision tagged them \"remove\" and simply never called _create_cube, and the new else-branch calls _spawn_removed_cell, whose first line returns when removal is \"gone\". Every kept cube, every deform factor (seat *0.15, legs *0.4/*0.4/*2.5, back *2.0/*0.2), the armrests and the five generation colours are untouched. All four placements (Fractal_Recursion, Proto_Fractal_Recursion, Hangar_Fractals_Walk, and the Corridor_Fractal_Recursion curation station) are bare tokens passing no keys, and apply_grid_config - a bare `pass` before this pass - now rebuilds only when a declared word both validates and DIFFERS, and only after _ready has built once.",
+    "was": "three exports and not one categorical among them: chair_size is a size, step_delay a duration, show_animation a bool the harness could not set (a typed bool rejects a config string before _ready). The runner refused the token for NO TURNABLE KNOBS, which was true of the KIND of knob. Meanwhile the file's own truth line - 'the chair was always inside the cube, subdivision merely removed what was not chair' - was made by an object that never showed a cube.",
+    "note": "The word is cantor_set's, character for character, from this same registry file: gone/ghost/scar, and the two material recipes are copied value for value (ghost = unshaded alpha 0.16 at Color(0.86,0.88,0.96); scar = matte Color(0.09,0.09,0.11) at 0.22 of the cell) so the siblings LOOK alike answering it. It fits here for the exact reason sierpinski_pyramid refused it: those children's volumes interpenetrate and have no complement to draw, whereas these 27 cells partition one cube, 16 kept and 11 removed, disjoint by construction. build_mode is the FIXTURE, not an axis - the chair assembles one step every 0.5 s, so a still at the harness's 1.1 s settle catches it at step 2, seatless and legless and one frame from step 3; \"instant\" runs the same five steps in _ready. SIBLING NOT TOUCHED: recursive_table is a separate script and a separate scene (not a shared generator), and the same word fits it exactly - its own truth line is 'a table is a cube that kept its top layer and four corners, everything else was excess', and its 3x3x2 lattice removes 5 of 18 cells the same way. It is assigned elsewhere in this batch, so it was left alone rather than edited under two hands."
+   },
    "size_group": "environment",
    "tags": [
     "procedural"
@@ -9665,6 +9682,21 @@
    "category": "unknown",
    "complexity": "beginner",
    "description": "table = subdivide_3x2(cube) -> keep(top_layer, corner_legs) -> flatten(top) -> stretch(legs)",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "keep": ["corners", "edges", "ring", "pedestal"],
+     "assembly": ["cells", "slab", "legs", "full"]
+    },
+    "default": "keep=corners, assembly=full - corners returns the shipped test character for character: _is_leg_cell falls past every match case to `return (x == 0 or x == 2) and (z == 0 or z == 2)`, the four corner cells of the bottom layer and nothing else. The apron SHORT-CIRCUITS with it: leg_inset stays the shipped literal table_size * 0.35 rather than being derived, because the corner legs actually stand at table_size / 3 and deriving would move the apron of the three existing placements by 0.017 * table_size. full is the only assembly this artifact could ever build - all three gate helpers return true, so _build_instant and _execute_step run steps 0-4 in the identical order over the identical geometry. All 3 placements (Fractal_Recursion, Hangar_Fractals_Walk, Proto_Fractal_Recursion, plus the Corridor_Fractal_Recursion curation_station list) are BARE tokens - the ':0:-0.5:0.2' suffix is rotation and offsets, not config keys - and both axes are read only inside `if config.has(...)`, so none of them reaches the new code.",
+    "was": "three @export knobs and not one categorical among them: table_size is a scale, show_animation a flag, step_delay a duration - and apply_grid_config's whole body was `pass`, so not one of them was reachable from a map token, which is why the stage-2 runner refused this for NO TURNABLE KNOBS. The essence line is literally `keep(top_layer, corner_legs)` and the critical_parameter is named as 'the top-layer vs bottom-layer role split', yet that split was four hard-coded corner tests buried in _step_1 - the one choice the artifact declares as its own subject was the one thing no placement could vary. The four steps then ran unconditionally, so the truth line ('everything else was excess') could only be shown as its finished result, with the excess never on view.",
+    "shared_with": "cube_staircase - `assembly` is that artifact's word, promoted the same week one folder over in the same subdivision family, with its terminal value `full`. The same question (how much of the built object is standing, in cumulative rungs) asked of this object's own parts. The rung NAMES are necessarily this table's, exactly as cube_staircase's treads/steps/stringers are its own; a shared vocabulary that forced a table to have treads would be the folding_past mistake. `keep` is this artifact's own word, taken from its own essence line rather than invented, and deliberately NOT `selection` - that word is already the evolution family's (drift|uniform|culled|runaway|split, four artifacts) and means natural selection.",
+    "fixture": {
+     "show_animation": false
+    },
+    "note": "The fixture is load-bearing for the evidence, not decoration. show_animation defaults to true and recursive_table.tscn sets step_delay = 0.5, so the four build steps land at 0.5s, 1.0s, 1.5s and 2.0s - while capture_config_sweep's SETTLE is 1.1s. Swept as shipped, every variant would be photographed half-built at the slab stage, `legs` and `full` would be pixel-identical, and the axis would read INERT as a fact about the capture clock. Setting the flag false takes the instant path, so each frame shows the rung it names. It is a real JSON boolean, not the string \"true\" that a typed bool export rejects before _ready."
+   },
    "dev_themes": [
     "generation",
     "procedural"

@@ -32,6 +32,48 @@ var slate_color: Color = Color(0.10, 0.11, 0.14)       # dark slate pedestal
 var brass_color: Color = Color(0.78, 0.62, 0.28)       # brass rim / crank / dial
 var lattice_color: Color = Color(0.45, 0.5, 0.58)      # etched integer ground-lattice hairlines
 
+# ── DNA axes (stage 2, promoted 2026-08-05) ──────────────────────────────────
+# regime: WHICH NAMED CASE of k the bench is standing at. The whole content of
+#   scalar multiplication is what k does to a vector, and this file already names
+#   the cases in prose four times over — the @identity ("k=+1 identity, k=0
+#   collapse, k=-1 perfect mirror … the three landmarks are the whole lesson"),
+#   the info panel's "k<0 reverses / k=0 collapses", the twin's red flip colour,
+#   and _refresh_text's REVERSED / COLLAPSED / same way. Every one of them was a
+#   case the bench could only reach if a player turned the crank; a map could
+#   place the bench and never argue anything but k=1. The rail genuinely reaches
+#   them: it is etched -3v..3v at every integer, _k_to_rail_x maps the full
+#   [min_k, max_k] onto it, and the crank, bead and needle all ride that map, so
+#   the negative half is a real position on a real number line and not a promise.
+#     identity — k = +1: the twin lies exactly on v (what this always opened at).
+#     stretch  — k = +2: |k|>1, the twin overshoots v's tick to the 2v lattice line.
+#     shrink   — k = +0.5: 0<|k|<1, the twin falls short, inside v.
+#     collapse — k = 0: the twin vanishes and the glowing origin dot appears.
+#     reversal — k = -1: the twin flips through its own tail and turns red.
+# workings: how much of the construction the bench draws. `workings` with these
+#   four values in this order is the Vector Bench's word — length_lantern, its
+#   HOUSING sibling (same slate plinth, same brass rim, same etched integer
+#   lattice, standing beside it in Force_Preview), plus adder_board, vector_add,
+#   vector_sub, dot_aligner and projection_shadow. The scaffolding here was never
+#   optional: the ghost lattice, the amber operand, the dial and the panel were
+#   hard-wired to go up together, so a room could not show a scaled vector as a
+#   bare result and had to teach the whole apparatus or nothing.
+#     outcome    — the twin k*v alone on its plinth. The result asserted.
+#     trace      — + the etched -3v..3v lattice and the bead: the field k sweeps.
+#     operands   — + the amber v and the crank: what the scalar is acting on.
+#     expression — + the dial, the readout and the panel (what this always drew).
+const REGIME_VALUES: Array = ["identity", "stretch", "shrink", "collapse", "reversal"]
+const REGIME_K: Dictionary = {
+	"identity": 1.0,
+	"stretch": 2.0,
+	"shrink": 0.5,
+	"collapse": 0.0,
+	"reversal": -1.0,
+}
+const WORKINGS_VALUES: Array = ["outcome", "trace", "operands", "expression"]
+
+@export_enum("identity", "stretch", "shrink", "collapse", "reversal") var regime: String = "identity"
+@export_enum("outcome", "trace", "operands", "expression") var workings: String = "expression"
+
 # ── Tunable DNA (overridable via apply_grid_config) ──────────────────────────
 var default_k: float = 1.0
 var min_k: float = -3.0
@@ -58,6 +100,9 @@ var _bead: MeshInstance3D = null                       # bead on the number line
 var _dial_needle: Node3D = null                        # rotating needle on the brass "k" dial
 var _slider: Node3D = null                             # desktop / accessibility fallback control
 var _snap_button: Node3D = null                        # SNAP integer-lock toggle
+var _lattice: Node3D = null                            # etched integer ticks + their ghost labels
+var _dial: Node3D = null                               # the brass "k" dial assembly
+var _info_panel: Node3D = null                         # the two-column info panel behind the bench
 var _info_label: Label = null   # 2D live-data column on the info panel (2D-in-3D)
 var _readout_label: Label = null   # 2D Label on the plate's 2D-in-3D display
 var _k_dial_label: Label3D = null
@@ -87,7 +132,7 @@ func build_scene() -> void:
 	# Scaled exhibition presentation; base_scale() == 0.5 * scale_multiplier.
 	scale = base_scale()
 
-	_k = clampf(default_k, min_k, max_k)
+	_k = clampf(_regime_k(), min_k, max_k)
 
 	_build_pedestal()
 	_build_rail_and_lattice()
@@ -99,6 +144,7 @@ func build_scene() -> void:
 	_build_panels()
 
 	_refresh_all()
+	_apply_workings()
 
 
 func _process(delta: float) -> void:
@@ -180,6 +226,13 @@ func _build_rail_and_lattice() -> void:
 	# Etched integer ground-lattice: a hairline tick + ghost label at every integer
 	# multiple of k from -3..3. This is the field the crank sweeps through; the
 	# player sees -2v, -1v, 0, 1v, 2v, 3v marked on the rail before they ever move.
+	# Grouped under one node so `workings` can take the whole field off in a single
+	# flag; the node carries no transform of its own, so every tick and label sits
+	# where it always sat.
+	_lattice = Node3D.new()
+	_lattice.name = "Lattice"
+	rail.add_child(_lattice)
+
 	var lattice_mat := _make_material(lattice_color, 0.4, 0.4, 0.2)
 	for ki in range(int(round(min_k)), int(round(max_k)) + 1):
 		var x := _k_to_rail_x(float(ki))
@@ -191,12 +244,12 @@ func _build_rail_and_lattice() -> void:
 		tick.mesh = tick_box
 		tick.material_override = lattice_mat
 		tick.position = Vector3(x * sc, rail_y * sc + tick_h * 0.5 * sc, 0.0)
-		rail.add_child(tick)
+		_lattice.add_child(tick)
 
 		# Etched integer label under each tick.
 		var lbl := _make_label(_format_int_label(ki), lattice_color, 16)
 		lbl.position = Vector3(x * sc, (rail_y - 0.06) * sc, 0.06 * sc)
-		rail.add_child(lbl)
+		_lattice.add_child(lbl)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -210,6 +263,7 @@ func _build_dial() -> void:
 	dial.position = Vector3(1.55, PLINTH_TOP_Y + 0.28, 0.0) * SCENE_SCALE
 	dial.rotation_degrees = Vector3(-18.0, 0.0, 0.0)
 	environment_root.add_child(dial)
+	_dial = dial
 
 	var sc := SCENE_SCALE
 	var brass_mat := _make_material(brass_color, 0.25, 0.3, 0.9)
@@ -417,6 +471,56 @@ func _build_panels() -> void:
 		Vector2(2.6, 1.1),
 		"k * v = (k*vx, k*vy, k*vz)",
 		"|k*v| = |k| * |v|\nk<0 reverses\nk=0 collapses")
+	# create_info_panel parents the panel under the base's info_root; grab the node
+	# itself (not just the live-data Label) so `workings` can take it off.
+	if info_root != null:
+		_info_panel = info_root.get_node_or_null("InfoPanel") as Node3D
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DNA  —  regime (which case of k) and workings (how much is drawn)
+# ═══════════════════════════════════════════════════════════════════════════
+
+## The k the bench opens at. At "identity" — the default — this SHORT-CIRCUITS to
+## the shipped default_k instead of the table's 1.0, so a map that sets `k` on the
+## token keeps its own number rather than being silently reset to the regime's.
+func _regime_k() -> float:
+	if regime == "identity":
+		return default_k
+	return float(REGIME_K.get(regime, default_k))
+
+
+## workings gates. At "expression" (the default) all three return true, which is
+## the only state this bench could previously be in — so every existing placement
+## draws the identical lattice, operands, dial and panel it always drew.
+func _shows_lattice() -> bool:
+	return workings != "outcome"
+
+
+func _shows_operands() -> bool:
+	return workings == "operands" or workings == "expression"
+
+
+func _shows_expression() -> bool:
+	return workings == "expression"
+
+
+## Visibility only — nothing is torn down and nothing is rebuilt, so this is safe
+## to re-run on a live bench. The twin and the collapse dot are never gated: they
+## are the outcome, and _refresh_geometry owns their visibility.
+func _apply_workings() -> void:
+	if _lattice != null:
+		_lattice.visible = _shows_lattice()
+	if _bead != null:
+		_bead.visible = _shows_lattice()
+	if _base_arrow != null:
+		_base_arrow.visible = _shows_operands()
+	if _crank != null:
+		_crank.visible = _shows_operands()
+	if _dial != null:
+		_dial.visible = _shows_expression()
+	if _info_panel != null:
+		_info_panel.visible = _shows_expression()
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -711,7 +815,8 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config == null:
 		return
 
-	# DNA knobs (read before super may rebuild the scene).
+	# DNA knobs (read before super may rebuild the scene). `k` is read first, so a
+	# token naming both k and regime=identity keeps its own explicit number.
 	if config.has("k") or config.has("default_k"):
 		var kv = config.get("k", config.get("default_k", default_k))
 		default_k = float(kv)
@@ -722,6 +827,19 @@ func apply_grid_config(config: Dictionary) -> void:
 		max_k = float(config["max_k"])
 	if config.has("base_vector") and config["base_vector"] is Vector3:
 		base_vector = config["base_vector"]
+	# The two declared axes. Both are validated against their own value list, so a
+	# misspelled token leaves the bench exactly as it shipped rather than falling
+	# into a half-set state.
+	if config.has("regime"):
+		var want_regime: String = str(config["regime"]).strip_edges().to_lower()
+		if REGIME_VALUES.has(want_regime) and want_regime != regime:
+			regime = want_regime
+			_k = clampf(_regime_k(), min_k, max_k)
+	if config.has("workings"):
+		var want_workings: String = str(config["workings"]).strip_edges().to_lower()
+		if WORKINGS_VALUES.has(want_workings):
+			workings = want_workings
+
 	if config.has("housed"):
 		housed = bool(config["housed"])
 	if config.has("console"):
@@ -736,10 +854,14 @@ func apply_grid_config(config: Dictionary) -> void:
 	# Let the base handle scale_multiplier (and rebuild if already built).
 	super.apply_grid_config(config)
 
-	# If we did not rebuild but the scene is live, push the new values in.
+	# If we did not rebuild but the scene is live, push the new values in. Both
+	# axes are re-applied here rather than triggering a rebuild: regime moves a
+	# number the refresh already reads, and workings is visibility on nodes that
+	# are already standing. Nothing is torn down on any path through this function.
 	if _scene_built and is_inside_tree() and _twin_arrow != null:
 		if _slider and _slider.has_method("set_range"):
 			_slider.call("set_range", min_k, max_k)
 		if _slider and _slider.has_method("set_normalized_value"):
 			_slider.call("set_normalized_value", _k_to_norm(_k))
+		_apply_workings()
 		_refresh_all()

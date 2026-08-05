@@ -468,6 +468,192 @@ func clear_all_projectiles():
 	active_projectiles.clear()
 	print("CubeSpawner: Cleared all projectiles")
 
+# ─── WARNING dressing ─────────────────────────────────────────────────────────────────
+# The bodies for the axis declared at the top of this file. They were MISSING: _ready and
+# configure both called _build_warning() and no such function existed anywhere in the
+# script, which in GDScript 4 is a resolution error at parse time, so CubeSpawner.gd did
+# not load and all ten placements of cube_projectile_spawner stood empty. The declaration
+# gate cannot see this class of fault — the export is real and its values are real; it is
+# the builder that is absent. Same shape as dna_specimen, one step further along.
+#
+# The vocabulary, the colours and the `hazard_warning` group are kaleidocycle_enemy.gd's,
+# reused and not re-invented, so the seven hazards that share the word photograph as one
+# apparatus at seven scales. Every box is sized from the emitter's own AABB, so a resized
+# spawner keeps its dressing in proportion.
+const WARN_STAIN_OUTER := Color(0.24, 0.19, 0.13)
+const WARN_STAIN_CORE := Color(0.09, 0.075, 0.055)
+const WARN_BAR := Color(0.52, 0.50, 0.44)
+const WARN_TAG := Color(0.86, 0.72, 0.12)
+const WARN_MAST := Color(0.38, 0.38, 0.40)
+const WARN_LAMP := Color(1.0, 0.62, 0.12)
+const WARN_CLOTH := Color(0.40, 0.38, 0.33)
+const WARN_STRAP := Color(0.15, 0.14, 0.13)
+
+
+## Rebuildable: configure() reaches this after _ready, so drop the previous dressing first
+## (remove_child before queue_free — the sweep measures the AABB on the very next frame).
+## "none" falls through the match and builds no node at all, which is why the default costs
+## the ten existing placements exactly zero children and zero index shifts.
+func _build_warning() -> void:
+	for child in get_children():
+		if child.is_in_group("hazard_warning"):
+			remove_child(child)
+			child.queue_free()
+	var b: AABB = _warn_bounds()
+	match warning:
+		"stain":
+			_warn_stain(b)
+		"cage":
+			_warn_cage(b)
+		"beacon":
+			_warn_beacon(b)
+		"shroud":
+			_warn_shroud(b)
+		_:
+			pass
+
+
+## The emitter's real extent, read from the mesh instead of guessed off the shipped 1.2 m.
+## The idle tween scales mesh_instance between 1.0 and 1.2 and is deliberately NOT read
+## here: the dressing must not breathe with the housing, or a still would photograph the
+## cage at whatever size the pulse happened to be.
+func _warn_bounds() -> AABB:
+	if mesh_instance != null and mesh_instance.mesh != null:
+		var m: AABB = mesh_instance.mesh.get_aabb()
+		m.position += mesh_instance.position
+		return m
+	return AABB(Vector3(-0.6, -0.6, -0.6), Vector3(1.2, 1.2, 1.2))
+
+
+## How high a cover has to reach to actually cover. The shipped placard hangs at y 1.5 well
+## above the 1.2 m housing, and a wrap that stopped at the crown would leave the hazard sign
+## legible — a shroud that announces itself is not a shroud. Read, never mutated: no legacy
+## child is touched by any value.
+func _warn_cover_top(b: AABB) -> float:
+	var top: float = b.position.y + b.size.y
+	var placard: Node = get_node_or_null("Label3D")
+	if placard is Node3D:
+		top = maxf(top, (placard as Node3D).position.y + 0.22)
+	return top
+
+
+## STAIN — the notice written on the floor. Scorch soaked in under the housing with a darker
+## core, and two burn runs bled off toward -Z, which is where this thing actually fires.
+## Nothing stands up: you can only read it from inside the room it has been firing into.
+func _warn_stain(b: AABB) -> void:
+	var r: float = maxf(maxf(b.size.x, b.size.z) * 0.5, 0.05)
+	var c: Vector3 = b.get_center()
+	var y: float = b.position.y - 0.006
+	_warn_add(Vector3(c.x, y, c.z), Vector3(r * 3.4, 0.012, r * 3.4),
+		_warn_mat(WARN_STAIN_OUTER, 1.0, 0.0))
+	_warn_add(Vector3(c.x, y + 0.007, c.z), Vector3(r * 2.1, 0.012, r * 2.1),
+		_warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(c.x + r * 0.30, y + 0.004, c.z - r * 1.5),
+		Vector3(r * 0.30, 0.012, r * 1.1), _warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+	_warn_add(Vector3(c.x - r * 0.70, y + 0.004, c.z - r * 1.25),
+		Vector3(r * 0.22, 0.012, r * 0.8), _warn_mat(WARN_STAIN_CORE, 1.0, 0.0))
+
+
+## CAGE — the notice as paperwork. Four posts, two rails, one filed yellow tag. Somebody
+## catalogued this and fenced it, and it fires through the bars on exactly the same clock.
+func _warn_cage(b: AABB) -> void:
+	var r: float = maxf(maxf(b.size.x, b.size.z) * 0.5, 0.05)
+	var c: Vector3 = b.get_center()
+	var bot: float = b.position.y - 0.005
+	var top: float = b.position.y + b.size.y + r * 0.55
+	var hx: float = r * 1.36
+	var bar: StandardMaterial3D = _warn_mat(WARN_BAR, 0.45, 0.55)
+	var thick: float = maxf(r * 0.09, 0.025)
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			_warn_add(Vector3(c.x + float(sx) * hx, (bot + top) * 0.5, c.z + float(sz) * hx),
+				Vector3(thick, top - bot, thick), bar)
+	for ry in [top, bot + (top - bot) * 0.45]:
+		var y: float = float(ry)
+		for s in [-1.0, 1.0]:
+			var o: float = float(s) * hx
+			_warn_add(Vector3(c.x, y, c.z + o), Vector3(hx * 2.0 + thick, thick * 0.8, thick * 0.8), bar)
+			_warn_add(Vector3(c.x + o, y, c.z), Vector3(thick * 0.8, thick * 0.8, hx * 2.0 + thick), bar)
+	_warn_add(Vector3(c.x + hx + thick * 0.6, bot + (top - bot) * 0.72, c.z),
+		Vector3(0.016, r * 0.42, r * 0.62), _warn_mat(WARN_TAG, 0.7, 0.0))
+
+
+## BEACON — the notice as broadcast. A lit mast up out of the housing with a lamp head and a
+## shade, and a glowing outline burnt onto the floor around it. Readable from the doorway,
+## which is the only rung of the five that reaches you before you are in range.
+func _warn_beacon(b: AABB) -> void:
+	var r: float = maxf(maxf(b.size.x, b.size.z) * 0.5, 0.05)
+	var c: Vector3 = b.get_center()
+	var crown: float = b.position.y + b.size.y
+	var mast_h: float = r * 2.0
+	var mast: StandardMaterial3D = _warn_mat(WARN_MAST, 0.4, 0.6)
+	var lamp: StandardMaterial3D = _warn_emissive(WARN_LAMP, 3.2)
+	var thick: float = maxf(r * 0.10, 0.03)
+	_warn_add(Vector3(c.x, crown + mast_h * 0.5, c.z), Vector3(thick, mast_h, thick), mast)
+	_warn_add(Vector3(c.x, crown + mast_h + r * 0.20, c.z),
+		Vector3(r * 0.52, r * 0.30, r * 0.52), lamp)
+	_warn_add(Vector3(c.x, crown + mast_h + r * 0.42, c.z),
+		Vector3(r * 0.74, thick * 0.7, r * 0.74), mast)
+	var hx: float = r * 1.55
+	var y: float = b.position.y - 0.004
+	for s in [-1.0, 1.0]:
+		var o: float = float(s) * hx
+		_warn_add(Vector3(c.x, y, c.z + o), Vector3(hx * 2.0, 0.02, thick), lamp)
+		_warn_add(Vector3(c.x + o, y, c.z), Vector3(thick, 0.02, hx * 2.0), lamp)
+
+
+## SHROUD — the notice withheld. Canvas strapped over the housing and up past the placard,
+## so the machine and its own sign go under together. The timer is still running underneath
+## it, on the same interval, with the same collider: the world knows and has decided you
+## should not.
+func _warn_shroud(b: AABB) -> void:
+	var r: float = maxf(maxf(b.size.x, b.size.z) * 0.5, 0.05)
+	var c: Vector3 = b.get_center()
+	var cloth: StandardMaterial3D = _warn_mat(WARN_CLOTH, 0.95, 0.0)
+	var strap: StandardMaterial3D = _warn_mat(WARN_STRAP, 0.85, 0.1)
+	var bot: float = b.position.y - 0.01
+	var top: float = _warn_cover_top(b) + 0.06
+	var h: float = maxf(top - bot, 0.05)
+	var mid: float = (bot + top) * 0.5
+	var w: float = r * 2.28
+	_warn_add(Vector3(c.x, mid, c.z), Vector3(w, h, w), cloth)
+	_warn_add(Vector3(c.x, top + 0.03, c.z), Vector3(w * 0.30, 0.06, w * 0.30), cloth)
+	_warn_add(Vector3(c.x, bot, c.z), Vector3(w + 0.07, 0.05, w + 0.07), cloth)
+	for s in [-1.0, 1.0]:
+		var o: float = float(s) * w * 0.5
+		_warn_add(Vector3(c.x, mid, c.z + o), Vector3(w + 0.01, h * 0.22, 0.012), strap)
+		_warn_add(Vector3(c.x + o, mid, c.z), Vector3(0.012, h * 0.22, w + 0.01), strap)
+
+
+func _warn_add(center: Vector3, box_size: Vector3, mat: Material) -> void:
+	var bm: BoxMesh = BoxMesh.new()
+	bm.size = box_size
+	var mi: MeshInstance3D = MeshInstance3D.new()
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = center
+	mi.add_to_group("hazard_warning")
+	add_child(mi)
+
+
+func _warn_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _warn_emissive(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.4
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	return m
+
+
 # Debug methods
 func _input(event):
 	if event is InputEventKey and event.pressed:

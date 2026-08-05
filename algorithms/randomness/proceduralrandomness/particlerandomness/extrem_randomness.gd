@@ -48,6 +48,52 @@ const CHAPTER_DEMOS: PackedStringArray = ["chaos", "noise", "pattern", "emergenc
 ## dna.fixture, never from a map.
 @export var scatter_seed: int = 0
 
+## STAGE-2 DNA — AXIS: WHAT THE SELECTION PRESSURE IS. Declared by the two tokens that
+## pin chapter five (evolutionary_algorithms, particle_randomness_evolutionary), and read
+## by extreme_randomness's own `chapter = evolution` because the update rule is shared.
+##
+## Chapter five is the only one of the five with a fitness function, and every term of it
+## was a literal: `int(particles.size() * 0.1)` decided who was fit, one moving target
+## decided what fit MEANT, and neither was reachable from a map. So the artifact whose
+## truth line is "evolution is the statistical consequence of reproduction with variation
+## under selection pressure" shipped with exactly one pressure and no way to vary it.
+##
+##   drift    nobody is fit. winner_count is 0, no particle is gold, nobody is followed,
+##            and the line only mutates — it spreads in place and never leaves where it
+##            started. The null case the rest are measured against.
+##   uniform  everybody is fit. All 100 turn gold at one radius and beeline for the same
+##            target together: the same reward for everyone, and the variety gone.
+##   culled   the shipped rule. The top tenth are winners, the other ninety chase a
+##            winner drawn at random and mutate on the way, which collapses the line into
+##            one tight knot with a gold core.
+##   split    two optima instead of one, flanking the line the population starts on, with
+##            alternate particles ranked against each. One field, two answers, and the
+##            two knots stay ~2.5 m apart.
+##
+## MEASURED, NOT ASSUMED. The rule was re-implemented in Python and run to the capture
+## harness's 1.1 s settle at four different wall-clock phases of the target's orbit:
+## drift ends as a 2.5 m cloud still at x=-4 with 0 gold; culled as a 0.18 m knot with 10
+## gold; uniform as a 1.9 m streak with 100 gold; split as two knots 2.50 m apart at every
+## phase tried. The first design for split — mirroring the shipped target through the
+## origin — measured a 0.5 m gap at two phases out of four, i.e. one knot, so it was
+## replaced by the flanking pair rather than shipped as a value that sometimes shows
+## nothing. The word is non_teleological_evolution's, and drift/uniform/split carry its
+## meanings exactly; `runaway` is NOT taken — see the registry note.
+@export_enum("drift", "uniform", "culled", "split") var selection: String = "culled"
+
+## Every value the update rule actually implements, so a typo in a map token falls back to
+## the shipped pressure instead of stranding a placement.
+const SELECTIONS: PackedStringArray = ["drift", "uniform", "culled", "split"]
+
+## The shipped truncation fraction, lifted out of update_evolutionary_algorithms unchanged.
+const ELITE_FRACTION: float = 0.1
+## `split` only. The population is staged along x = -5 .. -3 by start_demo, so its two
+## optima sit either side of the middle of that line and both are reachable inside a
+## second — which is what makes the two clusters legible in a still rather than two
+## journeys still in progress.
+const SPLIT_HOME: float = -4.0
+const SPLIT_SEPARATION: float = 1.25
+
 # Visual elements
 var particles = []
 var current_demo: int = 0
@@ -422,29 +468,64 @@ func update_emergent_behavior(delta) -> void:
 # Demo 5: Evolutionary algorithms
 func update_evolutionary_algorithms(delta):
 	var time = Time.get_ticks_msec() / 1000.0
-	
+
 	# Fitness function (in this case, proximity to a moving target)
 	var target = Vector3(
 		3 * sin(time * 0.5),
 		2 * cos(time * 0.7),
 		sin(time)
 	)
-	
+
+	# One optimum, one ranking, every particle in it — the shipped shape, and the path
+	# taken at every value except split.
+	if selection != "split":
+		_evolve_toward(particles, target, delta)
+		return
+
+	# Two optima. Alternate particles are ranked against each, so the population is one
+	# field asked two questions rather than two populations. The optima flank the line the
+	# demo stages, and inherit the shipped target's y and z motion so they still move.
+	var left: Array = []
+	var right: Array = []
+	for i in range(particles.size()):
+		if i % 2 == 0:
+			left.append(particles[i])
+		else:
+			right.append(particles[i])
+	_evolve_toward(left, Vector3(SPLIT_HOME - SPLIT_SEPARATION, target.y, target.z), delta)
+	_evolve_toward(right, Vector3(SPLIT_HOME + SPLIT_SEPARATION, target.y, target.z), delta)
+
+
+## How many of `n` ranked bodies count as winners. The shipped line was
+## `int(particles.size() * 0.1)`, which `culled` reproduces exactly.
+func _winner_count(n: int) -> int:
+	if selection == "drift":
+		return 0
+	if selection == "uniform":
+		return n
+	return int(n * ELITE_FRACTION)
+
+
+## One population ranked against one optimum. This is the shipped loop, with `particles`
+## read from the argument and the two guards `drift` needs — nothing else in it moved, so
+## at the default the arithmetic, the colour law, the radii and the order of the random
+## draws are the ones this demo has always run.
+func _evolve_toward(pop: Array, target: Vector3, delta) -> void:
 	# Sort particles by fitness (distance to target)
-	particles.sort_custom(func(a, b):
+	pop.sort_custom(func(a, b):
 		var dist_a = a.position.distance_to(target)
 		var dist_b = b.position.distance_to(target)
 		return dist_a < dist_b
 	)
-	
+
 	# Top 10% are "winners" that influence others
-	var winner_count = int(particles.size() * 0.1)
-	
-	for i in range(particles.size()):
-		var particle = particles[i]
+	var winner_count = _winner_count(pop.size())
+
+	for i in range(pop.size()):
+		var particle = pop[i]
 		var pos = particle.position
 		var velocity = particle.get_meta("velocity")
-		
+
 		if i < winner_count:
 			# Winners: move directly toward target with slight randomness
 			velocity = (target - pos).normalized() * 2.0
@@ -460,15 +541,20 @@ func update_evolutionary_algorithms(delta):
 			particle.radius = 0.08
 		else:
 			# Others: choose a random winner to follow + random mutation
-			var winner_idx = randi() % winner_count
-			var winner = particles[winner_idx]
-			
-			# Move toward winner position with randomness (mutation)
-			velocity = velocity * 0.9 + (winner.position - pos).normalized() * 0.5
+			if winner_count > 0:
+				var winner_idx: int = randi() % winner_count
+				var winner = pop[winner_idx]
+
+				# Move toward winner position with randomness (mutation)
+				velocity = velocity * 0.9 + (winner.position - pos).normalized() * 0.5
+			else:
+				# drift: there is no winner to follow, so the follow term is simply
+				# absent. Guarding this is not optional — `randi() % 0` is a crash.
+				velocity = velocity * 0.9
 			velocity += Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)) * 0.3
-			
+
 			# Color based on how close to being a winner
-			var rank_ratio = float(i) / particles.size()
+			var rank_ratio = float(i) / pop.size()
 			var material = particle.material as StandardMaterial3D
 			material.albedo_color = Color(
 				0.2 + 0.8 * (1.0 - rank_ratio),
@@ -540,9 +626,23 @@ func _read_grid_config_meta() -> void:
 ## particle positions on both of those, for nothing. Before _ready has run there is nothing
 ## staged, so the value is only recorded — which is also the path the capture harness takes
 ## when it sets the export directly.
+## Takes the `selection` axis if the word is one this file implements and is not already
+## the one in force. NOTHING IS REBUILT: update_evolutionary_algorithms reads `selection`
+## afresh every frame, so the new pressure applies on the next one and the population is
+## never torn down. That is why this hook is safe to call from anywhere — and why the
+## subclass can forward it without inheriting chapter's restaging.
+func _apply_selection(want_raw: String) -> void:
+	var want: String = want_raw.strip_edges().to_lower()
+	if SELECTIONS.find(want) < 0 or want == selection:
+		return
+	selection = want
+
+
 func apply_grid_config(config: Dictionary) -> void:
 	if config.has("scatter_seed"):
 		scatter_seed = int(config["scatter_seed"])
+	if config.has("selection"):
+		_apply_selection(str(config["selection"]))
 	if not config.has("chapter"):
 		return
 	var want: String = str(config["chapter"]).strip_edges().to_lower()

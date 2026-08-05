@@ -4057,6 +4057,27 @@
    }
   },
   "cube_projectile_spawner": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "warning": [
+      "none",
+      "stain",
+      "cage",
+      "beacon",
+      "shroud"
+     ]
+    },
+    "fixture": {
+     "idle_still": "true"
+    },
+    "default": "warning=none is the export default and the `_:` branch of _build_warning, which adds no node at all. All 9 placements are unchanged: Corridor_Random_Game, MindMap_Primitives, Room_Random_Game and Random_Game_* x5 plus TemplateMap_Descent13, of which six carry the long #mode:field#field_size:8x8#... chain and none of the nine passes a `warning` key. _build_warning runs LAST in _ready, after _setup_spawner, _find_player and activate_spawner, so MeshInstance3D, SpawnTimer, SpawnPoint, WarningParticles, SpawnSound, WarningSound and Label3D all keep their child indices. configure() reads the key only when it is PRESENT and names a legal value DIFFERENT from the one already standing, which matters because six of the nine send a dozen field_* keys on every load and must not tear the dressing down. An unrecognised word keeps the current value: a typo must not silently uncage a live hazard.",
+    "was": "BROKEN, and not by omission of a genome. The axis, its allow-list, its five-rung doc block, the field_seed pin and the idle_still fixture flag were already in CubeSpawner.gd from an earlier pass, and _ready and configure both CALLED _build_warning() — a function that existed nowhere in the script. In GDScript 4 that is a resolution error at parse time, so the script did not load and cube_projectile_spawner rendered nothing in any of its nine rooms. The declaration gate cannot catch this class: the export is real and its values are real, and it is the builder that is absent (dna_specimen's fault one step further along). The whole of this pass is the five builders, the bounds reader, the cover-height reader and this declaration. Found by scanning every .gd in b0428de74 'rescue(dna): 35 promotions that were written and never committed' for self-calls with no definition; the other eight hits were inherited helpers or a comment, so this is the rescue's only casualty.",
+    "note": "warning is kaleidocycle_enemy's word and its five values character for character — miura_crawler, scissor_stalker, kresling_spire, origami_droideka, path_cube, path_pyramid, path_wedge and force_vortex already ask it, and a room cannot coherently cage its crawlers and leave the thing that shoots at them unannounced. The colours, the `hazard_warning` group and the four builders are that artifact's, resized from this one's own AABB rather than copied at its scale, so the family photographs as one apparatus at eight sizes. The sharpest case in the family for its own reason: the spawner is not the danger, it is the SOURCE of the danger, and between two firings it is a box on the floor doing nothing at all — so what the room says about a currently idle box is not a property of the box. stain is legible only from inside the field of fire; beacon is the only rung that reaches you at the doorway; shroud reaches up past the placard at y 1.5 so the machine and its own hazard sign go under the canvas together, because a wrap that left the sign legible would not be a wrap. APPEARANCE ONLY: spawn_interval, projectile_speed, max_projectiles, target_prediction, spawn_mode and every field_* number are byte-identical across all five, and no value adds or removes a collider. A hazard that hides itself is not a gentler hazard.",
+    "fixture_note": "idle_still is a fixture and NOT an axis. auto_start is true, so activate_spawner runs in _ready and starts both a looping 0.5 s pulse tween on the housing and the 50-particle warning plume; a still 1.1 s in catches the box at an arbitrary scale between 1.0 and 1.2 and the plume at an arbitrary density, which is per-variant noise on top of the axis. idle_still skips both and is declared as the STRING \"true\" on purpose — the export is untyped for exactly this reason, since a typed bool rejects a fixture string before _ready and does it silently. field_seed is not in the fixture because it is not reachable in a still: spawn_mode defaults to FORWARD, which never draws from _rng, and the first projectile is due at t=6.0 s against a 1.1 s settle, so no capture of the default has a projectile in it at all.",
+    "declined": "spawn_interval, projectile_speed, fall_min/fall_max and jitter_interval were all considered and refused: a rate and a duration are invisible to a single frame, which is the info_board fault. spawn_mode = forward|falling_field is real, argues something (a shot aimed at you versus weather that does not know you are there) and is ALREADY reachable from a map token via configure()'s `mode` key — but the difference lives entirely in cubes that do not exist until t=6.0 s, so a still of the two modes is the same red box twice."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Timed hazard that spawns projectile cubes, leads the target, and fires warning effects before launch.",
