@@ -8,6 +8,17 @@
   "artifacts": {
     "rice_verifier_booth": {
       "dna": {
+        "measured": "PREDICTION FALSIFIED, and the `expected` block above is left as written. It predicted frame 4.0-4.5% at framing 0.55 and a move to bites. Actual: 1.11-1.32%, statistically unchanged from the 1.29% measured at framing 1.0. framing DID apply -- the subject went from 25% to 50% of frame width, verified by counting non-background pixels -- so the prediction failed on its reasoning, not on plumbing. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
+        "remedy": "THE FIX IS INK, NOT FRAMING, and slope_tangent_demo's registry note said so before this pass ran: 'no amount of reframing fixes a subject whose ink is one pixel wide.' The refusal axis mostly repaints the four MEANING cards and adds a lamp; the head panel, console, slot, RICE screen and the whole SYNTAX rack are invariant BY DESIGN, because the claim is that the booth works perfectly under all five values. Reframing multiplies the changed ink and the unchanged body by the same factor, so the ratio barely moves. To make this bite the semantic column has to carry more area -- taller cards, a filled rack panel behind them -- and that is a design pass, not a capture setting. NOT DONE IN THIS PASS: doing it badly to make a number go green is the failure this artifact is about.",
+        "colour_finding": "The greyscale verdict is the wrong lens here anyway. blank vs oracle measures focus 4.43% and COLOUR 81.94% -- unlit near-black cards against emissive gold is almost pure hue at similar luminance. The critic's own colour-only rescue caught it. `local` understates this axis.",
+        "framing": 0.55,
+        "fixture": {"rotor_frozen": true},
+        "promoted": "2026-08-05",
+        "stage": "2 - variation",
+        "fixture_why": "rotor_frozen pins the `spin` rotor. It is the only nondeterministic value in the file: _process advances the hub at 2.2 rad/s from _ready, so the blade angle at the shutter is a function of how many frames the headless boot managed, and two captures of `spin` were not comparable to each other. The flag is DELIBERATELY UNTYPED because the sweep applies fixtures with Object.set() before _ready and a typed bool silently rejects the string 'true' -- the flag never arrives, the rotor keeps turning, and the sheet reports the clock as an axis. No map passes rotor_frozen, so nothing placed is affected.",
+        "still_note": "The axis lives entirely in the RIGHT-HAND COLUMN of the head panel -- roughly 0.30 x 0.55 m of a 0.72 x 1.25 m body. The console, slot, RICE 1953 screen and the whole SYNTAX rack are invariant by design, because the claim is that the booth is in perfect working order under all five values. So a low frame percentage here is dilution and not an inert axis, and the first sweep measured exactly that: frame 1.29% against focus 17.25%, which the critic correctly called LOCAL rather than weak.",
+        "expected": "A PREDICTION, so the re-sweep falsifies it. At framing 0.55 the frame edge is 1.58 m against 2.87 m, an area ratio of 3.3x, so expect frame to land near 4.0-4.5% and the verdict to move from local to bites. Focus should stay near 17% -- focus is already measured in the hot region and reframing does not change what happens there. IF frame COMES BACK UNDER 2%, do not touch the design: check that dna.framing reached the rig at all, because a framing key that never arrives and an axis that does nothing produce the same sheet.",
+        "colour_note": "blank vs oracle measured focus 4.51% and COLOUR 80.80% on the first sweep -- the largest colour-only rescue in the batch. Unlit near-black cards against emissive gold is almost pure hue at similar luminance, which is precisely the pair a greyscale verdict would have called twins.",
         "axes": {
           "refusal": [
             "blank",
@@ -79,6 +90,11 @@
     },
     "critic_regress_stack": {
       "dna": {
+        "measured": "THE ONE THAT BITES, and the only one whose axis is silhouette-scale rather than detail-scale: frame 4.35-5.07%, focus 29-31%. Confirmed by per-variant pixel measurement rather than by the verdict alone -- subject HEIGHT varies 19% (single) / 22% (circular) / 39-40% (stacked, outside, sealed) of the frame, while every sibling holds constant height across all five of its values. Camera distance is fixed per token, not per variant, so that height variation is the artifact and not the rig. This is why leaving it at framing 1.0 was correct: its argument is in the outline. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
+        "promoted": "2026-08-05",
+        "stage": "2 - variation",
+        "framing_why": "LEFT AT 1.0 DELIBERATELY, while its three siblings come in to 0.55. This axis is not a detail: the dark mark travels the full height of the body -- footing to crown is about 1.3 m on a 1.32 m subject -- and `sealed` adds a shell over the whole stack. That is a silhouette-scale change, which is what full-frame fitting is for, and it is why this was the one token of four to bite on the first sweep at frame 2.95% / focus 25.50%. Tightening it would raise the number without making the argument any more visible, which is chasing the metric rather than reading the picture.",
+        "still_note": "The mark is the same object under every value -- same radius, same unlit black -- and only its POSITION argues. An axis that shrank it as critics were added would contradict the file's own truth line. `outside` is the one exception and it is principled: the mark shrinks there because a differently-constructed check genuinely does catch more, and it reappears under the outsider rather than vanishing.",
         "axes": {
           "relocation": [
             "single",
@@ -149,6 +165,13 @@
     },
     "fluency_seam": {
       "dna": {
+        "measured": "PREDICTION FALSIFIED. Predicted 4.5-5.0% at framing 0.55; actual 1.80-1.87% against 1.49% before. framing applied and is verified: subject width went 39% -> 64% of frame. THE ARITHMETIC OF WHY IT COULD NOT WORK: the right plate is 0.44 m of a 1.30 m span, so at framing 0.55 it occupies 21.8% of frame width, or 4.73% of frame area IF FULLY CHANGED. Measured 1.80% means barely a third of the plate actually differs between values -- because the plate itself is identical from value to value and only the TEXT on it changes. Text is thin ink, and 3.3x of very thin ink is still very thin ink. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
+        "remedy": "Ink, not framing. `smooth` vs `twice` differ by one white plate carrying different words; the values that add real area -- `spread` (seven plates) and `lattice` (a 35-cell grid) -- are the ones pulling the mean up at all. The honest repair is to give the divergence itself a body: a filled contrast panel behind the disagreeing lines rather than a 7 mm underline. NOT DONE IN THIS PASS.",
+        "framing": 0.55,
+        "promoted": "2026-08-05",
+        "stage": "2 - variation",
+        "still_note": "The LEFT plate is invariant on purpose -- it is the product as shipped, and the artifact's argument depends on it not changing. So the axis can only ever move the right half: about 0.44 x 0.26 m of a 1.30 m span, plus whatever apparatus the value adds behind it. First sweep: frame 1.49%, focus 21.50%, verdict LOCAL. The `spread` and `lattice` values add the most ink and should be the strongest pairs; `smooth` against `twice` is the thinnest, and that thinness is the price of `smooth` being an honest picture of the shipped condition.",
+        "expected": "At framing 0.55 the frame edge is 1.82 m against 3.31 m, 3.3x in area, so expect frame near 4.5-5.0% and a move to bites. The 1.30 m base still sits at 71% of the edge, so no crop.",
         "axes": {
           "crossing": [
             "smooth",
@@ -219,6 +242,14 @@
     },
     "negative_control_fixture": {
       "dna": {
+        "measured": "PREDICTION FALSIFIED. Predicted 3.5-4.0%; actual 1.16-1.20%, unchanged from 1.17% at framing 1.0. Same diagnosis as its two siblings: the case, dial, arcs and SELF-TEST header are invariant, and what the axis moves is a thin black needle, a 3 cm lamp, a lever and a small card. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
+        "remedy": "Ink. The needle is the thinnest element and it carries the injected-vs-green distinction almost alone. THE CONSTRAINT THAT MAKES THIS DELICATE: two of the five values are MEANT to be nearly identical -- `unproven` and `certified` differ only by a sealed wire, a caption and the mounted red card, because the difference between them is history rather than reading. A repair that separated those two would be a repair AGAINST the artifact's argument. The correct move is to enlarge the red record card, not to make the two greens differ.",
+        "colour_finding": "The critic rescued two pairs here from a false twin verdict: absent vs unproven (focus 4.69%, colour 10.59%) and absent vs silent (focus 5.07%, colour 12.93%). Luminance cannot see the lamp's hue change; the eye can.",
+        "framing": 0.55,
+        "promoted": "2026-08-05",
+        "stage": "2 - variation",
+        "still_note": "TWO OF THE FIVE VALUES READ GREEN AND ARE MEANT TO BE NEARLY IDENTICAL. `unproven` and `certified` differ by a sealed lever wire, a caption, and the mounted red record card -- and that near-identity IS the argument, because the difference between them is history rather than reading. A twin verdict on that specific pair would be the artifact working, not failing. The values that must separate are injected (needle hard over into the red arc, a wholesale change) and absent (no lever at all). First sweep: frame 1.17%, focus 14.84%, LOCAL.",
+        "expected": "At framing 0.55 the frame edge is 1.25 m against 2.28 m, 3.3x in area, so expect frame near 3.5-4.0%. If the critic reports a TWIN on unproven-vs-certified, read it as confirmation and not as a defect -- the correct repair would be to make the red record card larger, not to make the two greens differ.",
         "axes": {
           "proof": [
             "unproven",

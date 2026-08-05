@@ -58,6 +58,14 @@ const TextScreenScript = preload("res://commons/ui/text_screen.gd")
 
 @export_enum("blank", "regress", "oracle", "spin", "honest") var refusal: String = "honest": set = _set_refusal
 
+## Pins the `spin` rotor so a still is reproducible. DELIBERATELY UNTYPED: the
+## sweep applies fixtures with Object.set() before _ready, and a typed bool
+## rejects the string "true" silently — the flag never arrives and the frame is
+## a photograph of the boot's frame count rather than of the axis.
+@export var rotor_frozen = false
+## Where the frozen rotor sits. Off-axis so the three blades read as three.
+@export var rotor_angle: float = 0.62
+
 @export var booth_width: float = 0.72
 @export var booth_height: float = 1.18
 @export var booth_depth: float = 0.42
@@ -123,9 +131,12 @@ func _set_refusal(v: String) -> void:
 
 func _process(delta: float) -> void:
 	# Only `spin` animates: the halting case is the one that never settles.
+	# Frozen, it holds rotor_angle, so two captures of `spin` are comparable.
+	if rotor_frozen:
+		return
 	if refusal == "spin" and is_instance_valid(_rotor):
 		_spin_time += delta
-		_rotor.rotation.y = _spin_time * 2.2
+		_rotor.rotation.y = rotor_angle + _spin_time * 2.2
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -241,6 +252,7 @@ func _build_semantic() -> void:
 			# Still running. The literal halting case, caught mid-turn.
 			var hub := Node3D.new()
 			hub.position = Vector3(x, _slot(1), z + 0.04)
+			hub.rotation.y = rotor_angle
 			add_child(hub)
 			_semantic_nodes.append(hub)
 			_rotor = hub
@@ -362,7 +374,12 @@ static func normalise_refusal(value: String, fallback: String) -> String:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	if not config_data.has("refusal"):
-		return
-	refusal = normalise_refusal(str(config_data["refusal"]), refusal)
-	print("RiceVerifierBooth: refusal=%s" % refusal)
+	# Each key handled independently. An early `return` on the axis key would
+	# silently drop a fixture-only config on this fallback path, which is the
+	# same class of fault as a typed bool refusing the string "true".
+	if config_data.has("rotor_frozen"):
+		var rf: Variant = config_data["rotor_frozen"]
+		rotor_frozen = rf if rf is bool else str(rf).to_lower() in ["true", "1", "yes"]
+	if config_data.has("refusal"):
+		refusal = normalise_refusal(str(config_data["refusal"]), refusal)
+		print("RiceVerifierBooth: refusal=%s" % refusal)
