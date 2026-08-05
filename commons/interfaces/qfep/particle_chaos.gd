@@ -115,8 +115,20 @@ func _build_particles() -> void:
 	_material.angular_velocity_min = -360.0
 	_material.angular_velocity_max = 360.0
 	
+	# THE AXIS, which until now was declared, exported, documented to the value —
+	# and never read. The corpus audit found it: an @export_enum and thirty lines
+	# of comment specifying five silhouettes, with _build_particles() constructing
+	# the unconstrained cloud regardless. A sweep would have rendered five
+	# identical frames and reported the axis inert, which would have been a fact
+	# about a missing function.
+	#
+	# Applied AFTER the free build above and never instead of it, so `none` is the
+	# shipped material byte for byte: every branch below is additive and `none`
+	# has no branch at all.
+	_apply_constraint()
+
 	_particles.process_material = _material
-	
+
 	# Particle mesh - small spheres
 	var particle_mesh = SphereMesh.new()
 	particle_mesh.radius = 0.02
@@ -150,3 +162,60 @@ func pulse() -> void:
 		_particles.explosiveness = 0.8
 		await get_tree().create_timer(0.1).timeout
 		_particles.explosiveness = 0.0
+
+
+## Put a law back into the free cloud, one at a time, exactly as the DNA block
+## above specifies. Each branch changes the SILHOUETTE — never the count, the
+## speeds, the lifetime or the colour, because a finer or coarser cloud is the
+## reaction_diffusion failure: five frames differing only in texture, which a
+## still cannot tell from five frames of nothing.
+func _apply_constraint() -> void:
+	match constraint:
+		"gravity":
+			# A field. One direction is cheaper than the others, so the ball
+			# becomes a plume: chaos still total in x and z, broken in y.
+			_material.gravity = Vector3(0.0, -4.0, 0.0)
+		"jet":
+			# A channel. The heading is dictated at birth, so the same random
+			# speeds make a narrow column — freedom of magnitude, not direction.
+			_material.direction = Vector3(0.0, 1.0, 0.0)
+			_material.spread = 12.0
+			_material.emission_sphere_radius = emission_radius * 0.25
+		"vortex":
+			# A circulation. Emission on a thin horizontal annulus with tangential
+			# acceleration: motion is bound to a circle and the cloud reads as a disc.
+			_material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_RING
+			_material.emission_ring_radius = emission_radius * 1.6
+			_material.emission_ring_inner_radius = emission_radius * 1.2
+			_material.emission_ring_height = emission_radius * 0.12
+			_material.emission_ring_axis = Vector3(0.0, 1.0, 0.0)
+			_material.tangential_accel_min = 6.0
+			_material.tangential_accel_max = 9.0
+			_material.direction = Vector3(0.0, 0.0, 0.0)
+			_material.spread = 15.0
+		"drag":
+			# Dissipation. Damping bleeds the velocity away before the lifetime is
+			# out, so the cloud collapses toward its own emitter — the
+			# thermodynamic opposite of spread, and the one value where the
+			# particles are not free at all.
+			_material.damping_min = 6.0
+			_material.damping_max = 9.0
+		_:
+			pass    # "none" — the shipped lineage, untouched
+
+
+## Config from a map token. Guarded twice: a word must be in the artifact's own
+## allow-list AND differ from what is in play, and the rebuild only runs once
+## _ready has built, because the grid calls this deferred.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if not config_data.has("constraint"):
+		return
+	var want: String = str(config_data["constraint"]).strip_edges().to_lower()
+	if not CONSTRAINTS.has(want) or want == constraint:
+		return
+	constraint = want
+	if _particles == null:
+		return          # _ready has not built yet; it will read the new value
+	_particles.queue_free()
+	_particles = null
+	_build_particles()
