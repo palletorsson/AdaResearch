@@ -137,7 +137,11 @@ def specimens():
         "source": "BiomeGridTokens.ROLES",
         "axes": {"role": growth_roles},
         "note": "seed grows now; field waits to be claimed; halo spills wilderness past the rim; "
-                "mute is the declared vacuum. The role is the cell's verb.",
+                "mute is the declared vacuum. The role is the cell's verb. SWEEP FINDING "
+                "(2026-07-27): only seed and halo render — field is dormant BY DESIGN "
+                "(claimable), but `edge` ('transition band' in the design doc) is declared in "
+                "BiomeGridTokens.ROLES and implemented NOWHERE in GridBiomeComponent. A "
+                "declared role with no renderer: either build the blend band or drop the word.",
     }
     return out
 
