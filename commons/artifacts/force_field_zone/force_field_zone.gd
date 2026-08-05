@@ -15,6 +15,39 @@ class_name ForceFieldZone
 ## gravity_scale 0 + velocity += field·dt; the player_body: velocity += (field − its gravity)·dt).
 ## The vector_machine finds this via group "force_field" and calls set_field_vector().
 
+## ─── STAGE-2 DNA (promoted 2026-08-05) ────────────────────────────────────────
+##
+##  law       — which constant vector rules the volume. force_field_visualizer's
+##              word, taken because it answers the same question (which law is in
+##              force in here) and shares its "gravity" value meaning the same
+##              thing. Its OTHER three are REFUSED: a point charge, a dipole and a
+##              vortex are position-dependent fields, and this zone is a UNIFORM
+##              one by construction — one vector everywhere is the whole of what it
+##              argues, and _physics_process adds the same `f` to every body in the
+##              box. Taking those words would name a mechanism this object lacks.
+##  boundary  — how the place declares its own edge before you step into it. The
+##              word is vr_tile_editor's, for the same question; its value list
+##              (none|edge|cell|lattice) is refused, because a 5 m volume of space
+##              has no cells and no lattice. It has a wall, a stake, or nothing.
+##
+##  flow_time is NOT an axis — it is the capture fixture. The face chevrons stream
+##  on TIME, so two variants photographed a fraction of a second apart differ by
+##  the flow phase alone and an inert axis measures as a live one. 0.0 freezes
+##  them. Default 1.0 is the shipped animation, line for line.
+## ──────────────────────────────────────────────────────────────────────────────
+
+const LAWS := {
+	"gravity": Vector3(0.0, -9.8, 0.0),
+	"lift": Vector3(0.0, 9.8, 0.0),
+	"crossing": Vector3(7.0, 7.0, 0.0),
+	"weightless": Vector3.ZERO,
+}
+const BOUNDARIES := ["flow", "cage", "corners", "open"]
+
+@export_enum("gravity", "lift", "crossing", "weightless") var law: String = "gravity"
+@export_enum("flow", "cage", "corners", "open") var boundary: String = "flow"
+@export var flow_time: float = 1.0
+
 @export var size: float = 5.0
 @export var field_vector: Vector3 = Vector3(0.0, -9.8, 0.0)   # default: gravity, down
 @export var edge_color: Color = Color(0.40, 0.78, 1.0)
@@ -29,19 +62,72 @@ var _readout: Label3D
 var _scale_mat: StandardMaterial3D
 var _restore: Dictionary = {}            # body -> original gravity_scale
 var _pb: CharacterBody3D                  # cached player body (the thing with .velocity)
+var _built: bool = false
 
 
 func _ready() -> void:
 	add_to_group("force_field")
+	_apply_law()
 	_build()
+	_built = true
 	set_physics_process(not Engine.is_editor_hint())
 
 
+# "gravity" SHORT-CIRCUITS: the shipped field_vector is handed back untouched, so a
+# map that overrides field_vector alone still gets its own vector instead of being
+# reset to the table's (0, -9.8, 0). The other three name a vector and take it.
+func _apply_law() -> void:
+	if law == "gravity" or not LAWS.has(law):
+		return
+	field_vector = LAWS[law]
+
+
+# Guarded twice. Before this pass the body of this function tore down every child
+# and rebuilt on ANY call, including one naming nothing it owns — the force_pad
+# trap. A word is taken only when it validates against the code's own list AND
+# differs, and the rebuild fires only after _ready has built once, so the nine
+# existing placements (which pass no keys at all) reach no assignment and no
+# rebuild.
 func apply_grid_config(config_data: Dictionary) -> void:
-	if config_data.has("size"): size = float(config_data["size"])
-	if config_data.has("emissive"): emissive = bool(config_data["emissive"])
-	field_vector = _parse_vec(config_data.get("field_vector", field_vector))
-	edge_color = _parse_color(config_data.get("edge_color", edge_color), edge_color)
+	var dirty: bool = false
+	if config_data.has("law"):
+		var l: String = str(config_data["law"]).to_lower()
+		if LAWS.has(l) and l != law:
+			law = l
+			_apply_law()
+			dirty = true
+	if config_data.has("boundary"):
+		var b: String = str(config_data["boundary"]).to_lower()
+		if BOUNDARIES.has(b) and b != boundary:
+			boundary = b
+			dirty = true
+	if config_data.has("size"):
+		var s: float = float(config_data["size"])
+		if not is_equal_approx(s, size):
+			size = s
+			dirty = true
+	if config_data.has("emissive"):
+		var e: bool = bool(config_data["emissive"])
+		if e != emissive:
+			emissive = e
+			dirty = true
+	if config_data.has("flow_time"):
+		var t: float = float(config_data["flow_time"])
+		if not is_equal_approx(t, flow_time):
+			flow_time = t
+			dirty = true
+	if config_data.has("field_vector"):
+		var v: Vector3 = _parse_vec(config_data["field_vector"])
+		if v != field_vector:
+			field_vector = v
+			dirty = true
+	if config_data.has("edge_color"):
+		var col: Color = _parse_color(config_data["edge_color"], edge_color)
+		if col != edge_color:
+			edge_color = col
+			dirty = true
+	if not _built or not dirty:
+		return
 	for c in get_children():
 		remove_child(c); c.queue_free()
 	_build()
@@ -62,26 +148,34 @@ func _build() -> void:
 	add_child(_area)
 
 	# --- the wireframe cube edges -----------------------------------------------
+	# boundary: "flow" and "cage" draw the twelve edges; "corners" leaves only the
+	# eight marks that stake the volume out; "open" draws no edge at all and lets
+	# the central vector be the only thing that says a place is here.
 	var em := _glow_mat(edge_color, 1.4)
 	var c := [Vector3(-h, 0, -h), Vector3(h, 0, -h), Vector3(h, 0, h), Vector3(-h, 0, h),
 		Vector3(-h, size, -h), Vector3(h, size, -h), Vector3(h, size, h), Vector3(-h, size, h)]
 	var edges := [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]]
-	for e in edges:
-		add_child(_cylinder_between(c[e[0]], c[e[1]], 0.025, em))
-	for v in c:
-		add_child(_sphere(v, 0.05, em))
+	if boundary == "flow" or boundary == "cage":
+		for e in edges:
+			add_child(_cylinder_between(c[e[0]], c[e[1]], 0.025, em))
+	if boundary != "open":
+		for v in c:
+			add_child(_sphere(v, 0.05, em))
 
 	# --- the force shader on the six faces (chevrons stream the way F points) ----
-	_flow_mat = ShaderMaterial.new()
-	_flow_mat.shader = FLOW_SHADER
-	_flow_mat.set_shader_parameter("flow_color", arrow_color)
-	var faces := MeshInstance3D.new()
-	faces.name = "Faces"
-	var bm := BoxMesh.new(); bm.size = Vector3.ONE * size
-	faces.mesh = bm
-	faces.material_override = _flow_mat
-	faces.position = Vector3(0, h, 0)
-	add_child(faces)
+	_flow_mat = null
+	if boundary == "flow":
+		_flow_mat = ShaderMaterial.new()
+		_flow_mat.shader = FLOW_SHADER
+		_flow_mat.set_shader_parameter("flow_color", arrow_color)
+		_flow_mat.set_shader_parameter("time_scale", flow_time)
+		var faces := MeshInstance3D.new()
+		faces.name = "Faces"
+		var bm := BoxMesh.new(); bm.size = Vector3.ONE * size
+		faces.mesh = bm
+		faces.material_override = _flow_mat
+		faces.position = Vector3(0, h, 0)
+		add_child(faces)
 
 	# --- the big central vector + readout ---------------------------------------
 	_central = Node3D.new(); _central.position = Vector3(0, h, 0); add_child(_central)

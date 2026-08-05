@@ -906,6 +906,28 @@
    }
   },
   "ca_bridge": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "rule": [
+      30,
+      90,
+      110,
+      250
+     ]
+    },
+    "fixture": {
+     "build_rows": 120
+    },
+    "fixture_why": "MANDATORY for the sweep, and it is a fact about the bench rather than about the artifact. The bridge grows one row per generation_speed seconds out of `length` rows - at the scene's own 0.05 s x 120 rows that is six full seconds of wall clock. A still photographed at the bench's settle time catches a stump, and worse, a different stump per value, because a rule that spawns more cubes renders slower: four frames that differ by how far each one got. build_rows 0 is the shipped grow-over-time behaviour and is what all four placements get; a positive number builds that many rows synchronously inside _ready and then stops, so the capture photographs a finished deck. Capture bench only - no map sets it.",
+    "default": "rule=30 - the shipped @export default, which the .tscn does not override (it sets width 31, length 120 and generation_speed 0.05 and nothing else). MEASURED, not assumed: seven string occurrences across five map files - `ca_bridge:0:-5` in CA_GameOfLife, bare `ca_bridge` in Disposition_Test_Maze, bare `ca_bridge` and `ca_bridge:180:0.0` in Zone_ForbiddenWetLab, and `curation_station#artifacts:ca_bridge...` in Corridor_CA_GameOfLife and Curation_Bay_cellularautomata_0 where the # keys belong to the station rather than to this token. The `:0:-5` form is artifact:rotation:y_offset, not config. None passes a rule key, and the new apply_grid_config returns without regenerating unless a key is present AND differs from the value the node holds - so all four keep walking rule 30 at the same speed as before.",
+    "was": "everything this artifact argues is one 8-bit number, and the number was unreachable. `rule` was already an @export, but apply_grid_config was a literal `pass`, so no map token could name it and every placement walked rule 30. The runner refused it as NO TURNABLE KNOBS: the knob existed and nothing was connected to it.",
+    "shares_vocabulary_with": "complexity_pattern, lifeform_walker, mold_network, structure_growth - the WORD `rule` only. All four use it for the same question, which local update law is in force, and the registry already carries it over two disjoint value lists (Life-family rulestrings, and agent behaviours), so a third is consistent rather than a drift.",
+    "vocabulary_declined": "life|highlife|seeds|replicator|maze|coral, the value list complexity_pattern and lifeform_walker share. Those are 2D Moore-neighbourhood birth/survival rulestrings and this is a 1D three-cell automaton: there is no `life` here to name, and taking those answers would name a mechanism this object does not have. For an elementary CA the rules ARE their numbers, and the artifact's own @identity already says so - `critical_parameter: rule (0-255)`. Same shape as bouncing_ball taking `regime` and refusing under/critical/over. Also declined: a second `seeding` axis (one cell vs a random row), for the reason complexity_pattern recorded when it declined density - the initial row is drawn with an unseeded randf(), so four random-start frames would be four different bridges and any bite number would measure the RNG rather than the rule.",
+    "ladder_note": "the four values were MEASURED, not taken from a textbook. The exact update in _apply_rule was re-implemented in Python at this scene's own geometry (width 31, periodic wrap, single centre seed, 120 rows) and every rule 0-254 scored for fill and pairwise difference. 184 and 22 were dropped for filling about 3% of the deck - a thread, not a bridge, and far too small a subject to photograph. What ships spans Wolfram's classes and no two values share more than 58% of their cells: 30 is 48.0% full (class 3, chaotic - a broken deck), 90 is 23.5% (class 2, the Sierpinski gasket - nested self-similar gaps), 110 is 49.7% (class 4, the universal one), 250 is 87.5% (class 1/2, near-solid - the control, a ramp that computes nothing).",
+    "still_note": "with the fixture in place the rule is resolved entirely at build time and the bridge stops growing, so one frame is a complete account of the axis. Without it the axis is real and the CAPTURE is the thing that is time-domain, which is the distinction the brief's table is about."
+   },
    "category": "emergence",
    "complexity": "intermediate",
    "description": "Cellular Automata Bridge.",

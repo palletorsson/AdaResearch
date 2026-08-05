@@ -511,6 +511,8 @@
 				"seed": "Unused structural seed (default 0)",
 				"angle": "0..1 launch angle, flat to steep - range peaks at 45 deg (default 0.5)",
 				"power": "0..1 launch speed v0 (default 0.6)",
+				"workings": "outcome | trace | operands | expression - how much of the arithmetic the bench draws (default trace)",
+				"comparison": "single | fan | pairs | envelope - what the one throw is shown against, every companion fired at the same v0 (default single)",
 				"complexity": "Arc sample count (default 6)",
 				"color_a": "Pad + component arrows",
 				"color_b": "The arc + launch vector",
@@ -518,6 +520,31 @@
 				"emissive": "Bool - lift glow (default true)",
 				"sculpt_height": "Height in meters",
 				"sculpt_width": "Footprint width in meters"
+			},
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"comparison": [
+						"single",
+						"fan",
+						"pairs",
+						"envelope"
+					],
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					]
+				},
+				"default": "workings=trace, comparison=single - both are the fall-through arm of their own match and run no code whatever, and both matches sit AFTER _settle(rig). Nothing above that line was touched by this pass: the tilted pad, the base plate, the ground bar, the stroboscopic parabola, the launch vector, the dashed vx/vy legs and the apex/range/drop markers are the same calls with the same literals in the same order, so the fit, the scale and the placement are computed from exactly the geometry that shipped. All 4 existing placements (MindMap_VectorForces, VFM_05_Launch, VFM_Forces_Playground, Vectors_Act3_FieldsAndMotion) carry the bare token launch_arc or launch_arc:0:0 with no config overrides, so apply_grid_config never sees either key",
+				"was": "workings was written into the script in the 2026-08-02 rescue batch and never declared, so the sweep had no axis to turn and the runner refused the artifact for NO TURNABLE KNOBS - seed, angle, power, complexity and three colours are @exports that move or recolour one fixed arc and argue nothing. comparison did not exist in any form: the bench drew ONE throw while its own description claimed range = v0^2 sin 2theta / g peaks at 45 degrees, which is a statement about a FAMILY of throws that a single arc cannot make. The angle slider sweeps the family one member at a time and the exhibit forgets each as it goes",
+				"shared_with": "workings is transform_composition_workbench's word with its four values in the same order, seconded by its bench-mates dot_aligner, vector_add, vector_sub and projection_shadow; DERIVED from the @export_enum in launch_arc.gd, not transcribed. comparison is seed_replay_demo's and space_filling_curve_gallery's question - what is this one instance shown against - and keeps their 'single' anchor value character for character. The other three answers are this artifact's own, because a projectile's companions are angles and not grammars or replicas",
+				"note": "hand promotion 2026-08-05. comparison is the axis because the thing this exhibit teaches is a RELATION between throws and it could only ever draw one. fan fires five angles from the same launcher at the same v0: 45 lands furthest, and the five flights leave only THREE pips, because 20 and 70 land together and 35 and 55 land together, so the peak and the symmetry about it are both in the picture instead of in the caption. pairs is that symmetry alone, 25/65 and 40/50, each pair sharing a colour and ONE landing pip - a flat fast throw and a high slow one arriving together. envelope drops the individual flights for the boundary of everything reachable at this v0, y = v0^2/2g - g x^2/2v0^2, which the live arc kisses from inside at exactly one point because it IS the envelope of the family. Every companion is integrated with the same GRAVITY and the same v0 as the live launch, so the only difference between any two of them is the angle. The axes are independent: comparison adds ghost flights, workings decides how the live one is annotated, and the fan is still five arcs at workings=expression",
+				"declined": "foresight (catapult's word, seconded by force_pad) was considered and refused, though the brief handed it over as the obvious third use. It names how much of the flight you are given BEFORE you fire, and on both of those machines that is a real stance because both fire: the catapult has a FIRE button and a ball that follows the arc, the pad throws the player who steps on it, and in each case the drawn parabola is a prediction of an event that has not happened. Nothing on this bench ever fires. Its parabola is not a preview, it is the exhibit - a strobe photograph of a flight already complete. Worse, the word would be a second name for a knob that exists: workings=outcome already strips the strobe and keeps the apex and range markers, which is exactly foresight=landing, and workings=trace is foresight=parabola. Declaring both would give the sweep two words for one drawing and no rule for which wins when a map sets them against each other. Taking a word without its answers is the dishonest half of a shared vocabulary; taking a word whose answers are already spoken by another axis is the same fault twice",
+				"declined_gravity": "an axis over GRAVITY (const 3.0, the one hard-coded constant left in the file, and the one thing here that is not the launcher's choice) was designed, checked and thrown away, and the reason is worth keeping. At fixed v0 and theta, changing g is a SIMILARITY TRANSFORM on the trajectory: range = v0^2 sin 2theta / g and apex = v0^2 sin^2 theta / 2g both scale as 1/g, so the arc's shape is invariant and only its size changes. This artifact is a ToyConsole and _settle() rescales the demo to a fixed 0.78 m span, which undoes precisely that. A weak-gravity and a strong-gravity variant would therefore photograph as the SAME PICTURE, and the only pixels that moved would be the fixed-size furniture - the 0.42 m pad, the 0.05 m strobe spheres - shrinking against a renormalised arc. A bite report would have measured the scaler and called it physics. Only g = 0 genuinely changes the shape (a straight ray, no apex, no range), which is one real value against two decorative ones",
+				"harness_note": "the axes are declared comparison-FIRST on purpose. build_dna_gallery takes the first two axes and trims values off the END of each list until the cross product fits --max, which defaults to 9: 4 x 4 is 16, so whichever axis comes second loses half its values. workings is already measured on five bench-mates and comparison is the claim that needs evidence, so comparison keeps all four and workings is cut to outcome|trace. Run --max=16 for the full cross. Then: read the bite report with this in hand. The comparison geometry is added after _settle, so the demo rig keeps the shipped scale and the ghost arcs reach past it: the envelope's ceiling stands at v0^2/2g = 1.35 in rig units against the live arc's apex of 0.70, and the 65-degree fan member at 1.10. The capture AABB counts MeshInstance3D, so the camera does pull back for those three values and part of any measured change is that pull-back. It was kept because the pull-back here is small where catapult's was total: this is a console, and the 1.5 m housing, the monitor, the slider and the label plates are identical in all four frames and dominate the box, so the demo cannot collapse the AABB the way a bare 8 m trajectory preview did. If the report comes back faint anyway, the fixture to reach for is demo_only=true, an @export on the shared ToyConsole base that drops the housing and photographs the demo alone at 1.9 m. It is deliberately NOT declared as a fixture, because demo_only is a TYPED bool and this pass could not run a capture to prove that whatever sets it passes a real bool rather than the string \"true\""
 			},
 			"dev_themes": [
 				"forces",
@@ -707,6 +734,8 @@
 			"parameters": {
 				"seed": "Arm bearing jitter (default 0)",
 				"leverage": "0..1 angle of the push F from the arm r - drives the torque sin(theta), the tau vector length and the spin (default 0.78)",
+				"workings": "outcome | trace | operands | expression - how much of the arithmetic the bench draws (default trace)",
+				"purchase": "balanced | long | stub - how the same torque is bought, |r| against |F| at a constant product (default balanced)",
 				"complexity": "Flywheel spokes + spin-arc resolution (default 6)",
 				"color_a": "Steel rig",
 				"color_b": "The arm vector r",
@@ -715,6 +744,29 @@
 				"emissive": "Bool - lift glow (default true)",
 				"sculpt_height": "Height in meters",
 				"sculpt_width": "Footprint width in meters"
+			},
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"purchase": [
+						"balanced",
+						"long",
+						"stub"
+					],
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					]
+				},
+				"default": "workings=trace, purchase=balanced - trace is the fall-through arm of a match that sits AFTER _settle(rig) and runs no code at all, and balanced never enters the purchase match, so the two shipped literals arm_len = 0.82 and f_len = 0.55 reach the build untouched. Every derived quantity is therefore unchanged by construction: torque_mag is still clampf(r_dir.cross(f_dir).length()), the tau length is still 0.25 + torque_mag * 0.85, the wheel still turns torque_mag * 48 degrees and the monitor still reads the same rpm. The 4 direct placements (MindMap_VectorForces, VFM_02_Operations, VFM_Operations_Playground, Vectors_Act2_VectorArithmetic) carry the bare token torque_crank or torque_crank:0:0, and the fifth reference, inside a curation_station#artifacts list in VFM_02_Operations_Folded, is bare too - no config key reaches apply_grid_config anywhere",
+				"was": "workings was written into the script in the 2026-08-02 rescue batch and never declared, so the sweep had no axis to turn and the runner refused the artifact for NO TURNABLE KNOBS. purchase did not exist: the bench writes tau = |r| |F| sin theta on its own expression board and the LEVERAGE slider turns exactly ONE of those three factors. |r| was welded at 0.82 and |F| at 0.55 - as a bare local in _build_demo and as a literal 0.55 repeated inside two of the workings helpers - so no map could argue with the product, and the identity was a sentence about three numbers the exhibit only let you touch one of",
+				"shared_with": "workings is transform_composition_workbench's word with its four values in the same order, seconded by the bench-mates dot_aligner, vector_add, vector_sub and projection_shadow; DERIVED from the @export_enum in torque_crank.gd, not transcribed. purchase is this artifact's own word - no sibling names the trade between a lever arm and a push, because no sibling HAS a lever",
+				"note": "hand promotion 2026-08-05. purchase is the lever's bargain, and it is built so that the bargain is the only thing that moves: long doubles the arm and halves the push, stub halves the arm and doubles the push, and because the multipliers are 2.0 and 0.5 - which shift a binary exponent and leave the mantissa alone - the product |r||F| is the SAME FLOAT in all three values. tau, the wheel angle, the spin sweep, the flywheel glow and the rpm readout are therefore bit-identical across the axis by construction, and what changes is a long thin arm with a light hand against a stubby arm with a hard shove whose tip lands at 0.41, on the flywheel's own rim (inner 0.35, outer 0.45), which is exactly where a crank pin sits. At workings=operands this is at its sharpest: the dashed parallelogram spanned by r and F, whose AREA is |tau|, is redrawn in three quite different shapes enclosing one area. At workings=expression the board substitutes the live numbers - 1.64 x 0.28 and 0.41 x 1.10 both print the same result as 0.82 x 0.55 - so the algebra says out loud what the geometry shows",
+				"harness_note": "declared purchase-FIRST on purpose: build_dna_gallery takes the first two axes and trims values off the END of each list until the cross product fits --max (default 9), and 3 x 4 is 12, so the second axis loses its tail. This way purchase keeps all three values and workings is cut to outcome|trace|operands. Run --max=12 for the full cross. If a bite report comes back faint, the fixture to reach for is demo_only=true, an @export on the shared ToyConsole base that drops the 1.5 m housing and photographs the demo alone at 1.9 m - the axis moves only the demo, and the matte Braun console is dead weight in the frame. It is deliberately NOT declared as a fixture here, because demo_only is a TYPED bool and this pass could not run a capture to prove that whatever sets it passes a real bool rather than the string \"true\"",
+				"declined": "handedness (VectorCrossProduct's word, right|left|both, which the brief handed over and which fits the CLAIM exactly - this bench computes r_dir.cross(f_dir) and left would take F x r, the same anti-commutativity in the same product). It was refused for the object's body, not the word's meaning, and the geometry was measured rather than guessed. The machine stands on the floor: a pedestal cylinder of radius 0.30 spanning y 0.00-0.44, an axle of radius 0.05 spanning y 0.02-0.94, the hub at 0.92. The negative perpendicular points straight down that axle. A left-handed tau arrow drawn honestly from the hub (radius 0.034, length 0.25 + sin theta * 0.85 = 1.05 at the shipped leverage) lies INSIDE the axle for 0.90 of its 1.05 length, because 0.034 < 0.05, and the only part of it a camera can see is the 0.11 cone emerging beneath the pedestal at y -0.13. The second piece of evidence goes the same way: the swept spin arrows are a ring of radius 0.22 centred on hub + axis * (tau_len * 0.55), which for a downward axis is y 0.34 - inside a pedestal of radius 0.30 spanning 0.00-0.44. So the flip would photograph as the gold axis being DELETED from the top of the frame rather than moved to the other side of the plane, and the bite report would score that deletion high and mean nothing by it. This is the occlusion row of the null table, and its prescribed fix - change the fixture - cannot help, because no camera angle sees inside a solid pedestal. VectorCrossProduct can host the word precisely because its vectors float from an origin in free space with nothing standing under them. Rehousing this crank on a gantry so the wheel hangs would make room for the axis, and would also make the axis a fact about the mounting"
 			},
 			"dev_themes": [
 				"linear_algebra",
@@ -1806,6 +1858,7 @@
 			],
 			"parameters": {
 				"lift": "0..1 swing amplitude (momentum carried)",
+				"carried": "one | two | all - how many balls go in, and therefore how many come out (default one)",
 				"seed": "variation seed",
 				"complexity": "detail (default 6)",
 				"color_a": "rig / primary",
@@ -1813,6 +1866,23 @@
 				"accent": "highlight",
 				"emissive": "bool glow (default true)",
 				"demo_only": "capture mode: drop the console, demo only"
+			},
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"carried": [
+						"one",
+						"two",
+						"all"
+					]
+				},
+				"default": "carried=one - _carried_in() returns 1 from the fall-through arm of its match, which makes n_in = 1 and n_out = 1, and the loop's two tests then reduce to exactly the code they replace: `i < 1` is the old `i == 0` and `i >= BALLS - 1` is the old `i == BALLS - 1`. The arrow guard is the same reduction - `lift > 0.04 and not is_zero_approx(ang)` is true on precisely the two end balls when the old `(i == 0 or i == BALLS - 1) and lift > 0.04` was - and the readout's new %d in / %d out substitutes 1 and 1, reproducing the shipped string character for character. BALLS is still 5, the frame, the strings, the spacing and the settle are untouched, so all 4 existing placements (MindMap_VectorForces, VFM_08_Arena, VFM_Forces_Lab, Vectors_Act4b_Oscillation), every one of which carries the bare token, render byte-identically",
+				"was": "seven @exports, six of them a rate, a size or a colour, and the seventh - lift - a swing amplitude. Not one of them changes what the cradle argues, and the runner refused the artifact for NO TURNABLE KNOBS. The demonstration itself was welded into the ball loop as `if i == 0` and `elif i == BALLS - 1`: the console could draw exactly one sentence, one in and one out, and that sentence is only the first line of the lesson",
+				"note": "hand promotion 2026-08-05. THE AXIS IS THE COUNT, because the count IS the demonstration - lift two and two leave, which is the fact that separates a momentum cradle from any other row of hanging balls. At one, three balls stand still as couriers; at two, the courier line is down to a single ball; at all, every ball is lifted together, nobody is left to carry anything, nothing is transmitted and the readout says 5 in, 0 out - a five-ball pendulum wearing a cradle's frame. Appearance only in the strict sense: no collision rule, no mass, no timing and no physics of any kind is touched, because this console DRAWS its pose rather than integrating it. That is also why the axis exists here at all",
+				"shared_with": "nothing, deliberately. standstill (newton_cradle, none|catch|chalk|scale|tally) was considered first, as the direct sibling's word, and refused: it names what an apparatus says with its balls hanging DEAD, and this console's balls are never dead - at the shipped lift of 0.6 the two ends stand at 31 degrees with momentum arrows over them, and the one pose that would satisfy the word is already reachable by pulling the exported lift slider to zero. Its five answers are release catches, chalked arcs, graduated quadrants and bead tallies - hardware invented to stand in for a motion that could not be photographed. Here the motion IS photographed",
+				"harness_note": "one axis of three values, so nothing is trimmed at the default --max=9 and the shipped pose is always one of the three frames. The hot pixels are the accent momentum arrows and the glowing balls, which is exactly what the axis moves - two arrows at one, four at two, five at all - so a fixture should not be needed. If it is, demo_only=true is an @export on the shared ToyConsole base that drops the 1.5 m housing and photographs the demo alone at 1.9 m; it is left undeclared here because demo_only is a TYPED bool and this pass could not run a capture to prove that whatever sets it passes a real bool and not the string \"true\"",
+				"note_declined": "the two artifacts are the same claim under opposite conditions, and it is worth writing down which way round. newton_cradle REFUSED this very axis on 2026-08-03, under the name lift, because its swing is integrated in _physics_process: _release_left() sets an angle and the balls are moving on the next frame, and with a 0.6 m string the quarter period is 0.39 s, so a settled capture photographs a cradle mid-swing at an arbitrary phase. It took standstill instead, and could only take standstill. momentum_cradle has no _physics_process at all - _build_demo computes each ball's angle and places it - so the pose that is unphotographable there is the only thing that exists here. Neither artifact could have taken the other's axis"
 			},
 			"dev_themes": [
 				"forces",
@@ -2160,7 +2230,34 @@
 				"size": "cube edge in metres (default 4)",
 				"field_vector": "the force vector (default 0,-9.8,0)",
 				"grid_n": "field-line arrows per axis (default 3)",
+				"law": "gravity | lift | crossing | weightless - which constant vector rules the volume (default gravity)",
+				"boundary": "flow | cage | corners | open - how the zone declares its own edge (default flow)",
+				"flow_time": "capture fixture, not an axis: 0.0 freezes the streaming chevrons (default 1.0)",
 				"emissive": "Bool"
+			},
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"fixture": {
+					"flow_time": 0.0
+				},
+				"axes": {
+					"law": [
+						"gravity",
+						"lift",
+						"crossing",
+						"weightless"
+					],
+					"boundary": [
+						"flow",
+						"cage",
+						"corners",
+						"open"
+					]
+				},
+				"default": "law=gravity, boundary=flow - gravity SHORT-CIRCUITS: _apply_law() returns before touching anything, so field_vector stays the shipped @export Vector3(0, -9.8, 0), and a map that overrides field_vector alone keeps its own vector instead of being reset to the table's. boundary=flow builds the twelve edge cylinders, then the eight corner spheres, then the six-face BoxMesh carrying force_flow.gdshader - the same three blocks in the same order as before this pass, with nothing added and nothing skipped. All 9 placements (MindMap_VectorForces, Vectors_Act5_ForceAsPlace, Void_Crossing and the six Trial_*_forces rooms, which mount it through exhibit_furniture) carry the bare token with no config keys, so apply_grid_config reaches no assignment, sets no dirty flag and never rebuilds.",
+				"was": "four @export knobs and not one categorical among them: size is a length, field_vector three numbers, edge_color and arrow_color two colours. The zone had exactly one look - a wireframe cage with flowing faces - and exactly one law unless a vector_machine stood next to it and a hand moved its sliders. apply_grid_config tore down every child and rebuilt on ANY call, the force_pad trap.",
+				"note": "law is force_field_visualizer's word and shares its gravity value; its other three (point_charge, dipole, vortex) are REFUSED, because those are position-dependent fields and this zone adds ONE constant f to every body inside it - that uniformity is the whole of what it argues. boundary is vr_tile_editor's word with its value list refused: a volume of space has no cells and no lattice. flow_time is the fixture, not an axis - the chevrons stream on TIME and two variants shot a fraction of a second apart would differ by phase alone."
 			},
 			"dev_themes": [
 				"forces",

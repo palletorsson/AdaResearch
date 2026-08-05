@@ -53,6 +53,32 @@ const ORIGIN_MARGIN_Y: float = 0.16
 const BUTTON_SCENE := preload("res://commons/interactables/push_button.tscn")
 const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 
+# ── DNA axis (stage 2, promoted 2026-08-05) ──────────────────────────────────
+# workings: how much of the addition the board draws. Everything below was
+#   hard-coded as the only way a sum could be shown — the chain, both
+#   parallelogram ghosts, all seven live numbers, the triangle-inequality
+#   readout and its brass needle went up together on every placement, so the
+#   board could only ever make its whole case at once and no room could ask it
+#   to assert an answer, or to show a route, or to lay both operands out.
+#     outcome    — the resultant a+b alone, and the answer. No route, no
+#                  parallelogram, no arithmetic: addition asserted.
+#     trace      — + a from the origin and b chained off a's tip: the
+#                  tip-to-tail route you would actually walk.
+#     operands   — + the two ghosts (b from the origin, a off b's tip), which
+#                  close the parallelogram: both inputs from a shared tail, so
+#                  the two constructions stand side by side.
+#     expression — + the written arithmetic: all seven live numbers, the
+#                  substituting headline, and |a+b| <= |a|+|b| with its needle.
+#                  This is what the board always drew.
+# The baked formula plate ("a + b = (ax+bx, ay+by)") is present at EVERY value,
+# so a measured bite is a bite in the drawing and never in a caption.
+# Shares its word and its four values, in order, with length_lantern (the same
+# slate plinth and brass rim), vector_add / vector_sub and
+# transform_composition_workbench.
+const WORKINGS_VALUES: Array = ["outcome", "trace", "operands", "expression"]
+
+@export_enum("outcome", "trace", "operands", "expression") var workings: String = "expression"
+
 # ── Tunable DNA (overridable via apply_grid_config) ───────────────────────────
 var a_start: Vector2 = Vector2(3.0, 2.0)   # initial a in grid cells
 var b_start: Vector2 = Vector2(1.0, 3.0)   # initial b in grid cells
@@ -80,6 +106,7 @@ var _inequality_needle: Node3D = null       # brass needle: pegs at |a+b| == |a|
 var _info_label: Label = null             # left column, live numbers
 var _readout_label: Label3D = null          # billboarded headline above the action
 var _inequality_label: Label3D = null       # billboarded |a+b| <= |a|+|b| readout
+var _inequality_display: Node3D = null      # the bezel+screen housing the readout above
 
 var _slider_a: Node3D = null
 var _slider_b: Node3D = null
@@ -501,6 +528,9 @@ func _build_readouts() -> void:
 		Vector3(0.0, pedestal_height + BOARD_HEIGHT + 0.12, 0.0), COLOR_BRASS)
 	if _inequality_label:
 		_inequality_label.font_size = 44
+		# The whole instrument (bezel + screen + glyphs), so `workings` withholds
+		# the reading rather than leaving a lit but blank screen hanging.
+		_inequality_display = _inequality_label.get_parent() as Node3D
 
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -630,6 +660,27 @@ func _refresh_line(_arrow: Node3D) -> void:
 # PER-FRAME GEOMETRY UPDATE
 # ═════════════════════════════════════════════════════════════════════════
 
+# ── workings gates ───────────────────────────────────────────────────────────
+# At "expression" — the default, and the only thing this board could ever draw
+# — all three return true, so every piece stays on and the picture is the
+# pre-promotion one, part for part.
+
+## a from the origin and b chained off its tip: the tip-to-tail route.
+func _shows_chain() -> bool:
+	return workings != "outcome"
+
+
+## The two dashed ghosts that close the parallelogram.
+func _shows_parallelogram() -> bool:
+	return workings == "operands" or workings == "expression"
+
+
+## The written arithmetic: every live number, the substituting headline and the
+## triangle-inequality readout with its brass needle.
+func _shows_arithmetic() -> bool:
+	return workings == "expression"
+
+
 func _refresh_all() -> void:
 	var a: Vector2 = _read_a()
 	var b: Vector2 = _read_b()
@@ -671,6 +722,27 @@ func _update_geometry(a: Vector2, b: Vector2) -> void:
 	_set_arrow_alpha(_ghost_a, 0.85 if _parallelogram_emphasis else 0.4)
 	_set_arrow_alpha(_ghost_b, 0.85 if _parallelogram_emphasis else 0.4)
 
+	# workings gate. Only VISIBILITY is touched — every mesh is still built and
+	# still positioned, so the artifact's AABB is identical at all four values
+	# and a sweep frames every rung from the same camera.
+	var chain_on: bool = _shows_chain()
+	var para_on: bool = _shows_parallelogram()
+	var arith_on: bool = _shows_arithmetic()
+	if _arrow_a:
+		_arrow_a.visible = chain_on
+	if _arrow_b_chain:
+		_arrow_b_chain.visible = chain_on
+	if _ghost_a:
+		_ghost_a.visible = para_on
+	if _ghost_b:
+		_ghost_b.visible = para_on
+	if _label_a:
+		_label_a.visible = chain_on
+	if _label_b:
+		_label_b.visible = chain_on
+	if _inequality_display:
+		_inequality_display.visible = arith_on
+
 	# Board labels follow the geometry — each sits at the midpoint of its own arrow.
 	if _label_a:
 		_label_a.position = (origin_p + a_tip) * 0.5 + Vector3(0.04, 0.04, 0.02)
@@ -683,6 +755,7 @@ func _update_geometry(a: Vector2, b: Vector2) -> void:
 	# between the detour |a|+|b| and the straight |a+b|. At equality (parallel)
 	# slack -> 0 and the needle points to the top notch.
 	if _inequality_needle:
+		_inequality_needle.visible = arith_on
 		_inequality_needle.position = result_tip + Vector3(0.12, 0.0, 0.02)
 		var detour: float = a.length() + b.length()
 		var straight: float = (a + b).length()
@@ -703,22 +776,35 @@ func _update_text(a: Vector2, b: Vector2) -> void:
 	var detour: float = mag_a + mag_b
 	var angle_deg: float = rad_to_deg(atan2(r.y, r.x))
 
-	# Left column: live numbers.
+	# Left column: live numbers. The rungs are cumulative and "expression" — the
+	# default — appends all seven lines in the shipped order, so the plate reads
+	# exactly as it always has.
 	if _info_label:
 		var lines: Array = []
-		lines.append("a = (%.1f, %.1f)" % [a.x, a.y])
-		lines.append("b = (%.1f, %.1f)" % [b.x, b.y])
-		lines.append("a+b = (%.1f, %.1f)" % [r.x, r.y])
-		lines.append("|a| = %.2f" % mag_a)
-		lines.append("|b| = %.2f" % mag_b)
-		lines.append("|a+b| = %.2f" % mag_r)
-		lines.append("angle = %.1f deg" % angle_deg)
+		if workings == "outcome":
+			# The answer, with nothing in shot that made it.
+			lines.append("a+b = (%.1f, %.1f)" % [r.x, r.y])
+		else:
+			lines.append("a = (%.1f, %.1f)" % [a.x, a.y])
+			lines.append("b = (%.1f, %.1f)" % [b.x, b.y])
+			lines.append("a+b = (%.1f, %.1f)" % [r.x, r.y])
+			if workings != "trace":
+				lines.append("|a| = %.2f" % mag_a)
+				lines.append("|b| = %.2f" % mag_b)
+				lines.append("|a+b| = %.2f" % mag_r)
+			if _shows_arithmetic():
+				lines.append("angle = %.1f deg" % angle_deg)
 		_info_label.text = "\n".join(lines)
 
-	# Headline readout (substitutes the actual integers into the sum).
+	# Headline readout (substitutes the actual integers into the sum). At
+	# "outcome" the substitution IS the working, so the headline states the
+	# result on its own instead.
 	if _readout_label:
-		_readout_label.text = "(%.0f,%.0f) + (%.0f,%.0f) = (%.0f,%.0f)" % [
-			a.x, a.y, b.x, b.y, r.x, r.y]
+		if workings == "outcome":
+			_readout_label.text = "a+b = (%.0f,%.0f)" % [r.x, r.y]
+		else:
+			_readout_label.text = "(%.0f,%.0f) + (%.0f,%.0f) = (%.0f,%.0f)" % [
+				a.x, a.y, b.x, b.y, r.x, r.y]
 
 	# Triangle-inequality readout: |a+b| <= |a|+|b|, both numbers live.
 	if _inequality_label:
@@ -899,6 +985,17 @@ func apply_grid_config(config: Dictionary) -> void:
 		return
 	# Let the base handle scale_multiplier (and rebuild if already built).
 	super.apply_grid_config(config)
+
+	# DNA axis. Every piece workings governs is (re)positioned and (re)shown by
+	# _update_geometry / _update_text on the next frame anyway, so this needs no
+	# teardown at all — only a refresh so a still taken before the next _process
+	# already reads right. A token naming nothing here never reaches either.
+	if config.has("workings"):
+		var new_workings: String = str(config["workings"]).strip_edges().to_lower()
+		if WORKINGS_VALUES.has(new_workings) and new_workings != workings:
+			workings = new_workings
+			if _scene_built:
+				_refresh_all()
 
 	var needs_local_rebuild: bool = false
 	if config.has("a_start") and config["a_start"] is Vector2:

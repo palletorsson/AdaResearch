@@ -43,6 +43,25 @@ class_name LaunchArc
 @export_enum("outcome", "trace", "operands", "expression") var workings: String = "trace"
 const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
 
+## AXIS — WHAT THE THROW IS SHOWN AGAINST. The bench has always drawn exactly one arc,
+## and its own description claims a thing one arc cannot show: that range = v₀² sin 2θ / g
+## peaks at 45°, and that two different angles reach the same place. Every companion here
+## is fired from the SAME v₀ — only the angle differs — so the comparison is honest.
+##
+##   single    the shipped exhibit: one throw and nothing beside it.
+##   fan       five angles from one launcher, 20° to 70°. The 45° arc lands furthest, and
+##             the five flights leave only THREE pips: 20/70 land together, 35/55 too.
+##   pairs     two complementary pairs, 25/65 and 40/50, each pair in its own colour and
+##             each landing on ONE pip: a flat fast throw and a high slow one, same target.
+##   envelope  the parabola of safety — the boundary of every point reachable at this v₀,
+##             which the live arc kisses from inside. The reachable SET, not a throw.
+##
+## Added after _settle, like WORKINGS: at "single" the match runs no code at all, so the
+## fit, the scale and the placement of the shipped arc are computed from the shipped
+## geometry alone.
+@export_enum("single", "fan", "pairs", "envelope") var comparison: String = "single"
+const COMPARISONS: PackedStringArray = ["single", "fan", "pairs", "envelope"]
+
 const GRAVITY := 3.0
 
 
@@ -58,6 +77,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("workings"):
 		var _w: String = String(config_data["workings"]).strip_edges().to_lower()
 		workings = _w if WORKINGS.has(_w) else workings
+	if config_data.has("comparison"):
+		var _c: String = String(config_data["comparison"]).strip_edges().to_lower()
+		comparison = _c if COMPARISONS.has(_c) else comparison
 	apply_base_config(config_data)
 	color_a = _parse_color(config_data.get("color_a", color_a), color_a)
 	color_b = _parse_color(config_data.get("color_b", color_b), color_b)
@@ -144,6 +166,19 @@ func _build_demo() -> void:
 		_:
 			pass                                   # "trace" — the legacy lineage
 
+	# COMPANY for the throw, appended after WORKINGS and for the same reason: every value
+	# here adds geometry and never touches what _settle already fitted. "single" runs no
+	# code, so the shipped exhibit is byte for byte the one the 4 placements draw.
+	match _comparison_value():
+		"fan":
+			_comparison_fan(rig, v0, pad_y)
+		"pairs":
+			_comparison_pairs(rig, v0, pad_y)
+		"envelope":
+			_comparison_envelope(rig, v0, pad_y)
+		_:
+			pass                                   # "single" — the one throw
+
 
 # --- WORKINGS ---------------------------------------------------------------
 # One axis, four values, shared word for word with the rest of the vector subject.
@@ -153,6 +188,11 @@ func _build_demo() -> void:
 func _workings_value() -> String:
 	var w: String = String(workings).strip_edges().to_lower()
 	return w if WORKINGS.has(w) else "trace"
+
+
+func _comparison_value() -> String:
+	var c: String = String(comparison).strip_edges().to_lower()
+	return c if COMPARISONS.has(c) else "single"
 
 
 func _unlayer(n: Node) -> void:
@@ -218,3 +258,69 @@ func _workings_expression(rig: Node3D, v0: float, theta: float, rng_x: float, ap
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	l.position = Vector3(0.0, 0.0, 0.03)
 	board.add_child(l)
+
+
+# --- COMPARISON -------------------------------------------------------------
+# The companions the throw is shown against. Every one of them is fired at the SAME v₀ as
+# the live launch and integrated with the same GRAVITY, so what separates them is the
+# angle and nothing else — the claim the exhibit has always written and never drawn.
+
+## One ghost flight, strobed like the live one but dimmer and finer. Returns its range so
+## the caller can mark where it lands.
+func _ghost_arc(parent: Node3D, theta: float, v0: float, pad_y: float, mat: Material, dot: float) -> float:
+	var vx: float = v0 * cos(theta)
+	var vy: float = v0 * sin(theta)
+	var t_land: float = 2.0 * vy / GRAVITY
+	var steps: int = 26
+	for i in range(steps + 1):
+		var t: float = t_land * float(i) / float(steps)
+		var py: float = pad_y + vy * t - 0.5 * GRAVITY * t * t
+		parent.add_child(_sphere(Vector3(vx * t, py, 0.0), dot, mat))
+	return vx * t_land
+
+
+## FAN — five angles from one launcher. The 45° flight lands furthest, which is the peak
+## the description has always asserted, and the five arcs leave only THREE pips, because
+## 20/70 land together and 35/55 land together. Only the first three angles plant a pip;
+## the steep pair arrives at marks that are already standing, which IS the lesson (and it
+## keeps two boxes off exactly coincident transforms).
+func _comparison_fan(rig: Node3D, v0: float, pad_y: float) -> void:
+	var ghost: Material = _glow_mat(color_b.lerp(Color(0.28, 0.29, 0.33), 0.55), 0.5)
+	var pip: Material = _glow_mat(accent, 1.4)
+	for deg in [20.0, 35.0, 45.0, 55.0, 70.0]:
+		var d: float = float(deg)
+		var reach: float = _ghost_arc(rig, deg_to_rad(d), v0, pad_y, ghost, 0.026)
+		if d <= 45.0:
+			rig.add_child(_box(Vector3(reach, pad_y - 0.06, 0.0), Vector3(0.02, 0.10, 0.02), pip))
+
+
+## PAIRS — complementary angles, 25/65 and 40/50, each pair sharing one colour and one
+## landing pip. A flat fast throw and a high slow one arrive at the same place: the range
+## identity is symmetric about 45°, and here that symmetry is a picture and not a formula.
+func _comparison_pairs(rig: Node3D, v0: float, pad_y: float) -> void:
+	var wide: Material = _glow_mat(color_b, 0.85)
+	var near: Material = _glow_mat(accent.lerp(color_b, 0.35), 0.85)
+	var pip: Material = _glow_mat(accent, 1.8)
+	var r_wide: float = _ghost_arc(rig, deg_to_rad(25.0), v0, pad_y, wide, 0.028)
+	_ghost_arc(rig, deg_to_rad(65.0), v0, pad_y, wide, 0.028)
+	var r_near: float = _ghost_arc(rig, deg_to_rad(40.0), v0, pad_y, near, 0.028)
+	_ghost_arc(rig, deg_to_rad(50.0), v0, pad_y, near, 0.028)
+	rig.add_child(_box(Vector3(r_wide, pad_y - 0.07, 0.0), Vector3(0.03, 0.13, 0.03), pip))
+	rig.add_child(_box(Vector3(r_near, pad_y - 0.07, 0.0), Vector3(0.03, 0.13, 0.03), pip))
+
+
+## ENVELOPE — the parabola of safety: y = v₀²/2g − g x²/2v₀², the boundary of every point
+## this launcher can reach at all. It is the envelope of the whole family, so the live arc
+## touches it from inside at exactly one point, and the dashed rule is the ceiling — the
+## height a straight-up throw would reach and nothing can pass.
+func _comparison_envelope(rig: Node3D, v0: float, pad_y: float) -> void:
+	var edge: Material = _glow_mat(accent.lerp(color_b, 0.5), 1.0)
+	var x_max: float = v0 * v0 / GRAVITY
+	var top: float = v0 * v0 / (2.0 * GRAVITY)
+	var steps: int = 30
+	for i in range(steps + 1):
+		var x: float = x_max * float(i) / float(steps)
+		var h: float = top - GRAVITY * x * x / (2.0 * v0 * v0)
+		rig.add_child(_sphere(Vector3(x, pad_y + h, 0.0), 0.022, edge))
+	rig.add_child(_dashed(Vector3(0.0, pad_y + top, 0.0), Vector3(x_max * 0.55, pad_y + top, 0.0), 0.009,
+		_glow_mat(accent.lerp(Color(0.25, 0.26, 0.30), 0.45), 0.45)))

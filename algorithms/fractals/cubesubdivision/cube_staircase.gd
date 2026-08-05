@@ -14,8 +14,26 @@ extends Node3D
 # relationships: Sibling to recursive_chair and recursive_table; all share the subdivision-to-furniture pattern
 # truth: A staircase is a cube that learned to subdivide itself along its own diagonal.
 
+# --- DNA (stage 2, promoted 2026-08-05) --------------------------------------
+# assembly: how much of the built staircase is standing. The @identity claims
+#   "Handrails and stringers arise as structural necessity from the step
+#   geometry, not designed separately" — a sentence no placement could test,
+#   because the three build phases were hard-wired to run in order every time.
+#   The rungs are cumulative, from the bare result of the subdivision up to the
+#   architecture:
+#     treads     — the n horizontal slabs alone: what the diagonal cut yields.
+#     steps      — + the risers: each slice closed into a step you could climb.
+#     stringers  — + the two side walls: the cut becomes a built object.
+#     full       — + handrail, posts and balusters (what this always built).
+# step_count: the artifact's own declared critical_parameter, and the whole
+#   argument of the truth line — a staircase IS a discretised diagonal. At 1 it
+#   is a single block, at 24 the treads are thinner than the rail and the eye
+#   reads a ramp again; 6 is the shipped granularity.
+const ASSEMBLY_VALUES: Array = ["treads", "steps", "stringers", "full"]
+
 @export var stair_size: float = 2.0
 @export var step_count: int = 6
+@export_enum("treads", "steps", "stringers", "full") var assembly: String = "full"
 @export var show_construction: bool = true
 @export var step_delay: float = 0.3
 
@@ -31,13 +49,22 @@ var timer: float = 0.0
 var is_constructing: bool = false
 var build_phase: int = 0  # 0=steps, 1=sides, 2=rails
 
+# True once _ready has built (or started building) once, so apply_grid_config
+# knows whether a changed value needs a rebuild or will be picked up by the
+# first build that has not happened yet.
+var _built: bool = false
+
 func _ready() -> void:
+	# step_count divides stair_size in three places; 0 would be a division by
+	# zero. 6 is unaffected.
+	step_count = maxi(1, step_count)
 	if show_construction:
 		is_constructing = true
 		current_step = 0
 		build_phase = 0
 	else:
 		_build_instant()
+	_built = true
 
 func _process(delta: float) -> void:
 	if not is_constructing:
@@ -71,6 +98,19 @@ func _build_instant() -> void:
 	_build_sides()
 	_build_handrail()
 
+# ── assembly gates ───────────────────────────────────────────────────────────
+# At "full" — the default and the only thing this artifact could ever build —
+# all three return true, so every existing placement runs the identical code.
+
+func _shows_risers() -> bool:
+	return assembly != "treads"
+
+func _shows_stringers() -> bool:
+	return assembly == "stringers" or assembly == "full"
+
+func _shows_handrail() -> bool:
+	return assembly == "full"
+
 func _build_single_step(index: int) -> void:
 	var step_width = stair_size
 	var step_depth = stair_size / step_count
@@ -90,7 +130,7 @@ func _build_single_step(index: int) -> void:
 	)
 
 	# Riser (vertical face)
-	if index > 0:
+	if index > 0 and _shows_risers():
 		var riser_height = step_height - tread_thickness
 		var riser_y = y_pos - tread_thickness * 0.5 - riser_height * 0.5
 		var riser_z = z_pos - step_depth * 0.5
@@ -104,6 +144,8 @@ func _build_single_step(index: int) -> void:
 	print("Step %d: Built tread and riser" % index)
 
 func _build_sides() -> void:
+	if not _shows_stringers():
+		return
 	# Create side walls (stringers) that follow the stair profile
 	var total_height = stair_size
 	var total_depth = stair_size
@@ -131,6 +173,8 @@ func _build_sides() -> void:
 	print("Built side stringers")
 
 func _build_handrail() -> void:
+	if not _shows_handrail():
+		return
 	var rail_radius = stair_size * 0.025
 	var post_height = stair_size * 0.4
 	var rail_offset = stair_size * 0.52
@@ -225,5 +269,50 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Map tokens reach the DNA through here. Nothing rebuilds unless a value the
+## staircase owns ACTUALLY changed and _ready has already built once — a bare
+## `cube_staircase` token (which is what all three existing placements are)
+## never gets past the first line.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config == null or config.is_empty():
+		return
+
+	var changed: bool = false
+
+	if config.has("assembly"):
+		var want: String = str(config["assembly"]).strip_edges().to_lower()
+		if ASSEMBLY_VALUES.has(want) and want != assembly:
+			assembly = want
+			changed = true
+
+	if config.has("step_count"):
+		var n: int = maxi(1, int(config["step_count"]))
+		if n != step_count:
+			step_count = n
+			changed = true
+
+	if config.has("stair_size"):
+		var s: float = float(config["stair_size"])
+		if s > 0.0 and not is_equal_approx(s, stair_size):
+			stair_size = s
+			changed = true
+
+	if config.has("step_delay"):
+		var d: float = maxf(0.0, float(config["step_delay"]))
+		if not is_equal_approx(d, step_delay):
+			step_delay = d
+			# Pure timing — nothing standing has to be torn down for it.
+
+	if config.has("show_construction"):
+		var raw: Variant = config["show_construction"]
+		var flag: bool = false
+		if raw is String:
+			flag = str(raw).strip_edges().to_lower() in ["true", "1", "yes"]
+		else:
+			flag = bool(raw)
+		if flag != show_construction:
+			show_construction = flag
+			changed = true
+
+	if changed and _built:
+		reset()

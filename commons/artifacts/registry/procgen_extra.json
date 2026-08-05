@@ -2805,6 +2805,33 @@
    }
   },
   "cube_staircase": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "assembly": [
+      "treads",
+      "steps",
+      "stringers",
+      "full"
+     ],
+     "step_count": [
+      1,
+      3,
+      6,
+      12,
+      24
+     ]
+    },
+    "fixture": {
+     "show_construction": false
+    },
+    "fixture_note": "MANDATORY for the sweep, and NOT an axis. show_construction ships true, so the staircase assembles itself one part every step_delay (0.3 s) and takes ~2.4 s at the shipped six steps. capture_config_sweep settles 1.1 s before the shot and only 0.35 s before the AABB pre-pass, so an unpinned sweep would photograph half-built stairs and place its one fixed camera on a single tread. false takes the _build_instant() branch that already existed for exactly this case. Capture bench only - no placement passes this key.",
+    "default": "assembly=full, step_count=6 - full is the only assembly the artifact could ever build: all three gate helpers return true for it, so _build_instant/_execute_build run the identical steps-then-sides-then-handrail sequence over the identical geometry, and 6 is the shipped export untouched. All 3 placements (Fractal_Recursion, Corridor_Fractal_Recursion, Hangar_Fractals_Walk, plus the Curation_Bay_fractals_0 / Proto_Fractal_Recursion copies) are BARE tokens with no #key:value, and apply_grid_config now returns on the first line for an empty config, so none of them reaches the new code at all.",
+    "was": "stair_size, step_count, show_construction and step_delay were all @export, and apply_grid_config() was `pass` - the knobs existed in the inspector and no map token could turn one. The three build phases ran unconditionally, so the @identity's claim that 'handrails and stringers arise as structural necessity from the step geometry' was a sentence no room could test, and the truth line 'a staircase is a cube that learned to subdivide itself along its own diagonal' shipped at exactly one granularity.",
+    "note": "assembly is cumulative, not exclusive: treads is the bare result of the diagonal cut (n slabs, nothing holding them), steps closes each slice with its riser, stringers adds the two side walls that make it an object rather than a diagram, full adds the rail, posts and balusters. It bites in the silhouette - the handrail is the tallest thing in the frame and the stringers are the widest, so removing them moves the outline, not a detail. step_count is the artifact's own critical_parameter and its argument, x4 either side of the shipped six: 1 is a single block (a stair with no stair in it), 3 coarse, 6 shipped, 12 fine, 24 where the tread is thinner than the rail and the diagonal reads as a ramp again - the discretisation never becoming the thing it approximates. The two are orthogonal: every assembly value reads at every count. NOT `tick` (zeno_staircase's word for the same ladder on a staircase) because zeno pins its rungs to 1/3/9/27/81 and this artifact's shipped default is 6 - taking the word would either move a live placement or make the same rung name a different number on two staircases.",
+    "kin": "cube_subdivision, recursive_chair and recursive_table are the sibling subdivision-to-furniture family in the same directory; none is promoted yet. zeno_staircase (tick + evidence) is the other staircase in the corpus and argues the same limit, from the other end."
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Staircase created through diagonal cube subdivision with treads, risers, stringers and handrail",
@@ -2936,7 +2963,36 @@
      3.0,
      6.0
     ],
-    "size_group": "environment"
+    "size_group": "environment",
+    "tick": "once | coarse | fine | dense | limit - how many splits the record carries: 1, 3, 6, 12, 24 (default dense)",
+    "walk": "population | drill | spread - which cube gets split next (default population)",
+    "build_mode": "capture fixture, not an axis: grow (the shipped 0.8 s clock) | instant (the finished record in one frame)",
+    "seed_value": "capture fixture, not an axis: 0 keeps the shipped global randi(); any other value seeds the walk"
+   },
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "fixture": {
+     "build_mode": "instant",
+     "seed_value": 7
+    },
+    "axes": {
+     "tick": [
+      "once",
+      "coarse",
+      "fine",
+      "dense",
+      "limit"
+     ],
+     "walk": [
+      "population",
+      "drill",
+      "spread"
+     ]
+    },
+    "default": "tick=dense, walk=population - dense SHORT-CIRCUITS: _levels() hands back the shipped max_subdivisions rather than the table's 12, which matters because cube_subdivision.tscn sets 12 while the @export default is 10, and deriving the rung from the table would silently retune the scene. population returns the shipped picker verbatim - the same global randi() % all_cubes.size() over the same array in the same order, reached through _pick_index, which short-circuits to that identical call whenever seed_value is 0. build_mode stays grow, so the artifact still creates one cube at boot and splits another every subdivision_interval seconds on the same clock. All 10 placements (Fractal_Recursion, Fractals_Necklace, Hangar_Fractals_Walk, the Corridor_Fractal_Recursion curation_station roster and the six Trial_*_fractals plinths) carry the bare token with no config keys, so apply_grid_config - a bare `pass` before this pass - reaches no assignment and never rebuilds.",
+    "was": "five @export knobs and not one categorical among them: subdivision_interval is a duration, max_subdivisions and fixed_corner_index are counts, auto_start and random_corner are flags - and apply_grid_config's whole body was `pass`, so not one of them was reachable from a map token. random_corner and fixed_corner_index were worse than unreachable: NOTHING read them. perform_single_subdivision picked randi() % all_cubes.size() unconditionally, so the header's 'Single path recursive ... like diving into one corner repeatedly' and the @identity's declared critical_parameter both described a behaviour the code has never had.",
+    "note": "tick is cantor_set's, zeno_staircase's and sierpinski_pyramid's word with its five rungs character for character; the INTEGERS behind them are this rule's own, because one tick there is a whole generation and one tick here is a single cube being split. MEASURED, not assumed - the ladder re-run in Python for all three walks: population and spread give 8 / 22 / 43 / 85 / 169 cubes, every rung distinguishable. drill SATURATES ABOVE `fine`: scale falls 0.45x per level, 0.45^7 is under 1 cm of the metre cube, and fine, dense and limit all leave 35 visible cubes and 1.777 of summed face area. The top two rungs of tick exist in code under drill and cannot be photographed - the example_8_4 fault, found here before declaring rather than after. build_mode is cantor_set's fixture word for cantor_set's problem: the shipped artifact grows on a clock, so a still at boot holds ONE cube and the whole of tick is invisible to it."
    },
    "scene": "res://algorithms/fractals/cubesubdivision/cube_subdivision.tscn",
    "size_group": "environment",
@@ -11212,6 +11268,22 @@
    }
   },
   "test_scene_3": {
+   "dna": {
+    "axes": {
+    "tick": [
+    "fine",
+    "once",
+    "coarse",
+    "dense",
+    "limit"
+    ],
+    "removal": [
+    "gone",
+    "ghost",
+    "scar"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "this is the test",

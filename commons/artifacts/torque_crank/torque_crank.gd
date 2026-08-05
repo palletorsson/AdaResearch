@@ -43,6 +43,24 @@ class_name TorqueCrank
 @export_enum("outcome", "trace", "operands", "expression") var workings: String = "trace"
 const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
 
+## AXIS — HOW THE SAME TORQUE IS BOUGHT. τ = |r| |F| sin θ has three factors and the
+## LEVERAGE slider turns exactly one of them. |r| and |F| were welded at 0.82 and 0.55,
+## so the bench wrote a product on its own board that no map could argue with.
+##
+##   balanced  the shipped arm and push, 0.82 against 0.55.
+##   long      the arm doubled and the push halved — a light hand far out.
+##   stub      the arm halved and the push doubled — a hard shove close in. The arm tip
+##             lands at 0.41, on the flywheel's own rim (inner 0.35, outer 0.45), which
+##             is exactly where a crank pin sits.
+##
+## The PRODUCT is the same in all three, and exactly so: the multipliers are 2.0 and 0.5,
+## which shift a binary exponent and leave the mantissa alone, so |r||F| is bit-identical
+## at every value. τ, the wheel angle, the spin sweep, the glow and the rpm therefore do
+## not move at all — only the bargain that bought them. Under `operands` the parallelogram
+## r ∧ F, whose AREA is |τ|, is redrawn in three quite different shapes with one area.
+@export_enum("balanced", "long", "stub") var purchase: String = "balanced"
+const PURCHASES: PackedStringArray = ["balanced", "long", "stub"]
+
 
 func _ready() -> void:
 	_console_ready()
@@ -55,6 +73,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("workings"):
 		var _w: String = String(config_data["workings"]).strip_edges().to_lower()
 		workings = _w if WORKINGS.has(_w) else workings
+	if config_data.has("purchase"):
+		var _p: String = String(config_data["purchase"]).strip_edges().to_lower()
+		purchase = _p if PURCHASES.has(_p) else purchase
 	apply_base_config(config_data)
 	color_a = _parse_color(config_data.get("color_a", color_a), color_a)
 	color_b = _parse_color(config_data.get("color_b", color_b), color_b)
@@ -80,7 +101,20 @@ func _build_demo() -> void:
 
 	# --- the physics ------------------------------------------------------------
 	var bearing: float = deg_to_rad(_rng.randf_range(-22.0, 22.0))
+	# PURCHASE — the lever's bargain. `balanced` never enters the match, so the two shipped
+	# literals reach the build untouched; the other arms multiply by exact powers of two, so
+	# arm_len * f_len is the same float in all three and nothing downstream of it moves.
 	var arm_len: float = 0.82
+	var f_len: float = 0.55
+	match _purchase_value():
+		"long":
+			arm_len = 0.82 * 2.0
+			f_len = 0.55 / 2.0
+		"stub":
+			arm_len = 0.82 / 2.0
+			f_len = 0.55 * 2.0
+		_:
+			pass
 	var hub_y: float = 0.92
 	var hub: Vector3 = Vector3(0.0, hub_y, 0.0)
 	var r_dir: Vector3 = Vector3(cos(bearing), 0.0, sin(bearing)).normalized()   # vector r
@@ -113,7 +147,7 @@ func _build_demo() -> void:
 
 	# --- the vectors ------------------------------------------------------------
 	var arrow_r: Node3D = _arrow(hub, arm_tip, 0.03, _glow_mat(color_b, 1.3))                        # r
-	var arrow_f: Node3D = _arrow(arm_tip, arm_tip + f_dir * 0.55, 0.03, _glow_mat(force_color, 1.5))  # F
+	var arrow_f: Node3D = _arrow(arm_tip, arm_tip + f_dir * f_len, 0.03, _glow_mat(force_color, 1.5))  # F
 	rig.add_child(arrow_r)
 	rig.add_child(arrow_f)
 	var tau_len: float = 0.25 + torque_mag * 0.85
@@ -137,9 +171,9 @@ func _build_demo() -> void:
 		"outcome":
 			_workings_outcome(arrow_r, arrow_f, spin)
 		"operands":
-			_workings_operands(rig, spin, hub, arm_tip, r_dir, f_dir, arm_len)
+			_workings_operands(rig, spin, hub, arm_tip, r_dir, f_dir, arm_len, f_len)
 		"expression":
-			_workings_expression(rig, hub, arm_len, torque_mag, theta_deg)
+			_workings_expression(rig, hub, arm_len, f_len, torque_mag, theta_deg)
 		_:
 			pass                                   # "trace" — the legacy lineage
 
@@ -152,6 +186,11 @@ func _build_demo() -> void:
 func _workings_value() -> String:
 	var w: String = String(workings).strip_edges().to_lower()
 	return w if WORKINGS.has(w) else "trace"
+
+
+func _purchase_value() -> String:
+	var p: String = String(purchase).strip_edges().to_lower()
+	return p if PURCHASES.has(p) else "balanced"
 
 
 func _unlayer(n: Node) -> void:
@@ -175,9 +214,8 @@ func _workings_outcome(arrow_r: Node3D, arrow_f: Node3D, spin: Node3D) -> void:
 ## bit of the work), inside the dashed parallelogram that r and F span — the figure whose
 ## AREA is the magnitude of the cross product.
 func _workings_operands(rig: Node3D, spin: Node3D, hub: Vector3, arm_tip: Vector3,
-		r_dir: Vector3, f_dir: Vector3, arm_len: float) -> void:
+		r_dir: Vector3, f_dir: Vector3, arm_len: float, f_len: float) -> void:
 	_unlayer(spin)
-	var f_len: float = 0.55
 	var f_vec: Vector3 = f_dir * f_len
 	var par: Vector3 = r_dir * f_vec.dot(r_dir)          # the useless half
 	var perp: Vector3 = f_vec - par                       # the half that turns the world
@@ -198,7 +236,7 @@ func _workings_operands(rig: Node3D, spin: Node3D, hub: Vector3, arm_tip: Vector
 ## EXPRESSION — the algebra promoted over the geometry. A light Braun plate above the hub
 ## writes the cross-product identity out with the numbers substituted, held between two
 ## emissive rules so the writing owns hot pixels of its own.
-func _workings_expression(rig: Node3D, hub: Vector3, arm_len: float,
+func _workings_expression(rig: Node3D, hub: Vector3, arm_len: float, f_len: float,
 		torque_mag: float, theta_deg: float) -> void:
 	var board := Node3D.new()
 	board.name = "WorkingsBoard"
@@ -210,7 +248,7 @@ func _workings_expression(rig: Node3D, hub: Vector3, arm_len: float,
 	var l := Label3D.new()
 	l.name = "Algebra"
 	l.text = "τ  =  r × F  =  |r| |F| sin θ\n%.2f × %.2f × sin %d°  =  %.2f" % [
-		arm_len, 0.55, int(roundf(theta_deg)), arm_len * 0.55 * torque_mag]
+		arm_len, f_len, int(roundf(theta_deg)), arm_len * f_len * torque_mag]
 	l.font_size = 40
 	l.pixel_size = 0.0031
 	l.modulate = TEXT_DARK

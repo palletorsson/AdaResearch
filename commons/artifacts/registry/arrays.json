@@ -4691,6 +4691,26 @@
    }
   },
   "grid_2d_4x4": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "notation": [
+      "label",
+      "none",
+      "tape",
+      "tally",
+      "plate"
+     ]
+    },
+    "default": "notation=label - the white billboarded [x, z] built inside the cube loop, the same node in the same place with the same font size, outline, no_depth_test and colour as before. MEASURED, not assumed: 14 real mentions across 13 map files - bare tokens in Corridor_Tutorial_2D_Build, Kernel_Demo2, Trial_antrooms_array_tutorial, Tutorial_2D, Tutorial_2D_Build and Tutorial_Single; `exhibit_furniture#kind:floor_work#size:l#mount:grid_2d_4x4` in seven museum trials, where the # keys belong to the furniture; and `curation_station#artifacts:column_3_z,grid_2d_4x4,grid_3d_4x4x4` in Curation_Bay_array_tutorial_4, where they belong to the station. None passes a notation key. The layout values (cols, rows, spacing, label_size, label_color) were locals inside apply_grid_config with exactly the defaults _ready hard-coded, so promoting them to members lets one builder serve both paths and changes nothing at the default.",
+    "was": "a 4x4 of pickup cubes each wearing [x, z] in the air, which asserted that an address is a tag the object carries and hid that this is one answer among several - pick the cube up and the address leaves with it, while grid_data[x][z] quietly becomes 0 and the slot it named stays behind unmarked. The runner refused it as NO TURNABLE KNOBS; the exports it did have were a debug flag and a table toggle.",
+    "shares_vocabulary_with": "column_3_z - the same word and the same five values in the same order with the same default, character for character. This artifact's own @identity names column_3_z as the thing it extends to two dimensions, and the two are the same object at n=1 and n=2: pickup cubes on a floor with an index each. Every value has a real 2D answer rather than a fudged one - tape becomes two rules along the two origin-side margins (an address is two distances read off two scales, which is also the matrix margin), tally becomes x strokes on the face looking back down X and z strokes on the face looking back down Z (two counts, each on the face pointing at the origin it counts from), and plate is the strongest fit of the five here, because the floor plaque that stays when the cube is taken is exactly what grid_data[x][z] = 0 has always meant in data and never showed in space.",
+    "nearly_declined": "recorded so the next agent does not reopen it. The obvious reading is that this is scaffolding whose only knob is how many cubes there are, and grid dimensions are the decoration case - prebaked_loader and path_game_controller were both declined that way. What separates it is that the artifact makes a claim (an address is a tag on the object) that it never admitted was a choice, and its 1D sibling had already named the question.",
+    "still_note": "notation is resolved during _ready and the dressing is static geometry - boxes, and one non-billboarded Label3D per slot under `plate`. Nothing here animates, so a single frame is a complete account of the axis.",
+    "framing_note": "the BinaryTableDisplay sits at (-2.0, 1.8, 1.5), about 0.9 m square, and does NOT change with notation, so it dilutes the bite by roughly its share of the frame. Expect a smaller number than column_3_z measures for the same five values; that is dilution, not a weaker axis. All notation geometry stays inside the cubes' own X/Z envelope (-0.25 to 3.25 at default spacing), so the sweep frames the same box whichever value it shoots.",
+    "repair": "apply_grid_config tore down every child and rebuilt on ANY non-empty config, including one naming nothing it owns - the force_pad fault. It is now guarded: a value has to actually move, and nothing rebuilds before _ready has built once. _create_binary_table also read a hard-coded 4 x 4 while feeding it cols x rows of data; it now reads the members, which is identical at the default and merely coherent above it."
+   },
    "lookup_name": "grid_2d_4x4",
    "name": "grid_2d_4x4",
    "description": "Builds a 4x4 pickup-cube grid laid out across the floor.",

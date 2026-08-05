@@ -161,7 +161,32 @@
      1,
      1
     ],
-    "size_group": "compact"
+    "size_group": "compact",
+    "opening": "flat | hyperbolic | elliptic - which sign of K the bench is parked at (default flat)",
+    "witness": "number | surface | normals - what the instrument shows of the geometry it names (default number)",
+    "curvature": "K in [-1, +1] - now read at build time, so a map can open the slider anywhere on the range (default 0.0)"
+   },
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "fixture": {
+     "witness": "surface"
+    },
+    "axes": {
+     "opening": [
+      "flat",
+      "hyperbolic",
+      "elliptic"
+     ],
+     "witness": [
+      "number",
+      "surface",
+      "normals"
+     ]
+    },
+    "default": "opening=flat, witness=number - flat SHORT-CIRCUITS: _k() hands back the shipped `curvature` export rather than the table's 0.0, so a map that overrides curvature alone opens at its own number instead of being reset to zero. At K = 0 the slider knob is built at (0 + 1) / 2 = 0.5, the literal that was hard-coded there before, and _label_text() renders 'CURVATURE: K = 0\\n(Flat/Euclidean)' to the byte - _k_str returns '0' and not '0.00' for exactly this reason. witness=number adds no node at all, so the scene tree stays the rack panel and the Label3D and nothing else. The 5 placements (NonEuclidean_Spaces, NonEuclidean_Spaces_composed, test_batch_1 and the two curation_station rosters in Corridor_NonEuclidean_Spaces and Curation_Bay_foundationscrisis_1) name no config keys, so apply_grid_config - a bare `pass` before this pass - reaches no assignment and never rebuilds.",
+    "was": "one @export, `curvature`, a float that was never read at build time: _ready() built the panel with a hard-coded 0.5 and the label with a hard-coded string, and apply_grid_config's whole body was `pass`. The three signs of K - the whole of differential geometry's classification - were reachable only by a hand on a slider in a headset, and even then the artifact displayed no curvature, only the word for it.",
+    "note": "opening is dot_aligner's word for the same situation (a named case that existed only behind a hand in VR) with its four-angle value list refused: the sign of K has exactly three values and a fourth would invent a geometry. DECLINED and measured first: a geodesic-triangle value showing the angle sum. A chord lifted onto the patch is not a geodesic, and the lifted-chord sum comes out 179.6 on the saddle and 161.1 on the DOME - the wrong side of 180 for positive curvature, at every rotation of the triangle. It would have published a figure stating the theorem backwards. SEPARATE FINDING, not repaired here: curvature_changed has no listener anywhere in the repo, so the @identity's 'controls hyperbolic_surface and elliptic_surface' is aspirational."
    },
    "scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
    "tags": [

@@ -4161,6 +4161,31 @@
    }
   },
   "noise_space": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "generator": [
+      "simplex",
+      "perlin",
+      "value",
+      "cellular"
+     ],
+     "octaves": [
+      1,
+      2,
+      3,
+      4
+     ]
+    },
+    "default": "generator=simplex, octaves=4 - octaves=4 is the shipped @export byte for byte. generator=simplex does NOT assign a noise type: the shipped file set frequency and fractal_octaves and never touched noise_type at all, so this ground has always been whatever basis FastNoiseLite itself defaults to, and _build_noise leaves it alone at the default value instead of assigning TYPE_SIMPLEX - assigning it would be a silent correction that reshapes the terrain under every existing placement. MEASURED, not assumed: there are 11 mentions across 10 map files, by three reach-paths - bare tokens in Corridor_Noise_Space_10, Noise_Space_10 and Walk_grande_galerie_axial_text; `exhibit_furniture#kind:floor_work#size:l#mount:noise_space` in six museum trials, where the token is the furniture's mount value and the # keys are the furniture's; and `simplex_noise->noise_space` plus `noise_space->noisetorus` in Trial_erosion_noise, which are transformation targets and not config. None carries a generator or octaves key, and apply_grid_config returns without regenerating unless a key is present AND its value differs from the one the node already holds.",
+    "was": "an artifact named for its noise that never said which noise, and three @exports nobody could reach. TopologySpace has no apply_grid_config and NoiseSpace had none either, so noise_scale, octaves and persistence were editor-only: every placement got the same 10 x 10 m landform and map_data could not say otherwise. The runner refused it as NO TURNABLE KNOBS on exactly that ground - the knobs existed, nothing was connected to them.",
+    "shares_vocabulary_with": "perlin_noise, simplex_noise, shader_noise_space, noise_terrain - `generator` is the same axis with the same four values in the same order and the same default. cellular, not worley, for the same reason: the noise sequence is built on comparing bases, and spelling the comparison four ways would leave nothing to compare. `octaves` is simplex_noise's word for the same quantity, but the ladder is 1-2-3-4 rather than its 1-2-4-6, and the difference was computed rather than chosen: this mesh samples every 0.1 m across a 10 m space (resolution 100) while the base wavelength is about 2 m (frequency 0.1 against coordinates pre-multiplied by noise_scale 5.0), so octave k has wavelength 2 / 2^(k-1) and octaves 5 and 6 land at 0.125 and 0.0625 m, below the mesh's 0.2 m Nyquist wavelength. Declaring 6 would ship a rung that differs from 4 only by aliasing at a sixteenth of the amplitude.",
+    "vocabulary_declined": "readout (relief|plate|column), carried by perlin_noise, simplex_noise, perlin_noise_terrain, random_edge_profile and mandelbrot_set. Declined for exactly the reason noise_terrain recorded when it declined the same word: readout asks a geometric question about a tabletop field, and this is a walkable substrate with a trimesh collider under it, so plate and column would change what the player STANDS ON rather than what the field claims to be, and the word would stop meaning one thing across the sequence. noise_terrain's own second axis `legend` (contours|relief|mood) is declined too, for the opposite reason: there both encodings already existed in the file and only a 2D button chose between them, while here there is exactly one material - a flat organic-green StandardMaterial3D with no height encoding at all - so the shipped look is neither contours nor relief nor mood, and taking the word would mean inventing a fourth value to hold the thing that actually ships. Taking a word without its answers is the dishonest half of a shared vocabulary.",
+    "still_note": "both axes resolve during _ready and never move again - the noise object is fully configured before the 10,201-vertex mesh is built, and nothing on this artifact animates - so a single frame is a complete account of both. Deterministic besides: FastNoiseLite is left on its default seed and nothing in the file calls randf(), so four generator frames are four bases over one footprint rather than four landscapes, and no seed pin is needed.",
+    "framing_note": "the subject is a 10 x 10 m slab carrying about 4 m of relief, and a fit-by-diagonal camera is roughly right for it (the plan diagonal and the box diagonal are within 4% of each other), so no numeric framing is set. If the bite reads modest, compare silhouettes before believing it: expect cellular to be the loudest value by far and octaves=1 to be the smoothest.",
+    "repair": "persistence has been an @export since the file was written and was never spent on anything. It is the fBm gain and is now wired to fractal_gain - but only when it differs from its own shipped 0.5, so a placement that never names it leaves the noise object untouched no matter what FastNoiseLite's own default gain is. It is a repair, not a declared axis."
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Interactive 3D noise exploration space. Walk through a procedurally generated environment driven by configurable noise parameters.",
@@ -4959,6 +4984,18 @@
    "qfep_connection": "An homage assembled almost entirely from material settings — glossy liquids, pink fabrics, granular orange — under a candy environment where SSR and bloom do the heavy lifting. What it stages is that organic in CGI is mostly a shading budget: softness as roughness values, wetness as reflection steps."
   },
   "particle_randomness_emergent": {
+   "dna": {
+    "axes": {
+    "chapter": [
+    "all",
+    "chaos",
+    "noise",
+    "pattern",
+    "emergence",
+    "evolution"
+    ]
+    }
+   },
    "category": "emergence",
    "complexity": "intermediate",
    "description": "Emergent behavior particle system",
@@ -5166,6 +5203,18 @@
    }
   },
   "particle_randomness_patterns": {
+   "dna": {
+    "axes": {
+    "chapter": [
+    "all",
+    "chaos",
+    "noise",
+    "pattern",
+    "emergence",
+    "evolution"
+    ]
+    }
+   },
    "artifact_type": "interactive_algorithm",
    "category": "procedural",
    "complexity": "intermediate",
@@ -5276,6 +5325,18 @@
    "qfep_connection": "The 'procedural pattern' is a spiral vector field with a sine on top; the only randf() left runs once, at spawn, setting each particle's starting radius. Order is not coaxed out of chaos here — chaos is admitted a single time at the door and never consulted again."
   },
   "particle_randomness_perlin": {
+   "dna": {
+    "axes": {
+    "chapter": [
+    "all",
+    "chaos",
+    "noise",
+    "pattern",
+    "emergence",
+    "evolution"
+    ]
+    }
+   },
    "artifact_type": "interactive_algorithm",
    "category": "procedural",
    "complexity": "intermediate",
@@ -5386,6 +5447,18 @@
    "qfep_connection": "The function named noise3 is sin·cos·sin — no gradients, no permutation table, nothing of Perlin but the label. What the demo actually teaches is that 'Perlin' names any smooth field the eye can't audit; the brand does the epistemic work the algorithm skips."
   },
   "particle_randomness_pure": {
+   "dna": {
+    "axes": {
+    "chapter": [
+    "all",
+    "chaos",
+    "noise",
+    "pattern",
+    "emergence",
+    "evolution"
+    ]
+    }
+   },
    "artifact_type": "interactive_algorithm",
    "category": "primitives",
    "complexity": "intermediate",

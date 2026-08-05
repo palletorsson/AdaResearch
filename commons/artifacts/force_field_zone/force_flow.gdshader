@@ -12,6 +12,7 @@ uniform float freq = 1.6;                               // chevrons per metre al
 uniform float flow_speed = 1.8;
 uniform float density = 4.0;                            // chevron rows across the face
 uniform float chevron = 0.55;                           // how pointed the arrows are
+uniform float time_scale = 1.0;                         // capture fixture: 0.0 freezes the flow
 
 varying vec3 v_wpos;
 varying vec3 v_wnrm;
@@ -33,7 +34,7 @@ void fragment() {
 		vec3 across = normalize(cross(n, along));
 		float a = dot(v_wpos, along);
 		float b = dot(v_wpos, across);
-		float t = TIME * flow_speed;
+		float t = TIME * flow_speed * time_scale;
 		float within = abs(fract(b * density) - 0.5) * 2.0;   // 0 mid-row, 1 at the edge
 		float phase = a * freq - t + within * chevron;        // chevron points along the flow (∨)
 		float s = fract(phase);
@@ -42,7 +43,7 @@ void fragment() {
 		EMISSION = col * intensity * 2.2;
 		ALPHA = clamp(0.05 + intensity * 0.85, 0.0, 0.8);
 	} else {
-		float pulse = 0.5 + 0.5 * sin(TIME * 2.2);      // force is normal to this face
+		float pulse = 0.5 + 0.5 * sin(TIME * 2.2 * time_scale);  // force is normal to this face
 		EMISSION = col * (0.08 + 0.08 * pulse);
 		ALPHA = 0.12;
 	}
