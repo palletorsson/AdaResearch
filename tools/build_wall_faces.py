@@ -248,6 +248,103 @@ def hang(museum: str, band: str, limit: int, seed: int) -> Path:
     return p
 
 
+def hang_family(museum: str, token: str, axis: str, band: str, seed: int) -> Path:
+    """One artifact, one axis, its values spaced along ONE long wall face.
+
+    The bay series walks a family through repeated ROOMS; this walks it along a
+    single WALL, which is how a gallery has always shown variations: the same
+    subject, the same frame, one thing changed, and the corridor doing the
+    comparing for you. The face must be long enough that the values do not
+    crowd, and the work must fit the standoff — the same two rules the single
+    hang obeys, asked once for the whole family.
+    """
+    sys.path.insert(0, str(REPO / "tools"))
+    from compile_museum_map import compile_map, policy_pool, museums as cmus  # noqa: E402
+    mus = cmus()
+    if museum not in mus:
+        raise SystemExit(f"no museum `{museum}`")
+    pat = mus[museum]
+    reg = {}
+    for rp in sorted(glob.glob(str(REPO / "commons" / "artifacts" / "registry" / "*.json"))):
+        try:
+            d = json.load(open(rp, encoding="utf-8"))
+        except Exception:
+            continue
+        for t, e in (d.get("artifacts") or {}).items():
+            if isinstance(e, dict):
+                reg.setdefault(t, e)
+    panels = {q["lookup"]: q for q in panel_artifacts()}
+    if token and token not in panels:
+        raise SystemExit(f"`{token}` is not panel-class (dir_group != panel)")
+    tile = [[str(c) for c in r] for r in pat["tile"]]
+    faces = sorted(faces_of(tile), key=lambda f: -f["run"])
+    if not faces:
+        raise SystemExit("no faces")
+    face = faces[0]
+
+    # choose the family: the one that fits this face and has the most to say
+    def values_of(tok: str, ax: str):
+        v = ((reg.get(tok, {}).get("dna") or {}).get("axes") or {}).get(ax)
+        return [str(x) for x in v] if isinstance(v, list) else None
+    if token and axis:
+        vals = values_of(token, axis)
+        if not vals:
+            raise SystemExit(f"`{token}` declares no axis `{axis}`")
+        pick = (panels[token], axis, vals)
+    else:
+        cands = []
+        for q in panels.values():
+            if q["area_m2"] > face["max_area_m2"]:
+                continue
+            for ax in q["axes"]:
+                v = values_of(q["lookup"], ax)
+                if v and 3 <= len(v) <= 6:
+                    cands.append((len(v), q, ax, v))
+        if not cands:
+            raise SystemExit("no panel-class family fits this face")
+        cands.sort(key=lambda c: (-c[0], c[1]["lookup"]))
+        _, q, ax, v = cands[0]
+        pick = (q, ax, v)
+    art, ax, vals = pick
+    if art["area_m2"] > face["max_area_m2"]:
+        raise SystemExit(f"{art['lookup']} ({art['area_m2']} m2) does not fit this face "
+                         f"({face['max_area_m2']} m2)")
+
+    n_slots = sum(1 for row in pat["tile"] for c in row if str(c) in ("1s", "2s", "3s"))
+    name = f"Family_{museum.replace('-', '_')}_{art['lookup']}_{ax}"
+    doc = compile_map(museum, pat, policy_pool("spine")[:n_slots], "spine", name)
+    inter = doc["layers"]["interactables"]
+    yoff = next(y for b, _lo, _hi, y in BANDS if b == band)
+    # the front cells of the run, evenly spaced so the values read as a series
+    dx = {"N": 0, "S": 0, "E": 1, "W": -1}[face["facing"]]
+    dy = {"N": -1, "S": 1, "E": 0, "W": 0}[face["facing"]]
+    fronts = [(cx + dx, cy + dy) for (cx, cy) in face["cells"]]
+    step = max(1, len(fronts) // len(vals))
+    placed = []
+    for i, v in enumerate(vals):
+        j = min(len(fronts) - 1, i * step + step // 2)
+        fx, fy = fronts[j]
+        if not (0 <= fy < len(inter) and 0 <= fx < len(inter[0])):
+            continue
+        inter[fy][fx] = f'{art["lookup"]}#{ax}:{v}'
+        placed.append({"value": v, "cell": [fx, fy]})
+    doc["documentation"]["wall_family"] = {
+        "tool": "build_wall_faces.py --family", "token": art["lookup"], "axis": ax,
+        "values": vals, "band": band, "y_offset": yoff,
+        "face": {"facing": face["facing"], "run": face["run"],
+                 "standoff": face["standoff"], "max_area_m2": face["max_area_m2"]},
+        "work_area_m2": art["area_m2"], "placed": placed,
+        "note": "one artifact, one axis, its values spaced along a single wall face — "
+                "the gallery's own way of showing variations, and the corridor does the "
+                "comparing",
+    }
+    d = MAPS / name
+    d.mkdir(parents=True, exist_ok=True)
+    p2 = d / "map_data.json"
+    p2.write_text(json.dumps(doc, indent=1), encoding="utf-8")
+    return p2
+
+
 def selftest() -> int:
     ok = []
     # a plain room: walls all round, floor inside
@@ -295,10 +392,25 @@ def main() -> int:
     ap.add_argument("--band", default="hang", choices=[b[0] for b in BANDS])
     ap.add_argument("--limit", type=int, default=10)
     ap.add_argument("--seed", type=int, default=46)
+    ap.add_argument("--family", action="store_true",
+                    help="hang ONE artifact's DNA family along the longest face")
+    ap.add_argument("--token")
+    ap.add_argument("--axis")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
     if args.self_test:
         return selftest()
+    if args.hang and args.family:
+        p = hang_family(args.hang, args.token, args.axis, args.band, args.seed)
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        f = doc["documentation"]["wall_family"]
+        print(f"{f['token']}.{f['axis']} along a {f['face']['run']}-cell face "
+              f"facing {f['face']['facing']} (standoff {f['face']['standoff']}, "
+              f"wall allows {f['face']['max_area_m2']} m2, work is {f['work_area_m2']} m2)")
+        for q in f["placed"]:
+            print(f"  {q['value']:22} at {tuple(q['cell'])}")
+        print(f"-> {p.relative_to(REPO)}")
+        return 0
     if args.hang:
         p = hang(args.hang, args.band, args.limit, args.seed)
         doc = json.loads(p.read_text(encoding="utf-8"))
