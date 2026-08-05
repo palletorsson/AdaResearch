@@ -218,14 +218,67 @@ def judge_tile(tile_path: str, seq: str) -> int:
         shutil.rmtree(os.path.join(MAPS_DIR, name), ignore_errors=True)
 
 
+def judge_map(names: list) -> int:
+    """Score maps that ALREADY EXIST, as they stand. --map mode.
+
+    --tile judges a template by stamping a chapter's cast into it. That cannot
+    answer a question the wall work raised: does DECORATING a building change
+    how it reads? A hung corridor is not a different tile — it is the same tile
+    with more artifacts on it, and the only way to ask is to walk the map that
+    exists. Pass several and they are scored side by side, which is the only
+    honest form of the question: the same building, one thing changed.
+    """
+    rows = []
+    for name in names:
+        if not os.path.isfile(os.path.join(MAPS_DIR, name, "map_data.json")):
+            rows.append({"map": name, "status": "NOT ON DISK"})
+            continue
+        rc, pf = run([sys.executable, "tools/map_pathfinder.py", "check", name])
+        if rc != 0 or "0 FAIL" not in pf:
+            rows.append({"map": name, "status": "PATHFINDER FAIL"})
+            continue
+        s, detail = experience_score(name)
+        if s is None:
+            rows.append({"map": name, "status": f"SCORE FAIL: {detail}"})
+            continue
+        rows.append({"map": name, "status": "ok", "score": s, **detail})
+    ok = [r for r in rows if r["status"] == "ok"]
+    print(f"{'map':56} {'score':>5} {'tau':>5} {'cov':>4} {'prom':>5} {'pat':>5} "
+          f"{'dolly':>5} {'heroDeg':>7}  cycles")
+    print("-" * 108)
+    for r in rows:
+        if r["status"] != "ok":
+            print(f"{r['map']:56} {r['status']}")
+            continue
+        print(f"{r['map']:56} {r['score']:5.2f} {r['tau']:5.2f} {r['cov']:4.2f} "
+              f"{r['promise']:5.2f} {r['patience']:5.2f} {r['dolly']:5.2f} "
+              f"{r['heroDeg']:7} {r['cycles']}")
+    if len(ok) > 1:
+        base = ok[0]
+        print("-" * 108)
+        for r in ok[1:]:
+            d = r["score"] - base["score"]
+            print(f"{r['map']:56} {d:+5.2f} against {base['map']}")
+    out_p = os.path.join(ROOT, "doc", "reports", "museum_map_judgements.json")
+    json.dump({"rows": rows}, open(out_p, "w", encoding="utf-8"), indent=1)
+    print(f"\nreport -> {os.path.relpath(out_p, ROOT)}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--seq", required=True)
+    ap.add_argument("--seq", required=False)
     ap.add_argument("--museums", default=",".join(DEFAULT_MUSEUMS))
     ap.add_argument("--tile", help="judge ONE candidate tile (JSON) instead of the field")
+    ap.add_argument("--map", action="append",
+                    help="judge maps that already exist, side by side (repeatable)")
     ap.add_argument("--keep-losers", action="store_true")
     args = ap.parse_args()
 
+    if args.map:
+        return judge_map(args.map)
+    if not args.seq:
+        raise SystemExit("--seq is required unless --map is used")
     if args.tile:
         return judge_tile(args.tile, args.seq)
 
