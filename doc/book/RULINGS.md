@@ -708,4 +708,50 @@ spin, Trans_AxisDecomposition ⟷ matrix_4x4_viewer, Trans_RotationSpectacle ⟷
 toruscylinder, Trans_Scale ⟷ righttriangle. 7/7 distinct antis, all from disk.
 walked.md pages ghost-drafted next under P-8 leads; friction pass to follow.
 
-<!-- Next: R-032 — friction pass on transformation's walked pages; the blank (counter to transform_composition) -->
+## R-032 — a wall work is never the hero (2026-08-05)
+
+Palle, verbatim: "rule it: wall works never count as the hero."
+
+**What it answers.** The wall-face system made the templates' walls hangable, and
+the first judged comparison said decoration was expensive: the Grande Galerie
+compiled plain scored 5.30, and the same building with twelve works hung scored
+4.87. The columns named the cause — promise fell to 0.00 and the hero subtended
+11° instead of 74°. The hero is whatever the size oracle finds largest, so a
+panel flat against a wall had taken the room's climax and could not perform it: a
+hung thing cannot be promised down an axis, because you never approach it.
+
+**The rule.** A work lifted clear of the floor is on a wall, and a wall work is
+never eligible to be the hero. The height is stated in the map itself (the token
+form `artifact:rotation:y_offset`), and the line is 0.9 m — the dado/hang
+boundary in `commons/data/wall_faces.json`, below which a thing is furniture and
+above which it is on the wall. If a map is nothing but hung work the whole cast
+stands as candidates, because a rule that can empty the field would score a blank
+instead of a building (92 maps are in that case).
+
+**What it changed, measured.** Under the ruling the same three maps read:
+
+| map | before | after |
+|---|---|---|
+| Grande Galerie, plain | 5.30 | 5.30 |
+| + twelve hung works | 4.87 (−0.43) | **5.81 (+0.51)** |
+| + the five-work Magritte family | 5.57 (+0.27) | 5.57 (+0.27) |
+
+The hung building goes from the worst of the three to the best. It keeps what
+decoration had actually earned all along — the best encounter order (tau +0.57
+against −0.08) and the most works consumed (24/28) — and recovers the promise and
+the 74° climax the mis-assignment had cost it. **Decoration was never the
+problem; the hero was.**
+
+**Blast radius, stated before adoption.** 113 of 2040 maps with a cast change
+hero under this rule (5.5%), and the changes read as corrections:
+`science_screen → transform_composition_workbench`, `science_screen →
+animatedcubebuilder`, `folding_past → CoordinateSystem3M` — in each case a wall
+screen had been standing in for the room's actual subject. But the bred
+tournament baselines and the eight adopted crowns were all computed under the old
+hero rule, so they are now **measured on a different judge than the one that
+binds**. Re-running the fields is a separate act and is NOT done here; until it
+is, treat any comparison that crosses the ruling with suspicion.
+
+Implemented in `tools/map_tournament.py` (`is_wall_work`, `hero_candidates`).
+
+<!-- Next: R-033 — friction pass on transformation's walked pages; the blank (counter to transform_composition); and whether to re-run the bred baselines and crowns under R-032 -->

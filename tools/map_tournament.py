@@ -53,12 +53,45 @@ def cast_of(map_name):
     return cast
 
 
+WALL_WORK_MIN_Y = 0.9
+
+
+def is_wall_work(tok):
+    """A work lifted clear of the floor is hung on a wall (R-032).
+
+    The token form is artifact:rotation:y_offset, so the height is stated in the
+    map itself; 0.9 m is the dado/hang boundary in commons/data/wall_faces.json,
+    below which a thing is furniture and above which it is on the wall.
+    """
+    head = str(tok).split("#")[0].split(":")
+    if len(head) < 3:
+        return False
+    try:
+        return float(head[2]) >= WALL_WORK_MIN_Y
+    except ValueError:
+        return False
+
+
+def hero_candidates(cast):
+    """RULED 2026-08-05 (R-032): a wall work is never the hero.
+
+    Measured first: hanging twelve works in the Grande Galerie cost 0.43 because
+    the size oracle handed the hero's job to a panel, whose promise is
+    structurally zero — a thing flat against a wall cannot be shown down an axis.
+    The room's climax must be something you approach. If a map is nothing but
+    hung work the whole cast stands, because a rule that can empty the field
+    would score a blank instead of a building.
+    """
+    standing = [t for t in cast if not is_wall_work(t)]
+    return standing or cast
+
+
 def experience_score(name):
     """The edge fitness, target-free: how composed does the ride read?"""
     cast = cast_of(name)
     if not cast:
         return None, "no cast"
-    hero_tok = max(cast, key=size_of)
+    hero_tok = max(hero_candidates(cast), key=size_of)
     hero_b = base_of(hero_tok)
     rc, ride = run([sys.executable, "tools/gaze_ride.py", name], timeout=180)
     if rc != 0:
