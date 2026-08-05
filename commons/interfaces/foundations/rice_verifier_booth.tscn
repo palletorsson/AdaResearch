@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://rice_verifier_booth"]
+
+[ext_resource type="Script" path="res://commons/interfaces/foundations/rice_verifier_booth.gd" id="1_script"]
+
+[node name="RiceVerifierBooth" type="Node3D"]
+script = ExtResource("1_script")

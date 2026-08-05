@@ -6,6 +6,289 @@
     "theoretical_grounding": "Gamwell 'Mathematics and Art' Chapters 3-6, 9, 13"
   },
   "artifacts": {
+    "rice_verifier_booth": {
+      "dna": {
+        "axes": {
+          "refusal": [
+            "blank",
+            "regress",
+            "oracle",
+            "spin",
+            "honest"
+          ]
+        }
+      },
+      "lookup_name": "rice_verifier_booth",
+      "scene": "res://commons/interfaces/foundations/rice_verifier_booth.tscn",
+      "class_name": "RiceVerifierBooth",
+      "name": "Rice Verifier Booth",
+      "description": "A verification booth that answers every question about a program's form and cannot answer any question about its meaning",
+      "qfep_connection": "The hard floor under self-criticism: no internal verifier exists, so criticism must come from outside the description",
+      "signals": [
+        "question_submitted",
+        "refusal_shown"
+      ],
+      "interactions": [
+        "click the slot to submit a question"
+      ],
+      "tags": [
+        "rice",
+        "undecidability",
+        "verification",
+        "self-criticism",
+        "ai"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "ai-critique"
+      ],
+      "dev_category": "foundations_crisis",
+      "category": "philosophy",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "foundationscrisis"
+      ],
+      "sequence": "foundationscrisis",
+      "parameters": {
+        "refusal": "Which posture the booth takes toward the undecidable question",
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "preferred_zone": "mid"
+      }
+    },
+    "critic_regress_stack": {
+      "dna": {
+        "axes": {
+          "relocation": [
+            "single",
+            "stacked",
+            "circular",
+            "outside",
+            "sealed"
+          ]
+        }
+      },
+      "lookup_name": "critic_regress_stack",
+      "scene": "res://commons/interfaces/foundations/critic_regress_stack.tscn",
+      "class_name": "CriticRegressStack",
+      "name": "Critic Regress Stack",
+      "description": "Add a critic to check the system, then a critic to check the critic; the blind spot never closes, it moves",
+      "qfep_connection": "Conservation of the irreducible one level up: inductive bias can be relocated, never removed",
+      "signals": [
+        "arrangement_changed"
+      ],
+      "interactions": [
+        "walk the arrangement to find where the dark mark sits"
+      ],
+      "tags": [
+        "regress",
+        "meta-level",
+        "bias",
+        "conservation",
+        "ai"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "ai-critique"
+      ],
+      "dev_category": "foundations_crisis",
+      "category": "philosophy",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "foundationscrisis"
+      ],
+      "sequence": "foundationscrisis",
+      "parameters": {
+        "relocation": "Where the blind spot ends up",
+        "footprint": [
+          1,
+          1,
+          2
+        ],
+        "size_group": "compact"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "preferred_zone": "mid"
+      }
+    },
+    "fluency_seam": {
+      "dna": {
+        "axes": {
+          "crossing": [
+            "smooth",
+            "twice",
+            "spread",
+            "singular",
+            "lattice"
+          ]
+        }
+      },
+      "lookup_name": "fluency_seam",
+      "scene": "res://commons/interfaces/foundations/fluency_seam.tscn",
+      "class_name": "FluencySeam",
+      "name": "Fluency Seam",
+      "description": "One confident answer beside the same question asked again - the seam where compression is mistaken for judgement",
+      "qfep_connection": "The seam form of galton_friction applied to inference: the machine promises understanding and ships compression",
+      "signals": [
+        "seam_crossed"
+      ],
+      "interactions": [
+        "compare the shipped plate against the second run"
+      ],
+      "tags": [
+        "seam",
+        "fluency",
+        "compression",
+        "entropy",
+        "ai"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "ai-critique"
+      ],
+      "dev_category": "foundations_crisis",
+      "category": "philosophy",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "foundationscrisis"
+      ],
+      "sequence": "foundationscrisis",
+      "parameters": {
+        "crossing": "How far past the perception threshold the seam is dragged",
+        "footprint": [
+          2,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "preferred_zone": "mid"
+      }
+    },
+    "negative_control_fixture": {
+      "dna": {
+        "axes": {
+          "proof": [
+            "unproven",
+            "injected",
+            "certified",
+            "silent",
+            "absent"
+          ]
+        }
+      },
+      "lookup_name": "negative_control_fixture",
+      "scene": "res://commons/interfaces/foundations/negative_control_fixture.tscn",
+      "class_name": "NegativeControlFixture",
+      "name": "Negative Control Fixture",
+      "description": "A gauge that earns its green light only by first being made to go red on a planted fault",
+      "qfep_connection": "The one honest move after Rice: an instrument cannot be proven correct, but it can be proven capable of failing",
+      "signals": [
+        "fault_injected",
+        "needle_moved"
+      ],
+      "interactions": [
+        "pull the lever to inject the known fault",
+        "read whether the needle moved"
+      ],
+      "tags": [
+        "negative-control",
+        "self-test",
+        "instrument",
+        "falsification",
+        "ai"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "ai-critique"
+      ],
+      "dev_category": "foundations_crisis",
+      "category": "philosophy",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "foundationscrisis"
+      ],
+      "sequence": "foundationscrisis",
+      "parameters": {
+        "proof": "What this instrument has demonstrated about its capacity to fail",
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "preferred_zone": "mid"
+      }
+    },
     "godel_statement_plaque": {
       "dna": {
        "axes": {
