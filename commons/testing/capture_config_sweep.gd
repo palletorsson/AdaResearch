@@ -138,6 +138,9 @@ func _run() -> void:
 		if have_union:
 			print("fixed camera: union AABB size ", union.size, " centre ", union.get_center())
 
+	# Again, now that the autoloads have certainly readied. See _stage.
+	_stand_down_world_bridges()
+
 	var shot := 0
 	for v in variants:
 		var variant: Dictionary = v
@@ -284,7 +287,54 @@ func _suppress_chrome(node: Node) -> void:
 		_suppress_chrome(child)
 
 
+## Autoloads that spawn world content on a timer. Stood down for the length of a
+## sweep, because a capture bench must photograph the artifact and not the
+## operator's save file. NatureRenderer is the one that was caught (see _stage);
+## the other two are the same class of thing and are here pre-emptively.
+const WORLD_BRIDGES: PackedStringArray = [
+	"NatureRenderer", "FloraSpawner", "BiomeAccrualManager",
+]
+
+
+## THE GREEN, and why the bench's look now hangs on the CAMERA.
+##
+## Every sheet this rig ever published sits on a flat green — RGB(130,165,118) at
+## 94.2% of frame — and it is not the background set below. It is NatureRenderer's
+## fog. The autoload's `_deferred_init` calls `_find_world_environment()`, which
+## walks the whole tree matching on CLASS (`node.get_class() == "WorldEnvironment"`),
+## so it found the staging node this function used to create and took its
+## Environment RESOURCE. It then tweened `fog_light_color` to
+## `Color(0.6,0.6,0.6).lerp(Color(0.55,0.7,0.5), density)` and overwrote
+## `ambient_light_color` and `ambient_light_energy` outright — the two values
+## chosen below were never the ones that rendered.
+##
+## `density` comes from EcosystemManager, which restores
+## `user://ecosystem_progression.json` on boot: THE DEVELOPER'S OWN SAVE. With all
+## 25 sequences complete the density is 1.0, so the fog saturated to
+## `Color(0.55,0.7,0.5)` — ratios 0.786 and 0.714 against the 0.788 and 0.715
+## measured off the PNG. The 2.0 s tween finishes inside the pre-pass, so the fog
+## is on every frame of a sweep equally, which is why a hollow axis came back
+## byte-identical AND green rather than merely identical. **The background colour
+## of this bench was a function of how much of the game the operator had played,
+## and on a clean machine it would have been grey.** No `dna.framing` value can
+## help a frame that is 94% someone else's fog; the hook has to go.
+##
+## So the look lives on `Camera3D.environment`, a per-camera override that wins
+## over any WorldEnvironment, and no WorldEnvironment node is created at all.
+## `_find_world_environment()` now returns null, NatureRenderer warns "No
+## WorldEnvironment found — fog/sky disabled" and `_update_fog`/`_update_sky`
+## early-return on a null `_env`. That is timing-immune: it does not matter
+## whether the autoload readies before or after this function runs. It also
+## covers an artifact that ships its own WorldEnvironment, which the bridge would
+## otherwise hijack instead.
 func _stage(vp: SubViewport) -> void:
+	# Nothing an autoload parents under /root may enter the frame. NatureRenderer
+	# builds a GPUParticles3D of up to 100 greenish quads in an 8 x 0.5 x 8 box at
+	# the origin and, while this viewport shared the root's World3D, they were
+	# rendering into the sweep.
+	vp.own_world_3d = true
+	_stand_down_world_bridges()
+
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color(0.055, 0.055, 0.070)
@@ -292,9 +342,6 @@ func _stage(vp: SubViewport) -> void:
 	env.ambient_light_color = Color(0.62, 0.65, 0.72)
 	env.ambient_light_energy = 0.55
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
-	var we := WorldEnvironment.new()
-	we.environment = env
-	vp.add_child(we)
 	var key := DirectionalLight3D.new()
 	key.light_energy = 1.25
 	key.rotation_degrees = Vector3(-42, -35, 0)
@@ -307,7 +354,22 @@ func _stage(vp: SubViewport) -> void:
 	var cam := Camera3D.new()
 	cam.name = "Cam"
 	cam.fov = FOV
+	cam.environment = env
 	vp.add_child(cam)
+
+
+## Idempotent, and called twice on purpose: once from _stage, and once more after
+## the pre-pass, because whether an autoload is already in the tree when a
+## `--script` SceneTree reaches `_initialize()` is not something to bet a bench
+## on. A miss is harmless — the camera-owned environment above closes the fog
+## path on its own — so this is belt to that brace, and it also stops the
+## particle system and the polling.
+func _stand_down_world_bridges() -> void:
+	for singleton in WORLD_BRIDGES:
+		var n: Node = root.get_node_or_null(NodePath(singleton))
+		if n == null:
+			continue
+		n.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 ## The node that actually owns a swept property — the root if it has it, else

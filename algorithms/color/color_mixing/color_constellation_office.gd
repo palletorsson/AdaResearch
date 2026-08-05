@@ -125,18 +125,45 @@ func _add_glass_wall(pos: Vector3, angle_deg: float, color: Color, size: Vector2
 	mat.emission_enabled = true
 	mat.emission = color
 	mat.emission_energy_multiplier = emit_strength
-	
+
+	# ── mixture ──────────────────────────────────────────────────────────────
+	# `bench` FALLS THROUGH UNTOUCHED. The eight lines above are the shipped
+	# material property for property and in the shipped order, so the default is
+	# the legacy room by construction rather than by transcription — nothing here
+	# can drift away from it, because nothing here restates it.
+	if mixture == "light":
+		# LAMPS. Alpha stops damping the pane and the blend SUMS instead of
+		# averaging, so where the three 60-degree panes cross — the block whose
+		# own comment calls it "Overlapping area" — red, green and blue add
+		# toward the white core the @identity has always promised.
+		mat.albedo_color = Color(color.r, color.g, color.b, 1.0)
+		mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	elif mixture == "retina":
+		# PIGMENT PATCHES. Opaque, unlit, no glow: nothing passes through
+		# anything, so no two colours meet anywhere except in the eye of whoever
+		# is walking. Eighteen pure hues, the same count as the family's mosaic.
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+		mat.albedo_color = Color(color.r, color.g, color.b, 1.0)
+		mat.emission_enabled = false
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+
 	wall.material_override = mat
 	add_child(wall)
-	
-	# Add colored light to the wall
-	var light = OmniLight3D.new()
-	light.light_color = color
-	light.light_energy = light_energy
-	light.omni_range = light_range
-	light.position = Vector3(0, 0, wall_thickness * 2)  # Slightly in front of wall
-	wall.add_child(light)
-	
+
+	# Add colored light to the wall.
+	#
+	# `retina` builds NO OmniLight3D at all. A pigment patch that threw coloured
+	# light onto its neighbours would be mixing after all, which is the one thing
+	# this reading denies, and leaving the lamp in would have made the axis a
+	# statement about alpha rather than about where the colours meet.
+	if mixture != "retina":
+		var light = OmniLight3D.new()
+		light.light_color = color
+		light.light_energy = light_energy
+		light.omni_range = light_range
+		light.position = Vector3(0, 0, wall_thickness * 2)  # Slightly in front of wall
+		wall.add_child(light)
+
 	return wall
 
 func _exit_tree() -> void:

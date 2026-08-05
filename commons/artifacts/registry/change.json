@@ -342,20 +342,29 @@
   },
   "riemann_pump": {
    "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "framing": 0.55,
     "axes": {
-    "comparison": [
-    "rules",
-    "overlay",
-    "bracket",
-    "single"
-    ],
-    "resolution": [
-    "pump",
-    "coarse",
-    "mid",
-    "fine"
-    ]
-    }
+     "comparison": [
+      "rules",
+      "overlay",
+      "bracket",
+      "single"
+     ],
+     "resolution": [
+      "pump",
+      "coarse",
+      "mid",
+      "fine"
+     ]
+    },
+    "default": "comparison=rules AND resolution=pump - VERIFIED LINE BY LINE against the pre-promotion file (057abfdf9), not asserted. `rules` is the fall-through return of _panel_groups, [[LEFT],[RIGHT],[MID]], so k=3 and the centring formula (idx - (k-1)/2) * (panel_width + panel_gap) reduces term for term to the shipped (float(i) - 1.0) * pitch; the three panels are rebuilt at the same x, in the same order, carrying the same rule each. Every group then has size 1, so _emit_strips takes the `-0.01 if rules.size() == 1` branch and keeps the shipped z exactly, and its `seq` counter equals k, so the strips carry the node names _strip_0.._strip_(n-1) they always had. `pump` makes _ready skip the RESOLUTION_STRIPS lookup entirely, leaving n_strips at the shipped export default of 12, and makes _process run the shipped sinusoid body unchanged. In apply_grid_config the pre-existing n_strips key behaves exactly as before; the two new keys set nothing unless the value differs from what is already there, and the rebuild additionally refuses to fire until _built. All 3 placements pass no config key, so the rebuild branch is unreachable from every map that exists.",
+    "was": "nine plain exports - three colours, curve_color, n_strips, panel_width, panel_height, panel_gap, pump_period - and no apply_grid_config at all. Every one of them is a colour, a size or a rate. The two things the artifact ARGUES were welded shut: which accumulation rules stand beside each other (three, always, in a row) and how fine the partition is (driven on a sinusoid every frame, so the n_strips export was unreachable in practice - a sweep of it measured 0.011% and 0.016% because the pump overwrote each value before the shutter).",
+    "note": "comparison is WHAT STANDS BESIDE WHAT. rules is the shipped row of three. bracket drops the midpoint and shows left and right as the BRACKET they are - f is increasing on [0, PI], so the left sum is always under the true area and the right always over it, and the answer is trapped between two pictures. overlay puts all three rules on ONE panel, spread in depth with the shortest sum nearest, so the disagreement stops being a comparison across the room and becomes a difference of heights at one x. single is the midpoint rule alone, the reading you would actually use, with nothing to argue with. resolution is HOW FINE THE PARTITION IS, and unavoidably whether it holds still: coarse/mid/fine pin n_strips to 4/12/32 and freeze _process, and mid is 12 because 12 is the shipped export default - the count the artifact is BUILT at before the pump's first frame. The partition is this artifact's own declared critical_parameter, so letting a value stop the pump is the only way to photograph it.",
+    "still_note": "framing 0.55 SET THIS PASS, measured rather than guessed, by re-implementing _build_panels/_emit_strips and capture_config_sweep's camera in Python (RES 760, FOV 34, YAW .62, PITCH -.26, PAD 1.9, union AABB, radius = size.length()*0.5) and rasterising. The model reproduces the bench: it returns overlay-vs-single = 0.55% and subject 0.94% against the 0.55% / 1.0% that were actually measured. Union AABB is 4.70 x 0.71 x 0.03 m - a letterbox fitted by DIAGONAL into a square frame, which is the whole problem - putting the camera 14.77 m out and the default `rules` at 1.62% of frame. At 0.55 the camera is 8.12 m out, subject 5.63%, and cabinet_sweep's peak pair rises 2.30% -> 7.98% with the weakest 0.55% -> 1.83%. THE CLIP POINT IS 0.52 (furthest projected point at 99.9% of the half-frame); 0.55 leaves 7% margin, and clipping would cut the outer panels off `rules`, which is precisely what comparison exists to show. No layers=0 anchor is needed and none should be added: the artifact is built entirely from MeshInstance3D (BoxMesh bar, ImmediateMesh curve, BoxMesh strips), so _subtree_aabb measures it truly and never falls back to its 1 m default box. WHAT FRAMING DOES NOT DO, and the next agent should not expect it to: artifact_dna_critic CROPS to the union subject bbox before diffing, so its verdict is very nearly scale-free - comparison measures 58.6% focus at framing 1.0 and 57.7% at 0.55, resolution 27.9% and 26.7%. Both axes BITE at either value. The subject-under-6% rule in CLAUDE.md is about cabinet_sweep's _report_bite, which normalises over the WHOLE 760x760 frame and does not crop; that is the number 0.55 fixes, and at framing 1.0 its peak of 2.30% sat one antialiasing decision above the 2.0% BITES bar. The other reason is plainer: the published PNG is the uncropped frame, and at framing 1.0 a reader looking at the tile sees a thread across an empty square.",
+    "twin_warning": "pump and fine are near-twins ON THE BENCH, and it is a fact about the shutter, not the axis. _process integrates a 6 s sinusoid, so at SETTLE 1.1 s + 0.1 s the phase is 0.957 and n_strips has climbed to 31 - one strip short of `fine` = 32. Measured: pump-vs-fine 4.73% focus against 44.94% for pump-vs-coarse. Under cabinet_sweep's default --max 9 the second axis is truncated to its first two values, so only pump and coarse are swept and the twin never reaches the sheet; at --max 16 it will, and it should be read as 'the pump happened to be near the top of its stroke', not as two values that draw the same thing. A dna.fixture cannot pin it: cabinet_sweep merges the fixture UNDER each variant's own params, and with both axes declared every variant names resolution itself.",
+    "verified": "2026-08-05 verification pass, no code changed. Both axes are read: comparison in _ready via _build_panels -> _panel_groups, resolution in _ready (the RESOLUTION_STRIPS lookup) and in _process (the early return that stops the pump), and both again in apply_grid_config through _pick_axis, which falls back to the current value on an unknown string. The .tscn root carries the script (riemann_pump.tscn is a bare Node3D named RiemannPump with the script on it), so both axes are reachable from a map token. Export hints are single-line @export_enum. Declared value lists match COMPARISONS and RESOLUTIONS character for character; check_dna_declarations reports both axes ok."
    },
    "name": "Riemann Pump",
    "lookup_name": "riemann_pump",

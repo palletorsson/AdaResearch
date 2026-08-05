@@ -12,12 +12,62 @@ extends Node3D
 @export var animate_horizon: bool = true
 @export var horizon_speed: float = 0.5
 
+# --- STAGE-2 DNA (promoted 2026-08-05) ---------------------------------------
+#
+# WHAT WAS WELDED SHUT. This is not a Riemann SUM — nothing here partitions an
+# interval. It is the prime counting function pi(x) with the zeta horizon standing
+# at infinity behind it, and its whole subject is the prime number theorem: the
+# primes fall unpredictably, but their COUNT follows a law. The shipped exhibit
+# drew only half of that. It drew the staircase and the scatter and the mystical
+# wave, and it never drew the law, so the claim the object exists to make was in
+# the title and not in the picture.
+#
+# `law` is which smooth estimate stands against the staircase, and the answer is
+# not decoration: the two classical estimates disagree with pi(x) in OPPOSITE
+# DIRECTIONS and by an order of magnitude in size.
+#
+#   none         the staircase alone — the legacy exhibit, byte for byte. The
+#                count is a fact with nothing to be measured against.
+#   x_over_log   x / ln x, the crude PNT estimate. At the shipped max_x = 2000 it
+#                reads 263.1 against the true 303, so it runs visibly BELOW the
+#                staircase the whole way and the gap widens: a shaded wedge of
+#                about 6.3% of the plot's area, 2.0 world units deep at the right.
+#   logint       Li(x) = the integral of dt/ln t, the good estimate. 313.8 against
+#                303 — it hugs the staircase from ABOVE, a thin band of 2.1%. The
+#                same law, told properly.
+#   both         both bands at once, so which estimate is better stops being a
+#                sentence and becomes a difference of areas.
+#
+# The band and its curve are ADDED, never substituted, and `none` builds nothing
+# whatever — which matters more here than usual, because of the finding below.
+#
+# FINDING, not papered over: pi_infinity_surface.tscn already contains a BAKED
+# copy of everything _ready() builds (a 303-instance MultiMesh, the staircase
+# ArrayMesh, the zeta plane, the ground plane) saved by this @tool script from the
+# editor. At runtime _ready() builds all of it a SECOND time, so all 73 live
+# placements render the prime line, the ribbon, the horizon and the ground twice,
+# exactly overlapping — visible as doubled alpha on the ground plane and a hotter
+# ribbon. It is not fixed here: removing the baked copies would change what every
+# one of those maps looks like, which is the one thing a promotion may not do. It
+# is also the reason this axis is purely ADDITIVE. Any axis that removed or
+# altered legacy geometry would be half-muted by the baked twin still drawing the
+# original underneath, and would have come back as a "faint" verdict about a
+# design that was never actually reached.
+const LAWS: PackedStringArray = ["none", "x_over_log", "logint", "both"]
+## Which smooth estimate is drawn against the pi(x) staircase. none = the legacy exhibit.
+@export_enum("none", "x_over_log", "logint", "both") var law: String = "none"
+@export var law_color: Color = Color(1.0, 0.45, 0.35)     # x / ln x — the crude estimate
+@export var logint_color: Color = Color(0.45, 1.0, 0.60)  # Li(x) — the good estimate
+## Sample stride for the estimate curves, in integers of x. 4 is ~500 samples at max_x = 2000.
+@export var law_step: int = 4
+
 # Interactive movement
 @export_group("Journey Mode")
 @export var enable_auto_travel: bool = false
 @export var travel_speed: float = 0.5
 
 var primes: PackedInt32Array
+var _built: bool = false
 var mm_primes: MultiMesh
 var ribbon: MeshInstance3D
 var horizon: MeshInstance3D
@@ -35,12 +85,16 @@ func _ready() -> void:
 	# --- π(x) ribbon ---
 	_setup_pi_ribbon()
 
+	# --- the law the staircase is following (nothing at all, by default) ---
+	_setup_law()
+
 	# --- ζ(s) horizon at infinity ---
 	_setup_zeta_horizon()
 
 	# --- Environment ---
 	_setup_environment()
 
+	_built = true
 	set_process(true)
 
 
@@ -174,6 +228,103 @@ func _setup_pi_ribbon() -> void:
 
 
 # ----------------------------
+#   THE LAW — the smooth estimate the staircase is following
+# ----------------------------
+func _law_value() -> String:
+	var v: String = String(law).strip_edges().to_lower()
+	return v if LAWS.has(v) else "none"
+
+
+func _setup_law() -> void:
+	var v: String = _law_value()
+	if v == "none":
+		return                                   # the legacy exhibit: nothing is added
+	if v == "x_over_log" or v == "both":
+		_build_estimate("PntEstimate", law_color, false)
+	if v == "logint" or v == "both":
+		_build_estimate("LogIntegral", logint_color, true)
+
+
+## One estimate: a shaded band between the true staircase and the estimate, plus the
+## estimate's own emissive curve. use_li picks Li(x) (accumulated by trapezoid on the
+## same sample grid) over the crude x / ln x.
+func _build_estimate(node_name: String, col: Color, use_li: bool) -> void:
+	var step: int = maxi(law_step, 1)
+	var holder := Node3D.new()
+	holder.name = node_name
+	add_child(holder)
+	if Engine.is_editor_hint():
+		holder.owner = get_tree().edited_scene_root
+
+	var band := SurfaceTool.new()
+	band.begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
+	var line := SurfaceTool.new()
+	line.begin(Mesh.PRIMITIVE_LINE_STRIP)
+
+	var pi_count: int = 0
+	var prime_idx: int = 0
+	var li_sum: float = 0.0
+	var prev_x: float = 2.0
+	var x: int = 2
+	var samples: int = 0
+	while x <= max_x:
+		# advance the true count to x — the same staircase _setup_pi_ribbon draws
+		while prime_idx < primes.size() and primes[prime_idx] <= x:
+			pi_count += 1
+			prime_idx += 1
+		var xf: float = float(x)
+		var est: float = 0.0
+		if use_li:
+			if xf > prev_x:
+				li_sum += (xf - prev_x) * 0.5 * (1.0 / log(prev_x) + 1.0 / log(xf))
+			est = li_sum
+		else:
+			est = xf / log(xf)
+		prev_x = xf
+		var px: float = xf * x_scale
+		var y_true: float = float(pi_count) * scale_height
+		var y_est: float = est * scale_height
+		band.add_vertex(Vector3(px, y_est, 0.0))
+		band.add_vertex(Vector3(px, y_true, 0.0))
+		line.add_vertex(Vector3(px, y_est, 0.0))
+		samples += 1
+		x += step
+
+	if samples < 2:
+		return
+
+	var band_mi := MeshInstance3D.new()
+	band_mi.name = "Band"
+	band_mi.mesh = band.commit()
+	var bm := StandardMaterial3D.new()
+	bm.albedo_color = Color(col.r, col.g, col.b, 0.30)
+	bm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	bm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	bm.cull_mode = BaseMaterial3D.CULL_DISABLED
+	bm.emission_enabled = true
+	bm.emission = col
+	bm.emission_energy_multiplier = 0.8
+	band_mi.material_override = bm
+	holder.add_child(band_mi)
+
+	var line_mi := MeshInstance3D.new()
+	line_mi.name = "Curve"
+	line_mi.mesh = line.commit()
+	var lm := StandardMaterial3D.new()
+	lm.albedo_color = col
+	lm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	lm.emission_enabled = true
+	lm.emission = col
+	lm.emission_energy_multiplier = 2.0
+	line_mi.material_override = lm
+	holder.add_child(line_mi)
+
+	if Engine.is_editor_hint():
+		band_mi.owner = get_tree().edited_scene_root
+		line_mi.owner = get_tree().edited_scene_root
+
+
+# ----------------------------
 #   ZETA HORIZON (∞) - Complex wave surface
 # ----------------------------
 func _setup_zeta_horizon() -> void:
@@ -297,5 +448,22 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Only `law` is honoured, and only when it actually CHANGES — a map that names
+## nothing this artifact owns must not cause a rebuild. The legacy geometry is never
+## touched: the estimate holders are the only nodes removed and rebuilt, so a config
+## call cannot disturb the prime line, the ribbon, the horizon or the ground.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if not config.has("law"):
+		return
+	var want: String = String(config["law"]).strip_edges().to_lower()
+	if not LAWS.has(want) or want == _law_value():
+		return
+	law = want
+	if not _built:
+		return                                   # _ready has not run; it will build it
+	for path in ["PntEstimate", "LogIntegral"]:
+		var old: Node = get_node_or_null(NodePath(String(path)))
+		if old != null:
+			remove_child(old)
+			old.queue_free()
+	_setup_law()

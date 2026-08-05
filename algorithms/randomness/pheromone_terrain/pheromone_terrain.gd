@@ -30,6 +30,59 @@ extends Node3D
 @export_category("Terrain Settings")
 @export var border_size: int = 10  # Unmanipulated border size (in segments) for walkable edges
 
+## --- DNA (stage 2, promoted 2026-08-05) ---------------------------------------
+## THE LAW A WALKER FOLLOWS WHEN IT DECIDES WHERE TO STEP. `rule` is mold_network's word
+## for exactly this slot, seconded by structure_growth, complexity_pattern and
+## lifeform_walker. The WORD carries; the VALUE LIST cannot and must not — those four are
+## survive/born bands over a cell's neighbours, this is one walker choosing one of eight
+## compass steps, a different alphabet in which "4-6/5-7" means nothing. These should NOT
+## be compared as a family measurement.
+##
+## What is turned here is the LAW, never the rate: a still photograph cannot see a
+## deposit-per-second or a decay, but it can see whether the ground ended up ridged,
+## braided, rectilinear or evenly churned.
+##   trail  the shipped law — eight compass neighbours, sensed `sensor_distance` ahead,
+##          take the strongest scent (ties to the first direction, as it always has).
+##          Self-reinforcing: the walkers converge on paths they made, and the ground
+##          grows a few thick ridges.
+##   sniff  the walker keeps a HEADING and sees only the three steps in front of it
+##          (turn left, straight on, turn right). It cannot double back on itself, so
+##          the same attraction lays long smooth arcs instead of knots. This is the
+##          Physarum reading of stigmergy: the environment remembers, and so does the body.
+##   avoid  the sign of the gradient flipped — flee the strongest scent. Anti-stigmergy:
+##          a trail as a record of where you no longer need to go. The ridges never form;
+##          the walkers spread and the plot churns evenly.
+##   grid   the same following law over the four CARDINAL neighbours only. The lattice
+##          stops being a substrate and becomes visible in the result: right-angled
+##          ridges, a street plan rather than a delta.
+@export_enum("trail", "sniff", "avoid", "grid") var rule: String = "trail"
+const RULES: PackedStringArray = ["trail", "sniff", "avoid", "grid"]
+
+## -1 keeps the shipped behaviour EXACTLY: the global unseeded randf()/randi()/randi_range(),
+## a different landscape every run. Any value >= 0 pins one. Not an axis — without it four
+## rule variants are four different landscapes and a sweep measures the RNG instead of the law.
+@export var walk_seed: int = -1
+
+## Steps to run before the first frame is shown, each one decaying by the real step
+## interval so the dynamics are the shipped dynamics played fast. 0 is the shipped
+## behaviour: nothing has happened when the map opens and the trails grow while you watch.
+## Not an axis either — a still photographed 0.35 s after spawn shows a flat white plane
+## under every value, which is a fact about the bench and not about the rule.
+@export var warmup_steps: int = 0
+
+## The eight compass steps, in the order the shipped `_choose_next_position` built them
+## every call. Hoisted to a constant so the candidate set can be narrowed per rule; the
+## order is unchanged, which matters because ties fall to the first entry.
+const DIRS_8: Array = [
+	Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1),
+	Vector2i(1, 1), Vector2i(-1, 1), Vector2i(1, -1), Vector2i(-1, -1)]
+## The first four of those — the cardinal neighbours, same order.
+const DIRS_4: Array = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
+## The same eight in ANGULAR order, so a heading's neighbours are its list neighbours.
+const COMPASS: Array = [
+	Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, 1), Vector2i(-1, 1),
+	Vector2i(-1, 0), Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1)]
+
 @onready var plane_node = $Plane
 
 # Grid data
@@ -44,7 +97,13 @@ var walkers: Array = []
 var mesh_instance: MeshInstance3D
 var time_accumulator: float = 0.0
 
+# Seeded stream, used ONLY when walk_seed >= 0. At the shipped -1 every draw still comes
+# from the global generator, in the same order and the same count as it always did.
+var _rng := RandomNumberGenerator.new()
+var _seeded: bool = false
+
 func _ready() -> void:
+	_init_rng()
 	set_process(false)
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -91,10 +150,43 @@ func _ready() -> void:
 
 	_initialize_grids()
 	_create_walkers()
-	
+
 	_add_info_label()
+	_warmup()
 	set_process(true)
 	print("PheromoneeTerrain: Initialized with %d walkers on %dx%d grid" % [walker_count, x_segments, y_segments])
+
+
+func _init_rng() -> void:
+	_seeded = walk_seed >= 0
+	if _seeded:
+		_rng.seed = int(walk_seed)
+
+
+func _rand_unit() -> float:
+	return _rng.randf() if _seeded else randf()
+
+
+func _rand_index(n: int) -> int:
+	return (_rng.randi() % n) if _seeded else (randi() % n)
+
+
+func _rand_between(a: int, b: int) -> int:
+	return _rng.randi_range(a, b) if _seeded else randi_range(a, b)
+
+
+## Run the simulation forward before anything is shown, decaying by the REAL step
+## interval each step so this is the shipped dynamics played fast rather than a
+## different process. At the shipped 0 it returns before touching anything.
+func _warmup() -> void:
+	if warmup_steps <= 0:
+		return
+	var dt: float = 1.0 / maxf(walk_speed, 0.001)
+	for _i in range(warmup_steps):
+		_decay_pheromones(dt)
+		_walk_step()
+	_update_mesh()
+	_update_info_label()
 
 func _find_mesh_instance(node: Node) -> MeshInstance3D:
 	"""Recursively find MeshInstance3D"""
@@ -168,10 +260,18 @@ func _create_walkers() -> void:
 	var max_y = y_segments - border_size
 
 	for i in range(walker_count):
+		# The two draws, in the shipped order and count. The heading is assigned from the
+		# compass by INDEX, deliberately without a draw, so `trail` consumes exactly the
+		# random stream it always did and the shipped landscape is unchanged.
+		var start_x: int = _rand_between(min_x, max_x)
+		var start_y: int = _rand_between(min_y, max_y)
+		var head: Vector2i = COMPASS[i % COMPASS.size()]
 		walkers.append({
-			"x": randi_range(min_x, max_x),
-			"y": randi_range(min_y, max_y),
-			"active": true
+			"x": start_x,
+			"y": start_y,
+			"active": true,
+			"hx": head.x,
+			"hy": head.y
 		})
 
 func _process(delta: float) -> void:
@@ -214,6 +314,14 @@ func _walk_step() -> void:
 			# Move walker back to allowed area
 			walker.x = clamp(walker.x, border_size, x_segments - border_size)
 			walker.y = clamp(walker.y, border_size, y_segments - border_size)
+			# Turn it round. This branch `continue`s without choosing a direction, so a
+			# heading-locked walker (rule = sniff) would keep pushing at the same wall
+			# for ever — clamped back, stepping out, clamped back. Reversing the heading
+			# here is the only line the border needs. Inert under every other value,
+			# which never reads a heading, and it consumes no random draw, so the shipped
+			# stream is untouched.
+			walker.hx = -int(walker.get("hx", 1))
+			walker.hy = -int(walker.get("hy", 0))
 			continue
 
 		# Deposit pheromone at current location
@@ -226,53 +334,85 @@ func _walk_step() -> void:
 			vertex_grid[walker.y][walker.x] = current_vertex
 
 		# Decide next move based on pheromones
-		var next_pos = _choose_next_position(walker.x, walker.y)
+		var next_pos = _choose_next_position(walker)
 		walker.x = next_pos.x
 		walker.y = next_pos.y
 
-func _choose_next_position(x: int, y: int) -> Vector2i:
-	"""Choose next position based on pheromone concentration"""
-	# Get possible directions (8-way movement)
-	var directions = [
-		Vector2i(1, 0),   # Right
-		Vector2i(-1, 0),  # Left
-		Vector2i(0, 1),   # Down
-		Vector2i(0, -1),  # Up
-		Vector2i(1, 1),   # Down-right
-		Vector2i(-1, 1),  # Down-left
-		Vector2i(1, -1),  # Up-right
-		Vector2i(-1, -1)  # Up-left
-	]
-	
+## The three steps in front of a walker with this heading — straight on, turn left, turn
+## right. Used only by `sniff`; a walker that can only see forward cannot reverse into
+## its own trail, which is the whole difference between a knot and an arc.
+##
+## STRAIGHT ON IS FIRST ON PURPOSE. The shipped law breaks ties on the FIRST entry, and
+## on ground nobody has walked yet every candidate senses 0.0, so whatever sits at index
+## 0 is what a following walker does by default. With a turn there, a sniffing walker
+## curls the same way on every blank step and the plot fills with same-handed spirals —
+## an artefact of the list order presented as a fact about stigmergy. Straight ahead is
+## the honest default for a body with momentum.
+func _forward_cone(hx: int, hy: int) -> Array:
+	var here := Vector2i(hx, hy)
+	var idx: int = COMPASS.find(here)
+	if idx < 0:
+		idx = 0
+	var n: int = COMPASS.size()
+	return [COMPASS[idx], COMPASS[(idx + n - 1) % n], COMPASS[(idx + 1) % n]]
+
+func _rule_value() -> String:
+	var r: String = String(rule).strip_edges().to_lower()
+	return r if RULES.has(r) else "trail"
+
+func _choose_next_position(walker: Dictionary) -> Vector2i:
+	"""Choose next position based on pheromone concentration.
+
+	`trail` is the shipped law, line for line: eight compass directions in the order they
+	were always built, the seed value best_pheromone = -1.0, a STRICT > so ties fall to
+	the first entry, the same bounds test, and the same single randf() before it. The
+	other three values change WHICH neighbours are candidates (sniff, grid) or the SIGN
+	of the comparison (avoid), and nothing else — same draws, same order, same count.
+	"""
+	var x: int = int(walker["x"])
+	var y: int = int(walker["y"])
+
+	var directions: Array = DIRS_8
+	var seek_max: bool = true
+	match _rule_value():
+		"sniff":
+			directions = _forward_cone(int(walker.get("hx", 1)), int(walker.get("hy", 0)))
+		"avoid":
+			seek_max = false
+		"grid":
+			directions = DIRS_4
+		_:
+			pass                      # "trail" — the shipped law
+
+	var chosen: Vector2i = directions[0]
 	# Use pheromone attraction vs random choice
-	if randf() < pheromone_attraction:
-		# Follow pheromones - sense ahead and pick highest concentration
-		var best_dir = directions[0]
-		var best_pheromone = -1.0
-		
+	if _rand_unit() < pheromone_attraction:
+		# Follow (or flee) pheromones — sense ahead and pick the extreme concentration
+		var best_pheromone: float = -1.0 if seek_max else INF
+
 		for dir in directions:
-			var sense_x = x + dir.x * sensor_distance
-			var sense_y = y + dir.y * sensor_distance
-			
+			var d: Vector2i = dir
+			var sense_x: int = x + d.x * sensor_distance
+			var sense_y: int = y + d.y * sensor_distance
+
 			# Check bounds
 			if sense_x < 0 or sense_x > x_segments or sense_y < 0 or sense_y > y_segments:
 				continue
-			
-			var pheromone_level = pheromone_grid[sense_y][sense_x]
-			if pheromone_level > best_pheromone:
+
+			var pheromone_level: float = pheromone_grid[sense_y][sense_x]
+			var better: bool = (pheromone_level > best_pheromone) if seek_max else (pheromone_level < best_pheromone)
+			if better:
 				best_pheromone = pheromone_level
-				best_dir = dir
-		
-		# Move one step in the best direction
-		var new_x = clamp(x + best_dir.x, 0, x_segments)
-		var new_y = clamp(y + best_dir.y, 0, y_segments)
-		return Vector2i(new_x, new_y)
+				chosen = d
 	else:
 		# Random movement
-		var dir = directions[randi() % directions.size()]
-		var new_x = clamp(x + dir.x, 0, x_segments)
-		var new_y = clamp(y + dir.y, 0, y_segments)
-		return Vector2i(new_x, new_y)
+		chosen = directions[_rand_index(directions.size())]
+
+	# The heading a walker leaves with — read back by `sniff` on its next step, inert
+	# under every other value.
+	walker["hx"] = chosen.x
+	walker["hy"] = chosen.y
+	return Vector2i(clampi(x + chosen.x, 0, x_segments), clampi(y + chosen.y, 0, y_segments))
 
 func _update_mesh() -> void:
 	"""Update mesh with modified vertices, normals, and colors"""
@@ -376,5 +516,46 @@ func _update_info_label() -> void:
 			walker_count, pheromone_attraction * 100, total_phero
 		]
 
+## ASSIGNS ONLY — nothing here rebuilds. GridInteractablesComponent reaches this through
+## call_deferred, so it lands AFTER _ready has already built the grids and the walkers;
+## a rebuild would wipe a terrain the room has been growing since the player walked in,
+## which is force_pad's mistake and the reason this is a pure assignment. `rule` is read
+## live by _choose_next_position, so it bites from the next step under either ordering.
+## walk_seed and warmup_steps only mean anything before _ready — the capture bench sets
+## them as properties before add_child, which is where they belong.
+##
+## All three placements (Random_Pheromone, Room_Random_Pheromone, Corridor_Random_Pheromone)
+## carry the bare token with no config keys at all, so not one of these branches is
+## reachable from any map that exists today.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# An unknown word is ignored rather than assigned, so a typo falls back to the
+	# shipped law instead of stalling the walkers.
+	if config.has("rule"):
+		var want: String = String(config["rule"]).strip_edges().to_lower()
+		if RULES.has(want):
+			rule = want
+	if config.has("walk_seed"):
+		walk_seed = int(config["walk_seed"])
+		_init_rng()
+	if config.has("warmup_steps"): warmup_steps = maxi(0, int(config["warmup_steps"]))
+	if config.has("walker_count"): walker_count = maxi(1, int(config["walker_count"]))
+	if config.has("walk_speed"): walk_speed = maxf(0.001, float(config["walk_speed"]))
+	if config.has("raise_amount"): raise_amount = float(config["raise_amount"])
+	if config.has("max_height"): max_height = float(config["max_height"])
+	if config.has("pheromone_deposit"): pheromone_deposit = float(config["pheromone_deposit"])
+	if config.has("pheromone_decay_rate"): pheromone_decay_rate = maxf(0.0, float(config["pheromone_decay_rate"]))
+	if config.has("pheromone_attraction"): pheromone_attraction = clampf(float(config["pheromone_attraction"]), 0.0, 1.0)
+	if config.has("sensor_distance"): sensor_distance = maxi(1, int(config["sensor_distance"]))
+	if config.has("pheromone_color"):
+		pheromone_color = _parse_color(config["pheromone_color"], pheromone_color)
+
+
+func _parse_color(value: Variant, fallback: Color) -> Color:
+	if value is Color:
+		return value
+	if value is String:
+		var parts: PackedStringArray = String(value).split(",")
+		if parts.size() >= 3:
+			return Color(float(parts[0]), float(parts[1]), float(parts[2]),
+				1.0 if parts.size() < 4 else float(parts[3]))
+	return fallback
