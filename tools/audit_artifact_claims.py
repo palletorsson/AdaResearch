@@ -182,20 +182,61 @@ def check_hollow(token, entry, src, findings, path):
                 f"it — a sweep renders identical frames and blames the axis"))
 
 
+GODOT_BUILTIN = re.compile(
+    r"^(Node3D|Node|Node2D|Control|Resource|RefCounted|Object|SceneTree|"
+    r"CharacterBody3D|RigidBody3D|StaticBody3D|Area3D|MeshInstance3D|"
+    r"MultiMeshInstance3D|CSGShape3D|CSGCombiner3D|Camera3D|Label3D|"
+    r"AnimatableBody3D|GridMap|Path3D|Sprite3D|GPUParticles3D)$")
+
+
 def check_unbuilt(token, entry, src, findings):
-    """A script with no entry point that constructs anything."""
+    """A script with no entry point that constructs anything.
+
+    FOLLOW `extends`. A subclass of a project base legitimately has no _ready:
+    BaseCA._ready() calls initialize_grid(), which every ca_showcase member
+    overrides, so seventeen correctly-working automata read as building nothing.
+    Only a script extending a Godot BUILT-IN owes its own entry point — anything
+    extending a project class may be handed one, and this pass cannot see that
+    cheaply enough to be worth a false accusation.
+    """
     if not src:
         return
-    has_ready = re.search(r"^func\s+_ready\s*\(", src, re.M)
-    has_build = re.search(r"^func\s+(_build|_generate|build_scene|_setup|_create)\w*\s*\(",
-                          src, re.M)
-    if has_ready or has_build:
+    # _enter_tree is a deliberate choice, not an omission: reaction_diffusion
+    # forwards to its child there because Godot notifies ENTER_TREE top-down
+    # across the whole subtree before any _ready runs. And a script that only
+    # drives nodes the SCENE already contains (draw_calls_display is seven lines
+    # of _process updating a Label3D) has nothing to build and is not broken.
+    if re.search(r"^func\s+(_ready|_enter_tree|_process|_physics_process)\s*\(", src, re.M):
         return
-    # a pure resource//data script is fine; one a MAP PLACES is not
+    if re.search(r"^func\s+(_build|_generate|build_scene|_setup|_create|initialize)\w*\s*\(",
+                 src, re.M):
+        return
+    # And ask the SIBLINGS too, for the same reason check_hollow does: the forces
+    # family's scene root is a shared forces_demo_root.gd while each example does
+    # its building in its own .gd one node down. A root without an entry point is
+    # not an artifact without one.
+    scene = res_to_abs(entry.get("scene", ""))
+    if scene:
+        for sib in glob.glob(os.path.join(os.path.dirname(scene), "*.gd")):
+            try:
+                st = open(sib, encoding="utf-8", errors="replace").read()
+            except Exception:
+                continue
+            if re.search(r"^func\s+(_ready|_enter_tree|_process|_physics_process|"
+                         r"_build|_generate|build_scene|_setup|_create|initialize)\w*\s*\(",
+                         st, re.M):
+                return
+
+    base = re.search(r"^extends\s+([A-Za-z_][\w.]*)", src, re.M)
+    if base and not GODOT_BUILTIN.match(base.group(1)):
+        return          # a project base may own the entry point
+    if not re.search(r"^func\s", src, re.M):
+        pass            # no functions at all — certainly inert
     findings.append((
         "unbuilt", token,
-        f"no _ready and no builder in {os.path.relpath(src_path_of(entry), REPO)} "
-        f"— placed in maps and constructs nothing"))
+        f"no _ready and no builder in {os.path.relpath(src_path_of(entry), REPO)}, "
+        f"and it extends {base.group(1) if base else '?'} — placed in maps and "
+        f"constructs nothing"))
 
 
 _SRC_PATH: dict = {}
