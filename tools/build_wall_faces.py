@@ -50,6 +50,21 @@ WALL = "4"
 BANDS = [("dado", 0.0, 0.9, 0.45), ("hang", 0.9, 2.1, 1.5), ("frieze", 2.1, 3.2, 2.6)]
 # below this the viewing-distance rule says nothing can be taken in at all
 MIN_HANGABLE_M2 = 1.0
+
+# THE HANGAR'S OWN LAW, read from commons/scenes/WallHangarEditor.gd rather than
+# guessed. Its WALL_SET is three tokens and "everything else falls to the floor +
+# stacks"; the 30 curated walls corroborate it, mounting only station_panel (86),
+# station_wall (27) and science_screen (2). My first pass inferred a 206-strong
+# class from spatial_profile.dir_group == "panel" and hung things this project had
+# already decided stand on the floor.
+WALL_SET = ["station_panel", "station_frame", "framed_readout_screen",
+            "station_wall", "science_screen"]
+# And the size rule, from a curated wall's own source note: "the small/medium HELD
+# things (the large/applied worlds go on the open floor)". Across the corpus the
+# walls carry 73 small and 27 medium; large and applied go down. That convention
+# predicted R-032 — hanging the biggest work is what stole the hero.
+WALL_SIZES = {"small", "medium", "standard", ""}
+DEPTH_STEP = 0.7          # the hangar's depth layer for floor pieces
 # facing -> the rotation an artifact needs to look back down the standoff
 FACING_ROT = {"N": 0, "S": 180, "E": 270, "W": 90}
 
@@ -85,6 +100,26 @@ def panel_artifacts() -> list:
                             "xl": 12.0}.get(str(e.get("size_group", "")).lower(), 2.0)
                 out.append({"lookup": tok, "axes": axes, "area_m2": area})
     return sorted(out, key=lambda r: r["lookup"])
+
+
+def wall_class() -> dict:
+    """The mountable pieces, by NAME, from the hangar's own WALL_SET.
+
+    Read from the registry directly rather than through spatial_profile, because
+    station_panel and station_wall are not dir_group "panel" at all — the first
+    pass filtered on that and lost the very pieces the hangar mounts. Mountability
+    is a fact about the piece, and this project already stated which pieces.
+    """
+    out = {}
+    for rp in sorted(glob.glob(str(REPO / "commons" / "artifacts" / "registry" / "*.json"))):
+        try:
+            d = json.load(open(rp, encoding="utf-8"))
+        except Exception:
+            continue
+        for tok, e in (d.get("artifacts") or {}).items():
+            if tok in WALL_SET and isinstance(e, dict) and e.get("scene") and e.get("map_ready"):
+                out.setdefault(tok, e)
+    return out
 
 
 def max_area(standoff: float) -> float:
@@ -174,7 +209,7 @@ def emit() -> int:
     return sum(len(v) for v in payload["museums"].values())
 
 
-def hang(museum: str, band: str, limit: int, seed: int) -> Path:
+def hang(museum: str, band: str, limit: int, seed: int, with_floor: bool = False) -> Path:
     """A demo: hang the panel class on a museum's faces and write the map."""
     sys.path.insert(0, str(REPO / "tools"))
     from compile_museum_map import compile_map, policy_pool, museums as cmus  # noqa: E402
@@ -194,15 +229,17 @@ def hang(museum: str, band: str, limit: int, seed: int) -> Path:
     rng = random.Random(seed)
     faces = sorted(faces_of([[str(c) for c in r] for r in pat["tile"]]),
                    key=lambda f: (-f["run"], f["cells"][0][1]))
-    hung, too_tight = [], []
+    mountable = wall_class()
+    if not mountable:
+        raise SystemExit("none of the hangar's WALL_SET is alive in the registry")
+    # station_panel takes width_cells, so THE FACE SIZES THE PIECE — the hangar's
+    # own parameterisation, and better than choosing a different artifact per wall
+    piece = "station_panel" if "station_panel" in mountable else sorted(mountable)[0]
+    floor_pool = [q for q in panels if q["lookup"] not in WALL_SET]
+    hung, too_tight, floored = [], [], []
     for f in faces:
         if len(hung) >= limit:
             break
-        # THE RULE HAS TO BITE. The first run of this tool computed max_area and
-        # then hung panels on two faces it had just rated 0.00 m2 — a standoff of
-        # one metre is inside the viewing distance of the smallest work, so
-        # nothing can be seen there. A measured constraint that does not refuse
-        # anything is decoration; this one refuses.
         if f["max_area_m2"] < MIN_HANGABLE_M2:
             too_tight.append(f)
             continue
@@ -210,33 +247,54 @@ def hang(museum: str, band: str, limit: int, seed: int) -> Path:
         if not (0 <= fy < len(inter) and 0 <= fx < len(inter[0])):
             continue
         if str(inter[fy][fx]).strip():
-            continue          # the floor slot is already spoken for
-        # A WALL DEserves A WORK THAT FITS IT, AND ONLY ONE THAT DOES. The first
-        # hung run put a 36-cell face's worth of pattern on the wall because the
-        # planner chose at random: the face had been measured and the artifact
-        # never asked. Candidates are now those whose declared area fits the
-        # face's allowance, and the largest such is preferred — a long wall
-        # earns a big work, a pinch gets a small one.
-        fits = [q for q in panels if q["area_m2"] <= f["max_area_m2"]]
-        if not fits:
-            too_tight.append(f)
             continue
-        fits.sort(key=lambda q: -q["area_m2"])
-        top = fits[:max(1, len(fits) // 8)]
-        a = top[rng.randrange(len(top))]
-        tok = f'{a["lookup"]}:{f["rot"]}:{yoff}'
-        if a["axes"]:
-            # a face can carry a family, exactly as a bay run can
-            tok = f'{a["lookup"]}#{a["axes"][0]}:{rng.randrange(2)}' if False else tok
-        inter[fy][fx] = tok
-        hung.append({"token": tok, "cell": [fx, fy], "facing": f["facing"],
+        width = max(1, min(f["run"], 5))
+        inter[fy][fx] = f'{piece}:{f["rot"]}:{yoff}#width_cells:{width}'
+        hung.append({"token": inter[fy][fx], "cell": [fx, fy], "facing": f["facing"],
                      "run": f["run"], "standoff": f["standoff"],
-                     "max_area_m2": f["max_area_m2"], "work_area_m2": a["area_m2"]})
+                     "max_area_m2": f["max_area_m2"], "width_cells": width})
+    # THE SECOND GRAVITY, AND WHERE IT GOES — the correction the judge forced.
+    # First reading: "everything else falls to the floor + stacks", so I stood the
+    # big works at the hangar's depth layer, one cell out from the wall. Judged,
+    # that scored 4.79 against the plain building's 5.30 — promise 0.00, hero 13
+    # degrees. The works were legitimately hero candidates (a floor work is not a
+    # wall work under R-032) and were tucked against a wall where nothing can be
+    # promised down the axis: the same theft, in a new place.
+    #
+    # The curated note says "the large/applied worlds go on the OPEN floor", and
+    # the open floor is the room's middle — which the museum tile already models
+    # as its slots, already filled from the cast by the compiler. So the wall
+    # system should mount, and nothing else: adding floor works at the wall's foot
+    # is inventing a third place the building never had. --floor keeps the
+    # experiment reachable; it is off, and the number above is why.
+    import random as _r
+    rng2 = _r.Random(seed + 1)
+    for f in (faces if with_floor else []):
+        if len(floored) >= limit or not floor_pool:
+            break
+        if f["standoff"] < 2:
+            continue
+        dx = {"N": 0, "S": 0, "E": 1, "W": -1}[f["facing"]]
+        dy = {"N": -1, "S": 1, "E": 0, "W": 0}[f["facing"]]
+        fx, fy = f["front"][0] + dx, f["front"][1] + dy      # one depth layer out
+        if not (0 <= fy < len(inter) and 0 <= fx < len(inter[0])):
+            continue
+        if str(inter[fy][fx]).strip():
+            continue
+        q = floor_pool[rng2.randrange(len(floor_pool))]
+        inter[fy][fx] = f'{q["lookup"]}:{f["rot"]}:0'
+        floored.append({"token": inter[fy][fx], "cell": [fx, fy],
+                        "facing": f["facing"], "depth_m": DEPTH_STEP,
+                        "area_m2": q["area_m2"]})
     doc["documentation"]["wall_hang"] = {
         "tool": "build_wall_faces.py", "band": band, "y_offset": yoff,
         "hung": hung, "faces_available": len(faces),
         "refused_too_tight": len(too_tight),
         "min_hangable_m2": MIN_HANGABLE_M2,
+        "wall_set": WALL_SET, "piece": piece,
+        "floored": floored, "depth_step_m": DEPTH_STEP,
+        "law": "commons/scenes/WallHangarEditor.gd — WALL_SET mounts, everything "
+               "else falls to the floor and stands at a depth layer",
         "note": "panel-class artifacts (spatial_profile.dir_group == panel) placed on the "
                 "floor cell in front of a wall face, rotated to it, lifted into the band by "
                 "the token's own y-offset — no engine change, and no collision on the walk",
@@ -392,6 +450,9 @@ def main() -> int:
     ap.add_argument("--band", default="hang", choices=[b[0] for b in BANDS])
     ap.add_argument("--limit", type=int, default=10)
     ap.add_argument("--seed", type=int, default=46)
+    ap.add_argument("--floor", action="store_true",
+                    help="also stand non-mountable works at the wall's depth layer "
+                         "(judged worse: -0.51; kept only so the claim stays checkable)")
     ap.add_argument("--family", action="store_true",
                     help="hang ONE artifact's DNA family along the longest face")
     ap.add_argument("--token")
@@ -412,17 +473,19 @@ def main() -> int:
         print(f"-> {p.relative_to(REPO)}")
         return 0
     if args.hang:
-        p = hang(args.hang, args.band, args.limit, args.seed)
+        p = hang(args.hang, args.band, args.limit, args.seed, args.floor)
         doc = json.loads(p.read_text(encoding="utf-8"))
         wh = doc["documentation"]["wall_hang"]
         print(f"{len(wh['hung'])} hung on {wh['faces_available']} faces "
               f"in the `{args.band}` band (y {wh['y_offset']}) · "
               f"{wh['refused_too_tight']} faces refused: under {wh['min_hangable_m2']} m2 "
               f"of viewing distance")
-        for x in wh["hung"][:10]:
-            print(f"  {x['token']:40} facing {x['facing']} run {x['run']:2} "
-                  f"standoff {x['standoff']:2} · wall allows {x['max_area_m2']:6} m2 · "
-                  f"work is {x['work_area_m2']} m2")
+        print(f"  MOUNTED ({wh['piece']}, sized to the face):")
+        for x in wh["hung"][:8]:
+            print(f"    {x['token']:46} run {x['run']:2} -> width_cells {x['width_cells']}")
+        print(f"  FLOORED at {wh['depth_step_m']} m depth ({len(wh['floored'])}):")
+        for x in wh["floored"][:6]:
+            print(f"    {x['token']:46} {x['area_m2']} m2")
         print(f"-> {p.relative_to(REPO)}")
         return 0
     rows = survey()

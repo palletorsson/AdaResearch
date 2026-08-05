@@ -1096,7 +1096,7 @@
   "interactables": [
    [
     " ",
-    "UnitCircleTrig:270:1.5",
+    "station_panel:270:1.5#width_cells:5",
     " ",
     " ",
     " ",
@@ -1106,7 +1106,7 @@
     " ",
     " ",
     " ",
-    "breathing_room:90:1.5",
+    "station_panel:90:1.5#width_cells:5",
     " "
    ],
    [
@@ -1142,7 +1142,7 @@
    [
     " ",
     " ",
-    "sine_wall:0:1.5",
+    "station_panel:0:1.5#width_cells:1",
     " ",
     " ",
     " ",
@@ -1150,29 +1150,29 @@
     " ",
     " ",
     " ",
-    "sine_wall:0:1.5",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    "2d_in_3d_randomness_vis:270:1.5",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "unit_circle_advanced:90:1.5",
-    " ",
+    "station_panel:0:1.5#width_cells:1",
     " ",
     " "
    ],
    [
     " ",
     " ",
-    "advancedglitch:180:1.5",
+    " ",
+    "station_panel:270:1.5#width_cells:1",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "station_panel:90:1.5#width_cells:1",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    "station_panel:180:1.5#width_cells:1",
     " ",
     " ",
     " ",
@@ -1180,7 +1180,7 @@
     " ",
     " ",
     " ",
-    "pythagorean_triangle:180:1.5",
+    "station_panel:180:1.5#width_cells:1",
     " ",
     " "
    ],
@@ -1202,22 +1202,7 @@
    [
     " ",
     " ",
-    "filter_screen:0:1.5",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "configurable_portal:0:1.5",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
+    "station_panel:0:1.5#width_cells:1",
     " ",
     " ",
     " ",
@@ -1232,7 +1217,22 @@
    [
     " ",
     " ",
-    "sine_wall:180:1.5",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
     " ",
     " ",
     " ",
@@ -1595,7 +1595,7 @@
     " ",
     " ",
     " ",
-    "koch_curve_1:0:1.5",
+    "station_panel:0:1.5#width_cells:2",
     " ",
     "CoordinateSystem3M",
     " ",
@@ -1682,7 +1682,7 @@
    "y_offset": 1.5,
    "hung": [
     {
-     "token": "UnitCircleTrig:270:1.5",
+     "token": "station_panel:270:1.5#width_cells:5",
      "cell": [
       1,
       0
@@ -1691,10 +1691,10 @@
      "run": 36,
      "standoff": 11,
      "max_area_m2": 45.71,
-     "work_area_m2": 36.0
+     "width_cells": 5
     },
     {
-     "token": "breathing_room:90:1.5",
+     "token": "station_panel:90:1.5#width_cells:5",
      "cell": [
       11,
       0
@@ -1703,10 +1703,10 @@
      "run": 36,
      "standoff": 11,
      "max_area_m2": 45.71,
-     "work_area_m2": 14.0
+     "width_cells": 5
     },
     {
-     "token": "koch_curve_1:0:1.5",
+     "token": "station_panel:0:1.5#width_cells:2",
      "cell": [
       5,
       33
@@ -1715,10 +1715,10 @@
      "run": 2,
      "standoff": 34,
      "max_area_m2": 155.24,
-     "work_area_m2": 144.0
+     "width_cells": 2
     },
     {
-     "token": "sine_wall:0:1.5",
+     "token": "station_panel:0:1.5#width_cells:1",
      "cell": [
       2,
       3
@@ -1727,10 +1727,10 @@
      "run": 1,
      "standoff": 4,
      "max_area_m2": 12.38,
-     "work_area_m2": 5.0
+     "width_cells": 1
     },
     {
-     "token": "sine_wall:0:1.5",
+     "token": "station_panel:0:1.5#width_cells:1",
      "cell": [
       10,
       3
@@ -1739,10 +1739,10 @@
      "run": 1,
      "standoff": 4,
      "max_area_m2": 12.38,
-     "work_area_m2": 5.0
+     "width_cells": 1
     },
     {
-     "token": "advancedglitch:180:1.5",
+     "token": "station_panel:180:1.5#width_cells:1",
      "cell": [
       2,
       5
@@ -1751,10 +1751,10 @@
      "run": 1,
      "standoff": 3,
      "max_area_m2": 7.62,
-     "work_area_m2": 4.0
+     "width_cells": 1
     },
     {
-     "token": "pythagorean_triangle:180:1.5",
+     "token": "station_panel:180:1.5#width_cells:1",
      "cell": [
       10,
       5
@@ -1763,10 +1763,10 @@
      "run": 1,
      "standoff": 3,
      "max_area_m2": 7.62,
-     "work_area_m2": 4.0
+     "width_cells": 1
     },
     {
-     "token": "2d_in_3d_randomness_vis:270:1.5",
+     "token": "station_panel:270:1.5#width_cells:1",
      "cell": [
       3,
       4
@@ -1775,10 +1775,10 @@
      "run": 1,
      "standoff": 7,
      "max_area_m2": 26.67,
-     "work_area_m2": 12.0
+     "width_cells": 1
     },
     {
-     "token": "unit_circle_advanced:90:1.5",
+     "token": "station_panel:90:1.5#width_cells:1",
      "cell": [
       9,
       4
@@ -1787,10 +1787,10 @@
      "run": 1,
      "standoff": 7,
      "max_area_m2": 26.67,
-     "work_area_m2": 8.0
+     "width_cells": 1
     },
     {
-     "token": "filter_screen:0:1.5",
+     "token": "station_panel:0:1.5#width_cells:1",
      "cell": [
       2,
       7
@@ -1799,36 +1799,23 @@
      "run": 1,
      "standoff": 3,
      "max_area_m2": 7.62,
-     "work_area_m2": 6.0
-    },
-    {
-     "token": "configurable_portal:0:1.5",
-     "cell": [
-      10,
-      7
-     ],
-     "facing": "N",
-     "run": 1,
-     "standoff": 3,
-     "max_area_m2": 7.62,
-     "work_area_m2": 6.0
-    },
-    {
-     "token": "sine_wall:180:1.5",
-     "cell": [
-      2,
-      9
-     ],
-     "facing": "S",
-     "run": 1,
-     "standoff": 3,
-     "max_area_m2": 7.62,
-     "work_area_m2": 5.0
+     "width_cells": 1
     }
    ],
    "faces_available": 70,
    "refused_too_tight": 3,
    "min_hangable_m2": 1.0,
+   "wall_set": [
+    "station_panel",
+    "station_frame",
+    "framed_readout_screen",
+    "station_wall",
+    "science_screen"
+   ],
+   "piece": "station_panel",
+   "floored": [],
+   "depth_step_m": 0.7,
+   "law": "commons/scenes/WallHangarEditor.gd \u2014 WALL_SET mounts, everything else falls to the floor and stands at a depth layer",
    "note": "panel-class artifacts (spatial_profile.dir_group == panel) placed on the floor cell in front of a wall face, rotated to it, lifted into the band by the token's own y-offset \u2014 no engine change, and no collision on the walk"
   }
  }
