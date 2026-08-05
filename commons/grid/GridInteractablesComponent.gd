@@ -1592,8 +1592,65 @@ func _parse_config_token(token: String) -> Dictionary:
 
 # Apply configuration data to an artifact using the # syntax
 # This is a general system that allows any artifact to receive custom configuration
+## Coerce a config value to the type the artifact's own @export declares.
+##
+## _parse_config_token stores every value as a STRING — `config_data[key] =
+## config_parts[1].strip_edges()` — because a token is text. An artifact whose
+## export is typed then does `blade_length = config_data["blade_length"]`, Godot
+## refuses the assignment, and the artifact silently keeps its default. Nothing
+## errors and nothing is logged, so the knob simply does not work.
+##
+## An audit of every placed artifact found 54 of them in this state across 353
+## placements: xyz_slider_plate's min_value and max_value (35 placements),
+## pattern_tile_puzzle's tile_size (33), GlassRack's show_liquid (27),
+## laser_sword's blade_length and blade_emission (22). lsystem_editor was the
+## case that exposed it — seven L-system grammars behind a typed int `preset`,
+## so `lsystem_editor#preset:5` rendered Plant in all four maps, forever.
+##
+## Fixing it here rather than in 54 files is the whole point: the defect is at
+## the boundary, not in the artifacts. This asks the INSTANCE what type it
+## declared and converts to that, so an artifact with no such property, or a
+## value that is not a valid number, is passed through exactly as before.
+static func _coerce_to_export_type(target: Node, key: String, value: Variant) -> Variant:
+	if not (value is String):
+		return value
+	var text: String = value
+	for prop in target.get_property_list():
+		if String(prop.get("name", "")) != key:
+			continue
+		# only real script exports, never built-in Node properties
+		if int(prop.get("usage", 0)) & PROPERTY_USAGE_SCRIPT_VARIABLE == 0:
+			return value
+		match int(prop.get("type", 0)):
+			TYPE_INT:
+				return int(text) if text.is_valid_int() else value
+			TYPE_FLOAT:
+				return float(text) if text.is_valid_float() else value
+			TYPE_BOOL:
+				var low: String = text.to_lower()
+				if low in ["true", "1", "yes", "on"]:
+					return true
+				if low in ["false", "0", "no", "off"]:
+					return false
+				return value
+			_:
+				return value      # String, enum-as-String, everything else: untouched
+	return value
+
+
+# Apply configuration data to an artifact using the # syntax
+# This is a general system that allows any artifact to receive custom configuration
 func _apply_artifact_config(artifact_object: Node, config_data: Dictionary, lookup_name: String):
 	print("GridInteractablesComponent: Applying config to '%s': %s" % [lookup_name, config_data])
+
+	# Type-match the text a token carries against what the artifact declared, so a
+	# typed export stops silently rejecting its own value. Purely additive: a key
+	# the artifact does not declare, and any value that will not parse, is left
+	# exactly as it arrived.
+	var typed_config: Dictionary = {}
+	for k in config_data.keys():
+		typed_config[k] = _coerce_to_export_type(artifact_object, String(k), config_data[k])
+	config_data = typed_config
 
 	# Set config data as metadata for the artifact to read
 	for config_key in config_data.keys():
