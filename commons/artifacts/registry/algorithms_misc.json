@@ -7776,7 +7776,37 @@
     "derived_at": "2026-04-29T09:39:46.036080Z",
     "derived_from": "aabb_size + category"
    },
-   "qfep_connection": "The escape from the merely-nearby minimum: heat the system so it can jump out of shallow valleys, then cool it slowly so it settles into a deep one. Basin-hopping on an energy landscape, borrowed from how metals find their strongest crystal. The chapter's answer to descent's blindness — sometimes to find the best shape you must first let the form shake."
+   "qfep_connection": "The escape from the merely-nearby minimum: heat the system so it can jump out of shallow valleys, then cool it slowly so it settles into a deep one. Basin-hopping on an energy landscape, borrowed from how metals find their strongest crystal. The chapter's answer to descent's blindness — sometimes to find the best shape you must first let the form shake.",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "basin": [
+      "bowl",
+      "valley",
+      "plural",
+      "plateau",
+      "scarp"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "fixture": {
+     "anneal_seed": 20260805,
+     "prerun_steps": 900
+    },
+    "default": "basin=plural, evidence=longhand - plural short-circuits to the shipped problem_type 'rastrigin' WITHOUT WRITING IT: _sync_basin_from_exports only assigns problem_type when basin is something other than its default, so the objective string, the height range, the mesh and the colours are the same objects built by the same code as before. evidence=longhand is the shipped picture branch for branch - trail, both markers, hop marks, the P(accept) histogram and both working label lines - and _apply_evidence deliberately draws nothing itself, so the default does not even move the histogram's first frame. All five placements (Cabinet_Gallery, FormFinding_Annealing, Gallery_Misc, Gallery_Misc_Placed, Placement_Simulated_Annealing) are BARE tokens with no #key:value, and GridInteractablesComponent only calls apply_grid_config when merged_config is non-empty, so none of them reaches the new code at all. The two fixture exports default to 0 and 0, which are 'leave the global RNG alone' and 'run nothing early'.",
+    "was": "no declared axis - the runner refused this token for NO TURNABLE KNOBS. Twenty-eight exports existed and every one was a temperature, a rate, a count or a dimension; the one categorical knob, problem_type, was a bare String with its four legal values in a trailing COMMENT, reachable only by typing the exact word. apply_grid_config read fourteen keys and then, unconditionally on ANY call, tore the console and the control panel down, re-cut them, threw the search away and started a new one - the force_pad trap, dormant only because no token has ever carried a key.",
+    "note": "hand promotion 2026-08-05. basin is gradient_descent_visualization's word and its five values, character for character, and taking it is the point rather than a convenience: annealing and descent are the same picture - a runner on a relief - differing in exactly one thing, that this one is allowed to move UPHILL. That licence is meaningless on a bowl and is the only way out of an egg-crate, so the argument does not exist until the surface is named. A map that asks both tables for the same basin gets one landscape and two policies on it, which is the comparison neither can make alone. TWO OF THE FIVE FORMULAS ARE THE SIBLING'S UNTOUCHED (bowl = x^2+y^2, valley = the same Rosenbrock) and scarp is ported from it below; plural and plateau are served by THIS artifact's own shipped Rastrigin and Ackley instead of the sibling's Himmelblau and tanh disc, because both are textbook members of the class the word names and because swapping them in would have discarded the default this artifact ships with. Where the functions differ the word still means the same thing. evidence is the same four rungs the motion family uses, asked here of a search that is permitted to be wrong on purpose.",
+    "scarp_note": "THE RISE IS THE FAMILY'S PROPORTION, NOT ITS NUMBER. gradient_descent fixes a 3.0 step against a bowl spanning 2*4^2 = 32 over its domain and renders it with a per-function y_scale; this artifact normalises every relief over its own measured min/max, so a literal 3.0 against a domain-5 bowl spanning 50 would flatten to two thirds of the sibling's contrast and read as `bowl` with a smudge on it. SCARP_RATIO = 3/32 reproduces the ratio at whatever search_space_size is set to. Since the surface is coloured by normalised height, the whole x>0 half of the plate shifts band - this should be the loudest value on the axis, and if it is not, suspect the capture and not the function.",
+    "still_note": "EVERY RUNG OF BOTH AXES IS STANDING GEOMETRY, but the walk that draws three of evidence's four is not standing yet when the shutter opens. The bench settles 1.1 s, step_interval is 0.06, and _process performs at most ONE step per frame whatever step_interval says - so an unpinned capture photographs about eighteen steps of a thousand: a stub of trail, an almost-empty histogram, no basin hops (stagnation_threshold is 80) and nothing rejected. result / trace / longhand would then differ by a few centimetres of line and the axis would read INERT as a fact about the shutter. prerun_steps runs the search forward synchronously in _ready; anneal_seed pins the whole thing, without which four basin frames differ by the surface AND by four unrelated random walks drawn over it. The temperature schedule itself is NOT an axis and cannot be: cooling is the one thing this artifact does that a still cannot hold.",
+    "framing_note": "unchecked against a capture in this pass. The axis lives in a 1.4 m plate that is 0.15 m deep in relief, the sweep camera sits at pitch -0.26 rad, and _create_console now stands the whole thing on a 0.90 m deck with a rail ring and a control pad - so a fit-by-diagonal sees a near-edge-on plate inside a much taller box. Deliberately NOT given a dna.framing number here: the identical geometry on gradient_descent_visualization carries the same warning and no number, and inventing one without a frame to check it against would be guessing at two artifacts at once. Check subject % before reading any verdict on either axis.",
+    "placements": 5
+   }
   },
   "small_world_network": {
    "category": "algorithms",

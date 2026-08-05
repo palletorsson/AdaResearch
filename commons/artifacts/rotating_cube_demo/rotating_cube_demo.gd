@@ -58,6 +58,38 @@ const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 @export_enum("none", "trace", "lattice", "archive", "wax") var retention: String = "trace"
 const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
 
+## AXIS — ABOUT WHAT. `theta += omega*dt` is written on the plate in front of the cube and
+## it is an incomplete sentence: an angle is not a rotation until you say what it turns
+## around. This file answered that question with a single hard-coded `.y` in three places
+## and never let a map ask it. omega itself stays a plain export and is NOT an axis — a
+## rate is invisible to a still, which is the whole reason this artifact was refused.
+##
+## The values are the cube's own rotation axes, so each is a different order of symmetry
+## and therefore a different swept solid, not just a different tilt:
+##
+##   face     through opposite face centres — the shipped vertical .y. Four-fold: the cube
+##            comes back to itself every 90 degrees, the ground arc lies flat, the dial is
+##            a floor dial and the twelve archive ghosts stack into a twelve-sided drum
+##   edge     through opposite edge midpoints. Two-fold, and the cube stands on an edge at
+##            45 degrees; the record plane cants over with it
+##   corner   through opposite vertices — the body diagonal. Three-fold: the cube balances
+##            on a point and the twelve ghosts fall into four groups of three
+##   oblique  (0.887, 0.362, 0.288), chosen by search as the direction FURTHEST from every
+##            symmetry element of the cube (27.5 degrees from the nearest). Nothing comes
+##            back to itself; the archive is a shell rather than a drum. A rotation with no
+##            period in the body's own terms, which is the case the other three hide
+##
+## STRICTLY SHORT-CIRCUITED. `face` sets _axle_tilted false and every legacy line below runs
+## exactly as written, including the literal `_cube_instance.rotation.y = _current_angle`.
+@export_enum("face", "edge", "corner", "oblique") var axle: String = "face"
+const AXLES: PackedStringArray = ["face", "edge", "corner", "oblique"]
+const AXLE_DIR := {
+	"face": Vector3(0.0, 1.0, 0.0),
+	"edge": Vector3(1.0, 1.0, 0.0),
+	"corner": Vector3(1.0, 1.0, 1.0),
+	"oblique": Vector3(0.8866, 0.3619, 0.2881),
+}
+
 var _cube_instance: Node3D
 var _cube_mesh: MeshInstance3D
 var _label: Label3D
@@ -73,8 +105,13 @@ func _ready():
 	_create_ground_arc()
 	_create_direction_indicator()
 	_create_labels()
-	# DNA, LAST: the retention pass runs after the whole legacy build exists. "trace" returns
-	# on the first line, so the shipped lineage keeps its exact children in their exact order.
+	# DNA, LAST: both passes run after the whole legacy build exists. AXLE first, because
+	# the retention builders below read the alignment it computes; "face" leaves that
+	# alignment the identity, so nothing it writes is a change. "trace" then returns on the
+	# first line, so the shipped lineage keeps its exact children in their exact order.
+	var _a: String = str(axle).strip_edges().to_lower()
+	axle = _a if AXLES.has(_a) else "face"
+	_apply_axle()
 	var _r: String = str(retention).strip_edges().to_lower()
 	retention = _r if RETENTIONS.has(_r) else "trace"
 	_apply_retention()
@@ -204,22 +241,34 @@ func _process(delta):
 	while _current_angle >= TAU:
 		_current_angle -= TAU
 	
-	# Apply rotation to cube
-	_cube_instance.rotation.y = _current_angle
-	
+	# Apply rotation to cube. AXLE: _axle_tilted is false on the shipped value, so the
+	# else branch is the literal line this function has always had.
+	if _axle_tilted:
+		_cube_instance.transform.basis = Basis(_axle_dir, _current_angle).scaled(
+			Vector3.ONE * cube_size)
+	else:
+		_cube_instance.rotation.y = _current_angle
+
 	# Update direction indicator. RETENTION "lattice" only: the heading lands on a station.
 	# _ret_snap is 0.0 on every other value, so the legacy path takes the else branch.
 	if _direction_indicator:
+		var heading: float = _current_angle
 		if _ret_snap > 0.0:
-			_direction_indicator.rotation.y = snappedf(_current_angle, _ret_snap)
+			heading = snappedf(_current_angle, _ret_snap)
+		if _axle_tilted:
+			_direction_indicator.transform.basis = _axle_align * Basis(Vector3.UP, heading)
 		else:
-			_direction_indicator.rotation.y = _current_angle
+			_direction_indicator.rotation.y = heading
 
 	# RETENTION "wax" only: the fan of older headings follows the live one. _ret_fan_step is
 	# 0.0 on every other value, so this compare is the whole cost on the legacy path.
 	if _ret_fan_step > 0.0:
 		for i in range(_ret_ghosts.size()):
-			_ret_ghosts[i].rotation.y = _current_angle - float(i + 1) * _ret_fan_step
+			var ga: float = _current_angle - float(i + 1) * _ret_fan_step
+			if _axle_tilted:
+				_ret_ghosts[i].transform.basis = Basis(_axle_dir, ga)
+			else:
+				_ret_ghosts[i].rotation.y = ga
 
 	# Update label
 	if _label:
@@ -272,12 +321,79 @@ func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])
+	# AXLE before RETENTION, so that a token naming both rebuilds the record apparatus
+	# against the new alignment rather than the old one. The _cube_instance guard is the
+	# proof that _ready has already built once.
+	if config_data.has("axle"):
+		var _a: String = str(config_data["axle"]).strip_edges().to_lower()
+		axle = _a if AXLES.has(_a) else "face"
+		if _cube_instance != null:
+			_apply_axle()
+			# The dial and the ghosts were built in the old plane; re-seat them. Returns
+			# on the first line at "trace", where there is nothing built to re-seat.
+			_apply_retention()
 	# Only a token that actually names the axis re-runs the pass; everything else keeps the
 	# behaviour this function has always had.
 	if config_data.has("retention"):
 		var _r: String = str(config_data["retention"]).strip_edges().to_lower()
 		retention = _r if RETENTIONS.has(_r) else "trace"
 		_apply_retention()
+
+
+# ── AXLE ─────────────────────────────────────────────────────────────────────
+# The direction the cube turns around, and the plane its record therefore lies in. Every
+# write below is either guarded by _axle_tilted or provably equal to what the legacy build
+# already put there, which is why "face" is not merely equivalent to the shipped artifact
+# but assembles the same numbers.
+
+## Unit vector of the current axle. Vector3.UP on the shipped value.
+var _axle_dir: Vector3 = Vector3.UP
+## Basis mapping local +Y onto _axle_dir — the frame the flat record apparatus is drawn in.
+## Identity on the shipped value.
+var _axle_align: Basis = Basis.IDENTITY
+## False on "face". Every legacy line in this file is behind this being false.
+var _axle_tilted: bool = false
+
+
+func _axle_value() -> String:
+	var a: String = String(axle).strip_edges().to_lower()
+	return a if AXLES.has(a) else "face"
+
+
+func _apply_axle() -> void:
+	var v: String = _axle_value()
+	_axle_tilted = v != "face"
+	_axle_dir = Vector3.UP
+	_axle_align = Basis.IDENTITY
+	if _axle_tilted:
+		_axle_dir = (AXLE_DIR[v] as Vector3).normalized()
+		_axle_align = _axle_basis_y_to(_axle_dir)
+
+	# Re-seat what the axle owns. On "face" each of these writes the value the legacy
+	# build already holds — identity basis, and a lift of _axle_dir * k, which with
+	# _axle_dir = UP is exactly the `position.y = k` those builders wrote. So switching
+	# back to "face" at runtime is exact, not approximate.
+	if _cube_instance != null:
+		_cube_instance.transform.basis = Basis.IDENTITY.scaled(Vector3.ONE * cube_size)
+	if _ground_arc != null and is_instance_valid(_ground_arc):
+		_ground_arc.transform.basis = _axle_align
+		_ground_arc.position = _axle_dir * 0.005
+	if _direction_indicator != null and is_instance_valid(_direction_indicator):
+		_direction_indicator.position = _axle_dir * 0.01
+	if _ret_dial != null and is_instance_valid(_ret_dial):
+		_ret_dial.transform.basis = _axle_align
+		_ret_dial.position = _axle_dir * 0.006
+
+
+## A basis whose +Y runs along `dir` — the axis the flat record apparatus is drawn on.
+func _axle_basis_y_to(dir: Vector3) -> Basis:
+	var y: Vector3 = dir.normalized()
+	if y.length() < 0.0001:
+		return Basis()
+	var ref: Vector3 = Vector3.UP if absf(y.dot(Vector3.UP)) < 0.985 else Vector3.RIGHT
+	var x: Vector3 = ref.cross(y).normalized()
+	var z: Vector3 = x.cross(y).normalized()
+	return Basis(x, y, z)
 
 
 # ── RETENTION ────────────────────────────────────────────────────────────────
@@ -352,6 +468,10 @@ func _ret_build_dial() -> void:
 	dial.position.y = 0.006
 	add_child(dial)
 	_ret_dial = dial
+	# AXLE: the dial is a flat instrument, so it lives in the plane the axle is normal to.
+	if _axle_tilted:
+		dial.transform.basis = _axle_align
+		dial.position = _axle_dir * 0.006
 
 	var tick := StandardMaterial3D.new()
 	tick.albedo_color = Color(0.85, 0.70, 0.40, 0.85)
@@ -393,7 +513,14 @@ func _ret_build_dial() -> void:
 func _ret_build_ring() -> void:
 	for k in range(RET_ARCHIVE_FACES):
 		var ghost: MeshInstance3D = _ret_make_ghost(cube_size * 0.98, 0.30, 0.55)
-		ghost.rotation.y = TAU * float(k) / float(RET_ARCHIVE_FACES)
+		var ga: float = TAU * float(k) / float(RET_ARCHIVE_FACES)
+		# AXLE: twelve orientations ABOUT THE AXLE, so the union is the solid this
+		# rotation actually sweeps — a twelve-sided drum on "face", something with three
+		# groups of four on "corner", and no closed figure at all on "oblique".
+		if _axle_tilted:
+			ghost.transform.basis = Basis(_axle_dir, ga)
+		else:
+			ghost.rotation.y = ga
 		add_child(ghost)
 		_ret_ghosts.append(ghost)
 

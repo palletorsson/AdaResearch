@@ -211,6 +211,35 @@
    }
   },
   "velocity_arrow": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "framing": 0.55,
+    "fixture": {
+     "phase": "straight"
+    },
+    "axes": {
+     "phase": [
+      "traverse",
+      "straight",
+      "bend",
+      "mirror"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "default": "phase=traverse, evidence=trace - traverse is absent from PHASE_A by construction, so the station lookup MISSES and `a = fmod(_t, TAU)` is still the line that decides where the puck is; trace leaves the arrow on layer 1 (its Godot default, so the write is a no-op) and _build_evidence falls through its match without adding a node, leaving _ready at the same three children in the same order. The 4 placements (Change_Velocity, VFM_Velocity, Trial_gate8_cha_size, Trial_gate8_cha_type) are BARE `velocity_arrow` tokens passing no config key at all, so no map can see either axis unless someone writes one in. The three numeric exports keep their pre-promotion behaviour including the broken part of it: track_radius_x/z are still assigned after _ready has stitched the track mesh, so the drawn ring still does not move when a map sets them.",
+    "was": "seven exports - three colours, three track dimensions and a speed. Nothing declared changed what the artifact ARGUED, and the runner refused the token for NO TURNABLE KNOBS. Worse, the one thing that did vary was the one thing nobody could pin: the puck's position is a function of how many process frames elapsed, so every still of this artifact was a photograph of the boot time.",
+    "note": "phase is WHERE ON THE TRACK THE DERIVATIVE IS READ, and the track was built to make that question have an answer - the `sin(a*2)*0.15` bulge in _track_point exists to vary curvature. Measured off that function rather than guessed: straight (a=pi/2) is curvature 0.311, |v| 1.700, arrow 1.190 long; bend (a=0.3241) is curvature 2.218, |v| 0.878, arrow 0.614; mirror (a=3pi/2) is curvature 0.744, |v| 1.100, arrow 0.770. Three positions 1.4-1.8 m apart on a 2.86 x 1.80 m track with a 0.12 m puck, so no two stations overlap anywhere. WHAT IS DELIBERATELY ABSENT: `swing`, the place the arrow rotates fastest. k*|v| peaks at a=0.345 and curvature peaks at a=0.324 - the same 1.2 degrees of track - so swing and bend would have been two names for one point and shipped two identical stills. That is slope_tangent_demo's zero/steepest/inflection lesson applied before the sweep instead of after it. mirror is the value that carries the actual claim: it is the point diametrically opposite straight, on the side the bulge does not reach, so it looks like the same piece of ellipse and is moving at 1.100 against 1.700 - two symmetric-looking places that are not symmetric motions.",
+    "kin": "evidence is the family word (38 siblings) taken character for character, with slope_tangent_demo's default, `trace`. The two artifacts are the change sequence's derivative pair and they now carry the SAME TWO AXES, which is the honesty test for a shared vocabulary: if velocity_arrow and slope_tangent_demo do not measure alike on evidence, that is a fault to chase and not a design difference. Values here: result = track and puck with no arrow, motion without its rate; trace = the shipped arrow at one point; longhand = the difference quotient the arrow is the limit of, drawn out - the two sample points, the chord between them and the numeric |v| readout this file's @identity has listed as missing since it was written; axiom = `v = dP/dt` on a plate with no arrow at all, the textbook line instead of the demonstration. `phase` is slope_tangent_demo's word taken for the same question (where on the curve is the rate read, with the shipped sweep as the default value) and NOT its value list - crest, steepest and trough are facts about a sine and this is a closed track, so taking them would be folding_past's fault. Only `traverse` is shared, because only `traverse` names the same thing in both objects.",
+    "fixture_why": "phase=straight, and it is NOT a claim that straight is special - it is the station with the longest arrow, so a sweep of `evidence` alone has the most ink to lose when result and axiom take the arrow away. traverse is the only nondeterministic value in the file, so any sweep that does not itself vary phase would otherwise be photographing evidence against a puck in a different place each frame and reporting the clock as a bite. cabinet_sweep merges the fixture UNDER the swept params, so when phase IS the axis the swept value wins and this pin costs nothing. No placement passes phase, so no map ever sees it.",
+    "still_note": "READ THE SUBJECT SHARE BEFORE BELIEVING ANY NUMBER. The track is an ImmediateMesh LINE_STRIP that rasterises one pixel wide across 2.86 x 1.80 m, so almost the whole AABB is empty - this is the slope_tangent_demo dilution problem in a second body. The ink that moves is the 0.12 m puck plus a 0.04 x 0.7-2.2 m emissive arrow. phase should still read wholesale, because it moves ALL of that ink 1.4-1.8 m and no two stations overlap. evidence is the thinner one and its thinnest pair is result-vs-trace, which is exactly one arrow's worth of pixels - roughly 0.06 m2 of a ~3.5 m frame. That thinness is the PRICE OF PRESERVING THE DEFAULT and cannot be fixed by thickening the arrow: the arrow is drawn at evidence=trace, which is what all 4 placements show. What longhand and axiom add is new geometry no placement has seen, so both are drawn generously (a 3.5 cm chord, two 7 cm sample spheres, a 19 cm-glyph readout; a 1.55 x 0.40 m plate with two emissive rules). Expect longhand and axiom to bite and result-vs-trace to be the weak pair. IF phase COMES BACK UNDER 1%, do not re-cut the stations: check first that the station lookup fired at all, because PHASE_A is keyed on the raw export and a value that never arrives and an axis that does nothing produce the same sheet.",
+    "declines": "puck_color, arrow_color and track_color stay plain exports - a recolour is not an argument. track_radius_x, track_radius_z and puck_radius stay dials on the same picture. `speed` was the tempting one and is REFUSED on the brief's own rule: the @identity names it the critical_parameter, but omega is a rate, a still cannot photograph a rate, and the arrow's length is a function of the track's shape and NOT of `speed` - _update_puck_and_arrow scales by |dP/da|, so doubling speed changes how fast the puck goes round and leaves every frame of it identical. A `speed` axis would have produced four indistinguishable tiles and a confident verdict about nothing, which is info_board exactly."
+   },
    "name": "Velocity Arrow",
    "lookup_name": "velocity_arrow",
    "description": "A puck moves around a closed track with an arrow riding on it. Length = speed, direction = motion. Velocity as the visible derivative of position.",
@@ -410,6 +439,34 @@
    }
   },
   "ftc_bridge": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "framing": 0.8,
+    "fixture": {
+     "pulse_speed": 0.0
+    },
+    "axes": {
+     "curve": [
+      "wave",
+      "hump",
+      "ramp",
+      "spike",
+      "step"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand"
+     ]
+    },
+    "default": "curve=hump, evidence=result - VERIFIED AGAINST THE PRE-PROMOTION SOURCE, not asserted. At hump _curve_h returns ARCH_H * (1.0 - pow(2.0*u - 1.0, 2.0)) with ARCH_H = 0.7, which is character for character the arch_h * (1.0 - pow(2.0*t_norm - 1.0, 2.0)) that _arch_point held before the promotion; _curve_h(0) and _curve_h(1) are both exactly 0, so each pillar is again BoxMesh(0.25, pillar_height, 0.25) sitting at y = pillar_height * 0.5, and the beam label stays at the shipped literal pillar_height + 1.05 rather than being re-derived from the deck's peak - short circuit over recomputation, so a future change to ARCH_H cannot quietly move the beam in 26 rooms. At result _build_evidence returns before a single node is constructed, so the scene tree and the measured AABB are what they were. The 31 cells across 26 maps are all bare `ftc_bridge` or `ftc_bridge:0:0` and pass no config key at all, so the rebuild path in apply_grid_config is unreachable from any map that exists.",
+    "was": "ten exports - three colours and four numbers - and an apply_grid_config that assigned bridge_span and pillar_height after _ready had already built with them, and never rebuilt for either. The runner refused the token for NO TURNABLE KNOBS, and that was true in the sense that mattered: nothing declared changed what the bridge ARGUED. THE FINDING THAT MADE curve NECESSARY: the shipped deck is a symmetric parabola, so its two ends sit at the same height, f(a) = f(b), and the right-hand side of the theorem painted on its own beam is exactly zero. The capstone of the change sequence was labelled with an equation that, on its own geometry, read 0 = 0.",
+    "note": "curve is WHICH ANTIDERIVATIVE THE DECK IS. hump is the shipped parabola and is kept because 26 maps stand on it. ramp is a straight climb from -0.7 to +0.7 - the plainest non-degenerate case, a constant rate underneath and a constant difference across - and step is a smoothed atan running -0.672 to +0.672, the largest honest difference in the family; only at those two does the beam say something. wave and spike both return to their start height, so the accumulated rate cancels to nothing over the full span, which is a different and equally real thing to photograph. Every member is smooth on [0,1] INCLUDING step, which is an atan and not a jump: a genuinely discontinuous f would be a counter-example to the theorem this deck carries, not an instance of it, and the family does not offer one. evidence is HOW MUCH OF THE THEOREM'S WORKING STANDS ON THE BRIDGE - result asserts the claim and computes nothing; trace draws the left-hand side, f' on a zero line under the deck with its SIGNED area shaded in strips that hang below the axis where the rate is negative; longhand adds the right-hand side, both pillar tops dropped onto one datum so the difference between them is a length you can look at, and prints the two quantities. The printed integral is trapezoid quadrature over the same slope function the strips were drawn from, so their agreement is a statement about the geometry rather than a constant typed in beside it.",
+    "kin": "curve is integral_area's and derivative_pair's word and value list character for character, and the five shapes are the same five functions of u, so a player can meet ramp as a rate in one room, as an accumulation in the next, and as a bridge here - which is what a capstone is for. hump is this artifact's own shipped parabola rather than the siblings' sin(u*PI), exactly as integral_area's hump is its own: the word names one arch over the whole span, and each artifact's hump is its own shipped curve. evidence is the family word but takes zeno_staircase's THREE-value list from this same registry file, not the canonical four, and the missing rung is deliberate. The family's fourth value, axiom, is 'the rule stated instead of drawn' - and the rule is ALREADY painted on this artifact's beam at the shipped default. Declaring axiom here would have shipped a second photograph of result under a different word: the two-values-identical fault, bought in advance. That refusal is bouncing_ball's, made of a different ladder.",
+    "still_note": "curve is the strong axis and it is not close: the deck is 24 emissive 0.18 m boxes over a 3 m span, and ramp against step moves that whole run of ink by up to 1.34 m vertically. Expect a large bite. evidence is the thinner claim, though not a thin one - the rate plot is 40 solid BoxMesh strips up to 0.34 m tall, real ink rather than a one-pixel line, but it sits under the deck inside the existing silhouette. THE ONE NONDETERMINISM IS PINNED: _process runs a pulse marker along the deck and _update_pulse raises the emission multiplier of the three segments nearest it from 0.6 to about 2.1, so the brightest band in the frame walks the span and two frames of the same curve are not comparable to each other. The fixture sets pulse_speed = 0.0, which parks the marker at the left pillar and freezes that band at segment 0. No map passes pulse_speed, so nothing standing is touched, and cabinet_sweep merges the fixture UNDER the swept params so it can never fight an axis. framing 0.8 from the rig's own arithmetic: the union box including longhand's readout ticks at x = 1.95 is about 3.9 x 2.4 x 0.25 m, half-diagonal 2.29 m, so dist = 2.29/tan(17 deg) * PAD 1.9 * 0.8 = 11.4 m and the frame is about 6.97 m across against a projected subject near 3.3 m at YAW 0.62 - roughly 48% of frame width. Cropping is arithmetically impossible at any framing above 1/PAD = 0.53, because the rig fits by bounding SPHERE, so 0.8 has margin in hand.",
+    "declines": "pillar_color, arch_color and pulse_color stay plain exports - a recolour is not an argument. bridge_span and pillar_height stay dials on the same picture: a longer bridge is a bigger photograph of the same claim. arch_segments is the resolution of the approximation rather than the shape being approximated, which is zeno_staircase's axis and not this one's. pulse_speed is time-domain and invisible to a still, which is exactly why it is a fixture here and not an axis."
+   },
    "name": "FTC Bridge",
    "lookup_name": "ftc_bridge",
    "description": "An arched bridge labeled with the Fundamental Theorem of Calculus. A pulse runs from left pillar (a) to right pillar (b). The change-sequence capstone.",

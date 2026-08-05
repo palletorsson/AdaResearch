@@ -1844,6 +1844,26 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.273850Z",
     "derived_from": "aabb_size + category"
+   },
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "assay": [
+      "none",
+      "gauge",
+      "control",
+      "chart",
+      "vitrine"
+     ]
+    },
+    "default": "assay=none - the early return in _assay_dressing, which does not even create the Assay pivot, so the 0.3 m soft body, its plinth, its label and its rack stand on nothing exactly as they did in all 4 rooms. Every other rung builds under ONE Node3D appended AFTER _create_vr_controls, so no legacy child index moves and no branch below the match touches _soft_body, _material or a single physics value. All four placements (SoftBodies_Soft_Body_Deformation and its _p1/_p2/_p3 siblings) are the bare token `jelly_cube:0:0.5:1` with no #key:value, and GridInteractablesComponent only calls apply_grid_config when merged_config is non-empty, so none of them reaches the new code at all.",
+    "was": "DERIVED, not composed. The axis, its allow-list, the five builders and the guarded apply_grid_config were already in commons/artifacts/jelly_cube/jelly_cube.gd (committed d3b41fbab) and the registry had never been told, so check_dna_declarations listed jelly_cube under 'promoted in code, undeclared in the registry' and the sweep could not reach any of it. What this pass added is the declaration and nothing else - not one line of the artifact was touched, because the code was already right: apply_grid_config returns unless the word is in the allow-list AND differs from the word already standing AND is_node_ready(), and _read_dna_meta lets a token's word be built once in _ready instead of built and torn down a frame later.",
+    "note": "assay is the softbody bench family's word and its five values, character for character - grab_jelly_bench, mass_spring_bench, energy_landscape_bench, membrane_bench, rigidity_dial_bench, abject_bench, octopus_bench, becoming_bench and tentacle_grab_bench all ask what apparatus a specimen is surrounded by, and jelly_cube stands in the same softbodies sequence as every one of them. The kit is re-dimensioned by a single factor u = cube_size / 0.5 so the family's proportions, accents and captions survive at this artifact's smaller scale; `control` is the rung that argues hardest, because an empty wire cage at the size the cube had BEFORE anything happened to it turns a thing you are watching into a difference you could disagree with.",
+    "still_note": "THE JIGGLE IS NOT AN AXIS AND CANNOT BE, and this is why the apparatus carries the claim instead. Everything jelly_cube exposes - stiffness, damping, pressure, mass - is a STARTING CONDITION on a body that relaxes, so five cubes started five ways settle into the same shape and photograph as one object five times; cloth_straps hit exactly this and took `suspension` for the same reason. Every assay rung is standing geometry: a graduated column, a wire reference cage, a plotted board, a glass case. The chart's settling trace is CLOSED FORM (exp(-3.4f)cos(13f)) and not sampled from the running solver, because a plot that came out different every launch would be noise wearing the costume of a record.",
+    "framing_note": "unchecked against a capture in this pass. The subject is a 0.3 m cube on a 0.42 m plinth, and _create_vr_controls already hangs a rack panel at z = 0.36 tilted -30 degrees; `chart` adds a board behind at -0.31 and `control` a second plate 0.35 m to the right, so the union-of-variants camera is pulled well back from the jelly itself. If the axis measures faint, check subject % before believing it - the apparatus IS the axis here, so a frame dominated by apparatus is not the failure it would be elsewhere.",
+    "sibling_note": "jelly_variants.gd carries the same axis and is likewise undeclared in the registry; it was outside this pass's three tokens and is left for the batch that owns it.",
+    "placements": 4
    }
   },
   "softbodytest": {

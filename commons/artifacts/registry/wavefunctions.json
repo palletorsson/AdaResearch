@@ -11888,6 +11888,35 @@
    }
   },
   "rotating_cube_demo": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "fixture": {
+     "rotation_speed": 0.0
+    },
+    "axes": {
+     "retention": [
+      "none",
+      "trace",
+      "lattice",
+      "archive",
+      "wax"
+     ],
+     "axle": [
+      "face",
+      "edge",
+      "corner",
+      "oblique"
+     ]
+    },
+    "default": "retention=trace, axle=face - trace returns on the first line of _apply_retention and builds nothing, leaving the shipped ground arc and heading arrow exactly as _create_ground_arc and _create_direction_indicator made them; face sets _axle_tilted false, so _process still runs the literal `_cube_instance.rotation.y = _current_angle` and `_direction_indicator.rotation.y = ...` this file has always run. The three writes _apply_axle makes on the face path are provably equal to what the legacy build already holds, not merely equivalent: Basis.IDENTITY.scaled(ONE*cube_size) is the basis `scale = Vector3.ONE * cube_size` produced, and _axle_dir * 0.005 with _axle_dir = UP is the vector `position.y = 0.005` produced. The 4 placements (WaveFunctions_Intro and its p1/p2/p3 variants) are all `rotating_cube_demo:180:0.5`, rotation and y-offset only, passing no config key, so nothing standing can move either way.",
+    "was": "retention was already written and working in the file and was NEVER DECLARED - the same rescued-batch state as vector_subtraction_demo: the axis existed in code, a map token could reach it, and the sweep, the gallery and the bite report were all blind to it because the registry said nothing. This declaration is DERIVED from the @export_enum. axle did not exist: the direction of rotation was three hard-coded `.y` writes in _process, plus a ground arc, a heading line, a dial and twelve ghosts all drawn in the XZ plane because that was the only plane the rotation could ever be in. Five exports (cube_size, rotation_speed, cube_color, show_labels, show_trail) and none of them an argument, which is why the runner refused the token for NO TURNABLE KNOBS.",
+    "kin": "retention is mystic_writing_pad's word taken character for character and shared with 8 siblings including y_oscillation_cube and oscillation_controlled_cube, the other two motion demos in this registry - three demonstrations of one claim (a body moves, and something or nothing is kept of where it has been) that should not use three words for it. axle is a NEW word and is stated as such: the corpus has `travel` (none|seat|spindle|rail|gimbal|armature, 7 siblings including rotating_cube) but that names the MOUNT a motion is carried on, which is furniture, not the direction of the turn. It was not taken.",
+    "not_the_same_artifact": "rotating_cube (primitives.json) is a DIFFERENT TOKEN, a different scene (res://commons/primitives/cubes/animation/rotating_cube.tscn) and a different implementation - a cube_scene.tscn instance whose root carries NO script at all, with the `travel` axis living on a child node running cube_bearing.gd. That is the token the corpus audit flagged HOLLOW. rotating_cube_demo shares nothing with it: its own .tscn root carries rotating_cube_demo.gd, class RotatingCubeDemo, and both axes declared here are exported on that root. Checked because the brief asked; they are unrelated beyond the name.",
+    "note": "axle answers the question the plate in front of this cube asks and does not answer. `theta += omega*dt` is written there in 72-point type and it is an incomplete sentence - an angle is not a rotation until you say what it turns around - and until now the answer was a hard-coded `.y`. The four values are the cube's own rotation axes, so each is a different ORDER of symmetry and therefore a different swept solid rather than a different tilt: face is 4-fold (the twelve archive ghosts stack into a twelve-sided drum), edge is 2-fold, corner is 3-fold (the twelve fall into four groups of three), and oblique (0.887, 0.362, 0.288) was chosen by search as the direction furthest from EVERY symmetry element of the cube - 27.5 degrees from the nearest - so nothing returns to itself and the archive is a shell instead of a drum. The two axes compose properly because the record apparatus follows the axle: the arc, the 24-station dial and the ghost ring are all re-seated into the plane the axle is normal to, so `lattice` on `corner` is a dial canted onto the body diagonal and not a floor dial under a tipped cube.",
+    "declines": "rotation_speed is REFUSED as an axis and this is the artifact the brief predicted it for. omega is the file's own declared critical_parameter and it is exactly the thing one still cannot photograph: theta at the shutter is a function of boot time, so five values of omega give five frames of a cube at five arbitrary angles, which is a clock and not an axis. It is used as the FIXTURE instead, at 0.0, which pins theta at 0 for the whole sweep using an export that already existed - no new knob, and the label reading omega = 0.00 in every frame contributes nothing to any pair. cube_size and cube_color stay plain exports: a bigger or oranger cube is the same claim. show_labels and show_trail are booleans that delete text and the arc respectively, and show_trail in particular was tempting - but `retention` already owns the question of what the space keeps, and `none` is show_trail=false plus the heading, said better.",
+    "still_note": "NO CAPTURE WAS RUN IN THIS PASS (the brief forbids a second Godot instance), so every number below is arithmetic off the source and the next sweep should falsify it. The subject is compact - a 0.3 m cube at y=0.15 inside a 0.21 m arc, union AABB roughly 0.55 m cubed once corner and oblique tilt the apparatus - so this is NOT a dilution case like slope_tangent_demo; the ink and the box are the same size. framing is deliberately left UNSET rather than guessed. What to watch: the three Label3D nodes (title, theta readout, formula plate) are NOT counted by the capture AABB, reach about 0.5 m wide, and will crop at a tight fit; if the sheet comes back with cut text, set framing near 1.2 rather than re-cutting either axis. retention should measure wholesale (none deletes the arc and arrow, lattice replaces the arc with 72 dial bars, archive adds twelve ghost cubes). axle's weakest pair will be edge-vs-oblique at 28 degrees of separation; face-vs-corner at 54.7 degrees is the strong one. The residual floor is the cube's own yaw, which the rotation_speed=0.0 fixture removes entirely - if two tiles that should be identical differ, the fixture did not arrive."
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "Continuous rotation demonstration: θ += ω·dt. The simplest rotational motion—angle increases by angular velocity times delta time each frame. Ground arc shows the rotation path, direction arrow tracks the current angle. Constant spin, no oscillation.",

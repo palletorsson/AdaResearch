@@ -51,9 +51,78 @@ const RAIL_LIFT := 0.040
 @export var max_hops: int = 20
 
 @export_category("Problem")
-@export var problem_type: String = "rastrigin"  # rastrigin, ackley, sphere, rosenbrock
+@export var problem_type: String = "rastrigin"  # rastrigin, ackley, sphere, rosenbrock, scarp
 @export var search_space_size: float = 5.0
 @export var landscape_resolution: int = 40
+
+# --- DNA (stage 2, promoted 2026-08-05) ---------------------------------------
+#
+# basin — WHAT IS BEING SEARCHED.
+#
+# The word and its five values are gradient_descent_visualization's, character for
+# character, and that is the whole point of taking them. Annealing and descent are
+# the same picture — a runner on a relief — arguing about one thing: descent only
+# ever goes down, annealing sometimes goes UP on purpose. That argument is empty
+# until the surface is named, because "sometimes go uphill" is a wasted licence on
+# a bowl and the only way out of an egg-crate. A map that asks this table and the
+# descent table for the SAME basin gets one landscape and two policies on it, which
+# is the comparison neither artifact can make alone.
+#
+#   bowl     x² + y². One minimum; down is always right and the licence is wasted.
+#   valley   Rosenbrock. Steepest ≠ toward the minimum; the floor is a curved trench.
+#   plural   Rastrigin. Down is true about SOME minimum and there are dozens.
+#            THE SHIPPED LANDSCAPE, and the default.
+#   plateau  Ackley. A near-flat outer field with one needle at the centre — the
+#            surface has almost nothing to say until you are nearly on top of it.
+#   scarp    the bowl, cut. A step the derivative cannot see at all.
+#
+# TWO OF THE FIVE FORMULAS ARE THE FAMILY'S UNTOUCHED (bowl = x²+y²; valley = the
+# same Rosenbrock), the third (scarp) is ported below. `plural` and `plateau` are
+# served by THIS artifact's own already-shipped Rastrigin and Ackley rather than by
+# the descent table's Himmelblau and tanh disc: both are textbook members of the
+# class their word names, and swapping in the sibling's functions would have thrown
+# away the default this artifact ships with — which outranks tidiness. Where the
+# functions differ the WORD still means the same thing, and that is the test.
+@export_enum("bowl", "valley", "plural", "plateau", "scarp") var basin: String = "plural"
+const BASINS: PackedStringArray = ["bowl", "valley", "plural", "plateau", "scarp"]
+
+## basin -> the objective this artifact already had (scarp is the one addition).
+## One table so the word and the string it switches on cannot drift.
+const BASIN_PROBLEM: Dictionary = {
+	"bowl": "sphere",
+	"valley": "rosenbrock",
+	"plural": "rastrigin",
+	"plateau": "ackley",
+	"scarp": "scarp",
+}
+## The inverse, so a scene or a map that sets the legacy `problem_type` and never
+## mentions `basin` still reports the right word instead of being silently reset.
+const PROBLEM_BASIN: Dictionary = {
+	"sphere": "bowl",
+	"rosenbrock": "valley",
+	"rastrigin": "plural",
+	"ackley": "plateau",
+	"scarp": "scarp",
+}
+
+# evidence — WHAT THE TABLE PUTS IN FRAME AS PROOF THAT A SEARCH HAPPENED.
+#
+# The family's word and its four rungs, character for character (gradient_descent_
+# visualization, gradient_hunter, and behind them koch_curve, box_counting_dimension,
+# three_body_problem). Asked here of a search that is allowed to be WRONG on purpose.
+#
+#   result    the two markers. An optimisation as a POSITION, with no claim about
+#             how it was reached — indistinguishable, at this rung, from a descent.
+#   trace     + the walk and the basin-hop marks: where it actually went.
+#   longhand  + the P(accept) histogram and the acceptance statistics. THE SHIPPED
+#             PICTURE, branch for branch, and the default.
+#   axiom     + every move the rule was OFFERED. The rejected candidates as red
+#             spurs off the path, and a green ring on every move that went UPHILL
+#             and was taken anyway. Only at this rung is the difference between
+#             this table and the descent table visible in a still: the rejections
+#             are the denominator of exp(-ΔE/T) and nothing else shows them.
+@export_enum("result", "trace", "longhand", "axiom") var evidence: String = "longhand"
+const EVIDENCES: PackedStringArray = ["result", "trace", "longhand", "axiom"]
 
 @export_category("Visualization")
 @export var surface_size: float = 1.4
@@ -61,6 +130,23 @@ const RAIL_LIFT := 0.040
 @export var trail_length: int = 120
 @export var show_prob_bars: bool = true
 @export var step_interval: float = 0.06
+
+@export_category("Capture fixture — NOT axes")
+## Pins the walk. 0 keeps the global RNG untouched, which is what all five existing
+## placements get and what they have always got: a fresh search per launch. Anything
+## else seeds the global stream once, in _initialize_problem, so the same seed gives
+## the same walk on the same landscape — without which four `basin` frames differ by
+## the surface AND by four unrelated random walks drawn over it, and the critic reads
+## the walks as the axis.
+@export var anneal_seed: int = 0
+## Steps run synchronously at the end of _ready. 0 is the shipped behaviour exactly:
+## nothing runs until the first _process. The bench settles for 1.1 s and step_interval
+## is 0.06, so an unpinned capture photographs roughly EIGHTEEN steps of a thousand —
+## a stub of trail, an almost-empty histogram, no hop marks and nothing rejected — and
+## `evidence` would be measured on a search that has barely started. _process performs
+## at most one step per frame whatever step_interval says, so no rate can fix this; the
+## run has to be brought forward instead.
+@export var prerun_steps: int = 0
 
 # --- Colors ---
 
@@ -114,6 +200,12 @@ var _trail_was_accepted: Array[bool] = []
 # Hop markers
 var _hop_positions: Array[Vector2] = []
 
+# Offers — the moves the acceptance rule was handed. Recorded ONLY under
+# evidence == "axiom", so the default path allocates nothing and appends nothing.
+var _offer_from: Array[Vector2] = []
+var _offer_to: Array[Vector2] = []
+var _offer_taken: Array[bool] = []    # true = went uphill and was accepted anyway
+
 # --- Height cache ---
 var _height_min: float = 0.0
 var _height_max: float = 1.0
@@ -129,6 +221,7 @@ var _temp_ember_mat: StandardMaterial3D
 
 var _surface_mesh: MeshInstance3D
 var _trail_mesh: MeshInstance3D
+var _offer_mesh: MeshInstance3D
 var _current_marker: MeshInstance3D
 var _best_marker: MeshInstance3D
 var _prob_mesh: MeshInstance3D
@@ -148,6 +241,14 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	# The grid writes `config_*` metadata BEFORE add_child and only calls
+	# apply_grid_config a frame later, so reading the two DNA words here lets the
+	# FIRST build be the asked-for one instead of building rastrigin and tearing it
+	# down. The DNA sweep sets the @exports directly, also before add_child, and
+	# lands in the same place. No metadata, no change — which is all five existing
+	# placements, every one of them a bare token.
+	_read_dna_meta()
+	_sync_basin_from_exports()
 	_prob_bins.resize(_prob_bin_count)
 	_prob_bins.fill(0)
 	_create_field()
@@ -155,15 +256,65 @@ func _ready() -> void:
 	_create_surface()
 	_create_markers()
 	_create_trail_mesh_node()
+	_create_offer_mesh_node()
 	_create_prob_mesh_node()
 	_create_hop_parent()
 	_create_labels()
 	_create_vr_controls()
 	_initialize_problem()
+	_apply_evidence()
+	_run_prerun()
 	_update_surface()
 	_update_labels()
 	_create_console()
 	call_deferred("_start_optimization")
+
+
+## An unknown word keeps whatever is standing; the axis can only ever be set to a
+## value the code can actually build, which is the difference between a sweep that
+## measures the axis and one that measures a fallback.
+func _read_dna_meta() -> void:
+	if has_meta("config_basin"):
+		var b: String = str(get_meta("config_basin")).strip_edges().to_lower()
+		basin = b if BASINS.has(b) else basin
+	if has_meta("config_evidence"):
+		var e: String = str(get_meta("config_evidence")).strip_edges().to_lower()
+		evidence = e if EVIDENCES.has(e) else evidence
+
+
+## `basin` wins when it is set to anything other than its shipped default, which is
+## the sweep's route and a map token's route. Left at "plural" the LEGACY export wins
+## and `basin` is derived from it instead — so a scene that says problem_type =
+## "ackley" keeps Ackley rather than being quietly reset to Rastrigin. THE DEFAULT
+## IS A SHORT CIRCUIT, NOT A RECOMPUTATION: at "plural" this function never writes
+## problem_type at all.
+func _sync_basin_from_exports() -> void:
+	basin = basin.strip_edges().to_lower()
+	if not BASINS.has(basin):
+		basin = "plural"
+	if basin != "plural":
+		problem_type = str(BASIN_PROBLEM[basin])
+	else:
+		var pt: String = problem_type.strip_edges().to_lower()
+		basin = str(PROBLEM_BASIN.get(pt, "plural"))
+
+
+## Brings the search forward so a still can be of a search rather than of its first
+## few seconds. Capture bench only — at the shipped 0 this is a single comparison and
+## a return, and nothing in any room runs one step earlier than it did.
+func _run_prerun() -> void:
+	if prerun_steps <= 0:
+		return
+	var budget: int = mini(prerun_steps, max_iterations)
+	var done: int = 0
+	while done < budget:
+		if current_temperature <= final_temperature or current_iteration >= max_iterations:
+			_is_complete = true
+			break
+		_perform_annealing_step()
+		done += 1
+	_update_trail()
+	_update_prob_bars()
 
 
 ## The deck datum. The algorithm's own coordinates are all LOCAL to this pivot,
@@ -190,6 +341,8 @@ func _evaluate(pos: Vector2) -> float:
 			return _sphere(pos)
 		"rosenbrock":
 			return _rosenbrock(pos)
+		"scarp":
+			return _scarp(pos)
 		_:
 			return _rastrigin(pos)
 
@@ -216,6 +369,28 @@ func _rosenbrock(p: Vector2) -> float:
 	var t1 = p.y - p.x * p.x
 	var t2 = 1.0 - p.x
 	return 100.0 * t1 * t1 + t2 * t2
+
+
+## The `scarp` landscape: the bowl, cut. r² + a step at x = 0.
+##
+## The one function the descent table has and this one did not, ported so the shared
+## word arrives with its own answer rather than borrowing a name and shrugging. Its
+## point is that a step has NO derivative to give: a descent reading the surface one
+## sample either side of the face is perfectly honest about the bowl and completely
+## blind to the cliff standing between the two readings. Annealing does not read
+## derivatives at all — it JUMPS and asks the energy — so this is the one landscape
+## on the list where the two tables should disagree about what is hard.
+##
+## THE RISE IS THE FAMILY'S PROPORTION, NOT ITS NUMBER. gradient_descent_visualization
+## fixes a rise of 3.0 against a bowl spanning 2·4² = 32 over its domain and calls the
+## result a visible face. This artifact normalises every relief over its own min/max
+## (_height_to_y), so a literal 3.0 against a domain-5 bowl spanning 50 would flatten
+## to two thirds of that and read as `bowl` with a smudge. Same ratio, same picture.
+const SCARP_RATIO := 3.0 / 32.0
+
+func _scarp(p: Vector2) -> float:
+	var rise: float = SCARP_RATIO * 2.0 * search_space_size * search_space_size
+	return p.x * p.x + p.y * p.y + (rise if p.x > 0.0 else 0.0)
 
 
 # ═══════════════════════════════════════════════════
@@ -386,8 +561,14 @@ func _create_trail_mesh_node() -> void:
 
 
 func _update_trail() -> void:
+	# `result` withholds the walk: an optimisation reported as a POSITION.
+	if evidence == "result":
+		_trail_mesh.mesh = null
+		_update_offers()
+		return
 	if _trail_positions.size() < 2:
 		_trail_mesh.mesh = null
+		_update_offers()
 		return
 
 	var im = ImmediateMesh.new()
@@ -414,6 +595,8 @@ func _update_trail() -> void:
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_trail_mesh.material_override = mat
 
+	_update_offers()
+
 
 func _add_trail_point(accepted: bool) -> void:
 	_trail_positions.append(current_solution)
@@ -423,6 +606,93 @@ func _add_trail_point(accepted: bool) -> void:
 		_trail_positions.pop_front()
 		_trail_energies.pop_front()
 		_trail_was_accepted.pop_front()
+
+
+# ═══════════════════════════════════════════════════
+#  OFFERS — the moves the rule was handed (evidence == "axiom")
+# ═══════════════════════════════════════════════════
+
+func _create_offer_mesh_node() -> void:
+	_offer_mesh = MeshInstance3D.new()
+	_offer_mesh.name = "Offers"
+	_field.add_child(_offer_mesh)
+
+
+## The candidate the step generated and what became of it. THIS IS THE ONE THING THE
+## ARTIFACT ALREADY KNEW AND THREW AWAY: _perform_annealing_step evaluates a neighbour,
+## weighs exp(-ΔE/T) against a die, and on a rejection discards the position entirely
+## and appends the CURRENT one to the trail again — so the shipped trail records a
+## rejection as a point that did not move, and the acceptance rule leaves no mark. A
+## still of the walk was a still of the survivors.
+func _record_offer(from_pos: Vector2, to_pos: Vector2, uphill_taken: bool) -> void:
+	if evidence != "axiom":
+		return
+	_offer_from.append(from_pos)
+	_offer_to.append(to_pos)
+	_offer_taken.append(uphill_taken)
+	if _offer_from.size() > trail_length:
+		_offer_from.pop_front()
+		_offer_to.pop_front()
+		_offer_taken.pop_front()
+
+
+func _update_offers() -> void:
+	if _offer_mesh == null or not is_instance_valid(_offer_mesh):
+		return
+	if evidence != "axiom" or _offer_from.is_empty():
+		# Guarded, because _update_trail reaches this every frame on the default rung
+		# and a property write per frame for nothing is a cost with no picture in it.
+		if _offer_mesh.mesh != null:
+			_offer_mesh.mesh = null
+		return
+
+	var im := ImmediateMesh.new()
+	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in range(_offer_from.size()):
+		var taken: bool = _offer_taken[i]
+		var c: Color = color_accept if taken else color_reject
+		# Older offers fade, so the cloud reads as a history and not as a hedge.
+		c.a = float(i) / float(_offer_from.size()) * 0.75 + 0.25
+		var a: Vector3 = _func_to_world(_offer_from[i]) + Vector3(0, 0.012, 0)
+		var b: Vector3 = _func_to_world(_offer_to[i]) + Vector3(0, 0.012, 0)
+		im.surface_set_color(c)
+		im.surface_add_vertex(a)
+		im.surface_set_color(c)
+		im.surface_add_vertex(b)
+		# An accepted uphill move gets a mast at its landing point: the licence being
+		# used, standing up off the surface where it was taken.
+		if taken:
+			im.surface_set_color(c)
+			im.surface_add_vertex(b)
+			im.surface_set_color(c)
+			im.surface_add_vertex(b + Vector3(0, 0.045, 0))
+	im.surface_end()
+	_offer_mesh.mesh = im
+
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission_energy_multiplier = 0.5
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_offer_mesh.material_override = mat
+
+
+## What each rung of `evidence` is allowed to stand in the frame. Called once at build
+## and again whenever the word changes — it re-dresses and never re-runs, so switching
+## it can never restart a search or move a marker.
+##
+## DELIBERATELY DRAWS NOTHING ITSELF. _update_trail and _update_prob_bars already read
+## `evidence` on every pass, so the meshes correct themselves on the next frame; making
+## this function force them would have had the default build the histogram one frame
+## earlier than it does today, which is a behaviour change for the sake of tidiness.
+func _apply_evidence() -> void:
+	if _hop_parent != null and is_instance_valid(_hop_parent):
+		# `result` keeps the basin-hops out: a hop mark is a claim about the route.
+		_hop_parent.visible = evidence != "result"
+	if evidence != "axiom":
+		_offer_from.clear()
+		_offer_to.clear()
+		_offer_taken.clear()
 
 
 # ═══════════════════════════════════════════════════
@@ -447,7 +717,9 @@ func _record_probability(delta_e: float) -> void:
 
 
 func _update_prob_bars() -> void:
-	if not show_prob_bars:
+	# The histogram IS the rule's own bookkeeping, so it belongs to `longhand` and up;
+	# `result` and `trace` withhold it and leave the milled trough standing empty.
+	if not show_prob_bars or evidence == "result" or evidence == "trace":
 		_prob_mesh.mesh = null
 		return
 
@@ -616,11 +888,34 @@ func _update_labels() -> void:
 		current_temperature, current_energy, best_energy, status, current_iteration
 	]
 
-	_stats_label.text = "accept=%.1f%%  improve=%d  reject=%d  moves=%d" % [
-		rate_pct, improvements, rejected_moves, total_moves
-	]
+	# A legend for exhibits that are not in the frame is the label contradicting the
+	# picture, so the two working lines travel with `evidence`. `longhand` is the
+	# shipped pair, verbatim; `axiom` swaps the second for the rule itself.
+	if evidence == "result" or evidence == "trace":
+		_stats_label.text = ""
+		_adaptive_label.text = ""
+	else:
+		_stats_label.text = "accept=%.1f%%  improve=%d  reject=%d  moves=%d" % [
+			rate_pct, improvements, rejected_moves, total_moves
+		]
+		_update_working_label()
 
-	if adaptive_enabled:
+	# THE EMBER IS THE TEMPERATURE. The family's one warm line is made to carry
+	# this artifact's own subject: the basin is rimmed in fire at the start and
+	# cools to a dark ember as the schedule runs. Albedo never changes, so the
+	# accent stays canon (G4) and stays present (G7) however cold the machine gets.
+	# It is NOT on the evidence axis: the housing's own accent is not an exhibit.
+	if _temp_ember_mat != null:
+		var tt: float = clampf(current_temperature / maxf(initial_temperature, 0.001), 0.0, 1.0)
+		_temp_ember_mat.emission_energy_multiplier = lerpf(0.20, 2.8, tt)
+
+
+func _update_working_label() -> void:
+	if evidence == "axiom":
+		_adaptive_label.text = "P(accept | ΔE>0) = exp(-ΔE/T)   T=%.2f   uphill taken=%d" % [
+			current_temperature, _offer_taken.count(true)
+		]
+	elif adaptive_enabled:
 		var window_rate = _get_window_acceptance_rate()
 		_adaptive_label.text = "ADAPTIVE  rate=%.3f  window_accept=%.1f%%  target=%.0f%%  hops=%d" % [
 			effective_cooling_rate, window_rate * 100.0, target_acceptance_rate * 100.0, basin_hops_performed
@@ -629,14 +924,6 @@ func _update_labels() -> void:
 		_adaptive_label.text = "schedule=%s  rate=%.3f  hops=%d" % [
 			cooling_schedule, cooling_rate, basin_hops_performed
 		]
-
-	# THE EMBER IS THE TEMPERATURE. The family's one warm line is made to carry
-	# this artifact's own subject: the basin is rimmed in fire at the start and
-	# cools to a dark ember as the schedule runs. Albedo never changes, so the
-	# accent stays canon (G4) and stays present (G7) however cold the machine gets.
-	if _temp_ember_mat != null:
-		var tt: float = clampf(current_temperature / maxf(initial_temperature, 0.001), 0.0, 1.0)
-		_temp_ember_mat.emission_energy_multiplier = lerpf(0.20, 2.8, tt)
 
 
 # ═══════════════════════════════════════════════════
@@ -1030,6 +1317,10 @@ func _create_console() -> void:
 # ═══════════════════════════════════════════════════
 
 func _initialize_problem() -> void:
+	# Capture fixture. At the shipped 0 this line is a comparison and nothing else, and
+	# the global stream is left exactly as every placement has always found it.
+	if anneal_seed != 0:
+		seed(anneal_seed)
 	# Random start in search space
 	current_solution = Vector2(
 		randf_range(-search_space_size * 0.8, search_space_size * 0.8),
@@ -1058,6 +1349,9 @@ func _initialize_problem() -> void:
 	_trail_energies.clear()
 	_trail_was_accepted.clear()
 	_hop_positions.clear()
+	_offer_from.clear()
+	_offer_to.clear()
+	_offer_taken.clear()
 
 	_add_trail_point(true)
 	_update_marker_positions()
@@ -1121,6 +1415,8 @@ func _perform_annealing_step() -> void:
 	var neighbor = _generate_neighbor()
 	var neighbor_energy = _evaluate(neighbor)
 	var delta_energy = neighbor_energy - current_energy
+	var offer_from: Vector2 = current_solution
+	var uphill: bool = delta_energy >= 0.0
 
 	var accept = false
 
@@ -1133,6 +1429,12 @@ func _perform_annealing_step() -> void:
 		_record_probability(delta_energy)
 		accept = randf() < probability
 		steps_since_improvement += 1
+
+	# The rule's two interesting outcomes, kept only for `axiom`: a candidate that was
+	# turned down, and a candidate that went UP and was taken anyway. A downhill accept
+	# is already the trail and needs no second line drawn over it.
+	if uphill:
+		_record_offer(offer_from, neighbor, accept)
 
 	total_moves += 1
 
@@ -1260,7 +1562,57 @@ func _perform_basin_hop() -> void:
 #  GRID CONFIG
 # ═══════════════════════════════════════════════════
 
+## Every key below re-cuts the body or restarts the search, so any one of them
+## present means a rebuild — exactly the set the function already read, listed once
+## so the guard and the reads cannot drift apart. `evidence` is deliberately absent.
+const _REBUILD_KEYS: PackedStringArray = [
+	"initial_temperature", "cooling_rate", "cooling_schedule", "max_iterations",
+	"equilibrium_steps", "problem_type", "search_space_size", "adaptive_enabled",
+	"target_acceptance_rate", "basin_hop_enabled", "hop_strength", "step_interval",
+	"surface_size", "height_scale",
+	"finish", "wear", "unit_code", "deck_height", "show_console", "prob_gauge_depth",
+]
+
+
+## GUARDED THREE WAYS, because the body of this function tears the console and the
+## control panel down, re-cuts them, throws the search away and starts a new one.
+## Before this pass it did all of that on ANY call, including one naming nothing it
+## owns — the force_pad trap. It never fired in a room (GridInteractablesComponent
+## only calls it when a token carries at least one `#key:value`, and all five
+## placements are bare), so this changes nothing shipped; it stops the first token
+## that says `#finish:rams` from also silently restarting the anneal.
+##
+## `evidence` is handled first and separately: every one of its rungs is a branch in
+## the per-frame draw, so it re-dresses in place and must NOT reach the rebuild.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("evidence"):
+		var e: String = str(config_data["evidence"]).strip_edges().to_lower()
+		if EVIDENCES.has(e) and e != evidence:
+			evidence = e
+			_apply_evidence()
+			if is_node_ready():
+				_update_trail()
+				_update_prob_bars()
+				_update_labels()
+
+	var rebuild: bool = false
+
+	if config_data.has("basin"):
+		var b: String = str(config_data["basin"]).strip_edges().to_lower()
+		if BASINS.has(b) and b != basin:
+			basin = b
+			problem_type = str(BASIN_PROBLEM[b])
+			rebuild = true
+
+	for k in _REBUILD_KEYS:
+		if config_data.has(k):
+			rebuild = true
+			break
+
+	# Nothing this artifact owns was named, or only `evidence` was: no teardown.
+	if not rebuild:
+		return
+
 	if config_data.has("initial_temperature"):
 		initial_temperature = float(config_data["initial_temperature"])
 	if config_data.has("cooling_rate"):
@@ -1305,6 +1657,17 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("prob_gauge_depth"):
 		prob_gauge_depth = float(config_data["prob_gauge_depth"])
 
+	# A token that names the legacy `problem_type` and never mentions `basin` still
+	# gets the right word out, so the two can never report different landscapes.
+	if config_data.has("problem_type"):
+		basin = str(PROBLEM_BASIN.get(problem_type.strip_edges().to_lower(), basin))
+
+	# Called before the body exists — the sweep's rescue path can do this, and every
+	# node the teardown below reaches for is still null. The values are assigned by
+	# the time we get here, so _ready builds with them once instead of twice.
+	if not is_node_ready():
+		return
+
 	# Re-initialize with new settings
 	_is_running = false
 	_is_complete = false
@@ -1330,6 +1693,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	_create_console()
 
 	_initialize_problem()
+	_apply_evidence()
 	_compute_height_range()
 	_update_surface()
 	_update_prob_bars()

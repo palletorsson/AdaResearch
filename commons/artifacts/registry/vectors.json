@@ -4935,6 +4935,26 @@
         "size_group": "compact"
       },
       "scene": "res://algorithms/vectors/08_vector_throwing/destructibles/gravity_gun_test_scene.tscn",
+      "dna": {
+        "promoted": "2026-08-05",
+        "stage": "2 - variation",
+        "axes": {
+          "arrangement": [
+            "grid",
+            "ramp",
+            "ring",
+            "stack"
+          ]
+        },
+        "fixture": {
+          "spawn_gravity_scale": 0.0,
+          "color_seed": 20260805
+        },
+        "default": "arrangement=grid - the match block's 'grid' case calls spawn_grid_pattern(), whose body is untouched: two rows of five at spawn_spacing, flat in the XY plane. The rename from spawn_pattern is safe because nothing ever set it - no .tscn, no map token and no caller anywhere in the repo writes spawn_pattern, and set_pattern() still answers to the pre-promotion words 'circle' and 'pyramid' through LEGACY_PATTERN_WORDS. 'ring' and 'stack' are the old spawn_circle_pattern and spawn_pyramid_pattern bodies verbatim. The three direct placements (ForcesArena, Forces_Destruct, Forces_Drone_Game) and the two station collections (Corridor_ForcesArena, Curation_Bay_forces_4) pass no arrangement key; apply_grid_config was 'pass' and now returns on its first line for a config that does not name one, never respawns before _ready has spawned once, and never respawns for a word that repeats the current value.",
+        "was": "spawn_pattern, an untyped String documented in a trailing comment as 'grid', 'circle', 'pyramid', with apply_grid_config literally 'pass' - so three arrangements existed in the code and no map could ever ask for one. Every token a map wrote for this artifact was parsed, logged and silently discarded. The identity block already named the axis without knowing it: 'pattern decides whether the arrangement reads as wall, ring, or stack'.",
+        "note": "NOT scaffolding, which was the thing to rule out first: a token with 'test_scene' in its name is usually a harness, and this one builds ten to thirty physics-active spheres that are the whole point of the room - the rehearsal the gravity gun is aimed at. The word and its four values are grabcolorcollection's, character for character, which asks the identical question of ten colour swatches; the word alone is also particle_systems' and scale_lines'. Three of the four values ARE this file's shipped three under the family's spelling (circle was a ring, pyramid was a stack) and 'ramp' is the one the collection lacked - the value that turns a lightness of layouts into an argument, because a graded rank claims targets are ORDERED where the wall claims they are an undifferentiated mass. 'ramp' re-files the GRID's ten and not spawn_count's thirty (RAMP_COUNT = 10): the .tscn sets spawn_count = 30 at spawn_spacing = 0.5, and thirty in a rank is a fourteen-metre object that would shrink the other three values to specks under a fixed camera.",
+        "harness": "the fixture is load-bearing, not decoration. These are RigidBody3D and shootable_sphere.setup_physics() asserts gravity_scale = 1.0 from its own _ready, so on a capture bench with no floor all four arrangements dissolve into the same falling cloud within a second and the axis photographs as nothing; spawn_gravity_scale = 0.0 holds each collection in the pose it was filed in, and is applied AFTER add_child because a value set before it is erased by that _ready. color_seed pins a palette that is otherwise rng.randomize(), which would make four variants differ before the axis had been turned at all and read as bite. Both are set from here and never from a map: the shipped values are 1.0 and 0."
+      },
       "size_group": "compact",
       "tags": [
         "vector"
@@ -6915,6 +6935,29 @@
       }
     },
     "vector_subtraction_demo": {
+      "dna": {
+        "promoted": "2026-08-05",
+        "stage": "2 - variation",
+        "axes": {
+          "workings": [
+            "outcome",
+            "trace",
+            "operands",
+            "expression"
+          ],
+          "order": [
+            "a_minus_b",
+            "b_minus_a",
+            "reciprocal"
+          ]
+        },
+        "default": "workings=trace, order=a_minus_b - trace returns on the first line of _apply_workings and builds nothing, so the five shipped arrows, their labels, the title and formula panels and the VR control rack are the lineage byte for byte; a_minus_b sets _ord_head=vector_a and _ord_tail=vector_b, which makes `-_ord_tail` and `_ord_head - _ord_tail` the literal `-vector_b` and `vector_a - vector_b` the function was written with, makes _head_symbol/_tail_symbol return \"A\"/\"B\" so every label and formula line reassembles character for character, and leaves the Order holder empty. All 4 placements (Corridor_VectorFoundations, VFM_01_Foundations, VectorSubtraction, Vectors_Intro) are BARE tokens passing no config key at all, so nothing standing can move either way.",
+        "was": "workings was already written and working in the file and was NEVER DECLARED - a rescued-batch artifact whose axis existed in code, could be reached by a map token, and was invisible to the sweep, the gallery and the bite report because the registry said nothing about it. This declaration is DERIVED from the @export_enum, not transcribed. order did not exist: `var result = vector_a - vector_b` was welded into _update_vectors and the @identity's own critical_parameter (\"the relationship between vector_a and vector_b\") was unreachable from any map.",
+        "kin": "BOTH words are taken character for character, and from two different siblings, because they are two different questions. workings (outcome | trace | operands | expression) is the 15-sibling vector-subject word from transform_composition_workbench, shared with vector_add, vector_sub and length_lantern - how much of the arithmetic the bench draws. order (a_minus_b | b_minus_a | reciprocal) is VectorSubtraction's and example_1_3's - which difference is drawn. Three benches in this corpus argue a - b and they now argue it in one vocabulary; that is the whole point of the word, and a divergence between these three would be a measurement fault, not a design choice. NOT taken: `construction` (bare | flip | chain | parallelogram), the other half of the sibling pair. It asks the same question workings already answers here - flip/chain/parallelogram are outcome/trace/operands under other names - and this file had workings implemented first. Declaring both would have shipped two axes for one question and guaranteed a redundant sweep.",
+        "note": "order changes what is TRUE in the frame, not just what is shown: b_minus_a negates the other operand, so the ghost arrow, the tip-to-tail leg, the green result and every printed component flip together, and reciprocal draws the counter-difference from the origin so the two arrows stand nose to nose - anti-commutativity as one picture. The two axes compose: at (operands, b_minus_a) the bright arrow runs from A's tip to B's tip instead of B's to A's, which is the same pair of positions read in the opposite direction. DELIBERATELY NOT SWAPPED under b_minus_a: color_neg_b stays blue while its label reads \"-A\". The ghost colour names the ROLE (the negated operand), not the operand, and swapping it would mean rewriting materials built in _ready for a value the sweep can already tell apart by geometry.",
+        "declines": "max_vector_length, arrow_thickness, vector_a, vector_b and the five colour exports stay plain exports - a longer arrow or a different red is a size or a palette change, not a different argument. The four preset buttons (ORTHO / SAME / OPPOSE / RESET) were tempting as a `case` axis, and were refused: they are a player INTERACTION, so a still photographs whichever preset was last pressed, which is never - the sweep would have measured four identical frames of the shipped vector_a/vector_b. That is info_board's fault exactly.",
+        "still_note": "The five arrows are the only saturated things in the frame and outcome takes four of them out, so workings should measure wholesale. order is the thinner one and is thinnest at the default workings: a_minus_b vs b_minus_a moves the green arrow and the ghost pair but keeps A and B themselves fixed, so expect it to read strongest at workings=operands (where a single bright arrow reverses across the whole figure) and weakest at workings=expression (where the board dominates the pixels and only its glyphs change). If order comes back under 1%, check the board is not eating the frame before touching the design."
+      },
       "category": "mathematics",
       "class_name": "VectorSubtractionDemo",
       "complexity": "beginner",

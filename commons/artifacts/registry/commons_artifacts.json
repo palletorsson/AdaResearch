@@ -1352,6 +1352,23 @@
     "size_group": "environment"
    },
    "scene": "res://commons/context/drawingboard/ball_painting_demo_v2.tscn",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "priming": [
+      "white",
+      "ochre",
+      "bole",
+      "verdaccio"
+     ]
+    },
+    "default": "priming=white - PRIMING_COLOR['white'] is Color(1, 1, 1, 1), the exact literal reset_canvas() used to pass, so the same splat runs at the same size with the same argument and the shipped path is unchanged down to the call. _settle_priming() walks up for config_priming metadata and every placement of both tokens carries none, so the loop runs to the top of the tree, finds nothing, and leaves the export where it was. No node is added, no .tscn is touched, no process is started, and nothing outside reset_canvas() reads the axis. The four references - Color_Paint (ball_painting_demo:180:0.5), Color_Sphere, Corridor_Color_Paint, Kernel_Demo2, plus the Curation_Bay_color_0 station collection - pass no priming key.",
+    "was": "no export on the axis at all, and a scriptless .tscn ROOT on both scenes that run this script, which is why the runner refused the token for NO TURNABLE KNOBS. reset_canvas() splatted a hard-coded Color(1, 1, 1, 1) across the whole 4 x 2.5 m surface - a white ground handed over as though white were the absence of a decision rather than a recent and specific one.",
+    "note": "ONE SCRIPT, TWO TOKENS - this corpus's most common hidden family, found again. paper_draw_surface.gd is the entire visible body of both ball_painting_demo (a framed canvas with thirty grabbable pigment balls on a shelf) and drawing_paper (the same surface as a sheet with a pen), so both are declared with the same word and the same values, and they should MEASURE ALIKE. That is the check on the shared vocabulary, not a coincidence to explain away afterwards. Reached with NO new root script: GridInteractablesComponent stamps config_<key> on the artifact root at line 1195, before the add_child at line 1220, therefore before any _ready in the subtree - so an ancestor walk reads the token one call EARLIER than apply_grid_config could and the ground is laid once instead of being laid white and then relaid. The consequence, stated: priming is a spawn-time choice only. There is no runtime re-priming, because the scriptless root has no apply_grid_config to call, and adding a script to a shipped scriptless root was judged the riskier change for four placements when the metadata path already works.",
+    "declined_word": "'ground' is the obvious art term and is already taken, one day earlier and in this same colour sequence, by flashlight_demo (white | swatch | relief | mirror | none) where it means the surface a beam is demonstrated AGAINST. That is a different question - what light falls on, not what the first mark falls on - and only 'white' would have carried over. Taking a word without its answers is the dishonest half of a shared vocabulary, so this took a word of its own.",
+    "harness": "the axis is on the SURFACE and not on the balls, and that was a measurement decision rather than a taste one. The thirty pigment balls are 3 to 9 cm across (grab_sphere's SphereMesh radius 0.025, scaled 0.65 to 1.8) for about 0.085 m2 of projected area, while the sweep fits a 4.15 x 2.8 x 2.1 m box from roughly 17 m - so the balls land near 0.08% of frame and any axis on their colour would have come back INERT by dilution, which is the random_walk_collection failure (a huge change across a share of frame too small to measure). The surface is about 7-8% of frame at that fit and every value covers all of it, so no framing hint is needed. One pre-existing dependency to know about: the canvas IS a nested SubViewport texture (render_target_update_mode = ALWAYS, clear NEVER, transparent_bg), so if it fails to render headless the canvas is blank in every frame - that condition predates this axis and would make the artifact unphotographable, not the axis inert."
+   },
    "size_group": "environment",
    "tags": [
     "commons"
@@ -2813,6 +2830,35 @@
    "qfep_connection": "lambda_edge: sculpting inside randomized constraints — the material answers with bounded surprise; authorship shared with chance."
   },
   "control_pendulum": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "framing": 0.7,
+    "fixture": {
+     "evidence": "trace"
+    },
+    "axes": {
+     "regime": [
+      "free",
+      "underdamped",
+      "critical",
+      "overdamped",
+      "resonance"
+     ],
+     "evidence": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ]
+    },
+    "default": "regime=free, evidence=result - VERIFIED AGAINST THE PRE-PROMOTION SOURCE, and preserved by SHORT CIRCUIT rather than by recomputation. _damping_multiplier returns the raw shipped `damping` export unchanged when regime is free, so `_angular_velocity *= damping` is bit-identical to the line it replaced, INCLUDING its frame-rate dependence; free is never routed through _zeta() and back, so nothing rounds. _angle still initialises to 0.3, which is now also named as START_ANGLE. At result _build_evidence returns before constructing a node, so the scene tree, the measured AABB and therefore the grid's auto-grounding are what they were. The 11 cells across 6 maps (WaveFunctions_Intro and its three parts, Corridor_WaveFunctions_Intro, Curation_Bay_wavefunctions_10) are bare `control_pendulum` or `control_pendulum:0:1.5:1` and pass no config key at all.",
+    "was": "four numeric exports and a generic apply_grid_config that did `if key in self: set(key, ...)`. The runner refused the token for NO TURNABLE KNOBS. This registry entry has described the artifact as having 'configurable control parameters - adjust damping, driving force, and frequency' and as offering 'the transition from periodic motion through quasi-periodicity to chaos' since it was written, and the file had NO DRIVE AT ALL: no driving force, no driving frequency, and nothing in it nonlinear enough to reach chaos. `resonance` is the value that makes the first half of that sentence true. The chaos claim remains false and is recorded here rather than papered over - a driven pendulum reaches chaos only at drive amplitudes far past the 0.45*PI clamp this file applies.",
+    "note": "THE FAULT CHECK CAME FIRST, AND IT IS NOT spring_demo's. spring_demo's damping slider stopped at c = 2.0 where critical damping for its own parameters was 6.32, so the one regime it existed to teach was off the end of the hardware. Here there is no slider and no clamp - damping is a bare @export float and the old generic setter would have taken any value - so critical damping WAS numerically reachable, at a per-frame multiplier of exactly 0.874, and nowhere written down. The fault is a UNIT, not a cap. damping is a per-physics-frame multiplier with no relation to the pendulum's own omega, so the same number is a different regime at a different length, and the declared critical_parameter IS the length. Expressed as a ratio the shipped 0.995 is zeta = 0.037 (omega0 = sqrt(9.8/0.6) = 4.04 rad/s, zeta = -ln(0.995)*60/(2*omega0)); expressed as anything else it is nothing. So the four non-default values are set as damping RATIOS against omega0 and stay honest if the length moves: underdamped 0.25, decay you can see inside six seconds and still crossing zero; critical 1.00, the fastest return that never crosses; overdamped 2.50, no crossing either and slower, which is the whole joke; resonance 0.08 with a drive at omega0, where DRIVE_AMP 0.06 gives a steady amplitude of 0.06/(2*0.08) = 0.375 rad, comfortably larger than the 0.3 rad start and comfortably inside the 0.45*PI clamp, so it reads as a swing that GROWS rather than as a clipped one.",
+    "kin": "regime is harmonic_motion_demo's word, and its first four values are that artifact's list character for character. The fifth, resonance, is a case this artifact can answer and the undriven siblings cannot, which is why it is ADDED rather than substituted - the shared four still mean next door exactly what they mean here. bouncing_ball is the precedent for taking this word and refusing part of its list (there is no critically-bouncing); here the list is taken whole and extended, which is the honest half of the same rule. evidence is the family word and the canonical four-value ladder, and it is ALSO what makes regime photographable at all.",
+    "still_note": "A PREDICTION, so the next sweep falsifies it instead of re-describing it: EXPECT regime TO MEASURE FLAT, AND DO NOT READ THAT AS AN INERT AXIS. This is slope_tangent_demo's fault exactly, and the arithmetic says so in advance. regime is invisible in a still of the pendulum itself - a rod photographed at one arbitrary phase puts free and underdamped somewhere in the swing and puts critical and overdamped BOTH hanging straight down, two values identical to the byte, which is a fact about the camera and not about the physics. So the regime is DRAWN, as theta(t) over six seconds integrated at build time with the same update rule _physics_process uses, on one fixed vertical scale so a decaying trace cannot be mistaken for a free one, and the fixture pins evidence=trace so that curve is present in every regime tile. BUT THAT CURVE IS AN ImmediateMesh LINE_STRIP, WHICH RASTERISES ONE PIXEL WIDE. At framing 0.7 the frame is about 1.20 m across, so a 0.60 m trace is half the frame wide and one pixel tall - on the order of 0.1% of frame changed between two regimes that differ wholesale. THE REMEDY IS INK, NOT framing: no framing value reaches 3% from a subject one pixel thick. It is also cheap and safe, because the plot is built only under evidence != result and NO placement uses a non-default value - rebuild the trace as a TRIANGLE_STRIP ribbon the way slope_tangent_demo's deepened pass did, and the axis becomes measurable without touching one of the 11 shipped cells. That was left undone in this pass ON PURPOSE and is recorded rather than silently skipped: it is a geometry change to a file committed minutes earlier, and this pass was forbidden from running Godot to confirm it compiles. framing 0.7 is set anyway for the shipped ink: the union box with the plot present is about 0.60 x 0.65 x 0.18 m, half-diagonal 0.45 m, so dist = 0.45/tan(17 deg) * PAD 1.9 * 0.7 = 1.96 m and the frame comes to 1.20 m against a 0.65 m subject. Cropping is arithmetically impossible above 1/PAD = 0.53, because the rig fits by bounding SPHERE.",
+    "declines": "pendulum_length, bob_radius, gravity and damping stay plain exports. A 2026-04 sweep of pendulum_length x bob_radius is already on disk at doc/reports/sweep_control_pendulum_bite.json and returned BITES at 2.2% peak on a subject filling 1.47% of frame - which is the point rather than a counter-argument: it is a size dial, a bigger photograph of the same claim, and most of that 2.2% is the rod occupying different pixels. Those four also keep their pre-promotion behaviour, generic setter and all, INCLUDING the part of it that is broken and is recorded here rather than quietly repaired: pendulum_length is the declared critical_parameter, and setting it moves the physics and the bob but NOT the rod mesh, which was sized once during _ready. No map passes it, so nothing is standing on either the bug or on a fix for it."
+   },
    "category": "waves",
    "complexity": "intermediate",
    "description": "A pendulum with configurable control parameters — adjust damping, driving force, and frequency to explore the transition from periodic motion through quasi-periodicity to chaos. The canonical example of nonlinear dynamics in a physical system.",
@@ -4026,6 +4072,7 @@
     "size_group": "room_scale"
    },
    "scene": "res://commons/context/drawingboard/drawing_paper.tscn",
+   "dna_declined": "2026-08-05 - CANNOT BE DECLARED WITHOUT BREAKING THE GATE, and that is the finding. This token runs the same paper_draw_surface.gd as ball_painting_demo, so it already HAS the priming axis in code and it works here; the axis was declared, verified ok, and then withdrawn. check_dna_declarations.untracked_sources walks EVERY script a scene runs, and drawing_paper.tscn instantiates godot-xr-tools' pickable.gd and hand_pose_settings.gd for its grab pen - both under /addons/*, which is .gitignore line 13. Declaring anything here therefore adds two rows to 'DECLARED AXIS whose implementing script is NOT IN THE REPOSITORY' and takes the gate's exit code from 0 to 2, even though the script that implements the axis is tracked and committed. The general fact, worth knowing before the next agent tries: no artifact whose .tscn contains an XR-Tools grabbable can carry a dna block until untracked_sources distinguishes the script that implements the axis from the vendored addons the scene merely instantiates. Until then this token shows in the orphan list ('promoted in code, undeclared in the registry'), which is a print and not a failure, and is TRUE.",
    "size_group": "room_scale",
    "tags": [
     "3d",

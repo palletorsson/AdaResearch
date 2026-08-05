@@ -73,6 +73,29 @@ class_name VectorSubtractionDemo
 @export_enum("outcome", "trace", "operands", "expression") var workings: String = "trace"
 const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
 
+## AXIS — WHICH DIFFERENCE THE BENCH DRAWS. Taken character for character from
+## [[VectorSubtraction]] and [[example_1_3_vector_subtraction_vr]], the two other benches
+## in this corpus arguing a − b; one operation should not carry three vocabularies for the
+## question of which operand gets negated. `workings` says how much of the arithmetic is
+## shown, `order` says whose arithmetic it is — independent questions, and this artifact's
+## own @identity already names the second one ("when equal, the result is zero") without
+## ever making it reachable from a map.
+##
+##   a_minus_b   head = A, tail = B. −B is the ghost, the tip-to-tail leg stands on A's
+##               tip, the green arrow is A − B. Literally the `vector_a - vector_b` this
+##               file was written with. The shipped reading.
+##   b_minus_a   the operands swap. −A is the ghost, the leg stands on B's tip, and the
+##               green arrow points the other way — the same two positions, the opposite
+##               direction between them.
+##   reciprocal  both differences at once, nose to nose through the origin.
+##               Anti-commutativity as one picture instead of a claim.
+##
+## The ghost colour is deliberately NOT swapped under b_minus_a: color_neg_b names the ROLE
+## (the negated operand) and not the operand, so the frame stays readable and no material
+## built in _ready has to be rewritten per value.
+@export_enum("a_minus_b", "b_minus_a", "reciprocal") var order: String = "a_minus_b"
+const ORDERS: PackedStringArray = ["a_minus_b", "b_minus_a", "reciprocal"]
+
 var _arrow_a: Node3D
 var _arrow_b: Node3D
 var _arrow_neg_b: Node3D  # -B from origin
@@ -95,6 +118,16 @@ var _axes_container: Node3D
 # WORKINGS dressing lives here and nowhere else — created last in _ready() so the
 # legacy tree above it is untouched, cleared and refilled on every _update_vectors().
 var _workings_root: Node3D
+
+# ORDER dressing (the reciprocal counter-arrow) lives here and nowhere else, created after
+# the workings holder so neither it nor anything above it changes index. Empty on the
+# default and on b_minus_a; only `reciprocal` ever puts a node in it.
+var _order_root: Node3D
+
+# The operands as `order` reads them, so _apply_workings can draw the gap between the right
+# two tips. On a_minus_b these are exactly vector_a and vector_b.
+var _ord_head: Vector3 = Vector3.ZERO
+var _ord_tail: Vector3 = Vector3.ZERO
 
 # VR Controls
 var _control_panel: Node3D
@@ -196,6 +229,11 @@ func _ready():
 	_workings_root = Node3D.new()
 	_workings_root.name = "Workings"
 	_add_tracked_child(_workings_root)
+	# ORDER holder — after the workings holder, so the workings holder's own index is
+	# unchanged too. Stays empty at a_minus_b and b_minus_a.
+	_order_root = Node3D.new()
+	_order_root.name = "Order"
+	_add_tracked_child(_order_root)
 	_update_vectors()
 
 func _init_shared_materials():
@@ -446,36 +484,50 @@ func _apply_preset(va: Vector3, vb: Vector3):
 	_handle_b.position = vector_b
 
 func _update_vectors():
-	var neg_b = -vector_b
-	var result = vector_a - vector_b  # = vector_a + neg_b
-	
+	# ORDER decides which operand is negated. a_minus_b is head = A, tail = B — the
+	# literal `-vector_b` and `vector_a - vector_b` these two lines used to be.
+	_ord_head = vector_a
+	_ord_tail = vector_b
+	if _order_value() == "b_minus_a":
+		_ord_head = vector_b
+		_ord_tail = vector_a
+	var neg_b = -_ord_tail
+	var result = _ord_head - _ord_tail  # = _ord_head + neg_b
+
 	# Arrow A (from origin)
 	_position_arrow(_arrow_a, Vector3.ZERO, vector_a)
-	
+
 	# Arrow B (from origin)
 	_position_arrow(_arrow_b, Vector3.ZERO, vector_b)
-	
+
 	# Negative B from origin (shows the opposite)
 	_position_arrow(_arrow_neg_b, Vector3.ZERO, neg_b)
-	
+
 	# Negative B from tip of A (tip-to-tail for A + (-B))
-	_position_arrow(_arrow_neg_b_tip, vector_a, vector_a + neg_b)
-	
+	_position_arrow(_arrow_neg_b_tip, _ord_head, _ord_head + neg_b)
+
 	# Update vector labels
 	_label_a.position = vector_a * 0.5 + Vector3(0.04, 0.04, 0)
 	_label_b.position = vector_b * 0.5 + Vector3(0.04, 0.04, 0)
 	_label_neg_b.position = neg_b * 0.5 + Vector3(0.04, 0.04, 0)
 	_label_result.position = result * 0.5 + Vector3(0.04, 0.04, 0)
-	
+	# The two label TEXTS follow the order. At a_minus_b these assign the exact strings
+	# _create_vector_labels() already put there, so the default writes itself back.
+	_label_neg_b.text = "-" + _tail_symbol()
+	_label_result.text = _head_symbol() + "-" + _tail_symbol()
+
 	# Result arrow (from origin to A - B)
 	_position_arrow(_arrow_result, Vector3.ZERO, result)
-	
+
 	# Update formula
 	_update_formula(neg_b, result)
 
 	# WORKINGS, applied LAST so nothing above it moves. "trace" restores every layer
 	# and builds nothing at all — the legacy lineage, byte for byte.
 	_apply_workings(neg_b, result)
+
+	# ORDER dressing, after it. Returns on the first line unless the value is reciprocal.
+	_apply_order(result)
 
 func _position_arrow(arrow: Node3D, start: Vector3, end: Vector3):
 	var direction = end - start
@@ -504,10 +556,18 @@ func _position_arrow(arrow: Node3D, start: Vector3, end: Vector3):
 func _update_formula(neg_b: Vector3, result: Vector3):
 	var label = _get_panel_label(_formula_panel)
 	if label:
+		# h/t are "A"/"B" at a_minus_b, so every line below is the shipped line character
+		# for character; only b_minus_a swaps them and only reciprocal appends.
+		var h: String = _head_symbol()
+		var t: String = _tail_symbol()
 		label.text = "A = (%.2f, %.2f, %.2f)\n" % [vector_a.x, vector_a.y, vector_a.z]
 		label.text += "B = (%.2f, %.2f, %.2f)\n" % [vector_b.x, vector_b.y, vector_b.z]
-		label.text += "-B = (%.2f, %.2f, %.2f)\n" % [neg_b.x, neg_b.y, neg_b.z]
-		label.text += "A - B = A + (-B) = (%.2f, %.2f, %.2f)" % [result.x, result.y, result.z]
+		label.text += "-%s = (%.2f, %.2f, %.2f)\n" % [t, neg_b.x, neg_b.y, neg_b.z]
+		label.text += "%s - %s = %s + (-%s) = (%.2f, %.2f, %.2f)" % [
+			h, t, h, t, result.x, result.y, result.z]
+		if _order_value() == "reciprocal":
+			label.text += "\n%s - %s = (%.2f, %.2f, %.2f)" % [
+				t, h, -result.x, -result.y, -result.z]
 
 func _process(_delta):
 	if _handle_a and _handle_a.position != vector_a:
@@ -542,12 +602,24 @@ func _exit_tree():
 			node.queue_free()
 	_created_nodes.clear()
 
+## Guarded on all three counts the corpus has been burned by: the key must be NAMED, the
+## word must VALIDATE, and the value must actually DIFFER. Nothing is redrawn otherwise, and
+## nothing is redrawn at all until _ready has built once — _order_root is null before that,
+## and the pending value is picked up by _ready's own _update_vectors().
 func apply_grid_config(config_data: Dictionary) -> void:
+	var touched: bool = false
 	if config_data.has("workings"):
 		var w: String = String(config_data["workings"]).strip_edges().to_lower()
-		workings = w if WORKINGS.has(w) else workings
-		if is_inside_tree():
-			_update_vectors()
+		if WORKINGS.has(w) and w != workings:
+			workings = w
+			touched = true
+	if config_data.has("order"):
+		var o: String = String(config_data["order"]).strip_edges().to_lower()
+		if ORDERS.has(o) and o != order:
+			order = o
+			touched = true
+	if touched and is_inside_tree() and _order_root != null:
+		_update_vectors()
 
 
 # --- WORKINGS ---------------------------------------------------------------
@@ -559,6 +631,43 @@ func apply_grid_config(config_data: Dictionary) -> void:
 func _workings_value() -> String:
 	var w: String = String(workings).strip_edges().to_lower()
 	return w if WORKINGS.has(w) else "trace"
+
+
+# --- ORDER -------------------------------------------------------------------
+# An unknown word in a map token falls back to the shipped reading rather than stranding a
+# placement with a blank bench — the same allow-list discipline WORKINGS uses above.
+
+func _order_value() -> String:
+	var o: String = String(order).strip_edges().to_lower()
+	return o if ORDERS.has(o) else "a_minus_b"
+
+
+## "A" unless the operands have been swapped.
+func _head_symbol() -> String:
+	return "B" if _order_value() == "b_minus_a" else "A"
+
+
+## "B" unless the operands have been swapped.
+func _tail_symbol() -> String:
+	return "A" if _order_value() == "b_minus_a" else "B"
+
+
+## RECIPROCAL — the counter-difference, drawn from the origin in the direction the result
+## does not go, with its own midpoint label. Both differences stand nose to nose through
+## the origin, which is anti-commutativity as a picture rather than a sentence. Every other
+## value of `order` leaves this holder empty, so the shipped bench gains no node at all.
+func _apply_order(result: Vector3) -> void:
+	if _order_root == null:
+		return
+	for c in _order_root.get_children():
+		_order_root.remove_child(c)
+		c.queue_free()
+	if _order_value() != "reciprocal":
+		return
+	_order_root.add_child(_w_arrow(Vector3.ZERO, -result, color_result, arrow_thickness, 0.6))
+	var lbl: Label3D = _create_vector_label(_tail_symbol() + "-" + _head_symbol(), color_result)
+	lbl.position = -result * 0.5 + Vector3(0.04, 0.04, 0)
+	_order_root.add_child(lbl)
 
 
 func _set_layers(n: Node, bits: int) -> void:
@@ -599,10 +708,12 @@ func _apply_workings(neg_b: Vector3, result: Vector3) -> void:
 			# TIP. The dashed sides close the parallelogram A and −B span.
 			if _arrow_neg_b_tip != null:
 				_set_layers(_arrow_neg_b_tip, 0)
-			_workings_root.add_child(_w_arrow(vector_b, vector_a, color_result, 0.010, 2.0))
+			# tail's tip to head's tip. At a_minus_b that is vector_b -> vector_a, the
+			# pair this line was written with.
+			_workings_root.add_child(_w_arrow(_ord_tail, _ord_head, color_result, 0.010, 2.0))
 			var side: Color = Color(color_result.r, color_result.g, color_result.b, 0.5)
-			_workings_root.add_child(_w_dashed(vector_a, vector_a + neg_b, side))
-			_workings_root.add_child(_w_dashed(neg_b, vector_a + neg_b, side))
+			_workings_root.add_child(_w_dashed(_ord_head, _ord_head + neg_b, side))
+			_workings_root.add_child(_w_dashed(neg_b, _ord_head + neg_b, side))
 			_workings_root.add_child(_w_dot(vector_b, color_b))
 			_workings_root.add_child(_w_dot(vector_a, color_a))
 		"expression":
@@ -733,8 +844,14 @@ func _w_board(neg_b: Vector3, result: Vector3) -> Node3D:
 		board.add_child(rule)
 	var l := Label3D.new()
 	l.name = "Algebra"
-	l.text = "A − B  =  A + (−B)\n(%+.2f, %+.2f, %+.2f) + (%+.2f, %+.2f, %+.2f)\n=  (%+.2f, %+.2f, %+.2f)" % [
-		vector_a.x, vector_a.y, vector_a.z, neg_b.x, neg_b.y, neg_b.z,
+	# `head`, not `h`: this function already has a float h (the board height, used
+	# by pixel_size four lines down), and a second `var h` in the same scope is a
+	# parse error that stops the whole script loading.
+	var head: String = _head_symbol()
+	var t: String = _tail_symbol()
+	l.text = "%s − %s  =  %s + (−%s)\n(%+.2f, %+.2f, %+.2f) + (%+.2f, %+.2f, %+.2f)\n=  (%+.2f, %+.2f, %+.2f)" % [
+		head, t, head, t,
+		_ord_head.x, _ord_head.y, _ord_head.z, neg_b.x, neg_b.y, neg_b.z,
 		result.x, result.y, result.z]
 	l.font_size = 30
 	l.pixel_size = h / 300.0

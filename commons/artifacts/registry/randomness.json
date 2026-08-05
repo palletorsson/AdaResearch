@@ -3024,6 +3024,27 @@
    ],
    "name": "Extreme Randomness",
    "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.tscn",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "chapter": [
+      "all",
+      "chaos",
+      "noise",
+      "pattern",
+      "emergence",
+      "evolution"
+     ]
+    },
+    "fixture": {
+     "scatter_seed": 20260805
+    },
+    "default": "chapter=all - 'all' is the value that pins nothing. _chapter_demo_index() finds no match for it in CHAPTER_DEMOS, falls through to the legacy forced_demo (-1 everywhere this token is placed), returns -1, and _ready's gate never fires: display_time stays at its shipped 10.0 and the whole of the staging is the start_demo(0) that was always there. The four direct placements (Randomness_Examples_of_Randomness, Room_Randomness_Examples_of_Randomness, Corridor_Randomness_Examples_of_Randomness, TestMap_Unused_6) and the Curation_Bay_randomness_7 station collection pass no chapter key, and apply_grid_config returns on its first line for a config that does not name one. The one deliberate asymmetry: at a pinned chapter 0 the code FREEZES rather than restaging, where the old forced_demo path called start_demo(0) twice - so 'all' and 'chaos' are the same picture rather than two draws from different stretches of an unseeded stream, and the axis is not handed a bite it did not earn.",
+    "was": "an int called forced_demo with no names attached, a registry that declared nothing, and an apply_grid_config that was literally 'pass'. Five chapters existed in full in the file - each with its own opening arrangement in start_demo, its own update rule, its own colour law, its own title and its own paragraph of prose - and there was no way to stop on one, so every map that places this shows whichever page the ten-second clock happened to be on. The five differ in SILHOUETTE before they differ in anything else (a 10 m cube, a flat 20 x 5 panel, a disc, a 2 m ball, a 2 m line), which is what makes the axis legible in one still rather than a claim about motion.",
+    "note": "THE AXIS ALREADY SHIPPED AS FOUR SEPARATE REGISTRY NAMES. extrem_randomness.gd is one script behind five tokens: particle_randomness_pure, _perlin, _patterns and _emergent are four .tscn wrappers that set forced_demo = 0/1/2/3 with display_time = 1e6, which is chapter = chaos / noise / pattern / emergence spelled as four artifacts. 'evolution' has no wrapper and has therefore never been placed anywhere in the corpus. Those four are deliberately NOT declared here: each token's NAME is its pinned value, and an axis on them would let a map make particle_randomness_perlin show emergence. check_dna_declarations reports them under 'promoted in code, undeclared in the registry' because they share this source file - that is a fact about one script serving five names, not an unfinished promotion. The word 'chapter' and the leading 'all' are facade_grammar_demo's, where 'all' likewise admits the whole book unfiltered; the chapter names belong to this book.",
+    "harness": "READ THIS BEFORE BELIEVING AN INERT VERDICT. The body is 100 CSGSphere3D plus two Label3D, and capture_config_sweep._subtree_aabb counts MeshInstance3D and MultiMeshInstance3D ONLY - so the particle cloud is invisible to the sweep's own framing and would fall back to a 1 m box. What the camera will actually fit is the MeshInstance3D plates LabelFramer builds behind the two labels before the AABB is taken, roughly x +/-2.5 by y -4.5..3.7, which lands it near 30 m with an 18 m window over a cloud spanning +/-5 to +/-7. That is close enough to leave framing at 1.0 and no anchor was added, because a +/-5 anchor would be fitted BY DIAGONAL and push the camera out to ~54 m, which is worse. If the sheet comes back cropped or tiny, the AABB is the first thing to check and not the design. The game's own grounder, GridInteractablesComponent._compute_local_aabb, DOES walk CSGShape3D, so the two measurers disagree about this artifact by construction."
+   },
    "sequence": "randomness",
    "tags": [
     "procedural"

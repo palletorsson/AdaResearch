@@ -6,6 +6,52 @@
 @export var default_snap_grid_size: int = 8  # Default snap grid size
 @export var random_dot_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW]  # Colors for the random dots
 
+## STAGE-2 DNA — AXIS: WHAT COLOUR "NOTHING" IS.
+##
+## This script owns the entire visible body of two artifacts. `ball_painting_demo` is a
+## 4 x 2.5 m canvas in a dark frame with thirty grabbable pigment balls on a shelf, and
+## `drawing_paper` is the same surface as a sheet with a pen. In a STILL both are almost
+## entirely one thing: the blank surface. The balls are 3-9 cm across and cover under a
+## tenth of one percent of a fitted frame, so an axis on THEM would be measured through
+## a keyhole; the surface is about 7-8% of frame and is the only place here where a
+## still can carry an argument at all.
+##
+## And the surface is not neutral. `reset_canvas()` splats Color(1,1,1,1) — a white
+## ground — which every drawing app hands you as though white were the absence of a
+## decision. It is a decision, and a recent one. The axis is the four historical answers
+## to what a painter puts down before the first mark:
+##
+##   white       gesso. Chalk and glue. The picture begins from nothing and the ground
+##               is not a colour — the modern default, the blank slate, the white cube.
+##               THE SHIPPED VALUE, Color(1,1,1,1), the exact literal that was here.
+##   ochre       imprimatura, the warm mid-tone wash. White is a LIGHT you have to earn:
+##               every mark is up or down from a middle, and the highlight is paint.
+##   bole        the red-brown clay ground of the Baroque. The picture is pulled out of
+##               a warm dark, and the ground stays visible in every shadow it left.
+##   verdaccio   the cool green underpainting of tempera flesh. The ground is a
+##               CORRECTION — laid in order to be cancelled by what goes over it.
+##
+## Not a lightness ladder: neutral light, warm mid, warm dark, cool mid. Every pair
+## differs in hue as well as value, and each value covers the whole surface.
+##
+## REACHED WITHOUT A ROOT SCRIPT. Both scenes have a scriptless root, so a map token's
+## `apply_grid_config` has nowhere to land — but GridInteractablesComponent stamps
+## `config_<key>` metadata on the root BEFORE add_child (line 1195 vs 1220), which is
+## before any _ready in the subtree. Walking up for it here reads the token one call
+## earlier than apply_grid_config could, so the ground is laid once and never relaid.
+@export_enum("white", "ochre", "bole", "verdaccio") var priming: String = "white"
+
+## Allow-list. An unknown word in a map token keeps the shipped white.
+const PRIMINGS: PackedStringArray = ["white", "ochre", "bole", "verdaccio"]
+
+## `white` is the literal that was hard-coded in reset_canvas(), unchanged.
+const PRIMING_COLOR: Dictionary = {
+	"white": Color(1, 1, 1, 1),
+	"ochre": Color(0.78, 0.60, 0.33, 1),
+	"bole": Color(0.42, 0.20, 0.16, 1),
+	"verdaccio": Color(0.45, 0.50, 0.36, 1),
+}
+
 # --- WET PAINT EFFECT (GPU) ---
 @export var wet_paint: bool = false:
 	set(value):
@@ -33,8 +79,13 @@ var active_pen_properties = {
 @onready var debug_label: Label3D = $"../Label3D"
 
 func _ready():
+	# BEFORE _setup_gpu_painting(), because that ends by calling reset_canvas() and the
+	# ground has to be settled by then. Both existing scenes carry no config metadata at
+	# all, so this leaves `priming` at "white" and reset_canvas() splats the same white it
+	# always did.
+	_settle_priming()
 	_setup_gpu_painting()
-	
+
 	# Initialize active properties from exports
 	active_pen_properties["brush_size"] = default_brush_size
 	active_pen_properties["brush_color"] = default_brush_color
@@ -98,9 +149,15 @@ func draw_random_dots(uv_position: Vector2):
 func reset_canvas():
 	# To reset a feedback loop viewport, we need to clear it.
 	# The easiest way for a "Fade/Clear" is to draw a giant rect on the BrushLayer
+	#
+	# THE GROUND IS LAID HERE, and only here — one splat, the same call, the same
+	# geometry. At priming = "white" the colour looked up is Color(1, 1, 1, 1), the
+	# literal that used to be written on this line, so the shipped path is unchanged
+	# down to the argument. A reset by the player relays the ground rather than
+	# whitewashing it, which is what a reset to a primed canvas means.
 	if brush_layer:
-		brush_layer.add_splat(Vector2(texture_size.x/2, texture_size.y/2), max(texture_size.x, texture_size.y), Color(1, 1, 1, 1))
-	
+		brush_layer.add_splat(Vector2(texture_size.x/2, texture_size.y/2), max(texture_size.x, texture_size.y), _priming_color())
+
 	if debug_label:
 		debug_label.text = "Drawing reset."
 
@@ -227,3 +284,40 @@ func draw_at_world_position(world_pos: Vector3, color: Color = Color.BLACK):
 func _process(_delta):
 	# GPU simulation runs automatically in the shader/viewport
 	pass
+
+
+# ── PRIMING ──────────────────────────────────────────────────────────────────────────
+# Appended LAST. Nothing here touches the brush, the pen, the wet-paint shader, the
+# snapping, the UV transform or the viewport. Only what is on the surface before anyone
+# has drawn on it.
+
+## The ground colour for the settled value, and the shipped white for anything unknown.
+func _priming_color() -> Color:
+	var c: Color = PRIMING_COLOR.get(priming, Color(1, 1, 1, 1))
+	return c
+
+
+## Config from map_data.json tokens:  ball_painting_demo#priming:bole
+##
+## NOT apply_grid_config, deliberately. Both scenes that run this script have a scriptless
+## ROOT — GridInteractablesComponent calls apply_grid_config on the root and would never
+## reach a MeshInstance3D three levels down — but it stamps `config_<key>` metadata on that
+## same root BEFORE add_child, so the value is already sitting on an ancestor when this
+## subtree's _ready runs. Reading it here needs no new script on either .tscn and no
+## rebuild: the ground is laid once, correctly, on the first pass.
+##
+## NEAREST ANCESTOR WINS and the walk stops there, so a token on this artifact is never
+## overridden by a stray `config_priming` further up the map's tree. Both existing scenes
+## and all placements of both tokens carry no such metadata anywhere, so the loop runs to
+## the top, finds nothing, and leaves "white".
+func _settle_priming() -> void:
+	var node: Node = self
+	while node != null:
+		if node.has_meta("config_priming"):
+			var m: String = str(node.get_meta("config_priming")).strip_edges().to_lower()
+			if PRIMINGS.has(m):
+				priming = m
+			break
+		node = node.get_parent()
+	var v: String = String(priming).strip_edges().to_lower()
+	priming = v if PRIMINGS.has(v) else "white"
