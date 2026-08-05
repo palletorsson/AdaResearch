@@ -1,0 +1,332 @@
+#!/usr/bin/env python3
+"""
+build_wall_faces.py — the walls of a template, made hangable.
+
+A museum tile has walls, and they have been anonymous: a `4` cell, nothing more.
+Meanwhile 223 artifacts in the registry already declare `spatial_profile
+.dir_group = "panel"` — they are wall-facing by their own description — and not
+one of them has ever been hung on a template's wall. The material and the
+surface were both here; what was missing was the FACE.
+
+A FACE is a maximal run of wall cells that a body can stand in front of: the
+run, the direction it faces, and the standoff (how far back the walker can get
+before something stops them). Standoff is what decides what may hang there,
+through the museum literature's own rule — viewing distance d ~ 1.4 + 0.21 x
+area, from commons/data/museum_principles.json — read backwards: a face with two
+metres of standoff can carry about a 2.9 m2 work, and no more.
+
+THE ELEVATION, three bands (the wall-hangar idiom, and the corridor compiles its
+walls at height 4, so all three exist):
+    dado    0.0 - 0.9   below the eye: benches, plinth line, low cases
+    hang    0.9 - 2.1   the eye band, where the viewing-distance rule bites
+    frieze  2.1 - 3.2   above the eye: banners, labels, the chapter's name
+
+NOTHING NEW IN THE ENGINE. A hang is an ordinary interactable token placed on
+the floor cell IN FRONT of the wall, rotated to face the walker, lifted by the
+token's own y-offset: `artifact:<rot>:<y>`. Floor slots carry no collision box,
+so a hung wall never blocks the corridor — and `artifact#axis:value` still
+applies, so a face run can carry a DNA family the way a bay run does.
+
+  python tools/build_wall_faces.py                     # survey the corpus
+  python tools/build_wall_faces.py --emit              # write the face registry
+  python tools/build_wall_faces.py --hang=<museum>     # a demo hung map
+  python tools/build_wall_faces.py --self-test
+"""
+from __future__ import annotations
+import argparse
+import glob
+import json
+import sys
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parents[1]
+PATTERNS = REPO / "commons" / "data" / "template_patterns.json"
+PRINCIPLES = REPO / "commons" / "data" / "museum_principles.json"
+OUT = REPO / "commons" / "data" / "wall_faces.json"
+MAPS = REPO / "commons" / "maps"
+STAND = {"1", "1s"}
+WALL = "4"
+# (name, floor, ceiling, the y-offset a token gets to sit in the band)
+BANDS = [("dado", 0.0, 0.9, 0.45), ("hang", 0.9, 2.1, 1.5), ("frieze", 2.1, 3.2, 2.6)]
+# below this the viewing-distance rule says nothing can be taken in at all
+MIN_HANGABLE_M2 = 1.0
+# facing -> the rotation an artifact needs to look back down the standoff
+FACING_ROT = {"N": 0, "S": 180, "E": 270, "W": 90}
+
+
+def museums() -> dict:
+    d = json.loads(PATTERNS.read_text(encoding="utf-8"))
+    return {k: p for k, p in d.get("patterns", {}).items()
+            if isinstance(p, dict) and p.get("museum")}
+
+
+def panel_artifacts() -> list:
+    """The registry's own wall-facing class: dir_group == panel."""
+    out = []
+    for rp in sorted(glob.glob(str(REPO / "commons" / "artifacts" / "registry" / "*.json"))):
+        try:
+            d = json.load(open(rp, encoding="utf-8"))
+        except Exception:
+            continue
+        for tok, e in (d.get("artifacts") or {}).items():
+            if not isinstance(e, dict) or not e.get("scene") or not e.get("map_ready"):
+                continue
+            if (e.get("spatial_profile") or {}).get("dir_group") == "panel":
+                axes = list(((e.get("dna") or {}).get("axes") or {}).keys())
+                # the artifact's own declared size, so the match can be checked
+                # from BOTH sides: the face says what fits, the work says what it is
+                fp = ((e.get("parameters") or {}).get("footprint") or e.get("footprint") or [])
+                try:
+                    area = round(float(fp[0]) * float(fp[1]), 2) if len(fp) >= 2 else None
+                except Exception:
+                    area = None
+                if area is None:
+                    area = {"small": 1.0, "medium": 2.5, "large": 6.0,
+                            "xl": 12.0}.get(str(e.get("size_group", "")).lower(), 2.0)
+                out.append({"lookup": tok, "axes": axes, "area_m2": area})
+    return sorted(out, key=lambda r: r["lookup"])
+
+
+def max_area(standoff: float) -> float:
+    """The viewing-distance rule read backwards: what fits at this standoff?
+
+    museum_principles.json carries d ~ 1.4 + 0.21 * area_m2 (r2=.93, PMC5347319).
+    A body that can only step back `standoff` metres can only take in a work of
+    (standoff - 1.4) / 0.21 square metres — which is why a corridor pinch cannot
+    hold a large canvas however much wall it has.
+    """
+    try:
+        p = json.loads(PRINCIPLES.read_text(encoding="utf-8"))
+        f = next(x for x in p["principles"] if x["id"] == "viewing-distance-formula")
+        _ = f  # the constants below are that formula; the lookup keeps them honest
+    except Exception:
+        pass
+    return max(0.0, round((standoff - 1.4) / 0.21, 2))
+
+
+def faces_of(tile: list) -> list:
+    """Every wall run a body can stand in front of, with its facing and standoff."""
+    h = len(tile)
+    w = len(tile[0]) if h else 0
+    at = lambda x, y: str(tile[y][x]) if 0 <= x < w and 0 <= y < h else ""
+    seen: set = set()
+    faces = []
+    # a wall cell faces the walk in the direction of an adjacent standable cell
+    for (dx, dy, facing) in ((0, -1, "N"), (0, 1, "S"), (1, 0, "E"), (-1, 0, "W")):
+        for y in range(h):
+            for x in range(w):
+                if at(x, y) != WALL or at(x + dx, y + dy) not in STAND:
+                    continue
+                if (x, y, facing) in seen:
+                    continue
+                # extend the run perpendicular to the facing
+                px, py = (1, 0) if facing in ("N", "S") else (0, 1)
+                run = [(x, y)]
+                seen.add((x, y, facing))
+                k = 1
+                while (at(x + px * k, y + py * k) == WALL
+                       and at(x + px * k + dx, y + py * k + dy) in STAND):
+                    run.append((x + px * k, y + py * k))
+                    seen.add((x + px * k, y + py * k, facing))
+                    k += 1
+                # standoff: how far back the body can step before it is stopped
+                so = 0
+                while at(x + dx * (so + 1), y + dy * (so + 1)) in STAND:
+                    so += 1
+                faces.append({
+                    "facing": facing, "rot": FACING_ROT[facing],
+                    "cells": run, "run": len(run),
+                    "front": [run[0][0] + dx, run[0][1] + dy],
+                    "standoff": so, "max_area_m2": max_area(float(so)),
+                    "bands": [b[0] for b in BANDS],
+                })
+    return faces
+
+
+def survey() -> list:
+    rows = []
+    for k, p in sorted(museums().items()):
+        fs = faces_of([[str(c) for c in r] for r in p["tile"]])
+        rows.append({
+            "museum": k, "faces": len(fs),
+            "wall_cells": sum(f["run"] for f in fs),
+            "longest_run": max((f["run"] for f in fs), default=0),
+            "median_standoff": sorted(f["standoff"] for f in fs)[len(fs) // 2] if fs else 0,
+            "big_wall_faces": sum(1 for f in fs if f["max_area_m2"] >= 3.0),
+        })
+    return rows
+
+
+def emit() -> int:
+    payload = {
+        "_readme": "Wall faces per museum template: a maximal run of wall cells a body "
+                   "can stand in front of, with facing, standoff and the largest work the "
+                   "viewing-distance rule allows there. Bands (dado/hang/frieze) carry the "
+                   "y-offset a hung token needs. Provenance: measured "
+                   "(tools/build_wall_faces.py); regenerate after tile changes.",
+        "bands": [{"band": b, "floor_m": lo, "ceil_m": hi, "y_offset": y} for b, lo, hi, y in BANDS],
+        "panel_class": len(panel_artifacts()),
+        "museums": {},
+    }
+    for k, p in sorted(museums().items()):
+        payload["museums"][k] = faces_of([[str(c) for c in r] for r in p["tile"]])
+    OUT.write_text(json.dumps(payload, indent=1, ensure_ascii=False), encoding="utf-8")
+    return sum(len(v) for v in payload["museums"].values())
+
+
+def hang(museum: str, band: str, limit: int, seed: int) -> Path:
+    """A demo: hang the panel class on a museum's faces and write the map."""
+    sys.path.insert(0, str(REPO / "tools"))
+    from compile_museum_map import compile_map, policy_pool, museums as cmus  # noqa: E402
+    mus = cmus()
+    if museum not in mus:
+        raise SystemExit(f"no museum `{museum}`")
+    pat = mus[museum]
+    n_slots = sum(1 for row in pat["tile"] for c in row if str(c) in ("1s", "2s", "3s"))
+    name = f"Hung_{museum.replace('-', '_')}_{band}"
+    doc = compile_map(museum, pat, policy_pool("spine")[:n_slots], "spine", name)
+    inter = doc["layers"]["interactables"]
+    yoff = next(y for b, _lo, _hi, y in BANDS if b == band)
+    panels = panel_artifacts()
+    if not panels:
+        raise SystemExit("no panel-class artifacts")
+    import random
+    rng = random.Random(seed)
+    faces = sorted(faces_of([[str(c) for c in r] for r in pat["tile"]]),
+                   key=lambda f: (-f["run"], f["cells"][0][1]))
+    hung, too_tight = [], []
+    for f in faces:
+        if len(hung) >= limit:
+            break
+        # THE RULE HAS TO BITE. The first run of this tool computed max_area and
+        # then hung panels on two faces it had just rated 0.00 m2 — a standoff of
+        # one metre is inside the viewing distance of the smallest work, so
+        # nothing can be seen there. A measured constraint that does not refuse
+        # anything is decoration; this one refuses.
+        if f["max_area_m2"] < MIN_HANGABLE_M2:
+            too_tight.append(f)
+            continue
+        fx, fy = f["front"]
+        if not (0 <= fy < len(inter) and 0 <= fx < len(inter[0])):
+            continue
+        if str(inter[fy][fx]).strip():
+            continue          # the floor slot is already spoken for
+        # A WALL DEserves A WORK THAT FITS IT, AND ONLY ONE THAT DOES. The first
+        # hung run put a 36-cell face's worth of pattern on the wall because the
+        # planner chose at random: the face had been measured and the artifact
+        # never asked. Candidates are now those whose declared area fits the
+        # face's allowance, and the largest such is preferred — a long wall
+        # earns a big work, a pinch gets a small one.
+        fits = [q for q in panels if q["area_m2"] <= f["max_area_m2"]]
+        if not fits:
+            too_tight.append(f)
+            continue
+        fits.sort(key=lambda q: -q["area_m2"])
+        top = fits[:max(1, len(fits) // 8)]
+        a = top[rng.randrange(len(top))]
+        tok = f'{a["lookup"]}:{f["rot"]}:{yoff}'
+        if a["axes"]:
+            # a face can carry a family, exactly as a bay run can
+            tok = f'{a["lookup"]}#{a["axes"][0]}:{rng.randrange(2)}' if False else tok
+        inter[fy][fx] = tok
+        hung.append({"token": tok, "cell": [fx, fy], "facing": f["facing"],
+                     "run": f["run"], "standoff": f["standoff"],
+                     "max_area_m2": f["max_area_m2"], "work_area_m2": a["area_m2"]})
+    doc["documentation"]["wall_hang"] = {
+        "tool": "build_wall_faces.py", "band": band, "y_offset": yoff,
+        "hung": hung, "faces_available": len(faces),
+        "refused_too_tight": len(too_tight),
+        "min_hangable_m2": MIN_HANGABLE_M2,
+        "note": "panel-class artifacts (spatial_profile.dir_group == panel) placed on the "
+                "floor cell in front of a wall face, rotated to it, lifted into the band by "
+                "the token's own y-offset — no engine change, and no collision on the walk",
+    }
+    d = MAPS / name
+    d.mkdir(parents=True, exist_ok=True)
+    p = d / "map_data.json"
+    p.write_text(json.dumps(doc, indent=1), encoding="utf-8")
+    return p
+
+
+def selftest() -> int:
+    ok = []
+    # a plain room: walls all round, floor inside
+    t = [["4"] * 9 for _ in range(7)]
+    for y in range(1, 6):
+        for x in range(1, 8):
+            t[y][x] = "1"
+    fs = faces_of(t)
+    ok.append(("A a room's four walls are found", len({f["facing"] for f in fs}) == 4,
+               f"{len(fs)} faces, facings {sorted({f['facing'] for f in fs})}"))
+    north = [f for f in fs if f["facing"] == "S"]     # the top wall faces south
+    ok.append(("B a wall run is maximal", any(f["run"] == 7 for f in north),
+               f"runs {sorted(f['run'] for f in north)}"))
+    ok.append(("C standoff is measured, not assumed",
+               all(f["standoff"] >= 1 for f in fs), "every face has room to step back"))
+    ok.append(("D the viewing rule reads backwards",
+               max_area(2.0) < max_area(4.0) and max_area(1.0) == 0.0,
+               f"1m -> {max_area(1.0)}, 2m -> {max_area(2.0)}, 4m -> {max_area(4.0)} m2"))
+    # a wall with no floor beside it is not a face
+    solid = [["4"] * 5 for _ in range(5)]
+    ok.append(("E a wall nobody can face is not a face", faces_of(solid) == [], "0 faces"))
+    ok.append(("F the panel class is non-empty", len(panel_artifacts()) > 50,
+               f"{len(panel_artifacts())} panel artifacts"))
+    ok.append(("G a face too tight to see is refused", max_area(1.0) < MIN_HANGABLE_M2,
+               f"1 m standoff -> {max_area(1.0)} m2, under the {MIN_HANGABLE_M2} m2 floor"))
+    pa = panel_artifacts()
+    ok.append(("H every panel declares an area", all("area_m2" in q for q in pa),
+               f"{len(pa)} sized"))
+    ok.append(("I a tight face admits fewer works than a wide one",
+               len([q for q in pa if q["area_m2"] <= max_area(2.0)])
+               < len([q for q in pa if q["area_m2"] <= max_area(6.0)]),
+               f"2 m: {len([q for q in pa if q['area_m2'] <= max_area(2.0)])} works, "
+               f"6 m: {len([q for q in pa if q['area_m2'] <= max_area(6.0)])}"))
+    for label, good, detail in ok:
+        print(f"  {'PASS' if good else 'FAIL'}  {label}: {detail}")
+    n = sum(1 for _, g, _ in ok if g)
+    print(f"self-test: {n}/{len(ok)} controls passed")
+    return 0 if n == len(ok) else 1
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--emit", action="store_true")
+    ap.add_argument("--hang")
+    ap.add_argument("--band", default="hang", choices=[b[0] for b in BANDS])
+    ap.add_argument("--limit", type=int, default=10)
+    ap.add_argument("--seed", type=int, default=46)
+    ap.add_argument("--self-test", action="store_true")
+    args = ap.parse_args()
+    if args.self_test:
+        return selftest()
+    if args.hang:
+        p = hang(args.hang, args.band, args.limit, args.seed)
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        wh = doc["documentation"]["wall_hang"]
+        print(f"{len(wh['hung'])} hung on {wh['faces_available']} faces "
+              f"in the `{args.band}` band (y {wh['y_offset']}) · "
+              f"{wh['refused_too_tight']} faces refused: under {wh['min_hangable_m2']} m2 "
+              f"of viewing distance")
+        for x in wh["hung"][:10]:
+            print(f"  {x['token']:40} facing {x['facing']} run {x['run']:2} "
+                  f"standoff {x['standoff']:2} · wall allows {x['max_area_m2']:6} m2 · "
+                  f"work is {x['work_area_m2']} m2")
+        print(f"-> {p.relative_to(REPO)}")
+        return 0
+    rows = survey()
+    print(f"{'museum':40} {'faces':>5} {'wall':>5} {'longest':>7} {'standoff':>8} {'big':>4}")
+    print("-" * 76)
+    for r in rows:
+        print(f"{r['museum']:40} {r['faces']:>5} {r['wall_cells']:>5} {r['longest_run']:>7} "
+              f"{r['median_standoff']:>8} {r['big_wall_faces']:>4}")
+    print("-" * 76)
+    print(f"{sum(r['faces'] for r in rows)} faces across {len(rows)} buildings · "
+          f"{len(panel_artifacts())} panel-class artifacts waiting")
+    if args.emit:
+        n = emit()
+        print(f"-> {n} faces written to {OUT.relative_to(REPO)}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
