@@ -3,7 +3,9 @@ extends Node3D
 # @identity
 # essence: RGB/CMY glass walls at angles — additive color mixing through transparency and emitted light overlap
 # desire: to walk between colored glass partitions and see your shadow split into complementary colors on the floor
-# critical_parameter: transparency — controls how much light passes through each wall; at 0.4 the mixing is visible but walls remain distinct
+# critical_parameter: mixture — WHERE the colours are claimed to meet. The shipped office
+#   stages the additive/subtractive pair as two groups of panes and then renders both the
+#   same way; the axis makes the room commit to one answer.
 # triggers: none — static installation; color mixing happens through player movement and viewing angle
 # emerges: walking through overlapping RGB walls creates white-ish zones where all three primaries combine — additive mixing proven by architecture
 # needs: OmniLight3D per wall [has]; transparency [has]; VR walkthrough [has]; interactive wall rotation [missing]
@@ -24,8 +26,51 @@ extends Node3D
 @export var spread: float = 2.5
 @export var room_size: Vector3 = Vector3(12.0, 3.0, 10.0)
 
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `mixture`
+# ═══════════════════════════════════════════════════════════════════
+#
+# WHERE THE COLOURS ARE CLAIMED TO MEET. The word and its meanings are taken
+# from visual_color_mixing, the standing bench of the same sequence, which asks
+# the identical question of nine disks on two tables. This is the ARCHITECTURAL
+# member of that family: you do not look at the mixing, you walk into it.
+#
+# The shipped room already stages the pair — _build_office_walls labels three
+# panes "RGB Section - Primary additive colors" and three "CMY Section - Primary
+# subtractive colors" — and then builds all eighteen the same way: alpha 0.4
+# glass with emission on and a coloured OmniLight3D bolted to the front. So the
+# cyan, magenta and yellow panes EMIT. They are lamps that happen to be named
+# after inks, and nothing in this room has ever mixed subtractively. The comment
+# made the claim and the material quietly refused it.
+#
+#   bench    the shipped eighteen panes, both sections named and neither
+#            performed. Byte for byte the legacy room — this branch touches
+#            nothing at all.
+#   light    the panes are LAMPS. Alpha stops damping them and the blend SUMS
+#            instead of averaging, so the three 60-degree panes in the middle
+#            (the block its own comment calls "Overlapping area") finally make
+#            the white core the @identity has always promised.
+#   retina   the panes are PIGMENT PATCHES. Opaque, unlit, no glow and no
+#            coloured spill: nothing passes through anything, so no two colours
+#            meet anywhere except in the eye of whoever is walking. Eighteen
+#            pure hues, which is the same count as the family's mosaic.
+#
+# `pigment` IS DELIBERATELY ABSENT and the reason is in the registry's `declines`:
+# subtractive mixing needs a white ground to subtract FROM, and a room of
+# freestanding partitions has none. The sibling solved this with a white TABLE.
+@export_enum("bench", "light", "retina") var mixture: String = "bench"
+
+## Allow-list. An unknown word in a map token keeps the shipped room rather than
+## stranding a placement with a half-staged one.
+const MIXTURES: PackedStringArray = ["bench", "light", "retina"]
+
+## _ready has built once. Guards the rebuild: a config call that arrives BEFORE
+## the first build must not tear down panes that do not exist yet.
+var _built: bool = false
+
 func _ready() -> void:
 	_build_office_walls()
+	_built = true
 
 func _build_office_walls() -> void:
 	# RGB Section - Primary additive colors
@@ -100,5 +145,20 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Guarded twice: the word must be in this artifact's own allow-list AND differ
+## from what is in play, and the rebuild only runs once _ready has built, because
+## the grid calls this deferred.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if not config.has("mixture"):
+		return
+	var want: String = str(config["mixture"]).strip_edges().to_lower()
+	if not MIXTURES.has(want) or want == mixture:
+		return
+	mixture = want
+	if not _built:
+		return          # _ready has not built yet; it will read the new value
+	for child in get_children():
+		if child is MeshInstance3D:
+			remove_child(child)
+			child.queue_free()
+	_build_office_walls()

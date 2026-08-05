@@ -341,6 +341,22 @@
    }
   },
   "riemann_pump": {
+   "dna": {
+    "axes": {
+    "comparison": [
+    "rules",
+    "overlay",
+    "bracket",
+    "single"
+    ],
+    "resolution": [
+    "pump",
+    "coarse",
+    "mid",
+    "fine"
+    ]
+    }
+   },
    "name": "Riemann Pump",
    "lookup_name": "riemann_pump",
    "description": "Three side-by-side strip displays of the same curve, accumulated via left, right, and midpoint sums. The strip count pumps up and down, showing convergence and bias.",

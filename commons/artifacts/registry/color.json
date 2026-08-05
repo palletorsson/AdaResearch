@@ -690,6 +690,16 @@
    }
   },
   "color_constellation_office": {
+   "dna": {
+    "still_note": "UNVERIFIED, and the reason is the bench not the axis. Swept 2026-08-05: all three frames came back BYTE-IDENTICAL at 28741 bytes, and 94.2% of every frame is one colour, RGB(130,165,118) - a green this artifact does not produce, since it carries no WorldEnvironment in either its .tscn or its .gd. The panes are present but total ~0.4% of frame (cyan 99,255,255 and magenta 255,130,255 among 7625 distinct colours). So the capture is photographing something that is not this office, and 0.00% is a fact about the capture. The axis itself was read line by line and is correctly implemented: bench reproduces the shipped material in order, light switches to BLEND_MODE_ADD with alpha 1.0, retina goes opaque and unlit and builds no OmniLight3D at all. Do NOT read the 0.00% as an inert axis, and do not add a framing hint - a framing hint cannot help a frame that is 94% someone else's fog. The next step is to find where that green comes from.",
+    "axes": {
+    "mixture": [
+    "bench",
+    "light",
+    "retina"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Office space with adaptive additive/subtractive constellations",
