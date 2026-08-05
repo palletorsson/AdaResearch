@@ -21,11 +21,11 @@
 #
 #   Since 2026-08-04 both halves of that admission are knobs rather than
 #   disclaimers. `pitch_space` swaps the map (circle_of_fifths / chromatic /
-#   tonnetz / keyboard / helix) — five different claims about which notes are
-#   NEAR each other. `consonance_theory` swaps the weighting that decides which
-#   pairs get a line at all, and it is the same word, the same four values and
-#   the same tables as chord_tension_spring, which this file's @identity already
-#   names as its contrast piece.
+#   tonnetz / keyboard / helix / consonance) — six different claims about which
+#   notes are NEAR each other. `consonance_theory` swaps the weighting that
+#   decides which pairs get a line at all, and it is the same word, the same four
+#   values and the same tables as chord_tension_spring, which this file's
+#   @identity already names as its contrast piece.
 #
 extends Node3D
 class_name HarmonicDistanceTable
@@ -106,13 +106,29 @@ const LINE_COLOR_BASE := Color(0.0, 0.78, 0.85)
 #                        black/white split is the structure that matters.
 #     helix            — Shepard: chroma goes round, height goes up. C and the
 #                        C above are the same note and are not the same note.
+#     consonance       — the artifact's own title taken literally: angle is chroma,
+#                        RADIUS is harmonic distance from C. Added 2026-08-05 as
+#                        the answer to a measured problem — circle_of_fifths and
+#                        chromatic are the same twelve points (multiplying by 7 is
+#                        a bijection mod 12), so between those two values nothing
+#                        moves but the line web, and the web renders at a third of
+#                        a pixel in the sweep frame. This layout is the one where
+#                        the nearness is DRAWN instead of implied, and the only one
+#                        where consonance_theory moves the nodes rather than the
+#                        lines: under `ratio` the fifth sits at 0.125 of the radius
+#                        and the semitone at 0.81, under `flat` every note lands on
+#                        one ring including C, which is exactly what that theory
+#                        says. Under the default `western` the shells are shallow
+#                        (0.81 / 0.875 / 0.9375) because SHARED_OVERTONES counts
+#                        harmonics 1..16 and its largest non-unison entry is 5 —
+#                        a real, and readable, fact about that table.
 # consonance_theory: which table decides who is CONNECTED, and how heavily.
 #   Same word, same values and same numbers as chord_tension_spring. "western"
 #   short-circuits to this file's own SHARED_OVERTONES, so it is a no-op.
-@export_enum("circle_of_fifths", "chromatic", "tonnetz", "keyboard", "helix") var pitch_space: String = "circle_of_fifths"
+@export_enum("circle_of_fifths", "chromatic", "tonnetz", "keyboard", "helix", "consonance") var pitch_space: String = "circle_of_fifths"
 @export_enum("western", "blues", "ratio", "flat") var consonance_theory: String = "western"
 
-const PITCH_SPACES: Array[String] = ["circle_of_fifths", "chromatic", "tonnetz", "keyboard", "helix"]
+const PITCH_SPACES: Array[String] = ["circle_of_fifths", "chromatic", "tonnetz", "keyboard", "helix", "consonance"]
 const THEORIES: Array[String] = ["western", "blues", "ratio", "flat"]
 
 ## Configuration
@@ -121,6 +137,20 @@ const THEORIES: Array[String] = ["western", "blues", "ratio", "flat"]
 @export var base_octave: int = 4           # Octave for tone generation
 @export var tone_duration: float = 1.5     # How long a played tone sustains
 @export var volume_db: float = -6.0        # Master volume
+
+## Overtone-line thickness multiplier. NOT AN AXIS — 1.0 is the shipped value and
+## `x * 1.0` is bit-identical, so every placement draws the web it always drew.
+## It exists because of a number: the thickness ramp remaps shared overtones 2..16
+## onto 1..6 mm, but 16 is the UNISON, which never occurs between two distinct
+## notes, and the largest non-unison entry in SHARED_OVERTONES is the perfect fifth
+## at 5. So every line this table has ever drawn is between 1.00 and 1.36 mm — the
+## bottom fifth of its own range. At arm's length in VR that is four or five pixels
+## and perfectly legible; at the DNA sweep's camera distance it is a third of a
+## pixel, which is why the two ring layouts, whose only difference IS the web,
+## measured 0.53% apart. The registry sets this in dna.fixture so the instrument
+## can see what the player sees, the same way `warmup` exists on
+## turing_pattern_generator. It changes no argument and no room.
+@export var line_scale: float = 1.0
 
 ## Internal state
 var note_nodes: Array[Dictionary] = []  # {label, area, note_name, chromatic_idx, angle, base_pos}
@@ -173,6 +203,8 @@ func _layout_positions() -> Array[Vector3]:
 			return _pos_keyboard()
 		"helix":
 			return _pos_helix()
+		"consonance":
+			return _pos_consonance()
 		_:
 			return _pos_circle_of_fifths()
 
@@ -249,6 +281,24 @@ func _pos_helix() -> Array[Vector3]:
 		var a: float = -PI / 2.0 + (float(ci) / 12.0) * TAU
 		var lift: float = 0.02 + (float(ci) / 11.0) * circle_radius * 0.55
 		out.append(Vector3(cos(a) * circle_radius, lift, sin(a) * circle_radius))
+	return out
+
+# The title drawn as geometry. Angle is chroma, so the twelve notes keep the order
+# every other layout agrees on; RADIUS is harmonic distance, read through the SAME
+# _shared_for the lines use, so the layout cannot say one thing while the web says
+# another. C is at distance zero from itself and sits at the centre — under every
+# theory except `flat`, which rates all twelve intervals alike and therefore puts C
+# on the ring with everyone else. Nothing leaves the shipped plate: the radius is a
+# fraction of circle_radius and 16 shared overtones is the ceiling by construction.
+func _pos_consonance() -> Array[Vector3]:
+	var out: Array[Vector3] = []
+	for i in range(12):
+		var ci: int = CHROMATIC_NOTES.find(CIRCLE_OF_FIFTHS[i])
+		var interval_class: int = ci if ci <= 6 else 12 - ci
+		var shared: int = _shared_for(interval_class)
+		var r: float = circle_radius * (1.0 - clampf(float(shared) / 16.0, 0.0, 1.0))
+		var a: float = -PI / 2.0 + (float(ci) / 12.0) * TAU
+		out.append(Vector3(cos(a) * r, 0.02, sin(a) * r))
 	return out
 
 # ═══════════════════════════════════════════
@@ -453,7 +503,7 @@ func _build_overtone_lines() -> void:
 		var pos_to: Vector3 = note_nodes[data.to_idx].base_pos
 		var shared: int = data.shared
 
-		var thickness = remap(float(shared), 2.0, 16.0, 0.001, 0.006)
+		var thickness = remap(float(shared), 2.0, 16.0, 0.001, 0.006) * line_scale
 		var delta = pos_to - pos_from
 		var length = delta.length()
 		var midpoint = (pos_from + pos_to) / 2.0

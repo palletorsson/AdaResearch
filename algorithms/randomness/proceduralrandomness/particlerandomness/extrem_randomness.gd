@@ -10,6 +10,44 @@ extends Node3D
 @export var enable_narration: bool = true
 @export var forced_demo: int = -1
 
+## STAGE-2 DNA — AXIS: WHICH KIND OF RANDOMNESS IS ON SHOW.
+##
+## This artifact is a five-chapter book that reads itself aloud on a ten-second timer. Every
+## chapter already exists in full below — its own opening arrangement in `start_demo`, its
+## own update rule, its own colour law, its own title and its own paragraph of prose. What
+## did not exist was any way to stop on one. `forced_demo` is an int with no names attached,
+## the registry declared nothing, and `apply_grid_config` was literally `pass`, so all five
+## maps that place this show whichever page the clock happened to be on.
+##
+##   all         the shipped rotation: open on chaos, turn the page every display_time
+##               seconds, forever. Photographed at any instant it IS one of the five.
+##   chaos       100 spheres uniform in a 10 m cube, each shoved by an independent random
+##               force. Randomness as pure unstructured draw — the null hypothesis.
+##   noise       a flat 20 x 5 lattice flowing along a smooth field. Randomness with
+##               CORRELATION: neighbouring samples agree, which is what makes it look
+##               like nature instead of like static.
+##   pattern     a disc, angle by index and radius by draw, wound into a spiral. Randomness
+##               under a RULE — the same chance filtered through an equation.
+##   emergence   a 2 m ball obeying separation, alignment and cohesion with a small random
+##               nudge. Randomness as the LOCAL term whose global effect is order.
+##   evolution   a 2 m line that ranks itself against a moving target every frame; the top
+##               tenth turn gold and grow, the rest chase a winner and mutate. Randomness
+##               under SELECTION.
+##
+## The five differ in silhouette before they differ in anything else — cube, panel, disc,
+## ball, line — which is what makes the axis legible in one still rather than a claim about
+## motion. Their prose changes with them, because the labels belong to the chapter.
+@export_enum("all", "chaos", "noise", "pattern", "emergence", "evolution") var chapter: String = "all"
+## Index-matched to `start_demo`'s existing match block, in its existing order. "all" is
+## deliberately absent: it is the value that pins nothing.
+const CHAPTER_DEMOS: PackedStringArray = ["chaos", "noise", "pattern", "emergence", "evolution"]
+
+## 0 keeps the shipped `randomize()` — a different cloud every visit, which is what all five
+## placements have always shown and what the piece is about. Any other value pins the draw,
+## so a sweep's frames differ by `chapter` and by nothing else. Set from the registry's
+## dna.fixture, never from a map.
+@export var scatter_seed: int = 0
+
 # Visual elements
 var particles = []
 var current_demo: int = 0
@@ -64,25 +102,40 @@ var demo_descriptions = [
 
 # Initialize
 func _ready() -> void:
-	randomize()
-	
+	_read_grid_config_meta()
+	if scatter_seed != 0:
+		seed(scatter_seed)
+	else:
+		randomize()
+
 	# NOTE: Camera3D, DirectionalLight3D, and WorldEnvironment removed —
 	# the grid scene (GridSystem) already provides these. Creating duplicates
 	# causes rendering conflicts (multiple active cameras, double lighting).
 
 	# Create particles
 	create_particles()
-	
+
 	# Create UI elements for explanations
 	create_ui()
-	
+
 	# Start first demo
 	start_demo(0)
-	if forced_demo >= 0 and forced_demo < demo_titles.size():
+	# CHAPTER gate. `all` with no legacy forced_demo resolves to -1 and falls straight
+	# through, leaving the line above as the whole of _ready's staging and display_time at
+	# its shipped 10.0 — the rotation, unchanged. A pinned chapter freezes the clock and
+	# stages its own opening, exactly as forced_demo always did.
+	var idx: int = _chapter_demo_index()
+	if idx >= 0:
 		display_time = 1_000_000.0
 		demo_time = 0.0
-		current_demo = forced_demo
-		start_demo(current_demo)
+		current_demo = idx
+		# Chapter 0 is already the one the line above staged, so pinning it is a FREEZE and
+		# not a restart. Re-staging would redraw its hundred positions from a fresh stretch
+		# of the stream, and `all` and `chaos` — which are the same picture, because a
+		# rotating demo photographed at t=0 is its first chapter — would come back as two
+		# different scatters and hand the axis a bite it did not earn.
+		if idx != 0:
+			start_demo(idx)
 
 # Create particles for visualization
 func create_particles() -> void:
@@ -448,5 +501,66 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+# ── CHAPTER ──────────────────────────────────────────────────────────────────────────────
+# Appended LAST. Nothing here touches a demo's arrangement, its update rule, its colour law
+# or its prose — only which of the five is on the table, and whether the clock runs.
+
+## Which demo index the axis asks for, or -1 for "keep turning the pages".
+##
+## The legacy `forced_demo` export still wins where a map or scene set it, so nothing that
+## already used it changes; `chapter` is the named door onto the same room.
+func _chapter_demo_index() -> int:
+	var c: String = str(chapter).strip_edges().to_lower()
+	var i: int = CHAPTER_DEMOS.find(c)
+	if i >= 0:
+		return i
+	if forced_demo >= 0 and forced_demo < demo_titles.size():
+		return forced_demo
+	return -1
+
+
+## The grid sets config_<key> metadata on the instantiated root BEFORE it calls
+## apply_grid_config(), so reading it here means the chapter is staged once rather than
+## staged as `all` and then restaged. All five existing placements carry no such meta and
+## fall straight through.
+func _read_grid_config_meta() -> void:
+	var node: Node = self
+	while node != null:
+		if node.has_meta("config_chapter"):
+			chapter = str(node.get_meta("config_chapter"))
+		if node.has_meta("config_scatter_seed"):
+			scatter_seed = int(node.get_meta("config_scatter_seed"))
+		node = node.get_parent()
+
+
+## Config from map_data.json tokens:  extreme_randomness#chapter:emergence
+##
+## GUARDED ON CHANGE. All five existing placements arrive here with no keys at all, and the
+## grid reaches this twice for one placement; restaging unguarded would redraw a hundred
+## particle positions on both of those, for nothing. Before _ready has run there is nothing
+## staged, so the value is only recorded — which is also the path the capture harness takes
+## when it sets the export directly.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("scatter_seed"):
+		scatter_seed = int(config["scatter_seed"])
+	if not config.has("chapter"):
+		return
+	var want: String = str(config["chapter"]).strip_edges().to_lower()
+	if want != "all" and CHAPTER_DEMOS.find(want) < 0:
+		return
+	if want == chapter:
+		return
+	chapter = want
+	if particles.is_empty():
+		return
+	var idx: int = _chapter_demo_index()
+	if idx < 0:
+		display_time = 10.0
+		demo_time = 0.0
+		current_demo = 0
+		start_demo(0)
+		return
+	display_time = 1_000_000.0
+	demo_time = 0.0
+	current_demo = idx
+	start_demo(idx)

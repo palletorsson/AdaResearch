@@ -271,6 +271,16 @@ func _suppress_chrome(node: Node) -> void:
 			(child as CanvasLayer).visible = false
 		elif child is Camera3D:
 			(child as Camera3D).current = false
+		elif child is Control:
+			# A Control parented under a Node3D draws STRAIGHT INTO THE VIEWPORT
+			# without a CanvasLayer, and this suppressor only stood down
+			# CanvasLayer and Camera3D. rhizomatic_maze_space carries a DebugInfo
+			# Control — a 390x110 panel reading "Generating organic tunnel
+			# network..." — and that panel WAS the 8.2% "subject" the verify pass
+			# measured, identical in every frame, while the maze itself was a
+			# ghost in its own volumetric fog with the camera 220 m out. The
+			# subject-share number is only as honest as this list.
+			(child as Control).visible = false
 		_suppress_chrome(child)
 
 

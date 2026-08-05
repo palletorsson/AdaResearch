@@ -38,6 +38,22 @@ class_name TuringPatternGenerator
 #   "spots" is PRESETS[0], which is the shipped pattern_type, so it is a no-op.
 @export_enum("spots", "stripes", "maze", "mitosis", "coral", "waves") var regime: String = "spots"
 
+# seeding: WHAT THE FIELD IS INOCULATED WITH before the chemistry runs. `regime`
+#   moves feed and kill; this file's own truth line is about neither — "pattern
+#   emerges from the ratio of two diffusion rates, not from a template, not from a
+#   gene" — and until now nothing let anyone test it, because every placement in
+#   the corpus starts from the same five random discs.
+#   MEASURED, not assumed: the update rule below was re-implemented exactly (same
+#   0.2/0.05 laplacian weights, same clamp, same U=0.5 / V=0.25 stamp) and all four
+#   inoculations run at every regime, resolution 40, 1600 steps. Under `maze` the
+#   four settle at coverage 0.434 / 0.410 / 0.443 / 0.440 while 39-73% of the CELLS
+#   differ: the law fixes HOW MUCH, the seed fixes WHERE, which is the truth line
+#   vindicated. Under `waves` the lattice never ignites and under `mitosis` the ring
+#   dies out entirely, so the seed also decides IF. Both halves of that answer are
+#   in the picture, and neither is reachable through regime.
+#   "discs" is the shipped five-random-disc inoculation, moved but not changed.
+@export_enum("discs", "centre", "lattice", "ring") var seeding: String = "discs"
+
 # ── Capture knobs. NOT axes: both default to 0, which is shipped behaviour. ──
 # pattern_seed pins the five seeded blobs. Without it six regime frames are six
 #   different random inoculations and the sweep measures the RNG, not the law.
@@ -95,7 +111,11 @@ const PRESETS = {
 ## 4 M cell-updates buys 2500 steps at resolution 40 and 976 at 64.
 const WARMUP_CELL_BUDGET: int = 4000000
 
+const SEEDINGS: Array[String] = ["discs", "centre", "lattice", "ring"]
+
 var _seed_rng: RandomNumberGenerator = null
+## true once _ready has built and inoculated the field at least once.
+var _built: bool = false
 
 var _U: Array[Array] = []
 var _V: Array[Array] = []
@@ -125,6 +145,7 @@ func _ready():
 	_resolve_regime()
 	_apply_preset()
 	_run_warmup()
+	_built = true
 
 ## Fold the DNA word back onto the integer the rest of the file (and the VR
 ## preset slider) already speaks. At the default "spots" this resolves to 0,
@@ -318,21 +339,75 @@ func _seed_random():
 	if pattern_seed != 0:
 		_seed_rng = RandomNumberGenerator.new()
 		_seed_rng.seed = pattern_seed
-	var seed_size = resolution / 8
+	match seeding:
+		"centre":
+			_seed_centre()
+		"lattice":
+			_seed_lattice()
+		"ring":
+			_seed_ring()
+		_:
+			_seed_discs()
+
+## THE SHIPPED INOCULATION, moved and not otherwise touched: five discs at random
+## centres with random radii, drawn in the same order and the same count from the
+## same generator. At the default seeding this is the only branch that runs, so an
+## existing placement is inoculated byte for byte as before.
+func _seed_discs():
+	var seed_size: int = resolution / 8
 
 	for _i in range(5):
-		var cx = _seed_draw(seed_size, resolution - seed_size)
-		var cy = _seed_draw(seed_size, resolution - seed_size)
-		var size = _seed_draw(2, seed_size)
-		
-		for dy in range(-size, size + 1):
-			for dx in range(-size, size + 1):
-				var x = cx + dx
-				var y = cy + dy
-				if x >= 0 and x < resolution and y >= 0 and y < resolution:
-					if dx*dx + dy*dy <= size*size:
-						_U[y][x] = 0.5
-						_V[y][x] = 0.25
+		var cx: int = _seed_draw(seed_size, resolution - seed_size)
+		var cy: int = _seed_draw(seed_size, resolution - seed_size)
+		var size: int = _seed_draw(2, seed_size)
+		_stamp_disc(cx, cy, size)
+
+## The stamp the shipped loop applied inline: a filled disc of activator.
+func _stamp_disc(cx: int, cy: int, size: int) -> void:
+	for dy in range(-size, size + 1):
+		for dx in range(-size, size + 1):
+			var x = cx + dx
+			var y = cy + dy
+			if x >= 0 and x < resolution and y >= 0 and y < resolution:
+				if dx*dx + dy*dy <= size*size:
+					_U[y][x] = 0.5
+					_V[y][x] = 0.25
+
+## One square in the middle — the inoculation every textbook figure of Gray-Scott
+## starts from, and the only one that carries no randomness at all.
+func _seed_centre() -> void:
+	var h: int = maxi(2, resolution / 10)
+	var c: int = resolution / 2
+	for y in range(c - h, c + h):
+		for x in range(c - h, c + h):
+			if x >= 0 and x < resolution and y >= 0 and y < resolution:
+				_U[y][x] = 0.5
+				_V[y][x] = 0.25
+
+## A regular 3x3 array of identical discs — a TEMPLATE, deliberately. Whether the
+## settled pattern still shows the lattice is the question the truth line asks.
+func _seed_lattice() -> void:
+	var n: int = 3
+	var size: int = maxi(2, resolution / 12)
+	for iy in range(n):
+		for ix in range(n):
+			var cx: int = int((float(ix) + 0.5) * float(resolution) / float(n))
+			var cy: int = int((float(iy) + 0.5) * float(resolution) / float(n))
+			_stamp_disc(cx, cy, size)
+
+## An annulus: a closed front with no ends. Mitosis has nothing to split here and
+## the ring dies out; maze fills the field from it exactly as from anything else.
+func _seed_ring() -> void:
+	var c: float = float(resolution - 1) * 0.5
+	var r0: float = float(resolution) * 0.30
+	var w: float = maxf(1.5, float(resolution) * 0.05)
+	for y in range(resolution):
+		for x in range(resolution):
+			var dx: float = float(x) - c
+			var dy: float = float(y) - c
+			if absf(sqrt(dx * dx + dy * dy) - r0) <= w:
+				_U[y][x] = 0.5
+				_V[y][x] = 0.25
 
 func _seed_draw(lo: int, hi: int) -> int:
 	if _seed_rng != null:
@@ -436,9 +511,16 @@ func reset():
 ## nothing else: the field is not re-seeded and no node is torn down, which is
 ## what the VR preset slider already does. Neither curation bay that mounts this
 ## artifact sends a regime key, so no shipped room moves.
+##
+## `seeding` is pulled out of the write-through loop for a reason the blanket
+## `set()` would hide: writing the word alone would change what the RESET button
+## draws next time and leave the field on screen inoculated the old way, so the
+## artifact would be labelled one thing and showing another. It re-seeds instead —
+## and only when _ready has already built once, so a config that arrives before the
+## grids exist cannot index an empty array.
 func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
-		if str(key) == "regime":
+		if str(key) == "regime" or str(key) == "seeding":
 			continue
 		if key in self:
 			set(key, config_data[key])
@@ -447,3 +529,10 @@ func apply_grid_config(config_data: Dictionary):
 		if _has_regime(want) and want != regime:
 			regime = want
 			pattern_type = _regime_index(want)
+	if config_data.has("seeding"):
+		var want_seed: String = str(config_data["seeding"]).to_lower()
+		if SEEDINGS.has(want_seed) and want_seed != seeding:
+			seeding = want_seed
+			if _built:
+				_init_simulation()
+				_run_warmup()

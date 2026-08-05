@@ -29,7 +29,10 @@ class_name RhizomaticMazeSpace
 ##             thickness is the hierarchy — a trunk carries everything below it.
 ##   severed   asignifying rupture. The rhizome is built in full and then cut: a fissure is
 ##             opened through the middle and every tunnel crossing it is removed, so the
-##             network falls into fragments that are each still rhizomatic.
+##             network falls into fragments that are each still rhizomatic — and the two
+##             fragments then STAND APART, because a graph that no longer connects and one
+##             that does are the same photograph until they do. What a rupture makes is not
+##             a damaged rhizome, it is two of them.
 ##   plateau   "a continuous, self-vibrating region of intensities whose development avoids
 ##             any orientation toward a culmination point." The four stacked levels collapse
 ##             into one, connectivity rises, and the 25 m tower becomes a dense flat mat
@@ -44,6 +47,42 @@ const TOPOLOGIES: PackedStringArray = ["rhizome", "tree", "severed", "plateau"]
 ## draw; without it, four values would be four different mazes and any bite number would be
 ## measuring the RNG. No placement passes it.
 @export_enum("fresh", "pinned") var layout_draw: String = "fresh"
+
+## CAPTURE BENCH ONLY, like layout_draw, and deliberately not an axis either. `scene` is the
+## shipped state and every placement gets it.
+##
+## THE REASON THIS EXISTS IS A MEASUREMENT, and it is worth reading before trusting any
+## number about this artifact. The first sweep reported all four topologies within 0.062% of
+## each other, on a "subject" filling 8.2% of the frame — which reads as a healthy subject
+## and a dead axis. It was neither. Three things in this .tscn stand between the bench and
+## the maze:
+##
+##   DebugInfo, a Control        a 390 x 110 panel with a RichTextLabel reading "Generating
+##                               organic tunnel network..." and the parameter list. A Control
+##                               under a Node3D still draws to the viewport, and the sweep's
+##                               chrome suppressor only stands down CanvasLayer and Camera3D,
+##                               so this panel WAS the 8.2% subject. It is identical in every
+##                               frame, so the statistic that was supposed to say whether the
+##                               axis works was mostly a photograph of a debug readout.
+##   WorldEnvironment            volumetric fog at density 0.03 over a 50 m length, authored
+##                               for a player standing INSIDE the tunnels. The sweep camera
+##                               stands about 220 m out, so the frame is a flat wall of haze
+##                               and the maze is a ghost: 90% of the picture sits within 13
+##                               grey levels of the background.
+##   NavigationHelpers           four 0.6 m marker spheres at x,z = +/-25. They are
+##                               MeshInstance3D, so they pin the fitted AABB to a 50 m box
+##                               whatever the maze does, and that is what put the camera 220 m
+##                               out in the first place.
+##
+## `bare` clears all three — the Control and the markers are freed, the environment keeps
+## everything except its two fog switches. It changes nothing about the maze — the topology
+## code is not touched — it only lets the maze be the thing in the photograph.
+##
+## THE SAME THREE SHIP INTO EVERY MAP, which is a separate finding and is NOT repaired here:
+## fourteen placements each get a debug panel and an environment override. That is a change
+## to what those rooms look like and it belongs in its own pass, not smuggled in under a DNA
+## deepening. Recorded in the registry's dna.open.
+@export_enum("scene", "bare") var bench_stage: String = "scene"
 
 @export var maze_size: Vector3 = Vector3(40, 20, 40)
 @export var path_width: float = 2.5
@@ -83,12 +122,38 @@ var surface_noise: FastNoiseLite
 var _built: bool = false
 
 func _ready() -> void:
+	if bench_stage == "bare":
+		_strip_bench_stage()
 	if layout_draw == "pinned":
 		seed(generation_seed if generation_seed >= 0 else 0)
 	setup_noise_systems()
 	setup_components()
 	generate_rhizomatic_maze()
 	_built = true
+
+
+## Clear the three .tscn children that stand between the bench and the maze. Runs only from
+## bench_stage == "bare", which no placement sets, and touches nothing the generator owns.
+##
+## The environment is DISARMED rather than freed, on purpose. Freeing it would leave the
+## viewport's environment to whichever WorldEnvironment Godot decides survives — the sweep
+## rig adds one of its own, and two in a tree is undefined enough that the picture would
+## depend on node order. Turning off exactly the two properties that cause the problem keeps
+## this scene's own dark background (0.02, 0.02, 0.08), which is the best possible backdrop
+## for tunnels whose albedo is 0.7/0.8/0.9, and leaves everything else the author chose.
+func _strip_bench_stage() -> void:
+	for child in get_children():
+		if child is Control:
+			child.queue_free()
+		elif child is WorldEnvironment:
+			var env: Environment = (child as WorldEnvironment).environment
+			if env == null:
+				child.queue_free()
+			else:
+				env.fog_enabled = false
+				env.volumetric_fog_enabled = false
+		elif String(child.name) == "NavigationHelpers":
+			child.queue_free()
 
 func setup_noise_systems() -> void:
 	"""Initialize noise for organic path variation"""
@@ -399,13 +464,23 @@ func add_hanging_elements() -> void:
 	if topology == "plateau":
 		ceiling_y = 3.0
 
+	# A tendril dangling in the middle of the fissure sews the wound shut in the picture —
+	# and the picture is the only place the wound exists, since a cut graph and an uncut one
+	# are the same photograph until the halves stand apart. Nothing hangs over the gap.
+	var clear_span: float = 0.0
+	if topology == "severed":
+		var cut: float = maxf(2.0, maze_size.x * RhizomaticMazeGenerator.FISSURE_FRACTION)
+		clear_span = cut + maze_size.x * RhizomaticMazeGenerator.DRIFT_FRACTION
+
 	for i in range(hanging_count):
 		var hanging_pos = Vector3(
 			randf_range(-maze_size.x * 0.4, maze_size.x * 0.4),
 			ceiling_y,  # Start from ceiling
 			randf_range(-maze_size.z * 0.4, maze_size.z * 0.4)
 		)
-		
+		if clear_span > 0.0 and absf(hanging_pos.x) < clear_span:
+			continue
+
 		create_hanging_tendril(hanging_pos)
 
 func create_hanging_tendril(start_pos: Vector3) -> void:

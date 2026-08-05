@@ -37,8 +37,12 @@ class_name SlopeTangentDemo
 ## --- DNA (stage 2, promoted 2026-08-04) --------------------------------------------
 ## phase — WHERE ON THE CURVE the slope is being read. `traverse` is the shipped marker,
 ##   running the whole period on _process; the other three stop it at the places where the
-##   derivative says something different, and they are the only places a sine HAS. Note
-##   what is deliberately absent: `zero`, `steepest` and `inflection` would be three names
+##   derivative says something different, and they are the only places a sine HAS. A named
+##   station also MARKS ITSELF — a band down the plot at that x, and the tangent laid on as
+##   a straightedge instead of trailed as a one-pixel line. That was added 2026-08-05 after
+##   the sweep measured all four values within 0.21% of each other on a subject filling
+##   0.8% of the frame: the axis was right and the ink was invisible. See STATION_BAND_W.
+##   Note what is deliberately absent: `zero`, `steepest` and `inflection` would be three names
 ##   for one point on this curve — sin''(x) = −sin(x) vanishes exactly where |cos x| is
 ##   maximal — so declaring them would have shipped three identical stills under three
 ##   different words. One value, `steepest`, holds that point.
@@ -54,6 +58,24 @@ const EVIDENCE := ["result", "trace", "longhand", "axiom"]
 # a quarter, the steepest ascent dead centre, the crest at three quarters.
 const PHASE_T := {"crest": 0.75, "steepest": 0.5, "trough": 0.25}
 
+## HOW A STATION IS DRAWN, and why the shipped sweep is not drawn that way.
+##
+## `traverse` is a SWEEP: the point is passing through and the tangent is a trace it drags
+## behind it — one pixel wide, which is what this artifact has always drawn. A station is a
+## READING: the marker has been stopped somewhere on purpose, and a reading is made with
+## apparatus — the place is banded on the plot and the straightedge is laid along the curve.
+## So the weight of the ink is not decoration bolted onto three of the four values; it is
+## the difference between watching and measuring, which is what the axis names.
+##
+## It is also the only version of "raise the line weight" that costs the eight shipped cells
+## nothing. The tangent is NOT new geometry — it is drawn at evidence=trace, which is the
+## default — so thickening it unconditionally would change every placement. Thickening it
+## only where phase names a station touches nothing any map has ever asked for, because no
+## map passes phase at all.
+const STATION_BAND_W: float = 0.26
+const STATION_TANGENT_W: float = 0.075
+const DERIV_RIBBON_W: float = 0.045
+
 var _curve_strip: MeshInstance3D
 var _tangent_strip: MeshInstance3D
 var _marker: MeshInstance3D
@@ -61,6 +83,7 @@ var _deriv_strip: MeshInstance3D
 var _rise_run: MeshInstance3D
 var _readout: Label3D
 var _axiom: Label3D
+var _station_band: MeshInstance3D
 var _t: float = 0.0
 
 
@@ -111,6 +134,7 @@ func _rebuild() -> void:
 	_rise_run = null
 	_readout = null
 	_axiom = null
+	_station_band = null
 	_build_axes()
 	_build_curve()
 	_build_tangent()
@@ -178,8 +202,32 @@ func _build_tangent() -> void:
 	mat.emission = tangent_color
 	mat.emission_energy_multiplier = 1.6
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	# A LINE_STRIP is not culled, so this changes nothing at the shipped default; it exists
+	# so the station ribbon below is not thrown away by whichever way its winding lands.
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	_tangent_strip.material_override = mat
 	add_child(_tangent_strip)
+
+
+## The band that says WHERE the reading is being taken — built lazily, and only ever from a
+## named station, so at the shipped `traverse` this node does not exist at all. That matters
+## for more than tidiness: the grid auto-grounds every artifact off its measured AABB, so a
+## mesh standing here unused would lift all eight placements off the floor. The height is the
+## vertical axis bar's expression character for character for the same reason — a station
+## never grows the box either.
+func _ensure_station_band() -> void:
+	if _station_band != null:
+		return
+	_station_band = MeshInstance3D.new()
+	_station_band.name = "StationBand"
+	var box := BoxMesh.new()
+	box.size = Vector3(STATION_BAND_W, 2.0 * amplitude + 0.2, 0.01)
+	_station_band.mesh = box
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.20, 0.23, 0.31, 1.0)
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_station_band.material_override = mat
+	add_child(_station_band)
 
 
 func _build_marker() -> void:
@@ -215,13 +263,17 @@ func _build_evidence() -> void:
 	_deriv_strip.name = "DerivativeCurve"
 	var imm := ImmediateMesh.new()
 	imm.clear_surfaces()
-	imm.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	# A RIBBON, not a LINE_STRIP. This curve exists only under `longhand`, a value no
+	# placement has ever set, so its weight is free of any regression — and at one pixel
+	# wide the whole derivative was quieter in the frame than the marker dot explaining it.
+	imm.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 	for i in samples + 1:
 		var t: float = float(i) / float(samples)
 		var x: float = lerp(-horizontal_span * 0.5, horizontal_span * 0.5, t)
 		var x_curve: float = lerp(-x_range * 0.5, x_range * 0.5, t)
 		var dy: float = cos(x_curve) * amplitude
-		imm.surface_add_vertex(Vector3(x, dy, 0.0))
+		imm.surface_add_vertex(Vector3(x, dy + DERIV_RIBBON_W * 0.5, 0.0))
+		imm.surface_add_vertex(Vector3(x, dy - DERIV_RIBBON_W * 0.5, 0.0))
 	imm.surface_end()
 	_deriv_strip.mesh = imm
 	_deriv_strip.material_override = _line_mat(Color(tangent_color.r, tangent_color.g, tangent_color.b, 1.0), 0.7)
@@ -243,6 +295,7 @@ func _line_mat(c: Color, energy: float) -> StandardMaterial3D:
 	mat.emission = c
 	mat.emission_energy_multiplier = energy
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	return mat
 
 
@@ -270,18 +323,39 @@ func _update_marker_and_tangent() -> void:
 	var dx_display: float = horizontal_span / x_range
 	var slope_display: float = slope / dx_display
 	_marker.position = Vector3(x, y, 0.0)
+	# The station's place on the plot. Behind the curve (z below zero) so nothing the artifact
+	# draws is hidden by it, and absent entirely while the marker is sweeping.
+	if phase == "traverse":
+		if _station_band != null:
+			_station_band.visible = false
+	else:
+		_ensure_station_band()
+		_station_band.visible = true
+		_station_band.position = Vector3(x, 0.0, -0.06)
 	if _tangent_strip == null:
 		return
 	# Build tangent as a line in immediate mesh.
 	var imm := ImmediateMesh.new()
 	imm.clear_surfaces()
-	imm.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	var half_len := 0.55
 	var p0 := Vector3(x - half_len, y - slope_display * half_len, 0.0)
 	var p1 := Vector3(x + half_len, y + slope_display * half_len, 0.0)
-	imm.surface_add_vertex(p0)
-	imm.surface_add_vertex(p1)
-	imm.surface_end()
+	if phase == "traverse":
+		imm.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		imm.surface_add_vertex(p0)
+		imm.surface_add_vertex(p1)
+		imm.surface_end()
+	else:
+		# Laid on the curve as a straightedge rather than dragged behind the point. Same two
+		# endpoints, so the artifact's measured box does not move.
+		var along: Vector3 = (p1 - p0).normalized()
+		var across: Vector3 = Vector3(-along.y, along.x, 0.0) * (STATION_TANGENT_W * 0.5)
+		imm.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
+		imm.surface_add_vertex(p0 + across)
+		imm.surface_add_vertex(p0 - across)
+		imm.surface_add_vertex(p1 + across)
+		imm.surface_add_vertex(p1 - across)
+		imm.surface_end()
 	_tangent_strip.mesh = imm
 	if _rise_run != null:
 		# The same slope as arithmetic: run out to p1's x, then rise to p1.

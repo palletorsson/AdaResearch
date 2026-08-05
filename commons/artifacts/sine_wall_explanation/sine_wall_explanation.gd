@@ -47,6 +47,42 @@ class_name SineWallExplanation
 ## Maximum frequency the slider can reach
 @export_range(1.0, 20.0, 0.5) var frequency_max: float = 6.0
 
+## STAGE-2 DNA — AXIS: WHAT THE WALL IS MADE OF, which is the same as asking what a wave IS.
+##
+## THE WORD IS BORROWED ON PURPOSE, character for character, from the artifact this case
+## exists to explain: `cut` = skin · ribs · strata · lattice, declared by sine_wall_corridor
+## (algorithms/wavefunctions/sine_wall/SineWallCorridor.gd). The @identity below already
+## names that pairing — "contrasts with sine_wall_corridor (explanation vs immersion)" — so
+## the display case and the corridor are two scales of one object, and asking them the same
+## question is the whole point. Both compute a sample grid and then decide which cells of it
+## get a surface; neither touches the displacement function, the colour ramp or the sample
+## positions. The corridor answers at 24 m with your body inside it. This answers at 90 cm
+## with the formula written above it.
+##
+##   skin      every quad emitted, a closed ribbon. The wave as an OBJECT: continuous,
+##             seamless, the arithmetic denied. The shipped lineage, byte for byte.
+##   ribs      two columns kept of every four — twelve vertical fins with air between them.
+##             The wave as a FAMILY OF PROFILES, which is how a wave is actually drawn, and
+##             on a case whose job is to show the profile it is arguably the honest reading.
+##   strata    the same cut taken horizontally: four bands with gaps, so the wall becomes a
+##             stack of contours — the way a curved surface is really fabricated.
+##   lattice   both cuts at once: six mullions and four rails standing on the sample lines.
+##             The wave as its own measuring grid, with the surface withheld.
+##
+## THE DEFAULT IS SHORT-CIRCUITED, NOT RECOMPUTED. `skin` (and `ribs`) run at one row per
+## column, so `_update_wall_mesh` emits y = 0.0 and y = wall_height exactly as the
+## pre-promotion loop did — the same vertices in the same order with the same colours, not
+## a subdivision that happens to agree. Only strata and lattice subdivide, because only they
+## need somewhere to put a horizontal gap.
+@export_enum("skin", "ribs", "strata", "lattice") var cut: String = "skin"
+const FABRICS: PackedStringArray = ["skin", "ribs", "strata", "lattice"]
+
+## Vertical subdivisions used ONLY by strata and lattice. At the shipped 0.5 m wall height
+## that is 3.1 cm per row, so a two-row band is 6.2 cm and a one-row rail 3.1 cm — tens of
+## pixels at the sweep's framing of a 1 m case, not hairlines. The column moduli are in
+## SAMPLE units, so a fin stays a fin whatever wall_length is set to.
+const WALL_ROWS: int = 16
+
 var _wall_mesh: MeshInstance3D
 var _base_plate: MeshInstance3D
 var _formula_label: Label3D
@@ -66,6 +102,8 @@ var RackTpl = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
 
 func _ready():
+	_read_grid_config_meta()
+	_normalise_cut()
 	_create_base_plate()
 	_create_wall()
 	_create_sine_curve()
@@ -106,6 +144,7 @@ func _update_wall_mesh(phase: float):
 
 	var half_length = wall_length / 2.0
 	var safe_amplitude = maxf(amplitude, 0.0001)
+	var rows: int = _cut_rows()
 
 	for i in range(SEGMENTS):
 		var z0 = lerp(-half_length, half_length, float(i) / SEGMENTS)
@@ -121,26 +160,35 @@ func _update_wall_mesh(phase: float):
 		var x0 = disp0
 		var x1 = disp1
 
-		# Quad vertices - wall facing +X
-		var v0 = Vector3(x0, 0.0, z0)
-		var v1 = Vector3(x1, 0.0, z1)
-		var v2 = Vector3(x1, wall_height, z1)
-		var v3 = Vector3(x0, wall_height, z0)
-
 		# Color: bright where displaced most
 		var intensity0 = abs(disp0) / safe_amplitude
 		var intensity1 = abs(disp1) / safe_amplitude
 		var c0 = wall_color.lerp(Color.WHITE, intensity0 * 0.4)
 		var c1 = wall_color.lerp(Color.WHITE, intensity1 * 0.4)
 
-		# Face toward viewer (+X direction)
-		st.set_color(c0); st.add_vertex(v0)
-		st.set_color(c1); st.add_vertex(v1)
-		st.set_color(c1); st.add_vertex(v2)
+		# CUT gate. On "skin" rows is 1 and _cut_keeps is always true, so the two lines
+		# below evaluate to 0.0 and wall_height and the vertex stream is emitted in full,
+		# exactly as it was before the axis existed.
+		for r in range(rows):
+			if not _cut_keeps(i, r):
+				continue
+			var y0: float = wall_height * (float(r) / float(rows))
+			var y1: float = wall_height * (float(r + 1) / float(rows))
 
-		st.set_color(c0); st.add_vertex(v0)
-		st.set_color(c1); st.add_vertex(v2)
-		st.set_color(c0); st.add_vertex(v3)
+			# Quad vertices - wall facing +X
+			var v0 = Vector3(x0, y0, z0)
+			var v1 = Vector3(x1, y0, z1)
+			var v2 = Vector3(x1, y1, z1)
+			var v3 = Vector3(x0, y1, z0)
+
+			# Face toward viewer (+X direction)
+			st.set_color(c0); st.add_vertex(v0)
+			st.set_color(c1); st.add_vertex(v1)
+			st.set_color(c1); st.add_vertex(v2)
+
+			st.set_color(c0); st.add_vertex(v0)
+			st.set_color(c1); st.add_vertex(v2)
+			st.set_color(c0); st.add_vertex(v3)
 
 	st.generate_normals()
 	_wall_mesh.mesh = st.commit()
@@ -416,5 +464,69 @@ func _refresh_static() -> void:
 	_update_value_markers(_time)
 
 
+# ── CUT ──────────────────────────────────────────────────────────────────────────────────
+# Appended LAST. Nothing here touches the displacement function, the colour ramp, the sine
+# curve overlay, the value markers or the frequency slider — only which cells of the sample
+# grid are given a surface.
+
+## Snapped once, in _ready, so every downstream match sees a legal value and a typo in a
+## map token renders the shipped wall rather than nothing.
+func _normalise_cut() -> void:
+	var c: String = str(cut).strip_edges().to_lower()
+	cut = c if FABRICS.has(c) else "skin"
+
+
+## The grid sets config_<key> metadata on the instantiated root BEFORE it calls
+## apply_grid_config(), so reading it here means the wall is built once, correctly, instead
+## of built as `skin` and then rebuilt. All six existing placements carry no such meta and
+## fall straight through.
+func _read_grid_config_meta() -> void:
+	var node: Node = self
+	while node != null:
+		if node.has_meta("config_cut"):
+			cut = str(node.get_meta("config_cut"))
+			return
+		node = node.get_parent()
+
+
+## One row per column unless the value needs a horizontal gap. This is the short-circuit
+## that makes the default byte-identical rather than merely equivalent.
+func _cut_rows() -> int:
+	if cut == "strata" or cut == "lattice":
+		return WALL_ROWS
+	return 1
+
+
+## Moduli in SAMPLE units. At the shipped 48 columns \ 0.9 m and 16 rows \ 0.5 m: twelve
+## fins 3.8 cm wide, four bands 6.3 cm tall, and a cage of six 3.8 cm mullions crossing four
+## 3.1 cm rails.
+func _cut_keeps(col: int, row: int) -> bool:
+	match cut:
+		"ribs":
+			return (col % 4) < 2
+		"strata":
+			return (row % 4) < 2
+		"lattice":
+			return ((col % 8) < 2) or ((row % 4) < 1)
+		_:
+			return true
+
+
+## Config from map_data.json tokens:  sine_wall_explanation#cut:ribs
+##
+## GUARDED ON CHANGE. All six existing placements arrive here with no keys at all, and the
+## grid reaches this twice for one placement; rebuilding unguarded would re-commit the mesh
+## on both of those, for nothing. Before _ready has run there is no mesh to rebuild, so the
+## value is only recorded and _ready builds with it — which is also the path the capture
+## harness takes when it sets the export directly.
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	if not config_data.has("cut"):
+		return
+	if _wall_mesh == null:
+		cut = str(config_data["cut"])
+		return
+	var want: String = str(config_data["cut"]).strip_edges().to_lower()
+	if not FABRICS.has(want) or want == cut:
+		return
+	cut = want
+	_update_wall_mesh(_time)

@@ -28,12 +28,14 @@ extends Node3D
 ##   tuning   which scale the row is CUT to
 ##
 ## A free-free bar's flexural frequency goes as h/L², so L is proportional to 1/sqrt(f)
-## and a scale is a SHAPE. Four scales, four visibly different rows: pentatonic steps
-## down in uneven jumps where the scale skips its fourth and seventh; equal temperament
-## grades evenly, every bar the same ratio shorter than the last; just intonation is
-## nearly pentatonic but not quite, which is the whole argument between them; and the
-## harmonic series — the tuning nature actually uses — collapses away in a hyperbola,
-## the eighth bar barely a third of the first.
+## and a scale is a SHAPE — both in how long each bar is and in how many there are.
+## Four scales, four visibly different rows: pentatonic steps down in uneven jumps where
+## the scale skips its fourth and seventh, eight bars across a fifth of an octave short
+## of two; just intonation covers the same ground in ten; equal temperament needs
+## seventeen and grades them evenly, every bar the same ratio shorter than the last; and
+## the harmonic series — the tuning nature actually uses — is not a division of a range
+## at all and collapses away in a hyperbola. See the TUNINGS block for why the count
+## carries as much of the argument as the length does.
 ##
 ## tuning=pentatonic is the shipped C-major-pentatonic series note for note, so the
 ## sound of all 7 placements is unchanged. What is NOT unchanged is that the bars are
@@ -58,19 +60,53 @@ const PENTATONIC_SCALE = [
 	659.25,  # E5
 ]
 
-## Eight bars, four ways to cut them. Keyed by the `tuning` gene; "pentatonic" IS
-## PENTATONIC_SCALE, referenced rather than retyped so the default cannot drift.
+## FOUR WAYS TO FILL THE SAME RANGE, and the count is the argument.
+##
+## The first cut of this axis kept eight bars for every value and only re-cut their
+## lengths. That is not what a tuning is. A tuning is a rule for dividing a range, and
+## the first thing the rule decides is HOW MANY notes there are — five to the octave or
+## twelve to the octave is the whole difference between the instruments, and a row that
+## always has eight bars is always the same instrument slightly re-filed. Measured, and
+## this is why it changed: pentatonic against just came back 0.233% apart on a subject
+## filling 11.3% of the frame. They differed by a few millimetres on five of eight bars
+## because both are just-ish ratios; the picture was correct and the axis was not saying
+## anything with it.
+##
+## So every value now states its scale over the SAME PITCH RANGE — C4 up to E5, which is
+## the range the shipped pentatonic row already spans — at its own cardinality:
+##
+##   pentatonic  5 to the octave   ->  8 bars   (THE SHIPPED ROW, note for note)
+##   just        7 to the octave   -> 10 bars
+##   equal      12 to the octave   -> 17 bars
+##   harmonic   not a division of a range at all
+##
+## Every one of these lists is a pure APPEND to the list it replaces — no frequency that
+## was declared before has moved — and pentatonic is untouched, so the 7 placements ring
+## and measure exactly as they did.
+##
+## harmonic is the value that refuses the frame, and that refusal is its claim. The
+## overtone series is not a way of dividing a range; it climbs from the fundamental and
+## crosses E5 on its second step. Asked to fill the range it would give TWO bars, so it is
+## allowed to keep running instead — twelve partials over three and a half octaves,
+## crowding visibly toward nothing, which is precisely why nobody tunes an instrument to
+## it. Twelve is also a count no other value here has, so the row still cannot be confused
+## with any of them.
 const TUNINGS = {
 	"pentatonic": PENTATONIC_SCALE,
-	# 12-TET semitones from C4 — every step the same RATIO, so every bar the same
-	# fraction shorter than its neighbour: an evenly graded row.
-	"equal": [261.63, 277.18, 293.66, 311.13, 329.63, 349.23, 369.99, 392.00],
-	# 5-limit just major from C4: 1, 9/8, 5/4, 4/3, 3/2, 5/3, 15/8, 2. The whole
-	# temperament argument, in centimetres.
-	"just": [261.63, 294.33, 327.04, 348.84, 392.45, 436.05, 490.56, 523.26],
+	# 12-TET semitones C4 -> E5. Every step the same RATIO, so every bar the same
+	# fraction shorter than its neighbour: an evenly graded row, and seventeen of them
+	# where the pentatonic gets eight.
+	"equal": [261.63, 277.18, 293.66, 311.13, 329.63, 349.23, 369.99, 392.00,
+		415.30, 440.00, 466.16, 493.88, 523.25, 554.37, 587.33, 622.25, 659.25],
+	# 5-limit just major from C4: 1, 9/8, 5/4, 4/3, 3/2, 5/3, 15/8, 2, then 9/4 and 5/2
+	# to reach the same E5. The whole temperament argument, in centimetres.
+	"just": [261.63, 294.33, 327.04, 348.84, 392.45, 436.05, 490.56, 523.26,
+		588.67, 654.08],
 	# The overtone series on C4 — what a single vibrating body actually contains.
-	# Frequency is linear in the partial, so length falls as 1/sqrt(n): a hyperbola.
-	"harmonic": [261.63, 523.26, 784.89, 1046.52, 1308.15, 1569.78, 1831.41, 2093.04],
+	# Frequency is linear in the partial, so length falls as 1/sqrt(n): a hyperbola,
+	# and by the twelfth partial the bar is 8.7 cm against the fundamental's 30.
+	"harmonic": [261.63, 523.26, 784.89, 1046.52, 1308.15, 1569.78, 1831.41, 2093.04,
+		2354.67, 2616.30, 2877.93, 3139.56],
 }
 
 ## The shipped bar, from the CollisionShape3D in resonating_bar.tscn. BAR_LENGTH is
@@ -94,8 +130,10 @@ const BAR_COLORS = [
 @export var bar_spacing: float = 0.12
 @export var decay_time: float = 3.0
 @export var visualizer_height: float = 1.0
-## DNA gene: which scale the row of bars is CUT to. Pitch on a metallophone is not a
-## number attached to a bar, it is the bar's LENGTH. "pentatonic" is the shipped series.
+## DNA gene: which scale the row of bars is CUT to — how many bars there are and how
+## long each one is. Pitch on a metallophone is not a number attached to a bar, it is
+## the bar's LENGTH; a scale is not a set of pitches, it is a count. "pentatonic" is the
+## shipped series and the shipped eight-bar row.
 @export_enum("pentatonic", "equal", "just", "harmonic") var tuning: String = "pentatonic"
 
 var bars: Array[ResonatingBar] = []

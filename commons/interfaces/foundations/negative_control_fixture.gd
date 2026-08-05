@@ -175,14 +175,16 @@ func _build_state() -> void:
 		"certified":
 			_lever(true, false)
 			# The red record, kept beside the green rather than absorbed by it.
-			var card: MeshInstance3D = _box(Vector3(0.20, 0.13, 0.008), Color(0.14, 0.06, 0.06))
-			card.position = Vector3(body_width * 0.52, body_height * 0.46, 0.06)
+			# It hangs clear of the case: at z = 0.06 it is inside the body's
+			# 0.20 depth and the corner eats the text.
+			var card: MeshInstance3D = _box(Vector3(0.22, 0.13, 0.008), Color(0.14, 0.06, 0.06))
+			card.position = Vector3(body_width * 0.68, body_height * 0.46, 0.106)
 			_keep(card)
-			var stripe: MeshInstance3D = _box(Vector3(0.18, 0.022, 0.010), fail_color)
-			stripe.position = Vector3(body_width * 0.52, body_height * 0.50, 0.068)
+			var stripe: MeshInstance3D = _box(Vector3(0.19, 0.022, 0.010), fail_color)
+			stripe.position = Vector3(body_width * 0.68, body_height * 0.50, 0.114)
 			_emissive(stripe, fail_color, 1.1)
 			_keep(stripe)
-			_keep(_text("FAILED ONCE\nON PURPOSE", Vector3(body_width * 0.52, body_height * 0.44, 0.072), 0.018, Color(0.86, 0.62, 0.60)))
+			_keep(_text("FAILED ONCE\nON PURPOSE", Vector3(body_width * 0.68, body_height * 0.44, 0.118), 0.018, Color(0.86, 0.62, 0.60)))
 			_keep(_text("GREEN, EARNED", Vector3(0.0, body_height * 0.22, 0.115), 0.022, pass_color))
 
 		"silent":
@@ -229,8 +231,10 @@ func _lamp(col: Color) -> void:
 
 ## The fault lever. `thrown` swings it down; `sealed` wires it shut.
 func _lever(thrown: bool, sealed_shut: bool) -> void:
+	# Clear of the dial. At body_height * 0.40 the thrown arm sweeps across the
+	# face and reads as part of the gauge instead of as the thing you pull.
 	var pivot := Node3D.new()
-	pivot.position = Vector3(body_width * 0.30, body_height * 0.40, 0.106)
+	pivot.position = Vector3(body_width * 0.36, body_height * 0.28, 0.106)
 	add_child(pivot)
 	_parts.append(pivot)
 
@@ -249,7 +253,7 @@ func _lever(thrown: bool, sealed_shut: bool) -> void:
 	if sealed_shut:
 		# Factory seal — the lever has never been pulled.
 		var wire: MeshInstance3D = _box(Vector3(0.11, 0.008, 0.008), seal_color)
-		wire.position = Vector3(body_width * 0.30 - 0.045, body_height * 0.40 + 0.02, 0.118)
+		wire.position = Vector3(body_width * 0.36 - 0.045, body_height * 0.28 + 0.09, 0.118)
 		_emissive(wire, seal_color, 0.8)
 		_keep(wire)
 

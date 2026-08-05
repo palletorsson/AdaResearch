@@ -70,6 +70,21 @@ const TextScreenScript = preload("res://commons/ui/text_screen.gd")
 
 const REFUSALS: PackedStringArray = ["blank", "regress", "oracle", "spin", "honest"]
 
+# Vertical layout, as fractions of booth_height. The console lid sits at 0.571
+# (booth_height * 0.52 + 0.06), so NOTE_Y and SUB_Y must stay above it or the
+# geometry ends up inside the console and reads as a light leak rather than a lamp.
+const HEAD_CENTRE := 0.86      # head panel centre
+const SLOT_Y := 0.70           # lowest card
+const SLOT_PITCH := 0.11       # metres between cards
+const HEADER_Y := 1.025        # column headers, above the top card
+const NOTE_Y := 0.66           # lamps and rotors — clear of the lid
+const SUB_Y := 0.60            # caption line under them
+
+
+## Card slot i, in metres. Four slots run up the head panel.
+func _slot(i: int) -> float:
+	return booth_height * SLOT_Y + float(i) * SLOT_PITCH
+
 # Questions the booth can and cannot rule on. The left rack is decidable by
 # inspection; the right rack is Rice's theorem, item by item.
 const SYNTACTIC: PackedStringArray = [
@@ -131,20 +146,23 @@ func _build_body() -> void:
 	add_child(slot)
 
 	var head: MeshInstance3D = _box(Vector3(booth_width, booth_height * 0.40, 0.05), body_color.lightened(0.08))
-	head.position = Vector3(0.0, booth_height * 0.78, -booth_depth * 0.35)
+	head.position = Vector3(0.0, HEAD_CENTRE * booth_height, -booth_depth * 0.35)
 	add_child(head)
 
 	# Left rack: answered. This half always works, under every value.
 	for i in range(SYNTACTIC.size()):
-		var y: float = booth_height * 0.62 + float(i) * 0.11
+		var y: float = _slot(i)
 		var card: MeshInstance3D = _box(Vector3(0.26, 0.075, 0.012), answered_color)
 		card.position = Vector3(-booth_width * 0.22, y, -booth_depth * 0.30)
 		_emissive(card, answered_color, 0.55)
 		add_child(card)
 		_label(SYNTACTIC[i], Vector3(-booth_width * 0.22, y, -booth_depth * 0.30 + 0.02), 0.020, Color(0.05, 0.12, 0.08))
 
-	_label("SYNTAX", Vector3(-booth_width * 0.22, booth_height * 0.58, -booth_depth * 0.30 + 0.02), 0.028, answered_color)
-	_label("MEANING", Vector3(booth_width * 0.22, booth_height * 0.58, -booth_depth * 0.30 + 0.02), 0.028, Color(0.62, 0.64, 0.70))
+	# Headers go ABOVE the racks. Below them is the console lid, and anything
+	# placed there is inside the console volume and reads as a light leak.
+	var hy: float = booth_height * HEADER_Y
+	_label("SYNTAX", Vector3(-booth_width * 0.22, hy, -booth_depth * 0.30 + 0.02), 0.028, answered_color)
+	_label("MEANING", Vector3(booth_width * 0.22, hy, -booth_depth * 0.30 + 0.02), 0.028, Color(0.62, 0.64, 0.70))
 
 	# set() rather than dotted access: `screen` is statically a Node3D here, and
 	# TextScreen's properties are not on that base class.
@@ -178,14 +196,17 @@ func _build_semantic() -> void:
 	var x: float = booth_width * 0.22
 	var z: float = -booth_depth * 0.30
 
+	var note_y: float = booth_height * NOTE_Y
+	var sub_y: float = booth_height * SUB_Y
+
 	match refusal:
 		"blank":
 			# Unlit cards. Refusal and crash are indistinguishable from here.
 			for i in range(SEMANTIC.size()):
-				var y: float = booth_height * 0.62 + float(i) * 0.11
 				var card: MeshInstance3D = _box(Vector3(0.26, 0.075, 0.012), Color(0.10, 0.10, 0.12))
-				card.position = Vector3(x, y, z)
+				card.position = Vector3(x, _slot(i), z)
 				_keep(card)
+			_keep(_label("NO READING", Vector3(x, sub_y, z + 0.02), 0.022, Color(0.42, 0.44, 0.50)))
 
 		"regress":
 			# A verifier to check the verifier. Four of them, receding and shrinking.
@@ -193,18 +214,18 @@ func _build_semantic() -> void:
 				var s: float = 1.0 - float(i) * 0.19
 				var d: float = float(i) * 0.16
 				var mini: MeshInstance3D = _box(Vector3(0.24 * s, 0.30 * s, 0.05 * s), rack_color.darkened(float(i) * 0.16))
-				mini.position = Vector3(x + float(i) * 0.045, booth_height * 0.74, z - d)
+				mini.position = Vector3(x + float(i) * 0.045, _slot(1), z - d)
 				_keep(mini)
 				var lamp: MeshInstance3D = _sphere(0.016 * s, answered_color.darkened(float(i) * 0.2))
-				lamp.position = Vector3(x + float(i) * 0.045, booth_height * 0.74 + 0.17 * s, z - d + 0.03)
+				lamp.position = Vector3(x + float(i) * 0.045, _slot(1) + 0.17 * s, z - d + 0.03)
 				_emissive(lamp, answered_color, 0.5 - float(i) * 0.1)
 				_keep(lamp)
-			_keep(_label("WHO CHECKS THIS ONE?", Vector3(x, booth_height * 0.58 - 0.09, z + 0.02), 0.022, Color(0.72, 0.74, 0.82)))
+			_keep(_label("WHO CHECKS THIS ONE?", Vector3(x, sub_y, z + 0.02), 0.022, Color(0.72, 0.74, 0.82)))
 
 		"oracle":
 			# A confident answer, and no seal beneath it. The plate nobody signed.
 			for i in range(SEMANTIC.size()):
-				var y: float = booth_height * 0.62 + float(i) * 0.11
+				var y: float = _slot(i)
 				var card: MeshInstance3D = _box(Vector3(0.26, 0.075, 0.012), oracle_color)
 				card.position = Vector3(x, y, z)
 				_emissive(card, oracle_color, 0.75)
@@ -212,14 +233,14 @@ func _build_semantic() -> void:
 				_keep(_label("YES", Vector3(x, y, z + 0.02), 0.026, Color(0.14, 0.10, 0.02)))
 			# The empty seal socket — bracketed, ruled, and never filled.
 			var socket: MeshInstance3D = _box(Vector3(0.11, 0.05, 0.008), Color(0.06, 0.06, 0.08))
-			socket.position = Vector3(x, booth_height * 0.56, z)
+			socket.position = Vector3(x, note_y, z)
 			_keep(socket)
-			_keep(_label("[ UNSEALED ]", Vector3(x, booth_height * 0.52, z + 0.02), 0.020, oracle_color.darkened(0.2)))
+			_keep(_label("[ UNSEALED ]", Vector3(x, sub_y, z + 0.02), 0.020, oracle_color.darkened(0.2)))
 
 		"spin":
 			# Still running. The literal halting case, caught mid-turn.
 			var hub := Node3D.new()
-			hub.position = Vector3(x, booth_height * 0.72, z + 0.04)
+			hub.position = Vector3(x, _slot(1), z + 0.04)
 			add_child(hub)
 			_semantic_nodes.append(hub)
 			_rotor = hub
@@ -227,28 +248,28 @@ func _build_semantic() -> void:
 				var blade: MeshInstance3D = _box(Vector3(0.20, 0.012, 0.030), rack_color.lightened(0.25))
 				blade.rotation.y = float(i) * (TAU / 3.0)
 				hub.add_child(blade)
-			_keep(_label("...", Vector3(x, booth_height * 0.58, z + 0.02), 0.040, Color(0.72, 0.74, 0.82)))
+			_keep(_label("...", Vector3(x, sub_y, z + 0.02), 0.040, Color(0.72, 0.74, 0.82)))
 
 		_:  # "honest"
 			# The refusal is lit, cited, and the rack is visibly, deliberately empty.
 			for i in range(SEMANTIC.size()):
-				var y: float = booth_height * 0.62 + float(i) * 0.11
+				var y2: float = _slot(i)
 				var frame: MeshInstance3D = _box(Vector3(0.26, 0.075, 0.006), Color(0.09, 0.09, 0.11))
-				frame.position = Vector3(x, y, z)
+				frame.position = Vector3(x, y2, z)
 				_keep(frame)
-				_keep(_label(SEMANTIC[i], Vector3(x, y, z + 0.02), 0.019, Color(0.58, 0.60, 0.68)))
+				_keep(_label(SEMANTIC[i], Vector3(x, y2, z + 0.02), 0.019, Color(0.58, 0.60, 0.68)))
 			var lamp2: MeshInstance3D = _sphere(0.035, refused_color)
-			lamp2.position = Vector3(x, booth_height * 0.56, z + 0.03)
+			lamp2.position = Vector3(x, note_y, z + 0.03)
 			_emissive(lamp2, refused_color, 1.5)
 			_keep(lamp2)
 			var light := OmniLight3D.new()
 			light.light_color = refused_color
 			light.light_energy = 0.85
 			light.omni_range = 1.4
-			light.position = Vector3(x, booth_height * 0.56, z + 0.10)
+			light.position = Vector3(x, note_y, z + 0.10)
 			add_child(light)
 			_semantic_nodes.append(light)
-			_keep(_label("REFUSED — BY THEOREM", Vector3(x, booth_height * 0.50, z + 0.02), 0.021, refused_color))
+			_keep(_label("REFUSED — BY THEOREM", Vector3(x, sub_y, z + 0.02), 0.021, refused_color))
 
 
 # ─────────────────────────────────────────────────────────────────────────────

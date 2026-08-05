@@ -84,10 +84,17 @@ In the Inspector, you can adjust:
 ### Test Scene Settings
 
 **Spawn Patterns:**
-- `spawn_pattern` - Choose: "grid", "circle", or "pyramid"
-- `spawn_count` - Number of spheres (default: 10)
+- `arrangement` - Choose: "grid", "ramp", "ring", or "stack" (default: "grid").
+  Promoted 2026-08-05 from `spawn_pattern`; the old words "circle" and "pyramid"
+  still work through `set_pattern()`, and a map can set it with
+  `gravity_gun_test_scene#arrangement:ring`.
+- `spawn_count` - Number of spheres (default: 10). Note: "grid" and "stack" build a
+  fixed ten regardless; only "ring" reads this.
 - `spawn_spacing` - Distance between spheres (default: 0.3m)
+- `spawn_gravity_scale` - Multiplies each spawned sphere's gravity (default: 1.0).
+  0.0 holds the collection in the pose it was filed in — for captures and stills.
 - `randomize_colors` - Use random colors from palette
+- `color_seed` - 0 (default) recolours on every launch; any positive value seeds it
 
 ## How It Works
 

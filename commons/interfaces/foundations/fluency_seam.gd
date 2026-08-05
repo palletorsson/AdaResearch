@@ -68,6 +68,10 @@ class_name FluencySeam
 
 const CROSSINGS: PackedStringArray = ["smooth", "twice", "spread", "singular", "lattice"]
 
+## Posts sit BEHIND the plate face. At z = 0 they intersect the plate and cut
+## the answer in half, which photographs as damage rather than as a seam.
+const POST_Z := -0.075
+
 # The same question, put twice. The disagreement is the artifact's whole content.
 const RUN_A: String = "THE ANSWER IS 1847,\nESTABLISHED BY ROSEN."
 const RUN_B: String = "THE ANSWER IS 1852,\nESTABLISHED BY HALVORS."
@@ -99,7 +103,7 @@ func _build_invariant() -> void:
 	add_child(base)
 
 	var post: MeshInstance3D = _box(Vector3(0.05, stand_height, 0.05), frame_color)
-	post.position = Vector3(-0.34, stand_height * 0.5, 0.0)
+	post.position = Vector3(-0.34, stand_height * 0.5, POST_Z)
 	add_child(post)
 
 	_plate(Vector3(-0.34, stand_height, 0.0), answer_color, 1.0)
@@ -136,10 +140,11 @@ func _build_right() -> void:
 			_keep(_post(x))
 			_keep(_plate(Vector3(x, stand_height, 0.0), answer_color, 1.0))
 			_keep(_text(RUN_B, Vector3(x, stand_height, 0.016), 0.021, Color(0.10, 0.11, 0.14)))
-			# Lit bars over each disagreement. Same prompt, different world.
+			# Underline each disagreeing line. A bar ON the text hides the thing
+			# it is pointing at; the mark has to sit clear of the words.
 			for i in range(2):
-				var bar: MeshInstance3D = _box(Vector3(0.13, 0.028, 0.010), divergence_color)
-				bar.position = Vector3(x - 0.06 + float(i) * 0.11, stand_height + 0.045 - float(i) * 0.085, 0.020)
+				var bar: MeshInstance3D = _box(Vector3(0.17, 0.007, 0.010), divergence_color)
+				bar.position = Vector3(x, stand_height + 0.006 - float(i) * 0.036, 0.020)
 				_emissive(bar, divergence_color, 1.2)
 				_keep(bar)
 			_keep(_text("SAME QUESTION", Vector3(x, stand_height - plate_height * 0.78, 0.016), 0.021, divergence_color))
@@ -181,7 +186,7 @@ func _build_right() -> void:
 
 func _post(x: float) -> MeshInstance3D:
 	var post: MeshInstance3D = _box(Vector3(0.05, stand_height, 0.05), frame_color)
-	post.position = Vector3(x, stand_height * 0.5, 0.0)
+	post.position = Vector3(x, stand_height * 0.5, POST_Z)
 	return post
 
 

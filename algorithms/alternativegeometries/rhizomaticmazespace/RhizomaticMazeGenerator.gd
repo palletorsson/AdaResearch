@@ -15,6 +15,12 @@ var config: Dictionary = {}
 var _depth: Dictionary = {}
 var _root_position: Vector3 = Vector3.ZERO
 
+## The wound `severed` opens, as fractions of maze_size.x. RhizomaticMazeSpace reads them
+## too, so the tendril pass knows not to hang anything across the gap; one definition, not
+## two that can drift apart.
+const FISSURE_FRACTION: float = 0.14
+const DRIFT_FRACTION: float = 0.06
+
 func configure(params: Dictionary) -> void:
 	config = params
 
@@ -176,12 +182,27 @@ func generate_secondary_branches() -> void:
 ## degrees are recounted afterwards so the chamber pass does not put a nine-metre CSG sphere
 ## in the gap it just opened. What a still cannot show is the second half of the principle,
 ## the starting-up-again; this value claims only the break.
+##
+## AND THEN THE FRAGMENTS ARE MOVED APART, which is the 2026-08-05 repair and needs its
+## defence. The first version cut the graph and left both halves where they were, and it
+## measured 0.012% against the intact rhizome — the smallest number in the whole sweep. The
+## obvious reading is the Deleuzian one, that severing a rhizome changes nothing because any
+## point still reaches any other, and it is the wrong reading of what happened here: a plane
+## cut removes EVERY edge crossing it, so the graph really does fall into two components that
+## cannot reach each other at all. The failure was not in the topology, it was in the
+## photograph. CONNECTION IS NOT A VISIBLE PROPERTY. Two halves that no longer reach each
+## other look exactly like two halves that do, especially from outside a tangle where the
+## fissure is behind two hundred tunnels. Moving the fragments apart is not theatre added to
+## a real cut; it is the only rendering a still can carry of a fact that is otherwise purely
+## relational — and it is also the truer picture, because what a rupture produces is not a
+## damaged rhizome but TWO rhizomes, and to see two you have to see two.
 func sever_network() -> void:
 	if str(config.get("topology", "rhizome")) != "severed":
 		return
 
 	var size: Vector3 = config.get("size", Vector3(40, 20, 40))
-	var half_fissure: float = maxf(2.0, size.x * 0.08)
+	var half_fissure: float = maxf(2.0, size.x * FISSURE_FRACTION)
+	var drift: float = size.x * DRIFT_FRACTION
 
 	var kept: Array[Dictionary] = []
 	for c in connections:
@@ -194,6 +215,22 @@ func sever_network() -> void:
 			continue
 		kept.append(conn)
 	connections = kept
+
+	# Every surviving connection has both ends on the same side of the cut, so a fragment
+	# moves as one piece and no tunnel is stretched across the gap. Node positions move by
+	# the same rule, because the chamber and waypoint passes read those and not the edges.
+	for i in range(connections.size()):
+		var moved: Dictionary = connections[i]
+		var s: Vector3 = moved["start"]
+		var e: Vector3 = moved["end"]
+		s.x += (drift if s.x > 0.0 else -drift)
+		e.x += (drift if e.x > 0.0 else -drift)
+		moved["start"] = s
+		moved["end"] = e
+	for i in range(network_nodes.size()):
+		var p: Vector3 = network_nodes[i]["position"]
+		p.x += (drift if p.x > 0.0 else -drift)
+		network_nodes[i]["position"] = p
 
 	for i in range(network_nodes.size()):
 		network_nodes[i]["connections"] = []
