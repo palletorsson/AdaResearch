@@ -16825,6 +16825,32 @@
     "probability",
     "procedural"
    ],
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "dispersal": [
+      "spigot",
+      "random",
+      "clumped",
+      "even"
+     ],
+     "capacity": [
+      20,
+      6,
+      44
+     ]
+    },
+    "fixture": {
+     "initial_population": -1,
+     "freeze_arrivals": true,
+     "spawn_seed": 20260805
+    },
+    "fixture_note": "UNPHOTOGRAPHABLE WITHOUT THIS, by construction. The first cube arrives at next_spawn_time = 1.0 s and the shutter opens at SETTLE = 1.1 s, so every variant of every axis renders the same single cube; and the duplicated grab_cube_wood is a live RigidBody3D, so on a bench with no floor it has fallen six metres by the time it is photographed, out of a frame that was measured at 0.35 s. initial_population = -1 fills to capacity during _ready, freeze_arrivals holds every body (including the hidden template) where the law put it, spawn_seed pins the draws so one value is one arrangement rather than a fresh object per boot. WHAT THE FIXTURE HIDES, stated rather than buried: frozen, `spigot` photographs as ONE cube, because that is literally what the placement law does. In a lived map the coincident arrivals are shoved apart by collision into a heap, so the tile shows the rule and not the pile it settles into. All three flags ship OFF and no placement sees them.",
+    "default": "dispersal=spigot, capacity=20 - spigot returns spawn_position and takes NO draw at all, so the global RNG stream is consumed exactly as before (the only other draw, next_spawn_time, moved from randf() to _rf(0.0, 1.0), which with spawn_seed=0 is randf_range(0.0, 1.0) = one identical draw off the same stream); capacity=20 is `const MAX_CUBES: int = 20`, kept in the file and used as the export's default so the default is provably the constant it replaced. play_wood_sound is now passed the cube's own position, which under spigot IS spawn_position. apply_grid_config was `pass` and now returns having touched nothing unless a key is present; it never tears down, and a dispersal change is deliberately not retroactive. The 4 placements spawn the same column they always spawned.",
+    "was": "three exports (cube_size, gutter, spawn_position - two of them dead: total_size is computed and never used), a `const MAX_CUBES` the file's own @identity block named as the critical parameter, and an apply_grid_config whose entire body was `pass`, so nothing was reachable from a map token. The registry described it as an algorithm that 'randomly generates and places objects in the environment' and the placement was the one thing never left to chance: every cube in the artifact's life entered at exactly spawn_position. The randomness was all in the clock and the kill.",
+    "note": "hand promotion 2026-08-05, refused by the runner as NO TURNABLE KNOBS. dispersal's values are ecology's three textbook dispersion patterns (random / clumped / even) plus `spigot`, which names the shipped degenerate case - a point process with zero variance - honestly. Ecology is this file's own vocabulary already: carrying capacity, metabolism, 'each spawn requires a death'. THE WORD WAS NOT BORROWED FROM random_cubes: its `macrostate` (uniform|corner|layered|spilled) asks which REGION a fixed pile occupies so the ways-it-could-have-been can be counted, and none of its four values can name a single point. Same substrate, different question, so taking the word would have meant taking it without its answers. DECLINED here: the mortality rule (uniform vs oldest-first vs newest-first is a real argument about memorylessness, but a wooden cube carries no visible age, so four rules photograph as one heap), the 0.3-1.3 s interval, and the wood-knock synthesis - a rate and a sound, both invisible to a still."
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",

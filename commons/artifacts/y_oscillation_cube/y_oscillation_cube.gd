@@ -61,6 +61,46 @@ const GRID_SHADER = preload("res://commons/resourses/shaders/Grid.gdshader")
 @export_enum("none", "trace", "lattice", "archive", "wax") var retention: String = "wax"
 const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
 
+## AXIS — WHERE IN THE CYCLE THIS EXHIBIT IS CAUGHT.
+##
+## y = A * sin(wt) is a sentence about TIME, and a room can only ever meet it at one moment.
+## The shipped artifact never decides which moment: the cube runs, and whichever instant a
+## visitor arrives in is the instant the formula is demonstrated at. That is a real choice
+## made by default and never stated, and it is the whole difference between "watch a thing
+## oscillate" and "here is what this formula EQUALS at wt = pi/2, and here is what its
+## velocity is there".
+##
+## `phase` is [[slope_tangent_demo]]'s word, taken character for character WITH its value
+## list — traverse / crest / steepest / trough — and it is taken because that file's own
+## promotion note says these four "are facts about a sine" and declined them for being a
+## closed track rather than a sine. This artifact IS the sine, so it can answer all four,
+## which is the only condition under which a shared word is honest.
+##
+##   traverse  the shipped free run. _time accumulates delta exactly as it always has and
+##             the cube crosses its rail once per 1/f seconds. The legacy lineage, and the
+##             only value whose picture is not reproducible: what a still catches depends
+##             on how many frames the boot managed before the shutter
+##   crest     wt = pi/2. sin = +1, y = +A, and the velocity is ZERO — the cube is held at
+##             the top marker, the moment the motion is furthest from where it started and
+##             least in a hurry to be anywhere
+##   steepest  wt = 0. sin = 0, y = 0, and |dy/dt| is at its MAXIMUM — the cube sits at the
+##             rest height it passes through fastest. The value that separates position
+##             from motion: it looks like the cube is doing nothing and it is doing the most
+##   trough    wt = 3pi/2. sin = -1, y = -A, velocity zero again — the crest's mirror, at
+##             the bottom marker, and the proof that a sine's two still points are not the
+##             same point
+##
+## Three of the four are three DIFFERENT HEIGHTS on the same rail (+A, 0, -A) against
+## markers that were already there, so no two values can produce the same still. That is
+## the trap slope_tangent_demo warned about — on y = sin(x), zero, steepest and inflection
+## are one point — avoided by stationing on POSITION rather than on curvature.
+##
+## The rate itself is NOT on this axis and could not be: `frequency` is a rate and a rate
+## is invisible to a still. What a still can hold is where in the cycle the sentence was
+## interrupted.
+@export_enum("traverse", "crest", "steepest", "trough") var phase: String = "traverse"
+const PHASES: PackedStringArray = ["traverse", "crest", "steepest", "trough"]
+
 var _cube_mesh: MeshInstance3D
 var _cube_material: ShaderMaterial
 var _label: Label3D
@@ -73,6 +113,12 @@ var _trail_ghosts: Array[MeshInstance3D] = []
 var _base_y: float = 0.0
 var _time: float = 0.0
 var _trail_history: Array[float] = []
+
+## PHASE state. `_phase_held` is false on the shipped value, and it is the only thing the
+## legacy _process path ever asks about.
+var _phase_held: bool = false
+var _phase_pin: float = 0.0
+var _phase_plate: Label3D = null
 
 
 func _ready():
@@ -87,6 +133,11 @@ func _ready():
 	var _r: String = str(retention).strip_edges().to_lower()
 	retention = _r if RETENTIONS.has(_r) else "wax"
 	_apply_retention()
+	# AND THE PHASE, last of all: "traverse" leaves _phase_held false and returns before it
+	# touches _time, so the shipped cube starts at t = 0 and accumulates delta as it always has.
+	var _p: String = str(phase).strip_edges().to_lower()
+	phase = _p if PHASES.has(_p) else "traverse"
+	_apply_phase()
 
 
 func _create_cube():
@@ -228,8 +279,15 @@ func _create_trail_ghosts():
 
 
 func _process(delta):
-	_time += delta
-	
+	# PHASE. `_phase_held` is false at "traverse", so the shipped line below is what runs and
+	# the clock accumulates exactly as it did. A pinned station re-asserts its own _time every
+	# frame instead, which freezes the sine, the labels and the colour feedback together —
+	# nothing downstream needs to know, because everything downstream is a function of _time.
+	if _phase_held:
+		_time = _phase_pin
+	else:
+		_time += delta
+
 	# Calculate oscillation: y = A * sin(ωt)
 	var omega = frequency * TAU  # ω = 2πf
 	var sin_value = sin(omega * _time)
@@ -340,6 +398,68 @@ func apply_grid_config(config_data: Dictionary):
 		var _r: String = str(config_data["retention"]).strip_edges().to_lower()
 		retention = _r if RETENTIONS.has(_r) else "wax"
 		_apply_retention()
+	# Same contract for the station: only a token that actually names `phase` re-runs it, and
+	# _apply_phase frees its own plate first, so a config call that arrives BEFORE _ready (the
+	# capture harness does exactly that) cannot leave a second one behind when _ready repeats it.
+	if config_data.has("phase"):
+		var _p: String = str(config_data["phase"]).strip_edges().to_lower()
+		phase = _p if PHASES.has(_p) else "traverse"
+		_apply_phase()
+
+
+# ── PHASE ────────────────────────────────────────────────────────────────────
+# Where in the cycle the exhibit is caught. Nothing here touches the formula: `amplitude`,
+# `frequency`, the rail, the markers, the ghosts and the colour feedback are identical at
+# every value, and a pinned station is the SAME sine read at a stated moment rather than a
+# different one. The stations are solved from `frequency`, not hard-coded, so a map that
+# changes the rate still gets the crest at the crest.
+
+
+func _apply_phase() -> void:
+	# The caption is rebuilt, never accumulated. This function is idempotent by construction
+	# because both entry points (_ready and apply_grid_config) may reach it more than once.
+	if _phase_plate != null and is_instance_valid(_phase_plate):
+		remove_child(_phase_plate)
+		_phase_plate.queue_free()
+	_phase_plate = null
+
+	_phase_held = (phase != "traverse") and PHASES.has(phase)
+	if not _phase_held:
+		return                       # the legacy lineage: a free-running clock, untouched
+
+	var omega: float = frequency * TAU
+	if absf(omega) < 0.0001:
+		omega = TAU                  # a zero rate has no crest; fall back to one cycle a second
+	var caption: String = ""
+	match phase:
+		"crest":
+			_phase_pin = (PI * 0.5) / omega
+			caption = "crest    wt = pi/2    sin = +1    y = +A    v = 0"
+		"steepest":
+			_phase_pin = 0.0
+			caption = "steepest    wt = 0    sin = 0    y = 0    |v| max"
+		"trough":
+			_phase_pin = (PI * 1.5) / omega
+			caption = "trough    wt = 3pi/2    sin = -1    y = -A    v = 0"
+		_:
+			_phase_pin = 0.0
+	_time = _phase_pin
+	_trail_history.clear()
+
+	# ASCII on purpose. The two legacy labels carry a real omega and a real middle dot and
+	# they are left exactly as they are; new text does not gamble on the fallback font,
+	# because an exponent that renders as a tofu box is worse evidence than a plain line.
+	var plate := Label3D.new()
+	plate.name = "PhaseStation"
+	plate.pixel_size = 0.001
+	plate.font_size = 34
+	plate.outline_size = 5
+	plate.text = caption
+	plate.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	plate.position = Vector3(0.0, _base_y + amplitude + 0.055, cube_size * 0.9)
+	plate.modulate = Color(1.0, 0.92, 0.55)
+	add_child(plate)
+	_phase_plate = plate
 
 
 # ── RETENTION ────────────────────────────────────────────────────────────────

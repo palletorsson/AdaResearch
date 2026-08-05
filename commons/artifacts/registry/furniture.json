@@ -560,6 +560,13 @@
     "sound",
     "vr"
    ],
+   "dna_declined": {
+    "date": "2026-08-05",
+    "by": "hand promotion pass, after the runner refused it as NO TURNABLE KNOBS",
+    "reason": "This is prebaked_loader wearing a bezel: a pointer with handles. Its own @identity names `sound_key` as the critical parameter, and a sound key is an index into somebody else's catalogue. AudioCatalogTablet3D.gd is 590 lines of which roughly 470 are audio synthesis dispatch (_generate_audio, _detect_generator_type, _string_to_sound_type, _invoke_soundbank_sample) and the rest is signal plumbing; every decision it makes is AUDIBLE and the evidence for a DNA axis is one still PNG. It has four exports and all four are dimensions: screen_width, screen_height, viewport_width, viewport_height. Its visible body - Frame, HandleLeft, HandleRight, ScreenGlow, the 'AUDIO CATALOG' plate - is hard-coded in the .tscn and the script never touches it. The catalogue itself (73 sounds, 15 categories) belongs to AudioCatalogDataProvider, not to this tablet.",
+    "the_axis_that_was_considered": "`disclosure` - how a library presents itself: category tree (shipped) vs flat list vs search-first vs a taxonomy by synthesis family. It is a real question and this artifact does answer it, but it does not answer it in its own code. The answer lives in AudioCatalogUI.gd's _setup_header/_setup_content and in SoundBrowser.gd, two scripts inside a SubViewport that the tablet's .tscn does not list as scripts, so a declared axis would be unreachable to the declaration gate and would have to be forwarded from a root that currently only forwards signals. Implementing it means re-authoring a 250-line Control builder, which is writing a new artifact rather than lifting a hidden parameter. And the evidence would be a text layout inside a 1600x1200 texture mapped onto a 1.48 x 1.08 x 0.02 m plate - a thin flat subject, the documented fit-by-diagonal case, with the whole axis living in a few hundred pixels of small type.",
+    "reopen_if": "the browser chrome is ever pulled up onto the tablet root as a first-class part of the artifact, or a still can be shown to separate the layouts at capture resolution. Not before."
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",

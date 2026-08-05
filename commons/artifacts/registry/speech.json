@@ -231,6 +231,26 @@
       "tags": [
         "speech"
       ],
+      "dna": {
+        "promoted": "2026-08-05",
+        "stage": "2 - variation",
+        "axes": {
+          "chart": [
+            "anchors",
+            "none",
+            "ticks",
+            "quadrilateral",
+            "field"
+          ]
+        },
+        "fixture": {
+          "is_ambient_enabled": false
+        },
+        "fixture_note": "The board starts a phrase at t = 1.0 s and the shutter opens at 1.1 s, so without this the mapper's point and the word label are caught 0.1 s into 'Right Here Right Now' - different frames of an animation on top of the axis being measured. Ambient off leaves the board at rest so the tiles differ only by what `chart` draws. Bench only; the shipped default is true and every placement keeps speaking.",
+        "default": "chart=anchors - `none` is the only value that skips the shipped label loop; every other value runs it unchanged and then adds to it, so `anchors` reaches the end of _spawn_visual_anchors() and stops, node for node the build the 4 placements have always had. No mesh, no material and no extra child is created at the default. apply_grid_config is gated three ways - the key must be present, the word must be in CHARTS, and the value must have CHANGED - and only rebuilds after _ready has drawn once, so a config call naming nothing this board owns cannot tear the chart off a live placement.",
+        "was": "three exports, all of them audible or temporal: phrase_selection (12 words), is_ambient_enabled, repeat_interval. apply_grid_config existed but only accepted `say` and `repeat`, i.e. more speech. The board's whole visual argument - that a vowel is a POSITION in an F1/F2 plane, which is what its @identity truth says - was one hard-coded loop hanging seven billboarded phoneme labels at their coordinates. The plane itself was never drawn.",
+        "note": "hand promotion 2026-08-05, refused by the runner as NO TURNABLE KNOBS. The formant plane IS a real diagram and the board did draw its landmarks - the seven ANCHORS labels - but not the space: no figures, no bounding figure, no continuum. The four alternatives are four positions in phonetics, not four decorations: a vowel as a named landmark (anchors), as an unlocated sound (none), as a measurement in Hz (ticks), as a vertex of the canonical published quadrilateral (quadrilateral), or as one conventional stop on a continuum that has none (field). REFUSED, and this is the tempting one: an axis over ANCHORS or the F1/DELTA bounds - a child's vowel space, a soprano's, another language's - which is a live argument about whose mouth is the reference, but retunes the instrument instead of changing it, and would render as the same seven labels a few pixels apart. ALSO REFUSED: everything audible. phrase_selection's twelve words, repeat_interval, pulse_hz, the plosive/fricative/nasal chain. The evidence is one still PNG and this board's real work is a time series of formant transitions; twelve phrases photograph as twelve identical boards."
+      },
       "geometry_spec": {
         "mesh_type": "composed_primitives",
         "topology": "manifold_closed",

@@ -12138,6 +12138,27 @@
    }
   },
   "ruth_asawa_sculpture": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "framing": 0.65,
+    "axes": {
+     "weave": [
+      "grid",
+      "rings",
+      "diagonal",
+      "meridians"
+     ],
+     "nesting": [
+      "single",
+      "within",
+      "within_within"
+     ]
+    },
+    "default": "weave=grid, nesting=single - grid emits the two index pairs in the shipped order from the shipped loop (the loop was moved into _add_indices() and its body copied verbatim into the fallthrough case), and single creates no node at all, so no host, no inner mesh, no change to the scene tree. The 6 map_data.json files that place this token (WaveFunctions_John_Cage and its _p1/_p2/_p3, Corridor_WaveFunctions_John_Cage, Curation_Bay_wavefunctions_5) render exactly as before. The agenda's count of 4 is the sequence's official map list; the working tree carries six.",
+    "was": "One surface of revolution with a full inspector of exports and apply_grid_config() = pass, so no map token could reach a single knob. Everything that WAS exported is a size or a rate: u_resolution and v_resolution are mesh density, height and max_radius are scale, rotation_speed and the six audio fields are time-domain and invisible to a still. The claim in the artifact's own description - nested surfaces that oscillate between inside and outside - was written down and never built: the code draws exactly one skin, and always the same lattice over it.",
+    "notes": "weave is WHICH SEGMENTS EXIST between the same vertices, not how many there are; u_resolution and v_resolution stay deliberately un-promoted, because a resolution knob is a density knob and argues nothing. rings drops the meridians (the form reads as stacked contours), meridians drops the loops (a birdcage), diagonal crosses each quad corner to corner, which is the nearest a vertex grid comes to the crocheted loop the wire physically is. Openness rises grid -> diagonal -> rings, which is the half of the claim that matters, because an inner form is only visible through a skin loose enough to see through. radius_curve is untouched at every value: the lobed silhouette is the artifact's declared critical_parameter and the scene ships its own eight-point curve, so the profile is identical across the whole sweep and the axes cannot be confused with a change of shape. A lobe-count axis was considered and dropped for exactly that reason - it would have moved the silhouette, which is the one thing already settled. Inner forms are strictly inside the outer, so the merged AABB and therefore the sweep camera are identical at every value. framing 0.8 because the form is 4 x 10 x 4: fit-by-diagonal (11.5) frames an extent that is never wider than 4. At --max 9 the sweep takes 4 x 3 = 12 and will trim nesting to within_within; --max 12 shows the cross product, which is where the argument lives (nested plus opaque grid hides the inner form; nested plus rings reveals it)."
+   },
    "category": "waves",
    "complexity": "expert",
    "description": "Wire forms inspired by Ruth Asawa's crocheted metal sculptures—nested surfaces that oscillate between inside and outside, solid and void. Topology as frozen wave, material as line drawing in space.",
@@ -14188,6 +14209,30 @@
    }
   },
   "timbre_sculptor": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "framing": 0.62,
+    "axes": {
+     "waveform": [
+      "sine",
+      "square",
+      "sawtooth",
+      "triangle",
+      "formant"
+     ],
+     "machinery": [
+      "none",
+      "plate",
+      "vacancy",
+      "frame",
+      "works"
+     ]
+    },
+    "default": "waveform=sine, machinery=none - sine resolves through WAVEFORM_PRESET to PRESETS[\"SINE\"], which is the literal array the replaced line named, so the panel still starts with one slider up and seven on the floor; none builds no machinery node at all. The 12 map_data.json files that place this token (WaveFunctions_Effect_Sound and its _p1/_p2/_p3, Corridor_WaveFunctions_Effect_Sound, Curation_Bay_wavefunctions_7 and six Trial_*_wavefunctions museum halls) render exactly as before. The agenda's count of 4 is the sequence's official map list; the working tree carries twelve, which is three times the exposure and the reason nothing below writes to the presets, the morph or the audio.",
+    "was": "machinery was written into the script on 2026-08-03 and committed unread in b0428de74 (rescue: 35 promotions that were written and never committed) with NO registry entry, so the sweep could never reach it and the declaration gate could not see it either - its source carries no promotion mark, so it was not even in the orphan list. This block DERIVES both value lists from the @export_enum declarations rather than transcribing the prose. waveform is new: before it, the only exports were fundamental_freq, volume_db and morph_speed - a pitch, a level and a rate, the last two invisible to a still - and apply_grid_config read one key.",
+    "notes": "The SOUND is invisible to a still and no axis here pretends otherwise. What is photographable is the eight slider POSITIONS, which are the spectrum drawn as a bar chart - the file's own cognitive-compression claim, that the slider heights ARE the spectrum. set_normalized_value drives XRToolsInteractableSlider.slider_position, whose setter moves transform.origin, so each of the eight handles physically stands at its harmonic amplitude in the frame. sine, square, sawtooth and triangle are taken character for character from additive_wave_demo.waveform and agree with fourier_transform.waveform; three artifacts in the same sequence asking the same question of the same series must not answer it in three vocabularies. The fifth value is NOT additive_wave_demo's clear (every slider down, a blank tile) because this panel has something those two cannot draw: five vowel presets. formant stands the eight sliders in the A vowel - peaks at h2 and h4, a shape no 1/n law produces - which is the only picture here that argues the harmonic model against a real voice, and is the artifact's own QFEP audit made visible. The registry spellings are the siblings' (sawtooth, triangle), the PRESETS keys are the file's (SAW, TRI), and WAVEFORM_PRESET is the join. machinery is adopted word for word and value for value from MarioSoundController and the seven promoted audio racks. CAP WARNING: 5 x 5 = 25 variants, so at --max 9 build_dna_gallery sweeps waveform alone; --max 25 gets the cross product. waveform is listed first deliberately, so a capped run measures the new axis rather than re-measuring a word that eight siblings have already evidenced. framing 0.62 because PAD is 1.9 and the axis lives in eight 48 mm handles on an 0.82 x 0.60 panel."
+   },
    "category": "waves",
    "complexity": "expert",
    "description": "VR rack panel with 8 vertical sliders controlling harmonic amplitudes for real-time additive synthesis. Waveform and spectrum displays show the result. Preset buttons morph to known timbres: sine, square, sawtooth, triangle, and vowel approximations (A, E, I, O, U). Cognitive compression: timbre IS harmonic recipe — the slider heights ARE the spectrum. Build Fourier transforms with your hands.",
@@ -15129,6 +15174,20 @@
    "name": "Y-Oscillation Cube",
    "scene": "res://commons/artifacts/y_oscillation_cube/y_oscillation_cube.tscn",
    "sequence": "wavefunctions",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "retention": ["none", "trace", "lattice", "archive", "wax"],
+     "phase": ["traverse", "crest", "steepest", "trough"]
+    },
+    "default": "retention=wax, phase=traverse - both a deliberate no-op. wax returns on the FIRST line of _apply_retention, so the shipped lineage keeps its five graded ghosts, their exact size ramp (cube_size * (0.6 + i/trail_count * 0.3)) and their exact alpha ramp (0.1 + i/trail_count * 0.2), in their exact child order. traverse leaves _phase_held false, so _process runs the shipped `_time += delta` line and _apply_phase returns before it touches the clock, the trail history or the label; no plate node is constructed at all. The token is named in 12 map files - WaveFunctions_Intro and its three parts, Corridor_WaveFunctions_Intro, Trial_castelvecchio/grande/kanazawa/sainsbury/uffizi/wfc_wavefunctions, Curation_Bay_wavefunctions_2 and an exhibit_furniture plinth mount - and every reach path was read: they are bare tokens, one `y_oscillation_cube:180:0.5` (grid rotation and y-offset shorthand, not config) and two curation_station artifact lists. NOT ONE passes `retention` or `phase`, and apply_grid_config only re-runs a pass when the config dict actually contains that key, so nothing rebuilds for any of them.",
+    "was": "seven exports and not one of them a claim: cube_size, amplitude, frequency, cube_color, show_rail, show_trail, trail_count. Turning them made the same cube travel further, oscillate faster or be a different colour. The runner refused the token for NO TURNABLE KNOBS - which was HALF WRONG in the same way it was half wrong about oscillation_controlled_cube: `retention` was already implemented in this file, fully working, with its five values, its @export_enum, its allow-list and a guarded apply_grid_config hook, and the registry had never been told. The sweep therefore had no axis to turn while the knob sat there in the source. That half is DERIVED here and not transcribed - the declared list is the @export_enum line read back off the file, not retyped from the sibling's entry.",
+    "note": "phase is WHERE IN THE CYCLE THE EXHIBIT IS CAUGHT, and it exists because y = A*sin(wt) is a sentence about TIME that a still can only ever meet at one moment - a moment the shipped artifact chose by accident, every time, and never stated. crest (wt = pi/2, y = +A, v = 0), steepest (wt = 0, y = 0, |v| maximal) and trough (wt = 3pi/2, y = -A, v = 0) are three DIFFERENT HEIGHTS on a rail whose top and bottom markers were already there to be read against, so no two values can render the same still and the axis cannot come back inert for want of separation. The stations are SOLVED from `frequency` at apply time rather than hard-coded, so a map that changes the rate still gets its crest at the crest. THE RATE IS NOT ON THIS AXIS and could not be: frequency is a rate and a rate is invisible to a still - that is the info_board fault and it is refused here on purpose. traverse is the only nondeterministic tile in the sheet, because what a free-running clock shows depends on how many frames the headless boot managed before the shutter; a large traverse-to-traverse difference is a clock, not a bite, and the axis should be judged on the three pinned stations.",
+    "kin": "phase is [[slope_tangent_demo]]'s word taken character for character WITH ITS VALUE LIST - traverse, crest, steepest, trough - and the reason it may be taken whole is written in that artifact's own note: it declined crest/steepest/trough as 'facts about a sine' on the grounds that it is a closed track and not a sine. This artifact IS the sine, so it can answer all four, which is the only condition under which a shared word is honest (folding_past's rule). Note the stations here are read off POSITION, not curvature, which is what keeps them distinct: slope_tangent_demo warned that on y = sin(x) zero, steepest and inflection collapse to one point, and they would have here too if the axis had stationed on the second derivative. retention is adopted word for word and value for value from [[mystic_writing_pad]], shared with draw_dot, grab_sphere_point_snap, draw_triangle_faces, interactive_point_origin_force and the sibling motion demo oscillation_controlled_cube - what a position persists as once the body has left it. This artifact is the sibling that DEFAULTS to wax rather than none, because five graded ghosts have shipped since it was written; the difference in default across the family is a true statement about the objects, not drift.",
+    "still_note": "the two axes interact honestly rather than cleanly, and it is worth knowing which way. At a pinned station the trail collapses - _update_trail pushes the same y every frame, so every ghost sits at one height behind the cube - which means retention is at its most legible at traverse and at its least under crest/steepest/trough. Read retention off a sweep that does NOT vary phase. cabinet_sweep at the default --max=9 picks retention first (5 values, declared first in this block) and then has no room for a second axis, so that is what a default sweep measures; phase needs its own run, and at --max=20 the pair crosses fully.",
+    "declines": "cube_size, amplitude, frequency, trail_count, cube_color, show_rail and show_trail stay plain exports. amplitude was the tempting one, since it is the A in the formula and it IS visible in a still - but only once the phase is pinned, and a bigger swing photographed at the crest is a bigger picture of the same claim rather than a different claim. frequency is refused outright as a rate."
+   },
    "tags": [
     "animation",
     "visualization",

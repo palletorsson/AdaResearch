@@ -138,6 +138,50 @@ const PRESET_COLORS := {
 @export_enum("none", "plate", "vacancy", "frame", "works") var machinery: String = "none"
 const MACHINERIES: PackedStringArray = ["none", "plate", "vacancy", "frame", "works"]
 
+## SECOND AXIS — STAGE-2 DNA, 2026-08-05. WHICH HARMONIC RECIPE THE PANEL IS FOUND HOLDING.
+##
+## The sound this artifact makes is invisible to a still. The eight slider POSITIONS are not:
+## they ARE the spectrum drawn as a bar chart, which is the whole cognitive-compression claim
+## in the header of this file ("the slider heights ARE the spectrum"). So the one thing here
+## that is simultaneously audible and photographable is which named series the eight sliders
+## are standing in, and that is what this axis turns.
+##
+## The word and its first four values are taken character for character from
+## [[additive_wave_demo]].waveform (sine, square, sawtooth, triangle, clear) and agree with
+## [[fourier_transform]].waveform (sine, square, impulse, triangle, sawtooth, noise) — three
+## artifacts in the same sequence asking the same question of the same series must not answer
+## it in three vocabularies. The spellings are the siblings', not the PRESETS keys': the
+## registry says "sawtooth" and "triangle", the code's dictionary says SAW and TRI, and
+## WAVEFORM_PRESET is the join.
+##
+## The fifth value is this artifact's alone and is why it does not simply adopt
+## additive_wave_demo's list whole. Its fifth value is "clear" — every slider down, silence,
+## a demo with nothing to show. This panel already has nine presets and five of them are
+## vowels, which the other two artifacts do not have and cannot draw: a formant spectrum is
+## not a monotone falling series but a bumpy envelope with peaks away from the fundamental,
+## and standing the eight sliders in that shape is the only picture here that argues the
+## harmonic model against a real voice. "clear" would have been a sixth blank tile.
+##
+##   sine       [1,0,0,0,0,0,0,0] — one slider up, seven on the floor. The shipped startup.
+##   square     odd harmonics only, 1/n — a comb: up, down, up, down.
+##   sawtooth   every harmonic at 1/n — a clean descending staircase, all eight standing.
+##   triangle   odd harmonics at 1/n^2 — almost the sine, with two faint survivors.
+##   formant    the "A" vowel — peaks at h2 and h4, a shape no 1/n law produces.
+##
+## DEFAULT PRESERVES. "sine" writes PRESETS["SINE"], which is exactly the array the four
+## existing placements were already initialised with on the line this replaced. Nothing here
+## touches the presets, the buttons, the morph, the audio, the displays or the machinery.
+@export_enum("sine", "square", "sawtooth", "triangle", "formant") var waveform: String = "sine"
+const WAVEFORMS: PackedStringArray = ["sine", "square", "sawtooth", "triangle", "formant"]
+## The join between the shared registry vocabulary and this file's own PRESETS keys.
+const WAVEFORM_PRESET := {
+	"sine": "SINE",
+	"square": "SQUARE",
+	"sawtooth": "SAW",
+	"triangle": "TRI",
+	"formant": "A",
+}
+
 ## Internal state
 var harmonic_amplitudes: Array[float] = []  # Current amplitude for each harmonic
 var target_amplitudes: Array[float] = []     # Target (from preset morph)
@@ -170,11 +214,17 @@ func _ready() -> void:
 	_audio_phases.resize(NUM_HARMONICS)
 	_waveform_buffer.resize(WAVEFORM_BUFFER_SIZE)
 	
+	# DNA: which named series the panel is found holding. "sine" resolves to PRESETS["SINE"],
+	# the literal array this line used to name, so the default startup state is unchanged.
+	var _w: String = str(waveform).strip_edges().to_lower()
+	waveform = _w if WAVEFORMS.has(_w) else "sine"
+	var startup: Array = PRESETS[WAVEFORM_PRESET.get(waveform, "SINE")]
+
 	for i in range(NUM_HARMONICS):
-		harmonic_amplitudes[i] = PRESETS["SINE"][i]
+		harmonic_amplitudes[i] = startup[i]
 		target_amplitudes[i] = harmonic_amplitudes[i]
 		_audio_phases[i] = 0.0
-	
+
 	_build_panel()
 	_build_sliders()
 	_build_preset_buttons()
@@ -516,6 +566,19 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		if MACHINERIES.has(want) and want != machinery:
 			machinery = want
 			_build_machinery()
+
+	# Second axis, same contract: an absent or unknown "waveform" leaves the shipped value
+	# alone. The sliders check is the guard against running before _ready has built them —
+	# apply_grid_config arrives call_deferred from the grid, but a fixture or a caller that
+	# reached it earlier would otherwise index an empty array.
+	if config_data.has("waveform"):
+		var wf: String = str(config_data["waveform"]).strip_edges().to_lower()
+		if WAVEFORMS.has(wf) and wf != waveform:
+			waveform = wf
+			if not sliders.is_empty():
+				# Morph rather than snap: this is the same path a player's button press
+				# takes, so a map that names a waveform gets the panel walking to it.
+				set_preset(WAVEFORM_PRESET.get(waveform, "SINE"))
 
 
 # ── MACHINERY ────────────────────────────────────────────────────────────────

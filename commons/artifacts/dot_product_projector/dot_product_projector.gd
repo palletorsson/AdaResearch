@@ -25,15 +25,20 @@ class_name DotProductProjector
 @export var max_vector_length: float = 1.2
 @export var arrow_thickness: float = 0.012  # Thin like y_oscillation_cube
 
+# The pose this bench has shipped in since it was written: 35.5 degrees, the acute
+# case. `opening` hands these two back verbatim rather than re-deriving them.
+const POSE_A := Vector3(0.7, 0.5, 0.0)
+const POSE_B := Vector3(0.9, 0.0, 0.0)
+
 ## Vector A (the vector being projected)
-@export var vector_a: Vector3 = Vector3(0.7, 0.5, 0.0):
+@export var vector_a: Vector3 = POSE_A:
 	set(value):
 		vector_a = value.limit_length(max_vector_length)
 		if is_inside_tree():
 			_update_visualization()
 
 ## Vector B (the vector projected onto)
-@export var vector_b: Vector3 = Vector3(0.9, 0.0, 0.0):
+@export var vector_b: Vector3 = POSE_B:
 	set(value):
 		vector_b = value.limit_length(max_vector_length)
 		if vector_b.length() < 0.01:
@@ -65,6 +70,38 @@ class_name DotProductProjector
 ## the green bar is the answer. Each value keeps a different one of those three.
 @export_enum("outcome", "trace", "operands", "expression") var workings: String = "operands"
 const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
+
+## AXIS — WHICH CASE THE BENCH IS FOUND IN. agreement_gauge's word with its four
+## values in the same order, seconded by dot_aligner and exercise_5_9_angle_between:
+## literally the same question asked of the same pair of directions, so a room can
+## set the gauge, the exercise, the turret and this projector to one case and expect
+## the four to MEASURE alike.
+##
+##   agreeing    the shipped pose, handed back verbatim — 35.5 degrees, dot +0.63,
+##               the projection a short green bar lying along B.
+##   strangers   90 degrees. The dot is exactly 0, the green bar vanishes to a point
+##               at the shared tail, and the drop line lands on the origin. The
+##               threshold this artifact's @identity calls its critical parameter.
+##   opposing    140 degrees. The dot is negative and the projection arrow points
+##               BACKWARDS down B — the sign change as a direction, not a minus sign.
+##   parallel    0 degrees. The two arrows superimpose, the arc collapses (the arc
+##               builder returns early under 0.05 rad) and the projection is the whole
+##               of A: |A||B| at its ceiling.
+##
+## Why this is not a second word for a knob that already exists — the test
+## projection_shadow applied when it declined this same word. vector_a and vector_b
+## are exported, but they are two raw Vector3 literals: reaching "exactly 90 degrees"
+## through them means computing components by hand, and NO map has ever done it. The
+## artifact already thinks in these cases — ALIGNED / ORTHO / OPPOSED are three of the
+## five hard-coded presets wired to the VR buttons — but that vocabulary was reachable
+## only by a hand in the headset, never from a map token. This lifts the presets the
+## artifact already has into the family's word for them.
+##
+## |A| and |B| are PRESERVED at every value: the pose turns theta and nothing else, so
+## a sweep cannot be read as a fact about lengths.
+@export_enum("agreeing", "strangers", "opposing", "parallel") var opening: String = "agreeing"
+const OPENINGS: PackedStringArray = ["agreeing", "strangers", "opposing", "parallel"]
+const OPENING_DEGREES := {"strangers": 90.0, "opposing": 140.0, "parallel": 0.0}
 
 # Sleek color palette
 var color_a: Color = Color(1.0, 0.35, 0.4)        # Coral - vector A
@@ -103,6 +140,11 @@ var _time: float = 0.0
 
 
 func _ready():
+	# The pose comes first, so the handles are created already standing on it. At the
+	# default this is a hard no-op: _apply_opening() is not even called.
+	if _opening_value() != "agreeing":
+		_apply_opening()
+
 	_ground = VectorVisuals.create_ground(self, max_vector_length * 2.5)
 	_axes = VectorVisuals.create_axes(self, max_vector_length * 1.3)
 	
@@ -211,6 +253,13 @@ func _apply_preset(va: Vector3, vb: Vector3):
 	_handle_b.position = vector_b
 
 func _update_visualization():
+	# The vector_a / vector_b setters fire this whenever the node is inside the tree,
+	# and _ready() is inside the tree. Writing a pose before _create_arrows() would
+	# otherwise reach a null arrow. Nothing calls this before the arrows exist today,
+	# so the guard changes nothing that ships.
+	if _arrow_a == null:
+		return
+
 	# Calculate dot product and projection
 	var dot = vector_a.dot(vector_b)
 	var b_normalized = vector_b.normalized()
@@ -376,10 +425,51 @@ func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])
+	# `opening` MOVES the two arrows, so it is applied only when the config actually
+	# names it — a placement that sets vector_a by hand is never overruled by a pose
+	# it did not ask for. (The loop above has already written the enum string.)
+	if config_data.has("opening"):
+		_apply_opening()
+		if _handle_a != null:
+			_handle_a.position = vector_a
+		if _handle_b != null:
+			_handle_b.position = vector_b
 	# `workings` is a plain export with no setter (the vector_* ones rebuild themselves),
 	# so a config that only changes the axis has to ask for the rebuild explicitly.
 	if is_inside_tree():
 		_update_visualization()
+
+
+# --- OPENING ----------------------------------------------------------------
+# The case the bench is found in. Turns theta and nothing else.
+
+func _opening_value() -> String:
+	var o: String = String(opening).strip_edges().to_lower()
+	return o if OPENINGS.has(o) else "agreeing"
+
+
+## Swings A to the requested angle away from B, about the axis normal to the plane the
+## two arrows already share, keeping |A| and B untouched. `agreeing` SHORT-CIRCUITS to
+## the two shipped literals instead of re-deriving 35.5 degrees from them, so the
+## default is the pose itself and not a ratio that could rescale under a map override.
+func _apply_opening() -> void:
+	var value: String = _opening_value()
+	if not OPENING_DEGREES.has(value):
+		vector_a = POSE_A                       # "agreeing" — the shipped pose, verbatim
+		vector_b = POSE_B
+		return
+
+	var len_a: float = vector_a.length()
+	var b_dir: Vector3 = vector_b.normalized()
+	if len_a < 0.001 or b_dir.length() < 0.5:
+		return
+	# The plane the shipped pose lives in (A and B are both in XY), so a swung arrow
+	# stays where the player is already looking rather than leaving toward the camera.
+	var axis: Vector3 = b_dir.cross(vector_a.normalized())
+	if axis.length() < 0.001:
+		axis = Vector3.BACK
+	axis = axis.normalized()
+	vector_a = b_dir.rotated(axis, deg_to_rad(float(OPENING_DEGREES[value]))) * len_a
 
 
 # --- WORKINGS ---------------------------------------------------------------

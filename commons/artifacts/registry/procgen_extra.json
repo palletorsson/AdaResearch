@@ -3739,6 +3739,31 @@
     "size_group": "room_scale"
    },
    "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "axes": {
+     "tick": [
+      "once",
+      "coarse",
+      "fine",
+      "dense",
+      "limit"
+     ],
+     "removal": [
+      "gone",
+      "ghost",
+      "scar"
+     ]
+    },
+    "default": "tick=fine, removal=gone - fine is the SHIPPED RUNG and it short-circuits: it hands back the literal 0.01 width floor rather than deriving one, leaves max_depth at 6 (which is also the denominator of the per-row fade, so no surviving row is repainted) and leaves the status label byte-identical. Verified by re-running both stop conditions in Python over the whole recursion - the shipped `depth > 6 or width < 0.01` and the new `depth > 6 or depth > 3 or width < 0.01` produce the SAME 15 bars at the same 15 positions and widths, because 0.8/3^4 = 0.00988 was already under the floor. gone draws nothing where the middle third was, which is what this file has always done: the middle was simply never created. apply_grid_config was a bare `pass` and is now guarded twice - a value is taken only when it validates AND differs, and _rebuild fires only after _built - and all 6 existing placements (Fractal_CantorSet, Fractals_Necklace, Hangar_Fractals, Hangar_Fractals_Walk, Corridor_Fractal_CantorSet, Curation_Bay_fractals_1) carry the bare token with no config keys, so none of them can reach a rebuild.",
+    "was": "three @export knobs, every one of them a count or a size, and an apply_grid_config whose entire body was `pass` - so max_depth, initial_width and vertical_spacing were unreachable from any map token and no placement could differ from any other. The runner refused the token for NO TURNABLE KNOBS, which was a fact about the KIND of knob, not about the artifact.",
+    "finding": "MAX_DEPTH 6 HAS NEVER BEEN REACHED. The recursion stops on `depth > max_depth OR width < 0.01`, and 0.8/3^4 = 0.00988 trips the floor first, so every placement since this file was written has drawn four rows and fifteen bars rather than seven rows and 127. The shipped number was aspirational, and that is why the default rung is `fine` (3 removals) and not `limit`. Nothing above fine is reachable without relaxing that floor, which _min_width() now does by exactly the amount the requested rung needs and no more - measured: dense 0.00494, limit 0.00165, while once and coarse keep the shipped 0.01 because the level cap stops them long before the floor matters.",
+    "kin": "tick and removal are cantor_set's two words with cantor_set's own value lists, and TICK_LEVELS is its table copied rung for rung (once 1, coarse 2, fine 3, dense 4, limit 5) - the same ladder of subdivision zeno_staircase names. The ghost colour, the 0.16 alpha, the unshaded flag and the 0.22 scar ratio are lifted unchanged as well, so the two Cantors in this corpus photograph alike and a room can set the physical one and the NOC translation to one rung and expect them to agree. THE DEFAULT DIFFERS AND THAT IS A FACT ABOUT THE ARTIFACT: cantor_set ships at the TOP of the ladder (limit) and this one ships in the MIDDLE (fine), because its mesh floor cut the recursion off two rungs early. So unlike the sibling's, this axis runs BOTH ways - what the record gains as well as what it loses.",
+    "note": "removal is the question this file's own @identity already claimed to be about - 'the eye learns to see what is missing, not what remains' - while drawing nothing at all where the middle used to be. gone is that shipped silence. ghost restores each removed third as a pale full-thickness volume, so a row reads as the complete interval with its holes marked and the eye can watch measure leaving; scar leaves a thin dark rod at 22 percent of the bar's section, so the row reads as a comb rather than as scattered dust. Removed middles are drawn only when the row they belong to is itself drawn, so the record's extent - and therefore the capture's union AABB - is identical at all three values and the bite measures the drawing and never the camera.",
+    "one_scene_many_names": "this .tscn is ALSO the body of `fractal_cantor_set` and of `test_scene_3` in this same registry file - the corpus's most common hidden family, found again here. The axes live on the script, so both siblings inherit them the moment they are placed; only this token carries the declaration, and the other two should be checked before either is promoted separately.",
+    "still_note": "MEASURED, not assumed: the recursion was re-run in Python at every rung. tick is the strong axis - 3 / 7 / 15 / 31 / 63 bars over 2 / 3 / 4 / 5 / 6 rows, so the silhouette changes wholesale and no two rungs come out identical (checked explicitly, because a naive ladder would have made dense and limit the same picture). removal is the thinner measurement: at the default rung it adds 7 volumes totalling 0.563 of drawn length against the 15 survivors' 1.926, so ghost is about 29 percent more drawn material - but at alpha 0.16 and unshaded, so crop-recheck before believing an INERT verdict on it. scar is thinner still, 7 dark rods of 3.3 mm section against a dark background, and is the hardest value in this pair to photograph. At `limit` the narrowest segment is 3.3 mm against a bar section of 15 x 20 mm, which is Cantor dust and deliberately the last rung: the next one would be a picture of the mesh's minimum feature, the same reason cantor_set stopped at five."
+   },
    "size_group": "room_scale",
    "tags": [
     "procedural"
@@ -4444,6 +4469,22 @@
    }
   },
   "fractal_cantor_set": {
+   "dna": {
+    "axes": {
+    "tick": [
+    "fine",
+    "once",
+    "coarse",
+    "dense",
+    "limit"
+    ],
+    "removal": [
+    "gone",
+    "ghost",
+    "scar"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Classic Cantor set fractal demonstrating infinite subdivision",

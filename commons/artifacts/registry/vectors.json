@@ -3146,6 +3146,29 @@
       },
       "qfep_connection": "Dot product as alignment - measuring how much two directions agree or oppose",
       "scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
+      "dna": {
+        "promoted": "2026-08-05",
+        "stage": "2 - variation",
+        "axes": {
+          "opening": [
+            "agreeing",
+            "strangers",
+            "opposing",
+            "parallel"
+          ],
+          "workings": [
+            "outcome",
+            "trace",
+            "operands",
+            "expression"
+          ]
+        },
+        "default": "opening=agreeing, workings=operands - agreeing does not name an angle at all: _apply_opening SHORT-CIRCUITS and hands back the two shipped Vector3 literals (0.7,0.5,0) and (0.9,0,0) verbatim, and at _ready it is not even called (the pose is applied only when the value is not agreeing, and at runtime only when a config actually names the key), so a placement that sets vector_a by hand is never overruled by a pose it did not ask for. operands is the fall-through arm of the workings match and builds nothing. One line was added above the legacy build - _update_visualization returns early while _arrow_a is null - because the vector_a/vector_b setters fire whenever the node is inside the tree and _ready is inside the tree; nothing calls it before the arrows exist today, so it changes nothing that ships. All 5 existing placements (Vectors_Intro, VectorDotProduct, VectorOperations, Corridor_VectorOperations, Curation_Bay_forces_3) carry the bare token with no config keys.",
+        "was": "workings was in the code and declared NOWHERE - it landed in the 2026-08-02 rescue batch and the ledger never learned about it, so a real axis sat unmeasurable and the runner refused the token for NO TURNABLE KNOBS. opening did not exist: the pose was two Vector3 literals, and although the artifact ships FIVE hard-coded presets (aligned / ortho / opposed / acute / obtuse) wired to VR buttons, that vocabulary was reachable only by a hand in the headset. Every placement in every map has opened on the same 35.5-degree acute case - the one case where the dot product is neither zero, nor negative, nor at its ceiling, which is to say none of the three cases the artifact exists to teach.",
+        "shared_with": "opening is agreement_gauge's word with its four values in the same order, seconded by dot_aligner and exercise_5_9_angle_between - literally the same question asked of the same pair of directions, so a room can set the gauge, the turret, the exercise and this projector to one case and the four should MEASURE alike. workings is transform_composition_workbench's word, shared across the whole vector subject with vector_add, vector_sub, projection_shadow, dot_aligner, length_lantern, geometric_transformations and csg_difference_demo.",
+        "note": "projection_shadow declined opening on the ground that the pose it names was ALREADY a live exported slider, and that test was applied here before the word was taken. vector_a and vector_b are exported and config-reachable, but they are two raw Vector3 literals: reaching exactly 90 degrees through them means computing components by hand and no map has ever done it, while the artifact itself already thinks in these named cases and keeps them behind a button. ASKED THE GEOMETRY RATHER THAN ASSUMING - the pose is swung about the normal of the plane the two arrows already share (measured +Z for the shipped pair, so a swung arrow stays in the plane the player is looking at) and |A| = 0.8602 and B are preserved at every value, so the axis turns theta and nothing else. Measured: agreeing dot +0.630 / theta 35.5; strangers dot 0.0000 exactly / theta 90.0, where the green projection bar collapses to a point at the shared tail and the drop line lands on the origin; opposing dot -0.593 / theta 140, where the projection arrow points BACKWARDS down B - the sign change as a direction rather than as a minus sign; parallel dot +0.774, which is |A||B| at its ceiling, theta 0, the two arrows superimposed and the arc gone (the arc builder returns early under 0.05 rad).",
+        "gotcha": "opening MOVES the two arrows and workings REMOVES them - outcome unlayers A, the rejection, the drop line and the arc - so the two axes disturb the same bright pixels by different means, and if they score alike something is wrong with the capture rather than the design. Also expected and not a missing render: at strangers and at parallel the projection arrow is zero-length and VectorVisuals.position_arrow hides it, and at parallel the angle arc and the drop line hide themselves through their own shipped early-returns."
+      },
       "sequence": "forces",
       "signals": [],
       "tags": [

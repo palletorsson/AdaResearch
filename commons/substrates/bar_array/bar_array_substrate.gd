@@ -15,6 +15,41 @@ class_name BarArraySubstrate
 @export var auto_play: bool = true        ## Start stepping immediately
 @export var label_text: String = ""
 
+## --- STAGE-2 DNA, promoted 2026-08-05 ---------------------------------------------------
+## THE STATE THE ARRAY IS FOUND IN.
+##
+## A sort is time-domain and a still catches one arbitrary pass, so "how far through" is not
+## an honest axis for a photograph. What IS still-visible, and what this artifact's own
+## subject line is about, is the array BEFORE the first comparison — because bubble sort's
+## whole claim is that the same code costs O(n) on one input and O(n^2) on another, and the
+## input is a picture.
+##
+##   shuffled       the shipped Fisher-Yates draw. Average case, ~n^2/4 inversions.
+##   reversed       descending. The WORST case: n(n-1)/2 inversions, every pass swaps.
+##   nearly_sorted  ascending with a scatter of adjacent transpositions. The case where
+##                  bubble sort is genuinely competitive and everyone forgets it.
+##   sorted         ascending. The BEST case: one pass, no swap, done — the early-exit
+##                  branch in cartridge_bubble_sort.step() that nothing had ever shown.
+##
+## WHY NOT found_state. entropy_jar and entropy_morphogenesis already declare
+## found_state = sorted | stirred | mixed for the same-shaped question, and three of these
+## four values map onto it cleanly. `reversed` does not, and cannot be added to it without
+## breaking it: on an entropy ladder reversed sits at the SAME rung as sorted (it is
+## perfectly ordered) while being the single most expensive input bubble sort can be handed.
+## That gap is exactly this artifact's lesson — the cost model is inversion count, not
+## disorder — so taking the word would have meant either corrupting a sibling's ladder or
+## dropping the one value that carries the argument. Different question, different word.
+##
+## DEFAULT PRESERVES. At initial_order = "shuffled" AND order_seed = 0, _arrange returns the
+## cartridge's own array untouched, so the shipped `super.initialize()` shuffle is the only
+## thing that ran. The 4 existing placements are unaffected.
+@export_enum("shuffled", "reversed", "nearly_sorted", "sorted") var initial_order: String = "shuffled"
+const ORDERS: PackedStringArray = ["shuffled", "reversed", "nearly_sorted", "sorted"]
+## Capture-bench pin, NOT an axis. The shipped shuffle is the global unseeded randi(), so a
+## sweep photographs a different array every run and any bite number measures the RNG. 0
+## keeps the shipped fresh-every-run behaviour and is what every placement gets.
+@export var order_seed: int = 0
+
 ## Algorithm selection
 enum Algorithm {
 	BUBBLE_SORT, INSERTION_SORT, SELECTION_SORT,
@@ -55,6 +90,11 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
+	# DNA: normalise before anything builds, so an unrecognised value falls back to the
+	# shipped lineage rather than to whatever the match block's wildcard happens to draw.
+	var _o: String = str(initial_order).strip_edges().to_lower()
+	initial_order = _o if ORDERS.has(_o) else "shuffled"
+
 	_resolve_algorithm_from_lookup_name()
 	_load_cartridge()
 
@@ -74,8 +114,10 @@ func _load_cartridge() -> void:
 	if pi > 0.0:
 		step_interval = pi
 
-	# Initialize array
-	_array = _cartridge.initialize(array_size)
+	# Initialize array. The cartridge still runs first — it resets its own cursor and pass
+	# state off array_size — and _arrange then decides what values those indices hold. At the
+	# shipped default it hands the cartridge's array straight back.
+	_array = _arrange(_cartridge.initialize(array_size))
 	_step_index = 0
 	_time_accumulator = 0.0
 	_is_done = false
@@ -158,9 +200,66 @@ func reset() -> void:
 	_step_index = 0
 	_time_accumulator = 0.0
 	_is_done = false
-	_array = _cartridge.initialize(array_size)
+	_array = _arrange(_cartridge.initialize(array_size))
 	if _renderer:
 		_renderer.update_bars(_array, _cartridge)
+
+
+## --- initial_order ----------------------------------------------------------------------
+## Rewrite the starting values. Returns the cartridge's own array UNCHANGED on the shipped
+## default, so this is a short circuit and not a recomputation of the same shuffle — a map
+## that overrides nothing gets the same code path it always got.
+func _arrange(arr: PackedFloat32Array) -> PackedFloat32Array:
+	if initial_order == "shuffled" and order_seed == 0:
+		return arr
+
+	# ONLY A SORT IS ASKED WHAT STATE ITS INPUT IS IN. This export lands on the substrate,
+	# which all nine bar_array_* tokens share, but histogram, fibonacci and prime_sieve build
+	# their own arrays in initialize() — an empty bin count, a Fibonacci series, a sieve —
+	# and overwriting those with a ramp would not be a variation of anything, it would be
+	# vandalism. Asked of the cartridge rather than hard-coded against a list of names, so a
+	# tenth cartridge answers for itself. The six sorts inherit the base "sorting".
+	if _cartridge == null or _cartridge.get_category() != "sorting":
+		return arr
+
+	var n: int = arr.size()
+	if n <= 0:
+		return arr
+
+	var out := PackedFloat32Array()
+	out.resize(n)
+	for i in range(n):
+		out[i] = float(i + 1) / float(n)
+
+	match initial_order:
+		"sorted":
+			# Ascending, untouched. Bubble sort's best case: one pass, no swap.
+			pass
+		"reversed":
+			# The worst case — every adjacent pair is an inversion.
+			out.reverse()
+		"nearly_sorted":
+			# Ascending with ~12% of positions disturbed by an adjacent transposition.
+			var rng_near: RandomNumberGenerator = RandomNumberGenerator.new()
+			rng_near.seed = order_seed if order_seed != 0 else 20260805
+			var kicks: int = maxi(1, int(float(n) * 0.12))
+			for k in range(kicks):
+				var i_near: int = rng_near.randi_range(0, n - 2)
+				var tmp_near: float = out[i_near]
+				out[i_near] = out[i_near + 1]
+				out[i_near + 1] = tmp_near
+		_:
+			# "shuffled" with a pinned seed — the same Fisher-Yates the cartridge does,
+			# reproducible so a sweep photographs one array rather than one per run.
+			var rng_all: RandomNumberGenerator = RandomNumberGenerator.new()
+			rng_all.seed = order_seed if order_seed != 0 else 20260805
+			for i in range(n - 1, 0, -1):
+				var j: int = rng_all.randi_range(0, i)
+				var tmp_all: float = out[i]
+				out[i] = out[j]
+				out[j] = tmp_all
+
+	return out
 
 func touch_bar(index: int) -> void:
 	if index < 0 or index >= array_size:
@@ -298,6 +397,22 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("auto_play"):
 		auto_play = str(config["auto_play"]).to_lower() == "true"
 
+	# DNA. Read BEFORE the algorithm key below, because the algorithm setter calls
+	# _load_cartridge() and _load_cartridge is where _arrange runs — so if a token names both,
+	# one rebuild serves both. An unknown value leaves the shipped state alone; a value that
+	# did not change sets no flag and so costs nothing.
+	var reload: bool = false
+	if config.has("order_seed"):
+		var s: int = int(config["order_seed"])
+		if s != order_seed:
+			order_seed = s
+			reload = true
+	if config.has("initial_order"):
+		var want: String = str(config["initial_order"]).strip_edges().to_lower()
+		if ORDERS.has(want) and want != initial_order:
+			initial_order = want
+			reload = true
+
 	# Set algorithm last — the setter calls _load_cartridge()
 	if config.has("algorithm"):
 		var algo_name = str(config["algorithm"]).to_lower()
@@ -321,9 +436,15 @@ func apply_grid_config(config: Dictionary) -> void:
 		}
 		if algo_name in algo_map:
 			algorithm = algo_map[algo_name]
+			reload = false   # the setter already re-ran _load_cartridge with the new order
 			print("BarArray: Config set algorithm to '%s'" % algo_name)
 		else:
 			push_warning("BarArray: Unknown algorithm '%s'" % algo_name)
+
+	# Rebuild ONLY when a DNA value actually changed, only after _ready built the cartridge
+	# once, and only if the algorithm setter above has not already done it.
+	if reload and _cartridge != null:
+		_load_cartridge()
 
 	if auto_play and not _is_playing:
 		play()

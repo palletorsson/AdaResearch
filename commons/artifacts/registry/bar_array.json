@@ -2,6 +2,16 @@
  "_comment": "BarArray substrate — MultiMesh bar visualization with algorithm cartridges. Use #algorithm:<name> or named variants.",
  "artifacts": {
   "bar_array": {
+   "dna": {
+    "axes": {
+    "initial_order": [
+    "shuffled",
+    "reversed",
+    "nearly_sorted",
+    "sorted"
+    ]
+    }
+   },
    "name": "BarArray Substrate",
    "lookup_name": "bar_array",
    "description": "Universal 1D array visualization. MultiMesh bars with emission and smooth transitions. Defaults to Bubble Sort. Use #algorithm:<name> to select cartridge.",
@@ -107,6 +117,27 @@
    "qfep_connection": "The array itself, standing up: a row of bars whose heights ARE the values, index by index. The chapter's first primitive and its whole thesis in one object — that a list of numbers is a shape, and that to store data in order is already to draw it. Every sort, search, and histogram downstream is this row, rearranged."
   },
   "bar_array_bubble_sort": {
+   "dna": {
+    "promoted": "2026-08-05",
+    "stage": "2 - variation",
+    "framing": 0.55,
+    "axes": {
+     "initial_order": [
+      "shuffled",
+      "reversed",
+      "nearly_sorted",
+      "sorted"
+     ]
+    },
+    "fixture": {
+     "order_seed": 20260805,
+     "auto_play": false
+    },
+    "fixture_note": "MANDATORY for the sweep, and neither key is an axis. order_seed 0 is the shipped behaviour - the cartridge's Fisher-Yates uses the GLOBAL unseeded randi(), so without a pin the shuffled tile is a different array every run and any bite number partly measures the RNG (the generative-artifact trap in CLAUDE.md). auto_play false stops the clock: with it true the sort advances ~13 steps during the 1.1 s SETTLE, which is still close to the initial state but is 13 steps of drift that differ per value and would be read as part of the axis. auto_play is a typed bool and this fixture value is a real JSON false, not the string \"false\" - a string would be rejected by the typed export before _ready.",
+    "default": "initial_order=shuffled with order_seed=0 - _arrange short-circuits and hands the cartridge's own array straight back, so the shipped super.initialize() Fisher-Yates is the only code that ran and nothing is recomputed. The 4 existing placements (Test_Substrates, Test_Substrates_Placed, Tutorial_3D, Zone_TemporalStorage) are byte-identical.",
+    "was": "array_size, step_interval, auto_play, label_text and an Algorithm enum. Every one of those is a count, a rate, a caption or the FAMILY IDENTITY - algorithm is what tells the nine bar_array_* tokens apart via _resolve_algorithm_from_lookup_name, so sweeping it would photograph the siblings, not this artifact's variation. The one thing bubble sort argues, that the same code is O(n) on one input and O(n^2) on another, was unreachable because the starting array was always the same unseeded shuffle.",
+    "notes": "SORTING IS TIME-DOMAIN AND A STILL CATCHES ONE ARBITRARY PASS, so \"how far through\" was never a candidate. What a still can hold is the array BEFORE the first comparison, and that is the artifact's own subject: reversed is the worst case at n(n-1)/2 inversions, sorted is the best case at one pass and no swap - the early-exit branch in cartridge_bubble_sort.step() that no placement has ever shown - and nearly_sorted is the case where bubble sort is genuinely competitive. The bars carry it twice over, because get_bar_color is a function of VALUE: sorted draws a smooth colour ramp, shuffled draws colour noise, so the axis moves hue as well as height. DECLINED THE FAMILY WORD: entropy_jar and entropy_morphogenesis declare found_state = sorted|stirred|mixed for a question of the same shape, and three of these four values map onto it cleanly, but reversed does not and cannot be added without breaking it - on an entropy ladder reversed sits at the same rung as sorted, being perfectly ordered, while being the single most expensive input bubble sort can be handed. Taking the word would have meant corrupting a sibling's ladder or dropping the one value that carries the lesson (the cost model is inversion count, not disorder), so it takes a different word instead. ONE SCENE, MANY NAMES: the export lands on bar_array_substrate.gd, which all nine bar_array_* tokens share, so insertion, selection, merge, quicksort, heap, histogram, fibonacci and prime_sieve all gain the knob and none of them declares it yet - _arrange therefore ASKS THE CARTRIDGE (get_category() != \"sorting\" returns the array untouched) rather than hard-coding a list of names, so histogram, fibonacci and prime_sieve cannot have their bin count, series or sieve overwritten by a ramp, and a tenth cartridge answers for itself. The five other sorts are honest candidates for this same word and are deliberately NOT declared here - each needs its own default-preservation check and its own placement count, and quicksort in particular inverts the argument (already-sorted input is its WORST case, not its best). Expect them in the gate's promoted-in-code-undeclared list until someone does that work; that is a known consequence of one scene carrying nine names, not an oversight. framing 0.55 because PAD is 1.9 and the subject is 1.37 m wide by 0.31 m tall: fit-by-diagonal frames a letterbox in a square."
+   },
    "name": "BarArray — Bubble Sort",
    "lookup_name": "bar_array_bubble_sort",
    "description": "Bubble sort on a MultiMesh bar array. Adjacent comparisons, largest bubbles to the end. O(n²). The canonical first sort.",
@@ -212,6 +243,16 @@
    "qfep_connection": "The array in motion: bubble sort walking the bars, comparing neighbors, swapping, the largest rising to the end pass after pass. O(n²) and honest about it — the slowest useful sort, chosen here because you can SEE it think. The algorithm made a dance the eye can follow, index against index."
   },
   "bar_array_insertion_sort": {
+   "dna": {
+    "axes": {
+    "initial_order": [
+    "shuffled",
+    "reversed",
+    "nearly_sorted",
+    "sorted"
+    ]
+    }
+   },
    "name": "BarArray — Insertion Sort",
    "lookup_name": "bar_array_insertion_sort",
    "description": "Insertion sort — slides each element into its sorted position. O(n²) worst, O(n) best. The card-player sort.",
@@ -317,6 +358,16 @@
    "qfep_connection": "Each cyan bar walks left one adjacent swap at a time until an equal-or-smaller neighbor stops it: the sorted region grows by admission, and the only question is how far in each newcomer gets. Its O(n) best case is a quiet bias — the algorithm rewards arrays that were nearly compliant already."
   },
   "bar_array_selection_sort": {
+   "dna": {
+    "axes": {
+    "initial_order": [
+    "shuffled",
+    "reversed",
+    "nearly_sorted",
+    "sorted"
+    ]
+    }
+   },
    "name": "BarArray — Selection Sort",
    "lookup_name": "bar_array_selection_sort",
    "description": "Selection sort — find minimum, swap to front. O(n²) always. Simple and minimum swaps.",
@@ -422,6 +473,16 @@
    "qfep_connection": "A magenta crown sits on the provisional minimum while the scan interrogates every remaining bar, and nothing moves until the survey is total. Exhaustive review, minimal displacement — certainty bought at O(n²) comparisons for the fewest possible swaps, a bureaucrat's economy of order."
   },
   "bar_array_merge_sort": {
+   "dna": {
+    "axes": {
+    "initial_order": [
+    "shuffled",
+    "reversed",
+    "nearly_sorted",
+    "sorted"
+    ]
+    }
+   },
    "name": "BarArray — Merge Sort",
    "lookup_name": "bar_array_merge_sort",
    "description": "Merge sort — iterative bottom-up divide and conquer. O(n log n) always. Stable. Watch halves merge.",
@@ -528,6 +589,16 @@
    "qfep_connection": "Order arrives wholesale, on a doubling schedule: width 1, 2, 4, 8, each pass zipping two already-sorted halves through a two-pointer rule. The array is never almost done — it is done at ever coarser scales, sortedness manufactured in factory lots."
   },
   "bar_array_quicksort": {
+   "dna": {
+    "axes": {
+    "initial_order": [
+    "shuffled",
+    "reversed",
+    "nearly_sorted",
+    "sorted"
+    ]
+    }
+   },
    "name": "BarArray — Quicksort",
    "lookup_name": "bar_array_quicksort",
    "description": "Quicksort — pivot, partition, recurse. O(n log n) average. The practical fast sort.",
@@ -634,6 +705,16 @@
    "qfep_connection": "The magenta pivot is a temporary sovereign — for one partition every bar defines itself relative to it, then the recursion dethrones it and crowns two smaller ones. Order arrives through delegated local authority; no bar ever sees the whole array."
   },
   "bar_array_heap_sort": {
+   "dna": {
+    "axes": {
+    "initial_order": [
+    "shuffled",
+    "reversed",
+    "nearly_sorted",
+    "sorted"
+    ]
+    }
+   },
    "name": "BarArray — Heap Sort",
    "lookup_name": "bar_array_heap_sort",
    "description": "Heap sort — build max-heap, extract maximums. O(n log n) always. In-place. Two visible phases.",
@@ -740,6 +821,16 @@
    "qfep_connection": "Two regimes in one array: an orange phase builds a tree that never exists as geometry — parent and child are only index arithmetic — then a cyan phase dismantles it maximum by maximum into a green region growing from the right. F_order imposed through a structure the eye is never shown."
   },
   "bar_array_histogram": {
+   "dna": {
+    "axes": {
+    "initial_order": [
+    "shuffled",
+    "reversed",
+    "nearly_sorted",
+    "sorted"
+    ]
+    }
+   },
    "name": "BarArray — Histogram",
    "lookup_name": "bar_array_histogram",
    "description": "Gaussian histogram — bins random samples to form a bell curve. Watch the distribution emerge from noise.",
@@ -846,6 +937,16 @@
    "qfep_connection": "Box-Muller noise falls one sample at a time into bins until a bell curve stands up out of pure accident, then sampling halts and the shape remains. Order is not imposed on this randomness — order is what randomness looks like once it has been counted."
   },
   "bar_array_fibonacci": {
+   "dna": {
+    "axes": {
+    "initial_order": [
+    "shuffled",
+    "reversed",
+    "nearly_sorted",
+    "sorted"
+    ]
+    }
+   },
    "name": "BarArray — Fibonacci",
    "lookup_name": "bar_array_fibonacci",
    "description": "Fibonacci sequence — each bar = F(n), growing exponentially. Watch the golden ratio emerge.",
@@ -952,6 +1053,16 @@
    "qfep_connection": "Each new F(n) becomes the unit of measure and every older bar shrinks in place, renormalized against the latest maximum: exponential growth experienced as the past's continuous demotion. The golden ratio never appears as a number — only as the proportion each bar keeps to its neighbor while everything rescales."
   },
   "bar_array_prime_sieve": {
+   "dna": {
+    "axes": {
+    "initial_order": [
+    "shuffled",
+    "reversed",
+    "nearly_sorted",
+    "sorted"
+    ]
+    }
+   },
    "name": "BarArray — Prime Sieve",
    "lookup_name": "bar_array_prime_sieve",
    "description": "Sieve of Eratosthenes — bars go dark when eliminated as composite. Watch the primes survive.",

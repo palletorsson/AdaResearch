@@ -24,6 +24,50 @@ extends MeshInstance3D
 @export var auto_rotate: bool = true
 @export var rotation_speed: float = 0.5
 
+## --- DNA (stage 2, promoted 2026-08-05) ------------------------------------------------
+## TWO AXES, AND NEITHER OF THEM TOUCHES THE PROFILE. radius_curve is this artifact's
+## declared critical_parameter and the shipped scene supplies its own eight-point curve, so
+## the lobed SILHOUETTE is identical at every value below. What the axes open is the pair of
+## things Asawa's own titles argue about and this code had nailed shut: how the wire is
+## looped, and how many forms are inside the form.
+##
+## weave — WHICH LINES EXIST, not how many. u_resolution and v_resolution stay exactly what
+## they were, un-promoted, because a resolution knob is a density knob and says nothing.
+## What changes is the topology of the line set laid over the same vertices:
+##   grid       both families of segments, the shipped lineage byte for byte — a woven skin.
+##   rings      the horizontal loops only. The form reads as stacked contours: the profile
+##              curve made literal, a surface of revolution admitting it is one.
+##   diagonal   each quad crossed corner to corner instead of edged. The closest this
+##              vertex grid comes to a crocheted loop, which is what the wire actually is.
+##   meridians  the vertical runs only. A birdcage: the silhouette swept, the surface gone.
+## Openness rises from grid to rings, which is the half of the claim that matters — you can
+## only see an inner form through a skin loose enough to see through.
+##
+## nesting — Asawa titled these "Continuous Form within a Form", and counted the layers.
+##   single         one surface. The shipped tree: no extra node is created at all.
+##   within         one smaller form hung inside, at 0.58 radius and 0.86 height.
+##   within_within  two, at 0.62 and 0.34. Inside becomes outside twice over.
+## Every inner form is strictly inside the outer one, so the merged AABB — and therefore the
+## sweep's camera — is the same at every value.
+##
+## DEFAULT PRESERVES. weave = "grid" emits the two index pairs in the shipped order from the
+## shipped loop; nesting = "single" builds nothing and adds no node. The four existing
+## placements (WaveFunctions_John_Cage and its _p1/_p2, Curation_Bay_wavefunctions_5, plus
+## the John Cage corridor) render exactly as before.
+@export_enum("grid", "rings", "diagonal", "meridians") var weave: String = "grid"
+@export_enum("single", "within", "within_within") var nesting: String = "single"
+const WEAVES: PackedStringArray = ["grid", "rings", "diagonal", "meridians"]
+const NESTINGS: PackedStringArray = ["single", "within", "within_within"]
+const NEST_HOST := "NestedForms"
+## radius scale, height scale — one entry per inner form, outermost first.
+const NEST_LAYERS := {
+	"single": [],
+	"within": [Vector2(0.58, 0.86)],
+	"within_within": [Vector2(0.62, 0.90), Vector2(0.34, 0.72)],
+}
+
+var _built: bool = false
+
 @export_category("Audio Reactivity")
 @export var audio_reactive: bool = false
 @export var frequency_influence: float = 2.0  # How much frequency affects shape
@@ -44,10 +88,21 @@ var audio_initialized: bool = false
 var debug_timer: float = 0.0
 
 func _ready() -> void:
+	weave = _pick(weave, WEAVES, "grid")
+	nesting = _pick(nesting, NESTINGS, "single")
 	if not radius_curve:
 		_create_default_curve()
 	generate_surface()
 	base_scale = scale
+	_build_nesting()
+	_built = true
+
+## Normalise an axis value to one the code can actually build. A map token or a sweep
+## hands a raw string; anything unrecognised falls back to the shipped lineage rather
+## than to whatever a match block's wildcard happens to draw.
+func _pick(value: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = str(value).strip_edges().to_lower()
+	return v if allowed.has(v) else fallback
 
 func _ensure_audio_initialized() -> void:
 	if audio_initialized:
@@ -145,29 +200,8 @@ func generate_surface() -> void:
 			st.set_uv(Vector2(u_ratio, v_ratio))
 			st.add_vertex(Vector3(x, -y, z)) # Invert y to match curve top-down logic usually
 
-	# Generate indices
-	for i in range(v_resolution):
-		for j in range(u_resolution):
-			var current = i * (u_resolution + 1) + j
-			var next_row = (i + 1) * (u_resolution + 1) + j
-			
-			if wireframe:
-				# Horizontal line
-				st.add_index(current)
-				st.add_index(current + 1)
-				
-				# Vertical line
-				st.add_index(current)
-				st.add_index(next_row)
-			else:
-				# Triangles
-				st.add_index(current)
-				st.add_index(current + 1)
-				st.add_index(next_row)
-				
-				st.add_index(current + 1)
-				st.add_index(next_row + 1)
-				st.add_index(next_row)
+	# Generate indices — see _add_indices(): weave decides WHICH segments exist.
+	_add_indices(st)
 
 	if not wireframe:
 		st.generate_normals()
@@ -190,6 +224,139 @@ func generate_surface() -> void:
 			
 		generated_mesh.surface_set_material(0, material)
 		mesh = generated_mesh
+
+## --- weave ------------------------------------------------------------------------------
+## The index generator both surfaces share. Same vertices in every case; what changes is
+## which segments are drawn between them, which is the only non-density sense in which a
+## wire surface can be more or less open.
+##
+## "grid" emits the two pairs in the shipped order, from the shipped loop, so it is the
+## legacy lineage byte for byte. The triangle branch is untouched and ignores weave — with
+## wireframe = false there are no lines for the axis to be about, and every placement and
+## the scene itself ship wireframe = true.
+func _add_indices(st: SurfaceTool) -> void:
+	for i in range(v_resolution):
+		for j in range(u_resolution):
+			var current: int = i * (u_resolution + 1) + j
+			var next_row: int = (i + 1) * (u_resolution + 1) + j
+
+			if not wireframe:
+				# Triangles
+				st.add_index(current)
+				st.add_index(current + 1)
+				st.add_index(next_row)
+
+				st.add_index(current + 1)
+				st.add_index(next_row + 1)
+				st.add_index(next_row)
+				continue
+
+			match weave:
+				"rings":
+					# Horizontal loops only — the profile curve made literal.
+					st.add_index(current)
+					st.add_index(current + 1)
+				"meridians":
+					# Vertical runs only — a birdcage; the swept silhouette, no skin.
+					st.add_index(current)
+					st.add_index(next_row)
+				"diagonal":
+					# Each quad crossed corner to corner: the nearest a vertex grid gets
+					# to a crocheted loop, which is what the wire physically is.
+					st.add_index(current)
+					st.add_index(next_row + 1)
+					st.add_index(current + 1)
+					st.add_index(next_row)
+				_:
+					# "grid" — the shipped lineage, horizontal then vertical.
+					st.add_index(current)
+					st.add_index(current + 1)
+
+					st.add_index(current)
+					st.add_index(next_row)
+
+
+## --- nesting ----------------------------------------------------------------------------
+## Form within a form. Each layer is an independent MeshInstance3D child under one host
+## node, built from the SAME radius_curve at a reduced radius and height, so the inner
+## silhouette is the outer one shrunk — which is what Asawa's nested forms are.
+##
+## "single" creates no host node at all, so the shipped scene tree is untouched. Inner forms
+## are strictly inside the outer, so the merged AABB does not move and the sweep's camera
+## is the same at every value.
+func _build_nesting() -> void:
+	var old: Node = get_node_or_null(NEST_HOST)
+	if old:
+		remove_child(old)
+		old.queue_free()
+
+	var layers: Array = NEST_LAYERS.get(nesting, [])
+	if layers.is_empty():
+		return
+
+	var host := Node3D.new()
+	host.name = NEST_HOST
+	add_child(host)
+	for k in range(layers.size()):
+		var spec: Vector2 = layers[k]
+		var mi := MeshInstance3D.new()
+		mi.name = "Within%d" % (k + 1)
+		mi.mesh = _make_nested_surface(spec.x, spec.y)
+		host.add_child(mi)
+
+
+## One inner form. Same parametric surface as generate_surface(), scaled in radius and
+## height, honouring the same weave so the layers read as one crocheted object rather than
+## two unrelated meshes.
+func _make_nested_surface(rad_scale: float, hgt_scale: float) -> ArrayMesh:
+	var st := SurfaceTool.new()
+
+	if wireframe:
+		st.begin(Mesh.PRIMITIVE_LINES)
+	else:
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var u_max := TAU
+
+	for i in range(v_resolution + 1):
+		var v_ratio: float = float(i) / float(v_resolution)
+		var y: float = (v_ratio - 0.5) * height * hgt_scale
+
+		var r: float = 1.0
+		if radius_curve:
+			r = radius_curve.sample(v_ratio) * max_radius
+		r *= rad_scale
+
+		for j in range(u_resolution + 1):
+			var u_ratio: float = float(j) / float(u_resolution)
+			var u: float = u_ratio * u_max
+			st.set_uv(Vector2(u_ratio, v_ratio))
+			st.add_vertex(Vector3(r * cos(u), -y, r * sin(u)))
+
+	_add_indices(st)
+
+	if not wireframe:
+		st.generate_normals()
+		st.generate_tangents()
+
+	var inner_mesh := st.commit()
+	if inner_mesh:
+		var material := StandardMaterial3D.new()
+		if wireframe:
+			material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			# Dimmer than the outer skin, so a still reads which form is inside which.
+			material.albedo_color = Color(0.82, 0.86, 0.92)
+			material.emission_enabled = true
+			material.emission = Color(0.82, 0.86, 0.92)
+			material.emission_energy = 0.38
+		else:
+			material.albedo_color = Color(0.85, 0.85, 0.85)
+			material.metallic = 0.5
+			material.roughness = 0.5
+			material.cull_mode = BaseMaterial3D.CULL_DISABLED
+		inner_mesh.surface_set_material(0, material)
+	return inner_mesh
+
 
 func _update_audio_data() -> void:
 	if not spectrum_instance:
@@ -295,24 +462,8 @@ func generate_audio_reactive_surface() -> void:
 			st.set_uv(Vector2(u_ratio, v_ratio))
 			st.add_vertex(Vector3(x, -final_y, z))
 
-	# Generate indices
-	for i in range(v_resolution):
-		for j in range(u_resolution):
-			var current := i * (u_resolution + 1) + j
-			var next_row := (i + 1) * (u_resolution + 1) + j
-
-			if wireframe:
-				st.add_index(current)
-				st.add_index(current + 1)
-				st.add_index(current)
-				st.add_index(next_row)
-			else:
-				st.add_index(current)
-				st.add_index(current + 1)
-				st.add_index(next_row)
-				st.add_index(current + 1)
-				st.add_index(next_row + 1)
-				st.add_index(next_row)
+	# Generate indices — see _add_indices(): weave decides WHICH segments exist.
+	_add_indices(st)
 
 	if not wireframe:
 		st.generate_normals()
@@ -340,4 +491,29 @@ func generate_audio_reactive_surface() -> void:
 		mesh = generated_mesh
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Was a no-op stub, so no map token could reach anything on this artifact. It now reads
+	# exactly two keys, and REBUILDS ONLY WHEN A VALUE ACTUALLY CHANGED and only after
+	# _ready has built once — an unguarded rebuild here would tear down and re-lay every
+	# vertex on calls that name nothing this artifact owns.
+	var changed: bool = false
+
+	if config.has("weave"):
+		var w: String = str(config["weave"]).strip_edges().to_lower()
+		if WEAVES.has(w) and w != weave:
+			weave = w
+			changed = true
+
+	if config.has("nesting"):
+		var n: String = str(config["nesting"]).strip_edges().to_lower()
+		if NESTINGS.has(n) and n != nesting:
+			nesting = n
+			changed = true
+
+	if not changed or not _built:
+		return
+
+	# Both surfaces carry the weave, so the outer is relaid too. When audio_reactive is on,
+	# _process overwrites this mesh next frame — through the same _add_indices, so the weave
+	# survives; the inner forms are static and are rebuilt here.
+	generate_surface()
+	_build_nesting()

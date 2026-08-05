@@ -1652,6 +1652,33 @@
 		"bounce_well": {
 			"lookup_name": "bounce_well",
 			"scene": "res://commons/artifacts/bounce_well/bounce_well.tscn",
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"regime": [
+						"mixed",
+						"elastic",
+						"dead",
+						"inelastic"
+					],
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					]
+				},
+				"fixture": {
+					"restitution": 0.9
+				},
+				"default": "regime=mixed, workings=trace - mixed is the axis ABSTAINING: _restitution_value() returns the shipped expression clampf(restitution, 0.05, 0.97) verbatim rather than routing the default through a table, so the slider keeps its full span and the demo is bit-identical (checked numerically at the shipped restitution 0.6: e = 0.60, floor span 2.924, apex heights 0.950 / 0.570 / 0.342 / 0.205). trace is the fall-through arm of the workings match and adds nothing, and that match already sat AFTER _settle(rig), so the fit is still computed from the legacy geometry. One line was added to _param_set - moving the slider sets regime back to mixed - which is a no-op at the default and stops a pinned regime from leaving a live slider that visibly does nothing. All 4 existing placements (MindMap_VectorForces, VFM_Forces_Lab, VFM_06_Springs, Vectors_Act4b_Oscillation) carry the bare token with no config keys.",
+				"was": "workings was in the code and declared NOWHERE - the 2026-08-02 rescue batch put it there and the ledger never learned about it, so the runner refused this token for NO TURNABLE KNOBS while a real axis sat unmeasurable. regime did not exist: e came from one clamped float, and the two cases this file's own doc line names - 'e = 1 is a perpetual bounce, e = 0 a dead thud' - were the exact two the clamp deleted.",
+				"shared_with": "regime is bouncing_ball's word with its four values in the same order AND its three numbers (elastic 1.0, dead 0.0, inelastic 0.55) taken from that file rather than re-invented, so the sim and this console can be set to one case and compared - which is the point, since bounce_well is the clean console rebuild of exactly that sim. bouncing_ball took the word from mass_spring_damper and refused its value list because under/critical/overdamped do not transfer to restitution; the same test was applied here and the values DO transfer, because both artifacts are asking the same question about the same coefficient. workings is transform_composition_workbench's word, shared across the vector subject with dot_aligner, projection_shadow, vector_add, vector_sub, length_lantern and geometric_transformations.",
+				"note": "mixed means the same thing in both files: the axis declines to pin e and leaves the shipped source in charge - there a per-ball randf_range, here the player's slider. THE CLAMP IS WHY THIS IS NOT A SECOND NAME FOR A KNOB THAT ALREADY EXISTS, which is the test projection_shadow applied when it declined a borrowed pose. restitution is exported and config-reachable, but clampf(e, 0.05, 0.97) means the slider reaches every case EXCEPT the two named ones - dot_aligner's situation exactly, whose alignment knob could not reach 90 or 180 degrees, and the same answer: name the cases and make them true rather than ship a near-miss wearing an exact name. Measured: elastic e 1.00 gives nine arcs of equal height 0.95 over a 5.90 m floor; dead e 0.00 gives the drop and then a row of flat markers on the floor, apexes 0.95 then zero, floor 1.93 m; inelastic e 0.55 gives 0.950 / 0.522 / 0.287 / 0.158. Unlike its sibling this bench is honest in a still - nothing here moves, the arcs are stroboscopic geometry laid down at build time, so e IS the picture and not something a photograph has to catch at the right instant.",
+				"fixture_note": "restitution is pinned to 0.9 for the sweep and for no other reason. The shipped slider sits at 0.6 and inelastic is 0.55, five hundredths apart - a sweep at the shipped position would photograph mixed and inelastic as near-twins (floor span 2.92 against 2.75) and the critic would report a fact about where the slider ships rather than about the axis. 0.9 is inside the shipped 0.05..0.97 span and is a position the player's own hand can reach. The fixture never touches a placement, and cabinet_sweep lets a variant's own params override it, so the three pinned regimes are unaffected by it.",
+				"still_note": "regime moves the floor span by a factor of 3.8 between elastic (5.90 m) and dead (1.93 m), so the capture camera fits the union and the dead frame will sit smaller in its own frame than the elastic one - read the bite with that in mind. The vertical extent is h0 = 0.95 at every value and does not move. Two things are shipped behaviour and deliberately untouched: the per-arc colour fade runs on the arc INDEX and not on e, so even elastic's equal-height arcs dim along the row; and workings=expression adds a board above the series, which enlarges the union AABB for every frame in the sheet."
+			},
 			"class_name": "BounceWell",
 			"name": "Bounce Well (restitution)",
 			"description": "Restitution made playable - a console toy for the embodied vectors-forces arc (the clean rebuild of the bouncing-ball sim). A ball dropped into a well bounces, each bounce returning to e times the last height; frozen stroboscopically the arcs shrink geometrically. restitution 0..1 from a dead thud to a perpetual bounce.",

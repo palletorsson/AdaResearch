@@ -44,6 +44,37 @@ class_name BounceWell
 @export_enum("outcome", "trace", "operands", "expression") var workings: String = "trace"
 const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression"]
 
+## AXIS — WHICH RESTITUTION REGIME THE WELL IS RUNNING. bouncing_ball's word one
+## artifact along, with its four values in the same order and its own three numbers
+## (1.0 / 0.0 / 0.55), so the two benches can be set to one case and compared.
+##
+##   mixed       the axis abstains and the shipped line runs verbatim:
+##               clampf(restitution, 0.05, 0.97). The slider is in charge, which is
+##               what `mixed` means in bouncing_ball too — there it leaves the
+##               per-ball randf_range alone, here it leaves the player's hand alone.
+##   elastic     e = 1.0. Nine arcs of equal height across a floor twice as long as
+##               any other value's: the perpetual bounce.
+##   dead        e = 0.0. The drop lands and stays down — one arc, then a row of
+##               flat markers on the floor. The thud.
+##   inelastic   e = 0.55. The shipped picture's near neighbour, drawn to make the
+##               point that the geometric decay is the DEFAULT case and not an
+##               extreme: this is the value the whole family lands on.
+##
+## THE CLAMP IS THE REASON THIS AXIS IS NOT A SECOND NAME FOR THE SLIDER — the test
+## projection_shadow applied when it declined a borrowed pose. `restitution` is
+## exported, config-reachable and under the player's hand, but _build_demo has always
+## run it through clampf(e, 0.05, 0.97), and the two values this file's own doc line
+## promises — "e = 1 is a perpetual bounce, e = 0 a dead thud" — are precisely the two
+## the clamp deletes. The slider can reach every case EXCEPT the two named ones. That
+## is dot_aligner's situation exactly, and the answer is the same: name the cases and
+## make them true rather than ship a near-miss wearing an exact name.
+##
+## A still is honest here, unlike its sibling's: nothing in this bench moves. The arcs
+## are stroboscopic geometry laid down at build time, so e IS the picture rather than
+## something a photograph has to catch at the right instant.
+@export_enum("mixed", "elastic", "dead", "inelastic") var regime: String = "mixed"
+const REGIMES: PackedStringArray = ["mixed", "elastic", "dead", "inelastic"]
+
 
 func _ready() -> void:
 	_console_ready()
@@ -56,6 +87,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("workings"):
 		var _w: String = String(config_data["workings"]).strip_edges().to_lower()
 		workings = _w if WORKINGS.has(_w) else workings
+	if config_data.has("regime"):
+		var _r: String = String(config_data["regime"]).strip_edges().to_lower()
+		regime = _r if REGIMES.has(_r) else regime
 	apply_base_config(config_data)
 	color_a = _parse_color(config_data.get("color_a", color_a), color_a)
 	color_b = _parse_color(config_data.get("color_b", color_b), color_b)
@@ -72,13 +106,40 @@ func _param_get() -> float:
 
 func _param_set(v: float) -> void:
 	restitution = v
+	# The slider hands control back. `regime` names the case the bench is FOUND in,
+	# not a lock on the player's hand — without this line a map that pins elastic
+	# would leave a live slider that visibly does nothing. Default is already
+	# "mixed", so this is a no-op for every existing placement.
+	regime = "mixed"
+
+
+## The declared regime, or the shipped abstention if the string is not one of ours.
+func _regime_value() -> String:
+	var r: String = String(regime).strip_edges().to_lower()
+	return r if REGIMES.has(r) else "mixed"
+
+
+## The coefficient this well runs at. `mixed` returns the shipped expression verbatim
+## rather than routing the default through a table, so the default is the line that
+## shipped and the player's slider keeps its full 0.05..0.97 span. The other three are
+## bouncing_ball's own numbers, and two of them are the endpoints this file's doc line
+## promises ("e = 1 is a perpetual bounce, e = 0 a dead thud") and the clamp deletes.
+func _restitution_value() -> float:
+	match _regime_value():
+		"elastic":
+			return 1.0
+		"dead":
+			return 0.0
+		"inelastic":
+			return 0.55
+	return clampf(restitution, 0.05, 0.97)
 
 
 func _build_demo() -> void:
 	var rig := _fresh_demo_rig("BounceWellRig")
 	_rng.seed = hash(seed)
 
-	var e: float = clampf(restitution, 0.05, 0.97)
+	var e: float = _restitution_value()
 	var bounces: int = clampi(complexity + 3, 5, 9)
 	var h0: float = 0.95
 	var base_w: float = 0.6
