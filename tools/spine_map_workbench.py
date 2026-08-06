@@ -23,6 +23,7 @@ import argparse
 import json
 import re
 import sys
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -67,6 +68,64 @@ def _resolve_res_path(scene_path: str) -> Path | None:
     if not scene_path.startswith("res://"):
         return None
     return ROOT / scene_path[len("res://") :]
+
+
+BIOME_TOKENS_GD = ROOT / "commons/grid/BiomeGridTokens.gd"
+_GD_CONST_RE = r"const\s+{name}\s*:\s*Array\s*=\s*\[(?P<body>[^\]]*)\]"
+
+
+@lru_cache(maxsize=1)
+def _biome_vocabulary() -> dict[str, frozenset[str]]:
+    """Read the kingdom/role vocabulary out of BiomeGridTokens.gd.
+
+    Derived, never transcribed: a hand-copied list drifts, and then the registry
+    declares a role the engine has never heard of while the audit still says fine.
+    If the source can't be read we return nothing — every biome_token then counts
+    as invalid, so the exemption below fails closed rather than open.
+    """
+    try:
+        source = BIOME_TOKENS_GD.read_text(encoding="utf-8")
+    except OSError:
+        return {}
+    vocab: dict[str, frozenset[str]] = {}
+    for name in ("KINGDOMS", "ROLES"):
+        match = re.search(_GD_CONST_RE.format(name=name), source)
+        if not match:
+            return {}
+        vocab[name] = frozenset(re.findall(r'"([^"]*)"', match.group("body")))
+    return vocab
+
+
+def _is_valid_biome_token(raw: str) -> bool:
+    """True when `raw` is a well-formed `kingdom:algo:role` grammar token.
+
+    Mirrors the head of BiomeGridTokens.parse(). A registry entry may leave a
+    segment as a `<placeholder>` — that means "this axis varies across the
+    family", which is what a DNA-promoted token declares, so it is accepted
+    while a literal segment is still checked against the vocabulary.
+    """
+    token = str(raw or "").strip()
+    if not token:
+        return False
+    vocab = _biome_vocabulary()
+    if not vocab:
+        return False
+    parts = [segment.strip() for segment in token.split(":")]
+    if len(parts) < 3:
+        return False
+    kingdom, algo, role = parts[0], parts[1], parts[2]
+
+    def varies(segment: str) -> bool:
+        return segment.startswith("<") and segment.endswith(">") and len(segment) > 2
+
+    if not varies(kingdom) and kingdom not in vocab["KINGDOMS"]:
+        return False
+    if not varies(role) and role not in vocab["ROLES"]:
+        return False
+    # Every role but `mute` and `field` needs something to render with.
+    if not varies(role) and role not in {"mute", "field"} and not algo:
+        return False
+    return True
 
 
 def _common_prefix_len(a: str, b: str) -> int:
@@ -236,6 +295,14 @@ def load_raw_artifact_entries() -> list[dict[str, Any]]:
             # through the base artifact, which is itself audited independently.
             delegate_to = str(value.get("delegate_to", "")).strip()
 
+            # Living entries are grammar tokens, not scenes: the biome dispatcher
+            # renders `kingdom:algo:role` through a morphology, so there is no
+            # .tscn to point at. A token that does not parse IS an error though —
+            # it names a kingdom or role the engine will refuse — so it is counted
+            # separately instead of being waved through.
+            biome_token = str(value.get("biome_token", "")).strip()
+            biome_token_valid = _is_valid_biome_token(biome_token)
+
             artifact_type = str(value.get("artifact_type", "")).strip().lower()
             source_domain = ""
             if scene_path.startswith("res://algorithms/"):
@@ -252,6 +319,9 @@ def load_raw_artifact_entries() -> list[dict[str, Any]]:
                     "scene_exists": scene_exists,
                     "delegate_to": delegate_to,
                     "has_delegate": bool(delegate_to),
+                    "biome_token": biome_token,
+                    "has_biome_token": bool(biome_token),
+                    "biome_token_valid": biome_token_valid,
                     "artifact_type": artifact_type,
                     "source_domain": source_domain,
                     "sequence": str(value.get("sequence", "")).strip().lower(),
@@ -506,7 +576,12 @@ def build_artifact_audit(limit: int = 200) -> dict[str, Any]:
     missing_scene_path = [
         r
         for r in dict_rows
-        if not str(r.get("scene_path", "")).strip() and not r.get("has_delegate")
+        if not str(r.get("scene_path", "")).strip()
+        and not r.get("has_delegate")
+        and not r.get("biome_token_valid")
+    ]
+    invalid_biome_token = [
+        r for r in dict_rows if r.get("has_biome_token") and not r.get("biome_token_valid")
     ]
     unsupported_scene_path = [
         r
@@ -559,6 +634,7 @@ def build_artifact_audit(limit: int = 200) -> dict[str, Any]:
             "non_dict_entries": len(non_dict_entries),
             "placeholder_entries": len(placeholder_entries),
             "missing_scene_path": len(missing_scene_path),
+            "invalid_biome_token": len(invalid_biome_token),
             "unsupported_scene_path": len(unsupported_scene_path),
             "disallowed_scene_prefix": len(disallowed_scene_prefix),
             "unresolved_scene_files": len(unresolved_scene_files),
@@ -572,6 +648,7 @@ def build_artifact_audit(limit: int = 200) -> dict[str, Any]:
             "non_dict_entries": non_dict_entries[:limit],
             "placeholder_entries": placeholder_entries[:limit],
             "missing_scene_path": missing_scene_path[:limit],
+            "invalid_biome_token": invalid_biome_token[:limit],
             "unsupported_scene_path": unsupported_scene_path[:limit],
             "disallowed_scene_prefix": disallowed_scene_prefix[:limit],
             "unresolved_scene_files": unresolved_scene_files[:limit],
@@ -602,6 +679,7 @@ def render_artifact_audit_markdown(audit: dict[str, Any], sample_limit: int = 20
     ordered_sections = [
         "unresolved_scene_files",
         "missing_scene_path",
+        "invalid_biome_token",
         "unsupported_scene_path",
         "disallowed_scene_prefix",
         "placeholder_entries",

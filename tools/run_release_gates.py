@@ -178,6 +178,10 @@ def build_report(
             and int(art_summary.get("unresolved_scene_files", 999999)) == 0
             and int(art_summary.get("missing_scene_path", 999999)) == 0
             and int(art_summary.get("unsupported_scene_path", 999999)) == 0
+            # A scene-less entry is excused only by a biome_token the engine can
+            # parse. A malformed one names a kingdom or role that does not exist,
+            # so it fails here rather than quietly buying the exemption.
+            and int(art_summary.get("invalid_biome_token", 999999)) == 0
         )
         gates.append(
             {
@@ -187,6 +191,7 @@ def build_report(
                 "metrics": {
                     "unresolved_scene_files": int(art_summary.get("unresolved_scene_files", -1)),
                     "missing_scene_path": int(art_summary.get("missing_scene_path", -1)),
+                    "invalid_biome_token": int(art_summary.get("invalid_biome_token", -1)),
                     "unsupported_scene_path": int(art_summary.get("unsupported_scene_path", -1)),
                     "missing_map_ready": int(art_summary.get("missing_map_ready", -1)),
                     "missing_include_in_map_data": int(
