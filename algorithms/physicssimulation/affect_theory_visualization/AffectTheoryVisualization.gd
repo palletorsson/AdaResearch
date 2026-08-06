@@ -12,6 +12,88 @@ var affective_flows := []
 var intensity_levels := {}
 var touch_responses := []
 
+# ═══════════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — individuation × locus (promoted 2026-08-06)
+# ═══════════════════════════════════════════════════════════════════════
+#
+# THIS FILE HAD NO EXPORTS AT ALL. Everything it argues was a constant, and the
+# thing it argues hardest was invisible: the six names in the `affects` table
+# below — joy, fear, anger, sadness, surprise, disgust — never reach the eye.
+# They pick a colour and a motion rule and then stay in the source. What a
+# viewer meets is coloured blobs, a bar field and some ripples. Whether that
+# reads as a claim about feeling or as a physics demo written with emotional
+# variable names is the artifact's own open question, and until now there was no
+# way to ask it, because there was only ever one answer on the floor.
+#
+#   individuation  WHAT AN AFFECT IS TAKEN TO BE, decided at the one place the
+#                  six names ever become visible: their colour.
+#                    named      six affects, six hues — feeling arrives already
+#                               sorted into kinds. Ekman's basic emotions, which
+#                               is the picture affect theory exists to argue
+#                               with, and it is the picture this file shipped.
+#                    intensive  one hue for everything, brightness carrying
+#                               intensity alone. Affect as pre-personal
+#                               intensity: how much, never which.
+#                    valence    two poles, warm and cool, brightness by strength.
+#                               The circumplex — feeling reduced to good-or-bad
+#                               times how much of it.
+#                    unmarked   no colour distinction at all. The renaming
+#                               withdrawn, and the simulation left running
+#                               underneath it. The deformations still differ,
+#                               because the MOTION rule is named too, so this
+#                               value asks precisely: without the colour key, is
+#                               there anything here you would call an affect?
+#
+#   locus          WHERE THE PIECE PUTS FEELING. The scene has four displays —
+#                  bodies, transmission, an intensity field, touch — parked 8 m
+#                  apart on four axes, all drawn at once. They are four
+#                  incompatible answers to "where does affect live": in the
+#                  subject, between subjects, in an impersonal field, in the
+#                  event of contact. Drawn together they are co-asserted and
+#                  none of them is argued. Drawn one at a time they are claims.
+#
+# DEFAULTS ARE THE SHIPPED PIECE. named returns each affect's own Color literal
+# untouched, so every material is built from the same three floats as before;
+# dispersed draws all four displays exactly as _process always did. THE
+# SIMULATION IS NEVER GATED at any value — bodies move, affect transmits, touches
+# land and influence their neighbours identically at all twenty combinations.
+# Only what is drawn changes.
+@export_enum("named", "intensive", "valence", "unmarked") var individuation: String = "named"
+@export_enum("dispersed", "bodies", "between", "field", "touch") var locus: String = "dispersed"
+
+const INDIVIDUATIONS: PackedStringArray = ["named", "intensive", "valence", "unmarked"]
+const LOCI: PackedStringArray = ["dispersed", "bodies", "between", "field", "touch"]
+
+## The single hue `intensive` paints everything. Arbitrary ON PURPOSE: the whole
+## claim of that value is that nothing here is distinguished by kind, so no hue
+## can be the right one for any particular affect.
+const INTENSIVE_HUE: Color = Color(0.95, 0.55, 0.35)
+const VALENCE_WARM: Color = Color(1.0, 0.72, 0.25)
+const VALENCE_COOL: Color = Color(0.30, 0.50, 0.90)
+const UNMARKED_GREY: Color = Color(0.72, 0.72, 0.74)
+## Which of the six a valence reading calls positive. Kept OUT of the affects
+## table on purpose — the table is this artifact's own six, and valence is a
+## reading imposed on them from outside, so it is written down separately.
+const POSITIVE_AFFECTS: PackedStringArray = ["joy", "surprise"]
+
+## Bench knobs, NOT axes. 0 leaves the RNG alone, which is the shipped file:
+## initialize_emotional_bodies picks six positions, six sizes, six
+## responsivenesses and six permeabilities with randf_range, so unseeded variants
+## are six different crowds and any difference measured between them is the RNG.
+@export var rng_seed: int = 0
+## See _build_capture_anchor. OFF by default: the shipped scene has no
+## MeshInstance3D in it anywhere and this adds one.
+@export var capture_anchor: bool = false
+
+## Derived from the scene, not guessed. Bodies hang off the $EmotionalBodies
+## container at (-8,0,0) with positions clamped to x,z in [-5,5] and y in
+## [0.5,8]; $AffectiveTransmission at (8,0,0) draws between those same
+## coordinates; the pillar grid under $IntensityFlows at (0,8,0) spans [-5,4]
+## with pillars up to 4 m tall; $DigitalTouch at (0,-8,0) starts ripples inside
+## [-4,4] and grows them a 6 m radius.
+const ANCHOR_CENTRE: Vector3 = Vector3(0.0, 2.0, 0.0)
+const ANCHOR_SIZE: Vector3 = Vector3(26.0, 20.0, 20.0)
+
 # Emotional states based on affect theory
 var affects = [
 	{"name": "joy", "intensity": 0.5, "transmission": 0.8, "color": Color(1.0, 0.8, 0.2)},
@@ -47,8 +129,66 @@ class TouchResponse:
 	var age: float
 
 func _ready() -> void:
+	# 0 is the shipped file and never touches the RNG.
+	if rng_seed != 0:
+		seed(rng_seed)
 	initialize_emotional_bodies()
 	initialize_affective_system()
+	if capture_anchor:
+		_build_capture_anchor()
+
+
+## `individuation` — the one function where the six names become something you
+## can see. `named` returns each affect's own Color literal untouched, so every
+## material downstream is built from exactly the floats it was built from before.
+func _affect_color(affect: Dictionary) -> Color:
+	var base: Color = affect.get("color", Color.WHITE)
+	match individuation:
+		"intensive":
+			var lit: float = 0.35 + 0.65 * clamp(float(affect.get("intensity", 0.5)), 0.0, 1.0)
+			# Alpha is rebuilt at 1.0 rather than scaled: three of the five callers
+			# hand this straight to albedo_color with no transparency flag set, and
+			# a fourth overwrites the alpha anyway. Scaling it would be a value
+			# nothing reads today and a bug the first time something does.
+			return Color(INTENSIVE_HUE.r * lit, INTENSIVE_HUE.g * lit, INTENSIVE_HUE.b * lit, 1.0)
+		"valence":
+			var pole: Color = VALENCE_COOL
+			if POSITIVE_AFFECTS.has(str(affect.get("name", ""))):
+				pole = VALENCE_WARM
+			var strength: float = 0.40 + 0.60 * clamp(float(affect.get("intensity", 0.5)), 0.0, 1.0)
+			return Color(pole.r * strength, pole.g * strength, pole.b * strength, 1.0)
+		"unmarked":
+			return UNMARKED_GREY
+	return base
+
+
+## `locus` — which claim about where affect lives is on show. Drawing only: every
+## caller of this still runs its simulation first, so the bodies move, the flows
+## advance and the touches influence their neighbours at every value.
+func _shows(part: String) -> bool:
+	return locus == "dispersed" or locus == part
+
+
+## A capture bench cannot see this artifact at all, and that is a fact about the
+## BENCH rather than the work: every body, particle, pillar and ripple here is a
+## CSGShape3D, and the AABB pass counts MeshInstance3D and MultiMeshInstance3D
+## only. Finding neither it falls back to a 1 m box at the origin — and there is
+## nothing at the origin, because all four displays are parked 8 m out. It would
+## photograph empty air and score the axis dead.
+##
+## So: one BoxMesh on layers = 0, rendered by no camera, measured by the walk,
+## sized from the container offsets and the clamps in apply_emotional_physics.
+## OFF by default, because a 26 m mesh would also change what the grid's
+## auto-grounding measures for the 3 existing placements.
+func _build_capture_anchor() -> void:
+	var anchor := MeshInstance3D.new()
+	anchor.name = "CaptureAnchor"
+	var box := BoxMesh.new()
+	box.size = ANCHOR_SIZE
+	anchor.mesh = box
+	anchor.layers = 0
+	anchor.position = ANCHOR_CENTRE
+	add_child(anchor)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -112,9 +252,11 @@ func simulate_emotional_bodies() -> void:
 		
 		# Apply soft body physics with emotional modulation
 		apply_emotional_physics(body)
-		
-		# Visualize emotional body
-		create_emotional_body_visualization(container, body, i)
+
+		# Visualize emotional body — the only gated line. The two calls above are
+		# the simulation and run at every value of `locus`.
+		if _shows("bodies"):
+			create_emotional_body_visualization(container, body, i)
 
 func update_affective_influence(body: EmotionalBody, body_index: int) -> void:
 	# Affect transmission between bodies
@@ -221,36 +363,34 @@ func create_emotional_body_visualization(container: Node3D, body: EmotionalBody,
 	var size_modulation = 1.0 + body.current_affect.intensity * 0.5
 	body_sphere.radius = body.size * size_modulation
 	body_sphere.position = body.position
-	
-	# Apply emotional deformation
+
+	# Apply emotional deformation. NOT gated by `individuation`: the motion rule
+	# is named too, and `unmarked` is the question "is the behaviour alone legible
+	# as affect", which is only a question if the behaviour survives.
 	var deformation = get_emotional_deformation(body.current_affect.name, index)
 	body_sphere.scale = deformation
-	
+
+	var col: Color = _affect_color(body.current_affect)
 	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(
-		body.current_affect.color.r,
-		body.current_affect.color.g,
-		body.current_affect.color.b,
-		0.7
-	)
+	material.albedo_color = Color(col.r, col.g, col.b, 0.7)
 	material.flags_transparent = true
 	material.emission_enabled = true
-	material.emission = body.current_affect.color * body.current_affect.intensity * 0.6
+	material.emission = col * body.current_affect.intensity * 0.6
 	material.metallic = 0.1
 	material.roughness = 0.8
 	body_sphere.material_override = material
-	
+
 	container.add_child(body_sphere)
-	
+
 	# Add affect label (small indicator)
 	var affect_indicator = CSGBox3D.new()
 	affect_indicator.size = Vector3(0.2, 0.2, 0.2)
 	affect_indicator.position = body.position + Vector3(0, body.size + 0.5, 0)
-	
+
 	var indicator_material = StandardMaterial3D.new()
-	indicator_material.albedo_color = body.current_affect.color
+	indicator_material.albedo_color = col
 	indicator_material.emission_enabled = true
-	indicator_material.emission = body.current_affect.color * 0.8
+	indicator_material.emission = col * 0.8
 	affect_indicator.material_override = indicator_material
 	
 	container.add_child(affect_indicator)
@@ -315,19 +455,21 @@ func visualize_affective_transmission() -> void:
 			
 			particle.position = flow.source.lerp(flow.target, particle.progress)
 			
-			# Visualize particle
-			if particle.progress < 1.0:
+			# Visualize particle. The progress integration above is the simulation
+			# and is never gated; only this drawing is.
+			if particle.progress < 1.0 and _shows("between"):
 				var particle_sphere = CSGSphere3D.new()
 				particle_sphere.radius = particle.size
 				particle_sphere.position = particle.position
-				
+
 				var affect_data = affects.filter(func(a): return a.name == flow.affect_type)[0]
+				var col: Color = _affect_color(affect_data)
 				var material = StandardMaterial3D.new()
-				material.albedo_color = affect_data.color
+				material.albedo_color = col
 				material.emission_enabled = true
-				material.emission = affect_data.color * flow.intensity
+				material.emission = col * flow.intensity
 				particle_sphere.material_override = material
-				
+
 				container.add_child(particle_sphere)
 		
 		# Remove completed flows
@@ -342,7 +484,12 @@ func demonstrate_intensity_flows() -> void:
 	# Clear previous visualization
 	for child in container.get_children():
 		child.queue_free()
-	
+
+	# The clear above still runs at every value, so switching `locus` away from
+	# the field leaves no stale pillars standing.
+	if not _shows("field"):
+		return
+
 	# Create intensity field visualization
 	var grid_size = 10
 	for i in range(grid_size):
@@ -372,16 +519,17 @@ func demonstrate_intensity_flows() -> void:
 				intensity_pillar.size = Vector3(0.4, total_intensity * 4.0, 0.4)
 				intensity_pillar.position = pos + Vector3(0, intensity_pillar.size.y * 0.5, 0)
 				
+				var pillar_col: Color = _affect_color(dominant_affect)
 				var material = StandardMaterial3D.new()
 				material.albedo_color = Color(
-					dominant_affect.color.r,
-					dominant_affect.color.g,
-					dominant_affect.color.b,
+					pillar_col.r,
+					pillar_col.g,
+					pillar_col.b,
 					0.6
 				)
 				material.flags_transparent = true
 				material.emission_enabled = true
-				material.emission = dominant_affect.color * total_intensity * 0.4
+				material.emission = pillar_col * total_intensity * 0.4
 				intensity_pillar.material_override = material
 				
 				container.add_child(intensity_pillar)
@@ -408,6 +556,12 @@ func show_digital_touch_responses() -> void:
 		if response.age > 3.0:
 			touch_responses.remove_at(i)
 			continue
+
+		# The ageing above is the simulation and runs at every value of `locus`;
+		# only the ripple and the haptic sphere below are gated.
+		if not _shows("touch"):
+			i += 1
+			continue
 		
 		# Create ripple effect
 		var ripple = CSGCylinder3D.new()
@@ -416,17 +570,18 @@ func show_digital_touch_responses() -> void:
 		ripple.position = response.position
 		
 		var affect_data = affects.filter(func(a): return a.name == response.affect_type)[0]
+		var touch_col: Color = _affect_color(affect_data)
 		var material = StandardMaterial3D.new()
 		var alpha = (1.0 - response.age / 3.0) * response.intensity
 		material.albedo_color = Color(
-			affect_data.color.r,
-			affect_data.color.g,
-			affect_data.color.b,
+			touch_col.r,
+			touch_col.g,
+			touch_col.b,
 			alpha * 0.4
 		)
 		material.flags_transparent = true
 		material.emission_enabled = true
-		material.emission = affect_data.color * alpha * 0.6
+		material.emission = touch_col * alpha * 0.6
 		ripple.material_override = material
 		
 		container.add_child(ripple)
@@ -437,9 +592,9 @@ func show_digital_touch_responses() -> void:
 		haptic_sphere.position = response.position + Vector3(0, sin(response.age * 5) * 0.5, 0)
 		
 		var haptic_material = StandardMaterial3D.new()
-		haptic_material.albedo_color = affect_data.color
+		haptic_material.albedo_color = touch_col
 		haptic_material.emission_enabled = true
-		haptic_material.emission = affect_data.color * alpha
+		haptic_material.emission = touch_col * alpha
 		haptic_sphere.material_override = haptic_material
 		
 		container.add_child(haptic_sphere)
@@ -476,5 +631,32 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Map tokens: "affect_theory_visualization#individuation:unmarked",
+## "affect_theory_visualization#locus:field".
+##
+## THERE IS NOTHING TO REBUILD HERE, and that is not laziness. _process frees
+## every child of all four containers and builds them again from scratch on every
+## single frame, so a value set at any moment is on screen at the next one. The
+## trap this loop has fallen into before — force_pad tearing down eight
+## placements on a call that named nothing it owned — cannot arise, because there
+## is no teardown to schedule. A word the code cannot build is refused rather
+## than accepted and silently rendered as the default.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("individuation"):
+		var want: String = str(config["individuation"]).strip_edges().to_lower()
+		if INDIVIDUATIONS.has(want):
+			individuation = want
+		elif want != "":
+			push_warning("affect_theory_visualization: unknown individuation '%s' — keeping '%s'"
+				% [want, individuation])
+
+	if config.has("locus"):
+		var want_locus: String = str(config["locus"]).strip_edges().to_lower()
+		if LOCI.has(want_locus):
+			locus = want_locus
+		elif want_locus != "":
+			push_warning("affect_theory_visualization: unknown locus '%s' — keeping '%s'"
+				% [want_locus, locus])
+
+	if config.has("rng_seed"):
+		rng_seed = int(config["rng_seed"])

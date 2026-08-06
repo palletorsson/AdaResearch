@@ -6211,6 +6211,37 @@
    "tags": [
     "3d"
    ],
+   "dna": {
+    "promoted": "2026-08-06",
+    "stage": "2 - variation",
+    "framing": 0.21,
+    "fixture": {
+     "metaball_seed": 7,
+     "pose_time": 3.0
+    },
+    "axes": {
+     "fusion": [
+      "distinct",
+      "necked",
+      "lobed",
+      "single"
+     ],
+     "metaball_count": [
+      1,
+      3,
+      5,
+      9
+     ]
+    },
+    "default": "fusion=distinct, metaball_count=9 - both a deliberate no-op. distinct SHORT-CIRCUITS: _blend() hands back the raw exported blend_factor rather than FUSION_K's 0.4, so a scene overriding blend_factor in the inspector is not retuned by this promotion and a map naming blend_factor directly still wins. 9 is metaball.gdshader's own array length, so at the default the two parking loops have ZERO iterations and the three arrays handed to the shader are byte for byte what they always were, in the same order, from the same unseeded randf_range calls in the same sequence. metaball_seed 0 is the shipped global RNG and pose_time -1.0 is the shipped Time.get_ticks_msec() clock. All 3 placements of this token (ISO_ImplicitModeling at 'implicit_surface_modeling:0:2', Corridor_ISO_ImplicitModeling, ProceduralGeneration_Five) carry the bare token with no config keys, so apply_grid_config - a bare `pass` before this pass - reaches no assignment and never rebuilds. The same holds for the two SIBLING TOKENS that share this scene, see `kin`.",
+    "was": "eight @export knobs and not one categorical among them: one flag and seven magnitudes, two of which nothing reads. apply_grid_config's whole body was `pass`, so blend_factor - the @identity's own declared critical_parameter - was unreachable from any map token. The runner refused the token for NO TURNABLE KNOBS, which was a fact about the KIND of knob, not about the artifact.",
+    "finding": "THIS ARTIFACT IS NON-DETERMINISTIC TWICE OVER, and either fault alone would have made a sweep measure noise and report it as an axis. (1) The radii come from an unseeded randf_range(0.5, 1.0), so every instantiation is a different object - the trap the brief names as 'confident bite on a generative artifact'. (2) Worse and less obvious: _process OVERWRITES all nine positions every frame from Time.get_ticks_msec(), so the initial positions never survive one frame and two tiles captured 1.5 s apart photograph two different poses of the same field. Both are pinned by dna.fixture rather than by an axis, for cantor_set's build_mode reason. SEPARATELY: min_strength (0.8) and max_strength (1.2) are exported and READ BY NOTHING - every metaball is created at base_strength with a hard-coded radius range - and metaball.gdshader hard-codes its uniform arrays at 9 slots and its loop at `i < 9`, so any count above 9 was silently impossible and any count below 9 would have handed the shader a short array whose remaining slots read as radius-0 spheres sitting at the world origin, which smin then glues the field to. Nothing was rewired: the dead exports stay dead and documented, the count is clamped to the shader's own ceiling and the spare slots are parked a kilometre out at strength 0.",
+    "kin": "ONE SCENE, THREE REGISTRY NAMES - the corpus's most common hidden family, found again here. implicit_surface_modeling, `metaballs` (procgen_extra.json) and `raymarched_metaballs` (isosurfaces.json) all resolve to metaballs.tscn, and the siblings are placed too: ISO_Metaballs carries both at 'metaballs:0:2' and 'raymarched_metaballs:0:0:0.2', Corridor_ISO_Metaballs carries both, Curation_Bay_isosurfaces_4 rosters raymarched_metaballs, and 'metaballs' appears in several Trial_* rosters. The code change therefore reaches all three, which is safe precisely because both defaults are no-ops; the declaration is made on this token only and the siblings are named here so the next pass can copy it deliberately rather than discover the family again. fusion is a NEW word and sierpinski_pyramid's `packing` was considered and REFUSED. packing's four values - fused | contact | open | dust - name exactly these four pictures, and the shipped state here would sit at `open`. But packing is an atom's claim on its own cell, driven by a size multiplier with the lattice and the count held fixed, and `dust` withdraws the atom to a point. Here the radii come from the sample and only the smin k moves, so `dust` cannot be built at all. Taking the word and dropping one of its answers is the folding_past fault - the dishonest half of a shared vocabulary - so the word is left to the artifact that can answer it in full. metaball_count is a numeric axis in the manner of multiple_ring.count, star_primitive.points and noise_space.octaves: declared sample points along a range rather than names.",
+    "note": "fusion is the artifact's own truth made variable. 'A function plus a threshold is already a shape' has until now been argued at exactly one threshold. smin(a, b, k) only acts where |a - b| < k, so the shipped k = 0.4 against inter-ball gaps of one to three metres NEVER ENGAGES - the shipped picture is nine separate spheres, and that is why the shipped value is named distinct and the ladder runs upward only. necked opens the bridges between near neighbours, lobed merges them into clusters, single closes the whole field into one mass. metaball_count is the other half of the same claim: at 1 there is no sum at all and this is an SDF sphere, so the implicit-surface argument only exists from 2 upward.",
+    "still_note": "MEASURED BEFORE DECLARING, by re-implementing metaball.gdshader's map() and smin() in numpy and sphere-tracing the silhouette from capture_config_sweep's own YAW 0.62 / PITCH -0.26 direction at the framing below. fusion against the shipped k=0.4: necked 5.1%, lobed 15.1%, single 40.5% of frame, with consecutive steps of 5.1%, ~10% and ~25%. A fifth rung at k=0.02 was TRIED AND DROPPED at 0.04% - the example_8_4 fault caught before it shipped rather than after. metaball_count against the shipped 9: count 5 is 5.1%, count 3 is 7.9%, count 1 is 13.5%. dna.framing is 0.21 and it is not cosmetic: the only MeshInstance3D here is the 12 m ray-marching box, so fit-to-AABB would frame a 39 m shot for a 5 m blob and every rung would measure as noise. 0.21 puts the camera 13.6 m from centre - outside the box, and inside the shader's own t > 20.0 ray cutoff, which a looser framing would cross and render nothing at all. At count 1 the subject is about 3% of frame; that is the true picture of one sphere, not a framing fault.",
+    "declines": "base_strength, min_strength and max_strength stay plain exports: the first is a magnitude that only rescales radii, and the other two are dead. animate_strength stays a flag - it is a rate, invisible to a still, and the fixture pins the clock it runs on. world_offset is placement, not argument.",
+    "placements": 3
+   },
    "geometry_spec": {
     "mesh_type": "shader_driven",
     "topology": "planar",
@@ -6656,6 +6687,32 @@
    "tags": [
     "3d"
    ],
+   "dna": {
+    "promoted": "2026-08-06",
+    "stage": "2 - variation",
+    "framing": 0.5,
+    "axes": {
+     "tick": [
+      "once",
+      "coarse",
+      "fine"
+     ],
+     "head": [
+      "arch",
+      "lintel",
+      "gable",
+      "catenary"
+     ]
+    },
+    "default": "tick=fine, head=arch - fine SHORT-CIRCUITS: _levels() hands back the shipped `iterations` rather than the table's 4, which matters because the @export default is 4 and a scene is free to override it, and deriving the rung from the table would silently retune it. arch returns the original map_to_arch body line for line - the same PI * (1 - t) angle, the same portal_width/2 radius, the same point.z * 0.5 radial offset - and never touches the new head-curve code at all. rotation_speed stays 0.0, line_width stays the .tscn's 0.2, depth_layers stays 6. All 3 placements (Fractal_KochSierpinski at 'koch_curve_3d:0:-0.5', Corridor_Fractal_KochSierpinski, RecursiveEmergence_Iterated_Function_Systems_IFS) carry the bare token with no config keys, so apply_grid_config - a bare `pass` before this pass - reaches no assignment and never rebuilds. THE AXIS DEFAULTS PRESERVE THE GEOMETRY EXACTLY; the SCENE SHAPE changed and is a repair, see `finding`.",
+    "was": "eight @export knobs and not one categorical among them - a count, five lengths, a spacing and a rotation rate - and apply_grid_config's whole body was `pass`. Worse than unreachable: the script was not on the scene root at all, so no map token could address it by any route. The runner refused the token for NO TURNABLE KNOBS, which was a fact about the kind of knob and about the scene shape, not about the artifact.",
+    "finding": "TWO DEFECTS, both older than this promotion. (1) THE SCRIPT WAS NOT ON THE ROOT. KochCurve3D.tscn was [Main] (unscripted Node3D) with the script on a KochCurve3D child alongside the camera and the light. GridInteractablesComponent sets config_* metadata and calls apply_grid_config on the ROOT (line 1672), so `iterations` - which this artifact's own @identity names as its critical_parameter - has never been reachable from a map, and the README's documented usage `portal.iterations = 5` on the instantiated scene has never done anything. The script now sits on the root, carrying the four overrides the child held (line_width 0.2, portal_width 3.0, depth_layers 6, layer_spacing 0.2) at the child's identity transform, so the drawn geometry is unchanged to the millimetre. (2) THE FRACTAL SATURATES TWO GENERATIONS BELOW WHAT IT SHIPS. Every segment is a cylinder of radius line_width = 0.2 m; the bump added at generation n has amplitude (4.71 / 3^n) * sqrt(3)/2 * 0.5, which is 0.076 m at n=3 and 0.025 m at n=4. Measured by re-implementing the geometry in Python and rasterising the tube union at the sweep's framing: against the shipped iterations=4, iteration 3 differs by 0.27% of frame and iteration 5 by 0.03%. Iterations 3, 4, 5 and 6 are one photograph. The three maps are paying for 2304 cylinders to draw a picture 144 of them already made. Nothing was changed about it - a smaller line_width would be a regression on three live rooms - but the ladder is declared honestly around it.",
+    "kin": "tick is cantor_set's, zeno_staircase's, sierpinski_pyramid's, cube_subdivision's and menger_sponge's word, and once | coarse | fine are the first three of the family's five names character for character. THE LADDER STOPS AT THREE FOR A REASON THAT IS NOT MENGER'S, and the difference is the point. Menger stops because each tick multiplies its cube count by 20. Koch's multiplies by only 4, so 4^5 = 1024 arch segments is affordable - what stops this ladder is THE LINE THICKNESS, a fact about how the artifact is drawn rather than about the rule it draws. The integers behind the names are this artifact's own (1, 2, 4), and 3 is SKIPPED rather than named, because measurement put it 0.27% from the shipped rung: declaring `dense` and `limit` here would be the example_8_4 fault, rungs that exist in the enum and cannot be told apart. head is a NEW word and deliberately not koch_curve's `evidence`: the 2D sibling asks what a finished figure shows of its own iteration, which is a question about teaching. This one is a DOORWAY, and its question is which architecture the curve is bent into - arcuated, trabeated, pitched or funicular. Taking `evidence` would have meant answering a question this object does not ask.",
+    "note": "head is the artifact's own claim made variable. Its @identity has always said the Koch bumps 'become architectural ornament', and until now the architecture was one hard-coded semicircle. Every value maps the IDENTICAL Koch point list and throws the IDENTICAL point.z * 0.5 displacement; only the curve the points lie on, and the outward normal they are displaced along, change. All four share the springing points at (+/- portal_width/2, leg_height) so the legs meet the head exactly, and all but lintel share the crown at leg_height + portal_width/2, so this is a curvature axis and not a size axis. lintel is the one that drops the crown by 1.5 m, and it is the honest degenerate case: the fractal admitted to be ornament on a straight beam.",
+    "still_note": "head is the strong axis and is legible by construction - a static silhouette, complete at frame zero. Measured on a rasterised tube union at the union framing: lintel 15.2%, gable 8.8%, catenary 4.1% of frame against arch, and no pair of the four closer than 4.1%. tick is the thinner measurement and the numbers are stated so no one has to guess: once is 7.4% from the shipped rung and coarse is 1.9%, so COARSE SITS JUST UNDER THE 2% BITE FLOOR and should be crop-rechecked before anyone believes an INERT verdict on it - it is thin for the reason in `finding`, not because the rule does nothing. dna.framing is 0.5 because the union AABB is roughly 4.8 x 4.1 x 1.2 m of very thin tubing: at framing 1.0 the sweep would photograph a 12 m frame for a 4.8 m subject and the lit pixels would be about 3% of it.",
+    "declines": "line_width, portal_width, leg_height, depth_layers and layer_spacing stay plain exports: they are sizes, and a size axis is the thing this loop exists not to ship. rotation_speed is time-domain and invisible to a still. portal_height is DEAD - nothing reads it, the crown has always been derived from portal_width - and it was deliberately not repurposed, because giving a dead export meaning changes what a scene that sets it draws.",
+    "placements": 3
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",
@@ -8218,6 +8275,32 @@
    },
    "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
    "size_group": "world_scale",
+   "dna": {
+    "promoted": "2026-08-06",
+    "stage": "2 - variation",
+    "framing": 0.21,
+    "fixture": {
+     "metaball_seed": 7,
+     "pose_time": 3.0
+    },
+    "axes": {
+     "fusion": [
+      "distinct",
+      "necked",
+      "lobed",
+      "single"
+     ],
+     "metaball_count": [
+      1,
+      3,
+      5,
+      9
+     ]
+    },
+    "default": "fusion=distinct, metaball_count=9 - the shipped no-op on both. distinct short-circuits to the raw exported blend_factor; 9 is the shader's own array length, so the parking loops have zero iterations and the arrays are byte for byte what they were. This token is placed at 'metaballs:0:2' in ISO_Metaballs, in Corridor_ISO_Metaballs and in several Trial_* rosters, all bare, so apply_grid_config reaches no assignment and never rebuilds.",
+    "kin": "SIBLING DECLARATION. This token, implicit_surface_modeling (procgen_extra.json) and raymarched_metaballs (isosurfaces.json) are three registry names on ONE scene, metaballs.tscn. The axes, the values, the fixture and the framing are copied character for character from implicit_surface_modeling, which carries the full reasoning, the measurements and the findings. They must measure ALIKE; if they do not, the difference is in the bench and not in the artifact.",
+    "placements": 2
+   },
    "tags": [
     "3d"
    ],
@@ -10824,6 +10907,23 @@
    "category": "unknown",
    "complexity": "intermediate",
    "description": "stochastic_tree_separated",
+   "dna": {
+    "promoted": "2026-08-06",
+    "stage": "2 - variation",
+    "axes": {
+     "habit": ["planar", "fanned", "whorled", "spiral"],
+     "settlement": ["live", "settled", "grown"]
+    },
+    "default": "habit=planar, settlement=live - both no-ops. planar resolves to a roll of exactly 0.0 and the rotation is SKIPPED rather than applied as a zero turn, so _grow_tree hands _rotate_vector the literal Vector3.FORWARD and Vector3.RIGHT it always passed, at every level, and the same randf_range calls run in the same order; live is _ready's original tail line for line (reset the deepest level's velocities, is_separating = true, set_process(true)). rng_seed stays 0, which keeps the shipped randomize(). Nothing in the 3 existing placements changes.",
+    "was": "the fork always turned about the WORLD axis Vector3.FORWARD and the third branch always leaned out on the WORLD axis Vector3.RIGHT, hard-coded at every level of _grow_tree, so the tree was a flat drawing with one branch out of plane and no way to say otherwise; and the separation phase always ran live, once, over separation_duration seconds per level - 15 s at the shipped values - so the artifact's own truth statement (a canopy is negotiated, not designed) could only be seen by someone standing there for the whole of it.",
+    "family": "habit is branching_vine's word, its four values and its mechanism - a roll of the branching plane applied at each descent, 0 / 30 / 90 / 137.5 degrees. The table is PRELOADED out of branching_vine.gd rather than retyped, so the two artifacts sharing the word cannot drift into two vocabularies. Deliberately NOT growth_form: branching_coral's five values are coral names (staghorn, fan, table, whip, brain) and taking that word would mean answering it with a list this artifact does not have.",
+    "fixture": {
+     "rng_seed": 20260806
+    },
+    "fixture_why": "'stochastic' is the artifact's first name: every fork angle and every child length is a randf_range and _ready calls randomize(). Unseeded, five swept variants are five different trees and the critic would measure the RNG. rng_seed defaults to 0, which is the shipped randomize(), so pinning it is a bench act only.",
+    "note": "settlement=live is NOT REPRODUCIBLE and that is a fact about the artifact, not the bench: _apply_separation accumulates velocity per FRAME (`branch_a.velocity += force`) and multiplies only the offset by delta, so how far the canopy has opened at capture time depends on the frame rate. settled and grown are both static states and are byte-stable under a fixed seed. The pre-existing frame-rate coupling was left alone - fixing it would change what the 3 placements do.",
+    "not_an_axis": "recursion_depth, base_angle, angle_variance, length_reduction, length_variance, separation_strength, separation_duration, upward_bias and upward_alignment_strength are the nine exports this file already had, and every one is a MAGNITUDE: the same tree bigger, wider, twitchier or slower. separation_duration in particular is a DURATION, which one still cannot hold at all."
+   },
    "dev_themes": [
     "generation",
     "procedural"

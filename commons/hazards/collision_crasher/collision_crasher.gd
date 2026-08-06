@@ -26,6 +26,83 @@ class_name CollisionCrasher
 @export_group("Combat")
 @export var block_damage: float = 10.0
 
+# ─────────────────────────────────────────────────────────────────────
+#  STAGE-2 DNA — promoted 2026-08-06 (hand promotion; the runner refused
+#  this token for NO TURNABLE KNOBS, which was a fact about the KIND of
+#  knob: seven exports, every one of them a count, a length, a spring
+#  constant, a damping rate or a damage number, and not one categorical
+#  among them.)
+#
+#  tether — WHETHER THE CONSTRAINT IS DRAWN AT ALL. This artifact is
+#           called CollisionCrasher, its class doc says "5 tethered
+#           BoxMesh blocks", its @identity names "tether length" as its
+#           critical parameter, and there has never been a tether in it.
+#           The blocks are held by a spring force computed in
+#           _process_visual and nothing in the scene depicts it, so what
+#           a player meets is five cubes hovering near a sphere for no
+#           visible reason. The law is the whole content of the object
+#           and it is the one thing not drawn.
+#
+#             none    the shipped silence. Builds nothing; _build_tether
+#                     returns on the first line.
+#             line    one thin rod per block, body to block, in the
+#                     block's own colour, following it every frame. The
+#                     spring as a link: it shows that each block is held
+#                     to the CENTRE and not to its neighbours.
+#             cage    three orthogonal great circles at tether_radius.
+#                     The boundary as a wireframe, so the blocks inside
+#                     it stay visible while the surface they are being
+#                     pulled back to becomes a place.
+#             shell   the same boundary as one translucent sphere. The
+#                     constraint as a volume rather than a hint - the
+#                     envelope the spring defends, drawn.
+#
+#           IT IS AN ORDINAL LADDER: nothing, the individual links, the
+#           boundary implied, the boundary made solid.
+#
+#  block_seed is the FIXTURE, not an axis, for bouncing_ball's ball_seed
+#  reason. _build_mesh draws three unseeded randf_range values per block
+#  - a y offset, a launch speed and a mass - so five variants would be
+#  five different objects and the sweep would measure the draw. seed 0 is
+#  the shipped global RNG, call for call, in the same order.
+#
+#  AND A SECOND FIXTURE KEY WITH A HARDER REASON, patrol_speed = 0.0.
+#  This is a CharacterBody3D that walks. At the shipped patrol_speed of
+#  1.5 m/s it crosses 1.65 m during the bench's 1.1 s settle while the
+#  whole artifact is 0.9 m across, and the camera was placed from a
+#  0.35 s pre-pass - so it simply leaves the frame. fractal_hydra, the
+#  other promoted HazardCreatureBase, pins the same two keys for the
+#  same reason.
+#
+#  DECLINED, on the record so nobody reopens it. `regime` - bouncing
+#  ball's restitution word, and the obvious second axis here, since the
+#  block-block impulse (2.0 * v_n) / (m1 + m2) is a hard-coded e = 1.
+#  Refused because restitution is a RATE OF ENERGY LOSS and the evidence
+#  is one still: five 8 cm cubes photographed at an arbitrary instant of
+#  a chaotic five-body bounce, where elastic and inelastic differ only in
+#  how far apart they happen to be. bouncing_ball hit exactly this and
+#  stepped around it by drawing a PREDICTED envelope, h(n) = h0 e^(2n),
+#  as static geometry. There is no closed-form envelope for this system
+#  - and the thing that would stand in for one, the boundary the blocks
+#  are held inside, is already what `tether` draws. `configuration` -
+#  three_body_problem's and nbody_simulation's word for the initial
+#  condition - refused too, and measured rather than guessed: nbody
+#  qualifies for it because its bodies drift ~0.002 per frame against a
+#  0.35 m radius, so t=0 survives the settle. Here a block starts at
+#  0.5-1.5 m/s inside a 0.4 m tether and has crossed its own cage many
+#  times over before the shutter falls. The initial condition is gone.
+# ─────────────────────────────────────────────────────────────────────
+
+## Allow-list. A typo in a map token falls back to the shipped silence.
+const TETHERS: Array[String] = ["none", "line", "cage", "shell"]
+## Half-thickness of a drawn tether rod, and of a cage ring.
+const TETHER_LINE_RADIUS: float = 0.006
+const TETHER_RING_RADIUS: float = 0.008
+
+@export_enum("none", "line", "cage", "shell") var tether: String = "none"
+## 0 keeps the shipped global RNG, call for call. Non-zero seeds a local one.
+@export var block_seed: int = 0
+
 # ── State ──────────────────────────────────────────────────────────────
 var _blocks: Array[Dictionary] = []
 # {mesh, mat, position, velocity, mass, color}
@@ -37,6 +114,11 @@ var _total_ke: float = 0.0
 var _total_momentum: float = 0.0
 var _leg_roots: Array[Node3D] = []
 var _walk_phase: float = 0.0
+## Drawn tether rods, one per block, only when tether == "line".
+var _tether_lines: Array[MeshInstance3D] = []
+## Non-null only when block_seed != 0. Null is the shipped global RNG.
+var _rng: RandomNumberGenerator = null
+var _built: bool = false
 
 var _block_colors: Array[Color] = [
 	Color(0.9, 0.2, 0.15),   # Red
@@ -69,8 +151,21 @@ func _build_collision() -> void:
 	add_child(col)
 
 
+## The shipped draw when block_seed is 0 — the same global randf_range, in the
+## same order. Only a non-zero seed diverts to a local stream.
+func _block_randf(lo: float, hi: float) -> float:
+	if _rng == null:
+		return randf_range(lo, hi)
+	return _rng.randf_range(lo, hi)
+
+
 func _build_mesh() -> void:
 	_mesh_root.position.y = 0.45
+
+	_rng = null
+	if block_seed != 0:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = block_seed
 
 	# Central body
 	var body := SphereMesh.new()
@@ -96,20 +191,20 @@ func _build_mesh() -> void:
 		var angle: float = (float(i) / float(num_blocks)) * TAU
 		var start_pos := Vector3(
 			cos(angle) * tether_radius * 0.5,
-			randf_range(-0.1, 0.1),
+			_block_randf(-0.1, 0.1),
 			sin(angle) * tether_radius * 0.5
 		)
 
 		# Initial velocity: tangential
 		var tangent := Vector3(-sin(angle), 0, cos(angle))
-		var start_vel: Vector3 = tangent * randf_range(0.5, 1.5)
+		var start_vel: Vector3 = tangent * _block_randf(0.5, 1.5)
 
 		_blocks.append({
 			"mesh": mi,
 			"mat": mat,
 			"position": start_pos,
 			"velocity": start_vel,
-			"mass": 1.0 + randf_range(-0.2, 0.2),
+			"mass": 1.0 + _block_randf(-0.2, 0.2),
 			"color": color,
 		})
 
@@ -141,6 +236,97 @@ func _build_mesh() -> void:
 	_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_label.modulate = Color(1, 1, 1, 0.85)
 	_mesh_root.add_child(_label)
+
+	# APPENDED LAST so the legacy build above is untouched at the default value.
+	_build_tether()
+	_built = true
+
+
+## Draw the constraint the spring already enforces. `none` — the shipped
+## value — builds nothing and returns on the first line.
+func _build_tether() -> void:
+	_tether_lines.clear()
+	if tether == "none":
+		return
+
+	if tether == "line":
+		# One rod per block, body to block, in the block's own colour. Unit
+		# height: _update_tether_lines scales it along its own Y each frame.
+		for i in range(_blocks.size()):
+			var color: Color = _blocks[i]["color"]
+			var cyl := CylinderMesh.new()
+			cyl.height = 1.0
+			cyl.top_radius = TETHER_LINE_RADIUS
+			cyl.bottom_radius = TETHER_LINE_RADIUS
+			cyl.radial_segments = 6
+			cyl.rings = 1
+			var mi := MeshInstance3D.new()
+			mi.mesh = cyl
+			mi.set_surface_override_material(0, _make_material(color, color * 0.6))
+			mi.name = "Tether_%d" % i
+			_mesh_root.add_child(mi)
+			_tether_lines.append(mi)
+		return
+
+	if tether == "shell":
+		var sph := SphereMesh.new()
+		sph.radius = tether_radius
+		sph.height = tether_radius * 2.0
+		sph.radial_segments = 24
+		sph.rings = 12
+		var smi := MeshInstance3D.new()
+		smi.mesh = sph
+		smi.set_surface_override_material(0,
+			_make_material(Color(0.55, 0.75, 1.0), Color(0.2, 0.35, 0.6), 0.22))
+		smi.name = "TetherShell"
+		_mesh_root.add_child(smi)
+		return
+
+	# cage — the same boundary as three orthogonal great circles, so the
+	# blocks inside it stay visible.
+	for i in range(3):
+		var tor := TorusMesh.new()
+		tor.inner_radius = maxf(tether_radius - TETHER_RING_RADIUS, 0.001)
+		tor.outer_radius = tether_radius + TETHER_RING_RADIUS
+		tor.rings = 32
+		tor.ring_segments = 6
+		var tmi := MeshInstance3D.new()
+		tmi.mesh = tor
+		tmi.set_surface_override_material(0,
+			_make_material(Color(0.55, 0.75, 1.0), Color(0.25, 0.45, 0.8)))
+		tmi.name = "TetherRing_%d" % i
+		if i == 1:
+			tmi.rotation.x = PI * 0.5
+		elif i == 2:
+			tmi.rotation.z = PI * 0.5
+		_mesh_root.add_child(tmi)
+
+
+## Follow the blocks. Only reached when tether == "line".
+func _update_tether_lines() -> void:
+	var n: int = mini(_tether_lines.size(), _blocks.size())
+	for i in range(n):
+		var mi: MeshInstance3D = _tether_lines[i]
+		if not is_instance_valid(mi):
+			continue
+		var pos: Vector3 = _blocks[i]["position"]
+		var d: float = pos.length()
+		if d < 0.002:
+			mi.visible = false
+			continue
+		mi.visible = true
+		# Build the basis by hand rather than with look_at: `pos` is in
+		# _mesh_root's LOCAL space and the creature yaws while it walks, so a
+		# global-space look_at would swing the rods off their blocks.
+		var yv: Vector3 = pos / d
+		var hint: Vector3 = Vector3.UP
+		if absf(yv.dot(hint)) > 0.99:
+			hint = Vector3.RIGHT
+		var xv: Vector3 = yv.cross(hint).normalized()
+		var zv: Vector3 = xv.cross(yv).normalized()
+		# The Y column carries the length, so the unit cylinder spans body
+		# to block in one assignment and no scale decomposition happens.
+		mi.transform = Transform3D(Basis(xv, yv * d, zv), pos * 0.5)
 
 
 func _process_visual(delta: float) -> void:
@@ -205,6 +391,10 @@ func _process_visual(delta: float) -> void:
 		total_p += b["velocity"] * b["mass"]
 
 	_total_momentum = total_p.length()
+
+	# ── Tether rods follow their blocks ───────────────────────────
+	if tether == "line":
+		_update_tether_lines()
 
 	# ── Walk animation ────────────────────────────────────────────
 	if _state == BaseState.PATROL or _state == BaseState.CHASE:
@@ -289,3 +479,52 @@ func _on_state_changed(new_state: BaseState) -> void:
 		# Give blocks extra energy when entering chase
 		for b in _blocks:
 			b["velocity"] *= 1.5
+
+
+## Tear down the visual body and build it again. Only ever reached from
+## apply_grid_config when a declared value ACTUALLY changed after the first
+## build — an unguarded rebuild here would re-run the whole construction on
+## every placement that passes any config key at all, including the ones that
+## only name `health` or `speed`.
+func _rebuild() -> void:
+	for child in _mesh_root.get_children():
+		child.queue_free()
+	_blocks.clear()
+	_impulse_arrows.clear()
+	_leg_roots.clear()
+	_tether_lines.clear()
+	_body_mesh = null
+	_label = null
+	_build_mesh()
+
+
+## Config from a map token. The base class's keys (health, speed, chase_speed,
+## damage, detection_radius) are forwarded first and untouched; the two added
+## here are guarded twice — a value is taken only when it validates AND
+## differs, and _rebuild() fires only after _build_mesh has run once.
+func apply_grid_config(config: Dictionary) -> void:
+	super.apply_grid_config(config)
+	if config.is_empty():
+		return
+
+	var changed: bool = false
+
+	if config.has("tether"):
+		var t: String = str(config["tether"]).to_lower()
+		if TETHERS.has(t) and t != tether:
+			tether = t
+			changed = true
+
+	if config.has("block_seed"):
+		var s: int = int(config["block_seed"])
+		if s != block_seed:
+			block_seed = s
+			changed = true
+
+	if not changed:
+		return
+	# Before the first build there is nothing to tear down — _build_mesh() will
+	# pick the new values up when the base class calls it.
+	if not _built:
+		return
+	_rebuild()

@@ -33,6 +33,61 @@ var floor_y: float = 0.0                     # local-space floor height for anal
 var drone_count: int = 6                     # swarm size
 var arena_radius: float = 9.0                # roam radius for the swarm + ground disc
 
+# ── DNA axes (stage 2, promoted 2026-08-06) ────────────────────────────────
+# THE FAMILY'S WORDS, character for character. catapult, human_catapult and
+# force_pad already split "what is drawn before you commit" into two questions,
+# and this is the same machine one rung further out. A catapult throws a stone at
+# a wall you can see and a force pad throws YOU; a mortar throws a shell at a
+# drone the tube is not pointed at. Direct fire aims AT the target, indirect fire
+# aims a parabola so its FOOT lands on it — which makes this the purest case the
+# word has, because the prediction is not a garnish on the machine, it IS the
+# machine.
+#
+# ONE RUNG IS THIS ARTIFACT'S OWN. On a catapult `landing` had to invent a 0.35 m
+# marker, because a stone lands on a point. A mortar lands on an AREA — aoe_radius,
+# 2.2 m of ground that dies — so the ring this thing already draws IS its landing,
+# at true size. Same rung of the same ladder (the target, not the route), drawn by
+# the weapon's own splash instead of by a nominal dot.
+#
+#   foresight   how much of the shot is handed to you BEFORE you fire
+#               parabola · apex · landing · none
+#   vectors     how "what you give" is drawn at the muzzle
+#               sum · components · velocity · gravity
+#
+# WHY THIS IS NOT DECORATION. At `none` you tip the tube by feel and find out
+# where the shell went; at `landing` the floor already names the patch that will
+# not survive; at `parabola` the whole solution is written before you touch the
+# trigger. Aiming becomes reading, or it stops being reading. The drones are lit
+# red by target-lock at every value, so what changes is what YOU are told, never
+# what the shell does.
+#
+# DEFAULTS ARE THE SHIPPED MORTAR. `parabola` draws the dotted arc AND leaves the
+# AoE ring and its impact dot lit — exactly the 3 placements as they stand. `sum`
+# is the green velocity arrow beside the red gravity arrow, both already built.
+# The two component arrows are not instantiated at all unless `components` asks
+# for them, so the default scene tree and its capture AABB are unchanged.
+#
+# NOTHING BALLISTIC MOVES. The floor-crossing solve runs unconditionally at every
+# value; only the EMIT is gated. _predicted_impact_world, the drone target-lock
+# and every shell fired are byte-identical to before.
+@export_enum("parabola", "apex", "landing", "none") var foresight: String = "parabola"
+@export_enum("sum", "components", "velocity", "gravity") var vectors: String = "sum"
+
+const FORESIGHTS: PackedStringArray = ["parabola", "apex", "landing", "none"]
+const VECTOR_DRAWINGS: PackedStringArray = ["sum", "components", "velocity", "gravity"]
+
+# ── Bench knobs. NOT axes: neither one argues anything. ─────────────────────
+## 0 leaves the global RNG exactly as shipped, so the swarm spawns where it likes.
+## A non-zero value pins it, because _spawn_one_drone() picks every anchor with
+## randf() and the auto-aim then aims at the first drone in the list — so an
+## unseeded DNA sweep photographs five different arenas and calls the difference
+## an axis.
+@export var rng_seed: int = 0
+## The 60 m backdrop sphere and its horizon band. True is the shipped mortar. A
+## capture bench turns it off: a 120 m mesh in the union AABB frames the 0.55 m
+## tube at roughly one pixel, which is a fact about the sphere, not the axis.
+@export var sky_dome: bool = true
+
 # Desktop / headless fallback
 var auto_fire_interval: float = 3.0          # seconds between auto-shots when no controller
 
@@ -86,6 +141,8 @@ var _force_bar_mat: StandardMaterial3D = null
 
 var _velocity_arrow: Node3D = null
 var _gravity_arrow: Node3D = null
+var _vx_arrow: Node3D = null                 # vectors:components — horizontal part
+var _vy_arrow: Node3D = null                 # vectors:components — vertical part
 var _velocity_label: Label3D = null
 var _gravity_label: Label3D = null
 var _readout_label: Label3D = null
@@ -115,6 +172,11 @@ var _predicted_impact_world: Vector3 = Vector3.ZERO   # AoE centre for drone loc
 # Held-controller acquisition (cached when grabbed)
 var _controller: XRController3D = null
 
+# True once _ready has built the body. apply_grid_config refreshes the drawing
+# only after this, so a config arriving before the first build cannot redraw
+# nodes that do not exist yet.
+var _built: bool = false
+
 # Preloaded interactables (kept for parity with sibling artifacts; auto-charge is
 # the primary control, but a console FIRE/RELOAD pair lives on the base too).
 const SLIDER_SCENE := preload("res://commons/interactables/slider_horizontal.tscn")
@@ -129,6 +191,9 @@ signal detonated(impact: Vector3, hits: int)
 # ═════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	# Bench determinism only. 0 is the shipped mortar and never touches the RNG.
+	if rng_seed != 0:
+		seed(rng_seed)
 	_force = min_force
 
 	_shell_container = Node3D.new()
@@ -150,6 +215,7 @@ func _ready() -> void:
 	_spawn_swarm()
 
 	_refresh_visuals()
+	_built = true
 
 
 func _process(delta: float) -> void:
@@ -354,6 +420,8 @@ func _attach_pickable(node: Node3D) -> void:
 ## conflict). Culling is flipped so we see its inside; it is unshaded so it reads
 ## as a glowing sky regardless of scene lighting.
 func _build_sky_dome() -> void:
+	if not sky_dome:
+		return
 	var dome := MeshInstance3D.new()
 	dome.name = "SkyDome"
 	var sphere := SphereMesh.new()
@@ -1489,27 +1557,82 @@ func _update_holographic_pulse() -> void:
 		_impact_dot.scale = Vector3(s, s, s)
 
 
+## The component arrows exist only when the `components` value asks for them, so
+## the default scene tree — and the AABB a capture measures — is the shipped one.
+func _ensure_component_arrows() -> void:
+	if _vx_arrow != null:
+		return
+	_vx_arrow = _create_arrow("VxArrow", velocity_arrow_color)
+	add_child(_vx_arrow)
+	_vy_arrow = _create_arrow("VyArrow", Color(0.35, 0.75, 1.0))
+	add_child(_vy_arrow)
+
+
+## `vectors` — how the launch is written at the muzzle. The default, `sum`, is one
+## velocity arrow beside the constant gravity arrow, which is what this mortar has
+## always drawn.
 func _update_vector_arrows() -> void:
 	var p0 := to_local(_muzzle_world())
 	var aim_local := global_transform.basis.inverse() * _aim_dir_world()
 	var v0 := aim_local.normalized() * _force
 
+	var split: bool = vectors == "components"
+	var show_velocity: bool = vectors != "gravity"
+	var show_gravity: bool = vectors != "velocity"
+	if split:
+		_ensure_component_arrows()
+
 	# Velocity arrow: scaled down so it reads as a direction handle (0.06 m per m/s).
 	var vel_end := p0 + v0 * 0.06
 	if _velocity_arrow:
-		_position_arrow(_velocity_arrow, p0, vel_end)
+		if show_velocity and not split:
+			_position_arrow(_velocity_arrow, p0, vel_end)
+		else:
+			_velocity_arrow.visible = false
+
+	# components — the same launch, written head-to-tail as horizontal + vertical.
+	# On a mortar the horizontal part is the range and the vertical part is the
+	# hang time, which is the whole difference between this and a flat shot.
+	var horiz := Vector3(v0.x, 0.0, v0.z)
+	if _vx_arrow:
+		if split:
+			_position_arrow(_vx_arrow, p0, p0 + horiz * 0.06)
+		else:
+			_vx_arrow.visible = false
+	if _vy_arrow:
+		if split:
+			var vx_end := p0 + horiz * 0.06
+			_position_arrow(_vy_arrow, vx_end, vx_end + Vector3(0.0, v0.y, 0.0) * 0.06)
+		else:
+			_vy_arrow.visible = false
+
 	if _velocity_label:
-		_velocity_label.text = "v0 = %.1f m/s" % _force
-		_velocity_label.position = vel_end + Vector3(0.0, 0.12, 0.0)
+		if split:
+			_velocity_label.text = "vh = %.1f   vy = %.1f" % [horiz.length(), v0.y]
+			_velocity_label.position = vel_end + Vector3(0.0, 0.12, 0.0)
+			_velocity_label.visible = true
+		elif show_velocity:
+			_velocity_label.text = "v0 = %.1f m/s" % _force
+			_velocity_label.position = vel_end + Vector3(0.0, 0.12, 0.0)
+			_velocity_label.visible = true
+		else:
+			_velocity_label.visible = false
 
 	# Gravity arrow: constant downward, fixed visual length, near the muzzle.
 	var g_start := p0 + Vector3(0.22, 0.0, 0.0)
 	var g_end := g_start + Vector3(0.0, -0.45, 0.0)
 	if _gravity_arrow:
-		_position_arrow(_gravity_arrow, g_start, g_end)
+		if show_gravity:
+			_position_arrow(_gravity_arrow, g_start, g_end)
+		else:
+			_gravity_arrow.visible = false
 	if _gravity_label:
-		_gravity_label.text = "g = %.1f m/s^2" % gravity_magnitude
-		_gravity_label.position = g_end + Vector3(0.0, -0.10, 0.0)
+		if show_gravity:
+			_gravity_label.text = "g = %.1f m/s^2" % gravity_magnitude
+			_gravity_label.position = g_end + Vector3(0.0, -0.10, 0.0)
+			_gravity_label.visible = true
+		else:
+			_gravity_label.visible = false
 
 
 ## Live parabola p(t)=p0+v0*t+0.5*g*t^2 (local space) AND the analytic floor
@@ -1524,8 +1647,20 @@ func _update_trajectory_and_aoe() -> void:
 	var v0 := aim_local.normalized() * _force
 	var g := Vector3(0.0, -gravity_magnitude, 0.0)
 
+	# `foresight` gates the EMIT and nothing else. The sampling walk below still
+	# runs at every value, so the impact the AoE ring is laid on — and the one the
+	# drone target-lock reads out of _predicted_impact_world — is found by the same
+	# arithmetic it always was. Switching the solve to the closed form for the
+	# values that skip the walk would move the ring by up to one sample step.
+	var draw_arc: bool = foresight == "parabola"
+	var show_ring: bool = foresight == "parabola" or foresight == "landing"
+	# An ImmediateMesh surface with no vertices is an error, so only open one when
+	# something is actually going to be written into it.
+	var emit_any: bool = draw_arc or foresight == "apex"
+
 	# Dotted parabola, stopping at the floor crossing.
-	_trajectory_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	if emit_any:
+		_trajectory_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	var steps := 96
 	var dt := 0.04
 	var prev := p0
@@ -1535,7 +1670,7 @@ func _update_trajectory_and_aoe() -> void:
 	for i in range(1, steps + 1):
 		var t := i * dt
 		var pos := p0 + v0 * t + 0.5 * g * t * t
-		var draw_segment := have_prev and (i % 2 == 0)
+		var draw_segment: bool = draw_arc and have_prev and (i % 2 == 0)
 		if draw_segment:
 			_trajectory_mesh.surface_set_color(trajectory_color)
 			_trajectory_mesh.surface_add_vertex(prev)
@@ -1553,16 +1688,47 @@ func _update_trajectory_and_aoe() -> void:
 		have_prev = true
 		if found_impact and t > dt:
 			break
-	_trajectory_mesh.surface_end()
+	if foresight == "apex":
+		_emit_apex_marks(p0, v0, g)
+	if emit_any:
+		_trajectory_mesh.surface_end()
 
 	# If the parabola never dipped to the floor (shouldn't with downward g), use
 	# the closed-form positive root of p0.y + v0.y*t - 0.5*g*t^2 = floor_y.
 	if not found_impact:
 		impact_local = _analytic_floor_impact(p0, v0)
 
+	# foresight:landing keeps the splash ring and drops the route; apex and none
+	# drop both. The impact dot is a child of the ring, so one flag carries it.
+	if _aoe_ring:
+		_aoe_ring.visible = show_ring
 	_position_aoe_ring(impact_local)
 	# Cache the predicted impact in world space for drone target-lock.
 	_predicted_impact_world = to_global(impact_local)
+
+
+func _emit_traj_segment(a: Vector3, b: Vector3) -> void:
+	_trajectory_mesh.surface_set_color(trajectory_color)
+	_trajectory_mesh.surface_add_vertex(a)
+	_trajectory_mesh.surface_set_color(trajectory_color)
+	_trajectory_mesh.surface_add_vertex(b)
+
+
+## foresight:apex — the summit only. How HIGH the lob goes and nothing whatever
+## about where it comes down: a tick out of the muzzle, a cross at the peak, and a
+## plumb line to the floor so the height is readable against the painted range.
+## The cross is 0.35 m rather than the catapult's 0.16 m because this machine
+## stands in an 18 m arena and a bench-scale mark would vanish in it.
+func _emit_apex_marks(p0: Vector3, v0: Vector3, g: Vector3) -> void:
+	var dir: Vector3 = v0.normalized()
+	_emit_traj_segment(p0, p0 + dir * 0.30)
+	var t_apex: float = maxf(v0.y / maxf(gravity_magnitude, 0.001), 0.0)
+	var apex: Vector3 = p0 + v0 * t_apex + 0.5 * g * t_apex * t_apex
+	var s: float = 0.35
+	_emit_traj_segment(apex - Vector3(s, 0.0, 0.0), apex + Vector3(s, 0.0, 0.0))
+	_emit_traj_segment(apex - Vector3(0.0, s, 0.0), apex + Vector3(0.0, s, 0.0))
+	_emit_traj_segment(apex - Vector3(0.0, 0.0, s), apex + Vector3(0.0, 0.0, s))
+	_emit_traj_segment(apex, Vector3(apex.x, floor_y, apex.z))
 
 
 ## Closed-form floor impact: solve p0.y + v0.y*t - 0.5*g*t^2 = floor_y for the
@@ -1722,7 +1888,33 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("lock_color") and config["lock_color"] is Color:
 		lock_color = config["lock_color"]
 
+	# DNA axes. Map tokens: "mortar_vector_siege#foresight:landing",
+	# "mortar_vector_siege#vectors:components". Only a value the code can actually
+	# build is accepted — an unknown string would fall through to the default
+	# branch and the sheet would publish a lie about the artifact.
+	if config.has("foresight"):
+		var f: String = str(config["foresight"]).strip_edges().to_lower()
+		if FORESIGHTS.has(f):
+			foresight = f
+		elif f != "":
+			push_warning("mortar_vector_siege: unknown foresight '%s' — keeping '%s'"
+				% [f, foresight])
+	if config.has("vectors"):
+		var vmode: String = str(config["vectors"]).strip_edges().to_lower()
+		if VECTOR_DRAWINGS.has(vmode):
+			vectors = vmode
+		elif vmode != "":
+			push_warning("mortar_vector_siege: unknown vectors '%s' — keeping '%s'"
+				% [vmode, vectors])
+
 	_force = clamp(_force, min_force, max_force)
+
+	# GUARDED, and a REDRAW rather than a rebuild: no node is freed, and none is
+	# created unless `components` asks for the two extra arrows. Before _ready has
+	# built there is nothing to redraw and _process will draw it on frame one, so a
+	# config arriving early cannot touch a half-built tree.
+	if _built and is_inside_tree():
+		_refresh_visuals()
 
 
 # ═════════════════════════════════════════════════════════════════════════

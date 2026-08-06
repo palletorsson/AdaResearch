@@ -2004,6 +2004,32 @@
     "elastic",
     "physics"
    ],
+   "dna": {
+    "promoted": "2026-08-06",
+    "stage": "2 - variation",
+    "framing": 0.75,
+    "fixture": {
+     "patrol_speed": 0.0,
+     "detection_radius": 0.0,
+     "block_seed": 7
+    },
+    "axes": {
+     "tether": [
+      "none",
+      "line",
+      "cage",
+      "shell"
+     ]
+    },
+    "default": "tether=none - a deliberate no-op. _build_tether() returns on its first line before constructing anything, so the scene tree, the capture AABB and every material are byte-identical to the pre-promotion build, and _process_visual's new branch is skipped by a string compare. block_seed 0 is the shipped unseeded global RNG: _block_randf falls straight through to the same randf_range calls, in the same order, with the same three draws per block. apply_grid_config now OVERRIDES the base class's, and the first thing it does is `super.apply_grid_config(config)`, so the existing health / speed / chase_speed / damage / detection_radius keys keep working exactly as before; the two new keys are guarded twice, and _rebuild() fires only after _build_mesh has run once. The placements pass no tether key - the direct grid token in Hazards_Zoo_5, and the curation_station rosters in VFM_03_Motion, Trial_eye_VFM_03_Motion, Curation_Bay_hazards_3 and Corridor_VFM_03_Motion - so none of them reaches an assignment and none of them rebuilds.",
+    "was": "seven @export knobs and not one categorical among them: a count, two lengths, a spring constant, a damping rate and two damage numbers. The runner refused the token for NO TURNABLE KNOBS, which was a fact about the KIND of knob, not about the artifact.",
+    "finding": "THE TETHER WAS NEVER DRAWN. The class is named CollisionCrasher, its own doc says '5 tethered BoxMesh blocks', its @identity names 'tether length' as its critical parameter and the registry description says 'tethered physics blocks' - and there has never been a tether in the scene. The constraint is a spring force computed in _process_visual against tether_radius and depicted by nothing, so what a player meets is five cubes hovering near a sphere for no visible reason. SECOND: the impulse arrows, which the description and the @identity both present as this artifact's evidence ('Impulse vectors visible as arrows on impact'), only spawn when a block comes within 0.3 m of the PLAYER. Nobody has ever seen them in a still and most players will not have seen them at all. They are left as they are - firing them without a player would change what five rooms draw - but they are not the evidence this entry claims.",
+    "kin": "tether is a NEW word and two existing ones were considered and refused. `warning` (none | stain | cage | beacon | shroud, force_vortex and nine siblings) is the hazard family's word and this IS a hazard, but warning asks how legible the DANGER is to a player and two of its five values - stain and beacon - would have to be answered with something this object does not do. A boundary drawn here is not a threat announcement; it is a physics constraint, and the danger is the blocks, not the sphere they are held inside. `disclosure` (bias_visualizer, penrose_triangle, cube_lines) fits the shape of the question - how much of its own working the object shows - but each of its siblings carries a bespoke value list, so the shared word would carry nothing across. Taking a word without its answers is the folding_past fault, so both were left where they are.",
+    "note": "tether is an ORDINAL ladder of how much of the constraint is drawn: nothing, the individual links, the boundary implied, the boundary made solid. Every value leaves the physics untouched - the same spring, the same tether_radius, the same perfectly elastic block-block impulse - so the axis is strictly about depiction. line is the one that says something the others cannot: it shows each block held to the CENTRE and not to its neighbours, which is exactly the claim the code makes and the picture denies.",
+    "still_note": "READ BEFORE CALLING A RUNG INERT. shell and cage are the strong values: a 0.8 m sphere or three 0.8 m rings against a subject whose largest existing mesh is a 0.24 m body, in a frame that dna.framing pins at roughly 2.3 m. line is the THIN rung by construction - five rods of 6 mm radius and at most 0.4 m length, on the order of 1% of frame - so crop-recheck it before believing an INERT verdict; it is thin because a tether is thin, not because the value does nothing. dna.framing is 0.75 because at 1.0 the fit-to-AABB shot is about 3 m wide for roughly 1% lit pixels; 0.75 is deliberately not tighter because THE BODIES MOVE BETWEEN THE PRE-PASS AND THE SHUTTER - the union AABB is measured at 0.35 s and the frame is written at 1.1 s, the fault newtons_laws documented - so the margin is there to stop the axis cropping the very blocks it is about.",
+    "declines": "num_blocks, block_size, tether_radius, tether_k, block_damping, chase_tether_bonus and block_damage stay plain exports: five are magnitudes and two are rates. `regime` (bouncing_ball's restitution word) was refused with a reason - see the header block in collision_crasher.gd: restitution is a rate of energy loss and a still catches one arbitrary instant of a chaotic five-body bounce, and the static envelope bouncing_ball drew instead is, here, precisely what `tether` already draws. `configuration` (three_body_problem, nbody_simulation) was refused too: nbody qualifies because its bodies drift ~0.002 per frame against a 0.35 m radius so t=0 survives the settle, while a block here starts at 0.5-1.5 m/s inside a 0.4 m tether and has crossed its cage many times before the shutter falls.",
+    "placements": 3
+   },
    "geometry_spec": {
     "mesh_type": "composed_primitives",
     "topology": "manifold_closed",

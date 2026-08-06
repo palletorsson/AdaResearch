@@ -18,6 +18,24 @@
 			"footprint": [3, 1, 3],
 			"tags": ["forces", "vectors", "mortar", "projectile", "ballistic", "trajectory", "aoe", "splash", "drone", "swarm", "targeting", "velocity", "gravity", "vr", "held", "placeable"],
 			"qfep_connection": "F_force: launch velocity + constant gravity = a parabola whose foot is the strike. Indirect fire teaches the vector sum as a felt aim, not a watched arc.",
+			"dna": {
+				"promoted": "2026-08-06",
+				"stage": "2 - variation",
+				"axes": {
+					"foresight": ["parabola", "apex", "landing", "none"],
+					"vectors": ["sum", "components", "velocity", "gravity"]
+				},
+				"default": "foresight=parabola, vectors=sum - byte-for-byte the 3 shipped placements. parabola emits the same dotted arc from the same 96-step walk AND leaves the AoE ring and its impact dot lit, which is what the mortar has always drawn; sum is the green velocity arrow beside the red gravity arrow, both already built in _build_vector_indicators. The two component arrows are never instantiated at the default, so the scene tree and the capture AABB are the pre-promotion ones, and the floor-crossing solve runs unconditionally at every value so _predicted_impact_world, the drone target-lock and every fired shell are unchanged.",
+				"was": "the prediction was always the WHOLE solution at once - the dotted parabola and the 2.2 m splash ring and the impact dot, all three hard-coded in _update_trajectory_and_aoe with no way to hand the player less; and the launch was always one arrow beside one gravity arrow, hard-coded in _update_vector_arrows.",
+				"family": "the catapult's two words, character for character, shared with catapult / human_catapult / force_pad. This machine is the indirect-fire member: the others throw at something you can see, a mortar aims a parabola so its FOOT lands on a drone the tube is not pointed at, which makes it the purest case the word foresight has. One rung is its own - on a catapult `landing` had to invent a 0.35 m marker because a stone lands on a point, while a mortar lands on an AREA, so the ring already on this floor IS the landing at its true splash radius.",
+				"fixture": {
+					"rng_seed": 20260806,
+					"sky_dome": false
+				},
+				"framing": 0.7,
+				"fixture_why": "rng_seed pins the swarm: _spawn_one_drone picks every anchor with randf() and the headless auto-aim then aims at the first drone in the list, so an unseeded sweep photographs five different arenas and reads the difference as an axis. sky_dome drops the 60 m backdrop sphere, whose 120 m mesh in the union AABB would frame the 0.55 m tube at about one pixel - the six-ways-null table's 'AABB inflated by one far-flung mesh' row. Both default to the shipped behaviour and neither is an axis.",
+				"not_an_axis": "min_force / max_force / charge_time / aoe_radius / reload_cooldown / drone_count are all MAGNITUDES - turning them makes the same mortar lob further or splash wider, and the charge and the flight are events a still cannot hold at all."
+			},
 			"parameters": {
 				"min_force": 6.0,
 				"max_force": 22.0,

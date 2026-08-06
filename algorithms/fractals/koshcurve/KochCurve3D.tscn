@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://cmia024b68cmu" path="res://algorithms/fractals/koshcurve/KochCurve3D.gd" id="1_2x4f5"]
 
 [node name="Main" type="Node3D"]
-
-[node name="KochCurve3D" type="Node3D" parent="."]
 script = ExtResource("1_2x4f5")
 line_width = 0.2
 portal_width = 3.0

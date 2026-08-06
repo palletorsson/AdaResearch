@@ -1539,6 +1539,32 @@
    "lookup_name": "raymarched_metaballs",
    "category": "procedural",
    "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
+   "dna": {
+    "promoted": "2026-08-06",
+    "stage": "2 - variation",
+    "framing": 0.21,
+    "fixture": {
+     "metaball_seed": 7,
+     "pose_time": 3.0
+    },
+    "axes": {
+     "fusion": [
+      "distinct",
+      "necked",
+      "lobed",
+      "single"
+     ],
+     "metaball_count": [
+      1,
+      3,
+      5,
+      9
+     ]
+    },
+    "default": "fusion=distinct, metaball_count=9 - the shipped no-op on both. distinct short-circuits to the raw exported blend_factor; 9 is the shader's own array length, so the parking loops have zero iterations and the arrays are byte for byte what they were. This token is placed at 'raymarched_metaballs:0:0:0.2' in ISO_Metaballs, in Corridor_ISO_Metaballs and in the Curation_Bay_isosurfaces_4 roster, all bare, so apply_grid_config reaches no assignment and never rebuilds.",
+    "kin": "SIBLING DECLARATION. This token, implicit_surface_modeling and `metaballs` (both procgen_extra.json) are three registry names on ONE scene, metaballs.tscn. The axes, the values, the fixture and the framing are copied character for character from implicit_surface_modeling, which carries the full reasoning, the measurements and the findings. They must measure ALIKE; if they do not, the difference is in the bench and not in the artifact. NOTE this token's own `parameters` block already documented metaball_count and blend_factor as if a map could set them - it could not, because apply_grid_config was a bare `pass` until this pass.",
+    "placements": 3
+   },
    "description": "Shader raymarched metaballs — 9 animated balls rendered via SDF raymarching on a cube mesh. Real-time implicit surface visualization.",
    "parameters": {
     "metaball_count": "Number of balls (default 9)",
