@@ -5,7 +5,7 @@ build_museum_corpus_sheet.py — the fourteen museums on one sheet.
 Renders every museum-tagged pattern in template_patterns.json as a cell grid,
 in dealing order (em_order), each in its own accent colour: dark floor, grey
 wall, light podium, accent-tinted artifact slots, the hero slot outlined.
-Output: doc/reports/museum_templates_corpus.png. Rerun after any extraction
+Output: ada_encyclopedia/public/museum/museum_templates_corpus.png. Rerun after any extraction
 wave or tile repair.
 """
 import json
@@ -13,7 +13,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 REPO = Path(__file__).resolve().parents[1]
-OUT = REPO / "doc" / "reports" / "museum_templates_corpus.png"
+OUT = REPO.parent / "ada_encyclopedia" / "public" / "museum" / "museum_templates_corpus.png"
 
 tp = json.loads((REPO / "commons/data/template_patterns.json").read_text(encoding="utf-8"))["patterns"]
 mus = {k: p for k, p in tp.items() if isinstance(p, dict) and p.get("museum")}
@@ -79,4 +79,4 @@ d.text((PAD, 6), f"THE CORPUS - {len(order)} museum templates in dealing order (
         "dark = floor   grey = wall   light = podium   tinted = artifact slot   outlined = hero (3s)",
        fill=(200, 202, 210), font=f_sm)
 img.save(OUT)
-print(f"corpus sheet -> {OUT.relative_to(REPO)}  {img.size}")
+print(f"corpus sheet -> {OUT}  {img.size}")

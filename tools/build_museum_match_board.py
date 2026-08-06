@@ -11,7 +11,7 @@ number is the classic score, the small number score2 (with the proposed
 the classic score; a hollow crown marks score2-only wins — the chapters the
 withheld-hero contract would claim if patience were ruled in.
 
-Output: doc/reports/museum_match_board.png. Rerun after any match.
+Output: ada_encyclopedia/public/museum/museum_match_board.png. Rerun after any match.
 """
 import json
 import glob
@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SPINE = os.path.join(ROOT, "commons", "maps", "curriculum_spine.json")
-OUT = os.path.join(ROOT, "doc", "reports", "museum_match_board.png")
+OUT = os.path.join(os.path.dirname(ROOT), "ada_encyclopedia", "public", "museum", "museum_match_board.png")
 
 MUSEUMS = [
     ("uffizi-spine-enfilade", "Uffizi\nspine"),
@@ -36,7 +36,8 @@ seq_order = [r["name"] for r in sorted(spine, key=lambda r: r.get("order", 999))
 reports = {}
 for f in glob.glob(os.path.join(ROOT, "doc", "reports", "museum_match_*.json")):
     d = json.load(open(f, encoding="utf-8"))
-    reports[d["seq"]] = d
+    if "seq" in d:   # skip the rescore summary, which shares the prefix
+        reports[d["seq"]] = d
 rows = [s for s in seq_order if s in reports]
 
 CW, RH, LEFT, TOP = 150, 46, 190, 92
@@ -114,4 +115,4 @@ d.text((14, y + 20), f"{len(rows)} sequences matched - {n_museum_cells} museum s
        fill=(140, 142, 150), font=f_s)
 
 img.save(OUT)
-print(f"match board -> {os.path.relpath(OUT, ROOT)}  ({len(rows)} sequences)")
+print(f"match board -> {OUT}  ({len(rows)} sequences)")
