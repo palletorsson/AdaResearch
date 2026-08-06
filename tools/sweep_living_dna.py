@@ -119,10 +119,22 @@ def _capture(dest_png):
            "--mode=map", "--target=" + STAGE]
     subprocess.run(cmd, cwd=ROOT, capture_output=True)
     src = os.path.join(SHOTS, "iso.png")
-    if os.path.isfile(src):
-        shutil.copyfile(src, dest_png)
-        return True
-    return False
+    if not os.path.isfile(src):
+        return False
+    # DEAD-FRAME GUARD. Two Godot instances cannot run at once (the second dies
+    # on the user:// lock) and this sweep shares ONE scratch stage map, so any
+    # concurrent capture — a manual shot, another sweep — silently produces
+    # black frames. Seven were published that way before this check existed.
+    # A frame with no bright pixel is not evidence; refuse it and say so.
+    try:
+        from PIL import Image
+        if Image.open(src).convert("L").getextrema()[1] < 40:
+            print("      DEAD FRAME (black) — is another Godot / sweep running?")
+            return False
+    except Exception:
+        pass
+    shutil.copyfile(src, dest_png)
+    return True
 
 
 def cmd_list():

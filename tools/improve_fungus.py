@@ -118,9 +118,25 @@ def cmd_promote(args):
     if not bases:
         raise SystemExit(f"no curated presets for family {args.family}")
     os.makedirs(BACKUP_DIR, exist_ok=True)
-    # replace the LAST N variants (the weakest by convention — the loop keeps
-    # the low-numbered curated ones and overwrites the tail with winners)
-    targets = bases[-len(winners):]
+    if args.target:
+        # Replace SPECIFIC variants by number. The trailing-N convention below
+        # cannot reach a bad preset in the middle, and the living-DNA sweep
+        # found exactly that: button_dome variant 09 renders as spore-specks,
+        # and a cell's variant index is derived from its position, so that one
+        # is what some maps actually grow. Fix the variant the evidence names.
+        wanted = [int(t) for t in str(args.target).split(",") if t.strip()]
+        by_num = {int(os.path.basename(b)[:-5].rsplit("_", 1)[1]): b for b in bases}
+        missing = [n for n in wanted if n not in by_num]
+        if missing:
+            raise SystemExit("family %s has no variant(s) %s" % (args.family, missing))
+        targets = [by_num[n] for n in wanted]
+        if len(targets) != len(winners):
+            raise SystemExit("--target expects one variant per winner (%d winners, %d targets)"
+                             % (len(winners), len(targets)))
+    else:
+        # replace the LAST N variants (the weakest by convention — the loop keeps
+        # the low-numbered curated ones and overwrites the tail with winners)
+        targets = bases[-len(winners):]
     for win, target in zip(winners, targets):
         src = os.path.join(SCRATCH, win + ".json")
         if not os.path.isfile(src):
@@ -141,6 +157,8 @@ def main():
     p = sub.add_parser("propose"); p.add_argument("--family", required=True); p.add_argument("--n", type=int, default=8)
     sub.add_parser("render")
     q = sub.add_parser("promote"); q.add_argument("--family", required=True); q.add_argument("--winners", required=True)
+    q.add_argument("--target", default="", help="variant number(s) to replace, e.g. 9 — "
+                                                "defaults to the trailing variants")
     args = ap.parse_args()
     {"propose": cmd_propose, "render": cmd_render, "promote": cmd_promote}[args.cmd](args)
 

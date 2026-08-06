@@ -98,6 +98,8 @@ var _routed: int = 0             # cells sent through the dispatcher
 var _marker_only: int = 0        # cells kept on the pilot marker (no substrate kingdom)
 var _halo_cells: int = 0         # boundary halo cells that spilled wilderness
 var _halo_instances: int = 0     # total halo ground-cover instances
+var _edge_cells: int = 0         # transition-band cells (the edge role)
+var _edge_instances: int = 0     # total edge ground-cover instances
 var _grid_rows: int = 0
 var _grid_cols: int = 0
 
@@ -231,7 +233,10 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 			_declared[key] = parsed
 			_runtime[key] = {
 				# seeds AND halos live from load (both render); fields wake on claim
-				"active": parsed["role"] == "seed" or parsed["role"] == "halo",
+				# seed/halo/edge all render at load, so all three are live from the
+				# start (field wakes on claim, mute never). The presence stain reads
+				# this, so an edge band tints the ground it fades across.
+				"active": parsed["role"] in ["seed", "halo", "edge"],
 				"muted": parsed["role"] == "mute",
 				"generation": 0,
 				"claimed_by": "",
@@ -254,6 +259,8 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 				_stage_cell(col, row, parsed)
 			elif parsed["role"] == "halo":
 				_spawn_halo(col, row, parsed)
+			elif parsed["role"] == "edge":
+				_spawn_edge(col, row, parsed)
 	_flush_batches()
 	_refresh_presence()
 	if _living_ground:
@@ -276,6 +283,9 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	if _halo_cells > 0:
 		print("GridBiomeComponent: halo spill from %d cells -> %d ground-cover instances (grid-native ring)" % [
 			_halo_cells, _halo_instances])
+	if _edge_cells > 0:
+		print("GridBiomeComponent: edge band on %d cells -> %d instances (transition, fades inward)" % [
+			_edge_cells, _edge_instances])
 
 
 # ── living_ground: the declared layer feeds the real ecology loop ──
@@ -778,6 +788,54 @@ func adopt_biome_organism(node: Node3D) -> void:
 		add_child(_chunk_mgr)
 		print("GridBiomeComponent: chunk_lod ON — seed organisms adopt into BiomeChunkLOD (ChunkManager, adopt_only)")
 	_chunk_mgr.adopt(node)
+
+
+# ── edge (2026-07-27): the TRANSITION BAND. The design doc declared this role
+#    ("transition band; algorithms fade/blend here") and BiomeGridTokens has
+#    always accepted it, but nothing rendered it — a word in the grammar with no
+#    behaviour behind it, found by the living-DNA sweep when the edge variant
+#    photographed as bare floor.
+#
+#    Where halo spills OUTWARD past the rim, edge blends INWARD on its own cell:
+#    the kingdom's ground-cover, thinning from the cell's outer side toward its
+#    centre, so two neighbouring kingdoms meet in a soft band instead of a hard
+#    line. Same batching, same determinism, no collider — an edge is scenery.
+#    Density (d=) sets how far the fade reaches across the cell.
+
+func _spawn_edge(col: int, row: int, cell: Dictionary) -> void:
+	_edge_cells += 1
+	var d: float = BiomeGridTokensScript.density_of(cell)
+	var kingdom: String = String(cell["kingdom"])
+	var step: float = _cube_size + _gutter
+	var surf_y: float = _surface_y(col, row)
+	var centre: Vector3 = Vector3(col * step, surf_y, row * step)
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = hash("edge:%d,%d" % [col, row])
+	# the band reaches from the cell edge toward the middle; denser = deeper
+	var reach: float = step * lerpf(0.25, 0.5, d)
+	var target: int = int(round(lerpf(6.0, 24.0, d)))
+	for recipe in _halo_recipes(kingdom):
+		var count: int = maxi(1, int(round(float(target) * float(recipe["fraction"]))))
+		var added: int = 0
+		for _i in count:
+			# t: 0 at the cell's rim, 1 at its centre — density falls off inward
+			var t_in: float = rng.randf()
+			if rng.randf() < t_in:            # linear thinning toward the middle
+				continue
+			var ang: float = rng.randf_range(0.0, TAU)
+			var r: float = step * 0.5 - t_in * reach
+			var pos: Vector3 = centre + Vector3(cos(ang) * r, 0.0, sin(ang) * r)
+			var xf: Transform3D = Transform3D.IDENTITY
+			xf = xf.rotated(Vector3.UP, rng.randf_range(0.0, TAU))
+			var sc: float = rng.randf_range(0.55, 1.0)   # smaller than a halo's: a fade, not a field
+			xf = xf.scaled(Vector3(sc, sc, sc))
+			xf.origin = pos + Vector3(0.0, float(recipe.get("y_off", 0.0)) * sc, 0.0)
+			_batch_add("edge:%s:%s" % [kingdom, String(recipe["name"])], recipe["mesh"], {
+				"albedo": recipe["color"], "cull_off": true,
+				"emission": (recipe["color"] as Color) * float(recipe.get("emission_mul", 0.2)),
+			}, xf)
+			added += 1
+		_edge_instances += added
 
 
 # ── halo (biome-3): the cell spills wilderness OUTWARD — the old ring,
