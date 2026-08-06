@@ -1,0 +1,80 @@
+{
+ "sweep": "synthesis_stand",
+ "peak_changed_pct": 2.443,
+ "subject_pct": 2.514,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "subject": "godel_statement_plaque",
+    "mode": "hero"
+   },
+   "b": {
+    "subject": "godel_statement_plaque",
+    "mode": "series"
+   },
+   "changed_px": 10443,
+   "changed_pct": 1.808
+  },
+  {
+   "a": {
+    "subject": "godel_statement_plaque",
+    "mode": "hero"
+   },
+   "b": {
+    "subject": "pick_up_cube",
+    "mode": "hero"
+   },
+   "changed_px": 2915,
+   "changed_pct": 0.505
+  },
+  {
+   "a": {
+    "subject": "godel_statement_plaque",
+    "mode": "hero"
+   },
+   "b": {
+    "subject": "pick_up_cube",
+    "mode": "series"
+   },
+   "changed_px": 14047,
+   "changed_pct": 2.432
+  },
+  {
+   "a": {
+    "subject": "godel_statement_plaque",
+    "mode": "series"
+   },
+   "b": {
+    "subject": "pick_up_cube",
+    "mode": "hero"
+   },
+   "changed_px": 12026,
+   "changed_pct": 2.082
+  },
+  {
+   "a": {
+    "subject": "godel_statement_plaque",
+    "mode": "series"
+   },
+   "b": {
+    "subject": "pick_up_cube",
+    "mode": "series"
+   },
+   "changed_px": 14112,
+   "changed_pct": 2.443
+  },
+  {
+   "a": {
+    "subject": "pick_up_cube",
+    "mode": "hero"
+   },
+   "b": {
+    "subject": "pick_up_cube",
+    "mode": "series"
+   },
+   "changed_px": 13509,
+   "changed_pct": 2.339
+  }
+ ]
+}
