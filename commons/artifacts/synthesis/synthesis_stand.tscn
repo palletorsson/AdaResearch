@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://synthstand01"]
+
+[ext_resource type="Script" path="res://commons/artifacts/synthesis/synthesis_stand.gd" id="1_synth"]
+
+[node name="SynthesisStand" type="Node3D"]
+script = ExtResource("1_synth")

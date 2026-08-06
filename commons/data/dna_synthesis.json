@@ -1,0 +1,7013 @@
+{
+ "_note": "Per promoted family: is its best public form one pinned variant (hero), the whole family in measured order (series), or the shipped default? Derived from the swept renders with the critic's focus metric; regenerate with tools/synthesize_heroes.py after any re-sweep.",
+ "verdicts": {
+  "AntColonyV2": {
+   "prop": "AntColonyV2",
+   "verdict": "default",
+   "score": 0.0189,
+   "gallery": "swarm-dna"
+  },
+  "BigPipeSystem": {
+   "prop": "BigPipeSystem",
+   "verdict": "hero",
+   "hero": {
+    "slack": "truss"
+   },
+   "score": 0.0862,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "slack": "chord"
+     },
+     "focus": 0.0192
+    },
+    {
+     "dna": {
+      "slack": "catenary"
+     },
+     "focus": 0.0462
+    },
+    {
+     "dna": {
+      "slack": "festoon"
+     },
+     "focus": 0.0759
+    },
+    {
+     "dna": {
+      "slack": "truss"
+     },
+     "focus": 0.0862
+    }
+   ]
+  },
+  "GaussianBlurCircle": {
+   "prop": "GaussianBlurCircle",
+   "verdict": "default",
+   "score": 0.0665,
+   "gallery": "randomness-dna"
+  },
+  "GaussianPaintSplatter": {
+   "prop": "GaussianPaintSplatter",
+   "verdict": "default",
+   "score": 0.0496,
+   "gallery": "procgen-dna"
+  },
+  "GeneticProgramming": {
+   "prop": "GeneticProgramming",
+   "verdict": "hero",
+   "hero": {
+    "alphabet": "voxel",
+    "muster": "champion"
+   },
+   "score": 0.286,
+   "gallery": "procgen-dna",
+   "evidence": [
+    {
+     "dna": {
+      "alphabet": "voxel",
+      "muster": "parade"
+     },
+     "focus": 0.1331
+    },
+    {
+     "dna": {
+      "alphabet": "primitives",
+      "muster": "champion"
+     },
+     "focus": 0.1716
+    },
+    {
+     "dna": {
+      "alphabet": "parametric",
+      "muster": "champion"
+     },
+     "focus": 0.2789
+    },
+    {
+     "dna": {
+      "alphabet": "voxel",
+      "muster": "champion"
+     },
+     "focus": 0.286
+    }
+   ]
+  },
+  "GlassRack": {
+   "prop": "GlassRack",
+   "verdict": "series",
+   "axis": "admission",
+   "order": [
+    "none",
+    "residue",
+    "exhibit",
+    "bench"
+   ],
+   "span": [
+    0.0446,
+    0.1582
+   ],
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "admission": "residue"
+     },
+     "focus": 0.0446
+    },
+    {
+     "dna": {
+      "admission": "exhibit"
+     },
+     "focus": 0.1006
+    },
+    {
+     "dna": {
+      "admission": "bench"
+     },
+     "focus": 0.1582
+    }
+   ]
+  },
+  "KonigsbergBridge": {
+   "prop": "KonigsbergBridge",
+   "verdict": "default",
+   "score": 0.059,
+   "gallery": "graphtheory-dna"
+  },
+  "PhysarumColony": {
+   "prop": "PhysarumColony",
+   "verdict": "default",
+   "score": 0.01,
+   "gallery": "swarm-dna"
+  },
+  "Rack303Acid": {
+   "prop": "Rack303Acid",
+   "verdict": "hero",
+   "hero": {
+    "machinery": "plate"
+   },
+   "score": 0.3628,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "machinery": "frame"
+     },
+     "focus": 0.2036
+    },
+    {
+     "dna": {
+      "machinery": "works"
+     },
+     "focus": 0.2827
+    },
+    {
+     "dna": {
+      "machinery": "vacancy"
+     },
+     "focus": 0.3317
+    },
+    {
+     "dna": {
+      "machinery": "plate"
+     },
+     "focus": 0.3628
+    }
+   ]
+  },
+  "Rack808Drums": {
+   "prop": "Rack808Drums",
+   "verdict": "hero",
+   "hero": {
+    "machinery": "plate"
+   },
+   "score": 0.3697,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "machinery": "frame"
+     },
+     "focus": 0.2269
+    },
+    {
+     "dna": {
+      "machinery": "works"
+     },
+     "focus": 0.3001
+    },
+    {
+     "dna": {
+      "machinery": "vacancy"
+     },
+     "focus": 0.3359
+    },
+    {
+     "dna": {
+      "machinery": "plate"
+     },
+     "focus": 0.3697
+    }
+   ]
+  },
+  "RackAmbientDrone": {
+   "prop": "RackAmbientDrone",
+   "verdict": "hero",
+   "hero": {
+    "machinery": "plate"
+   },
+   "score": 0.3625,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "machinery": "frame"
+     },
+     "focus": 0.181
+    },
+    {
+     "dna": {
+      "machinery": "works"
+     },
+     "focus": 0.285
+    },
+    {
+     "dna": {
+      "machinery": "vacancy"
+     },
+     "focus": 0.3281
+    },
+    {
+     "dna": {
+      "machinery": "plate"
+     },
+     "focus": 0.3625
+    }
+   ]
+  },
+  "RackDX7Piano": {
+   "prop": "RackDX7Piano",
+   "verdict": "hero",
+   "hero": {
+    "machinery": "plate"
+   },
+   "score": 0.3624,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "machinery": "frame"
+     },
+     "focus": 0.1892
+    },
+    {
+     "dna": {
+      "machinery": "works"
+     },
+     "focus": 0.2806
+    },
+    {
+     "dna": {
+      "machinery": "vacancy"
+     },
+     "focus": 0.3309
+    },
+    {
+     "dna": {
+      "machinery": "plate"
+     },
+     "focus": 0.3624
+    }
+   ]
+  },
+  "RackMario": {
+   "prop": "RackMario",
+   "verdict": "hero",
+   "hero": {
+    "machinery": "plate"
+   },
+   "score": 0.3652,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "machinery": "frame"
+     },
+     "focus": 0.1999
+    },
+    {
+     "dna": {
+      "machinery": "works"
+     },
+     "focus": 0.2876
+    },
+    {
+     "dna": {
+      "machinery": "vacancy"
+     },
+     "focus": 0.3315
+    },
+    {
+     "dna": {
+      "machinery": "plate"
+     },
+     "focus": 0.3652
+    }
+   ]
+  },
+  "RackMoogBass": {
+   "prop": "RackMoogBass",
+   "verdict": "hero",
+   "hero": {
+    "machinery": "plate"
+   },
+   "score": 0.3628,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "machinery": "frame"
+     },
+     "focus": 0.2033
+    },
+    {
+     "dna": {
+      "machinery": "works"
+     },
+     "focus": 0.2825
+    },
+    {
+     "dna": {
+      "machinery": "vacancy"
+     },
+     "focus": 0.3317
+    },
+    {
+     "dna": {
+      "machinery": "plate"
+     },
+     "focus": 0.3628
+    }
+   ]
+  },
+  "RackSineBasic": {
+   "prop": "RackSineBasic",
+   "verdict": "hero",
+   "hero": {
+    "machinery": "plate"
+   },
+   "score": 0.3752,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "machinery": "works"
+     },
+     "focus": 0.2727
+    },
+    {
+     "dna": {
+      "machinery": "frame"
+     },
+     "focus": 0.3054
+    },
+    {
+     "dna": {
+      "machinery": "vacancy"
+     },
+     "focus": 0.3534
+    },
+    {
+     "dna": {
+      "machinery": "plate"
+     },
+     "focus": 0.3752
+    }
+   ]
+  },
+  "SoundscapeRadioRack": {
+   "prop": "SoundscapeRadioRack",
+   "verdict": "default",
+   "score": 0.0183,
+   "gallery": "promoted-wave2"
+  },
+  "SphericalHarmonics": {
+   "prop": "SphericalHarmonics",
+   "verdict": "hero",
+   "hero": {
+    "surface": "lobed"
+   },
+   "score": 0.1278,
+   "gallery": "promoted-wave1",
+   "evidence": [
+    {
+     "dna": {
+      "surface": "wire"
+     },
+     "focus": 0.1156
+    },
+    {
+     "dna": {
+      "surface": "nodal"
+     },
+     "focus": 0.1173
+    },
+    {
+     "dna": {
+      "surface": "lobed"
+     },
+     "focus": 0.1278
+    }
+   ]
+  },
+  "VectorForces": {
+   "prop": "VectorForces",
+   "verdict": "default",
+   "score": 0.0113,
+   "gallery": "promoted-wave1"
+  },
+  "VectorMotion": {
+   "prop": "VectorMotion",
+   "verdict": "hero",
+   "hero": {
+    "drive": "resisted"
+   },
+   "score": 0.2014,
+   "gallery": "promoted-wave3",
+   "evidence": [
+    {
+     "dna": {
+      "drive": "central"
+     },
+     "focus": 0.1649
+    },
+    {
+     "dna": {
+      "drive": "inertial"
+     },
+     "focus": 0.1778
+    },
+    {
+     "dna": {
+      "drive": "resisted"
+     },
+     "focus": 0.2014
+    }
+   ]
+  },
+  "WavePaintings": {
+   "prop": "WavePaintings",
+   "verdict": "series",
+   "axis": "display",
+   "order": [
+    "backdrop",
+    "none",
+    "plate",
+    "wall"
+   ],
+   "span": [
+    0.0382,
+    0.3265
+   ],
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "display": "none"
+     },
+     "focus": 0.0382
+    },
+    {
+     "dna": {
+      "display": "plate"
+     },
+     "focus": 0.0458
+    },
+    {
+     "dna": {
+      "display": "wall"
+     },
+     "focus": 0.3265
+    }
+   ]
+  },
+  "abject_bench": {
+   "prop": "abject_bench",
+   "verdict": "default",
+   "score": 0.0785,
+   "gallery": "bench-hazard-dna"
+  },
+  "adjacency_shelf": {
+   "prop": "adjacency_shelf",
+   "verdict": "hero",
+   "hero": {
+    "coherence": "1.0"
+   },
+   "score": 0.1185,
+   "gallery": "readymades-dna",
+   "evidence": [
+    {
+     "dna": {
+      "coherence": "0.5"
+     },
+     "focus": 0.0727
+    },
+    {
+     "dna": {
+      "coherence": "1.0"
+     },
+     "focus": 0.1185
+    }
+   ]
+  },
+  "agreement_gauge": {
+   "prop": "agreement_gauge",
+   "verdict": "default",
+   "score": 0.0012,
+   "gallery": "promoted-wave2"
+  },
+  "angle_sum_triangle": {
+   "prop": "angle_sum_triangle",
+   "verdict": "default",
+   "score": 0.0201,
+   "gallery": "verify19"
+  },
+  "atmosphericmonitoring": {
+   "prop": "atmosphericmonitoring",
+   "verdict": "hero",
+   "hero": {
+    "record": "window"
+   },
+   "score": 0.3438,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "record": "margin"
+     },
+     "focus": 0.3358
+    },
+    {
+     "dna": {
+      "record": "archive"
+     },
+     "focus": 0.3402
+    },
+    {
+     "dna": {
+      "record": "window"
+     },
+     "focus": 0.3438
+    }
+   ]
+  },
+  "balance_puzzle": {
+   "prop": "balance_puzzle",
+   "verdict": "default",
+   "score": 0.0182,
+   "gallery": "wave-two-dna"
+  },
+  "barber_paradox": {
+   "prop": "barber_paradox",
+   "verdict": "series",
+   "axis": "roster",
+   "order": [
+    "pair",
+    "blanket",
+    "none",
+    "exception"
+   ],
+   "span": [
+    0.0923,
+    0.2275
+   ],
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "roster": "blanket"
+     },
+     "focus": 0.0923
+    },
+    {
+     "dna": {
+      "roster": "none"
+     },
+     "focus": 0.1496
+    },
+    {
+     "dna": {
+      "roster": "exception"
+     },
+     "focus": 0.2275
+    }
+   ]
+  },
+  "becoming_bench": {
+   "prop": "becoming_bench",
+   "verdict": "series",
+   "axis": "assay",
+   "order": [
+    "none",
+    "gauge",
+    "control",
+    "chart",
+    "vitrine"
+   ],
+   "span": [
+    0.0722,
+    0.2101
+   ],
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "assay": "gauge"
+     },
+     "focus": 0.0722
+    },
+    {
+     "dna": {
+      "assay": "control"
+     },
+     "focus": 0.0929
+    },
+    {
+     "dna": {
+      "assay": "chart"
+     },
+     "focus": 0.0982
+    },
+    {
+     "dna": {
+      "assay": "vitrine"
+     },
+     "focus": 0.2101
+    }
+   ]
+  },
+  "bernini_columns": {
+   "prop": "bernini_columns",
+   "verdict": "hero",
+   "hero": {
+    "colonnade": "pair"
+   },
+   "score": 0.1531,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "colonnade": "ring"
+     },
+     "focus": 0.139
+    },
+    {
+     "dna": {
+      "colonnade": "aisle"
+     },
+     "focus": 0.1398
+    },
+    {
+     "dna": {
+      "colonnade": "pair"
+     },
+     "focus": 0.1531
+    }
+   ]
+  },
+  "biomagneticresonator": {
+   "prop": "biomagneticresonator",
+   "verdict": "series",
+   "axis": "series",
+   "order": [
+    "stack",
+    "target",
+    "cage",
+    "terrace"
+   ],
+   "span": [
+    0.1205,
+    0.2795
+   ],
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "series": "target"
+     },
+     "focus": 0.1205
+    },
+    {
+     "dna": {
+      "series": "cage"
+     },
+     "focus": 0.2021
+    },
+    {
+     "dna": {
+      "series": "terrace"
+     },
+     "focus": 0.2795
+    }
+   ]
+  },
+  "boid_manager": {
+   "prop": "boid_manager",
+   "verdict": "series",
+   "axis": "accord",
+   "order": [
+    "school",
+    "lattice",
+    "lane",
+    "orb"
+   ],
+   "span": [
+    0.0329,
+    0.1441
+   ],
+   "gallery": "swarm-dna",
+   "evidence": [
+    {
+     "dna": {
+      "accord": "lattice"
+     },
+     "focus": 0.0329
+    },
+    {
+     "dna": {
+      "accord": "lane"
+     },
+     "focus": 0.0371
+    },
+    {
+     "dna": {
+      "accord": "orb"
+     },
+     "focus": 0.1441
+    }
+   ]
+  },
+  "boids_aquarium": {
+   "prop": "boids_aquarium",
+   "verdict": "default",
+   "score": 0.0449,
+   "gallery": "swarm-dna"
+  },
+  "boolean_tunnel": {
+   "prop": "boolean_tunnel",
+   "verdict": "default",
+   "score": 0.0114,
+   "gallery": "bench-hazard-dna"
+  },
+  "botanical_flower": {
+   "prop": "botanical_flower",
+   "verdict": "hero",
+   "hero": {
+    "species": "orchid"
+   },
+   "score": 0.0916,
+   "gallery": "flower-ten",
+   "evidence": [
+    {
+     "dna": {
+      "species": "iris"
+     },
+     "focus": 0.0743
+    },
+    {
+     "dna": {
+      "species": "bluebell"
+     },
+     "focus": 0.0746
+    },
+    {
+     "dna": {
+      "species": "fritillaria"
+     },
+     "focus": 0.0794
+    },
+    {
+     "dna": {
+      "species": "orchid"
+     },
+     "focus": 0.0916
+    }
+   ]
+  },
+  "branching_growth_algorithm": {
+   "prop": "branching_growth_algorithm",
+   "verdict": "series",
+   "axis": "aftermath",
+   "order": [
+    "form",
+    "strata",
+    "field",
+    "envelope",
+    "apparatus"
+   ],
+   "span": [
+    0.0051,
+    0.1287
+   ],
+   "gallery": "procgen-dna",
+   "evidence": [
+    {
+     "dna": {
+      "aftermath": "strata"
+     },
+     "focus": 0.0051
+    },
+    {
+     "dna": {
+      "aftermath": "field"
+     },
+     "focus": 0.0418
+    },
+    {
+     "dna": {
+      "aftermath": "envelope"
+     },
+     "focus": 0.1109
+    },
+    {
+     "dna": {
+      "aftermath": "apparatus"
+     },
+     "focus": 0.1287
+    }
+   ]
+  },
+  "brouwer_choice_sequence": {
+   "prop": "brouwer_choice_sequence",
+   "verdict": "hero",
+   "hero": {
+    "horizon": "law"
+   },
+   "score": 0.0827,
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "horizon": "closed"
+     },
+     "focus": 0.0674
+    },
+    {
+     "dna": {
+      "horizon": "spread"
+     },
+     "focus": 0.0708
+    },
+    {
+     "dna": {
+      "horizon": "law"
+     },
+     "focus": 0.0827
+    }
+   ]
+  },
+  "cable_builder": {
+   "prop": "cable_builder",
+   "verdict": "default",
+   "score": 0.0406,
+   "gallery": "wavefunctions-dna"
+  },
+  "calder_mobile": {
+   "prop": "calder_mobile",
+   "verdict": "default",
+   "score": 0.0505,
+   "gallery": "verify12"
+  },
+  "cap_theorem_walk": {
+   "prop": "cap_theorem_walk",
+   "verdict": "hero",
+   "hero": {
+    "sacrifice": "partition"
+   },
+   "score": 0.1935,
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "sacrifice": "whole"
+     },
+     "focus": 0.1005
+    },
+    {
+     "dna": {
+      "sacrifice": "consistency"
+     },
+     "focus": 0.1481
+    },
+    {
+     "dna": {
+      "sacrifice": "availability"
+     },
+     "focus": 0.1569
+    },
+    {
+     "dna": {
+      "sacrifice": "partition"
+     },
+     "focus": 0.1935
+    }
+   ]
+  },
+  "capsule": {
+   "prop": "capsule",
+   "verdict": "hero",
+   "hero": {
+    "facture": "armature"
+   },
+   "score": 0.1567,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "facture": "facet"
+     },
+     "focus": 0.0942
+    },
+    {
+     "dna": {
+      "facture": "wear"
+     },
+     "focus": 0.1178
+    },
+    {
+     "dna": {
+      "facture": "section"
+     },
+     "focus": 0.1473
+    },
+    {
+     "dna": {
+      "facture": "armature"
+     },
+     "focus": 0.1567
+    }
+   ]
+  },
+  "carousel_cake": {
+   "prop": "carousel_cake",
+   "verdict": "hero",
+   "hero": {
+    "profile": "ziggurat"
+   },
+   "score": 0.1483,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "profile": "flare"
+     },
+     "focus": 0.0721
+    },
+    {
+     "dna": {
+      "profile": "column"
+     },
+     "focus": 0.1069
+    },
+    {
+     "dna": {
+      "profile": "spindle"
+     },
+     "focus": 0.1441
+    },
+    {
+     "dna": {
+      "profile": "ziggurat"
+     },
+     "focus": 0.1483
+    }
+   ]
+  },
+  "catalyst_foe": {
+   "prop": "catalyst_foe",
+   "verdict": "series",
+   "axis": "body",
+   "order": [
+    "curriculum",
+    "cube",
+    "mote",
+    "serpent",
+    "octapod"
+   ],
+   "span": [
+    0.0895,
+    0.2032
+   ],
+   "gallery": "promoted-wave3",
+   "evidence": [
+    {
+     "dna": {
+      "body": "cube"
+     },
+     "focus": 0.0895
+    },
+    {
+     "dna": {
+      "body": "mote"
+     },
+     "focus": 0.1797
+    },
+    {
+     "dna": {
+      "body": "serpent"
+     },
+     "focus": 0.2026
+    },
+    {
+     "dna": {
+      "body": "octapod"
+     },
+     "focus": 0.2032
+    }
+   ]
+  },
+  "catalyst_pickup": {
+   "prop": "catalyst_pickup",
+   "verdict": "hero",
+   "hero": {
+    "offer": "shrine"
+   },
+   "score": 0.3677,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "offer": "clamp"
+     },
+     "focus": 0.182
+    },
+    {
+     "dna": {
+      "offer": "vitrine"
+     },
+     "focus": 0.2665
+    },
+    {
+     "dna": {
+      "offer": "chute"
+     },
+     "focus": 0.2863
+    },
+    {
+     "dna": {
+      "offer": "shrine"
+     },
+     "focus": 0.3677
+    }
+   ]
+  },
+  "catalyst_target": {
+   "prop": "catalyst_target",
+   "verdict": "hero",
+   "hero": {
+    "support": "frame",
+    "mark": "grid"
+   },
+   "score": 0.3082,
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "support": "frame",
+      "mark": "none"
+     },
+     "focus": 0.2943
+    },
+    {
+     "dna": {
+      "support": "frame",
+      "mark": "bullseye"
+     },
+     "focus": 0.2953
+    },
+    {
+     "dna": {
+      "support": "gantry",
+      "mark": "grid"
+     },
+     "focus": 0.2989
+    },
+    {
+     "dna": {
+      "support": "frame",
+      "mark": "grid"
+     },
+     "focus": 0.3082
+    }
+   ]
+  },
+  "catapult": {
+   "prop": "catapult",
+   "verdict": "default",
+   "score": 0.0041,
+   "gallery": "promoted-wave1"
+  },
+  "chair_assembly_puzzle": {
+   "prop": "chair_assembly_puzzle",
+   "verdict": "default",
+   "score": 0.0141,
+   "gallery": "wave-two-dna"
+  },
+  "chemicalapparatus": {
+   "prop": "chemicalapparatus",
+   "verdict": "series",
+   "axis": "admission",
+   "order": [
+    "none",
+    "residue",
+    "exhibit",
+    "bench"
+   ],
+   "span": [
+    0.0469,
+    0.2245
+   ],
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "admission": "residue"
+     },
+     "focus": 0.0469
+    },
+    {
+     "dna": {
+      "admission": "exhibit"
+     },
+     "focus": 0.0549
+    },
+    {
+     "dna": {
+      "admission": "bench"
+     },
+     "focus": 0.2245
+    }
+   ]
+  },
+  "chladni_plate": {
+   "prop": "chladni_plate",
+   "verdict": "default",
+   "score": 0.0709,
+   "gallery": "wavefunctions-dna"
+  },
+  "citation_graph_node": {
+   "prop": "citation_graph_node",
+   "verdict": "series",
+   "axis": "reception",
+   "order": [
+    "cited",
+    "dogma",
+    "overturned",
+    "contested",
+    "orphan"
+   ],
+   "span": [
+    0.0489,
+    0.3127
+   ],
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "reception": "dogma"
+     },
+     "focus": 0.0489
+    },
+    {
+     "dna": {
+      "reception": "overturned"
+     },
+     "focus": 0.1067
+    },
+    {
+     "dna": {
+      "reception": "contested"
+     },
+     "focus": 0.112
+    },
+    {
+     "dna": {
+      "reception": "orphan"
+     },
+     "focus": 0.3127
+    }
+   ]
+  },
+  "colonization_bench": {
+   "prop": "colonization_bench",
+   "verdict": "hero",
+   "hero": {
+    "workings": "trial"
+   },
+   "score": 0.092,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "workings": "reject"
+     },
+     "focus": 0.0515
+    },
+    {
+     "dna": {
+      "workings": "rule"
+     },
+     "focus": 0.073
+    },
+    {
+     "dna": {
+      "workings": "trial"
+     },
+     "focus": 0.092
+    }
+   ]
+  },
+  "color_constellation_office": {
+   "prop": "color_constellation_office",
+   "verdict": "default",
+   "score": 0.0,
+   "gallery": "verify19"
+  },
+  "column_3_z": {
+   "prop": "column_3_z",
+   "verdict": "hero",
+   "hero": {
+    "notation": "plate"
+   },
+   "score": 0.2261,
+   "gallery": "promoted-wave3",
+   "evidence": [
+    {
+     "dna": {
+      "notation": "tally"
+     },
+     "focus": 0.1224
+    },
+    {
+     "dna": {
+      "notation": "none"
+     },
+     "focus": 0.1227
+    },
+    {
+     "dna": {
+      "notation": "tape"
+     },
+     "focus": 0.2154
+    },
+    {
+     "dna": {
+      "notation": "plate"
+     },
+     "focus": 0.2261
+    }
+   ]
+  },
+  "combine_capsule": {
+   "prop": "combine_capsule",
+   "verdict": "hero",
+   "hero": {
+    "taxonomy": "heap"
+   },
+   "score": 0.1161,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "taxonomy": "ladder"
+     },
+     "focus": 0.0548
+    },
+    {
+     "dna": {
+      "taxonomy": "stack"
+     },
+     "focus": 0.07
+    },
+    {
+     "dna": {
+      "taxonomy": "heap"
+     },
+     "focus": 0.1161
+    }
+   ]
+  },
+  "combine_sphere": {
+   "prop": "combine_sphere",
+   "verdict": "hero",
+   "hero": {
+    "taxonomy": "heap"
+   },
+   "score": 0.1279,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "taxonomy": "ladder"
+     },
+     "focus": 0.0625
+    },
+    {
+     "dna": {
+      "taxonomy": "stack"
+     },
+     "focus": 0.0806
+    },
+    {
+     "dna": {
+      "taxonomy": "heap"
+     },
+     "focus": 0.1279
+    }
+   ]
+  },
+  "computer_vision_vr": {
+   "prop": "computer_vision_vr",
+   "verdict": "default",
+   "score": 0.0292,
+   "gallery": "machinelearning-dna"
+  },
+  "configurable_portal": {
+   "prop": "configurable_portal",
+   "verdict": "hero",
+   "hero": {
+    "tell": "exemplar"
+   },
+   "score": 0.3386,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "tell": "none"
+     },
+     "focus": 0.2035
+    },
+    {
+     "dna": {
+      "tell": "ghost"
+     },
+     "focus": 0.3021
+    },
+    {
+     "dna": {
+      "tell": "exemplar"
+     },
+     "focus": 0.3386
+    }
+   ]
+  },
+  "control_console": {
+   "prop": "control_console",
+   "verdict": "hero",
+   "hero": {
+    "demo_apparatus": "cube"
+   },
+   "score": 0.8936,
+   "gallery": "props-dna-gallery",
+   "evidence": [
+    {
+     "dna": {
+      "demo_apparatus": "jar"
+     },
+     "focus": 0.8569
+    },
+    {
+     "dna": {
+      "demo_apparatus": "monitor"
+     },
+     "focus": 0.8842
+    },
+    {
+     "dna": {
+      "demo_apparatus": "cube"
+     },
+     "focus": 0.8936
+    }
+   ]
+  },
+  "coupled_oscillator_lattice": {
+   "prop": "coupled_oscillator_lattice",
+   "verdict": "series",
+   "axis": "fabric",
+   "order": [
+    "nodes",
+    "boundary",
+    "bonds",
+    "sheet"
+   ],
+   "span": [
+    0.0268,
+    0.1085
+   ],
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "fabric": "boundary"
+     },
+     "focus": 0.0268
+    },
+    {
+     "dna": {
+      "fabric": "bonds"
+     },
+     "focus": 0.0388
+    },
+    {
+     "dna": {
+      "fabric": "sheet"
+     },
+     "focus": 0.1085
+    }
+   ]
+  },
+  "critic_regress_stack": {
+   "prop": "critic_regress_stack",
+   "verdict": "series",
+   "axis": "relocation",
+   "order": [
+    "single",
+    "stacked",
+    "circular",
+    "outside",
+    "sealed"
+   ],
+   "span": [
+    0.0584,
+    0.1375
+   ],
+   "gallery": "self-critical-ai",
+   "evidence": [
+    {
+     "dna": {
+      "relocation": "stacked"
+     },
+     "focus": 0.0584
+    },
+    {
+     "dna": {
+      "relocation": "circular"
+     },
+     "focus": 0.0656
+    },
+    {
+     "dna": {
+      "relocation": "outside"
+     },
+     "focus": 0.089
+    },
+    {
+     "dna": {
+      "relocation": "sealed"
+     },
+     "focus": 0.1375
+    }
+   ]
+  },
+  "cube_lines": {
+   "prop": "cube_lines",
+   "verdict": "default",
+   "score": 0.0579,
+   "gallery": "promoted-wave3"
+  },
+  "cube_mound_scene": {
+   "prop": "cube_mound_scene",
+   "verdict": "hero",
+   "hero": {
+    "release": "chute"
+   },
+   "score": 0.1344,
+   "gallery": "procgen-dna",
+   "evidence": [
+    {
+     "dna": {
+      "release": "ring"
+     },
+     "focus": 0.0907
+    },
+    {
+     "dna": {
+      "release": "sheet"
+     },
+     "focus": 0.122
+    },
+    {
+     "dna": {
+      "release": "rift"
+     },
+     "focus": 0.1259
+    },
+    {
+     "dna": {
+      "release": "chute"
+     },
+     "focus": 0.1344
+    }
+   ]
+  },
+  "curation_station": {
+   "prop": "curation_station",
+   "verdict": "default",
+   "score": 0.0372,
+   "gallery": "central-dna"
+  },
+  "dark_sphere": {
+   "prop": "dark_sphere",
+   "verdict": "hero",
+   "hero": {
+    "presence": "hush",
+    "body": "swarm"
+   },
+   "score": 0.3509,
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "presence": "hush",
+      "body": "cairn"
+     },
+     "focus": 0.3325
+    },
+    {
+     "dna": {
+      "presence": "witness",
+      "body": "cairn"
+     },
+     "focus": 0.3347
+    },
+    {
+     "dna": {
+      "presence": "beacon",
+      "body": "swarm"
+     },
+     "focus": 0.3447
+    },
+    {
+     "dna": {
+      "presence": "hush",
+      "body": "swarm"
+     },
+     "focus": 0.3509
+    }
+   ]
+  },
+  "default_body_bay": {
+   "prop": "default_body_bay",
+   "verdict": "series",
+   "axis": "defaults_applied",
+   "order": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "span": [
+    0.0871,
+    0.2783
+   ],
+   "gallery": "readymades-dna",
+   "evidence": [
+    {
+     "dna": {
+      "defaults_applied": "1"
+     },
+     "focus": 0.0871
+    },
+    {
+     "dna": {
+      "defaults_applied": "2"
+     },
+     "focus": 0.1564
+    },
+    {
+     "dna": {
+      "defaults_applied": "3"
+     },
+     "focus": 0.209
+    },
+    {
+     "dna": {
+      "defaults_applied": "4"
+     },
+     "focus": 0.2362
+    },
+    {
+     "dna": {
+      "defaults_applied": "5"
+     },
+     "focus": 0.2783
+    }
+   ]
+  },
+  "dice_throw": {
+   "prop": "dice_throw",
+   "verdict": "default",
+   "score": 0.0452,
+   "gallery": "randomness-dna"
+  },
+  "dna_specimen": {
+   "prop": "dna_specimen",
+   "verdict": "series",
+   "axis": "becoming",
+   "order": [
+    "jarred",
+    "clouded",
+    "cracked",
+    "escaped"
+   ],
+   "span": [
+    0.0286,
+    0.2395
+   ],
+   "gallery": "verify1",
+   "evidence": [
+    {
+     "dna": {
+      "becoming": "clouded"
+     },
+     "focus": 0.0286
+    },
+    {
+     "dna": {
+      "becoming": "cracked"
+     },
+     "focus": 0.1491
+    },
+    {
+     "dna": {
+      "becoming": "escaped"
+     },
+     "focus": 0.2395
+    }
+   ]
+  },
+  "draw_dot": {
+   "prop": "draw_dot",
+   "verdict": "series",
+   "axis": "retention",
+   "order": [
+    "none",
+    "lattice",
+    "trace",
+    "wax",
+    "archive"
+   ],
+   "span": [
+    0.0342,
+    0.1647
+   ],
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "retention": "lattice"
+     },
+     "focus": 0.0342
+    },
+    {
+     "dna": {
+      "retention": "trace"
+     },
+     "focus": 0.0366
+    },
+    {
+     "dna": {
+      "retention": "wax"
+     },
+     "focus": 0.1443
+    },
+    {
+     "dna": {
+      "retention": "archive"
+     },
+     "focus": 0.1647
+    }
+   ]
+  },
+  "draw_triangle_faces": {
+   "prop": "draw_triangle_faces",
+   "verdict": "hero",
+   "hero": {
+    "retention": "archive"
+   },
+   "score": 0.1913,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "retention": "lattice"
+     },
+     "focus": 0.0916
+    },
+    {
+     "dna": {
+      "retention": "trace"
+     },
+     "focus": 0.0935
+    },
+    {
+     "dna": {
+      "retention": "wax"
+     },
+     "focus": 0.1538
+    },
+    {
+     "dna": {
+      "retention": "archive"
+     },
+     "focus": 0.1913
+    }
+   ]
+  },
+  "dual_display_test": {
+   "prop": "dual_display_test",
+   "verdict": "default",
+   "score": 0.0495,
+   "gallery": "wavefunctions-dna"
+  },
+  "durer_scene": {
+   "prop": "durer_scene",
+   "verdict": "default",
+   "score": 0.0624,
+   "gallery": "wave-two-dna"
+  },
+  "ecosystem_simulation": {
+   "prop": "ecosystem_simulation",
+   "verdict": "hero",
+   "hero": {
+    "quota": "fallow"
+   },
+   "score": 0.1158,
+   "gallery": "swarm-dna",
+   "evidence": [
+    {
+     "dna": {
+      "quota": "barren"
+     },
+     "focus": 0.0786
+    },
+    {
+     "dna": {
+      "quota": "hunted"
+     },
+     "focus": 0.0943
+    },
+    {
+     "dna": {
+      "quota": "fallow"
+     },
+     "focus": 0.1158
+    }
+   ]
+  },
+  "edge_as_ground_capstone": {
+   "prop": "edge_as_ground_capstone",
+   "verdict": "series",
+   "axis": "rim",
+   "order": [
+    "closed",
+    "gapped",
+    "arc",
+    "crowded"
+   ],
+   "span": [
+    0.0287,
+    0.2942
+   ],
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "rim": "crowded",
+      "assertion": "disc"
+     },
+     "focus": 0.2171
+    },
+    {
+     "dna": {
+      "rim": "crowded",
+      "assertion": "void"
+     },
+     "focus": 0.2227
+    },
+    {
+     "dna": {
+      "rim": "arc",
+      "assertion": "shards"
+     },
+     "focus": 0.2284
+    },
+    {
+     "dna": {
+      "rim": "arc",
+      "assertion": "cairn"
+     },
+     "focus": 0.2384
+    },
+    {
+     "dna": {
+      "rim": "crowded",
+      "assertion": "shards"
+     },
+     "focus": 0.2607
+    },
+    {
+     "dna": {
+      "rim": "crowded",
+      "assertion": "cairn"
+     },
+     "focus": 0.2942
+    }
+   ]
+  },
+  "edge_of_chaos_unlocked": {
+   "prop": "edge_of_chaos_unlocked",
+   "verdict": "series",
+   "axis": "tenure",
+   "order": [
+    "unlocked",
+    "clamped",
+    "frozen",
+    "withheld",
+    "chaos"
+   ],
+   "span": [
+    0.0303,
+    0.129
+   ],
+   "gallery": "qfeplab-dna",
+   "evidence": [
+    {
+     "dna": {
+      "tenure": "clamped"
+     },
+     "focus": 0.0303
+    },
+    {
+     "dna": {
+      "tenure": "frozen"
+     },
+     "focus": 0.0342
+    },
+    {
+     "dna": {
+      "tenure": "withheld"
+     },
+     "focus": 0.0682
+    },
+    {
+     "dna": {
+      "tenure": "chaos"
+     },
+     "focus": 0.129
+    }
+   ]
+  },
+  "edmonds_algorithm": {
+   "prop": "edmonds_algorithm",
+   "verdict": "default",
+   "score": 0.0487,
+   "gallery": "graphtheory-dna"
+  },
+  "elliptic_surface": {
+   "prop": "elliptic_surface",
+   "verdict": "hero",
+   "hero": {
+    "postulate": "euclid"
+   },
+   "score": 0.1804,
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "postulate": "net"
+     },
+     "focus": 0.0975
+    },
+    {
+     "dna": {
+      "postulate": "triangle"
+     },
+     "focus": 0.1098
+    },
+    {
+     "dna": {
+      "postulate": "parallels"
+     },
+     "focus": 0.111
+    },
+    {
+     "dna": {
+      "postulate": "euclid"
+     },
+     "focus": 0.1804
+    }
+   ]
+  },
+  "emergence_zone": {
+   "prop": "emergence_zone",
+   "verdict": "default",
+   "score": 0.0784,
+   "gallery": "wave-two-dna"
+  },
+  "energy_landscape_bench": {
+   "prop": "energy_landscape_bench",
+   "verdict": "default",
+   "score": 0.0794,
+   "gallery": "bench-hazard-dna"
+  },
+  "enhanced_kmeans": {
+   "prop": "enhanced_kmeans",
+   "verdict": "default",
+   "score": 0.0037,
+   "gallery": "machinelearning-dna"
+  },
+  "entropy_ceiling": {
+   "prop": "entropy_ceiling",
+   "verdict": "default",
+   "score": 0.0592,
+   "gallery": "qfeplab-dna"
+  },
+  "entropy_fan": {
+   "prop": "entropy_fan",
+   "verdict": "hero",
+   "hero": {
+    "prospect": "thread"
+   },
+   "score": 0.2083,
+   "gallery": "qfeplab-dna",
+   "evidence": [
+    {
+     "dna": {
+      "prospect": "pruned"
+     },
+     "focus": 0.0986
+    },
+    {
+     "dna": {
+      "prospect": "fan"
+     },
+     "focus": 0.116
+    },
+    {
+     "dna": {
+      "prospect": "thread"
+     },
+     "focus": 0.2083
+    }
+   ]
+  },
+  "env_one": {
+   "prop": "env_one",
+   "verdict": "series",
+   "axis": "disclosure",
+   "order": [
+    "oracle",
+    "tally",
+    "ledger",
+    "works",
+    "origin"
+   ],
+   "span": [
+    0.0661,
+    0.2853
+   ],
+   "gallery": "procgen-dna",
+   "evidence": [
+    {
+     "dna": {
+      "disclosure": "tally"
+     },
+     "focus": 0.0661
+    },
+    {
+     "dna": {
+      "disclosure": "ledger"
+     },
+     "focus": 0.2175
+    },
+    {
+     "dna": {
+      "disclosure": "works"
+     },
+     "focus": 0.2799
+    },
+    {
+     "dna": {
+      "disclosure": "origin"
+     },
+     "focus": 0.2853
+    }
+   ]
+  },
+  "escher_staircase": {
+   "prop": "escher_staircase",
+   "verdict": "hero",
+   "hero": {
+    "seam": "field"
+   },
+   "score": 0.1358,
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "seam": "gap"
+     },
+     "focus": 0.0784
+    },
+    {
+     "dna": {
+      "seam": "scaffold"
+     },
+     "focus": 0.0955
+    },
+    {
+     "dna": {
+      "seam": "hairline"
+     },
+     "focus": 0.1202
+    },
+    {
+     "dna": {
+      "seam": "field"
+     },
+     "focus": 0.1358
+    }
+   ]
+  },
+  "ethical_design_clipboard": {
+   "prop": "ethical_design_clipboard",
+   "verdict": "hero",
+   "hero": {
+    "adoption": "dropped"
+   },
+   "score": 0.3284,
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "adoption": "built"
+     },
+     "focus": 0.2434
+    },
+    {
+     "dna": {
+      "adoption": "posted"
+     },
+     "focus": 0.2621
+    },
+    {
+     "dna": {
+      "adoption": "dropped"
+     },
+     "focus": 0.3284
+    }
+   ]
+  },
+  "evolved_creatures": {
+   "prop": "evolved_creatures",
+   "verdict": "default",
+   "score": 0.0082,
+   "gallery": "machinelearning-dna"
+  },
+  "evolvingflowers": {
+   "prop": "evolvingflowers",
+   "verdict": "default",
+   "score": 0.0292,
+   "gallery": "machinelearning-dna"
+  },
+  "example_1_3_vector_subtraction_vr": {
+   "prop": "example_1_3_vector_subtraction_vr",
+   "verdict": "default",
+   "score": 0.0564,
+   "gallery": "framing-check"
+  },
+  "example_1_7_motion_101_velocity_vr": {
+   "prop": "example_1_7_motion_101_velocity_vr",
+   "verdict": "series",
+   "axis": "evidence",
+   "order": [
+    "result",
+    "longhand",
+    "trace",
+    "axiom"
+   ],
+   "span": [
+    0.0808,
+    0.3042
+   ],
+   "gallery": "promoted-wave3",
+   "evidence": [
+    {
+     "dna": {
+      "evidence": "longhand"
+     },
+     "focus": 0.0808
+    },
+    {
+     "dna": {
+      "evidence": "trace"
+     },
+     "focus": 0.0874
+    },
+    {
+     "dna": {
+      "evidence": "axiom"
+     },
+     "focus": 0.3042
+    }
+   ]
+  },
+  "excluded_class_visualizer": {
+   "prop": "excluded_class_visualizer",
+   "verdict": "series",
+   "axis": "exclusion",
+   "order": [
+    "fringe",
+    "slab",
+    "majority",
+    "erased"
+   ],
+   "span": [
+    0.047,
+    0.3252
+   ],
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "exclusion": "slab"
+     },
+     "focus": 0.047
+    },
+    {
+     "dna": {
+      "exclusion": "majority"
+     },
+     "focus": 0.0563
+    },
+    {
+     "dna": {
+      "exclusion": "erased"
+     },
+     "focus": 0.3252
+    }
+   ]
+  },
+  "excluded_middle_demo": {
+   "prop": "excluded_middle_demo",
+   "verdict": "hero",
+   "hero": {
+    "middle": "half"
+   },
+   "score": 0.0886,
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "middle": "third"
+     },
+     "focus": 0.0246
+    },
+    {
+     "dna": {
+      "middle": "spectrum"
+     },
+     "focus": 0.0628
+    },
+    {
+     "dna": {
+      "middle": "half"
+     },
+     "focus": 0.0886
+    }
+   ]
+  },
+  "exhibit_furniture": {
+   "prop": "exhibit_furniture",
+   "verdict": "series",
+   "axis": "house",
+   "order": [
+    "white_cube",
+    "didactic",
+    "depot",
+    "derelict",
+    "forensic",
+    "wunderkammer"
+   ],
+   "span": [
+    0.0551,
+    0.2933
+   ],
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "house": "derelict",
+      "guard": "label"
+     },
+     "focus": 0.2441
+    },
+    {
+     "dna": {
+      "house": "didactic",
+      "guard": "label"
+     },
+     "focus": 0.2561
+    },
+    {
+     "dna": {
+      "house": "white_cube",
+      "guard": "label"
+     },
+     "focus": 0.2572
+    },
+    {
+     "dna": {
+      "house": "forensic",
+      "guard": "label"
+     },
+     "focus": 0.268
+    },
+    {
+     "dna": {
+      "house": "wunderkammer",
+      "guard": "label"
+     },
+     "focus": 0.2808
+    },
+    {
+     "dna": {
+      "house": "wunderkammer",
+      "guard": "none"
+     },
+     "focus": 0.2933
+    }
+   ]
+  },
+  "exhibit_podium": {
+   "prop": "exhibit_podium",
+   "verdict": "hero",
+   "hero": {
+    "house": "wunderkammer",
+    "reserve": "none"
+   },
+   "score": 0.2828,
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "house": "white_cube",
+      "reserve": "armature"
+     },
+     "focus": 0.2644
+    },
+    {
+     "dna": {
+      "house": "wunderkammer",
+      "reserve": "armature"
+     },
+     "focus": 0.2678
+    },
+    {
+     "dna": {
+      "house": "forensic",
+      "reserve": "armature"
+     },
+     "focus": 0.2692
+    },
+    {
+     "dna": {
+      "house": "wunderkammer",
+      "reserve": "none"
+     },
+     "focus": 0.2828
+    }
+   ]
+  },
+  "exhibit_vitrine": {
+   "prop": "exhibit_vitrine",
+   "verdict": "series",
+   "axis": "enclosure",
+   "order": [
+    "box",
+    "niche",
+    "cradle",
+    "bell"
+   ],
+   "span": [
+    0.0961,
+    0.3151
+   ],
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "enclosure": "cradle",
+      "guard": "none"
+     },
+     "focus": 0.2742
+    },
+    {
+     "dna": {
+      "enclosure": "bell",
+      "guard": "none"
+     },
+     "focus": 0.2822
+    },
+    {
+     "dna": {
+      "enclosure": "bell",
+      "guard": "fixture"
+     },
+     "focus": 0.2934
+    },
+    {
+     "dna": {
+      "enclosure": "bell",
+      "guard": "frame"
+     },
+     "focus": 0.2937
+    },
+    {
+     "dna": {
+      "enclosure": "cradle",
+      "guard": "frame"
+     },
+     "focus": 0.3128
+    },
+    {
+     "dna": {
+      "enclosure": "cradle",
+      "guard": "fixture"
+     },
+     "focus": 0.3151
+    }
+   ]
+  },
+  "exit_sign": {
+   "prop": "exit_sign",
+   "verdict": "unmeasured",
+   "note": "single variant",
+   "gallery": "props-shape-gallery"
+  },
+  "f_order_bench": {
+   "prop": "f_order_bench",
+   "verdict": "hero",
+   "hero": {
+    "complement": "redaction"
+   },
+   "score": 0.0988,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "complement": "supply"
+     },
+     "focus": 0.0861
+    },
+    {
+     "dna": {
+      "complement": "ghost"
+     },
+     "focus": 0.0878
+    },
+    {
+     "dna": {
+      "complement": "quorum"
+     },
+     "focus": 0.0944
+    },
+    {
+     "dna": {
+      "complement": "redaction"
+     },
+     "focus": 0.0988
+    }
+   ]
+  },
+  "facade_builder": {
+   "prop": "facade_builder",
+   "verdict": "series",
+   "axis": "armature",
+   "order": [
+    "none",
+    "datum",
+    "gantry",
+    "scaffold"
+   ],
+   "span": [
+    0.053,
+    0.1316
+   ],
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "armature": "datum"
+     },
+     "focus": 0.053
+    },
+    {
+     "dna": {
+      "armature": "gantry"
+     },
+     "focus": 0.1197
+    },
+    {
+     "dna": {
+      "armature": "scaffold"
+     },
+     "focus": 0.1316
+    }
+   ]
+  },
+  "fire_extinguisher": {
+   "prop": "fire_extinguisher",
+   "verdict": "hero",
+   "hero": {
+    "support": "bracket",
+    "statute": "notice"
+   },
+   "score": 0.3621,
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "support": "cabinet",
+      "statute": "notice"
+     },
+     "focus": 0.3348
+    },
+    {
+     "dna": {
+      "support": "cabinet",
+      "statute": "joinery"
+     },
+     "focus": 0.3437
+    },
+    {
+     "dna": {
+      "support": "cabinet",
+      "statute": "issue"
+     },
+     "focus": 0.3616
+    },
+    {
+     "dna": {
+      "support": "bracket",
+      "statute": "notice"
+     },
+     "focus": 0.3621
+    }
+   ]
+  },
+  "fire_hose_box": {
+   "prop": "fire_hose_box",
+   "verdict": "hero",
+   "hero": {
+    "support": "stand",
+    "statute": "notice"
+   },
+   "score": 0.4026,
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "support": "stand",
+      "statute": "joinery"
+     },
+     "focus": 0.3956
+    },
+    {
+     "dna": {
+      "support": "stand",
+      "statute": "issue"
+     },
+     "focus": 0.4008
+    },
+    {
+     "dna": {
+      "support": "stand",
+      "statute": "lapse"
+     },
+     "focus": 0.4008
+    },
+    {
+     "dna": {
+      "support": "stand",
+      "statute": "notice"
+     },
+     "focus": 0.4026
+    }
+   ]
+  },
+  "fitness_landscape_politics": {
+   "prop": "fitness_landscape_politics",
+   "verdict": "series",
+   "axis": "mandate",
+   "order": [
+    "converge",
+    "ridge",
+    "spread",
+    "novelty"
+   ],
+   "span": [
+    0.0332,
+    0.107
+   ],
+   "gallery": "swarm-dna",
+   "evidence": [
+    {
+     "dna": {
+      "mandate": "ridge"
+     },
+     "focus": 0.0332
+    },
+    {
+     "dna": {
+      "mandate": "spread"
+     },
+     "focus": 0.0896
+    },
+    {
+     "dna": {
+      "mandate": "novelty"
+     },
+     "focus": 0.107
+    }
+   ]
+  },
+  "floating_sphere_field": {
+   "prop": "floating_sphere_field",
+   "verdict": "default",
+   "score": 0.0352,
+   "gallery": "batch2-dna"
+  },
+  "florensky_in_production": {
+   "prop": "florensky_in_production",
+   "verdict": "hero",
+   "hero": {
+    "contradiction": "superposed"
+   },
+   "score": 0.2791,
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "contradiction": "folded"
+     },
+     "focus": 0.2428
+    },
+    {
+     "dna": {
+      "contradiction": "collapsed"
+     },
+     "focus": 0.253
+    },
+    {
+     "dna": {
+      "contradiction": "superposed"
+     },
+     "focus": 0.2791
+    }
+   ]
+  },
+  "florensky_sphere": {
+   "prop": "florensky_sphere",
+   "verdict": "series",
+   "axis": "seam",
+   "order": [
+    "none",
+    "field",
+    "gap",
+    "scaffold",
+    "hairline"
+   ],
+   "span": [
+    0.0415,
+    0.1112
+   ],
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "seam": "field"
+     },
+     "focus": 0.0415
+    },
+    {
+     "dna": {
+      "seam": "gap"
+     },
+     "focus": 0.0431
+    },
+    {
+     "dna": {
+      "seam": "scaffold"
+     },
+     "focus": 0.0495
+    },
+    {
+     "dna": {
+      "seam": "hairline"
+     },
+     "focus": 0.1112
+    }
+   ]
+  },
+  "fluency_seam": {
+   "prop": "fluency_seam",
+   "verdict": "hero",
+   "hero": {
+    "crossing": "lattice"
+   },
+   "score": 0.2379,
+   "gallery": "self-critical-ai",
+   "evidence": [
+    {
+     "dna": {
+      "crossing": "singular"
+     },
+     "focus": 0.1558
+    },
+    {
+     "dna": {
+      "crossing": "twice"
+     },
+     "focus": 0.156
+    },
+    {
+     "dna": {
+      "crossing": "spread"
+     },
+     "focus": 0.2062
+    },
+    {
+     "dna": {
+      "crossing": "lattice"
+     },
+     "focus": 0.2379
+    }
+   ]
+  },
+  "folded_strip": {
+   "prop": "folded_strip",
+   "verdict": "default",
+   "score": 0.0515,
+   "gallery": "primitives-dna"
+  },
+  "foucault_pendulum": {
+   "prop": "foucault_pendulum",
+   "verdict": "series",
+   "axis": "interference",
+   "order": [
+    "none",
+    "fence",
+    "swarm",
+    "attractors"
+   ],
+   "span": [
+    0.0328,
+    0.1503
+   ],
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "interference": "fence"
+     },
+     "focus": 0.0328
+    },
+    {
+     "dna": {
+      "interference": "swarm"
+     },
+     "focus": 0.0343
+    },
+    {
+     "dna": {
+      "interference": "attractors"
+     },
+     "focus": 0.1503
+    }
+   ]
+  },
+  "fourier_transform": {
+   "prop": "fourier_transform",
+   "verdict": "hero",
+   "hero": {
+    "domain": "frequency"
+   },
+   "score": 0.2523,
+   "gallery": "promoted-wave1",
+   "evidence": [
+    {
+     "dna": {
+      "domain": "both"
+     },
+     "focus": 0.2523
+    },
+    {
+     "dna": {
+      "domain": "frequency"
+     },
+     "focus": 0.2523
+    }
+   ]
+  },
+  "fractal_arch_bench": {
+   "prop": "fractal_arch_bench",
+   "verdict": "default",
+   "score": 0.0541,
+   "gallery": "wave-two-dna"
+  },
+  "gallery_marker_facade": {
+   "prop": "gallery_marker_facade",
+   "verdict": "hero",
+   "hero": {
+    "mode": "float"
+   },
+   "score": 0.3825,
+   "gallery": "batch2-dna",
+   "evidence": [
+    {
+     "dna": {
+      "mode": "plate"
+     },
+     "focus": 0.2658
+    },
+    {
+     "dna": {
+      "mode": "decal"
+     },
+     "focus": 0.2982
+    },
+    {
+     "dna": {
+      "mode": "float"
+     },
+     "focus": 0.3825
+    }
+   ]
+  },
+  "game_of_life_petri": {
+   "prop": "game_of_life_petri",
+   "verdict": "default",
+   "score": 0.0335,
+   "gallery": "wave-two-dna"
+  },
+  "geodesic_dome": {
+   "prop": "geodesic_dome",
+   "verdict": "hero",
+   "hero": {
+    "subdivision": "v1"
+   },
+   "score": 0.1313,
+   "gallery": "batch2-dna",
+   "evidence": [
+    {
+     "dna": {
+      "subdivision": "v4"
+     },
+     "focus": 0.0807
+    },
+    {
+     "dna": {
+      "subdivision": "v3"
+     },
+     "focus": 0.101
+    },
+    {
+     "dna": {
+      "subdivision": "v1"
+     },
+     "focus": 0.1313
+    }
+   ]
+  },
+  "godel_sentence_machine": {
+   "prop": "godel_sentence_machine",
+   "verdict": "default",
+   "score": 0.0754,
+   "gallery": "foundations-dna"
+  },
+  "godel_statement_plaque": {
+   "prop": "godel_statement_plaque",
+   "verdict": "series",
+   "axis": "outside",
+   "order": [
+    "quotation",
+    "margin",
+    "habitat",
+    "breach",
+    "omission"
+   ],
+   "span": [
+    0.1959,
+    0.4311
+   ],
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "outside": "margin"
+     },
+     "focus": 0.1959
+    },
+    {
+     "dna": {
+      "outside": "habitat"
+     },
+     "focus": 0.3315
+    },
+    {
+     "dna": {
+      "outside": "breach"
+     },
+     "focus": 0.4097
+    },
+    {
+     "dna": {
+      "outside": "omission"
+     },
+     "focus": 0.4311
+    }
+   ]
+  },
+  "grab_jelly_bench": {
+   "prop": "grab_jelly_bench",
+   "verdict": "hero",
+   "hero": {
+    "assay": "vitrine"
+   },
+   "score": 0.1018,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "assay": "gauge"
+     },
+     "focus": 0.0681
+    },
+    {
+     "dna": {
+      "assay": "chart"
+     },
+     "focus": 0.0703
+    },
+    {
+     "dna": {
+      "assay": "control"
+     },
+     "focus": 0.0826
+    },
+    {
+     "dna": {
+      "assay": "vitrine"
+     },
+     "focus": 0.1018
+    }
+   ]
+  },
+  "grab_long_stick": {
+   "prop": "grab_long_stick",
+   "verdict": "default",
+   "score": 0.0572,
+   "gallery": "primitives-dna"
+  },
+  "grab_rainbow_stick": {
+   "prop": "grab_rainbow_stick",
+   "verdict": "default",
+   "score": 0.0573,
+   "gallery": "primitives-dna"
+  },
+  "grab_sphere_E": {
+   "prop": "grab_sphere_E",
+   "verdict": "default",
+   "score": 0.0345,
+   "gallery": "spine-tail-dna"
+  },
+  "grab_sphere_F": {
+   "prop": "grab_sphere_F",
+   "verdict": "default",
+   "score": 0.0387,
+   "gallery": "spine-tail-dna"
+  },
+  "grab_sphere_lambda": {
+   "prop": "grab_sphere_lambda",
+   "verdict": "default",
+   "score": 0.0397,
+   "gallery": "spine-tail-dna"
+  },
+  "grab_sphere_point_snap": {
+   "prop": "grab_sphere_point_snap",
+   "verdict": "series",
+   "axis": "retention",
+   "order": [
+    "none",
+    "lattice",
+    "trace",
+    "wax",
+    "archive"
+   ],
+   "span": [
+    0.0317,
+    0.2822
+   ],
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "retention": "lattice"
+     },
+     "focus": 0.0317
+    },
+    {
+     "dna": {
+      "retention": "trace"
+     },
+     "focus": 0.0612
+    },
+    {
+     "dna": {
+      "retention": "wax"
+     },
+     "focus": 0.1622
+    },
+    {
+     "dna": {
+      "retention": "archive"
+     },
+     "focus": 0.2822
+    }
+   ]
+  },
+  "gradient_descent_visualization": {
+   "prop": "gradient_descent_visualization",
+   "verdict": "series",
+   "axis": "basin",
+   "order": [
+    "bowl",
+    "scarp",
+    "valley",
+    "plural",
+    "plateau"
+   ],
+   "span": [
+    0.0349,
+    0.1888
+   ],
+   "gallery": "machinelearning-dna",
+   "evidence": [
+    {
+     "dna": {
+      "basin": "scarp"
+     },
+     "focus": 0.0349
+    },
+    {
+     "dna": {
+      "basin": "valley"
+     },
+     "focus": 0.0812
+    },
+    {
+     "dna": {
+      "basin": "plural"
+     },
+     "focus": 0.1654
+    },
+    {
+     "dna": {
+      "basin": "plateau"
+     },
+     "focus": 0.1888
+    }
+   ]
+  },
+  "graphspace": {
+   "prop": "graphspace",
+   "verdict": "series",
+   "axis": "siting",
+   "order": [
+    "relaxed",
+    "star",
+    "shell",
+    "circle",
+    "lattice"
+   ],
+   "span": [
+    0.2322,
+    0.5269
+   ],
+   "gallery": "graphtheory-dna",
+   "evidence": [
+    {
+     "dna": {
+      "siting": "star"
+     },
+     "focus": 0.2322
+    },
+    {
+     "dna": {
+      "siting": "shell"
+     },
+     "focus": 0.3071
+    },
+    {
+     "dna": {
+      "siting": "circle"
+     },
+     "focus": 0.3898
+    },
+    {
+     "dna": {
+      "siting": "lattice"
+     },
+     "focus": 0.5269
+    }
+   ]
+  },
+  "grid_3d_capture": {
+   "prop": "grid_3d_capture",
+   "verdict": "hero",
+   "hero": {
+    "bed": "tray"
+   },
+   "score": 0.1628,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "bed": "board"
+     },
+     "focus": 0.1509
+    },
+    {
+     "dna": {
+      "bed": "lattice"
+     },
+     "focus": 0.1522
+    },
+    {
+     "dna": {
+      "bed": "tray"
+     },
+     "focus": 0.1628
+    }
+   ]
+  },
+  "hallway_scene": {
+   "prop": "hallway_scene",
+   "verdict": "hero",
+   "hero": {
+    "element": "deck"
+   },
+   "score": 0.7485,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "element": "vault"
+     },
+     "focus": 0.0
+    },
+    {
+     "dna": {
+      "element": "walls"
+     },
+     "focus": 0.4092
+    },
+    {
+     "dna": {
+      "element": "deck"
+     },
+     "focus": 0.7485
+    }
+   ]
+  },
+  "hardware_entropy_decay": {
+   "prop": "hardware_entropy_decay",
+   "verdict": "default",
+   "score": 0.0425,
+   "gallery": "procgen-dna"
+  },
+  "harmonic_distance_table": {
+   "prop": "harmonic_distance_table",
+   "verdict": "default",
+   "score": 0.0587,
+   "gallery": "verify12"
+  },
+  "harmonic_motion_demo": {
+   "prop": "harmonic_motion_demo",
+   "verdict": "default",
+   "score": 0.0049,
+   "gallery": "promoted-wave2"
+  },
+  "holographicdisplay": {
+   "prop": "holographicdisplay",
+   "verdict": "default",
+   "score": 0.0679,
+   "gallery": "wavefunctions-dna"
+  },
+  "hyperbolic_surface": {
+   "prop": "hyperbolic_surface",
+   "verdict": "hero",
+   "hero": {
+    "postulate": "euclid"
+   },
+   "score": 0.0975,
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "postulate": "triangle"
+     },
+     "focus": 0.0574
+    },
+    {
+     "dna": {
+      "postulate": "parallels"
+     },
+     "focus": 0.0577
+    },
+    {
+     "dna": {
+      "postulate": "net"
+     },
+     "focus": 0.0827
+    },
+    {
+     "dna": {
+      "postulate": "euclid"
+     },
+     "focus": 0.0975
+    }
+   ]
+  },
+  "impossible_trident": {
+   "prop": "impossible_trident",
+   "verdict": "default",
+   "score": 0.0559,
+   "gallery": "foundations-dna"
+  },
+  "incompleteness_tower": {
+   "prop": "incompleteness_tower",
+   "verdict": "series",
+   "axis": "regress",
+   "order": [
+    "taper",
+    "column",
+    "capped",
+    "endless"
+   ],
+   "span": [
+    0.0562,
+    0.174
+   ],
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "regress": "column"
+     },
+     "focus": 0.0562
+    },
+    {
+     "dna": {
+      "regress": "capped"
+     },
+     "focus": 0.1566
+    },
+    {
+     "dna": {
+      "regress": "endless"
+     },
+     "focus": 0.174
+    }
+   ]
+  },
+  "info_board": {
+   "prop": "info_board",
+   "verdict": "hero",
+   "hero": {
+    "voice": "tape",
+    "support": "stand"
+   },
+   "score": 0.4864,
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "voice": "system",
+      "support": "stand"
+     },
+     "focus": 0.4864
+    },
+    {
+     "dna": {
+      "voice": "tape",
+      "support": "cabinet"
+     },
+     "focus": 0.4864
+    },
+    {
+     "dna": {
+      "voice": "tape",
+      "support": "none"
+     },
+     "focus": 0.4864
+    },
+    {
+     "dna": {
+      "voice": "tape",
+      "support": "stand"
+     },
+     "focus": 0.4864
+    }
+   ]
+  },
+  "interactive_point_origin_force": {
+   "prop": "interactive_point_origin_force",
+   "verdict": "hero",
+   "hero": {
+    "retention": "wax"
+   },
+   "score": 0.163,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "retention": "trace"
+     },
+     "focus": 0.0833
+    },
+    {
+     "dna": {
+      "retention": "lattice"
+     },
+     "focus": 0.0986
+    },
+    {
+     "dna": {
+      "retention": "archive"
+     },
+     "focus": 0.123
+    },
+    {
+     "dna": {
+      "retention": "wax"
+     },
+     "focus": 0.163
+    }
+   ]
+  },
+  "john_cage_tech_noir": {
+   "prop": "john_cage_tech_noir",
+   "verdict": "hero",
+   "hero": {
+    "chance": "all"
+   },
+   "score": 0.0871,
+   "gallery": "promoted-wave2",
+   "evidence": [
+    {
+     "dna": {
+      "chance": "hue"
+     },
+     "focus": 0.0158
+    },
+    {
+     "dna": {
+      "chance": "size"
+     },
+     "focus": 0.0476
+    },
+    {
+     "dna": {
+      "chance": "all"
+     },
+     "focus": 0.0871
+    }
+   ]
+  },
+  "julia_bench": {
+   "prop": "julia_bench",
+   "verdict": "default",
+   "score": 0.0534,
+   "gallery": "wave-two-dna"
+  },
+  "julia_set": {
+   "prop": "julia_set",
+   "verdict": "default",
+   "score": 0.0121,
+   "gallery": "procgen-dna"
+  },
+  "kaleidocycle_enemy": {
+   "prop": "kaleidocycle_enemy",
+   "verdict": "hero",
+   "hero": {
+    "warning": "beacon"
+   },
+   "score": 0.2773,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "warning": "cage"
+     },
+     "focus": 0.189
+    },
+    {
+     "dna": {
+      "warning": "stain"
+     },
+     "focus": 0.2442
+    },
+    {
+     "dna": {
+      "warning": "shroud"
+     },
+     "focus": 0.2449
+    },
+    {
+     "dna": {
+      "warning": "beacon"
+     },
+     "focus": 0.2773
+    }
+   ]
+  },
+  "karger_algorithm": {
+   "prop": "karger_algorithm",
+   "verdict": "hero",
+   "hero": {
+    "bottleneck": "throat"
+   },
+   "score": 0.0895,
+   "gallery": "graphtheory-dna",
+   "evidence": [
+    {
+     "dna": {
+      "bottleneck": "braid"
+     },
+     "focus": 0.0181
+    },
+    {
+     "dna": {
+      "bottleneck": "severed"
+     },
+     "focus": 0.0659
+    },
+    {
+     "dna": {
+      "bottleneck": "throat"
+     },
+     "focus": 0.0895
+    }
+   ]
+  },
+  "koch_curve": {
+   "prop": "koch_curve",
+   "verdict": "default",
+   "score": 0.0,
+   "gallery": "wave-two-dna"
+  },
+  "kosaraju_algorithm": {
+   "prop": "kosaraju_algorithm",
+   "verdict": "hero",
+   "hero": {
+    "mutuality": "none"
+   },
+   "score": 0.1078,
+   "gallery": "graphtheory-dna",
+   "evidence": [
+    {
+     "dna": {
+      "mutuality": "split"
+     },
+     "focus": 0.0644
+    },
+    {
+     "dna": {
+      "mutuality": "total"
+     },
+     "focus": 0.0822
+    },
+    {
+     "dna": {
+      "mutuality": "none"
+     },
+     "focus": 0.1078
+    }
+   ]
+  },
+  "kusama_sine": {
+   "prop": "kusama_sine",
+   "verdict": "default",
+   "score": 0.0749,
+   "gallery": "wavefunctions-dna"
+  },
+  "lab_room": {
+   "prop": "lab_room",
+   "verdict": "hero",
+   "hero": {
+    "premises": "ruin",
+    "witness": "pane"
+   },
+   "score": 0.1888,
+   "gallery": "batch2-dna",
+   "evidence": [
+    {
+     "dna": {
+      "premises": "chamber",
+      "witness": "none"
+     },
+     "focus": 0.1674
+    },
+    {
+     "dna": {
+      "premises": "ruin",
+      "witness": "none"
+     },
+     "focus": 0.1756
+    },
+    {
+     "dna": {
+      "premises": "ruin",
+      "witness": "port"
+     },
+     "focus": 0.1756
+    },
+    {
+     "dna": {
+      "premises": "ruin",
+      "witness": "pane"
+     },
+     "focus": 0.1888
+    }
+   ]
+  },
+  "lab_sliding_door": {
+   "prop": "lab_sliding_door",
+   "verdict": "default",
+   "score": 0.0735,
+   "gallery": "bench-hazard-dna"
+  },
+  "lambda_dial_bench": {
+   "prop": "lambda_dial_bench",
+   "verdict": "hero",
+   "hero": {
+    "complement": "quorum"
+   },
+   "score": 0.1217,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "complement": "ghost"
+     },
+     "focus": 0.114
+    },
+    {
+     "dna": {
+      "complement": "supply"
+     },
+     "focus": 0.1166
+    },
+    {
+     "dna": {
+      "complement": "redaction"
+     },
+     "focus": 0.1189
+    },
+    {
+     "dna": {
+      "complement": "quorum"
+     },
+     "focus": 0.1217
+    }
+   ]
+  },
+  "lambda_slider": {
+   "prop": "lambda_slider",
+   "verdict": "hero",
+   "hero": {
+    "calibration": "band"
+   },
+   "score": 0.107,
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "calibration": "gap"
+     },
+     "focus": 0.0683
+    },
+    {
+     "dna": {
+      "calibration": "none"
+     },
+     "focus": 0.0859
+    },
+    {
+     "dna": {
+      "calibration": "dispute"
+     },
+     "focus": 0.1012
+    },
+    {
+     "dna": {
+      "calibration": "band"
+     },
+     "focus": 0.107
+    }
+   ]
+  },
+  "laser_measure": {
+   "prop": "laser_measure",
+   "verdict": "series",
+   "axis": "claim",
+   "order": [
+    "metric",
+    "figure",
+    "none",
+    "tolerance",
+    "datum"
+   ],
+   "span": [
+    0.0303,
+    0.3373
+   ],
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "claim": "figure"
+     },
+     "focus": 0.0303
+    },
+    {
+     "dna": {
+      "claim": "none"
+     },
+     "focus": 0.0304
+    },
+    {
+     "dna": {
+      "claim": "tolerance"
+     },
+     "focus": 0.0668
+    },
+    {
+     "dna": {
+      "claim": "datum"
+     },
+     "focus": 0.3373
+    }
+   ]
+  },
+  "layered_membrane": {
+   "prop": "layered_membrane",
+   "verdict": "default",
+   "score": 0.0372,
+   "gallery": "procgen-dna"
+  },
+  "length_lantern": {
+   "prop": "length_lantern",
+   "verdict": "default",
+   "score": 0.002,
+   "gallery": "promoted-wave2"
+  },
+  "liar_loop": {
+   "prop": "liar_loop",
+   "verdict": "series",
+   "axis": "valuation",
+   "order": [
+    "flip",
+    "neither",
+    "both",
+    "tiered"
+   ],
+   "span": [
+    0.072,
+    0.2315
+   ],
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "valuation": "neither"
+     },
+     "focus": 0.072
+    },
+    {
+     "dna": {
+      "valuation": "both"
+     },
+     "focus": 0.1813
+    },
+    {
+     "dna": {
+      "valuation": "tiered"
+     },
+     "focus": 0.2315
+    }
+   ]
+  },
+  "library_rack": {
+   "prop": "library_rack",
+   "verdict": "default",
+   "score": 0.0,
+   "gallery": "batch2-dna"
+  },
+  "line_builder_3d": {
+   "prop": "line_builder_3d",
+   "verdict": "default",
+   "score": 0.0383,
+   "gallery": "wavefunctions-dna"
+  },
+  "lineage_vitrine": {
+   "prop": "lineage_vitrine",
+   "verdict": "hero",
+   "hero": {
+    "subject": "curation_station",
+    "axis_index": "2"
+   },
+   "score": 0.42,
+   "gallery": "readymades-dna",
+   "evidence": [
+    {
+     "dna": {
+      "subject": "request_note",
+      "axis_index": "2"
+     },
+     "focus": 0.0597
+    },
+    {
+     "dna": {
+      "subject": "curation_station",
+      "axis_index": "0"
+     },
+     "focus": 0.42
+    },
+    {
+     "dna": {
+      "subject": "curation_station",
+      "axis_index": "1"
+     },
+     "focus": 0.42
+    },
+    {
+     "dna": {
+      "subject": "curation_station",
+      "axis_index": "2"
+     },
+     "focus": 0.42
+    }
+   ]
+  },
+  "locatable_knowledge_station": {
+   "prop": "locatable_knowledge_station",
+   "verdict": "hero",
+   "hero": {
+    "provenance": "ghost"
+   },
+   "score": 0.173,
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "provenance": "chained"
+     },
+     "focus": 0.1046
+    },
+    {
+     "dna": {
+      "provenance": "mapped"
+     },
+     "focus": 0.1082
+    },
+    {
+     "dna": {
+      "provenance": "ghost"
+     },
+     "focus": 0.173
+    }
+   ]
+  },
+  "loss_function_comparator": {
+   "prop": "loss_function_comparator",
+   "verdict": "hero",
+   "hero": {
+    "tail": "heavy"
+   },
+   "score": 0.089,
+   "gallery": "machinelearning-dna",
+   "evidence": [
+    {
+     "dna": {
+      "tail": "none"
+     },
+     "focus": 0.0225
+    },
+    {
+     "dna": {
+      "tail": "split"
+     },
+     "focus": 0.028
+    },
+    {
+     "dna": {
+      "tail": "sole"
+     },
+     "focus": 0.0316
+    },
+    {
+     "dna": {
+      "tail": "heavy"
+     },
+     "focus": 0.089
+    }
+   ]
+  },
+  "mandelbrot_bench": {
+   "prop": "mandelbrot_bench",
+   "verdict": "hero",
+   "hero": {
+    "ladder": "relief"
+   },
+   "score": 0.1158,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "ladder": "section"
+     },
+     "focus": 0.0557
+    },
+    {
+     "dna": {
+      "ladder": "seed"
+     },
+     "focus": 0.0615
+    },
+    {
+     "dna": {
+      "ladder": "series"
+     },
+     "focus": 0.0812
+    },
+    {
+     "dna": {
+      "ladder": "relief"
+     },
+     "focus": 0.1158
+    }
+   ]
+  },
+  "mass_spring_bench": {
+   "prop": "mass_spring_bench",
+   "verdict": "default",
+   "score": 0.0709,
+   "gallery": "bench-hazard-dna"
+  },
+  "maze_generation": {
+   "prop": "maze_generation",
+   "verdict": "default",
+   "score": 0.0392,
+   "gallery": "procgen-dna"
+  },
+  "mc_field_bench": {
+   "prop": "mc_field_bench",
+   "verdict": "hero",
+   "hero": {
+    "workings": "reject"
+   },
+   "score": 0.1742,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "workings": "rule"
+     },
+     "focus": 0.0859
+    },
+    {
+     "dna": {
+      "workings": "trial"
+     },
+     "focus": 0.1425
+    },
+    {
+     "dna": {
+      "workings": "reject"
+     },
+     "focus": 0.1742
+    }
+   ]
+  },
+  "membrane_bench": {
+   "prop": "membrane_bench",
+   "verdict": "hero",
+   "hero": {
+    "assay": "control"
+   },
+   "score": 0.1001,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "assay": "gauge"
+     },
+     "focus": 0.0559
+    },
+    {
+     "dna": {
+      "assay": "chart"
+     },
+     "focus": 0.0573
+    },
+    {
+     "dna": {
+      "assay": "vitrine"
+     },
+     "focus": 0.0796
+    },
+    {
+     "dna": {
+      "assay": "control"
+     },
+     "focus": 0.1001
+    }
+   ]
+  },
+  "menger_sponge": {
+   "prop": "menger_sponge",
+   "verdict": "default",
+   "score": 0.0451,
+   "gallery": "verify19"
+  },
+  "merge_conflict_visualizer": {
+   "prop": "merge_conflict_visualizer",
+   "verdict": "hero",
+   "hero": {
+    "merge": "fork"
+   },
+   "score": 0.2394,
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "merge": "overlap"
+     },
+     "focus": 0.1578
+    },
+    {
+     "dna": {
+      "merge": "resolved"
+     },
+     "focus": 0.1765
+    },
+    {
+     "dna": {
+      "merge": "fork"
+     },
+     "focus": 0.2394
+    }
+   ]
+  },
+  "microstate_counter": {
+   "prop": "microstate_counter",
+   "verdict": "default",
+   "score": 0.0537,
+   "gallery": "qfeplab-dna"
+  },
+  "mirror_cellular_texture_for_3d": {
+   "prop": "mirror_cellular_texture_for_3d",
+   "verdict": "default",
+   "score": 0.0504,
+   "gallery": "procgen-dna"
+  },
+  "miura_crawler": {
+   "prop": "miura_crawler",
+   "verdict": "series",
+   "axis": "warning",
+   "order": [
+    "none",
+    "stain",
+    "shroud",
+    "cage",
+    "beacon"
+   ],
+   "span": [
+    0.0794,
+    0.2933
+   ],
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "warning": "stain"
+     },
+     "focus": 0.0794
+    },
+    {
+     "dna": {
+      "warning": "shroud"
+     },
+     "focus": 0.1639
+    },
+    {
+     "dna": {
+      "warning": "cage"
+     },
+     "focus": 0.2096
+    },
+    {
+     "dna": {
+      "warning": "beacon"
+     },
+     "focus": 0.2933
+    }
+   ]
+  },
+  "modulor_man_demo": {
+   "prop": "modulor_man_demo",
+   "verdict": "hero",
+   "hero": {
+    "measure": "scale"
+   },
+   "score": 0.1137,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "measure": "crowd"
+     },
+     "focus": 0.0576
+    },
+    {
+     "dna": {
+      "measure": "module"
+     },
+     "focus": 0.0646
+    },
+    {
+     "dna": {
+      "measure": "canon"
+     },
+     "focus": 0.0839
+    },
+    {
+     "dna": {
+      "measure": "scale"
+     },
+     "focus": 0.1137
+    }
+   ]
+  },
+  "mst_visualization": {
+   "prop": "mst_visualization",
+   "verdict": "default",
+   "score": 0.0139,
+   "gallery": "graphtheory-dna"
+  },
+  "multimeter": {
+   "prop": "multimeter",
+   "verdict": "hero",
+   "hero": {
+    "record": "archive"
+   },
+   "score": 0.313,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "record": "window"
+     },
+     "focus": 0.3052
+    },
+    {
+     "dna": {
+      "record": "margin"
+     },
+     "focus": 0.3069
+    },
+    {
+     "dna": {
+      "record": "archive"
+     },
+     "focus": 0.313
+    }
+   ]
+  },
+  "multiple_ring": {
+   "prop": "multiple_ring",
+   "verdict": "default",
+   "score": 0.0786,
+   "gallery": "readymades-dna"
+  },
+  "mystic_writing_pad": {
+   "prop": "mystic_writing_pad",
+   "verdict": "default",
+   "score": 0.0414,
+   "gallery": "primitives-dna"
+  },
+  "negative_control_fixture": {
+   "prop": "negative_control_fixture",
+   "verdict": "series",
+   "axis": "proof",
+   "order": [
+    "unproven",
+    "absent",
+    "silent",
+    "injected",
+    "certified"
+   ],
+   "span": [
+    0.0247,
+    0.1093
+   ],
+   "gallery": "self-critical-ai",
+   "evidence": [
+    {
+     "dna": {
+      "proof": "absent"
+     },
+     "focus": 0.0247
+    },
+    {
+     "dna": {
+      "proof": "silent"
+     },
+     "focus": 0.0347
+    },
+    {
+     "dna": {
+      "proof": "injected"
+     },
+     "focus": 0.1071
+    },
+    {
+     "dna": {
+      "proof": "certified"
+     },
+     "focus": 0.1093
+    }
+   ]
+  },
+  "network_analysis": {
+   "prop": "network_analysis",
+   "verdict": "series",
+   "axis": "mutuality",
+   "order": [
+    "pockets",
+    "split",
+    "total",
+    "none"
+   ],
+   "span": [
+    0.0944,
+    0.229
+   ],
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "mutuality": "split"
+     },
+     "focus": 0.0944
+    },
+    {
+     "dna": {
+      "mutuality": "total"
+     },
+     "focus": 0.1968
+    },
+    {
+     "dna": {
+      "mutuality": "none"
+     },
+     "focus": 0.229
+    }
+   ]
+  },
+  "networkflow3d": {
+   "prop": "networkflow3d",
+   "verdict": "default",
+   "score": 0.0079,
+   "gallery": "graphtheory-dna"
+  },
+  "neural_network_visualization": {
+   "prop": "neural_network_visualization",
+   "verdict": "default",
+   "score": 0.0536,
+   "gallery": "machinelearning-dna"
+  },
+  "neural_networks_vr": {
+   "prop": "neural_networks_vr",
+   "verdict": "default",
+   "score": 0.0631,
+   "gallery": "machinelearning-dna"
+  },
+  "noisetorus": {
+   "prop": "noisetorus",
+   "verdict": "hero",
+   "hero": {
+    "readout": "none"
+   },
+   "score": 0.1072,
+   "gallery": "randomness-dna",
+   "evidence": [
+    {
+     "dna": {
+      "readout": "plate"
+     },
+     "focus": 0.0863
+    },
+    {
+     "dna": {
+      "readout": "none"
+     },
+     "focus": 0.1072
+    }
+   ]
+  },
+  "non_teleological_evolution": {
+   "prop": "non_teleological_evolution",
+   "verdict": "default",
+   "score": 0.0658,
+   "gallery": "machinelearning-dna"
+  },
+  "normal_force_demo": {
+   "prop": "normal_force_demo",
+   "verdict": "default",
+   "score": 0.0136,
+   "gallery": "promoted-wave1"
+  },
+  "octopus_bench": {
+   "prop": "octopus_bench",
+   "verdict": "hero",
+   "hero": {
+    "assay": "vitrine"
+   },
+   "score": 0.0932,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "assay": "gauge"
+     },
+     "focus": 0.0518
+    },
+    {
+     "dna": {
+      "assay": "control"
+     },
+     "focus": 0.0594
+    },
+    {
+     "dna": {
+      "assay": "chart"
+     },
+     "focus": 0.0873
+    },
+    {
+     "dna": {
+      "assay": "vitrine"
+     },
+     "focus": 0.0932
+    }
+   ]
+  },
+  "operational_eye": {
+   "prop": "operational_eye",
+   "verdict": "default",
+   "score": 0.0557,
+   "gallery": "readymades-dna"
+  },
+  "particle_chaos": {
+   "prop": "particle_chaos",
+   "verdict": "hero",
+   "hero": {
+    "constraint": "jet"
+   },
+   "score": 0.1576,
+   "gallery": "verify_pc",
+   "evidence": [
+    {
+     "dna": {
+      "constraint": "vortex"
+     },
+     "focus": 0.1297
+    },
+    {
+     "dna": {
+      "constraint": "gravity"
+     },
+     "focus": 0.1328
+    },
+    {
+     "dna": {
+      "constraint": "drag"
+     },
+     "focus": 0.1397
+    },
+    {
+     "dna": {
+      "constraint": "jet"
+     },
+     "focus": 0.1576
+    }
+   ]
+  },
+  "path_cube": {
+   "prop": "path_cube",
+   "verdict": "hero",
+   "hero": {
+    "warning": "shroud"
+   },
+   "score": 0.1626,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "warning": "cage"
+     },
+     "focus": 0.1254
+    },
+    {
+     "dna": {
+      "warning": "beacon"
+     },
+     "focus": 0.1305
+    },
+    {
+     "dna": {
+      "warning": "stain"
+     },
+     "focus": 0.1434
+    },
+    {
+     "dna": {
+      "warning": "shroud"
+     },
+     "focus": 0.1626
+    }
+   ]
+  },
+  "pathfinding3d": {
+   "prop": "pathfinding3d",
+   "verdict": "series",
+   "axis": "frontier",
+   "order": [
+    "unsearched",
+    "route",
+    "expanded",
+    "flooded"
+   ],
+   "span": [
+    0.0288,
+    0.1659
+   ],
+   "gallery": "graphtheory-dna",
+   "evidence": [
+    {
+     "dna": {
+      "frontier": "route"
+     },
+     "focus": 0.0288
+    },
+    {
+     "dna": {
+      "frontier": "expanded"
+     },
+     "focus": 0.0929
+    },
+    {
+     "dna": {
+      "frontier": "flooded"
+     },
+     "focus": 0.1659
+    }
+   ]
+  },
+  "pattern_loom": {
+   "prop": "pattern_loom",
+   "verdict": "hero",
+   "hero": {
+    "colophon": "catalogue"
+   },
+   "score": 0.1148,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "colophon": "repeat"
+     },
+     "focus": 0.1057
+    },
+    {
+     "dna": {
+      "colophon": "symmetry"
+     },
+     "focus": 0.108
+    },
+    {
+     "dna": {
+      "colophon": "catalogue"
+     },
+     "focus": 0.1148
+    }
+   ]
+  },
+  "pattern_machine_c": {
+   "prop": "pattern_machine_c",
+   "verdict": "default",
+   "score": 0.0315,
+   "gallery": "wave-two-dna"
+  },
+  "pattern_maker_station": {
+   "prop": "pattern_maker_station",
+   "verdict": "default",
+   "score": 0.0555,
+   "gallery": "bench-hazard-dna"
+  },
+  "pattern_mill": {
+   "prop": "pattern_mill",
+   "verdict": "default",
+   "score": 0.0784,
+   "gallery": "wave-two-dna"
+  },
+  "pca_visualization": {
+   "prop": "pca_visualization",
+   "verdict": "default",
+   "score": 0.038,
+   "gallery": "machinelearning-dna"
+  },
+  "peer_edit_ledger": {
+   "prop": "peer_edit_ledger",
+   "verdict": "hero",
+   "hero": {
+    "authorship": "fork"
+   },
+   "score": 0.1798,
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "authorship": "sole"
+     },
+     "focus": 0.0839
+    },
+    {
+     "dna": {
+      "authorship": "squashed"
+     },
+     "focus": 0.1073
+    },
+    {
+     "dna": {
+      "authorship": "fork"
+     },
+     "focus": 0.1798
+    }
+   ]
+  },
+  "perlin_noise_terrain": {
+   "prop": "perlin_noise_terrain",
+   "verdict": "hero",
+   "hero": {
+    "readout": "column"
+   },
+   "score": 0.2415,
+   "gallery": "randomness-dna",
+   "evidence": [
+    {
+     "dna": {
+      "readout": "plate"
+     },
+     "focus": 0.2013
+    },
+    {
+     "dna": {
+      "readout": "column"
+     },
+     "focus": 0.2415
+    }
+   ]
+  },
+  "phi_rate_bench": {
+   "prop": "phi_rate_bench",
+   "verdict": "hero",
+   "hero": {
+    "complement": "quorum"
+   },
+   "score": 0.2501,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "complement": "redaction"
+     },
+     "focus": 0.24
+    },
+    {
+     "dna": {
+      "complement": "supply"
+     },
+     "focus": 0.2418
+    },
+    {
+     "dna": {
+      "complement": "ghost"
+     },
+     "focus": 0.2459
+    },
+    {
+     "dna": {
+      "complement": "quorum"
+     },
+     "focus": 0.2501
+    }
+   ]
+  },
+  "phi_slider": {
+   "prop": "phi_slider",
+   "verdict": "hero",
+   "hero": {
+    "calibration": "band"
+   },
+   "score": 0.3017,
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "calibration": "gap"
+     },
+     "focus": 0.2394
+    },
+    {
+     "dna": {
+      "calibration": "none"
+     },
+     "focus": 0.2461
+    },
+    {
+     "dna": {
+      "calibration": "dispute"
+     },
+     "focus": 0.2606
+    },
+    {
+     "dna": {
+      "calibration": "band"
+     },
+     "focus": 0.3017
+    }
+   ]
+  },
+  "pick_up_cube": {
+   "prop": "pick_up_cube",
+   "verdict": "series",
+   "axis": "stock",
+   "order": [
+    "wire",
+    "steel",
+    "clay",
+    "crate",
+    "foam"
+   ],
+   "span": [
+    0.1161,
+    0.445
+   ],
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "stock": "clay",
+      "custody": "tally"
+     },
+     "focus": 0.3616
+    },
+    {
+     "dna": {
+      "stock": "clay",
+      "custody": "seal"
+     },
+     "focus": 0.3659
+    },
+    {
+     "dna": {
+      "stock": "crate",
+      "custody": "seal"
+     },
+     "focus": 0.389
+    },
+    {
+     "dna": {
+      "stock": "foam",
+      "custody": "tally"
+     },
+     "focus": 0.418
+    },
+    {
+     "dna": {
+      "stock": "foam",
+      "custody": "none"
+     },
+     "focus": 0.4247
+    },
+    {
+     "dna": {
+      "stock": "foam",
+      "custody": "seal"
+     },
+     "focus": 0.445
+    }
+   ]
+  },
+  "pickup_cube_combo": {
+   "prop": "pickup_cube_combo",
+   "verdict": "hero",
+   "hero": {
+    "travel": "armature"
+   },
+   "score": 0.2263,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "travel": "rail"
+     },
+     "focus": 0.1408
+    },
+    {
+     "dna": {
+      "travel": "gimbal"
+     },
+     "focus": 0.1866
+    },
+    {
+     "dna": {
+      "travel": "spindle"
+     },
+     "focus": 0.1869
+    },
+    {
+     "dna": {
+      "travel": "armature"
+     },
+     "focus": 0.2263
+    }
+   ]
+  },
+  "pickup_cube_rotating": {
+   "prop": "pickup_cube_rotating",
+   "verdict": "hero",
+   "hero": {
+    "travel": "spindle"
+   },
+   "score": 0.3288,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "travel": "seat"
+     },
+     "focus": 0.2659
+    },
+    {
+     "dna": {
+      "travel": "gimbal"
+     },
+     "focus": 0.2979
+    },
+    {
+     "dna": {
+      "travel": "armature"
+     },
+     "focus": 0.3244
+    },
+    {
+     "dna": {
+      "travel": "spindle"
+     },
+     "focus": 0.3288
+    }
+   ]
+  },
+  "pickup_cube_scaling": {
+   "prop": "pickup_cube_scaling",
+   "verdict": "hero",
+   "hero": {
+    "travel": "gimbal"
+   },
+   "score": 0.4531,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "travel": "rail"
+     },
+     "focus": 0.3554
+    },
+    {
+     "dna": {
+      "travel": "spindle"
+     },
+     "focus": 0.4066
+    },
+    {
+     "dna": {
+      "travel": "armature"
+     },
+     "focus": 0.415
+    },
+    {
+     "dna": {
+      "travel": "gimbal"
+     },
+     "focus": 0.4531
+    }
+   ]
+  },
+  "pickup_cube_static": {
+   "prop": "pickup_cube_static",
+   "verdict": "hero",
+   "hero": {
+    "travel": "gimbal"
+   },
+   "score": 0.468,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "travel": "rail"
+     },
+     "focus": 0.4473
+    },
+    {
+     "dna": {
+      "travel": "armature"
+     },
+     "focus": 0.4559
+    },
+    {
+     "dna": {
+      "travel": "spindle"
+     },
+     "focus": 0.4676
+    },
+    {
+     "dna": {
+      "travel": "gimbal"
+     },
+     "focus": 0.468
+    }
+   ]
+  },
+  "pickup_cube_transforming": {
+   "prop": "pickup_cube_transforming",
+   "verdict": "hero",
+   "hero": {
+    "travel": "spindle"
+   },
+   "score": 0.4695,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "travel": "armature"
+     },
+     "focus": 0.4453
+    },
+    {
+     "dna": {
+      "travel": "rail"
+     },
+     "focus": 0.4471
+    },
+    {
+     "dna": {
+      "travel": "gimbal"
+     },
+     "focus": 0.4678
+    },
+    {
+     "dna": {
+      "travel": "spindle"
+     },
+     "focus": 0.4695
+    }
+   ]
+  },
+  "platonic_grabbables": {
+   "prop": "platonic_grabbables",
+   "verdict": "hero",
+   "hero": {
+    "facture": "armature"
+   },
+   "score": 0.1154,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "facture": "cast"
+     },
+     "focus": 0.0245
+    },
+    {
+     "dna": {
+      "facture": "armature"
+     },
+     "focus": 0.1154
+    }
+   ]
+  },
+  "poor_image_gate": {
+   "prop": "poor_image_gate",
+   "verdict": "default",
+   "score": 0.0425,
+   "gallery": "readymades-dna"
+  },
+  "possibility_space_cloud": {
+   "prop": "possibility_space_cloud",
+   "verdict": "series",
+   "axis": "occupancy",
+   "order": [
+    "breath",
+    "pinched",
+    "packed",
+    "unboxed",
+    "widened"
+   ],
+   "span": [
+    0.0397,
+    0.1437
+   ],
+   "gallery": "qfeplab-dna",
+   "evidence": [
+    {
+     "dna": {
+      "occupancy": "pinched"
+     },
+     "focus": 0.0397
+    },
+    {
+     "dna": {
+      "occupancy": "packed"
+     },
+     "focus": 0.0528
+    },
+    {
+     "dna": {
+      "occupancy": "unboxed"
+     },
+     "focus": 0.0602
+    },
+    {
+     "dna": {
+      "occupancy": "widened"
+     },
+     "focus": 0.1437
+    }
+   ]
+  },
+  "prng_crank_machine": {
+   "prop": "prng_crank_machine",
+   "verdict": "default",
+   "score": 0.0689,
+   "gallery": "batch2-dna"
+  },
+  "provability_sorter": {
+   "prop": "provability_sorter",
+   "verdict": "series",
+   "axis": "reach",
+   "order": [
+    "proper",
+    "chasm",
+    "hairline",
+    "total",
+    "complete"
+   ],
+   "span": [
+    0.0527,
+    0.1172
+   ],
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "reach": "chasm"
+     },
+     "focus": 0.0527
+    },
+    {
+     "dna": {
+      "reach": "hairline"
+     },
+     "focus": 0.0581
+    },
+    {
+     "dna": {
+      "reach": "total"
+     },
+     "focus": 0.0775
+    },
+    {
+     "dna": {
+      "reach": "complete"
+     },
+     "focus": 0.1172
+    }
+   ]
+  },
+  "push_relabel_algorithm": {
+   "prop": "push_relabel_algorithm",
+   "verdict": "hero",
+   "hero": {
+    "relief": "terraced"
+   },
+   "score": 0.1617,
+   "gallery": "graphtheory-dna",
+   "evidence": [
+    {
+     "dna": {
+      "relief": "scarp"
+     },
+     "focus": 0.1389
+    },
+    {
+     "dna": {
+      "relief": "shaft"
+     },
+     "focus": 0.159
+    },
+    {
+     "dna": {
+      "relief": "terraced"
+     },
+     "focus": 0.1617
+    }
+   ]
+  },
+  "qfep_balance_workbench": {
+   "prop": "qfep_balance_workbench",
+   "verdict": "default",
+   "score": 0.0578,
+   "gallery": "qfeplab-dna"
+  },
+  "qfep_formula_3d": {
+   "prop": "qfep_formula_3d",
+   "verdict": "series",
+   "axis": "posture",
+   "order": [
+    "line",
+    "arc",
+    "stack",
+    "ring"
+   ],
+   "span": [
+    0.0091,
+    0.1885
+   ],
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "posture": "stack",
+      "emphasis": "F"
+     },
+     "focus": 0.0884
+    },
+    {
+     "dna": {
+      "posture": "stack",
+      "emphasis": "QFE"
+     },
+     "focus": 0.0897
+    },
+    {
+     "dna": {
+      "posture": "ring",
+      "emphasis": "lambda"
+     },
+     "focus": 0.1814
+    },
+    {
+     "dna": {
+      "posture": "ring",
+      "emphasis": "none"
+     },
+     "focus": 0.1845
+    },
+    {
+     "dna": {
+      "posture": "ring",
+      "emphasis": "F"
+     },
+     "focus": 0.1875
+    },
+    {
+     "dna": {
+      "posture": "ring",
+      "emphasis": "QFE"
+     },
+     "focus": 0.1885
+    }
+   ]
+  },
+  "qfep_reactor_bench": {
+   "prop": "qfep_reactor_bench",
+   "verdict": "default",
+   "score": 0.0533,
+   "gallery": "wave-two-dna"
+  },
+  "queer_morphology_specimen": {
+   "prop": "queer_morphology_specimen",
+   "verdict": "series",
+   "axis": "becoming",
+   "order": [
+    "jarred",
+    "clouded",
+    "cracked",
+    "escaped"
+   ],
+   "span": [
+    0.0641,
+    0.1822
+   ],
+   "gallery": "qfeplab-dna",
+   "evidence": [
+    {
+     "dna": {
+      "becoming": "clouded"
+     },
+     "focus": 0.0641
+    },
+    {
+     "dna": {
+      "becoming": "cracked"
+     },
+     "focus": 0.1655
+    },
+    {
+     "dna": {
+      "becoming": "escaped"
+     },
+     "focus": 0.1822
+    }
+   ]
+  },
+  "random_bell_curve": {
+   "prop": "random_bell_curve",
+   "verdict": "hero",
+   "hero": {
+    "constitution": "rib"
+   },
+   "score": 0.0802,
+   "gallery": "randomness-dna",
+   "evidence": [
+    {
+     "dna": {
+      "constitution": "terrace"
+     },
+     "focus": 0.0158
+    },
+    {
+     "dna": {
+      "constitution": "column"
+     },
+     "focus": 0.0517
+    },
+    {
+     "dna": {
+      "constitution": "rib"
+     },
+     "focus": 0.0802
+    }
+   ]
+  },
+  "random_edge_profile": {
+   "prop": "random_edge_profile",
+   "verdict": "hero",
+   "hero": {
+    "readout": "plate"
+   },
+   "score": 0.1351,
+   "gallery": "randomness-dna",
+   "evidence": [
+    {
+     "dna": {
+      "readout": "column"
+     },
+     "focus": 0.1271
+    },
+    {
+     "dna": {
+      "readout": "plate"
+     },
+     "focus": 0.1351
+    }
+   ]
+  },
+  "random_forest_visualization": {
+   "prop": "random_forest_visualization",
+   "verdict": "default",
+   "score": 0.0734,
+   "gallery": "machinelearning-dna"
+  },
+  "random_number_book_page_1955": {
+   "prop": "random_number_book_page_1955",
+   "verdict": "default",
+   "score": 0.0506,
+   "gallery": "randomness-dna"
+  },
+  "random_walk_128": {
+   "prop": "random_walk_128",
+   "verdict": "series",
+   "axis": "residue",
+   "order": [
+    "path",
+    "head",
+    "tail",
+    "envelope",
+    "ensemble"
+   ],
+   "span": [
+    0.0413,
+    0.1293
+   ],
+   "gallery": "randomness-dna",
+   "evidence": [
+    {
+     "dna": {
+      "residue": "head"
+     },
+     "focus": 0.0413
+    },
+    {
+     "dna": {
+      "residue": "tail"
+     },
+     "focus": 0.0414
+    },
+    {
+     "dna": {
+      "residue": "envelope"
+     },
+     "focus": 0.1077
+    },
+    {
+     "dna": {
+      "residue": "ensemble"
+     },
+     "focus": 0.1293
+    }
+   ]
+  },
+  "random_walk_collection": {
+   "prop": "random_walk_collection",
+   "verdict": "default",
+   "score": 0.0,
+   "gallery": "procgen-dna"
+  },
+  "random_walk_leash": {
+   "prop": "random_walk_leash",
+   "verdict": "series",
+   "axis": "residue",
+   "order": [
+    "tail",
+    "head",
+    "path",
+    "ensemble",
+    "envelope"
+   ],
+   "span": [
+    0.0545,
+    0.2114
+   ],
+   "gallery": "randomness-dna",
+   "evidence": [
+    {
+     "dna": {
+      "residue": "head"
+     },
+     "focus": 0.0545
+    },
+    {
+     "dna": {
+      "residue": "path"
+     },
+     "focus": 0.0545
+    },
+    {
+     "dna": {
+      "residue": "ensemble"
+     },
+     "focus": 0.2103
+    },
+    {
+     "dna": {
+      "residue": "envelope"
+     },
+     "focus": 0.2114
+    }
+   ]
+  },
+  "reaction_diffusion": {
+   "prop": "reaction_diffusion",
+   "verdict": "default",
+   "score": 0.0551,
+   "gallery": "procgen-dna"
+  },
+  "recursive_tree": {
+   "prop": "recursive_tree",
+   "verdict": "default",
+   "score": 0.0613,
+   "gallery": "procgen-dna"
+  },
+  "remove_random": {
+   "prop": "remove_random",
+   "verdict": "hero",
+   "hero": {
+    "selection_mode": "All"
+   },
+   "score": 0.1189,
+   "gallery": "hosttest",
+   "evidence": [
+    {
+     "dna": {
+      "selection_mode": "Column"
+     },
+     "focus": 0.0599
+    },
+    {
+     "dna": {
+      "selection_mode": "Row"
+     },
+     "focus": 0.0934
+    },
+    {
+     "dna": {
+      "selection_mode": "All"
+     },
+     "focus": 0.1189
+    }
+   ]
+  },
+  "request_note": {
+   "prop": "request_note",
+   "verdict": "hero",
+   "hero": {
+    "mode": "plate",
+    "tone": "bug"
+   },
+   "score": 0.3347,
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "mode": "plate",
+      "tone": "done"
+     },
+     "focus": 0.3346
+    },
+    {
+     "dna": {
+      "mode": "plate",
+      "tone": "question"
+     },
+     "focus": 0.3346
+    },
+    {
+     "dna": {
+      "mode": "plate",
+      "tone": "request"
+     },
+     "focus": 0.3346
+    },
+    {
+     "dna": {
+      "mode": "plate",
+      "tone": "bug"
+     },
+     "focus": 0.3347
+    }
+   ]
+  },
+  "resonating_metallophone": {
+   "prop": "resonating_metallophone",
+   "verdict": "default",
+   "score": 0.0401,
+   "gallery": "verify12"
+  },
+  "rhizomatic_maze_space": {
+   "prop": "rhizomatic_maze_space",
+   "verdict": "default",
+   "score": 0.0067,
+   "gallery": "verify12"
+  },
+  "rhizomatic_structure": {
+   "prop": "rhizomatic_structure",
+   "verdict": "default",
+   "score": 0.0384,
+   "gallery": "graphtheory-dna"
+  },
+  "rice_verifier_booth": {
+   "prop": "rice_verifier_booth",
+   "verdict": "series",
+   "axis": "refusal",
+   "order": [
+    "blank",
+    "oracle",
+    "spin",
+    "honest",
+    "regress"
+   ],
+   "span": [
+    0.0211,
+    0.1618
+   ],
+   "gallery": "self-critical-ai",
+   "evidence": [
+    {
+     "dna": {
+      "refusal": "oracle"
+     },
+     "focus": 0.0211
+    },
+    {
+     "dna": {
+      "refusal": "spin"
+     },
+     "focus": 0.0676
+    },
+    {
+     "dna": {
+      "refusal": "honest"
+     },
+     "focus": 0.1317
+    },
+    {
+     "dna": {
+      "refusal": "regress"
+     },
+     "focus": 0.1618
+    }
+   ]
+  },
+  "riemann_pump": {
+   "prop": "riemann_pump",
+   "verdict": "hero",
+   "hero": {
+    "comparison": "bracket"
+   },
+   "score": 0.1188,
+   "gallery": "verify19",
+   "evidence": [
+    {
+     "dna": {
+      "comparison": "overlay"
+     },
+     "focus": 0.0552
+    },
+    {
+     "dna": {
+      "comparison": "single"
+     },
+     "focus": 0.0611
+    },
+    {
+     "dna": {
+      "comparison": "bracket"
+     },
+     "focus": 0.1188
+    }
+   ]
+  },
+  "riemann_sphere": {
+   "prop": "riemann_sphere",
+   "verdict": "series",
+   "axis": "postulate",
+   "order": [
+    "bare",
+    "triangle",
+    "parallels",
+    "euclid",
+    "net"
+   ],
+   "span": [
+    0.0457,
+    0.1477
+   ],
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "postulate": "euclid",
+      "infinity": "open"
+     },
+     "focus": 0.113
+    },
+    {
+     "dna": {
+      "postulate": "euclid",
+      "infinity": "pole"
+     },
+     "focus": 0.113
+    },
+    {
+     "dna": {
+      "postulate": "euclid",
+      "infinity": "rays"
+     },
+     "focus": 0.113
+    },
+    {
+     "dna": {
+      "postulate": "net",
+      "infinity": "pole"
+     },
+     "focus": 0.133
+    },
+    {
+     "dna": {
+      "postulate": "net",
+      "infinity": "rays"
+     },
+     "focus": 0.1333
+    },
+    {
+     "dna": {
+      "postulate": "net",
+      "infinity": "open"
+     },
+     "focus": 0.1477
+    }
+   ]
+  },
+  "rigidity_dial_bench": {
+   "prop": "rigidity_dial_bench",
+   "verdict": "hero",
+   "hero": {
+    "assay": "vitrine"
+   },
+   "score": 0.1092,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "assay": "gauge"
+     },
+     "focus": 0.0568
+    },
+    {
+     "dna": {
+      "assay": "control"
+     },
+     "focus": 0.0611
+    },
+    {
+     "dna": {
+      "assay": "chart"
+     },
+     "focus": 0.0918
+    },
+    {
+     "dna": {
+      "assay": "vitrine"
+     },
+     "focus": 0.1092
+    }
+   ]
+  },
+  "room_shape_demonstrator": {
+   "prop": "room_shape_demonstrator",
+   "verdict": "series",
+   "axis": "plan",
+   "order": [
+    "pair",
+    "vacant",
+    "panopticon",
+    "circle",
+    "head"
+   ],
+   "span": [
+    0.0564,
+    0.1732
+   ],
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "plan": "vacant"
+     },
+     "focus": 0.0564
+    },
+    {
+     "dna": {
+      "plan": "panopticon"
+     },
+     "focus": 0.0624
+    },
+    {
+     "dna": {
+      "plan": "circle"
+     },
+     "focus": 0.1723
+    },
+    {
+     "dna": {
+      "plan": "head"
+     },
+     "focus": 0.1732
+    }
+   ]
+  },
+  "rotating_cube": {
+   "prop": "rotating_cube",
+   "verdict": "hero",
+   "hero": {
+    "travel": "spindle"
+   },
+   "score": 0.2972,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "travel": "seat"
+     },
+     "focus": 0.2407
+    },
+    {
+     "dna": {
+      "travel": "gimbal"
+     },
+     "focus": 0.2697
+    },
+    {
+     "dna": {
+      "travel": "armature"
+     },
+     "focus": 0.2949
+    },
+    {
+     "dna": {
+      "travel": "spindle"
+     },
+     "focus": 0.2972
+    }
+   ]
+  },
+  "russell_set_box": {
+   "prop": "russell_set_box",
+   "verdict": "series",
+   "axis": "outside",
+   "order": [
+    "quotation",
+    "omission",
+    "breach",
+    "margin",
+    "habitat"
+   ],
+   "span": [
+    0.1429,
+    0.3932
+   ],
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "outside": "omission"
+     },
+     "focus": 0.1429
+    },
+    {
+     "dna": {
+      "outside": "breach"
+     },
+     "focus": 0.1804
+    },
+    {
+     "dna": {
+      "outside": "margin"
+     },
+     "focus": 0.3348
+    },
+    {
+     "dna": {
+      "outside": "habitat"
+     },
+     "focus": 0.3932
+    }
+   ]
+  },
+  "samplevialrack": {
+   "prop": "samplevialrack",
+   "verdict": "default",
+   "score": 0.0473,
+   "gallery": "wavefunctions-dna"
+  },
+  "schrodinger_box": {
+   "prop": "schrodinger_box",
+   "verdict": "series",
+   "axis": "remainder",
+   "order": [
+    "core",
+    "witness",
+    "seam",
+    "twin",
+    "haze"
+   ],
+   "span": [
+    0.0903,
+    0.3508
+   ],
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "remainder": "twin",
+      "vantage": "stele"
+     },
+     "focus": 0.3284
+    },
+    {
+     "dna": {
+      "remainder": "core",
+      "vantage": "stele"
+     },
+     "focus": 0.3317
+    },
+    {
+     "dna": {
+      "remainder": "seam",
+      "vantage": "stele"
+     },
+     "focus": 0.3317
+    },
+    {
+     "dna": {
+      "remainder": "witness",
+      "vantage": "stele"
+     },
+     "focus": 0.3317
+    },
+    {
+     "dna": {
+      "remainder": "haze",
+      "vantage": "stele"
+     },
+     "focus": 0.3462
+    },
+    {
+     "dna": {
+      "remainder": "haze",
+      "vantage": "specimen"
+     },
+     "focus": 0.3508
+    }
+   ]
+  },
+  "science_screen": {
+   "prop": "science_screen",
+   "verdict": "series",
+   "axis": "surface",
+   "order": [
+    "plane",
+    "tiles",
+    "curve",
+    "triptych"
+   ],
+   "span": [
+    0.0443,
+    0.2017
+   ],
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "support": "pylon",
+      "surface": "triptych"
+     },
+     "focus": 0.1659
+    },
+    {
+     "dna": {
+      "support": "cabinet",
+      "surface": "curve"
+     },
+     "focus": 0.1663
+    },
+    {
+     "dna": {
+      "support": "cabinet",
+      "surface": "tiles"
+     },
+     "focus": 0.1757
+    },
+    {
+     "dna": {
+      "support": "cabinet",
+      "surface": "plane"
+     },
+     "focus": 0.1762
+    },
+    {
+     "dna": {
+      "support": "cabinet",
+      "surface": "triptych"
+     },
+     "focus": 0.1951
+    },
+    {
+     "dna": {
+      "support": "frame",
+      "surface": "triptych"
+     },
+     "focus": 0.2017
+    }
+   ]
+  },
+  "scissor_stalker": {
+   "prop": "scissor_stalker",
+   "verdict": "hero",
+   "hero": {
+    "warning": "stain"
+   },
+   "score": 0.1912,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "warning": "cage"
+     },
+     "focus": 0.1503
+    },
+    {
+     "dna": {
+      "warning": "beacon"
+     },
+     "focus": 0.1777
+    },
+    {
+     "dna": {
+      "warning": "shroud"
+     },
+     "focus": 0.1898
+    },
+    {
+     "dna": {
+      "warning": "stain"
+     },
+     "focus": 0.1912
+    }
+   ]
+  },
+  "sdf_sculpt_bench": {
+   "prop": "sdf_sculpt_bench",
+   "verdict": "hero",
+   "hero": {
+    "workings": "reject"
+   },
+   "score": 0.1847,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "workings": "rule"
+     },
+     "focus": 0.1072
+    },
+    {
+     "dna": {
+      "workings": "trial"
+     },
+     "focus": 0.1364
+    },
+    {
+     "dna": {
+      "workings": "reject"
+     },
+     "focus": 0.1847
+    }
+   ]
+  },
+  "seismograph": {
+   "prop": "seismograph",
+   "verdict": "hero",
+   "hero": {
+    "record": "margin"
+   },
+   "score": 0.1111,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "record": "window"
+     },
+     "focus": 0.09
+    },
+    {
+     "dna": {
+      "record": "archive"
+     },
+     "focus": 0.0977
+    },
+    {
+     "dna": {
+      "record": "margin"
+     },
+     "focus": 0.1111
+    }
+   ]
+  },
+  "self_membership_set": {
+   "prop": "self_membership_set",
+   "verdict": "series",
+   "axis": "descent",
+   "order": [
+    "nested",
+    "barred",
+    "swallowed",
+    "stratified"
+   ],
+   "span": [
+    0.0682,
+    0.2413
+   ],
+   "gallery": "foundations-dna",
+   "evidence": [
+    {
+     "dna": {
+      "descent": "barred"
+     },
+     "focus": 0.0682
+    },
+    {
+     "dna": {
+      "descent": "swallowed"
+     },
+     "focus": 0.1058
+    },
+    {
+     "dna": {
+      "descent": "stratified"
+     },
+     "focus": 0.2413
+    }
+   ]
+  },
+  "self_organizing_patterns": {
+   "prop": "self_organizing_patterns",
+   "verdict": "hero",
+   "hero": {
+    "cue": "slope"
+   },
+   "score": 0.1835,
+   "gallery": "swarm-dna",
+   "evidence": [
+    {
+     "dna": {
+      "cue": "neighbour"
+     },
+     "focus": 0.1071
+    },
+    {
+     "dna": {
+      "cue": "slope"
+     },
+     "focus": 0.1835
+    }
+   ]
+  },
+  "shannon_workbench": {
+   "prop": "shannon_workbench",
+   "verdict": "unmeasured",
+   "note": "single variant",
+   "gallery": "props-dna-gallery"
+  },
+  "sierpinski_bench": {
+   "prop": "sierpinski_bench",
+   "verdict": "default",
+   "score": 0.0488,
+   "gallery": "wave-two-dna"
+  },
+  "sierpinski_triangle": {
+   "prop": "sierpinski_triangle",
+   "verdict": "series",
+   "axis": "excision",
+   "order": [
+    "absence",
+    "rubble",
+    "ghost",
+    "cast",
+    "negative"
+   ],
+   "span": [
+    0.0397,
+    0.1493
+   ],
+   "gallery": "procgen-dna",
+   "evidence": [
+    {
+     "dna": {
+      "excision": "rubble"
+     },
+     "focus": 0.0397
+    },
+    {
+     "dna": {
+      "excision": "ghost"
+     },
+     "focus": 0.0421
+    },
+    {
+     "dna": {
+      "excision": "cast"
+     },
+     "focus": 0.0866
+    },
+    {
+     "dna": {
+      "excision": "negative"
+     },
+     "focus": 0.1493
+    }
+   ]
+  },
+  "sine_cylinder_staircase": {
+   "prop": "sine_cylinder_staircase",
+   "verdict": "hero",
+   "hero": {
+    "provision": "posts"
+   },
+   "score": 0.0942,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "provision": "none"
+     },
+     "focus": 0.0561
+    },
+    {
+     "dna": {
+      "provision": "rail"
+     },
+     "focus": 0.0883
+    },
+    {
+     "dna": {
+      "provision": "posts"
+     },
+     "focus": 0.0942
+    }
+   ]
+  },
+  "sine_wall_corridor": {
+   "prop": "sine_wall_corridor",
+   "verdict": "hero",
+   "hero": {
+    "cut": "ribs"
+   },
+   "score": 0.1483,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "cut": "strata"
+     },
+     "focus": 0.1206
+    },
+    {
+     "dna": {
+      "cut": "lattice"
+     },
+     "focus": 0.1447
+    },
+    {
+     "dna": {
+      "cut": "ribs"
+     },
+     "focus": 0.1483
+    }
+   ]
+  },
+  "sine_wave_controller": {
+   "prop": "sine_wave_controller",
+   "verdict": "hero",
+   "hero": {
+    "evidence": "trace"
+   },
+   "score": 0.2071,
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "evidence": "longhand"
+     },
+     "focus": 0.2
+    },
+    {
+     "dna": {
+      "evidence": "trace"
+     },
+     "focus": 0.2071
+    }
+   ]
+  },
+  "situated_readout": {
+   "prop": "situated_readout",
+   "verdict": "series",
+   "axis": "address",
+   "order": [
+    "footnote",
+    "parallax",
+    "erasure",
+    "survey",
+    "witness"
+   ],
+   "span": [
+    0.0792,
+    0.3321
+   ],
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "address": "parallax"
+     },
+     "focus": 0.0792
+    },
+    {
+     "dna": {
+      "address": "erasure"
+     },
+     "focus": 0.115
+    },
+    {
+     "dna": {
+      "address": "survey"
+     },
+     "focus": 0.1917
+    },
+    {
+     "dna": {
+      "address": "witness"
+     },
+     "focus": 0.3321
+    }
+   ]
+  },
+  "situated_sensor": {
+   "prop": "situated_sensor",
+   "verdict": "hero",
+   "hero": {
+    "standpoint": "many"
+   },
+   "score": 0.3295,
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "standpoint": "nowhere"
+     },
+     "focus": 0.188
+    },
+    {
+     "dna": {
+      "standpoint": "cone"
+     },
+     "focus": 0.2695
+    },
+    {
+     "dna": {
+      "standpoint": "many"
+     },
+     "focus": 0.3295
+    }
+   ]
+  },
+  "slime_bench": {
+   "prop": "slime_bench",
+   "verdict": "hero",
+   "hero": {
+    "workings": "reject"
+   },
+   "score": 0.2029,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "workings": "rule"
+     },
+     "focus": 0.1129
+    },
+    {
+     "dna": {
+      "workings": "trial"
+     },
+     "focus": 0.1529
+    },
+    {
+     "dna": {
+      "workings": "reject"
+     },
+     "focus": 0.2029
+    }
+   ]
+  },
+  "slope_tangent_demo": {
+   "prop": "slope_tangent_demo",
+   "verdict": "default",
+   "score": 0.0106,
+   "gallery": "verify12"
+  },
+  "snap_cube_puzzle": {
+   "prop": "snap_cube_puzzle",
+   "verdict": "hero",
+   "hero": {
+    "solid": "closed"
+   },
+   "score": 0.205,
+   "gallery": "qfeplab-dna",
+   "evidence": [
+    {
+     "dna": {
+      "solid": "scattered"
+     },
+     "focus": 0.1823
+    },
+    {
+     "dna": {
+      "solid": "short"
+     },
+     "focus": 0.1971
+    },
+    {
+     "dna": {
+      "solid": "closed"
+     },
+     "focus": 0.205
+    }
+   ]
+  },
+  "snap_tetra_puzzle": {
+   "prop": "snap_tetra_puzzle",
+   "verdict": "hero",
+   "hero": {
+    "solid": "short"
+   },
+   "score": 0.379,
+   "gallery": "qfeplab-dna",
+   "evidence": [
+    {
+     "dna": {
+      "solid": "scattered"
+     },
+     "focus": 0.3741
+    },
+    {
+     "dna": {
+      "solid": "closed"
+     },
+     "focus": 0.379
+    },
+    {
+     "dna": {
+      "solid": "short"
+     },
+     "focus": 0.379
+    }
+   ]
+  },
+  "space_colonization_algorithm": {
+   "prop": "space_colonization_algorithm",
+   "verdict": "hero",
+   "hero": {
+    "aftermath": "envelope"
+   },
+   "score": 0.084,
+   "gallery": "procgen-dna",
+   "evidence": [
+    {
+     "dna": {
+      "aftermath": "field"
+     },
+     "focus": 0.0297
+    },
+    {
+     "dna": {
+      "aftermath": "form"
+     },
+     "focus": 0.0834
+    },
+    {
+     "dna": {
+      "aftermath": "strata"
+     },
+     "focus": 0.0834
+    },
+    {
+     "dna": {
+      "aftermath": "envelope"
+     },
+     "focus": 0.084
+    }
+   ]
+  },
+  "spring_system": {
+   "prop": "spring_system",
+   "verdict": "series",
+   "axis": "suspension",
+   "order": [
+    "none",
+    "mast",
+    "gantry",
+    "hoop",
+    "wall"
+   ],
+   "span": [
+    0.0357,
+    0.1116
+   ],
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "suspension": "mast"
+     },
+     "focus": 0.0357
+    },
+    {
+     "dna": {
+      "suspension": "gantry"
+     },
+     "focus": 0.045
+    },
+    {
+     "dna": {
+      "suspension": "hoop"
+     },
+     "focus": 0.0528
+    },
+    {
+     "dna": {
+      "suspension": "wall"
+     },
+     "focus": 0.1116
+    }
+   ]
+  },
+  "station_crates": {
+   "prop": "station_crates",
+   "verdict": "hero",
+   "hero": {
+    "upkeep": "store"
+   },
+   "score": 0.2837,
+   "gallery": "central-dna",
+   "evidence": [
+    {
+     "dna": {
+      "upkeep": "works"
+     },
+     "focus": 0.1871
+    },
+    {
+     "dna": {
+      "upkeep": "scrap"
+     },
+     "focus": 0.209
+    },
+    {
+     "dna": {
+      "upkeep": "store"
+     },
+     "focus": 0.2837
+    }
+   ]
+  },
+  "station_floorline": {
+   "prop": "station_floorline",
+   "verdict": "series",
+   "axis": "upkeep",
+   "order": [
+    "service",
+    "scrap",
+    "store",
+    "works"
+   ],
+   "span": [
+    0.0266,
+    0.1024
+   ],
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "upkeep": "scrap"
+     },
+     "focus": 0.0266
+    },
+    {
+     "dna": {
+      "upkeep": "store"
+     },
+     "focus": 0.0643
+    },
+    {
+     "dna": {
+      "upkeep": "works"
+     },
+     "focus": 0.1024
+    }
+   ]
+  },
+  "station_micropod": {
+   "prop": "station_micropod",
+   "verdict": "series",
+   "axis": "upkeep",
+   "order": [
+    "service",
+    "scrap",
+    "works",
+    "store"
+   ],
+   "span": [
+    0.1067,
+    0.3546
+   ],
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "upkeep": "scrap"
+     },
+     "focus": 0.1067
+    },
+    {
+     "dna": {
+      "upkeep": "works"
+     },
+     "focus": 0.1208
+    },
+    {
+     "dna": {
+      "upkeep": "store"
+     },
+     "focus": 0.3546
+    }
+   ]
+  },
+  "station_pillar": {
+   "prop": "station_pillar",
+   "verdict": "unmeasured",
+   "note": "single variant",
+   "gallery": "props-dna-gallery"
+  },
+  "station_plinth": {
+   "prop": "station_plinth",
+   "verdict": "unmeasured",
+   "note": "single variant",
+   "gallery": "props-dna-gallery"
+  },
+  "station_wall": {
+   "prop": "station_wall",
+   "verdict": "unmeasured",
+   "note": "single variant",
+   "gallery": "props-dna-gallery"
+  },
+  "stock_stratum": {
+   "prop": "stock_stratum",
+   "verdict": "hero",
+   "hero": {
+    "max_bands": "9",
+    "live_props": "True"
+   },
+   "score": 0.131,
+   "gallery": "readymades-dna",
+   "evidence": [
+    {
+     "dna": {
+      "max_bands": "6",
+      "live_props": "False"
+     },
+     "focus": 0.1065
+    },
+    {
+     "dna": {
+      "max_bands": "6",
+      "live_props": "True"
+     },
+     "focus": 0.1066
+    },
+    {
+     "dna": {
+      "max_bands": "9",
+      "live_props": "False"
+     },
+     "focus": 0.1171
+    },
+    {
+     "dna": {
+      "max_bands": "9",
+      "live_props": "True"
+     },
+     "focus": 0.131
+    }
+   ]
+  },
+  "stretch_bench": {
+   "prop": "stretch_bench",
+   "verdict": "default",
+   "score": 0.0102,
+   "gallery": "verify19"
+  },
+  "sturtevant_bench": {
+   "prop": "sturtevant_bench",
+   "verdict": "hero",
+   "hero": {
+    "subject": "request_note"
+   },
+   "score": 0.2761,
+   "gallery": "readymades-dna",
+   "evidence": [
+    {
+     "dna": {
+      "subject": "bias_visualizer"
+     },
+     "focus": 0.1584
+    },
+    {
+     "dna": {
+      "subject": "monte_carlo_dartboard"
+     },
+     "focus": 0.2317
+    },
+    {
+     "dna": {
+      "subject": "request_note"
+     },
+     "focus": 0.2761
+    }
+   ]
+  },
+  "superposition_display": {
+   "prop": "superposition_display",
+   "verdict": "series",
+   "axis": "remainder",
+   "order": [
+    "core",
+    "haze",
+    "seam",
+    "twin",
+    "witness"
+   ],
+   "span": [
+    0.0821,
+    0.3137
+   ],
+   "gallery": "spine-tail-dna",
+   "evidence": [
+    {
+     "dna": {
+      "remainder": "witness",
+      "vantage": "chamber"
+     },
+     "focus": 0.2906
+    },
+    {
+     "dna": {
+      "remainder": "witness",
+      "vantage": "stele"
+     },
+     "focus": 0.2962
+    },
+    {
+     "dna": {
+      "remainder": "seam",
+      "vantage": "chamber"
+     },
+     "focus": 0.3001
+    },
+    {
+     "dna": {
+      "remainder": "seam",
+      "vantage": "stele"
+     },
+     "focus": 0.3016
+    },
+    {
+     "dna": {
+      "remainder": "twin",
+      "vantage": "stele"
+     },
+     "focus": 0.3125
+    },
+    {
+     "dna": {
+      "remainder": "twin",
+      "vantage": "chamber"
+     },
+     "focus": 0.3137
+    }
+   ]
+  },
+  "svm_visualization": {
+   "prop": "svm_visualization",
+   "verdict": "default",
+   "score": 0.0664,
+   "gallery": "machinelearning-dna"
+  },
+  "tarjan_algorithm": {
+   "prop": "tarjan_algorithm",
+   "verdict": "default",
+   "score": 0.0737,
+   "gallery": "graphtheory-dna"
+  },
+  "tech_crate": {
+   "prop": "tech_crate",
+   "verdict": "series",
+   "axis": "consignment",
+   "order": [
+    "seal",
+    "manifest",
+    "hold",
+    "bench",
+    "breach"
+   ],
+   "span": [
+    0.1075,
+    0.2848
+   ],
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "consignment": "manifest"
+     },
+     "focus": 0.1075
+    },
+    {
+     "dna": {
+      "consignment": "hold"
+     },
+     "focus": 0.1493
+    },
+    {
+     "dna": {
+      "consignment": "bench"
+     },
+     "focus": 0.2362
+    },
+    {
+     "dna": {
+      "consignment": "breach"
+     },
+     "focus": 0.2848
+    }
+   ]
+  },
+  "ten_print_maze_3d": {
+   "prop": "ten_print_maze_3d",
+   "verdict": "series",
+   "axis": "impression",
+   "order": [
+    "stroke",
+    "character",
+    "wall",
+    "tile"
+   ],
+   "span": [
+    0.0982,
+    0.2467
+   ],
+   "gallery": "randomness-dna",
+   "evidence": [
+    {
+     "dna": {
+      "impression": "character"
+     },
+     "focus": 0.0982
+    },
+    {
+     "dna": {
+      "impression": "wall"
+     },
+     "focus": 0.1954
+    },
+    {
+     "dna": {
+      "impression": "tile"
+     },
+     "focus": 0.2467
+    }
+   ]
+  },
+  "tentacle_placer": {
+   "prop": "tentacle_placer",
+   "verdict": "default",
+   "score": 0.0077,
+   "gallery": "verify1"
+  },
+  "three_body_problem": {
+   "prop": "three_body_problem",
+   "verdict": "hero",
+   "hero": {
+    "configuration": "lagrange"
+   },
+   "score": 0.1527,
+   "gallery": "promoted-wave1",
+   "evidence": [
+    {
+     "dna": {
+      "configuration": "near_collision"
+     },
+     "focus": 0.1271
+    },
+    {
+     "dna": {
+      "configuration": "figure_eight"
+     },
+     "focus": 0.1437
+    },
+    {
+     "dna": {
+      "configuration": "hierarchical"
+     },
+     "focus": 0.1497
+    },
+    {
+     "dna": {
+      "configuration": "lagrange"
+     },
+     "focus": 0.1527
+    }
+   ]
+  },
+  "topological_sort": {
+   "prop": "topological_sort",
+   "verdict": "hero",
+   "hero": {
+    "precedence": "snarl"
+   },
+   "score": 0.1755,
+   "gallery": "graphtheory-dna",
+   "evidence": [
+    {
+     "dna": {
+      "precedence": "stair"
+     },
+     "focus": 0.1395
+    },
+    {
+     "dna": {
+      "precedence": "flat"
+     },
+     "focus": 0.1519
+    },
+    {
+     "dna": {
+      "precedence": "lens"
+     },
+     "focus": 0.1612
+    },
+    {
+     "dna": {
+      "precedence": "snarl"
+     },
+     "focus": 0.1755
+    }
+   ]
+  },
+  "transform_composition": {
+   "prop": "transform_composition",
+   "verdict": "default",
+   "score": 0.006,
+   "gallery": "verify1"
+  },
+  "transform_composition_workbench": {
+   "prop": "transform_composition_workbench",
+   "verdict": "series",
+   "axis": "workings",
+   "order": [
+    "outcome",
+    "trace",
+    "operands",
+    "expression"
+   ],
+   "span": [
+    0.035,
+    0.1599
+   ],
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "workings": "trace"
+     },
+     "focus": 0.035
+    },
+    {
+     "dna": {
+      "workings": "operands"
+     },
+     "focus": 0.0516
+    },
+    {
+     "dna": {
+      "workings": "expression"
+     },
+     "focus": 0.1599
+    }
+   ]
+  },
+  "transformation_cube": {
+   "prop": "transformation_cube",
+   "verdict": "hero",
+   "hero": {
+    "travel": "spindle"
+   },
+   "score": 0.4408,
+   "gallery": "primitives-dna",
+   "evidence": [
+    {
+     "dna": {
+      "travel": "armature"
+     },
+     "focus": 0.4185
+    },
+    {
+     "dna": {
+      "travel": "rail"
+     },
+     "focus": 0.4217
+    },
+    {
+     "dna": {
+      "travel": "gimbal"
+     },
+     "focus": 0.4393
+    },
+    {
+     "dna": {
+      "travel": "spindle"
+     },
+     "focus": 0.4408
+    }
+   ]
+  },
+  "triangleprofiles": {
+   "prop": "triangleprofiles",
+   "verdict": "default",
+   "score": 0.028,
+   "gallery": "primitives-dna"
+  },
+  "trng_vs_prng": {
+   "prop": "trng_vs_prng",
+   "verdict": "hero",
+   "hero": {
+    "disclosure": "oracle"
+   },
+   "score": 0.0997,
+   "gallery": "procgen-dna",
+   "evidence": [
+    {
+     "dna": {
+      "disclosure": "origin"
+     },
+     "focus": 0.0294
+    },
+    {
+     "dna": {
+      "disclosure": "ledger"
+     },
+     "focus": 0.0394
+    },
+    {
+     "dna": {
+      "disclosure": "tally"
+     },
+     "focus": 0.0886
+    },
+    {
+     "dna": {
+      "disclosure": "oracle"
+     },
+     "focus": 0.0997
+    }
+   ]
+  },
+  "tt": {
+   "prop": "tt",
+   "verdict": "series",
+   "axis": "support",
+   "order": [
+    "none",
+    "frame",
+    "pylon",
+    "stand"
+   ],
+   "span": [
+    0.1283,
+    0.4918
+   ],
+   "gallery": "batch2-dna",
+   "evidence": [
+    {
+     "dna": {
+      "support": "frame"
+     },
+     "focus": 0.1283
+    },
+    {
+     "dna": {
+      "support": "pylon"
+     },
+     "focus": 0.3501
+    },
+    {
+     "dna": {
+      "support": "stand"
+     },
+     "focus": 0.4918
+    }
+   ]
+  },
+  "turing_pattern_generator": {
+   "prop": "turing_pattern_generator",
+   "verdict": "default",
+   "score": 0.016,
+   "gallery": "verify12"
+  },
+  "unfinishable_terrarium": {
+   "prop": "unfinishable_terrarium",
+   "verdict": "default",
+   "score": 0.0411,
+   "gallery": "readymades-dna"
+  },
+  "unit_circle_advanced": {
+   "prop": "unit_circle_advanced",
+   "verdict": "series",
+   "axis": "correspondence",
+   "order": [
+    "both",
+    "helix",
+    "cosine",
+    "tangent"
+   ],
+   "span": [
+    0.078,
+    0.1813
+   ],
+   "gallery": "verify1",
+   "evidence": [
+    {
+     "dna": {
+      "correspondence": "helix"
+     },
+     "focus": 0.078
+    },
+    {
+     "dna": {
+      "correspondence": "cosine"
+     },
+     "focus": 0.1225
+    },
+    {
+     "dna": {
+      "correspondence": "tangent"
+     },
+     "focus": 0.1813
+    }
+   ]
+  },
+  "vector_fields": {
+   "prop": "vector_fields",
+   "verdict": "hero",
+   "hero": {
+    "poles": "sink"
+   },
+   "score": 0.1865,
+   "gallery": "verify12",
+   "evidence": [
+    {
+     "dna": {
+      "poles": "binary"
+     },
+     "focus": 0.158
+    },
+    {
+     "dna": {
+      "poles": "source"
+     },
+     "focus": 0.1851
+    },
+    {
+     "dna": {
+      "poles": "sink"
+     },
+     "focus": 0.1865
+    }
+   ]
+  },
+  "visual_color_mixing": {
+   "prop": "visual_color_mixing",
+   "verdict": "hero",
+   "hero": {
+    "mixture": "pigment"
+   },
+   "score": 0.1405,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "mixture": "retina"
+     },
+     "focus": 0.1217
+    },
+    {
+     "dna": {
+      "mixture": "light"
+     },
+     "focus": 0.1326
+    },
+    {
+     "dna": {
+      "mixture": "pigment"
+     },
+     "focus": 0.1405
+    }
+   ]
+  },
+  "voronoi_bench": {
+   "prop": "voronoi_bench",
+   "verdict": "hero",
+   "hero": {
+    "workings": "reject"
+   },
+   "score": 0.1968,
+   "gallery": "wave-two-dna",
+   "evidence": [
+    {
+     "dna": {
+      "workings": "rule"
+     },
+     "focus": 0.1072
+    },
+    {
+     "dna": {
+      "workings": "trial"
+     },
+     "focus": 0.1493
+    },
+    {
+     "dna": {
+      "workings": "reject"
+     },
+     "focus": 0.1968
+    }
+   ]
+  },
+  "vr_tile_editor": {
+   "prop": "vr_tile_editor",
+   "verdict": "default",
+   "score": 0.0629,
+   "gallery": "bench-hazard-dna"
+  },
+  "wave_interference_3d": {
+   "prop": "wave_interference_3d",
+   "verdict": "default",
+   "score": 0.0716,
+   "gallery": "promoted-wave2"
+  },
+  "wave_interference_tank": {
+   "prop": "wave_interference_tank",
+   "verdict": "series",
+   "axis": "evidence",
+   "order": [
+    "result",
+    "sources",
+    "longhand",
+    "trace"
+   ],
+   "span": [
+    0.0567,
+    0.2881
+   ],
+   "gallery": "wavefunctions-dna",
+   "evidence": [
+    {
+     "dna": {
+      "evidence": "sources"
+     },
+     "focus": 0.0567
+    },
+    {
+     "dna": {
+      "evidence": "longhand"
+     },
+     "focus": 0.2466
+    },
+    {
+     "dna": {
+      "evidence": "trace"
+     },
+     "focus": 0.2881
+    }
+   ]
+  },
+  "wiki_fragment_station": {
+   "prop": "wiki_fragment_station",
+   "verdict": "series",
+   "axis": "gathering",
+   "order": [
+    "drift",
+    "bound",
+    "swarm",
+    "scattered"
+   ],
+   "span": [
+    0.0847,
+    0.1962
+   ],
+   "gallery": "postcrisis-dna",
+   "evidence": [
+    {
+     "dna": {
+      "gathering": "bound"
+     },
+     "focus": 0.0847
+    },
+    {
+     "dna": {
+      "gathering": "swarm"
+     },
+     "focus": 0.195
+    },
+    {
+     "dna": {
+      "gathering": "scattered"
+     },
+     "focus": 0.1962
+    }
+   ]
+  },
+  "z_translation_cube": {
+   "prop": "z_translation_cube",
+   "verdict": "hero",
+   "hero": {
+    "course": "depth",
+    "account": "sweep"
+   },
+   "score": 0.2448,
+   "gallery": "bench-hazard-dna",
+   "evidence": [
+    {
+     "dna": {
+      "course": "lift",
+      "account": "sweep"
+     },
+     "focus": 0.1626
+    },
+    {
+     "dna": {
+      "course": "depth",
+      "account": "ghost"
+     },
+     "focus": 0.1805
+    },
+    {
+     "dna": {
+      "course": "lateral",
+      "account": "sweep"
+     },
+     "focus": 0.2219
+    },
+    {
+     "dna": {
+      "course": "depth",
+      "account": "sweep"
+     },
+     "focus": 0.2448
+    }
+   ]
+  }
+ }
+}

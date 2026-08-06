@@ -1,0 +1,21 @@
+{
+	"artifacts": {
+		"synthesis_stand": {
+			"dna": {
+			 "axes": {
+			 "mode": [
+			 "auto",
+			 "hero",
+			 "series"
+			 ]
+			 }
+			},
+			"name": "Synthesis Stand",
+			"lookup_name": "synthesis_stand",
+			"scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+			"category": "synthesis",
+			"complexity": "intermediate",
+			"description": "Every promoted family's one best public form, decided by measurement rather than taste. Given #subject:<token> it reads the verdict file tools/synthesize_heroes.py derived from the swept renders: a HERO subject stands as its single strongest variant, pinned and stated on a plaque with the focus number that chose it; a SERIES subject stands as its whole family on one rail, shipped default first, then ascending by measured departure — because for those families the progression is the argument. 282 families carry verdicts: 113 heroes, 64 series, 100 where the shipped form stands."
+		}
+	}
+}
