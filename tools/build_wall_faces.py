@@ -65,6 +65,45 @@ WALL_SET = ["station_panel", "station_frame", "framed_readout_screen",
 # predicted R-032 — hanging the biggest work is what stole the hero.
 WALL_SIZES = {"small", "medium", "standard", ""}
 DEPTH_STEP = 0.7          # the hangar's depth layer for floor pieces
+WALL_TOP = 3.4            # the hangar's usable wall height
+SIZES = REPO / "commons" / "data" / "artifact_sizes.json"
+
+
+def measured_height(token: str) -> float | None:
+    """The piece's real body height, from the size oracle's measured AABB."""
+    try:
+        s = json.loads(SIZES.read_text(encoding="utf-8")).get("sizes", {})
+    except Exception:
+        return None
+    e = s.get(token)
+    if not isinstance(e, dict):
+        return None
+    h = e.get("height_m")
+    try:
+        return float(h) if h else None
+    except Exception:
+        return None
+
+
+def seat_y(token: str, band: str) -> tuple[float, str]:
+    """R-019 body_on_cell, done offline: seat by the MEASURED body, not a guess.
+
+    The hangar re-seats every piece after 40 frames because the generator's fixed
+    plinth-top guess left tall and short items "a touch off" — "the meet is
+    between what you SEE and what holds it". A band offset has the same fault: it
+    puts the piece's BASE at a nominal height, so a 0.6 m panel and a 2.3 m screen
+    hang from the same line and neither is centred on the eye. The oracle already
+    holds the measured AABB, so the centre can be placed instead of the base.
+    """
+    lo, hi, nominal = next((l, h, y) for b, l, h, y in BANDS if b == band)
+    centre = (lo + hi) / 2.0
+    h = measured_height(token)
+    if h is None:
+        return nominal, "nominal (unmeasured)"
+    y = round(max(0.0, centre - h / 2.0), 2)
+    if y + h > WALL_TOP:
+        return -1.0, f"too tall for the wall ({h} m over {WALL_TOP} m)"
+    return y, f"body {h} m centred at {centre} m"
 # facing -> the rotation an artifact needs to look back down the standoff
 FACING_ROT = {"N": 0, "S": 180, "E": 270, "W": 90}
 
@@ -249,10 +288,15 @@ def hang(museum: str, band: str, limit: int, seed: int, with_floor: bool = False
         if str(inter[fy][fx]).strip():
             continue
         width = max(1, min(f["run"], 5))
-        inter[fy][fx] = f'{piece}:{f["rot"]}:{yoff}#width_cells:{width}'
+        seat, why = seat_y(piece, band)
+        if seat < 0:
+            too_tight.append(f)
+            continue
+        inter[fy][fx] = f'{piece}:{f["rot"]}:{seat}#width_cells:{width}'
         hung.append({"token": inter[fy][fx], "cell": [fx, fy], "facing": f["facing"],
                      "run": f["run"], "standoff": f["standoff"],
-                     "max_area_m2": f["max_area_m2"], "width_cells": width})
+                     "max_area_m2": f["max_area_m2"], "width_cells": width,
+                     "seat_y": seat, "seat_reason": why})
     # THE SECOND GRAVITY, AND WHERE IT GOES — the correction the judge forced.
     # First reading: "everything else falls to the floor + stacks", so I stood the
     # big works at the hangar's depth layer, one cell out from the wall. Judged,
@@ -431,6 +475,13 @@ def selftest() -> int:
     pa = panel_artifacts()
     ok.append(("H every panel declares an area", all("area_m2" in q for q in pa),
                f"{len(pa)} sized"))
+    y_panel, why_p = seat_y("station_panel", "hang")
+    y_screen, why_s = seat_y("science_screen", "hang")
+    ok.append(("J a short and a tall piece seat differently", y_panel != y_screen,
+               f"station_panel {y_panel} ({why_p}) vs science_screen {y_screen}"))
+    ok.append(("K an unmeasured token falls back, it does not crash",
+               seat_y("no_such_artifact_xyz", "hang")[1].startswith("nominal"),
+               "nominal fallback"))
     ok.append(("I a tight face admits fewer works than a wide one",
                len([q for q in pa if q["area_m2"] <= max_area(2.0)])
                < len([q for q in pa if q["area_m2"] <= max_area(6.0)]),
@@ -482,7 +533,7 @@ def main() -> int:
               f"of viewing distance")
         print(f"  MOUNTED ({wh['piece']}, sized to the face):")
         for x in wh["hung"][:8]:
-            print(f"    {x['token']:46} run {x['run']:2} -> width_cells {x['width_cells']}")
+            print(f"    {x['token']:50} run {x['run']:2} · {x['seat_reason']}")
         print(f"  FLOORED at {wh['depth_step_m']} m depth ({len(wh['floored'])}):")
         for x in wh["floored"][:6]:
             print(f"    {x['token']:46} {x['area_m2']} m2")
