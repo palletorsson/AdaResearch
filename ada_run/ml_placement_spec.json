@@ -1,0 +1,425 @@
+{
+ "scenes": [
+  {
+   "token": "gradient_descent_visualization[basin=bowl]",
+   "scene": "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+   "params": {
+    "basin": "bowl"
+   }
+  },
+  {
+   "token": "gradient_descent_visualization[basin=valley]",
+   "scene": "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+   "params": {
+    "basin": "valley"
+   }
+  },
+  {
+   "token": "gradient_descent_visualization[basin=plural]",
+   "scene": "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+   "params": {
+    "basin": "plural"
+   }
+  },
+  {
+   "token": "gradient_descent_visualization[basin=plateau]",
+   "scene": "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+   "params": {
+    "basin": "plateau"
+   }
+  },
+  {
+   "token": "gradient_descent_visualization[basin=scarp]",
+   "scene": "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+   "params": {
+    "basin": "scarp"
+   }
+  },
+  {
+   "token": "evolved_creatures[selection=drift]",
+   "scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+   "params": {
+    "selection": "drift"
+   }
+  },
+  {
+   "token": "evolved_creatures[selection=uniform]",
+   "scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+   "params": {
+    "selection": "uniform"
+   }
+  },
+  {
+   "token": "evolved_creatures[selection=culled]",
+   "scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+   "params": {
+    "selection": "culled"
+   }
+  },
+  {
+   "token": "evolved_creatures[selection=runaway]",
+   "scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+   "params": {
+    "selection": "runaway"
+   }
+  },
+  {
+   "token": "evolved_creatures[selection=split]",
+   "scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+   "params": {
+    "selection": "split"
+   }
+  },
+  {
+   "token": "non_teleological_evolution[selection=drift]",
+   "scene": "res://algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+   "params": {
+    "selection": "drift"
+   }
+  },
+  {
+   "token": "non_teleological_evolution[selection=uniform]",
+   "scene": "res://algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+   "params": {
+    "selection": "uniform"
+   }
+  },
+  {
+   "token": "non_teleological_evolution[selection=culled]",
+   "scene": "res://algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+   "params": {
+    "selection": "culled"
+   }
+  },
+  {
+   "token": "non_teleological_evolution[selection=runaway]",
+   "scene": "res://algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+   "params": {
+    "selection": "runaway"
+   }
+  },
+  {
+   "token": "non_teleological_evolution[selection=split]",
+   "scene": "res://algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+   "params": {
+    "selection": "split"
+   }
+  },
+  {
+   "token": "evolvingflowers[selection=drift]",
+   "scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+   "params": {
+    "selection": "drift"
+   }
+  },
+  {
+   "token": "evolvingflowers[selection=uniform]",
+   "scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+   "params": {
+    "selection": "uniform"
+   }
+  },
+  {
+   "token": "evolvingflowers[selection=culled]",
+   "scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+   "params": {
+    "selection": "culled"
+   }
+  },
+  {
+   "token": "evolvingflowers[selection=runaway]",
+   "scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+   "params": {
+    "selection": "runaway"
+   }
+  },
+  {
+   "token": "evolvingflowers[selection=split]",
+   "scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+   "params": {
+    "selection": "split"
+   }
+  },
+  {
+   "token": "pca_visualization[bearing=aligned]",
+   "scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+   "params": {
+    "bearing": "aligned"
+   }
+  },
+  {
+   "token": "pca_visualization[bearing=crosswise]",
+   "scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+   "params": {
+    "bearing": "crosswise"
+   }
+  },
+  {
+   "token": "pca_visualization[bearing=none]",
+   "scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+   "params": {
+    "bearing": "none"
+   }
+  },
+  {
+   "token": "pca_visualization[bearing=curve]",
+   "scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+   "params": {
+    "bearing": "curve"
+   }
+  },
+  {
+   "token": "pca_visualization[bearing=plane]",
+   "scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+   "params": {
+    "bearing": "plane"
+   }
+  },
+  {
+   "token": "loss_function_comparator[tail=few]",
+   "scene": "res://algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+   "params": {
+    "tail": "few"
+   }
+  },
+  {
+   "token": "loss_function_comparator[tail=none]",
+   "scene": "res://algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+   "params": {
+    "tail": "none"
+   }
+  },
+  {
+   "token": "loss_function_comparator[tail=heavy]",
+   "scene": "res://algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+   "params": {
+    "tail": "heavy"
+   }
+  },
+  {
+   "token": "loss_function_comparator[tail=sole]",
+   "scene": "res://algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+   "params": {
+    "tail": "sole"
+   }
+  },
+  {
+   "token": "loss_function_comparator[tail=split]",
+   "scene": "res://algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+   "params": {
+    "tail": "split"
+   }
+  },
+  {
+   "token": "enhanced_kmeans[cohort=blobs]",
+   "scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+   "params": {
+    "cohort": "blobs"
+   }
+  },
+  {
+   "token": "enhanced_kmeans[cohort=block]",
+   "scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+   "params": {
+    "cohort": "block"
+   }
+  },
+  {
+   "token": "enhanced_kmeans[cohort=rings]",
+   "scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+   "params": {
+    "cohort": "rings"
+   }
+  },
+  {
+   "token": "enhanced_kmeans[cohort=braid]",
+   "scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+   "params": {
+    "cohort": "braid"
+   }
+  },
+  {
+   "token": "enhanced_kmeans[cohort=skew]",
+   "scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+   "params": {
+    "cohort": "skew"
+   }
+  },
+  {
+   "token": "svm_visualization[cohort=blobs]",
+   "scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+   "params": {
+    "cohort": "blobs"
+   }
+  },
+  {
+   "token": "svm_visualization[cohort=block]",
+   "scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+   "params": {
+    "cohort": "block"
+   }
+  },
+  {
+   "token": "svm_visualization[cohort=rings]",
+   "scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+   "params": {
+    "cohort": "rings"
+   }
+  },
+  {
+   "token": "svm_visualization[cohort=braid]",
+   "scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+   "params": {
+    "cohort": "braid"
+   }
+  },
+  {
+   "token": "svm_visualization[cohort=skew]",
+   "scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+   "params": {
+    "cohort": "skew"
+   }
+  },
+  {
+   "token": "random_forest_visualization[cohort=block]",
+   "scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+   "params": {
+    "cohort": "block"
+   }
+  },
+  {
+   "token": "random_forest_visualization[cohort=blobs]",
+   "scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+   "params": {
+    "cohort": "blobs"
+   }
+  },
+  {
+   "token": "random_forest_visualization[cohort=rings]",
+   "scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+   "params": {
+    "cohort": "rings"
+   }
+  },
+  {
+   "token": "random_forest_visualization[cohort=braid]",
+   "scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+   "params": {
+    "cohort": "braid"
+   }
+  },
+  {
+   "token": "random_forest_visualization[cohort=skew]",
+   "scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+   "params": {
+    "cohort": "skew"
+   }
+  },
+  {
+   "token": "neural_network_visualization[topology=graded]",
+   "scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+   "params": {
+    "topology": "graded"
+   }
+  },
+  {
+   "token": "neural_network_visualization[topology=flat]",
+   "scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+   "params": {
+    "topology": "flat"
+   }
+  },
+  {
+   "token": "neural_network_visualization[topology=deep]",
+   "scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+   "params": {
+    "topology": "deep"
+   }
+  },
+  {
+   "token": "neural_network_visualization[topology=widened]",
+   "scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+   "params": {
+    "topology": "widened"
+   }
+  },
+  {
+   "token": "neural_network_visualization[topology=pinched]",
+   "scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+   "params": {
+    "topology": "pinched"
+   }
+  },
+  {
+   "token": "neural_networks_vr[topology=graded]",
+   "scene": "res://algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn",
+   "params": {
+    "topology": "graded"
+   }
+  },
+  {
+   "token": "neural_networks_vr[topology=flat]",
+   "scene": "res://algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn",
+   "params": {
+    "topology": "flat"
+   }
+  },
+  {
+   "token": "neural_networks_vr[topology=deep]",
+   "scene": "res://algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn",
+   "params": {
+    "topology": "deep"
+   }
+  },
+  {
+   "token": "neural_networks_vr[topology=widened]",
+   "scene": "res://algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn",
+   "params": {
+    "topology": "widened"
+   }
+  },
+  {
+   "token": "neural_networks_vr[topology=pinched]",
+   "scene": "res://algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn",
+   "params": {
+    "topology": "pinched"
+   }
+  },
+  {
+   "token": "computer_vision_vr[detection=named]",
+   "scene": "res://algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+   "params": {
+    "detection": "named"
+   }
+  },
+  {
+   "token": "computer_vision_vr[detection=invented]",
+   "scene": "res://algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+   "params": {
+    "detection": "invented"
+   }
+  },
+  {
+   "token": "computer_vision_vr[detection=swarm]",
+   "scene": "res://algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+   "params": {
+    "detection": "swarm"
+   }
+  },
+  {
+   "token": "computer_vision_vr[detection=whole]",
+   "scene": "res://algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+   "params": {
+    "detection": "whole"
+   }
+  },
+  {
+   "token": "computer_vision_vr[detection=bare]",
+   "scene": "res://algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+   "params": {
+    "detection": "bare"
+   }
+  }
+ ],
+ "out": "res://ada_run/ml_placement.json"
+}

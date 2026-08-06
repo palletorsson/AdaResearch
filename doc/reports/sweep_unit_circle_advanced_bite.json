@@ -1,80 +1,104 @@
 {
  "sweep": "unit_circle_advanced",
- "peak_changed_pct": 4.445,
- "subject_pct": 4.518,
+ "peak_changed_pct": 7.972,
+ "subject_pct": 7.396,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "use_color_wheel": true,
-    "color_platforms_from_wheel": true
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "both"
    },
    "b": {
-    "use_color_wheel": true,
-    "color_platforms_from_wheel": false
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "cosine"
    },
-   "changed_px": 24796,
-   "changed_pct": 4.293
+   "changed_px": 26986,
+   "changed_pct": 4.672
   },
   {
    "a": {
-    "use_color_wheel": true,
-    "color_platforms_from_wheel": true
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "both"
    },
    "b": {
-    "use_color_wheel": false,
-    "color_platforms_from_wheel": true
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "tangent"
    },
-   "changed_px": 25677,
-   "changed_pct": 4.445
+   "changed_px": 39904,
+   "changed_pct": 6.909
   },
   {
    "a": {
-    "use_color_wheel": true,
-    "color_platforms_from_wheel": true
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "both"
    },
    "b": {
-    "use_color_wheel": false,
-    "color_platforms_from_wheel": false
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "helix"
    },
-   "changed_px": 25633,
-   "changed_pct": 4.438
+   "changed_px": 15389,
+   "changed_pct": 2.664
   },
   {
    "a": {
-    "use_color_wheel": true,
-    "color_platforms_from_wheel": false
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "cosine"
    },
    "b": {
-    "use_color_wheel": false,
-    "color_platforms_from_wheel": true
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "tangent"
    },
-   "changed_px": 963,
-   "changed_pct": 0.167
+   "changed_px": 46049,
+   "changed_pct": 7.972
   },
   {
    "a": {
-    "use_color_wheel": true,
-    "color_platforms_from_wheel": false
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "cosine"
    },
    "b": {
-    "use_color_wheel": false,
-    "color_platforms_from_wheel": false
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "helix"
    },
-   "changed_px": 902,
-   "changed_pct": 0.156
+   "changed_px": 23845,
+   "changed_pct": 4.128
   },
   {
    "a": {
-    "use_color_wheel": false,
-    "color_platforms_from_wheel": true
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "tangent"
    },
    "b": {
-    "use_color_wheel": false,
-    "color_platforms_from_wheel": false
+    "buildup": "complete",
+    "start_angle_deg": 50.0,
+    "wave_length": 8.0,
+    "correspondence": "helix"
    },
-   "changed_px": 117,
-   "changed_pct": 0.02
+   "changed_px": 41401,
+   "changed_pct": 7.168
   }
  ]
 }

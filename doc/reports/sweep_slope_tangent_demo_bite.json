@@ -1,188 +1,68 @@
 {
  "sweep": "slope_tangent_demo",
- "peak_changed_pct": 0.316,
- "subject_pct": 0.344,
- "verdict": "SUBJECT NOT DETECTED - only 0.34% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "peak_changed_pct": 0.211,
+ "subject_pct": 0.805,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
-    "samples": 48.0,
-    "amplitude": 0.3
+    "phase": "traverse"
    },
    "b": {
-    "samples": 48.0,
-    "amplitude": 0.6
+    "phase": "crest"
    },
-   "changed_px": 1823,
-   "changed_pct": 0.316
+   "changed_px": 1162,
+   "changed_pct": 0.201
   },
   {
    "a": {
-    "samples": 48.0,
-    "amplitude": 0.3
+    "phase": "traverse"
    },
    "b": {
-    "samples": 96.0,
-    "amplitude": 0.3
+    "phase": "steepest"
    },
-   "changed_px": 74,
-   "changed_pct": 0.013
+   "changed_px": 1122,
+   "changed_pct": 0.194
   },
   {
    "a": {
-    "samples": 48.0,
-    "amplitude": 0.3
+    "phase": "traverse"
    },
    "b": {
-    "samples": 96.0,
-    "amplitude": 0.6
+    "phase": "trough"
    },
-   "changed_px": 1816,
-   "changed_pct": 0.314
+   "changed_px": 992,
+   "changed_pct": 0.172
   },
   {
    "a": {
-    "samples": 48.0,
-    "amplitude": 0.3
+    "phase": "crest"
    },
    "b": {
-    "samples": 153.6,
-    "amplitude": 0.3
+    "phase": "steepest"
    },
-   "changed_px": 115,
-   "changed_pct": 0.02
+   "changed_px": 1216,
+   "changed_pct": 0.211
   },
   {
    "a": {
-    "samples": 48.0,
-    "amplitude": 0.3
+    "phase": "crest"
    },
    "b": {
-    "samples": 153.6,
-    "amplitude": 0.6
+    "phase": "trough"
    },
-   "changed_px": 1815,
-   "changed_pct": 0.314
+   "changed_px": 1095,
+   "changed_pct": 0.19
   },
   {
    "a": {
-    "samples": 48.0,
-    "amplitude": 0.6
+    "phase": "steepest"
    },
    "b": {
-    "samples": 96.0,
-    "amplitude": 0.3
+    "phase": "trough"
    },
-   "changed_px": 1817,
-   "changed_pct": 0.315
-  },
-  {
-   "a": {
-    "samples": 48.0,
-    "amplitude": 0.6
-   },
-   "b": {
-    "samples": 96.0,
-    "amplitude": 0.6
-   },
-   "changed_px": 174,
-   "changed_pct": 0.03
-  },
-  {
-   "a": {
-    "samples": 48.0,
-    "amplitude": 0.6
-   },
-   "b": {
-    "samples": 153.6,
-    "amplitude": 0.3
-   },
-   "changed_px": 1820,
-   "changed_pct": 0.315
-  },
-  {
-   "a": {
-    "samples": 48.0,
-    "amplitude": 0.6
-   },
-   "b": {
-    "samples": 153.6,
-    "amplitude": 0.6
-   },
-   "changed_px": 91,
-   "changed_pct": 0.016
-  },
-  {
-   "a": {
-    "samples": 96.0,
-    "amplitude": 0.3
-   },
-   "b": {
-    "samples": 96.0,
-    "amplitude": 0.6
-   },
-   "changed_px": 1810,
-   "changed_pct": 0.313
-  },
-  {
-   "a": {
-    "samples": 96.0,
-    "amplitude": 0.3
-   },
-   "b": {
-    "samples": 153.6,
-    "amplitude": 0.3
-   },
-   "changed_px": 48,
-   "changed_pct": 0.008
-  },
-  {
-   "a": {
-    "samples": 96.0,
-    "amplitude": 0.3
-   },
-   "b": {
-    "samples": 153.6,
-    "amplitude": 0.6
-   },
-   "changed_px": 1809,
-   "changed_pct": 0.313
-  },
-  {
-   "a": {
-    "samples": 96.0,
-    "amplitude": 0.6
-   },
-   "b": {
-    "samples": 153.6,
-    "amplitude": 0.3
-   },
-   "changed_px": 1813,
-   "changed_pct": 0.314
-  },
-  {
-   "a": {
-    "samples": 96.0,
-    "amplitude": 0.6
-   },
-   "b": {
-    "samples": 153.6,
-    "amplitude": 0.6
-   },
-   "changed_px": 124,
-   "changed_pct": 0.021
-  },
-  {
-   "a": {
-    "samples": 153.6,
-    "amplitude": 0.3
-   },
-   "b": {
-    "samples": 153.6,
-    "amplitude": 0.6
-   },
-   "changed_px": 1812,
-   "changed_pct": 0.314
+   "changed_px": 1055,
+   "changed_pct": 0.183
   }
  ]
 }

@@ -1,38 +1,38 @@
 {
  "sweep": "angle_sum_triangle",
- "peak_changed_pct": 0.656,
- "subject_pct": 0.378,
- "verdict": "SUBJECT NOT DETECTED - only 0.38% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "peak_changed_pct": 0.636,
+ "subject_pct": 0.532,
+ "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
-    "size": 0.2
+    "opening": "flat"
    },
    "b": {
-    "size": 0.4
+    "opening": "hyperbolic"
    },
-   "changed_px": 2628,
-   "changed_pct": 0.455
+   "changed_px": 3621,
+   "changed_pct": 0.627
   },
   {
    "a": {
-    "size": 0.2
+    "opening": "flat"
    },
    "b": {
-    "size": 0.64
+    "opening": "elliptic"
    },
-   "changed_px": 3312,
-   "changed_pct": 0.573
+   "changed_px": 3675,
+   "changed_pct": 0.636
   },
   {
    "a": {
-    "size": 0.4
+    "opening": "hyperbolic"
    },
    "b": {
-    "size": 0.64
+    "opening": "elliptic"
    },
-   "changed_px": 3788,
-   "changed_pct": 0.656
+   "changed_px": 3420,
+   "changed_pct": 0.592
   }
  ]
 }

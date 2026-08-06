@@ -1,187 +1,108 @@
 {
  "sweep": "harmonic_distance_table",
- "peak_changed_pct": 6.019,
+ "peak_changed_pct": 2.317,
+ "subject_pct": 2.844,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "circle_radius": 0.175,
-    "node_radius": 0.013
+    "pitch_space": "circle_of_fifths"
    },
    "b": {
-    "circle_radius": 0.175,
-    "node_radius": 0.025
+    "pitch_space": "chromatic"
    },
-   "changed_px": 5175,
-   "changed_pct": 0.896
+   "changed_px": 3063,
+   "changed_pct": 0.53
   },
   {
    "a": {
-    "circle_radius": 0.175,
-    "node_radius": 0.013
+    "pitch_space": "circle_of_fifths"
    },
    "b": {
-    "circle_radius": 0.35,
-    "node_radius": 0.013
+    "pitch_space": "tonnetz"
    },
-   "changed_px": 32960,
-   "changed_pct": 5.706
+   "changed_px": 9532,
+   "changed_pct": 1.65
   },
   {
    "a": {
-    "circle_radius": 0.175,
-    "node_radius": 0.013
+    "pitch_space": "circle_of_fifths"
    },
    "b": {
-    "circle_radius": 0.35,
-    "node_radius": 0.025
+    "pitch_space": "keyboard"
    },
-   "changed_px": 32965,
-   "changed_pct": 5.707
+   "changed_px": 10028,
+   "changed_pct": 1.736
   },
   {
    "a": {
-    "circle_radius": 0.175,
-    "node_radius": 0.013
+    "pitch_space": "circle_of_fifths"
    },
    "b": {
-    "circle_radius": 0.56,
-    "node_radius": 0.013
+    "pitch_space": "helix"
    },
-   "changed_px": 34132,
-   "changed_pct": 5.909
+   "changed_px": 11918,
+   "changed_pct": 2.063
   },
   {
    "a": {
-    "circle_radius": 0.175,
-    "node_radius": 0.013
+    "pitch_space": "chromatic"
    },
    "b": {
-    "circle_radius": 0.56,
-    "node_radius": 0.025
+    "pitch_space": "tonnetz"
    },
-   "changed_px": 34129,
-   "changed_pct": 5.909
+   "changed_px": 11235,
+   "changed_pct": 1.945
   },
   {
    "a": {
-    "circle_radius": 0.175,
-    "node_radius": 0.025
+    "pitch_space": "chromatic"
    },
    "b": {
-    "circle_radius": 0.35,
-    "node_radius": 0.013
+    "pitch_space": "keyboard"
    },
-   "changed_px": 33541,
-   "changed_pct": 5.807
+   "changed_px": 11309,
+   "changed_pct": 1.958
   },
   {
    "a": {
-    "circle_radius": 0.175,
-    "node_radius": 0.025
+    "pitch_space": "chromatic"
    },
    "b": {
-    "circle_radius": 0.35,
-    "node_radius": 0.025
+    "pitch_space": "helix"
    },
-   "changed_px": 33547,
-   "changed_pct": 5.808
+   "changed_px": 10396,
+   "changed_pct": 1.8
   },
   {
    "a": {
-    "circle_radius": 0.175,
-    "node_radius": 0.025
+    "pitch_space": "tonnetz"
    },
    "b": {
-    "circle_radius": 0.56,
-    "node_radius": 0.013
+    "pitch_space": "keyboard"
    },
-   "changed_px": 34763,
-   "changed_pct": 6.019
+   "changed_px": 6133,
+   "changed_pct": 1.062
   },
   {
    "a": {
-    "circle_radius": 0.175,
-    "node_radius": 0.025
+    "pitch_space": "tonnetz"
    },
    "b": {
-    "circle_radius": 0.56,
-    "node_radius": 0.025
+    "pitch_space": "helix"
    },
-   "changed_px": 34760,
-   "changed_pct": 6.018
+   "changed_px": 13381,
+   "changed_pct": 2.317
   },
   {
    "a": {
-    "circle_radius": 0.35,
-    "node_radius": 0.013
+    "pitch_space": "keyboard"
    },
    "b": {
-    "circle_radius": 0.35,
-    "node_radius": 0.025
+    "pitch_space": "helix"
    },
-   "changed_px": 34,
-   "changed_pct": 0.006
-  },
-  {
-   "a": {
-    "circle_radius": 0.35,
-    "node_radius": 0.013
-   },
-   "b": {
-    "circle_radius": 0.56,
-    "node_radius": 0.013
-   },
-   "changed_px": 27139,
-   "changed_pct": 4.699
-  },
-  {
-   "a": {
-    "circle_radius": 0.35,
-    "node_radius": 0.013
-   },
-   "b": {
-    "circle_radius": 0.56,
-    "node_radius": 0.025
-   },
-   "changed_px": 27139,
-   "changed_pct": 4.699
-  },
-  {
-   "a": {
-    "circle_radius": 0.35,
-    "node_radius": 0.025
-   },
-   "b": {
-    "circle_radius": 0.56,
-    "node_radius": 0.013
-   },
-   "changed_px": 27138,
-   "changed_pct": 4.698
-  },
-  {
-   "a": {
-    "circle_radius": 0.35,
-    "node_radius": 0.025
-   },
-   "b": {
-    "circle_radius": 0.56,
-    "node_radius": 0.025
-   },
-   "changed_px": 27139,
-   "changed_pct": 4.699
-  },
-  {
-   "a": {
-    "circle_radius": 0.56,
-    "node_radius": 0.013
-   },
-   "b": {
-    "circle_radius": 0.56,
-    "node_radius": 0.025
-   },
-   "changed_px": 25,
-   "changed_pct": 0.004
+   "changed_px": 12826,
+   "changed_pct": 2.221
   }
  ]
 }

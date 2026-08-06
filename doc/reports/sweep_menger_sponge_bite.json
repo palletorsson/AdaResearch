@@ -1,188 +1,44 @@
 {
  "sweep": "menger_sponge",
- "peak_changed_pct": 0.0,
- "subject_pct": 14.999,
- "verdict": "NO VISIBLE CHANGE - the axis did nothing a still can show",
+ "peak_changed_pct": 12.773,
+ "subject_pct": 14.982,
+ "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 0.5
+    "build_mode": "instant",
+    "tick": "once"
    },
    "b": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 1.0
+    "build_mode": "instant",
+    "tick": "coarse"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 39726,
+   "changed_pct": 6.878
   },
   {
    "a": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 0.5
+    "build_mode": "instant",
+    "tick": "once"
    },
    "b": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 0.5
+    "build_mode": "instant",
+    "tick": "fine"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 73774,
+   "changed_pct": 12.773
   },
   {
    "a": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 0.5
+    "build_mode": "instant",
+    "tick": "coarse"
    },
    "b": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 1.0
+    "build_mode": "instant",
+    "tick": "fine"
    },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 0.5
-   },
-   "b": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 0.5
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 0.5
-   },
-   "b": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 1.0
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 1.0
-   },
-   "b": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 0.5
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 1.0
-   },
-   "b": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 1.0
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 1.0
-   },
-   "b": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 0.5
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 1.0,
-    "subdivision_interval": 1.0
-   },
-   "b": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 1.0
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 0.5
-   },
-   "b": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 1.0
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 0.5
-   },
-   "b": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 0.5
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 0.5
-   },
-   "b": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 1.0
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 1.0
-   },
-   "b": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 0.5
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 2.0,
-    "subdivision_interval": 1.0
-   },
-   "b": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 1.0
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 0.5
-   },
-   "b": {
-    "max_iterations": 3.2,
-    "subdivision_interval": 1.0
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
+   "changed_px": 52252,
+   "changed_pct": 9.046
   }
  ]
 }

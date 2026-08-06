@@ -1,0 +1,355 @@
+{
+ "scenes": [
+  {
+   "token": "graphspace[siting=relaxed]",
+   "scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+   "params": {
+    "siting": "relaxed"
+   }
+  },
+  {
+   "token": "graphspace[siting=lattice]",
+   "scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+   "params": {
+    "siting": "lattice"
+   }
+  },
+  {
+   "token": "graphspace[siting=circle]",
+   "scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+   "params": {
+    "siting": "circle"
+   }
+  },
+  {
+   "token": "graphspace[siting=shell]",
+   "scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+   "params": {
+    "siting": "shell"
+   }
+  },
+  {
+   "token": "graphspace[siting=star]",
+   "scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+   "params": {
+    "siting": "star"
+   }
+  },
+  {
+   "token": "KonigsbergBridge[parity=blocked]",
+   "scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+   "params": {
+    "parity": "blocked"
+   }
+  },
+  {
+   "token": "KonigsbergBridge[parity=walk]",
+   "scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+   "params": {
+    "parity": "walk"
+   }
+  },
+  {
+   "token": "KonigsbergBridge[parity=circuit]",
+   "scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+   "params": {
+    "parity": "circuit"
+   }
+  },
+  {
+   "token": "KonigsbergBridge[parity=severed]",
+   "scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+   "params": {
+    "parity": "severed"
+   }
+  },
+  {
+   "token": "pathfinding3d[frontier=unsearched]",
+   "scene": "res://algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
+   "params": {
+    "frontier": "unsearched"
+   }
+  },
+  {
+   "token": "pathfinding3d[frontier=route]",
+   "scene": "res://algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
+   "params": {
+    "frontier": "route"
+   }
+  },
+  {
+   "token": "pathfinding3d[frontier=expanded]",
+   "scene": "res://algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
+   "params": {
+    "frontier": "expanded"
+   }
+  },
+  {
+   "token": "pathfinding3d[frontier=flooded]",
+   "scene": "res://algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
+   "params": {
+    "frontier": "flooded"
+   }
+  },
+  {
+   "token": "rhizomatic_structure[mutuality=pockets]",
+   "scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+   "params": {
+    "mutuality": "pockets"
+   }
+  },
+  {
+   "token": "rhizomatic_structure[mutuality=none]",
+   "scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+   "params": {
+    "mutuality": "none"
+   }
+  },
+  {
+   "token": "rhizomatic_structure[mutuality=split]",
+   "scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+   "params": {
+    "mutuality": "split"
+   }
+  },
+  {
+   "token": "rhizomatic_structure[mutuality=total]",
+   "scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+   "params": {
+    "mutuality": "total"
+   }
+  },
+  {
+   "token": "networkflow3d[bottleneck=mixed]",
+   "scene": "res://algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
+   "params": {
+    "bottleneck": "mixed"
+   }
+  },
+  {
+   "token": "networkflow3d[bottleneck=throat]",
+   "scene": "res://algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
+   "params": {
+    "bottleneck": "throat"
+   }
+  },
+  {
+   "token": "networkflow3d[bottleneck=braid]",
+   "scene": "res://algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
+   "params": {
+    "bottleneck": "braid"
+   }
+  },
+  {
+   "token": "networkflow3d[bottleneck=severed]",
+   "scene": "res://algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
+   "params": {
+    "bottleneck": "severed"
+   }
+  },
+  {
+   "token": "topological_sort[precedence=levels]",
+   "scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn",
+   "params": {
+    "precedence": "levels"
+   }
+  },
+  {
+   "token": "topological_sort[precedence=stair]",
+   "scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn",
+   "params": {
+    "precedence": "stair"
+   }
+  },
+  {
+   "token": "topological_sort[precedence=flat]",
+   "scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn",
+   "params": {
+    "precedence": "flat"
+   }
+  },
+  {
+   "token": "topological_sort[precedence=lens]",
+   "scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn",
+   "params": {
+    "precedence": "lens"
+   }
+  },
+  {
+   "token": "topological_sort[precedence=snarl]",
+   "scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn",
+   "params": {
+    "precedence": "snarl"
+   }
+  },
+  {
+   "token": "tarjan_algorithm[mutuality=pockets]",
+   "scene": "res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
+   "params": {
+    "mutuality": "pockets"
+   }
+  },
+  {
+   "token": "tarjan_algorithm[mutuality=none]",
+   "scene": "res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
+   "params": {
+    "mutuality": "none"
+   }
+  },
+  {
+   "token": "tarjan_algorithm[mutuality=split]",
+   "scene": "res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
+   "params": {
+    "mutuality": "split"
+   }
+  },
+  {
+   "token": "tarjan_algorithm[mutuality=total]",
+   "scene": "res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
+   "params": {
+    "mutuality": "total"
+   }
+  },
+  {
+   "token": "kosaraju_algorithm[mutuality=pockets]",
+   "scene": "res://algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.tscn",
+   "params": {
+    "mutuality": "pockets"
+   }
+  },
+  {
+   "token": "kosaraju_algorithm[mutuality=none]",
+   "scene": "res://algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.tscn",
+   "params": {
+    "mutuality": "none"
+   }
+  },
+  {
+   "token": "kosaraju_algorithm[mutuality=split]",
+   "scene": "res://algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.tscn",
+   "params": {
+    "mutuality": "split"
+   }
+  },
+  {
+   "token": "kosaraju_algorithm[mutuality=total]",
+   "scene": "res://algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.tscn",
+   "params": {
+    "mutuality": "total"
+   }
+  },
+  {
+   "token": "mst_visualization[backbone=picked]",
+   "scene": "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+   "params": {
+    "backbone": "picked"
+   }
+  },
+  {
+   "token": "mst_visualization[backbone=bare]",
+   "scene": "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+   "params": {
+    "backbone": "bare"
+   }
+  },
+  {
+   "token": "mst_visualization[backbone=refused]",
+   "scene": "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+   "params": {
+    "backbone": "refused"
+   }
+  },
+  {
+   "token": "mst_visualization[backbone=forest]",
+   "scene": "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+   "params": {
+    "backbone": "forest"
+   }
+  },
+  {
+   "token": "karger_algorithm[bottleneck=mixed]",
+   "scene": "res://algorithms/graphtheory/karger_algorithm/karger_algorithm.tscn",
+   "params": {
+    "bottleneck": "mixed"
+   }
+  },
+  {
+   "token": "karger_algorithm[bottleneck=throat]",
+   "scene": "res://algorithms/graphtheory/karger_algorithm/karger_algorithm.tscn",
+   "params": {
+    "bottleneck": "throat"
+   }
+  },
+  {
+   "token": "karger_algorithm[bottleneck=braid]",
+   "scene": "res://algorithms/graphtheory/karger_algorithm/karger_algorithm.tscn",
+   "params": {
+    "bottleneck": "braid"
+   }
+  },
+  {
+   "token": "karger_algorithm[bottleneck=severed]",
+   "scene": "res://algorithms/graphtheory/karger_algorithm/karger_algorithm.tscn",
+   "params": {
+    "bottleneck": "severed"
+   }
+  },
+  {
+   "token": "push_relabel_algorithm[relief=flat]",
+   "scene": "res://algorithms/graphtheory/push_relabel/push_relabel.tscn",
+   "params": {
+    "relief": "flat"
+   }
+  },
+  {
+   "token": "push_relabel_algorithm[relief=terraced]",
+   "scene": "res://algorithms/graphtheory/push_relabel/push_relabel.tscn",
+   "params": {
+    "relief": "terraced"
+   }
+  },
+  {
+   "token": "push_relabel_algorithm[relief=scarp]",
+   "scene": "res://algorithms/graphtheory/push_relabel/push_relabel.tscn",
+   "params": {
+    "relief": "scarp"
+   }
+  },
+  {
+   "token": "push_relabel_algorithm[relief=shaft]",
+   "scene": "res://algorithms/graphtheory/push_relabel/push_relabel.tscn",
+   "params": {
+    "relief": "shaft"
+   }
+  },
+  {
+   "token": "edmonds_algorithm[coupling=partial]",
+   "scene": "res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
+   "params": {
+    "coupling": "partial"
+   }
+  },
+  {
+   "token": "edmonds_algorithm[coupling=perfect]",
+   "scene": "res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
+   "params": {
+    "coupling": "perfect"
+   }
+  },
+  {
+   "token": "edmonds_algorithm[coupling=stranded]",
+   "scene": "res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
+   "params": {
+    "coupling": "stranded"
+   }
+  },
+  {
+   "token": "edmonds_algorithm[coupling=blossom]",
+   "scene": "res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
+   "params": {
+    "coupling": "blossom"
+   }
+  }
+ ],
+ "out": "res://ada_run/gt_placement.json"
+}

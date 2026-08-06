@@ -1,0 +1,614 @@
+{
+ "scenes": [
+  {
+   "token": "godel_sentence_machine[verdict=honest]",
+   "scene": "res://commons/artifacts/godel_sentence_machine/godel_sentence_machine.tscn",
+   "params": {
+    "verdict": "honest"
+   }
+  },
+  {
+   "token": "godel_sentence_machine[verdict=proved]",
+   "scene": "res://commons/artifacts/godel_sentence_machine/godel_sentence_machine.tscn",
+   "params": {
+    "verdict": "proved"
+   }
+  },
+  {
+   "token": "godel_sentence_machine[verdict=silent]",
+   "scene": "res://commons/artifacts/godel_sentence_machine/godel_sentence_machine.tscn",
+   "params": {
+    "verdict": "silent"
+   }
+  },
+  {
+   "token": "godel_sentence_machine[verdict=harmless]",
+   "scene": "res://commons/artifacts/godel_sentence_machine/godel_sentence_machine.tscn",
+   "params": {
+    "verdict": "harmless"
+   }
+  },
+  {
+   "token": "incompleteness_tower[regress=taper]",
+   "scene": "res://commons/artifacts/incompleteness_tower/incompleteness_tower.tscn",
+   "params": {
+    "regress": "taper"
+   }
+  },
+  {
+   "token": "incompleteness_tower[regress=endless]",
+   "scene": "res://commons/artifacts/incompleteness_tower/incompleteness_tower.tscn",
+   "params": {
+    "regress": "endless"
+   }
+  },
+  {
+   "token": "incompleteness_tower[regress=capped]",
+   "scene": "res://commons/artifacts/incompleteness_tower/incompleteness_tower.tscn",
+   "params": {
+    "regress": "capped"
+   }
+  },
+  {
+   "token": "incompleteness_tower[regress=column]",
+   "scene": "res://commons/artifacts/incompleteness_tower/incompleteness_tower.tscn",
+   "params": {
+    "regress": "column"
+   }
+  },
+  {
+   "token": "provability_sorter[reach=proper]",
+   "scene": "res://commons/artifacts/provability_sorter/provability_sorter.tscn",
+   "params": {
+    "reach": "proper"
+   }
+  },
+  {
+   "token": "provability_sorter[reach=complete]",
+   "scene": "res://commons/artifacts/provability_sorter/provability_sorter.tscn",
+   "params": {
+    "reach": "complete"
+   }
+  },
+  {
+   "token": "provability_sorter[reach=hairline]",
+   "scene": "res://commons/artifacts/provability_sorter/provability_sorter.tscn",
+   "params": {
+    "reach": "hairline"
+   }
+  },
+  {
+   "token": "provability_sorter[reach=chasm]",
+   "scene": "res://commons/artifacts/provability_sorter/provability_sorter.tscn",
+   "params": {
+    "reach": "chasm"
+   }
+  },
+  {
+   "token": "provability_sorter[reach=total]",
+   "scene": "res://commons/artifacts/provability_sorter/provability_sorter.tscn",
+   "params": {
+    "reach": "total"
+   }
+  },
+  {
+   "token": "self_membership_set[descent=nested]",
+   "scene": "res://commons/artifacts/self_membership_set/self_membership_set.tscn",
+   "params": {
+    "descent": "nested"
+   }
+  },
+  {
+   "token": "self_membership_set[descent=stratified]",
+   "scene": "res://commons/artifacts/self_membership_set/self_membership_set.tscn",
+   "params": {
+    "descent": "stratified"
+   }
+  },
+  {
+   "token": "self_membership_set[descent=barred]",
+   "scene": "res://commons/artifacts/self_membership_set/self_membership_set.tscn",
+   "params": {
+    "descent": "barred"
+   }
+  },
+  {
+   "token": "self_membership_set[descent=swallowed]",
+   "scene": "res://commons/artifacts/self_membership_set/self_membership_set.tscn",
+   "params": {
+    "descent": "swallowed"
+   }
+  },
+  {
+   "token": "barber_paradox[roster=pair]",
+   "scene": "res://commons/artifacts/barber_paradox/barber_paradox.tscn",
+   "params": {
+    "roster": "pair"
+   }
+  },
+  {
+   "token": "barber_paradox[roster=exception]",
+   "scene": "res://commons/artifacts/barber_paradox/barber_paradox.tscn",
+   "params": {
+    "roster": "exception"
+   }
+  },
+  {
+   "token": "barber_paradox[roster=blanket]",
+   "scene": "res://commons/artifacts/barber_paradox/barber_paradox.tscn",
+   "params": {
+    "roster": "blanket"
+   }
+  },
+  {
+   "token": "barber_paradox[roster=none]",
+   "scene": "res://commons/artifacts/barber_paradox/barber_paradox.tscn",
+   "params": {
+    "roster": "none"
+   }
+  },
+  {
+   "token": "liar_loop[valuation=flip]",
+   "scene": "res://commons/artifacts/liar_loop/liar_loop.tscn",
+   "params": {
+    "valuation": "flip"
+   }
+  },
+  {
+   "token": "liar_loop[valuation=neither]",
+   "scene": "res://commons/artifacts/liar_loop/liar_loop.tscn",
+   "params": {
+    "valuation": "neither"
+   }
+  },
+  {
+   "token": "liar_loop[valuation=both]",
+   "scene": "res://commons/artifacts/liar_loop/liar_loop.tscn",
+   "params": {
+    "valuation": "both"
+   }
+  },
+  {
+   "token": "liar_loop[valuation=tiered]",
+   "scene": "res://commons/artifacts/liar_loop/liar_loop.tscn",
+   "params": {
+    "valuation": "tiered"
+   }
+  },
+  {
+   "token": "impossible_trident[fault=global]",
+   "scene": "res://commons/artifacts/impossible_trident/impossible_trident.tscn",
+   "params": {
+    "fault": "global"
+   }
+  },
+  {
+   "token": "impossible_trident[fault=confessed]",
+   "scene": "res://commons/artifacts/impossible_trident/impossible_trident.tscn",
+   "params": {
+    "fault": "confessed"
+   }
+  },
+  {
+   "token": "impossible_trident[fault=none]",
+   "scene": "res://commons/artifacts/impossible_trident/impossible_trident.tscn",
+   "params": {
+    "fault": "none"
+   }
+  },
+  {
+   "token": "impossible_trident[fault=doubled]",
+   "scene": "res://commons/artifacts/impossible_trident/impossible_trident.tscn",
+   "params": {
+    "fault": "doubled"
+   }
+  },
+  {
+   "token": "hyperbolic_surface[postulate=bare]",
+   "scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+   "params": {
+    "postulate": "bare"
+   }
+  },
+  {
+   "token": "hyperbolic_surface[postulate=parallels]",
+   "scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+   "params": {
+    "postulate": "parallels"
+   }
+  },
+  {
+   "token": "hyperbolic_surface[postulate=triangle]",
+   "scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+   "params": {
+    "postulate": "triangle"
+   }
+  },
+  {
+   "token": "hyperbolic_surface[postulate=net]",
+   "scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+   "params": {
+    "postulate": "net"
+   }
+  },
+  {
+   "token": "hyperbolic_surface[postulate=euclid]",
+   "scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+   "params": {
+    "postulate": "euclid"
+   }
+  },
+  {
+   "token": "elliptic_surface[postulate=bare]",
+   "scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+   "params": {
+    "postulate": "bare"
+   }
+  },
+  {
+   "token": "elliptic_surface[postulate=parallels]",
+   "scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+   "params": {
+    "postulate": "parallels"
+   }
+  },
+  {
+   "token": "elliptic_surface[postulate=triangle]",
+   "scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+   "params": {
+    "postulate": "triangle"
+   }
+  },
+  {
+   "token": "elliptic_surface[postulate=net]",
+   "scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+   "params": {
+    "postulate": "net"
+   }
+  },
+  {
+   "token": "elliptic_surface[postulate=euclid]",
+   "scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+   "params": {
+    "postulate": "euclid"
+   }
+  },
+  {
+   "token": "riemann_sphere[postulate=bare]",
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "params": {
+    "postulate": "bare"
+   }
+  },
+  {
+   "token": "riemann_sphere[postulate=parallels]",
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "params": {
+    "postulate": "parallels"
+   }
+  },
+  {
+   "token": "riemann_sphere[postulate=triangle]",
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "params": {
+    "postulate": "triangle"
+   }
+  },
+  {
+   "token": "riemann_sphere[postulate=net]",
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "params": {
+    "postulate": "net"
+   }
+  },
+  {
+   "token": "riemann_sphere[postulate=euclid]",
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "params": {
+    "postulate": "euclid"
+   }
+  },
+  {
+   "token": "riemann_sphere[infinity=pole]",
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "params": {
+    "infinity": "pole"
+   }
+  },
+  {
+   "token": "riemann_sphere[infinity=rays]",
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "params": {
+    "infinity": "rays"
+   }
+  },
+  {
+   "token": "riemann_sphere[infinity=open]",
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "params": {
+    "infinity": "open"
+   }
+  },
+  {
+   "token": "riemann_sphere[infinity=none]",
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "params": {
+    "infinity": "none"
+   }
+  },
+  {
+   "token": "excluded_middle_demo[middle=classical]",
+   "scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
+   "params": {
+    "middle": "classical"
+   }
+  },
+  {
+   "token": "excluded_middle_demo[middle=third]",
+   "scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
+   "params": {
+    "middle": "third"
+   }
+  },
+  {
+   "token": "excluded_middle_demo[middle=spectrum]",
+   "scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
+   "params": {
+    "middle": "spectrum"
+   }
+  },
+  {
+   "token": "excluded_middle_demo[middle=half]",
+   "scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
+   "params": {
+    "middle": "half"
+   }
+  },
+  {
+   "token": "brouwer_choice_sequence[horizon=question]",
+   "scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
+   "params": {
+    "horizon": "question"
+   }
+  },
+  {
+   "token": "brouwer_choice_sequence[horizon=spread]",
+   "scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
+   "params": {
+    "horizon": "spread"
+   }
+  },
+  {
+   "token": "brouwer_choice_sequence[horizon=law]",
+   "scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
+   "params": {
+    "horizon": "law"
+   }
+  },
+  {
+   "token": "brouwer_choice_sequence[horizon=closed]",
+   "scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
+   "params": {
+    "horizon": "closed"
+   }
+  },
+  {
+   "token": "qfep_balance_workbench[settling=edge]",
+   "scene": "res://commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn",
+   "params": {
+    "settling": "edge"
+   }
+  },
+  {
+   "token": "qfep_balance_workbench[settling=order]",
+   "scene": "res://commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn",
+   "params": {
+    "settling": "order"
+   }
+  },
+  {
+   "token": "qfep_balance_workbench[settling=entropy]",
+   "scene": "res://commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn",
+   "params": {
+    "settling": "entropy"
+   }
+  },
+  {
+   "token": "qfep_balance_workbench[settling=integration]",
+   "scene": "res://commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn",
+   "params": {
+    "settling": "integration"
+   }
+  },
+  {
+   "token": "qfep_balance_workbench[settling=synthesis]",
+   "scene": "res://commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn",
+   "params": {
+    "settling": "synthesis"
+   }
+  },
+  {
+   "token": "edge_of_chaos_unlocked[tenure=unlocked]",
+   "scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+   "params": {
+    "tenure": "unlocked"
+   }
+  },
+  {
+   "token": "edge_of_chaos_unlocked[tenure=clamped]",
+   "scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+   "params": {
+    "tenure": "clamped"
+   }
+  },
+  {
+   "token": "edge_of_chaos_unlocked[tenure=withheld]",
+   "scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+   "params": {
+    "tenure": "withheld"
+   }
+  },
+  {
+   "token": "edge_of_chaos_unlocked[tenure=frozen]",
+   "scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+   "params": {
+    "tenure": "frozen"
+   }
+  },
+  {
+   "token": "edge_of_chaos_unlocked[tenure=chaos]",
+   "scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+   "params": {
+    "tenure": "chaos"
+   }
+  },
+  {
+   "token": "queer_morphology_specimen[becoming=jarred]",
+   "scene": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+   "params": {
+    "becoming": "jarred"
+   }
+  },
+  {
+   "token": "queer_morphology_specimen[becoming=cracked]",
+   "scene": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+   "params": {
+    "becoming": "cracked"
+   }
+  },
+  {
+   "token": "queer_morphology_specimen[becoming=escaped]",
+   "scene": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+   "params": {
+    "becoming": "escaped"
+   }
+  },
+  {
+   "token": "queer_morphology_specimen[becoming=clouded]",
+   "scene": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+   "params": {
+    "becoming": "clouded"
+   }
+  },
+  {
+   "token": "possibility_space_cloud[occupancy=breath]",
+   "scene": "res://commons/artifacts/possibility_space_cloud/possibility_space_cloud.tscn",
+   "params": {
+    "occupancy": "breath"
+   }
+  },
+  {
+   "token": "possibility_space_cloud[occupancy=pinched]",
+   "scene": "res://commons/artifacts/possibility_space_cloud/possibility_space_cloud.tscn",
+   "params": {
+    "occupancy": "pinched"
+   }
+  },
+  {
+   "token": "possibility_space_cloud[occupancy=packed]",
+   "scene": "res://commons/artifacts/possibility_space_cloud/possibility_space_cloud.tscn",
+   "params": {
+    "occupancy": "packed"
+   }
+  },
+  {
+   "token": "possibility_space_cloud[occupancy=unboxed]",
+   "scene": "res://commons/artifacts/possibility_space_cloud/possibility_space_cloud.tscn",
+   "params": {
+    "occupancy": "unboxed"
+   }
+  },
+  {
+   "token": "possibility_space_cloud[occupancy=widened]",
+   "scene": "res://commons/artifacts/possibility_space_cloud/possibility_space_cloud.tscn",
+   "params": {
+    "occupancy": "widened"
+   }
+  },
+  {
+   "token": "microstate_counter[macrostate=uniform]",
+   "scene": "res://commons/artifacts/microstate_counter/microstate_counter.tscn",
+   "params": {
+    "macrostate": "uniform"
+   }
+  },
+  {
+   "token": "microstate_counter[macrostate=corner]",
+   "scene": "res://commons/artifacts/microstate_counter/microstate_counter.tscn",
+   "params": {
+    "macrostate": "corner"
+   }
+  },
+  {
+   "token": "microstate_counter[macrostate=layered]",
+   "scene": "res://commons/artifacts/microstate_counter/microstate_counter.tscn",
+   "params": {
+    "macrostate": "layered"
+   }
+  },
+  {
+   "token": "microstate_counter[macrostate=spilled]",
+   "scene": "res://commons/artifacts/microstate_counter/microstate_counter.tscn",
+   "params": {
+    "macrostate": "spilled"
+   }
+  },
+  {
+   "token": "entropy_fan[prospect=breath]",
+   "scene": "res://commons/artifacts/entropy_fan/entropy_fan.tscn",
+   "params": {
+    "prospect": "breath"
+   }
+  },
+  {
+   "token": "entropy_fan[prospect=thread]",
+   "scene": "res://commons/artifacts/entropy_fan/entropy_fan.tscn",
+   "params": {
+    "prospect": "thread"
+   }
+  },
+  {
+   "token": "entropy_fan[prospect=fan]",
+   "scene": "res://commons/artifacts/entropy_fan/entropy_fan.tscn",
+   "params": {
+    "prospect": "fan"
+   }
+  },
+  {
+   "token": "entropy_fan[prospect=pruned]",
+   "scene": "res://commons/artifacts/entropy_fan/entropy_fan.tscn",
+   "params": {
+    "prospect": "pruned"
+   }
+  },
+  {
+   "token": "entropy_ceiling[headroom=pinned]",
+   "scene": "res://algorithms/qfeplaboratory/entropy_ceiling/entropy_ceiling.tscn",
+   "params": {
+    "headroom": "pinned"
+   }
+  },
+  {
+   "token": "entropy_ceiling[headroom=cropped]",
+   "scene": "res://algorithms/qfeplaboratory/entropy_ceiling/entropy_ceiling.tscn",
+   "params": {
+    "headroom": "cropped"
+   }
+  },
+  {
+   "token": "entropy_ceiling[headroom=raised]",
+   "scene": "res://algorithms/qfeplaboratory/entropy_ceiling/entropy_ceiling.tscn",
+   "params": {
+    "headroom": "raised"
+   }
+  },
+  {
+   "token": "entropy_ceiling[headroom=smooth]",
+   "scene": "res://algorithms/qfeplaboratory/entropy_ceiling/entropy_ceiling.tscn",
+   "params": {
+    "headroom": "smooth"
+   }
+  }
+ ],
+ "out": "res://ada_run/label_placement.json"
+}

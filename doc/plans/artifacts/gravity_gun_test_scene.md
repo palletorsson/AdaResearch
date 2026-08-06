@@ -28,10 +28,12 @@ gravity_gun_test_scene
 | Name | Type | Default |
 |------|------|---------|
 | `spawn_count` | int | 10 |
-| `spawn_pattern` | String | "grid" |
+| `arrangement` | String (enum) | "grid" |
 | `spawn_spacing` | float | 0.3 |
 | `spawn_height` | float | 0.0 |
+| `spawn_gravity_scale` | float | 1.0 |
 | `randomize_colors` | bool | true |
+| `color_seed` | int | 0 |
 | `color_palette` | Array[Color] | [ |
 
 ### Dependencies
@@ -43,8 +45,9 @@ gravity_gun_test_scene
 - `_ready()`
 - `spawn_spheres()`
 - `spawn_grid_pattern()`
-- `spawn_circle_pattern()`
-- `spawn_pyramid_pattern()`
+- `spawn_ramp_pattern()`
+- `spawn_ring_pattern()`
+- `spawn_stack_pattern()`
 - `spawn_sphere_at(position: Vector3)`
 - `clear_spheres()`
 - `reset_spheres()`
@@ -55,7 +58,9 @@ gravity_gun_test_scene
 
 ### Grid Config
 
-Stub only (`pass`)
+`arrangement` only, gated on the key and on a change (promoted 2026-08-05; it was
+`pass`). `gravity_gun_test_scene#arrangement:ring` respawns the collection as a ring;
+a token carrying any other key returns on the first line and respawns nothing.
 
 ## Curriculum Position
 

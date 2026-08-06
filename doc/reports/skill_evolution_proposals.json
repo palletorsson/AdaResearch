@@ -202,6 +202,12 @@
      "date": "2026-06-20",
      "source": "morning breath 2026-06-20T10:00",
      "note": "CONFIRMED LIVE this breath. While appending prop-003 I used the same truncating-open pattern (json.dump(io.open(p,'w'),...)) on skill_evolution_proposals.json; json.dump errored mid-stream on a pre-existing lone surrogate char (\ufffd\ufffd\ufffd) AFTER 'w' had already truncated the file, leaving it corrupted. Recovered via 'git checkout -- doc/reports/skill_evolution_proposals.json'. Two lessons reinforcing prop-004: (1) write to a temp file then atomic-rename, never truncate-then-stream; (2) these JSON reports contain lone surrogate bytes, so read/write must use errors='surrogatepass'. The breath_log.json Harvest write has the identical risk."
+    },
+    {
+     "date": "2026-08-06",
+     "breath_ref": "no breath (evening harvest, concurrent with the 2026-08-06T11:20 breath)",
+     "kind": "sharpening -- crash-safety is not lost-update safety; the proposed fix is necessary but insufficient",
+     "note": "Tonight produced a FOURTH ledger-write incident, and it is the first one this proposal's fix would NOT have prevented. The evening harvest loaded breath_log.json and improvement_trajectory.json at ~11:05. At 11:27 a concurrently-running `full` breath wrote both: entry 64 appended, total_breaths 63 -> 64, an 08-06 global_avg point added, stall_reason rewritten. The harvest was one write from replacing both files with its 11:05 copies. Read-fully-into-memory, serialise-first, temp-file + os.replace would have executed that erasure perfectly atomically -- atomicity guarantees the file is never TORN, not that it is never STALE. Add a fourth clause: (4) capture os.path.getmtime() for every ledger at load; immediately before os.replace, compare it against the current mtime; if it moved, ABORT and re-read-and-merge rather than write. Tonight's harvest script implements exactly this and both writes passed the guard. Cheap, and it closes the one hole left in an otherwise-solid recipe -- which matters more now that breaths and harvests demonstrably overlap in wall-clock time."
     }
    ]
   },
@@ -457,6 +463,12 @@
      "date": "2026-07-18",
      "source": "evening-harvest evolve-only (post morning breath 2026-07-18T14:22)",
      "note": "FOURTH occurrence, and the SECOND to pollute global_avg_history. The 2026-07-18 morning `full` breath logged baseline_avg=post_avg=0.0 in breath_log.json (the true saturated value is 6.0909: 23 spine seqs at stage-6 vr_testing, randomness COMPLETE, gates PASS -- independently confirmed by voice coverage 62% and passing release gates). The morning breath's self-harvest then appended the garbage 0.0 straight into global_avg_history as an avg=0.0 point amid 6.0909 neighbors -- exactly the trend-series pollution this proposal predicts, and the same failure the 07-12 harvest had to correct by hand. This evening harvest CORRECTED the 07-18 point to 6.0909 (raw_scorer_read=0.0 retained), mirroring the 07-12 fix. Occurrence tally is now FOUR (07-03 0.0, 07-06 null, 07-12 0.0, 07-18 0.0) and the by-hand correction has been needed on the last TWO of them -- a clean demonstration that the BREATHER-side guard (part 1 of proposed_change: treat a 0.0/null read as SUSPECT, re-run once, and never append it to global_avg_history) is not yet applied and keeps costing a manual correction each saturated breath that trips it. STRENGTHENS the standing apply recommendation. The TOOL-side root cause (part 2: make sequence_pipeline_scorer.py emit a sentinel/non-zero exit on incomplete computation instead of a silent 0.0) remains uninvestigated. 0 content failures this breath -> this is a tool-reliability confirming occurrence, not a new content-failure proposal."
+    },
+    {
+     "date": "2026-08-06",
+     "breath_ref": "no breath (evening harvest)",
+     "kind": "confirming -- FIRST suspect read from an instrument other than the pipeline scorer",
+     "note": "The suspect-read guard was written for one tool (sequence_pipeline_scorer's transient 0.0/null, four occurrences). Tonight the same class of bad reading came from a different instrument entirely: run_release_gates' Gate B returned missing_scene_path=7, then 1, then PASS. The pipeline scorer itself read clean (6.083 twice). So 'treat a suspect read as suspect, re-run, record only a confirmed value' should not be scoped to the scorer -- it belongs to every number the Baseline and Harvest phases write down, and the trigger is not only an implausible value (0.0/null) but any value taken while the tree is dirty. Recommend applying this proposal and prop-012's extended clause (3) as ONE edit: same discipline, reached from two directions -- a bad read from instrument noise, and a bad read from a live writer."
     }
    ]
   },
@@ -532,6 +544,12 @@
      "occurrence": 6,
      "kind": "confirming -- and the first with a MEASURED before/after instead of a narrative",
      "note": "The lever registered by last night's harvest (doc/reports/dna_coverage.json) was re-read tonight, exactly 24 hours later. It moved: declared families 185 -> 311 (+126), declared axes 259 -> 392 (+133), untouched-but-placed 1780 -> 1657 (-123), across twelve commits and zero breaths -- six DNA promotion tiers, a biome impact-stain system, a museum wave, two harness fixes. Every prior prop-011 note argued the blindness from the shape of the work; this one has both endpoints of a countable field, taken from a file that already exists and already sits in the repo. The Read phase loads HEAT_MAP, FOCUS_VECTOR, LOD_TREE and breath_log, so a breath firing tomorrow morning would open on 'pipeline saturated at 6.083, nothing autonomous to do' while the largest single day of DNA work on record sat one file read away. The registry is not a nice-to-have refinement: without it the loop is structurally incapable of noticing its own project's fastest-moving front."
+    },
+    {
+     "date": "2026-08-06",
+     "breath_ref": "2026-08-06T11:20",
+     "kind": "confirming -- largest commit window on record, with an honest qualification",
+     "note": "73 commits landed between the last harvest (fb8d811c7, 08-02 19:02) and tonight: twenty DNA book batches, five museum waves, the living-artifact family (a whole new registry, living.json), typed-export map tokens across 54 artifacts / 353 placements, and the biome edge renderer. None of the four files the Read phase loads -- HEAT_MAP, FOCUS_VECTOR, LOD_TREE, breath_log -- can see any of it. THE QUALIFICATION, which this proposal should absorb rather than ignore: today's breath DID find the living family, and found it well. But it found it only because the family BROKE A GATE. The Baseline phase's release gates are a real, working discovery channel for new work -- and a strictly negative one: it surfaces a new family only when that family trips something. The twenty DNA batches and five museum waves that broke nothing stayed invisible all week. So the lever registry's argument is not that the breather sees nothing; it is that the only thing it can currently see about new work is the damage. Register doc/reports/dna_coverage.json (whose declared_but_never_swept counter went 11 -> 57 across this same window, entirely unnoticed) as the first positive-signal lever."
     }
    ]
   },
@@ -566,6 +584,12 @@
      "occurrence": 5,
      "kind": "confirming -- and the FIRST pre-emptive detection (fired before any action was contemplated, not after)",
      "note": "Two `git status --porcelain` snapshots six minutes apart: 431 paths / md5 a39dd9b0 at 18:52, 443 paths / md5 6ab4fb0c at 18:58. Sixteen .gd files carried mtimes between 18:49 and 18:57 -- pattern_loom, wfc_room_bench, phi_rate_bench, game_of_life_petri, KochCurve, NewtonCradle, revolving_joy_ride and others, spread across commons/artifacts, algorithms and commons/primitives. A DNA promotion wave was mid-flight while this harvest ran. On 07-31 the check fired mid-breath, one step from a wrong commit; on 08-01 it separated abandoned work from a live writer after the fact; tonight it ran FIRST and set the boundary for the whole session -- nothing under commons/ or algorithms/ was staged, edited, or treated as stranded. TWO SECOND-ORDER FINDINGS. (1) doc/reports/dna_coverage.json is modified and uncommitted at 18:38. Under prop-006/prop-010 alone that reads as stranded work to rescue; under the two-snapshot test it is the live writer's own output and must be left alone. The two rules genuinely conflict on this file and prop-012 is the tie-breaker -- worth stating explicitly in SKILL.md, because prop-010 is the more tempting read. (2) Instrument readings taken during a live write are not stable facts: tonight's declaration gate reports koch_curve.evidence as 'promoted in code, undeclared in the registry', which is not a defect but a writer between two edits. Any gate output captured inside a concurrent-writer window should be labelled as such rather than logged as a finding."
+    },
+    {
+     "date": "2026-08-06",
+     "breath_ref": "2026-08-06T11:20 (breath) + concurrent evening harvest",
+     "kind": "confirming -- THIRD live occurrence, and it EXTENDS the proposal from files to measurements",
+     "note": "Two sightings in one day, from both sides. The BREATH logged its own (its discoveries[3]: another session committed 1babbf57b mid-breath, so missing_map_ready read 24 at baseline and 25 at harvest with no action from it; the 07-31 rule held and it staged two files by name). The HARVEST hit the sharper face: run_release_gates returned Gate B FAIL missing_scene_path=7, then 1 twelve minutes later, while spine_map_workbench audit-artifacts returned 0 in between and the final read was 6/6 PASS -- because the harvest was watching the breath's fix land file by file. A single reading of any tool over a dirty tree is not a fact. The proposal as written guards which FILES a breath may touch; extend clause (3) to MEASUREMENTS: any gate/scorer/audit number taken while candidate inputs are dirty must be read twice with the runs separated, and only a reconciled value may be recorded. A number that moved is a live writer, and it must be logged as a moving target -- never as a regression to repair. Tonight the unreconciled reading would have recorded a Gate B REGRESSION on the very day Gate B was REPAIRED."
     }
    ]
   },
@@ -579,6 +603,14 @@
    "expected_improvement": "Makes the difference between 'the human is steering' and 'nobody is steering' visible in every report instead of invisible. Costs one date comparison.",
    "breath_refs": [
     "2026-07-31T11:20"
+   ],
+   "evidence_updates": [
+    {
+     "date": "2026-08-06",
+     "breath_ref": "no breath (evening harvest)",
+     "kind": "confirming -- first update; the staleness is now 131 days",
+     "note": "FOCUS_VECTOR.json still reads updated 2026-03-28, primary still 'Rebuild all primitives maps using Map Studio'. 131 days without a move, across a period in which the project shipped museum templates, twenty DNA book batches, a living-artifact family and the biome edge renderer. Evaluate's decision priority 1 -- 'FOCUS_VECTOR primary goal always wins' -- has been silently inert for over four months, promoting priority 2 (temperature) into first place without saying so, at exactly the time the heat map was shown to be self-referential (prop-heatmap-voice-coolability). Two of the three top decision inputs are stale in the same window. Today's breath is the counter-example that proves the point: it selected from the release gates instead, and did real work."
+    }
    ]
   },
   {
@@ -624,6 +656,14 @@
     "prop-010",
     "prop-011",
     "prop-012"
+   ],
+   "evidence_updates": [
+    {
+     "date": "2026-08-06",
+     "breath_ref": "no breath (evening harvest)",
+     "kind": "confirming -- the unread ledger grew again",
+     "note": "When this proposal was filed on 08-01 the ledger held sixteen entries, all status 'proposed'. Tonight it holds EIGHTEEN, still all 'proposed', and tonight's pass adds seven more evidence_updates to a file no breath has ever read. Sharper still: today's breath independently re-derived prop-012's concurrent-writer rule from scratch (its discoveries[3]) while prop-012 sat in this file with two prior occurrences already written down. That is the fourth time a proposal has fired after it had already been filed. Apply this one FIRST -- it is a two-line addition to the Read phase, and it is what makes the other seventeen reachable by the breath that needs them, without the human hand-merging seventeen backlogged rules."
+    }
    ]
   },
   {
@@ -654,7 +694,15 @@
      "tentacle_grab_bench (6)",
      "x_translation_cube (6)"
     ]
-   }
+   },
+   "evidence_updates": [
+    {
+     "date": "2026-08-06",
+     "breath_ref": "no breath (evening harvest)",
+     "kind": "confirming -- fourth reading, the counter grew again",
+     "note": "declared_but_never_swept: 11 (07-31) -> 30 (08-02 13:59) -> 38 (08-02 18:38) -> 57 tonight, while totals.declared went 259 -> 365 (+106) over the same four days. Promotion outruns evidence structurally: declaring an axis is a registry edit, proving it needs a Godot run. Tonight's check_dna_declarations adds a second, sharper face the census does not count at all -- 5 declared axes whose implementing script is GITIGNORED (addons/godot-xr-tools: bubble_blaster, drawing_paper x2, force_cube, force_mower), so a fresh clone receives the declaration with no dispatch behind it, plus 2 with no enum, allow-list or dispatch table found at all (lineage_vitrine.subject, sturtevant_bench.subject). Recommend a third census field beside outside_system_placed and declared_but_never_swept: declared_without_reachable_code. It is a smaller number and a worse one -- unswept evidence is debt, unreachable code is a false declaration."
+    }
+   ]
   }
  ]
 }

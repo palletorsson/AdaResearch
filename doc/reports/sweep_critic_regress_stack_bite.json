@@ -1,0 +1,108 @@
+{
+ "sweep": "critic_regress_stack",
+ "peak_changed_pct": 6.483,
+ "subject_pct": 7.166,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "relocation": "single"
+   },
+   "b": {
+    "relocation": "stacked"
+   },
+   "changed_px": 8091,
+   "changed_pct": 1.401
+  },
+  {
+   "a": {
+    "relocation": "single"
+   },
+   "b": {
+    "relocation": "circular"
+   },
+   "changed_px": 11432,
+   "changed_pct": 1.979
+  },
+  {
+   "a": {
+    "relocation": "single"
+   },
+   "b": {
+    "relocation": "outside"
+   },
+   "changed_px": 11396,
+   "changed_pct": 1.973
+  },
+  {
+   "a": {
+    "relocation": "single"
+   },
+   "b": {
+    "relocation": "sealed"
+   },
+   "changed_px": 36165,
+   "changed_pct": 6.261
+  },
+  {
+   "a": {
+    "relocation": "stacked"
+   },
+   "b": {
+    "relocation": "circular"
+   },
+   "changed_px": 17800,
+   "changed_pct": 3.082
+  },
+  {
+   "a": {
+    "relocation": "stacked"
+   },
+   "b": {
+    "relocation": "outside"
+   },
+   "changed_px": 9897,
+   "changed_pct": 1.713
+  },
+  {
+   "a": {
+    "relocation": "stacked"
+   },
+   "b": {
+    "relocation": "sealed"
+   },
+   "changed_px": 36086,
+   "changed_pct": 6.248
+  },
+  {
+   "a": {
+    "relocation": "circular"
+   },
+   "b": {
+    "relocation": "outside"
+   },
+   "changed_px": 19756,
+   "changed_pct": 3.42
+  },
+  {
+   "a": {
+    "relocation": "circular"
+   },
+   "b": {
+    "relocation": "sealed"
+   },
+   "changed_px": 36716,
+   "changed_pct": 6.357
+  },
+  {
+   "a": {
+    "relocation": "outside"
+   },
+   "b": {
+    "relocation": "sealed"
+   },
+   "changed_px": 37446,
+   "changed_pct": 6.483
+  }
+ ]
+}

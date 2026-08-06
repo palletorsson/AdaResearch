@@ -361,3 +361,16 @@ doc/reports/map_strategies/
 /data/chamber/
 backups/
 commons/maps/FoldStudio_Preview/
+
+# =============================================================================
+# Generated evidence images live in ada_encyclopedia/public/, never on GitHub here.
+# This repo had 6,010 tracked images (68 MB) under doc/ before this rule; the sweep
+# and capture tools keep WRITING locally (the bite tooling reads sheets beside their
+# _bite.json), but the images themselves are published in the encyclopedia:
+#   doc/reports/*.png            -> public/doc-reports/
+#   doc/placement_research/*.svg -> public/placement-research/
+doc/reports/*.png
+doc/reports/**/*.png
+doc/reports/*.jpg
+doc/placement_research/*.svg
+doc/placement_research/*.png

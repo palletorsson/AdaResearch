@@ -1096,7 +1096,6 @@
   "interactables": [
    [
     " ",
-    "station_panel:270:1.2#width_cells:5",
     " ",
     " ",
     " ",
@@ -1106,7 +1105,8 @@
     " ",
     " ",
     " ",
-    "station_panel:90:1.2#width_cells:5",
+    " ",
+    " ",
     " "
    ],
    [
@@ -1351,6 +1351,7 @@
    ],
    [
     " ",
+    "station_panel:270:1.2#width_cells:1",
     " ",
     " ",
     " ",
@@ -1360,8 +1361,7 @@
     " ",
     " ",
     " ",
-    " ",
-    " ",
+    "station_panel:90:1.2#width_cells:1",
     " "
    ],
    [
@@ -1595,7 +1595,7 @@
     " ",
     " ",
     " ",
-    "station_panel:0:1.2#width_cells:2",
+    "station_panel:0:1.2#width_cells:1",
     " ",
     "CoordinateSystem3M",
     " ",
@@ -1682,35 +1682,47 @@
    "y_offset": 1.5,
    "hung": [
     {
-     "token": "station_panel:270:1.2#width_cells:5",
+     "token": "station_panel:270:1.2#width_cells:1",
      "cell": [
       1,
-      0
+      17
      ],
      "facing": "E",
      "run": 36,
      "standoff": 11,
      "max_area_m2": 45.71,
-     "width_cells": 5,
+     "width_cells": 1,
+     "spans_cells": [
+      [
+       0,
+       17
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
-     "token": "station_panel:90:1.2#width_cells:5",
+     "token": "station_panel:90:1.2#width_cells:1",
      "cell": [
       11,
-      0
+      17
      ],
      "facing": "W",
      "run": 36,
      "standoff": 11,
      "max_area_m2": 45.71,
-     "width_cells": 5,
+     "width_cells": 1,
+     "spans_cells": [
+      [
+       12,
+       17
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
-     "token": "station_panel:0:1.2#width_cells:2",
+     "token": "station_panel:0:1.2#width_cells:1",
      "cell": [
       5,
       33
@@ -1719,7 +1731,13 @@
      "run": 2,
      "standoff": 34,
      "max_area_m2": 155.24,
-     "width_cells": 2,
+     "width_cells": 1,
+     "spans_cells": [
+      [
+       5,
+       34
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
@@ -1734,6 +1752,12 @@
      "standoff": 4,
      "max_area_m2": 12.38,
      "width_cells": 1,
+     "spans_cells": [
+      [
+       2,
+       4
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
@@ -1748,6 +1772,12 @@
      "standoff": 4,
      "max_area_m2": 12.38,
      "width_cells": 1,
+     "spans_cells": [
+      [
+       10,
+       4
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
@@ -1762,6 +1792,12 @@
      "standoff": 3,
      "max_area_m2": 7.62,
      "width_cells": 1,
+     "spans_cells": [
+      [
+       2,
+       4
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
@@ -1776,6 +1812,12 @@
      "standoff": 3,
      "max_area_m2": 7.62,
      "width_cells": 1,
+     "spans_cells": [
+      [
+       10,
+       4
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
@@ -1790,6 +1832,12 @@
      "standoff": 7,
      "max_area_m2": 26.67,
      "width_cells": 1,
+     "spans_cells": [
+      [
+       2,
+       4
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
@@ -1804,6 +1852,12 @@
      "standoff": 7,
      "max_area_m2": 26.67,
      "width_cells": 1,
+     "spans_cells": [
+      [
+       10,
+       4
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
@@ -1818,6 +1872,12 @@
      "standoff": 3,
      "max_area_m2": 7.62,
      "width_cells": 1,
+     "spans_cells": [
+      [
+       2,
+       8
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     }

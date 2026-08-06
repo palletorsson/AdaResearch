@@ -1,187 +1,68 @@
 {
  "sweep": "transform_composition",
- "peak_changed_pct": 1.188,
+ "peak_changed_pct": 0.407,
+ "subject_pct": 1.344,
  "verdict": "faint - under 2% of the frame moved",
  "variants": [
   {
    "a": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.15
+    "pair": "rotate_translate"
    },
    "b": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.3
+    "pair": "rotate_scale"
    },
-   "changed_px": 2428,
-   "changed_pct": 0.42
+   "changed_px": 1626,
+   "changed_pct": 0.282
   },
   {
    "a": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.15
+    "pair": "rotate_translate"
    },
    "b": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.15
+    "pair": "translate_scale"
    },
-   "changed_px": 5691,
-   "changed_pct": 0.985
+   "changed_px": 2044,
+   "changed_pct": 0.354
   },
   {
    "a": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.15
+    "pair": "rotate_translate"
    },
    "b": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.3
+    "pair": "rotate_rotate"
    },
-   "changed_px": 5843,
-   "changed_pct": 1.012
+   "changed_px": 1815,
+   "changed_pct": 0.314
   },
   {
    "a": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.15
+    "pair": "rotate_scale"
    },
    "b": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.15
+    "pair": "translate_scale"
    },
-   "changed_px": 6575,
-   "changed_pct": 1.138
+   "changed_px": 1765,
+   "changed_pct": 0.306
   },
   {
    "a": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.15
+    "pair": "rotate_scale"
    },
    "b": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.3
+    "pair": "rotate_rotate"
    },
-   "changed_px": 6747,
-   "changed_pct": 1.168
+   "changed_px": 1752,
+   "changed_pct": 0.303
   },
   {
    "a": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.3
+    "pair": "translate_scale"
    },
    "b": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.15
+    "pair": "rotate_rotate"
    },
-   "changed_px": 5964,
-   "changed_pct": 1.033
-  },
-  {
-   "a": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.3
-   },
-   "b": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.3
-   },
-   "changed_px": 5887,
-   "changed_pct": 1.019
-  },
-  {
-   "a": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.3
-   },
-   "b": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.15
-   },
-   "changed_px": 6860,
-   "changed_pct": 1.188
-  },
-  {
-   "a": {
-    "rotation_angle": 22.5,
-    "translate_dist": 0.3
-   },
-   "b": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.3
-   },
-   "changed_px": 6815,
-   "changed_pct": 1.18
-  },
-  {
-   "a": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.15
-   },
-   "b": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.3
-   },
-   "changed_px": 1125,
-   "changed_pct": 0.195
-  },
-  {
-   "a": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.15
-   },
-   "b": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.15
-   },
-   "changed_px": 5257,
-   "changed_pct": 0.91
-  },
-  {
-   "a": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.15
-   },
-   "b": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.3
-   },
-   "changed_px": 5485,
-   "changed_pct": 0.95
-  },
-  {
-   "a": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.3
-   },
-   "b": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.15
-   },
-   "changed_px": 5462,
-   "changed_pct": 0.946
-  },
-  {
-   "a": {
-    "rotation_angle": 45.0,
-    "translate_dist": 0.3
-   },
-   "b": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.3
-   },
-   "changed_px": 5337,
-   "changed_pct": 0.924
-  },
-  {
-   "a": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.15
-   },
-   "b": {
-    "rotation_angle": 72.0,
-    "translate_dist": 0.3
-   },
-   "changed_px": 1174,
-   "changed_pct": 0.203
+   "changed_px": 2352,
+   "changed_pct": 0.407
   }
  ]
 }

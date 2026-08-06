@@ -468,6 +468,18 @@
       "topic": "artifact dna declarations",
       "insight": "A promotion NOTE is not a promotion: lambda_slider carries a full 07-27 STAGE-2 write-up for a calibration axis (optimum/band/dispute/gap/none) that the file never implements - no export, no match block, no config hook. check_dna_declarations reported it under the heading 'the axes exist but the sweep can never reach them', a claim it had never checked, which invites the opposite of the right repair. Now two buckets: promoted-in-code-undeclared (declare it) vs promotion-note-with-no-axis (implement or retract it).",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-08-02T17:02:48.128436+00:00",
+      "topic": "artifact_dna",
+      "insight": "declared_but_never_swept is the DNA system's evidence debt: 11 -> 30 -> 38 in two days, growing on the day twelve were closed by hand. The declaration gate proves an axis is reachable; only a sweep proves it bites. Sweeping the 38 (34 distinct scenes, 57 placements) is headless and bounded -- the first autonomous lever available while the pipeline sits vr-gated at 6.083.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-06T09:27:13.628015+00:00",
+      "topic": "release gates",
+      "insight": "A new render path breaks the AUDITOR, not the artifact: the living family renders from a biome_token via GridBiomeComponent, never a .tscn, so Gate B called seven correct entries broken. Exempt by DERIVING the kingdom/role vocabulary from BiomeGridTokens.gd (fail closed if unreadable), and add invalid_biome_token to the gate so the exemption bites both ways.",
+      "lod": 3
     }
   ]
 }

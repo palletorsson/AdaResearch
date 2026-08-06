@@ -1,0 +1,128 @@
+{
+ "sweep": "rice_verifier_booth",
+ "peak_changed_pct": 7.596,
+ "subject_pct": 34.175,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "blank"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "regress"
+   },
+   "changed_px": 23008,
+   "changed_pct": 3.983
+  },
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "blank"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "oracle"
+   },
+   "changed_px": 16412,
+   "changed_pct": 2.841
+  },
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "blank"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "spin"
+   },
+   "changed_px": 16079,
+   "changed_pct": 2.784
+  },
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "blank"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "honest"
+   },
+   "changed_px": 40743,
+   "changed_pct": 7.054
+  },
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "regress"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "oracle"
+   },
+   "changed_px": 23699,
+   "changed_pct": 4.103
+  },
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "regress"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "spin"
+   },
+   "changed_px": 12178,
+   "changed_pct": 2.108
+  },
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "regress"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "honest"
+   },
+   "changed_px": 43876,
+   "changed_pct": 7.596
+  },
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "oracle"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "spin"
+   },
+   "changed_px": 17539,
+   "changed_pct": 3.037
+  },
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "oracle"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "honest"
+   },
+   "changed_px": 40947,
+   "changed_pct": 7.089
+  },
+  {
+   "a": {
+    "rotor_frozen": true,
+    "refusal": "spin"
+   },
+   "b": {
+    "rotor_frozen": true,
+    "refusal": "honest"
+   },
+   "changed_px": 36740,
+   "changed_pct": 6.361
+  }
+ ]
+}

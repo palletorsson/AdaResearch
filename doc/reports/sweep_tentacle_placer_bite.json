@@ -1,0 +1,108 @@
+{
+ "sweep": "tentacle_placer",
+ "peak_changed_pct": 0.383,
+ "subject_pct": 0.316,
+ "verdict": "SUBJECT NOT DETECTED - only 0.32% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "posture": "cycle"
+   },
+   "b": {
+    "posture": "sentry"
+   },
+   "changed_px": 2134,
+   "changed_pct": 0.369
+  },
+  {
+   "a": {
+    "posture": "cycle"
+   },
+   "b": {
+    "posture": "stoop"
+   },
+   "changed_px": 1765,
+   "changed_pct": 0.306
+  },
+  {
+   "a": {
+    "posture": "cycle"
+   },
+   "b": {
+    "posture": "coil"
+   },
+   "changed_px": 1774,
+   "changed_pct": 0.307
+  },
+  {
+   "a": {
+    "posture": "cycle"
+   },
+   "b": {
+    "posture": "cast"
+   },
+   "changed_px": 2211,
+   "changed_pct": 0.383
+  },
+  {
+   "a": {
+    "posture": "sentry"
+   },
+   "b": {
+    "posture": "stoop"
+   },
+   "changed_px": 1682,
+   "changed_pct": 0.291
+  },
+  {
+   "a": {
+    "posture": "sentry"
+   },
+   "b": {
+    "posture": "coil"
+   },
+   "changed_px": 1152,
+   "changed_pct": 0.199
+  },
+  {
+   "a": {
+    "posture": "sentry"
+   },
+   "b": {
+    "posture": "cast"
+   },
+   "changed_px": 2200,
+   "changed_pct": 0.381
+  },
+  {
+   "a": {
+    "posture": "stoop"
+   },
+   "b": {
+    "posture": "coil"
+   },
+   "changed_px": 1464,
+   "changed_pct": 0.253
+  },
+  {
+   "a": {
+    "posture": "stoop"
+   },
+   "b": {
+    "posture": "cast"
+   },
+   "changed_px": 1987,
+   "changed_pct": 0.344
+  },
+  {
+   "a": {
+    "posture": "coil"
+   },
+   "b": {
+    "posture": "cast"
+   },
+   "changed_px": 1976,
+   "changed_pct": 0.342
+  }
+ ]
+}

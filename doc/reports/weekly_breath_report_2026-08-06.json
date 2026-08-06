@@ -1,0 +1,250 @@
+{
+  "report_date": "2026-08-06",
+  "generated": "2026-08-06T11:25:00",
+  "period": "2026-07-27 to 2026-08-06",
+  "period_note": "10 days, not 7. The 2026-08-03 weekly slot produced no report, so this one absorbs it. Previous report covered 2026-07-20 to 2026-07-27.",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-07-27.json",
+  "mode": "audit (dry-run breather: Baseline + Read + Evaluate only; release gates; trajectory diff). No project content changed. The only file written by this run is this report.",
+
+  "RESOLVED_DURING_THIS_AUDIT": {
+    "what": "The Gate B regression described throughout this report was FIXED AND COMMITTED while the audit was being written. Commit 0e48b8710 'fix(gates): a grammar token is a render path — Gate B stopped calling the living family broken' landed at ~11:24, after the 11:12 gate read and before this report was finalised.",
+    "gates_now": "Overall PASS, 6/6. missing_scene_path 7 -> 0, new metric invalid_biome_token = 0.",
+    "how_it_was_fixed": "Each living_* entry gained a `biome_token` field (e.g. 'fungus:dna:seed', 'flora:<algo>:seed', '<kingdom>:<algo>:<role>'), and spine_map_workbench.py now excuses a scene-less entry only when that token parses against the KINGDOMS/ROLES vocabulary read out of commons/grid/BiomeGridTokens.gd. Vocabulary derived, never transcribed; unreadable source means no exemption, so it fails closed. `<placeholder>` segments are accepted because they mean 'this axis varies across the family', which is what a DNA-promoted token declares.",
+    "status_of_this_report": "The release_gates block below records the 11:12 reading and is left INTACT as the honest snapshot the audit took. Every 'FAIL' / '5/6' claim in this document refers to that moment and is superseded by this addendum. The finding was real, not a false positive — it simply had a lifetime of about two hours.",
+    "SECONDARY_FINDING_STILL_OPEN": "The fix did NOT close the include_in_maps / map_ready hole. All 7 living_* entries still omit both fields, so both still DEFAULT TO TRUE and the tokens still advertise map-placeability they do not have. Corpus-wide missing_map_ready actually rose 24 -> 25. This remains rank-2 in the work plan below and is now the only actionable item from this audit.",
+    "meta": "This is the strongest possible evidence for prop-012: a weekly audit and a live session independently found the same defect within minutes of each other, and only the mtime check kept the audit from clobbering the better fix."
+  },
+
+  "headline": "Two things are true at once and the metric only sees the first. global_avg is FLAT at 6.083 for the fifth consecutive reading, so the literal 7-day stall test fires — and 210 commits landed in the same window, the largest burst in project history. The pipeline registered none of them, exactly as prop-011 predicts. The one genuinely NEW fact this week is a real regression the metric also cannot see: RELEASE GATES WENT 6/6 PASS -> 5/6 FAIL. Gate B (Artifact Registry Integrity) is red on missing_scene_path = 7, and all 7 are the living_* tokens in the new commons/artifacts/registry/living.json (a31891e8f, 08-05 22:19), whose own _readme states they are deliberately sceneless grammar tokens. IMPORTANT CAVEAT ON THIS FINDING: a live concurrent session was editing tools/spine_map_workbench.py and tools/run_release_gates.py DURING this audit (writes at 11:19-11:22 while the audit read the gates at 11:12), and its in-flight diff is precisely the fix — a biome_token exemption for scene-less entries, derived from BiomeGridTokens.gd and failing closed on a malformed token. The regression is real, was real at read time, and is being closed by someone else as this report is written. No action taken, correctly.",
+
+  "stall_analysis": {
+    "literal_test": "FIRES. global_avg 6.083 on 2026-07-24, 2026-07-31, 2026-08-02 and 2026-08-06 — flat for 13 days, well past the 7-day threshold.",
+    "verdict": "STALL IN THE INSTRUMENT, NOT THE WORK. Unchanged from the 07-27 diagnosis, now with a much larger number under it.",
+    "why": [
+      "23 of 24 spine sequences sit at HEAD 6 (vr_testing). randomness is COMPLETE. (23*6 + 8) / 24 = 6.083 — the arithmetic ceiling of the metric.",
+      "Stage 6 is scored by substring-matching a declared map name against ada_run/desktop_feedback.md. That file's last entry is dated 2026-02-20T13:25 — 167 days ago. No headless work of any kind can raise the mean. It is mathematically impossible to improve without a human VR comment.",
+      "Meanwhile 210 commits landed in the period (all authored plix), covering the museum template system through five waves, ~20 DNA promotion batches, the biome edge-role renderer, the living-DNA sweep, and at least four capture-harness bug fixes. The pipeline metric can register none of these categories."
+    ],
+    "the_number_that_did_move": "DNA declared axes went 259 (2026-08-01) -> 911 (today), a 3.5x expansion, with 898 verified, 0 broken, 13 unverifiable. This is the project's real weekly delta and it lives entirely outside global_avg.",
+    "recommendation": "Stop reporting global_avg as the headline. It has been an arithmetic constant for 13 days and will remain one until a human walks a declared map in VR and types one comment. prop-011 (lever registry) and prop-016 (register dna_coverage.json as a lever with remaining-work fields) are the standing fix and are now 18 proposals deep in an unapplied backlog — see proposals_pending_review."
+  },
+
+  "sequences_improved": [],
+  "sequences_improved_note": "Zero by pipeline HEAD, and honestly zero — the denominator held at 24 and every sequence held its stage. Not a scoring artifact.",
+
+  "total_delta": {
+    "global_avg_start": 6.083,
+    "global_avg_end": 6.083,
+    "global_avg_delta": 0.0,
+    "head_sum_aggregate_week_over_week": 0.0,
+    "breaths_in_period": 1,
+    "breaths_in_period_ids": ["2026-07-31T11:20"],
+    "largest_single_breath_delta_in_period": 0.0,
+    "commits_in_period": 210,
+    "commits_by_the_breather": 0,
+    "voice_coverage_start": 0.64,
+    "voice_coverage_end": 0.70,
+    "voice_coverage_delta": 0.06,
+    "voice_coverage_note": "garden_listener --diagnosis reads 70% voice coverage, 30% embodiment, 1037 phantom limbs across 2476 artifacts. +6pp is the largest weekly voice move on record and is entirely human-led; no breath touched it. Breaths continue to correctly decline the voice lever per the 2026-07-18 STOP-building-instruments correction.",
+    "dna_declared_axes_start": 259,
+    "dna_declared_axes_end": 911,
+    "dna_declared_axes_delta": 652,
+    "registry_entries_start": 2671,
+    "registry_entries_end": 2701,
+    "genuine_quality_delta_this_period": "The scored map corpus grew 2048 -> 2282 (+234, +11%) while grade_F held at 0 and grade_C held essentially flat at 181 -> 182. Growth without decay. grade_B rose 183 -> 403, which is the museum-wave maps entering the corpus at B rather than A — worth a look, but not a failure."
+  },
+
+  "release_gates": {
+    "overall": "FAIL",
+    "enabled": "5/6 passing (6 total)",
+    "read_at": "2026-08-06T11:12 — see concurrent_writer_audit; the tree was moving under this read",
+    "toggles": "doc/reports/RELEASE_GATES_TOGGLES.json",
+    "A_sequence_contract": {
+      "pass": true,
+      "missing_declared_maps": 0,
+      "duplicate_entries_within_sequence": 0,
+      "undeclared_map_folders": 1640
+    },
+    "B_artifact_registry_integrity": {
+      "pass": false,
+      "unresolved_scene_files": 0,
+      "missing_scene_path": 7,
+      "unsupported_scene_path": 0,
+      "disallowed_scene_prefix": 1,
+      "missing_map_ready": 24,
+      "missing_include_in_map_data": 24,
+      "blocking_metric": "missing_scene_path = 7"
+    },
+    "C_map_validation": {
+      "pass": true,
+      "grade_A": 1697,
+      "grade_B": 403,
+      "grade_C": 182,
+      "grade_F": 0
+    },
+    "D_lab_progression_continuity": {
+      "pass": true,
+      "lost_count": 0,
+      "changed_count": 12,
+      "total_issues": 39,
+      "ok_superset_pairs": 5
+    },
+    "E_museum_template_integrity": {
+      "pass": true,
+      "failing_templates": 0,
+      "chain_pairs_pass": 784,
+      "chain_pairs_total": 784,
+      "note": "chain pairs grew 196 -> 784 (4x) as waves 3-5 landed, and all 784 pass."
+    },
+    "F_museum_walkthrough_autopilot": {
+      "pass": true,
+      "museums": 3,
+      "z_reached": 102.0,
+      "goal_z": 102.0,
+      "walked_s": 29.0,
+      "cells_unlearned": 0
+    },
+    "week_over_week": {
+      "overall": "PASS (6/6) -> FAIL (5/6). The single regression is Gate B.",
+      "B_root_cause": "All 7 missing_scene_path entries are the complete contents of commons/artifacts/registry/living.json, introduced by a31891e8f (2026-08-05 22:19) and extended by 5949d137d: living_fungus_fruit, living_fungus_pose, living_fungus_colony, living_flora_tree, living_flora_bloom, living_fauna_body, living_ground_role. The file's own _readme says these are 'Not scenes: each entry is a grammar token rendered by a morphology'. So the entries are intentional and the gate is reading them with the wrong contract.",
+      "B_the_sharper_point": "TWO TOOLS ALREADY DISAGREE ABOUT WHAT living.json IS. tools/check_dna_declarations.py has been taught about them — it prints 'living specimen (no scene); derived from ...' for each and does not fail. tools/spine_map_workbench.py audit-artifacts has not, and gates on them. One of the two was updated when the new kind of registry entry was invented and the other was not. That divergence, not the seven entries, is the defect.",
+      "B_secondary_and_still_open": "Independently of the gate, all 7 entries lack include_in_maps and map_ready fields, so both DEFAULT TO TRUE. A map that names `living_fungus_fruit` as an interactable token would resolve to nothing. 7 of the 24 missing_map_ready / missing_include_in_map_data counts are these. Whether the in-flight fix also sets those fields is not yet visible in the working tree.",
+      "A_undeclared_map_folders": "1407 -> 1640 (+233). Museum-wave output — Deck*, Trial_*, Probe_*, and the new museum compiles — landing as map folders faster than sequences declare them. Non-blocking by design and consistent with the prior two weeks' pattern; noted, not flagged.",
+      "C_corpus": "1912 -> 2048 -> 2282 scored maps over three weeks. grade_F has held at 0 throughout."
+    }
+  },
+
+  "concurrent_writer_audit": {
+    "status": "LIVE SESSION CONFIRMED WRITING DURING THIS AUDIT",
+    "evidence": [
+      "doc/HEAT_MAP.json regenerated at 11:15 — this audit never ran heat_map_generator.py.",
+      "Tracked-file writes at 11:19:19 (tools/synthesize_heroes.py), 11:19:52 (commons/data/dna_synthesis.json), 11:20:07 (tools/spine_map_workbench.py), 11:20:18 (tools/run_release_gates.py), 11:21:08 (commons/artifacts/registry/synthesis.json), 11:22:00 (doc/reports/sweep_synthesis_stand*), 11:22:58 (ada_run/em_autopilot.json) — i.e. continuously, while this audit was reading.",
+      "125 modified paths in git status at session start."
+    ],
+    "what_it_is_doing": "An artifact-synthesis pass (doc/plans/ARTIFACT_SYNTHESIS_PLAN.md, written 11:03) AND a fix to the exact Gate B failure this audit found: the in-flight diff adds an `invalid_biome_token` metric and excuses a scene-less registry entry only when it carries a biome_token that BiomeGridTokens.gd can actually parse — vocabulary read from the .gd source rather than transcribed, and failing closed when the source can't be read.",
+    "consequence_for_this_report": "The Gate B reading is a snapshot at 11:12 against a moving tree. It was accurate when taken. It may already be stale, and re-running the gates now would measure a half-saved edit, so it was deliberately not re-run.",
+    "action_taken": "NONE. No file outside this report was written, no commit was made, nothing was staged. Per feedback_concurrent_writer_vs_stranded: the 125 modified paths are a live session's work, not stranded work, and are hands-off.",
+    "note": "This is the second consecutive period in which a concurrent writer was detected mid-breath (the 07-31 breath logged the same hazard against registry dna blocks). prop-012 exists for exactly this and remains unapplied."
+  },
+
+  "skill_effectiveness_changes": {
+    "changes_this_period": "NONE MEASURABLE. One breath ran in the period (2026-07-31T11:20) with 4 items attempted, 0 failed, so no success rate moved.",
+    "cumulative_state_note": "skill_effectiveness_cumulative in improvement_trajectory.json still carries its 2026-05-13 recomputation stamp. documentation_writing sits at 71/71 = 1.00 across 7 breaths. No skill is under the 50% / 5-call threshold that would trigger a Level-2 note.",
+    "the_real_signal": "Skill effectiveness has become an uninformative statistic for the same reason global_avg has: the breather has run once in 10 days and dispatched to almost nothing. Measuring the effectiveness of skills that are barely being called tracks the sample size, not the skills.",
+    "cooling_filter": "EMPTY. Neither of the last two breaths (2026-07-24, 2026-07-31) recorded a single failed item, so nothing is cooled and no candidate was skipped on that basis."
+  },
+
+  "proposals_pending_review": {
+    "count": 18,
+    "status_breakdown": {"proposed": 18, "applied": 0, "rejected": 0},
+    "meta_finding": "ZERO of 18 proposals have ever been applied. This is itself a stall, and a more consequential one than the flat metric. The Evolve phase has been producing well-evidenced proposals for months into a queue nobody drains, which means every breath re-derives the same lessons from scratch. prop-015 was written specifically to avoid asking the human to hand-merge a large backlog, and it is now itself in the backlog.",
+    "ids": [
+      "prop-001", "prop-002", "prop-003", "prop-004", "prop-005", "prop-006",
+      "prop-008", "prop-009", "prop-010", "prop-011", "prop-012", "prop-013",
+      "prop-014", "prop-015", "prop-016",
+      "prop-heatmap-voice-coolability", "prop-scorer-read-reliability", "prop-voice-metric-scope"
+    ],
+    "most_load_bearing_now": [
+      {"id": "prop-011", "why": "Lever registry. 210 commits invisible to the breather's Read phase in one period is the strongest evidence this proposal will ever get."},
+      {"id": "prop-012", "why": "Concurrent writer check. Fired again this period, for the second consecutive period, and this audit had to implement it by hand to avoid clobbering a live session's Gate B fix."},
+      {"id": "prop-016", "why": "Register dna_coverage.json as a lever. DNA is where all the actual movement is (+652 axes), and the census that would let the breather see it is stale — see anomaly_watch."},
+      {"id": "prop-013", "why": "FOCUS_VECTOR staleness check. See anomaly_watch; the human-intent file is 131 days old and describes finished work."}
+    ]
+  },
+
+  "dry_run_work_plan": {
+    "focus": "auto-selected (FOCUS_VECTOR primary is stale — see anomaly_watch)",
+    "trajectory": "flat (5 consecutive readings at 6.083)",
+    "cooled_skipping": [],
+    "items": [
+      {
+        "rank": 1,
+        "item": "Gate B / living.json sceneless-token contract",
+        "temperature": 95,
+        "reason": "Only red gate. Release gates went 6/6 -> 5/6 this period and this is the entire regression.",
+        "would_dispatch_to": "registry + tools/spine_map_workbench.py",
+        "expected_outcome": "missing_scene_path 7 -> 0, Overall PASS restored",
+        "VERDICT": "DO NOT ACT — a live concurrent session is landing this exact fix right now (see concurrent_writer_audit). Acting would clobber better work. Re-verify on the next breath instead."
+      },
+      {
+        "rank": 2,
+        "item": "living_* entries default to include_in_maps / map_ready = true",
+        "temperature": 70,
+        "reason": "Seven sceneless tokens are silently advertised as map-placeable. A map naming one gets nothing. Distinct from the gate question and may survive the in-flight fix.",
+        "would_dispatch_to": "registry edit (surgical — token-keyed dict, never re-dump)",
+        "expected_outcome": "missing_map_ready 24 -> 17, and the tokens stop claiming placeability they do not have",
+        "VERDICT": "DEFER one breath — same file family as the live edit. Re-check after the concurrent session commits."
+      },
+      {
+        "rank": 3,
+        "item": "doc/reports/dna_coverage.json is stale",
+        "temperature": 65,
+        "reason": "Last written 2026-08-02 20:08. It reports registry_entries 2671 (now 2701) and declared 365 (now 666 tokens / 911 axes). The census prop-016 wants promoted to a steering lever understates the declared surface by roughly 300 and would misdirect any breath that trusted it.",
+        "would_dispatch_to": "tools/dna_coverage_census.py re-run",
+        "expected_outcome": "an honest remaining-work number for the one thread that is actually moving",
+        "VERDICT": "SAFE and highest-value real work available — but it is a WRITE, and dry-run changes nothing. Queue for the next full breath."
+      },
+      {
+        "rank": 4,
+        "item": "5 declared axes whose implementing script is gitignored",
+        "temperature": 55,
+        "reason": "bubble_blaster, drawing_paper (x2), force_cube, force_mower all declare axes implemented in addons/godot-xr-tools/ (gitignored by .gitignore:13). A fresh clone gets the declaration with no dispatch behind it. Known class, already caught by the gate, not yet resolved.",
+        "would_dispatch_to": "registry or vendoring decision — needs a human call on whether to vendor the addon",
+        "expected_outcome": "declarations match what a clone actually contains",
+        "VERDICT": "NEEDS HUMAN DECISION — not autonomous."
+      },
+      {
+        "rank": 5,
+        "item": "FOCUS_VECTOR.current_focus is 131 days stale",
+        "temperature": 50,
+        "reason": "Says 'Rebuild all primitives maps using Map Studio', updated 2026-03-28. primitives now scores Str/Doc/Art/Map/Val all OK with Pol 91% and sits at the same stage-6 VR wall as everything else. The stated human intent describes finished work, so the breather's highest decision priority points at nothing.",
+        "would_dispatch_to": "human (FOCUS_VECTOR.json is read-only to the breather by hard limit)",
+        "expected_outcome": "the top of the decision priority stops being a no-op",
+        "VERDICT": "REPORT ONLY — FOCUS_VECTOR is read-only by hard limit. This is the single highest-leverage thing the human could do for autonomous work."
+      }
+    ],
+    "items_selected": 5,
+    "items_actionable_autonomously_right_now": 0,
+    "honest_note": "Five items found, zero safely actionable this instant: one is being fixed by someone else, one is adjacent to that live edit, one is a write that dry-run forbids, and two require a human. That is the correct outcome for a dry-run audit, not a failure — but the pattern across the last four audits is that the breather keeps finding work it is not allowed or not able to do, which is the substance of prop-011 and prop-015."
+  },
+
+  "anomaly_watch": [
+    {
+      "id": "focus-vector-stale",
+      "severity": "high",
+      "detail": "doc/FOCUS_VECTOR.json current_focus.updated = 2026-03-28, 131 days ago. Its primary goal is complete by every measure the project has. Decision priority #1 in the BREATHE cycle is therefore dead, and every breath silently falls through to priority #2. prop-013 proposes detecting this; it remains unapplied."
+    },
+    {
+      "id": "dna-census-stale",
+      "severity": "medium",
+      "detail": "doc/reports/dna_coverage.json (2026-08-02) understates declared tokens by ~300 and axes by ~650. Any lever built on it today would aim at the wrong artifacts."
+    },
+    {
+      "id": "registry-entry-count-discrepancy",
+      "severity": "low-unexamined",
+      "detail": "spine_map_workbench audit-artifacts reports 2701 total entries. A direct walk of the 110 files in commons/artifacts/registry/ counting non-underscore dict entries gives 3150. The ~449 gap is unexplained — plausibly nested containers or lookup_name dedup, but it was NOT investigated and no conclusion should be drawn from either figure until it is. Flagged because two of this report's numbers depend on which one is right."
+    },
+    {
+      "id": "weekly-report-gap",
+      "severity": "low",
+      "detail": "No weekly report was produced for the 2026-08-03 slot (and none for 2026-07-13 earlier). This report covers 10 days rather than 7. If the scheduled task is meant to be weekly, its firing history is worth checking."
+    },
+    {
+      "id": "breath-log-encoding",
+      "severity": "low",
+      "detail": "doc/reports/breath_log.json cannot be read with Python's default cp1252 codec on this machine (UnicodeDecodeError at byte 0x9d, position 16096). It requires an explicit encoding='utf-8'. Any tool or future breath that opens it without one will crash. Same hazard already noted for audit_lab_chain, which run_release_gates.py works around with PYTHONIOENCODING."
+    }
+  ],
+
+  "discoveries_this_period": [
+    "A new KIND of registry entry needs every registry-reading tool updated, not just the one you are writing. living.json invented the sceneless grammar token; check_dna_declarations.py learned about it and spine_map_workbench.py did not, and the gate went red 3 days later. The tell was two tools printing different verdicts about the same seven tokens.",
+    "The stall test and the truth diverged completely this period: 0.0 metric delta against 210 commits and a 3.5x expansion of the DNA declaration surface. A flat headline number is now positively misleading about this project and should be reported alongside commits-in-period and declared-axes, never alone.",
+    "Auditing a repository with a live session in it requires reading mtimes, not just git status. git status showed 125 modified paths, which is indistinguishable from abandoned work; only the timestamps (writes every 30-90 seconds during the audit) revealed a live writer — and that it was editing the very tool whose output the audit was about to report on.",
+    "An unapplied proposal queue is a compounding cost, not a backlog. 18 proposals, 0 applied: prop-012 would have told this audit to check for a concurrent writer, and the audit had to work that out from first principles instead."
+  ],
+
+  "summary_for_human_ADDENDUM": "Since this report was drafted two hours ago, the Gate B regression it is largely about has been fixed and committed by your live session (0e48b8710). Gates are back to 6/6 PASS. What is left for you from this audit is smaller and sharper: (a) the seven living_* tokens still omit include_in_maps/map_ready, so they still default to true and still claim placeability they do not have — the one thing the fix missed; (b) the 18-deep unapplied proposal queue; (c) the 131-day-stale FOCUS_VECTOR. Read the summary below with the gate paragraph mentally struck out.",
+
+  "summary_for_human": "The flat 6.083 is real and meaningless — it is the arithmetic ceiling of a metric gated on a VR comment file last touched 167 days ago, and it cannot move until you walk a declared map and type one line. Ignore it. The two things worth your attention: (1) release gates went 6/6 to 5/6 — Gate B is red because the seven deliberately sceneless living_* tokens trip a check that only one of the two registry-reading tools was taught about; a session you were running at 11:20 today is already landing the right fix (a biome_token exemption validated against BiomeGridTokens.gd, failing closed), so this audit touched nothing. Worth confirming that fix also sets include_in_maps/map_ready false on those seven, which is a separate hole. (2) The proposal queue is 18 deep and has never been drained — prop-011, prop-012, prop-013 and prop-016 between them are why this audit found five items and could act on none. Everything else is healthy: 210 commits, grade_F still 0 across a corpus that grew 11%, museum gates E and F green with 784/784 chain pairs, DNA axes 259 to 911 with 0 broken, voice coverage 64% to 70%. This was the most productive week in the project's history and the breather participated in none of it."
+}

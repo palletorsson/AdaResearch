@@ -1121,17 +1121,17 @@
    ],
    [
     " ",
-    "station_panel:180:1.2#width_cells:5",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
     " ",
     " ",
     "station_panel:180:1.2#width_cells:5",
     " ",
     " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "station_panel:180:1.2#width_cells:5",
     " ",
     " ",
     " "
@@ -1172,17 +1172,17 @@
    ],
    [
     " ",
-    "station_panel:0:1.2#width_cells:5",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
     " ",
     " ",
     "station_panel:0:1.2#width_cells:5",
     " ",
     " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "station_panel:0:1.2#width_cells:5",
     " ",
     " ",
     " "
@@ -1206,17 +1206,17 @@
    ],
    [
     " ",
-    "station_panel:180:1.2#width_cells:5",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
     " ",
     " ",
     "station_panel:180:1.2#width_cells:5",
     " ",
     " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "station_panel:180:1.2#width_cells:5",
     " ",
     " ",
     " "
@@ -1257,9 +1257,9 @@
    ],
    [
     " ",
+    " ",
+    " ",
     "station_panel:0:1.2#width_cells:5",
-    " ",
-    " ",
     " ",
     " ",
     " ",
@@ -1461,58 +1461,58 @@
    ],
    [
     " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
     "station_panel:270:1.2#width_cells:5",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    "station_panel:90:1.2#width_cells:5",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
     " ",
     " ",
     " ",
@@ -1558,16 +1558,16 @@
     " ",
     " ",
     " ",
-    " ",
+    "station_panel:90:1.2#width_cells:5",
     " "
    ],
    [
     " ",
+    " ",
+    " ",
+    " ",
+    " ",
     "station_panel:0:1.2#width_cells:5",
-    " ",
-    " ",
-    " ",
-    " ",
     " ",
     " ",
     " ",
@@ -1710,20 +1710,42 @@
      "token": "station_panel:90:1.2#width_cells:5",
      "cell": [
       13,
-      21
+      26
      ],
      "facing": "W",
      "run": 11,
      "standoff": 13,
      "max_area_m2": 55.24,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       14,
+       24
+      ],
+      [
+       14,
+       25
+      ],
+      [
+       14,
+       26
+      ],
+      [
+       14,
+       27
+      ],
+      [
+       14,
+       28
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
      "token": "station_panel:0:1.2#width_cells:5",
      "cell": [
-      1,
+      5,
       27
      ],
      "facing": "N",
@@ -1731,6 +1753,28 @@
      "standoff": 7,
      "max_area_m2": 26.67,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       3,
+       28
+      ],
+      [
+       4,
+       28
+      ],
+      [
+       5,
+       28
+      ],
+      [
+       6,
+       28
+      ],
+      [
+       7,
+       28
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
@@ -1738,20 +1782,42 @@
      "token": "station_panel:270:1.2#width_cells:5",
      "cell": [
       1,
-      21
+      24
      ],
      "facing": "E",
      "run": 7,
      "standoff": 13,
      "max_area_m2": 55.24,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       0,
+       22
+      ],
+      [
+       0,
+       23
+      ],
+      [
+       0,
+       24
+      ],
+      [
+       0,
+       25
+      ],
+      [
+       0,
+       26
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
      "token": "station_panel:180:1.2#width_cells:5",
      "cell": [
-      1,
+      3,
       1
      ],
      "facing": "S",
@@ -1759,13 +1825,35 @@
      "standoff": 4,
      "max_area_m2": 12.38,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       5,
+       0
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
      "token": "station_panel:180:1.2#width_cells:5",
      "cell": [
-      9,
+      11,
       1
      ],
      "facing": "S",
@@ -1773,13 +1861,35 @@
      "standoff": 4,
      "max_area_m2": 12.38,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       9,
+       0
+      ],
+      [
+       10,
+       0
+      ],
+      [
+       11,
+       0
+      ],
+      [
+       12,
+       0
+      ],
+      [
+       13,
+       0
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
      "token": "station_panel:0:1.2#width_cells:5",
      "cell": [
-      1,
+      3,
       4
      ],
      "facing": "N",
@@ -1787,13 +1897,35 @@
      "standoff": 4,
      "max_area_m2": 12.38,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       5
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
      "token": "station_panel:0:1.2#width_cells:5",
      "cell": [
-      9,
+      11,
       4
      ],
      "facing": "N",
@@ -1801,13 +1933,35 @@
      "standoff": 4,
      "max_area_m2": 12.38,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       9,
+       5
+      ],
+      [
+       10,
+       5
+      ],
+      [
+       11,
+       5
+      ],
+      [
+       12,
+       5
+      ],
+      [
+       13,
+       5
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
      "token": "station_panel:180:1.2#width_cells:5",
      "cell": [
-      1,
+      3,
       6
      ],
      "facing": "S",
@@ -1815,13 +1969,35 @@
      "standoff": 4,
      "max_area_m2": 12.38,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       5
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
      "token": "station_panel:180:1.2#width_cells:5",
      "cell": [
-      9,
+      11,
       6
      ],
      "facing": "S",
@@ -1829,13 +2005,35 @@
      "standoff": 4,
      "max_area_m2": 12.38,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       9,
+       5
+      ],
+      [
+       10,
+       5
+      ],
+      [
+       11,
+       5
+      ],
+      [
+       12,
+       5
+      ],
+      [
+       13,
+       5
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     },
     {
      "token": "station_panel:0:1.2#width_cells:5",
      "cell": [
-      1,
+      3,
       9
      ],
      "facing": "N",
@@ -1843,6 +2041,28 @@
      "standoff": 4,
      "max_area_m2": 12.38,
      "width_cells": 5,
+     "spans_cells": [
+      [
+       1,
+       10
+      ],
+      [
+       2,
+       10
+      ],
+      [
+       3,
+       10
+      ],
+      [
+       4,
+       10
+      ],
+      [
+       5,
+       10
+      ]
+     ],
      "seat_y": 1.2,
      "seat_reason": "body 0.6 m centred at 1.5 m"
     }

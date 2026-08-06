@@ -1,0 +1,43 @@
+{
+ "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+ "out_dir": "res://ada_run/sweep",
+ "framing": 1.0,
+ "variants": [
+  {
+   "label": "synthesis_stand__subject-godel_statement_plaque__mode-hero",
+   "artifact": "synthesis_stand",
+   "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+   "params": {
+    "subject": "godel_statement_plaque",
+    "mode": "hero"
+   }
+  },
+  {
+   "label": "synthesis_stand__subject-godel_statement_plaque__mode-series",
+   "artifact": "synthesis_stand",
+   "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+   "params": {
+    "subject": "godel_statement_plaque",
+    "mode": "series"
+   }
+  },
+  {
+   "label": "synthesis_stand__subject-pick_up_cube__mode-hero",
+   "artifact": "synthesis_stand",
+   "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+   "params": {
+    "subject": "pick_up_cube",
+    "mode": "hero"
+   }
+  },
+  {
+   "label": "synthesis_stand__subject-pick_up_cube__mode-series",
+   "artifact": "synthesis_stand",
+   "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+   "params": {
+    "subject": "pick_up_cube",
+    "mode": "series"
+   }
+  }
+ ]
+}

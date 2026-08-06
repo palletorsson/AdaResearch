@@ -1,188 +1,108 @@
 {
  "sweep": "particle_chaos",
- "peak_changed_pct": 4.812,
- "subject_pct": 2.732,
+ "peak_changed_pct": 2.824,
+ "subject_pct": 1.641,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "particle_count": 100.0,
-    "emission_radius": 0.25
+    "constraint": "none"
    },
    "b": {
-    "particle_count": 100.0,
-    "emission_radius": 0.5
+    "constraint": "gravity"
    },
-   "changed_px": 8343,
-   "changed_pct": 1.444
+   "changed_px": 15732,
+   "changed_pct": 2.724
   },
   {
    "a": {
-    "particle_count": 100.0,
-    "emission_radius": 0.25
+    "constraint": "none"
    },
    "b": {
-    "particle_count": 200.0,
-    "emission_radius": 0.25
+    "constraint": "jet"
    },
-   "changed_px": 13391,
-   "changed_pct": 2.318
+   "changed_px": 16314,
+   "changed_pct": 2.824
   },
   {
    "a": {
-    "particle_count": 100.0,
-    "emission_radius": 0.25
+    "constraint": "none"
    },
    "b": {
-    "particle_count": 200.0,
-    "emission_radius": 0.5
+    "constraint": "vortex"
    },
-   "changed_px": 14438,
-   "changed_pct": 2.5
+   "changed_px": 15955,
+   "changed_pct": 2.762
   },
   {
    "a": {
-    "particle_count": 100.0,
-    "emission_radius": 0.25
+    "constraint": "none"
    },
    "b": {
-    "particle_count": 320.0,
-    "emission_radius": 0.25
+    "constraint": "drag"
    },
-   "changed_px": 17703,
-   "changed_pct": 3.065
+   "changed_px": 15169,
+   "changed_pct": 2.626
   },
   {
    "a": {
-    "particle_count": 100.0,
-    "emission_radius": 0.25
+    "constraint": "gravity"
    },
    "b": {
-    "particle_count": 320.0,
-    "emission_radius": 0.5
+    "constraint": "jet"
    },
-   "changed_px": 19944,
-   "changed_pct": 3.453
+   "changed_px": 14036,
+   "changed_pct": 2.43
   },
   {
    "a": {
-    "particle_count": 100.0,
-    "emission_radius": 0.5
+    "constraint": "gravity"
    },
    "b": {
-    "particle_count": 200.0,
-    "emission_radius": 0.25
+    "constraint": "vortex"
    },
-   "changed_px": 13256,
-   "changed_pct": 2.295
+   "changed_px": 13334,
+   "changed_pct": 2.309
   },
   {
    "a": {
-    "particle_count": 100.0,
-    "emission_radius": 0.5
+    "constraint": "gravity"
    },
    "b": {
-    "particle_count": 200.0,
-    "emission_radius": 0.5
+    "constraint": "drag"
    },
-   "changed_px": 14175,
-   "changed_pct": 2.454
+   "changed_px": 12521,
+   "changed_pct": 2.168
   },
   {
    "a": {
-    "particle_count": 100.0,
-    "emission_radius": 0.5
+    "constraint": "jet"
    },
    "b": {
-    "particle_count": 320.0,
-    "emission_radius": 0.25
+    "constraint": "vortex"
    },
-   "changed_px": 17519,
-   "changed_pct": 3.033
+   "changed_px": 14109,
+   "changed_pct": 2.443
   },
   {
    "a": {
-    "particle_count": 100.0,
-    "emission_radius": 0.5
+    "constraint": "jet"
    },
    "b": {
-    "particle_count": 320.0,
-    "emission_radius": 0.5
+    "constraint": "drag"
    },
-   "changed_px": 19497,
-   "changed_pct": 3.376
+   "changed_px": 13834,
+   "changed_pct": 2.395
   },
   {
    "a": {
-    "particle_count": 200.0,
-    "emission_radius": 0.25
+    "constraint": "vortex"
    },
    "b": {
-    "particle_count": 200.0,
-    "emission_radius": 0.5
+    "constraint": "drag"
    },
-   "changed_px": 19129,
-   "changed_pct": 3.312
-  },
-  {
-   "a": {
-    "particle_count": 200.0,
-    "emission_radius": 0.25
-   },
-   "b": {
-    "particle_count": 320.0,
-    "emission_radius": 0.25
-   },
-   "changed_px": 21879,
-   "changed_pct": 3.788
-  },
-  {
-   "a": {
-    "particle_count": 200.0,
-    "emission_radius": 0.25
-   },
-   "b": {
-    "particle_count": 320.0,
-    "emission_radius": 0.5
-   },
-   "changed_px": 23618,
-   "changed_pct": 4.089
-  },
-  {
-   "a": {
-    "particle_count": 200.0,
-    "emission_radius": 0.5
-   },
-   "b": {
-    "particle_count": 320.0,
-    "emission_radius": 0.25
-   },
-   "changed_px": 23402,
-   "changed_pct": 4.052
-  },
-  {
-   "a": {
-    "particle_count": 200.0,
-    "emission_radius": 0.5
-   },
-   "b": {
-    "particle_count": 320.0,
-    "emission_radius": 0.5
-   },
-   "changed_px": 24329,
-   "changed_pct": 4.212
-  },
-  {
-   "a": {
-    "particle_count": 320.0,
-    "emission_radius": 0.25
-   },
-   "b": {
-    "particle_count": 320.0,
-    "emission_radius": 0.5
-   },
-   "changed_px": 27795,
-   "changed_pct": 4.812
+   "changed_px": 13496,
+   "changed_pct": 2.337
   }
  ]
 }

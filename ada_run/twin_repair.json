@@ -1,0 +1,111 @@
+[
+ {
+  "artifact": "lab_room",
+  "axis": "witness",
+  "gallery": "batch2-dna",
+  "pairs": [
+   "none==port",
+   "none==port",
+   "none==port",
+   "none==port"
+  ]
+ },
+ {
+  "artifact": "prng_crank_machine",
+  "axis": "disclosure",
+  "gallery": "batch2-dna",
+  "pairs": [
+   "ledger==tally"
+  ]
+ },
+ {
+  "artifact": "KonigsbergBridge",
+  "axis": "parity",
+  "gallery": "graphtheory-dna",
+  "pairs": [
+   "circuit==walk"
+  ]
+ },
+ {
+  "artifact": "karger_algorithm",
+  "axis": "bottleneck",
+  "gallery": "graphtheory-dna",
+  "pairs": [
+   "severed==throat"
+  ]
+ },
+ {
+  "artifact": "pca_visualization",
+  "axis": "bearing",
+  "gallery": "machinelearning-dna",
+  "pairs": [
+   "curve==plane",
+   "crosswise==curve",
+   "crosswise==plane",
+   "curve==none",
+   "none==plane",
+   "crosswise==none"
+  ]
+ },
+ {
+  "artifact": "svm_visualization",
+  "axis": "cohort",
+  "gallery": "machinelearning-dna",
+  "pairs": [
+   "block==skew"
+  ]
+ },
+ {
+  "artifact": "random_forest_visualization",
+  "axis": "cohort",
+  "gallery": "machinelearning-dna",
+  "pairs": [
+   "braid==skew"
+  ]
+ },
+ {
+  "artifact": "edge_of_chaos_unlocked",
+  "axis": "tenure",
+  "gallery": "qfeplab-dna",
+  "pairs": [
+   "clamped==withheld",
+   "chaos==frozen"
+  ]
+ },
+ {
+  "artifact": "queer_morphology_specimen",
+  "axis": "becoming",
+  "gallery": "qfeplab-dna",
+  "pairs": [
+   "clouded==jarred"
+  ]
+ },
+ {
+  "artifact": "entropy_fan",
+  "axis": "prospect",
+  "gallery": "qfeplab-dna",
+  "pairs": [
+   "breath==thread"
+  ]
+ },
+ {
+  "artifact": "boids_aquarium",
+  "axis": "accord",
+  "gallery": "swarm-dna",
+  "pairs": [
+   "lane==orb",
+   "lattice==orb",
+   "lane==lattice"
+  ]
+ },
+ {
+  "artifact": "AntColonyV2",
+  "axis": "anchorage",
+  "gallery": "swarm-dna",
+  "pairs": [
+   "ring==triad",
+   "scattered==triad",
+   "ring==scattered"
+  ]
+ }
+]
