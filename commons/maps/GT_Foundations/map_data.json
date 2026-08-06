@@ -1,70 +1,400 @@
 {
-  "map_info": {
-    "name": "Bridges and Islands",
-    "lookup_name": "GT_Foundations",
-    "description": "The KÃ¶nigsberg bridge problem brought to life â€” islands in void connected by narrow walkways. Can you cross every bridge exactly once? Graph theory begins here.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 10,
-      "depth": 10,
-      "max_height": 5
-    },
-    "metadata": {
-      "difficulty": "advanced",
-      "category": "graphtheory",
-      "estimated_time": "5-8 minutes",
-      "spatial_temperature": 0.7,
-      "design_notes": "KÃ¶nigsberg-inspired â€” four islands (h1 platforms) surrounded by void (h0 water) connected by seven narrow bridges (h1 width-1). Each island is a node, bridges are edges. Three artifacts on separate islands. Player must cross bridges to reach all."
-    },
-    "title": "Konigsberg Bridges and Euler"
+ "map_info": {
+  "name": "Bridges and Islands",
+  "lookup_name": "GT_Foundations",
+  "description": "The K\u00c3\u00b6nigsberg bridge problem brought to life \u00e2\u20ac\u201d islands in void connected by narrow walkways. Can you cross every bridge exactly once? Graph theory begins here.",
+  "version": "1.0",
+  "format": "json",
+  "dimensions": {
+   "width": 10,
+   "depth": 10,
+   "max_height": 5
   },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
+  "metadata": {
+   "difficulty": "advanced",
+   "category": "graphtheory",
+   "estimated_time": "5-8 minutes",
+   "spatial_temperature": 0.7,
+   "design_notes": "K\u00c3\u00b6nigsberg-inspired \u00e2\u20ac\u201d four islands (h1 platforms) surrounded by void (h0 water) connected by seven narrow bridges (h1 width-1). Each island is a node, bridges are edges. Three artifacts on separate islands. Player must cross bridges to reach all."
   },
-  "layers": {
-    "structure": [
-      ["1","1","1","0","1","0","0","0","0","0"],
-      ["1","1","1","0","1","0","0","0","0","0"],
-      ["1","1","1","0","1","0","0","0","0","0"],
-      ["0","0","0","0","1","0","0","0","0","0"],
-      ["0","0","1","1","1","1","1","1","1","0"],
-      ["0","0","0","0","1","1","1","0","0","0"],
-      ["0","0","0","0","1","1","1","0","0","0"],
-      ["0","0","0","0","1","0","0","1","1","1"],
-      ["0","0","0","0","1","0","0","1","0","1"],
-      ["0","0","0","0","0","0","0","1","1","1"]
-    ],
-    "utilities": [
-      ["s"," "," "," "," "," "," "," "," "," "],
-      [" ","an","tc:2:x"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," ","tc:3:z"," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","tc:3:x"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," ","t"," "],
-      [" "," "," "," "," "," "," "," ","sp"," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" ","graphspace:0:0:0.6"," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","KonigsbergBridge:0:0:0.6"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "]
-    ]
+  "title": "Konigsberg Bridges and Euler"
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next",
+   "description": "Continue to next step",
+   "properties": {
+    "action": "next_in_sequence"
+   }
   }
+ },
+ "layers": {
+  "structure": [
+   [
+    "1",
+    "1",
+    "1",
+    "0",
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "0",
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "0",
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "0",
+    "0",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "0"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "1",
+    "1",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "1",
+    "1",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "0",
+    "0",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "0",
+    "0",
+    "1",
+    "0",
+    "1"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "1",
+    "1"
+   ]
+  ],
+  "utilities": [
+   [
+    "s",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    "an",
+    "tc:2:x",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "tc:3:z",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    "tc:3:x",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "t",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "sp",
+    " "
+   ]
+  ],
+  "interactables": [
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    "synthesis_stand#subject:graphspace#mode:hero",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    "graphspace:0:0:0.6",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "KonigsbergBridge:0:0:0.6",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ]
+  ]
+ }
 }

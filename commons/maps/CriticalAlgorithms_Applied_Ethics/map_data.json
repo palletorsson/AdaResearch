@@ -1,373 +1,373 @@
 {
-	"map_info": {
-		"name": "Applied Ethics After G\u00f6del",
-		"lookup_name": "CriticalAlgorithms_Applied_Ethics",
-		"description": "If every formal system has an outside, every classifier has someone it misreads. Ethics isn't a postprocessing step \u2014 it's the shape of the room.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.872\u21920.932, walkability 0.463\u21920.450]",
-		"version": "placed-humanoid_walker",
-		"format": "json",
-		"dimensions": {
-			"width": 9,
-			"depth": 10,
-			"max_height": 3
-		},
-		"metadata": {
-			"difficulty": "advanced",
-			"category": "critical_algorithms",
-			"status": "scaffold",
-			"design_notes": "SCAFFOLD \u2014 walls carve an off-center path, forcing the player through the 'outside' of the otherwise symmetric grid. Artifacts TBD in phase 2."
-		},
-		"title": "Ethical Design After Incompleteness"
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Next",
-			"description": "Continue to next step",
-			"properties": {
-				"action": "next_in_sequence"
-			}
-		}
-	},
-	"audio": {
-		"ambient_preset": "minimal_drone",
-		"volume": -10.0
-	},
-	"layers": {
-		"structure": [
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"0",
-				"1",
-				"1",
-				"1",
-				"1"
-			]
-		],
-		"utilities": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				"sub:map",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"3t:THE OUTSIDE",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"3t:EVERY CLASSIFIER HAS ONE",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"3t:ETHICS IS ARCHITECTURE",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				"t",
-				" ",
-				" ",
-				" ",
-				" "
-			]
-		],
-		"interactables": [
-			[
-				" ",
-				"tt:qfep_critical:180:0.5",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				"room_shape_demonstrator",
-				" ",
-				"excluded_class_visualizer",
-				"bias_from_inside:0:0.3",
-				" ",
-				" ",
-				"godel_statement_plaque:180:0.5",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
-		]
-	}
+ "map_info": {
+  "name": "Applied Ethics After G\u00f6del",
+  "lookup_name": "CriticalAlgorithms_Applied_Ethics",
+  "description": "If every formal system has an outside, every classifier has someone it misreads. Ethics isn't a postprocessing step \u2014 it's the shape of the room.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.872\u21920.932, walkability 0.463\u21920.450]",
+  "version": "placed-humanoid_walker",
+  "format": "json",
+  "dimensions": {
+   "width": 9,
+   "depth": 10,
+   "max_height": 3
+  },
+  "metadata": {
+   "difficulty": "advanced",
+   "category": "critical_algorithms",
+   "status": "scaffold",
+   "design_notes": "SCAFFOLD \u2014 walls carve an off-center path, forcing the player through the 'outside' of the otherwise symmetric grid. Artifacts TBD in phase 2."
+  },
+  "title": "Ethical Design After Incompleteness"
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next",
+   "description": "Continue to next step",
+   "properties": {
+    "action": "next_in_sequence"
+   }
+  }
+ },
+ "audio": {
+  "ambient_preset": "minimal_drone",
+  "volume": -10.0
+ },
+ "layers": {
+  "structure": [
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "0",
+    "1",
+    "1",
+    "1",
+    "1"
+   ]
+  ],
+  "utilities": [
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    "sub:map",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    "3t:THE OUTSIDE",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    "3t:EVERY CLASSIFIER HAS ONE",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    "3t:ETHICS IS ARCHITECTURE",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    "t",
+    " ",
+    " ",
+    " ",
+    " "
+   ]
+  ],
+  "interactables": [
+   [
+    " ",
+    "tt:qfep_critical:180:0.5",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    "room_shape_demonstrator",
+    " ",
+    "excluded_class_visualizer",
+    "bias_from_inside:0:0.3",
+    " ",
+    " ",
+    "godel_statement_plaque:180:0.5",
+    " "
+   ],
+   [
+    "synthesis_stand#subject:tt#mode:hero",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ]
+  ]
+ }
 }
