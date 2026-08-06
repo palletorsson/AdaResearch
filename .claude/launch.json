@@ -11,7 +11,7 @@
     {
       "name": "encyclopedia-alt",
       "runtimeExecutable": "cmd",
-      "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && set NEXT_DIST_DIR=.next-alt&& npx next dev -p 3013"],
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && set NEXT_DIST_DIR=.next-alt&& npx next dev --webpack -p 3013"],
       "port": 3013,
       "autoPort": false
     },
@@ -20,6 +20,20 @@
       "runtimeExecutable": "cmd",
       "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && set NEXT_DIST_DIR=.next-alt2&& npx next dev -p 3023"],
       "port": 3023,
+      "autoPort": false
+    },
+    {
+      "name": "encyclopedia-alt3",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && set NEXT_DIST_DIR=.next-alt3&& npx next dev -p 3033"],
+      "port": 3033,
+      "autoPort": false
+    },
+    {
+      "name": "encyclopedia-alt4",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && set NEXT_DIST_DIR=.next-alt4&& npx next dev -p 3043"],
+      "port": 3043,
       "autoPort": false
     }
   ]
