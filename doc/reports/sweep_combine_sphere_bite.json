@@ -1,68 +1,344 @@
 {
  "sweep": "combine_sphere",
- "peak_changed_pct": 4.889,
- "subject_pct": 4.28,
- "verdict": "BITES",
+ "peak_changed_pct": 0.547,
+ "subject_pct": 0.319,
+ "verdict": "SUBJECT NOT DETECTED - only 0.32% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
  "variants": [
   {
    "a": {
-    "taxonomy": "table"
+    "taxonomy": "table",
+    "hemisphere_default": true
    },
    "b": {
-    "taxonomy": "ladder"
+    "taxonomy": "table",
+    "hemisphere_default": false
    },
-   "changed_px": 12625,
-   "changed_pct": 2.186
+   "changed_px": 742,
+   "changed_pct": 0.128
   },
   {
    "a": {
-    "taxonomy": "table"
+    "taxonomy": "table",
+    "hemisphere_default": true
    },
    "b": {
-    "taxonomy": "stack"
+    "taxonomy": "ladder",
+    "hemisphere_default": true
    },
-   "changed_px": 15955,
-   "changed_pct": 2.762
+   "changed_px": 3106,
+   "changed_pct": 0.538
   },
   {
    "a": {
-    "taxonomy": "table"
+    "taxonomy": "table",
+    "hemisphere_default": true
    },
    "b": {
-    "taxonomy": "heap"
+    "taxonomy": "ladder",
+    "hemisphere_default": false
    },
-   "changed_px": 28122,
-   "changed_pct": 4.869
+   "changed_px": 3039,
+   "changed_pct": 0.526
   },
   {
    "a": {
-    "taxonomy": "ladder"
+    "taxonomy": "table",
+    "hemisphere_default": true
    },
    "b": {
-    "taxonomy": "stack"
+    "taxonomy": "stack",
+    "hemisphere_default": true
    },
-   "changed_px": 6771,
-   "changed_pct": 1.172
+   "changed_px": 2459,
+   "changed_pct": 0.426
   },
   {
    "a": {
-    "taxonomy": "ladder"
+    "taxonomy": "table",
+    "hemisphere_default": true
    },
    "b": {
-    "taxonomy": "heap"
+    "taxonomy": "stack",
+    "hemisphere_default": false
    },
-   "changed_px": 25111,
-   "changed_pct": 4.347
+   "changed_px": 2442,
+   "changed_pct": 0.423
   },
   {
    "a": {
-    "taxonomy": "stack"
+    "taxonomy": "table",
+    "hemisphere_default": true
    },
    "b": {
-    "taxonomy": "heap"
+    "taxonomy": "heap",
+    "hemisphere_default": true
    },
-   "changed_px": 28236,
-   "changed_pct": 4.889
+   "changed_px": 1531,
+   "changed_pct": 0.265
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": false
+   },
+   "changed_px": 1531,
+   "changed_pct": 0.265
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "hemisphere_default": true
+   },
+   "changed_px": 3159,
+   "changed_pct": 0.547
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "hemisphere_default": false
+   },
+   "changed_px": 3060,
+   "changed_pct": 0.53
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "hemisphere_default": true
+   },
+   "changed_px": 2510,
+   "changed_pct": 0.435
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "hemisphere_default": false
+   },
+   "changed_px": 2462,
+   "changed_pct": 0.426
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": true
+   },
+   "changed_px": 1569,
+   "changed_pct": 0.272
+  },
+  {
+   "a": {
+    "taxonomy": "table",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": false
+   },
+   "changed_px": 1569,
+   "changed_pct": 0.272
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "ladder",
+    "hemisphere_default": false
+   },
+   "changed_px": 954,
+   "changed_pct": 0.165
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "hemisphere_default": true
+   },
+   "changed_px": 2895,
+   "changed_pct": 0.501
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "hemisphere_default": false
+   },
+   "changed_px": 2888,
+   "changed_pct": 0.5
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": true
+   },
+   "changed_px": 2011,
+   "changed_pct": 0.348
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": false
+   },
+   "changed_px": 2009,
+   "changed_pct": 0.348
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "hemisphere_default": true
+   },
+   "changed_px": 2833,
+   "changed_pct": 0.49
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "stack",
+    "hemisphere_default": false
+   },
+   "changed_px": 2782,
+   "changed_pct": 0.482
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": true
+   },
+   "changed_px": 1930,
+   "changed_pct": 0.334
+  },
+  {
+   "a": {
+    "taxonomy": "ladder",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": false
+   },
+   "changed_px": 1926,
+   "changed_pct": 0.333
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "stack",
+    "hemisphere_default": false
+   },
+   "changed_px": 713,
+   "changed_pct": 0.123
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": true
+   },
+   "changed_px": 1330,
+   "changed_pct": 0.23
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": false
+   },
+   "changed_px": 1334,
+   "changed_pct": 0.231
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": true
+   },
+   "changed_px": 1298,
+   "changed_pct": 0.225
+  },
+  {
+   "a": {
+    "taxonomy": "stack",
+    "hemisphere_default": false
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": false
+   },
+   "changed_px": 1301,
+   "changed_pct": 0.225
+  },
+  {
+   "a": {
+    "taxonomy": "heap",
+    "hemisphere_default": true
+   },
+   "b": {
+    "taxonomy": "heap",
+    "hemisphere_default": false
+   },
+   "changed_px": 186,
+   "changed_pct": 0.032
   }
  ]
 }
