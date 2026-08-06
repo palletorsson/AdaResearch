@@ -388,8 +388,25 @@ func _holder_of(node: Node, key: String) -> Node:
 
 
 func _subtree_aabb(root_node: Node) -> AABB:
+	# TWO PASSES, and the order matters. MeshInstance3D first: that is the body of
+	# almost every artifact here, and it is what the camera should frame.
+	#
+	# MultiMeshInstance3D is counted ONLY when there is no MeshInstance3D content
+	# at all. Counting it unconditionally is a change I made this morning for the
+	# host grid, and it silently wrecked any artifact carrying a far-flung field:
+	# three_body_problem draws a star sphere of radius 50-100 as a MultiMesh while
+	# its three bodies span about 4, so the union grew 25x, the camera pulled back
+	# to match, and the subject went from 1.91% of frame to 0.01% — forty-five
+	# distinct colours, a black square. The star field is decor; the bodies are
+	# the artifact.
+	#
+	# The host grid still measures, because a hosted artifact (remove_random,
+	# proximity_spawner) has no MeshInstance3D of its own — which is the whole
+	# reason it needed a host.
 	var acc := AABB()
 	var have := false
+	var mm_acc := AABB()
+	var mm_have := false
 	var stack: Array = [root_node]
 	while not stack.is_empty():
 		var n = stack.pop_back()
@@ -399,17 +416,18 @@ func _subtree_aabb(root_node: Node) -> AABB:
 			acc = wab if not have else acc.merge(wab)
 			have = true
 		elif n is MultiMeshInstance3D:
-			# A host grid IS a MultiMeshInstance3D, and so is any artifact drawn with
-			# one. Counting only MeshInstance3D measured those as a 1 m box, which is
-			# the documented cause of "subject under 6% of frame".
 			var mm := n as MultiMeshInstance3D
 			if mm.multimesh != null:
 				var wab2: AABB = mm.global_transform * mm.get_aabb()
-				acc = wab2 if not have else acc.merge(wab2)
-				have = true
+				mm_acc = wab2 if not mm_have else mm_acc.merge(wab2)
+				mm_have = true
 		for ch in n.get_children():
 			stack.append(ch)
-	return acc if have else AABB(Vector3(-0.5, 0, -0.5), Vector3.ONE)
+	if have:
+		return acc
+	if mm_have:
+		return mm_acc
+	return AABB(Vector3(-0.5, 0, -0.5), Vector3.ONE)
 
 
 ## ── The artifacts with no body of their own ──────────────────────────────────
