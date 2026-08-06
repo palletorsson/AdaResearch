@@ -528,28 +528,196 @@
    "score": 6.09,
    "score2": 6.09,
    "score_promise_only": 6.0
+  },
+  {
+   "museum": "mengoni-glazed-thoroughfare",
+   "status": "ok",
+   "map": "Trial_mengoni_glazed_thoroughfare_primitives",
+   "slots_used": 16,
+   "overflow_hung": 0,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 1.0,
+   "patience": 0.07,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "2/2",
+   "runtime_s": 55.5,
+   "heroDeg": 20,
+   "hero": "info_board",
+   "score": 8.0,
+   "score2": 8.0,
+   "score_promise_only": 8.0
+  },
+  {
+   "museum": "katsura-miegakure-circuit",
+   "status": "ok",
+   "map": "Trial_katsura_miegakure_circuit_primitives",
+   "slots_used": 9,
+   "overflow_hung": 7,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.15,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "2/2",
+   "runtime_s": 50.4,
+   "heroDeg": 25,
+   "hero": "info_board",
+   "score": 6.0,
+   "score2": 6.0,
+   "score_promise_only": 6.0
+  },
+  {
+   "museum": "labrouste-stack-hall",
+   "status": "ok",
+   "map": "Trial_labrouste_stack_hall_primitives",
+   "slots_used": 16,
+   "overflow_hung": 0,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.02,
+   "dolly": 0.0,
+   "rank1": 0.0,
+   "cycles": "2/2",
+   "runtime_s": 48.6,
+   "heroDeg": 3,
+   "hero": "info_board",
+   "score": 5.02,
+   "score2": 5.02,
+   "score_promise_only": 5.0
+  },
+  {
+   "museum": "thoronet-circumambulation-void",
+   "status": "ok",
+   "map": "Trial_thoronet_circumambulation_void_primitives",
+   "slots_used": 15,
+   "overflow_hung": 1,
+   "undealt": 0,
+   "tau": 0.0,
+   "cov": 1.0,
+   "promise": 1.0,
+   "patience": 0.0,
+   "dolly": 0.5,
+   "rank1": 0.0,
+   "cycles": "2/2",
+   "runtime_s": 61.4,
+   "heroDeg": 10,
+   "hero": "info_board",
+   "score": 4.5,
+   "score2": 4.5,
+   "score_promise_only": 4.5
+  },
+  {
+   "museum": "mesdag-panorama-drum",
+   "status": "ok",
+   "map": "Trial_mesdag_panorama_drum_primitives",
+   "slots_used": 6,
+   "overflow_hung": 10,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.43,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "2/2",
+   "runtime_s": 35.6,
+   "heroDeg": 53,
+   "hero": "info_board",
+   "score": 7.43,
+   "score2": 7.43,
+   "score_promise_only": 7.0
+  },
+  {
+   "museum": "capuchin-crypt-corridor",
+   "status": "ok",
+   "map": "Trial_capuchin_crypt_corridor_primitives",
+   "slots_used": 12,
+   "overflow_hung": 4,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.55,
+   "dolly": 0.0,
+   "rank1": 1.0,
+   "cycles": "2/2",
+   "runtime_s": 38.3,
+   "heroDeg": 53,
+   "hero": "info_board",
+   "score": 6.55,
+   "score2": 6.55,
+   "score_promise_only": 6.0
+  },
+  {
+   "museum": "caracalla-thermal-axis",
+   "status": "ok",
+   "map": "Trial_caracalla_thermal_axis_primitives",
+   "slots_used": 15,
+   "overflow_hung": 1,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.04,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "2/2",
+   "runtime_s": 74.4,
+   "heroDeg": 11,
+   "hero": "info_board",
+   "score": 6.5,
+   "score2": 6.5,
+   "score_promise_only": 6.5
+  },
+  {
+   "museum": "sando-threshold-run",
+   "status": "ok",
+   "map": "Trial_sando_threshold_run_primitives",
+   "slots_used": 16,
+   "overflow_hung": 0,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.02,
+   "dolly": 1.0,
+   "rank1": 0.0,
+   "cycles": "2/2",
+   "runtime_s": 41.8,
+   "heroDeg": 4,
+   "hero": "info_board",
+   "score": 6.02,
+   "score2": 6.02,
+   "score_promise_only": 6.0
   }
  ],
  "merged_leaderboard": [
   {
    "lineage": "MUSEUM",
-   "name": "altes-rotunda-hub",
-   "score": 7.5
+   "name": "mengoni-glazed-thoroughfare",
+   "score": 8.0
   },
   {
    "lineage": "MUSEUM",
-   "name": "bilbao-atrium-radial",
-   "score": 7.11
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "pompidou-plateau-libre",
-   "score": 7.1
+   "name": "mesdag-panorama-drum",
+   "score": 7.43
   },
   {
    "lineage": "bred",
    "name": "derive",
    "score": 7.0
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "capuchin-crypt-corridor",
+   "score": 6.55
   },
   {
    "lineage": "bred",
@@ -563,17 +731,7 @@
   },
   {
    "lineage": "MUSEUM",
-   "name": "dia-beacon-field",
-   "score": 6.5
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "libeskind-void-axis",
-   "score": 6.5
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "kanazawa-matrix-vista",
+   "name": "caracalla-thermal-axis",
    "score": 6.5
   },
   {
@@ -583,33 +741,8 @@
   },
   {
    "lineage": "MUSEUM",
-   "name": "mezquita-hypostyle",
-   "score": 6.15
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "teshima-droplet",
-   "score": 6.12
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "louisiana-pavilion-chain",
-   "score": 6.11
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "uffizi-spine-ordered",
-   "score": 6.09
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "neue-nationalgalerie-free-plan",
-   "score": 6.08
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "castelvecchio-endstop-pinch",
-   "score": 6.08
+   "name": "sando-threshold-run",
+   "score": 6.02
   },
   {
    "lineage": "bred",
@@ -617,24 +750,14 @@
    "score": 6.0
   },
   {
+   "lineage": "MUSEUM",
+   "name": "katsura-miegakure-circuit",
+   "score": 6.0
+  },
+  {
    "lineage": "bred",
    "name": "dla",
    "score": 5.83
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "chichu-buried-cells",
-   "score": 5.73
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "guggenheim-serpentine",
-   "score": 5.51
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "soane-cabinet-vista",
-   "score": 5.51
   },
   {
    "lineage": "bred",
@@ -652,6 +775,11 @@
    "score": 5.08
   },
   {
+   "lineage": "MUSEUM",
+   "name": "labrouste-stack-hall",
+   "score": 5.02
+  },
+  {
    "lineage": "bred",
    "name": "erosion",
    "score": 4.83
@@ -660,6 +788,11 @@
    "lineage": "bred",
    "name": "wanghall",
    "score": 4.83
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "thoronet-circumambulation-void",
+   "score": 4.5
   },
   {
    "lineage": "bred",

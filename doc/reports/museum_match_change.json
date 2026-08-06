@@ -513,18 +513,181 @@
    "score": 5.67,
    "score2": 5.67,
    "score_promise_only": 5.67
+  },
+  {
+   "museum": "mengoni-glazed-thoroughfare",
+   "status": "ok",
+   "map": "Trial_mengoni_glazed_thoroughfare_change",
+   "slots_used": 21,
+   "overflow_hung": 4,
+   "undealt": 3,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.06,
+   "dolly": 0.8,
+   "rank1": 0.0,
+   "cycles": "3/3",
+   "runtime_s": 80.0,
+   "heroDeg": 20,
+   "hero": "info_board",
+   "score": 6.3,
+   "score2": 6.3,
+   "score_promise_only": 6.3
+  },
+  {
+   "museum": "katsura-miegakure-circuit",
+   "status": "ok",
+   "map": "Trial_katsura_miegakure_circuit_change",
+   "slots_used": 9,
+   "overflow_hung": 19,
+   "undealt": 0,
+   "tau": 0.67,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.14,
+   "dolly": 0.57,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 70.2,
+   "heroDeg": 25,
+   "hero": "info_board",
+   "score": 5.4,
+   "score2": 5.4,
+   "score_promise_only": 5.4
+  },
+  {
+   "museum": "labrouste-stack-hall",
+   "status": "ok",
+   "map": "Trial_labrouste_stack_hall_change",
+   "slots_used": 26,
+   "overflow_hung": 2,
+   "undealt": 0,
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.02,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 102.0,
+   "heroDeg": 28,
+   "hero": "info_board",
+   "score": 6.17,
+   "score2": 6.17,
+   "score_promise_only": 6.17
+  },
+  {
+   "museum": "thoronet-circumambulation-void",
+   "status": "ok",
+   "map": "Trial_thoronet_circumambulation_void_change",
+   "slots_used": 15,
+   "overflow_hung": 13,
+   "undealt": 0,
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.06,
+   "dolly": 0.62,
+   "rank1": 0.0,
+   "cycles": "4/4",
+   "runtime_s": 75.0,
+   "heroDeg": 25,
+   "hero": "info_board",
+   "score": 4.79,
+   "score2": 4.79,
+   "score_promise_only": 4.79
+  },
+  {
+   "museum": "mesdag-panorama-drum",
+   "status": "ok",
+   "map": "Trial_mesdag_panorama_drum_change",
+   "slots_used": 6,
+   "overflow_hung": 12,
+   "undealt": 10,
+   "tau": -1.0,
+   "cov": 1.0,
+   "promise": 1.0,
+   "patience": 0.38,
+   "dolly": 0.73,
+   "rank1": 1.0,
+   "cycles": "3/3",
+   "runtime_s": 44.0,
+   "heroDeg": 53,
+   "hero": "info_board",
+   "score": 3.73,
+   "score2": 3.73,
+   "score_promise_only": 3.73
+  },
+  {
+   "museum": "capuchin-crypt-corridor",
+   "status": "ok",
+   "map": "Trial_capuchin_crypt_corridor_change",
+   "slots_used": 12,
+   "overflow_hung": 15,
+   "undealt": 1,
+   "tau": 0.67,
+   "cov": 1.0,
+   "promise": 0.0,
+   "patience": 0.34,
+   "dolly": 0.64,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 55.6,
+   "heroDeg": 53,
+   "hero": "info_board",
+   "score": 6.31,
+   "score2": 6.31,
+   "score_promise_only": 5.97
+  },
+  {
+   "museum": "caracalla-thermal-axis",
+   "status": "ok",
+   "map": "Trial_caracalla_thermal_axis_change",
+   "slots_used": 15,
+   "overflow_hung": 13,
+   "undealt": 0,
+   "tau": 1.0,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.03,
+   "dolly": 1.0,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 80.5,
+   "heroDeg": 28,
+   "hero": "info_board",
+   "score": 7.5,
+   "score2": 7.5,
+   "score_promise_only": 7.5
+  },
+  {
+   "museum": "sando-threshold-run",
+   "status": "ok",
+   "map": "Trial_sando_threshold_run_change",
+   "slots_used": 20,
+   "overflow_hung": 7,
+   "undealt": 1,
+   "tau": 0.33,
+   "cov": 1.0,
+   "promise": 0.5,
+   "patience": 0.36,
+   "dolly": 0.8,
+   "rank1": 1.0,
+   "cycles": "4/4",
+   "runtime_s": 65.1,
+   "heroDeg": 53,
+   "hero": "info_board",
+   "score": 5.97,
+   "score2": 5.97,
+   "score_promise_only": 5.97
   }
  ],
  "merged_leaderboard": [
   {
    "lineage": "MUSEUM",
-   "name": "soane-cabinet-vista",
+   "name": "caracalla-thermal-axis",
    "score": 7.5
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "altes-rotunda-hub",
-   "score": 7.06
   },
   {
    "lineage": "bred",
@@ -543,32 +706,27 @@
   },
   {
    "lineage": "MUSEUM",
-   "name": "teshima-droplet",
+   "name": "capuchin-crypt-corridor",
+   "score": 6.31
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "mengoni-glazed-thoroughfare",
+   "score": 6.3
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "labrouste-stack-hall",
    "score": 6.17
   },
   {
    "lineage": "MUSEUM",
-   "name": "louisiana-pavilion-chain",
-   "score": 6.12
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "kanazawa-matrix-vista",
-   "score": 6.08
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "pompidou-plateau-libre",
-   "score": 5.73
+   "name": "sando-threshold-run",
+   "score": 5.97
   },
   {
    "lineage": "bred",
    "name": "dla",
-   "score": 5.67
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "uffizi-spine-ordered",
    "score": 5.67
   },
   {
@@ -578,13 +736,8 @@
   },
   {
    "lineage": "MUSEUM",
-   "name": "dia-beacon-field",
-   "score": 5.43
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "bilbao-atrium-radial",
-   "score": 5.27
+   "name": "katsura-miegakure-circuit",
+   "score": 5.4
   },
   {
    "lineage": "bred",
@@ -593,38 +746,18 @@
   },
   {
    "lineage": "MUSEUM",
-   "name": "mezquita-hypostyle",
-   "score": 5.17
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "castelvecchio-endstop-pinch",
-   "score": 5.17
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "neue-nationalgalerie-free-plan",
-   "score": 5.07
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "libeskind-void-axis",
-   "score": 5.03
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "guggenheim-serpentine",
-   "score": 4.83
-  },
-  {
-   "lineage": "MUSEUM",
-   "name": "chichu-buried-cells",
-   "score": 4.83
+   "name": "thoronet-circumambulation-void",
+   "score": 4.79
   },
   {
    "lineage": "bred",
    "name": "erosion",
    "score": 4.07
+  },
+  {
+   "lineage": "MUSEUM",
+   "name": "mesdag-panorama-drum",
+   "score": 3.73
   },
   {
    "lineage": "bred",

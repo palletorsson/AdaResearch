@@ -320,6 +320,19 @@ def main() -> int:
     for i, x in enumerate(merged[:12], 1):
         print(f"{i:2}. {x['lineage']:6} {x['name']:40} {x['score']:5.2f}")
     out_p = os.path.join(ROOT, "doc", "reports", f"museum_match_{args.seq}.json")
+    # MERGE into the standing report: a round fields a subset, and overwriting
+    # museum_rows once cost five chapters their five-museum record. Latest run
+    # wins per museum; everyone else's rows survive.
+    if os.path.isfile(out_p):
+        try:
+            old = json.load(open(out_p, encoding="utf-8"))
+            kept = {r.get("museum"): r for r in old.get("museum_rows", [])
+                    if r.get("museum")}
+            for r in rows:
+                kept[r.get("museum")] = r
+            rows = list(kept.values())
+        except (json.JSONDecodeError, OSError):
+            pass
     json.dump({"seq": args.seq, "cast_source": champ,
                "bred_baseline": baseline, "museum_rows": rows,
                "merged_leaderboard": merged},
