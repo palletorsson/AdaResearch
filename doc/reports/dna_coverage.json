@@ -1,32 +1,14 @@
 {
  "_note": "Four independent questions per registry entry: does it DECLARE dna.axes, has the stage-2 runner RESEARCHED it, has it been SWEPT and measured, is it PLACED in a map. `untouched_placed` is the unexplored surface \u2014 artifacts a player meets that the research loop has never touched.",
  "totals": {
-  "registry_entries": 2671,
-  "declared": 365,
-  "placed": 2157,
-  "outside_system": 2070,
-  "outside_system_placed": 1608,
-  "declared_but_never_swept": 57
+  "registry_entries": 2683,
+  "declared": 666,
+  "placed": 2162,
+  "outside_system": 1810,
+  "outside_system_placed": 1350,
+  "declared_but_never_swept": 135
  },
  "untouched_placed": [
-  {
-   "token": "2d_in_3d_randomness_vis",
-   "registry": "randomness.json",
-   "placements": 29,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/infoboards_3d/boards/Randomness/2d_in_3d_randomness_vis.tscn"
-  },
-  {
-   "token": "mold_network",
-   "registry": "cellular_automata.json",
-   "placements": 27,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/cellular_automata_3d/MoldNetwork.tscn"
-  },
   {
    "token": "AudioContr",
    "registry": "commons_artifacts.json",
@@ -55,51 +37,6 @@
    "scene": ""
   },
   {
-   "token": "cube_projectile_spawner",
-   "registry": "primitives.json",
-   "placements": 9,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/cubes/cube_spawner.tscn"
-  },
-  {
-   "token": "newton_cradle",
-   "registry": "physics_simulation.json",
-   "placements": 8,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/physicssimulation/newtoncradle/newtoncradle.tscn"
-  },
-  {
-   "token": "gaussian_random",
-   "registry": "randomness.json",
-   "placements": 8,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/gaussian_random.tscn"
-  },
-  {
-   "token": "rounded_softbody_test",
-   "registry": "soft_bodies.json",
-   "placements": 8,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/softbodies/rounded_softbody_test.tscn"
-  },
-  {
-   "token": "csg_compose_workbench",
-   "registry": "boolean_surfaces.json",
-   "placements": 7,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/boolean_surfaces/csg_compose_workbench.tscn"
-  },
-  {
    "token": "interactable_demo",
    "registry": "commons_artifacts.json",
    "placements": 7,
@@ -107,42 +44,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/interactables/interactable_demo.tscn"
-  },
-  {
-   "token": "polyhedron_nets_cube",
-   "registry": "commons_artifacts.json",
-   "placements": 7,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/infoboards_3d/visualizations/polyhedron_nets_cube.tscn"
-  },
-  {
-   "token": "path_watchdog",
-   "registry": "hazards.json",
-   "placements": 7,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/path_watchdog/path_watchdog.tscn"
-  },
-  {
-   "token": "kresling_spire",
-   "registry": "hazards.json",
-   "placements": 7,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/kresling_spire/kresling_spire.tscn"
-  },
-  {
-   "token": "origami_droideka",
-   "registry": "hazards.json",
-   "placements": 7,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/armadillo_droideka/origami_droideka.tscn"
   },
   {
    "token": "loom_alhambra_p6m",
@@ -170,42 +71,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/primitives/booleans/dome.tscn"
-  },
-  {
-   "token": "VectorThrowing",
-   "registry": "vectors.json",
-   "placements": 7,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/08_vector_throwing/VectorThrowing.tscn"
-  },
-  {
-   "token": "entropy_morphogenesis",
-   "registry": "alternative_geometries.json",
-   "placements": 6,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn"
-  },
-  {
-   "token": "vector_field_grid",
-   "registry": "change.json",
-   "placements": 6,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/change/vector_field_grid.tscn"
-  },
-  {
-   "token": "force_field_visualizer",
-   "registry": "commons_artifacts.json",
-   "placements": 6,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/force_field_visualizer/force_field_visualizer.tscn"
   },
   {
    "token": "mill_alhambra_p6m",
@@ -253,33 +118,6 @@
    "scene": "res://commons/artifacts/situated_bench/situated_bench.tscn"
   },
   {
-   "token": "r_c",
-   "registry": "random_cubes.json",
-   "placements": 6,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/cubes/random_cycle_cube.tscn"
-  },
-  {
-   "token": "remove_random",
-   "registry": "randomness.json",
-   "placements": 6,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/remove_random.tscn"
-  },
-  {
-   "token": "parametric_pendulum_waves",
-   "registry": "wavefunctions.json",
-   "placements": 6,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.tscn"
-  },
-  {
    "token": "wave_interference",
    "registry": "wavefunctions.json",
    "placements": 6,
@@ -289,76 +127,22 @@
    "scene": "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn"
   },
   {
-   "token": "wave_propagation_3d",
-   "registry": "wavefunctions.json",
-   "placements": 6,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn"
-  },
-  {
-   "token": "toruscylinder",
-   "registry": "transforms.json",
-   "placements": 6,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/transformation/toruscylinder/toruscylinder.tscn"
-  },
-  {
-   "token": "rhizomatic_maze_space",
-   "registry": "alternative_geometries.json",
+   "token": "catalyst_pedestal",
+   "registry": "hazards.json",
    "placements": 5,
    "declared": false,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn"
+   "scene": "res://commons/hazards/becoming_catalyst/catalyst_pedestal.tscn"
   },
   {
-   "token": "petri_dish_worms",
-   "registry": "commons_artifacts.json",
-   "placements": 5,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/petri_dish_worms/petri_dish_worms.tscn"
-  },
-  {
-   "token": "turing_pattern_generator",
-   "registry": "commons_artifacts.json",
-   "placements": 5,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn"
-  },
-  {
-   "token": "force_vortex",
-   "registry": "force_vortex.json",
-   "placements": 5,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/force_vortex/force_vortex.tscn"
-  },
-  {
-   "token": "tentacle_placer",
-   "registry": "lab.json",
-   "placements": 5,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/tentacle_placer/tentacle_placer.tscn"
-  },
-  {
-   "token": "digital_materiality_glitch",
+   "token": "voxelnoise",
    "registry": "randomness.json",
    "placements": 5,
    "declared": false,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn"
+   "scene": "res://algorithms/randomness/voxelnoise/voxelnoise.tscn"
   },
   {
    "token": "SystemsMusicTest",
@@ -379,51 +163,6 @@
    "scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn"
   },
   {
-   "token": "resonating_metallophone",
-   "registry": "wavefunctions.json",
-   "placements": 5,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn"
-  },
-  {
-   "token": "unit_circle_advanced",
-   "registry": "wavefunctions.json",
-   "placements": 5,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn"
-  },
-  {
-   "token": "vector_sub",
-   "registry": "vectors_demos.json",
-   "placements": 5,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/vector_op_console/vector_sub.tscn"
-  },
-  {
-   "token": "dot_aligner",
-   "registry": "vectors_demos.json",
-   "placements": 5,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/dot_aligner/dot_aligner.tscn"
-  },
-  {
-   "token": "sine_space",
-   "registry": "wavefunctions_extra.json",
-   "placements": 5,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn"
-  },
-  {
    "token": "sine_oscillation",
    "registry": "wavefunctions_extra.json",
    "placements": 5,
@@ -431,60 +170,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/wavefunctions/sineoscillation/sine_oscillation.tscn"
-  },
-  {
-   "token": "agreement_gauge",
-   "registry": "agreement_gauge.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/agreement_gauge/agreement_gauge.tscn"
-  },
-  {
-   "token": "geometric_transformations",
-   "registry": "algorithms_misc.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn"
-  },
-  {
-   "token": "simulated_annealing",
-   "registry": "algorithms_misc.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn"
-  },
-  {
-   "token": "column_3_z",
-   "registry": "arrays.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/arrays/column_3_z.tscn"
-  },
-  {
-   "token": "pompeii_meander_floor",
-   "registry": "arrays.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/pompeii_mosaic_floor/pompeii_meander_floor.tscn"
-  },
-  {
-   "token": "san_michele_mosaic_floor",
-   "registry": "arrays.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/pompeii_mosaic_floor/san_michele_mosaic_floor.tscn"
   },
   {
    "token": "spiral_mosaic_floor",
@@ -496,69 +181,6 @@
    "scene": "res://commons/artifacts/pompeii_mosaic_floor/spiral_mosaic_floor.tscn"
   },
   {
-   "token": "catapult",
-   "registry": "catapult.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/catapult/catapult.tscn"
-  },
-  {
-   "token": "slope_tangent_demo",
-   "registry": "change.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/change/slope_tangent_demo.tscn"
-  },
-  {
-   "token": "integral_area",
-   "registry": "change.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/change/integral_area.tscn"
-  },
-  {
-   "token": "derivative_pair",
-   "registry": "change.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/change/derivative_pair.tscn"
-  },
-  {
-   "token": "velocity_arrow",
-   "registry": "change.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/change/velocity_arrow.tscn"
-  },
-  {
-   "token": "box_counting_dimension",
-   "registry": "procgen_extra.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/box_counting_dimension/box_counting_dimension.tscn"
-  },
-  {
-   "token": "ball_painting_demo",
-   "registry": "commons_artifacts.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/context/drawingboard/ball_painting_demo_v2.tscn"
-  },
-  {
    "token": "cctv",
    "registry": "commons_artifacts.json",
    "placements": 4,
@@ -566,69 +188,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/monitor/cctv.tscn"
-  },
-  {
-   "token": "control_pendulum",
-   "registry": "commons_artifacts.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/control_pendulum/control_pendulum.tscn"
-  },
-  {
-   "token": "harmonic_motion_demo",
-   "registry": "commons_artifacts.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn"
-  },
-  {
-   "token": "lsystem_editor",
-   "registry": "commons_artifacts.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/lsystem_editor/lsystem_editor.tscn"
-  },
-  {
-   "token": "mario_cube_time_trace",
-   "registry": "commons_artifacts.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/scenes/mapobjects/mario_cube_time_trace.tscn"
-  },
-  {
-   "token": "bifurcation_diagram",
-   "registry": "foundations.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn"
-  },
-  {
-   "token": "audio_catalog_tablet",
-   "registry": "furniture.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/audio/catalog/AudioCatalogTablet3D.tscn"
-  },
-  {
-   "token": "origami_bird",
-   "registry": "hazards.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/fold_system/origami_bird.tscn"
   },
   {
    "token": "cardboard_box",
@@ -640,105 +199,6 @@
    "scene": "res://commons/artifacts/cardboard_box/cardboard_box.tscn"
   },
   {
-   "token": "length_lantern",
-   "registry": "length_lantern.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/length_lantern/length_lantern.tscn"
-  },
-  {
-   "token": "CityGenerator",
-   "registry": "lsystems.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/lsystems/Architecture/CityGenerator.tscn"
-  },
-  {
-   "token": "space_filling_curve_gallery",
-   "registry": "lsystems.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn"
-  },
-  {
-   "token": "museum_hall_shell",
-   "registry": "museum.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/museum/museum_hall_shell.tscn"
-  },
-  {
-   "token": "algo_gun",
-   "registry": "physics_simulation.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/forces/algo_gun.tscn"
-  },
-  {
-   "token": "example_3_2_forces_with_arbitrary_angular_motion_vr",
-   "registry": "physics_simulation.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/oscillation/noc_ch03/example_3_2_forces_with_arbitrary_angular_motion_vr.tscn"
-  },
-  {
-   "token": "example_3_3_pointing_in_the_direction_of_motion_vr",
-   "registry": "physics_simulation.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.tscn"
-  },
-  {
-   "token": "newtons_laws",
-   "registry": "physics_simulation.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/physicssimulation/newtonslaws/newtonslaws.tscn"
-  },
-  {
-   "token": "combine_portals",
-   "registry": "primitives.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/combines/combine_portals.tscn"
-  },
-  {
-   "token": "cube",
-   "registry": "primitives.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/cube/cube.tscn"
-  },
-  {
-   "token": "draw_dot_time_domain",
-   "registry": "primitives.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/point/draw_dot_time_domain.tscn"
-  },
-  {
    "token": "light_sphere",
    "registry": "primitives.json",
    "placements": 4,
@@ -746,51 +206,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/primitives/sphere/light_sphere.tscn"
-  },
-  {
-   "token": "random_object_spawner",
-   "registry": "primitives.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/cubes/random_object_spawner.tscn"
-  },
-  {
-   "token": "delaunay_triangulation_3d_cell",
-   "registry": "procgen_extra.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn"
-  },
-  {
-   "token": "fibonacci_pagoda",
-   "registry": "procgen_extra.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/pillar/fibonacci_pagoda.tscn"
-  },
-  {
-   "token": "inverted_tree_cloud",
-   "registry": "procgen_extra.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/recursive_tree/inverted_tree_cloud.tscn"
-  },
-  {
-   "token": "mandelbrot_set",
-   "registry": "procgen_extra.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/mandelbrot_set/mandelbrot_set.tscn"
   },
   {
    "token": "mushrooms",
@@ -802,13 +217,13 @@
    "scene": "res://algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn"
   },
   {
-   "token": "monte_carlo_dartboard",
+   "token": "Random_Rotate_Random_XYZ",
    "registry": "randomness.json",
    "placements": 4,
    "declared": false,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn"
+   "scene": "res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn"
   },
   {
    "token": "noisesphere",
@@ -829,51 +244,6 @@
    "scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_collection.tscn"
   },
   {
-   "token": "shader_noise_space",
-   "registry": "randomness.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/shadernoisespace/noiseroom.tscn"
-  },
-  {
-   "token": "voxelnoise",
-   "registry": "randomness.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/voxelnoise/voxelnoise.tscn"
-  },
-  {
-   "token": "pi_dart_bench",
-   "registry": "randomness.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/pi_dart_bench/pi_dart_bench.tscn"
-  },
-  {
-   "token": "jelly_cube",
-   "registry": "soft_bodies.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/jelly_cube/jelly_cube.tscn"
-  },
-  {
-   "token": "vowel_sound_board",
-   "registry": "speech.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/speech/phoneme_cloud/vowel_sound_board.tscn"
-  },
-  {
    "token": "station_multiscreen",
    "registry": "station.json",
    "placements": 4,
@@ -881,15 +251,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/station/station_multiscreen.tscn"
-  },
-  {
-   "token": "DualBallFMController",
-   "registry": "wavefunctions.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn"
   },
   {
    "token": "ElphabaDress",
@@ -919,51 +280,6 @@
    "scene": "res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.tscn"
   },
   {
-   "token": "dot_product_projector",
-   "registry": "vectors.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn"
-  },
-  {
-   "token": "rotating_cube_demo",
-   "registry": "wavefunctions.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/rotating_cube_demo/rotating_cube_demo.tscn"
-  },
-  {
-   "token": "ruth_asawa_sculpture",
-   "registry": "wavefunctions.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.tscn"
-  },
-  {
-   "token": "sine_space_explanation",
-   "registry": "wavefunctions.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/sine_space_explanation/sine_space_explanation.tscn"
-  },
-  {
-   "token": "sine_wall_explanation",
-   "registry": "wavefunctions.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/sine_wall_explanation/sine_wall_explanation.tscn"
-  },
-  {
    "token": "unit_circle",
    "registry": "wavefunctions.json",
    "placements": 4,
@@ -971,96 +287,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn"
-  },
-  {
-   "token": "vector_subtraction_demo",
-   "registry": "vectors.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn"
-  },
-  {
-   "token": "y_oscillation_cube",
-   "registry": "wavefunctions.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/y_oscillation_cube/y_oscillation_cube.tscn"
-  },
-  {
-   "token": "VectorAddition",
-   "registry": "vectors.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn"
-  },
-  {
-   "token": "VectorMotion",
-   "registry": "vectors.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/08_vector_motion/VectorMotion.tscn"
-  },
-  {
-   "token": "gravity_gun_test_scene",
-   "registry": "vectors.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/08_vector_throwing/destructibles/gravity_gun_test_scene.tscn"
-  },
-  {
-   "token": "launch_arc",
-   "registry": "vectors_demos.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/launch_arc/launch_arc.tscn"
-  },
-  {
-   "token": "torque_crank",
-   "registry": "vectors_demos.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/torque_crank/torque_crank.tscn"
-  },
-  {
-   "token": "bounce_well",
-   "registry": "vectors_demos.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/bounce_well/bounce_well.tscn"
-  },
-  {
-   "token": "momentum_cradle",
-   "registry": "vectors_demos.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/momentum_cradle/momentum_cradle.tscn"
-  },
-  {
-   "token": "timbre_sculptor",
-   "registry": "wavefunctions.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/timbre_sculptor/timbre_sculptor.tscn"
   },
   {
    "token": "beat_frequency_demo",
@@ -1072,42 +298,6 @@
    "scene": "res://algorithms/wavefunctions/beat_frequency/beat_frequency_demo.tscn"
   },
   {
-   "token": "wave_interference_3d",
-   "registry": "wavefunctions.json",
-   "placements": 4,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/wave_interference_3d/wave_interference_3d.tscn"
-  },
-  {
-   "token": "adder_board",
-   "registry": "adder_board.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/adder_board/adder_board.tscn"
-  },
-  {
-   "token": "affect_theory_visualization",
-   "registry": "algorithms_misc.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/physicssimulation/affect_theory_visualization/affect_theory_visualization.tscn"
-  },
-  {
-   "token": "astar",
-   "registry": "algorithms_misc.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/searchpathfinding/astar/astar.tscn"
-  },
-  {
    "token": "audio_effects",
    "registry": "algorithms_misc.json",
    "placements": 3,
@@ -1115,15 +305,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/proceduralaudio/audio_effects/audio_effects.tscn"
-  },
-  {
-   "token": "force_directed_layout",
-   "registry": "algorithms_misc.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn"
   },
   {
    "token": "pathfinding_visualization",
@@ -1144,51 +325,6 @@
    "scene": "res://commons/artifacts/wiki_fragment/wiki_fragment.tscn"
   },
   {
-   "token": "curvature_slider",
-   "registry": "alternative_geometries.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn"
-  },
-  {
-   "token": "riemann_pi",
-   "registry": "alternative_geometries.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/spacetopology/riemann_pi/pi_infinity_surface.tscn"
-  },
-  {
-   "token": "grid_editor_board_3d",
-   "registry": "arrays.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/grid_editor_board/grid_editor_board_3d.tscn"
-  },
-  {
-   "token": "bar_array_merge_sort",
-   "registry": "bar_array.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
-  },
-  {
-   "token": "ca_bridge",
-   "registry": "cellular_automata.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/ca_bridge/ca_bridge.tscn"
-  },
-  {
    "token": "lattice_gas_automata",
    "registry": "cellular_automata.json",
    "placements": 3,
@@ -1198,49 +334,13 @@
    "scene": "res://algorithms/cellularautomata/lattice_gas_automata/lattice_gas_automata.tscn"
   },
   {
-   "token": "persian_rug",
-   "registry": "cellular_automata.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/persian_rug/persian_rug.tscn"
-  },
-  {
-   "token": "partial_derivative_terrain",
-   "registry": "change.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/change/partial_derivative_terrain.tscn"
-  },
-  {
-   "token": "riemann_pump",
-   "registry": "change.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/change/riemann_pump.tscn"
-  },
-  {
-   "token": "particle_flow_swarm",
-   "registry": "change.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/change/particle_flow_swarm.tscn"
-  },
-  {
-   "token": "color_constellation_office",
+   "token": "color_space_navigator",
    "registry": "color.json",
    "placements": 3,
    "declared": false,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/color/color_mixing/color_constellation_office.tscn"
+   "scene": "res://commons/artifacts/color_space_navigator/color_space_navigator.tscn"
   },
   {
    "token": "centripetal_force_demo",
@@ -1259,33 +359,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/coupled_pendulums/coupled_pendulums.tscn"
-  },
-  {
-   "token": "health_display",
-   "registry": "commons_artifacts.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/visualaid/gameplay/health_display.tscn"
-  },
-  {
-   "token": "hits_reset_display",
-   "registry": "commons_artifacts.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/visualaid/gameplay/hits_reset_display.tscn"
-  },
-  {
-   "token": "random_space",
-   "registry": "commons_artifacts.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/context/walkgrids/random_space.tscn"
   },
   {
    "token": "spring_network",
@@ -1315,24 +388,6 @@
    "scene": "res://commons/artifacts/trajectory_artifact/trajectory_artifact.tscn"
   },
   {
-   "token": "angle_sum_triangle",
-   "registry": "foundations.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn"
-  },
-  {
-   "token": "constructive_proof",
-   "registry": "foundations.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/constructive_proof/constructive_proof.tscn"
-  },
-  {
    "token": "composition_platform",
    "registry": "gallery_preview.json",
    "placements": 3,
@@ -1351,69 +406,6 @@
    "scene": "res://algorithms/proceduralgeneration/grammar_systems/markov_chains/markov_chains.tscn"
   },
   {
-   "token": "grid2d_bfs",
-   "registry": "grid2d.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn"
-  },
-  {
-   "token": "grid3d_bfs",
-   "registry": "grid3d.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn"
-  },
-  {
-   "token": "grid3d_kruskal",
-   "registry": "grid3d.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn"
-  },
-  {
-   "token": "grid3d_random_graph",
-   "registry": "grid3d.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn"
-  },
-  {
-   "token": "collision_crasher",
-   "registry": "hazards.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/collision_crasher/collision_crasher.tscn"
-  },
-  {
-   "token": "hazards_demo",
-   "registry": "hazards.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/hazards_demo/hazards_demo.tscn"
-  },
-  {
-   "token": "human_catapult",
-   "registry": "human_catapult.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/human_catapult/human_catapult.tscn"
-  },
-  {
    "token": "incompleteness_scale",
    "registry": "instruments.json",
    "placements": 3,
@@ -1421,15 +413,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/instruments/incompleteness_scale.tscn"
-  },
-  {
-   "token": "control_board",
-   "registry": "lab.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/control_board/control_board.tscn"
   },
   {
    "token": "AnimatedTree",
@@ -1459,15 +442,6 @@
    "scene": "res://algorithms/lsystems/Hilbert3D.tscn"
   },
   {
-   "token": "genetic_tree_sculptor",
-   "registry": "lsystems.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn"
-  },
-  {
    "token": "grammar_bench",
    "registry": "lsystems.json",
    "placements": 3,
@@ -1493,15 +467,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/fern_bench/fern_bench.tscn"
-  },
-  {
-   "token": "mortar_vector_siege",
-   "registry": "mortar_vector_siege.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/mortar_vector_siege/mortar_vector_siege.tscn"
   },
   {
    "token": "nature_system_demo",
@@ -1549,33 +514,6 @@
    "scene": "res://algorithms/forces/example_2_6_single_attractor_vr.tscn"
   },
   {
-   "token": "example_6_6_grab_vr",
-   "registry": "physics_simulation.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/physics/example_6_6_grab_vr.tscn"
-  },
-  {
-   "token": "firework_launcher",
-   "registry": "physics_simulation.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/physicssimulation/fireworklauncher/fireworklauncher.tscn"
-  },
-  {
-   "token": "friction_ramp",
-   "registry": "physics_simulation.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/friction_ramp/friction_ramp.tscn"
-  },
-  {
    "token": "gravity_well",
    "registry": "physics_simulation.json",
    "placements": 3,
@@ -1583,15 +521,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/physicssimulation/gravitywell/gravitywell.tscn"
-  },
-  {
-   "token": "nbody_simulation",
-   "registry": "physics_simulation.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/physicssimulation/nbodysimulation/nbody_problem.tscn"
   },
   {
    "token": "aalto_vase",
@@ -1603,24 +532,6 @@
    "scene": "res://commons/primitives/design_classics/aalto_vase.tscn"
   },
   {
-   "token": "cross_line_puzzle",
-   "registry": "primitives.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/line/puzzles/cross_line_puzzle.tscn"
-  },
-  {
-   "token": "cube_lines",
-   "registry": "primitives.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/line/cube_lines.tscn"
-  },
-  {
    "token": "probability_sphere",
    "registry": "primitives.json",
    "placements": 3,
@@ -1628,15 +539,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/primitives/spheres/probability_sphere.tscn"
-  },
-  {
-   "token": "pattern_tunnel_machine",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/pattern_tunnel/pattern_tunnel_machine.tscn"
   },
   {
    "token": "GyroidDemo",
@@ -1648,24 +550,6 @@
    "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/GyroidDemo.tscn"
   },
   {
-   "token": "cube_staircase",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/cubesubdivision/cube_staircase.tscn"
-  },
-  {
-   "token": "cube_subdivision",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/cubesubdivision/cube_subdivision.tscn"
-  },
-  {
    "token": "example_8_4_cantor_pagoda_vr",
    "registry": "procgen_extra.json",
    "placements": 3,
@@ -1673,51 +557,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn"
-  },
-  {
-   "token": "fibonacci_terrain",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/fibonacci_terrain/fibonacci_terrain.tscn"
-  },
-  {
-   "token": "fractal_recursion_2",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/example_8_2_recursion_vr.tscn"
-  },
-  {
-   "token": "implicit_surface_modeling",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn"
-  },
-  {
-   "token": "koch_curve_3d",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/koshcurve/KochCurve3D.tscn"
-  },
-  {
-   "token": "menger_sponge",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/mengersponge/menger_sponge.tscn"
   },
   {
    "token": "modelsynthesis",
@@ -1729,42 +568,6 @@
    "scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/modelsynthesis.tscn"
   },
   {
-   "token": "recursive_chair",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/cubesubdivision/recursive_chair.tscn"
-  },
-  {
-   "token": "recursive_table",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/cubesubdivision/recursive_table.tscn"
-  },
-  {
-   "token": "stochastic_tree_separated",
-   "registry": "procgen_extra.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/example_8_7_stochastic_tree_separated_vr.tscn"
-  },
-  {
-   "token": "Random_Rotate_Random_XYZ",
-   "registry": "randomness.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn"
-  },
-  {
    "token": "VoxelNoiseROIs",
    "registry": "randomness.json",
    "placements": 3,
@@ -1772,51 +575,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/randomness/voxelnoise/VoxelNoiseROIs.tscn"
-  },
-  {
-   "token": "bubbles_random",
-   "registry": "randomness.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/random_bubbles/bubbles_random.tscn"
-  },
-  {
-   "token": "evolutionary_algorithms",
-   "registry": "randomness.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn"
-  },
-  {
-   "token": "pheromone_terrain",
-   "registry": "randomness.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn"
-  },
-  {
-   "token": "pipe_dream",
-   "registry": "randomness.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/pipedream/pipe_dream.tscn"
-  },
-  {
-   "token": "pollock_painting_in_3d",
-   "registry": "randomness.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn"
   },
   {
    "token": "random_plants",
@@ -1837,15 +595,6 @@
    "scene": "res://algorithms/randomness/randompoint/randompoint.tscn"
   },
   {
-   "token": "sculpt_one",
-   "registry": "randomness.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/sculpt_one.tscn"
-  },
-  {
    "token": "worley_noise",
    "registry": "randomness.json",
    "placements": 3,
@@ -1853,15 +602,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/worley_noise/worley_noise.tscn"
-  },
-  {
-   "token": "exercise_5_9_angle_between",
-   "registry": "steering.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.tscn"
   },
   {
    "token": "flocking_controls",
@@ -1873,15 +613,6 @@
    "scene": "res://commons/artifacts/flocking_controls/flocking_controls.tscn"
   },
   {
-   "token": "stretch_bench",
-   "registry": "stretch_bench.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/stretch_bench/stretch_bench.tscn"
-  },
-  {
    "token": "hl_turret_vectors",
    "registry": "vectors.json",
    "placements": 3,
@@ -1889,15 +620,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.tscn"
-  },
-  {
-   "token": "rainbow_hallway",
-   "registry": "wavefunctions.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.tscn"
   },
   {
    "token": "sentry_turret",
@@ -1918,22 +640,13 @@
    "scene": "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn"
   },
   {
-   "token": "vector_addition_demo",
-   "registry": "vectors.json",
+   "token": "vector_field",
+   "registry": "transforms.json",
    "placements": 3,
    "declared": false,
    "researched": false,
    "swept": false,
-   "scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn"
-  },
-  {
-   "token": "vector_translation_demo",
-   "registry": "vectors.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn"
+   "scene": "res://algorithms/transformation/vector_field/vector_field.tscn"
   },
   {
    "token": "vector_cross_product_xl",
@@ -1981,105 +694,6 @@
    "scene": "res://algorithms/vectors/09_vector_torque/VectorTorque.tscn"
   },
   {
-   "token": "destructibles_test_scene",
-   "registry": "vectors.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.tscn"
-  },
-  {
-   "token": "example_1_3_vector_subtraction_vr",
-   "registry": "vectors.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/noc_ch01/example_1_3_vector_subtraction_vr.tscn"
-  },
-  {
-   "token": "example_1_5_vector_magnitude_vr",
-   "registry": "vectors.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/noc_ch01/example_1_5_vector_magnitude_vr.tscn"
-  },
-  {
-   "token": "example_1_6_vector_normalize_vr",
-   "registry": "vectors.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/noc_ch01/example_1_6_vector_normalize_vr.tscn"
-  },
-  {
-   "token": "example_1_7_motion_101_velocity_vr",
-   "registry": "vectors.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/noc_ch01/example_1_7_motion_101_velocity_vr.tscn"
-  },
-  {
-   "token": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
-   "registry": "vectors.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/noc_ch01/example_1_8_motion_101_velocity_and_constant_acceleration_vr.tscn"
-  },
-  {
-   "token": "sphere_splitting_showcase",
-   "registry": "vectors.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn"
-  },
-  {
-   "token": "force_mower",
-   "registry": "vectors_demos.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/force_mower/force_mower.tscn"
-  },
-  {
-   "token": "force_cube",
-   "registry": "vectors_demos.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/force_cube/force_cube.tscn"
-  },
-  {
-   "token": "bubble_blaster",
-   "registry": "vectors_demos.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/bubble_blaster/bubble_blaster.tscn"
-  },
-  {
-   "token": "circle_train",
-   "registry": "vectors_demos.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/circle_train/circle_train.tscn"
-  },
-  {
    "token": "work_energy_demo",
    "registry": "vectors_demos.json",
    "placements": 3,
@@ -2087,33 +701,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/vectors/03_dot_product/WorkEnergyDemo.tscn"
-  },
-  {
-   "token": "torque_demo",
-   "registry": "vectors_demos.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/06_vector_cross_product/TorqueDemo.tscn"
-  },
-  {
-   "token": "force_field_zone",
-   "registry": "vectors_demos.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/force_field_zone/force_field_zone.tscn"
-  },
-  {
-   "token": "calder_mobile",
-   "registry": "vectors_demos.json",
-   "placements": 3,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/calder_mobile/calder_mobile.tscn"
   },
   {
    "token": "albers_wall_gallery",
@@ -2395,42 +982,6 @@
    "scene": "res://commons/primitives/arrays/pattern_tile_plate.tscn"
   },
   {
-   "token": "bar_array",
-   "registry": "bar_array.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
-  },
-  {
-   "token": "bar_array_quicksort",
-   "registry": "bar_array.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
-  },
-  {
-   "token": "bar_array_histogram",
-   "registry": "bar_array.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
-  },
-  {
-   "token": "bar_array_prime_sieve",
-   "registry": "bar_array.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
-  },
-  {
    "token": "csg_union_demo",
    "registry": "boolean_surfaces.json",
    "placements": 2,
@@ -2458,24 +1009,6 @@
    "scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn"
   },
   {
-   "token": "ca_columns",
-   "registry": "cellular_automata.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/ca_columns/ca_columns.tscn"
-  },
-  {
-   "token": "ca_growth_network",
-   "registry": "cellular_automata.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/ca_growth_network/ca_growth_network.tscn"
-  },
-  {
    "token": "cellular_automata_3d_stacked",
    "registry": "cellular_automata.json",
    "placements": 2,
@@ -2483,42 +1016,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.tscn"
-  },
-  {
-   "token": "cellular_automata_3d_tree",
-   "registry": "cellular_automata.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn"
-  },
-  {
-   "token": "crossway_ca",
-   "registry": "cellular_automata.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn"
-  },
-  {
-   "token": "decaying_bridge",
-   "registry": "cellular_automata.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/living_architecture/decaying_bridge.tscn"
-  },
-  {
-   "token": "hexagon_ca_vr",
-   "registry": "cellular_automata.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn"
   },
   {
    "token": "pulsing_ca",
@@ -2530,15 +1027,6 @@
    "scene": "res://algorithms/cellularautomata/ca_showcase/PulsingCA.tscn"
   },
   {
-   "token": "rule_30_110_gravity",
-   "registry": "cellular_automata.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110_gravity.tscn"
-  },
-  {
    "token": "grid_substrate_runner",
    "registry": "cellular_automata.json",
    "placements": 2,
@@ -2546,15 +1034,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/grid/mutators/grid_substrate_runner.tscn"
-  },
-  {
-   "token": "structure_growth",
-   "registry": "cellular_automata.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/cellular_automata_3d/StructureGrowth.tscn"
   },
   {
    "token": "ca_rules_workbench",
@@ -2611,15 +1090,6 @@
    "scene": "res://algorithms/color/brick_wall_factory/brick_wall_factory.tscn"
   },
   {
-   "token": "color_space_navigator",
-   "registry": "color.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/color_space_navigator/color_space_navigator.tscn"
-  },
-  {
    "token": "colortrails",
    "registry": "color.json",
    "placements": 2,
@@ -2629,15 +1099,6 @@
    "scene": "res://algorithms/color/colortrails/colortrails.tscn"
   },
   {
-   "token": "spectrum_forest",
-   "registry": "color.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/color/spectrumforest/spectrum_forest.tscn"
-  },
-  {
    "token": "2d_in_3d_vectors_vis",
    "registry": "commons_artifacts.json",
    "placements": 2,
@@ -2645,15 +1106,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/infoboards_3d/boards/Vectors/2d_in_3d_vectors_vis.tscn"
-  },
-  {
-   "token": "bias_visualizer",
-   "registry": "commons_artifacts.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/bias_visualizer/bias_visualizer.tscn"
   },
   {
    "token": "constraint_sculptor",
@@ -2701,24 +1153,6 @@
    "scene": "res://commons/infoboards_3d/graphics_monitor.tscn"
   },
   {
-   "token": "mario_cube",
-   "registry": "commons_artifacts.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/mario_cube/mario_cube.tscn"
-  },
-  {
-   "token": "nail_color_controller",
-   "registry": "commons_artifacts.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/nail_color_controller.tscn"
-  },
-  {
    "token": "orbital_mechanics_demo",
    "registry": "commons_artifacts.json",
    "placements": 2,
@@ -2762,42 +1196,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/datastructures/binary_trees/binary_trees.tscn"
-  },
-  {
-   "token": "magritte_pipe",
-   "registry": "foundations.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/foundations/magritte_pipe.tscn"
-  },
-  {
-   "token": "euclid_postulates_plaque",
-   "registry": "foundations.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.tscn"
-  },
-  {
-   "token": "penrose_triangle",
-   "registry": "foundations.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/penrose_triangle/penrose_triangle.tscn"
-  },
-  {
-   "token": "poincare_disk",
-   "registry": "foundations.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/poincare_disk/poincare_disk.tscn"
   },
   {
    "token": "complexity_dial_workbench",
@@ -2870,15 +1268,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn"
-  },
-  {
-   "token": "catalyst_pedestal",
-   "registry": "hazards.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/becoming_catalyst/catalyst_pedestal.tscn"
   },
   {
    "token": "edible_mushroom",
@@ -2971,15 +1360,6 @@
    "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingShapesGallery.tscn"
   },
   {
-   "token": "raymarched_metaballs",
-   "registry": "isosurfaces.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn"
-  },
-  {
    "token": "fifteen_cases_demo",
    "registry": "isosurfaces.json",
    "placements": 2,
@@ -2987,15 +1367,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/spacetopology/marchingcubes/scenes/fifteen_cases_demo.tscn"
-  },
-  {
-   "token": "rhizome_cave_demo",
-   "registry": "isosurfaces.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn"
   },
   {
    "token": "queer_marching_cave",
@@ -3059,24 +1430,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/lsystems/context_free_grammars/context_free_grammars.tscn"
-  },
-  {
-   "token": "branching_coral",
-   "registry": "lsystems.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/branching_coral/branching_coral.tscn"
-  },
-  {
-   "token": "parametric_lsystem",
-   "registry": "lsystems.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/parametric_lsystem/parametric_lsystem.tscn"
   },
   {
    "token": "9_1_ga_shakespeare_vr",
@@ -3176,15 +1529,6 @@
    "researched": false,
    "swept": false,
    "scene": ""
-  },
-  {
-   "token": "pattern_machine_a",
-   "registry": "pattern_machine_a.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/pattern_machine_a/pattern_machine_a.tscn"
   },
   {
    "token": "ChainSwing",
@@ -3421,15 +1765,6 @@
    "scene": "res://commons/primitives/cave/test.tscn"
   },
   {
-   "token": "chaos_attractor",
-   "registry": "primitives.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/chaos/strangeattractors/strange_attractors.tscn"
-  },
-  {
    "token": "combine_torus",
    "registry": "primitives.json",
    "placements": 2,
@@ -3448,15 +1783,6 @@
    "scene": "res://commons/primitives/dodecahedron/dodecahedron.tscn"
   },
   {
-   "token": "grab_sphere_point",
-   "registry": "primitives.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/point/grab_sphere_point.tscn"
-  },
-  {
    "token": "icosahedron",
    "registry": "primitives.json",
    "placements": 2,
@@ -3464,15 +1790,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/primitives/icosahedron/icosahedron.tscn"
-  },
-  {
-   "token": "interactive_point_origin",
-   "registry": "primitives.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/point/interactive_point_origin.tscn"
   },
   {
    "token": "octahedron",
@@ -3536,15 +1853,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/primitives/arrays/transform_staircase_showcase.tscn"
-  },
-  {
-   "token": "achilles_tortoise",
-   "registry": "primitives.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/combines/achilles_tortoise.tscn"
   },
   {
    "token": "cube_chalkboard",
@@ -3754,60 +2062,6 @@
    "scene": "res://commons/substrates/profile/profile_substrate.tscn"
   },
   {
-   "token": "bifurcation_walkway",
-   "registry": "qfep.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/bifurcation_walkway.tscn"
-  },
-  {
-   "token": "qfep_reactor",
-   "registry": "qfep.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/qfep_reactor.tscn"
-  },
-  {
-   "token": "particle_chaos",
-   "registry": "qfep.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/particle_chaos.tscn"
-  },
-  {
-   "token": "chaos_particles",
-   "registry": "qfep.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/chaos_particles.tscn"
-  },
-  {
-   "token": "complexity_pattern",
-   "registry": "qfep.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/complexity_pattern.tscn"
-  },
-  {
-   "token": "edge_core",
-   "registry": "qfep.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/edge_core.tscn"
-  },
-  {
    "token": "russell_paradox_workbench",
    "registry": "qfep.json",
    "placements": 2,
@@ -3815,6 +2069,15 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/russell_paradox_workbench/russell_paradox_workbench.tscn"
+  },
+  {
+   "token": "MeltingBerniniScene",
+   "registry": "randomness.json",
+   "placements": 2,
+   "declared": false,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn"
   },
   {
    "token": "RotateGridCubes",
@@ -3898,15 +2161,6 @@
    "scene": "res://commons/artifacts/noise_mixer/noise_mixer.tscn"
   },
   {
-   "token": "noise_space",
-   "registry": "randomness.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/context/walkgrids/noise_space.tscn"
-  },
-  {
    "token": "noiselayers",
    "registry": "randomness.json",
    "placements": 2,
@@ -3923,15 +2177,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/randomness/noise/perlinvolume/perlinvolume.tscn"
-  },
-  {
-   "token": "pickup_cube_placer",
-   "registry": "randomness.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/pickup_cube_placer.tscn"
   },
   {
    "token": "plane_manipulator",
@@ -3961,15 +2206,6 @@
    "scene": "res://algorithms/randomness/distributions/ProbabilityDistributions3D.tscn"
   },
   {
-   "token": "random_decay_multimesh",
-   "registry": "randomness.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn"
-  },
-  {
    "token": "random_number_book_page_collection",
    "registry": "randomness.json",
    "placements": 2,
@@ -3977,15 +2213,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn"
-  },
-  {
-   "token": "random_transformations_geometric",
-   "registry": "randomness.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/random_transformations/geometric_transforms/geometric_transforms.tscn"
   },
   {
    "token": "randomup",
@@ -4004,15 +2231,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/randomness/RotateRandomY/rotate_random_y.tscn"
-  },
-  {
-   "token": "tessellation_lattice_demo",
-   "registry": "randomness.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/randomwalk/scenes/tessellation_lattice_demo.tscn"
   },
   {
    "token": "perlin_noise_bridge",
@@ -4049,15 +2267,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/reflection_hall/reflection_hall.tscn"
-  },
-  {
-   "token": "script_runner",
-   "registry": "script_runner.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/script_runner/script_runner.tscn"
   },
   {
    "token": "gradient_descent_well",
@@ -4204,15 +2413,6 @@
    "scene": "res://commons/artifacts/shear_matrix_demo/shear_matrix_demo.tscn"
   },
   {
-   "token": "vector_field",
-   "registry": "transforms.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/transformation/vector_field/vector_field.tscn"
-  },
-  {
    "token": "vector_arena",
    "registry": "vector_arena.json",
    "placements": 2,
@@ -4240,15 +2440,6 @@
    "scene": "res://algorithms/vectors/noc_ch01/example_1_1_bouncing_ball_with_no_vectors_vr.tscn"
   },
   {
-   "token": "throw_ball",
-   "registry": "vectors.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/08_vector_throwing/throw_ball.tscn"
-  },
-  {
    "token": "vector_addition_walk",
    "registry": "vectors.json",
    "placements": 2,
@@ -4256,15 +2447,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/vector_addition_walk/vector_addition_walk.tscn"
-  },
-  {
-   "token": "vector_drone",
-   "registry": "vectors.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/vectors/08_vector_throwing/vector_drone.tscn"
   },
   {
    "token": "vector_field_visualizer",
@@ -4346,15 +2528,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/lever_balance/lever_balance.tscn"
-  },
-  {
-   "token": "vector_machine",
-   "registry": "vectors_demos.json",
-   "placements": 2,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/vector_machine/vector_machine.tscn"
   },
   {
    "token": "centrifuge_ring",
@@ -4564,15 +2737,6 @@
    "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn"
   },
   {
-   "token": "mobius_world",
-   "registry": "alternative_geometries.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn"
-  },
-  {
    "token": "non_euclidean_space",
    "registry": "alternative_geometries.json",
    "placements": 1,
@@ -4616,15 +2780,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn"
-  },
-  {
-   "token": "pattern_tile_8x8",
-   "registry": "arrays.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn"
   },
   {
    "token": "step_sequencer_trap",
@@ -5212,42 +3367,6 @@
    "scene": "res://algorithms/arrays/sorting_race/sorting_algorithm_race.tscn"
   },
   {
-   "token": "bar_array_insertion_sort",
-   "registry": "bar_array.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
-  },
-  {
-   "token": "bar_array_selection_sort",
-   "registry": "bar_array.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
-  },
-  {
-   "token": "bar_array_heap_sort",
-   "registry": "bar_array.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
-  },
-  {
-   "token": "bar_array_fibonacci",
-   "registry": "bar_array.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
-  },
-  {
    "token": "csg_intersection_demo",
    "registry": "boolean_surfaces.json",
    "placements": 1,
@@ -5321,15 +3440,6 @@
   },
   {
    "token": "torus_specimen",
-   "registry": "bricolage.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn"
-  },
-  {
-   "token": "inventory_workbench",
    "registry": "bricolage.json",
    "placements": 1,
    "declared": false,
@@ -5483,15 +3593,6 @@
   },
   {
    "token": "counterweight_demo",
-   "registry": "bricolage.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn"
-  },
-  {
-   "token": "tension_demo",
    "registry": "bricolage.json",
    "placements": 1,
    "declared": false,
@@ -5851,15 +3952,6 @@
    "scene": "res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.tscn"
   },
   {
-   "token": "disease_spread_ca",
-   "registry": "cellular_automata.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.tscn"
-  },
-  {
    "token": "ecosystem_ca",
    "registry": "cellular_automata.json",
    "placements": 1,
@@ -5914,15 +4006,6 @@
    "scene": "res://commons/artifacts/lenia_continuous/lenia_continuous.tscn"
   },
   {
-   "token": "line_network_ca",
-   "registry": "cellular_automata.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/ca_showcase/LineNetworkCA.tscn"
-  },
-  {
    "token": "percolation_ca",
    "registry": "cellular_automata.json",
    "placements": 1,
@@ -5950,15 +4033,6 @@
    "scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110.tscn"
   },
   {
-   "token": "self_organization_ca",
-   "registry": "cellular_automata.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/ca_showcase/self_organization_ca.tscn"
-  },
-  {
    "token": "fold_theatre_runner",
    "registry": "cellular_automata.json",
    "placements": 1,
@@ -5966,15 +4040,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/qfeplaboratory/fold_theatre_runner/fold_theatre_runner.tscn"
-  },
-  {
-   "token": "volumetric_fog_ca",
-   "registry": "cellular_automata.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/cellularautomata/volumetric_fog/volumetric_fog_ca.tscn"
   },
   {
    "token": "wireworld_circuit",
@@ -6175,15 +4240,6 @@
    "scene": "res://algorithms/color/colorsheets/colorsheets.tscn"
   },
   {
-   "token": "dark_side_prism",
-   "registry": "color.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/color/dark_side_prism.tscn"
-  },
-  {
    "token": "disco_lights",
    "registry": "color.json",
    "placements": 1,
@@ -6209,15 +4265,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/color/color_scanner/grab_stick.tscn"
-  },
-  {
-   "token": "grab_stick_scanner",
-   "registry": "color.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/color/color_scanner/grab_stick_scanner.tscn"
   },
   {
    "token": "gridcolorizer",
@@ -6409,15 +4456,6 @@
    "scene": "res://commons/artifacts/bridget_riley_op_art/bridget_riley_op_art.tscn"
   },
   {
-   "token": "ca_rule_explorer",
-   "registry": "commons_artifacts.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn"
-  },
-  {
    "token": "cache_hit_visualizer",
    "registry": "commons_artifacts.json",
    "placements": 1,
@@ -6497,15 +4535,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/drag_coefficient_wind_tunnel/drag_coefficient_wind_tunnel.tscn"
-  },
-  {
-   "token": "drawing_paper",
-   "registry": "commons_artifacts.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/context/drawingboard/drawing_paper.tscn"
   },
   {
    "token": "drawing_pen",
@@ -6643,15 +4672,6 @@
    "scene": "res://commons/context/grideye/the_grid_point.tscn"
   },
   {
-   "token": "hand_color_controller",
-   "registry": "commons_artifacts.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/hand_color_controller.tscn"
-  },
-  {
    "token": "hand_model",
    "registry": "commons_artifacts.json",
    "placements": 1,
@@ -6704,15 +4724,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/monitor/infokiosk.tscn"
-  },
-  {
-   "token": "jelly_variants",
-   "registry": "commons_artifacts.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/jelly_cube/jelly_variants.tscn"
   },
   {
    "token": "julia_set_explorer",
@@ -6848,15 +4859,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/overfitting_demo/overfitting_demo.tscn"
-  },
-  {
-   "token": "perlin_terrain_sculptor",
-   "registry": "commons_artifacts.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn"
   },
   {
    "token": "pickable_showcase",
@@ -7118,15 +5120,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/context/walkgrids/voronoi_space.tscn"
-  },
-  {
-   "token": "wave_equation_solver",
-   "registry": "commons_artifacts.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/wave_equation_solver/wave_equation_solver.tscn"
   },
   {
    "token": "zelda_tilemap",
@@ -8002,24 +5995,6 @@
    "scene": "res://commons/hazards/blockbuilderentity/blockbuilderentity.tscn"
   },
   {
-   "token": "branching_vine",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/branching_vine/branching_vine.tscn"
-  },
-  {
-   "token": "bricoleur_golem",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/bricoleur_golem/bricoleur_golem.tscn"
-  },
-  {
    "token": "chromatic_field",
    "registry": "hazards.json",
    "placements": 1,
@@ -8173,15 +6148,6 @@
    "scene": "res://commons/hazards/octapod_crawler/four_leg_critter.tscn"
   },
   {
-   "token": "fractal_hydra",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/fractal_hydra/fractal_hydra.tscn"
-  },
-  {
    "token": "goomba_box",
    "registry": "hazards.json",
    "placements": 1,
@@ -8189,15 +6155,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/hazards/goomba_box/goomba_box.tscn"
-  },
-  {
-   "token": "gradient_hunter",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/gradient_hunter/gradient_hunter.tscn"
   },
   {
    "token": "grammar_markov",
@@ -8281,15 +6238,6 @@
    "scene": "res://commons/hazards/joint_articulator/joint_articulator.tscn"
   },
   {
-   "token": "lifeform_walker",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/lifeform_walker/lifeform_walker.tscn"
-  },
-  {
    "token": "maze_spinner",
    "registry": "hazards.json",
    "placements": 1,
@@ -8315,15 +6263,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/hazards/noise_field/noise_field.tscn"
-  },
-  {
-   "token": "octapod_crawler",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/octapod_crawler/octapod_crawler.tscn"
   },
   {
    "token": "octapod_ik",
@@ -8353,15 +6292,6 @@
    "scene": "res://commons/hazards/origami_pyre_plane/origami_pyre_plane.tscn"
   },
   {
-   "token": "paradox_stalker",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/paradox_stalker/paradox_stalker.tscn"
-  },
-  {
    "token": "particle_emitter_hazard",
    "registry": "hazards.json",
    "placements": 1,
@@ -8387,15 +6317,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/hazards/plasma/plasma_critter.tscn"
-  },
-  {
-   "token": "qfep_calibrator",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/qfep_calibrator/qfep_calibrator.tscn"
   },
   {
    "token": "recursion_spiral",
@@ -8452,15 +6373,6 @@
    "scene": "res://commons/hazards/sphere_droideka/sphere_droideka.tscn"
   },
   {
-   "token": "spring_hopper",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/spring_hopper/spring_hopper.tscn"
-  },
-  {
    "token": "spring_mass_bouncer",
    "registry": "hazards.json",
    "placements": 1,
@@ -8477,15 +6389,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/hazards/plasma/stick_tool.tscn"
-  },
-  {
-   "token": "swarm_hive",
-   "registry": "hazards.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/hazards/swarm_hive/swarm_hive.tscn"
   },
   {
    "token": "techstrider",
@@ -9100,15 +7003,6 @@
    "scene": "res://commons/substrates/living_paper/living_paper.tscn"
   },
   {
-   "token": "fractal_lsystem_string",
-   "registry": "lsystems.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.tscn"
-  },
-  {
    "token": "grammar_provenance",
    "registry": "lsystems.json",
    "placements": 1,
@@ -9116,15 +7010,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/grammar_provenance/grammar_provenance.tscn"
-  },
-  {
-   "token": "lsystem_dungeon",
-   "registry": "lsystems.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn"
   },
   {
    "token": "growth_animator",
@@ -11719,15 +9604,6 @@
    "scene": "res://commons/artifacts/flower_lab/flower_lab.tscn"
   },
   {
-   "token": "fractal_cantor_set",
-   "registry": "procgen_extra.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn"
-  },
-  {
    "token": "fractal_clouds",
    "registry": "procgen_extra.json",
    "placements": 1,
@@ -11962,15 +9838,6 @@
    "scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/reaction_diffusion_vr.tscn"
   },
   {
-   "token": "recursive_boolean_cube",
-   "registry": "procgen_extra.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/recursive_boolean_cube.tscn"
-  },
-  {
    "token": "recursive_tree_2",
    "registry": "procgen_extra.json",
    "placements": 1,
@@ -12032,15 +9899,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/tesseract_tunnel_demo.tscn"
-  },
-  {
-   "token": "test_scene_3",
-   "registry": "procgen_extra.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn"
   },
   {
    "token": "test_scene_4",
@@ -12313,87 +10171,6 @@
    "scene": "res://commons/interfaces/qfep/qfep_oscilloscope.tscn"
   },
   {
-   "token": "crystal_formation",
-   "registry": "qfep.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn"
-  },
-  {
-   "token": "random_cubes",
-   "registry": "qfep.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/random_cubes.tscn"
-  },
-  {
-   "token": "ordered_grid",
-   "registry": "qfep.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/ordered_grid.tscn"
-  },
-  {
-   "token": "dissolving_form",
-   "registry": "qfep.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/dissolving_form.tscn"
-  },
-  {
-   "token": "turing_pattern",
-   "registry": "qfep.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/turing_pattern.tscn"
-  },
-  {
-   "token": "rigid_sculpture",
-   "registry": "qfep.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/rigid_sculpture.tscn"
-  },
-  {
-   "token": "fluid_form",
-   "registry": "qfep.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/fluid_form.tscn"
-  },
-  {
-   "token": "preserved_pattern",
-   "registry": "qfep.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/preserved_pattern.tscn"
-  },
-  {
-   "token": "transforming_pattern",
-   "registry": "qfep.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/interfaces/qfep/transforming_pattern.tscn"
-  },
-  {
    "token": "earths_delight",
    "registry": "qfep.json",
    "placements": 1,
@@ -12464,15 +10241,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/quantumalgorithms/superposition/quantum_superposition.tscn"
-  },
-  {
-   "token": "MeltingBerniniScene",
-   "registry": "randomness.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn"
   },
   {
    "token": "RandomGaussianTexture",
@@ -12554,51 +10322,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/omoss/omoss.tscn"
-  },
-  {
-   "token": "particle_randomness_emergent",
-   "registry": "randomness.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/emergent_behavior/emergent_behavior.tscn"
-  },
-  {
-   "token": "particle_randomness_evolutionary",
-   "registry": "randomness.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn"
-  },
-  {
-   "token": "particle_randomness_patterns",
-   "registry": "randomness.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/procedural_patterns/procedural_patterns.tscn"
-  },
-  {
-   "token": "particle_randomness_perlin",
-   "registry": "randomness.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/perlin_noise/perlin_noise.tscn"
-  },
-  {
-   "token": "particle_randomness_pure",
-   "registry": "randomness.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/pure_randomness/pure_randomness.tscn"
   },
   {
    "token": "perlin_noise_clouds",
@@ -13150,15 +10873,6 @@
    "scene": "res://commons/artifacts/filter_screen/filter_screen.tscn"
   },
   {
-   "token": "flashlight_demo",
-   "registry": "shaders.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn"
-  },
-  {
    "token": "materials_transmission",
    "registry": "shaders.json",
    "placements": 1,
@@ -13391,24 +11105,6 @@
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/softbodies/advanced_concepts/soft_trampoline.tscn"
-  },
-  {
-   "token": "soft_mushrooms",
-   "registry": "soft_bodies.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn"
-  },
-  {
-   "token": "rounded_softbody",
-   "registry": "soft_bodies.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/softbodies/rounded_softbody.tscn"
   },
   {
    "token": "frozen_glass_vessel",
@@ -14131,15 +11827,6 @@
    "scene": "res://commons/artifacts/static_reference_cube/static_reference_cube.tscn"
   },
   {
-   "token": "tech_noir_audio",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn"
-  },
-  {
    "token": "vector_projection_demo",
    "registry": "vectors.json",
    "placements": 1,
@@ -14329,15 +12016,6 @@
    "scene": "res://commons/artifacts/return_launcher/return_launcher.tscn"
   },
   {
-   "token": "calder_object_mobile",
-   "registry": "vectors_demos.json",
-   "placements": 1,
-   "declared": false,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/calder_mobile/calder_object_mobile.tscn"
-  },
-  {
    "token": "pendulum_hall",
    "registry": "vectors_demos.json",
    "placements": 1,
@@ -14486,137 +12164,686 @@
   {
    "token": "MarioSoundController",
    "registry": "wavefunctions.json",
-   "placements": 11,
+   "placements": 12,
    "declared": true,
    "researched": false,
    "swept": false,
    "scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn"
   },
   {
-   "token": "life_zoo_bench",
-   "registry": "cellular_automata.json",
-   "placements": 8,
+   "token": "gallery_winner_showcase",
+   "registry": "gallery_preview.json",
+   "placements": 11,
    "declared": true,
-   "researched": false,
+   "researched": true,
    "swept": false,
-   "scene": "res://commons/artifacts/life_zoo_bench/life_zoo_bench.tscn"
-  },
-  {
-   "token": "y_translation_cube",
-   "registry": "transforms.json",
-   "placements": 8,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/axis_translation_cube/y_translation_cube.tscn"
-  },
-  {
-   "token": "fibonacci_sequences",
-   "registry": "algorithms_misc.json",
-   "placements": 7,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn"
+   "scene": "res://commons/artifacts/gallery_winner_showcase/gallery_winner_showcase.tscn"
   },
   {
    "token": "wfc_tile_bench",
    "registry": "procedural_generation.json",
-   "placements": 6,
+   "placements": 7,
    "declared": true,
    "researched": false,
    "swept": false,
    "scene": "res://commons/artifacts/wfc_tile_bench/wfc_tile_bench.tscn"
   },
   {
-   "token": "wfc_room_bench",
-   "registry": "procedural_generation.json",
+   "token": "force_field_visualizer",
+   "registry": "commons_artifacts.json",
    "placements": 6,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://commons/artifacts/wfc_room_bench/wfc_room_bench.tscn"
+   "scene": "res://commons/artifacts/force_field_visualizer/force_field_visualizer.tscn"
   },
   {
-   "token": "tentacle_grab_bench",
-   "registry": "soft_bodies.json",
-   "placements": 6,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/tentacle_grab_bench/tentacle_grab_bench.tscn"
-  },
-  {
-   "token": "double_helix_scene",
+   "token": "wave_propagation_3d",
    "registry": "wavefunctions.json",
    "placements": 6,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.tscn"
+   "scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn"
   },
   {
-   "token": "math_objects",
-   "registry": "wavefunctions.json",
-   "placements": 6,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/primitives/parametric/math_objects.tscn"
-  },
-  {
-   "token": "x_translation_cube",
-   "registry": "transforms.json",
-   "placements": 6,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/artifacts/axis_translation_cube/x_translation_cube.tscn"
-  },
-  {
-   "token": "revolving_joy_ride",
-   "registry": "soft_bodies.json",
-   "placements": 5,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/softbodies/joyride/revolving_joy_ride.tscn"
-  },
-  {
-   "token": "softbody_gallery_part2",
-   "registry": "soft_bodies.json",
-   "placements": 5,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/softbodies/softbody_gallery_part2.tscn"
-  },
-  {
-   "token": "vr_tile_editor_mirror",
+   "token": "wfc_tile_mosaic",
    "registry": "arrays.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/artifacts/wfc_tile_mosaic/wfc_tile_mosaic.tscn"
+  },
+  {
+   "token": "petri_dish_worms",
+   "registry": "commons_artifacts.json",
+   "placements": 5,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/artifacts/petri_dish_worms/petri_dish_worms.tscn"
+  },
+  {
+   "token": "example_2_3_gravity_scaled_by_mass_vr",
+   "registry": "physics_simulation.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/forces/example_2_3_gravity_scaled_by_mass_vr.tscn"
+  },
+  {
+   "token": "example_2_8_two_body_attraction_vr",
+   "registry": "physics_simulation.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/forces/example_2_8_two_body_attraction_vr.tscn"
+  },
+  {
+   "token": "example_2_9_n_body_attraction_vr",
+   "registry": "physics_simulation.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/forces/example_2_9_n_body_attraction_vr.tscn"
+  },
+  {
+   "token": "percolationnetwork_ca",
+   "registry": "procgen_extra.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn"
+  },
+  {
+   "token": "digital_materiality_glitch",
+   "registry": "randomness.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn"
+  },
+  {
+   "token": "ForceMagnitudeDemo",
+   "registry": "vectors.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn"
+  },
+  {
+   "token": "VectorCrossProduct",
+   "registry": "vectors.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn"
+  },
+  {
+   "token": "VectorSubtraction",
+   "registry": "vectors.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn"
+  },
+  {
+   "token": "vector_add",
+   "registry": "vectors_demos.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/artifacts/vector_op_console/vector_op_console.tscn"
+  },
+  {
+   "token": "dot_aligner",
+   "registry": "vectors_demos.json",
+   "placements": 5,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/artifacts/dot_aligner/dot_aligner.tscn"
+  },
+  {
+   "token": "combined_forces_demo",
+   "registry": "vectors_demos.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.tscn"
+  },
+  {
+   "token": "sine_space",
+   "registry": "wavefunctions_extra.json",
+   "placements": 5,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn"
+  },
+  {
+   "token": "geometric_transformations",
+   "registry": "algorithms_misc.json",
+   "placements": 4,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn"
+  },
+  {
+   "token": "integral_area",
+   "registry": "change.json",
+   "placements": 4,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/change/integral_area.tscn"
+  },
+  {
+   "token": "derivative_pair",
+   "registry": "change.json",
+   "placements": 4,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/change/derivative_pair.tscn"
+  },
+  {
+   "token": "bifurcation_diagram",
+   "registry": "foundations.json",
+   "placements": 4,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn"
+  },
+  {
+   "token": "space_filling_curve_gallery",
+   "registry": "lsystems.json",
+   "placements": 4,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn"
+  },
+  {
+   "token": "delaunay_triangulation_3d_cell",
+   "registry": "procgen_extra.json",
+   "placements": 4,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn"
+  },
+  {
+   "token": "inverted_tree_cloud",
+   "registry": "procgen_extra.json",
+   "placements": 4,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/fractals/recursive_tree/inverted_tree_cloud.tscn"
+  },
+  {
+   "token": "mandelbrot_set",
+   "registry": "procgen_extra.json",
+   "placements": 4,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/fractals/mandelbrot_set/mandelbrot_set.tscn"
+  },
+  {
+   "token": "monte_carlo_dartboard",
+   "registry": "randomness.json",
+   "placements": 4,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn"
+  },
+  {
+   "token": "DualBallFMController",
+   "registry": "wavefunctions.json",
+   "placements": 4,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn"
+  },
+  {
+   "token": "ruth_asawa_sculpture",
+   "registry": "wavefunctions.json",
+   "placements": 4,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.tscn"
+  },
+  {
+   "token": "VectorAddition",
+   "registry": "vectors.json",
+   "placements": 4,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn"
+  },
+  {
+   "token": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+   "registry": "vectors.json",
+   "placements": 4,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/vectors/noc_ch01/example_1_9_motion_101_velocity_and_random_acceleration_vr.tscn"
+  },
+  {
+   "token": "adder_board",
+   "registry": "adder_board.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/artifacts/adder_board/adder_board.tscn"
+  },
+  {
+   "token": "affect_theory_visualization",
+   "registry": "algorithms_misc.json",
    "placements": 3,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://commons/primitives/arrays/vr_tile_editor.tscn"
+   "scene": "res://algorithms/physicssimulation/affect_theory_visualization/affect_theory_visualization.tscn"
   },
   {
-   "token": "mirrored_cellular_automata",
-   "registry": "cellular_automata.json",
-   "placements": 2,
+   "token": "force_directed_layout",
+   "registry": "algorithms_misc.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn"
+  },
+  {
+   "token": "curvature_slider",
+   "registry": "alternative_geometries.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn"
+  },
+  {
+   "token": "health_display",
+   "registry": "commons_artifacts.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/visualaid/gameplay/health_display.tscn"
+  },
+  {
+   "token": "hits_reset_display",
+   "registry": "commons_artifacts.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/visualaid/gameplay/hits_reset_display.tscn"
+  },
+  {
+   "token": "constructive_proof",
+   "registry": "foundations.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/artifacts/constructive_proof/constructive_proof.tscn"
+  },
+  {
+   "token": "collision_crasher",
+   "registry": "hazards.json",
+   "placements": 3,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn"
+   "scene": "res://commons/hazards/collision_crasher/collision_crasher.tscn"
+  },
+  {
+   "token": "genetic_tree_sculptor",
+   "registry": "lsystems.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn"
+  },
+  {
+   "token": "mortar_vector_siege",
+   "registry": "mortar_vector_siege.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/artifacts/mortar_vector_siege/mortar_vector_siege.tscn"
   },
   {
    "token": "math_objects_gallery",
    "registry": "parametric.json",
-   "placements": 2,
+   "placements": 3,
    "declared": true,
    "researched": false,
    "swept": false,
    "scene": "res://commons/primitives/parametric/math_objects.tscn"
+  },
+  {
+   "token": "example_6_6_grab_vr",
+   "registry": "physics_simulation.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/physics/example_6_6_grab_vr.tscn"
+  },
+  {
+   "token": "cross_line_puzzle",
+   "registry": "primitives.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/primitives/line/puzzles/cross_line_puzzle.tscn"
+  },
+  {
+   "token": "fractal_recursion_2",
+   "registry": "procgen_extra.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/fractals/example_8_2_recursion_vr.tscn"
+  },
+  {
+   "token": "implicit_surface_modeling",
+   "registry": "procgen_extra.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn"
+  },
+  {
+   "token": "koch_curve_3d",
+   "registry": "procgen_extra.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/fractals/koshcurve/KochCurve3D.tscn"
+  },
+  {
+   "token": "stochastic_tree_separated",
+   "registry": "procgen_extra.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/fractals/example_8_7_stochastic_tree_separated_vr.tscn"
+  },
+  {
+   "token": "evolutionary_algorithms",
+   "registry": "randomness.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn"
+  },
+  {
+   "token": "sculpt_one",
+   "registry": "randomness.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/randomness/sculpt_one.tscn"
+  },
+  {
+   "token": "exercise_5_9_angle_between",
+   "registry": "steering.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.tscn"
+  },
+  {
+   "token": "vector_addition_demo",
+   "registry": "vectors.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn"
+  },
+  {
+   "token": "example_1_5_vector_magnitude_vr",
+   "registry": "vectors.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/vectors/noc_ch01/example_1_5_vector_magnitude_vr.tscn"
+  },
+  {
+   "token": "example_1_6_vector_normalize_vr",
+   "registry": "vectors.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/vectors/noc_ch01/example_1_6_vector_normalize_vr.tscn"
+  },
+  {
+   "token": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+   "registry": "vectors.json",
+   "placements": 3,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/vectors/noc_ch01/example_1_8_motion_101_velocity_and_constant_acceleration_vr.tscn"
+  },
+  {
+   "token": "force_mower",
+   "registry": "vectors_demos.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/artifacts/force_mower/force_mower.tscn"
+  },
+  {
+   "token": "bubble_blaster",
+   "registry": "vectors_demos.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/artifacts/bubble_blaster/bubble_blaster.tscn"
+  },
+  {
+   "token": "circle_train",
+   "registry": "vectors_demos.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/artifacts/circle_train/circle_train.tscn"
+  },
+  {
+   "token": "torque_demo",
+   "registry": "vectors_demos.json",
+   "placements": 3,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/vectors/06_vector_cross_product/TorqueDemo.tscn"
+  },
+  {
+   "token": "topological_sort_algorithm",
+   "registry": "algorithms_misc.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn"
+  },
+  {
+   "token": "bar_array",
+   "registry": "bar_array.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
+  },
+  {
+   "token": "bar_array_quicksort",
+   "registry": "bar_array.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
+  },
+  {
+   "token": "bar_array_histogram",
+   "registry": "bar_array.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
+  },
+  {
+   "token": "bar_array_prime_sieve",
+   "registry": "bar_array.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
+  },
+  {
+   "token": "shelf_assembly_puzzle",
+   "registry": "furniture.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn"
+  },
+  {
+   "token": "stool_assembly_puzzle",
+   "registry": "furniture.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn"
+  },
+  {
+   "token": "table_assembly_puzzle",
+   "registry": "furniture.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn"
+  },
+  {
+   "token": "path_wedge",
+   "registry": "hazards.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/hazards/path_block/path_wedge.tscn"
+  },
+  {
+   "token": "raymarched_metaballs",
+   "registry": "isosurfaces.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn"
+  },
+  {
+   "token": "branching_coral",
+   "registry": "lsystems.json",
+   "placements": 2,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/artifacts/branching_coral/branching_coral.tscn"
+  },
+  {
+   "token": "evolving_flowers",
+   "registry": "machinelearning.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn"
+  },
+  {
+   "token": "qfep_reactor",
+   "registry": "qfep.json",
+   "placements": 2,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://commons/interfaces/qfep/qfep_reactor.tscn"
+  },
+  {
+   "token": "softbody_gallery_part1",
+   "registry": "soft_bodies.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/softbodies/softbody_gallery_part1.tscn"
+  },
+  {
+   "token": "softbody_gallery_part3",
+   "registry": "soft_bodies.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/softbodies/softbody_gallery_part3.tscn"
+  },
+  {
+   "token": "softbodytest",
+   "registry": "soft_bodies.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/softbodies/softbodytest.tscn"
   },
   {
    "token": "axis_translation_cube",
@@ -14628,13 +12855,220 @@
    "scene": "res://commons/artifacts/axis_translation_cube/axis_translation_cube.tscn"
   },
   {
-   "token": "topological_sort_algorithm",
-   "registry": "algorithms_misc.json",
+   "token": "BigPipe",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn"
+  },
+  {
+   "token": "BigPipe_CrossManifold",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/cross_manifold.tscn"
+  },
+  {
+   "token": "BigPipe_IndustrialBranch",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/industrial_branch.tscn"
+  },
+  {
+   "token": "BigPipe_LBend",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/l_bend.tscn"
+  },
+  {
+   "token": "BigPipe_Serpentine",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/serpentine.tscn"
+  },
+  {
+   "token": "BigPipe_StraightRun",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/straight_run.tscn"
+  },
+  {
+   "token": "BigPipe_TDistribution",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/t_distribution.tscn"
+  },
+  {
+   "token": "BigPipe_VerticalBypass",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/vertical_bypass.tscn"
+  },
+  {
+   "token": "GlassRack_BranchingCondenser",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/branching_condenser.tscn"
+  },
+  {
+   "token": "GlassRack_BreakingBadCoffee",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/breaking_bad_coffee.tscn"
+  },
+  {
+   "token": "GlassRack_ComplexApparatus",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/complex_apparatus.tscn"
+  },
+  {
+   "token": "GlassRack_DistillationRack",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/distillation_rack.tscn"
+  },
+  {
+   "token": "GlassRack_DistillationY",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/distillation_y.tscn"
+  },
+  {
+   "token": "GlassRack_FractionalDistillation",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/fractional_distillation.tscn"
+  },
+  {
+   "token": "GlassRack_RefluxApparatus",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/reflux_apparatus.tscn"
+  },
+  {
+   "token": "GlassRack_SbendManifold",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/sbend_manifold.tscn"
+  },
+  {
+   "token": "GlassRack_SimpleTube",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/simple_tube.tscn"
+  },
+  {
+   "token": "GlassRack_SpiralCondenser",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/spiral_condenser.tscn"
+  },
+  {
+   "token": "GlassRack_SpiralTube",
+   "registry": "wavefunctions.json",
+   "placements": 2,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/glass_rack/presets/spiral_tube.tscn"
+  },
+  {
+   "token": "pattern_tile_8x8",
+   "registry": "arrays.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn"
+   "scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn"
+  },
+  {
+   "token": "bar_array_insertion_sort",
+   "registry": "bar_array.json",
+   "placements": 1,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
+  },
+  {
+   "token": "bar_array_selection_sort",
+   "registry": "bar_array.json",
+   "placements": 1,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
+  },
+  {
+   "token": "bar_array_heap_sort",
+   "registry": "bar_array.json",
+   "placements": 1,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
+  },
+  {
+   "token": "bar_array_fibonacci",
+   "registry": "bar_array.json",
+   "placements": 1,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn"
   },
   {
    "token": "icosahedron_base",
@@ -14673,49 +13107,49 @@
    "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn"
   },
   {
-   "token": "shelf_assembly_puzzle",
-   "registry": "furniture.json",
+   "token": "dark_side_prism",
+   "registry": "color.json",
    "placements": 1,
    "declared": true,
-   "researched": false,
+   "researched": true,
    "swept": false,
-   "scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn"
+   "scene": "res://algorithms/color/dark_side_prism.tscn"
   },
   {
-   "token": "stool_assembly_puzzle",
-   "registry": "furniture.json",
+   "token": "drawing_paper",
+   "registry": "commons_artifacts.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn"
+   "scene": "res://commons/context/drawingboard/drawing_paper.tscn"
   },
   {
-   "token": "table_assembly_puzzle",
-   "registry": "furniture.json",
+   "token": "jelly_variants",
+   "registry": "commons_artifacts.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn"
+   "scene": "res://commons/artifacts/jelly_cube/jelly_variants.tscn"
   },
   {
-   "token": "path_wedge",
-   "registry": "hazards.json",
+   "token": "wave_equation_solver",
+   "registry": "commons_artifacts.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://commons/hazards/path_block/path_wedge.tscn"
+   "scene": "res://commons/artifacts/wave_equation_solver/wave_equation_solver.tscn"
   },
   {
-   "token": "evolving_flowers",
-   "registry": "machinelearning.json",
+   "token": "fractal_cantor_set",
+   "registry": "procgen_extra.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn"
+   "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn"
   },
   {
    "token": "genetic_programming",
@@ -14727,58 +13161,94 @@
    "scene": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn"
   },
   {
-   "token": "grab_sphere_phi",
-   "registry": "qfep.json",
+   "token": "test_scene_3",
+   "registry": "procgen_extra.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn"
+   "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn"
   },
   {
-   "token": "reactive_particles",
-   "registry": "qfep.json",
+   "token": "particle_randomness_emergent",
+   "registry": "randomness.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn"
+   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/emergent_behavior/emergent_behavior.tscn"
   },
   {
-   "token": "edge_particles",
-   "registry": "qfep.json",
+   "token": "particle_randomness_evolutionary",
+   "registry": "randomness.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn"
+   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn"
   },
   {
-   "token": "softbody_gallery_part1",
+   "token": "particle_randomness_patterns",
+   "registry": "randomness.json",
+   "placements": 1,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/procedural_patterns/procedural_patterns.tscn"
+  },
+  {
+   "token": "particle_randomness_perlin",
+   "registry": "randomness.json",
+   "placements": 1,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/perlin_noise/perlin_noise.tscn"
+  },
+  {
+   "token": "particle_randomness_pure",
+   "registry": "randomness.json",
+   "placements": 1,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/pure_randomness/pure_randomness.tscn"
+  },
+  {
+   "token": "flashlight_demo",
+   "registry": "shaders.json",
+   "placements": 1,
+   "declared": true,
+   "researched": true,
+   "swept": false,
+   "scene": "res://algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn"
+  },
+  {
+   "token": "soft_mushrooms",
    "registry": "soft_bodies.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/softbodies/softbody_gallery_part1.tscn"
+   "scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn"
   },
   {
-   "token": "softbody_gallery_part3",
+   "token": "rounded_softbody",
    "registry": "soft_bodies.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/softbodies/softbody_gallery_part3.tscn"
+   "scene": "res://algorithms/softbodies/rounded_softbody.tscn"
   },
   {
-   "token": "softbodytest",
-   "registry": "soft_bodies.json",
+   "token": "tech_noir_audio",
+   "registry": "wavefunctions.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/softbodies/softbodytest.tscn"
+   "scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn"
   },
   {
    "token": "ant_colony_v2",
@@ -14799,175 +13269,22 @@
    "scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn"
   },
   {
-   "token": "BigPipe",
-   "registry": "wavefunctions.json",
+   "token": "calder_object_mobile",
+   "registry": "vectors_demos.json",
    "placements": 1,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn"
+   "scene": "res://commons/artifacts/calder_mobile/calder_object_mobile.tscn"
   },
   {
-   "token": "BigPipe_CrossManifold",
-   "registry": "wavefunctions.json",
-   "placements": 1,
+   "token": "zeno_staircase",
+   "registry": "change.json",
+   "placements": 0,
    "declared": true,
    "researched": false,
    "swept": false,
-   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/cross_manifold.tscn"
-  },
-  {
-   "token": "BigPipe_IndustrialBranch",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/industrial_branch.tscn"
-  },
-  {
-   "token": "BigPipe_LBend",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/l_bend.tscn"
-  },
-  {
-   "token": "BigPipe_Serpentine",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/serpentine.tscn"
-  },
-  {
-   "token": "BigPipe_StraightRun",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/straight_run.tscn"
-  },
-  {
-   "token": "BigPipe_TDistribution",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/t_distribution.tscn"
-  },
-  {
-   "token": "BigPipe_VerticalBypass",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://algorithms/wavefunctions/big_pipe_system/presets/vertical_bypass.tscn"
-  },
-  {
-   "token": "GlassRack_BranchingCondenser",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/branching_condenser.tscn"
-  },
-  {
-   "token": "GlassRack_BreakingBadCoffee",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/breaking_bad_coffee.tscn"
-  },
-  {
-   "token": "GlassRack_ComplexApparatus",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/complex_apparatus.tscn"
-  },
-  {
-   "token": "GlassRack_DistillationRack",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/distillation_rack.tscn"
-  },
-  {
-   "token": "GlassRack_DistillationY",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/distillation_y.tscn"
-  },
-  {
-   "token": "GlassRack_FractionalDistillation",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/fractional_distillation.tscn"
-  },
-  {
-   "token": "GlassRack_RefluxApparatus",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/reflux_apparatus.tscn"
-  },
-  {
-   "token": "GlassRack_SbendManifold",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/sbend_manifold.tscn"
-  },
-  {
-   "token": "GlassRack_SimpleTube",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/simple_tube.tscn"
-  },
-  {
-   "token": "GlassRack_SpiralCondenser",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/spiral_condenser.tscn"
-  },
-  {
-   "token": "GlassRack_SpiralTube",
-   "registry": "wavefunctions.json",
-   "placements": 1,
-   "declared": true,
-   "researched": false,
-   "swept": false,
-   "scene": "res://commons/glass_rack/presets/spiral_tube.tscn"
+   "scene": "res://algorithms/change/zeno_staircase/zeno_staircase.tscn"
   },
   {
    "token": "dna_facade_classical",
@@ -14986,6 +13303,69 @@
    "researched": false,
    "swept": false,
    "scene": "res://commons/hazards/path_block/path_pyramid.tscn"
+  },
+  {
+   "token": "living_fungus_fruit",
+   "registry": "living.json",
+   "placements": 0,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": ""
+  },
+  {
+   "token": "living_fungus_pose",
+   "registry": "living.json",
+   "placements": 0,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": ""
+  },
+  {
+   "token": "living_fungus_colony",
+   "registry": "living.json",
+   "placements": 0,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": ""
+  },
+  {
+   "token": "living_flora_tree",
+   "registry": "living.json",
+   "placements": 0,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": ""
+  },
+  {
+   "token": "living_flora_bloom",
+   "registry": "living.json",
+   "placements": 0,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": ""
+  },
+  {
+   "token": "living_fauna_body",
+   "registry": "living.json",
+   "placements": 0,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": ""
+  },
+  {
+   "token": "living_ground_role",
+   "registry": "living.json",
+   "placements": 0,
+   "declared": true,
+   "researched": false,
+   "swept": false,
+   "scene": ""
   },
   {
    "token": "station_plinth_wide",

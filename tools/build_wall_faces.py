@@ -161,6 +161,46 @@ def wall_class() -> dict:
     return out
 
 
+def wall_set_missing() -> list:
+    """WALL_SET names that no map token can ever reach.
+
+    The hangar's list was transcribed faithfully and never checked against the
+    registry. Two of its five names do not resolve: `framed_readout_screen` does
+    not exist anywhere, and `station_frame` has a scene on disk that no registry
+    entry points at. Nothing failed — wall_class() just returned a smaller dict,
+    every face in every building got the one surviving piece, and the run read as
+    a finished experiment. Same fault class as a fabricated dna.axes block
+    (CLAUDE.md, check_dna_declarations.py): declared, unreachable, silent.
+    """
+    alive = set(wall_class())
+    out = []
+    for tok in WALL_SET:
+        if tok in alive:
+            continue
+        scene = glob.glob(str(REPO / "**" / f"{tok}.tscn"), recursive=True)
+        out.append({"token": tok,
+                    "why": "scene on disk, no registry entry" if scene
+                           else "no scene, no registry entry"})
+    return out
+
+
+def mount_window(run_len: int, cap: int = 5) -> tuple:
+    """Where a centred piece may hang on a run of `run_len` wall cells.
+
+    station_panel builds its box at Vector3(0, 0, 0) — the mesh is CENTRED on the
+    token's own cell. Writing the token at the run's FIRST cell therefore hangs
+    (width-1)/2 cells off the end of the wall it belongs to. In Castelvecchio that
+    put a 4.9 m bar across the 3-cell doorway the whole enfilade looks through, so
+    the judge read promise 1.00 -> 0.00 and I reported it as a law about vistas.
+    It was a fact about this arithmetic. Anchor at the run's middle, keep the
+    width odd so the window is symmetric, and the piece stays on its own wall.
+    """
+    w = max(1, min(run_len, cap))
+    if w % 2 == 0:
+        w -= 1
+    return (run_len - 1) // 2, max(1, w)
+
+
 def max_area(standoff: float) -> float:
     """The viewing-distance rule read backwards: what fits at this standoff?
 
@@ -271,6 +311,9 @@ def hang(museum: str, band: str, limit: int, seed: int, with_floor: bool = False
     mountable = wall_class()
     if not mountable:
         raise SystemExit("none of the hangar's WALL_SET is alive in the registry")
+    missing = wall_set_missing()
+    for m in missing:
+        print(f"  WALL_SET `{m['token']}` unreachable: {m['why']}", file=sys.stderr)
     # station_panel takes width_cells, so THE FACE SIZES THE PIECE — the hangar's
     # own parameterisation, and better than choosing a different artifact per wall
     piece = "station_panel" if "station_panel" in mountable else sorted(mountable)[0]
@@ -282,12 +325,27 @@ def hang(museum: str, band: str, limit: int, seed: int, with_floor: bool = False
         if f["max_area_m2"] < MIN_HANGABLE_M2:
             too_tight.append(f)
             continue
-        fx, fy = f["front"]
+        ai, width = mount_window(f["run"])
+        dx = f["front"][0] - f["cells"][0][0]
+        dy = f["front"][1] - f["cells"][0][1]
+        fx, fy = f["cells"][ai][0] + dx, f["cells"][ai][1] + dy
+        half = (width - 1) // 2
+        # every cell the centred mesh covers must be free floor in front of THIS
+        # run — that is what keeps a wide piece off a doorway and out of a
+        # neighbour. The width shrinks until the span is clean, or the face is
+        # refused; a piece is never written where its body cannot go.
+        while width > 1:
+            span = [f["cells"][i] for i in range(ai - half, ai + half + 1)]
+            fronts = [(c[0] + dx, c[1] + dy) for c in span]
+            if all(0 <= b < len(inter) and 0 <= a < len(inter[0])
+                   and not str(inter[b][a]).strip() for a, b in fronts):
+                break
+            width -= 2
+            half = (width - 1) // 2
         if not (0 <= fy < len(inter) and 0 <= fx < len(inter[0])):
             continue
         if str(inter[fy][fx]).strip():
             continue
-        width = max(1, min(f["run"], 5))
         seat, why = seat_y(piece, band)
         if seat < 0:
             too_tight.append(f)
@@ -296,6 +354,8 @@ def hang(museum: str, band: str, limit: int, seed: int, with_floor: bool = False
         hung.append({"token": inter[fy][fx], "cell": [fx, fy], "facing": f["facing"],
                      "run": f["run"], "standoff": f["standoff"],
                      "max_area_m2": f["max_area_m2"], "width_cells": width,
+                     "spans_cells": [list(c) for c in
+                                     f["cells"][ai - half:ai + half + 1]],
                      "seat_y": seat, "seat_reason": why})
     # THE SECOND GRAVITY, AND WHERE IT GOES — the correction the judge forced.
     # First reading: "everything else falls to the floor + stacks", so I stood the
@@ -487,6 +547,23 @@ def selftest() -> int:
                < len([q for q in pa if q["area_m2"] <= max_area(6.0)]),
                f"2 m: {len([q for q in pa if q['area_m2'] <= max_area(2.0)])} works, "
                f"6 m: {len([q for q in pa if q['area_m2'] <= max_area(6.0)])}"))
+    # L — the fault that made this whole pass a picture of nothing. A centred mesh
+    # written at the run's first cell hangs off the wall's end; the control asserts
+    # the window stays inside the run for every run length, and the negative arm
+    # asserts the OLD arithmetic really did overhang (a control that cannot fail is
+    # not a control).
+    inside = all(0 <= (a - (w - 1) // 2) and (a + (w - 1) // 2) <= n - 1
+                 for n in range(1, 12) for a, w in [mount_window(n)])
+    old_overhang = any(0 - (min(n, 5) - 1) // 2 < 0 for n in range(2, 12))
+    ok.append(("L a centred piece stays on its own wall", inside and old_overhang,
+               f"windows {[mount_window(n) for n in range(1, 8)]}; "
+               f"anchoring at cell 0 overhangs: {old_overhang}"))
+    # M — the names. Two of five WALL_SET tokens are unreachable from any map, and
+    # nothing said so until this control existed.
+    miss = wall_set_missing()
+    ok.append(("M every WALL_SET name resolves to a map-reachable token", not miss,
+               "all resolve" if not miss
+               else "UNREACHABLE: " + ", ".join(f"{m['token']} ({m['why']})" for m in miss)))
     for label, good, detail in ok:
         print(f"  {'PASS' if good else 'FAIL'}  {label}: {detail}")
     n = sum(1 for _, g, _ in ok if g)
