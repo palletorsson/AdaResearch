@@ -755,6 +755,62 @@ def selftest() -> int:
     return 0 if ok == len(results) else 1
 
 
+def unreachable_roots(reg: dict) -> tuple:
+    """Declared axes whose SCENE ROOT carries no script, split by how badly.
+
+    THE CASE THIS GENERALISES. cctv.gd was 489 lines implementing `oversight`, its registry
+    declaration derived cleanly and the gate passed it — and cctv.tscn referenced no script
+    at all. Five frames came back identical to the byte. The declaration validated because
+    source_for() falls back to swapping .tscn for .gd, so it read a file BY NAME that the
+    scene never loads. Nothing in the value comparison can see that: the values are right,
+    they are simply the values of code nobody runs.
+
+    Asked of the whole corpus afterwards, the same shape appeared 16 more times. So:
+
+      BROKEN — no script anywhere in the scene. The declaration describes code that is never
+        loaded, and every variant of the axis necessarily renders the same picture.
+        cube_scene (166 placements) and prism_block (78) were exactly this: both .gd files
+        implement `grain` in full, ~20 references each, and neither scene loaded them.
+        Attaching the script moved the axis from silently dead to 13.2% and 27.9%.
+
+      CHILD-ONLY — a script exists, but on a CHILD rather than the root. The sweep still
+        finds the property, because it searches the subtree breadth-first, so the axis
+        measures fine on the bench and the gallery looks healthy. A MAP cannot reach it:
+        GridInteractablesComponent stamps config metadata and calls apply_grid_config on the
+        ROOT. The axis works everywhere except in the game, which is the only place it is
+        for. Reported, not failed — some of these are legitimately composed scenes.
+
+    Inherited scenes (`instance=ExtResource` on the root) are skipped: the base scene carries
+    the script and the root correctly has none of its own.
+    """
+    broken, child_only = [], []
+    for tok, (entry, _f) in sorted(reg.items()):
+        axes = ((entry.get("dna") or {}).get("axes") or {})
+        if not axes:
+            continue
+        sp = str(entry.get("scene", "") or "").replace("res://", "")
+        if not sp.endswith(".tscn"):
+            continue
+        path = REPO / sp
+        if not path.exists():
+            continue
+        try:
+            raw = path.read_text(encoding="utf-8", errors="replace")
+        except Exception:
+            continue
+        nodes = raw.split("[node ")
+        if len(nodes) < 2:
+            continue
+        root = nodes[1]
+        if re.search(r"^script = ExtResource", root, re.M):
+            continue
+        if "instance=ExtResource" in root:
+            continue
+        n_scripts = len(re.findall(r'\[ext_resource type="Script"', raw))
+        (broken if n_scripts == 0 else child_only).append((tok, sp, ",".join(axes)))
+    return broken, child_only
+
+
 def main() -> int:
     only = ""
     quiet = False
@@ -771,6 +827,9 @@ def main() -> int:
     # Asked BEFORE the value checks, because a declaration whose code is not in the
     # repository is broken in a way no value comparison can see.
     untracked = untracked_sources(reg)
+    # A declaration can be perfectly correct about values and still describe code the scene
+    # never loads. See unreachable_roots.
+    dead_roots, child_roots = unreachable_roots(reg)
     rows: list[dict] = []
     for tok, (entry, _rf) in sorted(reg.items()):
         if only and tok != only:
@@ -825,7 +884,19 @@ def main() -> int:
         for tok, rel, why, axis in untracked:
             print(f"  {tok:28s} .{axis:<16s} {rel}  ({why})")
 
-    return len({r["token"] for r in bad}) + len(untracked)
+    if dead_roots:
+        print(f"\n{len(dead_roots)} DECLARED AXIS whose SCENE LOADS NO SCRIPT AT ALL "
+              f"[the values are right; nothing runs them, so every variant is one picture]:")
+        for tok, scene, axes in dead_roots:
+            print(f"  {tok:28s} .{axes:<20s} {scene}")
+    if child_roots:
+        print(f"\n{len(child_roots)} declared axis whose script is on a CHILD, not the scene "
+              f"root [the sweep reaches it breadth-first; a map token cannot, because "
+              f"apply_grid_config is called on the ROOT]:")
+        for tok, scene, axes in child_roots:
+            print(f"  {tok:28s} .{axes:<20s} {scene}")
+
+    return len({r["token"] for r in bad}) + len(untracked) + len(dead_roots)
 
 
 if __name__ == "__main__":
