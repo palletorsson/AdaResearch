@@ -691,7 +691,18 @@ const SHOW_SSR_FADE_OUT: float = 2.0
 ## every wire so the tube read thicker than the geometry it was drawn from. A glow that
 ## changes an object's apparent SIZE is no longer describing light.
 const SHOW_GLOW_THRESHOLD: float = 1.35
-const SHOW_GLOW_INTENSITY: float = 0.32
+## OFF. Glow is the only setting complained about in ALL FOUR blind rounds, by every lens,
+## and lowering it twice did not stop the complaints — it changed their wording. Round
+## four, verbatim: rails "clip to pure 255 and lose the blue entirely"; a "hot red bloom
+## halo bleeding several pixels past the left silhouette — an additive bloom bug, not a
+## style choice"; "the bloom halo eats the left silhouette". The preference lens sat at
+## 30% while materials and grounding were at 74% and 71%, and this is what separates them:
+## a third of this corpus is emissive line-art (catalyst wireframes, dome's CSG operands,
+## tally lamps) authored against the default rig's FILMIC curve, and under any bloom at all
+## those lines stop being lines. A glow that changes an object's apparent SIZE and destroys
+## its hue is not describing light. The artifacts that genuinely emit still read as bright;
+## they just no longer bleed into their own silhouette.
+const SHOW_GLOW_INTENSITY: float = 0.0
 const SHOW_GLOW_STRENGTH: float = 1.0
 ## Additive-on-top rather than a screen-wide bloom lift.
 const SHOW_GLOW_BLOOM: float = 0.02
@@ -828,7 +839,7 @@ func _stage_showcase(vp: SubViewport) -> void:
 	env.ssr_fade_in = SHOW_SSR_FADE_IN
 	env.ssr_fade_out = SHOW_SSR_FADE_OUT
 
-	env.glow_enabled = true
+	env.glow_enabled = SHOW_GLOW_INTENSITY > 0.0
 	env.glow_hdr_threshold = SHOW_GLOW_THRESHOLD
 	env.glow_intensity = SHOW_GLOW_INTENSITY
 	env.glow_strength = SHOW_GLOW_STRENGTH
