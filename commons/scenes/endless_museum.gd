@@ -691,8 +691,23 @@ func _build_segment() -> void:
 	# baked albedo, headless-safe). Properties set before add_child so the one
 	# _ready() rebuild builds the right sign.
 	# each museum wears its own colour: the pattern's hex tints the banner title
-	# and an ember strip across the threshold floor
-	var accent := Color.html(String(spec.get("color", "#888888")))
+	# and an ember strip across the threshold floor.
+	#
+	# THE PALETTE WAS A CHART LEGEND. template_patterns.json's museum colours are
+	# #946b3d, #3d6b94, #6b943d, #943d6b ... the same three bytes (0x94/0x6b/0x3d)
+	# rotated through the RGB channels: a qualitative palette generated so twenty
+	# templates could be told apart in a legend on a data board. Fed straight into
+	# architectural light and emissive trim it put a full-width HOT MAGENTA stripe
+	# across the Soane's floor — the highest-chroma pixels in the frame, leading
+	# the eye, and no architectural surface in a museum is magenta. The legend hue
+	# is now translated to a plausible building material (brass, bronze, patinated
+	# copper, oxidised steel, warm stone) which keeps the museums distinguishable
+	# and takes the chroma out. The raw legend colour survives ONLY as the sign's
+	# text tint, where it is ink on a panel rather than light on a wall.
+	var legend := Color.html(String(spec.get("color", "#888888")))
+	var accent := legend
+	if _mod_has(_mod_detail, "architectural_accent"):
+		accent = _mod_detail.call("architectural_accent", legend)
 	# THE SIGN COMES OFF THE VANISHING POINT. At (w/2, 2.45, VESTIBULE_H-0.45) a
 	# 2.8 m panel (TextScreen ASPECT 0.62 -> 1.74 m tall, so 1.58..3.32) sat dead
 	# on the one-point vanishing point and covered the top third of the portal —
@@ -711,7 +726,7 @@ func _build_segment() -> void:
 	banner.title = String(spec["label"])
 	# the banner names the building AND the chapter it houses
 	banner.body = ("%s\n\n%s" % [spec["museum"], seg_seq]) if seg_seq != "" else String(spec["museum"])
-	banner.title_color = accent.lightened(0.35)
+	banner.title_color = legend.lightened(0.35)   # ink on a panel, not light on a wall
 	banner.width_m = BANNER_W
 	banner.position = Vector3(BANNER_X, BANNER_Y, BANNER_Z)
 	# TextScreen faces its own local +Z; yaw +90 turns that to world +X, i.e. off

@@ -43,10 +43,56 @@ extends RefCounted
 # The ONE deliberate divergence is the tonemapper, and it is argued below.
 #
 # SDFGI is em_lighting's call, not mine, but it lives on Environment where only
-# this file can reach it. So build() applies SDFGI_MIRROR — a byte-identical
-# copy of EmLighting.SDFGI_RECOMMENDATION — which makes a later call to
-# EmLighting.apply_gi_recommendation(env) a no-op rather than a fight. If those
-# numbers ever diverge, this file loses: re-copy them.
+# this file can reach it. So build() applied SDFGI_MIRROR — a byte-identical
+# copy of EmLighting.SDFGI_RECOMMENDATION — which made a later call to
+# EmLighting.apply_gi_recommendation(env) a no-op rather than a fight.
+#
+# THAT MIRROR IS NOW DELIBERATELY BROKEN IN THREE PLACES. See SDFGI_TUNED. The
+# safety argument for byte-identity was that apply_gi_recommendation() would
+# otherwise overwrite us — but nothing calls it. endless_museum.gd's
+# _setup_environment() calls install() and apply_render_quality() and nothing
+# else; apply_gi_recommendation exists at em_lighting.gd:298 and has no call
+# site anywhere in commons/. So the mirror was buying protection against a
+# collision that cannot happen, and charging three real numbers for it.
+#
+# ── THE BOUNCE FINDING, AND WHAT IT ACTUALLY WAS ─────────────────────────────
+# A critic measured aaa_hero: lit wall base rgb(138,120,104) = 54% luma, the
+# floor 300 mm below it rgb(17,12,13) = 6%. A 9:1 step across a contact seam,
+# and the verdict was "there is no bounce light. At all."
+#
+# The obvious reading — SDFGI is off — is false, and it is worth writing down
+# why, because it is the reading anyone will reach for next time. SDFGI was
+# already enabled on the high tier, with occlusion, 4 cascades and 32 rays; the
+# proof stills wait 90 frames against a 16-frame convergence budget, so the
+# cascades were converged when the shutter fired. Bounce was being computed.
+#
+# It was being computed and then subtracted back out, by this file, three times:
+#
+#   1. SSAO ran at intensity 2.8 with ssao_light_affect 0.35 on a 0.55 m radius.
+#      That radius is centred on exactly the 300 mm the critic measured. AO was
+#      multiplying the ambient to near zero AND taking a third off the DIRECT
+#      light in the one band of pixels the finding is about. An ambient-occlusion
+#      term applied to direct light is a lie told to compensate for missing GI;
+#      told on top of working GI it manufactures the very seam it was hired to
+#      describe.
+#   2. sdfgi_y_scale was 75%, and the transfer being asked for is vertical over
+#      about 300 mm in a 3 m room. 50% packs the cells tighter on Y — that is
+#      what the setting is FOR in a flat wide building — and doubles the
+#      resolution across the junction. Cascade 0 still covers 6.4 m of height,
+#      which is two galleries.
+#   3. sdfgi_energy was 1.0 into an ambient of 0.28. The ambient is flat and
+#      unoccluded; the GI is directional and occluded. Every unit moved from the
+#      first to the second makes lit rooms brighter and the void darker at the
+#      same time, which is the pair of complaints, so it is the one lever that
+#      answers both.
+#
+# Honest limit: some of that 9:1 is NOT transport and this file cannot reach it.
+# The same critic reports the hero floor at 0.05 albedo against plaster near
+# 0.6. Under identical irradiance those two surfaces differ 12:1 by material
+# alone — the measured 9:1 means the floor was already receiving MORE light than
+# the wall. Transport can take the ratio to roughly 5:1. Getting below that is
+# em_materials.gd's floor albedo, not mine, and no exposure or GI number here
+# will do it.
 #
 # ── WHY AgX AND NOT ACES ─────────────────────────────────────────────────────
 # The contract asks for ACES. This file ships AgX. The reason is the subject.
@@ -86,13 +132,37 @@ const TIER_PERF := "perf"
 
 ## Flip these two together to fall back to the contract's ACES. See header.
 const TONEMAP := Environment.TONE_MAPPER_AGX
-const TONEMAP_EXPOSURE := 0.92
+## 1.15, up from 0.92 (+0.32 stop).
+##
+## The four proof frames measure p05 -> p95 of roughly 24 -> 143 out of 255, with
+## maxima near 250. Read that carefully, because it is two different faults and
+## only one of them is exposure:
+##   - p95 at 143 means 95% of every frame lives below 56% display. The top
+##     44% of the range holds almost nothing. The image is not dark, it is
+##     PARKED — sat in the bottom half of the curve with the shoulder unused.
+##   - the maxima at 250 are a few hundred pixels: the hard white dome on the
+##     deck and the specular pips on the terrazzo. Those are not a highlight
+##     range, they are two clipped objects.
+## So there is no highlight to protect. Raising exposure moves the parked
+## midtone band up the curve and costs a handful of already-clipped pixels.
+##
+## It is deliberately NOT raised further. The remaining distance from 143 to a
+## healthy p95 has to come from bounce filling the lower half of the room, not
+## from a bigger multiplier — brightening a flat image just makes a bright flat
+## image, and this is the number that would let someone do that by accident.
+const TONEMAP_EXPOSURE := 1.15
 ## AgX (and ACES) map scene-linear to display; white is where the curve lands
 ## on 1.0. 6.0 is the contract value and the right one: it puts roughly 2.6
 ## stops of headroom above diffuse white, which is exactly the room the
 ## emissive threshold strip and em_lighting's practicals need to bloom without
 ## clipping. The Godot default of 1.0 would clip every one of them to paper.
 const TONEMAP_WHITE := 6.0
+
+## Ambient by tier, named so build() and describe() cannot drift apart — the
+## ledger printed at boot has to be the numbers actually installed or it is worse
+## than no ledger. Argued at the assignment site in build().
+const AMBIENT_HIGH := 0.20
+const AMBIENT_PERF := 0.62
 
 ## Mirrored from em_lighting.gd ENV_CONTRACT so this file has no hard dependency
 ## on that class parsing. check_contract() reads whatever dict you hand it, so
@@ -107,9 +177,14 @@ const ENV_CONTRACT_MIRROR := {
 	"volumetric_fog_density_max": 0.012,
 }
 
-## Byte-identical to EmLighting.SDFGI_RECOMMENDATION. Applied here because SDFGI
-## is an Environment property; kept identical so applying theirs afterwards is a
-## no-op. y_scale 2 == Environment.SDFGI_Y_SCALE_75_PERCENT.
+## EmLighting.SDFGI_RECOMMENDATION as of this writing. Kept verbatim so the
+## divergence below is a readable diff rather than a claim. NOT applied directly
+## any more — sdfgi_settings() is what build() uses.
+##
+## (The old comment here said "y_scale 2 == SDFGI_Y_SCALE_75_PERCENT". The dict
+## carries no y_scale key and 75% is enum ordinal 1, not 2. Both halves of that
+## sentence were wrong and neither mattered, because the code has always used
+## the named constant. Left as a note: a comment nobody can execute rots.)
 const SDFGI_MIRROR := {
 	"min_cell_size": 0.2,
 	"cascades": 4,
@@ -119,6 +194,32 @@ const SDFGI_MIRROR := {
 	"energy": 1.0,
 	"normal_bias": 1.1,
 	"probe_bias": 1.1,
+}
+
+## The three keys this file overrides, and only those three. Everything absent
+## here is taken from SDFGI_MIRROR unchanged, so re-copying em_lighting's dict
+## stays a one-line job and this stays a three-line argument.
+##
+##   energy 1.0 -> 1.25
+##     Within the 1.0-1.3 band the brief allows, at the top of it. The ambient
+##     it is replacing (0.28 -> 0.20) is flat and unoccluded; this is neither.
+##     Trading one for the other brightens lit galleries and darkens the void in
+##     the same move.
+##   bounce_feedback 0.5 -> 0.55
+##     Second-bounce gain. Barely moved on purpose: this is the parameter that
+##     runs away in a high-albedo room, and a museum is a high-albedo room. 0.55
+##     is a nudge, not a lever, and if plaster ever goes milky it is the first
+##     number to put back.
+##   y_scale 75% -> 50%
+##     The one that should actually move the measured seam. See header.
+##
+## y_scale is a named enum rather than a number by design: a renamed constant is
+## a PARSE error, which is loud, where a stale integer is a silent wrong cell
+## size. All three SDFGI_Y_SCALE_* members were checked present in the shipped
+## 4.6 binary's ClassDB registration before this was written.
+const SDFGI_TUNED := {
+	"energy": 1.25,
+	"bounce_feedback": 0.55,
 }
 
 ## Set false to fall back to a tuned ProceduralSkyMaterial (see _procedural_sky).
@@ -209,7 +310,11 @@ const VIGNETTE_SHADER := """
 shader_type canvas_item;
 render_mode blend_mix, unshaded;
 
-uniform float vignette_amount : hint_range(0.0, 1.0) = 0.26;
+// 0.15, from 0.26. A vignette is a multiplier on the corners, and in these four
+// frames the corners are where the FLOOR is — so a quarter of the light was
+// being taken out of the exact surface the bounce finding is about, after every
+// other stage had finished putting it there. 0.15 still shapes the frame.
+uniform float vignette_amount : hint_range(0.0, 1.0) = 0.15;
 uniform float vignette_inner : hint_range(0.0, 1.5) = 0.46;
 uniform float vignette_outer : hint_range(0.0, 2.0) = 1.05;
 uniform vec4 vignette_tint : source_color = vec4(0.015, 0.016, 0.024, 1.0);
@@ -279,7 +384,23 @@ static func build(tier_override: String = "") -> WorldEnvironment:
 	# On perf there is no SDFGI and no SSIL, so ambient has to carry the bounce
 	# it is no longer being given — 0.62 is the compensation, and it is
 	# knowingly outside the contract because the contract assumes GI exists.
-	e.ambient_light_energy = 0.28 if high else 0.62
+	#
+	# HIGH: 0.28 -> 0.20. Ambient is the crutch, and this is the pass that can
+	# afford to drop it. A flat ambient reaches everywhere equally — into the
+	# sealed void beyond the exit gap exactly as much as into the lit gallery —
+	# which is why the last attempt to fix a black floor by raising it "made the
+	# void grey instead of black". It cannot tell the two apart. SDFGI can: it is
+	# occluded, so it fills the room the light is in and leaves the room it is
+	# not. Moving 0.08 from ambient into sdfgi_energy (1.0 -> 1.25) is the same
+	# photons routed through something that knows where the walls are.
+	# Contract max is 0.30, so this is a reduction INSIDE the contract, not a
+	# breach of it — and it is the first number to raise if the drop overshot,
+	# because it is the reversible half of the trade.
+	#
+	# PERF: unchanged at 0.62. No SDFGI and no SSIL on that tier means no bounce
+	# to route anything through, so the crutch is still load-bearing there. Do
+	# not "tidy" these two into one number.
+	e.ambient_light_energy = AMBIENT_HIGH if high else AMBIENT_PERF
 	e.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
 
 	# ── tonemap: the single largest change to the image ─────────────────────
@@ -304,8 +425,18 @@ static func build(tier_override: String = "") -> WorldEnvironment:
 	# Above Godot's 2.0 default. Near-neutral high-albedo surfaces bounce so
 	# much light back into their own corners that physically-correct AO is
 	# nearly invisible on them; 2.8 is the compensation for a white museum.
-	e.ssao_intensity = 2.8
-	e.ssao_power = 1.5          # perceptual falloff; default, and correct
+	#
+	# 1.7, DOWN from 2.8. The paragraph above is only true while the bounce is
+	# genuinely absent. It is not any more: sdfgi_use_occlusion is on and doing
+	# the same job from the other side, so an intensity tuned to FAKE missing GI
+	# now double-counts real GI — AO darkens the corner, then SDFGI's occlusion
+	# darkens the same corner again. And the 300 mm the critic measured sits
+	# inside this 0.55 m radius. Past about 2.0 this stops reading as occlusion
+	# and starts reading as a drawn line.
+	e.ssao_intensity = 1.7
+	# 1.3, from 1.5. A shallower perceptual falloff spreads what occlusion is
+	# left across the seam instead of concentrating it in the last 100 mm.
+	e.ssao_power = 1.3
 	e.ssao_detail = 0.85        # well above default — the tight radius needs it
 	e.ssao_horizon = 0.06       # rejects self-occlusion on grazing faces
 	e.ssao_sharpness = 0.98     # stops AO bleeding across depth discontinuities
@@ -315,7 +446,22 @@ static func build(tier_override: String = "") -> WorldEnvironment:
 	# ambient-only multiplier is being multiplied into approximately zero. 0.35 is
 	# a lie, every shipped title tells it, and in a direct-lit room it is the only
 	# corner darkening you get.
-	e.ssao_light_affect = 0.35
+	#
+	# 0.10, DOWN from 0.35, and this is the single change most likely to move the
+	# measured number. Read the justification above again with the frame in hand:
+	# "the only corner darkening you get" was written when there was no GI, and
+	# what it authorised was AO multiplying into DIRECT light. Direct light does
+	# not care about ambient occlusion — that is the whole reason the physically
+	# defensible value is 0.1. So this term was taking 35% off the direct
+	# illumination of the floor in a 0.55 m band around the wall base. That band
+	# IS the 300 mm the critic measured. This file was not failing to light the
+	# contact seam; it was drawing it in.
+	#
+	# Not zero. 0.10 is the honest number and it still does something, because
+	# the room is no longer lit "~95% by direct spot over an ambient of 0.28" —
+	# with sdfgi_energy 1.25 a real share of the floor's light is now indirect,
+	# and AO multiplies into that share correctly and at full strength.
+	e.ssao_light_affect = 0.10
 	e.ssao_ao_channel_affect = 0.0   # no material AO maps in this scene
 
 	# ── SSIL: short-range bounce SDFGI is too coarse to see ─────────────────
@@ -359,17 +505,41 @@ static func build(tier_override: String = "") -> WorldEnvironment:
 	# streamed into existence at runtime, and VoxelGI would need a rebuild per
 	# segment. SDFGI is designed for exactly this: it re-scans as the world
 	# moves under it.
+	#
+	# HIGH TIER ONLY, and that guard is load-bearing rather than tidy. The
+	# autopilot gate and --em-test-collision both call set_tier("perf") before
+	# install() precisely so this block does not run: a headless gate walking a
+	# streamed corridor with SDFGI re-scanning cascades every segment stalls past
+	# the watchdog's 16 s window, and the run is then reported as a corridor
+	# failure when it was a lighting cost. Nothing below this line may become
+	# unconditional.
 	e.sdfgi_enabled = high
 	if high:
 		e.sdfgi_cascades = int(SDFGI_MIRROR["cascades"])
+		# 0.2 m. Cascade 0 then covers min_cell_size * 64 = 12.8 m, and 4 cascades
+		# reach 12.8 * 2^3 = 102.4 m — one gallery resolved finely, the whole
+		# enfilade covered coarsely. Left alone: it was never the problem.
 		e.sdfgi_min_cell_size = float(SDFGI_MIRROR["min_cell_size"])
 		e.sdfgi_use_occlusion = bool(SDFGI_MIRROR["use_occlusion"])
-		e.sdfgi_bounce_feedback = float(SDFGI_MIRROR["bounce_feedback"])
+		e.sdfgi_bounce_feedback = float(SDFGI_TUNED["bounce_feedback"])
+		# Still false. The dome feeds ambient and reflections but not GI, which is
+		# correct for an interior — sky-fed GI floods sealed rooms with flat blue
+		# through the walls, and "the void went grey" is the exact complaint this
+		# pass is trying to fix. Surfaces the sun actually strikes through the
+		# ceiling slots still bounce; that path does not go through this flag.
 		e.sdfgi_read_sky_light = bool(SDFGI_MIRROR["read_sky_light"])
-		e.sdfgi_energy = float(SDFGI_MIRROR["energy"])
+		e.sdfgi_energy = float(SDFGI_TUNED["energy"])
 		e.sdfgi_normal_bias = float(SDFGI_MIRROR["normal_bias"])
 		e.sdfgi_probe_bias = float(SDFGI_MIRROR["probe_bias"])
-		e.sdfgi_y_scale = Environment.SDFGI_Y_SCALE_75_PERCENT
+		# 50%, from 75%. Y scale packs SDFGI cells closer on the Y axis — it is
+		# the setting for scenes that are flat and wide, which is what a 3 m
+		# gallery 17 m across and 100 m deep is. At 50% cascade 0's effective
+		# vertical cell is 0.1 m rather than 0.15 m and it still spans 6.4 m of
+		# height, which is two galleries stacked. The transfer this whole pass is
+		# about — wall to floor over 300 mm — is vertical, so vertical resolution
+		# is the axis to spend on. Named constant, not the ordinal: a renamed
+		# enum is then a parse error (loud) instead of a wrong cell size (silent).
+		e.sdfgi_y_scale = Environment.SDFGI_Y_SCALE_50_PERCENT
 
 	# ── glow: only real highlights ──────────────────────────────────────────
 	e.glow_enabled = true
@@ -378,7 +548,12 @@ static func build(tier_override: String = "") -> WorldEnvironment:
 	e.glow_normalized = true
 	# Restrained. Glow is the effect that most reliably makes an image look
 	# like a game rather than a photograph.
-	e.glow_intensity = 0.55
+	# 0.45, from 0.55. glow_hdr_threshold is held at the contract's 1.0 and the
+	# threshold is read AFTER exposure, so raising tonemap_exposure 0.92 -> 1.15
+	# silently moved ~25% more scene into the glowing band. Backing intensity off
+	# by the same proportion keeps the effect where it was rather than letting an
+	# exposure change smuggle in a bloom change.
+	e.glow_intensity = 0.45
 	e.glow_strength = 1.0
 	# THE IMPORTANT ZERO. glow_bloom adds glow to pixels BELOW the threshold —
 	# i.e. to everything. Any non-zero value here hazes the whole frame and is
@@ -488,7 +663,14 @@ static func build(tier_override: String = "") -> WorldEnvironment:
 	e.adjustment_brightness = 1.0
 	# The AgX repayment. 1.12 restores roughly the shoulder ACES would have
 	# given, applied after the neutral rolloff rather than baked into it.
-	e.adjustment_contrast = 1.12
+	# 1.05, from 1.12. Contrast pivots on mid-grey and pushes both ends outward,
+	# and the frames say the bottom end had already gone too far: p05 sits at 24
+	# of 255. That is not a rich black, it is a floor with no information in it,
+	# and the AgX-repayment argument was being applied to an image whose problem
+	# was never a missing shoulder — it was a missing lower midtone, which is
+	# bounce light, which is now arriving. Restore contrast only if the graded
+	# frame reads flat AFTER the bounce lands, not before.
+	e.adjustment_contrast = 1.05
 	# AgX desaturates into highlights by design. Without this the museum accent
 	# colours — the whole point of each building wearing its own hex — drift
 	# grey. 1.08 is a lift, not a boost.
@@ -572,7 +754,12 @@ static func camera_attributes(tier_override: String = "") -> CameraAttributes:
 	# stops of latitude: enough that your eye adjusts, not enough that the
 	# building loses its dynamic range.
 	ca.auto_exposure_min_sensitivity = 40.0
-	ca.auto_exposure_max_sensitivity = 500.0
+	# 380, down from 500. Max sensitivity is how far the eye may open in a dark
+	# room, and with tonemap_exposure now 0.32 stop higher the old ceiling would
+	# hand the vestibule and the sealed void beyond an exit gap the same lift the
+	# raised ambient used to — the "void went grey" failure, arriving by a
+	# different door. 40..380 is about 3.2 stops of latitude, still an eye.
+	ca.auto_exposure_max_sensitivity = 380.0
 
 	# Base-class multiplier, applied before the tonemapper. Left at unity: all
 	# exposure intent is expressed in tonemap_exposure so there is exactly one
@@ -743,15 +930,22 @@ static func describe(tier_override: String = "") -> String:
 	lines.append("tonemap=%s exposure=%.2f white=%.1f" % [
 		"AgX" if TONEMAP == Environment.TONE_MAPPER_AGX else "ACES",
 		TONEMAP_EXPOSURE, TONEMAP_WHITE])
-	lines.append("ssao=on(r0.55 i2.8 la0.35)")
+	lines.append("ambient=%.2f" % (AMBIENT_HIGH if high else AMBIENT_PERF))
+	lines.append("ssao=on(r0.55 i1.7 la0.10)")
 	lines.append("ssil=%s" % ("on(r4.0 i1.15)" if high else "off"))
 	lines.append("ssr=%s" % ("on(64 steps)" if high else "off"))
-	lines.append("sdfgi=%s" % ("on(0.2m/4casc)" if high else "off"))
+	var gi: String = "off"
+	if high:
+		gi = "on(0.2m/4casc e%.2f fb%.2f y50%%)" % [
+			float(SDFGI_TUNED["energy"]),
+			float(SDFGI_TUNED["bounce_feedback"]),
+		]
+	lines.append("sdfgi=%s" % gi)
 	lines.append("glow=on(thr1.0 screen)")
 	lines.append("fog=on(0.0035) vfog=%s" % ("on(0.012)" if high else "off"))
 	lines.append("dof=%s" % ("far 26m/+14m" if high else "off"))
-	lines.append("autoexp=%s" % ("frozen (shot run)" if _is_shot_run() else "on(speed 0.28, ISO 40-500)"))
-	lines.append("vignette=%s" % ("on(0.26)" if (high and use_vignette) else "off"))
+	lines.append("autoexp=%s" % ("frozen (shot run)" if _is_shot_run() else "on(speed 0.28, ISO 40-380)"))
+	lines.append("vignette=%s" % ("on(0.15)" if (high and use_vignette) else "off"))
 	lines.append("sky=%s" % ("shader dome" if use_shader_sky else "procedural"))
 	return "\n".join(PackedStringArray(lines))
 
