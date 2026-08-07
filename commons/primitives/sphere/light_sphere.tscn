@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bru2ss8ib2qem"]
+[gd_scene load_steps=4 format=3 uid="uid://bru2ss8ib2qem"]
+
+[ext_resource type="Script" path="res://commons/primitives/sphere/light_sphere.gd" id="1_dna"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6p2k"]
 cull_mode = 2
@@ -10,6 +12,7 @@ radius = 40.0
 height = 40.0
 
 [node name="LightSphere" type="Node3D"]
+script = ExtResource("1_dna")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_r6p2k")

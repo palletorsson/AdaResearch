@@ -1718,6 +1718,16 @@
    }
   },
   "ElphabaDress": {
+   "dna": {
+    "axes": {
+    "wearer": [
+    "none",
+    "hanger",
+    "form",
+    "figure"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "Cloth simulation as wave—fabric responds to movement with ripples propagating outward. The dress becomes a visible record of motion, trailing oscillations behind every gesture.",
@@ -14924,6 +14934,16 @@
    }
   },
   "wave_interference": {
+   "dna": {
+    "axes": {
+    "evidence": [
+    "sources",
+    "result",
+    "trace",
+    "longhand"
+    ]
+    }
+   },
    "category": "waves",
    "complexity": "advanced",
    "description": "Superposition and interference patterns",

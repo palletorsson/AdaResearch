@@ -1,215 +1,284 @@
 extends Node3D
 class_name CCTVMonitor
 
-## CCTV Monitor - Displays a target scene in a SubViewport
-## Can be configured via grid system with scene path, rotation, y-offset, and scale
+## CCTV Monitor — the oversight of watching, staged one piece at a time.
+##
+## @identity
+## essence: a wall-tier security monitor whose feed is a private SubViewport copy of a
+##   scene — the picture is always a model of the room, never the room. The scene itself
+##   (frame, screen, viewport rig) is authored in cctv.tscn; this script stages WHICH
+##   PIECE of the watching oversight stands with it.
+## desire: to make the room ask who it is for. A monitor alone shows you the watching;
+##   a camera body gives the gaze an address; a drawn sightline points it at you; a
+##   tally shows what the watching keeps; a dome refuses to say where it looks.
+## critical_parameter: oversight — which face of the surveillance instrument fronts the
+##   installation. The feed never changes; the institution around it does.
+## triggers: _ready() stages the chosen oversight; apply_grid_config restages on an
+##   #oversight: token and ignores everything else (including the legacy scene-path
+##   fragments the test_cctv tokens still carry).
+## emerges: with four placements at four values, one room becomes a small history of
+##   CCTV — shopfront deterrence, bracket camera, aimed beam, smoked dome.
+## needs: cctv.tscn's authored monitor [present]; nothing external.
+## relationships: kin to operational_eye (images that were never for you — Farocki's
+##   operational images); adopts durer_scene's `oversight` word: both stage which piece
+##   of a seeing-machine stands before you. The dome is Foucault's move — a gaze made
+##   unverifiable is a gaze made permanent.
+## truth: the monitor never watches the world — it films its own private model. What the
+##   room learns from a camera is not what it sees, but who it is for.
+##
+## ── DNA ─────────────────────────────────────────────────────────────────────
+## AXIS — WHICH PIECE OF THE WATCHING INSTRUMENT STANDS IN THE ROOM. The word is
+## [[durer_scene]]'s `oversight` (same registry), adopted because the question is
+## the same one Dürer's machines answer: which part of the seeing-instrument is
+## staged between the eye and the subject. The VALUES are this artifact's own —
+## a CCTV rig is not a drawing frame — following the kresling_spire/eggling
+## precedent: shared word, shared question, body-specific vocabulary.
+## Rejected words, each for a reason worth keeping: `channel` (operational_eye)
+## picks WHICH of six feeds is up, and this monitor owns exactly one feed;
+## `disclosure` (bias_visualizer) is a monotone ladder of how much mechanism is
+## shown, and these are not quantities of one revelation but different faces of
+## the same watching; `notice` (pickup_gate) is how a rule announces itself,
+## which fits only the placard sense of surveillance and none of its bodies.
+##
+##   monitor    the shipped installation, byte for byte — frame and feed alone.
+##              Watching shown as its output: the shopfront deterrence monitor.
+##   housing    the gaze acquires a body — a bracket-mounted camera housing on a
+##              mast above the monitor, hooded, lens down the same axis the
+##              screen faces, a red REC point burning on the hood.
+##   sightline  the gaze acquires an address — the housing yaws toward its spot
+##              and a thin red beam runs from the lens to a floor reticle in
+##              front of the screen: the watched place, marked where you stand.
+##   tally      the gaze acquires a memory — a ledger fin bolted to the right
+##              flank, rows of counted marks and a SEEN total: not what it
+##              watches, what it has KEPT.
+##   dome       the gaze refuses an address — a smoked half-sphere on a stem
+##              above the monitor. No lens, no direction, no way to know where
+##              it looks: the unverifiable watcher that never blinks.
+@export_enum("monitor", "housing", "sightline", "tally", "dome") var oversight: String = "monitor"
+const OVERSIGHTS: PackedStringArray = ["monitor", "housing", "sightline", "tally", "dome"]
 
-@export_group("Target Scene")
-@export var target_scene_path: String = "res://commons/primitives/origin/origin.tscn"  # Default scene to display
-@export var camera_distance: float = 2.0
-@export var camera_fov: float = 70.0
+# Everything the axis builds, tracked for teardown so an #oversight: token
+# arriving after _ready() can restage without touching the authored monitor.
+var _staged: Array[Node] = []
 
-@export_group("Monitor Transform")
-@export var monitor_rotation_y: float = 0.0  # Rotation in degrees
-@export var monitor_y_offset: float = 0.0    # Y position offset
-@export var monitor_scale: float = 1.0       # Uniform scale
+# Authored-scene facts (from cctv.tscn): the frame is a 1.296 m slab centred at
+# (0, 1.2, 0.48); the screen sprite sits at z 0.434 facing -Z, so -Z is the
+# room the monitor watches and +Z is its back.
+const FRAME_TOP := 1.848
+const FRAME_HALF_W := 0.648
+const FRAME_Z := 0.48
 
-@export_group("Viewport Settings")
-@export var viewport_width: int = 512
-@export var viewport_height: int = 512
-@export var viewport_update_mode: SubViewport.UpdateMode = SubViewport.UPDATE_ALWAYS
-
-# Internal references
-var _subviewport: SubViewport
-var _camera: Camera3D
-var _sprite: Sprite3D
-var _monitor_frame: MeshInstance3D
-var _target_scene_instance: Node3D
 
 func _ready() -> void:
-	# Find child nodes
-	_subviewport = get_node_or_null("SubViewport")
-	_camera = get_node_or_null("SubViewport/Camera3D")
-	_sprite = get_node_or_null("Sprite3D")
-	_monitor_frame = get_node_or_null("MonitorFrame")
-	
-	if not _subviewport:
-		push_error("CCTVMonitor: SubViewport not found!")
-		return
-	
-	if not _camera:
-		push_error("CCTVMonitor: Camera3D not found in SubViewport!")
-		return
-	
-	# Configure viewport
-	_configure_viewport()
-	
-	# Apply monitor transforms
-	_apply_monitor_transforms()
-	
-	# Load and display target scene if path is set
-	if not target_scene_path.is_empty():
-		call_deferred("_load_and_display_scene")
+	_stage_oversight()
 
-func configure(scene_path: String, rot_y: float = 0.0, y_trans: float = 0.0, scale: float = 1.0) -> void:
-	"""Configure the CCTV monitor from grid system"""
-	target_scene_path = scene_path
-	monitor_rotation_y = rot_y
-	monitor_y_offset = y_trans
-	monitor_scale = scale
-	
-	# Apply transforms
-	_apply_monitor_transforms()
-	
-	# Load scene
-	if is_inside_tree():
-		call_deferred("_load_and_display_scene")
-	
-	print("CCTVMonitor: Configured - scene='%s', rot=%f, y=%f, scale=%f" % [scene_path, rot_y, y_trans, scale])
 
-func _configure_viewport() -> void:
-	"""Set up the SubViewport with proper settings"""
-	if not _subviewport:
-		return
-	
-	_subviewport.size = Vector2i(viewport_width, viewport_height)
-	_subviewport.render_target_update_mode = viewport_update_mode
-	_subviewport.transparent_bg = false
-	
-	# Configure camera
-	if _camera:
-		_camera.fov = camera_fov
-		_camera.position = Vector3(0, 0, camera_distance)
-		_camera.look_at(Vector3.ZERO, Vector3.UP)
-	
-	print("CCTVMonitor: Viewport configured - size=%dx%d" % [viewport_width, viewport_height])
+## Grid entry point. `oversight` is normalised against OVERSIGHTS so a typo in a
+## map token keeps the shipped monitor. Every other key is ignored on purpose —
+## the four test_cctv placements still carry pre-config-grammar tokens
+## (cctv#res://...tscn:rot:y:scale) whose fragment parses to a junk "res" key,
+## and this artifact has never answered it.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("oversight"):
+		var a: String = str(config_data["oversight"]).strip_edges().to_lower()
+		if OVERSIGHTS.has(a) and a != oversight:
+			oversight = a
+			_stage_oversight()
 
-func _apply_monitor_transforms() -> void:
-	"""Apply rotation, y-offset, and scale to the entire monitor"""
-	rotation_degrees.y = monitor_rotation_y
-	position.y = monitor_y_offset
-	scale = Vector3.ONE * monitor_scale
 
-func _load_and_display_scene() -> void:
-	"""Load the target scene and display it in the viewport"""
-	if target_scene_path.is_empty():
-		push_warning("CCTVMonitor: No target scene path set")
-		return
-	
-	if not _subviewport:
-		push_error("CCTVMonitor: SubViewport not available")
-		return
-	
-	# Clear any existing target scene
-	if _target_scene_instance:
-		_target_scene_instance.queue_free()
-		_target_scene_instance = null
-	
-	# Load the target scene
-	if not FileAccess.file_exists(target_scene_path):
-		push_error("CCTVMonitor: Target scene file not found: %s" % target_scene_path)
-		_show_no_signal()
-		return
-	
-	var scene = load(target_scene_path)
-	if not scene:
-		push_error("CCTVMonitor: Failed to load scene: %s" % target_scene_path)
-		_show_no_signal()
-		return
-	
-	# Instantiate the scene
-	_target_scene_instance = scene.instantiate()
-	if not _target_scene_instance:
-		push_error("CCTVMonitor: Failed to instantiate scene: %s" % target_scene_path)
-		_show_no_signal()
-		return
-	
-	# Add to viewport
-	_subviewport.add_child(_target_scene_instance)
-	
-	# Position camera to frame the scene
-	call_deferred("_frame_target_scene")
-	
-	print("CCTVMonitor: Loaded and displaying scene: %s" % target_scene_path)
+func _stage_oversight() -> void:
+	for n in _staged:
+		if is_instance_valid(n):
+			n.queue_free()
+	_staged.clear()
+	match oversight:
+		"housing":
+			_stage_housing(0.0)
+		"sightline":
+			_stage_sightline()
+		"tally":
+			_stage_tally()
+		"dome":
+			_stage_dome()
+		_:
+			pass  # "monitor" — the legacy lineage: the authored scene, untouched
 
-func _frame_target_scene() -> void:
-	"""Automatically position camera to frame the target scene"""
-	if not _target_scene_instance or not _camera:
-		return
-	
-	# Try to calculate bounding box of the scene
-	var aabb = _calculate_scene_aabb(_target_scene_instance)
-	
-	if aabb.size.length() > 0.001:
-		# Position camera to look at center of AABB
-		var center = aabb.get_center()
-		var size = aabb.size.length()
-		
-		# Adjust camera distance based on scene size
-		var adjusted_distance = max(camera_distance, size * 1.5)
-		_camera.position = center + Vector3(0, size * 0.3, adjusted_distance)
-		_camera.look_at(center, Vector3.UP)
-		
-		print("CCTVMonitor: Camera framed - center=%s, distance=%f" % [center, adjusted_distance])
-	else:
-		# Fallback to default positioning
-		_camera.position = Vector3(0, 0.5, camera_distance)
-		_camera.look_at(Vector3.ZERO, Vector3.UP)
-		print("CCTVMonitor: Using default camera position")
 
-func _calculate_scene_aabb(node: Node) -> AABB:
-	"""Calculate the axis-aligned bounding box for all visual nodes in the scene"""
-	var combined_aabb = AABB()
-	var first = true
-	
-	_collect_aabb_recursive(node, combined_aabb, first)
-	
-	return combined_aabb
+# ── the values ───────────────────────────────────────────────────────────────
 
-func _collect_aabb_recursive(node: Node, combined_aabb: AABB, first: bool) -> void:
-	"""Recursively collect AABBs from all MeshInstance3D nodes"""
-	if node is MeshInstance3D:
-		var mesh_instance = node as MeshInstance3D
-		if mesh_instance.mesh:
-			var local_aabb = mesh_instance.mesh.get_aabb()
-			var global_aabb = local_aabb
-			
-			# Transform AABB to global coordinates
-			if mesh_instance.global_transform:
-				global_aabb = mesh_instance.global_transform * local_aabb
-			
-			if first:
-				combined_aabb = global_aabb
-				first = false
-			else:
-				combined_aabb = combined_aabb.merge(global_aabb)
-	
-	# Recurse through children
-	for child in node.get_children():
-		_collect_aabb_recursive(child, combined_aabb, first)
+## HOUSING — the camera in its body, mast-mounted above the monitor, pitched
+## down the axis the screen faces. yaw_to lets sightline aim the same body at
+## its marked spot; plain housing watches dead ahead.
+func _stage_housing(yaw_to: float) -> void:
+	var steel: StandardMaterial3D = _flat(Color(0.22, 0.23, 0.26), 0.55, 0.6)
+	var dark: StandardMaterial3D = _flat(Color(0.10, 0.11, 0.13), 0.8, 0.2)
+	# mast: base plate on the frame top, post rising off it
+	_stage(_box(Vector3(0.0, FRAME_TOP + 0.01, FRAME_Z), Vector3(0.14, 0.02, 0.14), steel))
+	_stage(_cyl(Vector3(0.0, 1.935, FRAME_Z), 0.02, 0.135, steel))
+	# the housing itself, grouped so it can pitch (and, for sightline, yaw)
+	var head := Node3D.new()
+	head.name = "CameraHousing"
+	head.position = Vector3(0.0, 2.06, 0.44)
+	head.rotation = Vector3(-0.30, yaw_to, 0.0)
+	_stage(head)
+	head.add_child(_box(Vector3.ZERO, Vector3(0.16, 0.15, 0.34), steel))
+	# hood lip over the lens end (-Z is the nose)
+	head.add_child(_box(Vector3(0.0, 0.083, -0.02), Vector3(0.17, 0.012, 0.36), dark))
+	# lens ring + glass on the nose face
+	var ring: MeshInstance3D = _cyl(Vector3(0.0, -0.01, -0.185), 0.045, 0.02, dark)
+	ring.rotation.x = PI / 2.0
+	head.add_child(ring)
+	var glass: MeshInstance3D = _cyl(Vector3(0.0, -0.01, -0.198), 0.032, 0.006, _flat(Color(0.04, 0.05, 0.07), 0.1, 0.7))
+	glass.rotation.x = PI / 2.0
+	head.add_child(glass)
+	# the REC point — the one light surveillance always allows itself
+	head.add_child(_box(Vector3(0.06, 0.10, -0.10), Vector3(0.018, 0.018, 0.018), _emi(Color(0.95, 0.18, 0.14), 2.2)))
 
-func _show_no_signal() -> void:
-	"""Display a 'NO SIGNAL' message when scene loading fails"""
-	if not _sprite:
-		return
-	
-	# Create a simple "NO SIGNAL" texture
-	var img = Image.create(viewport_width, viewport_height, false, Image.FORMAT_RGB8)
-	img.fill(Color(0.1, 0.1, 0.15))  # Dark blue background
-	
-	var texture = ImageTexture.create_from_image(img)
-	_sprite.texture = texture
-	
-	print("CCTVMonitor: Displaying NO SIGNAL")
 
-func set_camera_distance(distance: float) -> void:
-	"""Adjust camera distance from target"""
-	camera_distance = distance
-	if _camera:
-		_camera.position.z = distance
-		if _target_scene_instance:
-			call_deferred("_frame_target_scene")
+## SIGHTLINE — the housing plus its gaze, drawn. The body yaws toward the spot
+## it holds, a thin beam runs lens-to-floor, and a reticle marks the watched
+## place — front-right of the screen, where a door (or a viewer) would stand.
+func _stage_sightline() -> void:
+	_stage_housing(-0.515)
+	var beam_c := Color(0.95, 0.30, 0.25)
+	# lens position with the head pitched -0.30 and yawed -0.515 (see _stage_housing)
+	_stage(_cyl_between(Vector3(0.09, 1.99, 0.28), Vector3(0.60, 0.012, -0.80), 0.006, _emi(beam_c, 1.3)))
+	# the floor reticle: an open square frame plus a centre tick
+	var rmat: StandardMaterial3D = _emi(beam_c, 1.0)
+	var r := 0.22
+	var cx := 0.60
+	var cz := -0.80
+	_stage(_box(Vector3(cx, 0.012, cz - r), Vector3(r * 2.0, 0.004, 0.03), rmat))
+	_stage(_box(Vector3(cx, 0.012, cz + r), Vector3(r * 2.0, 0.004, 0.03), rmat))
+	_stage(_box(Vector3(cx - r, 0.012, cz), Vector3(0.03, 0.004, r * 2.0), rmat))
+	_stage(_box(Vector3(cx + r, 0.012, cz), Vector3(0.03, 0.004, r * 2.0), rmat))
+	_stage(_box(Vector3(cx, 0.012, cz), Vector3(0.06, 0.004, 0.06), rmat))
 
-func get_target_scene_instance() -> Node3D:
-	"""Get reference to the instantiated target scene"""
-	return _target_scene_instance
+
+## TALLY — what the watching keeps. A ledger fin bolted to the right flank:
+## rows of counted marks, the last row still filling, and the running total.
+func _stage_tally() -> void:
+	var plate: StandardMaterial3D = _flat(Color(0.09, 0.10, 0.12), 0.85, 0.15)
+	var steel: StandardMaterial3D = _flat(Color(0.22, 0.23, 0.26), 0.55, 0.6)
+	var mark: StandardMaterial3D = _emi(Color(0.55, 0.90, 0.60), 1.0)
+	# the fin, thin in X, faces +X; two bracket arms pin it to the frame edge
+	_stage(_box(Vector3(0.85, 1.2, FRAME_Z), Vector3(0.03, 1.0, 0.30), plate))
+	_stage(_box(Vector3(0.741, 1.55, FRAME_Z), Vector3(0.19, 0.03, 0.03), steel))
+	_stage(_box(Vector3(0.741, 0.85, FRAME_Z), Vector3(0.19, 0.03, 0.03), steel))
+	# counted marks on the +X face: 9 full rows of 4, one row of 2 — counting on
+	var rows := 10
+	var row_i := 0
+	while row_i < rows:
+		var cols: int = 4 if row_i < rows - 1 else 2
+		var col_i := 0
+		while col_i < cols:
+			var mz: float = FRAME_Z - 0.105 + float(col_i) * 0.07
+			var my: float = 1.56 - float(row_i) * 0.082
+			_stage(_box(Vector3(0.868, my, mz), Vector3(0.008, 0.009, 0.034), mark))
+			col_i += 1
+		row_i += 1
+	# the running total, printed at the head of the ledger
+	var total := Label3D.new()
+	total.text = "SEEN 0447"
+	total.font_size = 40
+	total.pixel_size = 0.0016
+	total.outline_size = 6
+	total.modulate = Color(0.55, 0.90, 0.60)
+	total.double_sided = true
+	total.position = Vector3(0.872, 1.64, FRAME_Z)
+	total.rotation.y = -PI / 2.0
+	_stage(total)
+
+
+## DOME — the unverifiable gaze. A smoked half-sphere on a stem above the
+## monitor: no lens, no direction, no way to know where it looks.
+func _stage_dome() -> void:
+	var steel: StandardMaterial3D = _flat(Color(0.22, 0.23, 0.26), 0.55, 0.6)
+	_stage(_cyl(Vector3(0.0, 1.985, FRAME_Z), 0.018, 0.25, steel))
+	_stage(_box(Vector3(0.0, 2.12, FRAME_Z), Vector3(0.26, 0.018, 0.26), steel))
+	var smoked := StandardMaterial3D.new()
+	smoked.albedo_color = Color(0.06, 0.06, 0.08, 0.88)
+	smoked.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	smoked.roughness = 0.12
+	smoked.metallic = 0.4
+	var bulb := SphereMesh.new()
+	bulb.radius = 0.15
+	bulb.height = 0.15
+	bulb.is_hemisphere = true
+	var mi := MeshInstance3D.new()
+	mi.name = "Dome"
+	mi.mesh = bulb
+	mi.material_override = smoked
+	mi.position = Vector3(0.0, 2.11, FRAME_Z)
+	mi.rotation.x = PI  # bulge downward, off the plate
+	_stage(mi)
+
+
+# ── helpers ──────────────────────────────────────────────────────────────────
+
+func _stage(n: Node) -> Node:
+	add_child(n)
+	_staged.append(n)
+	return n
+
+
+func _flat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	return m
+
+
+func _emi(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.emission_enabled = true
+	m.emission = c
+	m.emission_energy_multiplier = energy
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	return m
+
+
+func _box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi
+
+
+func _cyl(center: Vector3, radius: float, height: float, mat: Material) -> MeshInstance3D:
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = radius
+	mesh.bottom_radius = radius
+	mesh.height = height
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi
+
+
+func _basis_y_to(dir: Vector3) -> Basis:
+	var y: Vector3 = dir.normalized()
+	if y.length() < 0.0001:
+		return Basis()
+	var ref: Vector3 = Vector3.UP if absf(y.dot(Vector3.UP)) < 0.985 else Vector3.RIGHT
+	var x: Vector3 = ref.cross(y).normalized()
+	var z: Vector3 = x.cross(y).normalized()
+	return Basis(x, y, z)
+
+
+func _cyl_between(a: Vector3, b: Vector3, radius: float, mat: Material) -> MeshInstance3D:
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = radius
+	mesh.bottom_radius = radius
+	mesh.height = maxf(a.distance_to(b), 0.001)
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.transform = Transform3D(_basis_y_to(b - a), (a + b) * 0.5)
+	return mi

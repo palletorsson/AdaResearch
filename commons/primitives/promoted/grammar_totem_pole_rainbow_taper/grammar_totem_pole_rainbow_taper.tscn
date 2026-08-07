@@ -1,4 +1,6 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://commons/primitives/promoted/grammar_totem_pole_rainbow_taper/grammar_totem_pole_rainbow_taper.gd" id="1_dna"]
 
 ; Promoted composition: grammar_totem_pole_rainbow_taper (8 components, flat-shaded)
 ; Source: primitive_dna.py promote --compose=<spec> --shader=flat --as=grammar_totem_pole_rainbow_taper
@@ -98,6 +100,7 @@ metallic = 0.0
 roughness = 0.5
 
 [node name="GrammarTotemPoleRainbowTaper" type="Node3D"]
+script = ExtResource("1_dna")
 
 [node name="Part0" type="MeshInstance3D" parent="."]
 mesh = SubResource("Mesh_0")

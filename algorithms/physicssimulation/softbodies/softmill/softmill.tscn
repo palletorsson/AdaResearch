@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctq1ibdmbs7oi"]
+[gd_scene load_steps=7 format=3 uid="uid://ctq1ibdmbs7oi"]
 
 [ext_resource type="Shader" uid="uid://cn6haqw16yd0n" path="res://commons/resourses/shaders/frosted_glass.gdshader" id="1_qjj20"]
 [ext_resource type="Script" uid="uid://clw586fh12g8f" path="res://algorithms/physicssimulation/softbody3d/softbody3d.gd" id="2_xp6t4"]
 [ext_resource type="PackedScene" uid="uid://cflnu0r1frky4" path="res://algorithms/physicssimulation/softbodies/softmill/RotatingArmWithStand.tscn" id="3_qjj20"]
+[ext_resource type="Script" path="res://algorithms/physicssimulation/softbodies/softmill/softmill.gd" id="4_dna"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_njui8"]
 render_priority = 0
@@ -15,6 +16,7 @@ shader_parameter/edge_color = Color(0, 0, 0, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_vompo"]
 
 [node name="Softmill" type="Node3D"]
+script = ExtResource("4_dna")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.269054, 0, -0.963125, 0, 1, 0, 0.963125, 0, -0.269054, -4.72509, 3.53199, -2.64146)

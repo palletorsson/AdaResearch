@@ -31,11 +31,62 @@ extends Node3D
 @export var linked_frequency_max: float = 0.18
 @export var linked_iso_bias: float = 0.0
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-08-06).
+#
+#   threshold   WHERE THE LINE IS DRAWN THROUGH THE FIELD
+#
+# The @identity above already names iso_level the critical_parameter and states
+# the artifact's truth as "matter is a threshold". This axis is that sentence
+# made settable from a map token: four named stances of the one decision this
+# artifact exists to demonstrate. The FIELD never changes — same simplex, same
+# seed (1337, deterministic since the day it shipped), same 32³ walk. Only the
+# line moves, which is precisely the lesson.
+#
+#   massif       n > -0.30  most of the volume is matter; void survives as caves
+#                worming through a nearly solid block. Matter with holes in it.
+#   sponge       n >  0.00  THE LEGACY LINEAGE, byte for byte — solid and void
+#                in equal measure, one bicontinuous tangle, neither the figure
+#                nor the ground. This is iso_level's shipped value read through
+#                the export, so the sculptor link keeps steering it live.
+#   archipelago  n > +0.25  matter has become the exception: scattered islands
+#                of glass cubes hanging in mostly nothing.
+#   wisp         n > +0.45  the last shreds before the field admits no matter at
+#                all — a thin dust of cubes marking only the noise's peaks.
+#
+# WHY NOT `readout` (relief | plate | column), the word five noise artifacts
+# already share: readout is the question "how is a 2D sample MATERIALIZED", and
+# every one of its values flattens the field to a sheet. This artifact's whole
+# argument against its siblings is that the field is VOLUMETRIC and the surface
+# is an iso-surface, not a graph — rendering it as relief would teach
+# perlin_noise's lesson from voxelnoise's pedestal (R5). The axis it actually
+# argues is the threshold itself, a question no promoted artifact asks yet.
+#
+# `sponge` keeps iso_level authoritative, so apply_perlin_terrain_controls (the
+# signal-bus link from perlin_terrain_sculptor) behaves exactly as today. A
+# non-default threshold pins the line and wins over the live slider — declared
+# behaviour, only reachable where a map asks for it.
+#
+# No fixture needed: _ready builds standalone, the noise is seeded, nothing
+# animates, and the one MeshInstance3D spans the full 32 m volume.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## THE AXIS — where the solid/void line is drawn through the noise field.
+## `sponge` is the legacy default and reads the iso_level export unchanged.
+@export_enum("massif", "sponge", "archipelago", "wisp") var threshold: String = "sponge"
+
+## The allow-list, same spelling and order as the @export_enum. An unknown word
+## keeps the default rather than re-carving five placed volumes.
+const THRESHOLDS: PackedStringArray = ["massif", "sponge", "archipelago", "wisp"]
+
 var noise: FastNoiseLite
 var _generated_root: Node3D
 var _rebuild_queued: bool = false
 
 func _ready() -> void:
+	# The grid sets config_* metadata SYNCHRONOUSLY before add_child and calls
+	# apply_grid_config deferred (after this), so the meta read happens here.
+	_read_meta_overrides()
 	add_to_group("voxelnoise_receivers")
 	_ensure_generated_root()
 	_queue_rebuild()
@@ -45,6 +96,10 @@ func _generate_chunk(chunk_pos: Vector3i) -> void:
 	var mesh = ArrayMesh.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	# Hoisted once per rebuild: `sponge` returns iso_level itself (the legacy
+	# comparison, byte for byte), the other stances return their named line.
+	var iso: float = _effective_iso()
 
 	for x in range(chunk_size):
 		for y in range(1, world_height + 1):  # Start at Y=1, go up to world_height
@@ -56,7 +111,7 @@ func _generate_chunk(chunk_pos: Vector3i) -> void:
 				var p = Vector3(world_x, world_y, world_z)
 				var val = noise.get_noise_3d(p.x, p.y, p.z)
 
-				if val > iso_level:
+				if val > iso:
 					_add_cube(st, p * voxel_scale)
 
 	st.generate_normals()
@@ -210,5 +265,51 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+# DNA plumbing
+# ═════════════════════════════════════════════════════════════════════════════
+
+## The line the generator compares against. `sponge` (the default) hands back
+## the iso_level export unchanged — 0.0 as shipped, and still writable live by
+## apply_perlin_terrain_controls — so the legacy path is the export itself, not
+## a copy of it. The named stances pin the line regardless of the slider.
+func _effective_iso() -> float:
+	match threshold:
+		"massif":
+			return -0.30
+		"archipelago":
+			return 0.25
+		"wisp":
+			return 0.45
+		_:
+			return iso_level      # "sponge" — the legacy lineage
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_threshold"):
+		var v: String = str(get_meta("config_threshold")).strip_edges().to_lower()
+		if THRESHOLDS.has(v):
+			threshold = v
+		elif v != "":
+			push_warning("voxelnoise: unknown threshold '%s' — keeping '%s'" % [v, threshold])
+	if has_meta("config_iso_level"):
+		iso_level = clampf(float(str(get_meta("config_iso_level"))), -1.0, 1.0)
+	if has_meta("config_noise_seed"):
+		noise_seed = int(str(get_meta("config_noise_seed")))
+
+
+## Was `pass` — every `#token: value` a map put on a voxelnoise placement was
+## parsed, stashed as metadata and then discarded. Guarded like the family's:
+## an unchanged config touches nothing, so curation_station's blanket
+## apply_grid_config({"emissive": false}) cannot trigger a 32³ rebuild.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var before_threshold: String = threshold
+	var before_iso: float = iso_level
+	var before_seed: int = noise_seed
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	_read_meta_overrides()
+	if threshold == before_threshold and is_equal_approx(iso_level, before_iso) \
+			and noise_seed == before_seed:
+		return
+	_queue_rebuild()

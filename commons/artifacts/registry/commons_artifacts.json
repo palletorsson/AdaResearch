@@ -2142,6 +2142,17 @@
    "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Scene-composition helper (a bare Node3D named Camera) swept into the artifact registry; never an artifact."
   },
   "cctv": {
+   "dna": {
+    "axes": {
+    "oversight": [
+    "monitor",
+    "housing",
+    "sightline",
+    "tally",
+    "dome"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "intermediate",
    "description": "Security camera monitor. Use cctv:rotation:ytrans:scale to configure.",

@@ -393,6 +393,17 @@
       }
     },
     "situated_bench": {
+      "dna": {
+       "axes": {
+       "address": [
+       "witness",
+       "erasure",
+       "footnote",
+       "parallax",
+       "survey"
+       ]
+       }
+      },
       "lookup_name": "situated_bench",
       "scene": "res://commons/artifacts/situated_bench/situated_bench.tscn",
       "class_name": "SituatedBench",

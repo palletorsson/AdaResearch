@@ -29,6 +29,41 @@ const CRYSTAL_BOB_AMOUNT := 0.04
 const CRYSTAL_SPIN_SPEED := 0.4  # Slow Y rotation (rad/s)
 const CAGE_FADE_TIME := 1.5     # Seconds to fade cage after pickup
 
+# ── DNA ──────────────────────────────────────────────────────────────────────
+## AXIS — ON WHAT TERMS THE CRYSTAL IS OFFERED. The word is [[catalyst_pickup]]'s,
+## adopted because the question is identical — this pedestal IS the offer side of
+## the catalyst system, and the thing a still can hold about it is the institution
+## standing around the reward. The values overlap where this artifact's body can
+## build them: catalyst_pickup stages its offers in painted metal and glass, this
+## pedestal owns exactly one material language — glowing wireframe edges — so every
+## institution here is drawn in edges, through the same _build_edge() pipeline, and
+## therefore fades on pickup, hides on lease, returns on re-materialize and answers
+## #cage_color: exactly as the shipped cage does. `chute` (vended) is the one
+## catalyst_pickup value honestly refused: a dispenser cabinet with a dark delivery
+## slot cannot be said in open wireframe, and a wire hopper would be a menu entry,
+## not an argument.
+##
+##   cage     the shipped presentation, byte for byte — a 1 m wireframe cube, the
+##            display case whose truth line is "the cage doesn't protect the
+##            crystal — it frames the invitation".
+##   plinth   the bare offer — no case at all. A low open wireframe dais under the
+##            crystal and nothing between you and it; catalyst_pickup's own reading:
+##            take it.
+##   vitrine  the case glazed shut — every face of the cube gains glazing bars (a
+##            vertical and a horizontal mullion per side, a cross over the top), so
+##            the same cube reads as panes: an exhibit at the last moment.
+##   clamp    held by the machine — the cube is gone; four edges rise from the base
+##            square and pinch to an apex above the crystal, a single finger
+##            reaching down at it. Not offered: GRIPPED.
+##   shrine   venerated — the cube keeps its shape and gains two stepped ground
+##            squares at its foot and a four-hip wireframe roof with a finial.
+##            Approach, don't grab.
+##
+## Appearance only (R5): nothing here touches the crystal spawn, the pickup signal,
+## the sequence binding, the lease clock or the forwarded config keys.
+@export_enum("cage", "plinth", "vitrine", "clamp", "shrine") var offer: String = "cage"
+const OFFERS: PackedStringArray = ["cage", "plinth", "vitrine", "clamp", "shrine"]
+
 var _cage: Node3D = null
 var _crystal: Node3D = null       # The BecomingCatalyst instance
 var _cage_light: OmniLight3D = null
@@ -110,30 +145,137 @@ func _build_cage() -> void:
 
 	var half := CAGE_SIZE * 0.5
 
-	# 8 vertices of the cube, centered at origin, base at y=0
-	var v := [
-		Vector3(-half, 0.0,  -half),  # 0: bottom-back-left
-		Vector3( half, 0.0,  -half),  # 1: bottom-back-right
-		Vector3( half, 0.0,   half),  # 2: bottom-front-right
-		Vector3(-half, 0.0,   half),  # 3: bottom-front-left
-		Vector3(-half, CAGE_SIZE, -half),  # 4: top-back-left
-		Vector3( half, CAGE_SIZE, -half),  # 5: top-back-right
-		Vector3( half, CAGE_SIZE,  half),  # 6: top-front-right
-		Vector3(-half, CAGE_SIZE,  half),  # 7: top-front-left
-	]
+	# plinth and clamp REPLACE the cube; cage, vitrine and shrine all start from
+	# the shipped cube, built in exactly the legacy order so offer=cage keeps
+	# every edge index and name byte for byte.
+	match offer:
+		"plinth":
+			_edges_plinth(half)
+		"clamp":
+			_edges_clamp(half)
+		_:
+			# 8 vertices of the cube, centered at origin, base at y=0
+			var v := [
+				Vector3(-half, 0.0,  -half),  # 0: bottom-back-left
+				Vector3( half, 0.0,  -half),  # 1: bottom-back-right
+				Vector3( half, 0.0,   half),  # 2: bottom-front-right
+				Vector3(-half, 0.0,   half),  # 3: bottom-front-left
+				Vector3(-half, CAGE_SIZE, -half),  # 4: top-back-left
+				Vector3( half, CAGE_SIZE, -half),  # 5: top-back-right
+				Vector3( half, CAGE_SIZE,  half),  # 6: top-front-right
+				Vector3(-half, CAGE_SIZE,  half),  # 7: top-front-left
+			]
 
-	# 12 edges
-	var edges := [
-		[v[0], v[1]], [v[1], v[2]], [v[2], v[3]], [v[3], v[0]],  # bottom
-		[v[4], v[5]], [v[5], v[6]], [v[6], v[7]], [v[7], v[4]],  # top
-		[v[0], v[4]], [v[1], v[5]], [v[2], v[6]], [v[3], v[7]],  # verticals
-	]
+			# 12 edges
+			var edges := [
+				[v[0], v[1]], [v[1], v[2]], [v[2], v[3]], [v[3], v[0]],  # bottom
+				[v[4], v[5]], [v[5], v[6]], [v[6], v[7]], [v[7], v[4]],  # top
+				[v[0], v[4]], [v[1], v[5]], [v[2], v[6]], [v[3], v[7]],  # verticals
+			]
 
-	for i in edges.size():
-		var edge: Array = edges[i]
-		var start: Vector3 = edge[0]
-		var end_pos: Vector3 = edge[1]
-		_build_edge(start, end_pos, i)
+			for i in edges.size():
+				var edge: Array = edges[i]
+				var start: Vector3 = edge[0]
+				var end_pos: Vector3 = edge[1]
+				_build_edge(start, end_pos, i)
+
+	# OFFER dressing, appended AFTER the cube so offer=cage adds nothing at all;
+	# plinth and clamp already said everything above.
+	match offer:
+		"vitrine":
+			_edges_vitrine(half)
+		"shrine":
+			_edges_shrine(half)
+		_:
+			pass
+
+
+## PLINTH — the bare offer. A low open wireframe dais (two squares and four
+## stubs) under the crystal, and nothing between you and it.
+func _edges_plinth(half: float) -> void:
+	var r: float = half * 0.84
+	var h: float = 0.14
+	var b := [
+		Vector3(-r, 0.0, -r), Vector3(r, 0.0, -r),
+		Vector3(r, 0.0, r), Vector3(-r, 0.0, r),
+	]
+	var t := [
+		Vector3(-r, h, -r), Vector3(r, h, -r),
+		Vector3(r, h, r), Vector3(-r, h, r),
+	]
+	var idx: int = 0
+	for i in range(4):
+		_build_edge(b[i], b[(i + 1) % 4], idx)
+		idx += 1
+	for i in range(4):
+		_build_edge(t[i], t[(i + 1) % 4], idx)
+		idx += 1
+	for i in range(4):
+		_build_edge(b[i], t[i], idx)
+		idx += 1
+
+
+## CLAMP — held by the machine. Four edges rise off the base square and pinch to
+## an apex above the crystal, and a single finger reaches down at it. The claw
+## silhouette against the cube is the whole argument: not offered, gripped.
+func _edges_clamp(half: float) -> void:
+	var apex := Vector3(0.0, CAGE_SIZE * 1.32, 0.0)
+	var b := [
+		Vector3(-half, 0.0, -half), Vector3(half, 0.0, -half),
+		Vector3(half, 0.0, half), Vector3(-half, 0.0, half),
+	]
+	var idx: int = 0
+	for i in range(4):
+		_build_edge(b[i], b[(i + 1) % 4], idx)
+		idx += 1
+	for i in range(4):
+		_build_edge(b[i], apex, idx)
+		idx += 1
+	# the finger: from the pinch point down toward the crystal, stopping short
+	_build_edge(apex, Vector3(0.0, 0.92, 0.0), idx)
+
+
+## VITRINE — the case glazed shut. Each side face gains a vertical and a
+## horizontal glazing bar, the top face a cross: the same cube read as panes.
+func _edges_vitrine(half: float) -> void:
+	var idx: int = 12
+	for face in range(4):
+		var ang: float = TAU * float(face) / 4.0
+		var n := Vector3(cos(ang), 0.0, sin(ang))
+		var t := Vector3(-sin(ang), 0.0, cos(ang))
+		var c: Vector3 = n * half
+		var mid_y := Vector3(0.0, CAGE_SIZE * 0.5, 0.0)
+		_build_edge(c + t * -half + mid_y, c + t * half + mid_y, idx)
+		idx += 1
+		_build_edge(c, c + Vector3(0.0, CAGE_SIZE, 0.0), idx)
+		idx += 1
+	_build_edge(Vector3(-half, CAGE_SIZE, 0.0), Vector3(half, CAGE_SIZE, 0.0), idx)
+	idx += 1
+	_build_edge(Vector3(0.0, CAGE_SIZE, -half), Vector3(0.0, CAGE_SIZE, half), idx)
+
+
+## SHRINE — venerated. Two stepped ground squares widen the foot, four hips rise
+## to an apex over the cube and a finial tops it: approach, don't grab.
+func _edges_shrine(half: float) -> void:
+	var idx: int = 12
+	for r in [half * 1.24, half * 1.44]:
+		var rf: float = r
+		var q := [
+			Vector3(-rf, 0.0, -rf), Vector3(rf, 0.0, -rf),
+			Vector3(rf, 0.0, rf), Vector3(-rf, 0.0, rf),
+		]
+		for i in range(4):
+			_build_edge(q[i], q[(i + 1) % 4], idx)
+			idx += 1
+	var apex := Vector3(0.0, CAGE_SIZE * 1.42, 0.0)
+	var tv := [
+		Vector3(-half, CAGE_SIZE, -half), Vector3(half, CAGE_SIZE, -half),
+		Vector3(half, CAGE_SIZE, half), Vector3(-half, CAGE_SIZE, half),
+	]
+	for i in range(4):
+		_build_edge(tv[i], apex, idx)
+		idx += 1
+	_build_edge(apex, apex + Vector3(0.0, 0.16, 0.0), idx)
 
 
 func _build_edge(start: Vector3, end_pos: Vector3, idx: int) -> void:
@@ -291,6 +433,16 @@ const _CATALYST_FORWARD_KEYS = [
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	# offer: which institution stands around the crystal (appearance only). Read
+	# FIRST, and normalised against OFFERS so a typo keeps the shipped cage; a
+	# cage_color in the same token then recolours the rebuilt edges below.
+	if config_data.has("offer"):
+		var o: String = str(config_data["offer"]).strip_edges().to_lower()
+		if OFFERS.has(o) and o != offer:
+			offer = o
+			if _cage != null and not _fading and not _leased_out:
+				_rebuild_cage()
+
 	if config_data.has("cage_color"):
 		var c: Color = Color(config_data["cage_color"])
 		for mat in _edge_materials:
@@ -344,6 +496,20 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	else:
 		# Crystal not yet spawned — defer until _spawn_crystal runs.
 		_pending_crystal_cfg = crystal_cfg
+
+
+## Rebuild only the wireframe housing (an #offer: token arriving after _ready).
+## The light, the crystal, the lease clock and every signal are untouched — this
+## frees the Cage node alone and builds the newly chosen institution through the
+## same _build_edge pipeline, so fade, lease hide/return and #cage_color: keep
+## working at every value.
+func _rebuild_cage() -> void:
+	if _cage != null:
+		_cage.queue_free()
+	_cage = null
+	_cage_edges.clear()
+	_edge_materials.clear()
+	_build_cage()
 
 
 # Truthy check — accepts native bool, "true"/"yes"/"1" strings, non-zero numbers.

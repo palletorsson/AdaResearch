@@ -982,6 +982,17 @@
    "no_auto_ground": true
   },
   "catalyst_pedestal": {
+   "dna": {
+    "axes": {
+    "offer": [
+    "cage",
+    "plinth",
+    "vitrine",
+    "clamp",
+    "shrine"
+    ]
+    }
+   },
    "category": "tools",
    "complexity": "simple",
    "description": "A one-meter wireframe cube display case with the Becoming Catalyst crystal floating and rotating inside. Place this in lab spawn areas. The player walks up, sees the glowing crystal, and grabs it — the cage fades away as the crystal absorbs into their hand.",

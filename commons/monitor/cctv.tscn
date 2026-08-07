@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://btnmwtxi2a65o"]
+[gd_scene load_steps=7 format=3 uid="uid://btnmwtxi2a65o"]
+
+[ext_resource type="Script" path="res://commons/monitor/cctv.gd" id="1_dna"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x8ybs"]
 viewport_path = NodePath("SubViewport")
@@ -18,6 +20,7 @@ resource_local_to_scene = true
 size = Vector3(1.08, 1.08, 0.06)
 
 [node name="Screen" type="Node3D"]
+script = ExtResource("1_dna")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-0.24999999, 0, -2.1855692e-08, 0, 0.25, 0, 2.1855692e-08, 0, -0.24999999, 0, 1.2, 0.43370646)

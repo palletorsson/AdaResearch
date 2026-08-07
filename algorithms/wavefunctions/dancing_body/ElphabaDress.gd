@@ -11,12 +11,50 @@ extends Node3D
 # @identity
 # essence: r(u,v) = waist + (hem-waist)*u, modulated by sin(v*TAU + wave*u)
 # desire: Watch fabric ripple as sine waves propagate through a procedural dress mesh
-# critical_parameter: wave_intensity — transforms static garment into living oscillation
-# triggers: set_wave_intensity() deforms the parametric surface in real-time
+# critical_parameter: wearer — what the garment hangs on. A dress is the one artifact in
+#   this registry that argues about a BODY, and the shipped build argues by omission: the
+#   dress floats empty, worn by nobody, mathematics wearing itself. The axis makes that
+#   omission one member of a family of four answers to "what is inside this?".
+# triggers: set_wave_intensity() deforms the parametric surface in real-time; _ready reads
+#   #wearer: and stages the wearer; apply_grid_config({wearer}).
 # emerges: cloth-like motion from pure trigonometric displacement of vertices
 # needs: VR sliders for wave parameters [missing], skeleton attachment [has]
 # relationships: depends on SurfaceTool mesh generation; contrasts with ruth_asawa_sculpture (fabric vs wire); unlocks wearable wave visualization
 # truth: Fabric is a surface that remembers every wave that passes through it.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-08-06). Every export on this costume was a dial on the
+# CLOTH — radii, wave amplitudes, three greens. You could make the skirt wider, wavier
+# or greener and in every case you got the identical epistemic object: an empty garment,
+# presented as a surface. What a garment ARGUES is the body wearing it, and this one has
+# never had one.
+#
+# The word is `wearer` — adopted, not invented: ten promoted artifacts already carry it
+# for "what holds this thing up" (pollock_painting_in_3d: floor|table|easel|wall;
+# double_helix_scene in this registry: monument|bench|vitrine|terrace). The values are
+# the garment trade's own:
+#
+#   none     THE LEGACY LINEAGE, byte for byte — the dress floats empty. Worn by nobody,
+#            held by nothing: the claim that the wave needs no wearer.
+#   hanger   a wooden hanger and a rail above. The wardrobe: a costume between
+#            performances, the body merely expected.
+#   form     a tailor's dress form — canvas bust above the waist, pole through the hem,
+#            round base below. The atelier: a stand-in body, headless, armless, exactly
+#            as much body as the cloth requires and no more.
+#   figure   a green-skinned wearer — head, neck, shoulders, arms, and the pointed hat.
+#            The performance: Elphaba inside her own mathematics, the costume worn.
+#
+# The dress mesh itself is IDENTICAL in all four — same vertices, same shader, same
+# animation. R5: the wave is the curriculum and no value repaints it. All wearer
+# geometry is appended LAST inside one host node, so "none" is the untouched scene tree.
+#
+# R2 note: wave_amplitude / flutter_intensity / animation_speed were the tempting axes
+# and all three are motion — a still photographs the same dress at one phase regardless.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## AXIS — what the garment hangs on: nothing, the wardrobe, the atelier, or the wearer.
+@export_enum("none", "hanger", "form", "figure") var wearer: String = "none"
+const WEARERS: PackedStringArray = ["none", "hanger", "form", "figure"]
 
 @export_group("Dress Shape")
 @export var waist_radius: float = 0.15
@@ -70,6 +108,11 @@ func _initialize() -> void:
 		_find_skeleton()
 
 	create_dress_mesh()
+
+	# DNA, LAST: the wearer is staged after the dress exists, so nothing about the
+	# legacy build shifts. "none" builds nothing at all.
+	_read_meta_overrides()
+	_build_wearer()
 
 func _find_skeleton() -> void:
 	var parent = get_parent()
@@ -378,5 +421,202 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## LATENT BUG, FIXED HERE. This method existed as `pass`: the artifact advertised a
+## configuration hook and silently discarded every key handed to it. It now stores the
+## config as metadata in the family's shape and re-reads. No shipped placement carries
+## any config on this token, so the change is off the default path either way.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	var was: String = wearer
+	_read_meta_overrides()
+	# Rebuild only when the word actually changed AND the deferred _initialize has
+	# already built once — otherwise _initialize picks the new value up on its own pass.
+	if _initialized and wearer != was:
+		_teardown_wearer()
+		_build_wearer()
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_wearer"):
+		var s: String = str(get_meta("config_wearer")).strip_edges().to_lower()
+		wearer = s if WEARERS.has(s) else wearer
+
+
+# ── wearer: what the garment hangs on ───────────────────────────────────────
+# One host node, appended last; the dress mesh is never touched. All geometry is sized
+# from the same exports the dress reads (waist_radius, hem_radius, dress_length), so a
+# resized costume keeps a fitted wearer. Deterministic — no randf anywhere in this file.
+
+const WEARER_HOST := "WearerStage"
+
+# The wearer's palette: canvas for the atelier, skin-green and hat-black for the figure,
+# warm wood and steel for the wardrobe.
+const CANVAS := Color(0.78, 0.72, 0.62)
+const SKIN_GREEN := Color(0.30, 0.55, 0.30)
+const HAT_BLACK := Color(0.05, 0.05, 0.07)
+const WOOD := Color(0.45, 0.30, 0.18)
+const STEEL := Color(0.55, 0.57, 0.60)
+
+var _wearer_host: Node3D
+
+
+func _build_wearer() -> void:
+	if wearer == "none" or not WEARERS.has(wearer):
+		return                        # the legacy lineage builds nothing at all
+	_wearer_host = Node3D.new()
+	_wearer_host.name = WEARER_HOST
+	add_child(_wearer_host)
+	match wearer:
+		"hanger":
+			_wearer_hanger()
+		"form":
+			_wearer_form()
+		"figure":
+			_wearer_figure()
+		_:
+			pass
+
+
+func _teardown_wearer() -> void:
+	var old: Node = get_node_or_null(WEARER_HOST)
+	if old != null:
+		remove_child(old)
+		old.queue_free()
+	_wearer_host = null
+
+
+## HANGER — the wardrobe. A wooden hanger's two sloped arms carry the waist, a steel
+## hook loops over a rail, and the rail's drop rods rise out of the top of the frame:
+## a costume between performances, the body merely expected.
+func _wearer_hanger() -> void:
+	var wood_mat := _support_mat(WOOD, 0.75, 0.0, 0.0)
+	var steel_mat := _support_mat(STEEL, 0.35, 0.85, 0.0)
+	var arm_len: float = maxf(waist_radius * 1.9, 0.24)
+	for sx in [-1.0, 1.0]:
+		var f: float = float(sx)
+		var arm := BoxMesh.new()
+		arm.size = Vector3(arm_len, 0.035, 0.022)
+		var mi := MeshInstance3D.new()
+		mi.mesh = arm
+		mi.material_override = wood_mat
+		mi.position = Vector3(f * arm_len * 0.46, 0.055, 0)
+		mi.rotation_degrees = Vector3(0, 0, f * -12.0)
+		_wearer_host.add_child(mi)
+	# The hook: a short riser and an open steel loop above it.
+	_support_cylinder(steel_mat, 0.008, 0.10, Vector3(0, 0.14, 0), Vector3.ZERO)
+	var loop := TorusMesh.new()
+	loop.inner_radius = 0.030
+	loop.outer_radius = 0.048
+	var hook := MeshInstance3D.new()
+	hook.mesh = loop
+	hook.material_override = steel_mat
+	hook.position = Vector3(0, 0.23, 0)
+	# Default torus lies flat with its hole along Y; rolled about Z the hole runs
+	# along X, so the rail threads the loop.
+	hook.rotation_degrees = Vector3(0, 0, 90)
+	_wearer_host.add_child(hook)
+	# The rail the hook hangs from, with drop rods rising out of frame.
+	_support_cylinder(steel_mat, 0.018, 1.2, Vector3(0, 0.27, 0), Vector3(0, 0, 90))
+	for rx in [-0.55, 0.55]:
+		_support_cylinder(steel_mat, 0.012, 0.62, Vector3(rx, 0.58, 0), Vector3.ZERO)
+
+
+## FORM — the atelier. A canvas bust above the waist, exactly as much body as the cloth
+## requires; a steel pole through the hem to a round base below it.
+func _wearer_form() -> void:
+	var canvas_mat := _support_mat(CANVAS, 0.92, 0.0, 0.0)
+	var steel_mat := _support_mat(STEEL, 0.4, 0.8, 0.0)
+	var wood_mat := _support_mat(WOOD, 0.7, 0.0, 0.0)
+	var torso_r: float = maxf(waist_radius * 0.78, 0.08)
+	# The bust: a capsule torso, a neck, a wooden neck button.
+	var torso := CapsuleMesh.new()
+	torso.radius = torso_r
+	torso.height = torso_r * 2.0 + 0.22
+	var tmi := MeshInstance3D.new()
+	tmi.mesh = torso
+	tmi.material_override = canvas_mat
+	tmi.position = Vector3(0, 0.16, 0)
+	_wearer_host.add_child(tmi)
+	_support_cylinder(canvas_mat, torso_r * 0.38, 0.10, Vector3(0, 0.37, 0), Vector3.ZERO)
+	_support_cylinder(wood_mat, torso_r * 0.46, 0.035, Vector3(0, 0.435, 0), Vector3.ZERO)
+	# The pole, from inside the skirt down past the hem to the base.
+	var hem_y: float = -dress_length
+	_support_cylinder(steel_mat, 0.014, dress_length * 0.55 + 0.38, Vector3(0, hem_y * 0.72 - 0.19, 0), Vector3.ZERO)
+	_support_cylinder(steel_mat, hem_radius * 0.62, 0.024, Vector3(0, hem_y - 0.40, 0), Vector3.ZERO)
+
+
+## FIGURE — the performance. Green skin, black pointed hat: a head, neck, shoulders,
+## and two arms held just clear of the skirt. Elphaba inside her own mathematics.
+func _wearer_figure() -> void:
+	var skin := _support_mat(SKIN_GREEN, 0.6, 0.0, 0.18)
+	var hat := _support_mat(HAT_BLACK, 0.55, 0.1, 0.0)
+	# Head and neck.
+	_support_sphere(skin, 0.085, Vector3(0, 0.34, 0), Vector3.ONE)
+	_support_cylinder(skin, 0.034, 0.09, Vector3(0, 0.245, 0), Vector3.ZERO)
+	# Shoulders: a flattened sphere bridging into the waistline.
+	_support_sphere(skin, 0.16, Vector3(0, 0.175, 0), Vector3(1.0, 0.45, 0.62))
+	# Arms and hands, angled outward past the skirt's silhouette.
+	for sx in [-1.0, 1.0]:
+		var f: float = float(sx)
+		var arm := CapsuleMesh.new()
+		arm.radius = 0.032
+		arm.height = 0.40
+		var ami := MeshInstance3D.new()
+		ami.mesh = arm
+		ami.material_override = skin
+		ami.position = Vector3(f * 0.235, 0.01, 0)
+		ami.rotation_degrees = Vector3(0, 0, f * -24.0)
+		_wearer_host.add_child(ami)
+		_support_sphere(skin, 0.040, Vector3(f * 0.315, -0.165, 0), Vector3.ONE)
+	# The pointed hat: brim disc and cone.
+	_support_cylinder(hat, 0.165, 0.016, Vector3(0, 0.402, 0), Vector3.ZERO)
+	var cone := CylinderMesh.new()
+	cone.top_radius = 0.0
+	cone.bottom_radius = 0.10
+	cone.height = 0.26
+	var cmi := MeshInstance3D.new()
+	cmi.mesh = cone
+	cmi.material_override = hat
+	cmi.position = Vector3(0, 0.53, 0)
+	cmi.rotation_degrees = Vector3(0, 0, -6.0)
+	_wearer_host.add_child(cmi)
+
+
+# ── wearer helpers ──────────────────────────────────────────────────────────
+
+func _support_mat(c: Color, rough: float, metal: float, glow: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	m.metallic = metal
+	if glow > 0.0:
+		m.emission_enabled = true
+		m.emission = c
+		m.emission_energy_multiplier = glow
+	return m
+
+
+func _support_sphere(mat: Material, r: float, pos: Vector3, scl: Vector3) -> void:
+	var mesh := SphereMesh.new()
+	mesh.radius = r
+	mesh.height = r * 2.0
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = pos
+	mi.scale = scl
+	_wearer_host.add_child(mi)
+
+
+func _support_cylinder(mat: Material, r: float, h: float, pos: Vector3, rot_deg: Vector3) -> void:
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = r
+	mesh.bottom_radius = r
+	mesh.height = h
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = pos
+	mi.rotation_degrees = rot_deg
+	_wearer_host.add_child(mi)

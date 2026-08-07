@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx4amv6r8f33k"]
+[gd_scene load_steps=3 format=3 uid="uid://dx4amv6r8f33k"]
 
 [ext_resource type="PackedScene" uid="uid://tiamaxuywcn7" path="res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_1955.tscn" id="1_l5wed"]
+[ext_resource type="Script" path="res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_collection.gd" id="2_dna"]
 
 [node name="randomNumberBookPageCollection" type="Node3D"]
+script = ExtResource("2_dna")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999929, -0.0119378, 0, 0.0119378, 0.999929, 0.114775, -0.183014, 4.77024)

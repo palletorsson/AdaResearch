@@ -812,6 +812,16 @@
    "qfep_connection": "The mean is hard-coded to the middle of the screen; only deviation is delegated to chance, on a leash of sixty pixels of standard deviation. What the accumulating smudge demonstrates is not randomness but its licensing — wander permitted against a promised return."
   },
   "Random_Rotate_Random_XYZ": {
+   "dna": {
+    "fixture": {"rotate_seed": 20260807},
+    "axes": {
+    "visitation": [
+    "bell",
+    "even",
+    "weather"
+    ]
+    }
+   },
    "category": "primitives",
    "complexity": "intermediate",
    "description": "Applies random rotation on all three axes (X, Y, Z), creating fully randomized orientations for chaotic arrangements.",
@@ -4657,6 +4667,15 @@
    }
   },
   "noisesphere": {
+   "dna": {
+    "axes": {
+    "readout": [
+    "relief",
+    "plate",
+    "none"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "advanced",
    "description": "Noise-deformed hemisphere rendered with the planet shader for atmospheric dome effects.",
@@ -7616,6 +7635,17 @@
    "qfep_connection": "Butterflies scattered by draw — position, wing-beat, drift all sampled. The prettiest argument in the room that entropy is freedom: nothing places them, and that is why they look alive."
   },
   "random_color_book_page_collection": {
+   "dna": {
+    "axes": {
+    "disclosure": [
+    "works",
+    "oracle",
+    "tally",
+    "ledger",
+    "origin"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "Interactive collection of randomly generated colored book pages using procedural algorithms",
@@ -12216,6 +12246,16 @@
    "qfep_connection": "Randomness lives only on the lattice; everything between is interpolation, and the sliders let you swap None for Linear for Smoothstep over the very same dice rolls. Smoothness exposed as a post-production decision — the noise never changed, only your policy for the gaps."
   },
   "voxelnoise": {
+   "dna": {
+    "axes": {
+    "threshold": [
+    "sponge",
+    "massif",
+    "archipelago",
+    "wisp"
+    ]
+    }
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "3D noise visualized as voxels — cubes appear or disappear based on noise threshold, revealing the underlying scalar field as solid geometry.",

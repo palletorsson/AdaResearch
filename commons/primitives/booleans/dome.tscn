@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://dauqfg13lhdvi"]
+[gd_scene load_steps=4 format=3 uid="uid://dauqfg13lhdvi"]
 
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="1_axc48"]
+[ext_resource type="Script" path="res://commons/primitives/booleans/dome.gd" id="2_dna"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw16f"]
 render_priority = 0
@@ -14,6 +15,7 @@ shader_parameter/emission_strength = 2.0
 shader_parameter/show_interior = true
 
 [node name="Node3D" type="Node3D" unique_id=1266018762]
+script = ExtResource("2_dna")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1312668756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.684956, 0)
