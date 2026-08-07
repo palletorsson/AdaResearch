@@ -326,14 +326,15 @@ static func brushed_metal(base: Color = STEEL, roughness: float = 0.30,
 	m.metallic = 1.0
 	m.metallic_specular = 0.55
 	_rough(m, clampf(roughness + w * 0.24, 0.03, 0.96), GRAIN_BRUSH, LO_METAL)
-	# Normal strength cut ~3x on the MANUFACTURED surfaces, from the same measurement
-	# that fixed rams_body: a micro normal at 0.25 was legible as bark on a flat slab,
-	# and on light_sphere's curved dome the metals came back with an orange-peel crinkle
-	# whose serration was visible in the SILHOUETTE. Brushed steel, machined aluminium,
-	# a powder-coated housing and injection-moulded plastic are all surfaces whose grain
-	# should live in the highlight, not in the form. worn_metal, cast_metal, rubber and
-	# concrete keep their strengths — those are genuinely rough and are meant to read.
-	_normal(m, GRAIN_BRUSH, BUMP_FINE, 0.10 + w * 0.16)
+	# THESE STRENGTHS WERE CUT ~3x AND THE CUT WAS REVERTED. The reasoning was sound and
+	# the result was measured: the blind vote fell from 60.2% to 38.9% in one round, and
+	# the materials lens — the one that reads exactly this — went 63% to 32%. Removing
+	# micro-normal removed the only thing making most of these surfaces read as anything,
+	# and the critics' oldest and loudest complaint has always been 'no roughness
+	# variation, flat plastic'. The bench's bark was real, but it was a fact about a LARGE
+	# FLAT SLAB carrying a grain sized for a small part — a scale problem, fixed at
+	# rams_body and per-artifact — not a reason to flatten steel and moulded plastic too.
+	_normal(m, GRAIN_BRUSH, BUMP_FINE, 0.30 + w * 0.45)
 	m.anisotropy_enabled = true
 	m.anisotropy = 0.72
 	# The stretch IS the brush: 3 tiles across the grain, 40 along it.
@@ -356,7 +357,7 @@ static func machined_metal(base: Color = ALUMINIUM, roughness: float = 0.22,
 	m.metallic = 1.0
 	m.metallic_specular = 0.6
 	_rough(m, clampf(roughness + w * 0.20, 0.03, 0.96), GRAIN_MICRO, LO_METAL)
-	_normal(m, GRAIN_MICRO, BUMP_FINE, 0.06 + w * 0.11)
+	_normal(m, GRAIN_MICRO, BUMP_FINE, 0.18 + w * 0.30)
 	m.anisotropy_enabled = true
 	m.anisotropy = 0.25
 	_triplanar(m, Vector3(6.0, 6.0, 6.0))
@@ -457,7 +458,7 @@ static func terminal_body(c: Color = TERMINAL_BODY, wear: float = 0.30) -> Stand
 	m.metallic = clampf(0.12 + w * 0.62, 0.0, 1.0)
 	m.metallic_specular = 0.5
 	_rough(m, clampf(0.42 + w * 0.20, 0.05, 0.96), GRAIN_BRUSH, LO_METAL)
-	_normal(m, GRAIN_BRUSH, BUMP_FINE, 0.10 + w * 0.18)
+	_normal(m, GRAIN_BRUSH, BUMP_FINE, 0.30 + w * 0.50)
 	m.anisotropy_enabled = true
 	m.anisotropy = 0.55
 	m.clearcoat_enabled = true
@@ -499,7 +500,7 @@ static func hard_plastic(base: Color = PLASTIC_WHITE, gloss: float = 0.55,
 	m.metallic = 0.0
 	m.metallic_specular = 0.5
 	_rough(m, clampf(lerpf(0.52, 0.12, g) + w * 0.18, 0.03, 0.98), GRAIN_MICRO, LO_HARD)
-	_normal(m, GRAIN_MICRO, BUMP_FINE, 0.04 + w * 0.09)
+	_normal(m, GRAIN_MICRO, BUMP_FINE, 0.10 + w * 0.25)
 	m.clearcoat_enabled = true
 	m.clearcoat = g * 0.55
 	m.clearcoat_roughness = clampf(0.05 + (1.0 - g) * 0.35, 0.0, 1.0)

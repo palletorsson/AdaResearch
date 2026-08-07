@@ -159,6 +159,17 @@ func _run() -> void:
 		# A gradient-free flat backdrop still bands where the ground disc fades
 		# into it, and an 8-bit PNG shows it. Debanding is a dither in the
 		# tonemapper — sub-millisecond, and the only fix that survives the PNG.
+		# OFF — this is the "television static" three rounds of critics kept finding on
+		# dome's shadowed faces. A dither is noise you bet stays under the quantisation
+		# step; rendered at 2x and then DOWNSAMPLED to 760, that bet loses, because
+		# neighbouring dither samples average into values that no longer cancel. What was
+		# meant to be invisible becomes visible speckle, screen-aligned and not
+		# foreshortening — exactly as reported, on the dark faces where the step is
+		# widest relative to the signal.
+		#
+		# It was blamed on SSIL twice, by the critics and by me, and SSIL was cut to 0.18
+		# and then to 0.0 with the speckle unchanged at every step. Ablation found this;
+		# reasoning did not, three times running.
 		vp.use_debanding = true
 	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	root.add_child(vp)
@@ -642,6 +653,14 @@ const SHOW_SSAO_DETAIL: float = 0.6
 ## RECEDING face and do not foreshorten, so they cannot be surface texture. Measured std
 ## 15.7 on a mean of 40 with peaks at 134. The coloured contact bleed is worth having; it
 ## is not worth having at three times the amplitude of the shading it sits on.
+##
+## AND THEN OFF ENTIRELY. Cutting to 0.18 was not enough: the next blind round still called
+## it "the worst single artifact in the whole set" — "dense black-and-white vertical
+## speckle, television static" on dome's shadowed face, with the floor's high-frequency
+## std measured jumping 0.77 -> 3.11 across one horizontal band. Reducing a sampling
+## artifact makes it quieter, not correct, and a still frame gives SSIL no temporal history
+## to resolve against no matter how low the intensity. SSAO already darkens contact and
+## the sky IBL already bounces light; the coloured bleed was never worth a visible defect.
 const SHOW_SSIL_RADIUS_K: float = 2.2
 const SHOW_SSIL_INTENSITY: float = 0.18
 

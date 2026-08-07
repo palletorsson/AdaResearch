@@ -63,7 +63,15 @@ const CSG_NODE := "CSGBox3D"
 ## Detail tiling for the cast grain, in UV units per metre. One texture period every
 ## ~3 m across a 20 m wall: coarse enough to read as aggregate at arm's length, fine
 ## enough that the repeat is invisible at the sweep's framing.
-const GRAIN_TILES_PER_M: float = 0.32
+## COARSENED from 0.32 after six wrong ablations. At one period every ~3 m, and a 20 m
+## wall spanning ~300 px in the sweep, a grain FEATURE lands on one or two pixels — right
+## at Nyquist, which is not detail, it is aliasing. Under the default rig's flat ambient it
+## stayed invisible; under a directional key it resolved into the vertical speckle three
+## rounds of critics called "television static" and blamed, as I did, on SSIL, SSR,
+## debanding, SSAO, DOF and soft shadows in turn — every one of them ablated to zero with
+## the speckle completely unchanged. A feature has to be several pixels wide to be a
+## surface; below that it is noise no post-process can rescue.
+const GRAIN_TILES_PER_M: float = 0.10
 
 ## An operand gets re-tessellated only if its own radius asks for more than the scene
 ## authored. Both authored cylinders already clear this bar (64 and 32 sides for 9 m
