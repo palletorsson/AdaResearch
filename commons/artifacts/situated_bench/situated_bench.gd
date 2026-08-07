@@ -19,6 +19,20 @@ class_name SituatedBench
 ## truth: there is no view from nowhere; every reading has a standpoint. The shape you
 ##   measure is a fact about the data AND about where you stood to measure it.
 
+## SURFACE PASS — 2026-08-07. The bench was assembled out of Godot defaults: one
+## roughness value per object, metallic 0.6 on the legs (which is neither metal nor
+## dielectric), zero-radius edges that catch no highlight, and nothing underneath to
+## say the thing stood on a floor. It is furniture in a laboratory — a phenolic-resin
+## worktop on turned steel legs — and the whole argument of furniture is that somebody
+## used it. So this pass is wear, not effects: chamfers rubbed bright, the underside
+## darkened where a floor and a pair of shoes live, a two-scale patina across the top,
+## metal shaded as metal, and a contact shadow so the bench sits instead of hovering.
+## The instrument light is left exactly where it was — three eyes, three sightlines,
+## one core. Not one position, size or rotation moved at any address; the single
+## geometric edit is a hidden centimetre in parallax, and it is documented there.
+const PBR := preload("res://commons/render/pbr_kit.gd")
+const MK := preload("res://commons/render/mesh_kit.gd")
+
 # NOTE: `emissive` is declared by the parent (embodied_prop.gd) — do not redeclare.
 @export var cool_white: Color = Color(0.90, 0.93, 1.0)
 @export var slate: Color = Color(0.20, 0.23, 0.30)
@@ -119,6 +133,186 @@ func _truthy(value) -> bool:
 	return false
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# SURFACES AND MESH. Every address arm builds through the same five primitives and
+# three material builders it inherits from embodied_prop. Overriding them here
+# re-finishes all five arms at once, and — because not one call site is touched —
+# every position, size and rotation stays exactly where the shipped bench put it.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## The dielectric surfaces: the worktop, the island tops, the slabs of overpaint.
+## A lab bench top is cast phenolic resin, not paint — metallic 0, no clear coat, a
+## fine speckle in the roughness so the highlight is a soft field instead of one flat
+## wash, then grunge on a second, coarser scale for the patina of use.
+##
+## `rough` is honoured rather than replaced, but PRE-DIVIDED: Godot computes
+## ROUGHNESS = roughness * texture, so a scalar handed over raw comes out glossier
+## than asked for by the texture's mean. The 0.82 bias is deliberate — 0.85 dead flat
+## was a guess, and a resin top that has been leaned on is satin. The spread between
+## the worktop (0.70) and the chalkier overpaint (0.78) survives it.
+func _matte_mat(c: Color, rough: float = 0.8, metal: float = 0.0) -> StandardMaterial3D:
+	if metal > 0.35:
+		return _steel_mat(c)
+	var w: float = clampf(rough - 0.55, 0.0, 0.45)
+	var m: StandardMaterial3D = PBR.rams_body(c, w)
+	var target: float = clampf(rough * 0.82, 0.30, 0.92)
+	var mean: float = (PBR.LO_PAINT + 1.0) * 0.5
+	m.roughness = clampf(target / mean, 0.02, 1.0)
+	# 0.24 + w*0.6 put the worktop at 0.42 and the render came back as bark. A lab
+	# bench that has been leaned on is SATIN — the wear shows as a slight unevenness
+	# in the sheen, not as texture you could feel through a glove. Halved, and the
+	# kit's detail normal now scales with this number instead of ignoring it.
+	PBR.weather(m, 0.12 + w * 0.3)
+	PBR.crevice_ao(m, 0.45)
+	return m
+
+
+## Legs, posts, the pillar under the data. These are METAL and were not being shaded
+## as metal: albedo 0.30 grey at metallic 0.6 sits in the physically meaningless
+## middle, and it is the loudest amateur tell on the bench. A bench leg is turned bar
+## stock, so machined rather than brushed — metallic 1.0, a measured steel
+## reflectance the caller's grey is pulled toward, micro-pitting in the roughness.
+##
+## The parent lit these with a token emission — energy 0.1 over an emission colour
+## already scaled to 0.3, so about 0.009 of radiance. It went. What replaces it is
+## ROUGHNESS, not a trick: 0.47 rather than a polished 0.30, because a full metal
+## with no reflection source has only the direct lights to work with and a tight
+## lobe would leave the legs black between the two highlights. A satin leg catches
+## both. Nobody polishes bench legs anyway.
+##
+## No Fresnel rim here, deliberately: Godot multiplies diffuse_light — which is
+## where rim lands — by (1 - metallic), so edge_light() on a metallic 1.0 surface
+## is a line of code that does nothing at all.
+func _steel_mat(c: Color) -> StandardMaterial3D:
+	var m: StandardMaterial3D = PBR.machined_metal(c.lerp(PBR.STEEL, 0.45), 0.42, 0.26)
+	PBR.weather(m, 0.28)
+	# Every upright on this bench is 2.8-6 cm across. The kit authors its triplanar
+	# detail at 6 tiles/m, which never repeats on a part that thin and so reads as
+	# flat colour; 8x lands the grain near a centimetre. Fitted here, and flagged so
+	# _fit_detail leaves it alone.
+	PBR.scale_detail(m, 8.0)
+	m.set_meta("bench_fit", true)
+	return m
+
+
+## Instrument light — the eyes, the sightlines, the wire cage, the readings. Same
+## energy rule as the parent (and as _process, which re-applies it every frame), so
+## the `emissive` export behaves exactly as before. What changes is that the albedo
+## is darkened relative to the emission: a surface carrying both at full value clips
+## to white the moment any scene light lands on it, and a clipped white is the one
+## colour mistake that cannot be graded back.
+func _glow_mat(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = PBR.emissive(c, energy if emissive else energy * 0.3)
+	m.roughness = 0.28
+	return m
+
+
+## Rescale a material's triplanar detail to the part it is about to dress. The kit's
+## scale_detail MULTIPLIES, so a material shared by two meshes of different sizes
+## would compound — the meta flag makes it once-only, at the first and largest use.
+## Emissive parts are skipped: their surface is light, not finish.
+func _fit_detail(mat: Material, longest: float) -> void:
+	if not (mat is StandardMaterial3D):
+		return
+	var m: StandardMaterial3D = mat as StandardMaterial3D
+	if m.emission_enabled or m.has_meta("bench_fit"):
+		return
+	m.set_meta("bench_fit", true)
+	if longest >= 0.45:
+		return
+	PBR.scale_detail(m, clampf(1.0 / maxf(longest, 0.02), 1.0, 8.0))
+
+
+## A chamfered box. Every real edge has a break on it, and that break is the
+## highlight line that separates a slab from a rendered box. `wear` scales with the
+## part: the metre-wide worktop takes the full vertex-colour gradient — chamfers
+## rubbed bright where hands and hips pass, underside darkened where a floor and a
+## pair of shoes live — while a 7 cm readout cube takes almost none.
+func _box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var longest: float = maxf(size.x, maxf(size.y, size.z))
+	_fit_detail(mat, longest)
+	# Wear ceiling cut from 0.45: the metre-wide worktop hit the cap, and the baked
+	# vertex darkening stacked on top of the grime multiply and the AO map until a
+	# slate bench read as a black one. Three subtle effects agreeing on "darker" is
+	# not subtle. The gradient is still there; it just no longer eats the colour.
+	return PBR.box(center, size, mat, -1.0, clampf((longest - 0.06) * 0.6, 0.0, 0.20))
+
+
+## A cylinder with chamfered rims. A raw CylinderMesh ends in a zero-radius corner
+## that vanishes against any background; the chamfer draws a bright ring at the foot
+## of every leg and the top of every post. 18 radial segments instead of Godot's 64 —
+## a 6 cm bar does not need 64, and the saving is what pays for the chamfer.
+func _cylinder(center: Vector3, radius: float, height: float, mat: Material) -> MeshInstance3D:
+	_fit_detail(mat, maxf(radius * 2.0, height))
+	var mi := MeshInstance3D.new()
+	mi.mesh = MK.cylinder(radius, height, 18, clampf(minf(radius, height) * 0.16, 0.0009, 0.005))
+	mi.material_override = mat
+	mi.position = center
+	return mi
+
+
+## The sightlines and the tie bars. Thin glowing rods, so ten sides is plenty, and
+## the kit's transform is the parent's to the last decimal — same basis convention,
+## same midpoint, same fallback axis.
+func _cylinder_between(a: Vector3, b: Vector3, radius: float, mat: Material) -> MeshInstance3D:
+	return PBR.pipe(a, b, radius, mat, 10)
+
+
+## Godot's SphereMesh defaults to 64x32 — 4096 triangles for a 5 cm instrument eye.
+## At 32x16 the silhouette of the largest sphere here moves by six tenths of a
+## millimetre and the bench sheds three quarters of its triangles, which is where the
+## VR budget for the chamfers and the noise comes from.
+func _sphere(center: Vector3, radius: float, mat: Material) -> MeshInstance3D:
+	_fit_detail(mat, radius * 2.0)
+	var mesh := SphereMesh.new()
+	mesh.radius = radius
+	mesh.height = radius * 2.0
+	mesh.radial_segments = 32
+	mesh.rings = 16
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi
+
+
+## Same argument as the sphere: TorusMesh ships at 64x32 and there are up to six of
+## them on this bench. 36x14 on a 6 mm tube is smooth at any distance a body can
+## stand at.
+func _torus(center: Vector3, radius: float, tube: float, mat: Material) -> MeshInstance3D:
+	_fit_detail(mat, tube * 2.0)
+	var mesh := TorusMesh.new()
+	mesh.inner_radius = radius - tube
+	mesh.outer_radius = radius + tube
+	mesh.rings = 36
+	mesh.ring_segments = 14
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi
+
+
+## The parent outlines every label in pure black. Nothing in a lit room is 0,0,0;
+## the outline takes the capture rig's own background instead, so it reads as depth
+## behind the type rather than as ink drawn over it.
+func _billboard_label(text: String, pos: Vector3, font: int, color: Color) -> Label3D:
+	var l: Label3D = super._billboard_label(text, pos, font, color)
+	l.outline_modulate = Color(0.045, 0.050, 0.062, 1.0)
+	return l
+
+
+## The contact shadow that makes the bench SIT. A Decal, so it conforms to whatever
+## floor a map puts under it instead of z-fighting a flat quad, and a Decal is not a
+## light, so it costs nothing against the VR light budget. It is also not a
+## MeshInstance3D, so the capture AABB — and every framing number ever measured on
+## this artifact — stays exactly where it was.
+func _ground_shadow(radius: float, at: Vector3 = Vector3.ZERO) -> void:
+	var d: Decal = PBR.ground_shadow(radius, 0.5, 0.10)
+	d.position += at
+	add_child(d)
+
+
 func _build() -> void:
 	_eye_mats = []
 	_line_mats = []
@@ -140,10 +334,12 @@ func _build() -> void:
 			_build_witness()
 
 
-## WITNESS — the legacy lineage, byte for byte. Every statement below is the
-## shipped _build() body, unmoved and unedited, so address=witness reproduces
-## the exact scene tree (same children, same order) the six placed benches
-## have always built.
+## WITNESS — the legacy lineage. Every statement below is the shipped _build()
+## body, unmoved and unedited, so address=witness still builds the same children
+## in the same order, at the same positions and the same sizes, that the six
+## placed benches have always built. The one addition is the contact shadow every
+## address now carries: a Decal, not a mesh, so it changes no silhouette and no
+## measured AABB — it only stops the bench hovering over a map's floor.
 func _build_witness() -> void:
 	# --- bench base ~1 m ---
 	var base_mat: StandardMaterial3D = _matte_mat(slate, 0.85)
@@ -152,6 +348,7 @@ func _build_witness() -> void:
 	for sx in [-0.42, 0.42]:
 		for sz in [-0.42, 0.42]:
 			add_child(_cylinder(Vector3(sx, 0.18, sz), 0.03, 0.36, leg_mat))
+	_ground_shadow(0.62)
 
 	# --- central dataset object: a faceted, ambiguous core (the SAME data) ---
 	_center_mat = _glow_mat(cool_white, 0.9)
@@ -215,7 +412,8 @@ func _build_witness() -> void:
 # ─────────────────────────────────────────────────────────────────────────────
 
 ## The shipped bench base and legs, reused by every address that keeps a
-## common table (erasure, footnote, survey).
+## common table (erasure, footnote, survey) — including the one contact shadow
+## that comes with having one table to stand on.
 func _variant_base() -> void:
 	var base_mat: StandardMaterial3D = _matte_mat(slate, 0.85)
 	add_child(_box(Vector3(0.0, 0.36, 0.0), Vector3(1.0, 0.16, 1.0), base_mat))
@@ -223,6 +421,7 @@ func _variant_base() -> void:
 	for sx in [-0.42, 0.42]:
 		for sz in [-0.42, 0.42]:
 			add_child(_cylinder(Vector3(sx, 0.18, sz), 0.03, 0.36, leg_mat))
+	_ground_shadow(0.62)
 
 
 ## The central dataset core. tint_amt 0 = the shipped neutral core; survey
@@ -339,9 +538,15 @@ func _build_parallax() -> void:
 		var ang: float = float(si) * TAU / 3.0 - PI / 2.0
 		var dir_v: Vector3 = Vector3(cos(ang), 0.0, sin(ang))
 		var island_c: Vector3 = dir_v * 0.48
-		# the island: its own tabletop on its own single leg
+		# the island: its own tabletop on its own single leg. The leg used to stop
+		# at exactly y = 0.28 and the tabletop's underside starts at exactly
+		# y = 0.28 — two coplanar faces, which is a z-fight, not a joint. One
+		# centimetre of embedment fixes it, and the extra length is buried inside an
+		# opaque slab three times its width, so not a pixel of silhouette moves.
 		add_child(_box(island_c + Vector3(0.0, 0.36, 0.0), Vector3(0.34, 0.16, 0.34), top_mat))
-		add_child(_cylinder(island_c + Vector3(0.0, 0.14, 0.0), 0.03, 0.28, leg_mat))
+		add_child(_cylinder(island_c + Vector3(0.0, 0.145, 0.0), 0.03, 0.29, leg_mat))
+		# each island answers to its own patch of floor — three contacts, no shared one
+		_ground_shadow(0.26, island_c)
 		# tie bar reaching for the centre and stopping short of it
 		var tie: StandardMaterial3D = _glow_mat(accents[si].lightened(0.15), 0.6)
 		add_child(_cylinder_between(dir_v * 0.34 + Vector3(0.0, 0.44, 0.0), dir_v * 0.12 + Vector3(0.0, 0.44, 0.0), 0.007, tie))

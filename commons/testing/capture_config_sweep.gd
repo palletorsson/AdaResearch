@@ -14,6 +14,40 @@
 ## Run (via the watchdog, expecting <out_dir>/_done.txt):
 ##   godot --path . --xr-mode off --no-window \
 ##     --script res://commons/testing/capture_config_sweep.gd -- --spec=<abs/res path>
+##
+## ── THE SHOWCASE PROFILE (opt-in, default OFF) ───────────────────────────────
+##
+## There are two lighting rigs in this file and only one of them may change.
+##
+## The DEFAULT rig — flat colour background, AMBIENT_SOURCE_COLOR, FILMIC, key +
+## fill — is the rig that took every published DNA gallery and produced every
+## bite number in doc/reports/sweep_*_bite.json. Those numbers are a time series.
+## Re-lighting the bench retroactively invalidates the series, so the default
+## path below is frozen: same nodes, same order, same values, same viewport size.
+##
+## The SHOWCASE rig is what Forward+ can actually do, and it is selected three
+## ways, first match wins:
+##
+##   1. command line   --showcase   (or --showcase=1 / =true / =0 / =false)
+##   2. environment    ADA_SWEEP_SHOWCASE=1
+##   3. spec JSON      {"showcase": true, ...}
+##
+## (2) exists because tools/cabinet_sweep.py builds both the spec and the Godot
+## command line and neither is this agent's to edit; an env var rides in on the
+## subprocess for free. (1) beats (2) beats (3).
+##
+## WHAT IT CHANGES FOR WHOEVER READS THE PNGs. Framing is identical — same FOV,
+## same PAD, same _framing, same 760x760 output — so a showcase tile and a
+## default tile line up pixel for pixel in SILHOUETTE. Shading does not:
+##   · the frame corners stay a FLAT colour (deliberate — tools/artifact_dna_
+##     critic.py reads pixel (3,3) as "background by construction" and would
+##     mis-bbox a gradient), but
+##   · there is now a lit ground disc under the subject, so the critic's subject
+##     box grows to include the contact shadow and the pool of light around it,
+##     and focus% therefore reads LOWER than the same axis measured on the
+##     default rig. Showcase frames are for looking at. Do not compare their
+##     bite numbers to the historical series. That is the whole reason the
+##     profile is opt-in rather than an improvement to the default.
 
 extends SceneTree
 
@@ -43,12 +77,41 @@ var _spec_path: String = ""
 ## which cabinet_sweep fills from the registry's dna.framing.
 var _framing: float = 1.0
 
+## OFF unless something asks for it. See the header for the three switches and
+## for why the default rig is frozen.
+var _showcase: bool = false
+## -1 = nothing on the command line or in the environment, so the spec decides.
+## 0/1 = an explicit override that beats the spec.
+var _showcase_override: int = -1
+
+## Live showcase nodes, null on the default path. Held as members because the
+## ground and the key light have to be re-fitted to each sweep's subject size
+## AFTER the union AABB is known, which is long after _stage has run.
+var _show_ground: MeshInstance3D = null
+var _show_ground_mat: StandardMaterial3D = null
+var _show_key: DirectionalLight3D = null
+var _show_env: Environment = null
+var _show_attrs: CameraAttributesPractical = null
+
 
 func _initialize() -> void:
 	for raw in OS.get_cmdline_user_args():
 		var a := String(raw).strip_edges()
 		if a.begins_with("--spec="):
 			_spec_path = a.substr(7)
+		elif a == "--showcase" or a == "--showcase=1" or a == "--showcase=true":
+			_showcase_override = 1
+		elif a == "--showcase=0" or a == "--showcase=false":
+			_showcase_override = 0
+	# The env var only speaks when the command line did not. cabinet_sweep.py owns
+	# the argv for this script and is out of scope to edit, so this is the hook an
+	# orchestrator can reach without touching tools/.
+	if _showcase_override < 0:
+		var envflag: String = OS.get_environment("ADA_SWEEP_SHOWCASE").strip_edges().to_lower()
+		if envflag == "1" or envflag == "true" or envflag == "yes" or envflag == "on":
+			_showcase_override = 1
+		elif envflag == "0" or envflag == "false" or envflag == "no" or envflag == "off":
+			_showcase_override = 0
 	_run()
 
 
@@ -60,6 +123,15 @@ func _run() -> void:
 	# dna.host from the registry, for artifacts that only exist as an operation on
 	# a host map's grid. Empty means the artifact stands alone, as before.
 	var host_spec: Dictionary = spec.get("host", {})
+	# Resolve the profile before anything is built. Command line / env beat the
+	# spec; absent all three this stays false and every line below behaves exactly
+	# as it did before the profile existed.
+	if _showcase_override >= 0:
+		_showcase = _showcase_override == 1
+	else:
+		_showcase = bool(spec.get("showcase", false))
+	if _showcase:
+		print("SHOWCASE profile ON — ACES, sky IBL, three-point rig, ground, %dx supersample" % SHOW_SUPERSAMPLE)
 	var scene_path: String = str(spec.get("scene", ""))
 	var out_dir: String = str(spec.get("out_dir", "res://ada_run/sweep"))
 	var variants: Array = spec.get("variants", [])
@@ -69,9 +141,25 @@ func _run() -> void:
 		return
 	DirAccess.make_dir_recursive_absolute(out_dir)
 
+	# SUPERSAMPLING, and why the PNG is still 760x760. Rendering at 2x and boxing
+	# down at save time is the cheapest real edge-quality win available here: it
+	# antialiases everything MSAA cannot (specular aliasing on a tight highlight,
+	# alpha-tested foliage, thin emissive wires) and it costs nothing downstream
+	# because the file that lands on disk is the same size as every historical
+	# tile. On the default path render_scale is 1 and this is Vector2i(760, 760),
+	# byte for byte the old line.
+	var render_scale: int = SHOW_SUPERSAMPLE if _showcase else 1
 	var vp := SubViewport.new()
-	vp.size = Vector2i(RES, RES)
-	vp.msaa_3d = Viewport.MSAA_8X
+	vp.size = Vector2i(RES * render_scale, RES * render_scale)
+	# 8x MSAA is kept on the default path because that is what shipped. Showcase
+	# drops to 4x: 2x supersampling already multiplies the sample count by four,
+	# and 8x on a 1520^2 target is a large MSAA buffer for a gain nobody can see.
+	vp.msaa_3d = SHOW_MSAA if _showcase else Viewport.MSAA_8X
+	if _showcase:
+		# A gradient-free flat backdrop still bands where the ground disc fades
+		# into it, and an 8-bit PNG shows it. Debanding is a dither in the
+		# tonemapper — sub-millisecond, and the only fix that survives the PNG.
+		vp.use_debanding = true
 	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	root.add_child(vp)
 	_stage(vp)
@@ -247,10 +335,25 @@ func _run() -> void:
 		cam.global_position = c + dir * dist
 		cam.look_at(c, Vector3.UP)
 
+		# Everything in the showcase rig that has a LENGTH in it — shadow range,
+		# shadow bias, AO radius, GI radius, fog density, the focal plane, the
+		# ground disc — has to be sized against this artifact. A 1 m AO radius is
+		# a global dimmer on a 4 cm token and does nothing at all on a 30 m field.
+		# The default path never reaches this and is not affected.
+		if _showcase:
+			_showcase_fit(aabb, radius, dist)
+
 		await process_frame
 		await process_frame
 		await create_timer(0.1).timeout
-		vp.get_texture().get_image().save_png("%s/%s.png" % [out_dir, label])
+		var img: Image = vp.get_texture().get_image()
+		if render_scale > 1:
+			# Lanczos, not bilinear: a box/bilinear downsample of a 2x render is
+			# softer than the 1x render it replaces, which would lose more edge
+			# than the supersample gained. Output stays RES x RES so the tiler,
+			# the critic and every archived sheet keep the same geometry.
+			img.resize(RES, RES, Image.INTERPOLATE_LANCZOS)
+		img.save_png("%s/%s.png" % [out_dir, label])
 		shot += 1
 		print("SWEPT ", label)
 		inst.queue_free()
@@ -334,7 +437,18 @@ func _stage(vp: SubViewport) -> void:
 	# rendering into the sweep.
 	vp.own_world_3d = true
 	_stand_down_world_bridges()
+	if _showcase:
+		_stage_showcase(vp)
+	else:
+		_stage_default(vp)
 
+
+## FROZEN. Every value, every node and the ORDER they are added in is the rig
+## that produced the published galleries and the archived bite numbers. Do not
+## tune this to make a picture nicer — add the knob to the showcase profile
+## instead. A "small improvement" here silently re-bases a time series that
+## other tools compare against.
+func _stage_default(vp: SubViewport) -> void:
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color(0.055, 0.055, 0.070)
@@ -356,6 +470,542 @@ func _stage(vp: SubViewport) -> void:
 	cam.fov = FOV
 	cam.environment = env
 	vp.add_child(cam)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  THE SHOWCASE DIALS — one named number each, tune here, never inside the rig.
+#
+#  Read this block and nothing else to change the look. Every constant carries
+#  WHY it is that value and WHAT it costs. Nothing below is reachable unless the
+#  profile is switched on.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+## ── Render ────────────────────────────────────────────────────────────────────
+## Render at N x RES and Lanczos down to RES. 2 is the knee: 3x costs 2.25x the
+## pixels of 2x for a difference you cannot see in a 760 px tile. Cost at 2:
+## ~4x fragment work and a 1520^2 MSAA buffer. Headless desktop only — this
+## bench never runs on a Quest, so R2's VR budget does not bind here; the
+## ARTIFACTS it photographs still have to obey it.
+const SHOW_SUPERSAMPLE: int = 2
+## 4x with 2x supersampling ~= 16 geometric samples. 8x on top is buffer for
+## nothing.
+const SHOW_MSAA: int = Viewport.MSAA_4X
+
+## ── Tone ──────────────────────────────────────────────────────────────────────
+## ACES over FILMIC: the highlight shoulder is what stops a bright metal
+## specular clipping to a flat white blob, which is rubric item 5 and the single
+## most common tell in this corpus. (Godot 4.3+ also has TONE_MAPPER_AGX, a
+## longer, flatter shoulder — swap this one constant if you want it. AGX
+## desaturates highlights harder, which flatters metal and hurts the artifacts
+## that argue with colour, so ACES is the default here.)
+const SHOW_TONEMAP: int = Environment.TONE_MAPPER_ACES
+## Slightly under 1.0. The sky dome below is a bright overhead softbox and the
+## key is 2.6; at 1.0 the top faces of pale artifacts sat on the shoulder.
+const SHOW_EXPOSURE: float = 0.92
+## White point. FILMIC's default 1.0 clips anything above middle grey hard.
+## 3.2 keeps a specular ~3 stops over diffuse white as a readable gradient
+## instead of a disc. Raise it if emissive artifacts are blowing out; lower it
+## for more contrast.
+const SHOW_WHITE: float = 3.2
+
+## ── The dome ──────────────────────────────────────────────────────────────────
+## A ProceduralSkyMaterial used as an IMAGE-BASED LIGHT, not as a picture. The
+## camera pitches 15 deg down with a 34 deg FOV, so the visible band runs from
+## about 2 deg above the horizon to 32 deg below it: the sky_* colours are
+## almost entirely OFF-FRAME and act as a large soft overhead source, while the
+## ground_* colours are what the viewer actually sees behind the subject.
+##
+## This is why the profile can have a real environment AND keep flat corners.
+## The upper hemisphere lights and reflects; the lower hemisphere is a flat
+## studio backdrop. `reflected_light_source` is left at its default
+## (REFLECTION_SOURCE_BG), which with BG_SKY means metals reflect this dome —
+## the cheapest possible answer to "metals read as metal" with no reflection
+## probe anywhere (R2: a probe would be a per-frame render, this is one cubemap
+## baked once at boot).
+const SHOW_SKY_TOP: Color = Color(0.66, 0.70, 0.79)
+## MEASURED FIX, first showcase render: at 0.40,0.44,0.52 this sat directly above a
+## 0.082 backdrop and the horizon — which the 15 deg downward pitch puts INSIDE the
+## top of the frame — read as a hard black stripe across every sheet. The seam has to
+## be continuous in VALUE, so the horizon now meets the backdrop nearly where the
+## backdrop starts. Costs almost no light: sky_top is off-frame and does the lifting,
+## and SHOW_AMBIENT below is raised to pay back what the darker horizon takes.
+const SHOW_SKY_HORIZON: Color = Color(0.150, 0.162, 0.188)
+## The visible backdrop. Deliberately in the same family as the default rig's
+## Color(0.055, 0.055, 0.070) so a showcase sheet is recognisably the same bench.
+## THIRD AND ACTUAL FIX, found by painting the three dome regions red/green/blue and
+## re-rendering: the black band was ground_horizon_color, and ProceduralSkyMaterial
+## puts a dark seam at the horizon whenever the sky side and the ground side of it do
+## not agree. It is not a value problem — 0.104 rendered as 8/255 — it is the blend.
+## So this is now IDENTICAL to SHOW_SKY_HORIZON above; the horizon stops existing as
+## a visible line. Change the two together or the band comes back.
+const SHOW_BACKDROP_HIGH: Color = Color(0.150, 0.162, 0.188)
+## SECOND MEASURED FIX. This was 0.048 — near black — and ground_curve was 0.02, so the
+## dome snapped to it within a degree of the horizon. What the frame then showed, on
+## EVERY artifact, was: sky, a hard black band, then the lit ground disc. The band was
+## the dome's lower hemisphere in the gap between the horizon and the disc's near edge.
+## The lower hemisphere is not scenery here, it is the surface the disc has to blend
+## into, so it now sits within a few points of the disc's lit value.
+const SHOW_BACKDROP_LOW: Color = Color(0.098, 0.103, 0.119)
+## Ambient from the sky includes the dark lower hemisphere, so it lands near
+## half of what a same-coloured AMBIENT_SOURCE_COLOR would give. 0.95 puts the
+## shadow side back where the old rig had it, but now with a DIRECTION to it.
+const SHOW_AMBIENT: float = 1.12
+
+## ── Three-point rig ───────────────────────────────────────────────────────────
+## Directions the light COMES FROM, world space, aimed at the subject centre.
+## They are derived from the fixed camera, which sits at
+## dir = (0.561, 0.257, 0.787) — YAW 0.62 rad, PITCH -0.26 rad — so screen-right
+## is about (0.79, 0, -0.56) and "behind" is -dir.
+##
+## KEY: 40 deg off the camera axis to screen-LEFT, 50 deg elevation. Off-axis is
+## the whole point — a light near the camera axis flattens every form it touches.
+const SHOW_KEY_FROM: Vector3 = Vector3(-0.47, 0.80, 0.37)
+const SHOW_KEY_ENERGY: float = 2.6
+## Warm key against cool fill and cool rim. A one-temperature rig is the other
+## amateur tell; a 200-300 K split reads as intent without looking coloured.
+const SHOW_KEY_COLOR: Color = Color(1.0, 0.965, 0.918)
+## Angular diameter in degrees. The sun is 0.5; 1.4 is a small softbox, enough
+## that the contact shadow has a penumbra that opens with distance. Costs a
+## PCSS lookup on the one shadowed light only.
+const SHOW_KEY_SOFTNESS: float = 1.4
+
+## FILL: frontal and to screen-right, low, cool, and — the part that matters —
+## with its SPECULAR turned down. A fill at full specular puts a second
+## highlight on every curved surface and reads as two suns. Diffuse-only fill is
+## how the shadow side opens without lying about where the light is.
+const SHOW_FILL_FROM: Vector3 = Vector3(0.80, 0.32, 0.50)
+const SHOW_FILL_ENERGY: float = 0.50
+const SHOW_FILL_COLOR: Color = Color(0.80, 0.86, 1.0)
+const SHOW_FILL_SPECULAR: float = 0.20
+
+## RIM: behind and to screen-right, opposite the key, high specular. This is the
+## light that separates the subject from a dark backdrop — without it a dark
+## artifact on a dark ground has no silhouette at all, which is half of why the
+## old sheets read flat. Energy is high because it is grazing: almost none of it
+## lands on anything the camera can see except the edge.
+const SHOW_RIM_FROM: Vector3 = Vector3(0.26, 0.45, -0.86)
+const SHOW_RIM_ENERGY: float = 1.9
+const SHOW_RIM_COLOR: Color = Color(0.84, 0.90, 1.0)
+
+## ── Shadows ───────────────────────────────────────────────────────────────────
+## Shadow range as a multiple of camera distance. Everything in frame is within
+## ~1.5x; 3x leaves room for the ground disc's near half without wasting texels.
+## SHADOW_ORTHOGONAL (one split) then puts the entire shadow map on the subject.
+const SHOW_SHADOW_FIT: float = 3.0
+## Bias per metre of shadow range. Godot's DirectionalLight3D default is a flat
+## 0.1, tuned for a 100 m range; at the ~2 m range a small artifact gets, 0.1
+## detaches the contact shadow from the object and destroys rubric item 4. This
+## scales instead, then clamps so neither a 4 cm token nor a 40 m field breaks.
+const SHOW_SHADOW_BIAS_K: float = 0.0016
+const SHOW_SHADOW_BIAS_MIN: float = 0.004
+const SHOW_SHADOW_BIAS_MAX: float = 0.10
+## Normal-offset. Below 1.0 because the corpus is full of thin plates and wires
+## that peter-pan at the default.
+const SHOW_SHADOW_NORMAL_BIAS: float = 0.55
+const SHOW_SHADOW_BLUR: float = 1.0
+
+## ── Screen-space AO / GI ──────────────────────────────────────────────────────
+## AO radius as a fraction of the SUBJECT radius, not an absolute metre. This is
+## the difference between AO that finds crevices and AO that is a vignette.
+const SHOW_SSAO_RADIUS_K: float = 0.34
+const SHOW_SSAO_RADIUS_MIN: float = 0.04
+const SHOW_SSAO_RADIUS_MAX: float = 2.5
+const SHOW_SSAO_INTENSITY: float = 1.7
+## Above 1.0 deepens contact and leaves broad surfaces alone.
+const SHOW_SSAO_POWER: float = 1.6
+const SHOW_SSAO_DETAIL: float = 0.6
+## SSIL is the one that makes a coloured artifact bleed onto its own base and
+## onto the ground. It is the most expensive thing in this profile (a half-res
+## GI pass) and the reason it earns it is rubric item 4: a coloured contact
+## patch is what tells the eye an object is TOUCHING the floor rather than
+## floating 2 mm above it. Set the intensity to 0.0 to switch it off.
+const SHOW_SSIL_RADIUS_K: float = 2.2
+const SHOW_SSIL_INTENSITY: float = 0.55
+
+## ── Screen-space reflection ───────────────────────────────────────────────────
+## The ground gets a soft reflection of what is standing on it. Cheap at this
+## step count and, like SSIL, it buys grounding. 0 steps disables.
+const SHOW_SSR_STEPS: int = 40
+const SHOW_SSR_FADE_IN: float = 0.15
+const SHOW_SSR_FADE_OUT: float = 2.0
+
+## ── Glow ──────────────────────────────────────────────────────────────────────
+## HIGH threshold on purpose. A low threshold blooms every bright diffuse
+## surface and is how a render starts looking like a phone filter. At 1.05 only
+## genuinely emissive geometry — which in this corpus means something that is
+## MEANT to be a light — crosses it.
+const SHOW_GLOW_THRESHOLD: float = 1.05
+const SHOW_GLOW_INTENSITY: float = 0.55
+const SHOW_GLOW_STRENGTH: float = 1.0
+## Additive-on-top rather than a screen-wide bloom lift.
+const SHOW_GLOW_BLOOM: float = 0.02
+
+## ── Depth ─────────────────────────────────────────────────────────────────────
+## Fog fraction reached at the SUBJECT's distance. Two jobs: it lifts pure black
+## off 0,0,0 (rubric item 5) and it dissolves the far edge of the ground disc
+## into the backdrop so the disc has no visible rim. fog_sky_affect is pinned to
+## 0.0 so the backdrop colour — and therefore the critic's corner sample — does
+## not move. Set to 0.0 to disable.
+const SHOW_FOG_AT_SUBJECT: float = 0.06
+## Mild far-only DOF. The focal plane is pushed past the BACK of the subject's
+## bounding box by this multiple of its radius, so nothing on the artifact is
+## ever soft — only the ground behind it. Tall or deep artifacts are the reason
+## this is a margin and not a fixed distance.
+const SHOW_DOF: bool = true
+const SHOW_DOF_MARGIN: float = 1.45
+const SHOW_DOF_AMOUNT: float = 0.06
+
+## ── Ground ────────────────────────────────────────────────────────────────────
+## A disc, not a plane: no square corners can wander into frame, and a radial
+## vertex-colour fade lets it vanish into the backdrop instead of ending in a
+## visible edge. Set SHOW_GROUND false if you need the frame's non-background
+## pixels to mean what they meant on the default rig (see the header).
+const SHOW_GROUND: bool = true
+## Disc radius as a multiple of the subject's DIAMETER. Large, because the
+## horizon is in frame and a small disc's rim reads as a hard line right behind
+## the subject.
+const SHOW_GROUND_SPAN: float = 12.0
+const SHOW_GROUND_RINGS: int = 6
+const SHOW_GROUND_SEGMENTS: int = 64
+## Sink below the union AABB floor. 2 mm: enough to lose z-fighting against an
+## artifact that IS a flat plate at y = its own minimum, small enough that
+## nothing looks like it is hovering.
+const SHOW_GROUND_DROP: float = 0.002
+## How dark the disc is allowed to get at its rim, as a fraction of its lit centre.
+## 0.0 is a black ring against the sky; this lands the rim on the backdrop so the
+## two meet without a seam. Lower it only if the disc starts to read as a lit table
+## rather than as a floor continuing past the frame.
+const SHOW_GROUND_RIM_FLOOR: float = 0.62
+const SHOW_GROUND_TINT: Color = Color(0.128, 0.131, 0.147)
+## Roughness BREAKUP, rubric item 2. The floor's roughness is a texture in this
+## band rather than one number, so the key's reflection on it is a broken sheen
+## and not a mirror stripe.
+const SHOW_GROUND_ROUGH_MIN: float = 0.40
+const SHOW_GROUND_ROUGH_MAX: float = 0.74
+## Grain size as a fraction of the subject radius. Smaller = finer.
+const SHOW_GROUND_GRAIN: float = 0.28
+## Procedural texture edge. 256 is ~66k texels x 4 noise taps for the seamless
+## wrap = ~260k FastNoiseLite calls, once per boot, ~0.2 s. Do not raise this
+## without a reason; the sweep budget is the watchdog's 45 s boot grace.
+const SHOW_TEX_PX: int = 256
+const SHOW_TEX_SEED: int = 20260807
+
+## ── Final grade ───────────────────────────────────────────────────────────────
+## Almost nothing. A grade this bench cannot see the result of is a grade that
+## should not exist; these three exist so the orchestrator has a last dial.
+const SHOW_BRIGHTNESS: float = 1.0
+const SHOW_CONTRAST: float = 1.02
+const SHOW_SATURATION: float = 1.05
+
+
+## Build the showcase rig. Everything with a LENGTH in it is deliberately NOT set
+## here — see _showcase_fit, which runs once the subject's size is known.
+func _stage_showcase(vp: SubViewport) -> void:
+	var env := Environment.new()
+
+	# The dome. Visible band is the ground_* pair; the sky_* pair is the softbox.
+	var sky_mat := ProceduralSkyMaterial.new()
+	sky_mat.sky_top_color = SHOW_SKY_TOP
+	sky_mat.sky_horizon_color = SHOW_SKY_HORIZON
+	sky_mat.ground_horizon_color = SHOW_BACKDROP_HIGH
+	sky_mat.ground_bottom_color = SHOW_BACKDROP_LOW
+	# A tight curve on both halves keeps each hemisphere close to a single value
+	# across the band that is actually in frame, which is what keeps the corners
+	# flat enough for the critic's (3,3) background sample to stay honest.
+	# Curves softened with the backdrop fix above: a tight curve put the whole value
+	# change into a few degrees of arc, which is what turned a gradient into an edge.
+	# Gradual across the visible band is what makes a backdrop read as a studio wall
+	# rather than as two flat colours meeting.
+	sky_mat.sky_curve = 0.30
+	sky_mat.ground_curve = 0.38
+	sky_mat.sun_angle_max = 30.0
+	sky_mat.sun_curve = 0.15
+	var sky := Sky.new()
+	sky.sky_material = sky_mat
+	env.sky = sky
+	env.background_mode = Environment.BG_SKY
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+	env.ambient_light_energy = SHOW_AMBIENT
+
+	env.tonemap_mode = SHOW_TONEMAP
+	env.tonemap_exposure = SHOW_EXPOSURE
+	env.tonemap_white = SHOW_WHITE
+
+	env.ssao_enabled = true
+	env.ssao_intensity = SHOW_SSAO_INTENSITY
+	env.ssao_power = SHOW_SSAO_POWER
+	env.ssao_detail = SHOW_SSAO_DETAIL
+	env.ssil_enabled = SHOW_SSIL_INTENSITY > 0.0
+	env.ssil_intensity = SHOW_SSIL_INTENSITY
+
+	env.ssr_enabled = SHOW_SSR_STEPS > 0
+	env.ssr_max_steps = SHOW_SSR_STEPS
+	env.ssr_fade_in = SHOW_SSR_FADE_IN
+	env.ssr_fade_out = SHOW_SSR_FADE_OUT
+
+	env.glow_enabled = true
+	env.glow_hdr_threshold = SHOW_GLOW_THRESHOLD
+	env.glow_intensity = SHOW_GLOW_INTENSITY
+	env.glow_strength = SHOW_GLOW_STRENGTH
+	env.glow_bloom = SHOW_GLOW_BLOOM
+	# Weight the wide levels, not the tight ones: a broad halo reads as light,
+	# a tight one reads as a blur artefact.
+	env.set("glow_levels/1", 0.0)
+	env.set("glow_levels/2", 0.2)
+	env.set("glow_levels/3", 0.6)
+	env.set("glow_levels/4", 1.0)
+	env.set("glow_levels/5", 0.7)
+
+	env.fog_enabled = SHOW_FOG_AT_SUBJECT > 0.0
+	env.fog_light_color = SHOW_BACKDROP_LOW
+	env.fog_sun_scatter = 0.0
+	env.fog_aerial_perspective = 0.0
+	# THE PIN. Without this the fog tints the sky as well, the backdrop moves,
+	# and the critic's corner-background assumption quietly becomes false.
+	env.fog_sky_affect = 0.0
+	env.fog_density = 0.0   # fitted per subject in _showcase_fit
+
+	env.adjustment_enabled = true
+	env.adjustment_brightness = SHOW_BRIGHTNESS
+	env.adjustment_contrast = SHOW_CONTRAST
+	env.adjustment_saturation = SHOW_SATURATION
+	_show_env = env
+
+	# ── The three lights. Aimed by look_at rather than by hand-written Euler
+	# angles, because the directions above are readable as "where is it coming
+	# from" and a Vector3(-42, -35, 0) is not. A DirectionalLight3D ignores its
+	# position, so parking it on the from-vector and looking at the origin is
+	# purely a way to spell the rotation.
+	var key := DirectionalLight3D.new()
+	key.light_energy = SHOW_KEY_ENERGY
+	key.light_color = SHOW_KEY_COLOR
+	key.light_angular_distance = SHOW_KEY_SOFTNESS
+	key.shadow_enabled = true
+	key.shadow_blur = SHOW_SHADOW_BLUR
+	key.shadow_normal_bias = SHOW_SHADOW_NORMAL_BIAS
+	key.directional_shadow_mode = DirectionalLight3D.SHADOW_ORTHOGONAL
+	vp.add_child(key)
+	_aim(key, SHOW_KEY_FROM)
+	_show_key = key
+
+	var fill := DirectionalLight3D.new()
+	fill.light_energy = SHOW_FILL_ENERGY
+	fill.light_color = SHOW_FILL_COLOR
+	fill.light_specular = SHOW_FILL_SPECULAR
+	fill.shadow_enabled = false
+	vp.add_child(fill)
+	_aim(fill, SHOW_FILL_FROM)
+
+	var rim := DirectionalLight3D.new()
+	rim.light_energy = SHOW_RIM_ENERGY
+	rim.light_color = SHOW_RIM_COLOR
+	rim.shadow_enabled = false
+	vp.add_child(rim)
+	_aim(rim, SHOW_RIM_FROM)
+
+	# ── The ground. The MATERIAL is built unconditionally — the host grid in
+	# _build_host borrows its two procedural textures — while the mesh and its
+	# placement wait for the subject in _showcase_fit. One generation per boot.
+	_show_ground_mat = _showcase_ground_material()
+	if SHOW_GROUND:
+		var g := MeshInstance3D.new()
+		g.name = "ShowGround"
+		g.material_override = _show_ground_mat
+		# The floor must not cast into itself or into the subject's shadow.
+		g.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		vp.add_child(g)
+		_show_ground = g
+
+	var cam := Camera3D.new()
+	cam.name = "Cam"
+	cam.fov = FOV
+	cam.environment = env
+	if SHOW_DOF:
+		var attrs := CameraAttributesPractical.new()
+		attrs.dof_blur_near_enabled = false
+		attrs.dof_blur_far_enabled = true
+		attrs.dof_blur_amount = SHOW_DOF_AMOUNT
+		attrs.exposure_multiplier = 1.0
+		cam.attributes = attrs
+		_show_attrs = attrs
+	vp.add_child(cam)
+
+
+## Point a light along -from, i.e. make it shine FROM `from` toward the origin.
+## look_at needs the node in the tree and fails if the direction is parallel to
+## up, so both are asserted rather than assumed.
+func _aim(light: Node3D, from: Vector3) -> void:
+	var v: Vector3 = from
+	if v.length() < 0.0001:
+		v = Vector3(0.0, 1.0, 0.2)
+	v = v.normalized()
+	if absf(v.dot(Vector3.UP)) > 0.999:
+		v = (v + Vector3(0.02, 0.0, 0.02)).normalized()
+	light.position = v
+	light.look_at(Vector3.ZERO, Vector3.UP)
+
+
+## Size every length in the rig against THIS subject. Called once per variant,
+## with the union AABB when the camera is fixed, so on a normal sweep it does
+## the same thing every time and the ground never moves between tiles.
+func _showcase_fit(box: AABB, radius: float, dist: float) -> void:
+	var centre: Vector3 = box.get_center()
+
+	if _show_key != null:
+		var span: float = maxf(dist * SHOW_SHADOW_FIT, 0.5)
+		_show_key.directional_shadow_max_distance = span
+		_show_key.shadow_bias = clampf(
+			span * SHOW_SHADOW_BIAS_K, SHOW_SHADOW_BIAS_MIN, SHOW_SHADOW_BIAS_MAX)
+
+	if _show_env != null:
+		_show_env.ssao_radius = clampf(
+			radius * SHOW_SSAO_RADIUS_K, SHOW_SSAO_RADIUS_MIN, SHOW_SSAO_RADIUS_MAX)
+		_show_env.ssil_radius = maxf(radius * SHOW_SSIL_RADIUS_K, 0.25)
+		if SHOW_FOG_AT_SUBJECT > 0.0:
+			# Density that reaches exactly SHOW_FOG_AT_SUBJECT of the way to the
+			# fog colour at the camera-to-subject distance, whatever that is.
+			_show_env.fog_density = -log(1.0 - SHOW_FOG_AT_SUBJECT) / maxf(dist, 0.001)
+
+	if _show_attrs != null:
+		# Sharp through the whole bounding box, soft only beyond it.
+		_show_attrs.dof_blur_far_distance = dist + radius * SHOW_DOF_MARGIN
+		_show_attrs.dof_blur_far_transition = maxf(radius * 2.0, 0.2)
+
+	if _show_ground != null:
+		var disc: float = maxf(radius * 2.0 * SHOW_GROUND_SPAN, 1.0)
+		var tiles: float = maxf(disc / maxf(radius * SHOW_GROUND_GRAIN, 0.001), 1.0)
+		_show_ground.mesh = _showcase_ground_mesh(disc, tiles)
+		_show_ground.global_position = Vector3(
+			centre.x, box.position.y - SHOW_GROUND_DROP, centre.z)
+
+
+## A flat disc of concentric rings whose vertex colour falls off toward the rim.
+## The fade is the whole trick: the ground is a lit pool under the subject that
+## dissolves into the backdrop, so the disc has no edge to see and the frame
+## corners stay the flat backdrop colour the critic samples.
+##
+## CULL_DISABLED on the material, so winding order cannot be wrong. Normals are
+## written explicitly (all up) rather than generated, so lighting is right
+## either way.
+func _showcase_ground_mesh(disc_radius: float, uv_tiles: float) -> ArrayMesh:
+	var rings: int = maxi(SHOW_GROUND_RINGS, 1)
+	var seg: int = maxi(SHOW_GROUND_SEGMENTS, 3)
+	var verts := PackedVector3Array()
+	var norms := PackedVector3Array()
+	var uvs := PackedVector2Array()
+	var cols := PackedColorArray()
+	var idx := PackedInt32Array()
+	for ri: int in range(rings + 1):
+		var t: float = float(ri) / float(rings)
+		var rr: float = disc_radius * t
+		# Squared falloff: full brightness holds across the inner third — where
+		# the contact shadow lives — then drops away fast.
+		#
+		# THE FLOOR IS THE FIX, and it took three renders to find. This reached 0.0
+		# at the rim, and a vertex colour of zero multiplied into albedo is BLACK.
+		# So every showcase frame showed the lit disc, then a hard black ring where
+		# the disc died, then sky — read on the sheets as "a black band across the
+		# picture", and blamed twice on the sky dome before the mesh was opened.
+		# The disc has to fade INTO the backdrop, not into nothing, so the rim now
+		# lands within a point or two of SHOW_BACKDROP_LOW under this rig's light.
+		var f: float = clampf(1.0 - t * t, SHOW_GROUND_RIM_FLOOR, 1.0)
+		for si: int in range(seg + 1):
+			var a: float = TAU * float(si) / float(seg)
+			var ca: float = cos(a)
+			var sa: float = sin(a)
+			verts.append(Vector3(ca * rr, 0.0, sa * rr))
+			norms.append(Vector3.UP)
+			uvs.append(Vector2(ca * t * uv_tiles, sa * t * uv_tiles))
+			cols.append(Color(f, f, f, 1.0))
+	var stride: int = seg + 1
+	for ri: int in range(rings):
+		for si: int in range(seg):
+			var a0: int = ri * stride + si
+			var a1: int = a0 + 1
+			var b0: int = a0 + stride
+			var b1: int = b0 + 1
+			idx.append(a0)
+			idx.append(b0)
+			idx.append(a1)
+			idx.append(a1)
+			idx.append(b0)
+			idx.append(b1)
+	var arrays: Array = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arrays[Mesh.ARRAY_NORMAL] = norms
+	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_COLOR] = cols
+	arrays[Mesh.ARRAY_INDEX] = idx
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	return mesh
+
+
+## Dielectric floor: metallic 0, a roughness TEXTURE rather than one number, and
+## a matching albedo mottle. Both come out of one seamless noise field so the
+## sheen and the tone agree with each other, which is what a real surface does.
+func _showcase_ground_material() -> StandardMaterial3D:
+	var pair: Array = _showcase_noise_textures()
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = SHOW_GROUND_TINT
+	mat.albedo_texture = pair[0]
+	mat.vertex_color_use_as_albedo = true
+	mat.metallic = 0.0
+	# roughness stays 1.0 because the texture IS the roughness: the sampled red
+	# channel already spans SHOW_GROUND_ROUGH_MIN..MAX and gets multiplied by
+	# this. Setting both would silently squash the band.
+	mat.roughness = 1.0
+	mat.roughness_texture = pair[1]
+	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return mat
+
+
+## One FastNoiseLite field -> [albedo mottle, roughness] as ImageTextures.
+##
+## SEAMLESS BY CONSTRUCTION. The disc tiles this texture dozens of times across
+## its radius, so a non-tiling noise would draw a grid of hard seams straight
+## through the picture. The four-tap corner blend below wraps the field exactly:
+## the value at x = 0 and the value approached at x = W are the same sample.
+##
+## Built synchronously with set_pixel rather than with NoiseTexture2D, which
+## generates on a worker thread — a bench that photographs a half-generated
+## texture on its first tile and a finished one on the rest has invented a
+## difference between variants, which is the exact failure mode this whole file
+## is a monument to.
+func _showcase_noise_textures() -> Array:
+	var n := FastNoiseLite.new()
+	n.seed = SHOW_TEX_SEED           # fixed: two runs must produce one floor
+	n.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	n.frequency = 0.035
+	var px: int = maxi(SHOW_TEX_PX, 8)
+	var w: float = float(px)
+	var alb := Image.create(px, px, false, Image.FORMAT_RGB8)
+	var rgh := Image.create(px, px, false, Image.FORMAT_RGB8)
+	var rough_span: float = SHOW_GROUND_ROUGH_MAX - SHOW_GROUND_ROUGH_MIN
+	for y: int in range(px):
+		var fy: float = float(y) / w
+		for x: int in range(px):
+			var fx: float = float(x) / w
+			var n00: float = n.get_noise_2d(float(x), float(y))
+			var n10: float = n.get_noise_2d(float(x) - w, float(y))
+			var n01: float = n.get_noise_2d(float(x), float(y) - w)
+			var n11: float = n.get_noise_2d(float(x) - w, float(y) - w)
+			var top: float = n00 + (n10 - n00) * fx
+			var bot: float = n01 + (n11 - n01) * fx
+			var g: float = clampf((top + (bot - top) * fy) * 0.5 + 0.5, 0.0, 1.0)
+			# Albedo mottle is gentle — a floor that is visibly blotchy competes
+			# with the artifact. 0.80..1.00 multiplied onto SHOW_GROUND_TINT.
+			var a: float = 0.80 + 0.20 * g
+			alb.set_pixel(x, y, Color(a, a, a, 1.0))
+			var r: float = SHOW_GROUND_ROUGH_MIN + rough_span * g
+			rgh.set_pixel(x, y, Color(r, r, r, 1.0))
+	# Mipmaps matter here: the disc is tiled dozens of times and its far half is
+	# at a grazing angle, where an unmipped noise aliases into a shimmer.
+	alb.generate_mipmaps()
+	rgh.generate_mipmaps()
+	return [ImageTexture.create_from_image(alb), ImageTexture.create_from_image(rgh)]
 
 
 ## Idempotent, and called twice on purpose: once from _stage, and once more after
@@ -484,6 +1134,18 @@ func _build_host(vp: SubViewport, host: Dictionary) -> Node3D:
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(0.62, 0.64, 0.70)
 	mat.roughness = 0.75
+	if _showcase and _show_ground_mat != null:
+		# Same dielectric treatment the floor gets: one flat roughness value
+		# across every cube of a host grid is the flat-plastic tell, and the
+		# hosted artifacts (remove_random, proximity_spawner) are photographed
+		# with this grid filling most of the frame. Reuses the floor's textures
+		# rather than generating a second pair.
+		mat.albedo_color = Color(0.50, 0.52, 0.57)
+		mat.albedo_texture = _show_ground_mat.albedo_texture
+		mat.roughness = 1.0
+		mat.roughness_texture = _show_ground_mat.roughness_texture
+		mat.metallic = 0.0
+		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	mmi.material_override = mat
 	stage.add_child(mmi)
 
