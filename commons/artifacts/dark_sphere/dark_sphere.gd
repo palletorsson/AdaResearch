@@ -69,9 +69,46 @@ class_name DarkSphere
 ## hide a wrong roughness on, and a terminator that shows a mis-sized normal map as orange
 ## peel before anything else does. Every number below is sized against that.
 ##
+## ECLIPSE, AND THE ONE LINE THIS PASS REVERSES (2026-08-07, second look). The first render
+## came back with eclipse as a flat black circle: no rim, no terminator, no sheen, nothing
+## separating the sphere from the pool it stands in. The darkness was not the fault — an
+## artifact called dark_sphere whose value is `eclipse` is supposed to be black, and a
+## checker calling it CRUSHED is measuring the design working. The fault was that it had
+## stopped being an OBJECT. `metallic_specular = 0.0` was the line that did it: F0 = 0 means
+## the surface has no Fresnel at all, and Fresnel is the whole of a dark ball's limb. So the
+## old note here — "the sheen has to go too, because a black ball with a specular highlight
+## still reads as a ball" — is exactly backwards, and it is reversed on purpose. A black
+## sphere in a lit room HAS a grazing sheen around its limb, a terminator lifted a shade by
+## light wrapping past it, and one small specular the size of the lamp. Take those away and
+## you do not get a darker sphere, you get a hole. The albedo did not move a digit; the
+## darkness is untouched. Only the physics of the surface came back.
+##
+## GRAIN SCALE — the number that costs the most when it is wrong. The body is a sphere
+## 0.70 m across at witness (radius 0.35), 1.05 m at eclipse, 0.385 m at hush, and it sits
+## in an AABB about 0.95 m tall, so in a 760 px capture the ball itself lands near 300 px
+## whichever lineage is built. Now run the kit's rule of thumb on that. scale_detail's
+## factor ~= 1 / longest dimension is a MULTIPLIER on whatever tiling the builder already
+## chose, and at a 0.95 m body it comes out at almost exactly 1.0 — so it leaves both
+## builders where they are: 5 repeats per metre for hard_plastic, 9 for rubber. Carry it
+## through. Micro grain is about 24 features per repeat, so 3.7 repeats across the ball is
+## ~90 features over 300 px, three pixels each and already at the edge. Flake is about 107
+## per repeat, so 9.9 repeats is over a THOUSAND features across the same 300 px — a
+## quarter of a pixel each. That is not detail; that is the television static three rounds
+## of critics blamed on six different post-process settings.
+##
+## So the tiling here is stated as REPEATS ACROSS THE SILHOUETTE and nothing else: about
+## two for the micro grain, about one for the flake. Both land a feature near six screen
+## pixels at the working distance, and both are computed from _radius, so hush and eclipse
+## get the same surface at different sizes rather than the same numbers at different sizes.
+## _fit_grain() is where that happens; GRAIN_ACROSS_* are the numbers.
+##
 ## WHAT DID NOT CHANGE. Every mesh, every radius, every position, both lamps, the pulse
-## rates, the halo's own alpha numbers, and both axes. presence=witness + body=orb builds
-## the silhouette it has always built.
+## rates, the halo's peak alpha, and both axes. presence=witness + body=orb builds the
+## silhouette it has always built. The floor pool is the one place a shape moved: it was a
+## uniform wash out to a hard circular edge, which is a flat region as surely as a flat
+## sphere is, and it now carries a radial falloff that peaks at the legacy alpha under the
+## ball and reaches zero at the same rim. The disc, its radius and its y = 0.01 seat — the
+## auto-grounding contract documented at _create_halo_ring — are byte for byte.
 ##
 ## MeshKit was read and deliberately not called. The geometry is exactly as it shipped
 ## (this pass re-finishes surfaces), and every mesh in play — SphereMesh, CylinderMesh,
@@ -124,12 +161,42 @@ func spine_hints() -> Dictionary:
 ## The values are far apart on purpose: at 3 m the difference between two variants
 ## has to be obvious, not a nudge. radius alone moves silhouette area by 7x across
 ## the axis (0.55^2 to 1.5^2).
+##
+## The three finish columns were folded into THIS table rather than a parallel one on
+## purpose: a second const keyed by the same four names would read, to anything deriving
+## the registry from this file, like a second dispatch table for the same axis. One row
+## per value, all of it, is the shape that cannot be misread.
+##   gloss     into PbrKit.hard_plastic — how tight the base specular lobe sits
+##   rim       fresnel strength at the limb. The line that makes a sphere not a circle,
+##             and the line PbrKit.edge_light warns is a filter when it is on everything.
+##   rim_tint  0 = the rim carries the light's own colour, 1 = the albedo's
 const PRESENCE: Dictionary = {
-	"hush":    {"radius": 0.55, "emit": 0.20, "alpha": 0.50, "tint": 1.00, "halo_a": 0.35, "halo_r": 0.85, "lamp": "none"},
-	"witness": {"radius": 1.00, "emit": 1.00, "alpha": 1.00, "tint": 1.00, "halo_a": 1.00, "halo_r": 1.00, "lamp": "none"},
-	"beacon":  {"radius": 1.15, "emit": 3.60, "alpha": 1.00, "tint": 1.60, "halo_a": 2.60, "halo_r": 1.45, "lamp": "glow"},
-	"eclipse": {"radius": 1.50, "emit": 0.00, "alpha": 1.00, "tint": 0.30, "halo_a": 2.20, "halo_r": 1.25, "lamp": "drink"},
+	"hush":    {"radius": 0.55, "emit": 0.20, "alpha": 0.50, "tint": 1.00, "halo_a": 0.35, "halo_r": 0.85, "lamp": "none",  "gloss": 0.46, "rim": 0.20, "rim_tint": 0.40},
+	"witness": {"radius": 1.00, "emit": 1.00, "alpha": 1.00, "tint": 1.00, "halo_a": 1.00, "halo_r": 1.00, "lamp": "none",  "gloss": 0.62, "rim": 0.26, "rim_tint": 0.35},
+	"beacon":  {"radius": 1.15, "emit": 3.60, "alpha": 1.00, "tint": 1.60, "halo_a": 2.60, "halo_r": 1.45, "lamp": "glow",  "gloss": 0.70, "rim": 0.16, "rim_tint": 0.55},
+	"eclipse": {"radius": 1.50, "emit": 0.00, "alpha": 1.00, "tint": 0.30, "halo_a": 2.20, "halo_r": 1.25, "lamp": "drink", "gloss": 0.00, "rim": 0.46, "rim_tint": 0.22},
 }
+
+## GRAIN SIZE, stated the only way that survives a change of radius: how many times the
+## detail texture repeats ACROSS THE SPHERE'S OWN SILHOUETTE. See the grain note at the
+## top of the file. The kit's builders ship tilings authored for small parts — 5 per metre
+## for hard_plastic, 9 for rubber — and on a body this size those are a tenth of a feature
+## per pixel. _fit_grain converts these into the tiling each material actually gets.
+##
+## MICRO is SIMPLEX_SMOOTH at frequency 0.095, so about 24 features per repeat: two repeats
+## across ~300 screen pixels puts a feature near 6 px. FLAKE is 1-octave value noise at
+## 0.42, about 107 features per repeat, so it needs roughly a fifth as many repeats to land
+## in the same place. Same look, different noise — which is exactly why one global tiling
+## number would have been wrong for both.
+const GRAIN_ACROSS_MICRO: float = 2.0
+const GRAIN_ACROSS_FLAKE: float = 0.9
+
+## The cage is the other scale in this file and it runs the reasoning the other way. Its
+## hoops are a 28 mm tube and its legs 36 mm — about 12 screen pixels of cross-section — so
+## a tiling that suits the sphere never repeats across them at all and reads as flat paint.
+## An eighth of a repeat across 28 mm is three features on the tube, four pixels each.
+const GRAIN_ACROSS_TUBE: float = 0.12
+const CAGE_TUBE_M: float = 0.028
 
 ## The forms this artifact builds. Nouns, lowercase, one word each.
 const BODIES: Array[String] = ["orb", "swarm", "cage", "cairn"]
@@ -156,6 +223,9 @@ var _halo_hi: float = 0.20
 var _halo_seed: float = 0.15
 var _halo_radius: float = 0.42
 var _unlit_body: bool = false
+var _gloss: float = 0.62
+var _rim: float = 0.26
+var _rim_tint: float = 0.35
 
 
 func _ready() -> void:
@@ -215,12 +285,73 @@ func _resolve_presence() -> void:
 	if body == "swarm":
 		_halo_radius *= 1.35
 	_unlit_body = str(p["lamp"]) == "drink"
+	# Defaulted rather than indexed: a row that predates the finish columns degrades to the
+	# legacy witness surface instead of throwing during a build.
+	_gloss = float(p.get("gloss", 0.62))
+	_rim = float(p.get("rim", 0.26))
+	_rim_tint = float(p.get("rim_tint", 0.35))
+
+
+## Re-tile an already-built kit material so its grain lands at `repeats` texture repeats
+## across `span` metres of the thing wearing it — the sphere's diameter, the cage tube's
+## width. PbrKit.scale_detail() multiplies, so the factor is target over current; reading
+## uv1_scale back rather than assuming the builder's number means this keeps working if the
+## kit retunes its own tilings.
+func _fit_grain(m: StandardMaterial3D, span: float, repeats: float) -> void:
+	if m == null:
+		return
+	var want: float = repeats / maxf(span, 0.02)
+	PBR.scale_detail(m, want / maxf(m.uv1_scale.x, 0.001))
 
 
 ## The dark material every lineage shares — one instance, so a swarm of six orbs
 ## pulses as one animal rather than six.
+##
+## Two builders, because eclipse and the rest are not the same substance. The lit lineages
+## are dark glass: a dielectric with a film on it, one broad lobe from the body and one
+## tight lobe from the coat, which is what hard_plastic() builds and what metallic 0.6
+## was fumbling toward. eclipse is matte stone — rubber() is the kit's own name for "the
+## surface that eats light and shows only a broad soft sheen", which is eclipse's argument
+## written out in a material.
+##
+## NOTHING HERE TOUCHES ALBEDO OR EMISSION BEYOND THE LEGACY EXPRESSIONS, deliberately.
+## _process rewrites albedo every frame from the same formula it always did, so a brightened
+## base would be undone within one frame anyway — and the brief for this pass was that the
+## darkness is correct. Every change lives in the fields the frame loop never writes:
+## roughness, normal, specular, coat, rim, backlight.
 func _build_material() -> StandardMaterial3D:
-	var m := StandardMaterial3D.new()
+	var m: StandardMaterial3D
+	if _unlit_body:
+		m = PBR.rubber(albedo_color, 0.18)
+		_fit_grain(m, _radius * 2.0, GRAIN_ACROSS_FLAKE)
+		# rubber authors its tooth against a tiling ten times finer than a body this size
+		# wants, and a normal is not re-tiled by stretching — the slopes stay, the bumps get
+		# bigger. Left at 0.51 the flake stops being matte grain and becomes dents in a ball.
+		# This is the grain SIZED WRONG failure of the kit's own note, not a reason to
+		# flatten it: the tooth stays, it is just no longer authored for a cable jacket.
+		m.normal_scale = 0.30
+		# THE REVERSAL. F0 = 0.08 * specular, so the old 0.0 meant no Fresnel anywhere,
+		# and Fresnel at grazing incidence is the entire limb of a dark ball. 0.5 is the
+		# ordinary dielectric value — obsidian's, glass's — and it costs the albedo nothing.
+		m.metallic_specular = 0.50
+		# The second lobe. A broad 0.89 base and a 0.18 coat are far enough apart that the
+		# coat reads as one small specular the size of the lamp sitting inside a sheen the
+		# size of the sphere. One lobe is a disc; two is a ball.
+		m.clearcoat_enabled = true
+		m.clearcoat = 0.24
+		m.clearcoat_roughness = 0.18
+		# The terminator. Backlight is a per-pixel wrap term — no subsurface, nothing the
+		# Quest cannot afford — and at this size it lifts the dark side by a shade instead
+		# of letting it fall off a cliff into the background. Kept under the albedo so it
+		# cannot become a glow.
+		m.backlight_enabled = true
+		m.backlight = Color(0.030, 0.024, 0.046)
+	else:
+		m = PBR.hard_plastic(albedo_color, _gloss, 0.05)
+		_fit_grain(m, _radius * 2.0, GRAIN_ACROSS_MICRO)
+	PBR.edge_light(m, _rim, _rim_tint)
+
+	# --- everything below is the legacy material, unchanged ---
 	m.albedo_color = Color(
 		albedo_color.r * _tint_mul,
 		albedo_color.g * _tint_mul,
@@ -228,22 +359,14 @@ func _build_material() -> StandardMaterial3D:
 		0.85 * _alpha_mul
 	)
 	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	m.metallic = 0.6
-	m.metallic_specular = 0.7
-	m.roughness = 0.25
-	m.emission_enabled = true
-	m.emission = emission_color
-	m.emission_energy_multiplier = pulse_min * _emit_mul
 	m.cull_mode = BaseMaterial3D.CULL_BACK
-
-	# eclipse is not a dimmer setting — it is a different kind of object. The sheen
-	# has to go too, because a black ball with a specular highlight still reads as a
-	# ball; without it, it reads as a hole cut in the room.
 	if _unlit_body:
+		# eclipse gives nothing back. It still has to be a thing that gives nothing back.
 		m.emission_enabled = false
-		m.metallic = 0.0
-		m.metallic_specular = 0.0
-		m.roughness = 0.95
+	else:
+		m.emission_enabled = true
+		m.emission = emission_color
+		m.emission_energy_multiplier = pulse_min * _emit_mul
 	return m
 
 
@@ -332,7 +455,14 @@ func _build_cage() -> void:
 
 	var frame := Node3D.new()
 	frame.name = "Cage"
-	var metal: StandardMaterial3D = HangarKit.painted_metal(Color(0.46, 0.48, 0.53), 0.30, 0.55, 0.48)
+	# HangarKit -> PbrKit, same four arguments and the same house grey. What arrives now is
+	# a dielectric coat over metal with a roughness texture and a clear film, instead of one
+	# albedo at one metallic; wear stays at 0.30, one notch under painted_metal's grime
+	# threshold, because a multiply-darkening pass over a dark scene is how three subtle
+	# darkenings agree on black. Then the tube-sized tiling, which is the whole reason a
+	# thin part looks painted rather than finished.
+	var metal: StandardMaterial3D = PBR.painted_metal(Color(0.46, 0.48, 0.53), 0.30, 0.55, 0.48)
+	_fit_grain(metal, CAGE_TUBE_M, GRAIN_ACROSS_TUBE)
 	var cage_r: float = _radius * 1.34
 
 	for axis in range(3):
@@ -455,6 +585,25 @@ func _create_halo_ring() -> void:
 	# single frame before _process takes it over. Using _halo_lo here instead would
 	# have made frame zero of every existing capture a shade lighter.
 	halo_mat.albedo_color = Color(0.1, 0.04, 0.16, _halo_seed)
+	# THE POOL'S EDGE. The alpha above is still the peak, directly under the ball, and
+	# _process still drives it; the texture only says how that alpha falls off with radius.
+	# A disc painted one flat value out to a hard circle is a flat region — the same fault
+	# as a flat sphere, on the largest single surface this artifact owns — and it is also
+	# what let the ball merge into its own shadow, because the two were the same tone with
+	# a rule drawn between them. A falloff gives the floor a gradient to sit the sphere in.
+	halo_mat.albedo_texture = _pool_falloff()
+	halo_mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	# Triplanar in LOCAL space, exactly one repeat across the disc's own diameter. The disc
+	# spans local x,z in [-r, r], so at this scale its UV spans [-0.5, 0.5] — which wraps to
+	# the texture's four CORNERS meeting at the centre of the disc. That is why the falloff
+	# in _pool_falloff() is built around the corner and not the middle: it makes the pattern
+	# seamless, and it keeps the mapping independent of how Godot happens to lay out a
+	# CylinderMesh cap's UVs, which is not a thing to build a shipped surface on.
+	halo_mat.uv1_triplanar = true
+	halo_mat.uv1_world_triplanar = false
+	var pool_uv: float = 1.0 / maxf(_halo_radius * 2.0, 0.02)
+	halo_mat.uv1_scale = Vector3(pool_uv, pool_uv, pool_uv)
+	halo_mat.uv1_triplanar_sharpness = 1.0
 	halo_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	halo_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	halo_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
@@ -464,6 +613,44 @@ func _create_halo_ring() -> void:
 	_halo_ring.position = Vector3(0, 0.01, 0)
 
 	add_child(_halo_ring)
+
+
+# One 64 px image for every placement in the project. Built on the first _ready and never
+# again — 317 copies of the same gradient is the kind of cost that hides.
+static var _pool_tex: ImageTexture = null
+
+## Radial falloff for the floor pool. White RGB so the disc keeps its own colour and only
+## the alpha channel is doing anything.
+##
+## Centred on the texture's CORNER, so it is periodic in both axes and the wrapped triplanar
+## mapping in _create_halo_ring lands its peak at the middle of the disc with no seam. The
+## radius comes out exact rather than approximate: at that tiling min(u, 1 - u) IS
+## |x| / (2 * radius), so the two axes together give true radial distance in units of the
+## disc's own radius, and the pattern is symmetric under every wrap.
+##
+## The curve is a smoothstep times a linear ramp rather than a plain smoothstep. Smoothstep
+## alone is flat near its peak, which would have traded one uniform region for a slightly
+## smaller uniform region; the ramp keeps a gradient running the whole way out while the
+## smoothstep keeps the rim from ending in a visible ring.
+static func _pool_falloff() -> ImageTexture:
+	if _pool_tex != null:
+		return _pool_tex
+	var px: int = 64
+	var img: Image = Image.create(px, px, false, Image.FORMAT_RGBA8)
+	for y in range(px):
+		for x in range(px):
+			var u: float = (float(x) + 0.5) / float(px)
+			var v: float = (float(y) + 0.5) / float(px)
+			var dx: float = minf(u, 1.0 - u)
+			var dy: float = minf(v, 1.0 - v)
+			var rad: float = clampf(sqrt(dx * dx + dy * dy) * 2.0, 0.0, 1.0)
+			var a: float = 1.0 - rad
+			a = a * a * (3.0 - 2.0 * a)
+			a = a * (0.42 + 0.58 * (1.0 - rad))
+			img.set_pixel(x, y, Color(1.0, 1.0, 1.0, clampf(a, 0.0, 1.0)))
+	img.generate_mipmaps()
+	_pool_tex = ImageTexture.create_from_image(img)
+	return _pool_tex
 
 
 ## Grid system integration

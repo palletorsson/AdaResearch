@@ -102,6 +102,106 @@ class_name AnnotationInfoBoard
 #      nothing. set_animation_enabled() writes it and nothing reads that either.
 # ─────────────────────────────────────────────────────────────────────────────
 
+# ─────────────────────────────────────────────────────────────────────────────
+# RENDER PASS (2026-08-07). tools/render_lint.py measured
+# `voice-noticeboard x support-cabinet` as FLAT: tonal spread under 0.055 and
+# fewer than 40 distinct colours across the subject, which is the numeric
+# signature of one albedo, one roughness, one metallic over a whole object. It
+# was reading a fact about _mat3(): four scalars and no texture of any kind, on
+# every box the two axes have ever built.
+#
+# So the surfaces move to commons/render/pbr_kit.gd. NOTHING ABOUT THE AXES
+# MOVES: the same five voices, the same four native supports, the same
+# geometry per value, the same palette colours (the colour IS the voice's
+# argument), the same emission energies, and the legacy guard still returns
+# before touching a node — so all 1,123 placements, every one of which is
+# voice:system + support:none, remain byte-identical. What changed is that a
+# voice's colour now arrives on a surface with a roughness texture, a micro
+# normal, an honest metallic and a chamfered edge, instead of on a scalar.
+#
+# THE MEASUREMENT THAT DECIDED IT — see the GRAIN_* block below. This artifact
+# is the one place in the corpus where PbrKit's defaults are WRONG out of the
+# box, because the .tscn root bakes a 0.2 scale and the kit's triplanar is
+# local: used raw, its grain lands a texture feature on 0.7 of a pixel. That is
+# not detail, it is static. Every material here is re-scaled by one over the
+# assembly's longest LOCAL dimension.
+#
+# THE SECOND THING, ADDED AFTER RE-READING THE VERDICT: a texture is not an
+# albedo. Grunge on one colour moves the tonal spread by roughly a tenth of the
+# base value, and the cabinet — the variant actually measured — was reading the
+# `body` slot on nine tenths of its new solid: back slab, both stiles, head
+# rail, sill, lock keep. So the pieces standing proud of the carcass now take a
+# second tone derived from the same slot (_vm_tone), lighter and at 55% of the
+# wear. On a timber voice that one number also crosses PbrKit's grunge/micro
+# threshold, so the door is a different SURFACE and not just a different value.
+# The tone is derived from `body` rather than read from `trim` on purpose:
+# `trim` is the palette's LIT slot in three of the five voices, and a glowing
+# bezel around a reading surface is the one thing this artifact may not grow.
+#
+# THE ONE THING THAT MAY NOT REGRESS is the text. This artifact exists to be
+# read, so no new surface may reduce contrast on the reading plane: the
+# Sprite3D, its unshaded ViewportTexture and every label colour are untouched,
+# nothing new was moved in front of a glyph, and the two changes that do land
+# over text — the emissive slot and the flap's amber slivers — got DARKER
+# albedo under the same emission energy, which is the safe direction. The one
+# piece that does cross the sheet, the cabinet's sill, moved to the LIGHTER of
+# the two body tones; it occludes the same 34 rows it always did and now
+# separates from the field behind it instead of merging with it.
+# ─────────────────────────────────────────────────────────────────────────────
+
+const PBR := preload("res://commons/render/pbr_kit.gd")
+
+# ── GRAIN SCALE — the number that decides material from static ───────────────
+#
+# THE UNIT TRAP, AND IT IS SPECIFIC TO THIS ARTIFACT. The .tscn root bakes a 0.2
+# scale (see SPRITE_Y below), so 1 local unit = 0.2 m of world. PbrKit's
+# triplanar is LOCAL — it samples the mesh's own model-space vertex position —
+# so every uv1_scale in the kit means "tiles per local unit", and the kit's
+# defaults (rams_body 4.0, brushed 3 across / 40 along) were tuned on artifacts
+# where a local unit IS a metre. Used raw here they land 5x too fine:
+#
+#     4.0 tiles/unit = 20 tiles/m -> 50 mm tile -> ~2 mm feature -> 0.7 PIXELS
+#
+# in a 760 px frame. A feature under a pixel is the television-static fault, and
+# it is invisible in the code, in the material inspector and under flat ambient
+# — it only appears once a directional key lands on it.
+#
+# PbrKit's rule of thumb is factor ~= 1 / longest_dimension_in_METRES. Fold the
+# unit conversion in and the 0.2 cancels exactly:
+#
+#     factor = (1 / L_metres) * 0.2 = 1 / L_units
+#
+# so the number to pass is one over the assembly's longest LOCAL dimension.
+# Measured, at roughly 3 mm per pixel for a 2 m board photographed at 760 px:
+#
+#   pylon    11.00 u = 2.20 m -> 0.09 -> 1.8 tiles/m -> 23 mm feature -> 7.6 px
+#   cabinet   8.62 u = 1.72 m -> 0.12 -> 2.3 tiles/m -> 18 mm feature -> 6.0 px
+#   stand     9.10 u = 1.82 m -> 0.11 -> 2.2 tiles/m -> 19 mm feature -> 6.3 px
+#   face      8.00 u = 1.60 m -> 0.13 -> 2.5 tiles/m -> 17 mm feature -> 5.6 px
+#
+# ONE FACTOR PER ASSEMBLY, NOT PER PART, and that is not laziness. Local
+# triplanar is POSITION-based, so a single uv1_scale already gives every part of
+# an assembly the same texel density: the 2.6 cm pin head gets a slow tonal
+# drift and the 2.2 m slab gets visible blotches, out of the same number.
+# Sizing the grain per part would do the opposite — it would put the FINEST
+# grain on the SMALLEST parts, which are also the smallest in frame, which is
+# how the static gets made.
+#
+# The strengths are not cut to compensate. Micro normal is the only thing making
+# brushed aluminium and moulded plastic read as anything, and the fault here was
+# never that a grain existed, only that it was sized for a different object.
+const GRAIN_PYLON := 0.09
+const GRAIN_CABINET := 0.12
+const GRAIN_STAND := 0.11
+const GRAIN_FACE := 0.13
+
+# Build the shared grain set once per process, the first time any variant
+# actually dresses. Everything in PbrKit is lazy and cached anyway; doing it up
+# front means no material can render against a still-white noise texture on the
+# first frame of a capture. Never reached on the legacy path, so the default
+# placements pay nothing for it.
+static var _warmed: bool = false
+
 # References to UI elements
 @onready var level_number_label = $Viewport/InfoBoardUI/MainPanel/LevelNumber
 @onready var level_id_label = $Viewport/InfoBoardUI/MainPanel/LevelID
@@ -168,6 +268,23 @@ const DNA_NODE := "InfoBoardDNA"
 # dress the SubViewport UI; `body` / `trim` / `glass` dress the support. The
 # "system" entry exists only so a support built under the legacy voice has
 # somewhere to get its charcoal from — with support:none nothing reads it.
+#
+# EACH 3D SLOT NOW NAMES A PbrKit FAMILY (`k`) AND HOW WORN IT IS (`w`). The
+# colours, the roughnesses and the emission energies below are the ones that
+# shipped — they are what the voice ARGUES and R1 protects them. `k` only says
+# which physical surface that colour lands on, which is the whole render pass:
+#
+#   brushed    rolled-and-brushed metal, metallic 1.0, anisotropic highlight
+#   steelcoat  powder-coated steel thinning to bare metal as it wears
+#   timber     a dielectric film over a body — varnished board, stained frame
+#   plastic    injection-moulded hard plastic with a clear coat
+#   matte      the calm Rams housing; no coat, no metal, soft roughness field
+#   lamp       self-lit, at the palette's OWN energy, with the albedo pulled
+#              down under it so a lit face cannot clip white
+#   glass      one dielectric pane, alpha from the colour, Fresnel rim
+#
+# Nothing sits at the physically meaningless 0.3-0.6 metallic any more except
+# steelcoat, where a failing coat legitimately ramps through the middle.
 const VOICES := {
 	# The legacy lineage. These numbers are lifted from info_board.tscn's
 	# StyleBoxFlat_yc54e and the label defaults; they are never APPLIED (the
@@ -177,9 +294,12 @@ const VOICES := {
 		"field": Color(0.12, 0.12, 0.12), "border_w": 3, "border_c": Color(0.8, 0.0, 0.0),
 		"ink": Color(1, 1, 1), "dim": Color(0.72, 0.72, 0.74),
 		"accent": Color(0.9137757, 0.5173696, 1.0), "sep": Color(0.5, 0.5, 0.5),
-		"body": {"c": Color(0.16, 0.16, 0.17), "r": 0.55},
-		"trim": {"c": Color(0.55, 0.06, 0.06), "r": 0.45, "e": 0.7},
-		"glass": {"c": Color(0.60, 0.75, 0.85, 0.14), "r": 0.05},
+		# Charcoal was 0.16 flat — a near-black with no diffuse left to shade,
+		# which reads as a hole rather than as a dark object. steelcoat lifts it
+		# and gives it a brushed grain to catch on.
+		"body": {"c": Color(0.16, 0.16, 0.17), "r": 0.55, "k": "steelcoat", "w": 0.30},
+		"trim": {"c": Color(0.55, 0.06, 0.06), "r": 0.45, "e": 0.7, "k": "lamp"},
+		"glass": {"c": Color(0.60, 0.75, 0.85, 0.14), "r": 0.05, "k": "glass"},
 		"face": "",
 	},
 	# The lobby directory: a lit sheet of white behind a brushed frame. Nobody
@@ -189,9 +309,14 @@ const VOICES := {
 		"field": Color(0.93, 0.94, 0.96), "border_w": 2, "border_c": Color(0.62, 0.65, 0.70),
 		"ink": Color(0.07, 0.08, 0.10), "dim": Color(0.30, 0.32, 0.36),
 		"accent": Color(0.03, 0.35, 0.62), "sep": Color(0.72, 0.74, 0.78),
-		"body": {"c": Color(0.66, 0.68, 0.71), "r": 0.22, "m": 0.85},
-		"trim": {"c": Color(0.88, 0.92, 0.97), "r": 0.15, "m": 0.5, "e": 0.9},
-		"glass": {"c": Color(0.88, 0.94, 1.00, 0.10), "r": 0.02},
+		# metallic 0.85 was neither metal nor dielectric. brushed_metal takes it to
+		# a true 1.0 with a coloured specular and a roughness that VARIES 0.19-0.31,
+		# so the highlight is a lobe smeared along the brush rather than one
+		# mirror-smooth sweep — which is also what stops it going black in a room
+		# with nothing to reflect.
+		"body": {"c": Color(0.66, 0.68, 0.71), "r": 0.22, "m": 0.85, "k": "brushed", "w": 0.16},
+		"trim": {"c": Color(0.88, 0.92, 0.97), "r": 0.15, "m": 0.5, "e": 0.9, "k": "lamp"},
+		"glass": {"c": Color(0.88, 0.94, 1.00, 0.10), "r": 0.02, "k": "glass"},
 		"face": "header",
 	},
 	# The cork board by the lift. Anyone with a pin may add to it, and everyone
@@ -200,9 +325,18 @@ const VOICES := {
 		"field": Color(0.62, 0.44, 0.26), "border_w": 0, "border_c": Color(0.36, 0.22, 0.11),
 		"ink": Color(0.12, 0.09, 0.06), "dim": Color(0.27, 0.20, 0.14),
 		"accent": Color(0.45, 0.11, 0.08), "sep": Color(0.44, 0.31, 0.18),
-		"body": {"c": Color(0.36, 0.22, 0.11), "r": 0.72},
-		"trim": {"c": Color(0.52, 0.34, 0.17), "r": 0.65},
-		"glass": {"c": Color(0.82, 0.86, 0.80, 0.13), "r": 0.12},
+		# THE FRAME THE LINTER CALLED FLAT was this timber under support:cabinet.
+		# The carcass sits at 0.36, deliberately ABOVE painted_metal's 0.30
+		# threshold, so it picks up the big warped grunge blotches AND a grime
+		# pass. Its door is the same entry read through _vm_tone at 55% of that
+		# wear, which lands UNDER the threshold: fine micro grain, clear coat
+		# intact, no grime. Old wood next to newer wood, which is what a board
+		# that has been repaired looks like — and note that the second tone is
+		# derived, not stored, because `trim` here reaches only the hinges, the
+		# lock and the pediment and could never have carried the read.
+		"body": {"c": Color(0.36, 0.22, 0.11), "r": 0.72, "k": "timber", "w": 0.36},
+		"trim": {"c": Color(0.52, 0.34, 0.17), "r": 0.65, "k": "timber", "w": 0.26},
+		"glass": {"c": Color(0.82, 0.86, 0.80, 0.13), "r": 0.12, "k": "glass"},
 		"face": "pins",
 	},
 	# The departure board. Only the timetable writes here, and it writes by
@@ -211,9 +345,14 @@ const VOICES := {
 		"field": Color(0.035, 0.035, 0.045), "border_w": 0, "border_c": Color(0.07, 0.07, 0.08),
 		"ink": Color(1.00, 0.72, 0.15), "dim": Color(0.84, 0.59, 0.12),
 		"accent": Color(0.98, 0.80, 0.28), "sep": Color(0.22, 0.17, 0.06),
-		"body": {"c": Color(0.07, 0.07, 0.08), "r": 0.45},
-		"trim": {"c": Color(1.00, 0.68, 0.12), "r": 0.35, "e": 1.1},
-		"glass": {"c": Color(0.20, 0.20, 0.22, 0.18), "r": 0.06},
+		# 0.07 was effectively pure black — PbrKit's own audit flags that as "nothing
+		# left to shade". Same charcoal, but as a worn powder coat: it keeps its
+		# darkness and gains a surface. Amber energy is UNCHANGED at 1.1; only the
+		# albedo under it comes down, which if anything lifts contrast on the two
+		# slivers that cross the text.
+		"body": {"c": Color(0.07, 0.07, 0.08), "r": 0.45, "k": "steelcoat", "w": 0.34},
+		"trim": {"c": Color(1.00, 0.68, 0.12), "r": 0.35, "e": 1.1, "k": "lamp"},
+		"glass": {"c": Color(0.20, 0.20, 0.22, 0.18), "r": 0.06, "k": "glass"},
 		"face": "seams",
 	},
 	# A4, printed at somebody's desk, taped up crooked. The most amendable
@@ -224,9 +363,12 @@ const VOICES := {
 		"field": Color(0.95, 0.94, 0.90), "border_w": 0, "border_c": Color(0.80, 0.79, 0.76),
 		"ink": Color(0.06, 0.06, 0.07), "dim": Color(0.32, 0.32, 0.32),
 		"accent": Color(0.55, 0.10, 0.10), "sep": Color(0.62, 0.61, 0.58),
-		"body": {"c": Color(0.80, 0.79, 0.76), "r": 0.85},
-		"trim": {"c": Color(0.92, 0.90, 0.84), "r": 0.60},
-		"glass": {"c": Color(0.90, 0.90, 0.88, 0.10), "r": 0.30},
+		# The quietest voice keeps the quietest surface: matte is the family default,
+		# no coat and no metal, a roughness that varies just enough that the
+		# highlight is a soft field instead of a flat wash.
+		"body": {"c": Color(0.80, 0.79, 0.76), "r": 0.85, "k": "matte", "w": 0.24},
+		"trim": {"c": Color(0.92, 0.90, 0.84), "r": 0.60, "k": "plastic", "w": 0.12},
+		"glass": {"c": Color(0.90, 0.90, 0.88, 0.10), "r": 0.30, "k": "glass"},
 		"face": "tape",
 	},
 }
@@ -877,6 +1019,9 @@ func _dress() -> void:
 	if voice == "system" and support == "none":
 		_dressed_as = want
 		return
+	if not _warmed:
+		_warmed = true
+		PBR.warm_cache()
 	var old: Node = get_node_or_null(DNA_NODE)
 	if old:
 		old.free()
@@ -993,8 +1138,8 @@ func _dress_face(face: Node3D) -> void:
 # stiles standing just outside the panel edge. All of it clears the text: the
 # header covers the top 0.47 local, where the .tscn leaves 60 px of dead margin.
 func _face_header(face: Node3D) -> void:
-	var alu: StandardMaterial3D = _vm("body")
-	var lit: StandardMaterial3D = _vm("trim")
+	var alu: StandardMaterial3D = _vm("body", GRAIN_FACE)
+	var lit: StandardMaterial3D = _vm("trim", GRAIN_FACE)
 	_vbox(face, Vector3(6.9, 0.62, 0.36), Vector3(0, PANEL_TOP - 0.24, 0.18), alu)
 	_vbox(face, Vector3(5.8, 0.10, 0.10), Vector3(0, PANEL_TOP - 0.60, 0.22), lit)
 	for sx in [-1.0, 1.0]:
@@ -1008,13 +1153,28 @@ func _face_header(face: Node3D) -> void:
 # margins the .tscn leaves outside its 500 px label boxes. No paper slips: they
 # would land on the blurb, and a caption you cannot read is not a variant.
 func _face_pins(face: Node3D) -> void:
-	var brass := _mat3(Color(0.78, 0.60, 0.24), 0.28, 0.0, 0.85)
-	var shaft := _mat3(Color(0.55, 0.42, 0.18), 0.4, 0.0, 0.7)
+	# Brass and steel at a true metallic 1.0 — 0.85 and 0.7 were the physically
+	# meaningless middle. A 2.6 cm ball's read is its HIGHLIGHT, not its texture:
+	# at GRAIN_FACE the whole head sits inside a single noise blob, so each pin
+	# gets a slow tonal drift rather than speckle on a nine-pixel object. That is
+	# the right answer for a small part, and the opposite of what sizing the
+	# grain to the PART would have given.
+	var brass: StandardMaterial3D = PBR.scale_detail(
+			PBR.machined_metal(Color(0.78, 0.60, 0.24), 0.28, 0.10), GRAIN_FACE)
+	var shaft: StandardMaterial3D = PBR.scale_detail(
+			PBR.worn_metal(Color(0.55, 0.42, 0.18), 0.30), GRAIN_FACE)
 	for sx in [-1.0, 1.0]:
 		for py in [0.55, 7.50]:
 			var head := SphereMesh.new()
 			head.radius = 0.13
 			head.height = 0.20
+			# Godot's SphereMesh defaults to 64 x 32 — about 4,000 triangles for
+			# a 2.6 cm pin head, four of them, on an artifact that ships to a
+			# Quest. 16 x 8 is 256 and identical in silhouette at this size, and
+			# it buys back more than the chamfers cost. The oblate height stays
+			# authored: the pin's shape is not what this pass is changing.
+			head.radial_segments = 16
+			head.rings = 8
 			var mi := MeshInstance3D.new()
 			mi.mesh = head
 			mi.material_override = brass
@@ -1026,8 +1186,8 @@ func _face_pins(face: Node3D) -> void:
 # (which is what a split-flap does to a glyph) and one on the separator row.
 # Deliberately static — the flip is a per-second event and invisible to a still.
 func _face_seams(face: Node3D) -> void:
-	var black: StandardMaterial3D = _vm("body")
-	var amber: StandardMaterial3D = _vm("trim")
+	var black: StandardMaterial3D = _vm("body", GRAIN_FACE)
+	var amber: StandardMaterial3D = _vm("trim", GRAIN_FACE)
 	_vbox(face, Vector3(6.9, 0.62, 0.34), Vector3(0, PANEL_TOP - 0.29, 0.17), black)
 	_vbox(face, Vector3(5.9, 0.09, 0.09), Vector3(0, PANEL_TOP - 0.66, 0.21), amber)
 	for sy in [6.57, 5.31]:
@@ -1039,7 +1199,17 @@ func _face_seams(face: Node3D) -> void:
 # TAPED. Four tabs at 45 degrees over the sheet corners. The 2.5-degree list that
 # sells it comes from _sheet_xform(), which has already been applied to `face`.
 func _face_tape(face: Node3D) -> void:
-	var tape := _mat3(Color(0.86, 0.85, 0.79, 0.72), 0.55, 0.0, 0.0)
+	# Matte packing tape: a dielectric film light gets THROUGH rather than off.
+	# hard_plastic supplies the micro-roughness and the thin-edge rim; the alpha
+	# and the backlight are what make it tape and not a white sticker.
+	# Deliberately low gloss — a specular sheet over the sheet's own corners
+	# would fight the text it is holding up, and legibility outranks finish here.
+	var tape: StandardMaterial3D = PBR.hard_plastic(Color(0.86, 0.85, 0.79), 0.22, 0.10)
+	tape.albedo_color = Color(0.86, 0.85, 0.79, 0.72)
+	tape.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	tape.backlight_enabled = true
+	tape.backlight = Color(0.26, 0.26, 0.24)
+	PBR.scale_detail(tape, GRAIN_FACE)
 	var i := 0
 	for sx in [-1.0, 1.0]:
 		for py in [0.45, 7.60]:
@@ -1083,8 +1253,8 @@ func _build_support(holder: Node3D) -> void:
 # The key is "stand" in both (it was "easel" in both before the convergence) and
 # they must move together or the board leans off its own frame.
 func _support_stand(holder: Node3D) -> void:
-	var wood: StandardMaterial3D = _vm("body")
-	var trim: StandardMaterial3D = _vm("trim")
+	var wood: StandardMaterial3D = _vm("body", GRAIN_STAND)
+	var trim: StandardMaterial3D = _vm("trim", GRAIN_STAND)
 	var lean := Node3D.new()
 	lean.name = "Lean"
 	holder.add_child(lean)
@@ -1108,6 +1278,9 @@ func _support_stand(holder: Node3D) -> void:
 	strut.rotation_degrees = Vector3(11.6, 0, 0)
 	for sx in [-1.0, 1.0]:
 		_vbox(holder, Vector3(0.90, 0.26, 2.6), Vector3(sx * 3.05, 0.13, 0.20), trim)
+	# The feet reach 3.05 out and the rear foot 1.65 back; a pool a touch wider
+	# than the feet reads as contact without becoming a puddle.
+	_contact(holder, 3.6)
 
 # CABINET. A glazed bezel with two hinge barrels, a lock and a sloped pediment —
 # the parish/university board you may read but not open. Joinery integrated with
@@ -1115,17 +1288,27 @@ func _support_stand(holder: Node3D) -> void:
 # board and becomes a box. The bezel alone puts 0.56 m2 of new solid outside the
 # panel's silhouette.
 func _support_cabinet(holder: Node3D) -> void:
-	var body: StandardMaterial3D = _vm("body")
-	var trim: StandardMaterial3D = _vm("trim")
-	var glass: StandardMaterial3D = _vm("glass")
+	var body: StandardMaterial3D = _vm("body", GRAIN_CABINET)
+	# THE DOOR IS NOT THE CARCASS. Every piece standing PROUD of the back slab —
+	# both stiles, the head rail, the sill, the lock keep — is the leaf you would
+	# open, so it carries its own tone: 0.16 lighter and at 55% of the carcass's
+	# wear. See _vm_tone for why it is derived from `body` and not read from
+	# `trim`. This is the largest single change the render pass makes to the
+	# variant the linter actually measured — the front of the box stops being one
+	# colour with the back of it.
+	var door: StandardMaterial3D = _vm_tone("body", GRAIN_CABINET, 0.16, 0.55)
+	var trim: StandardMaterial3D = _vm("trim", GRAIN_CABINET)
+	var glass: StandardMaterial3D = _vm("glass", GRAIN_CABINET)
 	_vbox(holder, Vector3(7.1, 8.5, 0.35), Vector3(0, 4.25, -0.30), body)        # back slab
 	for sx in [-1.0, 1.0]:
-		_vbox(holder, Vector3(0.55, 8.5, 0.48), Vector3(sx * 3.28, 4.25, 0.14), body)
-	_vbox(holder, Vector3(7.1, 0.55, 0.48), Vector3(0, 8.22, 0.14), body)        # head rail
+		_vbox(holder, Vector3(0.55, 8.5, 0.48), Vector3(sx * 3.28, 4.25, 0.14), door)
+	_vbox(holder, Vector3(7.1, 0.55, 0.48), Vector3(0, 8.22, 0.14), door)        # head rail
 	# The sill is the one place the case has to eat into the poster: the panel's
 	# bottom edge is 4.5 mm off the floor, so there is nowhere below it to put a
 	# rail. Held to 0.34 (UI rows 768+) and the hint line is lifted clear below.
-	_vbox(holder, Vector3(7.1, 0.34, 0.48), Vector3(0, 0.17, 0.14), body)        # sill
+	# It takes the DOOR tone, which on every voice is the lighter of the two —
+	# the safe direction for a piece that sits in front of the reading surface.
+	_vbox(holder, Vector3(7.1, 0.34, 0.48), Vector3(0, 0.17, 0.14), door)        # sill
 	var hint: Node = get_node_or_null("Viewport/InfoBoardUI/MainPanel/ContextHint")
 	if hint and hint is Label:
 		var h := hint as Label
@@ -1137,10 +1320,11 @@ func _support_cabinet(holder: Node3D) -> void:
 	for hy in [2.30, 6.20]:
 		_vcyl(holder, Vector3(-3.28, hy, 0.34), 0.13, 0.55, trim, Vector3(0, 0, 0))
 	_vcyl(holder, Vector3(3.34, 4.25, 0.34), 0.20, 0.12, trim, Vector3(90, 0, 0))
-	_vbox(holder, Vector3(0.09, 0.30, 0.10), Vector3(3.34, 4.05, 0.40), body)
+	_vbox(holder, Vector3(0.09, 0.30, 0.10), Vector3(3.34, 4.05, 0.40), door)    # lock keep
 	# pediment — a board that lives outdoors gets a roof
 	var roof := _vbox(holder, Vector3(7.7, 0.24, 1.30), Vector3(0, 8.62, 0.28), trim)
 	roof.rotation_degrees = Vector3(-14, 0, 0)
+	_contact(holder, 3.9)
 
 # PYLON. 1.92 x 2.20 m of monolith with the panel sunk into a reveal, on a stepped
 # base with a capping course. Nearly 3x the object's projected area — the heaviest
@@ -1148,8 +1332,8 @@ func _support_cabinet(holder: Node3D) -> void:
 # money. Also where `gantry` lands: the cap course at 11.15 against a panel top of
 # 8.02 is the only real structure this artifact carries ABOVE the sheet.
 func _support_pylon(holder: Node3D) -> void:
-	var body: StandardMaterial3D = _vm("body")
-	var trim: StandardMaterial3D = _vm("trim")
+	var body: StandardMaterial3D = _vm("body", GRAIN_PYLON)
+	var trim: StandardMaterial3D = _vm("trim", GRAIN_PYLON)
 	_vbox(holder, Vector3(9.6, 11.0, 1.20), Vector3(0, 5.50, -0.66), body)       # slab
 	# Base course and reveal both sit wholly BEHIND the panel plane (z < 0). Pushed
 	# forward they would occlude the bottom two text rows and the whole sheet
@@ -1157,58 +1341,169 @@ func _support_pylon(holder: Node3D) -> void:
 	_vbox(holder, Vector3(10.6, 0.50, 2.00), Vector3(0, 0.25, -1.05), trim)      # base course
 	_vbox(holder, Vector3(10.2, 0.38, 1.70), Vector3(0, 11.15, -0.55), trim)     # cap
 	# the reveal: a darker recess ringing the panel so it reads as sunk, not stuck on
-	var rec := _mat3(_col("field", Color(0.1, 0.1, 0.1)).darkened(0.55), 0.8, 0.0, 0.0)
+	# A reveal is the one place in this artifact a crevice map earns its keep:
+	# a recess is exactly where ambient light does not reach, and a large flat
+	# slab is exactly where scene SSAO has nothing to bite on. It is also the
+	# darkening budget spent in full — the colour is already 55% down off the
+	# field — so this material takes no vertex wear and no weathering pass.
+	var rec: StandardMaterial3D = PBR.rams_body(
+			_col("field", Color(0.1, 0.1, 0.1)).darkened(0.55), 0.05)
+	PBR.crevice_ao(rec, 0.45)
+	PBR.scale_detail(rec, GRAIN_PYLON)
+	rec.set_meta("vwear", 0.0)
 	_vbox(holder, Vector3(6.9, 8.6, 0.30), Vector3(0, PANEL_BOT + 4.30, -0.20), rec)
 	for sx in [-1.0, 1.0]:
 		_vbox(holder, Vector3(0.26, 8.9, 0.26), Vector3(sx * 3.36, PANEL_BOT + 4.30, 0.02), trim)
 	_vbox(holder, Vector3(7.4, 0.26, 0.26), Vector3(0, PANEL_BOT + 8.72, 0.02), trim)
+	_contact(holder, 5.4)
 
 # ── primitives ───────────────────────────────────────────────────────────────
 
-func _mat3(c: Color, rough: float = 0.6, emit: float = 0.0, metal: float = 0.0) -> StandardMaterial3D:
-	var m := StandardMaterial3D.new()
-	m.albedo_color = c
-	m.roughness = rough
-	if metal > 0.0:
-		m.metallic = metal
-	if c.a < 1.0:
-		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	if emit > 0.0:
-		m.emission_enabled = true
-		m.emission = Color(c.r, c.g, c.b)
-		m.emission_energy_multiplier = emit
-	return m
-
-# A material from a voice palette slot. The fallbacks match _mat3's own defaults,
-# so a half-specified voice degrades to plain matte rather than to nothing.
-func _vm(slot: String) -> StandardMaterial3D:
+# A material from a voice palette slot, built by PbrKit rather than by hand.
+#
+# `grain` is the assembly's 1 / longest-local-dimension — see the GRAIN_* block.
+# It is a required argument on purpose: the old _mat3 could be called without
+# thinking about scale, and that is the fault this pass exists to fix.
+#
+# The fallbacks keep a half-specified voice degrading to plain matte rather than
+# to nothing, which is what the hand-rolled version did.
+func _vm(slot: String, grain: float) -> StandardMaterial3D:
 	var d: Dictionary = _pal().get(slot, {})
 	var c: Color = d.get("c", Color(0.8, 0.8, 0.8))
-	var r: float = float(d.get("r", 0.6))
-	var em: float = float(d.get("e", 0.0))
-	var mt: float = float(d.get("m", 0.0))
-	return _mat3(c, r, em, mt)
+	return _vm_build(str(d.get("k", "matte")), c, float(d.get("r", 0.6)),
+			float(d.get("e", 0.0)), float(d.get("w", 0.18)), grain)
+
+# A SECOND TONE OFF THE SAME SLOT — same wood, same coat, different age.
+#
+# THE FLAT VERDICT WAS ABOUT AREA, NOT ABOUT TEXTURE. A grunge map on one albedo
+# moves the tonal spread by about a tenth of the base value; a second albedo
+# moves it by half. The cabinet was the variant the linter measured and it read
+# `body` on the back slab, both stiles, the head rail, the sill AND the lock
+# keep — nine tenths of the new solid in frame, all one colour. So the DOOR gets
+# its own tone and the carcass keeps the palette's.
+#
+# LIGHTER, then LESS WORN, in that order and for reasons:
+#   lighter    two of the five voices put a near-black in `body` (flap 0.07,
+#              system 0.16), and on a near-black the only direction with any
+#              room in it is up. Darkening a second piece would have produced
+#              the hole PbrKit's own audit warns about, twice.
+#   less worn  under PbrKit.painted_metal's 0.30 threshold the same colour
+#              switches from big warped grunge WITH a grime pass to fine micro
+#              grain with its clear coat intact. One number therefore buys two
+#              different SURFACES, not just two values — which is the "old wood
+#              next to newer wood" the noticeboard palette already claimed and
+#              did not previously deliver anywhere it could be seen.
+#
+# DERIVED FROM `body`, NOT READ FROM `trim`, and that is the whole care in this
+# function. `trim` is the palette's LIT slot: three of the five voices put an
+# emissive there (system red 0.7, directory white 0.9, flap amber 1.1). A bezel
+# routed to it would become a glowing frame around the reading surface, which is
+# the one thing this artifact may not do — and it would raise the emissive area
+# of an already lamp-heavy corpus for nothing.
+func _vm_tone(slot: String, grain: float, lift: float, wear_scale: float) -> StandardMaterial3D:
+	var d: Dictionary = _pal().get(slot, {})
+	var c: Color = d.get("c", Color(0.8, 0.8, 0.8))
+	return _vm_build(str(d.get("k", "matte")), c.lightened(clampf(lift, 0.0, 1.0)),
+			float(d.get("r", 0.6)), float(d.get("e", 0.0)),
+			float(d.get("w", 0.18)) * maxf(wear_scale, 0.0), grain)
+
+func _vm_build(kind: String, c: Color, r: float, em: float, w: float,
+		grain: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = null
+	# How much edge-lighter / base-darker wear PbrKit.box may bake into the
+	# vertex colours. THREE SUBTLE DARKENINGS AGREE ON BLACK: a grime multiply,
+	# an AO map and baked vertex wear each take "a little" off and the result is
+	# a hole. So any family that already runs its own weathering pass gets zero
+	# here, and no surface in this file carries more than two.
+	var vwear: float = 0.22
+	match kind:
+		"brushed":
+			m = PBR.brushed_metal(c, r, w, "y")
+		"steelcoat":
+			# terminal_body darkens its albedo AND weathers itself above wear 0.18.
+			# That is already two.
+			m = PBR.terminal_body(c, w)
+			vwear = 0.0
+		"timber":
+			# painted_metal at metal 0 is a dielectric film over a body, which is
+			# exactly a varnished board. Above wear 0.30 it swaps micro grain for
+			# the big warped grunge and adds a grime pass of its own.
+			m = PBR.painted_metal(c, w, 0.0, r)
+			if w > 0.30:
+				vwear = 0.0
+		"plastic":
+			m = PBR.hard_plastic(c, clampf(1.0 - r, 0.0, 1.0), w)
+			vwear = 0.18
+		"lamp":
+			# Energy is the palette's OWN, unchanged. This corpus is already full
+			# of lit lines and the capture rig has bloom off because it fattened
+			# every one of them past its own silhouette; the only move available
+			# is downward, and PbrKit's is to pull the albedo out from under the
+			# emission so a lit face cannot clip to white.
+			m = PBR.emissive(c, em)
+			vwear = 0.0
+		"glass":
+			# One pane, never stacked — transparency is overdraw and overdraw is
+			# the Quest's tightest budget. Roughness stays above 0.01 in every
+			# voice, so the pane keeps a specular LOBE instead of being a perfect
+			# mirror with nothing to reflect.
+			m = PBR.glass(c, r, c.a)
+			vwear = 0.0
+		_:
+			m = PBR.rams_body(c, w)
+	PBR.scale_detail(m, grain)
+	m.set_meta("vwear", vwear)
+	return m
+
+# Vertex-wear budget carried on the material, so _vbox can honour it without
+# every call site having to repeat it.
+func _vwear_of(mat: StandardMaterial3D) -> float:
+	if mat != null and mat.has_meta("vwear"):
+		return float(mat.get_meta("vwear"))
+	return 0.0
+
+# Chamfer width in LOCAL units. Real objects have no zero-radius edges, and a
+# chamfer catching a highlight line is the clearest single difference between a
+# render and a box.
+#
+# PbrKit.box derives its own default from the smallest dimension and clamps it
+# to 14 mm — right when a local unit is a metre, 2.8 mm here, which is under a
+# pixel on a 2 m board. So the clamp is restated in this artifact's units:
+# 12 mm to 75 mm local, which is 2.4 mm to 15 mm of world, or 1-5 px in frame.
+#
+# Below 0.12 units (24 mm) a part is a hairline strip — the flap's seam slivers,
+# the directory's lit slot, the pin shafts. Returning 0 there sends PbrKit.box
+# down its plain-BoxMesh path: 12 triangles instead of 44, and identical on
+# screen. That is most of the part count, and it is how the R2 budget survives
+# chamfering everything that is actually thick enough to show one.
+func _bev(size: Vector3) -> float:
+	var mn: float = minf(minf(absf(size.x), absf(size.y)), absf(size.z))
+	if mn < 0.12:
+		return 0.0
+	return clampf(mn * 0.09, 0.012, 0.075)
 
 func _vbox(parent: Node3D, size: Vector3, pos: Vector3, mat: StandardMaterial3D) -> MeshInstance3D:
-	var mi := MeshInstance3D.new()
-	var bm := BoxMesh.new()
-	bm.size = size
-	mi.mesh = bm
-	mi.material_override = mat
-	mi.position = pos
+	var mi: MeshInstance3D = PBR.box(pos, size, mat, _bev(size), _vwear_of(mat))
 	parent.add_child(mi)
 	return mi
 
+# Chamfered rims rather than CylinderMesh's zero-radius corner, which disappears
+# against any background. Also CHEAPER than what it replaces: Godot's
+# CylinderMesh defaults to 64 radial segments, and nothing here is bigger than a
+# 5 cm hinge barrel, so 20 is generous.
 func _vcyl(parent: Node3D, pos: Vector3, radius: float, height: float,
 		mat: StandardMaterial3D, rot: Vector3) -> MeshInstance3D:
-	var mi := MeshInstance3D.new()
-	var cm := CylinderMesh.new()
-	cm.top_radius = radius
-	cm.bottom_radius = radius
-	cm.height = height
-	mi.mesh = cm
-	mi.material_override = mat
+	var mi: MeshInstance3D = PBR.chamfer_cylinder(radius, height, -1.0, mat, 20,
+			_vwear_of(mat))
 	mi.position = pos
 	mi.rotation_degrees = rot
 	parent.add_child(mi)
 	return mi
+
+# A projected contact pool, so a support MEETS the floor instead of hovering
+# over it. It is a Decal, so it conforms to whatever it lands on rather than
+# z-fighting a floor quad, and a Decal is not a light — this spends nothing
+# against the R2 light budget. One per support, never on support:none, which
+# never reaches here.
+func _contact(holder: Node3D, radius: float) -> void:
+	holder.add_child(PBR.ground_shadow(radius, 0.45, 0.10))

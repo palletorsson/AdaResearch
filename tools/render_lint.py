@@ -98,28 +98,41 @@ def measure(p: Path) -> dict:
     import numpy as np
     from PIL import Image
     im = Image.open(p).convert("RGB")
-    a = np.asarray(im, dtype=np.int16)
-    bg = a[3, 3]
+    a_full = np.asarray(im, dtype=np.int16)
+
+    # THE MASK HAS TO BE A CENTRAL CROP, and shipping it without this was the same
+    # mistake this tool exists to catch, made inside the tool itself.
+    #
+    # The corner-pixel background convention is correct on the DEFAULT rig, where an
+    # artifact floats on flat colour, and that is what this was calibrated against. The
+    # SHOWCASE rig puts a lit ground under the subject, so "differs from the corner" then
+    # means "is not sky" — the whole floor joins the subject. Measured on tt: subject_share
+    # 0.11 on the published frame against 0.81 on the showcase render of the same artifact.
+    # Every FLAT and CRUSHED number on a showcase frame was therefore describing the floor,
+    # and a cross-rig before/after was comparing two different measurements.
+    #
+    # aaa_ab_sheet.py already hit this and already fixed it the same way; the fix simply
+    # was not carried across. Both rigs frame identically by construction, so a fixed
+    # central window holds the subject in either one and compares like with like.
+    h, w = a_full.shape[:2]
+    m = int(min(w, h) * 0.225)
+    a = a_full[m:h - m, m:w - m]
+    bg = a_full[3, 3]
     mask = np.abs(a - bg).sum(axis=2) > 36
     n = int(mask.sum())
-    out = {"subject_share": round(n / mask.size, 4)}
+    out = {"subject_share": round(float(n) / mask.size, 4),
+           "frame_share": round(float((np.abs(a_full - bg).sum(axis=2) > 36).mean()), 4)}
     if n < 200:
         out["EMPTY"] = True
         return out
     g = (0.2126 * a[..., 0] + 0.7152 * a[..., 1] + 0.0722 * a[..., 2])
     subj = g[mask]
     out["clipped"] = round(float((subj >= 250).mean() * 100.0), 2)
-    # PER-CHANNEL clipping, and the luminance measure above is BLIND to it. A blind
-    # critic reading crops found "72.5% of subject pixels at R=255" on a frame this
-    # linter called clean — because fully clipped pure red is luminance 54, nowhere near
-    # the 250 threshold. Saturated emissives are a third of this corpus (wireframes,
-    # tally lamps, hazard markers), so the channel that actually blows is almost never
-    # the luminance. Measured on the worst single channel.
     chans = a[mask]
     out["clipped_ch"] = round(float((chans >= 250).any(axis=1).mean() * 100.0), 2)
     out["crushed"] = round(float((subj <= 4).mean() * 100.0), 2)
     out["midtone_sd"] = round(float(subj.std() / 255.0), 4)
-    q = (a[mask] // 16).astype(np.int32)
+    q = (chans // 16).astype(np.int32)
     out["colours"] = int(len(np.unique(q[:, 0] * 4096 + q[:, 1] * 64 + q[:, 2])))
     return out
 

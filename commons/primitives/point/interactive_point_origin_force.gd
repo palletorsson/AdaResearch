@@ -24,6 +24,71 @@ class_name InteractivePointOriginForce
 ## stop firing.
 
 const FORCE_SHADER: Shader = preload("res://commons/primitives/point/force_catalyst.gdshader")
+const PBR := preload("res://commons/render/pbr_kit.gd")
+
+# ── GRAIN SCALE, WHICH IS THE WHOLE GAME ────────────────────────────────
+#
+# The bead is a SPHERE OF RADIUS 0.03 — 60 mm across, the smallest subject
+# anything in this render pass has been asked to finish. point_mesh.gd writes
+# it into the host MeshInstance3D before this script's _ready runs, and the
+# whole artifact at retention=none is that ball and nothing else.
+#
+# It is also photographed small. Measured off the published sweep frame, the
+# subject's bounding box is 60 x 61 px in a 760 px capture, which is
+#
+#     1000 pixels per metre
+#
+# — because the harness fits ONE camera distance to all five values of the
+# axis, and `archive` is 512 px wide. (That is a framing fact, not a materials
+# fact; it is written up at the bottom of this block.)
+#
+# PbrKit's blob arithmetic, the same one exit_sign.gd uses:
+#
+#     blob_px  =  (px_per_m / tiles_per_m) / 24
+#
+# because GRAIN_MICRO's dominant octave is about 1/24 of a tile. Solving for a
+# feature about SIX pixels wide — exit_sign measured 10-16 px as reading like
+# dirt on a small part, and under ~3 px as television static:
+#
+#     tiles_per_m = 1000 / (6 * 24) = 6.9  ->  7.0
+#
+# One tile is then 0.143 m of surface arc, holding ~24 blobs, so a blob is
+# about 6 mm of surface and roughly TEN of them span the visible face of the
+# bead. A surface, not static.
+#
+# WHAT THE RULE OF THUMB WOULD HAVE DONE HERE, since this is the lesson that
+# cost the most: PbrKit.scale_detail's docstring suggests factor ~= 1 /
+# longest_dimension, which on a 0.06 m object is 16.7, applied on top of a kit
+# default near 5 — about 83 tiles per metre, a blob of HALF A PIXEL. The rule
+# of thumb is calibrated for parts in the 0.1-1 m band and inverts below it.
+# On a bead it does not produce detail, it produces noise finer than the pixel
+# grid, which is precisely the failure three rounds of critics blamed on six
+# different post-process settings.
+#
+# The sphere's UV needs one more correction the triplanar path does not: u
+# spans 2*pi*r of arc and v spans pi*r, so equal tiling in UV gives blobs twice
+# as wide as they are tall. _apply_bead_finish multiplies each axis by its own
+# arc length, which is why grain_uv is a vec2 and not a float.
+#
+# NOTHING ELSE ON THIS ARTIFACT NEEDS SCALING. The wax plate is 0.31 m across
+# and PbrKit's own defaults land its blob at 6.7 px (hard_plastic, 5 tiles/m)
+# and the clearing sheet's at 5.6 px (glass, 6 tiles/m) — the kit is tuned for
+# objects that size, and reaching for scale_detail there would have been
+# fiddling with a number that was already right.
+#
+# THE FRAMING FACT, LEFT ALONE ON PURPOSE. `none` occupies 0.50% of its frame,
+# well under the linter's 6% "below measurable" floor, and the obvious fix is
+# the registry's dna.framing key — the sibling interactive_point_origin carries
+# framing 0.3 for exactly this. It does not work here. _framing in
+# capture_config_sweep.gd scales ONE camera distance shared by every value of
+# the axis, and this axis's values are not the same size: measured, `archive`
+# already spans 512 px and `wax` 249 px of a 760 px frame, so any framing below
+# about 1.0 crops archive out of its own picture. Two of five values would be
+# destroyed to enlarge a third. The materials work below therefore has to
+# survive at 60 px — which it does, because what fixes a flat sphere is the
+# whole-object gradient a light draws across it, not the grain. The grain only
+# has to avoid becoming static, which is what the number above is for.
+const GRAIN_TILES_PER_M: float = 7.0
 
 # ── Catalyst-mode factories ────────────────────────────────────────────
 # Use the canonical mode_<name>.gd scripts (NOT the <name>_projectile.gd
@@ -170,6 +235,13 @@ func _ready() -> void:
 
 # Replace the base class's _glow_material with our shader material so the
 # vertex morph runs on the SAME MeshInstance3D the base class set up.
+#
+# Note this is the ONLY material the bead ever shows. The parent's _apply_glow
+# / _restore_original_material pair writes to set_surface_override_material(0),
+# and material_override outranks a surface override in Godot — so on this
+# subclass the pickup glow swap has always been inert and the shader is what
+# you see at every moment of the artifact's life. That is why the finish had to
+# go into the shader rather than beside it.
 func _install_force_shader() -> void:
 	var mi: MeshInstance3D = get_node_or_null("MeshInstance3D")
 	if mi == null:
@@ -181,7 +253,47 @@ func _install_force_shader() -> void:
 	# into the shader. Tweakable per-instance via export if needed.
 	_force_shader_mat.set_shader_parameter("base_color", Color(0.95, 0.95, 0.92, 1.0))
 	_force_shader_mat.set_shader_parameter("force_color", Color(1.0, 0.55, 0.10, 1.0))
+	_apply_bead_finish(mi)
 	mi.material_override = _force_shader_mat
+
+
+## The bead's surface finish: PbrKit's shared grain, tiled for a 60 mm ball.
+##
+## Both textures come out of PbrKit's static cache, so this costs no VRAM that
+## the six already-migrated artifacts have not paid for — and it costs no new
+## generation either if any of them built the same (kind, floor) pair first.
+##
+## LO_HARD is the roughness floor for a moulded hard surface, and its mean is
+## what the shader divides the target roughness by, exactly as PbrKit._rough
+## does for a StandardMaterial3D: Godot multiplies roughness by the map, so a
+## texture averaging 0.85 silently makes everything 15% glossier than asked.
+func _apply_bead_finish(mi: MeshInstance3D) -> void:
+	if _force_shader_mat == null:
+		return
+	_force_shader_mat.set_shader_parameter(
+		"grain_rough", PBR.grain(PBR.GRAIN_MICRO, PBR.LO_HARD))
+	_force_shader_mat.set_shader_parameter(
+		"grain_norm", PBR.grain_normal(PBR.GRAIN_MICRO, PBR.BUMP_FINE))
+	_force_shader_mat.set_shader_parameter("grain_mean", (PBR.LO_HARD + 1.0) * 0.5)
+	# Isotropic in metres of surface arc — see the GRAIN_TILES_PER_M block.
+	var r: float = _bead_radius(mi)
+	_force_shader_mat.set_shader_parameter("grain_uv", Vector2(
+		TAU * r * GRAIN_TILES_PER_M,
+		PI * r * GRAIN_TILES_PER_M))
+
+
+## Measure the bead rather than hard-coding 0.03, so the grain stays sized to
+## the object if point_mesh.gd's radius is ever changed in the scene. The child
+## `Sphere` node is ready before this root is (Godot readies depth-first), so
+## the SphereMesh is already in place by the time this runs.
+func _bead_radius(mi: MeshInstance3D) -> float:
+	var sphere: SphereMesh = mi.mesh as SphereMesh
+	if sphere != null:
+		return maxf(sphere.radius, 0.001)
+	if mi.mesh != null:
+		var ext: Vector3 = mi.mesh.get_aabb().size
+		return maxf(maxf(ext.x, maxf(ext.y, ext.z)) * 0.5, 0.001)
+	return 0.03
 
 
 # Try to grab the OrbGestureDetector at startup. If it isn't in the
@@ -377,13 +489,11 @@ func _spawn_projectile_ball(origin: Vector3, direction: Vector3) -> void:
 	sm.rings = 8
 	mi.mesh = sm
 
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = ball_color
-	mat.emission_enabled = true
-	mat.emission = ball_color
-	mat.emission_energy_multiplier = ball_emission_energy
-	mat.metallic = 0.1
-	mat.roughness = 0.25
+	# Same colour, same energy, same export — but PbrKit.emissive drops the
+	# ALBEDO under the emission. A ball whose albedo AND emission are both full
+	# value clips to white the instant any scene light lands on it, and a
+	# clipped white projectile has lost the mode colour it was fired to show.
+	var mat: StandardMaterial3D = PBR.emissive(ball_color, ball_emission_energy)
 	mi.material_override = mat
 	ball.add_child(mi)
 
@@ -686,10 +796,19 @@ func _ret_wax() -> void:
 	cm.height = 0.012
 	cm.radial_segments = 32
 	slab.mesh = cm
-	var smat := StandardMaterial3D.new()
-	smat.albedo_color = Color(0.10, 0.085, 0.095)
-	smat.roughness = 0.95
-	smat.metallic = 0.0
+	# The wax. Was one albedo, one roughness, one metallic — the flat-plastic
+	# signature on the largest surface the axis owns. hard_plastic at a low
+	# gloss gives it a roughness map so the highlight breaks up, a micro normal
+	# so it reads as a poured surface, and a faint waxy sheen instead of the old
+	# dead 0.95 matte. Its kit default of 5 tiles/m lands the grain at about
+	# 6.7 px across a 0.31 m plate, so this one needs no scale_detail.
+	#
+	# The albedo is lifted a hair off the shipped 0.10 for the reason PbrKit
+	# spends a paragraph on: a surface with nothing left to shade reads as a
+	# hole in the scene rather than as a dark object. `wear` is the ONLY
+	# darkening applied — no AO map, no vertex wear, because three subtle
+	# darkenings agree on black.
+	var smat: StandardMaterial3D = PBR.hard_plastic(Color(0.115, 0.098, 0.108), 0.15, 0.18)
 	slab.material_override = smat
 	slab.position = Vector3(0, y, 0)
 	root.add_child(slab)
@@ -718,11 +837,14 @@ func _ret_wax() -> void:
 	pm.height = 0.004
 	pm.radial_segments = 32
 	sheet.mesh = pm
-	var pmat := StandardMaterial3D.new()
-	pmat.albedo_color = Color(0.62, 0.65, 0.70, 0.30)
-	pmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	pmat.roughness = 0.25
-	pmat.metallic = 0.0
+	# The Wunderblock's celluloid. Same tint, same 0.30 opacity, same near-
+	# roughness — but PbrKit.glass adds the Fresnel rim, which is the whole
+	# difference between a sheet and a tinted ghost: real glass goes nearly
+	# opaque at grazing angles, and without that this disc had no edges at all.
+	# ONE transparent layer, which is the budget: overdraw is the Quest's
+	# tightest, and screen-space refraction stays off (desktop_extras defaults
+	# false). Kit tiling of 6/m puts its grain near 5.6 px here — no scaling.
+	var pmat: StandardMaterial3D = PBR.glass(Color(0.62, 0.65, 0.70), 0.22, 0.30)
 	sheet.material_override = pmat
 	sheet.position = Vector3(0, y + 0.022, 0)
 	root.add_child(sheet)
