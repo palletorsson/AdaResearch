@@ -480,6 +480,12 @@
       "topic": "release gates",
       "insight": "A new render path breaks the AUDITOR, not the artifact: the living family renders from a biome_token via GridBiomeComponent, never a .tscn, so Gate B called seven correct entries broken. Exempt by DERIVING the kingdom/role vocabulary from BiomeGridTokens.gd (fail closed if unreadable), and add invalid_biome_token to the gate so the exemption bites both ways.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-08-07T08:05:02.628770+00:00",
+      "topic": "dna gate exit code",
+      "insight": "check_dna_declarations flagged a token when ANY script in its scene was untracked, so the extends-walk reached the gitignored XR-tools base and called 5 sound declarations broken; now asked per axis, fail-closed. A piped exit code (| tail; echo $?) hid the red gate for 2 days -- use ${PIPESTATUS[0]}.",
+      "lod": 3
     }
   ]
 }

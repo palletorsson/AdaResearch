@@ -3375,6 +3375,48 @@
         "0e48b8710"
       ],
       "duration_minutes": 22
+    },
+    {
+      "breath_id": "2026-08-07T09:55",
+      "mode": "full",
+      "baseline_avg": 0.0,
+      "post_avg": 0.0,
+      "delta": 0.0,
+      "items_attempted": [
+        "stranded work commit (delegate_to tooling + 14 bite reports)",
+        "DNA gate exit 5: untracked_sources false positives",
+        "concurrent-writer scan before any commit"
+      ],
+      "items_succeeded": [
+        "stranded work commit (delegate_to tooling + 14 bite reports)",
+        "DNA gate exit 5: untracked_sources false positives",
+        "concurrent-writer scan before any commit"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE GATE WAS RED AND EVERY VERDICT WAS FALSE. check_dna_declarations exited 5 on 5 'implementing script NOT IN THE REPOSITORY' rows; all 5 were sound. untracked_sources flagged a token when ANY script its scene runs was untracked, so the walk up `extends` reached the gitignored XR-tools pickable.gd (force_cube -> _embodied/pickable_prop.gd -> addons/) and reported a vendored base class as a stranded declaration, while the axis sat two hops down, tracked, with its export and config hook. Fifth costume of this file's own disease: a fact about WHERE a line is written, presented as a verdict about the registry. Fixed by asking per AXIS, fail-closed (silence needs a positive tracked implementer, not merely failing to prove the untracked one implements it). Both historical catches survive.",
+        "READ THE EXIT CODE, NOT THE PIPE'S. `python gate.py | tail -25; echo EXIT=$?` reports tail's status, so a gate failing with exit 5 read as EXIT=0 and nearly went unexamined. ${PIPESTATUS[0]} is the only honest form. A breath that trusts a piped $? cannot tell a green gate from a red one -- and this gate had been red since at least the 08-06 breath, which also piped it.",
+        "CONCURRENT WRITER, THIRD SIGHTING -- and the first time reading git status TWICE actually paid. The second read showed tools/aaa_ab_sheet.py (mtime 2.5 min, a blind A/B visual-quality tool) that the first did not. mtime separated it cleanly from the real stranded work: the three tool diffs were 17h old (yesterday 16:50) and the 14 bite reports 2h20m old from the pass that committed at 07:41. Age, not presence in git status, is what distinguishes settled work from a live hand. Staged 17 paths by name; left the live file alone.",
+        "prop-006 recurrence #4, and the interval keeps shrinking: 2 weeks (07-23), 2 days (07-31), 17 hours (today). The 07:41 pass committed 13 promoted artifacts and stranded both its evidence (14 bite reports; 627 siblings are tracked, so they belong) and 100 lines of tooling. The tooling was one discovery in three costumes -- delegate_to, a registry NAME onto another artifact's scene, was invisible to the gate, the block-writer and the sweep alike, so cabinet_sweep had been photographing pattern_loom's DEFAULT under the escher token's name."
+      ],
+      "files_changed": [
+        "tools/check_dna_declarations.py",
+        "tools/apply_dna_block.py",
+        "tools/cabinet_sweep.py",
+        "doc/reports/sweep_*_bite.json (14)"
+      ],
+      "duration_minutes": 30
     }
   ]
 }
