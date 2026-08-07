@@ -92,13 +92,33 @@ var _next_z: float = 0.0
 var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
+var _banner_pos: Vector3 = Vector3.ZERO   # where the first segment hung its sign
 var _player: CharacterBody3D
 var _cam: Camera3D
 var _yaw: float = 0.0
 var _pitch: float = 0.0
 
+# ── AAA RENDER MODULES (commons/scenes/em/*.gd) ──────────────────────────────
+# Loaded at RUNTIME, never preloaded. A preload of a module that fails to parse
+# is a parse error in THIS file and takes the whole museum down with it;
+# load() returns null instead, so a broken or absent module degrades to the v1
+# flat-box look rather than to a black screen. Every call site is guarded.
+const EM_DIR := "res://commons/scenes/em/"
+var _mod_mats = null
+var _mod_light = null
+var _mod_env = null
+var _mod_detail = null
+var _mod_feel = null
+var _mod_audio = null
+var _feel: Node = null
+var _surf: Dictionary = {}         # role -> Material; empty when the library is absent
+var _detail_mats: Dictionary = {}  # the four roles em_detail probes for
+var _audio_seg: int = -1           # which segment's acoustic the bed is tuned to
+var _mod_warned: Dictionary = {}
+
 func _ready() -> void:
 	_parse_args()
+	_load_modules()
 	_load_museums()
 	_load_crowns()
 	_load_pool()
@@ -133,6 +153,95 @@ func _parse_args() -> void:
 			_autopilot = int(a.substr(15))
 		elif a.begins_with("--em-first="):
 			_first_key = a.substr(11)
+
+## ── MODULE LOADING ───────────────────────────────────────────────────────────
+## Six render modules, six independent failure domains. Anything that does not
+## load is simply absent for the rest of the run.
+func _load_modules() -> void:
+	_mod_mats = _load_module("em_materials.gd")
+	_mod_light = _load_module("em_lighting.gd")
+	_mod_env = _load_module("em_environment.gd")
+	_mod_detail = _load_module("em_detail.gd")
+	_mod_feel = _load_module("em_feel.gd")
+	_mod_audio = _load_module("em_audio.gd")
+	print("[endless_museum] modules: mats=%s light=%s env=%s detail=%s feel=%s audio=%s" % [
+		_mod_mats != null, _mod_light != null, _mod_env != null,
+		_mod_detail != null, _mod_feel != null, _mod_audio != null])
+	_build_surfaces()
+
+func _load_module(fname: String):
+	var p: String = EM_DIR + fname
+	if not ResourceLoader.exists(p):
+		push_warning("endless_museum: module absent %s — degrading to v1 for it" % p)
+		return null
+	var s = load(p)
+	if s == null:
+		push_warning("endless_museum: module failed to parse %s — degrading to v1 for it" % p)
+	return s
+
+## Guarded static dispatch onto a loaded GDScript. Warns once per missing entry
+## point so a renamed API shows up in stdout instead of vanishing.
+func _mod_has(m, fn: String) -> bool:
+	if m == null:
+		return false
+	if (m as Object).has_method(fn):
+		return true
+	var key: String = str(m) + "::" + fn
+	if not _mod_warned.has(key):
+		_mod_warned[key] = true
+		push_warning("endless_museum: module has no `%s` — skipping that stage" % fn)
+	return false
+
+## One material per role, resolved once. A getter that is missing leaves its
+## role null, and _box() then falls back to the flat v1 colour for that role
+## alone — the degrade is per-surface, not all-or-nothing.
+func _build_surfaces() -> void:
+	if _mod_mats == null:
+		return
+	if _mod_has(_mod_mats, "warm_up"):
+		_mod_mats.call("warm_up")
+	_surf["floor"] = _mat_of("floor_stone", [])
+	# circulation is the floor that gets walked on. soil 0.15 was in the library
+	# from the start and had never once been passed non-zero by anybody.
+	_surf["deck"] = _mat_of("floor_terrazzo", [Color.WHITE, 0.15])
+	_surf["wall"] = _mat_of("wall_plaster", [])
+	_surf["podium"] = _mat_of("podium_marble", [])
+	_surf["plinth"] = _mat_of("trim_oak", [])
+	_surf["ceiling"] = _mat_of("ceiling_plaster", [])
+	_surf["trim"] = _mat_of("travertine", [])
+	_surf["brass"] = _mat_of("accent_brass", [0.35])
+	# THE 130 mm CONTACT STRIP. em_materials.skirting() existed with no callers in
+	# the whole repo; it is the library's one real light-reactive edge-darkening
+	# mechanism and it was dead code while every frame showed a wall meeting a
+	# floor at an indistinguishable value step.
+	_surf["skirting"] = _mat_of("skirting", [&"plaster", Color.WHITE])
+	# A JOINT IS A SHADOW, NOT A LIGHT. The floor seams used to be drawn in aged
+	# brass — metallic, roughness ~0.27 in the high spots, so every strip mirrored
+	# whatever spot was overhead and blew to 0.75-0.95 against a 0.03 floor. The
+	# least important element in the building (a 5 mm joint) was doing all the
+	# leading-line work. A dark soiled stone reads by shadow instead.
+	_surf["joint"] = _mat_of("skirting", [&"floor_stone", Color.WHITE])
+	for k in _surf.keys():
+		if _surf[k] == null:
+			_surf.erase(k)
+	# em_detail probes a Dictionary of Materials by role name — the plainest of
+	# the four shapes it accepts, so no method-name guessing is involved.
+	_detail_mats = {}
+	for pair in [["wall", "wall"], ["trim", "trim"], ["accent", "joint"],
+			["ceiling", "ceiling"], ["skirting", "skirting"]]:
+		var role: String = String(pair[0])
+		var src: String = String(pair[1])
+		if _surf.has(src):
+			_detail_mats[role] = _surf[src]
+	print("[endless_museum] surfaces: %d roles from em_materials" % _surf.size())
+
+func _mat_of(fn: String, args: Array) -> Material:
+	if not _mod_has(_mod_mats, fn):
+		return null
+	var r = _mod_mats.callv(fn, args)
+	if r is Material:
+		return r
+	return null
 
 func _load_museums() -> void:
 	var f := FileAccess.open(TEMPLATES, FileAccess.READ)
@@ -320,23 +429,10 @@ func _pick_pool(rank: int) -> Dictionary:
 	return e
 
 func _setup_world() -> void:
-	var env := WorldEnvironment.new()
-	var e := Environment.new()
-	e.background_mode = Environment.BG_SKY
-	e.sky = Sky.new()
-	e.sky.sky_material = ProceduralSkyMaterial.new()
-	e.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	e.ambient_light_energy = 1.2
-	env.environment = e
-	add_child(env)
-	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-55.0, 30.0, 0.0)
-	sun.light_energy = 1.1
-	sun.shadow_enabled = true
-	add_child(sun)
-	# the walker is a body now, not a gliding camera: a capsule the walls and
+	# the walker is a body, not a gliding camera: a capsule the walls and
 	# podiums can push back on. No gravity — the deck is flat by construction,
-	# so y is clamped instead of simulated.
+	# so y is clamped instead of simulated. Built FIRST now, because the
+	# environment binds its camera attributes to the camera.
 	_player = CharacterBody3D.new()
 	_player.name = "Walker"
 	_player.position = Vector3(7.5, 0.0, 1.5)
@@ -355,18 +451,100 @@ func _setup_world() -> void:
 	_cam.fov = 90.0
 	_player.add_child(_cam)
 	_cam.make_current()
+	var lit := _setup_environment()
+	# The sun. With em_lighting's rig and em_detail's ceiling in place the
+	# directional is no longer the interior's light source — it is the shaft
+	# through the ceiling slots, and em_lighting's ENV_CONTRACT caps it at 0.35.
+	# With no rig it is still the ONLY light, so it keeps its v1 energy.
+	var sun := DirectionalLight3D.new()
+	sun.name = "Sun"
+	sun.rotation_degrees = Vector3(-55.0, 30.0, 0.0)
+	sun.light_energy = 0.35 if lit else 1.1
+	sun.shadow_enabled = true
+	add_child(sun)
+	_setup_feel()
+	_setup_audio()
+
+## The environment. Returns true when the AAA environment installed, so the sun
+## knows whether it is a shaft or the only light in the building.
+func _setup_environment() -> bool:
+	var have_rig: bool = _mod_light != null
+	if _mod_env != null and have_rig and _mod_has(_mod_env, "install"):
+		# a headless gate run cannot afford SSIL + SSR + SDFGI + volumetric fog:
+		# the walk would slow under the watchdog's stall window and a timing
+		# artefact would be reported as a corridor failure.
+		if (_autopilot > 0 or _test_collision) and _mod_has(_mod_env, "set_tier"):
+			_mod_env.call("set_tier", "perf")
+		var we = _mod_env.call("install", self, _cam)
+		if we != null:
+			if _mod_has(_mod_env, "apply_render_quality"):
+				_mod_env.call("apply_render_quality")
+			return true
+	# v1 fallback: sky background, flat sky ambient, no post.
+	var env := WorldEnvironment.new()
+	var e := Environment.new()
+	e.background_mode = Environment.BG_SKY
+	e.sky = Sky.new()
+	e.sky.sky_material = ProceduralSkyMaterial.new()
+	e.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+	e.ambient_light_energy = 1.2
+	env.environment = e
+	add_child(env)
+	return false
+
+## The movement feel. Only for the interactive walk — the proof shot, the
+## collision test and the autopilot all aim the body themselves and must not be
+## fought over, so the node is not even created for them.
+func _setup_feel() -> void:
+	if _mod_feel == null or _shot_path != "" or _autopilot > 0 or _test_collision:
+		return
+	var n = _mod_feel.new()
+	if not (n is Node):
+		push_warning("endless_museum: em_feel did not instance a Node — keeping v1 movement")
+		return
+	_feel = n as Node
+	_feel.name = "Feel"
+	_feel.add_to_group("em_feel")
+	add_child(_feel)
+	if not _feel.has_method("configure"):
+		push_warning("endless_museum: em_feel has no configure() — keeping v1 movement")
+		remove_child(_feel)
+		_feel.queue_free()
+		_feel = null
+		return
+	_feel.call("configure", _player, _cam)
+
+## Audio. The module's own guard makes every capture and headless run a no-op,
+## so this call is safe on every path.
+func _setup_audio() -> void:
+	if not _mod_has(_mod_audio, "install"):
+		return
+	_mod_audio.call("install", self)
+	if _feel != null and _mod_has(_mod_audio, "bind_footsteps"):
+		_mod_audio.call("bind_footsteps", _feel, "footstep")
 
 func _mat(color: Color) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = color
 	return m
 
-func _box(parent: Node3D, pos: Vector3, size: Vector3, color: Color) -> void:
+## One role out of the resolved library, or null when the library never
+## produced it.
+func _sm(role: String) -> Material:
+	var v = _surf.get(role, null)
+	if v is Material:
+		return v
+	return null
+
+## `mat` wins when the material library gave us one for this role; `color` is
+## the v1 flat fallback, kept per-surface so a partially loaded library still
+## dresses what it can.
+func _box(parent: Node3D, pos: Vector3, size: Vector3, color: Color, mat: Material = null) -> void:
 	var mi := MeshInstance3D.new()
 	var bm := BoxMesh.new()
 	bm.size = size
 	mi.mesh = bm
-	mi.material_override = _mat(color)
+	mi.material_override = mat if mat != null else _mat(color)
 	mi.position = pos
 	parent.add_child(mi)
 
@@ -414,27 +592,34 @@ func _build_segment() -> void:
 	var pw: int = _prev_w if _prev_w > 0 else 1
 	var zbase := int(_next_z)
 	var wall_col := Color(0.32, 0.32, 0.36)
+	# the material library replaces the flat albedos role by role; a role the
+	# library never produced stays on its v1 colour
+	var m_wall: Material = _sm("wall")
+	var m_deck: Material = _sm("deck")
+	var m_floor: Material = _sm("floor")
+	var m_podium: Material = _sm("podium")
+	var m_plinth: Material = _sm("plinth")
 	for zr in range(VESTIBULE_H):
 		for x in range(LOBBY_W):
-			_box(seg, Vector3(x + 0.5, -0.1, zr + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16))
+			_box(seg, Vector3(x + 0.5, -0.1, zr + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16), m_deck)
 			if x > 0 and x < LOBBY_W - 1 and not (zr == 0 and x >= pw - 1) and not (zr == VESTIBULE_H - 1 and x >= w - 1):
 				_walk_cells[Vector2i(x, zbase + zr)] = true
 	for zr in range(VESTIBULE_H):
 		for sx in [0, LOBBY_W - 1]:
-			_box(seg, Vector3(sx + 0.5, 1.5, zr + 0.5), Vector3(1, 3.0, 1), wall_col)
+			_box(seg, Vector3(sx + 0.5, 1.5, zr + 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
 			_add_col(solid, Vector3(sx + 0.5, 1.5, zr + 0.5), Vector3(1, 3.0, 1))
 	for x in range(pw - 1, LOBBY_W):        # seal beyond the previous tile's width
-		_box(seg, Vector3(x + 0.5, 1.5, 0.5), Vector3(1, 3.0, 1), wall_col)
+		_box(seg, Vector3(x + 0.5, 1.5, 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
 		_add_col(solid, Vector3(x + 0.5, 1.5, 0.5), Vector3(1, 3.0, 1))
 	for x in range(w - 1, LOBBY_W):         # seal beyond this tile's width
-		_box(seg, Vector3(x + 0.5, 1.5, VESTIBULE_H - 0.5), Vector3(1, 3.0, 1), wall_col)
+		_box(seg, Vector3(x + 0.5, 1.5, VESTIBULE_H - 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
 		_add_col(solid, Vector3(x + 0.5, 1.5, VESTIBULE_H - 0.5), Vector3(1, 3.0, 1))
 	# outer skin: an implicit wall just beyond both side columns of the tile, so
 	# free-plan templates with a walkable rim (Kanazawa, Neue Nationalgalerie)
 	# cannot leak the walker off the edge of the world
 	for y_skin in range(tile.size()):
 		for sx2 in [-1, w]:
-			_box(seg, Vector3(sx2 + 0.5, 1.5, y_skin + VESTIBULE_H + 0.5), Vector3(1, 3.0, 1), wall_col)
+			_box(seg, Vector3(sx2 + 0.5, 1.5, y_skin + VESTIBULE_H + 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
 			_add_col(solid, Vector3(sx2 + 0.5, 1.5, y_skin + VESTIBULE_H + 0.5), Vector3(1, 3.0, 1))
 	# collect slots first so the artifact budget prefers hero > podium > floor
 	var slots: Array = []
@@ -445,16 +630,16 @@ func _build_segment() -> void:
 			var c := String(row[x])
 			match c:
 				"1", "1s":
-					_box(seg, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19))
+					_box(seg, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19), m_floor)
 					_walk_cells[Vector2i(x, zbase + z)] = true
 				"2", "2s":
-					_box(seg, Vector3(x + 0.5, 0.1, z + 0.5), Vector3(1, 0.6, 1), Color(0.23, 0.23, 0.28))
+					_box(seg, Vector3(x + 0.5, 0.1, z + 0.5), Vector3(1, 0.6, 1), Color(0.23, 0.23, 0.28), m_podium)
 					_add_col(solid, Vector3(x + 0.5, 0.1, z + 0.5), Vector3(1, 0.6, 1))
 				"3s":
-					_box(seg, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1), Color(0.35, 0.27, 0.16))
+					_box(seg, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1), Color(0.35, 0.27, 0.16), m_plinth)
 					_add_col(solid, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1))
 				"4":
-					_box(seg, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1), wall_col)
+					_box(seg, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
 					_add_col(solid, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1))
 			if c == "1s":
 				slots.append({"x": x, "y": z, "top": 0.0, "rank": 2})
@@ -508,39 +693,172 @@ func _build_segment() -> void:
 	# each museum wears its own colour: the pattern's hex tints the banner title
 	# and an ember strip across the threshold floor
 	var accent := Color.html(String(spec.get("color", "#888888")))
+	# THE SIGN COMES OFF THE VANISHING POINT. At (w/2, 2.45, VESTIBULE_H-0.45) a
+	# 2.8 m panel (TextScreen ASPECT 0.62 -> 1.74 m tall, so 1.58..3.32) sat dead
+	# on the one-point vanishing point and covered the top third of the portal —
+	# the single thing a 30 m axial vista exists to show was behind a black
+	# rectangle in all three corridor shots. It also had no thickness, no frame
+	# return, no mounting and no contact shadow, so it read as world-space UI.
+	# A real museum mounts its sign on the wall BESIDE the opening. So does this
+	# one now: west lobby wall, 2.2 m wide, on a 90 mm oak surround that leaves a
+	# 50 mm reveal all round to catch a shadow gap.
+	const BANNER_X := 1.06
+	const BANNER_Z := 2.30
+	const BANNER_Y := 1.95
+	const BANNER_W := 2.2
 	var banner: Node3D = TextScreenRes.new()
 	banner.mode = TextScreenRes.Mode.SCREEN
 	banner.title = String(spec["label"])
 	# the banner names the building AND the chapter it houses
 	banner.body = ("%s\n\n%s" % [spec["museum"], seg_seq]) if seg_seq != "" else String(spec["museum"])
 	banner.title_color = accent.lightened(0.35)
-	banner.width_m = 2.8
-	# the banner hangs in the vestibule, over the museum's entry
-	banner.position = Vector3(w / 2.0, 2.45, VESTIBULE_H - 0.45)
-	banner.rotation_degrees = Vector3(0, 180, 0)
+	banner.width_m = BANNER_W
+	banner.position = Vector3(BANNER_X, BANNER_Y, BANNER_Z)
+	# TextScreen faces its own local +Z; yaw +90 turns that to world +X, i.e. off
+	# the west wall into the lobby
+	banner.rotation_degrees = Vector3(0, 90, 0)
 	seg.add_child(banner)
+	# the surround: buried in the wall, 50 mm proud, so the sign sits IN a reveal
+	# and throws a real shadow instead of floating
+	_box(seg, Vector3(1.005, BANNER_Y, BANNER_Z),
+		Vector3(0.09, BANNER_W * 0.62 + 0.18, BANNER_W + 0.18),
+		Color(0.25, 0.17, 0.10), m_plinth)
+	if _banner_pos == Vector3.ZERO:
+		_banner_pos = Vector3(BANNER_X, BANNER_Y, BANNER_Z + _next_z)
 	var ember := MeshInstance3D.new()
 	var ebm := BoxMesh.new()
 	ebm.size = Vector3(w - 2.0, 0.02, 0.08)
 	ember.mesh = ebm
-	var emat := StandardMaterial3D.new()
-	emat.albedo_color = accent
-	emat.emission_enabled = true
-	emat.emission = accent
-	emat.emission_energy_multiplier = 1.6
+	# 1.1, down from 1.8. The strip runs edge to edge at the exact horizontal
+	# centre of every axial shot; at 1.8 it was the brightest line in the frame
+	# and it bisected the composition. It is an ember, not a light fitting.
+	var emat: Material = _mat_of("emissive_accent", [accent, 1.1])
+	if emat == null:
+		var fallback := StandardMaterial3D.new()
+		fallback.albedo_color = accent
+		fallback.emission_enabled = true
+		fallback.emission = accent
+		fallback.emission_energy_multiplier = 1.6
+		emat = fallback
 	ember.material_override = emat
 	ember.position = Vector3(w / 2.0, 0.02, VESTIBULE_H - 0.15)
 	seg.add_child(ember)
-	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H), "index": _seg_index})
+	# ── the AAA passes, in the order they depend on each other ───────────────
+	# 1. architectural detail: skirting, cornice, shadow gap, door reveals, a
+	#    coffered ceiling with open daylight slots, floor seams. Adds NO
+	#    collision and never touches _walk_cells, so the autopilot's BFS plan is
+	#    bit-identical with and without it.
+	if _mod_has(_mod_detail, "dress_segment"):
+		_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w)
+	# 1b. FURNITURE. em_detail is contractually forbidden to add collision, and a
+	#     bench you can walk through is worse than no bench — so the one fixture
+	#     family that occupies floor lives here, where the segment's StaticBody3D
+	#     and the walk map are both in scope.
+	_dress_fixtures(seg, solid, tile, w, zbase)
+	# 2. the light rig: ambient floor, north daylight down the axis, keys on the
+	#    hero and podium slots, cove and accent grazer at the threshold, wall
+	#    wash, floor fill. Capped at 24 lights / 6 shadow casters per segment.
+	if _mod_has(_mod_light, "rig_segment"):
+		_mod_light.call("rig_segment", seg, w, h, accent, slots, {"tile": tile})
+	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H), "index": _seg_index, "w": w})
 	_next_z += float(h) + float(VESTIBULE_H)
 	_seg_index += 1
 	_prev_w = w
 	_auto_replan = true
 	if _autopilot > 0 and _seg_index == _autopilot:
 		_auto_goal_z = float(_segments[-1]["z1"])
-	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d, z %.0f..%.0f" % [
+	var n_lights: int = 0
+	if _mod_has(_mod_light, "lights_installed"):
+		n_lights = int(_mod_light.call("lights_installed", seg))
+	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d, z %.0f..%.0f, lights %d" % [
 		_seg_index - 1, spec["key"], spec["museum"], seg_seq if seg_seq != "" else "-",
-		placed, _segments[-1]["z0"], _segments[-1]["z1"]])
+		placed, _segments[-1]["z0"], _segments[-1]["z1"], n_lights])
+
+## THERE WAS NOTHING IN THE ROOM. Measured on the proof shots: a band 520 px
+## tall across the full 1800 px width — 24% of the frame — with no bench, no
+## vitrine, no stanchion, no wall card, no door furniture, nothing at all. A
+## museum interior earns its read from object density at BODY scale: something
+## the eye can measure a human against every three or four metres. Materials and
+## lighting cannot supply that; an empty box lit perfectly is still an empty box.
+##
+## em_detail supplies the wall cards (no collision needed, 25 mm proud). This
+## supplies the one fixture that stands on the floor, and it is deliberately
+## conservative, because every collider added here is a chance to seal a corridor
+## and fail the autopilot:
+##   * only against a wall face, never free-standing;
+##   * only where the walker can still get past on the far side AND both
+##     neighbours along the wall are open floor, so a bench never plugs a 1-cell
+##     passage or a doorway;
+##   * at most MAX_BENCHES per segment, at least 5 cells apart;
+##   * the occupied cell is REMOVED from _walk_cells, so the BFS plan routes
+##     around it exactly the way it already routes around a podium.
+## Deterministic — a fixed iteration order and no randf(), so the same seed builds
+## the same room and two proof shots of one museum are the same photograph.
+const MAX_BENCHES := 5
+const BENCH_H := 0.44
+const BENCH_D := 0.42
+const BENCH_L := 0.95
+
+func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbase: int) -> void:
+	var m_bench: Material = _sm("plinth")
+	var placed := 0
+	var last_z: int = -99
+	for y in range(tile.size()):
+		if placed >= MAX_BENCHES:
+			break
+		if y - last_z < 5:
+			continue
+		if not (tile[y] is Array):
+			continue
+		var row: Array = tile[y]
+		var z: int = y + VESTIBULE_H
+		for x in range(row.size()):
+			if String(row[x]) != "1":
+				continue
+			# which side is the wall, and is the far side still walkable?
+			var side := 0
+			if _solid_at(tile, x - 1, y, w) and not _solid_at(tile, x + 1, y, w):
+				side = -1
+			elif _solid_at(tile, x + 1, y, w) and not _solid_at(tile, x - 1, y, w):
+				side = 1
+			if side == 0:
+				continue
+			# never plug a passage: both neighbours along the wall must be floor,
+			# and so must the cell the walker will squeeze past on
+			if String(_tile_at(tile, x, y - 1)) != "1" or String(_tile_at(tile, x, y + 1)) != "1":
+				continue
+			if String(_tile_at(tile, x - side, y)) != "1":
+				continue
+			var face: float = float(x) + (0.0 if side < 0 else 1.0)
+			var cx: float = face + float(-side) * BENCH_D * 0.5
+			_box(seg, Vector3(cx, BENCH_H * 0.5, float(z) + 0.5),
+				Vector3(BENCH_D, BENCH_H, BENCH_L), Color(0.30, 0.22, 0.14), m_bench)
+			_add_col(solid, Vector3(cx, BENCH_H * 0.5, float(z) + 0.5),
+				Vector3(BENCH_D, BENCH_H, BENCH_L))
+			_walk_cells.erase(Vector2i(x, zbase + z))
+			placed += 1
+			last_z = y
+			break
+	if placed > 0:
+		print("[endless_museum]   fixtures: %d benches" % placed)
+
+
+## A cell that stops a walker: a template wall, or the outer skin the scene
+## stamps at x = -1 and x = w.
+func _solid_at(tile: Array, x: int, y: int, w: int) -> bool:
+	if x < 0 or x >= w:
+		return true
+	return String(_tile_at(tile, x, y)) == "4"
+
+
+func _tile_at(tile: Array, x: int, y: int) -> String:
+	if y < 0 or y >= tile.size() or not (tile[y] is Array):
+		return ""
+	var row: Array = tile[y]
+	if x < 0 or x >= row.size():
+		return ""
+	return String(row[x])
+
 
 func _process(_delta: float) -> void:
 	if _cam == null or _shot_path != "":
@@ -553,6 +871,31 @@ func _process(_delta: float) -> void:
 		var old: Dictionary = _segments.pop_front()
 		var n: Node3D = old["node"]
 		n.queue_free()
+	_track_acoustic()
+
+## The room the walker is actually standing in decides the reverb. Crossing a
+## threshold retunes the bed and fires the doorway whoosh; the module is a
+## no-op on every headless and capture path, so this costs nothing there.
+func _track_acoustic() -> void:
+	if not _mod_has(_mod_audio, "set_space"):
+		return
+	var z: float = _cam.global_position.z
+	for s in _segments:
+		var sd: Dictionary = s
+		if z < float(sd["z0"]) or z >= float(sd["z1"]):
+			continue
+		var idx: int = int(sd["index"])
+		if idx == _audio_seg:
+			return
+		_audio_seg = idx
+		var sw: int = int(sd.get("w", 12))
+		var kind: String = "hall"
+		if sw <= 8:
+			kind = "corridor"
+		elif sw <= 14:
+			kind = "gallery"
+		_mod_audio.call("set_space", kind)
+		return
 
 func _physics_process(_delta: float) -> void:
 	if _player == null or _shot_path != "":
@@ -574,7 +917,16 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_D):
 		dir += _player.global_transform.basis.x
 	dir.y = 0.0
-	if dir.length() > 0.01:
+	if _feel != null and is_instance_valid(_feel):
+		# em_feel owns the curve: accel/decel asymmetry, launch bite, head bob,
+		# footstep cadence, strafe roll, sprint FOV. It only returns a velocity —
+		# the body is still moved here.
+		var v = _feel.call("step", _delta, dir, Input.is_key_pressed(KEY_SHIFT))
+		if v is Vector3:
+			_player.velocity = v
+		else:
+			_player.velocity = Vector3.ZERO
+	elif dir.length() > 0.01:
 		var speed := WALK_SPEED * (2.5 if Input.is_key_pressed(KEY_SHIFT) else 1.0)
 		_player.velocity = dir.normalized() * speed
 	else:
@@ -591,6 +943,11 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	elif event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		# em_feel buffers raw motion and drains it at render rate (18 ms lag,
+		# ~1 frame at 60 Hz) so look and bob update on the same clock.
+		if _feel != null and is_instance_valid(_feel):
+			_feel.call("look", (event as InputEventMouseMotion).relative)
+			return
 		_yaw -= event.relative.x * 0.002
 		_pitch = clampf(_pitch - event.relative.y * 0.002, -1.2, 1.2)
 		_player.rotation = Vector3(0.0, _yaw, 0.0)
@@ -734,16 +1091,44 @@ func _auto_write(done: bool, ok: bool) -> void:
 			"cells_unlearned": _auto_learned,
 		}, " "))
 
+## THE SHOT IS COMPOSED, NOT AIMED. Three of the four proof stills were the same
+## picture: perfect one-point perspective, vanishing point dead centre in both
+## axes, no foreground occluder, no diagonal, no framing element entering a frame
+## edge, and the horizon on the exact half-line. The fourth (--em-shot-at=20)
+## was the only good one, and the only thing it did differently was stand where
+## a near jamb entered the frame as a foreground plane.
+##
+## So: step 1.7 m off the axis and yaw ~9 degrees back onto it. The vista is kept
+## and a near jamb or pilaster enters one edge as a foreground value anchor. Eye
+## drops to 1.62 and the camera pitches ~2 degrees down, which puts the horizon
+## at about 0.55 of frame height instead of bisecting it.
 func _take_proof_shot() -> void:
-	# stand at the first segment's entry (or --em-shot-at=<z>), look down the
-	# corridor, settle, save
 	var spec: Dictionary = _museums[0]
-	# negative --em-shot-at means "the banner shot": stand at the lobby's mouth
-	# and tilt up at the vestibule sign instead of down the axis
-	var z: float = _shot_z if _shot_z >= 0.0 else 0.7
-	_player.position = Vector3(float(spec["w"]) / 2.0, 0.0, z)
-	_player.rotation = Vector3(0.0, PI, 0.0)  # scene +z runs away from entry; face along it
-	_cam.rotation = Vector3(-0.05 if _shot_z >= 0.0 else 0.18, 0.0, 0.0)
+	_cam.position = Vector3(0, 1.62, 0)
+	if _shot_z >= 0.0:
+		var cx: float = float(spec["w"]) / 2.0
+		_player.position = Vector3(cx + 1.7, 0.0, _shot_z)
+		# forward is (-sin y, 0, -cos y): y just under PI turns back toward -x,
+		# i.e. back onto the axis we just stepped off
+		_player.rotation = Vector3(0.0, PI - 0.16, 0.0)
+		_cam.rotation = Vector3(-0.035, 0.0, 0.0)
+		_shoot_deferred()
+		return
+	# negative --em-shot-at is the banner shot. The sign is no longer on the axis,
+	# so this can no longer be "stand at the mouth and tilt up" — stand off the
+	# west wall and turn to face the sign, aiming at where it was actually built
+	# rather than at a hardcoded guess.
+	# NOT at z 0.85. The very first segment has no museum behind it, so its near
+	# seal runs the FULL lobby width across z 0..1 — a camera at 0.85 stands
+	# inside that wall box and half the frame is the inside of a plaster slab.
+	# Stand deep in the lobby instead, near the portal, and look back across it:
+	# 4.7 m out at 15 degrees off the sign's normal.
+	var bp: Vector3 = _banner_pos if _banner_pos != Vector3.ZERO else Vector3(1.06, 1.95, 2.30)
+	var eye: Vector3 = Vector3(bp.x + 4.55, 1.62, bp.z + 1.20)
+	_player.position = Vector3(eye.x, 0.0, eye.z)
+	var d: Vector3 = (bp - eye).normalized()
+	_player.rotation = Vector3(0.0, atan2(-d.x, -d.z), 0.0)
+	_cam.rotation = Vector3(asin(clampf(d.y, -1.0, 1.0)), 0.0, 0.0)
 	_shoot_deferred()
 
 func _shoot_deferred() -> void:
