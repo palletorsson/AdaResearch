@@ -85,7 +85,13 @@ const CHALK_ALBEDO: Color = Color(0.93, 0.92, 0.90, 1.0)
 const CHALK_WEAR: float = 0.12
 ## PbrKit's cast normal is sized for a concrete plinth. On a forty-metre dome the same
 ## strength would read as geology, so the bump is pulled back to a chalky tooth.
-const CHALK_BUMP: float = 0.35
+## PULLED BACK AGAIN, from 0.35, by a blind critique that measured what "chalky tooth"
+## actually rendered as: an orange-peel crinkle over the whole dome at high-frequency
+## std 8.15 against a smooth reference of 0.81, with the terminator visibly SERRATED in
+## the silhouette. A normal map that changes an object's outline has stopped being a
+## surface finish. Barium sulphate is matte, not rough — the light it returns should be
+## even, which is the entire point of an integrating sphere.
+const CHALK_BUMP: float = 0.11
 
 ## How many repeats of a skin's own detail texture span the shell — the only numbers here
 ## that are about SIZE rather than taste, and the ones a forty-metre body cannot inherit.
