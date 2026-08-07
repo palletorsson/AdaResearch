@@ -70,6 +70,7 @@ ENC = REPO.parent / "ada_encyclopedia" / "public"
 
 # Thresholds, each sitting between a measured failure and a measured success.
 CLIP_PCT = 1.0      # light_sphere/softmill failures were 4.65%; healthy frames < 0.3%
+CLIP_CH_PCT = 8.0   # per-channel; emissive art legitimately runs hot, 8% is where hue dies
 CRUSH_PCT = 2.0     # the black-mirror failure was 25.9%; healthy frames ~0.0%
 FLAT_SD = 0.055     # flat-plastic proxy; the corpus mean after materials work is ~0.14
 FLAT_COLOURS = 40   # dome pre-materials measured 77 over the whole frame
@@ -108,6 +109,14 @@ def measure(p: Path) -> dict:
     g = (0.2126 * a[..., 0] + 0.7152 * a[..., 1] + 0.0722 * a[..., 2])
     subj = g[mask]
     out["clipped"] = round(float((subj >= 250).mean() * 100.0), 2)
+    # PER-CHANNEL clipping, and the luminance measure above is BLIND to it. A blind
+    # critic reading crops found "72.5% of subject pixels at R=255" on a frame this
+    # linter called clean — because fully clipped pure red is luminance 54, nowhere near
+    # the 250 threshold. Saturated emissives are a third of this corpus (wireframes,
+    # tally lamps, hazard markers), so the channel that actually blows is almost never
+    # the luminance. Measured on the worst single channel.
+    chans = a[mask]
+    out["clipped_ch"] = round(float((chans >= 250).any(axis=1).mean() * 100.0), 2)
     out["crushed"] = round(float((subj <= 4).mean() * 100.0), 2)
     out["midtone_sd"] = round(float(subj.std() / 255.0), 4)
     q = (a[mask] // 16).astype(np.int32)
@@ -121,6 +130,9 @@ def faults(m: dict) -> list:
     f = []
     if m["clipped"] > CLIP_PCT:
         f.append(f"CLIPPED {m['clipped']}% of subject at 250+ (no highlight rolloff)")
+    elif m.get("clipped_ch", 0) > CLIP_CH_PCT:
+        f.append(f"CHANNEL CLIPPED {m['clipped_ch']}% of subject has a channel at 255 "
+                 f"(hue destroyed while luminance looks fine)")
     if m["crushed"] > CRUSH_PCT:
         f.append(f"CRUSHED {m['crushed']}% of subject at 4- (nothing to reflect, or exposure)")
     if m["midtone_sd"] < FLAT_SD and m["colours"] < FLAT_COLOURS:
