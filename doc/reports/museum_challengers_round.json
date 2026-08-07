@@ -60,5 +60,38 @@
    "mesdag-panorama-drum 7.43 on primitives and 7.33 on isosurfaces \u2014 approach-removed viewing places on both",
    "color and randomness: bred crowns hold against all sixteen challengers to date"
   ]
+ },
+ "closed_loop_round_2026-08-06": {
+  "_note": "First edits authored WITH the judge in the loop (museum_match --tile): diagnose from real components, edit, judge, keep the number. Two hypotheses, both tested.",
+  "castelvecchio-pinch-v2": {
+   "seq": "isosurfaces",
+   "score": 8.0,
+   "ancestor": 7.6,
+   "delta": 0.4,
+   "components": {
+    "tau": "0.8 -> 1.0",
+    "promise": 1.0,
+    "dolly": 1.0,
+    "rank1": 1.0,
+    "cycles": "5/5",
+    "heroDeg": 65
+   },
+   "deal": "32 slots, 0 overflow (was 9 slots, 23 hung)",
+   "verdict": "CONFIRMED \u2014 capacity was the whole gap. A PERFECT score (every component maxed): the edited lineage beats its ancestor, beats the crowned castelvecchio 7.60, and ties the chapter leader soane 8.00."
+  },
+  "kanazawa-vista-v2": {
+   "seq": "color",
+   "score": 7.1,
+   "ancestor": 7.1,
+   "delta": 0.0,
+   "components": {
+    "tau": "0.8 -> 0.8 (unchanged despite 0 overflow)",
+    "promise": "0.5 -> 0.5 (unchanged despite hero on the entry centre column)",
+    "heroDeg": "48 -> 71"
+   },
+   "deal": "22 slots, 0 overflow (was 10 slots, 12 hung)",
+   "verdict": "REFUTED, and instructively. Both halves of the diagnosis were wrong: eliminating overflow did NOT move tau, and putting the hero dead-ahead on the spawn column did NOT earn promise CENTER. So on a free-plan matrix the encounter order is set by the DRIFT, not by the slot inventory, and CENTER is a fact about where the gaze points at step 1, not about geometry. Kanazawa needs a directed walk, not more slots \u2014 which may be a thing its identity cannot give."
+  },
+  "method_finding": "Wave 3 authored three edits blind and lost three. This round authored two against real component readings and went 1 win / 1 clean refutation \u2014 the refutation being worth as much, because it is knowledge the proxy model could never produce."
  }
 }
