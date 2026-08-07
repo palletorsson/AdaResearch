@@ -1,0 +1,68 @@
+{
+ "sweep": "TrigWalkingPath",
+ "peak_changed_pct": 0.33,
+ "subject_pct": 7.264,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "provision": "none"
+   },
+   "b": {
+    "provision": "membrane"
+   },
+   "changed_px": 1904,
+   "changed_pct": 0.33
+  },
+  {
+   "a": {
+    "provision": "none"
+   },
+   "b": {
+    "provision": "rail"
+   },
+   "changed_px": 1049,
+   "changed_pct": 0.182
+  },
+  {
+   "a": {
+    "provision": "none"
+   },
+   "b": {
+    "provision": "posts"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "provision": "membrane"
+   },
+   "b": {
+    "provision": "rail"
+   },
+   "changed_px": 1054,
+   "changed_pct": 0.182
+  },
+  {
+   "a": {
+    "provision": "membrane"
+   },
+   "b": {
+    "provision": "posts"
+   },
+   "changed_px": 1904,
+   "changed_pct": 0.33
+  },
+  {
+   "a": {
+    "provision": "rail"
+   },
+   "b": {
+    "provision": "posts"
+   },
+   "changed_px": 1049,
+   "changed_pct": 0.182
+  }
+ ]
+}

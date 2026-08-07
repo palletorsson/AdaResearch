@@ -1,0 +1,68 @@
+{
+ "sweep": "grammar_totem_pole_rainbow_taper",
+ "peak_changed_pct": 1.693,
+ "subject_pct": 1.211,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "taxonomy": "stack"
+   },
+   "b": {
+    "taxonomy": "ladder"
+   },
+   "changed_px": 6843,
+   "changed_pct": 1.185
+  },
+  {
+   "a": {
+    "taxonomy": "stack"
+   },
+   "b": {
+    "taxonomy": "table"
+   },
+   "changed_px": 9595,
+   "changed_pct": 1.661
+  },
+  {
+   "a": {
+    "taxonomy": "stack"
+   },
+   "b": {
+    "taxonomy": "heap"
+   },
+   "changed_px": 5379,
+   "changed_pct": 0.931
+  },
+  {
+   "a": {
+    "taxonomy": "ladder"
+   },
+   "b": {
+    "taxonomy": "table"
+   },
+   "changed_px": 9780,
+   "changed_pct": 1.693
+  },
+  {
+   "a": {
+    "taxonomy": "ladder"
+   },
+   "b": {
+    "taxonomy": "heap"
+   },
+   "changed_px": 6811,
+   "changed_pct": 1.179
+  },
+  {
+   "a": {
+    "taxonomy": "table"
+   },
+   "b": {
+    "taxonomy": "heap"
+   },
+   "changed_px": 8737,
+   "changed_pct": 1.513
+  }
+ ]
+}

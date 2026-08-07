@@ -71,7 +71,22 @@ def find_entry(token: str) -> tuple[Path, dict] | None:
                 print("  (%s appears in %d registries; using %s, the one with a scene)"
                       % (token, len(hits), rp.name))
             return rp, entry
-    return hits[0]
+    # No hit has a scene. Mirror registry() in check_dna_declarations: sorted file
+    # order, last BUILDABLE hit wins (a delegate_to counts as buildable) — the same
+    # entry the gate validates and the runtime grid's last-write-wins load serves.
+    # mill_alhambra_p6m sits in BOTH pattern_machine_c.json and pattern_mill.json;
+    # taking hits[0] wrote the declaration into the one entry every other reader
+    # ignores, so the gallery then skipped the token as undeclared.
+    chosen = hits[0]
+    for rp, entry in hits[1:]:
+        if str(chosen[1].get("delegate_to", "")).strip() \
+                and not str(entry.get("delegate_to", "")).strip():
+            continue
+        chosen = (rp, entry)
+    if len(hits) > 1:
+        print("  (%s appears in %d registries, none with a scene; using %s, "
+              "mirroring the gate's pick)" % (token, len(hits), chosen[0].name))
+    return chosen
 
 
 def derive(token: str, entry: dict, axes: list[str], drop: dict[str, set]) -> dict:

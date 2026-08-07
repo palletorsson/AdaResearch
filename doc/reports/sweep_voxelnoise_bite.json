@@ -1,0 +1,68 @@
+{
+ "sweep": "voxelnoise",
+ "peak_changed_pct": 13.412,
+ "subject_pct": 14.879,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "threshold": "sponge"
+   },
+   "b": {
+    "threshold": "massif"
+   },
+   "changed_px": 30926,
+   "changed_pct": 5.354
+  },
+  {
+   "a": {
+    "threshold": "sponge"
+   },
+   "b": {
+    "threshold": "archipelago"
+   },
+   "changed_px": 54505,
+   "changed_pct": 9.436
+  },
+  {
+   "a": {
+    "threshold": "sponge"
+   },
+   "b": {
+    "threshold": "wisp"
+   },
+   "changed_px": 73269,
+   "changed_pct": 12.685
+  },
+  {
+   "a": {
+    "threshold": "massif"
+   },
+   "b": {
+    "threshold": "archipelago"
+   },
+   "changed_px": 59832,
+   "changed_pct": 10.359
+  },
+  {
+   "a": {
+    "threshold": "massif"
+   },
+   "b": {
+    "threshold": "wisp"
+   },
+   "changed_px": 77469,
+   "changed_pct": 13.412
+  },
+  {
+   "a": {
+    "threshold": "archipelago"
+   },
+   "b": {
+    "threshold": "wisp"
+   },
+   "changed_px": 50248,
+   "changed_pct": 8.699
+  }
+ ]
+}

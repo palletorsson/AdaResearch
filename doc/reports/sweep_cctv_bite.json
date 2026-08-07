@@ -1,0 +1,108 @@
+{
+ "sweep": "cctv",
+ "peak_changed_pct": 0.171,
+ "subject_pct": 0.821,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "oversight": "monitor"
+   },
+   "b": {
+    "oversight": "housing"
+   },
+   "changed_px": 200,
+   "changed_pct": 0.035
+  },
+  {
+   "a": {
+    "oversight": "monitor"
+   },
+   "b": {
+    "oversight": "sightline"
+   },
+   "changed_px": 459,
+   "changed_pct": 0.079
+  },
+  {
+   "a": {
+    "oversight": "monitor"
+   },
+   "b": {
+    "oversight": "tally"
+   },
+   "changed_px": 566,
+   "changed_pct": 0.098
+  },
+  {
+   "a": {
+    "oversight": "monitor"
+   },
+   "b": {
+    "oversight": "dome"
+   },
+   "changed_px": 121,
+   "changed_pct": 0.021
+  },
+  {
+   "a": {
+    "oversight": "housing"
+   },
+   "b": {
+    "oversight": "sightline"
+   },
+   "changed_px": 409,
+   "changed_pct": 0.071
+  },
+  {
+   "a": {
+    "oversight": "housing"
+   },
+   "b": {
+    "oversight": "tally"
+   },
+   "changed_px": 766,
+   "changed_pct": 0.133
+  },
+  {
+   "a": {
+    "oversight": "housing"
+   },
+   "b": {
+    "oversight": "dome"
+   },
+   "changed_px": 190,
+   "changed_pct": 0.033
+  },
+  {
+   "a": {
+    "oversight": "sightline"
+   },
+   "b": {
+    "oversight": "tally"
+   },
+   "changed_px": 990,
+   "changed_pct": 0.171
+  },
+  {
+   "a": {
+    "oversight": "sightline"
+   },
+   "b": {
+    "oversight": "dome"
+   },
+   "changed_px": 447,
+   "changed_pct": 0.077
+  },
+  {
+   "a": {
+    "oversight": "tally"
+   },
+   "b": {
+    "oversight": "dome"
+   },
+   "changed_px": 687,
+   "changed_pct": 0.119
+  }
+ ]
+}

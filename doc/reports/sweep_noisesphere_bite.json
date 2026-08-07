@@ -1,0 +1,38 @@
+{
+ "sweep": "noisesphere",
+ "peak_changed_pct": 10.815,
+ "subject_pct": 10.781,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "readout": "relief"
+   },
+   "b": {
+    "readout": "plate"
+   },
+   "changed_px": 47330,
+   "changed_pct": 8.194
+  },
+  {
+   "a": {
+    "readout": "relief"
+   },
+   "b": {
+    "readout": "none"
+   },
+   "changed_px": 62469,
+   "changed_pct": 10.815
+  },
+  {
+   "a": {
+    "readout": "plate"
+   },
+   "b": {
+    "readout": "none"
+   },
+   "changed_px": 40634,
+   "changed_pct": 7.035
+  }
+ ]
+}

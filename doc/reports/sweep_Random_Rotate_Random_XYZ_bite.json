@@ -1,0 +1,44 @@
+{
+ "sweep": "Random_Rotate_Random_XYZ",
+ "peak_changed_pct": 0.0,
+ "subject_pct": 0.0,
+ "verdict": "SUBJECT NOT DETECTED - only 0.00% of the frame differs from the backdrop, so there was nothing to compare. Not a verdict about the axis.",
+ "variants": [
+  {
+   "a": {
+    "rotate_seed": 20260807,
+    "visitation": "bell"
+   },
+   "b": {
+    "rotate_seed": 20260807,
+    "visitation": "even"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "rotate_seed": 20260807,
+    "visitation": "bell"
+   },
+   "b": {
+    "rotate_seed": 20260807,
+    "visitation": "weather"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "rotate_seed": 20260807,
+    "visitation": "even"
+   },
+   "b": {
+    "rotate_seed": 20260807,
+    "visitation": "weather"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

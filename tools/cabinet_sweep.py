@@ -40,18 +40,53 @@ CANON = REPO / "commons" / "data" / "cabinet_grammar.json"
 SPEC = REPO / "ada_run" / "sweep_spec.json"
 
 
-def resolve_scene(artifact: str) -> str:
+def resolve_scene(artifact: str, _hops: int = 0) -> str:
     for m in json.loads(CANON.read_text(encoding="utf-8")).get("members", []):
         if m["artifact"] == artifact:
             return m["scene"]
     import glob
-    for f in glob.glob(str(REPO / "commons/artifacts/registry/*.json")):
+    delegate = ""
+    for f in sorted(glob.glob(str(REPO / "commons/artifacts/registry/*.json"))):
         reg = json.loads(Path(f).read_text(encoding="utf-8")).get("artifacts", {})
         if artifact in reg:
             sp = reg[artifact].get("scene_path") or reg[artifact].get("scene")
             if sp:
                 return sp
+            tgt = str(reg[artifact].get("delegate_to") or "").strip()
+            if tgt:
+                delegate = tgt   # last match wins, mirroring the runtime grid's
+                                 # last-write-wins registry load and the gate's pick
+    # delegate_to: the token is a registry NAME onto another artifact's scene plus
+    # per-instance params (loom_alhambra_p6m -> pattern_loom) — the same contract
+    # GridInteractablesComponent resolves at spawn. Follow it one hop at a time,
+    # capped so a registry cycle cannot hang the sweep.
+    if delegate and delegate != artifact and _hops < 4:
+        return resolve_scene(delegate, _hops + 1)
     return ""
+
+
+def delegate_params_for(artifact: str) -> dict:
+    """The delegate_params a delegate token carries — its identity on the host scene.
+
+    Without them a sweep of loom_escher_mirror photographs pattern_loom's DEFAULT
+    (p4m alhambra roller) four times under the escher token's name: every tile a
+    variant of the wrong artifact, and the axis verdict a fact about the wrong
+    body. Read from the token's own entry rather than hand-copied into a fixture,
+    so the sweep and the grid can never disagree about what the token means.
+    """
+    import glob
+    out: dict = {}
+    for f in sorted(glob.glob(str(REPO / "commons/artifacts/registry/*.json"))):
+        try:
+            reg = json.loads(Path(f).read_text(encoding="utf-8")).get("artifacts", {})
+        except Exception:
+            continue
+        e = reg.get(artifact)
+        if isinstance(e, dict) and str(e.get("delegate_to") or "").strip():
+            dp = e.get("delegate_params")
+            if isinstance(dp, dict):
+                out = dict(dp)   # last match wins — same entry the grid serves
+    return out
 
 
 def coerce(v: str):
@@ -166,10 +201,18 @@ def main() -> int:
                 if isinstance(_fx, dict):
                     fixture = _fx
                 break
-    if fixture:
-        print(f"  fixture from registry: {fixture}")
+    # Delegate identity first, fixture over it, the swept axis values over both —
+    # so a fixture can still override a delegate param for capture, and the axis
+    # always wins. Only single-artifact sweeps have one identity to carry.
+    dparams: dict = delegate_params_for(targets[0][0]) if (targets and not args.all) else {}
+    if dparams:
+        print(f"  delegate params from registry: {dparams}")
+    if fixture or dparams:
+        if fixture:
+            print(f"  fixture from registry: {fixture}")
         for v in variants:
-            merged = dict(fixture)
+            merged = dict(dparams)
+            merged.update(fixture)
             merged.update(v["params"])
             v["params"] = merged
 

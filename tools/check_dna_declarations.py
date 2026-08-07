@@ -95,6 +95,22 @@ def registry() -> dict:
     return out
 
 
+_TOKEN_INDEX: dict | None = None
+
+
+def _entry_by_token(token: str) -> dict | None:
+    """The registry entry a delegate_to names, from a lazily built token index.
+
+    Memoized because sources_for runs once per declared axis-carrying token and
+    registry() re-reads every JSON file; one scan serves the whole gate run.
+    """
+    global _TOKEN_INDEX
+    if _TOKEN_INDEX is None:
+        _TOKEN_INDEX = {tok: e for tok, (e, _f) in registry().items()}
+    e = _TOKEN_INDEX.get(token)
+    return e if isinstance(e, dict) else None
+
+
 def sources_for(entry: dict) -> list[tuple[Path, str]]:
     """EVERY script the scene runs, the root's first.
 
@@ -123,6 +139,14 @@ def sources_for(entry: dict) -> list[tuple[Path, str]]:
     costume: a fact about WHERE a line of code is written, presented as a verdict about the
     registry. Only `extends "res://..."` is followed; `extends SomeClassName` would need the
     class_name index and has not been needed yet.
+
+    AND THE SCENE A DELEGATE RUNS. loom_alhambra_p6m has no scene of its own — it is a
+    registry NAME onto pattern_loom plus delegate_params, the same contract
+    GridInteractablesComponent resolves at spawn. Reading only the entry reported a working,
+    reachable, already implemented axis as "source unreadable: None" — a fact about WHERE
+    a scene path is written, presented as a verdict about the registry (the same disease as
+    the three above, fourth costume). So an entry with no scene but a `delegate_to` is read
+    through its host's entry, hop-capped so a cycle cannot hang the gate.
     """
     out: list[tuple[Path, str]] = []
     seen: set[Path] = set()
@@ -134,6 +158,18 @@ def sources_for(entry: dict) -> list[tuple[Path, str]]:
         out.append((p, p.read_text(encoding="utf-8", errors="replace")))
 
     sp = str(entry.get("scene_path") or entry.get("scene") or "")
+    if not sp:
+        e, seen_tok = entry, set()
+        while not sp and len(seen_tok) < 4:
+            tgt = str(e.get("delegate_to", "")).strip()
+            if not tgt or tgt in seen_tok:
+                break
+            seen_tok.add(tgt)
+            nxt = _entry_by_token(tgt)
+            if nxt is None:
+                break
+            e = nxt
+            sp = str(e.get("scene_path") or e.get("scene") or "")
     if not sp:
         return out
     tscn = REPO / sp.replace("res://", "")
