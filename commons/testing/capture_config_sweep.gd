@@ -501,12 +501,21 @@ const SHOW_MSAA: int = Viewport.MSAA_4X
 const SHOW_TONEMAP: int = Environment.TONE_MAPPER_ACES
 ## Slightly under 1.0. The sky dome below is a bright overhead softbox and the
 ## key is 2.6; at 1.0 the top faces of pale artifacts sat on the shoulder.
-const SHOW_EXPOSURE: float = 0.92
+## CUT after a blind critique of 28 sheets: three independent critics, none told which
+## render was which, all reported clipping as the single worst fault — "any bright surface
+## goes straight to 255 with no rolloff", measured at up to 4.65% of subject pixels. The
+## comment below already said to lower this if emissives blow out. They were blowing out.
+const SHOW_EXPOSURE: float = 0.78
 ## White point. FILMIC's default 1.0 clips anything above middle grey hard.
 ## 3.2 keeps a specular ~3 stops over diffuse white as a readable gradient
 ## instead of a disc. Raise it if emissive artifacts are blowing out; lower it
 ## for more contrast.
-const SHOW_WHITE: float = 3.2
+##
+## RAISED to 6.0 by the same critique. 3.2 gave ACES roughly three stops of headroom, and
+## this corpus is full of emissive artifacts that live well above that — the dome's red
+## wireframe bloomed a third of the object's width past its own silhouette and ate the
+## edge. More headroom is what turns a blown disc back into a readable gradient.
+const SHOW_WHITE: float = 6.0
 
 ## ── The dome ──────────────────────────────────────────────────────────────────
 ## A ProceduralSkyMaterial used as an IMAGE-BASED LIGHT, not as a picture. The
@@ -522,7 +531,13 @@ const SHOW_WHITE: float = 3.2
 ## the cheapest possible answer to "metals read as metal" with no reflection
 ## probe anywhere (R2: a probe would be a per-frame render, this is one cubemap
 ## baked once at boot).
-const SHOW_SKY_TOP: Color = Color(0.66, 0.70, 0.79)
+## RAISED from 0.66 with the exposure cut. This hemisphere is the softbox: it is what a
+## polished surface actually SEES, and light_sphere at ground=mirror came back as a pure
+## black silhouette — 25.9% of its pixels at luminance 4 or below, darker than the backdrop
+## it stood against. A mirror is not dark; a mirror in an unlit room is. Brightening the one
+## thing in the scene worth reflecting fixes the mirror and pays back the exposure cut in
+## the mid-tones at the same time, without touching the visible backdrop below the horizon.
+const SHOW_SKY_TOP: Color = Color(1.05, 1.10, 1.22)
 ## MEASURED FIX, first showcase render: at 0.40,0.44,0.52 this sat directly above a
 ## 0.082 backdrop and the horizon — which the 15 deg downward pitch puts INSIDE the
 ## top of the frame — read as a hard black stripe across every sheet. The seam has to
@@ -619,13 +634,29 @@ const SHOW_SSAO_DETAIL: float = 0.6
 ## GI pass) and the reason it earns it is rubric item 4: a coloured contact
 ## patch is what tells the eye an object is TOUCHING the floor rather than
 ## floating 2 mm above it. Set the intensity to 0.0 to switch it off.
+##
+## CUT FROM 0.55 TO 0.18 by the blind critique. SSIL is a half-res, temporally-unfiltered
+## GI pass, and in a SINGLE still frame it has no history to denoise against: three critics
+## independently reported "vertical screen-space streaks" on the dark faces of dome, and
+## the tell they gave is decisive — the streaks run vertically in SCREEN space across a
+## RECEDING face and do not foreshorten, so they cannot be surface texture. Measured std
+## 15.7 on a mean of 40 with peaks at 134. The coloured contact bleed is worth having; it
+## is not worth having at three times the amplitude of the shading it sits on.
 const SHOW_SSIL_RADIUS_K: float = 2.2
-const SHOW_SSIL_INTENSITY: float = 0.55
+const SHOW_SSIL_INTENSITY: float = 0.18
 
 ## ── Screen-space reflection ───────────────────────────────────────────────────
 ## The ground gets a soft reflection of what is standing on it. Cheap at this
 ## step count and, like SSIL, it buys grounding. 0 steps disables.
-const SHOW_SSR_STEPS: int = 40
+##
+## DISABLED by the blind critique. Two critics measured "concentric hard-stepped rings in
+## the floor specular directly under the object" and a "speckled, undersampled blob rather
+## than a roughness-weighted blur" — both are SSR's ray march quantising at 40 steps, and
+## raising the step count buys a slower render of the same banding pattern. The sky dome is
+## already the reflection source (REFLECTION_SOURCE_BG with BG_SKY), so the floor keeps a
+## clean environment reflection with none of the stepping. A visible artifact costs more
+## than the grounding it was bought for.
+const SHOW_SSR_STEPS: int = 0
 const SHOW_SSR_FADE_IN: float = 0.15
 const SHOW_SSR_FADE_OUT: float = 2.0
 
@@ -634,8 +665,14 @@ const SHOW_SSR_FADE_OUT: float = 2.0
 ## surface and is how a render starts looking like a phone filter. At 1.05 only
 ## genuinely emissive geometry — which in this corpus means something that is
 ## MEANT to be a light — crosses it.
-const SHOW_GLOW_THRESHOLD: float = 1.05
-const SHOW_GLOW_INTENSITY: float = 0.55
+## RAISED and CUT by the blind critique. This corpus is unusually emissive — wireframes,
+## readouts, tally lamps — and at 1.05/0.55 the bloom stopped being light and became mass:
+## "the red drum's emission blooms across the whole object, the sphere washes to near-white
+## and its colour information is destroyed", and on the catalyst family the halo fattened
+## every wire so the tube read thicker than the geometry it was drawn from. A glow that
+## changes an object's apparent SIZE is no longer describing light.
+const SHOW_GLOW_THRESHOLD: float = 1.35
+const SHOW_GLOW_INTENSITY: float = 0.32
 const SHOW_GLOW_STRENGTH: float = 1.0
 ## Additive-on-top rather than a screen-wide bloom lift.
 const SHOW_GLOW_BLOOM: float = 0.02
@@ -690,6 +727,17 @@ const SHOW_GROUND_GRAIN: float = 0.28
 const SHOW_TEX_PX: int = 256
 const SHOW_TEX_SEED: int = 20260807
 
+## ── The flat backdrop ─────────────────────────────────────────────────────────
+## What the camera sees behind the subject, now that BG_COLOR has taken that job off the
+## sky dome. This is NOT interchangeable with the dome's ground_* colours even though it
+## looks like it should be: those are radiance fed into an IBL and this one goes through
+## exposure and the ACES curve on its way to a pixel. Set to SHOW_BACKDROP_HIGH's 0.15 it
+## rendered at 0,0,0 — pure black — because the white point is 6.0 and the low end of the
+## curve is correspondingly long. Tuned instead against what the LIT GROUND measures in
+## frame (~52/255) so backdrop and floor read as one studio rather than as an object
+## floating in a void with a shelf under it.
+const SHOW_BACKDROP_FLAT: Color = Color(0.62, 0.65, 0.72)
+
 ## ── Final grade ───────────────────────────────────────────────────────────────
 ## Almost nothing. A grade this bench cannot see the result of is a grade that
 ## should not exist; these three exist so the orchestrator has a last dial.
@@ -723,7 +771,25 @@ func _stage_showcase(vp: SubViewport) -> void:
 	var sky := Sky.new()
 	sky.sky_material = sky_mat
 	env.sky = sky
-	env.background_mode = Environment.BG_SKY
+	# WHAT THE CAMERA SEES IS NOW DECOUPLED FROM WHAT SURFACES REFLECT, and this kills a
+	# whole class of bug rather than another instance of it.
+	#
+	# With BG_SKY the dome was doing two incompatible jobs: it had to be BRIGHT so a
+	# polished surface had something to reflect (a mirror in an unlit room is black), and
+	# DARK AND FLAT so the backdrop read as a studio wall with no horizon in it. Every
+	# setting that helped one hurt the other, and the visible horizon seam came back the
+	# moment the softbox was raised — the same black band, for the third time, from a
+	# different direction.
+	#
+	# BG_COLOR paints the backdrop as one flat value: there is no horizon in the frame
+	# because there is no sky in the frame. REFLECTION_SOURCE_SKY keeps the dome as the
+	# reflection probe and AMBIENT_SOURCE_SKY keeps it as the ambient source, so metals
+	# still see a bright overhead softbox with a darker floor below it. It also restores
+	# the flat corners the DNA critic samples at pixel (3,3) as "background by
+	# construction", which the gradient had quietly put at risk.
+	env.background_mode = Environment.BG_COLOR
+	env.background_color = SHOW_BACKDROP_FLAT
+	env.reflected_light_source = Environment.REFLECTION_SOURCE_SKY
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
 	env.ambient_light_energy = SHOW_AMBIENT
 
