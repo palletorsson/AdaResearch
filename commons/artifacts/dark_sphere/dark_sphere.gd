@@ -51,7 +51,34 @@ class_name DarkSphere
 ##   "dark_sphere#presence:eclipse"                 → a matte hole that eats light
 ##   "dark_sphere#body:cairn"                       → stacked marker, meets the ground
 
-const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+## THE FINISH (2026-08-07). tools/render_lint.py measured this artifact FLAT — tonal
+## spread under 0.055 and fewer than forty distinct colours across the subject, which is
+## the numeric signature of one albedo, one roughness and one metallic over a whole
+## object. It was exactly that, on 317 placements: metallic 0.6, roughness 0.25, no
+## roughness map, no normal map, and a floor pool painted one uniform alpha out to a hard
+## circular edge.
+##
+## metallic 0.6 is the tell. Nothing is 0.6 metallic; the middle of that range is not a
+## material, it is a knob turned until the sheen looked right. What the knob was reaching
+## for is a DIELECTRIC WITH A FILM OVER IT — a dark glass ball has a broad specular lobe
+## from its own surface and a tighter one from the coat on top, and two lobes of different
+## width is most of what makes a sphere read as a sphere and not as a disc. The body is
+## metallic 0 now and the sheen comes from where it actually comes from.
+##
+## A sphere is the hardest surface there is: no edge to catch a highlight, no flat face to
+## hide a wrong roughness on, and a terminator that shows a mis-sized normal map as orange
+## peel before anything else does. Every number below is sized against that.
+##
+## WHAT DID NOT CHANGE. Every mesh, every radius, every position, both lamps, the pulse
+## rates, the halo's own alpha numbers, and both axes. presence=witness + body=orb builds
+## the silhouette it has always built.
+##
+## MeshKit was read and deliberately not called. The geometry is exactly as it shipped
+## (this pass re-finishes surfaces), and every mesh in play — SphereMesh, CylinderMesh,
+## TorusMesh — is a Godot primitive that already carries the UVs and TANGENTS a normal map
+## needs, so there is nothing for it to fix. The one thing it would have been for,
+## replacing a mesh, is the thing this pass must not do.
+const PBR := preload("res://commons/render/pbr_kit.gd")
 
 
 # Spine-corridor contract — see doc/SPINE_HINTS_CONTRACT.md

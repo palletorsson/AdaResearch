@@ -2,6 +2,7 @@ extends Node3D
 class_name ExitSign
 
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+const PBR := preload("res://commons/render/pbr_kit.gd")
 
 # @identity
 # essence: a wall-mounted illuminated EXIT sign — Portal 2 / Half-Life vocabulary. A small emissive rectangle that names a way out and points at it. The cheapest, most legible piece of architectural narrative the room can hold.
@@ -9,7 +10,7 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 # critical_parameter: sign_color — green = safe egress (the standard), red = warning/alarm exit, accent-color tint = "this exit belongs to THIS phase". The text stays white.
 # triggers: _ready() builds the body, text, and arrow from exports; rebuilds on apply_grid_config
 # emerges: same script, four signs — green "EXIT →", red "EMERGENCY ↓", phase-tinted "λ-S LAB ←", contextual "RETURN ↑"
-# needs: emissive material with high glow_energy [present]; baked text quads painted onto the sign face [present]; arrow glyph baked as unshaded quad [present]
+# needs: emissive material with high glow_energy [present]; baked text quads painted onto the sign face [present]; arrow glyph baked as unshaded quad [present]; a HOUSING that is not the light — moulded shell, painted-steel bezel, and the green the lens throws back onto both [present]
 # relationships: sibling to lab_room (a chamber with no exit sign is a sealed room — the sign is the seal's release valve); peer to sliding_door (the sign names the door); descendant of the Half-Life test-chamber visual vocabulary the lab_room inherits from
 # truth: a sign is not the way out. The sign is the PROMISE that there IS a way out. A room without an exit sign is a trap. A room with one is a stage.
 
@@ -19,6 +20,63 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 ## faces +Z by default (mount on a -Z wall and the player will see it
 ## as they look into the room). Re-orient the parent transform to mount
 ## on other walls.
+##
+## ── THE FINISH (material pass, 2026-08-07) ────────────────────────────
+##
+## The sign shipped as ONE box that glowed on all six faces: sides, back and
+## front the same emerald, one albedo, one roughness, one metallic. A render
+## lint measured it flat, and it is flat — the object had no housing at all,
+## only light shaped like a brick.
+##
+## What changed is NOT the light. glow_energy is passed through untouched and
+## no emission was raised anywhere: the glowing face is already the brightest
+## thing in any room this sign hangs in, and this corpus runs with bloom off
+## precisely because lit things here fatten past their own silhouette. The
+## work went into the three surfaces that were never there:
+##
+##   Shell   the back box. Moulded ABS, satin, barely worn — it lives against
+##           a wall. Inset 4 mm per side so the bezel laps over it and throws
+##           a shadow line down the join.
+##   Bezel   painted steel, dark, chamfered. The ring around the light, and
+##           the reason the green reads as bright: it has something dull to be
+##           bright against. Its chamfer is 5 mm on purpose — see below.
+##   Lens    the acrylic diffuser. It still glows at exactly the shipped
+##           energy, but it is now a PLASTIC that glows: clear coat, fine
+##           roughness break-up, a specular that moves when you do, and an
+##           albedo dropped under the emission so scene light cannot clip the
+##           panel to white and take its colour away.
+##
+## Plus one shadowless, distance-faded omni at the lens (`spill`), because a
+## lamp that lights nothing is a sticker. It is what puts a gradient across
+## the bezel and the bracket instead of a flat ambient wash.
+##
+## ── GRAIN SCALE, WHICH IS THE WHOLE GAME ──────────────────────────────
+##
+## The sign body is 0.45 x 0.18 x 0.06 m; with the gantry it stands about
+## 0.63 m tall. Framed for a 760 px capture that is roughly 1200 px per metre
+## (840 for the gantry). PbrKit's triplanar scale is texture tiles per metre
+## of local space, and GRAIN_MICRO's dominant blob is about 1/24 of a tile, so
+##
+##     blob_px  =  (px_per_m / tiles_per_m) / 24
+##
+## At the kit's own defaults (hard_plastic 5, painted_metal 3) that lands the
+## blob at 10-16 px — soft mottling, which reads as dirt on a part this small,
+## not as moulded plastic. At the docstring's rule of thumb (1 / longest = 2.2
+## as a multiplier) it lands near 4.5 px, which is legible but thin. This file
+## picks GRAIN_TILES_PER_M = 8.0 for EVERY surface, which puts the blob at
+## about 6 px on the body and 4.3 px on the gantry — a feature several pixels
+## wide, which is the rule that matters. One tile is then 0.125 m, so roughly
+## three and a half grain periods span the sign: a surface, not static.
+##
+## The same arithmetic is why brushed_metal appears nowhere here. Its brush is
+## a 40x stretch along one axis; on parts this small that puts the streaks at
+## a fraction of a pixel and the result is television static, not steel. The
+## rods use machined_metal, which is isotropic, and they read as drawn stock.
+##
+## And it is why the bezel's chamfer is 5 mm rather than the kit's automatic
+## 1 mm: PbrKit.box() derives its bevel from the box's SMALLEST dimension, and
+## an 18 mm bezel gets a 1 mm chamfer — about one pixel, i.e. invisible. Same
+## lesson, in geometry instead of texture.
 
 # ── DNA ───────────────────────────────────────────────────────────────
 
@@ -42,6 +100,12 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 @export_group("Emission")
 @export var glow_energy: float = 1.5
+## Light the sign throws back onto its own bezel and the wall around it, as a
+## fraction of glow_energy. ONE OmniLight3D, shadows off, distance-faded past
+## 7 m — a sign that lights nothing is a decal, and the bezel is the surface
+## that proves it is a lamp. Set 0 in a room that is already light-bound.
+## This does NOT touch glow_energy: the face is bright enough already.
+@export var spill: float = 0.55
 
 # ── Stage-2 DNA: support ──────────────────────────────────────────────
 #
@@ -92,6 +156,36 @@ const GANTRY_RISE: float = 0.45                            ## rod length above t
 const GANTRY_ROD_X: float = 0.10                           ## rods either side of centre
 const GANTRY_PLATE: Vector3 = Vector3(0.30, 0.06, 0.02)    ## the plate the load comes from
 
+# ── Finish constants ──────────────────────────────────────────────────
+
+## Texture tiles per metre of local space, for EVERY surface on this sign.
+##
+## One number for the whole artifact is not a shortcut, it is the point: shell,
+## bezel, bracket plate and gantry rod are one object photographed at one
+## distance, and a real object's parts all carry grain at the same texel
+## density. The derivation is in the file docstring — 8.0 puts a GRAIN_MICRO
+## blob at about 6 px in a 760 px frame and one full tile at 0.125 m.
+const GRAIN_TILES_PER_M: float = 8.0
+
+## The housing is deliberately NOT the sign's colour. It is building fabric and
+## it should be the same grey in all 59 rooms; only the light changes.
+const HOUSING_SHELL: Color = Color(0.615, 0.605, 0.585)   ## moulded ABS back box
+const HOUSING_BEZEL: Color = Color(0.235, 0.240, 0.250)   ## painted steel ring
+const HARDWARE_MID: Color = Color(0.400, 0.400, 0.412)    ## bracket / gantry plate
+const HARDWARE_DARK: Color = Color(0.255, 0.260, 0.270)   ## frame bezel stock
+
+## Bezel depth as a fraction of `thickness`, and the face-on width of the ring
+## as a fraction of the sign's short side. Both clamped, so a map that sets a
+## 0.02 m thick sign still gets a bezel rather than a knife edge.
+const BEZEL_DEPTH_FRAC: float = 0.30
+const BEZEL_FACE_FRAC: float = 0.075
+## The shell is inset this much in TOTAL (half per side) so the bezel laps over
+## it. 8 mm reads as a ~5 px lip in a capture; 4 mm would not have.
+const SHELL_INSET: float = 0.008
+## How far the diffuser stands out of the bezel opening. Small — the text quad
+## already floats 3 mm off the body face and must stay clear of it.
+const LENS_PROUD: float = 0.0015
+
 # ── Internal state ────────────────────────────────────────────────────
 
 var _built: bool = false
@@ -120,6 +214,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	var before_thickness: float = thickness
 	var before_mount: float = mount_offset_z
 	var before_glow: float = glow_energy
+	var before_spill: float = spill
 	var before_support: String = support
 
 	for k in config_data.keys():
@@ -139,6 +234,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			and is_equal_approx(thickness, before_thickness)
 			and is_equal_approx(mount_offset_z, before_mount)
 			and is_equal_approx(glow_energy, before_glow)
+			and is_equal_approx(spill, before_spill)
 			and support == before_support):
 		# Nothing that shapes this sign moved. Touch nothing, say nothing.
 		return
@@ -167,6 +263,8 @@ func _read_metadata_overrides() -> void:
 		mount_offset_z = float(str(get_meta("config_mount_offset_z")))
 	if has_meta("config_glow_energy"):
 		glow_energy = float(str(get_meta("config_glow_energy")))
+	if has_meta("config_spill"):
+		spill = float(str(get_meta("config_spill")))
 	if has_meta("config_support"):
 		support = _pick_axis(str(get_meta("config_support")), SUPPORTS, support)
 
@@ -191,6 +289,7 @@ func _build_all() -> void:
 	_build_body()
 	_build_text()
 	_build_arrow()
+	_build_wall_contact()
 
 
 func _add_owned(n: Node3D) -> void:
@@ -198,29 +297,169 @@ func _add_owned(n: Node3D) -> void:
 	_owned.append(n)
 
 
+## Shell + bezel + lens, occupying exactly the box the old single emissive
+## BoxMesh occupied. The OUTLINE is unchanged — same width, same height, same
+## thickness, back face still on the local plane at mount_offset_z — so every
+## shipped `support = none` placement keeps its silhouette. What changed is
+## that the outline is now filled by three surfaces instead of one, and only
+## the middle one is a light.
 func _build_body() -> void:
-	# The body is a thin emissive box, offset from the wall by mount_offset_z.
-	# Centered at local origin in X/Y; pushed forward in +Z by half its
-	# thickness + mount_offset_z so the back surface sits at the local plane.
-	var body := MeshInstance3D.new()
-	body.name = "Body"
-	var mesh := BoxMesh.new()
-	mesh.size = Vector3(width, height, thickness)
-	body.mesh = mesh
+	var bezel_d: float = clampf(thickness * BEZEL_DEPTH_FRAC, 0.006, 0.022)
+	var bezel_w: float = clampf(minf(width, height) * BEZEL_FACE_FRAC, 0.005, 0.018)
+	var shell_d: float = maxf(thickness - bezel_d, 0.004)
+	var z_front: float = mount_offset_z + thickness
 
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = sign_color
-	mat.emission_enabled = true
-	mat.emission = sign_color
-	mat.emission_energy_multiplier = glow_energy
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
-	mat.roughness = 0.3
-	mat.metallic = 0.0
-	body.material_override = mat
-	body.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	# ── Shell: the moulded back box, inset so the bezel laps over it ──
+	# No chamfer (bevel 0 -> PbrKit falls back to a 12-tri BoxMesh): the only
+	# edge that ever catches a highlight here is the bezel's, and this box is
+	# tucked under it. Paying 44 triangles for edges nobody sees is the kind of
+	# thing that turns a prop with 59 placements into a budget problem.
+	var inset: float = SHELL_INSET
+	var shell: MeshInstance3D = PBR.box(
+		Vector3(0.0, 0.0, mount_offset_z + shell_d * 0.5),
+		Vector3(maxf(width - inset, 0.01), maxf(height - inset, 0.01), shell_d),
+		_shell_material(), 0.0, 0.0)
+	shell.name = "Shell"
+	_add_owned(shell)
 
-	body.position = Vector3(0.0, 0.0, mount_offset_z + thickness * 0.5)
-	_add_owned(body)
+	# ── Bezel: the painted ring around the light ─────────────────────
+	# Chamfered, and chamfered by hand. PbrKit derives its automatic bevel from
+	# the SMALLEST dimension, which on an 18 mm bezel is about 1 mm — roughly
+	# one pixel in a capture, so the edge would vanish exactly as it did before
+	# this pass. 5 mm is ~6 px: a band, not a hairline.
+	var bevel: float = clampf(bezel_d * 0.28, 0.0025, 0.006)
+	var bezel: MeshInstance3D = PBR.box(
+		Vector3(0.0, 0.0, z_front - bezel_d * 0.5),
+		Vector3(width, height, bezel_d),
+		_bezel_material(), bevel, 0.10)
+	bezel.name = "Bezel"
+	_add_owned(bezel)
+
+	# ── Lens: the diffuser, still the only thing that glows ──────────
+	# A solid box passing THROUGH the bezel plate rather than a hollow frame
+	# plus a pane — the interpenetration is invisible and it buys the whole
+	# ring for 12 triangles. Node keeps the old name "Body" so anything that
+	# ever went looking for the glowing part still finds it.
+	var lens_d: float = bezel_d + 0.006
+	var lens: MeshInstance3D = PBR.box(
+		Vector3(0.0, 0.0, z_front + LENS_PROUD - lens_d * 0.5),
+		Vector3(maxf(width - bezel_w * 2.0, 0.01),
+			maxf(height - bezel_w * 2.0, 0.01), lens_d),
+		_lens_material(), 0.0, 0.0)
+	lens.name = "Body"
+	lens.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_add_owned(lens)
+
+	_build_spill(z_front)
+
+
+# ── Finish ────────────────────────────────────────────────────────────
+
+## Land a kit material's detail frequency on THIS artifact's scale.
+##
+## scale_detail MULTIPLIES, so the factor is derived from whatever tiling the
+## kit builder chose (uv1_scale.x, the across-grain component in every builder
+## used here) rather than assigned over the top of it. Each material keeps its
+## own character; only the frequency moves, and it moves to one shared number.
+func _fit_grain(m: StandardMaterial3D) -> StandardMaterial3D:
+	if m == null:
+		return m
+	var base: float = maxf(m.uv1_scale.x, 0.001)
+	return PBR.scale_detail(m, GRAIN_TILES_PER_M / base)
+
+
+## The back box. Moulded ABS: satin, dielectric, hardly worn. No weathering and
+## no crevice AO — a mid-grey with three separate "slight" darkenings stacked on
+## it is how a light object arrives at charcoal.
+func _shell_material() -> StandardMaterial3D:
+	return _fit_grain(PBR.hard_plastic(HOUSING_SHELL, 0.42, 0.06))
+
+
+## The bezel: painted steel, the darkest surface on the sign and the reason the
+## green reads as bright. `wear` stays under 0.30, which is the line where
+## painted_metal starts multiplying grime into the albedo — this surface is
+## already dark, its box wear already dims the underside, and a third darkening
+## would take it to a hole in the scene rather than a ring around a lamp.
+func _bezel_material() -> StandardMaterial3D:
+	return _fit_grain(PBR.painted_metal(HOUSING_BEZEL, 0.18, 0.28, 0.56))
+
+
+## The diffuser. An acrylic panel that glows, not a slab of coloured light.
+##
+## hard_plastic brings the roughness texture, the micro normal and the clear
+## coat, so the face carries a specular that MOVES over an emission that does
+## not. The emission itself is bolted on at exactly the shipped glow_energy —
+## nothing here raises it.
+func _lens_material() -> StandardMaterial3D:
+	var m: StandardMaterial3D = PBR.hard_plastic(sign_color, 0.86, 0.02)
+	# The kit's anti-clip rule: albedo sits BELOW emission. A face whose albedo
+	# and emission are both full-value goes to flat white the moment any room
+	# light lands on it, and a clipped white sign has no colour left to be.
+	m.albedo_color = sign_color.darkened(0.35)
+	m.emission_enabled = true
+	m.emission = sign_color
+	m.emission_energy_multiplier = maxf(glow_energy, 0.0)
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
+	# hard_plastic's rim is tuned for an unlit part; on a face this bright it
+	# just washes the border into the bezel.
+	m.rim = 0.12
+	return _fit_grain(m)
+
+
+## Drawn steel rod. machined_metal rather than brushed_metal on purpose:
+## brushed_metal's 40x stretch is sized for a cabinet face, and on an 8 mm rod
+## it puts the streaks well under a pixel — which is static, not steel.
+func _rod_material() -> StandardMaterial3D:
+	return _fit_grain(PBR.machined_metal(PBR.STEEL, 0.34, 0.16))
+
+
+## The sign's own light, thrown back at its housing.
+##
+## VR budget: ONE OmniLight3D, shadows OFF, range under 1.1 m, and distance
+## fade so it stops being submitted past ~10 m. A room places one to three of
+## these, not fifty-nine — the corpus-wide placement count is spread across
+## maps. Without it the new bezel and the support hardware are lit only by
+## whatever ambient the room has, and a flat wash on a good surface still
+## renders as a flat surface.
+func _build_spill(z_front: float) -> void:
+	var energy: float = glow_energy * clampf(spill, 0.0, 2.0)
+	if energy <= 0.001:
+		return
+	var lamp := OmniLight3D.new()
+	lamp.name = "Spill"
+	lamp.light_color = sign_color
+	lamp.light_energy = clampf(energy, 0.0, 3.0)
+	lamp.light_specular = 0.6
+	lamp.omni_range = clampf(maxf(width, height) * 2.4, 0.30, 1.60)
+	lamp.omni_attenuation = 1.4
+	lamp.shadow_enabled = false
+	lamp.distance_fade_enabled = true
+	lamp.distance_fade_begin = 7.0
+	lamp.distance_fade_length = 3.0
+	# Just in front of the lens, so the bezel ring takes it at a grazing angle
+	# and gets a gradient across its width instead of a uniform tint.
+	lamp.position = Vector3(0.0, 0.0, z_front + 0.045)
+	_add_owned(lamp)
+
+
+## A soft contact shadow on the WALL, not the floor.
+##
+## PbrKit.ground_shadow projects along its own -Y; a pivot rotated 90 degrees
+## about X turns that into -Z, which is where this artifact's wall is. It is
+## the cheapest cue that the sign is mounted rather than floating, and it costs
+## no triangles and no light. normal_fade keeps it off surfaces facing the
+## wrong way, so it cannot smear a dark square across a floor.
+func _build_wall_contact() -> void:
+	if mount_offset_z <= 0.001:
+		return
+	var pivot := Node3D.new()
+	pivot.name = "WallContact"
+	pivot.rotation = Vector3(deg_to_rad(90.0), 0.0, 0.0)
+	var d: Decal = PBR.ground_shadow(maxf(width, height) * 0.62, 0.40, 0.015)
+	d.name = "WallShadow"
+	d.normal_fade = 0.55
+	pivot.add_child(d)
+	_add_owned(pivot)
 
 
 func _build_text() -> void:

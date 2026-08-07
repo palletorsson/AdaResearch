@@ -9,9 +9,11 @@ extends Node3D
 ## critical_parameter: spread (sigma) — wider sigma means flatter terrain, tighter sigma means sharper peak; constitution — what the law's body is MADE of, continuum or count (skin | terrace | column | rib)
 ## triggers: _build_flat_grid() lays a 20x20 quad mesh; height_at(x,z) applies exp(-(r²)/(2σ²)) per vertex
 ## emerges: a 3D HeightMapShape3D that is the integral of countless independent random walks — the bell shape is inevitable
-## needs: HeightMapShape3D for player collisions [has]; configurable sigma + height [has]; subtle Z-noise option [has]
-## relationships: galton_board's analytical limit (infinite bins, infinite balls); kin to distribution_comparator; one cross-section of probability_distributions_3d
+## needs: HeightMapShape3D for player collisions [has]; configurable sigma + height [has]; subtle Z-noise option [has]; a cast-and-painted finish that answers to light rather than a wireframe that ignores it [derived]; a grain sized for twenty metres, not for a bolt head [derived]; the hypsometric tint carried in vertex colour so it costs no draw call and no second material [derived]
+## relationships: galton_board's analytical limit (infinite bins, infinite balls); kin to distribution_comparator; one cross-section of probability_distributions_3d; surfaces through [[pbr_kit]], the same move dome made off the same shader
 ## truth: The bell curve is not chosen — it is what every sum of independent randomness becomes.
+
+const PBR := preload("res://commons/render/pbr_kit.gd")
 
 @export var quads_x: int = 20
 @export var quads_z: int = 20
