@@ -62,6 +62,7 @@ extends SceneTree
 ## sees, because in a map the framer has already run. A sheet that disagrees with the
 ## game about what the artifact looks like is not evidence about the artifact.
 const LabelFramer := preload("res://commons/grid/LabelFramer.gd")
+const ArtifactIdentity := preload("res://commons/grid/artifact_identity.gd")
 
 const RES := 760
 const FOV := 34.0
@@ -84,6 +85,27 @@ var _showcase: bool = false
 ## 0/1 = an explicit override that beats the spec.
 var _showcase_override: int = -1
 
+## STAGED MODE, opt-in like the showcase profile and for a different reason.
+##
+## Every tile this bench has ever produced photographs an artifact in a VOID. The project
+## already decided that is not what an artifact is: commons/data/staging_dna.json defines
+## eight artifact TYPES, each as the full environment it needs — a specimen stands on
+## station_plinth, an instrument on station_bench, a performer on station_stage, a tableau
+## against station_wall. Those props are built and working. Nothing in the capture path
+## ever read that file, so the galleries show bodies floating in the dark while the
+## repository holds the room they were designed for.
+##
+## That gap also explains a fault found by a corpus probe: 105 artifacts carry their OWN
+## WorldEnvironment node, because each was authored as a standalone demo that had to supply
+## its own sky. They do not each need one. They need ONE good room, and this is the switch
+## that puts them in it.
+##
+##   --staged   ·   ADA_SWEEP_STAGED=1   ·   spec {"staged": true}
+var _staged: bool = false
+var _staged_override: int = -1
+## Chosen per artifact from its measured extent; see _station_for.
+var _stage_prop: Node3D = null
+
 ## Live showcase nodes, null on the default path. Held as members because the
 ## ground and the key light have to be re-fitted to each sweep's subject size
 ## AFTER the union AABB is known, which is long after _stage has run.
@@ -103,9 +125,19 @@ func _initialize() -> void:
 			_showcase_override = 1
 		elif a == "--showcase=0" or a == "--showcase=false":
 			_showcase_override = 0
+		elif a == "--staged" or a == "--staged=1" or a == "--staged=true":
+			_staged_override = 1
+		elif a == "--staged=0" or a == "--staged=false":
+			_staged_override = 0
 	# The env var only speaks when the command line did not. cabinet_sweep.py owns
 	# the argv for this script and is out of scope to edit, so this is the hook an
 	# orchestrator can reach without touching tools/.
+	if _staged_override < 0:
+		var sflag: String = OS.get_environment("ADA_SWEEP_STAGED").strip_edges().to_lower()
+		if sflag == "1" or sflag == "true" or sflag == "yes" or sflag == "on":
+			_staged_override = 1
+		elif sflag == "0" or sflag == "false" or sflag == "no" or sflag == "off":
+			_staged_override = 0
 	if _showcase_override < 0:
 		var envflag: String = OS.get_environment("ADA_SWEEP_SHOWCASE").strip_edges().to_lower()
 		if envflag == "1" or envflag == "true" or envflag == "yes" or envflag == "on":
@@ -130,6 +162,12 @@ func _run() -> void:
 		_showcase = _showcase_override == 1
 	else:
 		_showcase = bool(spec.get("showcase", false))
+	if _staged_override >= 0:
+		_staged = _staged_override == 1
+	else:
+		_staged = bool(spec.get("staged", false))
+	if _staged:
+		print("STAGED mode ON - artifact stands on its station prop, not in a void")
 	if _showcase:
 		print("SHOWCASE profile ON — ACES, sky IBL, three-point rig, ground, %dx supersample" % SHOW_SUPERSAMPLE)
 	var scene_path: String = str(spec.get("scene", ""))
@@ -330,9 +368,30 @@ func _run() -> void:
 			LabelFramer.frame_labels(inst)
 			_suppress_chrome(inst)
 
+		# STAGED: put the body on the station its size calls for, then let the camera
+		# frame BOTH. The lift is applied to the artifact so it stands on the top face
+		# rather than intersecting it; the station is a sibling, never a parent.
+		if _staged:
+			var own: AABB = _subtree_aabb(inst)
+			var lift: float = await _stage_station(host if host != null else vp, own)
+			if lift > 0.0 and inst is Node3D:
+				(inst as Node3D).position.y += lift - own.position.y
+				await process_frame
+
 		# The union box when we have one, this variant's own only as a fallback for
 		# single-variant sweeps and for a pre-pass that measured nothing.
 		var aabb: AABB = union if have_union else _subtree_aabb(host if host != null else inst)
+		if _staged and _stage_prop != null:
+			# Frame the pair. A body photographed with its plinth cropped off is the void
+			# tile with extra steps.
+			#
+			# ONLY the body and its station. The first version took the whole viewport
+			# subtree and the showcase ground disc is sized to TWELVE times the subject,
+			# so the camera retreated until the frame was flat sky and nothing else. The
+			# set is not the subject.
+			var pair: AABB = _subtree_aabb(inst).merge(_subtree_aabb(_stage_prop))
+			if pair.size.length() > aabb.size.length():
+				aabb = pair
 		var c := aabb.get_center()
 		var radius: float = maxf(aabb.size.length() * 0.5, 0.2)
 		# PAD frames the WHOLE artifact, which is wrong when the axis lives in a
@@ -367,6 +426,9 @@ func _run() -> void:
 		img.save_png("%s/%s.png" % [out_dir, label])
 		shot += 1
 		print("SWEPT ", label)
+		if _stage_prop != null:
+			_stage_prop.queue_free()
+			_stage_prop = null
 		inst.queue_free()
 		await process_frame
 
@@ -939,6 +1001,71 @@ func _aim(light: Node3D, from: Vector3) -> void:
 		v = (v + Vector3(0.02, 0.0, 0.02)).normalized()
 	light.position = v
 	light.look_at(Vector3.ZERO, Vector3.UP)
+
+
+## Which station a body belongs on, from staging_dna.json, chosen by measured extent.
+##
+## The type is DERIVED rather than looked up, on purpose. artifact_type exists in the
+## registry but is filled on well under a tenth of entries and posture on seven; waiting
+## for that data would mean this mode helps almost nothing today. Extent is already
+## measured by the pre-pass, costs nothing, and is right about what matters here: whether
+## a body sits on a plinth, occupies a bench, stands on a stage, or hangs on a wall.
+##
+## Above 6 m nothing is staged. A terrain or a monument makes its own ground, which is
+## exactly why those templates in staging_dna carry no support prop.
+func _station_for(box: AABB) -> Dictionary:
+	var sz: Vector3 = box.size
+	var w: float = maxf(sz.x, sz.z)
+	var h: float = sz.y
+	if w > 6.0 or h > 6.0:
+		return {}
+	# TABLEAU IS ROUTED TO THE BENCH FOR NOW, and that is a known gap rather than a
+	# judgement. station_wall renders LYING FLAT here, so cctv came back standing on a
+	# horizontal panel instead of hanging on a vertical one — worse than the void tile,
+	# because it states something false about how the artifact is mounted. The prop is
+	# fine; the sweep does not yet know its orientation convention, and guessing a
+	# rotation into a shared instrument is how a plausible-looking wrong picture gets
+	# published across every future gallery.
+	if w > h * 2.5 and minf(sz.x, sz.z) < w * 0.35:
+		return {"prop": "station_bench", "type": "tableau_on_bench", "on_top": true}
+	if w <= 0.55 and h <= 0.55:
+		return {"prop": "station_plinth", "type": "specimen", "on_top": true}
+	if w <= 1.6 and h <= 1.6:
+		return {"prop": "station_bench", "type": "instrument", "on_top": true}
+	return {"prop": "station_stage", "type": "performer", "on_top": true}
+
+
+## Instantiate the station; return the Y the artifact should stand at.
+##
+## The station is added to the SAME parent as the artifact, never as its owner: a station
+## that owned the body would change what _subtree_aabb measures, and the axis is still
+## the subject of the picture.
+func _stage_station(parent: Node, box: AABB) -> float:
+	_stage_prop = null
+	var pick: Dictionary = _station_for(box)
+	if pick.is_empty():
+		return 0.0
+	var entry: Dictionary = ArtifactIdentity.registry_entry(str(pick["prop"]))
+	var scene_path: String = str(entry.get("scene", ""))
+	if scene_path == "" or not ResourceLoader.exists(scene_path):
+		push_warning("staged: no scene for %s" % pick["prop"])
+		return 0.0
+	var packed: PackedScene = load(scene_path)
+	if packed == null:
+		return 0.0
+	var st: Node = packed.instantiate()
+	ArtifactIdentity.stamp(st, str(pick["prop"]), entry)
+	parent.add_child(st)
+	if st is Node3D:
+		_stage_prop = st
+	await create_timer(0.35).timeout
+	var sbox: AABB = _subtree_aabb(st)
+	if not bool(pick.get("on_top", true)):
+		if _stage_prop != null:
+			_stage_prop.position = Vector3(0.0, 0.0, -maxf(box.size.z, 0.05) * 0.5 - 0.06)
+		return 0.0
+	print("staged: %s on %s" % [pick["type"], pick["prop"]])
+	return sbox.position.y + sbox.size.y
 
 
 ## Size every length in the rig against THIS subject. Called once per variant,
