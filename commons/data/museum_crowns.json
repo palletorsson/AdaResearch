@@ -1,5 +1,5 @@
 {
- "_readme": "THE EIGHT CROWNS \u2014 chapters whose champion template is a MUSEUM, ruled 2026-08-01 (Palle: 'adopt the 8 museum crowns') from the corpus-wide match (ada_encyclopedia/public/museum/museum_match_board.png: 24 chapters x 5 museums, identical casts, same pathfinder gate, same judge \u2014 museums won these on the CLASSIC pre-patience score, so the wins owe nothing to the same-day patience ruling). Consumers: endless_museum.gd deals a crowned chapter into its crowned building; map building for these chapters should reach for the museum template first. Kanazawa's patience-only win on isosurfaces is NOT adopted \u2014 its baseline was never rescored under the ruled judge. AUDITED under the ruled judge 2026-08-01: 7/8 crowns hold, primitives contested (see rescore report), zero new claims.",
+ "_readme": "THE EIGHT CROWNS \u2014 chapters whose champion template is a MUSEUM, ruled 2026-08-01 (Palle: 'adopt the 8 museum crowns') from the corpus-wide match (ada_encyclopedia/public/museum/museum_match_board.png: 24 chapters x 5 museums, identical casts, same pathfinder gate, same judge \u2014 museums won these on the CLASSIC pre-patience score, so the wins owe nothing to the same-day patience ruling). Consumers: endless_museum.gd deals a crowned chapter into its crowned building; map building for these chapters should reach for the museum template first. Kanazawa's patience-only win on isosurfaces is NOT adopted \u2014 its baseline was never rescored under the ruled judge. AUDITED under the ruled judge 2026-08-01: 7/8 crowns hold, primitives contested (see rescore report), zero new claims. RULED 2026-08-06: isosurfaces passes to castelvecchio-pinch-v2 (8.00, EDITED lineage) \u2014 the first crown held by a hand-edited descendant.",
  "ruled": "2026-08-01",
  "evidence": "doc/reports/museum_match_<seq>.json (match rows), doc/reports/map_tournament_<seq>.json (bred baselines, seed 46)",
  "crowns": {
@@ -43,12 +43,21 @@
    "note": ""
   },
   "isosurfaces": {
-   "template": "castelvecchio-endstopped-enfilade",
-   "map": "Trial_castelvecchio_isosurfaces",
-   "score": 7.6,
+   "template": "castelvecchio-pinch-v2",
+   "map": "Trial_pinch_v2_isosurfaces",
+   "score": 8.0,
    "bred_champion": "physarum",
    "bred_score": 6.3,
-   "note": "four of five museums beat the bred field here \u2014 the register wants rooms and vistas"
+   "lineage": "EDITED \u2014 the third lineage takes its first crown",
+   "note": "ruled 2026-08-06: a PERFECT 8.00 (tau/cov/promise/dolly/rank1 all maxed, 5/5 cycles). Authored in the closed loop (museum_match --tile): the ancestor's own component reading named capacity as the fault, 9 slots + 23 ad-hoc-hung became 32 ordered slots with zero overflow, tau 0.8 -> 1.0, the pinch keeping heroDeg 65. Succeeds castelvecchio-endstopped-enfilade (7.60) and ties soane-cabinet-vista (8.00), taken on the higher lineage claim: an edit that names its ancestor and beats it.",
+   "succeeds": {
+    "template": "castelvecchio-endstopped-enfilade",
+    "score": 7.6
+   },
+   "ties": {
+    "template": "soane-cabinet-vista",
+    "score": 8.0
+   }
   },
   "graphtheory": {
    "template": "grande-galerie-axial",
