@@ -569,14 +569,40 @@ def untracked_sources(reg: dict) -> list:
     A fresh clone in either case gets a declared axis with no dispatch behind it. `git
     ls-files --error-unmatch` is the only question that distinguishes "present" from
     "committed", so it is the one asked here.
+
+    ASKED PER AXIS, NOT PER SCENE (2026-08-07). Flagging a token because ANY script its
+    scene runs is untracked made this gate red on five declarations that were entirely
+    fine. force_cube extends commons/artifacts/_embodied/pickable_prop.gd, which extends
+    the gitignored XR-tools pickable.gd — so the walk up `extends` reached a vendored
+    base class and reported it as a stranded declaration, while `decomposition` sat two
+    hops down in force_cube.gd, tracked, with its @export_enum and its config hook.
+    drawing_paper the same, twice, for grab and hand-pose plumbing it merely instances;
+    `priming` is implemented in paper_draw_surface.gd and committed.
+
+    That is this file's own recurring disease in a fifth costume — a fact about WHERE a
+    line of code is written, presented as a verdict about the registry — and the costume
+    it wears here is the worst of them, because a gate that cries wolf on vendored
+    third-party plumbing teaches its reader to skip the one line that means the synth-rack
+    fault came back.
+
+    So the question is now the one the heading always claimed: is THIS AXIS implemented
+    anywhere a fresh clone would get? Both historical catches survive unchanged — in each,
+    the untracked file WAS the implementer and no tracked source declared the axis.
+
+    FAIL CLOSED. Silence requires a positive: some tracked source that implements the axis.
+    Failing to prove the untracked file implements it is not a reason to let it pass — the
+    idiom inside a vendored or unstaged script may be one code_values has never seen.
     """
     import subprocess
     out = []
     for tok, (e, rf) in sorted(reg.items()):
-        if not ((e.get("dna") or {}).get("axes")):
+        axes = (e.get("dna") or {}).get("axes") or {}
+        if not axes:
             continue
         # EVERY script the scene runs, not just the primary one. A pass-through root that
         # never got staged strands the axis just as completely as an unstaged demo script.
+        tracked_src: list[tuple[str, str]] = []
+        untracked_src: list[tuple[str, str]] = []
         for gd, src in sources_for(e):
             if not src:
                 continue
@@ -585,20 +611,29 @@ def untracked_sources(reg: dict) -> list:
                 rel = rel.split("AdaResearch_46/", 1)[1]
             r = subprocess.run(["git", "ls-files", "--error-unmatch", rel],
                                capture_output=True, cwd=str(REPO))
-            if r.returncode == 0:
+            (tracked_src if r.returncode == 0 else untracked_src).append((rel, src))
+        if not untracked_src:
+            continue
+        for axis in axes:
+            # A tracked implementer makes the heading's claim false for this axis. Reuse
+            # the same two signatures the value checks trust, so the gate cannot hold the
+            # rest of the file to one standard and this paragraph to another.
+            if any(has_export(src, axis) or code_values(src, axis)[0] is not None
+                   for _rel, src in tracked_src):
                 continue
-            # check-ignore exits 0 on a NEGATED pattern too — `!*.gd` means the path is
-            # explicitly NOT ignored. Reading only the exit code labelled a merely-unstaged
-            # file "gitignored by .gitignore:304", which sends the reader to edit a
-            # .gitignore that is already correct. Ask what the matching pattern says.
-            ig = subprocess.run(["git", "check-ignore", "-v", rel],
-                                capture_output=True, text=True, cwd=str(REPO))
-            why = ""
-            if ig.returncode == 0 and ig.stdout.strip():
-                parts = ig.stdout.strip().split("\t")[0].split(":")
-                if len(parts) >= 3 and not parts[2].lstrip().startswith("!"):
-                    why = "gitignored by " + ":".join(parts[0:2])
-            out.append((tok, rel, why or "never staged"))
+            for rel, src in untracked_src:
+                # check-ignore exits 0 on a NEGATED pattern too — `!*.gd` means the path is
+                # explicitly NOT ignored. Reading only the exit code labelled a merely-unstaged
+                # file "gitignored by .gitignore:304", which sends the reader to edit a
+                # .gitignore that is already correct. Ask what the matching pattern says.
+                ig = subprocess.run(["git", "check-ignore", "-v", rel],
+                                    capture_output=True, text=True, cwd=str(REPO))
+                why = ""
+                if ig.returncode == 0 and ig.stdout.strip():
+                    parts = ig.stdout.strip().split("\t")[0].split(":")
+                    if len(parts) >= 3 and not parts[2].lstrip().startswith("!"):
+                        why = "gitignored by " + ":".join(parts[0:2])
+                out.append((tok, rel, why or "never staged", axis))
     return out
 
 
@@ -614,6 +649,17 @@ func _build() -> void:
 \t\t\tpass
 \t\t"wall":
 \t\t\tpass
+'''
+
+PROBE_EXT = REPO / "tools" / "_dna_gate_selftest_probe_ext.gd"
+
+# Untracked by construction, and it EXTENDS a tracked script — the shape that made the
+# gate red on five sound declarations (force_cube -> pickable_prop -> gitignored XR-tools).
+# One fixture serves both directions: `cube_size` is implemented by the tracked parent,
+# `housing` only by this untracked child.
+PROBE_EXT_SRC = '''extends "res://commons/grid/GridSystem.gd"
+# transient self-test probe for check_dna_declarations.py — safe to delete
+@export var housing: String = "stand"
 '''
 
 
@@ -632,6 +678,15 @@ def selftest() -> int:
       C  axis with no @export     -> NO_EXPORT                (the unreachable-knob class)
       D  untracked source file    -> untracked_sources flags  (the 85d9f5cc4 blind spot)
       E  tracked source file      -> untracked_sources silent (no false alarms from git)
+      F  axis implemented by a TRACKED parent, untracked child in the same scene
+                                  -> silent  (the five false alarms of 2026-08-07)
+      G  same scene, axis implemented ONLY in the untracked child
+                                  -> flags   (F must not have sanded the gate down)
+
+    F and G share one fixture on purpose. They differ in nothing but WHICH AXIS is asked
+    about, which is the whole content of the 08-07 change: the question is per axis, not
+    per scene. If a future edit makes the gate answer per scene again, exactly one of
+    this pair goes red whichever direction it drifts.
     """
     results: list[tuple[str, bool, str]] = []
 
@@ -673,9 +728,27 @@ def selftest() -> int:
         flagged = untracked_sources({"tracked": (tracked, "selftest")})
         control("E tracked source is not flagged", len(flagged) == 0,
                 f"{len(flagged)} flagged (GridSystem.gd is committed)")
+
+        PROBE_EXT.write_text(PROBE_EXT_SRC, encoding="utf-8")
+        ext_scene = "res://tools/_dna_gate_selftest_probe_ext.gd"
+
+        entry_parent = {"scene": ext_scene,
+                        "dna": {"axes": {"cube_size": ["1.0"]}}}
+        flagged = untracked_sources({"probe_ext": (entry_parent, "selftest")})
+        control("F axis implemented by tracked parent is not flagged", len(flagged) == 0,
+                f"{len(flagged)} flagged (cube_size lives in the committed GridSystem.gd)")
+
+        entry_child = {"scene": ext_scene,
+                       "dna": {"axes": {"housing": ["stand", "wall"]}}}
+        flagged = untracked_sources({"probe_ext": (entry_child, "selftest")})
+        control("G axis implemented only in untracked child is flagged",
+                len(flagged) == 1 and flagged[0][3] == "housing",
+                f"{len(flagged)} flagged {[f[3] for f in flagged]} "
+                f"(housing exists nowhere committed)")
     finally:
-        if PROBE.exists():
-            PROBE.unlink()
+        for p in (PROBE, PROBE_EXT):
+            if p.exists():
+                p.unlink()
 
     ok = sum(1 for _, r, _ in results if r)
     print(f"self-test: {ok}/{len(results)} controls passed")
@@ -749,8 +822,8 @@ def main() -> int:
     if untracked:
         print(f"\n{len(untracked)} DECLARED AXIS whose implementing script is NOT IN THE "
               f"REPOSITORY [a fresh clone gets the declaration with no dispatch behind it]:")
-        for tok, rel, why in untracked:
-            print(f"  {tok:34s} {rel}  ({why})")
+        for tok, rel, why, axis in untracked:
+            print(f"  {tok:28s} .{axis:<16s} {rel}  ({why})")
 
     return len({r["token"] for r in bad}) + len(untracked)
 
