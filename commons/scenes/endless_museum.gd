@@ -235,6 +235,28 @@ func _build_surfaces() -> void:
 			_detail_mats[role] = _surf[src]
 	print("[endless_museum] surfaces: %d roles from em_materials" % _surf.size())
 
+## ── ANTIALIASING ─────────────────────────────────────────────────────────────
+## A critic measured this and it was the single largest look gap in the build:
+## of every strong luminance step (|dL| > 0.15), the fraction that crossed in ONE
+## pixel was 99% in the axis frame, 96% in the soane, 88% in the hero. No shipped
+## frame has ever looked like that. The chamfer pass made it worse by adding
+## thousands of thin near-horizontal arris edges, every one of which aliased —
+## the geometry fix and the sampling fault compound.
+##
+## MSAA 4x for geometric edges (which is what an all-box building is made of),
+## FXAA to catch the specular pips on polished terrazzo that MSAA cannot see
+## because they are shading, not coverage. TAA is deliberately NOT used: the
+## proof shots are single frames after a 90-frame settle, and a temporal
+## accumulator with no motion history is a blur, not an antialiaser.
+func _setup_antialiasing() -> void:
+	var vp := get_viewport()
+	if vp == null:
+		return
+	vp.msaa_3d = Viewport.MSAA_4X
+	vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
+	vp.use_debanding = true
+	print("[endless_museum] AA: MSAA 4x + FXAA + debanding")
+
 func _mat_of(fn: String, args: Array) -> Material:
 	if not _mod_has(_mod_mats, fn):
 		return null
@@ -451,6 +473,7 @@ func _setup_world() -> void:
 	_cam.fov = 90.0
 	_player.add_child(_cam)
 	_cam.make_current()
+	_setup_antialiasing()
 	var lit := _setup_environment()
 	# The sun. With em_lighting's rig and em_detail's ceiling in place the
 	# directional is no longer the interior's light source — it is the shaft

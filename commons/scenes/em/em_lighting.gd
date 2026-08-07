@@ -469,6 +469,22 @@ static func _keys(seg: Node3D, slots: Array, pal: Dictionary, budget: Dictionary
 			var k := SpotLight3D.new()
 			k.name = "HeroKey%d" % heroes
 			k.light_color = pal["key"]
+			# NOT A LIGHTING FAULT — the diagnosis was wrong and the energy stays.
+			# Two critics independently read a "hard-edged near-white dome with a
+			# razor boundary and a chopped base" on the hero deck as a light
+			# gizmo: "nothing in frame explains it, no fixture, no aperture".
+			# It is not lighting at all. It is `origin`, the curriculum's own
+			# coordinate-origin marker — an emissive octahedron
+			# (emission_energy_multiplier 2.0) dealt third in the primitives
+			# chapter and standing with its lower half below the floor plane.
+			# Achromatic because it is emissive white, razor-edged and
+			# flat-bottomed because it is GEOMETRY cut by the deck, unexplained
+			# by any fixture because it is not lit by one. The critics read
+			# CONTENT as a rendering bug — the same disease this project keeps
+			# finding one level up, an instrument reporting a fact about one
+			# thing as a fact about another. Cutting this key to 2.1 dimmed
+			# every real hero in the building to chase an artifact that was
+			# behaving correctly, so it is restored.
 			k.light_energy = 3.8 * scale
 			k.light_indirect_energy = 0.8
 			k.light_specular = 1.0
