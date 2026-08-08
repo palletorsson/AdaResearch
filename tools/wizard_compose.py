@@ -270,13 +270,23 @@ SPINE_BOUNDS = {}           # ...and its own extent: no margin is added to a pla
 
 
 def spine_tiles():
+    """THE SHELF, not one file. Since the merge the composer reads every stamped
+    plan the project owns — the pattern editor's tiles, the museum line's eight
+    extracted buildings, and the spine's seven measured typologies — because they
+    are one schema and were only ever three files. Falls back to the spine file
+    alone if the shelf has not been built."""
     global _SPINE_TILES
     if _SPINE_TILES is None:
         try:
-            _SPINE_TILES = json.loads((ROOT / "commons/data/spine_typologies.json")
-                                      .read_text(encoding="utf-8"))["patterns"]
+            _SPINE_TILES = {k: v for k, v in json.loads(
+                (ROOT / "commons/data/template_shelf.json").read_text(encoding="utf-8")
+            )["patterns"].items() if v.get("stampable")}
         except Exception:
-            _SPINE_TILES = {}
+            try:
+                _SPINE_TILES = json.loads((ROOT / "commons/data/spine_typologies.json")
+                                          .read_text(encoding="utf-8"))["patterns"]
+            except Exception:
+                _SPINE_TILES = {}
     return _SPINE_TILES
 
 
@@ -333,8 +343,17 @@ def make_spine_typology(key):
 
 
 TYPOLOGIES = {"gallery_spine": typo_gallery_spine, "courtyard": typo_courtyard, "hall_wings": typo_hall_wings}
+# every stamped plan on the shelf becomes a typology the composer can compose
+# INTO. Before the merge it had three, all invented; now it has the project's
+# whole stock of real floor plans.
+for _k in spine_tiles():
+    TYPOLOGIES["stamp_" + _k] = make_spine_typology(_k)
+    # the seven keep their old names: "spine_uffizi-spine-enfilade" would be a
+    # lie now that the shelf carries museums too, but recipes already name the
+    # spine seven and a rename that breaks a recipe is not a rename.
 for _k in ("motif-room", "chamber", "yard", "step-room", "terrace", "cascade", "ramp-chamber"):
-    TYPOLOGIES["spine_" + _k] = make_spine_typology(_k)
+    if _k in spine_tiles():
+        TYPOLOGIES["spine_" + _k] = TYPOLOGIES["stamp_" + _k]
 
 DIRS = {(-1, 0): "w", (1, 0): "e", (0, -1): "n", (0, 1): "s"}
 # cluster Y-rot so the dressing faces the artifact: local +z (front) → door dir
@@ -404,7 +423,7 @@ def compose(spec):
     threshold = set(); prologue_cell = None; mouth_door = None
 
     # 3 ROOM grown around each artifact
-    stamped = str(tname).startswith("spine_")
+    stamped = str(tname).startswith(("stamp_", "spine_"))
     rooms = []
     for k, (cx, cz, dd) in zip(room_order, slots):
         dn = (1 if dd[0] > 0 else -1, 0) if abs(dd[0]) >= abs(dd[1]) else (0, 1 if dd[1] > 0 else -1)
