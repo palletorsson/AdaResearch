@@ -1,0 +1,325 @@
+{
+ "seed": 46,
+ "pairs": [
+  {
+   "pair": 1,
+   "opponent_map": "Pattern_Walls_Pearl",
+   "opponent_class": "hand",
+   "cast": 6,
+   "A": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 527,
+    "station": [
+     12,
+     7
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   },
+   "B": {
+    "kind": "hand",
+    "origin": "Pattern_Walls_Pearl",
+    "cells": 1600,
+    "station": [
+     7,
+     5
+    ],
+    "facing": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "pair": 2,
+   "opponent_map": "VFM_05_Launch",
+   "opponent_class": "hand",
+   "cast": 13,
+   "A": {
+    "kind": "hand",
+    "origin": "VFM_05_Launch",
+    "cells": 816,
+    "station": [
+     13,
+     12
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   },
+   "B": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 28985,
+    "station": [
+     102,
+     128
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   }
+  },
+  {
+   "pair": 3,
+   "opponent_map": "Vectors_Act2_VectorArithmetic",
+   "opponent_class": "hand",
+   "cast": 10,
+   "A": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 1000,
+    "station": [
+     19,
+     10
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   },
+   "B": {
+    "kind": "hand",
+    "origin": "Vectors_Act2_VectorArithmetic",
+    "cells": 760,
+    "station": [
+     10,
+     13
+    ],
+    "facing": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "pair": 4,
+   "opponent_map": "MindMap_VectorForces",
+   "opponent_class": "hand",
+   "cast": 26,
+   "A": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 1150,
+    "station": [
+     10,
+     13
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   },
+   "B": {
+    "kind": "hand",
+    "origin": "MindMap_VectorForces",
+    "cells": 869,
+    "station": [
+     6,
+     22
+    ],
+    "facing": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "pair": 5,
+   "opponent_map": "Vectors_Act4a_KineticForces",
+   "opponent_class": "hand",
+   "cast": 5,
+   "A": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 1500,
+    "station": [
+     19,
+     15
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   },
+   "B": {
+    "kind": "hand",
+    "origin": "Vectors_Act4a_KineticForces",
+    "cells": 900,
+    "station": [
+     16,
+     19
+    ],
+    "facing": [
+     0,
+     -1
+    ]
+   }
+  },
+  {
+   "pair": 6,
+   "opponent_map": "Vectors_Act4b_Oscillation",
+   "opponent_class": "hand",
+   "cast": 7,
+   "A": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 931,
+    "station": [
+     18,
+     8
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   },
+   "B": {
+    "kind": "hand",
+    "origin": "Vectors_Act4b_Oscillation",
+    "cells": 900,
+    "station": [
+     16,
+     19
+    ],
+    "facing": [
+     0,
+     -1
+    ]
+   }
+  },
+  {
+   "pair": 7,
+   "opponent_map": "MindMap_Primitives",
+   "opponent_class": "hand",
+   "cast": 22,
+   "A": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 1624,
+    "station": [
+     12,
+     14
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   },
+   "B": {
+    "kind": "hand",
+    "origin": "MindMap_Primitives",
+    "cells": 737,
+    "station": [
+     6,
+     18
+    ],
+    "facing": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "pair": 8,
+   "opponent_map": "ForcesArena",
+   "opponent_class": "hand",
+   "cast": 20,
+   "A": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 697,
+    "station": [
+     16,
+     7
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   },
+   "B": {
+    "kind": "hand",
+    "origin": "ForcesArena",
+    "cells": 1020,
+    "station": [
+     7,
+     1
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   }
+  },
+  {
+   "pair": 9,
+   "opponent_map": "MANN_Gallery_Pearl",
+   "opponent_class": "hand",
+   "cast": 5,
+   "A": {
+    "kind": "hand",
+    "origin": "MANN_Gallery_Pearl",
+    "cells": 900,
+    "station": [
+     6,
+     4
+    ],
+    "facing": [
+     0,
+     1
+    ]
+   },
+   "B": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 476,
+    "station": [
+     10,
+     7
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   }
+  },
+  {
+   "pair": 10,
+   "opponent_map": "Cabinet_Gallery",
+   "opponent_class": "hand",
+   "cast": 16,
+   "A": {
+    "kind": "composed",
+    "origin": "composer",
+    "cells": 4212,
+    "station": [
+     32,
+     25
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   },
+   "B": {
+    "kind": "hand",
+    "origin": "Cabinet_Gallery",
+    "cells": 1600,
+    "station": [
+     37,
+     0
+    ],
+    "facing": [
+     1,
+     0
+    ]
+   }
+  }
+ ]
+}
