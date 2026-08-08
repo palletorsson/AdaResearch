@@ -2,48 +2,6 @@
  "_comment": "Living Paper — universal 2D algorithm substrate. Use #algorithm:<name> to select cartridge.",
  "artifacts": {
   "living_paper": {
-   "dna": {
-    "axes": {
-    "algorithm": [
-    "RANDOM_WALK_SIMPLE",
-    "RANDOM_WALK_BROWNIAN",
-    "RANDOM_WALK_LEVY",
-    "RANDOM_WALK_SELF_AVOIDING",
-    "RANDOM_WALK_FRACTAL",
-    "RANDOM_WALK_FIBONACCI",
-    "CA_1D_RULE30",
-    "CA_1D_RULE110",
-    "CA_1D_RULE90",
-    "CA_2D_LIFE",
-    "CA_2D_SEEDS",
-    "CA_2D_BRIANS_BRAIN",
-    "SORTING_BUBBLE",
-    "SORTING_INSERTION",
-    "SORTING_MERGE",
-    "SORTING_QUICK",
-    "SINE_WAVE",
-    "FOURIER_SERIES",
-    "LISSAJOUS",
-    "MANDELBROT",
-    "JULIA_SET",
-    "SIERPINSKI",
-    "KOCH_CURVE",
-    "LSYSTEM_TREE",
-    "LSYSTEM_FERN",
-    "LSYSTEM_DRAGON",
-    "PERLIN_NOISE",
-    "NOISE_OCTAVES",
-    "BFS_FLOOD",
-    "DFS_MAZE",
-    "REACTION_DIFFUSION",
-    "DLA_CRYSTAL",
-    "VORONOI",
-    "KMEANS",
-    "HEAT_DIFFUSION",
-    "QUADTREE"
-    ]
-    }
-   },
    "name": "Living Paper",
    "lookup_name": "living_paper",
    "description": "Universal grabbable 2D canvas. Grab to run the algorithm, drop to pause. Defaults to simple random walk. Use #algorithm:<name> config to select cartridge.",
