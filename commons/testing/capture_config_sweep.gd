@@ -373,7 +373,7 @@ func _run() -> void:
 		# rather than intersecting it; the station is a sibling, never a parent.
 		if _staged:
 			var own: AABB = _subtree_aabb(inst)
-			var lift: float = await _stage_station(host if host != null else vp, own)
+			var lift: float = await _stage_station(host if host != null else vp, own, lookup)
 			if lift > 0.0 and inst is Node3D:
 				(inst as Node3D).position.y += lift - own.position.y
 				await process_frame
@@ -1047,8 +1047,21 @@ func _station_for(box: AABB) -> Dictionary:
 ## The station is added to the SAME parent as the artifact, never as its owner: a station
 ## that owned the body would change what _subtree_aabb measures, and the axis is still
 ## the subject of the picture.
-func _stage_station(parent: Node, box: AABB) -> float:
+func _stage_station(parent: Node, box: AABB, lookup: String) -> float:
 	_stage_prop = null
+	# FURNITURE IS NOT STAGED ON FURNITURE. The lab_prop category IS the room — benches,
+	# stools, fume hoods, exit signs — and standing one on a plinth states something false
+	# about what it is. 91 artifacts carry that category and every one of them stands on
+	# the floor by definition.
+	#
+	# KNOWN RESIDUAL: situated_bench is furniture with category `postfoundations`, so this
+	# rule misses it and it still comes back as a bench on a bench. There is no cheap signal
+	# that separates "an artifact that is its own support" from "an artifact that needs
+	# one"; the real fix is honouring a declared `posture`, which exists on seven entries
+	# in the whole corpus. Recorded rather than papered over with a name list.
+	var entry_self: Dictionary = ArtifactIdentity.registry_entry(lookup)
+	if str(entry_self.get("category", "")).to_lower() == "lab_prop":
+		return 0.0
 	var pick: Dictionary = _station_for(box)
 	if pick.is_empty():
 		return 0.0
