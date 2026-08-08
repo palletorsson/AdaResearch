@@ -259,6 +259,27 @@ def code_values(src: str, axis: str) -> tuple[list[str] | None, str]:
     if m:
         return _strings(m.group(1)), "@export_enum"
 
+    # A TYPED GODOT ENUM, a stronger claim than any form below, and the single largest
+    # blind spot this reader had. `enum Algorithm {A, B}` plus `@export var algorithm:
+    # Algorithm` is how the ENTIRE substrate category declares its values: 104 artifacts
+    # across six scenes, none declared - not because nobody promoted them, but because
+    # this function had no branch for the syntax. Corpus-wide the shape is on 70.
+    #
+    # The values returned are MEMBER NAMES. At runtime the property is an int, so
+    # whoever SETS it must convert; capture_config_sweep does that from the script's
+    # constant map. Returning ints here would make a registry nobody can read -
+    # `grain: [0, 1, 2]` says nothing about what the artifact argues.
+    m = re.search(r"@export\s+var\s+" + a + r"\s*:\s*([A-Z]\w*)\s*(?:=|$)", src, re.M)
+    if m:
+        em = re.search(r"^\s*enum\s+" + re.escape(m.group(1)) + r"\s*\{([^}]*)\}",
+                       src, re.M | re.S)
+        if em:
+            names = [x.strip().split("=")[0].strip()
+                     for x in em.group(1).split(",") if x.strip()]
+            names = [n for n in names if re.fullmatch(r"[A-Za-z_]\w*", n or "")]
+            if names:
+                return names, "typed enum %s" % m.group(1)
+
     # _pick_axis(str(config_data["housing"]), HOUSINGS, housing) — the allow-list the
     # token parser validates against, which is the thing a map actually hits.
     m = re.search(r'_pick_axis\([^)]*?,\s*([A-Z][A-Z0-9_]*)\s*,\s*' + a + r'\s*\)', src)

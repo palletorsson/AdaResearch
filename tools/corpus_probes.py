@@ -77,6 +77,44 @@ def _scene_text(entry: dict):
         return sp, None
 
 
+def probe_token_collision(reg: dict) -> list:
+    """One registry NAME pointing at two or more DIFFERENT scenes.
+
+    Found by using the tooling rather than by reading it. Declaring living_paper wrote a
+    perfectly valid block that no reader could see: the token is in living_paper.json AND
+    primitives.json, both naming a scene, and those are two genuinely different artifacts
+    that happen to share a name. Sorted-order last-write-wins resolves the bare token to the
+    primitives one, so the 33-name substrate family is shadowed by a same-named primitive.
+
+    This is worse than an ordinary duplicate. A map placing the token gets whichever entry
+    wins the sort; the other artifact is unreachable by that name and nothing says so.
+    """
+    import collections as _c
+    scenes = _c.defaultdict(set)
+    for tok, (e, _f) in reg.items():
+        pass                                    # reg is already deduplicated; read files
+    import json as _j
+    REGDIR = REPO / "commons" / "artifacts" / "registry"
+    files = _c.defaultdict(set)
+    for f in sorted(REGDIR.glob("*.json")):
+        try:
+            d = _j.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        arts = d.get("artifacts", d)
+        if not isinstance(arts, dict):
+            continue
+        for tok, e in arts.items():
+            if not isinstance(e, dict):
+                continue
+            sp = str(e.get("scene") or e.get("scene_path") or "").strip()
+            if sp:
+                scenes[tok].add(sp)
+                files[tok].add(f.name)
+    return sorted((tok, sorted(s), sorted(files[tok]))
+                  for tok, s in scenes.items() if len(s) > 1)
+
+
 def probe_hidden_family(reg: dict) -> list:
     """Scenes worn by 3+ registry names where most of the family is undeclared.
 
@@ -182,6 +220,8 @@ def probe_axis_barely_read(reg: dict) -> list:
 
 
 PROBES = {
+    "token_collision": (probe_token_collision,
+                        "one registry NAME pointing at two different scenes"),
     "hidden_family": (probe_hidden_family,
                       "one scene worn by 3+ registry names, mostly undeclared"),
     "unreadable_values": (probe_unreadable_values,

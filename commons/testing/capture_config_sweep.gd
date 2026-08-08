@@ -258,7 +258,7 @@ func _run() -> void:
 			for key in pparams.keys():
 				var ph: Node = _holder_of(probe, String(key))
 				if ph != null:
-					ph.set(key, pparams[key])
+					ph.set(key, _coerce(ph, String(key), pparams[key]))
 			(host if host != null else vp).add_child(probe)
 			_suppress_chrome(probe)
 			await create_timer(0.35).timeout
@@ -318,7 +318,7 @@ func _run() -> void:
 			var val: Variant = params[key]
 			var holder: Node = _holder_of(inst, String(key))
 			if holder != null:
-				holder.set(key, val)
+				holder.set(key, _coerce(holder, String(key), val))
 			else:
 				push_warning("capture_config_sweep: no node in %s exposes '%s' — "
 					+ "the value was not applied and this tile is not a variant."
@@ -1274,6 +1274,36 @@ func _stand_down_world_bridges() -> void:
 
 ## The node that actually owns a swept property — the root if it has it, else
 ## the first descendant that does. Breadth-first so the shallowest owner wins.
+## Turn a declared axis VALUE into whatever the property actually holds.
+##
+## A typed Godot enum is an INT at runtime, and the registry declares its MEMBER NAMES
+## because "grain: [0, 1, 2]" tells a reader nothing about what the artifact argues. So the
+## conversion has to happen at the moment of setting, and if it did not, every typed-enum
+## axis would set a String onto an int property, Godot would coerce it to 0, and the sweep
+## would publish N identical tiles under N different labels. That is the exact failure this
+## whole bench exists to prevent, arriving through a new door.
+##
+## Read from the script constant map rather than a hand-kept table: enums live there
+## already, keyed by enum name, as {MEMBER: int}.
+func _coerce(holder: Node, key: String, val: Variant) -> Variant:
+	if typeof(val) != TYPE_STRING:
+		return val
+	var cur: Variant = holder.get(key)
+	if typeof(cur) != TYPE_INT:
+		return val
+	var scr: Script = holder.get_script()
+	if scr == null:
+		return val
+	var consts: Dictionary = scr.get_script_constant_map()
+	for cname in consts:
+		var c: Variant = consts[cname]
+		if c is Dictionary and (c as Dictionary).has(val):
+			return int((c as Dictionary)[val])
+	push_warning("capture_config_sweep: '%s' is an int property and '%s' is not a member of "
+		% [key, val] + "any enum on its script — the tile is not a variant.")
+	return val
+
+
 func _holder_of(node: Node, key: String) -> Node:
 	if key in node:
 		return node

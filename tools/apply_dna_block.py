@@ -65,12 +65,25 @@ def find_entry(token: str) -> tuple[Path, dict] | None:
             hits.append((rp, arts[token]))
     if not hits:
         return None
-    for rp, entry in hits:
-        if str(entry.get("scene") or entry.get("scene_path") or "").strip():
-            if len(hits) > 1:
-                print("  (%s appears in %d registries; using %s, the one with a scene)"
-                      % (token, len(hits), rp.name))
-            return rp, entry
+    # THE LAST hit with a scene, not the first, and the difference is a silent no-op.
+    # living_paper is in BOTH living_paper.json and primitives.json and both name a scene,
+    # so "first with a scene" wrote the declaration into living_paper.json while every
+    # reader — check_dna_declarations.registry(), cabinet_sweep, the gallery builder —
+    # resolves the token to primitives.json under sorted-order last-write-wins. The block
+    # was written, the JSON was valid, the tool reported success, and the gallery said
+    # "no declared dna.axes" for an artifact that had just been declared.
+    #
+    # This is the same fault the comment below already fixed for the SCENE-LESS case
+    # (mill_alhambra_p6m). It recurred here because both entries have scenes and so never
+    # reached that branch. The rule is now one rule: mirror registry() exactly.
+    scened = [(rp, e) for rp, e in hits
+              if str(e.get("scene") or e.get("scene_path") or "").strip()]
+    if scened:
+        rp, entry = scened[-1]
+        if len(hits) > 1:
+            print("  (%s appears in %d registries; using %s, the LAST with a scene, "
+                  "which is the one every reader resolves to)" % (token, len(hits), rp.name))
+        return rp, entry
     # No hit has a scene. Mirror registry() in check_dna_declarations: sorted file
     # order, last BUILDABLE hit wins (a delegate_to counts as buildable) — the same
     # entry the gate validates and the runtime grid's last-write-wins load serves.
