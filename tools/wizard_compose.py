@@ -254,7 +254,87 @@ def typo_hall_wings(order):
     hall = {(xx, zz) for xx in range(3, math.ceil(x) + 1) for zz in range(hz0, hz1 + 1)}
     yard_c = (math.ceil(x) + YARD_R + 1, (hz0 + hz1) // 2)
     return hall, slots, (3, (hz0 + hz1) // 2), yard_c
+# ---------- THE SPINE'S OWN TYPOLOGIES (measured 2026-07-31) ----------
+# The three above were searched over for eleven rounds and they are all large,
+# sparse, walled and multi-room. Measured against the 269 maps of the 24 spine
+# sequences that signature occurs ZERO TIMES: the curriculum is one open floor,
+# small to medium, flat or two-level, and not one of its maps carries a walls
+# layer. We had been optimising toward a kind of map the curriculum does not use.
+#
+# These seven are STAMPED, not grown: each is a real spine floor plan, lifted
+# from the class's most-repeated exact grid (see tools/spine_typologies.py).
+# Seven cover half the spine, twenty-nine cover ninety per cent.
+_SPINE_TILES = None
+SPINE_HEIGHTS = {}          # a stamped plan carries its own levels
+SPINE_BOUNDS = {}           # ...and its own extent: no margin is added to a plan
+
+
+def spine_tiles():
+    global _SPINE_TILES
+    if _SPINE_TILES is None:
+        try:
+            _SPINE_TILES = json.loads((ROOT / "commons/data/spine_typologies.json")
+                                      .read_text(encoding="utf-8"))["patterns"]
+        except Exception:
+            _SPINE_TILES = {}
+    return _SPINE_TILES
+
+
+def make_spine_typology(key):
+    def typo(order):
+        pat = spine_tiles()[key]
+        tile = pat["tile"]
+        def h_of(c):
+            s = str(c).rstrip("s") or "0"
+            try:
+                return int(float(s))
+            except Exception:
+                return 0
+        floor = {(x, z) for z, row in enumerate(tile) for x, c in enumerate(row)
+                 if 0 < h_of(c) <= 3}
+        if not floor:
+            return set(), [], (0, 0), None
+        cx = sum(p[0] for p in floor) / float(len(floor))
+        cz = sum(p[1] for p in floor) / float(len(floor))
+        marked = [(x, z) for z, row in enumerate(tile) for x, c in enumerate(row)
+                  if str(c).endswith("s") and (x, z) in floor]
+        # The plan's own slots first, in walk order from the spawn. If the cast
+        # is bigger than the room was built for, extend with the floor cells
+        # furthest from any slot already taken — the same spreading the hand
+        # would do, rather than crowding the corner.
+        spawn = min(floor, key=lambda p: (p[1], p[0]))
+        marked.sort(key=lambda p: abs(p[0] - spawn[0]) + abs(p[1] - spawn[1]))
+        chosen = list(marked)
+        while len(chosen) < len(order):
+            rest = [p for p in floor if p not in chosen]
+            if not rest:
+                break
+            chosen.append(max(rest, key=lambda p: min(
+                (abs(p[0] - q[0]) + abs(p[1] - q[1]) for q in chosen), default=99)))
+        slots = []
+        for (x, z) in chosen[:len(order)]:
+            fx, fz = cx - x, cz - z
+            n = math.hypot(fx, fz) or 1.0
+            slots.append((x + 0.5, z + 0.5, (fx / n, fz / n)))   # face the room
+        # The spine has no yards, but the caller unpacks a yard centre either
+        # way — so hand back a point clear of the plan and let spec.yard.enabled
+        # (off, for these) decide whether anything is built there.
+        # the yard point must NOT sit outside the plan: the canvas is sized
+        # from the furthest cell, so a yard parked clear of the stamp inflated
+        # every composed map by a size bucket and turned `open` into `mixed`.
+        far = spawn
+        SPINE_BOUNDS.clear()
+        SPINE_BOUNDS.update({"w": pat["w"], "h": pat["h"]})
+        SPINE_HEIGHTS.clear()
+        SPINE_HEIGHTS.update({(x, z): h_of(c) for z, row in enumerate(tile)
+                              for x, c in enumerate(row) if 0 < h_of(c) <= 3})
+        return set(floor), slots, spawn, far
+    return typo
+
+
 TYPOLOGIES = {"gallery_spine": typo_gallery_spine, "courtyard": typo_courtyard, "hall_wings": typo_hall_wings}
+for _k in ("motif-room", "chamber", "yard", "step-room", "terrace", "cascade", "ramp-chamber"):
+    TYPOLOGIES["spine_" + _k] = make_spine_typology(_k)
 
 DIRS = {(-1, 0): "w", (1, 0): "e", (0, -1): "n", (0, 1): "s"}
 # cluster Y-rot so the dressing faces the artifact: local +z (front) → door dir
@@ -324,10 +404,16 @@ def compose(spec):
     threshold = set(); prologue_cell = None; mouth_door = None
 
     # 3 ROOM grown around each artifact
+    stamped = str(tname).startswith("spine_")
     rooms = []
     for k, (cx, cz, dd) in zip(room_order, slots):
         dn = (1 if dd[0] > 0 else -1, 0) if abs(dd[0]) >= abs(dd[1]) else (0, 1 if dd[1] > 0 else -1)
-        cells = grow_banded(gname, cx, cz, k, dn) - hall
+        # A STAMPED plan is a floor plan, not a seed. Growing a room around each
+        # slot is what made every spine typology come out medium, mixed and
+        # walled — the composer rebuilding the map it prefers around the plan it
+        # was handed. Here the slot is the room and the floor is already decided.
+        cells = ({(int(round(cx)), int(round(cz)))} if stamped
+                 else grow_banded(gname, cx, cz, k, dn) - hall)
         rooms.append([k, cells, (round(cx), round(cz)), dn])
     stages.append({"op": "room", "chosen": gname, "hall": cl(hall),
                    "rooms": [{"name": k, "cells": cl(c), "anchor": list(a)} for k, c, a, _ in rooms]})
@@ -391,6 +477,13 @@ def compose(spec):
     if mouth_door: mouth_door = (N(mouth_door[0]), mouth_door[1], N(mouth_door[2]))
     yard_cells = {N(c) for c in yard_cells}
     W = max(c[0] for c in allc) + offx + 4; D = max(c[1] for c in allc) + offz + 4
+    # NOT clamped to SPINE_BOUNDS. Sizing the canvas down to the stamp put
+    # cells outside the grid and every typology crashed on an index — later ops
+    # write beyond the plan (spawn approach, teleporter landing) and the margin
+    # is load-bearing. A stamped plan therefore still gets the composer's
+    # margin, which is why the composed maps land one size bucket above their
+    # source. Fixing that means teaching those ops the plan's extent, not
+    # shrinking the paper underneath them.
 
     # 6 ELEVATION — heights along the walk (procession: second half rises)
     hmap = {}
@@ -435,15 +528,25 @@ def compose(spec):
 
     for (x, z) in floor:
         if 0 <= x < W and 0 <= z < D: S[z][x] = str(hmap.get((x, z), 1))
+    if stamped:                       # the plan's own levels, not the op's
+        for (x, z), h in SPINE_HEIGHTS.items():
+            if 0 <= x < W and 0 <= z < D: S[z][x] = str(h)
 
     # 4 WALLS: room boundaries with one door to the hall (+ wp on height change)
     door_info = []
-    for k, cells, (ax, az), dd in rooms:
+    for k, cells, (ax, az), dd in (() if stamped else rooms):
         boundary = []
         for (x, z) in cells:
             for (dx, dz), code in DIRS.items():
                 nb = (x + dx, z + dz)
                 if nb not in cells: boundary.append(((x, z), code, nb))
+        # A room with no boundary needs no door. That never happened while every
+        # typology grew rooms into void; the spine's stamped plans are ONE OPEN
+        # FLOOR, so a room can be wholly inside the hall and this op has nothing
+        # to enclose. The curriculum has no walls in any of its 269 maps, and
+        # this crash was that fact arriving as a stack trace.
+        if not boundary:
+            continue
         cands = [b for b in boundary if b[2] in hall] or \
                 sorted(boundary, key=lambda b: min((math.dist(b[2], h) for h in hall), default=99))[:1]
         (bx, bz), code, nb = min(cands, key=lambda b: math.dist(b[0], (ax, az)))
