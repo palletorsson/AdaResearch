@@ -2,6 +2,28 @@
   "_comment": "Profile substrate — 1D continuous curve renderer. Ribbon-strip ImmediateMesh.",
   "artifacts": {
     "profile": {
+      "dna": {
+       "axes": {
+       "algorithm": [
+       "SINE_WAVE",
+       "SQUARE_WAVE",
+       "SAW_WAVE",
+       "TRIANGLE_WAVE",
+       "FOURIER_SERIES",
+       "BEAT_FREQUENCIES",
+       "LISSAJOUS_1D",
+       "NOISE_1D",
+       "NOISE_OCTAVES",
+       "RANDOM_WALK",
+       "BROWNIAN_BRIDGE",
+       "BELL_CURVE",
+       "DAMPED_OSCILLATION",
+       "SPRING_MASS",
+       "GRADIENT_DESCENT",
+       "LOGISTIC_MAP"
+       ]
+       }
+      },
       "name": "Profile Substrate",
       "lookup_name": "profile",
       "description": "Universal 1D curve renderer. ImmediateMesh ribbon strips over a grid. Defaults to sine wave. Use #algorithm:<name> to select cartridge.",

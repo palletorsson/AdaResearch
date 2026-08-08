@@ -2,6 +2,18 @@
   "_comment": "MeshGrammar substrate — rule-based procedural mesh generation. Each recipe defines a seed shape, grammar rules, and generation count. The MeshGrammarNode applies rules to reshape topology. Use #recipe:<name> or named variants.",
   "artifacts": {
     "mesh_grammar": {
+      "dna": {
+       "axes": {
+       "seed_type": [
+       "icosahedron",
+       "cube",
+       "sphere",
+       "disk",
+       "flower_disk",
+       "custom"
+       ]
+       }
+      },
       "name": "MeshGrammar Substrate",
       "lookup_name": "mesh_grammar",
       "description": "Universal mesh grammar substrate. Start from a seed shape, apply rule-based operations (extrude, inset, split, branch, scatter) across generations. The only substrate where the algorithm reshapes topology itself.",

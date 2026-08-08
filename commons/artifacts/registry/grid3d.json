@@ -2,6 +2,21 @@
  "_comment": "Grid3D substrate — dual MultiMesh (nodes + edges) for 3D graph algorithms.",
  "artifacts": {
   "grid3d": {
+   "dna": {
+    "framing": 0.12,
+    "axes": {
+    "algorithm": [
+    "BFS",
+    "DFS",
+    "DIJKSTRA",
+    "KRUSKAL_MST",
+    "PRIM_MST",
+    "FORCE_DIRECTED",
+    "RANDOM_GRAPH",
+    "ENTROPY_FIELD"
+    ]
+    }
+   },
    "name": "Grid3D Substrate",
    "lookup_name": "grid3d",
    "description": "Universal 3D graph visualization. MultiMesh spheres + cylinder edges. Defaults to BFS. Use #algorithm:<name> to select cartridge.",

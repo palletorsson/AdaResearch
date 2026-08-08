@@ -3,14 +3,19 @@
  "artifacts": {
   "bar_array": {
    "dna": {
-    "axes": {
-    "initial_order": [
-    "shuffled",
-    "reversed",
-    "nearly_sorted",
-    "sorted"
-    ]
-    }
+	"axes": {
+	 "algorithm": [
+	  "BUBBLE_SORT",
+	  "INSERTION_SORT",
+	  "SELECTION_SORT",
+	  "MERGE_SORT",
+	  "QUICKSORT",
+	  "HEAP_SORT",
+	  "HISTOGRAM",
+	  "FIBONACCI",
+	  "PRIME_SIEVE"
+	 ]
+	}
    },
    "name": "BarArray Substrate",
    "lookup_name": "bar_array",
@@ -20,123 +25,123 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "datastructures",
    "tags": [
-    "substrate",
-    "bar_array",
-    "sorting",
+	"substrate",
+	"bar_array",
+	"sorting",
     "universal"
    ],
    "complexity": "beginner",
    "include_in_map_data": true,
    "map_ready": true,
    "map_sequences": [
-    "datastructures",
+	"datastructures",
     "randomness"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "entry",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "The array itself, standing up: a row of bars whose heights ARE the values, index by index. The chapter's first primitive and its whole thesis in one object — that a list of numbers is a shape, and that to store data in order is already to draw it. Every sort, search, and histogram downstream is this row, rearranged."
   },
   "bar_array_bubble_sort": {
    "dna": {
-    "promoted": "2026-08-05",
-    "stage": "2 - variation",
-    "framing": 0.55,
-    "axes": {
-     "initial_order": [
-      "shuffled",
-      "reversed",
-      "nearly_sorted",
+	"promoted": "2026-08-05",
+	"stage": "2 - variation",
+	"framing": 0.55,
+	"axes": {
+	 "initial_order": [
+	  "shuffled",
+	  "reversed",
+	  "nearly_sorted",
       "sorted"
-     ]
-    },
-    "fixture": {
-     "order_seed": 20260805,
-     "auto_play": false
-    },
-    "fixture_note": "MANDATORY for the sweep, and neither key is an axis. order_seed 0 is the shipped behaviour - the cartridge's Fisher-Yates uses the GLOBAL unseeded randi(), so without a pin the shuffled tile is a different array every run and any bite number partly measures the RNG (the generative-artifact trap in CLAUDE.md). auto_play false stops the clock: with it true the sort advances ~13 steps during the 1.1 s SETTLE, which is still close to the initial state but is 13 steps of drift that differ per value and would be read as part of the axis. auto_play is a typed bool and this fixture value is a real JSON false, not the string \"false\" - a string would be rejected by the typed export before _ready.",
-    "default": "initial_order=shuffled with order_seed=0 - _arrange short-circuits and hands the cartridge's own array straight back, so the shipped super.initialize() Fisher-Yates is the only code that ran and nothing is recomputed. The 4 existing placements (Test_Substrates, Test_Substrates_Placed, Tutorial_3D, Zone_TemporalStorage) are byte-identical.",
-    "was": "array_size, step_interval, auto_play, label_text and an Algorithm enum. Every one of those is a count, a rate, a caption or the FAMILY IDENTITY - algorithm is what tells the nine bar_array_* tokens apart via _resolve_algorithm_from_lookup_name, so sweeping it would photograph the siblings, not this artifact's variation. The one thing bubble sort argues, that the same code is O(n) on one input and O(n^2) on another, was unreachable because the starting array was always the same unseeded shuffle.",
-    "notes": "SORTING IS TIME-DOMAIN AND A STILL CATCHES ONE ARBITRARY PASS, so \"how far through\" was never a candidate. What a still can hold is the array BEFORE the first comparison, and that is the artifact's own subject: reversed is the worst case at n(n-1)/2 inversions, sorted is the best case at one pass and no swap - the early-exit branch in cartridge_bubble_sort.step() that no placement has ever shown - and nearly_sorted is the case where bubble sort is genuinely competitive. The bars carry it twice over, because get_bar_color is a function of VALUE: sorted draws a smooth colour ramp, shuffled draws colour noise, so the axis moves hue as well as height. DECLINED THE FAMILY WORD: entropy_jar and entropy_morphogenesis declare found_state = sorted|stirred|mixed for a question of the same shape, and three of these four values map onto it cleanly, but reversed does not and cannot be added without breaking it - on an entropy ladder reversed sits at the same rung as sorted, being perfectly ordered, while being the single most expensive input bubble sort can be handed. Taking the word would have meant corrupting a sibling's ladder or dropping the one value that carries the lesson (the cost model is inversion count, not disorder), so it takes a different word instead. ONE SCENE, MANY NAMES: the export lands on bar_array_substrate.gd, which all nine bar_array_* tokens share, so insertion, selection, merge, quicksort, heap, histogram, fibonacci and prime_sieve all gain the knob and none of them declares it yet - _arrange therefore ASKS THE CARTRIDGE (get_category() != \"sorting\" returns the array untouched) rather than hard-coding a list of names, so histogram, fibonacci and prime_sieve cannot have their bin count, series or sieve overwritten by a ramp, and a tenth cartridge answers for itself. The five other sorts are honest candidates for this same word and are deliberately NOT declared here - each needs its own default-preservation check and its own placement count, and quicksort in particular inverts the argument (already-sorted input is its WORST case, not its best). Expect them in the gate's promoted-in-code-undeclared list until someone does that work; that is a known consequence of one scene carrying nine names, not an oversight. framing 0.55 because PAD is 1.9 and the subject is 1.37 m wide by 0.31 m tall: fit-by-diagonal frames a letterbox in a square."
+	 ]
+	},
+	"fixture": {
+	 "order_seed": 20260805,
+	 "auto_play": false
+	},
+	"fixture_note": "MANDATORY for the sweep, and neither key is an axis. order_seed 0 is the shipped behaviour - the cartridge's Fisher-Yates uses the GLOBAL unseeded randi(), so without a pin the shuffled tile is a different array every run and any bite number partly measures the RNG (the generative-artifact trap in CLAUDE.md). auto_play false stops the clock: with it true the sort advances ~13 steps during the 1.1 s SETTLE, which is still close to the initial state but is 13 steps of drift that differ per value and would be read as part of the axis. auto_play is a typed bool and this fixture value is a real JSON false, not the string \"false\" - a string would be rejected by the typed export before _ready.",
+	"default": "initial_order=shuffled with order_seed=0 - _arrange short-circuits and hands the cartridge's own array straight back, so the shipped super.initialize() Fisher-Yates is the only code that ran and nothing is recomputed. The 4 existing placements (Test_Substrates, Test_Substrates_Placed, Tutorial_3D, Zone_TemporalStorage) are byte-identical.",
+	"was": "array_size, step_interval, auto_play, label_text and an Algorithm enum. Every one of those is a count, a rate, a caption or the FAMILY IDENTITY - algorithm is what tells the nine bar_array_* tokens apart via _resolve_algorithm_from_lookup_name, so sweeping it would photograph the siblings, not this artifact's variation. The one thing bubble sort argues, that the same code is O(n) on one input and O(n^2) on another, was unreachable because the starting array was always the same unseeded shuffle.",
+	"notes": "SORTING IS TIME-DOMAIN AND A STILL CATCHES ONE ARBITRARY PASS, so \"how far through\" was never a candidate. What a still can hold is the array BEFORE the first comparison, and that is the artifact's own subject: reversed is the worst case at n(n-1)/2 inversions, sorted is the best case at one pass and no swap - the early-exit branch in cartridge_bubble_sort.step() that no placement has ever shown - and nearly_sorted is the case where bubble sort is genuinely competitive. The bars carry it twice over, because get_bar_color is a function of VALUE: sorted draws a smooth colour ramp, shuffled draws colour noise, so the axis moves hue as well as height. DECLINED THE FAMILY WORD: entropy_jar and entropy_morphogenesis declare found_state = sorted|stirred|mixed for a question of the same shape, and three of these four values map onto it cleanly, but reversed does not and cannot be added without breaking it - on an entropy ladder reversed sits at the same rung as sorted, being perfectly ordered, while being the single most expensive input bubble sort can be handed. Taking the word would have meant corrupting a sibling's ladder or dropping the one value that carries the lesson (the cost model is inversion count, not disorder), so it takes a different word instead. ONE SCENE, MANY NAMES: the export lands on bar_array_substrate.gd, which all nine bar_array_* tokens share, so insertion, selection, merge, quicksort, heap, histogram, fibonacci and prime_sieve all gain the knob and none of them declares it yet - _arrange therefore ASKS THE CARTRIDGE (get_category() != \"sorting\" returns the array untouched) rather than hard-coding a list of names, so histogram, fibonacci and prime_sieve cannot have their bin count, series or sieve overwritten by a ramp, and a tenth cartridge answers for itself. The five other sorts are honest candidates for this same word and are deliberately NOT declared here - each needs its own default-preservation check and its own placement count, and quicksort in particular inverts the argument (already-sorted input is its WORST case, not its best). Expect them in the gate's promoted-in-code-undeclared list until someone does that work; that is a known consequence of one scene carrying nine names, not an oversight. framing 0.55 because PAD is 1.9 and the subject is 1.37 m wide by 0.31 m tall: fit-by-diagonal frames a letterbox in a square."
    },
    "name": "BarArray — Bubble Sort",
    "lookup_name": "bar_array_bubble_sort",
@@ -146,10 +151,10 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "datastructures",
    "tags": [
-    "substrate",
-    "bar_array",
-    "bubble_sort",
-    "sorting",
+	"substrate",
+	"bar_array",
+	"bubble_sort",
+	"sorting",
     "O(n²)"
    ],
    "complexity": "beginner",
@@ -159,99 +164,99 @@
     "testmaps"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "entry",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "The array in motion: bubble sort walking the bars, comparing neighbors, swapping, the largest rising to the end pass after pass. O(n²) and honest about it — the slowest useful sort, chosen here because you can SEE it think. The algorithm made a dance the eye can follow, index against index."
   },
   "bar_array_insertion_sort": {
    "dna": {
-    "axes": {
-    "initial_order": [
-    "shuffled",
-    "reversed",
-    "nearly_sorted",
+	"axes": {
+	"initial_order": [
+	"shuffled",
+	"reversed",
+	"nearly_sorted",
     "sorted"
-    ]
-    }
+	]
+	}
    },
    "name": "BarArray — Insertion Sort",
    "lookup_name": "bar_array_insertion_sort",
@@ -261,10 +266,10 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "datastructures",
    "tags": [
-    "substrate",
-    "bar_array",
-    "insertion_sort",
-    "sorting",
+	"substrate",
+	"bar_array",
+	"insertion_sort",
+	"sorting",
     "O(n²)"
    ],
    "complexity": "beginner",
@@ -274,99 +279,99 @@
     "datastructures"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "entry",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "Each cyan bar walks left one adjacent swap at a time until an equal-or-smaller neighbor stops it: the sorted region grows by admission, and the only question is how far in each newcomer gets. Its O(n) best case is a quiet bias — the algorithm rewards arrays that were nearly compliant already."
   },
   "bar_array_selection_sort": {
    "dna": {
-    "axes": {
-    "initial_order": [
-    "shuffled",
-    "reversed",
-    "nearly_sorted",
+	"axes": {
+	"initial_order": [
+	"shuffled",
+	"reversed",
+	"nearly_sorted",
     "sorted"
-    ]
-    }
+	]
+	}
    },
    "name": "BarArray — Selection Sort",
    "lookup_name": "bar_array_selection_sort",
@@ -376,10 +381,10 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "datastructures",
    "tags": [
-    "substrate",
-    "bar_array",
-    "selection_sort",
-    "sorting",
+	"substrate",
+	"bar_array",
+	"selection_sort",
+	"sorting",
     "O(n²)"
    ],
    "complexity": "beginner",
@@ -389,99 +394,99 @@
     "datastructures"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "entry",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "A magenta crown sits on the provisional minimum while the scan interrogates every remaining bar, and nothing moves until the survey is total. Exhaustive review, minimal displacement — certainty bought at O(n²) comparisons for the fewest possible swaps, a bureaucrat's economy of order."
   },
   "bar_array_merge_sort": {
    "dna": {
-    "axes": {
-    "initial_order": [
-    "shuffled",
-    "reversed",
-    "nearly_sorted",
+	"axes": {
+	"initial_order": [
+	"shuffled",
+	"reversed",
+	"nearly_sorted",
     "sorted"
-    ]
-    }
+	]
+	}
    },
    "name": "BarArray — Merge Sort",
    "lookup_name": "bar_array_merge_sort",
@@ -491,11 +496,11 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "datastructures",
    "tags": [
-    "substrate",
-    "bar_array",
-    "merge_sort",
-    "sorting",
-    "O(n log n)",
+	"substrate",
+	"bar_array",
+	"merge_sort",
+	"sorting",
+	"O(n log n)",
     "divide_conquer"
    ],
    "complexity": "intermediate",
@@ -505,99 +510,99 @@
     "testmaps"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "table",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "table",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "Order arrives wholesale, on a doubling schedule: width 1, 2, 4, 8, each pass zipping two already-sorted halves through a two-pointer rule. The array is never almost done — it is done at ever coarser scales, sortedness manufactured in factory lots."
   },
   "bar_array_quicksort": {
    "dna": {
-    "axes": {
-    "initial_order": [
-    "shuffled",
-    "reversed",
-    "nearly_sorted",
+	"axes": {
+	"initial_order": [
+	"shuffled",
+	"reversed",
+	"nearly_sorted",
     "sorted"
-    ]
-    }
+	]
+	}
    },
    "name": "BarArray — Quicksort",
    "lookup_name": "bar_array_quicksort",
@@ -607,11 +612,11 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "datastructures",
    "tags": [
-    "substrate",
-    "bar_array",
-    "quicksort",
-    "sorting",
-    "O(n log n)",
+	"substrate",
+	"bar_array",
+	"quicksort",
+	"sorting",
+	"O(n log n)",
     "divide_conquer"
    ],
    "complexity": "intermediate",
@@ -621,99 +626,99 @@
     "testmaps"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "The magenta pivot is a temporary sovereign — for one partition every bar defines itself relative to it, then the recursion dethrones it and crowns two smaller ones. Order arrives through delegated local authority; no bar ever sees the whole array."
   },
   "bar_array_heap_sort": {
    "dna": {
-    "axes": {
-    "initial_order": [
-    "shuffled",
-    "reversed",
-    "nearly_sorted",
+	"axes": {
+	"initial_order": [
+	"shuffled",
+	"reversed",
+	"nearly_sorted",
     "sorted"
-    ]
-    }
+	]
+	}
    },
    "name": "BarArray — Heap Sort",
    "lookup_name": "bar_array_heap_sort",
@@ -723,11 +728,11 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "datastructures",
    "tags": [
-    "substrate",
-    "bar_array",
-    "heap_sort",
-    "sorting",
-    "O(n log n)",
+	"substrate",
+	"bar_array",
+	"heap_sort",
+	"sorting",
+	"O(n log n)",
     "heap"
    ],
    "complexity": "intermediate",
@@ -737,99 +742,99 @@
     "datastructures"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "Two regimes in one array: an orange phase builds a tree that never exists as geometry — parent and child are only index arithmetic — then a cyan phase dismantles it maximum by maximum into a green region growing from the right. F_order imposed through a structure the eye is never shown."
   },
   "bar_array_histogram": {
    "dna": {
-    "axes": {
-    "initial_order": [
-    "shuffled",
-    "reversed",
-    "nearly_sorted",
+	"axes": {
+	"initial_order": [
+	"shuffled",
+	"reversed",
+	"nearly_sorted",
     "sorted"
-    ]
-    }
+	]
+	}
    },
    "name": "BarArray — Histogram",
    "lookup_name": "bar_array_histogram",
@@ -839,11 +844,11 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "randomness",
    "tags": [
-    "substrate",
-    "bar_array",
-    "histogram",
-    "distribution",
-    "gaussian",
+	"substrate",
+	"bar_array",
+	"histogram",
+	"distribution",
+	"gaussian",
     "statistics"
    ],
    "complexity": "beginner",
@@ -853,99 +858,99 @@
     "testmaps"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "entry",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "Box-Muller noise falls one sample at a time into bins until a bell curve stands up out of pure accident, then sampling halts and the shape remains. Order is not imposed on this randomness — order is what randomness looks like once it has been counted."
   },
   "bar_array_fibonacci": {
    "dna": {
-    "axes": {
-    "initial_order": [
-    "shuffled",
-    "reversed",
-    "nearly_sorted",
+	"axes": {
+	"initial_order": [
+	"shuffled",
+	"reversed",
+	"nearly_sorted",
     "sorted"
-    ]
-    }
+	]
+	}
    },
    "name": "BarArray — Fibonacci",
    "lookup_name": "bar_array_fibonacci",
@@ -955,11 +960,11 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "recursiveemergence",
    "tags": [
-    "substrate",
-    "bar_array",
-    "fibonacci",
-    "sequence",
-    "golden_ratio",
+	"substrate",
+	"bar_array",
+	"fibonacci",
+	"sequence",
+	"golden_ratio",
     "mathematical"
    ],
    "complexity": "beginner",
@@ -969,99 +974,99 @@
     "recursiveemergence"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "entry",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "Each new F(n) becomes the unit of measure and every older bar shrinks in place, renormalized against the latest maximum: exponential growth experienced as the past's continuous demotion. The golden ratio never appears as a number — only as the proportion each bar keeps to its neighbor while everything rescales."
   },
   "bar_array_prime_sieve": {
    "dna": {
-    "axes": {
-    "initial_order": [
-    "shuffled",
-    "reversed",
-    "nearly_sorted",
+	"axes": {
+	"initial_order": [
+	"shuffled",
+	"reversed",
+	"nearly_sorted",
     "sorted"
-    ]
-    }
+	]
+	}
    },
    "name": "BarArray — Prime Sieve",
    "lookup_name": "bar_array_prime_sieve",
@@ -1071,11 +1076,11 @@
    "artifact_type": "interactive_algorithm",
    "sequence": "criticalalgorithms",
    "tags": [
-    "substrate",
-    "bar_array",
-    "prime_sieve",
-    "eratosthenes",
-    "number_theory",
+	"substrate",
+	"bar_array",
+	"prime_sieve",
+	"eratosthenes",
+	"number_theory",
     "mathematical"
    ],
    "complexity": "intermediate",
@@ -1085,86 +1090,86 @@
     "testmaps"
    ],
    "dev_themes": [
-    "arrays",
+	"arrays",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
+	"mesh_type": "instanced_particles",
+	"topology": "scattered",
+	"construction": {
+	 "method": "multimesh_instancing",
+	 "primitives": [],
+	 "operations": [
+	  "allocate_instances",
+	  "set_transforms",
       "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "multimesh",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 2,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     1.38,
-     0.02,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.38,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.38,
+	 0.02,
+	 0.18
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.38,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    2.0,
-    1,
-    1.0
+	2.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.061521Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.061521Z",
+	"derived_from": "aabb_size + category"
    },
    "qfep_connection": "Primality staged as pure negative space: the cartridge never tests a number, it only darkens multiples, and whatever survives the crossing-out inherits the name. The cyan bars glow because of what was done around them, not to them."
   }
