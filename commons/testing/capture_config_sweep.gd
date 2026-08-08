@@ -1017,22 +1017,29 @@ func _station_for(box: AABB) -> Dictionary:
 	var sz: Vector3 = box.size
 	var w: float = maxf(sz.x, sz.z)
 	var h: float = sz.y
+	var cells: int = int(clampf(ceil(w / 1.0), 1.0, 5.0))
 	if w > 6.0 or h > 6.0:
 		return {}
-	# TABLEAU IS ROUTED TO THE BENCH FOR NOW, and that is a known gap rather than a
-	# judgement. station_wall renders LYING FLAT here, so cctv came back standing on a
-	# horizontal panel instead of hanging on a vertical one — worse than the void tile,
-	# because it states something false about how the artifact is mounted. The prop is
-	# fine; the sweep does not yet know its orientation convention, and guessing a
-	# rotation into a shared instrument is how a plausible-looking wrong picture gets
-	# published across every future gallery.
-	if w > h * 2.5 and minf(sz.x, sz.z) < w * 0.35:
-		return {"prop": "station_bench", "type": "tableau_on_bench", "on_top": true}
+	# FLAT FIRST, and this ordering is the whole correction. The previous version tested
+	# only for thin-in-one-horizontal-axis, so an upright plate was caught but a flat DISC
+	# or a flat GRID was not — those fell through every branch to the stage, and a bare
+	# platform under a flat object says nothing at all. GaussianBlurCircle, random_bell_curve
+	# and cctv all landed there. Anything much wider than it is tall LIES ON A TABLE.
+	if h < w * 0.35:
+		return {"prop": "station_bench", "type": "flat_on_table", "on_top": true,
+			"cfg": {"length_cells": cells, "depth_cells": maxi(1, cells - 1)}}
+	# Upright and thin front-to-back: a plate, a sign, a screen. That hangs.
+	if h > w * 1.2 and minf(sz.x, sz.z) < w * 0.4 and h <= 2.2:
+		return {"prop": "station_wall", "type": "tableau", "on_top": false,
+			"cfg": {"length_cells": maxi(2, cells), "height": 2.5}}
 	if w <= 0.55 and h <= 0.55:
-		return {"prop": "station_plinth", "type": "specimen", "on_top": true}
-	if w <= 1.6 and h <= 1.6:
-		return {"prop": "station_bench", "type": "instrument", "on_top": true}
-	return {"prop": "station_stage", "type": "performer", "on_top": true}
+		return {"prop": "station_plinth", "type": "specimen", "on_top": true,
+			"cfg": {"width_cells": 1, "depth_cells": 1}}
+	if w <= 1.8:
+		return {"prop": "station_bench", "type": "instrument", "on_top": true,
+			"cfg": {"length_cells": cells, "depth_cells": maxi(1, cells - 1)}}
+	return {"prop": "station_stage", "type": "performer", "on_top": true,
+		"cfg": {"width_cells": cells, "depth_cells": cells}}
 
 
 ## Instantiate the station; return the Y the artifact should stand at.
@@ -1055,7 +1062,14 @@ func _stage_station(parent: Node, box: AABB) -> float:
 		return 0.0
 	var st: Node = packed.instantiate()
 	ArtifactIdentity.stamp(st, str(pick["prop"]), entry)
+	# Size the station to the body. A 12 cm specimen on a default 2-cell bench reads as
+	# lost property; the cfg comes from posture_to_station.json, which has said so all along.
+	var cfg: Dictionary = pick.get("cfg", {})
+	for k in cfg:
+		st.set_meta("config_%s" % str(k), cfg[k])
 	parent.add_child(st)
+	if st.has_method("apply_grid_config") and not cfg.is_empty():
+		st.call("apply_grid_config", cfg)
 	if st is Node3D:
 		_stage_prop = st
 	await create_timer(0.35).timeout
