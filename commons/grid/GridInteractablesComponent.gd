@@ -1676,7 +1676,55 @@ func _apply_artifact_config(artifact_object: Node, config_data: Dictionary, look
 		artifact_object.call_deferred("configure", config_data.duplicate(true))
 		print("  → Called configure() method")
 	else:
-		print("  → No configuration method found, using metadata only")
+		# THE BENCH LOOKED HARDER THAN THE WORLD DID, and this closes that gap.
+		#
+		# capture_config_sweep searches the whole subtree for the node that owns a property
+		# (_holder_of, breadth-first). This call site only ever asked the ROOT. For fourteen
+		# tokens the script sits on a CHILD of the .tscn, so their axes were measured on the
+		# bench, published, and proven to bite — in a place no player can stand. The config
+		# landed as metadata on a root that reads nothing, has_method() was false here, and
+		# this branch printed a line indistinguishable from a config-less artifact. Every
+		# stage green; the axis never happened.
+		#
+		# 184 placements across 152 maps, none of which carries a #config today — so nothing
+		# is broken yet. The trap is armed, not sprung: the first person to write
+		# `line#readout:gradation` gets silence and a default-valued artifact.
+		#
+		# GATED BY CONSTRUCTION: an artifact whose root handles config never reaches this
+		# branch, so its path is byte-identical to before.
+		var holder: Node = _config_holder(artifact_object, config_data)
+		if holder != null:
+			for config_key in config_data.keys():
+				var sk: String = String(config_key).replace(":", "_").replace(",", "_").replace(" ", "_").replace("-", "_")
+				if sk.is_valid_identifier():
+					holder.set_meta("config_%s" % sk, config_data[config_key])
+			if holder.has_method("apply_grid_config"):
+				holder.call_deferred("apply_grid_config", config_data.duplicate(true))
+			else:
+				holder.call_deferred("configure", config_data.duplicate(true))
+			print("  → Forwarded config to child '%s' (root carries no handler)" % holder.name)
+		else:
+			print("  → No configuration method found, using metadata only")
+
+
+## The first descendant that either handles the config call or declares one of its keys as a
+## property. Breadth-first, mirroring capture_config_sweep._holder_of so the world reaches
+## exactly as far as the bench does — no further.
+##
+## Returns null when nothing claims it, which preserves today's behaviour for every
+## genuinely config-less artifact.
+func _config_holder(root: Node, config_data: Dictionary) -> Node:
+	var queue: Array[Node] = [root]
+	while not queue.is_empty():
+		var n: Node = queue.pop_front()
+		for c in n.get_children():
+			if c.has_method("apply_grid_config") or c.has_method("configure"):
+				return c
+			for k in config_data.keys():
+				if String(k) in c:
+					return c
+			queue.append(c)
+	return null
 
 # Safely set a property if the node exposes it
 func _try_set_property(obj: Object, prop: String, value) -> void:
