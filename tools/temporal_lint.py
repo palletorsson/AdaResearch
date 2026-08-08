@@ -52,6 +52,17 @@ OUT = REPO / "ada_run" / "temporal"
 # a fixed artifact reads 0.00-0.34%, the worst offender read 6.22%.
 STABLE = 0.2
 STROBE = 3.0
+# HARD-CHANGED PIXEL COUNT, and this exists because frame-fraction alone was WRONG.
+# boids_aquarium reported 0.14% of frame moved and was called stable; the boids had in
+# fact all moved, and the flock was flocking correctly. Thirty specks a few pixels across
+# inside a large glass tank change a tiny FRACTION of the frame while changing completely.
+# A small moving part in a large static housing is exactly that shape, and it is common
+# here: an instrument in a cabinet, a readout on a rack, a school in a tank.
+#
+# Max delta separates them. A stable artifact differs by a few levels of noise; anything
+# that genuinely moved leaves pixels differing by a lot, however few of them there are.
+HARD_DELTA = 60
+HARD_MIN = 25
 MIN_SUBJECT = 1.0      # below this the frame is too empty for the verdict to mean anything
 
 
@@ -63,10 +74,11 @@ def measure(label: str):
     ia, ib = Image.open(a).convert("RGB"), Image.open(b).convert("RGB")
     d = list(ImageChops.difference(ia, ib).convert("L").getdata())
     moved = 100.0 * sum(1 for v in d if v > 6) / len(d)
+    hard = sum(1 for v in d if v > HARD_DELTA)
     bg = ia.getpixel((3, 3))
     m = list(ImageChops.difference(ia, Image.new("RGB", ia.size, bg)).convert("L").getdata())
     subj = 100.0 * sum(1 for v in m if v > 12) / len(m)
-    return moved, subj, max(d)
+    return moved, subj, max(d), hard
 
 
 def run_one(token: str, scene: str, gap: float) -> bool:
@@ -106,8 +118,8 @@ def main() -> int:
         tokens = tokens[:limit]
     OUT.mkdir(parents=True, exist_ok=True)
 
-    print(f"{'artifact':30s} {'moved':>7s} {'subject':>8s} {'max':>5s}  verdict")
-    print("-" * 68)
+    print(f"{'artifact':30s} {'moved':>7s} {'subject':>8s} {'max':>5s} {'hard':>6s}  verdict")
+    print("-" * 76)
     rows = []
     for t in tokens:
         e = reg.get(t)
@@ -125,18 +137,21 @@ def main() -> int:
         if m is None:
             print(f"{t:30s} {'':>7s} {'':>8s} {'':>5s}  no frames")
             continue
-        moved, subj, mx = m
+        moved, subj, mx, hard = m
         if subj < MIN_SUBJECT:
             v = "TOO EMPTY TO JUDGE"
-        elif moved < STABLE:
-            v = "stable"
-        elif moved < STROBE:
+        elif moved >= STROBE:
+            v = "STROBES"
+        elif moved >= STABLE or hard >= HARD_MIN:
+            # `hard` is what catches a small mover in a big housing. Without it
+            # boids_aquarium read stable while its whole school had relocated.
             v = "MOVES"
         else:
-            v = "STROBES"
-        print(f"{t:30s} {moved:6.2f}% {subj:7.2f}% {mx:5d}  {v}")
+            v = "stable"
+        print(f"{t:30s} {moved:6.2f}% {subj:7.2f}% {mx:5d} {hard:6d}  {v}")
         rows.append({"token": t, "moved_pct": round(moved, 3),
-                     "subject_pct": round(subj, 3), "max_delta": mx, "verdict": v})
+                     "subject_pct": round(subj, 3), "max_delta": mx,
+                     "hard_changed_px": hard, "verdict": v})
     rep = REPO / "doc" / "reports" / "temporal_lint.json"
     rep.write_text(json.dumps({
         "_note": "Two frames %.2fs apart with nothing asked to change. The gap must be "

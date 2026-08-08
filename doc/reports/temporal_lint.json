@@ -3,88 +3,44 @@
  "gap": 0.15,
  "rows": [
   {
-   "token": "random_transformations",
-   "moved_pct": 0.0,
-   "subject_pct": 2.322,
-   "max_delta": 0,
-   "verdict": "stable"
-  },
-  {
-   "token": "laser_turret",
-   "moved_pct": 0.34,
-   "subject_pct": 2.192,
-   "max_delta": 226,
+   "token": "boids_aquarium",
+   "moved_pct": 0.14,
+   "subject_pct": 12.311,
+   "max_delta": 130,
+   "hard_changed_px": 67,
    "verdict": "MOVES"
   },
   {
-   "token": "line_builder_3d",
+   "token": "random_transformations",
    "moved_pct": 0.0,
-   "subject_pct": 0.406,
+   "subject_pct": 1.331,
    "max_delta": 0,
-   "verdict": "TOO EMPTY TO JUDGE"
-  },
-  {
-   "token": "mold_network",
-   "moved_pct": 44.708,
-   "subject_pct": 42.22,
-   "max_delta": 201,
-   "verdict": "STROBES"
-  },
-  {
-   "token": "boids_aquarium",
-   "moved_pct": 0.147,
-   "subject_pct": 12.311,
-   "max_delta": 104,
+   "hard_changed_px": 0,
    "verdict": "stable"
   },
   {
    "token": "reaction_diffusion",
-   "moved_pct": 0.021,
-   "subject_pct": 62.503,
-   "max_delta": 13,
+   "moved_pct": 0.001,
+   "subject_pct": 62.466,
+   "max_delta": 8,
+   "hard_changed_px": 0,
    "verdict": "stable"
   },
   {
-   "token": "particle_chaos",
-   "moved_pct": 2.36,
-   "subject_pct": 1.15,
-   "max_delta": 148,
-   "verdict": "MOVES"
-  },
-  {
-   "token": "evolved_creatures",
-   "moved_pct": 0.776,
-   "subject_pct": 70.49,
-   "max_delta": 180,
-   "verdict": "MOVES"
+   "token": "galton_board",
+   "moved_pct": 0.005,
+   "subject_pct": 6.222,
+   "max_delta": 105,
+   "hard_changed_px": 15,
+   "verdict": "stable"
   },
   {
    "token": "crystal_cluster",
    "moved_pct": 0.0,
-   "subject_pct": 3.771,
+   "subject_pct": 3.787,
    "max_delta": 0,
+   "hard_changed_px": 0,
    "verdict": "stable"
-  },
-  {
-   "token": "chladni_plate",
-   "moved_pct": 0.85,
-   "subject_pct": 4.17,
-   "max_delta": 237,
-   "verdict": "MOVES"
-  },
-  {
-   "token": "galton_board",
-   "moved_pct": 0.006,
-   "subject_pct": 6.222,
-   "max_delta": 101,
-   "verdict": "stable"
-  },
-  {
-   "token": "newton_cradle",
-   "moved_pct": 1.289,
-   "subject_pct": 3.44,
-   "max_delta": 252,
-   "verdict": "MOVES"
   }
  ]
 }

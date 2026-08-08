@@ -1,62 +1,51 @@
-# boids_aquarium never flocks
+# boids_aquarium never flocks — WITHDRAWN, THE CLAIM WAS FALSE
 
-**Status:** FOUND, not fixed — the fix is a design and performance decision, not a bug repair.
-**Found:** 2026-08-08, by `tools/temporal_lint.py`.
+**Status:** RETRACTED 2026-08-08, same day it was filed. The artifact is fine.
+**Kept** rather than deleted, because how the claim was made is the useful part.
 
-## The measurement
+## What was claimed
 
-Two frames, nothing asked to change:
+That `boids_aquarium` has no `_process` and no `_physics_process`, that nothing integrates
+velocity, and that its identity block promises motion the implementation cannot deliver.
 
-| gap | frame moved |
-|---|---|
-| 0.15 s | 0.15% |
-| **3.0 s** | **0.14%** |
+## What is true
 
-Three seconds produces the same number as a seventh of a second. A school that flocks drifts
-steadily; this one is a fixed image. The residual 0.14% is the info plate, not the boids.
+`boids_aquarium.gd` has a `_process(delta)` at **line 752**. It calls `_update_boids(delta)`,
+which is a complete Reynolds implementation over a spatial hash — separation, alignment,
+cohesion, speed limiting, Euler integration, boundary bounce — and then `_update_multimesh()`.
+The school flocks. Photographed three seconds apart, every boid is in a different place.
 
-## Why
+## The two errors, because they are different mistakes
 
-`commons/artifacts/boids_aquarium/boids_aquarium.gd` is the only script in the scene and it
-has **no `_process` and no `_physics_process`**. Nothing integrates velocity. The slider
-callbacks set `separation_weight` / `alignment_weight` / `cohesion_weight` and call
-`_update_boid_params()`, which only refreshes the caption — the weights are stored and never
-applied to anything that moves.
+**1. A truncated read presented as a whole one.** The grep that produced "no `_process`" was
+piped through `head -20` and stopped at line 564. `_process` is at 752. The output was
+consistent with the claim only because it was cut off before the evidence. Nothing about the
+command said so; the number 20 did all the damage.
 
-## Why this is a gap and not a preference
+**2. An instrument that could not see a small mover.** `temporal_lint` thresholded on the
+FRACTION OF THE FRAME that changed. Thirty boid specks, a few pixels each, inside a large
+glass tank change 0.14% of a 640x640 frame while changing *completely*. The verdict said
+"stable" and the number was correct — it was measuring the wrong thing.
 
-The file's own identity block promises motion, in its own words:
+The tell was there and unread: **max delta 164**. A genuinely stable artifact differs by a few
+levels of sensor noise. Anything that moved leaves pixels differing by a lot, however few.
+`temporal_lint` now counts pixels differing by more than 60 and reports it beside the
+fraction; `boids_aquarium` reads MOVES, and the four artifacts that really are stable still
+read stable.
 
-- *"Flocking simulation in a glass tank"*
-- *"emerges: rotating toroids, figure-eight loops, and sudden directional consensus events —
-  the tank finds shapes the designer never chose"*
-- *"triggers: dragging SEP slider to max produces cold dispersal; dragging COH to max produces
-  a pulsing sphere"*
+## Why the second error was likelier than it looks
 
-None of that can happen. In VR a visitor can drag all three sliders and the school will not
-move, because there is no loop to move it.
+Every check written this week — `render_lint`, the A/B sheets, the bite critic — expresses its
+answer as a percentage of frame. That unit is right for an artifact that fills its frame and
+wrong for a small part inside a large housing, which is a common shape here: an instrument in
+a cabinet, a readout on a rack, a school in a tank. The unit was inherited without being
+questioned.
 
-## What is genuinely deliberate
+## What survives
 
-The DNA work on `accord` is explicit that the *still* needs a standing configuration:
+- `random_transformations` really was rebuilding itself 90 times a second, and is fixed.
+- `line_builder_3d` really did roll a fresh material every frame, confirmed in source, and its
+  own comment admitted it while pinning only the measurement branch.
+- The instrument is real and now has one more axis than it did.
 
-> "The capturer waits ~1.1 s and shoots, so the axis has to be legible in the STANDING
-> configuration, not after a long run. Every value is deposited arithmetically — no pre-roll,
-> no convergence loop."
-
-That reasoning is sound for the photograph. It says nothing about the artifact at play, and
-the deposit appears to have become the whole implementation.
-
-## The decision, which is Palle's
-
-1. **Add the integrator.** Restores what the identity promises. Costs a per-frame update over
-   ~30 boids with a spatial hash — cheap on desktop, and this ships to a Quest, so it needs a
-   budget check. The DNA sweep must keep photographing the standing deposit, so the loop would
-   have to be suppressed under `dna.fixture` — the same mechanism that hid the
-   `line_builder_3d` flicker, so it would need to be applied honestly this time: pinned for
-   the bench, live in the world, and never the reverse.
-2. **Correct the identity.** If a standing tableau of four flock shapes is what this artifact
-   is for, the header should say so and stop promising toroids and consensus events.
-
-Doing neither leaves an artifact whose documentation and behaviour disagree, which is the
-condition that made every other finding in this session expensive to track down.
+The finding that produced this document was wrong. The two fixes it sat next to were not.
