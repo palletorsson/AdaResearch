@@ -81,7 +81,8 @@ def measure(label: str):
     return moved, subj, max(d), hard
 
 
-def run_one(token: str, scene: str, gap: float) -> bool:
+def run_one(token: str, scene: str, gap: float, framing: float = 1.0,
+            fixture: dict | None = None) -> bool:
     done = OUT / "_done.txt"
     if done.exists():
         done.unlink()
@@ -90,7 +91,9 @@ def run_one(token: str, scene: str, gap: float) -> bool:
            GODOT, "--path", str(REPO), "--xr-mode", "off", "--no-window",
            "--script", "res://commons/testing/capture_temporal.gd", "--",
            f"--scene={scene}", "--out=res://ada_run/temporal",
-           f"--label={token}", f"--gap={gap}"]
+           f"--label={token}", f"--gap={gap}", f"--framing={framing}"]
+    if fixture:
+        cmd.append("--fixture=" + json.dumps(fixture))
     r = subprocess.run(cmd, capture_output=True, text=True, timeout=240)
     return "exited 0" in (r.stdout or "")
 
@@ -130,7 +133,9 @@ def main() -> int:
         if not scene.endswith(".tscn"):
             print(f"{t:30s} {'':>7s} {'':>8s} {'':>5s}  no scene")
             continue
-        if not run_one(t, scene, gap):
+        dna = (e[0].get("dna") or {})
+        if not run_one(t, scene, gap, float(dna.get("framing", 1.0) or 1.0),
+                       dna.get("fixture") or None):
             print(f"{t:30s} {'':>7s} {'':>8s} {'':>5s}  CAPTURE FAILED")
             continue
         m = measure(t)

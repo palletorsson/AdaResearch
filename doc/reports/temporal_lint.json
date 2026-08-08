@@ -3,44 +3,52 @@
  "gap": 0.15,
  "rows": [
   {
+   "token": "line_builder_3d",
+   "moved_pct": 0.0,
+   "subject_pct": 0.469,
+   "max_delta": 0,
+   "hard_changed_px": 0,
+   "verdict": "TOO EMPTY TO JUDGE"
+  },
+  {
+   "token": "qfep_formula_3d",
+   "moved_pct": 0.107,
+   "subject_pct": 1.253,
+   "max_delta": 13,
+   "hard_changed_px": 0,
+   "verdict": "stable"
+  },
+  {
+   "token": "floating_sphere_field",
+   "moved_pct": 0.047,
+   "subject_pct": 0.088,
+   "max_delta": 207,
+   "hard_changed_px": 40,
+   "verdict": "TOO EMPTY TO JUDGE"
+  },
+  {
+   "token": "interactive_point_origin_force",
+   "moved_pct": 0.0,
+   "subject_pct": 0.504,
+   "max_delta": 0,
+   "hard_changed_px": 0,
+   "verdict": "TOO EMPTY TO JUDGE"
+  },
+  {
    "token": "boids_aquarium",
-   "moved_pct": 0.14,
+   "moved_pct": 0.142,
    "subject_pct": 12.311,
-   "max_delta": 130,
-   "hard_changed_px": 67,
+   "max_delta": 156,
+   "hard_changed_px": 63,
    "verdict": "MOVES"
   },
   {
-   "token": "random_transformations",
-   "moved_pct": 0.0,
-   "subject_pct": 1.331,
-   "max_delta": 0,
-   "hard_changed_px": 0,
-   "verdict": "stable"
-  },
-  {
-   "token": "reaction_diffusion",
-   "moved_pct": 0.001,
-   "subject_pct": 62.466,
-   "max_delta": 8,
-   "hard_changed_px": 0,
-   "verdict": "stable"
-  },
-  {
-   "token": "galton_board",
-   "moved_pct": 0.005,
-   "subject_pct": 6.222,
-   "max_delta": 105,
-   "hard_changed_px": 15,
-   "verdict": "stable"
-  },
-  {
-   "token": "crystal_cluster",
-   "moved_pct": 0.0,
-   "subject_pct": 3.787,
-   "max_delta": 0,
-   "hard_changed_px": 0,
-   "verdict": "stable"
+   "token": "pick_up_cube",
+   "moved_pct": 5.453,
+   "subject_pct": 2.53,
+   "max_delta": 249,
+   "hard_changed_px": 4702,
+   "verdict": "STROBES"
   }
  ]
 }

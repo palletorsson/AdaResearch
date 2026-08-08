@@ -48,6 +48,15 @@ func _initialize() -> void:
 	var out_dir := "res://ada_run/temporal"
 	var label := ""
 	var gap := 1.0
+	# THE SWEEP APPLIES THESE AND THIS DID NOT, so the two benches disagreed about how
+	# big an artifact is. Measured: interactive_point_origin_force filled 4.65% of the
+	# frame in its published bite report and 0.50% here, and four artifacts were called
+	# "too empty to judge" on the strength of that difference. dna.framing moves the
+	# camera in for an axis that lives in a detail; dna.fixture is what makes an artifact
+	# whose _ready() is gated build anything at all. An instrument that ignores both is
+	# not looking at the same object the rest of the toolchain is.
+	var framing := 1.0
+	var fixture_json := ""
 	for raw in OS.get_cmdline_user_args():
 		var a := String(raw).strip_edges()
 		if a.begins_with("--scene="):
@@ -58,6 +67,10 @@ func _initialize() -> void:
 			label = a.substr(8)
 		elif a.begins_with("--gap="):
 			gap = maxf(0.1, float(a.substr(6)))
+		elif a.begins_with("--framing="):
+			framing = clampf(float(a.substr(10)), 0.05, 20.0)
+		elif a.begins_with("--fixture="):
+			fixture_json = a.substr(10)
 	if scene_path == "" or not ResourceLoader.exists(scene_path):
 		push_error("capture_temporal: no scene at " + scene_path)
 		quit(2)
@@ -65,10 +78,11 @@ func _initialize() -> void:
 	if label == "":
 		label = scene_path.get_file().get_basename()
 	DirAccess.make_dir_recursive_absolute(out_dir)
-	_run(scene_path, out_dir, label, gap)
+	_run(scene_path, out_dir, label, gap, framing, fixture_json)
 
 
-func _run(scene_path: String, out_dir: String, label: String, gap: float) -> void:
+func _run(scene_path: String, out_dir: String, label: String, gap: float,
+		framing: float, fixture_json: String) -> void:
 	var vp := SubViewport.new()
 	vp.size = Vector2i(RES, RES)
 	vp.transparent_bg = false
@@ -99,13 +113,22 @@ func _run(scene_path: String, out_dir: String, label: String, gap: float) -> voi
 		quit(2)
 		return
 	var inst: Node = packed.instantiate()
+	# Fixture BEFORE add_child, the sweep's own rule: _ready() must build with it.
+	if fixture_json != "":
+		var j := JSON.new()
+		if j.parse(fixture_json) == OK and j.data is Dictionary:
+			for k in (j.data as Dictionary):
+				var holder: Node = _holder_of(inst, String(k))
+				if holder != null:
+					holder.set(String(k), (j.data as Dictionary)[k])
+				inst.set_meta("config_%s" % String(k), (j.data as Dictionary)[k])
 	vp.add_child(inst)
 	await create_timer(SETTLE).timeout
 
 	var box := _subtree_aabb(inst)
 	var c := box.get_center()
 	var radius: float = maxf(box.size.length() * 0.5, 0.2)
-	var dist: float = radius / tan(deg_to_rad(FOV * 0.5)) * PAD
+	var dist: float = radius / tan(deg_to_rad(FOV * 0.5)) * PAD * framing
 	var dir := Vector3(sin(YAW) * cos(PITCH), -sin(PITCH), cos(YAW) * cos(PITCH))
 	cam.position = c + dir * dist
 	cam.look_at(c, Vector3.UP)
@@ -126,6 +149,21 @@ func _run(scene_path: String, out_dir: String, label: String, gap: float) -> voi
 		f.close()
 	print("TEMPORAL %s  two frames %.2fs apart" % [label, gap])
 	quit(0)
+
+
+## Breadth-first, the same rule capture_config_sweep uses: the node that OWNS the
+## property, which is often not the root.
+func _holder_of(node: Node, key: String) -> Node:
+	if key in node:
+		return node
+	var queue: Array = [node]
+	while not queue.is_empty():
+		var n: Node = queue.pop_front()
+		for c in n.get_children():
+			if key in c:
+				return c
+			queue.append(c)
+	return null
 
 
 func _subtree_aabb(node: Node) -> AABB:
