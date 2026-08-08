@@ -143,9 +143,34 @@ func _update_line() -> void:
 	mesh_instance.mesh = mesh
 	mesh_instance.material_override = mat
 
+## Cached, and the cache IS the fix.
+##
+## This is called from _update_line(), which _process calls every frame. It used to
+## duplicate() the shader material and roll a fresh glow_intensity on every one of those
+## calls, so the line flickered across 1.5..2.0 at framerate in all 72 placements, and a
+## new ShaderMaterial resource was allocated 90 times a second.
+##
+## The comment below already knew: it says the function runs EVERY FRAME and that
+## handle_seed pins it. But the pin was written on the MEASUREMENT branch only — the
+## bench was made clean and the shipped default was left strobing. That is why no gate
+## ever caught it: every gate in this project photographs a single still, and a still
+## cannot disagree with itself.
+##
+## R1 is preserved in the thing that was actually intended. The docstring at the top of
+## this file says two launches should be two different polylines, and they still are:
+## the roll happens ONCE per instance instead of once per frame. What stops is the
+## flicker, which nothing asked for — every other time-varying uniform here
+## (flow_speed, pulse_frequency, thickness_variation) is pinned to 0.
+var _line_mat_cache: ShaderMaterial = null
+var _line_mat_seed: int = -2
+
 func _create_line_material() -> ShaderMaterial:
+	if _line_mat_cache != null and _line_mat_seed == handle_seed:
+		return _line_mat_cache
 	# Make a *copy* of the exported ShaderMaterial, otherwise each update overwrites one shared resource
 	var mat := line_material.duplicate() as ShaderMaterial
+	_line_mat_cache = mat
+	_line_mat_seed = handle_seed
 
 	# Same fixture as the handles: this function is called from _update_line() EVERY
 	# FRAME and rolls a fresh glow_intensity each time, so the brightest pixels in the

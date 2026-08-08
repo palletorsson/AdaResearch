@@ -18,11 +18,41 @@ var noise_amplitude := 1.0
 
 func _ready() -> void:
 	initialize_base_objects()
+	# PRIMED so the FIRST _process builds immediately. Gating the rebuild without this
+	# left the artifact empty until the first interval elapsed - caught by the temporal
+	# capture reporting subject 0.00% of frame, which is the same "measured nothing and
+	# called it a result" failure this instrument exists to prevent, introduced by the
+	# fix for it.
+	transform_timer = rebuild_interval
+
+## How long a set of random transformations stands before it is re-rolled. This exists
+## because it was MISSING, and the artifact was measurably strobing without it.
+##
+## Every one of the four builders below begins by queue_free()-ing all of its children and
+## then rebuilds them with new StandardMaterial3D instances and fresh rng draws. They were
+## called unconditionally from _process, so the entire visualisation was destroyed and
+## recreated 90 times a second: a 4x4 matrix display that is pure noise at framerate,
+## dozens of material allocations per frame, and this ships to a Quest.
+##
+## Measured with commons/testing/capture_temporal.gd — two frames one second apart, with
+## nothing asked to change — this artifact moved 6.22% of the frame, the worst of the
+## three found. No existing gate could see it: every gate here photographs a single still,
+## and a still cannot disagree with itself.
+##
+## transform_timer was already being accumulated and never used. It is the gate now.
+##
+## THIS CHANGES THE DEFAULT LOOK, deliberately. The artifact is about random
+## transformation and should still change — at a cadence a person can read, not at
+## refresh rate. Set to 0.0 to restore the old per-frame behaviour.
+@export var rebuild_interval: float = 2.0
 
 func _process(delta: float) -> void:
 	time += delta
 	transform_timer += delta
-	
+	if rebuild_interval > 0.0 and transform_timer < rebuild_interval:
+		return
+	transform_timer = 0.0
+
 	apply_geometric_transforms()
 	demonstrate_stochastic_operations()
 	show_random_matrices()
