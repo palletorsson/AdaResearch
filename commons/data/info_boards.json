@@ -1,6 +1,7 @@
 {
  "_readme": "One info board per spine map. `topic` = a term this map's own sequence introduces; `lit` = introduced earlier in the curriculum, so fair game; `early` = PRESENT BUT NOT YET INTRODUCED \u2014 the map uses it before the curriculum has taught it. Detection is a keyword match over each artifact's lookup name, category, tags and description, and every term carries the artifacts that triggered it so a wrong light can be argued with.",
  "substrate_note": "Everything a point needs in order to exist, almost none of which the curriculum names. Across the 24 spine sequences: collider, camera and XR score zero hits; clock and shader appear only as notes the authors left themselves; rasterization gets one line; and the grid \u2014 the floor from the first second \u2014 is taught at sequence 3, as `array`. The point is taught first and is last to exist. Measured per map here: grid, cubes, floor, wall, levels, collider, utilities. Constants of the runtime, true by construction and not measured: clock, shader, XR. eye_m and fov_deg come from the Vitruvian block.",
+ "machine_note": "A third category: not what the map is about, not what it is made of, but whether you look at the thing or work it. Derived by tools/artifact_controls.py from the scene and the ControlPanel builder API \u2014 165 of the 814 placed spine tokens are operable, and 178 of the 269 maps hold nothing operable at all. `settings` counts the DNA axis values a map's MACHINES have; `settings_used` counts the ones a placement actually sets: 974 available across the spine, 2 ever set. Counting every artifact and not just the operable ones, 12 placements set a declared axis, on 3 token-axis pairs (10 away from default, all but two of them catalyst_prompter_box.emergence). The families exist and are measured; the player meets one member of each.",
  "vocabulary": [
   {
    "term": "point",
@@ -191,6 +192,15 @@
     "fov_deg": 90.0,
     "utilities": 9
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 8,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 1,
    "spine_index": 0,
    "cast": 9,
@@ -304,6 +314,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 6
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 19,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 1,
    "spine_index": 1,
@@ -482,6 +501,15 @@
     "fov_deg": 90.0,
     "utilities": 6
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 1,
    "spine_index": 2,
    "cast": 5,
@@ -569,6 +597,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 6
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 1,
    "spine_index": 3,
@@ -689,6 +726,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 14,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 1,
    "spine_index": 4,
@@ -837,6 +883,45 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 2,
+    "exhibits": 6,
+    "unknown": 1,
+    "controls": {},
+    "settings": 7,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "grab_trihedron",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "figure": 4,
+       "facets": 3
+      },
+      "set": []
+     },
+     {
+      "token": "becoming_catalyst",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
+   },
    "seq_order": 1,
    "spine_index": 5,
    "cast": 9,
@@ -961,6 +1046,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 1,
    "spine_index": 6,
    "cast": 5,
@@ -1057,6 +1151,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 1,
    "spine_index": 7,
    "cast": 4,
@@ -1133,6 +1236,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 6
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 21,
+    "unknown": 1,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "grab_octahedron",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "dual": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 1,
    "spine_index": 8,
@@ -1270,6 +1398,15 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 1,
    "spine_index": 9,
    "cast": 5,
@@ -1348,6 +1485,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 7
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 10,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 1,
    "spine_index": 10,
@@ -1465,6 +1611,102 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 5,
+    "exhibits": 1,
+    "unknown": 1,
+    "controls": {},
+    "settings": 32,
+    "settings_used": 2,
+    "items": [
+     {
+      "token": "homogeneous_coordinates",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "regime": 3,
+       "mount": 3
+      },
+      "set": []
+     },
+     {
+      "token": "invariants_demo",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "figure": 3,
+       "pose": 6
+      },
+      "set": [
+       "pose"
+      ]
+     },
+     {
+      "token": "rotation_gimbal",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "regime": 4,
+       "evidence": 3
+      },
+      "set": []
+     },
+     {
+      "token": "matrix_4x4_viewer",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "pose": 6
+      },
+      "set": [
+       "pose"
+      ]
+     },
+     {
+      "token": "transform_composition",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "pair": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 2,
    "spine_index": 11,
    "cast": 7,
@@ -1580,6 +1822,67 @@
     "fov_deg": 90.0,
     "utilities": 12
    },
+   "machines": {
+    "operable": 3,
+    "exhibits": 4,
+    "unknown": 2,
+    "controls": {
+     "slider": 1
+    },
+    "settings": 20,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "transform_composition_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "workings": 4
+      },
+      "set": []
+     },
+     {
+      "token": "z_translation_cube",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "course": 3,
+       "account": 5
+      },
+      "set": []
+     },
+     {
+      "token": "y_translation_cube",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "course": 3,
+       "account": 5
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 2,
    "spine_index": 12,
    "cast": 9,
@@ -1686,6 +1989,48 @@
     "fov_deg": 90.0,
     "utilities": 8
    },
+   "machines": {
+    "operable": 2,
+    "exhibits": 5,
+    "unknown": 1,
+    "controls": {},
+    "settings": 16,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "z_translation_cube",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "course": 3,
+       "account": 5
+      },
+      "set": []
+     },
+     {
+      "token": "x_translation_cube",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "course": 3,
+       "account": 5
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 2,
    "spine_index": 13,
    "cast": 8,
@@ -1771,6 +2116,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 6,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 2,
    "spine_index": 14,
@@ -1885,6 +2239,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 5,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 2,
    "spine_index": 15,
    "cast": 5,
@@ -1987,6 +2350,15 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 5,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 2,
    "spine_index": 16,
    "cast": 7,
@@ -2081,6 +2453,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 2,
    "spine_index": 17,
    "cast": 4,
@@ -2128,6 +2509,15 @@
     "fov_deg": 90.0,
     "utilities": 32
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 2,
    "spine_index": 18,
    "cast": 2,
@@ -2150,6 +2540,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 3,
    "spine_index": 19,
@@ -2217,6 +2616,33 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "pattern_loom",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "colophon": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 3,
    "spine_index": 20,
@@ -2315,6 +2741,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 3,
    "spine_index": 21,
    "cast": 4,
@@ -2404,6 +2839,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 4,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 3,
    "spine_index": 22,
    "cast": 4,
@@ -2450,6 +2894,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "pattern_maker_station",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "boundary": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 3,
    "spine_index": 23,
@@ -2542,6 +3011,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 3,
    "spine_index": 24,
    "cast": 4,
@@ -2588,6 +3066,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 3,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "vr_tile_editor",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "boundary": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 3,
    "spine_index": 25,
@@ -2681,6 +3184,15 @@
     "fov_deg": 90.0,
     "utilities": 24
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 4,
    "spine_index": 26,
    "cast": 5,
@@ -2759,6 +3271,59 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 3,
+    "exhibits": 3,
+    "unknown": 4,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "pattern_studio_plate",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "pattern_maker_station",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "boundary": 4
+      },
+      "set": []
+     },
+     {
+      "token": "pattern_tile_plate",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 4,
    "spine_index": 27,
@@ -2865,6 +3430,57 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 3,
+    "exhibits": 6,
+    "unknown": 4,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "pattern_tunnel_machine",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "pattern_tile_plate",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "vr_tile_editor_mirror",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "boundary": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 4,
    "spine_index": 28,
@@ -2984,6 +3600,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 4,
    "spine_index": 29,
    "cast": 3,
@@ -3059,6 +3684,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 6,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 4,
    "spine_index": 30,
@@ -3142,6 +3776,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 5,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "sorting_algorithm_race",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 4,
    "spine_index": 31,
@@ -3255,6 +3914,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 4,
    "spine_index": 32,
    "cast": 3,
@@ -3301,6 +3969,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 4,
    "spine_index": 33,
@@ -3356,6 +4033,70 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 6
+   },
+   "machines": {
+    "operable": 4,
+    "exhibits": 0,
+    "unknown": 0,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "pattern_machine_d",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "pattern_machine_b",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "pattern_machine_a",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "pattern_machine_c",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "exhibit": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 5,
    "spine_index": 34,
@@ -3438,6 +4179,40 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 21
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 5,
+    "unknown": 18,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "primitive_combo_puzzle",
+      "kinds": [
+       "grab"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "pattern_tunnel_machine",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 5,
    "spine_index": 35,
@@ -3584,6 +4359,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 7,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 5,
    "spine_index": 36,
    "cast": 7,
@@ -3688,6 +4472,15 @@
     "fov_deg": 90.0,
     "utilities": 10
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 5,
    "spine_index": 37,
    "cast": 4,
@@ -3786,6 +4579,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 7
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 6,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 5,
    "spine_index": 38,
@@ -3909,6 +4711,15 @@
     "fov_deg": 90.0,
     "utilities": 24
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 6,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 5,
    "spine_index": 39,
    "cast": 7,
@@ -4030,6 +4841,15 @@
     "fov_deg": 90.0,
     "utilities": 7
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 5,
    "spine_index": 40,
    "cast": 4,
@@ -4075,6 +4895,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 11
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "pattern_mill",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "exhibit": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 5,
    "spine_index": 41,
@@ -4161,6 +5006,44 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "subpixel_display",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "gradient_interpolator",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 5,
    "spine_index": 42,
@@ -4274,6 +5157,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 5,
    "spine_index": 43,
    "cast": 0,
@@ -4306,6 +5198,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 6,
    "spine_index": 44,
@@ -4396,6 +5297,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 6,
    "spine_index": 45,
    "cast": 4,
@@ -4484,6 +5394,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 6,
    "spine_index": 46,
    "cast": 2,
@@ -4550,6 +5469,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 6,
    "spine_index": 47,
    "cast": 3,
@@ -4606,6 +5534,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 6,
    "spine_index": 48,
    "cast": 3,
@@ -4640,6 +5577,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 6,
    "spine_index": 49,
@@ -4716,6 +5662,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 6,
    "spine_index": 50,
@@ -4794,6 +5749,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 6,
    "spine_index": 51,
    "cast": 3,
@@ -4849,6 +5813,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 1
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 7,
    "spine_index": 52,
@@ -4963,6 +5936,31 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {
+     "slider": 1
+    },
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "vector_machine",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [],
+      "axes": {},
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 53,
    "cast": 3,
@@ -5062,6 +6060,119 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 1
+   },
+   "machines": {
+    "operable": 6,
+    "exhibits": 0,
+    "unknown": 0,
+    "controls": {
+     "slider": 7,
+     "button": 1
+    },
+    "settings": 9,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "halting_workbench",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "slider": 2,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "russell_paradox_workbench",
+      "kinds": [
+       "slider",
+       "crank"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "crank",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "complexity_dial_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "ca_rules_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "qfep_balance_workbench",
+      "kinds": [
+       "slider",
+       "crank"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "crank",
+       "slider"
+      ],
+      "axes": {
+       "settling": 5
+      },
+      "set": []
+     },
+     {
+      "token": "transform_composition_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "workings": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 54,
@@ -5196,6 +6307,175 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 8,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {
+     "slider": 6,
+     "button": 4,
+     "dial": 1
+    },
+    "settings": 50,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "length_lantern",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "slider": 3,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "workings": 4,
+       "norm": 3
+      },
+      "set": []
+     },
+     {
+      "token": "adder_board",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "slider": 2,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "workings": 4
+      },
+      "set": []
+     },
+     {
+      "token": "stretch_bench",
+      "kinds": [
+       "slider",
+       "button",
+       "crank"
+      ],
+      "counted": {
+       "slider": 1,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank",
+       "slider"
+      ],
+      "axes": {
+       "regime": 5,
+       "workings": 4
+      },
+      "set": []
+     },
+     {
+      "token": "agreement_gauge",
+      "kinds": [
+       "slider",
+       "knob",
+       "dial",
+       "button"
+      ],
+      "counted": {
+       "dial": 1,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "button",
+       "knob"
+      ],
+      "axes": {
+       "opening": 4,
+       "measure": 3
+      },
+      "set": []
+     },
+     {
+      "token": "weather_vector_field",
+      "kinds": [
+       "slider",
+       "button",
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank",
+       "slider"
+      ],
+      "axes": {
+       "weather": 4,
+       "evidence": 3
+      },
+      "set": []
+     },
+     {
+      "token": "mortar_vector_siege",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "foresight": 4,
+       "vectors": 4
+      },
+      "set": []
+     },
+     {
+      "token": "reflection_hall",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "human_catapult",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "foresight": 4,
+       "vectors": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 55,
@@ -5383,6 +6663,124 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 6,
+    "exhibits": 0,
+    "unknown": 1,
+    "controls": {
+     "slider": 6,
+     "button": 1,
+     "dial": 1,
+     "joystick": 1
+    },
+    "settings": 12,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "control_console",
+      "kinds": [
+       "slider",
+       "dial",
+       "joystick",
+       "button"
+      ],
+      "counted": {
+       "slider": 1,
+       "button": 1,
+       "dial": 1,
+       "joystick": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "mounting": 3,
+       "demo_apparatus": 5
+      },
+      "set": []
+     },
+     {
+      "token": "triangle_curvature_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "cantor_diagonal_workbench",
+      "kinds": [
+       "slider",
+       "crank"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "crank",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "riemann_sum_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "tangent_slope_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "shannon_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 56,
    "cast": 7,
@@ -5528,6 +6926,45 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 9,
+    "unknown": 0,
+    "controls": {
+     "slider": 1,
+     "button": 1,
+     "dial": 1,
+     "joystick": 1
+    },
+    "settings": 8,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "control_console",
+      "kinds": [
+       "slider",
+       "dial",
+       "joystick",
+       "button"
+      ],
+      "counted": {
+       "slider": 1,
+       "button": 1,
+       "dial": 1,
+       "joystick": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "mounting": 3,
+       "demo_apparatus": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 57,
@@ -5706,6 +7143,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 7,
    "spine_index": 58,
    "cast": 0,
@@ -5728,6 +7174,57 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 9
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {
+     "slider": 4,
+     "button": 1
+    },
+    "settings": 13,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "length_lantern",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "slider": 3,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "workings": 4,
+       "norm": 3
+      },
+      "set": []
+     },
+     {
+      "token": "vector_normalize_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "input_mode": 3,
+       "reference_mode": 3
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 59,
@@ -5804,6 +7301,195 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 10,
+    "exhibits": 7,
+    "unknown": 2,
+    "controls": {
+     "slider": 15,
+     "button": 3
+    },
+    "settings": 56,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "vector_translation_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 4
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "length_lantern",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "slider": 3,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "workings": 4,
+       "norm": 3
+      },
+      "set": []
+     },
+     {
+      "token": "example_2_1_forces_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 3
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "adder_board",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "slider": 2,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "workings": 4
+      },
+      "set": []
+     },
+     {
+      "token": "stretch_bench",
+      "kinds": [
+       "slider",
+       "button",
+       "crank"
+      ],
+      "counted": {
+       "slider": 1,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank",
+       "slider"
+      ],
+      "axes": {
+       "regime": 5,
+       "workings": 4
+      },
+      "set": []
+     },
+     {
+      "token": "vector_magnitude_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "decomposition": 3,
+       "metric": 3
+      },
+      "set": []
+     },
+     {
+      "token": "vector_normalize_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "input_mode": 3,
+       "reference_mode": 3
+      },
+      "set": []
+     },
+     {
+      "token": "basis_vectors_rig",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "frame": 5,
+       "decomposition": 4
+      },
+      "set": []
+     },
+     {
+      "token": "vector_subtraction_demo",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "workings": 4,
+       "order": 3
+      },
+      "set": []
+     },
+     {
+      "token": "example_1_4_vector_multiplication_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "span": 3,
+       "scalar_mode": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 60,
@@ -5955,6 +7641,90 @@
     "fov_deg": 90.0,
     "utilities": 6
    },
+   "machines": {
+    "operable": 5,
+    "exhibits": 4,
+    "unknown": 3,
+    "controls": {},
+    "settings": 24,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "VectorCrossProduct",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "span": 4,
+       "handedness": 3
+      },
+      "set": []
+     },
+     {
+      "token": "basis_vectors_rig",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "frame": 5,
+       "decomposition": 4
+      },
+      "set": []
+     },
+     {
+      "token": "VectorDotProduct",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "dot_product_projector",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "opening": 4,
+       "workings": 4
+      },
+      "set": []
+     },
+     {
+      "token": "vector_projection_demo",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 61,
    "cast": 12,
@@ -6103,6 +7873,65 @@
     "fov_deg": 90.0,
     "utilities": 11
    },
+   "machines": {
+    "operable": 3,
+    "exhibits": 4,
+    "unknown": 3,
+    "controls": {
+     "slider": 1
+    },
+    "settings": 14,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "example_2_3_gravity_scaled_by_mass_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4,
+       "mass_spread": 3
+      },
+      "set": []
+     },
+     {
+      "token": "vector_addition_walk",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "torque_crank",
+      "kinds": [
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "crank"
+      ],
+      "axes": {
+       "purchase": 3,
+       "workings": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 62,
    "cast": 10,
@@ -6219,6 +8048,108 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 5,
+    "exhibits": 4,
+    "unknown": 3,
+    "controls": {
+     "slider": 6,
+     "button": 7,
+     "dial": 1
+    },
+    "settings": 25,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "VectorWorkbench",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "slider": 6,
+       "button": 6
+      },
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "agreement_gauge",
+      "kinds": [
+       "slider",
+       "knob",
+       "dial",
+       "button"
+      ],
+      "counted": {
+       "dial": 1,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [
+       "button",
+       "knob"
+      ],
+      "axes": {
+       "opening": 4,
+       "measure": 3
+      },
+      "set": []
+     },
+     {
+      "token": "exercise_5_9_angle_between",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "opening": 4,
+       "figure": 4
+      },
+      "set": []
+     },
+     {
+      "token": "torque_crank",
+      "kinds": [
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "crank"
+      ],
+      "axes": {
+       "purchase": 3,
+       "workings": 4
+      },
+      "set": []
+     },
+     {
+      "token": "torque_demo",
+      "kinds": [
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "crank"
+      ],
+      "axes": {
+       "handedness": 3
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 63,
@@ -6381,6 +8312,46 @@
     "fov_deg": 90.0,
     "utilities": 7
    },
+   "machines": {
+    "operable": 2,
+    "exhibits": 9,
+    "unknown": 2,
+    "controls": {},
+    "settings": 7,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "torque_demo",
+      "kinds": [
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "crank"
+      ],
+      "axes": {
+       "handedness": 3
+      },
+      "set": []
+     },
+     {
+      "token": "exercise_1_8_solution_attraction_magnitude_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 64,
    "cast": 13,
@@ -6539,6 +8510,36 @@
     "fov_deg": 90.0,
     "utilities": 7
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 7,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "weather_vector_field",
+      "kinds": [
+       "slider",
+       "button",
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank",
+       "slider"
+      ],
+      "axes": {
+       "weather": 4,
+       "evidence": 3
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 65,
    "cast": 5,
@@ -6631,6 +8632,114 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 6,
+    "exhibits": 9,
+    "unknown": 0,
+    "controls": {
+     "slider": 3
+    },
+    "settings": 30,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "example_2_5_fluid_resistance_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 3
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "mass_spread": 3,
+       "medium": 3
+      },
+      "set": []
+     },
+     {
+      "token": "example_3_3_pointing_in_the_direction_of_motion_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "configuration": 5
+      },
+      "set": []
+     },
+     {
+      "token": "flocking_controls",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "friction_ramp",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "incline": 5,
+       "grip": 5
+      },
+      "set": []
+     },
+     {
+      "token": "newton_cradle",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "standstill": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 66,
@@ -6843,6 +8952,15 @@
     "fov_deg": 90.0,
     "utilities": 10
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 5,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 7,
    "spine_index": 67,
    "cast": 5,
@@ -6946,6 +9064,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 11
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 7,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 7,
    "spine_index": 68,
@@ -7062,6 +9189,31 @@
     "fov_deg": 90.0,
     "utilities": 7
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {
+     "slider": 1
+    },
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "vector_machine",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [],
+      "axes": {},
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 69,
    "cast": 3,
@@ -7161,6 +9313,103 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 6
+   },
+   "machines": {
+    "operable": 5,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {
+     "slider": 7
+    },
+    "settings": 32,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "example_2_5_fluid_resistance_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 3
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "mass_spread": 3,
+       "medium": 3
+      },
+      "set": []
+     },
+     {
+      "token": "example_2_1_forces_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 3
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "example_2_3_gravity_scaled_by_mass_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4,
+       "mass_spread": 3
+      },
+      "set": []
+     },
+     {
+      "token": "friction_ramp",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "incline": 5,
+       "grip": 5
+      },
+      "set": []
+     },
+     {
+      "token": "basis_vectors_rig",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "frame": 5,
+       "decomposition": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 70,
@@ -7296,6 +9545,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 7,
    "spine_index": 71,
    "cast": 4,
@@ -7341,6 +9599,63 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 3,
+    "exhibits": 5,
+    "unknown": 2,
+    "controls": {},
+    "settings": 17,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "vector_addition_walk",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "force_field_visualizer",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "law": 4,
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "basis_vectors_rig",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "frame": 5,
+       "decomposition": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 72,
@@ -7464,6 +9779,85 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 4,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {},
+    "settings": 24,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "weather_vector_field",
+      "kinds": [
+       "slider",
+       "button",
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank",
+       "slider"
+      ],
+      "axes": {
+       "weather": 4,
+       "evidence": 3
+      },
+      "set": []
+     },
+     {
+      "token": "basis_vectors_rig",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "frame": 5,
+       "decomposition": 4
+      },
+      "set": []
+     },
+     {
+      "token": "force_field_visualizer",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "law": 4,
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "hl_turret_vectors",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 73,
@@ -7591,6 +9985,95 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 5,
+    "exhibits": 6,
+    "unknown": 0,
+    "controls": {},
+    "settings": 15,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "weather_vector_field",
+      "kinds": [
+       "slider",
+       "button",
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank",
+       "slider"
+      ],
+      "axes": {
+       "weather": 4,
+       "evidence": 3
+      },
+      "set": []
+     },
+     {
+      "token": "force_fields",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "force_field_visualizer",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "law": 4,
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "flow_field_painter",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "noc_5_04_flow_field",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 74,
@@ -7728,6 +10211,117 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 6,
+    "exhibits": 7,
+    "unknown": 0,
+    "controls": {},
+    "settings": 33,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "catapult",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "foresight": 4,
+       "vectors": 4,
+       "throw": 5
+      },
+      "set": []
+     },
+     {
+      "token": "hl_turret_vectors",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "mortar_vector_siege",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "foresight": 4,
+       "vectors": 4
+      },
+      "set": []
+     },
+     {
+      "token": "firework_launcher",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "shell": 4
+      },
+      "set": []
+     },
+     {
+      "token": "human_catapult",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "foresight": 4,
+       "vectors": 4
+      },
+      "set": []
+     },
+     {
+      "token": "slingshot_launcher",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 75,
@@ -7912,6 +10506,126 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 7
+   },
+   "machines": {
+    "operable": 7,
+    "exhibits": 6,
+    "unknown": 2,
+    "controls": {},
+    "settings": 37,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "force_field_visualizer",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "law": 4,
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "configuration": 5
+      },
+      "set": []
+     },
+     {
+      "token": "mass_spring_damper",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "spread": 3,
+       "regime": 4
+      },
+      "set": []
+     },
+     {
+      "token": "firework_launcher",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "shell": 4
+      },
+      "set": []
+     },
+     {
+      "token": "basis_vectors_rig",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "frame": 5,
+       "decomposition": 4
+      },
+      "set": []
+     },
+     {
+      "token": "force_fields",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "example_3_3_pointing_in_the_direction_of_motion_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 76,
@@ -8098,6 +10812,113 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 6,
+    "exhibits": 7,
+    "unknown": 0,
+    "controls": {
+     "slider": 7
+    },
+    "settings": 22,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "harmonic_motion_demo",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "slider": 4
+      },
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "regime": 4,
+       "record": 4
+      },
+      "set": []
+     },
+     {
+      "token": "spring_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 3
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "regime": 4,
+       "trace": 3
+      },
+      "set": []
+     },
+     {
+      "token": "mass_spring_damper",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "spread": 3,
+       "regime": 4
+      },
+      "set": []
+     },
+     {
+      "token": "HingeCrank",
+      "kinds": [
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "crank"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "SliderPress",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "coupled_pendulums",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 77,
    "cast": 13,
@@ -8246,6 +11067,83 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 6
+   },
+   "machines": {
+    "operable": 4,
+    "exhibits": 7,
+    "unknown": 2,
+    "controls": {
+     "slider": 3
+    },
+    "settings": 17,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "example_2_9_n_body_attraction_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 2
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "example_2_8_two_body_attraction_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "three_body_problem",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "configuration": 5,
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "chaos_attractor",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 78,
@@ -8411,6 +11309,115 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 6,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {
+     "slider": 3
+    },
+    "settings": 21,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "example_2_9_n_body_attraction_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 2
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "example_2_8_two_body_attraction_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "orbital_mechanics_demo",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "three_body_problem",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "configuration": 5,
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "gravity_well",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "exercise_1_8_solution_attraction_magnitude_vr",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 79,
    "cast": 9,
@@ -8561,6 +11568,44 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 2,
+    "exhibits": 5,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "reflection_hall",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "vector_arena",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
+   },
    "seq_order": 7,
    "spine_index": 80,
    "cast": 7,
@@ -8706,6 +11751,136 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 7,
+    "exhibits": 11,
+    "unknown": 2,
+    "controls": {
+     "slider": 2
+    },
+    "settings": 48,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "vector_magnitude_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "decomposition": 3,
+       "metric": 3
+      },
+      "set": []
+     },
+     {
+      "token": "vector_normalize_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "input_mode": 3,
+       "reference_mode": 3
+      },
+      "set": []
+     },
+     {
+      "token": "catapult",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "foresight": 4,
+       "vectors": 4,
+       "throw": 5
+      },
+      "set": []
+     },
+     {
+      "token": "human_catapult",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "foresight": 4,
+       "vectors": 4
+      },
+      "set": []
+     },
+     {
+      "token": "grab_sphere_point",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "VectorAddition",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "construction": 4,
+       "pair": 4
+      },
+      "set": []
+     },
+     {
+      "token": "VectorCrossProduct",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "span": 4,
+       "handedness": 3
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 7,
    "spine_index": 81,
@@ -8895,6 +12070,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 8,
    "spine_index": 82,
    "cast": 4,
@@ -8962,6 +12146,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 8,
    "spine_index": 83,
@@ -9082,6 +12275,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 8,
    "spine_index": 84,
    "cast": 4,
@@ -9159,6 +12361,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 8,
    "spine_index": 85,
@@ -9258,6 +12469,34 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 9,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "simulated_annealing",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "basin": 5,
+       "evidence": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 8,
    "spine_index": 86,
    "cast": 4,
@@ -9355,6 +12594,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 8,
    "spine_index": 87,
    "cast": 4,
@@ -9400,6 +12648,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 8,
    "spine_index": 88,
@@ -9468,6 +12725,61 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 3,
+    "exhibits": 13,
+    "unknown": 0,
+    "controls": {},
+    "settings": 18,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "pickup_cube_static",
+      "kinds": [
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "crank"
+      ],
+      "axes": {
+       "travel": 6
+      },
+      "set": []
+     },
+     {
+      "token": "pickup_cube_transforming",
+      "kinds": [
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "crank"
+      ],
+      "axes": {
+       "travel": 6
+      },
+      "set": []
+     },
+     {
+      "token": "pickup_cube_rotating",
+      "kinds": [
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "crank"
+      ],
+      "axes": {
+       "travel": 6
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 9,
    "spine_index": 89,
@@ -9609,6 +12921,15 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 10,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 9,
    "spine_index": 90,
    "cast": 10,
@@ -9745,6 +13066,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 6,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 9,
    "spine_index": 91,
    "cast": 6,
@@ -9845,6 +13175,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 5,
+    "unknown": 0,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "sine_wall_explanation",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "cut": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 9,
    "spine_index": 92,
@@ -9958,6 +13313,15 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 9,
    "spine_index": 93,
    "cast": 4,
@@ -10034,6 +13398,175 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 8,
+    "exhibits": 13,
+    "unknown": 3,
+    "controls": {
+     "slider": 3,
+     "button": 2
+    },
+    "settings": 34,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "RackSineBasic",
+      "kinds": [
+       "slider",
+       "knob",
+       "dial",
+       "lever",
+       "button"
+      ],
+      "counted": {
+       "slider": 3,
+       "button": 2
+      },
+      "at_least": false,
+      "wired": [
+       "button",
+       "knob",
+       "slider"
+      ],
+      "axes": {
+       "machinery": 5
+      },
+      "set": []
+     },
+     {
+      "token": "timbre_sculptor",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "waveform": 5,
+       "machinery": 5
+      },
+      "set": []
+     },
+     {
+      "token": "RackMoogBass",
+      "kinds": [
+       "slider",
+       "knob",
+       "dial",
+       "lever",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "knob",
+       "slider"
+      ],
+      "axes": {
+       "machinery": 5
+      },
+      "set": []
+     },
+     {
+      "token": "RackDX7Piano",
+      "kinds": [
+       "slider",
+       "knob",
+       "dial",
+       "lever",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "knob",
+       "slider"
+      ],
+      "axes": {
+       "machinery": 5
+      },
+      "set": []
+     },
+     {
+      "token": "wave_interference_3d",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "interactable_demo",
+      "kinds": [
+       "slider",
+       "dial",
+       "joystick",
+       "wheel",
+       "lever",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "AudioContr",
+      "kinds": [
+       "slider",
+       "dial",
+       "joystick",
+       "wheel",
+       "lever",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "lever",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "Rack303Acid",
+      "kinds": [
+       "slider",
+       "knob",
+       "dial",
+       "lever",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "knob",
+       "slider"
+      ],
+      "axes": {
+       "machinery": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 9,
    "spine_index": 94,
@@ -10223,6 +13756,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 9,
    "spine_index": 95,
    "cast": 4,
@@ -10309,6 +13851,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 9,
    "spine_index": 96,
@@ -10398,6 +13949,53 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 6,
+    "unknown": 0,
+    "controls": {},
+    "settings": 15,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "RackAmbientDrone",
+      "kinds": [
+       "slider",
+       "knob",
+       "dial",
+       "lever",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "knob",
+       "slider"
+      ],
+      "axes": {
+       "machinery": 5
+      },
+      "set": []
+     },
+     {
+      "token": "air_music_display_case",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "house": 6,
+       "seal": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 9,
    "spine_index": 97,
@@ -10519,6 +14117,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 9,
    "spine_index": 98,
    "cast": 4,
@@ -10607,6 +14214,42 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "beat_frequency_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "sine_oscillation",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 9,
    "spine_index": 99,
@@ -10706,6 +14349,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 9,
    "spine_index": 100,
    "cast": 4,
@@ -10751,6 +14403,85 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 4,
+    "exhibits": 20,
+    "unknown": 1,
+    "controls": {
+     "slider": 8
+    },
+    "settings": 30,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "additive_wave_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 5
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "waveform": 5,
+       "components": 3
+      },
+      "set": []
+     },
+     {
+      "token": "spring_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 3
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "regime": 4,
+       "trace": 3
+      },
+      "set": []
+     },
+     {
+      "token": "air_music_display_case",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "house": 6,
+       "seal": 4
+      },
+      "set": []
+     },
+     {
+      "token": "petri_dish_worms",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "assay": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 9,
    "spine_index": 101,
@@ -10966,6 +14697,83 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 4,
+    "exhibits": 2,
+    "unknown": 9,
+    "controls": {},
+    "settings": 22,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "slot_machine",
+      "kinds": [
+       "button",
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank"
+      ],
+      "axes": {
+       "disclosure": 5
+      },
+      "set": []
+     },
+     {
+      "token": "prng_crank_machine",
+      "kinds": [
+       "button",
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank"
+      ],
+      "axes": {
+       "disclosure": 5
+      },
+      "set": []
+     },
+     {
+      "token": "entropy_jar",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "found_state": 4,
+       "readout": 4
+      },
+      "set": []
+     },
+     {
+      "token": "seed_replay_demo",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "comparison": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 10,
    "spine_index": 102,
    "cast": 15,
@@ -11076,6 +14884,47 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 3,
+    "unknown": 3,
+    "controls": {},
+    "settings": 13,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "entropy_jar",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "found_state": 4,
+       "readout": 4
+      },
+      "set": []
+     },
+     {
+      "token": "hardware_entropy_decay",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "disclosure": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 10,
    "spine_index": 103,
@@ -11210,6 +15059,15 @@
     "fov_deg": 90.0,
     "utilities": 8
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 10,
    "spine_index": 104,
    "cast": 3,
@@ -11273,6 +15131,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 4,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 10,
    "spine_index": 105,
@@ -11363,6 +15230,50 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 2,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 9,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "coin_toss",
+      "kinds": [
+       "button",
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank"
+      ],
+      "axes": {
+       "disclosure": 5
+      },
+      "set": []
+     },
+     {
+      "token": "dice_throw",
+      "kinds": [
+       "button",
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "crank"
+      ],
+      "axes": {
+       "warrant": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 10,
    "spine_index": 106,
    "cast": 5,
@@ -11441,6 +15352,44 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 1,
+    "unknown": 2,
+    "controls": {},
+    "settings": 5,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "hardware_entropy_decay",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "disclosure": 5
+      },
+      "set": []
+     },
+     {
+      "token": "random_decay_multimesh",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 10,
    "spine_index": 107,
@@ -11535,6 +15484,48 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 3,
+    "unknown": 5,
+    "controls": {},
+    "settings": 9,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "random_walk_terrarium",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "memory": 4
+      },
+      "set": []
+     },
+     {
+      "token": "random_walk_leash",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "residue": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 10,
    "spine_index": 108,
@@ -11675,6 +15666,66 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 3,
+    "exhibits": 1,
+    "unknown": 5,
+    "controls": {},
+    "settings": 23,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "galton_board",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "derivation": 3,
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "distribution_comparator",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "comparison": 4,
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "distribution_sampler",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "law": 4,
+       "evidence": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 10,
    "spine_index": 109,
    "cast": 9,
@@ -11766,6 +15817,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 10,
    "spine_index": 110,
    "cast": 4,
@@ -11811,6 +15871,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 3,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "reaction_diffusion_intro",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 10,
    "spine_index": 111,
@@ -11901,6 +15986,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 3,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "perlin_noise_bridge",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 10,
    "spine_index": 112,
@@ -12012,6 +16122,31 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 1,
+    "unknown": 3,
+    "controls": {},
+    "settings": 5,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "monte_carlo_dartboard",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "disclosure": 5
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 10,
    "spine_index": 113,
    "cast": 5,
@@ -12088,6 +16223,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 10,
    "spine_index": 114,
    "cast": 3,
@@ -12163,6 +16307,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "noise_mixer",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 10,
    "spine_index": 115,
@@ -12305,6 +16474,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 8,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 10,
    "spine_index": 116,
    "cast": 8,
@@ -12349,6 +16527,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 3,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 11,
    "spine_index": 117,
    "cast": 3,
@@ -12384,6 +16571,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 11,
    "spine_index": 118,
@@ -12482,6 +16678,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 11,
    "spine_index": 119,
    "cast": 3,
@@ -12548,6 +16753,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 7
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "perlin_terrain_sculptor",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 11,
    "spine_index": 120,
@@ -12637,6 +16867,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 11,
    "spine_index": 121,
    "cast": 2,
@@ -12700,6 +16939,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 11,
    "spine_index": 122,
@@ -12767,6 +17015,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 11,
    "spine_index": 123,
    "cast": 2,
@@ -12832,6 +17089,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 5,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 11,
    "spine_index": 124,
@@ -12902,6 +17168,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 11,
    "spine_index": 125,
    "cast": 2,
@@ -12947,6 +17222,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 11,
    "spine_index": 126,
@@ -13002,6 +17286,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 3,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 12,
    "spine_index": 127,
@@ -13109,6 +17402,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 12,
    "spine_index": 128,
    "cast": 2,
@@ -13163,6 +17465,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 4,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 12,
    "spine_index": 129,
@@ -13228,6 +17539,33 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 3,
+    "controls": {},
+    "settings": 5,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "game_of_life_petri",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "culture": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 12,
    "spine_index": 130,
@@ -13325,6 +17663,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 4,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 12,
    "spine_index": 131,
@@ -13442,6 +17789,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 12,
    "spine_index": 132,
    "cast": 2,
@@ -13464,6 +17820,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 0,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "ca_rule_explorer",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 12,
    "spine_index": 133,
@@ -13532,6 +17913,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 12,
    "spine_index": 134,
    "cast": 4,
@@ -13578,6 +17968,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 4,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 12,
    "spine_index": 135,
    "cast": 4,
@@ -13600,6 +17999,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 9,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 13,
    "spine_index": 136,
@@ -13705,6 +18113,29 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 8,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "fractal_lsystem_tree",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 13,
    "spine_index": 137,
@@ -13840,6 +18271,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 5,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 13,
    "spine_index": 138,
    "cast": 5,
@@ -13938,6 +18378,29 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 7,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "fractal_koch_curve",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 13,
    "spine_index": 139,
@@ -14074,6 +18537,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 5,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 13,
    "spine_index": 140,
    "cast": 5,
@@ -14191,6 +18663,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 13,
    "spine_index": 141,
    "cast": 5,
@@ -14264,6 +18745,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "julia_set_explorer",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 13,
    "spine_index": 142,
@@ -14366,6 +18872,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 13,
    "spine_index": 143,
    "cast": 3,
@@ -14433,6 +18948,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 13,
    "spine_index": 144,
    "cast": 4,
@@ -14478,6 +19002,29 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 9,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "strange_attractors",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 13,
    "spine_index": 145,
@@ -14582,6 +19129,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 13,
    "spine_index": 146,
@@ -14710,6 +19266,47 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 2,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {
+     "slider": 1
+    },
+    "settings": 12,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "grammar_provenance",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "lsystem_editor",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "grammar": 7,
+       "depth": 5
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 14,
    "spine_index": 147,
    "cast": 6,
@@ -14811,6 +19408,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 14,
    "spine_index": 148,
    "cast": 4,
@@ -14846,6 +19452,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 1,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "ContextFreeGrammars",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 14,
    "spine_index": 149,
@@ -14904,6 +19535,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 14,
    "spine_index": 150,
@@ -15021,6 +19661,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 14,
    "spine_index": 151,
    "cast": 3,
@@ -15108,6 +19757,33 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 5,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "genetic_tree_sculptor",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "pressure": 5
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 14,
    "spine_index": 152,
    "cast": 3,
@@ -15167,6 +19843,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 14,
    "spine_index": 153,
    "cast": 4,
@@ -15212,6 +19897,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 5,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 14,
    "spine_index": 154,
@@ -15322,6 +20016,15 @@
     "fov_deg": 90.0,
     "utilities": 8
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 15,
    "spine_index": 155,
    "cast": 2,
@@ -15378,6 +20081,15 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 15,
    "spine_index": 156,
    "cast": 1,
@@ -15400,6 +20112,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 15,
    "spine_index": 157,
@@ -15476,6 +20197,15 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 15,
    "spine_index": 158,
    "cast": 2,
@@ -15498,6 +20228,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 15,
    "spine_index": 159,
@@ -15544,6 +20283,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 15,
    "spine_index": 160,
@@ -15620,6 +20368,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 15,
    "spine_index": 161,
    "cast": 3,
@@ -15686,6 +20443,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 15,
    "spine_index": 162,
    "cast": 2,
@@ -15730,6 +20496,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 163,
@@ -15798,6 +20573,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 3,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 164,
    "cast": 6,
@@ -15865,6 +20649,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 165,
    "cast": 4,
@@ -15920,6 +20713,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 166,
@@ -15988,6 +20790,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 167,
    "cast": 1,
@@ -16034,6 +20845,15 @@
     "fov_deg": 90.0,
     "utilities": 8
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 168,
    "cast": 3,
@@ -16069,6 +20889,29 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 0,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "radiolaria",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
+   },
    "seq_order": 16,
    "spine_index": 169,
    "cast": 1,
@@ -16091,6 +20934,34 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 10,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "turing_pattern_generator",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "regime": 6,
+       "seeding": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 16,
    "spine_index": 170,
@@ -16136,6 +21007,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 171,
@@ -16233,6 +21113,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 172,
    "cast": 3,
@@ -16279,6 +21168,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 173,
    "cast": 1,
@@ -16313,6 +21211,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 174,
@@ -16349,6 +21256,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 175,
    "cast": 1,
@@ -16383,6 +21299,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 176,
@@ -16419,6 +21344,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 177,
    "cast": 1,
@@ -16453,6 +21387,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 178,
@@ -16489,6 +21432,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 179,
    "cast": 1,
@@ -16523,6 +21475,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 180,
@@ -16559,6 +21520,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 181,
    "cast": 1,
@@ -16593,6 +21563,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 182,
@@ -16629,6 +21608,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 183,
    "cast": 1,
@@ -16663,6 +21651,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 184,
@@ -16699,6 +21696,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 185,
    "cast": 1,
@@ -16733,6 +21739,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 186,
@@ -16769,6 +21784,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 187,
    "cast": 1,
@@ -16803,6 +21827,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 188,
@@ -16839,6 +21872,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 189,
    "cast": 1,
@@ -16873,6 +21915,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 190,
@@ -16909,6 +21960,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 191,
    "cast": 1,
@@ -16943,6 +22003,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 192,
@@ -16979,6 +22048,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 193,
    "cast": 1,
@@ -17013,6 +22091,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 16,
    "spine_index": 194,
@@ -17049,6 +22136,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 195,
    "cast": 1,
@@ -17084,6 +22180,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 16,
    "spine_index": 196,
    "cast": 1,
@@ -17118,6 +22223,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 17,
    "spine_index": 197,
@@ -17195,6 +22309,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 17,
    "spine_index": 198,
    "cast": 2,
@@ -17252,6 +22375,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 17,
    "spine_index": 199,
@@ -17332,6 +22464,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 17,
    "spine_index": 200,
    "cast": 2,
@@ -17388,6 +22529,29 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "mc_sculpt_vr",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
+   },
    "seq_order": 17,
    "spine_index": 201,
    "cast": 2,
@@ -17434,6 +22598,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 17,
    "spine_index": 202,
    "cast": 4,
@@ -17479,6 +22652,29 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "mc_terrain_demo",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 17,
    "spine_index": 203,
@@ -17539,6 +22735,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 17,
    "spine_index": 204,
    "cast": 1,
@@ -17561,6 +22766,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 17,
    "spine_index": 205,
@@ -17620,6 +22834,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 17,
    "spine_index": 206,
    "cast": 2,
@@ -17642,6 +22865,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 17,
    "spine_index": 207,
@@ -17710,6 +22942,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 17,
    "spine_index": 208,
@@ -17812,6 +23053,15 @@
     "fov_deg": 90.0,
     "utilities": 3
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 17,
    "spine_index": 209,
    "cast": 1,
@@ -17857,6 +23107,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 18,
    "spine_index": 210,
@@ -17904,6 +23163,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 18,
    "spine_index": 211,
    "cast": 1,
@@ -17949,6 +23217,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 18,
    "spine_index": 212,
@@ -18006,6 +23283,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 18,
    "spine_index": 213,
    "cast": 1,
@@ -18040,6 +23326,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 18,
    "spine_index": 214,
@@ -18087,6 +23382,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 18,
    "spine_index": 215,
    "cast": 1,
@@ -18121,6 +23425,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 19,
    "spine_index": 216,
@@ -18178,6 +23491,15 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 19,
    "spine_index": 217,
    "cast": 1,
@@ -18221,6 +23543,61 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 3,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 8,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "boid_flocking",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {},
+      "set": []
+     },
+     {
+      "token": "boids_aquarium",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "accord": 4
+      },
+      "set": []
+     },
+     {
+      "token": "boid_manager",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "accord": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 19,
    "spine_index": 218,
@@ -18300,6 +23677,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "ant_colony_optimization",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 19,
    "spine_index": 219,
@@ -18387,6 +23789,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 19,
    "spine_index": 220,
    "cast": 1,
@@ -18421,6 +23832,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 3,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 19,
    "spine_index": 221,
@@ -18467,6 +23887,53 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 8
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 0,
+    "unknown": 0,
+    "controls": {
+     "button": 4,
+     "slider": 1
+    },
+    "settings": 7,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "fitness_landscape_politics",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "button": 4,
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [],
+      "axes": {
+       "mandate": 4
+      },
+      "set": []
+     },
+     {
+      "token": "self_organizing_patterns",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "cue": 3
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 19,
    "spine_index": 222,
@@ -18525,6 +23992,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 19,
    "spine_index": 223,
    "cast": 1,
@@ -18557,6 +24033,34 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 3
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 4,
+    "unknown": 0,
+    "controls": {},
+    "settings": 9,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "gradient_descent_visualization",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "basin": 5,
+       "evidence": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 20,
    "spine_index": 224,
@@ -18675,6 +24179,51 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 2,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 14,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "gradient_descent_visualization",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "basin": 5,
+       "evidence": 4
+      },
+      "set": []
+     },
+     {
+      "token": "loss_function_comparator",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "tail": 5
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 20,
    "spine_index": 225,
    "cast": 3,
@@ -18752,6 +24301,31 @@
     "fov_deg": 90.0,
     "utilities": 6
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 5,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "enhanced_kmeans",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "cohort": 5
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 20,
    "spine_index": 226,
    "cast": 3,
@@ -18806,6 +24380,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 5,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "neural_network_visualization",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "topology": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 20,
    "spine_index": 227,
@@ -18875,6 +24474,15 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 20,
    "spine_index": 228,
    "cast": 2,
@@ -18897,6 +24505,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 20,
    "spine_index": 229,
@@ -18942,6 +24559,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 2,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 20,
    "spine_index": 230,
@@ -18989,6 +24615,15 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 20,
    "spine_index": 231,
    "cast": 1,
@@ -19012,6 +24647,15 @@
     "fov_deg": 90.0,
     "utilities": 7
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 20,
    "spine_index": 232,
    "cast": 3,
@@ -19034,6 +24678,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 7
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 21,
    "spine_index": 233,
@@ -19092,6 +24745,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 21,
    "spine_index": 234,
    "cast": 1,
@@ -19148,6 +24810,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 21,
    "spine_index": 235,
    "cast": 1,
@@ -19203,6 +24874,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 8
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 21,
    "spine_index": 236,
@@ -19293,6 +24973,15 @@
     "fov_deg": 90.0,
     "utilities": 8
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 21,
    "spine_index": 237,
    "cast": 3,
@@ -19363,6 +25052,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 21,
    "spine_index": 238,
    "cast": 3,
@@ -19409,6 +25107,15 @@
     "fov_deg": 90.0,
     "utilities": 6
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 21,
    "spine_index": 239,
    "cast": 1,
@@ -19454,6 +25161,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "karger_algorithm",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "bottleneck": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 21,
    "spine_index": 240,
@@ -19512,6 +25244,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 21,
    "spine_index": 241,
    "cast": 1,
@@ -19567,6 +25308,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 22,
    "spine_index": 242,
@@ -19632,6 +25382,32 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 9
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 3,
+    "unknown": 1,
+    "controls": {},
+    "settings": 6,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "curvature_slider",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "opening": 3,
+       "witness": 3
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 22,
    "spine_index": 243,
@@ -19706,6 +25482,15 @@
     "fov_deg": 90.0,
     "utilities": 11
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 3,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 22,
    "spine_index": 244,
    "cast": 4,
@@ -19754,6 +25539,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 10
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 6,
+    "unknown": 2,
+    "controls": {},
+    "settings": 5,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "fluency_seam",
+      "kinds": [
+       "crank"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "crank"
+      ],
+      "axes": {
+       "crossing": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 22,
    "spine_index": 245,
@@ -19814,6 +25624,15 @@
     "fov_deg": 90.0,
     "utilities": 6
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 3,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 22,
    "spine_index": 246,
    "cast": 4,
@@ -19836,6 +25655,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 11
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 3,
+    "unknown": 0,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "excluded_middle_demo",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "middle": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 22,
    "spine_index": 247,
@@ -19871,6 +25715,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 22,
    "spine_index": 248,
@@ -19918,6 +25771,32 @@
     "fov_deg": 90.0,
     "utilities": 6
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 1,
+    "unknown": 2,
+    "controls": {},
+    "settings": 8,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "superposition_display",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "remainder": 5,
+       "vantage": 3
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 22,
    "spine_index": 249,
    "cast": 4,
@@ -19940,6 +25819,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 8
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 8,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 22,
    "spine_index": 250,
@@ -19976,6 +25864,37 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 8
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 2,
+    "unknown": 7,
+    "controls": {
+     "slider": 1
+    },
+    "settings": 5,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "qfep_balance_workbench",
+      "kinds": [
+       "slider",
+       "crank"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "crank",
+       "slider"
+      ],
+      "axes": {
+       "settling": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 23,
    "spine_index": 251,
@@ -20042,6 +25961,35 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 7
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 5,
+    "unknown": 2,
+    "controls": {
+     "slider": 1
+    },
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "shannon_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "evidence": 4
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 23,
    "spine_index": 252,
@@ -20162,6 +26110,15 @@
     "fov_deg": 90.0,
     "utilities": 7
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 4,
+    "unknown": 3,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 23,
    "spine_index": 253,
    "cast": 7,
@@ -20220,6 +26177,15 @@
     "fov_deg": 90.0,
     "utilities": 9
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 0,
+    "unknown": 7,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 23,
    "spine_index": 254,
    "cast": 7,
@@ -20254,6 +26220,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 7
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 5,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 23,
    "spine_index": 255,
@@ -20290,6 +26265,36 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 4
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 1,
+    "unknown": 4,
+    "controls": {
+     "slider": 2,
+     "button": 1
+    },
+    "settings": 5,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "edge_of_chaos_unlocked",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {
+       "slider": 2,
+       "button": 1
+      },
+      "at_least": false,
+      "wired": [],
+      "axes": {
+       "tenure": 5
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 23,
    "spine_index": 256,
@@ -20347,6 +26352,15 @@
     "fov_deg": 90.0,
     "utilities": 2
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 23,
    "spine_index": 257,
    "cast": 3,
@@ -20393,6 +26407,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 5,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 23,
    "spine_index": 258,
    "cast": 6,
@@ -20428,6 +26451,33 @@
     "fov_deg": 90.0,
     "utilities": 12
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 1,
+    "unknown": 5,
+    "controls": {},
+    "settings": 4,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "queer_morphology_specimen",
+      "kinds": [
+       "slider",
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button",
+       "slider"
+      ],
+      "axes": {
+       "becoming": 4
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 23,
    "spine_index": 259,
    "cast": 7,
@@ -20462,6 +26512,47 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 2,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 11,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "bias_visualizer",
+      "kinds": [
+       "button"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "button"
+      ],
+      "axes": {
+       "disclosure": 5,
+       "analogy_type": 3
+      },
+      "set": []
+     },
+     {
+      "token": "bias_from_inside",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "perspective_blend": 3
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 24,
    "spine_index": 260,
@@ -20507,6 +26598,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 5
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 3,
+    "unknown": 2,
+    "controls": {},
+    "settings": 3,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "bias_from_inside",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "perspective_blend": 3
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 24,
    "spine_index": 261,
@@ -20565,6 +26681,32 @@
     "fov_deg": 90.0,
     "utilities": 5
    },
+   "machines": {
+    "operable": 1,
+    "exhibits": 3,
+    "unknown": 2,
+    "controls": {},
+    "settings": 8,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "superposition_display",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "remainder": 5,
+       "vantage": 3
+      },
+      "set": []
+     }
+    ]
+   },
    "seq_order": 24,
    "spine_index": 262,
    "cast": 6,
@@ -20601,6 +26743,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 24,
    "spine_index": 263,
    "cast": 1,
@@ -20636,6 +26787,15 @@
     "fov_deg": 90.0,
     "utilities": 4
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 24,
    "spine_index": 264,
    "cast": 2,
@@ -20670,6 +26830,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 8
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 24,
    "spine_index": 265,
@@ -20715,6 +26884,15 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 2
+   },
+   "machines": {
+    "operable": 0,
+    "exhibits": 2,
+    "unknown": 1,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
    },
    "seq_order": 24,
    "spine_index": 266,
@@ -20762,6 +26940,15 @@
     "fov_deg": 90.0,
     "utilities": 9
    },
+   "machines": {
+    "operable": 0,
+    "exhibits": 1,
+    "unknown": 0,
+    "controls": {},
+    "settings": 0,
+    "settings_used": 0,
+    "items": []
+   },
    "seq_order": 24,
    "spine_index": 267,
    "cast": 1,
@@ -20784,6 +26971,31 @@
     "eye_m": 1.65,
     "fov_deg": 90.0,
     "utilities": 11
+   },
+   "machines": {
+    "operable": 1,
+    "exhibits": 3,
+    "unknown": 2,
+    "controls": {},
+    "settings": 3,
+    "settings_used": 0,
+    "items": [
+     {
+      "token": "bias_from_inside",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {},
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {
+       "perspective_blend": 3
+      },
+      "set": []
+     }
+    ]
    },
    "seq_order": 24,
    "spine_index": 268,
