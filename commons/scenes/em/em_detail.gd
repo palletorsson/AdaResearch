@@ -4,6 +4,22 @@ extends RefCounted
 #
 #   EmDetail.dress_segment(seg, tile, w, h, mats)              # 5-arg contract
 #   EmDetail.dress_segment(seg, tile, w, h, mats, prev_w)      # sharper vestibule
+#   EmDetail.dress_segment(seg, tile, w, h, mats, prev_w, opts)# walls get HUNG
+#
+# THE SEVENTH ARGUMENT IS THE ONE THE FRAMES WERE MISSING. em_budget computes
+# `wall_features_max` and `fill_walls` for every building and nothing consumed
+# them, because this function had no parameter to receive them. Two critics
+# measured the cost independently and got the same answer: 8.27 m2 of dressed
+# plaster with ZERO features above threshold in four of four proof frames, on a
+# surface that is 60-70% of every picture. Skirting and cornice are the only
+# things that ever touched a wall here, and both hug an edge — so the middle of
+# every wall, which is where a museum puts its argument, was empty.
+#
+# opts (all optional, all defaulted so the 5- and 6-arg contracts are unchanged):
+#   wall_features_max  int   hard cap on hung showings. -1 = derive from the
+#                            face count, so an un-wired caller still gets walls.
+#   fill_walls         bool  false = this building hangs nothing (Teshima, whose
+#                            whole argument is one work in an empty room).
 #
 # WHY TRIM AND NOT MORE GEOMETRY. The baseline segment is one hundred unbevelled
 # 1x3x1 boxes. A renderer given an unbevelled box has exactly two pieces of
@@ -174,6 +190,33 @@ const BLOCK_CH := 0.026       # podium (0.40) and plinth (0.80) top perimeters
 # not draw calls, and a 45-degree bar is 12 triangles.
 const CHAMFER_BUDGET := 2400
 
+# ── wall furniture: the hung showing ────────────────────────────────────────
+# One showing = frame (4 bars) + mount (light) + field (dark). Six boxes, three
+# draw calls for the whole building, and it is deliberately THREE materials
+# rather than one: the frames measured a single value band across every proof
+# frame (72% of pixels inside one 50-level band, no highlight tier, no committed
+# dark tier), which is why nothing separated from the wall at distance. A light
+# mount at 0.78 and a dark field at 0.12 put both missing tiers on the surface
+# that occupies most of the picture, at eye height, where the eye already is.
+const HANG_Y := 1.58          # centre line. Museum standard is 1.45-1.60 to centre
+const HANG_FIELD_PROUD := 0.030
+const HANG_MOUNT_PROUD := 0.018
+const HANG_FRAME_PROUD := 0.070
+const HANG_FRAME_W := 0.075   # 75 mm frame section
+const HANG_MOUNT_W := 0.090   # visible mount margin around the field
+# A showing every N consecutive dressed faces (1 face = 1 m of run). Two metres
+# is the corpus pitch: closer and a 1.3 m landscape has no wall around it.
+const HANG_PITCH_FACES := 2
+# format cycle [width, height], in metres. Three formats, so a run of six reads
+# as a hang rather than as wallpaper — and the cycle is indexed off the run key,
+# not off randf(), so the same seed builds the same building.
+const HANG_FORMATS := [
+	Vector2(0.72, 0.98),   # portrait
+	Vector2(1.32, 0.86),   # landscape
+	Vector2(0.58, 0.58),   # square
+]
+const HANG_HARD_MAX := 80     # mirrors em_budget.MAX_WALL_FEATURES
+
 # ── the legend-to-architecture translator ───────────────────────────────────
 # Twelve 30-degree bins of the legend hue wheel, each landing on one named
 # building material as [hue_deg, saturation, value, name]. Two rules governed
@@ -256,7 +299,11 @@ const SEAM_PROUD := 0.02      # box straddles y=0: 10 mm proud of the floor plan
 ##         defensively — a missing library degrades to local fallbacks.
 ## prev_w  optional: the previous segment's width, so the near vestibule seal is
 ##         known. Omit it and that one strip simply goes untrimmed.
-static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w: int = -1) -> void:
+## opts    optional: {wall_features_max: int, fill_walls: bool} straight off
+##         em_budget.for_segment(). Omit it and the walls are hung at a derived
+##         rate anyway — a blank wall is the defect, not the safe default.
+static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w: int = -1,
+		opts: Dictionary = {}) -> void:
 	if seg == null:
 		return
 	if w <= 0:
@@ -290,6 +337,10 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	var ch_ceil_x: Array = []    # the ceiling ribs' two lower arrises
 	var ch_pod_x: Array = []     # podium top perimeter (marble)
 	var ch_pli_x: Array = []     # plinth top perimeter (oak)
+	# the hung showings: the only family here that occupies the MIDDLE of a wall
+	var hang_frame_x: Array = []
+	var hang_mount_x: Array = []
+	var hang_field_x: Array = []
 	var tally: Dictionary = {"n": 0, "over": 0}
 
 	# SKIRTING IS ITS OWN BUCKET NOW, and that is the whole point of the change.
@@ -308,6 +359,19 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	_add_wall_faces(faces, skirt_x, trim_x)
 	_add_arris_beads(walls, floors, trim_x)
 	_add_labels(faces, trim_x)
+	# THE HUNG SHOWINGS, before the chamfer budget is spent — this family is not
+	# an arris and must never be the thing that a pathological template drops.
+	var hang_on: bool = bool(opts.get("fill_walls", true))
+	var hang_cap: int = int(opts.get("wall_features_max", -1))
+	if hang_cap < 0:
+		# un-wired caller. One showing per ~6 dressed faces is the corpus median
+		# (em_budget's CORPUS_WALL_FEATURES 2.2 per 10 m against a 1 m face).
+		hang_cap = clampi(int(floor(float(faces.size()) / 6.0)), 0, HANG_HARD_MAX)
+	hang_cap = clampi(hang_cap, 0, HANG_HARD_MAX)
+	if hang_on and hang_cap > 0:
+		_add_wall_showings(faces, hang_cap, hang_frame_x, hang_mount_x, hang_field_x)
+	print("[em_detail] walls: %d dressed faces, licence %d, %d showings hung%s" % [
+		faces.size(), hang_cap, hang_mount_x.size(), "" if hang_on else " (building hangs nothing)"])
 
 	# CHAMFER PRIORITY ORDER. Under budget this is just an order; over budget it
 	# is a ranking, so state it as one. Reveals first — a door is the one arris
@@ -342,6 +406,12 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	_emit(seg, "ArrisCeiling", ch_ceil_x, lib.get("ceiling"), false)
 	_emit(seg, "ArrisPodium", ch_pod_x, lib.get("podium"), false)
 	_emit(seg, "ArrisPlinth", ch_pli_x, lib.get("plinth"), false)
+	# The frames cast — a 70 mm proud section at 1.58 throws the only cast shadow
+	# anywhere in the middle of a wall, and that shadow is half of why a hung
+	# object reads as hung rather than as a decal.
+	_emit(seg, "WallFrames", hang_frame_x, lib.get("plinth"), true)
+	_emit(seg, "WallMounts", hang_mount_x, _hang_mount_mat(), false)
+	_emit(seg, "WallFields", hang_field_x, _hang_field_mat(), false)
 	_add_extent_anchor(seg, w, h)
 
 
@@ -460,6 +530,175 @@ static func _add_labels(faces: Array, out: Array) -> void:
 		if not bool(fd["along_x"]):
 			sz = Vector3(LABEL_T, LABEL_H, LABEL_W)
 		out.append(_xf(Vector3(fx, LABEL_Y, fz), sz))
+
+
+## ── THE HUNG SHOWINGS ────────────────────────────────────────────────────────
+## The wall furniture em_budget has always licensed and nothing ever built.
+##
+## Faces are grouped into RUNS (same plane, same outward normal, same fixed
+## coordinate) and each run into contiguous STRETCHES, so a showing is never
+## centred across a door opening or around an inside corner — a stretch breaks
+## wherever the wall does. Within a stretch one showing lands per HANG_PITCH_FACES
+## metres, centred in its group, which leaves >= 340 mm of bare wall either side
+## of the widest format before the frame is counted.
+##
+## Deterministic by construction: the face list arrives sorted, the stretches are
+## derived from it, and the format cycles off the showing's own coordinates. Two
+## runs of the same seed hang the same pictures in the same places — a randf()
+## here would make every proof shot a different building and no frame could ever
+## be compared with the frame before it.
+static func _add_wall_showings(faces: Array, cap: int, frame_out: Array,
+		mount_out: Array, field_out: Array) -> void:
+	if cap <= 0 or faces.is_empty():
+		return
+	# ── group into runs ─────────────────────────────────────────────────────
+	var runs: Dictionary = {}
+	for f in faces:
+		var fd: Dictionary = f
+		var along_x: bool = bool(fd["along_x"])
+		var fixed: float = float(fd["z"]) if along_x else float(fd["x"])
+		var vary: float = float(fd["x"]) if along_x else float(fd["z"])
+		var key: String = "%s|%.2f|%.0f|%.0f" % [
+			"x" if along_x else "z", fixed, float(fd["nx"]), float(fd["nz"])]
+		if not runs.has(key):
+			runs[key] = {"along_x": along_x, "fixed": fixed,
+				"nx": float(fd["nx"]), "nz": float(fd["nz"]), "v": []}
+		(runs[key]["v"] as Array).append(vary)
+	var keys: Array = runs.keys()
+	keys.sort()
+
+	# ── every candidate position first, THEN the cap ────────────────────────
+	# Spending the licence run by run starved whichever walls sorted last: the
+	# Sainsbury generates 203 dressed faces and licenses 52 showings, and taking
+	# the first 52 in key order hung them all on the z-normal walls while the
+	# long x-normal wall that fills a third of the hero frame got none. The cap
+	# is a density, not a queue, so it is dealt round-robin across the runs — a
+	# short wall keeps its one picture and a long wall gets proportionally more,
+	# but no wall in the building is bare while another is crowded.
+	var per_run: Array = []
+	for key in keys:
+		var run: Dictionary = runs[key]
+		var vs: Array = run["v"]
+		vs.sort()
+		var here: Array = []
+		var stretch: Array = []
+		var i: int = 0
+		while i <= vs.size():
+			var broke: bool = i == vs.size()
+			if not broke and not stretch.is_empty():
+				broke = absf(float(vs[i]) - float(stretch[-1])) > 1.01
+			if broke:
+				_stretch_candidates(stretch, run, here)
+				stretch = []
+				if i == vs.size():
+					break
+			stretch.append(vs[i])
+			i += 1
+		if not here.is_empty():
+			per_run.append(here)
+	var hung: int = 0
+	var round_i: int = 0
+	var guard: int = 0
+	while hung < cap and guard < 4096:
+		guard += 1
+		var dealt_this_round: int = 0
+		for lane in per_run:
+			var la: Array = lane
+			if round_i >= la.size():
+				continue
+			if hung >= cap:
+				break
+			var c: Dictionary = la[round_i]
+			_hang_one(float(c["centre"]), float(c["fixed"]), bool(c["along_x"]),
+				float(c["nrm"]), c["fmt"], frame_out, mount_out, field_out)
+			hung += 1
+			dealt_this_round += 1
+		if dealt_this_round == 0:
+			break
+		round_i += 1
+
+
+## Every position one contiguous wall stretch could carry a showing at, appended
+## to `out`. Placement is decided later, when the whole building's candidates are
+## known and the licence can be spread over all of them.
+static func _stretch_candidates(stretch: Array, run: Dictionary, out: Array) -> void:
+	# a one-metre stub is a pier return, not a wall. Nothing hangs on it.
+	if stretch.size() < HANG_PITCH_FACES:
+		return
+	var along_x: bool = bool(run["along_x"])
+	var fixed: float = float(run["fixed"])
+	var nrm: float = float(run["nx"]) if not along_x else float(run["nz"])
+	var g: int = 0
+	while g + HANG_PITCH_FACES <= stretch.size():
+		var centre: float = 0.0
+		for k in range(HANG_PITCH_FACES):
+			centre += float(stretch[g + k])
+		centre /= float(HANG_PITCH_FACES)
+		var idx: int = absi(int(round(centre * 2.0)) + int(round(fixed * 2.0)))
+		out.append({
+			"centre": centre, "fixed": fixed, "along_x": along_x, "nrm": nrm,
+			"fmt": HANG_FORMATS[idx % HANG_FORMATS.size()],
+		})
+		g += HANG_PITCH_FACES
+
+
+## Six boxes: four frame bars, a light mount, a dark field. All fully PROUD of
+## the wall plane (offset along the outward normal by half their own depth), not
+## straddling it the way the skirting does — a picture is on a wall, not in it.
+static func _hang_one(centre: float, fixed: float, along_x: bool, nrm: float,
+		fmt: Vector2, frame_out: Array, mount_out: Array, field_out: Array) -> void:
+	var wm: float = fmt.x
+	var hm: float = fmt.y
+	var fw: float = HANG_FRAME_W
+	# field is inset inside the mount by the visible mount margin
+	var fieldw: float = maxf(wm - 2.0 * HANG_MOUNT_W, 0.12)
+	var fieldh: float = maxf(hm - 2.0 * HANG_MOUNT_W, 0.12)
+	field_out.append(_hang_box(centre, HANG_Y, fixed, along_x, nrm,
+		fieldw, fieldh, HANG_FIELD_PROUD))
+	mount_out.append(_hang_box(centre, HANG_Y, fixed, along_x, nrm,
+		wm, hm, HANG_MOUNT_PROUD))
+	# frame: head, sill, two stiles. The head and sill run the full outer width
+	# so the mitres close.
+	var outer: float = wm + 2.0 * fw
+	frame_out.append(_hang_box(centre, HANG_Y + hm * 0.5 + fw * 0.5, fixed,
+		along_x, nrm, outer, fw, HANG_FRAME_PROUD))
+	frame_out.append(_hang_box(centre, HANG_Y - hm * 0.5 - fw * 0.5, fixed,
+		along_x, nrm, outer, fw, HANG_FRAME_PROUD))
+	frame_out.append(_hang_box(centre - wm * 0.5 - fw * 0.5, HANG_Y, fixed,
+		along_x, nrm, fw, hm, HANG_FRAME_PROUD))
+	frame_out.append(_hang_box(centre + wm * 0.5 + fw * 0.5, HANG_Y, fixed,
+		along_x, nrm, fw, hm, HANG_FRAME_PROUD))
+
+
+## One box on a wall plane, in the plane's own axes. `u` runs along the wall,
+## `depth` out of it along the outward normal.
+static func _hang_box(u: float, y: float, fixed: float, along_x: bool, nrm: float,
+		u_len: float, height: float, depth: float) -> Transform3D:
+	var off: float = nrm * depth * 0.5
+	if along_x:
+		return _xf(Vector3(u, y, fixed + off), Vector3(u_len, height, depth))
+	return _xf(Vector3(fixed + off, y, u), Vector3(depth, height, u_len))
+
+
+## The two value tiers the frames never had. Not routed through the material
+## library on purpose: every role the library publishes lands in the same 0.30
+## .. 0.45 albedo band (measured: hue spread 13.6-15.7 degrees, 72% of pixels in
+## one 50-level band, no highlight and no committed dark). A mount at 0.78 and a
+## field at 0.12 are the two ends the picture is missing, and asking the library
+## for them would just return another mid-grey.
+static func _hang_mount_mat() -> Material:
+	return _fallback(Color(0.78, 0.765, 0.735), 0.72, 0.0)
+
+
+## 0.30, arrived at by measuring twice rather than by choosing once. At 0.115 the
+## field crushed to RGB 0-3 and at 0.19 it still crushed at the light levels the
+## wall wash actually delivers: in both re-shoots the nearest showing read as a
+## HOLE punched in the wall, not as a dark picture in a light mount. A black
+## rectangle is not a dark tier, it is a missing one. 0.30 against the 0.78 mount
+## is a value step of the same order as the mount-to-wall step, which is what
+## makes the three read as three surfaces instead of two and a void.
+static func _hang_field_mat() -> Material:
+	return _fallback(Color(0.300, 0.285, 0.265), 0.62, 0.0)
 
 
 ## A 45-degree bead on every FREE convex arris — a lattice point with exactly one

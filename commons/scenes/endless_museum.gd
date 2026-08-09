@@ -46,11 +46,25 @@ const ORDER_POLICIES := "res://commons/data/artifact_order_policies.json"
 # A crowned chapter is dealt into its crowned building; uncrowned chapters
 # keep the em_order rotation.
 const CROWNS := "res://commons/data/museum_crowns.json"
+# THE RELATION FILE (2026-08-09). Every spine artifact's authored neighbours:
+# `named` (an @identity names the other token), `sibling` (one scene, two
+# registry names), `axis_kin` (both declare an axis of the same NAME, so they
+# can make the same argument), `co_placed` (already stand together in N shipped
+# maps), `family` (same category+sequence — padding). 481 of 799 also carry
+# multiples > 1: a declared DNA family exists in order to be shown at more than
+# one axis value. This is what turns one-artifact-per-slot into a SET.
+const RELATIONS := "res://commons/data/artifact_relations.json"
 const TextScreenRes = preload("res://commons/ui/text_screen.gd")
 const EYE := 1.65
 const WALK_SPEED := 4.0
 const BUILD_AHEAD_M := 24.0
 const KEEP_BEHIND_M := 70.0
+# THE V1 CONSTANT, now only a FALLBACK. Eight objects for twenty-six buildings
+# was simultaneously far too few for the Soane (51 declared slots in 13 cells of
+# width, a building whose whole argument is that every wall of the path is the
+# display) and twice too many for Teshima (one work, which is the building).
+# em_budget.gd reads a rate off each building's own stated mechanism instead;
+# this number survives for the run where that module is absent.
 const MAX_ARTIFACTS_PER_SEGMENT := 8
 # THE VESTIBULE (v3). Collision exposed what the gliding camera never felt:
 # each template's exit gap and the next template's entry gap sit at different x,
@@ -70,7 +84,11 @@ var _seed: int = 46
 var _order_mode: String = "spine"  # spine | shuffle
 var _shot_path: String = ""
 var _shot_segments: int = 3
+# 1.0 is the LOBBY, and it was the default: three of four proof frames were shot
+# one room short of the museum. It survives only as the value an explicit
+# --em-shot-at can still ask for; unset, the shot is composed inside the tile.
 var _shot_z: float = 1.0
+var _shot_z_set: bool = false
 var _test_collision: bool = false
 var _test_frames: int = 0
 # autopilot: walk through N museums end-to-end under real physics. The plan
@@ -92,6 +110,11 @@ var _next_z: float = 0.0
 var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
+var _first_spec: Dictionary = {}  # the spec segment 0 was actually stamped from
+# every artifact that survived into the museum, in world space. The proof shot is
+# composed against this list, so a frame can no longer claim to photograph a deal
+# it does not contain.
+var _shot_targets: Array = []
 # WHICH SHELF THE CORRIDOR DEALS FROM (2026-08-06). "museum" is v1 behaviour and
 # stays the default: the extracted buildings only. "spine" deals the curriculum's
 # OWN rooms, cut to corridor segments by tools/spine_segments.py. "both" walks
@@ -129,12 +152,27 @@ var _surf: Dictionary = {}         # role -> Material; empty when the library is
 var _detail_mats: Dictionary = {}  # the four roles em_detail probes for
 var _audio_seg: int = -1           # which segment's acoustic the bed is tuned to
 var _mod_warned: Dictionary = {}
+var _mod_arity_cache: Dictionary = {}
+# ── THE SET-DEAL MODULES (2026-08-09) ────────────────────────────────────────
+# Three more independent failure domains, loaded the same way. Any one of them
+# absent degrades the deal a step at a time and never past v1: no budget module
+# and the segment holds MAX_ARTIFACTS_PER_SEGMENT; no sets module and a lead
+# stands alone on its slot; no multiples module and a token shows once.
+var _mod_sets = null
+var _mod_mult = null
+var _mod_budget = null
+var _rel_db: Dictionary = {}       # parsed artifact_relations.json
+var _live: Dictionary = {}         # lookup -> {scene, fp} for EVERY alive artifact,
+                                   # not only the pool: a relative is dealt by name,
+                                   # and most names are not in the curriculum order
+var _deal_stats: Dictionary = {}   # running totals for the end-of-run print
 
 func _ready() -> void:
 	_parse_args()
 	_load_modules()
 	_load_museums()
 	_load_crowns()
+	_load_relations()
 	_load_pool()
 	if _museums.is_empty():
 		push_error("endless_museum: no museum-tagged templates in %s" % TEMPLATES)
@@ -143,6 +181,20 @@ func _ready() -> void:
 	var preload_n: int = _shot_segments if _shot_path != "" else 2
 	for i in range(preload_n):
 		_build_segment()
+	# the number the whole set-deal pass exists to move: v1 stamped at most 8
+	# objects per segment for every one of the twenty-six buildings.
+	var segs_built: int = int(_deal_stats.get("segments", 0))
+	if segs_built > 0:
+		print("[endless_museum] deal: %d objects across %d segments (%.1f per segment; v1 ceiling was %d)" % [
+			int(_deal_stats.get("objects", 0)), segs_built,
+			float(_deal_stats.get("objects", 0)) / float(segs_built),
+			MAX_ARTIFACTS_PER_SEGMENT])
+		# the chrome net's own count, printed rather than assumed. Zero is a
+		# FINDING, not a success: it means the affordances two critics counted in
+		# the frames are not named anything this net recognises, and they are
+		# still in the picture.
+		print("[endless_museum] chrome: %d geometry instances taken out of the picture" % [
+			int(_deal_stats.get("chrome_hidden", 0))])
 	if _shot_path != "":
 		_take_proof_shot()
 
@@ -163,6 +215,7 @@ func _parse_args() -> void:
 			_shot_path = a.substr(10)
 		elif a.begins_with("--em-shot-at="):
 			_shot_z = float(a.substr(13))
+			_shot_z_set = true
 		elif a.begins_with("--em-segments="):
 			_shot_segments = int(a.substr(14))
 		elif a == "--em-test-collision":
@@ -182,10 +235,36 @@ func _load_modules() -> void:
 	_mod_detail = _load_module("em_detail.gd")
 	_mod_feel = _load_module("em_feel.gd")
 	_mod_audio = _load_module("em_audio.gd")
+	_mod_sets = _load_module("em_sets.gd")
+	_mod_mult = _load_module("em_multiples.gd")
+	_mod_budget = _load_module("em_budget.gd")
 	print("[endless_museum] modules: mats=%s light=%s env=%s detail=%s feel=%s audio=%s" % [
 		_mod_mats != null, _mod_light != null, _mod_env != null,
 		_mod_detail != null, _mod_feel != null, _mod_audio != null])
+	print("[endless_museum] deal modules: sets=%s multiples=%s budget=%s" % [
+		_mod_sets != null, _mod_mult != null, _mod_budget != null])
 	_build_surfaces()
+
+## The relation file, once. 2.6 MB of JSON, parsed at startup because every
+## segment build asks it questions and a per-segment reparse would land on the
+## streaming frame. Absent or malformed, `_rel_db` stays empty and the deal
+## degrades to a lead alone on its slot — which is exactly v1.
+func _load_relations() -> void:
+	if not FileAccess.file_exists(RELATIONS):
+		push_warning("endless_museum: %s absent — dealing single artifacts (v1)" % RELATIONS)
+		return
+	var text := FileAccess.get_file_as_string(RELATIONS)
+	if text.is_empty():
+		push_warning("endless_museum: %s unreadable — dealing single artifacts (v1)" % RELATIONS)
+		return
+	var parsed: Variant = JSON.parse_string(text)
+	if not (parsed is Dictionary):
+		push_warning("endless_museum: %s is not an object — dealing single artifacts (v1)" % RELATIONS)
+		return
+	_rel_db = parsed as Dictionary
+	var arts: Variant = _rel_db.get("artifacts", {})
+	var n: int = (arts as Dictionary).size() if arts is Dictionary else 0
+	print("[endless_museum] relations: %d artifacts with authored neighbours" % n)
 
 func _load_module(fname: String):
 	var p: String = EM_DIR + fname
@@ -209,6 +288,25 @@ func _mod_has(m, fn: String) -> bool:
 		_mod_warned[key] = true
 		push_warning("endless_museum: module has no `%s` — skipping that stage" % fn)
 	return false
+
+## How many arguments a module entry point declares. A module contract that grew
+## an optional parameter must not break a run against an older copy on disk, and
+## "call it and see" is not available: too many arguments is a hard runtime error,
+## not a swallowed one.
+func _mod_arity(m, fn: String) -> int:
+	if m == null:
+		return -1
+	var key: String = str(m) + "#" + fn
+	if _mod_arity_cache.has(key):
+		return int(_mod_arity_cache[key])
+	var n: int = -1
+	if m is Script:
+		for row in (m as Script).get_script_method_list():
+			if String((row as Dictionary).get("name", "")) == fn:
+				n = ((row as Dictionary).get("args", []) as Array).size()
+				break
+	_mod_arity_cache[key] = n
+	return n
 
 ## One material per role, resolved once. A getter that is missing leaves its
 ## role null, and _box() then falls back to the flat v1 colour for that role
@@ -368,6 +466,10 @@ func _load_pool() -> void:
 	# the registry decides what is ALIVE (map_ready + scene on disk); the order
 	# mode decides how the living are dealt
 	var live: Dictionary = {}  # lookup -> {scene, fp}
+	# the dna blocks, harvested on the SAME pass. em_multiples would otherwise
+	# scan the whole registry again for them — one pass over ~7 MB of JSON is
+	# cheap, two in one boot is pure waste on the streaming frame.
+	var dna_by_token: Dictionary = {}
 	var dir := DirAccess.open(REGISTRY_DIR)
 	if dir == null:
 		return
@@ -386,6 +488,16 @@ func _load_pool() -> void:
 			var scene: String = String(a.get("scene", ""))
 			if scene != "" and a.get("map_ready", false) and ResourceLoader.exists(scene):
 				live[String(lookup)] = {"scene": scene, "fp": _footprint_of(a)}
+			var dna: Variant = a.get("dna", null)
+			if dna is Dictionary:
+				dna_by_token[String(lookup)] = dna
+	# a relative is dealt BY NAME out of the relation file, and most of those
+	# names are nowhere in the curriculum order — so the whole living registry
+	# has to stay resolvable, not just the pool.
+	_live = live
+	if _mod_has(_mod_mult, "prime"):
+		_mod_mult.call("prime", dna_by_token)
+		print("[endless_museum] dna: %d promoted tokens handed to em_multiples" % dna_by_token.size())
 	if _order_mode == "spine" and _load_spine_pool(live):
 		return
 	if _order_mode != "shuffle" and _load_policy_pool(live, _order_mode):
@@ -520,7 +632,14 @@ func _setup_world() -> void:
 	add_child(_player)
 	_cam = Camera3D.new()
 	_cam.position = Vector3(0, EYE, 0)
-	_cam.fov = 90.0
+	# FOV IS HORIZONTAL HERE, AND THAT IS THE FIX. Godot's default keep_aspect is
+	# KEEP_HEIGHT, so `fov = 90` was 90 degrees VERTICAL — 112.6 degrees across at
+	# 1800x1200. That is a fisheye, and it is the mechanism behind most of what the
+	# critics measured: the near wall is stretched until it fills two thirds of the
+	# frame, and a 1 m object at 10 m collapses to about 20 px. KEEP_WIDTH makes
+	# the number mean what it says; 75 across is 53.6 vertical, an ordinary lens.
+	_cam.keep_aspect = Camera3D.KEEP_WIDTH
+	_cam.fov = 75.0
 	_player.add_child(_cam)
 	_cam.make_current()
 	_setup_antialiasing()
@@ -647,6 +766,11 @@ func _build_segment() -> void:
 				break
 	if not use_crown:
 		_rot_i += 1
+	# the proof shot needs the spec that was actually STAMPED at segment 0, not
+	# _museums[0]: a crowned chapter replaces the rotation's pick, so those two
+	# disagree exactly when the frame is about a specific building.
+	if _seg_index == 0:
+		_first_spec = spec
 	var w: int = spec["w"]
 	var h: int = spec["h"]
 	var tile: Array = spec["tile"]
@@ -721,45 +845,9 @@ func _build_segment() -> void:
 			elif c == "3s":
 				slots.append({"x": x, "y": z, "top": 0.8, "rank": 0})
 	slots.sort_custom(func(a, b): return int(a["rank"]) < int(b["rank"]))
-	var placed := 0
-	var seg_seq := ""
-	for s in slots:
-		if placed >= MAX_ARTIFACTS_PER_SEGMENT or _pool.is_empty():
-			break
-		var entry: Dictionary = _pick_pool(int(s["rank"]))
-		if entry.is_empty():
-			break
-		# chapter alignment: a museum houses ONE sequence. When the spine order
-		# crosses into the next sequence mid-museum (and this museum already
-		# holds a real showing), the chapter opener is handed back and the NEXT
-		# museum opens with it — the book's chapters get buildings.
-		var sq := String(entry.get("sequence", ""))
-		if seg_seq == "":
-			seg_seq = sq
-		elif sq != seg_seq and sq != "" and placed >= 4:
-			_pool_i -= 1
-			break
-		var ps: PackedScene = load(String(entry["scene"])) as PackedScene
-		if ps == null:
-			continue
-		var node: Node3D = ps.instantiate() as Node3D
-		if node == null:
-			continue
-		node.set_meta("artifact_lookup_name", entry["lookup"])
-		node.position = Vector3(float(s["x"]) + 0.5, float(s["top"]), float(s["y"]) + 0.5)
-		seg.add_child(node)
-		# an occupied floor slot leaves the walk map: some artifact scenes carry
-		# their own collision, and the autopilot must not plan through them
-		if int(s["rank"]) == 2:
-			_walk_cells.erase(Vector2i(int(s["x"]), zbase + int(s["y"])))
-		# a LARGE hero overhangs its plinth — clear the surrounding ring too, so
-		# the planner routes around the piece instead of hugging it (Chichu's
-		# hero chamber is also its through-passage; found by the autopilot)
-		if int(s["rank"]) == 0 and int(entry.get("fp", 1)) >= 2:
-			for dz in range(-1, 2):
-				for dx in range(-1, 2):
-					_walk_cells.erase(Vector2i(int(s["x"]) + dx, zbase + int(s["y"]) + dz))
-		placed += 1
+	var deal: Dictionary = _deal_segment(seg, slots, zbase, spec, tile, w, h)
+	var placed: int = int(deal.get("placed", 0))
+	var seg_seq: String = String(deal.get("sequence", ""))
 	# museum banner at the threshold — the canonical TextScreen (framed panel,
 	# baked albedo, headless-safe). Properties set before add_child so the one
 	# _ready() rebuild builds the right sign.
@@ -837,7 +925,18 @@ func _build_segment() -> void:
 	#    collision and never touches _walk_cells, so the autopilot's BFS plan is
 	#    bit-identical with and without it.
 	if _mod_has(_mod_detail, "dress_segment"):
-		_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w)
+		# THE SEVENTH ARGUMENT IS THE WALL FURNITURE WIRE. em_budget has always
+		# licensed hung showings per building (Soane 80, a bare-wall building 0)
+		# and dress_segment had no parameter to receive the licence, so 60-70% of
+		# every proof frame was plaster with nothing on it. Arity-probed rather
+		# than assumed: an older em_detail on disk keeps the 6-arg contract and
+		# degrades to its own derived rate instead of erroring out.
+		if _mod_arity(_mod_detail, "dress_segment") >= 7:
+			_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w,
+				{"wall_features_max": int(deal.get("wall_features_max", -1)),
+					"fill_walls": bool(deal.get("fill_walls", true))})
+		else:
+			_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w)
 	# 1b. FURNITURE. em_detail is contractually forbidden to add collision, and a
 	#     bench you can walk through is worse than no bench — so the one fixture
 	#     family that occupies floor lives here, where the segment's StaticBody3D
@@ -858,9 +957,657 @@ func _build_segment() -> void:
 	var n_lights: int = 0
 	if _mod_has(_mod_light, "lights_installed"):
 		n_lights = int(_mod_light.call("lights_installed", seg))
-	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d, z %.0f..%.0f, lights %d" % [
+	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d/%d (%d leads, %d relatives, %d repeats), z %.0f..%.0f, lights %d" % [
 		_seg_index - 1, spec["key"], spec["museum"], seg_seq if seg_seq != "" else "-",
-		placed, _segments[-1]["z0"], _segments[-1]["z1"], n_lights])
+		placed, int(deal.get("max_objects", 0)), int(deal.get("leads", 0)),
+		int(deal.get("relatives", 0)), int(deal.get("repeats", 0)),
+		_segments[-1]["z0"], _segments[-1]["z1"], n_lights])
+
+## ── THE SET DEAL ─────────────────────────────────────────────────────────────
+## v1 dealt ONE artifact per slot in spine order and stopped at eight. A critic
+## reading the rendered frames named the result exactly — "the frames contain
+## architecture and no objects" — and named the answer too: placement is where a
+## procedural generator is ADVANTAGED, because it knows where every door, light,
+## wall run and walker path is, so it can place the relative opposite the lead by
+## rule, consistently, forever.
+##
+## So a lead is no longer an object, it is a SET. Three modules, three questions,
+## in the order the answers depend on each other:
+##   em_budget    how much can THIS building hold, read off its own stated
+##                mechanism (Soane 24, Chichu 4, Teshima 1, where there was one
+##                constant 8 for all twenty-six)
+##   em_sets      which authored neighbours stand beside the lead, and WHERE —
+##                a `named` relative in the lead's sightline, an `axis_kin` at a
+##                different value of the shared axis shoulder to shoulder, a
+##                `sibling` family as an evenly spaced row
+##   em_multiples how many times this token's own declared family earns a
+##                showing, at which values, in which order
+##
+## Every one is guarded. No budget module and the segment holds the v1 eight; no
+## sets module and the lead stands alone; no multiples module and a token shows
+## once. The chain degrades a step at a time and never past v1.
+##
+## THE AXIS VALUE GOES ON BEFORE add_child. Everything procedural in this corpus
+## builds in _ready(); a sibling edited afterwards is the default wearing a
+## costume, and it photographs as a twin with every stage green.
+func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
+		tile: Array, w: int, h: int) -> Dictionary:
+	var budget: Dictionary = _segment_budget(w, h, slots, String(spec.get("key", "")), tile)
+	var max_objects: int = int(budget.get("max_objects", MAX_ARTIFACTS_PER_SEGMENT))
+	var lead_cap: int = int(budget.get("lead_count", MAX_ARTIFACTS_PER_SEGMENT))
+	var rel_per_lead: int = int(budget.get("relatives_per_lead", 0))
+	var mult_allowed: int = int(budget.get("multiples_allowed", 1))
+	var out: Dictionary = {"placed": 0, "sequence": "", "leads": 0, "relatives": 0,
+		"repeats": 0, "max_objects": max_objects, "class": String(budget.get("class", "?")),
+		# handed straight through to em_detail.dress_segment. The budget has always
+		# computed these; until now nothing consumed them and every wall in every
+		# proof frame was bare plaster.
+		"wall_features_max": int(budget.get("wall_features_max", -1)),
+		"fill_walls": bool(budget.get("fill_walls", true))}
+	if max_objects <= 0 or slots.is_empty() or _pool.is_empty():
+		return out
+	var have_sets: bool = _mod_has(_mod_sets, "build_set") and not _rel_db.is_empty()
+	var have_mult: bool = _mod_has(_mod_mult, "plan") and mult_allowed > 1
+	var used: Dictionary = {}        # Vector2i -> true; a slot offered is a slot spent
+	var seg_tokens: Dictionary = {}  # token -> true; a relative shows once per segment
+	var placed: int = 0
+	var leads: int = 0
+	var n_rel: int = 0
+	var n_rep: int = 0
+	var seg_seq: String = ""
+	var guard: int = 0
+	while placed < max_objects and leads < lead_cap and not _pool.is_empty():
+		guard += 1
+		if guard > 96:
+			break
+		var free: Array = _free_slots(slots, used)
+		if free.is_empty():
+			break
+		var entry: Dictionary = _pick_pool(int(free[0].get("rank", 2)))
+		if entry.is_empty():
+			break
+		# chapter alignment, unchanged: a museum houses ONE sequence. When the
+		# spine order crosses into the next sequence mid-museum (and this museum
+		# already holds a real showing), the chapter opener is handed back and the
+		# NEXT museum opens with it — the book's chapters get buildings.
+		var sq: String = String(entry.get("sequence", ""))
+		if seg_seq == "":
+			seg_seq = sq
+		elif sq != seg_seq and sq != "" and placed >= 4:
+			_pool_i -= 1
+			break
+		var lead_tok: String = String(entry.get("lookup", ""))
+		var lead_scene: String = String(entry.get("scene", ""))
+		var lead_fp: int = int(entry.get("fp", 1))
+		if lead_tok == "" or lead_scene == "":
+			continue
+
+		# ── 1. the relatives ────────────────────────────────────────────────
+		var set_budget: int = mini(1 + rel_per_lead, max_objects - placed)
+		var set_pl: Array = []
+		if have_sets and set_budget > 0:
+			var rv: Variant = _mod_sets.call("build_set", lead_tok, free, _rel_db, set_budget)
+			if rv is Array:
+				set_pl = rv as Array
+		if set_pl.is_empty():
+			set_pl = [{"token": lead_tok, "cell": free[0], "axis": "", "value": "",
+				"kind": "lead", "role": "lead",
+				"why": "no relation set available — the v1 single deal"}]
+
+		# ── 2. the values ───────────────────────────────────────────────────
+		# em_multiples owns every repeat of the lead's OWN token, because it is
+		# the only one of the two that knows the corpus law (exactly one copy
+		# ships bare, because an untouched node is a fact about the scene while
+		# even a correct-looking value is a claim about the registry). So when it
+		# is present, em_sets' own multiples phase is dropped rather than dealing
+		# the token twice by two different rules.
+		var copies: Array = []
+		if have_mult or mult_allowed <= 1:
+			# ...and a building whose mechanism licenses NO repeat (Castelvecchio's
+			# network of gazes, which a duplicate would break) drops them either way.
+			var kept: Array = []
+			for p0 in set_pl:
+				if String((p0 as Dictionary).get("role", "")) != "multiple":
+					kept.append(p0)
+			set_pl = kept
+		if have_mult:
+			var room_after: int = maxi(1, free.size() - (set_pl.size() - 1))
+			# the building's own licence is handed over, so em_multiples' MAX_COPIES
+			# is the default rather than a ceiling standing in front of a budget
+			# that already said 8 or 16.
+			var pv: Variant
+			if _mod_arity(_mod_mult, "plan") >= 5:
+				pv = _mod_mult.call("plan", lead_tok, _rel_db, room_after, {}, mult_allowed)
+			else:
+				pv = _mod_mult.call("plan", lead_tok, _rel_db, room_after)
+			if pv is Array:
+				copies = pv as Array
+		# the budget is binding: lead + relatives + repeats may not overrun it
+		var self_cap: int = mini(mult_allowed, (max_objects - placed) - (set_pl.size() - 1))
+		self_cap = maxi(1, self_cap)
+		if copies.size() > self_cap:
+			copies.resize(self_cap)
+
+		# ── 3. where the repeats stand ──────────────────────────────────────
+		# The lead's own cell is chosen by em_sets (best slot in the room, and
+		# the anchor its relatives are arranged around); the repeats take further
+		# free cells. All of them carry the SAME token, so which copy lands on
+		# which cell is free.
+		#
+		# IT IS NOW SPENT ON THE BROADSIDE, NOT ON THE LADDER, and that is the
+		# change a critic asked for by measurement rather than by taste. Walk
+		# order put the family down the corridor axis: the Soane's four copies of
+		# one chest measured 120, 56, 42 and 22 px wide near-to-far — a 5:1
+		# apparent-size ratio inside one "family", with the last member eight
+		# pixels of wood colour. Walk order is a TEMPORAL sequence, and a family
+		# reads when its members are legible SIMULTANEOUSLY: sorting a comparison
+		# into depth converts it into a memory test. Cells within one cell of the
+		# lead's own z are therefore preferred, so the copies stand shoulder to
+		# shoulder across the walker's view at one distance, and the ladder is
+		# read left-to-right across the frame instead of front-to-back into it.
+		# Walk order survives as the fallback for a room too narrow to line up.
+		var lead_cell: Dictionary = {}
+		for p0 in set_pl:
+			if String((p0 as Dictionary).get("role", "")) == "lead":
+				lead_cell = (p0 as Dictionary).get("cell", {})
+				break
+		if lead_cell.is_empty():
+			lead_cell = free[0]
+		var self_cells: Array = [lead_cell]
+		if copies.size() > 1:
+			var reserved: Dictionary = used.duplicate()
+			for p0 in set_pl:
+				var c0: Dictionary = (p0 as Dictionary).get("cell", {})
+				if not c0.is_empty():
+					reserved[_cell_key(c0)] = true
+			var spare: Array = _broadside_first(lead_cell, _free_slots(slots, reserved))
+			for c1 in spare:
+				if self_cells.size() >= copies.size():
+					break
+				self_cells.append(c1)
+		if self_cells.size() < copies.size():
+			copies.resize(self_cells.size())
+		self_cells = _read_order(self_cells)
+
+		# ── 4. stamp the lead and its repeats ───────────────────────────────
+		var self_placed: int = 0
+		for i in range(self_cells.size()):
+			if placed >= max_objects:
+				break
+			var cell: Dictionary = self_cells[i]
+			var ax: Dictionary = {}
+			if i < copies.size():
+				ax = copies[i]
+			used[_cell_key(cell)] = true
+			# `true`: a repeat that could not be varied is a twin, not a
+			# comparison — drop it rather than photograph the default twice.
+			if _stamp(seg, lead_scene, lead_tok, cell, zbase, lead_fp, ax, self_placed > 0):
+				placed += 1
+				self_placed += 1
+		if self_placed == 0:
+			continue                      # the lead would not build; try the next one
+		leads += 1
+		n_rep += self_placed - 1
+		seg_tokens[lead_tok] = true
+		if _mod_has(_mod_mult, "describe") and copies.size() > 1:
+			print("[endless_museum]   %s" % String(_mod_mult.call("describe", lead_tok, copies)))
+		# the broadside, stated as a number so the claim can be wrong. z-spread 0
+		# means every copy stands at one depth and the family is read across the
+		# frame; a spread of 4 means it was strung down the corridor and the far
+		# member is measurably smaller than the near one.
+		if self_placed > 1:
+			var z_lo: int = 9999
+			var z_hi2: int = -9999
+			for i2 in range(self_placed):
+				var zc2: int = int((self_cells[i2] as Dictionary).get("y", 0))
+				z_lo = mini(z_lo, zc2)
+				z_hi2 = maxi(z_hi2, zc2)
+			print("[endless_museum]   %s x%d z-spread %d cell(s)%s" % [
+				lead_tok, self_placed, z_hi2 - z_lo,
+				" — broadside" if z_hi2 - z_lo <= 1 else " — strung down the axis"])
+
+		# ── 5. stamp the relatives ──────────────────────────────────────────
+		for p0 in set_pl:
+			if placed >= max_objects:
+				break
+			var p: Dictionary = p0
+			if String(p.get("role", "")) == "lead":
+				continue
+			var tok: String = String(p.get("token", ""))
+			var cell2: Dictionary = p.get("cell", {})
+			if tok == "" or cell2.is_empty() or used.has(_cell_key(cell2)):
+				continue
+			if seg_tokens.has(tok):
+				continue
+			var lv: Variant = _live.get(tok, null)
+			if not (lv is Dictionary):
+				continue                  # named in the relation file, not alive on disk
+			used[_cell_key(cell2)] = true
+			var ax2: Dictionary = {}
+			if String(p.get("axis", "")) != "" and String(p.get("value", "")) != "":
+				ax2 = {"axis": String(p["axis"]), "value": String(p["value"]),
+					"is_default": false, "alt": []}
+			# `false`: a relative whose axis value will not take is still worth
+			# standing there — it loses the comparison, not its reason to exist.
+			if _stamp(seg, String((lv as Dictionary).get("scene", "")), tok, cell2, zbase,
+					int((lv as Dictionary).get("fp", 1)), ax2, false):
+				placed += 1
+				n_rel += 1
+				seg_tokens[tok] = true
+		if have_sets and _mod_has(_mod_sets, "summary"):
+			print("[endless_museum]   set: %s" % String(_mod_sets.call("summary", set_pl)))
+	out["placed"] = placed
+	out["sequence"] = seg_seq
+	out["leads"] = leads
+	out["relatives"] = n_rel
+	out["repeats"] = n_rep
+	_deal_stats["objects"] = int(_deal_stats.get("objects", 0)) + placed
+	_deal_stats["segments"] = int(_deal_stats.get("segments", 0)) + 1
+	return out
+
+
+## How much this building can hold, from its own stated mechanism. Absent the
+## module, the v1 constant for every template.
+func _segment_budget(w: int, h: int, slots: Array, key: String, tile: Array) -> Dictionary:
+	if _mod_has(_mod_budget, "for_segment"):
+		var r: Variant = _mod_budget.call("for_segment", w, h, slots, key, {"tile": tile})
+		if r is Dictionary and (r as Dictionary).has("max_objects"):
+			return r as Dictionary
+	return {"max_objects": MAX_ARTIFACTS_PER_SEGMENT,
+		"lead_count": MAX_ARTIFACTS_PER_SEGMENT, "relatives_per_lead": 0,
+		"multiples_allowed": 1, "fill_walls": false, "class": "v1-flat"}
+
+
+func _cell_key(cell: Dictionary) -> Vector2i:
+	return Vector2i(int(cell.get("x", 0)), int(cell.get("y", 0)))
+
+
+## The still-free slots, in the caller's rank order (hero, podium, floor). These
+## are the SAME dictionaries the builder made, which is what em_sets' contract
+## requires and what lets `top` be read straight off a returned cell.
+func _free_slots(slots: Array, used: Dictionary) -> Array:
+	var out: Array = []
+	for s in slots:
+		if s is Dictionary and not used.has(_cell_key(s)):
+			out.append(s)
+	return out
+
+
+## Candidate cells for a repeat, BROADSIDE FIRST: everything within one cell of
+## the lead's own z, nearest laterally first, then everything else in walk order.
+## A copy standing beside its original is at the same distance from the eye, so
+## the two are within 1.1:1 apparent size and the difference between them is the
+## only thing that changes across the pair. A copy standing ten metres further
+## down the same axis is half the size, and half the size swamps whatever the
+## axis was arguing.
+func _broadside_first(lead_cell: Dictionary, cells: Array) -> Array:
+	if cells.size() < 2:
+		return cells
+	var lx: int = int(lead_cell.get("x", 0))
+	var ly: int = int(lead_cell.get("y", 0))
+	var near: Array = []
+	var far: Array = []
+	for c in cells:
+		if c is Dictionary and absi(int((c as Dictionary).get("y", 0)) - ly) <= 1:
+			near.append(c)
+		else:
+			far.append(c)
+	near.sort_custom(func(a, b): return absi(int(a["x"]) - lx) < absi(int(b["x"]) - lx))
+	var out: Array = near.duplicate()
+	out.append_array(_walk_order(far))
+	return out
+
+
+## The order the copies are dealt into their cells. A family that came out
+## broadside is read left to right across the frame, which is the order an eye
+## crosses it; a family the room forced into depth keeps walk order, which is the
+## order a body meets it. Both are asserted orders — the point is that the order
+## matches the way the set is actually going to be perceived.
+func _read_order(cells: Array) -> Array:
+	if cells.size() < 2:
+		return cells
+	var y0: int = int((cells[0] as Dictionary).get("y", 0))
+	for c in cells:
+		if absi(int((c as Dictionary).get("y", 0)) - y0) > 1:
+			return _walk_order(cells)
+	var out: Array = cells.duplicate()
+	out.sort_custom(func(a, b): return int(a["x"]) < int(b["x"]))
+	return out
+
+
+## Slots in the order a body meets them: along +z first, then across. The
+## builder's list is rank-sorted, which is not the order a walker meets anything,
+## and a ladder dealt into rank order is a ladder shuffled.
+func _walk_order(cells: Array) -> Array:
+	if _mod_has(_mod_mult, "walk_sort"):
+		var r: Variant = _mod_mult.call("walk_sort", cells)
+		if r is Array:
+			return r as Array
+	var out: Array = cells.duplicate()
+	out.sort_custom(func(a, b): return int(a["y"]) * 4096 + int(a["x"]) < int(b["y"]) * 4096 + int(b["x"]))
+	return out
+
+
+## Instantiate one artifact onto one slot. Everything that can go wrong with a
+## set deal is concentrated here on purpose:
+##   * the axis value is written BEFORE add_child, through em_multiples.stage,
+##     which mirrors GridInteractablesComponent exactly — coerce to the export's
+##     type, set config_<axis> metadata, write the property, then DEFER
+##     apply_grid_config so an artifact that rebuilds on config gets its refresh
+##     after _ready rather than during it;
+##   * a copy that could not be varied is refused (`drop_if_unvaried`), because
+##     a twin standing beside its original is worse than an empty slot;
+##   * the occupied cell leaves the autopilot's walk map, and a floor cell whose
+##     removal would seal the corridor is declined outright.
+func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
+		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool) -> bool:
+	if scene_path == "" or cell.is_empty():
+		return false
+	var ps: PackedScene = load(scene_path) as PackedScene
+	if ps == null:
+		return false
+	var node: Node3D = ps.instantiate() as Node3D
+	if node == null:
+		return false
+	node.set_meta("artifact_lookup_name", lookup)
+	if not axis_entry.is_empty():
+		var ok: bool = _apply_axis(node, axis_entry)
+		if not ok and drop_if_unvaried:
+			node.queue_free()
+			return false
+	node.position = Vector3(float(cell.get("x", 0)) + 0.5, float(cell.get("top", 0.0)),
+		float(cell.get("y", 0)) + 0.5)
+	seg.add_child(node)
+	# _ready has run for everything the scene shipped; strip the workshop chrome
+	# before the extent is measured, so a grab handle floating a metre off the
+	# object cannot inflate the AABB it is about to be sealed by either.
+	if not _seal_cells(node, cell, zbase, fp):
+		# it would have cut the corridor in two. Take it back out rather than ship
+		# a museum with a room nobody can reach.
+		seg.remove_child(node)
+		node.queue_free()
+		return false
+	# where the deal actually put something, in world space — recorded AFTER the
+	# seal check, so the list holds only artifacts that survived into the museum.
+	# A proof shot is composed against this rather than aimed at a hardcoded z.
+	_shot_targets.append({
+		"p": Vector3(float(cell.get("x", 0)) + 0.5,
+			float(cell.get("top", 0.0)) + 0.55,
+			float(zbase + int(cell.get("y", 0))) + 0.5),
+		"cell": Vector2i(int(cell.get("x", 0)), zbase + int(cell.get("y", 0))),
+		"token": lookup,
+	})
+	return true
+
+
+## ── THE WORKSHOP CHROME ──────────────────────────────────────────────────────
+## Two critics counted the objects in the four proof frames independently and
+## both reported the same thing: the most numerous discrete objects visible were
+## VR grab handles — five pale-blue spheres hovering at head height in one frame,
+## eight in another, with nothing underneath them — and the two largest saturated
+## blobs in the Soane's aperture were both handles rather than exhibits. In a
+## frame where the actual exhibit resolves to 22 px, a 14 px glowing sphere wins.
+## An RGB tri-arrow and a yellow debug label were measured in two more.
+##
+## None of that is a bug in the artifacts. A grab sphere is correct in a map you
+## reach into; the museum is a walk-through, nobody's hands are in it, and the
+## handle is left over from a different room. So it is removed from the PICTURE
+## and from nothing else.
+##
+## `layers = 0` rather than `visible = false`, per the corpus law: visibility is
+## hierarchical in Godot and hiding a handle would hide whatever hangs under it,
+## while layers is per-instance, leaves mesh, material and collision untouched,
+## and cannot break a pickup highlight the way material_override would.
+##
+## THE VOCABULARY IS MEASURED, NOT GUESSED, and the first version of it caught
+## exactly ZERO in four runs. GrabSphere/GrabSphere2 are real node names, but
+## only inside the arrow scenes; the handles that actually photographed came from
+## grabbable_line and grab_line, which call theirs EndpointA, EndpointB,
+## TipSphere and TipMarker and build them in _ready() rather than shipping them
+## in the .tscn. Every name below was read off the source that creates it.
+##
+## TWO THINGS BOTH CRITICS CALLED BUGS ARE NOT, and are deliberately NOT in this
+## list:
+##   * the "RGB tri-arrow and yellow debug label" is `origin` — OriginBeam and
+##     OriginBeamLabel in commons/primitives/origin. It is a shipped primitives-
+##     chapter artifact whose whole subject is a coordinate frame. A gate on it
+##     would delete a curriculum object for looking like the thing it teaches.
+##   * some of the "floating grab spheres" are `floating_sphere_field` and
+##     `dark_sphere`, artifacts that ARE floating spheres. From the pixels the
+##     two are indistinguishable; from the source they are opposites.
+##
+## HONEST LIMIT: a name net cannot be complete. An affordance under a name no
+## shipped scene uses today still photographs, and the count is printed at the
+## end of every run so a zero is visible rather than assumed.
+const CHROME_NAMES := ["grabsphere", "grabhandle", "grab_sphere", "grab_handle",
+	"endpointa", "endpointb", "tipsphere", "tipmarker",
+	"laserpoint", "laser_point", "gizmo", "axisgizmo", "debug", "debugdraw",
+	"debuglabel", "debugaxes"]
+const CHROME_SCAN_MAX := 400
+
+func _suppress_chrome(root: Node3D, lookup: String = "") -> int:
+	var n_hit: int = 0
+	# A grab sphere IS the exhibit for the grab_sphere_* family, and a laser
+	# pointer IS the exhibit on the vector benches. Suppressing by name would
+	# empty exactly the rooms those artifacts were dealt into, which is the same
+	# NO RENDER failure by another route. Those tokens keep their geometry; only
+	# the demo camera and HUD are still taken off them.
+	var self_named: bool = _is_chrome_name(lookup)
+	var stack: Array = [root]
+	var seen: int = 0
+	while not stack.is_empty() and seen < CHROME_SCAN_MAX:
+		var n: Node = stack.pop_back()
+		seen += 1
+		for c in n.get_children():
+			stack.append(c)
+		# a demo's own camera or HUD, leaking into a walk-through — the known
+		# demo-as-artifact UI leak, in a scene that has no GridInteractables
+		# component to catch it
+		if n is Camera3D:
+			(n as Camera3D).current = false
+			n.queue_free()
+			n_hit += 1
+			continue
+		if n is CanvasLayer:
+			n.queue_free()
+			n_hit += 1
+			continue
+		if n == root or self_named:
+			continue
+		if not _is_chrome_name(String(n.name)):
+			continue
+		# the node and every geometry under it leave the picture; nothing else
+		# about them changes
+		var sub: Array = [n]
+		while not sub.is_empty():
+			var m: Node = sub.pop_back()
+			for c2 in m.get_children():
+				sub.append(c2)
+			if m is GeometryInstance3D:
+				(m as GeometryInstance3D).layers = 0
+				n_hit += 1
+	if n_hit > 0:
+		_deal_stats["chrome_hidden"] = int(_deal_stats.get("chrome_hidden", 0)) + n_hit
+	return n_hit
+
+
+func _is_chrome_name(nm: String) -> bool:
+	if nm == "":
+		return false
+	var low: String = nm.to_lower()
+	for pat in CHROME_NAMES:
+		var p: String = String(pat)
+		if low.contains(p):
+			return true
+	return false
+
+
+## Write one axis value onto an instanced artifact. em_multiples.stage is
+## preferred over em_sets.apply_axis for BOTH callers: it validates the value
+## against the script's own @export_enum before writing (a value the code does
+## not have would be swallowed by the artifact's fallback and photographed as
+## the default — the science_screen failure), and it defers apply_grid_config
+## instead of calling it on a node whose _ready has not run.
+func _apply_axis(node: Node, e: Dictionary) -> bool:
+	if bool(e.get("is_default", false)):
+		return true                        # bare on purpose; an untouched node is the default
+	if _mod_has(_mod_mult, "stage"):
+		var r: Variant = _mod_mult.call("stage", node, e)
+		if r is Dictionary:
+			return bool((r as Dictionary).get("ok", false))
+		return false
+	if _mod_has(_mod_sets, "apply_axis"):
+		return bool(_mod_sets.call("apply_axis", node,
+			String(e.get("axis", "")), String(e.get("value", ""))))
+	return false
+
+
+## ── THE WALK MAP, AND THE ONE WAY THIS BUILD BREAKS ──────────────────────────
+## An occupied cell leaves the walk map, because artifact scenes carry their own
+## collision and the autopilot must not plan through them. v1 erased ONE cell per
+## placement and topped out at eight placements; the set deal spends up to
+## twenty-four, and the difference is not a matter of degree.
+##
+## MEASURED, not asserted. At eight objects the Soane walked clean; at
+## twenty-four it stalled at (7.2, 11.6) with the walker pressed against nothing
+## the plan knew about, and twenty-six cells unlearned before it gave up. The
+## Soane's spine is three cells wide with podium slots set into the cross-walls
+## either side of it. A wide artifact standing on one of those podiums reaches
+## into the spine — and the registry footprint says nothing about it, because
+## most tokens declare no footprint at all. The v1 rule (erase the cell you stand
+## on, plus a ring for a hero the registry called large) is simply blind to that.
+##
+## So the extent is read off the INSTANCE. After add_child, when _ready has built
+## whatever the artifact builds, its meshes and collision shapes are merged into
+## one world AABB and every walk cell that AABB covers is sealed. Clamped to two
+## cells either side, because a single far-flung mesh inflating an AABB is a
+## known trap in this corpus and an over-seal is how a corridor closes.
+##
+## Then the corridor is checked: the sealed cells are removed provisionally and
+## their surviving neighbours must still reach each other inside a bounded flood.
+## If they cannot, the artifact is taken back out — a museum with an unreachable
+## room is worse than a museum with an empty plinth.
+const SEAL_PROBE_CELLS := 400
+const MAX_SEAL_RADIUS := 2
+
+func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int) -> bool:
+	var cells: Array = _occupied_cells(node, cell, zbase)
+	# the v1 hero rule survives as a floor, not a ceiling: an artifact that builds
+	# its geometry deferred measures small at this instant, and a declared large
+	# footprint is the only warning we get about it.
+	if int(cell.get("rank", 2)) == 0 and fp >= 2:
+		var hx: int = int(cell.get("x", 0))
+		var hz: int = zbase + int(cell.get("y", 0))
+		for dz in range(-1, 2):
+			for dx in range(-1, 2):
+				var hk := Vector2i(hx + dx, hz + dz)
+				if _walk_cells.has(hk) and not cells.has(hk):
+					cells.append(hk)
+	if cells.is_empty():
+		return true
+	for k in cells:
+		_walk_cells.erase(k)
+	var nb: Dictionary = {}
+	for k in cells:
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var n2: Vector2i = (k as Vector2i) + d
+			if _walk_cells.has(n2):
+				nb[n2] = true
+	var keys: Array = nb.keys()
+	if keys.size() <= 1:
+		return true                        # a pocket: nothing ever routed through it
+	if _reaches_all(keys[0], keys, SEAL_PROBE_CELLS):
+		return true
+	for k in cells:
+		_walk_cells[k] = true
+	return false
+
+
+## Which walk cells this artifact's own body stands in. Segment nodes sit at
+## (0, 0, z0) and cells are unit metres, so a world position maps straight onto
+## a _walk_cells key with no conversion.
+func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
+	var cx: int = int(cell.get("x", 0))
+	var cz: int = zbase + int(cell.get("y", 0))
+	var out: Array = []
+	var box: AABB = _extent_of(node)
+	if box.size.x > 0.0 or box.size.z > 0.0:
+		var x0: int = maxi(int(floor(box.position.x)), cx - MAX_SEAL_RADIUS)
+		var x1: int = mini(int(floor(box.position.x + box.size.x - 0.01)), cx + MAX_SEAL_RADIUS)
+		var z0: int = maxi(int(floor(box.position.z)), cz - MAX_SEAL_RADIUS)
+		var z1: int = mini(int(floor(box.position.z + box.size.z - 0.01)), cz + MAX_SEAL_RADIUS)
+		for zz in range(z0, z1 + 1):
+			for xx in range(x0, x1 + 1):
+				var k := Vector2i(xx, zz)
+				if _walk_cells.has(k):
+					out.append(k)
+	# the slot's own cell always goes, even when nothing measurable was built:
+	# an artifact that renders nothing still occupies the pocket it was dealt to.
+	var own := Vector2i(cx, cz)
+	if int(cell.get("rank", 2)) == 2 and _walk_cells.has(own) and not out.has(own):
+		out.append(own)
+	return out
+
+
+## The instance's own world extent: every MeshInstance3D and every
+## CollisionShape3D under it, merged. Collision is what actually stops a walker;
+## mesh is what a player reads as "there is a thing there" and is included so a
+## decorative overhang does not become an invisible plan trap.
+func _extent_of(root: Node3D) -> AABB:
+	var acc: AABB = AABB()
+	var got: bool = false
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		for c in n.get_children():
+			stack.append(c)
+		var b: AABB = AABB()
+		var have: bool = false
+		if n is MeshInstance3D:
+			var mi: MeshInstance3D = n as MeshInstance3D
+			if mi.mesh != null:
+				b = mi.global_transform * mi.get_aabb()
+				have = true
+		elif n is CollisionShape3D:
+			var cs: CollisionShape3D = n as CollisionShape3D
+			if cs.shape != null:
+				var dm: Mesh = cs.shape.get_debug_mesh()
+				if dm != null:
+					b = cs.global_transform * dm.get_aabb()
+					have = true
+		if have:
+			if got:
+				acc = acc.merge(b)
+			else:
+				acc = b
+				got = true
+	return acc
+
+
+func _reaches_all(from: Vector2i, targets: Array, limit: int) -> bool:
+	var want: Dictionary = {}
+	for t in targets:
+		want[t] = true
+	var seen: Dictionary = {}
+	seen[from] = true
+	want.erase(from)
+	var q: Array = [from]
+	var qi: int = 0
+	while qi < q.size():
+		if want.is_empty():
+			return true
+		if seen.size() > limit:
+			return true                    # the flood outran the pinch; not a hinge
+		var c: Vector2i = q[qi]
+		qi += 1
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var n: Vector2i = c + d
+			if _walk_cells.has(n) and not seen.has(n):
+				seen[n] = true
+				want.erase(n)
+				q.append(n)
+	return want.is_empty()
+
 
 ## THERE WAS NOTHING IN THE ROOM. Measured on the proof shots: a band 520 px
 ## tall across the full 1800 px width — 24% of the frame — with no bench, no
@@ -1190,15 +1937,67 @@ func _auto_write(done: bool, ok: bool) -> void:
 ## and a near jamb or pilaster enters one edge as a foreground value anchor. Eye
 ## drops to 1.62 and the camera pitches ~2 degrees down, which puts the horizon
 ## at about 0.55 of frame height instead of bisecting it.
+##
+## AND THE CAMERA MUST STAND IN THE BUILDING. The default _shot_z was 1.0, which
+## is the LOBBY — the code's own comment nine lines down says the first segment's
+## near seal runs the full lobby width across z 0..1, so three of the four proof
+## frames were taken one room short of the museum they claimed to photograph.
+## `--em-first=soane` and `--em-first=chichu` swapped the building and the camera
+## never left the vestibule: two supposedly opposite buildings came back as the
+## same photograph with a colour grade on it (mean abs RGB diff 15.5, 5% of
+## pixels differing by more than 32), and 82-92% of every frame was architecture
+## the deal never touched. An unset --em-shot-at now stands a quarter of the way
+## into the first museum's own tile, on a cell the walker could actually occupy.
 func _take_proof_shot() -> void:
-	var spec: Dictionary = _museums[0]
+	var spec: Dictionary = _first_spec if not _first_spec.is_empty() else _museums[0]
 	_cam.position = Vector3(0, 1.62, 0)
-	if _shot_z >= 0.0:
+	# a proof shot is a photograph, not a viewport: 70 across (50 vertical at 3:2)
+	# is a documentation lens, and it is the one number that decides whether an
+	# object 10 m down the room is 20 px or 60.
+	_cam.keep_aspect = Camera3D.KEEP_WIDTH
+	_cam.fov = 70.0
+	if _shot_z >= 0.0 or not _shot_z_set:
+		# COMPOSE ON THE EVIDENCE. A frame containing 100% architecture cannot
+		# corroborate a claim of "3 works dealt" — it cannot even distinguish a
+		# building that held back from a building that failed to build, which is
+		# what happened to set_chichu: chichu-buried-cells is a 1-cell spine at
+		# x=7 with its three slots at x=3 and x=11 behind solid wall runs, so
+		# every object it deals is invisible from its own axis BY DESIGN. Aiming
+		# a camera down that axis produces an unfalsifiable picture no matter how
+		# well the dealer worked. So the standpoint is chosen: among the cells a
+		# walker could stand on inside the first museum, the one that can SEE the
+		# most of what was dealt, with a bonus for holding something in the near
+		# band, because nothing occupied 0-4 m in any of the four frames.
+		#
+		# --em-shot-at is now a HINT into that search rather than a standpoint.
+		# As a standpoint it was a coordinate with no knowledge of the building:
+		# z=20 in the Sainsbury put the eye flat against a pier and gave 60% of
+		# the frame to one blank plane. As a hint it still says "photograph this
+		# depth" and the search finds the cell at that depth that can see what
+		# was dealt there.
+		var comp: Dictionary = _compose_auto_shot(_shot_z if _shot_z_set else -1.0)
+		if not comp.is_empty():
+			_player.position = comp["stand"]
+			_player.rotation = Vector3(0.0, float(comp["yaw"]), 0.0)
+			_cam.rotation = Vector3(float(comp["pitch"]), 0.0, 0.0)
+			print("[endless_museum] shot composed at %.1f,%.1f — %d of %d dealt objects in view, nearest %.1f m" % [
+				(comp["stand"] as Vector3).x, (comp["stand"] as Vector3).z,
+				int(comp["seen"]), _shot_targets.size(), float(comp["near"])])
+			_shoot_deferred()
+			return
+		push_warning("endless_museum: no standpoint sees any dealt object — falling back to the axis")
+	if _shot_z >= 0.0 or not _shot_z_set:
 		var cx: float = float(spec["w"]) / 2.0
-		_player.position = Vector3(cx + 1.7, 0.0, _shot_z)
-		# forward is (-sin y, 0, -cos y): y just under PI turns back toward -x,
-		# i.e. back onto the axis we just stepped off
-		_player.rotation = Vector3(0.0, PI - 0.16, 0.0)
+		var zc: float = _shot_z if _shot_z_set else _auto_shot_z(spec)
+		# stand on a cell the corridor actually has, offset off the axis so a near
+		# jamb or pilaster enters one edge as a foreground value anchor
+		var stand: Vector3 = _stand_near(cx + 1.7, zc)
+		_player.position = Vector3(stand.x, 0.0, stand.z)
+		# aim at the axis 14 m ahead: the vista is kept, the vanishing point comes
+		# off dead centre, and the aim is derived rather than the old hardcoded
+		# 0.16 rad — which was only correct for the one x offset it was tuned at.
+		var d: Vector3 = Vector3(cx - stand.x, 0.0, 14.0)
+		_player.rotation = Vector3(0.0, atan2(-d.x, -d.z), 0.0)
 		_cam.rotation = Vector3(-0.035, 0.0, 0.0)
 		_shoot_deferred()
 		return
@@ -1218,6 +2017,165 @@ func _take_proof_shot() -> void:
 	_player.rotation = Vector3(0.0, atan2(-d.x, -d.z), 0.0)
 	_cam.rotation = Vector3(asin(clampf(d.y, -1.0, 1.0)), 0.0, 0.0)
 	_shoot_deferred()
+
+## ── THE COMPOSED STANDPOINT ──────────────────────────────────────────────────
+## Every walkable cell inside the first museum is a candidate. For each, the
+## dealt objects it has clear line of sight to are counted by a grid walk over
+## the same cell map the autopilot plans on — so "visible" means the corridor
+## itself agrees, not that the maths came out. The winner is the cell that sees
+## the most, preferring one that also holds something in the 1.5-5 m band and
+## that stands off the room's centre line (so a jamb or pier enters an edge as a
+## foreground plane rather than the frame being a symmetrical funnel).
+##
+## Returns {} when nothing was dealt or nothing can be seen from anywhere — and
+## an empty return is itself a finding, printed as a warning, because it means
+## the building's slots are unphotographable from inside the building.
+const SHOT_NEAR_M := 1.5
+const SHOT_FAR_M := 20.0
+const SHOT_FG_M := 5.0
+const SHOT_HINT_BAND := 7.0   # how far off an asked-for depth the search may wander
+
+func _compose_auto_shot(z_hint: float = -1.0) -> Dictionary:
+	if _shot_targets.is_empty() or _segments.is_empty() or _walk_cells.is_empty():
+		return {}
+	var z_hi: float = float(_segments[0]["z1"])
+	var best: Dictionary = {}
+	var best_score: float = -1.0
+	for k in _walk_cells:
+		var c: Vector2i = k
+		# inside the museum's own tile, never in the lobby: the vestibule is what
+		# three of the four frames photographed instead of a museum
+		if float(c.y) < float(VESTIBULE_H) or float(c.y) >= z_hi:
+			continue
+		var hint_off: float = 0.0
+		if z_hint >= 0.0:
+			hint_off = absf(float(c.y) + 0.5 - z_hint)
+			if hint_off > SHOT_HINT_BAND:
+				continue
+		var eye: Vector3 = Vector3(float(c.x) + 0.5, 1.62, float(c.y) + 0.5)
+		var seen: Array = []
+		var near: float = 1e9
+		for t in _shot_targets:
+			var td: Dictionary = t
+			var p: Vector3 = td["p"]
+			var d: float = Vector2(p.x - eye.x, p.z - eye.z).length()
+			if d < SHOT_NEAR_M or d > SHOT_FAR_M:
+				continue
+			if not _clear_line(c, td["cell"]):
+				continue
+			seen.append(p)
+			near = minf(near, d)
+		if seen.is_empty():
+			continue
+		var score: float = float(seen.size()) * 10.0
+		if near <= SHOT_FG_M:
+			score += 6.0            # the empty foreground band, bought back
+		# off the centre line, so the composition has a near plane on one side
+		var w0: float = float(_segments[0].get("w", 8))
+		score += minf(absf(float(c.x) + 0.5 - w0 * 0.5), 2.0)
+		# ...but OFF the centre line is not the same as jammed against it. The
+		# first re-shoot proved the difference: a standpoint hard up against a
+		# pier gave 60% of the frame to one unmodulated plane, which is the exact
+		# defect the offset was supposed to cure. Openness — how much of the 3x3
+		# ring the walker could actually step into — separates the two.
+		var open8: int = 0
+		for dz in range(-1, 2):
+			for dx in range(-1, 2):
+				if dx == 0 and dz == 0:
+					continue
+				if _walk_cells.has(Vector2i(c.x + dx, c.y + dz)):
+					open8 += 1
+		score += float(open8) * 0.6
+		# an asked-for depth is honoured, not obeyed: within the band, nearer the
+		# request wins, but never at the price of seeing nothing
+		score -= hint_off
+		if score <= best_score:
+			continue
+		best_score = score
+		var mid: Vector3 = Vector3.ZERO
+		for p2 in seen:
+			mid += p2 as Vector3
+		mid /= float(seen.size())
+		var dir: Vector3 = mid - eye
+		var flat: float = maxf(Vector2(dir.x, dir.z).length(), 0.01)
+		best = {
+			"stand": Vector3(eye.x, 0.0, eye.z),
+			"yaw": atan2(-dir.x, -dir.z),
+			"pitch": clampf(atan2(dir.y, flat), -0.20, 0.06),
+			"seen": seen.size(),
+			"near": near,
+		}
+	return best
+
+
+## Line of sight over the walk map: every cell strictly between a and b must be
+## walkable. Supercover-free and deliberately cheap — it is the same coarse
+## notion of "can be reached" the BFS plan uses, so a shot can never claim to see
+## through something the corridor treats as solid.
+func _clear_line(a: Vector2i, b: Vector2i) -> bool:
+	var dx: int = absi(b.x - a.x)
+	var dy: int = absi(b.y - a.y)
+	var sx: int = 1 if a.x < b.x else -1
+	var sy: int = 1 if a.y < b.y else -1
+	var err: int = dx - dy
+	var cx: int = a.x
+	var cy: int = a.y
+	var guard: int = 0
+	while guard < 256:
+		guard += 1
+		if cx == b.x and cy == b.y:
+			return true
+		var e2: int = err * 2
+		if e2 > -dy:
+			err -= dy
+			cx += sx
+		if e2 < dx:
+			err += dx
+			cy += sy
+		if cx == b.x and cy == b.y:
+			return true
+		if not _walk_cells.has(Vector2i(cx, cy)):
+			return false
+	return false
+
+
+## A quarter of the way into the first museum's OWN tile, never in the vestibule
+## and never within two cells of the far wall — that is the shortest depth at
+## which the room's own proportions, rather than the lobby's, set the frame.
+func _auto_shot_z(spec: Dictionary) -> float:
+	var h: int = int(spec.get("h", 8))
+	var into: int = clampi(int(round(float(h) * 0.25)), 2, maxi(2, h - 2))
+	return float(VESTIBULE_H + into) + 0.5
+
+
+## The nearest cell the walk map actually contains to (x, z). The camera is a
+## CharacterBody3D: dropped inside a wall box it is depenetrated by the physics
+## step and photographs from wherever it was pushed, which is how a shot ends up
+## inside a plaster slab. Snapping to a known-walkable cell makes the standpoint
+## a fact about the built corridor instead of an arithmetic guess.
+func _stand_near(x: float, z: float) -> Vector3:
+	if _walk_cells.is_empty():
+		return Vector3(x, 0.0, z)
+	var best: Vector2i = Vector2i(int(floor(x)), int(floor(z)))
+	if _walk_cells.has(best):
+		return Vector3(float(best.x) + 0.5, 0.0, float(best.y) + 0.5)
+	var best_d: float = 1e9
+	var found: bool = false
+	for k in _walk_cells:
+		var c: Vector2i = k
+		# z is weighted 3x: standing at the right depth matters more than standing
+		# at the right lateral offset, because depth is what the shot is about.
+		var dz: float = float(c.y) + 0.5 - z
+		var dx: float = float(c.x) + 0.5 - x
+		var d: float = dx * dx + dz * dz * 9.0
+		if d < best_d:
+			best_d = d
+			best = c
+			found = true
+	if not found:
+		return Vector3(x, 0.0, z)
+	return Vector3(float(best.x) + 0.5, 0.0, float(best.y) + 0.5)
+
 
 func _shoot_deferred() -> void:
 	var frames := 90
