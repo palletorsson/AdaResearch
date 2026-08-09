@@ -92,6 +92,16 @@ var _next_z: float = 0.0
 var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
+# WHICH SHELF THE CORRIDOR DEALS FROM (2026-08-06). "museum" is v1 behaviour and
+# stays the default: the extracted buildings only. "spine" deals the curriculum's
+# OWN rooms, cut to corridor segments by tools/spine_segments.py. "both" walks
+# them mixed, which is the only way to see a museum and the room it would replace
+# in one continuous walk.
+#
+# It matters for the match, not just for the walk: until now a chapter could not
+# compete against its own room, so "is a museum better for softbodies?" was asked
+# without the control on the board.
+var _source: String = "museum"
 var _banner_pos: Vector3 = Vector3.ZERO   # where the first segment hung its sign
 var _player: CharacterBody3D
 var _cam: Camera3D
@@ -139,6 +149,8 @@ func _parse_args() -> void:
 	for a in args:
 		if a.begins_with("--em-seed="):
 			_seed = int(a.substr(10))
+		elif a.begins_with("--em-source="):
+			_source = a.substr(12)
 		elif a.begins_with("--em-order="):
 			_order_mode = a.substr(11)
 		elif a.begins_with("--em-shot="):
@@ -265,6 +277,34 @@ func _mat_of(fn: String, args: Array) -> Material:
 		return r
 	return null
 
+## The spine's own rooms, cut to corridor segments. Merged into the same
+## dictionary the museum patterns arrive in, so everything downstream — the
+## dealing order, the vestibule join, the slot fill — is untouched. A segment is
+## tagged rather than renamed, because the corridor should be able to tell you
+## which building you are standing in.
+func _load_extra_source(into: Dictionary) -> void:
+	var text := FileAccess.get_file_as_string("res://commons/data/spine_segments.json")
+	if text.is_empty():
+		push_warning("endless_museum: --em-source=%s but spine_segments.json is missing "
+			% _source + "(run tools/spine_segments.py build); dealing museums only")
+		return
+	var parsed: Variant = JSON.parse_string(text)
+	if typeof(parsed) != TYPE_DICTIONARY:
+		return
+	var segs: Variant = (parsed as Dictionary).get("patterns", {})
+	if typeof(segs) != TYPE_DICTIONARY:
+		return
+	var n := 0
+	for k in (segs as Dictionary):
+		var s: Dictionary = (segs as Dictionary)[k]
+		s["spine_segment"] = true
+		s["museum"] = "spine/%s" % str(s.get("sequence", "?"))
+		s["em_order"] = 50
+		into[str(s.get("key", k))] = s
+		n += 1
+	print("endless_museum: +%d spine segments (--em-source=%s)" % [n, _source])
+
+
 func _load_museums() -> void:
 	var f := FileAccess.open(TEMPLATES, FileAccess.READ)
 	if f == null:
@@ -273,9 +313,13 @@ func _load_museums() -> void:
 	if not (data is Dictionary):
 		return
 	var patterns: Dictionary = data.get("patterns", {})
+	if _source != "museum":
+		_load_extra_source(patterns)
 	for key in patterns:
 		var p: Dictionary = patterns[key]
-		if p.has("museum"):  # only the extracted museum templates
+		if _source == "spine" and not p.has("spine_segment"):
+			continue
+		if p.has("museum") or p.has("spine_segment"):  # extracted buildings, or the spine's own rooms
 			# challengers (edited-lineage tiles not yet adopted) stay out of the
 			# corridor rotation — they exist to be judged, not walked, until ruled
 			if p.get("challenger", false):
