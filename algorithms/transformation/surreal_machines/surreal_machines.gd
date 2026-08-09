@@ -202,13 +202,14 @@ func create_rainbow_pendulum_machine() -> void:
 		collision_shape.shape = capsule_shape
 		pendulum_part.add_child(collision_shape)
 
-		# Connect with pin joint
+		# Add pendulum part to scene first
+		add_child(pendulum_part)
+		
+		# Connect with pin joint (now that both nodes are in the scene tree)
 		var pin_joint = PinJoint3D.new()
 		pin_joint.node_a = get_path_to(previous_body)
 		pin_joint.node_b = get_path_to(pendulum_part)
 		pin_joint.position = Vector3(0, -0.5, 0) if i == 0 else Vector3(0, 0.5, 0)
-
-		add_child(pendulum_part)
 		add_child(pin_joint)
 
 		mechanical_parts.append(pendulum_part)
