@@ -25,15 +25,25 @@ SHELF = ROOT / "commons/data/template_shelf.json"
 OUT = ROOT / "doc/reports/own_room_match.json"
 
 
-def plan():
+def field_keys(shelf, seq, field):
+    """Which plans a chapter is played against. `own` is the control this tool
+    was written for; `shelf` is every stampable plan the project owns — the
+    museums, the pattern editor's tiles and all 125 spine segments — which is
+    the match the crowns were never given."""
+    if field == "own":
+        return [k for k, v in shelf.items() if v["source"] == "spine-segment"
+                and (v.get("extra") or {}).get("sequence") == seq]
+    return [k for k, v in shelf.items() if v.get("stampable")]
+
+
+def plan(field="own"):
     shelf = json.loads(SHELF.read_text(encoding="utf-8"))["patterns"]
     spine = json.loads((ROOT / "commons/maps/curriculum_spine.json").read_text(encoding="utf-8"))
     crowns = json.loads((ROOT / "commons/data/museum_crowns.json").read_text(encoding="utf-8"))["crowns"]
     out = []
     for s in spine["spine"]["sequences"]:
         seq = s["name"]
-        keys = [k for k, v in shelf.items() if v["source"] == "spine-segment"
-                and (v.get("extra") or {}).get("sequence") == seq]
+        keys = field_keys(shelf, seq, field)
         if keys and (ROOT / ("doc/reports/map_tournament_%s.json" % seq)).exists():
             out.append({"seq": seq, "phase": s.get("phase", ""), "keys": keys,
                         "crown": crowns.get(seq, {}).get("template", "")})
@@ -43,9 +53,10 @@ def plan():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--seq", default="")
+    ap.add_argument("--field", choices=["own", "shelf"], default="own")
     a = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    rows = [r for r in plan() if not a.seq or r["seq"] == a.seq]
+    rows = [r for r in plan(a.field) if not a.seq or r["seq"] == a.seq]
     print("%d chapters, %d own-room candidates" % (len(rows), sum(len(r["keys"]) for r in rows)))
     results = []
     t0 = time.time()
@@ -56,31 +67,32 @@ def main():
                             "--seq=%s" % seq, "--museums=%s" % ",".join(r["keys"])],
                            capture_output=True, text=True, cwd=str(ROOT))
         rep = ROOT / ("doc/reports/museum_match_%s.json" % seq)
-        best, champ = None, None
+        # the report's real shape: museum_rows (candidates) + bred_baseline
+        best, champ, scored = None, None, 0
+        shelf = json.loads(SHELF.read_text(encoding="utf-8"))["patterns"]
         try:
             d = json.loads(rep.read_text(encoding="utf-8"))
-            rowset = d if isinstance(d, list) else (d.get("results") or d.get("rows") or [])
-            for e in rowset:
-                if not isinstance(e, dict):
+            for e in d.get("museum_rows", []):
+                if e.get("status") != "ok" or e.get("score") is None:
                     continue
-                nm, sc = str(e.get("name") or e.get("key") or ""), e.get("score")
-                if sc is None:
-                    continue
-                if nm in r["keys"] and (best is None or sc > best[1]):
-                    best = (nm, sc)
-                if e.get("kind") == "bred" and (champ is None or sc > champ[1]):
-                    champ = (nm, sc)
-        except Exception:
-            pass
-        # the tool prints the ranked table; parse it as the durable record
-        table = [l for l in p.stdout.splitlines() if l.strip()[:2].rstrip(".").isdigit()]
+                scored += 1
+                key = next((v for v in e.values() if isinstance(v, str) and v in shelf), "")
+                if best is None or e["score"] > best[1]:
+                    best = (key, e["score"], shelf.get(key, {}).get("source", "?"))
+            for e in d.get("bred_baseline", []):
+                if e.get("status") == "ok" and e.get("score") is not None:
+                    if champ is None or e["score"] > champ[1]:
+                        champ = (e.get("recipe", "?"), e["score"])
+        except Exception as exc:
+            print("    (report unreadable: %s)" % exc)
         results.append({"seq": seq, "phase": r["phase"], "crown": r["crown"],
-                        "candidates": len(r["keys"]), "table": table[:6],
-                        "own_best": best, "bred_champ": champ,
+                        "candidates": len(r["keys"]), "scored": scored,
+                        "best": best, "bred_champ": champ,
                         "secs": round(time.time() - t1, 1), "rc": p.returncode})
-        print("[%2d/%2d] %-24s %2d cand  %5.0fs  %s" %
+        print("[%2d/%2d] %-22s %4d cand %5.0fs  best %-28s %5s  bred %5s" %
               (i, len(rows), seq, len(r["keys"]), time.time() - t1,
-               (table[0].strip() if table else "no table")))
+               (best[0][:28] if best else "-"), ("%.2f" % best[1]) if best else "-",
+               ("%.2f" % champ[1]) if champ else "-"))
         OUT.write_text(json.dumps({"elapsed_s": round(time.time() - t0, 1),
                                    "results": results}, indent=1), encoding="utf-8")
     print("\ndone in %.0f min -> %s" % ((time.time() - t0) / 60.0, OUT))

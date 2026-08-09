@@ -1,280 +1,437 @@
 {
- "_readme": "Every chapter played against its OWN room. The board that ruled the eight crowns tested 24 chapters against 5 museums and could not test anything else: the field gate required a `museum` field, so a chapter never met the room its sequence already uses. Same cast, same pathfinder gate, same judge as every previous match. A BASELINE, not a verdict \u2014 the register rulings still bind.",
- "ruled_crowns_revisit": [
-  "forces",
-  "lsystems",
-  "foundationscrisis",
-  "postfoundationscrisis"
- ],
- "summary": {
-  "chapters": 24,
-  "own_beats_bred": 10,
-  "own_beats_crown": 4
- },
+ "elapsed_s": 2636.7,
  "results": [
   {
    "seq": "primitives",
    "phase": "F_order",
-   "own_best": 5.5,
-   "own_key": "2ddf163738",
-   "bred_champ": 7.0,
    "crown": "sainsbury-false-perspective-enfilade",
-   "crown_score": 7.0,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "mengoni-glazed-thoroughfare",
+    8.0,
+    "museum"
+   ],
+   "bred_champ": [
+    "derive",
+    7.0
+   ],
+   "secs": 121.4,
+   "rc": 0
   },
   {
    "seq": "transformation",
    "phase": "F_order",
-   "own_best": 7.5,
-   "own_key": "8a2f421de2",
-   "bred_champ": 6.61,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": true,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "8a2f421de2",
+    7.5,
+    "spine-segment"
+   ],
+   "bred_champ": [
+    "wfc",
+    6.61
+   ],
+   "secs": 115.7,
+   "rc": 0
   },
   {
    "seq": "symmetry",
    "phase": "F_order",
-   "own_best": 8.0,
-   "own_key": "2ab5924074",
-   "bred_champ": 7.56,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": true,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "2ab5924074",
+    8.0,
+    "spine-segment"
+   ],
+   "bred_champ": [
+    "halls",
+    7.56
+   ],
+   "secs": 113.4,
+   "rc": 0
   },
   {
    "seq": "array_tutorial",
    "phase": "F_order",
-   "own_best": 7.5,
-   "own_key": "a8145c5877",
-   "bred_champ": 5.95,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": true,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "beat:ada_all_authored-15",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "antrooms",
+    5.95
+   ],
+   "secs": 114.7,
+   "rc": 0
   },
   {
    "seq": "color",
    "phase": "F_order",
-   "own_best": 6.0,
-   "own_key": "cc3fa12353",
-   "bred_champ": 8.0,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "bay:kanazawa-room-matrix#b1",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "wfc",
+    8.0
+   ],
+   "secs": 112.9,
+   "rc": 0
   },
   {
    "seq": "change",
    "phase": "F_order",
-   "own_best": 6.0,
-   "own_key": "677884b5c6",
-   "bred_champ": 6.83,
    "crown": "grande-galerie-axial",
-   "crown_score": 7.73,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "grande-galerie-axial",
+    7.73,
+    "museum"
+   ],
+   "bred_champ": [
+    "rooms",
+    6.83
+   ],
+   "secs": 110.4,
+   "rc": 0
   },
   {
    "seq": "forces",
    "phase": "oscillation",
-   "own_best": 6.5,
-   "own_key": "6ad3554e4f",
-   "bred_champ": 6.13,
    "crown": "sainsbury-false-perspective-enfilade",
-   "crown_score": 6.33,
-   "beats_bred": true,
-   "beats_crown": true
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "fa5c7d147d",
+    8.0,
+    "spine-segment"
+   ],
+   "bred_champ": [
+    "erosion",
+    6.13
+   ],
+   "secs": 114.8,
+   "rc": 0
   },
   {
    "seq": "formfinding",
    "phase": "F_order",
-   "own_best": 6.5,
-   "own_key": "2147e6b14f",
-   "bred_champ": 7.73,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "bay:kanazawa-room-matrix#b1",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "wfc",
+    7.73
+   ],
+   "secs": 117.4,
+   "rc": 0
   },
   {
    "seq": "wavefunctions",
    "phase": "oscillation",
-   "own_best": 7.5,
-   "own_key": "d6680ccdab",
-   "bred_champ": 6.5,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": true,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "bay:soane-cabinet-vista#b0",
+    7.67,
+    "authored"
+   ],
+   "bred_champ": [
+    "wfc",
+    6.5
+   ],
+   "secs": 116.2,
+   "rc": 0
   },
   {
    "seq": "randomness",
    "phase": "E_entropy",
-   "own_best": 7.67,
-   "own_key": "6fa6e67c26",
-   "bred_champ": 6.63,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": true,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "beat:ada_all_authored-15",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "halls",
+    6.63
+   ],
+   "secs": 107.1,
+   "rc": 0
   },
   {
    "seq": "noise",
    "phase": "E_entropy",
-   "own_best": 7.5,
-   "own_key": "4436d880a7",
-   "bred_champ": 7.5,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "lattice:pmg-13",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "erosion",
+    7.5
+   ],
+   "secs": 106.1,
+   "rc": 0
   },
   {
    "seq": "cellularautomata",
    "phase": "lambda_edge",
-   "own_best": 5.65,
-   "own_key": "9678548ead",
-   "bred_champ": 7.0,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "bay:labrouste-stack-hall#b2",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "antrooms",
+    7.0
+   ],
+   "secs": 111.8,
+   "rc": 0
   },
   {
    "seq": "fractals",
    "phase": "lambda_edge",
-   "own_best": 7.5,
-   "own_key": "cb09abd425",
-   "bred_champ": 7.33,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": true,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "beat:ada_all_authored-15",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "halls",
+    7.33
+   ],
+   "secs": 114.3,
+   "rc": 0
   },
   {
    "seq": "lsystems",
    "phase": "lambda_edge",
-   "own_best": 6.79,
-   "own_key": "c08d7e53b6",
-   "bred_champ": 6.1,
    "crown": "grande-galerie-axial",
-   "crown_score": 6.7,
-   "beats_bred": true,
-   "beats_crown": true
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "lattice:pmg-13",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "antrooms",
+    6.1
+   ],
+   "secs": 107.9,
+   "rc": 0
   },
   {
    "seq": "proceduralgeneration",
    "phase": "lambda_edge",
-   "own_best": 6.5,
-   "own_key": "bc7799657d",
-   "bred_champ": 6.55,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "lattice:cmm-13",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "rooms",
+    6.55
+   ],
+   "secs": 105.6,
+   "rc": 0
   },
   {
    "seq": "softbodies",
    "phase": "integration",
-   "own_best": 5.5,
-   "own_key": "181c580e03",
-   "bred_champ": 6.21,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "lattice:pm-17",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "wfc",
+    6.21
+   ],
+   "secs": 109.0,
+   "rc": 0
   },
   {
    "seq": "isosurfaces",
    "phase": "F_order",
-   "own_best": 6.0,
-   "own_key": "bbd087ecef",
-   "bred_champ": 6.3,
    "crown": "castelvecchio-pinch-v2",
-   "crown_score": 8.0,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "soane-cabinet-vista",
+    8.0,
+    "museum"
+   ],
+   "bred_champ": [
+    "physarum",
+    6.3
+   ],
+   "secs": 106.0,
+   "rc": 0
   },
   {
    "seq": "boolean_surfaces",
    "phase": "F_order",
-   "own_best": 5.0,
-   "own_key": "650d8bbccc",
-   "bred_champ": 7.27,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "thoronet-circumambulation-void",
+    7.6,
+    "museum"
+   ],
+   "bred_champ": [
+    "halls",
+    7.27
+   ],
+   "secs": 103.5,
+   "rc": 0
   },
   {
    "seq": "swarmintelligence",
    "phase": "lambda_edge",
-   "own_best": 5.0,
-   "own_key": "ffc03cc4f6",
-   "bred_champ": 7.3,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "chamber",
+    8.0,
+    "spine"
+   ],
+   "bred_champ": [
+    "physarum",
+    7.3
+   ],
+   "secs": 106.5,
+   "rc": 0
   },
   {
    "seq": "machinelearning",
    "phase": "integration",
-   "own_best": 5.5,
-   "own_key": "8f23780ec9",
-   "bred_champ": 7.33,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "mengoni-glazed-thoroughfare",
+    7.6,
+    "museum"
+   ],
+   "bred_champ": [
+    "halls",
+    7.33
+   ],
+   "secs": 105.0,
+   "rc": 0
   },
   {
    "seq": "graphtheory",
    "phase": "relation",
-   "own_best": 5.67,
-   "own_key": "4d9efcb9a4",
-   "bred_champ": 6.08,
    "crown": "grande-galerie-axial",
-   "crown_score": 6.5,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "beat:ada_all_authored-15",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "flock",
+    6.08
+   ],
+   "secs": 104.3,
+   "rc": 0
   },
   {
    "seq": "foundationscrisis",
    "phase": "synthesis",
-   "own_best": 7.5,
-   "own_key": "27ef135731",
-   "bred_champ": 6.46,
    "crown": "grande-galerie-axial",
-   "crown_score": 6.96,
-   "beats_bred": true,
-   "beats_crown": true
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "soane-cabinet-vista",
+    8.0,
+    "museum"
+   ],
+   "bred_champ": [
+    "derive",
+    6.46
+   ],
+   "secs": 102.9,
+   "rc": 0
   },
   {
    "seq": "qfeplaboratory",
    "phase": "synthesis",
-   "own_best": 5.79,
-   "own_key": "1efca39e29",
-   "bred_champ": 5.89,
    "crown": "",
-   "crown_score": null,
-   "beats_bred": false,
-   "beats_crown": false
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "motif-room",
+    7.67,
+    "spine"
+   ],
+   "bred_champ": [
+    "wfc",
+    5.89
+   ],
+   "secs": 104.5,
+   "rc": 0
   },
   {
    "seq": "postfoundationscrisis",
    "phase": "synthesis",
-   "own_best": 7.6,
-   "own_key": "960a357a67",
-   "bred_champ": 5.9,
    "crown": "uffizi-spine-enfilade",
-   "crown_score": 6.23,
-   "beats_bred": true,
-   "beats_crown": true
+   "candidates": 310,
+   "scored": 303,
+   "best": [
+    "lattice:cmm-13",
+    8.0,
+    "authored"
+   ],
+   "bred_champ": [
+    "erosion",
+    5.9
+   ],
+   "secs": 105.1,
+   "rc": 0
   }
  ]
 }

@@ -329,7 +329,12 @@ def main() -> int:
             continue
         # full key in the name: an edited tile (kanazawa-matrix-vista) must not
         # clobber its ancestor's trial (Trial_kanazawa_<seq>)
-        name = f"Trial_{mk.replace('-', '_')}_{args.seq}"
+        # A KEY IS NOT A FILENAME. 148 of the shelf's 310 stampable plans are
+        # museum BAYS, keyed "bay:altes-rotunda-hub#b2" — os.makedirs cannot
+        # take ':' or '#' on Windows, so the run died partway through the field
+        # and reported a board built from whatever it reached first.
+        safe = "".join(c if (c.isalnum() or c == "_") else "_" for c in mk.replace("-", "_"))
+        name = f"Trial_{safe}_{args.seq}"
         shutil.rmtree(os.path.join(MAPS_DIR, name), ignore_errors=True)
         deal = stamp(mk, pat, champ, name)
         rc, pf = run([sys.executable, "tools/map_pathfinder.py", "check", name])
