@@ -31,6 +31,7 @@ SHELF = ROOT / "commons/data/template_shelf.json"
 SOURCES = [
     ("commons/data/template_patterns.json", None),      # source decided per entry
     ("commons/data/spine_typologies.json", "spine"),
+    ("commons/data/spine_segments.json", "spine-segment"),
 ]
 
 

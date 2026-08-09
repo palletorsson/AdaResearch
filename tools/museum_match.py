@@ -89,15 +89,31 @@ def stamp(museum_key: str, pat: dict, champ: str, name: str) -> dict:
                 slots.append((SLOT_CELLS[c], y, x))
 
     # spawn at the entry gap, exit token (champion's) at the exit gap
-    entry = [x for x in range(w) if grid[0][x] in ("1", "1s")]
-    exit_ = [x for x in range(w) if grid[h - 1][x] in ("1", "1s")]
+    # THE ENTRY IS THE FIRST WALKABLE ROW, not row 0. A museum plan is enclosed
+    # and its gap sits in the top wall; a spine plan has no walls at all (269 of
+    # 269 carry none) and often opens with a void border, so row 0 was empty and
+    # this indexed off the end. Scan inward from each end for the first row that
+    # has floor in it.
+    WALK = ("1", "1s", "2", "2s", "3s")
+
+    def _first(rows):
+        for y in rows:
+            xs = [x for x in range(w) if grid[y][x] in WALK]
+            if xs:
+                return y, xs
+        return 0, []
+
+    entry_y, entry = _first(range(h))
+    exit_y, exit_ = _first(range(h - 1, -1, -1))
+    if not entry or not exit_:
+        raise ValueError("no walkable row: %s has nothing to enter" % museum_key)
     exit_tok = "t"
     for row in src["layers"]["utilities"]:
         for c in row:
             if str(c).strip().startswith("t"):
                 exit_tok = str(c).strip()
-    utils[0][entry[len(entry) // 2]] = "s"
-    utils[h - 1][exit_[len(exit_) // 2]] = exit_tok
+    utils[entry_y][entry[len(entry) // 2]] = "s"
+    utils[exit_y][exit_[len(exit_) // 2]] = exit_tok
 
     # deal: hero token to the 3s, the rest in champion order into walk-order
     # slots, overflow hung along walls
@@ -282,7 +298,17 @@ def main() -> int:
     if args.tile:
         return judge_tile(args.tile, args.seq)
 
+    # THE SHELF FIRST. The field used to be whatever template_patterns.json held,
+    # which meant a chapter competed against 5 museums and never against its own
+    # room. commons/data/template_shelf.json joins the pattern editor's tiles,
+    # the extracted museums and the spine's own segments in one schema; falling
+    # back keeps this tool working if the shelf has not been built.
+    SHELF = os.path.join(ROOT, "commons", "data", "template_shelf.json")
     pats = json.loads(open(PATTERNS, encoding="utf-8").read())["patterns"]
+    if os.path.exists(SHELF):
+        shelf = json.loads(open(SHELF, encoding="utf-8").read())["patterns"]
+        for k, v in shelf.items():
+            pats.setdefault(k, v)
     champ, baseline = champion_of(args.seq)
     print(f"cast source: {champ} (bred champion, score {baseline[0]['score']})")
 
@@ -290,8 +316,16 @@ def main() -> int:
     for mk in args.museums.split(","):
         mk = mk.strip()
         pat = pats.get(mk)
-        if not (isinstance(pat, dict) and pat.get("museum")):
-            print(f"{mk:40} NOT A MUSEUM TEMPLATE")
+        # A CANDIDATE IS A STAMPABLE PLAN, not a museum. The gate used to require
+        # a `museum` field, so a chapter could never be played against its own
+        # room — the control was missing from every board this tool has ever
+        # produced. Anything on the shelf with a tile may enter; where it came
+        # from is recorded in the result, not used to bar it.
+        if not (isinstance(pat, dict) and pat.get("tile")):
+            print(f"{mk:40} NOT ON THE SHELF (no tile)")
+            continue
+        if pat.get("mode") == "repeat":
+            print(f"{mk:40} SKIPPED (a repeating motif, not a whole plan)")
             continue
         # full key in the name: an edited tile (kanazawa-matrix-vista) must not
         # clobber its ancestor's trial (Trial_kanazawa_<seq>)
