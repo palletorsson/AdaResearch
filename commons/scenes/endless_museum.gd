@@ -102,6 +102,10 @@ var _first_key: String = ""       # --em-first=<key> rotates the dealing order
 # compete against its own room, so "is a museum better for softbodies?" was asked
 # without the control on the board.
 var _source: String = "museum"
+# --em-order-file=<res://path> deals from an alternative order in the same
+# schema as spine_artifact_order.json. Written for the kin experiment: the
+# curriculum order with each artifact's closest relatives dealt beside it.
+var _order_file: String = ""
 var _banner_pos: Vector3 = Vector3.ZERO   # where the first segment hung its sign
 var _player: CharacterBody3D
 var _cam: Camera3D
@@ -149,6 +153,8 @@ func _parse_args() -> void:
 	for a in args:
 		if a.begins_with("--em-seed="):
 			_seed = int(a.substr(10))
+		elif a.begins_with("--em-order-file="):
+			_order_file = a.substr(17)
 		elif a.begins_with("--em-source="):
 			_source = a.substr(12)
 		elif a.begins_with("--em-order="):
@@ -435,7 +441,7 @@ func _load_policy_pool(live: Dictionary, policy: String) -> bool:
 ## only artifacts the registry says are alive, in manifest order — so the first
 ## hero slot of the first museum receives the first artifact of the spine.
 func _load_spine_pool(live: Dictionary) -> bool:
-	var f := FileAccess.open(SPINE_ORDER, FileAccess.READ)
+	var f := FileAccess.open(_order_file if _order_file != "" else SPINE_ORDER, FileAccess.READ)
 	if f == null:
 		push_warning("endless_museum: --em-order=spine but %s is missing (run tools/build_spine_artifact_order.py); falling back to shuffle" % SPINE_ORDER)
 		return false
