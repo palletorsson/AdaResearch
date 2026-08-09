@@ -1,0 +1,5320 @@
+{
+ "_readme": "Where a map's DESCRIPTIONS and its CODE disagree. `claimed_not_run` = the prose names a concept no artifact's script executes. `run_not_claimed` = the code runs something no description mentions. The four ubiquitous code terms (array, point, loop, colour \u2014 each >90% of scripts) are excluded: they would drown the join. Maps where less than half the cast had a readable script are skipped, because absence of code is not absence of the concept.",
+ "maps": 240,
+ "rows": [
+  {
+   "map": "Point_One",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "grammar",
+    "graph",
+    "isosurface",
+    "line",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "boolean",
+    "cube",
+    "force",
+    "laser",
+    "primitive"
+   ],
+   "coverage": 0.89
+  },
+  {
+   "map": "Point_Lines",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [
+    "automata",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "fractal",
+    "grammar",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "boolean",
+    "cube",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.9
+  },
+  {
+   "map": "Point_Trace",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.6
+  },
+  {
+   "map": "Point_Line_Grid",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "grammar",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "Point_Triangle_Context",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [
+    "change",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "isosurface",
+    "laser",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.88
+  },
+  {
+   "map": "Primitives_Polythedra",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [
+    "plane",
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.89
+  },
+  {
+   "map": "Point_Animatedcube",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "Chamber_Primitives",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [
+    "change",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "isosurface",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "Primitives_Ignorance",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [
+    "line",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "grammar",
+    "graph",
+    "laser",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "noise",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.96
+  },
+  {
+   "map": "Primitives_Portals",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [
+    "limit",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "Primitives_Melencolia",
+   "sequence": "primitives",
+   "seq": 1,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "fractal",
+    "grammar",
+    "graph",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "laser",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.91
+  },
+  {
+   "map": "Trans_Introduction",
+   "sequence": "transformation",
+   "seq": 2,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "graph",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.86
+  },
+  {
+   "map": "Trans_Translation",
+   "sequence": "transformation",
+   "seq": 2,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.78
+  },
+  {
+   "map": "Trans_AxisDecomposition",
+   "sequence": "transformation",
+   "seq": 2,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise"
+   ],
+   "both": [
+    "cube",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.88
+  },
+  {
+   "map": "Trans_Rotation",
+   "sequence": "transformation",
+   "seq": 2,
+   "claimed_not_run": [
+    "change",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "isosurface",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "Trans_RotationSpectacle",
+   "sequence": "transformation",
+   "seq": 2,
+   "claimed_not_run": [
+    "boolean",
+    "line",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Trans_Scale",
+   "sequence": "transformation",
+   "seq": 2,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.71
+  },
+  {
+   "map": "Chamber_Transformation",
+   "sequence": "transformation",
+   "seq": 2,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Symmetry_Motif",
+   "sequence": "symmetry",
+   "seq": 3,
+   "claimed_not_run": [
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Symmetry_Translation",
+   "sequence": "symmetry",
+   "seq": 3,
+   "claimed_not_run": [
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "plane",
+    "primitive",
+    "wave"
+   ],
+   "both": [
+    "line",
+    "randomness",
+    "softbody",
+    "transform"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "Symmetry_Mirror_Rotor",
+   "sequence": "symmetry",
+   "seq": 3,
+   "claimed_not_run": [
+    "grammar",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Symmetry_Group",
+   "sequence": "symmetry",
+   "seq": 3,
+   "claimed_not_run": [
+    "grammar",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "plane",
+    "transform"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "Chamber_Symmetry",
+   "sequence": "symmetry",
+   "seq": 3,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Symmetry_Seventeen",
+   "sequence": "symmetry",
+   "seq": 3,
+   "claimed_not_run": [
+    "limit",
+    "primitive",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "plane",
+    "randomness",
+    "transform"
+   ],
+   "both": [
+    "cube"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Tutorial_Single",
+   "sequence": "array_tutorial",
+   "seq": 4,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "Tutorial_Pattern",
+   "sequence": "array_tutorial",
+   "seq": 4,
+   "claimed_not_run": [
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.6
+  },
+  {
+   "map": "Array_Patterns",
+   "sequence": "array_tutorial",
+   "seq": 4,
+   "claimed_not_run": [
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "automata",
+    "collision",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "grammar",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.69
+  },
+  {
+   "map": "Tutorial_Row",
+   "sequence": "array_tutorial",
+   "seq": 4,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Tutorial_2D_Build",
+   "sequence": "array_tutorial",
+   "seq": 4,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.86
+  },
+  {
+   "map": "Tutorial_3D",
+   "sequence": "array_tutorial",
+   "seq": 4,
+   "claimed_not_run": [
+    "line",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "graph",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_Arrays",
+   "sequence": "array_tutorial",
+   "seq": 4,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "Pattern_Foundry",
+   "sequence": "color",
+   "seq": 5,
+   "claimed_not_run": [
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "plane",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "laser",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Color_Nails",
+   "sequence": "color",
+   "seq": 5,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.86
+  },
+  {
+   "map": "Color_Grid_Pallet",
+   "sequence": "color",
+   "seq": 5,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Color_Rainbow",
+   "sequence": "color",
+   "seq": 5,
+   "claimed_not_run": [
+    "change",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "isosurface",
+    "laser",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.86
+  },
+  {
+   "map": "Color_Pillar",
+   "sequence": "color",
+   "seq": 5,
+   "claimed_not_run": [
+    "line",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.86
+  },
+  {
+   "map": "Chamber_Color",
+   "sequence": "color",
+   "seq": 5,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Color_Paint",
+   "sequence": "color",
+   "seq": 5,
+   "claimed_not_run": [
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Color_Walls",
+   "sequence": "color",
+   "seq": 5,
+   "claimed_not_run": [
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "boolean",
+    "cube",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.86
+  },
+  {
+   "map": "Change_Intro",
+   "sequence": "change",
+   "seq": 6,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "line",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "Change_Velocity",
+   "sequence": "change",
+   "seq": 6,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "grammar",
+    "graph",
+    "wave"
+   ],
+   "both": [
+    "line",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Change_Slope_Surface",
+   "sequence": "change",
+   "seq": 6,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Accumulation_Area",
+   "sequence": "change",
+   "seq": 6,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Accumulation_Riemann",
+   "sequence": "change",
+   "seq": 6,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "line",
+    "plane",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "Flow_Field",
+   "sequence": "change",
+   "seq": 6,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "plane",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Flow_Particle_Pulse",
+   "sequence": "change",
+   "seq": 6,
+   "claimed_not_run": [
+    "plane",
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "Change_Reconciliation",
+   "sequence": "change",
+   "seq": 6,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Sky_Climb",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "formfinding",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "learning",
+    "line",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "collision",
+    "force",
+    "primitive"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "Void_Crossing",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "line"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "graph",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Reformed_Instruments",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "automata",
+    "limit"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "graph",
+    "primitive",
+    "wave"
+   ],
+   "both": [
+    "fractal",
+    "grammar",
+    "line",
+    "plane",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Force_Preview",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "fractal",
+    "grammar",
+    "graph",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "collision",
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.83
+  },
+  {
+   "map": "Console_Test",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "fractal"
+   ],
+   "run_not_claimed": [
+    "graph",
+    "wave"
+   ],
+   "both": [
+    "boolean",
+    "cube",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.86
+  },
+  {
+   "map": "Force_Props_Sandbox",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "fractal",
+    "grammar",
+    "graph",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "boolean",
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Vectors_Act1_WhatAVectorIs",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "force",
+    "laser"
+   ],
+   "run_not_claimed": [
+    "graph",
+    "line",
+    "primitive",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "VFM_01_Foundations",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "laser"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "grammar",
+    "primitive",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "graph",
+    "line",
+    "plane",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.89
+  },
+  {
+   "map": "VectorOperations",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "fractal",
+    "grammar",
+    "graph",
+    "primitive",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "collision",
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "plane",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "Vectors_Act2_VectorArithmetic",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "grammar",
+    "line",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "laser",
+    "plane",
+    "transform"
+   ],
+   "coverage": 0.7
+  },
+  {
+   "map": "VFM_02_Operations",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "collision"
+   ],
+   "run_not_claimed": [
+    "primitive",
+    "randomness"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "plane",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "VectorAdvanced",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "softbody",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "grammar",
+    "graph",
+    "isosurface",
+    "laser",
+    "primitive",
+    "wave"
+   ],
+   "both": [
+    "collision",
+    "cube",
+    "force",
+    "line",
+    "plane",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.85
+  },
+  {
+   "map": "Vectors_Act3_FieldsAndMotion",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "fractal",
+    "grammar",
+    "graph",
+    "plane",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "line",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "VFM_03_Motion",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "laser",
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "graph",
+    "noise"
+   ],
+   "both": [
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Vectors_Act4a_KineticForces",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "plane",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "line",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "collision",
+    "force",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Vectors_Act4b_Oscillation",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "collision",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "fractal",
+    "grammar",
+    "learning",
+    "primitive",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "force",
+    "laser",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Vectors_Act5_ForceAsPlace",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "line"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "graph",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ForcesFoundations",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "grammar",
+    "graph",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "collision",
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "plane",
+    "softbody",
+    "transform"
+   ],
+   "coverage": 0.9
+  },
+  {
+   "map": "Chamber_Forces",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "ForcesComposition",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "graph",
+    "noise",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "collision",
+    "force",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "VectorApplied",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "automata",
+    "change"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "grammar",
+    "graph",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "laser",
+    "line",
+    "plane",
+    "transform"
+   ],
+   "coverage": 0.89
+  },
+  {
+   "map": "VFM_04_Fields",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "grammar",
+    "graph",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "line",
+    "noise",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "VFM_05_Launch",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "automata",
+    "change",
+    "swarm",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "laser",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "collision",
+    "force",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ForcesSystems",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "automata",
+    "change"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "grammar",
+    "graph",
+    "noise",
+    "softbody"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.87
+  },
+  {
+   "map": "VFM_06_Springs",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "graph"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "learning",
+    "primitive",
+    "randomness"
+   ],
+   "both": [
+    "collision",
+    "force",
+    "laser",
+    "line",
+    "softbody",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ForcesChaos",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "automata",
+    "formfinding",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "graph",
+    "laser",
+    "noise",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "grammar",
+    "line",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.85
+  },
+  {
+   "map": "VFM_07_Gravity",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "change",
+    "formfinding",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "grammar",
+    "graph",
+    "line",
+    "softbody"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "VFM_08_Arena",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "automata",
+    "change"
+   ],
+   "run_not_claimed": [
+    "fractal",
+    "laser",
+    "randomness",
+    "transform"
+   ],
+   "both": [
+    "collision",
+    "cube",
+    "force",
+    "line",
+    "plane",
+    "primitive",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ForcesArena",
+   "sequence": "forces",
+   "seq": 7,
+   "claimed_not_run": [
+    "boolean",
+    "change",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "graph",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "laser",
+    "line",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.9
+  },
+  {
+   "map": "FormFinding_Descent",
+   "sequence": "formfinding",
+   "seq": 8,
+   "claimed_not_run": [
+    "formfinding"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "plane",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "FormFinding_Catenary",
+   "sequence": "formfinding",
+   "seq": 8,
+   "claimed_not_run": [
+    "change",
+    "formfinding"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "fractal",
+    "graph",
+    "laser",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "line",
+    "plane",
+    "softbody",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "FormFinding_Relaxation",
+   "sequence": "formfinding",
+   "seq": 8,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "primitive",
+    "softbody",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "FormFinding_Equilibrium",
+   "sequence": "formfinding",
+   "seq": 8,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "graph",
+    "laser",
+    "learning",
+    "line",
+    "plane",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "fractal",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "FormFinding_Annealing",
+   "sequence": "formfinding",
+   "seq": 8,
+   "claimed_not_run": [
+    "change",
+    "formfinding"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "primitive",
+    "wave"
+   ],
+   "both": [
+    "plane",
+    "randomness",
+    "softbody",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_FormFinding",
+   "sequence": "formfinding",
+   "seq": 8,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "FormFinding_Forge",
+   "sequence": "formfinding",
+   "seq": 8,
+   "claimed_not_run": [
+    "formfinding"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "softbody",
+    "transform"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "WaveFunctions_Intro",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "learning",
+    "noise",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "collision",
+    "cube",
+    "force",
+    "line",
+    "plane",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "WaveFunctions_Pendulum",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "graph",
+    "procedural"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "grammar",
+    "laser",
+    "noise",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "force",
+    "line",
+    "plane",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "WaveFunctions_Unit_Circle",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "WaveFunctions_Sine_Space",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "grammar",
+    "laser",
+    "line",
+    "noise",
+    "randomness"
+   ],
+   "both": [
+    "force",
+    "plane",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "plane",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "WaveFunctions_Effect_Sound",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "change",
+    "formfinding",
+    "plane",
+    "procedural",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "fractal",
+    "grammar",
+    "isosurface",
+    "laser",
+    "learning",
+    "noise",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "graph",
+    "line",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.88
+  },
+  {
+   "map": "Wavefunctions_Bernini",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "plane",
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise"
+   ],
+   "both": [
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "WaveFunctions_John_Cage",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "softbody"
+   ],
+   "both": [
+    "line",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "WaveFunctions_AirMusic",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "formfinding",
+    "graph",
+    "plane",
+    "procedural"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "softbody"
+   ],
+   "both": [
+    "line",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Wavefunctions_Sky_Stairs",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "noise",
+    "randomness"
+   ],
+   "both": [
+    "cube",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "WaveFunctions_TrigWalkingPath",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise"
+   ],
+   "both": [
+    "line",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_Waves",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "WaveFunctions_Synthesis_Lab",
+   "sequence": "wavefunctions",
+   "seq": 9,
+   "claimed_not_run": [
+    "automata",
+    "formfinding",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "graph",
+    "softbody"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "line",
+    "noise",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.96
+  },
+  {
+   "map": "Random_Entropy",
+   "sequence": "randomness",
+   "seq": 10,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "fractal",
+    "grammar",
+    "graph",
+    "line",
+    "noise",
+    "softbody"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "laser",
+    "plane",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.62
+  },
+  {
+   "map": "Random_Remove",
+   "sequence": "randomness",
+   "seq": 10,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "Random_Cubes",
+   "sequence": "randomness",
+   "seq": 10,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "grammar",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "Random_Rotate_Random_XYZ",
+   "sequence": "randomness",
+   "seq": 10,
+   "claimed_not_run": [
+    "change",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.6
+  },
+  {
+   "map": "Random_Walk",
+   "sequence": "randomness",
+   "seq": 10,
+   "claimed_not_run": [
+    "change",
+    "plane",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "grammar",
+    "graph",
+    "isosurface",
+    "laser",
+    "noise",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "force",
+    "line",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Chamber_Random",
+   "sequence": "randomness",
+   "seq": 10,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Random_Mushrooms",
+   "sequence": "randomness",
+   "seq": 10,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "wave"
+   ],
+   "both": [
+    "noise",
+    "plane",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "Random_Space_Geometry",
+   "sequence": "randomness",
+   "seq": 10,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "wave"
+   ],
+   "both": [
+    "line",
+    "noise",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Random_Space",
+   "sequence": "randomness",
+   "seq": 10,
+   "claimed_not_run": [
+    "automata",
+    "fractal"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "grammar",
+    "graph"
+   ],
+   "both": [
+    "laser",
+    "noise",
+    "plane",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Noise_Columns",
+   "sequence": "noise",
+   "seq": 11,
+   "claimed_not_run": [
+    "graph",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "wave"
+   ],
+   "both": [
+    "noise",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "Noise_Voxel",
+   "sequence": "noise",
+   "seq": 11,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "noise",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "Noise_6_Wall",
+   "sequence": "noise",
+   "seq": 11,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "laser",
+    "wave"
+   ],
+   "both": [
+    "noise",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Noise_Inside_Noise",
+   "sequence": "noise",
+   "seq": 11,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "laser",
+    "wave"
+   ],
+   "both": [
+    "noise",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Noise_Space_10",
+   "sequence": "noise",
+   "seq": 11,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "laser",
+    "wave"
+   ],
+   "both": [
+    "noise",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_Noise",
+   "sequence": "noise",
+   "seq": 11,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Lab_Path",
+   "sequence": "noise",
+   "seq": 11,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "CA_ElementaryRules",
+   "sequence": "cellularautomata",
+   "seq": 12,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "CA_BeyondBinary",
+   "sequence": "cellularautomata",
+   "seq": 12,
+   "claimed_not_run": [
+    "automata",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody"
+   ],
+   "both": [
+    "plane",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "CA_AgentsCircuits",
+   "sequence": "cellularautomata",
+   "seq": 12,
+   "claimed_not_run": [
+    "automata",
+    "fractal",
+    "line",
+    "noise"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "graph",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 0.5
+  },
+  {
+   "map": "Chamber_CA",
+   "sequence": "cellularautomata",
+   "seq": 12,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Fractal_Recursion",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "fractal",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.9
+  },
+  {
+   "map": "Fractal_RecursiveTrees",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.9
+  },
+  {
+   "map": "Fractal_CantorSet",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "automata",
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "noise",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "fractal",
+    "laser",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Fractal_KochSierpinski",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.89
+  },
+  {
+   "map": "Fractal_MengerSponge",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [
+    "change",
+    "plane",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "force",
+    "grammar",
+    "isosurface",
+    "laser",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "fractal",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Fractal_GoldenSpiral",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "fractal",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.6
+  },
+  {
+   "map": "Fractal_JuliaSet",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [
+    "fractal"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Fractal_MandelbrotSet",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [
+    "fractal",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "Chamber_Fractals",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Fractal_Synthesis",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "line",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "fractal",
+    "laser",
+    "noise",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Fractal_CrossSequence",
+   "sequence": "fractals",
+   "seq": 13,
+   "claimed_not_run": [
+    "automata",
+    "graph"
+   ],
+   "run_not_claimed": [
+    "force",
+    "laser",
+    "line",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "fractal",
+    "grammar",
+    "plane",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.6
+  },
+  {
+   "map": "LSystems_Grammar_Lab",
+   "sequence": "lsystems",
+   "seq": 14,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "graph",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "fractal",
+    "grammar",
+    "plane",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "LSystems_Growth",
+   "sequence": "lsystems",
+   "seq": 14,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "fractal",
+    "line",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "both": [
+    "grammar"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "LSystems_Grammars_And_Curves",
+   "sequence": "lsystems",
+   "seq": 14,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "fractal",
+    "line",
+    "plane",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "grammar",
+    "graph"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "LSystems_Architecture",
+   "sequence": "lsystems",
+   "seq": 14,
+   "claimed_not_run": [
+    "change",
+    "plane",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "force",
+    "isosurface",
+    "laser",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "grammar",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "LSystems_Competition",
+   "sequence": "lsystems",
+   "seq": 14,
+   "claimed_not_run": [
+    "plane",
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "laser",
+    "line",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "grammar",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "LSystems_Living",
+   "sequence": "lsystems",
+   "seq": 14,
+   "claimed_not_run": [
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "learning",
+    "line",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "grammar"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_LSystems",
+   "sequence": "lsystems",
+   "seq": 14,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Assemblage_Same_Desire",
+   "sequence": "lsystems",
+   "seq": 14,
+   "claimed_not_run": [
+    "change",
+    "limit",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "laser",
+    "plane"
+   ],
+   "both": [
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "coverage": 0.71
+  },
+  {
+   "map": "PG_Genetic_Evolution",
+   "sequence": "proceduralgeneration",
+   "seq": 15,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "randomness",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "PG_Space_Colonization",
+   "sequence": "proceduralgeneration",
+   "seq": 15,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "graph",
+    "line",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "PG_Percolation_Network",
+   "sequence": "proceduralgeneration",
+   "seq": 15,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "noise",
+    "wave"
+   ],
+   "both": [
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "PG_Branching_Growth",
+   "sequence": "proceduralgeneration",
+   "seq": 15,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "boolean",
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "isosurface",
+    "line",
+    "noise",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_ProcGen",
+   "sequence": "proceduralgeneration",
+   "seq": 15,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "PG_Caves_Mazes",
+   "sequence": "proceduralgeneration",
+   "seq": 15,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "automata",
+    "collision",
+    "fractal",
+    "primitive"
+   ],
+   "both": [
+    "cube",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "PG_Sculpted_Forms",
+   "sequence": "proceduralgeneration",
+   "seq": 15,
+   "claimed_not_run": [
+    "automata"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "graph",
+    "noise",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "boolean",
+    "cube",
+    "primitive"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "PG_Mirrored_Patterns",
+   "sequence": "proceduralgeneration",
+   "seq": 15,
+   "claimed_not_run": [
+    "automata",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "boolean",
+    "collision",
+    "force",
+    "grammar",
+    "isosurface",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBodies_Soft_Body_Deformation",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "softbody",
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "SoftBodies_Carusell",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "graph",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "primitive",
+    "softbody",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "SoftBodies_Obsticals",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "graph",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "SoftBodies_Obsticals_Part2",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "graph",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "SoftBodies_Cloth_Physics",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "force"
+   ],
+   "run_not_claimed": [
+    "fractal",
+    "primitive"
+   ],
+   "both": [
+    "softbody"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "line",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 0.67
+  },
+  {
+   "map": "SoftBodies_Affect_Theory_Visualization",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "boolean",
+    "collision",
+    "cube",
+    "force",
+    "noise",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "learning",
+    "plane",
+    "randomness",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "Topology_Entropy_Morphogenesis",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "formfinding",
+    "plane",
+    "wave"
+   ],
+   "run_not_claimed": [
+    "grammar"
+   ],
+   "both": [
+    "cube",
+    "isosurface",
+    "noise",
+    "randomness"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_SoftBodies",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "SoftBody_sb01_cloth_drape_corners",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb02_cloth_drape_top_row",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb03_cloth_flag_sideways",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb04_cloth_tablecloth",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb05_jelly_box_bounce",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb06_jelly_grid_settle",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb07_jelly_grid_tall_stiff",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb08_jelly_grid_floppy",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb_ls01_plant_skeleton",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb_ls02_plant_wind_collapse",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb_ca01_conway_cloth",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb_ca02_life_without_death_cloth",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb_noise01_jelly_crystal",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb_rd01_coral_cloth",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_sb_rd02_stripes_flag",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_gl01_classic_bulb",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_gl02_long_bottle",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_gl03_wide_bowl",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_gl04_lopsided_vase",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_gl05_collapsed_sag",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_gm01_bottle_in_cylinder_mould",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_gm02_vase_in_tapered_mould",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_gm03_box_in_cube_mould",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SoftBody_gm04_pressed_onto_sphere",
+   "sequence": "softbodies",
+   "seq": 16,
+   "claimed_not_run": [
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_Introduction",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "isosurface",
+    "noise",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_LookupTable",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [
+    "noise"
+   ],
+   "run_not_claimed": [
+    "graph",
+    "line",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "isosurface"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_ShapesGallery",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [
+    "cube",
+    "formfinding",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "transform"
+   ],
+   "both": [
+    "isosurface",
+    "primitive"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_TorusGyroid",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [
+    "cube"
+   ],
+   "run_not_claimed": [],
+   "both": [
+    "isosurface",
+    "primitive"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_Sculpting",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "both": [
+    "cube",
+    "isosurface"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_Isosurfaces",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "ISO_FlatTerrain",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [
+    "noise"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "laser",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "isosurface"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_PortalLandscape",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "isosurface",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_Caves",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [
+    "transform"
+   ],
+   "run_not_claimed": [
+    "graph",
+    "learning",
+    "noise",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "isosurface"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_CaveGeneration",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "isosurface",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_AnimatedNoise",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [
+    "cube",
+    "noise",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "wave"
+   ],
+   "both": [
+    "isosurface"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ISO_Metaballs",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [
+    "collision",
+    "line",
+    "plane",
+    "softbody"
+   ],
+   "run_not_claimed": [
+    "noise",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "isosurface",
+    "primitive"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "ISO_ImplicitModeling",
+   "sequence": "isosurfaces",
+   "seq": 17,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "noise",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "isosurface"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Boolean_Union",
+   "sequence": "boolean_surfaces",
+   "seq": 18,
+   "claimed_not_run": [
+    "primitive"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "transform"
+   ],
+   "both": [
+    "boolean"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Boolean_Intersection",
+   "sequence": "boolean_surfaces",
+   "seq": 18,
+   "claimed_not_run": [
+    "primitive"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "transform"
+   ],
+   "both": [
+    "boolean"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Boolean_Difference",
+   "sequence": "boolean_surfaces",
+   "seq": 18,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "transform"
+   ],
+   "both": [
+    "boolean",
+    "cube",
+    "primitive"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Boolean_Compose_Workbench",
+   "sequence": "boolean_surfaces",
+   "seq": 18,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "graph",
+    "transform"
+   ],
+   "both": [
+    "boolean"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_Boolean",
+   "sequence": "boolean_surfaces",
+   "seq": 18,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "Boolean_Architecture_Cavity",
+   "sequence": "boolean_surfaces",
+   "seq": 18,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "boolean"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "SwarmIntelligence_PhysarumColony",
+   "sequence": "swarmintelligence",
+   "seq": 19,
+   "claimed_not_run": [
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "learning",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "SwarmIntelligence_FlowFields",
+   "sequence": "swarmintelligence",
+   "seq": 19,
+   "claimed_not_run": [
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "noise",
+    "randomness"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SwarmIntelligence_Boids_Algorithm",
+   "sequence": "swarmintelligence",
+   "seq": 19,
+   "claimed_not_run": [
+    "automata",
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "learning",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+   "sequence": "swarmintelligence",
+   "seq": 19,
+   "claimed_not_run": [
+    "change",
+    "swarm",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "isosurface",
+    "learning",
+    "line",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "cube"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "SwarmIntelligence_Ant_Colony_Optimization",
+   "sequence": "swarmintelligence",
+   "seq": 19,
+   "claimed_not_run": [
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "grammar",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+   "sequence": "swarmintelligence",
+   "seq": 19,
+   "claimed_not_run": [
+    "noise",
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "automata",
+    "cube",
+    "line",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+   "sequence": "swarmintelligence",
+   "seq": 19,
+   "claimed_not_run": [
+    "swarm"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "ML_Evolution",
+   "sequence": "machinelearning",
+   "seq": 20,
+   "claimed_not_run": [
+    "change",
+    "formfinding",
+    "learning",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "force",
+    "grammar",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ML_Gradient_Landscape",
+   "sequence": "machinelearning",
+   "seq": 20,
+   "claimed_not_run": [
+    "change",
+    "force",
+    "formfinding",
+    "learning",
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "graph",
+    "line",
+    "noise",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "ML_Classification",
+   "sequence": "machinelearning",
+   "seq": 20,
+   "claimed_not_run": [
+    "line"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "grammar",
+    "plane",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "randomness"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ML_Neural_Networks",
+   "sequence": "machinelearning",
+   "seq": 20,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "noise",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "graph",
+    "learning",
+    "line",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "ML_Perception",
+   "sequence": "machinelearning",
+   "seq": 20,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "graph",
+    "learning",
+    "plane",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "ML_Sequence_Memory",
+   "sequence": "machinelearning",
+   "seq": 20,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "learning",
+    "line",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "laser",
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_ML",
+   "sequence": "machinelearning",
+   "seq": 20,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "ML_Generative",
+   "sequence": "machinelearning",
+   "seq": 20,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "ML_Synthesis",
+   "sequence": "machinelearning",
+   "seq": 20,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "GT_Foundations",
+   "sequence": "graphtheory",
+   "seq": 21,
+   "claimed_not_run": [
+    "force"
+   ],
+   "run_not_claimed": [
+    "boolean",
+    "cube",
+    "laser",
+    "learning",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "graph",
+    "line"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "GT_Layout",
+   "sequence": "graphtheory",
+   "seq": 21,
+   "claimed_not_run": [
+    "force",
+    "formfinding"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "graph"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "GT_Pathfinding",
+   "sequence": "graphtheory",
+   "seq": 21,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "force",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "graph"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "GT_Network_Analysis",
+   "sequence": "graphtheory",
+   "seq": 21,
+   "claimed_not_run": [
+    "line"
+   ],
+   "run_not_claimed": [
+    "force",
+    "fractal",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "graph",
+    "randomness"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "GT_Connectivity",
+   "sequence": "graphtheory",
+   "seq": 21,
+   "claimed_not_run": [
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "graph",
+    "line"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_GraphTheory",
+   "sequence": "graphtheory",
+   "seq": 21,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "GT_Spanning_Trees",
+   "sequence": "graphtheory",
+   "seq": 21,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "learning",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "graph",
+    "line"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "GT_Flow",
+   "sequence": "graphtheory",
+   "seq": 21,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "graph",
+    "line",
+    "randomness"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "GT_Matching",
+   "sequence": "graphtheory",
+   "seq": 21,
+   "claimed_not_run": [
+    "line",
+    "symmetry"
+   ],
+   "run_not_claimed": [
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "graph"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Euclid_Parallel",
+   "sequence": "foundationscrisis",
+   "seq": 22,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "plane",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "line",
+    "primitive",
+    "transform"
+   ],
+   "coverage": 0.5
+  },
+  {
+   "map": "NonEuclidean_Spaces",
+   "sequence": "foundationscrisis",
+   "seq": 22,
+   "claimed_not_run": [
+    "line",
+    "randomness"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "learning",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "plane",
+    "primitive"
+   ],
+   "coverage": 0.8
+  },
+  {
+   "map": "Russell_Paradox",
+   "sequence": "foundationscrisis",
+   "seq": 22,
+   "claimed_not_run": [
+    "limit"
+   ],
+   "run_not_claimed": [
+    "fractal",
+    "grammar",
+    "primitive",
+    "transform"
+   ],
+   "both": [
+    "wave"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "Godel_Incompleteness",
+   "sequence": "foundationscrisis",
+   "seq": 22,
+   "claimed_not_run": [
+    "limit"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "graph",
+    "laser",
+    "primitive",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "grammar",
+    "randomness"
+   ],
+   "coverage": 0.78
+  },
+  {
+   "map": "Brouwer_Intuitionism",
+   "sequence": "foundationscrisis",
+   "seq": 22,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "graph",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_Foundations",
+   "sequence": "foundationscrisis",
+   "seq": 22,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "Florensky_Paraconsistent",
+   "sequence": "foundationscrisis",
+   "seq": 22,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "graph",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 0.5
+  },
+  {
+   "map": "QFEP_F_Term",
+   "sequence": "qfeplaboratory",
+   "seq": 23,
+   "claimed_not_run": [
+    "change"
+   ],
+   "run_not_claimed": [
+    "collision",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "line",
+    "noise",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "laser",
+    "plane",
+    "primitive",
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.75
+  },
+  {
+   "map": "QFEP_E_Term",
+   "sequence": "qfeplaboratory",
+   "seq": 23,
+   "claimed_not_run": [
+    "laser"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "grammar",
+    "graph",
+    "primitive",
+    "wave"
+   ],
+   "both": [
+    "randomness",
+    "transform"
+   ],
+   "coverage": 0.57
+  },
+  {
+   "map": "Chamber_QFEP",
+   "sequence": "qfeplaboratory",
+   "seq": 23,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+   "sequence": "postfoundationscrisis",
+   "seq": 24,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "CriticalAlgorithms_Applied_Ethics",
+   "sequence": "postfoundationscrisis",
+   "seq": 24,
+   "claimed_not_run": [
+    "learning",
+    "limit"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "graph",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "SpeculativeComputation_Paraconsistent_Engineering",
+   "sequence": "postfoundationscrisis",
+   "seq": 24,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "graph",
+    "laser",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "SpeculativeComputation_Situated_Computation",
+   "sequence": "postfoundationscrisis",
+   "seq": 24,
+   "claimed_not_run": [
+    "plane"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "grammar",
+    "graph",
+    "transform"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SpeculativeComputation_Collective_Knowledge",
+   "sequence": "postfoundationscrisis",
+   "seq": 24,
+   "claimed_not_run": [
+    "limit"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "SpeculativeComputation_Rhizome_Network",
+   "sequence": "postfoundationscrisis",
+   "seq": 24,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "graph",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [
+    "cube",
+    "isosurface"
+   ],
+   "coverage": 1.0
+  },
+  {
+   "map": "Chamber_PostFoundations",
+   "sequence": "postfoundationscrisis",
+   "seq": 24,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "collision",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "graph",
+    "laser",
+    "line",
+    "plane",
+    "primitive",
+    "randomness",
+    "softbody",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  },
+  {
+   "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+   "sequence": "postfoundationscrisis",
+   "seq": 24,
+   "claimed_not_run": [],
+   "run_not_claimed": [
+    "cube",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ],
+   "both": [],
+   "coverage": 1.0
+  },
+  {
+   "map": "PostCrisis_Synthesis",
+   "sequence": "postfoundationscrisis",
+   "seq": 24,
+   "claimed_not_run": [
+    "limit",
+    "line"
+   ],
+   "run_not_claimed": [
+    "cube",
+    "fractal",
+    "grammar",
+    "graph",
+    "primitive",
+    "randomness",
+    "wave"
+   ],
+   "both": [
+    "transform"
+   ],
+   "coverage": 0.67
+  }
+ ]
+}
