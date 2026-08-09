@@ -1,1 +1,88 @@
-{"map_info": {"name": "Symmetry: The Motif", "title": "Symmetry: The Motif", "lookup_name": "Symmetry_Motif", "description": "One painted cell. Everything a pattern will ever be is already in its domain \u2014 and on the floor, a two-thousand-year-old meander made of three tiles.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.889\u21920.918, walkability 0.463\u21920.931]", "version": "placed-humanoid_walker", "format": "json", "dimensions": {"width": 12, "depth": 10, "max_height": 1}, "metadata": {"difficulty": "beginner", "category": "algorithms", "estimated_time": "3-5 minutes", "learning_objectives": ["The motif/domain cell contains the whole pattern"]}}, "utility_definitions": {"s": {"type": "spawn", "description": "spawn point"}, "t": {"type": "teleporter", "description": "exit teleporter"}}, "lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1, 0.9, 0.8], "energy": 1.2}}, "settings": {"cube_size": 1.0, "gutter": 0.05, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "all", "background": "dark"}, "layers": {"structure": [["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]], "utilities": [[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", "s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]], "interactables": [[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", "pattern_tile_4x4:90", "pattern_tile_cube:90", "tile_meander_floor", " ", " "], [" ", " ", " ", " ", " ", " ", " ", "science_screen:90", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]]}}
+{
+  "map_info": {
+    "name": "Symmetry: The Motif",
+    "title": "Symmetry: The Motif",
+    "lookup_name": "Symmetry_Motif",
+    "description": "One painted cell. Everything a pattern will ever be is already in its domain — and on the floor, a two-thousand-year-old meander made of three tiles.\n\n[Placement applied humanoid_walker engine — constraint 0.889→0.918, walkability 0.463→0.931]",
+    "version": "placed-humanoid_walker",
+    "format": "json",
+    "dimensions": {
+      "width": 12,
+      "depth": 10,
+      "max_height": 1
+    },
+    "metadata": {
+      "difficulty": "beginner",
+      "category": "algorithms",
+      "estimated_time": "3-5 minutes",
+      "learning_objectives": ["The motif/domain cell contains the whole pattern"]
+    }
+  },
+  "utility_definitions": {
+    "s": {
+      "type": "spawn",
+      "description": "spawn point"
+    },
+    "t": {
+      "type": "teleporter",
+      "description": "exit teleporter"
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.4,0.4,0.5],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1,0.9,0.8],
+      "energy": 1.2
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.05,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": false,
+    "initial_tile_visibility": "all",
+    "background": "dark"
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","s"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","pattern_tile_4x4:90","pattern_tile_cube:90","tile_meander_floor"," "," "],
+      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

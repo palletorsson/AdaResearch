@@ -1,1 +1,103 @@
-{"map_info": {"name": "LSystems_Growth", "lookup_name": "LSystems_Growth", "description": "Watch trees grow generation by generation. On the left, a constrained corridor where branches adapt to walls. On the right, an open clearing where the same rules produce unconstrained growth. Same axiom, different context, different trees.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.918\u21920.940, walkability 0.460\u21920.481]", "version": "placed-humanoid_walker", "format": "json", "dimensions": {"width": 8, "depth": 10, "max_height": 2}, "metadata": {"difficulty": "intermediate", "category": "lsystems", "estimated_time": "4-6 minutes", "learning_objectives": ["Generation-by-generation growth animation", "Context-sensitive vs context-free rules", "Environmental influence on branching", "Parametric decay: angle and length as continuous variables"]}, "title": "LSystems_Growth", "eye_shot_adopted": "Trial_eye_LSystems_Growth"}, "utility_definitions": {"t": {"type": "teleporter", "name": "Grammars", "description": "Continue to formal grammars and space-filling curves", "properties": {"action": "next_in_sequence"}}, "s": {"properties": {"height": 5.5}}}, "documentation": {"summary": "LSystems_Growth \u2014 Animated growth and context sensitivity", "layout": "8x10 asymmetric. Left walled corridor (constrained), right open clearing (free). Back platform for parameter control.", "objective": "See how the same grammar produces different trees depending on spatial context. Adjust continuous parameters.", "key_elements": ["`AnimatedTree` at (2,3) \u2014 step-by-step generation in constrained zone", "`ContextSensitiveTree` at (6,3) \u2014 environment-aware branching in open zone", "`lsystem_tree` at (4,5) \u2014 a static generated tree for comparison", "`parametric_lsystem` at (4,7) \u2014 tweak angle and length decay"]}, "lighting": {"ambient_color": [0.3, 0.42, 0.35], "ambient_energy": 0.65, "directional_light": {"enabled": true, "direction": [-0.5, -0.7, -0.3], "color": [1.0, 0.95, 0.85], "energy": 1.1}}, "settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "hidden_except_corners", "background": {"type": "sky", "color": [0.15, 0.3, 0.45]}}, "layers": {"structure": [["2", "1", "1", "2", "1", "1", "1", "1"], ["2", "1", "1", "2", "1", "1", "1", "1"], ["2", "1", "1", "2", "1", "1", "1", "1"], ["2", "1", "1", "1", "1", "1", "1", "1"], ["2", "1", "1", "1", "1", "1", "1", "1"], ["2", "1", "1", "2", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "0", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1"]], "utilities": [[" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", "an"], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", "t", " ", " ", " "], [" ", " ", " ", " ", " ", "s", " ", " "]], "interactables": [[" ", " ", " ", " ", " ", " ", " ", " "], [" ", "ContextSensitiveTree:270", " ", " ", " ", "AnimatedTree:180", "lsystem_tree:90", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", "parametric_lsystem", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " "]]}}
+{
+  "map_info": {
+    "name": "LSystems_Growth",
+    "lookup_name": "LSystems_Growth",
+    "description": "Watch trees grow generation by generation. On the left, a constrained corridor where branches adapt to walls. On the right, an open clearing where the same rules produce unconstrained growth. Same axiom, different context, different trees.\n\n[Placement applied humanoid_walker engine — constraint 0.918→0.940, walkability 0.460→0.481]",
+    "version": "placed-humanoid_walker",
+    "format": "json",
+    "dimensions": {
+      "width": 8,
+      "depth": 10,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "lsystems",
+      "estimated_time": "4-6 minutes",
+      "learning_objectives": ["Generation-by-generation growth animation","Context-sensitive vs context-free rules","Environmental influence on branching","Parametric decay: angle and length as continuous variables"]
+    },
+    "title": "LSystems_Growth",
+    "eye_shot_adopted": "Trial_eye_LSystems_Growth"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Grammars",
+      "description": "Continue to formal grammars and space-filling curves",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
+  },
+  "documentation": {
+    "summary": "LSystems_Growth — Animated growth and context sensitivity",
+    "layout": "8x10 asymmetric. Left walled corridor (constrained), right open clearing (free). Back platform for parameter control.",
+    "objective": "See how the same grammar produces different trees depending on spatial context. Adjust continuous parameters.",
+    "key_elements": ["`AnimatedTree` at (2,3) — step-by-step generation in constrained zone","`ContextSensitiveTree` at (6,3) — environment-aware branching in open zone","`lsystem_tree` at (4,5) — a static generated tree for comparison","`parametric_lsystem` at (4,7) — tweak angle and length decay"]
+  },
+  "lighting": {
+    "ambient_color": [0.3,0.42,0.35],
+    "ambient_energy": 0.65,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.5,-0.7,-0.3],
+      "color": [1.0,0.95,0.85],
+      "energy": 1.1
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": false,
+    "initial_tile_visibility": "hidden_except_corners",
+    "background": {
+      "type": "sky",
+      "color": [0.15,0.3,0.45]
+    }
+  },
+  "layers": {
+    "structure": [
+      ["2","1","1","2","1","1","1","1"],
+      ["2","1","1","2","1","1","1","1"],
+      ["2","1","1","2","1","1","1","1"],
+      ["2","1","1","1","1","1","1","1"],
+      ["2","1","1","1","1","1","1","1"],
+      ["2","1","1","2","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","1","1","1"],
+      ["1","1","1","1","1","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","an"],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","t"," "," "," "],
+      [" "," "," "," "," ","s"," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "],
+      [" ","ContextSensitiveTree:270"," "," "," ","AnimatedTree:180","lsystem_tree:90"," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","parametric_lsystem"," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "]
+    ]
+  }
+}

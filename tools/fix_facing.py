@@ -23,7 +23,7 @@ this tool has no opinion about sculpture.
     python tools/fix_facing.py --apply
     python tools/fix_facing.py --only=science_screen --apply
 """
-import json, argparse, pathlib, sys
+import json, argparse, pathlib, subprocess, sys
 from collections import Counter
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -157,7 +157,13 @@ def main():
         if str(I[z][x]).strip() != r["from"]:
             continue                              # moved under us; leave it
         I[z][x] = r["to"]
+        # COMPACT-ROWS, not one line. The first run wrote json.dumps(md) and
+        # collapsed 105 shipped maps to a single line each — 64,472 deletions of
+        # formatting nobody asked to change. The project's canonical map format
+        # is one grid row per line; tools/compact_map_json.py owns it.
         p.write_text(json.dumps(md), encoding="utf-8")
+        subprocess.run([sys.executable, str(ROOT / "tools/compact_map_json.py"), str(p)],
+                       capture_output=True)
         touched[r["map"]] += 1
     print("\nwrote %d placements across %d maps" % (sum(touched.values()), len(touched)))
     return 0

@@ -1,1 +1,88 @@
-{"map_info": {"name": "Form-Finding: The Forge", "title": "Form-Finding: The Forge", "lookup_name": "FormFinding_Forge", "description": "Shape your own. Feed raw matter into the forge and it descends toward its liveliest form and emerges; then prove it \u2014 stack the pieces until the whole system stops moving, the minimum reached by your own hand.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.925\u21920.969, walkability 0.407\u21920.586]", "version": "placed-humanoid_walker", "format": "json", "dimensions": {"width": 12, "depth": 10, "max_height": 1}, "metadata": {"difficulty": "intermediate", "category": "algorithms", "estimated_time": "3-5 minutes", "learning_objectives": ["Find a form by descent", "Prove it: reach the resting minimum"]}}, "utility_definitions": {"s": {"type": "spawn", "description": "spawn point"}, "t": {"type": "teleporter", "description": "exit teleporter"}}, "lighting": {"ambient_color": [0.4, 0.4, 0.5], "ambient_energy": 0.6, "directional_light": {"enabled": true, "direction": [-0.4, -0.7, -0.4], "color": [1, 0.9, 0.8], "energy": 1.2}}, "settings": {"cube_size": 1.0, "gutter": 0.05, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "all", "background": "dark"}, "layers": {"structure": [["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]], "utilities": [[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", "s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]], "interactables": [[" ", "balance_puzzle:180", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", "self_shaping_forge:270", " ", " ", "gradient_descent_optimizer:90", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", "science_screen:90", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]]}}
+{
+  "map_info": {
+    "name": "Form-Finding: The Forge",
+    "title": "Form-Finding: The Forge",
+    "lookup_name": "FormFinding_Forge",
+    "description": "Shape your own. Feed raw matter into the forge and it descends toward its liveliest form and emerges; then prove it — stack the pieces until the whole system stops moving, the minimum reached by your own hand.\n\n[Placement applied humanoid_walker engine — constraint 0.925→0.969, walkability 0.407→0.586]",
+    "version": "placed-humanoid_walker",
+    "format": "json",
+    "dimensions": {
+      "width": 12,
+      "depth": 10,
+      "max_height": 1
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "algorithms",
+      "estimated_time": "3-5 minutes",
+      "learning_objectives": ["Find a form by descent","Prove it: reach the resting minimum"]
+    }
+  },
+  "utility_definitions": {
+    "s": {
+      "type": "spawn",
+      "description": "spawn point"
+    },
+    "t": {
+      "type": "teleporter",
+      "description": "exit teleporter"
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.4,0.4,0.5],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1,0.9,0.8],
+      "energy": 1.2
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.05,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": false,
+    "initial_tile_visibility": "all",
+    "background": "dark"
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","s"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" ","balance_puzzle:180"," "," "," "," "," "," "," "," "," "," "],
+      [" ","self_shaping_forge:270"," "," ","gradient_descent_optimizer:90"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","science_screen:90"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

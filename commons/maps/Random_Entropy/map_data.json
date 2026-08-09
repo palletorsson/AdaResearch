@@ -1,1 +1,88 @@
-{"map_info": {"name": "Random: Entropy", "title": "Random_Entropy", "lookup_name": "Random_Entropy", "description": "The entropy pocket gets its own room. Surprise, measured: the Shannon meter reads disorder in bits at the center; a jar of order decays in your hand; hardware entropy leaks; true and pseudo randomness stand side by side for comparison. At the dark end, a sphere you cannot predict and butterflies that will not repeat. Entropy is not mess - it is how much you do not know yet.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.576\u21920.902, walkability 0.650\u21920.534]", "version": "placed-humanoid_walker", "format": "json", "dimensions": {"width": 16, "depth": 10, "max_height": 1}, "metadata": {"difficulty": "intermediate", "category": "algorithms", "estimated_time": "4-6 minutes", "learning_objectives": ["Entropy measures surprise in bits, not messiness", "Order decays without work; the jar and the hardware agree", "True randomness is harvested, pseudo randomness is grown from a seed"]}}, "utility_definitions": {"s": {"type": "spawn", "description": "enter at low entropy"}, "t": {"type": "teleporter", "description": "exit - past the dark end"}}, "lighting": {"ambient_color": [0.24, 0.24, 0.3], "ambient_energy": 0.4, "directional_light": {"enabled": true, "direction": [-0.4, -0.75, -0.25], "color": [0.95, 0.92, 0.85], "energy": 0.7}}, "settings": {"cube_size": 1.0, "gutter": 0.05, "show_grid": true, "enable_physics": true, "auto_reveal_on_entry": false, "initial_tile_visibility": "all", "background": "dark"}, "layers": {"structure": [["0", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0"], ["0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1"], ["0", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0"]], "utilities": [[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", "s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]], "interactables": [[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", "trng_vs_prng:180", " ", " ", " ", "random_butterflies:90", "dark_sphere", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", "entropy_axiom:90", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "entropy_jar:90", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "hardware_entropy_decay:90", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", " ", " ", "science_screen:180", " ", " ", " ", " ", " ", " "], [" ", " ", " ", " ", " ", " ", " ", "shannon_entropy_meter:90", " ", " ", " ", " ", " ", " ", " ", " "]]}}
+{
+  "map_info": {
+    "name": "Random: Entropy",
+    "title": "Random_Entropy",
+    "lookup_name": "Random_Entropy",
+    "description": "The entropy pocket gets its own room. Surprise, measured: the Shannon meter reads disorder in bits at the center; a jar of order decays in your hand; hardware entropy leaks; true and pseudo randomness stand side by side for comparison. At the dark end, a sphere you cannot predict and butterflies that will not repeat. Entropy is not mess - it is how much you do not know yet.\n\n[Placement applied humanoid_walker engine — constraint 0.576→0.902, walkability 0.650→0.534]",
+    "version": "placed-humanoid_walker",
+    "format": "json",
+    "dimensions": {
+      "width": 16,
+      "depth": 10,
+      "max_height": 1
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "algorithms",
+      "estimated_time": "4-6 minutes",
+      "learning_objectives": ["Entropy measures surprise in bits, not messiness","Order decays without work; the jar and the hardware agree","True randomness is harvested, pseudo randomness is grown from a seed"]
+    }
+  },
+  "utility_definitions": {
+    "s": {
+      "type": "spawn",
+      "description": "enter at low entropy"
+    },
+    "t": {
+      "type": "teleporter",
+      "description": "exit - past the dark end"
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.24,0.24,0.3],
+    "ambient_energy": 0.4,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.4,-0.75,-0.25],
+      "color": [0.95,0.92,0.85],
+      "energy": 0.7
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.05,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": false,
+    "initial_tile_visibility": "all",
+    "background": "dark"
+  },
+  "layers": {
+    "structure": [
+      ["0","0","1","1","1","1","1","1","1","1","1","1","1","1","1","0"],
+      ["0","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","0","1"],
+      ["0","0","1","1","1","1","1","1","1","1","1","1","1","1","1","0"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","s"," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","trng_vs_prng:180"," "," "," ","random_butterflies:90","dark_sphere"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","entropy_axiom:90"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," ","entropy_jar:90"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," ","hardware_entropy_decay:90"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","science_screen:180"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","shannon_entropy_meter:90"," "," "," "," "," "," "," "," "]
+    ]
+  }
+}
