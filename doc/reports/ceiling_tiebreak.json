@@ -1,0 +1,188 @@
+{
+ "_readme": "107 rows scored exactly 8.00 in the 310-wide match. Five of the score's terms (tau, cov, promise, dolly, rank1) are saturated at the ceiling and carry no information there; patience (30 distinct values) and heroDeg (14) still discriminate and were recorded all along. This ranks each chapter's tie by each of them. NOTE: patience has a prior ruling against it \u2014 museum_crowns records that Kanazawa's patience-only win on isosurfaces was NOT adopted \u2014 so heroDeg is the tiebreak that does not contradict a ruling.",
+ "disagreements": 12,
+ "chapters": {
+  "array_tutorial": {
+   "ties": 11,
+   "by_heroDeg": {
+    "key": "motif-room",
+    "heroDeg": 53,
+    "family": "spine"
+   },
+   "by_patience": {
+    "key": "fa5c7d147d",
+    "patience": 0.29,
+    "family": "spine-segment"
+   }
+  },
+  "cellularautomata": {
+   "ties": 9,
+   "by_heroDeg": {
+    "key": "081b9f3f9f",
+    "heroDeg": 53,
+    "family": "spine-segment"
+   },
+   "by_patience": {
+    "key": "fa5c7d147d",
+    "patience": 0.29,
+    "family": "spine-segment"
+   }
+  },
+  "foundationscrisis": {
+   "ties": 4,
+   "by_heroDeg": {
+    "key": "soane-cabinet-vista",
+    "heroDeg": 76,
+    "family": "museum"
+   },
+   "by_patience": {
+    "key": "bay:castelvecchio-endstop-pinch#b0",
+    "patience": 0.28,
+    "family": "authored"
+   }
+  },
+  "fractals": {
+   "ties": 16,
+   "by_heroDeg": {
+    "key": "081b9f3f9f",
+    "heroDeg": 53,
+    "family": "spine-segment"
+   },
+   "by_patience": {
+    "key": "8fee3877f2",
+    "patience": 0.39,
+    "family": "spine-segment"
+   }
+  },
+  "graphtheory": {
+   "ties": 10,
+   "by_heroDeg": {
+    "key": "081b9f3f9f",
+    "heroDeg": 53,
+    "family": "spine-segment"
+   },
+   "by_patience": {
+    "key": "motif-room",
+    "patience": 0.2,
+    "family": "spine"
+   }
+  },
+  "isosurfaces": {
+   "ties": 9,
+   "by_heroDeg": {
+    "key": "958ac5140a",
+    "heroDeg": 161,
+    "family": "spine-segment"
+   },
+   "by_patience": {
+    "key": "958ac5140a",
+    "patience": 0.67,
+    "family": "spine-segment"
+   }
+  },
+  "lsystems": {
+   "ties": 6,
+   "by_heroDeg": {
+    "key": "lattice:pmg-13",
+    "heroDeg": 53,
+    "family": "authored"
+   },
+   "by_patience": {
+    "key": "081b9f3f9f",
+    "patience": 0.12,
+    "family": "spine-segment"
+   }
+  },
+  "noise": {
+   "ties": 3,
+   "by_heroDeg": {
+    "key": "lattice:pmg-13",
+    "heroDeg": 53,
+    "family": "authored"
+   },
+   "by_patience": {
+    "key": "step-room",
+    "patience": 0.44,
+    "family": "spine"
+   }
+  },
+  "postfoundationscrisis": {
+   "ties": 14,
+   "by_heroDeg": {
+    "key": "081b9f3f9f",
+    "heroDeg": 53,
+    "family": "spine-segment"
+   },
+   "by_patience": {
+    "key": "8fee3877f2",
+    "patience": 0.39,
+    "family": "spine-segment"
+   }
+  },
+  "proceduralgeneration": {
+   "ties": 3,
+   "by_heroDeg": {
+    "key": "lattice:cmm-13",
+    "heroDeg": 70,
+    "family": "authored"
+   },
+   "by_patience": {
+    "key": "fa5c7d147d",
+    "patience": 0.59,
+    "family": "spine-segment"
+   }
+  },
+  "randomness": {
+   "ties": 2,
+   "by_heroDeg": {
+    "key": "beat:ada_all_authored-15",
+    "heroDeg": 39,
+    "family": "authored"
+   },
+   "by_patience": {
+    "key": "beat:ada_all_authored-15",
+    "patience": 0.09,
+    "family": "authored"
+   }
+  },
+  "softbodies": {
+   "ties": 7,
+   "by_heroDeg": {
+    "key": "6fa6e67c26",
+    "heroDeg": 67,
+    "family": "spine-segment"
+   },
+   "by_patience": {
+    "key": "lattice:pm-17",
+    "patience": 0.74,
+    "family": "authored"
+   }
+  },
+  "swarmintelligence": {
+   "ties": 5,
+   "by_heroDeg": {
+    "key": "9da9d1d305",
+    "heroDeg": 53,
+    "family": "spine-segment"
+   },
+   "by_patience": {
+    "key": "fa5c7d147d",
+    "patience": 0.59,
+    "family": "spine-segment"
+   }
+  },
+  "symmetry": {
+   "ties": 4,
+   "by_heroDeg": {
+    "key": "2ab5924074",
+    "heroDeg": 53,
+    "family": "spine-segment"
+   },
+   "by_patience": {
+    "key": "2ddf163738",
+    "patience": 0.22,
+    "family": "spine-segment"
+   }
+  }
+ }
+}
