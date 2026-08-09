@@ -1,0 +1,8891 @@
+{
+ "_readme": "What each spine artifact's GDScript actually executes. Signals are types and calls, not adjectives, so a term here is a term the engine RUNS. Compare with info_boards.json, which reads descriptions: where they disagree, either the prose promises what the code does not do, or the code does something nobody wrote down.",
+ "signals": {
+  "collision": [
+   "RayCast3D",
+   "intersect_ray",
+   "move_and_collide",
+   "body_entered",
+   "area_entered",
+   "Area3D",
+   "CollisionShape3D",
+   "get_overlapping"
+  ],
+  "laser": [
+   "RayCast3D",
+   "\\blaser",
+   "\\bbeam\\b"
+  ],
+  "transform": [
+   "Transform3D",
+   "\\.basis",
+   "\\brotate[_a-z]*\\(",
+   "\\btranslate\\(",
+   "look_at\\(",
+   "\\.rotation",
+   "\\.scale\\b"
+  ],
+  "randomness": [
+   "\\brandf\\(",
+   "\\brandi\\(",
+   "RandomNumberGenerator",
+   "rand_range",
+   "\\.randomize\\(",
+   "randf_range"
+  ],
+  "noise": [
+   "FastNoiseLite",
+   "NoiseTexture",
+   "\\bnoise\\.",
+   "perlin",
+   "simplex"
+  ],
+  "loop": [
+   "^\\s*for\\s+\\w+\\s+in\\b",
+   "^\\s*while\\s+"
+  ],
+  "array": [
+   "\\bArray\\[",
+   "Packed\\w+Array",
+   "\\brange\\(",
+   "\\.append\\(",
+   "\\bDictionary\\b"
+  ],
+  "cube": [
+   "BoxMesh",
+   "CSGBox3D",
+   "BoxShape3D",
+   "\\bvoxel"
+  ],
+  "point": [
+   "Vector3\\(",
+   "\\bposition\\b",
+   "global_position"
+  ],
+  "line": [
+   "ImmediateMesh",
+   "PRIMITIVE_LINE",
+   "draw_line",
+   "\\bCurve3D\\b"
+  ],
+  "plane": [
+   "PlaneMesh",
+   "QuadMesh",
+   "\\bPlane\\("
+  ],
+  "primitive": [
+   "SphereMesh",
+   "CylinderMesh",
+   "TorusMesh",
+   "CapsuleMesh",
+   "PrismMesh"
+  ],
+  "colour": [
+   "\\bColor\\(",
+   "albedo_color",
+   "Color\\.from_hsv",
+   "\\.modulate"
+  ],
+  "wave": [
+   "\\bsin\\(",
+   "\\bcos\\(",
+   "\\bTAU\\b",
+   "\\bPI\\b"
+  ],
+  "force": [
+   "apply_impulse",
+   "apply_force",
+   "RigidBody3D",
+   "\\bgravity\\b",
+   "linear_velocity"
+  ],
+  "softbody": [
+   "SoftBody3D",
+   "\\bspring",
+   "\\bdamping\\b"
+  ],
+  "isosurface": [
+   "marching",
+   "\\bsdf\\b",
+   "metaball",
+   "iso_level"
+  ],
+  "boolean": [
+   "CSGCombiner",
+   "OPERATION_SUBTRACTION",
+   "OPERATION_INTERSECTION",
+   "OPERATION_UNION"
+  ],
+  "grammar": [
+   "\\brule[s]?\\s*[:=]",
+   "\\baxiom\\b",
+   "rewrite",
+   "l_system",
+   "lsystem"
+  ],
+  "automata": [
+   "neighbou?r_count",
+   "\\bgeneration\\b.*\\bcell",
+   "rule_number",
+   "\\bca_step"
+  ],
+  "graph": [
+   "adjacency",
+   "\\bedges\\b",
+   "\\bnodes\\b.*\\bedges\\b",
+   "astar",
+   "AStar"
+  ],
+  "learning": [
+   "\\bweights\\b",
+   "\\bneuron",
+   "backprop",
+   "\\blayer[s]?\\b.*\\bweight"
+  ],
+  "fractal": [
+   "\\brecurs",
+   "self_similar",
+   "\\biterat\\w*_depth",
+   "\\bdepth\\s*[-+]?=\\s*1"
+  ]
+ },
+ "counts": {
+  "artifacts": 622,
+  "no_script_found": 192
+ },
+ "artifacts": {
+  "AntColonyV2": {
+   "script": "algorithms/swarmintelligence/ants_v2/AntColonyV2.gd",
+   "lines": 567,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "AudioContr": {
+   "script": "commons/audio/UniversalVRAudioController.gd",
+   "lines": 1742,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "fractal",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "BigPipeSystem": {
+   "script": "algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd",
+   "lines": 525,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "ChainSwing": {
+   "script": "algorithms/joint/07_chain_swing/ChainSwing.gd",
+   "lines": 191,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "laser",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "wave"
+   ]
+  },
+  "ConeTwistBag": {
+   "script": "algorithms/joint/06_cone_twist_bag/ConeTwistBag.gd",
+   "lines": 194,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "laser",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "ContextFreeGrammars": {
+   "script": "algorithms/lsystems/context_free_grammars/ContextFreeGrammars.gd",
+   "lines": 1487,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "CoordinateSystem3M": {
+   "script": "algorithms/vectors/00_coordinates/CoordinateSystem3M.gd",
+   "lines": 242,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "DualBallFMController": {
+   "script": "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd",
+   "lines": 679,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "ElphabaDress": {
+   "script": "algorithms/wavefunctions/dancing_body/ElphabaDress.gd",
+   "lines": 623,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "FlowFieldMain": {
+   "script": "algorithms/pathfinding/flow_field/FlowFieldMain.gd",
+   "lines": 209,
+   "terms": [
+    "array",
+    "collision",
+    "loop",
+    "noise",
+    "point",
+    "randomness"
+   ]
+  },
+  "ForceMagnitudeDemo": {
+   "script": "algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.gd",
+   "lines": 299,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "GeneticProgramming": {
+   "script": "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd",
+   "lines": 924,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "GlassRack": {
+   "script": "commons/glass_rack/GlassRackController.gd",
+   "lines": 1345,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "GyroidDemo": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorGyroid.gd",
+   "lines": 25,
+   "terms": [
+    "array",
+    "isosurface",
+    "primitive"
+   ]
+  },
+  "HingeCrank": {
+   "script": "algorithms/joint/03_hinge_crank/HingeCrank.gd",
+   "lines": 187,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "KonigsbergBridge": {
+   "script": "algorithms/graphtheory/graphspace3d/konigsberg3d.gd",
+   "lines": 1103,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "MelodyChaser3D": {
+   "script": "algorithms/wavefunctions/mariocontrol/MelodyChaser3D.gd",
+   "lines": 477,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "MeltingBerniniScene": {
+   "script": "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd",
+   "lines": 647,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "MolecularDesigner": {
+   "script": "algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd",
+   "lines": 503,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "OscillationCurve": {
+   "script": "algorithms/wavefunctions/oscillation_driver/OscillationCurve.gd",
+   "lines": 95,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "PendulumWave": {
+   "script": "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd",
+   "lines": 118,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "PhysarumColony": {
+   "script": "algorithms/swarmintelligence/physarum/PhysarumColony.gd",
+   "lines": 415,
+   "terms": [
+    "array",
+    "colour",
+    "learning",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "Rack303Acid": {
+   "script": "addons/element_editor/element_layout_node.gd",
+   "lines": 1660,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "RackAmbientDrone": {
+   "script": "addons/element_editor/element_layout_node.gd",
+   "lines": 1660,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "RackDX7Piano": {
+   "script": "addons/element_editor/element_layout_node.gd",
+   "lines": 1660,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "RackMoogBass": {
+   "script": "addons/element_editor/element_layout_node.gd",
+   "lines": 1660,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "RackSineBasic": {
+   "script": "addons/element_editor/element_layout_node.gd",
+   "lines": 1660,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "SimpleOscillatingBridge": {
+   "script": "algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.gd",
+   "lines": 195,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "SliderPress": {
+   "script": "algorithms/joint/04_slider_press/SliderPress.gd",
+   "lines": 174,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "SoundscapeRadioRack": {
+   "script": "commons/audio/rack_configs/SoundscapeRadioRack.gd",
+   "lines": 392,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point"
+   ]
+  },
+  "SpectrumVisualizer": {
+   "script": "algorithms/color/spectrum_visualizer/SpectrumVisualizer.gd",
+   "lines": 160,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "SphericalHarmonics": {
+   "script": "algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.gd",
+   "lines": 571,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "SystemsMusicTest": {
+   "script": "commons/audio/systems/air_points/FMPianoSynth.gd",
+   "lines": 107,
+   "terms": [
+    "array",
+    "loop",
+    "softbody"
+   ]
+  },
+  "TrigWalkingPath": {
+   "script": "algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.gd",
+   "lines": 279,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "UnitCircleTrig": {
+   "script": "algorithms/wavefunctions/oscillation_driver/UnitCircleTrig.gd",
+   "lines": 150,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "VRAudioMonitor": {
+   "script": "commons/audio/interfaces/VRAudioMonitor.gd",
+   "lines": 176,
+   "terms": [
+    "array",
+    "loop"
+   ]
+  },
+  "VectorAddition": {
+   "script": "algorithms/vectors/02_vector_addition/VectorAddition.gd",
+   "lines": 422,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "VectorBasics": {
+   "script": "algorithms/vectors/01_vector_basics/VectorBasics.gd",
+   "lines": 275,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "transform"
+   ]
+  },
+  "VectorCrossProduct": {
+   "script": "algorithms/vectors/06_vector_cross_product/VectorCrossProduct.gd",
+   "lines": 327,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "laser",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "VectorDotProduct": {
+   "script": "algorithms/vectors/03_dot_product/VectorDotProduct.gd",
+   "lines": 253,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "VectorFieldFlow": {
+   "script": "algorithms/vectors/10_vector_field_flow/VectorFieldFlow.gd",
+   "lines": 314,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "VectorForces": {
+   "script": "algorithms/vectors/05_vector_forces/VectorForces.gd",
+   "lines": 297,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point"
+   ]
+  },
+  "VectorMotion": {
+   "script": "algorithms/vectors/08_vector_motion/VectorMotion.gd",
+   "lines": 365,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "grammar",
+    "line",
+    "loop",
+    "point"
+   ]
+  },
+  "VectorSubtraction": {
+   "script": "algorithms/vectors/04_vector_subtraction/VectorSubtraction.gd",
+   "lines": 329,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "VectorThrowing": {
+   "script": "algorithms/vectors/08_vector_throwing/VectorThrowing.gd",
+   "lines": 425,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "VectorTorque": {
+   "script": "algorithms/vectors/09_vector_torque/VectorTorque.gd",
+   "lines": 74,
+   "terms": [
+    "array",
+    "colour",
+    "point",
+    "wave"
+   ]
+  },
+  "VectorWorkbench": {
+   "script": "algorithms/vectors/vector_workbench/VectorWorkbench.gd",
+   "lines": 481,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point"
+   ]
+  },
+  "WavePaintings": {
+   "script": "algorithms/wavefunctions/oscillation_driver/WavePaintings.gd",
+   "lines": 534,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "accountability_ledger": {
+   "script": "commons/artifacts/accountability_ledger/accountability_ledger.gd",
+   "lines": 184,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "achilles_tortoise": {
+   "script": "commons/primitives/combines/achilles_tortoise.gd",
+   "lines": 278,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive"
+   ]
+  },
+  "adder_board": {
+   "script": "commons/artifacts/adder_board/adder_board.gd",
+   "lines": 1018,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "additive_wave_demo": {
+   "script": "commons/artifacts/additive_wave_demo/additive_wave_demo.gd",
+   "lines": 391,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "agreement_gauge": {
+   "script": "commons/artifacts/agreement_gauge/agreement_gauge.gd",
+   "lines": 756,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "air_music_display_case": {
+   "script": "commons/artifacts/air_music_display_case/air_music_display_case.gd",
+   "lines": 452,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "albers_wall_gallery": {
+   "script": "algorithms/primitives/homagetothesquare/albers_wall_gallery.gd",
+   "lines": 296,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "angle_sum_triangle": {
+   "script": "commons/artifacts/angle_sum_triangle/angle_sum_triangle.gd",
+   "lines": 217,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "point"
+   ]
+  },
+  "animated_noise_explorer": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/AnimatedNoiseExplorer.gd",
+   "lines": 232,
+   "terms": [
+    "array",
+    "colour",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "animatedcubebuilder": {
+   "script": "commons/primitives/animatedcubebuilder/animatedcubebuilder.gd",
+   "lines": 746,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "anomaly_detection": {
+   "script": "algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd",
+   "lines": 304,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "ant_colony_optimization": {
+   "script": "algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd",
+   "lines": 901,
+   "terms": [
+    "array",
+    "colour",
+    "learning",
+    "line",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "atmosphericmonitoring": {
+   "script": "commons/lab/atmosphericmonitoring/atmosphericmonitoring.gd",
+   "lines": 481,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "ball_painting_demo": {
+   "script": "commons/context/drawingboard/paper_draw_surface.gd",
+   "lines": 324,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "randomness"
+   ]
+  },
+  "bar_array": {
+   "script": "commons/substrates/bar_array/bar_array_substrate.gd",
+   "lines": 452,
+   "terms": [
+    "array",
+    "collision",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "bar_array_bubble_sort": {
+   "script": "commons/substrates/bar_array/bar_array_substrate.gd",
+   "lines": 452,
+   "terms": [
+    "array",
+    "collision",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "barber_paradox": {
+   "script": "commons/artifacts/barber_paradox/barber_paradox.gd",
+   "lines": 401,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "basis_vectors_rig": {
+   "script": "commons/artifacts/basis_vectors_rig/basis_vectors_rig.gd",
+   "lines": 842,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "beat_frequency_demo": {
+   "script": "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd",
+   "lines": 240,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "becoming_catalyst": {
+   "script": "commons/hazards/becoming_catalyst/becoming_catalyst.gd",
+   "lines": 3515,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "fractal",
+    "grammar",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "bernini_columns": {
+   "script": "algorithms/wavefunctions/berninicolumns/BerniniColumns.gd",
+   "lines": 422,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "bias_from_inside": {
+   "script": "commons/artifacts/bias_from_inside/bias_from_inside.gd",
+   "lines": 358,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "bias_visualizer": {
+   "script": "commons/artifacts/bias_visualizer/bias_visualizer.gd",
+   "lines": 843,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "bigframe": {
+   "script": "commons/primitives/boxbeam/boxbeam.gd",
+   "lines": 211,
+   "terms": [
+    "collision",
+    "colour",
+    "cube",
+    "laser",
+    "loop",
+    "point"
+   ]
+  },
+  "biomagneticresonator": {
+   "script": "commons/lab/biomagneticresonator/biomagneticresonator.gd",
+   "lines": 345,
+   "terms": [
+    "array",
+    "colour",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "boid_flocking": {
+   "script": "algorithms/emergentsystems/boidflocking/boids_documentation_ui.gd",
+   "lines": 267,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point"
+   ]
+  },
+  "boid_manager": {
+   "script": "algorithms/emergentsystems/boidflocking/boid_manager.gd",
+   "lines": 551,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "grammar",
+    "learning",
+    "loop",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "boids_2d_in_3d": {
+   "script": "addons/godot-xr-tools/objects/viewport_2d_in_3d.gd",
+   "lines": 659,
+   "terms": [
+    "array",
+    "collision",
+    "loop",
+    "point"
+   ]
+  },
+  "boids_aquarium": {
+   "script": "commons/artifacts/boids_aquarium/boids_aquarium.gd",
+   "lines": 1006,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "learning",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "boolean_tunnel": {
+   "script": "algorithms/transformation/booleanTunnel/booleanTunnel.gd",
+   "lines": 385,
+   "terms": [
+    "array",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "both_true_gate": {
+   "script": "commons/artifacts/both_true_gate/both_true_gate.gd",
+   "lines": 185,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "bounce_well": {
+   "script": "commons/artifacts/bounce_well/bounce_well.gd",
+   "lines": 268,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "bouncing_ball": {
+   "script": "algorithms/physicssimulation/bouncingball/BouncingBall.gd",
+   "lines": 647,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform"
+   ]
+  },
+  "box_counting_dimension": {
+   "script": "algorithms/fractals/box_counting_dimension/box_counting_dimension.gd",
+   "lines": 624,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "branching_coral": {
+   "script": "commons/artifacts/branching_coral/branching_coral.gd",
+   "lines": 453,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "branching_growth_algorithm": {
+   "script": "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/branching_growth_algorithm.gd",
+   "lines": 718,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "brick_wall_factory": {
+   "script": "algorithms/color/brick_wall_factory/brick_wall_factory.gd",
+   "lines": 92,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point"
+   ]
+  },
+  "brouwer_choice_sequence": {
+   "script": "commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.gd",
+   "lines": 322,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "bubble_blaster": {
+   "script": "commons/artifacts/bubble_blaster/bubble_blaster.gd",
+   "lines": 290,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "graph",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "bubble_particles": {
+   "script": "algorithms/randomness/proceduralrandomness/movementbased/scenes/bubbleparticles/bubble_particles.gd",
+   "lines": 236,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "ca_rule_explorer": {
+   "script": "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+   "lines": 434,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "graph",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "ca_rules_workbench": {
+   "script": "commons/artifacts/ca_rules_workbench/ca_rules_workbench.gd",
+   "lines": 524,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "cable_builder": {
+   "script": "algorithms/wavefunctions/line_builder_3d/cable_builder.gd",
+   "lines": 361,
+   "terms": [
+    "array",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "calder_mobile": {
+   "script": "commons/artifacts/calder_mobile/calder_mobile.gd",
+   "lines": 248,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "fractal",
+    "learning",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "calder_object_mobile": {
+   "script": "commons/artifacts/calder_mobile/calder_mobile.gd",
+   "lines": 248,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "fractal",
+    "learning",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "cantor_diagonal_workbench": {
+   "script": "commons/artifacts/cantor_diagonal_workbench/cantor_diagonal_workbench.gd",
+   "lines": 518,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "cantor_set": {
+   "script": "algorithms/fractals/cantorset/cantor_set.gd",
+   "lines": 346,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point"
+   ]
+  },
+  "cap_theorem_walk": {
+   "script": "algorithms/postfoundationscrisis/cap_theorem_walk.gd",
+   "lines": 268,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "capsule": {
+   "script": "commons/primitives/prismes/rotation.gd",
+   "lines": 25,
+   "terms": [
+    "point",
+    "transform"
+   ]
+  },
+  "capsule_radials_rings": {
+   "script": "commons/primitives/capsule/capsule_radials_rings.gd",
+   "lines": 230,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "laser",
+    "primitive"
+   ]
+  },
+  "carousel_cake": {
+   "script": "algorithms/transformation/carousel_cake/carousel_cake.gd",
+   "lines": 394,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "catalyst_prompter_box": {
+   "script": "commons/hazards/becoming_catalyst/catalyst_prompter_box.gd",
+   "lines": 384,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "catalyst_target": {
+   "script": "commons/hazards/becoming_catalyst/catalyst_target.gd",
+   "lines": 1045,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "laser",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "catalyst_vent": {
+   "script": "commons/hazards/catalyst_foe/catalyst_vent.gd",
+   "lines": 344,
+   "terms": [
+    "array",
+    "colour",
+    "isosurface",
+    "loop",
+    "point",
+    "primitive"
+   ]
+  },
+  "catapult": {
+   "script": "commons/artifacts/catapult/catapult.gd",
+   "lines": 1016,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "catenoid": {
+   "script": "commons/primitives/parametric/catenoid.gd",
+   "lines": 119,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "caverandomwalk": {
+   "script": "algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.gd",
+   "lines": 229,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point",
+    "primitive",
+    "randomness"
+   ]
+  },
+  "centrifuge_ring": {
+   "script": "commons/artifacts/centrifuge_ring/centrifuge_ring.gd",
+   "lines": 95,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "chaos_attractor": {
+   "script": "algorithms/chaos/strangeattractors/strange_attractors.gd",
+   "lines": 607,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "chemicalapparatus": {
+   "script": "commons/lab/chemicalapparatus/chemicalapparatus.gd",
+   "lines": 662,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "chladni_plate": {
+   "script": "commons/artifacts/chladni_plate/chladni_plate.gd",
+   "lines": 340,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "chord_tension_spring": {
+   "script": "commons/artifacts/chord_tension_spring/chord_tension_spring.gd",
+   "lines": 892,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "circle_train": {
+   "script": "commons/artifacts/circle_train/circle_train.gd",
+   "lines": 284,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "code_display": {
+   "script": "commons/context/clipboard/codeDisplay.gd",
+   "lines": 831,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "graph",
+    "loop",
+    "point"
+   ]
+  },
+  "coin_toss": {
+   "script": "algorithms/randomness/coin_toss/coin_toss.gd",
+   "lines": 1092,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "collision_carts": {
+   "script": "commons/artifacts/collision_carts/collision_carts.gd",
+   "lines": 87,
+   "terms": [
+    "array",
+    "colour",
+    "point"
+   ]
+  },
+  "collision_crasher": {
+   "script": "commons/hazards/collision_crasher/collision_crasher.gd",
+   "lines": 531,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "color_constellation_office": {
+   "script": "algorithms/color/color_mixing/color_constellation_office.gd",
+   "lines": 192,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "softbody",
+    "transform"
+   ]
+  },
+  "color_sets_overview": {
+   "script": "algorithms/color/grabcolor/color_sets_overview.gd",
+   "lines": 352,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "color_space_navigator": {
+   "script": "commons/artifacts/color_space_navigator/color_space_navigator.gd",
+   "lines": 326,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "colorballs": {
+   "script": "algorithms/color/colorballs/colorballs.gd",
+   "lines": 532,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "coloredlines": {
+   "script": "algorithms/color/colorlines/coloredlines.gd",
+   "lines": 478,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "column_3_z": {
+   "script": "algorithms/arrays/column_3_z.gd",
+   "lines": 242,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point"
+   ]
+  },
+  "combine_portals": {
+   "script": "commons/primitives/combines/combine_portals.gd",
+   "lines": 258,
+   "terms": [
+    "array",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "combined_forces_demo": {
+   "script": "algorithms/vectors/02_vector_addition/CombinedForcesDemo.gd",
+   "lines": 259,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point"
+   ]
+  },
+  "complexity_dial_workbench": {
+   "script": "commons/artifacts/complexity_dial_workbench/complexity_dial_workbench.gd",
+   "lines": 809,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "transform"
+   ]
+  },
+  "computer_vision_vr": {
+   "script": "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd",
+   "lines": 985,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "graph",
+    "learning",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "constructive_proof": {
+   "script": "commons/artifacts/constructive_proof/constructive_proof.gd",
+   "lines": 235,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point"
+   ]
+  },
+  "constructive_staircase": {
+   "script": "commons/artifacts/constructive_staircase/constructive_staircase.gd",
+   "lines": 182,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "control_console": {
+   "script": "commons/ui/control_console.gd",
+   "lines": 627,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "graph",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "control_pendulum": {
+   "script": "commons/artifacts/control_pendulum/control_pendulum.gd",
+   "lines": 495,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "convolutional_neural_networks_cnns_vr": {
+   "script": "algorithms/machinelearning/convolutional_neural_networks_CNNs/ConvolutionalNeuralNetworksCNNs_VR.gd",
+   "lines": 572,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "graph",
+    "learning",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "coordinate_system_switcher": {
+   "script": "commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.gd",
+   "lines": 434,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "wave"
+   ]
+  },
+  "coupled_oscillator_lattice": {
+   "script": "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd",
+   "lines": 490,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "coupled_pendulums": {
+   "script": "commons/artifacts/coupled_pendulums/coupled_pendulums.gd",
+   "lines": 374,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "crackpropagation_ca": {
+   "script": "algorithms/proceduralgeneration/growth_systems/crackpropagation_ca/crackpropagation_ca.gd",
+   "lines": 446,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "plane",
+    "point",
+    "randomness"
+   ]
+  },
+  "critic_regress_stack": {
+   "script": "commons/interfaces/foundations/critic_regress_stack.gd",
+   "lines": 266,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "csg_architecture_cavity": {
+   "script": "algorithms/boolean_surfaces/csg_architecture_cavity.gd",
+   "lines": 121,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "csg_compose_workbench": {
+   "script": "algorithms/boolean_surfaces/csg_compose_workbench.gd",
+   "lines": 359,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "csg_difference_demo": {
+   "script": "algorithms/boolean_surfaces/csg_difference_demo.gd",
+   "lines": 356,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "csg_intersection_demo": {
+   "script": "algorithms/boolean_surfaces/csg_intersection_demo.gd",
+   "lines": 84,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "point",
+    "transform"
+   ]
+  },
+  "csg_union_demo": {
+   "script": "algorithms/boolean_surfaces/csg_union_demo.gd",
+   "lines": 88,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "point",
+    "transform"
+   ]
+  },
+  "cube_bookshelf": {
+   "script": "algorithms/fractals/cubesubdivision/cube_bookshelf.gd",
+   "lines": 219,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point"
+   ]
+  },
+  "cube_cabin": {
+   "script": "algorithms/fractals/cubesubdivision/cube_cabin.gd",
+   "lines": 385,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "cube_desk": {
+   "script": "algorithms/fractals/cubesubdivision/cube_desk.gd",
+   "lines": 274,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point"
+   ]
+  },
+  "cube_mound_scene": {
+   "script": "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound.gd",
+   "lines": 435,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "cube_scene": {
+   "script": "commons/primitives/cubes/cube_scene.gd",
+   "lines": 332,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point"
+   ]
+  },
+  "cube_staircase": {
+   "script": "algorithms/fractals/cubesubdivision/cube_staircase.gd",
+   "lines": 319,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point"
+   ]
+  },
+  "cube_subdivision": {
+   "script": "algorithms/fractals/cubesubdivision/cube_subdivision.gd",
+   "lines": 457,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "curl_noise_particles": {
+   "script": "commons/artifacts/curl_noise_particles/curl_noise_particles.gd",
+   "lines": 374,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "curvature_slider": {
+   "script": "commons/artifacts/curvature_slider/curvature_slider.gd",
+   "lines": 276,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "dark_sphere": {
+   "script": "commons/artifacts/dark_sphere/dark_sphere.gd",
+   "lines": 691,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "grammar",
+    "laser",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "death_pylon": {
+   "script": "commons/artifacts/death_pylon/death_pylon.gd",
+   "lines": 382,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "derivative_pair": {
+   "script": "algorithms/change/derivative_pair.gd",
+   "lines": 421,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "wave"
+   ]
+  },
+  "descent_marble_toy": {
+   "script": "commons/artifacts/descent_marble_toy/descent_marble_toy.gd",
+   "lines": 151,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "destructibles_test_scene": {
+   "script": "algorithms/vectors/08_vector_throwing/destructibles_test_scene.gd",
+   "lines": 299,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "fractal",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "dgrid": {
+   "script": "commons/primitives/frame/durer_grid.gd",
+   "lines": 263,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "diamonds": {
+   "script": "commons/primitives/combines/diamonds.gd",
+   "lines": 141,
+   "terms": [
+    "array",
+    "grammar",
+    "loop",
+    "noise",
+    "point",
+    "transform"
+   ]
+  },
+  "diamondtoruscollection": {
+   "script": "algorithms/primitives/diamondtoruscollection/diamondtoruscollection.gd",
+   "lines": 248,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "dice_throw": {
+   "script": "algorithms/randomness/dice_throw/dice_throw.gd",
+   "lines": 1199,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "diffusion_limited_aggregation": {
+   "script": "algorithms/patterngeneration/diffusion_limited_aggregation/DiffusionLimitedAggregation.gd",
+   "lines": 267,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "distribution_comparator": {
+   "script": "algorithms/randomness/distribution_comparator/distribution_comparator.gd",
+   "lines": 681,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "distribution_sampler": {
+   "script": "commons/artifacts/distribution_sampler/distribution_sampler.gd",
+   "lines": 695,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "dna_specimen": {
+   "script": "commons/artifacts/dna_specimen/dna_specimen.gd",
+   "lines": 345,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "dome": {
+   "script": "commons/primitives/booleans/dome.gd",
+   "lines": 706,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "dot_aligner": {
+   "script": "commons/artifacts/dot_aligner/dot_aligner.gd",
+   "lines": 318,
+   "terms": [
+    "array",
+    "colour",
+    "laser",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "dot_product_projector": {
+   "script": "commons/artifacts/dot_product_projector/dot_product_projector.gd",
+   "lines": 631,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "double_helix_scene": {
+   "script": "algorithms/wavefunctions/oscillation_driver/double_helix_scene.gd",
+   "lines": 277,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "wave"
+   ]
+  },
+  "drag_corridor": {
+   "script": "commons/artifacts/drag_corridor/drag_corridor.gd",
+   "lines": 119,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point"
+   ]
+  },
+  "drag_lane": {
+   "script": "commons/artifacts/drag_lane/drag_lane.gd",
+   "lines": 115,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "draw_dot": {
+   "script": "commons/primitives/point/draw_dot.gd",
+   "lines": 677,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "draw_dot_time_domain": {
+   "script": "commons/primitives/point/draw_dot_time_domain.gd",
+   "lines": 92,
+   "terms": [
+    "array",
+    "loop",
+    "point"
+   ]
+  },
+  "draw_triangle_faces": {
+   "script": "commons/primitives/point/draw_triangle_faces.gd",
+   "lines": 982,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "dress_selector": {
+   "script": "commons/artifacts/dress_selector/dress_selector.gd",
+   "lines": 120,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive"
+   ]
+  },
+  "dual_display_test": {
+   "script": "algorithms/wavefunctions/spectralanalysis/dual_display_test.gd",
+   "lines": 217,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "durer_scene": {
+   "script": "commons/scenes/demos/durer/DurerPolyhedron.gd",
+   "lines": 137,
+   "terms": [
+    "array",
+    "loop",
+    "point"
+   ]
+  },
+  "ecosystem_simulation": {
+   "script": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd",
+   "lines": 550,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "edge_ground_synthesis": {
+   "script": "commons/artifacts/edge_ground_synthesis/edge_ground_synthesis.gd",
+   "lines": 189,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "edge_of_chaos_unlocked": {
+   "script": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+   "lines": 859,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "edmonds_algorithm": {
+   "script": "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd",
+   "lines": 653,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "electronicscales": {
+   "script": "commons/lab/electronicscales/electronicscales.gd",
+   "lines": 224,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "elliptic_surface": {
+   "script": "commons/artifacts/elliptic_surface/elliptic_surface.gd",
+   "lines": 531,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "energy_landscape_bench": {
+   "script": "commons/artifacts/energy_landscape_bench/energy_landscape_bench.gd",
+   "lines": 383,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "enhanced_kmeans": {
+   "script": "algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd",
+   "lines": 1539,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "entropy_fan": {
+   "script": "commons/artifacts/entropy_fan/entropy_fan.gd",
+   "lines": 515,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "entropy_jar": {
+   "script": "algorithms/randomness/entropy_jar/entropy_jar.gd",
+   "lines": 847,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "entropy_morphogenesis": {
+   "script": "algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.gd",
+   "lines": 322,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "isosurface",
+    "noise",
+    "point",
+    "randomness"
+   ]
+  },
+  "evolved_creatures": {
+   "script": "algorithms/machinelearning/carlsims/evolvedcreatures.gd",
+   "lines": 621,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "evolvingflowers": {
+   "script": "algorithms/machinelearning/evolvingflowers/evolvingflowers.gd",
+   "lines": 928,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "example_1_4_vector_multiplication_vr": {
+   "script": "algorithms/vectors/noc_ch01/example_1_4_vector_multiplication_vr.gd",
+   "lines": 415,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "example_1_9_motion_101_velocity_and_random_acceleration_vr": {
+   "script": "algorithms/vectors/noc_ch01/example_1_9_motion_101_velocity_and_random_acceleration_vr.gd",
+   "lines": 512,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "example_2_1_forces_vr": {
+   "script": "algorithms/forces/example_2_1_forces_vr.gd",
+   "lines": 525,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "example_2_3_gravity_scaled_by_mass_vr": {
+   "script": "algorithms/forces/example_2_3_gravity_scaled_by_mass_vr.gd",
+   "lines": 598,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "example_2_5_fluid_resistance_vr": {
+   "script": "algorithms/forces/example_2_5_fluid_resistance_vr.gd",
+   "lines": 508,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "example_2_8_two_body_attraction_vr": {
+   "script": "algorithms/forces/example_2_8_two_body_attraction_vr.gd",
+   "lines": 618,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "example_2_9_n_body_attraction_vr": {
+   "script": "algorithms/forces/example_2_9_n_body_attraction_vr.gd",
+   "lines": 632,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "example_3_2_forces_with_arbitrary_angular_motion_vr": {
+   "script": "algorithms/oscillation/noc_ch03/example_3_2_forces_with_arbitrary_angular_motion_vr.gd",
+   "lines": 528,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "example_3_3_pointing_in_the_direction_of_motion_vr": {
+   "script": "algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.gd",
+   "lines": 626,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "example_8_3_recursion_circles_vr": {
+   "script": "algorithms/fractals/example_8_3_recursion_circles_vr.gd",
+   "lines": 258,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "example_8_4_cantor_pagoda_vr": {
+   "script": "algorithms/fractals/example_8_4_cantor_pagoda_vr.gd",
+   "lines": 180,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point"
+   ]
+  },
+  "example_8_4_cantor_set_vr": {
+   "script": "algorithms/fractals/example_8_4_cantor_set_vr.gd",
+   "lines": 256,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point"
+   ]
+  },
+  "excluded_class_visualizer": {
+   "script": "algorithms/postfoundationscrisis/excluded_class_visualizer.gd",
+   "lines": 383,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "excluded_middle_demo": {
+   "script": "commons/artifacts/excluded_middle_demo/excluded_middle_demo.gd",
+   "lines": 383,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "exercise_1_3_solution_3_d_bouncing_ball_vr": {
+   "script": "algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.gd",
+   "lines": 491,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "exercise_1_5_solution_accelerate_and_decelerate_vr": {
+   "script": "algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.gd",
+   "lines": 612,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "exercise_1_8_solution_attraction_magnitude_vr": {
+   "script": "algorithms/vectors/noc_ch01/exercise_1_8_solution_attraction_magnitude_vr.gd",
+   "lines": 590,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "exercise_5_9_angle_between": {
+   "script": "algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.gd",
+   "lines": 298,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "explainable_ai_xai_vr": {
+   "script": "algorithms/machinelearning/explainable_AI_XAI/ExplainableAIXAI_VR.gd",
+   "lines": 629,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "facade_grammar_demo": {
+   "script": "commons/mesh_grammar/mesh_grammar_demo.gd",
+   "lines": 657,
+   "terms": [
+    "array",
+    "automata",
+    "collision",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "plane",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "fibonacci_pagoda": {
+   "script": "algorithms/fractals/pillar/fibonacci_pagoda.gd",
+   "lines": 484,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "fibonacci_sequences": {
+   "script": "algorithms/stringalgorithms/recursiveemergence/fibonacci_sequences/FibonacciSequences.gd",
+   "lines": 503,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "grammar",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "fifteen_cases_demo": {
+   "script": "algorithms/spacetopology/marchingcubes/scenes/FifteenCasesController.gd",
+   "lines": 433,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "isosurface",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "firework_burst": {
+   "script": "commons/artifacts/firework_burst/firework_burst.gd",
+   "lines": 90,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "firework_launcher": {
+   "script": "algorithms/physicssimulation/fireworklauncher/FireworkLauncher.gd",
+   "lines": 663,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "fitness_landscape_politics": {
+   "script": "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd",
+   "lines": 640,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "floating_sphere_field": {
+   "script": "commons/primitives/sphere_field/floating_sphere_field.gd",
+   "lines": 631,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive"
+   ]
+  },
+  "flocking_controls": {
+   "script": "commons/artifacts/flocking_controls/flocking_controls.gd",
+   "lines": 561,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "flow_field_painter": {
+   "script": "commons/artifacts/flow_field_painter/flow_field_painter.gd",
+   "lines": 399,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "line",
+    "loop",
+    "noise",
+    "plane",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "fluency_seam": {
+   "script": "commons/interfaces/foundations/fluency_seam.gd",
+   "lines": 272,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "wave"
+   ]
+  },
+  "folded_strip": {
+   "script": "commons/primitives/folded_strip/folded_strip.gd",
+   "lines": 374,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "folding_past": {
+   "script": "commons/primitives/temporal/animated_folding_past.gd",
+   "lines": 217,
+   "terms": [
+    "array",
+    "colour",
+    "isosurface",
+    "line",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "fontana_puncture": {
+   "script": "commons/primitives/fontana_puncture/fontana_puncture.gd",
+   "lines": 342,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "primitive"
+   ]
+  },
+  "force_cube": {
+   "script": "commons/artifacts/force_cube/force_cube.gd",
+   "lines": 174,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "graph",
+    "loop",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "force_directed_layout": {
+   "script": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd",
+   "lines": 462,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "force_field_visualizer": {
+   "script": "commons/artifacts/force_field_visualizer/force_field_visualizer.gd",
+   "lines": 778,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "force_field_zone": {
+   "script": "commons/artifacts/force_field_zone/force_field_zone.gd",
+   "lines": 292,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "graph",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "force_fields": {
+   "script": "algorithms/physicssimulation/forcefields/ForceFields.gd",
+   "lines": 373,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody"
+   ]
+  },
+  "force_mower": {
+   "script": "commons/artifacts/force_mower/force_mower.gd",
+   "lines": 398,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "force_pad": {
+   "script": "commons/artifacts/force_pad/force_pad.gd",
+   "lines": 462,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "force_vortex": {
+   "script": "commons/artifacts/force_vortex/force_vortex.gd",
+   "lines": 440,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "forcedirected3d": {
+   "script": "algorithms/graphtheory/forcedirected3d/forcedirected3d.gd",
+   "lines": 1040,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "foucault_pendulum": {
+   "script": "commons/artifacts/foucault_pendulum/foucault_pendulum.gd",
+   "lines": 915,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "fountain_demo": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorFountain.gd",
+   "lines": 25,
+   "terms": [
+    "array",
+    "isosurface",
+    "primitive"
+   ]
+  },
+  "fractal_clouds": {
+   "script": "algorithms/fractals/fractal_clouds/fractal_clouds.gd",
+   "lines": 335,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "fractal_koch_curve": {
+   "script": "algorithms/fractals/example_8_5_koch_curve_vr.gd",
+   "lines": 281,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point"
+   ]
+  },
+  "fractal_lsystem_string": {
+   "script": "commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.gd",
+   "lines": 218,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "point"
+   ]
+  },
+  "fractal_lsystem_tree": {
+   "script": "algorithms/fractals/example_8_9_lsystem_tree_vr.gd",
+   "lines": 221,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point"
+   ]
+  },
+  "fractal_recursion_1": {
+   "script": "algorithms/fractals/example_8_1_recursion_vr.gd",
+   "lines": 206,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "fractal_recursion_2": {
+   "script": "algorithms/fractals/example_8_2_recursion_vr.gd",
+   "lines": 362,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "grammar",
+    "graph",
+    "loop",
+    "point"
+   ]
+  },
+  "fractal_scene": {
+   "script": "algorithms/fractals/meshfractal/fractal.gd",
+   "lines": 216,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "fractal",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "fractal_stochastic_tree": {
+   "script": "algorithms/fractals/example_8_7_stochastic_tree_vr.gd",
+   "lines": 142,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "fractal_truss_tower": {
+   "script": "commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+   "lines": 126,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "laser",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "frame_counter_display": {
+   "script": "commons/visualaid/frame_counter/frame_counter_display.gd",
+   "lines": 171,
+   "terms": [
+    "array"
+   ]
+  },
+  "friction_ramp": {
+   "script": "commons/artifacts/friction_ramp/friction_ramp.gd",
+   "lines": 565,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "frozen_glass_vessel": {
+   "script": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd",
+   "lines": 199,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "softbody",
+    "wave"
+   ]
+  },
+  "ftc_bridge": {
+   "script": "algorithms/change/ftc_bridge.gd",
+   "lines": 466,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "laser",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "gallery_marker_soft-body": {
+   "script": "commons/artifacts/gallery_marker/gallery_marker.gd",
+   "lines": 336,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "galton_board": {
+   "script": "algorithms/randomness/galton_board/galton_board.gd",
+   "lines": 1443,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "graph",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "game_of_life_petri": {
+   "script": "commons/artifacts/game_of_life_petri/game_of_life_petri.gd",
+   "lines": 452,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "generative_adversarial_networks_gans_vr": {
+   "script": "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd",
+   "lines": 585,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "genetic_tree_sculptor": {
+   "script": "commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd",
+   "lines": 364,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "fractal",
+    "grammar",
+    "learning",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "godel_sentence_machine": {
+   "script": "commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd",
+   "lines": 438,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "grab_long_stick": {
+   "script": "commons/primitives/cubes/grab_rod.gd",
+   "lines": 290,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "grab_octahedron": {
+   "script": "commons/primitives/octahedron/grab_octahedron.gd",
+   "lines": 444,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "grab_rainbow_stick": {
+   "script": "commons/primitives/cubes/grab_rod.gd",
+   "lines": 290,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "grab_sphere_point": {
+   "script": "commons/primitives/point/grab_sphere.gd",
+   "lines": 277,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "grab_sphere_point_snap": {
+   "script": "commons/primitives/point/grab_sphere_point_snap.gd",
+   "lines": 509,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "grab_trihedron": {
+   "script": "commons/primitives/trihedron/grab_trihedron.gd",
+   "lines": 364,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "grabbable_line": {
+   "script": "commons/primitives/line/grabbable_line.gd",
+   "lines": 535,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "gradient_descent": {
+   "script": "algorithms/machinelearning/gradientdescent/GradientDescentDemo.gd",
+   "lines": 324,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness"
+   ]
+  },
+  "gradient_descent_optimizer": {
+   "script": "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+   "lines": 222,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "gradient_descent_visualization": {
+   "script": "algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.gd",
+   "lines": 1894,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "gradient_descent_well": {
+   "script": "commons/artifacts/gradient_descent_well/gradient_descent_well.gd",
+   "lines": 719,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "gradient_interpolator": {
+   "script": "algorithms/color/gradient_interpolator/gradient_interpolator.gd",
+   "lines": 236,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "transform"
+   ]
+  },
+  "grammar_provenance": {
+   "script": "commons/artifacts/grammar_provenance/grammar_provenance.gd",
+   "lines": 273,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "graphics_monitor": {
+   "script": "commons/infoboards_3d/graphics_monitor.gd",
+   "lines": 43,
+   "terms": [
+    "array",
+    "loop"
+   ]
+  },
+  "graphspace": {
+   "script": "algorithms/graphtheory/graphspace/graphspace.gd",
+   "lines": 714,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "graph",
+    "laser",
+    "learning",
+    "line",
+    "loop",
+    "point",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "gravity_gun_test_scene": {
+   "script": "algorithms/vectors/08_vector_throwing/destructibles/gravity_gun_test_scene.gd",
+   "lines": 272,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "gravity_well": {
+   "script": "algorithms/physicssimulation/gravitywell/gravitywell.gd",
+   "lines": 304,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "grid3d": {
+   "script": "commons/substrates/grid3d/grid3d_substrate.gd",
+   "lines": 285,
+   "terms": [
+    "array",
+    "graph",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "grid3d_force_directed": {
+   "script": "commons/substrates/grid3d/grid3d_substrate.gd",
+   "lines": 285,
+   "terms": [
+    "array",
+    "graph",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "grid_2d_4x4": {
+   "script": "algorithms/arrays/grid_2d_4x4.gd",
+   "lines": 410,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "grid_3d_4x4x4": {
+   "script": "algorithms/arrays/grid_3d_4x4x4.gd",
+   "lines": 93,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point"
+   ]
+  },
+  "grid_lines": {
+   "script": "commons/primitives/line/grid_lines.gd",
+   "lines": 315,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "grid_model": {
+   "script": "algorithms/arrays/grid_model/grid_model.gd",
+   "lines": 598,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "grid_substrate_runner": {
+   "script": "commons/grid/mutators/grid_substrate_runner.gd",
+   "lines": 423,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "gridagent": {
+   "script": "commons/hazards/gridagent/grid_agent_base.gd",
+   "lines": 680,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "gridcolorizer": {
+   "script": "algorithms/color/gridcolorizer/gridcolorizer.gd",
+   "lines": 25,
+   "terms": []
+  },
+  "gyroid_demo": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorGyroid.gd",
+   "lines": 25,
+   "terms": [
+    "array",
+    "isosurface",
+    "primitive"
+   ]
+  },
+  "hallway_scene": {
+   "script": "algorithms/wavefunctions/sine_hallway/hallway_scene.gd",
+   "lines": 215,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "halting_workbench": {
+   "script": "commons/artifacts/halting_workbench/halting_workbench.gd",
+   "lines": 684,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "hand_color_controller": {
+   "script": "commons/interfaces/nail_color_controller.gd",
+   "lines": 335,
+   "terms": [
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "hardware_entropy_decay": {
+   "script": "algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.gd",
+   "lines": 1078,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "harmonic_distance_table": {
+   "script": "commons/artifacts/harmonic_distance_table/harmonic_distance_table.gd",
+   "lines": 798,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "graph",
+    "learning",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "harmonic_motion_demo": {
+   "script": "commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.gd",
+   "lines": 381,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "hazards_demo": {
+   "script": "commons/hazards/hazards_demo/hazards_demo.gd",
+   "lines": 651,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "health_display": {
+   "script": "commons/visualaid/gameplay/health_display.gd",
+   "lines": 217,
+   "terms": [
+    "array",
+    "colour",
+    "point"
+   ]
+  },
+  "helicoid": {
+   "script": "commons/primitives/parametric/helicoid.gd",
+   "lines": 118,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "hits_reset_display": {
+   "script": "commons/visualaid/gameplay/hits_reset_display.gd",
+   "lines": 191,
+   "terms": [
+    "array",
+    "colour"
+   ]
+  },
+  "hl_turret_vectors": {
+   "script": "commons/artifacts/hl_turret_vectors/hl_turret_vectors.gd",
+   "lines": 1484,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "hole_with_cones": {
+   "script": "commons/primitives/combines/hole_with_cones.gd",
+   "lines": 424,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "holographicdisplay": {
+   "script": "commons/lab/holographicdisplay/holographicdisplay.gd",
+   "lines": 435,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "homogeneous_coordinates": {
+   "script": "commons/artifacts/homogeneous_coordinates/homogeneous_coordinates.gd",
+   "lines": 542,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "human_catapult": {
+   "script": "commons/artifacts/human_catapult/human_catapult.gd",
+   "lines": 628,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "hyperbolic_surface": {
+   "script": "commons/artifacts/hyperbolic_surface/hyperbolic_surface.gd",
+   "lines": 705,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "implicit_surface_modeling": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.gd",
+   "lines": 328,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "isosurface",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "impossible_trident": {
+   "script": "commons/artifacts/impossible_trident/impossible_trident.gd",
+   "lines": 366,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "incompleteness_scale": {
+   "script": "commons/instruments/incompleteness_scale.gd",
+   "lines": 18,
+   "terms": [
+    "colour",
+    "laser",
+    "point",
+    "transform"
+   ]
+  },
+  "incompleteness_tower": {
+   "script": "commons/artifacts/incompleteness_tower/incompleteness_tower.gd",
+   "lines": 405,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "integral_area": {
+   "script": "algorithms/change/integral_area.gd",
+   "lines": 436,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "interactable_demo": {
+   "script": "commons/interactables/InteractableDemo.gd",
+   "lines": 1485,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "interactive_point_origin_force": {
+   "script": "commons/primitives/point/interactive_point_origin_force.gd",
+   "lines": 904,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "interactivetriangle": {
+   "script": "commons/primitives/interactivetriangle/interactivetriangle.gd",
+   "lines": 306,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "invariants_demo": {
+   "script": "algorithms/transforms/invariants/invariants_demo.gd",
+   "lines": 512,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "inverted_tree_cloud": {
+   "script": "algorithms/fractals/recursive_tree/inverted_tree_cloud.gd",
+   "lines": 709,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "john_cage_tech_noir": {
+   "script": "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd",
+   "lines": 1437,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "joint_learn_walk": {
+   "script": "algorithms/machinelearning/reinforcementlearning/joint_learn_walk.gd",
+   "lines": 696,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "fractal",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "julia_set": {
+   "script": "algorithms/fractals/julia_set/JuliaSet.gd",
+   "lines": 376,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "julia_set_explorer": {
+   "script": "commons/artifacts/julia_set_explorer/julia_set_explorer.gd",
+   "lines": 318,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "kaleidoscope": {
+   "script": "commons/artifacts/kaleidoscope/kaleidoscope.gd",
+   "lines": 347,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "karger_algorithm": {
+   "script": "algorithms/graphtheory/karger_algorithm/karger_algorithm.gd",
+   "lines": 1095,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "klee_walking_point": {
+   "script": "commons/primitives/klee_walking_point/klee_walking_point.gd",
+   "lines": 405,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "wave"
+   ]
+  },
+  "koch_curve": {
+   "script": "algorithms/fractals/koch_curve/KochCurve.gd",
+   "lines": 540,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive"
+   ]
+  },
+  "koch_curve_3d": {
+   "script": "algorithms/fractals/koshcurve/KochCurve3D.gd",
+   "lines": 438,
+   "terms": [
+    "array",
+    "colour",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "kosaraju_algorithm": {
+   "script": "algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.gd",
+   "lines": 822,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "kusama_sine": {
+   "script": "algorithms/wavefunctions/kusamasine/kusama.gd",
+   "lines": 1378,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "lab_room": {
+   "script": "commons/artifacts/lab_room/lab_room.gd",
+   "lines": 4003,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "graph",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "lab_table": {
+   "script": "commons/lab/table/table.gd",
+   "lines": 332,
+   "terms": [
+    "array",
+    "colour",
+    "laser",
+    "loop",
+    "point"
+   ]
+  },
+  "laser_measure": {
+   "script": "commons/primitives/laser_measure/laser_measure.gd",
+   "lines": 908,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "laser_sword": {
+   "script": "commons/primitives/line/laser_sword.gd",
+   "lines": 352,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "wave"
+   ]
+  },
+  "launch_arc": {
+   "script": "commons/artifacts/launch_arc/launch_arc.gd",
+   "lines": 327,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "layered_membrane": {
+   "script": "algorithms/proceduralgeneration/hybrid_complex/layeredmembrane/layered_membrane.gd",
+   "lines": 380,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "length_lantern": {
+   "script": "commons/artifacts/length_lantern/length_lantern.gd",
+   "lines": 903,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "lever_balance": {
+   "script": "commons/artifacts/lever_balance/lever_balance.gd",
+   "lines": 104,
+   "terms": [
+    "array",
+    "colour",
+    "laser",
+    "learning",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "liar_loop": {
+   "script": "commons/artifacts/liar_loop/liar_loop.gd",
+   "lines": 511,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "library_rack": {
+   "script": "commons/artifacts/library_rack/library_rack.gd",
+   "lines": 803,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "lightrod": {
+   "script": "commons/primitives/line/light_rod.gd",
+   "lines": 123,
+   "terms": [
+    "array",
+    "colour",
+    "laser",
+    "loop",
+    "point",
+    "primitive"
+   ]
+  },
+  "line": {
+   "script": "commons/primitives/line/line.gd",
+   "lines": 590,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "line_builder_3d": {
+   "script": "algorithms/wavefunctions/line_builder_3d/interactive_line.gd",
+   "lines": 366,
+   "terms": [
+    "array",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "lissajous_curves": {
+   "script": "algorithms/wavefunctions/lissajous_curves/lissajous_curves.gd",
+   "lines": 442,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "wave"
+   ]
+  },
+  "loss_function_comparator": {
+   "script": "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd",
+   "lines": 704,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "lshape": {
+   "script": "commons/primitives/lshape/lshape.gd",
+   "lines": 378,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point"
+   ]
+  },
+  "lstms_vr": {
+   "script": "algorithms/machinelearning/LSTMs/LSTMs_VR.gd",
+   "lines": 517,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "lsystem_dungeon": {
+   "script": "commons/artifacts/lsystem_dungeon/lsystem_dungeon.gd",
+   "lines": 358,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "lsystem_editor": {
+   "script": "commons/artifacts/lsystem_editor/lsystem_editor.gd",
+   "lines": 403,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "lsystem_tree": {
+   "script": "commons/artifacts/lsystem_tree/lsystem_tree.gd",
+   "lines": 415,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "lyapunov_fractal": {
+   "script": "commons/artifacts/lyapunov_fractal/lyapunov_fractal.gd",
+   "lines": 152,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "plane",
+    "point",
+    "transform"
+   ]
+  },
+  "magnetic_simulation": {
+   "script": "algorithms/physicssimulation/magneticsimulation/magnetic_simulation_main.gd",
+   "lines": 132,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive"
+   ]
+  },
+  "mamma_monster_gallery": {
+   "script": "commons/artifacts/mamma_monster_gallery/mamma_monster_gallery.gd",
+   "lines": 110,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point"
+   ]
+  },
+  "mandelbrot_set": {
+   "script": "algorithms/fractals/mandelbrot_set/MandelbrotSet.gd",
+   "lines": 401,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "marchingcave": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+   "lines": 115,
+   "terms": [
+    "array",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "marchingcubes_cave": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+   "lines": 115,
+   "terms": [
+    "array",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "marchingcubes_portal_landscape": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorOverhang.gd",
+   "lines": 61,
+   "terms": [
+    "array",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "mario_cube": {
+   "script": "commons/artifacts/mario_cube/mario_cube.gd",
+   "lines": 234,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "mario_cube_time_trace": {
+   "script": "commons/scenes/mapobjects/mario_cube_time_trace.gd",
+   "lines": 388,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "mario_test_sound_ui": {
+   "script": "commons/scenes/2din3dui/settings_ui.gd",
+   "lines": 18,
+   "terms": []
+  },
+  "mass_spring_bench": {
+   "script": "commons/artifacts/mass_spring_bench/mass_spring_bench.gd",
+   "lines": 295,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "grammar",
+    "graph",
+    "loop",
+    "point",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "mass_spring_damper": {
+   "script": "algorithms/physicssimulation/massspringdamper/MassSpringDamper.gd",
+   "lines": 485,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "math_objects": {
+   "script": "commons/primitives/parametric/math_objects_gallery.gd",
+   "lines": 476,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "matrix_4x4_viewer": {
+   "script": "algorithms/transforms/matrix_viewer/matrix_4x4_viewer.gd",
+   "lines": 688,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "max_q_basin_room": {
+   "script": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+   "lines": 196,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "maze_generation": {
+   "script": "algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.gd",
+   "lines": 622,
+   "terms": [
+    "array",
+    "automata",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "mc_base": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+   "lines": 115,
+   "terms": [
+    "array",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "mc_cave": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+   "lines": 115,
+   "terms": [
+    "array",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "mc_flat_landscape": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorFlat.gd",
+   "lines": 75,
+   "terms": [
+    "array",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "mc_inside_cave": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+   "lines": 115,
+   "terms": [
+    "array",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "mc_overhang_landscape": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorOverhang.gd",
+   "lines": 61,
+   "terms": [
+    "array",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "mc_portal_landscape": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorUnifiedPortals.gd",
+   "lines": 79,
+   "terms": [
+    "array",
+    "isosurface",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "mc_sculpt_vr": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingCubesSculptVR.gd",
+   "lines": 464,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "isosurface",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "mc_shapes_gallery": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingShapesGallery.gd",
+   "lines": 58,
+   "terms": [
+    "array",
+    "colour",
+    "isosurface",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "mc_terrain_demo": {
+   "script": "algorithms/spacetopology/marchingcubes/scenes/TerrainDemoController.gd",
+   "lines": 411,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "isosurface",
+    "laser",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "mc_torus_sculpture": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorTorus.gd",
+   "lines": 28,
+   "terms": [
+    "array",
+    "isosurface",
+    "primitive"
+   ]
+  },
+  "menger_sponge": {
+   "script": "algorithms/fractals/mengersponge/menger_sponge.gd",
+   "lines": 396,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "grammar",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "merge_conflict_visualizer": {
+   "script": "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
+   "lines": 274,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "metaballs": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.gd",
+   "lines": 328,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "isosurface",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "microscope": {
+   "script": "commons/lab/microscope/microscope.gd",
+   "lines": 280,
+   "terms": [
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "microstate_counter": {
+   "script": "commons/artifacts/microstate_counter/microstate_counter.gd",
+   "lines": 556,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "mirror_cellular_texture_for_3d": {
+   "script": "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd",
+   "lines": 110,
+   "terms": [
+    "array"
+   ]
+  },
+  "mobius_world": {
+   "script": "algorithms/alternativegeometries/mobiusstrip/mobius_world.gd",
+   "lines": 201,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "modulor_man_demo": {
+   "script": "algorithms/wavefunctions/line_builder_3d/modulor_man_demo.gd",
+   "lines": 374,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "momentum_collision": {
+   "script": "algorithms/physicssimulation/momentum_collision/momentum_collision.gd",
+   "lines": 233,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "momentum_cradle": {
+   "script": "commons/artifacts/momentum_cradle/momentum_cradle.gd",
+   "lines": 139,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "monte_carlo_dartboard": {
+   "script": "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd",
+   "lines": 1126,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "mortar_vector_siege": {
+   "script": "commons/artifacts/mortar_vector_siege/mortar_vector_siege.gd",
+   "lines": 2227,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "mst_visualization": {
+   "script": "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd",
+   "lines": 1242,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "learning",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "multimeter": {
+   "script": "commons/lab/multimeter/multimeter.gd",
+   "lines": 421,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "mushrooms": {
+   "script": "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd",
+   "lines": 925,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "noise",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "mystic_writing_pad": {
+   "script": "commons/primitives/mystic_writing_pad/mystic_writing_pad.gd",
+   "lines": 541,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "nail_color_controller": {
+   "script": "commons/interfaces/nail_color_controller.gd",
+   "lines": 335,
+   "terms": [
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "nakama_metaballs": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.gd",
+   "lines": 365,
+   "terms": [
+    "array",
+    "colour",
+    "isosurface",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "nature_system_demo": {
+   "script": "algorithms/nature_system/demo/nature_system_demo.gd",
+   "lines": 268,
+   "terms": [
+    "array",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "nbody_simulation": {
+   "script": "algorithms/physicssimulation/nbodysimulation/nbody_problem.gd",
+   "lines": 542,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "negative_control_fixture": {
+   "script": "commons/interfaces/foundations/negative_control_fixture.gd",
+   "lines": 337,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "network_analysis": {
+   "script": "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd",
+   "lines": 674,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "networkflow3d": {
+   "script": "algorithms/graphtheory/networkflow3d/networkflow3d.gd",
+   "lines": 939,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "neural_network_visualization": {
+   "script": "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd",
+   "lines": 993,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "learning",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "neural_networks_vr": {
+   "script": "algorithms/machinelearning/neural_networks/NeuralNetworks_VR.gd",
+   "lines": 966,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "graph",
+    "learning",
+    "line",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "newton_cradle": {
+   "script": "algorithms/physicssimulation/newtoncradle/NewtonCradle.gd",
+   "lines": 615,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "newtons_laws": {
+   "script": "algorithms/physicssimulation/newtonslaws/NewtonsLaws.gd",
+   "lines": 401,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "noc_5_04_flow_field": {
+   "script": "algorithms/steering/noc_ch05/noc_5_04_flow_field_vr.gd",
+   "lines": 201,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "line",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "noise_mixer": {
+   "script": "commons/artifacts/noise_mixer/noise_mixer.gd",
+   "lines": 331,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "noise",
+    "plane",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "noise_space": {
+   "script": "commons/context/walkgrids/NoiseSpace.gd",
+   "lines": 161,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "noise"
+   ]
+  },
+  "non_teleological_evolution": {
+   "script": "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd",
+   "lines": 607,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "normal_force_demo": {
+   "script": "algorithms/vectors/07_vector_projection_reflection/NormalForceDemo.gd",
+   "lines": 311,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "plane",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "orbit_pair": {
+   "script": "commons/artifacts/orbit_pair/orbit_pair.gd",
+   "lines": 131,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "orbit_walk": {
+   "script": "commons/artifacts/orbit_walk/orbit_walk.gd",
+   "lines": 121,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "orbital_mechanics_demo": {
+   "script": "commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.gd",
+   "lines": 358,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "organic_space": {
+   "script": "algorithms/alternativegeometries/organicspace/organic_space.gd",
+   "lines": 480,
+   "terms": [
+    "array",
+    "boolean",
+    "collision",
+    "cube",
+    "force",
+    "grammar",
+    "isosurface",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "origin": {
+   "script": "commons/primitives/origin/origin.gd",
+   "lines": 233,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "oscillation_controlled_cube": {
+   "script": "commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd",
+   "lines": 636,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "learning",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "oscilloscope": {
+   "script": "commons/artifacts/oscilloscope/oscilloscope.gd",
+   "lines": 406,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "panel_bridge_loom": {
+   "script": "commons/ui/panel_bridge/test_panel_bridge.gd",
+   "lines": 339,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "parallel_line_puzzle": {
+   "script": "commons/primitives/line/puzzles/parallel_line_puzzle.gd",
+   "lines": 185,
+   "terms": [
+    "array",
+    "force",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "parametric_lsystem": {
+   "script": "commons/artifacts/parametric_lsystem/parametric_lsystem.gd",
+   "lines": 304,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "parasol_triangle": {
+   "script": "commons/primitives/triangle/parasol_triangle.gd",
+   "lines": 315,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "partial_derivative_terrain": {
+   "script": "algorithms/change/partial_derivative_terrain.gd",
+   "lines": 340,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "particle_flow_swarm": {
+   "script": "algorithms/change/particle_flow_swarm.gd",
+   "lines": 268,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "particle_systems": {
+   "script": "algorithms/physicssimulation/particlesystems/ParticleSystems.gd",
+   "lines": 284,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "wave"
+   ]
+  },
+  "path_game_controller": {
+   "script": "commons/hazards/path_game/path_game_controller.gd",
+   "lines": 163,
+   "terms": [
+    "array",
+    "loop",
+    "point"
+   ]
+  },
+  "path_watchdog": {
+   "script": "commons/hazards/path_watchdog/path_watchdog.gd",
+   "lines": 633,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "fractal",
+    "line",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "pathfinding3d": {
+   "script": "algorithms/graphtheory/pathfinding3d/pathfinding3d.gd",
+   "lines": 1398,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "pattern_artifact": {
+   "script": "commons/artifacts/pattern_artifact/pattern_artifact.gd",
+   "lines": 153,
+   "terms": [
+    "array",
+    "loop",
+    "plane",
+    "point",
+    "transform"
+   ]
+  },
+  "pattern_atlas_gallery": {
+   "script": "commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.gd",
+   "lines": 214,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point"
+   ]
+  },
+  "pattern_loom": {
+   "script": "commons/artifacts/pattern_loom/pattern_loom.gd",
+   "lines": 1751,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "laser",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "pattern_machine_a": {
+   "script": "commons/artifacts/pattern_machine_a/pattern_machine_a.gd",
+   "lines": 990,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "pattern_machine_b": {
+   "script": "commons/artifacts/pattern_machine_b/pattern_machine_b.gd",
+   "lines": 671,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "pattern_machine_c": {
+   "script": "commons/artifacts/pattern_machine_c/pattern_machine_c.gd",
+   "lines": 1347,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "laser",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "pattern_machine_d": {
+   "script": "commons/artifacts/pattern_machine_d/pattern_machine_d.gd",
+   "lines": 822,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "laser",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "pattern_maker_station": {
+   "script": "commons/artifacts/pattern_maker_station/pattern_maker_station.gd",
+   "lines": 811,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "pattern_mill": {
+   "script": "commons/artifacts/pattern_mill/pattern_mill.gd",
+   "lines": 1634,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "pattern_studio_plate": {
+   "script": "commons/primitives/arrays/pattern_studio_plate.gd",
+   "lines": 1127,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "pattern_tile_plate": {
+   "script": "commons/primitives/arrays/pattern_tile_plate.gd",
+   "lines": 693,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "pattern_tunnel_machine": {
+   "script": "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd",
+   "lines": 235,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "pca_visualization": {
+   "script": "algorithms/machinelearning/pca/pca_visualization.gd",
+   "lines": 1483,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "peer_production_tool": {
+   "script": "commons/artifacts/peer_production_tool/peer_production_tool.gd",
+   "lines": 226,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "pendulum_hall": {
+   "script": "commons/artifacts/pendulum_hall/pendulum_hall.gd",
+   "lines": 127,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "laser",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "percolationnetwork_ca": {
+   "script": "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd",
+   "lines": 697,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "perlin_noise_bridge": {
+   "script": "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd",
+   "lines": 256,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "perlin_terrain_sculptor": {
+   "script": "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd",
+   "lines": 326,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "perspective_lines": {
+   "script": "commons/primitives/line/perspective_lines.gd",
+   "lines": 141,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "petri_dish_worms": {
+   "script": "commons/artifacts/petri_dish_worms/petri_dish_worms.gd",
+   "lines": 580,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "pick_up_cube": {
+   "script": "commons/scenes/mapobjects/pick_up_cube.gd",
+   "lines": 798,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "pickup_cube_rotating": {
+   "script": "commons/primitives/cubes/pickups/pickup_wrapper.gd",
+   "lines": 146,
+   "terms": [
+    "array",
+    "collision",
+    "fractal",
+    "loop",
+    "point"
+   ]
+  },
+  "pickup_cube_static": {
+   "script": "commons/primitives/cubes/pickups/pickup_wrapper.gd",
+   "lines": 146,
+   "terms": [
+    "array",
+    "collision",
+    "fractal",
+    "loop",
+    "point"
+   ]
+  },
+  "pickup_cube_transforming": {
+   "script": "commons/primitives/cubes/pickups/pickup_wrapper.gd",
+   "lines": 146,
+   "terms": [
+    "array",
+    "collision",
+    "fractal",
+    "loop",
+    "point"
+   ]
+  },
+  "pillarcolorcollection": {
+   "script": "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+   "lines": 205,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point"
+   ]
+  },
+  "platonic_grabbables": {
+   "script": "commons/primitives/platonic_grabbables.gd",
+   "lines": 121,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point"
+   ]
+  },
+  "player_trace": {
+   "script": "commons/primitives/point/player_trace.gd",
+   "lines": 711,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "plus": {
+   "script": "commons/primitives/plus/plus.gd",
+   "lines": 287,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "plus_line_puzzle": {
+   "script": "commons/primitives/line/puzzles/plus_line_puzzle.gd",
+   "lines": 176,
+   "terms": [
+    "array",
+    "loop",
+    "point"
+   ]
+  },
+  "polyhedron_nets_cube": {
+   "script": "commons/infoboards_3d/visualizations/polyhedron_nets.gd",
+   "lines": 516,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "plane",
+    "point",
+    "transform"
+   ]
+  },
+  "possibility_space_cloud": {
+   "script": "commons/artifacts/possibility_space_cloud/possibility_space_cloud.gd",
+   "lines": 381,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "primitive_assembler": {
+   "script": "commons/artifacts/primitive_assembler/primitive_assembler.gd",
+   "lines": 1189,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "primitive_combo_puzzle": {
+   "script": "commons/artifacts/primitive_combo_puzzle/primitive_combo_puzzle.gd",
+   "lines": 343,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "prism_block": {
+   "script": "commons/primitives/prismes/prism_block.gd",
+   "lines": 375,
+   "terms": [
+    "array",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "prng_crank_machine": {
+   "script": "algorithms/randomness/prng_crank_machine/prng_crank_machine.gd",
+   "lines": 1009,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "projection_shadow": {
+   "script": "commons/artifacts/projection_shadow/projection_shadow.gd",
+   "lines": 256,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "provability_sorter": {
+   "script": "commons/artifacts/provability_sorter/provability_sorter.gd",
+   "lines": 513,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "push_relabel_algorithm": {
+   "script": "algorithms/graphtheory/push_relabel/push_relabel.gd",
+   "lines": 1067,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "pyramid": {
+   "script": "commons/primitives/pyramid/pyramid.gd",
+   "lines": 163,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "pyramid_edit": {
+   "script": "commons/primitives/pyramid/pyramid_edit.gd",
+   "lines": 305,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "pyramidlong": {
+   "script": "commons/primitives/pyramid/pyramidlong.gd",
+   "lines": 216,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "pythagorean_triangle_angles": {
+   "script": "commons/primitives/triangle/pythagorean_triangle_angles.gd",
+   "lines": 513,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point"
+   ]
+  },
+  "qfep_balance_workbench": {
+   "script": "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd",
+   "lines": 1080,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "quad": {
+   "script": "commons/primitives/quad/quad.gd",
+   "lines": 291,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "quad_line_puzzle": {
+   "script": "commons/primitives/line/puzzles/quad_line_puzzle.gd",
+   "lines": 181,
+   "terms": [
+    "array",
+    "graph",
+    "loop",
+    "point"
+   ]
+  },
+  "queer_cylinder_target": {
+   "script": "commons/primitives/targets/queer_cylinder_target.gd",
+   "lines": 371,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "queer_marching_cave": {
+   "script": "algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.gd",
+   "lines": 474,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "isosurface",
+    "learning",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "queer_morphology_specimen": {
+   "script": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+   "lines": 867,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "radiolaria": {
+   "script": "algorithms/computationalbiology/radiolaria2/radiolaria.gd",
+   "lines": 1183,
+   "terms": [
+    "array",
+    "boolean",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "rainbow": {
+   "script": "algorithms/primitives/rainbow/rainbow.gd",
+   "lines": 296,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "plane",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "rainbow_hallway": {
+   "script": "algorithms/wavefunctions/rainbow_hallway/RainbowHallway.gd",
+   "lines": 377,
+   "terms": [
+    "array",
+    "boolean",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "random_decay_multimesh": {
+   "script": "algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd",
+   "lines": 480,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "random_forest_visualization": {
+   "script": "algorithms/machinelearning/randomforest/random_forest_visualization.gd",
+   "lines": 1286,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "random_object_spawner": {
+   "script": "algorithms/randomness/random_object_spawner.gd",
+   "lines": 430,
+   "terms": [
+    "array",
+    "force",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "random_space": {
+   "script": "commons/context/walkgrids/RandomSpace.gd",
+   "lines": 464,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "random_walk_leash": {
+   "script": "algorithms/randomness/random_walk_leash/random_walk_leash.gd",
+   "lines": 1158,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "random_walk_terrarium": {
+   "script": "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+   "lines": 804,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "raymarched_metaballs": {
+   "script": "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.gd",
+   "lines": 328,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "isosurface",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "reaction_diffusion": {
+   "script": "algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.gd",
+   "lines": 113,
+   "terms": [
+    "array"
+   ]
+  },
+  "reaction_diffusion_intro": {
+   "script": "algorithms/randomness/reaction_diffusion_intro/reaction_diffusion_intro.gd",
+   "lines": 328,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "noise",
+    "plane",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "recursive_chair": {
+   "script": "algorithms/fractals/cubesubdivision/recursive_chair.gd",
+   "lines": 395,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "loop",
+    "point"
+   ]
+  },
+  "recursive_table": {
+   "script": "algorithms/fractals/cubesubdivision/recursive_table.gd",
+   "lines": 448,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "grammar",
+    "graph",
+    "loop",
+    "point"
+   ]
+  },
+  "recursive_tree": {
+   "script": "algorithms/fractals/recursive_tree/recursive_tree.gd",
+   "lines": 769,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "recursive_tree_2": {
+   "script": "algorithms/fractals/recursivetree/recursive_tree.gd",
+   "lines": 343,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "reflection_hall": {
+   "script": "commons/artifacts/reflection_hall/reflection_hall.gd",
+   "lines": 1592,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "fractal",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "resonating_metallophone": {
+   "script": "algorithms/wavefunctions/resonance/ResonatingMetallophone.gd",
+   "lines": 331,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "return_launcher": {
+   "script": "commons/artifacts/return_launcher/return_launcher.gd",
+   "lines": 159,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "rhizomatic_maze_space": {
+   "script": "algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.gd",
+   "lines": 606,
+   "terms": [
+    "array",
+    "boolean",
+    "collision",
+    "force",
+    "grammar",
+    "isosurface",
+    "loop",
+    "noise",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "rhizomatic_structure": {
+   "script": "algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.gd",
+   "lines": 446,
+   "terms": [
+    "array",
+    "fractal",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "rhizome_cave_demo": {
+   "script": "algorithms/spacetopology/marchingcubes/scenes/RhizomeCaveDemoController.gd",
+   "lines": 146,
+   "terms": [
+    "array",
+    "cube",
+    "isosurface",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "rhizome_grower": {
+   "script": "commons/artifacts/rhizome_grower/rhizome_grower.gd",
+   "lines": 238,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "rice_verifier_booth": {
+   "script": "commons/interfaces/foundations/rice_verifier_booth.gd",
+   "lines": 386,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "riemann_pi": {
+   "script": "algorithms/spacetopology/riemann_pi/pi_infinity_surface.gd",
+   "lines": 470,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "riemann_pump": {
+   "script": "algorithms/change/riemann_pump.gd",
+   "lines": 280,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "riemann_sphere": {
+   "script": "commons/artifacts/riemann_sphere/riemann_sphere.gd",
+   "lines": 684,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "learning",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "riemann_sum_workbench": {
+   "script": "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd",
+   "lines": 629,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "righttriangle": {
+   "script": "commons/primitives/righttriangle/righttriangle.gd",
+   "lines": 277,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "romanesco": {
+   "script": "algorithms/fractals/romanesco/romanesco.gd",
+   "lines": 263,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "room_grammar": {
+   "script": "commons/artifacts/room_grammar/room_grammar.gd",
+   "lines": 359,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "grammar",
+    "graph",
+    "loop",
+    "plane",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "room_shape_demonstrator": {
+   "script": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
+   "lines": 371,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "rotatescalecubes": {
+   "script": "algorithms/transformation/rotatescalecubes/rotatescalecubes.gd",
+   "lines": 158,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "rotating_cube": {
+   "script": "commons/primitives/cubes/animation/RotationTween.gd",
+   "lines": 50,
+   "terms": [
+    "point",
+    "transform"
+   ]
+  },
+  "rotating_cube_demo": {
+   "script": "commons/artifacts/rotating_cube_demo/rotating_cube_demo.gd",
+   "lines": 558,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "rotation_gimbal": {
+   "script": "commons/artifacts/rotation_gimbal/rotation_gimbal.gd",
+   "lines": 739,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "roughrock": {
+   "script": "commons/primitives/roughrock/roughrock.gd",
+   "lines": 150,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "row_3_x": {
+   "script": "algorithms/arrays/row_3_x.gd",
+   "lines": 167,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "russell_paradox_workbench": {
+   "script": "commons/artifacts/russell_paradox_workbench/russell_paradox_workbench.gd",
+   "lines": 784,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "ruth_asawa_sculpture": {
+   "script": "algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.gd",
+   "lines": 520,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "samplevialrack": {
+   "script": "commons/lab/samplevialrack/samplevialrack.gd",
+   "lines": 597,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "scale_lines": {
+   "script": "commons/primitives/line/scale_lines.gd",
+   "lines": 132,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "scale_me": {
+   "script": "algorithms/primitives/scaleme/scale_me.gd",
+   "lines": 328,
+   "terms": [
+    "array",
+    "collision",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "science_screen": {
+   "script": "commons/artifacts/science_screen/science_screen.gd",
+   "lines": 3050,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "fractal",
+    "graph",
+    "laser",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "seed_replay_demo": {
+   "script": "algorithms/randomness/seed_replay/seed_replay_demo.gd",
+   "lines": 292,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "seismograph": {
+   "script": "commons/lab/seismograph/seismograph.gd",
+   "lines": 423,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "self_membership_set": {
+   "script": "commons/artifacts/self_membership_set/self_membership_set.gd",
+   "lines": 437,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "grammar",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "self_organizing_patterns": {
+   "script": "algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.gd",
+   "lines": 1517,
+   "terms": [
+    "array",
+    "automata",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "self_shaping_forge": {
+   "script": "commons/artifacts/self_shaping_forge/self_shaping_forge.gd",
+   "lines": 183,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "sentry_turret": {
+   "script": "commons/artifacts/sentry_turret/sentry_turret.gd",
+   "lines": 965,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "shannon_entropy_meter": {
+   "script": "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd",
+   "lines": 602,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "randomness"
+   ]
+  },
+  "shannon_workbench": {
+   "script": "commons/artifacts/shannon_workbench/shannon_workbench.gd",
+   "lines": 635,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "sierpinski_triangle": {
+   "script": "algorithms/fractals/sierpinskitriangle/sierpinski_triangle.gd",
+   "lines": 489,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "simulated_annealing": {
+   "script": "algorithms/optimization/simulatedannealing/simulated_annealing_visualization.gd",
+   "lines": 1708,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "sine_cylinder_staircase": {
+   "script": "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd",
+   "lines": 339,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "sine_oscillation": {
+   "script": "algorithms/wavefunctions/sineoscillation/sine_oscillation.gd",
+   "lines": 621,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "wave"
+   ]
+  },
+  "sine_space": {
+   "script": "algorithms/wavefunctions/sine_space/SineSpace.gd",
+   "lines": 399,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "sine_space_explanation": {
+   "script": "commons/artifacts/sine_space_explanation/sine_space_explanation.gd",
+   "lines": 401,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "sine_wall_corridor": {
+   "script": "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd",
+   "lines": 406,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "sine_wall_explanation": {
+   "script": "commons/artifacts/sine_wall_explanation/sine_wall_explanation.gd",
+   "lines": 533,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "situated_readout": {
+   "script": "commons/artifacts/situated_readout/situated_readout.gd",
+   "lines": 618,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "graph",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "slingshot_launcher": {
+   "script": "algorithms/physicssimulation/slingshotlauncher/slingshotlauncher.gd",
+   "lines": 467,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "slingshot_pull": {
+   "script": "commons/artifacts/slingshot_pull/slingshot_pull.gd",
+   "lines": 98,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "slope_tangent_demo": {
+   "script": "algorithms/change/slope_tangent_demo.gd",
+   "lines": 373,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "wave"
+   ]
+  },
+  "slot_machine": {
+   "script": "algorithms/randomness/slot_machine/slot_machine.gd",
+   "lines": 1005,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "small_subdivision_cube": {
+   "script": "commons/primitives/cubes/subdivision_cube.gd",
+   "lines": 204,
+   "terms": [
+    "collision",
+    "colour",
+    "fractal",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "snap_cube_puzzle": {
+   "script": "commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.gd",
+   "lines": 708,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "snap_octahedron_puzzle": {
+   "script": "commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.gd",
+   "lines": 708,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "snap_pyramid_puzzle": {
+   "script": "commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.gd",
+   "lines": 187,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "graph",
+    "loop",
+    "point"
+   ]
+  },
+  "snap_tetra_puzzle": {
+   "script": "commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.gd",
+   "lines": 453,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "soft_mushroom": {
+   "script": "algorithms/softbodies/mushrooms/soft_mushrooms.gd",
+   "lines": 327,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "softmill": {
+   "script": "algorithms/physicssimulation/softbody3d/softbody3d.gd",
+   "lines": 297,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "point",
+    "softbody",
+    "wave"
+   ]
+  },
+  "softstopscene": {
+   "script": "algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd",
+   "lines": 290,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "primitive",
+    "softbody"
+   ]
+  },
+  "sorting_algorithm_race": {
+   "script": "algorithms/arrays/sorting_race/sorting_algorithm_race.gd",
+   "lines": 383,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point"
+   ]
+  },
+  "space_colonization_algorithm": {
+   "script": "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.gd",
+   "lines": 621,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "space_filling_curve_gallery": {
+   "script": "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd",
+   "lines": 357,
+   "terms": [
+    "array",
+    "colour",
+    "fractal",
+    "grammar",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "spectrum_forest": {
+   "script": "algorithms/color/spectrumforest/spectrum_forest.gd",
+   "lines": 132,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "sphere": {
+   "script": "commons/primitives/sphere/sphere.gd",
+   "lines": 117,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "primitive"
+   ]
+  },
+  "sphere_high": {
+   "script": "commons/primitives/godotmeshes/sphere_high.gd",
+   "lines": 93,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "primitive"
+   ]
+  },
+  "sphere_low": {
+   "script": "commons/primitives/godotmeshes/sphere_low.gd",
+   "lines": 101,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "primitive"
+   ]
+  },
+  "sphere_mid": {
+   "script": "commons/primitives/godotmeshes/sphere_mid.gd",
+   "lines": 94,
+   "terms": [
+    "array",
+    "colour",
+    "primitive"
+   ]
+  },
+  "sphere_splitting_showcase": {
+   "script": "algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.gd",
+   "lines": 387,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "spin": {
+   "script": "algorithms/transformation/spin/spin.gd",
+   "lines": 112,
+   "terms": [
+    "array",
+    "loop",
+    "transform"
+   ]
+  },
+  "spring_demo": {
+   "script": "commons/artifacts/spring_demo/spring_demo.gd",
+   "lines": 386,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "spring_network": {
+   "script": "algorithms/wavefunctions/spring_network/spring_network.gd",
+   "lines": 244,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "wave"
+   ]
+  },
+  "spring_system": {
+   "script": "algorithms/physicssimulation/springsystem/spring_system.gd",
+   "lines": 785,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "spring_tower": {
+   "script": "commons/artifacts/spring_tower/spring_tower.gd",
+   "lines": 110,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "star_primitive": {
+   "script": "commons/primitives/star/star.gd",
+   "lines": 220,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "stochastic_tree_separated": {
+   "script": "algorithms/fractals/example_8_7_stochastic_tree_separated_vr.gd",
+   "lines": 583,
+   "terms": [
+    "array",
+    "automata",
+    "colour",
+    "fractal",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "strange_attractors": {
+   "script": "algorithms/chaos/strangeattractors/strange_attractors.gd",
+   "lines": 607,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "stretch_bench": {
+   "script": "commons/artifacts/stretch_bench/stretch_bench.gd",
+   "lines": 868,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "subpixel_display": {
+   "script": "algorithms/color/subpixel_display/subpixel_display.gd",
+   "lines": 223,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "plane",
+    "point",
+    "transform"
+   ]
+  },
+  "superposition_display": {
+   "script": "commons/artifacts/superposition_display/superposition_display.gd",
+   "lines": 682,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "surreal_kinetic_sculpture": {
+   "script": "algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.gd",
+   "lines": 206,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "svm_visualization": {
+   "script": "algorithms/machinelearning/supportvectormachine/svm_visualization.gd",
+   "lines": 1006,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "wave"
+   ]
+  },
+  "tangent_slope_workbench": {
+   "script": "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd",
+   "lines": 764,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "tarjan_algorithm": {
+   "script": "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd",
+   "lines": 786,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "ten_print_textile": {
+   "script": "commons/artifacts/ten_print_textile/ten_print_textile.gd",
+   "lines": 154,
+   "terms": [
+    "array",
+    "colour",
+    "laser",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "tensegrity_triangle": {
+   "script": "commons/primitives/tensegrity_triangle/tensegrity_triangle.gd",
+   "lines": 151,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "tentacle_placer": {
+   "script": "commons/artifacts/tentacle_placer/tentacle_placer.gd",
+   "lines": 859,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "three_body_problem": {
+   "script": "algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd",
+   "lines": 575,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "throw_ball": {
+   "script": "algorithms/vectors/08_vector_throwing/throw_ball_sphere.gd",
+   "lines": 345,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "tile_meander_floor": {
+   "script": "commons/artifacts/pompeii_mosaic_floor/tile_meander_floor.gd",
+   "lines": 372,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "tiling_demo": {
+   "script": "commons/primitives/arrays/tiling_demo.gd",
+   "lines": 216,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "plane",
+    "point",
+    "transform"
+   ]
+  },
+  "timbre_sculptor": {
+   "script": "commons/artifacts/timbre_sculptor/timbre_sculptor.gd",
+   "lines": 769,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "topological_sort": {
+   "script": "algorithms/graphtheory/topological_sort/topological_sort.gd",
+   "lines": 876,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform"
+   ]
+  },
+  "torque_crank": {
+   "script": "commons/artifacts/torque_crank/torque_crank.gd",
+   "lines": 272,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "torque_demo": {
+   "script": "algorithms/vectors/06_vector_cross_product/TorqueDemo.gd",
+   "lines": 261,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "plane",
+    "point",
+    "wave"
+   ]
+  },
+  "torus_radials_rings": {
+   "script": "commons/primitives/torus/torus_radials_rings.gd",
+   "lines": 220,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "primitive"
+   ]
+  },
+  "toruscylinder": {
+   "script": "algorithms/transformation/toruscylinder/toruscylinder.gd",
+   "lines": 184,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "trajectory_artifact": {
+   "script": "commons/artifacts/trajectory_artifact/trajectory_artifact.gd",
+   "lines": 113,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "transform_composition": {
+   "script": "commons/artifacts/transform_composition/transform_composition.gd",
+   "lines": 635,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "transform_composition_workbench": {
+   "script": "commons/artifacts/transform_composition_workbench/transform_composition_workbench.gd",
+   "lines": 1007,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "transformation_cube": {
+   "script": "commons/primitives/cubes/animation/TransformationTween.gd",
+   "lines": 61,
+   "terms": [
+    "point",
+    "wave"
+   ]
+  },
+  "transformers_vr": {
+   "script": "algorithms/machinelearning/transformers/Transformers_VR.gd",
+   "lines": 618,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "learning",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "translation_cube_demo": {
+   "script": "commons/primitives/translation/translation_cube_demo.gd",
+   "lines": 605,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "triangle": {
+   "script": "commons/primitives/triangle/triangle.gd",
+   "lines": 253,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "triangle_curvature_workbench": {
+   "script": "commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd",
+   "lines": 790,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "triangle_line_puzzle": {
+   "script": "commons/primitives/line/puzzles/triangle_line_puzzle.gd",
+   "lines": 219,
+   "terms": [
+    "array",
+    "graph",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "triangleprofiles": {
+   "script": "commons/primitives/triangleprofiles/triangleprofiles.gd",
+   "lines": 428,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "graph",
+    "line",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "truncatedtetrahedron": {
+   "script": "commons/primitives/truncatedtetrahedron/truncatedtetrahedron.gd",
+   "lines": 201,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "tt": {
+   "script": "commons/context/clipboard/codeDisplay.gd",
+   "lines": 831,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "fractal",
+    "graph",
+    "loop",
+    "point"
+   ]
+  },
+  "turing_pattern_generator": {
+   "script": "commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd",
+   "lines": 538,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "learning",
+    "loop",
+    "plane",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "turret_boll_infoboard": {
+   "script": "addons/godot-xr-tools/objects/viewport_2d_in_3d.gd",
+   "lines": 659,
+   "terms": [
+    "array",
+    "collision",
+    "loop",
+    "point"
+   ]
+  },
+  "turret_targeting": {
+   "script": "algorithms/vectors/11_turret_targeting/TurretTargeting.gd",
+   "lines": 128,
+   "terms": [
+    "array",
+    "colour",
+    "laser",
+    "loop",
+    "point"
+   ]
+  },
+  "unit_circle_advanced": {
+   "script": "algorithms/wavefunctions/unit_circle/UnitCircle.gd",
+   "lines": 383,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_add": {
+   "script": "commons/artifacts/vector_op_console/vector_op_console.gd",
+   "lines": 237,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "vector_addition_walk": {
+   "script": "commons/artifacts/vector_addition_walk/vector_addition_walk.gd",
+   "lines": 437,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform"
+   ]
+  },
+  "vector_arena": {
+   "script": "commons/artifacts/vector_arena/vector_arena.gd",
+   "lines": 884,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_drone": {
+   "script": "algorithms/vectors/08_vector_throwing/vector_drone.gd",
+   "lines": 611,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "fractal",
+    "loop",
+    "point",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_field": {
+   "script": "algorithms/transformation/vector_field/vector_field.gd",
+   "lines": 506,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "line",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_field_grid": {
+   "script": "algorithms/change/vector_field_grid.gd",
+   "lines": 160,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_field_visualizer": {
+   "script": "commons/artifacts/vector_field_visualizer/vector_field_visualizer.gd",
+   "lines": 262,
+   "terms": [
+    "array",
+    "colour",
+    "line",
+    "loop",
+    "point"
+   ]
+  },
+  "vector_fields": {
+   "script": "algorithms/physicssimulation/vectorfields/VectorFields.gd",
+   "lines": 275,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "force",
+    "loop",
+    "noise",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_joint_playground": {
+   "script": "algorithms/vectors/playground/vector_joint_playground.gd",
+   "lines": 740,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "force",
+    "laser",
+    "learning",
+    "loop",
+    "point",
+    "primitive",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_machine": {
+   "script": "commons/artifacts/vector_machine/vector_machine.gd",
+   "lines": 114,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "vector_magnitude_demo": {
+   "script": "commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.gd",
+   "lines": 261,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point"
+   ]
+  },
+  "vector_normalize_demo": {
+   "script": "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+   "lines": 322,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_projection_demo": {
+   "script": "commons/artifacts/vector_projection_demo/vector_projection_demo.gd",
+   "lines": 604,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "grammar",
+    "graph",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_sub": {
+   "script": "commons/artifacts/vector_op_console/vector_op_console.gd",
+   "lines": 237,
+   "terms": [
+    "array",
+    "colour",
+    "grammar",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "vector_subtraction_demo": {
+   "script": "commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.gd",
+   "lines": 866,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "grammar",
+    "graph",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "vector_translation_demo": {
+   "script": "commons/artifacts/vector_translation_demo/vector_translation_demo.gd",
+   "lines": 291,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "velocity_arrow": {
+   "script": "algorithms/change/velocity_arrow.gd",
+   "lines": 369,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "verlet_workbench": {
+   "script": "commons/artifacts/verlet_workbench/verlet_workbench.gd",
+   "lines": 175,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "randomness",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "visual_color_mixing": {
+   "script": "algorithms/color/color_mixing/color_display_disk.gd",
+   "lines": 79,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "primitive"
+   ]
+  },
+  "vowel_sound_board": {
+   "script": "algorithms/speech/phoneme_cloud/vowel_sound_board.gd",
+   "lines": 614,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "voxel_noise_demo": {
+   "script": "algorithms/spacetopology/marchingcubes/VoxelNoiseMarchingCubes.gd",
+   "lines": 409,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "graph",
+    "isosurface",
+    "loop",
+    "noise",
+    "point",
+    "transform"
+   ]
+  },
+  "vr_tile_editor": {
+   "script": "commons/primitives/arrays/vr_tile_editor.gd",
+   "lines": 509,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "transform"
+   ]
+  },
+  "vr_tile_editor_mirror": {
+   "script": "commons/primitives/arrays/vr_tile_editor.gd",
+   "lines": 509,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "plane",
+    "point",
+    "transform"
+   ]
+  },
+  "wall_pattern_gallery": {
+   "script": "commons/artifacts/wall_pattern_gallery/wall_pattern_gallery.gd",
+   "lines": 455,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "randomness"
+   ]
+  },
+  "wave_interference": {
+   "script": "algorithms/wavefunctions/wave_interference/WaveInterference.gd",
+   "lines": 615,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "line",
+    "loop",
+    "point",
+    "transform",
+    "wave"
+   ]
+  },
+  "wave_interference_3d": {
+   "script": "algorithms/wavefunctions/wave_interference_3d/wave_interference_3d.gd",
+   "lines": 603,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "line",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "wave_propagation_3d": {
+   "script": "algorithms/wavefunctions/wave_propagation_3d/WavePropagation3D.gd",
+   "lines": 443,
+   "terms": [
+    "array",
+    "collision",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "softbody",
+    "transform",
+    "wave"
+   ]
+  },
+  "weather_vane": {
+   "script": "commons/artifacts/weather_vane/weather_vane.gd",
+   "lines": 104,
+   "terms": [
+    "array",
+    "colour",
+    "loop",
+    "point",
+    "randomness",
+    "wave"
+   ]
+  },
+  "weather_vector_field": {
+   "script": "algorithms/vectors/weather_vector_field/weather_vector_field.gd",
+   "lines": 2389,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "graph",
+    "line",
+    "loop",
+    "plane",
+    "point",
+    "primitive",
+    "randomness",
+    "transform",
+    "wave"
+   ]
+  },
+  "wedge_slide": {
+   "script": "commons/artifacts/wedge_slide/wedge_slide.gd",
+   "lines": 248,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "wiki_fragment": {
+   "script": "commons/artifacts/wiki_fragment/wiki_fragment.gd",
+   "lines": 169,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "point"
+   ]
+  },
+  "work_energy_demo": {
+   "script": "algorithms/vectors/03_dot_product/WorkEnergyDemo.gd",
+   "lines": 177,
+   "terms": [
+    "array",
+    "colour",
+    "force",
+    "loop",
+    "point",
+    "wave"
+   ]
+  },
+  "worley_noise": {
+   "script": "commons/artifacts/worley_noise/worley_noise.gd",
+   "lines": 126,
+   "terms": [
+    "array",
+    "colour",
+    "graph",
+    "loop",
+    "noise",
+    "plane",
+    "point",
+    "randomness",
+    "transform"
+   ]
+  },
+  "x_translation_cube": {
+   "script": "commons/artifacts/axis_translation_cube/axis_translation_cube.gd",
+   "lines": 688,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "xyz_coordinates": {
+   "script": "commons/context/XYZcoordinates/pickable_xyz.gd",
+   "lines": 379,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "transform"
+   ]
+  },
+  "y_oscillation_cube": {
+   "script": "commons/artifacts/y_oscillation_cube/y_oscillation_cube.gd",
+   "lines": 586,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "grammar",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "y_translation_cube": {
+   "script": "commons/artifacts/axis_translation_cube/axis_translation_cube.gd",
+   "lines": 688,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "you_are_here": {
+   "script": "commons/primitives/you_are_here/you_are_here.gd",
+   "lines": 272,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  },
+  "z_translation_cube": {
+   "script": "commons/artifacts/axis_translation_cube/axis_translation_cube.gd",
+   "lines": 688,
+   "terms": [
+    "array",
+    "colour",
+    "cube",
+    "loop",
+    "point",
+    "primitive",
+    "transform",
+    "wave"
+   ]
+  }
+ }
+}
