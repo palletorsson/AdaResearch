@@ -1,7 +1,7 @@
 {
  "_readme": "One info board per spine map. `topic` = a term this map's own sequence introduces; `lit` = introduced earlier in the curriculum, so fair game; `early` = PRESENT BUT NOT YET INTRODUCED \u2014 the map uses it before the curriculum has taught it. Detection is a keyword match over each artifact's lookup name, category, tags and description, and every term carries the artifacts that triggered it so a wrong light can be argued with.",
  "substrate_note": "Everything a point needs in order to exist, almost none of which the curriculum names. Across the 24 spine sequences: collider, camera and XR score zero hits; clock and shader appear only as notes the authors left themselves; rasterization gets one line; and the grid \u2014 the floor from the first second \u2014 is taught at sequence 3, as `array`. The point is taught first and is last to exist. Measured per map here: grid, cubes, floor, wall, levels, collider, utilities. Constants of the runtime, true by construction and not measured: clock, shader, XR. eye_m and fov_deg come from the Vitruvian block.",
- "machine_note": "A third category: not what the map is about, not what it is made of, but whether you look at the thing or work it. Derived by tools/artifact_controls.py from the scene and the ControlPanel builder API \u2014 165 of the 814 placed spine tokens are operable, and 178 of the 269 maps hold nothing operable at all. `settings` counts the DNA axis values a map's MACHINES have; `settings_used` counts the ones a placement actually sets: 974 available across the spine, 2 ever set. Counting every artifact and not just the operable ones, 12 placements set a declared axis, on 3 token-axis pairs (10 away from default, all but two of them catalyst_prompter_box.emergence). The families exist and are measured; the player meets one member of each.",
+ "machine_note": "A third category: not what the map is about, not what it is made of, but whether you look at the thing or work it. Derived by tools/artifact_controls.py from the scene and the ControlPanel builder API \u2014 165 of the 814 placed spine tokens are operable, and 178 of the 269 maps hold nothing operable at all. `settings` counts the DNA axis values a map's MACHINES have; `settings_used` counts the ones a placement actually sets: 974 available across the spine, 5 ever set. Counting every artifact and not just the operable ones, 4,996 axis values are available and 15 placements set one, across 6 token-axis pairs, 12 of them away from default \u2014 and 10 of those 15 are catalyst_prompter_box.emergence from a single pass. The families exist and are measured; the player meets one member of each.",
  "vocabulary": [
   {
    "term": "point",
@@ -5200,17 +5200,35 @@
     "utilities": 2
    },
    "machines": {
-    "operable": 0,
+    "operable": 1,
     "exhibits": 4,
     "unknown": 1,
-    "controls": {},
+    "controls": {
+     "slider": 1
+    },
     "settings": 0,
     "settings_used": 0,
-    "items": []
+    "items": [
+     {
+      "token": "tangent_slope_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 6,
    "spine_index": 44,
-   "cast": 5,
+   "cast": 6,
    "terms": [
     {
      "term": "point",
@@ -5228,7 +5246,8 @@
      "state": "lit",
      "evidence": [
       "derivative_pair",
-      "slope_tangent_demo"
+      "slope_tangent_demo",
+      "tangent_slope_workbench"
      ]
     },
     {
@@ -5237,7 +5256,8 @@
      "intro": 2,
      "state": "lit",
      "evidence": [
-      "science_screen"
+      "science_screen",
+      "tangent_slope_workbench"
      ]
     },
     {
@@ -5256,7 +5276,8 @@
      "state": "topic",
      "evidence": [
       "derivative_pair",
-      "slope_tangent_demo"
+      "slope_tangent_demo",
+      "tangent_slope_workbench"
      ]
     },
     {
@@ -5298,17 +5319,35 @@
     "utilities": 2
    },
    "machines": {
-    "operable": 0,
+    "operable": 1,
     "exhibits": 4,
     "unknown": 0,
-    "controls": {},
+    "controls": {
+     "slider": 1
+    },
     "settings": 0,
     "settings_used": 0,
-    "items": []
+    "items": [
+     {
+      "token": "tangent_slope_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 6,
    "spine_index": 45,
-   "cast": 4,
+   "cast": 5,
    "terms": [
     {
      "term": "point",
@@ -5325,6 +5364,7 @@
      "intro": 1,
      "state": "lit",
      "evidence": [
+      "tangent_slope_workbench",
       "derivative_pair",
       "player_trace"
      ]
@@ -5344,6 +5384,7 @@
      "intro": 2,
      "state": "lit",
      "evidence": [
+      "tangent_slope_workbench",
       "player_trace"
      ]
     },
@@ -5362,6 +5403,7 @@
      "intro": 6,
      "state": "topic",
      "evidence": [
+      "tangent_slope_workbench",
       "velocity_arrow",
       "derivative_pair"
      ]
@@ -5395,17 +5437,35 @@
     "utilities": 2
    },
    "machines": {
-    "operable": 0,
+    "operable": 1,
     "exhibits": 2,
     "unknown": 0,
-    "controls": {},
+    "controls": {
+     "slider": 1
+    },
     "settings": 0,
     "settings_used": 0,
-    "items": []
+    "items": [
+     {
+      "token": "tangent_slope_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 6,
    "spine_index": 46,
-   "cast": 2,
+   "cast": 3,
    "terms": [
     {
      "term": "point",
@@ -5417,11 +5477,21 @@
      ]
     },
     {
+     "term": "line",
+     "owner": "primitives",
+     "intro": 1,
+     "state": "lit",
+     "evidence": [
+      "tangent_slope_workbench"
+     ]
+    },
+    {
      "term": "transform",
      "owner": "transformation",
      "intro": 2,
      "state": "lit",
      "evidence": [
+      "tangent_slope_workbench",
       "science_screen"
      ]
     },
@@ -5440,6 +5510,7 @@
      "intro": 6,
      "state": "topic",
      "evidence": [
+      "tangent_slope_workbench",
       "partial_derivative_terrain"
      ]
     }
@@ -5449,6 +5520,7 @@
    ],
    "lit": [
     "point",
+    "line",
     "transform",
     "array"
    ],
@@ -5535,24 +5607,52 @@
     "utilities": 2
    },
    "machines": {
-    "operable": 0,
+    "operable": 1,
     "exhibits": 3,
     "unknown": 0,
-    "controls": {},
+    "controls": {
+     "slider": 1
+    },
     "settings": 0,
     "settings_used": 0,
-    "items": []
+    "items": [
+     {
+      "token": "riemann_sum_workbench",
+      "kinds": [
+       "slider"
+      ],
+      "counted": {
+       "slider": 1
+      },
+      "at_least": false,
+      "wired": [
+       "slider"
+      ],
+      "axes": {},
+      "set": []
+     }
+    ]
    },
    "seq_order": 6,
    "spine_index": 48,
-   "cast": 3,
+   "cast": 4,
    "terms": [
+    {
+     "term": "line",
+     "owner": "primitives",
+     "intro": 1,
+     "state": "lit",
+     "evidence": [
+      "riemann_sum_workbench"
+     ]
+    },
     {
      "term": "change",
      "owner": "change",
      "intro": 6,
      "state": "topic",
      "evidence": [
+      "riemann_sum_workbench",
       "integral_area"
      ]
     }
@@ -5560,7 +5660,9 @@
    "topic": [
     "change"
    ],
-   "lit": [],
+   "lit": [
+    "line"
+   ],
    "early": []
   },
   "Flow_Field": {
@@ -13408,7 +13510,7 @@
      "button": 2
     },
     "settings": 34,
-    "settings_used": 0,
+    "settings_used": 1,
     "items": [
      {
       "token": "RackSineBasic",
@@ -13450,7 +13552,9 @@
        "waveform": 5,
        "machinery": 5
       },
-      "set": []
+      "set": [
+       "waveform"
+      ]
      },
      {
       "token": "RackMoogBass",
@@ -14412,7 +14516,7 @@
      "slider": 8
     },
     "settings": 30,
-    "settings_used": 0,
+    "settings_used": 1,
     "items": [
      {
       "token": "additive_wave_demo",
@@ -14430,7 +14534,9 @@
        "waveform": 5,
        "components": 3
       },
-      "set": []
+      "set": [
+       "waveform"
+      ]
      },
      {
       "token": "spring_demo",
@@ -19274,7 +19380,7 @@
      "slider": 1
     },
     "settings": 12,
-    "settings_used": 0,
+    "settings_used": 1,
     "items": [
      {
       "token": "grammar_provenance",
@@ -19303,7 +19409,9 @@
        "grammar": 7,
        "depth": 5
       },
-      "set": []
+      "set": [
+       "grammar"
+      ]
      }
     ]
    },

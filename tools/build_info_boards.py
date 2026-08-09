@@ -201,10 +201,16 @@ def build():
         #
         # `settings` is the sharp end. 393 spine tokens declare DNA axes — a
         # named family of variants, built and measured — and across all 269 maps
-        # exactly 3 (token, axis) pairs are ever set in a placement, 12 times,
-        # 10 of them away from the default. Everything else ships at default, so
-        # the player meets one member of every family. The row shows the number
-        # rather than leaving it in a report nobody opens.
+        # exactly 6 (token, axis) pairs are ever set in a placement, 15 times,
+        # 12 of them away from the default, and 10 of the 15 from one catalyst
+        # pass. Everything else ships at default, so the player meets one member
+        # of every family. The row shows the number rather than leaving it in a
+        # report nobody opens.
+        #
+        # Counted independently of this pipeline before being written down: an
+        # earlier reading said 12/3 and was wrong, having missed three placements
+        # that were there all along (timbre_sculptor, additive_wave_demo,
+        # lsystem_editor).
         machines, controls_n, settings_n, set_n = [], Counter(), 0, 0
         for tok in cast:
             c = CTL.get(tok, {})
@@ -262,10 +268,11 @@ def build():
                          "API — 165 of the 814 placed spine tokens are operable, and 178 of the "
                          "269 maps hold nothing operable at all. `settings` counts the DNA axis "
                          "values a map's MACHINES have; `settings_used` counts the ones a "
-                         "placement actually sets: 974 available across the spine, 2 ever set. "
-                         "Counting every artifact and not just the operable ones, 12 placements "
-                         "set a declared axis, on 3 token-axis pairs (10 away from default, all "
-                         "but two of them catalyst_prompter_box.emergence). The families exist "
+                         "placement actually sets: 974 available across the spine, 5 ever set. "
+                         "Counting every artifact and not just the operable ones, 4,996 axis "
+                         "values are available and 15 placements set one, across 6 token-axis "
+                         "pairs, 12 of them away from default — and 10 of those 15 are "
+                         "catalyst_prompter_box.emergence from a single pass. The families exist "
                          "and are measured; the player meets one member of each."),
         "vocabulary": [{"term": t["term"], "introduced_by": t["owner"], "order": t["intro"]}
                        for t in terms],
