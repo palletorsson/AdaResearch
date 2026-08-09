@@ -98,6 +98,19 @@ def registry():
     return reg
 
 
+def body_constants():
+    """eye and fov from the Vitruvian block — the same body the camera stands as."""
+    try:
+        v = json.loads((ROOT / "commons/data/museum_principles.json")
+                       .read_text(encoding="utf-8"))["vitruvian"]
+        return float(v["eye_height_m"]["value"]), float(v["fov_deg"]["value"])
+    except Exception:
+        return 1.65, 90.0
+
+
+EYE, FOV = body_constants()
+
+
 def build():
     spine = json.loads((ROOT / "commons/maps/curriculum_spine.json").read_text(encoding="utf-8"))
     seq_order = {s["name"]: s.get("order", 99) for s in spine["spine"]["sequences"]}
@@ -143,7 +156,35 @@ def build():
                 early_total[t["term"]] += 1
             held.append({"term": t["term"], "owner": t["owner"], "intro": t["intro"],
                          "state": state, "evidence": hits[:4]})
+        # THE SUBSTRATE ROW. Everything a point needs in order to exist, almost
+        # none of which the curriculum names. Searched across all 24 spine
+        # sequences (the loose patterns, then every hit read by hand):
+        #   collider · camera · XR        0 hits. Named nowhere.
+        #   scene graph                   3 hits, all false — "non-hierarchical"
+        #                                 is the rhizome, not the node tree.
+        #   clock / delta time            1 hit, a compute-budget tag ("TICK").
+        #   shader                        2 hits: an artifact token and a budget
+        #                                 note. Apparatus, not lesson.
+        #   rasterization                 1 real line, in primitives objectives.
+        #   the grid                      TAUGHT — as `array`, sequence 3, two
+        #                                 sequences after the maps are made of it.
+        # So these are shown and not taught. The row is always lit and never a
+        # topic: the conditions you are standing in, not the lesson you are in.
+        S, U, I2, WL = wp.grids(md)
+        cells = [wp.h_at(S, x, z) for z in range(len(S)) for x in range(len(S[z]))]
+        solid = [h for h in cells if h > 0]
+        substrate = {
+            "cubes": len(solid),
+            "floor": sum(1 for h in solid if h <= 3),
+            "wall": sum(1 for h in solid if h >= 4),
+            "levels": len(sorted({h for h in solid})),
+            "grid": "%dx%d" % (max((len(r) for r in S), default=0), len(S)),
+            "collider": bool(solid),
+            "eye_m": EYE, "fov_deg": FOV,
+            "utilities": sum(1 for r in U for c in r if str(c).strip()),
+        }
         boards[nm] = {"map": nm, "sequence": seq, "phase": phase.get(seq, ""),
+                      "substrate": substrate,
                       "seq_order": mine, "spine_index": order_i,
                       "cast": len(cast), "terms": held,
                       "topic": [h["term"] for h in held if h["state"] == "topic"],
@@ -158,6 +199,15 @@ def build():
                     "curriculum has taught it. Detection is a keyword match over each artifact's "
                     "lookup name, category, tags and description, and every term carries the "
                     "artifacts that triggered it so a wrong light can be argued with."),
+        "substrate_note": ("Everything a point needs in order to exist, almost none of which "
+                           "the curriculum names. Across the 24 spine sequences: collider, camera "
+                           "and XR score zero hits; clock and shader appear only as notes the "
+                           "authors left themselves; rasterization gets one line; and the grid — "
+                           "the floor from the first second — is taught at sequence 3, as `array`. "
+                           "The point is taught first and is last to exist. Measured per map here: "
+                           "grid, cubes, floor, wall, levels, collider, utilities. Constants of the "
+                           "runtime, true by construction and not measured: clock, shader, XR. "
+                           "eye_m and fov_deg come from the Vitruvian block."),
         "vocabulary": [{"term": t["term"], "introduced_by": t["owner"], "order": t["intro"]}
                        for t in terms],
         "counts": {"maps": len(boards),
