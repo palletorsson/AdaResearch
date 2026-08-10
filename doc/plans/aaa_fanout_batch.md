@@ -36,16 +36,41 @@ which is the shipped default, so this is an R1 break across 2,463 placements.
 three house values. The failure is unmistakable at a glance and invisible in the agent reports,
 every one of which is careful, well-argued, and confident.
 
-## The likely cause, unconfirmed
+## The cause, now DIAGNOSED — and both first guesses were wrong
 
-The symptom is front faces missing rather than genuine transparency: you see the inside of the
-back wall. That points at `PbrKit.box`'s chamfer producing wrong winding or degenerate geometry
-for some size-and-bevel combination, rather than at a material alpha. It is NOT the glass
-routing — that is correctly gated on `slot == "glass"`.
+**It is not the geometry.** `commons/testing/probe_pbr_box.gd` builds ten boxes at the exact
+sizes and bevels this batch used and runs an edge census: in a closed mesh every edge is shared
+by exactly two triangles. **0 of 10 failed** — including a 4 mm panel, an oversized bevel, and
+a bevel exactly at half the minimum dimension. `PbrKit.box` is watertight, and the fourteen
+artifacts already shipping on it are safe.
 
-If it is the kit, it matters beyond this batch: `PbrKit.box` is used by the fourteen artifacts
-already shipped. Those render correctly today, so any fault must be conditional on proportions
-this batch introduced — thin-walled boxes are the obvious suspect.
+**It is not transparency.** Only 8 colours in the palette carry alpha below 1: six are the
+`glass` slot and two are contact-shadow quads. Every body colour is opaque.
+
+**The bodies are simply THREE TIMES TOO DARK.** Measured on `white_cube`, the shipped default,
+over the plinth body:
+
+| | mean luminance | near-black px |
+|---|---|---|
+| before | **209.5** | 0.0% |
+| after | **66.6** | 1.8% |
+
+Its palette entry is `body: Color(0.85, 0.83, 0.78), r 0.6` with **no metallic key**, so it is a
+bright dielectric by declaration. It renders at a third of its albedo. A white cube that is not
+white has lost the thing it is named for.
+
+"Hollow" was the eye's reading of a near-black body beside a lit cap and a dark floor. The
+corpus-wide metric said the same thing in numbers and I read it too slowly: **crushed 0.20% ->
+1.35%, a 6.7x rise.** That is lesson 5 from the brief — three subtle darkenings agree on black —
+recurring at scale despite being written into the brief as a rule.
+
+## Where to look next
+
+The stacking is the suspect, not any single call: `weather()`'s grime multiply (floor 0.60-0.95),
+`crevice_ao`, `rams_body`'s wear darkening, and the roughness retarget the agent added all
+multiply into the same surface. A 0.32x survival factor needs more than one of them. The fix is
+almost certainly a budget — at most one darkening per surface, asserted rather than intended —
+not a per-artifact re-tune.
 
 ## What to do next
 
