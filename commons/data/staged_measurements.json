@@ -1,0 +1,3088 @@
+{
+ "_schema": "adaresearch.staged_measurements.v1 — PROPOSAL, not yet canonical",
+ "_generated": "2026-08-10",
+ "_method": "commons/testing/capture_dressing_room.gd via DressingRoomBuilder, each artifact captured at wait=0.7s and wait=2.1s so a size-changing body is detected rather than assumed. One Godot instance at a time. Source then read back per artifact to decide whether the measurement describes the artifact or the rig.",
+ "_why_trust_field": "artifact_sizes.json holds 1934 entries: 223 measure as zero, 125 exceed 20 m, 845 were never measured, and nothing in it distinguishes a real 50 m artifact from a 50 m measurement error. laser_measure has stood in it at 50.13 m since 2026-04-29 and is a hand tool. A number without a trust verdict is not usable by an editor, because the person editing cannot tell which kind they are looking at.",
+ "_trust_values": {
+  "trustworthy": "the number describes the artifact",
+  "inflated_by_outlier": "one piece of geometry (a label, a hidden mesh, a top-level node, a tick array) dominates the box",
+  "fallback_no_meshes": "no geometry survived the capture filters; the [1,1,1] is a fallback, not a measurement",
+  "undercounts_nonmesh": "real geometry exists that the capture did not count",
+  "unknown": "not established"
+ },
+ "_known_instrument_faults": [
+  "capture_dressing_room.gd:427 — the 18 m size guard is PER-MESH, so a long extent made of small pieces passes and a single long mesh is deleted",
+  "capture_dressing_room.gd:420 — admits any GeometryInstance3D, so billboarded Label3D text counts as body, and `visible` is never checked",
+  "capture_dressing_room.gd:423 — GPUParticles3D returns a zero-size AABB and is dropped",
+  "capture_dressing_room.gd:424 — transforms the AABB box, so a yawed artifact gains up to sqrt(2) of phantom XZ",
+  "the harness never reads registry dna.fixture, which already exists to pin captures like laser_measure's max_range 0.25"
+ ],
+ "summary": {
+  "artifacts": 72,
+  "trust": {
+   "trustworthy": 47,
+   "undercounts_nonmesh": 2,
+   "fallback_no_meshes": 4,
+   "inflated_by_outlier": 18,
+   "unknown": 1
+  },
+  "moving": 20,
+  "disagree_with_oracle": 17,
+  "disagreements": [
+   "lambda_slider",
+   "catalyst_target",
+   "magnetic_simulation",
+   "queer_cylinder_target",
+   "particle_chaos",
+   "chaos_particles",
+   "edge_core",
+   "qfep_reactor",
+   "edge_of_chaos_orb",
+   "laser_turret",
+   "phase_cube",
+   "plasma_critter",
+   "qfep_sandbox_console",
+   "scale_lines",
+   "draw_dot",
+   "player_trace",
+   "draw_triangle_faces"
+  ]
+ },
+ "artifacts": {
+  "CoordinateSystem3M": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    7.43,
+    9.93,
+    5.46
+   ],
+   "declared_footprint": [
+    5,
+    4,
+    1.0
+   ],
+   "size_class": "room",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     4.76,
+     3.22,
+     3.27
+    ],
+    "oracle_max_m": 4.76,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "platonicsolids": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    6.68,
+    2.3,
+    1.1
+   ],
+   "declared_footprint": [
+    7,
+    3,
+    1.2
+   ],
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 6.952,
+   "body_wd_estimate": [
+    6.561,
+    2.3
+   ],
+   "pivot_centred": false,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     10.0,
+     3.5,
+     10.0
+    ],
+    "oracle_max_m": 10.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "line_builder_3d": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    3.55,
+    0.97,
+    1.52
+   ],
+   "declared_footprint": [
+    4,
+    1,
+    1
+   ],
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 3.59,
+   "body_wd_estimate": [
+    3.55,
+    0.534
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     3.55,
+     1.46,
+     0.95
+    ],
+    "oracle_max_m": 3.55,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "perspective_lines": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    1.34,
+    2.01,
+    1.12
+   ],
+   "declared_footprint": [
+    2,
+    3,
+    1
+   ],
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.02,
+     1.02,
+     2.01
+    ],
+    "oracle_max_m": 2.01,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "rotating_cube": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    1.29,
+    1.29,
+    1.21
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 1.435,
+   "body_wd_estimate": [
+    1.015,
+    1.015
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "oracle_max_m": 1.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "origin": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    1.11,
+    1.11,
+    1.59
+   ],
+   "declared_footprint": [
+    1.11,
+    1.11,
+    1.32
+   ],
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.02,
+     1.02,
+     1.02
+    ],
+    "oracle_max_m": 1.02,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "science_screen": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    3.14,
+    0.2,
+    2.35
+   ],
+   "declared_footprint": [
+    4,
+    1,
+    1
+   ],
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     3.14,
+     2.34,
+     0.2
+    ],
+    "oracle_max_m": 3.14,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "pick_up_cube": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    0.6,
+    0.6,
+    0.5
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 0.905,
+   "body_wd_estimate": [
+    0.64,
+    0.64
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "oracle_max_m": 0.5,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "lambda_slider": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    0.69,
+    0.33,
+    1.3
+   ],
+   "declared_footprint": [
+    0.69,
+    0.33,
+    1.31
+   ],
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 6.2x"
+   }
+  },
+  "qfep_formula_3d": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    1.64,
+    0.02,
+    0.13
+   ],
+   "declared_footprint": [
+    3.0,
+    3.0,
+    3.0
+   ],
+   "size_class": "surface",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     2.09,
+     0.14,
+     0.02
+    ],
+    "oracle_max_m": 2.09,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "grabbable_line": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    0.28,
+    0.08,
+    0.1
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_class": "tiny",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.28,
+     0.04,
+     0.04
+    ],
+    "oracle_max_m": 0.28,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "control_pendulum": {
+   "wave": 1,
+   "staged": true,
+   "measured_wdh": [
+    0.14,
+    0.04,
+    0.75
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 0.091,
+   "body_wd_estimate": [
+    0.082,
+    0.04
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "wave 1; three of the twelve reproduce published captures to within 0.04 m",
+   "proposed_footprint_cells": null,
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.23,
+     0.63,
+     0.04
+    ],
+    "oracle_max_m": 0.63,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "catalyst_target": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.566,
+    0.566,
+    0.24
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "surface",
+   "moving": true,
+   "sweep_diameter_m": 0.785,
+   "body_wd_estimate": [
+    0.555,
+    0.555
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "Default shape builds a 0.4 m outer torus (outer_radius 0.2, catalyst_target.gd:534) that yaws, and 0.4 * sqrt(2) = 0.566 is exactly the measured width, so the number is a valid (loose) spinning bound, not an error.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D"
+   ],
+   "motion_source": "catalyst_target.gd:199 spins the outer torus about Y at 0.8 rad/s and :201 spins the inner torus about X at 1.2 rad/s; the body itself does not translate at defaults (_moving/_orbit are false until a map sets them at :1028-1034).",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "sweep",
+   "note": "Solid geometry is a 0.4 m torus plus a 0.24 m sphere; even the inflated 0.566 m sweep fits one cell. WARNING for the placer: if a map token sets moving or orbit (catalyst_target.gd:1028-1034) the default _patrol_range 2.5 makes it sweep 5.6 m along X (moving) or a 5.6 m circle (orbit) — that placement needs [6,1] or [6,6], and no map has ever been checked against it.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 14.1x"
+   }
+  },
+  "magnetic_simulation": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    2.287,
+    1.944,
+    0.403
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 2.997,
+   "body_wd_estimate": [
+    2.287,
+    1.937
+   ],
+   "pivot_centred": true,
+   "trust": "undercounts_nonmesh",
+   "trust_reason": "The artifact's largest spatial commitment is a collision-only StaticBody3D floor, BoxShape3D 6 x 0.2 x 6 at magnetic_simulation_main.gd:21 under a node scale of 0.8 (:12) = 4.8 m square, which has no mesh at all and so is invisible to the AABB walk.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D"
+   ],
+   "motion_source": "Four RigidBody3D magnets are pushed by apply_central_force in _physics_process (magnetic_simulation_main.gd:104-122); they translate freely on all three axes with linear_damp 0.5 and nothing containing them, which is why x grew 2.287 -> 2.333 between the two samples.",
+   "proposed_footprint_cells": [
+    5,
+    5
+   ],
+   "proposed_basis": "sweep",
+   "note": "5 x 5 is the collision floor (4.8 m), not the visible mesh (2.3 x 1.9). The magnets start at (+/-1, 1, +/-1) x 0.8 with 0.2 m radius cylinders = a 1.92 m visible cluster; same-polarity pairs repel with an unbounded 1/r^2 force, so nothing guarantees they stay on the pad — two samples 1.4 s apart show it still spreading.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 3.5x"
+   }
+  },
+  "queer_cylinder_target": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.176,
+    0.107,
+    1.176
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 1.181,
+   "body_wd_estimate": [
+    1.176,
+    0.107
+   ],
+   "pivot_centred": true,
+   "trust": "undercounts_nonmesh",
+   "trust_reason": "The mesh is a 1.2 m disc (target_radius 0.6, queer_cylinder_target.gd:73) but queer_cylinder_target.tscn's CapsuleShape3D is radius 0.3 height 1.8 rotated -90 deg about Z, so the SOLID body lies 1.8 m along local X — 50 percent wider than anything the AABB saw.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D"
+   ],
+   "motion_source": "queer_cylinder_target.gd:130-137 scales every ring in local X/Z by 1 + sin(t * 2.0) * 0.02; the rings are rotated 90 deg about X at :325 so this reads as a +/-2 percent breathe of the disc's world X and Y diameter. Nothing translates.",
+   "proposed_footprint_cells": [
+    2,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "Careful with axes: measured_wdh puts 0.107 in the DEPTH slot — this is a vertical disc 1.2 m across and 0.107 m thick, standing in the XY plane, not a flat pad. Footprint [2,1] is driven by the 1.8 m capsule collider; the visual alone would be [2,1] as well only because 1.2 m crosses a cell boundary. Default face is bullseye and flag is progress; face:column restacks the same disks horizontally and would change the footprint to roughly [2,2] with a 0.8 m height.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 6.8x"
+   }
+  },
+  "foucault_pendulum": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    7.6,
+    7.6,
+    12.04
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "7.6 m is exactly the podium's lower base, lower_size = canvas_size + 1.6 with canvas_size 6.0 (foucault_pendulum.gd:255 and :70) — the footprint is a hard-coded static slab, not an accident of framing.",
+   "builds": [
+    "MeshInstance3D",
+    "MultiMeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": "The bob does swing — _physics_process at foucault_pendulum.gd:613 integrates theta from initial_amplitude 0.4 rad on an 8 m wire, an excursion of 8*sin(0.4) = 3.1 m — but that is entirely inside the 7.6 m podium, so the merged AABB is byte-identical at 0.7 s and 2.1 s. moving:false is a fact about the AABB, not about the artifact.",
+   "proposed_footprint_cells": [
+    8,
+    8
+   ],
+   "proposed_basis": "body",
+   "note": "The ONE artifact in this batch whose [8,8] placeholder is right by measurement. Height caveat: I can account for only about 9.9 m of the measured 12.04 m from the source (podium bottom -1.10 via lower_base at y=-0.95 with 0.3 thickness, up to the title Label3D at pendulum_length+0.5 = 8.5 plus its glyph height); roughly 2.1 m of height is unexplained and I did not verify it. The footprint is not affected. Interference defaults to none (:119) so no rim or attractor masses are built.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     7.6,
+     11.42,
+     7.6
+    ],
+    "oracle_max_m": 11.42,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "kusama_sine": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    9.036,
+    9.083,
+    2.74
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "room",
+   "moving": true,
+   "sweep_diameter_m": 12.549,
+   "body_wd_estimate": [
+    8.659,
+    9.083
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "The 9 m extent is real animated geometry: tendril segments are built at the origin with no position and are placed only in _process at segment_radius = 2.0 + j*0.4 + undulation (kusama.gd:930-938), and the source maximum 2.0 + 8*0.4 + 0.15 = 5.35 m radius brackets the measured 4.5-4.7 m half-width.",
+   "builds": [
+    "MeshInstance3D",
+    "MultiMeshInstance3D"
+   ],
+   "motion_source": "kusama.gd:912-945 re-assigns every tendril segment's position each frame — the segment angle advances with time, so the four tendrils sweep a horizontal circle about the Y axis; petals also orbit at radius 1.8 +/- 0.3 (:887-903) and core layers pulse (:867-877).",
+   "proposed_footprint_cells": [
+    10,
+    10
+   ],
+   "proposed_basis": "sweep",
+   "note": "The declared 8x8 UNDERSTATES this artifact by about 1 m on every side — measured floor area 82.1 m2 against the 64 m2 the placeholder reserves. The 40x40 m create_ultra_vivid_floor at kusama.gd:1087 is defined but never called from generate_ultra_vivid_sculpture, so it is not in the number (and would have been discarded anyway: its 56.6 m XZ diagonal exceeds the 18 m cut at capture_dressing_room.gd:427). vertical_offset 2.0 (:25) lifts the whole sculpture at _ready; the harness re-seats it. include_tendrils is true in the .tscn — with it false the sculpture collapses to roughly [4,4].",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     7.33,
+     2.58,
+     7.73
+    ],
+    "oracle_max_m": 7.73,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "structure_growth": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    7.185,
+    7.185,
+    6.435
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 9.11,
+   "body_wd_estimate": [
+    6.135,
+    6.735
+   ],
+   "pivot_centred": false,
+   "trust": "trustworthy",
+   "trust_reason": "7.185 m is derived exactly: cells are placed at t.origin = Vector3(x,y,z) * cell_size (CellularAutomata3D_Flexible.gd:438) over x in 1..48 with cell_size 0.15 and a 0.135 box, giving 47*0.15 + 0.135 = 7.185 — the measurement reproduces the arithmetic to the millimetre, and this is the grid's hard ceiling.",
+   "builds": [
+    "MultiMeshInstance3D"
+   ],
+   "motion_source": "The automaton steps every generation_interval 0.1 s for max_generations 20 and _update_visuals rebuilds the visible shell each step, so the live extent changes shape between samples (x went 7.185 -> 6.135, y 6.435 -> 7.185); nothing translates and the volume can never exceed the 50^3 grid.",
+   "proposed_footprint_cells": [
+    8,
+    8
+   ],
+   "proposed_basis": "sweep",
+   "note": "CRITICAL for the placer: the footing declares anchor [1,1] at the centre of a 3x3 pad, but the geometry is CORNER-ORIGIN — measured centre is (3.675, 3.218, 3.675), so the whole 7.2 m body occupies the +X/+Z quadrant from its anchor. A placer that centres it on the anchor buries half of it. Also randomize_on_start is true with growth_seed -1 in StructureGrowth.tscn, so the organism is different every boot; only the bounding volume is stable. This is also proof the harness DOES count MultiMeshInstance3D — it is the artifact's only geometry node.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     7.19,
+     7.19,
+     7.19
+    ],
+    "oracle_max_m": 7.19,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "particle_chaos": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "fallback_no_meshes",
+   "trust_reason": "The only GeometryInstance3D in the subtree is one GPUParticles3D (particle_chaos.gd:80, added at :149); Godot returns a zero-size AABB for GPUParticles3D, so it is skipped by the size test at capture_dressing_room.gd:423 and the fallback at :434 fires.",
+   "builds": [
+    "GPUParticles3D"
+   ],
+   "motion_source": "Continuous isotropic emission: direction (0,0,0) with spread 180 deg, initial velocity 0.5-2.0 m/s, gravity zero, no damping, lifetime 3.0 s (particle_chaos.gd:94-105). The cloud is in permanent motion; the data's moving:false is the identical fallback repeating, not stillness.",
+   "proposed_footprint_cells": [
+    13,
+    13
+   ],
+   "proposed_basis": "sweep",
+   "note": "13 m = 2 * (emission_radius 0.5 + 2.0 m/s * 3.0 s lifetime) — derived from source, NOT measured. Nothing fades: there is no scale_curve and no color_ramp, so particles are fully opaque at the shell and the outer envelope is genuinely visible. The dense core (mean 1.25 m/s over mean age 1.5 s) is about 5x5. This is the ONE artifact in the batch whose true claim exceeds even a doubled placeholder. Posture is float with artifact_offset y 1.5. Note also that the [1,1,1] here is NOT the 18 m discard at :427 — see batch_findings.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 8.0x"
+   }
+  },
+  "chaos_particles": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "fallback_no_meshes",
+   "trust_reason": "Same path as particle_chaos: the only GeometryInstance3D is one GPUParticles3D (chaos_particles.gd:44, added at :113), its AABB is zero-size, it is skipped at capture_dressing_room.gd:423, and the [1,1,1] at :434 is returned.",
+   "builds": [
+    "GPUParticles3D"
+   ],
+   "motion_source": "Explosive isotropic emission, spread 180 deg, initial velocity 1.0-3.0 m/s, damping 0.5-2.0, gravity +0.5 y, lifetime 2.0 s, explosiveness 0.3 (chaos_particles.gd:44-96). Constant motion; the reported moving:false is the repeated fallback.",
+   "proposed_footprint_cells": [
+    7,
+    7
+   ],
+   "proposed_basis": "sweep",
+   "note": "Two different answers depending on what you count. Full kinematic envelope for the least-damped particle is 2 * (0.3 + [3.0*2.0 - 0.5*2.0^2/2]) = 10.6 m, so [11,11]. But scale_curve reaches 0.0 and color_ramp reaches alpha 0.0 at end of life (chaos_particles.gd:73-88), so the outer shell is invisible; at half-life the visible cloud is about 6.1 m across. [7,7] is the VISIBLE claim and what a placer should reserve. Posture is float with artifact_offset y 1.5.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 8.0x"
+   }
+  },
+  "edge_core": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.99,
+    0.99,
+    0.796
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 1.401,
+   "body_wd_estimate": [
+    0.99,
+    0.99
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "The solid body is a 0.8 m sphere (core_radius 0.4, edge_core.gd:97) pulsing +/-10 percent; the 0.99 XZ against 0.796 Y is the signature of AABB-of-rotated-box inflation from the yaw at :372, so 0.99 is a loose but valid bound, and it does not cross a cell boundary.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D"
+   ],
+   "motion_source": "edge_core.gd:372 yaws the whole node at rotation_speed 0.3 rad/s; :363-364 pulses the outer sphere by +/-10 percent and :367-369 counter-pulses the inner sphere by +/-20 percent. At station 'order' _frozen short-circuits _process (:356) and all of this stops.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "sweep",
+   "note": "[1,1] covers the solid geometry. The green ring particles are NOT in the measurement (zero AABB) and they stream +X up to 1.2 m (velocity <= 0.4 m/s * lifetime 3.0 s) from an emission ring at 0.48 m; the node's yaw sweeps that stream around, so the visible glow is roughly 3.4 m across — reserve [4,4] if the halo matters for the room. Station defaults to 'edge' (:82); station 'chaos' deletes the shell and scatters 90 dots to core_radius * 1.15, still under 1 m.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 8.1x"
+   }
+  },
+  "qfep_reactor": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.11,
+    1.11,
+    1.464
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 1.57,
+   "body_wd_estimate": [
+    1.11,
+    1.11
+   ],
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "The solid core is a 0.6 m sphere (radius 0.3, qfep_reactor.gd:226) breathing to about 0.68 m; the measured 1.11 m box and most of the 1.464 m height come from ONE billboarded Label3D placard at y 0.6, font_size 32 (qfep_reactor.gd:304-309), whose AABB is expanded to a cube because billboard is enabled.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D",
+    "Label3D"
+   ],
+   "motion_source": "qfep_reactor.gd:336-337 breathes the core sphere by 1 + sin(pulse_phase) * 0.1 * (1 + lambda); at the default station 'edge' lambda is below 0.6 so the jitter branch at :340-346 never runs and core_mesh.position stays zero. The billboard label also re-orients with the camera.",
+   "proposed_footprint_cells": [
+    2,
+    2
+   ],
+   "proposed_basis": "sweep",
+   "note": "Body alone is [1,1]. [2,2] is proposed because the placard is real, readable and billboarded — it rotates to face any viewer, so it claims a 1.11 m disc at head height no matter which way the artifact is turned. readout defaults to 'numeral' (:82) so the label always builds; a map that sets readout:none removes it and the artifact honestly becomes [1,1]. Particles reach roughly 0.95 m radius (emission 0.35 + 0.3 m/s * 2.0 s) which also fits inside [2,2].",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 5.5x"
+   }
+  },
+  "ca_conway_city": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    7.42,
+    7.42,
+    2.205
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "The 7.42 m footprint is real: city_radius=3.6 spans -3.6..+3.6 plus a 0.22 m cube (ca_conway_city.gd:35,38,104-105) = 7.42 exactly, drawn by a MultiMeshInstance3D which the capture DOES count (capture_dressing_room.gd:420 tests GeometryInstance3D, not MeshInstance3D); only the 2.205 m height is inflated, by the billboarded Label3D at y=1.65 (ca_conway_city.gd:128-138).",
+   "builds": [
+    "MultiMeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    8,
+    8
+   ],
+   "proposed_basis": "body",
+   "note": "The ONE honest placeholder in this batch: 7.42 m really does need 8x8 cells. But its footing is only 3x3 tiles, so 5/8 of the city hangs off the staged pad. Buildings are at most 0.66 m tall (h = 0.1 + n*0.07, ca_conway_city.gd:106) - this is a walkable ankle-high field, not a skyline; the only thing above 0.7 m is the text label. apply_grid_config clamps city_radius to 1.5..8.0 (line 155), so a map can legally ask for a 16.2 m version.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     7.42,
+     0.59,
+     7.42
+    ],
+    "oracle_max_m": 7.42,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "edge_of_chaos_orb": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.436,
+    1.503,
+    1.991
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 2.079,
+   "body_wd_estimate": [
+    1.436,
+    1.503
+   ],
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "Real geometry is the 0.8 m orb (edge_of_chaos_orb.gd:70-71) and 3 tori topping out at 1.25 m diameter (lines 99-100); the extra width and most of the 1.991 m height come from two billboarded Label3D nodes at y=1.4 and y=1.5 (lines 169-185) whose AABBs are cubes of their own text width.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D",
+    "Label3D",
+    "OmniLight3D"
+   ],
+   "motion_source": "Three rings each rotate about their own tilted axis Vector3(sin(i*1.2), 1, cos(i*0.8)) at speed scaled by _pulse_speed (edge_of_chaos_orb.gd:296-304); the orb mesh wobbles in X and Z with amplitude _wobble_amount, 0.1 m at the default lambda=0.4/phi=0.5 (lines 231, 289-293).",
+   "proposed_footprint_cells": [
+    2,
+    2
+   ],
+   "proposed_basis": "sweep",
+   "note": "The GPUParticles3D contributes nothing to the AABB (Godot returns an empty get_aabb for it) but visually throws a 60-120 particle cloud out to ~0.5 m past the orb; add clearance rather than footprint for it. The orb sits at y=0.7, so the artifact is a floating sphere over an empty base cell - nothing occupies the floor.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 4.0x"
+   }
+  },
+  "example_6_4_windmill_vr": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    2.325,
+    2.325,
+    3.253
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "Not one number in the measurement is the windmill: the pole is 0.3 m tall at radius 0.025 and the blades reach 0.175 m from the hub (example_6_4_windmill_vr.gd:149-152, 197-204) = a 0.35 m machine, while three billboarded Label3D nodes at y=0.7, y=0.55 and y=-0.7 (lines 583-597, 643-649) produce cube AABBs of their own text width - the 34-char info line at font 28 alone accounts for the 2.325 m box and the -0.7 m instructions line for the bottom of the 3.253 m span.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D",
+    "Label3D",
+    "RigidBody3D",
+    "StaticBody3D",
+    "HingeJoint3D",
+    "AudioStreamPlayer3D"
+   ],
+   "motion_source": "The blade RigidBody3D spins about Y, driven by a HingeJoint3D motor at target_velocity = _motor_speed = 2.0 rad/s (example_6_4_windmill_vr.gd:26, 306-307, 89-90). The harness reported moving:false with drift exactly 0.000 because the spinning 0.35 m blade disc is entirely buried inside the 2.3 m text box and cannot move the merged AABB.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "sweep",
+   "note": "A placer must know two things the AABB hides. (1) The physical windmill is 0.35 m wide and 0.45 m tall - a desk toy, not a monument. (2) Three ParameterController3D sliders sit at y=-0.55 and an instructions label at y=-0.7 (lines 617-647), i.e. BELOW the artifact origin; on a floor mount they are underground. Give it a table/plinth posture or an artifact_offset.y of at least +0.8, not posture floor.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "force_field": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    3.645,
+    3.645,
+    5.998
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "The measured 3.645 m width is exactly the cube AABB of the billboarded Label3D at y = zone_height + 0.3 (force_visual_controller.gd:88-94), and the 5.998 m height is that cube's top minus a hidden ProgressRing torus - laid flat by rotation.x = -PI/2 so its rotated-box AABB dips 1.375 m below the artifact origin, and visible=false does not exclude it (force_visual_controller.gd:99-116). The real body is one cylinder of radius 1.5 and height 2.5 (lines 27-30, with force_field.gd:46-47).",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D",
+    "Label3D",
+    "OmniLight3D",
+    "CollisionShape3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    3,
+    3
+   ],
+   "proposed_basis": "body",
+   "note": "This is a WALK-IN hazard zone, not an obstacle: the 3x3 m cylinder is translucent and has no body collider, only an Area3D that damages on entry (force_field.gd:105-118). The cells it covers must stay walkable or the artifact can never fire. Because of the hidden ring the capture seated it 1.375 m into the air, so any staging screenshot shows it floating. The only dressing room in this batch that is not the bare template - 5x5 footing with a raised 3x3 centre and posture 'table' - which is wrong for a floor-standing zone whose whole point is that you step into it.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "laser_turret": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.648,
+    0.648,
+    1.0
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 0.817,
+   "body_wd_estimate": [
+    0.563,
+    0.592
+   ],
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "Height is exactly 1.000 m in both samples because two laser cylinders of height 1.0 sit unmoved at the origin (laser_turret.gd:151-155, 170-174); they are laser_beam.visible=false / laser_glow.visible=false (lines 149, 168) but capture_dressing_room.gd:420-427 never checks visibility. The turret itself tops out at ~0.35 m (base at 0.04, column at 0.18, head at 0.3).",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D",
+    "SpotLight3D",
+    "OmniLight3D"
+   ],
+   "motion_source": "With no target the base yaws about Y in a sinusoidal scan, turret_base.rotation.y lerped toward atan2(dir) + sin(t*0.002)*0.5 (laser_turret.gd:579-585), and the head pitches about X toward 0.1 rad (line 586). When tracking, yaw is unbounded and pitch clamps to -PI/3..PI/4 (lines 397-402).",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "sweep",
+   "note": "Sweep is the 0.56 m base disc plus the barrel tip orbiting at radius 0.31 = ~0.66 m; one cell is enough. Real height is 0.35 m, not 1.0. Because the invisible beam spans y -0.5..+0.5, the capture's seat step lifted the whole turret 0.5 m off its plinth - do not read the staging shots as the mounting height. detection_range is 30 m (line 13) and it targets the player (line 26), so it reaches far beyond any footprint.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 8.0x"
+   }
+  },
+  "origami_pyre_plane": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    2.399,
+    3.599,
+    0.074
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "surface",
+   "moving": true,
+   "sweep_diameter_m": 3.065,
+   "body_wd_estimate": [
+    1.7,
+    2.55
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "Both samples are real ImmediateMesh geometry of the base 2.0 x 3.0 sheet (origami_pyre_plane.gd:24-25, 133-149): 2.399 x 3.599 is that sheet at scale 1.2 and 1.700 x 2.550 at scale 0.85, both inside scale_pulse_range (line 29). The measurement is honest but INCOMPLETE - the affine cycle has three 4-second phases and both samples (0.7 s and 2.1 s) landed inside phase 1, SCALE, so the rotate and translate phases were never sampled.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D",
+    "OmniLight3D",
+    "Area3D"
+   ],
+   "motion_source": "A three-phase affine cycle, one phase per 4 s (origami_pyre_plane.gd:32, 344-391): SCALE pulses _mesh_root.scale in X and Z between 0.8 and 1.2; ROTATE sweeps _mesh_root.rotation.y by sin(t*TAU)*rotation_speed*cycle_duration = +/-1.2 rad; TRANSLATE drifts the whole node +/-0.5 m along X.",
+   "proposed_footprint_cells": [
+    4,
+    4
+   ],
+   "proposed_basis": "sweep",
+   "note": "Sweep computed from source, not from the samples. The 2x3 rectangle yawing to +/-1.2 rad has a bounding extent of 2|cos|+3|sin| which peaks at 3.61 m at 56 deg (reachable), and 3.61 m in depth at 34 deg; scale-1.2 gives only 2.4 x 3.6 and the X drift only 3.0, so 3.61 x 3.61 governs -> 4x4. It is a floor-level instant-kill plate 0.074 m thick with a 2.0 x 0.3 x 3.0 kill box (lines 226-228): the cells must be walkable AND lethal, and the kill box does NOT follow the scale pulse, so at scale 1.2 the visible fire is 0.2 m wider than the damage on each side.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "phase_cube": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.655,
+    0.655,
+    0.816
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 0.926,
+   "body_wd_estimate": [
+    0.655,
+    0.655
+   ],
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "The subject is a 0.3 m box (phase_cube.gd:52-53) rotating on two axes, which alone bounds at 0.3*sqrt(3) = 0.52; the measured 0.655 width is the billboarded Label3D 'COMPLEX' at y=0.3 (lines 124-129) whose AABB is a cube of its text width, and both GPUParticles3D contribute nothing.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D",
+    "Label3D"
+   ],
+   "motion_source": "cube_mesh.rotate_y(delta*rotation_speed) and rotate_x(delta*rotation_speed*0.3) run every frame (phase_cube.gd:196-197), plus a breathing scale of 1.0 +/- 0.05 in the default complex phase (lines 204-206) and a randf jitter in the gas phase (line 201).",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "sweep",
+   "note": "The cube is centred on the artifact ORIGIN, not seated on it (phase_cube.gd:49-66 never offsets it), so on a real plinth the lower half sinks in; the capture only looks right because capture_dressing_room.gd:178-183 re-seats it. Give it artifact_offset.y ~ +0.26 or a hand-height mount. 64 m2 reserved for a 0.09 m2 object.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 9.8x"
+   }
+  },
+  "plasma_critter": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.347,
+    0.347,
+    0.349
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "tiny",
+   "moving": true,
+   "sweep_diameter_m": 0.49,
+   "body_wd_estimate": [
+    0.347,
+    0.347
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "Both samples are the bare core sphere and nothing else: core_radius 0.18 gives 0.36 m, and the pulse 0.95 + 0.1*sin (plasma_critter.gd:37, 480-482, 460) brackets it to 0.342..0.378 - the measured 0.347 and 0.374 sit inside that to the millimetre. The 50-particle wisp cloud and the OmniLight3D are correctly invisible to the AABB.",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D",
+    "OmniLight3D",
+    "CollisionShape3D"
+   ],
+   "motion_source": "The core scales 0.95..1.05 at 3 rad/s (plasma_critter.gd:460-462) and the whole visual root bobs +/-0.05 m along Y at 1.5 rad/s (line 466). No horizontal motion - the XZ sweep equals the body.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "sweep",
+   "note": "The number the AABB can never see: interaction_radius is 0.6 (plasma_critter.gd:25, 539-541), a 1.2 m damage sphere - 3.4x the visible body. A placer that leaves only the 0.35 m footprint clear will have players taking 5 dmg from a thing they are not touching. Reserve 1x1 of geometry but 2x2 of hazard clearance. Also note the artifact reparents its visuals onto a carried stick when touched (lines 237-260), so its footprint is not fixed at runtime.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 22.9x"
+   }
+  },
+  "puls_markov": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    8.692,
+    8.692,
+    8.0
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "room",
+   "moving": true,
+   "sweep_diameter_m": 12.292,
+   "body_wd_estimate": [
+    8.692,
+    8.692
+   ],
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "The 8.0 m height is one mesh: the 'outer environment' sphere of radius base_radius*4 (puls_markov.gd:120-124), rendered CULL_FRONT so it is an inside-out atmosphere shell, not a body (line 131). The 1.119 m 'growth' between samples is not growth at all - rotate_y(delta*0.1) (line 172) yaws that 8 m box and Godot bounds a rotated box as 8(|cos|+|sin|), which gives 8.69 at 0.087 rad and 9.81 at 0.264 rad, matching both samples. The actual cell is the membrane sphere, radius 1.0 pulsing to 1.2 (lines 104-105, 182-183).",
+   "builds": [
+    "MeshInstance3D",
+    "GPUParticles3D",
+    "Camera3D",
+    "WorldEnvironment",
+    "DirectionalLight3D",
+    "CanvasLayer"
+   ],
+   "motion_source": "The whole node yaws about Y at 0.1 rad/s (puls_markov.gd:172); the membrane scales 1.0..1.2 and the inner sphere 0.6..0.8 (lines 182-183, 193); information hotspots spawn on a shell at radius 1.5..2.5 and drift inward at 0.3 m/s (lines 215-221, 258-259).",
+   "proposed_footprint_cells": [
+    5,
+    5
+   ],
+   "proposed_basis": "sweep",
+   "note": "5x5 covers the membrane (2.4 m) plus the hotspot and decorative-element halo that spawns out to radius 2.5 (lines 215, 375). The 8 m outer shell is translucent, front-culled and has no collider - it is atmosphere the player walks through, so do not reserve 8x8 for it, but do expect it to visually swallow anything placed within 4 m. SEPARATE DEFECT worth flagging: this artifact builds its own Camera3D with current=true (lines 59-62), its own WorldEnvironment with fog (65-75), its own DirectionalLight3D (78-81) and a CanvasLayer with two 2D Labels (141-152). Dropped into a map it will hijack the view and paint 'Inner Entropy' over the HUD - the demo-as-artifact UI leak pattern. Its apply_grid_config is an empty pass (line 432), so a map cannot configure it at all.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     7.97,
+     8.0,
+     7.97
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "qfep_sandbox_console": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    2.303,
+    0.162,
+    1.555
+   ],
+   "declared_footprint": [
+    8,
+    8,
+    1
+   ],
+   "declared_is_placeholder": true,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "2.303 x 0.162 x 1.555 is the real panel: a 2.0 x 1.5 x 0.05 box plus a 2.02 x 1.52 border (qfep_sandbox_console.gd:28-29, 91, 106), with the extra width coming from ordinary non-billboarded Label3D quads - which is why the depth stayed at 0.16 m instead of being cubed like the labels in the other five artifacts here.",
+   "builds": [
+    "MeshInstance3D",
+    "Label3D",
+    "GPUParticles3D"
+   ],
+   "motion_source": "Only the mini orb, which wobbles by lambda*0.02 = 0.008 m in X and Z (qfep_sandbox_console.gd:516-518) - that is the entire 0.0084 z-drift the harness recorded, and it is below its own motion threshold.",
+   "proposed_footprint_cells": [
+    3,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "This is a WALL PANEL, not a floor object: 2.3 m wide, 0.16 m deep, 1.56 m tall, all content facing +Z, sitting on the artifact origin. Its dressing room declares posture 'floor' with a 3x3 pad, which is wrong twice over. Also its AABB centre is x=-0.141, because the lambda/phi captions are centred on x=-0.7 (lines 158, 200) - so the visual centre is 14 cm left of the anchor and a centred placement will look off. It instantiates five push_button.tscn children at z=+0.05 (lines 356-395), which are the reachable controls and must not be flush against a wall.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     8.0,
+     8.0,
+     8.0
+    ],
+    "oracle_max_m": 8.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 3.5x"
+   }
+  },
+  "frame_counter_display": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    0.151,
+    0.297
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "surface",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "1.0 x 0.151 x 0.297 reproduces the scene exactly: BoxMesh 1x0.2x0.1 on StartButton at y=0.3 plus the 0.6-scaled 'Frames' caption at y=0.446 (frame_counter_display.tscn:59-83), and capture_dressing_room.gd:420 measures any GeometryInstance3D so the CSG panel and both Label3D count.",
+   "builds": [
+    "CSGMesh3D",
+    "Label3D",
+    "MeshInstance3D"
+   ],
+   "motion_source": "frame_counter_display.gd:90 rewrites label.text every frame (Engine.get_process_frames()), which regenerates the Label3D text mesh. The digits stay inside the 1.0 m panel so the AABB never moves; the probe's 'static' is a fact about the box, not about the artifact.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "Exactly 1.000 m wide - it fills its cell edge to edge with zero margin, so any neighbour tolerance of 0 will collide. The visible body is a CSGMesh3D; the only MeshInstance3D in the scene carries visible = false (frame_counter_display.tscn:59), so any tool that measures MeshInstance3D only will report this artifact as empty.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.0,
+     0.2,
+     0.1
+    ],
+    "oracle_max_m": 1.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "you_are_here": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    2.667,
+    1.8,
+    0.03
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "surface",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "you_are_here.gd:203-215 builds a TorusMesh at ring_radius 0.9 (1.8 m across) and gd:162-186 a TextMesh of 'YOU ARE HERE' at font_size 96 x pixel_size 0.004; the measured 2.667 x 1.8 is the sentence width by the ring diameter, all real MeshInstance3D.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    3,
+    2
+   ],
+   "proposed_basis": "body",
+   "note": "Declared footprint is under by ~3x in width: a 2.67 x 1.8 m floor decal on a 1x1 declaration, and it is a floor decal so it will silently overprint whatever the two neighbouring cells hold. The deixis=plan_fragment DNA value grows it further - ring_radius*4.4 = 3.96 m by ring_radius*3.2 = 2.88 m (gd:237-238), i.e. 4x3 cells - so a variant placement needs more room than the default. _process exists but set_process(pride_gradient) with pride_gradient default false (gd:157) and it only recolours materials, never moves geometry.",
+   "oracle": {
+    "in_oracle": false
+   }
+  },
+  "fontana_puncture": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "declared_footprint": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "tiny",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "Measured 0.5 x 0.5 x 0.5 is exactly cube_size (fontana_puncture.gd:77); the CSG is baked into a real MeshInstance3D named FontanaCarved one idle frame after _ready (gd:326-341), well inside the 0.7 s settle, so both samples measured the baked mesh.",
+   "builds": [
+    "MeshInstance3D",
+    "CSGCombiner3D",
+    "CSGBox3D",
+    "CSGSphere3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "Declaration is correct. cube_size is held at 0.5 across all four breach values by design (gd file header, lines 30-45), so no DNA variant changes the footprint - unusual and worth trusting. The dressing room raises it 0.25 m (artifact_offset) onto a height-3 pedestal tile, and 8 of its 37 live placements embed interactive_point_origin_force inside the void (gd:275-292), which adds a grabbable to the same cell.",
+   "oracle": {
+    "in_oracle": false
+   }
+  },
+  "floating_sphere_field": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "fallback_no_meshes",
+   "trust_reason": "The artifact builds only two GPUParticles3D (floating_sphere_field.gd:343-347) whose visibility_aabb is 20 x 10 x 20 m (gd:370-372); capture_dressing_room.gd:426-427 discards any GeometryInstance3D with an XZ footprint diagonal over 18 m, so both emitters were skipped and gd:434 returned the 1x1x1 constant. The 1.0 is not a measurement.",
+   "builds": [
+    "GPUParticles3D"
+   ],
+   "motion_source": "The whole field drifts continuously on the GPU: initial_velocity up to drift_speed 0.18 m/s in all directions (spread 180), a +Y float_bias of 0.06, turbulence 0.6 and a 14 s respawn lifetime (gd:67-73, 392-409). No axis - it is omnidirectional. The probe reported static only because both samples were the same fallback constant.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "I departed from the sweep rule deliberately, and a placer must read this. The sweep is 16 x 16 m in plan by 6 m tall - emission_box_extents = bounds (8, 3, 8) half-extents centred at volume_offset (0, 2.4, 0), gd:53-55 - spanning y = -0.6 to +5.4, i.e. straight through the player. But it is non-colliding unshaded particle glow with no solid body and no floor contact, so reserving 256 cells for it would be wrong. Treat the token as a 1-cell emitter with a 16 m radius-8 influence: never place two within 16 m (the fields add), and expect motes inside every artifact in that radius. posture is 'float' with artifact_offset y=1.5, which is honest.",
+   "oracle": {
+    "in_oracle": false
+   }
+  },
+  "interactive_point_origin_force": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.114,
+    0.114,
+    0.167
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "tiny",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "The visible body is a SphereMesh of radius 0.03 written by point_mesh.gd:37-40, i.e. 0.06 m across; the measured 0.167 m height comes from a Label3D carrying visible = false at y=0.08 scaled 0.12 (interactive_point_origin_force.tscn:41-47) and the 0.12-scaled HighlightRing, because capture_dressing_room.gd:420 never checks visible. Footprint is unaffected - the cell count is the same either way.",
+   "builds": [
+    "MeshInstance3D",
+    "Label3D",
+    "OmniLight3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "_process (gd:313-328) drives the morph shader only while held - _morph_target = 1.0 if _is_held else 0.0 (gd:324) - so unheld it is geometrically inert; standalone measurement is safe. Two placement hazards: (a) the visible object is a 6 cm sphere and the dressing room posture is 'floor' with no plinth, so on a bare cell it reads as nothing; (b) held with the morph engaged it applies an inverse-square pull to every RigidBody3D within attraction_radius 1.5 m, so keep loose rigid props at least 2 cells away.",
+   "oracle": {
+    "in_oracle": false
+   }
+  },
+  "folding_past": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    5.572,
+    4.05,
+    4.458
+   ],
+   "declared_footprint": [
+    6,
+    5,
+    1.0
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 6.752,
+   "body_wd_estimate": [
+    5.402,
+    4.05
+   ],
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "MultiMeshInstance3D is a GeometryInstance3D so capture_dressing_room.gd:420 measures it correctly from the 10 instance transforms (animated_folding_past.gd:147-149); the sizes agree with frame_width 6.0 / frame_height 4.8 from animated_folding_past.tscn. The number is honest about SIZE - see the note about where it sits.",
+   "builds": [
+    "MultiMeshInstance3D"
+   ],
+   "motion_source": "_process (gd:109-111) advances _animation_time and _update_frames() rewrites all 10 MultiMesh instance transforms every frame. Two motions, no rotation: scale = scale_ratio^(progress*10) shrinking each frame toward the centre, and a translation along -Z from z_base_offset -8.0 down to -12.5 over the 4 s cycle (gd:182-185). Only recession='nested' animates; the other three values call set_process(false) (gd:82).",
+   "proposed_footprint_cells": [
+    6,
+    5
+   ],
+   "proposed_basis": "sweep",
+   "note": "TRAP 4 confirmed here with numbers: neither sample caught the outermost frame (max measured width 5.572 against a true frame_width of 6.0 at scale 1.0), so the two samples do NOT bracket the sweep. The real sweep is 6.0 m wide by 4.5 m of Z travel, which is where the declared [6,5] comes from - the only declaration in my ten that is already right. THE BIG ONE: the geometry is not at the token. z_base_offset = -8.0 (gd:23) puts the whole nest 8 to 12.5 m behind the cell, and the raw capture center is z = -10.23. A placer that reserves 6x5 cells at the token reserves empty air while the frames are drawn through whatever occupies the cells 8-12.5 m away in -Z.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     6.0,
+     4.8,
+     4.05
+    ],
+    "oracle_max_m": 6.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "lab_room": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    8.04,
+    7.98,
+    4.3
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "room",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "This is a genuine room-scale body, not a shell mesh inflating an object: room_width 8.0 / room_depth 7.0 / room_height 3.8 (lab_room.gd:173-175) and _build_room calls _build_floor / _build_walls / _build_ceiling / _build_ceiling_fixtures (gd:1042-1045), each spawning many MeshInstance3D. The 8.04 is width plus wall thickness; the extra ~1 m of depth and 0.5 m of height are the entry stairs/ramp and ceiling fixtures, all part of the room the player walks inside.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    9,
+    8
+   ],
+   "proposed_basis": "body",
+   "note": "Worst declaration mismatch in the batch: 1x1 declared against 64 m2 measured, a 64x under-declaration on an artifact with 41 live placements. Two further complications for a placer. It is asymmetric in Z - measured center z = +0.47, so it runs roughly -3.5 to +4.5 from the token, not symmetrically. And lab_offset_z is applied by call_deferred AFTER the grid has placed the room (gd:_apply_lab_offset_z), so the offset is per-placement and NO single footprint is correct for every map. The dressing-room posture 'table' is also wrong for a room you enter.",
+   "oracle": {
+    "in_oracle": false
+   }
+  },
+  "dgrid": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.04,
+    1.04,
+    1.24
+   ],
+   "declared_footprint": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "0.04 x 1.04 x 1.24 is frame_depth 0.04, frame_width 1.0 + bar_size 0.04, frame_height 1.2 + 0.04 (durer_grid.gd:22-24 and the bar sizes at gd:110-135), with X and Z swapped by the 90-degree Y rotation baked into the scene root at durer_grid.tscn:6. Every piece is a MeshInstance3D.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    2
+   ],
+   "proposed_basis": "body",
+   "note": "[1,2] is the round-up rule applied literally: the depth is 1.04 m, i.e. a 2 cm overhang per side, so [1,1] is defensible if the placer tolerates a 4 cm bleed. Real placement hazard instead: the .tscn root carries a 90-degree Y rotation (durer_grid.tscn:6), so at rotation token '0' the screen already faces +/-X rather than +/-Z, and a map rotation composes on top of that. Minor dead code, no measurement effect - _create_wire builds an ImmediateMesh MeshInstance3D at gd:189-192 and never parents it; only the cylinder is added (gd:227).",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.04,
+     1.24,
+     0.04
+    ],
+    "oracle_max_m": 1.24,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "laser_sword": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.058,
+    0.058,
+    0.946
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "The 0.946 m height counts the 0.8 m blade, which _apply_repose() hides at the default repose='dark' (laser_sword.gd:300, _blade_mesh.visible = false), and capture_dressing_room.gd:420 never tests visible. What a visitor sees on the plinth is a 0.14 m handle plus a copper guard, about 0.146 m tall. The 0.058 x 0.058 footprint is unaffected.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "Grabbable RigidBody3D (extends XRToolsPickable) - once picked up it leaves its cell entirely and _ignite() brings the blade to full 0.946 m (gd:240-245), so the tall AABB is the HELD extent, not the standing one. A placement naming repose=lit/ghost/pilot does show the blade standing (gd:273-302), and only then is 0.946 m the visible height. _process (gd:95-109) runs only if _is_held and only modulates hum pitch and emission energy.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.06,
+     0.95,
+     0.06
+    ],
+    "oracle_max_m": 0.95,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "klee_walking_point": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.634,
+    0.08,
+    0.603
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "48 trail dots plus a head, all MeshInstance3D with SphereMesh (klee_walking_point.gd:215-231 and 242-257); measured 1.634 x 0.08 x 0.603 matches walk_length 1.6 plus trail_radius 0.018 either end, and walk_height 0.6 (gd:71-72, 84).",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": "_process (gd:361-393) walks _head.position the full 1.6 m along the trail in the local XY plane and relights all 48 dot materials as it passes, looping every ~3 s at walk_speed 0.32. The probe reported static because the head travels INSIDE the static trail's own AABB - only 0.011 m of Y drift between the two samples - so the box never grows. The measurement is therefore already the sweep.",
+   "proposed_footprint_cells": [
+    2,
+    1
+   ],
+   "proposed_basis": "sweep",
+   "note": "1.63 m wide on a 1x1 declaration - it overhangs its cell by about 32 cm on each side, across 20 live placements. The walk is drawn in the local XY plane and is only 0.08 m deep in Z, so under a 90/270 rotation token the 1.63 m runs in Z instead and the footprint becomes [1,2]. The registry declares dna.fixture walk_speed=40 / loop=false so DNA sweeps photograph a finished line, but capture_dressing_room applies no fixture, so this measurement was taken mid-walk at the shipped 0.32 - which does not matter here, since all 48 dots exist from _ready and the AABB is complete before the head moves.",
+   "oracle": {
+    "in_oracle": false
+   }
+  },
+  "lightrod": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.04,
+    0.04,
+    2.0
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "light_rod.gd:_create_rod builds one CylinderMesh MeshInstance3D of height rod_height=2.0 and radius 0.02 at (0, 1.0, 0) with count=1 (commons/primitives/line/light_rod.gd:88-107), which is exactly the measured 0.04 x 0.04 x 2.0.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The 0.04 m measurement is the count=1 default ONLY. light_rod.gd:_build_rods lays count rods along local X at `spacing` metres, total_width = (count-1)*spacing. Six live map tokens read `lightrod:90:0:1#config:4`, i.e. count=4 at the default spacing 1.0 = a 3.04 m colonnade needing 4x1 cells. A placer that trusts one number for this token will collide in those six rooms. Scene root carries the script, so apply_grid_config is reachable.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.04,
+     2.0,
+     0.04
+    ],
+    "oracle_max_m": 2.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "cube_scene": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    1.0,
+    1.212
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "The 1.0 x 1.0 footprint is the shipped BoxMesh(1,1,1) in commons/primitives/cubes/cube_scene.tscn, but the 1.212 height is the 1 m cube (-0.5..+0.5) plus the `Label3D_1_1` node at y=0.6 which ships `visible = false` in that same .tscn; capture_dressing_room.gd:420 counts any GeometryInstance3D, and Label3D is one, so a hidden label adds 0.212 m.",
+   "builds": [
+    "MeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The 1.0 x 1.0 here is a REAL 1 m cube, not the line-434 fallback — check the third number before assuming otherwise. The cube is ORIGIN-CENTRED, which its own dressing-room notes flag: \"[auto] AABB.y min = -0.50 — body sinks into / floats above floor\". capture_dressing_room.gd:178-183 re-seats it before measuring; the live grid auto-grounds it. cube_scene.gd's `grain` axis (split/quartered/lattice/shell) is explicitly built inside the same 1 m envelope (UNIT=1.0, SHELL_EDGE 0.475 so struts land on +/-0.5), so no value of the axis enlarges the footprint. 155 live placements.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "oracle_max_m": 1.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "parallel_line_puzzle": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    0.275,
+    1.177
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "Every extreme of the box belongs to shared boilerplate, not to this puzzle: the 1.0 m width is the CategoryLogicDisplay's CSGMesh3D BoxMesh(1, 0.305, 0.1) (commons/primitives/logic_display/CategoryLogicDisplay.tscn, Frame node at local y=0.0998), and the low Y comes from the base's stock rack at y=-0.4 (parallel_line_puzzle.gd:47 START_CENTERS).",
+   "builds": [
+    "CSGMesh3D",
+    "MeshInstance3D"
+   ],
+   "motion_source": "Per-frame geometry animation IS present and the probe did not see it: line_snap_puzzle_base.gd:114-126 attaches a runtime GDScript to every target marker that does `scale = Vector3.ONE * base_scale * pulse` (sin, +/-10%) and `$Ring.rotation.y += delta * 0.5` each frame. Drift measured 0.0000 because the markers (TorusMesh outer_radius 0.025 at local +/-0.2) sit wholly inside the display-driven envelope and never reach the AABB bounds.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The CSGMesh3D frame is counted, not skipped — CSGShape3D derives from GeometryInstance3D and capture_dressing_room.gd:420 tests that base class. Footprint stays 1 cell either way. The puzzle's own geometry (targets at (0,+/-0.2,+/-0.1), stock lines at x=0.2, z=+/-0.15) is a 0.4 x 0.3 x 0.3 volume entirely inside the signboard's shadow.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.45,
+     0.98,
+     1.0
+    ],
+    "oracle_max_m": 1.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "line": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.29,
+    0.11,
+    0.13
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "tiny",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "line.tscn instances two snap_point.tscn at x=-0.12 and +0.12 and line.gd:create_connection_line builds a CylinderMesh between them (commons/primitives/line/line.gd), giving 0.24 m plus the two ~0.025 m endpoint spheres/highlight rings = the measured 0.29 m.",
+   "builds": [
+    "MeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": "line.gd:_process rewrites the cylinder every frame from the two grab-sphere positions, and _process_resistance jitters current_line.position by up to max_jitter=0.02 m — but only when the segment length is within resistance_threshold=0.08 of a whole metre. The shipped 0.24 m segment is 0.24 from the nearest integer, so the jitter branch never fires and the measured drift of 0.0 is correct.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "TWO things a placer must know. (1) line.tscn's ROOT node (\"Line\", Node3D) carries NO script — line.gd sits on the child \"lineContainer\". line.gd documents this itself as a latent defect: every config path (GridInteractablesComponent, capture_config_sweep) targets the root, so the declared `readout` axis is unreachable by @export and only works via the metadata walk in _read_readout(). (2) readout=gradation or lattice calls _build_rule(), which lays a graduated blade of RULE_SPAN = 1.10 m from the first endpoint plus standing gates GATE_H=0.13 — nearly 4x the default footprint. 1 cell holds only at the default readout=numeral (all 40 live placements).",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.29,
+     0.05,
+     0.04
+    ],
+    "oracle_max_m": 0.29,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "dark_sphere": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.84,
+    0.84,
+    0.949
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": true,
+   "sweep_diameter_m": 1.188,
+   "body_wd_estimate": [
+    0.84,
+    0.84
+   ],
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "The 'motion' is an AABB-of-a-rotating-box artefact, not growth: dark_sphere.gd:273 spins _sphere_mesh about Y, and capture_dressing_room.gd:424 transforms the SphereMesh's LOCAL box AABB (0.70 cube) by that rotation, so the world box breathes between 0.70 and 0.99 m (0.70*(|cos|+|sin|)) while the sphere's silhouette never changes at all.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": "dark_sphere.gd:273-274 — _sphere_mesh.rotation.y += rotation_speed(0.15) * delta, continuous about the Y axis, with a wobble rotation.x = sin(t*0.4)*0.05 about X. Both are rotations of a sphere; no geometry translates and nothing changes size.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "sweep",
+   "note": "Body and sweep are the SAME here: a spinning sphere sweeps its own diameter. The real extents at the default presence=witness + body=orb are a 0.70 m sphere over a 0.84 m halo disc (dark_sphere.gd _halo_radius = _radius*1.2*halo_r = 0.42). The reported sweep_diameter_m of 1.188 is the box diagonal and overstates it by 41%. NON-DEFAULT VALUES DO overflow one cell: presence=eclipse gives halo diameter 0.35*1.5*1.2*1.25*2 = 1.575 m and presence=becoming gives 1.92 m — 2 cells. The halo disc at y=0.01 is load-bearing for auto-grounding (commented at dark_sphere.gd:613-616); do not treat it as decoration to be cropped. 748 maps carry this artifact.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.84,
+     0.94,
+     0.84
+    ],
+    "oracle_max_m": 0.94,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "scale_lines": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    10.0,
+    0.127,
+    3.762
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "room",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "unknown",
+   "trust_reason": "Cause is known, direction is UNDERCOUNT by 10x, and the enum has no value for it. scale_lines.gd:83-89 sets Line_100m to 100 m long (RUNG_SETS[\"world\"][0]=100.0, start_x=-50, end_x=+50) and that node exists in scale_lines.tscn, but capture_dressing_room.gd:426-427 discards any single geometry whose world XZ diagonal exceeds 18.0 m — the 100 m cylinder's is 100.0, so it was dropped and the reported 10.0 m is merely the SECOND-longest rung, Line_10m. Not a non-mesh problem: every rung is an ordinary MeshInstance3D.",
+   "builds": [
+    "MeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    100,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The batch's worst declaration error: posture \"monument\", dressing-room footprint [1,1,1], actual span 100 m x 0.13 m x ~4.2 m tall, and 16 bare `scale_lines` tokens plus 6 `scale_lines:0:3:1` placed on that 1x1 promise. Two further facts. The .tscn carries only FOUR line nodes (Line_100m/10m/1m/10cm) while scale_lines.gd:SLOTS names five — Line_1mm does not exist, so get_node_or_null returns null and the 1 mm rung silently never renders at any value of `rungs`. And arrangement=\"ruler\" moves every span from centred (-L/2..+L/2) to anchored (0..L), shifting the 100 m line's centre by 50 m; a placer keyed to the default centring is wrong by that much under that value.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "oracle_max_m": 0.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle says zero"
+   }
+  },
+  "plus_line_puzzle": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    0.275,
+    1.177
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "Identical mechanism to parallel_line_puzzle: the 1.0 m width is the shared CategoryLogicDisplay CSG frame BoxMesh(1, 0.305, 0.1) and the bottom is the shared stock rack at y=-0.4 (plus_line_puzzle.gd:_stock_positions \"stacked\" returns Vector3(0.2, -0.4, +/-0.15)).",
+   "builds": [
+    "CSGMesh3D",
+    "MeshInstance3D"
+   ],
+   "motion_source": "Same unseen per-frame animation as parallel_line_puzzle — line_snap_puzzle_base.gd:114-126 pulses and spins every target marker every frame; drift reads 0.0000 because the markers never reach the AABB bounds.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "Byte-identical measurement to parallel_line_puzzle and triangle_line_puzzle for a source-verifiable reason, not a harness accident — see shared_scene_families and batch_findings.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.45,
+     0.98,
+     1.0
+    ],
+    "oracle_max_m": 1.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "modulor_man_demo": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    2.015,
+    0.162,
+    3.0
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "modulor_man_demo.tscn ships NINE Label3D annotation nodes all authored `visible = false`, spanning x = -0.8 to +0.75 and y = -0.3 to 2.26; capture_dressing_room.gd:420 tests only `n is GeometryInstance3D` (Label3D is one) and never checks visibility, so the 2.015 m width and 3.0 m height are the invisible caption block, not the figure.",
+   "builds": [
+    "MeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "measure=\"body\" is the default and builds nothing at all (modulor_man_demo.gd:_build_measure returns early), so 1 cell is right for all 7 live placements. The other four values DO enlarge it and the enlargement is in the source as literals: `scale` puts a rule at x=1.15 (2 cells), `module` runs datum lines span=3.2 centred plus nested squares out to x=1.88 (4 cells), and `crowd` builds four extra figures at x0=1.02 with step=0.74 and a datum from x_left=-0.62 to x_right=3.76 — a 4.38 m span, 5 cells. If any map ever sets measure, the placer needs [5,1].",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.96,
+     2.4,
+     0.16
+    ],
+    "oracle_max_m": 2.4,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "laser_measure": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.168,
+    50.081,
+    0.058
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "surface",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "NOT the beam — the beam was caught and dropped. laser_measure.gd:170-173 builds the beam as one BoxMesh of size (0.002, 0.002, 50.0), whose world XZ diagonal is 50.0 and which capture_dressing_room.gd:427 therefore discards as studio floor. The 50.081 m comes from laser_measure.gd:312-323, which pools FIFTY separate tick MeshInstance3Ds at z = -i*1.0 for i in 1..50; each is a 0.012 x 0.012 x 0.002 box with an XZ diagonal of ~0.012, so every one of them sails through the guard and the last sets the far bound at z = -50.001.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": "Latent, did not fire: laser_measure.gd:367-373 runs perform_measurement() 30x/second and update_laser_hit (lines 438-441) rewrites beam_mesh.size.z to the hit distance and re-centres the beam. Both samples measured 50.081 exactly, so the raycast found nothing in the dressing room and the beam stayed at full reach — but in a furnished room the beam mesh resizes every frame between 0 and 50 m, and update_tick_marks re-reveals ticks up to the hit distance.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "Real body from source: CylinderMesh handle handle_length=0.14 / handle_radius=0.016, copper guard at 1.8x radius, LCD frame 0.054 x 0.028, inside the grab_stick.tscn wrapper — about 0.168 x 0.15 x 0.058 m, a hand tool. Two corrections to how this artifact gets talked about. (1) The 50 m runs along world Z, i.e. HORIZONTALLY, in the guard's own plane — it is not a tall outlier and the guard's blindness to Y is not what let it through. (2) THE FIX ALREADY EXISTS AND THIS HARNESS DOES NOT USE IT: commons/artifacts/registry/primitives.json declares `dna.fixture: {max_range: 0.25, tick_interval_m: 0.05}` and `framing: 0.7` precisely to pin the reach for capture, but capture_dressing_room.gd reads the registry only for `scene` (line 378) and never touches dna.fixture. Also: it needs 1 cell to STAND but a clear sight-line to READ; spatial_needs already sets wall_backing=true. 18 bare + 10 `laser_measure:0` + 8 `laser_measure:0:1:1` placements.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.1,
+     50.13,
+     0.13
+    ],
+    "oracle_max_m": 50.13,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "laser_exploding_sphere": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.199,
+    0.199,
+    0.2
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "tiny",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "laser_exploding_sphere.tscn's SphereMesh_main is radius 0.1 / height 0.2 with a matching SphereShape3D, and laser_exploding_sphere.gd:_build_moment returns on its first line at the default moment=\"intact\" so nothing is added — exactly the measured 0.199 x 0.199 x 0.2.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "Still 1 cell at every value of its axis: moment=burst freezes fragments on a Fibonacci sphere at BURST_RADIUS=0.28 (0.60 m across) and moment=scattered spreads a debris disc at SCATTER_RADIUS=0.40 (0.84 m across), both under 1 m. The live explosion is different — _create_explosion_particles parents its particles to get_parent() and tweens them explosion_speed=2.5 m outward, so during the event debris leaves the cell entirely; that is a transient, not a footprint. Script is @tool, so it also builds in the editor. 13 live placements.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.2,
+     0.2,
+     0.2
+    ],
+    "oracle_max_m": 0.2,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "mystic_writing_pad": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.05,
+    0.22,
+    1.45
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "Every measured dimension is reproduced by the exports: depth 0.22 is exactly the foot BoxMesh size Vector3(0.34, 0.03, 0.22) at mystic_writing_pad.gd:172, height 1.45 is stand_height 0.78 + board_height 0.62 + frame bar, width 1.05 is board_width 0.95 + two 0.05 frame bars (mystic_writing_pad.gd:26-28, 160-211).",
+   "builds": [
+    "MeshInstance3D",
+    "MultiMeshInstance3D"
+   ],
+   "motion_source": "mystic_writing_pad.gd:279 _process walks a luminous stylus (MeshInstance3D sphere, radius 0.02) across the slate face and grows a MultiMesh dot-stroke; every clear_interval (3.2 s) the stroke sinks into the wax as a ghost and a new one starts. All of it happens inside the 0.95 x 0.62 board plane, so the merged AABB is byte-identical at 0.7 s and 2.1 s. The probe's drift of 0.0 is a CORRECT reading of the envelope, not a missed motion — but the artifact is never still, and any 'is it static?' consumer downstream will be wrong about it.",
+   "proposed_footprint_cells": [
+    2,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The 5 cm overhang is the whole story: 1.05 m wide against a declared 1 x 1. Strict round-up says 2 x 1, but if a 2.5 cm overhang each side into the neighbour cell is tolerable the declared 1 x 1 stands. It is a floor-standing slate on a post — depth only 0.22 m, so it wants a WALL or a back edge, not a free-standing pedestal; the dressing room's posture 'pedestal' on a raised 3-tile is fighting an object that already has its own stand (stand_height 0.78) and gets lifted to 2.2 m centre.",
+   "oracle": {
+    "in_oracle": false
+   }
+  },
+  "draw_dot": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.5,
+    0.338,
+    3.29
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "draw_dot.gd:144 calls _progress_indicator.set_as_top_level(true) on a 0.2 x 0.04 QuadMesh that is also visible=false (line 145); top_level pins it at WORLD origin, and the capture's seating step (capture_dressing_room.gd:178-183) then lifts the real body 1.52 m away from it, so the merged box spans from that stranded quad to the top of the pad.",
+   "builds": [
+    "MeshInstance3D",
+    "MultiMeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The arithmetic closes exactly, which is how I know it is the instrument and not the artifact. Real body = the reference frame (reference_frame_size 0.5 at reference_frame_position (0,0,0.2), draw_dot.gd:20-21) plus the DrawSphere at z=-0.12 radius 0.018: X 0.5 EXACT, Z -0.138..0.2 = 0.338 EXACT, Y about 0.5. The stranded ProgressIndicator sits at world y -0.02..+0.02; seat_d lifts the parent by 1.52 m; re-measured span -0.02..3.27 = 3.29 with centre 1.625 — both reported values to the byte. Real height is ~0.5 m, not 3.29 m. Two more nodes are top_level (the trail at line 73, the data table label at line 174) and are silent here only because an ImmediateMesh with no surfaces and a Label3D with no text both have zero local AABB and are dropped by capture_dressing_room.gd:423. In a live map, once the player draws, BOTH appear at world origin, which is a placement bug waiting in 27-odd spine slots, not a measurement one.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.5,
+     0.5,
+     0.34
+    ],
+    "oracle_max_m": 0.5,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 0.2x"
+   }
+  },
+  "room_grammar": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.8,
+    0.85,
+    0.001
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "surface",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "The 1 mm height is a GENUINE floor decal, not an undercount: room_grammar.gd:70-76 builds one MeshInstance3D with a QuadMesh of quad_size 0.8 x 0.8 rotated -90 deg about X at y=0.005, and there is no other geometry in the file — the plan is painted into a 128x128 ImageTexture on the albedo (line 145), so all the detail is texels, not meshes.",
+   "builds": [
+    "MeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The 0.85 depth against a 0.80 quad is the title Label3D at room_grammar.gd:89-97, position (0, 0.006, quad_size.y*0.5 + 0.03) = z 0.43, rotated -90 deg so it lies flat too. Label3D IS a GeometryInstance3D and was counted — which is how a 0.80 m quad measures 0.85 deep with centre z 0.025. Both planes are within 1 mm of each other in Y, hence the 0.001. This is the one artifact in my ten where the 1 mm reading needed proving rather than assuming, and it proves out: room_grammar is a plaque, and the dressing room already says posture 'floor'. It must be walked ON or looked DOWN at; a pedestal would hide it edge-on.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.8,
+     0.0,
+     0.8
+    ],
+    "oracle_max_m": 0.8,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "grab_sphere_point_snap": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.114,
+    0.152,
+    0.093
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "tiny",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "show_reference_frame defaults to FALSE here (grab_sphere_point_snap.gd:33, unlike its sibling draw_dot where it is true), so nothing but the pickable sphere and the DrawSphere at z=-0.12 radius 0.02 (grab_sphere_point_snap.tscn) is built; measured z span -0.14..0.012 = 0.152 and the seated bottom sits exactly on the 1.5 m anchor top, proving no stranded top_level node crept into the box.",
+   "builds": [
+    "MeshInstance3D",
+    "MultiMeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "A 11 x 15 x 9 cm hand specimen — the smallest thing in this batch and 1/70th of a 1 m cell by area. It reads as nothing on a bare tile; it needs the pedestal the dressing room already gives it, and probably a vitrine. It carries the same top_level trap as draw_dot (grab_sphere_point_snap.gd:272 sets the data-table Label3D top_level) but escapes it in capture because the label is empty at rest; the moment a player snaps a point in a map, that table appears at world origin.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.04,
+     0.04,
+     0.15
+    ],
+    "oracle_max_m": 0.15,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "player_trace": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    1.0,
+    0.12
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "surface",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "Both numbers are exports read straight off the source: the 1.0 x 1.0 is the ground-plane grid built from reference_frame_size 1.0 (player_trace.gd:22, 206-237) and the 0.12 height is the two endpoint marker spheres of radius 0.045 and 0.06 built at the origin by _setup_endpoints (player_trace.gd:259-267) — 2 x 0.06 = 0.12 to the byte.",
+   "builds": [
+    "MeshInstance3D",
+    "MultiMeshInstance3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "TWO warnings for a placer. (1) The lattice is EXACTLY 1.000 m square, so it fills its declared cell edge-to-edge with zero margin — any neighbour flush against it touches. (2) The measured 0.12 m height is two spheres created with visible=false (player_trace.gd:256); the visible artifact at rest is a perfectly flat grid of zero thickness, and at RUNTIME the thing is unbounded: _trail_instance is a plain child (player_trace.gd:204, deliberately NOT top_level, unlike draw_dot's) that accumulates the player's whole walked path, so its real occupied volume becomes the size of the map. It is not a 1 m object, it is a 1 m origin marker for an unbounded recorder. Standalone it set_process(false) at line 161 because no XROrigin3D exists — the static reading is honest for the bench and meaningless for a map.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "oracle_max_m": 0.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle says zero"
+   }
+  },
+  "grid_lines": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    5.109,
+    5.109,
+    0.423
+   ],
+   "declared_footprint": [
+    6,
+    6,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "grid_lines.gd:189 computes half_size = (grid_size 5 * cell_spacing 1.0) / 2 = 2.5, so the lattice is a true 5.0 m square and the measured 5.109 is that plus ~5.5 cm of Label3D billboard slop at the outermost lines; declared [6,6,1] already covers it.",
+   "builds": [
+    "MeshInstance3D",
+    "Label3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    6,
+    6
+   ],
+   "proposed_basis": "body",
+   "note": "The only artifact of my ten whose declared footprint was already right. But 95% of the measured HEIGHT is text, not lattice: the lines are line_static cylinders of radius 0.006-0.01 (grid_lines.gd:203-220), i.e. about 2 cm thick, while each of the twelve line_static children creates a billboarded 'Length: 5.00m' Label3D at midpoint + 0.05 y (line_static.gd:16-26, 93) and the scene adds a hidden 'Grid (5x5 meters)' Label3D at y=0.3. Label3D counts as geometry, invisible or not, so 0.423 is a text envelope over a 0.02 m lattice. Also: grid_lines.tscn ships a live Camera3D child — the demo-as-artifact chrome leak class — and its @export show_data_table builds a further Label3D scaled 2.0 at y=2.5 that fires visible=true the first time a trace arrives; that one is 2.5 m up and was invisible to this capture only because its text is empty at rest.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     5.01,
+     0.02,
+     5.01
+    ],
+    "oracle_max_m": 5.01,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "catalyst_pedestal": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.019,
+    1.019,
+    1.019
+   ],
+   "declared_footprint": [
+    2,
+    2,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "1.019 in all three axes is CAGE_SIZE 1.0 (catalyst_pedestal.gd:63) plus two corner ferrules of FERRULE_RADIUS = EDGE_THICKNESS 0.006 * 1.55 = 0.0093 (line 92), i.e. 1.0 + 0.0186 = 1.0186, matching to three decimals; the OmniLight3D and the ground Decal are correctly excluded because neither is a GeometryInstance3D.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": "catalyst_pedestal.gd:195-197 — the spawned BecomingCatalyst crystal BOBS on Y by sin(t*1.2)*0.04 m and SPINS about Y at 0.4 rad/s, continuously, every frame. _spawn_crystal (line 710-723) is unconditional, so it was live during both samples. The probe's drift of exactly 0.0 is nevertheless correct: the crystal sits at (0, 0.5, 0), the cage is the extreme in all three axes, so a 4 cm bob and a Y spin can never touch the merged bounds. This is the case the brief predicted (a catalyst artifact that animates) and it is NOT an under-detection — the AABB genuinely does not move. The finding is about the QUESTION: 'does the box change size' is not the same question as 'does the artifact move'.",
+   "proposed_footprint_cells": [
+    2,
+    2
+   ],
+   "proposed_basis": "body",
+   "note": "Declared [2,2] is right by strict round-up (1.019 > 1.0 by 19 mm) and right for the reason too — a wireframe cube you reach INTO needs a cell of standing room, and its dressing room already gives it a 3x3 raised table inside a 5x5. The DNA axis `offer` (line 141) changes the footprint at non-default values: `shrine` adds two stepped ground squares at the foot and a hipped roof, `clamp` deletes the cube for four rising edges. Only `cage` was measured. Also note the pedestal DELETES ITSELF: on pickup with no lease it queue_free()s at line 217, so the cell it occupies becomes empty mid-session.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.01,
+     1.01,
+     1.01
+    ],
+    "oracle_max_m": 1.01,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "parasol_triangle": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.4,
+    0.08,
+    1.841
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "Reconstructs from the exports to three decimals: width 0.4 = triangle_size (parasol_triangle.gd:21), height 1.841 = stick_height 1.5 + triangle_size*0.866*cos(10 deg tilt) = 1.5 + 0.341, depth 0.08 = the 10-degree tilt projection of the equilateral height plus the 0.0195 base stick radius (lines 19-22, 93-123).",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "A flag on a stick: 40 x 8 cm on the ground, 1.84 m tall. The footprint is honest at 1 x 1 but the SHAPE is not square — it is a 5:1 blade, and its DNA axis `sidedness` (line 52) exists precisely so the two faces read differently, which means rotation is load-bearing and the dressing room's four permitted rotations are not interchangeable. Placed on the declared pedestal footing its apex reaches 3.34 m; on the floor it reads at eye height, which is what the @identity asks for ('visible from across the room'). Consider posture floor, not pedestal.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.4,
+     1.84,
+     0.08
+    ],
+    "oracle_max_m": 1.84,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "triangle_line_puzzle": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    0.275,
+    1.177
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "I reconstructed all three axes: X 1.000 is the CategoryLogicDisplay's 1 m-wide screen/frame meshes, Z 0.275 is that frame's 0.15 m thickness merged with the stock lines parked at local x=0.2 (triangle_line_puzzle.gd:61-63), Y 1.177 runs from the lowest stock line at y=-0.4 up to the display top at y=0.75 — so the snap lines and markers ARE in the box and the number is real, not a fallback.",
+   "builds": [
+    "MeshInstance3D",
+    "CSGMesh3D"
+   ],
+   "motion_source": "line_snap_puzzle_base.gd:114-125 attaches a generated script to every target marker that pulses its scale by +/-10% at 3 Hz and spins the marker ring about Y each frame. Real, continuous, and invisible to the AABB because the 5 cm markers sit at the triangle vertices, far inside the 1 m logic-display envelope. Drift 0.0 is correct.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "THE 1.000 IS NOT THE PUZZLE. The puzzle geometry is only about 0.4 m across; the measured metre is the CategoryLogicDisplay instanced as a child of the .tscn (QuadMesh size 1 x 0.25 and CSG BoxMeshes 1 x 0.305 x 0.1). Strip the display and this is a 0.4 m object. Two of those display meshes are visible=false (Frame/MeshInstance3D and ProgressIndicator) and were counted anyway — capture_dressing_room.gd never tests visibility. Fits its cell exactly at 1.000 m with zero margin. Centre sits at 2.09 m after seating on the 1.5 m pedestal footing, which puts a hand-assembly puzzle above head height — the pedestal posture is wrong for a thing you must reach into.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.45,
+     0.95,
+     1.0
+    ],
+    "oracle_max_m": 1.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "catalyst_vent": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.92,
+    0.92,
+    4.02
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "pole",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "Not an outlier inflation — the tall pillar IS the artifact, by design: catalyst_vent.gd:138-154 builds a CylinderMesh of pillar_height 4.0 (export at line 31) seated at y=2.0, and the @identity at line 7 names 'tall pillar visual so the vent reads at any camera angle' as a requirement it HAS. Width 0.92 is the base halo TorusMesh outer_radius 0.46 x 2 (lines 159-163) and the extra 0.02 of height is that torus tube dipping below zero.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "Footprint 1 x 1 is correct at 0.92 m, but the declared HEIGHT of 1 understates a 4.02 m column by 4x — this needs 4 m of vertical clearance and will punch through any ceiling or upper storey. size_class 'pole' was the right call. Two runtime facts a placer needs: the vent SPAWNS bodies (catalyst_vent.gd:266 add_child on the PARENT, at vent position + 0.4 m) up to wave_size 5, so the cell needs walking room around it and a path for foes to march; and it was correctly measured as static only because _physics_process is double-gated by require_catalyst_armed (line 200, no armed catalyst on the bench) and start_delay_s 5.0 > the 2.1 s sample — with a bracelet present the space around it is not static at all. Sitting it on the dressing room's raised 1.5 m pedestal tile also makes no sense for a floor seam; posture should be floor.",
+   "oracle": {
+    "in_oracle": false
+   }
+  },
+  "triangleprofiles": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    5.037,
+    5.007,
+    0.222
+   ],
+   "declared_footprint": [
+    6,
+    6,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "surface",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "one MeshInstance3D pleat wrapped on a square path of side_len 5.0 (triangleprofiles.gd:108 'var side_len = 5.0', h = side_len/2.0) plus DragPointSet handles at sphere_scale 0.3, which reproduces the measured 5.037 x 5.007 to within the 0.029 m highlight-ring margin.",
+   "builds": [
+    "MeshInstance3D",
+    "DragPointSet grab spheres (MeshInstance3D)",
+    "StaticBody3D/CollisionShape3D"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    6,
+    6
+   ],
+   "proposed_basis": "body",
+   "note": "_ready() at triangleprofiles.gd:68-72 deletes EVERY child before building, which silently removes the Camera3D the .tscn ships. Height 0.222 = base_y 0.5 + height 0.2 crest minus the 0.52 trough, so the pleat is only 18 cm tall over a 5 m square - it reads as surface, not object.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     5.01,
+     0.2,
+     5.01
+    ],
+    "oracle_max_m": 5.01,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "folded_strip": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    4.036,
+    0.307,
+    0.376
+   ],
+   "declared_footprint": [
+    5,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "surface",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "vertices are laid along X over strip_length with z alternating +/-0.15 (folded_strip.gd:78-90), giving exactly 4.0 x 0.30; measured 4.036 x 0.307 is that plus the 0.029 m highlight ring.",
+   "builds": [
+    "MeshInstance3D",
+    "DragPointSet grab spheres (MeshInstance3D)"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    5,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The .tscn root node is named 'Quad', not 'FoldedStrip' - a copy-paste from quad.tscn. Harmless to the grid but misleading in any scene-tree dump.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     4.01,
+     0.36,
+     0.31
+    ],
+    "oracle_max_m": 4.01,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "draw_triangle_faces": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.15,
+    0.245,
+    3.224
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "the snap indicator is a SphereMesh of height point_snap_distance = 0.15 that is set_as_top_level(true) at draw_triangle_faces.gd:186-188, so it is stranded at world origin while the artifact sits on its pedestal; the measured AABB floor is exactly -0.075 m (center 1.537 - 3.224/2), which is that sphere's half-height to the millimetre.",
+   "builds": [
+    "MeshInstance3D",
+    "MultiMeshInstance3D",
+    "ImmediateMesh (in MeshInstance3D)"
+   ],
+   "motion_source": "_process at :191-196 scales _draw_ring by 0.8 + sin(t*3)*0.2, but only while _is_grabbed; nothing is grabbed in the dressing room, so the probe is right that it is static there.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The 3.224 m height is an artefact, not the artifact. The real body is the GrabPoint bundle: a 0.07 m DrawSphere at z=-0.12 plus a TorusMesh ring of outer_radius 0.05, i.e. roughly 0.15 x 0.245 x 0.2 - a handheld dot. The empty ImmediateMesh line instances are also top-level but survive nothing because capture_dressing_room.gd:423 drops any local AABB under 1 cm. Declared [1,1] is already correct; do not resize it from the measurement.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.15,
+     0.15,
+     0.24
+    ],
+    "oracle_max_m": 0.24,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": "oracle disagrees by 0.1x"
+   }
+  },
+  "triangle": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    0.529,
+    0.006,
+    0.521
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "tiny",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "genuinely flat: all three vertices carry z = 0.0 (triangle.gd:26-30) and the mesh is a SurfaceTool PRIMITIVE_TRIANGLES pair of coplanar faces, so the 0.006 m depth is entirely the grab spheres - point_mesh.gd radius 0.012 scaled by sphere_size_multiplier 0.25 gives a diameter of exactly 0.006.",
+   "builds": [
+    "MeshInstance3D",
+    "DragPointSet grab spheres (MeshInstance3D)",
+    "Label3D (inside grab sphere scene)"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "A 0.5 m plate standing upright in the XY plane with literally zero thickness. The 0.029 m of excess over 0.5 in width is the godot-xr-tools HighlightRing at scale 0.12 riding each grab sphere. This is NOT an undercount - the whole family measures the same way.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.51,
+     0.51,
+     0.01
+    ],
+    "oracle_max_m": 0.51,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "pythagorean_triangle_angles": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    3.0,
+    1.67,
+    3.368
+   ],
+   "declared_footprint": [
+    3,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "inflated_by_outlier",
+   "trust_reason": "every mesh in this artifact is coplanar at z = 0 - vertex_positions all end in 0.0 (:59-63) and update_square_mesh builds its perpendicular as Vector3(edge.y, -edge.x, 0.0) (:297) - so the 1.67 m measured depth cannot come from a mesh; the only other GeometryInstance3D in the subtree is the seven billboarded Label3D nodes created at :146-155, and Label3D is a GeometryInstance3D, so the capture counted them.",
+   "builds": [
+    "MeshInstance3D",
+    "Label3D",
+    "DragPointSet grab spheres (MeshInstance3D)"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    3,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The declared [3,1] is RIGHT and the measurement is wrong - a rare direction for this corpus. The width 3.000 is exact and derivable: with sphere_y_offset 0.5 the leg square reaches x = -1.5 and the hypotenuse square reaches x = +1.5. Mesh depth is at most ~0.03 m. The FormulaLabel is parked at centroid + (0, 1.5, 0) (:184), which is also where the extra 0.368 m of height comes from. A placer should treat labels as occupying no floor.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     3.0,
+     3.0,
+     0.01
+    ],
+    "oracle_max_m": 3.0,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "quad": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.862,
+    0.212,
+    1.643
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "the four vertex literals at quad.gd:35-39 span x -1.0..0.8, y -0.8..0.8 and z -0.2..0.0, which is 1.8 x 1.6 x 0.2 - the measured 1.862 x 1.643 x 0.212 is that plus the highlight rings.",
+   "builds": [
+    "MeshInstance3D",
+    "DragPointSet grab spheres (MeshInstance3D)"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    2,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "DECLARED TOO SMALL. It is 1.86 m wide, nearly twice its declared cell. Note also that this quad is deliberately non-planar - vertices 1 and 3 sit at z = -0.2 while 0 and 2 sit at z = 0, which is the artifact's whole argument about triangulation, so the 0.212 depth is real geometry and not slop. Center is offset x = -0.101, so it does not sit symmetrically on its anchor.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.81,
+     1.61,
+     0.21
+    ],
+    "oracle_max_m": 1.81,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "interactivetriangle": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.062,
+    0.012,
+    1.043
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "flat by construction: vertices are built at z = 0.0 with triangle_scale 0.5 (interactivetriangle.gd:39-41), and the 0.012 m depth is exactly the grab-sphere diameter - point_mesh.gd radius 0.012 times sphere_size_multiplier 0.5, doubled.",
+   "builds": [
+    "MeshInstance3D",
+    "DragPointSet grab spheres (MeshInstance3D)",
+    "Label3D (inside grab sphere scene)"
+   ],
+   "motion_source": null,
+   "proposed_footprint_cells": [
+    2,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "Same body as `triangle` at 2x scale: two coplanar MeshInstance3D (pink and black) sharing one index list, so the black one is drawn exactly on top of the pink. Overflows its declared cell by 6 cm, hence [2,1] - but if the placer can tolerate 6 cm of overhang, [1,1] is nearly honest.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.01,
+     1.01,
+     0.01
+    ],
+    "oracle_max_m": 1.01,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "quad_line_puzzle": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    0.275,
+    1.327
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "the 1.000 m width is the CategoryLogicDisplay signage child, whose QuadMesh screen is size Vector2(1, 0.25) and BoxMesh frame Vector3(1, 0.2, 0.1); the display's -90 deg yaw in quad_line_puzzle.tscn composed with the root's +90 deg yaw maps that 1.0 straight onto world X.",
+   "builds": [
+    "MeshInstance3D",
+    "SubViewport-textured QuadMesh (MeshInstance3D)"
+   ],
+   "motion_source": "line_snap_puzzle_base.gd:116-125 attaches a _process that pulses each marker by sin(t*3)*0.1 and spins $Ring about Y - but the GDScript is built from source_code and reload() is never called, so it never compiles and never runs. The measurement corroborates the bug: a 2.094 s pulse period sampled at 0.7 s and 2.1 s should have shown ~0.004 m of drift, and the drift is 0.000 on all three axes.",
+   "proposed_footprint_cells": [
+    1,
+    1
+   ],
+   "proposed_basis": "body",
+   "note": "The puzzle you actually solve is small: corners at +/-0.2 (HALF = 0.2, :49) and four lines parked in a 0.3 m rank, about 0.45 x 0.25. Everything wider is the sign. Even so a spinning $Ring about its own Y axis would not have changed the AABB, since the torus is laid flat at :83 and is rotationally symmetric about that axis - so the dead animation is invisible to this instrument twice over.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     0.45,
+     1.08,
+     1.0
+    ],
+    "oracle_max_m": 1.08,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "grab_trihedron": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.259,
+    1.258,
+    1.201
+   ],
+   "declared_footprint": [
+    2,
+    2,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "trustworthy",
+   "trust_reason": "one MeshInstance3D built by PrimitiveMeshBuilder from _trihedron_geometry() and parented to the pickable ROOT (grab_trihedron.gd:97-101), with the script confirmed on the .tscn root node, so apply_grid_config is reachable and the measured 1.259 x 1.258 x 1.201 is the whole body.",
+   "builds": [
+    "MeshInstance3D"
+   ],
+   "motion_source": "_process at :274-281 calls _snap_to_nearest_shelf_point(true) every frame while snap_to_shelf is on and nothing is holding it. There is no shelf in the dressing room, so it never fires there - but in a map with a shelf this artifact TRANSLATES itself out of its placed cell on the first frame.",
+   "proposed_footprint_cells": [
+    2,
+    2
+   ],
+   "proposed_basis": "body",
+   "note": "This is a grabbable pickable that is 1.26 m across - larger than any of the flat plates it sits beside. The shelf-snap is the one genuine placement hazard in this batch: its resting position in a furnished map is not the position the map file gives it.",
+   "oracle": {
+    "in_oracle": true,
+    "oracle_aabb": [
+     1.2,
+     1.2,
+     1.2
+    ],
+    "oracle_max_m": 1.2,
+    "oracle_measured_at": "2026-04-29T07:09:56.762620Z",
+    "disagreement": null
+   }
+  },
+  "path_game_controller": {
+   "wave": 2,
+   "staged": true,
+   "measured_wdh": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "declared_footprint": [
+    1,
+    1,
+    1
+   ],
+   "declared_is_placeholder": false,
+   "size_class": "object",
+   "moving": false,
+   "sweep_diameter_m": null,
+   "body_wd_estimate": null,
+   "pivot_centred": true,
+   "trust": "fallback_no_meshes",
+   "trust_reason": "path_game_controller.tscn is a bare Node3D carrying only the script, with zero child nodes, and the script's only geometry call _spawn_badge parents the badge to get_tree().current_scene rather than to itself (path_game_controller.gd:135-138) - so the artifact subtree can never contain a GeometryInstance3D, and the [1,1,1] is capture_dressing_room.gd:434 firing, not an 18 m object being filtered out at :427.",
+   "builds": [],
+   "motion_source": null,
+   "proposed_footprint_cells": null,
+   "proposed_basis": "unknown",
+   "note": "IT SHOULD NOT BE IN A MUSEUM. This is the win/lose rulebook for the path-and-block game: it wires itself to a path_watchdog and to every node in group 'enemy' and emits game_won/game_lost. It has no body, occupies no floor, and in a museum room with no watchdog and no foes it does nothing observable at all. It needs a map token so the game can host it, but it needs excluding from any placement or gallery sweep - it is furniture-code, not furniture.",
+   "oracle": {
+    "in_oracle": false
+   }
+  }
+ }
+}

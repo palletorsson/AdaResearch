@@ -1,0 +1,440 @@
+{
+  "schema_status": "PROPOSAL FOR REVIEW — not canonical, not a schema commitment",
+  "note": "This file deliberately does NOT declare itself as adaresearch.lineage.v1 or any other canonical name. If a lineage schema is adopted, it should be designed against several audits, not retrofitted from this one. Field names here are descriptive and expected to change.",
+  "generated": "2026-08-10",
+  "audit": "lambda_slider / phi_slider artifact lineage",
+  "method": {
+    "evidence_classes_used": [
+      "registry entries in commons/artifacts/registry/*.json (lookup_name, scene, sequence, dna.axes, parameters.footprint)",
+      "scene file existence on disk for every named lookup",
+      "GDScript signal declarations and emit sites",
+      "GDScript group membership (add_to_group) versus group lookup (get_nodes_in_group) — the live-wiring test",
+      "@identity relationships blocks",
+      "map_data.json interactables layers across 2049 maps — actual co-location",
+      "commons/data/spine_artifact_order.json — the shipped 1D walk order (799 entries)",
+      "commons/data/artifact_relations.json — typed relation edges",
+      "commons/artifacts/dressing_rooms/*.json — declared bodies and clearances",
+      "doc/book/text_mentions.json — written-content mentions",
+      "commons/artifacts/artifact_theme_index.json and category_index.json — the corpus's own taxonomy",
+      "commons/data/artifact_neighbors.json — embedding similarity, used ONLY as a candidate generator, never as evidence (see finding F5)"
+    ],
+    "explicit_separation": "Every record splits `verified` (statements a script re-derived from files) from `interpretation` (curatorial reading that a reviewer may reject without the verified facts changing)."
+  },
+
+  "anchors": {
+    "lambda_slider": {
+      "lookup_name": "lambda_slider",
+      "registry": "commons/artifacts/registry/qfep.json",
+      "scene": "res://commons/interfaces/qfep/lambda_slider.tscn",
+      "scene_exists": true,
+      "source": "commons/interfaces/qfep/lambda_slider.gd",
+      "source_lines": 908,
+      "sequence": "qfeplaboratory",
+      "map_sequences": ["foundationscrisis", "qfeplaboratory"],
+      "dna_axes": { "calibration": ["optimum", "band", "dispute", "gap", "none"] },
+      "spine_order_index": 750,
+      "spine_order_map": "Crisis_Synthesis",
+      "signal_emitted": "lambda_changed(value: float)",
+      "group_joined": "qfep_lambda_controllers (conditional on broadcast_globally, default true)",
+      "measured_body_m": [0.69, 0.33, 1.31],
+      "measured_body_source": "commons/artifacts/dressing_rooms/lambda_slider.json (production_grade: featured_aaa)",
+      "rail_geometry": { "rail_length": 0.5, "rail_height": 0.02, "rail_depth": 0.05, "handle_radius": 0.03, "console_body": true },
+      "maps_containing": 22,
+      "text_mentions": 35
+    },
+    "phi_slider": {
+      "lookup_name": "phi_slider",
+      "registry": "commons/artifacts/registry/qfep.json",
+      "scene": "res://commons/interfaces/qfep/phi_slider.tscn",
+      "scene_exists": true,
+      "source": "commons/interfaces/qfep/phi_slider.gd",
+      "source_lines": 609,
+      "sequence": "qfeplaboratory",
+      "map_sequences": ["foundationscrisis", "qfeplaboratory"],
+      "dna_axes": { "calibration": ["optimum", "band", "dispute", "gap", "none"] },
+      "spine_order_index": 751,
+      "spine_order_map": "Crisis_Synthesis",
+      "signal_emitted": "phi_changed(value: float)",
+      "group_joined": "qfep_phi_controllers (conditional on broadcast_globally, default true)",
+      "declared_body_m": [8, 8, 1],
+      "declared_body_source": "commons/artifacts/dressing_rooms/phi_slider.json",
+      "declared_body_flag": "PLACEHOLDER — see finding F3. Rail geometry is identical to lambda_slider and phi has no console_body export, so the true body is at or below lambda's 0.69 x 0.33 x 1.31 m.",
+      "rail_geometry": { "rail_length": 0.5, "rail_height": 0.02, "rail_depth": 0.05, "handle_radius": 0.03, "console_body": "absent" },
+      "maps_containing": 12,
+      "text_mentions": 30
+    }
+  },
+
+  "findings": {
+    "F1_asymmetric_exhibition": {
+      "verified": [
+        "QFEP_Phi_Term contains phi_slider together with rigid_sculpture, fluid_form, preserved_pattern, transforming_pattern, tt.",
+        "QFEP_Lambda_Spectrum contains bifurcation_walkway, chaos_particles, complexity_pattern, crystal_formation, dissolving_form, edge_particles, ordered_grid — and does NOT contain lambda_slider.",
+        "lambda_slider instead stands in QFEP_Edge_Of_Chaos, the single-value room (lambda ~ 0.4), with edge_core, edge_of_chaos_unlocked, emergence_zone, turing_pattern, tt."
+      ],
+      "interpretation": "Lambda is exhibited as a spectrum the visitor walks; Phi is exhibited as a dial the visitor turns. They are not symmetric twins with a shared display grammar, and a layout engine that treats them as one pattern will produce a room that is wrong for one of them."
+    },
+    "F2_dead_wire": {
+      "verified": [
+        "Six files call get_nodes_in_group(\"qfep_slider\"): edge_detector.gd:205, entropy_meter.gd:181, phase_cube.gd:234, qfep_oscilloscope.gd:235, qfep_reactor.gd:428, reactive_particle_field.gd:294.",
+        "No file in the repository calls add_to_group(\"qfep_slider\").",
+        "lambda_slider.gd:196 joins qfep_lambda_controllers; phi_slider.gd:145 joins qfep_phi_controllers.",
+        "Only edge_of_chaos_orb.gd:194,199 reads those two correct group names.",
+        "queer_morphology_specimen.gd:599,603 connects by direct node reference to slider_moved, not to lambda_changed/phi_changed.",
+        "qfep_reactor.gd:23-25 already documents this failure for its own file."
+      ],
+      "interpretation": "The relation graph contains two populations that look identical in the registry: artifacts that genuinely respond to the dial, and artifacts that were written to respond and never do. Placing a dead consumer beside the dial promises a live system and delivers a static one. Only edge_of_chaos_orb and queer_morphology_specimen currently pass the live-wiring test."
+    },
+    "F3_phi_body_placeholder": {
+      "verified": [
+        "commons/artifacts/dressing_rooms/phi_slider.json declares footprint [8, 8, 1], posture floor, no production_grade.",
+        "commons/artifacts/dressing_rooms/lambda_slider.json declares footprint [0.69, 0.33, 1.31], posture wall, production_grade featured_aaa.",
+        "Both sources declare rail_length 0.5, rail_height 0.02, rail_depth 0.05, handle_radius 0.03.",
+        "lambda_slider.gd:131 has @export var console_body: bool = true; phi_slider.gd has no console_body export.",
+        "The value [8, 8, 1] also appears in the dressing rooms for qfep_sandbox_console, edge_of_chaos_orb, chaos_particles, edge_core and qfep_reactor."
+      ],
+      "interpretation": "[8, 8, 1] is an unmeasured default, not a measurement. Phi's declared floor area is roughly 100x lambda's for what the source says is the same object minus a console shell. Any negotiation that reads dressing-room footprints as truth will grant Phi a gallery and Lambda a bay. Measuring Phi is a precondition for laying out this lineage, not a later polish step."
+    },
+    "F5_similarity_is_not_lineage": {
+      "verified": [
+        "commons/data/artifact_neighbors.json ranks lambda_slider's nearest neighbours: phi_slider 0.806, shannon_workbench 0.754, qfep_balance_workbench 0.753, microstate_counter 0.733, qfep_formula_3d 0.713, entropy_fan lower.",
+        "qfep_formula_3d is named in BOTH sliders' @identity relationships fields and is co-located with lambda in 9 maps.",
+        "shannon_workbench is named by neither, and shares no map with lambda_slider (it appears with phi in QFEP_F_Term only)."
+      ],
+      "interpretation": "Embedding similarity ranks a workbench the sliders never mention above the formula they are terms of. It is a good candidate GENERATOR — it surfaced phi_rate_bench, which every other signal missed — and a bad evidence class. It should never be allowed to set an edge kind or a bay assignment on its own."
+    },
+    "F6_taxonomy_asymmetry": {
+      "verified": [
+        "commons/artifacts/category_index.json — categories/13_qfep/subcategories/parameters/artifacts is exactly [lambda_slider, phi_slider].",
+        "commons/artifacts/artifact_theme_index.json — by_complexity/intermediate contains lambda_slider; by_complexity/advanced contains phi_slider.",
+        "by_theme/tools is exactly [lambda_slider, phi_slider]."
+      ],
+      "interpretation": "The corpus's own taxonomy already says the parameter family has exactly two members and already grades them differently. The complexity split is a third independent source agreeing with F1: these are not interchangeable twins, and an order that walks lambda before phi is supported by the taxonomy, not only by the formula."
+    },
+    "F4_register_discrepancy": {
+      "verified": [
+        "doc/book/dig_reports/qfeplaboratory.md lines 12 and 14 record both sliders as register 'side' and annotate both 'mute (no @identity)'.",
+        "lambda_slider.gd:12-20 and phi_slider.gd:38-46 both contain full @identity blocks."
+      ],
+      "interpretation": "Either the dig ran before the identity blocks landed, or its parser misses an @identity that is not at the top of the file (phi's sits at line 38, behind a long header). Low stakes for placement, but the 'side' register should not be trusted as a curatorial ranking until re-dug."
+    }
+  },
+
+  "proposed_order": {
+    "status": "PROPOSAL — one defensible arc, not a derived fact",
+    "principle": "term -> its extremes -> its line -> its edge -> second term -> its extremes -> recombination -> formula -> the console that supersedes both dials",
+    "sequence": [
+      "lambda_slider", "ordered_grid", "chaos_particles", "bifurcation_walkway",
+      "bifurcation_diagram", "edge_core", "edge_of_chaos_orb", "phi_slider",
+      "rigid_sculpture", "fluid_form", "queer_morphology_specimen",
+      "qfep_formula_3d", "qfep_sandbox_console"
+    ],
+    "conflicts_with_shipped_order": [
+      "Shipped spine order places bifurcation_diagram at 752, AFTER lambda_slider at 750, both inside Crisis_Synthesis. This proposal treats it as prior in concept while acknowledging the shipped order disagrees.",
+      "Shipped spine order places phi_slider at 751, immediately after lambda_slider. This proposal separates them by six positions so that lambda's own extremes are walked first."
+    ]
+  },
+
+  "candidates": [
+    {
+      "lookup_name": "phi_slider",
+      "role": "sibling",
+      "proposed_order": 8,
+      "confidence": "high",
+      "bay": "later_bay",
+      "relationship": "The second term of the same formula, built from the same rail geometry and carrying the same declared DNA axis with the same five values.",
+      "verified_evidence": [
+        "commons/artifacts/registry/qfep.json — both declare dna.axes.calibration = [optimum, band, dispute, gap, none]",
+        "commons/interfaces/qfep/lambda_slider.gd:24-27 — 'ONE AXIS, TWO FILES' note naming phi_slider",
+        "Both @identity relationships fields name the other ('paired with phi_slider' / 'paired with lambda_slider')",
+        "Co-located in 10 maps",
+        "Identical rail_length/rail_height/rail_depth/handle_radius exports"
+      ],
+      "interpretation": "A shared vocabulary is honest only if the two objects are allowed to disagree in the room. Adjacency turns the pair into a control panel; separation lets each dial argue."
+    },
+    {
+      "lookup_name": "qfep_sandbox_console",
+      "role": "extension",
+      "proposed_order": 13,
+      "confidence": "high",
+      "bay": "later_bay",
+      "relationship": "The only object in the corpus that joins BOTH controller groups — one console that does both dials' jobs.",
+      "verified_evidence": [
+        "commons/interfaces/qfep/qfep_sandbox_console.gd:77-78 — add_to_group(\"qfep_lambda_controllers\") and add_to_group(\"qfep_phi_controllers\")",
+        "Registered in commons/artifacts/registry/qfep.json, scene res://commons/interfaces/qfep/qfep_sandbox_console.tscn exists",
+        "Not present in commons/data/spine_artifact_order.json"
+      ],
+      "interpretation": "Functionally this supersedes both sliders, which makes it the natural terminal object of the lineage rather than a neighbour. Its absence from the spine order means the walk currently ends without ever handing the visitor both dials at once."
+    },
+    {
+      "lookup_name": "queer_morphology_specimen",
+      "role": "application",
+      "proposed_order": 11,
+      "confidence": "high",
+      "bay": "textual_link_only",
+      "relationship": "The only artifact that binds to BOTH sliders by direct node reference and exposes set_lambda and set_phi — one body driven by both terms at once.",
+      "verified_evidence": [
+        "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd:599,603 — direct connects to slider_moved on both",
+        "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd:761,764 — set_lambda / set_phi",
+        "Named in BOTH @identity relationships fields",
+        "placements_together = 0 in commons/data/artifact_relations.json — it has never shared a map with either slider"
+      ],
+      "interpretation": "This is the audit's cleanest instance of the brief's warning. It is the most strongly related artifact by authored intent and by code, and the most weakly related by shipped location. A textual link is the honest answer today; co-location would be a design decision, not a recovery of an existing one."
+    },
+    {
+      "lookup_name": "qfep_formula_3d",
+      "role": "application",
+      "proposed_order": 12,
+      "confidence": "high",
+      "bay": "later_bay",
+      "relationship": "The formula the two sliders are terms of; it re-colours its own symbols as the dials move.",
+      "verified_evidence": [
+        "commons/interfaces/qfep/formula_display/qfep_formula_3d.gd:350,365 — on_lambda_changed / on_phi_changed",
+        "Named in both @identity relationships fields",
+        "Co-located with lambda in 9 maps, with phi in 7",
+        "Declares dna.axes posture and emphasis; dressing room footprint [3.0, 3.0, 3.0], clearance [3.0, 3.0, 5.0]"
+      ],
+      "interpretation": "The formula is where the two terms stop being separate instruments. It reads as a summary, so it wants to be met after both dials, not between them."
+    },
+    {
+      "lookup_name": "edge_of_chaos_orb",
+      "role": "extension",
+      "proposed_order": 7,
+      "confidence": "high",
+      "bay": "later_bay",
+      "relationship": "The only signal consumer in the corpus that looks up the correct group names and therefore actually moves when a dial moves.",
+      "verified_evidence": [
+        "commons/interfaces/qfep/edge_of_chaos_orb.gd:194 — qfep_lambda_controllers",
+        "commons/interfaces/qfep/edge_of_chaos_orb.gd:199 — qfep_phi_controllers",
+        "Registered, scene exists, dressing room present",
+        "Not present in commons/data/spine_artifact_order.json"
+      ],
+      "interpretation": "If exactly one artifact is placed within sight of a dial to prove the dial does something, the live-wiring test says it must be this one. It is currently off the spine walk entirely."
+    },
+    {
+      "lookup_name": "ordered_grid",
+      "role": "contrast",
+      "proposed_order": 2,
+      "confidence": "high",
+      "bay": "adjacent_bay",
+      "relationship": "The lambda = 0 end of the scale, rendered as a body.",
+      "verified_evidence": [
+        "commons/interfaces/qfep/chaos_particles.gd:17 — '# relationships: contrasts ordered_grid (lambda=0 vs lambda=1)'",
+        "Spine order 770, map QFEP_Lambda_Spectrum",
+        "Dressing room footprint [1, 1, 1], posture pedestal"
+      ],
+      "interpretation": "A dial with no visible endpoints is a claim without a demonstration. This and chaos_particles are the pair that makes the rail mean something, and a 1x1 pedestal body is cheap enough to justify the adjacent bay."
+    },
+    {
+      "lookup_name": "chaos_particles",
+      "role": "contrast",
+      "proposed_order": 3,
+      "confidence": "high",
+      "bay": "adjacent_bay",
+      "relationship": "The lambda = 1 end of the scale, rendered as a body; the declared contrast partner of ordered_grid.",
+      "verified_evidence": [
+        "commons/interfaces/qfep/chaos_particles.gd:17-18 — contrast declared in @identity",
+        "Spine order 767, map QFEP_Lambda_Spectrum",
+        "Dressing room footprint [8, 8, 1] — PLACEHOLDER, see finding F3"
+      ],
+      "interpretation": "Wants the same bay treatment as ordered_grid, but its declared body is one of the five unmeasured [8,8,1] entries and must be measured before it can be laid out beside a 1x1 pedestal."
+    },
+    {
+      "lookup_name": "bifurcation_walkway",
+      "role": "application",
+      "proposed_order": 4,
+      "confidence": "medium",
+      "bay": "later_bay",
+      "relationship": "The parameter line turned into floor — the visitor walks the axis the slider sets.",
+      "verified_evidence": [
+        "Spine order 768, map QFEP_Lambda_Spectrum",
+        "Dressing room footprint [9, 3, 1], posture table",
+        "Declares dna.axes regime and occupancy",
+        "Registry parameters.footprint [2, 3, 10]"
+      ],
+      "interpretation": "The single strongest argument for a later bay rather than an adjacent one: at 9 m long it is a room, not a neighbour. Note the registry footprint [2,3,10] and the dressing room footprint [9,3,1] disagree about which axis is length — worth a reviewer's eye before layout."
+    },
+    {
+      "lookup_name": "bifurcation_diagram",
+      "role": "ancestor",
+      "proposed_order": 5,
+      "confidence": "medium",
+      "bay": "later_bay",
+      "relationship": "Parameter-to-regime as a drawn figure; the mathematics the lambda dial assumes.",
+      "verified_evidence": [
+        "Named in lambda_slider's @identity relationships",
+        "Co-located with lambda in 4 maps",
+        "Registry commons/artifacts/registry/foundations.json, sequence foundationscrisis",
+        "Spine order 752 — AFTER lambda_slider at 750, in the same map",
+        "Dressing room footprint [5, 1, 1], posture platform"
+      ],
+      "interpretation": "Called ancestor on conceptual grounds only. The shipped order contradicts it: both sit in Crisis_Synthesis and the diagram comes second. A reviewer may reasonably downgrade this to sibling."
+    },
+    {
+      "lookup_name": "edge_core",
+      "role": "extension",
+      "proposed_order": 6,
+      "confidence": "medium",
+      "bay": "later_bay",
+      "relationship": "A body whose pulse, colour and amplitude are functions of lambda, standing in the same room as the dial.",
+      "verified_evidence": [
+        "commons/interfaces/qfep/edge_core.gd:380 — set_lambda(value: float)",
+        "commons/interfaces/qfep/edge_core.gd:30 — 'qfep_reactor connects a slider to its own set_lambda, not to this one'",
+        "commons/interfaces/qfep/edge_core.gd:128 — joins qfep_visualizations, which nothing looks up",
+        "Named in lambda_slider's @identity; co-located in 2 maps including QFEP_Edge_Of_Chaos",
+        "Declares dna.axes.station"
+      ],
+      "interpretation": "Included because it already shares QFEP_Edge_Of_Chaos with the dial and because its station axis is the honest response to being undriven — it declares where on the lambda line it stands when nothing is driving it. Its live wiring is dead (F2), so it should be captioned as a fixed position, never as a response."
+    },
+    {
+      "lookup_name": "rigid_sculpture",
+      "role": "contrast",
+      "proposed_order": 9,
+      "confidence": "medium",
+      "bay": "later_bay",
+      "relationship": "The phi < 0 pole — the form that resists change.",
+      "verified_evidence": [
+        "Named in phi_slider's @identity relationships ('controls queer_morphology_specimen, fluid_form, rigid_sculpture')",
+        "Spine order 773, map QFEP_Phi_Term — already shares a room with phi_slider",
+        "Dressing room footprint [1, 1, 1], posture pedestal",
+        "Declares dna.axes.formation"
+      ],
+      "interpretation": "Unlike lambda's poles, phi's poles are already installed with their dial. This lineage should adopt the shipped arrangement rather than invent one."
+    },
+    {
+      "lookup_name": "fluid_form",
+      "role": "contrast",
+      "proposed_order": 10,
+      "confidence": "medium",
+      "bay": "later_bay",
+      "relationship": "The phi > 0 pole — the form that seeks change; the queer signature made into a body.",
+      "verified_evidence": [
+        "Named in phi_slider's @identity relationships",
+        "Spine order 774, map QFEP_Phi_Term",
+        "Dressing room footprint [1, 1, 1], posture pedestal",
+        "Declares dna.axes.flux"
+      ],
+      "interpretation": "Paired with rigid_sculpture; the two should never be split, because the whole content of phi is the asymmetry between them."
+    }
+  ],
+
+  "candidates_added_after_neighbour_check": [
+    {
+      "lookup_name": "phi_rate_bench",
+      "role": "extension",
+      "proposed_order": "10.5 — between fluid_form and queer_morphology_specimen",
+      "confidence": "medium",
+      "bay": "later_bay",
+      "relationship": "A bench built around phi's rate term, declaring a `complement` axis — the phi-side counterpart to what edge_of_chaos_orb is for lambda.",
+      "verified_evidence": [
+        "Registered in commons/artifacts/registry/qfep.json; scene exists on disk",
+        "Declares dna.axes.complement",
+        "Registry `sequence` field is EMPTY",
+        "Not present in commons/data/spine_artifact_order.json",
+        "Placed in MissionHall_Qfeplaboratory and six Trial_* museum tiles — never in a map with phi_slider",
+        "Surfaced only by commons/data/artifact_neighbors.json (sim 0.785 to phi_slider); invisible to @identity, sibling, axis_kin and co-placement"
+      ],
+      "interpretation": "The audit's own near-miss. Five evidence classes missed it because it is unsequenced, unnamed by either slider, and never co-placed. Only the weakest class found it. That is an argument for keeping similarity as a generator and an argument against trusting the four strong classes to be complete.",
+      "note": "Raises the accepted count to 13, one above the brief's 6-12 band. Dropping it would keep the count and lose the finding; the count seemed the cheaper thing to break."
+    }
+  ],
+
+  "rejected": [
+    {
+      "lookup_name": "shannon_workbench",
+      "reason": "Ranked 0.754 to lambda_slider — above qfep_formula_3d at 0.713 — and that is the whole reason it is listed here. Named by neither slider, shares no map with lambda, sits at spine 238 against lambda's 750. It is the counter-example that makes F5 concrete.",
+      "confidence": "high"
+    },
+    {
+      "lookup_name": "qfep_balance_workbench",
+      "reason": "The strongest of the neighbour-generated candidates: declares dna.axes.settling, is in the qfeplaboratory sequence, and does share QFEP_Introduction with a slider. Excluded on distance — spine index 222 against the sliders' 750/751, more than five hundred positions upstream. A reviewer wanting a fourteenth entry should take this one first.",
+      "confidence": "low",
+      "would_reconsider_if": "the lineage is allowed to reach backwards into the early spine"
+    },
+    {
+      "lookup_name": "phi_becoming_room",
+      "reason": "Name promises a phi-scale room; registered with a scene on disk, but empty `sequence`, no declared axes, absent from spine order, and placed in no map at all. Unbuilt-out rather than unrelated.",
+      "confidence": "medium",
+      "would_reconsider_if": "it is developed — it is the only candidate whose name claims room scale for phi"
+    },
+    {
+      "lookup_name": "microstate_counter",
+      "reason": "Spine 761, QFEP_E_Term. Declares macrostate. Sits on the walk between the sliders (750/751) and QFEP_Lambda_Spectrum (767-770), so a visitor meets it inside this lineage's span — but its subject is entropy's bookkeeping, not the dial that weights it. Same for entropy_fan (762, prospect) and possibility_space_cloud (763, occupancy).",
+      "confidence": "medium"
+    },
+    {
+      "lookup_name": "qfep_reactor",
+      "reason": "Same dead-wire class as edge_core and a weaker exhibit. Its own source (qfep_reactor.gd:23-25) states set_lambda and set_phi 'have never been called in any room' and current_lambda 'has stood at its initialiser, 0.4, everywhere, forever'. One documented dead driver is enough for the lineage to teach the lesson; two is a pattern the visitor cannot see.",
+      "confidence": "high",
+      "would_reconsider_if": "the qfep_slider group bug is fixed, at which point it becomes a live extension"
+    },
+    {
+      "lookup_name": "entropy_meter",
+      "reason": "Reads the non-existent qfep_slider group (entropy_meter.gd:181). No declared DNA axes. Never named by either slider's @identity.",
+      "confidence": "high"
+    },
+    {
+      "lookup_name": "phase_cube",
+      "reason": "Same dead group lookup (phase_cube.gd:234). Not in spine order. No axes.",
+      "confidence": "high"
+    },
+    {
+      "lookup_name": "qfep_oscilloscope",
+      "reason": "Same dead group lookup (qfep_oscilloscope.gd:235-240) for both signals. Not in spine order.",
+      "confidence": "high"
+    },
+    {
+      "lookup_name": "edge_detector",
+      "reason": "Same dead group lookup (edge_detector.gd:205). Its entire function — beeping when lambda is in 0.3-0.5 — is inert without the connection.",
+      "confidence": "high"
+    },
+    {
+      "lookup_name": "reactive_particle_field",
+      "reason": "Same dead group lookup (reactive_particle_field.gd:294). Additionally it is the scene behind two other registry names (edge_particles, emergence_zone), so placing it by lookup name would be ambiguous about which member the room means.",
+      "confidence": "high"
+    },
+    {
+      "lookup_name": "grab_sphere_lambda",
+      "reason": "Registered and its scene exists, but it shares res://commons/primitives/point/grab_sphere_point_with_color.tscn with grab_sphere_phi, grab_sphere_E, grab_sphere_F and grab_sphere_point_with_color. It is a coloured sphere standing for a term inside QFEP_Synthesis, not an instrument in the slider's lineage. Same for grab_sphere_phi.",
+      "confidence": "high"
+    },
+    {
+      "lookup_name": "edge_of_chaos_unlocked",
+      "reason": "Named in lambda_slider's @identity and co-located once, but it is a progression reward keyed to tenure, not a demonstration of the parameter. It belongs to the sequence's unlock grammar rather than to this lineage.",
+      "confidence": "medium"
+    },
+    {
+      "lookup_name": "lambda_hall",
+      "reason": "Matches on the word lambda and carries a lambda variable, but it is registered under commons/artifacts/registry/concept_architecture.json with no sequence and is architecture, not instrumentation. Name collision, not lineage.",
+      "confidence": "medium"
+    },
+    {
+      "lookup_name": "dissolving_form",
+      "reason": "Sits in QFEP_Lambda_Spectrum at spine order 769 and is plausibly a third pole marker, but neither slider names it and it has no declared axes. Weaker than ordered_grid/chaos_particles, which carry an explicit declared contrast.",
+      "confidence": "low",
+      "would_reconsider_if": "the reviewer wants three points on the lambda line rather than two"
+    },
+    {
+      "lookup_name": "preserved_pattern",
+      "reason": "In QFEP_Phi_Term at 775 and declares dna.axes.motif, but it is not named by phi_slider's @identity, which lists exactly three controlled bodies. Included only if the phi room is treated as a whole rather than as its named contents.",
+      "confidence": "low"
+    },
+    {
+      "lookup_name": "particle_chaos",
+      "reason": "Co-located with lambda in 2 maps and declares dna.axes.constraint, but it belongs to the E-term room (spine 764) where the subject is entropy itself, not the dial that weights it.",
+      "confidence": "medium"
+    },
+    {
+      "lookup_name": "shannon_entropy_meter",
+      "reason": "Different sequence (randomness), never co-located, never named. Reached only by topic association through the word entropy.",
+      "confidence": "high"
+    }
+  ],
+
+  "open_questions_for_review": [
+    "Should the lineage adopt the shipped spine order (phi immediately after lambda, positions 750/751) or the proposed order that inserts lambda's own poles between them?",
+    "Is bifurcation_diagram an ancestor or a sibling? The concept says ancestor; the shipped order says sibling.",
+    "Does a dead-wire artifact belong in a lineage at all, or should F2 be fixed first and the lineage rebuilt against live wiring?",
+    "bifurcation_walkway's registry footprint [2,3,10] and dressing-room footprint [9,3,1] disagree. Which is authoritative?"
+  ]
+}
