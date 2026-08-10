@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://em_corridor_vr"]
+
+; THE MUSEUM, WALKED IN A HEADSET.
+;
+; This scene deliberately owns almost nothing. It instances base.tscn — the XR
+; rig Palle's headset already uses (XROrigin3D, collision hands, XR Tools direct
+; movement, the wrist displays) — and hangs the museum generator beside it. The
+; generator detects the live OpenXR interface and builds ONLY the building: no
+; CharacterBody3D, no Camera3D, no make_current, no head bob. Every one of those
+; would fight the headset for the view, and a scene that fights the headset is
+; the standard way to make somebody sick.
+;
+; Streaming keys off the XR camera's own position, so walking forward opens the
+; next museum exactly as it does on the desktop.
+;
+;   Run:  godot --path . res://commons/scenes/endless_museum_vr.tscn
+;   (or set it as the main scene; vr_staging.tscn remains the shipped default)
+
+[ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_rig"]
+[ext_resource type="Script" path="res://commons/scenes/endless_museum.gd" id="2_museum"]
+
+[node name="EndlessMuseumVR" type="Node3D"]
+
+[node name="Rig" parent="." instance=ExtResource("1_rig")]
+
+[node name="Museum" type="Node3D" parent="."]
+script = ExtResource("2_museum")

@@ -110,6 +110,9 @@ var _next_z: float = 0.0
 var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
+var _force_vr: bool = false       # --em-vr forces the headset path
+var _vr: bool = false             # resolved once in _ready
+var _vr_cam: Camera3D = null      # the XR eye, cached
 var _first_spec: Dictionary = {}  # the spec segment 0 was actually stamped from
 # every artifact that survived into the museum, in world space. The proof shot is
 # composed against this list, so a frame can no longer claim to photograph a deal
@@ -161,6 +164,18 @@ var _mod_arity_cache: Dictionary = {}
 var _mod_sets = null
 var _mod_mult = null
 var _mod_budget = null
+# ── THE DRESSING MODULES (2026-08-10) ────────────────────────────────────────
+# Three more independent failure domains. em_plinths lifts the 47% of measured
+# artifacts whose centre sits below the viewing band; em_props hangs the service
+# vocabulary the walls have never carried; em_pool widens the dealing pool past
+# the 799 spine tokens to the 132 gallery guests. Any one absent and the museum
+# is exactly the museum of the previous pass.
+var _mod_plinths = null
+var _mod_props = null
+var _mod_pool = null
+var _guest_pool: Dictionary = {}   # em_pool.build()'s own report, for the print
+var _seg_plinths: int = 0          # plinths stamped in the segment being dealt
+var _seat_rows: Array = []         # [{token, gap}] — measured seat error per lifted artifact
 var _rel_db: Dictionary = {}       # parsed artifact_relations.json
 var _live: Dictionary = {}         # lookup -> {scene, fp} for EVERY alive artifact,
                                    # not only the pool: a relative is dealt by name,
@@ -169,11 +184,13 @@ var _deal_stats: Dictionary = {}   # running totals for the end-of-run print
 
 func _ready() -> void:
 	_parse_args()
+	_vr = _is_vr()
 	_load_modules()
 	_load_museums()
 	_load_crowns()
 	_load_relations()
 	_load_pool()
+	_load_guests()
 	if _museums.is_empty():
 		push_error("endless_museum: no museum-tagged templates in %s" % TEMPLATES)
 		return
@@ -195,6 +212,44 @@ func _ready() -> void:
 		# still in the picture.
 		print("[endless_museum] chrome: %d geometry instances taken out of the picture" % [
 			int(_deal_stats.get("chrome_hidden", 0))])
+		# the three claims of this pass, each as a number that can be wrong.
+		print("[endless_museum] dressing: %d plinths (%.1f/seg), %d props (%.1f/seg, %d walk cells surrendered), %d guests (%.1f/seg)" % [
+			int(_deal_stats.get("plinths", 0)),
+			float(_deal_stats.get("plinths", 0)) / float(segs_built),
+			int(_deal_stats.get("props", 0)),
+			float(_deal_stats.get("props", 0)) / float(segs_built),
+			int(_deal_stats.get("prop_cells", 0)),
+			int(_deal_stats.get("guests", 0)),
+			float(_deal_stats.get("guests", 0)) / float(segs_built)])
+		# tokens em_plinths was asked about and had no measurement for. Named,
+		# not counted: each is a lift that did not happen, and the escape
+		# (measure the instance, then plan_measured) is one pass away.
+		# the lift, measured on the built result rather than on the plan, and stated
+		# as the correction that was APPLIED. Both extremes are named, because
+		# "worst" without a token is a number nobody can go and look at. After the
+		# correction every one of these artifacts stands with its own floor on the
+		# deck, so the residual is zero by construction and this line reports how
+		# wrong seating-by-origin would have been.
+		if not _seat_rows.is_empty():
+			var hi: Dictionary = _seat_rows[0]
+			var lo: Dictionary = _seat_rows[0]
+			var sum_abs: float = 0.0
+			for r0 in _seat_rows:
+				var r: Dictionary = r0
+				if float(r["gap"]) > float(hi["gap"]):
+					hi = r
+				if float(r["gap"]) < float(lo["gap"]):
+					lo = r
+				sum_abs += absf(float(r["gap"]))
+			print("[endless_museum] seat: %d lifted artifacts re-seated on their decks — origin would have floated %+.3f m (%s) and sunk %+.3f m (%s), mean correction %.3f m" % [
+				_seat_rows.size(), float(hi["gap"]), String(hi["token"]),
+				float(lo["gap"]), String(lo["token"]),
+				sum_abs / float(_seat_rows.size())])
+		if _mod_has(_mod_plinths, "missing"):
+			var miss: Variant = _mod_plinths.call("missing")
+			if miss is Array and not (miss as Array).is_empty():
+				print("[em_plinths] %d dealt tokens have no height on record — left on the deck: %s" % [
+					(miss as Array).size(), str((miss as Array).slice(0, 24))])
 	if _shot_path != "":
 		_take_proof_shot()
 
@@ -222,6 +277,8 @@ func _parse_args() -> void:
 			_test_collision = true
 		elif a.begins_with("--em-autopilot="):
 			_autopilot = int(a.substr(15))
+		elif a == "--em-vr":
+			_force_vr = true
 		elif a.begins_with("--em-first="):
 			_first_key = a.substr(11)
 
@@ -238,11 +295,16 @@ func _load_modules() -> void:
 	_mod_sets = _load_module("em_sets.gd")
 	_mod_mult = _load_module("em_multiples.gd")
 	_mod_budget = _load_module("em_budget.gd")
+	_mod_plinths = _load_module("em_plinths.gd")
+	_mod_props = _load_module("em_props.gd")
+	_mod_pool = _load_module("em_pool.gd")
 	print("[endless_museum] modules: mats=%s light=%s env=%s detail=%s feel=%s audio=%s" % [
 		_mod_mats != null, _mod_light != null, _mod_env != null,
 		_mod_detail != null, _mod_feel != null, _mod_audio != null])
 	print("[endless_museum] deal modules: sets=%s multiples=%s budget=%s" % [
 		_mod_sets != null, _mod_mult != null, _mod_budget != null])
+	print("[endless_museum] dress modules: plinths=%s props=%s pool=%s" % [
+		_mod_plinths != null, _mod_props != null, _mod_pool != null])
 	_build_surfaces()
 
 ## The relation file, once. 2.6 MB of JSON, parsed at startup because every
@@ -265,6 +327,41 @@ func _load_relations() -> void:
 	var arts: Variant = _rel_db.get("artifacts", {})
 	var n: int = (arts as Dictionary).size() if arts is Dictionary else 0
 	print("[endless_museum] relations: %d artifacts with authored neighbours" % n)
+
+## ── THE GUEST POOL, ONCE ─────────────────────────────────────────────────────
+## em_pool reads the 47 DNA-gallery manifests under the encyclopedia checkout and
+## resolves them against the same living registry `_load_pool` just walked. It is
+## built HERE, eagerly, with `_live` handed in, for two reasons: guests_for()
+## caches on first call and would otherwise cache a pool built with no liveness
+## oracle (and pay a second 6.6 MB registry pass to make one); and the resolve
+## report belongs in the startup line, where a zero is visible rather than
+## discovered three segments later.
+##
+## The encyclopedia is a SIBLING checkout. On a machine without it the module
+## returns zero guests and the corridor deals exactly the spine — which is the
+## behaviour of the previous pass, reached without an error.
+func _load_guests() -> void:
+	if not _mod_has(_mod_pool, "build"):
+		return
+	var r: Variant = _mod_pool.call("build", _live, PackedStringArray())
+	if r is Dictionary:
+		_guest_pool = r as Dictionary
+	if _mod_has(_mod_pool, "report"):
+		print("[em_pool] %s" % String(_mod_pool.call("report")))
+	# what the prop catalogue can actually reach, printed before anything is
+	# hung: a token in the catalogue with no live registry row is a registry
+	# gap, and it should be a named line in stdout rather than a silent skip
+	# inside a per-segment loop.
+	if _mod_has(_mod_props, "resolve_report"):
+		var pr: Variant = _mod_props.call("resolve_report", _live)
+		if pr is Dictionary:
+			var p: Dictionary = pr
+			print("[em_props] catalogue %d/%d live; placeable %d/%d live%s" % [
+				int(p.get("resolved", 0)), int(p.get("total", 0)),
+				int(p.get("placeable_resolved", 0)), int(p.get("placeable", 0)),
+				("" if (p.get("placeable_missing", []) as Array).is_empty()
+					else " — NOT LIVE: %s" % str(p.get("placeable_missing", [])))])
+
 
 func _load_module(fname: String):
 	var p: String = EM_DIR + fname
@@ -612,7 +709,67 @@ func _pick_pool(rank: int) -> Dictionary:
 	_pool_i += 1
 	return e
 
+## ── VR ───────────────────────────────────────────────────────────────────────
+## In VR the museum does NOT own the walker. The project already has a working
+## XR rig (commons/scenes/base.tscn: XROrigin3D + collision hands + XR Tools
+## direct movement, the one Palle's headset already uses), and the correct move
+## is to reuse it rather than hand-roll a second rig that has never met a
+## headset. So in VR mode this scene builds only the BUILDING: no
+## CharacterBody3D, no Camera3D, no make_current, no head bob — every one of
+## those fights the headset for control of the view, and a scene that fights the
+## headset is the classic way to make people sick.
+##
+## Streaming then keys off the XR camera instead: _vr_eye() finds the
+## XRCamera3D once and the same build-ahead / free-behind arithmetic runs
+## against its global position. Entered by --em-vr, or automatically when an XR
+## interface is already initialised (which is what vr_staging does before this
+## scene loads).
+func _is_vr() -> bool:
+	if _force_vr:
+		return true
+	var iface := XRServer.find_interface("OpenXR")
+	return iface != null and iface.is_initialized()
+
+## The headset's eye, found once and cached. Returns null until the rig exists,
+## and every caller must cope with that — during staging the museum can be in
+## the tree a frame or two before the XR origin is.
+func _vr_eye() -> Camera3D:
+	if _vr_cam != null and is_instance_valid(_vr_cam):
+		return _vr_cam
+	var origin := get_tree().get_first_node_in_group("xr_origin")
+	if origin == null:
+		origin = _find_node_of_type(get_tree().get_root(), "XROrigin3D")
+	if origin == null:
+		return null
+	for c in origin.get_children():
+		if c is XRCamera3D:
+			_vr_cam = c
+			return _vr_cam
+	return null
+
+func _find_node_of_type(n: Node, type_name: String) -> Node:
+	if n.is_class(type_name):
+		return n
+	for c in n.get_children():
+		var f := _find_node_of_type(c, type_name)
+		if f != null:
+			return f
+	return null
+
+## Where the walker's eye is, whichever body owns it.
+func _eye_pos() -> Vector3:
+	if _vr:
+		var e := _vr_eye()
+		return e.global_position if e != null else Vector3(7.5, EYE, 0.0)
+	return _cam.global_position if _cam != null else Vector3.ZERO
+
 func _setup_world() -> void:
+	if _vr:
+		# building only. The XR rig walks it; the environment still installs,
+		# because tonemapping and GI belong to the world, not to the camera.
+		_setup_environment()
+		print("[endless_museum] VR: building only — the XR rig owns the walker")
+		return
 	# the walker is a body, not a gliding camera: a capsule the walls and
 	# podiums can push back on. No gravity — the deck is flat by construction,
 	# so y is clamped instead of simulated. Built FIRST now, because the
@@ -942,6 +1099,14 @@ func _build_segment() -> void:
 	#     family that occupies floor lives here, where the segment's StaticBody3D
 	#     and the walk map are both in scope.
 	_dress_fixtures(seg, solid, tile, w, zbase)
+	# 1c. SERVICE FURNITURE. A critic measured a 420x360 crop of this museum's
+	#     wall — about 2 m2 of plaster — and found exactly one feature in it, a
+	#     light blob: no socket, no vent, no seam, no signage. em_props answers
+	#     with 87 already-built props positioned off the geometry the generator
+	#     already owns (the door list, the wall runs, the ceiling bays, the
+	#     walker's own BFS route). It runs AFTER the benches, so a bench cell is
+	#     already out of the walk map when the floor rules look for a free pocket.
+	_dress_props(seg, tile, w, h, zbase, deal)
 	# 2. the light rig: ambient floor, north daylight down the axis, keys on the
 	#    hero and podium slots, cove and accent grazer at the threshold, wall
 	#    wash, floor fill. Capped at 24 lights / 6 shadow casters per segment.
@@ -957,10 +1122,16 @@ func _build_segment() -> void:
 	var n_lights: int = 0
 	if _mod_has(_mod_light, "lights_installed"):
 		n_lights = int(_mod_light.call("lights_installed", seg))
-	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d/%d (%d leads, %d relatives, %d repeats), z %.0f..%.0f, lights %d" % [
+	# the four kinds are printed separately because they answer four different
+	# questions and a single total hides all of them: an artifact is the
+	# curriculum, a plinth is whether you can SEE it, a prop is whether the wall
+	# is a wall, a guest is whether the pool is wider than the spine.
+	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d/%d (%d leads, %d relatives, %d repeats, %d guests) + %d plinths + %d props, z %.0f..%.0f, lights %d" % [
 		_seg_index - 1, spec["key"], spec["museum"], seg_seq if seg_seq != "" else "-",
 		placed, int(deal.get("max_objects", 0)), int(deal.get("leads", 0)),
 		int(deal.get("relatives", 0)), int(deal.get("repeats", 0)),
+		int(deal.get("guests", 0)), int(deal.get("plinths", 0)),
+		int(seg.get_meta("em_props_placed", 0)),
 		_segments[-1]["z0"], _segments[-1]["z1"], n_lights])
 
 ## ── THE SET DEAL ─────────────────────────────────────────────────────────────
@@ -997,8 +1168,14 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 	var lead_cap: int = int(budget.get("lead_count", MAX_ARTIFACTS_PER_SEGMENT))
 	var rel_per_lead: int = int(budget.get("relatives_per_lead", 0))
 	var mult_allowed: int = int(budget.get("multiples_allowed", 1))
+	_seg_plinths = 0
 	var out: Dictionary = {"placed": 0, "sequence": "", "leads": 0, "relatives": 0,
-		"repeats": 0, "max_objects": max_objects, "class": String(budget.get("class", "?")),
+		"repeats": 0, "guests": 0, "plinths": 0,
+		"max_objects": max_objects, "class": String(budget.get("class", "?")),
+		# the whole budget, handed back so _build_segment can give em_props the
+		# building's own service rate rather than a second _segment_budget call
+		# that would ask em_budget the same question twice per segment.
+		"budget": budget,
 		# handed straight through to em_detail.dress_segment. The budget has always
 		# computed these; until now nothing consumed them and every wall in every
 		# proof frame was bare plaster.
@@ -1196,12 +1373,102 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 				seg_tokens[tok] = true
 		if have_sets and _mod_has(_mod_sets, "summary"):
 			print("[endless_museum]   set: %s" % String(_mod_sets.call("summary", set_pl)))
+
+	# ── 6. THE GUESTS ───────────────────────────────────────────────────────
+	# The curriculum order is 799 tokens; the DNA galleries hold 365, of which
+	# 132 resolve as artifacts no chapter's spine list will ever deal. They enter
+	# LAST and only into slots the chapter's own leads and relatives left empty,
+	# so a guest can never displace a lead — the museum is still the curriculum,
+	# with the corpus standing in the rooms the curriculum did not fill.
+	#
+	# The axis value is passed through exactly as the gallery rendered it, and
+	# em_pool has already refused any value the registry does not declare on that
+	# token. `false` for drop_if_unvaried: a guest whose value will not take is
+	# still a guest, and it loses the comparison rather than its place.
+	var n_guest: int = 0
+	if _mod_has(_mod_pool, "guests_for") and seg_seq != "":
+		# WHY THE TEST IS `free slots`, NOT `placed < max_objects`. Measured on the
+		# first four dressed captures: every one of the eight segments came back
+		# with 0 guests, and in six of them the reason was that the budget was
+		# already spent — the guest phase never ran at all. The budget is a
+		# LICENCE FOR THE CURRICULUM (em_budget derives it from the building's own
+		# stated mechanism, and the leads/relatives/repeats it governs are the
+		# chapter's argument); a guest is not competing for that licence, it is
+		# standing in a slot the chapter left empty. Chichu, whose mechanism licenses
+		# four objects, still holds four objects of curriculum — plus whatever the
+		# corpus can put in the alcoves the curriculum did not want.
+		#
+		# The guard against a guest crowding out a lead is not the budget, it is the
+		# ORDER: this block runs after the deal loop has broken, so every slot it
+		# can see is one the curriculum already declined.
+		var free_g: Array = _free_slots(slots, used)
+		# a spare slot is not a licence to fill EVERY spare slot: the Soane leaves
+		# 20 of them and 20 strangers would drown the chapter. Half the building's
+		# own object licence, at least one, is the guest allowance.
+		var guest_cap: int = maxi(1, int(round(float(max_objects) * 0.5)))
+		var n_drop_live: int = 0
+		var n_drop_dupe: int = 0
+		if not free_g.is_empty():
+			var want: int = mini(guest_cap, free_g.size())
+			var gv: Variant = _mod_pool.call("guests_for", seg_seq, want, _rel_db)
+			var glist: Array = []
+			if gv is Array:
+				glist = gv as Array
+			var gi: int = 0
+			var dealt: Array = []
+			for g0 in glist:
+				if n_guest >= guest_cap or gi >= free_g.size():
+					break
+				if not (g0 is Dictionary):
+					continue
+				var g: Dictionary = g0
+				var gtok: String = String(g.get("token", ""))
+				if gtok == "":
+					continue
+				if seg_tokens.has(gtok):
+					n_drop_dupe += 1
+					continue
+				var glv: Variant = _live.get(gtok, null)
+				if not (glv is Dictionary):
+					n_drop_live += 1
+					continue          # named by a manifest, not alive on disk
+				var gcell: Dictionary = free_g[gi]
+				gi += 1
+				var gax: Dictionary = {}
+				if String(g.get("axis", "")) != "" and String(g.get("value", "")) != "":
+					gax = {"axis": String(g["axis"]), "value": String(g["value"]),
+						"is_default": false, "alt": []}
+				used[_cell_key(gcell)] = true
+				# NOT counted into `placed`. The budget's numerator is the
+				# curriculum's, and a guest that inflated it would make the
+				# "placed 13/14" line — the only place a building's licence is
+				# ever checked against what it got — quietly meaningless.
+				if _stamp(seg, String((glv as Dictionary).get("scene", "")), gtok, gcell,
+						zbase, int((glv as Dictionary).get("fp", 1)), gax, false,
+						GUEST_SPAN_CAP):
+					n_guest += 1
+					seg_tokens[gtok] = true
+					dealt.append(g)
+			if not dealt.is_empty() and _mod_has(_mod_pool, "summary"):
+				print("[endless_museum]   guests: %s" % String(_mod_pool.call("summary", dealt)))
+			elif not glist.is_empty():
+				# a candidate list that produces nothing is a FINDING, not a quiet
+				# skip: it means the pool's 132 strangers are unreachable for a
+				# reason this line is the only place to read.
+				print("[endless_museum]   guests: 0 of %d offered into %d free slot(s) — %d not alive, %d already here" % [
+					glist.size(), free_g.size(), n_drop_live, n_drop_dupe])
+		else:
+			print("[endless_museum]   guests: none — every slot in this building is spent")
+
 	out["placed"] = placed
 	out["sequence"] = seg_seq
 	out["leads"] = leads
 	out["relatives"] = n_rel
 	out["repeats"] = n_rep
-	_deal_stats["objects"] = int(_deal_stats.get("objects", 0)) + placed
+	out["guests"] = n_guest
+	out["plinths"] = _seg_plinths
+	_deal_stats["guests"] = int(_deal_stats.get("guests", 0)) + n_guest
+	_deal_stats["objects"] = int(_deal_stats.get("objects", 0)) + placed + n_guest
 	_deal_stats["segments"] = int(_deal_stats.get("segments", 0)) + 1
 	return out
 
@@ -1299,8 +1566,11 @@ func _walk_order(cells: Array) -> Array:
 ##     a twin standing beside its original is worse than an empty slot;
 ##   * the occupied cell leaves the autopilot's walk map, and a floor cell whose
 ##     removal would seal the corridor is declined outright.
+##   * `span_cap` (metres, 0 = no test) refuses an artifact whose BUILT extent is
+##     wider than the seal can honestly cover. See _guest_span_cap.
 func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
-		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool) -> bool:
+		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool,
+		span_cap: float = 0.0) -> bool:
 	if scene_path == "" or cell.is_empty():
 		return false
 	var ps: PackedScene = load(scene_path) as PackedScene
@@ -1315,24 +1585,123 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		if not ok and drop_if_unvaried:
 			node.queue_free()
 			return false
-	node.position = Vector3(float(cell.get("x", 0)) + 0.5, float(cell.get("top", 0.0)),
-		float(cell.get("y", 0)) + 0.5)
+	# ── THE LIFT ────────────────────────────────────────────────────────────
+	# 47% of every artifact this corpus has measured is below the viewing band:
+	# a 0.05 m object on the deck sits at 3% of a 1.65 m eye height and the
+	# walker has to look at their feet to find it. em_plinths decides, per token
+	# and per slot, whether a pedestal is the right claim and how tall — and
+	# the answer is `false` far more often than `true`, because a mosaic on a
+	# plinth is a rug on a table and a 2.6 m machine on one is a hazard.
+	#
+	# THE PLINTH IS BUILT BEFORE THE ARTIFACT and staged before add_child: every
+	# candidate script reads its config metas in _ready() and builds once, so a
+	# config written afterwards shapes nothing. `artifact_y` is the plinth's own
+	# DECK, not its nominal height — the two differ on three of the five
+	# candidates — so it is added to the cell surface exactly as returned.
+	var lift: float = 0.0
+	var plinth_node: Node3D = null
+	var plan_d: Dictionary = {}
+	if _mod_has(_mod_plinths, "plan"):
+		var pv: Variant = _mod_plinths.call("plan", lookup, cell)
+		if pv is Dictionary:
+			plan_d = pv as Dictionary
+	var pscene: String = String(plan_d.get("scene", ""))
+	if bool(plan_d.get("needs", false)) and pscene != "" and ResourceLoader.exists(pscene):
+		var pps: PackedScene = load(pscene) as PackedScene
+		if pps != null:
+			var pn: Node3D = pps.instantiate() as Node3D
+			if pn != null:
+				if _mod_has(_mod_plinths, "stage"):
+					_mod_plinths.call("stage", pn, plan_d, {})
+				pn.position = Vector3(float(cell.get("x", 0)) + 0.5,
+					float(cell.get("top", 0.0)), float(cell.get("y", 0)) + 0.5)
+				seg.add_child(pn)
+				plinth_node = pn
+				lift = float(plan_d.get("artifact_y", 0.0))
+				_seg_plinths += 1
+				_deal_stats["plinths"] = int(_deal_stats.get("plinths", 0)) + 1
+	node.position = Vector3(float(cell.get("x", 0)) + 0.5,
+		float(cell.get("top", 0.0)) + lift, float(cell.get("y", 0)) + 0.5)
 	seg.add_child(node)
+	# ── DOES IT FIT THE SLOT IT WAS DEALT? ──────────────────────────────────
+	# `_seal_cells` clamps to MAX_SEAL_RADIUS, so it can only take 5x5 cells out
+	# of the walk map however big the thing actually is. For a curriculum artifact
+	# that clamp is a guard against a wild AABB; for an artifact dealt out of a
+	# gallery manifest it is a hole, and the autopilot found it in one run:
+	# `light_sphere` dealt into a 1-cell slot in the Soane measures
+	# 79.9 x 40.0 x 79.9 m — an eighty-metre body around a one-metre pocket. The
+	# seal took its five cells, every other cell it stood in stayed "walkable",
+	# and the walker unlearned 26 of them by walking into them. Baseline PASS,
+	# dressed FAIL, one object.
+	#
+	# So the test is on the BUILT extent, before any cell has been sealed: too
+	# wide, and the instance goes straight back out. Measured here rather than
+	# after the chrome strip, which can only shrink the box by a grab handle's
+	# 0.1 m and cannot make a 5 m object pass.
+	if span_cap > 0.0:
+		var sbox: AABB = _extent_of(node)
+		if sbox.size.x > span_cap or sbox.size.z > span_cap:
+			print("[endless_museum]   refused %s — %.1f x %.1f m will not fit a %.0f m slot" % [
+				lookup, sbox.size.x, sbox.size.z, span_cap])
+			seg.remove_child(node)
+			node.queue_free()
+			if plinth_node != null:
+				seg.remove_child(plinth_node)
+				plinth_node.queue_free()
+				_seg_plinths -= 1
+				_deal_stats["plinths"] = int(_deal_stats.get("plinths", 0)) - 1
+			return false
 	# _ready has run for everything the scene shipped; strip the workshop chrome
 	# before the extent is measured, so a grab handle floating a metre off the
 	# object cannot inflate the AABB it is about to be sealed by either.
-	if not _seal_cells(node, cell, zbase, fp):
+	#
+	# The plinth is sealed WITH the artifact, as one body. em_plinths cuts every
+	# cap to `min(base + 0.10, cells - 0.06)` so the pedestal claims no cell the
+	# artifact's own AABB did not already claim — but that is the module's own
+	# arithmetic, and this line is the museum checking rather than believing it.
+	if not _seal_cells(node, cell, zbase, fp, plinth_node):
 		# it would have cut the corridor in two. Take it back out rather than ship
 		# a museum with a room nobody can reach.
 		seg.remove_child(node)
 		node.queue_free()
+		if plinth_node != null:
+			seg.remove_child(plinth_node)
+			plinth_node.queue_free()
+			_seg_plinths -= 1
+			_deal_stats["plinths"] = int(_deal_stats.get("plinths", 0)) - 1
 		return false
+	# ── THE SEAT ────────────────────────────────────────────────────────────
+	# THE LIKELIEST DEFECT OF THE WHOLE LIFT, and the one a still shows first: an
+	# object hovering a hand's width over its pedestal, or half-swallowed by it.
+	# It is not hypothetical — the first dressed run measured it. Seating by ORIGIN
+	# gave cube_scene a −0.500 m sink (half the object inside the plinth) and
+	# cable_builder a +0.730 m float, because an artifact's origin is its own
+	# business: some build up from y = 0, some are centred, some hang.
+	#
+	# So the artifact is seated by its MEASURED FLOOR, not by its origin — which is
+	# the grid's own law (artifacts auto-ground base-to-floor; `_stamp` is the one
+	# path in the project that bypasses it, and on a bare deck a 10 cm error was
+	# invisible). Measured AFTER the chrome strip inside `_seal_cells`, so a grab
+	# handle hanging under the object cannot define its base, and AFTER the seal,
+	# because the correction is in y only and cannot change a footprint.
+	#
+	# Only LIFTED artifacts are re-seated. An artifact on the floor keeps whatever
+	# relationship to the deck it has always had: correcting those is a different
+	# change, to every museum ever captured, and it is not this pass's claim.
+	if plinth_node != null:
+		var abox: AABB = _extent_of(node)
+		if abox.size.y > 0.0:
+			var deck: float = float(cell.get("top", 0.0)) + lift
+			var gap: float = abox.position.y - deck
+			if absf(gap) > 0.005:
+				node.position.y -= gap
+			_seat_rows.append({"token": lookup, "gap": gap})
 	# where the deal actually put something, in world space — recorded AFTER the
 	# seal check, so the list holds only artifacts that survived into the museum.
 	# A proof shot is composed against this rather than aimed at a hardcoded z.
 	_shot_targets.append({
 		"p": Vector3(float(cell.get("x", 0)) + 0.5,
-			float(cell.get("top", 0.0)) + 0.55,
+			float(cell.get("top", 0.0)) + lift + 0.55,
 			float(zbase + int(cell.get("y", 0))) + 0.5),
 		"cell": Vector2i(int(cell.get("x", 0)), zbase + int(cell.get("y", 0))),
 		"token": lookup,
@@ -1489,9 +1858,24 @@ func _apply_axis(node: Node, e: Dictionary) -> bool:
 ## room is worse than a museum with an empty plinth.
 const SEAL_PROBE_CELLS := 400
 const MAX_SEAL_RADIUS := 2
+# The widest object the seal can tell the truth about: the clamp is a radius, so
+# the honest span is (2 * radius + 1) cells of one metre. A GUEST wider than this
+# is refused rather than sealed to five cells and left standing in the rest.
+# Curriculum artifacts are NOT tested against it — they have been walked in this
+# corridor since v1, the autopilot passes on them, and a size gate switched on for
+# all 799 in the same pass that adds guests would make any regression unreadable.
+const GUEST_SPAN_CAP := float(MAX_SEAL_RADIUS * 2 + 1)
 
-func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int) -> bool:
+func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int,
+		also: Node3D = null) -> bool:
 	var cells: Array = _occupied_cells(node, cell, zbase)
+	# a lifted artifact and the pedestal under it are ONE obstacle. The lift
+	# moves the artifact's AABB in y only, so its own footprint is unchanged and
+	# the pedestal's is the thing that could be new.
+	if also != null:
+		for k0 in _occupied_cells(also, cell, zbase):
+			if not cells.has(k0):
+				cells.append(k0)
 	# the v1 hero rule survives as a floor, not a ceiling: an artifact that builds
 	# its geometry deferred measures small at this instant, and a declared large
 	# footprint is the only warning we get about it.
@@ -1678,6 +2062,90 @@ func _dress_fixtures(seg: Node3D, solid: StaticBody3D, tile: Array, w: int, zbas
 		print("[endless_museum]   fixtures: %d benches" % placed)
 
 
+## ── THE SERVICE FURNITURE ────────────────────────────────────────────────────
+## em_props plans; this function stamps. The division is the safety property, not
+## a style: the one way this build breaks is an object standing on a floor cell
+## that never left `_walk_cells`, and a module that cannot call add_child cannot
+## cause it. Every placement arrives carrying `occupies_floor`, and only the two
+## rules that put something on the deck ever set it true.
+##
+## THE WALK MAP IS NOT TOUCHED FOR A WALL OR A CEILING PLACEMENT. An exit sign at
+## 2.72 m, a vent in a coffer, a tray at 2.86 m and a floor grate flush with the
+## deck are all walked under or over; erasing their cells would starve the
+## autopilot's plan of the corridor it is supposed to use.
+func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
+		deal: Dictionary) -> void:
+	if not _mod_has(_mod_props, "dress"):
+		return
+	# the building's own service rate, straight off em_budget — a Teshima at 0.3
+	# wall features per 10 m gets nothing, a Soane gets the full set. Without the
+	# budget module the allowance is empty and em_props falls back to the corpus
+	# mean, which is the same degrade every other stage takes.
+	var allowance: Dictionary = {}
+	var b: Variant = deal.get("budget", null)
+	if b is Dictionary:
+		allowance = (b as Dictionary).duplicate()
+	allowance["prev_w"] = _prev_w
+	allowance["artworks"] = int(deal.get("placed", 0))
+	# the liveness oracle. A token absent from `_live` is dropped inside the
+	# module, so nothing unresolvable can reach the stamp loop below.
+	allowance["live"] = _live
+	var rv: Variant = _mod_props.call("dress", seg, tile, w, h, allowance, _detail_mats)
+	if not (rv is Array):
+		return
+	var rows: Array = rv as Array
+	var n_ok: int = 0
+	var n_floor: int = 0
+	var kinds: Dictionary = {}
+	for r0 in rows:
+		if not (r0 is Dictionary):
+			continue
+		var r: Dictionary = r0
+		var tok: String = String(r.get("token", ""))
+		if tok == "":
+			continue
+		var lv: Variant = _live.get(tok, null)
+		if not (lv is Dictionary):
+			continue
+		var scene_path: String = String((lv as Dictionary).get("scene", ""))
+		if scene_path == "":
+			continue
+		var ps: PackedScene = load(scene_path) as PackedScene
+		if ps == null:
+			continue
+		var node: Node3D = ps.instantiate() as Node3D
+		if node == null:
+			continue
+		node.set_meta("artifact_lookup_name", tok)
+		# the config goes on BEFORE add_child, same law as everywhere else in
+		# this file: these props build in _ready() and a key written afterwards
+		# shapes nothing. The values come from the scripts' own @exports.
+		var cfg: Variant = r.get("config", {})
+		if cfg is Dictionary:
+			for k in (cfg as Dictionary):
+				node.set_meta("config_%s" % str(k), (cfg as Dictionary)[k])
+		var p: Variant = r.get("pos", null)
+		if p is Vector3:
+			node.position = p as Vector3
+		node.rotation_degrees = Vector3(0, float(r.get("rot_y", 0.0)), 0)
+		seg.add_child(node)
+		n_ok += 1
+		var surf: String = String(r.get("surface", "?"))
+		kinds[surf] = int(kinds.get(surf, 0)) + 1
+		if bool(r.get("occupies_floor", false)):
+			var c: Variant = r.get("cell", null)
+			if c is Vector2i:
+				var cv: Vector2i = c as Vector2i
+				_walk_cells.erase(Vector2i(cv.x, zbase + cv.y))
+				n_floor += 1
+	if n_ok > 0:
+		_deal_stats["props"] = int(_deal_stats.get("props", 0)) + n_ok
+		_deal_stats["prop_cells"] = int(_deal_stats.get("prop_cells", 0)) + n_floor
+		print("[endless_museum]   props: %d of %d offered (%s); %d walk cell(s) surrendered" % [
+			n_ok, rows.size(), str(kinds), n_floor])
+	seg.set_meta("em_props_placed", n_ok)
+
+
 ## A cell that stops a walker: a template wall, or the outer skin the scene
 ## stamps at x = -1 and x = w.
 func _solid_at(tile: Array, x: int, y: int, w: int) -> bool:
@@ -1696,13 +2164,20 @@ func _tile_at(tile: Array, x: int, y: int) -> String:
 
 
 func _process(_delta: float) -> void:
-	if _cam == null or _shot_path != "":
+	if _shot_path != "":
+		return
+	# desktop needs its own camera; VR waits for the headset rig to appear,
+	# which can be a frame or two after this scene enters the tree.
+	if _vr:
+		if _vr_eye() == null:
+			return
+	elif _cam == null:
 		return
 	# stream: open the next museum as the walker nears the built edge
-	if _cam.global_position.z > _next_z - BUILD_AHEAD_M:
+	if _eye_pos().z > _next_z - BUILD_AHEAD_M:
 		_build_segment()
 	# free far-behind segments (keep the museum endless, not the node tree)
-	while _segments.size() > 2 and float(_segments[0]["z1"]) < _cam.global_position.z - KEEP_BEHIND_M:
+	while _segments.size() > 2 and float(_segments[0]["z1"]) < _eye_pos().z - KEEP_BEHIND_M:
 		var old: Dictionary = _segments.pop_front()
 		var n: Node3D = old["node"]
 		n.queue_free()
