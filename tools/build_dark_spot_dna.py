@@ -260,6 +260,80 @@ CURATION_REVERSAL: dict[str, tuple] = {
     ),
 }
 
+
+# -- FOURTH MOVEMENT: the anamorphic bodies -----------------------------------
+#
+# Anamorphosis is the form that resolves from one oblique station and from nowhere else:
+# Holbein's skull, invisible to everyone standing in front of The Ambassadors. Palle names
+# the anamorphic bodies as part of what this project is FOR - the hidden that has to be
+# approached from the wrong angle to be seen at all.
+#
+# THE PIPELINE THAT JUDGES THIS PROJECT HAS ONE STANDPOINT. capture_config_sweep shot every
+# tile in every DNA gallery - some three hundred of them - from YAW 0.62, PITCH -0.26. That
+# is not a neutral default. It is a place to stand, and it was never written down as a
+# choice. The pixel critic can only ever have said "this axis does not change what the
+# camera at 0.62 happened to be facing", and it has been reporting that as "this axis does
+# nothing."
+#
+# SO IT WAS TESTED, not argued. tools/probe_anamorphic.py re-renders an axis from five
+# standpoints and measures each with the critic's own arithmetic. Three results:
+#
+#   random_number_book_page_1955.disclosure   canonical 0.00%   opposite 62.50%
+#       The RAND 1955 page of random digits is printed on ONE FACE and the canonical camera
+#       stands BEHIND IT. Every published tile of that artifact is the blank back of a sheet
+#       of paper. The critic measured 0.00% - not small, ZERO - and filed the axis INERT.
+#       That verdict was a fact about which side of the paper somebody was standing on.
+#
+#   reaction_diffusion.inoculation            canonical 0.00%   from-above 21.84%
+#       Inert from the canonical view AND from its opposite, and biting from square-on, from
+#       above and from below. This one had already been diagnosed in the project's own notes
+#       as "genuinely inert" - a diagnosis made, of course, from the canonical view. It is
+#       not inert. It was oblique.
+#
+#   boids_aquarium.accord                     canonical 14.60%   best other 17.19%
+#       And the honest negative, which is why the other two count: this axis reads from
+#       everywhere, ratio 1.18. Standpoint does not rescue everything, and a probe that
+#       rescued everything would be measuring itself.
+#
+# TWO OF THE THREE AXES TESTED WERE INVISIBLE FROM WHERE WE HAD BEEN STANDING. Not weakly
+# rendered - absent, at 0.00%. The harmony meter was never the only straightening machine
+# in this project. There was also a camera, bolted to one angle, quietly deciding which
+# differences counted as differences, and every INERT verdict in the corpus was issued from
+# it.
+ANAMORPHIC_DIR = ENC / "anamorphic"
+CURATION_ANAMORPHIC: dict[str, tuple] = {
+    "random_number_book_page_1955__canonical__tally": (
+        "0.00%",
+        "the anamorphic bodies", "Holbein / The Ambassadors / the oblique station",
+        "What the pipeline saw from the only place it has ever stood.",
+        "A blank white rectangle. This is the RAND corporation's 1955 book of a million random digits, and this is the tile the evidence pipeline recorded for it. The critic measured the disclosure axis at 0.00% - zero, not small - and filed it INERT.",
+    ),
+    "random_number_book_page_1955__opposite__tally": (
+        "62.50%",
+        "the anamorphic bodies", "Holbein / The Ambassadors / the oblique station",
+        "The same artifact, the same axis, the camera moved to the other side.",
+        "The page is printed on ONE FACE and the canonical camera stands behind it. Turn around and there are the million random digits and a histogram of their frequencies, and the axis that measured ZERO measures 62.50%. Nothing about the artifact changed. The verdict had been a fact about which side of the paper somebody was standing on.",
+    ),
+    "reaction_diffusion__canonical__lattice": (
+        "INERT, ALLEGEDLY",
+        "the anamorphic bodies", "Holbein / The Ambassadors / the oblique station",
+        "This one had already been written down as genuinely inert.",
+        "reaction_diffusion.inoculation at the canonical view: 0.00%. The project's own notes record this axis as 'genuinely inert' - a diagnosis made, of course, from this angle. It is inert from here and from directly opposite, which is exactly how a plane presents itself edge-on to two stations and face-on to the rest.",
+    ),
+    "reaction_diffusion__from-above__lattice": (
+        "21.84%",
+        "the anamorphic bodies", "Holbein / The Ambassadors / the oblique station",
+        "The same axis, seen from above.",
+        "14.50% square-on, 21.84% from above, 14.76% from below. The axis was never inert; it was oblique to the one place the pipeline stands. A written-down verdict in this project's own memory was wrong, and it was wrong in the specific way this gallery is about.",
+    ),
+    "boids_aquarium__canonical__lattice": (
+        "1.18x",
+        "the anamorphic bodies", "Holbein / The Ambassadors / the oblique station",
+        "The honest negative, and the reason the other two count.",
+        "boids_aquarium.accord measured 14.60% canonical against 17.19% from its best other standpoint - a ratio of 1.18. This axis reads from everywhere. Standpoint does not rescue everything, and a probe that rescued everything would be measuring itself rather than the work. Two of three axes tested were invisible from where we had been standing; this is the third.",
+    ),
+}
+
 WITHHELD = {
     "id": "grey_point__withheld",
     "prop": "grey_point",
@@ -310,12 +384,21 @@ def main() -> int:
     import shutil
     extra: list[dict] = []
     for slug, curation in (("dark-spot-props", CURATION_PROPS),
-                           ("dark-spot-reversal", CURATION_REVERSAL)):
+                           ("dark-spot-reversal", CURATION_REVERSAL),
+                           ("anamorphic", CURATION_ANAMORPHIC)):
         d = ENC / slug
         f = d / "manifest.json"
-        if not f.exists():
-            continue
-        extra += json.loads(f.read_text(encoding="utf-8")).get("entries", [])
+        if f.exists():
+            extra += json.loads(f.read_text(encoding="utf-8")).get("entries", [])
+        else:
+            # probe_anamorphic writes PNGs and a JSON report, not a gallery manifest -
+            # it is an experiment, not a sweep. Synthesise the entries it would have had.
+            for key in curation:
+                if (d / f"{key}.png").exists():
+                    tok, view, val = key.split("__", 2)
+                    extra.append({"id": key, "prop": tok, "index": 0,
+                                  "label": f"{view} - {val}", "image": f"/{slug}/{key}.png",
+                                  "dna": {"standpoint": view}})
         for key in curation:
             src_png = d / f"{key}.png"
             if src_png.exists():
@@ -323,7 +406,7 @@ def main() -> int:
 
     combined = list(man.get("entries", [])) + extra
     ordered = (list(CURATION.items()) + list(CURATION_PROPS.items())
-               + list(CURATION_REVERSAL.items()))
+               + list(CURATION_REVERSAL.items()) + list(CURATION_ANAMORPHIC.items()))
 
     for key, (word, persona, lineage, line, reading) in ordered:
         src = next((e for e in combined if str(e.get("id")) == key), None)
@@ -334,7 +417,8 @@ def main() -> int:
         e["image"] = f"/dark-spot-dna/{key}.png"
         e["movement"] = ("found words" if key in CURATION
                          else "the interface layer" if key in CURATION_PROPS
-                         else "the half-life reversal")
+                         else "the half-life reversal" if key in CURATION_REVERSAL
+                         else "the anamorphic bodies")
         e["label"] = word
         e["subtitle"] = f"{src.get('prop','?')} - {src.get('label','')}"
         e["notes"] = (

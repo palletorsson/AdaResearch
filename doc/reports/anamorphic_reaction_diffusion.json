@@ -1,0 +1,538 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "reaction_diffusion",
+ "axis": "inoculation",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.0,
+ "best_other_view": "from-above",
+ "best_other_mean_focus": 0.21837,
+ "ratio": null,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "blot",
+    "b": "lattice",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "blot",
+     "b": "lattice",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "blot",
+     "b": "point",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "blot",
+     "b": "rim",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "blot",
+     "b": "seam",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "blot",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "lattice",
+     "b": "point",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "lattice",
+     "b": "rim",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "lattice",
+     "b": "seam",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "lattice",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "point",
+     "b": "rim",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "point",
+     "b": "seam",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "point",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "rim",
+     "b": "seam",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "rim",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "seam",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "blot",
+    "b": "lattice",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "blot",
+     "b": "lattice",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "blot",
+     "b": "point",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "blot",
+     "b": "rim",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "blot",
+     "b": "seam",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "blot",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "lattice",
+     "b": "point",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "lattice",
+     "b": "rim",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "lattice",
+     "b": "seam",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "lattice",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "point",
+     "b": "rim",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "point",
+     "b": "seam",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "point",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "rim",
+     "b": "seam",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "rim",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "seam",
+     "b": "dust",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.14501,
+   "best_pair": {
+    "a": "blot",
+    "b": "lattice",
+    "focus": 0.24581,
+    "colour": 0.26186
+   },
+   "pairs": [
+    {
+     "a": "blot",
+     "b": "lattice",
+     "focus": 0.24581,
+     "colour": 0.26186
+    },
+    {
+     "a": "blot",
+     "b": "point",
+     "focus": 0.12726,
+     "colour": 0.13362
+    },
+    {
+     "a": "blot",
+     "b": "rim",
+     "focus": 0.22737,
+     "colour": 0.23821
+    },
+    {
+     "a": "blot",
+     "b": "seam",
+     "focus": 0.15074,
+     "colour": 0.16398
+    },
+    {
+     "a": "blot",
+     "b": "dust",
+     "focus": 0.13335,
+     "colour": 0.14328
+    },
+    {
+     "a": "lattice",
+     "b": "point",
+     "focus": 0.13521,
+     "colour": 0.14589
+    },
+    {
+     "a": "lattice",
+     "b": "rim",
+     "focus": 0.22568,
+     "colour": 0.23925
+    },
+    {
+     "a": "lattice",
+     "b": "seam",
+     "focus": 0.16851,
+     "colour": 0.18379
+    },
+    {
+     "a": "lattice",
+     "b": "dust",
+     "focus": 0.14203,
+     "colour": 0.15489
+    },
+    {
+     "a": "point",
+     "b": "rim",
+     "focus": 0.1185,
+     "colour": 0.12374
+    },
+    {
+     "a": "point",
+     "b": "seam",
+     "focus": 0.09444,
+     "colour": 0.10151
+    },
+    {
+     "a": "point",
+     "b": "dust",
+     "focus": 0.03519,
+     "colour": 0.04012
+    },
+    {
+     "a": "rim",
+     "b": "seam",
+     "focus": 0.14173,
+     "colour": 0.1524
+    },
+    {
+     "a": "rim",
+     "b": "dust",
+     "focus": 0.12627,
+     "colour": 0.13468
+    },
+    {
+     "a": "seam",
+     "b": "dust",
+     "focus": 0.1031,
+     "colour": 0.11309
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.21837,
+   "best_pair": {
+    "a": "lattice",
+    "b": "rim",
+    "focus": 0.29518,
+    "colour": 0.31367
+   },
+   "pairs": [
+    {
+     "a": "blot",
+     "b": "lattice",
+     "focus": 0.27892,
+     "colour": 0.29961
+    },
+    {
+     "a": "blot",
+     "b": "point",
+     "focus": 0.26636,
+     "colour": 0.2786
+    },
+    {
+     "a": "blot",
+     "b": "rim",
+     "focus": 0.24813,
+     "colour": 0.26244
+    },
+    {
+     "a": "blot",
+     "b": "seam",
+     "focus": 0.25104,
+     "colour": 0.26661
+    },
+    {
+     "a": "blot",
+     "b": "dust",
+     "focus": 0.16173,
+     "colour": 0.17323
+    },
+    {
+     "a": "lattice",
+     "b": "point",
+     "focus": 0.26472,
+     "colour": 0.28145
+    },
+    {
+     "a": "lattice",
+     "b": "rim",
+     "focus": 0.29518,
+     "colour": 0.31367
+    },
+    {
+     "a": "lattice",
+     "b": "seam",
+     "focus": 0.22703,
+     "colour": 0.2462
+    },
+    {
+     "a": "lattice",
+     "b": "dust",
+     "focus": 0.18767,
+     "colour": 0.20411
+    },
+    {
+     "a": "point",
+     "b": "rim",
+     "focus": 0.25721,
+     "colour": 0.2682
+    },
+    {
+     "a": "point",
+     "b": "seam",
+     "focus": 0.1826,
+     "colour": 0.19566
+    },
+    {
+     "a": "point",
+     "b": "dust",
+     "focus": 0.14248,
+     "colour": 0.1504
+    },
+    {
+     "a": "rim",
+     "b": "seam",
+     "focus": 0.22246,
+     "colour": 0.23692
+    },
+    {
+     "a": "rim",
+     "b": "dust",
+     "focus": 0.15496,
+     "colour": 0.1655
+    },
+    {
+     "a": "seam",
+     "b": "dust",
+     "focus": 0.13507,
+     "colour": 0.14725
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.14757,
+   "best_pair": {
+    "a": "blot",
+    "b": "lattice",
+    "focus": 0.239,
+    "colour": 0.25726
+   },
+   "pairs": [
+    {
+     "a": "blot",
+     "b": "lattice",
+     "focus": 0.239,
+     "colour": 0.25726
+    },
+    {
+     "a": "blot",
+     "b": "point",
+     "focus": 0.18157,
+     "colour": 0.19047
+    },
+    {
+     "a": "blot",
+     "b": "rim",
+     "focus": 0.12369,
+     "colour": 0.13255
+    },
+    {
+     "a": "blot",
+     "b": "seam",
+     "focus": 0.21545,
+     "colour": 0.23019
+    },
+    {
+     "a": "blot",
+     "b": "dust",
+     "focus": 0.12503,
+     "colour": 0.13372
+    },
+    {
+     "a": "lattice",
+     "b": "point",
+     "focus": 0.19584,
+     "colour": 0.21086
+    },
+    {
+     "a": "lattice",
+     "b": "rim",
+     "focus": 0.1706,
+     "colour": 0.18622
+    },
+    {
+     "a": "lattice",
+     "b": "seam",
+     "focus": 0.19279,
+     "colour": 0.21191
+    },
+    {
+     "a": "lattice",
+     "b": "dust",
+     "focus": 0.16446,
+     "colour": 0.17941
+    },
+    {
+     "a": "point",
+     "b": "rim",
+     "focus": 0.08943,
+     "colour": 0.09539
+    },
+    {
+     "a": "point",
+     "b": "seam",
+     "focus": 0.15405,
+     "colour": 0.16556
+    },
+    {
+     "a": "point",
+     "b": "dust",
+     "focus": 0.08634,
+     "colour": 0.09231
+    },
+    {
+     "a": "rim",
+     "b": "seam",
+     "focus": 0.11981,
+     "colour": 0.13105
+    },
+    {
+     "a": "rim",
+     "b": "dust",
+     "focus": 0.03534,
+     "colour": 0.04138
+    },
+    {
+     "a": "seam",
+     "b": "dust",
+     "focus": 0.12017,
+     "colour": 0.13174
+    }
+   ]
+  }
+ }
+}

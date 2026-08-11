@@ -1,0 +1,388 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "random_number_book_page_1955",
+ "axis": "disclosure",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.0,
+ "best_other_view": "opposite",
+ "best_other_mean_focus": 0.62499,
+ "ratio": null,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "works",
+    "b": "oracle",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "works",
+     "b": "oracle",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "tally",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "tally",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tally",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tally",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "ledger",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.62499,
+   "best_pair": {
+    "a": "oracle",
+    "b": "tally",
+    "focus": 0.78143,
+    "colour": 0.79775
+   },
+   "pairs": [
+    {
+     "a": "works",
+     "b": "oracle",
+     "focus": 0.58939,
+     "colour": 0.6063
+    },
+    {
+     "a": "works",
+     "b": "tally",
+     "focus": 0.779,
+     "colour": 0.79538
+    },
+    {
+     "a": "works",
+     "b": "ledger",
+     "focus": 0.4879,
+     "colour": 0.50237
+    },
+    {
+     "a": "works",
+     "b": "origin",
+     "focus": 0.33853,
+     "colour": 0.34826
+    },
+    {
+     "a": "oracle",
+     "b": "tally",
+     "focus": 0.78143,
+     "colour": 0.79775
+    },
+    {
+     "a": "oracle",
+     "b": "ledger",
+     "focus": 0.58803,
+     "colour": 0.60455
+    },
+    {
+     "a": "oracle",
+     "b": "origin",
+     "focus": 0.6041,
+     "colour": 0.62118
+    },
+    {
+     "a": "tally",
+     "b": "ledger",
+     "focus": 0.77926,
+     "colour": 0.79562
+    },
+    {
+     "a": "tally",
+     "b": "origin",
+     "focus": 0.77851,
+     "colour": 0.79488
+    },
+    {
+     "a": "ledger",
+     "b": "origin",
+     "focus": 0.5238,
+     "colour": 0.53854
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "works",
+    "b": "oracle",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "works",
+     "b": "oracle",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "tally",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "tally",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tally",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tally",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "ledger",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "works",
+    "b": "oracle",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "works",
+     "b": "oracle",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "tally",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "tally",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tally",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tally",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "ledger",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "works",
+    "b": "oracle",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "works",
+     "b": "oracle",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "tally",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "works",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "tally",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "oracle",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tally",
+     "b": "ledger",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tally",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "ledger",
+     "b": "origin",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  }
+ }
+}

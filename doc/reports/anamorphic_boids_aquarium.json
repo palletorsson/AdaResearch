@@ -1,0 +1,268 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "boids_aquarium",
+ "axis": "accord",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.14603,
+ "best_other_view": "from-above",
+ "best_other_mean_focus": 0.17191,
+ "ratio": 1.18,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.14603,
+   "best_pair": {
+    "a": "lane",
+    "b": "lattice",
+    "focus": 0.19968,
+    "colour": 0.3016
+   },
+   "pairs": [
+    {
+     "a": "school",
+     "b": "orb",
+     "focus": 0.05773,
+     "colour": 0.08059
+    },
+    {
+     "a": "school",
+     "b": "lane",
+     "focus": 0.1674,
+     "colour": 0.25131
+    },
+    {
+     "a": "school",
+     "b": "lattice",
+     "focus": 0.13665,
+     "colour": 0.21532
+    },
+    {
+     "a": "orb",
+     "b": "lane",
+     "focus": 0.16411,
+     "colour": 0.24673
+    },
+    {
+     "a": "orb",
+     "b": "lattice",
+     "focus": 0.15063,
+     "colour": 0.23061
+    },
+    {
+     "a": "lane",
+     "b": "lattice",
+     "focus": 0.19968,
+     "colour": 0.3016
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.16023,
+   "best_pair": {
+    "a": "lane",
+    "b": "lattice",
+    "focus": 0.21001,
+    "colour": 0.31625
+   },
+   "pairs": [
+    {
+     "a": "school",
+     "b": "orb",
+     "focus": 0.06698,
+     "colour": 0.0976
+    },
+    {
+     "a": "school",
+     "b": "lane",
+     "focus": 0.18531,
+     "colour": 0.28231
+    },
+    {
+     "a": "school",
+     "b": "lattice",
+     "focus": 0.14294,
+     "colour": 0.22589
+    },
+    {
+     "a": "orb",
+     "b": "lane",
+     "focus": 0.18971,
+     "colour": 0.28764
+    },
+    {
+     "a": "orb",
+     "b": "lattice",
+     "focus": 0.16642,
+     "colour": 0.25298
+    },
+    {
+     "a": "lane",
+     "b": "lattice",
+     "focus": 0.21001,
+     "colour": 0.31625
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.16367,
+   "best_pair": {
+    "a": "lane",
+    "b": "lattice",
+    "focus": 0.20531,
+    "colour": 0.30333
+   },
+   "pairs": [
+    {
+     "a": "school",
+     "b": "orb",
+     "focus": 0.09215,
+     "colour": 0.12604
+    },
+    {
+     "a": "school",
+     "b": "lane",
+     "focus": 0.15461,
+     "colour": 0.21367
+    },
+    {
+     "a": "school",
+     "b": "lattice",
+     "focus": 0.17668,
+     "colour": 0.26359
+    },
+    {
+     "a": "orb",
+     "b": "lane",
+     "focus": 0.16668,
+     "colour": 0.23747
+    },
+    {
+     "a": "orb",
+     "b": "lattice",
+     "focus": 0.1866,
+     "colour": 0.27451
+    },
+    {
+     "a": "lane",
+     "b": "lattice",
+     "focus": 0.20531,
+     "colour": 0.30333
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.17191,
+   "best_pair": {
+    "a": "lane",
+    "b": "lattice",
+    "focus": 0.24135,
+    "colour": 0.35432
+   },
+   "pairs": [
+    {
+     "a": "school",
+     "b": "orb",
+     "focus": 0.07067,
+     "colour": 0.09655
+    },
+    {
+     "a": "school",
+     "b": "lane",
+     "focus": 0.16133,
+     "colour": 0.24383
+    },
+    {
+     "a": "school",
+     "b": "lattice",
+     "focus": 0.17066,
+     "colour": 0.24937
+    },
+    {
+     "a": "orb",
+     "b": "lane",
+     "focus": 0.18457,
+     "colour": 0.27333
+    },
+    {
+     "a": "orb",
+     "b": "lattice",
+     "focus": 0.20289,
+     "colour": 0.29063
+    },
+    {
+     "a": "lane",
+     "b": "lattice",
+     "focus": 0.24135,
+     "colour": 0.35432
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.14704,
+   "best_pair": {
+    "a": "lane",
+    "b": "lattice",
+    "focus": 0.20164,
+    "colour": 0.30306
+   },
+   "pairs": [
+    {
+     "a": "school",
+     "b": "orb",
+     "focus": 0.048,
+     "colour": 0.07612
+    },
+    {
+     "a": "school",
+     "b": "lane",
+     "focus": 0.17955,
+     "colour": 0.27247
+    },
+    {
+     "a": "school",
+     "b": "lattice",
+     "focus": 0.13004,
+     "colour": 0.20578
+    },
+    {
+     "a": "orb",
+     "b": "lane",
+     "focus": 0.18104,
+     "colour": 0.2761
+    },
+    {
+     "a": "orb",
+     "b": "lattice",
+     "focus": 0.14197,
+     "colour": 0.22153
+    },
+    {
+     "a": "lane",
+     "b": "lattice",
+     "focus": 0.20164,
+     "colour": 0.30306
+    }
+   ]
+  }
+ }
+}

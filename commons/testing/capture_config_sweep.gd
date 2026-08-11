@@ -77,6 +77,9 @@ var _spec_path: String = ""
 ## a detail rather than in the silhouette. Read from the spec's "framing" key,
 ## which cabinet_sweep fills from the registry's dna.framing.
 var _framing: float = 1.0
+## The standpoint. Defaults to the canonical one every gallery has used.
+var _yaw: float = YAW
+var _pitch: float = PITCH
 
 ## OFF unless something asks for it. See the header for the three switches and
 ## for why the default rig is frozen.
@@ -152,6 +155,15 @@ func _run() -> void:
 	var framing_hint: float = float(spec.get("framing", 1.0))
 	if framing_hint > 0.05 and framing_hint < 20.0:
 		_framing = framing_hint
+	# THE VIEWPOINT IS NOW SETTABLE, AND UNTIL NOW IT WAS NOT. Every tile in every DNA
+	# gallery — some three hundred of them across seven sequences — was shot from ONE
+	# fixed place: YAW 0.62, PITCH -0.26. That is not a neutral default, it is a
+	# standpoint, and an artifact whose difference resolves obliquely to it is invisible
+	# to the entire evidence pipeline no matter how loudly it differs in the room. The
+	# critic can only judge what this camera happened to be facing. Overriding these
+	# lets the anamorphic case be TESTED rather than argued about.
+	_yaw = float(spec.get("yaw", YAW))
+	_pitch = float(spec.get("pitch", PITCH))
 	# dna.host from the registry, for artifacts that only exist as an operation on
 	# a host map's grid. Empty means the artifact stands alone, as before.
 	var host_spec: Dictionary = spec.get("host", {})
@@ -401,7 +413,7 @@ func _run() -> void:
 		# scales that distance (below 1.0 moves in), set per artifact from the
 		# registry's dna.framing so the subject of the axis is what gets framed.
 		var dist: float = radius / tan(deg_to_rad(FOV * 0.5)) * PAD * _framing
-		var dir := Vector3(sin(YAW) * cos(PITCH), -sin(PITCH), cos(YAW) * cos(PITCH))
+		var dir := Vector3(sin(_yaw) * cos(_pitch), -sin(_pitch), cos(_yaw) * cos(_pitch))
 		cam.global_position = c + dir * dist
 		cam.look_at(c, Vector3.UP)
 
