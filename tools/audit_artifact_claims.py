@@ -270,6 +270,62 @@ def check_unreachable(token, entry, src, findings):
             f"artifact silently keeps its default"))
 
 
+def check_dialects(reg, placed, findings):
+    """One axis word, two disjoint value lists — a shared vocabulary that split.
+
+    A CORPUS-WIDE check, not a per-artifact one, so it runs once against the
+    whole registry rather than inside the per-token loop.
+
+    Twenty batches of promotion built shared vocabularies on purpose: reuse the
+    word AND its value list character for character, so two artifacts carrying
+    the same word can be compared, and refuse the word out loud when the artifact
+    argues something else. That discipline held most of the time. Where it did
+    not, the result is worse than an invented word, because a reader — human or
+    agent — reasonably assumes a shared word means a shared question.
+
+    `workings` split 19 / 7. The nineteen ask how much of the arithmetic an
+    operation shows (outcome|trace|operands|expression); the seven _bench
+    artifacts ask what stage of a generate-and-test search is on show
+    (result|rule|trial|reject), where `reject` has no meaning in the first sense
+    at all. `opening` split the same way earlier and was caught by hand.
+
+    ORDER-ONLY differences are reported separately and softly: the same five
+    words in a different order still compare, but a sweep truncating values from
+    the end to fit --max drops a DIFFERENT value in each artifact, which is how
+    a family quietly stops being measurable against itself.
+    """
+    by_word: dict = defaultdict(lambda: defaultdict(list))
+    for token, entry in sorted(reg.items()):
+        axes = ((entry.get("dna") or {}).get("axes") or {})
+        for word, vals in axes.items():
+            if not isinstance(vals, list) or not vals:
+                continue
+            by_word[word][tuple(str(v) for v in vals)].append(token)
+
+    for word, variants in sorted(by_word.items()):
+        if len(variants) < 2:
+            continue
+        as_sets = {frozenset(v) for v in variants}
+        reach = sum(placed[t] for ts in variants.values() for t in ts)
+        if len(as_sets) > 1:
+            lines = "; ".join(
+                f"{len(ts)}x [{' | '.join(v)}]" for v, ts in
+                sorted(variants.items(), key=lambda kv: -len(kv[1])))
+            findings.append((
+                "dialect", word,
+                f"one word, {len(as_sets)} DIFFERENT vocabularies across "
+                f"{sum(len(t) for t in variants.values())} artifacts / {reach} "
+                f"placements — {lines}. A shared word that does not share its "
+                f"answers cannot be compared, which is what the word was for."))
+        else:
+            findings.append((
+                "dialect_order", word,
+                f"same values, {len(variants)} different ORDERS across "
+                f"{sum(len(t) for t in variants.values())} artifacts. Harmless to "
+                f"read, but a sweep truncating to --max drops a different value "
+                f"in each, so the family stops being measurable against itself."))
+
+
 def check_miscased(token, entry, src, findings, tracked):
     """A scene pointing at a path whose casing git does not have."""
     scene = res_to_abs(entry.get("scene", ""))
@@ -342,12 +398,16 @@ def main() -> int:
         if only in (None, "miscased"):
             check_miscased(token, entry, src, findings, tracked)
 
+    # Corpus-wide, so it runs once after the per-token loop rather than inside it.
+    if only in (None, "dialect", "dialect_order"):
+        check_dialects(reg, placed, findings)
+
     by_class: dict = defaultdict(list)
     for cls, token, why in findings:
         by_class[cls].append((placed[token], token, why))
 
     print(f"\naudited {scanned} placed artifacts · {len(findings)} findings\n")
-    order = ["unbuilt", "hollow", "unreachable", "miscased"]
+    order = ["unbuilt", "hollow", "unreachable", "dialect", "dialect_order", "miscased"]
     for cls in order:
         rows = sorted(by_class.get(cls, []), reverse=True)
         if not rows:
