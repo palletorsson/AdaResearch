@@ -38,6 +38,44 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUB = r"C:/Users/palle/Documents/GitHub/ada_encyclopedia/public"
 
 
+def warn_truncation(tokens: list, max_variants: int) -> None:
+    """Say when --max is about to hide an axis entirely.
+
+    build_dna_gallery sweeps the first TWO declared axes as a matrix and trims
+    values from the end to fit --max. A two-axis artifact at 4 x 4 = 16 with
+    --max=5 therefore sweeps four values of the first axis and ONE of the second
+    — so the second axis is not measured at all, and the run reports a closest
+    pair as if it had been.
+
+    foresight_range was verified twice that way and passed as a single-axis
+    artifact. Swept properly at --max=16 its closest pair is 0.01%, and the pair
+    is `vectors = gravity` against `vectors = sum` — the axis the trim had been
+    hiding is the near-inert one. A verification that silently drops half the
+    question is worse than none, because it is believed.
+    """
+    import sys as _s
+    _s.path.insert(0, os.path.join(REPO, "tools"))
+    try:
+        import artifact_dna_research as _R
+        reg = _R.registry()
+    except Exception:
+        return
+    for tok in tokens:
+        axes = ((reg.get(tok, {}).get("dna") or {}).get("axes") or {})
+        swept = list(axes.items())[:2]          # the gallery's own rule
+        if len(swept) < 2:
+            continue
+        full = 1
+        for _n, vals in swept:
+            full *= max(1, len(vals))
+        if full > max_variants:
+            names = " x ".join(f"{n}({len(v)})" for n, v in swept)
+            need = full
+            print(f"  ! {tok}: {names} = {full} combinations but --max={max_variants}. "
+                  f"Values are trimmed FROM THE END, so an axis may be reduced to a "
+                  f"single value and never measured. Re-run with --max={need}.")
+
+
 def sweep(slug: str, tokens: list, max_variants: int) -> dict:
     cmd = [sys.executable, "tools/build_dna_gallery.py",
            f"--slug={slug}", "--tokens=" + ",".join(tokens), f"--max={max_variants}"]

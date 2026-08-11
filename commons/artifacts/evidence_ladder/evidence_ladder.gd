@@ -54,7 +54,9 @@ class_name EvidenceLadder
 #   axiom     the rule, standing where the event was. Four lines of update on the
 #             slate, and the initial state drawn small — a dot at release height
 #             for a fall, a dot with a launch arrow for a throw, a dot with the
-#             floor's reply for a bounce. The flight is withheld entirely.
+#             floor's reply for a bounce, and for a drag the same dot as the fall,
+#             because the two are told apart nowhere but in the printed rule. The
+#             flight is withheld entirely.
 #
 # ONE COPY OF THE ARITHMETIC. Every mark on all four panels is read out of a
 # single integration, `_run()`, performed once at build time through a single
@@ -93,9 +95,34 @@ class_name EvidenceLadder
 #           here is a fixed property of one event, not the four named populations
 #           that bench compares, and taking a word without its answers is the
 #           dishonest half of a shared vocabulary.
+#   drag    released from rest at h0 through air. The one value that rewrites the
+#           UPDATE rather than the floor or the initial state, and the only one whose
+#           y(t) is not a parabola at all.
+#
+# WHY `drag` WAS ADDED, and why it is the ONLY value that could be. MEASURED first:
+# the first sweep of this bench returned 0.595 / 0.596 / 0.725 per cent for its three
+# pairs — three numbers so alike that the limit is plainly the TOTAL INK in the two
+# piers that can vary, not the similarity of any pair. Pier 1 is identical at every
+# value by construction and pier 4 moves a line of text, so at most half the drawing
+# can ever move, and it was drawn in hairlines.
+#
+# The second half of that finding is the constraint on new values. y(t) does not
+# depend on vx AT ALL, and both axes on these panels are normalised — height by h0,
+# time by the run's own window. So every projectile with apex h0 collapses to ONE
+# curve here no matter how hard or flat it is thrown: a second throw would have been
+# a duplicate frame wearing a different plate. The shapes actually available to this
+# panel are a half parabola (fall), a full one (throw), a decaying train (bounce) and
+# whatever a velocity-dependent force draws — which is why the fourth value had to
+# reach into the update line, and why there is no fifth.
+#
+# And `drag` is the value that inverts the bench's own central sentence. The longhand
+# pier says the widening gaps between the dots ARE the acceleration. Under drag the
+# gaps stop widening and the dots march out evenly along a straight line, which is the
+# exact picture example_1_7 drew for CONSTANT velocity. The same panel, the same
+# cadence, the opposite reading.
 #
 # THE VERTICAL SCALE IS SHARED AND THE HORIZONTAL ONE IS NOT, on purpose. All
-# three events peak at exactly h0, so height is directly comparable across the
+# four events peak at exactly h0, so height is directly comparable across the
 # three stills. Time is not: the fall is over in 0.45 s and the bounce takes four
 # times as long. Rather than hide that by relabelling, the axis is ticked at a
 # fixed 0.1 s, so the TICK DENSITY carries the difference and no caption is needed.
@@ -107,22 +134,28 @@ class_name EvidenceLadder
 # Usage in map_data.json:
 #   "evidence_ladder"                     — the fall
 #   "evidence_ladder#phenomenon:bounce"
+#   "evidence_ladder#phenomenon:drag"
 
 ## The event the four readings are readings OF. The ladder is invariant.
-@export_enum("fall", "throw", "bounce") var phenomenon: String = "fall"
+@export_enum("fall", "throw", "bounce", "drag") var phenomenon: String = "fall"
 
 ## Allow-list. An unknown word in a map token falls back to the shipped fall
 ## rather than stranding a placement with four blank panels.
-const PHENOMENA: PackedStringArray = ["fall", "throw", "bounce"]
+const PHENOMENA: PackedStringArray = ["fall", "throw", "bounce", "drag"]
 
 ## The four rungs, in the order 29 artifacts declare them. Left to right.
 const RUNGS: PackedStringArray = ["result", "trace", "longhand", "axiom"]
 
 # ── the event ────────────────────────────────────────────────────────────
 const G: float = 9.8                  ## drawn gravity; the panel is a diagram
-const H0: float = 1.0                 ## release height / apex, metres. Shared by all three.
+const H0: float = 1.0                 ## release height / apex, metres. Shared by all four.
 const E_BOUNCE: float = 0.62          ## restitution, `bounce` only
 const VX_THROW: float = 1.0           ## the horizontal term `throw` adds
+## `drag` only. The terminal speed it settles at, and the drag coefficient DERIVED
+## from it rather than typed beside it — at equilibrium g = k v^2, so one number fixes
+## both and the plaque cannot print a k the integration is not running.
+const V_TERM: float = 1.15
+const K_DRAG: float = G / (V_TERM * V_TERM)
 const REST_EPS: float = 0.30          ## below this an impact is a buzz, not an arc
 const SIM_DT: float = 0.0008          ## the one integration's step
 const SIM_MAX_STEPS: int = 4200       ## 3.36 s cap; the bounce settles near 1.8 s
@@ -151,12 +184,31 @@ const LEFT_X: float = -0.26
 const RIGHT_X: float = 0.26
 const GROUND_Y: float = -0.05         ## the floor line. Identical on all four panels.
 const TOP_Y: float = 0.23             ## h = H0 lands here
-const VZERO_Y: float = -0.175         ## the velocity lane's zero
-const VAMP: float = 0.085             ## |v| = VMAX lands here
-const TICK_LEN: float = 0.012
+const VZERO_Y: float = -0.19          ## the velocity lane's zero
+const VAMP: float = 0.115             ## |v| = VMAX lands here
+const TICK_LEN: float = 0.020
 const TICK_EVERY: float = 0.1         ## seconds per tick. Density carries the timescale.
-const N_DOT: int = 26                 ## longhand's cadence
+const N_DOT: int = 18                 ## longhand's cadence
 const N_RIB: int = 180                ## trace ribbon samples
+
+# ── STROKE WEIGHTS, and why they are not the ones this bench shipped with ────
+# The first sweep drew every mark as a hairline: an 0.018 m ribbon on a 0.62 m slate
+# is 3.9 px in the 760 px capture and roughly one pixel through a headset at standing
+# distance. It is legible in the source file and nowhere else. So every mark the axis
+# can move is drawn at roughly twice the width, which is what a diagram chalked on an
+# exhibition slate actually looks like, and the dot cadence drops from 26 to 18 so the
+# beads stay separate beads at the new size instead of fusing into a bar. The furniture
+# is untouched: nothing was shrunk to make the drawing look bigger.
+const W_FLOOR: float = 0.009          ## the floor line, on every panel
+const W_TRACE: float = 0.034          ## the trace ribbon
+const W_VEL: float = 0.020            ## the velocity lane's ribbon
+const W_LANE: float = 0.006           ## the velocity lane's zero line
+const W_TICK: float = 0.006           ## time ticks on the floor line
+const W_RANGE: float = 0.011          ## x(t), lying on the floor
+const W_DOT: float = 0.024            ## longhand's beads
+const W_RULE: float = 0.007           ## the axiom pier's ruled square
+const W_ARROW: float = 0.010          ## v0 and the floor's reply
+const LAW_PX: float = 0.0013          ## the law's pixel_size
 
 # ── palette, taken from example_1_7 so the family reads as one bench ──────
 const C_CHALK := Color(0.88, 0.90, 0.95)
@@ -193,11 +245,19 @@ func _ready() -> void:
 ## Semi-implicit Euler with a floor. `e` is the floor's restitution: 0.0 is a
 ## perfectly inelastic landing (bouncing_ball's `dead` — the first impact keeps
 ## nothing), anything above it reflects the normal component and keeps the rest.
+## `k` is quadratic drag, and it is ZERO for every value but `drag`: at k = 0 the
+## acceleration is exactly Vector2(0, -G) and this function reduces, term for term, to
+## the two lines it shipped with, so fall, throw and bounce integrate bit-identically
+## to their first sweep. Only the new value takes the new branch.
 ##
 ## Returns [position, velocity]. This is the single copy of the arithmetic on this
 ## bench; every mark on all four panels descends from it through _run().
-func _step(p: Vector2, v: Vector2, dt: float, e: float) -> Array[Vector2]:
-	v.y -= G * dt
+func _step(p: Vector2, v: Vector2, dt: float, e: float, k: float) -> Array[Vector2]:
+	var a: Vector2 = Vector2(0.0, -G)
+	if k > 0.0:
+		# opposes motion and grows with speed — the whole of what `drag` adds
+		a -= v * (k * v.length())
+	v += a * dt
 	p += v * dt
 
 	if p.y <= 0.0:
@@ -211,20 +271,26 @@ func _step(p: Vector2, v: Vector2, dt: float, e: float) -> Array[Vector2]:
 	return out
 
 
-## The event's opening state: [position, velocity, restitution].
+## The event's opening state: [position, velocity, restitution, drag].
 ##
-## All three peak at exactly H0 — the fall and the bounce because they are
+## All four peak at exactly H0 — the fall, the bounce and the drag because they are
 ## released there, the throw because its vy is sqrt(2 g H0), which is the same
 ## speed the fall arrives with, run backwards. So the height scale on the panels
 ## is shared across every value of the axis and heights are directly comparable.
+##
+## `drag` and `fall` open at the SAME state, which is the axiom pier's sharpest line:
+## the two are told apart nowhere in the initial condition and only in the update. Each
+## value of this axis reaches the law in a different place — throw at v0, bounce at the
+## floor rule, drag at the update itself — and the pier colours whichever line moved.
 func _initial() -> Array:
-	match phenomenon:
-		"throw":
-			return [Vector2(0.0, 0.0), Vector2(VX_THROW, sqrt(2.0 * G * H0)), 0.0]
-		"bounce":
-			return [Vector2(0.0, H0), Vector2.ZERO, E_BOUNCE]
-		_:
-			return [Vector2(0.0, H0), Vector2.ZERO, 0.0]
+	var out: Array = [Vector2(0.0, H0), Vector2.ZERO, 0.0, 0.0]
+	if phenomenon == "throw":
+		out = [Vector2(0.0, 0.0), Vector2(VX_THROW, sqrt(2.0 * G * H0)), 0.0, 0.0]
+	elif phenomenon == "bounce":
+		out = [Vector2(0.0, H0), Vector2.ZERO, E_BOUNCE, 0.0]
+	elif phenomenon == "drag":
+		out = [Vector2(0.0, H0), Vector2.ZERO, 0.0, K_DRAG]
+	return out
 
 
 ## Integrate once, forward, at build time, and keep the whole thing. Everything the
@@ -240,6 +306,7 @@ func _run() -> void:
 	var p: Vector2 = init[0]
 	var v: Vector2 = init[1]
 	var e: float = init[2]
+	var k: float = init[3]
 
 	_vmax = maxf(sqrt(2.0 * G * H0), 0.001)
 
@@ -257,7 +324,7 @@ func _run() -> void:
 		if rest_at >= 0.0 and t > rest_at * TAIL:
 			break
 
-		var stepped: Array[Vector2] = _step(p, v, SIM_DT, e)
+		var stepped: Array[Vector2] = _step(p, v, SIM_DT, e, k)
 		p = stepped[0]
 		v = stepped[1]
 		t += SIM_DT
@@ -352,7 +419,7 @@ func _station(station: Node3D, rung: String) -> void:
 	# The floor. EVERY rung gets it, including the one that withholds the event —
 	# bouncing_ball's rule, and its reason: without a zero line an envelope is a
 	# shape, and with one it is a measurement.
-	_seg(panel, Vector2(LEFT_X, GROUND_Y), Vector2(RIGHT_X, GROUND_Y), 0.006,
+	_seg(panel, Vector2(LEFT_X, GROUND_Y), Vector2(RIGHT_X, GROUND_Y), W_FLOOR,
 		_mat(C_CHALK, 0.25), DRAW_Z)
 
 	match rung:
@@ -405,7 +472,7 @@ func _draw_trace(panel: Node3D) -> void:
 		var at: float = _t_win * float(i) / float(N_RIB - 1)
 		var k: int = _idx(at)
 		pts.append(Vector2(_map_t(_t[k]), _map_h(_py[k])))
-	_ribbon(panel, pts, 0.018, C_INK, C_LATE, DRAW_Z)
+	_ribbon(panel, pts, W_TRACE, C_INK, C_LATE, DRAW_Z)
 
 
 ## LONGHAND — the working instead of the answer.
@@ -416,15 +483,20 @@ func _draw_trace(panel: Node3D) -> void:
 ##   the flight dropped as dots at an even cadence — equal in time, unequal in
 ##     space. example_1_7 drew forty dots the SAME distance apart and said that is
 ##     what constant velocity looks like when you stop saying it. These widen, and
-##     that is what accelerated looks like. The same picture, one derivative along;
+##     that is what accelerated looks like. The same picture, one derivative along —
+##     and under `drag` they STOP widening and march out evenly along a near-straight
+##     line, which is example_1_7's constant-velocity picture arriving on the panel
+##     built to say the opposite. It is the one reading on this bench that turns round;
 ##   a lower lane carrying v(t): a straight line of slope -g, whose jumps are the
-##     impacts and whose crossing of zero is the apex.
+##     impacts and whose crossing of zero is the apex — except under `drag`, where it
+##     bends over to a shallow horizontal at the terminal speed and stays there, which
+##     is what "the force depends on the velocity" looks like with nobody saying so.
 ##
 ## And the range, x(t), on the floor. It is the only place on this bench where the
 ## horizontal term appears at all: a height-against-time strip cannot show it, so a
 ## throw read at `trace` is indistinguishable from a tall fall. The working is where
 ## the exhibit admits what the picture above it dropped. Flat on the floor for a
-## fall and a bounce, climbing for a throw — same frame, different content, which is
+## fall, a bounce and a drag, climbing for a throw — same frame, different content, which is
 ## the family's own way of drawing a difference.
 func _draw_longhand(panel: Node3D) -> void:
 	var tick_mat: StandardMaterial3D = _mat(C_CHALK, 0.2)
@@ -434,18 +506,18 @@ func _draw_longhand(panel: Node3D) -> void:
 		if at > _t_win:
 			break
 		var x: float = _map_t(at)
-		_seg(panel, Vector2(x, GROUND_Y), Vector2(x, GROUND_Y - TICK_LEN), 0.0035,
+		_seg(panel, Vector2(x, GROUND_Y), Vector2(x, GROUND_Y - TICK_LEN), W_TICK,
 			tick_mat, DRAW_Z)
 
 	# the range. Straight, because nothing accelerates it.
 	var last: int = _t.size() - 1
 	_seg(panel, Vector2(LEFT_X, _map_h(_px[0])), Vector2(RIGHT_X, _map_h(_px[last])),
-		0.005, _mat(C_RANGE, 0.7), DRAW_Z + 0.002)
+		W_RANGE, _mat(C_RANGE, 0.7), DRAW_Z + 0.002)
 
 	# the flight at a cadence you can count
 	var dot_mat: StandardMaterial3D = _mat(C_INK, 1.0)
 	var dot_mesh := BoxMesh.new()
-	dot_mesh.size = Vector3(0.014, 0.014, 0.010)
+	dot_mesh.size = Vector3(W_DOT, W_DOT, 0.010)
 	for i in range(N_DOT):
 		var at2: float = _t_win * float(i) / float(N_DOT - 1)
 		var k: int = _idx(at2)
@@ -456,17 +528,17 @@ func _draw_longhand(panel: Node3D) -> void:
 		panel.add_child(mi)
 
 	# the velocity lane
-	_seg(panel, Vector2(LEFT_X, VZERO_Y), Vector2(RIGHT_X, VZERO_Y), 0.0035,
+	_seg(panel, Vector2(LEFT_X, VZERO_Y), Vector2(RIGHT_X, VZERO_Y), W_LANE,
 		_mat(C_CHALK, 0.18), DRAW_Z)
 	var vpts: PackedVector2Array = PackedVector2Array()
 	for i in range(N_RIB):
 		var at3: float = _t_win * float(i) / float(N_RIB - 1)
 		var k2: int = _idx(at3)
 		vpts.append(Vector2(_map_t(_t[k2]), _map_v(_vy[k2])))
-	_ribbon(panel, vpts, 0.010, C_LATE, C_LATE, DRAW_Z)
+	_ribbon(panel, vpts, W_VEL, C_LATE, C_LATE, DRAW_Z)
 
 	panel.add_child(_text("y(t)", Vector3(RIGHT_X - 0.045, TOP_Y - 0.012, DRAW_Z), 24, 0.0012, C_INK))
-	panel.add_child(_text("v(t)", Vector3(RIGHT_X - 0.045, VZERO_Y + 0.048, DRAW_Z), 24, 0.0012, C_LATE))
+	panel.add_child(_text("v(t)", Vector3(RIGHT_X - 0.045, VZERO_Y + 0.062, DRAW_Z), 24, 0.0012, C_LATE))
 
 
 ## AXIOM — the rule, standing where the event was.
@@ -479,14 +551,25 @@ func _draw_longhand(panel: Node3D) -> void:
 ## The initial state is the whole difference between a fall and a throw at this rung,
 ## and the reason those two values differ LEAST here and most in the middle of the
 ## ladder: they run identical arithmetic, and the exhibit says so by printing
-## identical arithmetic under two different v0. Only `bounce` earns a fourth line,
-## because only `bounce` changes what the floor does.
+## identical arithmetic under two different v0.
+##
+## All four print four lines, and the ink is not hard-coded — _lines_the_axis_reaches()
+## writes out all four laws and colours whichever lines disagree. Today that is three of
+## them, and each value reaches a DIFFERENT one: `throw` the initial condition, `bounce`
+## the floor's rule, `drag` the update itself. Only "p += v dt" is chalk, because nothing
+## the axis can name touches the carry. So the pier's second reading is that an event can
+## be varied in three separate places in one law, and you can see which place without
+## reading a word of it. `drag` and `fall` share the ruled square exactly — same release,
+## same rest, no arrow — and differ only in the coloured text, which is the strongest
+## thing this pier says: at the top of the ladder two different flights can be told apart
+## nowhere except in the rule.
 func _draw_axiom(panel: Node3D) -> void:
 	var lines: PackedStringArray = _law()
+	var reach: PackedInt32Array = _lines_the_axis_reaches()
 	for i in range(lines.size()):
 		var y: float = 0.19 - float(i) * 0.055
-		panel.add_child(_text(lines[i], Vector3(0.0, y, DRAW_Z), 30, 0.0012,
-			C_INK if i >= 2 else C_CHALK))
+		panel.add_child(_text(lines[i], Vector3(0.0, y, DRAW_Z), 30, LAW_PX,
+			C_INK if reach.has(i) else C_CHALK))
 
 	# THE INITIAL STATE, in its own frame, on its own floor. It gets a frame rather
 	# than the panel's shared floor line for a plain reason: a fall starts at h0,
@@ -495,12 +578,12 @@ func _draw_axiom(panel: Node3D) -> void:
 	# a small ruled square on the plate, holding the support of the thing that varies.
 	var rule: StandardMaterial3D = _mat(C_CHALK, 0.35)
 	var cx: float = 0.0
-	var cy: float = -0.15
-	var h: float = 0.085
-	_seg(panel, Vector2(cx - h, cy + h), Vector2(cx + h, cy + h), 0.0035, rule, DRAW_Z)
-	_seg(panel, Vector2(cx - h, cy - h), Vector2(cx + h, cy - h), 0.005, rule, DRAW_Z)
-	_seg(panel, Vector2(cx - h, cy - h), Vector2(cx - h, cy + h), 0.0035, rule, DRAW_Z)
-	_seg(panel, Vector2(cx + h, cy - h), Vector2(cx + h, cy + h), 0.0035, rule, DRAW_Z)
+	var cy: float = -0.155
+	var h: float = 0.115
+	_seg(panel, Vector2(cx - h, cy + h), Vector2(cx + h, cy + h), W_RULE, rule, DRAW_Z)
+	_seg(panel, Vector2(cx - h, cy - h), Vector2(cx + h, cy - h), W_RULE * 1.55, rule, DRAW_Z)
+	_seg(panel, Vector2(cx - h, cy - h), Vector2(cx - h, cy + h), W_RULE, rule, DRAW_Z)
+	_seg(panel, Vector2(cx + h, cy - h), Vector2(cx + h, cy + h), W_RULE, rule, DRAW_Z)
 
 	var init: Array = _initial()
 	var p0: Vector2 = init[0]
@@ -510,35 +593,59 @@ func _draw_axiom(panel: Node3D) -> void:
 	var body_y: float = floor_y + (p0.y / H0) * (h * 1.88)
 	var at: Vector2 = Vector2(cx - 0.045, body_y)
 
-	panel.add_child(_box(Vector3(at.x, at.y, DRAW_Z + 0.004), Vector3(0.018, 0.018, 0.012),
+	panel.add_child(_box(Vector3(at.x, at.y, DRAW_Z + 0.004), Vector3(0.026, 0.026, 0.012),
 		_mat(C_INK, 1.1)))
 
 	var impact: float = maxf(sqrt(2.0 * G * H0), 0.001)
 	var scale_v: float = 0.11 / maxf(Vector2(VX_THROW, impact).length(), 0.001)
 	if v0.length() > 0.001:
-		_arrow(panel, at, at + v0 * scale_v, 0.006, _mat(C_INK, 1.0))
+		_arrow(panel, at, at + v0 * scale_v, W_ARROW, _mat(C_INK, 1.0))
 
 	if e > 0.0:
 		# what the floor gives back: e times the speed it took from the body
 		var foot: Vector2 = Vector2(cx + 0.045, floor_y)
-		_arrow(panel, foot, foot + Vector2(0.0, impact * e * scale_v), 0.006,
+		_arrow(panel, foot, foot + Vector2(0.0, impact * e * scale_v), W_ARROW,
 			_mat(C_LATE, 1.0))
 
 
-## The law, as the axiom pier prints it. Two lines of update that never change, the
-## floor's rule, and the initial condition — in that order, so what is invariant is
-## read first and what the axis moves is read last.
+## The law, as the axiom pier prints it: the update, the carry, the floor's rule and
+## the initial condition, in that order.
 func _law() -> PackedStringArray:
-	match phenomenon:
-		"throw":
-			return PackedStringArray(["v.y -= g dt", "p += v dt", "floor: v = 0",
-				"v0 = (1.00, 4.43)"])
-		"bounce":
-			return PackedStringArray(["v.y -= g dt", "p += v dt", "floor: v.y = -e v.y",
-				"v0 = (0,0)  e = 0.62"])
-		_:
-			return PackedStringArray(["v.y -= g dt", "p += v dt", "floor: v = 0",
-				"v0 = (0, 0)"])
+	return _law_for(phenomenon)
+
+
+## The same four lines for ANY value, so the pier can be asked which of them the axis
+## is able to move rather than told. `fall` is the plainest event and prints the
+## plainest law; each other value rewrites exactly one line of it, and a different one:
+## throw the initial condition, bounce the floor's rule, drag the update itself.
+func _law_for(which: String) -> PackedStringArray:
+	var update: String = "v.y -= g dt"
+	var floor_rule: String = "floor: v = 0"
+	var v0_line: String = "v0 = (0, 0)"
+	if which == "throw":
+		v0_line = "v0 = (1.00, 4.43)"
+	elif which == "bounce":
+		floor_rule = "floor: v.y = -e v.y"
+		v0_line = "v0 = (0,0)  e = 0.62"
+	elif which == "drag":
+		update = "v.y -= (g + k|v|v.y) dt"
+		v0_line = "v0 = (0,0)  k = %.2f" % K_DRAG
+	return PackedStringArray([update, "p += v dt", floor_rule, v0_line])
+
+
+## WHICH LINES ARE INK — asked of the four laws rather than asserted about them.
+## The pier's rule is that chalk is what the axis cannot touch and ink is what it can,
+## and the honest way to know that is to write all four laws out and see which lines
+## disagree. It also cannot rot: a fifth value would recolour the pier by itself.
+func _lines_the_axis_reaches() -> PackedInt32Array:
+	var base: PackedStringArray = _law_for(PHENOMENA[0])
+	var out: PackedInt32Array = PackedInt32Array()
+	for i in range(base.size()):
+		for w in PHENOMENA:
+			if _law_for(w)[i] != base[i]:
+				out.append(i)
+				break
+	return out
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -560,7 +667,7 @@ func _read_grid_config_meta() -> void:
 		node = node.get_parent()
 
 
-## Tokens: #phenomenon:throw · #phenomenon:bounce
+## Tokens: #phenomenon:throw · #phenomenon:bounce · #phenomenon:drag
 ##
 ## GUARDED THREE WAYS — the key must be present, the value must be one the code can
 ## build, and it must differ from the one already standing. A placement carrying any

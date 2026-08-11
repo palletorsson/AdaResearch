@@ -4,9 +4,9 @@ class_name RecursionObservatory
 # @identity
 # essence: four recursions held at one rung — a ladder's length is set by which wall arrives first, COUNT or THICKNESS
 # desire: To be read across rather than walked around — the row exists so four rules can be held against each other
-# critical_parameter: tick — the rung every plinth is built at. Three rungs, because three is the shortest ladder in the family
-# triggers: tick -> every plinth rebuilds at rung n, and the last line of each plaque restates its own count
-# emerges: The Menger plinth stops changing while the other three keep going — exhaustion arriving at different times
+# critical_parameter: tick — the rung every plinth is built at. Four rungs, because four is where the second wall arrives and both are biting at once
+# triggers: tick -> every plinth rebuilds at rung n, and the last line of each plaque restates its own count, or names the wall that stopped it and the count it would have needed
+# emerges: Menger stops at fine, Koch stops at dense, Cantor and Sierpinski walk past both — exhaustion arriving at different times, in order, on one axis
 # needs: nothing supplied — no clock, no physics, no randf; it is built for a still by construction
 # relationships: synthesis of cantor_set, koch_curve_3d, sierpinski_pyramid and menger_sponge, the four artifacts that share `tick`
 # truth: A fractal is endless and its picture is not. Every ladder stops, and the rung it stops on is a fact about the drawing, not about the set.
@@ -51,22 +51,48 @@ class_name RecursionObservatory
 #  with its branching factor, its dimension, the rung its own ladder
 #  ends on, and which wall ends it.
 #
-#  tick — the one axis, and the only word the four of them share. THREE
-#         RUNGS: once | coarse | fine, character for character the names
-#         menger_sponge and koch_curve_3d carry and the first three of
-#         cantor_set's and sierpinski_pyramid's five. Three is not a
-#         convenience, it is the INTERSECTION — the deepest rung every
-#         member can honestly be shown at. Declaring `dense` and `limit`
-#         would be menger_sponge's example_8_4 fault one level up: rungs
-#         that exist in the enum and that two of the four members cannot
-#         reach.
+#  tick — the one axis, and the only word the four of them share. FOUR
+#         RUNGS since 2026-08-11: once | coarse | fine | dense, all four
+#         names taken character for character from cantor_set's and
+#         sierpinski_pyramid's five-rung table.
 #
-#  AND THE ROOM HITS THE WALL ITSELF, which is the part worth the trip.
-#  At `fine` the plinths carry 8 bars, 64 segments and 125 cubes without
-#  trouble — and Menger's third rung is 8000 cubes, so the Menger plinth
-#  is held at n=2 and says so on its own plaque. Three of the four are
-#  still climbing at the top of this ladder; one stopped a rung below it.
-#  That is the exhibit, performed on the exhibit's own body.
+#  WHY THE LADDER GREW, and why the original three-rung argument was
+#  half right. That argument said three is the INTERSECTION — the deepest
+#  rung every member can honestly be shown at — and that declaring
+#  `dense` would be a rung two members cannot reach. But the row was
+#  ALREADY doing that at `fine`: Menger's third rung is 8000 leaves, so
+#  the Menger plinth is held at n=2 and its plaque reads HELD. The `room`
+#  cap and the HELD line were built for exactly that case. A rung a member
+#  cannot reach is example_8_4's fault only when the object falls back
+#  SILENTLY; here the plinth stands at its cap and prints the number it
+#  would have needed, which is the opposite of a silent fallback. It is
+#  the exhibit.
+#
+#  AND THAT IS WHAT `dense` IS FOR. Read across the four rungs, the row
+#  stops being a picture of four fractals and becomes a picture of four
+#  LADDERS ENDING:
+#
+#    once    all four climbing
+#    coarse  all four climbing
+#    fine    Menger held on COUNT at n=2 (8000)
+#    dense   Menger still held; Koch now held on THICKNESS at n=3, because
+#            a fourth-rung segment is 0.020 m long against a 0.024 m pen;
+#            Cantor and Sierpinski, whose own ladders are five rungs, are
+#            still climbing past both of them
+#
+#  So at `dense` BOTH walls are biting at once, on two different plinths,
+#  while the two long ladders walk past them — which is precisely the
+#  claim sitting in four registry notes ("the lengths are not ordered by
+#  the branching factor") and which no object has ever shown. Three rungs
+#  could only assert it on a plaque.
+#
+#  `limit` (n=5) IS DECLINED, on the record. At five rungs only Cantor is
+#  still moving: Koch held at 3, Sierpinski held at 4 (5^5 is 3125 leaves
+#  on top of Menger's 400, past this row's own budget), Menger held at 2.
+#  Three quarters of the object would stop answering the axis, and an
+#  exhibit that makes its point by ceasing to be an exhibit has made a
+#  different point. The COUNT wall arriving at the ROOM rather than at a
+#  member is worth this paragraph and is not worth a rung.
 #
 #  NO FIXTURE AND NO SEED. cantor_set and menger_sponge both needed
 #  dna.fixture build_mode=instant before a still could see anything,
@@ -92,10 +118,10 @@ const SRC_KOCH := preload("res://algorithms/fractals/koshcurve/KochCurve3D.gd")
 const SRC_PYRAMID := preload("res://algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd")
 const SRC_MENGER := preload("res://algorithms/fractals/mengersponge/menger_sponge.gd")
 
-## This row's ladder — the intersection of all four. See the note above.
-const TICK_LEVELS := {"once": 1, "coarse": 2, "fine": 3}
+## This row's ladder. FOUR rungs since 2026-08-11 — see the header note on `dense`.
+const TICK_LEVELS := {"once": 1, "coarse": 2, "fine": 3, "dense": 4}
 
-@export_enum("once", "coarse", "fine") var tick: String = "fine"
+@export_enum("once", "coarse", "fine", "dense") var tick: String = "fine"
 
 # ── The row, in metres ───────────────────────────────────────────────
 const SPAN: float = 1.02        ## every fractal's characteristic width
@@ -108,17 +134,46 @@ const BASE_T: float = 0.08
 const BASE_PAD: float = 0.30
 const BASE_D: float = 1.34
 const DECK: float = BASE_T + COL_H + CAP_T   ## the surface each fractal stands on
-const CANTOR_ROW: float = 0.30  ## vertical pitch of the Cantor ladder
+## The Cantor ladder's TOTAL height, held constant while the number of rows changes —
+## the row pitch is CANTOR_STACK / rung, so at rung 3 it is exactly the 0.30 m this
+## artifact shipped with and the default is untouched. The source uses a fixed pitch
+## and lets the stack grow taller with every rung; here the envelope is held and only
+## the texture inside it changes, which is what this row already does for the pyramid
+## (leaf pitch SPAN / 2^d) and for Menger. It also keeps the union AABB identical at
+## every rung, so the fixed camera fits all four variants equally and no value is
+## photographed from further away than another.
+const CANTOR_STACK: float = 0.90
 const KOCH_R: float = 0.012     ## half-thickness of a Koch segment
 const RAIL_TOP_D: float = 3.0   ## the dimension rail runs 0 -> 3
 
 ## key, plaque title, branching factor N, scale divisor s, which wall ends the
 ## ladder, what the leaves are called, and the deepest rung THIS ROOM will build
-## for that member. Only Menger's `room` binds: 20^3 is 8000 leaves.
+## for that member.
+##
+## `room` IS THE EXHIBIT'S OWN DEVICE AND NOT A CONVENIENCE. It is the rung at which
+## this room's drawing of that rule hits the same wall the source hit, and each of the
+## three caps below is a different arrival:
+##
+##   cantor  5  never binds inside this ladder. 2^5 is 32 bars and each is still
+##             thicker than it is short.
+##   koch    3  THICKNESS, arriving here rather than at the source's own n=4. A Koch
+##             segment at rung n is 1.602 / 3^n m long against a 0.024 m box: 0.059 m
+##             at n=3 and 0.020 m at n=4, where the segment is SHORTER THAN THE PEN IS
+##             WIDE and the arch becomes a lumpy sausage. The source declares 3 rungs
+##             ending at n=4 because it draws 4.71 m with a 0.2 m tube; the wall is a
+##             property of the drawing, which is this row's whole thesis, so the row
+##             hits it in a different place and says so on the plaque.
+##   pyramid 4  COUNT. 5^4 = 625 leaves; 5^5 is 3125 on top of Menger's 400, which is
+##             past this row's own budget. The source's ladder declares that fifth
+##             rung and this room cannot draw it.
+##   menger  2  COUNT. 20^3 is 8000 and the source stops there itself.
+##
+## So at `dense` two of the four are held and the two walls are both biting at once,
+## which is the claim the four registry notes make and no object has ever shown.
 const MEMBERS := [
-	{"key": "cantor", "title": "CANTOR SET", "n": 2, "s": 3, "wall": "THICKNESS", "unit": "BARS", "room": 3},
+	{"key": "cantor", "title": "CANTOR SET", "n": 2, "s": 3, "wall": "THICKNESS", "unit": "BARS", "room": 5},
 	{"key": "koch", "title": "KOCH CURVE 3D", "n": 4, "s": 3, "wall": "THICKNESS", "unit": "SEGMENTS", "room": 3},
-	{"key": "pyramid", "title": "SIERPINSKI PYRAMID", "n": 5, "s": 2, "wall": "COUNT", "unit": "CUBES", "room": 3},
+	{"key": "pyramid", "title": "SIERPINSKI PYRAMID", "n": 5, "s": 2, "wall": "COUNT", "unit": "CUBES", "room": 4},
 	{"key": "menger", "title": "MENGER SPONGE", "n": 20, "s": 3, "wall": "COUNT", "unit": "CUBES", "room": 2},
 ]
 
@@ -206,16 +261,21 @@ func _build_row() -> void:
 		var x: float = (float(i) - float(count - 1) * 0.5) * PITCH
 		_add_plinth(x)
 		_add_plaque(m, x, rung)
+		# ONE cap, applied to all four. Cantor and Koch used to be built at the raw
+		# rung because within a three-rung ladder neither ever bound; at four rungs
+		# Koch does, and a per-member exception is how a held plinth quietly becomes
+		# an unheld one that draws garbage.
+		var shown: int = mini(rung, int(m["room"]))
 		var origin: Vector3 = Vector3(x, DECK, 0.0)
 		match str(m["key"]):
 			"cantor":
-				_build_cantor(origin, rung)
+				_build_cantor(origin, shown)
 			"koch":
-				_build_koch(origin, rung)
+				_build_koch(origin, shown)
 			"pyramid":
-				_build_pyramid(origin, mini(rung, int(m["room"])))
+				_build_pyramid(origin, shown)
 			"menger":
-				_build_menger(origin, mini(rung, int(m["room"])))
+				_build_menger(origin, shown)
 
 
 func _add_plinth(x: float) -> void:
@@ -267,7 +327,13 @@ func _add_plaque(m: Dictionary, x: float, rung: int) -> void:
 		% [_ladder_rungs(str(m["key"])), str(m["wall"])])
 	var tail: String = "n=%d   %d %s" % [shown, leaves, str(m["unit"])]
 	if shown < rung:
-		tail += "   HELD - n=%d IS %d" % [rung, leaves * int(m["n"])]
+		# The count at the rung the ROW is standing at, however far above the cap it
+		# is — computed rather than one multiply, which was only ever right when the
+		# gap was exactly one rung. At tick=dense the Menger plinth now says 160000.
+		var would: int = 1
+		for k in range(rung):
+			would *= int(m["n"])
+		tail += "   HELD ON %s - n=%d IS %d" % [str(m["wall"]), rung, would]
 	lines.append(tail)
 
 	var label: Label3D = Label3D.new()
@@ -289,13 +355,22 @@ func _add_plaque(m: Dictionary, x: float, rung: int) -> void:
 ## deck and the original bar stands highest. The hue law is the source's too:
 ## Color.from_hsv(level / max_iterations, 0.8, 0.9).
 ##
+## ONE DEPARTURE, and it is the same departure the pyramid makes. The source's pitch is
+## a fixed number, so its stack grows taller with every rung; here the pitch is
+## CANTOR_STACK / rung, so the stack is always 0.90 m and it is the ROW COUNT inside it
+## that changes. At rung 3 that is 0.30 m and identical to what this artifact shipped.
+## The reason is the row's own thesis: every member's envelope is held constant so that
+## only its texture varies, which is also what keeps the union AABB the same at every
+## rung and stops one value being photographed from further away than another.
+##
 ## `removal` is NOT declared here — see the registry. Its middles are drawn as
 ## the source's default `gone` draws them: not at all.
 func _build_cantor(origin: Vector3, rung: int) -> void:
 	var thick: float = SPAN * 0.034
+	var row_pitch: float = CANTOR_STACK / float(maxi(rung, 1))
 	var segs: Array[Vector2] = [Vector2(0.0, SPAN)]
 	for level in range(rung + 1):
-		var y: float = float(rung - level) * CANTOR_ROW
+		var y: float = float(rung - level) * row_pitch
 		var hue: float = float(level) / float(maxi(rung, 1))
 		var mat: StandardMaterial3D = _flat(Color.from_hsv(hue, 0.8, 0.9))
 		var mesh: BoxMesh = BoxMesh.new()

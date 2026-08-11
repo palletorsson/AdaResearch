@@ -73,8 +73,10 @@ class_name ForesightRange
 #     shrunk to be tidy; the overlap is the finding.
 #   - the mortar keeps its ring LIT at foresight=parabola as well as at landing,
 #     which is exactly what mortar_vector_siege does and no other member does.
-#   - apex crosses are 0.16 m (pad, catapult), 0.28 m (human catapult) and 0.35 m
-#     (mortar), each the size its own source chose for the room it stands in.
+#   - apex crosses stand in the ratio 0.16 : 0.35 : 0.16 : 0.28 — each source's own
+#     literal, kept exactly — scaled by one common MARK_SCALE for the field. What a
+#     dialect carries is the RELATION between the four, and a 0.16 m marker chosen for
+#     a 1.6 m catapult is not the same relation once it stands on an 18 m range.
 #
 # THE ETCHING SAYS WHAT EACH MACHINE IS AND NEVER WHERE IT LANDS. Station plates
 # carry the name and v0 and nothing else. Printing the range in metres would hand
@@ -121,6 +123,29 @@ const FIELD_FRONT := 17.0                      # and run past the furthest landi
 const LANE_WIDTH := 0.62
 const VEL_SCALE := 0.10                        # metres of arrow per (m/s) — catapult's
 const GRAV_ARROW_LEN := 0.60                   # IDENTICAL at all four stations, on purpose
+
+# ── MARK GAUGE — the range's, not the bench's. See dna.deepened. ─────────────
+# MEASURED: at the sweep's framing an 0.035 m beam was 0.7 px of a 760 px frame, so
+# `foresight` was drawn in marks the camera could not resolve and apex against none
+# came back at 0.164 per cent — a number about a line width. The arc already had this
+# correction (its sources emit hairline ImmediateMesh and it draws beads instead); the
+# apex crosses, the plumbs and the landing rings never got it.
+#
+# WHAT IS PRESERVED AND WHAT IS NOT. The apex crosses keep their RATIOS exactly —
+# 0.16 : 0.35 : 0.16 : 0.28, each source's own literal — and are scaled by one common
+# factor, because a 0.16 m marker chosen for a 1.6 m catapult is a different RELATION
+# on an 18 m field than the one that source drew, and it is the relation the dialect
+# was keeping. The landing rings keep their OUTER radius untouched, so the mortar's
+# 2.2 m splash is still 2.2 m and still crosses its neighbours' lanes; only the tube
+# thickens inward. Line weight lands at 0.15 m, which is the gauge of the exhibit's own
+# timber (the human catapult's posts are 0.16 m), so a mark reads as a member of the
+# object rather than a wire laid over it.
+const MARK_SCALE: float = 2.0                  # apex crosses + launch ticks
+const MARK_T: float = 0.15                     # apex cross / launch tick weight
+const PLUMB_T: float = 0.11                    # the plumb is a construction line, lighter
+const RING_T: float = 0.18                     # landing ring tube, drawn INWARD from r
+const CROSS_T: float = 0.12                    # landing crosshairs
+const BEAD_R: float = 0.09                     # trajectory bead radius
 
 const VELOCITY_COLOR := Color(0.20, 1.0, 0.55)     # green = the throw
 const GRAVITY_COLOR := Color(1.0, 0.30, 0.30)      # red = constant down
@@ -559,8 +584,8 @@ func _emit_arc(lane: Node3D, p0: Vector3, v0: Vector3) -> void:
 	var total: float = _time_to_floor(p0, v0)
 	var steps: int = 44
 	var bead := SphereMesh.new()
-	bead.radius = 0.065
-	bead.height = 0.13
+	bead.radius = BEAD_R
+	bead.height = BEAD_R * 2.0
 	bead.radial_segments = 8
 	bead.rings = 4
 	var mat: StandardMaterial3D = _glow(TRAJECTORY_COLOR, 2.0)
@@ -577,15 +602,21 @@ func _emit_arc(lane: Node3D, p0: Vector3, v0: Vector3) -> void:
 
 ## foresight:apex — the summit only. How high this throws, and nothing about where it
 ## comes down: a tick out of the muzzle, a cross at the peak, a plumb line to the floor.
+##
+## THE PLUMB HAS NO FOOT MARK, and that is not an omission. A cross on the floor under
+## the summit would be half the range for any near-symmetric arc, which hands back the
+## number this value exists to withhold — [[catapult]]'s `none` reasoning, one rung up.
+## It is also why apex is and should remain the THINNEST reading on this axis: it shows
+## the least of the flight while still showing something.
 func _emit_apex(lane: Node3D, st: Dictionary, p0: Vector3, v0: Vector3) -> void:
 	var mat: StandardMaterial3D = _glow(TRAJECTORY_COLOR, 2.0)
 	var apex: Vector3 = _apex_point(p0, v0)
-	var s: float = float(st["apex_s"])
-	_beam(lane, p0, p0 + v0.normalized() * float(st["tick"]), 0.035, mat, "LaunchTick")
-	_beam(lane, apex - Vector3(s, 0.0, 0.0), apex + Vector3(s, 0.0, 0.0), 0.035, mat, "ApexX")
-	_beam(lane, apex - Vector3(0.0, s, 0.0), apex + Vector3(0.0, s, 0.0), 0.035, mat, "ApexY")
-	_beam(lane, apex - Vector3(0.0, 0.0, s), apex + Vector3(0.0, 0.0, s), 0.035, mat, "ApexZ")
-	_beam(lane, apex, Vector3(apex.x, FLOOR_Y + 0.02, apex.z), 0.02, mat, "Plumb")
+	var s: float = float(st["apex_s"]) * MARK_SCALE
+	_beam(lane, p0, p0 + v0.normalized() * float(st["tick"]) * MARK_SCALE, MARK_T, mat, "LaunchTick")
+	_beam(lane, apex - Vector3(s, 0.0, 0.0), apex + Vector3(s, 0.0, 0.0), MARK_T, mat, "ApexX")
+	_beam(lane, apex - Vector3(0.0, s, 0.0), apex + Vector3(0.0, s, 0.0), MARK_T, mat, "ApexY")
+	_beam(lane, apex - Vector3(0.0, 0.0, s), apex + Vector3(0.0, 0.0, s), MARK_T, mat, "ApexZ")
+	_beam(lane, apex, Vector3(apex.x, FLOOR_Y + 0.02, apex.z), PLUMB_T, mat, "Plumb")
 
 
 ## foresight:landing — the target only, at each machine's OWN radius: a stone lands on
@@ -599,7 +630,9 @@ func _emit_landing(lane: Node3D, st: Dictionary, p0: Vector3, v0: Vector3) -> vo
 	var ring := MeshInstance3D.new()
 	ring.name = "LandingRing"
 	var tm := TorusMesh.new()
-	tm.inner_radius = maxf(r - 0.055, 0.02)
+	# Thickened INWARD only: outer_radius is the source's own literal and stays put, so
+	# the mortar's ring is still 2.2 m and still crosses the lanes either side of it.
+	tm.inner_radius = maxf(r - RING_T, 0.02)
 	tm.outer_radius = r
 	tm.rings = 40
 	tm.ring_segments = 8
@@ -610,9 +643,9 @@ func _emit_landing(lane: Node3D, st: Dictionary, p0: Vector3, v0: Vector3) -> vo
 
 	var c: float = r * 0.5
 	_beam(lane, Vector3(hit.x - c, FLOOR_Y + 0.04, hit.z),
-		Vector3(hit.x + c, FLOOR_Y + 0.04, hit.z), 0.028, mat, "CrossX")
+		Vector3(hit.x + c, FLOOR_Y + 0.04, hit.z), CROSS_T, mat, "CrossX")
 	_beam(lane, Vector3(hit.x, FLOOR_Y + 0.04, hit.z - c),
-		Vector3(hit.x, FLOOR_Y + 0.04, hit.z + c), 0.028, mat, "CrossZ")
+		Vector3(hit.x, FLOOR_Y + 0.04, hit.z + c), CROSS_T, mat, "CrossZ")
 
 
 # ═════════════════════════════════════════════════════════════════════════
