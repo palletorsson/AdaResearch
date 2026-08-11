@@ -1,0 +1,268 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "curation_station",
+ "axis": "bay",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.63251,
+ "best_other_view": "square-on",
+ "best_other_mean_focus": 0.61006,
+ "ratio": 0.96,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.63251,
+   "best_pair": {
+    "a": "hall",
+    "b": "none",
+    "focus": 0.75012,
+    "colour": 0.79125
+   },
+   "pairs": [
+    {
+     "a": "hall",
+     "b": "apse",
+     "focus": 0.45336,
+     "colour": 0.50112
+    },
+    {
+     "a": "hall",
+     "b": "gate",
+     "focus": 0.7456,
+     "colour": 0.78369
+    },
+    {
+     "a": "hall",
+     "b": "none",
+     "focus": 0.75012,
+     "colour": 0.79125
+    },
+    {
+     "a": "apse",
+     "b": "gate",
+     "focus": 0.74733,
+     "colour": 0.78804
+    },
+    {
+     "a": "apse",
+     "b": "none",
+     "focus": 0.74598,
+     "colour": 0.78394
+    },
+    {
+     "a": "gate",
+     "b": "none",
+     "focus": 0.35265,
+     "colour": 0.38599
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.53414,
+   "best_pair": {
+    "a": "hall",
+    "b": "none",
+    "focus": 0.64755,
+    "colour": 0.66542
+   },
+   "pairs": [
+    {
+     "a": "hall",
+     "b": "apse",
+     "focus": 0.34702,
+     "colour": 0.38095
+    },
+    {
+     "a": "hall",
+     "b": "gate",
+     "focus": 0.55997,
+     "colour": 0.59094
+    },
+    {
+     "a": "hall",
+     "b": "none",
+     "focus": 0.64755,
+     "colour": 0.66542
+    },
+    {
+     "a": "apse",
+     "b": "gate",
+     "focus": 0.62385,
+     "colour": 0.64623
+    },
+    {
+     "a": "apse",
+     "b": "none",
+     "focus": 0.61767,
+     "colour": 0.63365
+    },
+    {
+     "a": "gate",
+     "b": "none",
+     "focus": 0.40881,
+     "colour": 0.43621
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.61006,
+   "best_pair": {
+    "a": "hall",
+    "b": "none",
+    "focus": 0.76989,
+    "colour": 0.81593
+   },
+   "pairs": [
+    {
+     "a": "hall",
+     "b": "apse",
+     "focus": 0.18809,
+     "colour": 0.22425
+    },
+    {
+     "a": "hall",
+     "b": "gate",
+     "focus": 0.76324,
+     "colour": 0.80313
+    },
+    {
+     "a": "hall",
+     "b": "none",
+     "focus": 0.76989,
+     "colour": 0.81593
+    },
+    {
+     "a": "apse",
+     "b": "gate",
+     "focus": 0.76295,
+     "colour": 0.80325
+    },
+    {
+     "a": "apse",
+     "b": "none",
+     "focus": 0.76266,
+     "colour": 0.80871
+    },
+    {
+     "a": "gate",
+     "b": "none",
+     "focus": 0.41354,
+     "colour": 0.45778
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.54406,
+   "best_pair": {
+    "a": "apse",
+    "b": "gate",
+    "focus": 0.73924,
+    "colour": 0.77229
+   },
+   "pairs": [
+    {
+     "a": "hall",
+     "b": "apse",
+     "focus": 0.15756,
+     "colour": 0.17905
+    },
+    {
+     "a": "hall",
+     "b": "gate",
+     "focus": 0.73712,
+     "colour": 0.77055
+    },
+    {
+     "a": "hall",
+     "b": "none",
+     "focus": 0.73866,
+     "colour": 0.7718
+    },
+    {
+     "a": "apse",
+     "b": "gate",
+     "focus": 0.73924,
+     "colour": 0.77229
+    },
+    {
+     "a": "apse",
+     "b": "none",
+     "focus": 0.7377,
+     "colour": 0.77105
+    },
+    {
+     "a": "gate",
+     "b": "none",
+     "focus": 0.15408,
+     "colour": 0.17417
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.53243,
+   "best_pair": {
+    "a": "hall",
+    "b": "none",
+    "focus": 0.69618,
+    "colour": 0.73735
+   },
+   "pairs": [
+    {
+     "a": "hall",
+     "b": "apse",
+     "focus": 0.38953,
+     "colour": 0.43354
+    },
+    {
+     "a": "hall",
+     "b": "gate",
+     "focus": 0.53033,
+     "colour": 0.57043
+    },
+    {
+     "a": "hall",
+     "b": "none",
+     "focus": 0.69618,
+     "colour": 0.73735
+    },
+    {
+     "a": "apse",
+     "b": "gate",
+     "focus": 0.61983,
+     "colour": 0.65862
+    },
+    {
+     "a": "apse",
+     "b": "none",
+     "focus": 0.5695,
+     "colour": 0.59984
+    },
+    {
+     "a": "gate",
+     "b": "none",
+     "focus": 0.38924,
+     "colour": 0.43658
+    }
+   ]
+  }
+ }
+}

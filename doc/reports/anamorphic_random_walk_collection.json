@@ -1,0 +1,388 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "random_walk_collection",
+ "axis": "residue",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.05317,
+ "best_other_view": "opposite",
+ "best_other_mean_focus": 0.163,
+ "ratio": 3.07,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.05317,
+   "best_pair": {
+    "a": "envelope",
+    "b": "ensemble",
+    "focus": 0.09973,
+    "colour": 0.15366
+   },
+   "pairs": [
+    {
+     "a": "path",
+     "b": "head",
+     "focus": 0.01633,
+     "colour": 0.03969
+    },
+    {
+     "a": "path",
+     "b": "tail",
+     "focus": 0.01811,
+     "colour": 0.04415
+    },
+    {
+     "a": "path",
+     "b": "envelope",
+     "focus": 0.07156,
+     "colour": 0.10339
+    },
+    {
+     "a": "path",
+     "b": "ensemble",
+     "focus": 0.05983,
+     "colour": 0.11533
+    },
+    {
+     "a": "head",
+     "b": "tail",
+     "focus": 0.00618,
+     "colour": 0.01528
+    },
+    {
+     "a": "head",
+     "b": "envelope",
+     "focus": 0.07629,
+     "colour": 0.10138
+    },
+    {
+     "a": "head",
+     "b": "ensemble",
+     "focus": 0.05459,
+     "colour": 0.09369
+    },
+    {
+     "a": "tail",
+     "b": "envelope",
+     "focus": 0.07181,
+     "colour": 0.08904
+    },
+    {
+     "a": "tail",
+     "b": "ensemble",
+     "focus": 0.05723,
+     "colour": 0.10088
+    },
+    {
+     "a": "envelope",
+     "b": "ensemble",
+     "focus": 0.09973,
+     "colour": 0.15366
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.163,
+   "best_pair": {
+    "a": "envelope",
+    "b": "ensemble",
+    "focus": 0.28072,
+    "colour": 0.3592
+   },
+   "pairs": [
+    {
+     "a": "path",
+     "b": "head",
+     "focus": 0.02468,
+     "colour": 0.05236
+    },
+    {
+     "a": "path",
+     "b": "tail",
+     "focus": 0.03938,
+     "colour": 0.08803
+    },
+    {
+     "a": "path",
+     "b": "envelope",
+     "focus": 0.19952,
+     "colour": 0.25622
+    },
+    {
+     "a": "path",
+     "b": "ensemble",
+     "focus": 0.20809,
+     "colour": 0.30135
+    },
+    {
+     "a": "head",
+     "b": "tail",
+     "focus": 0.01572,
+     "colour": 0.03841
+    },
+    {
+     "a": "head",
+     "b": "envelope",
+     "focus": 0.2069,
+     "colour": 0.24832
+    },
+    {
+     "a": "head",
+     "b": "ensemble",
+     "focus": 0.22066,
+     "colour": 0.313
+    },
+    {
+     "a": "tail",
+     "b": "envelope",
+     "focus": 0.21205,
+     "colour": 0.26476
+    },
+    {
+     "a": "tail",
+     "b": "ensemble",
+     "focus": 0.22231,
+     "colour": 0.32051
+    },
+    {
+     "a": "envelope",
+     "b": "ensemble",
+     "focus": 0.28072,
+     "colour": 0.3592
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "path",
+    "b": "head",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "path",
+     "b": "head",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "path",
+     "b": "tail",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "path",
+     "b": "envelope",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "path",
+     "b": "ensemble",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "head",
+     "b": "tail",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "head",
+     "b": "envelope",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "head",
+     "b": "ensemble",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tail",
+     "b": "envelope",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tail",
+     "b": "ensemble",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "envelope",
+     "b": "ensemble",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.11426,
+   "best_pair": {
+    "a": "envelope",
+    "b": "ensemble",
+    "focus": 0.20281,
+    "colour": 0.25741
+   },
+   "pairs": [
+    {
+     "a": "path",
+     "b": "head",
+     "focus": 0.02521,
+     "colour": 0.05229
+    },
+    {
+     "a": "path",
+     "b": "tail",
+     "focus": 0.02535,
+     "colour": 0.05321
+    },
+    {
+     "a": "path",
+     "b": "envelope",
+     "focus": 0.1488,
+     "colour": 0.18843
+    },
+    {
+     "a": "path",
+     "b": "ensemble",
+     "focus": 0.15089,
+     "colour": 0.20998
+    },
+    {
+     "a": "head",
+     "b": "tail",
+     "focus": 0.01527,
+     "colour": 0.02135
+    },
+    {
+     "a": "head",
+     "b": "envelope",
+     "focus": 0.14738,
+     "colour": 0.16987
+    },
+    {
+     "a": "head",
+     "b": "ensemble",
+     "focus": 0.14742,
+     "colour": 0.18416
+    },
+    {
+     "a": "tail",
+     "b": "envelope",
+     "focus": 0.14166,
+     "colour": 0.16832
+    },
+    {
+     "a": "tail",
+     "b": "ensemble",
+     "focus": 0.13783,
+     "colour": 0.17797
+    },
+    {
+     "a": "envelope",
+     "b": "ensemble",
+     "focus": 0.20281,
+     "colour": 0.25741
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "path",
+    "b": "head",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "path",
+     "b": "head",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "path",
+     "b": "tail",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "path",
+     "b": "envelope",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "path",
+     "b": "ensemble",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "head",
+     "b": "tail",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "head",
+     "b": "envelope",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "head",
+     "b": "ensemble",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tail",
+     "b": "envelope",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "tail",
+     "b": "ensemble",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "envelope",
+     "b": "ensemble",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  }
+ }
+}

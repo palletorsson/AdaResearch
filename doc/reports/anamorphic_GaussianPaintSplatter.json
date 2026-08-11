@@ -1,0 +1,388 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "GaussianPaintSplatter",
+ "axis": "refusal",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.01252,
+ "best_other_view": "square-on",
+ "best_other_mean_focus": 0.01413,
+ "ratio": 1.13,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.01252,
+   "best_pair": {
+    "a": "echo",
+    "b": "ghost",
+    "focus": 0.01523,
+    "colour": 0.02337
+   },
+   "pairs": [
+    {
+     "a": "void",
+     "b": "rim",
+     "focus": 0.01076,
+     "colour": 0.01896
+    },
+    {
+     "a": "void",
+     "b": "echo",
+     "focus": 0.01111,
+     "colour": 0.01877
+    },
+    {
+     "a": "void",
+     "b": "ghost",
+     "focus": 0.01194,
+     "colour": 0.01786
+    },
+    {
+     "a": "void",
+     "b": "none",
+     "focus": 0.00968,
+     "colour": 0.0186
+    },
+    {
+     "a": "rim",
+     "b": "echo",
+     "focus": 0.01359,
+     "colour": 0.02311
+    },
+    {
+     "a": "rim",
+     "b": "ghost",
+     "focus": 0.01497,
+     "colour": 0.02347
+    },
+    {
+     "a": "rim",
+     "b": "none",
+     "focus": 0.01136,
+     "colour": 0.02253
+    },
+    {
+     "a": "echo",
+     "b": "ghost",
+     "focus": 0.01523,
+     "colour": 0.02337
+    },
+    {
+     "a": "echo",
+     "b": "none",
+     "focus": 0.01286,
+     "colour": 0.02362
+    },
+    {
+     "a": "ghost",
+     "b": "none",
+     "focus": 0.01369,
+     "colour": 0.02307
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "void",
+    "b": "rim",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "void",
+     "b": "rim",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "void",
+     "b": "echo",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "void",
+     "b": "ghost",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "void",
+     "b": "none",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "rim",
+     "b": "echo",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "rim",
+     "b": "ghost",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "rim",
+     "b": "none",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "echo",
+     "b": "ghost",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "echo",
+     "b": "none",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "ghost",
+     "b": "none",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.01413,
+   "best_pair": {
+    "a": "rim",
+    "b": "echo",
+    "focus": 0.01555,
+    "colour": 0.02814
+   },
+   "pairs": [
+    {
+     "a": "void",
+     "b": "rim",
+     "focus": 0.01343,
+     "colour": 0.02421
+    },
+    {
+     "a": "void",
+     "b": "echo",
+     "focus": 0.01276,
+     "colour": 0.02317
+    },
+    {
+     "a": "void",
+     "b": "ghost",
+     "focus": 0.01296,
+     "colour": 0.02112
+    },
+    {
+     "a": "void",
+     "b": "none",
+     "focus": 0.01255,
+     "colour": 0.024
+    },
+    {
+     "a": "rim",
+     "b": "echo",
+     "focus": 0.01555,
+     "colour": 0.02814
+    },
+    {
+     "a": "rim",
+     "b": "ghost",
+     "focus": 0.01501,
+     "colour": 0.02545
+    },
+    {
+     "a": "rim",
+     "b": "none",
+     "focus": 0.0151,
+     "colour": 0.02918
+    },
+    {
+     "a": "echo",
+     "b": "ghost",
+     "focus": 0.01517,
+     "colour": 0.02538
+    },
+    {
+     "a": "echo",
+     "b": "none",
+     "focus": 0.01429,
+     "colour": 0.02773
+    },
+    {
+     "a": "ghost",
+     "b": "none",
+     "focus": 0.01447,
+     "colour": 0.02587
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.00584,
+   "best_pair": {
+    "a": "echo",
+    "b": "none",
+    "focus": 0.0064,
+    "colour": 0.01232
+   },
+   "pairs": [
+    {
+     "a": "void",
+     "b": "rim",
+     "focus": 0.00556,
+     "colour": 0.01013
+    },
+    {
+     "a": "void",
+     "b": "echo",
+     "focus": 0.00551,
+     "colour": 0.00993
+    },
+    {
+     "a": "void",
+     "b": "ghost",
+     "focus": 0.00518,
+     "colour": 0.00894
+    },
+    {
+     "a": "void",
+     "b": "none",
+     "focus": 0.00608,
+     "colour": 0.01057
+    },
+    {
+     "a": "rim",
+     "b": "echo",
+     "focus": 0.00608,
+     "colour": 0.01192
+    },
+    {
+     "a": "rim",
+     "b": "ghost",
+     "focus": 0.00568,
+     "colour": 0.01089
+    },
+    {
+     "a": "rim",
+     "b": "none",
+     "focus": 0.00627,
+     "colour": 0.01204
+    },
+    {
+     "a": "echo",
+     "b": "ghost",
+     "focus": 0.00576,
+     "colour": 0.0111
+    },
+    {
+     "a": "echo",
+     "b": "none",
+     "focus": 0.0064,
+     "colour": 0.01232
+    },
+    {
+     "a": "ghost",
+     "b": "none",
+     "focus": 0.0059,
+     "colour": 0.01094
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.01073,
+   "best_pair": {
+    "a": "echo",
+    "b": "none",
+    "focus": 0.01292,
+    "colour": 0.02503
+   },
+   "pairs": [
+    {
+     "a": "void",
+     "b": "rim",
+     "focus": 0.00852,
+     "colour": 0.01826
+    },
+    {
+     "a": "void",
+     "b": "echo",
+     "focus": 0.00811,
+     "colour": 0.01851
+    },
+    {
+     "a": "void",
+     "b": "ghost",
+     "focus": 0.00797,
+     "colour": 0.0157
+    },
+    {
+     "a": "void",
+     "b": "none",
+     "focus": 0.0094,
+     "colour": 0.01892
+    },
+    {
+     "a": "rim",
+     "b": "echo",
+     "focus": 0.01209,
+     "colour": 0.02466
+    },
+    {
+     "a": "rim",
+     "b": "ghost",
+     "focus": 0.0114,
+     "colour": 0.02045
+    },
+    {
+     "a": "rim",
+     "b": "none",
+     "focus": 0.01288,
+     "colour": 0.02433
+    },
+    {
+     "a": "echo",
+     "b": "ghost",
+     "focus": 0.01161,
+     "colour": 0.02218
+    },
+    {
+     "a": "echo",
+     "b": "none",
+     "focus": 0.01292,
+     "colour": 0.02503
+    },
+    {
+     "a": "ghost",
+     "b": "none",
+     "focus": 0.01243,
+     "colour": 0.02177
+    }
+   ]
+  }
+ }
+}

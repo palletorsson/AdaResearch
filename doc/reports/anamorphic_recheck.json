@@ -1,0 +1,84 @@
+{
+ "_note": "Every INERT / NO RENDER verdict in the corpus, re-measured from five standpoints after the anamorphic finding. The canonical view (yaw 0.62, pitch -0.26) is the one every published DNA tile was shot from; if an axis bites from elsewhere, the verdict described where the camera stood and not the artifact.",
+ "standpoints": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.76,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "results": [
+  {
+   "artifact": "GaussianPaintSplatter",
+   "axis": "refusal",
+   "canonical": 0.01252,
+   "best_other": 0.01413,
+   "best_view": "square-on",
+   "verdict": "GENUINELY INERT - flat from every standpoint"
+  },
+  {
+   "artifact": "boids_aquarium",
+   "axis": "accord",
+   "canonical": 0.14603,
+   "best_other": 0.17191,
+   "best_view": "from-above",
+   "verdict": "STALE - bites at canonical now; the INERT verdict predates the harness fixes"
+  },
+  {
+   "artifact": "curation_station",
+   "axis": "bay",
+   "canonical": 0.63251,
+   "best_other": 0.61006,
+   "best_view": "square-on",
+   "verdict": "STALE - bites at canonical now; the INERT verdict predates the harness fixes"
+  },
+  {
+   "artifact": "koch_curve",
+   "axis": "evidence",
+   "canonical": 0.0,
+   "best_other": 0.0,
+   "best_view": "opposite",
+   "verdict": "GENUINELY INERT - flat from every standpoint"
+  },
+  {
+   "artifact": "random_number_book_page_1955",
+   "axis": "disclosure",
+   "canonical": 0.0,
+   "best_other": 0.62499,
+   "best_view": "opposite",
+   "verdict": "ANAMORPHIC - invisible from canonical, bites from opposite"
+  },
+  {
+   "artifact": "random_walk_collection",
+   "axis": "residue",
+   "canonical": 0.05317,
+   "best_other": 0.163,
+   "best_view": "opposite",
+   "verdict": "ANAMORPHIC - invisible from canonical, bites from opposite"
+  },
+  {
+   "artifact": "reaction_diffusion",
+   "axis": "inoculation",
+   "canonical": 0.0,
+   "best_other": 0.21837,
+   "best_view": "from-above",
+   "verdict": "ANAMORPHIC - invisible from canonical, bites from from-above"
+  }
+ ],
+ "library_rack.guard": "NOT RE-CHECKED FROM ANGLES, and it would be pointless: it renders nothing from anywhere because it refuses to build without a collection key. Settled separately in dna_bite_batch2.json."
+}
