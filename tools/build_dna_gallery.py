@@ -47,12 +47,28 @@ SWEEP_OUT = REPO / "ada_run" / "sweep"
 # the same cure: one implementation, in the module that already got it right.
 
 
-def sweep(token: str, axes: dict, cap: int) -> list[dict]:
+def sweep(token: str, axes: dict, cap: int, coverage: dict = None) -> list[dict]:
     """One Godot boot; returns [{file, params}] for the frames it produced.
 
     Serialised by construction — the caller loops. Two Godot instances cannot run at once
     (the second dies on the user:// lock), so this must never be parallelised.
+
+    WHAT `coverage` IS FOR, and why it is not optional in spirit. The variant budget below
+    trims a declared axis until the cross product fits `cap`, and it trims from the END of
+    the declared value list. It used to do that in silence. dot_aligner declares
+    opening(4) x workings(4); at the default cap of 9 that renders 4 x 2, and the critic
+    then read `workings` over `outcome` and `trace` alone and called the axis INERT — a
+    verdict about two values, published as a verdict about four. Worse, the two it dropped
+    included `operands`, which is the artifact's own default and therefore the baseline the
+    other values are supposed to differ FROM.
+
+    A dropped value is invisible downstream: the manifest lists what rendered, so a
+    truncated axis looks exactly like a complete one. CLAUDE.md's rule is that a workflow
+    which bounds coverage must say what it dropped. This records it, per axis, so the
+    manifest carries the denominator with the measurement.
     """
+    if coverage is None:
+        coverage = {}
     # Stale frames from a previous artifact would be harvested as this one's variants.
     for old in SWEEP_OUT.glob(f"{token}__*.png"):
         old.unlink()
@@ -61,13 +77,26 @@ def sweep(token: str, axes: dict, cap: int) -> list[dict]:
     picked: list[tuple[str, list]] = []
     total = 1
     for name, vals in axes.items():
+        declared = list(vals)
         if len(picked) == 2:
-            break
-        v = list(vals)
+            # The sweep renders at most two axes. A third is not measured at all.
+            coverage[name] = {"declared": declared, "swept": [], "dropped": declared,
+                              "reason": "only the first two declared axes are swept"}
+            continue
+        v = list(declared)
         while len(v) > 1 and total * len(v) > cap:
             v = v[:-1]
         if len(v) < 2:
+            coverage[name] = {"declared": declared, "swept": [], "dropped": declared,
+                              "reason": f"cap={cap} left room for fewer than 2 values"}
             continue
+        if len(v) < len(declared):
+            coverage[name] = {"declared": declared, "swept": list(v),
+                              "dropped": declared[len(v):],
+                              "reason": f"cap={cap} on the axis cross product"}
+        else:
+            coverage[name] = {"declared": declared, "swept": list(v), "dropped": [],
+                              "reason": ""}
         picked.append((name, v))
         total *= len(v)
     if not picked:
@@ -95,7 +124,16 @@ def main() -> int:
     slug = ""
     tokens: list[str] = []
     only: set[str] = set()
-    cap = 9
+    # WHY 16 AND NOT 9. The cap bounds the AXIS CROSS PRODUCT, and the corpus's standard
+    # shape is two axes of four values - exactly 16. At 9 that shape was silently swept
+    # 4x2: the second axis lost half its values, the gallery published a full-looking row,
+    # and the critic issued a whole-axis verdict over a subset. Audited across every
+    # manifest, 94 axes in 29 galleries came out short this way, boolean_surfaces included
+    # - where the dropped values were, in five of five cases, the ones the authors had
+    # already flagged as the doubtful ones. `partial_axes` records the shortfall now, but
+    # recording a fault is not the same as not having it, and a default that silently
+    # halves the most common shape in the corpus is the wrong default.
+    cap = 16
     title = ""
     for a in sys.argv[1:]:
         if a.startswith("--slug="):
@@ -120,13 +158,21 @@ def main() -> int:
     # artifacts silently drops every other variant — a partial rebuild that looks complete
     # is the same failure class as a sweep of identical tiles.
     entries: list[dict] = []
+    coverage: dict = {}
     if only:
         mf_old = out / "manifest.json"
         if mf_old.exists():
             try:
-                kept = json.loads(mf_old.read_text(encoding="utf-8")).get("entries", [])
+                old = json.loads(mf_old.read_text(encoding="utf-8"))
+                kept = old.get("entries", [])
                 entries = [e for e in kept if str(e.get("prop")) not in only]
                 print(f"  (keeping {len(entries)} variant(s) from artifacts not rebuilt)")
+                # Carry the denominator forward with the frames it belongs to, or an
+                # --only rebuild would silently promote another artifact's partial axis
+                # back to looking complete.
+                for k, c in (old.get("partial_axes") or {}).items():
+                    if str(k).split(".")[0] not in only:
+                        coverage[k] = c
             except Exception:
                 entries = []
 
@@ -161,7 +207,14 @@ def main() -> int:
                 continue
 
         print(f"  {token}: sweeping {list(axes)} ...")
-        frames = sweep(token, axes, cap)
+        cov: dict = {}
+        frames = sweep(token, axes, cap, cov)
+        for ax_name, c in cov.items():
+            if c["dropped"]:
+                coverage[f"{token}.{ax_name}"] = c
+                print(f"  {token}.{ax_name}: PARTIAL — swept {len(c['swept'])}/"
+                      f"{len(c['declared'])} values, dropped {c['dropped']} ({c['reason']}). "
+                      f"Any verdict on this axis is about the swept values only.")
         if not frames:
             print(f"  {token}: sweep produced no frames")
             continue
@@ -198,8 +251,19 @@ def main() -> int:
             f"{len(set(e['prop'] for e in entries))} promoted artifacts, each swept across "
             "the DNA axes it declares in the registry."),
         "capture_size": [900, 900],
+        # The denominator, travelling with the measurement. Absent or empty means every
+        # declared value of every swept axis rendered; a key here means the axis was
+        # measured over a SUBSET and no verdict on it covers the whole declaration.
+        "partial_axes": coverage,
         "entries": entries,
     }, indent=1), encoding="utf-8")
+    if coverage:
+        print(f"\n{len(coverage)} axis/axes swept PARTIALLY — recorded in manifest "
+              f"under `partial_axes`:")
+        for k, c in sorted(coverage.items()):
+            print(f"  {k}: {len(c['swept'])}/{len(c['declared'])} values "
+                  f"— dropped {c['dropped']}")
+        print("  Re-run with a larger --max to close these.")
     print(f"\n{len(entries)} variants -> {out}/manifest.json")
     return 0
 
