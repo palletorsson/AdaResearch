@@ -19,8 +19,9 @@ class_name SortingHall
 #   bubble sort has 9 cells in FINAL position at the right end and insertion sort has 0 —
 #   its sorted prefix of about 23 is sorted and provisional, the largest values gathered
 #   in order, every one of them still to move. Both cartridges paint their region green.
-#   The two sorts cost identically (992 cells each, measured), and selection, which the
-#   corpus calls a bureaucrat's economy, arrives having moved 32.
+#   The two sorts cost within 3% of each other (993 and 1024, measured), and selection,
+#   which the corpus calls a bureaucrat's economy, pays 544 on the same array and 528 on
+#   one already in order — it is the row that does not care what it was given.
 # truth: the same start and the same end do not make the same journey. Six algorithms
 #   agree completely about where the array is going and about nothing else, and the
 #   only place that disagreement is visible is the middle, which no single artifact in
@@ -56,7 +57,8 @@ class_name SortingHall
 # bubble sort's compares one adjacent pair. Budgeting in steps would have said heap
 # sort costs a tenth of bubble sort, which is a fact about animation pacing wearing the
 # costume of a fact about complexity. So the hall never asks the algorithm how hard it
-# is working. It reads the array after every step and counts how many cells moved. That
+# is working. It reads the array after every step and counts how many cells moved, with a
+# FLOOR OF ONE PER STEP so that work which writes a cell back unchanged still costs. That
 # is measured from OUTSIDE, in the same currency for all six, it is what the eye can
 # check against the picture, and it is exactly the quantity the family's own note is
 # about: for the two adjacent-swap sorts it is twice the inversion count.
@@ -86,19 +88,31 @@ class_name SortingHall
 # framed to the plates and photographed with its top row cropped. The board covers the
 # true extent and not a millimetre more.
 #
-# MEASURED BEFORE IT WAS BUILT. The six cartridge step() functions were ported to Python
-# and the per-step cell diff counted exactly as _changed() below counts it, because a
-# gauge that draws an unverified number is worse than no gauge. Cells moved over a whole
-# run at array_size 32 —
-#         reversed:  bubble 992  insertion 992  selection  32  merge 160  quick 112  heap 143
-#         sorted:    bubble   0  insertion   0  selection   0  merge   0  quick  32  heap 193
-# — and all six ports finish sorted, which is the port's check on itself. Two things in
-# that table were wrong in the draft this file replaces: merge sort was assumed to churn
-# on an already-sorted array (it writes every cell and changes none, so it moves 0), and
-# heap sort's build was assumed expensive on `reversed` (a descending array is already a
-# max-heap at every node, so the build moves 0 of its 143). The input that ruins both
-# adjacency sorts is free for heap sort, and the input that costs them nothing is heap
-# sort's worst in the whole table.
+# MEASURED, AND THEN MEASURED AGAIN AFTER THE UNIT WAS REPAIRED. The first table was a
+# Python port of the six cartridge step() functions counting only cells whose value
+# CHANGED, and it reported merge sort at 0 on an already-sorted array — it writes every
+# cell and changes none. That is not an economy, it is a blind spot, and it made the hall
+# say merge sort is free on sorted input. With the floor of one unit per step (see _drive)
+# the whole table is different enough that it was re-read from the artifact itself rather
+# than re-derived, by commons/testing/probe_sorting_hall_work.gd. Totals over a whole run
+# at array_size 32, in cell-moves floored at one per step —
+#
+#     input            bubble  insertion  selection    merge    quick     heap
+#     reversed            993       1024        544      161      215      161
+#     shuffled            694        516        556      161      218      181
+#     nearly_sorted        65         38        531      161      145      196
+#     sorted               32         32        528      161      142      195
+#
+# READ IT DOWN THE COLUMNS, because that is what `initial_order` is for. Two rows do not
+# care what they were given: merge sort pays 161 under every input, to the unit, and
+# selection sort pays between 528 and 556 — a spread of 5% across inputs that make bubble
+# sort differ by a factor of 31. Two rows care about nothing else: bubble and insertion
+# fall from 993 and 1024 to 32 and 32. And two care in ways nobody would guess from the
+# complexity class — heap sort's worst input in the whole table is the SORTED one (195
+# against 161 on reversed, because a descending array is already a max-heap at every node
+# and its build costs nothing), and this quicksort is cheapest on sorted and dearest on
+# shuffled, so its cartridge is plainly not pivoting on the first element. The famous
+# degenerate case is not in this table and the hall must not be read as showing it.
 #
 # DETERMINISTIC. order_seed defaults to 20260805 — the substrate's own documented sweep
 # pin, not 0 — because at 0 the shipped shuffle is the global unseeded randi() and five
@@ -163,6 +177,8 @@ const MOMENTS: Dictionary = {"start": 0.0, "quarter": 0.25, "half": 0.5, "done":
 const ROW_GAP: float = 0.06
 ## Gap between the left edge of a row's base plate and its work gauge.
 const GAUGE_GAP: float = 0.05
+## The work gauge's width, in bar widths. See the note at its use.
+const GAUGE_WIDTHS: float = 3.4
 const PANEL_MARGIN: float = 0.06
 const PANEL_T: float = 0.02
 const PANEL_Z: float = -0.105
@@ -183,7 +199,7 @@ var _built: bool = false
 ## reading this artifact from a report rather than from a photograph.
 var _totals: Array = []
 var _spent: Array = []
-var _unit: String = "writes"
+var _unit: String = "cell-moves, floor 1/step"
 
 
 func _ready() -> void:
@@ -240,7 +256,14 @@ func _build() -> void:
 			plate_w = ((plate as MeshInstance3D).mesh as BoxMesh).size.x
 
 	var pitch: float = bar_h + ROW_GAP
-	var gauge_w: float = float(ROW_RENDERER.BAR_BASE_WIDTH)
+	# GAUGED TO THE HALL, NOT TO A BAR. One bar's width is the right pen for a mark that
+	# sits among the bars and has to be read against them; the work gauge is not that. It
+	# is the hall's second subject — the whole content of `initial_order` is what the
+	# input COSTS — and at one bar wide it was three pixels in a 760 px frame, a claim
+	# nobody in the room could read and the bench could not measure either. The board
+	# grows by the difference and the camera, which is fitted to the union box across
+	# every value, takes the whole thing.
+	var gauge_w: float = float(ROW_RENDERER.BAR_BASE_WIDTH) * GAUGE_WIDTHS
 	var gauge_x: float = -(plate_w * 0.5) - GAUGE_GAP - gauge_w * 0.5
 
 	# Content extents in row-local x, then a shift so the board is centred on the
@@ -257,13 +280,11 @@ func _build() -> void:
 			x_shift, float(ROWS.size() - 1 - i) * pitch, 0.0)
 
 	# ── The work gauges ──────────────────────────────────────────────────────────
-	# One column per row: how many cells that algorithm rewrites on THIS input, as a
-	# fraction of the busiest row in the frame, with the elapsed portion filled. The
-	# columns differ; the fills all sit at the same relative height, because the whole
-	# method is one fraction cut through six different amounts of work.
-	var max_total: int = 1
-	for t in _totals:
-		max_total = maxi(max_total, int(t))
+	# One column per row: how many cells that algorithm rewrites on THIS input, against
+	# a ceiling that is the SAME in all sixteen frames, with the elapsed portion filled.
+	# The columns differ; the fills all sit at the same relative height, because the
+	# whole method is one fraction cut through six different amounts of work.
+	var max_total: int = _reference_work(n)
 
 	var mat_track := _matte(TRACK_COLOR, 0.0)
 	var mat_column := _matte(COLUMN_COLOR, 0.0)
@@ -304,7 +325,7 @@ func _wind(row: Node3D, fraction: float) -> Dictionary:
 			+ "falling back to cartridge steps, which are NOT comparable between sorts.")
 	var unit: String = "steps"
 	if by_writes:
-		unit = "writes"
+		unit = "cell-moves, floor 1/step"
 	var total: int = _drive(row, -1, by_writes)
 	var spent: int = total
 	if fraction < 1.0:
@@ -313,9 +334,65 @@ func _wind(row: Node3D, fraction: float) -> Dictionary:
 	return {"total": total, "spent": spent, "unit": unit}
 
 
+## THE GAUGE'S CEILING, AND WHY IT IS NOT THIS FRAME'S OWN MAXIMUM.
+##
+## Normalising to the busiest row in the frame draws every frame's tallest column at full
+## height, which erases the one thing `initial_order` exists to say: what the input COSTS.
+## Under `sorted` the three adjacency sorts rewrite nothing at all and under `reversed`
+## they rewrite more than anything else in the table, and a frame-relative gauge prints
+## those two as the same picture. Measured before the repair: at moment=done the frames
+## for `reversed` and `shuffled` differed by 0.09% of pixels, because a finished sort is a
+## finished sort — the array is identical by the theorem, and the gauge was the only
+## surface left that could carry the difference. It was not carrying it.
+##
+## The ceiling is therefore fixed across the whole axis: the largest total any of the six
+## rows spends under `reversed`, the worst input in the family's own value list. A column
+## of a given height means the same number of cell-writes in all sixteen frames.
+##
+## Cheap in the case that matters — when `initial_order` is already `reversed` the answer
+## is this frame's own maximum and no scratch row is wound. Otherwise six rows are built
+## at the SAME array_size, wound to completion, read and dropped; identical size matters
+## because the substrate's BasePlate mesh is shared between instances (see the header) and
+## a scratch row at another size would resize the plates of the rows on display.
+func _reference_work(n: int) -> int:
+	var best: int = 1
+	if initial_order == "reversed":
+		for t in _totals:
+			best = maxi(best, int(t))
+		return best
+	for i in range(ROWS.size()):
+		var row: Node3D = ROW_SCENE.instantiate()
+		row.set_meta("artifact_lookup_name", ROWS[i])
+		row.set("auto_play", false)
+		row.set("array_size", n)
+		row.set("order_seed", order_seed)
+		row.set("initial_order", "reversed")
+		row.name = "Reference%d" % i
+		add_child(row)
+		best = maxi(best, int(_wind(row, 1.0)["total"]))
+		remove_child(row)
+		row.queue_free()
+	return best
+
+
 ## Step the row until it is done (budget < 0) or until it has spent its budget. The
 ## step that reaches the budget is the last one taken — a single heap-sort sift can
 ## rewrite six cells at once and is not divisible.
+##
+## THE FLOOR OF ONE, AND THE BUG IT REPAIRS. Counting only cells whose VALUE CHANGED
+## reports zero for work that really happened: merging two already-sorted runs writes
+## every cell back with the value it already held, and comparing a pair that is already
+## in order writes nothing at all. Under `initial_order = sorted` that made all six
+## totals zero — the hall stated that merge sort is free on sorted input, which is the
+## opposite of the truth and the opposite of the hall's own lesson, and it measured as
+## `moment = start` and `moment = done` being the same photograph to 0.04%.
+##
+## Every step therefore costs at least one unit, and a step that moves cells costs what
+## it moves. The unit stays comparable across the six for the reason the header gives —
+## it is still read from outside, in cells — and it stops rewarding an algorithm for
+## doing its work invisibly. It also lets the board finally say the most famous thing
+## about quicksort: on sorted input the naive pivot degenerates, and the row that is
+## cheapest for bubble sort is the dearest in the hall.
 func _drive(row: Node3D, budget: int, by_writes: bool) -> int:
 	if budget == 0:
 		return 0
@@ -331,7 +408,7 @@ func _drive(row: Node3D, budget: int, by_writes: bool) -> int:
 		steps += 1
 		if by_writes:
 			var cur: PackedFloat32Array = _read_array(row)
-			used += _changed(prev, cur)
+			used += maxi(_changed(prev, cur), 1)
 			prev = cur
 		else:
 			used += 1

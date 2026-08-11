@@ -380,6 +380,31 @@ func _tone(mag: float) -> float:
 
 ## vector_field_grid's `_tint_for`, its four branches and its two colour literals, with
 ## atan2(dir.z, dir.x) relabelled for the room's plane.
+##
+## A DIVERGENCE WAS TRIED HERE AND REVERTED, and the measurement is worth more than the
+## change would have been. The source anchors its four classes to the ENDS of the ramp —
+## floor(t*4)/3 sends them to 0, 1/3, 2/3, 1 — so a cell at t = 1.0 is reported by the
+## choropleth at exactly its true value. Under `law = gravity`, which is a uniform field,
+## every sample is the peak, every tone is 1.0, and `banded` and `magnitude` come out
+## identical to the byte. The registry's `predicted_degeneracy` had computed that before
+## the first capture; the sweep confirmed it at 0.00%.
+##
+## The repair attempted was to draw each class at its MIDPOINT instead — 1/8, 3/8, 5/8,
+## 7/8 — on the argument that a choropleth reports each class by a representative value
+## and should therefore never coincide with the continuum. It fixed gravity, 0.00% to
+## 3.40%. It also made every other law WORSE, because a class drawn at its midpoint is by
+## construction CLOSER to the values it stands for than one flung to the end of the scale:
+##
+##                    endpoint    midpoint
+##     gravity           0.00%       3.40%    fixed
+##     vortex            2.16%       0.54%    lost three quarters of it
+##     point_charge      0.37%       0.19%
+##     dipole            0.24%       0.10%
+##
+## The more faithful classing is the weaker axis, which is not a paradox — it is what
+## faithful means. Reverted to the family's arithmetic. The gravity pair stays at 0.00%
+## and stays TRUE: a ramp and a four-class legend cannot disagree about a field that has
+## one value in it, and `uniform` and `direction` still separate there.
 func _tint(dir: Vector2, t_mag: float) -> Color:
 	match coding:
 		"direction":
