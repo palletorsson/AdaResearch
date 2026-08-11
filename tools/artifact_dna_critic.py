@@ -340,8 +340,13 @@ def main() -> int:
                 if f2 < TWIN_FOCUS and bx and byy:
                     px2, py2 = mdir / f"{xid}.png", mdir / f"{yid}.png"
                     rgbf = focus_rgb(load_rgb(px2, box), load_rgb(py2, box))
+                # The CO-AXIS CONTEXT this pair was measured in — the values of every
+                # other axis, which are equal across the pair by construction above.
+                # Kept so the mean can be split by it; see the conditional-axis check.
+                ctx = tuple(sorted((k, str(v)) for k, v in (x.get("dna") or {}).items()
+                                   if k != axis))
                 pair_focus.append((f2, str(x.get("dna", {}).get(axis, "?")),
-                                   str(y.get("dna", {}).get(axis, "?")), rgbf))
+                                   str(y.get("dna", {}).get(axis, "?")), rgbf, ctx))
             frame = sum(fr) / len(fr)
             focus = sum(fo) / len(fo)
 
@@ -386,6 +391,49 @@ def main() -> int:
                 verdict = "local"
             else:
                 verdict = "bites"
+
+            # CONDITIONAL: an axis whose meaning DEPENDS on a crossed axis, averaged
+            # flat by a mean over the whole cross product.
+            #
+            # csg_union_demo taught this. `join` marks where two solids meet, crossed
+            # with `fusion`, which sets how far apart they are. At fusion=distinct the
+            # solids are DISJOINT: A intersect B is empty, so there is no seam curve and
+            # no shared volume, and flush/seam/shared measure 0.00% to the byte. That is
+            # not a dead knob and not an occlusion — marking a join where no join exists
+            # is correctly nothing. But those three structural zeroes are averaged in
+            # with fusion=single, where the same pairs measure 12.50 / 7.49 / 17.53, and
+            # the axis came out WEAK at 8.3% overall.
+            #
+            # The corpus's whole promotion discipline is two crossed axes per artifact,
+            # so any axis conditional on its partner has been understated this way for
+            # as long as the tool has existed. Split the pairs by co-axis context: if
+            # the best context bites while another is inert, the mean is the wrong
+            # statistic and the report says so rather than quietly convicting.
+            # Grouped by VALUE PAIR, not by context. The first attempt averaged each
+            # co-axis context and missed the case entirely: at fusion=distinct the
+            # `tinted` pairs still measure ~11% because recolouring B works whether or
+            # not the solids touch, which drags that context's mean to 5.5% and hides
+            # three structural zeroes inside it. The signal is that the SAME TWO VALUES
+            # are identical in one context and plainly different in another.
+            conditional = None
+            if verdict in ("WEAK", "INERT", "local") and pair_focus:
+                by_vals: dict[tuple, list[tuple]] = defaultdict(list)
+                for p in pair_focus:
+                    by_vals[tuple(sorted((p[1], p[2])))].append((p[0], p[4]))
+                swings = []
+                for vals, obs in by_vals.items():
+                    if len(obs) < 2:
+                        continue
+                    lo = min(obs, key=lambda o: o[0])
+                    hi = max(obs, key=lambda o: o[0])
+                    if lo[0] < INERT_FOCUS and hi[0] >= WEAK_FOCUS:
+                        swings.append({"values": list(vals),
+                                       "dead": round(lo[0], 5), "dead_when": dict(lo[1]),
+                                       "alive": round(hi[0], 5), "alive_when": dict(hi[1])})
+                if swings:
+                    conditional = {"was": verdict,
+                                   "swings": sorted(swings, key=lambda s: -s["alive"])}
+                    verdict = "CONDITIONAL"
             pc = partial.get(f"{prop}.{axis}")
             flag = ""
             if pc:
@@ -395,13 +443,13 @@ def main() -> int:
             print(f"{prop:24} {axis:22} {frame*100:6.2f}% {focus*100:7.2f}%  {verdict}{flag}")
             report.append({"artifact": prop, "axis": axis, "frame": round(frame, 5),
                            "focus": round(focus, 5), "verdict": verdict,
-                           "partial": pc or None,
+                           "partial": pc or None, "conditional": conditional,
                            "subject": round(subject, 5), "pairs": len(pairs),
                            "twins": [{"a": a, "b": b, "focus": round(f, 5),
-                                      "rgb": round(g, 5)} for f, a, b, g in twins],
+                                      "rgb": round(g, 5)} for f, a, b, g, _c in twins],
                            "colour_only": [{"a": a, "b": b, "focus": round(f, 5),
                                             "rgb": round(g, 5)}
-                                           for f, a, b, g in colour_only]})
+                                           for f, a, b, g, _c in colour_only]})
 
     # Fold in any standpoint evidence that already exists, so a checked axis reports
     # the angle that rescued it (or confirms it really is flat from everywhere).
@@ -452,6 +500,7 @@ def main() -> int:
     bites = [r for r in report if r["verdict"] == "bites"]
     print(f"{len(report)} axes measured · {len(bites)} bite · {len(local)} local"
           f" · {len(weak)} weak · {len(inert)} inert · {len(unconfirmed)} unconfirmed"
+          f" · {len([r for r in report if r.get('conditional')])} conditional"
           f" · {len(anamorphic)} anamorphic · {len(blank)} not rendered")
     if anamorphic:
         print("\nANAMORPHIC — flat from this pipeline's one standpoint, alive from another."
@@ -488,6 +537,24 @@ def main() -> int:
                 print(f"  {r['artifact']}.{r['axis']}  {t['a']} vs {t['b']}"
                       f"  (focus {t['focus']*100:.2f}%, colour {t['rgb']*100:.2f}%)")
         print(f"  {n} pair(s) rescued from a false twin verdict")
+
+    cond = [r for r in report if r.get("conditional")]
+    if cond:
+        print("\nCONDITIONAL — the axis DEPENDS on the one it is crossed with, and a mean"
+              " over the whole cross product is the wrong statistic for it. csg_union_demo"
+              " taught this: `join` marks where two solids meet, and at fusion=distinct"
+              " they are DISJOINT, so there is no seam and no shared volume. Marking a"
+              " join where no join exists is correctly nothing — but three structural"
+              " zeroes averaged in with a context where the same pairs measure 12-17%"
+              " produced a WEAK verdict on an axis that works wherever it is defined:")
+        for r in cond:
+            c = r["conditional"]
+            print(f"  {r['artifact']}.{r['axis']}  (was {c['was']} at"
+                  f" {r['focus']*100:.2f}% overall)")
+            for s in c["swings"]:
+                print(f"    {s['values'][0]} vs {s['values'][1]}:"
+                      f"  {s['dead']*100:5.2f}% when {s['dead_when']}"
+                      f"  ->  {s['alive']*100:5.2f}% when {s['alive_when']}")
 
     twinned = [r for r in report if r.get("twins")]
     if twinned:
