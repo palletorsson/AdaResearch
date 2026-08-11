@@ -248,26 +248,45 @@ func _build_interior_runs() -> void:
 		return
 	var half_t: float = wall_size.z * 0.5
 	var depth: float = (wall_size.z + 4.0) * 0.5 - half_t - GROUND_MARGIN
-	var side_len: float = depth + wall_size.z
 	var side_x: float = wall_size.x * 0.5 - half_t
-	var side_z: float = (half_t + (-depth - half_t)) * 0.5
+	# THE RETURNING RUNS BUTT AGAINST THE FRONT WALL'S BACK FACE, they do not run
+	# through it. They used to: side_len was depth + wall_size.z and side_z was
+	# -depth * 0.5, which put each run's near end at +half_t — the front wall's own
+	# FRONT plane. Two consequences, both wrong. The two solids are separate
+	# CSGCombiner3D roots rather than one, so coplanar front faces z-fight — in the
+	# sequence whose sibling artifact exists specifically to exhibit that failure. And
+	# the run occupied the full z-thickness of the wall at each end, plugging the end
+	# bay at openwork=arcade and the end columns at openwork=screen, so the openings
+	# were cut and then filled in from behind.
+	var side_len: float = depth
+	var side_z: float = -(depth * 0.5) - half_t
 
-	var left: CSGCombiner3D = _make_run("WallRunLeft", side_len, false)
-	left.position = Vector3(-side_x, 0.0, side_z)
-	left.rotation.y = PI * 0.5
-	_own(left)
+	# THE RUN NEAREST THE CAMERA IS BUILT FIRST, and that is not an aesthetic choice.
+	# It was +X second, so `corner` raised the run on -X: the side the canonical
+	# standpoint (yaw 0.62, pitch -0.26 — camera at +X/+Y/+Z) cannot see, because it
+	# falls inside the front wall's own silhouette and behind it. A reviewer predicted
+	# from that geometry alone that corner would measure identical to none and court
+	# identical to room, before any frame existed. The sweep then reported exactly
+	# those two pairs as twins, at 5.33% and 4.22%. The axis was not half-dead; half of
+	# it was built where this pipeline does not stand. Same disease as the anamorphic
+	# audit, one layer further in — there the camera missed a face, here it missed a
+	# whole wall.
+	var near: CSGCombiner3D = _make_run("WallRunRight", side_len, false)
+	near.position = Vector3(side_x, near.position.y, side_z)
+	near.rotation.y = PI * 0.5
+	_own(near)
 	if interior == "corner":
 		return
 
-	var right: CSGCombiner3D = _make_run("WallRunRight", side_len, false)
-	right.position = Vector3(side_x, 0.0, side_z)
-	right.rotation.y = PI * 0.5
-	_own(right)
+	var far: CSGCombiner3D = _make_run("WallRunLeft", side_len, false)
+	far.position = Vector3(-side_x, far.position.y, side_z)
+	far.rotation.y = PI * 0.5
+	_own(far)
 	if interior == "court":
 		return
 
 	var back: CSGCombiner3D = _make_run("WallRunBack", wall_size.x, false)
-	back.position = Vector3(0.0, 0.0, -depth)
+	back.position = Vector3(0.0, back.position.y, -depth)
 	_own(back)
 
 
