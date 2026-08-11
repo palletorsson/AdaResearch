@@ -232,6 +232,27 @@ func _apply_surface(material: ShaderMaterial, dna: CritterDNA, part_type: int) -
 
 	material.set_shader_parameter("surface_type", surface)
 
+	# SPECULAR — the light response every DNA organism was missing.
+	# The shader writes `SPECULAR = specular_tint` and that uniform defaults to
+	# 0.0, and nothing in the project ever set it: so every leaf, branch, cap,
+	# gill and grub rendered with its specular lobe fully suppressed. Godot's own
+	# default is 0.5; at 0.0 a surface cannot answer a light source at all, which
+	# is why organisms read as flat paper whatever their roughness said.
+	# Set it per SURFACE, because that is what specular means physically:
+	# a wet mushroom cap catches a highlight, dry bark does not.
+	var spec: float = 0.5
+	if is_equal_approx(surface, SURFACE_BARK):
+		spec = 0.18                      # dry, fibrous — almost no highlight
+	elif is_equal_approx(surface, SURFACE_PETAL):
+		spec = 0.55                      # damp, waxy — a soft sheen along the dome
+	elif is_equal_approx(surface, SURFACE_MEMBRANE):
+		spec = 0.6                       # thin and wet
+	elif is_equal_approx(surface, SURFACE_SCALES):
+		spec = 0.45
+	# wetness reads as specular, not as albedo: a slick organism is glossier.
+	spec = clampf(spec + dna.iridescence * 0.2, 0.0, 1.0)
+	material.set_shader_parameter("specular_tint", spec)
+
 
 func _apply_animation(material: ShaderMaterial, dna: CritterDNA) -> void:
 	var kingdom := dna.get_kingdom()

@@ -53,6 +53,9 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 	mat.albedo_color = dna.primary_color
 	mat.roughness = clampf(dna.roughness, 0.4, 0.95)
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED  # never see-through
+	# consume the mesher's base-dark / cap-light vertex gradient: the stem sits in
+	# its own shadow and the cap catches the light, instead of one flat tone.
+	mat.vertex_color_use_as_albedo = true
 	if dna.iridescence > 0.4:
 		mat.emission_enabled = true
 		mat.emission = dna.primary_color * 0.3

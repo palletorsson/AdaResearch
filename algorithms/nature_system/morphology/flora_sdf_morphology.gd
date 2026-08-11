@@ -113,6 +113,11 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 			lmat.albedo_color = dna.secondary_color if dna.secondary_color.g > 0.0 else Color(0.2, 0.5, 0.2)
 			lmat.roughness = 0.85
 			lmat.cull_mode = BaseMaterial3D.CULL_DISABLED  # never see-through
+			# CONSUME THE MESHER'S HEIGHT GRADIENT. SdfMesher writes a base-dark /
+			# crown-light vertex colour on every SDF vertex; a canopy that ignores it
+			# is one flat green ball, which is exactly how this read before. Opting in
+			# costs nothing and gives the crown depth: shadowed underside, lit top.
+			lmat.vertex_color_use_as_albedo = true
 			lmi.material_override = lmat
 			root.add_child(lmi)
 	return root

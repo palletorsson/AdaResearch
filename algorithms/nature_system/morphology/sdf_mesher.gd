@@ -200,6 +200,9 @@ static func mesh_field(field: Callable, aabb_min: Vector3, aabb_max: Vector3, re
 				vi += 1
 	var idx := func(ix: int, iy: int, iz: int) -> int:
 		return (iz * ny + iy) * nx + ix
+	# reciprocal size, computed ONCE — the per-vertex UV path must not divide.
+	var inv_size := Vector3(
+		1.0 / maxf(size.x, 1e-6), 1.0 / maxf(size.y, 1e-6), 1.0 / maxf(size.z, 1e-6))
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var any: bool = false
@@ -211,7 +214,7 @@ static func mesh_field(field: Callable, aabb_min: Vector3, aabb_max: Vector3, re
 				for off in _CUBE_OFF:
 					ci.append(idx.call(ix + int(off.x), iy + int(off.y), iz + int(off.z)))
 				for tet in _TET_CORNERS:
-					if _march_tet(st, tet, ci, vals, pos):
+					if _march_tet(st, tet, ci, vals, pos, aabb_min, inv_size):
 						any = true
 	if not any:
 		return null
@@ -228,7 +231,8 @@ static func mesh_field(field: Callable, aabb_min: Vector3, aabb_max: Vector3, re
 # "see-through broken" bug — inconsistent faces got backface-culled). Instead
 # every triangle is oriented so its normal points AWAY from the tet's inside
 # corners, i.e. toward the outside — always correct, whatever the case.
-static func _march_tet(st: SurfaceTool, tet: Array, ci: Array, vals: PackedFloat32Array, pos: PackedVector3Array) -> bool:
+static func _march_tet(st: SurfaceTool, tet: Array, ci: Array, vals: PackedFloat32Array,
+		pos: PackedVector3Array, lo: Vector3, size: Vector3) -> bool:
 	var vv: Array = [ci[tet[0]], ci[tet[1]], ci[tet[2]], ci[tet[3]]]
 	var dd: Array = [vals[vv[0]], vals[vv[1]], vals[vv[2]], vals[vv[3]]]
 	var mask: int = 0
@@ -252,33 +256,71 @@ static func _march_tet(st: SurfaceTool, tet: Array, ci: Array, vals: PackedFloat
 		return pos[a].lerp(pos[b], t)
 	match mask:
 		1, 14:
-			_tri(st, lerp_edge.call(vv[0], vv[1]), lerp_edge.call(vv[0], vv[2]), lerp_edge.call(vv[0], vv[3]), inside)
+			_tri(st, lerp_edge.call(vv[0], vv[1]), lerp_edge.call(vv[0], vv[2]), lerp_edge.call(vv[0], vv[3]), inside, lo, size)
 		2, 13:
-			_tri(st, lerp_edge.call(vv[1], vv[0]), lerp_edge.call(vv[1], vv[3]), lerp_edge.call(vv[1], vv[2]), inside)
+			_tri(st, lerp_edge.call(vv[1], vv[0]), lerp_edge.call(vv[1], vv[3]), lerp_edge.call(vv[1], vv[2]), inside, lo, size)
 		4, 11:
-			_tri(st, lerp_edge.call(vv[2], vv[0]), lerp_edge.call(vv[2], vv[1]), lerp_edge.call(vv[2], vv[3]), inside)
+			_tri(st, lerp_edge.call(vv[2], vv[0]), lerp_edge.call(vv[2], vv[1]), lerp_edge.call(vv[2], vv[3]), inside, lo, size)
 		8, 7:
-			_tri(st, lerp_edge.call(vv[3], vv[0]), lerp_edge.call(vv[3], vv[2]), lerp_edge.call(vv[3], vv[1]), inside)
+			_tri(st, lerp_edge.call(vv[3], vv[0]), lerp_edge.call(vv[3], vv[2]), lerp_edge.call(vv[3], vv[1]), inside, lo, size)
 		3, 12:  # two corners inside → quad
-			_quad(st, lerp_edge.call(vv[0], vv[3]), lerp_edge.call(vv[0], vv[2]), lerp_edge.call(vv[1], vv[2]), lerp_edge.call(vv[1], vv[3]), inside)
+			_quad(st, lerp_edge.call(vv[0], vv[3]), lerp_edge.call(vv[0], vv[2]), lerp_edge.call(vv[1], vv[2]), lerp_edge.call(vv[1], vv[3]), inside, lo, size)
 		5, 10:
-			_quad(st, lerp_edge.call(vv[0], vv[1]), lerp_edge.call(vv[0], vv[3]), lerp_edge.call(vv[2], vv[3]), lerp_edge.call(vv[2], vv[1]), inside)
+			_quad(st, lerp_edge.call(vv[0], vv[1]), lerp_edge.call(vv[0], vv[3]), lerp_edge.call(vv[2], vv[3]), lerp_edge.call(vv[2], vv[1]), inside, lo, size)
 		6, 9:
-			_quad(st, lerp_edge.call(vv[1], vv[0]), lerp_edge.call(vv[1], vv[3]), lerp_edge.call(vv[2], vv[3]), lerp_edge.call(vv[2], vv[0]), inside)
+			_quad(st, lerp_edge.call(vv[1], vv[0]), lerp_edge.call(vv[1], vv[3]), lerp_edge.call(vv[2], vv[3]), lerp_edge.call(vv[2], vv[0]), inside, lo, size)
 	return true
+
+
+# UV + vertex colour for one SDF vertex.
+#
+# WHY THIS EXISTS: the marching loop used to emit bare `add_vertex`, so every
+# SDF body carried UV = (0,0) at every vertex. The DNA shader derives ALL of its
+# pattern, surface and cracking work from UV — at a constant UV those twenty
+# patterns collapse to a constant, and its normal perturbation degenerates into a
+# fixed tilt written into NORMAL_MAP, i.e. a uniform lighting skew across the
+# whole body. Every SDF grub was flat-tinted and patternless for that reason
+# alone. Cost: two setters per emitted vertex against a loop that already does
+# res^3 field evaluations — unmeasurable at build time, free at runtime.
+#
+# The projection is CYLINDRICAL around Y: u wraps around the body, v runs base to
+# tip. That is the right unwrap for organisms — patterns band along a stem or
+# ring a cap rather than smearing off a planar projection.
+#
+# COLOR is a height gradient (dark at the base, light at the crown). Materials
+# ignore it unless they opt in with vertex_color_use_as_albedo, so this is
+# additive: it costs nothing and is there for the canopy and cap that want it.
+static func _emit(st: SurfaceTool, v: Vector3, lo: Vector3, inv: Vector3) -> void:
+	# MEASURED, not assumed: the first version of this called atan2() per vertex
+	# for a true cylindrical wrap and cost +26% on the grub and +50% on the
+	# mushroom — a real regression against a "this is free" prediction. The
+	# marching loop emits a LOT of vertices, so anything here is multiplied.
+	# This version is pure multiply-add: `inv` is the reciprocal size, computed
+	# once by the caller, and u is a diagonal planar sweep instead of an angle.
+	# The pattern library only needs UV to VARY across the surface, which this
+	# gives; it trades a seam-free wrap for a cost that stays near zero.
+	var ry: float = (v.y - lo.y) * inv.y
+	st.set_uv(Vector2(((v.x - lo.x) * inv.x + (v.z - lo.z) * inv.z) * 0.5, ry))
+	# base darker, crown lighter — free depth on any material that opts in with
+	# vertex_color_use_as_albedo.
+	var shade: float = 0.72 + 0.28 * (ry if ry > 0.0 else 0.0)
+	st.set_color(Color(shade, shade, shade))
+	st.add_vertex(v)
 
 
 # emit triangle a,b,c with the winding that makes its normal face away from
 # `inside` (the interior). Flip if the geometric normal points inward.
-static func _tri(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, inside: Vector3) -> void:
+static func _tri(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, inside: Vector3,
+		lo: Vector3, size: Vector3) -> void:
 	var normal: Vector3 = (b - a).cross(c - a)
 	var centroid: Vector3 = (a + b + c) / 3.0
 	if normal.dot(centroid - inside) >= 0.0:
-		st.add_vertex(a); st.add_vertex(b); st.add_vertex(c)
+		_emit(st, a, lo, size); _emit(st, b, lo, size); _emit(st, c, lo, size)
 	else:
-		st.add_vertex(a); st.add_vertex(c); st.add_vertex(b)
+		_emit(st, a, lo, size); _emit(st, c, lo, size); _emit(st, b, lo, size)
 
 
-static func _quad(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3, inside: Vector3) -> void:
-	_tri(st, a, b, c, inside)
-	_tri(st, a, c, d, inside)
+static func _quad(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3,
+		inside: Vector3, lo: Vector3, size: Vector3) -> void:
+	_tri(st, a, b, c, inside, lo, size)
+	_tri(st, a, c, d, inside, lo, size)
