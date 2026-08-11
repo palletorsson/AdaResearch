@@ -118,6 +118,88 @@ CURATION: dict[str, tuple] = {
     ),
 }
 
+# ── SECOND MOVEMENT: the layer of hidden interfaced processes ────────────────
+#
+# The first movement reads words the props were already stencilled with. This one is
+# about something quieter and stranger: ordinary furniture that turns out to be an
+# INTERFACE to an administrative process you cannot see. A door is not a door, it is an
+# access-control terminal with an occupancy count. A fire extinguisher is not equipment,
+# it is the one object in the building whose appearance is written down in law — and its
+# axis asks what the building DID with that law. A workbench has a duty roster.
+#
+# The uncanny here is not that the props are sinister. It is that every one of these
+# readouts, tags, permissions and states was authored as set dressing, by somebody making
+# a room feel lived-in — and together they describe a facility that is administering
+# itself continuously, in a vocabulary nobody sat down and chose.
+CURATION_PROPS: dict[str, tuple] = {
+    "lab_sliding_door__welcome-plate": (
+        "AUTHORISED / PERSONS ONLY",
+        "Queer phenomenologist", "Ahmed / Munoz / Getsy",
+        "Orientation is a question of which bodies a space is already shaped for.",
+        "THE SENTENCE ONLY EXISTS WHEN THE DOOR IS SHUT. AUTHORISED is stencilled on the left leaf and PERSONS ONLY on the right, and the code comment says so outright: 'half of a sentence - the other half is on the right leaf, so the line only completes itself when the door is shut.' The permission is legible only in the state of exclusion; open the door and it says nothing. Beside it the room is named SPECIMEN PREP on a readout, with a second plate reading ACCESS OPEN, OCCUPANCY 6. The comment for that builder: 'the door is not just named, it is administered.'",
+    ),
+    "lab_sliding_door__welcome-bolt": (
+        "AUTHORISED",
+        "Critical-AI & infrastructure scholar", "Crawford / Noble / Zuboff / Buolamwini",
+        "Take your own citations seriously and the project audits itself.",
+        "Half the sentence, alone on a bolted leaf. This is the whole grammar of access in one word and no object to apply it to - authorisation as a property of the door rather than of anybody standing at it.",
+    ),
+    "fire_extinguisher__support-bracket__statute-notice": (
+        "FULL SUBMISSION",
+        "Critical-AI & infrastructure scholar", "Crawford / Noble / Zuboff / Buolamwini",
+        "AI is never immaterial, but lithium, water, GPU foundries, ghost labour, and planetary cost.",
+        "The artifact's own header calls this out: 'this is the one class of object whose appearance is written down in law rather than chosen. So: what did this building do with that law?' At notice the building submits completely - backing board, mandatory sign, projecting flag, painted floor zone. The material infrastructure of compliance, rendered as furniture.",
+    ),
+    "fire_extinguisher__support-bracket__statute-joinery": (
+        "ABSORBED",
+        "Art historian of Klee's Bauhaus pedagogy", "Klee / abstraction / surrealism",
+        "Not a catalogue of forms; it is a grammar of Formung, forming.",
+        "The same law, absorbed. The alarm red is retinted into the building's own cabinetwork and the shout becomes one small engraved plate. The source comment for this branch is the most dark-spot sentence in the corpus: 'the building would rather not say it.'",
+    ),
+    "fire_extinguisher__support-bracket__statute-lapse": (
+        "EXPIRED",
+        "Media-archaeologist of the poor image", "Steyerl / the demoscene / glitch",
+        "Every gotcha in your memory is a defeated glitch, archived as a triumph.",
+        "The promise left to rot: chalked paint, rust, and a small yellow service tag hanging off the neck with a date that has passed. A safety guarantee that is still hanging on the wall and is no longer true - and it is the only value on this axis that admits time has passed at all.",
+    ),
+    "fire_hose_box__support-cabinet__statute-notice": (
+        "FIRE POINT",
+        "Complexity scientist", "Shannon / Crutchfield / Prigogine",
+        "They share a word, not a value, not units, not a sign convention.",
+        "The extinguisher's kin, under the same statute ladder - two artifacts, one legal vocabulary, four states each. FIRE POINT is a designation, not a description: the building declaring a coordinate where the law is satisfied.",
+    ),
+    "curation_station__bay-apse__duty-watch": (
+        "MONITORED",
+        "Reflexive critic of the critique-machine", "Fraser / Ahmed / Han",
+        "I am the problem I was hired to name.",
+        "The workbench where artifacts are prepared has a DUTY ROSTER, and its states are MONITORED, ON SHOW, IN STORE, IN TRANSIT, with OPERATOR, CONTROL, HANDLING and LINK OK printed around them. This is the station that curates the project's own objects, and it is watching them. Nobody designed an argument here; somebody was making a workbench feel real.",
+    ),
+    "curation_station__bay-apse__duty-show": (
+        "ON SHOW",
+        "Walking-sim & procedural-rhetoric critic", "Fez / Miegakure / procedural rhetoric",
+        "In Miegakure the fourth dimension isn't taught to you; you rotate into it with your own hands, and the rotation is the argument.",
+        "The other end of the same roster. An artifact is either watched, shown, stored or in transit - four administrative states, and none of them is 'being used by somebody'. The vocabulary has no word for the thing the project says it is for.",
+    ),
+    "exit_sign__support-gantry": (
+        "EXIT",
+        "Queer phenomenologist", "Ahmed / Munoz / Getsy",
+        "A path becomes a path by being walked; repetition straightens it.",
+        "The most ordinary object in any building, hung from an overhead gantry so it reads from down the corridor. It is a single word that exists to make everybody move the same way, and it is the one piece of signage nobody experiences as an instruction.",
+    ),
+    "station_wall__upkeep-scrap": (
+        "SCRAP",
+        "Media-archaeologist of the poor image", "Steyerl / the demoscene / glitch",
+        "More entropy, more noise, more difference.",
+        "The third artifact on the shared upkeep ladder - crates, pillar, wall. A whole facility conjugated through one four-state grammar of maintenance, down to the walls. At scrap even the architecture is filed as waste, which is a state the building has a word for.",
+    ),
+    "control_console__mounting-lectern__demo_apparatus-none": (
+        "(no apparatus)",
+        "Art historian of Klee's Bauhaus pedagogy", "Klee / abstraction / surrealism",
+        "Your headline is the boldest thing in the dossier, and it is the thing your build most betrays.",
+        "A control console on a lectern with nothing to control. The demo_apparatus axis has four things it can hold and one value where it holds none - the interface surviving the removal of its object, which is the cleanest picture of a hidden process this gallery has: all switch, no referent.",
+    ),
+}
+
 WITHHELD = {
     "id": "grey_point__withheld",
     "prop": "grey_point",
@@ -163,12 +245,30 @@ def main() -> int:
     kept: list[dict] = []
     missing: list[str] = []
 
-    for key, (word, persona, lineage, line, reading) in CURATION.items():
-        src = next((e for e in man.get("entries", []) if str(e.get("id")) == key), None)
+    # The second movement is swept into its own slug, so its images live there. Copy
+    # them next to the first movement's so one manifest can carry both.
+    props_dir = ENC / "dark-spot-props"
+    props_entries: list[dict] = []
+    pmf = props_dir / "manifest.json"
+    if pmf.exists():
+        props_entries = json.loads(pmf.read_text(encoding="utf-8")).get("entries", [])
+        import shutil
+        for key in CURATION_PROPS:
+            src_png = props_dir / f"{key}.png"
+            if src_png.exists():
+                shutil.copy2(src_png, GALLERY / src_png.name)
+
+    combined = list(man.get("entries", [])) + props_entries
+    ordered = list(CURATION.items()) + list(CURATION_PROPS.items())
+
+    for key, (word, persona, lineage, line, reading) in ordered:
+        src = next((e for e in combined if str(e.get("id")) == key), None)
         if src is None:
             missing.append(key)
             continue
         e = dict(src)
+        e["image"] = f"/dark-spot-dna/{key}.png"
+        e["movement"] = "found words" if key in CURATION else "the interface layer"
         e["label"] = word
         e["subtitle"] = f"{src.get('prop','?')} - {src.get('label','')}"
         e["notes"] = (
