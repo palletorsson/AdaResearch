@@ -200,6 +200,66 @@ CURATION_PROPS: dict[str, tuple] = {
     ),
 }
 
+# ── THIRD MOVEMENT: the Half-Life reversal ───────────────────────────────────
+#
+# Palle's reading, and it reorganises the whole gallery. In Half-Life there is another
+# world, and that world is hostile: Xen is where the other comes from, the other is the
+# threat, and the entire architecture of Black Mesa exists to contain it. You arrive with
+# a crowbar. The goal is to close the portal.
+#
+# Ada Research runs that backwards. Here the other world IS THE GOAL — the hidden, the
+# dark spots, the anamorphic bodies are the thing the project is for. And the artifact
+# that carries it says so in its own truth line: "the catalyst doesn't kill — it
+# phase-shifts."
+#
+# THE REVERSAL IS PROPERLY BUILT, and this is worth saying before the criticism. catalyst_foe
+# carries TWO ORTHOGONAL AXES. `body` is what the other IS — cube, mote, serpent, octapod,
+# grand — and at octapod it is a pink, soft, many-legged thing with one eye, which is a
+# headcrab's morphology drained of menace. `phase` is how the other is MET — foe, wary,
+# neutral, curious, friend. The two do not depend on each other: you can meet a cube as a
+# friend or an octapod as a foe. In Half-Life morphology and threat are welded together —
+# alien shape IS hostility. Here they are decoupled by construction, and the decoupling is
+# a declared axis anyone can set from map data.
+#
+# SO WHERE IS THE DARK SPOT? In the room around it. The facility that hosts this thesis was
+# modelled on the facility built to refute it. SPECIMEN appears in 33 source files. SEALED
+# in 13, DANGER in 11, HAZARD in 10, CONTAINMENT in 6, CLEARANCE in 5; there is a
+# BIOHAZARD CONTAINMENT label and a SECURITY BREACH label in the corpus. The door to the
+# room is stencilled AUTHORISED PERSONS ONLY and names the room SPECIMEN PREP. The catalyst
+# stands under glass marked DO NOT HANDLE. The furniture still believes the other is a
+# threat, because it is quoting an architecture whose whole logic is containment.
+#
+# And the reversal's own control surface is the tell: progression_driver, whose essence
+# line calls it "a VR control surface for the curriculum's hidden state machine", carries a
+# panel headed BEFRIEND HAZARD with one button per registered hazard type. The inversion of
+# Half-Life exists, it works, and it is administered from a debug console.
+CURATION_REVERSAL: dict[str, tuple] = {
+    "catalyst_foe__body-octapod__phase-foe": (
+        "THE OTHER, AS MET",
+        "the Half-Life reversal", "Xen / Black Mesa / the crowbar",
+        "In Half-Life the other world is hostile and the architecture exists to contain it. Here the other world is the goal.",
+        "A pink, soft, many-legged body with a single eye, in a black void. It is a headcrab's morphology with the menace drained out. This is `phase=foe` — the most hostile rung the artifact has — and the body is still tender. In the game this gallery is quoting, that shape would be coming at you and you would have a crowbar.",
+    ),
+    "catalyst_foe__body-octapod__phase-friend": (
+        "FRIEND",
+        "the Half-Life reversal", "Xen / Black Mesa / the crowbar",
+        "The catalyst doesn't kill - it phase-shifts.",
+        "The same body at the far end of the arc. `phase` runs foe, wary, neutral, curious, friend — five rungs, and the artifact's own truth line is that the catalyst does not kill. The reversal is not a mood here, it is a declared axis with five values that a map author sets from a token.",
+    ),
+    "catalyst_foe__body-cube__phase-foe": (
+        "A WHITE CUBE",
+        "Complexity scientist", "Shannon / Crutchfield / Prigogine",
+        "They share a word, not a value, not units, not a sign convention.",
+        "The same hostile rung on the plainest body: a white cube in a void. `body` and `phase` are ORTHOGONAL — otherness and hostility are decoupled by construction, so the most alien morphology can be met as a friend and the blankest box can be met as a foe. In Half-Life those two are welded: alien shape IS the threat. Decoupling them is the most substantive thing this project does with the genre it borrows from.",
+    ),
+    "catalyst_foe__body-cube__phase-friend": (
+        "THE SAME CUBE, GREEN",
+        "Reflexive critic of the critique-machine", "Fraser / Ahmed / Han",
+        "I am the problem I was hired to name.",
+        "And here is the cost of that decoupling, stated fairly. On the cube body the whole foe-to-friend arc renders as a hue: identical geometry, identical size, identical position, recoloured by its relation to you. Read generously that IS the thesis — friendship is a relation, not a property of the body, so nothing about the body needs to change. Read hard, the other has been admitted as a colour. The gallery cannot decide this for you; both readings survive the picture.",
+    ),
+}
+
 WITHHELD = {
     "id": "grey_point__withheld",
     "prop": "grey_point",
@@ -247,19 +307,23 @@ def main() -> int:
 
     # The second movement is swept into its own slug, so its images live there. Copy
     # them next to the first movement's so one manifest can carry both.
-    props_dir = ENC / "dark-spot-props"
-    props_entries: list[dict] = []
-    pmf = props_dir / "manifest.json"
-    if pmf.exists():
-        props_entries = json.loads(pmf.read_text(encoding="utf-8")).get("entries", [])
-        import shutil
-        for key in CURATION_PROPS:
-            src_png = props_dir / f"{key}.png"
+    import shutil
+    extra: list[dict] = []
+    for slug, curation in (("dark-spot-props", CURATION_PROPS),
+                           ("dark-spot-reversal", CURATION_REVERSAL)):
+        d = ENC / slug
+        f = d / "manifest.json"
+        if not f.exists():
+            continue
+        extra += json.loads(f.read_text(encoding="utf-8")).get("entries", [])
+        for key in curation:
+            src_png = d / f"{key}.png"
             if src_png.exists():
                 shutil.copy2(src_png, GALLERY / src_png.name)
 
-    combined = list(man.get("entries", [])) + props_entries
-    ordered = list(CURATION.items()) + list(CURATION_PROPS.items())
+    combined = list(man.get("entries", [])) + extra
+    ordered = (list(CURATION.items()) + list(CURATION_PROPS.items())
+               + list(CURATION_REVERSAL.items()))
 
     for key, (word, persona, lineage, line, reading) in ordered:
         src = next((e for e in combined if str(e.get("id")) == key), None)
@@ -268,7 +332,9 @@ def main() -> int:
             continue
         e = dict(src)
         e["image"] = f"/dark-spot-dna/{key}.png"
-        e["movement"] = "found words" if key in CURATION else "the interface layer"
+        e["movement"] = ("found words" if key in CURATION
+                         else "the interface layer" if key in CURATION_PROPS
+                         else "the half-life reversal")
         e["label"] = word
         e["subtitle"] = f"{src.get('prop','?')} - {src.get('label','')}"
         e["notes"] = (
