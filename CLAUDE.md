@@ -373,12 +373,25 @@ about the design. Every one of these was measured, not guessed:
 | subject under ~6% of frame | the AABB is inflated by one big or far-flung mesh | `dna.framing`, or a `layers = 0` anchor |
 | strong confident bite on a generative artifact | unseeded `randf` — five variants are five objects | seed export + `dna.fixture` pins it |
 | axis real in world space, invisible in frame | fit-by-DIAGONAL on a wide flat or thin subject | `dna.framing` below 1.0 |
+| `INERT` at 0.00%, or a one-faced subject | the axis is ANAMORPHIC — the camera is standing in the wrong place | `probe_anamorphic.py`; the critic now gates on it |
+
+**A dead verdict is no longer yours to issue.** Every DNA tile ever published was shot from
+ONE standpoint — `capture_config_sweep`'s yaw 0.62, pitch -0.26 — so `INERT` has only ever
+meant *"this axis does not change what the camera at 0.62 happened to be facing."* Audited
+across the corpus, **five of seven dead verdicts were false.** `artifact_dna_critic.py`
+therefore refuses to convict without evidence from elsewhere, and emits three verdicts:
+`INERT?` (nobody has looked from another angle — a to-do, and it prints the command),
+`ANAMORPHIC` (flat here, alive from another standpoint), `INERT` (flat from all five).
+Run `python tools/probe_anamorphic.py --token=X --axis=Y` to clear one; it writes
+`doc/reports/anamorphic_<token>.json`, which is what the gate reads.
 
 **Diagnose with numbers, not by squinting.** `subject %` (pixels differing from the corner
-background) separates "too small to measure" from "axis does nothing": `reaction_diffusion`
-filled 62% of frame and moved 15 grey levels — genuinely inert. `random_walk_collection`
-moved 174 grey levels across 0.06% of frame — a huge change, invisible. Same verdict, opposite
-problems.
+background) separates "too small to measure" from "axis does nothing". `random_walk_collection`
+moved 174 grey levels across 0.06% of frame — a huge change, invisible. But note which way
+that cuts: `reaction_diffusion.inoculation` filled 62% of frame, moved 15 grey levels, and was
+written down **in this file** as "genuinely inert" — a fact about the canonical camera. It is
+21.84% from above. A big subject and a small number is not proof of a dead axis; it can equally
+mean the difference is on a face you are not looking at.
 
 **`commons/testing/probe_aabb_hogs.gd`** ranks an artifact's meshes by world diagonal and
 prints the merged AABB; it needs a 0.35 s settle, because two process frames photographs a
