@@ -20,6 +20,16 @@ whole image; FOCUS is the mean over the most-changed 5% of pixels.
   else, frame < 2%      LOCAL — decisive where it happens, diluted by a wide shot
   otherwise     BITES
 
+A dead verdict is no longer issued on this tool's own authority. Every tile it reads was
+shot from ONE standpoint (yaw 0.62, pitch -0.26) and an axis that resolves obliquely to
+that camera is invisible here however loudly it differs in the room. Audited across the
+corpus, five of seven dead verdicts were false. So INERT is now gated on evidence from
+somewhere else, via doc/reports/anamorphic_<token>.json:
+
+  INERT?       nobody has looked from another angle yet — not a verdict, a to-do
+  ANAMORPHIC   flat from here, alive from elsewhere: the verdict was about the camera
+  INERT        flat from all five standpoints — convicted
+
 Usage:
   python tools/artifact_dna_critic.py                 # judge the readymades gallery
   python tools/artifact_dna_critic.py --gallery=props-dna-gallery
@@ -182,6 +192,45 @@ BLANK_SUBJECT = 0.002
 TWIN_FOCUS = 0.060
 
 
+def _declared_axis(token: str, axis: str) -> bool:
+    """Is this a promoted axis, or a raw export the gallery happened to vary?
+
+    The props gallery predates dna.axes: its entries carry a hand-authored `dna` dict of
+    plain @export values, so this tool synthesises pseudo-axes from them. slide_projector's
+    `current_slide_number` is one — an int the gallery set to 1 / 23 / 0, never a declared
+    family. The standpoint gate must not order a probe for those, because probe_anamorphic
+    reads the REGISTRY and will refuse: "not a declared axis". It did, which is how this
+    was found. A gate that emits commands nobody can run is worse than no gate.
+    """
+    for rp in (REPO / "commons" / "artifacts" / "registry").glob("*.json"):
+        try:
+            data = json.loads(rp.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        arts = data.get("artifacts", data) if isinstance(data, dict) else None
+        e = arts.get(token) if isinstance(arts, dict) else None
+        if isinstance(e, dict) and axis in (((e.get("dna") or {}).get("axes")) or {}):
+            return True
+    return False
+
+
+def _standpoint_checked(token: str, axis: str) -> dict | None:
+    """Has this axis been looked at from anywhere but the canonical viewpoint?
+
+    probe_anamorphic writes doc/reports/anamorphic_<token>.json when it runs. Its
+    presence for the right axis is the evidence that somebody stood somewhere else;
+    its absence is the reason an INERT verdict here is not yet a verdict.
+    """
+    p = REPO / "doc" / "reports" / f"anamorphic_{token}.json"
+    if not p.exists():
+        return None
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    return d if str(d.get("axis", "")) == axis else None
+
+
 def main() -> int:
     gallery = "readymades-dna"
     out_json = None
@@ -196,7 +245,21 @@ def main() -> int:
     if not mf.exists():
         print(f"no manifest at {mf}")
         return 1
-    entries = json.loads(mf.read_text(encoding="utf-8")).get("entries", [])
+    _manifest = json.loads(mf.read_text(encoding="utf-8"))
+    entries = _manifest.get("entries", [])
+    # THE DENOMINATOR, read back beside the measurement.
+    #
+    # The sweep trims a declared axis from the END of its value list until the cross
+    # product fits its variant cap. dot_aligner declares workings(4); at the default cap
+    # it rendered `outcome` and `trace` only, and this tool called the axis INERT at
+    # 0.11% frame / 2.27% focus. Swept over all four values it reads 2.07% / 37.49% and
+    # BITES — the whole signal was in `expression`, which the cap had dropped, and the
+    # published verdict was a fact about the harness's budget.
+    #
+    # An axis listed here was measured over a SUBSET of what it declares, so its verdict
+    # bounds nothing about the values that never rendered. Marked on the row, because a
+    # verdict is read from the table and a caveat that is not on the table is not read.
+    partial = _manifest.get("partial_axes") or {}
 
     by_prop: dict[str, list[dict]] = defaultdict(list)
     for e in entries:
@@ -323,9 +386,16 @@ def main() -> int:
                 verdict = "local"
             else:
                 verdict = "bites"
-            print(f"{prop:24} {axis:22} {frame*100:6.2f}% {focus*100:7.2f}%  {verdict}")
+            pc = partial.get(f"{prop}.{axis}")
+            flag = ""
+            if pc:
+                flag = (f"   [PARTIAL {len(pc.get('swept', []))}/"
+                        f"{len(pc.get('declared', []))} values — verdict covers only "
+                        f"{', '.join(map(str, pc.get('swept', [])))}]")
+            print(f"{prop:24} {axis:22} {frame*100:6.2f}% {focus*100:7.2f}%  {verdict}{flag}")
             report.append({"artifact": prop, "axis": axis, "frame": round(frame, 5),
                            "focus": round(focus, 5), "verdict": verdict,
+                           "partial": pc or None,
                            "subject": round(subject, 5), "pairs": len(pairs),
                            "twins": [{"a": a, "b": b, "focus": round(f, 5),
                                       "rgb": round(g, 5)} for f, a, b, g in twins],
@@ -333,6 +403,47 @@ def main() -> int:
                                             "rgb": round(g, 5)}
                                            for f, a, b, g in colour_only]})
 
+    # Fold in any standpoint evidence that already exists, so a checked axis reports
+    # the angle that rescued it (or confirms it really is flat from everywhere).
+    for r in report:
+        ev = _standpoint_checked(r["artifact"], r["axis"])
+        if ev:
+            r["standpoint"] = {"canonical": ev.get("canonical_mean_focus"),
+                               "best_other_view": ev.get("best_other_view"),
+                               "best_other": ev.get("best_other_mean_focus")}
+            best = ev.get("best_other_mean_focus") or 0.0
+            if r["verdict"] == "INERT" and best >= WEAK_FOCUS:
+                r["verdict"] = "ANAMORPHIC"
+
+    # ── THE STANDPOINT GATE ──────────────────────────────────────────────────
+    #
+    # Every tile this critic reads was shot from ONE place: capture_config_sweep's
+    # YAW 0.62, PITCH -0.26. That is not a neutral default, it is a standpoint, and
+    # an axis whose difference resolves obliquely to it is invisible here no matter
+    # how loudly it differs in the room. So "INERT" has always meant, precisely,
+    # "this axis does not change what the camera at 0.62 happened to be facing."
+    #
+    # Audited over the whole corpus, that cost FIVE FALSE NEGATIVES out of seven
+    # dead verdicts. random_number_book_page_1955.disclosure measured 0.00% here and
+    # 62.50% from the opposite side, because the RAND 1955 page is printed on one
+    # face and this camera stands behind it — every published tile of that artifact
+    # was the blank back of a sheet of paper. reaction_diffusion.inoculation measured
+    # 0.00% and was written into the project's own notes as "genuinely inert"; it is
+    # 21.84% from above. random_walk_collection.residue is 3.07x from the opposite.
+    #
+    # That audit was run by hand, which means it would have been forgotten. This
+    # makes it a gate: an INERT verdict is no longer reportable until somebody has
+    # looked from somewhere else. The critic cannot re-render (that needs Godot and
+    # the user:// lock), so it does not pretend to — it REFUSES TO CONVICT, names the
+    # command, and downgrades the verdict to UNCONFIRMED.
+    unconfirmed = [r for r in report if r["verdict"] == "INERT"
+                   and _declared_axis(r["artifact"], r["axis"])
+                   and not _standpoint_checked(r["artifact"], r["axis"])]
+    for r in unconfirmed:
+        r["verdict"] = "INERT?"
+        r["needs_standpoint_check"] = True
+
+    anamorphic = [r for r in report if r["verdict"] == "ANAMORPHIC"]
     inert = [r for r in report if r["verdict"] == "INERT"]
     weak = [r for r in report if r["verdict"] == "WEAK"]
     blank = [r for r in report if r["verdict"] == "NO RENDER"]
@@ -340,7 +451,23 @@ def main() -> int:
     local = [r for r in report if r["verdict"] == "local"]
     bites = [r for r in report if r["verdict"] == "bites"]
     print(f"{len(report)} axes measured · {len(bites)} bite · {len(local)} local"
-          f" · {len(weak)} weak · {len(inert)} inert · {len(blank)} not rendered")
+          f" · {len(weak)} weak · {len(inert)} inert · {len(unconfirmed)} unconfirmed"
+          f" · {len(anamorphic)} anamorphic · {len(blank)} not rendered")
+    if anamorphic:
+        print("\nANAMORPHIC — flat from this pipeline's one standpoint, alive from another."
+              " The verdict described where the camera stood, not the artifact:")
+        for r in anamorphic:
+            sp = r["standpoint"]
+            print(f"  {r['artifact']}.{r['axis']}  canonical {sp['canonical']*100:.2f}%"
+                  f"  ->  {sp['best_other']*100:.2f}% from {sp['best_other_view']}")
+    if unconfirmed:
+        print("\nINERT? — NOT CONVICTED. These look dead from the only place this pipeline"
+              " has ever stood (yaw 0.62, pitch -0.26). Five of seven dead verdicts in this"
+              " corpus turned out to be anamorphic — alive from another angle — so an"
+              " unchecked INERT is not evidence. Run the probe, then re-read:")
+        for r in unconfirmed:
+            print(f"  python tools/probe_anamorphic.py --token={r['artifact']}"
+                  f" --axis={r['axis']}")
     if blank:
         print("\nNO RENDER — the frames are empty, so NOTHING here is a verdict about the"
               " axis. The artifact drew nothing in the sweep. Usual causes: it builds only"
@@ -377,9 +504,24 @@ def main() -> int:
                       f"  (focus {t['focus']*100:.2f}%, colour {t['rgb']*100:.2f}%)")
         print(f"  {n} twin pair(s) across {len(twinned)} axes")
     if inert:
-        print("\nINERT — these knobs are not connected to anything you can see:")
-        for r in inert:
-            print(f"  {r['artifact']}.{r['axis']}")
+        convicted = [r for r in inert if r.get("standpoint")]
+        ungated = [r for r in inert if not r.get("standpoint")]
+        if convicted:
+            print("\nINERT — CONVICTED. Flat from the canonical view AND from the four other"
+                  " standpoints the probe stood at. These knobs are not connected to"
+                  " anything anyone can see from anywhere:")
+            for r in convicted:
+                sp = r["standpoint"]
+                print(f"  {r['artifact']}.{r['axis']}"
+                      f"  (best other view {(sp.get('best_other') or 0)*100:.2f}%"
+                      f" from {sp.get('best_other_view')})")
+        if ungated:
+            print("\nINERT (undeclared) — flat, and NOT gated on a standpoint probe because"
+                  " these are not promoted axes. The props gallery predates dna.axes: its"
+                  " entries carry hand-authored @export dicts, so this tool synthesises an"
+                  " axis per key. Promote the artifact if the knob is meant to be a family:")
+            for r in ungated:
+                print(f"  {r['artifact']}.{r['axis']}")
     if local:
         print("\nLOCAL — decisive where it happens, diluted by a wide frame."
               " These want a tighter capture, not a redesign:")
