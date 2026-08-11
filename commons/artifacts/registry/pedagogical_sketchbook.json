@@ -1,0 +1,75 @@
+{
+	"registry_info": {
+		"name": "pedagogical_sketchbook",
+		"description": "Wave-1 synthesis (doc/plans/ARTIFACT_SYNTHESIS_PLAN.md). A hero built out of klee_walking_point: the Pedagogical Sketchbook's opening line taxonomy as one triptych, three sheets carrying the same walk read as active line, medial figure and passive plane.",
+		"note": "Per-token registry file so parallel synthesis builders never share one JSON. This artifact does not replace klee_walking_point and must not be substituted for it in the Primitives sequence: the walk-scale encounter with one line, alone, is the curriculum's spine. The triptych is for a room that wants the comparison."
+	},
+	"artifacts": {
+		"pedagogical_sketchbook": {
+			"lookup_name": "pedagogical_sketchbook",
+			"name": "Pedagogical Sketchbook",
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Three sheets pinned side by side on one standing easel, each carrying THE SAME WALK read a different way: the open line still on its journey, the same walk closed on itself so its deviation is spent on the radius of an enclosure, and the same walk untouched with a plane raised to the floor beneath it. Klee's Pedagogical Sketchbook divides line into active, medial and passive on page one; this is that page made an object. Built out of three live klee_walking_point instances, not a port.",
+			"scene": "res://commons/artifacts/pedagogical_sketchbook/pedagogical_sketchbook.tscn",
+			"artifact_type": "exhibit",
+			"dev_themes": ["commons", "primitives", "klee", "line", "synthesis"],
+			"tags": ["klee", "line", "point", "taxonomy", "triptych", "didactic", "synthesis"],
+			"footprint": [3, 1, 1],
+			"size_group": "large",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": ["primitives"],
+			"parameters": {
+				"walk_style": "meander",
+				"grain": "stroke",
+				"footprint": [3, 1, 1],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 3,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": ["klee_walking_point"],
+				"preferred_zone": "teaching",
+				"footprint_source": "derived",
+				"footprint_note": "2.96 m wide x 1.89 m tall x 0.16 m deep, computed from FRAME_W 0.92, PANEL_PITCH 1.02 and FRAME_H 1.18 in the script. Three cells of frontage, one deep. footprint_cells is a COUNT, not a [w,d] pair - a pair crashes the placement engine. The front clearance is 3 because the whole argument is a comparison read at a glance, and a viewer standing closer than about 2.5 m cannot hold all three sheets in one look."
+			},
+			"qfep_connection": "The three kinds of line are not three objects. They are one walk and three decisions about where to stop looking. Klee's page one is taught as a classification; put the three side by side out of one walk and it reads instead as a demonstration that classification was the wrong verb - the mark does not change, only what it is taken to be the boundary OF.",
+			"relationships": "Made entirely out of [[klee_walking_point]] - three live instances of its scene, driven by its own LINE_KINDS table, with nothing about the walk re-implemented here. WHAT THAT SOURCE LEARNED, and what this exhibits: its promotion found that walk_style says what the point DID while `line` says what the resulting mark IS, and that Klee's three kinds are one silhouette apart - open string, closed ring, filled field. Crucially it found that MEDIAL IS NOT A CIRCLE: closing the walk on itself spends the wander on the RADIUS, so a medial meander still shows where it wandered; and that PASSIVE TOUCHES THE TRAIL NOT AT ALL - the identical points are kept and a surface is raised beneath them, so only what the line bounds has changed. Both findings are invisible in a single still, because one still is one value of `line`. The triptych is that axis unrolled into space so the three can be held in one look. Sibling to [[grabbable_line]], which asks what a line is made OF and answers by breaking a solid rod into named parts (`grain` = solid|split|quartered|lattice|shell) - the mirror of this object, which asks what a line IS and answers by not touching it. Cousin to [[draw_dot_time_domain]], whose inherited `retention` axis (none|trace|lattice|archive|wax) is the same discovery in the time domain: what a trace KEEPS against what a trace IS; it also learned, and this reuses the lesson, that the standing photographable record is the axis and the live animation is not.",
+			"dna": {
+				"promoted": "2026-08-06",
+				"stage": "synthesis",
+				"axes": {
+					"walk_style": ["meander", "straight", "spiral", "arc"],
+					"grain": ["points", "beads", "stroke", "flood"]
+				},
+				"default": "walk_style=meander, grain=stroke - the strongest single reading, and a free choice because a synthesis has no shipped placements to preserve. meander is the founding image and the only walk whose biography survives legibly into all three readings: you can follow the same wobble along the open line, around the ring's radius and across the plane's top edge. stroke is klee_walking_point's own shipped trail_points of 48, so at the default each sheet is exactly the picture that artifact ships in its twenty maps - the triptych's default IS the source's default, three times, which is the reading to stand in front of in a museum.",
+				"was": "synthesized from klee_walking_point. Nothing was refactored and nothing about the source changed: this is a new object that instantiates klee_walking_point.tscn three times. The gap it fills is that `line` (active|medial|passive) is an axis, and an axis shows ONE value per still, so the claim those three values make together - that they are one walk and not three objects - is the one thing the source can never photograph. Twenty placements of klee_walking_point all show the active line; nobody has ever met the medial or passive reading in a map at all.",
+				"sources": ["klee_walking_point"],
+				"axes_note": "walk_style is REUSED CHARACTER FOR CHARACTER from klee_walking_point - same four values, same order, same default - and it turns all three sheets at once, because the triptych is the `line` axis unrolled into space and the knob that remains is the one that changes the walk they are all readings of. grain is new here: how finely the walk is quantised into its constituent points (9 / 20 / 48 / 112 in trail_points).",
+				"declined": "The `line` axis itself is declined, and the refusal is the design: this synthesis CONSUMES it. line is no longer a knob because it has become the three panels, simultaneous. Promoting it back would be a triptych of triptychs. `grain`'s value list from [[grabbable_line]] is also refused, on the folding_past precedent: solid|split|quartered|lattice|shell are PARTITIONS OF A SOLID ROD and every one presumes a whole that gets broken, but this trail was never solid - it is points pretending to be a line, and the question runs the other way, how many points before the pretence works. Taking that word with those answers would name a mechanism this object lacks. `resolution` (coarse|mid|fine|ultra) was refused too: it is a quality ladder, and here the coarse end is not worse, it is the truth uncovered. The word `grain` is kept because grabbable_line is the sibling asking the same question in the same sequence. Animation - speed, hold, loop, how far the head has got - is declined for klee_walking_point's own reason: the evidence is one still and a still cannot tell 0.32 from 0.9. Here it is more than declined, it is pinned (see fixture). Panel arrangement is declined as an axis because it is mounting, not argument.",
+				"finding": "At grain=points the left sheet has stopped being a line - it is nine beads - and the centre sheet has stopped being a ring; but the right sheet is still unambiguously a plane. Klee's third kind survives coarse sampling that destroys the other two, because a plane only needs its EDGE sampled while a line has to BE its points. In the source's code the plane's column width is step*1.15, tied to the sample spacing, so the columns touch at any count and the field never breaks up. No single artifact could show this: it needs two line kinds in one frame at one sampling density.",
+				"second_finding": "walk_style=spiral exposes an assumption inside Klee's passive line. A spiral is not single-valued in x, so the plane's columns pile up on each other instead of forming a field: the third kind quietly presumes the walk is a graph over its own baseline. The source has always behaved this way and it is NOT repaired here - repairing it would make this a port rather than an exhibit, and the exposure is worth more than the tidy picture.",
+				"determinism": "There is no seed, because there is nothing random. klee_walking_point is deterministic summed sines with no randf and no noise anywhere in the file - a requirement of the Primitives sequence, stated in its own source comment and confirmed by reading all 405 lines. The three sheets therefore share one walk BY CONSTRUCTION: same scene, same walk_style, walk_length, walk_height and trail_points, all written before add_child so each instance builds with them in its own _ready. That is a stronger guarantee than a shared seed, and it is why dna.fixture carries no seed to pin.",
+				"fixture": {},
+				"fixture_why": "Empty, and deliberately. The two things a fixture would normally supply here are supplied by the artifact itself. (1) The seed: there is none - see determinism above. (2) The animation: klee_walking_point walks, holds and loops, so a still taken a third of a second after boot catches a dim half-drawn trail; its own capture fixture is walk_speed 40 / loop false. This artifact writes walk_speed 1000 and loop false onto each sheet in code, which carries the walk past its end inside the FIRST process frame and holds it lit forever, so the still is the finished mark by construction and no settle time has to be assumed. Do NOT fixture `captions`: it is a typed bool export and a fixture string \"true\" is rejected before _ready. A map token reaches it as config_captions, which is parsed from text.",
+				"framing": 0.55,
+				"framing_why": "DERIVED, not guessed. The capture AABB is 2.96 x 1.89 x 0.16 m, diagonal 3.516, so radius 1.758; the bench computes dist = radius / tan(FOV/2) * PAD * framing with FOV 34 and PAD 1.9, and views from yaw 0.62 / pitch -0.26. At framing 1.0 the triptych's projected width (2.96*cos(35.5deg) + 0.16*sin(35.5deg) = 2.50 m) fills only 37% of a 6.7 m visible extent - a wide flat subject fitted by DIAGONAL, the exact case the brief's table sends to dna.framing. At 0.55 the visible extent is 3.68 m, so the subject fills 68% of the width and 51% of the height with no clipping in either direction.",
+				"aabb_note": "The frames and the foot bar are the only geometry that never changes, and they enclose every variant of both axes: the widest content is the open meander at half walk_length 0.375 against an inner half-width of 0.425, and the tallest-plus-deepest is spiral+passive spanning y in [-0.6475, +0.3775] against an inner half-height of 0.555 about a content offset of -0.135. So the capture AABB is IDENTICAL for all sixteen variants and the fixed camera frames the same box every time - the tiles are comparable pixel for pixel, which is what makes the grain finding readable at all. No layers=0 anchor is needed: every body here is a MeshInstance3D and there is no MultiMesh.",
+				"budget": "13 frame boxes plus 3 x (trail_points + 1) trail spheres, plus up to trail_points plane columns on the passive sheet. Worst case at grain=flood is 3 x 113 + 112 + 13 = 464 MeshInstance3D and 3 Label3D. No collision shapes and no static bodies: the object is looked at, not handled.",
+				"drift_guard": "The panel list is read at runtime out of klee_walking_point's own LINE_KINDS const, in the source's own order - the sheets are active, medial, passive left to right because the source says so, not because a curator chose. The slot_machine pattern applied to a taxonomy. walk_style cannot be read the same way because GDScript cannot build an @export_enum from a const and the declaration gate reads the enum, so the four words are written out AND _check_vocabulary() compares them to KLEE_SCRIPT.WALK_STYLES at every _ready and push_warnings on divergence. Every property written onto a sheet goes through _apply_to_panel(), which checks the real property list first: Object.set() on a name that does not exist is a silent no-op, and a silent no-op here would publish sixteen identical frames as a verdict about the design - the science_screen failure, one level down.",
+				"still_note": "Everything this artifact argues is a standing object. The three marks are finished and held, the frames do not move, and the difference between the sheets is a silhouette difference - open string, closed ring, filled field - which is exactly what survives a shutter. The one thing a still cannot carry is the source's own best moment, the head crawling along the trail lighting it point by point; that is why klee_walking_point stays placed and this does not replace it."
+			}
+		}
+	}
+}

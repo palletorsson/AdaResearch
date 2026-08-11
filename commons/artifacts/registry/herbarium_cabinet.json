@@ -1,0 +1,68 @@
+{
+  "artifacts": {
+    "herbarium_cabinet": {
+      "name": "Herbarium Cabinet",
+      "lookup_name": "herbarium_cabinet",
+      "scene": "res://commons/artifacts/herbarium_cabinet/herbarium_cabinet.tscn",
+      "class_name": "HerbariumCabinet",
+      "category": "exhibit",
+      "artifact_type": "synthesis",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "description": "Ten real botanical_flower specimens standing in one body, arranged and dressed by the exhibits family's `house`. Same ten plants every time; six different collections. white_cube keeps three on separate plinths with air around them and drops seven, including the unnamed one it cannot show at all. wunderkammer crowds all ten on three ranked shelves behind old warm glass, the bays sized off each species' own stem height. depot racks them in accession order on raw ply, packed from one end so the waste shows, and stencils a quantity that names no plant. forensic presses all ten flat against a brushed steel panel, sorted by measurement, each beside a tick rule cut to its own height. didactic prints a card with the species name under every single one. derelict is the same case as wunderkammer with the light off, the glass dusty, a shelf off true and the specimens leaning.",
+      "tags": [
+        "synthesis",
+        "collection",
+        "herbarium",
+        "botanical",
+        "display",
+        "museum",
+        "taxonomy",
+        "placeable"
+      ],
+      "map_sequences": [],
+      "qfep_connection": "E_encoding / P_position: a collection is a claim about its members, and the members do not get a vote. The ten specimens are byte-identical across all six values — every difference in the frame is the institution's, not the plants'. Two of the values make the claim in the open: white_cube's argument is what it left out (the chequered one, the one shaped like an insect, the one nobody calls a flower, and the unnamed one whose whole position is that a flower can be specified without being named), and forensic's press is the flattening that makes a body measurable, performed on the body rather than on the record. The remaining question the cabinet does not answer is whether any arrangement could host ten things without ranking them.",
+      "relationships": "Synthesised from [[botanical_flower]] and [[exhibit_furniture]]; the exhibit IS what each of them learned. [[botanical_flower]] found ten complete 25-key parameter sets that no player had ever met, because the wrapper set `preset` after the generator had already built — and then learned a second thing when its own first pass declared six of nine and dropped fritillaria, orchid and clover for sitting close to their neighbours in parameter space, which is not what the axis measures. All ten stand here, and this cabinet reads the roster out of BotanicalFlowerArtifact.SPECIES and every height out of BotanicalFlower.PRESETS rather than retyping either. [[exhibit_furniture]] found that its single look across 1077 placements was not neutrality but the white cube, and that its houses are all empty — 'all empty; all waiting' is its own essence line. This is the first object to put something in them. Its palette, its house_name() alias reader and its band/mark dressing are read live from ExhibitFurniture, so the herbarium owns no colour of its own and cannot drift from the family. Siblings on the same word: [[exhibit_podium]] and [[exhibit_vitrine]] (which spelled it `regard` and converged). Neighbours, not sources: [[fern_press]] presses ONE algorithmic specimen flat between glass, and [[codex_flora]] rows up four grammars — both are collections of one kind of thing; this one is a collection of one kind of housing.",
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 0,
+          "left": 1,
+          "right": 1
+        }
+      },
+      "footprint": [
+        2,
+        3,
+        1
+      ],
+      "dna": {
+        "promoted": "2026-08-06",
+        "stage": "synthesis",
+        "axes": {
+          "house": [
+            "white_cube",
+            "wunderkammer",
+            "depot",
+            "forensic",
+            "didactic",
+            "derelict"
+          ]
+        },
+        "default": "house=wunderkammer. A synthesis has no shipped placements, so the default is a free design choice and this is the strongest single reading: it is the only value that stands all ten species at once, which is the whole grievance the source axis was promoted to answer (nine species in the source tree that no player had ever met), and a dry-garden cabinet is the register a herbarium historically lives in. white_cube was the obvious alternative and is wrong as a default for one reason: it shows three and hides seven, so shipping it would default to hiding exactly the thing [[botanical_flower]] was promoted to reveal.",
+        "was": "synthesized from botanical_flower (species x10) and exhibit_furniture (house x6). Neither source could state this on its own: the flowers can only be met one at a time, and the houses are all empty.",
+        "sources": [
+          "botanical_flower",
+          "exhibit_furniture"
+        ],
+        "shared_with": "exhibit_furniture / exhibit_podium / exhibit_vitrine — the same word, the same six values, in the family's order, parsed through ExhibitFurniture.house_name() so #house:, #regard: and the old spellings (plain, reliquary) reach all four members identically. If that vocabulary is honest these should measure alike, and the interesting result would be if they do not: this is the word's first test OUTSIDE the furniture family, on an artifact that hosts rather than waits.",
+        "widened": "The commission named four values (white_cube, wunderkammer, depot, forensic). Shipped SIX, the family's full list character for character. Four would re-open exactly the collision exhibit_furniture's 2026-07-27 convergence pass closed when it widened `house` from four to six and recorded that widening beat squeezing didactic and derelict into forensic and depot — and it would repeat, in the same file that credits it, botanical_flower's own corrected mistake of dropping values for being near their neighbours. Both added values are also the two a herbarium argues hardest about: a herbarium sheet is a didactic object by construction (a plant turned into a label with a plant attached), and a herbarium is already a collection of dead things kept because somebody decided they mattered, which makes derelict the state where nobody does any more and the specimens do not notice.",
+        "declined": "`guard`, the exhibits family's second axis (none < label < fixture < frame < hood < cordon). Refused, and not for want of geometry: a cabinet IS apparatus, and every value of `house` already sets this artifact's distance — white_cube has no case at all, wunderkammer/didactic/derelict glaze, depot leaves the rack open, forensic mounts the specimens on a bare ruled panel. Adding `guard` would put a barrier around a barrier and the sweep would measure the same pixels twice under two names, which is the collision botanical_flower declined its own second axis to avoid. Also declined: a `roster` axis (all / type-specimens / one). It is the same decision `house` already makes — white_cube's edit down to three IS the roster claim — so it would fight the first axis rather than cross it.",
+        "still_note": "Built for the fixed-camera bench and checked against it. (1) DETERMINISM: BotanicalFlower.build() opens `rng.seed = c.seed as int`; `seed` is 0 in DEFAULT_CONFIG and is not set by any of the nine presets, by the wrapper, or by this cabinet, and every rng.randf_range in the generator draws from that one seeded stream in build order. A species is therefore the same object every run, the six frames differ only by the axis, and NO seed fixture is needed or declared — verified by reading the generator, not assumed. The cabinet's own arrangement uses no randomness at all: the derelict lean angles are a fixed ten-entry table. (2) NO FIXTURE: _ready() is ungated and builds standalone, so nothing has to be supplied. (3) FRAMING: every value builds inside the same 1.60 x 0.52 envelope and tops out between 1.5 m (white_cube, which has plinths and air rather than a case) and 2.07 m, deliberately, because the camera fits the union of all six boxes and one sprawling value would shrink the other five in frame and read as a size change rather than as an argument. (4) MESHES: the body and every specimen are MeshInstance3D — the generator's MultiMesh path belongs to create_garden(), which build() never calls — so no layers=0 extent anchor is required. Element count is roughly 1000 (allium's twenty-head umbel is ~420 of them on its own), well under the ~3200 budget, and nothing carries collision. (5) TEXT is one baked plate per house, except didactic, whose ten species cards are its entire claim. (6) EXPECTED WEAK PAIR: none — the six differ in body albedo (0.85 / 0.19 / 0.72 ply / metallic steel / 0.70 grey / 0.26), in arrangement, and in whether there is a case at all. If a sweep comes back flat, suspect the harness before the design and check the declaration first."
+      }
+    }
+  }
+}

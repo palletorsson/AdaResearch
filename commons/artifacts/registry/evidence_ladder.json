@@ -1,0 +1,115 @@
+{
+  "artifacts": {
+    "evidence_ladder": {
+      "name": "Evidence Ladder",
+      "lookup_name": "evidence_ladder",
+      "description": "A synthesis bench, 2.9 m of it: four identical piers on one rail, each carrying a slate panel with the same floor line at the same height, each giving a different account of ONE event. result is the body at rest on an unmarked panel. trace is the whole flight as a time-coloured ribbon. longhand is the working — the floor line ticked as a time axis, the flight dropped as dots at an even cadence so the widening gaps are the acceleration, a lower lane carrying v(t), and the range lying flat on the floor. axiom withholds the flight entirely and keeps four lines of update and the initial state in a ruled square. Every mark on all four panels is read out of a single integration performed once at build time. Nothing here moves, nothing here is random, and the artifact has no per-frame code at all.",
+      "scene": "res://commons/artifacts/evidence_ladder/evidence_ladder.tscn",
+      "category": "physics",
+      "artifact_type": "synthesis",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "sequence": "forces",
+      "size_group": "xlarge",
+      "tags": [
+        "evidence",
+        "synthesis",
+        "epistemology",
+        "gravity",
+        "projectile",
+        "restitution",
+        "diagram",
+        "exhibit"
+      ],
+      "dev_themes": [
+        "what counts as showing",
+        "disclosure",
+        "integration",
+        "gravity"
+      ],
+      "interactions": [
+        "walk the row left to right",
+        "compare the four readings of one event",
+        "read the law on the fourth pier and notice the event is gone"
+      ],
+      "capacity": "SEE that the four rungs of `evidence` are not a staircase — result, trace and longhand disclose more and more of one event, and axiom takes the event away again",
+      "qfep_connection": "F is the law, one _step, printed on the fourth pier and identical under all three events. E is the four accounts, which are irreducible to each other: no rung can be recovered from the rung beside it, which is why the family needed a word for the choice at all. lambda is where along the row you are willing to stand. The dark spot is the first pier — a result cannot tell a fall from a bounce, and every exhibit that shows only its answer is standing there.",
+      "relationships": "Synthesised out of the `evidence` family, the corpus's most-shared axis word. Three members were read closely and each contributed a specific finding this bench exhibits rather than describes:\n\n[[example_1_7_motion_101_velocity_vr]] extracted its law into a single _step(p, v, dt) lifted out of _process so that its predicted trace could not drift from the running scene — 'an exhibit that predicts the path with its own copy of the arithmetic is one that will eventually be lying'. Here that rule is taken as a construction constraint and made stronger: not one function but one RUN. The ribbon, the dots, the velocity lane, the range line, the resting body and the length of the time axis all index the same arrays from one build-time integration. It also lent the amber-to-blue time colouring, which is on the trace pier for its reason and not its look, and the ruled square holding the initial state, which is its own answer to text and diagram colliding on one plate.\n\n[[bouncing_ball]] drew its decay envelope PREDICTED from each ball's own restitution rather than accumulated from watching, and it emitted a floor line at every value because 'without a zero line an envelope is a shape, and with one it is a measurement' — every panel here carries that floor line at the same height, including the one that withholds the event. It also reported, honestly and against its own interest, that its restitution axis was inert at evidence=result because at that rung the parameter 'has no geometry'. The first pier of this bench is that finding built on purpose: a fall and a bounce make the SAME picture there.\n\n[[dark_side_prism]] made axiom the rung that withholds — 'the album cover refused, the law kept'. The fourth pier draws no flight at all.\n\nThe wider family was measured, not assumed: 45 registry entries declare an `evidence` axis. 29 hold result/trace/longhand/axiom; 7 are three-value truncations of it; 5 ([[wave_interference_tank]], [[wave_interference_3d]], [[wave_interference]], [[force_field_visualizer]], [[DualBallFMController]]) put `sources` where `axiom` goes, because their event is a SUM and the operands, not the symbols, are their deepest rung; and 4 ([[galton_board]], [[distribution_sampler]], [[distribution_comparator]], [[shannon_workbench]]) carry census/sample/anecdote/none, which is a question about sampling wearing the same word. This bench builds the 29. It does NOT replace any of them: the walk-scale encounter with one artifact alone is the curriculum, and this is the room that wants the comparison.",
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 3,
+        "clearance": {
+          "front": 3,
+          "back": 0,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": true,
+        "orientation": "face_approach",
+        "isolation": 1,
+        "cluster_with": [
+          "evidence",
+          "forces",
+          "physics"
+        ],
+        "preferred_zone": "teaching",
+        "footprint_source": "computed_from_geometry"
+      },
+      "measurements": {
+        "aabb_size": [
+          2.92,
+          1.585,
+          0.267
+        ],
+        "aabb_center": [
+          0.0,
+          0.7925,
+          0.0035
+        ],
+        "measured_at": "2026-08-06T00:00:00Z",
+        "measured_by": "computed from the script's layout constants; MeshInstance3D only, which is what the capture AABB counts"
+      },
+      "dna": {
+        "promoted": "2026-08-06",
+        "stage": "synthesis",
+        "axes": {
+          "phenomenon": [
+            "fall",
+            "throw",
+            "bounce"
+          ]
+        },
+        "default": "phenomenon=fall. A synthesis has no shipped placements, so the default is a free design choice and this is the strongest single reading rather than the emptiest: the subject of this bench is the LADDER, so the event under it should be the simplest event there is. A body released from rest is two lines of law with no horizontal term and nothing to explain, which leaves the four readings as the only thing in the frame that differs. `fall` is also first in the declared list because build_dna_gallery trims value lists from the TAIL to fit its cap, so a truncated sweep still gets the reading the description argues.",
+        "was": "synthesized from the `evidence` family (45 declaring entries; 29 on the canonical four values), read through example_1_7_motion_101_velocity_vr, bouncing_ball and dark_side_prism. Nothing was promoted here — this artifact did not exist. It is the cross-member argument those batches left in registry notes, built as a body.",
+        "sources": [
+          "example_1_7_motion_101_velocity_vr",
+          "bouncing_ball",
+          "dark_side_prism",
+          "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+          "wave_interference_tank",
+          "wave_interference_3d",
+          "force_field_visualizer",
+          "DualBallFMController",
+          "galton_board",
+          "distribution_sampler",
+          "distribution_comparator",
+          "shannon_workbench"
+        ],
+        "note": "THE ARGUMENT THE BENCH MAKES, and it is not the one the family's own notes make. Read as a list, result -> trace -> longhand -> axiom looks like a monotone ladder of disclosure, and several registry entries describe it exactly that way ('one ordered ladder monotone in disclosure', wave_interference_3d). Put the four side by side over one event and the top of it turns around. trace adds the history to the result; longhand adds the working to the history; axiom SUBTRACTS the event and keeps the rule. The fourth pier shows less of the thing than the first one does. That turn is the whole reason the word was hard enough to need four values, and it is invisible to any artifact that can only be one rung at a time — which is every member.\n\nTHE SECOND FINDING is in the first pier. bouncing_ball discovered, and reported against itself, that its restitution axis was genuinely inert at evidence=result because at that rung the coefficient 'has no geometry'. Generalised here: at `result` a fall and a bounce are the SAME PICTURE — a body at rest on a floor. The pier has no abscissa at all, because a result is a state and not a function. So the object that every exhibit is nominally about is legible at exactly one station, and it is the station that explains nothing.\n\nONE COPY OF THE ARITHMETIC, and one run of it. example_1_7's rule is a construction constraint here, not a quotation. _run() integrates once at build time through _step() and stores four index-aligned lanes; the ribbon, the dots, the velocity lane, the range line, the resting body and even the LENGTH OF THE TIME AXIS are reads of those lanes. There is nothing on this bench that can disagree with anything else on it, because there is nothing else for it to agree with.\n\nAND THE DOTS ARE NOT A SECOND INTEGRATION, which is the trap this design walked into once on paper. The obvious way to draw 'Euler steps you can see' is to re-integrate at a visible dt. At dt around 0.06 s the body penetrates the floor by a quarter of a metre before the reflection fires, the clamp-then-reflect hands back more speed than it took, and the drawn bounce climbs. The picture would have been about the integrator. So the dots are the same fine run read at a cadence you can count: equal in time, unequal in space, which is the entire content of the word accelerated. example_1_7 drew forty dots the SAME distance apart and said that is what constant velocity looks like when you stop saying it; these widen. The same picture, one derivative along.\n\nWHY THE HEIGHT SCALE IS SHARED AND THE TIME SCALE IS NOT. All three events peak at exactly h0 — fall and bounce because they are released there, throw because its vy is sqrt(2 g h0), the speed the fall arrives with run backwards — so heights are directly comparable across the three stills without any rescaling. Durations are not comparable: the fall is over in 0.45 s and the bounce takes four times as long. Rather than hide that behind a relabelled axis, the floor line is ticked at a fixed 0.1 s, so the TICK DENSITY carries the timescale and no caption has to be believed.",
+        "kin": "`evidence` IS REFUSED AS AN AXIS HERE, on the record, and the refusal is the design. Every one of the 45 members uses the word to pick ONE rung and discard the other three. On this bench all four are standing at once, and that simultaneity is the entire object: an axis whose every value demolishes three quarters of the exhibit is not this artifact's variation, it is its demolition. Adding a fifth value ('ladder') to hold the default would have been worse — it takes a family's word and quietly changes its value list, which is the failure check_dna_declarations.py exists to catch one level down. So the word is exhibited rather than turned, and what turns instead is the event under it.\n\n`phenomenon` is this artifact's own word; no sibling declares it. The nearest were bouncing_ball's `regime` (mixed|elastic|dead|inelastic) and nbody_simulation's `configuration` — regime names four POPULATIONS of restitution one chamber can run, which is a question about the spread of a parameter, where this names three different events under one unchanged law. Borrowing it would have meant borrowing answers that do not transfer, which the family already ruled on twice (folding_past refusing `fold`, sierpinski_pyramid refusing `removal`).\n\nWhat IS taken character for character is bouncing_ball's `dead`: e = 0 here is its perfectly inelastic landing, 'the first impact keeps nothing', and it is the floor rule both `fall` and `throw` run.",
+        "declines": [
+          "A SECOND AXIS on the fourth rung's two dialects — `axiom` (29 members: the law in symbols, the event withheld) against `sources` (5 members: the operands without the sum). It is a real fork, it was found by measuring the registry rather than reading its notes, and for a fall it would draw well: h0 and -g t^2 / 2 as two component curves summing to the trace. It is declined because it would change ONE panel out of four — a quarter of the ink, in a band roughly the size of the critic's hottest-5% window — and a faint verdict there would be a fact about dilution rather than about the fork. The honest way to show it is a second synthesis whose whole body is the fourth rung, not a second axis on this one.",
+          "`order` — the row read result-to-axiom against axiom-to-result, empiricism against deduction. It would bite enormously (three quarters of the frame changes) and that is most of what is wrong with it: a large measured number for a question about mounting rather than about the event. Two members already declare the same four values in opposite orders (galton_board ascending, distribution_comparator descending) and both say plainly it is about sweep truncation, not about reading direction.",
+          "Any axis on the INTEGRATOR — dt, the integration scheme, the Euler error between the coarse and fine runs. Real, teachable, and invisible in a still at the resolutions that keep the bench honest; and the one place it IS visible is the coarse-bounce energy gain, which is a fact about the arithmetic's implementation and not about the fall."
+        ],
+        "still_note": "WHAT SHOULD BITE AND WHAT SHOULD NOT, said in advance so a thin number is read correctly rather than filed as inert.\n\nPier 1 (result) is IDENTICAL across all three values by construction, and that is the design, not a fault. Piers 2 and 3 change almost completely: fall is a descending half-arc over a short time axis, throw a full symmetric arc, bounce a decaying train of arcs with a sawtooth velocity lane under it. The integration was re-run in Python before this was written rather than assumed, and the numbers are: T_win 0.479 / 0.958 / 1.947 s, so the floor line carries 5 / 10 / 20 ticks — the timescale is legible from tick density alone. Pier 4 changes least between fall and throw — one line of text and the arrow in the ruled square — because they run identical arithmetic and only v0 differs, which is exactly what that pier is for. So roughly half the ink in the frame moves, concentrated in two of four panels.\n\nONE THING THAT WILL NOT READ IN A STILL, stated so it is not mistaken for a bug: the bounce's apex heights measure 0.384 / 0.147 / 0.056 / 0.021 / 0.008 of h0, a clean geometric decay by e^2 = 0.3844. On the panel that is 23 / 9 / 3 / 1 / sub-pixel at framing 0.55. The first three arcs carry the decay; the tail is a thinning ripple along the floor line, which is what a settling ball looks like and is also all a 760 px frame can hold.\n\nTHE HEADER DOES NOT NAME THE EVENT, deliberately. A caption carrying the axis value would let a measurement of the physics be padded by a measurement of the label. Every pixel that differs between fall, throw and bounce on this bench is a mark the integration made.\n\nLabel3D text is non-billboard throughout, so LabelFramer leaves it alone as text already lying on a body — no plates are added and the capture AABB is the mesh extent, unchanged by the captions.\n\nIF IT COMES BACK FAINT, check the framing before the design: the subject is 2.92 m wide and 0.267 m deep, and the varying ink is four 0.52 m squares inside it. If a sweep is run --staged, a 1.585 m floor-standing bench does not want a plinth under it and the pair AABB will grow; measure unstaged.",
+        "framing": 0.55,
+        "framing_note": "ARITHMETIC, NOT TASTE. The mesh AABB is 2.92 x 1.585 x 0.267, diagonal 3.333, so radius 1.667. capture_config_sweep fits by diagonal — radius / tan(FOV/2) * PAD * framing, FOV 34, PAD 1.9 — which at framing 1.0 puts the camera 10.36 m out, where the visible frame is 6.33 m across and one panel's drawing is 8% of the frame width. This is precisely the wide-flat subject the brief's table warns about: the diagonal is set by the width, and the height and depth then buy nothing. 0.55 brings the camera to 5.70 m and the frame to 3.48 m; at the sweep's yaw of 0.62 rad the row projects to about 2.53 m, or 73% of frame width, and each panel drawing to about 12%. Subject is then roughly a third of the frame, well clear of the ~6% dilution floor.",
+        "fixture_note": "NO FIXTURE AND NO SEED, and the absence is checkable rather than claimed: there is not one call to randf, randi or randomize in the file. Every build of a given value is the same object down to the vertex. _ready is ungated and builds the whole bench standalone, so nothing has to be supplied for the still. There is also no _process and no _physics_process — the flight is integrated once at build time and drawn, so a capture's settle time cannot catch this artifact half-way through anything.",
+        "budget_note": "59 MeshInstance3D at fall, 77 at bounce (the count follows the tick count, which follows the timescale), and 11 Label3D. No collision bodies, no MultiMesh — so no layers = 0 extent anchor is needed and the capture AABB is the real body. The two ribbons (trace, velocity lane) are single ImmediateMesh surfaces of ~180 quads each rather than chains of boxes: a PRIMITIVE_LINE_STRIP would come back a hairline in a 760 px still, which is the documented way an axis reads as inert when it is not."
+      }
+    }
+  }
+}
