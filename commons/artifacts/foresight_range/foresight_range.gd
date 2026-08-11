@@ -122,7 +122,13 @@ const FIELD_BACK := -1.4                       # lane strips start behind the fi
 const FIELD_FRONT := 17.0                      # and run past the furthest landing
 const LANE_WIDTH := 0.62
 const VEL_SCALE := 0.10                        # metres of arrow per (m/s) — catapult's
-const GRAV_ARROW_LEN := 0.60                   # IDENTICAL at all four stations, on purpose
+const GRAV_ARROW_LEN := 1.15                   # IDENTICAL at all four stations, on purpose
+# 0.60 -> 1.15. What this arrow argues is its SAMENESS across four machines of
+# very different size — g does not care how big the thrower is — and its length
+# is not part of that claim, so lengthening it costs the argument nothing. It
+# buys the `vectors` axis its only difference between `sum` and `velocity`,
+# which measured 0.37% at the old length: one 0.6 m arrow per station on a lane
+# 18 m long.
 
 # ── MARK GAUGE — the range's, not the bench's. See dna.deepened. ─────────────
 # MEASURED: at the sweep's framing an 0.035 m beam was 0.7 px of a 760 px frame, so
@@ -665,11 +671,23 @@ func _build_plate(lane: Node3D, st: Dictionary) -> void:
 	lane.add_child(plate)
 
 
+## Bench-only, and untyped on purpose so a fixture string reaches it (a typed
+## float rejects "0.5" before _ready — the trap recorded in the promotion brief).
+##
+## WHY IT EXISTS: the station plates are billboarded Label3D, which the capture
+## AABB does not measure, and at font 48 / pixel_size 0.010 they project ~3.4 m
+## wide. They are what stops dna.framing going below ~0.46 — not the mesh. They
+## are sized for a walker standing 3 m away and are correct at that distance, so
+## they are not shrunk in the world; the sweep supplies a smaller value and the
+## rooms keep the plates they need.
+@export var plate_scale = 1.0
+
+
 func _make_label(text: String, color: Color, size: int) -> Label3D:
 	var l := Label3D.new()
 	l.text = text
 	l.font_size = size
-	l.pixel_size = 0.010
+	l.pixel_size = 0.010 * maxf(0.15, float(plate_scale))
 	l.modulate = color
 	l.outline_size = 8
 	l.outline_modulate = Color(0.02, 0.03, 0.05, 0.9)
@@ -716,7 +734,16 @@ func _arrow(parent: Node3D, origin: Vector3, dir: Vector3, color: Color,
 	var l: float = dir.length()
 	if l < 0.02:
 		return
-	var head: float = minf(0.22, l * 0.34)
+	# FIELD GAUGE, not bench gauge. This helper kept catapult's own arrow
+	# proportions — a 0.028 m shaft and a 0.072 m head — which are right at a
+	# bench you stand in front of and roughly ONE PIXEL across a lane 18 m long.
+	# The foresight repair thickened its crosses, plumbs and rings to MARK_T and
+	# left these alone, so `vectors` measured 0.01% between sum and gravity: the
+	# velocity arrow that is the whole difference between those two values was a
+	# hairline. Same fault the artifact's own header had already diagnosed for
+	# the arc ("right at a bench and sub-pixel across a 17 m field") and fixed in
+	# one place only.
+	var head: float = minf(0.42, l * 0.34)
 	var shaft_len: float = maxf(l - head, 0.01)
 	var mat: StandardMaterial3D = _glow(color, 1.9)
 	var root := Node3D.new()
@@ -727,8 +754,8 @@ func _arrow(parent: Node3D, origin: Vector3, dir: Vector3, color: Color,
 	var shaft := MeshInstance3D.new()
 	shaft.name = "Shaft"
 	var cm := CylinderMesh.new()
-	cm.top_radius = 0.028
-	cm.bottom_radius = 0.028
+	cm.top_radius = MARK_T
+	cm.bottom_radius = MARK_T
 	cm.height = shaft_len
 	cm.radial_segments = 10
 	shaft.mesh = cm
@@ -740,7 +767,7 @@ func _arrow(parent: Node3D, origin: Vector3, dir: Vector3, color: Color,
 	tip.name = "Head"
 	var hm := CylinderMesh.new()
 	hm.top_radius = 0.0
-	hm.bottom_radius = 0.072
+	hm.bottom_radius = MARK_T * 2.4
 	hm.height = head
 	hm.radial_segments = 12
 	tip.mesh = hm
