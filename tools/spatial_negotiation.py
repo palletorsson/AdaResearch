@@ -521,12 +521,34 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
         traces.append(Trace("circulation_on_floor", "fail",
                             f"{len(off_floor)} clearance cells fall outside the floor"))
         return False, 0.0, traces, exceptions
+    # THE BODY IS TESTED FIRST, AND IT IS THE HARD ONE. This rule used to check
+    # the CLEARANCE against the through-route and never the body — so a work
+    # standing squarely in the corridor passed while one whose standing room
+    # merely touched it was refused. doc/reports/interior_bottleneck.json found
+    # a case with 4 of 20 BODY cells on the route, unexamined, refused for 6
+    # clearance cells.
+    #
+    # A body on the route blocks the walk: nothing can pass through an object.
+    # Clearance on the route does not: the through-route and a viewing apron are
+    # allowed to be the same floor, because a visitor standing to look and a
+    # visitor walking past are the same person a moment apart. That is a
+    # compromise worth pricing, not a refusal.
+    body_on_route = world_phys & plan.route
+    if body_on_route:
+        traces.append(Trace("route_preserved", "fail",
+                            f"the body itself would stand on {len(body_on_route)} "
+                            f"through-route cells and block the walk"))
+        return False, 0.0, traces, exceptions
     route_eaten = world_circ & plan.route
     if route_eaten:
-        traces.append(Trace("route_preserved", "fail",
-                            f"clearance would occupy {len(route_eaten)} through-route cells"))
-        return False, 0.0, traces, exceptions
-    traces.append(Trace("route_preserved", "pass", "through-route untouched"))
+        traces.append(Trace("route_preserved", "compromised",
+                            f"clearance shares {len(route_eaten)} cells with the "
+                            f"through-route; the walk still passes"))
+        exceptions.append(
+            f"viewing apron overlaps the through-route by {len(route_eaten)} cells")
+        access_penalty += len(route_eaten) / max(1, len(world_circ))
+    else:
+        traces.append(Trace("route_preserved", "pass", "through-route untouched"))
 
     circ_clash = world_circ & set(occ.physical)
     if circ_clash:
