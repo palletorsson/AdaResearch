@@ -1,0 +1,99 @@
+{
+  "lookup_name": "lineage_vitrine",
+  "footprint": [
+    3,
+    1,
+    2
+  ],
+  "rotations": [
+    "0",
+    "90",
+    "180",
+    "270"
+  ],
+  "approach": "south",
+  "exit": "north",
+  "footing": {
+    "anchor": [
+      0,
+      0
+    ],
+    "tiles": [
+      [
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "extras": [],
+  "artifact_offset": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "clearance": [
+    5,
+    4,
+    3
+  ],
+  "placement_contract": {
+    "allowed_modes": [
+      "freestanding"
+    ],
+    "preferred_mode": "freestanding",
+    "required_support": "none",
+    "interaction_faces": [
+      "south"
+    ],
+    "front_clearance_m": 2.0,
+    "rear_clearance_m": 1.0,
+    "hard_zone_m": [
+      5.0,
+      4.0,
+      1.67
+    ],
+    "preferred_zone_m": [
+      7.0,
+      5.0,
+      1.67
+    ],
+    "circulation": "frontal",
+    "circulation_behind": true,
+    "containment": "exhibited",
+    "body_m": [
+      2.76,
+      0.52,
+      1.67
+    ],
+    "visual_radius_m": 2,
+    "importance": "related",
+    "preferred_venue": "interior",
+    "centre_offset_m": [
+      0.0,
+      0.0
+    ],
+    "base_y_m": -0.005
+  },
+  "_generated": {
+    "by": "tools/emit_dressing_room.py",
+    "at": "2026-08-12T14:49:25Z",
+    "from": {
+      "body.size_m": "measurements.aabb_size",
+      "body.footprint_cells": "measurements.grid_cells",
+      "placement.modes": "placement_contract.allowed_modes",
+      "placement.preferred_mode": "placement_contract.preferred_mode",
+      "clearance": "spatial_needs.clearance",
+      "clearance.front": "placement_contract.front_clearance_m",
+      "clearance.back": "placement_contract.rear_clearance_m",
+      "access.required_sides": "placement_contract.interaction_faces",
+      "presentation.importance": "default",
+      "presentation.visual_radius": "placement_contract preferred-minus-hard zone",
+      "containment": "placement_contract.containment (hand-authored)",
+      "presentation.preferred_venue": "placement_contract.preferred_venue"
+    },
+    "conflicts": [],
+    "note": "A DEFAULT, bootstrapped per SPATIAL_PIPELINE.md 4. Author over it freely \u2014 remove this block when you do, and the generator will leave the file alone."
+  },
+  "display_name": "Lineage Vitrine"
+}

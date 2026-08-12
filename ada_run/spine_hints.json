@@ -1,0 +1,154 @@
+{
+	"_readme": "spine_hints() as CALLED, not parsed — the doctrine defines it as dynamic. Regenerate after touching any artifact that implements it. Read by tools/spatial_contract.py.",
+	"artifacts_checked": 2653,
+	"hints": {
+		"combine_portals": {
+			"_scene": "res://commons/primitives/combines/combine_portals.tscn",
+			"approach": "south",
+			"budget_ms": 3.0,
+			"footprint": [
+				2,
+				16
+			],
+			"reading_dist": 1.0,
+			"role": "primary",
+			"tags": [
+				"oversized",
+				"corridor_incompatible"
+			]
+		},
+		"dark_sphere": {
+			"_scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+			"approach": "any",
+			"budget_ms": 0.2,
+			"footprint": [
+				1,
+				1
+			],
+			"height": -0.5,
+			"reading_dist": 0.0,
+			"role": "ambient",
+			"tags": [
+				"visual"
+			]
+		},
+		"diamondtoruscollection": {
+			"_scene": "res://algorithms/primitives/diamondtoruscollection/diamondtoruscollection.tscn",
+			"approach": "any",
+			"budget_ms": 2.0,
+			"footprint": [
+				2,
+				2
+			],
+			"reading_dist": 1.5,
+			"role": "primary",
+			"tags": [
+				"oversized",
+				"corridor_incompatible"
+			]
+		},
+		"grid_lines": {
+			"_scene": "res://commons/primitives/line/grid_lines.tscn",
+			"approach": "any",
+			"budget_ms": 0.6,
+			"footprint": [
+				5,
+				5
+			],
+			"reading_dist": 1.0,
+			"role": "primary",
+			"tags": [
+				"visual",
+				"static",
+				"isolated"
+			]
+		},
+		"interactive_point_origin": {
+			"_scene": "res://commons/primitives/point/interactive_point_origin.tscn",
+			"approach": "south",
+			"budget_ms": 1.2,
+			"footprint": [
+				2,
+				2
+			],
+			"height": 1.0,
+			"reading_dist": 2.0,
+			"role": "primary",
+			"tags": [
+				"vector",
+				"interactive",
+				"grouped"
+			]
+		},
+		"interactive_point_origin_force": {
+			"_scene": "res://commons/primitives/point/interactive_point_origin_force.tscn",
+			"approach": "south",
+			"budget_ms": 1.2,
+			"footprint": [
+				2,
+				2
+			],
+			"height": 1.0,
+			"reading_dist": 2.0,
+			"role": "primary",
+			"tags": [
+				"vector",
+				"interactive",
+				"grouped"
+			]
+		},
+		"library_rack": {
+			"_scene": "res://commons/artifacts/library_rack/library_rack.tscn",
+			"approach": "south",
+			"budget_ms": 8.0,
+			"footprint": [
+				3,
+				4
+			],
+			"reading_dist": 2.0,
+			"role": "primary",
+			"tags": [
+				"oversized",
+				"corridor_incompatible",
+				"gallery"
+			]
+		},
+		"science_screen": {
+			"_scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+			"approach": "south",
+			"budget_ms": 0.4,
+			"footprint": [
+				2,
+				1
+			],
+			"height": 2.0,
+			"reading_dist": 1.0,
+			"role": "reflection",
+			"rotation_y": 180,
+			"tags": [
+				"label",
+				"static"
+			]
+		},
+		"static_point": {
+			"_scene": "res://commons/primitives/point/static_point.tscn",
+			"approach": "any",
+			"budget_ms": 0.3,
+			"footprint": [
+				1,
+				1
+			],
+			"height": 1.0,
+			"reading_dist": 1.5,
+			"role": "supporting",
+			"tags": [
+				"vector",
+				"static",
+				"isolated"
+			]
+		}
+	},
+	"implementors": 9,
+	"returned_non_dictionary": [],
+	"schema": "adaresearch.spine_hints_dump.v1"
+}
