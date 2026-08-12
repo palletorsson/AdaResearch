@@ -154,6 +154,22 @@ class_name AdmissionRack
 const Admission = preload("res://commons/glass_rack/GlassRackController.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
+## THE STATUSES THIS RACK CAN ACTUALLY BUILD. This is NOT a second copy of the
+## vocabulary — the vocabulary is Admission.ADMISSIONS and it is never retyped. This
+## is the rack's own CAPABILITY list, and it exists to be checked against the owner's,
+## which is the divergence LAW 1 asks for and which the first draft of this file did
+## not perform. `_dress_bay` and `_mark_vessel` are both a `match` on three literal
+## branch names plus a default; if the family ever adds `loan` or `deaccessioned` to
+## ADMISSIONS, _plan() would lay out a fifth bay, _build_code_plate would give it a
+## fifth slot and a filled code, and BOTH matches would fall through to `pass`. The
+## rack would then exhibit a status with no dressing at any value of the axis: an
+## empty niche presented as an institutional position, and — worse for the evidence
+## loop — a bay that is identical at all four values, which would drag every focus
+## number down while looking like a finding about `carrier`. `none` is in this list
+## deliberately: it is dressed by building nothing, which is a real branch and the
+## artifact's own argument about bay 1, not a gap.
+const DRESSABLE: PackedStringArray = ["none", "bench", "residue", "exhibit"]
+
 @export_group("DNA")
 ## AXIS — WHERE INSTITUTIONAL STATUS IS CARRIED. See the block above. Declared
 ## default-first, then in DESCENDING separation from the default, so a sweep
@@ -289,16 +305,34 @@ func _pick_carrier(raw: String) -> String:
 
 
 ## The bay vocabulary is BORROWED, so it gets checked rather than trusted. If
-## GlassRackController's ADMISSIONS ever changes shape this rack will say so out
-## loud at build time instead of silently exhibiting a vocabulary nobody uses.
+## GlassRackController's ADMISSIONS ever changes shape this rack says so out loud at
+## build time instead of silently exhibiting a vocabulary nobody uses.
+##
+## THE THIRD CHECK IS THE ONE THAT MATTERS and the first draft of this file was
+## missing it. Size and emptiness are cheap; the failure that would actually ship is
+## the family GAINING a value. The rack would build the extra bay's chassis and code
+## plate from ADMISSIONS and then find no branch for it in either match — an empty
+## niche, identical at all four values of `carrier`, quietly flattening every number
+## the evidence loop produces. A push_error naming the exact word is the difference
+## between a five-minute fix and a puzzling capture.
 func _check_borrowed_vocabulary() -> void:
 	var owner_list: PackedStringArray = Admission.ADMISSIONS
 	if owner_list.size() < 2:
 		push_error("admission_rack: GlassRackController.ADMISSIONS is %d long — "
 			% owner_list.size() + "the rack has nothing to exhibit.")
+	var undressable := PackedStringArray()
 	for w in owner_list:
-		if String(w).strip_edges() == "":
+		var s: String = String(w).strip_edges()
+		if s == "":
 			push_error("admission_rack: GlassRackController.ADMISSIONS contains an empty value.")
+		elif not DRESSABLE.has(s):
+			undressable.append(s)
+	if undressable.size() > 0:
+		push_error("admission_rack: GlassRackController.ADMISSIONS has grown %s, which "
+			% str(undressable) + "this rack has no dressing for. Those bays will be "
+			+ "built empty at EVERY value of `carrier` and will read as a dead axis. "
+			+ "Add a branch to _dress_bay and _mark_vessel, or the family and the "
+			+ "synthesis have silently forked.")
 
 
 func apply_grid_config(config: Dictionary) -> void:

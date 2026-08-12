@@ -130,25 +130,34 @@ const STAIN_LOBES: Array = [
 ## rather than in a comment that cannot be wrong out loud. _g["px_per_m"] is the one copy of
 ## that arithmetic and this is what reads it.
 ##
-## The sweep's pitch is -0.26 rad = 14.90 degrees of elevation, so a mark lying on the ground
-## keeps sin(14.90) of its depth and a mark standing up keeps cos(14.90) of its height. Both
-## factors are applied here, which is the conservative reading: no mark is credited with the
-## yaw's diagonal widening, though the posts and the mast get it.
+## A mark is not foreshortened by where it lies but by WHICH WAY ITS READ DIMENSION RUNS, and
+## getting that wrong is how this check nearly shipped a false alarm: the stain's drag runs
+## lie flat on the ground, but the 0.32 m that carries their read is their WIDTH, across the
+## view, which the elevation does not compress at all. Three cases, at pitch -0.26 rad
+## (14.90 degrees of elevation) and yaw 0.62 rad:
+##   "d"  into the view along the ground — compressed hardest, by sin(14.90) = 0.2571
+##   "w"  across the ground — untouched by the elevation, so only the yaw, and the worse of
+##        the two horizontal runs is taken: sin(0.62) = 0.5810
+##   "s"  standing up — cos(14.90) = 0.9664
+## Every factor here is the conservative one. No mark is credited with the yaw's diagonal
+## widening even where it genuinely gets it: a 0.15 m square post presents 0.21 m of
+## silhouette at this yaw, and it is checked as 0.15.
 const ELEV_SIN: float = 0.2571
+const YAW_MIN: float = 0.5810
 const ELEV_COS: float = 0.9664
 const GAUGE_FLOOR_PX: float = 5.0
 
-## name, the metres that carry the read, and the plane it lives in: "g" ground / "s" standing.
+## name, the metres that carry the read, and which way that dimension runs: "d" / "w" / "s".
 const GAUGE_MARKS: Array = [
-	["stain core band", 0.75, "g"],
-	["stain drag run", 0.32, "g"],
+	["stain core band", 0.75, "d"],
+	["stain drag run", 0.32, "w"],
 	["cage rail", 0.10, "s"],
 	["cage kick board", 0.20, "s"],
 	["cage post", 0.15, "s"],
 	["cage tag", 0.35, "s"],
 	["beacon mast", 0.22, "s"],
-	["beacon lit rim", 0.50, "g"],
-	["beacon stop bar", 0.36, "g"],
+	["beacon lit rim", 0.50, "d"],
+	["beacon stop bar", 0.36, "d"],
 	["shroud strap", 0.14, "s"],
 	["shroud crown rise", 0.62, "s"],
 ]
@@ -219,22 +228,25 @@ func _assert_vocabulary() -> void:
 
 
 ## Every mark the axis is measured on, against the frame it will be photographed in. Silent
-## when the artifact is in gauge, which it is: the thinnest mark is the cage rail at 5.70 px
-## and the second thinnest is the beacon's stop bar at 5.46 px. The stop bar is why this
-## function exists — it was drawn 0.30 m deep, which is 4.55 px after the ground cosine, and
-## the registry's hand-written gauge table had omitted it while claiming every mark cleared
-## 5.7 px. A comment cannot fail; this can.
+## when the artifact is in gauge, which it is: the thinnest mark is the beacon's stop bar at
+## 5.46 px, then the cage rail at 5.70. The stop bar is why this function exists — it was
+## drawn 0.30 m deep, which is 4.55 px once the elevation has flattened it, and the registry's
+## hand-written gauge table had left it out while claiming every mark cleared 5.7 px. A
+## comment cannot fail; this can.
 func _gauge_check() -> void:
 	var ppm: float = float(_g["px_per_m"])
 	for m in GAUGE_MARKS:
 		var spec: Array = m
 		var metres: float = float(spec[1])
+		var run: String = str(spec[2])
 		var factor: float = ELEV_COS
-		if str(spec[2]) == "g":
+		if run == "d":
 			factor = ELEV_SIN
+		elif run == "w":
+			factor = YAW_MIN
 		var px: float = metres * factor * ppm
 		if px < GAUGE_FLOOR_PX:
-			push_warning("warning_yard: the mark '%s' is %.3f m = %.2f px at dna.framing 0.60, under the %.1f px floor. Widen it or the axis is being measured on something a visitor cannot see." % [str(spec[0]), metres, px, GAUGE_FLOOR_PX])
+			push_warning("warning_yard: the mark '%s' is %.3f m = %.2f px at dna.framing 0.60, under the %.1f px floor. Widen it, or the axis is being measured on something a visitor cannot see." % [str(spec[0]), metres, px, GAUGE_FLOOR_PX])
 
 
 # ── ONE COPY OF THE ARITHMETIC ──────────────────────────────────────────────────────────
