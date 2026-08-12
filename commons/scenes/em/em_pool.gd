@@ -585,11 +585,15 @@ static func _axis_value(rec: Dictionary, reg_entry: Dictionary) -> Dictionary:
 			var declared: Variant = axes[axis]
 			if not (declared is Array):
 				continue
-			var want: String = String(dna[k])
+			# `str`, not `String`. A DNA axis value is not always text — the
+			# corpus has numeric levels (14, 2) and booleans, and the String
+			# CONSTRUCTOR rejects those at runtime, aborting _axis_value and
+			# every caller up to _load_guests. `str` converts any Variant.
+			var want: String = str(dna[k])
 			for d in (declared as Array):
-				if String(d) == want:
+				if str(d) == want:
 					return {"axis": axis, "value": want,
-						"gallery": String(gals[i]) if i < gals.size() else ""}
+						"gallery": str(gals[i]) if i < gals.size() else ""}
 	return {}
 
 

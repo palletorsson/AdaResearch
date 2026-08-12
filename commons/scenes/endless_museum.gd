@@ -33,6 +33,18 @@ extends Node3D
 # reversed words.
 
 const TEMPLATES := "res://commons/data/template_patterns.json"
+# THE NEGOTIATED PLAN (2026-08-12). Until now this museum dealt every artifact
+# itself: it picked the pool entry, picked the cell, and decided the rotation.
+# That made it a second placement algorithm sitting downstream of the real one,
+# which is the failure `doc/SPATIAL_PIPELINE.md` names for an assembler. With
+# `--em-plan` it becomes what the doctrine asks for — a dealer that receives
+# RESOLVED CELLS and stamps them.
+#
+# Written by `python tools/export_museum_plan.py --all`. ADDITIVE AND GATED: no
+# file, or no entry for this museum's key, and the segment deals exactly as it
+# did before. Cells arrive already in TILE space (the exporter subtracts its own
+# apron), so this side never does that arithmetic.
+const EM_PLAN := "res://ada_run/em_plan.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
 const SPINE_ORDER := "res://commons/data/spine_artifact_order.json"
 # DECLARED ORDER POLICIES (unification step 4): who decides the order of the
@@ -110,6 +122,8 @@ var _next_z: float = 0.0
 var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
+var _plan_path: String = ""       # --em-plan[=res://...]; empty = deal as before
+var _plan_db: Dictionary = {}     # museum key -> {artifacts:[...]}
 var _force_vr: bool = false       # --em-vr forces the headset path
 var _vr: bool = false             # resolved once in _ready
 var _vr_cam: Camera3D = null      # the XR eye, cached
@@ -190,6 +204,9 @@ func _ready() -> void:
 	_load_crowns()
 	_load_relations()
 	_load_pool()
+	# after the pool, because a plan naming an artifact the pool never built is
+	# a stale plan and the museum should be able to say so by name.
+	_load_plan()
 	_load_guests()
 	if _museums.is_empty():
 		push_error("endless_museum: no museum-tagged templates in %s" % TEMPLATES)
@@ -258,7 +275,9 @@ func _parse_args() -> void:
 	if args.is_empty():
 		args = OS.get_cmdline_args()
 	for a in args:
-		if a.begins_with("--em-seed="):
+		if a.begins_with("--em-plan"):
+			_plan_path = EM_PLAN if a == "--em-plan" else a.substr(10)
+		elif a.begins_with("--em-seed="):
 			_seed = int(a.substr(10))
 		elif a.begins_with("--em-order-file="):
 			_order_file = a.substr(17)
@@ -347,7 +366,13 @@ func _load_guests() -> void:
 	if r is Dictionary:
 		_guest_pool = r as Dictionary
 	if _mod_has(_mod_pool, "report"):
-		print("[em_pool] %s" % String(_mod_pool.call("report")))
+		# `str`, not `String`. The String CONSTRUCTOR rejects a number —
+		# `String(0.0)` is a runtime error that aborts the enclosing function —
+		# and `report()` returns 0 when the module declines to answer. That
+		# aborted `_load_guests()` before `_setup_world()`, so the museum built
+		# nothing headless and wrote no proof frame. Pre-existing; found while
+		# wiring the plan, because the plan's log was the last line printed.
+		print("[em_pool] %s" % str(_mod_pool.call("report")))
 	# what the prop catalogue can actually reach, printed before anything is
 	# hung: a token in the catalogue with no live registry row is a registry
 	# gap, and it should be a named line in stdout rather than a silent skip
@@ -1161,9 +1186,102 @@ func _build_segment() -> void:
 ## THE AXIS VALUE GOES ON BEFORE add_child. Everything procedural in this corpus
 ## builds in _ready(); a sibling edited afterwards is the default wearing a
 ## costume, and it photographs as a twin with every stage green.
+## Load the negotiated plan, if one was asked for and exists.
+func _load_plan() -> void:
+	if _plan_path == "" or not FileAccess.file_exists(_plan_path):
+		return
+	var parsed: Variant = JSON.parse_string(
+		FileAccess.get_file_as_string(_plan_path))
+	if not (parsed is Dictionary):
+		push_warning("[em-plan] %s is not JSON — dealing as before" % _plan_path)
+		return
+	var museums: Variant = (parsed as Dictionary).get("museums", {})
+	if museums is Dictionary:
+		_plan_db = museums as Dictionary
+	print("[em-plan] %d museum(s) planned from %s" % [_plan_db.size(), _plan_path])
+
+
+## Stamp one museum exactly as the negotiator resolved it.
+##
+## Returns an EMPTY dictionary when this museum has no usable plan, which the
+## caller reads as "deal normally". That is the gate: a building the exporter
+## never visited is untouched by this code path.
+##
+## Only `venue == "interior"` placements are stamped. The negotiator can also
+## put a body on a porch, in a courtyard or outside — 995 of 1141 placements in
+## the current corpus — but this museum has no apron, so those cells do not
+## exist in the building. They are counted and reported rather than silently
+## dropped, because "the plan said 8 and the room shows 2" is exactly the kind
+## of quiet subtraction that reads as a bug in the negotiator.
+func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
+		w: int, h: int) -> Dictionary:
+	if not _plan_db.has(key):
+		return {}
+	var entry: Dictionary = _plan_db[key]
+	var rows: Array = entry.get("artifacts", [])
+	if rows.is_empty():
+		return {}
+
+	# token -> scene, from the pool this museum already built. A plan naming an
+	# artifact the pool does not carry is a stale plan; it is skipped and said.
+	var scene_of: Dictionary = {}
+	for e in _pool:
+		scene_of[String((e as Dictionary).get("lookup", ""))] = 			String((e as Dictionary).get("scene", ""))
+
+	var placed: int = 0
+	var exterior: int = 0
+	var missing: Array = []
+	var off_tile: int = 0
+	for row_v in rows:
+		var row: Dictionary = row_v as Dictionary
+		if String(row.get("venue", "")) != "interior":
+			exterior += 1
+			continue
+		var tok := String(row.get("token", ""))
+		var scene := String(scene_of.get(tok, ""))
+		if scene == "":
+			missing.append(tok)
+			continue
+		var tc: Array = row.get("tile_cell", [])
+		if tc.size() < 2:
+			continue
+		var tx := int(tc[0])
+		var tz := int(tc[1])
+		if tx < 0 or tz < 0 or tz >= tile.size() or tx >= (tile[tz] as Array).size():
+			off_tile += 1
+			continue
+		# `top` is the surface the body stands on. The negotiator already solved
+		# it (support_height_m), so it is taken from the plan rather than
+		# re-derived from the tile — re-deriving is how the two sides drift.
+		var cell: Dictionary = {
+			"x": tx, "y": tz, "rank": 2,
+			"top": float(row.get("support_height_m", 0.0)),
+		}
+		if _stamp(seg, scene, tok, cell, zbase, 1, {}, false):
+			placed += 1
+
+	print("[em-plan] %s: stamped %d interior, %d exterior not hostable%s%s"
+		% [key, placed, exterior,
+		   (", %d off-tile" % off_tile) if off_tile > 0 else "",
+		   (", %d not in pool" % missing.size()) if not missing.is_empty() else ""])
+	return {"placed": placed, "sequence": "", "leads": placed, "relatives": 0,
+		"repeats": 0, "guests": 0, "plinths": 0,
+		"max_objects": rows.size(), "class": "planned",
+		"budget": {}, "wall_features_max": -1, "fill_walls": true,
+		"from_plan": true, "exterior_unhosted": exterior}
+
+
 func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 		tile: Array, w: int, h: int) -> Dictionary:
-	var budget: Dictionary = _segment_budget(w, h, slots, String(spec.get("key", "")), tile)
+	# THE GATE. A planned museum is stamped from the plan and never dealt; every
+	# other museum falls through to the dealer below, untouched.
+	var mkey := String(spec.get("key", ""))
+	if not _plan_db.is_empty():
+		var planned: Dictionary = _deal_from_plan(seg, zbase, mkey, tile, w, h)
+		if not planned.is_empty():
+			return planned
+
+	var budget: Dictionary = _segment_budget(w, h, slots, mkey, tile)
 	var max_objects: int = int(budget.get("max_objects", MAX_ARTIFACTS_PER_SEGMENT))
 	var lead_cap: int = int(budget.get("lead_count", MAX_ARTIFACTS_PER_SEGMENT))
 	var rel_per_lead: int = int(budget.get("relatives_per_lead", 0))
