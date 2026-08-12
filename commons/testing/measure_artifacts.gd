@@ -17,6 +17,25 @@ const REGISTRY_DIR := "res://commons/artifacts/registry/"
 var _outdir: String = "res://ada_run"
 var _registry_filter: String = ""
 var _start_time: int = 0
+## Seconds an artifact gets to finish building before it is frozen and read.
+## 0.35 s is the figure probe_aabb_hogs.gd already needed for the same reason.
+var _settle: float = 0.35
+## Only measure these lookup_names (comma-separated). For the negative tests.
+var _only: Dictionary = {}
+var _last_measure: Dictionary = {}
+## Set when a second reading shows the artifact is still growing — a simulation
+## running, not geometry settling.
+var _unstable: bool = false
+## No artifact is half a kilometre. Beyond this a number is evidence of a fault,
+## never a body, and must not overwrite whatever the registry already holds.
+const IMPLAUSIBLE_M := 500.0
+
+
+func _finite(a: AABB) -> bool:
+	for v in [a.size.x, a.size.y, a.size.z, a.position.x, a.position.y, a.position.z]:
+		if is_nan(v) or is_inf(v):
+			return false
+	return true
 
 func _initialize() -> void:
 	_parse_args()
@@ -35,6 +54,11 @@ func _parse_args() -> void:
 				_outdir = value
 			"registry":
 				_registry_filter = value
+			"settle":
+				_settle = value.to_float()
+			"only":
+				for name in value.split(",", false):
+					_only[String(name).strip_edges()] = true
 
 # ══════════════════════════════════════════════════════════════════
 # MAIN PIPELINE
@@ -61,6 +85,10 @@ func _run() -> void:
 
 	var lookup_names: Array = artifacts.keys()
 	lookup_names.sort()
+	if not _only.is_empty():
+		lookup_names = lookup_names.filter(func(n): return _only.has(String(n)))
+		print("measure_artifacts: --only restricts this run to %d artifact(s)"
+			% lookup_names.size())
 
 	# Resume support: if we have a partial report, skip everything up to
 	# and including the last entry it contains.
@@ -127,12 +155,36 @@ func _run() -> void:
 
 		holder.add_child(instance)
 
-		# Disable processing to prevent simulations from running
+		# ORDER MATTERS, and it used to be wrong. Processing was disabled here,
+		# BEFORE the artifact had a chance to build — so every artifact that
+		# grows its geometry in _process (or over a tween) was frozen at nothing
+		# and then measured. Two process frames photographs a half-built
+		# artifact; the correspondence gate caught bias_visualizer recorded at
+		# 0.55 m against a real 1.98 m, and neural_network_visualization at
+		# 0.6 m deep against a real 5.43 m. Let it build, THEN freeze it, THEN
+		# measure — the freeze still does its original job of stopping a
+		# simulation from drifting mid-measurement.
+		await process_frame
+		await process_frame
+		if _settle > 0.0:
+			await create_timer(_settle).timeout
 		_disable_processing_recursive(instance)
+		await process_frame
 
-		# Give _ready() two frames
-		await process_frame
-		await process_frame
+		# Letting it BUILD also lets it RUN. The first version of this fix
+		# produced heights of 1003 m for the cellular automata and 9.4e19 for
+		# evolving_bloops — a simulation walking away during the settle window,
+		# recorded as a body. So take a second reading a moment later: if the
+		# box is still growing, the artifact is not settling, it is running, and
+		# neither reading describes it. Marked unstable, and the merge refuses
+		# to write it over a prior value.
+		var target_probe: Node3D = instance as Node3D if instance is Node3D else null
+		if target_probe != null:
+			var first_box: AABB = _measure_body(target_probe)
+			await create_timer(0.15).timeout
+			var second_box: AABB = _measure_body(target_probe)
+			var grew: float = (second_box.size - first_box.size).length()
+			_unstable = grew > 0.25 or not _finite(second_box)
 
 		var target: Node3D = instance as Node3D if instance is Node3D else null
 		if not target:
@@ -142,11 +194,25 @@ func _run() -> void:
 					break
 
 		if target:
-			var aabb: AABB = _get_combined_aabb(target)
+			var aabb: AABB = _measure_body(target)
 
-			# Clamp extreme values (particles, hidden geometry)
+			# The old code discarded anything over 100 m as "nonsense", which
+			# is how a genuinely 100 m artifact (scale_lines, standing in 22
+			# live maps) came to be recorded as ZERO — indistinguishable from a
+			# failure, and a large part of the 226 artifacts that measure zero.
+			# The two causes it was really guarding against — particle boxes and
+			# hidden geometry — are now excluded at the source, so an extreme
+			# number here is evidence rather than noise. Keep it, and flag it.
 			if aabb.size.length() > 100.0:
-				aabb = AABB()  # discard nonsense
+				_last_measure["oversize"] = true
+			if _unstable:
+				_last_measure["unstable"] = true
+			var worst: float = maxf(aabb.size.x, maxf(aabb.size.y, aabb.size.z))
+			if _unstable or worst > IMPLAUSIBLE_M or not _finite(aabb):
+				_last_measure["implausible"] = true
+				_last_measure["implausible_reason"] = (
+					"still growing at the second reading" if _unstable
+					else "%.1f m on one axis — evidence of a fault, not a body" % worst)
 
 			var size_x: float = snapped(aabb.size.x, 0.01)
 			var size_y: float = snapped(aabb.size.y, 0.01)
@@ -173,6 +239,10 @@ func _run() -> void:
 				"interaction": entry.get("interaction", ""),
 				"category": entry.get("category", ""),
 				"tags": entry.get("tags", []),
+				# How the number was reached, beside the number. A fallback that
+				# cannot say it is a fallback is the fault that let [1,1,1] pass
+				# as a measurement.
+				"provenance": _last_measure.duplicate(true),
 			})
 		else:
 			results.append({
@@ -307,48 +377,122 @@ func _load_json(path: String) -> Dictionary:
 # AABB MEASUREMENT (from check_aabb_below_ground.gd)
 # ══════════════════════════════════════════════════════════════════
 
+## The artifact's BODY, in the measurement root's own space, with provenance.
+##
+## Rewritten 2026-08-11 against doc/plans/capture_measure_faults.md, which
+## documented five faults in the dressing-room twin of this function. Three of
+## them lived here too, and this path is the one that writes the registry every
+## placement tool reads. What changed:
+##
+##   * particles no longer contribute `visibility_aabb`. That property defaults
+##     to an 8x8x8 box, and propagating it is what produced the [8,8,1] epidemic
+##     across 19 artifacts. Effects are SHOWN, not stood on — reported apart.
+##   * hidden geometry is no longer body. `visible = false` means the player
+##     never meets it.
+##   * a top-level node has left the artifact's frame (set_as_top_level detaches
+##     it), so it no longer drags the box back toward the world origin.
+##   * text is reported as signage. It is authored to be read, not occupied.
+##   * the result says how it was reached, so a fallback can never again be
+##     mistaken for a measurement.
+##
+## Walks in GLOBAL space and converts once at the end, which also removes the
+## old double-application of `child.transform` on nested subtrees.
+func _measure_body(root: Node3D) -> AABB:
+	var body := AABB()
+	var signage := AABB()
+	var effects := AABB()
+	var has_body := false
+	var has_signage := false
+	var has_effects := false
+	var counted := 0
+	var skipped_invisible := 0
+	var skipped_top_level: Array[String] = []
+	var widest := 0.0
+	var widest_name := ""
+
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var n = stack.pop_back()
+		if n == null:
+			continue
+		for c in n.get_children():
+			stack.push_back(c)
+		if not (n is GeometryInstance3D):
+			continue
+		var vi := n as GeometryInstance3D
+
+		if not vi.is_visible_in_tree():
+			skipped_invisible += 1
+			continue
+		if vi.top_level:
+			skipped_top_level.append(String(vi.name))
+			continue
+
+		var local := AABB()
+		if vi is MultiMeshInstance3D:
+			var mm = (vi as MultiMeshInstance3D).multimesh
+			if mm == null or mm.instance_count <= 0:
+				continue
+			local = mm.get_aabb()
+		elif vi is CSGShape3D:
+			var meshes: Array = (vi as CSGShape3D).get_meshes()
+			if meshes.size() < 2 or not (meshes[1] is Mesh):
+				continue
+			local = (meshes[1] as Mesh).get_aabb()
+		else:
+			local = vi.get_aabb()
+		if local.size.length_squared() < 0.0001:
+			continue
+
+		var world: AABB = vi.global_transform * local
+
+		if vi is Label3D or vi is Sprite3D:
+			signage = world if not has_signage else signage.merge(world)
+			has_signage = true
+			continue
+		if vi is GPUParticles3D or vi is CPUParticles3D:
+			effects = world if not has_effects else effects.merge(world)
+			has_effects = true
+			continue
+
+		var reach: float = Vector2(world.size.x, world.size.z).length()
+		if reach > widest:
+			widest = reach
+			widest_name = String(vi.name)
+		counted += 1
+		body = world if not has_body else body.merge(world)
+		has_body = true
+
+	_last_measure = {
+		"counted_meshes": counted,
+		"skipped_invisible": skipped_invisible,
+		"skipped_top_level": skipped_top_level,
+		"widest_single_mesh_m": snappedf(widest, 0.001),
+		"widest_single_mesh": widest_name,
+		"signage": _aabb_dict(signage) if has_signage else null,
+		"effects": _aabb_dict(effects) if has_effects else null,
+		"fallback": not has_body,
+		"settle_s": _settle,
+	}
+	if not has_body:
+		_last_measure["fallback_reason"] = (
+			"no visible, non-signage, non-effect geometry in the subtree"
+			+ (" (%d hidden, %d top-level skipped)" % [skipped_invisible, skipped_top_level.size()]))
+		return AABB()
+	return root.global_transform.affine_inverse() * body
+
+
+func _aabb_dict(a: AABB) -> Dictionary:
+	return {
+		"center": [snappedf(a.get_center().x, 0.001), snappedf(a.get_center().y, 0.001),
+			snappedf(a.get_center().z, 0.001)],
+		"size": [snappedf(a.size.x, 0.001), snappedf(a.size.y, 0.001), snappedf(a.size.z, 0.001)],
+	}
+
+
+## Kept so any other caller in the tree keeps working; body is what it measured.
 func _get_combined_aabb(node: Node3D) -> AABB:
-	var result := AABB()
-	var first := true
-	for child in node.get_children():
-		var child_aabb := AABB()
-		var has_aabb := false
-		if child is MeshInstance3D:
-			var mesh = (child as MeshInstance3D).mesh
-			if mesh:
-				child_aabb = child.transform * mesh.get_aabb()
-				has_aabb = true
-		elif child is MultiMeshInstance3D:
-			var mm = child.multimesh
-			if mm and mm.instance_count > 0:
-				child_aabb = child.transform * mm.get_aabb()
-				has_aabb = true
-		elif child is CSGShape3D:
-			var child_meshes: Array = child.get_meshes()
-			if child_meshes.size() >= 2:
-				var m = child_meshes[1]
-				if m is Mesh:
-					child_aabb = child.transform * m.get_aabb()
-					has_aabb = true
-		elif child is GPUParticles3D:
-			child_aabb = child.transform * child.visibility_aabb
-			has_aabb = true
-		if has_aabb and child_aabb.size.length() > 0:
-			if first:
-				result = child_aabb
-				first = false
-			else:
-				result = result.merge(child_aabb)
-		if child is Node3D:
-			var sub_aabb: AABB = _get_combined_aabb(child)
-			if sub_aabb.size.length() > 0:
-				sub_aabb = child.transform * sub_aabb
-				if first:
-					result = sub_aabb
-					first = false
-				else:
-					result = result.merge(sub_aabb)
-	return result
+	return _measure_body(node)
 
 # ══════════════════════════════════════════════════════════════════
 # HELPERS

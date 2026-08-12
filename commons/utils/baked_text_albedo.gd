@@ -18,10 +18,42 @@ class_name BakedTextAlbedo
 static var _texture_cache: Dictionary = {}
 
 
+## THE PROJECT'S TYPEFACE. Every baked label used ThemeDB.fallback_font — the
+## engine's built-in, which is why museum captions read like a debug overlay.
+## Roboto ships in this repo already, licensed, with a full weight range: a
+## humanist sans that holds up at wall size and stays legible at caption size.
+## Medium for titles, Regular for body — the split a real wall label makes.
+const FONT_DIR := "res://commons/font/static/"
+const WEIGHTS := {
+	"light": "Roboto-Light.ttf",
+	"regular": "Roboto-Regular.ttf",
+	"medium": "Roboto-Medium.ttf",
+	"bold": "Roboto-Bold.ttf",
+}
+static var _font_cache: Dictionary = {}
+
+
+## The project face at a given weight, or the engine fallback if it is missing.
+## Never returns null when a fallback exists, so a missing file degrades to the
+## old look rather than to no text at all.
+static func project_font(weight: String = "regular") -> Font:
+	if _font_cache.has(weight):
+		return _font_cache[weight]
+	var file: String = String(WEIGHTS.get(weight, WEIGHTS["regular"]))
+	var path := FONT_DIR + file
+	var f: Font = null
+	if ResourceLoader.exists(path):
+		f = load(path) as Font
+	if f == null:
+		f = ThemeDB.fallback_font
+	_font_cache[weight] = f
+	return f
+
+
 static func _cache_key(text: String, text_color: Color,
-		image_size: Vector2i, font_size: int) -> String:
-	return "%s|%s|%dx%d|%d" % [
-		text, text_color, image_size.x, image_size.y, font_size]
+		image_size: Vector2i, font_size: int, weight: String = "regular") -> String:
+	return "%s|%s|%dx%d|%d|%s" % [
+		text, text_color, image_size.x, image_size.y, font_size, weight]
 
 
 ## Render `text` into a transparent-bg ImageTexture at the given size.
@@ -33,16 +65,17 @@ static func generate_text_image(
 		text: String,
 		text_color: Color = Color.WHITE,
 		image_size: Vector2i = Vector2i(512, 256),
-		font_size: int = 160) -> ImageTexture:
+		font_size: int = 160,
+		weight: String = "regular") -> ImageTexture:
 	if text.is_empty():
 		return null
-	var key := _cache_key(text, text_color, image_size, font_size)
+	var key := _cache_key(text, text_color, image_size, font_size, weight)
 	if _texture_cache.has(key):
 		return _texture_cache[key]
 
-	var font: Font = ThemeDB.fallback_font
+	var font: Font = project_font(weight)
 	if font == null:
-		push_warning("BakedTextAlbedo: no fallback font")
+		push_warning("BakedTextAlbedo: no font available")
 		return null
 	var font_rids: Array = font.get_rids()
 	if font_rids.is_empty():
@@ -165,9 +198,10 @@ static func generate_panel_image(
 		text_color: Color = Color.WHITE,
 		image_size: Vector2i = Vector2i(512, 256),
 		font_size: int = 160,
-		band: Dictionary = {}) -> ImageTexture:
+		band: Dictionary = {},
+		weight: String = "regular") -> ImageTexture:
 	# Render the text mask first (transparent bg).
-	var text_tex: ImageTexture = generate_text_image(text, text_color, image_size, font_size)
+	var text_tex: ImageTexture = generate_text_image(text, text_color, image_size, font_size, weight)
 	if text_tex == null:
 		return null
 	# Compose: bg + optional band + text mask.
@@ -209,12 +243,18 @@ static func generate_panel_image(
 ## `unshaded=true` for a self-lit readout (screens), false (default) for paint that
 ## takes scene light. Returns a MeshInstance3D (QuadMesh, +Z normal) or null.
 static func make_label_mesh(text: String, text_color: Color, world_size: Vector2,
-		px_per_m: int = 1400, unshaded: bool = false) -> MeshInstance3D:
+		px_per_m: int = 1400, unshaded: bool = false,
+		weight: String = "regular", force_font_size: int = 0) -> MeshInstance3D:
 	if text.is_empty():
 		return null
 	var img_sz := _image_size_for(world_size, px_per_m)
-	var fs := _fit_font_size(text, img_sz)
-	var tex: ImageTexture = generate_text_image(text, text_color, img_sz, fs)
+	# `force_font_size` lets a caller impose ONE size across several lines. Each
+	# line fitting itself is right for a lone label and wrong for a paragraph:
+	# _fit_font_size solves from text.length(), so a short last line came out
+	# markedly larger than the full ones above it — ransom-note typography on a
+	# museum wall.
+	var fs: int = force_font_size if force_font_size > 0 else _fit_font_size(text, img_sz)
+	var tex: ImageTexture = generate_text_image(text, text_color, img_sz, fs, weight)
 	if tex == null:
 		return null
 	return _text_quad(tex, world_size, true, unshaded)
@@ -294,12 +334,12 @@ static func make_tag(text: String, text_color: Color = Color(0.9, 0.95, 1.0),
 ## Label3D with one textured quad. `band` is forwarded to generate_panel_image.
 static func make_panel_mesh(text: String, bg_color: Color, text_color: Color,
 		world_size: Vector2, px_per_m: int = 1400, unshaded: bool = false,
-		band: Dictionary = {}) -> MeshInstance3D:
+		band: Dictionary = {}, weight: String = "regular") -> MeshInstance3D:
 	if text.is_empty():
 		return null
 	var img_sz := _image_size_for(world_size, px_per_m)
 	var fs := _fit_font_size(text, img_sz)
-	var tex: ImageTexture = generate_panel_image(text, bg_color, text_color, img_sz, fs, band)
+	var tex: ImageTexture = generate_panel_image(text, bg_color, text_color, img_sz, fs, band, weight)
 	if tex == null:
 		return null
 	return _text_quad(tex, world_size, false, unshaded)
@@ -346,18 +386,32 @@ static func _text_quad(tex: ImageTexture, world_size: Vector2, transparent: bool
 ## (+Z normal) holding one baked label quad per non-empty line, top line first. Each
 ## line quad is `max_width` wide × `line_height` tall; `gap` adds vertical spacing.
 static func make_text_block(lines: Array, text_color: Color, line_height: float,
-		max_width: float, gap: float = 0.0, unshaded: bool = false) -> Node3D:
+		max_width: float, gap: float = 0.0, unshaded: bool = false,
+		weight: String = "regular") -> Node3D:
 	var root := Node3D.new()
 	var n: int = lines.size()
 	if n == 0:
 		return root
 	var pitch: float = line_height + gap
 	var total: float = pitch * float(n)
+	# One type size for the whole block, set by the line that needs the smallest
+	# — so a paragraph reads as a paragraph rather than as lines that happen to
+	# share a colour.
+	var box := _image_size_for(Vector2(max_width, line_height), 1400)
+	var common_fs: int = 0
+	for probe in lines:
+		var t := str(probe)
+		if t.strip_edges() == "":
+			continue
+		var fs_i: int = _fit_font_size(t, box)
+		common_fs = fs_i if common_fs == 0 else mini(common_fs, fs_i)
 	for i in range(n):
 		var line := str(lines[i])
 		if line.strip_edges() == "":
 			continue
-		var q: MeshInstance3D = make_label_mesh(line, text_color, Vector2(max_width, line_height), 1400, unshaded)
+		var q: MeshInstance3D = make_label_mesh(
+			line, text_color, Vector2(max_width, line_height), 1400, unshaded,
+			weight, common_fs)
 		if q == null:
 			continue
 		# Top line at the top of the block; block centred on the root origin.

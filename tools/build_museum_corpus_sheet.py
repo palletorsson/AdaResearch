@@ -1,18 +1,29 @@
 #!/usr/bin/env python3
 """
-build_museum_corpus_sheet.py — the fourteen museums on one sheet.
+build_museum_corpus_sheet.py — the whole museum corpus on one sheet.
 
 Renders every museum-tagged pattern in template_patterns.json as a cell grid,
-in dealing order (em_order), each in its own accent colour: dark floor, grey
-wall, light podium, accent-tinted artifact slots, the hero slot outlined.
+in dealing order (em_order).
+
+Cell colours come from the ENCYCLOPEDIA's own ROLES table via
+tools/spatial_palette.py — the same one /template-pattern-editor,
+/template-gallery, /template-maps and /template-lab read. This sheet used to
+carry its own greyscale (floor 32, wall 58, podium 78), so the corpus sheet and
+the editor disagreed about what a wall looks like: the same museum rendered two
+ways depending on which tool drew it. The per-template accent is kept, but for
+what it is actually good at — telling twenty templates apart in a grid — so it
+now colours the TITLE and outlines the hero, while the cells say what they are.
 Output: ada_encyclopedia/public/museum/museum_templates_corpus.png. Rerun after any extraction
 wave or tile repair.
 """
 import json
+import sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "tools"))
+from spatial_palette import GROUND, INK, INK_DIM, cell_colour
 OUT = REPO.parent / "ada_encyclopedia" / "public" / "museum" / "museum_templates_corpus.png"
 
 tp = json.loads((REPO / "commons/data/template_patterns.json").read_text(encoding="utf-8"))["patterns"]
@@ -38,7 +49,7 @@ def fit(dr, text, font, maxw):
     return text
 
 
-img = Image.new("RGB", (W, H), (16, 17, 20))
+img = Image.new("RGB", (W, H), hx(GROUND))
 d = ImageDraw.Draw(img)
 try:
     f_big = ImageFont.truetype("arialbd.ttf", 13)
@@ -46,7 +57,9 @@ try:
 except OSError:
     f_big = f_sm = ImageFont.load_default()
 
-COLORS = {"4": (58, 60, 68), "1": (32, 34, 39), "2": (78, 82, 92)}
+def role_rgb(code):
+    """One cell's colour, from the table the web pages share."""
+    return hx(cell_colour(code))
 maxtext = cw - PAD * 2
 for i, (key, p) in enumerate(order):
     cx0 = (i % COLS) * cw
@@ -56,8 +69,8 @@ for i, (key, p) in enumerate(order):
     slots = sum(1 for r in tile for c in r if str(c) in ("1s", "2s", "3s"))
     head = ("CH" if p.get("challenger") else str(p.get("em_order", "?"))) + f"  {p.get('label', key)}"
     d.text((cx0 + PAD, cy0), fit(d, head, f_big, maxtext), fill=accent, font=f_big)
-    d.text((cx0 + PAD, cy0 + 18), fit(d, p.get("museum", ""), f_sm, maxtext), fill=(168, 170, 178), font=f_sm)
-    d.text((cx0 + PAD, cy0 + 32), f"{w}x{h}  -  {slots} slots", fill=(120, 122, 130), font=f_sm)
+    d.text((cx0 + PAD, cy0 + 18), fit(d, p.get("museum", ""), f_sm, maxtext), fill=hx(INK), font=f_sm)
+    d.text((cx0 + PAD, cy0 + 32), f"{w}x{h}  -  {slots} slots", fill=hx(INK_DIM), font=f_sm)
     ox = cx0 + PAD + (tile_w - w * CELL) // 2
     oy = cy0 + HEAD + (tile_h - h * CELL) // 2
     for y in range(h):
@@ -66,17 +79,15 @@ for i, (key, p) in enumerate(order):
             px, py = ox + x * CELL, oy + y * CELL
             if c.strip() == "":
                 continue
+            # Every cell is its declared role colour. The hero keeps an accent
+            # outline because it is the one cell that is singular per museum,
+            # and losing that made twenty tiles read as one.
+            d.rectangle([px, py, px + CELL - 1, py + CELL - 1], fill=role_rgb(c))
             if c == "3s":
-                d.rectangle([px, py, px + CELL - 1, py + CELL - 1], fill=accent, outline=(255, 255, 255))
-            elif c in ("1s", "2s"):
-                base = COLORS["1"] if c == "1s" else COLORS["2"]
-                d.rectangle([px, py, px + CELL - 1, py + CELL - 1], fill=base)
-                mix = tuple(int(0.55 * a + 0.45 * b) for a, b in zip(accent, base))
-                d.rectangle([px + 1, py + 1, px + CELL - 2, py + CELL - 2], fill=mix)
-            else:
-                d.rectangle([px, py, px + CELL - 1, py + CELL - 1], fill=COLORS.get(c, (25, 26, 30)))
+                d.rectangle([px, py, px + CELL - 1, py + CELL - 1], outline=accent)
 d.text((PAD, 6), f"THE CORPUS - {len(order)} museum templates in dealing order (challengers last, marked CH).   "
-        "dark = floor   grey = wall   light = podium   tinted = artifact slot   outlined = hero (3s)",
-       fill=(200, 202, 210), font=f_sm)
+        "cell colours from the encyclopedia ROLES table: floor, wall, platform, "
+        "floor slot, podium slot, hero (3s, outlined in the museum's accent)",
+       fill=hx(INK), font=f_sm)
 img.save(OUT)
 print(f"corpus sheet -> {OUT}  {img.size}")

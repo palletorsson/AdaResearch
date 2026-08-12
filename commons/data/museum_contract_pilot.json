@@ -1,0 +1,234 @@
+{
+  "schema": "adaresearch.museum_contract_pilot.v1",
+  "title": "Endless Museum Contract Pilot",
+  "description": "Twelve featured artifacts negotiated against one-metre floor and wall modules. Hard safety rules win; preferences are optimized and every compromise is reported.",
+  "units": "metres",
+  "grid": {
+    "tile_m": 1,
+    "base_width_cells": 15,
+    "minimum_through_route_cells": 3,
+    "wall_height_m": 4,
+    "section_gap_cells": 2,
+    "maximum_width_cells": 25
+  },
+  "layer_contracts": {
+    "artifact": {
+      "goal": "Give every object enough physical, interaction, and viewing space in both island and wall postures.",
+      "owns": ["body envelope", "sweep envelope", "directional clearance", "allowed postures"],
+      "hard_rules": ["body remains inside the room", "required interaction sides stay reachable", "sweep never enters the through-route"],
+      "offers": ["preferred posture", "viewing distance", "rear overlap allowance"]
+    },
+    "order": {
+      "goal": "Keep one readable main sequence while exposing lineage and DNA relations.",
+      "owns": ["main index", "relation to prior artifact", "DNA axes"],
+      "hard_rules": ["main indices are unique", "a relation target precedes its child"],
+      "offers": ["side-by-side pairing", "same-side continuity"]
+    },
+    "floorplan": {
+      "goal": "Preserve a continuous accessible route and expand only when artifact contracts require it.",
+      "owns": ["one-metre grid", "walls", "through-route", "section bounds"],
+      "hard_rules": ["route is at least three cells wide", "spawn connects to exit", "walls stay on the one-metre grid"],
+      "offers": ["room width", "section depth", "left or right bay"]
+    },
+    "props": {
+      "goal": "Reserve the wall centre for map text and feature imagery while placing support props at usable heights.",
+      "owns": ["wall elevation bands", "feature field", "side rails"],
+      "hard_rules": ["feature field remains unobstructed", "interactive controls stay between 0.75 and 1.35 metres"],
+      "offers": ["left rail", "right rail", "upper band"]
+    },
+    "museum": {
+      "goal": "Compile tested modules into a confident, repeatable endless museum segment.",
+      "owns": ["module boundaries", "entry and exit interfaces", "validation gates"],
+      "hard_rules": ["all hard gates pass before release", "module entry and exit align to the through-route"],
+      "offers": ["bay repetition", "material and lighting treatment"]
+    },
+    "book": {
+      "goal": "Let the visitor's written account and the current map content inhabit the same exhibition.",
+      "owns": ["chapter order", "monitor content", "visitor voice"],
+      "hard_rules": ["monitor content names the current artifact and relation", "text does not replace interaction space"],
+      "offers": ["caption length", "monitor size", "chapter pacing"]
+    }
+  },
+  "negotiation": {
+    "priority": ["safety", "reachability", "route continuity", "lineage order", "view quality", "compactness"],
+    "determinism": "Same contracts and solver version always produce the same plan.",
+    "failure_policy": "Never silently squeeze an artifact. Expand, change an offered posture, or fail with a named gate."
+  },
+  "wall_system": {
+    "feature_field": {"horizontal_percent": [20, 80], "vertical_m": [1.1, 2.3]},
+    "prop_rails": {"horizontal_percent": [[0, 18], [82, 100]], "vertical_m": [0.75, 2.3]},
+    "low_band_m": [0, 1.1],
+    "eye_band_m": [1.1, 2.3],
+    "upper_band_m": [2.3, 4]
+  },
+  "artifacts": [
+    {
+      "lookup_name": "origin",
+      "display_name": "Origin",
+      "artifact_class": "diagram",
+      "body_envelope_m": [2, 2, 1],
+      "sweep_envelope_m": [2, 2, 1],
+      "interaction": {"mode": "observe", "required_sides": ["front", "left", "right"], "clearance_m": {"front": 2, "back": 1, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": true, "orbit": true}, "wall": {"allowed": true, "rear_overlap_m": 1}, "corridor": {"allowed": false}},
+      "preferred_posture": "island",
+      "view": {"preferred_distance_m": 2.5, "front_angle_degrees": 180},
+      "rotations": [0, 90, 180, 270],
+      "order": {"index": 1, "relation_to": null, "relation_type": "root"},
+      "dna": ["reference", "zero", "orientation"]
+    },
+    {
+      "lookup_name": "CoordinateSystem3M",
+      "display_name": "Coordinate System 3M",
+      "artifact_class": "diagram",
+      "body_envelope_m": [5, 4, 3],
+      "sweep_envelope_m": [5, 4, 3],
+      "interaction": {"mode": "walkaround", "required_sides": ["front", "left", "right"], "clearance_m": {"front": 2, "back": 1, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": true, "orbit": true}, "wall": {"allowed": false, "rear_overlap_m": 0}, "corridor": {"allowed": false}},
+      "preferred_posture": "island",
+      "view": {"preferred_distance_m": 3, "front_angle_degrees": 180},
+      "rotations": [0, 180],
+      "order": {"index": 2, "relation_to": "origin", "relation_type": "expands-reference-frame"},
+      "dna": ["axes", "scale", "reference"]
+    },
+    {
+      "lookup_name": "grabbable_line",
+      "display_name": "Grabbable Line",
+      "artifact_class": "interface",
+      "body_envelope_m": [1, 1, 1],
+      "sweep_envelope_m": [3, 2, 2],
+      "interaction": {"mode": "manipulate", "required_sides": ["front"], "clearance_m": {"front": 2, "back": 1, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": true, "orbit": false}, "wall": {"allowed": true, "rear_overlap_m": 0}, "corridor": {"allowed": false}},
+      "preferred_posture": "wall",
+      "view": {"preferred_distance_m": 1.5, "front_angle_degrees": 120},
+      "rotations": [90, 270],
+      "order": {"index": 3, "relation_to": "CoordinateSystem3M", "relation_type": "extracts-one-axis"},
+      "dna": ["endpoints", "grain", "reach"]
+    },
+    {
+      "lookup_name": "perspective_lines",
+      "display_name": "Perspective Lines",
+      "artifact_class": "diagram",
+      "body_envelope_m": [2, 3, 2],
+      "sweep_envelope_m": [4, 4, 2],
+      "interaction": {"mode": "observe", "required_sides": ["front"], "clearance_m": {"front": 3, "back": 1, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": true, "orbit": false}, "wall": {"allowed": true, "rear_overlap_m": 1}, "corridor": {"allowed": false}},
+      "preferred_posture": "wall",
+      "view": {"preferred_distance_m": 3, "front_angle_degrees": 90},
+      "rotations": [90, 270],
+      "order": {"index": 4, "relation_to": "grabbable_line", "relation_type": "projects-lineage"},
+      "dna": ["vanishing-point", "projection", "horizon"]
+    },
+    {
+      "lookup_name": "line_builder_3d",
+      "display_name": "Line Builder 3D",
+      "artifact_class": "interface",
+      "body_envelope_m": [4, 1, 2],
+      "sweep_envelope_m": [5, 3, 3],
+      "interaction": {"mode": "manipulate", "required_sides": ["front", "left", "right"], "clearance_m": {"front": 2, "back": 1, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": true, "orbit": true}, "wall": {"allowed": false, "rear_overlap_m": 0}, "corridor": {"allowed": false}},
+      "preferred_posture": "island",
+      "view": {"preferred_distance_m": 2, "front_angle_degrees": 180},
+      "rotations": [0, 180],
+      "order": {"index": 5, "relation_to": "grabbable_line", "relation_type": "makes-line-constructible"},
+      "dna": ["segments", "slack", "construction"]
+    },
+    {
+      "lookup_name": "platonicsolids",
+      "display_name": "Platonic Solids",
+      "artifact_class": "solid",
+      "body_envelope_m": [7, 7, 4],
+      "sweep_envelope_m": [9, 9, 4],
+      "interaction": {"mode": "walkaround", "required_sides": ["front", "back", "left", "right"], "clearance_m": {"front": 2, "back": 2, "left": 2, "right": 2}},
+      "placements": {"island": {"allowed": true, "orbit": true}, "wall": {"allowed": false, "rear_overlap_m": 0}, "corridor": {"allowed": false}},
+      "preferred_posture": "island",
+      "view": {"preferred_distance_m": 4, "front_angle_degrees": 360},
+      "rotations": [0, 90, 180, 270],
+      "order": {"index": 6, "relation_to": "CoordinateSystem3M", "relation_type": "occupies-coordinate-space"},
+      "dna": ["symmetry", "faces", "volume"]
+    },
+    {
+      "lookup_name": "rotating_cube",
+      "display_name": "Rotating Cube",
+      "artifact_class": "kinetic",
+      "body_envelope_m": [1, 1, 1],
+      "sweep_envelope_m": [3, 3, 2],
+      "interaction": {"mode": "observe", "required_sides": ["front", "left", "right"], "clearance_m": {"front": 2, "back": 1, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": true, "orbit": true}, "wall": {"allowed": false, "rear_overlap_m": 0}, "corridor": {"allowed": false}},
+      "preferred_posture": "island",
+      "view": {"preferred_distance_m": 2, "front_angle_degrees": 270},
+      "rotations": [0, 90, 180, 270],
+      "order": {"index": 7, "relation_to": "platonicsolids", "relation_type": "isolates-cube"},
+      "dna": ["rotation", "period", "solid"]
+    },
+    {
+      "lookup_name": "pick_up_cube",
+      "display_name": "Pick Up Cube",
+      "artifact_class": "interface",
+      "body_envelope_m": [1, 1, 1],
+      "sweep_envelope_m": [3, 3, 2],
+      "interaction": {"mode": "grab", "required_sides": ["front"], "clearance_m": {"front": 2, "back": 1, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": true, "orbit": false}, "wall": {"allowed": true, "rear_overlap_m": 0}, "corridor": {"allowed": false}},
+      "preferred_posture": "wall",
+      "view": {"preferred_distance_m": 1.2, "front_angle_degrees": 120},
+      "rotations": [90, 270],
+      "order": {"index": 8, "relation_to": "rotating_cube", "relation_type": "changes-custody"},
+      "dna": ["grab", "custody", "translation"]
+    },
+    {
+      "lookup_name": "science_screen",
+      "display_name": "Science Screen",
+      "artifact_class": "diagram",
+      "body_envelope_m": [4, 1, 2],
+      "sweep_envelope_m": [4, 1, 2],
+      "interaction": {"mode": "observe", "required_sides": ["front"], "clearance_m": {"front": 3, "back": 0, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": false, "orbit": false}, "wall": {"allowed": true, "rear_overlap_m": 1}, "corridor": {"allowed": false}},
+      "preferred_posture": "wall",
+      "view": {"preferred_distance_m": 3, "front_angle_degrees": 90},
+      "rotations": [90, 270],
+      "order": {"index": 9, "relation_to": "pick_up_cube", "relation_type": "documents-interaction"},
+      "dna": ["caption", "evidence", "display"]
+    },
+    {
+      "lookup_name": "qfep_formula_3d",
+      "display_name": "QFEP Formula 3D",
+      "artifact_class": "diagram",
+      "body_envelope_m": [3, 1, 3],
+      "sweep_envelope_m": [3, 1, 3],
+      "interaction": {"mode": "observe", "required_sides": ["front"], "clearance_m": {"front": 3, "back": 0, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": false, "orbit": false}, "wall": {"allowed": true, "rear_overlap_m": 1}, "corridor": {"allowed": false}},
+      "preferred_posture": "wall",
+      "view": {"preferred_distance_m": 3, "front_angle_degrees": 90},
+      "rotations": [90, 270],
+      "order": {"index": 10, "relation_to": "science_screen", "relation_type": "specializes-monitor"},
+      "dna": ["formula", "constraint", "emphasis"]
+    },
+    {
+      "lookup_name": "lambda_slider",
+      "display_name": "Lambda Slider",
+      "artifact_class": "interface",
+      "body_envelope_m": [3, 2, 2],
+      "sweep_envelope_m": [4, 3, 2],
+      "interaction": {"mode": "manipulate", "required_sides": ["front"], "clearance_m": {"front": 2, "back": 1, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": true, "orbit": false}, "wall": {"allowed": true, "rear_overlap_m": 1}, "corridor": {"allowed": false}},
+      "preferred_posture": "wall",
+      "view": {"preferred_distance_m": 1.5, "front_angle_degrees": 100},
+      "rotations": [90, 270],
+      "order": {"index": 11, "relation_to": "qfep_formula_3d", "relation_type": "exposes-parameter"},
+      "dna": ["lambda", "calibration", "agency"]
+    },
+    {
+      "lookup_name": "control_pendulum",
+      "display_name": "Control Pendulum",
+      "artifact_class": "kinetic",
+      "body_envelope_m": [1, 1, 2],
+      "sweep_envelope_m": [3, 3, 3],
+      "interaction": {"mode": "manipulate", "required_sides": ["front", "left", "right"], "clearance_m": {"front": 2, "back": 1, "left": 1, "right": 1}},
+      "placements": {"island": {"allowed": true, "orbit": true}, "wall": {"allowed": false, "rear_overlap_m": 0}, "corridor": {"allowed": false}},
+      "preferred_posture": "island",
+      "view": {"preferred_distance_m": 2, "front_angle_degrees": 180},
+      "rotations": [0, 180],
+      "order": {"index": 12, "relation_to": "lambda_slider", "relation_type": "embodies-control-loop"},
+      "dna": ["period", "feedback", "regime"]
+    }
+  ]
+}

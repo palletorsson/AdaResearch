@@ -29,7 +29,15 @@ import json, argparse, pathlib, sys
 from collections import Counter
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-OUT = ROOT / "commons/data/artifact_relations.json"
+## NOT `artifact_relations.json`. That path is owned by
+## tools/build_artifact_relations.py, whose schema (spine_artifacts,
+## edges_by_kind, and per-token `multiples`/`axes`) is read at RUNTIME by
+## endless_museum.gd and four em_* modules. This tool writes a different thing —
+## scored proposals with reasons — and both schemas carry an `artifacts` key, so
+## writing here would not crash anything: the museum would simply stop finding
+## multiples and quietly deal single artifacts. Silent degradation is worse than
+## a crash, hence the separate file.
+OUT = ROOT / "commons/data/artifact_relations_proposed.json"
 W_AXIS, W_CATEGORY, W_TAGS, W_FILE = 3.0, 2.0, 2.0, 0.5
 TOP_N = 12
 

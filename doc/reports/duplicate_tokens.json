@@ -1,0 +1,146 @@
+{
+ "_readme": "lookup_names claimed by more than one registry file with DIFFERENT scenes. measure_artifacts.gd builds a token-keyed dict across all registries, so the last file to be read wins and the other scene is never measured. Each of these needs an authoring decision about which scene is canonical; measurement cannot guess. Generated 2026-08-11.",
+ "count": 10,
+ "artifacts": [
+  {
+   "lookup_name": "entropy_axiom",
+   "entries": [
+    {
+     "registry": "algorithms_misc.json",
+     "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom.tscn"
+    },
+    {
+     "registry": "randomness.json",
+     "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn"
+    }
+   ],
+   "measured_as": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn"
+  },
+  {
+   "lookup_name": "fluid_simulation",
+   "entries": [
+    {
+     "registry": "algorithms_misc.json",
+     "scene": "res://algorithms/physicssimulation/fluidsimulation/fluid_simulation.tscn"
+    },
+    {
+     "registry": "physics_simulation.json",
+     "scene": "res://algorithms/physicssimulation/fluidsimulation/fluidsimulation.tscn"
+    }
+   ],
+   "measured_as": "res://algorithms/physicssimulation/fluidsimulation/fluidsimulation.tscn"
+  },
+  {
+   "lookup_name": "grab_cube",
+   "entries": [
+    {
+     "registry": "commons_artifacts.json",
+     "scene": "res://commons/interactables/grab_cube.tscn"
+    },
+    {
+     "registry": "primitives.json",
+     "scene": "res://commons/primitives/cubes/grab_cube.tscn"
+    }
+   ],
+   "measured_as": "res://commons/primitives/cubes/grab_cube.tscn"
+  },
+  {
+   "lookup_name": "living_paper",
+   "entries": [
+    {
+     "registry": "living_paper.json",
+     "scene": "res://commons/substrates/living_paper/living_paper.tscn"
+    },
+    {
+     "registry": "primitives.json",
+     "scene": "res://commons/primitives/living_paper/living_paper.tscn"
+    }
+   ],
+   "measured_as": "res://commons/primitives/living_paper/living_paper.tscn"
+  },
+  {
+   "lookup_name": "microscope",
+   "entries": [
+    {
+     "registry": "lab.json",
+     "scene": "res://commons/artifacts/microscope/microscope.tscn"
+    },
+    {
+     "registry": "wavefunctions.json",
+     "scene": "res://commons/lab/microscope/microscope.tscn"
+    }
+   ],
+   "measured_as": "res://commons/lab/microscope/microscope.tscn"
+  },
+  {
+   "lookup_name": "oscilloscope",
+   "entries": [
+    {
+     "registry": "commons_artifacts.json",
+     "scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn"
+    },
+    {
+     "registry": "lab.json",
+     "scene": "res://commons/artifacts/oscilloscope/oscilloscope.tscn"
+    }
+   ],
+   "measured_as": "res://commons/artifacts/oscilloscope/oscilloscope.tscn"
+  },
+  {
+   "lookup_name": "prism",
+   "entries": [
+    {
+     "registry": "lab.json",
+     "scene": "res://commons/artifacts/prism/prism.tscn"
+    },
+    {
+     "registry": "primitives.json",
+     "scene": "res://commons/primitives/prism/prism.tscn"
+    }
+   ],
+   "measured_as": "res://commons/primitives/prism/prism.tscn"
+  },
+  {
+   "lookup_name": "sliding_door",
+   "entries": [
+    {
+     "registry": "lab.json",
+     "scene": "res://commons/artifacts/sliding_door/sliding_door.tscn"
+    },
+    {
+     "registry": "primitives.json",
+     "scene": "res://commons/primitives/translation/sliding_door.tscn"
+    }
+   ],
+   "measured_as": "res://commons/primitives/translation/sliding_door.tscn"
+  },
+  {
+   "lookup_name": "spring_network",
+   "entries": [
+    {
+     "registry": "commons_artifacts.json",
+     "scene": "res://commons/artifacts/spring_network/spring_network.tscn"
+    },
+    {
+     "registry": "wavefunctions.json",
+     "scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn"
+    }
+   ],
+   "measured_as": "res://algorithms/wavefunctions/spring_network/spring_network.tscn"
+  },
+  {
+   "lookup_name": "turret_targeting",
+   "entries": [
+    {
+     "registry": "vectors.json",
+     "scene": "res://commons/artifacts/turret_targeting/turret_targeting.tscn"
+    },
+    {
+     "registry": "vectors_demos.json",
+     "scene": "res://algorithms/vectors/11_turret_targeting/TurretTargeting.tscn"
+    }
+   ],
+   "measured_as": "res://algorithms/vectors/11_turret_targeting/TurretTargeting.tscn"
+  }
+ ]
+}

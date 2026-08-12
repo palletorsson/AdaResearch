@@ -38,6 +38,10 @@ const Builder := preload("res://commons/artifacts/catalog/DressingRoomBuilder.gd
 
 var _config_path: String = ""
 var _out_id: String = "self"
+## How the last measurement was reached — mesh count, what was skipped and why,
+## signage and effects apart from body. Merged into the manifest beside the
+## number, so provenance ships with it.
+var _last_measure: Dictionary = {}
 var _wait := 2.5
 
 
@@ -67,30 +71,53 @@ func _run() -> void:
 	var wait_total: float = float(cfg.get("wait", _wait))
 
 	var root := get_root()
+	var studio: String = String(cfg.get("studio", "neutral"))
 
 	# === Studio setup (neutral, controlled) =========================
 	# Soft sky + warm key + cool fill + ground-bounce. No biome, no fog.
 	var env := WorldEnvironment.new()
 	var e := Environment.new()
 	e.background_mode = Environment.BG_COLOR
-	e.background_color = Color(0.93, 0.92, 0.90)
+	e.background_color = Color(0.025, 0.035, 0.055) if studio == "museum" else Color(0.93, 0.92, 0.90)
 	e.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
-	e.ambient_light_color = Color(0.85, 0.86, 0.92)
-	e.ambient_light_energy = 0.7
+	e.ambient_light_color = Color(0.32, 0.42, 0.58) if studio == "museum" else Color(0.85, 0.86, 0.92)
+	e.ambient_light_energy = 0.42 if studio == "museum" else 0.7
 	e.tonemap_mode = Environment.TONE_MAPPER_ACES
 	env.environment = e
 	root.add_child(env)
+	if root is Window:
+		(root as Window).world_3d.environment = e
+	if studio == "museum":
+		RenderingServer.set_default_clear_color(Color(0.025, 0.035, 0.055))
 
 	var sun := DirectionalLight3D.new()
 	sun.rotation = Vector3(deg_to_rad(-50), deg_to_rad(35), 0)
-	sun.light_energy = 1.4
+	sun.light_energy = 0.95 if studio == "museum" else 1.4
 	sun.shadow_enabled = true
 	root.add_child(sun)
+	if studio == "museum":
+		var fill := OmniLight3D.new()
+		fill.position = Vector3(-3.0, 2.6, 2.5)
+		fill.light_color = Color(0.32, 0.68, 1.0)
+		fill.light_energy = 1.15
+		fill.omni_range = 9.0
+		root.add_child(fill)
 
-	# Studio floor — context-aware. Built later, after we measure the
-	# artifact, since "is this a floor tile?" determines whether we
-	# need a neighbor-grid context or just a neutral plane.
-	# (Floor build deferred — see below.)
+	# A separate floor plane gives the staged footprint a readable ground
+	# surface instead of letting it dissolve into the studio background.
+	# Keep it outside RoomRoot so it never contributes to artifact/room bounds.
+	if studio == "museum":
+		var studio_floor := MeshInstance3D.new()
+		studio_floor.name = "StudioFloor"
+		var floor_mesh := PlaneMesh.new()
+		floor_mesh.size = Vector2(28.0, 28.0)
+		studio_floor.mesh = floor_mesh
+		studio_floor.position = Vector3(0.0, -0.025, 0.0)
+		var floor_material := StandardMaterial3D.new()
+		floor_material.albedo_color = Color(0.12, 0.135, 0.16)
+		floor_material.roughness = 0.96
+		studio_floor.material_override = floor_material
+		root.add_child(studio_floor)
 
 	# === Load the artifact's pre-authored dressing room =============
 	# Canonical source: commons/artifacts/dressing_rooms/<lookup>.json
@@ -257,6 +284,10 @@ func _run() -> void:
 			"center": [aabb.get_center().x, aabb.get_center().y, aabb.get_center().z],
 			"size":   [aabb.size.x, aabb.size.y, aabb.size.z],
 		},
+		# Provenance beside the number, so a fallback or a signage-inflated box
+		# can be recognised as such downstream instead of looking exactly as
+		# authoritative as a good measurement.
+		"measurement": _last_measure.duplicate(true),
 		"size_class": size_class,
 		"shots": shot_results,
 	}
@@ -383,31 +414,105 @@ func _matches_filter(entry: Dictionary, lookup: String, where: Dictionary) -> bo
 	return true
 
 
+## The artifact's BODY, with provenance in `_last_measure`.
+##
+## Applies doc/plans/capture_measure_faults.md (written 2026-08-10, held back
+## because a second session was inside this buffer). 25 of 72 staged
+## measurements described this function rather than the artifact.
 func _measure_artifact_aabb(node: Node) -> AABB:
 	var combined := AABB()
+	var signage := AABB()
+	var effects := AABB()
 	var has_any := false
+	var has_signage := false
+	var has_effects := false
+	var skipped_invisible: int = 0
+	var skipped_top_level: Array[String] = []
+	var counted: int = 0
+	var widest: float = 0.0
+	var widest_name: String = ""
+
 	var stack: Array = [node]
 	while stack.size() > 0:
 		var n = stack.pop_back()
 		if n == null: continue
 		for c in n.get_children():
 			stack.push_back(c)
-		if not (n is VisualInstance3D): continue
-		var vi := n as VisualInstance3D
+		# Physical bounds come from geometry. Lights have large influence AABBs
+		# and cameras have editor helpers; neither occupies museum floor space.
+		if not (n is GeometryInstance3D): continue
+		var vi := n as GeometryInstance3D
+		# Hidden presentation branches (for example an analysis-only graph) are
+		# not part of the active artifact body and must not inflate its contract.
+		if not vi.is_visible_in_tree():
+			skipped_invisible += 1
+			continue
+		# F3 — set_as_top_level detaches a node from its parent transform, so it
+		# stays at the world origin while the seating step lifts the artifact
+		# away from it. draw_dot read 3.29 m for exactly this reason.
+		if vi.top_level:
+			skipped_top_level.append(String(vi.name))
+			continue
 		var local := vi.get_aabb()
 		if local.size.length_squared() < 0.0001: continue
 		var world: AABB = vi.global_transform * local
-		# Skip the studio floor — it's huge and not the artifact.
-		var footprint: float = Vector2(world.size.x, world.size.z).length()
-		if footprint > 18.0: continue
+
+		# F2 — text is authored to be READ, not occupied, and it billboards.
+		# force_field's 3.645 m width was its caption.
+		if vi is Label3D or vi is Sprite3D:
+			signage = world if not has_signage else signage.merge(world)
+			has_signage = true
+			continue
+		# F4 — effects are shown, not stood on.
+		if vi is GPUParticles3D or vi is CPUParticles3D:
+			effects = world if not has_effects else effects.merge(world)
+			has_effects = true
+			continue
+
+		# F1 — no 18 m guard. It failed in both directions: scale_lines' single
+		# 100 m rung was thrown away (measured 10 m, is 100 m, stands in 22 live
+		# maps) while laser_measure's fifty 12 mm ticks each sailed through to
+		# pool out at 50 m. And it guarded nothing: StudioFloor is parented to
+		# root, not RoomRoot, so it was never in this subtree. Report the widest
+		# single mesh instead, so a real giant is visible as evidence.
+		var reach: float = Vector2(world.size.x, world.size.z).length()
+		if reach > widest:
+			widest = reach
+			widest_name = String(vi.name)
+		counted += 1
 		if not has_any:
 			combined = world
 			has_any = true
 		else:
 			combined = combined.merge(world)
+
+	_last_measure = {
+		"counted_meshes": counted,
+		"skipped_invisible": skipped_invisible,
+		"skipped_top_level": skipped_top_level,
+		"widest_single_mesh_m": snappedf(widest, 0.001),
+		"widest_single_mesh": widest_name,
+		"signage": _aabb_dict(signage) if has_signage else null,
+		"effects": _aabb_dict(effects) if has_effects else null,
+		"fallback": not has_any,
+	}
 	if not has_any:
+		# F5 — a fallback that cannot say it is a fallback is indistinguishable
+		# from an artifact that is genuinely one metre cubed. Two of the four
+		# that returned this were load-bearing design decisions.
+		_last_measure["fallback_reason"] = (
+			"no visible, non-signage, non-effect GeometryInstance3D in the subtree"
+			+ (" (%d hidden, %d top-level skipped)" % [skipped_invisible, skipped_top_level.size()]))
 		return AABB(Vector3(-0.5, 0, -0.5), Vector3(1, 1, 1))
 	return combined
+
+
+func _aabb_dict(a: AABB) -> Dictionary:
+	return {
+		"center": [snappedf(a.get_center().x, 0.001), snappedf(a.get_center().y, 0.001),
+			snappedf(a.get_center().z, 0.001)],
+		"size": [snappedf(a.size.x, 0.001), snappedf(a.size.y, 0.001), snappedf(a.size.z, 0.001)],
+	}
 
 
 ## Bucket the artifact by physical size into a class that picks shots.
@@ -555,8 +660,9 @@ func _measure_room_aabb(node: Node) -> AABB:
 			stack.push_back(c)
 		if n is Node3D and (n as Node3D).name == "AnchorMarker":
 			continue
-		if not (n is VisualInstance3D): continue
-		var vi := n as VisualInstance3D
+		if not (n is GeometryInstance3D): continue
+		var vi := n as GeometryInstance3D
+		if not vi.is_visible_in_tree(): continue
 		var local := vi.get_aabb()
 		if local.size.length_squared() < 0.0001: continue
 		var world: AABB = vi.global_transform * local
