@@ -9,6 +9,23 @@ class_name TerrainGeneratorBase extends MeshInstance3D
 @export var use_fallback : bool = false  # Force use simple mesh for testing
 @export var invert_faces : bool = false # Flip triangle winding and normals (useful for objects vs caves)
 @export var continuous_update : bool = false # Keep re-rendering every frame (for animated shaders like Fountain)
+## CAPTURE ONLY, and 0.0 means "leave the material exactly as authored".
+##
+## TerrainMat.tres fades ALBEDO to black with camera distance:
+##   fade = 1.0 - clamp(distance(camera, vertex) / fade_distance * fade_gain, 0, 1)
+## at the shipped 500.0 / 1.2 that reaches pure black at about 417 units. Fine for
+## a player standing on a 300-unit terrain; fatal to a capture bench, which must
+## stand ~1600 units back to frame the whole thing. Measured, the six terrain
+## artifacts rendered at a subject mean luminance of 0.0-0.1 out of 255 against 59
+## and 168 for the two wave-1 artifacts that do not use this material, and ten
+## declared axes were scored WEAK or INERT on frames where the axis is plainly
+## visible.
+##
+## Deliberately NOT read by apply_grid_config, so no map token can reach it: this
+## is for dna.fixture, which assigns straight onto the property before _ready.
+## Left at 0.0 the material resource is never touched and every placement renders
+## byte-identically to before.
+@export var capture_fade_distance : float = 0.0
 
 const resolution : int = 8
 const num_waitframes_gpusync : int = 12
@@ -54,6 +71,7 @@ var _released : bool = false  # Guard release() against double-teardown (PREDELE
 
 func _ready() -> void:
 	print("🏳️‍🌈 %s: Starting generation..." % get_class_name())
+	_apply_capture_fade()
 	array_mesh = ArrayMesh.new()
 	mesh = array_mesh
 	
@@ -325,6 +343,23 @@ func _create_fallback_mesh() -> void:
 # Called from release() AFTER any in-flight compute is synced, so freeing is crash-safe.
 func _free_extra_rids() -> void:
 	pass
+
+## Opens the material's distance fade for a capture, and ONLY for a capture.
+##
+## Duplicates the material first. TerrainMat.tres is a shared resource across
+## eight scenes, so writing the parameter straight onto it would leak the capture
+## setting into every other terrain alive in the same process - which during a
+## sweep is exactly what happens next.
+func _apply_capture_fade() -> void:
+	if capture_fade_distance <= 0.0:
+		return
+	var mat := material_override
+	if mat == null or not (mat is ShaderMaterial):
+		return
+	var own := (mat as ShaderMaterial).duplicate() as ShaderMaterial
+	own.set_shader_parameter("fade_distance", capture_fade_distance)
+	material_override = own
+
 
 func get_params_array():
 	var params = []
