@@ -374,8 +374,20 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
               ) -> tuple[bool, float, list[Trace], list[str]]:
     """One concrete attempt. Returns (ok, score, traces, exceptions)."""
     traces: list[Trace] = []
+    exceptions: list[str] = []
+    # A lone authored rotation is a preference, so turning the work is allowed —
+    # but never silently. Every placement that faces a way the author did not
+    # write says so, which is what keeps "preference" from meaning "ignored".
+    authored = getattr(contract, "authored_rotation", None)
+    if authored is not None and rotation != authored:
+        exceptions.append(
+            f"turned to rotation {rotation}; the dressing room wrote {authored} "
+            f"(one declared rotation is a preference, not a constraint)")
     m = masks(contract, rotation, mode)
-    exceptions = list(m.exceptions)
+    # EXTEND. This used to reassign, which silently dropped the rotation
+    # compromise recorded above — the record that keeps a preference from
+    # meaning "ignored".
+    exceptions += list(m.exceptions)
     ax, az = origin if origin is not None else origin_for(slot, m)
     score = 1.0
 
@@ -460,7 +472,8 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
         return False, 0.0, traces, exceptions
     traces.append(Trace("physical_overlap", "pass", "no body collision"))
 
-    # Required access: those sides must be walkable and unclaimed.
+    # Required access: each side needs somewhere to STAND, not a clear apron.
+    access_penalty = 0.0
     for side in contract.required_sides:
         band = {(c[0] + ax, c[1] + az) for c in _side_cells(m, side, rotation)}
         if not band:
@@ -469,12 +482,37 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
             return False, 0.0, traces, exceptions
         blocked = [c for c in band
                    if not plan.walkable(*c) or c in occ.physical]
-        if blocked:
+        open_cells = len(band) - len(blocked)
+        # ENOUGH ACCESS, NOT ALL OF IT. This used to refuse the placement if a
+        # SINGLE cell of the band was blocked, which is not what the side is
+        # for: a visitor needs somewhere to stand and look from, not the whole
+        # apron swept. `CoordinateSystem3M` was refused from the Uffizi's only
+        # slot large enough to hold it — 3 of 5 back cells blocked, 2 open,
+        # which is a person's worth of standing room — and went to the porch.
+        #
+        # Same over-strict shape as the slot-access rule that once invented 16
+        # "unreachable" slots in this corpus. The project's own standard is what
+        # a body can actually do, not a clean rectangle.
+        #
+        # Zero open cells is still a refusal: a side nobody can stand on is not
+        # an approach. A partial band places and SAYS SO, and the crowding is
+        # priced in the score below rather than hidden.
+        if open_cells <= 0:
             traces.append(Trace(f"required_access.{side}", "fail",
-                                f"{len(blocked)} of {len(band)} access cells blocked"))
+                                f"all {len(band)} access cells blocked — "
+                                f"nowhere to stand on the {side}"))
             return False, 0.0, traces, exceptions
-        traces.append(Trace(f"required_access.{side}", "pass",
-                            f"{len(band)} cells reachable"))
+        if blocked:
+            traces.append(Trace(f"required_access.{side}", "compromised",
+                                f"{open_cells} of {len(band)} access cells open "
+                                f"on the {side}"))
+            exceptions.append(
+                f"{side} access is crowded: {open_cells} of {len(band)} cells "
+                f"open (a visitor can stand, but not step around)")
+            access_penalty += len(blocked) / len(band)
+        else:
+            traces.append(Trace(f"required_access.{side}", "pass",
+                                f"{len(band)} cells reachable"))
 
     # Circulation: must be walkable floor, and must not eat the through-route.
     world_circ = {(c[0] + ax, c[1] + az) for c in m.circulation}
@@ -530,6 +568,10 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
     if rotation != contract.rotations[0]:
         score -= 0.05
 
+    # Crowded access is worse than clear access, so it loses to a roomier
+    # slot when one exists — priced, not gated. Without this the relaxed
+    # rule would treat a 1-of-5 squeeze as equal to an open apron.
+    score -= access_penalty
     return True, max(0.0, score), traces, exceptions
 
 

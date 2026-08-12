@@ -280,6 +280,12 @@ class SpatialContract:
     #: full_circle | half_circle | cone | corridor | ambient — how the artifact
     #: wants to be approached (artifact_spatial_contracts.json).
     directional_profile: str = ""
+    #: The rotation the author actually wrote, when a dressing room named
+    #: exactly ONE. It leads `rotations` and every other facing is a recorded
+    #: compromise — a single declared value is a preference, not a constraint.
+    #: Two or more is an enumerated set and stays binding: an author who lists
+    #: three has considered the fourth and excluded it.
+    authored_rotation: int | None = None
     #: y-offset the artifact asks for via spine_hints().height — the mount the
     #: artifact knows about and the measurement cannot see.
     hint_height_m: float = 0.0
@@ -516,7 +522,20 @@ def resolve(lookup: str) -> SpatialContract:
             "placement_contract.preferred_mode" if contract.get("preferred_mode")
             else "museum_contract_pilot.preferred_posture")
 
-    rotations = [int(str(r)) for r in room.get("rotations", [])] or \
+    authored_rots = [int(str(r)) for r in room.get("rotations", [])]
+    authored_rotation = authored_rots[0] if len(authored_rots) == 1 else None
+    if authored_rotation is not None:
+        # ONE declared rotation is a PREFERENCE. The escalation ladder lists
+        # rotation as its second step and could never take it here: the
+        # Uffizi's largest slot holds 42 cells at rotation 90 and 6 at
+        # rotation 0, so a room naming only 0 sent the work to the grounds
+        # past a slot that would have held it. Eleven museums were losing a
+        # resident that way. The authored value still LEADS; any other is
+        # recorded as a compromise rather than taken silently.
+        authored_rots = [authored_rotation] + [
+            r for r in (0, 90, 180, 270) if r != authored_rotation]
+        prov["placement.rotations"] = "dressing room (1 declared -> preference)"
+    rotations = authored_rots or \
                 [int(r) for r in pilot.get("rotations", [])] or [0, 90, 180, 270]
     # A declared rotation is a preference, not a restriction: the hint says
     # which way the artifact wants to face, so it LEADS the list the negotiator
@@ -527,7 +546,16 @@ def resolve(lookup: str) -> SpatialContract:
     hint_rot = hints.get("rotation_y")
     if isinstance(hint_rot, (int, float)) and int(hint_rot) >= 0:
         r = int(hint_rot) % 360
-        if r in rotations:
+        if authored_rotation is not None and r != authored_rotation:
+            # The author's single value is now a PREFERENCE, so `r` is legal —
+            # but legal is not preferred. The authored facing keeps the lead and
+            # the hint takes second place, ahead of the rest.
+            rotations = [authored_rotation, r] + [
+                x for x in rotations if x not in (authored_rotation, r)]
+            conflicts.append(
+                f"spine_hints() asks for rotation {r}; the author's {authored_rotation} "
+                f"leads and {r} is the first fallback")
+        elif r in rotations:
             rotations = [r] + [x for x in rotations if x != r]
             prov["placement.rotations"] = "spine_hints().rotation_y leads"
         else:
@@ -717,6 +745,7 @@ def resolve(lookup: str) -> SpatialContract:
                           str(contract.get("required_support")
                               or room.get("posture")
                               or needs.get("platform", "floor") or "floor")),
+        authored_rotation=authored_rotation,
         centre_offset_m=centre_offset,
         base_y_m=round(base_y, 3),
         hint_height_m=(float(hints["height"])

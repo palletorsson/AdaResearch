@@ -217,7 +217,12 @@ def from_room(room: dict[str, Any]) -> SpatialContract:
                 f"dressing room declares footprint {declared} where the measured "
                 f"body gives {footprint}; the MEASUREMENT wins on body size "
                 f"(the room predates the re-measure)"])
-    rotations = [int(str(r)) for r in room.get("rotations", [])] or base.rotations
+    room_rots = [int(str(r)) for r in room.get("rotations", [])]
+    # ONE declared rotation is a preference (spatial_contract expanded it and
+    # recorded which one the author wrote); reading the room's single value
+    # back here would collapse it into a constraint again, on the only path
+    # the negotiator uses.
+    rotations = base.rotations if len(room_rots) <= 1 else room_rots
     sides = [COMPASS_TO_SIDE.get(str(s), str(s))
              for s in pc.get("interaction_faces", [])] or base.required_sides
 

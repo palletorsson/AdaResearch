@@ -187,10 +187,17 @@ class NegotiationTests(unittest.TestCase):
         c = sc.resolve("science_screen")
         self.assertEqual("exhibited", c.containment)
         _, placements, _ = neg.run(["science_screen"], plan=plan)
-        self.assertGreater(plan.width, before)
-        self.assertTrue(plan.expansions, "an expansion must leave a record")
-        self.assertTrue(any("step 6" in t.detail
-                            for t in placements[0].traces if t.rule == "escalation"))
+        # It USED to grow the room here, because its single authored rotation
+        # was binding and it would not fit facing that way. Now that one
+        # declared rotation is a preference, the ladder takes step 2 (turn) and
+        # never reaches step 6 (grow the building) — which is the whole point
+        # of ordering the ladder. Cheaper rung first.
+        self.assertEqual(plan.width, before, "turning must beat growing")
+        self.assertEqual(placements[0].result, "ACCEPT")
+        self.assertNotEqual(placements[0].rotation, c.authored_rotation)
+        self.assertTrue(any("turned to rotation" in e
+                            for e in placements[0].exceptions),
+                        "a turn away from the authored facing must be recorded")
 
     def test_a_precinct_is_given_ground_not_a_bigger_building(self) -> None:
         """The category, not a failure.
@@ -337,8 +344,12 @@ class DressingRoomIsCanonical(unittest.TestCase):
         """
         c = sc.resolve("science_screen")
         self.assertEqual(c.footprint_cells, [4, 1])
-        self.assertEqual(c.rotations, [0])
-        self.assertNotIn(180, c.rotations)
+        # ONE declared rotation is now a PREFERENCE, so 180 is legal — but the
+        # author's 0 still LEADS, ahead of the hint that asked for 180. A
+        # preference any provider can outrank is not a preference.
+        self.assertEqual(c.rotations[0], 0)
+        self.assertEqual(c.authored_rotation, 0)
+        self.assertIn(180, c.rotations)
         self.assertTrue(any("authored" in x for x in c.conflicts),
                         "an overruled hint must be recorded, not swallowed")
 
