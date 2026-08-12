@@ -1,0 +1,244 @@
+{
+ "schema": "adaresearch.interior_bottleneck.v1",
+ "generated": "2026-08-12",
+ "commit": "f4bbe79dd",
+ "question": "What actually stops artifacts from being placed INTERIOR in ada_run/em_plan.json?",
+ "method": {
+  "harness": "tools/spatial_negotiation.py::try_place wrapped at import time (monkeypatched, source never edited). Every call records slot.venue, rotation, mode, origin and — when the call returns not-ok — the LAST trace, which is always the failing one because every refusal in try_place appends its trace and returns immediately.",
+  "replay": "tools/export_museum_plan.py's exact brief: the first 8 lookups from exhibition_brief.spine_order() negotiated in order into every key of commons/data/template_patterns.json, apron=14, occupancy accumulating per museum.",
+  "reproduced_baseline": {"interior": 179, "porch": 1070, "outside": 168, "courtyard": 39, "total": 1456, "rejected": 0},
+  "try_place_calls": 230683,
+  "interior_refusals": 100864,
+  "three_aggregations_and_why": [
+   "ATTEMPT level counts every refused try_place call. It is dominated by search enumeration, not by binding constraints: candidate_origins offers up to 48 anchors per slot per rotation per mode, and a centred mask at a pocket-edge anchor trivially fails body_inside_room. Reporting this table alone would repeat the pocket-vs-capacity error one level up.",
+   "SLOT level takes, for each (museum, artifact, slot) that never accepted, the DEEPEST first-failing rule it reached — the closest that slot ever got.",
+   "PAIR level takes, for each (museum, artifact), the deepest rule reached across every interior slot. This is the only aggregation whose unit is the thing the corpus counts: a placement that did or did not land indoors."
+  ]
+ },
+
+ "table_attempt_level": {
+  "unit": "refused try_place call on an interior slot",
+  "total": 100864,
+  "rows": [
+   {"rank": 1, "rule": "body_inside_room",         "count": 49417, "pct": 48.99},
+   {"rank": 2, "rule": "required_access.<side>",   "count": 14928, "pct": 14.80},
+   {"rank": 3, "rule": "circulation_on_floor",     "count": 14044, "pct": 13.92},
+   {"rank": 4, "rule": "route_preserved",          "count": 12027, "pct": 11.92},
+   {"rank": 5, "rule": "physical_overlap",         "count":  7337, "pct":  7.27},
+   {"rank": 6, "rule": "faces_out_of_wall",        "count":  1719, "pct":  1.70},
+   {"rank": 7, "rule": "wall_is_available",        "count":  1392, "pct":  1.38},
+   {"rank": 8, "rule": "support_matches_contract", "count":     0, "pct":  0.00},
+   {"rank": 8, "rule": "body_fits_under_ceiling",  "count":     0, "pct":  0.00},
+   {"rank": 8, "rule": "circulation_overlap",      "count":     0, "pct":  0.00}
+  ],
+  "note": "support_matches_contract and body_fits_under_ceiling never fire on an interior slot for this brief — the plinth relaxation and the precinct short-circuit already removed them. All 100864 refusals occur inside the 30 museum-tagged templates; the other 152 template keys contribute ZERO interior try_place calls (see largest_share)."
+ },
+
+ "table_slot_level": {
+  "unit": "(museum, artifact, slot) triple that was tried and never accepted",
+  "total": 1280,
+  "rows": [
+   {"rank": 1, "rule": "circulation_on_floor", "count": 523, "pct": 40.86},
+   {"rank": 2, "rule": "route_preserved",      "count": 335, "pct": 26.17},
+   {"rank": 3, "rule": "body_inside_room",     "count": 256, "pct": 20.00},
+   {"rank": 4, "rule": "required_access",      "count": 155, "pct": 12.11},
+   {"rank": 5, "rule": "physical_overlap",     "count":  11, "pct":  0.86}
+  ]
+ },
+
+ "table_pair_level": {
+  "unit": "(museum, artifact) pair that did NOT land interior",
+  "total": 1277,
+  "rows": [
+   {"rank": 1, "rule": "NO_INTERIOR_ATTEMPT",  "count": 1246, "pct": 97.57,
+    "meaning": "the plan published no interior slot to test, so try_place was never called for one"},
+   {"rank": 2, "rule": "route_preserved",      "count":   21, "pct":  1.64},
+   {"rank": 3, "rule": "circulation_on_floor", "count":    8, "pct":  0.63},
+   {"rank": 4, "rule": "required_access",      "count":    1, "pct":  0.08},
+   {"rank": 5, "rule": "body_inside_room",     "count":    1, "pct":  0.08}
+  ],
+  "restricted_to_the_30_buildable_museums": {
+   "total": 61,
+   "rows": [
+    {"rule": "NO_INTERIOR_ATTEMPT",  "count": 30, "pct": 49.18,
+     "meaning": "folding_past x 30 — containment=precinct (4.80 m tall against a 4 m certified wall). A category, not a failure."},
+    {"rule": "route_preserved",      "count": 21, "pct": 34.43},
+    {"rule": "circulation_on_floor", "count":  8, "pct": 13.11},
+    {"rule": "required_access",      "count":  1, "pct":  1.64},
+    {"rule": "body_inside_room",     "count":  1, "pct":  1.64}
+   ],
+   "of_the_31_that_reached_try_place": {"route_preserved": 21, "pct": 67.74}
+  }
+ },
+
+ "largest_share": {
+  "literal_answer_to_the_question_as_asked": {
+   "rule": "body_inside_room",
+   "pct_of_all_interior_refusals": 48.99,
+   "verdict": "GENUINE SPATIAL FACT, AND A MEANINGLESS STATISTIC",
+   "why": "A body cell landing on wall or void is a true refusal, but the count is search enumeration, not resistance. candidate_origins hands try_place every cell of the slot pocket as an anchor and spatial_contract.masks centres the footprint on it, so a 5x4 body probed at a pocket-edge cell overhangs into the wall by construction. It binds 256 of 1280 refused slot triples (20.0%) and decides the outcome for exactly 1 of 1277 pairs (0.08%). Correcting it would change nothing."
+  },
+  "the_actual_bottleneck": {
+   "name": "the plan publishes no interior slot at all",
+   "pct_of_all_non_interior_pairs": 97.57,
+   "verdict": "OVER-STRICT ENCODING — a coverage gap between two files, not a spatial fact",
+   "mechanism": [
+    "spatial_floorplan.from_museum() builds interior Slots ONLY from commons/data/slot_capacity.json (`for sid, rec in caps.items()`). It reads no slot tokens from the tile itself.",
+    "slot_capacity.load_museums() filters template_patterns.json with `if v.get(\"museum\")` (tools/slot_capacity.py:56). That field is a display name present on 30 of 182 pattern keys.",
+    "So slot_capacity.json covers 30 museums / 475 slots. The other 152 template keys get a FloorPlan with 0 interior slots, rank_slots returns only exterior slots, and every exhibited artifact lands on the porch."
+   ],
+   "measured": {
+    "templates_total": 182,
+    "templates_with_interior_slots": 30,
+    "templates_with_zero_interior_slots": 152,
+    "authored_slot_tokens_in_the_152_uncovered_tiles": 857,
+    "uncovered_tiles_carrying_at_least_one_slot_token": 150,
+    "interior_try_place_calls_in_the_152": 0,
+    "placements_into_the_152": 1216,
+    "porch_placements_into_the_152": 1031,
+    "share_of_all_1070_porch_placements": 96.36
+   },
+   "the_corpus_headline_is_a_bookkeeping_fault": {
+    "class_museum_tagged_30": {"n": 240, "interior": 179, "porch": 39, "outside": 17, "courtyard": 5, "interior_pct": 74.58},
+    "class_bay_brush_91":     {"n": 728, "interior": 0,   "porch": 604, "outside": 90, "courtyard": 34, "interior_pct": 0.0},
+    "class_lattice_beat_fragment_brush_61": {"n": 488, "interior": 0, "porch": 427, "outside": 61, "courtyard": 0, "interior_pct": 0.0},
+    "reading": "In the 30 templates the museum can actually stamp, the negotiator already puts 74.58% of exhibited work indoors. The 12.3% corpus figure is produced by counting 152 brushes as buildings.",
+    "why_they_are_brushes": [
+     "91 keys are `bay:<name>` sub-tiles emitted by tools/extract_museum_bays.py, whose own docstring says they are keyed `bay:` and carry bay=true 'so every consumer that filters on `museum` ... is untouched'.",
+     "61 keys are `lattice:<wallpaper-group>-<w>`, `beat:<name>-<w>`, twin_bays, cloister, stepping_stones, inner_podium — floor courses and fragments, not buildings.",
+     "commons/scenes/endless_museum.gd:548 builds a template only `if p.has(\"museum\") or p.has(\"spine_segment\")`. Measured: 30 of the 182 keys qualify; 0 carry spine_segment. tools/validate_museum_templates.py:149,226 applies the same filter.",
+     "tools/export_museum_plan.py --all is the ONLY consumer in the chain that does not filter: it plans `sorted(patterns)` = all 182 keys. 1216 of the 1456 placements are for templates the museum will never stamp."
+    ]
+   }
+  },
+  "the_top_rule_that_actually_decides_an_outcome_inside_try_place": {
+   "rule": "route_preserved",
+   "pct_of_pairs_that_reached_try_place_and_failed": 67.74,
+   "verdict": "OVER-STRICT ENCODING, and it tests the wrong mask",
+   "why": [
+    "It is a categorical REJECT on ANY overlap between the circulation mask and plan.route. Circulation cells have already passed circulation_on_floor, so they are walkable floor a visitor stands on — a soft reservation, not an obstruction.",
+    "The PHYSICAL mask — the cells that genuinely block a corridor — is never tested against plan.route at all. try_place checks `world_circ & plan.route` and nothing else.",
+    "The sibling rule required_access was relaxed in commit f4bbe79dd from all-cells to one-open-cell-plus-a-priced-penalty for exactly this reason ('what a body can actually do, not a clean rectangle'). route_preserved kept the old shape.",
+    "plan.route is a BFS shortest path thickened by one cell in all 8 directions, i.e. ~3 cells wide, computed on the apron-expanded grid. In labrouste-stack-hall it covers 26.0% of the building's walkable floor and 9 of 26 interior slots sit within one cell of it."
+   ]
+  }
+ },
+
+ "worked_example_A_the_dominant_cause": {
+  "museum": "bay:altes-rotunda-hub#b2",
+  "artifacts": "the first 7 exhibited spine artifacts",
+  "tile": "15x15, pattern metadata declares slots=13, hero=true",
+  "slot_tokens_counted_in_the_tile": 13,
+  "note_on_the_tile": "4x 2s at the corners, 6x 1s in the side chapels, 1x 3s on the centre axis, 2x 2s on the entry course — a complete authored room with walls, not a fragment.",
+  "has_museum_key": false,
+  "in_slot_capacity_json": false,
+  "interior_slots_published_by_from_museum": 0,
+  "result_shipped": {
+   "CoordinateSystem3M": "porch", "frame_counter_display": "porch", "origin": "porch",
+   "you_are_here": "porch", "fontana_puncture": "porch", "floating_sphere_field": "porch",
+   "interactive_point_origin_force": "porch", "folding_past": "outside"
+  },
+  "interior_try_place_calls": 0,
+  "first_failing_rule": null,
+  "result_with_slot_capacity_regenerated_over_all_182": {
+   "interior_slots_published": 13,
+   "CoordinateSystem3M": "interior bay:altes-rotunda-hub#b2/1,0@west",
+   "frame_counter_display": "interior bay:altes-rotunda-hub#b2/1,0@west",
+   "origin": "interior bay:altes-rotunda-hub#b2/1,14@free",
+   "you_are_here": "interior bay:altes-rotunda-hub#b2/1,0@west",
+   "fontana_puncture": "interior bay:altes-rotunda-hub#b2/1,0@free",
+   "floating_sphere_field": "interior bay:altes-rotunda-hub#b2/1,0@free",
+   "interactive_point_origin_force": "interior bay:altes-rotunda-hub#b2/7,10",
+   "folding_past": "porch"
+  },
+  "reading": "7 of 7 exhibited artifacts move porch -> interior. Not one rule in try_place changed; the plan simply stopped claiming the building had no slots."
+ },
+
+ "worked_example_B_route_preserved": {
+  "museum": "labrouste-stack-hall",
+  "slot": "labrouste-stack-hall/11,2",
+  "slot_role": "2s (podium)",
+  "artifact": "CoordinateSystem3M",
+  "position_in_brief": "first — occupancy is empty, so nothing is competing",
+  "contract": {
+   "body_m": [4.75, 3.35, 3.35], "footprint_cells": [5, 4],
+   "clearance": {"front": 1, "back": 1, "left": 1, "right": 1},
+   "required_sides": ["front", "right", "back", "left"],
+   "importance": "feature", "containment": "exhibited", "preferred_venue": "interior"
+  },
+  "plan": {"size": [43, 61], "tile": [15, 33], "wall_height_m": 4.0,
+           "interior_slots": 26, "route_cells": 113, "route_cells_inside_the_tile": 106,
+           "tile_walkable_cells": 407, "route_share_of_building_floor_pct": 26.0,
+           "interior_slots_within_1_cell_of_the_route": 9},
+  "attempt": {
+   "rotation": 0, "mode": "freestanding", "anchor_cell": [24, 18],
+   "mask": {"physical": 20, "circulation": 18},
+   "traces": [
+    "pass  support_matches_contract   slot offers 'podium', artifact needs 'floor'",
+    "pass  body_fits_under_ceiling    3.35 m under a 4 m wall",
+    "pass  physical_overlap           no body collision",
+    "pass  required_access.front      5 cells reachable",
+    "pass  required_access.right      4 cells reachable",
+    "pass  required_access.back       5 cells reachable",
+    "pass  required_access.left       4 cells reachable",
+    "FAIL  route_preserved            clearance would occupy 6 through-route cells"
+   ]
+  },
+  "the_numbers_that_matter": {
+   "clearance_cells": 18,
+   "clearance_cells_on_the_route": 6,
+   "clearance_cells_that_are_walkable_floor": 18,
+   "body_cells": 20,
+   "body_cells_standing_on_the_route": 4,
+   "body_cells_tested_against_the_route": 0
+  },
+  "verdict": "OVER-STRICT, and inverted. The placement is refused because 6 cells of walkable STANDING ROOM touch the corridor, while the artifact's own 20-cell BODY squats on 4 cells of that same corridor unexamined. Every other rule passes, including all four required access sides. This is the same shape as the two refusals already corrected in this file's history (the podium-tile demand, and required_access demanding a swept apron) — a soft requirement encoded at hard-reject severity.",
+  "caveat_measured_not_assumed": "A separate sweep of the 179 ACCEPTED interior placements found 0 whose body sits on the route — because circulation normally encloses the body, so the untested asymmetry is dormant in the accepted set. It is not dormant in the refusals, as this example shows."
+ },
+
+ "counterfactuals_measured": {
+  "note": "Each row is a full 182-template replay, not an extrapolation. The capacity table was regenerated in a scratchpad over all 182 keys (1332 slots, 0 with no fit) and spatial_floorplan.CAPACITY repointed at it; commons/data/slot_capacity.json was not touched.",
+  "rows": [
+   {"caps": "shipped (30 museums, 475 slots)", "route_preserved": "as-is",
+    "interior": 179, "porch": 1070, "outside": 168, "courtyard": 39},
+   {"caps": "shipped (30 museums, 475 slots)", "route_preserved": "OFF",
+    "interior": 199, "porch": 1055, "outside": 164, "courtyard": 38},
+   {"caps": "regenerated over all 182 (1332 slots)", "route_preserved": "as-is",
+    "interior": 1095, "porch": 279, "outside": 73, "courtyard": 9},
+   {"caps": "regenerated over all 182 (1332 slots)", "route_preserved": "OFF",
+    "interior": 1181, "porch": 225, "outside": 48, "courtyard": 2}
+  ]
+ },
+
+ "porch_recovery_estimate": {
+  "question": "How many of the 1070 porch placements become interior if the one rule is corrected?",
+  "if_the_rule_is_body_inside_room": {"porch_recovered": 0,
+   "basis": "measured — it binds 1 of 1277 pairs; it is a true spatial fact and there is nothing to correct"},
+  "if_the_rule_is_route_preserved": {"porch_recovered": 15, "interior_gained": 20,
+   "basis": "measured, route_preserved disabled entirely: porch 1070 -> 1055, interior 179 -> 199"},
+  "if_the_rule_is_the_capacity_coverage_gap": {"porch_recovered": 791, "interior_gained": 916,
+   "basis": "measured, capacity regenerated over all 182 keys: porch 1070 -> 279, interior 179 -> 1095",
+   "split": {"from_bay_brushes": 431, "from_lattice_beat_fragment_brushes": 360}},
+  "if_both": {"porch_recovered": 845, "interior_gained": 1002,
+   "basis": "measured: porch 1070 -> 225, interior 179 -> 1181"},
+  "the_number_i_will_be_judged_on": 791,
+  "how_i_could_be_wrong": [
+   "791 assumes every one of the 152 uncovered template keys deserves interior slots. 360 of the 791 come from lattice:/beat: keys, which are wallpaper-group and rhythm FLOOR COURSES — giving those interior slots is arithmetic, not architecture. Strike them and the defensible figure is 431, all from bay: sub-tiles, which really are walled 15x15 rooms with hero slots.",
+   "Under the OTHER reading — that export_museum_plan.py should filter on `museum` like endless_museum.gd:548 and validate_museum_templates.py do — the correct answer is 0 porch placements recovered, because 1031 of the 1070 stop existing. The corpus becomes 240 placements of which 179 (74.58%) are already interior, and there was never an interior bottleneck to find.",
+   "So the honest range is 0, 431 or 791 depending on a curatorial question this measurement cannot settle: is a `bay:` tile a building or a brush? Whichever answer is taken, the 179/1456 headline is wrong today — either because the denominator counts brushes as buildings, or because the numerator is missing 916 placements the slot tokens already authorise."
+  ]
+ },
+
+ "falsified_and_confirmed": {
+  "confirmed_falsified_by_this_pass": [
+   "'Not enough pedestal slots' — measured: support_matches_contract fires 0 times on an interior slot.",
+   "'Not enough slots' — measured: in the 30 museums that have slots, 74.58% of exhibited work is already indoors. The shortage is of TABLE ROWS, not of slots: 857 authored slot tokens exist in tiles that slot_capacity.json never looked at.",
+   "'required_access is too strict' — measured: it binds 155 of 1280 refused slot triples (12.11%) and 1 of 1277 pairs (0.08%)."
+  ],
+  "new_standing_facts": [
+   "A slot's POCKET is not its CAPACITY, and an attempt COUNT is not a bottleneck. body_inside_room is 48.99% of interior refusals and decides 0.08% of outcomes.",
+   "spatial_floorplan.from_museum reads interior slots from a DERIVED TABLE, never from the tile. A template absent from that table is silently a building with no slots — no error, no warning, 8 porch placements.",
+   "try_place tests plan.route against the circulation mask only. The physical mask is never tested against it."
+  ]
+ }
+}
