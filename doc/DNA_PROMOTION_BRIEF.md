@@ -50,16 +50,47 @@ Refusing a handed-down word is also correct, and three agents have done it well:
 - `bouncing_ball` took `regime` and refused its value list: under/critical/over
   are the named cases of a second-order ODE and there is no critically-bouncing.
 
-## Six ways a sweep comes back null, and only one is about the artifact
+## Seven ways a sweep comes back null, and only one is about the artifact
 
 | symptom | cause | fix |
 |---|---|---|
 | all frames identical, ~0.7% | declared values are not the code's values | `check_dna_declarations.py` |
 | NO RENDER, subject 0.00% | `_ready()` is gated and builds nothing standalone | registry `dna.fixture` |
 | two values identical to the byte | geometry exists but is occluded or off-camera | change the fixture |
+| **big subject share, tiny closest pair** | **the artifact's own furniture is IN FRONT of its marks** | **read the z-stack; look at the PNG** |
 | subject under ~6% of frame | AABB inflated by one big or far-flung mesh | `dna.framing`, or a `layers = 0` anchor |
 | confident bite on a generative artifact | unseeded `randf` — five variants are five objects | seed export + `dna.fixture` |
 | axis real in world space, invisible in frame | fit-by-diagonal on a thin subject | `dna.framing` below 1.0 |
+
+**A LARGE SUBJECT WITH A SMALL NUMBER IS THE MOST CONVINCING FALSE READING there
+is**, because it looks exactly like the honest dilution case — a real axis drawn
+in small marks on a big body — and the reflex is to write it up as thin and move
+on. `operations_gallery` swept at **0.09% with subject 70.3% of frame**. Its
+"bezel" was one `BoxMesh` 0.66 m square and 24 mm thick spanning z 0.000–0.024,
+enclosing the panel face (0.009–0.015) *and* every mark the axis draws
+(0.014–0.020). Four photographs of the same blank slab measure 0.09% apart, and
+70.3% of frame **is the slab**. Compiled, gated, swept, four frames, a number
+from the critic — every stage green.
+
+## Predict the closest pair BEFORE the capture. This is not optional.
+
+Write `dna.predicted_degeneracy` into the registry when you promote: **which two
+frames will look most alike, the percentage, and the arithmetic**. Rasterise in
+Python at the sweep's own resolution if you have to; it is arithmetic, not a
+render, and it takes minutes.
+
+It does not have to be right. `operations_gallery` predicted the wrong pair —
+second of six — and was 1.8× low on the number. It still caught the blank wall,
+because predicted 4.18% against measured 0.09% is a factor of 46 and nothing else
+in the chain was going to object. Contrast `field_room`, which predicted that a
+uniform gravity field would make `banded` and `magnitude` identical to the byte:
+it did, at 0.00%, and because the prediction existed the zero was read as a fact
+about uniform fields instead of as a broken axis.
+
+**A prediction that agrees with the sweep is worth nothing. A prediction that
+disagrees with it is worth the whole pass.** Either the artifact is not drawing
+what you think it draws, or you do not understand your own subject — and both are
+findings you cannot get from a percentage alone.
 
 **The capture AABB counts `MeshInstance3D` and `MultiMeshInstance3D` only.** If
 your axis hides the only `MeshInstance3D` bodies, the camera will fit whatever is

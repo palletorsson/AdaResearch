@@ -370,6 +370,7 @@ about the design. Every one of these was measured, not guessed:
 | all N frames identical, `focus ~= frame ~= 0.7%` | declared values are not the code's values | `check_dna_declarations.py` |
 | `NO RENDER`, subject 0.00% | `_ready()` is gated and builds nothing standalone | registry `dna.fixture` sets the gate |
 | two values `== 0.00%` to the byte | the geometry exists but is OCCLUDED or off-camera | change the fixture, not the axis |
+| BIG subject share, TINY closest pair | the artifact's own furniture is IN FRONT of its marks | read the z-stack; **look at the PNG** |
 | subject under ~6% of frame | the AABB is inflated by one big or far-flung mesh | `dna.framing`, or a `layers = 0` anchor |
 | strong confident bite on a generative artifact | unseeded `randf` — five variants are five objects | seed export + `dna.fixture` pins it |
 | axis real in world space, invisible in frame | fit-by-DIAGONAL on a wide flat or thin subject | `dna.framing` below 1.0 |
@@ -384,6 +385,17 @@ therefore refuses to convict without evidence from elsewhere, and emits three ve
 `ANAMORPHIC` (flat here, alive from another standpoint), `INERT` (flat from all five).
 Run `python tools/probe_anamorphic.py --token=X --axis=Y` to clear one; it writes
 `doc/reports/anamorphic_<token>.json`, which is what the gate reads.
+
+**PREDICT THE CLOSEST PAIR BEFORE THE CAPTURE, and write it into the registry as
+`dna.predicted_degeneracy`** — which two frames will look most alike, the number, and the
+arithmetic. It does not have to be right. `operations_gallery` named the wrong pair (second
+of six) and was 1.8x low, and still caught a wall that photographed **blank**: its bezel was
+built as a solid 24 mm slab enclosing the panel face and every mark the axis drew, so four
+values were four photographs of one slab. It compiled, it passed the declaration gate, it
+swept four frames, and the critic returned 0.09% with the subject at 70.3% of frame — which
+reads exactly like an honest axis diluted by furniture. Predicted 4.18% against measured
+0.09% is a factor of 46, and nothing else in the chain was going to object. **A prediction
+that agrees with the sweep is worth nothing; one that disagrees is worth the whole pass.**
 
 **Diagnose with numbers, not by squinting.** `subject %` (pixels differing from the corner
 background) separates "too small to measure" from "axis does nothing". `random_walk_collection`
