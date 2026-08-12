@@ -1,2404 +1,2614 @@
 {
- "registry_info": {
-  "name": "isosurfaces",
-  "description": "Marching cubes, metaballs, implicit surfaces, and isosurface extraction artifacts",
-  "category": "proceduralgeneration"
- },
- "artifacts": {
-  "voxel_noise_demo": {
-   "lookup_name": "voxel_noise_demo",
-   "category": "procedural",
-   "scene": "res://algorithms/spacetopology/marchingcubes/voxel_noise_demo.tscn",
-   "class_name": "VoxelNoiseMarchingCubes",
-   "description": "CPU marching cubes with 3D noise — the working cave/blob generator. Glass shader with wireframe overlay.",
-   "interactions": [
-    "auto-generates on ready",
-    "regenerate() to rebuild"
-   ],
-   "parameters": {
-    "chunk_size": "World size (default 32)",
-    "num_points_per_axis": "Voxel resolution (default 32)",
-    "iso_level": "Isosurface threshold 0-1 (default 0.5)",
-    "noise_scale": "Noise frequency (default 0.05)",
-    "noise_octaves": "Fractal octaves (default 4)",
-    "footprint": [
-     1,
-     11,
-     31
-    ],
-    "size_group": "world_scale"
-   },
-   "compute": "HEAVY — CPU nested loop, generates mesh on ready",
-   "tags": [
-    "marching_cubes",
-    "noise",
-    "voxel",
-    "cpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "name": "voxel_noise_demo",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": [
-      "emission"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": true,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1024,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     32.0,
-     32.0,
-     32.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     32.0,
-     32.0
-    ],
-    "max_dimension_m": 32.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    32.0,
-    1,
-    32.0
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 60,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.132578Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "The field before the surface: a lattice of samples, each holding one number — how inside am I here? Noise fills the grid with a landscape of values and no shape yet. The chapter's raw material, shown honestly as data."
-  },
-  "gyroid_demo": {
-   "lookup_name": "gyroid_demo",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/GyroidDemo.tscn",
-   "class_name": "TerrainGeneratorGyroid",
-   "description": "GPU compute gyroid minimal surface — domain-warped, organic sculpture emerging from nothing. Triply periodic implicit function.",
-   "interactions": [
-    "auto-generates on ready"
-   ],
-   "parameters": {
-    "noiseScale": "Domain warp intensity",
-    "isoLevel": "Surface threshold",
-    "scale": "World scale",
-    "footprint": [
-     41,
-     41,
-     41
-    ],
-    "size_group": "world_scale"
-   },
-   "compute": "MEDIUM — GPU compute shader",
-   "tags": [
-    "marching_cubes",
-    "gyroid",
-    "sculpture",
-    "gpu",
-    "implicit",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "name": "gyroid_demo",
-   "complexity": "beginner",
-   "dev_themes": [
-    "3d",
-    "art",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 400,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     20.0,
-     20.0,
-     20.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     20.0,
-     20.0
-    ],
-    "max_dimension_m": 20.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    20.0,
-    1,
-    20.0
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.132578Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "A minimal surface no hand modeled: sin x cos y + sin y cos z + sin z cos x = 0. The gyroid divides all of space into two interpenetrating labyrinths that never touch — an equation wearing geometry."
-  },
-  "fountain_demo": {
-   "lookup_name": "fountain_demo",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/FountainDemo.tscn",
-   "class_name": "TerrainGeneratorFountain",
-   "description": "GPU compute fountain shape — vertical form generated by marching cubes.",
-   "interactions": [
-    "auto-generates on ready"
-   ],
-   "compute": "MEDIUM — GPU compute shader",
-   "tags": [
-    "marching_cubes",
-    "fountain",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     1,
-     11,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "fountain_demo",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "cylinder"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 100,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     10.0,
-     10.0,
-     10.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     10.0,
-     10.0
-    ],
-    "max_dimension_m": 10.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    10.0,
-    1,
-    10.0
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 18,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.132578Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "The field animated: a surface re-extracted every frame as its function changes, geometry flowing like water because it *is* recomputation, not motion."
-  },
-  "mc_sculpt_vr": {
-   "lookup_name": "mc_sculpt_vr",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn",
-   "class_name": "TerrainGeneratorSculpt",
-   "description": "GPU SDF sculpting — add spherical blobs with smooth union. Up to 500 blobs, real-time mesh extraction.",
-   "interactions": [
-    "add_blob(pos, radius) to sculpt",
-    "clear_blobs() to reset"
-   ],
-   "parameters": {
-    "numBlobs": "Active blob count",
-    "isoLevel": "Surface threshold"
-   },
-   "compute": "MEDIUM — GPU compute, real-time updates",
-   "tags": [
-    "marching_cubes",
-    "sculpt",
-    "sdf",
-    "gpu",
-    "interactive",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "box",
-      "sphere"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "emission",
-      "grid_overlay",
-      "transparency",
-      "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "few",
-    "vertex_estimate": "~256"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 6,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 6,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     2.55,
-     2.0,
-     2.0
-    ],
-    "aabb_center": [
-     0.27,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     3.0,
-     2.0
-    ],
-    "max_dimension_m": 2.55,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    3.0,
-    1,
-    2.0
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 6,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.132578Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Sculpting by editing the field, not the mesh: your hand adds and subtracts density, and the surface follows as a consequence. Digital clay whose truth lives in the numbers underneath the visible skin."
-  },
-  "mc_portal_landscape": {
-   "lookup_name": "mc_portal_landscape",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_portal_landscape.tscn",
-   "class_name": "TerrainGeneratorPortals",
-   "description": "GPU terrain with portal arches — landscape-scale marching cubes with embedded portal geometry.",
-   "interactions": [
-    "auto-generates on ready"
-   ],
-   "compute": "MEDIUM — GPU compute shader",
-   "tags": [
-    "marching_cubes",
-    "terrain",
-    "portals",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     50,
-     50,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "mc_portal_landscape",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~3600"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "Two regimes of the same field joined by a portal — thresholds as doorways, the level-set constant as the architect of where you can pass."
-  },
-  "mc_cave": {
-   "lookup_name": "mc_cave",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
-   "class_name": "TerrainGeneratorBase",
-   "description": "GPU cave system — noise-driven marching cubes producing walkable cave geometry.",
-   "interactions": [
-    "auto-generates on ready"
-   ],
-   "compute": "MEDIUM — GPU compute shader",
-   "tags": [
-    "marching_cubes",
-    "cave",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     46,
-     44,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "mc_cave",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~1600"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "The fifteen cases put to work at room scale — a cave marched out of a scalar field, the lookup table's alphabet suddenly speaking in caverns."
-  },
-  "mc_torus_sculpture": {
-   "lookup_name": "mc_torus_sculpture",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
-   "class_name": "TerrainGeneratorTorus",
-   "description": "GPU torus sculpture — marching cubes extracting torus isosurface.",
-   "interactions": [
-    "auto-generates on ready"
-   ],
-   "compute": "MEDIUM — GPU compute shader",
-   "tags": [
-    "marching_cubes",
-    "torus",
-    "sculpture",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     50,
-     50,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "mc_torus_sculpture",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "art",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "torus"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~576"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "A torus as a threshold event: the set of points where a field crosses zero. Walk around it and remember it has no polygons of its own — the mesh is the algorithm's testimony about the field."
-  },
-  "mc_shapes_gallery": {
-   "lookup_name": "mc_shapes_gallery",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingShapesGallery.tscn",
-   "class_name": "MarchingShapesGallery",
-   "description": "Gallery of multiple marching cubes shapes — sphere, torus, and more displayed side by side.",
-   "interactions": [
-    "auto-generates on ready"
-   ],
-   "compute": "HEAVY — multiple GPU compute passes",
-   "tags": [
-    "marching_cubes",
-    "gallery",
-    "shapes",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     1,
-     26,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "mc_shapes_gallery",
-   "complexity": "beginner",
-   "dev_themes": [
-    "3d",
-    "art",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": [
-      "metallic",
-      "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": true,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 50,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     9.06,
-     1.95,
-     4.7
-    ],
-    "aabb_center": [
-     -0.03,
-     -0.1,
-     -5.85
-    ],
-    "grid_cells": [
-     10.0,
-     5.0
-    ],
-    "max_dimension_m": 9.06,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    10.0,
-    1,
-    5.0
-   ],
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 18,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.132578Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "The extraction bestiary: spheres, tori, blends — each shape one implicit function passed through the same fifteen-case mill. The gallery's argument: the surface was never modeled, only *described*."
-  },
-  "mc_inside_cave": {
-   "lookup_name": "mc_inside_cave",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
-   "description": "GPU interior cave view — marching cubes cave seen from inside.",
-   "compute": "MEDIUM — GPU compute shader",
-   "tags": [
-    "marching_cubes",
-    "cave",
-    "interior",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     50,
-     30,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "mc_inside_cave",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~1600"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "Standing inside the isosurface: the cave is where the field says *in*, and you are in it. The boundary wraps around the walker — geometry experienced from the wrong side of the skin."
-  },
-  "mc_flat_landscape": {
-   "lookup_name": "mc_flat_landscape",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
-   "class_name": "TerrainGeneratorFlat",
-   "description": "GPU flat terrain — marching cubes landscape with gentle noise.",
-   "compute": "MEDIUM — GPU compute shader",
-   "tags": [
-    "marching_cubes",
-    "terrain",
-    "flat",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     36,
-     50,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "mc_flat_landscape",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~2500"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "A heightfield marched into terrain — the gentlest landscape the algorithm can speak, one value per column, the ground as a graph of a function."
-  },
-  "mc_overhang_landscape": {
-   "lookup_name": "mc_overhang_landscape",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn",
-   "class_name": "TerrainGeneratorOverhang",
-   "description": "GPU overhang terrain — landscape with overhanging rock formations.",
-   "compute": "MEDIUM — GPU compute shader",
-   "tags": [
-    "marching_cubes",
-    "terrain",
-    "overhang",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     50,
-     50,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "mc_overhang_landscape",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~3600"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "The terrain heightfields cannot make: overhangs. A full 3D field permits inside-above-outside, and the cliff leans over your head — the moment the third dimension of the data becomes visible as shelter."
-  },
-  "animated_noise_explorer": {
-   "lookup_name": "animated_noise_explorer",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/animated_noise_explorer.tscn",
-   "class_name": "AnimatedNoiseExplorer",
-   "description": "Animated noise field explorer — watch marching cubes extract surfaces from evolving noise in real-time.",
-   "compute": "MEDIUM — GPU compute shader, animated",
-   "tags": [
-    "marching_cubes",
-    "noise",
-    "animated",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     4,
-     5,
-     4
-    ],
-    "size_group": "environment"
-   },
-   "name": "animated_noise_explorer",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "grid_overlay",
-      "metallic",
-      "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "vertex",
-     "driven_by": "per_frame_rebuild",
-     "affects": [
-      "vertex_positions"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~256"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 1.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "omni",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.132578Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Marching cubes run on a noise field that will not hold still — surfaces extracted from evolving randomness in real time, the skin re-found every frame as the field beneath it churns. The chapter's two neighbors married and set in motion: noise supplies the field, marching cubes reads the threshold, and the result is geometry that flows because its data does."
-  },
-  "mc_base": {
-   "lookup_name": "mc_base",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn",
-   "description": "Base GPU marching cubes scene — the core implementation.",
-   "compute": "MEDIUM — GPU compute shader",
-   "tags": [
-    "marching_cubes",
-    "base",
-    "gpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     7,
-     41,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "mc_base",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~1600"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "The core marching-cubes scene on the GPU — the algorithm at its plainest, the base implementation everything else in the chapter is dressed from. The engine room: no landscape, no cave, just the fifteen cases running on the graphics card, the pure act of turning a field of numbers into a surface, shown without ornament."
-  },
-  "nakama_metaballs": {
-   "lookup_name": "nakama_metaballs",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.tscn",
-   "description": "Kouhei Nakama-inspired organic metaballs — 60 animated blobs with subsurface scattering shader. Approximated mesh via sphere deformation.",
-   "parameters": {
-    "num_metaballs": "Blob count (default 60)",
-    "container_size": "Bounds (default 5x5x5)",
-    "movement_speed": "Animation speed",
-    "material_color": "Surface color",
-    "footprint": [
-     1,
-     3,
-     6
-    ],
-    "size_group": "environment"
-   },
-   "compute": "HEAVY — CPU per-frame mesh rebuild with metaball field evaluation",
-   "tags": [
-    "metaballs",
-    "organic",
-    "animated",
-    "cpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "name": "nakama_metaballs",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ]
-  },
-  "raymarched_metaballs": {
-   "lookup_name": "raymarched_metaballs",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
-   "dna": {
-    "promoted": "2026-08-06",
-    "stage": "2 - variation",
-    "framing": 0.21,
-    "fixture": {
-     "metaball_seed": 7,
-     "pose_time": 3.0
-    },
-    "axes": {
-     "fusion": [
-      "distinct",
-      "necked",
-      "lobed",
-      "single"
-     ],
-     "metaball_count": [
-      1,
-      3,
-      5,
-      9
-     ]
-    },
-    "default": "fusion=distinct, metaball_count=9 - the shipped no-op on both. distinct short-circuits to the raw exported blend_factor; 9 is the shader's own array length, so the parking loops have zero iterations and the arrays are byte for byte what they were. This token is placed at 'raymarched_metaballs:0:0:0.2' in ISO_Metaballs, in Corridor_ISO_Metaballs and in the Curation_Bay_isosurfaces_4 roster, all bare, so apply_grid_config reaches no assignment and never rebuilds.",
-    "kin": "SIBLING DECLARATION. This token, implicit_surface_modeling and `metaballs` (both procgen_extra.json) are three registry names on ONE scene, metaballs.tscn. The axes, the values, the fixture and the framing are copied character for character from implicit_surface_modeling, which carries the full reasoning, the measurements and the findings. They must measure ALIKE; if they do not, the difference is in the bench and not in the artifact. NOTE this token's own `parameters` block already documented metaball_count and blend_factor as if a map could set them - it could not, because apply_grid_config was a bare `pass` until this pass.",
-    "placements": 3
-   },
-   "description": "Shader raymarched metaballs — 9 animated balls rendered via SDF raymarching on a cube mesh. Real-time implicit surface visualization.",
-   "parameters": {
-    "metaball_count": "Number of balls (default 9)",
-    "blend_factor": "SDF blend smoothness",
-    "base_strength": "Field strength",
-    "animate_strength": "Pulse animation"
-   },
-   "compute": "LIGHT — GPU shader only, no mesh extraction",
-   "tags": [
-    "metaballs",
-    "raymarching",
-    "sdf",
-    "implicit",
-    "shader",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "shader_driven",
-    "topology": "planar",
-    "construction": {
-     "method": "shader_rendering",
-     "primitives": [
-      "box"
-     ],
-     "operations": [
-      "create_base_mesh",
-      "apply_shader",
-      "set_parameters"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~4-24 (base mesh)"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 144,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     12.0,
-     12.0,
-     12.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     12.0,
-     12.0
-    ],
-    "max_dimension_m": 12.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    12.0,
-    1,
-    12.0
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.132578Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "metaball_world": {
-   "lookup_name": "metaball_world",
-   "category": "procedural",
-   "scene": "res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballworld.tscn",
-   "class_name": "MetaballGenerator",
-   "description": "Full marching cubes metaball system — proper isosurface extraction from metaball field. Animated, with collision. The real deal.",
-   "parameters": {
-    "grid_size": "Voxel grid resolution (default 64x32x64)",
-    "cell_size": "Cell size (default 0.5)",
-    "iso_level": "Surface threshold (default 1.0)",
-    "metaball_count": "Blob count (default 8)",
-    "animation_speed": "Movement speed",
-    "footprint": [
-     21,
-     6,
-     21
-    ],
-    "size_group": "world_scale"
-   },
-   "compute": "HEAVY — CPU marching cubes, periodic mesh rebuild",
-   "tags": [
-    "metaballs",
-    "marching_cubes",
-    "animated",
-    "collision",
-    "cpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "name": "metaball_world",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 9,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     2.66,
-     7.28,
-     2.49
-    ],
-    "aabb_center": [
-     0.04,
-     -0.36,
-     0.05
-    ],
-    "grid_cells": [
-     3.0,
-     3.0
-    ],
-    "max_dimension_m": 7.28,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    3.0,
-    1,
-    3.0
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 18,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.132578Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "No blob owns its outline: the surface is wherever summed influence crosses iso_level, so bodies merge and split with no merge event anywhere in the code. Marching cubes just walks the grid and reports where the field says skin — boundary as measurement, not membrane."
-  },
-  "fifteen_cases_demo": {
-   "lookup_name": "fifteen_cases_demo",
-   "category": "procedural",
-   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/fifteen_cases_demo.tscn",
-   "class_name": "FifteenCasesController",
-   "description": "Interactive display of the 15 unique marching cubes cases (from 256 total). Educational — shows how the lookup table works.",
-   "compute": "LIGHT — static mesh display",
-   "tags": [
-    "marching_cubes",
-    "educational",
-    "cases",
-    "lookup_table",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     1,
-     7,
-     11
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "fifteen_cases_demo",
-   "complexity": "beginner",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "emission",
-      "grid_overlay",
-      "metallic",
-      "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "table",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": true,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 45,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     8.79,
-     0.79,
-     4.79
-    ],
-    "aabb_center": [
-     0.36,
-     0.36,
-     0.36
-    ],
-    "grid_cells": [
-     9.0,
-     5.0
-    ],
-    "max_dimension_m": 8.79,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    9.0,
-    1,
-    5.0
-   ],
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 18,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.132578Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "The whole algorithm on one plinth: a cube has 8 corners, each in or out — 256 configurations that symmetry folds to 15. Every marching-cubes surface ever extracted is these fifteen tiles, looked up and glued. The lookup table as Rosetta stone."
-  },
-  "rhizome_cave_demo": {
-   "lookup_name": "rhizome_cave_demo",
-   "category": "procedural",
-   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
-   "class_name": "RhizomeCaveDemoController",
-   "description": "Rhizomatic cave — Deleuze-inspired branching cave generation using growth patterns + marching cubes.",
-   "compute": "HEAVY — CPU growth simulation + marching cubes",
-   "tags": [
-    "marching_cubes",
-    "rhizome",
-    "cave",
-    "growth",
-    "cpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "postfoundationscrisis"
-   ],
-   "sequence": "postfoundationscrisis",
-   "parameters": {
-    "footprint": [
-     1,
-     16,
-     26
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "rhizome_cave_demo",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~0"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "A cave grown as rhizome — Deleuze's centerless, multiply-connected figure carved into stone by branching growth and marching cubes. The post-crisis answer in geology: after the foundations fell, you build spaces with no single entrance and no privileged path, structures that are all middle. A world you enter anywhere and cross more than one way — formalization's limits turned into an architecture of the between."
-  },
-  "mc_terrain_demo": {
-   "lookup_name": "mc_terrain_demo",
-   "category": "procedural",
-   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
-   "class_name": "TerrainDemoController",
-   "description": "CPU terrain generation demo — marching cubes terrain with configurable noise parameters.",
-   "compute": "HEAVY — CPU marching cubes terrain",
-   "tags": [
-    "marching_cubes",
-    "terrain",
-    "cpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     1,
-     21,
-     11
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "mc_terrain_demo",
-   "complexity": "advanced",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "~256"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "The terrain workbench: density thresholds, noise octaves, resolution — dials on a landscape. Turning them shows the ground to be an opinion held by a field."
-  },
-  "queer_marching_cave": {
-   "lookup_name": "queer_marching_cave",
-   "category": "procedural",
-   "scene": "res://algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.tscn",
-   "class_name": "QueerMarchingCave",
-   "description": "Extended cave system — long procedural cave with queer spatial topology themes.",
-   "compute": "HEAVY — CPU extended cave generation",
-   "tags": [
-    "marching_cubes",
-    "cave",
-    "long",
-    "queer",
-    "cpu",
-    "working"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "sequence": "isosurfaces",
-   "parameters": {
-    "footprint": [
-     31,
-     21,
-     31
-    ],
-    "size_group": "world_scale"
-   },
-   "name": "queer_marching_cave",
-   "complexity": "expert",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "above",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 380,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     19.5,
-     11.5,
-     18.13
-    ],
-    "aabb_center": [
-     4.75,
-     2.75,
-     4.06
-    ],
-    "grid_cells": [
-     20.0,
-     19.0
-    ],
-    "max_dimension_m": 19.5,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    20.0,
-    1,
-    19.0
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.133583Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "The cave that refuses a single threshold: iso-values shifted, blended, contested. If inside/outside is just a number's relation to a cutoff, then the cutoff is a politics — this room marches the same field under a different regime and gets another world."
-  },
-  "rhizome_cave_system": {
-   "lookup_name": "rhizome_cave_system",
-   "name": "Rhizomatic Cave System",
-   "description": "Advanced cave generation using rhizomatic growth patterns and marching cubes for organic underground networks",
-   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
-   "category": "unknown",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "size_group": "compact",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "complexity": "advanced",
-   "tags": [
-    "simulation"
-   ],
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
-  },
-  "marching_cubes_static": {
-   "lookup_name": "marching_cubes_static",
-   "name": "Marching Cubes Static",
-   "description": "Static marching cubes demonstration",
-   "scene": "res://algorithms/marchingcubes/Scenes/Marching Cubes Static.tscn",
-   "category": "unknown",
-   "include_in_map_data": false,
-   "map_ready": false,
-   "map_sequences": [],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "size_group": "compact",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "complexity": "beginner",
-   "dev_themes": [
-    "3d",
-    "isosurfaces",
-    "math"
-   ],
-   "tags": [
-    "isosurface"
-   ],
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "deprecated": true,
-   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub; the marching-cubes family is implemented under algorithms/."
-  },
-  "marching_squares": {
-   "category": "isosurfaces",
-   "complexity": "intermediate",
-   "description": "The isosurfaces seam. A smooth circle beside the same circle read on a coarse grid - a blocky disc (lego). The surface between the samples was never seen; detail finer than the spacing is gone.",
-   "dev_themes": [
-    "digital_bias",
-    "seam"
-   ],
-   "include_in_map_data": true,
-   "interaction": "ambient",
-   "lookup_name": "marching_squares",
-   "map_ready": true,
-   "map_sequences": [
-    "isosurfaces"
-   ],
-   "name": "Marching Squares",
-   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for isosurfaces. Bias is conserved; show the seam.",
-   "scene": "res://algorithms/isosurfaces/marching_squares/marching_squares.tscn",
-   "sequence": "isosurfaces",
-   "tags": [
-    "marching_cubes",
-    "isosurface",
-    "grid",
-    "sampling",
-    "seam",
-    "digital_bias"
-   ]
-  }
- },
- "sequence_mapping": {
-  "isosurfaces": [
-   "voxel_noise_demo",
-   "gyroid_demo",
-   "mc_sculpt_vr",
-   "mc_cave",
-   "mc_portal_landscape",
-   "mc_shapes_gallery",
-   "nakama_metaballs",
-   "metaball_world",
-   "raymarched_metaballs",
-   "fifteen_cases_demo"
-  ]
- }
+	"registry_info": {
+		"name": "isosurfaces",
+		"description": "Marching cubes, metaballs, implicit surfaces, and isosurface extraction artifacts",
+		"category": "proceduralgeneration"
+	},
+	"artifacts": {
+		"voxel_noise_demo": {
+			"lookup_name": "voxel_noise_demo",
+			"category": "procedural",
+			"scene": "res://algorithms/spacetopology/marchingcubes/voxel_noise_demo.tscn",
+			"class_name": "VoxelNoiseMarchingCubes",
+			"description": "CPU marching cubes with 3D noise \u2014 the working cave/blob generator. Glass shader with wireframe overlay.",
+			"interactions": [
+				"auto-generates on ready",
+				"regenerate() to rebuild"
+			],
+			"parameters": {
+				"chunk_size": "World size (default 32)",
+				"num_points_per_axis": "Voxel resolution (default 32)",
+				"iso_level": "Isosurface threshold 0-1 (default 0.5)",
+				"noise_scale": "Noise frequency (default 0.05)",
+				"noise_octaves": "Fractal octaves (default 4)",
+				"footprint": [
+					1,
+					11,
+					31
+				],
+				"size_group": "world_scale"
+			},
+			"compute": "HEAVY \u2014 CPU nested loop, generates mesh on ready",
+			"tags": [
+				"marching_cubes",
+				"noise",
+				"voxel",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"name": "voxel_noise_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1024,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					32.0,
+					32.0,
+					32.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					32.0,
+					32.0
+				],
+				"max_dimension_m": 32.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				32.0,
+				1,
+				32.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The field before the surface: a lattice of samples, each holding one number \u2014 how inside am I here? Noise fills the grid with a landscape of values and no shape yet. The chapter's raw material, shown honestly as data."
+		},
+		"gyroid_demo": {
+			"dna": {
+				"promoted": "2026-08-12",
+				"stage": "2 - variation",
+				"axes": {
+					"intrusion": [
+						"melted",
+						"formula",
+						"eroded",
+						"drifting"
+					],
+					"period": [
+						"pair",
+						"sheet",
+						"lattice",
+						"weave"
+					]
+				},
+				"default": "intrusion=melted, period=pair - both exact no-ops, and the no-op is structural rather than arithmetic. TerrainGeneratorGyroid.gd declares no @export of its own and never did; the eight numbers this artifact has are literals inside MarchingGyroid.glsl. melted is the const triple [4.0, 0.5, 1.0], which IS the three literals that used to be written inline at MarchingGyroid.glsl:181, :190 and :197 - they were moved from the shader to a GDScript const and handed back through a uniform, so evaluate() multiplies the same snoise results by the same three floats in the same order. pair feeds periodScale 1.0 and `p * 1.0` returns the identical bit pattern for every finite float, so `dot(sin(gp), cos(gp.yzx))` receives the argument `dot(sin(p), cos(p.yzx))` always received. THE ONE HONEST CAVEAT, stated rather than glossed: the multiplier is now a uniform where it was a literal, so a driver that contracts `p += warp * 4.0` into an FMA and `p += warp * params.warpStrength` differently could differ in the last bit. Both are the same `a + b*c` expression shape, so there is no known compiler that does, but that is the exact size of the claim - not 'the bytes are proven equal', 'the same floats travel the same expression'. THIRTEEN MAP FILES place this scene under two names and NOT ONE passes a config key. gyroid_demo in 10: Gallery_ProceduralGeneration (`gyroid_demo:0:-0.5`), ISO_ShapesGallery (`gyroid_demo:0:1:0.04`), and an `exhibit_furniture#kind:floor_work#size:l#mount:gyroid_demo` in Trial_castelvecchio / grande / kanazawa / physarum / pinch_v2 / sainsbury / soane_cabinet_vista / uffizi. GyroidDemo in 3: ISO_TorusGyroid (`GyroidDemo:0:2:0.5`), Corridor_ISO_TorusGyroid and ProceduralGenerationMarchingCubesSculpture, all bare tokens. Neither registry entry declares default_params and neither token carries a delegate, so merged_config is EMPTY for the bare placements and GridInteractablesComponent's `if not merged_config.is_empty()` gate means _apply_artifact_config is never called at all - no metadata is stamped and apply_grid_config is never reached. The exhibit_furniture mounts load, instantiate and add the scene without calling it either. Zero of thirteen reach the rebuild branch.",
+				"was": "24 lines: a shader path, a class name, a `_process` overridden to `pass`, a fallback sphere, and an `apply_grid_config` whose whole body was `pass` - a method that existed only so the grid's has_method() check would find something. The artifact was recorded in the audit as having ZERO exports, which is true and is not the same as having no parameters. The registry entry above promises a `gyroid minimal surface ... triply periodic implicit function`, and the pure surface has never been rendered anywhere in this corpus: the shader writes Schoen's gyroid in one line at :185 and then perturbs it three times - a domain warp, an erosion, and a thickness modulation added to the density BEFORE the isoLevel comparison - before anything is compared to a threshold. What 13 maps show is the perturbation. What the description names is the thing underneath it.",
+				"note": "intrusion is a NEW word. `facture` (capsule, dome, folded_strip, platonic_grabbables, triangleprofiles - cast|facet|armature|section|wear) is the nearest relative and was refused: facture asks how a thing was fabricated, which presumes a maker, and this asks how much of a mathematical object survives being written into a noise pipeline. `weather`, `provenance`, `authorship`, `derivation` and `descent` are each already held with another meaning. The rungs are the three strengths as a LADDER rather than three knobs, and they were sized on a numpy replica of evaluate() over the same 65^3 corner grid at the scene's own iso_level of 1.0, counting connected bodies: melted (4.0, 0.5, 1.0) SHIPPED shatters the lattice into 2,859 separate bodies with no period readable anywhere in the box; formula (0, 0, 0) is ONE connected body holding 100% of the solid, every unit cell identical; eroded (0, 0.5, 0) keeps the period and pits the sheets - 1,268 bodies, but 95.3% of the solid still in one piece, a lattice surviving its own wear; drifting (0, 0.5, 1.0) restores only the space-varying threshold, so sheets thicken in some regions and thin to holes in others. 1 body against 2,859 is the axis in one number. SAID PRECISELY, because the registry's own description does not and the difference is the sequence's subject: `formula` is the pure gyroid level set at THIS ARTIFACT'S threshold, g = iso_level = 1.0, not the balanced minimal surface g = 0. GyroidDemo.tscn sets iso_level 1.0 and that export is untouched here, so what formula shows is the mathematical object at the threshold somebody already chose - which is the more honest picture for a sequence whose truth line is that the boundary between inside and outside is a decision. period is also NEW. `grain` (grabbable_line and 5 others - solid|split|quartered|lattice|shell) asks how the mass inside a fixed silhouette is divided, which is close, but its five rungs cannot be built here; `unit` (diamonds), `cell` (tessellation_lattice_demo) and `pitch_space` (harmonic_distance_table) are taken with other meanings. baseScale 0.5 against chunk_scale 20 gives ~1.59 periods per axis, and the multiplier is applied ONLY to the gyroid term's coordinate - deliberately NOT to baseScale, which also feeds the warp and the erosion, so scaling it would confound the two axes. Written this way the pair is strictly orthogonal: intrusion varies what is ADDED to the field with the period held, period varies the period with the additions held. pair 1.0 SHIPPED (~1.6 periods, two half-cells reading as a pair of sheets); sheet 0.5 (~0.8 periods, less than one full cell - the picture that shows the gyroid is a SURFACE and not a lattice); lattice 2.0 (~3.2 periods, the repeat unmistakable); weave 4.0 (~6.4 periods, a fine three-way interpenetrating weave). Both axes reach the GPU by the pattern TerrainGeneratorShapes already uses for shapeId: get_params_array() calls super and appends four floats, ParamsBuffer gains four matching trailing fields. MarchingGyroid.glsl is loaded by TerrainGeneratorGyroid and by nothing else, and TerrainGeneratorGyroid is loaded by GyroidDemo.tscn and by nothing else, so the shared eleven-field prefix every other Marching*.glsl reads is untouched by construction.",
+				"declined": "REFUSED, `iso_level`, and the refusal is the interesting one. It is real, it is a single float, and it is the sequence's central question - where you put the threshold is the whole of what a surface IS. It is declined because on THIS artifact the thickness modulation already varies the threshold through space, so an axis over the constant would be arguing with intrusion=drifting for the same pixels; the two would measure each other. It belongs to a sibling in this sequence that has no thickness term. REFUSED, `continuous_update` (TerrainGeneratorBase:11): it re-runs the compute dispatch every frame, which is a RATE, invisible in a still by law, and on a static gyroid it changes nothing except the risk of photographing a half-built mesh. REFUSED, `noise_offset`: it walks the field's domain, which is not a different surface but a different arbitrary sample of the same one - the same travel-through-noise-space idea refused by name on animated_noise_explorer. REFUSED, `chunk_scale` and `center_position`: a size and a placement, both self-cancelling under an AABB-fitted camera. REFUSED, an axis over the marching-cubes RESOLUTION, which is the other half of this sequence's argument (`how finely the field is sampled`) and would be a fine axis - but `resolution` is a `const int` on TerrainGeneratorBase shared by ELEVEN generators, and buffer sizes are computed from it, so it is not this artifact's to open.",
+				"fixture": {
+					"use_fallback": false,
+					"continuous_update": false
+				},
+				"fixture_why": "Neither key is an axis and both are already the shipped default, so this is a GUARD rather than a pin - it is here because the two silent failure modes of this artifact both end in a published sheet that is a fact about the host machine. use_fallback true, or a local rendering device / SPIR-V load that fails on the capture host, drops straight into _create_fallback_mesh: a naked SphereMesh of radius 20. Sixteen frames of a smooth grey ball, both axes measuring zero, and a verdict about the GPU. THE RUN IS ONLY VALID IF THE SWEEP LOG SHOWS `TerrainGeneratorGyroid: Generation complete!` AND DOES NOT SHOW `Creating fallback sphere`. continuous_update true would keep re-dispatching under the settle. Both are written as real booleans, never as the strings `false`, because capture_config_sweep assigns fixture values straight onto the typed export before _ready and a typed bool rejects a String. NOT PINNED, and deliberately: noise_offset. The approved design asked for `noise_offset: Vector3.ZERO` and JSON cannot hold a Vector3 - capture_config_sweep._coerce only converts String to enum int and would hand a three-element Array to a typed Vector3 export, which is a worse risk than the one it guards. It does not need a pin: GyroidDemo.tscn never sets it, no map token sets it, and its declared default IS Vector3.ZERO.",
+				"framing": 1.0,
+				"framing_why": "Explicit at the default because it was CHECKED rather than assumed. The generated mesh fills the whole 20 m chunk and is close to isotropic, so the fit-by-diagonal that letterboxes flat and thin subjects is honest here. Verified on the numpy replica: the surface's world AABB is 20.0 x 20.0 x 20.0 m for ALL SIXTEEN combinations of the two axes, to the voxel. That also disposes of the `layers = 0` anchor the approved design asked for - it was there because intrusion=formula was expected to build a mesh of a different extent than melted and walk the camera between tiles. It does not; the field is defined everywhere in the box and every rung crosses the threshold out to every face. Adding a 20 m anchor mesh to the scene would have changed what GridInteractablesComponent._compute_local_aabb measures for all 13 placements to fix a problem that is not there.",
+				"rebuild_guard": "apply_grid_config was a bare `pass`. It now stamps config into metadata, re-reads it, and returns unless a value the SHADER reads has changed. The signature is not a hand-listed tuple: it is get_params_array() itself, stringified - if a value reaches the GPU it is in the signature, so the guard cannot drift out of step with the build. `time` is one of the eleven base fields and is permanently 0.0 on this subclass because _process is overridden to `pass`, which is what makes the signature stable rather than a clock. Ordering is load-bearing and was read off the call site rather than assumed: GridInteractablesComponent stamps config metadata at line 1195 and calls add_child at 1220, so metadata always lands BEFORE _ready; _ready reads it, calls super._ready(), and records the signature, and the call_deferred('apply_grid_config') that follows finds the signature unchanged and returns. The rebuild path re-runs the same three calls _ready runs - run_compute, fetch_and_process_compute_data, create_mesh - and refuses to run at all while waiting_for_compute or waiting_for_meshthread is set, because resubmitting under an in-flight dispatch is the teardown segfault release() documents. NOTHING IS FREED BY THIS SCRIPT: create_mesh rewrites array_mesh's single surface in place and the base's _create_collision removes only the StaticBody3D it created itself. A blanket free of children is what cost three scripts a pass in the last wave, and it would be worse here than usual - GridInteractablesComponent attaches a _RotationTimer to the artifact after spawn.",
+				"still_note": "Static by construction and a still is a complete account: _process is `pass`, so the base's tick never advances and the mesh is finished when _ready returns. NO SEED IS NEEDED AND THIS IS WORTH SAYING OUT LOUD IN A SEQUENCE OF GENERATORS - the shader's snoise is the Ashima/stegu simplex function, a pure function of position with no seed and no time input, and the only thing that could move its sample point is noise_offset, which nothing sets. Four runs of the same rung are the same mesh. TRIANGLE BUDGET, checked before shipping because the failure would be silent: TerrainGeneratorBase.process_mesh_data aborts to num_triangles = 0 above 500,000, which yields an empty mesh, which routes to the fallback sphere, which measures as a dead axis. Simulated on the numpy replica, the worst of the sixteen combinations is melted x weave at 271,642 triangles (54% of the cap) and the lightest is formula x sheet at 23,589. The shipped melted x pair is 134,708, so collision generation is skipped at the default exactly as it is today (the >30,000 cutoff), and formula x sheet is the ONLY combination that crosses back under it and builds a trimesh - a bench-only difference no map placement can reach. PREDICTED BITE, and it is a prediction and not a measurement: an orthographic ray-march of the same density field from the sweep's canonical standpoint (yaw 0.62, pitch -0.26), Lambert-shaded, gives mean pairwise focus of 41% for intrusion and 59% for period. No perspective, no material, no marching-cubes interpolation, so those numbers must not be quoted as bite numbers - they answer only the question of whether these are 3% axes or 50% axes.",
+				"kin": "GyroidDemo, in procgen_extra.json, is THE SAME SCENE - GyroidDemo.tscn, one of the six hidden families in this sequence - and it is placed in 3 map files of its own. The declaration is written here, on gyroid_demo, because this is the entry that carries the class_name, the category and the parameters block. The sibling is named here rather than silently co-declared so that the next pass copies it DELIBERATELY, having read this note, instead of discovering the duplication from a diff.",
+				"placements": 13
+			},
+			"lookup_name": "gyroid_demo",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/GyroidDemo.tscn",
+			"class_name": "TerrainGeneratorGyroid",
+			"description": "GPU compute gyroid minimal surface \u2014 domain-warped, organic sculpture emerging from nothing. Triply periodic implicit function.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"parameters": {
+				"noiseScale": "Domain warp intensity",
+				"isoLevel": "Surface threshold",
+				"scale": "World scale",
+				"footprint": [
+					41,
+					41,
+					41
+				],
+				"size_group": "world_scale"
+			},
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"gyroid",
+				"sculpture",
+				"gpu",
+				"implicit",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"name": "gyroid_demo",
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"art",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.0,
+					20.0,
+					20.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					20.0
+				],
+				"max_dimension_m": 20.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				20.0,
+				1,
+				20.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "A minimal surface no hand modeled: sin x cos y + sin y cos z + sin z cos x = 0. The gyroid divides all of space into two interpenetrating labyrinths that never touch \u2014 an equation wearing geometry."
+		},
+		"fountain_demo": {
+			"lookup_name": "fountain_demo",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/FountainDemo.tscn",
+			"class_name": "TerrainGeneratorFountain",
+			"description": "GPU compute fountain shape \u2014 vertical form generated by marching cubes.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"fountain",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					1,
+					11,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "fountain_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 100,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					10.0,
+					10.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				10.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The field animated: a surface re-extracted every frame as its function changes, geometry flowing like water because it *is* recomputation, not motion."
+		},
+		"mc_sculpt_vr": {
+			"dna": {
+				"promoted": "2026-08-12",
+				"stage": "2 - variation",
+				"framing": 0.45,
+				"fixture": {
+					"show_brush_indicator": false
+				},
+				"axes": {
+					"hand": [
+						"stack",
+						"sweep",
+						"dab",
+						"heap"
+					]
+				},
+				"default": "hand=stack is a short-circuit, not a recomputation that lands on the same numbers. The generator's own seeding is left switched ON and untouched - TerrainGeneratorSculpt._ready lays its six deposits from its own `var s := chunk_scale * 0.15` expressions, in its own order - and this file then makes the single add_blob(Vector3(0, 0, 0), 0.3) call it has always made. The blob array handed to MarchingCubesSculpt.glsl is the same seven Vector4s in the same order, so the extracted mesh cannot differ. iso_level stays the hardcoded 0.3, volume_size stays 2.0, seed_blobs_on_ready is never assigned. REACH MEASURED across the whole map corpus: 13 map files across the two registry names and NOT ONE passes an axis key. Nine are bare or hosted - a bare cell in ISO_Sculpting, `marching_cubes_sculpt_vr:0:1:1` in ProceduralGenerationMarchingCubesSculpture, and `exhibit_furniture#kind:platform#size:l#mount:mc_sculpt_vr` in eight Trial_* museums, whose _mount_artifact instantiates and add_childs the scene without stamping any metadata at all. The other three are curation_station rosters (Corridor_ISO_Sculpting, Curation_Bay_isosurfaces_4, Curation_Bay_proceduralgeneration_all_8), and curation_station calls apply_grid_config with {emissive: false} on each curated item - a key this artifact does not read, which moves no term of the signature and returns early before touching the field. GridInteractablesComponent only calls _apply_artifact_config when merged_config is non-empty, so the bare placements never reach apply_grid_config at all. ONE THING DID MOVE FOR ALL THIRTEEN, said plainly rather than buried: the seventh deposit used to be added after two awaited process frames, which put the complete mesh ~102 frames out (12 to the GPU sync plus 90 to the mesh thread, ~1.7 s at 60 fps, against capture_config_sweep's 1.1 s settle). It is now laid synchronously and the field re-extracted inside _ready. Same values, same order, same steady-state mesh; only the moment it exists moves, from ~1.7 s to frame 0.",
+				"was": "one hardcoded gesture and no reachable knob at all. apply_grid_config was a bare `pass` at line 462, so nothing a map token could write reached this artifact - the same unreachable-knob shape mc_shapes_gallery and implicit_surface_modeling both found elsewhere in this sequence. What the artifact ARGUES sat in twelve literals in a different file: TerrainGeneratorSculpt._ready lines 15-27, six blobs climbing +y commented 'wide base / torso / shoulder / neck / top', plus the centre deposit added here. Across 13 map files and the whole life of the project this tool has never held anything but that one standing form - which invites exactly the conclusion the algorithm does not support, that marching cubes makes figures.",
+				"note": "Every other field in this sequence is GIVEN: gyroid_demo's by a formula, animated_noise_explorer's by noise, fifteen_cases_demo's by a lookup table, metaballs' by a fixed set of sources. This one's is DEPOSITED - a hand puts material in and the extractor finds a boundary through whatever was put - so its axis is what the hand did, and no other artifact here can carry that claim. All four rungs use THE SAME SEVEN DEPOSITS: the same six radii from the generator's own fractions (0.5/0.35/0.25/0.22/0.18/0.15 of s = chunk_scale * 0.15) plus the same centre deposit at the literal 0.3. The amount of material, the threshold and the sampling do not move between rungs; only the arrangement does, which is what makes this an axis about arrangement and nothing else. stack is the shipped standing form. sweep drags the seven along one horizontal arc that rises and settles, heavy end at +x/-z tapering to -x/+z. dab pushes them to seven of the volume's eight corners, spaced so that no two extracted surfaces touch - seven separate closed surfaces where every other rung gives one, which is the honest picture of what a deposit IS before anything fuses it, and the rung that carries the claim: the extractor did not build a body, it found the boundary of what was there. heap piles them low around the floor with the top half of the box empty. WHY THE dab NUMBERS ARE NOT FREE. iso_level is 0.3 against a plain sphere SDF, so every deposit renders at radius r + 0.3 - the smallest of the seven is a 0.345 ball and the largest a 0.6 ball, inside a box of half-extent 1.0 - and opSmoothUnion at k = scale * 0.06 = 0.12 bridges any two surfaces whose gap is under k/2 = 0.06. Each dab position is pushed to 0.96 - (r + 0.3) per axis, as close to the wall as the deposit can sit without the sampled domain clipping it, and the two SMALLEST deposits take the corners adjacent to the big one because that pair sets the tightest gap. The result, computed rather than hoped: minimum surface gap 0.073 and every other pair at 0.21 or more, so dab separates with about 20% margin on the worst pair. These numbers are tuned against the shipped volume_size 2.0 and iso_level 0.3; they scale with chunk_scale and they do NOT survive a change of iso_level. THE WORD. `hand` is taken from sculpt_one (randomness.json: composition|pour|drape|stipple|spatter, which procedure makes the form) and from maze_generation (procgen_extra.json: which algorithm builds the maze). The corpus already treats it as a stable word with artifact-specific rungs, the same licence `trace` carries across spring_demo and fourier_transform. sculpt_one's own five rungs are not answerable here - this tool deposits only spheres - so the rungs are this artifact's own moves, which is what that precedent requires.",
+				"still_note": "NOT MEASURED IN PIXELS - I have not run Godot. What follows is arithmetic on the deposit geometry: the seven spheres of each rung projected as silhouettes from probe_anamorphic's five standpoints, at this framing, and differenced. Subject occupies 10.7-32.1% of frame depending on rung and view, so it clears the ~6% floor everywhere. Pairwise silhouette difference, worst case over all five standpoints and all six pairs, is 7.7% of frame (stack vs sweep, square-on); the best is 25.5% (sweep vs dab). At the canonical standpoint: stack/sweep 9.8%, stack/heap 12.1%, stack/dab 20.9%. Nothing collapses at any standpoint, so this should not be an anamorphic axis - but that is a prediction from spheres, not from the wireframe-shaded extraction inside a translucent 2 m box with a control panel in frame, and the first sweep is what settles it. AN EARLIER sweep LAYOUT RAN ALONG +x, 35 degrees off the canonical view direction, and measured 4.4% against stack instead of 9.8%: a gesture pointing at the lens is a lump. That is half an axis lost to an arrangement choice nobody would have questioned, and it is why the arc now runs broadside.",
+				"declined": "paint_rate (line 9) is REFUSED BY NAME as time-domain: seconds between strokes, a rate, and one that only ticks while a trigger is held, so it is invisible to a still twice over. brush_radius / brush_radius_min / brush_radius_max are refused as magnitude - they only rescale the deposit and self-cancel under an AABB-fitted camera, the fault grabbable_line's promotion recorded. An axis over iso_level (hardcoded 0.3 in _create_terrain_generator) is refused as ALREADY ARGUED: it is the sequence's central question and it would bite hard, but on a union of blended spheres it moves precisely what raymarched_metaballs / metaballs / implicit_surface_modeling already own as `fusion` at 53.15% - how much the field merges - and re-arguing a taken claim is worse than leaving a knob plain. FLAGGED, NOT PROPOSED, because they are defects and not undeclared axes: erase_mode is BROKEN - line 382 negates the radius to erase and line 384 passes abs() of it to add_blob, so the sign is discarded and erase ADDS material. volume_resolution (line 18, default 64) is declared and read by NOTHING; the sampling is TerrainGeneratorBase.num_voxels_per_axis, a const 64 that happens to agree. Both are left exactly as found.",
+				"fixture_why": "show_brush_indicator: false, written as a BARE BOOLEAN and not the string \"false\" - a typed bool export rejects a string assigned before _ready, the trap the catalyst prompter-box pass paid for. The brush indicator is an orange emissive sphere at brush_radius; _update_brush_indicator already hides it when no controller is found, which in a headless capture should always be the case, but _find_controllers searches the WHOLE scene tree for any node whose name contains 'XRController3D' or 'LeftHand', and what a capture rig happens to carry is not this artifact's business. Switching it off makes the tile independent of that search. NO SEED IS PINNED AND NONE SHOULD BE - see finding.",
+				"rebuild_guard": "apply_grid_config was `pass`. It now stamps config_* metadata, re-reads the overrides, returns immediately if _ready has not run, and otherwise compares a signature over the values the build reads (hand, volume_size), returning early when nothing moved - which is the path all 13 existing placements take. NOTHING IS FREED. The rebuild replaces the CONTENTS of the generator's blob buffer (clear_blobs, re-lay, re-extract) and touches no node this script created, so the _RotationTimer that GridInteractablesComponent parents to this root after spawn - and ProceduralGenerationMarchingCubesSculpture's token `marching_cubes_sculpt_vr:0:1:1` does ask for rotation - cannot be collected by a config arriving later. The rebuild path also never has to retype the shipped gesture: _snapshot_seeded_gesture reads the six Vector4s back out of blobs_array the instant the generator enters the tree, so `stack` on a rebuild replays TerrainGeneratorSculpt._ready's own arithmetic rather than a copy of it, and the two cannot drift apart. _read_metadata_overrides is called at the TOP of _ready, before the build, because GridInteractablesComponent stamps metadata at line 1195 and only add_childs at line 1220 - so a placement's `hand` is already on the node and the first build is the right one; the deferred apply_grid_config that follows finds an unchanged signature and does nothing. Only `hand` is readable from config metadata; nothing else was opened up.",
+				"finding": "NO SEED EXPORT WAS ADDED AND NONE SHOULD BE. The audit's 14 random calls are real and every one of them is in an interactive path - _input's KEY_R branch and the mouse-button handler, and _regenerate_sculpture's three randf_range pairs behind the REGEN button. None of them runs during a capture, the build path contains no randf at all, and the four rungs are literal position tables. Adding a seed would imply a randomness this axis does not use. If anyone later makes dab or heap SCATTER, law 4 applies immediately and a seed export plus a dna.fixture pin becomes mandatory. THE REAL DETERMINISM HAZARD IS THE COMPUTE PATH AND IT IS SILENT, exactly as on mc_shapes_gallery: TerrainGeneratorBase._ready falls back when RenderingServer.create_local_rendering_device() or the SPIR-V load fails, and TerrainGeneratorSculpt inherits an EMPTY _create_fallback_mesh(), so a host without a working local rendering device publishes four blank frames and the critic files a live axis as INERT or NO RENDER. Before believing any verdict on this token, grep the sweep's stdout for 'Compute initialization failed'. The synchronous re-extract added here is guarded on rendering_device plus the validity of pipeline and blob_buffer rather than trusting them, because init_compute()'s return value is not visible from the caller and TerrainGeneratorSculpt.run_compute writes to blob_buffer without checking it. SECOND, AND IT CUTS THE OTHER WAY FROM THE BRIEF: the design asked dab for six separate surfaces while leaving the centre deposit where it was, which cannot separate - a 0.6-radius ball at the origin swallows anything the box has room for, and no arrangement of the six alone is disjoint either at this iso_level. Moving the centre deposit into the eighth corner gives SEVEN separate surfaces instead of six, which is a stronger version of the same claim rather than a weaker substitute for it. THIRD: collision. create_mesh calls _create_collision, which skips trimesh generation above 30k triangles; dab's surface area is about three times stack's, so a dab placement may come out without collision. No default is affected.",
+				"kin": "HIDDEN FAMILY, and the brief did not list this one. mc_sculpt_vr (isosurfaces.json) and marching_cubes_sculpt_vr (procgen_extra.json) are TWO registry names on ONE scene, MarchingCubesSculptVR.tscn, and both are placed - 11 map files for this token, 2 for the sibling. The identical export count across the two names is the tell CLAUDE.md describes, and it is confirmed here by the scene path being character for character the same in both entries. The declaration lives on this token only, as instructed; the sibling is NOT declared, so it is invisible to the sweep and the gallery while remaining fully functional at runtime - the code reads `hand` regardless of what any registry says. To mirror it: python tools/apply_dna_block.py --token=marching_cubes_sculpt_vr --axes=hand, then copy these prose fields across, which is what raymarched_metaballs / implicit_surface_modeling did for their three names. CHECKED, NOT ASSUMED: the .tscn root carries the script (script = ExtResource(\"1_sculpt_vr\") on the MarchingCubesSculptVR node), so a map token reaches apply_grid_config on the root without the child-forward path. NOTE that this entry's own `class_name` field says TerrainGeneratorSculpt, which is the CHILD's class and not the root's - left as found, but it is the reason a reader could go looking for the axis in the wrong file.",
+				"placements": 13
+			},
+			"lookup_name": "mc_sculpt_vr",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn",
+			"class_name": "TerrainGeneratorSculpt",
+			"description": "GPU SDF sculpting \u2014 add spherical blobs with smooth union. Up to 500 blobs, real-time mesh extraction.",
+			"interactions": [
+				"add_blob(pos, radius) to sculpt",
+				"clear_blobs() to reset"
+			],
+			"parameters": {
+				"numBlobs": "Active blob count",
+				"isoLevel": "Surface threshold"
+			},
+			"compute": "MEDIUM \u2014 GPU compute, real-time updates",
+			"tags": [
+				"marching_cubes",
+				"sculpt",
+				"sdf",
+				"gpu",
+				"interactive",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 6,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 6,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.55,
+					2.0,
+					2.0
+				],
+				"aabb_center": [
+					0.27,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					2.0
+				],
+				"max_dimension_m": 2.55,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Sculpting by editing the field, not the mesh: your hand adds and subtracts density, and the surface follows as a consequence. Digital clay whose truth lives in the numbers underneath the visible skin."
+		},
+		"mc_portal_landscape": {
+			"lookup_name": "mc_portal_landscape",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_portal_landscape.tscn",
+			"class_name": "TerrainGeneratorPortals",
+			"description": "GPU terrain with portal arches \u2014 landscape-scale marching cubes with embedded portal geometry.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"terrain",
+				"portals",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					50,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_portal_landscape",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~3600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z",
+				"withheld": true,
+				"withheld_reason": "measurement withheld: the artifact simulates during the settle window and its AABB runs away (>500 m on one axis). Neither this run's value nor April's frozen-at-frame-2 value describes the body. Needs a stability-aware measure."
+			},
+			"footprint_measured": [
+				1000,
+				1,
+				1000
+			],
+			"qfep_connection": "Two regimes of the same field joined by a portal \u2014 thresholds as doorways, the level-set constant as the architect of where you can pass."
+		},
+		"mc_cave": {
+			"lookup_name": "mc_cave",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
+			"class_name": "TerrainGeneratorBase",
+			"description": "GPU cave system \u2014 noise-driven marching cubes producing walkable cave geometry.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"cave",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					46,
+					44,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_cave",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					300.0,
+					300.0,
+					300.0
+				],
+				"aabb_center": [
+					0.0,
+					9.38,
+					0.0
+				],
+				"grid_cells": [
+					300,
+					300
+				],
+				"max_dimension_m": 300.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				300,
+				1,
+				300
+			],
+			"qfep_connection": "The fifteen cases put to work at room scale \u2014 a cave marched out of a scalar field, the lookup table's alphabet suddenly speaking in caverns."
+		},
+		"mc_torus_sculpture": {
+			"lookup_name": "mc_torus_sculpture",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
+			"class_name": "TerrainGeneratorTorus",
+			"description": "GPU torus sculpture \u2014 marching cubes extracting torus isosurface.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"torus",
+				"sculpture",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					50,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_torus_sculpture",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"art",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~576"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					158.13,
+					59.45,
+					146.02
+				],
+				"aabb_center": [
+					-1.98,
+					-0.28,
+					-1.08
+				],
+				"grid_cells": [
+					159,
+					147
+				],
+				"max_dimension_m": 158.13,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				159,
+				1,
+				147
+			],
+			"qfep_connection": "A torus as a threshold event: the set of points where a field crosses zero. Walk around it and remember it has no polygons of its own \u2014 the mesh is the algorithm's testimony about the field."
+		},
+		"mc_shapes_gallery": {
+			"dna": {
+				"promoted": "2026-08-12",
+				"stage": "2 - variation",
+				"framing": 0.5,
+				"fixture": {
+					"use_fallback": false,
+					"capture_anchor": "on"
+				},
+				"axes": {
+					"repertoire": [
+						"household",
+						"laboratory",
+						"abstract",
+						"survey"
+					],
+					"likeness": [
+						"exact",
+						"broken",
+						"padded",
+						"fused"
+					]
+				},
+				"default": "repertoire=household and likeness=exact, both a deliberate no-op. household SHORT-CIRCUITS: _roster() returns the shipped list [0,1,2,3,4,5], which is term for term, in the same order, what `for i in range(6): generator.shape_type = i` produced on the old line 11, at the same grid positions from the same col/row formula. The captions are now DERIVED from TerrainGeneratorShapes.ShapeType rather than read out of a second hardcoded array, and that reproduces the old list rather than replacing it: Human, Chair, House, Bottle, Cup, Computer are exactly String(key).capitalize() of the first six enum members. exact returns the literal 0.0 the old line 25 assigned to generator.iso_level, not a dictionary lookup that happens to land on it. Nothing else in the build moved - noise_scale 1.0, chunk_scale 120.0 (hoisted to a const, same number), center_position zero, invert_faces true, the per-slot hsv material, the spacing/shape_scale exports. The hue still indexes the SLOT and not the shape id, so a new roster cannot recolour the grid. use_fallback is forwarded as false, which is what TerrainGeneratorBase already defaulted to, and capture_anchor defaults to \"off\" so the anchor node does not exist in a map. REACH MEASURED across the whole map corpus: 4 files - a bare grid cell in Corridor_ISO_ShapesGallery, `mc_shapes_gallery:0:0.5:0.5` in ISO_ShapesGallery (rotation and offsets only, no # config), a `curation_station#artifacts:` roster in Curation_Bay_isosurfaces_0, and the corridor swap pair `mc_shapes_gallery->gyroid_demo` in Trial_physarum_isosurfaces. Not one passes an axis key. The only apply_grid_config call any of them produces is curation_station's {\"emissive\": false}, which moves no term of the signature and returns early before touching a single node.",
+				"was": "two @export knobs and not one categorical among them: spacing and shape_scale, both pure magnitudes. apply_grid_config was a bare `pass` at line 56, so neither was reachable from a map token at all - the same unreachable-knob shape implicit_surface_modeling's promotion found on its own critical_parameter. What the artifact ARGUES sat in two hardcoded literals instead: six shape names on line 7 against `for i in range(6)` on line 11, and iso_level = 0.0 on line 25. TerrainGeneratorShapes.ShapeType declares THIRTEEN members and MarchingCubesShapes.glsl dispatches all thirteen in evaluate() (id 0..12, every branch present), so seven fully implemented objects - microscope, flask, DNA helix, atom, sculpture, sphere, torus - had never been placed in a world.",
+				"note": "The sequence truth line is \"define a field, extract a surface; the boundary between inside and outside becomes geometry\", and this gallery is the only artifact in the sequence that makes the first half a QUESTION. repertoire asks what the field is asked to prove it can be. The artifact's whole claim is that an SDF can be any thing, and it has been arguing that on furniture and crockery: household is a room, laboratory is apparatus and its operator, abstract is six things that were functions before they were objects, and survey is one from each register - the only value that lets the three claims stand beside each other in one frame. Lifting the roster out of a hardcoded array is csg_compose_workbench's algebra move exactly. likeness is the second half: 0.0 on a signed distance field IS the surface, and everything else is a decision. The numbers come off the shader's own literals against the sampling scale - chunk_scale 120 over num_voxels_per_axis 64 is a cell of 1.875 SDF units, so these are real changes and not re-quantisation. broken (-2.0) erodes past the chair legs (sdBox half-extent 2), the cup handle (sdTorus minor radius 0.8), the human's arms (sdCapsule radius 2.5) and the monitor stand (half-extent 3): six things remain, no longer six nameable things. padded (+4.0) swells everything and fills the cup's subtracted bore; the objects go soft but stay identifiable. fused (+10.0) closes the chair's 20-unit leg gaps into one rounded block - the object dissolving back into the field it came from, the truth line run backwards on purpose. BOTH WORDS ARE NEW. `taxonomy` (math_objects_gallery, combine_portals: table|ladder|stack|heap) was considered and REFUSED - it is about WHERE a family stands, not which family; `census` (wall_pattern_gallery) is a count and this roster is always six; `roster` (barber_paradox) is about set membership. `threshold` exists in the corpus exactly once - voxelnoise, sponge|massif|archipelago|wisp - and was deliberately NOT taken: those four rungs name topologies a noise field can hold and a gallery of six designed objects can produce none of them. Taking a word and dropping its answers is the folding_past fault that implicit_surface_modeling names, so the word is left to the artifact that can answer it in full. fusion and metaball_count are already spoken for by raymarched_metaballs / metaballs / implicit_surface_modeling, and neither of these two re-argues them: how much a field merges and how many sources it has are questions about ONE object, and this artifact's questions are about the roster and the cut.",
+				"still_note": "NOT MEASURED - I have not run Godot and no pixel has been counted. What follows is derived by reading, and the first sweep is what settles it. A still is the right instrument here for once: this is the ONE artifact of the six in this sequence with no _process and no clock, because TerrainGeneratorBase calls set_process(false) as soon as the first mesh exists and continuous_update defaults false. Every frame is a frozen 3x2 grid of six static SDF meshes. repertoire replaces a human, a chair and a house with a microscope, a DNA helix and a torus - a complete change of silhouette in every one of six cells, which should be the largest single-frame difference available anywhere in the sequence. likeness keeps the layout and the count and changes only the outlines: at broken the thin members disappear, at fused the internal holes close (the cup's bore, the chair's gaps, the atom's three orbital rings). FRAMING IS A CALCULATION, NOT A MEASUREMENT. The capture anchor is 11.0 x 3.25 x 7.0 m, diagonal 13.44, so radius 6.72; capture_config_sweep places the camera at radius / tan(FOV/2) * PAD * framing with FOV 34 and PAD 1.9, which puts the half-frame width at the subject at 6.72 * 1.9 * framing. At the sweep's yaw 0.62 the six-cell field projects about 10.2 m wide (9 * cos 35.5 + 5 * sin 35.5), so framing 0.5 gives a half-frame of 6.38 against a subject half-width of 5.12 - about 80% of frame width, with margin and no crop. This is a wide flat subject fitted by diagonal, riemann_pump's letterbox case, so if the first sweep shows headroom the number to move is this one and not the axes.",
+				"declined": "spacing and shape_scale, the artifact's only two previous exports, stay plain exports. Both are pure magnitudes that SELF-CANCEL under an AABB-fitted capture camera - a gallery spread twice as wide is photographed from twice as far and looks identical - which is the fault grabbable_line's promotion recorded when its length and thickness were demoted. invert_faces is a winding flag: it changes shading, not form. The six per-shape hues are colour, not argument, and the code now says so by indexing them off the SLOT rather than the shape id. NO TIME-DOMAIN AXIS WAS AVAILABLE TO REFUSE, which is worth stating in a sequence where four of the six artifacts run _process: this one does not, and that is why an axis over arrangement was reachable here without first having to convert a rate into a standing state.",
+				"fixture_why": "use_fallback: false, written as a BARE BOOLEAN and not the string \"false\" - a typed bool export rejects a string assigned before _ready, the trap the catalyst prompter-box pass paid for. It does not make the compute path work; it only removes the deliberate opt-out so that a fallback in the log is unambiguously a device failure. It is forwarded from the gallery root to all six generators, because the sweep sets properties on the INSTANTIATED scene before add_child and the generators do not exist until _ready runs - a fixture key naming the base class's own export would have found no holder and been silently dropped. capture_anchor: \"on\" builds the invisible bounding box; see rebuild_guard for why it is off by default and why it is not readable from config metadata.",
+				"rebuild_guard": "apply_grid_config was `pass`. It now stamps config_* metadata, re-reads the overrides, returns immediately if _ready has not run yet, and otherwise compares a signature over every value the build reads - repertoire, likeness, spacing, shape_scale, capture_anchor, use_fallback - returning early when nothing moved. A rebuild frees ONLY what this script created: the old _exit_tree freed every child without an owner, which is also exactly what GridInteractablesComponent's _RotationTimer is, so the script now keeps an _owned array and removes before freeing so a rebuild cannot collide names with children that are queued but not yet gone. THE CAPTURE ANCHOR IS GATED BY CONSTRUCTION. GridInteractablesComponent._compute_local_aabb walks MeshInstance3D regardless of its render layers and hands the result to _auto_ground_artifact; this entry carries no auto_ground:false, so an anchor built in a map would lift all four placements by the difference between the domain floor and the deepest real mesh. capture_anchor defaults to \"off\" and is deliberately NOT read from config metadata, so no map token can reach it - only direct property assignment can, which is what dna.fixture does. use_fallback is withheld from the metadata reader for the same reason: a map token that could set it would replace the artifact with six spheres.",
+				"finding": "NO RNG AND NO NOISE, and that is checked rather than assumed: the gallery script makes no random call, and MarchingCubesShapes.glsl is pure SDF primitives and boolean operators with no snoise call anywhere in evaluate() - unlike MarchingGyroid.glsl sitting in the same folder. noise_scale is set to 1.0 and nothing in this shader reads it. Six generators therefore produce six deterministic meshes and the sweep needs no seed pin. THE REAL DETERMINISM HAZARD IS THE COMPUTE PATH, AND IT IS SILENT. TerrainGeneratorBase._ready falls back to _create_fallback_mesh() when RenderingServer.create_local_rendering_device() or the SPIR-V load fails, and TerrainGeneratorShapes' fallback is a SphereMesh of radius 10 - so a capture host without a working local rendering device publishes six identical spheres for every value of both axes and the critic files two correct axes as INERT. BEFORE BELIEVING ANY VERDICT ON THIS TOKEN, grep the sweep's stdout for 'Compute initialization failed' and for 'Creating fallback mesh'; if either appears the run is void. SEPARATELY: the shipped value of likeness is named `exact` and not `true`, which is what the design asked for. \"true\" does not survive the harness - cabinet_sweep.coerce() turns it into a Python boolean, which would be handed to a String-typed property as `true` and silently refused, and would tag its frame `likeness-True` against a registry that says \"true\". A value name the plumbing rewrites on the way in is the science_screen fault in a new hat, caught before it shipped rather than after.",
+				"kin": "NOT a hidden family, checked rather than assumed: MarchingShapesGallery.tscn is named by exactly one registry entry across all 108 registry files, and the .tscn root carries the script itself (script = ExtResource(\"1_script\") on the MarchingShapesGallery node), so a map token reaches apply_grid_config on the root without the child-forward path. Its neighbours in this sequence are the opposite shape - raymarched_metaballs, metaballs and implicit_surface_modeling are ONE scene under three registry names, and they own fusion and metaball_count. gyroid_demo and GyroidDemo are another such pair and are not this scene.",
+				"placements": 4
+			},
+			"lookup_name": "mc_shapes_gallery",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingShapesGallery.tscn",
+			"class_name": "MarchingShapesGallery",
+			"description": "Gallery of multiple marching cubes shapes \u2014 sphere, torus, and more displayed side by side.",
+			"interactions": [
+				"auto-generates on ready"
+			],
+			"compute": "HEAVY \u2014 multiple GPU compute passes",
+			"tags": [
+				"marching_cubes",
+				"gallery",
+				"shapes",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					1,
+					26,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_shapes_gallery",
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"art",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 50,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.06,
+					1.95,
+					4.7
+				],
+				"aabb_center": [
+					-0.03,
+					-0.1,
+					-5.85
+				],
+				"grid_cells": [
+					10.0,
+					5.0
+				],
+				"max_dimension_m": 9.06,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The extraction bestiary: spheres, tori, blends \u2014 each shape one implicit function passed through the same fifteen-case mill. The gallery's argument: the surface was never modeled, only *described*."
+		},
+		"mc_inside_cave": {
+			"lookup_name": "mc_inside_cave",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+			"description": "GPU interior cave view \u2014 marching cubes cave seen from inside.",
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"cave",
+				"interior",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					50,
+					30,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_inside_cave",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					280.0,
+					280.0,
+					280.0
+				],
+				"aabb_center": [
+					0.0,
+					8.75,
+					0.0
+				],
+				"grid_cells": [
+					280,
+					280
+				],
+				"max_dimension_m": 280.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				280,
+				1,
+				280
+			],
+			"qfep_connection": "Standing inside the isosurface: the cave is where the field says *in*, and you are in it. The boundary wraps around the walker \u2014 geometry experienced from the wrong side of the skin."
+		},
+		"mc_flat_landscape": {
+			"lookup_name": "mc_flat_landscape",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+			"class_name": "TerrainGeneratorFlat",
+			"description": "GPU flat terrain \u2014 marching cubes landscape with gentle noise.",
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"terrain",
+				"flat",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					36,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_flat_landscape",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~2500"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					300.0,
+					49.62,
+					300.0
+				],
+				"aabb_center": [
+					0.0,
+					-9.91,
+					0.0
+				],
+				"grid_cells": [
+					300,
+					300
+				],
+				"max_dimension_m": 300.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				300,
+				1,
+				300
+			],
+			"qfep_connection": "A heightfield marched into terrain \u2014 the gentlest landscape the algorithm can speak, one value per column, the ground as a graph of a function."
+		},
+		"mc_overhang_landscape": {
+			"lookup_name": "mc_overhang_landscape",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn",
+			"class_name": "TerrainGeneratorOverhang",
+			"description": "GPU overhang terrain \u2014 landscape with overhanging rock formations.",
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"terrain",
+				"overhang",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					50,
+					50,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_overhang_landscape",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~3600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z",
+				"withheld": true,
+				"withheld_reason": "measurement withheld: the artifact simulates during the settle window and its AABB runs away (>500 m on one axis). Neither this run's value nor April's frozen-at-frame-2 value describes the body. Needs a stability-aware measure."
+			},
+			"footprint_measured": [
+				1000,
+				1,
+				1000
+			],
+			"qfep_connection": "The terrain heightfields cannot make: overhangs. A full 3D field permits inside-above-outside, and the cliff leans over your head \u2014 the moment the third dimension of the data becomes visible as shelter."
+		},
+		"animated_noise_explorer": {
+			"dna": {
+				"promoted": "2026-08-12",
+				"stage": "2 - variation",
+				"axes": {
+					"extraction": [
+						"cells",
+						"faces",
+						"corners",
+						"crossings"
+					],
+					"resolution": [
+						"mid",
+						"coarse",
+						"fine"
+					]
+				},
+				"default": "extraction=cells, resolution=mid - both exact no-ops, not recomputations that land on the same numbers. cells calls create_marching_cubes_mesh, the function that shipped, with nothing altered but the name of its int parameter; mid returns the literal 16 that used to sit inside generate_chunk as a bare local var. The .tscn's own overrides (chunk_scale 1.0, noise_scale 0.7, iso_level 0.0, animation_speed 0.3, animation_path (1, 0.5, 0.3), regenerate_interval 0.15, auto_start true, mesh_color) are untouched, and the new frame_anchor defaults OFF for a specific reason: the grid auto-grounds an artifact by its measured AABB, so an always-on 1 m box would drop every existing placement by up to half a cell. REACH MEASURED BY READING THE MAPS, not estimated: 23 placements in 11 map files by four paths - a bare cell in ISO_AnimatedNoise and two more in Trial_physarum_isosurfaces, a curation_station roster in Corridor_ISO_AnimatedNoise and another in Curation_Bay_isosurfaces_2, sixteen exhibit_furniture#kind:plinth#size:m#mount:animated_noise_explorer across eight Trial_* museums, and two corridor pairs (voxel_noise_demo-> and mc_terrain_demo->) in Trial_physarum_isosurfaces. Not one of them names an axis key; a bare token builds an empty config dict, and GridInteractablesComponent skips _apply_artifact_config entirely when the dict is empty.",
+				"was": "A 1 m cube of noise that travels: _process pushed current_offset along animation_path and rebuilt the mesh every 0.15 s, forever, and the whole artifact was that motion. Two things were hidden inside it. The resolution of the sampling was a bare local literal, var resolution = 16, invisible to every map and every inspector although it decides everything about the picture. And the extractor is a STUB - create_marching_cubes_mesh tests whether a cell's eight corners straddle iso_level and then emits all six faces of a full solid cube, with no lookup table, no edge interpolation and no case index - so what has always been on screen is not the surface but the set of cells in which the field changes its mind. apply_grid_config was the single word pass, a config channel wired to nothing.",
+				"note": "extraction is NEW, and the word is the sequence's own verb - define a field, EXTRACT a surface. It exists because this artifact is the one place in the sequence where the question is not rhetorical: its extractor stopped one step short of the surface and left the intermediate on screen, so the four rungs can walk the whole distance in four pictures, every one of them built from the density_field the loop already computes. the ladder is the DIMENSION OF THE ANSWER - a sample, a point on an edge, a face, a cell. cells = a solid cube per straddling cell, SHIPPED, the crude honest default: a mass where a boundary was promised, 917 cells and 5502 quads. faces = the cell faces the contour actually passes through, kept only where the face's own four lattice corners disagree - a perforated stepped sheet running through the block set, 1940 distinct quads, one lattice dimension closer to the surface. corners = a marker at every lattice point above iso_level, no surface at all, the sampled field itself before any decision, 2272 of 4913 points. crossings = a marker at the linearly interpolated point on every lattice edge whose ends disagree, t = (iso - a) / (b - a), which is the exact set of vertices marching cubes would have produced and this extractor never built, 1024 of them. The ladder is the sequence's truth line in reverse: here is the field, here are the points where it crosses, here are the faces it crosses, here is the mass we settled for. MEASURED, NOT GUESSED, AND THE MEASUREMENT CHANGED THE DESIGN. noise_3d, the straddle test and all four extractors were re-implemented in Python against the shipped .tscn values and rasterised with a z-buffer from the sweep's own standpoint (yaw 0.62, pitch -0.26) at 300x300. Against cells: faces differs in 26.31 percent of the frame, corners in 35.27, crossings in 34.20; corners against crossings, 17.29. Subject share of frame 34.50 / 33.08 / 13.90 / 6.32 percent, so the point clouds really are a dust. WHAT THE MEASUREMENT KILLED: the approved rung for faces was the outer SKIN of the straddling set - a face kept only where its six-neighbour does not also straddle. It rasterises 0.00 percent different from cells. Not small, ZERO: all 3486 faces the skin discards are interior and occluded, so under an opaque material a mass and its own skin are the same photograph, and that rung would have published two identical tiles and been filed INERT for a fact about occlusion. The crossed-face reading is the nearest thing that bites, and it argues something the skin did not - not how much of the mass is drawn, but which lattice element the boundary is recorded on. trace (fourier_transform: samples|stems|ribbon; spring_demo: off|phase|wave) is the nearest relative and was refused because its rungs are a one-dimensional signal plot's vocabulary, which a volume cannot answer. workings (csg_difference_demo: outcome|trace|operands|expression) was refused for a sharper reason: workings asks how much of an operation a demonstration will DISCLOSE, and cells is not a fuller disclosure than crossings - it is a cruder extractor. Different claim, different word. resolution is SHARED, taken from riemann_pump (resolution is HOW FINE THE PARTITION IS, and the partition is that artifact's own subject) and given the same three rung names as queer_marching_cave in this same sequence, deliberately, so the two can be read against each other: there a cell size in metres, here a cell count per axis, both naming the shipped state mid. If a shared vocabulary is honest the two behave alike under it, and that is itself a check on the bench. Measured on the shipped field: coarse = 8 gives 232 straddling cells of 0.125 m, mid = 16 gives 917 of 0.0625 m, fine = 24 gives 2070 of 0.0417 m and about 24800 triangles. Capped at 24 on purpose - 32 is 3678 cells and the rebuild is a triple GDScript loop that also runs every regenerate_interval while animating, so a higher rung buys nothing and risks the watchdog. The argument is that the field is continuous and everything you see is an artefact of a sampling rate nobody was told about: same noise function, same threshold, three different objects. Neither axis re-argues fusion or metaball_count, which raymarched_metaballs, metaballs and implicit_surface_modeling already hold for how much the field merges and how many sources it has.",
+				"declined": "THE ENTIRE TRAVEL APPARATUS, refused by name and all four for the same reason: animation_speed, regenerate_interval, animation_path and auto_start. This artifact's premise is motion - its own Info label reads Traveling Through 4D Noise - and a rate, an interval and a direction are precisely what one PNG cannot photograph. A sweep over animation_speed would publish frames differing only in where the clock happened to be, which is the info_board fault (six identical tiles from five duration exports) with a moving subject instead of a still one. The standing arrangement offered instead is the promoted pair: the two things that are true of the field whether or not anyone is travelling through it - how finely it is sampled, and what a sample is turned into. The travel was only ever a way of showing that the field extends past the box, and extraction=corners shows the same thing in one frame by drawing the field itself. Also declined: show_wireframe, which is a material flag and not a form, and mesh_color.",
+				"fixture": {
+					"auto_start": false,
+					"frame_anchor": true
+				},
+				"fixture_why": "There is no RNG here of any kind - noise_3d is three hardcoded trigonometric terms and the file contains no randf, no randi and no FastNoiseLite - so the thing that has to be pinned is THE CLOCK. _process accumulates current_offset every frame and regenerates the mesh every regenerate_interval, which means two tiles captured 1.5 s apart photograph two different fields of the same artifact and the sweep would report the shutter as an axis. auto_start false freezes current_offset at Vector3.ZERO, the t=0 field and the only offset every viewer is guaranteed to have seen. Written as a bare JSON boolean, not the string false, because the sweep assigns fixture values straight onto a typed export before _ready. That pin is only safe because of the lifecycle repair recorded under rebuild_guard: until this pass, auto_start false meant NO MESH AT ALL and the fixture would have scored a blank frame INERT. frame_anchor true adds an invisible layers = 0 box the size of the sampled volume so the camera frames the FIELD rather than the extent of whatever the value being tested happened to build - corners and crossings are point clouds whose reach differs from the cube mass by up to a cell, and resolution moves the outermost block by half a cell. No dna.framing key: the subject is a 1 m cube at the origin and the three Label3D nodes do not count toward a MeshInstance3D-only AABB, so the default 1.0 should be honest - but that is an estimate, not a measurement, and it should be checked against the first sweep.",
+				"rebuild_guard": "apply_grid_config was the single word pass. It now writes each key as config_<key> metadata, re-reads the two axes against their allow-lists (an unrecognised value is dropped, not applied - the science_screen failure was a typo nothing refused), and rebuilds ONLY when a signature of every value the build reads has actually moved; a config dict naming none of these axes cannot move it. Deliberately narrow: it still ignores chunk_scale, noise_scale, iso_level and the animation knobs, because widening the channel to honour keys nobody has ever sent would be a behaviour change hiding inside a promotion. TWO STRUCTURAL FINDINGS. First, the lifecycle: generate_chunk was reachable only through start_animation, which _ready called only when auto_start was true, so freezing the clock produced no geometry at all. _ready now builds unconditionally and auto_start governs only whether _process advances the offset - for auto_start true, which is the .tscn's value and every placement's, the end state is identical (one chunk at offset zero, is_animating true). Second, the scriptless root: the .tscn root carries no script, the script sits on the child MeshInstance3D NoiseChunk, and the promotion brief expected that to make the axis unreachable from all 11 maps. READ THE ENGINE, IT DOES NOT. GridInteractablesComponent._apply_artifact_config falls through to _config_holder, a breadth-first search for the first descendant that handles config, which finds NoiseChunk; it sets the metadata there and calls apply_grid_config on it, and all of that happens BEFORE parent_node.add_child, so the child's _ready sees the keys. capture_config_sweep._holder_of does the same for the bench. So no forwarder script was added to the root: the gap the brief describes was closed at the call site, and adding a second handler would only have given the axis two homes. The only node this script creates is the frame anchor and it is tracked in an _owned array - GridInteractablesComponent attaches a _RotationTimer to spawned artifacts, so freeing every child is never safe here."
+			},
+			"lookup_name": "animated_noise_explorer",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/animated_noise_explorer.tscn",
+			"class_name": "AnimatedNoiseExplorer",
+			"description": "Animated noise field explorer \u2014 watch marching cubes extract surfaces from evolving noise in real-time.",
+			"compute": "MEDIUM \u2014 GPU compute shader, animated",
+			"tags": [
+				"marching_cubes",
+				"noise",
+				"animated",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					4,
+					5,
+					4
+				],
+				"size_group": "environment"
+			},
+			"name": "animated_noise_explorer",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"grid_overlay",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Marching cubes run on a noise field that will not hold still \u2014 surfaces extracted from evolving randomness in real time, the skin re-found every frame as the field beneath it churns. The chapter's two neighbors married and set in motion: noise supplies the field, marching cubes reads the threshold, and the result is geometry that flows because its data does."
+		},
+		"mc_base": {
+			"lookup_name": "mc_base",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn",
+			"description": "Base GPU marching cubes scene \u2014 the core implementation.",
+			"compute": "MEDIUM \u2014 GPU compute shader",
+			"tags": [
+				"marching_cubes",
+				"base",
+				"gpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					7,
+					41,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_base",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1600"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					91.67,
+					79.47,
+					200.0
+				],
+				"aabb_center": [
+					0.42,
+					-2.52,
+					0.0
+				],
+				"grid_cells": [
+					92,
+					200
+				],
+				"max_dimension_m": 200.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				92,
+				1,
+				200
+			],
+			"qfep_connection": "The core marching-cubes scene on the GPU \u2014 the algorithm at its plainest, the base implementation everything else in the chapter is dressed from. The engine room: no landscape, no cave, just the fifteen cases running on the graphics card, the pure act of turning a field of numbers into a surface, shown without ornament."
+		},
+		"nakama_metaballs": {
+			"lookup_name": "nakama_metaballs",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.tscn",
+			"description": "Kouhei Nakama-inspired organic metaballs \u2014 60 animated blobs with subsurface scattering shader. Approximated mesh via sphere deformation.",
+			"parameters": {
+				"num_metaballs": "Blob count (default 60)",
+				"container_size": "Bounds (default 5x5x5)",
+				"movement_speed": "Animation speed",
+				"material_color": "Surface color",
+				"footprint": [
+					1,
+					3,
+					6
+				],
+				"size_group": "environment"
+			},
+			"compute": "HEAVY \u2014 CPU per-frame mesh rebuild with metaball field evaluation",
+			"tags": [
+				"metaballs",
+				"organic",
+				"animated",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"name": "nakama_metaballs",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					7.24,
+					6.36,
+					5.61
+				],
+				"aabb_center": [
+					0.0,
+					0.03,
+					-0.01
+				],
+				"grid_cells": [
+					8,
+					6
+				],
+				"max_dimension_m": 7.24,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				8,
+				1,
+				6
+			]
+		},
+		"raymarched_metaballs": {
+			"lookup_name": "raymarched_metaballs",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
+			"dna": {
+				"promoted": "2026-08-06",
+				"stage": "2 - variation",
+				"framing": 0.21,
+				"fixture": {
+					"metaball_seed": 7,
+					"pose_time": 3.0
+				},
+				"axes": {
+					"fusion": [
+						"distinct",
+						"necked",
+						"lobed",
+						"single"
+					],
+					"metaball_count": [
+						1,
+						3,
+						5,
+						9
+					]
+				},
+				"default": "fusion=distinct, metaball_count=9 - the shipped no-op on both. distinct short-circuits to the raw exported blend_factor; 9 is the shader's own array length, so the parking loops have zero iterations and the arrays are byte for byte what they were. This token is placed at 'raymarched_metaballs:0:0:0.2' in ISO_Metaballs, in Corridor_ISO_Metaballs and in the Curation_Bay_isosurfaces_4 roster, all bare, so apply_grid_config reaches no assignment and never rebuilds.",
+				"kin": "SIBLING DECLARATION. This token, implicit_surface_modeling and `metaballs` (both procgen_extra.json) are three registry names on ONE scene, metaballs.tscn. The axes, the values, the fixture and the framing are copied character for character from implicit_surface_modeling, which carries the full reasoning, the measurements and the findings. They must measure ALIKE; if they do not, the difference is in the bench and not in the artifact. NOTE this token's own `parameters` block already documented metaball_count and blend_factor as if a map could set them - it could not, because apply_grid_config was a bare `pass` until this pass.",
+				"placements": 3
+			},
+			"description": "Shader raymarched metaballs \u2014 9 animated balls rendered via SDF raymarching on a cube mesh. Real-time implicit surface visualization.",
+			"parameters": {
+				"metaball_count": "Number of balls (default 9)",
+				"blend_factor": "SDF blend smoothness",
+				"base_strength": "Field strength",
+				"animate_strength": "Pulse animation"
+			},
+			"compute": "LIGHT \u2014 GPU shader only, no mesh extraction",
+			"tags": [
+				"metaballs",
+				"raymarching",
+				"sdf",
+				"implicit",
+				"shader",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 144,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.0,
+					12.0,
+					12.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					12.0,
+					12.0
+				],
+				"max_dimension_m": 12.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				12.0,
+				1,
+				12.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"metaball_world": {
+			"lookup_name": "metaball_world",
+			"category": "procedural",
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballworld.tscn",
+			"class_name": "MetaballGenerator",
+			"description": "Full marching cubes metaball system \u2014 proper isosurface extraction from metaball field. Animated, with collision. The real deal.",
+			"parameters": {
+				"grid_size": "Voxel grid resolution (default 64x32x64)",
+				"cell_size": "Cell size (default 0.5)",
+				"iso_level": "Surface threshold (default 1.0)",
+				"metaball_count": "Blob count (default 8)",
+				"animation_speed": "Movement speed",
+				"footprint": [
+					21,
+					6,
+					21
+				],
+				"size_group": "world_scale"
+			},
+			"compute": "HEAVY \u2014 CPU marching cubes, periodic mesh rebuild",
+			"tags": [
+				"metaballs",
+				"marching_cubes",
+				"animated",
+				"collision",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"name": "metaball_world",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.64,
+					6.3,
+					2.46
+				],
+				"aabb_center": [
+					0.24,
+					0.15,
+					-0.32
+				],
+				"grid_cells": [
+					3,
+					3
+				],
+				"max_dimension_m": 6.3,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				3,
+				1,
+				3
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "No blob owns its outline: the surface is wherever summed influence crosses iso_level, so bodies merge and split with no merge event anywhere in the code. Marching cubes just walks the grid and reports where the field says skin \u2014 boundary as measurement, not membrane."
+		},
+		"fifteen_cases_demo": {
+			"dna": {
+				"promoted": "2026-08-12",
+				"stage": "2 - variation",
+				"axes": {
+					"workings": [
+						"expression",
+						"outcome",
+						"operands",
+						"trace"
+					],
+					"margin": [
+						"even",
+						"starved",
+						"swollen",
+						"brimming"
+					]
+				},
+				"default": "workings=expression, margin=even - both are short-circuits, not recomputations that happen to land on the same numbers. expression IS the file's existing code path: show_wireframes and show_labels both shipped `true`, so the branch runs the same generate_case_mesh() and create_labels() bodies in the same order, adds no node the file did not already add, and the crossing markers exist only under `trace`. even is a bare `return case_data.densities` in _densities_for() and a bare `return SHIPPED_OUTSIDE` (0.3) in _outside_value() - the very literal arrays the fifteen dictionary entries have always carried, and the very number create_voxel_chunk_from_case has always filled the chunk with - so every case builds a byte-identical density field and the same ArrayMesh. TWELVE PLACEMENTS ACROSS ELEVEN MAPS, reaching the artifact by four different paths, every one bit-identical. (1) TWO BARE TOKENS, Corridor_ISO_LookupTable and Trial_physarum_isosurfaces: the naked string with no rotation, no y-offset and no config keys. This entry declares no default_params, so GridInteractablesComponent builds merged_config from default_params + delegate params + token params and gets an EMPTY dictionary; the `if not merged_config.is_empty()` gate means _apply_artifact_config is never called at all, no metadata is stamped, and apply_grid_config is never reached. (2) ONE ROTATION-ONLY token, `fifteen_cases_demo:90` in ISO_LookupTable: the `:90` is parsed into overrides.rotation_y, never into config_data, so it takes that same empty-config path. (3) EIGHT exhibit_furniture mounts, `#kind:floor_work#size:l#mount:fifteen_cases_demo`, across Trial_castelvecchio / grande / kanazawa / physarum / pinch_v2 / sainsbury / soane_cabinet_vista / uffizi - the # keys belong to the FURNITURE, not to this token, and exhibit_furniture._mount_artifact loads the scene, instantiates it, positions it at _surface_y() and adds the child without ever calling apply_grid_config or stamping identity, so those build at pure export defaults. (4) ONE curation_station roster, Curation_Bay_isosurfaces_0, which DOES call apply_grid_config - with exactly {\"emissive\": false}, a key no build path reads - so the new guarded body stamps config_emissive into metadata, recomputes the signature, finds it unchanged and returns before any teardown. (Trial_physarum_isosurfaces carries the token twice, once bare and once mounted, which is why twelve cells sit in eleven files.)",
+				"was": "a 3 x 5 grid of fifteen frozen marching-cubes cells, and a bare `pass` where apply_grid_config should be - line 431, no assignment behind it, so the artifact was unreachable from a map token by any key whatsoever. The two knobs it did expose were show_wireframes and show_labels, both true, both reachable only through a keyboard shortcut in a demo whose UI Control ships visible = false; and show_wireframes did not even do what the W key printed, because the wireframe nodes were never tracked, so toggling it changed nothing at all until a regenerate. Meanwhile the 0.3 / 0.7 sample pair - the numbers that decide where every extracted vertex lands - was typed out thirty times across the fifteen dictionary literals and a thirty-first time into the chunk fill, with nothing naming it, nothing connecting the two, and no way to ask what the picture would look like if it were any other pair.",
+				"note": "workings is SHARED, taken from csg_difference_demo (boolean_surfaces.json), whose note says 'workings is the axis a demonstration wants and an artwork does not: how much of the operation it is willing to show.' 26 tokens carried the word before this promotion. It transplants here because this is the same kind of object asked the same question - a demonstration, not a work - and because all four of its rungs are answerable in full, which is the test implicit_surface_modeling applied when it REFUSED sierpinski_pyramid's `packing`. What the four mean for a lookup table: expression is SHIPPED - the sheets, the fifteen wireframe cages, the 120 red/blue corner beads and the fifteen billboard labels each ending 'Config: %d', which is the table entry itself; outcome is the fifteen sheets ALONE, finished geometry with no account of where it came from and no configuration number; operands is cage and beads with NO sheet - the field before the decision, which is exactly and only what marching cubes consumes, and an inverse silhouette of outcome; trace is expression plus a marker on every one of the twelve cage edges whose two ends disagree, standing at the interpolated crossing, computed with the generator's own formula so the mark is WHERE the extracted vertex is rather than near it. WHAT DIFFERS FROM THE SIBLING, said plainly: over there the operands are two solids and `trace` is the removed material put back as a ghost, so its ladder is about a volume; here the operand is eight numbers and trace is a set of POINTS, so the ladder is about a sampling. Same question, two ontologies of showing. margin is a NEW word, and it is the sequence's truth line - 'define a field, extract a surface' - turned into a knob. The demo hardcodes 0.3 for outside and 0.7 for inside against MarchingCubesGenerator's threshold of 0.5. That pair is SYMMETRIC about the threshold, so every interpolated vertex lands on the exact edge midpoint: the diagram-book picture, and an accident of two literals rather than a property of the algorithm. Slide the pair while keeping its span at 0.4 and the fifteen cases stay the same fifteen cases - same config bytes, same table entries, same topology, the same eight beads in the same eight colours in the same eight places - while every sheet slides across its cell. The table decides what the surface IS; the numbers decide where it SITS; and only one of those is in the lookup table. Values are (outside, inside) pairs and t is measured from the inside corner: even (0.30, 0.70) t=0.50 SHIPPED; starved (0.14, 0.54) t=0.10, the inside corners barely made it and the sheets hug them until the solid is slivers; swollen (0.44, 0.84) t=0.85, the sheets stand off toward the outside corners and the solid nearly fills its cell; brimming (0.48, 0.88) t=0.95, the limit case. BOTH numbers of every pair stay strictly off 0.50 on purpose: march_cube_fixed's sign test is `density < threshold`, so an outside value of exactly 0.50 flips into the inside class, the configuration collapses to 0 or 255 and the cell renders NOTHING. Two implementation details are load-bearing rather than tidy. The chunk FILL moves with the pair (create_voxel_chunk_from_case takes _outside_value(), not a literal): the chunk is 2x2x2, so seven neighbour cubes share corners with the case cube and draw their own sheets wherever a case corner is inside, and leaving the fill at 0.3 would put those seven at a different crossing from the one the rung is arguing - the cell would contradict itself. And the bead colours are computed from the SAME resolved array the chunk got, so they are identical at all four rungs by construction rather than by luck. Words considered and rejected for this axis, each because it already carries a different claim elsewhere: `bias` (pixel_cloud), `crossing` (sine_space, sine_space_explanation, fluency_seam), and `reading`. margin names the quantity actually being varied - the distance of each sample from the threshold. NOT RE-ARGUED: fusion and metaball_count are held by raymarched_metaballs/metaballs/implicit_surface_modeling (one scene, three names) and both bite hard, so 'how much the field merges' and 'how many sources' are taken; neither is asked here.",
+				"declined": "REFUSED BY NAME: `animate_threshold` (line 106 as shipped, the A key, and the only thing _process has ever done). It is a time-domain export twice over - it oscillates on sin(animation_time), and what it writes is material.emission_energy, a brightness ramp - so a still photographs one arbitrary phase and a sweep over it would measure the shutter rather than the artifact. Worse, its NAME promises this sequence's central question and delivers a glow: it does not move a threshold at all, it modulates emission on meshes that were already built. margin is the honest version of what that export pretends to be, and the export is left exactly as it shipped (false, untouched, still on the A key). Also refused: case_spacing and case_scale - layout magnitudes that an AABB-fitted capture camera cancels almost exactly, since scaling every cell and the gaps between them scales the subject and the frame together; and zoom_speed / min_zoom / max_zoom, which drive the scene's own Camera3D, a node _suppress_embedded_chrome hides at spawn and no capture ever looks through.",
+				"fixture": {
+					"capture_anchor": "on"
+				},
+				"fixture_why": "ONE entry, and it is a BENCH SWITCH rather than a pin - the word, the two values and the gate are csg_union_demo's and csg_intersection_demo's, character for character. Nothing here needs pinning: there is no rotation, no RNG and no animation on any default path. What does need fixing is the FRAME. Both axes change the very MeshInstance3D set that capture_config_sweep._subtree_aabb measures - workings=outcome deletes fifteen PRIMITIVE_LINES cages and 120 corner beads, and margin slides every interpolated vertex, so the subject's own box runs from 8.79 m wide at starved to 9.02 m at brimming - and a camera fitted per variant photographs each rung at its own magnification, which is the frame-relative verdict already recorded from the PostCrisis pass. capture_anchor=on stands an invisible layers=0 BoxMesh over the union of every value's extent, sized by construction from GRID_COLS/GRID_ROWS/case_spacing/case_scale and the margin table rather than measured from the built scene, so the box is identical at all sixteen combinations. Derived, its local corners are (-4.04, -0.04, -2.04) to (4.975, 0.975, 2.975): 9.015 x 1.015 x 5.015, diagonal 10.366. This is a CORRECTION to the approved design, which estimated the anchor at about 8.0 x 2.5 x 4.5 - the true box is wider and much flatter, because the sheets in the seven neighbour cubes of each 2x2x2 chunk reach 1 + t past the case corner while nothing reaches above 1 + t in y either. The gating is load-bearing rather than tidy: this box is also what capture_multi_angle frames and what sync_footprints reads, and 9.015 m where the registry records 8.79 would re-rate the artifact's footprint on the next measurement sweep. It defaults to 'off' and _read_metadata_overrides deliberately does not read config_capture_anchor, so no map token can switch it on; only direct property assignment - which is what dna.fixture and the sweep do - reaches it. Grounding is unaffected in either case: _auto_ground_artifact reads only min_y, and the anchor's -0.04 is the corner beads' own minimum, the number the artifact has always grounded on.",
+				"framing": 0.8,
+				"framing_why": "DERIVED ARITHMETIC, NOT A MEASUREMENT - I have not run Godot, and the first sweep should correct this. The rig places the camera at radius / tan(FOV/2) * PAD * framing with FOV 34 and PAD 1.9, so the frame's world half-extent is simply radius * 1.9 * framing. The capture anchor's diagonal is 10.366, radius 5.183, giving a 19.7 m square frame at framing 1.0. The subject is a WIDE FLAT SLAB - 9.015 x 1.015 x 5.015 - and the canonical standpoint is yaw 0.62, pitch -0.26, so its projected bounding box is about 10.25 m across (4.5075*cos(35.5) + 2.5075*sin(35.5), doubled) by about 3.37 m tall: roughly 8.9 percent of frame as a BOUNDING box, and the fifteen cells are a sparse grid inside that box, so measured subject share would land nearer 3-4 percent - under the ~6 percent floor at which a fit-by-diagonal shot of a flat subject stops being able to tell a real axis from a dead one. 0.8 gives a 15.8 m frame, roughly 14 percent bounding, and leaves the widest rung at 65 percent of frame width, nowhere near cropped (the crop limit is framing 0.52). The approved design specified 1.0 with 0.8 named as the contingency if a first sweep came in under 6 percent; the arithmetic above is why the contingency is taken up front instead. The labels sit 1.5 below the grid and 2.5 below the frame centre, well inside a 6.3 m half-height, so expression and trace do not lose their Config lines to the crop.",
+				"rebuild_guard": "apply_grid_config was a bare `pass`. It now stamps config into metadata, re-reads it, and returns early on an unchanged signature (workings, margin, case_spacing, case_scale) - and returns immediately if _ready has not built yet. Eleven of the twelve placements never call it and the twelfth passes one key nothing reads, so not one of them is even torn down. The build is synchronous in _ready with no call_deferred anywhere on the build path. Teardown is restricted to an _owned array: the OLD KEY_R handler and the old _exit_tree both walked get_children() and freed everything, which is the CameraController this script caches, the Lighting rig, the WorldEnvironment, the UI Control - and any _RotationTimer GridInteractablesComponent attaches to the root after spawn. _rebuild() also remove_child()s before queue_free()ing, so the old nodes leave the AABB in the same frame rather than at the end of it, which is what a capture measuring straight after a config change would otherwise photograph.",
+				"still_note": "NOTHING IN THIS ARTIFACT MOVES on any default path - fifteen static ArrayMeshes, fifteen line cages, 120 beads and fifteen billboard labels, all resolved during _ready - which is why an axis was findable here at all in a sequence where four of six artifacts run _process. The strong rung pair is workings=outcome against operands: one removes the sheets and keeps the cage, the other the reverse, so they are inverse silhouettes of the same 8 m subject and cannot both be faint. margin is a change in sheet AREA of roughly an order of magnitude on case 1 (t=0.10 to t=0.95 on a corner triangle is t squared, 0.01 against 0.90) repeated across thirteen of the fifteen cells, with the cage and the beads deliberately held still so the still reads as an argument rather than as a resize. THE WEAK RUNG, written down here rather than discovered in the verdict, is trace against expression: they differ only by up to twelve markers per cell, and the markers sit exactly on the sheet boundary where the sheet can swallow them. CROSSING_RADIUS is therefore 0.1 - deliberately LARGER than the 0.08 corner bead - and the marker material is unshaded with emission at 1.4. If the sweep still reports trace faint, the honest remedy is to make the markers louder or to draw the residual edge segment as well, not to re-word the axis. Two cells are legitimately empty of sheet at every rung and this is truthful rather than broken: case 0 is all-outside and case 14 all-inside, so march_cube_fixed skips them and the demo stands its grey no-surface indicator there instead.",
+				"placements": 12
+			},
+			"lookup_name": "fifteen_cases_demo",
+			"category": "procedural",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/fifteen_cases_demo.tscn",
+			"class_name": "FifteenCasesController",
+			"description": "Interactive display of the 15 unique marching cubes cases (from 256 total). Educational \u2014 shows how the lookup table works.",
+			"compute": "LIGHT \u2014 static mesh display",
+			"tags": [
+				"marching_cubes",
+				"educational",
+				"cases",
+				"lookup_table",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					1,
+					7,
+					11
+				],
+				"size_group": "world_scale"
+			},
+			"name": "fifteen_cases_demo",
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 45,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.79,
+					0.79,
+					4.79
+				],
+				"aabb_center": [
+					0.36,
+					0.36,
+					0.36
+				],
+				"grid_cells": [
+					9.0,
+					5.0
+				],
+				"max_dimension_m": 8.79,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				9.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.132578Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The whole algorithm on one plinth: a cube has 8 corners, each in or out \u2014 256 configurations that symmetry folds to 15. Every marching-cubes surface ever extracted is these fifteen tiles, looked up and glued. The lookup table as Rosetta stone."
+		},
+		"rhizome_cave_demo": {
+			"lookup_name": "rhizome_cave_demo",
+			"category": "procedural",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"class_name": "RhizomeCaveDemoController",
+			"description": "Rhizomatic cave \u2014 Deleuze-inspired branching cave generation using growth patterns + marching cubes.",
+			"compute": "HEAVY \u2014 CPU growth simulation + marching cubes",
+			"tags": [
+				"marching_cubes",
+				"rhizome",
+				"cave",
+				"growth",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"postfoundationscrisis"
+			],
+			"sequence": "postfoundationscrisis",
+			"parameters": {
+				"footprint": [
+					1,
+					16,
+					26
+				],
+				"size_group": "world_scale"
+			},
+			"name": "rhizome_cave_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"qfep_connection": "A cave grown as rhizome \u2014 Deleuze's centerless, multiply-connected figure carved into stone by branching growth and marching cubes. The post-crisis answer in geology: after the foundations fell, you build spaces with no single entrance and no privileged path, structures that are all middle. A world you enter anywhere and cross more than one way \u2014 formalization's limits turned into an architecture of the between."
+		},
+		"mc_terrain_demo": {
+			"lookup_name": "mc_terrain_demo",
+			"category": "procedural",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
+			"class_name": "TerrainDemoController",
+			"description": "CPU terrain generation demo \u2014 marching cubes terrain with configurable noise parameters.",
+			"compute": "HEAVY \u2014 CPU marching cubes terrain",
+			"tags": [
+				"marching_cubes",
+				"terrain",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					1,
+					21,
+					11
+				],
+				"size_group": "world_scale"
+			},
+			"name": "mc_terrain_demo",
+			"complexity": "advanced",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					73.36,
+					0.89,
+					73.36
+				],
+				"aabb_center": [
+					0.0,
+					0.35,
+					0.0
+				],
+				"grid_cells": [
+					74,
+					74
+				],
+				"max_dimension_m": 73.36,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				74,
+				1,
+				74
+			],
+			"qfep_connection": "The terrain workbench: density thresholds, noise octaves, resolution \u2014 dials on a landscape. Turning them shows the ground to be an opinion held by a field."
+		},
+		"queer_marching_cave": {
+			"dna": {
+				"promoted": "2026-08-12",
+				"stage": "2 - variation",
+				"framing": 1.0,
+				"axes": {
+					"bulge": [
+						"pillowed",
+						"gridded",
+						"rounded",
+						"engulfed"
+					],
+					"resolution": [
+						"mid",
+						"coarse",
+						"fine"
+					]
+				},
+				"fixture": {
+					"cave_seed": 20260811,
+					"color_shift_speed": 0.0,
+					"pulse_intensity": 0.0
+				},
+				"default": "bulge=pillowed AND resolution=mid, both exact no-ops, and both SHORT-CIRCUITS rather than lookups: _bulge_amount() returns the `bulginess` export untouched at `pillowed`, _resolved_cell_size() returns `cell_size` untouched at `mid`. Neither 1.5 nor 0.5 is re-derived from a table that happens to land on the same number, so the density field, the marching loop, the edge interpolation and the vertex colours are computed from identical floats. REACH MEASURED, and the count is 3, not the 4 the design carried: a bare grid cell in ISO_Caves (interactables[6][6]), a bare cell in Corridor_ISO_Caves (interactables[16][2]), and a `curation_station#artifacts:mc_torus_sculpture,mc:sphere,fifteen_cases_demo,queer_marching_cave,mc_shapes_gallery` roster in Curation_Bay_isosurfaces_0. ISO_Showcase_12 was counted as a fourth because its map_info.description reads \"Test: metaball_world + queer_marching_cave\" - its interactables layer holds rhizome_cave_demo, marching_cubes and marchingcave and NOT this token. The description is stale; counting it would have been counting a sentence. None of the three passes a config key, so apply_grid_config - a bare `pass` until this pass - reaches no assignment and the guarded rebuild below is unreachable from every map that exists.",
+				"was": "Eight exports and an apply_grid_config whose entire body was the word `pass`. The artifact's own declared critical_parameter, bulginess, was welded at 1.5, so its truth line - \"the difference between geology and architecture is just parameter choice\" - was argued at exactly one parameter choice, which is the fault `fusion` was promoted to fix on the metaballs next door. The cell size was an export named `resolution` that no scene, no map and no caller has ever set. And the four noise fields were seeded from four bare randi() calls, so \"the same cave twice\" was not something this artifact could do.",
+				"note": "bulge is GEOLOGY OR ARCHITECTURE, and it is the artifact's own word - the code already calls the generator bulge_noise and the parameter bulginess, which is the `fusion` pattern: the artifact's own truth made variable, in the artifact's own vocabulary. bulginess does two things in calculate_density_at_position: it warps the sample point by up to bulginess * 10 m of cellular noise, and it scales the primary noise read at the warped point, which then enters the density sum at 0.5 weight. pillowed = 1.5 SHIPPED. gridded = 0.0 is the artifact's own stated null - the term is multiplied by bulginess twice over, so at zero the warp vanishes exactly and what is left is simplex noise plus a vertical gradient plus a smoothstep boundary, the \"gridded-out rock\" the desire line says it is trying not to be. rounded = 0.75 is the half-step where the warp is legible AS a warp. engulfed = 2.5, deliberately not 3.0: at 0.5 weight the bulge term already swings about +/-1.25 against other terms of similar magnitude, and a higher value risks a wholly solid or wholly empty field - the empty one photographs as NO RENDER, which the critic reads as a dead axis rather than an overdriven one. resolution is HOW FINELY THE FIELD IS SAMPLED, the second half of the sequence's own gap, and it argues against this artifact's own emerges line, \"the cubes-and-cases substrate vanishes into the sensed roundness of the result\". At coarse it does not vanish. mid = 0.5 m SHIPPED (21x13x21 samples, 20x12x20 marched cells); coarse = 1.0 m (11x7x11 samples, 600 cells - half-metre plates you can read the lattice off); fine = 0.3 m (34x21x34 samples, ~21,800 cells). Three rungs and not four: 0.2 m is ~75,000 samples and ~525,000 FastNoiseLite calls inside _ready, a watchdog risk that buys no extra argument. Same field, same threshold, same noise - only the sampling moves, and the claim of roundness turns out to be a claim about a cell size. The WORD is shared, taken from riemann_pump (\"resolution is HOW FINE THE PARTITION IS ... the partition is this artifact's own subject\", rungs pump|coarse|mid|fine) and from sphere_mid (coarse|mid|fine|ultra), and declared here with the shipped state named `mid` so the three can be read against each other. When a shared vocabulary is honest the siblings measure ALIKE, which is itself the check.",
+				"rename": "THE ONE PLACE THE DESIGN COULD NOT BE FOLLOWED LITERALLY. The cell size shipped as `@export var resolution: float = 0.5`, so the shared word was already spent on the number, and an axis name has to be a settable property. riemann_pump and sphere_mid both keep the named rung on `resolution` and the magnitude on a second property (n_strips; rings and radial_segments), so matching them means the float moves to `cell_size` and `resolution` becomes the enum. VERIFIED BY READING that nothing sets the old property: QueerMarchingCave.tscn does not, noise_terrain_with_blobs_demo.tscn instances the scene with a bare `[node ... instance=ExtResource]` line and overrides nothing, no map passes any key to this token, and set_cave_parameters never handled it. get_cave_info() still reports the NUMBER under the key \"resolution\" - at the shipped defaults the same 0.5 - so its one external contract is unchanged, with the rung added alongside as \"resolution_rung\". _read_metadata_overrides also accepts a NUMERIC config_resolution and routes it to cell_size, so a token written against the old name lands somewhere instead of being dropped as an unknown rung.",
+				"declined": "REFUSED BY NAME as time-domain: color_shift_speed and pulse_intensity. They are the only thing _process does - animate_cave_colors writes emission_energy = 1.8 + sin(time * speed) * intensity and lerps the albedo on a second sinusoid - so they are a rate and an animation phase, and a still photographs one arbitrary moment of them. Two frames of the SAME value taken 1.5 s apart would differ, which is the metaballs clock trap. They are pinned by the fixture instead of promoted. Also refused: vertical_bias and cave_density, which are real and visible but are magnitudes on the same density sum that `bulge` already varies, so they would say one thing twice; and cave_size, which is extent, and extent self-cancels under a camera that fits the subject. primary_noise_scale / secondary_noise_scale were considered for the second axis and dropped in favour of resolution: they change the FIELD, whereas resolution changes what the extractor is allowed to see of it, which is the sequence's question.",
+				"fixture_why": "THE DESIGN BRIEF SAID THIS ARTIFACT WAS SEEDED. IT WAS NOT, AND THAT IS THE MOST LOAD-BEARING FINDING OF THE PASS. setup_noise_generators() called randi() four times, once per FastNoiseLite, from Godot's globally-seeded RNG, and regenerate_cave() did it four more. Every instantiation was a different cave, so an unfixed sweep would have photographed twelve unrelated objects and reported the difference between them as an axis - a confident bite number about nothing. cave_seed was added as a new int export where 0 means \"keep the shipped randi() calls exactly, in the same order, consuming the global stream identically\" (the metaball_seed pattern, and the only way to preserve behaviour that is itself random), and any other value derives the four seeds as seed, seed+1, seed+2, seed+3, assigned BEFORE the first get_noise_3d call. 20260811 pins them. The two zeros freeze animate_cave_colors so emission_energy is a constant 1.8 and the albedo lerp is a constant, which makes two frames of the same variant byte-comparable. Both are written as NUMBERS, never as the strings \"0.0\": a typed float export rejects a string assigned before _ready.",
+				"rebuild_guard": "apply_grid_config stamps every incoming key as config_* metadata, re-reads the overrides, then compares an eleven-field signature (both rungs, cave_seed, the two RESOLVED floats, cave_size, iso_level, cave_density, vertical_bias and the two noise scales) against the one taken before the stamp. Unchanged means return, because a rebuild here is a whole density field plus a whole marching pass plus a new ConcavePolygonShape3D. It also returns early when _built is false, which is the normal case - config lands before _ready, the values are stashed as metadata, and _ready reads them, so the artifact is built once and not twice. NOTHING IS FREED and no _owned array is needed: this script creates no child nodes at all, it writes into the scene's own $CaveMesh.mesh and $CaveCollision/CollisionShape.shape, so the _RotationTimer GridInteractablesComponent attaches to this root after spawn is never in reach. The rebuild also does NOT call setup_noise_generators(): at cave_seed 0 that would draw four fresh randi() values and silently re-roll the cave underneath a config key that only moved `bulge`. The seeds are re-applied only when the cave is pinned.",
+				"kin": "noise_terrain_with_blobs (randomness.json, 1 placement, TestMap_Unused_10) is NOT a second registry name on this scene - it is a WRAPPER that instances QueerMarchingCave.tscn as a child alongside a Camera3D, a fog Environment, a particle field and a 100 m atmospheric sphere. It is named here because it is the one other place this density function runs, and because its instance line overrides no property at all: it inherits every default including cave_seed=0, so it is untouched by this pass and would have been moved by anything that changed the defaults. It should not be declared on these axes - a sweep of it would photograph the sphere.",
+				"bench_note": "framing left at 1.0 for the first sweep. The scene root carries the script and CaveMesh is a real MeshInstance3D filling the cave_size box, so _subtree_aabb measures the subject truly and no layers=0 anchor is wanted. IGNORE this entry's stored measurements block (aabb_size 19.5 x 11.5 x 18.13, centre 4.75 / 2.75 / 4.06, measured 2026-04-29): world_position_from_grid maps every vertex into [-5,5] x [-3,3] x [-5,5], so the mesh cannot leave a 10 x 6 x 10 box centred on the origin and those numbers are about something else. capture_config_sweep measures each variant live and unions the boxes before placing the camera once, so the stale figure cannot reach the bench - but a tool that trusts the registry instead would frame this artifact wrong. TWO THINGS THE TILES WILL SHOW that are not the axis: the .tscn brings its own DirectionalLight3D and two OmniLight3D at +/-15 m, which stay lit alongside the bench key light, and its own Camera3D, which the sweep stands down. Both are constant across variants, so neither can fake a bite; they will make these tiles look unlike the rest of the gallery.",
+				"placements": 3
+			},
+			"lookup_name": "queer_marching_cave",
+			"category": "procedural",
+			"scene": "res://algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.tscn",
+			"class_name": "QueerMarchingCave",
+			"description": "Extended cave system \u2014 long procedural cave with queer spatial topology themes.",
+			"compute": "HEAVY \u2014 CPU extended cave generation",
+			"tags": [
+				"marching_cubes",
+				"cave",
+				"long",
+				"queer",
+				"cpu",
+				"working"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"sequence": "isosurfaces",
+			"parameters": {
+				"footprint": [
+					31,
+					21,
+					31
+				],
+				"size_group": "world_scale"
+			},
+			"name": "queer_marching_cave",
+			"complexity": "expert",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 380,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					18.16,
+					11.5,
+					18.19
+				],
+				"aabb_center": [
+					4.08,
+					2.75,
+					4.09
+				],
+				"grid_cells": [
+					19,
+					19
+				],
+				"max_dimension_m": 18.19,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				19,
+				1,
+				19
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.133583Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The cave that refuses a single threshold: iso-values shifted, blended, contested. If inside/outside is just a number's relation to a cutoff, then the cutoff is a politics \u2014 this room marches the same field under a different regime and gets another world."
+		},
+		"rhizome_cave_system": {
+			"lookup_name": "rhizome_cave_system",
+			"name": "Rhizomatic Cave System",
+			"description": "Advanced cave generation using rhizomatic growth patterns and marching cubes for organic underground networks",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"simulation"
+			],
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			}
+		},
+		"marching_cubes_static": {
+			"lookup_name": "marching_cubes_static",
+			"name": "Marching Cubes Static",
+			"description": "Static marching cubes demonstration",
+			"scene": "res://algorithms/marchingcubes/Scenes/Marching Cubes Static.tscn",
+			"category": "unknown",
+			"include_in_map_data": false,
+			"map_ready": false,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"3d",
+				"isosurfaces",
+				"math"
+			],
+			"tags": [
+				"isosurface"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"deprecated": true,
+			"registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub; the marching-cubes family is implemented under algorithms/."
+		},
+		"marching_squares": {
+			"category": "isosurfaces",
+			"complexity": "intermediate",
+			"description": "The isosurfaces seam. A smooth circle beside the same circle read on a coarse grid - a blocky disc (lego). The surface between the samples was never seen; detail finer than the spacing is gone.",
+			"dev_themes": [
+				"digital_bias",
+				"seam"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "marching_squares",
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces"
+			],
+			"name": "Marching Squares",
+			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for isosurfaces. Bias is conserved; show the seam.",
+			"scene": "res://algorithms/isosurfaces/marching_squares/marching_squares.tscn",
+			"sequence": "isosurfaces",
+			"tags": [
+				"marching_cubes",
+				"isosurface",
+				"grid",
+				"sampling",
+				"seam",
+				"digital_bias"
+			],
+			"measurements": {
+				"aabb_size": [
+					1.05,
+					0.66,
+					0.03
+				],
+				"aabb_center": [
+					0.05,
+					0.07,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.05,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		}
+	},
+	"sequence_mapping": {
+		"isosurfaces": [
+			"voxel_noise_demo",
+			"gyroid_demo",
+			"mc_sculpt_vr",
+			"mc_cave",
+			"mc_portal_landscape",
+			"mc_shapes_gallery",
+			"nakama_metaballs",
+			"metaball_world",
+			"raymarched_metaballs",
+			"fifteen_cases_demo"
+		]
+	}
 }

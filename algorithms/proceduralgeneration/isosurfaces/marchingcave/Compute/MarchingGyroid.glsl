@@ -134,6 +134,20 @@ layout(set = 0, binding = 1, std430) restrict buffer ParamsBuffer
 	float noiseOffsetX;
 	float noiseOffsetY;
 	float noiseOffsetZ;
+	// TRAILING FIELDS, appended for the `intrusion` and `period` DNA axes. Same pattern
+	// as MarchingCubesShapes.glsl's shapeId: TerrainGeneratorGyroid.get_params_array()
+	// calls super and appends these four floats after the base's eleven, so the shared
+	// eleven-field prefix every other Marching*.glsl reads is untouched.
+	//
+	// Each of the first three replaces a LITERAL that used to be written inline below,
+	// and the shipped rung (intrusion = melted) supplies exactly that literal. See
+	// TerrainGeneratorGyroid.INTRUSION_STRENGTHS.
+	float warpStrength;        // was 4.0, inline at the old line 181
+	float erosionStrength;     // was 0.5, inline at the old line 190
+	float thicknessStrength;   // was 1.0, inline at the old line 197
+	// Multiplies the gyroid term's coordinate ONLY — not baseScale, which also feeds the
+	// warp and the erosion, so scaling it would confound the two axes. Shipped value 1.0.
+	float periodScale;
 }
 params;
 
@@ -178,23 +192,28 @@ vec4 evaluate(vec3 coord)
 	);
 	
 	// Apply the warp strength (increase for more "melted" look)
-	p += warp * 4.0;
-	
+	// At intrusion = melted this uniform holds 4.0, the literal that was written here.
+	p += warp * params.warpStrength;
+
 	// 2. GYROID FORMULA
 	// sin(x)cos(y) + sin(y)cos(z) + sin(z)cos(x)
-	float gyroid = dot(sin(p), cos(p.yzx));
-	
+	// `period` scales the coordinate this one line reads. At pair the uniform is 1.0 and
+	// `p * 1.0` is bit-identical to `p`, so the shipped surface is the shipped surface.
+	vec3 gp = p * params.periodScale;
+	float gyroid = dot(sin(gp), cos(gp.yzx));
+
 	// 3. NOISE EROSION
 	// Add some high frequency texture/erosion to the surface
 	float textureNoise = snoise(p * 2.0);
-	gyroid += textureNoise * 0.5;
-	
+	gyroid += textureNoise * params.erosionStrength;
+
 	// 4. VARYING THICKNESS
-	// Modulate the primitive thickness over large distances
+	// Modulate the primitive thickness over large distances. Added to the density BEFORE
+	// the isoLevel comparison, which makes it a threshold that varies through space.
 	float thicknessMod = snoise(worldPos * 0.05); // Very large scale variation
-	
+
 	// Combine
-	float density = gyroid + thicknessMod * 1.0;
+	float density = gyroid + thicknessMod * params.thicknessStrength;
 	
 	return vec4(worldPos, density);
 }

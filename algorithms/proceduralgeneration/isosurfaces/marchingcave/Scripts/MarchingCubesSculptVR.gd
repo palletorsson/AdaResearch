@@ -2,6 +2,131 @@
 # VR Paintable Marching Cubes - Paint in 3D with your controllers!
 extends Node3D
 
+# --- DNA (stage 2, promoted 2026-08-12) -------------------------------------
+# WHAT THIS ARTIFACT ARGUES THAT NO OTHER ONE IN ISOSURFACES DOES. Every other
+# field in this sequence is GIVEN: gyroid_demo's is a formula, animated_noise's is
+# noise, fifteen_cases' is a lookup table, metaballs' is a fixed set of sources.
+# This one's field is DEPOSITED — a hand puts material in and the extractor finds
+# a boundary through whatever was put. So its axis is what the hand did.
+#
+# And the hand has only ever done one thing. TerrainGeneratorSculpt._ready (lines
+# 15-27) lays six blobs climbing +y, commented "wide base / torso / shoulder /
+# neck / top"; _create_terrain_generator below adds a seventh at the centre. That
+# is the whole vocabulary this tool has ever been photographed with, in 13 map
+# files, and it reads as a figure — which invites exactly the wrong conclusion,
+# that marching cubes produces figures. It does not. It produces the boundary of
+# whatever the field says, and the field says what the hand said.
+#
+# hand — WHAT THE HAND PUT INTO THE VOLUME. All four rungs use THE SAME SEVEN
+#   DEPOSITS: the same six radii, computed by the generator's own expressions
+#   (s = chunk_scale * 0.15, then 0.5/0.35/0.25/0.22/0.18/0.15 of it) plus the
+#   same centre deposit at radius 0.3. Nothing about the amount of material, the
+#   threshold or the sampling changes between them. Only the arrangement.
+#     stack  SHIPPED. The six climbing +y with the big centre deposit through
+#            them: one lump, taller than wide, reading as a standing form.
+#     sweep  the same seven dragged along one horizontal arc that rises and
+#            settles, heavy end at +x/-z tapering to -x/+z: one continuous
+#            gesture ~1.9 units long and ~1.2 thick, where stack is ~1.2 x 1.33
+#            and upright. The arc runs BROADSIDE to the sweep camera on purpose
+#            — an earlier version ran along +x, which is 35 degrees off the
+#            canonical view direction, and a gesture pointing at the lens is a
+#            lump. Measured as silhouettes, that one cost half the axis: 4.4% of
+#            frame against stack, where this one is 9.8%.
+#     dab    the same seven pushed to seven of the volume's eight corners, spaced
+#            so that no two of their extracted surfaces touch. SEVEN separate
+#            closed surfaces where every other rung gives one. This is the honest
+#            picture of what a deposit IS before anything fuses it, and it is the
+#            rung that makes the point: the extractor did not build a body, it
+#            found the boundary of what was there.
+#     heap   the same seven piled low around the floor of the volume — a mound
+#            with the top half of the box empty.
+#
+# WHY THE dab NUMBERS ARE WHAT THEY ARE, and they are not free. iso_level is 0.3
+# and the SDF is a plain sphere distance, so every deposit renders at radius
+# r + 0.3 — the smallest of the seven is a 0.345 ball, the largest a 0.6 ball,
+# inside a box of half-extent 1.0. Two surfaces separated by a gap g are bridged
+# by opSmoothUnion(k = scale * 0.06 = 0.12) when g <= k/2 = 0.06. The dab
+# positions are each pushed to 0.96 - (r + 0.3) per axis (as close to the wall as
+# the deposit can sit without being clipped by the sampled domain), which leaves a
+# minimum surface gap of 0.073 between the big deposit and its nearest neighbour
+# and >= 0.21 for every other pair. So dab genuinely separates, with about 20%
+# margin on the tightest pair. These numbers are tuned against the shipped
+# volume_size = 2.0 and iso_level = 0.3; they scale with chunk_scale and they do
+# NOT survive a change of iso_level.
+#
+# WHAT IS DECLINED. paint_rate (line 9) is seconds between strokes — a rate, and
+#   one that only ticks while a trigger is held, so it is invisible to a still.
+#   brush_radius / _min / _max only rescale the deposit and self-cancel under an
+#   AABB-fitted camera. iso_level (hardcoded 0.3 at _create_terrain_generator) is
+#   the sequence's central question and WOULD bite hard, but on a union of blended
+#   spheres it moves precisely what raymarched_metaballs / metaballs /
+#   implicit_surface_modeling already own as `fusion` (53.15%) — how much the
+#   field merges — and re-arguing a claim the sequence has already made is worse
+#   than leaving a knob plain.
+#
+# FLAGGED, NOT PROPOSED. erase_mode is BROKEN, not merely unpromotable: line ~382
+#   negates the radius to erase and the very next call passes abs() of it, so the
+#   sign is discarded and erase ADDS material. volume_resolution (line 18) is
+#   declared and read by nothing — the sampling is TerrainGeneratorBase's
+#   num_voxels_per_axis, a const 64.
+#
+# DETERMINISM. The audit's 14 random calls are real and every one of them is in an
+# interactive path (_input's KEY_R and the mouse handler, _regenerate_sculpture's
+# three randf_range pairs). None runs during a capture, the build path contains no
+# randf at all, and the four rungs are literal position tables — so this artifact
+# needs NO seed export and none was added. Adding one would imply a randomness the
+# axis does not use.
+const HANDS: PackedStringArray = ["stack", "sweep", "dab", "heap"]
+
+## Radii of the six seeded deposits, as fractions of s = chunk_scale * 0.15 —
+## the same six numbers, in the same order, that TerrainGeneratorSculpt._ready
+## uses. Every rung lays these; only the positions differ.
+const DEPOSIT_FRACTIONS := [0.5, 0.35, 0.25, 0.22, 0.18, 0.15]
+
+## The seventh deposit's radius, the literal this file has always passed.
+const CENTRE_DEPOSIT_RADIUS: float = 0.3
+
+## Positions for the three non-shipped gestures, in units of the volume's HALF
+## extent (so [-1, 1] is exactly the domain the compute shader samples, and the
+## layout scales with chunk_scale the way the seeded one does). Index 0-5 are the
+## six seeded deposits in descending radius; index 6 is the centre deposit.
+##
+## `stack` is deliberately absent: it is not a table but a short-circuit, and its
+## numbers are read back out of the generator's own seeding (see _stack_deposits)
+## rather than retyped here, so the two cannot drift apart.
+const HAND_LAYOUTS := {
+	"sweep": [
+		Vector3(-0.016, 0.150, 0.012),
+		Vector3(-0.212, 0.156, 0.151),
+		Vector3(-0.367, 0.122, 0.261),
+		Vector3(-0.489, 0.072, 0.349),
+		Vector3(-0.562, 0.031, 0.401),
+		Vector3(-0.611, 0.000, 0.436),
+		Vector3(0.342, 0.000, -0.244),
+	],
+	"dab": [
+		Vector3(0.510, 0.510, 0.510),
+		Vector3(0.555, 0.555, -0.555),
+		Vector3(0.585, -0.585, 0.585),
+		Vector3(-0.594, 0.594, 0.594),
+		Vector3(-0.606, -0.606, 0.606),
+		Vector3(-0.615, 0.615, -0.615),
+		Vector3(-0.360, -0.360, -0.360),
+	],
+	"heap": [
+		Vector3(-0.40, -0.50, 0.10),
+		Vector3(0.38, -0.52, -0.16),
+		Vector3(0.10, -0.55, 0.40),
+		Vector3(-0.18, -0.56, -0.38),
+		Vector3(0.26, -0.58, 0.30),
+		Vector3(-0.30, -0.60, 0.26),
+		Vector3(0.00, -0.36, 0.00),
+	],
+}
+
+@export_category("Deposit")
+@export_enum("stack", "sweep", "dab", "heap") var hand: String = "stack"
+
 @export_category("Sculpting")
 @export var brush_radius: float = 0.15
 @export var brush_radius_min: float = 0.05
@@ -46,8 +171,20 @@ var _btn_brush_down: Node3D
 var is_initialized: bool = false
 var blobs_painted: int = 0
 
+## The six deposits TerrainGeneratorSculpt._ready seeded, snapshotted verbatim the
+## instant the generator entered the tree. This is where `hand = stack` comes from
+## on a rebuild — the numbers are read back out of the generator's own code, never
+## retyped here.
+var _stack_deposits: Array[Vector4] = []
+
 func _ready() -> void:
 	print("MarchingCubesSculptVR: Initializing VR sculpting...")
+	# BEFORE the build. GridInteractablesComponent stamps config_* metadata on the
+	# artifact and only THEN adds it to the tree (_apply_artifact_config at line
+	# 1195, add_child at line 1220), so a placement's `hand` is already on the node
+	# here and the first build is the right one. The deferred apply_grid_config that
+	# follows then finds an unchanged signature and returns without rebuilding.
+	_read_metadata_overrides()
 	_create_terrain_generator()
 	_create_brush_indicator()
 	_create_volume_bounds()
@@ -93,15 +230,105 @@ func _create_terrain_generator() -> void:
 		material.cull_mode = BaseMaterial3D.CULL_DISABLED
 		terrain_generator.material_override = material
 
+	# add_child runs TerrainGeneratorSculpt._ready SYNCHRONOUSLY: it seeds its six
+	# deposits and TerrainGeneratorBase._ready dispatches, syncs and builds the mesh
+	# before this line returns.
 	add_child(terrain_generator)
 
-	# Add initial blob so there's something to see
-	await get_tree().process_frame
-	await get_tree().process_frame
+	# Snapshot the seeded gesture before anything is added to or cleared from it.
+	_snapshot_seeded_gesture()
+
+	# THE SEVENTH DEPOSIT, AND WHY IT NO LONGER WAITS TWO FRAMES. This used to be
+	# `await process_frame` twice and then add_blob — which meant the mesh at frame
+	# 0 was the six-blob figure and the seven-blob one only appeared once the
+	# generator's async pipeline had come round again: 12 frames to the GPU sync
+	# plus 90 to the mesh thread, ~1.7 s at 60 fps. capture_config_sweep settles for
+	# 1.1 s, so the bench was photographing a half-built artifact, and a player
+	# walking in saw the object change under them. The deposits are laid
+	# synchronously now and the field is re-extracted once, in the same three calls
+	# TerrainGeneratorBase._ready makes. The blob array ends up byte for byte what
+	# it was — same values, same order — so the steady-state mesh is unchanged; only
+	# the moment it exists moves, from ~frame 102 to frame 0.
 	if terrain_generator.has_method("add_blob"):
-		# Add a starting sphere in the center
-		terrain_generator.add_blob(Vector3(0, 0, 0), 0.3)
+		if hand == "stack":
+			# SHORT-CIRCUIT. The generator's own six are already in the buffer,
+			# untouched and in order, and this is the same single call with the same
+			# literal radius the file has always made.
+			terrain_generator.add_blob(Vector3(0, 0, 0), CENTRE_DEPOSIT_RADIUS)
+		else:
+			terrain_generator.clear_blobs()
+			_lay_deposits()
+		# Counted exactly as shipped: ONE. The seeded gesture has never been counted
+		# as painted and is not counted in any rung either, so the status label reads
+		# the same on all four tiles and the difference between them is the surface.
 		blobs_painted += 1
+		_reextract_field()
+
+## Read the generator's own seeding back out of it, once, before anything touches
+## the buffer. `stack` is defined as "whatever TerrainGeneratorSculpt._ready laid",
+## not as a table in this file, so the shipped gesture cannot drift away from the
+## rung that claims to be it.
+func _snapshot_seeded_gesture() -> void:
+	_stack_deposits.clear()
+	if terrain_generator == null:
+		return
+	var seeded = terrain_generator.get("blobs_array")
+	if seeded is Array:
+		for b in seeded:
+			if typeof(b) == TYPE_VECTOR4:
+				_stack_deposits.append(b)
+
+
+## Lay the seven deposits of the current `hand` into an EMPTY field. Same seven
+## radii in every rung — the six from the generator's own expressions and the
+## centre deposit's literal 0.3 — so only the arrangement is under the axis.
+func _lay_deposits() -> void:
+	if terrain_generator == null or not terrain_generator.has_method("add_blob"):
+		return
+	if hand == "stack":
+		for b in _stack_deposits:
+			terrain_generator.add_blob(Vector3(b.x, b.y, b.z), b.w)
+		terrain_generator.add_blob(Vector3(0, 0, 0), CENTRE_DEPOSIT_RADIUS)
+		return
+	var table: Array = HAND_LAYOUTS.get(hand, HAND_LAYOUTS["sweep"])
+	var half: float = float(terrain_generator.chunk_scale) * 0.5
+	var s: float = float(terrain_generator.chunk_scale) * 0.15
+	var origin: Vector3 = terrain_generator.center_position
+	for i in range(DEPOSIT_FRACTIONS.size()):
+		var p: Vector3 = table[i]
+		terrain_generator.add_blob(origin + p * half, s * float(DEPOSIT_FRACTIONS[i]))
+	var centre: Vector3 = table[DEPOSIT_FRACTIONS.size()]
+	terrain_generator.add_blob(origin + centre * half, CENTRE_DEPOSIT_RADIUS)
+
+
+## Re-extract the isosurface NOW — the same dispatch / sync / build triple
+## TerrainGeneratorBase._ready() runs, so the mesh is complete before this frame
+## is drawn instead of ~102 frames later.
+##
+## Guarded on the compute resources rather than trusted: init_compute() can fail
+## (no rendering device, missing SPIRV) and its return value is not visible from
+## here, and the sculpt subclass's run_compute() writes to blob_buffer without
+## checking it. A half-initialised generator falls back to its own mesh and this
+## returns without touching the device.
+func _reextract_field() -> void:
+	if terrain_generator == null:
+		return
+	if terrain_generator.get("rendering_device") == null:
+		return
+	var pipe_v = terrain_generator.get("pipeline")
+	var blob_v = terrain_generator.get("blob_buffer")
+	if typeof(pipe_v) != TYPE_RID or typeof(blob_v) != TYPE_RID:
+		return
+	var pipe_rid: RID = pipe_v
+	var blob_rid: RID = blob_v
+	if not pipe_rid.is_valid() or not blob_rid.is_valid():
+		return
+	if not terrain_generator.has_method("run_compute"):
+		return
+	terrain_generator.run_compute()
+	terrain_generator.fetch_and_process_compute_data()
+	terrain_generator.create_mesh()
+
 
 func _create_brush_indicator() -> void:
 	brush_indicator = MeshInstance3D.new()
@@ -459,5 +686,47 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## THE REBUILD GUARD. This was a bare `pass`, so no map could reach anything in
+## this artifact. It now reads exactly one key, `hand`, and it returns early on an
+## unchanged signature — which is the path all 13 existing placements take, since
+## GridInteractablesComponent only calls this at all when a token carries config
+## and not one of them does.
+##
+## Nothing is freed here. The rebuild replaces the CONTENTS of the generator's blob
+## buffer and re-extracts; no node this script created is touched, and in
+## particular the _RotationTimer that GridInteractablesComponent parents to this
+## root after spawn survives untouched.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var before: String = _config_signature()
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	_read_metadata_overrides()
+	if not is_initialized:
+		# _ready has not run yet; it reads the metadata itself before building.
+		return
+	if _config_signature() == before:
+		return
+	_rebuild_deposits()
+
+
+func _config_signature() -> String:
+	return "%s|%.4f" % [hand, volume_size]
+
+
+func _read_metadata_overrides() -> void:
+	if has_meta("config_hand"):
+		var h: String = str(get_meta("config_hand")).strip_edges().to_lower()
+		if HANDS.has(h):
+			hand = h
+
+
+## Re-lay the field for a hand that arrived after the build. Only reachable when a
+## placement names a `hand` this artifact was not built with.
+func _rebuild_deposits() -> void:
+	if terrain_generator == null or not terrain_generator.has_method("clear_blobs"):
+		return
+	terrain_generator.clear_blobs()
+	_lay_deposits()
+	blobs_painted = 1
+	_reextract_field()
+	_update_status_label()

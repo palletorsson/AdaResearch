@@ -53,9 +53,19 @@ This interactive demo visualizes the **15 fundamental surface cases** that can o
 - **Zoom Range** - 8 to 30 units distance
 
 ### Visualization Controls
-- **W** - Toggle wireframe cubes on/off
-- **L** - Toggle text labels on/off
-- **A** - Toggle threshold animation (shows surface changes)
+- **W** - Cycle `workings`: how much of the operation is drawn
+  - `expression` (shipped) - sheets + cages + corner samples + config labels
+  - `outcome` - the fifteen sheets alone
+  - `operands` - cages + corner samples, no sheet (the field before the decision)
+  - `trace` - `expression` plus a marker on every edge whose ends disagree, at the
+    interpolated crossing
+- **M** - Cycle `margin`: how far the corner samples sit from the threshold, with the
+  classification held fixed. `even` (shipped, 0.30/0.70) puts every crossing on the
+  edge midpoint; `starved` / `swollen` / `brimming` slide the pair while keeping its
+  span at 0.4, so the fifteen cases stay the same fifteen cases and only the sheets move.
+- **L** - Show/hide the text labels this rung built
+- **A** - Toggle threshold animation (an emission ramp, not a threshold; see the DNA
+  block in `FifteenCasesController.gd` for why it is not an axis)
 - **R** - Regenerate all surfaces (refresh demo)
 
 ### Visual Elements

@@ -359,8 +359,34 @@ def main() -> int:
             # scored: a twin is a design fault for a human to judge, not a verdict.
             # A twin must be dim in BOTH luminance and colour. Anything the eye can
             # see is not a twin, whatever the greyscale says.
+            # A VALUE PAIR THAT IS DEAD IN ONE CONTEXT AND ALIVE IN ANOTHER IS NOT A TWIN.
+            #
+            # The first conditional check only ran on axes the mean had already called
+            # WEAK or INERT, which missed the case entirely on a BITING axis - and that is
+            # where it does the most damage, because the pairs then surface in the TWINS
+            # list instead, accusing the artifact of a false declaration.
+            #
+            # isosurfaces caught two at once, both structural. fifteen_cases_demo.margin
+            # reads 0.00% across all six of its pairs at workings=operands, because at
+            # that rung nothing margin touches is drawn - a reviewer predicted exactly
+            # that set, at exactly 0.00%, before the sweep ran. raymarched_metaballs.fusion
+            # reads 0.00% across all six at metaball_count=1, because one ball has nothing
+            # to fuse with. Neither axis is falsely declared: both bite at 37.97% and
+            # 53.15%. The pairs are conditional on the crossed axis, which is the same
+            # shape csg_union_demo.join taught - and, in the metaballs case, the same WORD.
+            conditional_pairs: set = set()
+            _by_vals: dict[tuple, list[tuple]] = defaultdict(list)
+            for p in pair_focus:
+                _by_vals[tuple(sorted((p[1], p[2])))].append((p[0], p[4]))
+            for _vals, _obs in _by_vals.items():
+                if len(_obs) < 2:
+                    continue
+                if min(o[0] for o in _obs) < INERT_FOCUS and max(o[0] for o in _obs) >= WEAK_FOCUS:
+                    conditional_pairs.add(_vals)
+
             twins = sorted((p for p in pair_focus
-                            if p[0] < TWIN_FOCUS and p[3] < TWIN_FOCUS),
+                            if p[0] < TWIN_FOCUS and p[3] < TWIN_FOCUS
+                            and tuple(sorted((p[1], p[2]))) not in conditional_pairs),
                            key=lambda p: p[0])
             colour_only = sorted((p for p in pair_focus
                                   if p[0] < TWIN_FOCUS and p[3] >= TWIN_FOCUS),
@@ -415,25 +441,27 @@ def main() -> int:
             # not the solids touch, which drags that context's mean to 5.5% and hides
             # three structural zeroes inside it. The signal is that the SAME TWO VALUES
             # are identical in one context and plainly different in another.
+            # Computed for EVERY axis, not just the ones the mean already doubted - see
+            # the note above the twin filter. The VERDICT is only overridden when the mean
+            # actually misleads it (WEAK / INERT / local); on an axis that bites, the
+            # conditionality is recorded and reported but the axis still bites, because it
+            # does.
             conditional = None
-            if verdict in ("WEAK", "INERT", "local") and pair_focus:
-                by_vals: dict[tuple, list[tuple]] = defaultdict(list)
-                for p in pair_focus:
-                    by_vals[tuple(sorted((p[1], p[2])))].append((p[0], p[4]))
+            if pair_focus:
                 swings = []
-                for vals, obs in by_vals.items():
-                    if len(obs) < 2:
+                for vals, obs in _by_vals.items():
+                    if vals not in conditional_pairs:
                         continue
                     lo = min(obs, key=lambda o: o[0])
                     hi = max(obs, key=lambda o: o[0])
-                    if lo[0] < INERT_FOCUS and hi[0] >= WEAK_FOCUS:
-                        swings.append({"values": list(vals),
-                                       "dead": round(lo[0], 5), "dead_when": dict(lo[1]),
-                                       "alive": round(hi[0], 5), "alive_when": dict(hi[1])})
+                    swings.append({"values": list(vals),
+                                   "dead": round(lo[0], 5), "dead_when": dict(lo[1]),
+                                   "alive": round(hi[0], 5), "alive_when": dict(hi[1])})
                 if swings:
                     conditional = {"was": verdict,
                                    "swings": sorted(swings, key=lambda s: -s["alive"])}
-                    verdict = "CONDITIONAL"
+                    if verdict in ("WEAK", "INERT", "local"):
+                        verdict = "CONDITIONAL"
             pc = partial.get(f"{prop}.{axis}")
             flag = ""
             if pc:

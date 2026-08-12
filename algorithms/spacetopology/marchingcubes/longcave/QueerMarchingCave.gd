@@ -11,14 +11,129 @@ class_name QueerMarchingCave
 # relationships: queer variant of the standard marching cubes cave — same algorithm but parameter-tuned for an aesthetic that resists the usual procedural-rock look; sibling to mc_inside_cave, marchingcubes_cave
 # truth: the difference between geology and architecture is just parameter choice — the same algorithm builds rocks or rooms depending on which noise weights you pick
 
+# --- DNA (stage 2, promoted 2026-08-12) -------------------------------------
+# The sequence's truth line is "define a field, extract a surface". This artifact
+# had until now argued only the first half, and argued it at exactly one setting.
+#
+# bulge — GEOLOGY OR ARCHITECTURE. The @identity above picks this parameter for
+#   me: "bulginess — at 0 the cave reads as procedural noise, at high values
+#   walls swell into pillowy curves; this is the parameter that turns mathematics
+#   into atmosphere", and the truth line says "the difference between geology and
+#   architecture is just parameter choice". That claim shipped at one value, 1.5,
+#   which is the same fault `fusion` was promoted to fix on the metaballs next
+#   door. bulginess does two things in calculate_density_at_position: it warps the
+#   sample point by up to bulginess * 10 m of cellular noise, and it scales the
+#   primary noise read at the warped point, which then enters the density sum at
+#   0.5 weight.
+#     pillowed   SHIPPED, 1.5, and a SHORT-CIRCUIT — returns the `bulginess`
+#                export untouched, so a placement that names the number directly
+#                still wins over the named rung.
+#     gridded    0.0. The artifact's own stated null: the whole warp term is
+#                exactly zero (it is multiplied by bulginess twice over), and what
+#                is left is simplex noise plus a vertical gradient plus a
+#                smoothstep boundary — the "gridded-out rock" the desire line says
+#                it is trying not to be.
+#     rounded    0.75, the half-step, where the warp is legible as a warp.
+#     engulfed   2.5, deliberately NOT 3.0. At 0.5 weight the bulge term already
+#                swings about +/-1.25 against other terms of similar magnitude; a
+#                higher value risks a wholly solid or wholly empty field, and the
+#                empty one photographs as NO RENDER, which the critic would read
+#                as a dead axis rather than as an overdriven one.
+#
+# resolution — HOW FINELY THE FIELD IS SAMPLED, the second half of the sequence's
+#   own gap, and an argument against this artifact's own emerges line: "the
+#   cubes-and-cases substrate vanishes into the sensed roundness of the result".
+#   At `coarse` it does not vanish. Same field, same threshold, same noise; only
+#   the sampling moves, and the claim of roundness turns out to be a claim about a
+#   cell size.
+#     mid        SHIPPED, 0.5 m, a SHORT-CIRCUIT returning `cell_size` untouched.
+#                21 x 13 x 21 density samples, 20 x 12 x 20 marched cells.
+#     coarse     1.0 m. 11 x 7 x 11 samples, 600 cells — half-metre plates you can
+#                read the lattice off.
+#     fine       0.3 m. 34 x 21 x 34 samples, ~21,800 cells. Three rungs and not
+#                four: 0.2 m is ~75,000 samples and ~525,000 FastNoiseLite calls
+#                inside _ready, a watchdog risk that buys no extra argument.
+#   The word is SHARED, taken from riemann_pump ("resolution is HOW FINE THE
+#   PARTITION IS ... the partition is this artifact's own subject", rungs
+#   pump|coarse|mid|fine) and from sphere_mid (coarse|mid|fine|ultra). Declared
+#   with the shipped state named `mid` so the three can be read against each
+#   other. When a shared vocabulary is honest the siblings measure alike.
+#
+# THE EXPORT RENAME, and why it was unavoidable. The cell size shipped as an
+#   export literally NAMED resolution, typed float, defaulting to 0.5 — so the
+#   shared WORD was already spent on the number, and an axis name has to be a
+#   settable property. (Written out in prose rather than quoted as a line of code
+#   on purpose: check_dna_declarations scans the whole file with a regex and no
+#   comment awareness, so pasting the old declaration here made it read
+#   `resolution` as a numeric axis and file a MISMATCH against three rung names —
+#   the gate reporting a fact about a COMMENT as a verdict about the registry,
+#   which is the exact disease that tool exists to cure.)
+#   riemann_pump and sphere_mid both keep the named rung on
+#   `resolution` and the magnitude on a second property (n_strips; rings and
+#   radial_segments). Matching them means the float moves to `cell_size` and
+#   `resolution` becomes the enum. Nothing in the repository sets the old
+#   property: QueerMarchingCave.tscn does not, noise_terrain_with_blobs_demo.tscn
+#   instances the scene without overriding it, no map passes it, and
+#   set_cave_parameters never touched it. get_cave_info() still reports the number
+#   under the key "resolution", so its one external contract is unchanged.
+#
+# cave_seed — NOT AN AXIS, A PRECONDITION. setup_noise_generators called randi()
+#   four times from the globally-seeded RNG, and regenerate_cave four more, so
+#   every instantiation was a DIFFERENT CAVE. An unfixed sweep would have
+#   photographed four unrelated objects and reported the difference as an axis.
+#   0 keeps the shipped randi() calls exactly, in the same order, consuming the
+#   global stream identically — the only way to preserve behaviour that is itself
+#   random. Non-zero derives the four seeds as seed, seed+1, seed+2, seed+3,
+#   assigned before the first get_noise_3d. dna.fixture pins it.
+#
+# DECLINED, by name. color_shift_speed and pulse_intensity are refused as
+#   time-domain: they are the only thing _process does — an emission_energy
+#   sinusoid and an albedo lerp on a second sinusoid — so a still photographs one
+#   arbitrary phase of them and two frames of the SAME value taken 1.5 s apart
+#   would differ. The fixture zeroes them instead, which freezes emission_energy
+#   at a constant 1.8 and the albedo at a constant mix. vertical_bias and
+#   cave_density are real and visible but are magnitudes on the same density sum
+#   that `bulge` already varies, so they would say one thing twice. cave_size is
+#   extent, and extent self-cancels under a camera that fits the subject.
+#   primary_noise_scale / secondary_noise_scale were considered for the second
+#   axis and dropped: they change the FIELD, whereas resolution changes what the
+#   extractor is allowed to see of it, which is the sequence's question.
+const BULGES: PackedStringArray = ["pillowed", "gridded", "rounded", "engulfed"]
+const RESOLUTIONS: PackedStringArray = ["mid", "coarse", "fine"]
+## Bulginess per rung. `pillowed` is absent on purpose — it short-circuits to the
+## exported `bulginess` rather than being recomputed onto the same number.
+const BULGE_AMOUNT: Dictionary = {
+	"gridded": 0.0,
+	"rounded": 0.75,
+	"engulfed": 2.5,
+}
+## Cell size in metres per rung. `mid` is absent for the same reason.
+const CELL_SIZE_BY_RUNG: Dictionary = {
+	"coarse": 1.0,
+	"fine": 0.3,
+}
+
+@export_enum("pillowed", "gridded", "rounded", "engulfed") var bulge: String = "pillowed"
+@export_enum("mid", "coarse", "fine") var resolution: String = "mid"
+
 # Marching cubes parameters
 @export var cave_size: Vector3 = Vector3(10, 6, 10)  # Meters (VR scale)
-@export var resolution: float = 0.5  # Cell size in meters
+## Cell size in metres. Was named `resolution` until the rename above; a
+## placement that names this directly still WINS over the `mid` rung, which is
+## why `mid` returns it untouched instead of looking 0.5 up in a table.
+@export var cell_size: float = 0.5
 @export var iso_level: float = 0.0
+
+## 0 = the shipped behaviour, four randi() calls, a different cave every launch.
+## Any other value pins all four noise fields. See the DNA note above.
+@export var cave_seed: int = 0
 
 # Noise parameters for queer bulgy aesthetics
 @export var primary_noise_scale: float = 0.15
 @export var secondary_noise_scale: float = 0.4
+## The shipped bulge. A placement that names this directly still WINS over
+## `bulge` — the named rung is a vocabulary laid over the raw number, never a
+## replacement for it.
 @export var bulginess: float = 1.5
 @export var cave_density: float = 0.3
 @export var vertical_bias: float = 0.2
@@ -43,6 +158,17 @@ var colors: PackedColorArray
 # Cave mesh and collision
 var cave_mesh: ArrayMesh
 var time: float = 0.0
+
+## Resolved once per build and then read as plain members by the inner loops, so
+## the marching pass costs exactly what it always did — no dictionary lookup per
+## voxel, no function call per vertex.
+var _cs: float = 0.5
+var _bulge_amt: float = 1.5
+var _built: bool = false
+## Set when something names the raw number rather than the rung. The number then
+## wins, which is what the doc comments on `bulginess` and `cell_size` promise.
+var _bulginess_explicit: bool = false
+var _cell_size_explicit: bool = false
 
 # Marching cubes edge table (256 entries)
 var edge_table: PackedInt32Array = [
@@ -84,40 +210,78 @@ var edge_table: PackedInt32Array = [
 var triangle_table: Array = []
 
 func _ready() -> void:
+	_read_metadata_overrides()
 	setup_noise_generators()
 	setup_triangle_table()
 	generate_cave()
+	_built = true
 
 func _process(delta: float) -> void:
 	time += delta
 	animate_cave_colors(delta)
 
+
+# ── The two axes, resolved ────────────────────────────────────────────────────
+
+## `pillowed` and any unknown string return the exported number UNTOUCHED rather
+## than looking 1.5 up in a table. At the shipped export the two are the same
+## float, but a placement that set bulginess alone would have it silently
+## overwritten by the table path, and the guarantee should not depend on nobody
+## doing that. (The same argument csg_difference_demo's `corner` makes.)
+func _bulge_amount() -> float:
+	if _bulginess_explicit or bulge == "pillowed" or not BULGES.has(bulge):
+		return bulginess
+	return float(BULGE_AMOUNT.get(bulge, bulginess))
+
+
+## `mid` and any unknown string return `cell_size` untouched, for the same reason.
+func _resolved_cell_size() -> float:
+	if _cell_size_explicit or resolution == "mid" or not RESOLUTIONS.has(resolution):
+		return cell_size
+	return float(CELL_SIZE_BY_RUNG.get(resolution, cell_size))
+
+
+## 0 means "leave the shipped randomness alone", so the four randi() calls happen
+## in the same order and consume the global stream exactly as they always did.
+func _noise_seed(offset: int) -> int:
+	if cave_seed == 0:
+		return randi()
+	return cave_seed + offset
+
+
 func setup_noise_generators() -> void:
 	# Primary cave structure noise
 	primary_noise = FastNoiseLite.new()
-	primary_noise.seed = randi()
+	primary_noise.seed = _noise_seed(0)
 	primary_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	primary_noise.frequency = primary_noise_scale
 	primary_noise.fractal_octaves = 4
 	primary_noise.fractal_gain = 0.5
-	
+
 	# Secondary detail noise
 	secondary_noise = FastNoiseLite.new()
-	secondary_noise.seed = randi()
+	secondary_noise.seed = _noise_seed(1)
 	secondary_noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	secondary_noise.frequency = secondary_noise_scale
+	# KNOWN BUG, LEFT ALONE ON PURPOSE (found 2026-08-12 while reading for the DNA
+	# promotion). This line says `primary_noise`, not `secondary_noise` — a
+	# copy-paste that silently overwrites primary's 4 octaves, set eight lines
+	# above, and leaves secondary_noise on FastNoiseLite's default octave count.
+	# Repairing it changes the density field of every existing placement, which is
+	# exactly what a promotion must not do, so it is reported and left for its own
+	# decision rather than folded in here.
 	primary_noise.fractal_octaves = 3
-	
+
 	# Bulge/distortion noise for queer aesthetics
 	bulge_noise = FastNoiseLite.new()
-	bulge_noise.seed = randi()
+	bulge_noise.seed = _noise_seed(2)
 	bulge_noise.noise_type = FastNoiseLite.TYPE_CELLULAR
 	bulge_noise.frequency = 0.01
 	bulge_noise.cellular_return_type = FastNoiseLite.RETURN_CELL_VALUE
-	
+
 	# Cave carving noise
 	cave_noise = FastNoiseLite.new()
-	cave_noise.seed = randi()
+	cave_noise.seed = _noise_seed(3)
 	cave_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	cave_noise.frequency = 0.015
 
@@ -163,7 +327,13 @@ func setup_triangle_table() -> void:
 
 func generate_cave() -> void:
 	print("Generating queer bulgy cave landscape...")
-	
+
+	# Resolve the two axes ONCE, here, so every loop below reads a plain float and
+	# the density field, the marching pass and the vertex colours cannot disagree
+	# about which cell size they are working in.
+	_cs = _resolved_cell_size()
+	_bulge_amt = _bulge_amount()
+
 	clear_previous_data()
 	generate_density_field()
 	generate_mesh_marching_cubes()
@@ -180,19 +350,19 @@ func clear_previous_data() -> void:
 
 func generate_density_field() -> void:
 	# Create 3D density field for marching cubes
-	var grid_x = int(cave_size.x / resolution) + 1
-	var grid_y = int(cave_size.y / resolution) + 1
-	var grid_z = int(cave_size.z / resolution) + 1
-	
+	var grid_x = int(cave_size.x / _cs) + 1
+	var grid_y = int(cave_size.y / _cs) + 1
+	var grid_z = int(cave_size.z / _cs) + 1
+
 	density_field.resize(grid_x * grid_y * grid_z)
-	
+
 	for x in range(grid_x):
 		for y in range(grid_y):
 			for z in range(grid_z):
 				var world_pos = Vector3(
-					x * resolution - cave_size.x * 0.5,
-					y * resolution - cave_size.y * 0.5,
-					z * resolution - cave_size.z * 0.5
+					x * _cs - cave_size.x * 0.5,
+					y * _cs - cave_size.y * 0.5,
+					z * _cs - cave_size.z * 0.5
 				)
 				
 				var density = calculate_density_at_position(world_pos)
@@ -209,10 +379,10 @@ func calculate_density_at_position(pos: Vector3) -> float:
 	var secondary_val = secondary_noise.get_noise_3d(pos.x, pos.y, pos.z) * 0.3
 	
 	# Bulge distortion for queer aesthetics
-	var bulge_x = pos.x + bulge_noise.get_noise_3d(pos.x * 0.1, pos.y * 0.1, pos.z * 0.1) * bulginess * 10.0
-	var bulge_y = pos.y + bulge_noise.get_noise_3d(pos.x * 0.12, pos.y * 0.12, pos.z * 0.12) * bulginess * 8.0
-	var bulge_z = pos.z + bulge_noise.get_noise_3d(pos.x * 0.11, pos.y * 0.11, pos.z * 0.11) * bulginess * 10.0
-	var bulge_val = primary_noise.get_noise_3d(bulge_x, bulge_y, bulge_z) * bulginess
+	var bulge_x = pos.x + bulge_noise.get_noise_3d(pos.x * 0.1, pos.y * 0.1, pos.z * 0.1) * _bulge_amt * 10.0
+	var bulge_y = pos.y + bulge_noise.get_noise_3d(pos.x * 0.12, pos.y * 0.12, pos.z * 0.12) * _bulge_amt * 8.0
+	var bulge_z = pos.z + bulge_noise.get_noise_3d(pos.x * 0.11, pos.y * 0.11, pos.z * 0.11) * _bulge_amt * 10.0
+	var bulge_val = primary_noise.get_noise_3d(bulge_x, bulge_y, bulge_z) * _bulge_amt
 	
 	# Cave carving
 	var cave_val = cave_noise.get_noise_3d(pos.x, pos.y, pos.z)
@@ -232,9 +402,9 @@ func calculate_density_at_position(pos: Vector3) -> float:
 	return final_density
 
 func generate_mesh_marching_cubes() -> void:
-	var grid_x = int(cave_size.x / resolution)
-	var grid_y = int(cave_size.y / resolution)
-	var grid_z = int(cave_size.z / resolution)
+	var grid_x = int(cave_size.x / _cs)
+	var grid_y = int(cave_size.y / _cs)
+	var grid_z = int(cave_size.z / _cs)
 	
 	for x in range(grid_x):
 		for y in range(grid_y):
@@ -333,9 +503,9 @@ func interpolate_edge(positions: Array, densities: Array, edge_index: int) -> Ve
 
 func world_position_from_grid(grid_pos: Vector3, offset_x: int, offset_y: int, offset_z: int) -> Vector3:
 	return Vector3(
-		(grid_pos.x + offset_x) * resolution - cave_size.x * 0.5,
-		(grid_pos.y + offset_y) * resolution - cave_size.y * 0.5,
-		(grid_pos.z + offset_z) * resolution - cave_size.z * 0.5
+		(grid_pos.x + offset_x) * _cs - cave_size.x * 0.5,
+		(grid_pos.y + offset_y) * _cs - cave_size.y * 0.5,
+		(grid_pos.z + offset_z) * _cs - cave_size.z * 0.5
 	)
 
 func add_triangle(v1: Vector3, v2: Vector3, v3: Vector3) -> void:
@@ -435,6 +605,8 @@ func animate_cave_colors(_delta) -> void:
 func set_cave_parameters(params: Dictionary) -> void:
 	if params.has("bulginess"):
 		bulginess = params.bulginess
+		# The raw number was asked for by name, so it outranks the `bulge` rung.
+		_bulginess_explicit = true
 	if params.has("cave_density"):
 		cave_density = params.cave_density
 	if params.has("vertical_bias"):
@@ -450,12 +622,13 @@ func set_cave_parameters(params: Dictionary) -> void:
 	generate_cave()
 
 func regenerate_cave() -> void:
-	# Generate new random seeds
-	primary_noise.seed = randi()
-	secondary_noise.seed = randi()
-	bulge_noise.seed = randi()
-	cave_noise.seed = randi()
-	
+	# New random seeds — unless the cave has been PINNED, in which case "regenerate"
+	# has to mean "rebuild the same cave", or the pin would last exactly one call.
+	primary_noise.seed = _noise_seed(0)
+	secondary_noise.seed = _noise_seed(1)
+	bulge_noise.seed = _noise_seed(2)
+	cave_noise.seed = _noise_seed(3)
+
 	generate_cave()
 
 func get_cave_info() -> Dictionary:
@@ -463,11 +636,83 @@ func get_cave_info() -> Dictionary:
 		"vertices": vertices.size(),
 		"triangles": indices.size() / 3,
 		"cave_size": cave_size,
-		"resolution": resolution,
-		"bulginess": bulginess,
+		# Still the NUMBER, under the key it always used: at the shipped defaults
+		# this is 0.5, bit for bit what the old `resolution` export returned.
+		"resolution": _resolved_cell_size(),
+		"resolution_rung": resolution,
+		"bulge": bulge,
+		"bulginess": _bulge_amount(),
 		"cave_density": cave_density,
 		"vertical_bias": vertical_bias
 	}
 
+
+# ── Config ────────────────────────────────────────────────────────────────────
+
+## Guarded. This was a bare `pass`, so no map has ever reached an assignment here
+## and none of the four placements passes a key. It now rebuilds when — and only
+## when — a value the build actually reads has changed, because a rebuild on this
+## artifact is a whole density field, a whole marching pass and a new
+## ConcavePolygonShape3D. Nothing is freed: the script creates no child nodes, it
+## writes into the .tscn's own $CaveMesh.mesh and $CaveCollision/CollisionShape
+## .shape, so the _RotationTimer GridInteractablesComponent attaches to this root
+## after spawn is never touched.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var before: String = _config_signature()
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	_read_metadata_overrides()
+	if not _built:
+		# Config normally lands BEFORE _ready. The values are stashed as metadata
+		# and _ready reads them, so the artifact is built once, not twice.
+		return
+	if _config_signature() == before:
+		return
+	if cave_seed != 0:
+		# A pinned cave stays pinned across a rebuild. When cave_seed is 0 the four
+		# fields are deliberately left exactly as _ready drew them — a config key
+		# that moves `bulge` must not silently re-roll the cave underneath it, which
+		# is what calling setup_noise_generators() here would do.
+		primary_noise.seed = _noise_seed(0)
+		secondary_noise.seed = _noise_seed(1)
+		bulge_noise.seed = _noise_seed(2)
+		cave_noise.seed = _noise_seed(3)
+	generate_cave()
+
+
+func _config_signature() -> String:
+	return "%s|%s|%d|%.4f|%.4f|%s|%.4f|%.4f|%.4f|%.4f|%.4f" % [
+		bulge, resolution, cave_seed, _bulge_amount(), _resolved_cell_size(),
+		str(cave_size), iso_level, cave_density, vertical_bias,
+		primary_noise_scale, secondary_noise_scale]
+
+
+func _read_metadata_overrides() -> void:
+	if has_meta("config_bulge"):
+		var b: String = str(get_meta("config_bulge")).strip_edges().to_lower()
+		if BULGES.has(b):
+			bulge = b
+	if has_meta("config_resolution"):
+		var r: String = str(get_meta("config_resolution")).strip_edges().to_lower()
+		if RESOLUTIONS.has(r):
+			resolution = r
+		elif r.is_valid_float():
+			# BACK-COMPAT. `resolution` was a float export until 2026-08-12. No map
+			# passes it, but a token written against the old name should land on the
+			# cell size rather than being silently dropped as an unknown rung.
+			cell_size = float(r)
+			_cell_size_explicit = true
+	if has_meta("config_cell_size"):
+		cell_size = float(str(get_meta("config_cell_size")))
+		_cell_size_explicit = true
+	if has_meta("config_bulginess"):
+		bulginess = float(str(get_meta("config_bulginess")))
+		_bulginess_explicit = true
+	if has_meta("config_cave_seed"):
+		cave_seed = str(get_meta("config_cave_seed")).to_int()
+	if has_meta("config_cave_density"):
+		cave_density = float(str(get_meta("config_cave_density")))
+	if has_meta("config_vertical_bias"):
+		vertical_bias = float(str(get_meta("config_vertical_bias")))
+	if has_meta("config_iso_level"):
+		iso_level = float(str(get_meta("config_iso_level")))
