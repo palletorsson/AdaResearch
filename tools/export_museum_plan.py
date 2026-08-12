@@ -103,7 +103,23 @@ def main() -> int:
 
     keys = [k.strip() for k in args.museums.split(",") if k.strip()]
     if not keys and args.all:
-        keys = sorted(json.loads(PATTERNS.read_text(encoding="utf-8"))["patterns"])
+        pats = json.loads(PATTERNS.read_text(encoding="utf-8"))["patterns"]
+        # FILTER ON `museum`, as endless_museum.gd:548 and
+        # validate_museum_templates.py already do. This was the only consumer in
+        # the chain that did not, and planning all 182 keys DOUBLE-COUNTED:
+        # `bay:<name>#bN` tiles PARTITION their parent's tile — altes-rotunda-hub
+        # has 15 slot tokens and its two bays have 13 + 2 = the same 15. The
+        # rest are `lattice:`/`beat:` floor courses, which are pattern swatches.
+        #
+        # Planning brushes as buildings is what produced "179 interior of 1456"
+        # and sent 1031 works to a porch: from_museum() gives a fragment a plan
+        # with zero slots, silently, because slot_capacity.json only covers the
+        # 30 real museums.
+        keys = sorted(k for k, v in pats.items() if v.get("museum"))
+        skipped = len(pats) - len(keys)
+        if skipped:
+            print(f"  ({skipped} of {len(pats)} patterns are brushes — bay: "
+                  f"sub-tiles and lattice:/beat: floor courses — not planned)")
     if not keys:
         ap.error("--museums=<key,...> or --all")
 
