@@ -1,22 +1,69 @@
 # Ada Research — Canonical Spatial Build Pipeline
 
-> **Status: canonical architecture note.**
+> **Status: canonical architecture + agent-work protocol.**
 >
-> Read this before adding a new map generator, placement heuristic, artifact spatial schema, or museum composition system.
+> Read this before adding a new map generator, placement heuristic, artifact spatial schema, museum composition system, or agent-specific README describing how spatial generation works.
 >
-> The repository already contains several generations of spatial research. They are not separate abandoned solutions. They are layers of one system. The purpose of this document is to establish ownership, preserve what has been learned, and stop future sessions from rediscovering the same problem under new names.
+> Ada Research is now too large for a single LLM session to safely hold as implicit context. The repository, not the context window, must be the project's durable memory.
 
-## 1. What we are building
+---
 
-Ada Research needs a **spatial compiler**, not merely an automatic museum generator.
+## 0. The problem this document solves
 
-The input is conceptual: sequences, artifacts, relationships, teaching order, and authored intentions. The output is experiential: a navigable 3D/VR environment in which artifacts have enough physical, perceptual, and interaction space to work.
+The project has repeatedly reached useful spatial ideas and then rediscovered them in later Claude/Codex sessions under different names. This is not primarily a code-generation failure. It is a **context and memory architecture failure**.
+
+Several generations of work are already present:
+
+```text
+hand placement
+    -> measured footprints / AABB
+    -> spatial_needs
+    -> grammar + A* spatial intelligence
+    -> spine_hints() artifact contract
+    -> dressing-room micro-scenes
+    -> spatial_profile derivation
+    -> structure-only / placement-only research
+    -> [NOW] one documented pipeline + bounded agent sessions
+```
+
+A later agent often reads the files closest to its current task—especially local README/CLAUDE/agent notes—and mistakes that local description for the architecture of the whole project. It then adds a new abstraction rather than recovering the existing lineage.
+
+The correction is:
+
+> **No agent is expected to remember Ada Research. The repository must make the relevant slice recoverable.**
+
+And:
+
+> **A session should be small enough that its complete problem, evidence, implementation and validation can remain coherent at the same time.**
+
+---
+
+# PART I — WHAT WE ARE BUILDING
+
+## 1. Ada Research needs a spatial compiler
+
+The goal is not merely an automatic museum generator.
+
+The input is conceptual:
+
+- sequences and curriculum;
+- artifacts and DNA/lineage;
+- relationships and teaching order;
+- authored spatial intentions.
+
+The output is experiential:
+
+- a navigable 3D/VR environment;
+- sufficient physical space around artifacts;
+- correct approach, reading and interaction distance;
+- coherent architecture;
+- explicit validation that the result works.
 
 The central rule is:
 
 > **The artifact speaks first about what it needs. Architecture responds. Neither owns the whole problem.**
 
-The system therefore separates six questions:
+The system separates six questions:
 
 1. **What should be encountered?** — sequence / atlas / curriculum.
 2. **What does each artifact require?** — measurement, metadata, dynamic hints, staging.
@@ -29,7 +76,7 @@ The system therefore separates six questions:
 
 ```text
 CONTENT / ONTOLOGY
-Sequence / curriculum / atlas / DNA / relationships
+sequence / curriculum / atlas / DNA / relationships
         |
         v
 EXHIBITION BRIEF
@@ -79,23 +126,27 @@ CAPTURE / CRITIQUE
                    +---------- feedback ----------> artifact / solver / grammar
 ```
 
-This is a pipeline with feedback, not a one-shot generator.
+This is a feedback pipeline, not a one-shot generator.
 
-## 3. Ownership: one fact, one authority
+---
 
-The previous sessions produced overlapping representations. They should be treated as a hierarchy, not competitors.
+# PART II — ONE FACT, ONE AUTHORITY
+
+## 3. Spatial ownership hierarchy
+
+Previous sessions produced several overlapping representations. Treat them as a hierarchy, not as competing architectures.
 
 ### Measured AABB
 
-**Owns:** actual observed geometry.
+**Owns:** observed geometry.
 
-Use automated Godot measurement whenever possible. AABB is evidence, not an authored preference.
+AABB is evidence, not preference.
 
-Relevant tools include `tools/measure_artifact_aabbs.py` and earlier footprint-detection work.
+Relevant tooling includes `tools/measure_artifact_aabbs.py` and earlier footprint-detection work.
 
 ### `spatial_profile`
 
-**Owns:** automatically inferred placement characteristics derived from geometry/category when no stronger authored information exists.
+**Owns:** automatically inferred placement characteristics when no stronger authored information exists.
 
 Typical fields include direction group, range, density, minimum clearance, stack priority and approach direction.
 
@@ -103,7 +154,7 @@ Relevant tool: `tools/derive_spatial_profile.py`.
 
 ### `spatial_needs`
 
-**Owns:** registry-level durable spatial defaults and semantic requirements.
+**Owns:** durable registry-level spatial defaults and semantic requirements.
 
 Existing vocabulary includes platform, footprint cells, clearance, wall backing, isolation, clustering and preferred zone.
 
@@ -121,9 +172,18 @@ See `doc/SPINE_HINTS_CONTRACT.md`.
 
 ### Dressing room
 
-**Owns:** the final reusable staging solution for an artifact.
+**Owns:** the strongest reusable static staging solution for an artifact.
 
-A dressing room may specify footing, artifact anchor, legal rotations, approach, exit, clearance, labels, tutorial panels, lights and other local staging elements. It is the strongest authored representation because it describes not merely the object but the small piece of space required for the object to work.
+A dressing room may specify:
+
+- footing;
+- artifact anchor;
+- legal rotations;
+- approach and exit;
+- clearance;
+- labels and tutorial panels;
+- lights and local supporting elements;
+- fine positioning.
 
 See `doc/DRESSING_ROOM_SCHEMA.md` and `commons/artifacts/dressing_rooms/`.
 
@@ -137,13 +197,13 @@ It does **not** own exact x/z placement.
 
 **Owns:** topology: rooms, corridors, walls, openings, boundaries, architectural rhythm and available placement surfaces.
 
-It does **not** decide what an artifact means or silently violate its staging requirements.
+It does **not** silently violate artifact staging requirements.
 
 ### Negotiator / solver
 
 **Owns:** placement decisions.
 
-It matches dressing-room/spatial-contract requirements against architectural opportunities. It may choose slots, rotations and legal modes; request more space; or fail explicitly.
+It matches staged artifact requirements against architectural opportunities and records why decisions succeed or fail.
 
 ### Assembler
 
@@ -153,11 +213,11 @@ It matches dressing-room/spatial-contract requirements against architectural opp
 
 **Owns:** accept/reject evidence.
 
-A visually plausible map is not accepted merely because generation completed.
+Generation completing is not proof that the map is good.
 
 ## 4. Resolution order
 
-When constructing the spatial contract for an artifact, resolve information in this order:
+Resolve artifact spatial knowledge in this order:
 
 ```text
 measured scene geometry
@@ -178,9 +238,7 @@ human/research-refined dressing room
 canonical staged artifact unit
 ```
 
-A stronger layer may refine a weaker layer, but it should not duplicate the same fact without an explicit reason.
-
-The desired long-term relationship is:
+Desired relationship:
 
 ```text
 AABB -> spatial_profile -> default dressing room -> authored dressing room
@@ -192,13 +250,17 @@ AABB -> spatial_profile -> default dressing room -> authored dressing room
           spine_hints() when dynamic
 ```
 
+A stronger layer may refine a weaker one. It should not duplicate the same fact without documenting why.
+
+---
+
+# PART III — THE DRESSING ROOM AND THE SOLVER
+
 ## 5. Why dressing rooms are central
 
-The April composer work discovered the strongest division of responsibility in the repository:
+The April composer work reached the clearest division of responsibility in the history of this system:
 
 > **Staging decisions go DOWN to the artifact level; layout goes UP into a constraint-routing problem.**
-
-The useful three-part architecture is:
 
 ```text
 ATLAS / SEQUENCE
@@ -213,67 +275,456 @@ COMPOSER / NEGOTIATOR
 solves WHERE and routes circulation
 ```
 
-This should remain the default mental model for the Endless Museum.
+A dressing room is more expressive than a scalar profile. A profile can say:
 
-A dressing room is more expressive than a scalar spatial profile. A profile can say "panel, front approach, two metres reading range". A dressing room can say "this 5x4 micro-layout, artifact here, player enters here, plinth here, label here, light here, these rotations legal".
+```text
+panel / front approach / 2m reading range
+```
 
-Therefore do **not** replace dressing rooms with `spatial_profile`. Use profiles to bootstrap dressing rooms.
+A dressing room can say:
 
-## 6. Important implementation warning: representation vs solver
+```text
+this micro-layout
+artifact here
+plinth here
+player enters here
+label here
+light here
+these rotations are legal
+```
 
-`tools/map_composer.py` demonstrates the dressing-room architecture, but its current placement strategy is deliberately simple: it distributes rooms at fractional positions along the spawn-to-teleport line, chooses a rotation, nudges overlaps, then uses A* to connect them.
+Therefore do **not** replace dressing rooms with `spatial_profile`. Use profiles and hints to bootstrap them.
 
-That means:
+## 6. Representation is not the solver
 
-> **An unattractive result from `map_composer.py` is evidence about the prototype solver, not evidence that the dressing-room representation is wrong.**
+`tools/map_composer.py` demonstrates the dressing-room architecture, but its historical placement strategy is deliberately simple: rooms are distributed approximately along the spawn-to-teleport direction, rotated, nudged to avoid overlap, and then connected with A*.
 
-Do not discard the abstraction because `place_rooms()` is simplistic. Improve or replace the negotiator while retaining the artifact staging contract.
+Therefore:
 
-## 7. Architecture-first vs artifact-first
+> **A bad map from a prototype solver is evidence about the solver, not evidence that the dressing-room representation failed.**
 
-The history contains two valid research modes.
+Solvers are replaceable. The spatial contract should survive solver replacement.
 
-### Architecture-first
+## 7. Two research modes
+
+Both modes are useful and must remain distinguishable.
+
+### Architecture-first research
 
 ```text
 grammar -> floor plan -> candidate surfaces -> artifact placement
 ```
 
-Useful for studying topology, architectural language and structure generation.
+Use this to investigate topology and architectural language.
 
-### Artifact-context-first
+### Artifact-context-first production
 
 ```text
 artifact -> dressing room -> reserve staged units -> route architecture between them
 ```
 
-Useful for the Endless Museum and other content-led sequences.
+Use this as the dominant model for the Endless Museum and other content-led sequences.
 
-For the canonical museum pipeline, **artifact-context-first is dominant**, but architecture still has an independent grammar. The negotiator is the interface between them.
-
-Neither system should directly overwrite the other.
-
-## 8. Research modes must remain separable
-
-Do not conflate structure research with placement research.
+## 8. Structure research is not placement research
 
 ### Structure research
 
-Hold artifact requirements relatively stable and vary topology / architecture.
+Hold artifact requirements stable and vary topology/architecture.
 
-Relevant tooling includes `tools/spine_auto_research.py`, map grammar systems and structural generators.
+Relevant systems include `tools/spine_auto_research.py` and map grammar tooling.
 
 ### Placement research
 
-Hold architecture stable, remove/re-place artifacts, evaluate alternatives.
+Hold architecture stable and re-solve artifact positions.
 
-Relevant tool: `tools/spine_placement_only.py`.
+Relevant system: `tools/spine_placement_only.py`.
 
-This separation is valuable because it makes failures legible. If both architecture and placement mutate simultaneously, the evaluator cannot tell which decision improved or damaged the map.
+If both mutate simultaneously, the result becomes difficult to interpret and difficult for a later agent to continue.
 
-## 9. Existing resource map
+---
 
-The following systems should be checked before implementing a new one.
+# PART IV — CONTEXT-BUDGET DOCTRINE
+
+## 9. The context window is working memory, not project memory
+
+Claude, Codex and similar agents can read a great deal of material, but the dangerous assumption is:
+
+> "If it fits in the context window, the agent understands it as one coherent system."
+
+That is not a safe engineering assumption.
+
+Large contexts develop practical failure modes long before a hard token limit is reached:
+
+- early architectural constraints lose salience;
+- recent local files dominate older canonical decisions;
+- similar systems become conflated;
+- an agent remembers conclusions but loses the evidence for them;
+- tool output and debugging noise displace the original goal;
+- the agent begins optimizing the implementation it most recently touched;
+- README files written by previous agents become self-reinforcing local realities;
+- the session continues because tokens remain, even though conceptual coherence is already degrading.
+
+Therefore Ada Research should optimize for **recoverability**, not maximum context occupancy.
+
+## 10. How much work should one agent session hold?
+
+Do not define session size primarily by token count or number of hours. Define it by **number of simultaneously live decisions**.
+
+### Default maximum: one vertical slice
+
+A healthy implementation session should normally contain:
+
+```text
+ONE goal
+ONE primary abstraction or subsystem
+ONE bounded set of files
+ONE before-state
+ONE implementation hypothesis
+ONE validation loop
+ONE durable handoff
+```
+
+Examples of appropriate sessions:
+
+- make three selected artifacts produce valid spatial contracts;
+- improve candidate-slot generation without changing artifact schemas;
+- implement wall occupancy for one wall-artifact test case;
+- replace `place_rooms()` while keeping the dressing-room format fixed;
+- add diagnostic rendering for body/access/presentation masks;
+- audit whether `spatial_needs` and `spatial_profile` conflict for 20 featured artifacts.
+
+Examples that are **too large for one session**:
+
+- "finish the Endless Museum";
+- "understand all artifact placement and improve it";
+- "clean up the registry and rewrite the composer";
+- "make all 1700 artifacts AAA and place them correctly";
+- "review the whole repository and implement the best architecture";
+- changing artifact schema, placement solver, map grammar, renderer and validation in one pass.
+
+### Practical file budget
+
+As a default, a coding session should have approximately:
+
+- **3–8 primary files** it is allowed to modify;
+- **up to ~15–25 reference files** it may inspect closely;
+- broader repository search only for orientation and dependency checks.
+
+This is not a hard technical limit. It is a coherence limit.
+
+If the agent discovers that the task genuinely requires changing 30 unrelated files, stop and split the problem unless the files are mechanical instances of one already-proven transformation.
+
+### Practical abstraction budget
+
+A session should normally modify **one architectural layer**.
+
+For example:
+
+```text
+GOOD:
+negotiator only
+
+GOOD:
+dressing-room schema migration only
+
+GOOD:
+wall-surface representation only
+
+RISKY:
+dressing-room schema + map grammar + solver
+
+STOP:
+registry ontology + artifact code + solver + architecture + visual style
+```
+
+### Practical uncertainty budget
+
+At session start, write down at most **one or two unresolved architectural questions**.
+
+If implementation exposes a third major uncertainty, stop implementation and create a handoff/research note. Do not continue stacking guesses.
+
+## 11. Context saturation signals
+
+An agent should end or checkpoint the session when any of these occur:
+
+- it proposes a new system that sounds very similar to an existing one;
+- it can no longer state the original goal in one paragraph without rereading the prompt;
+- more than two architectural questions are unresolved at once;
+- it starts changing files outside the declared working set "to make things consistent";
+- test failures lead to broad refactoring unrelated to the hypothesis;
+- the session has accumulated several temporary compatibility layers;
+- it repeatedly rereads its own newly written README instead of canonical project docs;
+- it cannot name which source owns a piece of data;
+- it is simultaneously debugging runtime, schema, solver and presentation issues;
+- summaries begin describing activity rather than decisions and evidence.
+
+These are **stop conditions**, not invitations to use more context.
+
+---
+
+# PART V — REPOSITORY MEMORY, NOT README LOOPS
+
+## 12. Documentation hierarchy
+
+Not all documentation has equal authority.
+
+Agents must distinguish four levels.
+
+### Level A — Canonical project doctrine
+
+Defines architecture and ownership across sessions.
+
+Examples:
+
+- this document;
+- `doc/SPINE_HINTS_CONTRACT.md`;
+- `doc/DRESSING_ROOM_SCHEMA.md`;
+- canonical map-grammar documentation;
+- explicit decision records.
+
+A local README cannot silently override Level A.
+
+### Level B — Subsystem reference
+
+Explains how a bounded subsystem currently works.
+
+Examples:
+
+- a grid-mutator README;
+- composer API documentation;
+- tool usage instructions;
+- schema field reference.
+
+It may describe implementation, but must link upward to the canonical doctrine it implements.
+
+### Level C — Session handoff / research record
+
+Records what one session tried, learned and left unresolved.
+
+It is evidence, not doctrine.
+
+A handoff can say:
+
+```text
+We tried X.
+Y failed because Z.
+Commit abc contains the experiment.
+Next test should compare A/B.
+```
+
+It must not redefine the whole architecture.
+
+### Level D — Agent-local notes / README / scratch
+
+Convenient temporary orientation only.
+
+These files have the lowest authority. An agent must never infer that a Level-D file is canonical merely because it is nearest to the code it is editing.
+
+## 13. The README-loop failure
+
+A common failure mode is:
+
+```text
+agent A writes README
+        |
+        v
+agent B starts nearby
+        |
+        v
+reads README as source of truth
+        |
+        v
+extends its assumptions
+        |
+        v
+writes a more detailed README
+        |
+        v
+agent C now sees a very coherent but locally invented architecture
+```
+
+This creates **documentation gravity**: prose becomes more internally consistent while drifting away from the actual project lineage.
+
+To prevent this:
+
+1. Every subsystem README should contain a **Canonical parent** link.
+2. Every agent session should start from the canonical parent, then descend to local docs.
+3. Local README claims that conflict with canonical docs must be treated as stale until resolved.
+4. Architectural discoveries must be promoted upward into canonical docs or decision records.
+5. Do not create a new README merely to remember the current conversation.
+6. Use Git commits and handoff notes for session-specific state.
+
+## 14. The Ada Research Encyclopedia should be a navigator, not a second memory universe
+
+The encyclopedia is useful when it helps answer:
+
+```text
+What exists?
+Where is the authority?
+What is current?
+What was tried?
+What should I read next?
+```
+
+It is harmful if it becomes a parallel body of prose disconnected from repository authority.
+
+The desired model is:
+
+```text
+                 CANONICAL REPO DOCS
+                        ^
+                        |
+        links / indices / generated summaries
+                        |
+              ADA ENCYCLOPEDIA
+                        |
+          search / browse / visualization
+                        |
+                        v
+                agent or human reader
+```
+
+Not:
+
+```text
+repo truth <---- competing ----> encyclopedia truth
+```
+
+The encyclopedia should preferentially **index and surface canonical documents, commits, reports, schemas and generated evidence**, rather than paraphrasing the architecture into another independent description.
+
+Where it contains interpretation, that interpretation should identify its source and date/commit.
+
+## 15. Every important page needs provenance
+
+For durable agent-readable documentation, prefer a small provenance header:
+
+```text
+Status: canonical | subsystem | handoff | generated | historical
+Owner: spatial-pipeline | grid | artifacts | etc.
+Canonical parent: doc/SPATIAL_PIPELINE.md
+Last verified against code: <commit SHA or date>
+Supersedes: <old document/system if applicable>
+Superseded by: <document if historical>
+```
+
+This is more useful to an LLM than another paragraph saying "this is important."
+
+---
+
+# PART VI — SESSION CONTRACT
+
+## 16. Required start-of-session procedure
+
+A session working on the spatial pipeline should begin with a short orientation pass, not unrestricted repository exploration.
+
+### Step 1 — State the task boundary
+
+Write internally or in the handoff:
+
+```text
+Goal:
+Layer being changed:
+Primary files allowed to change:
+Canonical docs read:
+Evidence/baseline:
+Success test:
+Explicit non-goals:
+```
+
+### Step 2 — Read canonical docs first
+
+At minimum when relevant:
+
+1. `doc/SPATIAL_PIPELINE.md`;
+2. `doc/SPINE_HINTS_CONTRACT.md`;
+3. `doc/DRESSING_ROOM_SCHEMA.md`;
+4. current map-grammar documentation;
+5. latest relevant Git history.
+
+Then read subsystem docs.
+
+### Step 3 — Recover history before inventing
+
+Before adding an abstraction, search Git history and code for the same concept under older names.
+
+Questions:
+
+- Which existing layer owns this fact today?
+- Why can that layer not represent it?
+- Is this proposed concept a provider, canonical representation, solver, assembler or validator?
+- What does it supersede?
+- How will old data migrate?
+
+If these cannot be answered, implementation should stop.
+
+### Step 4 — Declare the experiment
+
+One sentence:
+
+> "If we change X while holding Y and Z fixed, metric/evidence Q should improve."
+
+This prevents a session from turning into general cleanup.
+
+## 17. Required end-of-session handoff
+
+A useful session should leave a compact durable record even if the code is unfinished.
+
+The handoff should contain:
+
+```text
+GOAL
+What exact question this session addressed.
+
+BASELINE
+What existed before, including relevant commit/tool/test.
+
+CHANGES
+Only the meaningful architectural/code changes.
+
+EVIDENCE
+Tests, captures, scores, pathfinder results, examples.
+
+DECISIONS
+What is now considered true and why.
+
+FAILED APPROACHES
+What was tried and should not immediately be repeated.
+
+OPEN QUESTIONS
+Maximum 1-3 concrete unresolved issues.
+
+NEXT ACTION
+One bounded continuation task.
+
+FILES / COMMITS
+Exact paths and commit SHA(s).
+```
+
+A handoff is successful if a fresh agent can continue **without reading the previous conversation**.
+
+That is the test.
+
+## 18. Commit discipline as external memory
+
+Commits should record conceptual checkpoints, not only file changes.
+
+Good commit messages answer:
+
+```text
+What hypothesis changed?
+What evidence supports it?
+What is intentionally not solved?
+```
+
+When a wrong approach teaches something, prefer a documented revert/correction over silently erasing the history. The repository already contains useful examples of this pattern.
+
+Git history is part of the project's research memory.
+
+---
+
+# PART VII — CURRENT RESOURCE MAP
+
+## 19. Existing systems to check before writing a new one
 
 | Purpose | Existing resource |
 |---|---|
@@ -281,7 +732,7 @@ The following systems should be checked before implementing a new one.
 | AABB measurement | `tools/measure_artifact_aabbs.py` |
 | Spatial defaults | `spatial_needs` in registry |
 | Spatial derivation | `tools/derive_spatial_profile.py` |
-| Artifact-to-map contract | `doc/SPINE_HINTS_CONTRACT.md`, `commons/grid/SpineHints.gd` |
+| Artifact-to-map dynamic contract | `doc/SPINE_HINTS_CONTRACT.md`, `commons/grid/SpineHints.gd` |
 | Staged artifact contexts | `commons/artifacts/dressing_rooms/*.json` |
 | Dressing-room specification | `doc/DRESSING_ROOM_SCHEMA.md` |
 | Dressing-room 3D catalog/editor | DressingRoom catalog / inspector scenes and scripts |
@@ -309,63 +760,41 @@ The following systems should be checked before implementing a new one.
 | Historical architecture | `floor_plan_space`, museum maps, facade presets |
 | Editing | Map Studio / voxel editing tools |
 
-Names have changed over the history. Search before assuming a listed historical tool was deleted; if it was superseded, document the successor here.
+Names have changed. Search before assuming a historical tool was deleted. If superseded, record the successor in canonical documentation.
 
-## 10. Current maturity
+---
 
-Qualitative architectural assessment, not automated repository metrics:
+# PART VIII — CURRENT MILESTONE
 
-```text
-Artifact catalogue             [##########]  mature
-Measurements / footprints      [########--]  strong
-Artifact spatial metadata      [########--]  strong
-Artifact order / ontology      [#########-]  mature
-Dressing-room concept          [#########-]  mature concept
-Dressing-room authoring        [########--]  strong prototype
-Map grammar                    [#########-]  mature research
-Structure generation           [########--]  strong research
-Placement solver               [####------]  prototype
-Wall-placement model           [##--------]  early
-Unified negotiation layer      [###-------]  missing/fragmented
-Modular Endless Museum         [######----]  partial
-Validation                     [#######---]  strong but distributed
-Visual critique loop           [######----]  partial
-Canonical documentation        [####------]  this document begins consolidation
-```
-
-The primary missing component is **not another generator**. It is a unified negotiator operating on one documented contract.
-
-## 11. Next implementation milestone: three-artifact proof
+## 20. Three-artifact proof
 
 Before bulk migration or generation, make one small end-to-end pipeline undeniable.
 
-Use three artifacts with deliberately different spatial behavior:
+Select three deliberately different artifacts:
 
-1. a compact floor object;
-2. a wall/panel or front-read object;
-3. a larger or interaction-heavy object.
+1. compact floor object;
+2. wall/panel or front-read object;
+3. larger or interaction-heavy object.
 
-For each artifact:
+For each:
 
 1. measure actual geometry;
 2. inspect registry `spatial_needs` / profile;
 3. inspect any `spine_hints()`;
 4. generate or author one dressing room;
 5. produce the canonical spatial contract;
-6. give the architecture several candidate placement surfaces;
-7. let the negotiator place all three;
+6. offer architecture several candidate placement surfaces;
+7. let the negotiator place it;
 8. assemble the map;
 9. run path/reachability/clearance validation;
-10. capture it from useful viewpoints;
-11. record why each placement was chosen or rejected.
+10. capture useful viewpoints;
+11. record why each placement was accepted or rejected.
 
-Only after this works should the system scale to tens or hundreds of artifacts.
+Do not scale until this works.
 
-## 12. Required solver behaviour
+## 21. Required solver behaviour
 
-The next negotiator should be deterministic under a seed and explain its decisions.
-
-For each staged artifact it should attempt, in order:
+For each staged artifact:
 
 ```text
 candidate slot
@@ -376,81 +805,65 @@ candidate slot
  -> explicit failure with reasons
 ```
 
-A failure is useful output. Silent fallback to a meaningless 1x1 placement is not acceptable for authored or high-priority artifacts.
-
-The solver should expose at least:
+Expose:
 
 - candidate slots considered;
 - rejected constraints;
 - chosen placement mode;
 - chosen rotation;
-- reserved body/access/presentation space;
+- body/access/presentation reservations;
 - path impact;
 - final score and score components.
 
-This makes future AI sessions capable of diagnosing the system rather than guessing at it.
+A failure is valuable output. Silent fallback is not.
 
-## 13. Validation contract
-
-A generated map is not "done" until it passes relevant checks.
+## 22. Validation contract
 
 Minimum checks:
 
-- spawn -> required artifact(s) -> exit is reachable;
-- artifact body masks do not illegally overlap;
-- required approach/access zones remain traversable;
-- wall-backed objects have valid backing surfaces;
-- front-read objects retain sufficient viewing distance;
-- interaction-heavy artifacts have usable player standing space;
-- teleporter and spawn are valid;
-- no accidental unreachable islands are introduced;
-- performance budget is within the target when budget metadata exists.
+- spawn -> required artifact(s) -> exit reachable;
+- physical masks do not illegally overlap;
+- required access zones remain traversable;
+- wall-backed objects have valid surfaces;
+- front-read objects retain viewing distance;
+- interaction-heavy artifacts have player standing space;
+- spawn and teleporter are valid;
+- no accidental unreachable islands;
+- performance within target when budget metadata exists.
 
-Visual capture is part of validation, not merely presentation.
+Visual capture is validation evidence, not decoration.
 
-## 14. Session protocol
+---
 
-Every future session working on spatial generation should begin by reading:
+# PART IX — STOP CONDITIONS
 
-1. this document;
-2. `doc/SPINE_HINTS_CONTRACT.md`;
-3. `doc/DRESSING_ROOM_SCHEMA.md`;
-4. the current map grammar documentation;
-5. the latest relevant Git history.
-
-Before introducing a new abstraction, answer:
-
-- Which existing layer owns this fact today?
-- Why can that layer not represent it?
-- Is the new concept a provider, canonical representation, solver, assembler or validator?
-- What existing field/tool does it supersede?
-- How will old data migrate?
-
-If these questions cannot be answered, do not add the abstraction yet.
-
-## 15. Anti-patterns / stop conditions
-
-Until the three-artifact proof is complete, do **not**:
+## 23. Do not do these before the three-artifact proof
 
 - invent another artifact spatial schema;
 - add another general-purpose map generator;
 - generate hundreds of variants;
-- bulk-edit registry entries to fit a new heuristic;
+- bulk-edit registries to fit a new heuristic;
 - migrate every artifact;
-- build another museum visual style as a substitute for solving placement;
+- build another museum style as a substitute for solving placement;
 - optimize AAA presentation before the spatial contract works;
-- treat a prototype solver's bad output as proof that its input representation failed;
-- allow a new session to silently redefine ownership between `spatial_needs`, `spine_hints`, `spatial_profile` and dressing rooms.
+- treat a prototype solver's bad output as proof that its representation failed;
+- silently redefine ownership among `spatial_needs`, `spine_hints`, `spatial_profile` and dressing rooms;
+- ask one context window to hold the complete project;
+- allow agent-local READMEs to become architecture by repetition.
 
-## 16. Decision log
+---
+
+# PART X — DECISIONS
+
+## 24. Decision log
 
 ### Decision 1 — Artifact staging is reusable
 
-An artifact's local spatial requirements belong with the artifact, not hand-authored independently in every map.
+Local spatial requirements belong with the artifact, not independently in every map.
 
 ### Decision 2 — Architecture and staging are separate
 
-Architecture proposes spatial opportunities. Dressing rooms describe requirements. A negotiator matches them.
+Architecture proposes opportunities. Dressing rooms describe requirements. A negotiator matches them.
 
 ### Decision 3 — Dressing room is the strongest static staging representation
 
@@ -458,42 +871,45 @@ Profiles and hints feed it; they do not compete with it.
 
 ### Decision 4 — Solvers are replaceable
 
-`map_composer.py`, A* composers, grammar composers and future optimizers are implementations. The spatial contract must survive solver replacement.
+The spatial contract must survive changes to composer/optimizer implementation.
 
 ### Decision 5 — Generation must be inspectable
 
-The system should say why a placement happened and why alternatives failed.
+The system must explain why placement happened and why alternatives failed.
 
 ### Decision 6 — Research proceeds small-to-large
 
 Prove three heterogeneous artifacts end-to-end before scaling.
 
-## 17. Historical trajectory
+### Decision 7 — Context is disposable
 
-The repository's apparent repetition is actually a useful research lineage:
+No architectural fact is considered safely preserved merely because an agent currently remembers it.
 
-```text
-hand placement
-    -> measured footprints / AABB
-    -> spatial_needs
-    -> grammar + A* spatial intelligence
-    -> spine_hints artifact contract
-    -> dressing-room micro-scenes
-    -> spatial_profile derivation
-    -> structure-only / placement-only research
-    -> [NOW] consolidate into one negotiator + one documented pipeline
-```
+### Decision 8 — Repository documentation is durable memory
 
-The project is therefore not starting over. The present task is **convergence**.
+Important decisions must survive a fresh session with no access to the previous conversation.
+
+### Decision 9 — Local documentation cannot silently become canonical
+
+READMEs and session notes must identify their authority level and canonical parent.
+
+### Decision 10 — Agent sessions are bounded experiments
+
+One goal, one layer, one hypothesis, one validation loop, one handoff.
 
 ---
 
-## Short version for agents
+# Short version for agents
 
-If you remember only five things:
+If you remember only ten things:
 
 1. **Do not invent another schema.**
 2. **Artifact needs and architecture are separate systems.**
 3. **Dressing rooms are the canonical reusable staging unit.**
-4. **The negotiator/solver is the main unfinished component.**
+4. **The negotiator/solver is the main unfinished spatial component.**
 5. **Prove three different artifacts end-to-end before scaling.**
+6. **Your context window is working memory, not Ada Research memory.**
+7. **Modify one architectural layer per session whenever possible.**
+8. **Read canonical docs before local READMEs.**
+9. **Leave a handoff that works without the previous conversation.**
+10. **If the task has become 'understand/fix the whole project', stop and split it.**
