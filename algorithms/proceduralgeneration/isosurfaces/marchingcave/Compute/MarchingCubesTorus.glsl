@@ -134,6 +134,22 @@ layout(set = 0, binding = 1, std430) restrict buffer ParamsBuffer
 	float noiseOffsetX;
 	float noiseOffsetY;
 	float noiseOffsetZ;
+	// TRAILING FIELDS, appended for the `intrusion` DNA axis. Same pattern as
+	// MarchingCubesShapes.glsl's shapeId and MarchingGyroid.glsl's four:
+	// TerrainGeneratorTorus.get_params_array() calls super and appends these three floats
+	// after the base's eleven, so the shared eleven-field prefix every other Marching*.glsl
+	// reads is untouched. ORDER AND COUNT MUST MATCH THAT FUNCTION EXACTLY — a mismatch
+	// silently shifts every float and is not a compile error. 11 -> 14 on both sides.
+	//
+	// Each replaces a MULTIPLIER that used to be written inline at the old line 198, and the
+	// shipped rung (intrusion = melted) supplies exactly those three numbers. See
+	// TerrainGeneratorTorus.INTRUSION_WEIGHTS.
+	//
+	// `threshold`, the other axis, adds NO field here: it biases isoLevel, which this buffer
+	// already carries at index 2 and main() already reads.
+	float deformWeight;    // was 8.0, inline at the old line 198
+	float twistWeight;     // was an implicit 1.0 at the old line 198
+	float bulgeWeight;     // was an implicit 1.0 at the old line 198
 }
 params;
 
@@ -194,8 +210,15 @@ vec4 evaluate(vec3 coord)
 	// Add some bulges and constrictions around the ring
 	float bulge = sin(angle * 5.0) * cos(worldPos.y * 0.15) * 4.0;
 	
-	// Combine base torus with deformations
-	float sculptureShape = torusDist + deformation * 8.0 + twist + bulge;
+	// Combine base torus with deformations.
+	// The three weights were the literals 8.0, 1.0 and 1.0 (the last two implicit). At
+	// intrusion = melted the uniforms hold exactly those, and `twist * 1.0` is bit-identical
+	// to `twist`. The amplitudes at the twist's *3.0 and the bulge's *4.0 above are
+	// deliberately NOT touched — these weights multiply the FINISHED terms.
+	float sculptureShape = torusDist
+		+ deformation * params.deformWeight
+		+ twist * params.twistWeight
+		+ bulge * params.bulgeWeight;
 	
 	// Convert to density (negative inside, positive outside)
 	// Invert so interior is solid for marching cubes

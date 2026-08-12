@@ -134,6 +134,18 @@ layout(set = 0, binding = 1, std430) restrict buffer ParamsBuffer
 	float noiseOffsetX;
 	float noiseOffsetY;
 	float noiseOffsetZ;
+	// TRAILING FIELD, appended for the `interior` DNA axis. Same pattern as
+	// MarchingGyroid.glsl's four and MarchingCubesShapes.glsl's shapeId:
+	// TerrainGeneratorFlat.get_params_array() calls super and appends this ONE float
+	// after the base's eleven, so the shared eleven-field prefix that every other
+	// Marching*.glsl reads is untouched. Order and count are the whole risk here —
+	// one appended float in GDScript, one appended field here, each the last of its
+	// list. A mismatch silently shifts every float and is not a compile error.
+	//
+	// This replaces a LITERAL that used to be written inline below, and the shipped
+	// rung (interior = caverned) supplies exactly that literal. See
+	// TerrainGeneratorFlat.CAVE_STRENGTHS.
+	float caveStrength;        // was 0.4, inline at the old line 193
 }
 params;
 
@@ -188,9 +200,13 @@ vec4 evaluate(vec3 coord)
 	float surfaceHeight = surfaceNoise;  // Surface at y=0 + noise
 	float terrainDensity = (surfaceHeight - worldPos.y) / 30.0;  // Gradient from solid to air
 	
-	// Subtract cave noise to carve out caves
-	// Only caves where caveNoise is strong (multiply by 0.4 to control cave size/frequency)
-	float density = terrainDensity - (caveNoise * 0.4);
+	// Subtract cave noise to carve out caves.
+	// caveStrength controls cave size/frequency; it was the literal 0.4 here, and the
+	// shipped rung `caverned` hands back that same float. THIS SUBTRACTION IS THE WHOLE
+	// AXIS: at 0.0 the line above is left alone and the result is a heightfield — a
+	// graph over the plane, single-valued in y, which is the one shape marching cubes
+	// is not needed for. Everything above 0.0 is how much inside this landscape has.
+	float density = terrainDensity - (caveNoise * params.caveStrength);
 
 	return vec4(worldPos, density);
 }

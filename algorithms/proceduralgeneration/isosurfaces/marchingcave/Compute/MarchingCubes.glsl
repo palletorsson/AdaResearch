@@ -134,6 +134,21 @@ layout(set = 0, binding = 1, std430) restrict buffer ParamsBuffer
 	float noiseOffsetX;
 	float noiseOffsetY;
 	float noiseOffsetZ;
+	// TRAILING FIELDS, appended for the `plumb` and `octaves` DNA axes. Same pattern as
+	// MarchingCubesShapes.glsl's shapeId and MarchingGyroid.glsl's four:
+	// TerrainGenerator.get_params_array() calls super and appends these two floats after
+	// the base's eleven, so the shared eleven-field prefix every other Marching*.glsl
+	// reads is untouched, and the count goes 11 -> 13 on BOTH sides.
+	//
+	// ORDER IS THE CONTRACT AND IT IS THE WHOLE RISK SURFACE. Swapping these two makes
+	// plumbScale read 6.0 and octaves read 1 — a plausible mesh, no compile error, and a
+	// confident wrong picture. plumbScale is index 11, octaves is index 12, matching the
+	// two `params.append` calls in that order.
+	//
+	// Both replace a LITERAL that used to be written inline below, and the shipped rung
+	// supplies exactly that literal. See TerrainGenerator.PLUMB_SCALES.
+	float plumbScale;   // was the implicit 1.0 on the y-gradient, inline at the old line 180
+	float octaves;      // was the literal 6 in the ridged loop bound, at the old line 168
 }
 params;
 
@@ -165,7 +180,11 @@ vec4 evaluate(vec3 coord)
 	float amplitude = 1;
 	float weight = 1;
 	
-	for (int i = 0; i < 6; i ++)
+	// `octaves` — HOW MANY SCALES OF ROCK SURVIVE THE LATTICE. Was the literal 6. At the
+	// shipped rung the uniform holds 6.0 and int(6.0) is exactly 6, so this is the same
+	// integer comparison against the same integer that was compiled before — there is no
+	// float rounding anywhere on the default path.
+	for (int i = 0; i < int(params.octaves); i ++)
 	{
 		float noise = snoise(samplePos) * 2 - 1;
 		noise = 1 - abs(noise);
@@ -177,7 +196,27 @@ vec4 evaluate(vec3 coord)
 		amplitude *= 0.5;
 	}
 	float density = sum;
-	density = -(worldPos.y+100)/300 + density;
+
+	// `plumb` — WHICH WAY IS DOWN, AND WHETHER THERE IS A DOWN AT ALL. The line below is
+	// the ONLY anisotropic term in this file: everything above it is isotropic ridged
+	// noise, and this one linear vertical bias is what makes low regions solid and high
+	// regions air. From outside that is what gives the block a top surface and a sky;
+	// from inside it is what gives you a floor to stand on.
+	//
+	// SHORT-CIRCUITED, not multiplied, and deliberately so. `x * 1.0` is bit-identical in
+	// IEEE-754, but `a/b * c + d` and `a/b + d` are not the same EXPRESSION, and a GLSL
+	// compiler is free to contract the first into an FMA and round it once instead of
+	// twice. The branch means the shipped rung compiles the shipped line — character for
+	// character the statement that was here before — rather than a formula that lands
+	// near it. Every existing placement takes the first arm.
+	if (params.plumbScale == 1.0)
+	{
+		density = -(worldPos.y+100)/300 + density;                        // bedded — SHIPPED
+	}
+	else
+	{
+		density = -(worldPos.y+100)/300 * params.plumbScale + density;    // overturned/weightless/steep
+	}
 
 	return vec4(worldPos, density);
 }

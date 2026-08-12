@@ -115,6 +115,27 @@ layout(set = 0, binding = 1, std430) restrict buffer ParamsBuffer
 	float noiseOffsetX;
 	float noiseOffsetY;
 	float noiseOffsetZ;
+	// TRAILING FIELDS, appended for the `landform` DNA axis. Same pattern as
+	// MarchingCubesShapes.glsl's shapeId and MarchingGyroid.glsl's four:
+	// TerrainGeneratorOverhang.get_params_array() calls super and appends these four
+	// floats after the base's eleven, so the shared eleven-field prefix that every other
+	// Marching*.glsl reads is untouched and no other shader sees a changed layout.
+	//
+	// Each one replaces a LITERAL that used to be written inline in evaluate() below, and
+	// each is the STRENGTH of one of the four sculptural claims the density sum at the
+	// bottom of evaluate() adds up. `landform = compound` is the shipped rung and supplies
+	// exactly these four literals, in this order — see
+	// TerrainGeneratorOverhang.LANDFORM_WEIGHTS.
+	//
+	// NAMED *Weight AND NOT *Strength ON PURPOSE: the four lines below already declare
+	// locals called overhangStrength, caveStrength, archStrength and outcropStrength.
+	// `params.overhangStrength` and a local `overhangStrength` are distinct in GLSL and
+	// would compile fine, but a reader diffing those lines should not have to hold two
+	// different things under one name.
+	float overhangWeight;   // was 0.8, inline at the old line 171
+	float caveWeight;       // was 0.6, inline at the old line 198
+	float archWeight;       // was 0.4, inline at the old line 219
+	float outcropWeight;    // was 0.3, inline at the old line 229
 }
 params;
 
@@ -168,7 +189,7 @@ vec4 evaluate(vec3 coord)
 	// Create selective overhangs - only where terrain is elevated
 	// More overhangs on hills, less in valleys
 	float elevationFactor = smoothstep(-10.0, 20.0, surfaceHeight);
-	float overhangStrength = elevationFactor * 0.8;
+	float overhangStrength = elevationFactor * params.overhangWeight;
 	
 	// Height-based modulation - more features at certain heights
 	float heightMod = sin(worldPos.y * 0.1) * 0.5 + 0.5;
@@ -195,7 +216,7 @@ vec4 evaluate(vec3 coord)
 	
 	// Only carve caves near ground level and below
 	float caveMask = smoothstep(40.0, -10.0, worldPos.y);
-	float caveStrength = caveNoise * caveMask * 0.6;
+	float caveStrength = caveNoise * caveMask * params.caveWeight;
 	
 	// ===== ARCH FORMATIONS =====
 	// Create natural arch-like structures using specific noise patterns
@@ -216,7 +237,7 @@ vec4 evaluate(vec3 coord)
 	float archMask = smoothstep(0.3, 0.7, snoise(vec3(worldPos.x * 0.02, 0, worldPos.z * 0.02)));
 	archMask *= smoothstep(30.0, 5.0, abs(worldPos.y - surfaceHeight));
 	
-	float archStrength = archNoise * archMask * 0.4;
+	float archStrength = archNoise * archMask * params.archWeight;
 	
 	// ===== ROCKY OUTCROPS =====
 	// Add some solid rocky features that jut out
@@ -226,7 +247,7 @@ vec4 evaluate(vec3 coord)
 	
 	// Only add outcrops above surface
 	float outcropMask = smoothstep(surfaceHeight - 5.0, surfaceHeight + 15.0, worldPos.y);
-	float outcropStrength = outcroppNoise * outcropMask * 0.3;
+	float outcropStrength = outcroppNoise * outcropMask * params.outcropWeight;
 	
 	// ===== COMBINE ALL FEATURES =====
 	// Base terrain minus (overhangs + caves + arches) plus outcrops
