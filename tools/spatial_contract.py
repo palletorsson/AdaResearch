@@ -41,6 +41,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
@@ -93,6 +94,45 @@ ROTATION_FACING = {0: (0, 1), 90: (-1, 0), 180: (0, -1), 270: (1, 0)}
 #: Degrees to add to the artifact's facing to get each of its sides. Standing
 #: facing south (rotation 0), your right hand points west — so right is +90.
 SIDE_TURN = {"front": 0, "right": 90, "back": 180, "left": 270}
+
+
+#: The eye band, read from the module that owns it rather than copied.
+#: `commons/scenes/em/em_plinths.gd` decides every lift in the museum; a second
+#: copy of 1.15 in Python would be one edit away from disagreeing with the
+#: building, and this pass has already paid for that mistake three times in
+#: fields whose two copies were only equal by coincidence. Same technique as
+#: `spatial_palette.py`, which reads its colours out of the encyclopedia.
+PLINTHS_GD = REPO / "commons" / "scenes" / "em" / "em_plinths.gd"
+
+
+@lru_cache(maxsize=1)
+def plinth_band() -> dict[str, float]:
+    """TARGET_CENTRE / MIN_LIFT / MAX_LIFT as em_plinths.gd declares them."""
+    out = {"target_centre": 1.15, "min_lift": 0.25, "max_lift": 1.20}
+    try:
+        src = PLINTHS_GD.read_text(encoding="utf-8")
+    except OSError:
+        return out                      # defaults, and they are the doc's values
+    for key, name in (("target_centre", "TARGET_CENTRE"), ("min_lift", "MIN_LIFT"),
+                      ("max_lift", "MAX_LIFT")):
+        m = re.search(rf"^const {name} *:= *([0-9.]+)", src, re.M)
+        if m:
+            out[key] = float(m.group(1))
+    return out
+
+
+def lift_for(body_h_m: float, slot_top_m: float) -> float:
+    """The plinth em_plinths would build here, or 0.0 for none.
+
+    em_plinths.gd step 8: `want = TARGET_CENTRE - h * 0.5 - top`. The riser the
+    template already built is SUBTRACTED, which is the whole reason a floor slot
+    can host an artifact that asks to be raised — it just needs a taller plinth.
+    """
+    band = plinth_band()
+    want = band["target_centre"] - body_h_m * 0.5 - slot_top_m
+    if want < band["min_lift"]:
+        return 0.0                      # already in band; a lift would overshoot
+    return min(want, band["max_lift"])
 
 
 def side_dir(side: str, rotation: int = 0) -> tuple[int, int]:

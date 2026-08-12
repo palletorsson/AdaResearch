@@ -43,8 +43,8 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from spatial_contract import (ROTATION_FACING, SpatialContract, Masks, masks,
-                              side_dir)
+from spatial_contract import (ROTATION_FACING, SpatialContract, Masks, lift_for,
+                              masks, side_dir)
 # The negotiator consumes DRESSING ROOMS (SPATIAL_PIPELINE.md §5), not the
 # resolver's dataclass. `staged_contract` returns the authored room's contract
 # where one exists and a generated default where none does; `resolve` is
@@ -380,16 +380,35 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
     score = 1.0
 
     # Support the slot actually has.
+    # A PLINTH IS FURNITURE, NOT A TILE. This rule used to demand a `podium`
+    # slot for anything asking to be raised, and rejected 306 placements across
+    # the corpus with "slot offers 'floor', artifact needs 'pedestal'" — read as
+    # a shortage of podium tiles in 182 authored museums. It was not. The museum
+    # already stands plinths on floor cells: `em_plinths.gd` decides per token
+    # and computes its lift as `TARGET_CENTRE - h/2 - cell.top`, SUBTRACTING the
+    # riser the template built. A floor slot is not a refusal; it is a taller
+    # plinth. Demanding the tile was architecture being asked to pre-declare a
+    # staging decision that belongs to the assembler.
     need_support = contract.required_support
+    wants_lift = need_support in ("pedestal", "table", "podium")
+    plinth_h = (lift_for(contract.body_m[2], slot.surface_height_m)
+                if wants_lift and slot.support in ("floor", "podium") else 0.0)
     support_ok = (need_support in ("floor", "", "any")
                   or need_support == slot.support
                   or (need_support == "wall" and slot.wall_side is not None)
-                  or (need_support in ("pedestal", "table", "podium")
-                      and slot.support == "podium"))
+                  or (wants_lift and slot.support == "podium")
+                  or (wants_lift and slot.support == "floor" and plinth_h > 0.0))
     traces.append(Trace("support_matches_contract", "pass" if support_ok else "fail",
-                        f"slot offers {slot.support!r}, artifact needs {need_support!r}"))
+                        f"slot offers {slot.support!r}, artifact needs {need_support!r}"
+                        + (f"; a {plinth_h:.2f} m plinth supplies it" if plinth_h else "")))
     if not support_ok:
         return False, 0.0, traces, exceptions
+    # Reserved so the ceiling check below measures the artifact ON its plinth.
+    # An unreserved lift is how a plan clears a 4 m wall on paper and puts a
+    # head through it in the room.
+    if plinth_h > 0.0:
+        exceptions.append(f"plinth {plinth_h:.2f} m supplied by the assembler "
+                          f"(em_plinths decides the final form per token)")
 
     # against_wall must actually have that wall, and must FACE OUT of it.
     if mode == "against_wall":
@@ -410,7 +429,9 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
     # Vertical fit. A room is a box, not a floorplan: an artifact taller than
     # the wall sticks out through the top, which a purely 2D negotiator will
     # happily call a perfect placement. Found by looking at the capture.
-    stand_h = slot.surface_height_m if mode == "host_mounted" else 0.0
+    # The plinth counts. A reserved lift the ceiling check ignores is a plan
+    # that clears 4 m on paper and puts a head through the soffit in the room.
+    stand_h = (slot.surface_height_m if mode == "host_mounted" else 0.0) + plinth_h
     total_h = contract.body_m[2] + stand_h
     open_sky = slot.venue != "interior"
     if open_sky:
