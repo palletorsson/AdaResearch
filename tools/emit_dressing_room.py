@@ -190,10 +190,33 @@ def from_room(room: dict[str, Any]) -> SpatialContract:
         metres = (any(isinstance(v, float) and abs(v - round(v)) > 1e-9 for v in fp)
                   or bool(pc))
         if metres:
-            footprint = [max(1, math.ceil(float(fp[0]) - 1e-9)),
-                         max(1, math.ceil(float(fp[1]) - 1e-9))]
+            declared = [max(1, math.ceil(float(fp[0]) - 1e-9)),
+                        max(1, math.ceil(float(fp[1]) - 1e-9))]
         else:
-            footprint = [max(1, int(fp[0])), max(1, int(fp[1]))]
+            declared = [max(1, int(fp[0])), max(1, int(fp[1]))]
+        # THE MEASUREMENT WINS ON BODY SIZE. spatial_contract's own precedence:
+        # "BODY SIZE is a measurement. Godot's AABB wins over any hand-typed
+        # number. INTENT is authorship." A dressing room is authorship about
+        # INTENT — rotations, modes, faces — and taking its footprint as the
+        # body inverted that.
+        #
+        # It matters because the corpus re-measure moved 878 of 1741 artifacts
+        # and the 33 rooms carrying a placement_contract predate it.
+        # CoordinateSystem3M's room still says 7.43 x 9.93 m for a body that now
+        # measures 4.75 x 3.35 — an 8x10 cell claim for a 5x4 body, which fits
+        # nowhere in any museum and routed the work to the grounds past 49 idle
+        # slots. Every other such room agrees with its body to two decimals, so
+        # this is staleness, not a second meaning for the field.
+        if declared != footprint:
+            gap = max(abs(declared[0] - footprint[0]), abs(declared[1] - footprint[1]))
+            if gap <= 1:
+                footprint = declared        # rounding, not disagreement
+        # else: keep the measured footprint, and say so
+        if declared != footprint:
+            base = replace(base, conflicts=base.conflicts + [
+                f"dressing room declares footprint {declared} where the measured "
+                f"body gives {footprint}; the MEASUREMENT wins on body size "
+                f"(the room predates the re-measure)"])
     rotations = [int(str(r)) for r in room.get("rotations", [])] or base.rotations
     sides = [COMPASS_TO_SIDE.get(str(s), str(s))
              for s in pc.get("interaction_faces", [])] or base.required_sides
