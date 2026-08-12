@@ -102,15 +102,51 @@ def main() -> int:
         return 1
     values = [v for v in values if isinstance(v, str)]
 
+    # THE PROBE MUST RENDER UNDER THE SAME CONDITIONS AS THE GALLERY IT JUDGES.
+    #
+    # It did not, and that is the fault this comment exists to stop coming back.
+    # cabinet_sweep applies two things from the registry before it photographs
+    # anything: dna.fixture (config the artifact needs SUPPLIED before its axis is
+    # visible at all — most often a SEED) and dna.framing (how tight the shot is).
+    # This file applied neither. So for any seeded artifact the probe rendered five
+    # standpoints of five DIFFERENT OBJECTS and reported the difference as a fact
+    # about the viewing angle.
+    #
+    # Four of the seven anamorphic reports in doc/reports were produced that way,
+    # and all four carry a seed fixture: GaussianPaintSplatter (splatter_seed),
+    # random_number_book_page_1955 (page_seed), random_walk_collection (walk_seed),
+    # reaction_diffusion (field_seed). The critic's standpoint gate reads exactly
+    # those files, so an instrument built to stop verdicts that were really facts
+    # about the harness was itself issuing them.
+    dna = (entry.get("dna") or {})
+    fixture = dna.get("fixture") if isinstance(dna.get("fixture"), dict) else {}
+    try:
+        framing = float(dna.get("framing", 1.0))
+    except (TypeError, ValueError):
+        framing = 1.0
+    if not (0.05 < framing < 20.0):
+        framing = 1.0
+    if fixture:
+        print(f"  fixture from registry: {fixture}")
+    if framing != 1.0:
+        print(f"  framing hint from registry: x{framing}")
+
     OUT.mkdir(parents=True, exist_ok=True)
     results: dict[str, dict] = {}
 
     for view, (yaw, pitch) in VIEWS.items():
-        variants = [{"label": f"{args.token}__{view}__{v}", "artifact": args.token,
-                     "scene": scene, "params": {args.axis: v}} for v in values]
+        variants = []
+        for v in values:
+            # Fixture under the axis: the axis always wins, exactly as cabinet_sweep
+            # orders them, so a fixture can never silently overwrite the value being
+            # measured.
+            params = dict(fixture)
+            params[args.axis] = v
+            variants.append({"label": f"{args.token}__{view}__{v}", "artifact": args.token,
+                             "scene": scene, "params": params})
         spec = {"scene": scene, "out_dir": f"res://{OUT.relative_to(REPO.parent).as_posix()}"
                 if OUT.is_relative_to(REPO.parent) else str(OUT),
-                "yaw": yaw, "pitch": pitch, "variants": variants}
+                "yaw": yaw, "pitch": pitch, "framing": framing, "variants": variants}
         # out_dir must be a path Godot can write; use an absolute one.
         spec["out_dir"] = str(OUT).replace("\\", "/")
         sp = REPO / "ada_run" / "anamorphic_spec.json"
