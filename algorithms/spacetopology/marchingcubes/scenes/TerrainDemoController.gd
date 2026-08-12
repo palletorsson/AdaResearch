@@ -30,14 +30,119 @@ var terrain_size: float = 10.0
 var terrain_height: float = 5.0
 var noise_frequency: float = 0.05
 
+# --- STAGE-2 DNA (promoted 2026-08-12) -----------------------------------------------
+#
+# strata — WHAT THE FIELD IS MADE OF. calculate_terrain_density() sums three different
+# noises into one height: Perlin fBm (the landform), Simplex at 3x frequency (the crust)
+# and Cellular RETURN_CELL_VALUE (flat-topped plates). The axis multiplies those three
+# weights and nothing else. "all" hands back the shipped literals 1.0 / 0.2 / 0.3; the
+# sole-layer rungs carry weight 1.0 so each shows its layer at full strength, which makes
+# "all" about 1.5x the amplitude of a sole rung. Stated rather than hidden, and the reason
+# swell is crossed with it.
+@export_enum("all", "bedrock", "cells", "fine") var strata: String = "all"
+
+# swell — HOW FAR THE FIELD IS ALLOWED TO DEPART FROM FLAT: the amplitude the noise sum is
+# multiplied by before it becomes a height.
+#
+# THE LADDER DOES NOT REACH ZERO, and that is a fact about the artifact rather than a
+# design compromise. Chunks are created at y = 0.0 (TerrainGenerator.create_terrain_voxel_
+# grid) and sampled upward for 12 x 0.8 = 9.6 m, so the box floor IS the mean plane. The
+# density ladder crosses iso 0.5 at surface_factor = 1/6, i.e. 0.167 units BELOW the
+# geometric surface — so at amplitude 0 the extracted surface sits at y = -0.167, outside
+# the sampled column, every voxel reads 0.45 or less, and marching cubes finds no crossing
+# at all. Amplitude 0 renders NOTHING, not a slab. Small amplitudes render LESS, not
+# flatter: only the ~45% of the footprint where combined_height clears 0.167 gets any
+# geometry, which is also why the shipped default is a partial sheet rather than a ground.
+#
+# CEILING: 13.0 puts the crests near 6-8 m with the 9.6 m column still around them. Above
+# ~15 the terrain leaves the box and the rung photographs as holes rather than as mountains.
+@export_enum("rolling", "subdued", "hills", "range") var swell: String = "rolling"
+
+# Law 4. TerrainGenerator.setup_noise_generators reads
+#   var actual_seed = seed_value if seed_value >= 0 else randi()
+# and the shipped call site passed no argument, so every launch drew a fresh randi() and
+# five variants would have been five different terrains. Negative keeps that shipped
+# randi() call for call; dna.fixture pins it to 7 for the sweep.
+@export var terrain_seed: int = -1
+
+# Law 6. The shipped path is call_deferred("generate_terrain_async") plus three awaited
+# process frames inside the generator, so the mesh does not exist until roughly five
+# frames after _ready. True runs the identical four steps with the awaits removed.
+# Default false leaves the shipped deferred path untouched.
+@export var build_synchronously: bool = false
+
+## Signature of every value the build reads. apply_grid_config returns early when it has
+## not moved, so a map token that changes nothing cannot trigger a rebuild.
+var _cfg_signature: String = ""
+## Nodes THIS script put into the tree. A rebuild frees these and only these.
+var _owned: Array[Node] = []
+
 func _ready() -> void:
+	_read_config_meta()
 	setup_ui()
 	setup_terrain_generator()
 	setup_camera()
 	setup_vr_navigation()
-	
+	_cfg_signature = _config_signature()
+
 	# Generate initial terrain
-	call_deferred("generate_terrain_async")
+	if build_synchronously:
+		generate_terrain_sync()
+	else:
+		call_deferred("generate_terrain_async")
+
+func _read_config_meta() -> void:
+	"""Map-token config, read BEFORE the first build.
+
+	GridInteractablesComponent stamps config_<key> metadata at line 1195 and calls
+	add_child at 1220, so a token's values are already on this node when _ready runs. The
+	call_deferred("apply_grid_config") that follows then finds an unchanged signature and
+	returns without rebuilding anything."""
+	if has_meta("config_strata"):
+		strata = str(get_meta("config_strata"))
+	if has_meta("config_swell"):
+		swell = str(get_meta("config_swell"))
+	if has_meta("config_terrain_seed"):
+		terrain_seed = int(get_meta("config_terrain_seed"))
+	if has_meta("config_build_synchronously"):
+		var v: Variant = get_meta("config_build_synchronously")
+		if typeof(v) == TYPE_BOOL:
+			build_synchronously = bool(v)
+		else:
+			build_synchronously = str(v).to_lower() == "true"
+
+func _config_signature() -> String:
+	return "%s|%s|%d|%.4f|%.5f" % [strata, swell, terrain_seed, terrain_size, noise_frequency]
+
+func _strata_weights() -> Array:
+	"""The three summand weights for the current value of `strata`.
+
+	AN ARRAY AND NOT A Vector3, deliberately. Vector3 components are 32-bit floats, so
+	Vector3(1.0, 0.2, 0.3).y widened back to a GDScript double is 0.20000000298023224 —
+	NOT the double 0.2 the shipped literal compiles to. Returning an Array keeps every
+	element a double, which is what makes `all` a bit-identical short-circuit rather than
+	a value that merely lands near the old one."""
+	match strata:
+		"bedrock":
+			return [1.0, 0.0, 0.0]  # pure Perlin fBm: ground with no cells and no crust
+		"cells":
+			return [0.0, 0.0, 1.0]  # cellular alone: flat-topped plates, vertical steps
+		"fine":
+			return [0.0, 1.0, 0.0]  # simplex detail alone at 3x frequency: crust, no landform
+	# "all" — SHIPPED, the three literals handed back unchanged. Written as the fall-through
+	# rather than a `_:` case so the analyzer can see the function always returns.
+	return [1.0, 0.2, 0.3]
+
+func _swell_height() -> float:
+	match swell:
+		"subdued":
+			return 2.5
+		"hills":
+			return 9.0
+		"range":
+			return 13.0
+	# "rolling" — SHIPPED. terrain_height, so the HeightSlider path still works.
+	return terrain_height
 
 func setup_ui() -> void:
 	"""Initialize UI elements"""
@@ -56,7 +161,8 @@ func setup_ui() -> void:
 
 func setup_terrain_generator() -> void:
 	"""Initialize terrain generation system"""
-	terrain_generator = TerrainGenerator.new()
+	# terrain_seed defaults to -1, which is exactly the branch the no-argument call took.
+	terrain_generator = TerrainGenerator.new(terrain_seed)
 	terrain_generator.generation_progress.connect(_on_generation_progress)
 	terrain_generator.generation_complete.connect(_on_generation_complete)
 	
@@ -245,13 +351,17 @@ func update_teleport_previews() -> void:
 
 func update_terrain_parameters() -> void:
 	"""Update terrain parameters from UI"""
+	var weights: Array = _strata_weights()
 	var params = {
 		"size": Vector2(terrain_size, terrain_size),
-		"height": terrain_height,
+		"height": _swell_height(),
 		"noise_frequency": noise_frequency,
 		"threshold": 0.5,
 		"debug_mode": true,  # Enable debug mode to prevent holes
-		"min_density": 0.7   # Guarantee minimum density
+		"min_density": 0.7,  # Guarantee minimum density
+		"height_weight": weights[0],
+		"detail_weight": weights[1],
+		"feature_weight": weights[2]
 	}
 	terrain_generator.configure_terrain(params)
 
@@ -275,9 +385,54 @@ func generate_terrain_async() -> void:
 	# Update parameters and generate
 	update_terrain_parameters()
 	var terrain_meshes = await terrain_generator.generate_terrain_async()
-	
+
 	# Add terrain to scene
 	terrain_generator.add_terrain_to_scene(self)
+	_record_owned()
+
+func generate_terrain_sync() -> void:
+	"""The shipped four steps with no awaits — the mesh exists when this returns.
+
+	Same order as generate_terrain_async, including generation_complete firing before
+	add_terrain_to_scene, so _on_generation_complete sees exactly what it always saw."""
+	print("TerrainDemo: Starting terrain generation (synchronous)...")
+
+	if generate_button != null:
+		generate_button.disabled = true
+		generate_button.text = "Generating..."
+	if progress_bar != null:
+		progress_bar.visible = true
+		progress_bar.value = 0
+
+	update_terrain_parameters()
+	terrain_generator.generate_terrain_sync()
+	terrain_generator.add_terrain_to_scene(self)
+	_record_owned()
+
+func _record_owned() -> void:
+	for m in terrain_generator.terrain_meshes:
+		if m != null and not _owned.has(m):
+			_owned.append(m)
+	for b in terrain_generator.collision_bodies:
+		if b != null and not _owned.has(b):
+			_owned.append(b)
+
+func _free_owned() -> void:
+	"""Free ONLY what this script put into the tree. remove_child first, so the rebuilt
+	chunks do not collide with a still-queued name and get renamed to TerrainChunk_0@2."""
+	for n in _owned:
+		if is_instance_valid(n):
+			var p: Node = n.get_parent()
+			if p != null:
+				p.remove_child(n)
+			n.queue_free()
+	_owned.clear()
+
+func _rebuild_terrain() -> void:
+	_free_owned()
+	# A new generator, because the seed is read once in _init.
+	setup_terrain_generator()
+	generate_terrain_sync()
 
 func clear_previous_terrain() -> void:
 	"""Clear previously generated terrain"""
@@ -407,4 +562,29 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	"""Map-token config. Was a bare `pass`.
+
+	The signature guard is the whole point: GridInteractablesComponent always calls this
+	(deferred) after _ready has already built with the same values, so without it every
+	configured placement would rebuild its terrain once for nothing. Rebuilds are
+	SYNCHRONOUS — no call_deferred in a build path — and free only _owned."""
+	if config.has("strata"):
+		strata = str(config["strata"])
+	if config.has("swell"):
+		swell = str(config["swell"])
+	if config.has("terrain_seed"):
+		terrain_seed = int(config["terrain_seed"])
+
+	if terrain_generator == null:
+		# The call can arrive before _ready has run. It does not today — curation_station
+		# add_child()s first and only then calls this (curation_station.gd:378-382), and the
+		# grid defers the call — but a composer that instantiates and configures without
+		# parenting would otherwise rebuild against a null generator. The exports are
+		# already set above; _ready builds with them and records the signature.
+		return
+
+	var sig: String = _config_signature()
+	if sig == _cfg_signature:
+		return
+	_cfg_signature = sig
+	_rebuild_terrain()

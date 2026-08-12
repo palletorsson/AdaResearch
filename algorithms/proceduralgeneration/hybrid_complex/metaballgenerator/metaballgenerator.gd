@@ -3,13 +3,96 @@
 extends Node3D
 class_name MetaballGenerator
 
+# ─────────────────────────────────────────────────────────────────────
+#  STAGE-2 DNA — metaball_world. Two axes, and both are about THE FIELD
+#  ITSELF rather than about the surface pulled out of it: where the
+#  field's sources stand, and what one source contributes.
+#
+#  emplacement  WHERE THE SOURCES STAND. generate_metaballs built one
+#               arrangement and only one — a vertical stack with a small
+#               horizontal jitter. Measured against this scene's own
+#               grid (30 x 64 x 30 cells at 0.15 m, a 4.5 x 9.6 x 4.5 m
+#               volume) that stack is the whole reason the artifact
+#               reads as a lava lamp rather than as a cluster. `column`
+#               is that literal, untouched. The other four move the
+#               geometry of provenance and NOTHING else: the count stays
+#               at the scene's own 10 on every rung, same kernel, same
+#               iso, same summands.
+#
+#  kernel       WHAT ONE SOURCE CONTRIBUTES. The shipped potential is
+#               strength * radius^2 / d^2 — INFINITE SUPPORT, which the
+#               code then truncates at 5% of iso to afford it (see
+#               _update_influence_radii). That truncation is the
+#               artifact admitting what its field is made of: every
+#               source reaches every point forever, and the cull buys
+#               the frame rate back. `wyvill` is the only rung on which
+#               that cull is not an approximation but the kernel's own
+#               edge.
+#
+#  NOT metaball_count and NOT iso_level. `metaball_count` and `fusion`
+#  are the metaballs.tscn axes next door; the count is held CONSTANT
+#  here precisely so "how many sources" and "where they stand" stay
+#  separate questions, and the sweep can show they are independent.
+#  `threshold` is mc_torus_sculpture's. grid_size and cell_size are the
+#  sampling lattice, i.e. `resolution`, already a family word used
+#  twice. animation_speed, step_duration, max_steps, regen_interval and
+#  TIME_BUDGET_MS are rates and durations — invisible in a still.
+#
+#  max_steps is the FIXTURE rather than an axis, which is the neat part:
+#  _ready() starts the animation only `if max_steps > 0`, so max_steps =
+#  0 leaves the mesh in exactly the state generate_metaballs();
+#  generate_mesh() produced at t = 0 and never enters the stepping loop.
+#  A static, deterministic pose reached through an export that already
+#  existed, with no capture-only property invented for the bench.
+#
+#  DETERMINISM. This artifact was unseeded twice over: four randf_range
+#  draws per source in generate_metaballs, and six more inside
+#  Metaball._init for the animation. Five variants of an unseeded
+#  generator are five different objects, so any bite number would have
+#  been noise dressed as evidence. metaball_seed = 0 keeps the shipped
+#  global RNG, call for call and in the shipped order. Non-zero routes
+#  every draw through TWO local streams — one for position, one for body
+#  (strength, radius, and the animation constants _init draws) — so that
+#  a rung needing no positional jitter (ring, shell) does not shift the
+#  strengths and radii of the rung it is being compared against. Only
+#  the geometry moves. Without the split, `ring` and `column` would be
+#  ten differently-sized balls as well as two arrangements, and the
+#  axis would be measuring two things at once.
+# ─────────────────────────────────────────────────────────────────────
+
+## Compact-support kernels measure their reach in radii; 4 is the usual
+## Wyvill scale and `cone` reuses it so the two share one support and
+## differ only in continuity.
+const KERNEL_SUPPORT_RADII: float = 4.0
+## The culling floor _update_influence_radii already used: 5% of iso.
+## REFUSED as an axis and folded into kernel's subtext instead — at the
+## shipped kernel it is an approximation error, and at any conservative
+## value it is invisible by construction.
+const CULL_FRACTION: float = 0.05
+# Kernel ids, so the general field loop compares ints and not strings.
+const K_INVERSE_SQUARE: int = 0
+const K_WYVILL: int = 1
+const K_GAUSSIAN: int = 2
+const K_CONE: int = 3
+
+## WHERE THE FIELD'S SOURCES STAND. See _emplace().
+@export_enum("column", "ring", "pair", "shell", "scatter") var emplacement: String = "column"
+## WHAT ONE SOURCE CONTRIBUTES. See _kernel_id() and generate_mesh().
+@export_enum("inverse_square", "wyvill", "gaussian", "cone") var kernel: String = "inverse_square"
+## 0 keeps the shipped global RNG, call for call. Non-zero seeds locals.
+@export var metaball_seed: int = 0
+
 @export var grid_size: Vector3i = Vector3i(64, 32, 64)
 @export var cell_size: float = 0.5
 @export var iso_level: float = 1.0
 @export var metaball_count: int = 8
 @export var animation_speed: float = 0.5
 @export var generate_on_ready: bool = true
-@export var max_steps: int = 5  # Stop after this many steps (0 = unlimited)
+# Stop after this many steps. 0 means _ready() NEVER STARTS stepping (this is
+# the capture fixture) — the old comment here read "0 = unlimited", which is
+# only true of _process's stop test on the far side of a start_stepping() call
+# nothing in a spawned artifact ever makes.
+@export var max_steps: int = 5
 @export var step_duration: float = 0.4  # Seconds per step
 
 # Shader to apply to the metaball surface
@@ -53,6 +136,14 @@ var edge_v2: PackedInt32Array = PackedInt32Array([1,2,3,0,5,6,7,4,4,5,6,7])
 # Performance tracking
 var generation_time: float = 0.0
 
+# Nodes THIS SCRIPT created, and the only ones _exit_tree may free.
+var _owned: Array[Node] = []
+# True once _ready has built once. Before that there is nothing to redraw.
+var _built: bool = false
+# Signature of every value the build reads, so a config that changes none
+# of them returns before touching the mesh.
+var _last_sig: String = ""
+
 class Metaball:
 	var position: Vector3
 	var strength: float
@@ -66,20 +157,32 @@ class Metaball:
 	var drift_amount: float
 	var phase_offset: float
 	
-	func _init(pos: Vector3, str: float, rad: float) -> void:
+	# `rng` null is the SHIPPED path — the same six global draws, in the same
+	# order. It is passed in rather than read from the outer script because an
+	# inner class cannot see the outer scope, and because these six must come
+	# out of the SAME stream as strength and radius: they are consumed even at
+	# the fixture's max_steps = 0, since they happen in the constructor and not
+	# in update(), so a stream that skipped them would move every later source.
+	func _init(pos: Vector3, str: float, rad: float, rng: RandomNumberGenerator = null) -> void:
 		position = pos
 		strength = str
 		target_strength = str
 		radius = rad
-		animation_phase = randf() * TAU
+		animation_phase = (randf() if rng == null else rng.randf()) * TAU
 		# Vertical bobbing at different speeds
-		rise_speed = randf_range(0.3, 0.8)
+		rise_speed = randf_range(0.3, 0.8) if rng == null else rng.randf_range(0.3, 0.8)
 		# Small horizontal drift
-		drift_freq_x = randf_range(0.5, 1.5)
-		drift_freq_z = randf_range(0.5, 1.5)
-		drift_amount = randf_range(0.3, 0.7)
-		phase_offset = randf() * TAU
-	
+		drift_freq_x = randf_range(0.5, 1.5) if rng == null else rng.randf_range(0.5, 1.5)
+		drift_freq_z = randf_range(0.5, 1.5) if rng == null else rng.randf_range(0.5, 1.5)
+		drift_amount = randf_range(0.3, 0.7) if rng == null else rng.randf_range(0.3, 0.7)
+		phase_offset = (randf() if rng == null else rng.randf()) * TAU
+
+	# THE UN-INLINED TWIN, and DEAD: nothing in this file or the repo calls it —
+	# generate_mesh() inlines the field into its hot loop and that loop is the
+	# only live path. Left inverse-square on purpose rather than made
+	# kernel-aware, because an inner class cannot read the outer `kernel` and a
+	# second, half-wired copy of the axis is worse than an honest fossil. If it
+	# is ever revived it must take the kernel as an argument.
 	func get_field_value(point: Vector3) -> float:
 		var dist_sq = position.distance_squared_to(point)
 		if dist_sq < 0.0001:
@@ -109,9 +212,16 @@ func _ready() -> void:
 	if generate_on_ready:
 		generate_metaballs()
 		generate_mesh()
-		# Auto-start stepping
+		# Auto-start stepping. max_steps = 0 is the capture FIXTURE: the mesh
+		# stays in exactly the state the two calls above left it, and _process
+		# returns on `not stepping` forever after.
 		if max_steps > 0:
 			start_stepping()
+
+	# Everything here is synchronous — no call_deferred, no await — so the
+	# signature below describes a body that already exists.
+	_built = true
+	_last_sig = _signature()
 
 func _precompute_grid_positions() -> void:
 	# Pre-compute axis positions once — no per-frame math for grid coords
@@ -134,6 +244,7 @@ func setup_scene() -> void:
 	array_mesh = ArrayMesh.new()
 	mesh_instance.mesh = array_mesh
 	add_child(mesh_instance)
+	_owned.append(mesh_instance)
 	
 	# Use the pink shader if assigned, otherwise fallback to standard material
 	if surface_shader:
@@ -163,31 +274,139 @@ func generate_metaballs() -> void:
 	metaballs.clear()
 	influence_radius_sq.clear()
 	var bounds = Vector3(grid_size) * cell_size * 0.5
-	
+
+	# seed 0 is the shipped path: the global RNG, in the shipped call order.
+	# TWO streams, not one, and the split is the whole reason the emplacement
+	# sweep means anything — see the DETERMINISM note in the header.
+	var rng_pos: RandomNumberGenerator = null
+	var rng_body: RandomNumberGenerator = null
+	if metaball_seed != 0:
+		rng_pos = RandomNumberGenerator.new()
+		rng_pos.seed = metaball_seed
+		rng_body = RandomNumberGenerator.new()
+		rng_body.seed = metaball_seed + 1
+
 	# Small balls distributed vertically through the column
 	for i in metaball_count:
-		var y_frac = float(i) / float(metaball_count) * 2.0 - 1.0
-		var pos = Vector3(
-			randf_range(-bounds.x * 0.3, bounds.x * 0.3),
-			bounds.y * y_frac * 0.7,
-			randf_range(-bounds.z * 0.3, bounds.z * 0.3)
-		)
-		
-		var strength = randf_range(0.7, 1.0)
-		var radius = randf_range(0.35, 0.55)
-		metaballs.append(Metaball.new(pos, strength, radius))
-	
+		var pos: Vector3 = _emplace(i, bounds, rng_pos)
+
+		var strength: float = 0.0
+		var radius: float = 0.0
+		if rng_body == null:
+			strength = randf_range(0.7, 1.0)
+			radius = randf_range(0.35, 0.55)
+		else:
+			strength = rng_body.randf_range(0.7, 1.0)
+			radius = rng_body.randf_range(0.35, 0.55)
+		metaballs.append(Metaball.new(pos, strength, radius, rng_body))
+
 	_update_influence_radii()
+
+
+## WHERE ONE SOURCE STANDS — the emplacement axis.
+##
+## `column` reproduces the shipped literal exactly: the same two randf_range
+## calls, in the same order, against the same stream, so at metaball_seed = 0
+## and emplacement = "column" this function is the expression that was inline
+## here before. It is the fallthrough as well as the declared default, so an
+## unrecognised string lands on the shipped arrangement rather than on nothing.
+##
+## The four others move ONLY the geometry: the count, the strengths, the radii,
+## the kernel and the iso level are untouched by every branch below.
+func _emplace(i: int, bounds: Vector3, rng: RandomNumberGenerator) -> Vector3:
+	var n: int = maxi(metaball_count, 1)
+	match emplacement:
+		"ring":
+			# A circle in XZ at mid height, radius 0.6 of the half-width. At
+			# this scene's 4.5 m width that is a 2.7 m ring whose neighbours
+			# sit ~0.85 m apart — inside every kernel here, so the extraction
+			# closes into a torus rather than into ten beads.
+			var a: float = TAU * float(i) / float(n)
+			var rr: float = bounds.x * 0.6
+			return Vector3(rr * cos(a), 0.0, rr * sin(a))
+		"pair":
+			# Two clusters, the count split evenly, at +/- 0.6 of the
+			# half-height. At this scene's 9.6 m that is 5.76 m centre to
+			# centre: the arrangement in which a FIXED iso level decides
+			# whether this artifact is one body or two.
+			var half: int = maxi(n / 2, 1)
+			var side: float = -1.0 if i < half else 1.0
+			var j: int = i if i < half else i - half
+			var spread: float = (float(j) / float(half) - 0.5) * bounds.y * 0.15
+			return Vector3(
+				_jitter(rng, bounds.x * 0.3),
+				side * bounds.y * 0.6 + spread,
+				_jitter(rng, bounds.z * 0.3)
+			)
+		"shell":
+			# A Fibonacci sphere at 0.7 of the SMALLEST half-extent, so the bag
+			# fits the narrow axis of a tall box instead of being clipped by it.
+			# Sources on a hollow, nothing inside — whether the inside stays
+			# empty is a question for `kernel`, not for this axis, and the two
+			# answer it differently. See dna.predicted_degeneracy.
+			var k: float = (2.0 * float(i) + 1.0) / float(n) - 1.0
+			var ry: float = sqrt(maxf(1.0 - k * k, 0.0))
+			var phi: float = float(i) * PI * (3.0 - sqrt(5.0))
+			var rad: float = minf(bounds.x, minf(bounds.y, bounds.z)) * 0.7
+			return Vector3(rad * ry * cos(phi), rad * k, rad * ry * sin(phi))
+		"scatter":
+			# Uniform through the WHOLE volume, against column's +/-0.3 of it.
+			return Vector3(
+				_jitter(rng, bounds.x),
+				_jitter(rng, bounds.y),
+				_jitter(rng, bounds.z)
+			)
+	# column — SHIPPED.
+	var y_frac = float(i) / float(metaball_count) * 2.0 - 1.0
+	return Vector3(
+		_jitter(rng, bounds.x * 0.3),
+		bounds.y * y_frac * 0.7,
+		_jitter(rng, bounds.z * 0.3)
+	)
+
+
+## randf_range(-half, half). At rng == null this is the shipped global call,
+## and -half is an exact sign flip of the same product, so `column` draws the
+## identical two floats the inline expression drew.
+func _jitter(rng: RandomNumberGenerator, half: float) -> float:
+	if rng == null:
+		return randf_range(-half, half)
+	return rng.randf_range(-half, half)
+
+
+## The kernel as an int, so the general field loop compares integers.
+func _kernel_id() -> int:
+	match kernel:
+		"wyvill":
+			return K_WYVILL
+		"gaussian":
+			return K_GAUSSIAN
+		"cone":
+			return K_CONE
+	return K_INVERSE_SQUARE
 
 func _update_influence_radii() -> void:
 	# Max distance where a metaball's field > min_threshold
 	# Beyond this, the contribution is negligible
-	var min_threshold = iso_level * 0.05  # 5% of iso — anything less won't matter
+	var min_threshold = iso_level * CULL_FRACTION  # 5% of iso — anything less won't matter
 	influence_radius_sq.resize(metaballs.size())
 	for i in metaballs.size():
 		var mb = metaballs[i]
-		# field = strength * r² / d²  →  d = r * sqrt(strength / threshold)
-		var max_dist = mb.radius * sqrt(mb.target_strength / min_threshold)
+		var max_dist: float = 0.0
+		match kernel:
+			"wyvill", "cone":
+				# COMPACT SUPPORT. This is not a truncation and not an
+				# approximation: past R the kernel is exactly zero, so the
+				# cull and the field agree. It is the only rung where the
+				# 5% floor above is not a lie the artifact tells itself.
+				max_dist = mb.radius * KERNEL_SUPPORT_RADII
+			"gaussian":
+				# s * exp(-d²/2r²) = t  →  d = r * sqrt(2 * ln(s / t))
+				var ratio: float = mb.target_strength / maxf(min_threshold, 0.000001)
+				max_dist = mb.radius * sqrt(2.0 * log(maxf(ratio, 1.0000001)))
+			_:
+				# field = strength * r² / d²  →  d = r * sqrt(strength / threshold)
+				max_dist = mb.radius * sqrt(mb.target_strength / min_threshold)
 		influence_radius_sq[i] = max_dist * max_dist
 
 func generate_mesh() -> void:
@@ -199,17 +418,37 @@ func generate_mesh() -> void:
 	var mb_py: PackedFloat32Array = []
 	var mb_pz: PackedFloat32Array = []
 	var mb_sr2: PackedFloat32Array = []  # strength * radius²
+	# Read only by the non-default kernels: raw strength, and one shape
+	# coefficient whose meaning depends on the kernel (1/R² for wyvill,
+	# 1/(2r²) for gaussian, 1/R for cone). Filling them costs four stores per
+	# source and changes no arithmetic on the shipped path.
+	var mb_s: PackedFloat32Array = []
+	var mb_k: PackedFloat32Array = []
 	mb_px.resize(num_metaballs)
 	mb_py.resize(num_metaballs)
 	mb_pz.resize(num_metaballs)
 	mb_sr2.resize(num_metaballs)
+	mb_s.resize(num_metaballs)
+	mb_k.resize(num_metaballs)
+	var k_id: int = _kernel_id()
 	for i in num_metaballs:
 		var mb = metaballs[i]
 		mb_px[i] = mb.position.x
 		mb_py[i] = mb.position.y
 		mb_pz[i] = mb.position.z
 		mb_sr2[i] = mb.strength * mb.radius * mb.radius
-	
+		mb_s[i] = mb.strength
+		var support: float = maxf(mb.radius, 0.000001) * KERNEL_SUPPORT_RADII
+		match k_id:
+			K_WYVILL:
+				mb_k[i] = 1.0 / (support * support)
+			K_GAUSSIAN:
+				mb_k[i] = 1.0 / (2.0 * maxf(mb.radius * mb.radius, 0.000001))
+			K_CONE:
+				mb_k[i] = 1.0 / support
+			_:
+				mb_k[i] = 0.0
+
 	# Calculate field values with influence-radius culling
 	var total_points = grid_size.x * grid_size.y * grid_size.z
 	if field_values.size() != total_points:
@@ -221,26 +460,70 @@ func generate_mesh() -> void:
 	var stride_z = sx * sy
 	
 	var index = 0
-	for z in grid_size.z:
-		var wz = grid_positions_z[z]
-		for y in grid_size.y:
-			var wy = grid_positions_y[y]
-			for x in grid_size.x:
-				var wx = grid_positions_x[x]
-				var total_field = 0.0
-				for m in num_metaballs:
-					var dx = wx - mb_px[m]
-					var dy = wy - mb_py[m]
-					var dz = wz - mb_pz[m]
-					var dist_sq = dx * dx + dy * dy + dz * dz
-					if dist_sq < influence_radius_sq[m]:
-						if dist_sq < 0.0001:
-							total_field += mb_sr2[m] * 10000.0
-						else:
-							total_field += mb_sr2[m] / dist_sq
-				field_values[index] = total_field
-				index += 1
-	
+	if k_id == K_INVERSE_SQUARE:
+		# SHIPPED, and kept as its own loop rather than as a branch inside the
+		# hot path. The default must be the same two operations this artifact
+		# always did — a load and a divide — and not a general kernel evaluated
+		# at the parameters that happen to reproduce them. Every existing
+		# placement runs exactly these lines.
+		for z in grid_size.z:
+			var wz = grid_positions_z[z]
+			for y in grid_size.y:
+				var wy = grid_positions_y[y]
+				for x in grid_size.x:
+					var wx = grid_positions_x[x]
+					var total_field = 0.0
+					for m in num_metaballs:
+						var dx = wx - mb_px[m]
+						var dy = wy - mb_py[m]
+						var dz = wz - mb_pz[m]
+						var dist_sq = dx * dx + dy * dy + dz * dz
+						if dist_sq < influence_radius_sq[m]:
+							if dist_sq < 0.0001:
+								total_field += mb_sr2[m] * 10000.0
+							else:
+								total_field += mb_sr2[m] / dist_sq
+					field_values[index] = total_field
+					index += 1
+	else:
+		# The three kernels with a finite value at d = 0, so none of them needs
+		# the singularity guard above. influence_radius_sq already carries each
+		# kernel's own reach, so the cull below is the kernel's edge for wyvill
+		# and cone and its 5% tail for gaussian.
+		for z in grid_size.z:
+			var wz2 = grid_positions_z[z]
+			for y in grid_size.y:
+				var wy2 = grid_positions_y[y]
+				for x in grid_size.x:
+					var wx2 = grid_positions_x[x]
+					var total2 = 0.0
+					for m in num_metaballs:
+						var dx2 = wx2 - mb_px[m]
+						var dy2 = wy2 - mb_py[m]
+						var dz2 = wz2 - mb_pz[m]
+						var d2 = dx2 * dx2 + dy2 * dy2 + dz2 * dz2
+						if d2 < influence_radius_sq[m]:
+							if k_id == K_WYVILL:
+								# s * (1 - d²/R²)³ — C² continuous, exactly
+								# zero at R.
+								var q = 1.0 - d2 * mb_k[m]
+								if q > 0.0:
+									total2 += mb_s[m] * q * q * q
+							elif k_id == K_GAUSSIAN:
+								# s * exp(-d²/2r²) — smooth, and long-tailed
+								# like the shipped kernel but far tighter at
+								# the iso level.
+								total2 += mb_s[m] * exp(-d2 * mb_k[m])
+							else:
+								# s * max(0, 1 - d/R) — only C0, so the summed
+								# field creases where two sources meet and the
+								# extraction carries the crease.
+								var t2 = 1.0 - sqrt(d2) * mb_k[m]
+								if t2 > 0.0:
+									total2 += mb_s[m] * t2
+					field_values[index] = total2
+					index += 1
+
 	# --- Marching cubes pass ---
 	var vertices = PackedVector3Array()
 	var normals = PackedVector3Array()
@@ -735,10 +1018,75 @@ func set_animation_speed(speed: float) -> void:
 	animation_speed = speed
 
 func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
+	# ONLY what this script created. The shipped body walked every child and
+	# freed the ones without an owner, which is the same single node here —
+	# mesh_instance is all setup_scene() adds — but "everything nobody claims"
+	# stops being true the moment anything else parents a node to this one.
+	for n in _owned:
+		if is_instance_valid(n):
+			n.queue_free()
+	_owned.clear()
 
 
+## Everything the build reads. A config that moves none of these terms is not a
+## rebuild, and that is the case every existing placement is in.
+func _signature() -> String:
+	return "%s|%s|%d|%d|%s|%s|%s" % [
+		emplacement, kernel, metaball_seed, metaball_count,
+		String.num(iso_level, 6), str(grid_size), String.num(cell_size, 6)
+	]
+
+
+## Redraw the field and re-extract. No node teardown: generate_mesh() clears and
+## refills the ONE ArrayMesh setup_scene() already made, so nothing is freed and
+## nothing is created — _owned is unchanged by a rebuild.
+func _rebuild() -> void:
+	generate_metaballs()
+	generate_mesh()
+	_last_sig = _signature()
+
+
+## Whether an @export_enum accepts this value, read from the property's OWN hint
+## rather than from a second list kept beside it. A const allow-list next to the
+## enum is the science_screen fault at file scale: two lists, one of them wrong,
+## and a sweep that sets an invalid value, falls back to the default and
+## publishes identical frames. There is only one list here and the enum is it.
+func _accepts(prop: String, value: String) -> bool:
+	for p in get_property_list():
+		if String(p.get("name", "")) != prop:
+			continue
+		return value in String(p.get("hint_string", "")).split(",", false)
+	return false
+
+
+## Config from a map token. Guarded twice — a value is taken only when the
+## export's own enum accepts it, and the rebuild fires only when the signature
+## actually moved — so the eleven existing placements, none of which passes a
+## key this reads, reach no assignment and never rebuild.
+##
+## curation_station's {"emissive": false} arrives here too, forwarded by the
+## scene root, and dies on the signature compare.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+
+	if config.has("emplacement"):
+		var e: String = str(config["emplacement"]).strip_edges().to_lower()
+		if _accepts("emplacement", e):
+			emplacement = e
+
+	if config.has("kernel"):
+		var k: String = str(config["kernel"]).strip_edges().to_lower()
+		if _accepts("kernel", k):
+			kernel = k
+
+	if config.has("metaball_seed"):
+		metaball_seed = int(config["metaball_seed"])
+
+	if _signature() == _last_sig:
+		return
+	# Before the first build there is nothing to redraw — _ready() will pick the
+	# new values up when it runs.
+	if not _built:
+		return
+	_rebuild()

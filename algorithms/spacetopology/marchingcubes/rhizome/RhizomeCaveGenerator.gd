@@ -11,6 +11,30 @@ signal generation_complete()
 @export var chunk_size: Vector3i = Vector3i(32, 32, 32)
 @export var voxel_scale: float = 1.0
 
+# --- DNA plumbing (2026-08-12) ----------------------------------------------
+# Three fields, each defaulting to the literal that used to be written inline, so the
+# path a map takes is unchanged. RhizomeCaveDemoController sets them; nothing else in
+# the corpus constructs this class except examples/simple_cave.gd, which sets none of
+# them and therefore gets the old behaviour exactly.
+#
+#   growth_seed        -1 keeps the shipped `RhizomeGrowthPattern.new(randi())` call,
+#                      character for character. >= 0 pins the whole growth history,
+#                      which is what makes a four-tile sweep four views of ONE cave
+#                      instead of four different caves.
+#   carve_radius_scale the `bore` axis. 1.0, and `radius * 1.0` returns the identical
+#                      bit pattern for every finite float, so the default carve is not
+#                      merely close to the shipped one — it is the same call.
+#   synchronous        capture only. Removes the frame yields so one _ready() returns a
+#                      finished cave; the map path leaves it false and still builds
+#                      across frames, because a 13k-voxel march must not gate map load.
+var growth_seed: int = -1
+var carve_radius_scale: float = 1.0
+var synchronous: bool = false
+
+## Nodes THIS SCRIPT created, so a rebuild frees its own work and nothing else. A
+## blanket free of get_children() is what cost three scripts a pass in an earlier wave.
+var _owned: Array[Node] = []
+
 # VoxelChunk class
 class RhizomeVoxelChunk:
 	var chunk_size: Vector3i
@@ -58,11 +82,15 @@ func generate_mesh_from_chunk_async(chunk: RhizomeVoxelChunk, max_time_ms: float
 	for x in range(chunk.chunk_size.x):
 		for y in range(chunk.chunk_size.y):
 			for z in range(chunk.chunk_size.z):
-				# Check if we've exceeded our time budget
-				var current_time = Time.get_ticks_msec()
-				if current_time - start_time > max_time_ms:
-					start_time = Time.get_ticks_msec()
-					await get_tree().process_frame
+				# Check if we've exceeded our time budget.
+				# GATED. On the capture path there is no next frame to wait for, and
+				# yielding here is what turns a still of this artifact into a photograph
+				# of a half-marched chunk. The map path is untouched.
+				if not synchronous:
+					var current_time = Time.get_ticks_msec()
+					if current_time - start_time > max_time_ms:
+						start_time = Time.get_ticks_msec()
+						await get_tree().process_frame
 				
 				# Get the 8 corner values for this voxel
 				var corner_values = get_voxel_corners(chunk, Vector3i(x, y, z))
@@ -244,7 +272,12 @@ func get_edge_table_entry(cube_index: int) -> int:
 func carve_sphere(chunk: RhizomeVoxelChunk, center: Vector3, radius: float) -> void:
 	"""Carve a spherical cavity in the density field"""
 	var voxel_center = center / voxel_scale
-	var voxel_radius = radius / voxel_scale
+	# THE `bore` AXIS, and the only place it touches anything. The growth graph has
+	# already been decided by the time this runs, so every rung carves the SAME network
+	# at a different width — same nodes, same edges, same positions, same rng draws.
+	# carve_tunnel reaches the field only through this function, so scaling here scales
+	# tunnels and chambers alike and nothing else. `radius * 1.0` is bit-identical.
+	var voxel_radius = (radius * carve_radius_scale) / voxel_scale
 
 	var min_x = int(max(0, voxel_center.x - voxel_radius - 1))
 	var max_x = int(min(chunk.chunk_size.x - 1, voxel_center.x + voxel_radius + 1))
@@ -273,7 +306,19 @@ func carve_tunnel(chunk: RhizomeVoxelChunk, connection: Dictionary) -> void:
 
 	# Sample points along the tunnel
 	var length = start.distance_to(end)
-	var steps = int(max(2, length / (voxel_scale * 0.5)))
+	var step_len: float = voxel_scale * 0.5
+	# COST GUARD, live only on the WIDE rungs of `bore`. carve_sphere's clamped loop is
+	# O(radius^3) capped by the chunk, and this samples the segment twice per voxel: at
+	# bore=hollow the carve radius is 7.2 m in a 24 m box, so every one of ~50 samples
+	# sweeps the ENTIRE chunk and a single tunnel costs ~700k voxel writes. A tube of
+	# carved radius R is fully resolved by samples every R/4 — four per radius cannot
+	# leave a seam between consecutive spheres — so the spacing is floored at that.
+	# Gated on > 1.0, which means bore=tunnel (the default) and bore=thread both take the
+	# shipped expression: step_len is voxel_scale * 0.5 and the division is the same one.
+	if carve_radius_scale > 1.0:
+		var min_r: float = minf(float(start_radius), float(end_radius)) * carve_radius_scale
+		step_len = maxf(step_len, min_r * 0.25)
+	var steps = int(max(2, length / step_len))
 
 	for i in range(steps + 1):
 		var t = float(i) / float(steps)
@@ -290,6 +335,14 @@ func setup_parameters(params: Dictionary) -> void:
 		voxel_scale = params["voxel_scale"]
 	if params.has("threshold"):
 		threshold = params["threshold"]
+	# REPORTED, NOT INVENTED. Every caller of this function has always passed a "seed"
+	# key and this function has always dropped it: RhizomeCaveDemoController wrote
+	# `"seed": randi()` and examples/simple_cave.gd writes `"seed": 12345, # Reproducible
+	# generation`, and neither has ever reached the RNG. The key is now read. It defaults
+	# to -1 in the controller, which is the sentinel RhizomeGrowthPattern._init already
+	# understood, so the shipped `randi()` path below is unchanged.
+	if params.has("seed"):
+		growth_seed = int(params["seed"])
 
 # Rhizome growth parameters
 var rhizome_branch_probability: float = 0.6
@@ -297,6 +350,11 @@ var rhizome_merge_distance: float = 6.0
 var rhizome_vertical_bias: float = 0.3
 var rhizome_chamber_probability: float = 0.25
 var rhizome_max_depth: int = 4
+# RhizomeGrowthPattern declares these two and set_growth_rules never read them, so
+# nothing in the corpus could reach them and every cave was grown at 5..20 m. The
+# defaults here ARE 5.0 and 20.0, so that stays true unless someone says otherwise.
+var rhizome_min_branch_length: float = 5.0
+var rhizome_max_branch_length: float = 20.0
 var rhizome_growth: RhizomeGrowthPattern
 
 func configure_rhizome_parameters(params: Dictionary) -> void:
@@ -311,6 +369,23 @@ func configure_rhizome_parameters(params: Dictionary) -> void:
 		rhizome_chamber_probability = params["chamber_probability"]
 	if params.has("max_depth"):
 		rhizome_max_depth = params["max_depth"]
+	if params.has("min_branch_length"):
+		rhizome_min_branch_length = float(params["min_branch_length"])
+	if params.has("max_branch_length"):
+		rhizome_max_branch_length = float(params["max_branch_length"])
+
+
+## Free ONLY what this script created, and nothing else. GridInteractablesComponent
+## attaches its own children to a spawned artifact; a blanket sweep of get_children()
+## would take them too.
+func clear_generated() -> void:
+	for n in _owned:
+		if is_instance_valid(n):
+			if n.get_parent() != null:
+				n.get_parent().remove_child(n)
+			n.queue_free()
+	_owned.clear()
+
 
 func generate_cave_async() -> void:
 	"""Generate cave asynchronously using rhizomatic growth"""
@@ -318,13 +393,21 @@ func generate_cave_async() -> void:
 	generation_progress.emit(0.0)
 
 	# Create rhizome growth pattern
-	rhizome_growth = RhizomeGrowthPattern.new(randi())
+	# SEEDED, OR NOT, EXACTLY AS BEFORE. growth_seed is -1 unless somebody set it, and
+	# on that branch this is the same `RhizomeGrowthPattern.new(randi())` call at the
+	# same site drawing from the same unseeded global stream. The only thing that has
+	# changed for a map is that the controller no longer takes a second randi() draw
+	# and throws it away. With a seed the whole growth history repeats, which is what
+	# lets four tiles be four views of ONE cave rather than four different caves.
+	rhizome_growth = RhizomeGrowthPattern.new(growth_seed if growth_seed >= 0 else randi())
 	rhizome_growth.set_growth_rules({
 		"branch_probability": rhizome_branch_probability,
 		"merge_distance": rhizome_merge_distance,
 		"vertical_bias": rhizome_vertical_bias,
 		"chamber_probability": rhizome_chamber_probability,
-		"max_depth": rhizome_max_depth
+		"max_depth": rhizome_max_depth,
+		"min_branch_length": rhizome_min_branch_length,
+		"max_branch_length": rhizome_max_branch_length
 	})
 
 	# Add initial growth nodes
@@ -336,7 +419,8 @@ func generate_cave_async() -> void:
 	var network = rhizome_growth.generate_rhizome_network(30)
 	generation_progress.emit(30.0)
 
-	await get_tree().process_frame
+	if not synchronous:
+		await get_tree().process_frame
 
 	# Create voxel chunk
 	var chunk = RhizomeVoxelChunk.new(chunk_size, voxel_scale)
@@ -349,7 +433,8 @@ func generate_cave_async() -> void:
 				chunk.set_density(Vector3i(x, y, z), 1.0)
 
 	generation_progress.emit(40.0)
-	await get_tree().process_frame
+	if not synchronous:
+		await get_tree().process_frame
 
 	# Carve tunnels along connections
 	var connections = network.get("connections", [])
@@ -357,7 +442,8 @@ func generate_cave_async() -> void:
 		carve_tunnel(chunk, conn)
 
 	generation_progress.emit(60.0)
-	await get_tree().process_frame
+	if not synchronous:
+		await get_tree().process_frame
 
 	# Carve chambers at nodes
 	var all_nodes = network.get("all_nodes", [])
@@ -366,7 +452,8 @@ func generate_cave_async() -> void:
 			carve_sphere(chunk, node.position, node.radius * (2.0 if node.is_chamber else 1.0))
 
 	generation_progress.emit(80.0)
-	await get_tree().process_frame
+	if not synchronous:
+		await get_tree().process_frame
 	
 	# Generate mesh from chunk
 	var mesh = await generate_mesh_from_chunk_async(chunk)
@@ -385,6 +472,7 @@ func generate_cave_async() -> void:
 	mesh_instance.material_override = material
 
 	add_child(mesh_instance)
+	_owned.append(mesh_instance)
 
 	# Create collision
 	if mesh.get_surface_count() > 0:
@@ -394,6 +482,7 @@ func generate_cave_async() -> void:
 		collision_shape.shape = mesh.create_trimesh_shape()
 		collision_body.add_child(collision_shape)
 		add_child(collision_body)
+		_owned.append(collision_body)
 
 	# Emit completion
 	generation_complete.emit()

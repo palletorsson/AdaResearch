@@ -69,6 +69,16 @@ func set_growth_rules(rules: Dictionary) -> void:
 		chamber_probability = rules.chamber_probability
 	if rules.has("max_depth"):
 		max_depth = rules.max_depth
+	# min_branch_length and max_branch_length were declared at the top of this file and
+	# then never read by anything: this function did not look for them and no caller sent
+	# them, so create_branches has drawn from 5.0..20.0 in every cave the project has ever
+	# grown. Reading them changes nothing on its own — RhizomeCaveGenerator's defaults are
+	# those same two numbers — but it makes the branch scale reachable, which is what the
+	# capture fixture needs to fit a network inside a chunk it can afford to march.
+	if rules.has("min_branch_length"):
+		min_branch_length = rules.min_branch_length
+	if rules.has("max_branch_length"):
+		max_branch_length = rules.max_branch_length
 
 func generate_rhizome_network(iterations: int = 50) -> Dictionary:
 	"""Generate the complete rhizomatic network through iterative growth"""

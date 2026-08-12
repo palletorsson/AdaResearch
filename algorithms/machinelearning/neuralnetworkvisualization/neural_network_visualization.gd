@@ -46,6 +46,12 @@ enum ActivationType { SIGMOID, RELU, TANH }
 @export var show_weights: bool = true
 @export var show_activations: bool = true
 
+## Presentation controls where the live training readout belongs.
+## `analysis` preserves the original overhead telemetry and separate error graph.
+## `museum` joins the telemetry to the network body and suppresses the time-domain
+## graph, which cannot communicate its descent in a static gallery placement.
+@export_enum("analysis", "museum") var presentation: String = "analysis"
+
 # ============================================================================
 # STAGE-2 DNA — one axis: topology
 #
@@ -120,6 +126,7 @@ const DNA_SEED: int = 20260730
 ## Metres the telemetry plate floats above the TOP NEURON CENTRE of the tallest
 ## column, at every topology value. See create_info_display().
 const LABEL_LIFT: float = 2.25
+const PRESENTATIONS: PackedStringArray = ["analysis", "museum"]
 
 # --- Network State ---
 var layers = []  # Array of layer arrays containing neurons
@@ -201,6 +208,7 @@ func _build_all() -> void:
 
 	# Create 3D visualization
 	create_visualization()
+	_apply_presentation()
 
 	# Add lighting and environment for glow effect
 	setup_environment()
@@ -528,10 +536,9 @@ func create_weight_line(from_layer: int, from_neuron: int, to_layer: int, to_neu
 ## 0.005 is 0.12 m of text, three lines of telemetry about 30 characters wide, so a
 ## plate near 1.9 x 0.5 m. It must therefore hang clear of the diagram.
 ##
-## The x stays 0. That is the INPUT column's own x rather than the network's centre —
-## the body runs x = 0 to x = 9.0 m at the default — so the plate hangs over the left
-## end. Moving it would change the shipped look at the default value, so it is left
-## exactly where it was.
+## The original `analysis` presentation keeps x at 0 over the input column. The
+## `museum` presentation moves the same plate beneath the network centre, where it
+## reads as part of the exhibit rather than a second object floating above it.
 ##
 ## The y is the fix. It used to be hard-coded `neuron_spacing * 4` = 6.0 m, which does
 ## NOT follow the stack: at `widened` the tallest column reaches 6.75 m and a plate
@@ -576,6 +583,17 @@ func _tallest_layer_size() -> int:
 ## column. At the default 6-neuron column this is 6.0 m — the shipped value.
 func _caption_y() -> float:
 	return (float(_tallest_layer_size()) - 1.0) * neuron_spacing * 0.5 + LABEL_LIFT
+
+## Centre of the layer stack on X, independent of topology.
+func _network_center_x() -> float:
+	var layer_count: int = hidden_layer_sizes.size() + 2
+	return float(layer_count - 1) * layer_spacing * 0.5
+
+## Museum telemetry sits just below the lowest neuron surface. The 0.9 m offset
+## includes the 0.3 m neuron radius, the framed caption's half-height, and air.
+func _museum_caption_y() -> float:
+	var lowest_neuron_center: float = -(float(_tallest_layer_size()) - 1.0) * neuron_spacing * 0.5
+	return lowest_neuron_center - 0.9
 
 func create_error_graph() -> void:
 	error_graph = get_node_or_null("ErrorGraph")
@@ -898,14 +916,19 @@ func _exit_tree() -> void:
 func apply_grid_config(config_data: Dictionary) -> void:
 	# Snapshot every axis and geometry key BEFORE resolving anything.
 	var before_topology: String = topology
+	var before_presentation: String = presentation
 
 	if config_data.has("topology"):
 		topology = _pick_axis(str(config_data["topology"]), TOPOLOGYS, topology)
+	if config_data.has("presentation"):
+		presentation = _pick_axis(str(config_data["presentation"]), PRESENTATIONS, presentation)
 
 	# Non-geometry keys, applied IN PLACE, before either return.
 	if config_data.has("emissive"):
 		_emissive = _as_bool(config_data["emissive"], _emissive)
 		_apply_emissive()
+	if presentation != before_presentation:
+		_apply_presentation()
 
 	if not _built:
 		return
@@ -913,7 +936,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[NeuralNetworkVisualization] Config applied — topology=%s" % [topology])
+	print("[NeuralNetworkVisualization] Config applied — topology=%s presentation=%s" % [topology, presentation])
 
 ## Free ONLY what this script parented to self, then build again SYNCHRONOUSLY. No
 ## call_deferred anywhere in the build path: a deferred rebuild that removes children
@@ -980,6 +1003,19 @@ func _apply_emissive() -> void:
 			var mat: StandardMaterial3D = (n as MeshInstance3D).material_override as StandardMaterial3D
 			if mat:
 				mat.emission_enabled = _emissive
+
+## Keep analysis tooling available without allowing it to define the museum body.
+## The museum mode integrates the live readout beneath the network and hides the
+## error graph because a static snapshot cannot explain its time axis.
+func _apply_presentation() -> void:
+	presentation = _pick_axis(presentation, PRESENTATIONS, "analysis")
+	if is_instance_valid(info_display):
+		if presentation == "museum":
+			info_display.position = Vector3(_network_center_x(), _museum_caption_y(), 0.4)
+		else:
+			info_display.position = Vector3(0, _caption_y(), 0)
+	if is_instance_valid(error_graph):
+		error_graph.visible = presentation != "museum"
 
 ## Stop the batch loop and take its timer with it.
 func _stop_training() -> void:

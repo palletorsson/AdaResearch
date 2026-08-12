@@ -29,6 +29,15 @@ var collision_generator: CaveCollisionGenerator
 @export var debug_minimum_density: float = 0.7  # Adjustable minimum density for terrain
 @export var debug_wireframe_mode: bool = false  # Set true to show wireframe
 
+# WHAT THE FIELD IS MADE OF — the three summands of combined_height, lifted out of
+# calculate_terrain_density() where they were inline literals. The defaults ARE those
+# literals: 1.0 was the (implicit) weight on height_noise, 0.2 the one written at the
+# old line 264 and 0.3 the one at 265. Every existing caller that never passes these
+# keys through configure_terrain() gets the same three multiplications it always got.
+@export var height_weight: float = 1.0    # Perlin fBm, 4 octaves — the landform
+@export var detail_weight: float = 0.2    # Simplex at 3x frequency — the crust
+@export var feature_weight: float = 0.3   # Cellular RETURN_CELL_VALUE — the plates
+
 # Noise layers for terrain variation
 var height_noise: FastNoiseLite
 var detail_noise: FastNoiseLite
@@ -110,6 +119,13 @@ func configure_terrain(params: Dictionary) -> void:
 		debug_disable_surface_variation = params.get("debug_mode", false)
 		debug_minimum_density = params.get("min_density", 0.7)
 		print("TerrainGenerator: Debug mode enabled - surface variation: %s, min density: %.2f" % [not debug_disable_surface_variation, debug_minimum_density])
+	# Additive: a caller that never sends these keys keeps 1.0 / 0.2 / 0.3 untouched.
+	if params.has("height_weight"):
+		height_weight = params.height_weight
+	if params.has("detail_weight"):
+		detail_weight = params.detail_weight
+	if params.has("feature_weight"):
+		feature_weight = params.feature_weight
 
 func generate_terrain_async() -> Array[MeshInstance3D]:
 	"""Generate terrain asynchronously"""
@@ -141,7 +157,37 @@ func generate_terrain_async() -> Array[MeshInstance3D]:
 	
 	generation_complete.emit()
 	print("TerrainGenerator: Terrain generation complete!")
-	
+
+	return terrain_meshes
+
+func generate_terrain_sync() -> Array[MeshInstance3D]:
+	"""The same four steps with the awaits removed — for a caller that must have the mesh
+	before its _ready() returns (a config-driven rebuild, or a still capture).
+
+	The three awaits in the async path are unconditional yields that neither read nor
+	write anything between them, so this produces the identical mesh. That is a claim
+	worth CHECKING rather than asserting: compare get_terrain_info().total_vertices from
+	both paths at the same seed — they should agree exactly."""
+	clear_previous_terrain()
+
+	create_terrain_voxel_grid()
+	generation_progress.emit(25.0)
+
+	for chunk in terrain_chunks:
+		fill_chunk_with_terrain(chunk)
+	generation_progress.emit(50.0)
+
+	terrain_meshes.clear()
+	for i in range(terrain_chunks.size()):
+		build_chunk_mesh(i)
+	generation_progress.emit(75.0)
+
+	generate_walkable_collision()
+	generation_progress.emit(100.0)
+
+	generation_complete.emit()
+	print("TerrainGenerator: Terrain generation complete (synchronous)!")
+
 	return terrain_meshes
 
 func create_terrain_voxel_grid() -> void:
@@ -260,9 +306,9 @@ func fill_chunk_with_terrain(chunk: VoxelChunk) -> void:
 func calculate_terrain_density(world_pos: Vector3) -> float:
 	"""Calculate density value for terrain at world position - HOLE-FREE VERSION"""
 	# Get height from multiple noise layers
-	var height_value = height_noise.get_noise_2d(world_pos.x, world_pos.z)
-	var detail_value = detail_noise.get_noise_2d(world_pos.x, world_pos.z) * 0.2  # Reduced for stability
-	var feature_value = feature_noise.get_noise_2d(world_pos.x, world_pos.z) * 0.3  # Reduced for stability
+	var height_value = height_noise.get_noise_2d(world_pos.x, world_pos.z) * height_weight
+	var detail_value = detail_noise.get_noise_2d(world_pos.x, world_pos.z) * detail_weight  # weight was the literal 0.2, "reduced for stability"
+	var feature_value = feature_noise.get_noise_2d(world_pos.x, world_pos.z) * feature_weight  # weight was the literal 0.3, "reduced for stability"
 	
 	var combined_height = (height_value + detail_value + feature_value) * terrain_height * 0.4
 	
@@ -320,26 +366,31 @@ func calculate_surface_height(x: float, z: float) -> float:
 func generate_terrain_meshes_async() -> void:
 	"""Generate meshes from terrain chunks asynchronously"""
 	terrain_meshes.clear()
-	
+
 	for i in range(terrain_chunks.size()):
-		var chunk = terrain_chunks[i]
-		var mesh = marching_cubes.generate_mesh_from_chunk(chunk)
-		
-		if mesh.get_surface_count() > 0:
-			var mesh_instance = MeshInstance3D.new()
-			mesh_instance.mesh = mesh
-			mesh_instance.name = "TerrainChunk_%d" % i
-			
-			# Apply terrain material
-			var material = create_terrain_material(i)
-			mesh_instance.set_surface_override_material(0, material)
-			
-			terrain_meshes.append(mesh_instance)
-			
-			print("Generated terrain mesh chunk %d/%d" % [i + 1, terrain_chunks.size()])
-		
+		build_chunk_mesh(i)
+
 		# Wait one frame between chunks
 		await Engine.get_main_loop().process_frame
+
+func build_chunk_mesh(i: int) -> void:
+	"""One chunk's mesh — extracted verbatim from generate_terrain_meshes_async's loop body
+	so the async and sync paths cannot drift apart."""
+	var chunk = terrain_chunks[i]
+	var mesh = marching_cubes.generate_mesh_from_chunk(chunk)
+
+	if mesh.get_surface_count() > 0:
+		var mesh_instance = MeshInstance3D.new()
+		mesh_instance.mesh = mesh
+		mesh_instance.name = "TerrainChunk_%d" % i
+
+		# Apply terrain material
+		var material = create_terrain_material(i)
+		mesh_instance.set_surface_override_material(0, material)
+
+		terrain_meshes.append(mesh_instance)
+
+		print("Generated terrain mesh chunk %d/%d" % [i + 1, terrain_chunks.size()])
 
 func create_terrain_material(chunk_index: int) -> StandardMaterial3D:
 	"""Create material for terrain surface"""

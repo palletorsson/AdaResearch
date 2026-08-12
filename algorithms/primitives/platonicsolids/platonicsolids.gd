@@ -96,9 +96,22 @@ var positions = [
 ]
 
 func _ready() -> void:
+	_configure_authored_environment()
 	create_queer_environment()
 	create_all_solids()
 	_built = true
+
+
+## The packed scene carries preview lights and a camera for its standalone demo.
+## In museum-owned `bare` staging those helpers must not leak into the room:
+## the room contract owns lighting, circulation and viewpoint.
+func _configure_authored_environment() -> void:
+	for child in get_children():
+		if child is Camera3D:
+			(child as Camera3D).current = false
+			(child as Camera3D).visible = false
+		elif child is Light3D:
+			(child as Light3D).visible = staging != "bare"
 
 # --- DNA (stage 2) -----------------------------------------------------------
 

@@ -5,6 +5,41 @@
 extends Node3D
 class_name VoxelNoiseMarchingCubes
 
+## STAGE-2 DNA PROMOTION (2026-08-12). Seventeen @exports and not one of them said what the
+## field is MADE of. The whole density field is a single call — generate_density_field()
+## samples `noise.get_noise_3d(p)` and maps it to (n + 1) * 0.5, with no shape term, no
+## gradient, no bias — so this is the sequence's purest case of a surface that is nothing
+## but a level set of noise. The two decisions that carry that argument were hardcoded one
+## line apart in setup_noise() and were reachable from no map and no inspector:
+##
+##   generator   what one sample is made of     simplex · perlin · value · cellular
+##   accretion   how the scales are combined    summed · single · ridged · pingpong
+##
+## generator is the SAME axis, with the same four values in the same order and the same
+## default, as perlin_noise, simplex_noise, noise_terrain, noise_space and
+## shader_noise_space. The noise sequence is built on comparing bases; if each artifact
+## spells the comparison its own way there is nothing to compare. cellular, not worley,
+## for the same reason. ONE DOCUMENTED DIVERGENCE from those five, and it is here because
+## this artifact LEVEL-SETS the field instead of displacing a height with it: the cellular
+## rung also sets cellular_return_type = RETURN_CELL_VALUE. FastNoiseLite's own default,
+## RETURN_DISTANCE, returns distance-to-nearest-feature, whose one-point distribution is
+## strongly one-sided; against this file's fixed iso_level of 0.5 — which was chosen to cut
+## a zero-mean field at its own mean — that would mostly move how MUCH of the box is solid.
+## RETURN_CELL_VALUE is a mean-zero constant per Voronoi cell, so the rung answers about
+## structure (flat-faced plates, no curvature anywhere) rather than about exposure. Same
+## reasoning shader_noise_space recorded when it amplitude-matched its four bases.
+##
+## accretion is a NEW word and the adjacency is named rather than left for the critic:
+## `octaves` is taken seven times (mc_cave, mc_inside_cave, noise_space, noise_quarry,
+## simplex_noise, marchingcubes_cave, marchingcubes_inside_cave) and it counts HOW MANY
+## scales survive. accretion is the RULE by which they are combined. The count is held at
+## this scene's shipped noise_octaves = 4 on every rung — it is one of the seventeen
+## exports and is deliberately untouched — so the two questions cannot overlap.
+##
+## Usage in map_data.json:
+##   "voxel_noise_demo#generator:cellular"
+##   "voxel_noise_demo#accretion:ridged"
+
 # === WORLD SETTINGS ===
 @export_group("World Configuration")
 @export var chunk_size: int = 32  # Size of chunk in world units
@@ -28,8 +63,43 @@ class_name VoxelNoiseMarchingCubes
 @export var outline_color: Color = Color(1.0, 0.0, 0.5, 1.0)
 @export var outline_width: float = 1.5
 
+# === DNA AXES ===
+@export_group("DNA")
+
+## DNA axis: which noise basis one sample of the field is drawn from. setup_noise() used to
+## assign FastNoiseLite.TYPE_SIMPLEX unconditionally; "simplex" returns that same enum
+## constant, so the shipped rung is a short-circuit and not a recomputation.
+@export_enum("simplex", "perlin", "value", "cellular") var generator: String = "simplex"
+
+## DNA axis: the rule by which the octaves are combined, not how many there are.
+## setup_noise() used to assign FastNoiseLite.FRACTAL_FBM unconditionally; "summed" returns
+## that same enum constant. "single" is FRACTAL_NONE — one octave, the frame that shows what
+## the other three rungs are adding. "ridged" rectifies each octave to 1 - |n| so the field
+## grows crests instead of lobes and the extracted surface becomes thin blades. "pingpong"
+## folds the range repeatedly at the engine's default fractal_ping_pong_strength of 2.0.
+@export_enum("summed", "single", "ridged", "pingpong") var accretion: String = "summed"
+
+## Allow-lists. A typo in a map token falls back to the value the node already holds rather
+## than stranding a placement with a field nobody chose — the science_screen failure was a
+## typo that nothing in the chain refused.
+const GENERATORS: PackedStringArray = ["simplex", "perlin", "value", "cellular"]
+const ACCRETIONS: PackedStringArray = ["summed", "single", "ridged", "pingpong"]
+
 # === COMPONENTS ===
 var noise: FastNoiseLite
+
+## Nodes THIS script created, and the only ones it may free. GridInteractablesComponent
+## attaches helper nodes (a _RotationTimer) to spawned artifacts, so a blanket free of
+## children is never safe.
+var _owned: Array[Node] = []
+
+## True once _ready has built the world. apply_grid_config must not rebuild before it.
+var _built: bool = false
+
+## Signature of every value the build reads, recorded at the end of each build. The rebuild
+## guard compares against this rather than a hand-listed tuple of the two axes, so it cannot
+## drift out of step with what generate_world() actually consumes.
+var _build_sig: String = ""
 
 # Marching cubes lookup tables
 var edge_table: Array[int] = []
@@ -53,21 +123,72 @@ class Triangle:
 
 # === INITIALIZATION ===
 func _ready() -> void:
+	_read_dna_metadata()
 	setup_noise()
 	setup_marching_cubes_tables()
 	generate_world()
+	_built = true
+	_build_sig = _signature()
+
+## The grid stamps config as `config_<key>` metadata BEFORE add_child and only THEN defers
+## apply_grid_config, so reading it here lets the first build be the right one instead of a
+## default build followed by a rebuild. Deliberately narrow: only the two axes are read, so
+## a token naming noise_scale or iso_level still changes nothing — widening the channel to
+## honour keys nobody has ever sent would be a behaviour change hiding inside a promotion.
+func _read_dna_metadata() -> void:
+	if has_meta("config_generator"):
+		generator = _valid(str(get_meta("config_generator")).to_lower(), GENERATORS, generator)
+	if has_meta("config_accretion"):
+		accretion = _valid(str(get_meta("config_accretion")).to_lower(), ACCRETIONS, accretion)
+
+func _valid(value: String, allowed: PackedStringArray, fallback: String) -> String:
+	return value if allowed.has(value) else fallback
+
+func _noise_type_for(basis_name: String) -> int:
+	var chosen: String = _valid(basis_name, GENERATORS, "simplex")
+	if chosen == "perlin":
+		return FastNoiseLite.TYPE_PERLIN
+	if chosen == "value":
+		return FastNoiseLite.TYPE_VALUE
+	if chosen == "cellular":
+		return FastNoiseLite.TYPE_CELLULAR
+	return FastNoiseLite.TYPE_SIMPLEX
+
+func _fractal_type_for(rule: String) -> int:
+	var chosen: String = _valid(rule, ACCRETIONS, "summed")
+	if chosen == "single":
+		return FastNoiseLite.FRACTAL_NONE
+	if chosen == "ridged":
+		return FastNoiseLite.FRACTAL_RIDGED
+	if chosen == "pingpong":
+		return FastNoiseLite.FRACTAL_PING_PONG
+	return FastNoiseLite.FRACTAL_FBM
+
+## Every value generate_world() reads, in one string. voxel_scale is NOT here on purpose:
+## it is exported and nothing in the build path ever reads it, so including it would let a
+## dead knob pay for a 29,791-cube re-march.
+func _signature() -> String:
+	return str([generator, accretion, noise_seed, noise_scale, noise_octaves,
+		noise_persistence, noise_lacunarity, chunk_size, num_points_per_axis,
+		iso_level, use_shader, generate_colliders, glass_color, outline_color,
+		outline_width])
 
 func setup_noise() -> void:
 	"""Initialize noise generator"""
 	noise = FastNoiseLite.new()
-	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.noise_type = _noise_type_for(generator)  # was: FastNoiseLite.TYPE_SIMPLEX
+	# Only the cellular rung touches this; every other rung leaves the property at the
+	# engine default it has always had. See the divergence note in the header.
+	if _valid(generator, GENERATORS, "simplex") == "cellular":
+		noise.cellular_return_type = FastNoiseLite.RETURN_CELL_VALUE
 	noise.seed = noise_seed
 	noise.frequency = noise_scale
-	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
+	noise.fractal_type = _fractal_type_for(accretion)  # was: FastNoiseLite.FRACTAL_FBM
 	noise.fractal_octaves = noise_octaves
 	noise.fractal_lacunarity = noise_lacunarity
 	noise.fractal_gain = noise_persistence
-	print("VoxelNoiseMarchingCubes: Noise generator initialized")
+	print("VoxelNoiseMarchingCubes: Noise generator initialized (%s / %s)"
+		% [generator, accretion])
 
 func setup_marching_cubes_tables() -> void:
 	"""Initialize marching cubes lookup tables"""
@@ -94,6 +215,7 @@ func generate_world() -> void:
 	mesh_instance.mesh = mesh
 	mesh_instance.name = "VoxelWorld"
 	add_child(mesh_instance)
+	_owned.append(mesh_instance)
 
 	# Apply material
 	if use_shader:
@@ -358,6 +480,7 @@ func create_collision(mesh: ArrayMesh) -> void:
 	col.add_child(shape)
 	col.name = "VoxelWorldCollision"
 	add_child(col)
+	_owned.append(col)
 
 # === PUBLIC API ===
 func regenerate() -> void:
@@ -367,13 +490,18 @@ func regenerate() -> void:
 
 func clear_world() -> void:
 	"""Clear generated mesh and collision"""
-	if mesh_instance:
-		mesh_instance.queue_free()
-		mesh_instance = null
-
-	var collision = get_node_or_null("VoxelWorldCollision")
-	if collision:
-		collision.queue_free()
+	# LAW 6: free ONLY the nodes this script created. Identical in effect to the shipped
+	# pair of queue_free calls — mesh_instance and VoxelWorldCollision are the only two
+	# nodes this script has ever added — but detached FIRST, because queue_free is deferred
+	# and the rebuild below adds a second "VoxelWorld" in the same frame, which Godot would
+	# silently rename to "VoxelWorld2".
+	for n in _owned:
+		if is_instance_valid(n):
+			if n.get_parent() == self:
+				remove_child(n)
+			n.queue_free()
+	_owned.clear()
+	mesh_instance = null
 
 func set_noise_parameters(params: Dictionary) -> void:
 	"""Update noise parameters"""
@@ -399,10 +527,39 @@ func set_noise_parameters(params: Dictionary) -> void:
 			noise.fractal_lacunarity = noise_lacunarity
 
 func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
+	# WAS: a blanket queue_free of every child without an owner. Identical in effect today —
+	# the mesh and the collision body are the only ownerless children this node has ever had
+	# — and it stops being identical the moment anything else attaches a helper here, which
+	# is exactly what GridInteractablesComponent does to spawned artifacts.
+	for n in _owned:
+		if is_instance_valid(n):
+			n.queue_free()
+	_owned.clear()
+	mesh_instance = null
 
 
+## WAS the single word `pass` — a config channel wired to nothing, so the two axes above
+## were unreachable from any map token even after they existed.
+##
+## GUARDED. Config can arrive before _ready (the grid stamps metadata on the node it is
+## about to add and defers this call) or after. Before the first build, assignment is
+## enough: _ready reads the new values on its way through. After it, only a value that
+## actually MOVED may pay for a 32,768-sample field and a 29,791-cube march. The signature
+## is every value the build reads, so a config dict naming none of them — which is every
+## config any placement has ever sent, including curation_station's {"emissive": false} —
+## cannot move it.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("generator"):
+		generator = _valid(str(config["generator"]).to_lower(), GENERATORS, generator)
+	if config.has("accretion"):
+		accretion = _valid(str(config["accretion"]).to_lower(), ACCRETIONS, accretion)
+
+	if not _built:
+		return
+	var sig: String = _signature()
+	if sig == _build_sig:
+		return
+	_build_sig = sig
+	clear_world()
+	setup_noise()
+	generate_world()

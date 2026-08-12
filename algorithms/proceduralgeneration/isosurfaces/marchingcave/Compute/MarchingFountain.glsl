@@ -134,6 +134,18 @@ layout(set = 0, binding = 1, std430) restrict buffer ParamsBuffer
 	float noiseOffsetX;
 	float noiseOffsetY;
 	float noiseOffsetZ;
+	// TRAILING FIELDS, appended for the `admixture` and `taper` DNA axes. Same pattern
+	// as MarchingCubesShapes.glsl's shapeId and MarchingGyroid.glsl's four:
+	// TerrainGeneratorFountain.get_params_array() calls super and appends these two
+	// floats after the base's eleven, so the shared eleven-field prefix every other
+	// Marching*.glsl reads is untouched. THE ORDER IS THE CONTRACT — a mismatch is not a
+	// compile error, it silently shifts every float.
+	//
+	// Each replaces a LITERAL that used to be written inline below, and the shipped rung
+	// supplies exactly that literal. See TerrainGeneratorFountain.ADMIXTURE_WEIGHTS and
+	// .TAPER_FLARES.
+	float admixture;    // was 0.5, inline at the old line 201
+	float taperFlare;   // was an implicit 1.0 on the flare term at the old line 194
 }
 params;
 
@@ -188,17 +200,23 @@ vec4 evaluate(vec3 coord)
 	// Calculate distance from center axis (vertical line)
 	float distanceFromAxis = length(worldPos.xz);
 	
-	// Column radius scales with the sampling volume
+	// Column radius scales with the sampling volume. THE BASE IS NOT AN AXIS: `taper`
+	// varies the profile with the size held, so this 0.4 stays a literal.
 	float columnRadius = params.scale * 0.4;
-	// Make it taper out at the bottom
-	columnRadius += smoothstep(0.0, -params.scale, worldPos.y) * params.scale * 0.4;
-	
-	// Density is high inside the column, low outside
-	// Add noise to the surface
+	// Make it taper out at the bottom. At taper = basin the uniform holds 1.0 and the
+	// product is the one this line always computed. At waisted it is negative and the
+	// column narrows downward; the flare term bottoms out at -0.75 * 0.4 = -0.3 against
+	// a base of 0.4, so columnRadius stays strictly positive and the division below can
+	// never blow up.
+	columnRadius += smoothstep(0.0, -params.scale, worldPos.y) * params.scale * 0.4 * params.taperFlare;
+
+	// Density is high inside the column, low outside — the WRITTEN half of the field,
+	// an analytic tapered cylinder that knows nothing about noise.
 	float density = (columnRadius - distanceFromAxis) / columnRadius;
-	
-	// Add the noise
-	density += sum * 0.5;
+
+	// Add the SAMPLED half. This one multiply is the whole negotiation between the two
+	// provenances; at admixture = spray the uniform holds the 0.5 that was written here.
+	density += sum * params.admixture;
 	
 	// Hard cut at top and bottom if needed, but let's just let it be infinite column for now or clamped
 	

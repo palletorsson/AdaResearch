@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bvxq8n2y3qr7c"]
 
-[ext_resource type="Script" uid="uid://c3l817nt0dv02" path="res://algorithms/proceduralgeneration/metaballgenerator/metaballscene.gd" id="1_main"]
-[ext_resource type="Script" uid="uid://b6m62uve4s5ol" path="res://algorithms/proceduralgeneration/metaballgenerator/metaballgenerator.gd" id="2_generator"]
+[ext_resource type="Script" uid="uid://c3l817nt0dv02" path="res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballscene.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://b6m62uve4s5ol" path="res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd" id="2_generator"]
 [ext_resource type="Shader" path="res://commons/resourses/shaders/PinkTeleport.gdshader" id="3_pink_shader"]
 
 [sub_resource type="Environment" id="Environment_1"]
