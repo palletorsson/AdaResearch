@@ -402,7 +402,7 @@ background) separates "too small to measure" from "axis does nothing". `random_w
 moved 174 grey levels across 0.06% of frame — a huge change, invisible. But note which way
 that cuts: `reaction_diffusion.inoculation` filled 62% of frame, moved 15 grey levels, and was
 written down **in this file** as "genuinely inert" — a fact about the canonical camera. It is
-21.84% from above. A big subject and a small number is not proof of a dead axis; it can equally
+20.32% from above. A big subject and a small number is not proof of a dead axis; it can equally
 mean the difference is on a face you are not looking at.
 
 **`commons/testing/probe_aabb_hogs.gd`** ranks an artifact's meshes by world diagonal and

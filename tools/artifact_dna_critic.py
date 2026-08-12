@@ -477,7 +477,10 @@ def main() -> int:
     # face and this camera stands behind it — every published tile of that artifact
     # was the blank back of a sheet of paper. reaction_diffusion.inoculation measured
     # 0.00% and was written into the project's own notes as "genuinely inert"; it is
-    # 21.84% from above. random_walk_collection.residue is 3.07x from the opposite.
+    # 20.32% from above. random_walk_collection.residue is 4.57x from the opposite.
+    # (Those two numbers were re-measured after probe_anamorphic was found not to be
+    # applying dna.fixture: it had been probing seeded artifacts unseeded, so five
+    # standpoints were five different objects. All four verdicts survived the fix.)
     #
     # That audit was run by hand, which means it would have been forgotten. This
     # makes it a gate: an INERT verdict is no longer reportable until somebody has
