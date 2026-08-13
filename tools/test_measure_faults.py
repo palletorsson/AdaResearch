@@ -47,6 +47,15 @@ def _d(v): return v[1]
 def _h(v): return v[2]
 
 
+# Provenance lives under `measurement` in the manifest, NOT at the top level.
+# Three of these tests originally read the top level, scored the repair as three
+# failures, and were wrong — the code was already reporting everything they asked
+# for, one key down. A test that cannot find the evidence reports the absence of
+# evidence, which is the same fault class the tests exist to catch.
+def _prov(man): return man.get("measurement") or {}
+def _sign(man): return _prov(man).get("signage")
+
+
 TESTS = [
     dict(id=1, artifact="scale_lines", fault="F1",
          why="the 18 m guard deleted its only long mesh; it is 100 m wide in 22 live maps",
@@ -60,12 +69,21 @@ TESTS = [
     dict(id=3, artifact="pythagorean_triangle_angles", fault="F2",
          why="1.67 m of depth is seven billboarded Label3D; every real mesh is coplanar at z=0",
          today="depth 1.67 m",
-         check=lambda wdh, man: (_d(wdh) < 0.5 and man.get("signage") is not None,
-                                 f"depth {_d(wdh):.3f} m, signage={'yes' if man.get('signage') else 'no'}")),
+         # The assertion is not merely "smaller" — it is that the 1.67 m REAPPEARS
+         # as signage. A body that shrank without the text being accounted for
+         # somewhere would mean geometry went missing, not that it was reclassified.
+         check=lambda wdh, man: (
+             _d(wdh) < 0.5 and _sign(man) is not None and abs(_sign(man)["size"][0] - 1.67) < 0.05,
+             f"depth {_d(wdh):.3f} m, signage width "
+             f"{_sign(man)['size'][0] if _sign(man) else None}")),
     dict(id=4, artifact="force_field", fault="F2",
          why="its 3.645 m width IS its caption",
          today="3.645 m wide",
-         check=lambda wdh, man: (_w(wdh) < 3.0, f"width {_w(wdh):.3f} m")),
+         check=lambda wdh, man: (
+             _sign(man) is not None and abs(_sign(man)["size"][0] - 3.645) < 0.05
+             and _w(wdh) < 3.645,
+             f"body {_w(wdh):.3f} m, caption "
+             f"{_sign(man)['size'][0] if _sign(man) else None} m moved to signage")),
     dict(id=5, artifact="draw_dot", fault="F3",
          why="a set_as_top_level(true) node pinned at world origin while the seat lifts the artifact 1.52 m",
          today="3.29 m tall",
@@ -81,8 +99,9 @@ TESTS = [
     dict(id=8, artifact="particle_chaos", fault="F5",
          why="[1,1,1] is the fallback; it must announce itself rather than pass as a measurement",
          today="[1,1,1] silently",
-         check=lambda wdh, man: (man.get("fallback") is True,
-                                 f"fallback flag={man.get('fallback')!r}")),
+         check=lambda wdh, man: (_prov(man).get("fallback") is True,
+                                 f"fallback={_prov(man).get('fallback')!r}, "
+                                 f"reason={str(_prov(man).get('fallback_reason'))[:44]!r}")),
     dict(id=9, artifact="lambda_slider", fault="REGRESSION",
          why="published featured_aaa capture — if the patch moves this, the patch is wrong",
          today="0.69 x 0.33 x 1.31 (correct)",

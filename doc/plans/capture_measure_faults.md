@@ -1,3 +1,52 @@
+# ~~Five faults left in `_measure_artifact_aabb`~~ — RETRACTED, one left
+
+> ## RETRACTION, 2026-08-13
+>
+> **This document was wrong when written and the patch below is redundant.**
+> Five of the six faults were already repaired in `549f83e23` (2026-08-12,
+> *"capture_dressing_room.gd — five faults from the audit"*), and that repair is
+> in `HEAD`. I diagnosed against a **regressed working copy** — a 25,993-byte
+> uncommitted version of the file that still carried the 18 m guard, against
+> HEAD's repaired 29,367 bytes. I read the working tree, saw the faults, and did
+> not check `git show HEAD:` on the file I was about to rewrite. That is the
+> exact mistake `doc/spatial/CURRENT_STATE.md` opens by recording — *"the
+> repository is the durable memory, not the working tree"* — made a second time,
+> a day later, in the same repo.
+>
+> The prior session found the same faults independently, with the same evidence
+> (`draw_dot` 3.29 m, `force_field`'s caption, `scale_lines`' 100 m rung,
+> `laser_measure`'s fifty ticks) and numbered them F1–F4 as I did. Convergent
+> diagnosis, one day apart.
+>
+> **Verified against HEAD by `tools/test_measure_faults.py` — 9 of 9 pass:**
+>
+> | # | artifact | before | now |
+> |---|---|---|---|
+> | 1 | `scale_lines` | 10.0 m | **100.00 m** |
+> | 2 | `laser_measure` | 50.081 m | **0.058 m** |
+> | 3 | `pythagorean_triangle_angles` | depth 1.67 m | 0.006 m body, **1.67 m signage** |
+> | 4 | `force_field` | 3.645 m wide | 3.000 m body, **3.645 m signage** |
+> | 5 | `draw_dot` | 3.29 m | **0.500 m** |
+> | 6 | `draw_triangle_faces` | 3.224 m | **0.070 m** |
+> | 7 | `edge_core` | 0.99 m | 1.138 m, effects reported |
+> | 8 | `particle_chaos` | `[1,1,1]` silent | `fallback: true` **+ reason** |
+> | 9 | `lambda_slider` | 0.69 × 0.33 × 1.31 | **unchanged** |
+>
+> Tests 3, 4 and 8 initially reported FAIL and **the tests were wrong, not the
+> code** — provenance lives under `measurement`, and they read the top level. A
+> test that cannot find the evidence reports the absence of evidence. Fixed and
+> re-run.
+>
+> **Still open: F6 only.** `dna.fixture` is never read by the harness — 0
+> occurrences in the file. Note that test 2 passes *without* it: removing the
+> per-mesh guard alone took `laser_measure` from 50.081 m to 0.058 m, so my claim
+> that F6 was required to fix it was also wrong.
+>
+> The measured numbers in the fault descriptions below stand as a record of what
+> the faults cost. The patch does not — do not apply it.
+
+---
+
 # Five faults left in `_measure_artifact_aabb`, with the patch and its tests
 
 > Written 2026-08-10, **not applied**. `commons/testing/capture_dressing_room.gd`
