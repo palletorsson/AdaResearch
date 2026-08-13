@@ -22,8 +22,25 @@ Teaching it to negotiate would put a second placement algorithm in the
 assembler — the thing the doctrine names as a failure mode. It consumes
 resolved cells; it does not solve.
 
+THE CAST IS NOT A PREFIX. Until 2026-08-13 this offered `spine_order()[:limit]`
+— a flat slice of the curriculum walk, each artifact arriving alone with no
+argument about why it stands where it stands. `tools/museum_wizard.py` builds
+its cast from `exhibition_brief`: each spine anchor brings its best TYPED
+relations (`named` sightline, `sibling` row, `axis_kin` adjacency, ...), and
+`dna_variant` entries are withheld from the floor because five values of one
+scene are one object five times and would eat five slots. Measured on
+`uffizi-spine-enfilade`, same building, same limit: the prefix placed 8 (7
+interior), the brief-derived cast placed 15 (13 interior).
+
+`--limit` still works and still means "how much of the spine to offer" — it now
+counts ANCHORS, which is what `museum_wizard --count` counts, so the two tools
+can be compared without arithmetic. `--flat-cast` restores the old prefix, which
+is how the before/after above was measured rather than asserted.
+
     python tools/export_museum_plan.py --museums=uffizi_bay --limit=12
     python tools/export_museum_plan.py --all --limit=8
+    python tools/export_museum_plan.py --all --limit=8 --flat-cast   # the old way
+    python tools/export_museum_plan.py --all --sequence=symmetry     # one chapter
 """
 from __future__ import annotations
 
@@ -42,9 +59,49 @@ from spatial_floorplan import PATTERNS, from_museum
 from spatial_negotiation import run
 
 OUT = REPO / "ada_run" / "em_plan.json"
+RELATIONS = REPO / "commons" / "data" / "artifact_relations.json"
 
 
 APRON = 14
+
+
+def spine_anchors(limit: int, sequence: str = "") -> list[str]:
+    """The spine positions this run is about, filtered to what has a brief.
+
+    Same rule as `museum_wizard.stage_brief`: walk `spine_artifact_order.json`
+    and keep the tokens `artifact_relations.json` knows, because an anchor with
+    no relations contributes exactly itself and the brief stage has nothing to
+    say about it. `sequence` narrows the walk to one chapter; `limit <= 0` takes
+    the whole of it.
+    """
+    rel = json.loads(RELATIONS.read_text(encoding="utf-8")).get("artifacts", {}) \
+        if RELATIONS.exists() else {}
+    out: list[str] = []
+    seen: set[str] = set()
+    for row in spine_order():
+        if sequence and str(row.get("sequence", "")) != sequence:
+            continue
+        tok = str(row.get("lookup", ""))
+        if tok and tok in rel and tok not in seen:
+            out.append(tok)
+            seen.add(tok)
+        if limit > 0 and len(out) >= limit:
+            break
+    return out
+
+
+def brief_cast(anchors: list[str], relations: int = 2) -> list[str]:
+    """The cast a brief produces from those anchors — the wizard's rule, called.
+
+    Deliberately NOT re-implemented here. `museum_wizard.stage_brief` owns the
+    one decision (features and their relations go to the floor; dna_variants go
+    to a wall), and two copies of that rule would drift the day somebody changes
+    which kinds earn a place. The import is late because the wizard reaches back
+    into this module for `plan_museum`.
+    """
+    from museum_wizard import stage_brief
+    return list(stage_brief({"anchors": list(anchors), "count": len(anchors),
+                             "relations": relations})["cast"])
 
 
 def plan_museum(key: str, tokens: list[str]) -> dict[str, Any]:
@@ -97,7 +154,16 @@ def main() -> int:
     ap.add_argument("--museums", default="", help="comma-separated template keys")
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--limit", type=int, default=10,
-                    help="artifacts offered per museum, in spine order")
+                    help="spine ANCHORS offered per museum (each brings its "
+                         "typed relations); <=0 means the whole spine")
+    ap.add_argument("--sequence", default="",
+                    help="restrict the anchors to one spine sequence")
+    ap.add_argument("--relations", type=int, default=2,
+                    help="how many typed relations each anchor may bring")
+    ap.add_argument("--flat-cast", action="store_true",
+                    help="the pre-2026-08-13 behaviour: a flat spine_order() "
+                         "prefix, no relations. Kept so the improvement stays "
+                         "measurable instead of remembered")
     ap.add_argument("--out", default=str(OUT))
     args = ap.parse_args()
 
@@ -123,10 +189,22 @@ def main() -> int:
     if not keys:
         ap.error("--museums=<key,...> or --all")
 
-    order = [row["lookup"] for row in spine_order()][:args.limit]
+    if args.flat_cast:
+        rows = [r for r in spine_order()
+                if not args.sequence or r.get("sequence") == args.sequence]
+        order = [r["lookup"] for r in rows]
+        if args.limit > 0:
+            order = order[:args.limit]
+        anchors = list(order)
+    else:
+        anchors = spine_anchors(args.limit, args.sequence)
+        order = brief_cast(anchors, args.relations)
     if not order:
         print("no spine order available — nothing to place", file=sys.stderr)
         return 2
+    print(f"  cast: {len(anchors)} anchor(s) -> {len(order)} bodies"
+          + (f" (sequence {args.sequence})" if args.sequence else "")
+          + ("  [flat prefix — the old cast]" if args.flat_cast else ""))
 
     museums: dict[str, Any] = {}
     for key in keys:
@@ -137,6 +215,7 @@ def main() -> int:
                             "error": f"{type(exc).__name__}: {exc}"}
         m = museums[key]
         print(f"  {key:34s} placed {len(m['artifacts']):2d}  "
+              f"interior {m.get('interior_count', 0):2d}  "
               f"rejected {len(m['rejected']):2d}"
               + (f"  ERROR {m['error']}" if m.get("error") else ""))
 
@@ -147,11 +226,16 @@ def main() -> int:
         "_readme": ("Placements resolved by tools/spatial_negotiation.py. Read by "
                     "commons/scenes/endless_museum.gd under --em-plan. A museum "
                     "key absent here deals exactly as it did before."),
+        "cast": {"anchors": anchors, "bodies": len(order),
+                 "sequence": args.sequence,
+                 "source": "flat prefix" if args.flat_cast else "exhibition brief"},
         "offered": order,
         "museums": museums,
     }, indent=2) + "\n", encoding="utf-8")
     total = sum(len(m["artifacts"]) for m in museums.values())
-    print(f"\n{total} placements across {len(keys)} museum(s) -> {out}")
+    inter = sum(m.get("interior_count", 0) for m in museums.values())
+    print(f"\n{total} placements ({inter} interior) across {len(keys)} "
+          f"museum(s) -> {out}")
     return 0
 
 
