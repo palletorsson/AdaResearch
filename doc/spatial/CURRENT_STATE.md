@@ -54,11 +54,28 @@ grande-galerie); the banner names its chapter (`9a88d3196`,
 `chapter=primitives / transformation / symmetry`). `--em-plan --em-segments=N`
 is now a corridor that walks the curriculum in order and says so.
 
-**Open.** The exporter's key must become **(building, chapter)** — first-wins
-still stamps a loser chapter's room with the winner's cast, now visibly
-(`export_museum_plan.py`, not the assembler). `dna.fixture` cannot reach an
-artifact whose script is not on its scene root (**37 of 757**). The threshold
-sightline (13 accepts, or **0** if `candidates[:40]` is lifted).
+**The exporter key: closed (third session, 08-13).** `plans: [{museum,
+sequence, ...}]`, one row per chapter, displaced included; reader resolves
+chapter-first with the v1 dict as fallback (`1973ef77c`). NT1 failed v1 with
+`change -> grande-galerie: plan holds 'symmetry'` and passes v2. Live: seven
+segments, grande-galerie serves symmetry@2 AND change@5 with its own cast —
+buildings shared over time.
+
+**The courtyard: built v1 (spike 08, `eb986bd6a`).** Precinct venue derived in
+the contract (float -> balcony, grounded -> courtyard, provenance each);
+negotiator grants court_m = body + 3 m aprons; 261 court rows in the plan
+(planned rows 507 -> 975); assembler chains unroofed courts with 1.1 m parapets
+after the tile, apron derived by sealing. Gated: court-free plan builds
+identically (0.022% vs 1.020% noise floor). lab_room stands in a walled court
+under the museum's first open sky.
+
+**Open.** Courts chain — 12 after one building is 311 m of court; distribute
+across the corridor's joints next. The balcony void is designed, unbuilt
+(rows still count "exterior"). laser_measure took a 7 x 57 m court because its
+body still measures 50 m in Z — the court amplifies spike 06's broken config
+channel (**37 of 757** unreachable). The threshold sightline (13 accepts, or
+**0** if `candidates[:40]` is lifted). Court walkability asserted, not yet
+walker-proven.
 
 > **A method note worth more than any of the above.** Three times on 08-13 a
 > session diagnosed the WORKING TREE instead of `HEAD` and was wrong — once
