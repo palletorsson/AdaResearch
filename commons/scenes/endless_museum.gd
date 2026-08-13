@@ -1446,6 +1446,32 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		"from_plan": true, "exterior_unhosted": exterior}
 
 
+## Step the dealing cursor past every remaining entry of the chapter it is
+## currently inside, so the next segment resolves the NEXT chapter.
+##
+## One step would be wrong: the pool is flat and in spine order, so consecutive
+## entries share a sequence and `_pool_i += 1` would keep resolving the same
+## chapter for as many artifacts as that chapter has. The plan deals a whole
+## chapter per segment, so the cursor moves a whole chapter.
+##
+## Bounded by the pool size: a pool that is entirely one sequence — or empty —
+## must leave the cursor somewhere finite rather than spin.
+func _advance_pool_past_chapter() -> void:
+	var n: int = _pool.size()
+	if n == 0:
+		return
+	var here := String(_pool[_pool_i % n].get("sequence", ""))
+	var steps: int = 0
+	while steps < n:
+		_pool_i += 1
+		steps += 1
+		if String(_pool[_pool_i % n].get("sequence", "")) != here:
+			return
+	# every entry carries the same sequence: leave the cursor where it started
+	# rather than pretending a second chapter exists.
+	_pool_i -= steps
+
+
 func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 		tile: Array, w: int, h: int) -> Dictionary:
 	# THE GATE. A planned museum is stamped from the plan and never dealt; every
@@ -1454,6 +1480,15 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 	if not _plan_db.is_empty():
 		var planned: Dictionary = _deal_from_plan(seg, zbase, mkey, tile, w, h)
 		if not planned.is_empty():
+			# THE CURSOR MUST STILL MOVE. `_pick_pool` (the only `_pool_i += 1`
+			# in the file) sits below this early return, so under `--em-plan`
+			# the cursor never advanced: `_pool_i` stayed 0, `_build_segment`
+			# read `_pool[0].sequence` for every segment, resolved the same
+			# crown, and chose the same building — the corridor repeated one
+			# chapter forever. Invisible until now because every `--em-plan`
+			# run used `--em-segments=1` and every multi-segment run omitted
+			# `--em-plan`. See doc/spatial/spikes/04_one_building_two_chapters.md.
+			_advance_pool_past_chapter()
 			return planned
 
 	var budget: Dictionary = _segment_budget(w, h, slots, mkey, tile,
