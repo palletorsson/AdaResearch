@@ -1,774 +1,1073 @@
 {
- "artifacts": {
-  "catalyst_sustain_demo": {
-   "name": "Catalyst Sustain Demo",
-   "lookup_name": "catalyst_sustain_demo",
-   "description": "Demonstrates the catalyst bracelet's sustain affordance \u2014 hold a state while time runs. A glowing torus floats above a pedestal; a trail of after-images shows the integral of held-position over time. First place the player meets 'hold this while time passes.'",
-   "scene": "res://algorithms/change/catalyst_sustain_demo.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "SUSTAIN over time",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "interactive",
-    "catalyst_affordance",
-    "sustain",
-    "integration"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "slope_tangent_demo": {
-   "dna": {
-    "promoted": "2026-08-04",
-    "deepened": "2026-08-05",
-    "stage": "2 - variation",
-    "framing": 0.48,
-    "fixture": {
-     "phase": "steepest"
-    },
-    "axes": {
-     "phase": [
-      "traverse",
-      "crest",
-      "steepest",
-      "trough"
-     ],
-     "evidence": [
-      "result",
-      "trace",
-      "longhand",
-      "axiom"
-     ]
-    },
-    "default": "phase=traverse, evidence=trace - traverse skips the station lookup entirely, so _update_marker_and_tangent still computes t_norm = fmod(_t*0.2, 1.0) and the point still runs the full period in 8.3 s; trace builds the tangent strip on the same line of _ready it was always built on, and _build_evidence returns without adding a node. The 8 cells across 6 maps (Change_Intro, VFM_Velocity, Trial_rooms_change, Trial_gate8_cha_size x2, Trial_gate8_cha_type x2, Walk_grande_galerie_axial_text) pass no config keys at all. The three numeric exports keep their pre-promotion behaviour INCLUDING THE BROKEN PART OF IT: samples and horizontal_span are still assigned after _ready has already used them, so they still do nothing, and a map that has been quietly ignoring `samples` for a year does not start redrawing because this file was touched. Only evidence triggers a rebuild, and only when the word validates, differs, and arrives after _ready.",
-    "was": "seven exports: three colours and four numbers. The artifact's argument - that a curve carries a different rate at every point - was reachable only by standing in the room and waiting for the marker to arrive somewhere interesting, and no still could hold it. The runner refused the token for NO TURNABLE KNOBS, which was true in the sense that mattered: nothing declared changed what the picture ARGUED.",
-    "note": "phase is WHERE THE SLOPE IS READ. traverse is the shipped sweep; crest (t=0.75) and trough (t=0.25) are the two places the tangent lies flat; steepest (t=0.5) is the place it tilts hardest. WHAT IS DELIBERATELY ABSENT and why: the four candidate stations were peak / steepest / zero / inflection, and on y=sin(x) three of those are ONE POINT - sin''(x) = -sin(x) vanishes exactly where |cos x| is maximal - so zero, steepest and inflection would have shipped three identical stills under three different words. That is folding_past's fault in reverse, taking a value list the object cannot answer. Four values, four distinct pictures. A FINDING FELL OUT OF PINNING THE MARKER: this file's header comment and this entry's own description both said the tangent flattens at the zero crossings, which is the opposite of what the code computes and of what the artifact teaches. Both are corrected in this pass. The doc could stay wrong for as long as it did precisely because the marker never stopped anywhere long enough to be photographed.",
-    "kin": "evidence is the family word taken character for character, all four of the canonical 22-sibling list. result is curve + marker with no tangent, the thing changing without its rate; trace is the shipped tangent at one point; longhand adds the rise/run triangle, the numeric dy/dx readout this file's @identity has listed as missing since it was written, and the whole derivative cos(x) drawn across the same strip; axiom states 'd/dx sin x = cos x' and draws no tangent at all - the textbook line instead of the demonstration, which is pythagorean_triangle_angles' sense of the word exactly. NOT named `station`, although that is the natural English word: `station` is taken by a Wolfram-class axis (edge | order | chaos) asking a different question, and a shared word is only honest when the question is shared. The sibling word `curve` (derivative_pair and integral_area, wave|hump|ramp|spike|step) was considered and NOT taken: it names WHICH FUNCTION is drawn, and this artifact's argument is about one function read in different places. Implementing five curves here would have produced a third copy of derivative_pair instead of promoting this one.",
-    "still_note": "READ THE SUBJECT SHARE BEFORE BELIEVING ANY NUMBER HERE. The whole artifact is two 2 cm bars and three ImmediateMesh LINE_STRIPs, which rasterise one pixel wide, on a plot 3.8 m across and 0.02 m deep - the thinnest subject promoted so far. framing is set to 0.6 from the rig's own arithmetic: radius = 4.05/2, dist = radius/tan(17 deg) * PAD 1.9 * framing, so 0.6 gives a 4.6 m frame width against a ~3.1 m projected subject - tighter, with margin left. A low percentage here is far more likely to be dilution than an inert axis. SECOND CAVEAT, unavoidable and stated rather than hidden: traverse is the only nondeterministic tile in the sheet, because the marker's position depends on how many process frames the headless boot managed before the shutter. Two traverse frames are not comparable to each other, and a large traverse-to-traverse difference is a clock, not a bite. The three pinned stations are exactly reproducible and the axis should be judged on those. evidence is the wholesale one: longhand adds a second full-width curve plus a triangle and a readout, and result and axiom both delete the tangent entirely.",
-    "declines": "curve_color, tangent_color and marker_color stay plain exports - a recolour is not an argument. x_range, samples, amplitude and horizontal_span stay dials on the same picture; amplitude in particular was tempting, since the @identity names it the critical_parameter, but a steeper sine photographed at one station is a bigger picture of the same claim.",
-    "deepened_why": "MEASURED FLAT AND FIXED AT THE INK, not at the design. The 2026-08-05 sweep put all six phase pairs between 0.172% and 0.211% on a subject filling 0.805% of frame - the still_note below had predicted exactly this and it was right. Diagnosis, arithmetic rather than impression: at framing 0.6 the frame is 4.6 m wide over 760 px, so 165 px/m; the two axis BARS are 2 cm thick and account for roughly 0.48% of the frame on their own and never move, while everything phase actually changes - the 12 cm marker sphere and a 1-pixel tangent - totals under 0.08% of frame. Moving 0.08% of ink between two places cannot register above 0.2%, and no amount of reframing fixes a subject whose ink is one pixel wide. So the fix is ink, and the constraint is that the tangent is NOT new geometry: it is drawn at evidence=trace, the default, in all 8 shipped cells. Thickening it unconditionally would have been a regression dressed as a repair. What was added instead exists ONLY where phase names a station, which no map does: a 26 cm band down the plot at the marker's x (behind the curve, at the vertical axis bar's exact height so the AABB and therefore the grid's auto-grounding cannot move), and the tangent rebuilt as a 7.5 cm TRIANGLE_STRIP straightedge instead of a LINE_STRIP trace. Two stations 1.8 m apart now differ by two full bands - about 0.35 m2 of projected ink against 0.08 m2 before. framing also comes in from 0.6 to 0.48 (3.5 m frame against a 3.14 m projected plot, ~11% margin), worth a further 1.8x in area. The derivative curve under `longhand` is genuinely new geometry no placement has seen, so it is thickened unconditionally into a ribbon - the whole derivative was previously quieter in the frame than the marker dot explaining it.",
-    "fixture_why": "phase=steepest, and it is NOT a claim that steepest is special. traverse is the only nondeterministic value in the file - the marker's x depends on how many process frames the headless boot managed - so any sweep that does NOT vary phase (evidence alone, or a --max that only has room for one axis) was previously photographing evidence against a moving marker and calling the clock a bite. cabinet_sweep merges the fixture UNDER the swept params, so when phase IS the axis the swept value wins and this pin costs nothing. No placement passes phase, so no map ever sees it.",
-    "expected": "A PREDICTION, so the next sweep falsifies it instead of re-describing it. At framing 0.48 the frame is about 3.90 m wide against a 3.14 m projected plot (81%, uncropped), which is 195 px per projected metre against the old 156. A station band is 0.26 x 1.4 m, projecting to 0.291 m2 or about 1.9% of the frame, and the three stations sit 0.9 m apart with 0.26 m bands, so any two are fully disjoint. Expect all six phase pairs between roughly 2% and 4%, up from 0.17-0.21%. IF IT COMES BACK UNDER 1%, the band did not build: check that phase reached the root (`_holder_of` wants the export on the .tscn root) before touching the design, because a value that never arrives and an axis that does nothing produce the same sheet.",
-    "known_weak_pair": "AT --max=9 AND ABOVE, where the matrix becomes phase x evidence, the closest pair will be (traverse, result) against (traverse, trace) - the two tiles that differ only by the one-pixel shipped tangent at an unpinned marker, worth about 0.09%. That is not a repairable weakness; it is the price of preserving the default, and the two frames in question ARE the shipped artifact. Judge this token at --max=5, where only phase is swept and every pair carries a band."
-   },
-   "name": "Slope Tangent Demo",
-   "lookup_name": "slope_tangent_demo",
-   "description": "A sine curve with a moving point that drags its tangent line. Where the curve is steep the tangent tilts, and it is steepest exactly at the zero crossings; at the crest and the trough it lies flat. The first map showing rate as a thing alongside the thing \u2014 derivative as instantaneous slope.",
-   "scene": "res://algorithms/change/slope_tangent_demo.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "SEE the rate of change",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "derivative",
-    "tangent",
-    "rate_of_change",
-    "calculus"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "integral_area": {
-   "dna": {
-    "axes": {
-    "curve": [
-    "hump",
-    "wave",
-    "ramp",
-    "spike",
-    "step"
-    ],
-    "tally": [
-    "strips",
-    "blocks",
-    "column",
-    "antiderivative"
-    ]
-    }
-   },
-   "name": "Integral Area",
-   "lookup_name": "integral_area",
-   "description": "Area under a curve as accumulation, animated. A sweep marker progresses left to right; vertical strips light up as they enter the swept region. The definite integral made visible: the headline accumulation artifact for the change sequence.",
-   "scene": "res://algorithms/change/integral_area.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "ACCUMULATE under the curve",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "integral",
-    "area_under_curve",
-    "accumulation",
-    "calculus"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "derivative_pair": {
-   "dna": {
-    "axes": {
-    "curve": [
-    "wave",
-    "hump",
-    "ramp",
-    "spike",
-    "step"
-    ],
-    "panels": [
-    "stacked",
-    "overlaid",
-    "tower",
-    "phase"
-    ]
-    }
-   },
-   "name": "Derivative Pair",
-   "lookup_name": "derivative_pair",
-   "description": "Two stacked curves with a shared vertical sweep line. f on top, f' below. Shows the derivative as a function in its own right.",
-   "scene": "res://algorithms/change/derivative_pair.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "PAIR function and rate",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "derivative",
-    "function",
-    "calculus"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "velocity_arrow": {
-   "dna": {
-    "promoted": "2026-08-05",
-    "stage": "2 - variation",
-    "framing": 0.55,
-    "fixture": {
-     "phase": "straight"
-    },
-    "axes": {
-     "phase": [
-      "traverse",
-      "straight",
-      "bend",
-      "mirror"
-     ],
-     "evidence": [
-      "result",
-      "trace",
-      "longhand",
-      "axiom"
-     ]
-    },
-    "default": "phase=traverse, evidence=trace - traverse is absent from PHASE_A by construction, so the station lookup MISSES and `a = fmod(_t, TAU)` is still the line that decides where the puck is; trace leaves the arrow on layer 1 (its Godot default, so the write is a no-op) and _build_evidence falls through its match without adding a node, leaving _ready at the same three children in the same order. The 4 placements (Change_Velocity, VFM_Velocity, Trial_gate8_cha_size, Trial_gate8_cha_type) are BARE `velocity_arrow` tokens passing no config key at all, so no map can see either axis unless someone writes one in. The three numeric exports keep their pre-promotion behaviour including the broken part of it: track_radius_x/z are still assigned after _ready has stitched the track mesh, so the drawn ring still does not move when a map sets them.",
-    "was": "seven exports - three colours, three track dimensions and a speed. Nothing declared changed what the artifact ARGUED, and the runner refused the token for NO TURNABLE KNOBS. Worse, the one thing that did vary was the one thing nobody could pin: the puck's position is a function of how many process frames elapsed, so every still of this artifact was a photograph of the boot time.",
-    "note": "phase is WHERE ON THE TRACK THE DERIVATIVE IS READ, and the track was built to make that question have an answer - the `sin(a*2)*0.15` bulge in _track_point exists to vary curvature. Measured off that function rather than guessed: straight (a=pi/2) is curvature 0.311, |v| 1.700, arrow 1.190 long; bend (a=0.3241) is curvature 2.218, |v| 0.878, arrow 0.614; mirror (a=3pi/2) is curvature 0.744, |v| 1.100, arrow 0.770. Three positions 1.4-1.8 m apart on a 2.86 x 1.80 m track with a 0.12 m puck, so no two stations overlap anywhere. WHAT IS DELIBERATELY ABSENT: `swing`, the place the arrow rotates fastest. k*|v| peaks at a=0.345 and curvature peaks at a=0.324 - the same 1.2 degrees of track - so swing and bend would have been two names for one point and shipped two identical stills. That is slope_tangent_demo's zero/steepest/inflection lesson applied before the sweep instead of after it. mirror is the value that carries the actual claim: it is the point diametrically opposite straight, on the side the bulge does not reach, so it looks like the same piece of ellipse and is moving at 1.100 against 1.700 - two symmetric-looking places that are not symmetric motions.",
-    "kin": "evidence is the family word (38 siblings) taken character for character, with slope_tangent_demo's default, `trace`. The two artifacts are the change sequence's derivative pair and they now carry the SAME TWO AXES, which is the honesty test for a shared vocabulary: if velocity_arrow and slope_tangent_demo do not measure alike on evidence, that is a fault to chase and not a design difference. Values here: result = track and puck with no arrow, motion without its rate; trace = the shipped arrow at one point; longhand = the difference quotient the arrow is the limit of, drawn out - the two sample points, the chord between them and the numeric |v| readout this file's @identity has listed as missing since it was written; axiom = `v = dP/dt` on a plate with no arrow at all, the textbook line instead of the demonstration. `phase` is slope_tangent_demo's word taken for the same question (where on the curve is the rate read, with the shipped sweep as the default value) and NOT its value list - crest, steepest and trough are facts about a sine and this is a closed track, so taking them would be folding_past's fault. Only `traverse` is shared, because only `traverse` names the same thing in both objects.",
-    "fixture_why": "phase=straight, and it is NOT a claim that straight is special - it is the station with the longest arrow, so a sweep of `evidence` alone has the most ink to lose when result and axiom take the arrow away. traverse is the only nondeterministic value in the file, so any sweep that does not itself vary phase would otherwise be photographing evidence against a puck in a different place each frame and reporting the clock as a bite. cabinet_sweep merges the fixture UNDER the swept params, so when phase IS the axis the swept value wins and this pin costs nothing. No placement passes phase, so no map ever sees it.",
-    "still_note": "READ THE SUBJECT SHARE BEFORE BELIEVING ANY NUMBER. The track is an ImmediateMesh LINE_STRIP that rasterises one pixel wide across 2.86 x 1.80 m, so almost the whole AABB is empty - this is the slope_tangent_demo dilution problem in a second body. The ink that moves is the 0.12 m puck plus a 0.04 x 0.7-2.2 m emissive arrow. phase should still read wholesale, because it moves ALL of that ink 1.4-1.8 m and no two stations overlap. evidence is the thinner one and its thinnest pair is result-vs-trace, which is exactly one arrow's worth of pixels - roughly 0.06 m2 of a ~3.5 m frame. That thinness is the PRICE OF PRESERVING THE DEFAULT and cannot be fixed by thickening the arrow: the arrow is drawn at evidence=trace, which is what all 4 placements show. What longhand and axiom add is new geometry no placement has seen, so both are drawn generously (a 3.5 cm chord, two 7 cm sample spheres, a 19 cm-glyph readout; a 1.55 x 0.40 m plate with two emissive rules). Expect longhand and axiom to bite and result-vs-trace to be the weak pair. IF phase COMES BACK UNDER 1%, do not re-cut the stations: check first that the station lookup fired at all, because PHASE_A is keyed on the raw export and a value that never arrives and an axis that does nothing produce the same sheet.",
-    "declines": "puck_color, arrow_color and track_color stay plain exports - a recolour is not an argument. track_radius_x, track_radius_z and puck_radius stay dials on the same picture. `speed` was the tempting one and is REFUSED on the brief's own rule: the @identity names it the critical_parameter, but omega is a rate, a still cannot photograph a rate, and the arrow's length is a function of the track's shape and NOT of `speed` - _update_puck_and_arrow scales by |dP/da|, so doubling speed changes how fast the puck goes round and leaves every frame of it identical. A `speed` axis would have produced four indistinguishable tiles and a confident verdict about nothing, which is info_board exactly."
-   },
-   "name": "Velocity Arrow",
-   "lookup_name": "velocity_arrow",
-   "description": "A puck moves around a closed track with an arrow riding on it. Length = speed, direction = motion. Velocity as the visible derivative of position.",
-   "scene": "res://algorithms/change/velocity_arrow.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "SEE motion as derivative",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "velocity",
-    "tangent",
-    "kinematics"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "partial_derivative_terrain": {
-   "dna": {
-    "promoted": "2026-08-05",
-    "stage": "2 - variation",
-    "framing": 0.8,
-    "fixture": {
-     "phase": "oppose"
-    },
-    "axes": {
-     "phase": [
-      "traverse",
-      "agree",
-      "oppose",
-      "single"
-     ],
-     "asked": [
-      "both",
-      "partial_x",
-      "partial_y",
-      "gradient"
-     ]
-    },
-    "default": "phase=traverse, asked=both - traverse skips the station lookup entirely, so _update_arrows still computes sx = sin(_t*0.4)*0.7 and sz = cos(_t*0.6)*0.7 and the sample point still runs its Lissajous; it also holds both sign multipliers at +1, so the two bars keep the shipped abs() placement on the +x and +z side. both leaves the two arrows visible and builds no third. At this pair _build_dna() adds NO NODE and changes NO visibility flag - the ribbons and the signed placement exist only where phase names a station, and no map names one. All 25 placements carry the bare token with no config keys. grid_size and span keep their pre-promotion behaviour INCLUDING THE BROKEN PART OF IT: they are still assigned after _ready has already consumed them, so they still do nothing, and a map that has been quietly ignoring `span` does not start redrawing because this file was touched.",
-    "was": "seven exports - three colours and four numbers - and an apply_grid_config that took two of the numbers after _ready had already used them. The artifact's argument, that a surface carries two independent slopes at every point, was reachable only by standing in the room and waiting for the sample point to arrive somewhere interesting, and no still could hold it. The runner refused the token for NO TURNABLE KNOBS, which was true in the sense that mattered: nothing declared changed what the picture ARGUED.",
-    "finding": "THE SIGN HAS NEVER BEEN VISIBLE. _update_arrows draws clamp(abs(dx) * 6.0, 0.3, 2.0) and hangs the bar at origin + (0.25, 0, 0) unconditionally, and the same for dy on +z. A negative partial and a positive one of equal size have therefore rendered as the same picture since the file was written, which means the one thing this artifact has that the 1D case does not - two slopes that can disagree - has never been on screen. It could stay that way precisely because the sample point never stopped anywhere long enough to be looked at. THE SECOND FINDING IS ABOUT THE SURFACE AND IT KILLED THE OBVIOUS VALUE LIST: every critical point of f(x,y) = sin(1.5x)cos(1.5y)h + sin(x+y)(0.12h) lies ON THE BOUNDARY of the drawn terrain - a minimum at (-1.000, -0.031), a maximum at (+1.000, +0.031) and two saddles at (-0.031, -1.000) and (+0.031, +1.000). Borrowing slope_tangent_demo's crest and trough, or the saddle this pass was reasonably expected to declare, would have pinned the arrows over the edge of the mesh they measure. Measured on a 201x201 scan of the full domain and refined by descent on |grad f|^2, before declaring rather than after.",
-    "note": "phase is WHERE THE TWO SLOPES ARE READ, and the three stations are SIGN PATTERNS rather than critical points because that is what this surface can answer inside its own extent. agree (-0.525, +0.520) has fx +0.305 and fy +0.304: two arrows of the same length both pointing forward, the 1D story told twice. oppose (-0.550, -0.545) has fx +0.263 and fy -0.262: the same two lengths pointing OPPOSITE ways, which is the whole reason a derivative in more than one dimension is not one number. single (+0.170, +0.200) has fx +0.525 and fy 0.000, so one axis carries everything and the other reads its clamp minimum - ask the wrong variable and the surface tells you nothing. asked is this artifact's own truth statement made settable: you differentiate with respect to whichever axis you think to ask about. WHAT IS ADDED, AND ONLY OFF THE DEFAULT, following slope_tangent_demo's precedent exactly: at a named station the two SLICE RIBBONS appear - f(., y0) and f(x0, .), the curves the partials are literally the ordinary slopes OF, which nothing in this artifact had ever drawn - and each bar is placed on the side its sign points to.",
-    "kin": "phase is slope_tangent_demo's and velocity_arrow's word, the same question asked of the same kind of object - where on a moving thing is the rate read - and `traverse` is their name for the un-pinned shipped sweep, character for character. THE OTHER THREE VALUES ARE THIS SURFACE'S OWN, and the reason is in `finding` rather than in preference: this is bouncing_ball's move, take the word and refuse the value list where the object cannot answer it. `evidence` was considered for the second axis and NOT taken: the 22-sibling list is about how much of an artifact's working is shown, and this one's second question is which of two derivatives was asked for at all - a different question wearing a similar shape. `curve` (derivative_pair, integral_area) was not taken either: it names WHICH FUNCTION is drawn, and implementing five surfaces here would have produced a second vector_field_grid instead of promoting this one.",
-    "still_note": "READ THE SUBJECT SHARE BEFORE BELIEVING ANY NUMBER HERE. The terrain is 2 x 2 m and the two arrows are 4 cm bars 0.4 m long, so the moving ink was under 2 percent of a fit-to-AABB frame before this pass, and a low percentage would have been dilution rather than an inert axis - slope_tangent_demo's measured fault, one artifact over in the same sequence. That is why the ribbons exist: two 2 m x 5.6 cm strips are roughly 0.22 m2 against a 4 m2 terrain, an order of magnitude more ink than the bars, and they sit in completely different places at the three stations, which are 1.0 to 1.4 m apart on a 2 m field. framing is set to 0.8 rather than lower because the stations reach 0.55 m from centre and the ribbons run the full span; if the sheet still reads diluted the next lever is 0.7, not a redesign. traverse is the only nondeterministic tile in the sheet - the sample point's position depends on how many process frames the headless boot managed before the shutter - so two traverse frames are not comparable to each other and a large traverse-to-traverse difference is a clock, not a bite. Judge phase on the three pinned stations.",
-    "fixture_why": "phase=oppose, and it is not a claim that oppose is special. traverse is the one nondeterministic value in the file, so any sweep that varies `asked` alone would otherwise photograph it against a moving sample point and call the clock a bite. The sweep merges the fixture UNDER the swept params, so when phase IS the axis the swept value wins and this pin costs nothing. No placement passes phase, so no map ever sees it.",
-    "declines": "height_scale was the tempting numeric axis - the @identity names it the critical_parameter - and is declined for slope_tangent_demo's stated reason: a more pronounced terrain photographed at one station is a bigger picture of the same claim, not a different claim. The three colours stay plain exports; a recolour is not an argument. sample_speed is a rate and invisible to a still.",
-    "placements": 25
-   },
-   "name": "Partial Derivative Terrain",
-   "lookup_name": "partial_derivative_terrain",
-   "description": "A wavy terrain. Two arrows ride a moving sample point, one for partial-x, one for partial-y. First map showing two-axis differentiation.",
-   "scene": "res://algorithms/change/partial_derivative_terrain.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "SEE partials in 3D",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "partial_derivative",
-    "gradient",
-    "calculus_3d"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "riemann_pump": {
-   "dna": {
-    "promoted": "2026-08-05",
-    "stage": "2 - variation",
-    "framing": 0.55,
-    "axes": {
-     "comparison": [
-      "rules",
-      "overlay",
-      "bracket",
-      "single"
-     ],
-     "resolution": [
-      "pump",
-      "coarse",
-      "mid",
-      "fine"
-     ]
-    },
-    "default": "comparison=rules AND resolution=pump - VERIFIED LINE BY LINE against the pre-promotion file (057abfdf9), not asserted. `rules` is the fall-through return of _panel_groups, [[LEFT],[RIGHT],[MID]], so k=3 and the centring formula (idx - (k-1)/2) * (panel_width + panel_gap) reduces term for term to the shipped (float(i) - 1.0) * pitch; the three panels are rebuilt at the same x, in the same order, carrying the same rule each. Every group then has size 1, so _emit_strips takes the `-0.01 if rules.size() == 1` branch and keeps the shipped z exactly, and its `seq` counter equals k, so the strips carry the node names _strip_0.._strip_(n-1) they always had. `pump` makes _ready skip the RESOLUTION_STRIPS lookup entirely, leaving n_strips at the shipped export default of 12, and makes _process run the shipped sinusoid body unchanged. In apply_grid_config the pre-existing n_strips key behaves exactly as before; the two new keys set nothing unless the value differs from what is already there, and the rebuild additionally refuses to fire until _built. All 3 placements pass no config key, so the rebuild branch is unreachable from every map that exists.",
-    "was": "nine plain exports - three colours, curve_color, n_strips, panel_width, panel_height, panel_gap, pump_period - and no apply_grid_config at all. Every one of them is a colour, a size or a rate. The two things the artifact ARGUES were welded shut: which accumulation rules stand beside each other (three, always, in a row) and how fine the partition is (driven on a sinusoid every frame, so the n_strips export was unreachable in practice - a sweep of it measured 0.011% and 0.016% because the pump overwrote each value before the shutter).",
-    "note": "comparison is WHAT STANDS BESIDE WHAT. rules is the shipped row of three. bracket drops the midpoint and shows left and right as the BRACKET they are - f is increasing on [0, PI], so the left sum is always under the true area and the right always over it, and the answer is trapped between two pictures. overlay puts all three rules on ONE panel, spread in depth with the shortest sum nearest, so the disagreement stops being a comparison across the room and becomes a difference of heights at one x. single is the midpoint rule alone, the reading you would actually use, with nothing to argue with. resolution is HOW FINE THE PARTITION IS, and unavoidably whether it holds still: coarse/mid/fine pin n_strips to 4/12/32 and freeze _process, and mid is 12 because 12 is the shipped export default - the count the artifact is BUILT at before the pump's first frame. The partition is this artifact's own declared critical_parameter, so letting a value stop the pump is the only way to photograph it.",
-    "still_note": "framing 0.55 SET THIS PASS, measured rather than guessed, by re-implementing _build_panels/_emit_strips and capture_config_sweep's camera in Python (RES 760, FOV 34, YAW .62, PITCH -.26, PAD 1.9, union AABB, radius = size.length()*0.5) and rasterising. The model reproduces the bench: it returns overlay-vs-single = 0.55% and subject 0.94% against the 0.55% / 1.0% that were actually measured. Union AABB is 4.70 x 0.71 x 0.03 m - a letterbox fitted by DIAGONAL into a square frame, which is the whole problem - putting the camera 14.77 m out and the default `rules` at 1.62% of frame. At 0.55 the camera is 8.12 m out, subject 5.63%, and cabinet_sweep's peak pair rises 2.30% -> 7.98% with the weakest 0.55% -> 1.83%. THE CLIP POINT IS 0.52 (furthest projected point at 99.9% of the half-frame); 0.55 leaves 7% margin, and clipping would cut the outer panels off `rules`, which is precisely what comparison exists to show. No layers=0 anchor is needed and none should be added: the artifact is built entirely from MeshInstance3D (BoxMesh bar, ImmediateMesh curve, BoxMesh strips), so _subtree_aabb measures it truly and never falls back to its 1 m default box. WHAT FRAMING DOES NOT DO, and the next agent should not expect it to: artifact_dna_critic CROPS to the union subject bbox before diffing, so its verdict is very nearly scale-free - comparison measures 58.6% focus at framing 1.0 and 57.7% at 0.55, resolution 27.9% and 26.7%. Both axes BITE at either value. The subject-under-6% rule in CLAUDE.md is about cabinet_sweep's _report_bite, which normalises over the WHOLE 760x760 frame and does not crop; that is the number 0.55 fixes, and at framing 1.0 its peak of 2.30% sat one antialiasing decision above the 2.0% BITES bar. The other reason is plainer: the published PNG is the uncropped frame, and at framing 1.0 a reader looking at the tile sees a thread across an empty square.",
-    "twin_warning": "pump and fine are near-twins ON THE BENCH, and it is a fact about the shutter, not the axis. _process integrates a 6 s sinusoid, so at SETTLE 1.1 s + 0.1 s the phase is 0.957 and n_strips has climbed to 31 - one strip short of `fine` = 32. Measured: pump-vs-fine 4.73% focus against 44.94% for pump-vs-coarse. Under cabinet_sweep's default --max 9 the second axis is truncated to its first two values, so only pump and coarse are swept and the twin never reaches the sheet; at --max 16 it will, and it should be read as 'the pump happened to be near the top of its stroke', not as two values that draw the same thing. A dna.fixture cannot pin it: cabinet_sweep merges the fixture UNDER each variant's own params, and with both axes declared every variant names resolution itself.",
-    "verified": "2026-08-05 verification pass, no code changed. Both axes are read: comparison in _ready via _build_panels -> _panel_groups, resolution in _ready (the RESOLUTION_STRIPS lookup) and in _process (the early return that stops the pump), and both again in apply_grid_config through _pick_axis, which falls back to the current value on an unknown string. The .tscn root carries the script (riemann_pump.tscn is a bare Node3D named RiemannPump with the script on it), so both axes are reachable from a map token. Export hints are single-line @export_enum. Declared value lists match COMPARISONS and RESOLUTIONS character for character; check_dna_declarations reports both axes ok."
-   },
-   "name": "Riemann Pump",
-   "lookup_name": "riemann_pump",
-   "description": "Three side-by-side strip displays of the same curve, accumulated via left, right, and midpoint sums. The strip count pumps up and down, showing convergence and bias.",
-   "scene": "res://algorithms/change/riemann_pump.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "PUMP strips to integrate",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "riemann_sum",
-    "integration",
-    "accumulation"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "vector_field_grid": {
-   "dna": {
-    "promoted": "2026-08-03",
-    "stage": "2 - variation",
-    "axes": {
-     "field": [
-      "cells",
-      "orbit",
-      "sink",
-      "saddle",
-      "shear"
-     ],
-     "coding": [
-      "magnitude",
-      "direction",
-      "banded",
-      "uniform"
-     ]
-    },
-    "default": "field=cells, coding=magnitude - cells is the `_:` branch of the match, which is the shipped stream function v=(dPsi/dz, -dPsi/dx) with Psi=sin(kx+t)cos(kz+t) and k=2.5, unchanged line for line; magnitude is the `_:` branch of the tint, the shipped arrow_color->arrow_color_hot lerp on |v|/3.5. Neither branch is reachable unless a map names a value, and apply_grid_config ignores any word not in FIELDS/CODINGS, so a typo falls back to the shipped look rather than blanking the field. Nothing rebuilds: both are read fresh every frame by _update_arrows, so the 35 cells across seven maps (Flow_Field, Flow_Particle_Pulse, VFM_Field, Trial_rooms_change, Trial_gate8_cha_size, Trial_gate8_cha_type, Zone_TemporalStorage) build and animate exactly as before.",
-    "was": "one field and one colour rule, both hard-coded in the body of _field_vector and _update_arrows. grid_cols/grid_rows/spacing were already @export and already honoured by apply_grid_config, so the only thing a map could say about a field was how densely to sample it - never which field it was, or what the colour meant.",
-    "note": "field is WHICH RULE the plane obeys. cells is a tiled lattice of saddles - the default is already a field of the third value, repeated; orbit is a centre (closed circles, nothing enters or leaves), sink is a stable node (every trajectory ends at the origin), saddle is the single hyperbolic point the default tiles, shear is parallel layers sliding at different speeds. All four linear fields reuse the stream function's own k=2.5 as their gain, so |v| spans the same range at every value and the colour ramp keeps meaning one thing across the axis. coding is WHAT THE TINT CLAIMS: magnitude is a continuum, direction paints the heading as hue (the optical-flow convention, and the one value where speed is not in the colour at all), banded quantises |v| into four classes (the choropleth claim - a legend where there was a ramp), uniform withholds colour entirely so arrow LENGTH is the only channel left.",
-    "kin": "field is taken from VectorFieldFlow (vectors.json) and the two values it shares - orbit and sink - name the same phase portrait character for character. It is NOT the same list: spiral and source are absent, and cells, saddle and shear are new. source is absent for a measurement reason, not a taxonomic one - the arrow here is a headless BoxMesh oriented by looking_at, so reversing the sign of the field produces a pixel-identical still under the default coding, and a source would ship as a duplicate frame of sink. coding is taken from cube_lines (primitives.json), where it asks the same question - what does the colour encode - and shares uniform meaning the same withholding. force_field_visualizer, promoted in this same batch, deliberately did NOT take the word field for its four physical laws; that refusal and this reuse are consistent: over there the values are named force laws that fall off differently, here as there they are shapes a synthetic flow is bent into.",
-    "still_note": "field is the strong axis: cells is a tiled swirl, sink is a starburst, shear is eight parallel rows, and the arrow orientations differ everywhere at once. coding is the thinner measurement - the subject is 96 arrows of 2.5 cm x 18 cm on an otherwise empty plane, so the changed pixels are the arrows only; expect dilution and crop-recheck before believing an INERT verdict on it. direction is the value most likely to bite, since it replaces a two-colour ramp with the full hue circle."
-   },
-   "name": "Vector Field Grid",
-   "lookup_name": "vector_field_grid",
-   "description": "Regular grid of arrows over a plane, each pointing along a stream function flow direction. Arrow length and color reflect magnitude.",
-   "scene": "res://algorithms/change/vector_field_grid.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "FIELD as arrows",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "vector_field",
-    "stream_function",
-    "flow"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "particle_flow_swarm": {
-   "dna": {
-    "promoted": "2026-08-05",
-    "stage": "2 - variation",
-    "framing": 0.6,
-    "fixture": {
-     "flow_seed": 1,
-     "warmup_steps": 25,
-     "time_scale": 0.0
-    },
-    "axes": {
-     "field": [
-      "cells",
-      "orbit",
-      "sink",
-      "saddle",
-      "shear"
-     ],
-     "trace": [
-      "points",
-      "wake",
-      "streamline"
-     ]
-    },
-    "default": "field=cells, trace=points - cells is the `_` branch of the match in _field_at and returns the shipped three lines unchanged, phase = _t * 0.4 and psi_dz/psi_dx exactly as written, so the flow is the same flow. points sets the tail length to 0, which makes _build_multimesh's instance_count particle_count * 1 - the shipped expression - and makes _instance_xf short-circuit to the literal Transform3D(Basis(), Vector3(x, 0.08, z)) rather than build a scaled Basis it does not need. flow_seed defaults to 0, and at 0 _spawn_particles issues the same two global randf_range calls in the same order, so the shipped unseeded cloud is bit-identical and two swarms in one room are still two different clouds (Trial_rooms_change places two). warmup_steps defaults to 0, so _ready is the shipped two lines, and time_scale defaults to 1.0, so _process is `_t += delta * 1.0` and the shipped body. All 26 maps place the token bare or as `mount:particle_flow_swarm` on an exhibit_furniture plinth; not one passes a config key, so the rebuild branch is unreachable from any map that exists.",
-    "was": "seven exports - two colours and five numbers - and an apply_grid_config that honoured exactly one of them, particle_count, by tearing down the MultiMesh and respawning. The field itself was three welded lines. The runner refused it for NO TURNABLE KNOBS and that was the right verdict on the question that matters: a map could set how MANY particles rode the flow and never which flow they rode, or what a particle was allowed to leave behind.",
-    "note": "field is taken from vector_field_grid (this same registry file, promoted 2026-08-03) - the word, the five values, the comments and the arithmetic, character for character, including reusing the shipped wavenumber k = 2.5 as the gain of the four linear fields so |v| spans one range across the whole axis and the speed tint keeps meaning one thing. That is not decoration: the two artifacts are DECLARED a pair in both their own headers, one drawing the field and the other riding it, and a map that says field:sink to the grid and nothing to the swarm has silently broken the exhibit. Sharing the word is what lets a map keep them one thing. trace is the swarm's OWN question, and it is the one the grid cannot ask, because a body has a history and an arrow does not: points is where the bodies are and nothing else; wake gives each head a short upstream tail, so local direction becomes visible without committing to global structure; streamline drops the head emphasis entirely and the particle stops being a body and becomes the field's integral curve - which is the object the grid of arrows only ever sampled. The tail is INTEGRATED BACKWARDS from the head with the same step_scale rather than recorded, so it needs no history buffer and is identical on frame one and frame one thousand; it is therefore a streamline of the instantaneous field, not a pathline, which coincide under the four steady fields and differ under cells, the only one that scrolls. A tail point that leaves the domain is parked at zero scale rather than wrapped, because the wrap-around is bookkeeping for keeping the plane populated and a wrapped tail would claim the particle crossed the far edge - and it keeps the measured AABB identical at every value, so the sweep's fixed camera cannot drift.",
-    "still_note": "MEASURED by re-implementing the integrator and the harness camera in Python, not guessed. The subject is 220 spheres of 25 mm radius lying on a horizontal plane, and the rig's pitch is -0.26 rad, so the plane is seen at 15 degrees and foreshortened by 0.26 - the same dilution vector_field_grid recorded for its arrows. At framing 1.0 the whole 15-tile cross peaks at 2.02%, which is a fact about the camera. framing 0.6 is the answer: subject 6.35% of frame, peak 5.73%, and every one of the ten field pairs in the default trace=points column at or above 2.63%. It cannot crop - the rig fits by bounding sphere and 0.6 is above 1/PAD = 0.53. THE FIXTURE IS THE OTHER HALF. Without it this artifact is three kinds of unrepeatable at once: the spawn is an unseeded global draw, the integrator advances once per FRAME rather than per second so the still is a fact about the machine's frame rate, and the field scrolls. flow_seed=1 pins the cloud, warmup_steps=25 runs the shipped integrator at a fixed 1/60 delta so the field has ACTED before the shutter, and time_scale=0.0 parks it there. 25 is not arbitrary: at 60 steps the sink has collapsed to a dot 0.16 of its starting radius, the particles have arrived, and there is genuinely no wake left to draw - (sink, points) and (sink, wake) measure 0.02% apart. At 25 they are 0.50% apart and every other pair is comfortable. That weakest pair is the axis telling the truth about a stagnation point, not the axis failing.",
-    "declines": "particle_color and hot_color stay plain exports - a recolour is not an argument. particle_count, domain_x and domain_z stay dials on the same picture. step_scale and k are the rate and the wavenumber: turning either makes the same flow faster or finer, and the first is invisible to a still by construction. The three fixture knobs (flow_seed, warmup_steps, time_scale) are bench instruments and deliberately NOT axes - each of them defaults to the value that reproduces the shipped artifact exactly."
-   },
-   "name": "Particle Flow Swarm",
-   "lookup_name": "particle_flow_swarm",
-   "description": "Many small particles ride the same vector field shown in vector_field_grid. Pairs with the grid to demonstrate field effect on bodies.",
-   "scene": "res://algorithms/change/particle_flow_swarm.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "RIDE the field",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "particles",
-    "flow",
-    "vector_field"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "ftc_bridge": {
-   "dna": {
-    "promoted": "2026-08-05",
-    "stage": "2 - variation",
-    "framing": 0.8,
-    "fixture": {
-     "pulse_speed": 0.0
-    },
-    "axes": {
-     "curve": [
-      "wave",
-      "hump",
-      "ramp",
-      "spike",
-      "step"
-     ],
-     "evidence": [
-      "result",
-      "trace",
-      "longhand"
-     ]
-    },
-    "default": "curve=hump, evidence=result - VERIFIED AGAINST THE PRE-PROMOTION SOURCE, not asserted. At hump _curve_h returns ARCH_H * (1.0 - pow(2.0*u - 1.0, 2.0)) with ARCH_H = 0.7, which is character for character the arch_h * (1.0 - pow(2.0*t_norm - 1.0, 2.0)) that _arch_point held before the promotion; _curve_h(0) and _curve_h(1) are both exactly 0, so each pillar is again BoxMesh(0.25, pillar_height, 0.25) sitting at y = pillar_height * 0.5, and the beam label stays at the shipped literal pillar_height + 1.05 rather than being re-derived from the deck's peak - short circuit over recomputation, so a future change to ARCH_H cannot quietly move the beam in 26 rooms. At result _build_evidence returns before a single node is constructed, so the scene tree and the measured AABB are what they were. The 31 cells across 26 maps are all bare `ftc_bridge` or `ftc_bridge:0:0` and pass no config key at all, so the rebuild path in apply_grid_config is unreachable from any map that exists.",
-    "was": "ten exports - three colours and four numbers - and an apply_grid_config that assigned bridge_span and pillar_height after _ready had already built with them, and never rebuilt for either. The runner refused the token for NO TURNABLE KNOBS, and that was true in the sense that mattered: nothing declared changed what the bridge ARGUED. THE FINDING THAT MADE curve NECESSARY: the shipped deck is a symmetric parabola, so its two ends sit at the same height, f(a) = f(b), and the right-hand side of the theorem painted on its own beam is exactly zero. The capstone of the change sequence was labelled with an equation that, on its own geometry, read 0 = 0.",
-    "note": "curve is WHICH ANTIDERIVATIVE THE DECK IS. hump is the shipped parabola and is kept because 26 maps stand on it. ramp is a straight climb from -0.7 to +0.7 - the plainest non-degenerate case, a constant rate underneath and a constant difference across - and step is a smoothed atan running -0.672 to +0.672, the largest honest difference in the family; only at those two does the beam say something. wave and spike both return to their start height, so the accumulated rate cancels to nothing over the full span, which is a different and equally real thing to photograph. Every member is smooth on [0,1] INCLUDING step, which is an atan and not a jump: a genuinely discontinuous f would be a counter-example to the theorem this deck carries, not an instance of it, and the family does not offer one. evidence is HOW MUCH OF THE THEOREM'S WORKING STANDS ON THE BRIDGE - result asserts the claim and computes nothing; trace draws the left-hand side, f' on a zero line under the deck with its SIGNED area shaded in strips that hang below the axis where the rate is negative; longhand adds the right-hand side, both pillar tops dropped onto one datum so the difference between them is a length you can look at, and prints the two quantities. The printed integral is trapezoid quadrature over the same slope function the strips were drawn from, so their agreement is a statement about the geometry rather than a constant typed in beside it.",
-    "kin": "curve is integral_area's and derivative_pair's word and value list character for character, and the five shapes are the same five functions of u, so a player can meet ramp as a rate in one room, as an accumulation in the next, and as a bridge here - which is what a capstone is for. hump is this artifact's own shipped parabola rather than the siblings' sin(u*PI), exactly as integral_area's hump is its own: the word names one arch over the whole span, and each artifact's hump is its own shipped curve. evidence is the family word but takes zeno_staircase's THREE-value list from this same registry file, not the canonical four, and the missing rung is deliberate. The family's fourth value, axiom, is 'the rule stated instead of drawn' - and the rule is ALREADY painted on this artifact's beam at the shipped default. Declaring axiom here would have shipped a second photograph of result under a different word: the two-values-identical fault, bought in advance. That refusal is bouncing_ball's, made of a different ladder.",
-    "still_note": "curve is the strong axis and it is not close: the deck is 24 emissive 0.18 m boxes over a 3 m span, and ramp against step moves that whole run of ink by up to 1.34 m vertically. Expect a large bite. evidence is the thinner claim, though not a thin one - the rate plot is 40 solid BoxMesh strips up to 0.34 m tall, real ink rather than a one-pixel line, but it sits under the deck inside the existing silhouette. THE ONE NONDETERMINISM IS PINNED: _process runs a pulse marker along the deck and _update_pulse raises the emission multiplier of the three segments nearest it from 0.6 to about 2.1, so the brightest band in the frame walks the span and two frames of the same curve are not comparable to each other. The fixture sets pulse_speed = 0.0, which parks the marker at the left pillar and freezes that band at segment 0. No map passes pulse_speed, so nothing standing is touched, and cabinet_sweep merges the fixture UNDER the swept params so it can never fight an axis. framing 0.8 from the rig's own arithmetic: the union box including longhand's readout ticks at x = 1.95 is about 3.9 x 2.4 x 0.25 m, half-diagonal 2.29 m, so dist = 2.29/tan(17 deg) * PAD 1.9 * 0.8 = 11.4 m and the frame is about 6.97 m across against a projected subject near 3.3 m at YAW 0.62 - roughly 48% of frame width. Cropping is arithmetically impossible at any framing above 1/PAD = 0.53, because the rig fits by bounding SPHERE, so 0.8 has margin in hand.",
-    "declines": "pillar_color, arch_color and pulse_color stay plain exports - a recolour is not an argument. bridge_span and pillar_height stay dials on the same picture: a longer bridge is a bigger photograph of the same claim. arch_segments is the resolution of the approximation rather than the shape being approximated, which is zeno_staircase's axis and not this one's. pulse_speed is time-domain and invisible to a still, which is exactly why it is a fixture here and not an axis."
-   },
-   "name": "FTC Bridge",
-   "lookup_name": "ftc_bridge",
-   "description": "An arched bridge labeled with the Fundamental Theorem of Calculus. A pulse runs from left pillar (a) to right pillar (b). The change-sequence capstone.",
-   "scene": "res://algorithms/change/ftc_bridge.tscn",
-   "category": "change",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "BRIDGE derivative and integral",
-   "dev_themes": [
-    "change",
-    "sieve_2026_05_13"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "fundamental_theorem",
-    "calculus_capstone",
-    "integration"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   }
-  },
-  "riemann_sum_workbench": {
-   "name": "Riemann Sum Workbench",
-   "lookup_name": "riemann_sum_workbench",
-   "description": "An interactive workbench for the midpoint Riemann sum. One slider drives N (rectangle count) through six detents [4, 8, 16, 32, 64, 128]; N translucent blue rectangles regenerate under the curve f(x) = \u00bd + 0.4\u00b7sin(2x) + 0.15\u00b7cos(5x) on [0, 5]; a live readout shows \u03a3, the true \u222b \u2248 2.864, and the signed error; a side error-bar shrinks toward green as N grows. The slider IS the limit \u2014 at N=4 the polygon visibly under- and overshoots; at N=128 it traces the curve. Paired with the /riemann-sum-gallery web cells of this same instrument frozen at the six N-values.",
-   "scene": "res://commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
-   "category": "change",
-   "interaction": "grab_slide",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "WALK the integration limit",
-   "dev_themes": [
-    "change",
-    "calculus",
-    "integration",
-    "riemann_sum",
-    "convergence"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "interactive",
-    "slider",
-    "calculus",
-    "integration",
-    "riemann_sum",
-    "midpoint_rule",
-    "convergence",
-    "limit",
-    "area_under_curve"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     2,
-     3,
-     2
-    ],
-    "size_group": "medium"
-   },
-   "spatial_needs": {
-    "platform": "floor",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "integral_area",
-     "slope_tangent_demo",
-     "ftc_bridge",
-     "shannon_workbench"
-    ],
-    "preferred_zone": "any"
-   }
-  },
-  "tangent_slope_workbench": {
-   "name": "Tangent Slope Workbench",
-   "lookup_name": "tangent_slope_workbench",
-   "description": "An interactive workbench for the derivative as tangent slope. One slider drives x continuously across [0, 5]; a red marker slides along the curve f(x) = \u00bd + 0.4\u00b7sin(2x) + 0.15\u00b7cos(5x); a bright gold tangent line through the marker rotates to match f'(x) = 0.8\u00b7cos(2x) \u2212 0.75\u00b7sin(5x); a small f'(x) subplot above the main plot tracks the derivative as its own function; a live readout shows f'(x), f(x), an up/down/flat slope word, and x; a side sign indicator arrow tilts up (green) when rising, down (red) when falling, flat (white) at extrema. At local maxima/minima the tangent goes horizontal \u2014 the geometric moment of an extremum. Paired with the /tangent-slope-gallery web cells of this same instrument frozen at 8 x-positions. Sibling to riemann_sum_workbench \u2014 same f, differentiation vs. integration.",
-   "scene": "res://commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
-   "category": "calculus",
-   "interaction": "grab_slide",
-   "sequence": "change",
-   "artifact_type": "change",
-   "qfep_term": "F",
-   "capacity": "WALK the derivative slope",
-   "dev_themes": [
-    "change",
-    "calculus",
-    "derivative",
-    "tangent",
-    "slope"
-   ],
-   "dev_category": "change",
-   "complexity": "intermediate",
-   "tags": [
-    "interactive",
-    "slider",
-    "calculus",
-    "derivative",
-    "tangent",
-    "slope",
-    "rate_of_change",
-    "local_extrema",
-    "differentiation"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "parameters": {
-    "footprint": [
-     2,
-     3,
-     2
-    ],
-    "size_group": "medium"
-   },
-   "spatial_needs": {
-    "platform": "floor",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "riemann_sum_workbench",
-     "slope_tangent_demo",
-     "derivative_pair",
-     "ftc_bridge"
-    ],
-    "preferred_zone": "any"
-   }
-  },
-  "zeno_staircase": {
-   "dna": {
-    "promoted": "2026-08-03",
-    "stage": "2 - variation",
-    "axes": {
-     "tick": [
-      "once",
-      "coarse",
-      "fine",
-      "dense",
-      "limit"
-     ],
-     "evidence": [
-      "result",
-      "trace",
-      "longhand"
-     ]
-    },
-    "default": "tick=fine, evidence=longhand - fine maps to samples=9 and longhand draws the amber curve, the staircase, the secant and its tag, which is the shipped build line for line; the dot radius is now min(0.008, tick_pitch*0.45) and at nine samples the cap is 0.044, so the 0.008 constant is untouched. Zero placements in any map_data.json (the only other file naming this token is its own dressing room), so nothing standing changes either way.",
-    "was": "samples/span/amp and three colours were @export, but the ONLY route to them was an apply_grid_config that assigned the variable after _ready had already built with 9 and never rebuilt - the knob turned and nothing moved. The artifact ends on 'shrink the frame and the staircase gets finer; it never becomes the curve' and no placement could test the sentence.",
-    "note": "tick is the halving argument as one ladder, x3 either side of the shipped nine: once=1 (the whole motion as a single frozen frame), coarse=3, fine=9, dense=27, limit=81 - where the eye stops being able to tell and the record is STILL a staircase. It moves the secant too, since the secant is a chord over one frame: at limit it lies visually along the tangent while remaining, by construction, not it. evidence is what the machine puts in the frame for you to check its record against: result = the staircase alone, which looks perfectly correct because there is nothing in shot it could be wrong about; trace = + the true continuous curve; longhand = + the extended secant and its tag. The caption plate is present at every value of both axes, so a measured bite is a bite in the drawing and never in the label.",
-    "kin": "evidence is the family word (example_1_7 / 1_9 / 2_8 / 2_9, koch_curve, box_counting_dimension, sine_wave_controller), taken character for character. sine_wave_controller is the precedent for a three-value member: there is no fourth thing to withhold here, since the rule is already stated in words on the plate at every value. THE DEFAULT DIFFERS FROM THE FAMILY'S - the motion demos ship as `result` with every exhibit withheld, this one ships with its whole working already on the table - and that is a fact about the artifact, not a drift in the word.",
-    "still_note": "tick is the strong axis in pixels: once vs limit is 1 step against 81 and changes the picture wholesale. evidence is the sharper claim but the THINNER measurement - the amber curve it withholds is 180 segments at 4 mm on a 1.0 x 0.44 m panel, so expect result-vs-trace to land near the 3% line and crop-recheck before believing an INERT verdict on it."
-   },
-   "category": "change",
-   "complexity": "intermediate",
-   "description": "The change (calculus) seam. Motion is continuous; the machine reads at frame ticks and holds between (Zeno's arrow, frozen then jump). The amber curve vs the blue staircase; the 'instantaneous' rate it reports is a secant over one frozen frame, not the tangent.",
-   "dev_themes": [
-    "digital_bias",
-    "seam"
-   ],
-   "include_in_map_data": true,
-   "interaction": "ambient",
-   "lookup_name": "zeno_staircase",
-   "map_ready": true,
-   "map_sequences": [
-    "change"
-   ],
-   "name": "Zeno Staircase",
-   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for change. Bias is conserved; show the seam.",
-   "scene": "res://algorithms/change/zeno_staircase/zeno_staircase.tscn",
-   "sequence": "change",
-   "tags": [
-    "calculus",
-    "derivative",
-    "zeno",
-    "sampling",
-    "zero_order_hold",
-    "seam",
-    "digital_bias"
-   ]
-  }
- }
+	"artifacts": {
+		"catalyst_sustain_demo": {
+			"name": "Catalyst Sustain Demo",
+			"lookup_name": "catalyst_sustain_demo",
+			"description": "Demonstrates the catalyst bracelet's sustain affordance \u2014 hold a state while time runs. A glowing torus floats above a pedestal; a trail of after-images shows the integral of held-position over time. First place the player meets 'hold this while time passes.'",
+			"scene": "res://algorithms/change/catalyst_sustain_demo.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "SUSTAIN over time",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"catalyst_affordance",
+				"sustain",
+				"integration"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.18,
+					1.67,
+					1.18
+				],
+				"aabb_center": [
+					0.0,
+					0.83,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.67,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			]
+		},
+		"slope_tangent_demo": {
+			"dna": {
+				"promoted": "2026-08-04",
+				"deepened": "2026-08-05",
+				"stage": "2 - variation",
+				"framing": 0.48,
+				"fixture": {
+					"phase": "steepest"
+				},
+				"axes": {
+					"phase": [
+						"traverse",
+						"crest",
+						"steepest",
+						"trough"
+					],
+					"evidence": [
+						"result",
+						"trace",
+						"longhand",
+						"axiom"
+					]
+				},
+				"default": "phase=traverse, evidence=trace - traverse skips the station lookup entirely, so _update_marker_and_tangent still computes t_norm = fmod(_t*0.2, 1.0) and the point still runs the full period in 8.3 s; trace builds the tangent strip on the same line of _ready it was always built on, and _build_evidence returns without adding a node. The 8 cells across 6 maps (Change_Intro, VFM_Velocity, Trial_rooms_change, Trial_gate8_cha_size x2, Trial_gate8_cha_type x2, Walk_grande_galerie_axial_text) pass no config keys at all. The three numeric exports keep their pre-promotion behaviour INCLUDING THE BROKEN PART OF IT: samples and horizontal_span are still assigned after _ready has already used them, so they still do nothing, and a map that has been quietly ignoring `samples` for a year does not start redrawing because this file was touched. Only evidence triggers a rebuild, and only when the word validates, differs, and arrives after _ready.",
+				"was": "seven exports: three colours and four numbers. The artifact's argument - that a curve carries a different rate at every point - was reachable only by standing in the room and waiting for the marker to arrive somewhere interesting, and no still could hold it. The runner refused the token for NO TURNABLE KNOBS, which was true in the sense that mattered: nothing declared changed what the picture ARGUED.",
+				"note": "phase is WHERE THE SLOPE IS READ. traverse is the shipped sweep; crest (t=0.75) and trough (t=0.25) are the two places the tangent lies flat; steepest (t=0.5) is the place it tilts hardest. WHAT IS DELIBERATELY ABSENT and why: the four candidate stations were peak / steepest / zero / inflection, and on y=sin(x) three of those are ONE POINT - sin''(x) = -sin(x) vanishes exactly where |cos x| is maximal - so zero, steepest and inflection would have shipped three identical stills under three different words. That is folding_past's fault in reverse, taking a value list the object cannot answer. Four values, four distinct pictures. A FINDING FELL OUT OF PINNING THE MARKER: this file's header comment and this entry's own description both said the tangent flattens at the zero crossings, which is the opposite of what the code computes and of what the artifact teaches. Both are corrected in this pass. The doc could stay wrong for as long as it did precisely because the marker never stopped anywhere long enough to be photographed.",
+				"kin": "evidence is the family word taken character for character, all four of the canonical 22-sibling list. result is curve + marker with no tangent, the thing changing without its rate; trace is the shipped tangent at one point; longhand adds the rise/run triangle, the numeric dy/dx readout this file's @identity has listed as missing since it was written, and the whole derivative cos(x) drawn across the same strip; axiom states 'd/dx sin x = cos x' and draws no tangent at all - the textbook line instead of the demonstration, which is pythagorean_triangle_angles' sense of the word exactly. NOT named `station`, although that is the natural English word: `station` is taken by a Wolfram-class axis (edge | order | chaos) asking a different question, and a shared word is only honest when the question is shared. The sibling word `curve` (derivative_pair and integral_area, wave|hump|ramp|spike|step) was considered and NOT taken: it names WHICH FUNCTION is drawn, and this artifact's argument is about one function read in different places. Implementing five curves here would have produced a third copy of derivative_pair instead of promoting this one.",
+				"still_note": "READ THE SUBJECT SHARE BEFORE BELIEVING ANY NUMBER HERE. The whole artifact is two 2 cm bars and three ImmediateMesh LINE_STRIPs, which rasterise one pixel wide, on a plot 3.8 m across and 0.02 m deep - the thinnest subject promoted so far. framing is set to 0.6 from the rig's own arithmetic: radius = 4.05/2, dist = radius/tan(17 deg) * PAD 1.9 * framing, so 0.6 gives a 4.6 m frame width against a ~3.1 m projected subject - tighter, with margin left. A low percentage here is far more likely to be dilution than an inert axis. SECOND CAVEAT, unavoidable and stated rather than hidden: traverse is the only nondeterministic tile in the sheet, because the marker's position depends on how many process frames the headless boot managed before the shutter. Two traverse frames are not comparable to each other, and a large traverse-to-traverse difference is a clock, not a bite. The three pinned stations are exactly reproducible and the axis should be judged on those. evidence is the wholesale one: longhand adds a second full-width curve plus a triangle and a readout, and result and axiom both delete the tangent entirely.",
+				"declines": "curve_color, tangent_color and marker_color stay plain exports - a recolour is not an argument. x_range, samples, amplitude and horizontal_span stay dials on the same picture; amplitude in particular was tempting, since the @identity names it the critical_parameter, but a steeper sine photographed at one station is a bigger picture of the same claim.",
+				"deepened_why": "MEASURED FLAT AND FIXED AT THE INK, not at the design. The 2026-08-05 sweep put all six phase pairs between 0.172% and 0.211% on a subject filling 0.805% of frame - the still_note below had predicted exactly this and it was right. Diagnosis, arithmetic rather than impression: at framing 0.6 the frame is 4.6 m wide over 760 px, so 165 px/m; the two axis BARS are 2 cm thick and account for roughly 0.48% of the frame on their own and never move, while everything phase actually changes - the 12 cm marker sphere and a 1-pixel tangent - totals under 0.08% of frame. Moving 0.08% of ink between two places cannot register above 0.2%, and no amount of reframing fixes a subject whose ink is one pixel wide. So the fix is ink, and the constraint is that the tangent is NOT new geometry: it is drawn at evidence=trace, the default, in all 8 shipped cells. Thickening it unconditionally would have been a regression dressed as a repair. What was added instead exists ONLY where phase names a station, which no map does: a 26 cm band down the plot at the marker's x (behind the curve, at the vertical axis bar's exact height so the AABB and therefore the grid's auto-grounding cannot move), and the tangent rebuilt as a 7.5 cm TRIANGLE_STRIP straightedge instead of a LINE_STRIP trace. Two stations 1.8 m apart now differ by two full bands - about 0.35 m2 of projected ink against 0.08 m2 before. framing also comes in from 0.6 to 0.48 (3.5 m frame against a 3.14 m projected plot, ~11% margin), worth a further 1.8x in area. The derivative curve under `longhand` is genuinely new geometry no placement has seen, so it is thickened unconditionally into a ribbon - the whole derivative was previously quieter in the frame than the marker dot explaining it.",
+				"fixture_why": "phase=steepest, and it is NOT a claim that steepest is special. traverse is the only nondeterministic value in the file - the marker's x depends on how many process frames the headless boot managed - so any sweep that does NOT vary phase (evidence alone, or a --max that only has room for one axis) was previously photographing evidence against a moving marker and calling the clock a bite. cabinet_sweep merges the fixture UNDER the swept params, so when phase IS the axis the swept value wins and this pin costs nothing. No placement passes phase, so no map ever sees it.",
+				"expected": "A PREDICTION, so the next sweep falsifies it instead of re-describing it. At framing 0.48 the frame is about 3.90 m wide against a 3.14 m projected plot (81%, uncropped), which is 195 px per projected metre against the old 156. A station band is 0.26 x 1.4 m, projecting to 0.291 m2 or about 1.9% of the frame, and the three stations sit 0.9 m apart with 0.26 m bands, so any two are fully disjoint. Expect all six phase pairs between roughly 2% and 4%, up from 0.17-0.21%. IF IT COMES BACK UNDER 1%, the band did not build: check that phase reached the root (`_holder_of` wants the export on the .tscn root) before touching the design, because a value that never arrives and an axis that does nothing produce the same sheet.",
+				"known_weak_pair": "AT --max=9 AND ABOVE, where the matrix becomes phase x evidence, the closest pair will be (traverse, result) against (traverse, trace) - the two tiles that differ only by the one-pixel shipped tangent at an unpinned marker, worth about 0.09%. That is not a repairable weakness; it is the price of preserving the default, and the two frames in question ARE the shipped artifact. Judge this token at --max=5, where only phase is swept and every pair carries a band."
+			},
+			"name": "Slope Tangent Demo",
+			"lookup_name": "slope_tangent_demo",
+			"description": "A sine curve with a moving point that drags its tangent line. Where the curve is steep the tangent tilts, and it is steepest exactly at the zero crossings; at the crest and the trough it lies flat. The first map showing rate as a thing alongside the thing \u2014 derivative as instantaneous slope.",
+			"scene": "res://algorithms/change/slope_tangent_demo.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "SEE the rate of change",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"derivative",
+				"tangent",
+				"rate_of_change",
+				"calculus"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.05,
+					1.44,
+					0.12
+				],
+				"aabb_center": [
+					-0.13,
+					-0.02,
+					0.0
+				],
+				"grid_cells": [
+					5,
+					1
+				],
+				"max_dimension_m": 4.05,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				5,
+				1,
+				1
+			]
+		},
+		"integral_area": {
+			"dna": {
+				"axes": {
+					"curve": [
+						"hump",
+						"wave",
+						"ramp",
+						"spike",
+						"step"
+					],
+					"tally": [
+						"strips",
+						"blocks",
+						"column",
+						"antiderivative"
+					]
+				}
+			},
+			"name": "Integral Area",
+			"lookup_name": "integral_area",
+			"description": "Area under a curve as accumulation, animated. A sweep marker progresses left to right; vertical strips light up as they enter the swept region. The definite integral made visible: the headline accumulation artifact for the change sequence.",
+			"scene": "res://algorithms/change/integral_area.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "ACCUMULATE under the curve",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"integral",
+				"area_under_curve",
+				"accumulation",
+				"calculus"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.8,
+					0.8,
+					0.05
+				],
+				"aabb_center": [
+					0.0,
+					0.35,
+					0.0
+				],
+				"grid_cells": [
+					4,
+					1
+				],
+				"max_dimension_m": 3.8,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				4,
+				1,
+				1
+			]
+		},
+		"derivative_pair": {
+			"dna": {
+				"axes": {
+					"curve": [
+						"wave",
+						"hump",
+						"ramp",
+						"spike",
+						"step"
+					],
+					"panels": [
+						"stacked",
+						"overlaid",
+						"tower",
+						"phase"
+					]
+				}
+			},
+			"name": "Derivative Pair",
+			"lookup_name": "derivative_pair",
+			"description": "Two stacked curves with a shared vertical sweep line. f on top, f' below. Shows the derivative as a function in its own right.",
+			"scene": "res://algorithms/change/derivative_pair.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "PAIR function and rate",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"derivative",
+				"function",
+				"calculus"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.4,
+					1.5,
+					0.14
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					1.0
+				],
+				"max_dimension_m": 3.4,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				1.0
+			]
+		},
+		"velocity_arrow": {
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"framing": 0.55,
+				"fixture": {
+					"phase": "straight"
+				},
+				"axes": {
+					"phase": [
+						"traverse",
+						"straight",
+						"bend",
+						"mirror"
+					],
+					"evidence": [
+						"result",
+						"trace",
+						"longhand",
+						"axiom"
+					]
+				},
+				"default": "phase=traverse, evidence=trace - traverse is absent from PHASE_A by construction, so the station lookup MISSES and `a = fmod(_t, TAU)` is still the line that decides where the puck is; trace leaves the arrow on layer 1 (its Godot default, so the write is a no-op) and _build_evidence falls through its match without adding a node, leaving _ready at the same three children in the same order. The 4 placements (Change_Velocity, VFM_Velocity, Trial_gate8_cha_size, Trial_gate8_cha_type) are BARE `velocity_arrow` tokens passing no config key at all, so no map can see either axis unless someone writes one in. The three numeric exports keep their pre-promotion behaviour including the broken part of it: track_radius_x/z are still assigned after _ready has stitched the track mesh, so the drawn ring still does not move when a map sets them.",
+				"was": "seven exports - three colours, three track dimensions and a speed. Nothing declared changed what the artifact ARGUED, and the runner refused the token for NO TURNABLE KNOBS. Worse, the one thing that did vary was the one thing nobody could pin: the puck's position is a function of how many process frames elapsed, so every still of this artifact was a photograph of the boot time.",
+				"note": "phase is WHERE ON THE TRACK THE DERIVATIVE IS READ, and the track was built to make that question have an answer - the `sin(a*2)*0.15` bulge in _track_point exists to vary curvature. Measured off that function rather than guessed: straight (a=pi/2) is curvature 0.311, |v| 1.700, arrow 1.190 long; bend (a=0.3241) is curvature 2.218, |v| 0.878, arrow 0.614; mirror (a=3pi/2) is curvature 0.744, |v| 1.100, arrow 0.770. Three positions 1.4-1.8 m apart on a 2.86 x 1.80 m track with a 0.12 m puck, so no two stations overlap anywhere. WHAT IS DELIBERATELY ABSENT: `swing`, the place the arrow rotates fastest. k*|v| peaks at a=0.345 and curvature peaks at a=0.324 - the same 1.2 degrees of track - so swing and bend would have been two names for one point and shipped two identical stills. That is slope_tangent_demo's zero/steepest/inflection lesson applied before the sweep instead of after it. mirror is the value that carries the actual claim: it is the point diametrically opposite straight, on the side the bulge does not reach, so it looks like the same piece of ellipse and is moving at 1.100 against 1.700 - two symmetric-looking places that are not symmetric motions.",
+				"kin": "evidence is the family word (38 siblings) taken character for character, with slope_tangent_demo's default, `trace`. The two artifacts are the change sequence's derivative pair and they now carry the SAME TWO AXES, which is the honesty test for a shared vocabulary: if velocity_arrow and slope_tangent_demo do not measure alike on evidence, that is a fault to chase and not a design difference. Values here: result = track and puck with no arrow, motion without its rate; trace = the shipped arrow at one point; longhand = the difference quotient the arrow is the limit of, drawn out - the two sample points, the chord between them and the numeric |v| readout this file's @identity has listed as missing since it was written; axiom = `v = dP/dt` on a plate with no arrow at all, the textbook line instead of the demonstration. `phase` is slope_tangent_demo's word taken for the same question (where on the curve is the rate read, with the shipped sweep as the default value) and NOT its value list - crest, steepest and trough are facts about a sine and this is a closed track, so taking them would be folding_past's fault. Only `traverse` is shared, because only `traverse` names the same thing in both objects.",
+				"fixture_why": "phase=straight, and it is NOT a claim that straight is special - it is the station with the longest arrow, so a sweep of `evidence` alone has the most ink to lose when result and axiom take the arrow away. traverse is the only nondeterministic value in the file, so any sweep that does not itself vary phase would otherwise be photographing evidence against a puck in a different place each frame and reporting the clock as a bite. cabinet_sweep merges the fixture UNDER the swept params, so when phase IS the axis the swept value wins and this pin costs nothing. No placement passes phase, so no map ever sees it.",
+				"still_note": "READ THE SUBJECT SHARE BEFORE BELIEVING ANY NUMBER. The track is an ImmediateMesh LINE_STRIP that rasterises one pixel wide across 2.86 x 1.80 m, so almost the whole AABB is empty - this is the slope_tangent_demo dilution problem in a second body. The ink that moves is the 0.12 m puck plus a 0.04 x 0.7-2.2 m emissive arrow. phase should still read wholesale, because it moves ALL of that ink 1.4-1.8 m and no two stations overlap. evidence is the thinner one and its thinnest pair is result-vs-trace, which is exactly one arrow's worth of pixels - roughly 0.06 m2 of a ~3.5 m frame. That thinness is the PRICE OF PRESERVING THE DEFAULT and cannot be fixed by thickening the arrow: the arrow is drawn at evidence=trace, which is what all 4 placements show. What longhand and axiom add is new geometry no placement has seen, so both are drawn generously (a 3.5 cm chord, two 7 cm sample spheres, a 19 cm-glyph readout; a 1.55 x 0.40 m plate with two emissive rules). Expect longhand and axiom to bite and result-vs-trace to be the weak pair. IF phase COMES BACK UNDER 1%, do not re-cut the stations: check first that the station lookup fired at all, because PHASE_A is keyed on the raw export and a value that never arrives and an axis that does nothing produce the same sheet.",
+				"declines": "puck_color, arrow_color and track_color stay plain exports - a recolour is not an argument. track_radius_x, track_radius_z and puck_radius stay dials on the same picture. `speed` was the tempting one and is REFUSED on the brief's own rule: the @identity names it the critical_parameter, but omega is a rate, a still cannot photograph a rate, and the arrow's length is a function of the track's shape and NOT of `speed` - _update_puck_and_arrow scales by |dP/da|, so doubling speed changes how fast the puck goes round and leaves every frame of it identical. A `speed` axis would have produced four indistinguishable tiles and a confident verdict about nothing, which is info_board exactly."
+			},
+			"name": "Velocity Arrow",
+			"lookup_name": "velocity_arrow",
+			"description": "A puck moves around a closed track with an arrow riding on it. Length = speed, direction = motion. Velocity as the visible derivative of position.",
+			"scene": "res://algorithms/change/velocity_arrow.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "SEE motion as derivative",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"velocity",
+				"tangent",
+				"kinematics"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.98,
+					0.27,
+					1.8
+				],
+				"aabb_center": [
+					0.06,
+					0.18,
+					0.0
+				],
+				"grid_cells": [
+					3,
+					2
+				],
+				"max_dimension_m": 2.98,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				3,
+				1,
+				2
+			]
+		},
+		"partial_derivative_terrain": {
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"framing": 0.8,
+				"fixture": {
+					"phase": "oppose"
+				},
+				"axes": {
+					"phase": [
+						"traverse",
+						"agree",
+						"oppose",
+						"single"
+					],
+					"asked": [
+						"both",
+						"partial_x",
+						"partial_y",
+						"gradient"
+					]
+				},
+				"default": "phase=traverse, asked=both - traverse skips the station lookup entirely, so _update_arrows still computes sx = sin(_t*0.4)*0.7 and sz = cos(_t*0.6)*0.7 and the sample point still runs its Lissajous; it also holds both sign multipliers at +1, so the two bars keep the shipped abs() placement on the +x and +z side. both leaves the two arrows visible and builds no third. At this pair _build_dna() adds NO NODE and changes NO visibility flag - the ribbons and the signed placement exist only where phase names a station, and no map names one. All 25 placements carry the bare token with no config keys. grid_size and span keep their pre-promotion behaviour INCLUDING THE BROKEN PART OF IT: they are still assigned after _ready has already consumed them, so they still do nothing, and a map that has been quietly ignoring `span` does not start redrawing because this file was touched.",
+				"was": "seven exports - three colours and four numbers - and an apply_grid_config that took two of the numbers after _ready had already used them. The artifact's argument, that a surface carries two independent slopes at every point, was reachable only by standing in the room and waiting for the sample point to arrive somewhere interesting, and no still could hold it. The runner refused the token for NO TURNABLE KNOBS, which was true in the sense that mattered: nothing declared changed what the picture ARGUED.",
+				"finding": "THE SIGN HAS NEVER BEEN VISIBLE. _update_arrows draws clamp(abs(dx) * 6.0, 0.3, 2.0) and hangs the bar at origin + (0.25, 0, 0) unconditionally, and the same for dy on +z. A negative partial and a positive one of equal size have therefore rendered as the same picture since the file was written, which means the one thing this artifact has that the 1D case does not - two slopes that can disagree - has never been on screen. It could stay that way precisely because the sample point never stopped anywhere long enough to be looked at. THE SECOND FINDING IS ABOUT THE SURFACE AND IT KILLED THE OBVIOUS VALUE LIST: every critical point of f(x,y) = sin(1.5x)cos(1.5y)h + sin(x+y)(0.12h) lies ON THE BOUNDARY of the drawn terrain - a minimum at (-1.000, -0.031), a maximum at (+1.000, +0.031) and two saddles at (-0.031, -1.000) and (+0.031, +1.000). Borrowing slope_tangent_demo's crest and trough, or the saddle this pass was reasonably expected to declare, would have pinned the arrows over the edge of the mesh they measure. Measured on a 201x201 scan of the full domain and refined by descent on |grad f|^2, before declaring rather than after.",
+				"note": "phase is WHERE THE TWO SLOPES ARE READ, and the three stations are SIGN PATTERNS rather than critical points because that is what this surface can answer inside its own extent. agree (-0.525, +0.520) has fx +0.305 and fy +0.304: two arrows of the same length both pointing forward, the 1D story told twice. oppose (-0.550, -0.545) has fx +0.263 and fy -0.262: the same two lengths pointing OPPOSITE ways, which is the whole reason a derivative in more than one dimension is not one number. single (+0.170, +0.200) has fx +0.525 and fy 0.000, so one axis carries everything and the other reads its clamp minimum - ask the wrong variable and the surface tells you nothing. asked is this artifact's own truth statement made settable: you differentiate with respect to whichever axis you think to ask about. WHAT IS ADDED, AND ONLY OFF THE DEFAULT, following slope_tangent_demo's precedent exactly: at a named station the two SLICE RIBBONS appear - f(., y0) and f(x0, .), the curves the partials are literally the ordinary slopes OF, which nothing in this artifact had ever drawn - and each bar is placed on the side its sign points to.",
+				"kin": "phase is slope_tangent_demo's and velocity_arrow's word, the same question asked of the same kind of object - where on a moving thing is the rate read - and `traverse` is their name for the un-pinned shipped sweep, character for character. THE OTHER THREE VALUES ARE THIS SURFACE'S OWN, and the reason is in `finding` rather than in preference: this is bouncing_ball's move, take the word and refuse the value list where the object cannot answer it. `evidence` was considered for the second axis and NOT taken: the 22-sibling list is about how much of an artifact's working is shown, and this one's second question is which of two derivatives was asked for at all - a different question wearing a similar shape. `curve` (derivative_pair, integral_area) was not taken either: it names WHICH FUNCTION is drawn, and implementing five surfaces here would have produced a second vector_field_grid instead of promoting this one.",
+				"still_note": "READ THE SUBJECT SHARE BEFORE BELIEVING ANY NUMBER HERE. The terrain is 2 x 2 m and the two arrows are 4 cm bars 0.4 m long, so the moving ink was under 2 percent of a fit-to-AABB frame before this pass, and a low percentage would have been dilution rather than an inert axis - slope_tangent_demo's measured fault, one artifact over in the same sequence. That is why the ribbons exist: two 2 m x 5.6 cm strips are roughly 0.22 m2 against a 4 m2 terrain, an order of magnitude more ink than the bars, and they sit in completely different places at the three stations, which are 1.0 to 1.4 m apart on a 2 m field. framing is set to 0.8 rather than lower because the stations reach 0.55 m from centre and the ribbons run the full span; if the sheet still reads diluted the next lever is 0.7, not a redesign. traverse is the only nondeterministic tile in the sheet - the sample point's position depends on how many process frames the headless boot managed before the shutter - so two traverse frames are not comparable to each other and a large traverse-to-traverse difference is a clock, not a bite. Judge phase on the three pinned stations.",
+				"fixture_why": "phase=oppose, and it is not a claim that oppose is special. traverse is the one nondeterministic value in the file, so any sweep that varies `asked` alone would otherwise photograph it against a moving sample point and call the clock a bite. The sweep merges the fixture UNDER the swept params, so when phase IS the axis the swept value wins and this pin costs nothing. No placement passes phase, so no map ever sees it.",
+				"declines": "height_scale was the tempting numeric axis - the @identity names it the critical_parameter - and is declined for slope_tangent_demo's stated reason: a more pronounced terrain photographed at one station is a bigger picture of the same claim, not a different claim. The three colours stay plain exports; a recolour is not an argument. sample_speed is a rate and invisible to a still.",
+				"placements": 25
+			},
+			"name": "Partial Derivative Terrain",
+			"lookup_name": "partial_derivative_terrain",
+			"description": "A wavy terrain. Two arrows ride a moving sample point, one for partial-x, one for partial-y. First map showing two-axis differentiation.",
+			"scene": "res://algorithms/change/partial_derivative_terrain.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "SEE partials in 3D",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"partial_derivative",
+				"gradient",
+				"calculus_3d"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.0,
+					0.77,
+					2.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					2
+				],
+				"max_dimension_m": 2.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				2
+			]
+		},
+		"riemann_pump": {
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"framing": 0.55,
+				"axes": {
+					"comparison": [
+						"rules",
+						"overlay",
+						"bracket",
+						"single"
+					],
+					"resolution": [
+						"pump",
+						"coarse",
+						"mid",
+						"fine"
+					]
+				},
+				"default": "comparison=rules AND resolution=pump - VERIFIED LINE BY LINE against the pre-promotion file (057abfdf9), not asserted. `rules` is the fall-through return of _panel_groups, [[LEFT],[RIGHT],[MID]], so k=3 and the centring formula (idx - (k-1)/2) * (panel_width + panel_gap) reduces term for term to the shipped (float(i) - 1.0) * pitch; the three panels are rebuilt at the same x, in the same order, carrying the same rule each. Every group then has size 1, so _emit_strips takes the `-0.01 if rules.size() == 1` branch and keeps the shipped z exactly, and its `seq` counter equals k, so the strips carry the node names _strip_0.._strip_(n-1) they always had. `pump` makes _ready skip the RESOLUTION_STRIPS lookup entirely, leaving n_strips at the shipped export default of 12, and makes _process run the shipped sinusoid body unchanged. In apply_grid_config the pre-existing n_strips key behaves exactly as before; the two new keys set nothing unless the value differs from what is already there, and the rebuild additionally refuses to fire until _built. All 3 placements pass no config key, so the rebuild branch is unreachable from every map that exists.",
+				"was": "nine plain exports - three colours, curve_color, n_strips, panel_width, panel_height, panel_gap, pump_period - and no apply_grid_config at all. Every one of them is a colour, a size or a rate. The two things the artifact ARGUES were welded shut: which accumulation rules stand beside each other (three, always, in a row) and how fine the partition is (driven on a sinusoid every frame, so the n_strips export was unreachable in practice - a sweep of it measured 0.011% and 0.016% because the pump overwrote each value before the shutter).",
+				"note": "comparison is WHAT STANDS BESIDE WHAT. rules is the shipped row of three. bracket drops the midpoint and shows left and right as the BRACKET they are - f is increasing on [0, PI], so the left sum is always under the true area and the right always over it, and the answer is trapped between two pictures. overlay puts all three rules on ONE panel, spread in depth with the shortest sum nearest, so the disagreement stops being a comparison across the room and becomes a difference of heights at one x. single is the midpoint rule alone, the reading you would actually use, with nothing to argue with. resolution is HOW FINE THE PARTITION IS, and unavoidably whether it holds still: coarse/mid/fine pin n_strips to 4/12/32 and freeze _process, and mid is 12 because 12 is the shipped export default - the count the artifact is BUILT at before the pump's first frame. The partition is this artifact's own declared critical_parameter, so letting a value stop the pump is the only way to photograph it.",
+				"still_note": "framing 0.55 SET THIS PASS, measured rather than guessed, by re-implementing _build_panels/_emit_strips and capture_config_sweep's camera in Python (RES 760, FOV 34, YAW .62, PITCH -.26, PAD 1.9, union AABB, radius = size.length()*0.5) and rasterising. The model reproduces the bench: it returns overlay-vs-single = 0.55% and subject 0.94% against the 0.55% / 1.0% that were actually measured. Union AABB is 4.70 x 0.71 x 0.03 m - a letterbox fitted by DIAGONAL into a square frame, which is the whole problem - putting the camera 14.77 m out and the default `rules` at 1.62% of frame. At 0.55 the camera is 8.12 m out, subject 5.63%, and cabinet_sweep's peak pair rises 2.30% -> 7.98% with the weakest 0.55% -> 1.83%. THE CLIP POINT IS 0.52 (furthest projected point at 99.9% of the half-frame); 0.55 leaves 7% margin, and clipping would cut the outer panels off `rules`, which is precisely what comparison exists to show. No layers=0 anchor is needed and none should be added: the artifact is built entirely from MeshInstance3D (BoxMesh bar, ImmediateMesh curve, BoxMesh strips), so _subtree_aabb measures it truly and never falls back to its 1 m default box. WHAT FRAMING DOES NOT DO, and the next agent should not expect it to: artifact_dna_critic CROPS to the union subject bbox before diffing, so its verdict is very nearly scale-free - comparison measures 58.6% focus at framing 1.0 and 57.7% at 0.55, resolution 27.9% and 26.7%. Both axes BITE at either value. The subject-under-6% rule in CLAUDE.md is about cabinet_sweep's _report_bite, which normalises over the WHOLE 760x760 frame and does not crop; that is the number 0.55 fixes, and at framing 1.0 its peak of 2.30% sat one antialiasing decision above the 2.0% BITES bar. The other reason is plainer: the published PNG is the uncropped frame, and at framing 1.0 a reader looking at the tile sees a thread across an empty square.",
+				"twin_warning": "pump and fine are near-twins ON THE BENCH, and it is a fact about the shutter, not the axis. _process integrates a 6 s sinusoid, so at SETTLE 1.1 s + 0.1 s the phase is 0.957 and n_strips has climbed to 31 - one strip short of `fine` = 32. Measured: pump-vs-fine 4.73% focus against 44.94% for pump-vs-coarse. Under cabinet_sweep's default --max 9 the second axis is truncated to its first two values, so only pump and coarse are swept and the twin never reaches the sheet; at --max 16 it will, and it should be read as 'the pump happened to be near the top of its stroke', not as two values that draw the same thing. A dna.fixture cannot pin it: cabinet_sweep merges the fixture UNDER each variant's own params, and with both axes declared every variant names resolution itself.",
+				"verified": "2026-08-05 verification pass, no code changed. Both axes are read: comparison in _ready via _build_panels -> _panel_groups, resolution in _ready (the RESOLUTION_STRIPS lookup) and in _process (the early return that stops the pump), and both again in apply_grid_config through _pick_axis, which falls back to the current value on an unknown string. The .tscn root carries the script (riemann_pump.tscn is a bare Node3D named RiemannPump with the script on it), so both axes are reachable from a map token. Export hints are single-line @export_enum. Declared value lists match COMPARISONS and RESOLUTIONS character for character; check_dna_declarations reports both axes ok."
+			},
+			"name": "Riemann Pump",
+			"lookup_name": "riemann_pump",
+			"description": "Three side-by-side strip displays of the same curve, accumulated via left, right, and midpoint sums. The strip count pumps up and down, showing convergence and bias.",
+			"scene": "res://algorithms/change/riemann_pump.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "PUMP strips to integrate",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"riemann_sum",
+				"integration",
+				"accumulation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.7,
+					0.71,
+					0.03
+				],
+				"aabb_center": [
+					0.0,
+					0.35,
+					-0.01
+				],
+				"grid_cells": [
+					5,
+					1
+				],
+				"max_dimension_m": 4.7,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				5,
+				1,
+				1
+			]
+		},
+		"vector_field_grid": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"field": [
+						"cells",
+						"orbit",
+						"sink",
+						"saddle",
+						"shear"
+					],
+					"coding": [
+						"magnitude",
+						"direction",
+						"banded",
+						"uniform"
+					]
+				},
+				"default": "field=cells, coding=magnitude - cells is the `_:` branch of the match, which is the shipped stream function v=(dPsi/dz, -dPsi/dx) with Psi=sin(kx+t)cos(kz+t) and k=2.5, unchanged line for line; magnitude is the `_:` branch of the tint, the shipped arrow_color->arrow_color_hot lerp on |v|/3.5. Neither branch is reachable unless a map names a value, and apply_grid_config ignores any word not in FIELDS/CODINGS, so a typo falls back to the shipped look rather than blanking the field. Nothing rebuilds: both are read fresh every frame by _update_arrows, so the 35 cells across seven maps (Flow_Field, Flow_Particle_Pulse, VFM_Field, Trial_rooms_change, Trial_gate8_cha_size, Trial_gate8_cha_type, Zone_TemporalStorage) build and animate exactly as before.",
+				"was": "one field and one colour rule, both hard-coded in the body of _field_vector and _update_arrows. grid_cols/grid_rows/spacing were already @export and already honoured by apply_grid_config, so the only thing a map could say about a field was how densely to sample it - never which field it was, or what the colour meant.",
+				"note": "field is WHICH RULE the plane obeys. cells is a tiled lattice of saddles - the default is already a field of the third value, repeated; orbit is a centre (closed circles, nothing enters or leaves), sink is a stable node (every trajectory ends at the origin), saddle is the single hyperbolic point the default tiles, shear is parallel layers sliding at different speeds. All four linear fields reuse the stream function's own k=2.5 as their gain, so |v| spans the same range at every value and the colour ramp keeps meaning one thing across the axis. coding is WHAT THE TINT CLAIMS: magnitude is a continuum, direction paints the heading as hue (the optical-flow convention, and the one value where speed is not in the colour at all), banded quantises |v| into four classes (the choropleth claim - a legend where there was a ramp), uniform withholds colour entirely so arrow LENGTH is the only channel left.",
+				"kin": "field is taken from VectorFieldFlow (vectors.json) and the two values it shares - orbit and sink - name the same phase portrait character for character. It is NOT the same list: spiral and source are absent, and cells, saddle and shear are new. source is absent for a measurement reason, not a taxonomic one - the arrow here is a headless BoxMesh oriented by looking_at, so reversing the sign of the field produces a pixel-identical still under the default coding, and a source would ship as a duplicate frame of sink. coding is taken from cube_lines (primitives.json), where it asks the same question - what does the colour encode - and shares uniform meaning the same withholding. force_field_visualizer, promoted in this same batch, deliberately did NOT take the word field for its four physical laws; that refusal and this reuse are consistent: over there the values are named force laws that fall off differently, here as there they are shapes a synthetic flow is bent into.",
+				"still_note": "field is the strong axis: cells is a tiled swirl, sink is a starburst, shear is eight parallel rows, and the arrow orientations differ everywhere at once. coding is the thinner measurement - the subject is 96 arrows of 2.5 cm x 18 cm on an otherwise empty plane, so the changed pixels are the arrows only; expect dilution and crop-recheck before believing an INERT verdict on it. direction is the value most likely to bite, since it replaces a two-colour ramp with the full hue circle."
+			},
+			"name": "Vector Field Grid",
+			"lookup_name": "vector_field_grid",
+			"description": "Regular grid of arrows over a plane, each pointing along a stream function flow direction. Arrow length and color reflect magnitude.",
+			"scene": "res://algorithms/change/vector_field_grid.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "FIELD as arrows",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"vector_field",
+				"stream_function",
+				"flow"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.49,
+					0.03,
+					1.62
+				],
+				"aabb_center": [
+					0.0,
+					0.05,
+					0.0
+				],
+				"grid_cells": [
+					3,
+					2
+				],
+				"max_dimension_m": 2.49,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				3,
+				1,
+				2
+			]
+		},
+		"particle_flow_swarm": {
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"framing": 0.6,
+				"fixture": {
+					"flow_seed": 1,
+					"warmup_steps": 25,
+					"time_scale": 0.0
+				},
+				"axes": {
+					"field": [
+						"cells",
+						"orbit",
+						"sink",
+						"saddle",
+						"shear"
+					],
+					"trace": [
+						"points",
+						"wake",
+						"streamline"
+					]
+				},
+				"default": "field=cells, trace=points - cells is the `_` branch of the match in _field_at and returns the shipped three lines unchanged, phase = _t * 0.4 and psi_dz/psi_dx exactly as written, so the flow is the same flow. points sets the tail length to 0, which makes _build_multimesh's instance_count particle_count * 1 - the shipped expression - and makes _instance_xf short-circuit to the literal Transform3D(Basis(), Vector3(x, 0.08, z)) rather than build a scaled Basis it does not need. flow_seed defaults to 0, and at 0 _spawn_particles issues the same two global randf_range calls in the same order, so the shipped unseeded cloud is bit-identical and two swarms in one room are still two different clouds (Trial_rooms_change places two). warmup_steps defaults to 0, so _ready is the shipped two lines, and time_scale defaults to 1.0, so _process is `_t += delta * 1.0` and the shipped body. All 26 maps place the token bare or as `mount:particle_flow_swarm` on an exhibit_furniture plinth; not one passes a config key, so the rebuild branch is unreachable from any map that exists.",
+				"was": "seven exports - two colours and five numbers - and an apply_grid_config that honoured exactly one of them, particle_count, by tearing down the MultiMesh and respawning. The field itself was three welded lines. The runner refused it for NO TURNABLE KNOBS and that was the right verdict on the question that matters: a map could set how MANY particles rode the flow and never which flow they rode, or what a particle was allowed to leave behind.",
+				"note": "field is taken from vector_field_grid (this same registry file, promoted 2026-08-03) - the word, the five values, the comments and the arithmetic, character for character, including reusing the shipped wavenumber k = 2.5 as the gain of the four linear fields so |v| spans one range across the whole axis and the speed tint keeps meaning one thing. That is not decoration: the two artifacts are DECLARED a pair in both their own headers, one drawing the field and the other riding it, and a map that says field:sink to the grid and nothing to the swarm has silently broken the exhibit. Sharing the word is what lets a map keep them one thing. trace is the swarm's OWN question, and it is the one the grid cannot ask, because a body has a history and an arrow does not: points is where the bodies are and nothing else; wake gives each head a short upstream tail, so local direction becomes visible without committing to global structure; streamline drops the head emphasis entirely and the particle stops being a body and becomes the field's integral curve - which is the object the grid of arrows only ever sampled. The tail is INTEGRATED BACKWARDS from the head with the same step_scale rather than recorded, so it needs no history buffer and is identical on frame one and frame one thousand; it is therefore a streamline of the instantaneous field, not a pathline, which coincide under the four steady fields and differ under cells, the only one that scrolls. A tail point that leaves the domain is parked at zero scale rather than wrapped, because the wrap-around is bookkeeping for keeping the plane populated and a wrapped tail would claim the particle crossed the far edge - and it keeps the measured AABB identical at every value, so the sweep's fixed camera cannot drift.",
+				"still_note": "MEASURED by re-implementing the integrator and the harness camera in Python, not guessed. The subject is 220 spheres of 25 mm radius lying on a horizontal plane, and the rig's pitch is -0.26 rad, so the plane is seen at 15 degrees and foreshortened by 0.26 - the same dilution vector_field_grid recorded for its arrows. At framing 1.0 the whole 15-tile cross peaks at 2.02%, which is a fact about the camera. framing 0.6 is the answer: subject 6.35% of frame, peak 5.73%, and every one of the ten field pairs in the default trace=points column at or above 2.63%. It cannot crop - the rig fits by bounding sphere and 0.6 is above 1/PAD = 0.53. THE FIXTURE IS THE OTHER HALF. Without it this artifact is three kinds of unrepeatable at once: the spawn is an unseeded global draw, the integrator advances once per FRAME rather than per second so the still is a fact about the machine's frame rate, and the field scrolls. flow_seed=1 pins the cloud, warmup_steps=25 runs the shipped integrator at a fixed 1/60 delta so the field has ACTED before the shutter, and time_scale=0.0 parks it there. 25 is not arbitrary: at 60 steps the sink has collapsed to a dot 0.16 of its starting radius, the particles have arrived, and there is genuinely no wake left to draw - (sink, points) and (sink, wake) measure 0.02% apart. At 25 they are 0.50% apart and every other pair is comfortable. That weakest pair is the axis telling the truth about a stagnation point, not the axis failing.",
+				"declines": "particle_color and hot_color stay plain exports - a recolour is not an argument. particle_count, domain_x and domain_z stay dials on the same picture. step_scale and k are the rate and the wavenumber: turning either makes the same flow faster or finer, and the first is invisible to a still by construction. The three fixture knobs (flow_seed, warmup_steps, time_scale) are bench instruments and deliberately NOT axes - each of them defaults to the value that reproduces the shipped artifact exactly."
+			},
+			"name": "Particle Flow Swarm",
+			"lookup_name": "particle_flow_swarm",
+			"description": "Many small particles ride the same vector field shown in vector_field_grid. Pairs with the grid to demonstrate field effect on bodies.",
+			"scene": "res://algorithms/change/particle_flow_swarm.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "RIDE the field",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"particles",
+				"flow",
+				"vector_field"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.44,
+					0.05,
+					1.63
+				],
+				"aabb_center": [
+					0.01,
+					0.08,
+					0.0
+				],
+				"grid_cells": [
+					3,
+					2
+				],
+				"max_dimension_m": 2.44,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				3,
+				1,
+				2
+			]
+		},
+		"ftc_bridge": {
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"framing": 0.8,
+				"fixture": {
+					"pulse_speed": 0.0
+				},
+				"axes": {
+					"curve": [
+						"wave",
+						"hump",
+						"ramp",
+						"spike",
+						"step"
+					],
+					"evidence": [
+						"result",
+						"trace",
+						"longhand"
+					]
+				},
+				"default": "curve=hump, evidence=result - VERIFIED AGAINST THE PRE-PROMOTION SOURCE, not asserted. At hump _curve_h returns ARCH_H * (1.0 - pow(2.0*u - 1.0, 2.0)) with ARCH_H = 0.7, which is character for character the arch_h * (1.0 - pow(2.0*t_norm - 1.0, 2.0)) that _arch_point held before the promotion; _curve_h(0) and _curve_h(1) are both exactly 0, so each pillar is again BoxMesh(0.25, pillar_height, 0.25) sitting at y = pillar_height * 0.5, and the beam label stays at the shipped literal pillar_height + 1.05 rather than being re-derived from the deck's peak - short circuit over recomputation, so a future change to ARCH_H cannot quietly move the beam in 26 rooms. At result _build_evidence returns before a single node is constructed, so the scene tree and the measured AABB are what they were. The 31 cells across 26 maps are all bare `ftc_bridge` or `ftc_bridge:0:0` and pass no config key at all, so the rebuild path in apply_grid_config is unreachable from any map that exists.",
+				"was": "ten exports - three colours and four numbers - and an apply_grid_config that assigned bridge_span and pillar_height after _ready had already built with them, and never rebuilt for either. The runner refused the token for NO TURNABLE KNOBS, and that was true in the sense that mattered: nothing declared changed what the bridge ARGUED. THE FINDING THAT MADE curve NECESSARY: the shipped deck is a symmetric parabola, so its two ends sit at the same height, f(a) = f(b), and the right-hand side of the theorem painted on its own beam is exactly zero. The capstone of the change sequence was labelled with an equation that, on its own geometry, read 0 = 0.",
+				"note": "curve is WHICH ANTIDERIVATIVE THE DECK IS. hump is the shipped parabola and is kept because 26 maps stand on it. ramp is a straight climb from -0.7 to +0.7 - the plainest non-degenerate case, a constant rate underneath and a constant difference across - and step is a smoothed atan running -0.672 to +0.672, the largest honest difference in the family; only at those two does the beam say something. wave and spike both return to their start height, so the accumulated rate cancels to nothing over the full span, which is a different and equally real thing to photograph. Every member is smooth on [0,1] INCLUDING step, which is an atan and not a jump: a genuinely discontinuous f would be a counter-example to the theorem this deck carries, not an instance of it, and the family does not offer one. evidence is HOW MUCH OF THE THEOREM'S WORKING STANDS ON THE BRIDGE - result asserts the claim and computes nothing; trace draws the left-hand side, f' on a zero line under the deck with its SIGNED area shaded in strips that hang below the axis where the rate is negative; longhand adds the right-hand side, both pillar tops dropped onto one datum so the difference between them is a length you can look at, and prints the two quantities. The printed integral is trapezoid quadrature over the same slope function the strips were drawn from, so their agreement is a statement about the geometry rather than a constant typed in beside it.",
+				"kin": "curve is integral_area's and derivative_pair's word and value list character for character, and the five shapes are the same five functions of u, so a player can meet ramp as a rate in one room, as an accumulation in the next, and as a bridge here - which is what a capstone is for. hump is this artifact's own shipped parabola rather than the siblings' sin(u*PI), exactly as integral_area's hump is its own: the word names one arch over the whole span, and each artifact's hump is its own shipped curve. evidence is the family word but takes zeno_staircase's THREE-value list from this same registry file, not the canonical four, and the missing rung is deliberate. The family's fourth value, axiom, is 'the rule stated instead of drawn' - and the rule is ALREADY painted on this artifact's beam at the shipped default. Declaring axiom here would have shipped a second photograph of result under a different word: the two-values-identical fault, bought in advance. That refusal is bouncing_ball's, made of a different ladder.",
+				"still_note": "curve is the strong axis and it is not close: the deck is 24 emissive 0.18 m boxes over a 3 m span, and ramp against step moves that whole run of ink by up to 1.34 m vertically. Expect a large bite. evidence is the thinner claim, though not a thin one - the rate plot is 40 solid BoxMesh strips up to 0.34 m tall, real ink rather than a one-pixel line, but it sits under the deck inside the existing silhouette. THE ONE NONDETERMINISM IS PINNED: _process runs a pulse marker along the deck and _update_pulse raises the emission multiplier of the three segments nearest it from 0.6 to about 2.1, so the brightest band in the frame walks the span and two frames of the same curve are not comparable to each other. The fixture sets pulse_speed = 0.0, which parks the marker at the left pillar and freezes that band at segment 0. No map passes pulse_speed, so nothing standing is touched, and cabinet_sweep merges the fixture UNDER the swept params so it can never fight an axis. framing 0.8 from the rig's own arithmetic: the union box including longhand's readout ticks at x = 1.95 is about 3.9 x 2.4 x 0.25 m, half-diagonal 2.29 m, so dist = 2.29/tan(17 deg) * PAD 1.9 * 0.8 = 11.4 m and the frame is about 6.97 m across against a projected subject near 3.3 m at YAW 0.62 - roughly 48% of frame width. Cropping is arithmetically impossible at any framing above 1/PAD = 0.53, because the rig fits by bounding SPHERE, so 0.8 has margin in hand.",
+				"declines": "pillar_color, arch_color and pulse_color stay plain exports - a recolour is not an argument. bridge_span and pillar_height stay dials on the same picture: a longer bridge is a bigger photograph of the same claim. arch_segments is the resolution of the approximation rather than the shape being approximated, which is zeno_staircase's axis and not this one's. pulse_speed is time-domain and invisible to a still, which is exactly why it is a fixture here and not an axis."
+			},
+			"name": "FTC Bridge",
+			"lookup_name": "ftc_bridge",
+			"description": "An arched bridge labeled with the Fundamental Theorem of Calculus. A pulse runs from left pillar (a) to right pillar (b). The change-sequence capstone.",
+			"scene": "res://algorithms/change/ftc_bridge.tscn",
+			"category": "change",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "BRIDGE derivative and integral",
+			"dev_themes": [
+				"change",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"fundamental_theorem",
+				"calculus_capstone",
+				"integration"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.25,
+					2.39,
+					0.25
+				],
+				"aabb_center": [
+					0.0,
+					1.19,
+					0.0
+				],
+				"grid_cells": [
+					4,
+					1
+				],
+				"max_dimension_m": 3.25,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				4,
+				1,
+				1
+			]
+		},
+		"riemann_sum_workbench": {
+			"name": "Riemann Sum Workbench",
+			"lookup_name": "riemann_sum_workbench",
+			"description": "An interactive workbench for the midpoint Riemann sum. One slider drives N (rectangle count) through six detents [4, 8, 16, 32, 64, 128]; N translucent blue rectangles regenerate under the curve f(x) = \u00bd + 0.4\u00b7sin(2x) + 0.15\u00b7cos(5x) on [0, 5]; a live readout shows \u03a3, the true \u222b \u2248 2.864, and the signed error; a side error-bar shrinks toward green as N grows. The slider IS the limit \u2014 at N=4 the polygon visibly under- and overshoots; at N=128 it traces the curve. Paired with the /riemann-sum-gallery web cells of this same instrument frozen at the six N-values.",
+			"scene": "res://commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
+			"category": "change",
+			"interaction": "grab_slide",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "WALK the integration limit",
+			"dev_themes": [
+				"change",
+				"calculus",
+				"integration",
+				"riemann_sum",
+				"convergence"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"slider",
+				"calculus",
+				"integration",
+				"riemann_sum",
+				"midpoint_rule",
+				"convergence",
+				"limit",
+				"area_under_curve"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					2
+				],
+				"size_group": "medium"
+			},
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"integral_area",
+					"slope_tangent_demo",
+					"ftc_bridge",
+					"shannon_workbench"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.5,
+					1.61,
+					0.55
+				],
+				"aabb_center": [
+					0.12,
+					1.22,
+					-0.18
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.61,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		},
+		"tangent_slope_workbench": {
+			"name": "Tangent Slope Workbench",
+			"lookup_name": "tangent_slope_workbench",
+			"description": "An interactive workbench for the derivative as tangent slope. One slider drives x continuously across [0, 5]; a red marker slides along the curve f(x) = \u00bd + 0.4\u00b7sin(2x) + 0.15\u00b7cos(5x); a bright gold tangent line through the marker rotates to match f'(x) = 0.8\u00b7cos(2x) \u2212 0.75\u00b7sin(5x); a small f'(x) subplot above the main plot tracks the derivative as its own function; a live readout shows f'(x), f(x), an up/down/flat slope word, and x; a side sign indicator arrow tilts up (green) when rising, down (red) when falling, flat (white) at extrema. At local maxima/minima the tangent goes horizontal \u2014 the geometric moment of an extremum. Paired with the /tangent-slope-gallery web cells of this same instrument frozen at 8 x-positions. Sibling to riemann_sum_workbench \u2014 same f, differentiation vs. integration.",
+			"scene": "res://commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
+			"category": "calculus",
+			"interaction": "grab_slide",
+			"sequence": "change",
+			"artifact_type": "change",
+			"qfep_term": "F",
+			"capacity": "WALK the derivative slope",
+			"dev_themes": [
+				"change",
+				"calculus",
+				"derivative",
+				"tangent",
+				"slope"
+			],
+			"dev_category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"slider",
+				"calculus",
+				"derivative",
+				"tangent",
+				"slope",
+				"rate_of_change",
+				"local_extrema",
+				"differentiation"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					2
+				],
+				"size_group": "medium"
+			},
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"riemann_sum_workbench",
+					"slope_tangent_demo",
+					"derivative_pair",
+					"ftc_bridge"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.59,
+					1.97,
+					0.55
+				],
+				"aabb_center": [
+					0.17,
+					1.4,
+					-0.18
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.97,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		},
+		"zeno_staircase": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"tick": [
+						"once",
+						"coarse",
+						"fine",
+						"dense",
+						"limit"
+					],
+					"evidence": [
+						"result",
+						"trace",
+						"longhand"
+					]
+				},
+				"default": "tick=fine, evidence=longhand - fine maps to samples=9 and longhand draws the amber curve, the staircase, the secant and its tag, which is the shipped build line for line; the dot radius is now min(0.008, tick_pitch*0.45) and at nine samples the cap is 0.044, so the 0.008 constant is untouched. Zero placements in any map_data.json (the only other file naming this token is its own dressing room), so nothing standing changes either way.",
+				"was": "samples/span/amp and three colours were @export, but the ONLY route to them was an apply_grid_config that assigned the variable after _ready had already built with 9 and never rebuilt - the knob turned and nothing moved. The artifact ends on 'shrink the frame and the staircase gets finer; it never becomes the curve' and no placement could test the sentence.",
+				"note": "tick is the halving argument as one ladder, x3 either side of the shipped nine: once=1 (the whole motion as a single frozen frame), coarse=3, fine=9, dense=27, limit=81 - where the eye stops being able to tell and the record is STILL a staircase. It moves the secant too, since the secant is a chord over one frame: at limit it lies visually along the tangent while remaining, by construction, not it. evidence is what the machine puts in the frame for you to check its record against: result = the staircase alone, which looks perfectly correct because there is nothing in shot it could be wrong about; trace = + the true continuous curve; longhand = + the extended secant and its tag. The caption plate is present at every value of both axes, so a measured bite is a bite in the drawing and never in the label.",
+				"kin": "evidence is the family word (example_1_7 / 1_9 / 2_8 / 2_9, koch_curve, box_counting_dimension, sine_wave_controller), taken character for character. sine_wave_controller is the precedent for a three-value member: there is no fourth thing to withhold here, since the rule is already stated in words on the plate at every value. THE DEFAULT DIFFERS FROM THE FAMILY'S - the motion demos ship as `result` with every exhibit withheld, this one ships with its whole working already on the table - and that is a fact about the artifact, not a drift in the word.",
+				"still_note": "tick is the strong axis in pixels: once vs limit is 1 step against 81 and changes the picture wholesale. evidence is the sharper claim but the THINNER measurement - the amber curve it withholds is 180 segments at 4 mm on a 1.0 x 0.44 m panel, so expect result-vs-trace to land near the 3% line and crop-recheck before believing an INERT verdict on it."
+			},
+			"category": "change",
+			"complexity": "intermediate",
+			"description": "The change (calculus) seam. Motion is continuous; the machine reads at frame ticks and holds between (Zeno's arrow, frozen then jump). The amber curve vs the blue staircase; the 'instantaneous' rate it reports is a secant over one frozen frame, not the tangent.",
+			"dev_themes": [
+				"digital_bias",
+				"seam"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "zeno_staircase",
+			"map_ready": true,
+			"map_sequences": [
+				"change"
+			],
+			"name": "Zeno Staircase",
+			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for change. Bias is conserved; show the seam.",
+			"scene": "res://algorithms/change/zeno_staircase/zeno_staircase.tscn",
+			"sequence": "change",
+			"tags": [
+				"calculus",
+				"derivative",
+				"zeno",
+				"sampling",
+				"zero_order_hold",
+				"seam",
+				"digital_bias"
+			],
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.61,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					0.08,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		}
+	}
 }

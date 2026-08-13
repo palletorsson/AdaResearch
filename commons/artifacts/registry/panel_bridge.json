@@ -1,141 +1,141 @@
 {
- "_comment": "Panel Bridge — 2D-in-3D VR panel system for loom simulator and pattern maker.",
- "artifacts": {
-  "panel_bridge_loom": {
-   "dna": {
-    "promoted": "2026-07-29",
-    "stage": "2 - variation",
-    "axes": {
-     "threading_draw": [
-      "straight",
-      "point",
-      "block",
-      "broken"
-     ],
-     "treadling_order": [
-      "straight",
-      "point",
-      "block",
-      "broken"
-     ]
-    },
-    "default": "threading_draw=straight, treadling_order=straight - the draft exactly as loom_draft_data.json wrote it. The straight/straight case returns from _apply_draw_axes() before the data store is touched at all, so not one cell is rewritten and the 6 existing placements show the same 4-shaft twill they always did.",
-    "was": "No exports at all - the sweep refused it as NO TURNABLE KNOBS. _ready() loaded example 0, the shipped 4-shaft twill sample, and every placement in the project showed the same cloth. The four sample drafts sat in a private examples table reachable only by pressing 1-4 on a desktop keyboard, which no map placement can do.",
-    "note": "Hand promotion. The constants worth lifting were not in the panel chrome but in the draft the panels display, and a weaving draft has exactly two orders in it: the order the warps are drawn onto the shafts and the order the picks press the treadles. Both axes rewrite only their own one-hot matrix; the tie-up and the yarn colours are never touched, and the column period is read off the loaded draft (4 shafts used of 6 treadles wired) rather than assumed. point in the warp is a herringbone, point in both is a diamond twill - same tie-up, same threads, a different cloth. It makes the drawdown argue what the description only asserts: the diagonal is not IN the tie-up, it is in the order of the draw. TRAP HANDLED: apply_grid_config() already existed for the capture audit loop and writes its config dict out as the draft data, so an axis-only token would have blanked the drawdown; axis keys are now peeled off first and an axis-only config never reaches that path."
-   },
-   "name": "Panel Bridge — Loom Simulator",
-   "lookup_name": "panel_bridge_loom",
-   "description": "Three interactive VR panels displaying a weaving draft: threading, tie-up, treadling, and computed drawdown grids. Loaded from Panel Layout JSON exported by the web loom simulator. Click cells to edit the draft; drawdown recomputes in real-time.",
-   "scene": "res://commons/ui/panel_bridge/test_panel_bridge.tscn",
-   "category": "textile",
-   "artifact_type": "interactive_tool",
-   "tags": [
-    "panel_bridge",
-    "loom",
-    "weaving",
-    "draft",
-    "threading",
-    "tieup",
-    "treadling",
-    "drawdown",
-    "2d_in_3d",
-    "vr_panel"
-   ],
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "testmaps"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     2,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "dev_themes": [
-    "biology",
-    "panels",
-    "ui"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": true,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     1.44,
-     0.65,
-     0.0
-    ],
-    "aabb_center": [
-     0.03,
-     1.4,
-     -0.65
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.44,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    2.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 4,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.168511Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "The oldest L-system in human hands: threading, tie-up, treadling — a weaving draft is a grammar, and the drawdown is its derivation. Centuries before Lindenmayer, weavers were compiling short symbolic programs into large patterned surfaces. The loom panels stand in the thread as ancestry: grammar was textile before it was text."
-  }
- }
+	"_comment": "Panel Bridge \u2014 2D-in-3D VR panel system for loom simulator and pattern maker.",
+	"artifacts": {
+		"panel_bridge_loom": {
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"threading_draw": [
+						"straight",
+						"point",
+						"block",
+						"broken"
+					],
+					"treadling_order": [
+						"straight",
+						"point",
+						"block",
+						"broken"
+					]
+				},
+				"default": "threading_draw=straight, treadling_order=straight - the draft exactly as loom_draft_data.json wrote it. The straight/straight case returns from _apply_draw_axes() before the data store is touched at all, so not one cell is rewritten and the 6 existing placements show the same 4-shaft twill they always did.",
+				"was": "No exports at all - the sweep refused it as NO TURNABLE KNOBS. _ready() loaded example 0, the shipped 4-shaft twill sample, and every placement in the project showed the same cloth. The four sample drafts sat in a private examples table reachable only by pressing 1-4 on a desktop keyboard, which no map placement can do.",
+				"note": "Hand promotion. The constants worth lifting were not in the panel chrome but in the draft the panels display, and a weaving draft has exactly two orders in it: the order the warps are drawn onto the shafts and the order the picks press the treadles. Both axes rewrite only their own one-hot matrix; the tie-up and the yarn colours are never touched, and the column period is read off the loaded draft (4 shafts used of 6 treadles wired) rather than assumed. point in the warp is a herringbone, point in both is a diamond twill - same tie-up, same threads, a different cloth. It makes the drawdown argue what the description only asserts: the diagonal is not IN the tie-up, it is in the order of the draw. TRAP HANDLED: apply_grid_config() already existed for the capture audit loop and writes its config dict out as the draft data, so an axis-only token would have blanked the drawdown; axis keys are now peeled off first and an axis-only config never reaches that path."
+			},
+			"name": "Panel Bridge \u2014 Loom Simulator",
+			"lookup_name": "panel_bridge_loom",
+			"description": "Three interactive VR panels displaying a weaving draft: threading, tie-up, treadling, and computed drawdown grids. Loaded from Panel Layout JSON exported by the web loom simulator. Click cells to edit the draft; drawdown recomputes in real-time.",
+			"scene": "res://commons/ui/panel_bridge/test_panel_bridge.tscn",
+			"category": "textile",
+			"artifact_type": "interactive_tool",
+			"tags": [
+				"panel_bridge",
+				"loom",
+				"weaving",
+				"draft",
+				"threading",
+				"tieup",
+				"treadling",
+				"drawdown",
+				"2d_in_3d",
+				"vr_panel"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"biology",
+				"panels",
+				"ui"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.44,
+					0.65,
+					0.0
+				],
+				"aabb_center": [
+					0.02,
+					1.4,
+					-0.65
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.44,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.168511Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The oldest L-system in human hands: threading, tie-up, treadling \u2014 a weaving draft is a grammar, and the drawdown is its derivation. Centuries before Lindenmayer, weavers were compiling short symbolic programs into large patterned surfaces. The loom panels stand in the thread as ancestry: grammar was textile before it was text."
+		}
+	}
 }

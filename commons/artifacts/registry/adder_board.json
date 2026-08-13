@@ -14,14 +14,36 @@
 			"scene": "res://commons/artifacts/adder_board/adder_board.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"],
-			"footprint": [1, 2, 1],
-			"tags": ["vector", "addition", "machine", "vr", "vectors", "tip-to-tail", "parallelogram", "triangle-inequality", "vector-bench", "placeable"],
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"vector",
+				"addition",
+				"machine",
+				"vr",
+				"vectors",
+				"tip-to-tail",
+				"parallelogram",
+				"triangle-inequality",
+				"vector-bench",
+				"placeable"
+			],
 			"dna": {
 				"promoted": "2026-08-05",
 				"stage": "2 - variation",
 				"axes": {
-					"workings": ["outcome", "trace", "operands", "expression"]
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					]
 				},
 				"default": "workings=expression - expression turns every gate on, which is the only state this board could previously be in: the amber a from the origin, b chained off its tip, both dashed parallelogram ghosts, the a/b/a+b labels, all seven live number lines in the shipped order, the substituting headline string character for character, and the |a+b| <= |a|+|b| readout with its brass needle. All 3 placements (Force_Preview, VFM_01_Foundations, MiniScene_adder_board) are BARE tokens with no #key:value, and the axis is read only inside `if config.has(\"workings\")`, so none of them reaches the new code.",
 				"was": "no @export of its own. a_start, b_start, snap_to_grid and pedestal_height were plain vars reachable through apply_grid_config, which is why the stage-2 runner refused this token for NO TURNABLE KNOBS - and none of the four was an argument anyway. The chain, the parallelogram ghosts, the arithmetic and the triangle inequality were hard-wired to go up together, so the board could only ever make its whole case at once. Its own truth line says tip-to-tail and the parallelogram are the SAME truth drawn two ways, and no room could show one drawing without the other.",
@@ -29,14 +51,24 @@
 				"note": "Only VISIBILITY is gated - every mesh is still built and still positioned every frame - so the artifact's AABB is byte-identical at all four values and a sweep frames every rung from the same fixed camera, which is the failure mode that made an add-geometry axis measure as three magnifications of one picture. The bite is in the middle of the board, not the silhouette: outcome leaves one cyan-violet arrow on an empty lattice, trace adds the amber a and the orange chain, operands closes the parallelogram with both ghosts, expression hangs the inequality instrument above it. The baked formula plate reading 'a + b = (ax+bx, ay+by)' is present at every value, so a measured difference is a difference in the DRAWING and never in a caption. NO dna.framing was set, deliberately: the artifact's extent runs from the pedestal foot up to a floating info panel about 0.9 logical units above the board, so the slab the axis lives on is roughly the middle third of the frame, but the camera aims at the union centre and moving in blind would crop the board rather than fill with it. If the sheet reads faint, framing is the FIRST thing to try - before believing the axis.",
 				"declined": "`opening` (agreement_gauge's word for the pose a bench is found in, same housing family) does not fit this board and was refused rather than half-taken. The gauge lives in open space; this is a tilted drafting CHART whose etched lattice runs 0..7 by 0..5 from an origin pin at the lower-left, and _board_point maps a cell below about -1.2 in x off the slab entirely. `strangers` puts b at (-2,3) and `opposing` at roughly (-3,0), so two of the four values would hang b and its ghost in mid-air beside the board instead of on it. Only `parallel` (b=(3,2), a+b=(6,4)) lands on the lattice - and taking a word without two of its answers is the dishonest half of a shared vocabulary."
 			},
-			"qfep_connection": "F_force: two displacements taken in sequence equal one displacement — addition is composition, and the detour is never shorter than the diagonal (|a+b| <= |a|+|b|).",
+			"qfep_connection": "F_force: two displacements taken in sequence equal one displacement \u2014 addition is composition, and the detour is never shorter than the diagonal (|a+b| <= |a|+|b|).",
 			"parameters": {
-				"a_start": [3.0, 2.0],
-				"b_start": [1.0, 3.0],
+				"a_start": [
+					3.0,
+					2.0
+				],
+				"b_start": [
+					1.0,
+					3.0
+				],
 				"snap_to_grid": true,
 				"pedestal_height": 0.9,
 				"workings": "outcome | trace | operands | expression - how much of the addition the board draws (default expression)",
-				"footprint": [1, 2, 1],
+				"footprint": [
+					1,
+					2,
+					1
+				],
 				"size_group": "small"
 			},
 			"size_group": "small",
@@ -46,6 +78,24 @@
 				"density": "medium",
 				"reading_radius": 2,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.65,
+					1.29,
+					1.25
+				],
+				"aabb_center": [
+					0.05,
+					0.63,
+					-0.06
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.65,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

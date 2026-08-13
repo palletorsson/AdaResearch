@@ -2,20 +2,43 @@
 	"artifacts": {
 		"synthesis_stand": {
 			"dna": {
-			 "axes": {
-			 "mode": [
-			 "auto",
-			 "hero",
-			 "series"
-			 ]
-			 }
+				"axes": {
+					"mode": [
+						"auto",
+						"hero",
+						"series"
+					]
+				}
 			},
 			"name": "Synthesis Stand",
 			"lookup_name": "synthesis_stand",
 			"scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
 			"category": "synthesis",
 			"complexity": "intermediate",
-			"description": "Every promoted family's one best public form, decided by measurement rather than taste. Given #subject:<token> it reads the verdict file tools/synthesize_heroes.py derived from the swept renders: a HERO subject stands as its single strongest variant, pinned and stated on a plaque with the focus number that chose it; a SERIES subject stands as its whole family on one rail, shipped default first, then ascending by measured departure — because for those families the progression is the argument. 282 families carry verdicts: 113 heroes, 64 series, 100 where the shipped form stands."
+			"description": "Every promoted family's one best public form, decided by measurement rather than taste. Given #subject:<token> it reads the verdict file tools/synthesize_heroes.py derived from the swept renders: a HERO subject stands as its single strongest variant, pinned and stated on a plaque with the focus number that chose it; a SERIES subject stands as its whole family on one rail, shipped default first, then ascending by measured departure \u2014 because for those families the progression is the argument. 282 families carry verdicts: 113 heroes, 64 series, 100 where the shipped form stands.",
+			"measurements": {
+				"aabb_size": [
+					5.34,
+					1.25,
+					1.31
+				],
+				"aabb_center": [
+					0.0,
+					0.21,
+					-0.01
+				],
+				"grid_cells": [
+					6,
+					2
+				],
+				"max_dimension_m": 5.34,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				6,
+				1,
+				2
+			]
 		}
 	}
 }

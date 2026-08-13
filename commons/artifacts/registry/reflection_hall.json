@@ -1,23 +1,42 @@
 {
 	"id": "reflection_hall",
 	"name": "Reflection Hall",
-	"description": "A walk-in 5x5x3 m chamber of six reflective walls. Step through the small entrance, grab a glowing ball from the rack (or fire the console launcher), and throw it. Every wall bounce computes the law of reflection r = d - 2(d.n̂)n̂ off that surface's inward normal and blooms an annotation cluster AT the impact point: the incident throw d (orange), the wall normal n̂ (cyan), and the reflected ray r (magenta), plus the live formula with real numbers and a check that r matches the ball's new velocity. Each ball carries a velocity arrow and trails a fading ribbon of its path. The room is built at true metre scale — no shrink — so reflection is a thing you stand inside.",
+	"description": "A walk-in 5x5x3 m chamber of six reflective walls. Step through the small entrance, grab a glowing ball from the rack (or fire the console launcher), and throw it. Every wall bounce computes the law of reflection r = d - 2(d.n\u0302)n\u0302 off that surface's inward normal and blooms an annotation cluster AT the impact point: the incident throw d (orange), the wall normal n\u0302 (cyan), and the reflected ray r (magenta), plus the live formula with real numbers and a check that r matches the ball's new velocity. Each ball carries a velocity arrow and trails a fading ribbon of its path. The room is built at true metre scale \u2014 no shrink \u2014 so reflection is a thing you stand inside.",
 	"category": "vectors",
-	"theoreticalGrounding": "The law of reflection r = d - 2(d.n̂)n̂. A mirror keeps the component of the incoming vector tangent to the wall and flips only the component along the normal. Speed is conserved; reflection is conservation with a sign change. The dot product d.n̂ is the slice that points into the wall — double it, subtract it twice along n̂, and you have the bounce.",
+	"theoreticalGrounding": "The law of reflection r = d - 2(d.n\u0302)n\u0302. A mirror keeps the component of the incoming vector tangent to the wall and flips only the component along the normal. Speed is conserved; reflection is conservation with a sign change. The dot product d.n\u0302 is the slice that points into the wall \u2014 double it, subtract it twice along n\u0302, and you have the bounce.",
 	"artifacts": {
 		"reflection_hall": {
 			"lookup_name": "reflection_hall",
 			"name": "Reflection Hall",
-			"description": "Six StaticBody3D walls (floor, ceiling, +X, -X, +Z) enclose a 5x5x3 m room; the -Z wall is two side panels + a lintel leaving a 1.2x2.2 m entrance you walk through. An invisible doorway curtain on the ball-only collision layer keeps thrown balls inside while letting the player pass. Balls are RigidBody3D with a bouncy physics material (engine bounces; we visualise). Each ball caches its pre-contact velocity every physics frame; on wall contact it recovers the incident d, looks up the wall's inward normal n̂, computes r = d - 2(d.n̂)n̂, and spawns a ~1.5 s fading d/n̂/r arrow cluster + live formula at the hit point, verifying r against the post-bounce velocity. Fading per-ball trails via ImmediateMesh line strips. A grab-throw ball rack (primary VR) plus an optional ANGLE/FORCE/FIRE console; on desktop/headless the console auto-fires every ~3 s so captures show live bounces. DNA: ball_bounce, gravity_scale, launch_speed, room dimensions.",
+			"description": "Six StaticBody3D walls (floor, ceiling, +X, -X, +Z) enclose a 5x5x3 m room; the -Z wall is two side panels + a lintel leaving a 1.2x2.2 m entrance you walk through. An invisible doorway curtain on the ball-only collision layer keeps thrown balls inside while letting the player pass. Balls are RigidBody3D with a bouncy physics material (engine bounces; we visualise). Each ball caches its pre-contact velocity every physics frame; on wall contact it recovers the incident d, looks up the wall's inward normal n\u0302, computes r = d - 2(d.n\u0302)n\u0302, and spawns a ~1.5 s fading d/n\u0302/r arrow cluster + live formula at the hit point, verifying r against the post-bounce velocity. Fading per-ball trails via ImmediateMesh line strips. A grab-throw ball rack (primary VR) plus an optional ANGLE/FORCE/FIRE console; on desktop/headless the console auto-fires every ~3 s so captures show live bounces. DNA: ball_bounce, gravity_scale, launch_speed, room dimensions.",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"scene": "res://commons/artifacts/reflection_hall/reflection_hall.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"],
-			"footprint": [5, 3, 5],
-			"tags": ["forces", "vectors", "reflection", "normal", "velocity", "bounce", "conservation", "dot_product", "trail", "walk_in", "vr", "placeable"],
-			"qfep_connection": "F_force: a bounce is a deterministic reflection of velocity about a wall's normal — speed conserved, one component's sign flipped. The room performs r = d - 2(d.n̂)n̂ for you, six walls' worth, until the throw becomes felt law.",
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				5,
+				3,
+				5
+			],
+			"tags": [
+				"forces",
+				"vectors",
+				"reflection",
+				"normal",
+				"velocity",
+				"bounce",
+				"conservation",
+				"dot_product",
+				"trail",
+				"walk_in",
+				"vr",
+				"placeable"
+			],
+			"qfep_connection": "F_force: a bounce is a deterministic reflection of velocity about a wall's normal \u2014 speed conserved, one component's sign flipped. The room performs r = d - 2(d.n\u0302)n\u0302 for you, six walls' worth, until the throw becomes felt law.",
 			"parameters": {
 				"ball_bounce": 0.92,
 				"gravity_scale": 0.45,
@@ -28,7 +47,11 @@
 				"door_width": 1.2,
 				"door_height": 2.2,
 				"max_live_balls": 6,
-				"footprint": [5, 3, 5],
+				"footprint": [
+					5,
+					3,
+					5
+				],
 				"size_group": "large"
 			},
 			"size_group": "large",
@@ -38,6 +61,24 @@
 				"density": "high",
 				"reading_radius": 4,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.33,
+					3.57,
+					5.33
+				],
+				"aabb_center": [
+					0.0,
+					1.33,
+					0.0
+				],
+				"grid_cells": [
+					6,
+					6
+				],
+				"max_dimension_m": 5.33,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

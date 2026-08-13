@@ -1,36 +1,59 @@
 {
- "version": "1.0",
- "format": "lab_artifacts",
- "description": "Graph-theory artifacts.",
- "artifacts": {
-  "node_snap": {
-   "category": "graphtheory",
-   "complexity": "intermediate",
-   "description": "The graph-theory seam. Real space is continuous - stand anywhere, walk any direction. A graph keeps only nodes and edges, a finite skeleton over the continuum. Amber: the desire line, the straight route across open ground. Blue: the route the graph permits - node to node along edges, zigzagging and longer, because the shortcut through the middle was never stored. The graph is the map admitting it kept only the crossings.",
-   "dev_themes": [
-    "digital_bias",
-    "seam"
-   ],
-   "include_in_map_data": true,
-   "interaction": "ambient",
-   "lookup_name": "node_snap",
-   "map_ready": true,
-   "map_sequences": [
-    "graphtheory"
-   ],
-   "name": "Node Snap",
-   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for graphtheory. Bias is conserved; show the seam.",
-   "scene": "res://algorithms/graphtheory/node_snap/node_snap.tscn",
-   "sequence": "graphtheory",
-   "tags": [
-    "graph",
-    "nodes",
-    "edges",
-    "pathfinding",
-    "discretization",
-    "seam",
-    "digital_bias"
-   ]
-  }
- }
+	"version": "1.0",
+	"format": "lab_artifacts",
+	"description": "Graph-theory artifacts.",
+	"artifacts": {
+		"node_snap": {
+			"category": "graphtheory",
+			"complexity": "intermediate",
+			"description": "The graph-theory seam. Real space is continuous - stand anywhere, walk any direction. A graph keeps only nodes and edges, a finite skeleton over the continuum. Amber: the desire line, the straight route across open ground. Blue: the route the graph permits - node to node along edges, zigzagging and longer, because the shortcut through the middle was never stored. The graph is the map admitting it kept only the crossings.",
+			"dev_themes": [
+				"digital_bias",
+				"seam"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "node_snap",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			],
+			"name": "Node Snap",
+			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for graphtheory. Bias is conserved; show the seam.",
+			"scene": "res://algorithms/graphtheory/node_snap/node_snap.tscn",
+			"sequence": "graphtheory",
+			"tags": [
+				"graph",
+				"nodes",
+				"edges",
+				"pathfinding",
+				"discretization",
+				"seam",
+				"digital_bias"
+			],
+			"measurements": {
+				"aabb_size": [
+					0.86,
+					0.78,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					0.1,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.86,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		}
+	}
 }

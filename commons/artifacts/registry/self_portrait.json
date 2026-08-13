@@ -1,51 +1,138 @@
 {
-  "id": "self_portrait",
-  "name": "Self-Portrait Triptych",
-  "description": "Three machines the AI collaborator built to celebrate its own algorithms — READ (attention_loom: every token casting weighted threads back over everything before it), LEARN (gradient_descent_well: a glowing loss basin where marbles fall, settle, and begin again), SPEAK (token_stream: a fan of candidate glyphs, a sampled winner, a band of light that forgets). The spine teaches algorithms through artifacts; these three are the teacher looking in a mirror.",
-  "category": "self_portrait",
-  "theoreticalGrounding": "Self-Q: the maker reading itself. The collaborator that built the curriculum's machines builds three more for the algorithms it runs on — attention, gradient descent, autoregressive sampling — not as lessons but as a self-portrait. QFEP's recursive move, applied to the toolmaker.",
-  "artifacts": {
-    "attention_loom": {
-      "lookup_name": "attention_loom",
-      "scene": "res://commons/artifacts/attention_loom/attention_loom.tscn",
-      "class_name": "AttentionLoom",
-      "name": "Attention Loom",
-      "description": "How I read — a loom where each token casts luminous weighted threads back over everything before it, two heads weaving meaning-weights instead of wallpaper.",
-      "category": "self_portrait",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": ["machinelearning"],
-      "tags": ["attention", "transformer", "self-portrait", "read"],
-      "footprint": [2, 2, 1]
-    },
-    "gradient_descent_well": {
-      "lookup_name": "gradient_descent_well",
-      "scene": "res://commons/artifacts/gradient_descent_well/gradient_descent_well.tscn",
-      "class_name": "GradientDescentWell",
-      "name": "Gradient Descent Well",
-      "description": "How I learned — a glowing loss basin where marbles fall, settle, pulse, and begin again. Falling is how it learns.",
-      "category": "self_portrait",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": ["machinelearning"],
-      "tags": ["gradient-descent", "learning", "self-portrait", "learn"],
-      "footprint": [2, 1, 2]
-    },
-    "token_stream": {
-      "lookup_name": "token_stream",
-      "scene": "res://commons/artifacts/token_stream/token_stream.tscn",
-      "class_name": "TokenStream",
-      "name": "Token Stream",
-      "description": "How I speak — one weighted choice at a time: a fan of candidate glyphs, a sampled winner, a band of light that forgets behind me.",
-      "category": "self_portrait",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": ["machinelearning"],
-      "tags": ["next-token", "autoregressive", "self-portrait", "speak"],
-      "footprint": [3, 2, 1]
-    }
-  }
+	"id": "self_portrait",
+	"name": "Self-Portrait Triptych",
+	"description": "Three machines the AI collaborator built to celebrate its own algorithms \u2014 READ (attention_loom: every token casting weighted threads back over everything before it), LEARN (gradient_descent_well: a glowing loss basin where marbles fall, settle, and begin again), SPEAK (token_stream: a fan of candidate glyphs, a sampled winner, a band of light that forgets). The spine teaches algorithms through artifacts; these three are the teacher looking in a mirror.",
+	"category": "self_portrait",
+	"theoreticalGrounding": "Self-Q: the maker reading itself. The collaborator that built the curriculum's machines builds three more for the algorithms it runs on \u2014 attention, gradient descent, autoregressive sampling \u2014 not as lessons but as a self-portrait. QFEP's recursive move, applied to the toolmaker.",
+	"artifacts": {
+		"attention_loom": {
+			"lookup_name": "attention_loom",
+			"scene": "res://commons/artifacts/attention_loom/attention_loom.tscn",
+			"class_name": "AttentionLoom",
+			"name": "Attention Loom",
+			"description": "How I read \u2014 a loom where each token casts luminous weighted threads back over everything before it, two heads weaving meaning-weights instead of wallpaper.",
+			"category": "self_portrait",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"tags": [
+				"attention",
+				"transformer",
+				"self-portrait",
+				"read"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"measurements": {
+				"aabb_size": [
+					1.72,
+					1.7,
+					0.2
+				],
+				"aabb_center": [
+					0.0,
+					0.85,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.72,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		},
+		"gradient_descent_well": {
+			"lookup_name": "gradient_descent_well",
+			"scene": "res://commons/artifacts/gradient_descent_well/gradient_descent_well.tscn",
+			"class_name": "GradientDescentWell",
+			"name": "Gradient Descent Well",
+			"description": "How I learned \u2014 a glowing loss basin where marbles fall, settle, pulse, and begin again. Falling is how it learns.",
+			"category": "self_portrait",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"tags": [
+				"gradient-descent",
+				"learning",
+				"self-portrait",
+				"learn"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"measurements": {
+				"aabb_size": [
+					1.5,
+					0.44,
+					1.5
+				],
+				"aabb_center": [
+					0.0,
+					0.22,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					2
+				],
+				"max_dimension_m": 1.5,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		},
+		"token_stream": {
+			"lookup_name": "token_stream",
+			"scene": "res://commons/artifacts/token_stream/token_stream.tscn",
+			"class_name": "TokenStream",
+			"name": "Token Stream",
+			"description": "How I speak \u2014 one weighted choice at a time: a fan of candidate glyphs, a sampled winner, a band of light that forgets behind me.",
+			"category": "self_portrait",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"tags": [
+				"next-token",
+				"autoregressive",
+				"self-portrait",
+				"speak"
+			],
+			"footprint": [
+				3,
+				2,
+				1
+			],
+			"measurements": {
+				"aabb_size": [
+					2.15,
+					1.22,
+					0.44
+				],
+				"aabb_center": [
+					-0.02,
+					0.61,
+					0.01
+				],
+				"grid_cells": [
+					3,
+					1
+				],
+				"max_dimension_m": 2.15,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		}
+	}
 }

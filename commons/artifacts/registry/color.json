@@ -1,3690 +1,3713 @@
 {
- "artifacts": {
-  "MetamerismLab": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "MetamerismLab",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "MetamerismLab",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "MetamerismLab",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/metamerism_lab/MetamerismLab.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "box",
-      "sphere"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 5,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 5,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     5,
-     5,
-     1
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     5,
-     1
-    ],
-    "max_dimension_m": 5,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 10,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "One pure 580nm wave on the left, a red–green duet on the right, and both resolve to spheres of the exact same yellow. Two different physical events collapse into one percept the eye cannot appeal — color as the retina's lossy compression, metamerism as where the loss shows."
-  },
-  "RotatingLaser": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "RotatingLaser.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "RotatingLaser",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "RotatingLaser",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/rotating_laser/RotatingLaser.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [
-      "box",
-      "cylinder"
-     ],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
-      "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "emission",
-      "metallic",
-      "transparency",
-      "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "particle_lifecycle",
-     "driven_by": "cpu_simulation",
-     "affects": [
-      "transform",
-      "color"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "~36"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 105,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     14.2,
-     0.15,
-     6.15
-    ],
-    "aabb_center": [
-     0,
-     8,
-     0
-    ],
-    "grid_cells": [
-     15,
-     7
-    ],
-    "max_dimension_m": 14.2,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 35,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Wave, focus, spread, scan, chaos — a concert rig's whole emotional vocabulary is one MultiMesh and a phase offset per beam, colors rotating on a ten-second timer. Spectacle revealed as cheap: crowd-shaped feelings driven by a pattern enum."
-  },
-  "SimultaneousContrast": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "SimultaneousContrast",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    3,
-    4,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "SimultaneousContrast",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "SimultaneousContrast",
-   "parameters": {
-    "footprint": [
-     3,
-     4,
-     1
-    ],
-    "size_group": "room_scale"
-   },
-   "scene": "res://algorithms/color/simultaneous_contrast/SimultaneousContrast.tscn",
-   "size_group": "room_scale",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "box",
-      "sphere"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 7,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 7,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     7,
-     4,
-     1
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0.4
-    ],
-    "grid_cells": [
-     7,
-     1
-    ],
-    "max_dimension_m": 7,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 18,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "The same 0.5 gray twice, on dark and on light ground, and your visual system refuses to agree with the code. The hidden connector bar is the instrument's cruelty: proof that the difference you see was manufactured by context, never present in the value."
-  },
-  "SpectrumVisualizer": {
-   "capacity": "SEE that the color wheel is a perceptual invention — magenta is the seam where the brain closes what physics leaves open",
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "The visible spectrum bends from a line into a circle. Wavelength-to-color animation phases between linear layout (physics) and circular layout (perception). Magenta dots fill the gap that physics leaves empty — magenta is not a spectral color, it is the brain's invention to close the loop. The color wheel is a lie the brain tells to make the spectrum feel complete.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "gamwell_reference": "Color spaces (RGB, HSV, Lab), perceptual color science",
-   "include_in_map_data": true,
-   "interactions": [
-    "watch auto-animation (linear to circular phase)",
-    "observe magenta dots appearing in the gap"
-   ],
-   "lookup_name": "SpectrumVisualizer",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "SpectrumVisualizer",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "qfep_connection": "Lambda between physics and perception — the linear spectrum is pure F (physics, ordered by wavelength). The circular wheel is F + E (perception, with magenta invented to fill the gap). The animation IS the lambda sweep from one to the other.",
-   "scene": "res://algorithms/color/spectrum_visualizer/SpectrumVisualizer.tscn",
-   "size_group": "compact",
-   "tags": [
-    "spectrum",
-    "color_wheel",
-    "magenta",
-    "wavelength",
-    "perception",
-    "animation",
-    "color",
-    "physics"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "contrasts",
-     "spectrum_forest",
-     "spatial",
-     "temporal",
-     "spectrum"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.5,
-     0.5,
-     0.5
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 0.5,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "omni",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "advancedglitch": {
-   "category": "unknown",
-   "complexity": "intermediate",
-   "description": "Interactive colored line visualization and manipulation algorithms",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    2,
-    2,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "advancedglitch",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "advancedglitch",
-   "parameters": {
-    "footprint": [
-     2,
-     2,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/advancedglitch/advancedglitch.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "boolean_composition",
-    "topology": "volumetric",
-    "construction": {
-     "method": "csg_boolean",
-     "primitives": [
-      "box"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_primitives",
-      "boolean_combine"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "few",
-    "vertex_estimate": "~1"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 10,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     9.5,
-     5.5,
-     0.2
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     10,
-     1
-    ],
-    "max_dimension_m": 9.5,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 18,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Datamosh, buffer overflow, memory leak — fifteen failure modes each given a pedestal, a name, and an animation schedule. Nothing here is actually broken, which is exactly how corruption becomes a repertoire: glitch as aesthetic requires the removal of loss."
-  },
-  "brick_wall_factory": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "grid(width, height) of BoxMesh bricks colored sequentially from a named palette — running bond pattern",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "brick_wall_factory",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "brick_wall_factory",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/brick_wall_factory/brick_wall_factory.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "box"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 3,
-    "cluster_with": [
-     "depends",
-     "color_palettes",
-     "contrasts",
-     "pillarcolorcollection",
-     "vertical"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 9,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     8.39,
-     5.24,
-     0.2
-    ],
-    "aabb_center": [
-     4,
-     2.52,
-     0
-    ],
-    "grid_cells": [
-     9,
-     1
-    ],
-    "max_dimension_m": 8.39,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 18,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "color_constellation_office": {
-   "dna": {
-    "still_note": "AWAITING A RE-SWEEP ON A FIXED BENCH. Two separate faults were found on 2026-08-05, and the previous still_note was wrong about both. (1) THE AXIS WAS HOLLOW. The note claimed the three readings were implemented; they were not. commit 1fe54b36a says in its own message that it implemented them, and its diff never touches _add_glass_wall - the export, the MIXTURES allow-list and a thirty-line header existed and no function read the variable, so the byte-identical frames were honest. Now implemented as the header specifies: bench falls through the shipped material untouched, light sets alpha 1.0 and BLEND_MODE_ADD so the three 60-degree panes sum to a white core, retina goes opaque and unlit and builds no OmniLight3D at all. (2) THE GREEN WAS THE BENCH, AND IT IS NOT THIS ARTIFACT'S PROBLEM - it is on every sheet the rig has ever published, riemann_pump included. NatureRenderer is an autoload; its _find_world_environment walks the tree matching on CLASS, found capture_config_sweep's own staging WorldEnvironment, took its Environment resource and tweened fog_light_color to Color(0.6,0.6,0.6).lerp(Color(0.55,0.7,0.5), density), which at density 1.0 is exactly the measured RGB(130,165,118) by ratio (0.786/0.714 against 0.788/0.715). density comes from EcosystemManager restoring user://ecosystem_progression.json - the developer's own save, all 25 sequences complete - so the bench's background colour was a function of how much of the game the operator had played. Fixed in capture_config_sweep.gd: the Environment now lives on Camera3D.environment with no WorldEnvironment node for the bridge to find, the SubViewport owns its World3D, and the ecosystem autoloads are stood down. Not re-swept here - captures are serialised centrally. Expect a strong bite; if it still measures low, suspect the axis, not the fog.",
-    "declines": {
-     "pigment": "A fourth reading, refused. Subtractive mixing needs a white ground to subtract FROM, and a room of freestanding partitions has none - the light behind a cyan pane is whatever the next pane happens to be, so a pane that removed red would go black against half the room and read as an unlit slab rather than as ink. visual_color_mixing, the standing bench of the same sequence, solved this with a white TABLE. The architectural member of the family cannot borrow that answer, so it does not borrow the word."
-    },
-    "axes": {
-    "mixture": [
-    "bench",
-    "light",
-    "retina"
-    ]
-    }
-   },
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "Office space with adaptive additive/subtractive constellations",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "color_constellation_office",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "color_constellation_office",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/color_mixing/color_constellation_office.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "box"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "metallic",
-      "transparency",
-      "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "contrasts",
-     "albers_wall_gallery",
-     "subtractive",
-     "paint",
-     "additive"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 88,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     10.94,
-     2.8,
-     7.63
-    ],
-    "aabb_center": [
-     0.24,
-     1.4,
-     0.13
-    ],
-    "grid_cells": [
-     11,
-     8
-    ],
-    "max_dimension_m": 10.94,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 35,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "color_mixing": {
-   "category": "color",
-   "complexity": "beginner",
-   "description": "Interactive color mixing — combine colors and see the result in different color spaces. Additive (light) vs subtractive (pigment) mixing made visible.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "color_mixing",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "Color Mixing",
-   "parameters": {
-    "footprint": [
-     2,
-     2,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/color_mixing/color_mixing.tscn",
-   "tags": [
-    "color",
-    "mixing",
-    "additive",
-    "subtractive",
-    "rgb",
-    "beginner"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "box"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 12,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     11.6,
-     3.5,
-     0.17
-    ],
-    "aabb_center": [
-     0,
-     0.25,
-     0.01
-    ],
-    "grid_cells": [
-     12,
-     1
-    ],
-    "max_dimension_m": 11.6,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    12,
-    1,
-    1
-   ],
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "The two triads don't simulate mixing; they hand the question to the renderer, so CMY darkens through alpha blending while RGB whitens through additive blend mode. Subtraction and addition turn out to be GPU policies, not paint facts."
-  },
-  "color_scanner": {
-   "category": "color",
-   "complexity": "beginner",
-   "description": "Scans and analyzes color properties of objects and materials. See the numeric values behind what your eyes perceive.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "color_scanner",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "Color Scanner",
-   "parameters": {
-    "footprint": [
-     14,
-     8,
-     10
-    ],
-    "size_group": "world_scale"
-   },
-   "scene": "res://algorithms/color/color_scanner/color_scanner.tscn",
-   "tags": [
-    "color",
-    "scanner",
-    "analysis",
-    "rgb",
-    "hsv"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [
-      "box",
-      "sphere",
-      "cylinder",
-      "plane"
-     ],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "generated_texture",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "emission"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "~0"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 204,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     12,
-     8,
-     17
-    ],
-    "aabb_center": [
-     0,
-     0,
-     -6.5
-    ],
-    "grid_cells": [
-     12,
-     17
-    ],
-    "max_dimension_m": 17,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    12,
-    1,
-    17
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "color_space_navigator": {
-   "category": "color",
-   "complexity": "intermediate",
-   "description": "3D RGB color cube with HSV cylinder — visualize color as a navigable 3D space. Eight corner spheres mark primary and secondary colors, 500 sample points fill the interior, and a companion HSV cylinder shows the same colors in cylindrical coordinates.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "color_space_navigator",
-   "map_ready": true,
-   "map_sequences": [],
-   "name": "Color Space Navigator",
-   "scene": "res://commons/artifacts/color_space_navigator/color_space_navigator.tscn",
-   "tags": [
-    "color",
-    "rgb",
-    "hsv",
-    "color_space",
-    "3d",
-    "visualization"
-   ],
-   "geometry_spec": {
-    "mesh_type": "hybrid",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "unknown",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": []
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "emission",
-      "grid_overlay"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "~144"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     1.61,
-     0.74,
-     0.74
-    ],
-    "aabb_center": [
-     0.44,
-     0,
-     0
-    ],
-    "grid_cells": [
-     2,
-     1
-    ],
-    "max_dimension_m": 1.61,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    2,
-    1,
-    1
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "colorballs": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "N rigid spheres sampled from named color palettes — physics + palette = chromatic rain",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    3,
-    4
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "colorballs",
-   "map_ready": true,
-   "map_sequences": [
-    "color",
-    "wavefunctions"
-   ],
-   "name": "colorballs",
-   "parameters": {
-    "footprint": [
-     1,
-     3,
-     4
-    ],
-    "size_group": "room_scale"
-   },
-   "scene": "res://algorithms/color/colorballs/colorballs.tscn",
-   "size_group": "room_scale",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
-      "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "physics",
-     "driven_by": "physics_engine",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "~2304"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "depends",
-     "color_palettes",
-     "group",
-     "turret",
-     "shoot"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0,
-     0,
-     0
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
-  },
-  "coloredlines": {
-   "category": "unknown",
-   "complexity": "intermediate",
-   "description": "Interactive colored line visualization and manipulation algorithms",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    25,
-    20,
-    28
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "coloredlines",
-   "map_ready": true,
-   "map_sequences": [
-    "color",
-    "unused",
-    "wavefunctions"
-   ],
-   "name": "Colored Lines",
-   "parameters": {
-    "footprint": [
-     25,
-     20,
-     28
-    ],
-    "size_group": "xlarge"
-   },
-   "scene": "res://algorithms/color/colorlines/coloredlines.tscn",
-   "size_group": "xlarge",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": [
-      "emission",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "shader_time",
-     "driven_by": "shader_uniform",
-     "affects": [
-      "visual"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "~64"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "depends",
-     "rendering",
-     "contrasts",
-     "hallway_scene",
-     "color"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 552,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     23.64,
-     19.88,
-     22.09
-    ],
-    "aabb_center": [
-     -1.45,
-     -2.89,
-     -0.83
-    ],
-    "grid_cells": [
-     24,
-     23
-    ],
-    "max_dimension_m": 23.64,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 60,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "colorsheets": {
-   "category": "color",
-   "complexity": "beginner",
-   "description": "Color reference sheets showing systematic color relationships — hue wheels, value scales, saturation gradients. A visual periodic table of color.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "colorsheets",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "Color Sheets",
-   "scene": "res://algorithms/color/colorsheets/colorsheets.tscn",
-   "tags": [
-    "color",
-    "reference",
-    "hue",
-    "saturation",
-    "value",
-    "palette"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "plane"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "table",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0,
-     0,
-     0
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1,
-    1,
-    1
-   ],
-   "qfep_connection": "Twenty palettes filed under culture and feeling, sixteen swatches each, captioned and hung as reference. The wall works precisely by suppressing everything about a color that is not its value — mood and heritage normalized into a 4×4 grid."
-  },
-  "colortrails": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "colortrails",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "colortrails",
-   "map_ready": true,
-   "map_sequences": [
-    "color",
-    "unused"
-   ],
-   "name": "colortrails",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/colortrails/colortrails.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": [
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "vertex",
-     "driven_by": "per_frame_rebuild",
-     "affects": [
-      "vertex_positions"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0,
-     0,
-     0
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "qfep_connection": "Each hand writes a spline ribbon that begins dying the moment it exists — trail_lifetime caps the drawing at the last 1.75 seconds of you. Gesture is archived at exactly the rate it is erased, so the only way to keep the trace alive is to keep moving."
-  },
-  "dark_side_prism": {
-   "dna": {
-    "promoted": "2026-08-03",
-    "stage": "2 - variation",
-    "axes": {
-     "bands": [
-      "one",
-      "three",
-      "seven",
-      "continuum"
-     ],
-     "evidence": [
-      "result",
-      "trace",
-      "longhand",
-      "axiom"
-     ]
-    },
-    "default": "bands=seven, evidence=result - the two defaults together reproduce the shipped sculpture vertex for vertex. seven returns the SPECTRUM array itself, in order, so the fan loop still divides by size()-1 = 6 and every line ends where it always did; the incident beam stays overbright white because the monochromatic tint is reached only at bands=one. result is the early-return in _apply_evidence: no law node is ever constructed, the tree gains not one child, and the beams are painted by the same code path with the same three colour constants. apply_grid_config is guarded three ways - the key must be present, the value must be one the code can build, and it must differ from the current one - and it returns before repainting until _built is true, so the 2 placements (Corridor_Color_Nails, and the Curation_Bay_color_2 curation_station shelf) render exactly what they rendered before.",
-    "was": "No exports at all. The seven colours, the fan geometry and the absence of any normal or angle were locals inside _create_trace_beams, so every placement was the same picture and a map could say nothing about it. Refused by the runner for NO TURNABLE KNOBS.",
-    "note": "bands is the artifact's own dark spot: the fan has seven lines because Newton named seven, and he named seven to match the diatonic scale - a cultural fact wearing the costume of a physical one. one is the experimentum crucis (take one colour out of the fan, send it in again, and nothing further happens - the ray that will not split, drawn monochromatic on entry as well as exit so the frame does not claim white in and green out); three is the display's primaries taken from the same seven, so it reads as a SUBSET of Newton's and not a different palette; continuum is sixty-four samples through the same anchors, the seven revealed as a naming convention over a smooth ramp. evidence asks whether the law is in the frame at all: the shipped sculpture has no normal, no angle and no formula, so it shows the result and withholds the reason. trace draws the two surface normals dashed and the pair of arcs at the entry point - theta_1 between the incoming ray and the normal, theta_2 between the internal ray and the same normal, which is exactly the pair Snell relates. longhand measures every band: its own arc against the exit normal at its own radius, plus a rule at the end of the fan carrying a tick where each wavelength lands, so wavelength-dependence stops being a spray the viewer takes on trust. axiom withholds the rainbow and keeps the normals, the arcs and n1 sin(theta_1) = n2 sin(theta_2) in symbols - the album cover refused, the law kept.",
-    "kin": "evidence is the family word (26 artifacts: fibonacci_sequences, koch_curve, pythagorean_triangle_angles, gradient_descent_visualization, bouncing_ball and the rest) and the ladder is taken character for character in the family's own sense - how much of the working is admitted alongside the result, with axiom the symbolic assertion rather than the withheld one, exactly as pythagorean_triangle_angles uses it. bands is NOT shared with any sibling. The nearest words were rainbow.substance (light|glass|solid), which is what the arc is MADE of and not how finely it is divided, and vector_field_grid.coding (magnitude|direction|banded|uniform), whose banded/uniform pair is about a colour ramp's quantisation rather than about how many wavelengths a beam is claimed to contain. Neither is the same question, so neither word was borrowed.",
-    "still_note": "bands should bite hard: one draws two coloured lines where seven drew nine, continuum fills the same wedge solid. evidence is strongest at axiom (the fan, which is most of the ink, disappears and a formula appears) and at longhand (a rule and seven arcs added outside the existing silhouette); trace adds only four dashed normals and two arcs against a bloom-heavy black frame, so it is the value most likely to come in thin - if it does, check the framing before calling it inert, because the artifact adds its own WorldEnvironment with glow_bloom 0.5 and the added grey lines are deliberately unbloomed while the beams are overbright.",
-    "gotcha": "This scene adds its own Camera3D and WorldEnvironment in _ready. Both are embedded-chrome that GridInteractablesComponent._suppress_embedded_chrome handles; nothing here changes that, but a capture harness that does not suppress them will photograph through the artifact's own camera at (0, 0, 4) and no axis verdict from such a frame means anything."
-   },
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "Snell's law visualized — white beam enters prism, refracts into 7-color fan by wavelength-dependent angle",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    2,
-    2,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "dark_side_prism",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "dark_side_prism",
-   "parameters": {
-    "footprint": [
-     2,
-     2,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/dark_side_prism.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "procedural_line",
-    "topology": "non_manifold",
-    "construction": {
-     "method": "vertex_line_strip",
-     "primitives": [
-      "prism"
-     ],
-     "operations": [
-      "compute_vertices",
-      "connect_lines"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "emission",
-      "grid_overlay",
-      "metallic",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "contrasts",
-     "rainbow",
-     "linear",
-     "split",
-     "precedes"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 10,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     9.5,
-     3.25,
-     0.5
-    ],
-    "aabb_center": [
-     0.75,
-     -0.37,
-     0
-    ],
-    "grid_cells": [
-     10,
-     1
-    ],
-    "max_dimension_m": 9.5,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 18,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "disco_lights": {
-   "category": "unknown",
-   "complexity": "intermediate",
-   "description": "Interactive colored line visualization and manipulation algorithms",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "disco_lights",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "disco_lights",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/colorball/disco_lights.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     1,
-     1,
-     1
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 1,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "omni",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "The geometry is a default sphere; the party is three sine waves at incommensurate frequencies inside the light() pass, red, green, and blue never returning to the same phase together. Disco as a Lissajous figure — spectacle located entirely in the lighting equation."
-  },
-  "glitchcolor": {
-   "category": "color",
-   "complexity": "intermediate",
-   "description": "Color glitch effects — channel shifting, bit corruption, and chromatic aberration. What happens when color data breaks in beautiful ways.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "glitchcolor",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "Glitch Color",
-   "scene": "res://algorithms/color/glitchcolor/glitchcolor.tscn",
-   "tags": [
-    "color",
-    "glitch",
-    "chromatic_aberration",
-    "corruption",
-    "aesthetics"
-   ],
-   "geometry_spec": {
-    "mesh_type": "boolean_composition",
-    "topology": "volumetric",
-    "construction": {
-     "method": "csg_boolean",
-     "primitives": [
-      "box"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_primitives",
-      "boolean_combine"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~2"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     8.8,
-     4.8,
-     0.8
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     9,
-     1
-    ],
-    "max_dimension_m": 8.8,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    9,
-    1,
-    1
-   ],
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 18,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Bit rotation, XOR, quantization — integer operations performed on color, each cube a different violence to the byte. The resulting palette was never chosen by anyone; it is what the number system looks like when you watch it work."
-  },
-  "grab_stick": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "grab_stick",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "grab_stick",
-   "map_ready": true,
-   "map_sequences": [
-    "color",
-    "proceduralgeneration",
-    "proceduralgeneration_all"
-   ],
-   "name": "grab_stick",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/color_scanner/grab_stick.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [
-      "box",
-      "sphere",
-      "cylinder",
-      "plane"
-     ],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "generated_texture",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "emission"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "~0"
-   },
-   "spatial_needs": {
-    "platform": "pedestal",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 16,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.17,
-     0.05,
-     15.07
-    ],
-    "aabb_center": [
-     0,
-     0,
-     -7.46
-    ],
-    "grid_cells": [
-     1,
-     16
-    ],
-    "max_dimension_m": 15.07,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 35,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Grab it, point it, and it reads the texture's stored pixel at the hit UV — the asset, not the light. Color here was never a property of surfaces but an image wrapped around geometry, and the stick turns that archival fact into something you hold."
-  },
-  "grab_stick_scanner": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "Grabbable stick with a UV-based texture-pixel scanner — samples the hit-point colour from any surface the tip touches, displaying the RGB value live.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    5,
-    2
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "grab_stick_scanner",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "grab_stick_scannerk",
-   "parameters": {
-    "footprint": [
-     1,
-     5,
-     2
-    ],
-    "size_group": "environment"
-   },
-   "scene": "res://algorithms/color/color_scanner/grab_stick_scanner.tscn",
-   "size_group": "environment",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [
-      "box",
-      "sphere",
-      "cylinder",
-      "plane"
-     ],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "generated_texture",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "emission"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "~0"
-   },
-   "spatial_needs": {
-    "platform": "pedestal",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 15,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     14.72,
-     0.24,
-     0.17
-    ],
-    "aabb_center": [
-     7.27,
-     0.04,
-     0
-    ],
-    "grid_cells": [
-     15,
-     1
-    ],
-    "max_dimension_m": 14.72,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 35,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "e_entropy: the color thief — a grabbable stick whose tip samples the hit-point pixel of any surface and reports RGB live. Proof that what you see is an agreement: the number changes with the light, the angle, the neighbor."
-  },
-  "grabcolorcollection": {
-   "dna": {
-    "axes": {
-    "arrangement": [
-    "grid",
-    "ramp",
-    "ring",
-    "stack"
-    ]
-    }
-   },
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "grabcolorcollection",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "grabcolorcollection",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "grabcolorcollection",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/grabcolor/grabcolorcollection.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "delegated_scene",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "scene_instantiation",
-     "primitives": [],
-     "operations": [
-      "load_scene",
-      "instantiate",
-      "configure"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "varies"
-   },
-   "spatial_needs": {
-    "platform": "pedestal",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 2,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     1.1,
-     0.2,
-     0.3
-    ],
-    "aabb_center": [
-     0.45,
-     0,
-     0.15
-    ],
-    "grid_cells": [
-     2,
-     1
-    ],
-    "max_dimension_m": 1.1,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "A palette becomes graspable paper: pull a sheet off the stack and the system names its color by nearest neighbor in the web-color table. Every hue you hold is snapped to the vocabulary a 1990s standards body left behind — continuous color, colonized by a finite lexicon."
-  },
-  "gridcolorizer": {
-   "category": "unknown",
-   "complexity": "intermediate",
-   "description": "Finds cube meshes in the scene and recolors an 11x11 grid to match the rose vase palette.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "gridcolorizer",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "gridcolorizer",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn",
-   "size_group": "compact",
-   "tags": [
-    "2d",
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
-      "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "grid_overlay"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 1,
-    "cluster_with": [
-     "depends",
-     "color_palettes",
-     "contrasts",
-     "pillarcolorcollection",
-     "vertical"
-    ],
-    "preferred_zone": "any"
-   }
-  },
-  "k_means_color": {
-   "category": "color",
-   "complexity": "intermediate",
-   "description": "Extract dominant colors from images using k-means clustering in color space. Machine learning meets aesthetics — the algorithm behind every 'color palette from image' tool.",
-   "dev_themes": [
-    "art",
-    "color",
-    "education",
-    "perception"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "k_means_color",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "K-Means Color Clustering",
-   "scene": "res://algorithms/color/k_means_color/k_means_color.tscn",
-   "tags": [
-    "color",
-    "k_means",
-    "clustering",
-    "palette_extraction",
-    "machine_learning"
-   ],
-   "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [
-      "plane"
-     ],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
-      "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0,
-     0,
-     0
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1,
-    1,
-    1
-   ],
-   "qfep_connection": "The 'Ada Lovelace portrait' being quantized is itself synthesized — skin tones assigned by distance from center — so k-means clusters a caricature into k representatives of a representation. The double compression is the honest part: every palette-from-image tool does this to its subject."
-  },
-  "minimalglitch": {
-   "category": "color",
-   "complexity": "beginner",
-   "description": "Minimal glitch aesthetics — subtle data corruption effects that reveal the digital substrate beneath visual representation.",
-   "dev_themes": [
-    "art",
-    "color",
-    "perception"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "minimalglitch",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "Minimal Glitch",
-   "scene": "res://algorithms/color/minimalglitch/minimalglitch.tscn",
-   "tags": [
-    "color",
-    "glitch",
-    "minimal",
-    "digital",
-    "aesthetics"
-   ],
-   "geometry_spec": {
-    "mesh_type": "boolean_composition",
-    "topology": "volumetric",
-    "construction": {
-     "method": "csg_boolean",
-     "primitives": [
-      "box"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_primitives",
-      "boolean_combine"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 11,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     11,
-     6,
-     1
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     11,
-     1
-    ],
-    "max_dimension_m": 11,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    11,
-    1,
-    1
-   ],
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Corruption at survivable dosage: fifteen cubes cycling well-behaved functions that impersonate damage, in a demo that ships its own camera and lighting. That total safety is the aesthetic claim — glitch consumed as style only once it is separated from loss."
-  },
-  "pillarcolorcollection": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "Spawns a grid of pillar prefabs and cycles palette-driven materials from the shared color catalog.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "pillarcolorcollection",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "pillarcolorcollection",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
-   "size_group": "compact",
-   "tags": [
-    "2d",
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "delegated_scene",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "scene_instantiation",
-     "primitives": [],
-     "operations": [
-      "load_scene",
-      "instantiate",
-      "configure"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "varies"
-   },
-   "spatial_needs": {
-    "platform": "pedestal",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "depends",
-     "color_palettes",
-     "pillar",
-     "contrasts",
-     "brick_wall_factory"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 135,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     9,
-     4,
-     15
-    ],
-    "aabb_center": [
-     4,
-     2,
-     7
-    ],
-    "grid_cells": [
-     9,
-     15
-    ],
-    "max_dimension_m": 15,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "omni",
-    "range": 3,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:42:50.263Z",
-    "derived_from": "manual"
-   }
-  },
-  "shelf": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "shelf",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    2
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "shelf",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "shelf",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     2
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/grabcolor/shelf.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "boolean_composition",
-    "topology": "volumetric",
-    "construction": {
-     "method": "csg_boolean",
-     "primitives": [
-      "box",
-      "sphere"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_primitives",
-      "boolean_combine"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.95,
-     1.12,
-     0.22
-    ],
-    "aabb_center": [
-     0.01,
-     -0.09,
-     -0.05
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 1.12,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 4,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Display furniture that holds other artifacts at hand height — the gallery's quiet servant, staging the exhibits without joining them."
-  },
-  "shelf_with_stickers": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "shelf_with_stickers",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    2
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "shelf_with_stickers",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "shelf_with_stickers",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     2
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/grabcolor/shelf_with_stickers.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "boolean_composition",
-    "topology": "volumetric",
-    "construction": {
-     "method": "csg_boolean",
-     "primitives": [
-      "box",
-      "sphere"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_primitives",
-      "boolean_combine"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.95,
-     1.08,
-     0.22
-    ],
-    "aabb_center": [
-     0.01,
-     -0.08,
-     -0.05
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 1.08,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 4,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.075577Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "A CSG-carved wooden pigeonhole shelf whose compartments hold the project's own grant-application doubts as grabbable papers — 'risk of aestheticizing harm,' 'what if the queer potential gets commodified.' Institutional self-audit turned into furniture you can rummage."
-  },
-  "spectrum_forest": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "hue(x) = remap(x, bounds) — 5000 vertical lines colored by x-position across the visible spectrum",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    9,
-    6
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "spectrum_forest",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "spectrum_forest",
-   "parameters": {
-    "footprint": [
-     1,
-     9,
-     6
-    ],
-    "size_group": "environment"
-   },
-   "scene": "res://algorithms/color/spectrumforest/spectrum_forest.tscn",
-   "size_group": "environment",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "procedural_line",
-    "topology": "non_manifold",
-    "construction": {
-     "method": "vertex_line_strip",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "connect_lines"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "emission",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "contrasts",
-     "dark_side_prism",
-     "linear",
-     "spectrum",
-     "spatial"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 400,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     19.99,
-     3,
-     20
-    ],
-    "aabb_center": [
-     0,
-     2.5,
-     0
-    ],
-    "grid_cells": [
-     20,
-     20
-    ],
-    "max_dimension_m": 20,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 35,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.076073Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "spherecolors": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "spherecolors",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    2,
-    2,
-    2
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "spherecolors",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "spherecolors",
-   "parameters": {
-    "footprint": [
-     2,
-     2,
-     2
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/spherecolors/spherecolors.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "hybrid",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "unknown",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": []
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "emission",
-      "grid_overlay",
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "particle_lifecycle",
-     "driven_by": "cpu_simulation",
-     "affects": [
-      "transform",
-      "color"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "~32"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 16,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     3.05,
-     3.05,
-     3.05
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     4,
-     4
-    ],
-    "max_dimension_m": 3.05,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 10,
-    "density": "medium",
-    "min_clearance": 2,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.076073Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "strobe_lasers": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "strobe_lasers.",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "strobe_lasers",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "strobe_lasers",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/strobe_lasers/strobe_lasers.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [
-      "cylinder"
-     ],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
-      "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "particle_lifecycle",
-     "driven_by": "cpu_simulation",
-     "affects": [
-      "transform",
-      "color"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "~64"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.14,
-     2.05,
-     1
-    ],
-    "aabb_center": [
-     0,
-     112.5,
-     0
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 2.05,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 6,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.076073Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Sixteen beams and one visibility bit flipped at 12Hz — the nightclub's oldest trick is a square wave applied to the whole scene at once. The strobe outsources half the animation to the viewer's retina, which insists on continuity the code never renders."
-  },
-  "textureglitch": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "textureglitch",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "textureglitch",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "textureglitch",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/color/textureglitch/textureglitch.tscn",
-   "size_group": "compact",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "boolean_composition",
-    "topology": "volumetric",
-    "construction": {
-     "method": "csg_boolean",
-     "primitives": [
-      "box"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_primitives",
-      "boolean_combine"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 15,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     15,
-     7,
-     0.11
-    ],
-    "aabb_center": [
-     0,
-     0,
-     0
-    ],
-    "grid_cells": [
-     15,
-     1
-    ],
-    "max_dimension_m": 15,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.076073Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "visual_color_mixing": {
-   "dna": {
-    "axes": {
-    "mixture": [
-    "bench",
-    "light",
-    "pigment",
-    "retina"
-    ]
-    }
-   },
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "visual_color_mixing",
-   "dev_themes": [
-    "color",
-    "perception"
-   ],
-   "footprint": [
-    3,
-    2,
-    2
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "visual_color_mixing",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "visual_color_mixing",
-   "parameters": {
-    "footprint": [
-     3,
-     2,
-     2
-    ],
-    "size_group": "room_scale"
-   },
-   "scene": "res://algorithms/color/color_mixing/visual_color_mixing.tscn",
-   "size_group": "room_scale",
-   "tags": [
-    "color"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "cylinder"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 6,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 6,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     2.8,
-     0.15,
-     1.2
-    ],
-    "aabb_center": [
-     0,
-     0.05,
-     0
-    ],
-    "grid_cells": [
-     3,
-     2
-    ],
-    "max_dimension_m": 2.8,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 6,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.076073Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "f_order: additive mixing staged live — channels summing to hues before your eyes; RGB shown as the negotiation it is."
-  },
-  "color_sets_overview": {
-   "dna": {
-    "promoted": "2026-08-03",
-    "stage": "2 - variation",
-    "axes": {
-     "structure": [
-      "named",
-      "complementary",
-      "analogous",
-      "triadic",
-      "monochrome"
-     ]
-    },
-    "default": "structure=named returns the .tres palette list unchanged - _structured_colors is the identity function at this value, so all 10 existing placements render the same twelve cultural sets, in the same order, with the same labels.",
-    "was": "Twelve palettes read straight out of color_palettes.tres and laid out as grabbable sticker grids. The .tres already held twenty named cultural sets (frida_kahlo, harlem_renaissance, bauhaus_palette, stonewall_freedom, rothko_chapel ...) and the registry declared none of it - the data was a parameter space nobody had turned.",
-    "note": "The axis is WHERE A SET COMES FROM: a history somebody is answerable for (named), or a construction the colour wheel hands you from one hue (the other four). Non-named values keep each palette's dominant hue (max s*v) and every sticker's own saturation and value, so the twelve sets stay twelve distinguishable sets - the light survives, the history does not. TWO AXES DECLINED. (1) Layout: the sibling three files over, grabcolorcollection, already carries `arrangement` (grid|ramp|ring|stack) and its ramp/ring already sort by luminance and hue; a second word for the sibling's axis would split one vocabulary in two. (2) What the sticker SAYS (hex|name|both|none) is the axis this artifact's truth statement deserves - and the rig is 6 m wide, so a Label3D on a 0.195 m sticker is a few pixels in any still. An axis only a reader standing in the room can see cannot be argued for with one PNG.",
-    "framing": 0.75
-   },
-   "name": "Color Sets Overview",
-   "lookup_name": "color_sets_overview",
-   "description": "Interactive color set grabber — explore color families, hue relationships, and palette structures through physical manipulation.",
-   "scene": "res://algorithms/color/grabcolor/color_sets_overview.tscn",
-   "category": "color",
-   "interaction": "grab",
-   "sequence": "color",
-   "artifact_type": "interactive",
-   "map_ready": false,
-   "include_in_map_data": false,
-   "spatial_needs": {
-    "platform": "pedestal",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 1,
-    "cluster_with": [
-     "depends",
-     "color_palettes",
-     "follows",
-     "pillarcolorcollection",
-     "viewing"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 12,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     5.99,
-     0.66,
-     1.41
-    ],
-    "aabb_center": [
-     2.25,
-     0.23,
-     0.7
-    ],
-    "grid_cells": [
-     6,
-     2
-    ],
-    "max_dimension_m": 5.99,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    6,
-    1,
-    2
-   ],
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 18,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.076073Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "subpixel_display": {
-   "name": "Subpixel Display",
-   "lookup_name": "subpixel_display",
-   "description": "Shows how screens create color from RGB subpixels. Three vertical bars (R, G, B) with adjustable intensity via sliders. A combined swatch above shows the mixed color with hex value.",
-   "scene": "res://algorithms/color/subpixel_display/subpixel_display.tscn",
-   "category": "color",
-   "complexity": "beginner",
-   "tags": [
-    "rgb",
-    "subpixel",
-    "additive_mixing",
-    "display"
-   ],
-   "map_ready": true,
-   "include_in_map_data": true,
-   "spatial_needs": {
-    "platform": "pedestal",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "wall_backing": false,
-    "isolation": 0,
-    "preferred_zone": "teaching",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.18,
-     0.62,
-     0.18
-    ],
-    "aabb_center": [
-     0,
-     0.2,
-     0.05
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 0.62,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1,
-    1,
-    1
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.076073Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "gradient_interpolator": {
-   "name": "Gradient Interpolator",
-   "lookup_name": "gradient_interpolator",
-   "description": "Shows gradient interpolation between two colors using RGB and HSV color spaces. 16 cubes display the gradient. Toggle mode to see how the interpolation path changes between color spaces.",
-   "scene": "res://algorithms/color/gradient_interpolator/gradient_interpolator.tscn",
-   "category": "color",
-   "complexity": "beginner",
-   "tags": [
-    "gradient",
-    "interpolation",
-    "rgb",
-    "hsv",
-    "lerp"
-   ],
-   "map_ready": true,
-   "include_in_map_data": true,
-   "spatial_needs": {
-    "platform": "pedestal",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "wall_backing": false,
-    "isolation": 0,
-    "preferred_zone": "exploration",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.5,
-     0.39,
-     0.14
-    ],
-    "aabb_center": [
-     0,
-     0.15,
-     0.06
-    ],
-    "grid_cells": [
-     1,
-     1
-    ],
-    "max_dimension_m": 0.5,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1,
-    1,
-    1
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.076073Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "banding_gradient": {
-   "category": "color",
-   "complexity": "intermediate",
-   "description": "The color seam. A smooth gradient quantized to fewer and fewer levels (48 -> 2): the continuum becomes a stack of steps (banding), and the colors between the steps were never sayable. Eat the mushroom and your gamut shrinks.",
-   "dev_themes": [
-    "digital_bias",
-    "seam"
-   ],
-   "include_in_map_data": true,
-   "interaction": "ambient",
-   "lookup_name": "banding_gradient",
-   "map_ready": true,
-   "map_sequences": [
-    "color"
-   ],
-   "name": "Banding Gradient",
-   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for color. Bias is conserved; show the seam.",
-   "scene": "res://algorithms/color/banding_gradient/banding_gradient.tscn",
-   "sequence": "color",
-   "tags": [
-    "color",
-    "gamut",
-    "bit_depth",
-    "banding",
-    "quantization",
-    "seam",
-    "digital_bias"
-   ]
-  }
- },
- "registry_info": {
-  "category": "color",
-  "description": "Color theory and manipulation artifacts — mixing, scanning, clustering, and glitch aesthetics. Exploring color as data, perception, and creative material.",
-  "name": "color",
-  "theoretical_grounding": "Color spaces (RGB, HSV, Lab), perceptual color science, k-means clustering for palette extraction, color mixing models (additive, subtractive)"
- }
+	"artifacts": {
+		"MetamerismLab": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "MetamerismLab",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "MetamerismLab",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "MetamerismLab",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/metamerism_lab/MetamerismLab.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 5,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.3,
+					5.0,
+					1.0
+				],
+				"aabb_center": [
+					0.1,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					6.0,
+					1.0
+				],
+				"max_dimension_m": 5.3,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "One pure 580nm wave on the left, a red\u2013green duet on the right, and both resolve to spheres of the exact same yellow. Two different physical events collapse into one percept the eye cannot appeal \u2014 color as the retina's lossy compression, metamerism as where the loss shows."
+		},
+		"RotatingLaser": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "RotatingLaser.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "RotatingLaser",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "RotatingLaser",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/rotating_laser/RotatingLaser.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~36"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 105,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					31.66,
+					26.7,
+					42.4
+				],
+				"aabb_center": [
+					0.0,
+					1.34,
+					-0.25
+				],
+				"grid_cells": [
+					32.0,
+					43.0
+				],
+				"max_dimension_m": 42.4,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Wave, focus, spread, scan, chaos \u2014 a concert rig's whole emotional vocabulary is one MultiMesh and a phase offset per beam, colors rotating on a ten-second timer. Spectacle revealed as cheap: crowd-shaped feelings driven by a pattern enum."
+		},
+		"SimultaneousContrast": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "SimultaneousContrast",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				3,
+				4,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "SimultaneousContrast",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "SimultaneousContrast",
+			"parameters": {
+				"footprint": [
+					3,
+					4,
+					1
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/color/simultaneous_contrast/SimultaneousContrast.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 7,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 7,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					7,
+					4,
+					1
+				],
+				"aabb_center": [
+					0,
+					0,
+					0.4
+				],
+				"grid_cells": [
+					7,
+					1
+				],
+				"max_dimension_m": 7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The same 0.5 gray twice, on dark and on light ground, and your visual system refuses to agree with the code. The hidden connector bar is the instrument's cruelty: proof that the difference you see was manufactured by context, never present in the value."
+		},
+		"SpectrumVisualizer": {
+			"capacity": "SEE that the color wheel is a perceptual invention \u2014 magenta is the seam where the brain closes what physics leaves open",
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "The visible spectrum bends from a line into a circle. Wavelength-to-color animation phases between linear layout (physics) and circular layout (perception). Magenta dots fill the gap that physics leaves empty \u2014 magenta is not a spectral color, it is the brain's invention to close the loop. The color wheel is a lie the brain tells to make the spectrum feel complete.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Color spaces (RGB, HSV, Lab), perceptual color science",
+			"include_in_map_data": true,
+			"interactions": [
+				"watch auto-animation (linear to circular phase)",
+				"observe magenta dots appearing in the gap"
+			],
+			"lookup_name": "SpectrumVisualizer",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "SpectrumVisualizer",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Lambda between physics and perception \u2014 the linear spectrum is pure F (physics, ordered by wavelength). The circular wheel is F + E (perception, with magenta invented to fill the gap). The animation IS the lambda sweep from one to the other.",
+			"scene": "res://algorithms/color/spectrum_visualizer/SpectrumVisualizer.tscn",
+			"size_group": "compact",
+			"tags": [
+				"spectrum",
+				"color_wheel",
+				"magenta",
+				"wavelength",
+				"perception",
+				"animation",
+				"color",
+				"physics"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"spectrum_forest",
+					"spatial",
+					"temporal",
+					"spectrum"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.5,
+					0.5,
+					0.5
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					11.0,
+					1.0
+				],
+				"max_dimension_m": 10.5,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"advancedglitch": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive colored line visualization and manipulation algorithms",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "advancedglitch",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "advancedglitch",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/advancedglitch/advancedglitch.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~1"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 10,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.5,
+					5.5,
+					0.2
+				],
+				"aabb_center": [
+					0,
+					0,
+					0
+				],
+				"grid_cells": [
+					10,
+					1
+				],
+				"max_dimension_m": 9.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Datamosh, buffer overflow, memory leak \u2014 fifteen failure modes each given a pedestal, a name, and an animation schedule. Nothing here is actually broken, which is exactly how corruption becomes a repertoire: glitch as aesthetic requires the removal of loss."
+		},
+		"brick_wall_factory": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grid(width, height) of BoxMesh bricks colored sequentially from a named palette \u2014 running bond pattern",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "brick_wall_factory",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "brick_wall_factory",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/brick_wall_factory/brick_wall_factory.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 3,
+				"cluster_with": [
+					"depends",
+					"color_palettes",
+					"contrasts",
+					"pillarcolorcollection",
+					"vertical"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.39,
+					5.24,
+					0.2
+				],
+				"aabb_center": [
+					4,
+					2.52,
+					0
+				],
+				"grid_cells": [
+					9,
+					1
+				],
+				"max_dimension_m": 8.39,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"color_constellation_office": {
+			"dna": {
+				"still_note": "AWAITING A RE-SWEEP ON A FIXED BENCH. Two separate faults were found on 2026-08-05, and the previous still_note was wrong about both. (1) THE AXIS WAS HOLLOW. The note claimed the three readings were implemented; they were not. commit 1fe54b36a says in its own message that it implemented them, and its diff never touches _add_glass_wall - the export, the MIXTURES allow-list and a thirty-line header existed and no function read the variable, so the byte-identical frames were honest. Now implemented as the header specifies: bench falls through the shipped material untouched, light sets alpha 1.0 and BLEND_MODE_ADD so the three 60-degree panes sum to a white core, retina goes opaque and unlit and builds no OmniLight3D at all. (2) THE GREEN WAS THE BENCH, AND IT IS NOT THIS ARTIFACT'S PROBLEM - it is on every sheet the rig has ever published, riemann_pump included. NatureRenderer is an autoload; its _find_world_environment walks the tree matching on CLASS, found capture_config_sweep's own staging WorldEnvironment, took its Environment resource and tweened fog_light_color to Color(0.6,0.6,0.6).lerp(Color(0.55,0.7,0.5), density), which at density 1.0 is exactly the measured RGB(130,165,118) by ratio (0.786/0.714 against 0.788/0.715). density comes from EcosystemManager restoring user://ecosystem_progression.json - the developer's own save, all 25 sequences complete - so the bench's background colour was a function of how much of the game the operator had played. Fixed in capture_config_sweep.gd: the Environment now lives on Camera3D.environment with no WorldEnvironment node for the bridge to find, the SubViewport owns its World3D, and the ecosystem autoloads are stood down. Not re-swept here - captures are serialised centrally. Expect a strong bite; if it still measures low, suspect the axis, not the fog.",
+				"declines": {
+					"pigment": "A fourth reading, refused. Subtractive mixing needs a white ground to subtract FROM, and a room of freestanding partitions has none - the light behind a cyan pane is whatever the next pane happens to be, so a pane that removed red would go black against half the room and read as an unlit slab rather than as ink. visual_color_mixing, the standing bench of the same sequence, solved this with a white TABLE. The architectural member of the family cannot borrow that answer, so it does not borrow the word."
+				},
+				"axes": {
+					"mixture": [
+						"bench",
+						"light",
+						"retina"
+					]
+				}
+			},
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Office space with adaptive additive/subtractive constellations",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "color_constellation_office",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "color_constellation_office",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/color_mixing/color_constellation_office.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"albers_wall_gallery",
+					"subtractive",
+					"paint",
+					"additive"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 88,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.94,
+					2.8,
+					7.63
+				],
+				"aabb_center": [
+					0.24,
+					1.4,
+					0.13
+				],
+				"grid_cells": [
+					11,
+					8
+				],
+				"max_dimension_m": 10.94,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"color_mixing": {
+			"category": "color",
+			"complexity": "beginner",
+			"description": "Interactive color mixing \u2014 combine colors and see the result in different color spaces. Additive (light) vs subtractive (pigment) mixing made visible.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "color_mixing",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "Color Mixing",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/color_mixing/color_mixing.tscn",
+			"tags": [
+				"color",
+				"mixing",
+				"additive",
+				"subtractive",
+				"rgb",
+				"beginner"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 12,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					11.6,
+					3.5,
+					0.17
+				],
+				"aabb_center": [
+					0,
+					0.25,
+					0.01
+				],
+				"grid_cells": [
+					12,
+					1
+				],
+				"max_dimension_m": 11.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				12,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The two triads don't simulate mixing; they hand the question to the renderer, so CMY darkens through alpha blending while RGB whitens through additive blend mode. Subtraction and addition turn out to be GPU policies, not paint facts."
+		},
+		"color_scanner": {
+			"category": "color",
+			"complexity": "beginner",
+			"description": "Scans and analyzes color properties of objects and materials. See the numeric values behind what your eyes perceive.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "color_scanner",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "Color Scanner",
+			"parameters": {
+				"footprint": [
+					14,
+					8,
+					10
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/color/color_scanner/color_scanner.tscn",
+			"tags": [
+				"color",
+				"scanner",
+				"analysis",
+				"rgb",
+				"hsv"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"plane"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 204,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.0,
+					8.0,
+					10.1
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					-3.05
+				],
+				"grid_cells": [
+					12.0,
+					11.0
+				],
+				"max_dimension_m": 12.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				12.0,
+				1,
+				11.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"color_space_navigator": {
+			"category": "color",
+			"complexity": "intermediate",
+			"description": "3D RGB color cube with HSV cylinder \u2014 visualize color as a navigable 3D space. Eight corner spheres mark primary and secondary colors, 500 sample points fill the interior, and a companion HSV cylinder shows the same colors in cylindrical coordinates.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "color_space_navigator",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Color Space Navigator",
+			"scene": "res://commons/artifacts/color_space_navigator/color_space_navigator.tscn",
+			"tags": [
+				"color",
+				"rgb",
+				"hsv",
+				"color_space",
+				"3d",
+				"visualization"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~144"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.61,
+					0.74,
+					0.74
+				],
+				"aabb_center": [
+					0.44,
+					0,
+					0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.61,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"colorballs": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "N rigid spheres sampled from named color palettes \u2014 physics + palette = chromatic rain",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				3,
+				4
+			],
+			"include_in_map_data": true,
+			"lookup_name": "colorballs",
+			"map_ready": true,
+			"map_sequences": [
+				"color",
+				"wavefunctions"
+			],
+			"name": "colorballs",
+			"parameters": {
+				"footprint": [
+					1,
+					3,
+					4
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/color/colorballs/colorballs.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~2304"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"color_palettes",
+					"group",
+					"turret",
+					"shoot"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.87,
+					1.12,
+					8.46
+				],
+				"aabb_center": [
+					-0.23,
+					1.51,
+					-0.46
+				],
+				"grid_cells": [
+					10.0,
+					9.0
+				],
+				"max_dimension_m": 9.87,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		},
+		"coloredlines": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive colored line visualization and manipulation algorithms",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				25,
+				20,
+				28
+			],
+			"include_in_map_data": true,
+			"lookup_name": "coloredlines",
+			"map_ready": true,
+			"map_sequences": [
+				"color",
+				"unused",
+				"wavefunctions"
+			],
+			"name": "Colored Lines",
+			"parameters": {
+				"footprint": [
+					25,
+					20,
+					28
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/color/colorlines/coloredlines.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "shader_time",
+					"driven_by": "shader_uniform",
+					"affects": [
+						"visual"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"rendering",
+					"contrasts",
+					"hallway_scene",
+					"color"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 552,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					24.23,
+					17.38,
+					27.12
+				],
+				"aabb_center": [
+					-1.67,
+					-1.65,
+					-3.41
+				],
+				"grid_cells": [
+					25.0,
+					28.0
+				],
+				"max_dimension_m": 27.12,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"colorsheets": {
+			"category": "color",
+			"complexity": "beginner",
+			"description": "Color reference sheets showing systematic color relationships \u2014 hue wheels, value scales, saturation gradients. A visual periodic table of color.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "colorsheets",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "Color Sheets",
+			"scene": "res://algorithms/color/colorsheets/colorsheets.tscn",
+			"tags": [
+				"color",
+				"reference",
+				"hue",
+				"saturation",
+				"value",
+				"palette"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0,
+					0,
+					0
+				],
+				"aabb_center": [
+					0,
+					0,
+					0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"qfep_connection": "Twenty palettes filed under culture and feeling, sixteen swatches each, captioned and hung as reference. The wall works precisely by suppressing everything about a color that is not its value \u2014 mood and heritage normalized into a 4\u00d74 grid."
+		},
+		"colortrails": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "colortrails",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "colortrails",
+			"map_ready": true,
+			"map_sequences": [
+				"color",
+				"unused"
+			],
+			"name": "colortrails",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/colortrails/colortrails.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0,
+					0,
+					0
+				],
+				"aabb_center": [
+					0,
+					0,
+					0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"qfep_connection": "Each hand writes a spline ribbon that begins dying the moment it exists \u2014 trail_lifetime caps the drawing at the last 1.75 seconds of you. Gesture is archived at exactly the rate it is erased, so the only way to keep the trace alive is to keep moving."
+		},
+		"dark_side_prism": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"bands": [
+						"one",
+						"three",
+						"seven",
+						"continuum"
+					],
+					"evidence": [
+						"result",
+						"trace",
+						"longhand",
+						"axiom"
+					]
+				},
+				"default": "bands=seven, evidence=result - the two defaults together reproduce the shipped sculpture vertex for vertex. seven returns the SPECTRUM array itself, in order, so the fan loop still divides by size()-1 = 6 and every line ends where it always did; the incident beam stays overbright white because the monochromatic tint is reached only at bands=one. result is the early-return in _apply_evidence: no law node is ever constructed, the tree gains not one child, and the beams are painted by the same code path with the same three colour constants. apply_grid_config is guarded three ways - the key must be present, the value must be one the code can build, and it must differ from the current one - and it returns before repainting until _built is true, so the 2 placements (Corridor_Color_Nails, and the Curation_Bay_color_2 curation_station shelf) render exactly what they rendered before.",
+				"was": "No exports at all. The seven colours, the fan geometry and the absence of any normal or angle were locals inside _create_trace_beams, so every placement was the same picture and a map could say nothing about it. Refused by the runner for NO TURNABLE KNOBS.",
+				"note": "bands is the artifact's own dark spot: the fan has seven lines because Newton named seven, and he named seven to match the diatonic scale - a cultural fact wearing the costume of a physical one. one is the experimentum crucis (take one colour out of the fan, send it in again, and nothing further happens - the ray that will not split, drawn monochromatic on entry as well as exit so the frame does not claim white in and green out); three is the display's primaries taken from the same seven, so it reads as a SUBSET of Newton's and not a different palette; continuum is sixty-four samples through the same anchors, the seven revealed as a naming convention over a smooth ramp. evidence asks whether the law is in the frame at all: the shipped sculpture has no normal, no angle and no formula, so it shows the result and withholds the reason. trace draws the two surface normals dashed and the pair of arcs at the entry point - theta_1 between the incoming ray and the normal, theta_2 between the internal ray and the same normal, which is exactly the pair Snell relates. longhand measures every band: its own arc against the exit normal at its own radius, plus a rule at the end of the fan carrying a tick where each wavelength lands, so wavelength-dependence stops being a spray the viewer takes on trust. axiom withholds the rainbow and keeps the normals, the arcs and n1 sin(theta_1) = n2 sin(theta_2) in symbols - the album cover refused, the law kept.",
+				"kin": "evidence is the family word (26 artifacts: fibonacci_sequences, koch_curve, pythagorean_triangle_angles, gradient_descent_visualization, bouncing_ball and the rest) and the ladder is taken character for character in the family's own sense - how much of the working is admitted alongside the result, with axiom the symbolic assertion rather than the withheld one, exactly as pythagorean_triangle_angles uses it. bands is NOT shared with any sibling. The nearest words were rainbow.substance (light|glass|solid), which is what the arc is MADE of and not how finely it is divided, and vector_field_grid.coding (magnitude|direction|banded|uniform), whose banded/uniform pair is about a colour ramp's quantisation rather than about how many wavelengths a beam is claimed to contain. Neither is the same question, so neither word was borrowed.",
+				"still_note": "bands should bite hard: one draws two coloured lines where seven drew nine, continuum fills the same wedge solid. evidence is strongest at axiom (the fan, which is most of the ink, disappears and a formula appears) and at longhand (a rule and seven arcs added outside the existing silhouette); trace adds only four dashed normals and two arcs against a bloom-heavy black frame, so it is the value most likely to come in thin - if it does, check the framing before calling it inert, because the artifact adds its own WorldEnvironment with glow_bloom 0.5 and the added grey lines are deliberately unbloomed while the beams are overbright.",
+				"gotcha": "This scene adds its own Camera3D and WorldEnvironment in _ready. Both are embedded-chrome that GridInteractablesComponent._suppress_embedded_chrome handles; nothing here changes that, but a capture harness that does not suppress them will photograph through the artifact's own camera at (0, 0, 4) and no axis verdict from such a frame means anything."
+			},
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Snell's law visualized \u2014 white beam enters prism, refracts into 7-color fan by wavelength-dependent angle",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dark_side_prism",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "dark_side_prism",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/dark_side_prism.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"prism"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"rainbow",
+					"linear",
+					"split",
+					"precedes"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 10,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.5,
+					3.25,
+					0.5
+				],
+				"aabb_center": [
+					0.75,
+					-0.37,
+					0
+				],
+				"grid_cells": [
+					10,
+					1
+				],
+				"max_dimension_m": 9.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"disco_lights": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive colored line visualization and manipulation algorithms",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "disco_lights",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "disco_lights",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/colorball/disco_lights.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1,
+					1,
+					1
+				],
+				"aabb_center": [
+					0,
+					0,
+					0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The geometry is a default sphere; the party is three sine waves at incommensurate frequencies inside the light() pass, red, green, and blue never returning to the same phase together. Disco as a Lissajous figure \u2014 spectacle located entirely in the lighting equation."
+		},
+		"glitchcolor": {
+			"category": "color",
+			"complexity": "intermediate",
+			"description": "Color glitch effects \u2014 channel shifting, bit corruption, and chromatic aberration. What happens when color data breaks in beautiful ways.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "glitchcolor",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "Glitch Color",
+			"scene": "res://algorithms/color/glitchcolor/glitchcolor.tscn",
+			"tags": [
+				"color",
+				"glitch",
+				"chromatic_aberration",
+				"corruption",
+				"aesthetics"
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~2"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.8,
+					4.8,
+					0.8
+				],
+				"aabb_center": [
+					0,
+					0,
+					0
+				],
+				"grid_cells": [
+					9,
+					1
+				],
+				"max_dimension_m": 8.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				9,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Bit rotation, XOR, quantization \u2014 integer operations performed on color, each cube a different violence to the byte. The resulting palette was never chosen by anyone; it is what the number system looks like when you watch it work."
+		},
+		"grab_stick": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grab_stick",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_stick",
+			"map_ready": true,
+			"map_sequences": [
+				"color",
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"name": "grab_stick",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/color_scanner/grab_stick.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"plane"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.17,
+					0.02,
+					15.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					-7.49
+				],
+				"grid_cells": [
+					1,
+					16
+				],
+				"max_dimension_m": 15.01,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Grab it, point it, and it reads the texture's stored pixel at the hit UV \u2014 the asset, not the light. Color here was never a property of surfaces but an image wrapped around geometry, and the stick turns that archival fact into something you hold."
+		},
+		"grab_stick_scanner": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grabbable stick with a UV-based texture-pixel scanner \u2014 samples the hit-point colour from any surface the tip touches, displaying the RGB value live.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				5,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_stick_scanner",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "grab_stick_scannerk",
+			"parameters": {
+				"footprint": [
+					1,
+					5,
+					2
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/color/color_scanner/grab_stick_scanner.tscn",
+			"size_group": "environment",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"plane"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 15,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.72,
+					0.24,
+					0.17
+				],
+				"aabb_center": [
+					7.27,
+					0.04,
+					0
+				],
+				"grid_cells": [
+					15,
+					1
+				],
+				"max_dimension_m": 14.72,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "e_entropy: the color thief \u2014 a grabbable stick whose tip samples the hit-point pixel of any surface and reports RGB live. Proof that what you see is an agreement: the number changes with the light, the angle, the neighbor."
+		},
+		"grabcolorcollection": {
+			"dna": {
+				"axes": {
+					"arrangement": [
+						"grid",
+						"ramp",
+						"ring",
+						"stack"
+					]
+				}
+			},
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grabcolorcollection",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grabcolorcollection",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "grabcolorcollection",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/grabcolor/grabcolorcollection.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.09,
+					0.2,
+					0.23
+				],
+				"aabb_center": [
+					0.45,
+					0.0,
+					0.11
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.09,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "A palette becomes graspable paper: pull a sheet off the stack and the system names its color by nearest neighbor in the web-color table. Every hue you hold is snapped to the vocabulary a 1990s standards body left behind \u2014 continuous color, colonized by a finite lexicon."
+		},
+		"gridcolorizer": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Finds cube meshes in the scene and recolors an 11x11 grid to match the rose vase palette.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gridcolorizer",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "gridcolorizer",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"grid_overlay"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"depends",
+					"color_palettes",
+					"contrasts",
+					"pillarcolorcollection",
+					"vertical"
+				],
+				"preferred_zone": "any"
+			}
+		},
+		"k_means_color": {
+			"category": "color",
+			"complexity": "intermediate",
+			"description": "Extract dominant colors from images using k-means clustering in color space. Machine learning meets aesthetics \u2014 the algorithm behind every 'color palette from image' tool.",
+			"dev_themes": [
+				"art",
+				"color",
+				"education",
+				"perception"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "k_means_color",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "K-Means Color Clustering",
+			"scene": "res://algorithms/color/k_means_color/k_means_color.tscn",
+			"tags": [
+				"color",
+				"k_means",
+				"clustering",
+				"palette_extraction",
+				"machine_learning"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"plane"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0,
+					0,
+					0
+				],
+				"aabb_center": [
+					0,
+					0,
+					0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"qfep_connection": "The 'Ada Lovelace portrait' being quantized is itself synthesized \u2014 skin tones assigned by distance from center \u2014 so k-means clusters a caricature into k representatives of a representation. The double compression is the honest part: every palette-from-image tool does this to its subject."
+		},
+		"minimalglitch": {
+			"category": "color",
+			"complexity": "beginner",
+			"description": "Minimal glitch aesthetics \u2014 subtle data corruption effects that reveal the digital substrate beneath visual representation.",
+			"dev_themes": [
+				"art",
+				"color",
+				"perception"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "minimalglitch",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "Minimal Glitch",
+			"scene": "res://algorithms/color/minimalglitch/minimalglitch.tscn",
+			"tags": [
+				"color",
+				"glitch",
+				"minimal",
+				"digital",
+				"aesthetics"
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 11,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					11,
+					6,
+					1
+				],
+				"aabb_center": [
+					0,
+					0,
+					0
+				],
+				"grid_cells": [
+					11,
+					1
+				],
+				"max_dimension_m": 11,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				11,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Corruption at survivable dosage: fifteen cubes cycling well-behaved functions that impersonate damage, in a demo that ships its own camera and lighting. That total safety is the aesthetic claim \u2014 glitch consumed as style only once it is separated from loss."
+		},
+		"pillarcolorcollection": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Spawns a grid of pillar prefabs and cycles palette-driven materials from the shared color catalog.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pillarcolorcollection",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "pillarcolorcollection",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"color_palettes",
+					"pillar",
+					"contrasts",
+					"brick_wall_factory"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 135,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					9,
+					4,
+					15
+				],
+				"aabb_center": [
+					4,
+					2,
+					7
+				],
+				"grid_cells": [
+					9,
+					15
+				],
+				"max_dimension_m": 15,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 3,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:42:50.263Z",
+				"derived_from": "manual"
+			}
+		},
+		"shelf": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "shelf",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shelf",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "shelf",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/grabcolor/shelf.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.93,
+					0.99,
+					0.21
+				],
+				"aabb_center": [
+					0.0,
+					-0.03,
+					-0.06
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.99,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Display furniture that holds other artifacts at hand height \u2014 the gallery's quiet servant, staging the exhibits without joining them."
+		},
+		"shelf_with_stickers": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "shelf_with_stickers",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shelf_with_stickers",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "shelf_with_stickers",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/grabcolor/shelf_with_stickers.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.93,
+					0.99,
+					0.21
+				],
+				"aabb_center": [
+					0.0,
+					-0.03,
+					-0.06
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.99,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.075577Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "A CSG-carved wooden pigeonhole shelf whose compartments hold the project's own grant-application doubts as grabbable papers \u2014 'risk of aestheticizing harm,' 'what if the queer potential gets commodified.' Institutional self-audit turned into furniture you can rummage."
+		},
+		"spectrum_forest": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "hue(x) = remap(x, bounds) \u2014 5000 vertical lines colored by x-position across the visible spectrum",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				9,
+				6
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spectrum_forest",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "spectrum_forest",
+			"parameters": {
+				"footprint": [
+					1,
+					9,
+					6
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/color/spectrumforest/spectrum_forest.tscn",
+			"size_group": "environment",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"dark_side_prism",
+					"linear",
+					"spectrum",
+					"spatial"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.99,
+					3,
+					20
+				],
+				"aabb_center": [
+					0,
+					2.5,
+					0
+				],
+				"grid_cells": [
+					20,
+					20
+				],
+				"max_dimension_m": 20,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.076073Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"spherecolors": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "spherecolors",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				2,
+				2,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spherecolors",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "spherecolors",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/spherecolors/spherecolors.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~32"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.77,
+					3.05,
+					3.77
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					4,
+					4
+				],
+				"max_dimension_m": 3.77,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.076073Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"strobe_lasers": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "strobe_lasers.",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "strobe_lasers",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "strobe_lasers",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/strobe_lasers/strobe_lasers.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.076073Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Sixteen beams and one visibility bit flipped at 12Hz \u2014 the nightclub's oldest trick is a square wave applied to the whole scene at once. The strobe outsources half the animation to the viewer's retina, which insists on continuity the code never renders."
+		},
+		"textureglitch": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "textureglitch",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "textureglitch",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "textureglitch",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/color/textureglitch/textureglitch.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 15,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.02,
+					8.21,
+					0.69
+				],
+				"aabb_center": [
+					0.05,
+					0.1,
+					0.31
+				],
+				"grid_cells": [
+					17,
+					1
+				],
+				"max_dimension_m": 16.02,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.076073Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"visual_color_mixing": {
+			"dna": {
+				"axes": {
+					"mixture": [
+						"bench",
+						"light",
+						"pigment",
+						"retina"
+					]
+				}
+			},
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "visual_color_mixing",
+			"dev_themes": [
+				"color",
+				"perception"
+			],
+			"footprint": [
+				3,
+				2,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "visual_color_mixing",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "visual_color_mixing",
+			"parameters": {
+				"footprint": [
+					3,
+					2,
+					2
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/color/color_mixing/visual_color_mixing.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"color"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 6,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 6,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.2,
+					0.15,
+					4.4
+				],
+				"aabb_center": [
+					0.0,
+					0.05,
+					1.6
+				],
+				"grid_cells": [
+					4,
+					5
+				],
+				"max_dimension_m": 4.4,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.076073Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "f_order: additive mixing staged live \u2014 channels summing to hues before your eyes; RGB shown as the negotiation it is."
+		},
+		"color_sets_overview": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"structure": [
+						"named",
+						"complementary",
+						"analogous",
+						"triadic",
+						"monochrome"
+					]
+				},
+				"default": "structure=named returns the .tres palette list unchanged - _structured_colors is the identity function at this value, so all 10 existing placements render the same twelve cultural sets, in the same order, with the same labels.",
+				"was": "Twelve palettes read straight out of color_palettes.tres and laid out as grabbable sticker grids. The .tres already held twenty named cultural sets (frida_kahlo, harlem_renaissance, bauhaus_palette, stonewall_freedom, rothko_chapel ...) and the registry declared none of it - the data was a parameter space nobody had turned.",
+				"note": "The axis is WHERE A SET COMES FROM: a history somebody is answerable for (named), or a construction the colour wheel hands you from one hue (the other four). Non-named values keep each palette's dominant hue (max s*v) and every sticker's own saturation and value, so the twelve sets stay twelve distinguishable sets - the light survives, the history does not. TWO AXES DECLINED. (1) Layout: the sibling three files over, grabcolorcollection, already carries `arrangement` (grid|ramp|ring|stack) and its ramp/ring already sort by luminance and hue; a second word for the sibling's axis would split one vocabulary in two. (2) What the sticker SAYS (hex|name|both|none) is the axis this artifact's truth statement deserves - and the rig is 6 m wide, so a Label3D on a 0.195 m sticker is a few pixels in any still. An axis only a reader standing in the room can see cannot be argued for with one PNG.",
+				"framing": 0.75
+			},
+			"name": "Color Sets Overview",
+			"lookup_name": "color_sets_overview",
+			"description": "Interactive color set grabber \u2014 explore color families, hue relationships, and palette structures through physical manipulation.",
+			"scene": "res://algorithms/color/grabcolor/color_sets_overview.tscn",
+			"category": "color",
+			"interaction": "grab",
+			"sequence": "color",
+			"artifact_type": "interactive",
+			"map_ready": false,
+			"include_in_map_data": false,
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"depends",
+					"color_palettes",
+					"follows",
+					"pillarcolorcollection",
+					"viewing"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 12,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.98,
+					0.66,
+					1.41
+				],
+				"aabb_center": [
+					2.25,
+					0.23,
+					0.7
+				],
+				"grid_cells": [
+					6.0,
+					2.0
+				],
+				"max_dimension_m": 5.98,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				6.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.076073Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"subpixel_display": {
+			"name": "Subpixel Display",
+			"lookup_name": "subpixel_display",
+			"description": "Shows how screens create color from RGB subpixels. Three vertical bars (R, G, B) with adjustable intensity via sliders. A combined swatch above shows the mixed color with hex value.",
+			"scene": "res://algorithms/color/subpixel_display/subpixel_display.tscn",
+			"category": "color",
+			"complexity": "beginner",
+			"tags": [
+				"rgb",
+				"subpixel",
+				"additive_mixing",
+				"display"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"wall_backing": false,
+				"isolation": 0,
+				"preferred_zone": "teaching",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.18,
+					0.62,
+					0.16
+				],
+				"aabb_center": [
+					0.0,
+					0.2,
+					0.04
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.62,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.076073Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"gradient_interpolator": {
+			"name": "Gradient Interpolator",
+			"lookup_name": "gradient_interpolator",
+			"description": "Shows gradient interpolation between two colors using RGB and HSV color spaces. 16 cubes display the gradient. Toggle mode to see how the interpolation path changes between color spaces.",
+			"scene": "res://algorithms/color/gradient_interpolator/gradient_interpolator.tscn",
+			"category": "color",
+			"complexity": "beginner",
+			"tags": [
+				"gradient",
+				"interpolation",
+				"rgb",
+				"hsv",
+				"lerp"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"wall_backing": false,
+				"isolation": 0,
+				"preferred_zone": "exploration",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					0.39,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					0.15,
+					0.05
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.5,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.076073Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"banding_gradient": {
+			"category": "color",
+			"complexity": "intermediate",
+			"description": "The color seam. A smooth gradient quantized to fewer and fewer levels (48 -> 2): the continuum becomes a stack of steps (banding), and the colors between the steps were never sayable. Eat the mushroom and your gamut shrinks.",
+			"dev_themes": [
+				"digital_bias",
+				"seam"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "banding_gradient",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "Banding Gradient",
+			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for color. Bias is conserved; show the seam.",
+			"scene": "res://algorithms/color/banding_gradient/banding_gradient.tscn",
+			"sequence": "color",
+			"tags": [
+				"color",
+				"gamut",
+				"bit_depth",
+				"banding",
+				"quantization",
+				"seam",
+				"digital_bias"
+			],
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.6,
+					0.02
+				],
+				"aabb_center": [
+					0.0,
+					0.05,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.95,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		}
+	},
+	"registry_info": {
+		"category": "color",
+		"description": "Color theory and manipulation artifacts \u2014 mixing, scanning, clustering, and glitch aesthetics. Exploring color as data, perception, and creative material.",
+		"name": "color",
+		"theoretical_grounding": "Color spaces (RGB, HSV, Lab), perceptual color science, k-means clustering for palette extraction, color mixing models (additive, subtractive)"
+	}
 }

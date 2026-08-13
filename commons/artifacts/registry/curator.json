@@ -1,31 +1,100 @@
 {
- "artifacts": {
-  "mode_crown": {
-   "lookup_name": "mode_crown",
-   "scene": "res://commons/artifacts/curator/mode_crown.tscn",
-   "class_name": "CuratorModeCrown",
-   "name": "Curator Mode: The Crown",
-   "category": "curator",
-   "complexity": "intermediate",
-   "description": "Display mode 1 of the Curator's grammar: the room bows to one thing. A dark inverted canopy with a glowing underside hovers over the anchor's cell, a dais gathers the floor, a single downlight makes the object own its shadows. After the Grand Egyptian Museum. Configurable span/height; the anchor artifact is placed by the exhibition compiler."
-  },
-  "mode_dialogue": {
-   "lookup_name": "mode_dialogue",
-   "scene": "res://commons/artifacts/curator/mode_dialogue.tscn",
-   "class_name": "CuratorModeDialogue",
-   "name": "Curator Mode: The Dialogue",
-   "category": "curator",
-   "complexity": "intermediate",
-   "description": "Display mode 2: two works facing each other across a held axis, the tension sentence baked at the midpoint, cross-lights aiming each lamp at the opposite work. Stages heroes.json pairs. After the Worcester court. Config: gap, tension."
-  },
-  "mode_witness_wall": {
-   "lookup_name": "mode_witness_wall",
-   "scene": "res://commons/artifacts/curator/mode_witness_wall.tscn",
-   "class_name": "CuratorModeWitnessWall",
-   "name": "Curator Mode: The Witness Wall",
-   "category": "curator",
-   "complexity": "advanced",
-   "description": "Display mode 3: the commons ledger as a room. Reads doc/book/commons_sources.json LIVE at build time and bakes every pressed tradition (name, era) into columns on a dark wall, hush-lit, with a bench facing it. The wall grows when the ledger grows. After the 9/11 memorial hall - scale as feeling, credit as architecture."
-  }
- }
+	"artifacts": {
+		"mode_crown": {
+			"lookup_name": "mode_crown",
+			"scene": "res://commons/artifacts/curator/mode_crown.tscn",
+			"class_name": "CuratorModeCrown",
+			"name": "Curator Mode: The Crown",
+			"category": "curator",
+			"complexity": "intermediate",
+			"description": "Display mode 1 of the Curator's grammar: the room bows to one thing. A dark inverted canopy with a glowing underside hovers over the anchor's cell, a dais gathers the floor, a single downlight makes the object own its shadows. After the Grand Egyptian Museum. Configurable span/height; the anchor artifact is placed by the exhibition compiler.",
+			"measurements": {
+				"aabb_size": [
+					6.3,
+					6.13,
+					6.3
+				],
+				"aabb_center": [
+					0.0,
+					3.06,
+					0.0
+				],
+				"grid_cells": [
+					7,
+					7
+				],
+				"max_dimension_m": 6.3,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				7,
+				1,
+				7
+			]
+		},
+		"mode_dialogue": {
+			"lookup_name": "mode_dialogue",
+			"scene": "res://commons/artifacts/curator/mode_dialogue.tscn",
+			"class_name": "CuratorModeDialogue",
+			"name": "Curator Mode: The Dialogue",
+			"category": "curator",
+			"complexity": "intermediate",
+			"description": "Display mode 2: two works facing each other across a held axis, the tension sentence baked at the midpoint, cross-lights aiming each lamp at the opposite work. Stages heroes.json pairs. After the Worcester court. Config: gap, tension.",
+			"measurements": {
+				"aabb_size": [
+					8.6,
+					1.39,
+					1.6
+				],
+				"aabb_center": [
+					0.0,
+					0.7,
+					0.0
+				],
+				"grid_cells": [
+					9,
+					2
+				],
+				"max_dimension_m": 8.6,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				9,
+				1,
+				2
+			]
+		},
+		"mode_witness_wall": {
+			"lookup_name": "mode_witness_wall",
+			"scene": "res://commons/artifacts/curator/mode_witness_wall.tscn",
+			"class_name": "CuratorModeWitnessWall",
+			"name": "Curator Mode: The Witness Wall",
+			"category": "curator",
+			"complexity": "advanced",
+			"description": "Display mode 3: the commons ledger as a room. Reads doc/book/commons_sources.json LIVE at build time and bakes every pressed tradition (name, era) into columns on a dark wall, hush-lit, with a bench facing it. The wall grows when the ledger grows. After the 9/11 memorial hall - scale as feeling, credit as architecture.",
+			"measurements": {
+				"aabb_size": [
+					18.2,
+					6.15,
+					3.93
+				],
+				"aabb_center": [
+					0.0,
+					3.08,
+					1.71
+				],
+				"grid_cells": [
+					19,
+					4
+				],
+				"max_dimension_m": 18.2,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				19,
+				1,
+				4
+			]
+		}
+	}
 }

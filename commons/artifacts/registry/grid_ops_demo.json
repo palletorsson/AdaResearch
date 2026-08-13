@@ -1,7 +1,7 @@
 {
 	"id": "grid_ops_demo",
 	"name": "Grid Ops Demo",
-	"description": "The VR Grid-tab paint palette made visible: six 8x8 heightfield grids, each applying one GridOps operation (raise/pyramid, randomize with seed, checker, frame, ring, ground-plane). GridOps (commons/modifiers/grid_ops.gd) is the GDScript port of the web /editor mutators — the same paint ops the headset Grid tab will use. Step 1 of the unified editing-panel work.",
+	"description": "The VR Grid-tab paint palette made visible: six 8x8 heightfield grids, each applying one GridOps operation (raise/pyramid, randomize with seed, checker, frame, ring, ground-plane). GridOps (commons/modifiers/grid_ops.gd) is the GDScript port of the web /editor mutators \u2014 the same paint ops the headset Grid tab will use. Step 1 of the unified editing-panel work.",
 	"category": "grids",
 	"theoreticalGrounding": "Editing the grid is painting a heightfield; the op is the brush. add/raise push structure (F), randomize pushes variety (E), ground-plane normalizes back to order.",
 	"artifacts": {
@@ -14,15 +14,52 @@
 			"scene": "res://commons/artifacts/grid_ops_demo/grid_ops_demo.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["primitives"],
-			"footprint": [12, 1, 60],
-			"tags": ["grid", "editing", "paint", "heightfield", "mutators", "ground_plane", "randomize", "vr"],
-			"qfep_connection": "lambda: grid paint ops tend the structure — variety in (E), plane back (F).",
+			"map_sequences": [
+				"primitives"
+			],
+			"footprint": [
+				12,
+				1,
+				60
+			],
+			"tags": [
+				"grid",
+				"editing",
+				"paint",
+				"heightfield",
+				"mutators",
+				"ground_plane",
+				"randomize",
+				"vr"
+			],
+			"qfep_connection": "lambda: grid paint ops tend the structure \u2014 variety in (E), plane back (F).",
 			"parameters": {
-				"footprint": [12, 1, 60],
+				"footprint": [
+					12,
+					1,
+					60
+				],
 				"size_group": "large"
 			},
-			"size_group": "large"
+			"size_group": "large",
+			"measurements": {
+				"aabb_size": [
+					62.9,
+					1.6,
+					7.9
+				],
+				"aabb_center": [
+					0.0,
+					0.8,
+					0.0
+				],
+				"grid_cells": [
+					63,
+					8
+				],
+				"max_dimension_m": 62.9,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
 		}
 	}
 }

@@ -1,9 +1,9 @@
 {
 	"id": "catapult",
 	"name": "Catapult",
-	"description": "A procedural siege catapult that teaches force and velocity vectors as a projectile launch. Two levers compose the throw — a LAUNCH ANGLE slider tilts the throwing arm and a FORCE slider sets the release speed — and a live dotted parabola previews where the stone will land before you fire. The launch velocity vector (green, from the basket) and the constant gravity vector (red, downward) stay visible: the arc is literally their sum. Press FIRE and the arm swings, hurling a RigidBody3D ball along the predicted path under gravity.",
+	"description": "A procedural siege catapult that teaches force and velocity vectors as a projectile launch. Two levers compose the throw \u2014 a LAUNCH ANGLE slider tilts the throwing arm and a FORCE slider sets the release speed \u2014 and a live dotted parabola previews where the stone will land before you fire. The launch velocity vector (green, from the basket) and the constant gravity vector (red, downward) stay visible: the arc is literally their sum. Press FIRE and the arm swings, hurling a RigidBody3D ball along the predicted path under gravity.",
 	"category": "vectors",
-	"theoreticalGrounding": "Projectile motion p(t) = p0 + v0*t + 0.5*g*t^2. The release velocity v0 = launch_direction(angle) * force is the entire initial condition; gravity is constant. Horizontal motion is constant velocity, vertical motion is constant acceleration, and together they trace the parabola. A throw is an initial condition — after release, physics decides the rest.",
+	"theoreticalGrounding": "Projectile motion p(t) = p0 + v0*t + 0.5*g*t^2. The release velocity v0 = launch_direction(angle) * force is the entire initial condition; gravity is constant. Horizontal motion is constant velocity, vertical motion is constant acceleration, and together they trace the parabola. A throw is an initial condition \u2014 after release, physics decides the rest.",
 	"artifacts": {
 		"catapult": {
 			"lookup_name": "catapult",
@@ -47,9 +47,25 @@
 				"promoted": "2026-07-29",
 				"stage": "2 - variation",
 				"axes": {
-					"foresight": ["parabola", "apex", "landing", "none"],
-					"vectors": ["sum", "components", "velocity", "gravity"],
-					"throw": ["balanced", "mortar", "flat", "heavy", "weak"]
+					"foresight": [
+						"parabola",
+						"apex",
+						"landing",
+						"none"
+					],
+					"vectors": [
+						"sum",
+						"components",
+						"velocity",
+						"gravity"
+					],
+					"throw": [
+						"balanced",
+						"mortar",
+						"flat",
+						"heavy",
+						"weak"
+					]
 				},
 				"default": "foresight=parabola, vectors=sum, throw=balanced - the full dotted arc plus one velocity arrow and the gravity arrow is exactly what the 4 existing placements draw today; the component arrows are not even instantiated at that value, and throw=balanced is the else-branch of _apply_throw, which is character for character the two clamps _ready always ran (default_angle_deg 50, default_force 9.0) and never touches the counterweight. Scene tree and capture AABB unchanged",
 				"was": "the predicted parabola was always the whole flight path, and the throw was always drawn as a single arrow beside a single gravity arrow - both hard-coded in _update_trajectory and _update_vector_arrows with no way to say otherwise",
@@ -105,6 +121,24 @@
 				"stack_priority": 0.7,
 				"approach_dir": "front",
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.05,
+					4.11,
+					10.85
+				],
+				"aabb_center": [
+					0.0,
+					1.77,
+					4.49
+				],
+				"grid_cells": [
+					2.0,
+					11.0
+				],
+				"max_dimension_m": 10.85,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

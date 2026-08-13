@@ -1,95 +1,306 @@
 {
-  "category": "resourcemanagement",
-  "description": "Resource Management sequence — the meta layer of the curriculum: how software is made well. Algorithmic complexity, data locality/caching, real-time vs offline, version control, testing/debugging, hardware.",
-  "artifacts": {
-    "big_o_complexity": {
-      "lookup_name": "big_o_complexity",
-      "scene": "res://algorithms/resourcemanagement/big_o_complexity/big_o_complexity.tscn",
-      "class_name": "BigOComplexity",
-      "name": "Algorithmic Complexity (Big O)",
-      "description": "The complexity race — one bar per Big-O class (O(1) to O(2^n)) growing as the input size n sweeps up. At small n they stand level; at large n the quadratic and exponential peg the ceiling and flash OFF CHART. Scale made visible.",
-      "category": "resourcemanagement",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": ["resourcemanagement", "complexity", "big-o", "performance", "scale", "applied"],
-      "parameters": {
-        "n_max": "Largest input size the sweep reaches (default 24)",
-        "sweep_seconds": "Seconds for n to sweep 1 -> n_max (default 8)",
-        "freeze_n": "If > 0, hold at this n (for stills) instead of animating",
-        "max_height": "Chart ceiling height in metres (default 4)"
-      },
-      "spatial_needs": {"footprint_cells": 4, "platform": "step"}
-    },
-    "data_locality_caching": {
-      "lookup_name": "data_locality_caching",
-      "scene": "res://algorithms/resourcemanagement/data_locality_caching/data_locality_caching.tscn",
-      "class_name": "DataLocalityCaching",
-      "name": "Data Locality & Caching",
-      "description": "The memory hierarchy ladder — registers, L1/L2/L3, RAM, disk stacked with log-latency gaps. A probe climbs to fetch: fast (HIT) when data is near, ruinously slow (MISS) when far. Where a thing IS costs more than what it is.",
-      "category": "resourcemanagement",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": ["resourcemanagement", "caching", "memory", "locality", "performance", "applied"],
-      "parameters": {"cycle_seconds": "Seconds for the probe to cycle levels", "freeze_level": "-1 animate; >=0 park the probe at a level for stills"},
-      "spatial_needs": {"footprint_cells": 4}
-    },
-    "realtime_vs_offline": {
-      "lookup_name": "realtime_vs_offline",
-      "scene": "res://algorithms/resourcemanagement/realtime_vs_offline/realtime_vs_offline.tscn",
-      "class_name": "RealtimeVsOffline",
-      "name": "Real-time vs Offline Processing",
-      "description": "Twin pipelines — a real-time lane with a frame deadline (finish or drop, red) and an offline lane with no deadline (all complete, full quality). The clock changes the algorithm.",
-      "category": "resourcemanagement",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": ["resourcemanagement", "realtime", "latency", "throughput", "deadline", "applied"],
-      "parameters": {"item_rate": "Items spawned per second", "freeze": "Static representative frame for stills"},
-      "spatial_needs": {"footprint_cells": 6}
-    },
-    "version_control_tree": {
-      "lookup_name": "version_control_tree",
-      "scene": "res://algorithms/resourcemanagement/version_control_tree/version_control_tree.tscn",
-      "class_name": "VersionControlTree",
-      "name": "Version Control",
-      "description": "A commit tree — a main branch and a feature branch that peels off and merges back, with HEAD advancing commit by commit. History as a navigable branching shape, not a line.",
-      "category": "resourcemanagement",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": ["resourcemanagement", "version-control", "git", "dag", "history", "applied"],
-      "parameters": {"main_commits": "Commits on main", "freeze_head": "-1 animate; >=0 park HEAD at a commit for stills"},
-      "spatial_needs": {"footprint_cells": 6}
-    },
-    "test_harness": {
-      "lookup_name": "test_harness",
-      "scene": "res://algorithms/resourcemanagement/test_harness/test_harness.tscn",
-      "class_name": "TestHarness",
-      "name": "Testing & Debugging",
-      "description": "A test board — a grid of cases that pass green or fail red. Inject a bug and a band flips red; fix it and they heal left to right. A test is a claim about the future.",
-      "category": "resourcemanagement",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": ["resourcemanagement", "testing", "debugging", "ci", "regression", "applied"],
-      "parameters": {"cols": "Test grid columns", "rows": "Test grid rows", "freeze_phase": "-1 animate; 0 green / 1 bug / 2 fixing for stills"},
-      "spatial_needs": {"footprint_cells": 4, "wall_backing": true}
-    },
-    "hardware_cross_section": {
-      "lookup_name": "hardware_cross_section",
-      "scene": "res://algorithms/resourcemanagement/hardware_cross_section/hardware_cross_section.tscn",
-      "class_name": "HardwareCrossSection",
-      "name": "Hardware Considerations",
-      "description": "A machine cutaway — CPU, GPU, RAM, cache, disk strung on a bus, with data tokens flowing at component-specific throughput (cache fast, disk slow). The algorithm runs on a place, not in the abstract.",
-      "category": "resourcemanagement",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": ["resourcemanagement", "hardware", "throughput", "bus", "bandwidth", "applied"],
-      "parameters": {"token_count": "Data tokens on the bus", "flow_speed": "Token flow rate", "freeze": "Static frame for stills"},
-      "spatial_needs": {"footprint_cells": 8}
-    }
-  }
+	"category": "resourcemanagement",
+	"description": "Resource Management sequence \u2014 the meta layer of the curriculum: how software is made well. Algorithmic complexity, data locality/caching, real-time vs offline, version control, testing/debugging, hardware.",
+	"artifacts": {
+		"big_o_complexity": {
+			"lookup_name": "big_o_complexity",
+			"scene": "res://algorithms/resourcemanagement/big_o_complexity/big_o_complexity.tscn",
+			"class_name": "BigOComplexity",
+			"name": "Algorithmic Complexity (Big O)",
+			"description": "The complexity race \u2014 one bar per Big-O class (O(1) to O(2^n)) growing as the input size n sweeps up. At small n they stand level; at large n the quadratic and exponential peg the ceiling and flash OFF CHART. Scale made visible.",
+			"category": "resourcemanagement",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"tags": [
+				"resourcemanagement",
+				"complexity",
+				"big-o",
+				"performance",
+				"scale",
+				"applied"
+			],
+			"parameters": {
+				"n_max": "Largest input size the sweep reaches (default 24)",
+				"sweep_seconds": "Seconds for n to sweep 1 -> n_max (default 8)",
+				"freeze_n": "If > 0, hold at this n (for stills) instead of animating",
+				"max_height": "Chart ceiling height in metres (default 4)"
+			},
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"platform": "step"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.85,
+					4.86,
+					1.33
+				],
+				"aabb_center": [
+					0.0,
+					2.2,
+					0.01
+				],
+				"grid_cells": [
+					6.0,
+					2.0
+				],
+				"max_dimension_m": 5.85,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				6.0,
+				1,
+				2.0
+			]
+		},
+		"data_locality_caching": {
+			"lookup_name": "data_locality_caching",
+			"scene": "res://algorithms/resourcemanagement/data_locality_caching/data_locality_caching.tscn",
+			"class_name": "DataLocalityCaching",
+			"name": "Data Locality & Caching",
+			"description": "The memory hierarchy ladder \u2014 registers, L1/L2/L3, RAM, disk stacked with log-latency gaps. A probe climbs to fetch: fast (HIT) when data is near, ruinously slow (MISS) when far. Where a thing IS costs more than what it is.",
+			"category": "resourcemanagement",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"tags": [
+				"resourcemanagement",
+				"caching",
+				"memory",
+				"locality",
+				"performance",
+				"applied"
+			],
+			"parameters": {
+				"cycle_seconds": "Seconds for the probe to cycle levels",
+				"freeze_level": "-1 animate; >=0 park the probe at a level for stills"
+			},
+			"spatial_needs": {
+				"footprint_cells": 4
+			},
+			"measurements": {
+				"aabb_size": [
+					4.0,
+					6.7,
+					1.4
+				],
+				"aabb_center": [
+					1.0,
+					3.35,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					2.0
+				],
+				"max_dimension_m": 6.7,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				2.0
+			]
+		},
+		"realtime_vs_offline": {
+			"lookup_name": "realtime_vs_offline",
+			"scene": "res://algorithms/resourcemanagement/realtime_vs_offline/realtime_vs_offline.tscn",
+			"class_name": "RealtimeVsOffline",
+			"name": "Real-time vs Offline Processing",
+			"description": "Twin pipelines \u2014 a real-time lane with a frame deadline (finish or drop, red) and an offline lane with no deadline (all complete, full quality). The clock changes the algorithm.",
+			"category": "resourcemanagement",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"tags": [
+				"resourcemanagement",
+				"realtime",
+				"latency",
+				"throughput",
+				"deadline",
+				"applied"
+			],
+			"parameters": {
+				"item_rate": "Items spawned per second",
+				"freeze": "Static representative frame for stills"
+			},
+			"spatial_needs": {
+				"footprint_cells": 6
+			},
+			"measurements": {
+				"aabb_size": [
+					3.4,
+					0.95,
+					0.99
+				],
+				"aabb_center": [
+					0.0,
+					0.38,
+					0.0
+				],
+				"grid_cells": [
+					4,
+					1
+				],
+				"max_dimension_m": 3.4,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				4,
+				1,
+				1
+			]
+		},
+		"version_control_tree": {
+			"lookup_name": "version_control_tree",
+			"scene": "res://algorithms/resourcemanagement/version_control_tree/version_control_tree.tscn",
+			"class_name": "VersionControlTree",
+			"name": "Version Control",
+			"description": "A commit tree \u2014 a main branch and a feature branch that peels off and merges back, with HEAD advancing commit by commit. History as a navigable branching shape, not a line.",
+			"category": "resourcemanagement",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"tags": [
+				"resourcemanagement",
+				"version-control",
+				"git",
+				"dag",
+				"history",
+				"applied"
+			],
+			"parameters": {
+				"main_commits": "Commits on main",
+				"freeze_head": "-1 animate; >=0 park HEAD at a commit for stills"
+			},
+			"spatial_needs": {
+				"footprint_cells": 6
+			},
+			"measurements": {
+				"aabb_size": [
+					3.64,
+					0.99,
+					2.05
+				],
+				"aabb_center": [
+					-0.11,
+					0.22,
+					0.18
+				],
+				"grid_cells": [
+					4,
+					3
+				],
+				"max_dimension_m": 3.64,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				4,
+				1,
+				3
+			]
+		},
+		"test_harness": {
+			"lookup_name": "test_harness",
+			"scene": "res://algorithms/resourcemanagement/test_harness/test_harness.tscn",
+			"class_name": "TestHarness",
+			"name": "Testing & Debugging",
+			"description": "A test board \u2014 a grid of cases that pass green or fail red. Inject a bug and a band flips red; fix it and they heal left to right. A test is a claim about the future.",
+			"category": "resourcemanagement",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"tags": [
+				"resourcemanagement",
+				"testing",
+				"debugging",
+				"ci",
+				"regression",
+				"applied"
+			],
+			"parameters": {
+				"cols": "Test grid columns",
+				"rows": "Test grid rows",
+				"freeze_phase": "-1 animate; 0 green / 1 bug / 2 fixing for stills"
+			},
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"wall_backing": true
+			},
+			"measurements": {
+				"aabb_size": [
+					2.32,
+					2.89,
+					0.19
+				],
+				"aabb_center": [
+					0.0,
+					-0.08,
+					0.01
+				],
+				"grid_cells": [
+					3,
+					1
+				],
+				"max_dimension_m": 2.89,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				3,
+				1,
+				1
+			]
+		},
+		"hardware_cross_section": {
+			"lookup_name": "hardware_cross_section",
+			"scene": "res://algorithms/resourcemanagement/hardware_cross_section/hardware_cross_section.tscn",
+			"class_name": "HardwareCrossSection",
+			"name": "Hardware Considerations",
+			"description": "A machine cutaway \u2014 CPU, GPU, RAM, cache, disk strung on a bus, with data tokens flowing at component-specific throughput (cache fast, disk slow). The algorithm runs on a place, not in the abstract.",
+			"category": "resourcemanagement",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"tags": [
+				"resourcemanagement",
+				"hardware",
+				"throughput",
+				"bus",
+				"bandwidth",
+				"applied"
+			],
+			"parameters": {
+				"token_count": "Data tokens on the bus",
+				"flow_speed": "Token flow rate",
+				"freeze": "Static frame for stills"
+			},
+			"spatial_needs": {
+				"footprint_cells": 8
+			},
+			"measurements": {
+				"aabb_size": [
+					4.9,
+					1.54,
+					1.55
+				],
+				"aabb_center": [
+					0.0,
+					0.65,
+					0.02
+				],
+				"grid_cells": [
+					5,
+					2
+				],
+				"max_dimension_m": 4.9,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				5,
+				1,
+				2
+			]
+		}
+	}
 }

@@ -1,17 +1,27 @@
 {
 	"id": "human_catapult",
 	"name": "Human Catapult",
-	"description": "A catapult that launches the VR PLAYER. Walk into the player-sized basket, set the ANGLE and FORCE on the console, then hit FIRE — the arm swings and the player's body is given a ballistic launch velocity, arcing up and away under gravity. A live launch-velocity arrow and predicted parabola preview where you'll land. Sibling of the teaching `catapult` (which throws a ball); here YOU are the projectile, so the trajectory is felt, not watched. Uses the proven jump_pad / XRToolsPlayerBody.velocity player-launch pattern.",
+	"description": "A catapult that launches the VR PLAYER. Walk into the player-sized basket, set the ANGLE and FORCE on the console, then hit FIRE \u2014 the arm swings and the player's body is given a ballistic launch velocity, arcing up and away under gravity. A live launch-velocity arrow and predicted parabola preview where you'll land. Sibling of the teaching `catapult` (which throws a ball); here YOU are the projectile, so the trajectory is felt, not watched. Uses the proven jump_pad / XRToolsPlayerBody.velocity player-launch pattern.",
 	"category": "vectors",
-	"theoreticalGrounding": "The surest way to understand a launch vector is to be the projectile. p(t)=p0+v0*t+0.5*g*t^2 — angle and force set v0; gravity owns you the instant you leave the cup.",
+	"theoreticalGrounding": "The surest way to understand a launch vector is to be the projectile. p(t)=p0+v0*t+0.5*g*t^2 \u2014 angle and force set v0; gravity owns you the instant you leave the cup.",
 	"artifacts": {
 		"human_catapult": {
 			"dna": {
 				"promoted": "2026-08-05",
 				"stage": "2 - variation",
 				"axes": {
-					"foresight": ["parabola", "apex", "landing", "none"],
-					"vectors": ["sum", "components", "velocity", "gravity"]
+					"foresight": [
+						"parabola",
+						"apex",
+						"landing",
+						"none"
+					],
+					"vectors": [
+						"sum",
+						"components",
+						"velocity",
+						"gravity"
+					]
 				},
 				"default": "foresight=parabola, vectors=velocity - together these are the shipped machine exactly: the full predicted parabola drawn from the basket, plus ONE accent-coloured launch-velocity arrow, with gravity left undrawn. `parabola` is the fall-through arm of _foresight_mesh and runs _arc_mesh, which is the shipped p(t)=p0+v0*t+0.5*g*t^2 loop character for character - same 0.08 s sampling, same `while t < 4.0`, same break at p.y<0, same SurfaceTool LINE_STRIP. `velocity` is the fall-through arm of _build_indicators and runs the same two lines that always built the single arrow, in the same order, so _accent_mats gets the same one entry. MEASURED, not assumed: all three placements carry the bare token form - `human_catapult` in ForcesArena, `human_catapult:90:0` in Force_Preview and VFM_05_Launch. That form is artifact:rotation:y_offset, not config, so not one of them passes a foresight or vectors key, and the new apply_grid_config returns without rebuilding unless a key is present AND differs from the value the node already holds.",
 				"was": "a machine whose only knobs were MAGNITUDES - launch_force, launch_angle, gravity_magnitude. Turning them flings the same body further; none of them is an argument. And the flight is an EVENT, which one still cannot hold. Worse, apply_grid_config was actively harmful: it queue_free()d every child and call_deferred(\"_ready\") on ANY call, including one whose dictionary named nothing this machine owns - and because queue_free only detaches at end of frame, the deferred rebuild could run while the old frame was still parented. That is the force_pad trap, and it is fixed here in the same way.",
@@ -28,15 +38,36 @@
 			"scene": "res://commons/artifacts/human_catapult/human_catapult.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"],
-			"footprint": [2, 4, 2],
-			"tags": ["forces", "catapult", "player_launch", "velocity", "gravity", "projectile", "trajectory", "vr", "ride", "placeable"],
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				2,
+				4,
+				2
+			],
+			"tags": [
+				"forces",
+				"catapult",
+				"player_launch",
+				"velocity",
+				"gravity",
+				"projectile",
+				"trajectory",
+				"vr",
+				"ride",
+				"placeable"
+			],
 			"qfep_connection": "F_force: launch velocity + gravity = the arc you fly; the player becomes the projectile.",
 			"parameters": {
 				"launch_force": 12.0,
 				"launch_angle": 52.0,
 				"gravity_magnitude": 9.8,
-				"footprint": [2, 4, 2],
+				"footprint": [
+					2,
+					4,
+					2
+				],
 				"size_group": "large"
 			},
 			"size_group": "large",
@@ -46,6 +77,24 @@
 				"density": "high",
 				"reading_radius": 4,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.39,
+					5.42,
+					17.55
+				],
+				"aabb_center": [
+					0.2,
+					2.49,
+					7.37
+				],
+				"grid_cells": [
+					3,
+					18
+				],
+				"max_dimension_m": 17.55,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

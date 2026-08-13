@@ -1,708 +1,1543 @@
 {
- "_comment": "Bricolage specimen/affordance family. All entries share one scene (specimen_plinth.tscn); the shape is read from the lookup_name meta the grid stamps before _ready(). Built 2026-07-19 as the reusable wrapper that unblocks Bricolage_Inventory + Bricolage_Affordances.",
- "artifacts": {
-  "point_specimen": {
-   "name": "Point Specimen",
-   "lookup_name": "point_specimen",
-   "description": "The point primitive lifted onto a plinth as a labelled part.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The point as stock: position without extension, shelved as the first part. Bricolage begins by refusing to use a shape and instead cataloguing it — the point held in reserve, a candidate before it is a commitment."
-  },
-  "line_specimen": {
-   "name": "Line Specimen",
-   "lookup_name": "line_specimen",
-   "description": "The line primitive on a plinth as a labelled part.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The line as stock: a direction held in reserve. On the plinth it stops being a connection and becomes a *part* — the raw length the bricoleur reaches for when two things must be joined or spanned."
-  },
-  "triangle_specimen": {
-   "name": "Triangle Specimen",
-   "lookup_name": "triangle_specimen",
-   "description": "The triangle primitive on a plinth as a labelled part.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The triangle as stock: the first rigid part. Shelved beside the others it advertises what it alone offers — triangulation, the one primitive that cannot be racked without stiffening whatever it joins. The dome three maps later is made of nothing else."
-  },
-  "plane_specimen": {
-   "name": "Plane Specimen",
-   "lookup_name": "plane_specimen",
-   "description": "The plane primitive on a plinth as a labelled part.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The plane as stock: a surface waiting for a use. Category says 'flat thing'; the affordance room next door will make it a seat or a wall. Here it is neither yet — a part whose meaning is still open, which is the whole bricolage bet."
-  },
-  "cube_specimen": {
-   "name": "Cube Specimen",
-   "lookup_name": "cube_specimen",
-   "description": "The cube primitive on a plinth as a labelled part.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The cube as stock: the block, the volume of the grid boxed and set aside. The most obviously useful part on the shelf, and therefore the one the bricoleur must be most careful not to reach for by habit.",
-   "spatial_needs": {
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "platform": "none",
-    "player_position": "front",
-    "wall_backing": false
-   }
-  },
-  "sphere_specimen": {
-   "name": "Sphere Specimen",
-   "lookup_name": "sphere_specimen",
-   "description": "The sphere primitive on a plinth as a labelled part.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The sphere as stock: the joint, the hub, the pivot. Racked as a specimen it reads as potential rotation — the part you add where two struts must turn against each other. Not everything is a corner, and not every part wants to stay still."
-  },
-  "cylinder_specimen": {
-   "name": "Cylinder Specimen",
-   "lookup_name": "cylinder_specimen",
-   "description": "The cylinder primitive on a plinth as a labelled part.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The cylinder as stock: the axle and the column at once. The specimen that most obviously changes meaning with orientation — lay it down and it spins, stand it up and it bears load. A part defined by which way you shelve it."
-  },
-  "torus_specimen": {
-   "name": "Torus Specimen",
-   "lookup_name": "torus_specimen",
-   "description": "The torus primitive on a plinth as a labelled part.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The torus as stock: the ring, the loop, the hole you cannot fill. The oddest part on the shelf — useful precisely for its absence, the gap it carries. Bricolage's reminder that a part can be a thing that is mostly not-there."
-  },
-  "inventory_workbench": {
-   "name": "Inventory Workbench",
-   "lookup_name": "inventory_workbench",
-   "description": "The specimen rack — the eight primitives arrayed on one bench.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The rack that holds them all: the eight primitives in a row, parts before they are used. This is the bricoleur's true instrument — not any single shape but the *inventory*, the held collection from which structure will be improvised. Construction without blueprint starts here, with everything laid out and nothing yet decided."
-  },
-  "cylinder_as_axle": {
-   "name": "Cylinder as Axle",
-   "lookup_name": "cylinder_as_axle",
-   "description": "The cylinder laid horizontal between two wheels — rotation as its use.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The same cylinder from the inventory shelf, laid down — and lying down it becomes an axle, the part things turn around. First lesson of the affordance room: orientation is meaning. Nothing about the shape changed; its job did."
-  },
-  "cylinder_as_column": {
-   "name": "Cylinder as Column",
-   "lookup_name": "cylinder_as_column",
-   "description": "The cylinder stood upright bearing a lintel — load as its use.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "Stand the same cylinder up and it becomes a column, the part that bears. The lintel resting on it is the witness: a column is only a column under load. Category says cylinder twice; action says axle here, column there — and building is done with actions."
-  },
-  "plane_as_seat": {
-   "name": "Plane as Seat",
-   "lookup_name": "plane_as_seat",
-   "description": "The plane held flat at knee height on two legs — support as its use.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The plane held flat at sitting height stops being geometry and becomes furniture: a seat is a plane at the height a body folds. The legs are witnesses, not the point — the point is that flatness plus a height plus a body equals an affordance."
-  },
-  "plane_as_wall": {
-   "name": "Plane as Wall",
-   "lookup_name": "plane_as_wall",
-   "description": "The plane stood on edge — division as its use.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "Stood on edge, the same plane divides: this side, that side, a before and after of a room. The wall needs no witness geometry at all — verticality alone converts a surface into a boundary. The cheapest affordance, and the most political."
-  },
-  "sphere_as_hub": {
-   "name": "Sphere as Hub",
-   "lookup_name": "sphere_as_hub",
-   "description": "The sphere with four spokes radiating — connection as its use.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "Give the sphere spokes and it becomes a hub — the part everything radiates from. Roundness that meant perfection on the inventory shelf here means omnidirectionality: a hub accepts members from any angle, which no cornered part can promise."
-  },
-  "sphere_as_joint": {
-   "name": "Sphere as Joint",
-   "lookup_name": "sphere_as_joint",
-   "description": "The sphere where two members meet at an angle — articulation as its use.",
-   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
-   "category": "bricolage",
-   "artifact_type": "specimen",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "Two members meet at the sphere and can re-decide their angle: a joint. Where the hub is many connections at rest, the joint is one connection in negotiation — the sphere as the part that lets a structure bend without breaking. The chair two maps later hinges on exactly this."
-  },
-  "linear_array_demo": {
-   "name": "Linear Array Probe",
-   "lookup_name": "linear_array_demo",
-   "description": "Seven cubes under a law of nexts — the queue.",
-   "scene": "res://commons/artifacts/array_probe/array_probe.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The linear array: the same seven parts placed by a law of NEXTS, each element defined by following the last. The queue, the sentence, the timeline — the first and plainest way a count becomes a form. Bricolage reads it as a probe: what does this inventory look like exhausted one-after-another?"
-  },
-  "radial_array_demo": {
-   "name": "Radial Array Probe",
-   "lookup_name": "radial_array_demo",
-   "description": "Seven cubes under a law of angles — the council.",
-   "scene": "res://commons/artifacts/array_probe/array_probe.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The radial array: the same seven parts placed by a law of ANGLES, each element defined by its share of the circle. No first, no last — the council, the clock, the rose window. The probe that shows order without precedence: exhaust the same count around a center and hierarchy dissolves into membership."
-  },
-  "grid_array_demo": {
-   "name": "Grid Array Probe",
-   "lookup_name": "grid_array_demo",
-   "description": "Seven cubes under a law of rows and columns — the field.",
-   "scene": "res://commons/artifacts/array_probe/array_probe.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The grid array: the same seven parts placed by a law of ROWS AND COLUMNS, each element addressed twice. The field, the city block, this project entire floor system. The probe closest to home — exhaust a count in two indices and you get the space every map here is made of."
-  },
-  "stack_array_demo": {
-   "name": "Stack Array Probe",
-   "lookup_name": "stack_array_demo",
-   "description": "Seven cubes under a law of aboves — the tower.",
-   "scene": "res://commons/artifacts/array_probe/array_probe.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The stack array: the same seven parts placed by a law of ABOVES, each element resting on the one before. The tower, the pile, the undo history. The only arrangement where order is load-bearing — remove the middle and everything above it matters. Exhaustion with consequences."
-  },
-  "balance_fail_demo": {
-   "name": "Balance — Fail",
-   "lookup_name": "balance_fail_demo",
-   "description": "A stack whose courses creep outward until the mass leaves the base; it leans.",
-   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "Balance as the second thing that pushes back: each course steps a little further out, and there is a moment — invisible, arithmetical — when the centre of mass crosses the edge of the footing and the stack stops being a stack. Nothing is broken. It simply leaned past a number."
-  },
-  "balance_pass_demo": {
-   "name": "Balance — Pass",
-   "lookup_name": "balance_pass_demo",
-   "description": "The same courses stacked over the footing, upright and stable.",
-   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The same blocks, centred. Balance is the cheapest constraint to satisfy and the easiest to lose: it asks only that the mass stay over the base, and it is indifferent to how beautiful the leaning version looked. The sculpture room two maps later is this constraint made into a practice."
-  },
-  "gravity_fail_demo": {
-   "name": "Gravity — Fail",
-   "lookup_name": "gravity_fail_demo",
-   "description": "An unsupported span, dropped, with the load it could not carry lying on the pad.",
-   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "Gravity as the first thing that pushes back: the span reaches past its post and there is nothing under the far end, so the far end is on the floor. The bricoleur's first discovery is not a shape but an absence — the member that was never there. You cannot argue with a fallen beam."
-  },
-  "gravity_pass_demo": {
-   "name": "Gravity — Pass",
-   "lookup_name": "gravity_pass_demo",
-   "description": "The same span carried by two posts, level, bearing its load.",
-   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The same members, one addition: a second post under the far end. Nothing about the beam changed — only what stands beneath it. This is the whole lesson of support in one comparison: structure is not a property of the part, it is a relation between parts."
-  },
-  "triangulation_fail_demo": {
-   "name": "Triangulation — Fail",
-   "lookup_name": "triangulation_fail_demo",
-   "description": "A four-member frame racked into a parallelogram — the quad hinges.",
-   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "Connectivity as the third thing that pushes back: four members pinned into a square are not a square, they are a hinge that happens to be square right now. Push it and it becomes a parallelogram. The frame has enough parts and still no rigidity — quantity was never the missing thing."
-  },
-  "triangulation_pass_demo": {
-   "name": "Triangulation — Pass",
-   "lookup_name": "triangulation_pass_demo",
-   "description": "The same frame with one diagonal — two triangles, rigid.",
-   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "basic",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "One diagonal, and the hinge dies. The quad becomes two triangles, and a triangle cannot deform without changing the length of a side. This is the member the dome room is entirely made of: triangulation is what struts want to become, and the whole geodesic payoff is this single comparison, repeated over a sphere."
-  },
-  "icosahedron_base": {
-   "name": "Icosahedron Base",
-   "lookup_name": "icosahedron_base",
-   "description": "The twenty-face seed solid, rendered as a strut frame.",
-   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The seed: twenty identical triangles, the most faces a regular solid can have. Every geodesic dome in the world starts here — not because the icosahedron is dome-shaped, but because it is the closest a perfectly regular thing gets to a sphere. Bricolage begins with the best available part, not the ideal one.",
-   "dna": {
-    "promoted": "2026-07-29",
-    "stage": "2 - variation",
-    "axes": {
-     "subdivision": [
-      "v1",
-      "v2",
-      "v3",
-      "v4"
-     ]
-    },
-    "default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
-    "was": "the seed solid held at frequency 1 — the twenty faces before any subdivision, unable to show what happens next",
-    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
-   }
-  },
-  "subdivision_demo": {
-   "name": "Subdivision",
-   "lookup_name": "subdivision_demo",
-   "description": "One icosahedron face at frequency 1, 2 and 3 — the multiplication, left to right.",
-   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The operation that turns a solid into a sphere: split each triangle into four, push the new corners out to the sphere, repeat. Frequency is the only dial. Left to right you watch a face become four and then nine — and the curve is not drawn at any point, it is what the projection leaves behind.",
-   "dna": {
-    "promoted": "2026-07-29",
-    "stage": "2 - variation",
-    "axes": {
-     "subdivision": [
-      "v1",
-      "v2",
-      "v3",
-      "v4"
-     ]
-    },
-    "default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
-    "was": "a demonstration of subdivision whose subdivision was a constant",
-    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
-   }
-  },
-  "strut_inventory": {
-   "name": "Strut Inventory",
-   "lookup_name": "strut_inventory",
-   "description": "The rack of distinct strut lengths a subdivided dome resolves to.",
-   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The stock, and the reason domes are buildable: a subdivided sphere has hundreds of edges but only a handful of distinct LENGTHS. Sort them, cut them, and the whole curve is orderable from a short list. This is the moment bricolage becomes manufacture — the sphere reduced to a parts order.",
-   "dna": {
-    "promoted": "2026-07-29",
-    "stage": "2 - variation",
-    "axes": {
-     "subdivision": [
-      "v1",
-      "v2",
-      "v3",
-      "v4"
-     ]
-    },
-    "default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
-    "was": "the stock list held at 2V, so the count of distinct strut lengths — the thing the inventory exists to report — could never change",
-    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
-   }
-  },
-  "dome_builder": {
-   "name": "Dome Builder",
-   "lookup_name": "dome_builder",
-   "description": "The frame half raised: the base band standing, the remaining struts still stock.",
-   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "Assembly caught in the middle — the lower band triangulated and standing, the rest still lying flat as lengths. The half-built state is the honest one: a dome is not placed, it is closed, ring by ring, and until the last ring goes in every triangle below is already carrying itself.",
-   "dna": {
-    "promoted": "2026-07-29",
-    "stage": "2 - variation",
-    "axes": {
-     "subdivision": [
-      "v1",
-      "v2",
-      "v3",
-      "v4"
-     ]
-    },
-    "default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
-    "was": "the geodesic frequency was frozen at 2V, so the dome could not show that its curve is a consequence of how many times you subdivide",
-    "note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
-   }
-  },
-  "geodesic_dome": {
-   "dna": {
-    "promoted": "2026-08-03",
-    "stage": "2 - variation",
-    "axes": {
-     "subdivision": [
-      "v2",
-      "v1",
-      "v3",
-      "v4"
-     ],
-     "member": [
-      "strut",
-      "panel",
-      "clad",
-      "node"
-     ]
-    },
-    "default": "subdivision=v2, member=strut - v2 is the halving the shipped code always called and strut runs that identical loop over the identical edge list, so the 39 map cells naming this token stand exactly the dome they stood before",
-    "was": "subdivision was declared 2026-07-29 but the entry was never given the rest of its block; member is new — the dome could only ever be an assembly of cylinders, so the room could teach that the curve is derived and never that the struts are one choice of how to hold it",
-    "note": "member argues substance where subdivision argues resolution, and the two are orthogonal by construction: same radius, same hemisphere cut, every member value reads at every frequency. Applies to the DOME station only — the builder station is mid-assembly, and 'half raised' is a claim about members going up one at a time that a shell has no version of. The shell emits both windings because Grid.gdshader is cull_back and a one-sided hemisphere disappears from the inside."
-   },
-   "name": "Geodesic Dome",
-   "lookup_name": "geodesic_dome",
-   "description": "A 2V hemisphere standing on its ring — the payoff of the sequence.",
-   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "What triangulated struts want to become. Nobody designed this curve: someone chose a seed solid and a subdivision frequency, and the sphere did the rest. It is the constraint room's lesson repeated over a whole surface — every quad would hinge, every triangle cannot — and it is bricolage formalised, the point where recombination stops being improvisation and becomes a method you can hand to someone else.",
-   "measurements": {
-    "aabb_size": [
-     1.7,
-     0.835,
-     1.749
-    ],
-    "aabb_center": [
-     0.0,
-     0.418,
-     0.024
-    ],
-    "grid_cells": [
-     2,
-     2
-    ],
-    "max_dimension_m": 1.749,
-    "measured_at": "2026-07-23T10:42:46Z",
-    "source": "probe_artifact_elements"
-   },
-   "footprint_measured": [
-    2,
-    1,
-    2
-   ],
-   "spatial_needs": {
-    "footprint_cells": 4,
-    "footprint_source": "probe_artifact_elements"
-   }
-  },
-  "counterweight_demo": {
-   "name": "Counterweight",
-   "lookup_name": "counterweight_demo",
-   "description": "A beam on a fulcrum: the large mass close in, the small mass far out — the lever law, sized so the arithmetic holds.",
-   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The principle the whole room negotiates with: mass times distance, both sides, equal. The big block sits a quarter of the way out because it is four times the volume of the small one — the beam is not balanced by care, it is balanced by arithmetic. What the sculptor gets in return is everything else: once that one number is satisfied, the form above the fulcrum is free."
-  },
-  "tension_demo": {
-   "name": "Tension",
-   "lookup_name": "tension_demo",
-   "description": "The same load held two ways — a thin tie pulling from above, a thick strut pushing from below.",
-   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "A tie pulls where a strut pushes. Both carry the same load, and the tie can be a fraction of the thickness because pulling never buckles — which is why suspension outperforms propping wherever you can hang instead of stack. Set side by side, the pair explains why sculpture that hangs looks impossibly thin and is not cheating."
-  },
-  "sculpture_builder": {
-   "name": "Sculpture Bench",
-   "lookup_name": "sculpture_builder",
-   "description": "The fulcrum with a composition part-made, the remaining parts still loose on the pad.",
-   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "Balance caught mid-negotiation: a beam resting askew, one mass placed, three more waiting. This is the honest state of the practice — you do not calculate a sculpture and then build it, you place, watch it tip, and move something. The bench is where the constraint stops being a rule and becomes a conversation."
-  },
-  "balanced_sculpture_1": {
-   "name": "Work I",
-   "lookup_name": "balanced_sculpture_1",
-   "description": "A finished piece balanced the counterweight way: a heavy mass near the post, a long arm reaching to a small one.",
-   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The first solution — the lever answer. A tall mass sits close to the post and a long arm reaches out to a small one, with an accent hung below to settle it. It reads as asymmetric and is exactly balanced; the eye registers imbalance and the arithmetic disagrees. That gap is where the pleasure of the form lives."
-  },
-  "balanced_sculpture_2": {
-   "name": "Work II",
-   "lookup_name": "balanced_sculpture_2",
-   "description": "The other solution: three members leaning into one another, none of which stands alone.",
-   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "qfep_connection": "The second answer to the same problem, and it shares no strategy with the first. Three members lean into a shared cap; remove any one and the other two fall. Nothing here is counterweighted — the balance is mutual, meaning through relation exactly as the room's title claims. Two works, both upright, disagreeing about how: which is what makes balance a craft and not a rule."
-  },
-  "chair_parts_inventory": {
-   "name": "Chair Parts Inventory",
-   "lookup_name": "chair_parts_inventory",
-   "description": "Four cylinder legs racked as stock, seat and back planes leaning — the chair before anyone decides it is one.",
-   "qfep_connection": "Stock is a claim withheld: the same cylinders the affordance plinths named 'column' wait here without a verdict.",
-   "scene": "res://commons/artifacts/chair_kit/chair_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "footprint": [
-    1,
-    1
-   ]
-  },
-  "chair_builder": {
-   "name": "Chair Builder",
-   "lookup_name": "chair_builder",
-   "description": "Legs standing at their corners, the seat lowered halfway — assembly caught at the moment affordance becomes commitment.",
-   "qfep_connection": "The joint is the decision made rigid: between stock and chair there is a moment where the plane could still be a wall.",
-   "scene": "res://commons/artifacts/chair_kit/chair_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "footprint": [
-    1,
-    1
-   ]
-  },
-  "chair_assembled": {
-   "name": "Chair Assembled",
-   "lookup_name": "chair_assembled",
-   "description": "The finished chair — a plane at knee height on four columns, the back risen. Nothing here that was not already in the inventory.",
-   "qfep_connection": "A chair is a treaty between a plane and four columns; sitting was never invented, only noticed and made rigid.",
-   "scene": "res://commons/artifacts/chair_kit/chair_kit.tscn",
-   "category": "bricolage",
-   "artifact_type": "demonstration",
-   "complexity": "intermediate",
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "bricolage"
-   ],
-   "footprint": [
-    1,
-    1
-   ]
-  }
- }
+	"_comment": "Bricolage specimen/affordance family. All entries share one scene (specimen_plinth.tscn); the shape is read from the lookup_name meta the grid stamps before _ready(). Built 2026-07-19 as the reusable wrapper that unblocks Bricolage_Inventory + Bricolage_Affordances.",
+	"artifacts": {
+		"point_specimen": {
+			"name": "Point Specimen",
+			"lookup_name": "point_specimen",
+			"description": "The point primitive lifted onto a plinth as a labelled part.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The point as stock: position without extension, shelved as the first part. Bricolage begins by refusing to use a shape and instead cataloguing it \u2014 the point held in reserve, a candidate before it is a commitment.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"line_specimen": {
+			"name": "Line Specimen",
+			"lookup_name": "line_specimen",
+			"description": "The line primitive on a plinth as a labelled part.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The line as stock: a direction held in reserve. On the plinth it stops being a connection and becomes a *part* \u2014 the raw length the bricoleur reaches for when two things must be joined or spanned.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"triangle_specimen": {
+			"name": "Triangle Specimen",
+			"lookup_name": "triangle_specimen",
+			"description": "The triangle primitive on a plinth as a labelled part.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The triangle as stock: the first rigid part. Shelved beside the others it advertises what it alone offers \u2014 triangulation, the one primitive that cannot be racked without stiffening whatever it joins. The dome three maps later is made of nothing else.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"plane_specimen": {
+			"name": "Plane Specimen",
+			"lookup_name": "plane_specimen",
+			"description": "The plane primitive on a plinth as a labelled part.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The plane as stock: a surface waiting for a use. Category says 'flat thing'; the affordance room next door will make it a seat or a wall. Here it is neither yet \u2014 a part whose meaning is still open, which is the whole bricolage bet.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"cube_specimen": {
+			"name": "Cube Specimen",
+			"lookup_name": "cube_specimen",
+			"description": "The cube primitive on a plinth as a labelled part.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The cube as stock: the block, the volume of the grid boxed and set aside. The most obviously useful part on the shelf, and therefore the one the bricoleur must be most careful not to reach for by habit.",
+			"spatial_needs": {
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"platform": "none",
+				"player_position": "front",
+				"wall_backing": false
+			},
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"sphere_specimen": {
+			"name": "Sphere Specimen",
+			"lookup_name": "sphere_specimen",
+			"description": "The sphere primitive on a plinth as a labelled part.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The sphere as stock: the joint, the hub, the pivot. Racked as a specimen it reads as potential rotation \u2014 the part you add where two struts must turn against each other. Not everything is a corner, and not every part wants to stay still.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"cylinder_specimen": {
+			"name": "Cylinder Specimen",
+			"lookup_name": "cylinder_specimen",
+			"description": "The cylinder primitive on a plinth as a labelled part.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The cylinder as stock: the axle and the column at once. The specimen that most obviously changes meaning with orientation \u2014 lay it down and it spins, stand it up and it bears load. A part defined by which way you shelve it.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"torus_specimen": {
+			"name": "Torus Specimen",
+			"lookup_name": "torus_specimen",
+			"description": "The torus primitive on a plinth as a labelled part.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The torus as stock: the ring, the loop, the hole you cannot fill. The oddest part on the shelf \u2014 useful precisely for its absence, the gap it carries. Bricolage's reminder that a part can be a thing that is mostly not-there.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"inventory_workbench": {
+			"name": "Inventory Workbench",
+			"lookup_name": "inventory_workbench",
+			"description": "The specimen rack \u2014 the eight primitives arrayed on one bench.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The rack that holds them all: the eight primitives in a row, parts before they are used. This is the bricoleur's true instrument \u2014 not any single shape but the *inventory*, the held collection from which structure will be improvised. Construction without blueprint starts here, with everything laid out and nothing yet decided.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"cylinder_as_axle": {
+			"name": "Cylinder as Axle",
+			"lookup_name": "cylinder_as_axle",
+			"description": "The cylinder laid horizontal between two wheels \u2014 rotation as its use.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The same cylinder from the inventory shelf, laid down \u2014 and lying down it becomes an axle, the part things turn around. First lesson of the affordance room: orientation is meaning. Nothing about the shape changed; its job did.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"cylinder_as_column": {
+			"name": "Cylinder as Column",
+			"lookup_name": "cylinder_as_column",
+			"description": "The cylinder stood upright bearing a lintel \u2014 load as its use.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "Stand the same cylinder up and it becomes a column, the part that bears. The lintel resting on it is the witness: a column is only a column under load. Category says cylinder twice; action says axle here, column there \u2014 and building is done with actions.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"plane_as_seat": {
+			"name": "Plane as Seat",
+			"lookup_name": "plane_as_seat",
+			"description": "The plane held flat at knee height on two legs \u2014 support as its use.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The plane held flat at sitting height stops being geometry and becomes furniture: a seat is a plane at the height a body folds. The legs are witnesses, not the point \u2014 the point is that flatness plus a height plus a body equals an affordance.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"plane_as_wall": {
+			"name": "Plane as Wall",
+			"lookup_name": "plane_as_wall",
+			"description": "The plane stood on edge \u2014 division as its use.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "Stood on edge, the same plane divides: this side, that side, a before and after of a room. The wall needs no witness geometry at all \u2014 verticality alone converts a surface into a boundary. The cheapest affordance, and the most political.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"sphere_as_hub": {
+			"name": "Sphere as Hub",
+			"lookup_name": "sphere_as_hub",
+			"description": "The sphere with four spokes radiating \u2014 connection as its use.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "Give the sphere spokes and it becomes a hub \u2014 the part everything radiates from. Roundness that meant perfection on the inventory shelf here means omnidirectionality: a hub accepts members from any angle, which no cornered part can promise.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"sphere_as_joint": {
+			"name": "Sphere as Joint",
+			"lookup_name": "sphere_as_joint",
+			"description": "The sphere where two members meet at an angle \u2014 articulation as its use.",
+			"scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+			"category": "bricolage",
+			"artifact_type": "specimen",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "Two members meet at the sphere and can re-decide their angle: a joint. Where the hub is many connections at rest, the joint is one connection in negotiation \u2014 the sphere as the part that lets a structure bend without breaking. The chair two maps later hinges on exactly this.",
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.0,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"linear_array_demo": {
+			"name": "Linear Array Probe",
+			"lookup_name": "linear_array_demo",
+			"description": "Seven cubes under a law of nexts \u2014 the queue.",
+			"scene": "res://commons/artifacts/array_probe/array_probe.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The linear array: the same seven parts placed by a law of NEXTS, each element defined by following the last. The queue, the sentence, the timeline \u2014 the first and plainest way a count becomes a form. Bricolage reads it as a probe: what does this inventory look like exhausted one-after-another?",
+			"measurements": {
+				"aabb_size": [
+					1.72,
+					0.16,
+					0.73
+				],
+				"aabb_center": [
+					0.0,
+					0.08,
+					0.28
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.72,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		},
+		"radial_array_demo": {
+			"name": "Radial Array Probe",
+			"lookup_name": "radial_array_demo",
+			"description": "Seven cubes under a law of angles \u2014 the council.",
+			"scene": "res://commons/artifacts/array_probe/array_probe.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The radial array: the same seven parts placed by a law of ANGLES, each element defined by its share of the circle. No first, no last \u2014 the council, the clock, the rose window. The probe that shows order without precedence: exhaust the same count around a center and hierarchy dissolves into membership.",
+			"measurements": {
+				"aabb_size": [
+					1.72,
+					0.16,
+					0.73
+				],
+				"aabb_center": [
+					0.0,
+					0.08,
+					0.28
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.72,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		},
+		"grid_array_demo": {
+			"name": "Grid Array Probe",
+			"lookup_name": "grid_array_demo",
+			"description": "Seven cubes under a law of rows and columns \u2014 the field.",
+			"scene": "res://commons/artifacts/array_probe/array_probe.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The grid array: the same seven parts placed by a law of ROWS AND COLUMNS, each element addressed twice. The field, the city block, this project entire floor system. The probe closest to home \u2014 exhaust a count in two indices and you get the space every map here is made of.",
+			"measurements": {
+				"aabb_size": [
+					1.72,
+					0.16,
+					0.73
+				],
+				"aabb_center": [
+					0.0,
+					0.08,
+					0.28
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.72,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		},
+		"stack_array_demo": {
+			"name": "Stack Array Probe",
+			"lookup_name": "stack_array_demo",
+			"description": "Seven cubes under a law of aboves \u2014 the tower.",
+			"scene": "res://commons/artifacts/array_probe/array_probe.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The stack array: the same seven parts placed by a law of ABOVES, each element resting on the one before. The tower, the pile, the undo history. The only arrangement where order is load-bearing \u2014 remove the middle and everything above it matters. Exhaustion with consequences.",
+			"measurements": {
+				"aabb_size": [
+					1.72,
+					0.16,
+					0.73
+				],
+				"aabb_center": [
+					0.0,
+					0.08,
+					0.28
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.72,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		},
+		"balance_fail_demo": {
+			"name": "Balance \u2014 Fail",
+			"lookup_name": "balance_fail_demo",
+			"description": "A stack whose courses creep outward until the mass leaves the base; it leans.",
+			"scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "Balance as the second thing that pushes back: each course steps a little further out, and there is a moment \u2014 invisible, arithmetical \u2014 when the centre of mass crosses the edge of the footing and the stack stops being a stack. Nothing is broken. It simply leaned past a number.",
+			"measurements": {
+				"aabb_size": [
+					0.92,
+					0.67,
+					0.97
+				],
+				"aabb_center": [
+					0.0,
+					0.34,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"balance_pass_demo": {
+			"name": "Balance \u2014 Pass",
+			"lookup_name": "balance_pass_demo",
+			"description": "The same courses stacked over the footing, upright and stable.",
+			"scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The same blocks, centred. Balance is the cheapest constraint to satisfy and the easiest to lose: it asks only that the mass stay over the base, and it is indifferent to how beautiful the leaning version looked. The sculpture room two maps later is this constraint made into a practice.",
+			"measurements": {
+				"aabb_size": [
+					0.92,
+					0.67,
+					0.97
+				],
+				"aabb_center": [
+					0.0,
+					0.34,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"gravity_fail_demo": {
+			"name": "Gravity \u2014 Fail",
+			"lookup_name": "gravity_fail_demo",
+			"description": "An unsupported span, dropped, with the load it could not carry lying on the pad.",
+			"scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "Gravity as the first thing that pushes back: the span reaches past its post and there is nothing under the far end, so the far end is on the floor. The bricoleur's first discovery is not a shape but an absence \u2014 the member that was never there. You cannot argue with a fallen beam.",
+			"measurements": {
+				"aabb_size": [
+					0.92,
+					0.67,
+					0.97
+				],
+				"aabb_center": [
+					0.0,
+					0.34,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"gravity_pass_demo": {
+			"name": "Gravity \u2014 Pass",
+			"lookup_name": "gravity_pass_demo",
+			"description": "The same span carried by two posts, level, bearing its load.",
+			"scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The same members, one addition: a second post under the far end. Nothing about the beam changed \u2014 only what stands beneath it. This is the whole lesson of support in one comparison: structure is not a property of the part, it is a relation between parts.",
+			"measurements": {
+				"aabb_size": [
+					0.92,
+					0.67,
+					0.97
+				],
+				"aabb_center": [
+					0.0,
+					0.34,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"triangulation_fail_demo": {
+			"name": "Triangulation \u2014 Fail",
+			"lookup_name": "triangulation_fail_demo",
+			"description": "A four-member frame racked into a parallelogram \u2014 the quad hinges.",
+			"scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "Connectivity as the third thing that pushes back: four members pinned into a square are not a square, they are a hinge that happens to be square right now. Push it and it becomes a parallelogram. The frame has enough parts and still no rigidity \u2014 quantity was never the missing thing.",
+			"measurements": {
+				"aabb_size": [
+					0.92,
+					0.67,
+					0.97
+				],
+				"aabb_center": [
+					0.0,
+					0.34,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"triangulation_pass_demo": {
+			"name": "Triangulation \u2014 Pass",
+			"lookup_name": "triangulation_pass_demo",
+			"description": "The same frame with one diagonal \u2014 two triangles, rigid.",
+			"scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "basic",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "One diagonal, and the hinge dies. The quad becomes two triangles, and a triangle cannot deform without changing the length of a side. This is the member the dome room is entirely made of: triangulation is what struts want to become, and the whole geodesic payoff is this single comparison, repeated over a sphere.",
+			"measurements": {
+				"aabb_size": [
+					0.92,
+					0.67,
+					0.97
+				],
+				"aabb_center": [
+					0.0,
+					0.34,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"icosahedron_base": {
+			"name": "Icosahedron Base",
+			"lookup_name": "icosahedron_base",
+			"description": "The twenty-face seed solid, rendered as a strut frame.",
+			"scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The seed: twenty identical triangles, the most faces a regular solid can have. Every geodesic dome in the world starts here \u2014 not because the icosahedron is dome-shaped, but because it is the closest a perfectly regular thing gets to a sphere. Bricolage begins with the best available part, not the ideal one.",
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"subdivision": [
+						"v1",
+						"v2",
+						"v3",
+						"v4"
+					]
+				},
+				"default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
+				"was": "the seed solid held at frequency 1 \u2014 the twenty faces before any subdivision, unable to show what happens next",
+				"note": "declared by hand 2026-07-29 \u2014 the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.71,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.35,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"subdivision_demo": {
+			"name": "Subdivision",
+			"lookup_name": "subdivision_demo",
+			"description": "One icosahedron face at frequency 1, 2 and 3 \u2014 the multiplication, left to right.",
+			"scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The operation that turns a solid into a sphere: split each triangle into four, push the new corners out to the sphere, repeat. Frequency is the only dial. Left to right you watch a face become four and then nine \u2014 and the curve is not drawn at any point, it is what the projection leaves behind.",
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"subdivision": [
+						"v1",
+						"v2",
+						"v3",
+						"v4"
+					]
+				},
+				"default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
+				"was": "a demonstration of subdivision whose subdivision was a constant",
+				"note": "declared by hand 2026-07-29 \u2014 the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.71,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.35,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"strut_inventory": {
+			"name": "Strut Inventory",
+			"lookup_name": "strut_inventory",
+			"description": "The rack of distinct strut lengths a subdivided dome resolves to.",
+			"scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The stock, and the reason domes are buildable: a subdivided sphere has hundreds of edges but only a handful of distinct LENGTHS. Sort them, cut them, and the whole curve is orderable from a short list. This is the moment bricolage becomes manufacture \u2014 the sphere reduced to a parts order.",
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"subdivision": [
+						"v1",
+						"v2",
+						"v3",
+						"v4"
+					]
+				},
+				"default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
+				"was": "the stock list held at 2V, so the count of distinct strut lengths \u2014 the thing the inventory exists to report \u2014 could never change",
+				"note": "declared by hand 2026-07-29 \u2014 the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.71,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.35,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"dome_builder": {
+			"name": "Dome Builder",
+			"lookup_name": "dome_builder",
+			"description": "The frame half raised: the base band standing, the remaining struts still stock.",
+			"scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "Assembly caught in the middle \u2014 the lower band triangulated and standing, the rest still lying flat as lengths. The half-built state is the honest one: a dome is not placed, it is closed, ring by ring, and until the last ring goes in every triangle below is already carrying itself.",
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"subdivision": [
+						"v1",
+						"v2",
+						"v3",
+						"v4"
+					]
+				},
+				"default": "subdivision=v2 - the shipped code path, so existing placements are unchanged",
+				"was": "the geodesic frequency was frozen at 2V, so the dome could not show that its curve is a consequence of how many times you subdivide",
+				"note": "declared by hand 2026-07-29 \u2014 the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.71,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.35,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"geodesic_dome": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"subdivision": [
+						"v2",
+						"v1",
+						"v3",
+						"v4"
+					],
+					"member": [
+						"strut",
+						"panel",
+						"clad",
+						"node"
+					]
+				},
+				"default": "subdivision=v2, member=strut - v2 is the halving the shipped code always called and strut runs that identical loop over the identical edge list, so the 39 map cells naming this token stand exactly the dome they stood before",
+				"was": "subdivision was declared 2026-07-29 but the entry was never given the rest of its block; member is new \u2014 the dome could only ever be an assembly of cylinders, so the room could teach that the curve is derived and never that the struts are one choice of how to hold it",
+				"note": "member argues substance where subdivision argues resolution, and the two are orthogonal by construction: same radius, same hemisphere cut, every member value reads at every frequency. Applies to the DOME station only \u2014 the builder station is mid-assembly, and 'half raised' is a claim about members going up one at a time that a shell has no version of. The shell emits both windings because Grid.gdshader is cull_back and a one-sided hemisphere disappears from the inside."
+			},
+			"name": "Geodesic Dome",
+			"lookup_name": "geodesic_dome",
+			"description": "A 2V hemisphere standing on its ring \u2014 the payoff of the sequence.",
+			"scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "What triangulated struts want to become. Nobody designed this curve: someone chose a seed solid and a subdivision frequency, and the sphere did the rest. It is the constraint room's lesson repeated over a whole surface \u2014 every quad would hinge, every triangle cannot \u2014 and it is bricolage formalised, the point where recombination stops being improvisation and becomes a method you can hand to someone else.",
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.71,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.35,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_needs": {
+				"footprint_cells": 4,
+				"footprint_source": "probe_artifact_elements"
+			}
+		},
+		"counterweight_demo": {
+			"name": "Counterweight",
+			"lookup_name": "counterweight_demo",
+			"description": "A beam on a fulcrum: the large mass close in, the small mass far out \u2014 the lever law, sized so the arithmetic holds.",
+			"scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The principle the whole room negotiates with: mass times distance, both sides, equal. The big block sits a quarter of the way out because it is four times the volume of the small one \u2014 the beam is not balanced by care, it is balanced by arithmetic. What the sculptor gets in return is everything else: once that one number is satisfied, the form above the fulcrum is free.",
+			"measurements": {
+				"aabb_size": [
+					0.98,
+					0.43,
+					1.03
+				],
+				"aabb_center": [
+					0.0,
+					0.22,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.03,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				2.0
+			]
+		},
+		"tension_demo": {
+			"name": "Tension",
+			"lookup_name": "tension_demo",
+			"description": "The same load held two ways \u2014 a thin tie pulling from above, a thick strut pushing from below.",
+			"scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "A tie pulls where a strut pushes. Both carry the same load, and the tie can be a fraction of the thickness because pulling never buckles \u2014 which is why suspension outperforms propping wherever you can hang instead of stack. Set side by side, the pair explains why sculpture that hangs looks impossibly thin and is not cheating.",
+			"measurements": {
+				"aabb_size": [
+					0.98,
+					0.43,
+					1.03
+				],
+				"aabb_center": [
+					0.0,
+					0.22,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					2
+				],
+				"max_dimension_m": 1.03,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				2
+			]
+		},
+		"sculpture_builder": {
+			"name": "Sculpture Bench",
+			"lookup_name": "sculpture_builder",
+			"description": "The fulcrum with a composition part-made, the remaining parts still loose on the pad.",
+			"scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "Balance caught mid-negotiation: a beam resting askew, one mass placed, three more waiting. This is the honest state of the practice \u2014 you do not calculate a sculpture and then build it, you place, watch it tip, and move something. The bench is where the constraint stops being a rule and becomes a conversation.",
+			"measurements": {
+				"aabb_size": [
+					0.98,
+					0.43,
+					1.03
+				],
+				"aabb_center": [
+					0.0,
+					0.22,
+					0.02
+				],
+				"grid_cells": [
+					1,
+					2
+				],
+				"max_dimension_m": 1.03,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				2
+			]
+		},
+		"balanced_sculpture_1": {
+			"name": "Work I",
+			"lookup_name": "balanced_sculpture_1",
+			"description": "A finished piece balanced the counterweight way: a heavy mass near the post, a long arm reaching to a small one.",
+			"scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The first solution \u2014 the lever answer. A tall mass sits close to the post and a long arm reaches out to a small one, with an accent hung below to settle it. It reads as asymmetric and is exactly balanced; the eye registers imbalance and the arithmetic disagrees. That gap is where the pleasure of the form lives.",
+			"measurements": {
+				"aabb_size": [
+					0.98,
+					0.43,
+					1.03
+				],
+				"aabb_center": [
+					0.0,
+					0.22,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.03,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				2.0
+			]
+		},
+		"balanced_sculpture_2": {
+			"name": "Work II",
+			"lookup_name": "balanced_sculpture_2",
+			"description": "The other solution: three members leaning into one another, none of which stands alone.",
+			"scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"qfep_connection": "The second answer to the same problem, and it shares no strategy with the first. Three members lean into a shared cap; remove any one and the other two fall. Nothing here is counterweighted \u2014 the balance is mutual, meaning through relation exactly as the room's title claims. Two works, both upright, disagreeing about how: which is what makes balance a craft and not a rule.",
+			"measurements": {
+				"aabb_size": [
+					0.98,
+					0.43,
+					1.03
+				],
+				"aabb_center": [
+					0.0,
+					0.22,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.03,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				2.0
+			]
+		},
+		"chair_parts_inventory": {
+			"name": "Chair Parts Inventory",
+			"lookup_name": "chair_parts_inventory",
+			"description": "Four cylinder legs racked as stock, seat and back planes leaning \u2014 the chair before anyone decides it is one.",
+			"qfep_connection": "Stock is a claim withheld: the same cylinders the affordance plinths named 'column' wait here without a verdict.",
+			"scene": "res://commons/artifacts/chair_kit/chair_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					0.34,
+					1.15
+				],
+				"aabb_center": [
+					0.0,
+					0.17,
+					0.02
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.15,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		},
+		"chair_builder": {
+			"name": "Chair Builder",
+			"lookup_name": "chair_builder",
+			"description": "Legs standing at their corners, the seat lowered halfway \u2014 assembly caught at the moment affordance becomes commitment.",
+			"qfep_connection": "The joint is the decision made rigid: between stock and chair there is a moment where the plane could still be a wall.",
+			"scene": "res://commons/artifacts/chair_kit/chair_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					0.34,
+					1.15
+				],
+				"aabb_center": [
+					0.0,
+					0.17,
+					0.02
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.15,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		},
+		"chair_assembled": {
+			"name": "Chair Assembled",
+			"lookup_name": "chair_assembled",
+			"description": "The finished chair \u2014 a plane at knee height on four columns, the back risen. Nothing here that was not already in the inventory.",
+			"qfep_connection": "A chair is a treaty between a plane and four columns; sitting was never invented, only noticed and made rigid.",
+			"scene": "res://commons/artifacts/chair_kit/chair_kit.tscn",
+			"category": "bricolage",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"bricolage"
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					0.34,
+					1.15
+				],
+				"aabb_center": [
+					0.0,
+					0.17,
+					0.02
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.15,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		}
+	}
 }

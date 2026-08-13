@@ -1,9 +1,9 @@
 {
 	"id": "prebaked_loader",
 	"name": "Prebaked Loader",
-	"description": "Loads a pre-baked PackedScene of a DNA finding. The fast-load path: instead of running the grammar's Sim.build at every map open, load the .tscn that was baked once at curation time. Used for VR placements where per-instance parameter variation isn't needed — which is most of them.",
+	"description": "Loads a pre-baked PackedScene of a DNA finding. The fast-load path: instead of running the grammar's Sim.build at every map open, load the .tscn that was baked once at curation time. Used for VR placements where per-instance parameter variation isn't needed \u2014 which is most of them.",
 	"category": "meta",
-	"theoreticalGrounding": "A snapshot is enough when the snapshot is what was curated. Pre-baking trades render-time cost for storage cost — appropriate for findings whose value is the form, not the regeneration.",
+	"theoreticalGrounding": "A snapshot is enough when the snapshot is what was curated. Pre-baking trades render-time cost for storage cost \u2014 appropriate for findings whose value is the form, not the regeneration.",
 	"artifacts": {
 		"prebaked_loader": {
 			"lookup_name": "prebaked_loader",
@@ -15,15 +15,47 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [],
-			"footprint": [2, 2, 3],
-			"tags": ["prebaked", "fast-load", "dna", "vr", "meta"],
+			"footprint": [
+				2,
+				2,
+				3
+			],
+			"tags": [
+				"prebaked",
+				"fast-load",
+				"dna",
+				"vr",
+				"meta"
+			],
 			"qfep_connection": "S: a system state captured at one moment, replayed without recomputation.",
 			"parameters": {
 				"scene_path": "",
-				"footprint": [2, 2, 3],
+				"footprint": [
+					2,
+					2,
+					3
+				],
 				"size_group": "medium"
 			},
-			"size_group": "medium"
+			"size_group": "medium",
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
 		}
 	}
 }

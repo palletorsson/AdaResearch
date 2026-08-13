@@ -14,7 +14,12 @@
 			"scene": "res://commons/artifacts/subtraction_suite/subtraction_suite.tscn",
 			"artifact_type": "exhibit",
 			"qfep_term": "F",
-			"dev_themes": ["boolean_surfaces", "primitives", "csg", "synthesis"],
+			"dev_themes": [
+				"boolean_surfaces",
+				"primitives",
+				"csg",
+				"synthesis"
+			],
 			"tags": [
 				"csg",
 				"boolean",
@@ -29,17 +34,28 @@
 				"synthesis",
 				"placeable"
 			],
-			"footprint": [3, 2, 1],
+			"footprint": [
+				3,
+				2,
+				1
+			],
 			"size_group": "large",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["boolean_surfaces", "primitives"],
+			"map_sequences": [
+				"boolean_surfaces",
+				"primitives"
+			],
 			"parameters": {
 				"breach": "opened",
 				"station_pitch": 0.96,
 				"body_size": 0.36,
 				"specimen_radius": 0.075,
-				"footprint": [3, 2, 1],
+				"footprint": [
+					3,
+					2,
+					1
+				],
 				"size_group": "large"
 			},
 			"spatial_needs": {
@@ -72,7 +88,12 @@
 				"promoted": "2026-08-06",
 				"stage": "synthesis",
 				"axes": {
-					"breach": ["pierced", "opened", "severed", "husk"]
+					"breach": [
+						"pierced",
+						"opened",
+						"severed",
+						"husk"
+					]
 				},
 				"sources": [
 					"fontana_puncture",
@@ -97,6 +118,24 @@
 				"budget": "About 85 MeshInstance3D at every value - 1 base, 3 at the plinth, 6 at the lectern, 74 at the tray (cabinet, tray, four rim strips, and 68 fragments: 2 hemispheres, 8 octants, 8 wedges, 48 tiles, 2 boolean parts), 1 anchor - plus 3 Label3D and about 6 bare Node3D. The count does not change with the axis. Roughly 3,400 triangles. No collision, no static bodies, nothing to grab: this bench is walked along and looked at, not handled. Two orders of magnitude under the ~3200 element budget.",
 				"dark_spot": "Named rather than hidden, because it is the substitution this exhibit could not avoid. The tray's five bases are REBUILT as static lat/lon partitions of a solid ball and one real boolean cut - they are not [[sphere_splitting_showcase]]'s destructibles. In the source, three of the five (planar, octree, csg) are ONE unbroken body until something hits them, and their parts are a calculation waiting on an event; that is the distinction its own `comparison` axis was built to draw, between a part that is computed and a part that was always there. Here every part exists from _ready, so the tray shows all five as latent. That is what makes a deterministic exploded view possible and it is exactly what the source refused to fake, for the right reason. So: this station is a CATALOGUE PLATE of the five bases, not a bench of five destructibles, and anyone who wants the computed/latent distinction has to go and stand in front of the source. The second dark spot is the ordinary one for this whole pass: nothing here can be cut by a player, and the four sources all stay placed.",
 				"known_gap": "No map places this yet, and the corpus's standing warning applies with extra force: exactly one map anywhere (Artist_Readymades) places any artifact at a non-default axis value. A bench whose entire point is holding three framings at ONE depth of cut is worth little until somebody writes subtraction_suite#breach:severed into a map and walks the row - `severed` is the value where the argument is sharpest, because the plinth's cube becomes eight disconnected corner pieces and the tray's plates do not change state at all."
+			},
+			"measurements": {
+				"aabb_size": [
+					2.88,
+					1.58,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.79,
+					0.0
+				],
+				"grid_cells": [
+					3,
+					1
+				],
+				"max_dimension_m": 2.88,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

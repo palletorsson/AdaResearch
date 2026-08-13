@@ -1,9 +1,9 @@
 {
 	"id": "agreement_gauge",
 	"name": "Agreement Gauge",
-	"description": "A laboratory alignment gauge for the DOT PRODUCT. Two grabbable arrows rise from the origin — a (warm amber) and b (cooler orange). A floating slab shows a self-substituting three-line equation: a.b = ax*bx + ay*by + az*bz, the same with the numbers plugged in, and the result; stacked beneath it the geometric form a.b = |a||b|cos(theta) lands on the SAME number. The live angle theta reads at the arc midpoint. A red->grey->green rail with a sliding puck tracks cos(theta) so the sign of the dot product is readable without a digit: green = agreeing, grey notch = perpendicular (a.b = 0, strangers), red = opposing. A |b| dial scales b without turning it; a SNAP 90 button parks b perpendicular to a. The result is computed, never grabbed.",
+	"description": "A laboratory alignment gauge for the DOT PRODUCT. Two grabbable arrows rise from the origin \u2014 a (warm amber) and b (cooler orange). A floating slab shows a self-substituting three-line equation: a.b = ax*bx + ay*by + az*bz, the same with the numbers plugged in, and the result; stacked beneath it the geometric form a.b = |a||b|cos(theta) lands on the SAME number. The live angle theta reads at the arc midpoint. A red->grey->green rail with a sliding puck tracks cos(theta) so the sign of the dot product is readable without a digit: green = agreeing, grey notch = perpendicular (a.b = 0, strangers), red = opposing. A |b| dial scales b without turning it; a SNAP 90 button parks b perpendicular to a. The result is computed, never grabbed.",
 	"category": "vectors",
-	"theoreticalGrounding": "The dot product does not measure length — it measures how much two directions agree. a.b = |a||b|cos(theta): at 0 degrees the product peaks at |a||b| (full agreement), at 90 degrees it is zero (pure perpendicularity, strangers), past 90 it goes negative (opposition). The algebraic component sum and the geometric magnitude*cosine form are visibly the same scalar.",
+	"theoreticalGrounding": "The dot product does not measure length \u2014 it measures how much two directions agree. a.b = |a||b|cos(theta): at 0 degrees the product peaks at |a||b| (full agreement), at 90 degrees it is zero (pure perpendicularity, strangers), past 90 it goes negative (opposition). The algebraic component sum and the geometric magnitude*cosine form are visibly the same scalar.",
 	"artifacts": {
 		"agreement_gauge": {
 			"lookup_name": "agreement_gauge",
@@ -14,28 +14,64 @@
 			"scene": "res://commons/artifacts/agreement_gauge/agreement_gauge.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"],
-			"footprint": [1, 2, 1],
-			"tags": ["vector", "dot_product", "angle", "machine", "vr", "vectors", "projection", "placeable"],
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"vector",
+				"dot_product",
+				"angle",
+				"machine",
+				"vr",
+				"vectors",
+				"projection",
+				"placeable"
+			],
 			"dna": {
 				"promoted": "2026-08-03",
 				"stage": "2 - variation",
 				"axes": {
-					"opening": ["agreeing", "strangers", "opposing", "parallel"],
-					"measure": ["cosine", "projection", "angle"]
+					"opening": [
+						"agreeing",
+						"strangers",
+						"opposing",
+						"parallel"
+					],
+					"measure": [
+						"cosine",
+						"projection",
+						"angle"
+					]
 				},
 				"default": "opening=agreeing, measure=cosine - agreeing is not re-derived but hands back the two shipped Vector3 literals (0.9,0.55,0.2) and (0.35,0.85,0.6) verbatim, and cosine returns cos(theta) untouched with the shipped caption string, so all 4 existing placements open on exactly the pose and the reading they had before",
 				"was": "no @export of its own: the opening pose of the two arrows was two Vector3 literals and the rail was hard-wired to cos(theta), so every placement found the gauge in the same acute green case and the rail could only ever make one claim. The sweep saw no turnable knob (initial_a, initial_b, bar_half_width and the dial range were plain vars reachable only through apply_grid_config).",
 				"note": "opening turns which case the untouched machine argues - a is never moved and |b| is preserved, so the axis turns theta alone: 40 deg (shipped), 90 (dot exactly 0, puck on the grey notch), 140 (red, negative), 0 (peak |a||b|). measure turns what the rail claims to report, which is the artifact's own truth line put at risk: cosine is deaf to length, projection lets the |b| dial drag the puck, angle is linear in theta so the rail agrees with the cosine only at 0, 90 and 180. The caption names the active measure, so a still cannot misreport itself. Both words are chosen to transplant to the sibling length_lantern (same slate plinth, same brass rim, same control plate): the pose the machine is found in, and what its derived instrument reads."
 			},
-			"qfep_connection": "F_force: a.b = |a||b|cos(theta) is one scalar that says how much two directions agree — alignment made legible as a single red-to-green reading.",
+			"qfep_connection": "F_force: a.b = |a||b|cos(theta) is one scalar that says how much two directions agree \u2014 alignment made legible as a single red-to-green reading.",
 			"parameters": {
-				"initial_a": [0.9, 0.55, 0.2],
-				"initial_b": [0.35, 0.85, 0.6],
+				"initial_a": [
+					0.9,
+					0.55,
+					0.2
+				],
+				"initial_b": [
+					0.35,
+					0.85,
+					0.6
+				],
 				"bar_half_width": 0.55,
 				"slider_min_mag": 0.2,
 				"slider_max_mag": 2.5,
-				"footprint": [1, 2, 1],
+				"footprint": [
+					1,
+					2,
+					1
+				],
 				"size_group": "small"
 			},
 			"size_group": "small",
@@ -45,6 +81,24 @@
 				"density": "medium",
 				"reading_radius": 3,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					1.43,
+					0.67
+				],
+				"aabb_center": [
+					0.0,
+					0.3,
+					0.05
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.43,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

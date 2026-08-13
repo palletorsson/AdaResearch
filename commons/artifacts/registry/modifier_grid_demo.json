@@ -1,7 +1,7 @@
 {
 	"id": "modifier_grid_demo",
 	"name": "Modifier Grid Demo",
-	"description": "A proof of the grid MODIFIER STACK: a flat plane of cells with a non-destructive, ordered op-stack (colorize, random_colors with a seed, shift, normalize) applied on top. Demonstrates the proposed `modifiers` section of map_data.json — deterministic, seeded (predictable), previewable, undo = pop. The bracelet's editing made reproducible. See doc/BRACELET_GARDEN_MODIFIERS.md.",
+	"description": "A proof of the grid MODIFIER STACK: a flat plane of cells with a non-destructive, ordered op-stack (colorize, random_colors with a seed, shift, normalize) applied on top. Demonstrates the proposed `modifiers` section of map_data.json \u2014 deterministic, seeded (predictable), previewable, undo = pop. The bracelet's editing made reproducible. See doc/BRACELET_GARDEN_MODIFIERS.md.",
 	"category": "grids",
 	"theoreticalGrounding": "A modifier is not a thing in a cell but an operation over cells; the ordered stack is the trace of care (the lambda-tending log). colorize/random push variety (E), normalize pulls toward order (F).",
 	"artifacts": {
@@ -14,17 +14,53 @@
 			"scene": "res://commons/artifacts/modifier_grid_demo/modifier_grid_demo.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["primitives"],
-			"footprint": [9, 1, 9],
-			"tags": ["grid", "modifier", "colorize", "bracelet", "editing", "non_destructive", "vr"],
-			"qfep_connection": "lambda: the modifier stack is the trace of tending — variety in (E), order back (F).",
+			"map_sequences": [
+				"primitives"
+			],
+			"footprint": [
+				9,
+				1,
+				9
+			],
+			"tags": [
+				"grid",
+				"modifier",
+				"colorize",
+				"bracelet",
+				"editing",
+				"non_destructive",
+				"vr"
+			],
+			"qfep_connection": "lambda: the modifier stack is the trace of tending \u2014 variety in (E), order back (F).",
 			"parameters": {
 				"grid_n": 9,
 				"apply_modifiers": true,
-				"footprint": [9, 1, 9],
+				"footprint": [
+					9,
+					1,
+					9
+				],
 				"size_group": "large"
 			},
-			"size_group": "large"
+			"size_group": "large",
+			"measurements": {
+				"aabb_size": [
+					8.92,
+					0.72,
+					8.92
+				],
+				"aabb_center": [
+					0.0,
+					0.36,
+					0.0
+				],
+				"grid_cells": [
+					9,
+					9
+				],
+				"max_dimension_m": 8.92,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
 		}
 	}
 }

@@ -1,2634 +1,2778 @@
 {
-  "registry_info": {
-    "name": "foundations",
-    "description": "Artifacts for the Foundations Crisis sequence - Gödel, Russell, Escher, Magritte, Florensky",
-    "category": "integration",
-    "theoretical_grounding": "Gamwell 'Mathematics and Art' Chapters 3-6, 9, 13"
-  },
-  "artifacts": {
-    "rice_verifier_booth": {
-      "dna": {
-        "measured": "PREDICTION FALSIFIED, and the `expected` block above is left as written. It predicted frame 4.0-4.5% at framing 0.55 and a move to bites. Actual: 1.11-1.32%, statistically unchanged from the 1.29% measured at framing 1.0. framing DID apply -- the subject went from 25% to 50% of frame width, verified by counting non-background pixels -- so the prediction failed on its reasoning, not on plumbing. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
-        "remedy": "THE FIX IS INK, NOT FRAMING, and slope_tangent_demo's registry note said so before this pass ran: 'no amount of reframing fixes a subject whose ink is one pixel wide.' The refusal axis mostly repaints the four MEANING cards and adds a lamp; the head panel, console, slot, RICE screen and the whole SYNTAX rack are invariant BY DESIGN, because the claim is that the booth works perfectly under all five values. Reframing multiplies the changed ink and the unchanged body by the same factor, so the ratio barely moves. To make this bite the semantic column has to carry more area -- taller cards, a filled rack panel behind them -- and that is a design pass, not a capture setting. NOT DONE IN THIS PASS: doing it badly to make a number go green is the failure this artifact is about.",
-        "colour_finding": "The greyscale verdict is the wrong lens here anyway. blank vs oracle measures focus 4.43% and COLOUR 81.94% -- unlit near-black cards against emissive gold is almost pure hue at similar luminance. The critic's own colour-only rescue caught it. `local` understates this axis.",
-        "framing": 0.55,
-        "fixture": {"rotor_frozen": true},
-        "promoted": "2026-08-05",
-        "stage": "2 - variation",
-        "fixture_why": "rotor_frozen pins the `spin` rotor. It is the only nondeterministic value in the file: _process advances the hub at 2.2 rad/s from _ready, so the blade angle at the shutter is a function of how many frames the headless boot managed, and two captures of `spin` were not comparable to each other. The flag is DELIBERATELY UNTYPED because the sweep applies fixtures with Object.set() before _ready and a typed bool silently rejects the string 'true' -- the flag never arrives, the rotor keeps turning, and the sheet reports the clock as an axis. No map passes rotor_frozen, so nothing placed is affected.",
-        "still_note": "The axis lives entirely in the RIGHT-HAND COLUMN of the head panel -- roughly 0.30 x 0.55 m of a 0.72 x 1.25 m body. The console, slot, RICE 1953 screen and the whole SYNTAX rack are invariant by design, because the claim is that the booth is in perfect working order under all five values. So a low frame percentage here is dilution and not an inert axis, and the first sweep measured exactly that: frame 1.29% against focus 17.25%, which the critic correctly called LOCAL rather than weak.",
-        "expected": "A PREDICTION, so the re-sweep falsifies it. At framing 0.55 the frame edge is 1.58 m against 2.87 m, an area ratio of 3.3x, so expect frame to land near 4.0-4.5% and the verdict to move from local to bites. Focus should stay near 17% -- focus is already measured in the hot region and reframing does not change what happens there. IF frame COMES BACK UNDER 2%, do not touch the design: check that dna.framing reached the rig at all, because a framing key that never arrives and an axis that does nothing produce the same sheet.",
-        "colour_note": "blank vs oracle measured focus 4.51% and COLOUR 80.80% on the first sweep -- the largest colour-only rescue in the batch. Unlit near-black cards against emissive gold is almost pure hue at similar luminance, which is precisely the pair a greyscale verdict would have called twins.",
-        "axes": {
-          "refusal": [
-            "blank",
-            "regress",
-            "oracle",
-            "spin",
-            "honest"
-          ]
-        }
-      },
-      "lookup_name": "rice_verifier_booth",
-      "scene": "res://commons/interfaces/foundations/rice_verifier_booth.tscn",
-      "class_name": "RiceVerifierBooth",
-      "name": "Rice Verifier Booth",
-      "description": "A verification booth that answers every question about a program's form and cannot answer any question about its meaning",
-      "qfep_connection": "The hard floor under self-criticism: no internal verifier exists, so criticism must come from outside the description",
-      "signals": [
-        "question_submitted",
-        "refusal_shown"
-      ],
-      "interactions": [
-        "click the slot to submit a question"
-      ],
-      "tags": [
-        "rice",
-        "undecidability",
-        "verification",
-        "self-criticism",
-        "ai"
-      ],
-      "dev_themes": [
-        "philosophy",
-        "qfep",
-        "ai-critique"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "parameters": {
-        "refusal": "Which posture the booth takes toward the undecidable question",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "preferred_zone": "mid"
-      }
-    },
-    "critic_regress_stack": {
-      "dna": {
-        "measured": "THE ONE THAT BITES, and the only one whose axis is silhouette-scale rather than detail-scale: frame 4.35-5.07%, focus 29-31%. Confirmed by per-variant pixel measurement rather than by the verdict alone -- subject HEIGHT varies 19% (single) / 22% (circular) / 39-40% (stacked, outside, sealed) of the frame, while every sibling holds constant height across all five of its values. Camera distance is fixed per token, not per variant, so that height variation is the artifact and not the rig. This is why leaving it at framing 1.0 was correct: its argument is in the outline. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
-        "promoted": "2026-08-05",
-        "stage": "2 - variation",
-        "framing_why": "LEFT AT 1.0 DELIBERATELY, while its three siblings come in to 0.55. This axis is not a detail: the dark mark travels the full height of the body -- footing to crown is about 1.3 m on a 1.32 m subject -- and `sealed` adds a shell over the whole stack. That is a silhouette-scale change, which is what full-frame fitting is for, and it is why this was the one token of four to bite on the first sweep at frame 2.95% / focus 25.50%. Tightening it would raise the number without making the argument any more visible, which is chasing the metric rather than reading the picture.",
-        "still_note": "The mark is the same object under every value -- same radius, same unlit black -- and only its POSITION argues. An axis that shrank it as critics were added would contradict the file's own truth line. `outside` is the one exception and it is principled: the mark shrinks there because a differently-constructed check genuinely does catch more, and it reappears under the outsider rather than vanishing.",
-        "axes": {
-          "relocation": [
-            "single",
-            "stacked",
-            "circular",
-            "outside",
-            "sealed"
-          ]
-        }
-      },
-      "lookup_name": "critic_regress_stack",
-      "scene": "res://commons/interfaces/foundations/critic_regress_stack.tscn",
-      "class_name": "CriticRegressStack",
-      "name": "Critic Regress Stack",
-      "description": "Add a critic to check the system, then a critic to check the critic; the blind spot never closes, it moves",
-      "qfep_connection": "Conservation of the irreducible one level up: inductive bias can be relocated, never removed",
-      "signals": [
-        "arrangement_changed"
-      ],
-      "interactions": [
-        "walk the arrangement to find where the dark mark sits"
-      ],
-      "tags": [
-        "regress",
-        "meta-level",
-        "bias",
-        "conservation",
-        "ai"
-      ],
-      "dev_themes": [
-        "philosophy",
-        "qfep",
-        "ai-critique"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "parameters": {
-        "relocation": "Where the blind spot ends up",
-        "footprint": [
-          1,
-          1,
-          2
-        ],
-        "size_group": "compact"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "preferred_zone": "mid"
-      }
-    },
-    "fluency_seam": {
-      "dna": {
-        "measured": "PREDICTION FALSIFIED. Predicted 4.5-5.0% at framing 0.55; actual 1.80-1.87% against 1.49% before. framing applied and is verified: subject width went 39% -> 64% of frame. THE ARITHMETIC OF WHY IT COULD NOT WORK: the right plate is 0.44 m of a 1.30 m span, so at framing 0.55 it occupies 21.8% of frame width, or 4.73% of frame area IF FULLY CHANGED. Measured 1.80% means barely a third of the plate actually differs between values -- because the plate itself is identical from value to value and only the TEXT on it changes. Text is thin ink, and 3.3x of very thin ink is still very thin ink. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
-        "remedy": "Ink, not framing. `smooth` vs `twice` differ by one white plate carrying different words; the values that add real area -- `spread` (seven plates) and `lattice` (a 35-cell grid) -- are the ones pulling the mean up at all. The honest repair is to give the divergence itself a body: a filled contrast panel behind the disagreeing lines rather than a 7 mm underline. NOT DONE IN THIS PASS.",
-        "framing": 0.55,
-        "promoted": "2026-08-05",
-        "stage": "2 - variation",
-        "still_note": "The LEFT plate is invariant on purpose -- it is the product as shipped, and the artifact's argument depends on it not changing. So the axis can only ever move the right half: about 0.44 x 0.26 m of a 1.30 m span, plus whatever apparatus the value adds behind it. First sweep: frame 1.49%, focus 21.50%, verdict LOCAL. The `spread` and `lattice` values add the most ink and should be the strongest pairs; `smooth` against `twice` is the thinnest, and that thinness is the price of `smooth` being an honest picture of the shipped condition.",
-        "expected": "At framing 0.55 the frame edge is 1.82 m against 3.31 m, 3.3x in area, so expect frame near 4.5-5.0% and a move to bites. The 1.30 m base still sits at 71% of the edge, so no crop.",
-        "axes": {
-          "crossing": [
-            "smooth",
-            "twice",
-            "spread",
-            "singular",
-            "lattice"
-          ]
-        }
-      },
-      "lookup_name": "fluency_seam",
-      "scene": "res://commons/interfaces/foundations/fluency_seam.tscn",
-      "class_name": "FluencySeam",
-      "name": "Fluency Seam",
-      "description": "One confident answer beside the same question asked again - the seam where compression is mistaken for judgement",
-      "qfep_connection": "The seam form of galton_friction applied to inference: the machine promises understanding and ships compression",
-      "signals": [
-        "seam_crossed"
-      ],
-      "interactions": [
-        "compare the shipped plate against the second run"
-      ],
-      "tags": [
-        "seam",
-        "fluency",
-        "compression",
-        "entropy",
-        "ai"
-      ],
-      "dev_themes": [
-        "philosophy",
-        "qfep",
-        "ai-critique"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "parameters": {
-        "crossing": "How far past the perception threshold the seam is dragged",
-        "footprint": [
-          2,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "preferred_zone": "mid"
-      }
-    },
-    "negative_control_fixture": {
-      "dna": {
-        "measured": "PREDICTION FALSIFIED. Predicted 3.5-4.0%; actual 1.16-1.20%, unchanged from 1.17% at framing 1.0. Same diagnosis as its two siblings: the case, dial, arcs and SELF-TEST header are invariant, and what the axis moves is a thin black needle, a 3 cm lamp, a lever and a small card. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
-        "remedy": "Ink. The needle is the thinnest element and it carries the injected-vs-green distinction almost alone. THE CONSTRAINT THAT MAKES THIS DELICATE: two of the five values are MEANT to be nearly identical -- `unproven` and `certified` differ only by a sealed wire, a caption and the mounted red card, because the difference between them is history rather than reading. A repair that separated those two would be a repair AGAINST the artifact's argument. The correct move is to enlarge the red record card, not to make the two greens differ.",
-        "colour_finding": "The critic rescued two pairs here from a false twin verdict: absent vs unproven (focus 4.69%, colour 10.59%) and absent vs silent (focus 5.07%, colour 12.93%). Luminance cannot see the lamp's hue change; the eye can.",
-        "framing": 0.55,
-        "promoted": "2026-08-05",
-        "stage": "2 - variation",
-        "still_note": "TWO OF THE FIVE VALUES READ GREEN AND ARE MEANT TO BE NEARLY IDENTICAL. `unproven` and `certified` differ by a sealed lever wire, a caption, and the mounted red record card -- and that near-identity IS the argument, because the difference between them is history rather than reading. A twin verdict on that specific pair would be the artifact working, not failing. The values that must separate are injected (needle hard over into the red arc, a wholesale change) and absent (no lever at all). First sweep: frame 1.17%, focus 14.84%, LOCAL.",
-        "expected": "At framing 0.55 the frame edge is 1.25 m against 2.28 m, 3.3x in area, so expect frame near 3.5-4.0%. If the critic reports a TWIN on unproven-vs-certified, read it as confirmation and not as a defect -- the correct repair would be to make the red record card larger, not to make the two greens differ.",
-        "axes": {
-          "proof": [
-            "unproven",
-            "injected",
-            "certified",
-            "silent",
-            "absent"
-          ]
-        }
-      },
-      "lookup_name": "negative_control_fixture",
-      "scene": "res://commons/interfaces/foundations/negative_control_fixture.tscn",
-      "class_name": "NegativeControlFixture",
-      "name": "Negative Control Fixture",
-      "description": "A gauge that earns its green light only by first being made to go red on a planted fault",
-      "qfep_connection": "The one honest move after Rice: an instrument cannot be proven correct, but it can be proven capable of failing",
-      "signals": [
-        "fault_injected",
-        "needle_moved"
-      ],
-      "interactions": [
-        "pull the lever to inject the known fault",
-        "read whether the needle moved"
-      ],
-      "tags": [
-        "negative-control",
-        "self-test",
-        "instrument",
-        "falsification",
-        "ai"
-      ],
-      "dev_themes": [
-        "philosophy",
-        "qfep",
-        "ai-critique"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "parameters": {
-        "proof": "What this instrument has demonstrated about its capacity to fail",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "preferred_zone": "mid"
-      }
-    },
-    "godel_statement_plaque": {
-      "dna": {
-       "axes": {
-       "outside": [
-       "quotation",
-       "margin",
-       "breach",
-       "omission",
-       "habitat"
-       ]
-       }
-      },
-      "lookup_name": "godel_statement_plaque",
-      "scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
-      "class_name": "GodelStatementPlaque",
-      "description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in Gödel's incompleteness",
-      "gamwell_reference": "Chapter 9: Gödel's Incompleteness Theorem",
-      "qfep_connection": "Proves pure F-minimization is impossible - every formal system has an outside",
-      "signals": [
-        "statement_changed",
-        "paradox_triggered"
-      ],
-      "interactions": [
-        "click to advance statement",
-        "grab to cycle"
-      ],
-      "parameters": {
-        "current_index": "Starting statement (0-8)",
-        "grabbable": "Enable XR grab interaction",
-        "footprint": [
-          2,
-          2,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy",
-        "qfep"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": [
-        "godel",
-        "self_reference",
-        "paradox",
-        "incompleteness",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "name": "GÃ¶del Statement Plaque",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": [
-            "metallic"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "unlocks",
-          "escher_staircase",
-          "visual",
-          "contrasts",
-          "russell_set_box"
-        ],
-        "preferred_zone": "end",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.64,
-          0.44,
-          0.05
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.64,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 2,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      },
-      "content": "text"
-    },
-    "russell_set_box": {
-      "dna": {
-       "axes": {
-       "outside": [
-       "quotation",
-       "margin",
-       "breach",
-       "omission",
-       "habitat"
-       ]
-       }
-      },
-      "lookup_name": "russell_set_box",
-      "scene": "res://commons/interfaces/foundations/russell_set_box.tscn",
-      "class_name": "RussellSetBox",
-      "description": "Nested boxes visualizing Russell's Paradox - the set of all sets that don't contain themselves",
-      "gamwell_reference": "Chapter 5: Russell's Paradox (1901)",
-      "qfep_connection": "Self-reference creates edges in formal systems",
-      "signals": [
-        "paradox_observed",
-        "box_opened",
-        "infinite_regress_detected"
-      ],
-      "interactions": [
-        "click to open layers",
-        "reveals infinite regress"
-      ],
-      "parameters": {
-        "max_visible_depth": "How many nested boxes before infinite indicator",
-        "size": "Outer box dimensions",
-        "footprint": [
-          2,
-          2,
-          2
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy",
-        "qfep"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": [
-        "russell",
-        "paradox",
-        "self_reference",
-        "set_theory",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "name": "Russell's Set Box",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": [
-            "metallic"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 1,
-        "cluster_with": [
-          "contrasts",
-          "godel_statement_plaque",
-          "arithmetic",
-          "theoretic",
-          "reference"
-        ],
-        "preferred_zone": "end",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.3,
-          0.19,
-          0.3
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.3,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "omni",
-        "range": 1,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "magritte_pipe": {
-      "lookup_name": "magritte_pipe",
-      "scene": "res://commons/interfaces/foundations/magritte_pipe.tscn",
-      "class_name": "MagrittePipe",
-      "description": "'Ceci n'est pas une pipe' - The gap between representation and reality",
-      "gamwell_reference": "Chapter 9: Magritte's 'The Treachery of Images' (1929)",
-      "qfep_connection": "F (predictive model) ≠ reality. The map is not the territory.",
-      "signals": [
-        "representation_questioned",
-        "layer_revealed"
-      ],
-      "interactions": [
-        "click to cycle through meta-layers of representation"
-      ],
-      "dna": {
-        "promoted": "2026-08-03",
-        "stage": "2 - variation",
-        "axes": {
-          "presence": [
-            "pipe_and_words",
-            "pipe_only",
-            "words_only",
-            "empty_frame",
-            "picture_of_picture"
-          ]
-        },
-        "framing": 0.62,
-        "default": "presence=pipe_and_words - the frame, the canvas, the painted pipe at (0, 0.08, 0.04) and the sentence at font 28 below it, which is exactly what _ready built before this promotion; both existing placements carry no config, and apply_grid_config now ignores any config that does not name 'presence', so neither map changes by a pixel",
-        "was": "a fixed painting: frame + canvas + pipe + caption, with no way for a map to say which of the two terms is present. The gap between sign and signified was staged once and only once."
-      },
-      "parameters": {
-        "current_layer": "Current level of representation questioning (0-5)",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy"
-      ],
-      "dev_category": "art_mathematics",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": [
-        "magritte",
-        "representation",
-        "meta",
-        "art",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "artmathematics",
-        "foundationscrisis"
-      ],
-      "sequence": "artmathematics",
-      "name": "Magritte Pipe",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box",
-            "cylinder"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": [
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "foundational",
-          "artmathematics",
-          "sequence",
-          "signified",
-          "extends"
-        ],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.8,
-          0.6,
-          0.12
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.03
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.8,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 2,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "escher_staircase": {
-      "dna": {
-       "axes": {
-       "seam": [
-       "none",
-       "hairline",
-       "gap",
-       "scaffold",
-       "field"
-       ]
-       }
-      },
-      "lookup_name": "escher_staircase",
-      "scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
-      "class_name": "EscherStaircase",
-      "description": "Impossible staircase - locally coherent, globally impossible. Visual Gödel.",
-      "gamwell_reference": "Chapter 9: Escher's impossible objects",
-      "qfep_connection": "Local validity does not guarantee global consistency",
-      "signals": [
-        "step_taken",
-        "paradox_completed"
-      ],
-      "interactions": [
-        "climb_step() to ascend forever and return to start"
-      ],
-      "parameters": {
-        "steps_per_side": "Number of steps on each side of the square",
-        "rotate_view": "Auto-rotate for viewing",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy",
-        "qfep"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": [
-        "escher",
-        "impossible",
-        "paradox",
-        "geometry",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "artmathematics",
-        "foundationscrisis"
-      ],
-      "sequence": "artmathematics",
-      "name": "Escher Staircase",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box",
-            "sphere"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
-            "metallic"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "~0"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "visualizes",
-          "godel_statement_plaque",
-          "local",
-          "proof",
-          "steps"
-        ],
-        "preferred_zone": "end",
-        "measured_footprint_cells": 4,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          2.0,
-          1.98,
-          2.0
-        ],
-        "aabb_center": [
-          0.0,
-          0.91,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          2.0
-        ],
-        "max_dimension_m": 2.0,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        2.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 4,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "florensky_sphere": {
-      "dna": {
-       "axes": {
-       "seam": [
-       "none",
-       "hairline",
-       "gap",
-       "scaffold",
-       "field"
-       ]
-       }
-      },
-      "lookup_name": "florensky_sphere",
-      "scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
-      "class_name": "FlorenskySphere",
-      "description": "Paraconsistent logic sphere - holds A and not-A simultaneously without collapse",
-      "gamwell_reference": "Chapter 3: Florensky's 'Pillar and Ground of the Truth' - supralogic",
-      "qfep_connection": "QFEP allows holding order (F) and disorder (-λE) without triviality",
-      "signals": [
-        "state_observed",
-        "superposition_entered",
-        "superposition_collapsed"
-      ],
-      "interactions": [
-        "left-click to observe (collapses temporarily)",
-        "right-click to cycle states"
-      ],
-      "parameters": {
-        "current_state": "A, NOT_A, BOTH, or NEITHER",
-        "allow_observation": "Whether observation collapses superposition",
-        "footprint": [
-          2,
-          2,
-          2
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy",
-        "qfep"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "expert",
-      "tags": [
-        "florensky",
-        "paraconsistent_logic",
-        "superposition",
-        "quantum",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "name": "Florensky Sphere",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "sphere"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "contrasts",
-          "schrodinger_box",
-          "quantum",
-          "logical",
-          "superposition"
-        ],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.6,
-          0.6,
-          0.6
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.6,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "omni",
-        "range": 2,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "bifurcation_diagram": {
-      "dna": {
-        "promoted": "2026-08-03",
-        "stage": "2 - variation",
-        "axes": {
-          "regime": [
-            "all",
-            "stable",
-            "cascade",
-            "chaos",
-            "period3"
-          ],
-          "trace": [
-            "attractor",
-            "transient",
-            "approach"
-          ]
-        },
-        "default": "regime=all, trace=attractor - all is the one value absent from REGIME_WINDOWS, and _apply_regime returns immediately on it, so r_min=2.5 and r_max=4.0 stay exactly as exported and the whole diagram is framed as it always was; attractor is the `_:` branch of _keeps_iteration, which is the shipped `j >= skip_transient` test. apply_grid_config rebuilds only when a value it recognises actually differs AND _ready has already built once, so the 8 cells across four maps (Crisis_Synthesis, Crisis_Synthesis_composed, Corridor_Crisis_Synthesis, Trial_eye_Crisis_Synthesis) rebuild nothing and render the same picture. One deliberate difference: the z scatter was an unseeded randf_range, so every launch was a different cloud; it is now the same range from a seeded RNG. The jitter is +/-0.025 m of depth on a 4 x 2 m plot, invisible in a still, and without it no two frames of a sweep would be comparable.",
-        "was": "r_min=2.5 and r_max=4.0 were @export but nothing read them from a map, so every placement showed the same full sweep; skip_transient=50 silently threw the first fifty iterations away with no way to ask for them. The artifact's whole argument - that r selects a qualitative regime - was the one thing a map could not say.",
-        "note": "regime crops the r axis onto one claim about the same map, because WHICH WINDOW you are shown is the argument. stable = 2.5..3.0, one line, no branching, the map before it has anything to say; cascade = 3.0..3.57, the period-doubling ladder where Feigenbaum's constant is legible as the shrinking of each rung; chaos = 3.57..4.0, the band, plus the period-3 window sitting inside it as a stripe of order; period3 = 3.82..3.87, that window filling the whole plot, where the eye finds three clean branches inside what was called chaos - the strongest thing the diagram can say. trace is which part of each orbit counts as the picture: attractor draws only where the orbit ended up (the shipped diagram), transient draws every iteration including the run-in (the tree with a haze over it - the arriving), approach draws ONLY the fifty discarded iterations and no tree at all, which is the diagram's own waste product held up as the image.",
-        "kin": "regime is the family word (harmonic_motion_demo, spring_demo, mass_spring_damper, VectorForces, homogeneous_coordinates, DualBallFMController) and it is used for exactly the family's question - which qualitative behaviour class is on show. The `all` value is taken from mass_spring_damper character for character, and means the same thing there and here: do not crop, this is the shipped uncropped view. The other four values cannot be shared, because a damping ladder and a logistic cascade have different classes - underdamped is not a thing the logistic map can be - and inventing a mapping between them would make an incomparable family look comparable. trace is the LOOSE family word (spring_demo: off/phase/wave; fourier_transform: samples/stems/ribbon) meaning which drawing of the data is shown, and it is taken in that loose sense. It is deliberately NOT `evidence`, whose ladder (result/trace/longhand/axiom) is fixed character for character across fourteen artifacts and means how much of the working is admitted alongside the result: approach withholds the result and shows only the working, which is the inverse of the last rung of that ladder and would corrupt the word.",
-        "still_note": "regime is a strong axis in pixels - the four crops share almost no ink, since the point cloud is redrawn over a different domain and _get_color_for_r re-ramps across it. trace is strong at approach (the tree vanishes; only the run-in haze remains) and thinner at transient, where the haze is added over an unchanged tree; the added points are 50 of every 100 iterations though, so it should still clear the 3% line. The MultiMesh caveat applies: the capture AABB counts MeshInstance3D only and every point here lives in a MultiMeshInstance3D, so the only mesh instances are the two thin axis bars and the highlight plane - check the framing before believing any subject-percentage figure."
-      },
-      "lookup_name": "bifurcation_diagram",
-      "scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn",
-      "class_name": "BifurcationDiagram",
-      "description": "Interactive 3D bifurcation diagram from logistic map - walk through the edge of chaos",
-      "gamwell_reference": "Chapter 12: Chaos Theory, Fractals",
-      "qfep_connection": "The λ parameter IS Langton's λ - tunes between order and chaos",
-      "signals": [
-        "r_changed",
-        "regime_changed"
-      ],
-      "interactions": [
-        "set_r_value() to highlight different regimes",
-        "animate_r() for transitions"
-      ],
-      "parameters": {
-        "current_r": "Current r value (2.5-4.0)",
-        "r_steps": "Resolution of diagram",
-        "width": "Physical width of visualization",
-        "footprint": [
-          5,
-          5,
-          5
-        ],
-        "size_group": "environment"
-      },
-      "dev_themes": [
-        "qfep",
-        "philosophy"
-      ],
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": [
-        "chaos",
-        "bifurcation",
-        "edge_of_chaos",
-        "lambda",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "name": "Bifurcation Diagram",
-      "geometry_spec": {
-        "mesh_type": "instanced_particles",
-        "topology": "scattered",
-        "construction": {
-          "method": "multimesh_instancing",
-          "primitives": [
-            "box",
-            "sphere"
-          ],
-          "operations": [
-            "allocate_instances",
-            "set_transforms",
-            "update_per_frame"
-          ]
-        },
-        "material": {
-          "type": "vertex_color",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "particle_lifecycle",
-          "driven_by": "cpu_simulation",
-          "affects": [
-            "transform",
-            "color"
-          ]
-        },
-        "instance_strategy": "multimesh",
-        "vertex_estimate": "~64"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 5,
-        "clearance": {
-          "front": 2,
-          "back": 2,
-          "left": 2,
-          "right": 2
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "unlocks",
-          "lambda_slider",
-          "lambda",
-          "contrasts",
-          "florensky_sphere"
-        ],
-        "preferred_zone": "end",
-        "measured_footprint_cells": 5,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          4.2,
-          2.4,
-          0.7
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          5.0,
-          1.0
-        ],
-        "max_dimension_m": 4.2,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        5.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 10,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "euclid_postulates_plaque": {
-      "lookup_name": "euclid_postulates_plaque",
-      "scene": "res://commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.tscn",
-      "class_name": "EuclidPostulatesPlaque",
-      "description": "Interactive plaque displaying Euclid's five postulates, highlighting the controversial fifth (parallel) postulate",
-      "gamwell_reference": "Chapter 1-2: Euclidean Geometry",
-      "qfep_connection": "The parallel postulate seemed self-evident for 2000 years - certainty is fragile",
-      "signals": [
-        "postulate_selected",
-        "parallel_highlighted"
-      ],
-      "interactions": [
-        "click to cycle postulates"
-      ],
-      "parameters": {
-        "current_postulate": "Current postulate (0-4)",
-        "highlight_fifth": "Emphasize the parallel postulate",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy",
-        "geometry"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": [
-        "euclid",
-        "geometry",
-        "parallel_postulate",
-        "foundations",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": true,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "unlocks",
-          "hyperbolic_surface",
-          "elliptic_surface",
-          "happens",
-          "fifth"
-        ],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.84,
-          1.04,
-          0.06
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 1.04,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 4,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      },
-      "content": "text"
-    },
-    "penrose_triangle": {
-      "lookup_name": "penrose_triangle",
-      "scene": "res://commons/artifacts/penrose_triangle/penrose_triangle.tscn",
-      "class_name": "PenroseTriangle",
-      "description": "The impossible triangle - locally coherent, globally impossible. Visual Gödel.",
-      "gamwell_reference": "Chapter 9: Penrose and Escher collaboration",
-      "qfep_connection": "Local validity does not guarantee global consistency",
-      "signals": [
-        "viewpoint_locked",
-        "illusion_revealed"
-      ],
-      "interactions": [
-        "move to find the 'sweet spot' where illusion works"
-      ],
-      "dna": {
-        "promoted": "2026-08-03",
-        "stage": "2 - variation",
-        "axes": {
-          "disclosure": [
-            "marker",
-            "bare",
-            "seam",
-            "exploded",
-            "sealed"
-          ]
-        },
-        "framing": 0.42,
-        "default": "disclosure=marker - three beams with the z_gap of size*0.25 at the top joint, the caption, and the green sweet-spot bead at (0, 0, size*2.5) rendering as it always has; identical to the pre-promotion _ready, and both existing placements pass no config so nothing reaches the rebuild guard",
-        "was": "one fixed impossible object. The bead named the viewpoint that hides the break, and there was no way for a map to say whether the contradiction should be concealed, marked, dismantled or closed.",
-        "framing_note": "the bead sits 2.5 sizes out on +Z and dominates the capture AABB, which framed the triangle itself at roughly 4% of the frame. 0.42 pulls the camera in; the bead is still inside the 17 degree half-FOV, so marker vs bare remains readable."
-      },
-      "parameters": {
-        "size": "Triangle size",
-        "auto_rotate": "Slowly rotate to reveal impossibility",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy",
-        "qfep"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": [
-        "penrose",
-        "impossible",
-        "illusion",
-        "escher",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "artmathematics",
-        "foundationscrisis"
-      ],
-      "sequence": "artmathematics",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box",
-            "sphere"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "paired",
-          "escher_staircase",
-          "impossible",
-          "objects",
-          "family"
-        ],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.58,
-          0.49,
-          1.46
-        ],
-        "aabb_center": [
-          0.01,
-          0.06,
-          0.55
-        ],
-        "grid_cells": [
-          1.0,
-          2.0
-        ],
-        "max_dimension_m": 1.46,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        2.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 4,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "poincare_disk": {
-      "lookup_name": "poincare_disk",
-      "scene": "res://commons/artifacts/poincare_disk/poincare_disk.tscn",
-      "class_name": "PoincareDisk",
-      "description": "Poincaré disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum < 180°",
-      "gamwell_reference": "Chapter 2: Non-Euclidean Geometry",
-      "qfep_connection": "The parallel postulate is independent - geometry is a choice",
-      "signals": [
-        "curvature_changed"
-      ],
-      "interactions": [
-        "observe geodesics as circular arcs"
-      ],
-      "parameters": {
-        "disk_radius": "Size of the disk",
-        "line_count": "Number of geodesic lines",
-        "show_triangle": "Display hyperbolic triangle",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "geometry",
-        "philosophy"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "advanced",
-      "tags": [
-        "hyperbolic",
-        "poincare",
-        "non_euclidean",
-        "geometry",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "vertex_line_strip",
-          "primitives": [
-            "cylinder",
-            "torus"
-          ],
-          "operations": [
-            "compute_vertices",
-            "connect_lines"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "vertex",
-          "driven_by": "per_frame_rebuild",
-          "affects": [
-            "vertex_positions"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "~1024"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "models",
-          "geometry",
-          "hyperbolic_surface",
-          "different",
-          "representation"
-        ],
-        "preferred_zone": "end",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.81,
-          0.81,
-          0.03
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.01
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.81,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 2,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "schrodinger_box": {
-      "dna": {
-       "axes": {
-       "remainder": [
-       "core",
-       "twin",
-       "seam",
-       "haze",
-       "witness"
-       ],
-       "vantage": [
-       "specimen",
-       "stele",
-       "chamber"
-       ]
-       }
-      },
-      "lookup_name": "schrodinger_box",
-      "scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
-      "class_name": "SchrodingerBox",
-      "description": "Schrödinger's cat thought experiment - superposition collapses upon observation",
-      "gamwell_reference": "Quantum mechanics and measurement problem",
-      "qfep_connection": "Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A",
-      "signals": [
-        "box_opened",
-        "state_collapsed",
-        "superposition_entered"
-      ],
-      "interactions": [
-        "click to observe (collapse superposition)",
-        "auto-resets to superposition"
-      ],
-      "parameters": {
-        "box_size": "Physical dimensions",
-        "auto_reset_time": "Seconds before returning to superposition",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy",
-        "qfep"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": [
-        "schrodinger",
-        "quantum",
-        "superposition",
-        "collapse",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box",
-            "sphere"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "contrasts",
-          "florensky_sphere",
-          "quantum",
-          "paraconsistent",
-          "superposition"
-        ],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.42,
-          0.32,
-          0.31
-        ],
-        "aabb_center": [
-          0.0,
-          0.01,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.42,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 2,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "angle_sum_triangle": {
-      "lookup_name": "angle_sum_triangle",
-      "scene": "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn",
-      "class_name": "AngleSumTriangle",
-      "dna": {
-        "promoted": "2026-08-05",
-        "stage": "2 - variation",
-        "axes": {
-          "opening": ["flat", "hyperbolic", "elliptic"]
-        },
-        "default": "opening=flat - flat SHORT-CIRCUITS in _polyline(): the bow is zero, the arc loop is skipped by `continue`, and the function returns exactly the three shipped vertices, so ImmediateMesh receives v1, v2, v3, v1 in the shipped order with the same material. The label strings are handed back as literals rather than measured, so all four Label3Ds read the bytes they shipped ('60°' three times and '60° + 60° + 60° = 180°') at the same positions, pixel_size and font_size. All 3 placements (Euclid_Parallel, Euclid_Parallel_composed, test_batch_1) plus the two curation_station lists (Corridor_Euclid_Parallel, Curation_Bay_foundationscrisis_0) are bare tokens - the ':0:0.5' and ':90:0' suffixes are rotation and y-offset, not config keys - and the axis is read only inside `if config_data.has(\"opening\")`, so none of them reaches the new code.",
-        "was": "one @export, `size`, a scale factor - and apply_grid_config's whole body was `pass`, so no map token could turn even that. The artifact's own truth line is 'the angle sum of a triangle is not a fact about triangles but a fact about the space they inhabit' and its critical_parameter is named as curvature, but the only space it could draw was the flat one: three straight segments and a hard-coded '= 180°'. The theorem's FAILURE - the whole point of the artifact, per its description - lived in the registry text and in a relationships line pointing at two other artifacts, and nowhere in the geometry.",
-        "shared_with": "curvature_slider - `opening` is that artifact's word with its three values in the same order, because these are the same theorem from two directions: curvature_slider states the sign of K on a dial, this shows what that sign does to a triangle. A room holding both can no longer set them to disagreeing spaces. NOTE the corpus carries a second, unrelated `opening` (agreement_gauge, dot_aligner, dot_product_projector, exercise_5_9_angle_between: agreeing|strangers|opposing|parallel, the angle between two vectors). The collision predates this promotion; the value lists tell the two senses apart and this one is the curvature list.",
-        "finding": "The three angle labels read 60° each and are commented '# Equilateral for simplicity', but the triangle as drawn is isoceles - vertices (0, .5s), (-.4s, -.3s), (.4s, -.3s) measure 53.1 / 63.4 / 63.4, which do sum to 180. The shipped strings are nominal, not measured. They are preserved to the byte at the default because three maps ship them; the two curved values print angles MEASURED off the polyline they actually draw (hyperbolic 29+38+38=105, elliptic 79+88+88=255), summing the rounded parts so the printed equation is true as printed. Correcting the flat labels would be a legitimate follow-up and a deliberate change to three live maps, not a side effect of a promotion.",
-        "declined": "witness (curvature_slider's second axis, number|surface|normals) - it would need a rendered saddle or sphere patch and a normal field this artifact has neither of, and taking a word without its answers is the dishonest half of a shared vocabulary. A `figure` axis over triangle shapes (the theorem is invariant under the triangle and variant under the space) is real and still-visible, but its default value would have to be the legacy figure whose labels are nominal, and one axis measured honestly beats two with a seam in them."
-      },
-      "description": "Demonstrates that triangle angles sum to 180° in Euclidean space — a fact that fails in non-Euclidean geometries",
-      "gamwell_reference": "Chapter 1-2: Euclidean Geometry",
-      "qfep_connection": "The angle sum property is axiomatic — it holds only when the parallel postulate is assumed",
-      "signals": [],
-      "interactions": [
-        "observe angle labels and sum"
-      ],
-      "parameters": {
-        "size": "Triangle scale factor (default 0.4)",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "geometry",
-        "philosophy"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "beginner",
-      "tags": [
-        "euclidean",
-        "geometry",
-        "angles",
-        "triangle",
-        "foundations"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis",
-        "testmaps"
-      ],
-      "sequence": "foundationscrisis",
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "l_system_turtle",
-          "primitives": [],
-          "operations": [
-            "string_rewrite",
-            "turtle_interpret",
-            "emit_lines"
-          ]
-        },
-        "material": {
-          "type": "unlit",
-          "shading_model": "unshaded",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "contrasts",
-          "hyperbolic_surface",
-          "angle",
-          "elliptic_surface",
-          "angle"
-        ],
-        "preferred_zone": "entry",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.32,
-          0.32,
-          0.0
-        ],
-        "aabb_center": [
-          0.0,
-          0.04,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.32,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "omni",
-        "range": 1,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "hilbert_hotel": {
-      "lookup_name": "hilbert_hotel",
-      "scene": "res://commons/artifacts/hilbert_hotel/hilbert_hotel.tscn",
-      "class_name": "HilbertHotel",
-      "description": "Animated Hilbert's Hotel paradox - infinite rooms all occupied, yet a new guest always fits by shifting n to n+1",
-      "gamwell_reference": "Chapter 6: Cantor's transfinite numbers and Hilbert's Grand Hotel",
-      "qfep_connection": "Infinity is not a limit but a structure - countable infinity accommodates more without expanding",
-      "signals": [],
-      "interactions": [
-        "watch guests shift automatically"
-      ],
-      "parameters": {
-        "num_rooms": "Number of visible rooms (default 10)",
-        "shift_duration": "Animation speed for guest shifting",
-        "pause_between_shifts": "Delay between animation cycles"
-      },
-      "dev_themes": [
-        "philosophy",
-        "set_theory"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": [
-        "hilbert",
-        "infinity",
-        "paradox",
-        "set_theory",
-        "cantor",
-        "animated"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box",
-            "sphere"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.87,
-          0.1,
-          0.09
-        ],
-        "aabb_center": [
-          -0.03,
-          0.03,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.87,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "plane",
-        "range": 2,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "constructive_proof": {
-      "dna": {
-        "promoted": "2026-08-03",
-        "stage": "2 - variation",
-        "axes": {
-          "specimen": [
-            "built",
-            "outline",
-            "candidates",
-            "absent"
-          ]
-        },
-        "default": "specimen=built - the exact shipped picture. _build_solid() is _create_visual()'s old inline block moved into a function and nothing else: one BoxMesh at Vector3(0.3, 0.3, 0.3), one StandardMaterial3D at albedo (0.3, 0.6, 0.9), at the artifact's origin. It now hangs under a Specimen Node3D that sits at the origin with an identity transform, so the world position of the cube is unchanged; the arrow keeps the string '← Must BUILD it' character for character and the caption is identical at every value. All three placements (Brouwer_Intuitionism as a bare token, the curation_station collection in Curation_Bay_foundationscrisis_2, and exhibit_furniture#mount:constructive_proof in the six Trial_* museums) pass no key this reads - exhibit_furniture instantiates the mounted scene and forwards nothing - so nothing standing changes.",
-        "was": "no declared axis, and the runner refused the token for NO TURNABLE KNOBS: there were no @export lines at all. apply_grid_config accepted `color` and `size`, which are a tint and a dimension. The artifact's own critical_parameter is 'the witness - without an explicit construction, the proof is rejected', and the witness was a hard-coded 0.3 m cube that was always present, so the classical proof its caption names was the one thing the room could never be shown.",
-        "note": "specimen is what the proof puts forward in the place where x must be. built = the solid cube, blue, constructive: here is x. outline = the same cube as twelve edge bars in grey, the claim keeping its shape with nothing inside it. candidates = twenty-seven small grey cubes filling the same 0.3 m volume with none of them distinguished, existence over a finite domain where the proof will not say which. absent = a thin grey plate whose top face sits exactly where the solid cube's underside was and nothing above it, the reductio that refutes non-existence and produces nothing. Blue means produced and grey means claimed, which is the whole argument in one colour rule. Every value builds real MeshInstance3D geometry in the same slot, including absent - a value that measured zero AABB would be a fact about the capture rather than about the proof. The caption is deliberately NOT switched: it states both positions and stays true at every value, so a measured bite is a bite in the object. The arrow line does switch, because '← Must BUILD it' standing beside an empty plate is the label contradicting the picture.",
-        "kin": "`evidence` (result|trace|longhand|axiom, 19 declarations) was considered and DECLINED. It is the corpus's word for how much of the working is admitted alongside the result, and its rungs are a monotone disclosure ladder over an apparatus in motion. There is no working here and nothing in motion - one static claim - and the values are not more-or-less of one thing: candidates is not 'more working than outline', it is a different proof. Taking the word with a different question is the failure check_dna_declarations exists to catch. `witness` is the term of art and this artifact's own vocabulary, and was ALSO declined: lab_room already declares witness = pane|none|port|sash for an observation aperture, and one word covering two unrelated questions makes a shared vocabulary a lie. specimen is a new word and shares nothing; the nearest live neighbour is godel_statement_plaque.outside (quotation|margin|breach|omission|habitat), which asks where a statement stands relative to a system rather than what a proof produces."
-      },
-      "lookup_name": "constructive_proof",
-      "scene": "res://commons/artifacts/constructive_proof/constructive_proof.tscn",
-      "class_name": "ConstructiveProof",
-      "description": "Demonstrates constructive vs classical proof - constructive must exhibit the witness, classical can prove existence by contradiction",
-      "gamwell_reference": "Chapter 3-5: Constructivism and Intuitionism",
-      "qfep_connection": "Constructive proof demands the witness be built - existence without construction is insufficient",
-      "signals": [],
-      "interactions": [
-        "observe the contrast between constructive and classical proof"
-      ],
-      "parameters": {
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": [
-        "constructive",
-        "proof",
-        "intuitionism",
-        "foundations",
-        "witness"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis",
-        "testmaps"
-      ],
-      "sequence": "foundationscrisis",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "depends",
-          "excluded_middle_demo",
-          "rejecting",
-          "forces",
-          "constructive"
-        ],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.3,
-          0.3,
-          0.3
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.3,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "omni",
-        "range": 1,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "brouwer_choice_sequence": {
-      "dna": {
-       "axes": {
-       "horizon": [
-       "question",
-       "spread",
-       "law",
-       "closed"
-       ]
-       }
-      },
-      "lookup_name": "brouwer_choice_sequence",
-      "scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
-      "class_name": "BrouwerChoiceSequence",
-      "description": "Brouwer's free choice sequences - unfinished infinite objects that unfold over time, visualized as fading dots with an open-ended future",
-      "gamwell_reference": "Chapter 3-5: Intuitionism and Brouwer",
-      "qfep_connection": "The sequence is never complete - knowledge is always in-progress, never finalized",
-      "signals": [],
-      "interactions": [
-        "observe the unfolding sequence with animated dots"
-      ],
-      "parameters": {
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": [
-        "brouwer",
-        "intuitionism",
-        "choice_sequence",
-        "infinity",
-        "foundations"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "sequence": "foundationscrisis",
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "sphere"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": [
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "depends",
-          "excluded_middle_demo",
-          "rejection",
-          "enables",
-          "choice"
-        ],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.76,
-          0.06,
-          0.06
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.76,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "plane",
-        "range": 2,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "excluded_middle_demo": {
-      "dna": {
-       "axes": {
-       "middle": [
-       "classical",
-       "third",
-       "spectrum",
-       "half"
-       ]
-       }
-      },
-      "lookup_name": "excluded_middle_demo",
-      "scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
-      "class_name": "ExcludedMiddleDemo",
-      "description": "Law of excluded middle (P or not-P) interactive demo - Brouwer rejected this for non-constructive proofs, slider controls the degree of rejection",
-      "gamwell_reference": "Chapter 3-5: Intuitionism and the rejection of excluded middle",
-      "qfep_connection": "Not everything is decidable - the excluded middle assumes omniscience that constructivism rejects",
-      "signals": [],
-      "interactions": [
-        "use slider to toggle between classical and intuitionist views"
-      ],
-      "parameters": {
-        "show_rejection": "Whether to display Brouwer's rejection of the law",
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "dev_themes": [
-        "philosophy"
-      ],
-      "dev_category": "foundations_crisis",
-      "category": "philosophy",
-      "complexity": "intermediate",
-      "tags": [
-        "brouwer",
-        "intuitionism",
-        "excluded_middle",
-        "logic",
-        "foundations",
-        "interactive"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis",
-        "testmaps"
-      ],
-      "sequence": "foundationscrisis",
-      "geometry_spec": {
-        "mesh_type": "delegated_scene",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "scene_instantiation",
-          "primitives": [
-            "sphere"
-          ],
-          "operations": [
-            "load_scene",
-            "instantiate",
-            "configure"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "varies"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "unlocks",
-          "constructive_proof",
-          "rejected",
-          "constructive",
-          "proofs"
-        ],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.6,
-          0.67,
-          0.76
-        ],
-        "aabb_center": [
-          0.0,
-          0.24,
-          0.28
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.76,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "omni",
-        "range": 2,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.106998Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "complexity_dial_workbench": {
-      "lookup_name": "complexity_dial_workbench",
-      "scene": "res://commons/artifacts/complexity_dial_workbench/complexity_dial_workbench.tscn",
-      "class_name": "ComplexityDialWorkbench",
-      "name": "Complexity Dial Workbench",
-      "description": "Interactive workbench for the polynomial-vs-exponential gap. One slider drives N ∈ [1,60]; five algorithms (O(log N), O(N), O(N log N), O(N²), O(2^N)) race their step counts simultaneously. Log-scaled bars + step-count labels + a dashed wall-clock line at 10⁹ ops/sec + a small growth-curve panel at the bottom. At N≈30 the exponential bar crosses the wall-clock line; at N=60 the gap is 18 orders of magnitude. Sister to /complexity-dial-gallery (web frieze frozen at 7 N-values).",
-      "gamwell_reference": "Chapter 9-13: Turing-era complexity theory, decidability vs tractability",
-      "qfep_connection": "The polynomial/exponential gap as a categorical, not quantitative, limit — not bridgeable by any constant factor. A different kind of thing.",
-      "signals": [],
-      "interactions": [
-        "grab slider to change N (input size); 5 algorithm bars and the growth curves update live"
-      ],
-      "parameters": {
-        "initial_n": "Starting N value (default 30)",
-        "practical_log_threshold": "log10 of the wall-clock cutoff (default 9 = 10⁹ ops/sec)",
-        "plate_scale": "Overall workbench scale (default 2.0)",
-        "footprint": [
-          2,
-          3,
-          2
-        ],
-        "size_group": "medium"
-      },
-      "category": "limits-of-computing",
-      "interaction": "grab_slide",
-      "sequence": "foundationscrisis",
-      "artifact_type": "limits_workbench",
-      "capacity": "FEEL the polynomial/exponential gap",
-      "dev_themes": [
-        "limits_of_computing",
-        "complexity_theory",
-        "turing",
-        "p_vs_np",
-        "foundationscrisis"
-      ],
-      "dev_category": "limits_of_computing",
-      "complexity": "intermediate",
-      "tags": [
-        "interactive",
-        "slider",
-        "complexity",
-        "big_o",
-        "polynomial",
-        "exponential",
-        "bar_chart",
-        "growth_curves",
-        "limits_of_computing",
-        "workbench"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "spatial_needs": {
-        "platform": "floor",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "shannon_workbench",
-          "halting_bench",
-          "cantor_diagonal",
-          "godel_statement_plaque"
-        ],
-        "preferred_zone": "any"
-      }
-    },
-    "halting_workbench": {
-      "name": "Halting Workbench",
-      "lookup_name": "halting_workbench",
-      "description": "Interactive Turing machine simulator. Slider picks one of 8 canonical machines. Step button advances one step; budget slider auto-runs. Tape, head, state, and halt/loop banner update live.",
-      "scene": "res://commons/artifacts/halting_workbench/halting_workbench.tscn",
-      "category": "limits-of-computing",
-      "interaction": "grab_slide",
-      "sequence": "foundationscrisis",
-      "artifact_type": "limits-of-computing",
-      "qfep_term": "lambda",
-      "capacity": "WALK the halting decision",
-      "dev_themes": [
-        "interactive",
-        "turing-machine",
-        "halting-problem",
-        "simulator"
-      ],
-      "dev_category": "limits-of-computing",
-      "complexity": "intermediate",
-      "tags": [
-        "interactive",
-        "turing-machine",
-        "halting-problem",
-        "simulator"
-      ],
-      "include_in_map_data": true,
-      "map_sequences": [
-        "foundationscrisis"
-      ],
-      "map_ready": true,
-      "parameters": {
-        "footprint": [
-          1,
-          1
-        ]
-      },
-      "size_group": "standard"
-    }
-  },
-  "sequence_mapping": {
-    "foundationscrisis": [
-      "godel_statement_plaque",
-      "russell_set_box",
-      "escher_staircase",
-      "florensky_sphere",
-      "euclid_postulates_plaque",
-      "penrose_triangle",
-      "poincare_disk",
-      "schrodinger_box",
-      "hilbert_hotel",
-      "brouwer_choice_sequence",
-      "excluded_middle_demo",
-      "complexity_dial_workbench"
-    ],
-    "artmathematics": [
-      "magritte_pipe",
-      "escher_staircase",
-      "penrose_triangle"
-    ],
-    "qfeplaboratory": [
-      "bifurcation_diagram",
-      "florensky_sphere",
-      "schrodinger_box"
-    ]
-  },
-  "theoretical_connections": {
-    "self_reference_artifacts": [
-      "godel_statement_plaque",
-      "russell_set_box",
-      "escher_staircase"
-    ],
-    "representation_gap_artifacts": [
-      "magritte_pipe",
-      "penrose_triangle"
-    ],
-    "paraconsistent_artifacts": [
-      "florensky_sphere",
-      "schrodinger_box"
-    ],
-    "edge_of_chaos_artifacts": [
-      "bifurcation_diagram"
-    ],
-    "non_euclidean_artifacts": [
-      "poincare_disk"
-    ],
-    "infinity_paradox_artifacts": [
-      "hilbert_hotel"
-    ],
-    "foundations_artifacts": [
-      "euclid_postulates_plaque"
-    ]
-  }
+	"registry_info": {
+		"name": "foundations",
+		"description": "Artifacts for the Foundations Crisis sequence - G\u00f6del, Russell, Escher, Magritte, Florensky",
+		"category": "integration",
+		"theoretical_grounding": "Gamwell 'Mathematics and Art' Chapters 3-6, 9, 13"
+	},
+	"artifacts": {
+		"rice_verifier_booth": {
+			"dna": {
+				"measured": "PREDICTION FALSIFIED, and the `expected` block above is left as written. It predicted frame 4.0-4.5% at framing 0.55 and a move to bites. Actual: 1.11-1.32%, statistically unchanged from the 1.29% measured at framing 1.0. framing DID apply -- the subject went from 25% to 50% of frame width, verified by counting non-background pixels -- so the prediction failed on its reasoning, not on plumbing. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
+				"remedy": "THE FIX IS INK, NOT FRAMING, and slope_tangent_demo's registry note said so before this pass ran: 'no amount of reframing fixes a subject whose ink is one pixel wide.' The refusal axis mostly repaints the four MEANING cards and adds a lamp; the head panel, console, slot, RICE screen and the whole SYNTAX rack are invariant BY DESIGN, because the claim is that the booth works perfectly under all five values. Reframing multiplies the changed ink and the unchanged body by the same factor, so the ratio barely moves. To make this bite the semantic column has to carry more area -- taller cards, a filled rack panel behind them -- and that is a design pass, not a capture setting. NOT DONE IN THIS PASS: doing it badly to make a number go green is the failure this artifact is about.",
+				"colour_finding": "The greyscale verdict is the wrong lens here anyway. blank vs oracle measures focus 4.43% and COLOUR 81.94% -- unlit near-black cards against emissive gold is almost pure hue at similar luminance. The critic's own colour-only rescue caught it. `local` understates this axis.",
+				"framing": 0.55,
+				"fixture": {
+					"rotor_frozen": true
+				},
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"fixture_why": "rotor_frozen pins the `spin` rotor. It is the only nondeterministic value in the file: _process advances the hub at 2.2 rad/s from _ready, so the blade angle at the shutter is a function of how many frames the headless boot managed, and two captures of `spin` were not comparable to each other. The flag is DELIBERATELY UNTYPED because the sweep applies fixtures with Object.set() before _ready and a typed bool silently rejects the string 'true' -- the flag never arrives, the rotor keeps turning, and the sheet reports the clock as an axis. No map passes rotor_frozen, so nothing placed is affected.",
+				"still_note": "The axis lives entirely in the RIGHT-HAND COLUMN of the head panel -- roughly 0.30 x 0.55 m of a 0.72 x 1.25 m body. The console, slot, RICE 1953 screen and the whole SYNTAX rack are invariant by design, because the claim is that the booth is in perfect working order under all five values. So a low frame percentage here is dilution and not an inert axis, and the first sweep measured exactly that: frame 1.29% against focus 17.25%, which the critic correctly called LOCAL rather than weak.",
+				"expected": "A PREDICTION, so the re-sweep falsifies it. At framing 0.55 the frame edge is 1.58 m against 2.87 m, an area ratio of 3.3x, so expect frame to land near 4.0-4.5% and the verdict to move from local to bites. Focus should stay near 17% -- focus is already measured in the hot region and reframing does not change what happens there. IF frame COMES BACK UNDER 2%, do not touch the design: check that dna.framing reached the rig at all, because a framing key that never arrives and an axis that does nothing produce the same sheet.",
+				"colour_note": "blank vs oracle measured focus 4.51% and COLOUR 80.80% on the first sweep -- the largest colour-only rescue in the batch. Unlit near-black cards against emissive gold is almost pure hue at similar luminance, which is precisely the pair a greyscale verdict would have called twins.",
+				"axes": {
+					"refusal": [
+						"blank",
+						"regress",
+						"oracle",
+						"spin",
+						"honest"
+					]
+				}
+			},
+			"lookup_name": "rice_verifier_booth",
+			"scene": "res://commons/interfaces/foundations/rice_verifier_booth.tscn",
+			"class_name": "RiceVerifierBooth",
+			"name": "Rice Verifier Booth",
+			"description": "A verification booth that answers every question about a program's form and cannot answer any question about its meaning",
+			"qfep_connection": "The hard floor under self-criticism: no internal verifier exists, so criticism must come from outside the description",
+			"signals": [
+				"question_submitted",
+				"refusal_shown"
+			],
+			"interactions": [
+				"click the slot to submit a question"
+			],
+			"tags": [
+				"rice",
+				"undecidability",
+				"verification",
+				"self-criticism",
+				"ai"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"ai-critique"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"parameters": {
+				"refusal": "Which posture the booth takes toward the undecidable question",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"preferred_zone": "mid"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.72,
+					1.25,
+					0.43
+				],
+				"aabb_center": [
+					0.0,
+					0.63,
+					0.01
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.25,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"critic_regress_stack": {
+			"dna": {
+				"measured": "THE ONE THAT BITES, and the only one whose axis is silhouette-scale rather than detail-scale: frame 4.35-5.07%, focus 29-31%. Confirmed by per-variant pixel measurement rather than by the verdict alone -- subject HEIGHT varies 19% (single) / 22% (circular) / 39-40% (stacked, outside, sealed) of the frame, while every sibling holds constant height across all five of its values. Camera distance is fixed per token, not per variant, so that height variation is the artifact and not the rig. This is why leaving it at framing 1.0 was correct: its argument is in the outline. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"framing_why": "LEFT AT 1.0 DELIBERATELY, while its three siblings come in to 0.55. This axis is not a detail: the dark mark travels the full height of the body -- footing to crown is about 1.3 m on a 1.32 m subject -- and `sealed` adds a shell over the whole stack. That is a silhouette-scale change, which is what full-frame fitting is for, and it is why this was the one token of four to bite on the first sweep at frame 2.95% / focus 25.50%. Tightening it would raise the number without making the argument any more visible, which is chasing the metric rather than reading the picture.",
+				"still_note": "The mark is the same object under every value -- same radius, same unlit black -- and only its POSITION argues. An axis that shrank it as critics were added would contradict the file's own truth line. `outside` is the one exception and it is principled: the mark shrinks there because a differently-constructed check genuinely does catch more, and it reappears under the outsider rather than vanishing.",
+				"axes": {
+					"relocation": [
+						"single",
+						"stacked",
+						"circular",
+						"outside",
+						"sealed"
+					]
+				}
+			},
+			"lookup_name": "critic_regress_stack",
+			"scene": "res://commons/interfaces/foundations/critic_regress_stack.tscn",
+			"class_name": "CriticRegressStack",
+			"name": "Critic Regress Stack",
+			"description": "Add a critic to check the system, then a critic to check the critic; the blind spot never closes, it moves",
+			"qfep_connection": "Conservation of the irreducible one level up: inductive bias can be relocated, never removed",
+			"signals": [
+				"arrangement_changed"
+			],
+			"interactions": [
+				"walk the arrangement to find where the dark mark sits"
+			],
+			"tags": [
+				"regress",
+				"meta-level",
+				"bias",
+				"conservation",
+				"ai"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"ai-critique"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"parameters": {
+				"relocation": "Where the blind spot ends up",
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"preferred_zone": "mid"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					1.32,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.64,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.32,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
+		},
+		"fluency_seam": {
+			"dna": {
+				"measured": "PREDICTION FALSIFIED. Predicted 4.5-5.0% at framing 0.55; actual 1.80-1.87% against 1.49% before. framing applied and is verified: subject width went 39% -> 64% of frame. THE ARITHMETIC OF WHY IT COULD NOT WORK: the right plate is 0.44 m of a 1.30 m span, so at framing 0.55 it occupies 21.8% of frame width, or 4.73% of frame area IF FULLY CHANGED. Measured 1.80% means barely a third of the plate actually differs between values -- because the plate itself is identical from value to value and only the TEXT on it changes. Text is thin ink, and 3.3x of very thin ink is still very thin ink. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
+				"remedy": "Ink, not framing. `smooth` vs `twice` differ by one white plate carrying different words; the values that add real area -- `spread` (seven plates) and `lattice` (a 35-cell grid) -- are the ones pulling the mean up at all. The honest repair is to give the divergence itself a body: a filled contrast panel behind the disagreeing lines rather than a 7 mm underline. NOT DONE IN THIS PASS.",
+				"framing": 0.55,
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"still_note": "The LEFT plate is invariant on purpose -- it is the product as shipped, and the artifact's argument depends on it not changing. So the axis can only ever move the right half: about 0.44 x 0.26 m of a 1.30 m span, plus whatever apparatus the value adds behind it. First sweep: frame 1.49%, focus 21.50%, verdict LOCAL. The `spread` and `lattice` values add the most ink and should be the strongest pairs; `smooth` against `twice` is the thinnest, and that thinness is the price of `smooth` being an honest picture of the shipped condition.",
+				"expected": "At framing 0.55 the frame edge is 1.82 m against 3.31 m, 3.3x in area, so expect frame near 4.5-5.0% and a move to bites. The 1.30 m base still sits at 71% of the edge, so no crop.",
+				"axes": {
+					"crossing": [
+						"smooth",
+						"twice",
+						"spread",
+						"singular",
+						"lattice"
+					]
+				}
+			},
+			"lookup_name": "fluency_seam",
+			"scene": "res://commons/interfaces/foundations/fluency_seam.tscn",
+			"class_name": "FluencySeam",
+			"name": "Fluency Seam",
+			"description": "One confident answer beside the same question asked again - the seam where compression is mistaken for judgement",
+			"qfep_connection": "The seam form of galton_friction applied to inference: the machine promises understanding and ships compression",
+			"signals": [
+				"seam_crossed"
+			],
+			"interactions": [
+				"compare the shipped plate against the second run"
+			],
+			"tags": [
+				"seam",
+				"fluency",
+				"compression",
+				"entropy",
+				"ai"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"ai-critique"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"parameters": {
+				"crossing": "How far past the perception threshold the seam is dragged",
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"preferred_zone": "mid"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.3,
+					1.11,
+					0.34
+				],
+				"aabb_center": [
+					0.0,
+					0.56,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.3,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		},
+		"negative_control_fixture": {
+			"dna": {
+				"measured": "PREDICTION FALSIFIED. Predicted 3.5-4.0%; actual 1.16-1.20%, unchanged from 1.17% at framing 1.0. Same diagnosis as its two siblings: the case, dial, arcs and SELF-TEST header are invariant, and what the axis moves is a thin black needle, a 3 cm lamp, a lever and a small card. RUN-TO-RUN NOISE MEASURED AT +/-15%: two identical sweeps of unchanged code and registry gave rice_verifier_booth 1.32% then 1.11%, and critic_regress_stack 5.07% then 4.35%. The sweep is not deterministic, so any single-run verdict within about 15% of the 3% threshold is a coin toss reported as a fact. Numbers below are the range across both runs, not a point.",
+				"remedy": "Ink. The needle is the thinnest element and it carries the injected-vs-green distinction almost alone. THE CONSTRAINT THAT MAKES THIS DELICATE: two of the five values are MEANT to be nearly identical -- `unproven` and `certified` differ only by a sealed wire, a caption and the mounted red card, because the difference between them is history rather than reading. A repair that separated those two would be a repair AGAINST the artifact's argument. The correct move is to enlarge the red record card, not to make the two greens differ.",
+				"colour_finding": "The critic rescued two pairs here from a false twin verdict: absent vs unproven (focus 4.69%, colour 10.59%) and absent vs silent (focus 5.07%, colour 12.93%). Luminance cannot see the lamp's hue change; the eye can.",
+				"framing": 0.55,
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"still_note": "TWO OF THE FIVE VALUES READ GREEN AND ARE MEANT TO BE NEARLY IDENTICAL. `unproven` and `certified` differ by a sealed lever wire, a caption, and the mounted red record card -- and that near-identity IS the argument, because the difference between them is history rather than reading. A twin verdict on that specific pair would be the artifact working, not failing. The values that must separate are injected (needle hard over into the red arc, a wholesale change) and absent (no lever at all). First sweep: frame 1.17%, focus 14.84%, LOCAL.",
+				"expected": "At framing 0.55 the frame edge is 1.25 m against 2.28 m, 3.3x in area, so expect frame near 3.5-4.0%. If the critic reports a TWIN on unproven-vs-certified, read it as confirmation and not as a defect -- the correct repair would be to make the red record card larger, not to make the two greens differ.",
+				"axes": {
+					"proof": [
+						"unproven",
+						"injected",
+						"certified",
+						"silent",
+						"absent"
+					]
+				}
+			},
+			"lookup_name": "negative_control_fixture",
+			"scene": "res://commons/interfaces/foundations/negative_control_fixture.tscn",
+			"class_name": "NegativeControlFixture",
+			"name": "Negative Control Fixture",
+			"description": "A gauge that earns its green light only by first being made to go red on a planted fault",
+			"qfep_connection": "The one honest move after Rice: an instrument cannot be proven correct, but it can be proven capable of failing",
+			"signals": [
+				"fault_injected",
+				"needle_moved"
+			],
+			"interactions": [
+				"pull the lever to inject the known fault",
+				"read whether the needle moved"
+			],
+			"tags": [
+				"negative-control",
+				"self-test",
+				"instrument",
+				"falsification",
+				"ai"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"ai-critique"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"parameters": {
+				"proof": "What this instrument has demonstrated about its capacity to fail",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"preferred_zone": "mid"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.85,
+					0.3
+				],
+				"aabb_center": [
+					0.08,
+					0.43,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.85,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"godel_statement_plaque": {
+			"dna": {
+				"axes": {
+					"outside": [
+						"quotation",
+						"margin",
+						"breach",
+						"omission",
+						"habitat"
+					]
+				}
+			},
+			"lookup_name": "godel_statement_plaque",
+			"scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
+			"class_name": "GodelStatementPlaque",
+			"description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in G\u00f6del's incompleteness",
+			"gamwell_reference": "Chapter 9: G\u00f6del's Incompleteness Theorem",
+			"qfep_connection": "Proves pure F-minimization is impossible - every formal system has an outside",
+			"signals": [
+				"statement_changed",
+				"paradox_triggered"
+			],
+			"interactions": [
+				"click to advance statement",
+				"grab to cycle"
+			],
+			"parameters": {
+				"current_index": "Starting statement (0-8)",
+				"grabbable": "Enable XR grab interaction",
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"godel",
+				"self_reference",
+				"paradox",
+				"incompleteness",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"name": "G\u00c3\u00b6del Statement Plaque",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"escher_staircase",
+					"visual",
+					"contrasts",
+					"russell_set_box"
+				],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.64,
+					0.44,
+					0.05
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.64,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			},
+			"content": "text"
+		},
+		"russell_set_box": {
+			"dna": {
+				"axes": {
+					"outside": [
+						"quotation",
+						"margin",
+						"breach",
+						"omission",
+						"habitat"
+					]
+				}
+			},
+			"lookup_name": "russell_set_box",
+			"scene": "res://commons/interfaces/foundations/russell_set_box.tscn",
+			"class_name": "RussellSetBox",
+			"description": "Nested boxes visualizing Russell's Paradox - the set of all sets that don't contain themselves",
+			"gamwell_reference": "Chapter 5: Russell's Paradox (1901)",
+			"qfep_connection": "Self-reference creates edges in formal systems",
+			"signals": [
+				"paradox_observed",
+				"box_opened",
+				"infinite_regress_detected"
+			],
+			"interactions": [
+				"click to open layers",
+				"reveals infinite regress"
+			],
+			"parameters": {
+				"max_visible_depth": "How many nested boxes before infinite indicator",
+				"size": "Outer box dimensions",
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"russell",
+				"paradox",
+				"self_reference",
+				"set_theory",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"name": "Russell's Set Box",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"contrasts",
+					"godel_statement_plaque",
+					"arithmetic",
+					"theoretic",
+					"reference"
+				],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.74,
+					0.43,
+					0.33
+				],
+				"aabb_center": [
+					0.0,
+					0.07,
+					0.01
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.74,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"magritte_pipe": {
+			"lookup_name": "magritte_pipe",
+			"scene": "res://commons/interfaces/foundations/magritte_pipe.tscn",
+			"class_name": "MagrittePipe",
+			"description": "'Ceci n'est pas une pipe' - The gap between representation and reality",
+			"gamwell_reference": "Chapter 9: Magritte's 'The Treachery of Images' (1929)",
+			"qfep_connection": "F (predictive model) \u2260 reality. The map is not the territory.",
+			"signals": [
+				"representation_questioned",
+				"layer_revealed"
+			],
+			"interactions": [
+				"click to cycle through meta-layers of representation"
+			],
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"presence": [
+						"pipe_and_words",
+						"pipe_only",
+						"words_only",
+						"empty_frame",
+						"picture_of_picture"
+					]
+				},
+				"framing": 0.62,
+				"default": "presence=pipe_and_words - the frame, the canvas, the painted pipe at (0, 0.08, 0.04) and the sentence at font 28 below it, which is exactly what _ready built before this promotion; both existing placements carry no config, and apply_grid_config now ignores any config that does not name 'presence', so neither map changes by a pixel",
+				"was": "a fixed painting: frame + canvas + pipe + caption, with no way for a map to say which of the two terms is present. The gap between sign and signified was staged once and only once."
+			},
+			"parameters": {
+				"current_layer": "Current level of representation questioning (0-5)",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "art_mathematics",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"magritte",
+				"representation",
+				"meta",
+				"art",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"artmathematics",
+				"foundationscrisis"
+			],
+			"sequence": "artmathematics",
+			"name": "Magritte Pipe",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"foundational",
+					"artmathematics",
+					"sequence",
+					"signified",
+					"extends"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.6,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"escher_staircase": {
+			"dna": {
+				"axes": {
+					"seam": [
+						"none",
+						"hairline",
+						"gap",
+						"scaffold",
+						"field"
+					]
+				}
+			},
+			"lookup_name": "escher_staircase",
+			"scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
+			"class_name": "EscherStaircase",
+			"description": "Impossible staircase - locally coherent, globally impossible. Visual G\u00f6del.",
+			"gamwell_reference": "Chapter 9: Escher's impossible objects",
+			"qfep_connection": "Local validity does not guarantee global consistency",
+			"signals": [
+				"step_taken",
+				"paradox_completed"
+			],
+			"interactions": [
+				"climb_step() to ascend forever and return to start"
+			],
+			"parameters": {
+				"steps_per_side": "Number of steps on each side of the square",
+				"rotate_view": "Auto-rotate for viewing",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"escher",
+				"impossible",
+				"paradox",
+				"geometry",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"artmathematics",
+				"foundationscrisis"
+			],
+			"sequence": "artmathematics",
+			"name": "Escher Staircase",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"visualizes",
+					"godel_statement_plaque",
+					"local",
+					"proof",
+					"steps"
+				],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.07,
+					1.98,
+					2.07
+				],
+				"aabb_center": [
+					0.0,
+					0.91,
+					0.0
+				],
+				"grid_cells": [
+					3,
+					3
+				],
+				"max_dimension_m": 2.07,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				3,
+				1,
+				3
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"florensky_sphere": {
+			"dna": {
+				"axes": {
+					"seam": [
+						"none",
+						"hairline",
+						"gap",
+						"scaffold",
+						"field"
+					]
+				}
+			},
+			"lookup_name": "florensky_sphere",
+			"scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
+			"class_name": "FlorenskySphere",
+			"description": "Paraconsistent logic sphere - holds A and not-A simultaneously without collapse",
+			"gamwell_reference": "Chapter 3: Florensky's 'Pillar and Ground of the Truth' - supralogic",
+			"qfep_connection": "QFEP allows holding order (F) and disorder (-\u03bbE) without triviality",
+			"signals": [
+				"state_observed",
+				"superposition_entered",
+				"superposition_collapsed"
+			],
+			"interactions": [
+				"left-click to observe (collapses temporarily)",
+				"right-click to cycle states"
+			],
+			"parameters": {
+				"current_state": "A, NOT_A, BOTH, or NEITHER",
+				"allow_observation": "Whether observation collapses superposition",
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "expert",
+			"tags": [
+				"florensky",
+				"paraconsistent_logic",
+				"superposition",
+				"quantum",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"name": "Florensky Sphere",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"schrodinger_box",
+					"quantum",
+					"logical",
+					"superposition"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.44,
+					1.16,
+					0.71
+				],
+				"aabb_center": [
+					0.0,
+					0.06,
+					0.05
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.44,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"bifurcation_diagram": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"regime": [
+						"all",
+						"stable",
+						"cascade",
+						"chaos",
+						"period3"
+					],
+					"trace": [
+						"attractor",
+						"transient",
+						"approach"
+					]
+				},
+				"default": "regime=all, trace=attractor - all is the one value absent from REGIME_WINDOWS, and _apply_regime returns immediately on it, so r_min=2.5 and r_max=4.0 stay exactly as exported and the whole diagram is framed as it always was; attractor is the `_:` branch of _keeps_iteration, which is the shipped `j >= skip_transient` test. apply_grid_config rebuilds only when a value it recognises actually differs AND _ready has already built once, so the 8 cells across four maps (Crisis_Synthesis, Crisis_Synthesis_composed, Corridor_Crisis_Synthesis, Trial_eye_Crisis_Synthesis) rebuild nothing and render the same picture. One deliberate difference: the z scatter was an unseeded randf_range, so every launch was a different cloud; it is now the same range from a seeded RNG. The jitter is +/-0.025 m of depth on a 4 x 2 m plot, invisible in a still, and without it no two frames of a sweep would be comparable.",
+				"was": "r_min=2.5 and r_max=4.0 were @export but nothing read them from a map, so every placement showed the same full sweep; skip_transient=50 silently threw the first fifty iterations away with no way to ask for them. The artifact's whole argument - that r selects a qualitative regime - was the one thing a map could not say.",
+				"note": "regime crops the r axis onto one claim about the same map, because WHICH WINDOW you are shown is the argument. stable = 2.5..3.0, one line, no branching, the map before it has anything to say; cascade = 3.0..3.57, the period-doubling ladder where Feigenbaum's constant is legible as the shrinking of each rung; chaos = 3.57..4.0, the band, plus the period-3 window sitting inside it as a stripe of order; period3 = 3.82..3.87, that window filling the whole plot, where the eye finds three clean branches inside what was called chaos - the strongest thing the diagram can say. trace is which part of each orbit counts as the picture: attractor draws only where the orbit ended up (the shipped diagram), transient draws every iteration including the run-in (the tree with a haze over it - the arriving), approach draws ONLY the fifty discarded iterations and no tree at all, which is the diagram's own waste product held up as the image.",
+				"kin": "regime is the family word (harmonic_motion_demo, spring_demo, mass_spring_damper, VectorForces, homogeneous_coordinates, DualBallFMController) and it is used for exactly the family's question - which qualitative behaviour class is on show. The `all` value is taken from mass_spring_damper character for character, and means the same thing there and here: do not crop, this is the shipped uncropped view. The other four values cannot be shared, because a damping ladder and a logistic cascade have different classes - underdamped is not a thing the logistic map can be - and inventing a mapping between them would make an incomparable family look comparable. trace is the LOOSE family word (spring_demo: off/phase/wave; fourier_transform: samples/stems/ribbon) meaning which drawing of the data is shown, and it is taken in that loose sense. It is deliberately NOT `evidence`, whose ladder (result/trace/longhand/axiom) is fixed character for character across fourteen artifacts and means how much of the working is admitted alongside the result: approach withholds the result and shows only the working, which is the inverse of the last rung of that ladder and would corrupt the word.",
+				"still_note": "regime is a strong axis in pixels - the four crops share almost no ink, since the point cloud is redrawn over a different domain and _get_color_for_r re-ramps across it. trace is strong at approach (the tree vanishes; only the run-in haze remains) and thinner at transient, where the haze is added over an unchanged tree; the added points are 50 of every 100 iterations though, so it should still clear the 3% line. The MultiMesh caveat applies: the capture AABB counts MeshInstance3D only and every point here lives in a MultiMeshInstance3D, so the only mesh instances are the two thin axis bars and the highlight plane - check the framing before believing any subject-percentage figure."
+			},
+			"lookup_name": "bifurcation_diagram",
+			"scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn",
+			"class_name": "BifurcationDiagram",
+			"description": "Interactive 3D bifurcation diagram from logistic map - walk through the edge of chaos",
+			"gamwell_reference": "Chapter 12: Chaos Theory, Fractals",
+			"qfep_connection": "The \u03bb parameter IS Langton's \u03bb - tunes between order and chaos",
+			"signals": [
+				"r_changed",
+				"regime_changed"
+			],
+			"interactions": [
+				"set_r_value() to highlight different regimes",
+				"animate_r() for transitions"
+			],
+			"parameters": {
+				"current_r": "Current r value (2.5-4.0)",
+				"r_steps": "Resolution of diagram",
+				"width": "Physical width of visualization",
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "environment"
+			},
+			"dev_themes": [
+				"qfep",
+				"philosophy"
+			],
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"bifurcation",
+				"edge_of_chaos",
+				"lambda",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"name": "Bifurcation Diagram",
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"lambda_slider",
+					"lambda",
+					"contrasts",
+					"florensky_sphere"
+				],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 5,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.2,
+					2.4,
+					0.7
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					5.0,
+					1.0
+				],
+				"max_dimension_m": 4.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				5.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"euclid_postulates_plaque": {
+			"lookup_name": "euclid_postulates_plaque",
+			"scene": "res://commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.tscn",
+			"class_name": "EuclidPostulatesPlaque",
+			"description": "Interactive plaque displaying Euclid's five postulates, highlighting the controversial fifth (parallel) postulate",
+			"gamwell_reference": "Chapter 1-2: Euclidean Geometry",
+			"qfep_connection": "The parallel postulate seemed self-evident for 2000 years - certainty is fragile",
+			"signals": [
+				"postulate_selected",
+				"parallel_highlighted"
+			],
+			"interactions": [
+				"click to cycle postulates"
+			],
+			"parameters": {
+				"current_postulate": "Current postulate (0-4)",
+				"highlight_fifth": "Emphasize the parallel postulate",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy",
+				"geometry"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"euclid",
+				"geometry",
+				"parallel_postulate",
+				"foundations",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"hyperbolic_surface",
+					"elliptic_surface",
+					"happens",
+					"fifth"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.84,
+					1.04,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.04,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			},
+			"content": "text"
+		},
+		"penrose_triangle": {
+			"lookup_name": "penrose_triangle",
+			"scene": "res://commons/artifacts/penrose_triangle/penrose_triangle.tscn",
+			"class_name": "PenroseTriangle",
+			"description": "The impossible triangle - locally coherent, globally impossible. Visual G\u00f6del.",
+			"gamwell_reference": "Chapter 9: Penrose and Escher collaboration",
+			"qfep_connection": "Local validity does not guarantee global consistency",
+			"signals": [
+				"viewpoint_locked",
+				"illusion_revealed"
+			],
+			"interactions": [
+				"move to find the 'sweet spot' where illusion works"
+			],
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"disclosure": [
+						"marker",
+						"bare",
+						"seam",
+						"exploded",
+						"sealed"
+					]
+				},
+				"framing": 0.42,
+				"default": "disclosure=marker - three beams with the z_gap of size*0.25 at the top joint, the caption, and the green sweet-spot bead at (0, 0, size*2.5) rendering as it always has; identical to the pre-promotion _ready, and both existing placements pass no config so nothing reaches the rebuild guard",
+				"was": "one fixed impossible object. The bead named the viewpoint that hides the break, and there was no way for a map to say whether the contradiction should be concealed, marked, dismantled or closed.",
+				"framing_note": "the bead sits 2.5 sizes out on +Z and dominates the capture AABB, which framed the triangle itself at roughly 4% of the frame. 0.42 pulls the camera in; the bead is still inside the 17 degree half-FOV, so marker vs bare remains readable."
+			},
+			"parameters": {
+				"size": "Triangle size",
+				"auto_rotate": "Slowly rotate to reveal impossibility",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"penrose",
+				"impossible",
+				"illusion",
+				"escher",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"artmathematics",
+				"foundationscrisis"
+			],
+			"sequence": "artmathematics",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"escher_staircase",
+					"impossible",
+					"objects",
+					"family"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.58,
+					0.49,
+					1.46
+				],
+				"aabb_center": [
+					0.01,
+					0.06,
+					0.55
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.46,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"poincare_disk": {
+			"lookup_name": "poincare_disk",
+			"scene": "res://commons/artifacts/poincare_disk/poincare_disk.tscn",
+			"class_name": "PoincareDisk",
+			"description": "Poincar\u00e9 disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum < 180\u00b0",
+			"gamwell_reference": "Chapter 2: Non-Euclidean Geometry",
+			"qfep_connection": "The parallel postulate is independent - geometry is a choice",
+			"signals": [
+				"curvature_changed"
+			],
+			"interactions": [
+				"observe geodesics as circular arcs"
+			],
+			"parameters": {
+				"disk_radius": "Size of the disk",
+				"line_count": "Number of geodesic lines",
+				"show_triangle": "Display hyperbolic triangle",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"geometry",
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "advanced",
+			"tags": [
+				"hyperbolic",
+				"poincare",
+				"non_euclidean",
+				"geometry",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~1024"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"models",
+					"geometry",
+					"hyperbolic_surface",
+					"different",
+					"representation"
+				],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.81,
+					0.03
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"schrodinger_box": {
+			"dna": {
+				"axes": {
+					"remainder": [
+						"core",
+						"twin",
+						"seam",
+						"haze",
+						"witness"
+					],
+					"vantage": [
+						"specimen",
+						"stele",
+						"chamber"
+					]
+				}
+			},
+			"lookup_name": "schrodinger_box",
+			"scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
+			"class_name": "SchrodingerBox",
+			"description": "Schr\u00f6dinger's cat thought experiment - superposition collapses upon observation",
+			"gamwell_reference": "Quantum mechanics and measurement problem",
+			"qfep_connection": "Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A",
+			"signals": [
+				"box_opened",
+				"state_collapsed",
+				"superposition_entered"
+			],
+			"interactions": [
+				"click to observe (collapse superposition)",
+				"auto-resets to superposition"
+			],
+			"parameters": {
+				"box_size": "Physical dimensions",
+				"auto_reset_time": "Seconds before returning to superposition",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy",
+				"qfep"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"schrodinger",
+				"quantum",
+				"superposition",
+				"collapse",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"florensky_sphere",
+					"quantum",
+					"paraconsistent",
+					"superposition"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.42,
+					0.32,
+					0.31
+				],
+				"aabb_center": [
+					0.0,
+					0.01,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.42,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"angle_sum_triangle": {
+			"lookup_name": "angle_sum_triangle",
+			"scene": "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn",
+			"class_name": "AngleSumTriangle",
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"opening": [
+						"flat",
+						"hyperbolic",
+						"elliptic"
+					]
+				},
+				"default": "opening=flat - flat SHORT-CIRCUITS in _polyline(): the bow is zero, the arc loop is skipped by `continue`, and the function returns exactly the three shipped vertices, so ImmediateMesh receives v1, v2, v3, v1 in the shipped order with the same material. The label strings are handed back as literals rather than measured, so all four Label3Ds read the bytes they shipped ('60\u00b0' three times and '60\u00b0 + 60\u00b0 + 60\u00b0 = 180\u00b0') at the same positions, pixel_size and font_size. All 3 placements (Euclid_Parallel, Euclid_Parallel_composed, test_batch_1) plus the two curation_station lists (Corridor_Euclid_Parallel, Curation_Bay_foundationscrisis_0) are bare tokens - the ':0:0.5' and ':90:0' suffixes are rotation and y-offset, not config keys - and the axis is read only inside `if config_data.has(\"opening\")`, so none of them reaches the new code.",
+				"was": "one @export, `size`, a scale factor - and apply_grid_config's whole body was `pass`, so no map token could turn even that. The artifact's own truth line is 'the angle sum of a triangle is not a fact about triangles but a fact about the space they inhabit' and its critical_parameter is named as curvature, but the only space it could draw was the flat one: three straight segments and a hard-coded '= 180\u00b0'. The theorem's FAILURE - the whole point of the artifact, per its description - lived in the registry text and in a relationships line pointing at two other artifacts, and nowhere in the geometry.",
+				"shared_with": "curvature_slider - `opening` is that artifact's word with its three values in the same order, because these are the same theorem from two directions: curvature_slider states the sign of K on a dial, this shows what that sign does to a triangle. A room holding both can no longer set them to disagreeing spaces. NOTE the corpus carries a second, unrelated `opening` (agreement_gauge, dot_aligner, dot_product_projector, exercise_5_9_angle_between: agreeing|strangers|opposing|parallel, the angle between two vectors). The collision predates this promotion; the value lists tell the two senses apart and this one is the curvature list.",
+				"finding": "The three angle labels read 60\u00b0 each and are commented '# Equilateral for simplicity', but the triangle as drawn is isoceles - vertices (0, .5s), (-.4s, -.3s), (.4s, -.3s) measure 53.1 / 63.4 / 63.4, which do sum to 180. The shipped strings are nominal, not measured. They are preserved to the byte at the default because three maps ship them; the two curved values print angles MEASURED off the polyline they actually draw (hyperbolic 29+38+38=105, elliptic 79+88+88=255), summing the rounded parts so the printed equation is true as printed. Correcting the flat labels would be a legitimate follow-up and a deliberate change to three live maps, not a side effect of a promotion.",
+				"declined": "witness (curvature_slider's second axis, number|surface|normals) - it would need a rendered saddle or sphere patch and a normal field this artifact has neither of, and taking a word without its answers is the dishonest half of a shared vocabulary. A `figure` axis over triangle shapes (the theorem is invariant under the triangle and variant under the space) is real and still-visible, but its default value would have to be the legacy figure whose labels are nominal, and one axis measured honestly beats two with a seam in them."
+			},
+			"description": "Demonstrates that triangle angles sum to 180\u00b0 in Euclidean space \u2014 a fact that fails in non-Euclidean geometries",
+			"gamwell_reference": "Chapter 1-2: Euclidean Geometry",
+			"qfep_connection": "The angle sum property is axiomatic \u2014 it holds only when the parallel postulate is assumed",
+			"signals": [],
+			"interactions": [
+				"observe angle labels and sum"
+			],
+			"parameters": {
+				"size": "Triangle scale factor (default 0.4)",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"geometry",
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "beginner",
+			"tags": [
+				"euclidean",
+				"geometry",
+				"angles",
+				"triangle",
+				"foundations"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis",
+				"testmaps"
+			],
+			"sequence": "foundationscrisis",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "l_system_turtle",
+					"primitives": [],
+					"operations": [
+						"string_rewrite",
+						"turtle_interpret",
+						"emit_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"hyperbolic_surface",
+					"angle",
+					"elliptic_surface",
+					"angle"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.32,
+					0.32,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.04,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.32,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"hilbert_hotel": {
+			"lookup_name": "hilbert_hotel",
+			"scene": "res://commons/artifacts/hilbert_hotel/hilbert_hotel.tscn",
+			"class_name": "HilbertHotel",
+			"description": "Animated Hilbert's Hotel paradox - infinite rooms all occupied, yet a new guest always fits by shifting n to n+1",
+			"gamwell_reference": "Chapter 6: Cantor's transfinite numbers and Hilbert's Grand Hotel",
+			"qfep_connection": "Infinity is not a limit but a structure - countable infinity accommodates more without expanding",
+			"signals": [],
+			"interactions": [
+				"watch guests shift automatically"
+			],
+			"parameters": {
+				"num_rooms": "Number of visible rooms (default 10)",
+				"shift_duration": "Animation speed for guest shifting",
+				"pause_between_shifts": "Delay between animation cycles"
+			},
+			"dev_themes": [
+				"philosophy",
+				"set_theory"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"hilbert",
+				"infinity",
+				"paradox",
+				"set_theory",
+				"cantor",
+				"animated"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.1,
+					0.09
+				],
+				"aabb_center": [
+					0.0,
+					0.03,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"constructive_proof": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"specimen": [
+						"built",
+						"outline",
+						"candidates",
+						"absent"
+					]
+				},
+				"default": "specimen=built - the exact shipped picture. _build_solid() is _create_visual()'s old inline block moved into a function and nothing else: one BoxMesh at Vector3(0.3, 0.3, 0.3), one StandardMaterial3D at albedo (0.3, 0.6, 0.9), at the artifact's origin. It now hangs under a Specimen Node3D that sits at the origin with an identity transform, so the world position of the cube is unchanged; the arrow keeps the string '\u2190 Must BUILD it' character for character and the caption is identical at every value. All three placements (Brouwer_Intuitionism as a bare token, the curation_station collection in Curation_Bay_foundationscrisis_2, and exhibit_furniture#mount:constructive_proof in the six Trial_* museums) pass no key this reads - exhibit_furniture instantiates the mounted scene and forwards nothing - so nothing standing changes.",
+				"was": "no declared axis, and the runner refused the token for NO TURNABLE KNOBS: there were no @export lines at all. apply_grid_config accepted `color` and `size`, which are a tint and a dimension. The artifact's own critical_parameter is 'the witness - without an explicit construction, the proof is rejected', and the witness was a hard-coded 0.3 m cube that was always present, so the classical proof its caption names was the one thing the room could never be shown.",
+				"note": "specimen is what the proof puts forward in the place where x must be. built = the solid cube, blue, constructive: here is x. outline = the same cube as twelve edge bars in grey, the claim keeping its shape with nothing inside it. candidates = twenty-seven small grey cubes filling the same 0.3 m volume with none of them distinguished, existence over a finite domain where the proof will not say which. absent = a thin grey plate whose top face sits exactly where the solid cube's underside was and nothing above it, the reductio that refutes non-existence and produces nothing. Blue means produced and grey means claimed, which is the whole argument in one colour rule. Every value builds real MeshInstance3D geometry in the same slot, including absent - a value that measured zero AABB would be a fact about the capture rather than about the proof. The caption is deliberately NOT switched: it states both positions and stays true at every value, so a measured bite is a bite in the object. The arrow line does switch, because '\u2190 Must BUILD it' standing beside an empty plate is the label contradicting the picture.",
+				"kin": "`evidence` (result|trace|longhand|axiom, 19 declarations) was considered and DECLINED. It is the corpus's word for how much of the working is admitted alongside the result, and its rungs are a monotone disclosure ladder over an apparatus in motion. There is no working here and nothing in motion - one static claim - and the values are not more-or-less of one thing: candidates is not 'more working than outline', it is a different proof. Taking the word with a different question is the failure check_dna_declarations exists to catch. `witness` is the term of art and this artifact's own vocabulary, and was ALSO declined: lab_room already declares witness = pane|none|port|sash for an observation aperture, and one word covering two unrelated questions makes a shared vocabulary a lie. specimen is a new word and shares nothing; the nearest live neighbour is godel_statement_plaque.outside (quotation|margin|breach|omission|habitat), which asks where a statement stands relative to a system rather than what a proof produces."
+			},
+			"lookup_name": "constructive_proof",
+			"scene": "res://commons/artifacts/constructive_proof/constructive_proof.tscn",
+			"class_name": "ConstructiveProof",
+			"description": "Demonstrates constructive vs classical proof - constructive must exhibit the witness, classical can prove existence by contradiction",
+			"gamwell_reference": "Chapter 3-5: Constructivism and Intuitionism",
+			"qfep_connection": "Constructive proof demands the witness be built - existence without construction is insufficient",
+			"signals": [],
+			"interactions": [
+				"observe the contrast between constructive and classical proof"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"constructive",
+				"proof",
+				"intuitionism",
+				"foundations",
+				"witness"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis",
+				"testmaps"
+			],
+			"sequence": "foundationscrisis",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"excluded_middle_demo",
+					"rejecting",
+					"forces",
+					"constructive"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.3,
+					0.3,
+					0.3
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"brouwer_choice_sequence": {
+			"dna": {
+				"axes": {
+					"horizon": [
+						"question",
+						"spread",
+						"law",
+						"closed"
+					]
+				}
+			},
+			"lookup_name": "brouwer_choice_sequence",
+			"scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
+			"class_name": "BrouwerChoiceSequence",
+			"description": "Brouwer's free choice sequences - unfinished infinite objects that unfold over time, visualized as fading dots with an open-ended future",
+			"gamwell_reference": "Chapter 3-5: Intuitionism and Brouwer",
+			"qfep_connection": "The sequence is never complete - knowledge is always in-progress, never finalized",
+			"signals": [],
+			"interactions": [
+				"observe the unfolding sequence with animated dots"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"brouwer",
+				"intuitionism",
+				"choice_sequence",
+				"infinity",
+				"foundations"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"excluded_middle_demo",
+					"rejection",
+					"enables",
+					"choice"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.76,
+					0.1,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.76,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"excluded_middle_demo": {
+			"dna": {
+				"axes": {
+					"middle": [
+						"classical",
+						"third",
+						"spectrum",
+						"half"
+					]
+				}
+			},
+			"lookup_name": "excluded_middle_demo",
+			"scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
+			"class_name": "ExcludedMiddleDemo",
+			"description": "Law of excluded middle (P or not-P) interactive demo - Brouwer rejected this for non-constructive proofs, slider controls the degree of rejection",
+			"gamwell_reference": "Chapter 3-5: Intuitionism and the rejection of excluded middle",
+			"qfep_connection": "Not everything is decidable - the excluded middle assumes omniscience that constructivism rejects",
+			"signals": [],
+			"interactions": [
+				"use slider to toggle between classical and intuitionist views"
+			],
+			"parameters": {
+				"show_rejection": "Whether to display Brouwer's rejection of the law",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"brouwer",
+				"intuitionism",
+				"excluded_middle",
+				"logic",
+				"foundations",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis",
+				"testmaps"
+			],
+			"sequence": "foundationscrisis",
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"constructive_proof",
+					"rejected",
+					"constructive",
+					"proofs"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					0.66,
+					0.74
+				],
+				"aabb_center": [
+					0.0,
+					0.23,
+					0.27
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.74,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"complexity_dial_workbench": {
+			"lookup_name": "complexity_dial_workbench",
+			"scene": "res://commons/artifacts/complexity_dial_workbench/complexity_dial_workbench.tscn",
+			"class_name": "ComplexityDialWorkbench",
+			"name": "Complexity Dial Workbench",
+			"description": "Interactive workbench for the polynomial-vs-exponential gap. One slider drives N \u2208 [1,60]; five algorithms (O(log N), O(N), O(N log N), O(N\u00b2), O(2^N)) race their step counts simultaneously. Log-scaled bars + step-count labels + a dashed wall-clock line at 10\u2079 ops/sec + a small growth-curve panel at the bottom. At N\u224830 the exponential bar crosses the wall-clock line; at N=60 the gap is 18 orders of magnitude. Sister to /complexity-dial-gallery (web frieze frozen at 7 N-values).",
+			"gamwell_reference": "Chapter 9-13: Turing-era complexity theory, decidability vs tractability",
+			"qfep_connection": "The polynomial/exponential gap as a categorical, not quantitative, limit \u2014 not bridgeable by any constant factor. A different kind of thing.",
+			"signals": [],
+			"interactions": [
+				"grab slider to change N (input size); 5 algorithm bars and the growth curves update live"
+			],
+			"parameters": {
+				"initial_n": "Starting N value (default 30)",
+				"practical_log_threshold": "log10 of the wall-clock cutoff (default 9 = 10\u2079 ops/sec)",
+				"plate_scale": "Overall workbench scale (default 2.0)",
+				"footprint": [
+					2,
+					3,
+					2
+				],
+				"size_group": "medium"
+			},
+			"category": "limits-of-computing",
+			"interaction": "grab_slide",
+			"sequence": "foundationscrisis",
+			"artifact_type": "limits_workbench",
+			"capacity": "FEEL the polynomial/exponential gap",
+			"dev_themes": [
+				"limits_of_computing",
+				"complexity_theory",
+				"turing",
+				"p_vs_np",
+				"foundationscrisis"
+			],
+			"dev_category": "limits_of_computing",
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"slider",
+				"complexity",
+				"big_o",
+				"polynomial",
+				"exponential",
+				"bar_chart",
+				"growth_curves",
+				"limits_of_computing",
+				"workbench"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"shannon_workbench",
+					"halting_bench",
+					"cantor_diagonal",
+					"godel_statement_plaque"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.76,
+					1.71,
+					1.59
+				],
+				"aabb_center": [
+					0.01,
+					1.25,
+					-0.7
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.76,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			]
+		},
+		"halting_workbench": {
+			"name": "Halting Workbench",
+			"lookup_name": "halting_workbench",
+			"description": "Interactive Turing machine simulator. Slider picks one of 8 canonical machines. Step button advances one step; budget slider auto-runs. Tape, head, state, and halt/loop banner update live.",
+			"scene": "res://commons/artifacts/halting_workbench/halting_workbench.tscn",
+			"category": "limits-of-computing",
+			"interaction": "grab_slide",
+			"sequence": "foundationscrisis",
+			"artifact_type": "limits-of-computing",
+			"qfep_term": "lambda",
+			"capacity": "WALK the halting decision",
+			"dev_themes": [
+				"interactive",
+				"turing-machine",
+				"halting-problem",
+				"simulator"
+			],
+			"dev_category": "limits-of-computing",
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"turing-machine",
+				"halting-problem",
+				"simulator"
+			],
+			"include_in_map_data": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"map_ready": true,
+			"parameters": {
+				"footprint": [
+					1,
+					1
+				]
+			},
+			"size_group": "standard",
+			"measurements": {
+				"aabb_size": [
+					1.56,
+					1.78,
+					1.59
+				],
+				"aabb_center": [
+					0.16,
+					1.29,
+					-0.7
+				],
+				"grid_cells": [
+					2,
+					2
+				],
+				"max_dimension_m": 1.78,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				2
+			]
+		}
+	},
+	"sequence_mapping": {
+		"foundationscrisis": [
+			"godel_statement_plaque",
+			"russell_set_box",
+			"escher_staircase",
+			"florensky_sphere",
+			"euclid_postulates_plaque",
+			"penrose_triangle",
+			"poincare_disk",
+			"schrodinger_box",
+			"hilbert_hotel",
+			"brouwer_choice_sequence",
+			"excluded_middle_demo",
+			"complexity_dial_workbench"
+		],
+		"artmathematics": [
+			"magritte_pipe",
+			"escher_staircase",
+			"penrose_triangle"
+		],
+		"qfeplaboratory": [
+			"bifurcation_diagram",
+			"florensky_sphere",
+			"schrodinger_box"
+		]
+	},
+	"theoretical_connections": {
+		"self_reference_artifacts": [
+			"godel_statement_plaque",
+			"russell_set_box",
+			"escher_staircase"
+		],
+		"representation_gap_artifacts": [
+			"magritte_pipe",
+			"penrose_triangle"
+		],
+		"paraconsistent_artifacts": [
+			"florensky_sphere",
+			"schrodinger_box"
+		],
+		"edge_of_chaos_artifacts": [
+			"bifurcation_diagram"
+		],
+		"non_euclidean_artifacts": [
+			"poincare_disk"
+		],
+		"infinity_paradox_artifacts": [
+			"hilbert_hotel"
+		],
+		"foundations_artifacts": [
+			"euclid_postulates_plaque"
+		]
+	}
 }

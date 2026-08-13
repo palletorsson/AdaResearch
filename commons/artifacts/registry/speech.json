@@ -1,430 +1,430 @@
 {
-  "artifacts": {
-    "singing_board": {
-      "category": "speech",
-      "complexity": "beginner",
-      "description": "Interactive singing surface — touch points map to pitch and timbre, creating a spatial instrument where position becomes sound.",
-      "dev_themes": [
-        "audio",
-        "language",
-        "music",
-        "speech"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "singing_board",
-      "map_ready": true,
-      "map_sequences": [],
-      "name": "Singing Board",
-      "scene": "res://algorithms/speech/phoneme_cloud/singing_board.tscn",
-      "tags": [
-        "singing",
-        "instrument",
-        "spatial",
-        "sound",
-        "interaction",
-        "speech"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "~0"
-      },
-      "spatial_needs": {
-        "platform": "sunken",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "entry",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.58,
-          0.61,
-          0.58
-        ],
-        "aabb_center": [
-          0.27,
-          0.25,
-          0.27
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.61,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "omni",
-        "range": 2,
-        "density": "low",
-        "min_clearance": 0,
-        "stack_priority": 0.1,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.276843Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Ode to Joy stored as semitone offsets, beat durations, and vowel targets in the F1/delta plane, with vibrato as a 5.5 Hz wobble on the ratio. Song compressed to coordinates plus a formant field — and the irreducible part is that the residue still sounds like someone singing."
-    },
-    "vowel_instrument": {
-      "category": "speech",
-      "complexity": "intermediate",
-      "description": "Vowel space as musical instrument — navigate the formant plane to produce vowel sounds. Front/back, open/close become coordinates in phonemic space.",
-      "dev_themes": [
-        "audio",
-        "language",
-        "music",
-        "speech"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "vowel_instrument",
-      "map_ready": true,
-      "map_sequences": [],
-      "name": "Vowel Instrument",
-      "scene": "res://algorithms/speech/phoneme_cloud/vowel_instrument.tscn",
-      "tags": [
-        "vowel",
-        "formant",
-        "instrument",
-        "phoneme",
-        "synthesis",
-        "speech"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.0,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "qfep_connection": "The mouth is relocated to the hand: lowering it opens a jaw you do not have, pushing it forward advances a tongue, trigger pressure is breath. Formant space (F1/F2) becomes reachable space — speech re-staged as gesture, its hidden musculature made public and grabbable."
-    },
-    "vowel_sound_board": {
-      "category": "unknown",
-      "complexity": "beginner",
-      "description": "vowel(formant1, formant2) -> pulse_train filtered through formant resonances",
-      "dev_themes": [
-        "audio",
-        "language",
-        "music",
-        "speech"
-      ],
-      "footprint": [
-        1,
-        1,
-        1
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "vowel_sound_board",
-      "map_ready": true,
-      "map_sequences": [
-        "wavefunctions"
-      ],
-      "name": "vowel_sound_board",
-      "parameters": {
-        "footprint": [
-          1,
-          1,
-          1
-        ],
-        "size_group": "compact"
-      },
-      "scene": "res://algorithms/speech/phoneme_cloud/vowel_sound_board.tscn",
-      "size_group": "compact",
-      "tags": [
-        "speech"
-      ],
-      "dna": {
-        "promoted": "2026-08-05",
-        "stage": "2 - variation",
-        "axes": {
-          "chart": [
-            "anchors",
-            "none",
-            "ticks",
-            "quadrilateral",
-            "field"
-          ]
-        },
-        "fixture": {
-          "is_ambient_enabled": false
-        },
-        "fixture_note": "The board starts a phrase at t = 1.0 s and the shutter opens at 1.1 s, so without this the mapper's point and the word label are caught 0.1 s into 'Right Here Right Now' - different frames of an animation on top of the axis being measured. Ambient off leaves the board at rest so the tiles differ only by what `chart` draws. Bench only; the shipped default is true and every placement keeps speaking.",
-        "default": "chart=anchors - `none` is the only value that skips the shipped label loop; every other value runs it unchanged and then adds to it, so `anchors` reaches the end of _spawn_visual_anchors() and stops, node for node the build the 4 placements have always had. No mesh, no material and no extra child is created at the default. apply_grid_config is gated three ways - the key must be present, the word must be in CHARTS, and the value must have CHANGED - and only rebuilds after _ready has drawn once, so a config call naming nothing this board owns cannot tear the chart off a live placement.",
-        "was": "three exports, all of them audible or temporal: phrase_selection (12 words), is_ambient_enabled, repeat_interval. apply_grid_config existed but only accepted `say` and `repeat`, i.e. more speech. The board's whole visual argument - that a vowel is a POSITION in an F1/F2 plane, which is what its @identity truth says - was one hard-coded loop hanging seven billboarded phoneme labels at their coordinates. The plane itself was never drawn.",
-        "note": "hand promotion 2026-08-05, refused by the runner as NO TURNABLE KNOBS. The formant plane IS a real diagram and the board did draw its landmarks - the seven ANCHORS labels - but not the space: no figures, no bounding figure, no continuum. The four alternatives are four positions in phonetics, not four decorations: a vowel as a named landmark (anchors), as an unlocated sound (none), as a measurement in Hz (ticks), as a vertex of the canonical published quadrilateral (quadrilateral), or as one conventional stop on a continuum that has none (field). REFUSED, and this is the tempting one: an axis over ANCHORS or the F1/DELTA bounds - a child's vowel space, a soprano's, another language's - which is a live argument about whose mouth is the reference, but retunes the instrument instead of changing it, and would render as the same seven labels a few pixels apart. ALSO REFUSED: everything audible. phrase_selection's twelve words, repeat_interval, pulse_hz, the plosive/fricative/nasal chain. The evidence is one still PNG and this board's real work is a time series of formant transitions; twelve phrases photograph as twelve identical boards."
-      },
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": true,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "depends",
-          "formant",
-          "synthesis",
-          "engine",
-          "contrasts"
-        ],
-        "preferred_zone": "entry",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.58,
-          0.61,
-          0.58
-        ],
-        "aabb_center": [
-          0.27,
-          0.25,
-          0.27
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.61,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "spatial_profile": {
-        "dir_group": "omni",
-        "range": 2,
-        "density": "low",
-        "min_clearance": 0,
-        "stack_priority": 0.1,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.276843Z",
-        "derived_from": "aabb_size + category"
-      }
-    },
-    "vowel_synth": {
-      "category": "speech",
-      "complexity": "intermediate",
-      "description": "Real-time vowel synthesis from formant parameters — adjust F1 and F2 frequencies to morph between vowel sounds. Hear the geometry of the vowel triangle.",
-      "dev_themes": [
-        "audio",
-        "language",
-        "music",
-        "speech"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "vowel_synth",
-      "map_ready": true,
-      "map_sequences": [],
-      "name": "Vowel Synthesizer",
-      "scene": "res://algorithms/speech/phoneme_cloud/vowel_synth.tscn",
-      "tags": [
-        "vowel",
-        "synthesizer",
-        "formant",
-        "f1",
-        "f2",
-        "speech",
-        "synthesis"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "end",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.0,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "qfep_connection": "A voice from almost nothing: one pulse train, two resonant filters, and consonants as scheduled interruptions — closure, burst, decay stamped onto a sample clock. The throat exposed as a filter bank, which reads as reduction or liberation depending on who gets to own the voice."
-    }
-  },
-  "registry_info": {
-    "category": "speech",
-    "description": "Speech and phoneme artifacts — vowel synthesis, singing boards, and phonemic space exploration. Sound as computational material.",
-    "name": "speech",
-    "theoretical_grounding": "Phonetics, formant theory, vowel space geometry, sound synthesis, speech perception"
-  }
+	"artifacts": {
+		"singing_board": {
+			"category": "speech",
+			"complexity": "beginner",
+			"description": "Interactive singing surface \u2014 touch points map to pitch and timbre, creating a spatial instrument where position becomes sound.",
+			"dev_themes": [
+				"audio",
+				"language",
+				"music",
+				"speech"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "singing_board",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Singing Board",
+			"scene": "res://algorithms/speech/phoneme_cloud/singing_board.tscn",
+			"tags": [
+				"singing",
+				"instrument",
+				"spatial",
+				"sound",
+				"interaction",
+				"speech"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.58,
+					0.58,
+					0.58
+				],
+				"aabb_center": [
+					0.27,
+					0.27,
+					0.27
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.58,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.276843Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Ode to Joy stored as semitone offsets, beat durations, and vowel targets in the F1/delta plane, with vibrato as a 5.5 Hz wobble on the ratio. Song compressed to coordinates plus a formant field \u2014 and the irreducible part is that the residue still sounds like someone singing."
+		},
+		"vowel_instrument": {
+			"category": "speech",
+			"complexity": "intermediate",
+			"description": "Vowel space as musical instrument \u2014 navigate the formant plane to produce vowel sounds. Front/back, open/close become coordinates in phonemic space.",
+			"dev_themes": [
+				"audio",
+				"language",
+				"music",
+				"speech"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vowel_instrument",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Vowel Instrument",
+			"scene": "res://algorithms/speech/phoneme_cloud/vowel_instrument.tscn",
+			"tags": [
+				"vowel",
+				"formant",
+				"instrument",
+				"phoneme",
+				"synthesis",
+				"speech"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"qfep_connection": "The mouth is relocated to the hand: lowering it opens a jaw you do not have, pushing it forward advances a tongue, trigger pressure is breath. Formant space (F1/F2) becomes reachable space \u2014 speech re-staged as gesture, its hidden musculature made public and grabbable."
+		},
+		"vowel_sound_board": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "vowel(formant1, formant2) -> pulse_train filtered through formant resonances",
+			"dev_themes": [
+				"audio",
+				"language",
+				"music",
+				"speech"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vowel_sound_board",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "vowel_sound_board",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/speech/phoneme_cloud/vowel_sound_board.tscn",
+			"size_group": "compact",
+			"tags": [
+				"speech"
+			],
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"chart": [
+						"anchors",
+						"none",
+						"ticks",
+						"quadrilateral",
+						"field"
+					]
+				},
+				"fixture": {
+					"is_ambient_enabled": false
+				},
+				"fixture_note": "The board starts a phrase at t = 1.0 s and the shutter opens at 1.1 s, so without this the mapper's point and the word label are caught 0.1 s into 'Right Here Right Now' - different frames of an animation on top of the axis being measured. Ambient off leaves the board at rest so the tiles differ only by what `chart` draws. Bench only; the shipped default is true and every placement keeps speaking.",
+				"default": "chart=anchors - `none` is the only value that skips the shipped label loop; every other value runs it unchanged and then adds to it, so `anchors` reaches the end of _spawn_visual_anchors() and stops, node for node the build the 4 placements have always had. No mesh, no material and no extra child is created at the default. apply_grid_config is gated three ways - the key must be present, the word must be in CHARTS, and the value must have CHANGED - and only rebuilds after _ready has drawn once, so a config call naming nothing this board owns cannot tear the chart off a live placement.",
+				"was": "three exports, all of them audible or temporal: phrase_selection (12 words), is_ambient_enabled, repeat_interval. apply_grid_config existed but only accepted `say` and `repeat`, i.e. more speech. The board's whole visual argument - that a vowel is a POSITION in an F1/F2 plane, which is what its @identity truth says - was one hard-coded loop hanging seven billboarded phoneme labels at their coordinates. The plane itself was never drawn.",
+				"note": "hand promotion 2026-08-05, refused by the runner as NO TURNABLE KNOBS. The formant plane IS a real diagram and the board did draw its landmarks - the seven ANCHORS labels - but not the space: no figures, no bounding figure, no continuum. The four alternatives are four positions in phonetics, not four decorations: a vowel as a named landmark (anchors), as an unlocated sound (none), as a measurement in Hz (ticks), as a vertex of the canonical published quadrilateral (quadrilateral), or as one conventional stop on a continuum that has none (field). REFUSED, and this is the tempting one: an axis over ANCHORS or the F1/DELTA bounds - a child's vowel space, a soprano's, another language's - which is a live argument about whose mouth is the reference, but retunes the instrument instead of changing it, and would render as the same seven labels a few pixels apart. ALSO REFUSED: everything audible. phrase_selection's twelve words, repeat_interval, pulse_hz, the plosive/fricative/nasal chain. The evidence is one still PNG and this board's real work is a time series of formant transitions; twelve phrases photograph as twelve identical boards."
+			},
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"formant",
+					"synthesis",
+					"engine",
+					"contrasts"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.58,
+					0.58,
+					0.58
+				],
+				"aabb_center": [
+					0.27,
+					0.27,
+					0.27
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.58,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.276843Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"vowel_synth": {
+			"category": "speech",
+			"complexity": "intermediate",
+			"description": "Real-time vowel synthesis from formant parameters \u2014 adjust F1 and F2 frequencies to morph between vowel sounds. Hear the geometry of the vowel triangle.",
+			"dev_themes": [
+				"audio",
+				"language",
+				"music",
+				"speech"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vowel_synth",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Vowel Synthesizer",
+			"scene": "res://algorithms/speech/phoneme_cloud/vowel_synth.tscn",
+			"tags": [
+				"vowel",
+				"synthesizer",
+				"formant",
+				"f1",
+				"f2",
+				"speech",
+				"synthesis"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"qfep_connection": "A voice from almost nothing: one pulse train, two resonant filters, and consonants as scheduled interruptions \u2014 closure, burst, decay stamped onto a sample clock. The throat exposed as a filter bank, which reads as reduction or liberation depending on who gets to own the voice."
+		}
+	},
+	"registry_info": {
+		"category": "speech",
+		"description": "Speech and phoneme artifacts \u2014 vowel synthesis, singing boards, and phonemic space exploration. Sound as computational material.",
+		"name": "speech",
+		"theoretical_grounding": "Phonetics, formant theory, vowel space geometry, sound synthesis, speech perception"
+	}
 }

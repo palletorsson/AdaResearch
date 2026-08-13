@@ -1,230 +1,230 @@
 {
-  "registry_info": {
-    "name": "neuroscience",
-    "description": "Computational neuroscience artifacts — Markov blankets, perception, and the boundary between self and environment. Where information theory meets biology.",
-    "category": "neuroscience",
-    "theoretical_grounding": "Free energy principle, Markov blankets, active inference, perception as Bayesian inference, sensory processing"
-  },
-  "artifacts": {
-    "puls_markov": {
-      "lookup_name": "puls_markov",
-      "scene": "res://algorithms/neuroscience/markovblanket/puls_markov.tscn",
-      "name": "Pulsing Markov Blanket",
-      "description": "Markov blanket cell simulation with noise-driven pulsing and entropy measurement. Visualizes the statistical boundary between internal states and external environment — the free energy principle made tangible.",
-      "category": "neuroscience",
-      "complexity": "advanced",
-      "tags": [
-        "markov_blanket",
-        "free_energy",
-        "entropy",
-        "active_inference",
-        "boundary",
-        "neuroscience"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "dev_themes": [
-        "biology",
-        "neuroscience",
-        "qfep"
-      ],
-      "geometry_spec": {
-        "mesh_type": "instanced_particles",
-        "topology": "scattered",
-        "construction": {
-          "method": "multimesh_instancing",
-          "primitives": [
-            "sphere"
-          ],
-          "operations": [
-            "allocate_instances",
-            "set_transforms",
-            "update_per_frame"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "particle_lifecycle",
-          "driven_by": "particle_system",
-          "affects": [
-            "transform",
-            "color",
-            "visibility"
-          ]
-        },
-        "instance_strategy": "particles",
-        "vertex_estimate": "~1024"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 9,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "end",
-        "measured_footprint_cells": 64,
-        "footprint_source": "measured_capped"
-      },
-      "measurements": {
-        "aabb_size": [
-          7.97,
-          8.0,
-          7.97
-        ],
-        "aabb_center": [
-          0.0,
-          0.0,
-          0.0
-        ],
-        "grid_cells": [
-          8.0,
-          8.0
-        ],
-        "max_dimension_m": 8.0,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        8.0,
-        1,
-        8.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 18,
-        "density": "high",
-        "min_clearance": 2,
-        "stack_priority": 0.85,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.166995Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Yellow packets fall inward and the inner sphere's entropy moves only by what the membrane processes, while the outer world's entropy random-walks unconditioned. The blanket's claim made literal enough to read off two labels: inside touches outside solely through traffic at the boundary."
-    },
-    "perception_altering": {
-      "lookup_name": "perception_altering",
-      "scene": "res://algorithms/neuroscience/perceptionaltering/perception_altering.tscn",
-      "name": "Perception Altering Environment",
-      "description": "Environmental perception distortion through shader manipulation and spatial warping. Experience how altered sensory parameters change the felt quality of space — perception as active construction, not passive recording.",
-      "category": "neuroscience",
-      "complexity": "intermediate",
-      "tags": [
-        "perception",
-        "shader",
-        "distortion",
-        "sensory",
-        "embodiment",
-        "neuroscience"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "dev_themes": [
-        "biology",
-        "neuroscience"
-      ],
-      "geometry_spec": {
-        "mesh_type": "boolean_composition",
-        "topology": "volumetric",
-        "construction": {
-          "method": "csg_boolean",
-          "primitives": [
-            "box",
-            "plane"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_primitives",
-            "boolean_combine"
-          ]
-        },
-        "material": {
-          "type": "shader",
-          "shading_model": "wireframe",
-          "key_properties": [
-            "emission",
-            "grid_overlay",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "shader_time",
-          "driven_by": "shader_uniform",
-          "affects": [
-            "visual"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 9,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 900,
-        "footprint_source": "measured_capped"
-      },
-      "measurements": {
-        "aabb_size": [
-          30.0,
-          4.0,
-          30.0
-        ],
-        "aabb_center": [
-          0.0,
-          1.0,
-          0.0
-        ],
-        "grid_cells": [
-          30.0,
-          30.0
-        ],
-        "max_dimension_m": 30.0,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        30.0,
-        1,
-        30.0
-      ],
-      "spatial_profile": {
-        "dir_group": "plane",
-        "range": 60,
-        "density": "field",
-        "min_clearance": 0,
-        "stack_priority": 0.3,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.166995Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "The distortion does not stop at the retina: beyond the color shift and wobble, the zones rotate your movement direction up to 45 degrees and tilt gravity itself, so intention arrives in the world already edited. Perception and action exposed as one loop by corrupting them at the same joint."
-    }
-  }
+	"registry_info": {
+		"name": "neuroscience",
+		"description": "Computational neuroscience artifacts \u2014 Markov blankets, perception, and the boundary between self and environment. Where information theory meets biology.",
+		"category": "neuroscience",
+		"theoretical_grounding": "Free energy principle, Markov blankets, active inference, perception as Bayesian inference, sensory processing"
+	},
+	"artifacts": {
+		"puls_markov": {
+			"lookup_name": "puls_markov",
+			"scene": "res://algorithms/neuroscience/markovblanket/puls_markov.tscn",
+			"name": "Pulsing Markov Blanket",
+			"description": "Markov blanket cell simulation with noise-driven pulsing and entropy measurement. Visualizes the statistical boundary between internal states and external environment \u2014 the free energy principle made tangible.",
+			"category": "neuroscience",
+			"complexity": "advanced",
+			"tags": [
+				"markov_blanket",
+				"free_energy",
+				"entropy",
+				"active_inference",
+				"boundary",
+				"neuroscience"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"neuroscience",
+				"qfep"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "~1024"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 64,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.66,
+					8.0,
+					8.66
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					9,
+					9
+				],
+				"max_dimension_m": 8.66,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				9,
+				1,
+				9
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.166995Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Yellow packets fall inward and the inner sphere's entropy moves only by what the membrane processes, while the outer world's entropy random-walks unconditioned. The blanket's claim made literal enough to read off two labels: inside touches outside solely through traffic at the boundary."
+		},
+		"perception_altering": {
+			"lookup_name": "perception_altering",
+			"scene": "res://algorithms/neuroscience/perceptionaltering/perception_altering.tscn",
+			"name": "Perception Altering Environment",
+			"description": "Environmental perception distortion through shader manipulation and spatial warping. Experience how altered sensory parameters change the felt quality of space \u2014 perception as active construction, not passive recording.",
+			"category": "neuroscience",
+			"complexity": "intermediate",
+			"tags": [
+				"perception",
+				"shader",
+				"distortion",
+				"sensory",
+				"embodiment",
+				"neuroscience"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"neuroscience"
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "shader_time",
+					"driven_by": "shader_uniform",
+					"affects": [
+						"visual"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 900,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					30.0,
+					4.0,
+					30.0
+				],
+				"aabb_center": [
+					0.0,
+					1.0,
+					0.0
+				],
+				"grid_cells": [
+					30.0,
+					30.0
+				],
+				"max_dimension_m": 30.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				30.0,
+				1,
+				30.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.166995Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The distortion does not stop at the retina: beyond the color shift and wobble, the zones rotate your movement direction up to 45 degrees and tilt gravity itself, so intention arrives in the world already edited. Perception and action exposed as one loop by corrupting them at the same joint."
+		}
+	}
 }

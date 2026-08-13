@@ -1,7 +1,7 @@
 {
 	"id": "control_console",
 	"name": "Control Console",
-	"description": "A small Dieter-Rams CONSOLE — a brushed grey-metal CSG cabinet with a warm Braun control plate recessed flush in its slanted face, on a base plinth. Built like the pattern machines' display console with CSG booleans (a block minus a reclined wedge for the angled screen face, minus a shallow pocket for the bezel) so the plate sits INSIDE the metal, framed, not floating. The plate gives the controls a home; the console gives the whole instrument one. By default it shows a reference instrument (title + SCALE k slider + SNAP button + green-LED readout); a teaching machine can house its own controls inside it via the same add_slider / add_button / add_readout API.",
+	"description": "A small Dieter-Rams CONSOLE \u2014 a brushed grey-metal CSG cabinet with a warm Braun control plate recessed flush in its slanted face, on a base plinth. Built like the pattern machines' display console with CSG booleans (a block minus a reclined wedge for the angled screen face, minus a shallow pocket for the bezel) so the plate sits INSIDE the metal, framed, not floating. The plate gives the controls a home; the console gives the whole instrument one. By default it shows a reference instrument (title + SCALE k slider + SNAP button + green-LED readout); a teaching machine can house its own controls inside it via the same add_slider / add_button / add_readout API.",
 	"category": "ui",
 	"theoreticalGrounding": "A layout is not a set of positions, it is a set of relationships. The box model nests: a console contains a plate, which contains a row of cells, which contain controls. Once the relationships are modelled, the positions compute themselves and the housing reads as one designed object.",
 	"artifacts": {
@@ -14,13 +14,31 @@
 			"scene": "res://commons/ui/control_console.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"footprint": [1, 1, 1],
-			"tags": ["ui", "console", "control-panel", "csg", "dieter-rams", "housing", "2d-in-3d", "vr", "placeable"],
-			"qfep_connection": "The instrument that holds the instrument — a relational frame that gives the controls a body, a face, a base. The box model one level up.",
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"tags": [
+				"ui",
+				"console",
+				"control-panel",
+				"csg",
+				"dieter-rams",
+				"housing",
+				"2d-in-3d",
+				"vr",
+				"placeable"
+			],
+			"qfep_connection": "The instrument that holds the instrument \u2014 a relational frame that gives the controls a body, a face, a base. The box model one level up.",
 			"parameters": {
 				"title": "Console",
 				"tilt_deg": 20.0,
-				"footprint": [1, 1, 1],
+				"footprint": [
+					1,
+					1,
+					1
+				],
 				"size_group": "small"
 			},
 			"size_group": "small",
@@ -35,12 +53,40 @@
 				"promoted": "2026-08-05",
 				"stage": "2 - variation",
 				"axes": {
-					"mounting": ["kiosk", "lectern", "wall"],
-					"demo_apparatus": ["none", "monitor", "cube", "plan", "jar"]
+					"mounting": [
+						"kiosk",
+						"lectern",
+						"wall"
+					],
+					"demo_apparatus": [
+						"none",
+						"monitor",
+						"cube",
+						"plan",
+						"jar"
+					]
 				},
 				"default": "mounting=kiosk, demo_apparatus=none - the shipped build node for node: the CSG base box rising to the head's lower-front edge, the dark plinth lip, the cabinet door with its pull handle, the four vent slats, and no apparatus in front. Both new branches are additive `if mounting == \"kiosk\"` guards around code that is otherwise byte-identical, so the 4 map placements are unchanged AND so are the 14 workbench artifacts that compose this script directly (shannon_workbench, halting_workbench, stretch_bench, riemann_sum_workbench, ...), none of which sets mounting.",
 				"was": "a floor-standing metal cabinet, asserted before the question was asked. Twenty-one exports, every one of them a dimension, a colour or a nudge - four separate knobs (board_drop, board_out, board_slide, board_face_drop) for moving the same plate a centimetre - and not one of them asking whether an interface must also be a container. Every workbench that composes this console inherited a door and a vent grille whether or not the room wanted an appliance.",
 				"note": "mounting reuses soft_stage_dashboard's word and its three answers character for character; the two measure alike (wall removes the body, lectern puts the face on legs, kiosk gives it a standing body) and only the DEFAULT differs, because the dashboard shipped as a bare quad and this shipped as a cabinet. demo_apparatus was already an @export with a match block and had never been declared, so the sweep could not reach it. Its four non-none values now derive viz_floor from face_to_origin, because the -1.0 default is a DESKTOP assumption that sank every apparatus base a metre under a floor-standing console."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					1.28,
+					0.46
+				],
+				"aabb_center": [
+					0.0,
+					0.64,
+					-0.13
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.28,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

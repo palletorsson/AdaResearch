@@ -1,9 +1,9 @@
 {
 	"id": "mortar_vector_siege",
 	"name": "Mortar Vector Siege",
-	"description": "A player-held VR MORTAR vs a drone swarm. Grab the tube, TILT your hand to set the launch angle, HOLD the trigger to charge force, then RELEASE to lob a RigidBody shell on a ballistic arc. A live parabola, a green velocity arrow, a red gravity arrow, and a ground AoE ring preview where the shell will fall — computed analytically, so the preview never waits on physics. The shell detonates on the earlier of floor-contact or analytic impact, area-bombing every flying drone inside the splash radius. Indirect-fire sibling of the direct-fire `hl_turret_vectors`: there you point AT the target, here you aim a parabola so its FOOT lands on it. Desktop/headless: auto-aims at a roaming drone and auto-fires so a capture shows the arc + a shell + the swarm.",
+	"description": "A player-held VR MORTAR vs a drone swarm. Grab the tube, TILT your hand to set the launch angle, HOLD the trigger to charge force, then RELEASE to lob a RigidBody shell on a ballistic arc. A live parabola, a green velocity arrow, a red gravity arrow, and a ground AoE ring preview where the shell will fall \u2014 computed analytically, so the preview never waits on physics. The shell detonates on the earlier of floor-contact or analytic impact, area-bombing every flying drone inside the splash radius. Indirect-fire sibling of the direct-fire `hl_turret_vectors`: there you point AT the target, here you aim a parabola so its FOOT lands on it. Desktop/headless: auto-aims at a roaming drone and auto-fires so a capture shows the arc + a shell + the swarm.",
 	"category": "vectors",
-	"theoreticalGrounding": "v0 = aim_dir * force; p(t) = p0 + v0*t + 0.5*g*t^2. Hand tilt sets direction, charge time sets magnitude — together they fix where the parabola crosses the floor. Gravity is not the obstacle to the shot, it IS the shot. Indirect fire makes the velocity vector and the constant gravity vector legible as the curve they sum to.",
+	"theoreticalGrounding": "v0 = aim_dir * force; p(t) = p0 + v0*t + 0.5*g*t^2. Hand tilt sets direction, charge time sets magnitude \u2014 together they fix where the parabola crosses the floor. Gravity is not the obstacle to the shot, it IS the shot. Indirect fire makes the velocity vector and the constant gravity vector legible as the curve they sum to.",
 	"artifacts": {
 		"mortar_vector_siege": {
 			"lookup_name": "mortar_vector_siege",
@@ -14,16 +14,49 @@
 			"scene": "res://commons/artifacts/mortar_vector_siege/mortar_vector_siege.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"],
-			"footprint": [3, 1, 3],
-			"tags": ["forces", "vectors", "mortar", "projectile", "ballistic", "trajectory", "aoe", "splash", "drone", "swarm", "targeting", "velocity", "gravity", "vr", "held", "placeable"],
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				3,
+				1,
+				3
+			],
+			"tags": [
+				"forces",
+				"vectors",
+				"mortar",
+				"projectile",
+				"ballistic",
+				"trajectory",
+				"aoe",
+				"splash",
+				"drone",
+				"swarm",
+				"targeting",
+				"velocity",
+				"gravity",
+				"vr",
+				"held",
+				"placeable"
+			],
 			"qfep_connection": "F_force: launch velocity + constant gravity = a parabola whose foot is the strike. Indirect fire teaches the vector sum as a felt aim, not a watched arc.",
 			"dna": {
 				"promoted": "2026-08-06",
 				"stage": "2 - variation",
 				"axes": {
-					"foresight": ["parabola", "apex", "landing", "none"],
-					"vectors": ["sum", "components", "velocity", "gravity"]
+					"foresight": [
+						"parabola",
+						"apex",
+						"landing",
+						"none"
+					],
+					"vectors": [
+						"sum",
+						"components",
+						"velocity",
+						"gravity"
+					]
 				},
 				"default": "foresight=parabola, vectors=sum - byte-for-byte the 3 shipped placements. parabola emits the same dotted arc from the same 96-step walk AND leaves the AoE ring and its impact dot lit, which is what the mortar has always drawn; sum is the green velocity arrow beside the red gravity arrow, both already built in _build_vector_indicators. The two component arrows are never instantiated at the default, so the scene tree and the capture AABB are the pre-promotion ones, and the floor-crossing solve runs unconditionally at every value so _predicted_impact_world, the drone target-lock and every fired shell are unchanged.",
 				"was": "the prediction was always the WHOLE solution at once - the dotted parabola and the 2.2 m splash ring and the impact dot, all three hard-coded in _update_trajectory_and_aoe with no way to hand the player less; and the launch was always one arrow beside one gravity arrow, hard-coded in _update_vector_arrows.",
@@ -45,7 +78,11 @@
 				"reload_cooldown": 1.4,
 				"drone_count": 6,
 				"arena_radius": 9.0,
-				"footprint": [3, 1, 3],
+				"footprint": [
+					3,
+					1,
+					3
+				],
 				"size_group": "large"
 			},
 			"size_group": "large",
@@ -55,6 +92,24 @@
 				"density": "high",
 				"reading_radius": 4,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					119.49,
+					120.0,
+					119.49
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					120,
+					120
+				],
+				"max_dimension_m": 120.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

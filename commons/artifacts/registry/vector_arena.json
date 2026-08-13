@@ -1,7 +1,7 @@
 {
 	"id": "vector_arena",
 	"name": "Vector Arena",
-	"description": "A math holodeck where your two hands ARE the endpoints of a vector. Hold the LEFT trigger to plant point A at your left hand, the RIGHT trigger to plant point B at your right hand, and a glowing arrow A->B draws between them with the live arithmetic floating beside it: AB = B - A, |AB|, and the unit direction, all recomputed as your hands move. Charge with the RIGHT grip and pull the RIGHT trigger to FIRE a RigidBody3D ball from A whose launch velocity IS the vector scaled by force_gain — wider hands throw harder. A labeled wall with a visible unit normal reflects fired balls by the literal formula r = d - 2(d.n)n, flashing a panel that shows d.n, 2(d.n)n, r, and the |r| = |d| invariant. On desktop or headless, with no controllers found, two demo points orbit slowly and auto-fire so the arena always shows live vector math.",
+	"description": "A math holodeck where your two hands ARE the endpoints of a vector. Hold the LEFT trigger to plant point A at your left hand, the RIGHT trigger to plant point B at your right hand, and a glowing arrow A->B draws between them with the live arithmetic floating beside it: AB = B - A, |AB|, and the unit direction, all recomputed as your hands move. Charge with the RIGHT grip and pull the RIGHT trigger to FIRE a RigidBody3D ball from A whose launch velocity IS the vector scaled by force_gain \u2014 wider hands throw harder. A labeled wall with a visible unit normal reflects fired balls by the literal formula r = d - 2(d.n)n, flashing a panel that shows d.n, 2(d.n)n, r, and the |r| = |d| invariant. On desktop or headless, with no controllers found, two demo points orbit slowly and auto-fire so the arena always shows live vector math.",
 	"category": "vectors",
 	"theoreticalGrounding": "A vector is the difference between two points: AB = B - A. Its direction is AB / |AB| and its magnitude |AB| is the distance between the hands. Treated as a force, the same arrow becomes a launch velocity v = AB * force_gain, so subtraction, direction, magnitude, and force are one object seen from different sides. Reflection across a plane with unit normal n is r = d - 2(d.n)n, which removes twice the normal component and preserves length, so |r| = |d|. The artifact makes each of these the felt consequence of moving two hands.",
 	"artifacts": {
@@ -42,7 +42,7 @@
 				"interactive",
 				"placeable"
 			],
-			"qfep_connection": "F_force: a vector is the difference between two points, and once you can hold both points you can hold the difference. The gap between your hands becomes a direction, a magnitude, and a force in one gesture; the wall answers with reflection, which changes the arrow's heading while keeping its length — what you give is reshaped, never lost.",
+			"qfep_connection": "F_force: a vector is the difference between two points, and once you can hold both points you can hold the difference. The gap between your hands becomes a direction, a magnitude, and a force in one gesture; the wall answers with reflection, which changes the arrow's heading while keeping its length \u2014 what you give is reshaped, never lost.",
 			"parameters": {
 				"challenge": 1,
 				"force_gain": 4.0,
@@ -86,6 +86,24 @@
 				"stack_priority": 0.8,
 				"approach_dir": "front",
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.31,
+					2.37,
+					1.47
+				],
+				"aabb_center": [
+					0.0,
+					-0.04,
+					-0.18
+				],
+				"grid_cells": [
+					3,
+					2
+				],
+				"max_dimension_m": 2.37,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

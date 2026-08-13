@@ -1,65 +1,182 @@
 {
-  "id": "concept_architecture",
-  "name": "Concept Architecture",
-  "description": "Four walk-in structures from the late spine, each pushing a concept to its engulfing architectural form — not a model in a room but a building that IS the idea. RELATION: graph_basilica (the building is a graph; a BFS light-wave rolls through it). LIMITS: goedel_atrium (a room containing a perfect model of itself, with the statement it cannot prove). THE EDGE: lambda_hall (order wall, chaos wall, and the only lit path is the living band at lambda=0.35). AFTER: rhizome_vault (no root, no center, many entrances — grow sideways).",
-  "category": "concept_architecture",
-  "theoreticalGrounding": "The spine's last act spatialised: relation, limits, the lambda edge, and post-crisis practice — each as a structure the player inhabits rather than observes. Engulfment is the pedagogy: you don't look at the concept, you stand in it.",
-  "artifacts": {
-    "graph_basilica": {
-      "lookup_name": "graph_basilica",
-      "scene": "res://commons/artifacts/graph_basilica/graph_basilica.tscn",
-      "class_name": "GraphBasilica",
-      "name": "Graph Basilica",
-      "description": "A walk-in basilica that IS a graph — node-piers, an edge-beam vault, floor-plan adjacency, and a BFS light-wave rolling through the structure every six seconds.",
-      "category": "concept_architecture",
-      "complexity": "advanced",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": ["graphtheory"],
-      "tags": ["graph", "architecture", "engulfing", "relation"],
-      "footprint": [9, 5, 9]
-    },
-    "goedel_atrium": {
-      "lookup_name": "goedel_atrium",
-      "scene": "res://commons/artifacts/goedel_atrium/goedel_atrium.tscn",
-      "class_name": "GoedelAtrium",
-      "name": "Gödel Atrium",
-      "description": "A severe atrium containing a perfect 1:10 model of itself (and a 1:100 inside that), where the wall states THIS ROOM CANNOT PROVE THIS ROOM and one warm crack runs under every floor.",
-      "category": "concept_architecture",
-      "complexity": "advanced",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": ["foundationscrisis"],
-      "tags": ["goedel", "incompleteness", "architecture", "engulfing"],
-      "footprint": [8, 5, 8]
-    },
-    "lambda_hall": {
-      "lookup_name": "lambda_hall",
-      "scene": "res://commons/artifacts/lambda_hall/lambda_hall.tscn",
-      "class_name": "LambdaHall",
-      "name": "Lambda Hall",
-      "description": "A 14m hall whose architecture interpolates from frozen lattice to boiling shatter across its width — the only lit path is the narrow living band at lambda = 0.35.",
-      "category": "concept_architecture",
-      "complexity": "advanced",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": ["qfeplaboratory"],
-      "tags": ["qfep", "lambda", "edge-of-chaos", "architecture", "engulfing"],
-      "footprint": [7, 4, 14]
-    },
-    "rhizome_vault": {
-      "lookup_name": "rhizome_vault",
-      "scene": "res://commons/artifacts/rhizome_vault/rhizome_vault.tscn",
-      "class_name": "RhizomeVault",
-      "name": "Rhizome Vault",
-      "description": "Pods and crossing tunnels with no main entrance, no center, no front — glowing root-runners propagating between heterogeneous chambers. Enter anywhere; a map, not a tracing.",
-      "category": "concept_architecture",
-      "complexity": "advanced",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": ["postfoundationscrisis"],
-      "tags": ["rhizome", "post-crisis", "architecture", "engulfing"],
-      "footprint": [10, 4, 10]
-    }
-  }
+	"id": "concept_architecture",
+	"name": "Concept Architecture",
+	"description": "Four walk-in structures from the late spine, each pushing a concept to its engulfing architectural form \u2014 not a model in a room but a building that IS the idea. RELATION: graph_basilica (the building is a graph; a BFS light-wave rolls through it). LIMITS: goedel_atrium (a room containing a perfect model of itself, with the statement it cannot prove). THE EDGE: lambda_hall (order wall, chaos wall, and the only lit path is the living band at lambda=0.35). AFTER: rhizome_vault (no root, no center, many entrances \u2014 grow sideways).",
+	"category": "concept_architecture",
+	"theoreticalGrounding": "The spine's last act spatialised: relation, limits, the lambda edge, and post-crisis practice \u2014 each as a structure the player inhabits rather than observes. Engulfment is the pedagogy: you don't look at the concept, you stand in it.",
+	"artifacts": {
+		"graph_basilica": {
+			"lookup_name": "graph_basilica",
+			"scene": "res://commons/artifacts/graph_basilica/graph_basilica.tscn",
+			"class_name": "GraphBasilica",
+			"name": "Graph Basilica",
+			"description": "A walk-in basilica that IS a graph \u2014 node-piers, an edge-beam vault, floor-plan adjacency, and a BFS light-wave rolling through the structure every six seconds.",
+			"category": "concept_architecture",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			],
+			"tags": [
+				"graph",
+				"architecture",
+				"engulfing",
+				"relation"
+			],
+			"footprint": [
+				9,
+				5,
+				9
+			],
+			"measurements": {
+				"aabb_size": [
+					8.8,
+					4.02,
+					8.8
+				],
+				"aabb_center": [
+					0.0,
+					2.0,
+					0.0
+				],
+				"grid_cells": [
+					9,
+					9
+				],
+				"max_dimension_m": 8.8,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		},
+		"goedel_atrium": {
+			"lookup_name": "goedel_atrium",
+			"scene": "res://commons/artifacts/goedel_atrium/goedel_atrium.tscn",
+			"class_name": "GoedelAtrium",
+			"name": "G\u00f6del Atrium",
+			"description": "A severe atrium containing a perfect 1:10 model of itself (and a 1:100 inside that), where the wall states THIS ROOM CANNOT PROVE THIS ROOM and one warm crack runs under every floor.",
+			"category": "concept_architecture",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"tags": [
+				"goedel",
+				"incompleteness",
+				"architecture",
+				"engulfing"
+			],
+			"footprint": [
+				8,
+				5,
+				8
+			],
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					4.72,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					2.29,
+					0.0
+				],
+				"grid_cells": [
+					8,
+					8
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		},
+		"lambda_hall": {
+			"lookup_name": "lambda_hall",
+			"scene": "res://commons/artifacts/lambda_hall/lambda_hall.tscn",
+			"class_name": "LambdaHall",
+			"name": "Lambda Hall",
+			"description": "A 14m hall whose architecture interpolates from frozen lattice to boiling shatter across its width \u2014 the only lit path is the narrow living band at lambda = 0.35.",
+			"category": "concept_architecture",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			],
+			"tags": [
+				"qfep",
+				"lambda",
+				"edge-of-chaos",
+				"architecture",
+				"engulfing"
+			],
+			"footprint": [
+				7,
+				4,
+				14
+			],
+			"measurements": {
+				"aabb_size": [
+					7.57,
+					4.39,
+					14.62
+				],
+				"aabb_center": [
+					0.07,
+					1.85,
+					-0.13
+				],
+				"grid_cells": [
+					8,
+					15
+				],
+				"max_dimension_m": 14.62,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		},
+		"rhizome_vault": {
+			"lookup_name": "rhizome_vault",
+			"scene": "res://commons/artifacts/rhizome_vault/rhizome_vault.tscn",
+			"class_name": "RhizomeVault",
+			"name": "Rhizome Vault",
+			"description": "Pods and crossing tunnels with no main entrance, no center, no front \u2014 glowing root-runners propagating between heterogeneous chambers. Enter anywhere; a map, not a tracing.",
+			"category": "concept_architecture",
+			"complexity": "advanced",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"postfoundationscrisis"
+			],
+			"tags": [
+				"rhizome",
+				"post-crisis",
+				"architecture",
+				"engulfing"
+			],
+			"footprint": [
+				10,
+				4,
+				10
+			],
+			"measurements": {
+				"aabb_size": [
+					9.83,
+					2.62,
+					9.8
+				],
+				"aabb_center": [
+					0.01,
+					1.28,
+					0.0
+				],
+				"grid_cells": [
+					10,
+					10
+				],
+				"max_dimension_m": 9.83,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		}
+	}
 }

@@ -1,2065 +1,2134 @@
 {
- "artifacts": {
-  "bulging_tunnel": {
-   "capacity": "FEEL how parametric distortion transforms a predictable corridor into an unpredictable cave",
-   "category": "geometry",
-   "complexity": "intermediate",
-   "description": "Walk into a cylinder that refuses to stay regular. CSG spheres bulge outward at irregular intervals, warping your sense of depth — the tunnel breathes. The num_bulges and bulge_max_radius parameters control how much chaos enters the geometry: low values produce a hallway, high values produce a cave. Contrasts with Klein bottle (closed non-orientable) and Möbius strip (twisted surface); prepares for hyperbolic spaces where distortion becomes the rule.",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "footprint": [
-    3,
-    3,
-    10
-   ],
-   "gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology",
-   "include_in_map_data": true,
-   "interactions": [
-    "walk through tunnel",
-    "adjust num_bulges via export",
-    "change bulge_max_radius to control distortion intensity",
-    "toggle use_random_bulges for deterministic vs stochastic"
-   ],
-   "lookup_name": "bulging_tunnel",
-   "map_ready": true,
-   "map_sequences": [],
-   "name": "Bulging Tunnel",
-   "parameters": {
-    "bulge_max_radius": "Maximum bulge radius (default: 2.0)",
-    "bulge_seed": "Random seed for reproducibility (default: 42)",
-    "footprint": [
-     3,
-     3,
-     10
-    ],
-    "num_bulges": "Number of bulge deformations (default: 5)",
-    "size_group": "xlarge",
-    "tunnel_length": "Length of tunnel (default: 10.0)",
-    "tunnel_radius": "Base radius (default: 1.0)",
-    "use_random_bulges": "Stochastic vs sinusoidal bulge sizing (default: true)"
-   },
-   "qfep_connection": "Lambda applied to architecture — a regular cylinder is pure F (uniform, predictable). Each bulge introduces E (variation, surprise). The num_bulges parameter IS lambda: how much chaos do you let into your structure? At zero bulges the tunnel is Euclidean. At maximum, geometry becomes landscape.",
-   "scene": "res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.tscn",
-   "size_group": "xlarge",
-   "tags": [
-    "alternative_geometry",
-    "tunnel",
-    "distortion",
-    "non_euclidean",
-    "spatial",
-    "csg",
-    "procedural",
-    "cave",
-    "parametric"
-   ],
-   "geometry_spec": {
-    "mesh_type": "boolean_composition",
-    "topology": "volumetric",
-    "construction": {
-     "method": "csg_boolean",
-     "primitives": [
-      "box",
-      "sphere",
-      "cylinder",
-      "torus"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_primitives",
-      "boolean_combine"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": [
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "table",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "contrasts",
-     "mobius_strip_altgeo",
-     "twisted",
-     "surface",
-     "pairs"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 44,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     3.9,
-     3.9,
-     10.28
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     5.14
-    ],
-    "grid_cells": [
-     4.0,
-     11.0
-    ],
-    "max_dimension_m": 10.28,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "curvature_slider": {
-   "category": "geometry",
-   "complexity": "beginner",
-   "description": "VR slider controlling Gaussian curvature from negative (hyperbolic) through zero (flat/Euclidean) to positive (elliptic). Emits curvature_changed signal for linked surfaces.",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "curvature_slider",
-   "map_ready": true,
-   "map_sequences": [
-    "foundationscrisis",
-    "testmaps"
-   ],
-   "name": "Curvature Slider",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact",
-    "opening": "flat | hyperbolic | elliptic - which sign of K the bench is parked at (default flat)",
-    "witness": "number | surface | normals - what the instrument shows of the geometry it names (default number)",
-    "curvature": "K in [-1, +1] - now read at build time, so a map can open the slider anywhere on the range (default 0.0)"
-   },
-   "dna": {
-    "promoted": "2026-08-05",
-    "stage": "2 - variation",
-    "fixture": {
-     "witness": "surface"
-    },
-    "axes": {
-     "opening": [
-      "flat",
-      "hyperbolic",
-      "elliptic"
-     ],
-     "witness": [
-      "number",
-      "surface",
-      "normals"
-     ]
-    },
-    "default": "opening=flat, witness=number - flat SHORT-CIRCUITS: _k() hands back the shipped `curvature` export rather than the table's 0.0, so a map that overrides curvature alone opens at its own number instead of being reset to zero. At K = 0 the slider knob is built at (0 + 1) / 2 = 0.5, the literal that was hard-coded there before, and _label_text() renders 'CURVATURE: K = 0\\n(Flat/Euclidean)' to the byte - _k_str returns '0' and not '0.00' for exactly this reason. witness=number adds no node at all, so the scene tree stays the rack panel and the Label3D and nothing else. The 5 placements (NonEuclidean_Spaces, NonEuclidean_Spaces_composed, test_batch_1 and the two curation_station rosters in Corridor_NonEuclidean_Spaces and Curation_Bay_foundationscrisis_1) name no config keys, so apply_grid_config - a bare `pass` before this pass - reaches no assignment and never rebuilds.",
-    "was": "one @export, `curvature`, a float that was never read at build time: _ready() built the panel with a hard-coded 0.5 and the label with a hard-coded string, and apply_grid_config's whole body was `pass`. The three signs of K - the whole of differential geometry's classification - were reachable only by a hand on a slider in a headset, and even then the artifact displayed no curvature, only the word for it.",
-    "note": "opening is dot_aligner's word for the same situation (a named case that existed only behind a hand in VR) with its four-angle value list refused: the sign of K has exactly three values and a fourth would invent a geometry. DECLINED and measured first: a geodesic-triangle value showing the angle sum. A chord lifted onto the patch is not a geodesic, and the lifted-chord sum comes out 179.6 on the saddle and 161.1 on the DOME - the wrong side of 180 for positive curvature, at every rotation of the triangle. It would have published a figure stating the theorem backwards. SEPARATE FINDING, not repaired here: curvature_changed has no listener anywhere in the repo, so the @identity's 'controls hyperbolic_surface and elliptic_surface' is aspirational."
-   },
-   "scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
-   "tags": [
-    "curvature",
-    "non_euclidean",
-    "slider",
-    "interactive",
-    "alternative_geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "delegated_scene",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "scene_instantiation",
-     "primitives": [],
-     "operations": [
-      "load_scene",
-      "instantiate",
-      "configure"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "varies"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "controls",
-     "hyperbolic_surface",
-     "elliptic_surface",
-     "depends",
-     "euclid_postulates_plaque"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.18,
-     0.2,
-     0.04
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.02
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.2,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "omni",
-    "range": 1,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "elliptic_surface": {
-   "dna": {
-    "axes": {
-    "postulate": [
-    "bare",
-    "parallels",
-    "triangle",
-    "net",
-    "euclid"
-    ]
-    }
-   },
-   "category": "geometry",
-   "complexity": "intermediate",
-   "description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) — where parallel lines converge and triangle angles sum to more than 180 degrees.",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "elliptic_surface",
-   "map_ready": true,
-   "map_sequences": [
-    "foundationscrisis"
-   ],
-   "name": "Elliptic Surface",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
-   "tags": [
-    "elliptic",
-    "positive_curvature",
-    "non_euclidean",
-    "surface",
-    "alternative_geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": [
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "contrasts",
-     "hyperbolic_surface",
-     "lines",
-     "diverge",
-     "depends"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.79,
-     0.8,
-     0.79
-    ],
-    "aabb_center": [
-     0.0,
-     -0.12,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.8,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "omni",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "entropy_morphogenesis": {
-   "dna": {
-    "promoted": "2026-08-03",
-    "stage": "2 - variation",
-    "axes": {
-     "found_state": [
-      "sorted",
-      "stirred",
-      "mixed"
-     ],
-     "level": [
-      "minimal",
-      "thickened",
-      "pinched",
-      "broken"
-     ]
-    },
-    "fixture": {
-     "field_seed": 20260803
-    },
-    "framing": 0.85,
-    "default": "found_state=stirred, level=minimal - both are pure no-ops. `stirred` falls through to `_:` and never assigns S, `minimal` never assigns threshold_center, so the scene's own S (0.3) and threshold (0.0) survive untouched. The 7 existing placements (Topology_Entropy_Morphogenesis, _p1, _p2, _p3, Corridor_Topology_Entropy_Morphogenesis, Morphogenesis_Intro, Curation_Bay_softbodies_4) render byte-identically to before.",
-    "was": "A gyroid at one entropy value with a full inspector of exports and apply_grid_config() = pass, so no map token could reach a single knob. found_state opens the S scale that was already the declared critical_parameter; level opens threshold_center, which the artifact's own truth line names and which had been nailed to 0.0 everywhere. field_seed is a fixture knob, not an axis: GyroidFieldGenerator does noise.seed = randi(), so unpinned the sweep would photograph five different gyroids.",
-    "notes": "framing 0.85 because the volume is 5x10x5 - fit-by-diagonal (12.2) pulls the camera back for an extent that is never wider than 5. `shelled` from entropy_jar's list is deliberately absent: there it is a joke about the jar's vertical binning, and this artifact carries no instrument to fool."
-   },
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "A gyroid triply-periodic minimal surface built by marching cubes at one chosen entropy. S maps to frequency, noise amplitude and cut threshold together, so a single number decides whether the surface is a legible crystal or a crumpled labyrinth.",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "entropy_morphogenesis",
-   "map_ready": true,
-   "map_sequences": [
-    "softbodies"
-   ],
-   "name": "entropy_morphogenesis",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn",
-   "size_group": "compact",
-   "tags": [
-    "geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "shader_driven",
-    "topology": "planar",
-    "construction": {
-     "method": "shader_rendering",
-     "primitives": [],
-     "operations": [
-      "create_base_mesh",
-      "apply_shader",
-      "set_parameters"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "grid_overlay",
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~4-24 (base mesh)"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "synthesis",
-     "softbodies",
-     "sequence",
-     "entropy",
-     "becoming"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 25,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     5.0,
-     5.0,
-     5.0
-    ],
-    "aabb_center": [
-     0.0,
-     -2.5,
-     0.0
-    ],
-    "grid_cells": [
-     5.0,
-     5.0
-    ],
-    "max_dimension_m": 5.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 10,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "gyroid_cheese": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "gyroid_cheese",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "footprint": [
-    1,
-    1,
-    1
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "gyroid_cheese",
-   "map_ready": true,
-   "map_sequences": [],
-   "name": "gyroid_cheese",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://algorithms/spacetopology/gyroid_cheese/gyroid_cheese_vr.tscn",
-   "size_group": "compact",
-   "tags": [
-    "geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "shader_driven",
-    "topology": "planar",
-    "construction": {
-     "method": "shader_rendering",
-     "primitives": [],
-     "operations": [
-      "create_base_mesh",
-      "apply_shader",
-      "set_parameters"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "grid_overlay",
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~4-24 (base mesh)"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 256,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     16.0,
-     16.0,
-     16.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     16.0,
-     16.0
-    ],
-    "max_dimension_m": 16.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "sin·cos summed three ways yields a surface with no rooms, only two interlocked corridors that never touch — and marching cubes plus a generated collision body commits that implicit equation to something your feet must negotiate."
-  },
-  "hyperbolic_surface": {
-   "dna": {
-    "axes": {
-    "postulate": [
-    "bare",
-    "parallels",
-    "triangle",
-    "net",
-    "euclid"
-    ]
-    }
-   },
-   "category": "geometry",
-   "complexity": "intermediate",
-   "description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) — where parallel lines diverge and triangle angles sum to less than 180 degrees.",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "hyperbolic_surface",
-   "map_ready": true,
-   "map_sequences": [
-    "foundationscrisis"
-   ],
-   "name": "Hyperbolic Surface",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
-   "tags": [
-    "hyperbolic",
-    "negative_curvature",
-    "non_euclidean",
-    "saddle",
-    "surface",
-    "alternative_geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": [
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "contrasts",
-     "elliptic_surface",
-     "lines",
-     "converge",
-     "depends"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     1.0,
-     0.25,
-     1.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 1.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "marching_cubes": {
-   "category": "unknown",
-   "complexity": "advanced",
-   "description": "Test scene for marching cubes algorithm verification with basic sphere and voxel tests",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "footprint": [
-    1,
-    21,
-    11
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "marching_cubes",
-   "map_ready": true,
-   "map_sequences": [
-    "proceduralgeneration_all"
-   ],
-   "name": "Marching Cubes Test",
-   "parameters": {
-    "footprint": [
-     1,
-     21,
-     11
-    ],
-    "size_group": "world_scale"
-   },
-   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
-   "size_group": "world_scale",
-   "tags": [
-    "geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "~256"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "qfep_connection": "The surface is a verdict: a continuous noise field, cut at a threshold, hardens into walkable terrain. The sliders move the field; the verdict itself never appears on any slider."
-  },
-  "mobius_strip_altgeo": {
-   "category": "geometry",
-   "complexity": "beginner",
-   "description": "A walkable Möbius strip environment — traverse the one-sided surface and experience the topological twist firsthand. Non-orientability as lived experience.",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "mobius_strip_altgeo",
-   "map_ready": true,
-   "map_sequences": [],
-   "name": "Möbius Strip (Walkable)",
-   "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn",
-   "tags": [
-    "mobius",
-    "topology",
-    "non_orientable",
-    "walkable",
-    "alternative_geometry"
-   ],
-   "parameters": {
-    "footprint": [
-     3,
-     1,
-     3
-    ],
-    "reading_light": {
-     "type": "omni",
-     "direction": "+z",
-     "cone": 360,
-     "radius": 3
-    }
-   },
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "metallic",
-      "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "above",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 9,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     2.2,
-     0.4,
-     2.29
-    ],
-    "aabb_center": [
-     0.1,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     3.0,
-     3.0
-    ],
-    "max_dimension_m": 2.29,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    3.0,
-    1,
-    3.0
-   ],
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 6,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "mobius_world": {
-   "category": "unknown",
-   "complexity": "intermediate",
-   "description": "Walkable MÃ¶bius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "footprint": [
-    69,
-    16,
-    72
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "mobius_world",
-   "map_ready": true,
-   "map_sequences": [
-    "fractals"
-   ],
-   "name": "MÃ¶bius World",
-   "parameters": {
-    "footprint": [
-     69,
-     16,
-     72
-    ],
-    "size_group": "xlarge"
-   },
-   "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn",
-   "size_group": "xlarge",
-   "tags": [
-    "3d",
-    "physics"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "wireframe",
-     "key_properties": [
-      "emission",
-      "grid_overlay",
-      "metallic",
-      "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "table",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "alternative_geometries",
-     "sequence",
-     "contrasts",
-     "assumptions",
-     "other"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
-  },
-  "non_euclidean_space": {
-   "category": "geometry",
-   "complexity": "advanced",
-   "description": "A space where Euclid's parallel postulate fails — rooms that are bigger inside than outside, corridors that loop impossibly. Hyperbolic and elliptic geometry made navigable.",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "non_euclidean_space",
-   "map_ready": true,
-   "map_sequences": [],
-   "name": "Non-Euclidean Space",
-   "parameters": {
-    "footprint": [
-     7,
-     1,
-     8
-    ],
-    "size_group": "environment"
-   },
-   "scene": "res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.tscn",
-   "tags": [
-    "non_euclidean",
-    "hyperbolic",
-    "elliptic",
-    "impossible_space",
-    "alternative_geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
-      "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 418,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     18.48,
-     3.95,
-     21.95
-    ],
-    "aabb_center": [
-     -0.15,
-     1.32,
-     2.77
-    ],
-    "grid_cells": [
-     19.0,
-     22.0
-    ],
-    "max_dimension_m": 21.95,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    19.0,
-    1,
-    22.0
-   ],
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 60,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Euclid fails here not by curving space but by bookkeeping: portals stitch disjoint rooms so corridors loop and interiors exceed their shells, and the manager quietly signals each crossing. Consistency turns out to be a rendering convention your walking body can be talked out of."
-  },
-  "organic_space": {
-   "dna": {
-    "promoted": "2026-08-03",
-    "stage": "2 - variation",
-    "axes": {
-     "formation": ["chance", "erode", "accrete", "alternate"],
-     "cast": ["all", "membrane", "crystal", "growth"]
-    },
-    "default": "formation=chance, cast=all - reproduces the shipped build exactly. formation=chance calls the same coin flip at the same two thresholds the hard-coded expressions used (0.5 on the shell's deformation spheres, 0.3 on the tunnel details), and cast=all runs membranes, crystals and growths together as before, so all 13 existing placements are untouched.",
-    "was": "One hard-coded expression, twice: `OPERATION_UNION if randf() > 0.5 else OPERATION_SUBTRACTION` on the shell and the same at 0.3 on the tunnel details. The artifact's own truth line says organic form 'is what remains after noise has eaten away at geometry from within' — but the code was flipping a coin between eating away and piling on, and never said so. formation states the position; erode is the truth line taken literally, accrete is its opposite, alternate is neither chance nor doctrine but rhythm. cast was three generators that always all ran; the word and the all-plus-one-each shape are borrowed verbatim from particle_systems.cast, which asks the same question of its emitters.",
-    "fixture": {"form_seed": 20260803},
-    "fixture_note": "MANDATORY for the sweep. Every draw in this artifact was an unseeded global randf/randi, so without a pinned seed the N variants are N different caves and any bite number measures the RNG, not the axis (the trap CLAUDE.md names for generative artifacts). form_seed now routes all randomness through one RandomNumberGenerator; 0 keeps the shipped fresh-every-run behaviour, so this pin is capture-bench only and no placement sees it.",
-    "framing_note": "The subject is 25 m across (space_size 25,18,25 in the .tscn) and mostly hollow shell. If the sweep reports a small subject share, that is the shell's thin wall against a big frame, not an inert axis."
-   },
-   "category": "unknown",
-   "complexity": "expert",
-   "description": "An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "footprint": [
-    1,
-    6,
-    13
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "organic_space",
-   "map_ready": true,
-   "map_sequences": [
-    "proceduralgeneration",
-    "proceduralgeneration_all"
-   ],
-   "name": "Organic Space",
-   "parameters": {
-    "footprint": [
-     1,
-     6,
-     13
-    ],
-    "size_group": "world_scale"
-   },
-   "scene": "res://algorithms/alternativegeometries/organicspace/organic_space.tscn",
-   "size_group": "world_scale",
-   "tags": [
-    "geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "boolean_composition",
-    "topology": "volumetric",
-    "construction": {
-     "method": "csg_boolean",
-     "primitives": [
-      "box",
-      "sphere",
-      "cylinder"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_primitives",
-      "boolean_combine"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "paired",
-     "branching_growth_algorithm",
-     "contrasts",
-     "deterministic",
-     "growth"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 625,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     25.0,
-     25.0,
-     25.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     25.0,
-     25.0
-    ],
-    "max_dimension_m": 25.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 60,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "A space that looks grown rather than built — chambers and passages with the irregular rightness of something that developed instead of being placed. The proof that 'organic' is not a texture but a *process*: authorless form has a feel, and the walker can tell."
-  },
-  "rhizomatic_maze_space": {
-   "dna": {
-    "promoted": "2026-08-05",
-    "deepened": "2026-08-05",
-    "stage": "2 - variation",
-    "axes": {
-     "topology": [
-      "rhizome",
-      "tree",
-      "severed",
-      "plateau"
-     ]
-    },
-    "fixture": {
-     "layout_draw": "pinned",
-     "bench_stage": "bare"
-    },
-    "fixture_why": "MANDATORY for the sweep, and not an axis. The layout is drawn entirely from the UNSEEDED global randf/randi — generation_seed only ever fed the two FastNoiseLite fields, never the growth — so four topology frames would be four different mazes and any bite number would be measuring the RNG rather than the rule. This is the generative-artifact trap in CLAUDE.md. layout_draw defaults to `fresh`, which is the shipped every-launch-is-a-new-maze behaviour and is the artifact's point, so no placement ever sees the pin.",
-    "default": "topology=rhizome - the shipped network line for line. generate_primary_connections keeps the same three-nearest loop with the same randf() draw against the same branch_prob, generate_secondary_branches builds the same 250 nodes from the same three randf_range calls and hands over the same flat 0.7 width_multiplier, sever_network returns on its first line, and the seed ring keeps the identical layer_y expression. The tree, plateau and rupture code is reachable only from a non-default word, so the RNG consumes exactly the draws it always consumed in exactly the order it consumed them. MEASURED, not assumed: there are 14 mentions across 12 map files, not the 5 the promotion brief carried, and four reach-paths rather than one - bare tokens in PG_Mirrored_Patterns and its three parts and in ProceduralGeneration_Eight; a curation_station collection in Corridor_PG_Mirrored_Patterns whose #layout and #with_* flags belong to the station and not to this artifact; `exhibit_furniture#kind:floor_work#size:s#mount:rhizomatic_maze_space` in six museum trials, where the token is the furniture's mount value; and `rhizomatic_maze_space->layered_membrane` in Trial_rooms_proceduralgeneration, which is a transformation target and not a config. Not one of the fourteen carries a topology key, and apply_grid_config returns unless a token names a word this file knows AND that word differs from the one it holds AND _ready has already grown the maze once.",
-    "was": "thirteen float and int exports, none of which said what the artifact is FOR. The runner refused it as NO TURNABLE KNOBS because nothing enumerated: branch_probability could be turned from 0.7 to 0.8 but there was no way for a map to ask for the thing the name promises. An artifact called rhizomatic shipped exactly one topology, and — measured rather than assumed — it was mostly a TREE: the only rhizomatic operation in the file is the three-nearest-neighbour pass over about 20 seeds, while the 250 secondary branches each attach by exactly one edge and close no loop at all.",
-    "note": "The axis is Deleuze and Guattari's own opposition, not a dial. `tree` is a minimum spanning tree from the lowest seed with growth oriented away from the root and tunnel width tapering by depth, so hierarchy is visible as thickness — there is no critically-rhizomatic middle value, the way bouncing_ball found there is no critically-bouncing. `severed` is asignifying rupture performed ON a finished rhizome rather than a different way of growing one, and it recounts node degrees afterwards so the chamber pass cannot drop a nine-metre CSG sphere into the fissure it just opened. `plateau` keeps every seed the four levels would have made and puts them all on one, so the comparison is about arrangement and not about how much was grown.",
-    "declined": "branch_probability, growth_iterations, merge_threshold, chamber_probability, organic_distortion and tunnel_segments — six knobs that are already exports and all of them decline for the same reason: they change how MUCH tangle there is, not what the tangle claims. connection_probability and deadend_pruning are declined for a different reason worth recording: they are exported, they are set in the .tscn, and no line of code reads either of them.",
-    "still_note": "topology is resolved before a single tunnel mesh is built and never moves again, so one frame is a complete account of it. Expect plateau to be the loudest value by far — a 25 m tower collapsing to a flat mat is a silhouette change, not a texture one. tree and rhizome differ in loop structure and in tunnel thickness rather than in extent, so compare where routes close and how width falls off toward the periphery.",
-    "deepened_why": "THE BENCH HAD NEVER PHOTOGRAPHED THIS ARTIFACT, and that is the finding — the axis was not on trial, it was never called. The sweep reported peak 0.062% across ALL SIX pairs on a subject of 8.217%, and the tell is that the peak was rhizome-vs-plateau, the pair the still_note above had predicted would be the loudest in the batch by a distance: a 25 m tower against a flat mat cannot differ by six hundredths of a percent. A number that impossible is a fact about the instrument. Three causes, all measured in the sheet at doc/reports/sweep_rhizomatic_maze_space.png rather than guessed: (1) the .tscn carries a DebugInfo Control — a 390x110 panel with a RichTextLabel reading 'Generating organic tunnel network...' — and the sweep's chrome suppressor stands down CanvasLayer and Camera3D only, so a Control under a Node3D drew straight into the viewport and IS the 8.2% subject, identical in every frame. The statistic that was supposed to report on the axis was mostly a photograph of a debug readout. (2) NavigationHelpers hangs four 0.6 m marker spheres at x,z = +/-25; they are MeshInstance3D, so they pin the fitted AABB to a 50 m box no matter what the maze does, which put the camera about 220 m out. (3) At 220 m the artifact's own WorldEnvironment — volumetric fog at density 0.03 over a 50 m length, authored for a player standing INSIDE the tunnels — fills the frame with haze: the background samples (130,165,118) and the 90th percentile of per-pixel difference from it is SEVEN grey levels. The maze is a ghost, and it visibly MOVES between the four tiles, which is the proof the values were arriving all along. Repair: a bench-only `bench_stage` export, the same shape as the existing layout_draw, defaulting to `scene`; `bare` frees the Control and the marker spheres and turns off exactly two properties on the environment (fog_enabled, volumetric_fog_enabled) rather than freeing it — with the sweep rig adding a WorldEnvironment of its own, two in a tree is undefined enough that freeing would make the picture depend on node order, and this scene's own 0.02/0.02/0.08 background is the best backdrop available for tunnels of albedo 0.7/0.8/0.9. It touches no generator code and no placement sets it. THE SECOND REPAIR IS THE DESIGN ONE and it stands on its own: severed cut the graph in half and left both halves where they were, measuring 0.012% against the intact rhizome. The tempting reading is the Deleuzian one — that cutting a rhizome changes nothing because any point still reaches any other — and it is wrong about this code: a plane cut removes EVERY crossing edge, so the graph really does fall into two components. The failure was that CONNECTION IS NOT A VISIBLE PROPERTY. The fissure is now 0.14 of maze_size.x instead of 0.08 and the two fragments stand 0.06 apart on each side, so the wound is about 20 m of a 50 m object and reads in the silhouette; tendrils are suppressed over the gap so nothing sews it shut. Extent grows about 12%, which the freed camera repays many times.",
-    "expected": "NO NUMBER IS PREDICTED HERE, and that is honest rather than evasive: nothing about this artifact has ever been photographed, so there is no scale to extrapolate from. What IS predicted is the SHAPE of the result, and it is falsifiable. (1) The frame should stop being a flat field: the background sampled at (3,3) should come back near (5,5,18) instead of (130,165,118), and the 90th percentile of per-pixel difference from it should rise from 7 grey levels into the dozens. (2) The loudest pair should become rhizome-vs-plateau, because a 25 m tower against a flat mat is a silhouette. (3) The subject share will probably FALL from 8.2%, and that is the fix working, not failing - the 8.2% was a debug panel that has now been freed, so the number will finally be about the maze. IF EVERY PAIR IS STILL UNDER 0.1%, the fixture did not arrive: check that bench_stage reached the root before concluding anything at all about topology.",
-    "deepened_declined": "A FIFTH VALUE, `radicle` — Deleuze and Guattari's own middle figure, the fascicular root whose principal root has aborted and onto which an indefinite multiplicity of secondary roots grafts. It is the strongest thing missing from this axis, because it is the figure that LOOKS tangled and still is not a rhizome, which is the distinction the whole Introduction turns on, and the axis currently ships the two easy poles and two operations. It is not taken in this pass on a sequencing judgement: not one of the four existing values has ever been photographed, so designing a fifth against an imagined frame is the finished-looking-experiment failure the promotion brief warns about — 'an artifact that does not build is a finding, not an axis' applies just as well to an artifact that has never been seen. Take it after a clean sweep exists. Implementation sketch so the next agent does not start cold: connect_as_radicle() builds a short thick taproot from the lowest seed to a graft node above it, joins every other seed to that ONE graft at equal width (the star, against tree's spanning chain), and generate_secondary_branches concentrates the flourish near the graft with NO taper, because in a radicle the unity is the pivot and not the branching. The 20 primary connections are only about 16% of the 270 the file builds, so the secondary rule has to carry the value too or it will read as a variation on tree.",
-    "open": "THE SAME THREE CHILDREN SHIP INTO EVERY MAP, and this is NOT repaired here. All fourteen placements get the DebugInfo Control — a panel reading 'Generating organic tunnel network...' with the parameter list under it — because neither the sweep's chrome suppressor nor GridInteractablesComponent._suppress_embedded_chrome stands down a raw Control, and a Control under a Node3D draws to the viewport regardless. They also get a WorldEnvironment that overrides the map's own environment with volumetric fog, and four navigation marker spheres at +/-25 m that inflate the AABB the grid auto-grounds against. Every one of those is a change to what fourteen rooms look like, so fixing it belongs in its own pass with its own walk, not smuggled in under a DNA deepening. Worth checking how many other artifacts carry a Control child before repairing this one alone — the suppressor is the shared meeting point and this is likely a class, not a case."
-   },
-   "category": "unknown",
-   "complexity": "intermediate",
-   "description": "A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "footprint": [
-    50,
-    21,
-    50
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "rhizomatic_maze_space",
-   "map_ready": true,
-   "map_sequences": [
-    "proceduralgeneration",
-    "proceduralgeneration_all"
-   ],
-   "name": "Rhizomatic Maze Space",
-   "parameters": {
-    "footprint": [
-     50,
-     21,
-     50
-    ],
-    "size_group": "world_scale"
-   },
-   "scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
-   "size_group": "world_scale",
-   "tags": [
-    "geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "hybrid",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "unknown",
-     "primitives": [
-      "sphere",
-      "cylinder"
-     ],
-     "operations": []
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "paired",
-     "mirror_cellular_texture_for_3d",
-     "contrasts",
-     "maze_generation",
-     "structured"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "qfep_connection": "A labyrinth grown as rhizome — interconnected, centerless, any point reachable from any other by more than one route. The counter-maze: where recursive backtracking makes a tree with a single path, this makes a mesh with many, Deleuze's figure walked as architecture. A world with no author and, deliberately, no throughline either."
-  },
-  "rhizomatic_structure": {
-   "dna": {
-    "axes": {
-    "mutuality": [
-    "pockets",
-    "none",
-    "split",
-    "total"
-    ]
-    }
-   },
-   "category": "geometry",
-   "complexity": "intermediate",
-   "description": "Grow a network that refuses root, trunk, and leaves. Recursive branching creates a scaffold, then lateral reconnections turn that scaffold into a mesh where any point can connect to any other. Adjusting reconnection probability moves the artifact between tree and rhizome, making hierarchy versus multiplicity a concrete topological choice. It brings Deleuze and Guattari into graph theory by questioning when a tree is the wrong model.",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "footprint": [
-    20,
-    18,
-    14
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "rhizomatic_structure",
-   "map_ready": true,
-   "map_sequences": [
-    "graphtheory"
-   ],
-   "name": "Rhizomatic Structure",
-   "scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
-   "size_group": "xlarge",
-   "tags": [
-    "graph_theory",
-    "rhizome",
-    "non_hierarchical",
-    "cycles",
-    "topology",
-    "deleuze",
-    "network",
-    "alternative_geometry",
-    "critical_theory"
-   ],
-   "qfep_connection": "A challenge to hierarchical F: lateral reconnection redistributes structure away from roots and trunks. It asks what graph order looks like when no center is privileged.",
-   "gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception",
-   "capacity": "COMPARE tree-like and rhizomatic topologies by tuning how often local branches reconnect laterally.",
-   "interactions": [
-    "regenerate the structure",
-    "tune connection_probability to move between tree and rhizome",
-    "change growth_direction_randomness to bias branching",
-    "inspect cycles formed by lateral reconnections"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "cylinder"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "above",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "appears",
-     "inspired",
-     "contrast",
-     "hierarchical",
-     "graph"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 270,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     14.64,
-     15.02,
-     17.47
-    ],
-    "aabb_center": [
-     -1.93,
-     -2.04,
-     -1.01
-    ],
-    "grid_cells": [
-     15.0,
-     18.0
-    ],
-    "max_dimension_m": 17.47,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "riemann_pi": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "riemann_pi",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "dna": {
-    "promoted": "2026-08-05",
-    "stage": "2 - variation",
-    "axes": {
-     "law": [
-      "none",
-      "x_over_log",
-      "logint",
-      "both"
-     ]
-    },
-    "default": "law=none - _setup_law() returns on its first line when the value is none, so not one node is created and the scene tree, the AABB and every material are the ones that shipped. The estimate holders are ADDED as new siblings when a value asks for them; no legacy call, literal or ordering above them was touched. apply_grid_config was a bare `pass` before this pass and now returns immediately unless a config names `law` AND names a different value than the current one AND _ready has already built - so a map naming nothing this artifact owns still reaches no assignment and no rebuild. All 73 placements across 26 maps are bare tokens (riemann_pi, riemann_pi:0:1, or mounted as exhibit_furniture#mount:riemann_pi in the museum trial maps) with no config overrides, so none of them can see this key.",
-    "was": "nine @exports and not one axis among them: three colours, a sphere radius, two scale factors, an animation flag, a horizon speed and an auto-travel toggle. The runner refused it for NO TURNABLE KNOBS, and correctly - max_x is a reach, x_scale and scale_height are units, and animate_horizon and horizon_speed are time-domain and invisible to a still. What was welded shut was not a knob but the ARGUMENT: this exhibit is the prime number theorem, it drew the erratic half (the prime scatter, the pi(x) staircase, the zeta wave at infinity) and it never drew the law the staircase is following, so the claim lived in the title.",
-    "note": "hand promotion 2026-08-05. NOT a Riemann sum - nothing here partitions an interval. The brief's guess (strip count, convergence) is riemann_pump's subject, not this one. The two estimates were chosen because they disagree with pi(x) in OPPOSITE DIRECTIONS and by an order of magnitude, both computed here rather than asserted: at max_x = 2000, pi(x) = 303, x/ln x = 263.1 (below, a wedge of 6.3% of the plot area and 2.0 world units deep at the right edge) and Li(x) = 313.8 (above, 2.1%). Li is drawn by trapezoid on the same sample grid as the staircase rather than by a closed form, so the two curves are read off one traversal and cannot drift apart. both draws both bands, and the question of which estimate is better stops being a caption and becomes a difference of areas.",
-    "finding": "the scene already contains a BAKED copy of everything _ready() builds - a 303-instance MultiMesh, the staircase ArrayMesh, the zeta plane and the ground plane, saved into pi_infinity_surface.tscn by this @tool script from the editor. At runtime _ready() builds all of it AGAIN, so every one of the 73 placements draws the prime line, the ribbon, the horizon and the ground twice, exactly overlapping: doubled alpha on the transparent ground plane, a hotter ribbon. NOT repaired in this pass, because deleting the baked twin would change what 26 shipped maps look like. It is also why this axis is purely additive: anything that removed or altered legacy geometry would be half-muted by the baked copy still drawing the original underneath, and the sweep would have reported a faint verdict about a design it never actually reached.",
-    "declined": "max_x, the reach along the number line, is the obvious second axis and is the one this artifact's asymptotics would most like to vary - a staircase at x = 100 is a flight of visible steps, at x = 20000 a smooth curve. It is refused for a hard reason and not a soft one: the baked twin above is frozen at max_x = 2000, so every non-default value would render its own shorter or longer staircase ON TOP of the shipped 2000-wide one, and the frames would differ by the superposition rather than by the reach. animate_horizon and horizon_speed were refused as time-domain (a wave phase advanced in _process is invisible to one still), and prime_sphere_radius, x_scale and scale_height as units - a sweep over any of them photographs the exhibit's choice of scale and reports it as number theory.",
-    "harness_note": "the added band and curve lie inside the existing box in x and y (x/ln x runs below the staircase but well above the ground plane at y = -0.5), so the union AABB across a sweep is the same box every variant is framed to and no part of a measured change is a camera pull-back. The dilution risk is the other one: the subject is 24 x 15 world units of mostly empty plot plus a 24 x 8 ground plane and a zeta plane 22 units out, so the wedge is roughly 3% of frame even where it is 6.3% of the plot. The band is emissive on purpose - the critic reads the hottest 5% of pixels, and an unlit 30%-alpha wedge would have been the honest geometry and an invisible measurement. If it still reads faint, crop before concluding: dna.framing near 0.6 puts the plot in the frame instead of the horizon."
-   },
-   "footprint": [
-    23,
-    6,
-    4
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "riemann_pi",
-   "map_ready": true,
-   "map_sequences": [],
-   "name": "riemann_pi",
-   "parameters": {
-    "footprint": [
-     23,
-     6,
-     4
-    ],
-    "size_group": "world_scale"
-   },
-   "scene": "res://algorithms/spacetopology/riemann_pi/pi_infinity_surface.tscn",
-   "size_group": "world_scale",
-   "tags": [
-    "geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [
-      "sphere",
-      "plane"
-     ],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
-      "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "emission",
-      "metallic",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "particle_lifecycle",
-     "driven_by": "cpu_simulation",
-     "affects": [
-      "transform",
-      "color"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "~512"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 208,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     25.5,
-     15.65,
-     8.0
-    ],
-    "aabb_center": [
-     10.75,
-     7.32,
-     0.0
-    ],
-    "grid_cells": [
-     26.0,
-     8.0
-    ],
-    "max_dimension_m": 25.5,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 60,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045261Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "integration: pi estimated by Riemann slices — the circle's area approached rectangle by rectangle; the constant everyone knows, earned the slow way. Accumulation auditioning for exactness."
-  },
-  "riemann_sphere": {
-   "dna": {
-    "axes": {
-    "postulate": [
-    "bare",
-    "parallels",
-    "triangle",
-    "net",
-    "euclid"
-    ],
-    "infinity": [
-    "pole",
-    "rays",
-    "open",
-    "none"
-    ]
-    }
-   },
-   "category": "geometry",
-   "complexity": "advanced",
-   "description": "The Riemann sphere — compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "riemann_sphere",
-   "map_ready": true,
-   "map_sequences": [
-    "foundationscrisis"
-   ],
-   "name": "Riemann Sphere",
-   "parameters": {
-    "footprint": [
-     1,
-     1,
-     1
-    ],
-    "size_group": "compact"
-   },
-   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
-   "tags": [
-    "riemann",
-    "complex_analysis",
-    "stereographic",
-    "projection",
-    "sphere",
-    "alternative_geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "sphere",
-      "torus",
-      "plane"
-     ],
-     "operations": [
-      "create_primitives",
-      "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "metallic",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "few",
-    "vertex_estimate": "~512"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "contrasts",
-     "poincare_disk",
-     "compactification",
-     "hyperbolic",
-     "complex"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.9,
-     0.63,
-     0.9
-    ],
-    "aabb_center": [
-     0.0,
-     0.01,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.9,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045762Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "triangle_curvature_workbench": {
-   "name": "Triangle Curvature Workbench",
-   "lookup_name": "triangle_curvature_workbench",
-   "description": "An interactive workbench for Gauss-Bonnet on a triangle. One slider drives Gaussian curvature K through seven detents {-2, -1, -0.5, 0, +0.5, +1, +2}; the host surface morphs with K's sign (Poincaré disk for K<0, flat cyan grid for K=0, violet sphere for K>0); three triangle vertices at canonical 30° geodesic separation stay fixed while their connecting edges become geodesics ON the active surface (arcs, lines, great-circle arcs); the readout shows α + β + γ in degrees, the Gauss-Bonnet excess (sphere) or defect (disk) as a signed angle, and a regime word. The slider IS Gauss-Bonnet — the parallel postulate exposed as a setting on K, not a truth about lines. Paired with /triangle-table-gallery's nine cells (3 surfaces × 3 sizes).",
-   "scene": "res://commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.tscn",
-   "category": "limits-of-geometry",
-   "interaction": "grab_slide",
-   "sequence": "computationalgeometry",
-   "artifact_type": "geometry",
-   "qfep_term": "F",
-   "capacity": "WALK Gauss-Bonnet — angle sum is a property of the surface",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean",
-    "gauss_bonnet",
-    "curvature",
-    "parallel_postulate"
-   ],
-   "dev_category": "geometry",
-   "complexity": "intermediate",
-   "tags": [
-    "interactive",
-    "slider",
-    "geometry",
-    "non_euclidean",
-    "curvature",
-    "gauss_bonnet",
-    "triangle",
-    "poincare_disk",
-    "sphere",
-    "limits_of_geometry",
-    "parallel_postulate"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "computationalgeometry",
-    "higher_dimensions"
-   ],
-   "parameters": {
-    "footprint": [
-     2,
-     3,
-     2
-    ],
-    "size_group": "medium"
-   },
-   "spatial_needs": {
-    "platform": "floor",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "curvature_slider",
-     "hyperbolic_surface",
-     "elliptic_surface",
-     "riemann_sphere",
-     "euclid_postulates_plaque"
-    ],
-    "preferred_zone": "any"
-   }
-  },
-  "riemann_torus": {
-   "category": "unknown",
-   "complexity": "beginner",
-   "description": "riemann_torus",
-   "dev_themes": [
-    "geometry",
-    "non_euclidean"
-   ],
-   "footprint": [
-    15,
-    2,
-    2
-   ],
-   "include_in_map_data": true,
-   "lookup_name": "riemann_torus",
-   "map_ready": true,
-   "map_sequences": [],
-   "name": "riemann_torus",
-   "parameters": {
-    "footprint": [
-     15,
-     2,
-     2
-    ],
-    "size_group": "world_scale"
-   },
-   "scene": "res://algorithms/spacetopology/riemann_torus/torus_vr.tscn",
-   "size_group": "world_scale",
-   "tags": [
-    "geometry"
-   ],
-   "geometry_spec": {
-    "mesh_type": "hybrid",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "unknown",
-     "primitives": [
-      "cylinder",
-      "torus",
-      "plane"
-     ],
-     "operations": []
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": [
-      "emission",
-      "metallic",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "particle_lifecycle",
-     "driven_by": "cpu_simulation",
-     "affects": [
-      "transform",
-      "color"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "~64"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 312,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     25.73,
-     0.65,
-     12.0
-    ],
-    "aabb_center": [
-     6.87,
-     -0.09,
-     0.0
-    ],
-    "grid_cells": [
-     26.0,
-     12.0
-    ],
-    "max_dimension_m": 25.73,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 60,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.045762Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Drag two lattice vectors on the floor and the label recomputes τ = ω₂/ω₁ live: every torus is the same plane under a different quotient, and the shape you took for a doughnut turns out to be the ratio of two arrows."
-  }
- },
- "registry_info": {
-  "category": "geometry",
-  "description": "Non-Euclidean and alternative geometry artifacts — Möbius strips, bulging tunnels, rhizomatic structures, and spaces where parallel lines meet or diverge. Geometry beyond the textbook.",
-  "name": "alternative_geometries",
-  "theoretical_grounding": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception"
- }
+	"artifacts": {
+		"bulging_tunnel": {
+			"capacity": "FEEL how parametric distortion transforms a predictable corridor into an unpredictable cave",
+			"category": "geometry",
+			"complexity": "intermediate",
+			"description": "Walk into a cylinder that refuses to stay regular. CSG spheres bulge outward at irregular intervals, warping your sense of depth \u2014 the tunnel breathes. The num_bulges and bulge_max_radius parameters control how much chaos enters the geometry: low values produce a hallway, high values produce a cave. Contrasts with Klein bottle (closed non-orientable) and M\u00f6bius strip (twisted surface); prepares for hyperbolic spaces where distortion becomes the rule.",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"footprint": [
+				3,
+				3,
+				10
+			],
+			"gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology",
+			"include_in_map_data": true,
+			"interactions": [
+				"walk through tunnel",
+				"adjust num_bulges via export",
+				"change bulge_max_radius to control distortion intensity",
+				"toggle use_random_bulges for deterministic vs stochastic"
+			],
+			"lookup_name": "bulging_tunnel",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Bulging Tunnel",
+			"parameters": {
+				"bulge_max_radius": "Maximum bulge radius (default: 2.0)",
+				"bulge_seed": "Random seed for reproducibility (default: 42)",
+				"footprint": [
+					3,
+					3,
+					10
+				],
+				"num_bulges": "Number of bulge deformations (default: 5)",
+				"size_group": "xlarge",
+				"tunnel_length": "Length of tunnel (default: 10.0)",
+				"tunnel_radius": "Base radius (default: 1.0)",
+				"use_random_bulges": "Stochastic vs sinusoidal bulge sizing (default: true)"
+			},
+			"qfep_connection": "Lambda applied to architecture \u2014 a regular cylinder is pure F (uniform, predictable). Each bulge introduces E (variation, surprise). The num_bulges parameter IS lambda: how much chaos do you let into your structure? At zero bulges the tunnel is Euclidean. At maximum, geometry becomes landscape.",
+			"scene": "res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"alternative_geometry",
+				"tunnel",
+				"distortion",
+				"non_euclidean",
+				"spatial",
+				"csg",
+				"procedural",
+				"cave",
+				"parametric"
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"mobius_strip_altgeo",
+					"twisted",
+					"surface",
+					"pairs"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 44,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.9,
+					3.9,
+					10.28
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					5.14
+				],
+				"grid_cells": [
+					4.0,
+					11.0
+				],
+				"max_dimension_m": 10.28,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"curvature_slider": {
+			"category": "geometry",
+			"complexity": "beginner",
+			"description": "VR slider controlling Gaussian curvature from negative (hyperbolic) through zero (flat/Euclidean) to positive (elliptic). Emits curvature_changed signal for linked surfaces.",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "curvature_slider",
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis",
+				"testmaps"
+			],
+			"name": "Curvature Slider",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact",
+				"opening": "flat | hyperbolic | elliptic - which sign of K the bench is parked at (default flat)",
+				"witness": "number | surface | normals - what the instrument shows of the geometry it names (default number)",
+				"curvature": "K in [-1, +1] - now read at build time, so a map can open the slider anywhere on the range (default 0.0)"
+			},
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"fixture": {
+					"witness": "surface"
+				},
+				"axes": {
+					"opening": [
+						"flat",
+						"hyperbolic",
+						"elliptic"
+					],
+					"witness": [
+						"number",
+						"surface",
+						"normals"
+					]
+				},
+				"default": "opening=flat, witness=number - flat SHORT-CIRCUITS: _k() hands back the shipped `curvature` export rather than the table's 0.0, so a map that overrides curvature alone opens at its own number instead of being reset to zero. At K = 0 the slider knob is built at (0 + 1) / 2 = 0.5, the literal that was hard-coded there before, and _label_text() renders 'CURVATURE: K = 0\\n(Flat/Euclidean)' to the byte - _k_str returns '0' and not '0.00' for exactly this reason. witness=number adds no node at all, so the scene tree stays the rack panel and the Label3D and nothing else. The 5 placements (NonEuclidean_Spaces, NonEuclidean_Spaces_composed, test_batch_1 and the two curation_station rosters in Corridor_NonEuclidean_Spaces and Curation_Bay_foundationscrisis_1) name no config keys, so apply_grid_config - a bare `pass` before this pass - reaches no assignment and never rebuilds.",
+				"was": "one @export, `curvature`, a float that was never read at build time: _ready() built the panel with a hard-coded 0.5 and the label with a hard-coded string, and apply_grid_config's whole body was `pass`. The three signs of K - the whole of differential geometry's classification - were reachable only by a hand on a slider in a headset, and even then the artifact displayed no curvature, only the word for it.",
+				"note": "opening is dot_aligner's word for the same situation (a named case that existed only behind a hand in VR) with its four-angle value list refused: the sign of K has exactly three values and a fourth would invent a geometry. DECLINED and measured first: a geodesic-triangle value showing the angle sum. A chord lifted onto the patch is not a geodesic, and the lifted-chord sum comes out 179.6 on the saddle and 161.1 on the DOME - the wrong side of 180 for positive curvature, at every rotation of the triangle. It would have published a figure stating the theorem backwards. SEPARATE FINDING, not repaired here: curvature_changed has no listener anywhere in the repo, so the @identity's 'controls hyperbolic_surface and elliptic_surface' is aspirational."
+			},
+			"scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
+			"tags": [
+				"curvature",
+				"non_euclidean",
+				"slider",
+				"interactive",
+				"alternative_geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"controls",
+					"hyperbolic_surface",
+					"elliptic_surface",
+					"depends",
+					"euclid_postulates_plaque"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.18,
+					0.2,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"elliptic_surface": {
+			"dna": {
+				"axes": {
+					"postulate": [
+						"bare",
+						"parallels",
+						"triangle",
+						"net",
+						"euclid"
+					]
+				}
+			},
+			"category": "geometry",
+			"complexity": "intermediate",
+			"description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) \u2014 where parallel lines converge and triangle angles sum to more than 180 degrees.",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "elliptic_surface",
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"name": "Elliptic Surface",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+			"tags": [
+				"elliptic",
+				"positive_curvature",
+				"non_euclidean",
+				"surface",
+				"alternative_geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"hyperbolic_surface",
+					"lines",
+					"diverge",
+					"depends"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.79,
+					0.8,
+					0.79
+				],
+				"aabb_center": [
+					0.0,
+					-0.12,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"entropy_morphogenesis": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"found_state": [
+						"sorted",
+						"stirred",
+						"mixed"
+					],
+					"level": [
+						"minimal",
+						"thickened",
+						"pinched",
+						"broken"
+					]
+				},
+				"fixture": {
+					"field_seed": 20260803
+				},
+				"framing": 0.85,
+				"default": "found_state=stirred, level=minimal - both are pure no-ops. `stirred` falls through to `_:` and never assigns S, `minimal` never assigns threshold_center, so the scene's own S (0.3) and threshold (0.0) survive untouched. The 7 existing placements (Topology_Entropy_Morphogenesis, _p1, _p2, _p3, Corridor_Topology_Entropy_Morphogenesis, Morphogenesis_Intro, Curation_Bay_softbodies_4) render byte-identically to before.",
+				"was": "A gyroid at one entropy value with a full inspector of exports and apply_grid_config() = pass, so no map token could reach a single knob. found_state opens the S scale that was already the declared critical_parameter; level opens threshold_center, which the artifact's own truth line names and which had been nailed to 0.0 everywhere. field_seed is a fixture knob, not an axis: GyroidFieldGenerator does noise.seed = randi(), so unpinned the sweep would photograph five different gyroids.",
+				"notes": "framing 0.85 because the volume is 5x10x5 - fit-by-diagonal (12.2) pulls the camera back for an extent that is never wider than 5. `shelled` from entropy_jar's list is deliberately absent: there it is a joke about the jar's vertical binning, and this artifact carries no instrument to fool."
+			},
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A gyroid triply-periodic minimal surface built by marching cubes at one chosen entropy. S maps to frequency, noise amplitude and cut threshold together, so a single number decides whether the surface is a legible crystal or a crumpled labyrinth.",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "entropy_morphogenesis",
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"name": "entropy_morphogenesis",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"grid_overlay",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"synthesis",
+					"softbodies",
+					"sequence",
+					"entropy",
+					"becoming"
+				],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 25,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.0,
+					5.0,
+					5.0
+				],
+				"aabb_center": [
+					0.0,
+					-2.5,
+					0.0
+				],
+				"grid_cells": [
+					5.0,
+					5.0
+				],
+				"max_dimension_m": 5.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"gyroid_cheese": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "gyroid_cheese",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gyroid_cheese",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "gyroid_cheese",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/spacetopology/gyroid_cheese/gyroid_cheese_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"grid_overlay",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 256,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.0,
+					16.0,
+					16.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					16.0,
+					16.0
+				],
+				"max_dimension_m": 16.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "sin\u00b7cos summed three ways yields a surface with no rooms, only two interlocked corridors that never touch \u2014 and marching cubes plus a generated collision body commits that implicit equation to something your feet must negotiate."
+		},
+		"hyperbolic_surface": {
+			"dna": {
+				"axes": {
+					"postulate": [
+						"bare",
+						"parallels",
+						"triangle",
+						"net",
+						"euclid"
+					]
+				}
+			},
+			"category": "geometry",
+			"complexity": "intermediate",
+			"description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) \u2014 where parallel lines diverge and triangle angles sum to less than 180 degrees.",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "hyperbolic_surface",
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"name": "Hyperbolic Surface",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+			"tags": [
+				"hyperbolic",
+				"negative_curvature",
+				"non_euclidean",
+				"saddle",
+				"surface",
+				"alternative_geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"elliptic_surface",
+					"lines",
+					"converge",
+					"depends"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.25,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"marching_cubes": {
+			"dna": {
+			 "promoted": "2026-08-12",
+			 "stage": "2 - variation",
+			 "axes": {
+			  "strata": [
+			   "all",
+			   "bedrock",
+			   "cells",
+			   "fine"
+			  ],
+			  "swell": [
+			   "rolling",
+			   "subdued",
+			   "hills",
+			   "range"
+			  ]
+			 },
+			 "default": "strata=all, swell=rolling - both exact no-ops, and one of them needed care to stay that way. _strata_weights() returns the literal Array [1.0, 0.2, 0.3], which is the same three doubles calculate_terrain_density always compiled: 1.0 was the IMPLICIT weight on height_noise (x * 1.0 returns the identical bit pattern for every finite float), 0.2 and 0.3 were the inline literals on the two lines below it. IT IS AN Array AND NOT A Vector3, deliberately: Vector3 components are 32-bit, so Vector3(1.0, 0.2, 0.3).y widened back to a GDScript double is 0.20000000298023224, and the short-circuit would have landed NEAR the shipped weight instead of ON it - a 1.5e-9 error, invisible in any picture, and exactly the class of thing that makes the phrase 'bit-identical' a lie. _swell_height() returns terrain_height itself rather than the number 5.0, so the HeightSlider path is untouched too. FIVE MAP REFERENCES ACROSS TWO NAMES AND NOT ONE PASSES A CONFIG KEY. Three are direct grid tokens - `mc_terrain_demo:0:-2` (ISO_FlatTerrain), `marching_cubes:0:2:0.5` (ISO_Showcase_12) and `marching_cubes:0:2:0.5` (ProceduralGeneration_Marching_Cubes_Algorithm) - rotation, height and scale only, no `#` tail, so the parsed config_data is empty. Neither registry entry declares default_params and neither token carries a delegate, so merged_config is EMPTY for all three and GridInteractablesComponent's `if not merged_config.is_empty()` gate at line 1194 means _apply_artifact_config is never called at all: no metadata is stamped and apply_grid_config is never reached. The other two are curation_station mounts (Corridor_ISO_FlatTerrain, Curation_Bay_isosurfaces_1), and the station DOES call apply_grid_config - with {\"emissive\": false} (curation_station.gd:382), after add_child, so _ready has already run and recorded the signature. That dictionary contains no axis key, the signature is unchanged, and the guard returns before _rebuild_terrain. Zero of five reach the rebuild branch.",
+			 "was": "411 lines and ZERO exports: a walkable-terrain demo authored as a standalone scene, with an `apply_grid_config` whose entire body was `pass` - a method that existed only so the grid's has_method() check would find something. It also shipped UNSEEDED. setup_terrain_generator called `TerrainGenerator.new()` with no argument and setup_noise_generators:67 reads `var actual_seed = seed_value if seed_value >= 0 else randi()`, so every launch drew a different terrain. That is not an inference from reading: this registry's own `measurements` block records an aabb_size y of 0.89 here and 0.33 on `marching_cubes` for THE SAME SCENE measured in the same pass on 2026-08-12T04:39:51Z. Two numbers, one scene, one timestamp - which is what a randi() seed looks like from the outside, and it is the thread that led to reading the density function properly.",
+			 "note": "strata is a NEW word and the nearest taken relatives were each refused for a reason. `landform` (mc_overhang_landscape) and `interior` (mc_flat_landscape) name what a field PRODUCES; strata names which summands it is BUILT FROM. `octaves` (mc_cave, mc_inside_cave) is how many scales of ONE noise survive; this is which of THREE DIFFERENT noises contributes at all. `admixture` and `fusion` are held elsewhere in this same sequence with the sense of blending one field into another, which is a smooth knob; strata is a switchboard.\n\nTHE RUNGS, and the arithmetic that sizes them. calculate_terrain_density sums three noises into one height: height_noise (TYPE_PERLIN, frequency 0.05, 4 octaves, gain 0.5, lacunarity 2.0, weight 1.0), detail_noise (TYPE_SIMPLEX, frequency 0.15, 2 octaves, weight 0.2) and feature_noise (TYPE_CELLULAR, RETURN_CELL_VALUE, frequency 0.015, weight 0.3). The axis multiplies those three weights and touches nothing else. all = SHIPPED (1.0, 0.2, 0.3). bedrock = (1, 0, 0), the pure fBm ground with no cells and no crust. cells = (0, 0, 1), cellular alone. fine = (0, 1, 0), simplex alone. The sole-layer rungs carry weight 1.0 rather than the shipped 0.3 and 0.2 so each shows its layer at full strength, which makes `all` about 1.5x the amplitude of a sole rung - stated rather than hidden, and the reason swell is crossed with it.\n\nAND THEN THE FOOTPRINT ARITHMETIC, WHICH IS THE FINDING OF THIS PASS. The controller sets terrain_size 10 against a chunk of 16 x 0.8 = 12.8 m, so the grid is exactly ONE chunk and the whole artifact is 12.8 m across. Measure each layer's feature size against that: Perlin at 0.05 has a 20 m base period, so the footprint is 0.64 of one period plus its 10 / 5 / 2.5 m octaves - a broad ramp with wiggles, which is the picture everyone has seen. Simplex at 0.15 gives 6.7 m and 3.3 m features - about two bumps across the footprint, genuinely the finest of the three. Cellular at 0.015 has a lattice spacing of 66.7 m. THE FOOTPRINT IS 0.19 OF ONE VORONOI CELL. RETURN_CELL_VALUE is constant per cell, so at this artifact's own scale the third summand is not a layer of features at all - it is a single number, a DC offset of up to +/-0.6 m on the shipped weight. That is why `cells` is predicted to photograph as one perfectly flat plate (see predicted_degeneracy), and it is a better answer to `what is the field made of` than a prettier rung would have been: one third of this field is a constant.\n\nswell is also NEW. `relief` was the natural word and is taken once by push_relabel_algorithm, where it means the graph algorithm's relabel operation - an unrelated question, so reusing it would confuse rather than build a family. Not `bulge` (queer_marching_cave), which is a local swelling of a cave wall rather than the global amplitude of a height field. The literal is terrain_height = 5.0, declared twice (TerrainGenerator:21 and TerrainDemoController:30) and reaching the field through update_terrain_parameters()'s \"height\" key; it scales the entire noise sum and nothing else.\n\nTHE LADDER DOES NOT REACH ZERO, and the approved design asked that it should - `plane = 0.0`, a perfectly flat slab, offered as the evidence for the defect below. IT RENDERS NOTHING, and the arithmetic is short. Chunks are created at y = 0.0 (create_terrain_voxel_grid:169) and sampled upward for 12 x 0.8 = 9.6 m, so the box floor IS the mean plane. The density ladder lerps 0.45 -> 0.75 across the unit below the surface and therefore crosses iso 0.5 at surface_factor 1/6, i.e. 0.167 units BELOW the geometric surface. At amplitude 0 the extracted surface sits at y = -0.167, outside the sampled column; every voxel in the box reads 0.45 or less; marching cubes finds no crossing anywhere and the tile is empty. Nor can a small amplitude stand in for it: LOW AMPLITUDE RENDERS LESS, NOT FLATTER, because only the fraction of the footprint where combined_height clears 0.167 gets any geometry at all. So the rungs go UP from the default instead of down to zero: rolling = 5.0 SHIPPED, subdued = 2.5, hills = 9.0, range = 13.0. CEILING ARITHMETIC, do not overshoot: at 13.0 the crest is max_sum x 13 x 0.4, and `all` has a maximum sum near 1.5, so 7.8 m - still inside the 9.6 m column. Above about 15 the terrain leaves the chunk and the rung photographs as holes rather than as mountains.",
+			 "declined": "REFUSED, surface_threshold (0.5): `threshold` is taken by mc_torus_sculpture, and here it would also be degenerate - calculate_terrain_density is monotone in distance_to_surface, so a constant threshold offset is exactly a vertical translation of the extracted surface and would argue with swell for the same pixels. REFUSED, debug_disable_surface_variation and debug_minimum_density: the controller hardcodes debug_mode true and min_density 0.7, so surface_var is permanently 0.0; switching it on adds detail_value * 0.05 = +/-0.01 into a band 0.30 wide, a 3.3% perturbation of the transition zone, below the bite floor - and two values is below the axis floor anyway. REFUSED, noise_frequency (0.05): a real field property, but the same ratio question as `resolution`, already used twice in this sequence. REFUSED, chunk_size and voxel_scale: the sampling lattice, i.e. resolution again. REFUSED, terrain_size, the chunk material and the wireframe flag: a footprint and chrome.\n\nFOUR THINGS REPORTED AS DEFECTS RATHER THAN SWEPT.\n\n1. THE HEADLINE: THIS ARTIFACT'S FIELD IS TWO-DIMENSIONAL. All three layers are sampled with get_noise_2d(world_pos.x, world_pos.z) and the density is a five-branch piecewise ramp in world_pos.y minus that height. Density is monotone decreasing in y at every column, so there is exactly one crossing per column: the field is a height function extruded, and it cannot produce an overhang, a cave, a bridge or a disconnected body - the entire subject of the sequence it sits in. Its own registry description promises 'configurable noise parameters'; what it cannot do is the thing marching cubes is for.\n\n2. THE LADDER DOES NOT CROSS ITS OWN THRESHOLD AT THE SURFACE. lerp(0.45, 0.75, surface_factor) = 0.5 at surface_factor = 1/6, so the extracted iso-surface sits 0.167 units BELOW the geometric one everywhere. (The approved design put this at 0.833, which is 1 - 1/6 - the complement, not the offset.) Combined with a chunk floor at y = 0 this is why roughly half the footprint carries no geometry at the shipped settings: wherever combined_height < 0.167 the whole column is air. The shipped picture is a partial sheet, not a ground.\n\n3. A 73.36 m DECORATIVE PLANE, 5.7x THE ARTIFACT. marching_cubes_terrain_demo.tscn carries a MeshInstance3D with a PlaneMesh at scale 36.68 and a translucent pink material, sitting at y = -0.1. The terrain is 12.8 m. That plane is the entire content of this registry's `measurements.aabb_size` of [73.36, 0.89, 73.36] and of both entries' footprint_measured of 74 x 74 cells - a spatial contract, a placement footprint and a capture framing all sized to a backdrop rather than to the artifact. It is left in place (it ships in all five placements and defaults are sacred) and dna.framing is set against it instead; see framing_why.\n\n4. A LEAK ON EVERY GENERATION. TerrainGenerator.generate_walkable_collision allocates a bare `Node3D` as temp_parent, parents the navigation tiles and the VR teleport markers to it, and frees it only on its two early-return branches. On the success path it is never freed and never enters the tree, so every regeneration strands a Node3D and its tile children. Not touched here: fixing it changes the shipped path, and this pass owes those five placements a bit-identical build.",
+			 "fixture": {
+			  "terrain_seed": 7,
+			  "build_synchronously": true
+			 },
+			 "fixture_why": "TWO KEYS, both guards against publishing a fact about the harness. terrain_seed = 7 is law 4: the shipped call site is `TerrainGenerator.new()` with no argument, setup_noise_generators:67 falls through to randi(), and sixteen tiles of an unseeded generator are sixteen different terrains - the bite number would be noise wearing evidence's clothes. The export defaults to -1, which is the same `seed_value >= 0` test failing exactly as it did before, so nothing shipped changes. build_synchronously = true is law 6: _ready's shipped path is call_deferred(\"generate_terrain_async\") and the generator awaits process_frame at three points, so the mesh does not exist until roughly five frames after _ready. SETTLE is 1.1 s in capture_config_sweep, which is far more than five frames, so this is BELT AND BRACES rather than a fix for a known failure - but a half-built terrain photographs as a smaller subject and the sweep's union AABB is computed in a PRE-PASS with a 0.35 s settle, which is the tighter budget and the one that decides the camera for all sixteen tiles. Both values are written as a real int and a real bool, never as the strings \"7\" and \"true\", because capture_config_sweep assigns fixture values straight onto the typed export before _ready and a typed int rejects a String. NOTHING WAS MERGED OVER: this dna block was created by apply_dna_block.py in this same pass and had no fixture key of its own, so there is no second \"fixture\" for the last one to win over.",
+			 "framing": 0.13,
+			 "framing_why": "0.13, an unusually tight number, and it is set against the 73.36 m decorative plane rather than against the terrain. THE ARITHMETIC, because a number this far from 1.0 should be checkable. capture_config_sweep frames one UNION AABB for the whole sweep (line 395), and that union is dominated by the PlaneMesh: 73.36 x ~4 x 73.36, radius 51.9. dist = radius / tan(FOV/2) * PAD * framing = radius * 6.215 * framing, and the half-extent of the frame at the look-at plane is dist * tan(17 deg), so half_extent = 98.6 * framing metres. The terrain is a 12.8 m square; at the canonical yaw of 0.62 rad its projected half-width is 12.8 * (cos + sin) / 2 = 8.9 m, and its centre sits 1.4 m off the union centre in x and z (the chunk spans -5.0 to +7.8, not -6.4 to +6.4), which projects to about 1.95 m - so 10.9 m must fit. framing 0.11 fits it exactly; 0.13 gives 12.8 m, a 15% margin. TWO FAILURE SIGNATURES, so the next reader does not have to guess which way to move it: if the terrain comes back at ~3% of frame with a pink field around it, the union is bigger than modelled and framing must go LOWER; if any corner of the terrain is cropped, it must go higher. Precedent for the magnitude: grid3d already declares 0.12. Note also that because ONE union serves all sixteen tiles, the usual worry that an AABB-fitted camera absorbs an amplitude axis does not apply here - the camera does not retreat for `range`.",
+			 "rebuild_guard": "apply_grid_config was a bare `pass`. It now reads strata / swell / terrain_seed, builds a signature of every value the build consumes (the two axes plus the seed, terrain_size and noise_frequency) and RETURNS when it has not moved. _ready records that same signature before the first build, so the grid's deferred call - which always arrives after _ready has already built with the same values - returns without doing anything. Rebuilds are SYNCHRONOUS: _rebuild_terrain frees, re-creates the generator (the seed is read once in _init) and calls the new generate_terrain_sync(), so there is no call_deferred in a build path. FREEING IS BY REGISTER, NOT BY NAME. The script keeps an _owned array of the meshes and collision bodies it actually put into the tree and frees only those, remove_child before queue_free so a rebuilt chunk cannot collide with a still-queued sibling and get renamed TerrainChunk_0@2. The pre-existing clear_previous_terrain(), which frees by name prefix, is left exactly as it was for the Generate button. ONE ORDERING HAZARD, checked rather than assumed: curation_station calls apply_grid_config DIRECTLY (not deferred) on every artifact it mounts, with {\"emissive\": false}. It does so AFTER add_child (curation_station.gd:378-382), so _ready has run - but a null-generator guard is in place regardless, because a composer that configures before parenting would otherwise rebuild against a null.",
+			 "still_note": "Static once built, and a still is a complete account of it. _process exists and runs, but it only moves the demo's own Camera3D (which the sweep stands down as chrome) and updates VR teleport previews for controllers this scene has none of - nothing in the frame moves. The terrain itself is built once and never touched again. THE SYNCHRONOUS TWIN IS AN EXTRACTION, NOT A REWRITE: generate_terrain_meshes_async's loop body was lifted verbatim into build_chunk_mesh(i) and both paths call it, so they cannot drift apart. The three awaits it drops are unconditional yields with no read or write between them, so the mesh should be identical - and that is CHECKABLE rather than assertable: run both paths at the same terrain_seed and compare get_terrain_info().total_vertices, which must agree exactly. If they do not, the synchronous path is wrong and the fixture, not the artifact, is what the sheet is measuring.",
+			 "predicted_degeneracy": "TWO PREDICTIONS, and the second one is the interesting one because it predicts a DEFECT.\n\nstrata, PREDICTED CLOSEST PAIR: all x bedrock, predicted ~7% focus. They differ by exactly (0.2 * detail + 0.3 * feature) * terrain_height * 0.4 = (0.2 d + 0.3 f) * 2.0 at swell=rolling. The cellular term f is a CONSTANT across this footprint (see note - 0.19 of one Voronoi cell), so 0.3 f * 2.0 is a pure vertical offset of up to +/-0.6 m that moves no silhouette at all, and what is actually left between the two frames is 0.2 d * 2.0 = +/-0.4 m of simplex ripple on a sheet whose whole relief is about 1.5 m. That is 27% of the relief but it lives in shading rather than in outline. If it comes back under 3% the two tiles are photographs of the same Perlin ridge and the honest reading is that two of this artifact's three layers are decoration at its own scale.\n\nswell, PREDICTED CLOSEST PAIR: rolling x subdued, predicted ~6% focus. Note this is NOT the pair with the smallest ratio - hills:range is 1.44 against rolling:subdued's 2.0 - because the camera is pinned by one union AABB and does not retreat, so what the frame sees is the ABSOLUTE difference in relief: rolling minus subdued is 2.5 * 0.4 * max_sum ~ 0.75 m, while hills minus range is 4.0 * 0.4 * max_sum ~ 1.2 m. The low rung also loses coverage - the fraction of the footprint clearing the 0.167 iso offset drops from about 45% to about 30% - so if subdued measures LARGER than predicted, the axis is being read as coverage rather than as relief, and that is a true statement about the artifact rather than an error.\n\nTHE RISK THAT IS NOT A CLOSEST PAIR: `cells` MAY PHOTOGRAPH AS FOUR EMPTY FRAMES, and this is predicted deliberately so that an empty tile is not read as a broken harness. With the cellular layer alone, combined_height is the single constant c * terrain_height * 0.4 across the entire footprint, and geometry exists only where that clears 0.167 - i.e. only when c > 0.083 at rolling, c > 0.032 at range. c is one hash of one Voronoi cell under seed 2007 (terrain_seed 7 + 2000) and is roughly uniform on [-1, 1], so it is close to a coin flip. HEADS: four tiles of one perfectly flat plate at four heights - which is, ironically, the flat-slab picture the approved design wanted from swell=plane and could not have. TAILS: four empty tiles. IF IT COMES BACK EMPTY THE FIX IS THE FIXTURE SEED, NOT THE AXIS AND NOT THE WEIGHTS - raise terrain_seed until the cell value is positive, and RECORD which seed, because that number is then load-bearing for every future sweep of this token.",
+			 "kin": "`marching_cubes`, in alternative_geometries.json, is THE SAME SCENE - marching_cubes_terrain_demo.tscn - one of this sequence's one-scene-many-names families, and it carries 2 of the 5 placements under its own name. The declaration is written into BOTH entries rather than one, because check_dna_declarations.registry() and the gallery builder resolve a token to the LAST registry file (sorted) that names a scene, and both of these do; a declaration on only one of them would be reachable from one token and invisible from the other. The two entries' prose is identical on purpose. Their `measurements` blocks are NOT identical (aabb_size y of 0.89 against 0.33) and that difference is the unseeded randi(), not a difference between the artifacts.",
+			 "placements": 5
+			},
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Test scene for marching cubes algorithm verification with basic sphere and voxel tests",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"footprint": [
+				1,
+				21,
+				11
+			],
+			"include_in_map_data": true,
+			"lookup_name": "marching_cubes",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all"
+			],
+			"name": "Marching Cubes Test",
+			"parameters": {
+				"footprint": [
+					1,
+					21,
+					11
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					73.36,
+					0.33,
+					73.36
+				],
+				"aabb_center": [
+					0.0,
+					0.06,
+					0.0
+				],
+				"grid_cells": [
+					74,
+					74
+				],
+				"max_dimension_m": 73.36,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"qfep_connection": "The surface is a verdict: a continuous noise field, cut at a threshold, hardens into walkable terrain. The sliders move the field; the verdict itself never appears on any slider."
+		},
+		"mobius_strip_altgeo": {
+			"category": "geometry",
+			"complexity": "beginner",
+			"description": "A walkable M\u00f6bius strip environment \u2014 traverse the one-sided surface and experience the topological twist firsthand. Non-orientability as lived experience.",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mobius_strip_altgeo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "M\u00f6bius Strip (Walkable)",
+			"scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn",
+			"tags": [
+				"mobius",
+				"topology",
+				"non_orientable",
+				"walkable",
+				"alternative_geometry"
+			],
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					3
+				],
+				"reading_light": {
+					"type": "omni",
+					"direction": "+z",
+					"cone": 360,
+					"radius": 3
+				}
+			},
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.62,
+					0.4,
+					2.69
+				],
+				"aabb_center": [
+					0.1,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3,
+					3
+				],
+				"max_dimension_m": 2.69,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				3,
+				1,
+				3
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"mobius_world": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Walkable M\u00c3\u00b6bius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"footprint": [
+				69,
+				16,
+				72
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mobius_world",
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"name": "M\u00c3\u00b6bius World",
+			"parameters": {
+				"footprint": [
+					69,
+					16,
+					72
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"3d",
+				"physics"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"alternative_geometries",
+					"sequence",
+					"contrasts",
+					"assumptions",
+					"other"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					68.26,
+					16.0,
+					71.51
+				],
+				"aabb_center": [
+					3.87,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					69,
+					72
+				],
+				"max_dimension_m": 71.51,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		},
+		"non_euclidean_space": {
+			"category": "geometry",
+			"complexity": "advanced",
+			"description": "A space where Euclid's parallel postulate fails \u2014 rooms that are bigger inside than outside, corridors that loop impossibly. Hyperbolic and elliptic geometry made navigable.",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "non_euclidean_space",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Non-Euclidean Space",
+			"parameters": {
+				"footprint": [
+					7,
+					1,
+					8
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.tscn",
+			"tags": [
+				"non_euclidean",
+				"hyperbolic",
+				"elliptic",
+				"impossible_space",
+				"alternative_geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 418,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					18.48,
+					3.95,
+					21.95
+				],
+				"aabb_center": [
+					-0.15,
+					1.32,
+					2.77
+				],
+				"grid_cells": [
+					19.0,
+					22.0
+				],
+				"max_dimension_m": 21.95,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				19.0,
+				1,
+				22.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Euclid fails here not by curving space but by bookkeeping: portals stitch disjoint rooms so corridors loop and interiors exceed their shells, and the manager quietly signals each crossing. Consistency turns out to be a rendering convention your walking body can be talked out of."
+		},
+		"organic_space": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"formation": [
+						"chance",
+						"erode",
+						"accrete",
+						"alternate"
+					],
+					"cast": [
+						"all",
+						"membrane",
+						"crystal",
+						"growth"
+					]
+				},
+				"default": "formation=chance, cast=all - reproduces the shipped build exactly. formation=chance calls the same coin flip at the same two thresholds the hard-coded expressions used (0.5 on the shell's deformation spheres, 0.3 on the tunnel details), and cast=all runs membranes, crystals and growths together as before, so all 13 existing placements are untouched.",
+				"was": "One hard-coded expression, twice: `OPERATION_UNION if randf() > 0.5 else OPERATION_SUBTRACTION` on the shell and the same at 0.3 on the tunnel details. The artifact's own truth line says organic form 'is what remains after noise has eaten away at geometry from within' \u2014 but the code was flipping a coin between eating away and piling on, and never said so. formation states the position; erode is the truth line taken literally, accrete is its opposite, alternate is neither chance nor doctrine but rhythm. cast was three generators that always all ran; the word and the all-plus-one-each shape are borrowed verbatim from particle_systems.cast, which asks the same question of its emitters.",
+				"fixture": {
+					"form_seed": 20260803
+				},
+				"fixture_note": "MANDATORY for the sweep. Every draw in this artifact was an unseeded global randf/randi, so without a pinned seed the N variants are N different caves and any bite number measures the RNG, not the axis (the trap CLAUDE.md names for generative artifacts). form_seed now routes all randomness through one RandomNumberGenerator; 0 keeps the shipped fresh-every-run behaviour, so this pin is capture-bench only and no placement sees it.",
+				"framing_note": "The subject is 25 m across (space_size 25,18,25 in the .tscn) and mostly hollow shell. If the sweep reports a small subject share, that is the shell's thin wall against a big frame, not an inert axis."
+			},
+			"category": "unknown",
+			"complexity": "expert",
+			"description": "An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"footprint": [
+				1,
+				6,
+				13
+			],
+			"include_in_map_data": true,
+			"lookup_name": "organic_space",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"name": "Organic Space",
+			"parameters": {
+				"footprint": [
+					1,
+					6,
+					13
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/alternativegeometries/organicspace/organic_space.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"branching_growth_algorithm",
+					"contrasts",
+					"deterministic",
+					"growth"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 625,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					25.75,
+					25.0,
+					25.0
+				],
+				"aabb_center": [
+					0.38,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					26,
+					25
+				],
+				"max_dimension_m": 25.75,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "A space that looks grown rather than built \u2014 chambers and passages with the irregular rightness of something that developed instead of being placed. The proof that 'organic' is not a texture but a *process*: authorless form has a feel, and the walker can tell."
+		},
+		"rhizomatic_maze_space": {
+			"dna": {
+				"promoted": "2026-08-05",
+				"deepened": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"topology": [
+						"rhizome",
+						"tree",
+						"severed",
+						"plateau"
+					]
+				},
+				"fixture": {
+					"layout_draw": "pinned",
+					"bench_stage": "bare"
+				},
+				"fixture_why": "MANDATORY for the sweep, and not an axis. The layout is drawn entirely from the UNSEEDED global randf/randi \u2014 generation_seed only ever fed the two FastNoiseLite fields, never the growth \u2014 so four topology frames would be four different mazes and any bite number would be measuring the RNG rather than the rule. This is the generative-artifact trap in CLAUDE.md. layout_draw defaults to `fresh`, which is the shipped every-launch-is-a-new-maze behaviour and is the artifact's point, so no placement ever sees the pin.",
+				"default": "topology=rhizome - the shipped network line for line. generate_primary_connections keeps the same three-nearest loop with the same randf() draw against the same branch_prob, generate_secondary_branches builds the same 250 nodes from the same three randf_range calls and hands over the same flat 0.7 width_multiplier, sever_network returns on its first line, and the seed ring keeps the identical layer_y expression. The tree, plateau and rupture code is reachable only from a non-default word, so the RNG consumes exactly the draws it always consumed in exactly the order it consumed them. MEASURED, not assumed: there are 14 mentions across 12 map files, not the 5 the promotion brief carried, and four reach-paths rather than one - bare tokens in PG_Mirrored_Patterns and its three parts and in ProceduralGeneration_Eight; a curation_station collection in Corridor_PG_Mirrored_Patterns whose #layout and #with_* flags belong to the station and not to this artifact; `exhibit_furniture#kind:floor_work#size:s#mount:rhizomatic_maze_space` in six museum trials, where the token is the furniture's mount value; and `rhizomatic_maze_space->layered_membrane` in Trial_rooms_proceduralgeneration, which is a transformation target and not a config. Not one of the fourteen carries a topology key, and apply_grid_config returns unless a token names a word this file knows AND that word differs from the one it holds AND _ready has already grown the maze once.",
+				"was": "thirteen float and int exports, none of which said what the artifact is FOR. The runner refused it as NO TURNABLE KNOBS because nothing enumerated: branch_probability could be turned from 0.7 to 0.8 but there was no way for a map to ask for the thing the name promises. An artifact called rhizomatic shipped exactly one topology, and \u2014 measured rather than assumed \u2014 it was mostly a TREE: the only rhizomatic operation in the file is the three-nearest-neighbour pass over about 20 seeds, while the 250 secondary branches each attach by exactly one edge and close no loop at all.",
+				"note": "The axis is Deleuze and Guattari's own opposition, not a dial. `tree` is a minimum spanning tree from the lowest seed with growth oriented away from the root and tunnel width tapering by depth, so hierarchy is visible as thickness \u2014 there is no critically-rhizomatic middle value, the way bouncing_ball found there is no critically-bouncing. `severed` is asignifying rupture performed ON a finished rhizome rather than a different way of growing one, and it recounts node degrees afterwards so the chamber pass cannot drop a nine-metre CSG sphere into the fissure it just opened. `plateau` keeps every seed the four levels would have made and puts them all on one, so the comparison is about arrangement and not about how much was grown.",
+				"declined": "branch_probability, growth_iterations, merge_threshold, chamber_probability, organic_distortion and tunnel_segments \u2014 six knobs that are already exports and all of them decline for the same reason: they change how MUCH tangle there is, not what the tangle claims. connection_probability and deadend_pruning are declined for a different reason worth recording: they are exported, they are set in the .tscn, and no line of code reads either of them.",
+				"still_note": "topology is resolved before a single tunnel mesh is built and never moves again, so one frame is a complete account of it. Expect plateau to be the loudest value by far \u2014 a 25 m tower collapsing to a flat mat is a silhouette change, not a texture one. tree and rhizome differ in loop structure and in tunnel thickness rather than in extent, so compare where routes close and how width falls off toward the periphery.",
+				"deepened_why": "THE BENCH HAD NEVER PHOTOGRAPHED THIS ARTIFACT, and that is the finding \u2014 the axis was not on trial, it was never called. The sweep reported peak 0.062% across ALL SIX pairs on a subject of 8.217%, and the tell is that the peak was rhizome-vs-plateau, the pair the still_note above had predicted would be the loudest in the batch by a distance: a 25 m tower against a flat mat cannot differ by six hundredths of a percent. A number that impossible is a fact about the instrument. Three causes, all measured in the sheet at doc/reports/sweep_rhizomatic_maze_space.png rather than guessed: (1) the .tscn carries a DebugInfo Control \u2014 a 390x110 panel with a RichTextLabel reading 'Generating organic tunnel network...' \u2014 and the sweep's chrome suppressor stands down CanvasLayer and Camera3D only, so a Control under a Node3D drew straight into the viewport and IS the 8.2% subject, identical in every frame. The statistic that was supposed to report on the axis was mostly a photograph of a debug readout. (2) NavigationHelpers hangs four 0.6 m marker spheres at x,z = +/-25; they are MeshInstance3D, so they pin the fitted AABB to a 50 m box no matter what the maze does, which put the camera about 220 m out. (3) At 220 m the artifact's own WorldEnvironment \u2014 volumetric fog at density 0.03 over a 50 m length, authored for a player standing INSIDE the tunnels \u2014 fills the frame with haze: the background samples (130,165,118) and the 90th percentile of per-pixel difference from it is SEVEN grey levels. The maze is a ghost, and it visibly MOVES between the four tiles, which is the proof the values were arriving all along. Repair: a bench-only `bench_stage` export, the same shape as the existing layout_draw, defaulting to `scene`; `bare` frees the Control and the marker spheres and turns off exactly two properties on the environment (fog_enabled, volumetric_fog_enabled) rather than freeing it \u2014 with the sweep rig adding a WorldEnvironment of its own, two in a tree is undefined enough that freeing would make the picture depend on node order, and this scene's own 0.02/0.02/0.08 background is the best backdrop available for tunnels of albedo 0.7/0.8/0.9. It touches no generator code and no placement sets it. THE SECOND REPAIR IS THE DESIGN ONE and it stands on its own: severed cut the graph in half and left both halves where they were, measuring 0.012% against the intact rhizome. The tempting reading is the Deleuzian one \u2014 that cutting a rhizome changes nothing because any point still reaches any other \u2014 and it is wrong about this code: a plane cut removes EVERY crossing edge, so the graph really does fall into two components. The failure was that CONNECTION IS NOT A VISIBLE PROPERTY. The fissure is now 0.14 of maze_size.x instead of 0.08 and the two fragments stand 0.06 apart on each side, so the wound is about 20 m of a 50 m object and reads in the silhouette; tendrils are suppressed over the gap so nothing sews it shut. Extent grows about 12%, which the freed camera repays many times.",
+				"expected": "NO NUMBER IS PREDICTED HERE, and that is honest rather than evasive: nothing about this artifact has ever been photographed, so there is no scale to extrapolate from. What IS predicted is the SHAPE of the result, and it is falsifiable. (1) The frame should stop being a flat field: the background sampled at (3,3) should come back near (5,5,18) instead of (130,165,118), and the 90th percentile of per-pixel difference from it should rise from 7 grey levels into the dozens. (2) The loudest pair should become rhizome-vs-plateau, because a 25 m tower against a flat mat is a silhouette. (3) The subject share will probably FALL from 8.2%, and that is the fix working, not failing - the 8.2% was a debug panel that has now been freed, so the number will finally be about the maze. IF EVERY PAIR IS STILL UNDER 0.1%, the fixture did not arrive: check that bench_stage reached the root before concluding anything at all about topology.",
+				"deepened_declined": "A FIFTH VALUE, `radicle` \u2014 Deleuze and Guattari's own middle figure, the fascicular root whose principal root has aborted and onto which an indefinite multiplicity of secondary roots grafts. It is the strongest thing missing from this axis, because it is the figure that LOOKS tangled and still is not a rhizome, which is the distinction the whole Introduction turns on, and the axis currently ships the two easy poles and two operations. It is not taken in this pass on a sequencing judgement: not one of the four existing values has ever been photographed, so designing a fifth against an imagined frame is the finished-looking-experiment failure the promotion brief warns about \u2014 'an artifact that does not build is a finding, not an axis' applies just as well to an artifact that has never been seen. Take it after a clean sweep exists. Implementation sketch so the next agent does not start cold: connect_as_radicle() builds a short thick taproot from the lowest seed to a graft node above it, joins every other seed to that ONE graft at equal width (the star, against tree's spanning chain), and generate_secondary_branches concentrates the flourish near the graft with NO taper, because in a radicle the unity is the pivot and not the branching. The 20 primary connections are only about 16% of the 270 the file builds, so the secondary rule has to carry the value too or it will read as a variation on tree.",
+				"open": "THE SAME THREE CHILDREN SHIP INTO EVERY MAP, and this is NOT repaired here. All fourteen placements get the DebugInfo Control \u2014 a panel reading 'Generating organic tunnel network...' with the parameter list under it \u2014 because neither the sweep's chrome suppressor nor GridInteractablesComponent._suppress_embedded_chrome stands down a raw Control, and a Control under a Node3D draws to the viewport regardless. They also get a WorldEnvironment that overrides the map's own environment with volumetric fog, and four navigation marker spheres at +/-25 m that inflate the AABB the grid auto-grounds against. Every one of those is a change to what fourteen rooms look like, so fixing it belongs in its own pass with its own walk, not smuggled in under a DNA deepening. Worth checking how many other artifacts carry a Control child before repairing this one alone \u2014 the suppressor is the shared meeting point and this is likely a class, not a case."
+			},
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"footprint": [
+				50,
+				21,
+				50
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rhizomatic_maze_space",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"name": "Rhizomatic Maze Space",
+			"parameters": {
+				"footprint": [
+					50,
+					21,
+					50
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"mirror_cellular_texture_for_3d",
+					"contrasts",
+					"maze_generation",
+					"structured"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					66.8,
+					146.49,
+					50.8
+				],
+				"aabb_center": [
+					-8.1,
+					-51.96,
+					0.1
+				],
+				"grid_cells": [
+					67,
+					51
+				],
+				"max_dimension_m": 146.49,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"qfep_connection": "A labyrinth grown as rhizome \u2014 interconnected, centerless, any point reachable from any other by more than one route. The counter-maze: where recursive backtracking makes a tree with a single path, this makes a mesh with many, Deleuze's figure walked as architecture. A world with no author and, deliberately, no throughline either."
+		},
+		"rhizomatic_structure": {
+			"dna": {
+				"axes": {
+					"mutuality": [
+						"pockets",
+						"none",
+						"split",
+						"total"
+					]
+				}
+			},
+			"category": "geometry",
+			"complexity": "intermediate",
+			"description": "Grow a network that refuses root, trunk, and leaves. Recursive branching creates a scaffold, then lateral reconnections turn that scaffold into a mesh where any point can connect to any other. Adjusting reconnection probability moves the artifact between tree and rhizome, making hierarchy versus multiplicity a concrete topological choice. It brings Deleuze and Guattari into graph theory by questioning when a tree is the wrong model.",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"footprint": [
+				20,
+				18,
+				14
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rhizomatic_structure",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			],
+			"name": "Rhizomatic Structure",
+			"scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"graph_theory",
+				"rhizome",
+				"non_hierarchical",
+				"cycles",
+				"topology",
+				"deleuze",
+				"network",
+				"alternative_geometry",
+				"critical_theory"
+			],
+			"qfep_connection": "A challenge to hierarchical F: lateral reconnection redistributes structure away from roots and trunks. It asks what graph order looks like when no center is privileged.",
+			"gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception",
+			"capacity": "COMPARE tree-like and rhizomatic topologies by tuning how often local branches reconnect laterally.",
+			"interactions": [
+				"regenerate the structure",
+				"tune connection_probability to move between tree and rhizome",
+				"change growth_direction_randomness to bias branching",
+				"inspect cycles formed by lateral reconnections"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"appears",
+					"inspired",
+					"contrast",
+					"hierarchical",
+					"graph"
+				],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 270,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.65,
+					17.43,
+					16.17
+				],
+				"aabb_center": [
+					-4.76,
+					-0.49,
+					1.19
+				],
+				"grid_cells": [
+					20,
+					17
+				],
+				"max_dimension_m": 19.65,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"riemann_pi": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "riemann_pi",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"dna": {
+				"promoted": "2026-08-05",
+				"stage": "2 - variation",
+				"axes": {
+					"law": [
+						"none",
+						"x_over_log",
+						"logint",
+						"both"
+					]
+				},
+				"default": "law=none - _setup_law() returns on its first line when the value is none, so not one node is created and the scene tree, the AABB and every material are the ones that shipped. The estimate holders are ADDED as new siblings when a value asks for them; no legacy call, literal or ordering above them was touched. apply_grid_config was a bare `pass` before this pass and now returns immediately unless a config names `law` AND names a different value than the current one AND _ready has already built - so a map naming nothing this artifact owns still reaches no assignment and no rebuild. All 73 placements across 26 maps are bare tokens (riemann_pi, riemann_pi:0:1, or mounted as exhibit_furniture#mount:riemann_pi in the museum trial maps) with no config overrides, so none of them can see this key.",
+				"was": "nine @exports and not one axis among them: three colours, a sphere radius, two scale factors, an animation flag, a horizon speed and an auto-travel toggle. The runner refused it for NO TURNABLE KNOBS, and correctly - max_x is a reach, x_scale and scale_height are units, and animate_horizon and horizon_speed are time-domain and invisible to a still. What was welded shut was not a knob but the ARGUMENT: this exhibit is the prime number theorem, it drew the erratic half (the prime scatter, the pi(x) staircase, the zeta wave at infinity) and it never drew the law the staircase is following, so the claim lived in the title.",
+				"note": "hand promotion 2026-08-05. NOT a Riemann sum - nothing here partitions an interval. The brief's guess (strip count, convergence) is riemann_pump's subject, not this one. The two estimates were chosen because they disagree with pi(x) in OPPOSITE DIRECTIONS and by an order of magnitude, both computed here rather than asserted: at max_x = 2000, pi(x) = 303, x/ln x = 263.1 (below, a wedge of 6.3% of the plot area and 2.0 world units deep at the right edge) and Li(x) = 313.8 (above, 2.1%). Li is drawn by trapezoid on the same sample grid as the staircase rather than by a closed form, so the two curves are read off one traversal and cannot drift apart. both draws both bands, and the question of which estimate is better stops being a caption and becomes a difference of areas.",
+				"finding": "the scene already contains a BAKED copy of everything _ready() builds - a 303-instance MultiMesh, the staircase ArrayMesh, the zeta plane and the ground plane, saved into pi_infinity_surface.tscn by this @tool script from the editor. At runtime _ready() builds all of it AGAIN, so every one of the 73 placements draws the prime line, the ribbon, the horizon and the ground twice, exactly overlapping: doubled alpha on the transparent ground plane, a hotter ribbon. NOT repaired in this pass, because deleting the baked twin would change what 26 shipped maps look like. It is also why this axis is purely additive: anything that removed or altered legacy geometry would be half-muted by the baked copy still drawing the original underneath, and the sweep would have reported a faint verdict about a design it never actually reached.",
+				"declined": "max_x, the reach along the number line, is the obvious second axis and is the one this artifact's asymptotics would most like to vary - a staircase at x = 100 is a flight of visible steps, at x = 20000 a smooth curve. It is refused for a hard reason and not a soft one: the baked twin above is frozen at max_x = 2000, so every non-default value would render its own shorter or longer staircase ON TOP of the shipped 2000-wide one, and the frames would differ by the superposition rather than by the reach. animate_horizon and horizon_speed were refused as time-domain (a wave phase advanced in _process is invisible to one still), and prime_sphere_radius, x_scale and scale_height as units - a sweep over any of them photographs the exhibit's choice of scale and reports it as number theory.",
+				"harness_note": "the added band and curve lie inside the existing box in x and y (x/ln x runs below the staircase but well above the ground plane at y = -0.5), so the union AABB across a sweep is the same box every variant is framed to and no part of a measured change is a camera pull-back. The dilution risk is the other one: the subject is 24 x 15 world units of mostly empty plot plus a 24 x 8 ground plane and a zeta plane 22 units out, so the wedge is roughly 3% of frame even where it is 6.3% of the plot. The band is emissive on purpose - the critic reads the hottest 5% of pixels, and an unlit 30%-alpha wedge would have been the honest geometry and an invisible measurement. If it still reads faint, crop before concluding: dna.framing near 0.6 puts the plot in the frame instead of the horizon."
+			},
+			"footprint": [
+				23,
+				6,
+				4
+			],
+			"include_in_map_data": true,
+			"lookup_name": "riemann_pi",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "riemann_pi",
+			"parameters": {
+				"footprint": [
+					23,
+					6,
+					4
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/spacetopology/riemann_pi/pi_infinity_surface.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere",
+						"plane"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~512"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 208,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					25.5,
+					15.65,
+					8.0
+				],
+				"aabb_center": [
+					10.75,
+					7.32,
+					0.0
+				],
+				"grid_cells": [
+					26.0,
+					8.0
+				],
+				"max_dimension_m": 25.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "integration: pi estimated by Riemann slices \u2014 the circle's area approached rectangle by rectangle; the constant everyone knows, earned the slow way. Accumulation auditioning for exactness."
+		},
+		"riemann_sphere": {
+			"dna": {
+				"axes": {
+					"postulate": [
+						"bare",
+						"parallels",
+						"triangle",
+						"net",
+						"euclid"
+					],
+					"infinity": [
+						"pole",
+						"rays",
+						"open",
+						"none"
+					]
+				}
+			},
+			"category": "geometry",
+			"complexity": "advanced",
+			"description": "The Riemann sphere \u2014 compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "riemann_sphere",
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"name": "Riemann Sphere",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+			"tags": [
+				"riemann",
+				"complex_analysis",
+				"stereographic",
+				"projection",
+				"sphere",
+				"alternative_geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"torus",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~512"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"poincare_disk",
+					"compactification",
+					"hyperbolic",
+					"complex"
+				],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.63,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.01,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045762Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"triangle_curvature_workbench": {
+			"name": "Triangle Curvature Workbench",
+			"lookup_name": "triangle_curvature_workbench",
+			"description": "An interactive workbench for Gauss-Bonnet on a triangle. One slider drives Gaussian curvature K through seven detents {-2, -1, -0.5, 0, +0.5, +1, +2}; the host surface morphs with K's sign (Poincar\u00e9 disk for K<0, flat cyan grid for K=0, violet sphere for K>0); three triangle vertices at canonical 30\u00b0 geodesic separation stay fixed while their connecting edges become geodesics ON the active surface (arcs, lines, great-circle arcs); the readout shows \u03b1 + \u03b2 + \u03b3 in degrees, the Gauss-Bonnet excess (sphere) or defect (disk) as a signed angle, and a regime word. The slider IS Gauss-Bonnet \u2014 the parallel postulate exposed as a setting on K, not a truth about lines. Paired with /triangle-table-gallery's nine cells (3 surfaces \u00d7 3 sizes).",
+			"scene": "res://commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.tscn",
+			"category": "limits-of-geometry",
+			"interaction": "grab_slide",
+			"sequence": "computationalgeometry",
+			"artifact_type": "geometry",
+			"qfep_term": "F",
+			"capacity": "WALK Gauss-Bonnet \u2014 angle sum is a property of the surface",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean",
+				"gauss_bonnet",
+				"curvature",
+				"parallel_postulate"
+			],
+			"dev_category": "geometry",
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"slider",
+				"geometry",
+				"non_euclidean",
+				"curvature",
+				"gauss_bonnet",
+				"triangle",
+				"poincare_disk",
+				"sphere",
+				"limits_of_geometry",
+				"parallel_postulate"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"computationalgeometry",
+				"higher_dimensions"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					2
+				],
+				"size_group": "medium"
+			},
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"curvature_slider",
+					"hyperbolic_surface",
+					"elliptic_surface",
+					"riemann_sphere",
+					"euclid_postulates_plaque"
+				],
+				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.84,
+					1.15,
+					0.84
+				],
+				"aabb_center": [
+					0.0,
+					0.99,
+					-0.2
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.15,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"riemann_torus": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "riemann_torus",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean"
+			],
+			"footprint": [
+				15,
+				2,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "riemann_torus",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "riemann_torus",
+			"parameters": {
+				"footprint": [
+					15,
+					2,
+					2
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/spacetopology/riemann_torus/torus_vr.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"geometry"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"cylinder",
+						"torus",
+						"plane"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 312,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					25.73,
+					0.65,
+					12.0
+				],
+				"aabb_center": [
+					6.87,
+					-0.09,
+					0.0
+				],
+				"grid_cells": [
+					26.0,
+					12.0
+				],
+				"max_dimension_m": 25.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045762Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Drag two lattice vectors on the floor and the label recomputes \u03c4 = \u03c9\u2082/\u03c9\u2081 live: every torus is the same plane under a different quotient, and the shape you took for a doughnut turns out to be the ratio of two arrows."
+		}
+	},
+	"registry_info": {
+		"category": "geometry",
+		"description": "Non-Euclidean and alternative geometry artifacts \u2014 M\u00f6bius strips, bulging tunnels, rhizomatic structures, and spaces where parallel lines meet or diverge. Geometry beyond the textbook.",
+		"name": "alternative_geometries",
+		"theoretical_grounding": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception"
+	}
 }

@@ -15,13 +15,27 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [],
-			"footprint": [2, 2, 4],
-			"tags": ["primitive_stack", "composition", "dna", "bauhaus", "placeable"],
-			"qfep_connection": "F_order: structured arrangement of primitives — Bauspiel, Vignelli, Becker as composition vocabulary.",
+			"footprint": [
+				2,
+				2,
+				4
+			],
+			"tags": [
+				"primitive_stack",
+				"composition",
+				"dna",
+				"bauhaus",
+				"placeable"
+			],
+			"qfep_connection": "F_order: structured arrangement of primitives \u2014 Bauspiel, Vignelli, Becker as composition vocabulary.",
 			"parameters": {
 				"config_path": "",
 				"grammar": "primitive_stack",
-				"footprint": [2, 2, 4],
+				"footprint": [
+					2,
+					2,
+					4
+				],
 				"size_group": "medium"
 			},
 			"size_group": "medium",
@@ -31,6 +45,24 @@
 				"density": "high",
 				"reading_radius": 2,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

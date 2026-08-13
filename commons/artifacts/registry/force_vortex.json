@@ -1,9 +1,9 @@
 {
 	"id": "force_vortex",
 	"name": "Force Vortex",
-	"description": "A rotating force field — a whirlpool that drags the VR player toward its glowing core, spins them around it on a tangential current, then flings them back out (outward + up) when they cross the core radius. Force as a place you're caught in, not an arrow you read. Spiral arms rotate; ground ring marks the field. Uses the proven XRToolsPlayerBody.velocity launch path, applied continuously. DNA: field_radius, pull_strength, spin_strength, lift, eject_radius, eject_force, eject_up.",
+	"description": "A rotating force field \u2014 a whirlpool that drags the VR player toward its glowing core, spins them around it on a tangential current, then flings them back out (outward + up) when they cross the core radius. Force as a place you're caught in, not an arrow you read. Spiral arms rotate; ground ring marks the field. Uses the proven XRToolsPlayerBody.velocity launch path, applied continuously. DNA: field_radius, pull_strength, spin_strength, lift, eject_radius, eject_force, eject_up.",
 	"category": "vectors",
-	"theoreticalGrounding": "A force field assigns a velocity to every point in space. Here v_in = -r̂·pull + (ŷ×r)·spin (inward + swirl); cross the core and v_out = r̂·eject + ŷ·up. Centripetal in, centrifugal out — felt in the body.",
+	"theoreticalGrounding": "A force field assigns a velocity to every point in space. Here v_in = -r\u0302\u00b7pull + (\u0177\u00d7r)\u00b7spin (inward + swirl); cross the core and v_out = r\u0302\u00b7eject + \u0177\u00b7up. Centripetal in, centrifugal out \u2014 felt in the body.",
 	"artifacts": {
 		"force_vortex": {
 			"lookup_name": "force_vortex",
@@ -14,10 +14,27 @@
 			"scene": "res://commons/artifacts/force_vortex/force_vortex.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"],
-			"footprint": [4, 3, 4],
-			"tags": ["forces", "vortex", "force_field", "whirlpool", "centripetal", "spin", "player_launch", "velocity", "vr", "placeable"],
-			"qfep_connection": "F_force: a field is a velocity per point — pulled in, spun, thrown out; the body rides the vector current.",
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				4,
+				3,
+				4
+			],
+			"tags": [
+				"forces",
+				"vortex",
+				"force_field",
+				"whirlpool",
+				"centripetal",
+				"spin",
+				"player_launch",
+				"velocity",
+				"vr",
+				"placeable"
+			],
+			"qfep_connection": "F_force: a field is a velocity per point \u2014 pulled in, spun, thrown out; the body rides the vector current.",
 			"parameters": {
 				"field_radius": 3.5,
 				"pull_strength": 4.5,
@@ -27,7 +44,11 @@
 				"eject_force": 13.0,
 				"eject_up": 8.0,
 				"cooldown_time": 1.6,
-				"footprint": [4, 3, 4],
+				"footprint": [
+					4,
+					3,
+					4
+				],
 				"size_group": "medium"
 			},
 			"size_group": "medium",
@@ -35,8 +56,20 @@
 				"promoted": "2026-08-03",
 				"stage": "2 - variation",
 				"axes": {
-					"depiction": ["spiral", "spokes", "rings", "funnel", "column"],
-					"warning": ["none", "stain", "cage", "beacon", "shroud"]
+					"depiction": [
+						"spiral",
+						"spokes",
+						"rings",
+						"funnel",
+						"column"
+					],
+					"warning": [
+						"none",
+						"stain",
+						"cage",
+						"beacon",
+						"shroud"
+					]
 				},
 				"default": "depiction=spiral, warning=none - together these ARE the shipped vortex. spiral is the `_:` branch of the match and computes the same arithmetic line for line (3 arms, 14 beads, t*TAU*1.1, radius lerpf(0.25, field_radius*0.98, t), height 0.15+t*1.2, size lerpf(0.12,0.04,t), colour field_color->core_color, energy lerpf(3.2,1.4,t)); only the four lines that instance the bead moved into _bead(). warning=none returns on the first line of _build_warning and builds no node at all. Neither key is passed by any existing placement - force_vortex is named in 11 map files (Force_Preview, VFM_Field, VFM_04_Fields, Zone_WarehouseLab, Zone_WarehouseLab_Packed and six museum trials) and every one of them renders byte-identically. apply_grid_config is now guarded: it used to free every child and re-enter _ready() on ANY call, and now rebuilds only when a value actually differs AND the first build has happened.",
 				"was": "eight @export knobs and every one a magnitude - field_radius, pull_strength, spin_strength, lift, eject_radius, eject_force, eject_up, cooldown_time. Turning them made the same whirlpool pull harder or throw further; not one of them was a claim, and the throw itself is an event no still can hold. The drawing - three arms, fourteen beads, 1.1 turns, a 1.2 m rise - was hard-coded in the body of _build_field with nothing able to reach it. The runner refused the token for NO TURNABLE KNOBS, which was a fact about the kind of knob.",
@@ -49,6 +82,24 @@
 				"density": "medium",
 				"reading_radius": 4,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					7.0,
+					3.0,
+					7.0
+				],
+				"aabb_center": [
+					0.0,
+					1.5,
+					0.0
+				],
+				"grid_cells": [
+					7,
+					7
+				],
+				"max_dimension_m": 7.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

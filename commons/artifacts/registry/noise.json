@@ -1,37 +1,60 @@
 {
- "version": "1.0",
- "format": "lab_artifacts",
- "description": "Noise artifacts \u2014 the entropy floor and its seeded imitators.",
- "artifacts": {
-  "noise_floor": {
-   "category": "noise",
-   "complexity": "intermediate",
-   "description": "The noise seam. Left: gradient (simplex) noise - the smooth seeded field procgen calls 'noise', the same every run, rewindable, ownable. Right: white noise - a fresh value per cell, structureless, the incompressible entropy floor. The left is a crank in a smoother coat; the right is real noise, and it is the one procgen never uses because a shapeless field builds no world.",
-   "dev_themes": [
-    "digital_bias",
-    "seam"
-   ],
-   "include_in_map_data": true,
-   "interaction": "ambient",
-   "lookup_name": "noise_floor",
-   "map_ready": true,
-   "map_sequences": [
-    "noise"
-   ],
-   "name": "Noise Floor",
-   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for noise. Bias is conserved; show the seam.",
-   "scene": "res://algorithms/noise/noise_floor/noise_floor.tscn",
-   "sequence": "noise",
-   "tags": [
-    "noise",
-    "perlin",
-    "simplex",
-    "white_noise",
-    "entropy",
-    "determinism",
-    "seam",
-    "digital_bias"
-   ]
-  }
- }
+	"version": "1.0",
+	"format": "lab_artifacts",
+	"description": "Noise artifacts \u2014 the entropy floor and its seeded imitators.",
+	"artifacts": {
+		"noise_floor": {
+			"category": "noise",
+			"complexity": "intermediate",
+			"description": "The noise seam. Left: gradient (simplex) noise - the smooth seeded field procgen calls 'noise', the same every run, rewindable, ownable. Right: white noise - a fresh value per cell, structureless, the incompressible entropy floor. The left is a crank in a smoother coat; the right is real noise, and it is the one procgen never uses because a shapeless field builds no world.",
+			"dev_themes": [
+				"digital_bias",
+				"seam"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "noise_floor",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Noise Floor",
+			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for noise. Bias is conserved; show the seam.",
+			"scene": "res://algorithms/noise/noise_floor/noise_floor.tscn",
+			"sequence": "noise",
+			"tags": [
+				"noise",
+				"perlin",
+				"simplex",
+				"white_noise",
+				"entropy",
+				"determinism",
+				"seam",
+				"digital_bias"
+			],
+			"measurements": {
+				"aabb_size": [
+					0.92,
+					0.61,
+					0.02
+				],
+				"aabb_center": [
+					-0.01,
+					0.12,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.92,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		}
+	}
 }

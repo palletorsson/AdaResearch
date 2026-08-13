@@ -1,37 +1,83 @@
 {
- "artifacts": {
-  "pattern_atlas_gallery": {
-   "dna": {
-    "promoted": "2026-08-03",
-    "stage": "2 - variation",
-    "axes": {
-     "credit": [
-      "named",
-      "title_only",
-      "redacted",
-      "anonymous"
-     ]
-    },
-    "default": "credit=named - the tradition tag at y=0.42 and the makers tag at y=0.30 beneath every plate, built with make_tag's own default ink and ground, which is board for board what the gallery has always built; the 7 existing placements are untouched and the room keeps its 'the makers, named' headline",
-    "was": "the makers' names were unconditional captions, so the artifact could state its truth - a pattern reproduced without its makers is an enclosure - but had no way to stand the enclosure up beside the return and let a walker see the difference",
-    "refused": "colophon (pattern_loom) and exhibit (pattern_mill, pattern_machine_c) both ask how much of the RULE the goods admit to; three of their four values need each pattern's repeat period or plane symmetry group, which this gallery does not know for nineteen heterogeneous traditions and in several cases (kente strips, batik crackle, hitomezashi) does not have. Adopting either word would have meant inventing the measurements."
-   },
-   "lookup_name": "pattern_atlas_gallery",
-   "scene": "res://commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.tscn",
-   "class_name": "PatternAtlasGallery",
-   "name": "Pattern Atlas Gallery (the makers, named)",
-   "category": "symmetry",
-   "complexity": "intermediate",
-   "description": "Twelve world pattern traditions reproduced AS SHADERS (the rule, not an image), each on an upright plate with its makers named beneath: Kente strip-weavers of Ghana, ikat resist-dyers, bingata stencil-dyers of Ryukyu, kanga printers of the Swahili coast, indigo shibori dyers, Tibetan tiger-rug carpet-knotters, Iznik fritware potters, al-Andalus zellige tile-cutters, the Pompeii mosaic workshops, Anni Albers, Sonia Delaunay, Vasarely, Bridget Riley. The commons ledger's return performed in-game, plus Investigation II: Wang tiles (Hao Wang/Berger — tiling is undecidable), Javanese batik makers (the kawung and the crackle), Kuba/Shoowa weavers of DR Congo, sashiko/hitomezashi stitchers of northern Japan, Sami band weavers of Sapmi, adinkra carvers of Ghana."
-  },
-  "mamma_monster_gallery": {
-   "lookup_name": "mamma_monster_gallery",
-   "scene": "res://commons/artifacts/mamma_monster_gallery/mamma_monster_gallery.tscn",
-   "class_name": "MammaMonsterGallery",
-   "name": "Mamma Monster (the origin gallery)",
-   "category": "symmetry",
-   "complexity": "intermediate",
-   "description": "Kristina Torsson's pattern vocabulary as living shaders — varma backen, Fjader, Bonan, the Mah-Jong stripe (1966, with Helena Henschen and Veronika Nygren), Rutan Oscillerar (the Vamlingbo room's oscillating check), and Moders Drom (Mothers Dream 2023, the img2img oscillation breathing on TIME). Ada Research begins in a landscape of my mother's patterns; this room says so, with her name on it."
-  }
- }
+	"artifacts": {
+		"pattern_atlas_gallery": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"credit": [
+						"named",
+						"title_only",
+						"redacted",
+						"anonymous"
+					]
+				},
+				"default": "credit=named - the tradition tag at y=0.42 and the makers tag at y=0.30 beneath every plate, built with make_tag's own default ink and ground, which is board for board what the gallery has always built; the 7 existing placements are untouched and the room keeps its 'the makers, named' headline",
+				"was": "the makers' names were unconditional captions, so the artifact could state its truth - a pattern reproduced without its makers is an enclosure - but had no way to stand the enclosure up beside the return and let a walker see the difference",
+				"refused": "colophon (pattern_loom) and exhibit (pattern_mill, pattern_machine_c) both ask how much of the RULE the goods admit to; three of their four values need each pattern's repeat period or plane symmetry group, which this gallery does not know for nineteen heterogeneous traditions and in several cases (kente strips, batik crackle, hitomezashi) does not have. Adopting either word would have meant inventing the measurements."
+			},
+			"lookup_name": "pattern_atlas_gallery",
+			"scene": "res://commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.tscn",
+			"class_name": "PatternAtlasGallery",
+			"name": "Pattern Atlas Gallery (the makers, named)",
+			"category": "symmetry",
+			"complexity": "intermediate",
+			"description": "Twelve world pattern traditions reproduced AS SHADERS (the rule, not an image), each on an upright plate with its makers named beneath: Kente strip-weavers of Ghana, ikat resist-dyers, bingata stencil-dyers of Ryukyu, kanga printers of the Swahili coast, indigo shibori dyers, Tibetan tiger-rug carpet-knotters, Iznik fritware potters, al-Andalus zellige tile-cutters, the Pompeii mosaic workshops, Anni Albers, Sonia Delaunay, Vasarely, Bridget Riley. The commons ledger's return performed in-game, plus Investigation II: Wang tiles (Hao Wang/Berger \u2014 tiling is undecidable), Javanese batik makers (the kawung and the crackle), Kuba/Shoowa weavers of DR Congo, sashiko/hitomezashi stitchers of northern Japan, Sami band weavers of Sapmi, adinkra carvers of Ghana.",
+			"measurements": {
+				"aabb_size": [
+					10.32,
+					2.3,
+					4.7
+				],
+				"aabb_center": [
+					0.03,
+					1.15,
+					-2.2
+				],
+				"grid_cells": [
+					11,
+					5
+				],
+				"max_dimension_m": 10.32,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				11,
+				1,
+				5
+			]
+		},
+		"mamma_monster_gallery": {
+			"lookup_name": "mamma_monster_gallery",
+			"scene": "res://commons/artifacts/mamma_monster_gallery/mamma_monster_gallery.tscn",
+			"class_name": "MammaMonsterGallery",
+			"name": "Mamma Monster (the origin gallery)",
+			"category": "symmetry",
+			"complexity": "intermediate",
+			"description": "Kristina Torsson's pattern vocabulary as living shaders \u2014 varma backen, Fjader, Bonan, the Mah-Jong stripe (1966, with Helena Henschen and Veronika Nygren), Rutan Oscillerar (the Vamlingbo room's oscillating check), and Moders Drom (Mothers Dream 2023, the img2img oscillation breathing on TIME). Ada Research begins in a landscape of my mother's patterns; this room says so, with her name on it.",
+			"measurements": {
+				"aabb_size": [
+					9.87,
+					2.35,
+					0.32
+				],
+				"aabb_center": [
+					0.0,
+					1.18,
+					0.0
+				],
+				"grid_cells": [
+					10,
+					1
+				],
+				"max_dimension_m": 9.87,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				10,
+				1,
+				1
+			]
+		}
+	}
 }

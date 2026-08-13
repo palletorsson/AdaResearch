@@ -1,20 +1,20 @@
 {
 	"id": "pattern_loom",
 	"name": "Pattern Loom",
-	"description": "A sci-fi loom that manufactures wallpaper. The 17 wallpaper groups become output — a carpet woven on glowing warp threads and fed continuously out of the machine, the symmetry group scrolling past like fabric off a mill. Re-bodies the pattern editors (pattern_maker_station, pattern_tile_plate, vr_tile_editor) as a machine: those edit the carpet, this manufactures it. Reuses PatternSim.render_to_image and machine vocabulary from props-dna-gallery.",
+	"description": "A sci-fi loom that manufactures wallpaper. The 17 wallpaper groups become output \u2014 a carpet woven on glowing warp threads and fed continuously out of the machine, the symmetry group scrolling past like fabric off a mill. Re-bodies the pattern editors (pattern_maker_station, pattern_tile_plate, vr_tile_editor) as a machine: those edit the carpet, this manufactures it. Reuses PatternSim.render_to_image and machine vocabulary from props-dna-gallery.",
 	"category": "dna_grammar",
 	"theoreticalGrounding": "A pattern is produced, not given. The wallpaper group is the program; the loom is the press that runs it. loom_style (roller | warp | mirror) gives the same wallpaper engine three machine bodies.",
 	"artifacts": {
 		"pattern_loom": {
 			"dna": {
-			 "axes": {
-			 "colophon": [
-			 "none",
-			 "repeat",
-			 "symmetry",
-			 "catalogue"
-			 ]
-			 }
+				"axes": {
+					"colophon": [
+						"none",
+						"repeat",
+						"symmetry",
+						"catalogue"
+					]
+				}
 			},
 			"lookup_name": "pattern_loom",
 			"name": "Pattern Loom",
@@ -44,7 +44,7 @@
 				"scifi",
 				"placeable"
 			],
-			"qfep_connection": "F_order: the 17 wallpaper groups as a manufacturing program — constraint multiplied into endless fabric.",
+			"qfep_connection": "F_order: the 17 wallpaper groups as a manufacturing program \u2014 constraint multiplied into endless fabric.",
 			"parameters": {
 				"group": "p4m",
 				"palette": "alhambra",
@@ -64,6 +64,24 @@
 				"density": "high",
 				"reading_radius": 4,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.53,
+					1.22,
+					3.14
+				],
+				"aabb_center": [
+					-0.07,
+					0.61,
+					1.15
+				],
+				"grid_cells": [
+					3,
+					4
+				],
+				"max_dimension_m": 3.14,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		},
 		"loom_alhambra_p6m": {
@@ -249,7 +267,7 @@
 		"loom_drum_bauhaus_p4m": {
 			"lookup_name": "loom_drum_bauhaus_p4m",
 			"name": "Loom: Bauhaus p4m (rotary drum)",
-			"description": "Rotary print-drum press feeding a Bauhaus p4m carpet. Carries a reachable interactive console — walk up and re-pattern it live: cycle the wallpaper group and palette, drag density/seed sliders, watch the preview plate and the whole carpet re-weave.",
+			"description": "Rotary print-drum press feeding a Bauhaus p4m carpet. Carries a reachable interactive console \u2014 walk up and re-pattern it live: cycle the wallpaper group and palette, drag density/seed sliders, watch the preview plate and the whole carpet re-weave.",
 			"category": "dna_grammar",
 			"complexity": "intermediate",
 			"include_in_map_data": true,

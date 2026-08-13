@@ -1,14 +1,14 @@
 {
 	"id": "array_substrates",
 	"name": "Array Substrates",
-	"description": "Grid2D substrate stations for the array_tutorial sequence. Three cartridges (disco, slow, random) demonstrating substrate ↔ cartridge factoring.",
+	"description": "Grid2D substrate stations for the array_tutorial sequence. Three cartridges (disco, slow, random) demonstrating substrate \u2194 cartridge factoring.",
 	"category": "substrate",
 	"theoreticalGrounding": "Substrate-cartridge separation: the array is the reusable object, the cartridge is the algorithm running on it. Same hardware, many stories.",
 	"artifacts": {
 		"array_disco_substrate": {
 			"lookup_name": "array_disco_substrate",
 			"name": "Array DISCO Substrate",
-			"description": "Grid2D substrate running cartridge 'disco' at step interval 0.08s. One station of the Array_Soane_Plaza triptych — same array, different cadence.",
+			"description": "Grid2D substrate running cartridge 'disco' at step interval 0.08s. One station of the Array_Soane_Plaza triptych \u2014 same array, different cadence.",
 			"category": "substrate",
 			"complexity": "beginner",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
@@ -43,12 +43,30 @@
 				"size_group": "compact",
 				"label_text": "DISCO"
 			},
-			"size_group": "compact"
+			"size_group": "compact",
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
 		},
 		"array_slow_substrate": {
 			"lookup_name": "array_slow_substrate",
 			"name": "Array SLOW Substrate",
-			"description": "Grid2D substrate running cartridge 'slow' at step interval 0.6s. One station of the Array_Soane_Plaza triptych — same array, different cadence.",
+			"description": "Grid2D substrate running cartridge 'slow' at step interval 0.6s. One station of the Array_Soane_Plaza triptych \u2014 same array, different cadence.",
 			"category": "substrate",
 			"complexity": "beginner",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
@@ -83,12 +101,30 @@
 				"size_group": "compact",
 				"label_text": "SLOW"
 			},
-			"size_group": "compact"
+			"size_group": "compact",
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
 		},
 		"array_random_substrate": {
 			"lookup_name": "array_random_substrate",
 			"name": "Array RANDOM Substrate",
-			"description": "Grid2D substrate running cartridge 'random' at step interval 0.2s. One station of the Array_Soane_Plaza triptych — same array, different cadence.",
+			"description": "Grid2D substrate running cartridge 'random' at step interval 0.2s. One station of the Array_Soane_Plaza triptych \u2014 same array, different cadence.",
 			"category": "substrate",
 			"complexity": "beginner",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
@@ -123,7 +159,25 @@
 				"size_group": "compact",
 				"label_text": "RANDOM"
 			},
-			"size_group": "compact"
+			"size_group": "compact",
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
 		}
 	}
 }

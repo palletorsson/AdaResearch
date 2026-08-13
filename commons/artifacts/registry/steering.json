@@ -1,1683 +1,1683 @@
 {
-  "artifacts": {
-    "noc_5_01_seek": {
-      "name": "Seek Steering Behavior",
-      "lookup_name": "noc_5_01_seek",
-      "description": "Basic seek steering behavior where agents move toward a target.",
-      "scene": "res://algorithms/steering/noc_ch05/noc_5_01_seek_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "seek",
-        "autonomous_agents",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "beginner",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "sphere",
-            "cylinder"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "entry",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.15,
-          0.52,
-          0.29
-        ],
-        "aabb_center": [
-          0.2,
-          0.5,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.15,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 4,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Desire reduced to one subtraction: desired velocity minus current velocity, clamped by max_force. The agent can never overshoot its own ambition — its wanting has a ceiling, and the ceiling is a slider you can grab."
-    },
-    "noc_5_02_arrive": {
-      "name": "Arrive Steering Behavior",
-      "lookup_name": "noc_5_02_arrive",
-      "description": "Arrive steering behavior with deceleration as agents approach target.",
-      "scene": "res://algorithms/steering/noc_ch05/noc_5_02_arrive_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "arrive",
-        "deceleration",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "sphere",
-            "cylinder",
-            "torus"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.15,
-          0.47,
-          0.5
-        ],
-        "aabb_center": [
-          0.2,
-          0.48,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.15,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 4,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Seek plus the one thing seek lacks: a radius inside which desire decelerates. The torus drawn around the target gives the slowdown zone a body — restraint made into geometry you can resize by hand."
-    },
-    "noc_5_03_stay_within_walls": {
-      "name": "Stay Within Walls",
-      "lookup_name": "noc_5_03_stay_within_walls",
-      "description": "Boundary avoidance steering where agents stay within defined walls.",
-      "scene": "res://algorithms/steering/noc_ch05/noc_5_03_stay_within_walls_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "boundaries",
-        "avoidance",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box",
-            "cylinder"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.23,
-          0.91,
-          0.29
-        ],
-        "aabb_center": [
-          0.16,
-          0.5,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.23,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 4,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "The vehicle steers off a position it does not yet occupy: its velocity projected lookahead seconds forward is what the four walls repel. Containment operates on the imagined future, not the present body — the wall is obeyed before it is ever reached."
-    },
-    "noc_5_04_flow_field": {
-      "name": "Flow Field Following",
-      "lookup_name": "noc_5_04_flow_field",
-      "description": "Agents navigate by following a vector flow field.",
-      "scene": "res://algorithms/steering/noc_ch05/noc_5_04_flow_field_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "flow_field",
-        "vectors",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "vertex_line_strip",
-          "primitives": [
-            "cylinder"
-          ],
-          "operations": [
-            "compute_vertices",
-            "connect_lines"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.19,
-          0.13,
-          0.29
-        ],
-        "aabb_center": [
-          0.18,
-          0.49,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.19,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "plane",
-        "range": 4,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "F_force: agents steering by a vector flow field — every cell of space holds a direction, and motion is obedience to place. Force as geography."
-    },
-    "noc_5_05_path_following_simple": {
-      "name": "Simple Path Following",
-      "lookup_name": "noc_5_05_path_following_simple",
-      "description": "Basic path following where agents track along a simple path.",
-      "scene": "res://algorithms/steering/noc_ch05/noc_5_05_path_following_simple_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "path_following",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "beginner",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "delegated_scene",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "scene_instantiation",
-          "primitives": [
-            "cylinder"
-          ],
-          "operations": [
-            "load_scene",
-            "instantiate",
-            "configure"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "varies"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "entry",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.27,
-          0.64,
-          0.29
-        ],
-        "aabb_center": [
-          0.14,
-          0.45,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.27,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 4,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Two vehicles, one path, different max_speed and max_force: the fast one weaves, the slow one hugs. The radius slider widens or narrows how much deviation still counts as following — obedience defined as a tolerance band, never a line."
-    },
-    "noc_5_07_separation": {
-      "name": "Separation Steering",
-      "lookup_name": "noc_5_07_separation",
-      "description": "Separation steering behavior keeping agents apart from each other.",
-      "scene": "res://algorithms/steering/noc_ch05/noc_5_07_separation_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "separation",
-        "avoidance",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "delegated_scene",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "scene_instantiation",
-          "primitives": [
-            "cylinder"
-          ],
-          "operations": [
-            "load_scene",
-            "instantiate",
-            "configure"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "varies"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.18,
-          0.85,
-          0.29
-        ],
-        "aabb_center": [
-          0.18,
-          0.5,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.18,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 4,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Twenty agents governed by a single rule: get away from each other. No goal, no path, only weighted mutual repulsion — and out of pure avoidance comes even spacing, an order built entirely of refusals."
-    },
-    "noc_5_08_path_following": {
-      "name": "Path Following",
-      "lookup_name": "noc_5_08_path_following",
-      "description": "Advanced path following with prediction and normal point projection.",
-      "scene": "res://algorithms/steering/noc_ch05/noc_5_08_path_following_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "path_following",
-        "prediction",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "delegated_scene",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "scene_instantiation",
-          "primitives": [
-            "cylinder"
-          ],
-          "operations": [
-            "load_scene",
-            "instantiate",
-            "configure"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "varies"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.2,
-          0.79,
-          0.29
-        ],
-        "aabb_center": [
-          0.17,
-          0.51,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.2,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 4,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Each of twelve vehicles predicts its own future position, projects it onto the path's spine, and corrects only when the projection escapes the radius. Following is lazy by design — as long as the imagined self stays inside the tube, no force is spent at all."
-    },
-    "noc_5_08_separation_and_seek": {
-      "name": "Separation and Seek",
-      "lookup_name": "noc_5_08_separation_and_seek",
-      "description": "Combined separation and seek behaviors for balanced group movement.",
-      "scene": "res://algorithms/steering/noc_ch05/noc_5_08_separation_and_seek_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "separation",
-        "seek",
-        "combined",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "sphere",
-            "cylinder"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.22,
-          0.75,
-          0.29
-        ],
-        "aabb_center": [
-          0.16,
-          0.48,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.22,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 4,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Everyone wants the same target and wants distance from everyone else wanting it; two sliders weigh the contradiction. The ring that stabilizes around the goal is neither desire nor refusal but their arithmetic sum — a shape no single agent intends."
-    },
-    "example_5_9_flocking": {
-      "name": "Flocking Simulation",
-      "lookup_name": "example_5_9_flocking",
-      "description": "Classic flocking with separation, alignment, and cohesion (Reynolds boids).",
-      "scene": "res://algorithms/steering/noc_ch05/example_5_9_flocking_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "flocking",
-        "boids",
-        "emergence",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "advanced",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "hybrid",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "unknown",
-          "primitives": [
-            "cylinder"
-          ],
-          "operations": []
-        },
-        "material": {
-          "type": "vertex_color",
-          "shading_model": "unshaded",
-          "key_properties": [
-            "emission",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "particle_lifecycle",
-          "driven_by": "cpu_simulation",
-          "affects": [
-            "transform",
-            "color"
-          ]
-        },
-        "instance_strategy": "multimesh",
-        "vertex_estimate": "~36"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "end",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.89,
-          0.05,
-          0.04
-        ],
-        "aabb_center": [
-          0.0,
-          -0.6,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.89,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "plane",
-        "range": 2,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Three of forty boids are recolored predator and every agent wears its perception radius as a drawn ring: identical steering arithmetic split into chase and flee by role alone. The ring is the flock's real constitution — nobody knows anything beyond their own circle."
-    },
-    "example_5_9_flocking_with_binning": {
-      "name": "Flocking with Spatial Binning",
-      "lookup_name": "example_5_9_flocking_with_binning",
-      "description": "Optimized flocking using spatial binning for neighbor lookups.",
-      "scene": "res://algorithms/steering/noc_ch05/example_5_9_flocking_with_binning_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "flocking",
-        "optimization",
-        "spatial_hash",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "delegated_scene",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "scene_instantiation",
-          "primitives": [
-            "cylinder"
-          ],
-          "operations": [
-            "load_scene",
-            "instantiate",
-            "configure"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "varies"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.21,
-          0.84,
-          0.29
-        ],
-        "aabb_center": [
-          0.17,
-          0.5,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.21,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 4,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Same three desires, but neighborhood is resolved by bucket address instead of measured pairwise distance — bin_size decides who exists for whom. The flock behaves the same and cheaper, which is the uncomfortable lesson: perception can be replaced by bookkeeping without the collective noticing."
-    },
-    "example_5_12_sine_cosine_lookup": {
-      "name": "Sine Cosine Lookup Table",
-      "lookup_name": "example_5_12_sine_cosine_lookup",
-      "description": "Steering example using sine/cosine lookup tables for efficient movement.",
-      "scene": "res://algorithms/steering/noc_ch05/example_5_12_sine_cosine_lookup_table_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "trigonometry",
-        "lookup_table",
-        "optimization",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "vertex_line_strip",
-          "primitives": [],
-          "operations": [
-            "compute_vertices",
-            "connect_lines"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "vertex",
-          "driven_by": "per_frame_rebuild",
-          "affects": [
-            "vertex_positions"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "table",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.04,
-          0.23,
-          0.29
-        ],
-        "aabb_center": [
-          0.75,
-          0.36,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.29,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "omni",
-        "range": 1,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Sine is evaluated 360 times at _ready and never again; every later undulation is recall from a PackedFloat32Array, not computation. Smoothness as an archive being replayed — F_order's favorite trade, memory spent now so no future moment requires thought."
-    },
-    "exercise_5_2_pursuit": {
-      "name": "Pursuit Exercise",
-      "lookup_name": "exercise_5_2_pursuit",
-      "description": "Exercise implementing pursuit steering behavior.",
-      "scene": "res://algorithms/steering/noc_ch05/exercise_5_2_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "pursuit",
-        "exercise",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "beginner",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "sphere",
-            "cylinder"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "entry",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.25,
-          0.42,
-          0.29
-        ],
-        "aabb_center": [
-          0.15,
-          0.45,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.25,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 4,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Filed as pursuit, but the code only arrives: the chaser steers at where the target is, never at where its velocity says it will be. The gap between label and mechanism is the actual lesson — prediction is the one ingredient that would turn approach into hunting."
-    },
-    "exercise_5_4_wander": {
-      "name": "Wander Steering",
-      "lookup_name": "exercise_5_4_wander",
-      "description": "Wander steering behavior with random but smooth directional changes.",
-      "scene": "res://algorithms/steering/noc_ch05/exercise_5_4_wander_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "wander",
-        "random",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "vertex_line_strip",
-          "primitives": [
-            "cylinder"
-          ],
-          "operations": [
-            "compute_vertices",
-            "connect_lines"
-          ]
-        },
-        "material": {
-          "type": "vertex_color",
-          "shading_model": "unshaded",
-          "key_properties": [
-            "emission",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "vertex",
-          "driven_by": "per_frame_rebuild",
-          "affects": [
-            "vertex_positions"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "~36"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.89,
-          0.64,
-          0.05
-        ],
-        "aabb_center": [
-          0.0,
-          -0.29,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.89,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 2,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Randomness is smoothed twice before it may steer: a hand-shuffled permutation table feeds value noise, the noise picks a point on a circle projected ahead, and only that offset becomes force. Wander is chance on a fixed-radius leash — and the seek slider can drown it in purpose at any moment."
-    },
-    "exercise_5_9_angle_between": {
-      "name": "Angle Between Vectors",
-      "lookup_name": "exercise_5_9_angle_between",
-      "description": "Two thin arrows rise from a common centre in the XY plane with a pink figure drawn between them and a live degree readout above; two 3D sliders turn each arrow independently. DNA axes: opening (agreeing / strangers / opposing / parallel - the case the pair is found in, the same word and the same four values as the sibling agreement_gauge) and figure (arc / wedge / chord / none - what the angle is drawn as, where chord is the difference vector steering code actually computes).",
-      "scene": "res://algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.tscn",
-      "category": "steering",
-      "dna": {
-        "promoted": "2026-08-03",
-        "stage": "2 - variation",
-        "axes": {
-          "opening": [
-            "agreeing",
-            "strangers",
-            "opposing",
-            "parallel"
-          ],
-          "figure": [
-            "arc",
-            "wedge",
-            "chord",
-            "none"
-          ]
-        },
-        "default": "opening=agreeing, figure=arc - _opening_angle() returns the shipped literal PI / 3.0 for agreeing (angle_a stays 0.0), and the arc branch is the shipped _update_arc(center, 0.12, angle_a, angle_b) call reached through the match default, so the 3 existing placements draw the same 60-degree pair and the same 20-segment line strip they always did. The wedge and chord meshes are only ever built when a map asks for them",
-        "was": "two float @exports (angle_a, angle_b) with no enum shape, an apply_grid_config() whose body was `pass`, and one welded figure: a 20-segment arc of radius 0.12 was the only thing 'the angle between' could look like. The stage-2 sweep read no turnable knob. Every placement opened on the same acute pair, and the three cases the exercise exists to teach - perpendicular, obtuse, coincident - were reachable only by a player dragging a slider",
-        "shared_with": "agreement_gauge - `opening` is that artifact's word with that artifact's four values in the same order, because it is literally the same question asked of the same pair of directions. A room can now set the gauge and the exercise to the same case and the two will mean the same thing by it; if the vocabulary is honest they should MEASURE alike",
-        "note": "hand promotion 2026-08-03 - the runner refused it for NO TURNABLE KNOBS. opening turns theta alone: agreeing 60 deg (shipped), strangers 90 (dot exactly zero), opposing 120 (dot negative), parallel 0 (the arrows superimpose, the figure collapses to a point and the readout still answers). figure is the axis that puts the exercise's own title at risk - arc says the angle is a rotation, wedge says it is an area, none says it is only a digit, and chord draws the tip-to-tip segment, which IS the difference vector; no steering routine ever takes an arc, so chord is the reading the chapter actually uses in code. Under chord the readout gains a |b - a| line so a still cannot misreport which claim is on screen. The two angle sliders stay live under every value: opening sets the case the exercise is found in, it does not lock it",
-        "gotcha": "the angle sliders round to step_size 0.01, so the shipped PI / 3.0 has always been stored as 1.05 after ParameterController3D.set_value re-emits. The promotion routes opening through the same set_value path, so it inherits that rounding rather than introducing a second convention"
-      },
-      "tags": [
-        "steering",
-        "angle",
-        "vectors",
-        "exercise",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "vertex_line_strip",
-          "primitives": [
-            "cylinder"
-          ],
-          "operations": [
-            "compute_vertices",
-            "connect_lines"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "vertex",
-          "driven_by": "per_frame_rebuild",
-          "affects": [
-            "vertex_positions"
-          ]
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.78,
-          0.48,
-          0.29
-        ],
-        "aabb_center": [
-          0.38,
-          0.48,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 0.78,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 2,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Two unit arrows on dials with the arc between them meshed and measured live — an insistence that the angle is not a property of either vector but of the pair."
-    },
-    "exercise_5_13_crowd_path_following": {
-      "name": "Crowd Path Following",
-      "lookup_name": "exercise_5_13_crowd_path_following",
-      "description": "Multiple agents following a shared path with crowd dynamics.",
-      "scene": "res://algorithms/steering/noc_ch05/exercise_5_13_crowd_path_following_vr.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "crowd",
-        "path_following",
-        "exercise",
-        "nature_of_code"
-      ],
-      "include_in_map_data": true,
-      "map_ready": false,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "intermediate",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "delegated_scene",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "scene_instantiation",
-          "primitives": [
-            "cylinder"
-          ],
-          "operations": [
-            "load_scene",
-            "instantiate",
-            "configure"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "physics",
-          "driven_by": "physics_engine",
-          "affects": [
-            "transform"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "varies"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.18,
-          0.83,
-          0.29
-        ],
-        "aabb_center": [
-          0.18,
-          0.51,
-          0.0
-        ],
-        "grid_cells": [
-          2.0,
-          1.0
-        ],
-        "max_dimension_m": 1.18,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        2.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "panel",
-        "range": 4,
-        "density": "high",
-        "min_clearance": 1,
-        "stack_priority": 0.85,
-        "approach_dir": "front",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "Twenty vehicles with individually randomized top speeds and force budgets share one tube of tolerance; follow pulls them into file while separation keeps them from collapsing into one body. A crowd, operationally, is a corridor plus a repulsion term."
-    },
-    "flocking_controls": {
-      "name": "Flocking Controls",
-      "lookup_name": "flocking_controls",
-      "description": "Interactive boid flocking with VR sliders for separation, alignment, cohesion, speed, and perception radius. Highlights one boid with visible force vectors.",
-      "scene": "res://commons/artifacts/flocking_controls/flocking_controls.tscn",
-      "category": "steering",
-      "tags": [
-        "steering",
-        "flocking",
-        "boids",
-        "sliders",
-        "interactive",
-        "emergence"
-      ],
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [],
-      "sequence": "steering",
-      "complexity": "advanced",
-      "dev_themes": [
-        "autonomous_agents",
-        "steering"
-      ],
-      "geometry_spec": {
-        "mesh_type": "hybrid",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "unknown",
-          "primitives": [
-            "box",
-            "torus"
-          ],
-          "operations": []
-        },
-        "material": {
-          "type": "vertex_color",
-          "shading_model": "wireframe",
-          "key_properties": [
-            "emission",
-            "grid_overlay",
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "particle_lifecycle",
-          "driven_by": "cpu_simulation",
-          "affects": [
-            "transform",
-            "color"
-          ]
-        },
-        "instance_strategy": "multimesh",
-        "vertex_estimate": "~0"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "end",
-        "measured_footprint_cells": 2,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          0.8,
-          0.74,
-          1.02
-        ],
-        "aabb_center": [
-          0.0,
-          -0.07,
-          0.11
-        ],
-        "grid_cells": [
-          1.0,
-          2.0
-        ],
-        "max_dimension_m": 1.02,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        2.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 4,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.280749Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "relation: separation, alignment, cohesion on sliders — one boid highlighted with its force vectors so the flock's mind is readable as arithmetic. Emergence with its dials exposed."
-    }
-  }
+	"artifacts": {
+		"noc_5_01_seek": {
+			"name": "Seek Steering Behavior",
+			"lookup_name": "noc_5_01_seek",
+			"description": "Basic seek steering behavior where agents move toward a target.",
+			"scene": "res://algorithms/steering/noc_ch05/noc_5_01_seek_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"seek",
+				"autonomous_agents",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "beginner",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.48,
+					0.51,
+					0.17
+				],
+				"aabb_center": [
+					0.53,
+					0.5,
+					0.01
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.51,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Desire reduced to one subtraction: desired velocity minus current velocity, clamped by max_force. The agent can never overshoot its own ambition \u2014 its wanting has a ceiling, and the ceiling is a slider you can grab."
+		},
+		"noc_5_02_arrive": {
+			"name": "Arrive Steering Behavior",
+			"lookup_name": "noc_5_02_arrive",
+			"description": "Arrive steering behavior with deceleration as agents approach target.",
+			"scene": "res://algorithms/steering/noc_ch05/noc_5_02_arrive_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"arrive",
+				"deceleration",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.67,
+					0.5,
+					0.5
+				],
+				"aabb_center": [
+					0.44,
+					0.5,
+					0.1
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.67,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Seek plus the one thing seek lacks: a radius inside which desire decelerates. The torus drawn around the target gives the slowdown zone a body \u2014 restraint made into geometry you can resize by hand."
+		},
+		"noc_5_03_stay_within_walls": {
+			"name": "Stay Within Walls",
+			"lookup_name": "noc_5_03_stay_within_walls",
+			"description": "Boundary avoidance steering where agents stay within defined walls.",
+			"scene": "res://algorithms/steering/noc_ch05/noc_5_03_stay_within_walls_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"boundaries",
+				"avoidance",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.87,
+					6.47,
+					0.14
+				],
+				"aabb_center": [
+					-3.66,
+					3.28,
+					0.0
+				],
+				"grid_cells": [
+					9,
+					1
+				],
+				"max_dimension_m": 8.87,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				9,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "The vehicle steers off a position it does not yet occupy: its velocity projected lookahead seconds forward is what the four walls repel. Containment operates on the imagined future, not the present body \u2014 the wall is obeyed before it is ever reached."
+		},
+		"noc_5_04_flow_field": {
+			"name": "Flow Field Following",
+			"lookup_name": "noc_5_04_flow_field",
+			"description": "Agents navigate by following a vector flow field.",
+			"scene": "res://algorithms/steering/noc_ch05/noc_5_04_flow_field_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"flow_field",
+				"vectors",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.25,
+					0.35,
+					0.14
+				],
+				"aabb_center": [
+					0.15,
+					0.3,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.25,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "F_force: agents steering by a vector flow field \u2014 every cell of space holds a direction, and motion is obedience to place. Force as geography."
+		},
+		"noc_5_05_path_following_simple": {
+			"name": "Simple Path Following",
+			"lookup_name": "noc_5_05_path_following_simple",
+			"description": "Basic path following where agents track along a simple path.",
+			"scene": "res://algorithms/steering/noc_ch05/noc_5_05_path_following_simple_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"path_following",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "beginner",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.28,
+					0.64,
+					0.14
+				],
+				"aabb_center": [
+					0.13,
+					0.45,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.28,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Two vehicles, one path, different max_speed and max_force: the fast one weaves, the slow one hugs. The radius slider widens or narrows how much deviation still counts as following \u2014 obedience defined as a tolerance band, never a line."
+		},
+		"noc_5_07_separation": {
+			"name": "Separation Steering",
+			"lookup_name": "noc_5_07_separation",
+			"description": "Separation steering behavior keeping agents apart from each other.",
+			"scene": "res://algorithms/steering/noc_ch05/noc_5_07_separation_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"separation",
+				"avoidance",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.28,
+					1.01,
+					0.14
+				],
+				"aabb_center": [
+					0.13,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.28,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Twenty agents governed by a single rule: get away from each other. No goal, no path, only weighted mutual repulsion \u2014 and out of pure avoidance comes even spacing, an order built entirely of refusals."
+		},
+		"noc_5_08_path_following": {
+			"name": "Path Following",
+			"lookup_name": "noc_5_08_path_following",
+			"description": "Advanced path following with prediction and normal point projection.",
+			"scene": "res://algorithms/steering/noc_ch05/noc_5_08_path_following_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"path_following",
+				"prediction",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.28,
+					0.5,
+					0.14
+				],
+				"aabb_center": [
+					0.13,
+					0.63,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.28,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Each of twelve vehicles predicts its own future position, projects it onto the path's spine, and corrects only when the projection escapes the radius. Following is lazy by design \u2014 as long as the imagined self stays inside the tube, no force is spent at all."
+		},
+		"noc_5_08_separation_and_seek": {
+			"name": "Separation and Seek",
+			"lookup_name": "noc_5_08_separation_and_seek",
+			"description": "Combined separation and seek behaviors for balanced group movement.",
+			"scene": "res://algorithms/steering/noc_ch05/noc_5_08_separation_and_seek_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"separation",
+				"seek",
+				"combined",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.19,
+					0.86,
+					0.14
+				],
+				"aabb_center": [
+					0.18,
+					0.43,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.19,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Everyone wants the same target and wants distance from everyone else wanting it; two sliders weigh the contradiction. The ring that stabilizes around the goal is neither desire nor refusal but their arithmetic sum \u2014 a shape no single agent intends."
+		},
+		"example_5_9_flocking": {
+			"name": "Flocking Simulation",
+			"lookup_name": "example_5_9_flocking",
+			"description": "Classic flocking with separation, alignment, and cohesion (Reynolds boids).",
+			"scene": "res://algorithms/steering/noc_ch05/example_5_9_flocking_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"flocking",
+				"boids",
+				"emergence",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "advanced",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~36"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.56,
+					4.79,
+					4.56
+				],
+				"aabb_center": [
+					-1.09,
+					1.29,
+					1.54
+				],
+				"grid_cells": [
+					5,
+					5
+				],
+				"max_dimension_m": 4.79,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				5,
+				1,
+				5
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Three of forty boids are recolored predator and every agent wears its perception radius as a drawn ring: identical steering arithmetic split into chase and flee by role alone. The ring is the flock's real constitution \u2014 nobody knows anything beyond their own circle."
+		},
+		"example_5_9_flocking_with_binning": {
+			"name": "Flocking with Spatial Binning",
+			"lookup_name": "example_5_9_flocking_with_binning",
+			"description": "Optimized flocking using spatial binning for neighbor lookups.",
+			"scene": "res://algorithms/steering/noc_ch05/example_5_9_flocking_with_binning_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"flocking",
+				"optimization",
+				"spatial_hash",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.27,
+					0.99,
+					0.14
+				],
+				"aabb_center": [
+					0.14,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.27,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Same three desires, but neighborhood is resolved by bucket address instead of measured pairwise distance \u2014 bin_size decides who exists for whom. The flock behaves the same and cheaper, which is the uncomfortable lesson: perception can be replaced by bookkeeping without the collective noticing."
+		},
+		"example_5_12_sine_cosine_lookup": {
+			"name": "Sine Cosine Lookup Table",
+			"lookup_name": "example_5_12_sine_cosine_lookup",
+			"description": "Steering example using sine/cosine lookup tables for efficient movement.",
+			"scene": "res://algorithms/steering/noc_ch05/example_5_12_sine_cosine_lookup_table_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"trigonometry",
+				"lookup_table",
+				"optimization",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.17,
+					0.49,
+					0.14
+				],
+				"aabb_center": [
+					0.19,
+					0.49,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.17,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Sine is evaluated 360 times at _ready and never again; every later undulation is recall from a PackedFloat32Array, not computation. Smoothness as an archive being replayed \u2014 F_order's favorite trade, memory spent now so no future moment requires thought."
+		},
+		"exercise_5_2_pursuit": {
+			"name": "Pursuit Exercise",
+			"lookup_name": "exercise_5_2_pursuit",
+			"description": "Exercise implementing pursuit steering behavior.",
+			"scene": "res://algorithms/steering/noc_ch05/exercise_5_2_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"pursuit",
+				"exercise",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "beginner",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.97,
+					0.29,
+					0.14
+				],
+				"aabb_center": [
+					0.29,
+					0.39,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Filed as pursuit, but the code only arrives: the chaser steers at where the target is, never at where its velocity says it will be. The gap between label and mechanism is the actual lesson \u2014 prediction is the one ingredient that would turn approach into hunting."
+		},
+		"exercise_5_4_wander": {
+			"name": "Wander Steering",
+			"lookup_name": "exercise_5_4_wander",
+			"description": "Wander steering behavior with random but smooth directional changes.",
+			"scene": "res://algorithms/steering/noc_ch05/exercise_5_4_wander_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"wander",
+				"random",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~36"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.77,
+					1.56,
+					0.77
+				],
+				"aabb_center": [
+					-0.01,
+					0.17,
+					-0.02
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.56,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Randomness is smoothed twice before it may steer: a hand-shuffled permutation table feeds value noise, the noise picks a point on a circle projected ahead, and only that offset becomes force. Wander is chance on a fixed-radius leash \u2014 and the seek slider can drown it in purpose at any moment."
+		},
+		"exercise_5_9_angle_between": {
+			"name": "Angle Between Vectors",
+			"lookup_name": "exercise_5_9_angle_between",
+			"description": "Two thin arrows rise from a common centre in the XY plane with a pink figure drawn between them and a live degree readout above; two 3D sliders turn each arrow independently. DNA axes: opening (agreeing / strangers / opposing / parallel - the case the pair is found in, the same word and the same four values as the sibling agreement_gauge) and figure (arc / wedge / chord / none - what the angle is drawn as, where chord is the difference vector steering code actually computes).",
+			"scene": "res://algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.tscn",
+			"category": "steering",
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"opening": [
+						"agreeing",
+						"strangers",
+						"opposing",
+						"parallel"
+					],
+					"figure": [
+						"arc",
+						"wedge",
+						"chord",
+						"none"
+					]
+				},
+				"default": "opening=agreeing, figure=arc - _opening_angle() returns the shipped literal PI / 3.0 for agreeing (angle_a stays 0.0), and the arc branch is the shipped _update_arc(center, 0.12, angle_a, angle_b) call reached through the match default, so the 3 existing placements draw the same 60-degree pair and the same 20-segment line strip they always did. The wedge and chord meshes are only ever built when a map asks for them",
+				"was": "two float @exports (angle_a, angle_b) with no enum shape, an apply_grid_config() whose body was `pass`, and one welded figure: a 20-segment arc of radius 0.12 was the only thing 'the angle between' could look like. The stage-2 sweep read no turnable knob. Every placement opened on the same acute pair, and the three cases the exercise exists to teach - perpendicular, obtuse, coincident - were reachable only by a player dragging a slider",
+				"shared_with": "agreement_gauge - `opening` is that artifact's word with that artifact's four values in the same order, because it is literally the same question asked of the same pair of directions. A room can now set the gauge and the exercise to the same case and the two will mean the same thing by it; if the vocabulary is honest they should MEASURE alike",
+				"note": "hand promotion 2026-08-03 - the runner refused it for NO TURNABLE KNOBS. opening turns theta alone: agreeing 60 deg (shipped), strangers 90 (dot exactly zero), opposing 120 (dot negative), parallel 0 (the arrows superimpose, the figure collapses to a point and the readout still answers). figure is the axis that puts the exercise's own title at risk - arc says the angle is a rotation, wedge says it is an area, none says it is only a digit, and chord draws the tip-to-tip segment, which IS the difference vector; no steering routine ever takes an arc, so chord is the reading the chapter actually uses in code. Under chord the readout gains a |b - a| line so a still cannot misreport which claim is on screen. The two angle sliders stay live under every value: opening sets the case the exercise is found in, it does not lock it",
+				"gotcha": "the angle sliders round to step_size 0.01, so the shipped PI / 3.0 has always been stored as 1.05 after ParameterController3D.set_value re-emits. The promotion routes opening through the same set_value path, so it inherits that rounding rather than introducing a second convention"
+			},
+			"tags": [
+				"steering",
+				"angle",
+				"vectors",
+				"exercise",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					0.48,
+					0.14
+				],
+				"aabb_center": [
+					0.38,
+					0.48,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.78,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Two unit arrows on dials with the arc between them meshed and measured live \u2014 an insistence that the angle is not a property of either vector but of the pair."
+		},
+		"exercise_5_13_crowd_path_following": {
+			"name": "Crowd Path Following",
+			"lookup_name": "exercise_5_13_crowd_path_following",
+			"description": "Multiple agents following a shared path with crowd dynamics.",
+			"scene": "res://algorithms/steering/noc_ch05/exercise_5_13_crowd_path_following_vr.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"crowd",
+				"path_following",
+				"exercise",
+				"nature_of_code"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.35,
+					0.87,
+					0.14
+				],
+				"aabb_center": [
+					0.1,
+					0.57,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.35,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Twenty vehicles with individually randomized top speeds and force budgets share one tube of tolerance; follow pulls them into file while separation keeps them from collapsing into one body. A crowd, operationally, is a corridor plus a repulsion term."
+		},
+		"flocking_controls": {
+			"name": "Flocking Controls",
+			"lookup_name": "flocking_controls",
+			"description": "Interactive boid flocking with VR sliders for separation, alignment, cohesion, speed, and perception radius. Highlights one boid with visible force vectors.",
+			"scene": "res://commons/artifacts/flocking_controls/flocking_controls.tscn",
+			"category": "steering",
+			"tags": [
+				"steering",
+				"flocking",
+				"boids",
+				"sliders",
+				"interactive",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "steering",
+			"complexity": "advanced",
+			"dev_themes": [
+				"autonomous_agents",
+				"steering"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"torus"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.74,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					-0.07,
+					0.1
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "relation: separation, alignment, cohesion on sliders \u2014 one boid highlighted with its force vectors so the flock's mind is readable as arithmetic. Emergence with its dials exposed."
+		}
+	}
 }

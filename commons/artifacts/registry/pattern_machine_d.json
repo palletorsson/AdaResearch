@@ -1,30 +1,53 @@
 {
 	"id": "pattern_machine_d",
-	"name": "Pattern Machine D — Tile-Stamp Press",
-	"description": "An interactive sci-fi printing press for wallpaper. The player arranges a small NxN stamp matrix on the angled press bed (touch-paint cells, pick ink, cycle group), pulls the press lever, and the head punches down and STAMPS the symmetry-tiled carpet onto a conveyor tray that feeds it off the front. Editable like pattern_maker_station, manufactured like pattern_loom — one apparatus does both. Reuses WallpaperGroups.get_symmetric_color for the live carpet and PatternSim.render_to_image for the proof sheet.",
+	"name": "Pattern Machine D \u2014 Tile-Stamp Press",
+	"description": "An interactive sci-fi printing press for wallpaper. The player arranges a small NxN stamp matrix on the angled press bed (touch-paint cells, pick ink, cycle group), pulls the press lever, and the head punches down and STAMPS the symmetry-tiled carpet onto a conveyor tray that feeds it off the front. Editable like pattern_maker_station, manufactured like pattern_loom \u2014 one apparatus does both. Reuses WallpaperGroups.get_symmetric_color for the live carpet and PatternSim.render_to_image for the proof sheet.",
 	"category": "dna_grammar",
-	"theoreticalGrounding": "A print is a rule pressed into a surface. The matrix is the type, the wallpaper group is the forme, and the carpet is the impression. wallpaper_group is the critical parameter — one 3x3 arrangement of stamps, run through p1..p6m, prints 17 different universes.",
+	"theoreticalGrounding": "A print is a rule pressed into a surface. The matrix is the type, the wallpaper group is the forme, and the carpet is the impression. wallpaper_group is the critical parameter \u2014 one 3x3 arrangement of stamps, run through p1..p6m, prints 17 different universes.",
 	"artifacts": {
 		"pattern_machine_d": {
 			"lookup_name": "pattern_machine_d",
-			"name": "Pattern Machine D — Tile-Stamp Press",
+			"name": "Pattern Machine D \u2014 Tile-Stamp Press",
 			"description": "A cast-iron press chassis with side cheeks, a crown beam, an angled editable stamp matrix, a press head on guide rods + a pull lever, ink-well palette buttons, GROUP / PRESS / CLEAR controls, a PatternSim proof sheet on the crown, and a conveyor tray that feeds the printed carpet off the front. Touch-paint the bed; output updates live; pull the press to punch + re-stamp. DNA: group (p1..p6m), palette, motif_seed, matrix_size, carpet/feed params.",
 			"category": "dna_grammar",
 			"complexity": "intermediate",
 			"scene": "res://commons/artifacts/pattern_machine_d/pattern_machine_d.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["array_tutorial", "color", "artmathematics"],
-			"footprint": [2, 3, 3],
-			"tags": ["dna", "pattern", "wallpaper", "press", "stamp", "machine", "carpet", "interactive", "scifi", "placeable"],
-			"qfep_connection": "F_order: the 17 wallpaper groups as a press program — a hand-set matrix multiplied by constraint into endless printed fabric.",
+			"map_sequences": [
+				"array_tutorial",
+				"color",
+				"artmathematics"
+			],
+			"footprint": [
+				2,
+				3,
+				3
+			],
+			"tags": [
+				"dna",
+				"pattern",
+				"wallpaper",
+				"press",
+				"stamp",
+				"machine",
+				"carpet",
+				"interactive",
+				"scifi",
+				"placeable"
+			],
+			"qfep_connection": "F_order: the 17 wallpaper groups as a press program \u2014 a hand-set matrix multiplied by constraint into endless printed fabric.",
 			"parameters": {
 				"group": "p4m",
 				"palette": "bauhaus",
 				"motif_seed": 7,
 				"matrix_size": 3,
 				"carpet_repeats": 8,
-				"footprint": [2, 3, 3],
+				"footprint": [
+					2,
+					3,
+					3
+				],
 				"size_group": "large"
 			},
 			"size_group": "large",
@@ -34,6 +57,24 @@
 				"density": "high",
 				"reading_radius": 4,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.6,
+					2.48,
+					6.1
+				],
+				"aabb_center": [
+					0.0,
+					1.24,
+					2.7
+				],
+				"grid_cells": [
+					3,
+					7
+				],
+				"max_dimension_m": 6.1,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

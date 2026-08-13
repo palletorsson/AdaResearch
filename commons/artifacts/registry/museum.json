@@ -1,13 +1,164 @@
 {
- "artifacts": {
-  "museum_hall_shell": {
-   "lookup_name": "museum_hall_shell",
-   "scene": "res://commons/artifacts/museum/museum_hall_shell.tscn",
-   "class_name": "MuseumHallShell",
-   "name": "Museum Hall Shell (the court, worn)",
-   "category": "museum",
-   "complexity": "intermediate",
-   "description": "A two-story stone arcade with an iron-and-glass skylight, erected as a purely visual shell around an existing grid map — Cour Marly / Met / Natural History Museum typology as a kit: pier, lintel, cornice, balustrade, glass grid, orange trees, benches. Configurable width/depth/height. The grid below keeps physics and truth; the shell brings the museum light. First worn by Museum_Spine_Court."
-  }
- }
+	"artifacts": {
+		"museum_hall_shell": {
+			"lookup_name": "museum_hall_shell",
+			"scene": "res://commons/artifacts/museum/museum_hall_shell.tscn",
+			"class_name": "MuseumHallShell",
+			"name": "Museum Hall Shell (the court, worn)",
+			"category": "museum",
+			"complexity": "intermediate",
+			"description": "A two-story stone arcade with an iron-and-glass skylight, erected as a purely visual shell around an existing grid map \u2014 Cour Marly / Met / Natural History Museum typology as a kit: pier, lintel, cornice, balustrade, glass grid, orange trees, benches. Configurable width/depth/height. The grid below keeps physics and truth; the shell brings the museum light. First worn by Museum_Spine_Court.",
+			"measurements": {
+				"aabb_size": [
+					29.9,
+					13.02,
+					18.4
+				],
+				"aabb_center": [
+					0.0,
+					6.51,
+					0.0
+				],
+				"grid_cells": [
+					30,
+					19
+				],
+				"max_dimension_m": 29.9,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				30,
+				1,
+				19
+			]
+		},
+		"museum_uffizi_bay_module": {
+			"lookup_name": "museum_uffizi_bay_module",
+			"scene": "res://commons/artifacts/museum/museum_uffizi_bay_module.tscn",
+			"class_name": "MuseumUffiziBayModule",
+			"name": "Uffizi Bay Module (certified 1 m kit)",
+			"category": "museum",
+			"complexity": "intermediate",
+			"description": "An 8 x 8 m repeatable gallery bay assembled from one-metre floor, wall, ceiling and skylight parts. West/east 3 m sockets negotiate endless chaining; the central four-metre wall field remains protected for the featured artifact while props occupy peripheral wall zones.",
+			"measurements": {
+				"aabb_size": [
+					8.32,
+					4.37,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					2.19,
+					0.0
+				],
+				"grid_cells": [
+					9,
+					8
+				],
+				"max_dimension_m": 8.32,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				9,
+				1,
+				8
+			]
+		},
+		"museum_wall_piece": {
+			"lookup_name": "museum_wall_piece",
+			"scene": "res://commons/artifacts/museum/museum_wall_piece.tscn",
+			"class_name": "MuseumWallPiece",
+			"name": "Museum Wall Piece (typed 1-4 m span)",
+			"category": "museum",
+			"complexity": "intermediate",
+			"description": "A one-metre-grid wall kit family with solid, feature, window, vitrine, service, portal and endcap pieces. Every type spans an exact 1-4 m contract and exposes compatible flat-wall sockets.",
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					4.0,
+					0.36
+				],
+				"aabb_center": [
+					0.0,
+					2.0,
+					0.1
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 4.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"museum_wall_run": {
+			"lookup_name": "museum_wall_run",
+			"scene": "res://commons/artifacts/museum/museum_wall_run.tscn",
+			"class_name": "MuseumWallRun",
+			"name": "Museum Wall Run (exact-length composer)",
+			"category": "museum",
+			"complexity": "advanced",
+			"description": "Composes typed museum wall pieces from a compact specification such as service:2|feature:4|solid:2. The resulting run has exact length, gapless internal joints and compatible end sockets.",
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					4.0,
+					0.46
+				],
+				"aabb_center": [
+					0.0,
+					2.0,
+					0.16
+				],
+				"grid_cells": [
+					8,
+					1
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				8,
+				1,
+				1
+			]
+		},
+		"museum_wall_kit_atlas": {
+			"lookup_name": "museum_wall_kit_atlas",
+			"scene": "res://commons/artifacts/museum/museum_wall_kit_atlas.tscn",
+			"class_name": "MuseumWallKitAtlas",
+			"name": "Museum Wall Kit Atlas (widths + full build)",
+			"category": "museum",
+			"complexity": "advanced",
+			"description": "A physical kitbash sheet that proves every wall family across supported widths and ends with a complete sixteen-metre composed gallery wall.",
+			"measurements": {
+				"aabb_size": [
+					28.51,
+					4.06,
+					24.51
+				],
+				"aabb_center": [
+					-0.25,
+					1.97,
+					-2.25
+				],
+				"grid_cells": [
+					29,
+					25
+				],
+				"max_dimension_m": 28.51,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				29,
+				1,
+				25
+			]
+		}
+	}
 }

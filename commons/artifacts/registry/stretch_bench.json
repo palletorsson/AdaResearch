@@ -3,26 +3,45 @@
 	"name": "Stretch Bench",
 	"description": "A machinist's setting-out bench for scalar multiplication k*v. One amber reference arrow v is clamped to a graduated brass rail; turn the single brass 'k' crank (it physically slides along the rail, so the scalar's POSITION on the number line IS the input) and a twin arrow grows, shrinks, collapses to a glowing dot at k=0, and flips 180 degrees through its own tail when k goes negative. The twin reads cyan-violet for k>=0 and RED when reversed. k*v and |k*v|=|k|*|v| tick live the whole way. A SNAP button locks k to integers so you can land exactly on k=-1 (mirror) and k=2 (double). slider_horizontal stays wired as the desktop fallback.",
 	"category": "vectors",
-	"theoreticalGrounding": "To multiply a vector by a number is to choose a length and a direction-sign on a line you have already drawn. Scalar multiplication never touches the line's direction — only its magnitude and sign. |k*v| = |k|*|v|, always; negative k is reversal, k=0 is collapse, |k|>1 is stretch.",
+	"theoreticalGrounding": "To multiply a vector by a number is to choose a length and a direction-sign on a line you have already drawn. Scalar multiplication never touches the line's direction \u2014 only its magnitude and sign. |k*v| = |k|*|v|, always; negative k is reversal, k=0 is collapse, |k|>1 is stretch.",
 	"artifacts": {
 		"stretch_bench": {
 			"lookup_name": "stretch_bench",
 			"name": "Stretch Bench",
-			"description": "Dark slate pedestal + brass rim + graduated rail (the number line for k). A grabbable brass crank slides along the rail to set k in [-3,+3]; the amber base vector v is grabbable (re-aim the reference line), the derived twin k*v snaps to it and is never grabbable — cyan-violet when k>=0, red when k<0, a glowing dot at k=0. Etched integer ground-lattice (-3v..3v), a bead + brass 'k' dial needle, live k*v and |k||v| readout, SNAP integer-lock button, and a slider_horizontal desktop fallback. DNA: default_k, min_k, max_k, base_vector.",
+			"description": "Dark slate pedestal + brass rim + graduated rail (the number line for k). A grabbable brass crank slides along the rail to set k in [-3,+3]; the amber base vector v is grabbable (re-aim the reference line), the derived twin k*v snaps to it and is never grabbable \u2014 cyan-violet when k>=0, red when k<0, a glowing dot at k=0. Etched integer ground-lattice (-3v..3v), a bead + brass 'k' dial needle, live k*v and |k||v| readout, SNAP integer-lock button, and a slider_horizontal desktop fallback. DNA: default_k, min_k, max_k, base_vector.",
 			"category": "vectors",
 			"complexity": "beginner",
 			"scene": "res://commons/artifacts/stretch_bench/stretch_bench.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"],
-			"footprint": [1, 2, 1],
-			"tags": ["vector", "scalar", "multiply", "machine", "vr", "scalar_multiplication", "forces", "placeable"],
-			"qfep_connection": "F_field / scalar: one number reshapes one vector — length and sign on a fixed line. k<0 reverses, k=0 collapses, |k|>1 stretches; the twin is the field-value of v under the scalar.",
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"vector",
+				"scalar",
+				"multiply",
+				"machine",
+				"vr",
+				"scalar_multiplication",
+				"forces",
+				"placeable"
+			],
+			"qfep_connection": "F_field / scalar: one number reshapes one vector \u2014 length and sign on a fixed line. k<0 reverses, k=0 collapses, |k|>1 stretches; the twin is the field-value of v under the scalar.",
 			"parameters": {
 				"default_k": 1.0,
 				"min_k": -3.0,
 				"max_k": 3.0,
-				"footprint": [1, 2, 1],
+				"footprint": [
+					1,
+					2,
+					1
+				],
 				"size_group": "small"
 			},
 			"size_group": "small",
@@ -30,8 +49,19 @@
 				"promoted": "2026-08-05",
 				"stage": "2 - variation",
 				"axes": {
-					"regime": ["identity", "stretch", "shrink", "collapse", "reversal"],
-					"workings": ["outcome", "trace", "operands", "expression"]
+					"regime": [
+						"identity",
+						"stretch",
+						"shrink",
+						"collapse",
+						"reversal"
+					],
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					]
 				},
 				"default": "regime=identity, workings=expression - identity SHORT-CIRCUITS: _regime_k() hands back the shipped default_k rather than the table's 1.0, so a map that overrides k alone opens at its own number instead of being reset to the regime's. At k=1 the twin is positioned by the same _refresh_geometry call over the same base_vector, in twin_color and not twin_flip_color, with the collapse dot hidden, the crank and bead at _k_to_rail_x(1.0) and the needle at lerp(-120,120,0.667) - the literals that were there before. expression turns every gate on, which is the only state this bench could previously be in: the etched -3v..3v lattice with its ticks and ghost labels, the bead, the amber grabbable v, the brass crank, the k dial and the two-column info panel. All 3 placements (Force_Preview, MiniScene_stretch_bench, VFM_01_Foundations) are BARE tokens with no #key:value, and both axes are read only inside `if config.has(...)`, so none of them reaches the new code. Nothing in apply_grid_config tears anything down on any path: regime moves a number _refresh_all already reads, workings is visibility on nodes already standing.",
 				"was": "no @export at all, which is why the stage-2 runner refused this token for NO TURNABLE KNOBS. default_k, min_k, max_k, base_vector and housed were plain vars reachable through apply_grid_config - real knobs, but a range, two bounds, a direction and a cabinet flag, and not one of them an argument. The bench's whole content is what k DOES to a vector, and this file names the cases four times in prose (the @identity's 'k=+1 identity, k=0 collapse, k=-1 perfect mirror ... the three landmarks are the whole lesson', the panel's 'k<0 reverses / k=0 collapses', the red twin_flip_color, _refresh_text's REVERSED/COLLAPSED/same way) while a placed bench could only ever stand at k=1 until a player turned the crank. The scaffolding had the same problem in the other direction: the ghost lattice, the operand, the dial and the panel were hard-wired to go up together, so a room could not show a scaled vector as a bare result.",
@@ -44,6 +74,24 @@
 				"density": "low",
 				"reading_radius": 2,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.04,
+					1.15,
+					0.54
+				],
+				"aabb_center": [
+					0.05,
+					0.43,
+					-0.03
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.15,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}

@@ -1,1031 +1,1054 @@
 {
- "registry_info": {
-  "name": "wavefunctions_extra",
-  "description": "Additional wavefunction artifacts not in the main wavefunctions.json — sine spaces, sound timelines, modulor constructions, and cochlear models.",
-  "category": "wavefunctions",
-  "theoretical_grounding": "Wave mechanics, Fourier analysis, Le Corbusier's Modulor proportional system, cochlear mechanics, sound synthesis"
- },
- "artifacts": {
-  "coshlea": {
-   "lookup_name": "coshlea",
-   "scene": "res://algorithms/wavefunctions/coshlea/coshlea.tscn",
-   "name": "Cochlea Model",
-   "description": "Model of the cochlea — the spiral organ in the inner ear that performs a biological Fourier transform. Frequency-to-position mapping: high frequencies at the base, low at the apex.",
-   "category": "waves",
-   "complexity": "intermediate",
-   "tags": [
-    "cochlea",
-    "hearing",
-    "frequency",
-    "fourier",
-    "biology",
-    "wave"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "wavefunctions"
-   ],
-   "parameters": {
-    "footprint": [
-     5,
-     13,
-     19
-    ],
-    "size_group": "world_scale"
-   },
-   "dev_themes": [
-    "biology",
-    "oscillation",
-    "physics",
-    "waves"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": [
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 3025,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     54.58,
-     18.85,
-     54.58
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     55.0,
-     55.0
-    ],
-    "max_dimension_m": 54.58,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    55.0,
-    1,
-    55.0
-   ],
-   "spatial_profile": {
-    "dir_group": "floor",
-    "range": 81,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.319945Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "modulor_man": {
-   "lookup_name": "modulor_man",
-   "scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man.tscn",
-   "name": "Modulor Man",
-   "description": "Le Corbusier's Modulor proportional system in 3D — the human body as generator of harmonic measurements. Architecture derived from the golden ratio applied to human scale.",
-   "category": "waves",
-   "complexity": "intermediate",
-   "tags": [
-    "modulor",
-    "le_corbusier",
-    "proportion",
-    "golden_ratio",
-    "architecture",
-    "human_scale"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [],
-   "dev_themes": [
-    "oscillation",
-    "physics",
-    "waves"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.94,
-     2.37,
-     0.16
-    ],
-    "aabb_center": [
-     0.07,
-     1.17,
-     0.07
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 2.37,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 6,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.319945Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Le Corbusier's measuring-man drawn as one unbroken line through a table of constants — navel at 1.13, raised fist at 2.26. A body frozen into dimensions and then used to size the world: normalization as architecture's quiet first move."
-  },
-  "modulor_man_interactive": {
-   "lookup_name": "modulor_man_interactive",
-   "scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man_interactive.tscn",
-   "name": "Modulor Man (Interactive)",
-   "description": "Interactive Modulor proportional system — adjust body proportions and see how architectural measurements change. The relationship between human form and designed space.",
-   "category": "waves",
-   "complexity": "intermediate",
-   "tags": [
-    "modulor",
-    "interactive",
-    "proportion",
-    "architecture",
-    "human_scale"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [],
-   "dev_themes": [
-    "oscillation",
-    "physics",
-    "waves"
-   ],
-   "geometry_spec": {
-    "mesh_type": "parametric_surface",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "uv_grid_triangulation",
-     "primitives": [],
-     "operations": [
-      "compute_vertices",
-      "generate_triangles",
-      "compute_normals"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "vertex",
-     "driven_by": "per_frame_rebuild",
-     "affects": [
-      "vertex_positions"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.96,
-     2.4,
-     0.16
-    ],
-    "aabb_center": [
-     0.07,
-     1.18,
-     0.07
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 2.4,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 6,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.319945Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "Every vertex of the Modulor is a grab-sphere: pull the navel off its golden section and the harmonic figure follows your hand without protest. Proportion revealed as negotiable — the standard body was only ever a default, held in place by no one touching it."
-  },
-  "sine_space": {
-   "lookup_name": "sine_space",
-   "scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn",
-   "name": "Sine Space",
-   "description": "3D space defined by sine waves — walls, floors, and ceilings undulate according to wave parameters. An environment where the sine function becomes architecture.",
-   "category": "waves",
-   "complexity": "beginner",
-   "tags": [
-    "sine",
-    "wave",
-    "space",
-    "environment",
-    "oscillation",
-    "3d"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "wavefunctions"
-   ],
-   "parameters": {
-    "footprint": [
-     17,
-     19,
-     9
-    ],
-    "size_group": "world_scale"
-   },
-   "dev_themes": [
-    "oscillation",
-    "physics",
-    "waves"
-   ],
-   "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
-      "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission"
-     ]
-    },
-    "animation": {
-     "type": "particle_lifecycle",
-     "driven_by": "cpu_simulation",
-     "affects": [
-      "transform",
-      "color"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "~64"
-   },
-   "spatial_needs": {
-    "platform": "sunken",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 17,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     16.9,
-     3.58,
-     1.0
-    ],
-    "aabb_center": [
-     -0.05,
-     -1.71,
-     0.0
-    ],
-    "grid_cells": [
-     17.0,
-     1.0
-    ],
-    "max_dimension_m": 16.9,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    17.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 35,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.319945Z",
-    "derived_from": "aabb_size + category"
-   },
-   "dna": {
-    "promoted": "2026-08-03",
-    "stage": "2 - variation",
-    "axes": {
-     "manifold": [
-      "cycle",
-      "plane",
-      "cylinder",
-      "sphere",
-      "torus",
-      "mobius"
-     ],
-     "crossing": [
-      "product",
-      "sum",
-      "radial",
-      "single"
-     ]
-    },
-    "default": "manifold=cycle, crossing=product - a deliberate no-op on both. cycle is the shipped 5-second carousel through all five topologies and leaves current_topology at FLAT_SINE where its initialiser already put it; product is the sin(f*a+phase)*sin(f*b+phase*k) that every topology function computed inline before _wave() existed. All 5 existing placements undulate exactly as they did.",
-    "was": "one carousel. The five coordinate systems were a timer, not a choice, so no placement was ever a cylinder — every placement was all five for five seconds each. The product of two sines was the only way the two directions were allowed to meet.",
-    "note": "Two things a capture has to get right here. The surface is a MultiMeshInstance3D and the four controls are CSG nodes, so nothing in this artifact was a MeshInstance3D and it measured 16.9 x 3.58 x 1.0 — the pillars, with the 10 m field reading as 1 m of depth. _create_capture_anchor() adds an 11 m box at layers = 0 so the measurement is of the space rather than its dials; no camera in the game draws it. And the instances all sit at the origin until the first _process tick positions them, so a shot taken before the settle photographs a dot. Sweep at the default manifold=cycle: the topology timer has not fired at 5 s, so the frame is the plane, which is where `crossing` is legible."
-   }
-  },
-  "sine_wall": {
-   "lookup_name": "sine_wall",
-   "scene": "res://algorithms/wavefunctions/sine_wall/sine_wall.tscn",
-   "name": "Sine Wall",
-   "description": "A wall of oscillating elements driven by sine functions — amplitude, frequency, and phase visible as physical displacement. Wave parameters you can see and feel.",
-   "category": "waves",
-   "complexity": "beginner",
-   "tags": [
-    "sine",
-    "wall",
-    "oscillation",
-    "amplitude",
-    "frequency",
-    "phase"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "wavefunctions"
-   ],
-   "parameters": {
-    "footprint": [
-     1,
-     5,
-     11
-    ],
-    "size_group": "world_scale"
-   },
-   "dev_themes": [
-    "oscillation",
-    "physics",
-    "waves"
-   ],
-   "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
-      "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
-      "metallic"
-     ]
-    },
-    "animation": {
-     "type": "particle_lifecycle",
-     "driven_by": "cpu_simulation",
-     "affects": [
-      "transform",
-      "color"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 13,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     12.18,
-     11.16,
-     0.18
-    ],
-    "aabb_center": [
-     0.0,
-     0.03,
-     -4.0
-    ],
-    "grid_cells": [
-     13.0,
-     1.0
-    ],
-    "max_dimension_m": 12.18,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    13.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "panel",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.319945Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "sine_oscillation": {
-   "lookup_name": "sine_oscillation",
-   "scene": "res://algorithms/wavefunctions/sineoscillation/sine_oscillation.tscn",
-   "name": "Sine Oscillation",
-   "description": "Expressive 3D sine oscillation — rotating unit circle with sine + cosine wave projection, phase trail, radius arm, color-coded dual waves, and VR parameter sliders for amplitude, frequency, and speed.",
-   "category": "waves",
-   "complexity": "beginner",
-   "tags": [
-    "sine",
-    "cosine",
-    "oscillation",
-    "3d",
-    "unit_circle",
-    "circular_motion",
-    "amplitude",
-    "frequency",
-    "phase",
-    "wavelength"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "wavefunctions"
-   ],
-   "dev_themes": [
-    "oscillation",
-    "physics",
-    "waves"
-   ],
-   "geometry_spec": {
-    "mesh_type": "procedural_line",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "vertex_line_strip",
-     "primitives": [
-      "sphere"
-     ],
-     "operations": [
-      "compute_vertices",
-      "connect_lines"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "emission",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "vertex",
-     "driven_by": "per_frame_rebuild",
-     "affects": [
-      "vertex_positions"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "~144"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ]
-  },
-  "sound_timeline": {
-   "lookup_name": "sound_timeline",
-   "scene": "res://algorithms/wavefunctions/soundtimeline/sound_timeline.tscn",
-   "name": "Sound Timeline",
-   "description": "Audio timeline controller — visualize and manipulate sound as a waveform in time. Scrub through audio, see frequency content evolve, understand sound as time-domain signal.",
-   "category": "waves",
-   "complexity": "beginner",
-   "tags": [
-    "sound",
-    "timeline",
-    "audio",
-    "waveform",
-    "time_domain",
-    "controller"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "wavefunctions"
-   ],
-   "dev_themes": [
-    "music",
-    "oscillation",
-    "physics",
-    "waves"
-   ],
-   "geometry_spec": {
-    "mesh_type": "delegated_scene",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "scene_instantiation",
-     "primitives": [],
-     "operations": [
-      "load_scene",
-      "instantiate",
-      "configure"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "few",
-    "vertex_estimate": "varies"
-   },
-   "spatial_needs": {
-    "platform": "pedestal",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "qfep_connection": "REC turns the room's own passing sound into a scrubbable strip — capture, FFT, playhead — giving audio a past tense you can drag through. The recording doesn't preserve the flux; it converts it into an editable order, which is a different thing."
-  },
-  "vertical_wave_lines": {
-   "lookup_name": "vertical_wave_lines",
-   "scene": "res://algorithms/wavefunctions/vertical_wave_lines/vertical_wave_lines.tscn",
-   "name": "Vertical Wave Lines",
-   "description": "Array of vertical lines displaced by wave functions — interference, standing waves, and superposition made visible as a wall of oscillating rods.",
-   "category": "waves",
-   "complexity": "beginner",
-   "tags": [
-    "wave",
-    "vertical",
-    "lines",
-    "interference",
-    "standing_wave",
-    "superposition"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "wavefunctions"
-   ],
-   "dev_themes": [
-    "oscillation",
-    "physics",
-    "waves"
-   ],
-   "geometry_spec": {
-    "mesh_type": "instanced_particles",
-    "topology": "scattered",
-    "construction": {
-     "method": "multimesh_instancing",
-     "primitives": [
-      "box",
-      "prism"
-     ],
-     "operations": [
-      "allocate_instances",
-      "set_transforms",
-      "update_per_frame"
-     ]
-    },
-    "material": {
-     "type": "shader",
-     "shading_model": "custom_fragment",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "particle_lifecycle",
-     "driven_by": "cpu_simulation",
-     "affects": [
-      "transform",
-      "color"
-     ]
-    },
-    "instance_strategy": "multimesh",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "pedestal",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 144,
-    "footprint_source": "measured_capped"
-   },
-   "measurements": {
-    "aabb_size": [
-     11.78,
-     1.0,
-     11.78
-    ],
-    "aabb_center": [
-     -0.15,
-     0.5,
-     -0.15
-    ],
-    "grid_cells": [
-     12.0,
-     12.0
-    ],
-    "max_dimension_m": 11.78,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    12.0,
-    1,
-    12.0
-   ],
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 35,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.319945Z",
-    "derived_from": "aabb_size + category"
-   },
-   "qfep_connection": "A thousand rods on one shader clock: no rod is pushed by its neighbor, each evaluates the same equation alone, yet the eye insists on a body traveling through them. The wave is a perceptual verdict, not a mechanism — nothing propagates except your reading."
-  },
-  "doppler_effect_demo": {
-   "lookup_name": "doppler_effect_demo",
-   "scene": "res://commons/artifacts/doppler_effect_demo/doppler_effect_demo.tscn",
-   "name": "Doppler Effect Demo",
-   "description": "Moving source emits concentric wave rings — compression ahead (blue shift) and stretching behind (red shift). Rings expand from emission positions, naturally demonstrating how relative motion changes observed frequency.",
-   "category": "waves",
-   "complexity": "intermediate",
-   "tags": [
-    "doppler",
-    "wave",
-    "frequency",
-    "shift",
-    "red_shift",
-    "blue_shift",
-    "motion"
-   ],
-   "include_in_map_data": true,
-   "map_ready": true,
-   "map_sequences": [
-    "wavefunctions"
-   ],
-   "dev_themes": [
-    "oscillation",
-    "physics",
-    "waves"
-   ],
-   "geometry_spec": {
-    "mesh_type": "procedural_line",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "vertex_line_strip",
-     "primitives": [
-      "box",
-      "sphere"
-     ],
-     "operations": [
-      "compute_vertices",
-      "connect_lines"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "emission",
-      "transparency"
-     ]
-    },
-    "animation": {
-     "type": "vertex",
-     "driven_by": "per_frame_rebuild",
-     "affects": [
-      "vertex_positions"
-     ]
-    },
-    "instance_strategy": "few",
-    "vertex_estimate": "unknown"
-   },
-   "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
-   },
-   "measurements": {
-    "aabb_size": [
-     0.8,
-     0.06,
-     0.8
-    ],
-    "aabb_center": [
-     0.0,
-     0.02,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.8,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
-   },
-   "footprint_measured": [
-    1.0,
-    1,
-    1.0
-   ],
-   "spatial_profile": {
-    "dir_group": "plane",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.319945Z",
-    "derived_from": "aabb_size + category"
-   }
-  },
-  "aliasing_wave": {
-   "category": "waves",
-   "complexity": "intermediate",
-   "description": "The waves seam (the sampling crack). A true 15-cycle wave, 16 sample dots on it, and the straight-line reconstruction those samples give: a clean 1-cycle wave. Above half the sample rate (Nyquist) a wave does not vanish, it folds back and impersonates a slower one. Plus a spoked wheel that, spun past the frame rate, turns backward - real aliasing, the display sampling itself.",
-   "dev_themes": [
-    "waves",
-    "sampling",
-    "nyquist",
-    "aliasing"
-   ],
-   "include_in_map_data": true,
-   "interaction": "ambient",
-   "lookup_name": "aliasing_wave",
-   "map_ready": true,
-   "map_sequences": [
-    "wavefunctions"
-   ],
-   "name": "Aliasing Wave",
-   "qfep_connection": "The frequency that was never there. The digital-bias seam for waves: the machine shows you a slower wave than the real one, using its own clock. A conserved-bias station (doc/SEAM_PER_SEQUENCE.md).",
-   "scene": "res://algorithms/wavefunctions/aliasing_wave/aliasing_wave.tscn",
-   "sequence": "wavefunctions",
-   "tags": [
-    "nyquist",
-    "aliasing",
-    "sampling",
-    "wave",
-    "seam",
-    "digital_bias",
-    "wagon_wheel",
-    "wavefunctions"
-   ]
-  }
- }
+	"registry_info": {
+		"name": "wavefunctions_extra",
+		"description": "Additional wavefunction artifacts not in the main wavefunctions.json \u2014 sine spaces, sound timelines, modulor constructions, and cochlear models.",
+		"category": "wavefunctions",
+		"theoretical_grounding": "Wave mechanics, Fourier analysis, Le Corbusier's Modulor proportional system, cochlear mechanics, sound synthesis"
+	},
+	"artifacts": {
+		"coshlea": {
+			"lookup_name": "coshlea",
+			"scene": "res://algorithms/wavefunctions/coshlea/coshlea.tscn",
+			"name": "Cochlea Model",
+			"description": "Model of the cochlea \u2014 the spiral organ in the inner ear that performs a biological Fourier transform. Frequency-to-position mapping: high frequencies at the base, low at the apex.",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"cochlea",
+				"hearing",
+				"frequency",
+				"fourier",
+				"biology",
+				"wave"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"parameters": {
+				"footprint": [
+					5,
+					13,
+					19
+				],
+				"size_group": "world_scale"
+			},
+			"dev_themes": [
+				"biology",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3025,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					54.58,
+					18.85,
+					54.58
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					55.0,
+					55.0
+				],
+				"max_dimension_m": 54.58,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				55.0,
+				1,
+				55.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 81,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.319945Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"modulor_man": {
+			"lookup_name": "modulor_man",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man.tscn",
+			"name": "Modulor Man",
+			"description": "Le Corbusier's Modulor proportional system in 3D \u2014 the human body as generator of harmonic measurements. Architecture derived from the golden ratio applied to human scale.",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"modulor",
+				"le_corbusier",
+				"proportion",
+				"golden_ratio",
+				"architecture",
+				"human_scale"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.94,
+					2.37,
+					0.16
+				],
+				"aabb_center": [
+					0.07,
+					1.17,
+					0.07
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 2.37,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.319945Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Le Corbusier's measuring-man drawn as one unbroken line through a table of constants \u2014 navel at 1.13, raised fist at 2.26. A body frozen into dimensions and then used to size the world: normalization as architecture's quiet first move."
+		},
+		"modulor_man_interactive": {
+			"lookup_name": "modulor_man_interactive",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man_interactive.tscn",
+			"name": "Modulor Man (Interactive)",
+			"description": "Interactive Modulor proportional system \u2014 adjust body proportions and see how architectural measurements change. The relationship between human form and designed space.",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"modulor",
+				"interactive",
+				"proportion",
+				"architecture",
+				"human_scale"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.94,
+					2.38,
+					0.16
+				],
+				"aabb_center": [
+					0.07,
+					1.17,
+					0.07
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 2.38,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.319945Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "Every vertex of the Modulor is a grab-sphere: pull the navel off its golden section and the harmonic figure follows your hand without protest. Proportion revealed as negotiable \u2014 the standard body was only ever a default, held in place by no one touching it."
+		},
+		"sine_space": {
+			"lookup_name": "sine_space",
+			"scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn",
+			"name": "Sine Space",
+			"description": "3D space defined by sine waves \u2014 walls, floors, and ceilings undulate according to wave parameters. An environment where the sine function becomes architecture.",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": [
+				"sine",
+				"wave",
+				"space",
+				"environment",
+				"oscillation",
+				"3d"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					19,
+					9
+				],
+				"size_group": "world_scale"
+			},
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 17,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.99,
+					11.0,
+					11.0
+				],
+				"aabb_center": [
+					-0.05,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					17,
+					11
+				],
+				"max_dimension_m": 16.99,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				17,
+				1,
+				11
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.319945Z",
+				"derived_from": "aabb_size + category"
+			},
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"manifold": [
+						"cycle",
+						"plane",
+						"cylinder",
+						"sphere",
+						"torus",
+						"mobius"
+					],
+					"crossing": [
+						"product",
+						"sum",
+						"radial",
+						"single"
+					]
+				},
+				"default": "manifold=cycle, crossing=product - a deliberate no-op on both. cycle is the shipped 5-second carousel through all five topologies and leaves current_topology at FLAT_SINE where its initialiser already put it; product is the sin(f*a+phase)*sin(f*b+phase*k) that every topology function computed inline before _wave() existed. All 5 existing placements undulate exactly as they did.",
+				"was": "one carousel. The five coordinate systems were a timer, not a choice, so no placement was ever a cylinder \u2014 every placement was all five for five seconds each. The product of two sines was the only way the two directions were allowed to meet.",
+				"note": "Two things a capture has to get right here. The surface is a MultiMeshInstance3D and the four controls are CSG nodes, so nothing in this artifact was a MeshInstance3D and it measured 16.9 x 3.58 x 1.0 \u2014 the pillars, with the 10 m field reading as 1 m of depth. _create_capture_anchor() adds an 11 m box at layers = 0 so the measurement is of the space rather than its dials; no camera in the game draws it. And the instances all sit at the origin until the first _process tick positions them, so a shot taken before the settle photographs a dot. Sweep at the default manifold=cycle: the topology timer has not fired at 5 s, so the frame is the plane, which is where `crossing` is legible."
+			}
+		},
+		"sine_wall": {
+			"lookup_name": "sine_wall",
+			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall.tscn",
+			"name": "Sine Wall",
+			"description": "A wall of oscillating elements driven by sine functions \u2014 amplitude, frequency, and phase visible as physical displacement. Wave parameters you can see and feel.",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": [
+				"sine",
+				"wall",
+				"oscillation",
+				"amplitude",
+				"frequency",
+				"phase"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					5,
+					11
+				],
+				"size_group": "world_scale"
+			},
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 13,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.18,
+					11.66,
+					0.18
+				],
+				"aabb_center": [
+					0.0,
+					0.05,
+					-4.0
+				],
+				"grid_cells": [
+					13,
+					1
+				],
+				"max_dimension_m": 12.18,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				13,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.319945Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"sine_oscillation": {
+			"lookup_name": "sine_oscillation",
+			"scene": "res://algorithms/wavefunctions/sineoscillation/sine_oscillation.tscn",
+			"name": "Sine Oscillation",
+			"description": "Expressive 3D sine oscillation \u2014 rotating unit circle with sine + cosine wave projection, phase trail, radius arm, color-coded dual waves, and VR parameter sliders for amplitude, frequency, and speed.",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": [
+				"sine",
+				"cosine",
+				"oscillation",
+				"3d",
+				"unit_circle",
+				"circular_motion",
+				"amplitude",
+				"frequency",
+				"phase",
+				"wavelength"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~144"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.31,
+					0.76,
+					0.3
+				],
+				"aabb_center": [
+					0.15,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.31,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			]
+		},
+		"sound_timeline": {
+			"lookup_name": "sound_timeline",
+			"scene": "res://algorithms/wavefunctions/soundtimeline/sound_timeline.tscn",
+			"name": "Sound Timeline",
+			"description": "Audio timeline controller \u2014 visualize and manipulate sound as a waveform in time. Scrub through audio, see frequency content evolve, understand sound as time-domain signal.",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": [
+				"sound",
+				"timeline",
+				"audio",
+				"waveform",
+				"time_domain",
+				"controller"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.63,
+					0.31,
+					0.0
+				],
+				"aabb_center": [
+					0.82,
+					-0.15,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					1
+				],
+				"max_dimension_m": 1.63,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2,
+				1,
+				1
+			],
+			"qfep_connection": "REC turns the room's own passing sound into a scrubbable strip \u2014 capture, FFT, playhead \u2014 giving audio a past tense you can drag through. The recording doesn't preserve the flux; it converts it into an editable order, which is a different thing."
+		},
+		"vertical_wave_lines": {
+			"lookup_name": "vertical_wave_lines",
+			"scene": "res://algorithms/wavefunctions/vertical_wave_lines/vertical_wave_lines.tscn",
+			"name": "Vertical Wave Lines",
+			"description": "Array of vertical lines displaced by wave functions \u2014 interference, standing waves, and superposition made visible as a wall of oscillating rods.",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": [
+				"wave",
+				"vertical",
+				"lines",
+				"interference",
+				"standing_wave",
+				"superposition"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box",
+						"prism"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 144,
+				"footprint_source": "measured_capped"
+			},
+			"measurements": {
+				"aabb_size": [
+					11.78,
+					1.0,
+					11.78
+				],
+				"aabb_center": [
+					-0.15,
+					0.5,
+					-0.15
+				],
+				"grid_cells": [
+					12.0,
+					12.0
+				],
+				"max_dimension_m": 11.78,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				12.0,
+				1,
+				12.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.319945Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "A thousand rods on one shader clock: no rod is pushed by its neighbor, each evaluates the same equation alone, yet the eye insists on a body traveling through them. The wave is a perceptual verdict, not a mechanism \u2014 nothing propagates except your reading."
+		},
+		"doppler_effect_demo": {
+			"lookup_name": "doppler_effect_demo",
+			"scene": "res://commons/artifacts/doppler_effect_demo/doppler_effect_demo.tscn",
+			"name": "Doppler Effect Demo",
+			"description": "Moving source emits concentric wave rings \u2014 compression ahead (blue shift) and stretching behind (red shift). Rings expand from emission positions, naturally demonstrating how relative motion changes observed frequency.",
+			"category": "waves",
+			"complexity": "intermediate",
+			"tags": [
+				"doppler",
+				"wave",
+				"frequency",
+				"shift",
+				"red_shift",
+				"blue_shift",
+				"motion"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.06,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.02,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.319945Z",
+				"derived_from": "aabb_size + category"
+			}
+		},
+		"aliasing_wave": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "The waves seam (the sampling crack). A true 15-cycle wave, 16 sample dots on it, and the straight-line reconstruction those samples give: a clean 1-cycle wave. Above half the sample rate (Nyquist) a wave does not vanish, it folds back and impersonates a slower one. Plus a spoked wheel that, spun past the frame rate, turns backward - real aliasing, the display sampling itself.",
+			"dev_themes": [
+				"waves",
+				"sampling",
+				"nyquist",
+				"aliasing"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "aliasing_wave",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Aliasing Wave",
+			"qfep_connection": "The frequency that was never there. The digital-bias seam for waves: the machine shows you a slower wave than the real one, using its own clock. A conserved-bias station (doc/SEAM_PER_SEQUENCE.md).",
+			"scene": "res://algorithms/wavefunctions/aliasing_wave/aliasing_wave.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"nyquist",
+				"aliasing",
+				"sampling",
+				"wave",
+				"seam",
+				"digital_bias",
+				"wagon_wheel",
+				"wavefunctions"
+			],
+			"measurements": {
+				"aabb_size": [
+					1.03,
+					0.94,
+					0.03
+				],
+				"aabb_center": [
+					0.0,
+					-0.1,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.03,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			]
+		}
+	}
 }

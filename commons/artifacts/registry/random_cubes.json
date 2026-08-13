@@ -1,140 +1,140 @@
 {
-  "artifacts": {
-    "r_c": {
-      "dna": {
-        "promoted": "2026-08-03",
-        "stage": "2 - variation",
-        "axes": {
-          "posture": [
-            "cycle",
-            "seated",
-            "leaving",
-            "sunken",
-            "arriving"
-          ],
-          "warning": [
-            "beacon",
-            "stain",
-            "cage",
-            "none"
-          ]
-        },
-        "fixture": {
-          "posture": "leaving",
-          "cycle_seed": 20260803
-        },
-        "default": "posture=cycle, warning=beacon - both no-ops. `cycle` takes the identical _ready path (_set_state(IDLE) then a deferred loop start) and is guarded out of _apply_posture entirely; `beacon` leaves the indicator rule as `is_visible and true` and builds no extra nodes. The 6 existing placements (Random_Game, _HumanoidWalker, _Hybrid, _Placed, _SimulatedAnnealing, TemplateMap_Descent13, all writing the token `r_c:0:0:1#4`) render byte-identically, and the numeric-shorthand span path still ends in _restart_cycle_loop() exactly as before.",
-        "was": "A cube that sank out and rose back in on randomised timing. Every export was a DURATION - waits, sink, rise, collider lead and lag - and a still cannot photograph a duration, so the runner correctly refused it as having no turnable knobs. posture lifts the CycleState enum, which already drives height, colour, indicator and collider together but could never be selected from outside the loop. warning names the answer the cube already shipped (a lit mote on its crown) and puts it in the hazard family's vocabulary.",
-        "notes": "The fixture pins posture=leaving because that is the one pose where all four warning values are photographically distinct: beacon lights the mote, stain marks the floor, cage stands the bars, none shows a bare cube. At a resting pose beacon and none are identical by construction - which is the axis's own point, not a harness fault. cycle_seed pins _rng, whose randomize() would otherwise make five variants five different moments. Map syntax: r_c:0:0:1#posture=sunken#warning=cage.",
-        "declined": "Every timing export (wait_min_seconds, wait_span_seconds, sink_duration, rise_duration, disable_collider_delay, enable_collider_delay) is time-domain and invisible to a still. sink_distance was considered and left out: on a 1 m cube it is a distance, and posture already photographs the two ends of the travel."
-      },
-      "name": "Random Cycle Cube",
-      "lookup_name": "r_c",
-      "description": "Cube that sinks out and rises back in on randomized timing, with in/out state indicator and collider gating.",
-      "scene": "res://commons/primitives/cubes/random_cycle_cube.tscn",
-      "category": "hazards",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "randomness"
-      ],
-      "sequence": "randomness",
-      "complexity": "beginner",
-      "tags": [
-        "animation",
-        "hazards",
-        "probability",
-        "procedural"
-      ],
-      "dev_themes": [
-        "hazards",
-        "procedural",
-        "randomness"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box",
-            "sphere"
-          ],
-          "operations": [
-            "create_primitives",
-            "position_children"
-          ]
-        },
-        "material": {
-          "type": "shader",
-          "shading_model": "wireframe",
-          "key_properties": [
-            "emission",
-            "grid_overlay",
-            "metallic",
-            "transparency"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "entry",
-        "measured_footprint_cells": 1,
-        "footprint_source": "measured"
-      },
-      "measurements": {
-        "aabb_size": [
-          1.0,
-          1.31,
-          1.0
-        ],
-        "aabb_center": [
-          0.0,
-          0.16,
-          0.0
-        ],
-        "grid_cells": [
-          1.0,
-          1.0
-        ],
-        "max_dimension_m": 1.31,
-        "measured_at": "2026-04-29T07:09:56.762620Z"
-      },
-      "footprint_measured": [
-        1.0,
-        1,
-        1.0
-      ],
-      "spatial_profile": {
-        "dir_group": "floor",
-        "range": 4,
-        "density": "medium",
-        "min_clearance": 1,
-        "stack_priority": 0.5,
-        "approach_dir": "any",
-        "derived_at": "2026-04-29T09:39:46.242943Z",
-        "derived_from": "aabb_size + category"
-      },
-      "qfep_connection": "A floor tile with its own randomized schedule: it sinks, drops its collider after a 0.2-second grace, waits hidden, rises again. Ground stops being a promise and becomes a rhythm you must read off the state colors."
-    }
-  }
+	"artifacts": {
+		"r_c": {
+			"dna": {
+				"promoted": "2026-08-03",
+				"stage": "2 - variation",
+				"axes": {
+					"posture": [
+						"cycle",
+						"seated",
+						"leaving",
+						"sunken",
+						"arriving"
+					],
+					"warning": [
+						"beacon",
+						"stain",
+						"cage",
+						"none"
+					]
+				},
+				"fixture": {
+					"posture": "leaving",
+					"cycle_seed": 20260803
+				},
+				"default": "posture=cycle, warning=beacon - both no-ops. `cycle` takes the identical _ready path (_set_state(IDLE) then a deferred loop start) and is guarded out of _apply_posture entirely; `beacon` leaves the indicator rule as `is_visible and true` and builds no extra nodes. The 6 existing placements (Random_Game, _HumanoidWalker, _Hybrid, _Placed, _SimulatedAnnealing, TemplateMap_Descent13, all writing the token `r_c:0:0:1#4`) render byte-identically, and the numeric-shorthand span path still ends in _restart_cycle_loop() exactly as before.",
+				"was": "A cube that sank out and rose back in on randomised timing. Every export was a DURATION - waits, sink, rise, collider lead and lag - and a still cannot photograph a duration, so the runner correctly refused it as having no turnable knobs. posture lifts the CycleState enum, which already drives height, colour, indicator and collider together but could never be selected from outside the loop. warning names the answer the cube already shipped (a lit mote on its crown) and puts it in the hazard family's vocabulary.",
+				"notes": "The fixture pins posture=leaving because that is the one pose where all four warning values are photographically distinct: beacon lights the mote, stain marks the floor, cage stands the bars, none shows a bare cube. At a resting pose beacon and none are identical by construction - which is the axis's own point, not a harness fault. cycle_seed pins _rng, whose randomize() would otherwise make five variants five different moments. Map syntax: r_c:0:0:1#posture=sunken#warning=cage.",
+				"declined": "Every timing export (wait_min_seconds, wait_span_seconds, sink_duration, rise_duration, disable_collider_delay, enable_collider_delay) is time-domain and invisible to a still. sink_distance was considered and left out: on a 1 m cube it is a distance, and posture already photographs the two ends of the travel."
+			},
+			"name": "Random Cycle Cube",
+			"lookup_name": "r_c",
+			"description": "Cube that sinks out and rises back in on randomized timing, with in/out state indicator and collider gating.",
+			"scene": "res://commons/primitives/cubes/random_cycle_cube.tscn",
+			"category": "hazards",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"sequence": "randomness",
+			"complexity": "beginner",
+			"tags": [
+				"animation",
+				"hazards",
+				"probability",
+				"procedural"
+			],
+			"dev_themes": [
+				"hazards",
+				"procedural",
+				"randomness"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.242943Z",
+				"derived_from": "aabb_size + category"
+			},
+			"qfep_connection": "A floor tile with its own randomized schedule: it sinks, drops its collider after a 0.2-second grace, waits hidden, rises again. Ground stops being a promise and becomes a rhythm you must read off the state colors."
+		}
+	}
 }

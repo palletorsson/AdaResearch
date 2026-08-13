@@ -1,140 +1,227 @@
 {
- "artifacts": {
-  "exhibit_podium": {
-   "dna": {
-    "promoted": "2026-07-27",
-    "stage": "2 - variation",
-    "axes": {
-     "house": [
-      "white_cube",
-      "wunderkammer",
-      "didactic",
-      "derelict",
-      "depot",
-      "forensic"
-     ],
-     "reserve": [
-      "none",
-      "armature",
-      "ghost",
-      "shroud"
-     ]
-    },
-    "default": "regard=plain + reserve=none is the legacy lineage for the 223 bare placements.",
-    "note": "ONE DEFAULT-PATH CHANGE, accepted knowingly: #size:s|m|l previously hit float(\"s\")==0.0 and built a degenerate ZERO-WIDTH box; it now resolves to real dimensions. Blast radius verified as exactly 3 auto-generated preview maps (Prop_podium_s/m/l); the other 223 placements carry no size token. Invisible-to-visible, but it does redefine #size: for future maps. NAMING DEBT: regard here means institutional REGISTER, which is exhibit_furniture.house; it should converge on house once the vocabularies are aligned."
-   },
-   "lookup_name": "exhibit_podium",
-   "scene": "res://commons/artifacts/exhibits/exhibit_podium.tscn",
-   "class_name": "ExhibitPodium",
-   "name": "Exhibit Podium (empty, waiting)",
-   "category": "exhibit",
-   "complexity": "beginner",
-   "description": "An empty plinth with a soft top light - the exhibit affordance itself, before any exhibit. Planted by the gallery-DNA generator to mark hosting capacity; filled later by the Curator or placement engines. Config: size, height, kind (podium/dais)."
-  },
-  "exhibit_vitrine": {
-   "dna": {
-    "promoted": "2026-07-27",
-    "stage": "2 - variation",
-    "axes": {
-     "enclosure": [
-      "box",
-      "bell",
-      "cradle",
-      "niche",
-      "open"
-     ],
-     "guard": [
-      "none",
-      "label",
-      "fixture",
-      "frame",
-      "hood",
-      "cordon"
-     ]
-    },
-    "default": "enclosure=box + guard=none rebuilds HEAD statement for statement; 162 placements unchanged.",
-    "note": "RENAMED from `regard` to `guard` after the review: on exhibit_podium `regard` names the institutional register, while here it named the barrier between visitor and slot - which is exactly exhibit_furniture.guard. One word cannot mean both across three artifacts standing in the same room. The old #regard: token is still honoured. Empty value spelled `none`, matching the rest of the family."
-   },
-   "lookup_name": "exhibit_vitrine",
-   "scene": "res://commons/artifacts/exhibits/exhibit_vitrine.tscn",
-   "class_name": "ExhibitVitrine",
-   "name": "Exhibit Vitrine (empty, waiting)",
-   "category": "exhibit",
-   "complexity": "beginner",
-   "description": "An empty glass case on a dark base - the wall-side affordance for small precious things. Sets the visitor's pausing rhythm before the collection exists."
-  },
-  "exhibit_furniture": {
-   "dna": {
-    "promoted": "2026-07-27",
-    "stage": "2 - variation",
-    "axes": {
-     "house": [
-      "white_cube",
-      "wunderkammer",
-      "depot",
-      "forensic",
-      "didactic",
-      "derelict"
-     ],
-     "guard": [
-      "none",
-      "label",
-      "fixture",
-      "frame",
-      "hood",
-      "cordon"
-     ]
-    },
-    "default": "house=white_cube + guard=none is the legacy lineage; 1077 placements unchanged.",
-    "note": "Order matters: kind: must stay the FIRST config segment (tools/furnish_gallery.py classifies slots with startswith). guard:rail and guard:hood grow the footprint past the artifact's own cell. house does not apply to kind:sign_exit/sign_fire - statutory colours are the building's obligation, not the curator's."
-   },
-   "lookup_name": "exhibit_furniture",
-   "scene": "res://commons/artifacts/exhibits/exhibit_furniture.tscn",
-   "class_name": "ExhibitFurniture",
-   "name": "Exhibit Furniture (the display family)",
-   "category": "exhibit",
-   "complexity": "intermediate",
-   "description": "The display-furniture family as one parametric artifact - kind selects the body: floating_wall (MoMA hover with contact-shadow accent), plinth s/m/l, hollow_plinth, platform, table_2m, vitrine_tall, cabinet, infoboard, sign_exit, sign_fire (with the little red cylinder). All empty, all waiting. Config: kind, size, w, h."
-  },
-  "sim_cube": {
-   "name": "Sim Cube — the common wrapper",
-   "lookup_name": "sim_cube",
-   "scene": "res://commons/artifacts/sim_cube/sim_cube.tscn",
-   "category": "exhibit",
-   "artifact_type": "wrapper",
-   "description": "A 2m housing on a 1m cube plinth that integrates a simulation into map space — the grid cell made visible. Five family styles (gridglass/tank/cage/shadowbox/openframe) keep housed artifacts recognizable by nature, plus six stand families (table_display_1m/2m, podium, plinth, frame, pedestal). DNA: family selects the enclosure; fit selects who holds authority over size — metric lets the housing contain-scale the mounted artifact, raw lets the artifact keep its authored size and overflow the case. Token: sim_cube#family:tank#mount:<lookup>#fit:raw.",
-   "dna": {
-    "promoted": "2026-07-29",
-    "stage": "2 - variation",
-    "axes": {
-     "family": [
-      "gridglass",
-      "tank",
-      "cage",
-      "shadowbox",
-      "openframe",
-      "table_display_1m",
-      "table_display_2m",
-      "podium",
-      "plinth",
-      "frame",
-      "pedestal"
-     ],
-     "fit": [
-      "metric",
-      "raw"
-     ]
-    },
-    "default": "family=gridglass, fit=metric - fit=metric is the pre-promotion call to fit_artifact(), so all 37 existing placements are unchanged; every one of them already names its own family in the token, so the family default is never reached in a shipped map",
-    "was": "family and mount were untyped String exports with no declared range, and the mounted artifact was ALWAYS contain-scaled by the em-square engine - the housing's authority over the specimen was a hard-coded call, not a choice",
-    "note": "family is taxonomy by enclosure: the case tells you what nature of thing is inside before it moves. fit asks the next question — whether the case gets to decide how big the thing is."
-   },
-   "footprint": [
-    2,
-    3,
-    2
-   ],
-   "qfep_connection": "Classification arrives as architecture: five housing families (tank, cage, gridglass, shadowbox, openframe) tell you what nature of thing is mounted inside before it does anything. The grid cell made literal, and taxonomy done by enclosure."
-  }
- }
+	"artifacts": {
+		"exhibit_podium": {
+			"dna": {
+				"promoted": "2026-07-27",
+				"stage": "2 - variation",
+				"axes": {
+					"house": [
+						"white_cube",
+						"wunderkammer",
+						"didactic",
+						"derelict",
+						"depot",
+						"forensic"
+					],
+					"reserve": [
+						"none",
+						"armature",
+						"ghost",
+						"shroud"
+					]
+				},
+				"default": "regard=plain + reserve=none is the legacy lineage for the 223 bare placements.",
+				"note": "ONE DEFAULT-PATH CHANGE, accepted knowingly: #size:s|m|l previously hit float(\"s\")==0.0 and built a degenerate ZERO-WIDTH box; it now resolves to real dimensions. Blast radius verified as exactly 3 auto-generated preview maps (Prop_podium_s/m/l); the other 223 placements carry no size token. Invisible-to-visible, but it does redefine #size: for future maps. NAMING DEBT: regard here means institutional REGISTER, which is exhibit_furniture.house; it should converge on house once the vocabularies are aligned."
+			},
+			"lookup_name": "exhibit_podium",
+			"scene": "res://commons/artifacts/exhibits/exhibit_podium.tscn",
+			"class_name": "ExhibitPodium",
+			"name": "Exhibit Podium (empty, waiting)",
+			"category": "exhibit",
+			"complexity": "beginner",
+			"description": "An empty plinth with a soft top light - the exhibit affordance itself, before any exhibit. Planted by the gallery-DNA generator to mark hosting capacity; filled later by the Curator or placement engines. Config: size, height, kind (podium/dais).",
+			"measurements": {
+				"aabb_size": [
+					0.61,
+					0.99,
+					0.61
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.99,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"exhibit_vitrine": {
+			"dna": {
+				"promoted": "2026-07-27",
+				"stage": "2 - variation",
+				"axes": {
+					"enclosure": [
+						"box",
+						"bell",
+						"cradle",
+						"niche",
+						"open"
+					],
+					"guard": [
+						"none",
+						"label",
+						"fixture",
+						"frame",
+						"hood",
+						"cordon"
+					]
+				},
+				"default": "enclosure=box + guard=none rebuilds HEAD statement for statement; 162 placements unchanged.",
+				"note": "RENAMED from `regard` to `guard` after the review: on exhibit_podium `regard` names the institutional register, while here it named the barrier between visitor and slot - which is exactly exhibit_furniture.guard. One word cannot mean both across three artifacts standing in the same room. The old #regard: token is still honoured. Empty value spelled `none`, matching the rest of the family."
+			},
+			"lookup_name": "exhibit_vitrine",
+			"scene": "res://commons/artifacts/exhibits/exhibit_vitrine.tscn",
+			"class_name": "ExhibitVitrine",
+			"name": "Exhibit Vitrine (empty, waiting)",
+			"category": "exhibit",
+			"complexity": "beginner",
+			"description": "An empty glass case on a dark base - the wall-side affordance for small precious things. Sets the visitor's pausing rhythm before the collection exists.",
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					1.5,
+					0.55
+				],
+				"aabb_center": [
+					0.0,
+					0.75,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.5,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"exhibit_furniture": {
+			"dna": {
+				"promoted": "2026-07-27",
+				"stage": "2 - variation",
+				"axes": {
+					"house": [
+						"white_cube",
+						"wunderkammer",
+						"depot",
+						"forensic",
+						"didactic",
+						"derelict"
+					],
+					"guard": [
+						"none",
+						"label",
+						"fixture",
+						"frame",
+						"hood",
+						"cordon"
+					]
+				},
+				"default": "house=white_cube + guard=none is the legacy lineage; 1077 placements unchanged.",
+				"note": "Order matters: kind: must stay the FIRST config segment (tools/furnish_gallery.py classifies slots with startswith). guard:rail and guard:hood grow the footprint past the artifact's own cell. house does not apply to kind:sign_exit/sign_fire - statutory colours are the building's obligation, not the curator's."
+			},
+			"lookup_name": "exhibit_furniture",
+			"scene": "res://commons/artifacts/exhibits/exhibit_furniture.tscn",
+			"class_name": "ExhibitFurniture",
+			"name": "Exhibit Furniture (the display family)",
+			"category": "exhibit",
+			"complexity": "intermediate",
+			"description": "The display-furniture family as one parametric artifact - kind selects the body: floating_wall (MoMA hover with contact-shadow accent), plinth s/m/l, hollow_plinth, platform, table_2m, vitrine_tall, cabinet, infoboard, sign_exit, sign_fire (with the little red cylinder). All empty, all waiting. Config: kind, size, w, h.",
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					0.99,
+					0.6
+				],
+				"aabb_center": [
+					0.0,
+					0.49,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.99,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		},
+		"sim_cube": {
+			"name": "Sim Cube \u2014 the common wrapper",
+			"lookup_name": "sim_cube",
+			"scene": "res://commons/artifacts/sim_cube/sim_cube.tscn",
+			"category": "exhibit",
+			"artifact_type": "wrapper",
+			"description": "A 2m housing on a 1m cube plinth that integrates a simulation into map space \u2014 the grid cell made visible. Five family styles (gridglass/tank/cage/shadowbox/openframe) keep housed artifacts recognizable by nature, plus six stand families (table_display_1m/2m, podium, plinth, frame, pedestal). DNA: family selects the enclosure; fit selects who holds authority over size \u2014 metric lets the housing contain-scale the mounted artifact, raw lets the artifact keep its authored size and overflow the case. Token: sim_cube#family:tank#mount:<lookup>#fit:raw.",
+			"dna": {
+				"promoted": "2026-07-29",
+				"stage": "2 - variation",
+				"axes": {
+					"family": [
+						"gridglass",
+						"tank",
+						"cage",
+						"shadowbox",
+						"openframe",
+						"table_display_1m",
+						"table_display_2m",
+						"podium",
+						"plinth",
+						"frame",
+						"pedestal"
+					],
+					"fit": [
+						"metric",
+						"raw"
+					]
+				},
+				"default": "family=gridglass, fit=metric - fit=metric is the pre-promotion call to fit_artifact(), so all 37 existing placements are unchanged; every one of them already names its own family in the token, so the family default is never reached in a shipped map",
+				"was": "family and mount were untyped String exports with no declared range, and the mounted artifact was ALWAYS contain-scaled by the em-square engine - the housing's authority over the specimen was a hard-coded call, not a choice",
+				"note": "family is taxonomy by enclosure: the case tells you what nature of thing is inside before it moves. fit asks the next question \u2014 whether the case gets to decide how big the thing is."
+			},
+			"footprint": [
+				2,
+				3,
+				2
+			],
+			"qfep_connection": "Classification arrives as architecture: five housing families (tank, cage, gridglass, shadowbox, openframe) tell you what nature of thing is mounted inside before it does anything. The grid cell made literal, and taxonomy done by enclosure.",
+			"measurements": {
+				"aabb_size": [
+					2.04,
+					3.02,
+					2.04
+				],
+				"aabb_center": [
+					0.0,
+					1.51,
+					0.0
+				],
+				"grid_cells": [
+					3,
+					3
+				],
+				"max_dimension_m": 3.02,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
+			}
+		}
+	}
 }

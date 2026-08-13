@@ -7,14 +7,14 @@
 	"artifacts": {
 		"pattern_machine_c": {
 			"dna": {
-			 "axes": {
-			 "exhibit": [
-			 "bolt",
-			 "unit",
-			 "operation",
-			 "catalogue"
-			 ]
-			 }
+				"axes": {
+					"exhibit": [
+						"bolt",
+						"unit",
+						"operation",
+						"catalogue"
+					]
+				}
 			},
 			"lookup_name": "pattern_machine_c",
 			"name": "Kaleidoscope Mill",
@@ -24,10 +24,30 @@
 			"scene": "res://commons/artifacts/pattern_machine_c/pattern_machine_c.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["array_tutorial", "color", "artmathematics", "patterngeneration"],
-			"footprint": [3, 3, 4],
-			"tags": ["dna", "pattern", "wallpaper", "kaleidoscope", "mill", "machine", "interactive", "carpet", "scifi", "placeable"],
-			"qfep_connection": "F_order: the 17 wallpaper groups as an interactive manufacturing apparatus — the player feeds a fragment, the mirrors multiply constraint into endless fabric.",
+			"map_sequences": [
+				"array_tutorial",
+				"color",
+				"artmathematics",
+				"patterngeneration"
+			],
+			"footprint": [
+				3,
+				3,
+				4
+			],
+			"tags": [
+				"dna",
+				"pattern",
+				"wallpaper",
+				"kaleidoscope",
+				"mill",
+				"machine",
+				"interactive",
+				"carpet",
+				"scifi",
+				"placeable"
+			],
+			"qfep_connection": "F_order: the 17 wallpaper groups as an interactive manufacturing apparatus \u2014 the player feeds a fragment, the mirrors multiply constraint into endless fabric.",
 			"parameters": {
 				"group": "p6m",
 				"palette": "alhambra",
@@ -35,7 +55,11 @@
 				"hopper_size": 4,
 				"carpet_repeats": 9,
 				"rotor_speed": 0.6,
-				"footprint": [3, 3, 4],
+				"footprint": [
+					3,
+					3,
+					4
+				],
 				"size_group": "large"
 			},
 			"size_group": "large",
@@ -45,55 +69,149 @@
 				"density": "high",
 				"reading_radius": 4,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.4,
+					2.48,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					1.24,
+					3.25
+				],
+				"grid_cells": [
+					6,
+					8
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		},
 		"mill_alhambra_p6m": {
 			"lookup_name": "mill_alhambra_p6m",
 			"name": "Mill: Alhambra p6m",
 			"description": "Kaleidoscope Mill pre-loaded with an Alhambra-palette p6m program (6-fold rotor).",
-			"category": "dna_grammar", "complexity": "intermediate",
-			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
-			"footprint": [3, 3, 4], "size_group": "large",
-			"tags": ["dna", "pattern", "mill", "kaleidoscope", "interactive", "live"],
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				3,
+				3,
+				4
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"mill",
+				"kaleidoscope",
+				"interactive",
+				"live"
+			],
 			"qfep_connection": "F_order: a named, editable carpet program.",
 			"delegate_to": "pattern_machine_c",
-			"delegate_params": {"group": "p6m", "palette": "alhambra", "motif_seed": 13}
+			"delegate_params": {
+				"group": "p6m",
+				"palette": "alhambra",
+				"motif_seed": 13
+			}
 		},
 		"mill_bauhaus_p4m": {
 			"lookup_name": "mill_bauhaus_p4m",
 			"name": "Mill: Bauhaus p4m",
 			"description": "Kaleidoscope Mill pre-loaded with a Bauhaus-palette p4m program (4-fold rotor).",
-			"category": "dna_grammar", "complexity": "intermediate",
-			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
-			"footprint": [3, 3, 4], "size_group": "large",
-			"tags": ["dna", "pattern", "mill", "kaleidoscope", "interactive", "live"],
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				3,
+				3,
+				4
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"mill",
+				"kaleidoscope",
+				"interactive",
+				"live"
+			],
 			"qfep_connection": "F_order: a named, editable carpet program.",
 			"delegate_to": "pattern_machine_c",
-			"delegate_params": {"group": "p4m", "palette": "bauhaus", "motif_seed": 7}
+			"delegate_params": {
+				"group": "p4m",
+				"palette": "bauhaus",
+				"motif_seed": 7
+			}
 		},
 		"mill_persian_p3": {
 			"lookup_name": "mill_persian_p3",
 			"name": "Mill: Persian p3",
 			"description": "Kaleidoscope Mill pre-loaded with a Persian-palette p3 program (3-fold rotor).",
-			"category": "dna_grammar", "complexity": "intermediate",
-			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
-			"footprint": [3, 3, 4], "size_group": "large",
-			"tags": ["dna", "pattern", "mill", "kaleidoscope", "interactive", "live"],
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				3,
+				3,
+				4
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"mill",
+				"kaleidoscope",
+				"interactive",
+				"live"
+			],
 			"qfep_connection": "F_order: a named, editable carpet program.",
 			"delegate_to": "pattern_machine_c",
-			"delegate_params": {"group": "p3", "palette": "persian", "motif_seed": 21}
+			"delegate_params": {
+				"group": "p3",
+				"palette": "persian",
+				"motif_seed": 21
+			}
 		},
 		"mill_memphis_pgg": {
 			"lookup_name": "mill_memphis_pgg",
 			"name": "Mill: Memphis pgg",
 			"description": "Kaleidoscope Mill pre-loaded with a Memphis-palette pgg program (2-fold rotor).",
-			"category": "dna_grammar", "complexity": "intermediate",
-			"include_in_map_data": true, "map_ready": true, "map_sequences": [],
-			"footprint": [3, 3, 4], "size_group": "large",
-			"tags": ["dna", "pattern", "mill", "kaleidoscope", "interactive", "live"],
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				3,
+				3,
+				4
+			],
+			"size_group": "large",
+			"tags": [
+				"dna",
+				"pattern",
+				"mill",
+				"kaleidoscope",
+				"interactive",
+				"live"
+			],
 			"qfep_connection": "F_order: a named, editable carpet program.",
 			"delegate_to": "pattern_machine_c",
-			"delegate_params": {"group": "pgg", "palette": "memphis", "motif_seed": 33}
+			"delegate_params": {
+				"group": "pgg",
+				"palette": "memphis",
+				"motif_seed": 33
+			}
 		}
 	}
 }

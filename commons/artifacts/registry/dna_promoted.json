@@ -7,14 +7,14 @@
 	"artifacts": {
 		"dna_facade_classical": {
 			"dna": {
-			 "axes": {
-			 "armature": [
-			 "none",
-			 "datum",
-			 "scaffold",
-			 "gantry"
-			 ]
-			 }
+				"axes": {
+					"armature": [
+						"none",
+						"datum",
+						"scaffold",
+						"gantry"
+					]
+				}
 			},
 			"lookup_name": "dna_facade_classical",
 			"name": "DNA: Classical",
@@ -41,6 +41,24 @@
 			"delegate_to": "facade_builder",
 			"delegate_params": {
 				"preset": "classical"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.02,
+					14.0,
+					0.59
+				],
+				"aabb_center": [
+					6.0,
+					7.0,
+					0.15
+				],
+				"grid_cells": [
+					13,
+					1
+				],
+				"max_dimension_m": 14.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		},
 		"dna_mesh_grammar_gen00_petals": {
@@ -69,6 +87,24 @@
 			"delegate_to": "mesh_grammar_artifact",
 			"delegate_params": {
 				"config_path": "res://commons/generated/gallery_best_of/configs/mesh-grammar-gallery__gen00_petals.json"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		},
 		"dna_primitive_stack_ps01_bauhaus_totem_green": {

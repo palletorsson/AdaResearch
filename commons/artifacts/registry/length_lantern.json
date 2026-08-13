@@ -1,9 +1,9 @@
 {
 	"id": "length_lantern",
 	"name": "Length Lantern",
-	"description": "A vector-MAGNITUDE machine for The Vector Bench. Grab the glowing cyan lantern at the tip of one amber arrow and pull it through the air — the machine instantly measures how far it reaches from the origin, |v| = sqrt(x^2+y^2+z^2), drawing its own right-triangle scaffolding in light. The three component legs (x along red, z on the floor, y rising) chain tip-to-tail, a faint right-angle box makes the Pythagoras construction explicit, and a floor diagonal sqrt(x^2+z^2) feeds the final rise so you watch sqrt nest inside sqrt. The lantern bead brightens to white-hot and a vertical cyan-violet ruler fills as |v| grows; near-zero length flips red. A SNAP-to-triple button (and slider release) plays a one-shot two-step resolve proof. Sibling of the catapult/force-bench teaching vectors.",
+	"description": "A vector-MAGNITUDE machine for The Vector Bench. Grab the glowing cyan lantern at the tip of one amber arrow and pull it through the air \u2014 the machine instantly measures how far it reaches from the origin, |v| = sqrt(x^2+y^2+z^2), drawing its own right-triangle scaffolding in light. The three component legs (x along red, z on the floor, y rising) chain tip-to-tail, a faint right-angle box makes the Pythagoras construction explicit, and a floor diagonal sqrt(x^2+z^2) feeds the final rise so you watch sqrt nest inside sqrt. The lantern bead brightens to white-hot and a vertical cyan-violet ruler fills as |v| grows; near-zero length flips red. A SNAP-to-triple button (and slider release) plays a one-shot two-step resolve proof. Sibling of the catapult/force-bench teaching vectors.",
 	"category": "vectors",
-	"theoreticalGrounding": "A magnitude is not a number you are told — it is a diagonal you can see the construction of. 3D length is two Pythagoras theorems stacked: one on the floor (sqrt(x^2+z^2)), one rising to meet it, resolving to |v| = sqrt(x^2+y^2+z^2).",
+	"theoreticalGrounding": "A magnitude is not a number you are told \u2014 it is a diagonal you can see the construction of. 3D length is two Pythagoras theorems stacked: one on the floor (sqrt(x^2+z^2)), one rising to meet it, resolving to |v| = sqrt(x^2+y^2+z^2).",
 	"artifacts": {
 		"length_lantern": {
 			"lookup_name": "length_lantern",
@@ -14,10 +14,26 @@
 			"scene": "res://commons/artifacts/length_lantern/length_lantern.tscn",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"],
-			"footprint": [1, 2, 1],
-			"tags": ["vector", "magnitude", "length", "machine", "vr", "pythagoras", "sqrt", "vector_bench", "placeable"],
-			"qfep_connection": "F_force: magnitude is the felt size of a vector — |v| is the diagonal the three components frame, length you can hold and watch brighten in your hand.",
+			"map_sequences": [
+				"forces"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"vector",
+				"magnitude",
+				"length",
+				"machine",
+				"vr",
+				"pythagoras",
+				"sqrt",
+				"vector_bench",
+				"placeable"
+			],
+			"qfep_connection": "F_force: magnitude is the felt size of a vector \u2014 |v| is the diagonal the three components frame, length you can hold and watch brighten in your hand.",
 			"parameters": {
 				"reach": 1.5,
 				"max_magnitude": 2.6,
@@ -26,15 +42,28 @@
 				"arrow_thickness": 0.014,
 				"workings": "outcome | trace | operands | expression - how much of the construction the bench draws (default expression)",
 				"norm": "euclidean | taxicab | chebyshev - which length |v| reports (default euclidean)",
-				"footprint": [1, 2, 1],
+				"footprint": [
+					1,
+					2,
+					1
+				],
 				"size_group": "small"
 			},
 			"dna": {
 				"promoted": "2026-08-03",
 				"stage": "2 - variation",
 				"axes": {
-					"workings": ["outcome", "trace", "operands", "expression"],
-					"norm": ["euclidean", "taxicab", "chebyshev"]
+					"workings": [
+						"outcome",
+						"trace",
+						"operands",
+						"expression"
+					],
+					"norm": [
+						"euclidean",
+						"taxicab",
+						"chebyshev"
+					]
 				},
 				"default": "workings=expression, norm=euclidean - the full construction (three legs chained tip-to-tail, the floor diagonal, the right-angle box, every midpoint label, the squares-and-sum column) reporting sqrt(x^2+y^2+z^2), which is exactly what the bench drew before promotion, so the 4 existing placements are unchanged",
 				"was": "the scaffolding hard-coded as the only way a magnitude could be shown, and the Euclidean norm hard-coded as the only thing length could mean - reach, max_magnitude, degenerate_threshold, show_sliders and arrow_thickness were reachable from a map token, but none of them was an argument, and none was exported, so the stage-2 sweep saw no knobs at all",
@@ -48,6 +77,24 @@
 				"density": "medium",
 				"reading_radius": 2,
 				"derived_from": "manual"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.63,
+					1.33,
+					1.32
+				],
+				"aabb_center": [
+					0.0,
+					0.27,
+					0.0
+				],
+				"grid_cells": [
+					2,
+					2
+				],
+				"max_dimension_m": 1.63,
+				"measured_at": "2026-08-12T04:39:51.280397Z"
 			}
 		}
 	}
