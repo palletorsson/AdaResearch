@@ -69,13 +69,19 @@ after the tile, apron derived by sealing. Gated: court-free plan builds
 identically (0.022% vs 1.020% noise floor). lab_room stands in a walled court
 under the museum's first open sky.
 
-**Open.** Courts chain — 12 after one building is 311 m of court; distribute
-across the corridor's joints next. The balcony void is designed, unbuilt
-(rows still count "exterior"). laser_measure took a 7 x 57 m court because its
-body still measures 50 m in Z — the court amplifies spike 06's broken config
-channel (**37 of 757** unreachable). The threshold sightline (13 accepts, or
-**0** if `candidates[:40]` is lifted). Court walkability asserted, not yet
-walker-proven.
+**Court walkability: walker-proven (`e0ceddc46`).** Round 1 stalled at z=133
+inside dome's clamped court (26 cells unlearned, exit 1); the negotiator now
+refuses any body wider than tile_w − 3 (FloorPlan carries its apron so the rung
+can know), 136 uncrossable courts fell back to open ground (261 → 125 rows), and
+round 2 walked the building plus ten courts to the goal centimetre — ok:true,
+z 296.04/296.0, **2** cells unlearned, exit 0.
+
+**Open.** Courts chain — 278 m of court after one 34 m building; distribute
+across the corridor's joints next. The balcony void is designed, unbuilt (rows
+still count "exterior"). laser_measure took a 7 × 57 m court because its body
+still measures 50 m in Z — spike 06's config channel (**37 of 757**
+unreachable). The threshold sightline (13 accepts, or **0** if
+`candidates[:40]` is lifted).
 
 > **A method note worth more than any of the above.** Three times on 08-13 a
 > session diagnosed the WORKING TREE instead of `HEAD` and was wrong — once
