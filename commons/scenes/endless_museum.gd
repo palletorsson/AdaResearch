@@ -1404,8 +1404,25 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		# `top` is the surface the body stands on. The negotiator already solved
 		# it (support_height_m), so it is taken from the plan rather than
 		# re-derived from the tile — re-deriving is how the two sides drift.
+		#
+		# AND `y` IS SEGMENT SPACE, NOT TILE SPACE. `tz` above is a TILE row —
+		# that is what the bounds check on the previous line tests it as. But
+		# _build_segment lays a tile row down at `y + VESTIBULE_H` (:1136) and
+		# every slot it hands the dealer carries the shifted value (:1152), so
+		# storing the raw row here put each planned object VESTIBULE_H = 4 m
+		# closer to the entrance than the negotiator placed it. 30 of the
+		# corpus's 281 interior rows landed inside the lobby, and it was
+		# invisible because _compose_auto_shot takes its standpoint from what was
+		# dealt — the camera moved with the error, so every published --em-plan
+		# frame looked correct and was displaced.
+		#
+		# HANDOVER §8's endemic bug in a new field: two places holding one
+		# number, hidden by a 1 m grid where 4 and 4 are indistinguishable by
+		# value. tools/em_white_cube_measure.py:165 and em_module_measure.py:42
+		# both add the vestibule; the one consumer that actually places objects
+		# did not. See doc/spatial/spikes/03_where_the_fifteen_go.md.
 		var cell: Dictionary = {
-			"x": tx, "y": tz, "rank": 2,
+			"x": tx, "y": tz + VESTIBULE_H, "rank": 2,
 			"top": float(row.get("support_height_m", 0.0)),
 		}
 		if _stamp(seg, scene, tok, cell, zbase, 1, {}, false):
