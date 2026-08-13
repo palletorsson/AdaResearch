@@ -111,6 +111,11 @@ const SPLIT_RANK_Z: float = 7.0
 const SPLIT_PITCH: float = 3.5
 const SPLIT_RANK_SIZE: int = 10
 
+## Hold every body where the axis put it, instead of letting it fall the 1.2 m of
+## FOOT_CLEARANCE before the shutter opens. FALSE IS THE SHIPPED BEHAVIOUR and a map that
+## does not set this is untouched. Set only by the capture bench, via dna.fixture — see
+## the note in _create_body for what it is holding still and what it is NOT fixing.
+@export var freeze_bodies: bool = false
 @export var random_seed: int = 20241103
 @export var enable_random_restart: bool = false
 @export var enable_debug_prints: bool = true
@@ -412,6 +417,24 @@ func _create_body(size: Vector3, mass: float, colour: Color) -> RigidBody3D:
 	body.linear_damp = 0.2
 	body.angular_damp = 0.2
 	body.can_sleep = false
+	# HOLD THE POSE THE AXIS BUILT. Default false, so a map gets today's behaviour to the
+	# byte; only the capture bench ever sets this, through dna.fixture.
+	#
+	# WHY IT IS NEEDED, measured rather than argued. Every body spawns with FOOT_CLEARANCE
+	# = 1.2 m of air beneath it, and capture_config_sweep settles 1.1 s before the shutter.
+	# Free fall of 1.2 m takes sqrt(2*1.2/9.8) = 0.495 s, so the herd lands at ~4.85 m/s
+	# with the hip motors already driving, roughly 0.6 s before the frame exists. The
+	# entire y-ladder this axis builds — root heights 1.83 / 2.20 / 2.53 / 2.98 / 3.98 m
+	# across the five values — is gone by then. The artifact's own recorded measurement
+	# agrees and nobody read it that way: aabb_size [40.0, 2.21, 40.0] with centre y 0.71
+	# puts the top of everything at 1.815 m, BELOW drift's 2.400 m spawn torso top and far
+	# below runaway's 4.250 m. That number was taken after the fall.
+	#
+	# AND THIS DOES NOT MAKE THE ARTIFACT CORRECT, it makes it PHOTOGRAPHABLE. What a
+	# player meets is still the fallen herd, and bipeds that topple within a second of
+	# spawning are a real defect in a walker demo. Recorded in the registry rather than
+	# papered over here; the fix is the artifact's own, not the bench's.
+	body.freeze = freeze_bodies
 	var collider := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
 	shape.size = size
