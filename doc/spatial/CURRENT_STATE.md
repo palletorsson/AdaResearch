@@ -46,13 +46,19 @@ refusals are now `escalation` 189 and `physical_overlap` 107.
 - `dna.axes` is on **757** artifacts, not the 184 CLAUDE.md claims.
 - `28 of 30` museums in the threshold work is two denominators, not an error.
 
-**Open, and not started.** Three faults between the plan and the walker, all in
-`endless_museum.gd`: `_stamp` never applies the plan's **rotation** (65 of 65);
-the plan path never advances the **pool cursor**, so `--em-plan` repeats one
-chapter; `_deal_from_plan` keys on **building**, so 6 of 7 crowned chapters
-receive another chapter's cast and print `chapter=-`. Also open: `dna.fixture`
-cannot reach an artifact whose script is not on its scene root (**37 of 757**),
-and the threshold sightline (13 accepts, or **0** if `candidates[:40]` is lifted).
+**Assembler faults: closed 08-13 (second session).** Rotation reaches the scene
+with the grid's sign (`cc600fc3f`, 61 of 507 rows turn, 72.4% of pixels move in a
+controlled same-camera pair); the dealing cursor advances a CHAPTER per planned
+segment (`d0aec8ad4`, before: sainsbury x3, after: sainsbury / uffizi /
+grande-galerie); the banner names its chapter (`9a88d3196`,
+`chapter=primitives / transformation / symmetry`). `--em-plan --em-segments=N`
+is now a corridor that walks the curriculum in order and says so.
+
+**Open.** The exporter's key must become **(building, chapter)** — first-wins
+still stamps a loser chapter's room with the winner's cast, now visibly
+(`export_museum_plan.py`, not the assembler). `dna.fixture` cannot reach an
+artifact whose script is not on its scene root (**37 of 757**). The threshold
+sightline (13 accepts, or **0** if `candidates[:40]` is lifted).
 
 > **A method note worth more than any of the above.** Three times on 08-13 a
 > session diagnosed the WORKING TREE instead of `HEAD` and was wrong — once
