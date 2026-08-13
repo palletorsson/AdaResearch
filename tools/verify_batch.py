@@ -19,11 +19,17 @@ Tokens whose closest pair falls under --floor are printed as a repair list, read
 to paste into the next round's `improve` targets with the number attached. A
 measurement handed to an agent is worth more than a warning.
 
-WHAT A LOW NUMBER DOES NOT MEAN. It is not a verdict on the artifact. Six things
+WHAT A LOW NUMBER DOES NOT MEAN. It is not a verdict on the artifact. Seven things
 produce a flat sweep and only one of them is a dead axis — see
-doc/DNA_PROMOTION_BRIEF.md. Read the subject share printed beside it: under ~6%
-means the subject is too small to measure and the framing is the fault, not the
-design.
+doc/DNA_PROMOTION_BRIEF.md.
+
+Read the subject share printed beside it, but do NOT read it alone. A low share
+has two causes and only one is a framing fault: the subject can be SMALL (camera
+too far back) or AIRY (correctly framed and simply full of gaps). This tool asks
+the bounding box which it is — see subject_box(). It called both a framing fault
+until 2026-08-13, and was wrong twice: `taxonomy_hall` at 10.4% share and
+`selection_garden` at 5.7% are both framed correctly, with boxes filling 75.7%
+and 81.7% of frame width. Tightening either would have clipped the ends.
 """
 
 from __future__ import annotations
@@ -90,8 +96,41 @@ def sweep(slug: str, tokens: list, max_variants: int) -> dict:
     return out
 
 
+def subject_box(im) -> tuple:
+    """(box width %, box height %, how full the box is %) for one frame.
+
+    A LOW SUBJECT SHARE HAS TWO CAUSES AND ONLY ONE IS A FRAMING FAULT. If the
+    artifact's bounding box is small in frame, the camera is too far back and
+    `dna.framing` is the fix. If the box is large but AIRY — a bench of thin
+    pickets, four separated bays on an apron — then the framing is already right
+    and tightening it only clips the ends.
+
+    Measured, both cases exist and the old share-only test called both a framing
+    fault: `taxonomy_hall` reads 10.4% share with its box filling 75.7% of frame
+    width, and `selection_garden` reads 5.7% share with its box filling 81.7% of
+    width and only 27.6% of the box's own area. Neither is mis-framed.
+    """
+    W, H = im.size
+    bg = im.getpixel((3, 3))
+    px = im.load()
+    xs0, ys0, xs1, ys1, ink = W, H, 0, 0, 0
+    for y in range(H):
+        for x in range(W):
+            t = px[x, y]
+            if abs(t[0] - bg[0]) + abs(t[1] - bg[1]) + abs(t[2] - bg[2]) > 26:
+                ink += 1
+                if x < xs0: xs0 = x
+                if x > xs1: xs1 = x
+                if y < ys0: ys0 = y
+                if y > ys1: ys1 = y
+    if ink == 0:
+        return (0.0, 0.0, 0.0)
+    bw, bh = max(1, xs1 - xs0), max(1, ys1 - ys0)
+    return (100.0 * bw / W, 100.0 * bh / H, 100.0 * ink / (bw * bh))
+
+
 def measure(entries: list, slug: str) -> tuple:
-    """(closest pair %, its two labels, mean subject share %)"""
+    """(closest pair %, its two labels, mean subject share %, box of one frame)"""
     from PIL import Image, ImageChops
     ims = []
     for e in entries:
@@ -100,7 +139,7 @@ def measure(entries: list, slug: str) -> tuple:
             continue
         ims.append((e["label"], Image.open(p).convert("RGB")))
     if len(ims) < 2:
-        return (None, None, None)
+        return (None, None, None, None)
 
     n = ims[0][1].size[0] * ims[0][1].size[1]
     shares = []
@@ -109,6 +148,7 @@ def measure(entries: list, slug: str) -> tuple:
         px = sum(1 for t in im.getdata()
                  if sum(abs(a - b) for a, b in zip(t, bg)) > 26)
         shares.append(100.0 * px / n)
+    box = subject_box(ims[0][1])
 
     worst, pair = 101.0, None
     for i in range(len(ims)):
@@ -117,7 +157,7 @@ def measure(entries: list, slug: str) -> tuple:
             pct = 100.0 * sum(1 for t in d.getdata() if sum(t) > 24) / n
             if pct < worst:
                 worst, pair = pct, (ims[i][0], ims[j][0])
-    return (worst, pair, sum(shares) / len(shares))
+    return (worst, pair, sum(shares) / len(shares), box)
 
 
 def main() -> int:
@@ -139,13 +179,22 @@ def main() -> int:
             rows.append((tok, None, None, None, "NO FRAMES — the sweep produced nothing"))
             repair.append((tok, "sweep produced no frames at all"))
             continue
-        worst, pair, share = measure(entries, a.slug)
+        worst, pair, share, box = measure(entries, a.slug)
         if worst is None:
             rows.append((tok, None, None, share, "only one frame"))
             continue
         note = ""
         if share is not None and share < 6.0:
-            note = "subject under 6% of frame — suspect the FRAMING, not the axis"
+            # A LOW SHARE IS NOT BY ITSELF A FRAMING FAULT. Ask the bounding box
+            # whether the subject is SMALL (camera too far back) or AIRY (correctly
+            # framed and simply full of gaps). See subject_box().
+            bw, bh, fill = box if box else (0.0, 0.0, 0.0)
+            if max(bw, bh) >= 55.0:
+                note = (f"sparse, not small — box is {bw:.0f}x{bh:.0f}% of frame and "
+                        f"{fill:.0f}% full. The framing is fine; do not tighten it")
+            else:
+                note = (f"subject under 6% and box only {bw:.0f}x{bh:.0f}% of frame "
+                        f"— suspect the FRAMING, not the axis")
         rows.append((tok, worst, pair, share, note))
         if worst < a.floor:
             repair.append((tok, f"closest pair {worst:.2f}% ({pair[0]} vs {pair[1]}), "

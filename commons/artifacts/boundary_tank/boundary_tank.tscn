@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/boundary_tank/boundary_tank.gd" id="1"]
+
+[node name="BoundaryTank" type="Node3D"]
+script = ExtResource("1")

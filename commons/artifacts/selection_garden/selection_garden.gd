@@ -107,10 +107,12 @@ const SELECTION_SRC := preload("res://algorithms/machinelearning/non_teleologica
 ## population. The family word (45 declarations across the corpus), taken with the
 ## three-rung sub-list eight siblings already carry. `axiom` refused: see dna.declines.
 ##   result    the five plots and nothing else.
-##   trace     + the founder standing on every blade: a pale ghost of that lineage's
-##             OWN founding height, proud on the blade's face. Where the coloured
-##             blade rises above it the lineage gained; where the ghost rises above
-##             the blade it lost.
+##   trace     + the founder TICKED on every blade: a bone mark at that lineage's OWN
+##             founding height, proud on the blade's face. Where the coloured blade
+##             rises above the tick the lineage gained; where the tick stands above
+##             the blade on its riser it lost. The tick is drawn on every SLOT,
+##             including the ones a cull emptied, so `culled` reads as a removal -
+##             ten founders, three bodies - rather than as a shorter rank.
 ##   longhand  + the fixed gauge (one stile per plot, ticked at 0.00/0.25/0.50/0.75/
 ##             1.00 of the trait, the SAME five heights in every plot at every rung)
 ##             and the two means ruled across the rank: the founding mean in bone,
@@ -185,11 +187,28 @@ const BLADE_W: float = 0.056           # 5.80 px of screen width with the depth
 const BLADE_D: float = 0.014
 const H_MIN: float = 0.09              # a trait of 0.0 is still a body, not a hole
 const H_SPAN: float = 0.72             # 0.1 of trait = 7.72 px of height
-const GHOST_W: float = 0.034
-const GHOST_D: float = 0.012
-const CAP_W: float = 0.090             # the founder cap overhangs the blade, so the
-const CAP_T: float = 0.020             # mark changes the SILHOUETTE even when the
-const CAP_D: float = 0.016             # founding and final heights coincide
+## THE FOUNDER MARK IS A TICK, NOT A BODY, AND THAT WAS SETTLED BY LOOKING. It was
+## first a full-height bone rib standing proud on each blade's face. Every number was
+## green - `evidence` measured 18.98% mean focus, above the WEAK bar, no twins - and
+## the rendered tile was a white scaffold in which the coloured blades were slivers:
+## the axis that adds the proof was hiding the trait the other axis moves. A rib
+## 3.85 px wide on a blade 5.96 px wide covers 65% of its face.
+##
+## The tick costs bite and is worth it: `evidence` fell to 17.16% mean and `variation`
+## ROSE from 23.72% to 24.93%, because the trait is now visible for it to change.
+## TAB_W 0.090 is chosen against the PITCH, not against the blade: 0.090 x 0.81388 +
+## 0.020 x 0.58104 = 0.08487 m of screen against 0.07976 m of pitch, so adjacent ticks
+## abut with 0.57 px of overlap. A rank of equal founders therefore reads as one
+## continuous line, which is what equal founders are; ticks at different heights never
+## meet. The overhang past the blade is 1.54 px each side.
+const TAB_W: float = 0.090             # 9.42 px, centred ON the founder height
+const TAB_T: float = 0.030             # 3.68 px
+const TAB_D: float = 0.020
+## Only drawn where the founder stands ABOVE the blade's top, so the tick is never a
+## floating mark: a lineage that lost height carries a bone post up to where it began,
+## and a lineage that is GONE carries one all the way from the bed.
+const RISER_W: float = 0.020           # 2.71 px
+const RISER_D: float = 0.014
 
 const APRON_H: float = 0.05
 const SLAB_H: float = 0.02
@@ -349,7 +368,13 @@ func _founders() -> Array[float]:
 ## a sort whose result depends on the algorithm would make two builds of one value
 ## two different objects. Ten elements; the cost is nothing.
 func _sorted(v: Array[float]) -> Array[float]:
-	var out: Array[float] = v.duplicate()
+	# Copied element by element rather than with duplicate(), whose return type on a
+	# typed array is exactly the kind of thing that parses today and fails on a
+	# different engine build. Ten elements.
+	var out: Array[float] = []
+	out.resize(v.size())
+	for i in range(v.size()):
+		out[i] = v[i]
 	for i in range(1, out.size()):
 		var key: float = out[i]
 		var j: int = i - 1
@@ -509,15 +534,18 @@ func _build() -> void:
 				var h: float = _height(xs[i])
 				_box(st, Vector3(bx, BED_Y + h * 0.5, 0.0), Vector3(BLADE_W, h, BLADE_D), _ramp(xs[i]))
 			if evidence != "result":
-				# The founder of THIS lineage, on this blade, in every plot. Proud in
-				# +z by half a blade depth so it is a rib on the face and never a body
-				# standing behind one; the cap overhangs the blade in x so the mark
-				# changes the silhouette even where the two heights coincide.
+				# The founder of THIS lineage, on this blade, in every plot - and on
+				# every slot, INCLUDING the ones a cull emptied, which is what makes
+				# `culled` legible as a removal rather than as a short rank. Proud in
+				# +z so the tick is never a body standing behind one.
 				var gh: float = _height(founders[i])
-				_box(st, Vector3(bx, BED_Y + gh * 0.5, BLADE_D * 0.5 + GHOST_D * 0.5),
-					Vector3(GHOST_W, gh, GHOST_D), GHOST_C)
-				_box(st, Vector3(bx, BED_Y + gh - CAP_T * 0.5, BLADE_D * 0.5 + CAP_D * 0.5),
-					Vector3(CAP_W, CAP_T, CAP_D), GHOST_C)
+				var top: float = _height(xs[i]) if alive[i] else 0.0
+				if gh > top:
+					var rise: float = gh - top
+					_box(st, Vector3(bx, BED_Y + top + rise * 0.5, BLADE_D * 0.5 + RISER_D * 0.5),
+						Vector3(RISER_W, rise, RISER_D), GHOST_C)
+				_box(st, Vector3(bx, BED_Y + gh, BLADE_D * 0.5 + TAB_D * 0.5),
+					Vector3(TAB_W, TAB_T, TAB_D), GHOST_C)
 
 		if evidence == "longhand":
 			_rule_plot(st, cx, xs, alive, fmean)
