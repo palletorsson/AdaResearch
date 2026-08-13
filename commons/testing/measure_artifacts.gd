@@ -377,7 +377,41 @@ func _load_json(path: String) -> Dictionary:
 # AABB MEASUREMENT (from check_aabb_below_ground.gd)
 # ══════════════════════════════════════════════════════════════════
 
-## The artifact's BODY, in the measurement root's own space, with provenance.
+## The artifact's BODY, in its own frame AT ITS OWN SCALE, with provenance.
+##
+## Fixed 2026-08-12. This used to end `root.global_transform.affine_inverse() * body`,
+## which is the root's OWN space — so an artifact that sets its own root scale in
+## `_ready()` had that scale divided straight back out of the recorded box.
+## CoordinateSystem3M sets `scale = Vector3(1.5, 1.5, 1.5)`; the registry recorded
+## 4.75 x 3.35 x 3.35 while the body a player walks around is 7.13 x 5.02 x 5.02.
+##
+## The scale belongs IN the number, because that is how the number is CONSUMED.
+## `GridSystem.cube_size` is 1.0, so one grid cell is one world metre, and
+## `sync_footprints.py` ceils `grid_cells` straight into `spatial_needs.
+## footprint_cells`. `GridInteractablesComponent.gd:1080` applies a map token's
+## scale as `artifact_object.scale *= scale_factor` — MULTIPLICATIVE — so the
+## artifact's own root scale is present in the world body of every placement, and
+## not one of the ~40 consumers of these numbers multiplies by anything. Recording
+## root-local and storing the factor beside it was the alternative; it would have
+## required every one of those consumers to learn a new field. The root scale is
+## set in the artifact's own code, which makes it as intrinsic to the artifact as
+## its mesh sizes. It goes in the number.
+##
+## But only the SCALE. The root's translation and rotation are still divided out,
+## and measuring proved why: `XRToolsPickable` extends RigidBody3D, so
+## `edible_mushroom` and the three grab cubes FALL about 1.5 m during the settle
+## window, and `ruth_asawa_sculpture` spins on `rotation.y += rotation_speed *
+## delta`. Their world placement is a function of when you looked, not a property
+## of the artifact — a registry written from it would not reproduce between runs.
+## Scale is authored, static and reproducible; the rigid part is not.
+##
+## The removal now happens PER MESH rather than on the merged box, which fixes a
+## second fault of the old line for free: un-rotating an already-axis-aligned box
+## can only grow it, so every artifact with a self-rotation was over-reported.
+## `ruth_asawa_sculpture` measured 7.67 m wide that way against a true 5.54 m.
+##
+## Provenance carries `root_scale` and the exact old `root_local_size`, so the
+## change stays auditable from the data alone.
 ##
 ## Rewritten 2026-08-11 against doc/plans/capture_measure_faults.md, which
 ## documented five faults in the dressing-room twin of this function. Three of
@@ -395,10 +429,21 @@ func _load_json(path: String) -> Dictionary:
 ##   * the result says how it was reached, so a fallback can never again be
 ##     mistaken for a measurement.
 ##
-## Walks in GLOBAL space and converts once at the end, which also removes the
+## Walks in GLOBAL space and converts per mesh, which also removes the
 ## old double-application of `child.transform` on nested subtrees.
 func _measure_body(root: Node3D) -> AABB:
+	# The recording frame: rigidly pinned to the artifact's own origin, carrying
+	# the artifact's own scale. `ref` is the root's transform with the scale
+	# taken out of the basis, so `ref_inv * mesh_global` leaves scale * mesh.
+	var root_xform: Transform3D = root.global_transform
+	var root_scale: Vector3 = root_xform.basis.get_scale()
+	var ref_inv: Transform3D = Transform3D(
+		root_xform.basis.orthonormalized(), root_xform.origin).affine_inverse()
+
 	var body := AABB()
+	# The old root-local box, accumulated in parallel purely so provenance can
+	# state what this measurement used to be. Nothing consumes it.
+	var body_root_local := AABB()
 	var signage := AABB()
 	var effects := AABB()
 	var has_body := false
@@ -444,7 +489,8 @@ func _measure_body(root: Node3D) -> AABB:
 		if local.size.length_squared() < 0.0001:
 			continue
 
-		var world: AABB = vi.global_transform * local
+		var global_box: AABB = vi.global_transform * local
+		var world: AABB = ref_inv * global_box
 
 		if vi is Label3D or vi is Sprite3D:
 			signage = world if not has_signage else signage.merge(world)
@@ -461,7 +507,12 @@ func _measure_body(root: Node3D) -> AABB:
 			widest_name = String(vi.name)
 		counted += 1
 		body = world if not has_body else body.merge(world)
+		body_root_local = (global_box if not has_body else body_root_local.merge(global_box))
 		has_body = true
+
+	# What this measurement used to say, computed exactly the old way: merge in
+	# global space, then un-transform the merged box by the full root transform.
+	var root_local: AABB = root_xform.affine_inverse() * body_root_local
 
 	_last_measure = {
 		"counted_meshes": counted,
@@ -473,13 +524,29 @@ func _measure_body(root: Node3D) -> AABB:
 		"effects": _aabb_dict(effects) if has_effects else null,
 		"fallback": not has_body,
 		"settle_s": _settle,
+		# The frame the number is in, said out loud, and the root transform that
+		# used to be silently divided out of it.
+		"frame": "root_rigid_scaled",
+		"root_scale": [snappedf(root_scale.x, 0.0001), snappedf(root_scale.y, 0.0001),
+			snappedf(root_scale.z, 0.0001)],
+		"root_scale_applied": not root_scale.is_equal_approx(Vector3.ONE),
+		# Reported, NOT applied — both are contaminated by physics settling and by
+		# any animation running during the settle window.
+		"root_position_unapplied": [snappedf(root_xform.origin.x, 0.001),
+			snappedf(root_xform.origin.y, 0.001), snappedf(root_xform.origin.z, 0.001)],
+		"root_rotation_deg_unapplied": [
+			snappedf(rad_to_deg(root_xform.basis.get_euler().x), 0.01),
+			snappedf(rad_to_deg(root_xform.basis.get_euler().y), 0.01),
+			snappedf(rad_to_deg(root_xform.basis.get_euler().z), 0.01)],
+		"root_local_size": [snappedf(root_local.size.x, 0.001),
+			snappedf(root_local.size.y, 0.001), snappedf(root_local.size.z, 0.001)],
 	}
 	if not has_body:
 		_last_measure["fallback_reason"] = (
 			"no visible, non-signage, non-effect geometry in the subtree"
 			+ (" (%d hidden, %d top-level skipped)" % [skipped_invisible, skipped_top_level.size()]))
 		return AABB()
-	return root.global_transform.affine_inverse() * body
+	return body
 
 
 func _aabb_dict(a: AABB) -> Dictionary:
