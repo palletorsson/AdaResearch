@@ -1156,7 +1156,20 @@ func _build_segment() -> void:
 				slots.append({"x": x, "y": z, "top": 0.8, "rank": 0})
 	if wr:
 		_stamp_wall_runs(seg, solid, wcells, wall_col, m_wall)
-	slots.sort_custom(func(a, b): return int(a["rank"]) < int(b["rank"]))
+	# DEPTH FIRST, then rank, then x — the same key em_sets._slot_before now
+	# uses. These two sorts must agree: _deal_segment picks the artifact from
+	# `_pick_pool(free[0].rank)`, so with slots rank-sorted `free[0]` was the
+	# hero plinth while depth-first placement took it LAST. Most leads were
+	# therefore selected as footprint>=2 pieces and then placed on one-cell
+	# threshold slots, where _seal_cells silently refuses them and spends the
+	# cell anyway. That was the whole of Chichu 3 -> 2, and it is why the
+	# Uffizi hero ended up holding a guest.
+	slots.sort_custom(func(a, b):
+		if int(a["y"]) != int(b["y"]):
+			return int(a["y"]) < int(b["y"])
+		if int(a["rank"]) != int(b["rank"]):
+			return int(a["rank"]) < int(b["rank"])
+		return int(a["x"]) < int(b["x"]))
 	var deal: Dictionary = _deal_segment(seg, slots, zbase, spec, tile, w, h)
 	var placed: int = int(deal.get("placed", 0))
 	var seg_seq: String = String(deal.get("sequence", ""))
