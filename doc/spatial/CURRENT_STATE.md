@@ -3,7 +3,64 @@
 *Fast-changing implementation state. Doctrine lives in `doc/SPATIAL_PIPELINE.md`
 (915 lines, commits `fdbfeb8d6` + `a8b7fef18`) on `origin/palm-scanner-door-entry`.*
 
-Updated 2026-08-12.
+Updated 2026-08-13.
+
+## What changed on 08-13
+
+Spikes 02–07 (`doc/spatial/spikes/`). Four faults closed, three found and left
+open, five numbers in this file and in `HANDOVER.md` corrected.
+
+**Closed.**
+
+| | |
+|---|---|
+| the overloaded zero | `lift_for` returns `0.0` for two reasons and the support test read one. Every body over `2 × (target_centre − min_lift)` = **1.80 m** asking to be raised was refused from every floor slot *because it did not need raising*. 62 of 799 exposed, 3 realised. `fe3aa5647` |
+| the 4 m offset | `_build_segment` lays a tile row at `y + VESTIBULE_H`; `_deal_from_plan` stored the raw row. Every planned object stood 4 m nearer the entrance; 30 of 281 interior rows landed in the lobby. Invisible because `_compose_auto_shot` takes its standpoint from the same displaced cell. `e9202f138` |
+| `dna.fixture` unread | the harness now merges it into `artifact_config`, authored config winning. **Half-closed** — see open. `1ac266bd2` |
+| 51 untracked files | tracked rulings cited evidence a clean clone did not have, including `placement_negotiator.py` and its tests, which spike 01 calls the proven foundation. `810ef88f3` |
+
+**Placement, whole spine** — measured against the in-flight `spatial_contract.py`:
+
+```
+                     §5 baseline   after aliases   after the zero
+placed                       678            769             803
+interior                     383            429             440
+                          33.13%          37.1%           38.1%
+rejected                     478            387             353
+support_matches_contract     205             18               3
+chapters fully housed       0/24           0/24            0/24
+```
+
+The 3 survivors are legitimate (`science_screen` ×2, `lambda_slider` — all need a
+wall, offered slots with none). **The support bottleneck of §7.2 is spent.** Top
+refusals are now `escalation` 189 and `physical_overlap` 107.
+
+**Corrections to numbers this file and HANDOVER carry.**
+
+- `props_per_10m` **has** had a supplier since the white-cube pass
+  (`em_budget.gd:450` → `em_props.gd:449`). §8 quotes a past-tense before-state.
+- the module kit's **11.7×** mixes denominators — per dressed metre against per
+  wall cell. True factor **8.68×**.
+- mean unbroken wall run is **2.41 m pooled**, not 2.7 (a mean of 30 per-building
+  means, quoted beside three pooled figures).
+- `dna.axes` is on **757** artifacts, not the 184 CLAUDE.md claims.
+- `28 of 30` museums in the threshold work is two denominators, not an error.
+
+**Open, and not started.** Three faults between the plan and the walker, all in
+`endless_museum.gd`: `_stamp` never applies the plan's **rotation** (65 of 65);
+the plan path never advances the **pool cursor**, so `--em-plan` repeats one
+chapter; `_deal_from_plan` keys on **building**, so 6 of 7 crowned chapters
+receive another chapter's cast and print `chapter=-`. Also open: `dna.fixture`
+cannot reach an artifact whose script is not on its scene root (**37 of 757**),
+and the threshold sightline (13 accepts, or **0** if `candidates[:40]` is lifted).
+
+> **A method note worth more than any of the above.** Three times on 08-13 a
+> session diagnosed the WORKING TREE instead of `HEAD` and was wrong — once
+> after quoting this file's own correction about it. `doc/plans/capture_measure_faults.md`
+> is a whole document retracted for it: five of its six faults had been repaired
+> the day before in `549f83e23`. Reading the warning is not running the command.
+> `git show HEAD:<path>` belongs in the loop.
+
 
 > **Correction.** An earlier version of this file said `doc/SPATIAL_PIPELINE.md`
 > "does not exist yet". It does. It was never missing — **this working tree is
