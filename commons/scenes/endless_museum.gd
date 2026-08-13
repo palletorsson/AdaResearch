@@ -1283,8 +1283,16 @@ func _build_segment() -> void:
 	#    wash, floor fill. Capped at 24 lights / 6 shadow casters per segment.
 	if _mod_has(_mod_light, "rig_segment"):
 		_mod_light.call("rig_segment", seg, w, h, accent, slots, {"tile": tile})
-	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H), "index": _seg_index, "w": w})
-	_next_z += float(h) + float(VESTIBULE_H)
+	# SPIKE 08 — the courtyard joint. Built AFTER the tile, before the next
+	# segment's vestibule, only when the plan granted courts. A plan without
+	# court rows adds zero depth and zero nodes: the gate.
+	var court_depth: int = 0
+	var court_rows: Array = deal.get("courts", []) if deal is Dictionary else []
+	if not court_rows.is_empty():
+		court_depth = _build_courtyard(seg, solid, w, tile.size(), zbase,
+			court_rows, wall_col, m_wall)
+	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(court_depth), "index": _seg_index, "w": w})
+	_next_z += float(h) + float(VESTIBULE_H) + float(court_depth)
 	_seg_index += 1
 	_prev_w = w
 	_auto_replan = true
@@ -1378,6 +1386,57 @@ func _load_plan() -> void:
 ## exist in the building. They are counted and reported rather than silently
 ## dropped, because "the plan said 8 and the room shows 2" is exactly the kind
 ## of quiet subtraction that reads as a bug in the negotiator.
+## SPIKE 08 v1 — the courtyard: an unroofed joint between this building and the
+## next vestibule. The corridor compresses; the court exhales. One resident per
+## court, chained when a chapter has several.
+##
+## WHY UNROOFED IS THE POINT: the 4.0 m certified wall is what makes half the
+## precinct class precinct at all. The court has no roof, so height simply does
+## not apply — foucault_pendulum at 12.04 m stands under open sky in a SMALL
+## court. Walls here are a 1.1 m PARAPET, not the museum wall, so the court
+## reads as outside from inside the corridor.
+##
+## Dims come off the PLAN ROW (negotiator-owned, body + 3 m aprons); the width
+## is clamped to the corridor's in v1 and the clamp is printed, per the
+## no-silent-caps rule. The whole court walks; _seal_cells carves the resident
+## out, so the apron ring is derived, not stored — one owner.
+func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
+		zbase: int, courts: Array, wall_col: Color, m_wall: Material) -> int:
+	var m_deck: Material = _sm("deck")
+	var z0: int = VESTIBULE_H + tile_h
+	var zcur: int = z0
+	for c_v in courts:
+		var c: Dictionary = c_v as Dictionary
+		var dims: Array = c.get("court", [])
+		if dims.size() < 2:
+			continue
+		var cw: int = clampi(int(dims[0]), 3, w)
+		var cd: int = maxi(int(dims[1]), 3)
+		if cw < int(dims[0]):
+			print("[em-court] %s: court width %d clamped to corridor %d"
+				% [String(c.get("token", "?")), int(dims[0]), w])
+		# ground — the same -0.1 / 0.2 slab the vestibule deck uses, in its own
+		# exterior tone; no ceiling is BUILT, which is the whole venue
+		_box(seg, Vector3(w / 2.0, -0.1, zcur + cd / 2.0),
+			Vector3(w, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
+		for zz in range(zcur, zcur + cd):
+			for x in range(1, w - 1):
+				_walk_cells[Vector2i(x, zbase + zz)] = true
+		for zz in range(zcur, zcur + cd):
+			for sx in [0, w - 1]:
+				_box(seg, Vector3(sx + 0.5, 0.55, zz + 0.5),
+					Vector3(1, 1.1, 1), wall_col, m_wall)
+				_add_col(solid, Vector3(sx + 0.5, 0.55, zz + 0.5),
+					Vector3(1, 1.1, 1))
+		var cell: Dictionary = {"x": int(w / 2.0),
+			"y": zcur + int(cd / 2.0), "rank": 2, "top": 0.0}
+		if _stamp(seg, String(c.get("scene", "")), String(c.get("token", "")),
+				cell, zbase, 1, {}, false, 0.0, float(c.get("rotation", 0.0))):
+			_deal_stats["courts"] = int(_deal_stats.get("courts", 0)) + 1
+		zcur += cd
+	return zcur - z0
+
+
 func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		w: int, h: int, chapter: String = "") -> Dictionary:
 	# RESOLUTION ORDER: the chapter's own row first, the v1 building dict
@@ -1410,9 +1469,25 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	var exterior: int = 0
 	var missing: Array = []
 	var off_tile: int = 0
+	var courts: Array = []
 	for row_v in rows:
 		var row: Dictionary = row_v as Dictionary
-		if String(row.get("venue", "")) != "interior":
+		var venue := String(row.get("venue", ""))
+		if venue == "courtyard" and (row.get("court", []) as Array).size() >= 2:
+			# A court resident. Not stamped here — the court's ground does not
+			# exist yet; _build_segment builds the joint after the tile and
+			# stamps the resident onto it. Collected with its scene resolved by
+			# the same table, so a stale plan is caught the same way.
+			var ctok := String(row.get("token", ""))
+			var cscene := String(scene_of.get(ctok, ""))
+			if cscene == "":
+				missing.append(ctok)
+				continue
+			courts.append({"token": ctok, "scene": cscene,
+				"court": row.get("court", []),
+				"rotation": float(row.get("rotation", 0.0))})
+			continue
+		if venue != "interior":
 			exterior += 1
 			continue
 		var tok := String(row.get("token", ""))
@@ -1462,10 +1537,11 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 				float(row.get("rotation", 0.0))):
 			placed += 1
 
-	print("[em-plan] %s: stamped %d interior, %d exterior not hostable%s%s"
+	print("[em-plan] %s: stamped %d interior, %d exterior not hostable%s%s%s"
 		% [key, placed, exterior,
 		   (", %d off-tile" % off_tile) if off_tile > 0 else "",
-		   (", %d not in pool" % missing.size()) if not missing.is_empty() else ""])
+		   (", %d not in pool" % missing.size()) if not missing.is_empty() else "",
+		   (", %d to courtyard" % courts.size()) if not courts.is_empty() else ""])
 	# THE CHAPTER THE PLAN NAMES. `entry.sequence` is present on all 17 planned
 	# museums and was thrown away here, so every segment banner and every capture
 	# caption read `chapter=-` — a corridor that could not say what it was
@@ -1480,7 +1556,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		"repeats": 0, "guests": 0, "plinths": 0,
 		"max_objects": rows.size(), "class": "planned",
 		"budget": {}, "wall_features_max": -1, "fill_walls": true,
-		"from_plan": true, "exterior_unhosted": exterior}
+		"from_plan": true, "exterior_unhosted": exterior,
+		"courts": courts}
 
 
 ## Step the dealing cursor past every remaining entry of the chapter it is

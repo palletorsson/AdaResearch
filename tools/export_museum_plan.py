@@ -137,6 +137,9 @@ def plan_museum(key: str, tokens: list[str]) -> dict[str, Any]:
             "support_height_m": round(float(p.support_height_m), 3),
             "slot": p.slot,
             "wall": p.wall,
+            # court dims ride the row only when the negotiator granted a court;
+            # absent otherwise, so v1 rows are byte-identical.
+            **({"court": list(p.court_m)} if getattr(p, "court_m", None) else {}),
         })
     return {
         "artifacts": placed,

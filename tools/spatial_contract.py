@@ -791,13 +791,31 @@ def resolve(lookup: str) -> SpatialContract:
                 f"containment={declared_containment!r} is not one of "
                 f"{list(CONTAINMENT)}; kept the measured verdict")
 
-    # ── venue: curatorial intent, hand-authored only ────────────────
-    # Deliberately NOT derived from size. An artifact that happens not to fit
-    # indoors is a fact about the building; an artifact that WANTS the
-    # courtyard is a decision about the work, and inferring one from the other
-    # would put words in the curator's mouth.
+    # ── venue: curatorial intent first, then the precinct ruling ────
+    # For an EXHIBITED work, venue stays hand-authored only: an artifact that
+    # happens not to fit indoors is a fact about the building; one that WANTS
+    # the courtyard is a decision about the work, and inferring one from the
+    # other would put words in the curator's mouth.
+    #
+    # For a PRECINCT work, that reasoning inverts. The building was never going
+    # to contain it, so "interior" is not a preference — it is a wish the
+    # architecture cannot grant, and routing it to untyped `outside` was the
+    # dumping ground spike 08 was ruled against. Palle, 2026-08-13: precinct
+    # bodies get courtyards between segments, or hang in space above a balcony.
+    # Derived HERE because this file already owns containment and still sees the
+    # RAW posture — normalise_support erases `float` into "floor" a few lines
+    # down, so no later layer can tell a floating body from a grounded one. A
+    # hand-authored preferred_venue still wins, exactly as containment's
+    # override does.
     venue = "interior"
     raw_venue = contract.get("preferred_venue") or needs.get("preferred_venue")
+    if not raw_venue and containment == "precinct":
+        floats = str(room.get("posture", "")).strip().lower() == "float"
+        venue = "balcony" if floats else "courtyard"
+        prov["presentation.preferred_venue"] = (
+            f"derived: containment=precinct + posture "
+            f"{'float -> balcony void' if floats else 'grounded -> courtyard'}"
+            " (spike 08 ruling; hand-authored preferred_venue overrides)")
     if raw_venue:
         candidate_venue = str(raw_venue).strip().lower()
         if candidate_venue in VENUES:

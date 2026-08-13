@@ -330,6 +330,12 @@ class Placement:
     exceptions: list[str]
     masks: Masks | None = None
     contract: SpatialContract | None = None
+    #: Courtyard outer dims [w, d] in whole cells, set only when venue is
+    #: "courtyard". The negotiator owns placement SIZES the way it owns slots:
+    #: computed once from the body + a 3 m apron each side, so the assembler
+    #: never re-derives it from the body — re-deriving is how the two sides
+    #: drift (the 4 m vestibule offset was exactly that, spike 03).
+    court_m: list[int] | None = None
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -339,6 +345,7 @@ class Placement:
             "wall_rect_uv": self.wall_rect, "venue": self.venue,
             "support_height_m": self.support_height_m,
             "score": round(self.score, 3), "result": self.result,
+            "court_m": self.court_m,
             "exceptions": self.exceptions,
             "rules": [t.as_dict() for t in self.traces],
         }
@@ -680,6 +687,35 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
             f"precinct work ({contract.body_m[0]:.1f} x {contract.body_m[2]:.1f} m) "
             f"— the building was never going to contain it; going straight to "
             f"open ground"))
+        # THE COURTYARD RUNG, before the exterior scatter. Palle's ruling
+        # (spike 08): precinct bodies get courtyards between segments, or hang
+        # above a balcony. The contract derives which; the grounds below remain
+        # the fallback for anything hand-routed away from both. The court is
+        # UNROOFED, so the 4.0 m certified-wall height that made half these
+        # bodies precinct simply does not apply inside it.
+        if contract.preferred_venue in ("courtyard", "balcony"):
+            import math as _m
+            court = [int(_m.ceil(contract.body_m[0])) + 6,
+                     int(_m.ceil(contract.body_m[1])) + 6]
+            ladder.append(Trace(
+                "escalation", "pass",
+                f"precinct: a {court[0]} x {court[1]} cell "
+                f"{contract.preferred_venue} made to measure "
+                f"(body + 3 m apron each side; no roof, so height is free)"))
+            return Placement(
+                artifact=contract.lookup, slot=contract.preferred_venue,
+                anchor=(0, 0), rotation=contract.rotations[0],
+                mode="freestanding", wall=None, wall_rect=None,
+                venue=contract.preferred_venue,
+                support_height_m=0.0, score=1.0, result="ACCEPT",
+                traces=ladder,
+                exceptions=["a precinct work: given a court of its own"],
+                # COURT-LOCAL masks, (0,0) at the body centre. The court has no
+                # cell in the building's plan grid, but an ACCEPT without masks
+                # is a silent decision — the suite rightly refuses it, and the
+                # assembler seals from the same envelope.
+                masks=masks(contract, contract.rotations[0], "freestanding"),
+                contract=contract, court_m=court)
         for slot in plan.slots:
             if slot.venue == "interior":
                 continue
