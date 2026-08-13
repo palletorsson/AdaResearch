@@ -278,7 +278,7 @@ def _affinity(contract: SpatialContract, slot: Slot) -> int:
         score += 0 if slot.role == "3s" else 1
     elif slot.role == "3s":
         score += 2                       # do not spend the hero position lightly
-    if contract.required_support in ("pedestal", "table", "podium"):
+    if contract.required_support == "podium":
         score += 0 if slot.support == "podium" else 2
     return score
 
@@ -401,8 +401,21 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
     # riser the template built. A floor slot is not a refusal; it is a taller
     # plinth. Demanding the tile was architecture being asked to pre-declare a
     # staging decision that belongs to the assembler.
+    #
+    # AND A VOCABULARY IS NOT AN ARCHITECTURAL DEMAND. This rule then spent a
+    # second life refusing words it had simply never been taught. It was written
+    # against `placement_contract.required_support` (82 rooms) while 2538 rooms
+    # carry `room.posture`, whose vocabulary — tools/classify_postures.POSTURES —
+    # is eight words wide. Over the 24-chapter spine run, 198 of 1156 offered
+    # bodies declared a support no slot in any of 30 museums could satisfy, and
+    # this became the largest single refusal reason in the corpus: 205 of 478.
+    # `platform` alone was 120 of them, and `classify_postures.build_footing`
+    # raises it 1.0 m — the same lift as `table`, which was already accepted.
+    #
+    # The words are reconciled once, in spatial_contract.SUPPORT_ALIASES, so
+    # this rule sees only what a slot can actually offer.
     need_support = contract.required_support
-    wants_lift = need_support in ("pedestal", "table", "podium")
+    wants_lift = need_support == "podium"
     plinth_h = (lift_for(contract.body_m[2], slot.surface_height_m)
                 if wants_lift and slot.support in ("floor", "podium") else 0.0)
     # AND A ZERO LIFT IS NOT A REFUSAL. `lift_for` returns 0.0 for two different
@@ -420,7 +433,7 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
     # all the way up the size range and then inverted at the top. 62 of 799 spine
     # artifacts sit past that line. See doc/spatial/spikes/02_the_overloaded_zero.md.
     no_lift_needed = wants_lift and lift_for(contract.body_m[2], 0.0) <= 0.0
-    support_ok = (need_support in ("floor", "", "any")
+    support_ok = (need_support == "floor"
                   or need_support == slot.support
                   or (need_support == "wall" and slot.wall_side is not None)
                   or (wants_lift and slot.support == "podium")
@@ -1174,7 +1187,7 @@ def _slot_suits(contract: SpatialContract, slot: Slot) -> bool:
     """A cheap preference filter — the negotiator still verifies everything."""
     if contract.preferred_mode == "against_wall":
         return slot.wall_side is not None
-    if contract.required_support in ("pedestal", "table", "podium"):
+    if contract.required_support == "podium":
         return slot.support == "podium"
     if contract.importance == "feature":
         return slot.role == "3s"

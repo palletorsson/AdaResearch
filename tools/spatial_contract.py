@@ -81,6 +81,95 @@ VENUES = ("interior", "courtyard", "balcony", "bridge", "porch", "outside")
 #: rejecting them one at a time — as this negotiator did three times, from
 #: three different directions — was mistaking a category for a failure.
 CONTAINMENT = ("exhibited", "precinct")
+
+#: What architecture can actually OFFER. `tools/spatial_floorplan.py` SLOT_RANKS
+#: builds exactly two kinds of tile — floor and podium — and a wall is offered by
+#: any slot that backs onto one. Three words. Every contract has to land on one.
+SUPPORTS = ("floor", "podium", "wall")
+
+#: Three vocabularies were authored into this one field and never reconciled.
+#: `required_support` is resolved below as
+#:     placement_contract.required_support or room.posture or spatial_needs.platform
+#: and each of those three was written by a different hand:
+#:
+#:   placement_contract  82 rooms, hand-authored: floor/wall/table/pedestal/
+#:                       platform/plinth/none
+#:   room.posture        2538 rooms, machine-authored by tools/classify_postures.py,
+#:                       whose POSTURES list is EIGHT words wide: floor/pedestal/
+#:                       table/platform/float/pit/wall/monument
+#:   spatial_needs.platform  the registry bootstrap: none/table/pedestal/sunken
+#:
+#: The negotiator was taught the first list and never the second, so 94% of the
+#: corpus arrived speaking a language its support rule could not read. Measured
+#: on the 24-chapter spine run: 198 of 1156 offered bodies (17.1%) declared a
+#: support no slot in any of 30 museums could satisfy, and
+#: `support_matches_contract` became the single largest refusal reason — 205 of
+#: 478 rejections. Not a shortage of podium tiles. A vocabulary that was never
+#: taught.
+#:
+#: What each word actually BUILDS is not a matter of opinion:
+#: `classify_postures.build_footing()` writes the footing recipe per posture, and
+#: reading it settles every case ---
+#:
+#:   platform  7x7 pad, raised 5x5 at 1.0 m — "a stage you step onto". The same
+#:             lift as `table`, which the rule already accepted. RAISED.
+#:   plinth    a hand-authored synonym of `pedestal` (prism_block). RAISED.
+#:             `tools/build_uffizi_footprint_cohort.py` independently agrees:
+#:             `raised_supports = {"table", "pedestal", "plinth", "platform"}`.
+#:   pit       5x5 pad, raised RIM at 1.5 m, artifact DOWN at floor centre. The
+#:             body stands on the FLOOR; the rim is furniture the dressing room
+#:             builds, exactly like the plinth precedent below.
+#:   sunken    what `PLATFORM_MAP` already maps to `pit`. Same answer.
+#:   float     a plain floor pad with artifact_offset.y = 1.5. It hovers OVER
+#:             floor; the lift is an offset in the room, not a tile.
+#:   monument  a placeholder pad, artifact seated FLUSH AT y=0. Ground.
+#:   none      NOT a demand. `tools/bootstrap_spatial_needs.py` writes
+#:             `"platform": "none"` as its DEFAULT — 1773 of 2721 registry
+#:             entries carry it — meaning "no hint given". `classify_postures`
+#:             knows this and leaves it out of PLATFORM_MAP so it falls through
+#:             to the size logic; the `or`-chain below had no such guard and
+#:             took the absence of a demand as a demand for absence.
+#:
+#: So pit, sunken, float and monument are not architecture the museums lack.
+#: They are furniture the dressing room already draws, standing on floor.
+SUPPORT_ALIASES = {
+    # raised surfaces — the assembler supplies the riser (see `lift_for`)
+    "pedestal": "podium", "table": "podium", "podium": "podium",
+    "platform": "podium", "plinth": "podium", "dais": "podium",
+    "step": "podium", "high_podium": "podium",
+    # the ground, whatever furniture the room stands on it
+    "floor": "floor", "": "floor", "any": "floor", "none": "floor",
+    "ground": "floor", "pit": "floor", "sunken": "floor", "float": "floor",
+    "monument": "floor", "environment": "floor", "immersive_field": "floor",
+    # a wall to back onto
+    "wall": "wall", "backdrop": "wall", "wall_mounted": "wall",
+    # galton_board's footing is [[4,4,4,4,4],[1,1,1,1,1],...] — the `wall`
+    # recipe with floor in front. It wants the wall; the floor comes with it.
+    "wall_floor": "wall",
+}
+
+
+def normalise_support(raw: object) -> tuple[str, str]:
+    """One of `SUPPORTS`, plus a note when the authored word was not already one.
+
+    Returns (canonical, note). The note is empty when nothing was translated, so
+    a caller can record the rename in provenance without inventing an entry for
+    every contract that already spoke the offered language.
+    """
+    word = str(raw or "").strip().lower()
+    canon = SUPPORT_ALIASES.get(word)
+    if canon is None:
+        # An unknown word is a real defect, but refusing every slot is the worst
+        # possible way to report it: that is precisely how `platform` cost the
+        # corpus a tenth of its bodies while looking like a shortage of podiums.
+        # Stand it on the floor and SAY the word was not understood.
+        return "floor", (f"required_support={word!r} is not one of "
+                         f"{sorted(set(SUPPORT_ALIASES))}; stood on the floor")
+    if word == canon:
+        return canon, ""
+    return canon, f"required_support {word!r} resolved to {canon!r}"
+
+
 #: The widest body any authored slot in the corpus can hold, and the certified
 #: wall height. Beyond either, no exhibiting posture exists.
 WIDEST_SLOT_M = 8.0
@@ -721,6 +810,32 @@ def resolve(lookup: str) -> SpatialContract:
                 f"preferred_venue={raw_venue!r} is not one of {list(VENUES)}; "
                 f"kept 'interior'")
 
+    # ── support: three vocabularies into one offered word ───────────
+    # See SUPPORT_ALIASES. The `or`-chain picks the most specific SOURCE; this
+    # translates whatever it found into something a slot can actually offer, and
+    # records the translation rather than performing it silently.
+    if contract.get("required_support"):
+        raw_support, support_src = (contract["required_support"],
+                                    "placement_contract.required_support")
+    elif room.get("posture"):
+        raw_support, support_src = room["posture"], "room.posture"
+    else:
+        raw_support, support_src = (needs.get("platform", "floor") or "floor",
+                                    "spatial_needs.platform")
+    support, support_note = normalise_support(raw_support)
+    if containment == "precinct":
+        # A precinct stands on GROUND, whatever the registry says. `platform`
+        # and `posture` were authored for objects the building displays — an
+        # 8 m laboratory asked for a "table" and was refused open ground
+        # because of it. The field is meaningless at this scale, so containment
+        # overrides it rather than the negotiator quietly ignoring it.
+        support, support_note = "floor", "containment=precinct overrides it"
+        support_src = "containment"
+    prov["placement.required_support"] = (
+        f"{support_src}{': ' + support_note if support_note else ''}")
+    if "not one of" in support_note:
+        conflicts.append(support_note)
+
     return SpatialContract(
         lookup=lookup,
         body_m=body,
@@ -736,15 +851,7 @@ def resolve(lookup: str) -> SpatialContract:
         importance=importance,
         visual_radius=visual,
         preferred_context=context,
-        # A precinct stands on GROUND, whatever the registry says. `platform`
-        # and `posture` were authored for objects the building displays — an
-        # 8 m laboratory asked for a "table" and was refused open ground
-        # because of it. The field is meaningless at this scale, so containment
-        # overrides it rather than the negotiator quietly ignoring it.
-        required_support=("floor" if containment == "precinct" else
-                          str(contract.get("required_support")
-                              or room.get("posture")
-                              or needs.get("platform", "floor") or "floor")),
+        required_support=support,
         authored_rotation=authored_rotation,
         centre_offset_m=centre_offset,
         base_y_m=round(base_y, 3),
