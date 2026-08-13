@@ -1439,7 +1439,17 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		% [key, placed, exterior,
 		   (", %d off-tile" % off_tile) if off_tile > 0 else "",
 		   (", %d not in pool" % missing.size()) if not missing.is_empty() else ""])
-	return {"placed": placed, "sequence": "", "leads": placed, "relatives": 0,
+	# THE CHAPTER THE PLAN NAMES. `entry.sequence` is present on all 17 planned
+	# museums and was thrown away here, so every segment banner and every capture
+	# caption read `chapter=-` — a corridor that could not say what it was
+	# showing. Reporting it is also what makes the deeper fault legible: when two
+	# chapters resolve to one building the plan is first-wins, so `change` is
+	# stamped with symmetry's cast, and with the field blank that substitution
+	# looked like a shortfall instead of a swap. The KEY is still the building;
+	# fixing that belongs to the exporter, not here.
+	# See doc/spatial/spikes/04_one_building_two_chapters.md.
+	return {"placed": placed, "sequence": String(entry.get("sequence", "")),
+		"leads": placed, "relatives": 0,
 		"repeats": 0, "guests": 0, "plinths": 0,
 		"max_objects": rows.size(), "class": "planned",
 		"budget": {}, "wall_features_max": -1, "fill_walls": true,
