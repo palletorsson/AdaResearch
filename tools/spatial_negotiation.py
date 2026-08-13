@@ -405,11 +405,27 @@ def try_place(contract: SpatialContract, slot: Slot, plan: FloorPlan,
     wants_lift = need_support in ("pedestal", "table", "podium")
     plinth_h = (lift_for(contract.body_m[2], slot.surface_height_m)
                 if wants_lift and slot.support in ("floor", "podium") else 0.0)
+    # AND A ZERO LIFT IS NOT A REFUSAL. `lift_for` returns 0.0 for two different
+    # reasons and this test could only read one of them. It means "no riser
+    # needed" — the body already stands with its centre in the viewing band, so
+    # raising it would push the work over the visitor's head — and it was being
+    # read as "a floor slot cannot serve this artifact". With the shipped band
+    # (target_centre 1.15, min_lift 0.25) the crossover is exact:
+    #
+    #     body_h > 2 * (1.15 - 0.25) = 1.80 m
+    #
+    # so every body taller than 1.80 m asking to be raised was refused from every
+    # floor slot in all 30 museums PRECISELY BECAUSE it did not need raising. The
+    # plinth ruling ("a floor slot is not a refusal; it is a taller plinth") held
+    # all the way up the size range and then inverted at the top. 62 of 799 spine
+    # artifacts sit past that line. See doc/spatial/spikes/02_the_overloaded_zero.md.
+    no_lift_needed = wants_lift and lift_for(contract.body_m[2], 0.0) <= 0.0
     support_ok = (need_support in ("floor", "", "any")
                   or need_support == slot.support
                   or (need_support == "wall" and slot.wall_side is not None)
                   or (wants_lift and slot.support == "podium")
-                  or (wants_lift and slot.support == "floor" and plinth_h > 0.0))
+                  or (wants_lift and slot.support == "floor"
+                      and (plinth_h > 0.0 or no_lift_needed)))
     traces.append(Trace("support_matches_contract", "pass" if support_ok else "fail",
                         f"slot offers {slot.support!r}, artifact needs {need_support!r}"
                         + (f"; a {plinth_h:.2f} m plinth supplies it" if plinth_h else "")))
