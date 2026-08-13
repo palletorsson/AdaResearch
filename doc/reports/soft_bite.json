@@ -1,0 +1,577 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "softbodies-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "pendulum_slap",
+   "axis": "anvil",
+   "frame": 0.12181,
+   "focus": 0.7534,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.08875,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "flagdancer",
+   "axis": "crimp",
+   "frame": 0.0,
+   "focus": 0.0,
+   "verdict": "INERT?",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.00484,
+   "pairs": 24,
+   "twins": [
+    {
+     "a": "corrugation",
+     "b": "flat",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "ripple",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "flat",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "ripple",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "flat",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "ripple",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "flat",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "ripple",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "corrugation",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "flat",
+     "b": "ripple",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "flat",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "flat",
+     "b": "ripple",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "flat",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "flat",
+     "b": "ripple",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "flat",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "flat",
+     "b": "ripple",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "flat",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "ripple",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "ripple",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "ripple",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "ripple",
+     "b": "swell",
+     "focus": 0.0,
+     "rgb": 0.0
+    }
+   ],
+   "colour_only": [],
+   "needs_standpoint_check": true
+  },
+  {
+   "artifact": "flagdancer",
+   "axis": "heading",
+   "frame": 0.0,
+   "focus": 0.0,
+   "verdict": "INERT?",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.00484,
+   "pairs": 24,
+   "twins": [
+    {
+     "a": "both",
+     "b": "fly",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "hoist",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "fly",
+     "b": "hoist",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "fly",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "hoist",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "fly",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "hoist",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "fly",
+     "b": "hoist",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "fly",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "hoist",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "fly",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "hoist",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "fly",
+     "b": "hoist",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "fly",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "hoist",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "fly",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "hoist",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "both",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "fly",
+     "b": "hoist",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "fly",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    },
+    {
+     "a": "hoist",
+     "b": "none",
+     "focus": 0.0,
+     "rgb": 0.0
+    }
+   ],
+   "colour_only": [],
+   "needs_standpoint_check": true
+  },
+  {
+   "artifact": "softstopscene",
+   "axis": "landing",
+   "frame": 0.04522,
+   "focus": 0.43253,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.07215,
+   "pairs": 6,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "cloth_simulation",
+   "axis": "ease",
+   "frame": 0.02836,
+   "focus": 0.38836,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.02414,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "cloth_simulation",
+   "axis": "relaxation",
+   "frame": 0.03339,
+   "focus": 0.45021,
+   "verdict": "bites",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.02414,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
+  },
+  {
+   "artifact": "verlet_workbench",
+   "axis": "relaxation",
+   "frame": 0.00221,
+   "focus": 0.04421,
+   "verdict": "WEAK",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.15465,
+   "pairs": 6,
+   "twins": [
+    {
+     "a": "pressed",
+     "b": "worked",
+     "focus": 0.01155,
+     "rgb": 0.01959
+    },
+    {
+     "a": "held",
+     "b": "pressed",
+     "focus": 0.02599,
+     "rgb": 0.04123
+    },
+    {
+     "a": "held",
+     "b": "worked",
+     "focus": 0.03553,
+     "rgb": 0.05727
+    }
+   ],
+   "colour_only": [
+    {
+     "a": "nudged",
+     "b": "worked",
+     "focus": 0.05061,
+     "rgb": 0.08509
+    },
+    {
+     "a": "nudged",
+     "b": "pressed",
+     "focus": 0.05896,
+     "rgb": 0.09954
+    }
+   ]
+  },
+  {
+   "artifact": "elasticity_press",
+   "axis": "give",
+   "frame": 0.00705,
+   "focus": 0.13027,
+   "verdict": "CONDITIONAL",
+   "partial": null,
+   "conditional": {
+    "was": "local",
+    "swings": [
+     {
+      "values": [
+       "gel",
+       "rubber"
+      ],
+      "dead": 0.01883,
+      "dead_when": {
+       "platen": "plate"
+      },
+      "alive": 0.36967,
+      "alive_when": {
+       "platen": "wedge"
+      }
+     },
+     {
+      "values": [
+       "gel",
+       "jelly"
+      ],
+      "dead": 0.01872,
+      "dead_when": {
+       "platen": "plate"
+      },
+      "alive": 0.36838,
+      "alive_when": {
+       "platen": "wedge"
+      }
+     },
+     {
+      "values": [
+       "gel",
+       "resin"
+      ],
+      "dead": 0.02355,
+      "dead_when": {
+       "platen": "plate"
+      },
+      "alive": 0.36477,
+      "alive_when": {
+       "platen": "wedge"
+      }
+     },
+     {
+      "values": [
+       "jelly",
+       "rubber"
+      ],
+      "dead": 0.01091,
+      "dead_when": {
+       "platen": "plate"
+      },
+      "alive": 0.3149,
+      "alive_when": {
+       "platen": "punch"
+      }
+     },
+     {
+      "values": [
+       "jelly",
+       "resin"
+      ],
+      "dead": 0.01469,
+      "dead_when": {
+       "platen": "plate"
+      },
+      "alive": 0.25716,
+      "alive_when": {
+       "platen": "punch"
+      }
+     },
+     {
+      "values": [
+       "resin",
+       "rubber"
+      ],
+      "dead": 0.00803,
+      "dead_when": {
+       "platen": "plate"
+      },
+      "alive": 0.18968,
+      "alive_when": {
+       "platen": "punch"
+      }
+     }
+    ]
+   },
+   "subject": 0.26086,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": [
+    {
+     "a": "resin",
+     "b": "rubber",
+     "focus": 0.03445,
+     "rgb": 0.06429
+    },
+    {
+     "a": "jelly",
+     "b": "resin",
+     "focus": 0.03573,
+     "rgb": 0.06487
+    },
+    {
+     "a": "resin",
+     "b": "rubber",
+     "focus": 0.03589,
+     "rgb": 0.06764
+    },
+    {
+     "a": "gel",
+     "b": "resin",
+     "focus": 0.0384,
+     "rgb": 0.06843
+    },
+    {
+     "a": "jelly",
+     "b": "resin",
+     "focus": 0.03887,
+     "rgb": 0.07483
+    },
+    {
+     "a": "gel",
+     "b": "rubber",
+     "focus": 0.05727,
+     "rgb": 0.10926
+    }
+   ]
+  },
+  {
+   "artifact": "elasticity_press",
+   "axis": "platen",
+   "frame": 0.01293,
+   "focus": 0.23731,
+   "verdict": "local",
+   "partial": null,
+   "conditional": null,
+   "subject": 0.26086,
+   "pairs": 24,
+   "twins": [],
+   "colour_only": []
+  }
+ ]
+}
