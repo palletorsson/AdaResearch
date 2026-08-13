@@ -148,6 +148,30 @@ func _run() -> void:
 			return {}
 		return entry
 
+	# F6 — READ `dna.fixture`. It exists precisely so an artifact can be pinned
+	# into a measurable state for capture, and nothing here had ever looked at it.
+	# laser_measure declares {max_range: 0.25} and was photographed at its default
+	# instead: fifty 12 mm tick marks pooled out to z = -50, reported as a
+	# 50.081 m body, and carried in artifact_sizes.json at 50.13 m since April.
+	# The per-mesh guard removal already fixed that number — but the fixture is
+	# how an artifact SAYS what state it should be measured in, and a declaration
+	# no reader honours is worse than no declaration.
+	#
+	# The dressing room's own `artifact_config` WINS. The fixture is the
+	# artifact's default request; the room is the author's decision for this
+	# staging, and authorship outranks a default (the same order the sweep uses:
+	# delegate, then fixture, then the swept value).
+	var fixture_entry = registry.get(artifact_lookup, null)
+	if fixture_entry is Dictionary and fixture_entry.get("dna") is Dictionary:
+		var fx = (fixture_entry["dna"] as Dictionary).get("fixture", null)
+		if fx is Dictionary and not (fx as Dictionary).is_empty():
+			var merged: Dictionary = (fx as Dictionary).duplicate(true)
+			var authored = room_dict.get("artifact_config", {})
+			if authored is Dictionary:
+				merged.merge(authored as Dictionary, true)   # authored overwrites
+			room_dict["artifact_config"] = merged
+			print("dressing_room: dna.fixture applied %s" % [fx])
+
 	# Build the dressing room (footing + anchor plinth + artifact + extras).
 	# `staged: true` renders the raised footing as its real station prop
 	# (Element Catalog) instead of blockout tiles — the web's prop view.

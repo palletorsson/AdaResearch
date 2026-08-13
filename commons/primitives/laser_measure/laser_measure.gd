@@ -611,6 +611,19 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		claim = _claim_token(str(config_data["claim"]))
 		if is_inside_tree():
 			_apply_claim()
+	# RANGE — the two keys this artifact's OWN registry entry declares as its
+	# `dna.fixture` ({max_range: 0.25, tick_interval_m: 0.05}) and which this
+	# function did not forward. They are real exports and they drive the geometry
+	# (raycast target, beam_mesh.size, the tick pool), so dropping them meant the
+	# fixture had no effect on anything measurable: the tool photographed at its
+	# 50 m default, fifty ticks pooled out to z = -50, and artifact_sizes.json has
+	# carried it at 50.13 m since April. A declaration no reader honours is worse
+	# than no declaration — the harness now reads dna.fixture, and this is the
+	# other half of that handshake.
+	if config_data.has("max_range"):
+		max_range = maxf(0.05, float(config_data["max_range"]))
+	if config_data.has("tick_interval_m"):
+		tick_interval_m = maxf(0.005, float(config_data["tick_interval_m"]))
 
 
 func _is_player_body(obj: Node) -> bool:
