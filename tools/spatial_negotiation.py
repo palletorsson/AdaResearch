@@ -697,25 +697,42 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
             import math as _m
             court = [int(_m.ceil(contract.body_m[0])) + 6,
                      int(_m.ceil(contract.body_m[1])) + 6]
-            ladder.append(Trace(
-                "escalation", "pass",
-                f"precinct: a {court[0]} x {court[1]} cell "
-                f"{contract.preferred_venue} made to measure "
-                f"(body + 3 m apron each side; no roof, so height is free)"))
-            return Placement(
-                artifact=contract.lookup, slot=contract.preferred_venue,
-                anchor=(0, 0), rotation=contract.rotations[0],
-                mode="freestanding", wall=None, wall_rect=None,
-                venue=contract.preferred_venue,
-                support_height_m=0.0, score=1.0, result="ACCEPT",
-                traces=ladder,
-                exceptions=["a precinct work: given a court of its own"],
-                # COURT-LOCAL masks, (0,0) at the body centre. The court has no
-                # cell in the building's plan grid, but an ACCEPT without masks
-                # is a silent decision — the suite rightly refuses it, and the
-                # assembler seals from the same envelope.
-                masks=masks(contract, contract.rotations[0], "freestanding"),
-                contract=contract, court_m=court)
+            # THE COURT MUST BE CROSSABLE, and the autopilot proved it is not
+            # automatic: dome's 26 m body, clamped into a 15-cell corridor,
+            # spanned every walkable column — the seal takes 5x5 so the cells
+            # LOOKED walkable, the collision said no, and the walker unlearned
+            # 26 cells and stalled at z=133. A granted court the corridor
+            # cannot honour is worse than a refusal, because it walls the
+            # whole museum behind it. The corridor's tile width is
+            # plan.width - 2*apron; the walker needs one free column beside a
+            # centred body, so the widest crossable body is tile_w - 3.
+            tile_w = plan.width - 2 * getattr(plan, "apron", 0)
+            if tile_w >= 6 and int(_m.ceil(contract.body_m[0])) > tile_w - 3:
+                ladder.append(Trace(
+                    "escalation", "fail",
+                    f"courtyard refused: a {contract.body_m[0]:.1f} m body "
+                    f"leaves no walkable column in a {tile_w}-cell corridor "
+                    f"(widest crossable is {tile_w - 3}); open ground instead"))
+            else:
+                ladder.append(Trace(
+                    "escalation", "pass",
+                    f"precinct: a {court[0]} x {court[1]} cell "
+                    f"{contract.preferred_venue} made to measure "
+                    f"(body + 3 m apron each side; no roof, so height is free)"))
+                return Placement(
+                    artifact=contract.lookup, slot=contract.preferred_venue,
+                    anchor=(0, 0), rotation=contract.rotations[0],
+                    mode="freestanding", wall=None, wall_rect=None,
+                    venue=contract.preferred_venue,
+                    support_height_m=0.0, score=1.0, result="ACCEPT",
+                    traces=ladder,
+                    exceptions=["a precinct work: given a court of its own"],
+                    # COURT-LOCAL masks, (0,0) at the body centre. The court has
+                    # no cell in the building's plan grid, but an ACCEPT without
+                    # masks is a silent decision — the suite rightly refuses it,
+                    # and the assembler seals from the same envelope.
+                    masks=masks(contract, contract.rotations[0], "freestanding"),
+                    contract=contract, court_m=court)
         for slot in plan.slots:
             if slot.venue == "interior":
                 continue

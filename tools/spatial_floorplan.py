@@ -139,6 +139,11 @@ class FloorPlan:
     spawn: tuple[int, int]
     exit: tuple[int, int]
     wall_height_m: float = 4.0
+    #: The exterior margin from_museum wrapped around the tile, in cells. 0 for
+    #: scaffolds. Stored so a consumer can recover the TILE width
+    #: (width - 2*apron) without importing the exporter's constant — the
+    #: courtyard rung needs it to refuse a court the corridor cannot honour.
+    apron: int = 0
     expansions: list[str] = field(default_factory=list)
     #: May the negotiator grow this building? True for a parametric scaffold.
     #: FALSE for one of the 30 authored museums — their proportions are the
@@ -462,6 +467,7 @@ def from_museum(key: str, apron: int = 14) -> FloorPlan:
     exit_cell = (gap(off + th - 1), off + th - 1)
 
     plan = FloorPlan(width=w, depth=h, grid=grid, route=set(), slots=[],
+                     apron=apron,
                      walls=[], spawn=spawn, exit=exit_cell, expandable=False)
     plan.route = _route_between(plan, spawn, exit_cell)
 
