@@ -391,6 +391,7 @@ about the design. Every one of these was measured, not guessed:
 | symptom | cause | fix |
 |---|---|---|
 | all N frames identical, `focus ~= frame ~= 0.7%` | declared values are not the code's values | `check_dna_declarations.py` |
+| ONE axis flat while another in the same sweep bites | the value was REJECTED on assignment — `set()` on a typed property of the wrong type fails in **silence** | read `<out>/_rejects.json`; the sweep now refuses to publish over it |
 | `NO RENDER`, subject 0.00% | `_ready()` is gated and builds nothing standalone | registry `dna.fixture` sets the gate |
 | two values `== 0.00%` to the byte | the geometry exists but is OCCLUDED or off-camera | change the fixture, not the axis |
 | BIG subject share, TINY closest pair | the artifact's own furniture is IN FRONT of its marks | read the z-stack; **look at the PNG** |
@@ -398,6 +399,20 @@ about the design. Every one of these was measured, not guessed:
 | strong confident bite on a generative artifact | unseeded `randf` — five variants are five objects | seed export + `dna.fixture` pins it |
 | axis real in world space, invisible in frame | fit-by-DIAGONAL on a wide flat or thin subject | `dna.framing` below 1.0 |
 | `INERT` at 0.00%, or a one-faced subject | the axis is ANAMORPHIC — the camera is standing in the wrong place | `probe_anamorphic.py`; the critic now gates on it |
+
+**THE BITE HEADLINE IS A PEAK, SO A LIVE AXIS HIDES A DEAD ONE.** `tier_terrarium` swept ten
+frames as two distinct images and reported *"peak 8.02% — BITES"*: that 8.02% was the `channel`
+axis, while every `tier` pair measured exactly 0.0%. Read the per-pair rows in
+`sweep_<name>_bite.json`, never the headline alone, whenever a sweep carries two axes.
+
+**AND WHEN AN ARTIFACT AND ITS HARNESS DISAGREE, TEST THE HANDOFF FIRST.** That case was
+diagnosed as a fault in the per-variant PNG write and written up in three places before anyone
+opened the sheet — which had been *published in the blog post making the opposite claim* and
+plainly showed ten identical-in-pairs tiles. A probe had confirmed the artifact responds to
+`tier`; nobody asked whether the sweep ever *set* it. It did not: `@export_enum("1".."5") var
+tier: String` received an int, because `cabinet_sweep.coerce()` numericises anything that parses
+as a number, and **`Object.set()` on a typed property of the wrong type is refused in silence.**
+`commons/testing/probe_set_typed.gd` reproduces it in one boot.
 
 **A dead verdict is no longer yours to issue.** Every DNA tile ever published was shot from
 ONE standpoint — `capture_config_sweep`'s yaw 0.62, pitch -0.26 — so `INERT` has only ever

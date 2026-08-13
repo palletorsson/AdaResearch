@@ -257,7 +257,12 @@ def main() -> int:
     if SWEEP_OUT.exists():
         for p in SWEEP_OUT.glob("*.png"):
             p.unlink()
-    (SWEEP_OUT / "_done.txt").unlink() if (SWEEP_OUT / "_done.txt").exists() else None
+    # Clear the reject ledger too. The capturer rewrites it every run, but a run that
+    # dies before it gets there would otherwise leave the previous run's rejections
+    # standing — and this gate blocks publication, so a stale one is worse than none.
+    for marker in ("_done.txt", "_rejects.json"):
+        if (SWEEP_OUT / marker).exists():
+            (SWEEP_OUT / marker).unlink()
 
     print(f"· sweeping {sweep_name}: {len(variants)} variants, one boot …")
     done = SWEEP_OUT / "_done.txt"
@@ -274,6 +279,33 @@ def main() -> int:
     if not done.exists():
         print("sweep failed (no _done.txt) — check the Godot log")
         return 1
+
+    # THE VALUES MAY NOT HAVE ARRIVED, and until this check existed there was no way
+    # to find out. Object.set() on a typed property whose type does not match is
+    # rejected in silence, so a tile can be a photograph of the DEFAULT carrying a
+    # variant's filename. tier_terrarium swept ten frames that way: two distinct
+    # images, a published sheet, a bite of 8.02% (which was the other axis) and a
+    # recorded verdict — every stage green, and the number was about nothing.
+    #
+    # Refuse the sheet rather than annotate it. A sheet that exists gets read.
+    rejects = SWEEP_OUT / "_rejects.json"
+    if rejects.exists():
+        try:
+            rj = json.loads(rejects.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            rj = {}
+        rows = rj.get("rows") or []
+        if rows:
+            print(f"\n  REFUSING TO PUBLISH — {len(rows)} swept values did not take.")
+            for r in rows[:12]:
+                print(f"    {r.get('variant','')}  {r.get('key','')}="
+                      f"{r.get('wanted','')} ({r.get('wanted_type','')}) "
+                      f"-> {r.get('got','')}   {r.get('why','')}")
+            if len(rows) > 12:
+                print(f"    … and {len(rows) - 12} more")
+            print("  Those tiles are the artifact's DEFAULT under a variant's filename,\n"
+                  "  so no sheet and no bite number from this run is about the axis.")
+            return 2
 
     return tile(sweep_name, variants, keys, cross_member=args.all)
 

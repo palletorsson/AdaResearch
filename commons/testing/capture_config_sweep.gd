@@ -291,6 +291,11 @@ func _run() -> void:
 	_stand_down_world_bridges()
 
 	var shot := 0
+	## Every swept value that did not survive the assignment. A non-empty list means at
+	## least one tile is a photograph of the DEFAULT wearing a variant's filename, so no
+	## number taken off this run is about the axis. Written to _rejects.json beside the
+	## PNGs; cabinet_sweep.py refuses to publish a verdict when it is non-empty.
+	var rejects: Array = []
 	for v in variants:
 		var variant: Dictionary = v
 		var label: String = str(variant.get("label", "v%d" % shot))
@@ -326,15 +331,37 @@ func _run() -> void:
 		# simply move up because it must be the grab spheres' parent. Setting
 		# only on the root silently did nothing there: the sweep rendered eight
 		# identical tiles and the axis looked inert when it was merely unreachable.
+		# AND THEN READ IT BACK, which is the only part of this loop that cannot lie.
+		# _holder_of finding the property is not evidence that the property took the
+		# value: Object.set() on a TYPED script variable whose type does not match is
+		# rejected, and it is rejected in silence — no error, no warning, no return
+		# value. tier_terrarium declares `@export_enum("1".."5") var tier: String` and
+		# cabinet_sweep.coerce() numericises "1" into an int before it ever reaches the
+		# spec, so all five tiers arrived as ints, all five were dropped on the floor,
+		# and all five rendered at the default. Ten frames, two distinct images. The
+		# whole chain stayed green: the scene loaded, the holder was found, the sweep
+		# reported BITES (8.02%, which was the OTHER axis), a sheet was published and a
+		# verdict was recorded. Measured by commons/testing/probe_set_typed.gd:
+		# `set("tier", 3)` leaves the property reading "2", and `set("tier", "3")` works.
 		for key in params.keys():
 			var val: Variant = params[key]
 			var holder: Node = _holder_of(inst, String(key))
-			if holder != null:
-				holder.set(key, _coerce(holder, String(key), val))
-			else:
-				push_warning("capture_config_sweep: no node in %s exposes '%s' — "
-					+ "the value was not applied and this tile is not a variant."
-					% [inst.name, key])
+			if holder == null:
+				# NOTE the parentheses. This warning previously read
+				#   "…'%s' — " + "the value was not applied…" % [inst.name, key]
+				# and `%` binds tighter than `+` in GDScript, so the arguments were
+				# applied to the SECOND literal, which contains no placeholders. The
+				# one diagnostic covering an unreachable key could not print.
+				_reject(rejects, label, String(key), val, null,
+					"no node in %s exposes it" % inst.name)
+				continue
+			var want: Variant = _coerce(holder, String(key), val)
+			holder.set(key, want)
+			var got: Variant = holder.get(key)
+			if not _took(want, got):
+				_reject(rejects, label, String(key), want, got,
+					"%s rejected a %s (property is %s)" % [holder.name,
+						type_string(typeof(want)), type_string(typeof(got))])
 		(host if host != null else vp).add_child(inst)
 		# Suppress demo chrome exactly as the grid does at spawn. Many algorithms/
 		# scenes were authored as standalone demos and build a screen-space
@@ -444,11 +471,71 @@ func _run() -> void:
 		inst.queue_free()
 		await process_frame
 
+	# THE REJECT LEDGER IS WRITTEN WHETHER OR NOT IT IS EMPTY, so a reader can tell
+	# "nothing was rejected" from "this run predates the check". An absent file is not
+	# a clean bill of health, and every sweep archived before today has no file at all.
+	var rf := FileAccess.open(out_dir + "/_rejects.json", FileAccess.WRITE)
+	if rf:
+		rf.store_string(JSON.stringify({
+			"_note": "Swept values that did not survive assignment. Non-empty means at "
+				+ "least one tile photographed the DEFAULT under a variant's filename, "
+				+ "so no number from this run is about the axis.",
+			"variants": shot, "rejected": rejects.size(), "rows": rejects}, "\t"))
+		rf.close()
 	var f := FileAccess.open(out_dir + "/_done.txt", FileAccess.WRITE)
 	f.store_string("swept %d variants" % shot)
 	f.close()
 	print("config sweep: %d variants -> %s" % [shot, out_dir])
+	if not rejects.is_empty():
+		# Loud, and last, so it is the final thing in the log.
+		push_error("capture_config_sweep: %d swept values were REJECTED — this run's "
+			% rejects.size() + "tiles are not all variants. See _rejects.json.")
+		print("REJECTED %d values — NOT ALL TILES ARE VARIANTS" % rejects.size())
+		for r in rejects:
+			print("  %s  %s=%s -> %s  (%s)" % [r["variant"], r["key"],
+				r["wanted"], r["got"], r["why"]])
 	quit(0)
+
+
+## Did the property end up holding the value we asked for?
+##
+## NUMBERS ARE COMPARED AS NUMBERS, and that is not a nicety — the first version of
+## this check compared str() on both sides and immediately produced a FALSE REJECT on
+## every integer axis in the corpus. Godot's JSON parser returns all numbers as floats,
+## so an axis declaring `octaves: [1,2,3,4]` arrives here as 2.0, sets an int property
+## to 2 perfectly correctly, and then fails "2.0" != "2". Found by the negative test on
+## noise_quarry, which is what negative tests are for; a gate that cries wolf on the
+## common case is a gate somebody turns off.
+##
+## Everything else compares as text, because the comparison itself can fail: `3 == "2"`
+## raises "Invalid operands 'String' and 'int'" and would take the whole sweep down
+## rather than report one tile.
+func _took(want: Variant, got: Variant) -> bool:
+	var wn: bool = typeof(want) == TYPE_INT or typeof(want) == TYPE_FLOAT
+	var gn: bool = typeof(got) == TYPE_INT or typeof(got) == TYPE_FLOAT
+	if wn and gn:
+		# A float truncated into an int is still a LOSS and still fails here — 2.7
+		# landing as 2 is not the value the sweep asked for.
+		return is_equal_approx(float(want), float(got))
+	return str(got) == str(want)
+
+
+## One rejected assignment, printed once and remembered for the ledger.
+##
+## `got` is null when the property was never reached at all (no holder), which is a
+## different fault from a holder that refused the value — the first is a scene-shape
+## problem and the second is a type problem, and conflating them sends the next reader
+## to the wrong file.
+func _reject(rejects: Array, variant_label: String, key: String, wanted: Variant,
+		got: Variant, why: String) -> void:
+	rejects.append({
+		"variant": variant_label, "key": key,
+		"wanted": str(wanted), "wanted_type": type_string(typeof(wanted)),
+		"got": ("<unreachable>" if got == null else str(got)),
+		"why": why,
+	})
+	push_warning("capture_config_sweep: '%s' = %s did not take on %s — %s. This tile is "
+		% [key, str(wanted), variant_label, why] + "NOT a variant.")
 
 
 ## Mirror of GridInteractablesComponent._suppress_embedded_chrome (line 1010): hide
@@ -1298,6 +1385,32 @@ func _stand_down_world_bridges() -> void:
 ## Read from the script constant map rather than a hand-kept table: enums live there
 ## already, keyed by enum name, as {MEMBER: int}.
 func _coerce(holder: Node, key: String, val: Variant) -> Variant:
+	# THE OTHER DIRECTION, and it was missing. This function only ever handled
+	# String -> int, so a number arriving at a String property fell straight through
+	# untouched and was rejected on assignment without a word. The path is not exotic:
+	# cabinet_sweep.py's coerce() tries int() then float() on every value it is given,
+	# so ANY axis whose values look numeric is numericised before it reaches the spec —
+	# and build_dna_gallery and verify_batch both shell out through cabinet_sweep, so
+	# all three drivers share it. tier_terrarium declares ["1","2","3","4","5"] against
+	# `var tier: String` and lost every one of them.
+	#
+	# Matched against the property's OWN enum hint rather than by formatting the number,
+	# because str(3.0) is "3" in some Godot builds and "3.0" in others, and a member list
+	# is the artifact's own vocabulary. Same rule as everywhere else here: derive it from
+	# the code, never transcribe it.
+	if typeof(val) == TYPE_INT or typeof(val) == TYPE_FLOAT:
+		if typeof(holder.get(key)) == TYPE_STRING:
+			var members: PackedStringArray = _enum_members(holder, key)
+			for m in members:
+				if m == str(val) or float(m) == float(val):
+					return m
+			# No member matches. Returning the number would be rejected silently; the
+			# read-back check catches that, but say WHY here where the list is in hand.
+			push_warning("capture_config_sweep: '%s' is a String property and %s matches "
+				% [key, str(val)] + "none of its declared values [%s]."
+				% ", ".join(members))
+			return str(val)
+		return val
 	if typeof(val) != TYPE_STRING:
 		return val
 	var cur: Variant = holder.get(key)
@@ -1314,6 +1427,26 @@ func _coerce(holder: Node, key: String, val: Variant) -> Variant:
 	push_warning("capture_config_sweep: '%s' is an int property and '%s' is not a member of "
 		% [key, val] + "any enum on its script — the tile is not a variant.")
 	return val
+
+
+## The values an `@export_enum(...)` property actually declares, read off the live
+## property list. This is the artifact's own vocabulary as the engine sees it — the
+## same source tools/check_dna_declarations.py gates the registry against — so a sweep
+## and the declaration gate cannot end up disagreeing about what a value is called.
+## Empty for a property that is not an enum, which the caller treats as "no match".
+func _enum_members(holder: Node, key: String) -> PackedStringArray:
+	for p in holder.get_property_list():
+		if String(p.get("name", "")) != key:
+			continue
+		if int(p.get("hint", 0)) != PROPERTY_HINT_ENUM:
+			return PackedStringArray()
+		var out := PackedStringArray()
+		for part in String(p.get("hint_string", "")).split(",", false):
+			# An enum hint may carry explicit ordinals as "Name:3"; the name is what a
+			# String-typed export stores.
+			out.append(part.split(":")[0].strip_edges())
+		return out
+	return PackedStringArray()
 
 
 func _holder_of(node: Node, key: String) -> Node:
