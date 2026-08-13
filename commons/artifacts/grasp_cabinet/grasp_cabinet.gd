@@ -242,7 +242,12 @@ const COL_MARK := Color(0.28, 0.86, 0.92)     ## where the hand stopped
 ## rung that adds it predicted 1.25% at `pinch` — gauged for WIDTH and not for CONTRAST,
 ## which is the same law-4 failure one step further along. Nothing about what the stem
 ## claims changed; it is legible now.
-const COL_STEM := Color(0.58, 0.61, 0.66).darkened(0.10)
+## Color(0.58, 0.61, 0.66).darkened(0.10) written out. A METHOD CALL IS NOT A CONSTANT
+## EXPRESSION — the same rule that rejects PackedVector2Array([...]) in a const, one rung
+## further out, and it took the script down with "Assigned value for constant COL_STEM
+## isn't a constant expression". darkened(a) multiplies each channel by (1 - a), so this
+## is 0.58/0.61/0.66 x 0.9, done here rather than at load.
+const COL_STEM := Color(0.522, 0.549, 0.594)
 const COL_RULE := Color(0.55, 0.55, 0.58)
 
 ## THE LEDGER'S GAUGE. Ceiling +/- 0.5 R, FIXED ACROSS BOTH AXES and across every tile of
@@ -367,7 +372,9 @@ func _check_family_list() -> void:
 func _measure() -> void:
 	var hand_max: float = OPEN + PAD_R
 	var ch_low: float = CHOR_RAIL_Y * R - CHOR_SIB * R
-	var half_x: float = maxf(hand_max, _chorus_slot(CHOR_SLOTS - 1) + CHOR_SIB * R) + CLEAR
+	var ch_right: float = _chorus_slot(CHOR_SLOTS - 1) + CHOR_SIB * R
+	var ch_left: float = -(_chorus_slot(0) - CHOR_OVER * R - CHOR_BAR_R * R)
+	var half_x: float = maxf(hand_max, maxf(ch_right, ch_left)) + CLEAR
 	var top: float = hand_max + CLEAR
 	var bot: float = minf(-hand_max, ch_low) - CLEAR
 	_niche_w = half_x * 2.0
