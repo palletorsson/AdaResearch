@@ -794,12 +794,23 @@ def unreachable_roots(reg: dict) -> tuple:
         implement `grain` in full, ~20 references each, and neither scene loaded them.
         Attaching the script moved the axis from silently dead to 13.2% and 27.9%.
 
-      CHILD-ONLY — a script exists, but on a CHILD rather than the root. The sweep still
-        finds the property, because it searches the subtree breadth-first, so the axis
-        measures fine on the bench and the gallery looks healthy. A MAP cannot reach it:
-        GridInteractablesComponent stamps config metadata and calls apply_grid_config on the
-        ROOT. The axis works everywhere except in the game, which is the only place it is
-        for. Reported, not failed — some of these are legitimately composed scenes.
+      CHILD-ONLY — a script exists, but on a CHILD rather than the root. The sweep finds the
+        property, because it searches the subtree breadth-first, so the axis measures fine on
+        the bench.
+
+        THIS WAS A REACHABILITY FAULT UNTIL 2026-08-08, AND IS NOW A SHAPE REPORT. It used to
+        read: the axis works everywhere except in the game, which is the only place it is for.
+        GridInteractablesComponent asked the ROOT and only the ROOT, so config landed as
+        metadata on a node that reads nothing and eighteen axes were proven to bite in a place
+        no player could stand. e0bc97b3b closed it — when the root handles neither call,
+        _config_holder walks breadth-first for the first descendant that handles it or declares
+        one of the keys, mirroring capture_config_sweep._holder_of exactly, no further than the
+        bench reaches. A map token reaches these tokens now.
+
+        Kept, because which scenes are composed rather than scripted-at-the-root is still worth
+        knowing — it decides where to attach a script and where not to bother. Reported, not
+        failed: these are legitimately composed scenes, and the forward is gated by
+        construction, so an artifact whose root handles config never takes that path at all.
 
     Inherited scenes (`instance=ExtResource` on the root) are skipped: the base scene carries
     the script and the root correctly has none of its own.
@@ -832,6 +843,47 @@ def unreachable_roots(reg: dict) -> tuple:
     return broken, child_only
 
 
+def duplicate_values(reg: dict, only: str = "") -> list:
+    """Axes that declare the same value twice — invisible to every other check here.
+
+    THIS GATE CANNOT SEE IT ANY OTHER WAY, and that is the point. Every check above asks
+    whether a declared value EXISTS in the code, one value at a time. A duplicate passes
+    that test twice, because both entries are individually valid. Nothing looks at the
+    list as a list.
+
+    What it costs is a fabricated zero. build_dna_gallery sweeps the cross product, so a
+    repeated value renders the SAME frame under two labels, and the closest pair is the
+    minimum over all pairs — so the sweep is handed a guaranteed 0.00% that is a fact
+    about the registry and not about the artifact. Found in julia_bench, whose archived
+    bite report literally contains the row
+
+        {"ladder": "figure"} vs {"ladder": "figure"} -> 0.0 %
+
+    a frame compared against itself and reported as a measurement. Its real closest pair
+    is seed vs section at 0.733%. Its code declares five values; the registry declared six.
+
+    Scope, measured over the corpus at 1053 declared axes: exactly one. Cheap to keep
+    checking, and it is the third distinct cause of a 0.00% found in one day — the others
+    being a value the sweep never managed to set, and a designed byte identity. Those look
+    identical in a report and mean completely different things.
+    """
+    out = []
+    for tok, (entry, _f) in sorted(reg.items()):
+        if only and tok != only:
+            continue
+        for axis, vals in ((entry.get("dna") or {}).get("axes") or {}).items():
+            if not isinstance(vals, list):
+                continue
+            sv = [str(v) for v in vals]
+            rep = {}
+            for v in sv:
+                if sv.count(v) > 1:
+                    rep[v] = sv.count(v)
+            if rep:
+                out.append((tok, axis, sv, rep))
+    return out
+
+
 def main() -> int:
     only = ""
     quiet = False
@@ -860,6 +912,7 @@ def main() -> int:
     bad = [r for r in rows if r["status"] in ("MISMATCH", "NO_EXPORT")]
     unv = [r for r in rows if r["status"] == "unverifiable"]
     und = [r for r in rows if r["status"] == "UNDECLARED"]
+    dup = duplicate_values(reg, only)
 
     if not quiet:
         print(f"{'artifact.axis':46} status")
@@ -871,7 +924,12 @@ def main() -> int:
         print("-" * 78)
     print(f"{len(rows)} declared axes · {len(rows)-len(bad)-len(unv)-len(und)} verified"
           f" · {len(und)} with an undeclared code value · {len(unv)} unverifiable"
-          f" · {len(bad)} broken")
+          f" · {len(bad)} broken · {len(dup)} with a repeated value")
+    for tok, axis, vals, rep in dup:
+        print(f"\n  {tok}.{axis}  [a value is declared more than once — the sweep renders "
+              f"it twice and the closest pair is a guaranteed 0.00%]")
+        print(f"      {' | '.join(vals)}")
+        print(f"      repeated: {', '.join(f'{k} x{n}' for k, n in rep.items())}")
     for r in und:
         print(f"\n  {r['token']}.{r['axis']}  [the code can build a value the registry never "
               f"declares, so the sweep never renders it]\n    {r['detail']}")
@@ -912,8 +970,8 @@ def main() -> int:
             print(f"  {tok:28s} .{axes:<20s} {scene}")
     if child_roots:
         print(f"\n{len(child_roots)} declared axis whose script is on a CHILD, not the scene "
-              f"root [the sweep reaches it breadth-first; a map token cannot, because "
-              f"apply_grid_config is called on the ROOT]:")
+              f"root [composed scenes. Both the sweep and — since e0bc97b3b — a map token "
+              f"reach these breadth-first. Informational, not a fault]:")
         for tok, scene, axes in child_roots:
             print(f"  {tok:28s} .{axes:<20s} {scene}")
 
