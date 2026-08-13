@@ -122,6 +122,36 @@ var _next_z: float = 0.0
 var _seg_index: int = 0
 var _prev_w: int = -1             # width of the previous segment's tile (lobby seals the jump)
 var _first_key: String = ""       # --em-first=<key> rotates the dealing order
+# ── THE WHITE CUBE GATE (2026-08-12) ─────────────────────────────────────────
+# OFF by default and gated twice, so a museum that never opted in is untouched:
+#   --em-white-cube          forces every segment of THIS RUN into the mode
+#   "white_cube": true       on a pattern in template_patterns.json opts that
+#                            one building in, in every run
+# Everything it changes is a knob that already existed and was already wired --
+# em_budget's hang licence, em_props' props_per_10m, em_detail's stretch floor
+# and label modulo, and em_materials.gallery_white(), which has been in the
+# library since it was written with no callers while every wall in the corridor
+# was drawn in 0.72 warm plaster. See em_budget.gd's WHITE CUBE block for the
+# measurement that set each number.
+var _white_cube: bool = false
+# ── THE WALL-RUN GATE (2026-08-13) ───────────────────────────────────────────
+# OFF by default, gated twice, same shape as the white cube above:
+#   --em-wall-runs           merges every segment's walls in THIS RUN
+#   "wall_runs": true        on a pattern in template_patterns.json opts that
+#                            one building in, in every run
+# The museum stamps one BoxMesh(1, 3, 1) and one BoxShape3D per wall CELL, so a
+# 27 m enfilade wall is twenty-seven objects with no name and no length. This
+# merges collinear cells into one box per straight run: 6826 boxes -> 936 across
+# the 30 museums (tools/em_wall_merge_measure.py), a 7.29x cut, and the wall
+# becomes an object that knows how long it is.
+#
+# It is safe to merge ONLY because every architectural material in this scene is
+# WORLD triplanar (em_materials._base sets uv1_world_triplanar; its header says
+# the reason is these very boxes). A world-triplanar sample is a function of
+# world position, so an N-metre box and N one-metre boxes shade identically --
+# the merge cannot stretch a texture, because there is no mesh UV to stretch.
+# Solid volume is unchanged, so collision is unchanged.
+var _wall_runs: bool = false
 var _plan_path: String = ""       # --em-plan[=res://...]; empty = deal as before
 var _plan_db: Dictionary = {}     # museum key -> {artifacts:[...]}
 var _force_vr: bool = false       # --em-vr forces the headset path
@@ -300,6 +330,10 @@ func _parse_args() -> void:
 			_force_vr = true
 		elif a.begins_with("--em-first="):
 			_first_key = a.substr(11)
+		elif a == "--em-white-cube":
+			_white_cube = true
+		elif a == "--em-wall-runs":
+			_wall_runs = true
 
 ## ── MODULE LOADING ───────────────────────────────────────────────────────────
 ## Six render modules, six independent failure domains. Anything that does not
@@ -443,6 +477,15 @@ func _build_surfaces() -> void:
 	# from the start and had never once been passed non-zero by anybody.
 	_surf["deck"] = _mat_of("floor_terrazzo", [Color.WHITE, 0.15])
 	_surf["wall"] = _mat_of("wall_plaster", [])
+	# THE WHITE CUBE'S DEFINING SURFACE, and it was already in the library with
+	# no callers anywhere in the repo: em_materials.gallery_white(), documented
+	# as "Museum-white matt emulsion, 0.885 sRGB. The building's main bounce
+	# surface". Every wall in every proof frame has been drawn in wall_plaster
+	# instead — honed lime at albedo 0.72/0.705/0.675, a warm grey. That is a
+	# 0.165 albedo gap on the surface that is 60-70% of every picture, and no
+	# amount of hanging or unhanging things on it closes it. Resolved per segment
+	# so a per-template opt-in works; absent the gate this role is never read.
+	_surf["wall_white"] = _mat_of("gallery_white", [])
 	_surf["podium"] = _mat_of("podium_marble", [])
 	_surf["plinth"] = _mat_of("trim_oak", [])
 	_surf["ceiling"] = _mat_of("ceiling_plaster", [])
@@ -555,6 +598,9 @@ func _load_museums() -> void:
 				"h": int(p.get("h", 30)), "tile": p.get("tile", []),
 				"walk_rule": p.get("walk_rule", ""),
 				"color": String(p.get("color", "#888888")),
+				# the per-building half of the white-cube gate. Absent on all 30
+				# shipped patterns, so this reads false and nothing changes.
+				"white_cube": bool(p.get("white_cube", false)),
 				"em_order": int(p.get("em_order", 99))})
 	# the dealing order is DATA (em_order on the pattern, a proposal not a
 	# ruling); alphabetical keys are only the tiebreak. --em-first rotates a
@@ -930,6 +976,78 @@ func _add_col(body: StaticBody3D, pos: Vector3, size: Vector3) -> void:
 	cs.position = pos
 	body.add_child(cs)
 
+## THE WALL-RUN MERGE (2026-08-13). Gate-aware wall stamp: with the gate OFF
+## this is byte-for-byte the two calls it replaced, in the same order, so a
+## museum that never opted in is built exactly as before. With it ON the cell
+## is only recorded, and _stamp_wall_runs emits one box per straight run.
+func _wall_at(seg: Node3D, solid: StaticBody3D, cells: Dictionary, x: int, z: int,
+		col: Color, mat: Material, runs_on: bool) -> void:
+	if runs_on:
+		cells[Vector2i(x, z)] = true
+		return
+	_box(seg, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1), col, mat)
+	_add_col(solid, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1))
+
+## Greedy longest-first: take the longest straight run anywhere in the cell set,
+## emit it as ONE box, remove its cells, repeat. Removing a run can cut a
+## crossing run in two, so the remainder is re-measured every pass rather than
+## planned up front -- that is why this rescans instead of sorting once.
+##
+## Deterministic: cells are visited in (z, x) order, the x axis is tried before
+## z, and only a strict > replaces the incumbent, so ties always break the same
+## way and the same seed builds the same museum. tools/em_wall_merge_measure.py
+## mirrors this rule exactly and is where the 6826 -> 936 figure comes from.
+##
+## The merge is safe because every architectural material here is WORLD
+## triplanar (em_materials._base), so shading is a function of world position,
+## not of mesh UV: an N-metre box and N one-metre boxes sample identically.
+## The solid volume is unchanged, so the collider is unchanged too.
+func _stamp_wall_runs(seg: Node3D, solid: StaticBody3D, cells: Dictionary,
+		col: Color, mat: Material) -> void:
+	if cells.is_empty():
+		return
+	var left: Dictionary = cells.duplicate()
+	var order: Array = left.keys()
+	order.sort_custom(func(a, b): return (a.y * 8192 + a.x) < (b.y * 8192 + b.x))
+	var emitted: int = 0
+	var longest: int = 0
+	while not left.is_empty():
+		var best_x: int = 0
+		var best_z: int = 0
+		var best_n: int = 0
+		var best_axis: int = 0
+		for k in order:
+			if not left.has(k):
+				continue
+			for axis in [0, 1]:
+				var dx: int = 1 if axis == 0 else 0
+				var dz: int = 0 if axis == 0 else 1
+				if left.has(Vector2i(k.x - dx, k.y - dz)):
+					continue
+				var n: int = 0
+				while left.has(Vector2i(k.x + dx * n, k.y + dz * n)):
+					n += 1
+				if n > best_n:
+					best_n = n
+					best_x = int(k.x)
+					best_z = int(k.y)
+					best_axis = int(axis)
+		if best_n <= 0:
+			break
+		var ddx: int = 1 if best_axis == 0 else 0
+		var ddz: int = 0 if best_axis == 0 else 1
+		for i in range(best_n):
+			left.erase(Vector2i(best_x + ddx * i, best_z + ddz * i))
+		var span: float = float(best_n)
+		var size: Vector3 = Vector3(span, 3.0, 1.0) if best_axis == 0 else Vector3(1.0, 3.0, span)
+		var pos: Vector3 = Vector3(best_x + span * 0.5, 1.5, best_z + 0.5) if best_axis == 0 else Vector3(best_x + 0.5, 1.5, best_z + span * 0.5)
+		_box(seg, pos, size, col, mat)
+		_add_col(solid, pos, size)
+		emitted += 1
+		longest = maxi(longest, best_n)
+	print("[em_wall_runs] %d wall cells -> %d boxes (%.2fx fewer), longest run %d m" % [
+		cells.size(), emitted, float(cells.size()) / float(maxi(emitted, 1)), longest])
+
 func _build_segment() -> void:
 	# a crowned chapter gets its crowned building (the ruling made live);
 	# uncrowned chapters walk the em_order rotation. --em-first still forces
@@ -970,10 +1088,25 @@ func _build_segment() -> void:
 	# (a fully sealed strip at the very first segment, where nothing is behind).
 	var pw: int = _prev_w if _prev_w > 0 else 1
 	var zbase := int(_next_z)
-	var wall_col := Color(0.32, 0.32, 0.36)
+	# THE GATE, resolved once per segment. Off, every line below is what it was.
+	var wc: bool = _white_cube or bool(spec.get("white_cube", false))
+	var wall_col := Color(0.86, 0.855, 0.845) if wc else Color(0.32, 0.32, 0.36)
+	# THE WALL-RUN GATE, resolved the same way. Off, every _wall_at below is the
+	# pair of calls it replaced, in the same order, so the segment is untouched.
+	var wr: bool = _wall_runs or bool(spec.get("wall_runs", false))
+	var wcells: Dictionary = {}
 	# the material library replaces the flat albedos role by role; a role the
 	# library never produced stays on its v1 colour
-	var m_wall: Material = _sm("wall")
+	var m_wall: Material = _sm("wall_white") if wc else _sm("wall")
+	if m_wall == null:
+		m_wall = _sm("wall")
+	# door overpanels are stamped by em_detail in the "wall" role, so the role it
+	# probes has to be the same plaster the segment is actually built from or the
+	# panel over every door is a different colour from the wall around it
+	if wc and _surf.has("wall_white"):
+		_detail_mats["wall"] = _surf["wall_white"]
+	elif _surf.has("wall"):
+		_detail_mats["wall"] = _surf["wall"]
 	var m_deck: Material = _sm("deck")
 	var m_floor: Material = _sm("floor")
 	var m_podium: Material = _sm("podium")
@@ -985,21 +1118,17 @@ func _build_segment() -> void:
 				_walk_cells[Vector2i(x, zbase + zr)] = true
 	for zr in range(VESTIBULE_H):
 		for sx in [0, LOBBY_W - 1]:
-			_box(seg, Vector3(sx + 0.5, 1.5, zr + 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
-			_add_col(solid, Vector3(sx + 0.5, 1.5, zr + 0.5), Vector3(1, 3.0, 1))
+			_wall_at(seg, solid, wcells, int(sx), zr, wall_col, m_wall, wr)
 	for x in range(pw - 1, LOBBY_W):        # seal beyond the previous tile's width
-		_box(seg, Vector3(x + 0.5, 1.5, 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
-		_add_col(solid, Vector3(x + 0.5, 1.5, 0.5), Vector3(1, 3.0, 1))
+		_wall_at(seg, solid, wcells, x, 0, wall_col, m_wall, wr)
 	for x in range(w - 1, LOBBY_W):         # seal beyond this tile's width
-		_box(seg, Vector3(x + 0.5, 1.5, VESTIBULE_H - 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
-		_add_col(solid, Vector3(x + 0.5, 1.5, VESTIBULE_H - 0.5), Vector3(1, 3.0, 1))
+		_wall_at(seg, solid, wcells, x, VESTIBULE_H - 1, wall_col, m_wall, wr)
 	# outer skin: an implicit wall just beyond both side columns of the tile, so
 	# free-plan templates with a walkable rim (Kanazawa, Neue Nationalgalerie)
 	# cannot leak the walker off the edge of the world
 	for y_skin in range(tile.size()):
 		for sx2 in [-1, w]:
-			_box(seg, Vector3(sx2 + 0.5, 1.5, y_skin + VESTIBULE_H + 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
-			_add_col(solid, Vector3(sx2 + 0.5, 1.5, y_skin + VESTIBULE_H + 0.5), Vector3(1, 3.0, 1))
+			_wall_at(seg, solid, wcells, int(sx2), y_skin + VESTIBULE_H, wall_col, m_wall, wr)
 	# collect slots first so the artifact budget prefers hero > podium > floor
 	var slots: Array = []
 	for y in range(tile.size()):
@@ -1018,14 +1147,15 @@ func _build_segment() -> void:
 					_box(seg, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1), Color(0.35, 0.27, 0.16), m_plinth)
 					_add_col(solid, Vector3(x + 0.5, 0.3, z + 0.5), Vector3(1, 1.0, 1))
 				"4":
-					_box(seg, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1), wall_col, m_wall)
-					_add_col(solid, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1))
+					_wall_at(seg, solid, wcells, x, z, wall_col, m_wall, wr)
 			if c == "1s":
 				slots.append({"x": x, "y": z, "top": 0.0, "rank": 2})
 			elif c == "2s":
 				slots.append({"x": x, "y": z, "top": 0.4, "rank": 1})
 			elif c == "3s":
 				slots.append({"x": x, "y": z, "top": 0.8, "rank": 0})
+	if wr:
+		_stamp_wall_runs(seg, solid, wcells, wall_col, m_wall)
 	slots.sort_custom(func(a, b): return int(a["rank"]) < int(b["rank"]))
 	var deal: Dictionary = _deal_segment(seg, slots, zbase, spec, tile, w, h)
 	var placed: int = int(deal.get("placed", 0))
@@ -1116,7 +1246,9 @@ func _build_segment() -> void:
 		if _mod_arity(_mod_detail, "dress_segment") >= 7:
 			_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w,
 				{"wall_features_max": int(deal.get("wall_features_max", -1)),
-					"fill_walls": bool(deal.get("fill_walls", true))})
+					"fill_walls": bool(deal.get("fill_walls", true)),
+					"hang_min_stretch": int(deal.get("hang_min_stretch", 2)),
+					"label_every": int(deal.get("label_every", 11))})
 		else:
 			_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w)
 	# 1b. FURNITURE. em_detail is contractually forbidden to add collision, and a
@@ -1158,6 +1290,12 @@ func _build_segment() -> void:
 		int(deal.get("guests", 0)), int(deal.get("plinths", 0)),
 		int(seg.get_meta("em_props_placed", 0)),
 		_segments[-1]["z0"], _segments[-1]["z1"], n_lights])
+	if wc:
+		var wcb: Dictionary = deal.get("budget", {})
+		print("[white-cube] seg %d: hang licence %d (min wall %d m), 1 card per %d faces, props/10m %.4f, wall = gallery_white" % [
+			_seg_index - 1, int(deal.get("wall_features_max", -1)),
+			int(deal.get("hang_min_stretch", 2)), int(deal.get("label_every", 11)),
+			float(wcb.get("props_per_10m", -1.0))])
 
 ## ── THE SET DEAL ─────────────────────────────────────────────────────────────
 ## v1 dealt ONE artifact per slot in spine order and stopped at eight. A critic
@@ -1281,7 +1419,8 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 		if not planned.is_empty():
 			return planned
 
-	var budget: Dictionary = _segment_budget(w, h, slots, mkey, tile)
+	var budget: Dictionary = _segment_budget(w, h, slots, mkey, tile,
+		_white_cube or bool(spec.get("white_cube", false)))
 	var max_objects: int = int(budget.get("max_objects", MAX_ARTIFACTS_PER_SEGMENT))
 	var lead_cap: int = int(budget.get("lead_count", MAX_ARTIFACTS_PER_SEGMENT))
 	var rel_per_lead: int = int(budget.get("relatives_per_lead", 0))
@@ -1298,7 +1437,13 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 		# computed these; until now nothing consumed them and every wall in every
 		# proof frame was bare plaster.
 		"wall_features_max": int(budget.get("wall_features_max", -1)),
-		"fill_walls": bool(budget.get("fill_walls", true))}
+		"fill_walls": bool(budget.get("fill_walls", true)),
+		# the white cube's two em_detail knobs. Absent from the budget unless the
+		# gate is on, so these read the shipped defaults and dress_segment
+		# behaves exactly as before.
+		"hang_min_stretch": int(budget.get("hang_min_stretch", 2)),
+		"label_every": int(budget.get("label_every", 11)),
+		"white_cube": bool(budget.get("white_cube", false))}
 	if max_objects <= 0 or slots.is_empty() or _pool.is_empty():
 		return out
 	var have_sets: bool = _mod_has(_mod_sets, "build_set") and not _rel_db.is_empty()
@@ -1593,9 +1738,13 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 
 ## How much this building can hold, from its own stated mechanism. Absent the
 ## module, the v1 constant for every template.
-func _segment_budget(w: int, h: int, slots: Array, key: String, tile: Array) -> Dictionary:
+func _segment_budget(w: int, h: int, slots: Array, key: String, tile: Array,
+		white_cube: bool = false) -> Dictionary:
 	if _mod_has(_mod_budget, "for_segment"):
-		var r: Variant = _mod_budget.call("for_segment", w, h, slots, key, {"tile": tile})
+		var ctx: Dictionary = {"tile": tile}
+		if white_cube:
+			ctx["white_cube"] = true
+		var r: Variant = _mod_budget.call("for_segment", w, h, slots, key, ctx)
 		if r is Dictionary and (r as Dictionary).has("max_objects"):
 			return r as Dictionary
 	return {"max_objects": MAX_ARTIFACTS_PER_SEGMENT,
