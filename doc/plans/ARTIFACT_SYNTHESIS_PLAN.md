@@ -71,3 +71,88 @@
 
 Status: wave 1 in build. Verification: compile gate, declaration gate, fixed-
 camera sweep per token, then commit. Placement into maps is a separate ruling.
+
+---
+
+## Wave 8 — target picked by census, 2026-08-13
+
+Picked by census rather than from the backlog above, per the handover's rule. Of every
+axis word in the corpus, **7 families have 5+ members and no synthesis drawing on them.**
+Ranked by vocabulary count, because a word declared with one value list is a word the
+family agrees about:
+
+| word | members | vocabularies | distinct scenes |
+|---|---:|---:|---:|
+| `selection` | 6 | 2 | **4** |
+| `subdivision` | 5 | 2 | **1** |
+| `course` | 5 | 2 | 5 |
+| `resolution` | 5 | 3 | 5 |
+| `mode` | 6 | 4 | 6 |
+| `depth` | 6 | 5 | 6 |
+| `support` | 10 | 8 | 10 |
+
+**Two of the top three collapse, and the census as published would not have caught it.**
+Member count counts registry TOKENS, and CLAUDE.md's most common hidden family is one
+scene wearing several names:
+
+- **`subdivision` is not a family.** All five tokens — `icosahedron_base`,
+  `subdivision_demo`, `strut_inventory`, `dome_builder`, `geodesic_dome` — resolve to the
+  single scene `dome_kit.tscn`. A synthesis there would be five photographs of one object
+  varied by a token meta. Its values `v1|v2|v3|v4` are a bare ordinal besides, which makes
+  no claim there is anything to be dishonest about.
+- **`course` is real but split at the wrong seam.** Five scenes, but four declare
+  `lift|lateral|depth` while `translation_cube_demo` declares
+  `lift_lateral|lateral_lift|lift_depth|lateral|free` — a different question wearing the
+  same word. That is the VOCABULARY_SPLIT "genuinely different" case, not a family.
+
+**So the census needs a third column — distinct scenes, not token count — before anything
+is picked from it.** Added here rather than to the tool, because the tool's own output is
+what misled it.
+
+### `selection` — 6 tokens, 4 scenes, one honest vocabulary
+
+| token | values | scene |
+|---|---|---|
+| `evolved_creatures` | drift·uniform·culled·runaway·split | `evolvedcreatures.tscn` |
+| `evolving_flowers` / `evolvingflowers` | same five | `evolvingflowers.tscn` |
+| `non_teleological_evolution` | same five | `non_teleological_evolution.tscn` |
+| `evolutionary_algorithms` / `particle_randomness_evolutionary` | drift·uniform·culled·split | `evolutionary_algorithms.tscn` |
+
+The subset is real and derived, not a defect: `EvolutionaryAlgorithmsDemo.gd` extends
+`extrem_randomness.gd`, whose `const SELECTIONS` is four words wide (line 86) and whose
+`_apply_selection` (line 634) rejects anything outside it. `runaway` is absent because the
+parent never had it.
+
+**What the word means, read from all four scenes rather than from the registry.** Each
+value is a PAST-TENSE claim about what a pressure did to a population, and `drift` is the
+shipped default and live artifact in every one of them:
+
+- `drift` — the unselected gen-0 spread; the artifact as it ships, byte for byte
+- `uniform` — one converged genome copied N times; nothing left to tell apart
+- `culled` — a few survivors of that converged form, the rest of the plots bare
+- `runaway` — the population pinned at the genome's own clamp ceilings
+- `split` — two ranks with a corridor between them; disruptive selection
+
+### The synthesis, and LAW 2 answered from the code
+
+The four substrates are **parallel**: four scenes, four `match selection:` blocks with
+mutually exclusive branches, no shared state, and nothing about a flower contains a biped.
+So the simultaneity is the object — all four stand at once — and `selection` is the axis.
+Same shape as `tier_terrarium`'s parallel case.
+
+**The argument no single member can make:** a selection regime is a claim about a
+population's SPREAD, and each substrate renders that same claim in a different currency —
+limb length, petal count, radius and hue, position in a fitness landscape. Standing them
+together asks whether the word survives the change of currency.
+
+**And that is a falsifiable prediction, not a theme.** If the vocabulary is honest the four
+bays must measure ALIKE at each value — the shared-vocabulary check the corpus keeps
+rediscovering, and the one kind of claim that cannot be right by luck. `tier_terrarium`
+found the opposite (a factor of 4.49 across one word, and one bay running backwards), so
+the interesting outcome is available in both directions.
+
+Open before building: the second axis. `tier_terrarium` used `channel` — which of the
+word's readings to draw. Candidate here is how the population is drawn (bodies against a
+spread gauge), which must be pinned so it cannot borrow the first axis's signal. **Do not
+reuse `regime`** — VOCABULARY_SPLIT records it as the worst word in the corpus, 15 members
+across 13 vocabularies.
