@@ -1425,7 +1425,14 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 			"x": tx, "y": tz + VESTIBULE_H, "rank": 2,
 			"top": float(row.get("support_height_m", 0.0)),
 		}
-		if _stamp(seg, scene, tok, cell, zbase, 1, {}, false):
+		# The rotation is a NEGOTIATED result, not a hint. HANDOVER §6: "one
+		# authored rotation is a preference; two or more is a constraint", and
+		# every turn away from the authored value is recorded on the placement.
+		# It was read out of the plan and then dropped on the floor here — 61 of
+		# the plan's 507 rows carry a non-zero turn (270:27, 90:20, 180:14) and
+		# all of them were stamped facing 0.
+		if _stamp(seg, scene, tok, cell, zbase, 1, {}, false, 0.0,
+				float(row.get("rotation", 0.0))):
 			placed += 1
 
 	print("[em-plan] %s: stamped %d interior, %d exterior not hostable%s%s"
@@ -1865,9 +1872,20 @@ func _walk_order(cells: Array) -> Array:
 ##     removal would seal the corridor is declined outright.
 ##   * `span_cap` (metres, 0 = no test) refuses an artifact whose BUILT extent is
 ##     wider than the seal can honestly cover. See _guest_span_cap.
+## `yaw_deg` is the NEGOTIATED rotation, and it arrives only from the plan path.
+## Trailing and defaulted to 0.0, so the three pool/relatives/guest callers are
+## byte-identical and a museum built without a plan is untouched.
+##
+## The sign is the GRID's, not the dressing room's. GridInteractablesComponent
+## assigns `rotation_degrees.y = float(rotation)` straight from a map token, so a
+## plan rotation of 90 means the same thing in both renderers. The builder's
+## `artifact_yaw_deg - rotation_deg` is a room-LOCAL counter-rotation — the room
+## turns and the artifact turns back inside it — which is a different frame and
+## would mirror every placement if copied here. One negotiator, two renderers:
+## they must agree about what 90 means.
 func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool,
-		span_cap: float = 0.0) -> bool:
+		span_cap: float = 0.0, yaw_deg: float = 0.0) -> bool:
 	if scene_path == "" or cell.is_empty():
 		return false
 	var ps: PackedScene = load(scene_path) as PackedScene
@@ -1919,6 +1937,13 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 				_deal_stats["plinths"] = int(_deal_stats.get("plinths", 0)) + 1
 	node.position = Vector3(float(cell.get("x", 0)) + 0.5,
 		float(cell.get("top", 0.0)) + lift, float(cell.get("y", 0)) + 0.5)
+	# The negotiated turn, applied BEFORE the node enters the tree — the same
+	# order the dressing-room builder and the config sweep both use, so an
+	# artifact that builds differently per facing builds the right one first time.
+	# Guarded rather than assigned: a bare 0.0 would silently flatten a rotation
+	# the .tscn itself authored, and 446 of the plan's 507 rows are 0.
+	if not is_zero_approx(yaw_deg):
+		node.rotation_degrees.y = yaw_deg
 	seg.add_child(node)
 	# ── DOES IT FIT THE SLOT IT WAS DEALT? ──────────────────────────────────
 	# `_seal_cells` clamps to MAX_SEAL_RADIUS, so it can only take 5x5 cells out

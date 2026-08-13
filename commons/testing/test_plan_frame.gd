@@ -59,6 +59,23 @@ func _initialize() -> void:
 			"could not find the cell construction in _deal_from_plan; the test "
 			+ "cannot vouch for the frame and must not pass by default")
 
+	# --- 2b. the negotiated rotation must survive to the node ----------------
+	# Rotation is a RESULT, not a hint: HANDOVER §6 rules that two or more
+	# authored rotations make it a constraint, and every turn away from the
+	# authored value is recorded on the placement. The plan carries it on every
+	# row — 61 of 507 non-zero — and the assembler dropped all of them.
+	if not src.contains("yaw_deg: float = 0.0"):
+		failures.append(
+			"_stamp does not accept a yaw; the plan's rotation cannot reach the node")
+	if not src.contains("node.rotation_degrees.y = yaw_deg"):
+		failures.append(
+			"_stamp never applies a yaw — every stamped object faces 0 whatever "
+			+ "the negotiator decided")
+	if not src.contains("float(row.get(\"rotation\", 0.0))"):
+		failures.append(
+			"_deal_from_plan does not read `rotation` off the plan row, so the "
+			+ "negotiated turn is discarded between the plan and the scene")
+
 	# --- 3. the constant itself ---------------------------------------------
 	if not src.contains("const VESTIBULE_H := %d" % VESTIBULE_H):
 		failures.append(("endless_museum.VESTIBULE_H is no longer %d; this test "
