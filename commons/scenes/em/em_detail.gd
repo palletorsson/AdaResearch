@@ -20,6 +20,18 @@ extends RefCounted
 #                            face count, so an un-wired caller still gets walls.
 #   fill_walls         bool  false = this building hangs nothing (Teshima, whose
 #                            whole argument is one work in an empty room).
+#   hang_min_stretch   int   the shortest wall a showing may hang on, in metres.
+#                            Defaults to HANG_PITCH_FACES, which is the floor
+#                            _stretch_candidates has always enforced ("a
+#                            one-metre stub is a pier return, not a wall"), so an
+#                            omitted key changes nothing. The white cube raises
+#                            it: measured over the thirty museum templates the
+#                            mean unbroken wall is 2.7 m and 59% of all walls are
+#                            exactly 1 m, so at the shipped floor a cap of 50 is
+#                            spread one-per-fragment and no plane in the building
+#                            is ever left blank. Raising the floor collects the
+#                            same pictures onto the long walls instead.
+#   label_every        int   the wall-card modulo. Defaults to LABEL_EVERY (11).
 #
 # WHY TRIM AND NOT MORE GEOMETRY. The baseline segment is one hundred unbevelled
 # 1x3x1 boxes. A renderer given an unbevelled box has exactly two pieces of
@@ -358,7 +370,7 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 
 	_add_wall_faces(faces, skirt_x, trim_x)
 	_add_arris_beads(walls, floors, trim_x)
-	_add_labels(faces, trim_x)
+	_add_labels(faces, trim_x, maxi(int(opts.get("label_every", LABEL_EVERY)), 1))
 	# THE HUNG SHOWINGS, before the chamfer budget is spent — this family is not
 	# an arris and must never be the thing that a pathological template drops.
 	var hang_on: bool = bool(opts.get("fill_walls", true))
@@ -368,10 +380,14 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 		# (em_budget's CORPUS_WALL_FEATURES 2.2 per 10 m against a 1 m face).
 		hang_cap = clampi(int(floor(float(faces.size()) / 6.0)), 0, HANG_HARD_MAX)
 	hang_cap = clampi(hang_cap, 0, HANG_HARD_MAX)
+	var hang_min: int = maxi(int(opts.get("hang_min_stretch", HANG_PITCH_FACES)),
+		HANG_PITCH_FACES)
 	if hang_on and hang_cap > 0:
-		_add_wall_showings(faces, hang_cap, hang_frame_x, hang_mount_x, hang_field_x)
-	print("[em_detail] walls: %d dressed faces, licence %d, %d showings hung%s" % [
-		faces.size(), hang_cap, hang_mount_x.size(), "" if hang_on else " (building hangs nothing)"])
+		_add_wall_showings(faces, hang_cap, hang_frame_x, hang_mount_x, hang_field_x,
+			hang_min)
+	print("[em_detail] walls: %d dressed faces, licence %d, %d showings hung (min wall %d m)%s" % [
+		faces.size(), hang_cap, hang_mount_x.size(), hang_min,
+		"" if hang_on else " (building hangs nothing)"])
 
 	# CHAMFER PRIORITY ORDER. Under budget this is just an order; over budget it
 	# is a ranking, so state it as one. Reveals first — a door is the one arris
@@ -517,11 +533,11 @@ static func _dressed_faces(walls: Dictionary, floors: Dictionary) -> Array:
 ## seed produce the same building — a randf() here would make every proof shot a
 ## different room. Non-colliding by construction: 25 mm proud of a face the
 ## walker already stands 320 mm off.
-static func _add_labels(faces: Array, out: Array) -> void:
+static func _add_labels(faces: Array, out: Array, every: int = LABEL_EVERY) -> void:
 	var i: int = 0
 	for f in faces:
 		i += 1
-		if i % LABEL_EVERY != 0:
+		if i % every != 0:
 			continue
 		var fd: Dictionary = f
 		var fx: float = float(fd["x"])
@@ -548,7 +564,8 @@ static func _add_labels(faces: Array, out: Array) -> void:
 ## here would make every proof shot a different building and no frame could ever
 ## be compared with the frame before it.
 static func _add_wall_showings(faces: Array, cap: int, frame_out: Array,
-		mount_out: Array, field_out: Array) -> void:
+		mount_out: Array, field_out: Array,
+		min_stretch: int = HANG_PITCH_FACES) -> void:
 	if cap <= 0 or faces.is_empty():
 		return
 	# ── group into runs ─────────────────────────────────────────────────────
@@ -575,27 +592,32 @@ static func _add_wall_showings(faces: Array, cap: int, frame_out: Array,
 	# is a density, not a queue, so it is dealt round-robin across the runs — a
 	# short wall keeps its one picture and a long wall gets proportionally more,
 	# but no wall in the building is bare while another is crowded.
-	var per_run: Array = []
-	for key in keys:
-		var run: Dictionary = runs[key]
-		var vs: Array = run["v"]
-		vs.sort()
-		var here: Array = []
-		var stretch: Array = []
-		var i: int = 0
-		while i <= vs.size():
-			var broke: bool = i == vs.size()
-			if not broke and not stretch.is_empty():
-				broke = absf(float(vs[i]) - float(stretch[-1])) > 1.01
-			if broke:
-				_stretch_candidates(stretch, run, here)
-				stretch = []
-				if i == vs.size():
-					break
-			stretch.append(vs[i])
-			i += 1
-		if not here.is_empty():
-			per_run.append(here)
+	var per_run: Array = _candidates_at_floor(runs, keys, min_stretch)
+	# ── THE STUBBY-BUILDING GUARD ───────────────────────────────────────────
+	# A floor stated in metres is a fact about the CORPUS, and four buildings
+	# are not in it. Measured over the thirty museum templates, soane-cabinet-
+	# vista (60 showings), sainsbury-false-perspective-enfilade (52),
+	# pompidou-plateau-libre (27) and mengoni-glazed-thoroughfare (8) have
+	# 0.0% of their wall run in stretches of 6 m or more — their LONGEST plane
+	# is 5, 5, 4 and 5 m. Under a flat 6 m floor every candidate is rejected,
+	# the licence has nowhere to spend itself, and the Soane — the cabinet
+	# museum, the busiest wall in the building set — hangs nothing at all.
+	#
+	# So the floor is a PREFERENCE, not a law: if it silences a building
+	# completely, fall back to that building's own longest wall. Not to the
+	# shipped 2 m floor, which would put the pictures straight back onto the
+	# 1 m pier returns this whole change exists to clear. A museum whose
+	# longest plane is 5 m hangs on its 5 m planes and nowhere else.
+	#
+	# It cannot fire on an unchanged museum: `min_stretch` only exceeds
+	# HANG_PITCH_FACES when a caller passed hang_min_stretch, and a building
+	# that found candidates on the first pass never reaches this branch.
+	if per_run.is_empty() and min_stretch > HANG_PITCH_FACES:
+		var longest: int = _longest_stretch(runs, keys)
+		if longest >= HANG_PITCH_FACES:
+			per_run = _candidates_at_floor(runs, keys, longest)
+			print("[em_detail] no wall reaches %d m; falling back to this building's longest wall (%d m)" % [
+				min_stretch, longest])
 	var hung: int = 0
 	var round_i: int = 0
 	var guard: int = 0
@@ -618,12 +640,72 @@ static func _add_wall_showings(faces: Array, cap: int, frame_out: Array,
 		round_i += 1
 
 
+## One run's face coordinates cut into contiguous stretches — a gap of more than
+## one metre between neighbouring faces is a corner, a door or a pier return, and
+## ends the plane. Factored out of _add_wall_showings so the floor can be applied
+## twice: once at the requested minimum, and once more at the building's own
+## longest wall when the first pass found nothing anywhere. `vs.sort()` is
+## idempotent, so the second pass sees byte-identical stretches.
+static func _wall_stretches(vs: Array) -> Array:
+	var out: Array = []
+	var stretch: Array = []
+	var i: int = 0
+	while i <= vs.size():
+		var broke: bool = i == vs.size()
+		if not broke and not stretch.is_empty():
+			broke = absf(float(vs[i]) - float(stretch[-1])) > 1.01
+		if broke:
+			if not stretch.is_empty():
+				out.append(stretch)
+			stretch = []
+			if i == vs.size():
+				break
+		stretch.append(vs[i])
+		i += 1
+	return out
+
+
+## Every run's candidate positions at one stated floor, as a list of lanes for
+## the round-robin below. A run that contributes nothing is left out entirely, so
+## an empty return means "no wall in this building is long enough" and not "this
+## building has no walls".
+static func _candidates_at_floor(runs: Dictionary, keys: Array, floor_faces: int) -> Array:
+	var per_run: Array = []
+	for key in keys:
+		var run: Dictionary = runs[key]
+		var vs: Array = run["v"]
+		vs.sort()
+		var here: Array = []
+		for stretch in _wall_stretches(vs):
+			_stretch_candidates(stretch, run, here, floor_faces)
+		if not here.is_empty():
+			per_run.append(here)
+	return per_run
+
+
+## The longest unbroken wall anywhere in this building, in faces (= metres). Read
+## only by the guard, to answer "what floor would this building actually clear?"
+static func _longest_stretch(runs: Dictionary, keys: Array) -> int:
+	var best: int = 0
+	for key in keys:
+		var run: Dictionary = runs[key]
+		var vs: Array = run["v"]
+		vs.sort()
+		for stretch in _wall_stretches(vs):
+			best = maxi(best, (stretch as Array).size())
+	return best
+
+
 ## Every position one contiguous wall stretch could carry a showing at, appended
 ## to `out`. Placement is decided later, when the whole building's candidates are
 ## known and the licence can be spread over all of them.
-static func _stretch_candidates(stretch: Array, run: Dictionary, out: Array) -> void:
-	# a one-metre stub is a pier return, not a wall. Nothing hangs on it.
-	if stretch.size() < HANG_PITCH_FACES:
+static func _stretch_candidates(stretch: Array, run: Dictionary, out: Array,
+		min_stretch: int = HANG_PITCH_FACES) -> void:
+	# a one-metre stub is a pier return, not a wall. Nothing hangs on it. The
+	# white cube raises the same floor to six metres, which is the length at
+	# which a wall stops being a fragment between two doors and starts being a
+	# plane you could stand an artifact in front of.
+	if stretch.size() < maxi(min_stretch, HANG_PITCH_FACES):
 		return
 	var along_x: bool = bool(run["along_x"])
 	var fixed: float = float(run["fixed"])

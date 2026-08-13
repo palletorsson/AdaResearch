@@ -270,6 +270,48 @@ const TEMPLATES: Dictionary = {
 	},
 }
 
+## ---- THE WHITE CUBE GATE (2026-08-12) ---------------------------------------
+## OFF unless a caller asks for it. A museum that never sets it is byte-identical
+## to before -- the four numbers below are simply not computed.
+##
+## THE MEASUREMENT THAT PUT IT HERE. Over the thirty museum-tagged templates,
+## measured by tools/em_white_cube_measure.py and corroborated against a live
+## run's own log:
+##
+##   169 m of dressed wall run per segment, cut into 70 SEPARATE STRETCHES
+##   mean unbroken wall              2.7 m   (length-weighted 6.4 m)
+##   59% of all walls in the corpus  1 m long -- 1241 of 2104
+##   34.0 hung showings + 14.9 wall cards + 10.0 service props per room
+##   0.387 features per linear metre = one mark every 2.6 m
+##
+## So the corpus average wall is 2.7 m long and carries one mark: there is no
+## such thing as an uninterrupted white plane anywhere in the building. The wall
+## is not too FULL -- 90.7% of its readable band area is already bare -- it is
+## too BUSY and too SHORT, which is a different fault with a different cure. The
+## gate treats only the busy half, because that half is knobs; the short half is
+## the template tiles and is reported rather than worked around.
+##
+## Each number moves a knob that ALREADY EXISTS and is already wired:
+##   HANG_PER_10M    replaces the row's `wf` in the wall_features_max arithmetic
+##                   ONLY. `wall_features_per_10m` is returned unchanged, so
+##                   em_props' silent/statutory bands still read the building's
+##                   own text and a Teshima still gets nothing.
+##   PROPS_PER_ROOM  emitted as `props_per_10m`, a key em_props has always read
+##                   (`allowance.get("props_per_10m", wf_rate * PROP_SHARE)`) and
+##                   nothing has ever supplied. It is the only way to state a
+##                   count per ROOM: `wf` is a rate per 10 m, so a 200 m building
+##                   is always crowded no matter how low the rate goes.
+##   MIN_WALL_M      em_detail._stretch_candidates already refuses a stretch
+##                   shorter than HANG_PITCH_FACES ("a one-metre stub is a pier
+##                   return, not a wall"). This raises that existing floor, so
+##                   the showings collect on the long walls and the 1 m stubs go
+##                   blank instead of each collecting a picture.
+##   LABEL_EVERY     em_detail's wall-card modulo, which had no knob at all.
+const WHITE_CUBE_HANG_PER_10M: float = 0.55   # one showing per ~18 m of run
+const WHITE_CUBE_PROPS_PER_ROOM: float = 2.0  # props per ROOM, not per wall
+const WHITE_CUBE_MIN_WALL_M: int = 6          # nothing hangs on a shorter wall
+const WHITE_CUBE_LABEL_EVERY: int = 44        # em_detail LABEL_EVERY is 11
+
 ## The row used when a template declares no mechanism -- an edited-lineage tile
 ## whose ancestor is absent, or a spine segment cut by tools/spine_segments.py.
 ## Corpus medians, and it says so in `class`, so a report can tell a derived row
@@ -288,10 +330,12 @@ const DERIVED: Dictionary = {
 ##                 rank 0 = hero (3s), 1 = podium (2s), 2 = floor (1s)
 ## template_key    the key from template_patterns.json
 ## ctx             optional; {"tile": Array} makes walkable cells and wall run
-##                 exact instead of read from the cached measurement
+##                 exact instead of read from the cached measurement.
+##                 {"white_cube": true} opts this segment into the gate above.
 static func for_segment(w: int, h: int, slots: Array, template_key: String,
 		ctx: Dictionary = {}) -> Dictionary:
 	var row: Dictionary = _row(template_key)
+	var white_cube: bool = bool(ctx.get("white_cube", false))
 
 	# --- what the segment can physically hold -------------------------------
 	var hero: int = 0
@@ -356,11 +400,17 @@ static func for_segment(w: int, h: int, slots: Array, template_key: String,
 		multiples = mini(multiples, max_objects)
 
 	# --- the wall furniture allowance (NOT artifacts, NOT capped with them) --
+	# `wf_rate` stays the BUILDING's own rate in the returned dictionary even
+	# under the gate: em_props branches on it (below 0.6 silent, below 1.5 one
+	# statutory sign) and those branches are the buildings' own texts. Only the
+	# hang licence is recomputed, because a picture and a fire extinguisher were
+	# never the same fact and sharing one dial is what made them move together.
 	var wf_rate: float = float(row.get("wf", CORPUS_WALL_FEATURES))
-	var wf_max: int = int(round(wall_run * 0.1 * wf_rate))
+	var hang_rate: float = WHITE_CUBE_HANG_PER_10M if white_cube else wf_rate
+	var wf_max: int = int(round(wall_run * 0.1 * hang_rate))
 	wf_max = clampi(wf_max, 0, MAX_WALL_FEATURES)
 
-	return {
+	var out: Dictionary = {
 		"template": template_key,
 		"class": String(row.get("class", "derived")),
 		"mechanism": String(row.get("mech", "")),
@@ -385,6 +435,20 @@ static func for_segment(w: int, h: int, slots: Array, template_key: String,
 		"floor_slots": floor_slots,
 		"measured_from_tile": not tile.is_empty(),
 	}
+	# The gate's four keys exist ONLY when the gate is on. A consumer that reads
+	# them with a default is unchanged for every museum that never asked; a
+	# consumer that does not read them at all is unchanged full stop.
+	if white_cube:
+		out["white_cube"] = true
+		out["hang_per_10m"] = WHITE_CUBE_HANG_PER_10M
+		out["hang_min_stretch"] = WHITE_CUBE_MIN_WALL_M
+		out["label_every"] = WHITE_CUBE_LABEL_EVERY
+		# props stated as a COUNT PER ROOM, converted into the per-10 m unit
+		# em_props already reads. Zero wall run would divide by zero, so a
+		# building with no measurable wall simply keeps the derived share.
+		if wall_run > 0.0:
+			out["props_per_10m"] = WHITE_CUBE_PROPS_PER_ROOM * 10.0 / wall_run
+	return out
 
 
 ## The ceiling, stated once so a report and a gate read the same numbers.
