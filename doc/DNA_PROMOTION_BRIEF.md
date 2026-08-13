@@ -92,6 +92,36 @@ disagrees with it is worth the whole pass.** Either the artifact is not drawing
 what you think it draws, or you do not understand your own subject — and both are
 findings you cannot get from a percentage alone.
 
+### The prediction is a LOWER BOUND, and that makes it a gate
+
+Measured across four independent predictions that each named a pair and a number:
+
+| artifact | predicted | measured | |
+|---|---:|---:|---|
+| `grasp_cabinet` | 0.11% | 0.16% | 1.5× |
+| `operations_gallery` | 4.18% | 7.20% | 1.7× |
+| `noise_quarry` | 0.62% | 2.20% | 3.5× |
+| `removal_room` | 1.08% | 7.24% | 6.7× |
+
+**Every one under-predicts. The factor is not constant — 1.5× to 6.7× — so the
+number is not a forecast.** A Python rasteriser has one directional light, flat
+shading, and no shadows, ambient occlusion or antialiasing, so it cannot see most
+of what makes two real renders differ. Read your prediction as a floor.
+
+Which gives the rule that actually catches things:
+
+> **If the sweep comes back BELOW the prediction, stop and investigate.**
+
+`operations_gallery` before its repair: predicted 4.18%, measured **0.09%** —
+0.02×, the only case in the corpus that landed under its own prediction, and the
+only one that was broken. Every healthy artifact has come in above. A sweep that
+undershoots a prediction is either an artifact that is not drawing what its author
+thinks, or a prediction computed against geometry the script does not build.
+
+Corollary worth stating: a prediction that lands *under the floor* is not by
+itself a problem, because the real number will be higher. A prediction that lands
+comfortably above the floor and then sweeps below it is the alarm.
+
 **The capture AABB counts `MeshInstance3D` and `MultiMeshInstance3D` only.** If
 your axis hides the only `MeshInstance3D` bodies, the camera will fit whatever is
 left and clip the rest — `dna_specimen`'s `escaped` hides the jar and would have

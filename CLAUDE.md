@@ -397,6 +397,16 @@ reads exactly like an honest axis diluted by furniture. Predicted 4.18% against 
 0.09% is a factor of 46, and nothing else in the chain was going to object. **A prediction
 that agrees with the sweep is worth nothing; one that disagrees is worth the whole pass.**
 
+**THE PREDICTION IS A LOWER BOUND, WHICH IS WHAT MAKES IT A GATE.** Measured over four
+predictions that each named a pair and a number, every one UNDER-predicted, by 1.5x
+(`grasp_cabinet`), 1.7x (`operations_gallery`), 3.5x (`noise_quarry`) and 6.7x
+(`removal_room`) — a Python rasteriser has one light, flat shading and no shadows, AO or
+antialiasing, so it cannot see most of what separates two real renders. The factor is not
+constant, so the number is not a forecast; it is a floor. **If the sweep comes back BELOW
+the prediction, stop and investigate** — `operations_gallery` pre-repair measured 0.09%
+against a 4.18% prediction, 0.02x, the only case in the corpus to land under its own
+prediction and the only one that was broken.
+
 **Diagnose with numbers, not by squinting.** `subject %` (pixels differing from the corner
 background) separates "too small to measure" from "axis does nothing". `random_walk_collection`
 moved 174 grey levels across 0.06% of frame — a huge change, invisible. But note which way
