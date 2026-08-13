@@ -71,7 +71,12 @@ extends RefCounted
 # ── WHAT THIS FILE PROMISES ──────────────────────────────────────────────────
 #   * never two placements in one cell (`taken`, keyed by the slot's x/y);
 #   * never more than `budget` placements, lead included;
-#   * the lead always takes the best slot in the room (lowest rank);
+#   * the lead always takes the FIRST slot in the room (lowest y — nearest the
+#     entrance), and the best-ranked cell at that depth. Until 2026-08-13 this
+#     read "the best slot (lowest rank)", and it was the single most damaging
+#     order defect in the corridor: rank outranked depth, so the chapter's
+#     opening artifact was dealt to the hero plinth, which in 10 of 26 templates
+#     is the DEEPEST cell in the building. See _slot_before;
 #   * DEGRADES to lead-only when rel_db is missing, thin, or does not know the
 #     lead — a museum with no relations file deals exactly as it does today;
 #   * DETERMINISTIC. No randf(), no dictionary-order gambling: every tie breaks
@@ -146,7 +151,10 @@ static func build_set(lead: String, slots: Array, rel_db: Dictionary, budget: in
 	if cells.is_empty():
 		return out
 	var taken: Dictionary = {}
-	# the lead takes the best slot: lowest rank, then nearest the entrance
+	# the lead takes the FIRST slot past the threshold, and the best cell at that
+	# depth — nearest the entrance, then lowest rank. See _slot_before: the two
+	# keys used to be the other way round, which put the chapter's opening piece
+	# on the hero plinth at the far wall of the building.
 	var ranked: Array = cells.duplicate()
 	_sort_slots(ranked)
 	var lead_slot: Dictionary = ranked[0]
@@ -775,15 +783,36 @@ static func _sort_slots(arr: Array) -> void:
 		arr[j + 1] = v
 
 
+## DEPTH FIRST, RANK SECOND — and the order of those two lines is the whole
+## difference between a chapter and a shuffled pile.
+##
+## Until 2026-08-13 this compared `rank` before `y`. Rank is a property of the
+## FURNITURE (0 hero plinth, 1 podium, 2 floor); depth is a property of the
+## ENCOUNTER. A body walking a segment meets cells in ascending z and cannot see
+## a plinth's rank until it is already standing in front of it — so sorting by
+## rank first spends the room's one hero cell on the chapter's FIRST artifact,
+## and in the three templates measured (and 10 of the 26 in the audit) that cell
+## is the DEEPEST in the building. Measured consequence, real runs, one segment
+## each: the chapter opener stood at z=32 of 32 (Sainsbury), z=31 of 31 (Uffizi)
+## and z=24 of 24 (Chichu) — first dealt, last met, every time. Kendall tau of
+## walk order against deal order was -0.111 / +0.308 / -0.333.
+##
+## Rank is KEPT, as the tiebreak it was always documented to be. Cells at equal
+## z are met at the same moment, so between them the room is free to say which
+## one is primary, and elevation is how a room says it. What rank may no longer
+## do is decide the ORDER of the argument. The deepest cell of an axial building
+## is the vista's destination, not its opening line: after this change it is
+## still filled, by whichever piece the deal reaches last, which is what walking
+## toward something means.
 static func _slot_before(a: Dictionary, b: Dictionary) -> bool:
-	var ar: int = int(a.get("rank", 9))
-	var br: int = int(b.get("rank", 9))
-	if ar != br:
-		return ar < br
 	var ay: int = int(a.get("y", 0))
 	var by: int = int(b.get("y", 0))
 	if ay != by:
 		return ay < by
+	var ar: int = int(a.get("rank", 9))
+	var br: int = int(b.get("rank", 9))
+	if ar != br:
+		return ar < br
 	return int(a.get("x", 0)) < int(b.get("x", 0))
 
 
