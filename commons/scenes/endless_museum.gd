@@ -153,7 +153,8 @@ var _white_cube: bool = false
 # Solid volume is unchanged, so collision is unchanged.
 var _wall_runs: bool = false
 var _plan_path: String = ""       # --em-plan[=res://...]; empty = deal as before
-var _plan_db: Dictionary = {}     # museum key -> {artifacts:[...]}
+var _plan_db: Dictionary = {}     # museum key -> {artifacts:[...]} (v1, first-wins)
+var _plan_by_chapter: Dictionary = {}  # "museum|sequence" -> row (v2; a shared building carries one row PER chapter)
 var _force_vr: bool = false       # --em-vr forces the headset path
 var _vr: bool = false             # resolved once in _ready
 var _vr_cam: Camera3D = null      # the XR eye, cached
@@ -1170,7 +1171,7 @@ func _build_segment() -> void:
 		if int(a["rank"]) != int(b["rank"]):
 			return int(a["rank"]) < int(b["rank"])
 		return int(a["x"]) < int(b["x"]))
-	var deal: Dictionary = _deal_segment(seg, slots, zbase, spec, tile, w, h)
+	var deal: Dictionary = _deal_segment(seg, slots, zbase, spec, tile, w, h, next_seq)
 	var placed: int = int(deal.get("placed", 0))
 	var seg_seq: String = String(deal.get("sequence", ""))
 	# museum banner at the threshold — the canonical TextScreen (framed panel,
@@ -1349,7 +1350,20 @@ func _load_plan() -> void:
 	var museums: Variant = (parsed as Dictionary).get("museums", {})
 	if museums is Dictionary:
 		_plan_db = museums as Dictionary
-	print("[em-plan] %d museum(s) planned from %s" % [_plan_db.size(), _plan_path])
+	# v2: one row per CHAPTER, keyed "building|sequence". A building four
+	# chapters were ruled into carries four rows, and the dealer picks by the
+	# chapter it is about to deal instead of receiving whoever won the building
+	# first. v1 files simply have no `plans` array and resolve as before.
+	var rows: Variant = (parsed as Dictionary).get("plans", [])
+	if rows is Array:
+		for r in (rows as Array):
+			if r is Dictionary:
+				var mk := String((r as Dictionary).get("museum", ""))
+				var sq := String((r as Dictionary).get("sequence", ""))
+				if mk != "" and sq != "":
+					_plan_by_chapter["%s|%s" % [mk, sq]] = r
+	print("[em-plan] %d museum(s), %d chapter row(s) planned from %s"
+		% [_plan_db.size(), _plan_by_chapter.size(), _plan_path])
 
 
 ## Stamp one museum exactly as the negotiator resolved it.
@@ -1365,10 +1379,23 @@ func _load_plan() -> void:
 ## dropped, because "the plan said 8 and the room shows 2" is exactly the kind
 ## of quiet subtraction that reads as a bug in the negotiator.
 func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
-		w: int, h: int) -> Dictionary:
-	if not _plan_db.has(key):
+		w: int, h: int, chapter: String = "") -> Dictionary:
+	# RESOLUTION ORDER: the chapter's own row first, the v1 building dict
+	# second, nothing third. The v1 key was the building alone, first-wins, so
+	# a chapter ruled into a shared building was stamped with the winner's cast
+	# — `change` received symmetry's thirteen bodies and the banner printed the
+	# swap once it learned to print anything. A v2 file carries one row per
+	# (building, chapter); a v1 file has no `plans` and resolves as it always
+	# did. A v2 file with no row for THIS chapter falls through to the v1 view
+	# rather than to silence, which keeps generic plans (export_museum_plan
+	# --all, no chapter to key by) working unchanged.
+	var entry: Dictionary = {}
+	if chapter != "" and _plan_by_chapter.has("%s|%s" % [key, chapter]):
+		entry = _plan_by_chapter["%s|%s" % [key, chapter]]
+	elif _plan_db.has(key):
+		entry = _plan_db[key]
+	if entry.is_empty():
 		return {}
-	var entry: Dictionary = _plan_db[key]
 	var rows: Array = entry.get("artifacts", [])
 	if rows.is_empty():
 		return {}
@@ -1483,12 +1510,15 @@ func _advance_pool_past_chapter() -> void:
 
 
 func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
-		tile: Array, w: int, h: int) -> Dictionary:
+		tile: Array, w: int, h: int, chapter: String = "") -> Dictionary:
 	# THE GATE. A planned museum is stamped from the plan and never dealt; every
-	# other museum falls through to the dealer below, untouched.
+	# other museum falls through to the dealer below, untouched. `chapter` is the
+	# sequence _build_segment resolved from the pool cursor — the same value that
+	# chose this building via its crown — so the plan lookup and the building
+	# choice cannot disagree about which chapter this segment is for.
 	var mkey := String(spec.get("key", ""))
-	if not _plan_db.is_empty():
-		var planned: Dictionary = _deal_from_plan(seg, zbase, mkey, tile, w, h)
+	if not (_plan_db.is_empty() and _plan_by_chapter.is_empty()):
+		var planned: Dictionary = _deal_from_plan(seg, zbase, mkey, tile, w, h, chapter)
 		if not planned.is_empty():
 			# THE CURSOR MUST STILL MOVE. `_pick_pool` (the only `_pool_i += 1`
 			# in the file) sits below this early return, so under `--em-plan`

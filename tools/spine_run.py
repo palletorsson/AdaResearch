@@ -257,13 +257,24 @@ def spine_run(only: str = "", relations: int = 2,
 
 
 def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
-    """One em_plan entry per museum, holding the chapter that museum was dealt.
+    """Every chapter's plan, keyed by (museum, sequence) — plus the v1 dict.
 
-    Four chapters are crowned to `grande-galerie-axial` and two to
-    `sainsbury-...`, and `em_plan.json` is keyed by MUSEUM, so a museum serving
-    several chapters can only carry one. The first in curriculum order wins and
-    the file records which chapters were displaced — a silent last-write-wins
-    here would make the plan disagree with the report that produced it.
+    v1 kept `museums: {building: ...}`, first-wins. That key threw away a
+    decision the pipeline had already made: seven chapters were displaced by
+    whichever chapter reached their building first in curriculum order, their
+    casts were never planned at all, and the assembler stamped the winner's
+    cast into the loser's room — `change` received symmetry's thirteen bodies.
+    See doc/spatial/spikes/04_one_building_two_chapters.md.
+
+    v2 adds `plans: [{museum, sequence, ...}]` with one row per CHAPTER,
+    displaced chapters included — a building shared by four chapters carries
+    four plans, and the reader picks by the chapter it is about to deal. The
+    v1 `museums` dict is still written, first-wins as before, so an older
+    reader (or a plan written for a building with no chapter, like
+    export_museum_plan --all) resolves exactly as it always did. Additive and
+    gated: the compound key is the only fix that ADDS the information the
+    pipeline already computes instead of deleting a ruling (one building per
+    chapter) or a rule (one museum, one sequence) to make a flat dict adequate.
     """
     prev: dict[str, Any] = {}
     if out.exists():
@@ -272,29 +283,42 @@ def write_plan(result: dict[str, Any], out: Path) -> dict[str, Any]:
         except Exception:
             prev = {}
     museums: dict[str, Any] = {}
+    plans: list[dict[str, Any]] = []
     owner: dict[str, str] = {}
     displaced: list[dict[str, str]] = []
     for r in result["sequences"]:
         key = r["museum"]
+        # EVERY chapter is planned, displaced or not. The v1 loop `continue`d
+        # here before plan_museum ever ran, so a displaced chapter's cast was
+        # not merely unfindable — it was never negotiated into its building.
+        m = plan_museum(key, list(r["cast"]))
+        m["sequence"] = r["sequence"]
+        plans.append({"museum": key, **m})
         if key in owner:
             displaced.append({"sequence": r["sequence"], "museum": key,
                               "held_by": owner[key]})
             continue
         owner[key] = r["sequence"]
-        m = plan_museum(key, list(r["cast"]))
-        m["sequence"] = r["sequence"]
         museums[key] = m
     out.parent.mkdir(parents=True, exist_ok=True)
+    # The note is DERIVED, not typed. The v1 note said "six chapters share
+    # three crowned buildings" while the code two lines above it had written 7
+    # over 4 — a hand-typed count beside the loop that computes the real one is
+    # the endemic bug wearing prose (spike 04, F2).
+    shared = sorted({d["museum"] for d in displaced})
+    note = ("chapter-keyed: every chapter has a row in `plans`, displaced "
+            "included; `museums` is the v1 first-wins view"
+            + (f"; {len(displaced)} chapter(s) displaced across "
+               f"{len(shared)} shared building(s)" if displaced else ""))
     out.write_text(json.dumps({
-        "schema": "adaresearch.em_plan.v1",
+        "schema": "adaresearch.em_plan.v2",
         "_readme": prev.get("_readme", "Placements resolved by "
                             "tools/spatial_negotiation.py. Read by "
                             "commons/scenes/endless_museum.gd under --em-plan."),
         "_spine_run": {"at": result["at"], "owner": owner,
                        "displaced": displaced,
-                       "note": ("one chapter per museum; em_plan.json is keyed "
-                                "by building, and six chapters share three "
-                                "crowned buildings")},
+                       "note": note},
+        "plans": plans,
         "offered": sorted({t for r in result["sequences"] for t in r["cast"]}),
         "museums": museums,
     }, indent=2) + "\n", encoding="utf-8")
