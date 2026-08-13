@@ -1,0 +1,49 @@
+{
+  "name": "uffizi_props_bay_01_origin",
+  "source": "tools/build_uffizi_prop_placement_pilot.py",
+  "contract": {
+    "bay": "bay_01",
+    "artifact": "origin",
+    "anchor_cell": [16,1],
+    "wall": "north"
+  },
+  "pieces": [
+    {
+      "token": "station_panel",
+      "x": -5.5,
+      "y": 1.9,
+      "z": -0.5,
+      "wall": true,
+      "config": {
+        "width_cells": 4,
+        "height": 0.8,
+        "header": "POINT ZERO",
+        "lines": ["CURRENT MAP / BOOK MONITOR","FREESTANDING"],
+        "accent_color": "0.72,0.32,0.66,1"
+      }
+    },
+    {
+      "token": "exit_sign",
+      "x": -2.15,
+      "y": 3.15,
+      "z": -0.5,
+      "wall": true,
+      "config": {
+        "text": "EXIT",
+        "mounting": "above_threshold"
+      }
+    },
+    {
+      "token": "fire_extinguisher",
+      "x": -1.95,
+      "y": 0.0,
+      "z": 0.2,
+      "wall": false,
+      "config": {
+        "support": "floor_bracket",
+        "statute": "issue",
+        "label_text": "FIRE"
+      }
+    }
+  ]
+}

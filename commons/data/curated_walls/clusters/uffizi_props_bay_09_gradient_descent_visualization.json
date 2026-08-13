@@ -1,0 +1,35 @@
+{
+  "name": "uffizi_props_bay_09_gradient_descent_visualization",
+  "source": "tools/build_uffizi_prop_placement_pilot.py",
+  "contract": {
+    "bay": "bay_09",
+    "artifact": "gradient_descent_visualization",
+    "anchor_cell": [16,66],
+    "wall": "north"
+  },
+  "pieces": [
+    {
+      "token": "exit_sign",
+      "x": -2.15,
+      "y": 3.15,
+      "z": -0.5,
+      "wall": true,
+      "config": {
+        "text": "EXIT",
+        "mounting": "above_threshold"
+      }
+    },
+    {
+      "token": "fire_extinguisher",
+      "x": -1.95,
+      "y": 0.0,
+      "z": 0.2,
+      "wall": false,
+      "config": {
+        "support": "floor_bracket",
+        "statute": "issue",
+        "label_text": "FIRE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "name": "uffizi_props_bay_02_lambda_slider",
+  "source": "tools/build_uffizi_prop_placement_pilot.py",
+  "contract": {
+    "bay": "bay_02",
+    "artifact": "lambda_slider",
+    "anchor_cell": [16,9],
+    "wall": "north"
+  },
+  "pieces": [
+    {
+      "token": "emergency_button",
+      "x": -8.78,
+      "y": 1.05,
+      "z": -0.5,
+      "wall": true,
+      "config": {
+        "mounting": "wall",
+        "label_text": "STOP",
+        "plate_width": 0.22,
+        "plate_height": 0.22
+      }
+    },
+    {
+      "token": "station_panel",
+      "x": -2.22,
+      "y": 1.85,
+      "z": -0.5,
+      "wall": true,
+      "config": {
+        "width_cells": 1,
+        "height": 0.6,
+        "header": "LAMBDA",
+        "lines": ["ORDER <-> CHAOS","CALIBRATION LIVE"],
+        "accent_color": "0.28,0.74,0.96,1"
+      }
+    },
+    {
+      "token": "exit_sign",
+      "x": -2.15,
+      "y": 3.15,
+      "z": -0.5,
+      "wall": true,
+      "config": {
+        "text": "EXIT",
+        "mounting": "above_threshold"
+      }
+    },
+    {
+      "token": "fire_extinguisher",
+      "x": -1.95,
+      "y": 0.0,
+      "z": 0.2,
+      "wall": false,
+      "config": {
+        "support": "floor_bracket",
+        "statute": "issue",
+        "label_text": "FIRE"
+      }
+    }
+  ]
+}

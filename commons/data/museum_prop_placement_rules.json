@@ -1,0 +1,21 @@
+{
+ "schema":"adaresearch.museum_prop_placement_rules.v1",
+ "title":"Museum principal-wall prop contract",
+ "units":"metres",
+ "coordinate_system":{"surface_axes":["u","v"],"u":"horizontal along the wall","v":"floor to ceiling","world_mapping":"u maps to world x or z by wall orientation; v always maps to world y","grid_m":1},
+ "priority":["life_safety","artifact_claim","public_route","feature_field","reachability","operations","decoration"],
+ "hard_rules":["life-safety props require a matching entrance or exit anchor","non-feature props may not overlap the central feature field","artifact wall claims remain clear","interactive controls have centres between 0.75 and 1.35 m","floor props touch v=0 and stay in a corner or side rail","accepted rectangles do not overlap","every acceptance and refusal is retained as evidence"],
+ "bands":{"low":{"vertical_m":[0,1.1]},"eye":{"vertical_m":[1.1,2.3]},"upper":{"vertical_m":[2.3,4]},"interactive":{"vertical_m":[0.75,1.35]}},
+ "prop_types":{
+  "exit_sign":{"role":"egress_wayfinding","priority":"life_safety","mounting":"wall","size_m":[1.1,0.35],"anchor_kind":"entrance_exit","max_horizontal_distance_m":1.25,"preferred_center_v_m":3.15,"allowed_bands":["upper_side"]},
+  "fire_extinguisher":{"role":"fire_safety","priority":"life_safety","mounting":"floor_against_wall","size_m":[0.4,0.8],"anchor_kind":"entrance_exit","max_horizontal_distance_m":1.25,"preferred_base_v_m":0,"allowed_bands":["low_side"]},
+  "station_crates":{"role":"material_storage","priority":"operations","mounting":"floor_against_wall","size_m":[1,1.05],"anchor_kind":"corner","max_horizontal_distance_m":0.75,"preferred_base_v_m":0,"allowed_bands":["floor_corner"]},
+  "emergency_button":{"role":"safety_control","priority":"life_safety","mounting":"wall","size_m":[0.22,0.22],"anchor_kind":"side_rail","preferred_center_v_m":1.05,"interactive":true,"allowed_bands":["left_rail","right_rail"]},
+  "station_panel":{"role":"map_monitor","priority":"feature_field","mounting":"wall","size_m":[3.9,0.8],"anchor_kind":"feature_field","preferred_center_v_m":1.9,"allowed_bands":["feature_field","left_rail","right_rail"]}
+ },
+ "principal_wall_archetypes":{
+  "entrance_safety":{"goal":"Make egress legible without occupying the exhibition centre.","required_props":["exit_sign","fire_extinguisher"]},
+  "feature_wall":{"goal":"Reserve the centre for the artifact or the book monitor and push support props to side rails and corners.","required_props":["exit_sign","fire_extinguisher"],"optional_props":["station_panel","station_crates"]},
+  "protected_artifact":{"goal":"Keep the artifact-owned centre empty while allowing mandatory safety at the threshold.","required_props":["exit_sign","fire_extinguisher"],"refuse_roles":["map_monitor","decoration"]}
+ }
+}

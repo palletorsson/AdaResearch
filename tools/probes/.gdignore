@@ -1,0 +1,5 @@
+Godot must not parse these.
+They are BENCH scripts: copies of the throwaway probes tools/spine_run.py
+plants in its detached measurement worktree, kept here only so the sort
+measurement can be reproduced. They extend SceneTree and are meant to be run
+with --script from that worktree, never loaded as part of this project.

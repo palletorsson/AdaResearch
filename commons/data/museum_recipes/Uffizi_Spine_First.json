@@ -1,0 +1,32 @@
+{
+ "name": "Uffizi_Spine_First",
+ "date": "2026-08-13",
+ "spec": {
+  "museum": "uffizi-spine-enfilade",
+  "anchors": [],
+  "count": 8,
+  "relations": 2,
+  "include_relations": true,
+  "dna_cap": 6,
+  "segments": 2,
+  "shot_at": null
+ },
+ "metrics": {
+  "cast": 16,
+  "placed": 15,
+  "rejected": 1,
+  "interior": 13,
+  "interior_share": 0.867,
+  "lineages": 6,
+  "lineages_walled": 4,
+  "rooms_on_disk": 16,
+  "rooms_authored": 16
+ },
+ "rejected_why": [
+  {
+   "token": "fractal_recursion_2",
+   "why": "support_matches_contract: slot offers 'podium', artifact needs 'platform'"
+  }
+ ],
+ "regeneration_warning": "A recipe is not a time capsule. This replays the SPEC, not the corpus: spine_artifact_order.json, artifact_relations.json, the dressing rooms and slot_capacity.json all move under it, so the same spec can deal a different cast into different slots tomorrow. The metrics above are a receipt of one run, not a guarantee. (The same drift is confessed in wizard_recipes/Thread_Gate.json.)"
+}

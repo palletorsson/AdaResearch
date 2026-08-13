@@ -1,0 +1,77 @@
+{
+  "schema": "adaresearch.placement_rules.v1",
+  "title": "Endless Museum Placement Rules v1",
+  "units": "metres on a 1 m planning grid",
+  "zone_order": ["occupied_body", "hard_zone", "preferred_zone"],
+  "supported_actions": [
+    "accept",
+    "rotate",
+    "move",
+    "grow",
+    "shrink",
+    "apply_wall_exception",
+    "reject"
+  ],
+  "rules": [
+    {
+      "id": "body_inside_hard_zone",
+      "layer": "artifact",
+      "severity": "hard",
+      "goal": "Measured geometry must fit inside the artifact's minimum valid envelope."
+    },
+    {
+      "id": "hard_zone_inside_offer",
+      "layer": "floorplan",
+      "severity": "hard",
+      "goal": "The floorplan must supply the hard zone or explicitly allow enough expansion."
+    },
+    {
+      "id": "support_matches_contract",
+      "layer": "support",
+      "severity": "hard",
+      "goal": "The offered plinth, wall, table, stage, or floor must match the artifact contract."
+    },
+    {
+      "id": "mode_is_allowed",
+      "layer": "artifact_floorplan",
+      "severity": "hard",
+      "goal": "The placement mode must be one the artifact can physically use."
+    },
+    {
+      "id": "rotation_is_allowed",
+      "layer": "artifact_floorplan",
+      "severity": "hard",
+      "goal": "Rotation must preserve the artifact's authored interaction orientation."
+    },
+    {
+      "id": "wall_side_is_available",
+      "layer": "wall",
+      "severity": "hard",
+      "goal": "Against-wall placement requires the contracted wall side to exist."
+    },
+    {
+      "id": "rear_clearance_exception_is_explicit",
+      "layer": "artifact_wall",
+      "severity": "conditional",
+      "goal": "Zero rear clearance is valid only when the contract declines circulation behind the artifact."
+    },
+    {
+      "id": "neighbor_policy_is_respected",
+      "layer": "order_floorplan",
+      "severity": "hard",
+      "goal": "Lineage may influence order, but no neighboring artifact may silently enter reserved space."
+    },
+    {
+      "id": "preferred_zone_is_offered",
+      "layer": "artifact_floorplan",
+      "severity": "soft",
+      "goal": "Use the preferred envelope when the floorplan can grow or release surplus space."
+    },
+    {
+      "id": "complete_orbit_is_preserved",
+      "layer": "floorplan",
+      "severity": "hard",
+      "goal": "Artifacts declaring full-orbit circulation keep a continuous route around the hard zone."
+    }
+  ]
+}
