@@ -76,8 +76,14 @@ can know), 136 uncrossable courts fell back to open ground (261 → 125 rows), a
 round 2 walked the building plus ten courts to the goal centimetre — ok:true,
 z 296.04/296.0, **2** cells unlearned, exit 0.
 
-**Open.** Courts chain — 278 m of court after one 34 m building; distribute
-across the corridor's joints next. The balcony void is designed, unbuilt (rows
+**Courts distributed (`7e839b274`).** A queue drains ≤ 40 m of court per joint,
+deep courts standing alone; measured rhythm 34-25-…-57-…-25-…-93. Distribution
+exposed the last two-clocks fault: the rotation chose capuchin for
+transformation while the plan held the Uffizi — the plan now OWNS the building
+(`_plan_owner`, plan → crown → rotation), all segments plan-stamped in the
+plan's buildings. Autopilot round 3: ok, z 150.06/150.0, **1** cell unlearned.
+
+**Open.** The balcony void is designed, unbuilt (rows
 still count "exterior"). laser_measure took a 7 × 57 m court because its body
 still measures 50 m in Z — spike 06's config channel (**37 of 757**
 unreachable). The threshold sightline (13 accepts, or **0** if
