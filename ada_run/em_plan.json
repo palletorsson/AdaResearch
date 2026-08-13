@@ -1,15 +1,45 @@
 {
   "schema": "adaresearch.em_plan.v1",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
+  "_wizard": {
+    "museum": "uffizi-spine-enfilade",
+    "at": "2026-08-13T09:50:34",
+    "cast": [
+      "CoordinateSystem3M",
+      "origin",
+      "frame_counter_display",
+      "VectorBasics",
+      "you_are_here",
+      "fontana_puncture",
+      "csg_compose_workbench",
+      "floating_sphere_field",
+      "dark_sphere",
+      "lab_room",
+      "interactive_point_origin_force",
+      "interactive_point_origin",
+      "player_trace",
+      "folding_past",
+      "point",
+      "fractal_recursion_2"
+    ]
+  },
   "offered": [
     "CoordinateSystem3M",
-    "frame_counter_display",
     "origin",
+    "frame_counter_display",
+    "VectorBasics",
     "you_are_here",
     "fontana_puncture",
+    "csg_compose_workbench",
     "floating_sphere_field",
+    "dark_sphere",
+    "lab_room",
     "interactive_point_origin_force",
-    "folding_past"
+    "interactive_point_origin",
+    "player_trace",
+    "folding_past",
+    "point",
+    "fractal_recursion_2"
   ],
   "museums": {
     "altes-rotunda-hub": {
@@ -4148,6 +4178,23 @@
           "wall": null
         },
         {
+          "token": "origin",
+          "cell": [
+            21,
+            26
+          ],
+          "tile_cell": [
+            7,
+            12
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "uffizi-spine-enfilade/4,11",
+          "wall": null
+        },
+        {
           "token": "frame_counter_display",
           "cell": [
             24,
@@ -4165,14 +4212,14 @@
           "wall": "west"
         },
         {
-          "token": "origin",
+          "token": "VectorBasics",
           "cell": [
-            21,
-            26
+            19,
+            24
           ],
           "tile_cell": [
-            7,
-            12
+            5,
+            10
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -4216,6 +4263,23 @@
           "wall": null
         },
         {
+          "token": "csg_compose_workbench",
+          "cell": [
+            21,
+            34
+          ],
+          "tile_cell": [
+            7,
+            20
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "uffizi-spine-enfilade/4,19",
+          "wall": null
+        },
+        {
           "token": "floating_sphere_field",
           "cell": [
             21,
@@ -4230,6 +4294,40 @@
           "venue": "interior",
           "support_height_m": 0.0,
           "slot": "uffizi-spine-enfilade/6,2",
+          "wall": null
+        },
+        {
+          "token": "dark_sphere",
+          "cell": [
+            19,
+            27
+          ],
+          "tile_cell": [
+            5,
+            13
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "uffizi-spine-enfilade/4,11",
+          "wall": null
+        },
+        {
+          "token": "lab_room",
+          "cell": [
+            21,
+            48
+          ],
+          "tile_cell": [
+            7,
+            34
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "outside",
+          "support_height_m": 0.0,
+          "slot": "uffizi-spine-enfilade/outside",
           "wall": null
         },
         {
@@ -4250,14 +4348,48 @@
           "wall": null
         },
         {
+          "token": "interactive_point_origin",
+          "cell": [
+            25,
+            41
+          ],
+          "tile_cell": [
+            11,
+            27
+          ],
+          "rotation": 180,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 1.4,
+          "slot": "uffizi-spine-enfilade/12,27",
+          "wall": "south"
+        },
+        {
+          "token": "player_trace",
+          "cell": [
+            19,
+            36
+          ],
+          "tile_cell": [
+            5,
+            22
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "uffizi-spine-enfilade/4,19",
+          "wall": null
+        },
+        {
           "token": "folding_past",
           "cell": [
             21,
-            47
+            54
           ],
           "tile_cell": [
             7,
-            33
+            40
           ],
           "rotation": 0,
           "mode": "freestanding",
@@ -4265,15 +4397,37 @@
           "support_height_m": 0.0,
           "slot": "uffizi-spine-enfilade/outside",
           "wall": null
+        },
+        {
+          "token": "point",
+          "cell": [
+            24,
+            24
+          ],
+          "tile_cell": [
+            10,
+            10
+          ],
+          "rotation": 270,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.95,
+          "slot": "uffizi-spine-enfilade/10,4",
+          "wall": "west"
         }
       ],
-      "rejected": [],
+      "rejected": [
+        {
+          "token": "fractal_recursion_2",
+          "why": "support_matches_contract: slot offers 'podium', artifact needs 'platform'"
+        }
+      ],
       "room": {
         "w": 43,
         "h": 58
       },
       "apron": 14,
-      "interior_count": 7
+      "interior_count": 13
     },
     "uffizi-spine-ordered": {
       "artifacts": [
