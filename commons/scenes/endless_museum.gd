@@ -155,6 +155,24 @@ var _wall_runs: bool = false
 var _plan_path: String = ""       # --em-plan[=res://...]; empty = deal as before
 var _plan_db: Dictionary = {}     # museum key -> {artifacts:[...]} (v1, first-wins)
 var _plan_by_chapter: Dictionary = {}  # "museum|sequence" -> row (v2; a shared building carries one row PER chapter)
+# ── the court queue ──────────────────────────────────────────────────────────
+# A chapter's courts no longer chain behind its own building — 10 primitives
+# courts made 278 m of court after a 34 m building, a corridor that was mostly
+# exhale. Courts now queue and each JOINT (the gap before the next vestibule)
+# drains a few: pop while the joint holds under COURT_JOINT_MAX_DEPTH, always
+# popping at least one so a deep court (combine_portals, 93 m) stands alone at
+# its joint rather than blocking the queue forever. FIFO, so curriculum order
+# survives even though a chapter's later courts trail it by a building or two —
+# each court knows its chapter and the joint print says so.
+var _court_queue: Array = []       # [{token, scene, court, rotation, chapter}]
+# chapter -> museum key, read off the plan's rows. When a plan is loaded, THE
+# PLAN owns the building choice: the scene's em_order rotation and spine_run's
+# assignment are two clocks that walk the same list, and four segments in they
+# drifted — the rotation chose capuchin for transformation while the plan had
+# negotiated its cast into the Uffizi, so the segment fell back to the dealer
+# and the whole chapter was dealt instead of stamped. Two places, one number.
+var _plan_owner: Dictionary = {}
+const COURT_JOINT_MAX_DEPTH := 40  # metres of court per joint before the next building
 var _force_vr: bool = false       # --em-vr forces the headset path
 var _vr: bool = false             # resolved once in _ready
 var _vr_cam: Camera3D = null      # the XR eye, cached
@@ -1050,21 +1068,31 @@ func _stamp_wall_runs(seg: Node3D, solid: StaticBody3D, cells: Dictionary,
 		cells.size(), emitted, float(cells.size()) / float(maxi(emitted, 1)), longest])
 
 func _build_segment() -> void:
-	# a crowned chapter gets its crowned building (the ruling made live);
-	# uncrowned chapters walk the em_order rotation. --em-first still forces
-	# the front for proof shots.
+	# THE PLAN OWNS THE BUILDING when one is loaded: the chapter's museum is
+	# read off its own plan row, so the stamped cast and the built walls can
+	# never disagree about where a chapter lives. A crowned chapter without a
+	# plan row gets its crowned building (the ruling stays live); everything
+	# else walks the em_order rotation. --em-first still forces the front.
 	var spec: Dictionary = _museums[_rot_i % _museums.size()]
 	var next_seq := ""
 	if not _pool.is_empty():
 		next_seq = String(_pool[_pool_i % _pool.size()].get("sequence", ""))
-	var crowned := String(_crowns.get(next_seq, ""))
 	var use_crown := false
-	if crowned != "" and (_first_key == "" or _seg_index > 0):
+	var planned_key := String(_plan_owner.get(next_seq, ""))
+	if planned_key != "" and (_first_key == "" or _seg_index > 0):
 		for m in _museums:
-			if String(m["key"]) == crowned:
+			if String(m["key"]) == planned_key:
 				spec = m
-				use_crown = true
+				use_crown = true       # same meaning: the rotation did not choose
 				break
+	if not use_crown:
+		var crowned := String(_crowns.get(next_seq, ""))
+		if crowned != "" and (_first_key == "" or _seg_index > 0):
+			for m in _museums:
+				if String(m["key"]) == crowned:
+					spec = m
+					use_crown = true
+					break
 	if not use_crown:
 		_rot_i += 1
 	# the proof shot needs the spec that was actually STAMPED at segment 0, not
@@ -1283,14 +1311,34 @@ func _build_segment() -> void:
 	#    wash, floor fill. Capped at 24 lights / 6 shadow casters per segment.
 	if _mod_has(_mod_light, "rig_segment"):
 		_mod_light.call("rig_segment", seg, w, h, accent, slots, {"tile": tile})
-	# SPIKE 08 — the courtyard joint. Built AFTER the tile, before the next
-	# segment's vestibule, only when the plan granted courts. A plan without
-	# court rows adds zero depth and zero nodes: the gate.
-	var court_depth: int = 0
+	# SPIKE 08 — the courtyard joint. The chapter's courts ENQUEUE; the joint
+	# drains at most COURT_JOINT_MAX_DEPTH of them (always at least one), so the
+	# corridor breathes building - court - building instead of building followed
+	# by 278 m of court. A plan without court rows leaves the queue empty and
+	# adds zero depth and zero nodes: the gate.
 	var court_rows: Array = deal.get("courts", []) if deal is Dictionary else []
-	if not court_rows.is_empty():
+	for cr in court_rows:
+		_court_queue.append(cr)
+	var joint: Array = []
+	var joint_depth: int = 0
+	while not _court_queue.is_empty():
+		var head: Dictionary = _court_queue[0]
+		var hd: int = maxi(int((head.get("court", [0, 3]) as Array)[1]), 3)
+		if not joint.is_empty() and joint_depth + hd > COURT_JOINT_MAX_DEPTH:
+			break
+		joint.append(_court_queue.pop_front())
+		joint_depth += hd
+	var court_depth: int = 0
+	if not joint.is_empty():
+		var by_ch: Dictionary = {}
+		for j in joint:
+			var ch := String((j as Dictionary).get("chapter", "?"))
+			by_ch[ch] = int(by_ch.get(ch, 0)) + 1
+		print("[em-court] joint after seg %d: %d court(s), %d m deep, %s%s" % [
+			_seg_index, joint.size(), joint_depth, str(by_ch),
+			(", %d queued" % _court_queue.size()) if not _court_queue.is_empty() else ""])
 		court_depth = _build_courtyard(seg, solid, w, tile.size(), zbase,
-			court_rows, wall_col, m_wall)
+			joint, wall_col, m_wall)
 	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(court_depth), "index": _seg_index, "w": w})
 	_next_z += float(h) + float(VESTIBULE_H) + float(court_depth)
 	_seg_index += 1
@@ -1370,6 +1418,8 @@ func _load_plan() -> void:
 				var sq := String((r as Dictionary).get("sequence", ""))
 				if mk != "" and sq != "":
 					_plan_by_chapter["%s|%s" % [mk, sq]] = r
+					if not _plan_owner.has(sq):
+						_plan_owner[sq] = mk
 	print("[em-plan] %d museum(s), %d chapter row(s) planned from %s"
 		% [_plan_db.size(), _plan_by_chapter.size(), _plan_path])
 
@@ -1485,7 +1535,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 				continue
 			courts.append({"token": ctok, "scene": cscene,
 				"court": row.get("court", []),
-				"rotation": float(row.get("rotation", 0.0))})
+				"rotation": float(row.get("rotation", 0.0)),
+				"chapter": String(entry.get("sequence", ""))})
 			continue
 		if venue != "interior":
 			exterior += 1
