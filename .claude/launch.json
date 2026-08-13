@@ -35,6 +35,20 @@
       "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && set NEXT_DIST_DIR=.next-alt4&& npx next dev -p 3043"],
       "port": 3043,
       "autoPort": false
+    },
+    {
+      "name": "context-manager-api",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\claude_context_manager\\backend && .venv\\Scripts\\python.exe -m uvicorn main:app --port 8000"],
+      "port": 8000,
+      "autoPort": false
+    },
+    {
+      "name": "context-manager",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\claude_context_manager\\frontend && npm run dev"],
+      "port": 3001,
+      "autoPort": false
     }
   ]
 }

@@ -125,10 +125,32 @@ Auto-research findings: hybrid wins constraint score (deterministic, +0.04 mean 
 | **Map Text Writer** | `python tools/map_text_writer.py` | Generate blurb/intent/technical docs |
 | **Classify Artifacts** | `python tools/classify_artifacts.py` | Auto-classify artifacts by category |
 
+### Past sessions are readable — including the other subscription's
+
+Palle works this project from two Claude accounts and switches when one runs out of usage.
+**Every past session is readable from either account**, because transcripts are account-blind
+files under `~/.claude/projects/`, while each account's sidebar shows only the conversations
+that account started (measured 2026-08-13: of 101 Ada conversations, 6 appear in one sidebar,
+12 in the other, and **83 in neither**). Do not conclude that work is lost because you cannot
+see it listed.
+
+The `context-manager` MCP server reads all of them, registered at user scope so it is present
+under both accounts. It needs no server running — it opens the cache directly.
+
+| To do this | Call |
+|---|---|
+| See what exists | `list_sessions(project="C--Users-palle-Documents-GitHub-AdaResearch-46")` — use `title`, not `first_message`; most sessions open with identical boilerplate |
+| Find by topic | `search_sessions(project=…, query="museum")` — matches titles and message text |
+| Read what happened | `read_session_turns(session_id, include_thinking=true)` |
+| Recover *why* | `read_session_reasoning(session_id)` — the reasoning behind past decisions |
+
+Run `/pickup` to do the whole sweep at once. Sessions in worktrees live in their own project
+dirs (`…AdaResearch-46--claude-worktrees-*`) — check those too when a topic seems missing.
+
 ### Companion Tools (separate repos)
 | Tool | Location | Purpose |
 |------|----------|---------|
-| **Context Manager** | `C:\Users\palle\Documents\GitHub\claude_context_manager` | Session browser, clone, memory, working tree |
+| **Context Manager** | `C:\Users\palle\Documents\GitHub\claude_context_manager` | Session browser, clone, memory, working tree. Also the cross-account session reader — see above |
 | **Encyclopedia** | `C:\Users\palle\Documents\GitHub\ada_encyclopedia` | Web editors, search, substrates, API |
 | **Writer** | `C:\Users\palle\Documents\GitHub\ada_writer_pro` | Book writing tool |
 
@@ -253,6 +275,7 @@ See `doc/MAP_EDITING_PIPELINE.md` for detailed documentation.
 | `/ada-bridge-listener` | verify | VR feedback → AI action |
 | `/ada-humanizer` | document | Clean text for docs and UI |
 | `/ada-code-documenter` | document | Generate code documentation |
+| `/pickup` | orient | Resume work from past sessions, including the other subscription's |
 | `/ada-task-manager` | track | Task management (plan/done/report) |
 | `/ada-knowledge-updater` | track | Scan codebase, update knowledge |
 | `/ada-orchestrator` | track | Session handoff, onboarding |
