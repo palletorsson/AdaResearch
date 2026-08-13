@@ -18,6 +18,7 @@ Stages:
 import json
 import os
 import sys
+from collections import Counter
 import subprocess
 from pathlib import Path
 
@@ -313,6 +314,27 @@ def main():
             f"{bar(stages['7_polish']):>4s}  "
             f"{head_marker}"
         )
+
+    # The aggregate. Until now this table was the tool's entire output, so every
+    # caller wanting one number had to invent it: doc/reports/breath_log.json
+    # carries baseline_avg 0.0 / delta 0.0 for five consecutive breaths because
+    # nothing here was parseable as an average, and the 6.083 in the entries
+    # before those was carried forward rather than measured. The definition
+    # below is chosen to reproduce that 6.083 exactly on the corpus that
+    # produced it (23 sequences at head 6 + 1 complete at head 8), so the
+    # history stays comparable instead of being orphaned by a new metric.
+    if results:
+        heads = [r["head"] for r in results]
+        avg_head = sum(heads) / len(heads)
+        complete = sum(1 for h in heads if h >= 8)
+        dist = Counter(heads)
+        spread = "  ".join(
+            f"stage {h}: {dist[h]}" for h in sorted(dist)
+        )
+        print("-" * 100)
+        noun = "sequence" if len(heads) == 1 else "sequences"
+        print(f"global_avg {avg_head:.3f}   ({len(heads)} {noun} scored, "
+              f"{complete} complete)   {spread}")
 
 
 if __name__ == "__main__":

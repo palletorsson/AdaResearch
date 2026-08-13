@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "_why_not_in_breath_log": "This entry is a SIDECAR, not an append to doc/reports/breath_log.json, because a second breather was writing that file while this one ran. Measured, not assumed: breath_log.json mtime 16:41:00 and improvement_trajectory.json mtime 16:40:18, both while this session was mid-cycle and neither touched by it; the file then carried a new entry 2026-08-13T16:55 (mode evolve-only) that this session did not write, and `git diff --stat` showed 7257 changed lines -- a whole-file LF->CRLF round-trip, not an append. A read-modify-write from here would have silently dropped that entry, since the copy loaded at the start of this cycle predates it. The shared log has no lock. Fold this in by hand, or from a later breath that holds the file alone.",
+  "breath": {
+    "breath_id": "2026-08-13T16:26",
+    "mode": "full",
+    "invoked_by": "scheduled task ada-morning-breath",
+    "baseline_avg": 6.083,
+    "post_avg": 6.083,
+    "delta": 0.0,
+    "delta_note": "A MEASURED zero for the first time in six breaths. The last five entries recorded baseline_avg 0.0 / post_avg 0.0 because sequence_pipeline_scorer.py printed no aggregate at all, and the 6.083 in the entries before those was carried forward rather than read. The scorer now prints one, and it reads 6.083 -- so the zero is real: all 24 spine sequences sit at stage 6 (vr_testing), a headset gate no autonomous breath can move.",
+    "items_attempted": [
+      "release Gate B red for a fourth day: the sole blocking row (grey_point, missing_scene_path)",
+      "release Gate F red: museum walkthrough stalls at z=44.7/102.0",
+      "the dead pipeline aggregate the breath log has been faking for five breaths",
+      "concurrent-writer scan before any commit (run three times)"
+    ],
+    "items_succeeded": [
+      "gate_b_grey_point_scene_key",
+      "pipeline_scorer_aggregate"
+    ],
+    "items_failed": [],
+    "items_declined": [
+      "gate_f_museum_walkthrough"
+    ],
+    "decline_reasons": {
+      "gate_f_museum_walkthrough": "NOT MEASURABLE FROM HERE TODAY, and the reason is not the corridor. em_autopilot.py deletes and rewrites ada_run/em_autopilot.json on each of up to three attempts, and that file moved twice during this session (16:29, 16:36) with only one of those runs mine. The gate read z=44.7/102.0, 48.6s, 26 cells unlearned; the file minutes later read the same z but 27.0s and 8 cells -- a different attempt, or a different agent's. Re-running would have produced a number I could not attribute to my own process, and reading it as a corridor verdict is precisely the harness-before-design error this log records six times. Left red and unclaimed."
+    },
+    "files_changed": [
+      "commons/artifacts/registry/dark_spot.json",
+      "commons/artifacts/grey_point/grey_point.gd",
+      "commons/artifacts/grey_point/grey_point.gd.uid",
+      "commons/artifacts/grey_point/grey_point.tscn",
+      "tools/sequence_pipeline_scorer.py"
+    ],
+    "gates_before": {
+      "A": "PASS", "B": "FAIL (missing_scene_path 1)", "C": "PASS",
+      "D": "PASS", "E": "PASS", "F": "FAIL (z 44.7/102.0)"
+    },
+    "gates_after": {
+      "B": "PASS (missing_scene_path 0, verified against the gate's own five inputs: rc 0, unresolved_scene_files 0, missing_scene_path 0, unsupported_scene_path 0, invalid_biome_token 0)",
+      "F": "unchanged, deliberately unmeasured -- see decline_reasons"
+    },
+    "levers": {
+      "registry_entries": 2724,
+      "declared_families": 756,
+      "swept": 810,
+      "declared_but_never_swept": 136,
+      "placed_outside_the_system": 1300,
+      "_against_08_09": "declared 683->756 (+73), swept 747->810 (+63), debt 128->136 (+8), outside 1332->1300 (-32). Evidence debt rose while coverage rose -- promotion is outrunning measurement."
+    },
+    "duration_minutes": 25,
+    "discoveries": [
+      "THE GATE NAMES A KEY THAT DOES NOT EXIST, AND I WROTE THE GATE'S NAME INTO THE REGISTRY. Release Gate B reports `missing_scene_path`, and the artifact audit's output field is spelled `scene_path` -- but the registry INPUT key the audit actually reads is `scene` (spine_map_workbench.py:275, `value.get(\"scene\", \"\")`). Corpus-wide the split is 2686 entries using `scene` against 15 using `scene_path`. Told to fill in a missing scene path, I copied the name off the gate's own report, wrote `\"scene_path\": \"res://...\"` into dark_spot.json, and re-ran the audit: still 1. The JSON stayed valid, the file parsed, the entry looked complete to any human reading it, and NOTHING in the chain objected -- no schema check, no linter, no gate. The fix was a one-word rename to `scene`, after which the count went to 0. The general shape: when a report's field name and the data's field name differ, the report teaches the wrong name to whoever acts on it, and the wrong name fails silently because JSON has no unknown-key error.",
+      "THE 14 `scene_path` ENTRIES ARE A DORMANT VERSION OF THE SAME TRAP. commons_artifacts.json (6), physics_simulation.json (7) and procgen_extra.json (1) carry BOTH keys, and in all 14 the two values are byte-identical, so nothing is wrong today. But `scene` is the only one read; if any of those 14 is ever updated by editing the visible-looking `scene_path`, the artifact keeps loading the stale scene and every gate stays green. Not repaired -- 14 surgical edits across three tab-indented registries to delete a no-op is a worse risk than the trap. Recorded so the next hand knows which key is live.",
+      "THE 08-10 READING OF grey_point WAS MADE WITHOUT LOOKING ON DISK. That evening's breath called the entry 'an omission wearing the costume of a position' -- it declares include_in_map_data:true and map_ready:true, i.e. asks to be placed, while the artifact's @identity refuses capture -- and concluded 'the tell is entirely internal'. It is not internal: commons/artifacts/grey_point/grey_point.tscn has existed since 08-10 14:45, with the script on the ROOT node as the corpus requires, and grey_point.gd compiles clean (1 checked, 0 failed). The scene was written and simply never wired into the registry. A refusal does not ship a .tscn. The entry was not making a statement; it was three days unfinished, and reading it as a stance is what kept it unfinished -- the registry_info note forbids promoting, sweeping, capturing and harmonising it, and naming its scene is none of those.",
+      "THE PIPELINE AGGREGATE IS NOW MEASURED, AND IT REPRODUCES THE NUMBER IT REPLACES. sequence_pipeline_scorer.py printed a per-sequence table and nothing else, so the five most recent breaths logged baseline_avg 0.0 / delta 0.0 and the 6.083 before them was carried, not read -- while the scheduled task that invokes this skill instructs 'commit with a message including before/after pipeline scores', an instruction the tool could not satisfy. Mean head over scored sequences was chosen as the definition precisely because it reproduces the historical figure: (23 at head 6 + 1 at head 8) / 24 = 6.0833, and the tool now prints `global_avg 6.083`. The history is comparable rather than orphaned. The --json path is untouched (still a bare list of 24) so nothing downstream shifts.",
+      "TWO BREATHERS RAN ON ONE TREE AND NEITHER KNEW. This session's own concurrent-writer scan is what caught it: tools/spatial_*.py moved 16:20-16:24, six minutes before this cycle began; ada_run/scene_spatial.md and journey_narrative.md at 16:35; then breath_log.json at 16:41 carrying an entry timestamped 2026-08-13T16:55 in mode evolve-only that this session did not write. The other agent's Read phase reports '0 breaths logged since 2026-08-10' -- true when it looked, false by the time it wrote. Neither log will show the other unless a human folds them. The scan is in the skill as a pre-commit step; it is worth more as a pre-WRITE step, because the file this cycle was told to append to is exactly the file the other cycle was rewriting."
+    ]
+  }
+}
