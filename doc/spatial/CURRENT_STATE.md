@@ -92,6 +92,15 @@ January one; the calibrator and addon patch stay as opt-in.
 forward is STILL dead with bare hands, the gadget theory dies too — then
 flip `calibrate` on and read the `JoystickCalibrate:` reach lines.
 
+**Fifth session, 08-14: the grid wall.** Bare hands worked — Palle can move
+in VR — and the next wall was literal: the rig's `PlayerBoundsCheck` ships a
+10 m box around the world origin (right for grid maps), so the museum at
+x 0..15 extending endlessly in +z reset the player on every walk. The
+museum's VR setup now RESHAPES it rather than disabling it: x ±20, y ±10,
+z unbounded — still a net under a player who escapes every catch slab.
+`test_em_bounds.gd` proves it on the REAL staged scene the menu loads
+(reshape landed, check still active, z=500 legal).
+
 **Open findings (not fixed today).**
 
 - **Autopilot on the full plan FAILS at z 545**, inside the forces segment

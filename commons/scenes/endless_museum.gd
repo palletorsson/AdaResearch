@@ -917,6 +917,18 @@ func _setup_world() -> void:
 		# building only. The XR rig walks it; the environment still installs,
 		# because tonemapping and GI belong to the world, not to the camera.
 		_setup_environment()
+		# The rig's PlayerBoundsCheck is shaped for GRID MAPS: a 10 m box
+		# around the world origin, reset on exit. The museum lives at x 0..15
+		# and extends endlessly in +z, so the default box yanks the player
+		# back the moment they walk — the "can't leave the grid zone" wall.
+		# Reshape rather than disable: x ±20 and y ±10 still catch a player
+		# who somehow escapes the building or falls past every catch slab,
+		# while z is effectively unbounded because the museum is.
+		var bounds: Node = get_tree().get_root().find_child("PlayerBoundsCheck", true, false)
+		if bounds != null:
+			bounds.set("check_type", 0)  # BOX
+			bounds.set("box_bounds", Vector3(20.0, 10.0, 1.0e12))
+			print("[endless_museum] PlayerBoundsCheck reshaped for the museum: x ±20, y ±10, z unbounded")
 		print("[endless_museum] VR: building only — the XR rig owns the walker")
 		return
 	# the walker is a body, not a gliding camera: a capsule the walls and
