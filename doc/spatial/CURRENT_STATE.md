@@ -81,14 +81,16 @@ wrist workstation, gravity gun, wrist stats, XP listener — from every
 LOADED scene's rig (the staging menu keeps its pointers), leaving both
 hands' Movement* providers, collision hands, PlayerBody and the calibrator
 untouched. With FunctionPickup gone the catalyst bracelet can never attach.
-Enable any of three ways: `movement_only_hands` export on vr_staging,
-`--bare-hands`, or a `user://movement_only_hands.txt` marker (Quest:
-adb-push an empty file into the app's files dir). `test_bare_hands.gd`
-proves strip + survival + off-mode-untouched. NOTE: whether the earlier
-calibration fix ever RAN in Palle's failing session is unverified — no
-`JoystickCalibrate:` lines have been seen from a live headset run; if the
-next run lacks them, the fix never reached the device (stale Godot or
-un-pushed APK), and that is the first thing to check.
+**RULED DEFAULT ON by Palle the same day** (`47c30954f`): every loaded
+scene's rig is movement-only; uncheck `movement_only_hands` on vr_staging
+to restore the gadget rig (`--bare-hands` / the marker file remain as
+force-ons). The stick CALIBRATION was stood down in the same ruling
+(`calibrate = false`): the deadzone wall was live for every month movement
+worked, so it is not the suspect — the input path is byte-for-byte the
+January one; the calibrator and addon patch stay as opt-in.
+`test_bare_hands.gd` proves strip + survival + off-mode-untouched. If
+forward is STILL dead with bare hands, the gadget theory dies too — then
+flip `calibrate` on and read the `JoystickCalibrate:` reach lines.
 
 **Open findings (not fixed today).**
 
