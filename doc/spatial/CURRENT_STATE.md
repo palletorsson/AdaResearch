@@ -83,6 +83,11 @@ transformation while the plan held the Uffizi — the plan now OWNS the building
 (`_plan_owner`, plan → crown → rotation), all segments plan-stamped in the
 plan's buildings. Autopilot round 3: ok, z 150.06/150.0, **1** cell unlearned.
 
+**The curator's hand (`3c587a64f`).** In-museum editor under `--em-edit`:
+E/arrows/Q/R/DEL/F5 write `ada_run/em_overrides.json` — rulings keyed
+(chapter, token, from-cell), never scene transforms. Applied over the plan,
+each application printed, idle overrides reported. Round trip proven headless.
+
 **Open.** The balcony void is designed, unbuilt (rows
 still count "exterior"). laser_measure took a 7 × 57 m court because its body
 still measures 50 m in Z — spike 06's config channel (**37 of 757**
