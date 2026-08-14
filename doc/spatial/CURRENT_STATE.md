@@ -87,6 +87,11 @@ plan's buildings. Autopilot round 3: ok, z 150.06/150.0, **1** cell unlearned.
 E/arrows/Q/R/DEL/F5 write `ada_run/em_overrides.json` — rulings keyed
 (chapter, token, from-cell), never scene transforms. Applied over the plan,
 each application printed, idle overrides reported. Round trip proven headless.
+v2 (`f7621ed02`): the [ ] add-palette, chapter-scoped; adds apply at
+FULL-SEGMENT parity (timing was a third author); every `_stamp` refusal now
+carries a named reason — the one we chased was "sealing would sever the walk
+route", and it was correct: a 7.4 m body cuts the narrowing enfilade. Trial
+drives the editor's real keys and asserts on the file plus a rebuild.
 
 **Open.** The balcony void is designed, unbuilt (rows
 still count "exterior"). laser_measure took a 7 × 57 m court because its body
