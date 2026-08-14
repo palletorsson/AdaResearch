@@ -183,6 +183,9 @@ var _edit_sel: int = -1
 var _edit_overrides: Array = []
 var _edit_dirty: bool = false
 var _edit_hud: Label = null
+var _edit_pal: Array = []
+var _stamp_refusal: String = ""   # why the LAST _stamp said no — set at every false exit
+var _edit_pal_i: int = -1
 var _mod_editor = null
 const COURT_JOINT_MAX_DEPTH := 40  # metres of court per joint before the next building
 var _force_vr: bool = false       # --em-vr forces the headset path
@@ -1374,6 +1377,7 @@ func _build_segment() -> void:
 	# curriculum, a plinth is whether you can SEE it, a prop is whether the wall
 	# is a wall, a guest is whether the pool is wider than the spine.
 	seg.set_meta("em_chapter", seg_seq)
+	_apply_hand_adds(seg, zbase, seg_seq)
 	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d/%d (%d leads, %d relatives, %d repeats, %d guests) + %d plinths + %d props, z %.0f..%.0f, lights %d" % [
 		_seg_index - 1, spec["key"], spec["museum"], seg_seq if seg_seq != "" else "-",
 		placed, int(deal.get("max_objects", 0)), int(deal.get("leads", 0)),
@@ -1646,6 +1650,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 
 	var idle: int = 0
 	for ov_v in _edit_overrides:
+		if bool((ov_v as Dictionary).get("add", false)):
+			continue                # adds apply later, at full-segment parity
 		if String((ov_v as Dictionary).get("chapter", "")) == String(entry.get("sequence", "")) 				and not (ov_v as Dictionary).get("_matched", false):
 			idle += 1
 	if idle > 0:
@@ -2153,18 +2159,22 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		zbase: int, fp: int, axis_entry: Dictionary, drop_if_unvaried: bool,
 		span_cap: float = 0.0, yaw_deg: float = 0.0) -> bool:
 	if scene_path == "" or cell.is_empty():
+		_stamp_refusal = "no scene path or cell"
 		return false
 	var ps: PackedScene = load(scene_path) as PackedScene
 	if ps == null:
+		_stamp_refusal = "scene failed to load"
 		return false
 	var node: Node3D = ps.instantiate() as Node3D
 	if node == null:
+		_stamp_refusal = "instantiate returned non-Node3D"
 		return false
 	node.set_meta("artifact_lookup_name", lookup)
 	if not axis_entry.is_empty():
 		var ok: bool = _apply_axis(node, axis_entry)
 		if not ok and drop_if_unvaried:
 			node.queue_free()
+			_stamp_refusal = "axis value did not vary"
 			return false
 	# ── THE LIFT ────────────────────────────────────────────────────────────
 	# 47% of every artifact this corpus has measured is below the viewing band:
@@ -2238,6 +2248,7 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 				plinth_node.queue_free()
 				_seg_plinths -= 1
 				_deal_stats["plinths"] = int(_deal_stats.get("plinths", 0)) - 1
+			_stamp_refusal = "body wider than the slot span"
 			return false
 	# _ready has run for everything the scene shipped; strip the workshop chrome
 	# before the extent is measured, so a grab handle floating a metre off the
@@ -2257,6 +2268,7 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 			plinth_node.queue_free()
 			_seg_plinths -= 1
 			_deal_stats["plinths"] = int(_deal_stats.get("plinths", 0)) - 1
+		_stamp_refusal = "sealing would sever the walk route"
 		return false
 	# ── THE SEAT ────────────────────────────────────────────────────────────
 	# THE LIKELIEST DEFECT OF THE WHOLE LIFT, and the one a still shows first: an
@@ -2298,9 +2310,14 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		# The record's `tile_cell` is the PLAN's frame (segment z minus the
 		# vestibule), because that is the key an override must carry to match
 		# a plan row on the next build. Chapter resolves lazily off seg meta.
+		# `from` is the PLAN's cell and never mutates — it is the override's
+		# key. `tile_cell` tracks the hand's current position for the HUD. The
+		# first trial run keyed on tile_cell, and every nudge minted a fresh
+		# override because the nudge itself had moved the key.
+		var plan_cell: Array = [int(cell.get("x", 0)),
+			int(cell.get("y", 0)) - VESTIBULE_H]
 		_edit_records.append({"node": node, "token": lookup,
-			"tile_cell": [int(cell.get("x", 0)),
-				int(cell.get("y", 0)) - VESTIBULE_H],
+			"from": plan_cell.duplicate(), "tile_cell": plan_cell,
 			"rotation": yaw_deg, "chapter": "", "seg": seg})
 	return true
 
@@ -2862,6 +2879,43 @@ func _input(event: InputEvent) -> void:
 		_player.rotation = Vector3(0.0, _yaw, 0.0)
 		_cam.rotation = Vector3(_pitch, 0.0, 0.0)
 
+## The hand's ADDS, applied at FULL-SEGMENT PARITY — after courts, props and
+## every plan seal, which is exactly the world the curator stood in when ENTER
+## was pressed. The first version applied them inside _deal_from_plan, before
+## the courts and props existed, and the seal's severance rule (a body whose
+## cells would cut the walk map is refused) judged the add against a corridor
+## with no reconnection routes yet: the same add that previewed cleanly at
+## edit time was refused on every rebuild. Timing was the third author.
+func _apply_hand_adds(seg: Node3D, zbase: int, chapter: String) -> void:
+	if chapter == "" or _edit_overrides.is_empty():
+		return
+	for ov_v in _edit_overrides:
+		var ovd: Dictionary = ov_v as Dictionary
+		if not bool(ovd.get("add", false)):
+			continue
+		if String(ovd.get("chapter", "")) != chapter:
+			continue
+		ovd["_matched"] = true
+		var atok := String(ovd.get("token", ""))
+		var lv: Variant = _live.get(atok)
+		var ascene := String((lv as Dictionary).get("scene", "")) if lv is Dictionary else ""
+		if ascene == "":
+			print("[em-edit] add %s has no living scene — ruling idle" % atok)
+			continue
+		var to2: Array = ovd.get("to", [])
+		if to2.size() < 2:
+			continue
+		var acell: Dictionary = {"x": int(to2[0]),
+			"y": int(to2[1]) + VESTIBULE_H, "rank": 2, "top": 0.0}
+		if _stamp(seg, ascene, atok, acell, zbase, 1, {}, false, 0.0,
+				float(ovd.get("rotation", 0.0))):
+			print("[em-edit] %s re-added from ruling at [%d,%d]"
+				% [atok, int(to2[0]), int(to2[1])])
+		else:
+			print("[em-edit] add %s REFUSED at [%d,%d] — %s; the ruling stands"
+				% [atok, int(to2[0]), int(to2[1]), _stamp_refusal])
+
+
 ## The curator's keys. True = consumed. The live node moves as a PREVIEW; the
 ## override row is the truth, applied by _deal_from_plan on the next build.
 func _edit_handle_key(key: int) -> bool:
@@ -2885,11 +2939,28 @@ func _edit_handle_key(key: int) -> bool:
 		KEY_DELETE:
 			if _edit_sel >= 0:
 				var r2: Dictionary = _edit_records[_edit_sel]
-				var ov: Dictionary = _mod_editor.call(
-					"override_for", _edit_records, _edit_sel, _edit_overrides)
-				ov["remove"] = true
+				# an ADDED row's delete erases the add ruling itself; a plan
+				# row's delete records a removal. Different truths.
+				if not _mod_editor.call("remove_add",
+						_edit_records, _edit_sel, _edit_overrides):
+					var ov: Dictionary = _mod_editor.call(
+						"override_for", _edit_records, _edit_sel, _edit_overrides)
+					ov["remove"] = true
 				(r2.get("node") as Node3D).visible = false
 				_edit_dirty = true
+		KEY_BRACKETLEFT, KEY_BRACKETRIGHT:
+			# palette scoped to the chapter the CAMERA stands in — walk into a
+			# segment and [ ] browses that chapter's own cast
+			var ch := _edit_chapter_here()
+			_edit_pal = _mod_editor.call("palette", _pool, ch)
+			if _edit_pal.is_empty():
+				print("[em-edit] palette: chapter %s offers nothing here" % ch)
+				_edit_pal_i = -1
+			else:
+				_edit_pal_i = wrapi(_edit_pal_i + (1 if key == KEY_BRACKETRIGHT else -1),
+					0, _edit_pal.size())
+		KEY_ENTER:
+			_edit_place_from_palette()
 		KEY_F5:
 			if _mod_editor.call("save", _edit_overrides):
 				_edit_dirty = false
@@ -2898,8 +2969,55 @@ func _edit_handle_key(key: int) -> bool:
 			return false
 	if _edit_hud != null:
 		_edit_hud.text = _mod_editor.call(
-			"hud_text", _edit_records, _edit_sel, _edit_overrides, _edit_dirty)
+			"hud_text", _edit_records, _edit_sel, _edit_overrides, _edit_dirty,
+			_edit_pal, _edit_pal_i)
 	return true
+
+
+## The chapter whose segment the camera stands in — [ ] browses that cast.
+func _edit_chapter_here() -> String:
+	if _cam == null:
+		return ""
+	var z: float = _cam.global_position.z
+	for srec in _segments:
+		if z >= float(srec.get("z0", 0.0)) and z < float(srec.get("z1", 0.0)):
+			var n: Node = srec.get("node")
+			if n != null and is_instance_valid(n) and n.has_meta("em_chapter"):
+				return String(n.get_meta("em_chapter"))
+	return ""
+
+
+## ENTER: stamp the palette's pick 2.5 m ahead as a PREVIEW and record the add
+## as a ruling — {"add": true, chapter, token, to} — that _deal_from_plan
+## applies on every future build.
+func _edit_place_from_palette() -> void:
+	if _edit_pal_i < 0 or _edit_pal_i >= _edit_pal.size() or _cam == null:
+		return
+	var cand: Dictionary = _edit_pal[_edit_pal_i]
+	var fwd: Vector3 = -_cam.global_transform.basis.z
+	var spot: Vector3 = _cam.global_position + fwd * 2.5
+	var wx: int = int(floor(spot.x))
+	var wz: int = int(floor(spot.z))
+	for srec in _segments:
+		if wz < int(srec.get("z0", 0)) or wz >= int(srec.get("z1", 0)):
+			continue
+		var seg: Node3D = srec.get("node") as Node3D
+		var zbase: int = int(srec.get("z0", 0))
+		var ch := ""
+		if seg.has_meta("em_chapter"):
+			ch = String(seg.get_meta("em_chapter"))
+		var cell: Dictionary = {"x": wx, "y": wz - zbase, "rank": 2, "top": 0.0}
+		if _stamp(seg, String(cand.get("scene", "")), String(cand.get("token", "")),
+				cell, zbase, 1, {}, false):
+			_edit_overrides.append({"add": true, "chapter": ch,
+				"token": String(cand.get("token", "")),
+				"from": [wx, wz - zbase - VESTIBULE_H],
+				"to": [wx, wz - zbase - VESTIBULE_H],
+				"rotation": 0.0, "remove": false, "provenance": "hand"})
+			_edit_dirty = true
+			print("[em-edit] %s added by hand at world [%d,%d] (%s)"
+				% [cand.get("token"), wx, wz, ch])
+		return
 
 
 func _edit_nudge(dx: int, dz: int) -> void:

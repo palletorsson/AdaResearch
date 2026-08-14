@@ -61,7 +61,7 @@ static func pick(cam: Camera3D, records: Array, max_dist: float = 24.0) -> int:
 static func override_for(records: Array, idx: int, overrides: Array) -> Dictionary:
 	var r: Dictionary = records[idx]
 	var key_tok := String(r.get("token", ""))
-	var key_from: Array = r.get("tile_cell", [])
+	var key_from: Array = r.get("from", r.get("tile_cell", []))
 	for ov in overrides:
 		if String((ov as Dictionary).get("token", "")) == key_tok \
 				and (ov as Dictionary).get("from", []) == key_from:
@@ -108,6 +108,32 @@ static func load_file(path: String = OVERRIDES_PATH) -> Array:
 	return (rows as Array) if rows is Array else []
 
 
+## The add-palette: what the current chapter's pool offers, in spine order.
+## Chapter-scoped on purpose — 2,700 living tokens is a search problem, not a
+## palette; the chapter's own cast is a handful and is what belongs here.
+static func palette(pool: Array, chapter: String) -> Array:
+	var out: Array = []
+	for e in pool:
+		if String((e as Dictionary).get("sequence", "")) == chapter:
+			out.append({"token": String((e as Dictionary).get("lookup", "")),
+				"scene": String((e as Dictionary).get("scene", ""))})
+	return out
+
+
+## An added row's DELETE should erase the ADD ruling, not mint a removal of a
+## row the plan never held. True = an add was erased; false = not an add.
+static func remove_add(records: Array, idx: int, overrides: Array) -> bool:
+	var r: Dictionary = records[idx]
+	var tok := String(r.get("token", ""))
+	var at: Array = r.get("from", [])
+	for i in range(overrides.size()):
+		var ov: Dictionary = overrides[i]
+		if bool(ov.get("add", false)) and String(ov.get("token", "")) == tok 				and ov.get("to", []) == at:
+			overrides.remove_at(i)
+			return true
+	return false
+
+
 static func hud(root: Node) -> Label:
 	var layer := CanvasLayer.new()
 	layer.name = "EmEditHud"
@@ -124,8 +150,13 @@ static func hud(root: Node) -> Label:
 	return lbl
 
 
-static func hud_text(records: Array, sel: int, overrides: Array, dirty: bool) -> String:
-	var head := "[EDIT]  E select · arrows move · Q/R rotate · DEL remove · F5 save"
+static func hud_text(records: Array, sel: int, overrides: Array, dirty: bool,
+		pal: Array = [], pal_i: int = -1) -> String:
+	var head := "[EDIT]  E select · arrows move · Q/R rotate · DEL remove · [ ] palette · ENTER add · F5 save"
+	if pal_i >= 0 and pal_i < pal.size():
+		head += "
+add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
+			String((pal[pal_i] as Dictionary).get("token", "?")), pal_i + 1, pal.size()]
 	var line2 := ""
 	if sel >= 0 and sel < records.size():
 		var r: Dictionary = records[sel]
