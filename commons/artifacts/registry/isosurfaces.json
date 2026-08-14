@@ -1755,6 +1755,16 @@
 			"qfep_connection": "Marching cubes run on a noise field that will not hold still \u2014 surfaces extracted from evolving randomness in real time, the skin re-found every frame as the field beneath it churns. The chapter's two neighbors married and set in motion: noise supplies the field, marching cubes reads the threshold, and the result is geometry that flows because its data does."
 		},
 		"mc_base": {
+			"dna": {
+			 "axes": {
+			 "plumb": [
+			 "bedded",
+			 "overturned",
+			 "weightless",
+			 "steep"
+			 ]
+			 }
+			},
 			"lookup_name": "mc_base",
 			"category": "procedural",
 			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn",
