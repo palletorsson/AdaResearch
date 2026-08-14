@@ -3966,6 +3966,78 @@
     "python tools/em_autopilot.py  — the 3-museum gate against the balcony-void commits (ccb1b206e / 7bb5e6cbd), once the Godot lock is free"
    ],
    "duration_minutes": 22
+  },
+  {
+   "breath_id": "2026-08-14T18:55",
+   "mode": "evolve-only",
+   "baseline_avg": 6.083,
+   "post_avg": 6.083,
+   "delta": 0.0,
+   "items_attempted": [
+    "review the day's work: 1 morning breath (09:04) + 33 commits",
+    "re-measure the levers independently (pipeline, DNA declaration gate)",
+    "settle whether the two pieces of evidence owed by the morning breath can be paid tonight",
+    "Level-3 evidence check for a skill evolution proposal",
+    "concurrent-writer scan before any write"
+   ],
+   "items_succeeded": [
+    "review the day's work: 1 morning breath (09:04) + 33 commits",
+    "re-measure the levers independently (pipeline, DNA declaration gate)",
+    "settle whether the two pieces of evidence owed by the morning breath can be paid tonight",
+    "Level-3 evidence check for a skill evolution proposal",
+    "concurrent-writer scan before any write"
+   ],
+   "items_failed": [],
+   "items_blocked": [
+    "release gates / Gate F (museum walkthrough) - BLOCKED BY LOCK, not failed: two Godot processes live since 13:04 and 16:39",
+    "evidence owed #1: build_dna_gallery --slug=marchingcave - same lock",
+    "evidence owed #2: em_autopilot 3-museum gate - same lock, second consecutive breath"
+   ],
+   "failure_reasons": {},
+   "skills_used": [
+    "ada-breather"
+   ],
+   "skill_effectiveness": {
+    "ada-breather": {
+     "calls": 1,
+     "succeeded": 1,
+     "failed": 0
+    }
+   },
+   "files_changed": [
+    "doc/reports/breath_log.json",
+    "doc/reports/improvement_trajectory.json",
+    "doc/reports/skill_evolution_proposals.json"
+   ],
+   "measurements": {
+    "pipeline_global_avg": 6.083,
+    "pipeline_measured_at": "18:53",
+    "pipeline_derivation": "(23*6 + 8)/24 = 146/24",
+    "pipeline_flat_run_length": 12,
+    "dna_declared": 1066,
+    "dna_verified": 1053,
+    "dna_broken": 0,
+    "dna_undeclared_code_value": 0,
+    "dna_unverifiable": 13,
+    "dna_child_script_informational": 34,
+    "dna_measured_at": "18:58",
+    "dna_morning_reading": "1056 declared / 1043 verified",
+    "release_gates": null,
+    "release_gates_reason": "not run - Godot lock held by a live interactive session",
+    "head_at_harvest": "a11314453"
+   },
+   "discoveries": [
+    "THE LOCK IS NOW A STANDING BLOCKER, NOT AN ACCIDENT, AND IT HAS BLOCKED THE SAME ITEM TWICE IN ONE DAY. The morning breath recorded Gate F as YIELDED to a live concurrent session and wrote two pieces of evidence owed, both of which need Godot. Tonight neither can be paid: two Godot processes are live (PIDs 17996 and 25044, started 16:39:02 and 13:04:20), ada_run/sweep_spec.json was written at 18:51:27, HEAD was committed at 18:52:15, and my first probe ran at 18:52:58 - forty-three seconds after a commit, the same forty-three seconds that caught the morning breath out. CLAUDE.md's rule is 'never run two Godot instances at once - the second dies silently on the user:// lock', so the correct action was to run nothing. What this means for the ledger: em_autopilot.json on disk is stamped 10:50 and is not evidence of anything at HEAD (standing rule: re-run the gate, never read the file), so Gate F's status at current HEAD has now been UNKNOWN for two consecutive breaths and three calendar days, and the reason has changed from 'nobody ran it' to 'no scheduled breath CAN run it while Palle is working'. An evening breath scheduled at 18:55 on a working day will meet a live editor essentially every time.",
+    "TODAY'S BIGGEST COMMIT IS AN INDEPENDENT CONFIRMATION OF THE STANDPOINT LESSON, EXTENDED FROM ANGLE TO DISTANCE. a11314453 (18:52) re-framed fifteen vector artifacts whose near-zero subject shares had been read, where they were read at all, as axes that do nothing. All fifteen render correctly; the camera was three to eight times too far away. Subject shares rose 4-8x (basis_vectors_rig 1.56 -> 9.82%, projection_shadow 9.15 -> 42.34%, weather_vector_field 4.01 -> 34.64%). The corpus rule so far has been that a dead verdict is usually a fact about WHERE the camera stands; this is the same fault in the radial direction, and it is registry-only, so no artifact source, placement, material or geometry moved. Two of the three killed diagnoses are worth keeping: a showcase backdrop appeared to rescue basis_vectors_rig from 5.1% to 82.4%, until six different artifacts read 81.9% IDENTICAL TO THE DECIMAL - the mask was counting the grey ground plane, and peak barely moved (0.75 -> 1.11); and batching fifteen tokens into one spec to save Godot boots corrupts framing outright, because capture_config_sweep unions the AABBs of every variant in the spec.",
+    "THE DECLARATION GATE MOVED TEN AXES IN A DAY AND STAYED GREEN, WHICH IS THE FIRST TIME THAT NUMBER HAS BEEN A REPORT ON SOMEONE ELSE'S WORK. Morning: 1056 declared / 1043 verified / 0 broken. Tonight 18:58: 1066 / 1053 / 0 broken, 0 with an undeclared code value, 13 unverifiable, 34 child-script (informational). The +10 was not written by any breath - it came from the interactive session's DNA work. Worth naming because the gate has spent the last week being read as a measure of what the BREATH did; tonight it is evidence that the human's own additions were derived correctly rather than typed, ten for ten.",
+    "NO NEW PROPOSAL TONIGHT, AND THE THRESHOLD IS THE REASON. The strongest candidate - 'a live Godot process makes an entire class of work unobtainable, and the breath keeps selecting it anyway' - has exactly TWO occurrences (this morning's yield, tonight's block). The skill's Level-3 bar is three failures on the same pattern, so this is recorded as evidence under prop-012 rather than filed as prop-028. Stating it plainly because the temptation to round two up to three is exactly what would make the ledger's numbers stop meaning anything.",
+    "THE LEDGER IS THE FINDING. 27 proposals, every one status 'proposed'. None has ever been applied, rejected or superseded; the oldest, prop-001, is 116 days old. prop-015 was filed on 08-01 specifically to fix this, and asked to be applied FIRST on the grounds that it is a two-line addition to the Read phase that makes the other proposals reachable. In the thirteen days since, the ledger has grown from 16 to 27 - it filed eleven more proposals into the queue it had just diagnosed as write-only. That is a stronger and better-evidenced pattern than anything else measured today, it is at 27 occurrences rather than 3, and it cannot be closed autonomously: the skill forbids editing SKILL.md, and rightly. So it is escalated here instead of filed as a 28th entry."
+   ],
+   "evidence_owed": [
+    "python tools/em_autopilot.py - the 3-museum gate at HEAD (carried from 2026-08-14T09:04; still unpaid, lock held)",
+    "python tools/build_dna_gallery.py --slug=marchingcave --tokens=mc_base,marchingcave (carried from 2026-08-14T09:04; still unpaid, lock held)"
+   ],
+   "duration_minutes": 18
   }
  ]
 }

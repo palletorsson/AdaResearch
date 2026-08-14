@@ -601,6 +601,12 @@
      "date": "2026-08-14",
      "breath": "2026-08-14T09:04",
      "note": "A NEW FAILURE MODE FOR THE CHECK AS PROPOSED: git status CANNOT SEE A CONCURRENT WRITER WHO COMMITS. An interactive session held commons/scenes/endless_museum.gd through this breath's whole Baseline, saved it at 09:11:29, and committed at 09:15. When I ran `git diff --stat` on that path it printed NOTHING and `git status --porcelain -- commons/scenes/` showed one unrelated file, because by then the tree matched the NEW HEAD. The file read clean at both ends and had changed in the middle. What actually caught it: a Grep and a Read of the same file minutes apart disagreed by 43 lines about where _run_autopilot starts. So the check must be mtime-based (and HEAD-sha-based, see prop-027), not status-based: a recursive scan for files written in the last N minutes found the writer's four files immediately, and git found none of them."
+    },
+    {
+     "date": "2026-08-14",
+     "breath": "2026-08-14T18:55",
+     "kind": "extending -- the concurrent writer does not only corrupt measurements, it withholds them",
+     "note": "SECOND OCCURRENCE IN ONE DAY, AND A DIFFERENT FAILURE MODE FROM THIS MORNING'S. The morning entry recorded a concurrent writer CORRUPTING a baseline (the tree changed mid-measurement). Tonight the same concurrency WITHHELD the measurement entirely: two Godot processes live since 13:04:02 and 16:39:02, ada_run/sweep_spec.json written 18:51:27, HEAD committed 18:52:15, my first probe at 18:52:58. CLAUDE.md forbids a second Godot instance (the second dies silently on the user:// lock), so release gates, Gate F, and both pieces of evidence the morning breath owed were all unobtainable. Note what caught it and what did not: `git status` showed 398 dirty tracked files and told me nothing about liveness; process start times and file mtimes told me everything. PROPOSED EXTENSION, held below the filing bar at two occurrences: the Read phase should probe for a live Godot process BEFORE the Evaluate phase selects work, and mark every Godot-requiring candidate as BLOCKED-BY-LOCK rather than letting it be chosen and then yielded. A third occurrence should promote this to its own proposal."
     }
    ]
   },
@@ -674,6 +680,12 @@
      "breath_ref": "no breath (evening harvest)",
      "kind": "confirming -- the unread ledger grew again",
      "note": "When this proposal was filed on 08-01 the ledger held sixteen entries, all status 'proposed'. Tonight it holds EIGHTEEN, still all 'proposed', and tonight's pass adds seven more evidence_updates to a file no breath has ever read. Sharper still: today's breath independently re-derived prop-012's concurrent-writer rule from scratch (its discoveries[3]) while prop-012 sat in this file with two prior occurrences already written down. That is the fourth time a proposal has fired after it had already been filed. Apply this one FIRST -- it is a two-line addition to the Read phase, and it is what makes the other seventeen reachable by the breath that needs them, without the human hand-merging seventeen backlogged rules."
+    },
+    {
+     "date": "2026-08-14",
+     "breath_ref": "2026-08-14T18:55",
+     "kind": "confirming -- and the ledger has now outgrown the proposal that diagnosed it",
+     "note": "When this proposal was filed on 08-01 the ledger held SIXTEEN entries, all status 'proposed'. Tonight it holds TWENTY-SEVEN, still all 'proposed'; none has ever been applied, rejected or superseded, and the oldest (prop-001) is 116 days old. So in the thirteen days since a proposal was filed saying 'this queue is write-only', the queue absorbed eleven more entries, including that one. Tonight's harvest declined to add a twenty-eighth: the lock-blocking pattern it found is real but sits at two occurrences against a three-occurrence bar, and filing it would have grown the unread ledger without moving anything. This proposal remains the one to apply FIRST - it is a two-line addition to the Read phase, and it is what makes the other twenty-six reachable by the breath that keeps re-deriving them from scratch."
     }
    ]
   },
@@ -888,6 +900,12 @@
      "date": "2026-08-14",
      "breath": "2026-08-14T09:04",
      "note": "SECOND OCCURRENCE, AND IT MOVES THE QUESTION FROM THE TREE TO THE CLOCK. This breath's release-gates run spanned 09:04-09:11 and its Gate F walk booted at 09:12; the concurrent session saved endless_museum.gd at 09:11:29 and committed at 09:15. So Gate F's red (ok=false, z=44.65/102.0) is not a statement about HEAD before OR after - it is a statement about a tree that existed for a few minutes and was never committed by anyone. Naming the tree is necessary but not sufficient when the gate takes minutes to run and the tree can change inside it."
+    },
+    {
+     "date": "2026-08-14",
+     "breath": "2026-08-14T18:55",
+     "kind": "confirming -- the verdict on disk is now three days stale and still the only one that exists",
+     "note": "ada_run/em_autopilot.json is stamped 10:50 today; HEAD is a11314453 at 18:52 with 31 commits in between, several of them museum work (781046528 museum scale, fce41b369 the grid wall, 913a5eb7f the shipped menu and wide floats). The standing rule is to re-run the gate and never read the file, and tonight the gate could not be run at all. So the only artifact answering 'is the museum walkthrough green?' is a tracked JSON that names no tree and describes one that is three days and dozens of commits gone - which is exactly the defect this proposal asks the tool to fix by printing the git HEAD above its Overall line. Second consecutive breath at UNKNOWN."
     }
    ]
   },
