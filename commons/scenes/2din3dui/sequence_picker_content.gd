@@ -43,6 +43,22 @@ func _populate() -> void:
 	if _subtitle:
 		_subtitle.text = "%d sequences in the spine" % entries.size()
 
+	# The endless museum — not a spine sequence but the negotiated building
+	# that hosts all of them, pinned above the list. Gated on the staged
+	# scene existing so a build without the museum shows the picker
+	# exactly as before. MainMenu3D routes this id straight to
+	# staging.load_scene rather than SceneManager.start_sequence.
+	if ResourceLoader.exists("res://commons/scenes/endless_museum_staged.tscn"):
+		_list.add_child(_build_card({
+			"id": "endless_museum",
+			"order": "∞",
+			"phase": "",
+			"qfep_role": "every sequence, one continuous building",
+			"display_name": "Endless Museum",
+			"description": "walk the whole spine as architecture",
+			"map_count": 0,
+		}))
+
 	for entry in entries:
 		var card := _build_card(entry)
 		_list.add_child(card)

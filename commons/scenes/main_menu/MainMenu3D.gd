@@ -210,6 +210,27 @@ func _on_sequence_selected(sequence_name: String):
 		sequence_picker_instance.queue_free()
 		sequence_picker_instance = null
 
+	# The endless museum is not a spine sequence — it is the negotiated
+	# building itself, and it loads through the SAME staging path every
+	# other scene takes (XRToolsStaging.load_scene expects an
+	# XRToolsSceneBase root; endless_museum_staged.tscn inherits base.tscn
+	# for exactly that reason). SceneManager.start_sequence would look for
+	# a sequence JSON that doesn't exist.
+	if sequence_name == "endless_museum":
+		var staging := _find_staging()
+		if staging:
+			# same pointer hand-off _on_menu_start_game does: the staging
+			# rig's pointers would fight the loaded scene's rig
+			var left_pointer = find_child("FunctionPointerLeft", true, false)
+			var right_pointer = find_child("FunctionPointerRight", true, false)
+			if left_pointer: left_pointer.visible = false
+			if right_pointer: right_pointer.visible = false
+			print("MainMenu: Loading the endless museum via staging")
+			staging.load_scene("res://commons/scenes/endless_museum_staged.tscn")
+		else:
+			push_warning("MainMenu: no XRToolsStaging ancestor — cannot load endless museum")
+		return
+
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if scene_manager and scene_manager.has_method("start_sequence"):
 		# Clear any stale pending request so a later lab load can't double-fire.
@@ -223,6 +244,17 @@ func _on_sequence_selected(sequence_name: String):
 		if scene_manager and "pending_sequence_request" in scene_manager:
 			scene_manager.pending_sequence_request = sequence_name
 		start_game_requested.emit()
+
+func _find_staging() -> XRToolsStaging:
+	# The menu is instanced inside vr_staging.tscn, so the staging system is
+	# always an ancestor in the shipped loop. Walking up (rather than a
+	# hardcoded path) keeps this working if the menu is ever re-parented.
+	var n: Node = get_parent()
+	while n != null:
+		if n is XRToolsStaging:
+			return n
+		n = n.get_parent()
+	return null
 
 func _on_map_selected(map_name: String):
 	print("MainMenu: Loading map: %s" % map_name)

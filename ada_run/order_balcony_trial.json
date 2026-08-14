@@ -1,0 +1,1014 @@
+{
+ "_meta": {
+  "generated": "2026-08-14",
+  "generator": "balcony verification trial \u2014 color+forces only",
+  "rule": "filtered from spine_artifact_order.json"
+ },
+ "order": [
+  {
+   "lookup": "pattern_machine_d",
+   "sequence": "color",
+   "map": "Pattern_Foundry"
+  },
+  {
+   "lookup": "pattern_machine_b",
+   "sequence": "color",
+   "map": "Pattern_Foundry"
+  },
+  {
+   "lookup": "pattern_machine_a",
+   "sequence": "color",
+   "map": "Pattern_Foundry"
+  },
+  {
+   "lookup": "pattern_machine_c",
+   "sequence": "color",
+   "map": "Pattern_Foundry"
+  },
+  {
+   "lookup": "crackpropagation_ca",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "csg_architecture_cavity",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_triadic_primary",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_monochrome_blue",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_value_steps_warm",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "mill_memphis_p3",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_color_furniture_furniture_becker_utensilo_bauhaus",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_color_furniture_furniture_vignelli_metafora_primary",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_simultaneous_contrast",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_color_stacks_stack_complementary_red_green",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_modern_art_albers_homage_warm",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_color_furniture_furniture_coco_pendant_warm",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "primitive_assembler",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "primitive_combo_puzzle",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "loom_drum_bauhaus_p4m",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_color_furniture_furniture_lamp_warm_glow",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_modern_art_kandinsky_bauhaus_triad",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_modern_art_rothko_chromatic_field",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_primitive_stack_ps01_bauhaus_totem_green",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "loom_fountain_pastel_p4",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dress_selector",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "dna_modern_art_mondrian_de_stijl",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "constraint_sculptor",
+   "sequence": "color",
+   "map": "Color_Context_Placed"
+  },
+  {
+   "lookup": "colorballs",
+   "sequence": "color",
+   "map": "Color_Nails"
+  },
+  {
+   "lookup": "hand_model",
+   "sequence": "color",
+   "map": "Color_Nails"
+  },
+  {
+   "lookup": "brick_wall_factory",
+   "sequence": "color",
+   "map": "Color_Nails"
+  },
+  {
+   "lookup": "nail_color_controller",
+   "sequence": "color",
+   "map": "Color_Nails"
+  },
+  {
+   "lookup": "hand_color_controller",
+   "sequence": "color",
+   "map": "Color_Nails"
+  },
+  {
+   "lookup": "gridcolorizer",
+   "sequence": "color",
+   "map": "Color_Grid_Pallet"
+  },
+  {
+   "lookup": "spectrum_forest",
+   "sequence": "color",
+   "map": "Color_Grid_Pallet"
+  },
+  {
+   "lookup": "mario_cube",
+   "sequence": "color",
+   "map": "Color_Rainbow"
+  },
+  {
+   "lookup": "rainbow",
+   "sequence": "color",
+   "map": "Color_Rainbow"
+  },
+  {
+   "lookup": "visual_color_mixing",
+   "sequence": "color",
+   "map": "Color_Pillar"
+  },
+  {
+   "lookup": "grab_rainbow_stick",
+   "sequence": "color",
+   "map": "Color_Pillar"
+  },
+  {
+   "lookup": "loom_drum_persian_p6",
+   "sequence": "color",
+   "map": "Color_Pillar"
+  },
+  {
+   "lookup": "pillarcolorcollection",
+   "sequence": "color",
+   "map": "Color_Pillar"
+  },
+  {
+   "lookup": "color_sets_overview",
+   "sequence": "color",
+   "map": "Color_Pillar"
+  },
+  {
+   "lookup": "SpectrumVisualizer",
+   "sequence": "color",
+   "map": "Color_Pillar"
+  },
+  {
+   "lookup": "pattern_mill",
+   "sequence": "color",
+   "map": "Color_Paint"
+  },
+  {
+   "lookup": "albers_wall_gallery",
+   "sequence": "color",
+   "map": "Color_Paint"
+  },
+  {
+   "lookup": "ball_painting_demo",
+   "sequence": "color",
+   "map": "Color_Paint"
+  },
+  {
+   "lookup": "rainbow_hallway",
+   "sequence": "color",
+   "map": "Color_Walls"
+  },
+  {
+   "lookup": "color_space_navigator",
+   "sequence": "color",
+   "map": "Color_Walls"
+  },
+  {
+   "lookup": "color_constellation_office",
+   "sequence": "color",
+   "map": "Color_Walls"
+  },
+  {
+   "lookup": "subpixel_display",
+   "sequence": "color",
+   "map": "Color_Walls"
+  },
+  {
+   "lookup": "gradient_interpolator",
+   "sequence": "color",
+   "map": "Color_Walls"
+  },
+  {
+   "lookup": "calder_object_mobile",
+   "sequence": "forces",
+   "map": "Sky_Climb"
+  },
+  {
+   "lookup": "force_pad",
+   "sequence": "forces",
+   "map": "Sky_Climb"
+  },
+  {
+   "lookup": "calder_mobile",
+   "sequence": "forces",
+   "map": "Sky_Climb"
+  },
+  {
+   "lookup": "calder_mobile_primaries",
+   "sequence": "forces",
+   "map": "Sky_Climb"
+  },
+  {
+   "lookup": "return_launcher",
+   "sequence": "forces",
+   "map": "Sky_Climb"
+  },
+  {
+   "lookup": "force_cube",
+   "sequence": "forces",
+   "map": "Void_Crossing"
+  },
+  {
+   "lookup": "vector_machine",
+   "sequence": "forces",
+   "map": "Void_Crossing"
+  },
+  {
+   "lookup": "force_field_zone",
+   "sequence": "forces",
+   "map": "Void_Crossing"
+  },
+  {
+   "lookup": "russell_paradox_workbench",
+   "sequence": "forces",
+   "map": "Reformed_Instruments"
+  },
+  {
+   "lookup": "complexity_dial_workbench",
+   "sequence": "forces",
+   "map": "Reformed_Instruments"
+  },
+  {
+   "lookup": "ca_rules_workbench",
+   "sequence": "forces",
+   "map": "Reformed_Instruments"
+  },
+  {
+   "lookup": "halting_workbench",
+   "sequence": "forces",
+   "map": "Reformed_Instruments"
+  },
+  {
+   "lookup": "qfep_balance_workbench",
+   "sequence": "forces",
+   "map": "Reformed_Instruments"
+  },
+  {
+   "lookup": "vector_addition_xl_laser",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "vector_subtraction_xl_laser",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "weather_vector_field",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "mortar_vector_siege",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "force_vortex",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "reflection_hall",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "human_catapult",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "adder_board",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "length_lantern",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "stretch_bench",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "agreement_gauge",
+   "sequence": "forces",
+   "map": "Force_Preview"
+  },
+  {
+   "lookup": "triangle_curvature_workbench",
+   "sequence": "forces",
+   "map": "Console_Test"
+  },
+  {
+   "lookup": "cantor_diagonal_workbench",
+   "sequence": "forces",
+   "map": "Console_Test"
+  },
+  {
+   "lookup": "riemann_sum_workbench",
+   "sequence": "forces",
+   "map": "Console_Test"
+  },
+  {
+   "lookup": "tangent_slope_workbench",
+   "sequence": "forces",
+   "map": "Console_Test"
+  },
+  {
+   "lookup": "shannon_workbench",
+   "sequence": "forces",
+   "map": "Console_Test"
+  },
+  {
+   "lookup": "control_console",
+   "sequence": "forces",
+   "map": "Console_Test"
+  },
+  {
+   "lookup": "bubble_blaster",
+   "sequence": "forces",
+   "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "force_mower",
+   "sequence": "forces",
+   "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "vector_add",
+   "sequence": "forces",
+   "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "circle_train",
+   "sequence": "forces",
+   "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "wedge_slide",
+   "sequence": "forces",
+   "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "dot_aligner",
+   "sequence": "forces",
+   "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "death_pylon",
+   "sequence": "forces",
+   "map": "Force_Props_Sandbox"
+  },
+  {
+   "lookup": "vector_normalize_demo",
+   "sequence": "forces",
+   "map": "Vectors_Act1_WhatAVectorIs"
+  },
+  {
+   "lookup": "VectorBasics",
+   "sequence": "forces",
+   "map": "Vectors_Act1_WhatAVectorIs"
+  },
+  {
+   "lookup": "newtons_laws",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "example_2_1_forces_vr",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_translation_demo",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "coordinate_system_switcher",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "basis_vectors_rig",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_addition_xl",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_subtraction_demo",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_magnitude_demo",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_sub",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "example_1_4_vector_multiplication_vr",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "graphics_monitor",
+   "sequence": "forces",
+   "map": "VFM_01_Foundations"
+  },
+  {
+   "lookup": "vector_dot_product_xl",
+   "sequence": "forces",
+   "map": "VectorOperations"
+  },
+  {
+   "lookup": "vector_cross_product_xl",
+   "sequence": "forces",
+   "map": "VectorOperations"
+  },
+  {
+   "lookup": "VectorCrossProduct",
+   "sequence": "forces",
+   "map": "VectorOperations"
+  },
+  {
+   "lookup": "normal_force_demo",
+   "sequence": "forces",
+   "map": "VectorOperations"
+  },
+  {
+   "lookup": "VectorDotProduct",
+   "sequence": "forces",
+   "map": "VectorOperations"
+  },
+  {
+   "lookup": "dot_product_projector",
+   "sequence": "forces",
+   "map": "VectorOperations"
+  },
+  {
+   "lookup": "vector_projection_demo",
+   "sequence": "forces",
+   "map": "VectorOperations"
+  },
+  {
+   "lookup": "vector_addition_walk",
+   "sequence": "forces",
+   "map": "Vectors_Act2_VectorArithmetic"
+  },
+  {
+   "lookup": "example_2_3_gravity_scaled_by_mass_vr",
+   "sequence": "forces",
+   "map": "Vectors_Act2_VectorArithmetic"
+  },
+  {
+   "lookup": "projection_shadow",
+   "sequence": "forces",
+   "map": "Vectors_Act2_VectorArithmetic"
+  },
+  {
+   "lookup": "vector_projection_reflection_xl",
+   "sequence": "forces",
+   "map": "Vectors_Act2_VectorArithmetic"
+  },
+  {
+   "lookup": "torque_crank",
+   "sequence": "forces",
+   "map": "Vectors_Act2_VectorArithmetic"
+  },
+  {
+   "lookup": "VectorWorkbench",
+   "sequence": "forces",
+   "map": "VFM_02_Operations"
+  },
+  {
+   "lookup": "exercise_5_9_angle_between",
+   "sequence": "forces",
+   "map": "VFM_02_Operations"
+  },
+  {
+   "lookup": "work_energy_demo",
+   "sequence": "forces",
+   "map": "VFM_02_Operations"
+  },
+  {
+   "lookup": "torque_demo",
+   "sequence": "forces",
+   "map": "VFM_02_Operations"
+  },
+  {
+   "lookup": "VectorFieldFlow",
+   "sequence": "forces",
+   "map": "VectorAdvanced"
+  },
+  {
+   "lookup": "exercise_1_8_solution_attraction_magnitude_vr",
+   "sequence": "forces",
+   "map": "VectorAdvanced"
+  },
+  {
+   "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+   "sequence": "forces",
+   "map": "VectorAdvanced"
+  },
+  {
+   "lookup": "VectorTorque",
+   "sequence": "forces",
+   "map": "VectorAdvanced"
+  },
+  {
+   "lookup": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+   "sequence": "forces",
+   "map": "VectorAdvanced"
+  },
+  {
+   "lookup": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+   "sequence": "forces",
+   "map": "VectorAdvanced"
+  },
+  {
+   "lookup": "VectorThrowing",
+   "sequence": "forces",
+   "map": "VectorAdvanced"
+  },
+  {
+   "lookup": "VectorMotion",
+   "sequence": "forces",
+   "map": "Vectors_Act3_FieldsAndMotion"
+  },
+  {
+   "lookup": "launch_arc",
+   "sequence": "forces",
+   "map": "Vectors_Act3_FieldsAndMotion"
+  },
+  {
+   "lookup": "bouncing_ball",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "flocking_controls",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "VectorForces",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "ForceMagnitudeDemo",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "combined_forces_demo",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "trajectory_artifact",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "example_2_5_fluid_resistance_vr",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "friction_ramp",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "collision_crasher",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "newton_cradle",
+   "sequence": "forces",
+   "map": "VFM_03_Motion"
+  },
+  {
+   "lookup": "drag_corridor",
+   "sequence": "forces",
+   "map": "Vectors_Act4a_KineticForces"
+  },
+  {
+   "lookup": "orbit_walk",
+   "sequence": "forces",
+   "map": "Vectors_Act4a_KineticForces"
+  },
+  {
+   "lookup": "centrifuge_ring",
+   "sequence": "forces",
+   "map": "Vectors_Act4a_KineticForces"
+  },
+  {
+   "lookup": "bounce_well",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation"
+  },
+  {
+   "lookup": "momentum_cradle",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation"
+  },
+  {
+   "lookup": "weather_vane",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation"
+  },
+  {
+   "lookup": "lever_balance",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation"
+  },
+  {
+   "lookup": "pendulum_hall",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation"
+  },
+  {
+   "lookup": "spring_tower",
+   "sequence": "forces",
+   "map": "Vectors_Act4b_Oscillation"
+  },
+  {
+   "lookup": "momentum_collision",
+   "sequence": "forces",
+   "map": "ForcesComposition"
+  },
+  {
+   "lookup": "force_field_visualizer",
+   "sequence": "forces",
+   "map": "ForcesComposition"
+  },
+  {
+   "lookup": "hl_turret_vectors",
+   "sequence": "forces",
+   "map": "VectorApplied"
+  },
+  {
+   "lookup": "magnetic_simulation",
+   "sequence": "forces",
+   "map": "VFM_04_Fields"
+  },
+  {
+   "lookup": "vector_field",
+   "sequence": "forces",
+   "map": "VFM_04_Fields"
+  },
+  {
+   "lookup": "force_fields",
+   "sequence": "forces",
+   "map": "VFM_04_Fields"
+  },
+  {
+   "lookup": "flow_field_painter",
+   "sequence": "forces",
+   "map": "VFM_04_Fields"
+  },
+  {
+   "lookup": "vector_field_visualizer",
+   "sequence": "forces",
+   "map": "VFM_04_Fields"
+  },
+  {
+   "lookup": "noc_5_04_flow_field",
+   "sequence": "forces",
+   "map": "VFM_04_Fields"
+  },
+  {
+   "lookup": "catapult",
+   "sequence": "forces",
+   "map": "VFM_05_Launch"
+  },
+  {
+   "lookup": "turret_boll_infoboard",
+   "sequence": "forces",
+   "map": "VFM_05_Launch"
+  },
+  {
+   "lookup": "firework_burst",
+   "sequence": "forces",
+   "map": "VFM_05_Launch"
+  },
+  {
+   "lookup": "firework_launcher",
+   "sequence": "forces",
+   "map": "VFM_05_Launch"
+  },
+  {
+   "lookup": "drag_lane",
+   "sequence": "forces",
+   "map": "VFM_05_Launch"
+  },
+  {
+   "lookup": "slingshot_launcher",
+   "sequence": "forces",
+   "map": "VFM_05_Launch"
+  },
+  {
+   "lookup": "particle_systems",
+   "sequence": "forces",
+   "map": "ForcesSystems"
+  },
+  {
+   "lookup": "vector_fields",
+   "sequence": "forces",
+   "map": "ForcesSystems"
+  },
+  {
+   "lookup": "mass_spring_damper",
+   "sequence": "forces",
+   "map": "ForcesSystems"
+  },
+  {
+   "lookup": "spring_system",
+   "sequence": "forces",
+   "map": "ForcesSystems"
+  },
+  {
+   "lookup": "harmonic_motion_demo",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "slingshot_pull",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "ChainSwing",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "surreal_kinetic_sculpture",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "vector_joint_playground",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "ConeTwistBag",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "HingeCrank",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "SliderPress",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "spring_demo",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "spring_network",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "coupled_pendulums",
+   "sequence": "forces",
+   "map": "VFM_06_Springs"
+  },
+  {
+   "lookup": "three_body_problem",
+   "sequence": "forces",
+   "map": "ForcesChaos"
+  },
+  {
+   "lookup": "chaos_attractor",
+   "sequence": "forces",
+   "map": "ForcesChaos"
+  },
+  {
+   "lookup": "nbody_simulation",
+   "sequence": "forces",
+   "map": "ForcesChaos"
+  },
+  {
+   "lookup": "example_2_9_n_body_attraction_vr",
+   "sequence": "forces",
+   "map": "ForcesChaos"
+  },
+  {
+   "lookup": "forcedirected3d",
+   "sequence": "forces",
+   "map": "ForcesChaos"
+  },
+  {
+   "lookup": "example_2_8_two_body_attraction_vr",
+   "sequence": "forces",
+   "map": "ForcesChaos"
+  },
+  {
+   "lookup": "orbital_mechanics_demo",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity"
+  },
+  {
+   "lookup": "orbit_pair",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity"
+  },
+  {
+   "lookup": "grid3d_force_directed",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity"
+  },
+  {
+   "lookup": "gravity_well",
+   "sequence": "forces",
+   "map": "VFM_07_Gravity"
+  },
+  {
+   "lookup": "collision_carts",
+   "sequence": "forces",
+   "map": "VFM_08_Arena"
+  },
+  {
+   "lookup": "vector_arena",
+   "sequence": "forces",
+   "map": "VFM_08_Arena"
+  },
+  {
+   "lookup": "turret_targeting",
+   "sequence": "forces",
+   "map": "VFM_08_Arena"
+  },
+  {
+   "lookup": "sentry_turret",
+   "sequence": "forces",
+   "map": "VFM_08_Arena"
+  },
+  {
+   "lookup": "queer_cylinder_target",
+   "sequence": "forces",
+   "map": "VFM_08_Arena"
+  },
+  {
+   "lookup": "hits_reset_display",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  },
+  {
+   "lookup": "health_display",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  },
+  {
+   "lookup": "gravity_gun_test_scene",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  },
+  {
+   "lookup": "vector_drone",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  },
+  {
+   "lookup": "destructibles_test_scene",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  },
+  {
+   "lookup": "throw_ball",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  },
+  {
+   "lookup": "grab_sphere_point",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  },
+  {
+   "lookup": "sphere_splitting_showcase",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  },
+  {
+   "lookup": "VectorAddition",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  },
+  {
+   "lookup": "VectorSubtraction",
+   "sequence": "forces",
+   "map": "ForcesArena"
+  }
+ ]
+}

@@ -2,7 +2,7 @@
   "schema": "adaresearch.em_plan.v2",
   "_readme": "Placements resolved by tools/spatial_negotiation.py. Read by commons/scenes/endless_museum.gd under --em-plan. A museum key absent here deals exactly as it did before.",
   "_spine_run": {
-    "at": "2026-08-13T22:58:31",
+    "at": "2026-08-14T09:19:48",
     "owner": {
       "sainsbury-false-perspective-enfilade": "primitives",
       "uffizi-spine-enfilade": "transformation",
@@ -5696,6 +5696,27 @@
           "wall": null
         },
         {
+          "token": "weather_vector_field",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "balcony",
+          "support_height_m": 0.0,
+          "slot": "balcony",
+          "wall": null,
+          "court": [
+            19,
+            17
+          ]
+        },
+        {
           "token": "VectorFieldFlow",
           "cell": [
             29,
@@ -6852,6 +6873,27 @@
           ]
         },
         {
+          "token": "surreal_kinetic_sculpture",
+          "cell": [
+            0,
+            0
+          ],
+          "tile_cell": [
+            -14,
+            -14
+          ],
+          "rotation": 0,
+          "mode": "freestanding",
+          "venue": "balcony",
+          "support_height_m": 0.0,
+          "slot": "balcony",
+          "wall": null,
+          "court": [
+            44,
+            37
+          ]
+        },
+        {
           "token": "chaos_attractor",
           "cell": [
             27,
@@ -6872,23 +6914,6 @@
           "token": "strange_attractors",
           "cell": [
             15,
-            16
-          ],
-          "tile_cell": [
-            1,
-            2
-          ],
-          "rotation": 270,
-          "mode": "against_wall",
-          "venue": "interior",
-          "support_height_m": 0.0,
-          "slot": "sainsbury-false-perspective-enfilade/1,3",
-          "wall": "west"
-        },
-        {
-          "token": "hits_reset_display",
-          "cell": [
-            15,
             22
           ],
           "tile_cell": [
@@ -6903,7 +6928,7 @@
           "wall": "west"
         },
         {
-          "token": "health_display",
+          "token": "hits_reset_display",
           "cell": [
             15,
             18
@@ -6920,7 +6945,7 @@
           "wall": "west"
         },
         {
-          "token": "distribution_comparator",
+          "token": "health_display",
           "cell": [
             23,
             34
@@ -6935,13 +6960,26 @@
           "support_height_m": 0.0,
           "slot": "sainsbury-false-perspective-enfilade/9,15",
           "wall": "east"
+        },
+        {
+          "token": "distribution_comparator",
+          "cell": [
+            23,
+            25
+          ],
+          "tile_cell": [
+            9,
+            11
+          ],
+          "rotation": 90,
+          "mode": "against_wall",
+          "venue": "interior",
+          "support_height_m": 0.0,
+          "slot": "sainsbury-false-perspective-enfilade/9,15",
+          "wall": "east"
         }
       ],
       "rejected": [
-        {
-          "token": "weather_vector_field",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
         {
           "token": "mortar_vector_siege",
           "why": "escalation: precinct: no exterior venue is large enough either"
@@ -7243,10 +7281,6 @@
           "why": "physical_overlap: 1 body cells collide with launch_arc"
         },
         {
-          "token": "surreal_kinetic_sculpture",
-          "why": "escalation: precinct: no exterior venue is large enough either"
-        },
-        {
           "token": "vector_joint_playground",
           "why": "escalation: precinct: no exterior venue is large enough either"
         },
@@ -7332,7 +7366,7 @@
         },
         {
           "token": "queer_cylinder_target",
-          "why": "physical_overlap: 2 body cells collide with launch_arc"
+          "why": "physical_overlap: 2 body cells collide with strange_attractors"
         },
         {
           "token": "gravity_gun_test_scene",

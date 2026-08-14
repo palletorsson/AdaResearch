@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://em_staged_menu"]
+
+; THE MUSEUM, REACHED FROM THE SHIPPED GAME LOOP.
+;
+; endless_museum_vr.tscn wraps the rig in a plain Node3D and is launched
+; directly — fine for a dev boot, invisible to the menu, and NOT loadable by
+; vrStaging: XRToolsStaging.load_scene types its current_scene as
+; XRToolsSceneBase, so the loaded scene's ROOT must be one. This scene follows
+; lab.tscn's pattern instead: it INHERITS base.tscn (whose root inherits the
+; XR Tools scene_base), so the staging system, loading screen, and fade all
+; treat the museum like any other destination.
+;
+; The origin override spawns the player at the desktop walker's spawn cell
+; (7.5, 0, 1.5), turned 180° to face into the museum along +z.
+;
+; Reached from: MainMenu3D sequence picker, the "Endless Museum" card.
+
+[ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://commons/scenes/em/em_staged_museum.gd" id="2_museum"]
+
+[node name="Base" instance=ExtResource("1_base")]
+
+[node name="XROrigin3D" parent="." index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.5, 0.1, 1.5)
+
+[node name="Museum" type="Node3D" parent="."]
+script = ExtResource("2_museum")

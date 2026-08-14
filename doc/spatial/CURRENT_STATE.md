@@ -3,7 +3,43 @@
 *Fast-changing implementation state. Doctrine lives in `doc/SPATIAL_PIPELINE.md`
 (915 lines, commits `fdbfeb8d6` + `a8b7fef18`) on `origin/palm-scanner-door-entry`.*
 
-Updated 2026-08-13.
+Updated 2026-08-14.
+
+## What changed on 08-14 — the museum entered the shipped game loop
+
+**The wide floats are verified.** The overnight plan regeneration (post
+courtyard-only crossability) carries SIX balcony rows; targeted builds printed
+the voice for every float asked about: `color_constellation_office` z 34..48,
+`weather_vector_field` (12.4 m) z 34..51, `force_fields` z 34..44, and
+`surreal_kinetic_sculpture` z 34..71 — a 37 m void built as ONE joint, just
+under the 40 m cap.
+
+**VR from the menu.** Sequences picker → pinned "∞ · Endless Museum" card →
+`staging.load_scene("endless_museum_staged.tscn")`. Three blockers found, all
+real, all fixed:
+
+| | |
+|---|---|
+| staging contract | `XRToolsStaging.load_scene` types its scene `XRToolsSceneBase`; the old VR wrapper had a Node3D root. `endless_museum_staged.tscn` inherits `base.tscn` the way `lab.tscn` does; `em/em_staged_museum.gd` presets `_plan_path` (flagless menu launches were about to walk the UNNEGOTIATED museum). |
+| floors had no body | the desktop walker CLAMPS y, so floors were meshes only — the XR rig's PlayerBody simulates gravity and fell through on frame one. Floor colliders now stamp GATED ON `_vr`: `test_em_vr_floor.gd` measures **vr=633, desktop=0** (first run read artifact-internal colliders as a leak; the claim is scoped to the segment's own Collision body). |
+| null-cam crash | `_track_acoustic` read `_cam.global_position` every frame; `_cam` is null in VR. Reads `_eye_pos()` now. |
+
+**`--em-order-file` had NEVER worked.** The flag literal is 16 chars; the parse
+ran `substr(17)`, eating the path's first byte — the open failed and the pool
+fell back to the full spine, silently. Found the first time anyone used the
+flag; fixed, and the false exit now names which file refused.
+
+**Open findings (not fixed today).**
+
+- **Autopilot on the full plan FAILS at z 545**, inside the forces segment
+  (Sainsbury false-perspective, z 479..562, its narrow end): 26 cells
+  unlearned, stuck at (5.3, 545.5). Territory beyond every previous walk
+  (round 2 topped out at 296 m). The forces chapter plans 96 rows into that
+  narrowing — first suspect is an interior body legally sealed into the pinch.
+- **The court queue grows without bound**: ≤40 m drains per joint against 15+
+  courts enqueued per chapter — 39 queued by seg 3 on the full plan, 134 on a
+  forces-only loop. Balconies drift many segments behind their chapters (a
+  curator meets primitives' courts while walking transformation).
 
 ## What changed on 08-13
 

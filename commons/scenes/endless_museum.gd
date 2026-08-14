@@ -351,7 +351,11 @@ func _parse_args() -> void:
 		elif a.begins_with("--em-seed="):
 			_seed = int(a.substr(10))
 		elif a.begins_with("--em-order-file="):
-			_order_file = a.substr(17)
+			# substr(16), counted: the flag literal is 16 chars. This shipped
+			# as substr(17) — eating the path's first character, so the file
+			# never opened, the pool fell back to the full spine, and the flag
+			# had silently never worked. Found the first time anyone used it.
+			_order_file = a.substr(16)
 		elif a.begins_with("--em-source="):
 			_source = a.substr(12)
 		elif a.begins_with("--em-order="):
@@ -765,7 +769,10 @@ func _load_policy_pool(live: Dictionary, policy: String) -> bool:
 func _load_spine_pool(live: Dictionary) -> bool:
 	var f := FileAccess.open(_order_file if _order_file != "" else SPINE_ORDER, FileAccess.READ)
 	if f == null:
-		push_warning("endless_museum: --em-order=spine but %s is missing (run tools/build_spine_artifact_order.py); falling back to shuffle" % SPINE_ORDER)
+		# name WHICH file refused — an --em-order-file typo used to be
+		# indistinguishable from a missing spine manifest
+		push_warning("endless_museum: order file %s unreadable (run tools/build_spine_artifact_order.py); falling back to shuffle"
+			% (_order_file if _order_file != "" else SPINE_ORDER))
 		return false
 	var data: Variant = JSON.parse_string(f.get_as_text())
 	if not (data is Dictionary):
@@ -1168,6 +1175,14 @@ func _build_segment() -> void:
 			_box(seg, Vector3(x + 0.5, -0.1, zr + 0.5), Vector3(1, 0.2, 1), Color(0.13, 0.13, 0.16), m_deck)
 			if x > 0 and x < LOBBY_W - 1 and not (zr == 0 and x >= pw - 1) and not (zr == VESTIBULE_H - 1 and x >= w - 1):
 				_walk_cells[Vector2i(x, zbase + zr)] = true
+	if _vr:
+		# VR floor body. The desktop walker CLAMPS y and needs no deck
+		# collision, but the XR rig's PlayerBody simulates gravity — without
+		# a collider under the deck the headset falls through on frame one.
+		# One merged slab for the rectangular vestibule; per-cell below where
+		# the tile is sparse. Gated on _vr: the desktop segment is untouched.
+		_add_col(solid, Vector3(LOBBY_W / 2.0, -0.1, VESTIBULE_H / 2.0),
+			Vector3(LOBBY_W, 0.2, VESTIBULE_H))
 	for zr in range(VESTIBULE_H):
 		for sx in [0, LOBBY_W - 1]:
 			_wall_at(seg, solid, wcells, int(sx), zr, wall_col, m_wall, wr)
@@ -1191,6 +1206,8 @@ func _build_segment() -> void:
 			match c:
 				"1", "1s":
 					_box(seg, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1), Color(0.16, 0.16, 0.19), m_floor)
+					if _vr:
+						_add_col(solid, Vector3(x + 0.5, -0.1, z + 0.5), Vector3(1, 0.2, 1))
 					_walk_cells[Vector2i(x, zbase + z)] = true
 				"2", "2s":
 					_box(seg, Vector3(x + 0.5, 0.1, z + 0.5), Vector3(1, 0.6, 1), Color(0.23, 0.23, 0.28), m_podium)
@@ -1502,6 +1519,9 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 			var deck_w: int = 4
 			_box(seg, Vector3(deck_w / 2.0, -0.1, zcur + cd / 2.0),
 				Vector3(deck_w, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
+			if _vr:
+				_add_col(solid, Vector3(deck_w / 2.0, -0.1, zcur + cd / 2.0),
+					Vector3(deck_w, 0.2, cd))
 			for zz in range(zcur, zcur + cd):
 				for x in range(1, deck_w):
 					_walk_cells[Vector2i(x, zbase + zz)] = true
@@ -1510,9 +1530,14 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 				Vector3(0.25, 1.1, cd), wall_col, m_wall)
 			_add_col(solid, Vector3(float(deck_w), 0.55, zcur + cd / 2.0),
 				Vector3(0.25, 1.1, cd))
-			# the void's bottom, far below — matte dark, a shadow not a floor
+			# the void's bottom, far below — matte dark, a shadow not a floor.
+			# In VR it is also a BODY: the promise "so physics has a bottom"
+			# was a mesh with no collider until the staging pass met gravity.
 			_box(seg, Vector3((deck_w + w) / 2.0, -4.1, zcur + cd / 2.0),
 				Vector3(w - deck_w, 0.2, cd), Color(0.05, 0.05, 0.06), m_deck)
+			if _vr:
+				_add_col(solid, Vector3((deck_w + w) / 2.0, -4.1, zcur + cd / 2.0),
+					Vector3(w - deck_w, 0.2, cd))
 			# outer parapets frame the joint on both edges, open sky above
 			for zz in range(zcur, zcur + cd):
 				for sx in [0, w - 1]:
@@ -1540,6 +1565,9 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 		# exterior tone; no ceiling is BUILT, which is the whole venue
 		_box(seg, Vector3(w / 2.0, -0.1, zcur + cd / 2.0),
 			Vector3(w, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
+		if _vr:
+			_add_col(solid, Vector3(w / 2.0, -0.1, zcur + cd / 2.0),
+				Vector3(w, 0.2, cd))
 		for zz in range(zcur, zcur + cd):
 			for x in range(1, w - 1):
 				_walk_cells[Vector2i(x, zbase + zz)] = true
@@ -2845,7 +2873,10 @@ func _process(_delta: float) -> void:
 func _track_acoustic() -> void:
 	if not _mod_has(_mod_audio, "set_space"):
 		return
-	var z: float = _cam.global_position.z
+	# _eye_pos, not _cam: in VR the museum owns no camera (_cam is null — the
+	# XR rig owns the view) and this read crashed the first frame after the
+	# rig appeared. The eye is the same position on both paths.
+	var z: float = _eye_pos().z
 	for s in _segments:
 		var sd: Dictionary = s
 		if z < float(sd["z0"]) or z >= float(sd["z1"]):
