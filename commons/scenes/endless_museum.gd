@@ -313,11 +313,8 @@ func _ready() -> void:
 	var preload_n: int = _shot_segments if _shot_path != "" else 2
 	for i in range(preload_n):
 		_build_segment()
-	if _edit_mode and _mod_has(_mod_editor, "hud"):
-		_edit_hud = _mod_editor.call("hud", self)
-		_edit_hud.text = _mod_editor.call(
-			"hud_text", _edit_records, _edit_sel, _edit_overrides, _edit_dirty)
-		print("[em-edit] editor armed: %d editable placement(s)" % _edit_records.size())
+	if _edit_mode:
+		_arm_editor()
 	# the number the whole set-deal pass exists to move: v1 stamped at most 8
 	# objects per segment for every one of the twenty-six buildings.
 	var segs_built: int = int(_deal_stats.get("segments", 0))
@@ -2634,7 +2631,11 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 	_vis_records.append({"node": node,
 		"p": Vector3(float(cell.get("x", 0)) + 0.5, 0.0,
 			float(zbase + int(cell.get("y", 0))) + 0.5)})
-	if _edit_mode:
+	if not _vr:
+		# Collected ALWAYS on desktop (not just under --em-edit), so the TAB
+		# toggle can arm an editor that sees every placement since boot. A
+		# record is a small dict; the cost of always-on is nothing, the cost
+		# of a toggle that edits only half the museum was a lying editor.
 		# The record's `tile_cell` is the PLAN's frame (segment z minus the
 		# vestibule), because that is the key an override must carry to match
 		# a plan row on the next build. Chapter resolves lazily off seg meta.
@@ -3225,6 +3226,19 @@ func _physics_process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if _shot_path != "":
 		return
+	# TAB toggles the curator editor at runtime (desktop only — in VR the XR
+	# rig owns the hands and the editor is a desktop instrument). Before this
+	# was a launch flag, editing meant quitting the walk and relaunching with
+	# --em-edit; the walk and the edit are one session now.
+	if event is InputEventKey and event.pressed and not event.echo \
+			and event.keycode == KEY_TAB and not _vr:
+		_edit_mode = not _edit_mode
+		if _edit_mode:
+			_arm_editor()
+		elif _edit_hud != null:
+			(_edit_hud.get_parent() as CanvasLayer).visible = false
+			print("[em-edit] editor sheathed — TAB to resume; unsaved rulings stay in memory")
+		return
 	if _edit_mode and event is InputEventKey and event.pressed and not event.echo:
 		if _edit_handle_key((event as InputEventKey).keycode):
 			return
@@ -3282,6 +3296,20 @@ func _apply_hand_adds(seg: Node3D, zbase: int, chapter: String) -> void:
 
 ## The curator's keys. True = consumed. The live node moves as a PREVIEW; the
 ## override row is the truth, applied by _deal_from_plan on the next build.
+## Builds (or re-shows) the curator HUD. Records exist regardless of mode —
+## _stamp collects them always, so an editor armed mid-walk sees every
+## placement built since boot, not just those after the toggle.
+func _arm_editor() -> void:
+	if _edit_hud != null and is_instance_valid(_edit_hud):
+		(_edit_hud.get_parent() as CanvasLayer).visible = true
+	elif _mod_has(_mod_editor, "hud"):
+		_edit_hud = _mod_editor.call("hud", self)
+	if _edit_hud != null and _mod_has(_mod_editor, "hud_text"):
+		_edit_hud.text = _mod_editor.call(
+			"hud_text", _edit_records, _edit_sel, _edit_overrides, _edit_dirty)
+	print("[em-edit] editor armed: %d editable placement(s)" % _edit_records.size())
+
+
 func _edit_handle_key(key: int) -> bool:
 	if _mod_editor == null:
 		return false

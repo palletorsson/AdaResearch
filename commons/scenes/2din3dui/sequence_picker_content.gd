@@ -58,6 +58,20 @@ func _populate() -> void:
 			"description": "walk the whole spine as architecture",
 			"map_count": 0,
 		}))
+	# the measurement corridor — a desktop editing instrument (mouse + keys),
+	# so the card only appears when no headset is driving
+	var xr := XRServer.find_interface("OpenXR")
+	if (xr == null or not xr.is_initialized()) \
+			and ResourceLoader.exists("res://commons/scenes/prop_reference_wall.tscn"):
+		_list.add_child(_build_card({
+			"id": "prop_corridor",
+			"order": "✎",
+			"phase": "",
+			"qfep_role": "every prop at its ruled height — edit and F5",
+			"display_name": "Prop Corridor",
+			"description": "the measurement corridor",
+			"map_count": 0,
+		}))
 
 	for entry in entries:
 		var card := _build_card(entry)

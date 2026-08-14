@@ -223,6 +223,12 @@ func _input(event: InputEvent) -> void:
 		match event.keycode:
 			KEY_ESCAPE:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			KEY_F10:
+				# back to the shipped menu (the corridor is reachable from
+				# its sequences picker as the ✎ card)
+				if _dirty:
+					print("[prop-wall] leaving with UNSAVED rulings — F5 first if you meant to keep them")
+				get_tree().change_scene_to_file("res://commons/scenes/vr_staging.tscn")
 			KEY_E:
 				_sel = EmEditor.pick(_cam, _records)
 				for r in _records:
@@ -352,7 +358,7 @@ func _update_label(r: Dictionary) -> void:
 
 
 func _update_hud() -> void:
-	var line := "[PROP WALL]  E select · UP/DOWN nudge 5 cm · R reset · F5 save"
+	var line := "[PROP WALL]  E select · UP/DOWN nudge 5 cm · R reset · F5 save · F10 menu"
 	if _sel >= 0 and _sel < _records.size():
 		var r: Dictionary = _records[_sel]
 		line += "\nselected: %s  h %.2f  (code %.2f)" % [

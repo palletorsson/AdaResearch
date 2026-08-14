@@ -216,6 +216,14 @@ func _on_sequence_selected(sequence_name: String):
 	# XRToolsSceneBase root; endless_museum_staged.tscn inherits base.tscn
 	# for exactly that reason). SceneManager.start_sequence would look for
 	# a sequence JSON that doesn't exist.
+	# The measurement corridor is a plain desktop scene (own camera, mouse
+	# editing) — a straight scene change, not a staging load; F10 inside it
+	# returns here.
+	if sequence_name == "prop_corridor":
+		print("MainMenu: entering the prop corridor")
+		get_tree().change_scene_to_file("res://commons/scenes/prop_reference_wall.tscn")
+		return
+
 	if sequence_name == "endless_museum":
 		var staging := _find_staging()
 		if staging:
