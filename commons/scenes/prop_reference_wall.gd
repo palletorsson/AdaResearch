@@ -124,6 +124,8 @@ func _input(event: InputEvent) -> void:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			KEY_E:
 				_sel = EmEditor.pick(_cam, _records)
+				for r in _records:
+					_update_label(r)  # amber on the selected, parchment on the rest
 				_update_hud()
 			KEY_UP:
 				_nudge(0.05)
@@ -187,7 +189,12 @@ func _save() -> void:
 func _update_label(r: Dictionary) -> void:
 	var h: float = (r["node"] as Node3D).position.y
 	var src: String = "code" if absf(h - float(r["code_h"])) <= 0.001 else "HAND"
-	(r["label"] as Label3D).text = "%s\nh %.2f  (%s)" % [String(r["token"]), h, src]
+	var lbl: Label3D = r["label"]
+	lbl.text = "%s\nh %.2f  (%s)" % [String(r["token"]), h, src]
+	# the SELECTED prop's label burns amber; everyone else parchment
+	var selected: bool = _sel >= 0 and _sel < _records.size() and _records[_sel] == r
+	lbl.modulate = Color(1.0, 0.62, 0.1) if selected else Color(0.95, 0.9, 0.75)
+	lbl.font_size = 56 if selected else 40
 
 
 func _update_hud() -> void:
@@ -209,6 +216,26 @@ func _make_hud() -> Label:
 	lbl.add_theme_color_override("font_color", Color(1.0, 0.85, 0.3))
 	lbl.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
 	layer.add_child(lbl)
+	# the cursor — big enough to SEE against white plaster: a 14 px black
+	# ring with a 8 px amber dot, dead centre. E selects what this covers.
+	var ring := ColorRect.new()
+	ring.set_anchors_preset(Control.PRESET_CENTER)
+	ring.offset_left = -7
+	ring.offset_top = -7
+	ring.offset_right = 7
+	ring.offset_bottom = 7
+	ring.color = Color(0, 0, 0, 0.85)
+	ring.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(ring)
+	var dot := ColorRect.new()
+	dot.set_anchors_preset(Control.PRESET_CENTER)
+	dot.offset_left = -4
+	dot.offset_top = -4
+	dot.offset_right = 4
+	dot.offset_bottom = 4
+	dot.color = Color(1.0, 0.85, 0.3)
+	dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(dot)
 	add_child(layer)
 	return lbl
 

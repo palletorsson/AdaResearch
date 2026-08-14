@@ -975,14 +975,26 @@ func _setup_world() -> void:
 	hand.set_script(load("res://commons/scenes/em/em_desktop_pointer.gd"))
 	hand.set("cam", _cam)
 	_player.add_child(hand)
+	# ringed and bigger than desktop_player's 4 px — "I do not see a cursor"
+	# was the review of the first walk past white plaster
+	var ring := ColorRect.new()
+	ring.name = "CrosshairRing"
+	ring.set_anchors_preset(Control.PRESET_CENTER)
+	ring.offset_left = -5.0
+	ring.offset_top = -5.0
+	ring.offset_right = 5.0
+	ring.offset_bottom = 5.0
+	ring.color = Color(0, 0, 0, 0.8)
+	ring.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_cam.add_child(ring)
 	var dot := ColorRect.new()
 	dot.name = "Crosshair"
 	dot.set_anchors_preset(Control.PRESET_CENTER)
-	dot.offset_left = -2.0
-	dot.offset_top = -2.0
-	dot.offset_right = 2.0
-	dot.offset_bottom = 2.0
-	dot.color = Color(1, 1, 1, 0.9)
+	dot.offset_left = -3.0
+	dot.offset_top = -3.0
+	dot.offset_right = 3.0
+	dot.offset_bottom = 3.0
+	dot.color = Color(1, 1, 1, 0.95)
 	dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_cam.add_child(dot)
 	_setup_antialiasing()
