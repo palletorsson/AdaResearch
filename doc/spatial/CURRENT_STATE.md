@@ -93,11 +93,18 @@ carries a named reason — the one we chased was "sealing would sever the walk
 route", and it was correct: a 7.4 m body cuts the narrowing enfilade. Trial
 drives the editor's real keys and asserts on the file plus a rebuild.
 
-**Open.** The balcony void is designed, unbuilt (rows
-still count "exterior"). laser_measure took a 7 × 57 m court because its body
-still measures 50 m in Z — spike 06's config channel (**37 of 757**
-unreachable). The threshold sightline (13 accepts, or **0** if
-`candidates[:40]` is lifted).
+**The balcony void (`ccb1b206e`).** Spike 08 fully built: the second joint
+type. Side gallery walkable, 1.1 m rail with collision, floorless void with a
+catch slab 4 m down, float suspended base-above-head. Crossability is now
+courtyard-only (a hanging body severs no floor — it had refused
+weather_vector_field from the venue built for it). Measured:
+`color_constellation_office HANGS over the void at z 34..48`, and the autopilot
+walked past under real physics — PASS, z 144.1/144.0, 3 cells unlearned.
+
+**Open.** laser_measure took a 7 × 57 m court because its body still measures
+50 m in Z — spike 06's config channel (**37 of 757** unreachable). The
+threshold sightline (13 accepts, or **0** if `candidates[:40]` is lifted). The
+>34 m tail (worlds, not exhibits) awaits its threshold ruling.
 
 > **A method note worth more than any of the above.** Three times on 08-13 a
 > session diagnosed the WORKING TREE instead of `HEAD` and was wrong — once
