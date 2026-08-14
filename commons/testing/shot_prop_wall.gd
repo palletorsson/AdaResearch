@@ -13,8 +13,9 @@ func _run() -> void:
 	for i in range(10):
 		await process_frame
 	var cam: Camera3D = inst.get("_cam")
-	cam.global_position = Vector3(4.0, 1.75, 6.5)
-	cam.look_at(Vector3(16.0, 1.5, 0.0))
+	# framed from BEFORE the first token, so the extinguisher (x=3) is in shot
+	cam.global_position = Vector3(0.5, 1.75, 6.0)
+	cam.look_at(Vector3(7.0, 1.0, 0.0))
 	for i in range(20):
 		await process_frame
 	var img: Image = get_root().get_texture().get_image()

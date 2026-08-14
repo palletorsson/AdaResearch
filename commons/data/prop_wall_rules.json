@@ -1,0 +1,10 @@
+{
+	"schema": "adaresearch.prop_wall_rules.v1",
+	"_readme": "Hand mounting heights over em_props' code conventions, written by the prop reference wall (prop_reference_wall.tscn) or ruled directly. A token here mounts at h everywhere the museum dresses a wall; a token absent keeps its code height. Delete the file to restore every code convention. V1: one height per token — an exit_sign rule moves both the door and the portal sign.",
+	"rules": {
+		"fire_extinguisher": {
+			"h": 0.3,
+			"why": "Palle, 2026-08-14, at the reference wall: the base should sit 0.3 m from the floor — a floor-standing unit you reach DOWN to, not the EN-3 wall band the code default (1.10) assumed."
+		}
+	}
+}
