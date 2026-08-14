@@ -77,6 +77,55 @@ def run_one(token: str, entry: dict) -> dict | None:
         return {"label": token, "verdict": "unreadable result"}
 
 
+# ── corpus mode ──────────────────────────────────────────────────────────────
+
+CHUNK = 60
+LIST = REPO / "ada_run" / "interaction_list.json"
+
+
+def run_chunk(items: list) -> None:
+    """One boot, many artifacts. Results land as they go, so a crash costs the remainder."""
+    done = OUT / "_done.txt"
+    if done.exists():
+        done.unlink()
+    OUT.mkdir(parents=True, exist_ok=True)
+    LIST.parent.mkdir(parents=True, exist_ok=True)
+    LIST.write_text(json.dumps(items, indent=1), encoding="utf-8")
+    cmd = [sys.executable, str(REPO / "tools" / "godot_watchdog.py"),
+           f"--expect={OUT}", "--",
+           GODOT, "--path", str(REPO), "--xr-mode", "off", "--headless",
+           "--script", "res://commons/testing/probe_interaction.gd", "--",
+           f"--list=res://ada_run/interaction_list.json", "--out=res://ada_run/interaction"]
+    try:
+        subprocess.run(cmd, cwd=str(REPO), capture_output=True, text=True, timeout=3600)
+    except subprocess.TimeoutExpired:
+        pass
+
+
+def corpus(resume: bool = True) -> int:
+    reg = registry()
+    todo = []
+    for t, e in sorted(reg.items()):
+        scene = str(e.get("scene") or "")
+        if not scene:
+            continue
+        if resume and (OUT / f"{t}.json").exists():
+            continue
+        fx = ((e.get("dna") or {}).get("fixture") or {})
+        item = {"label": t, "scene": scene}
+        if fx:
+            item["fixture"] = fx
+        todo.append(item)
+    print(f"{len(todo)} artifacts to measure "
+          f"({len(list(OUT.glob('*.json'))) if OUT.exists() else 0} already on disk)")
+    for i in range(0, len(todo), CHUNK):
+        chunk = todo[i:i + CHUNK]
+        print(f"  chunk {i // CHUNK + 1}/{(len(todo) + CHUNK - 1) // CHUNK} "
+              f"({len(chunk)} artifacts) …", flush=True)
+        run_chunk(chunk)
+    return 0
+
+
 def main() -> int:
     tokens, category, limit = [], "", 0
     for a in sys.argv[1:]:
@@ -86,6 +135,8 @@ def main() -> int:
             category = a.split("=", 1)[1]
         elif a.startswith("--limit="):
             limit = int(a.split("=", 1)[1])
+    if "--corpus" in sys.argv:
+        return corpus(resume="--fresh" not in sys.argv)
     reg = registry()
     if category:
         tokens = [t for t, e in sorted(reg.items())

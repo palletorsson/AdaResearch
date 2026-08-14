@@ -50,6 +50,7 @@ func _initialize() -> void:
 	var label := ""
 	var out_dir := "res://ada_run/interaction"
 	var fixture_json := ""
+	var list_path := ""
 	for raw in OS.get_cmdline_user_args():
 		var a := String(raw).strip_edges()
 		if a.begins_with("--scene="):
@@ -60,17 +61,82 @@ func _initialize() -> void:
 			out_dir = a.substr(6)
 		elif a.begins_with("--fixture="):
 			fixture_json = a.substr(10)
+		elif a.begins_with("--list="):
+			list_path = a.substr(7)
+	DirAccess.make_dir_recursive_absolute(out_dir)
+
+	# BATCH MODE. One boot costs about six seconds and the test itself costs two, so a
+	# per-artifact boot spends three quarters of the corpus run on process startup — four
+	# hours for 2670 artifacts against roughly one. The list is processed in order and EACH
+	# RESULT IS WRITTEN AS IT LANDS, so a scene that takes the boot down costs the remainder
+	# of its chunk and nothing already measured.
+	if list_path != "":
+		await _run_list(list_path, out_dir)
+		return
+
 	if scene == "" or not ResourceLoader.exists(scene):
 		push_error("probe_interaction: no scene at " + scene)
 		quit(2)
 		return
 	if label == "":
 		label = scene.get_file().get_basename()
-	DirAccess.make_dir_recursive_absolute(out_dir)
 	_run(scene, label, out_dir, fixture_json)
 
 
+func _run_list(list_path: String, out_dir: String) -> void:
+	var f := FileAccess.open(list_path, FileAccess.READ)
+	if f == null:
+		push_error("probe_interaction: cannot read " + list_path)
+		quit(2)
+		return
+	var j := JSON.new()
+	if j.parse(f.get_as_text()) != OK or not (j.data is Array):
+		push_error("probe_interaction: list is not a JSON array")
+		quit(2)
+		return
+	f.close()
+	var items: Array = j.data
+	var n: int = 0
+	for raw_item in items:
+		if not (raw_item is Dictionary):
+			continue
+		var item: Dictionary = raw_item
+		var sc := String(item.get("scene", ""))
+		var lb := String(item.get("label", ""))
+		if sc == "" or lb == "" or not ResourceLoader.exists(sc):
+			_write_only(out_dir, lb if lb != "" else "unknown_%d" % n,
+				{"label": lb, "verdict": "no scene", "scene": sc})
+			n += 1
+			continue
+		var fx := ""
+		if item.has("fixture") and item["fixture"] is Dictionary:
+			fx = JSON.stringify(item["fixture"])
+		# A TOMBSTONE BEFORE THE LOAD, so a scene that kills the process cannot stall the run.
+		# The batch resumes past whatever is already on disk, so a hard crash on scene X used
+		# to put X first in the next chunk and crash again — the corpus run stopped dead at the
+		# same artifact every pass while looking like it was merely slow. Writing the marker
+		# first means a crash LEAVES EVIDENCE and the next pass moves on; _measure overwrites
+		# it moments later in the normal case, so this costs one file write per artifact.
+		_write_only(out_dir, lb, {"label": lb, "scene": sc,
+			"verdict": "CRASHED - this scene killed the runner while loading or settling"})
+		await _measure(sc, lb, out_dir, fx)
+		n += 1
+	var d := FileAccess.open("%s/_done.txt" % out_dir, FileAccess.WRITE)
+	if d:
+		d.store_string("interaction batch %d\n" % n)
+		d.close()
+	print("INTERACTION BATCH complete: %d artifacts" % n)
+	quit(0)
+
+
 func _run(scene_path: String, label: String, out_dir: String, fixture_json: String) -> void:
+	await _measure(scene_path, label, out_dir, fixture_json)
+	quit(0)
+
+
+## The measurement itself. Frees everything it makes, so a batch can call it in a loop
+## without the previous artifact's bodies still standing in the next one's world.
+func _measure(scene_path: String, label: String, out_dir: String, fixture_json: String) -> void:
 	var vp := SubViewport.new()
 	vp.size = Vector2i(64, 64)
 	vp.own_world_3d = true
@@ -78,8 +144,8 @@ func _run(scene_path: String, label: String, out_dir: String, fixture_json: Stri
 
 	var packed: PackedScene = load(scene_path)
 	if packed == null:
-		_write(out_dir, label, {"error": "scene would not load"})
-		quit(2)
+		_write_only(out_dir, label, {"label": label, "verdict": "scene would not load"})
+		vp.queue_free()
 		return
 	var inst: Node = packed.instantiate()
 	if fixture_json != "":
@@ -128,20 +194,29 @@ func _run(scene_path: String, label: String, out_dir: String, fixture_json: Stri
 	if not fired.is_empty():
 		if response > maxf(drift * 2.0, 0.0005):
 			verdict = "RESPONDS"
+		elif int(c2["meshes"]) == 0:
+			# NOT A CONVICTION. Both deltas are built from meshes, positions and boxes, so a
+			# subtree that never built any geometry scores drift 0.0 and response 0.0 no matter
+			# what the controls did — which prints exactly like a dead artifact. That is a fact
+			# about the BUILD (a gated _ready, a scene needing a fixture) and the harness has no
+			# standing to call it inert. The corpus has been here before with the DNA critic.
+			verdict = "unmeasurable - fired, but nothing built any geometry to measure"
 		elif drift > 0.0005:
 			verdict = "inconclusive - artifact drifts as much as it responded"
 		else:
 			verdict = "INERT - fired and nothing moved"
 
-	_write(out_dir, label, {
+	_write_only(out_dir, label, {
 		"label": label, "scene": scene_path,
 		"controls_found": controls.size(), "grabbables_found": grabs.size(),
 		"fired": fired, "drift": drift, "response": response, "margin": margin,
+		"meshes": int(c2["meshes"]), "spatials": int(c2["spatials"]),
 		"verdict": verdict,
 	})
 	print("INTERACTION %s  fired=%d drift=%.5f response=%.5f  %s"
 		% [label, fired.size(), drift, response, verdict])
-	quit(0)
+	vp.queue_free()
+	await process_frame
 
 
 ## Every node carrying a control signal, and every node that reads as grabbable.
@@ -185,6 +260,7 @@ func _default_args(node: Node, sig: String) -> Array:
 ## big they are, and what they are made of. Any of those moving is the artifact responding.
 func _snapshot(node: Node) -> Dictionary:
 	var meshes: int = 0
+	var spatials: int = 0
 	var pos := Vector3.ZERO
 	var scl := Vector3.ZERO
 	var vis: int = 0
@@ -194,6 +270,7 @@ func _snapshot(node: Node) -> Dictionary:
 	while not stack.is_empty():
 		var n: Node = stack.pop_back()
 		if n is Node3D:
+			spatials += 1
 			var n3 := n as Node3D
 			pos += n3.global_position
 			scl += n3.scale
@@ -207,7 +284,7 @@ func _snapshot(node: Node) -> Dictionary:
 			have = true
 		for c in n.get_children():
 			stack.append(c)
-	return {"meshes": meshes, "pos": pos, "scale": scl, "visible": vis,
+	return {"meshes": meshes, "spatials": spatials, "pos": pos, "scale": scl, "visible": vis,
 			"box_size": box.size, "box_pos": box.position}
 
 
@@ -237,12 +314,19 @@ func _holder_of(node: Node, key: String) -> Node:
 	return null
 
 
+## Single-shot: writes the result AND the done marker the watchdog waits on.
 func _write(out_dir: String, label: String, data: Dictionary) -> void:
-	var f := FileAccess.open("%s/%s.json" % [out_dir, label], FileAccess.WRITE)
-	if f:
-		f.store_string(JSON.stringify(data, "\t"))
-		f.close()
+	_write_only(out_dir, label, data)
 	var d := FileAccess.open("%s/_done.txt" % out_dir, FileAccess.WRITE)
 	if d:
 		d.store_string("interaction %s\n" % label)
 		d.close()
+
+
+## Batch: the result only. A per-item done marker would let the watchdog declare the whole
+## chunk finished after its first artifact.
+func _write_only(out_dir: String, label: String, data: Dictionary) -> void:
+	var f := FileAccess.open("%s/%s.json" % [out_dir, label], FileAccess.WRITE)
+	if f:
+		f.store_string(JSON.stringify(data, "\t"))
+		f.close()
