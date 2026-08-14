@@ -114,23 +114,29 @@ extends RefCounted
 # actually stamps it, named, so a drift is a one-line fix instead of a hunt.
 const VESTIBULE_H := 4        # endless_museum.gd VESTIBULE_H
 const LOBBY_W := 17           # endless_museum.gd LOBBY_W
-const WALL_H := 3.0           # endless_museum.gd wall boxes: y 1.5, size 3.0 -> 0..3
+# the building contract, IMPORTED from its owners rather than duplicated.
+# These were hand-copied literals, and the 3.0 -> 4.5 wall raise proved the
+# point: every copy below went stale the day the owner moved, and this file
+# would have dressed 4.5 m walls as if they were 3.0 (cable tray at 2.86 in
+# open air, nothing hung above a cornice that no longer exists at 2.72).
+const _Detail := preload("res://commons/scenes/em/em_detail.gd")
+const _Lighting := preload("res://commons/scenes/em/em_lighting.gd")
+const WALL_H := _Detail.WALL_H
 const FLOOR_TOP := 0.0        # floor boxes: y -0.1, size 0.2 -> top at 0.0
-const DOOR_HEAD := 2.10       # em_detail.gd DOOR_HEAD
-const HEAD_LINING := 0.12     # em_detail.gd HEAD_LINING
-const PORTAL_HEAD := 2.40     # em_detail.gd PORTAL_HEAD
+const DOOR_HEAD := _Detail.DOOR_HEAD
+const HEAD_LINING := _Detail.HEAD_LINING
+const PORTAL_HEAD := _Detail.PORTAL_HEAD
 const PORTAL_HEAD_LINING := 0.16
-const MAX_DOOR_CELLS := 3     # em_detail.gd MAX_DOOR_CELLS
-const CORNICE_BOTTOM := 2.72  # em_detail.gd — nothing may be hung above this
-const SKIRT_H := 0.13         # em_detail.gd — nothing hangs below this
-const CEIL_SOFFIT := 3.14     # em_detail.gd CEIL_SOFFIT — the ceiling plane
-const CEIL_THICK := 0.26      # the slab a recessed vent recesses INTO
-const BAY := 3.0              # em_detail.gd BAY — ceiling coffer and floor seam module
-const SLOT_W := 0.55          # em_detail.gd SLOT_W — the OPEN daylight slot per bay
-const RIB_W := 0.20           # em_detail.gd RIB_W — longitudinal ribs at x = 0, 3, 6 ...
-const RIB_UNDERSIDE := 2.96   # CEIL_SOFFIT - RIB_DROP
-const SKY_Y := 2.92           # em_lighting.gd SKY_Y — nothing hangs below the ribs
-                              # and above this plane
+const MAX_DOOR_CELLS := _Detail.MAX_DOOR_CELLS
+const CORNICE_BOTTOM := _Detail.CORNICE_BOTTOM  # nothing may be hung above this
+const SKIRT_H := _Detail.SKIRT_H                # nothing hangs below this
+const CEIL_SOFFIT := _Detail.CEIL_SOFFIT        # the ceiling plane
+const CEIL_THICK := _Detail.CEIL_THICK          # the slab a recessed vent recesses INTO
+const BAY := _Detail.BAY      # ceiling coffer and floor seam module
+const SLOT_W := _Detail.SLOT_W                  # the OPEN daylight slot per bay
+const RIB_W := _Detail.RIB_W  # longitudinal ribs at x = 0, 3, 6 ...
+const RIB_UNDERSIDE := _Detail.CEIL_SOFFIT - _Detail.RIB_DROP
+const SKY_Y := _Lighting.SKY_Y  # nothing hangs between the ribs and this plane
 
 # ── THE WALKER. endless_museum.gd builds a CharacterBody3D with
 # CapsuleShape3D.radius = 0.32 and the autopilot plans cell centre to cell
@@ -162,13 +168,56 @@ const H_SCREEN := 1.55        # centre of an info screen, near the hang centre l
 const H_BOARD := 1.30         # a whiteboard's centre: written on standing
 const H_WINDOW := 1.70        # an observation window, sighted over
 const H_HOSE_BOX := 1.00      # centre of a 0.6 m box -> 0.70..1.30
-const Y_EXIT_PORTAL := 2.72   # over the portal: the head lining tops out at
-                              # 2.56, the wall at 3.00; a 0.18 m sign centred at
-                              # 2.72 sits inside that overpanel and CANNOT cover
-                              # the axial vista, which ends at the 2.40 head
-const Y_EXIT_WALL := 2.30     # over an interior door head (2.10 + 0.12 lining)
-const Y_CABLE_TRAY := 2.86    # tray half-height 0.04 -> top 2.90, under SKY_Y
-                              # 2.92 and well under the rib underside 2.96
+# over the portal / the door: these were literals whose reasoning was
+# door-head arithmetic ("2.10 + 0.12 lining + 0.08") — now they ARE that
+# arithmetic, so they rode the door raise without being touched
+const Y_EXIT_PORTAL := PORTAL_HEAD + PORTAL_HEAD_LINING + 0.16
+const Y_EXIT_WALL := DOOR_HEAD + HEAD_LINING + 0.08
+const Y_CABLE_TRAY := RIB_UNDERSIDE - 0.10  # tray top clears under the ribs
+
+# ── THE HAND'S MOUNTING RULES — the editable reference wall ─────────────────
+# Every constant above is the CODE's convention. The hand's convention lives
+# in commons/data/prop_wall_rules.json, written by the prop reference wall
+# (res://commons/scenes/prop_reference_wall.tscn — walk it, nudge a prop,
+# F5). A token with a hand rule mounts at the hand's height everywhere;
+# absent file or absent token, the code convention applies unchanged.
+# V1 scope: one height per TOKEN — an exit_sign rule moves both the door
+# and the portal sign.
+const RULES_PATH := "res://commons/data/prop_wall_rules.json"
+static var _hand_rules: Dictionary = {}
+static var _hand_loaded: bool = false
+
+
+## Every wall-hung token with its CODE default height. The reference wall
+## reads this to know what to hang; the emitters read through _ruled_y.
+static func mount_defaults() -> Dictionary:
+	return {
+		"fire_extinguisher": H_EXTINGUISHER,
+		"emergency_button": H_ESTOP,
+		"electrical_panel": H_PANEL,
+		"palm_scanner": H_SCANNER,
+		"wall_clock": H_CLOCK,
+		"info_screen": H_SCREEN,
+		"whiteboard": H_BOARD,
+		"large_window": H_WINDOW,
+		"fire_hose_box": H_HOSE_BOX,
+		"exit_sign": Y_EXIT_WALL,
+		"cable_tray": Y_CABLE_TRAY,
+	}
+
+
+static func _ruled_y(token: String, code_y: float) -> float:
+	if not _hand_loaded:
+		_hand_loaded = true
+		if FileAccess.file_exists(RULES_PATH):
+			var doc: Variant = JSON.parse_string(FileAccess.get_file_as_string(RULES_PATH))
+			if doc is Dictionary and (doc as Dictionary).get("rules") is Dictionary:
+				_hand_rules = (doc as Dictionary)["rules"]
+				print("[em_props] %d hand mounting rule(s) from %s" % [_hand_rules.size(), RULES_PATH])
+	var r: Variant = _hand_rules.get(token, null)
+	if r is Dictionary and (r as Dictionary).has("h"):
+		return float((r as Dictionary)["h"])
+	return code_y
 
 # ── DENSITY ──────────────────────────────────────────────────────────────────
 ## Of em_budget's wall-furniture licence, the share that buys SERVICE furniture.
@@ -1242,6 +1291,7 @@ static func _rule_floor_pockets(out: Array, state: Dictionary, geo: Dictionary) 
 static func _emit_wall(out: Array, state: Dictionary,
 		token: String, face: Dictionary, y: float, cfg: Dictionary,
 		why: String, rule: String, family: String) -> bool:
+	y = _ruled_y(token, y)  # the hand's height wins over the caller's constant
 	var row: Dictionary = CATALOGUE.get(token, {})
 	var back: float = float(row.get("back", 0.0))
 	var front: float = float(row.get("front", 0.0))
@@ -1266,6 +1316,7 @@ static func _emit_wall(out: Array, state: Dictionary,
 static func _emit_floor_against_wall(out: Array, state: Dictionary, geo: Dictionary,
 		token: String, face: Dictionary, y: float, cfg: Dictionary,
 		why: String, rule: String, family: String) -> bool:
+	y = _ruled_y(token, y)  # the hand's height wins over the caller's constant
 	if int(state["floor_taken"]) >= MAX_FLOOR_TAKEN:
 		return false
 	var cell: Vector2i = face["front"]

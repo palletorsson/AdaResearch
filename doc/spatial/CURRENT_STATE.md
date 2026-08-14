@@ -122,6 +122,27 @@ ceiling higher for a museum." Three changes:
   default_body_bay, which is an argument). Culled with the artifacts;
   probe confirms 2 figures in 2 segments.
 
+**Seventh session, 08-14: the editable reference wall.** Palle: "editable
+reference walls for all props so you know how to put." Built as three
+layers, and it caught a live bug on arrival:
+
+- **em_props' contract constants were STALE COPIES** — its own `WALL_H 3.0`,
+  `SKY_Y 2.92`, `CORNICE_BOTTOM 2.72` survived the 4.5 raise untouched, so
+  it would have dressed 4.5 m walls as 3.0 ones (cable tray in open air).
+  All contract constants now import from em_detail/em_lighting; the
+  door-relative heights (exit signs, cable tray) became the arithmetic
+  their comments always claimed, so they rode the door raise for free.
+- **One editable surface**: `em_props.mount_defaults()` (11 wall tokens ×
+  code heights) + `commons/data/prop_wall_rules.json` (hand overrides,
+  absent by default) read through `_ruled_y` at the two emitters. V1: one
+  height per token — an exit_sign rule moves door AND portal signs.
+- **The wall itself**: `prop_reference_wall.tscn` — every token hung at its
+  resolved height on a 4.5 m wall, labels naming height and source
+  (code|HAND), the 1.65 eye-line drawn, the 1.75 m figure at the end.
+  WASD walk, E select, UP/DOWN nudge 5 cm, R reset, F5 saves the rules the
+  museum then reads. `test_prop_wall_rules.gd`: 11 hung, hand rule
+  round-trips into em_props, gate holds when the file is deleted.
+
 **Open findings (not fixed today).**
 
 - **Autopilot on the full plan FAILS at z 545**, inside the forces segment

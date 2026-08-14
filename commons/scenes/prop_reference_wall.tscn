@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://prop_ref_wall"]
+
+; THE PROP REFERENCE WALL — every wall prop at its ruled height, with a 1.75 m
+; figure for scale. Nudge a prop, F5, and the height becomes the museum's
+; convention (commons/data/prop_wall_rules.json, read by em_props._ruled_y).
+;
+;   Run:  godot --path . res://commons/scenes/prop_reference_wall.tscn
+
+[ext_resource type="Script" path="res://commons/scenes/prop_reference_wall.gd" id="1_wall"]
+
+[node name="PropReferenceWall" type="Node3D"]
+script = ExtResource("1_wall")
