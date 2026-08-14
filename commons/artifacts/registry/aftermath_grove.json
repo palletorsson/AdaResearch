@@ -1,0 +1,58 @@
+{
+	"artifacts": {
+		"aftermath_grove": {
+			"scene": "res://commons/artifacts/aftermath_grove/aftermath_grove.tscn",
+			"category": "proceduralgeneration",
+			"description": "Four growths and the one word they share for what remains of one - and the word splits two and two. A 2x2 where the top row's envelope is permission decided before anything grew and the bottom row's is a hull fitted after the fact.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 6,
+				"clearance": {
+					"front": 3,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			},
+			"dna": {
+				"promoted": "2026-08-14",
+				"stage": "synthesis",
+				"axes": {
+					"aftermath": [
+						"form",
+						"field",
+						"envelope",
+						"apparatus",
+						"strata"
+					],
+					"trial": [
+						"fixture",
+						"shipped",
+						"default",
+						"control"
+					]
+				},
+				"default": "aftermath=form, trial=fixture. form is the growth alone, which is what every member ships as; fixture is the seed both procgen members already pin in their own dna.fixture, so the default frame is the one the corpus has been photographing all along.",
+				"sources": [
+					"branching_growth_algorithm",
+					"space_colonization_algorithm",
+					"recursive_tree",
+					"inverted_tree_cloud"
+				],
+				"framing": 0.55,
+				"note": "LAW 16 FROM THE MEMBERS' DISPATCH: the values NEST, so aftermath is the AXIS. recursive_tree.gd:570-584 has apparatus re-evaluate envelope's exact expression and append; inverted_tree_cloud.gd:545-548 draws the cage unconditionally and adds marks only at apparatus; branching_growth_algorithm.gd:587-589 uses three booleans in which field and envelope are siblings over form and apparatus is their union. STRICT SUPERSET, three times.",
+				"kin": "`aftermath` IS TAKEN CHARACTER FOR CHARACTER by the two members that declare five values. The two that declare four REFUSE `field`, and that refusal is drawn rather than papered over: bays C and D draw no crosses at any value, because a grower with no demand has no field to show.",
+				"declines": "`trial` IS THIS ARTIFACT'S OWN WORD. Its four values are read off the members - fixture 20260802 (the seed both procgen members pin in dna.fixture), shipped 12345 (recursive_tree.tscn:20), default 42 (both tree scripts' export default) - except `control` = 1, the only invented value, placed LAST so law 15's trim takes it first.",
+				"still_note": "THE LAYOUT IS THE FINDING, so do not re-order the bays. TOP ROW is the two PRIOR-envelope members and BOTTOM ROW the two POSTERIOR. The partition is exact on a second symptom: the two prior members are precisely the two that declare `field` (bga:55, SpaceCol:65) and the two posterior are precisely the two that refuse it (rt:60, itc:88). One cause, two visible consequences. No plinth anywhere - two of the four put half their aftermath BELOW their own datum and a slab would hide it; the furniture is one 2.20 m datum rim per bay.",
+				"predicted_relationship": "THE INSTRUMENT IS THE SECOND AXIS, and this is the falsifiable claim the whole artifact exists for: SWEEP `trial` AT aftermath = envelope AND THE TOP ROW MUST NOT MOVE. A permission is decided before anything grows, so bay A's sphere cage and bay D's box cage are byte-identical at all four seeds; the bottom row's hulls are fitted to branches and must differ at every seed. FALSIFYING THRESHOLD: if any top-row cage moves between two trials, its envelope is not permission and the two-and-two split is wrong. If any bottom-row hull does NOT move, that member is not fitting to its own growth. A constant envelope cannot move and a measured one must - which is why re-running is the only instrument that separates them.",
+				"predicted_degeneracy": "PREDICTED BEFORE ANY CAPTURE, from the dispatch rather than a raster, and stated so it can be wrong in a checkable way. THE SHAPE OF THE AXIS: branching_growth's three booleans make `field` and `envelope` SIBLINGS over `form`, `apparatus` their union, and `strata` a RE-COLOURING of the same geometry rather than an addition. So the pairs are not a ladder:   form -> field       adds 120 crosses in TWO bays only (the other two refuse the word)  MEDIUM   form -> envelope    adds a sphere cage, a box cage and two fitted hulls               MEDIUM   field -> envelope   swaps crosses for cages                                            LARGE   envelope -> apparatus adds the crosses back plus four origin balls                    MEDIUM   form -> strata      adds NOTHING - it recolours the identical branches                 SMALLEST THE CLOSEST PAIR IS THEREFORE aftermath = form vs aftermath = strata, at any trial, and I name trial = fixture because it is the default. `strata` moves no vertex: every branch is where it was and only the per-instance colour changes, from a radius ramp to a generation ramp. Both ramps run over the same tint toward white, so the two frames differ only where generation and radius disagree - the deep interior branches of the two demand-driven bays, which are short and near the origin. THE NUMBER: the bushes are the only bodies whose generation and radius decorrelate, they occupy roughly a fifth of each of two bays out of four, and the colour delta over that region averages well under half the tint range. Call the floor 0.55% of FRAME. TWO-SIDED, per the domain limit wave 10 measured: the marks here are 0.006 m hairlines, about 1.6 px at this framing, so a sub-floor return does not on its own mean broken - it means the recolour is landing under the antialiaser. Read the per-bay diff before judging. AND A NAMED RISK I EXPECT TO BE WRONG ABOUT: I predicted by hand for residue_hall and missed the pair entirely because I reasoned along one axis and never enumerated the cross-axis pairs. The same trap is live here - the quietest pair may well be two TRIALS at a single aftermath value rather than anything on the aftermath axis, since a re-seed moves the two posterior bays and leaves the two prior cages exactly where they were.",
+				"placements": 0,
+				"measured": "MEASURED 2026-08-14, first capture. 20 variants, rejected=0. Closest pair 0.03% at aftermath=form vs aftermath=strata (trial=control), subject 3.1% of frame, box 92x30% and 14% full - verify_batch reads it as sparse-not-small and says do not tighten. THE PREDICTION NAMED THE PAIR AND UNDERSHOT THE NUMBER. predicted_degeneracy called form vs strata, reasoning that strata moves no vertex and only swaps a radius ramp for a generation ramp; that is exactly the measured pair. The floor was 0.55% and the measurement is 0.03%, 0.055x - but this was PRE-REGISTERED as a two-sided case (0.006 m hairlines, about 1.6 px), so a sub-floor return here was declared in advance not to mean broken. STRATA IS NEARLY INERT AS DRAWN, AND THAT IS MY FAULT AND NOT THE FAMILY'S. Both ramps run toward white over the same tint, so the recolour lands under the antialiaser at hairline width. The family's own strata is legible because its members draw thicker bodies. Recorded rather than inflated: an axis thin because of the drawing is a different claim from an axis thin because of the thing. THE CENTRAL CLAIM HELD DIRECTIONALLY AND MY TEST OF IT WAS CONTAMINATED. predicted_relationship said: sweep trial at aftermath=envelope and the TOP ROW MUST NOT MOVE, because a permission is decided before anything grows. Isolating the cage as (envelope frame - form frame) at each trial and comparing masks by Jaccard:   fixture vs shipped   UPPER/prior 0.574   LOWER/posterior 0.155   fixture vs default   UPPER/prior 0.570   LOWER/posterior 0.181   fixture vs control   UPPER/prior 0.611   LOWER/posterior 0.209 A 3x separation in the predicted direction - the fitted hulls move about three times as much as the permissions. But I predicted 1.000 for the top row and named anything less as falsifying, and it is 0.57. THAT GAP IS OCCLUSION IN THE MEASUREMENT, NOT MOVEMENT IN THE CAGE. The mask is 'cage pixels not hidden by branches', and the branches differ at every trial by design, so the visible fraction of a stationary cage changes when the growth in front of it changes. The cages themselves take no RNG input at all - _sphere_cage(CAGE_R) and _box_cage(+/-CAGE_BOX) read constants - while the hulls are fitted from the segment list. The claim is true by construction and my instrument could not see it cleanly. YOU CANNOT IMAGE-DIFFERENCE 'DID THIS ELEMENT MOVE' WHEN SOMETHING IN FRONT OF IT ALSO MOVES. That is the methodological finding, and it is new to this corpus. AND THE FINDING IS VISIBLE IN THE SHEET WITHOUT ANY TOOL, which is the better evidence: at aftermath=field the crosses appear in TWO BAYS ONLY - the two that declare the word - and the bottom row stays bare at every trial. At aftermath=envelope the blue sphere and the blue box hold their size and place across all four trials while the orange hulls visibly change shape. Permission against hull, in one frame."
+			}
+		}
+	}
+}
