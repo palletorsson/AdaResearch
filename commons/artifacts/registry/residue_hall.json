@@ -1,0 +1,58 @@
+{
+	"artifacts": {
+		"residue_hall": {
+			"scene": "res://commons/artifacts/residue_hall/residue_hall.tscn",
+			"category": "randomness",
+			"description": "Three walks and the one vocabulary they share for what remains of a walk - a lattice field that raises the ground it lands on, a pipe whose record is its body, and a walk pulled back inside a sphere. The rungs nest, so the sheet accumulates rather than substituting.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 3,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			},
+			"dna": {
+				"promoted": "2026-08-14",
+				"stage": "synthesis",
+				"axes": {
+					"residue": [
+						"head",
+						"tail",
+						"path",
+						"envelope",
+						"ensemble"
+					],
+					"tenure": [
+						"worked",
+						"spent",
+						"fresh"
+					]
+				},
+				"default": "residue=path, tenure=worked. path is the middle rung and the first at which all three bodies are fully drawn; worked is 60% of the run, long enough that the fitted fences have found their shape and short enough that the field has not saturated.",
+				"sources": [
+					"random_walk_128",
+					"pipe_dream",
+					"random_walk_leash",
+					"random_walk_collection"
+				],
+				"framing": 0.62,
+				"framing_why": "Union 3.925 x 0.72 x 0.86 m, diagonal 4.0821, radius 2.0411. At framing 1.0 the camera stands 12.68 m out for a row 3.925 m wide - a thin-wide subject fitted by its diagonal, the case CLAUDE.md's null-verdict table exists for. At 0.53 the frame is 4.111 m and the row fills about 95% of its width at 184.9 px/m, which is what puts a 0.008 m fence wire at 1.48 px.",
+				"note": "LAW 16 ANSWERED FROM THE MEMBERS' CODE, not their prose: the values NEST, so residue is the AXIS and the members are the exhibit. All four hold RESIDUE_RUNGS as an INTEGER dict {head:0, tail:1, path:2, envelope:3, ensemble:4} (PipeDream.gd:154-160, RandomWalk128Algorithm.gd:118-124, random_walk_leash.gd:125-131, random_walk_collection.gd:95-101) and no member matches on the word once resolved. Every gate is `>=` and not `==`: PipeDream draws the pipe at rung>=1, rails at rung>=3, ghosts at rung>=4; RandomWalk128 raises the field at rung>=2, refreshes the rail at r>=3, builds ghosts at r>=4. A rung contains every rung beneath it, so this hall accumulates.",
+				"kin": "`residue` IS TAKEN CHARACTER FOR CHARACTER. The census read this family as three vocabularies; it is one. All four members declare the identical five values and differ only in DECLARATION ORDER - PipeDream opens on `head`, random_walk_leash on `tail` - which doc/reports/VOCABULARY_SPLIT.md rules is a decision rather than a disagreement. THE CENSUS COMPARES TUPLES WHERE IT SHOULD COMPARE SETS, and that is a tool fault this entry records: ranking families by vocabulary count made two honest families look dirty and left `frame` (whose members ask genuinely different questions) looking comparable.",
+				"declines": "`tenure` IS THIS ARTIFACT'S OWN WORD and no member declares it. Refused as axes: the per-member step parameters (max_segments, total_steps, initial_steps) because each belongs to one bay and a sheet varying one bay is a fact about one bay; and any rate or cadence, because the evidence here is one still per variant.",
+				"still_note": "NO GLASS, NO CASE, NO SHARED PLINTH - each bay carries its member's own ground, because the field's cube carpet IS its ground and pipe_dream has none. The row runs along +X rather than as a court: the camera's screen-x direction is (0.8139, 0, -0.5810), so a 2x2 court projects its middle bays only 0.233*pitch apart and overlaps. THE FENCES ARE THE THINNEST MARKS IN THE HALL at 1.47 px, and they carry the whole path->envelope pair - read the per-bay diff before believing that pair's headline.",
+				"predicted_relationship": "THE RUNGS NEST, SO THE DIFFERENCES MUST BE MONOTONE IN WHAT IS ADDED, and that is falsifiable without any reference to absolute size: measured pair(head,tail) and pair(tail,path) must BOTH exceed pair(path,envelope), at every tenure, because the first two add filled line across three bays and the third adds wire only. FALSIFYING THRESHOLD: if pair(path,envelope) exceeds either of them at any tenure, the fences are not thin marks but bodies, and the drawing is wrong rather than the axis. A second claim: pair(path,envelope) must be SMALLEST at tenure=fresh, because two of the three fences shrink with the record and only the leash ring is constant.",
+				"predicted_degeneracy": "PREDICTED BEFORE ANY CAPTURE, from the rung arithmetic rather than a full raster, and the reasoning is stated so it can be wrong in a checkable way. THE RUNGS NEST - every gate in this artifact and in all four sources is `>=`, so a rung contains every rung below it and an adjacent pair differs by EXACTLY WHAT THE HIGHER ONE ADDS. That turns the prediction into a comparison of added line-length:   head -> tail      adds the ramped recent window across three bays   LARGE   tail -> path      adds the entire trace                             LARGEST   path -> envelope  adds wire only: a 4-corner fence, a 12-edge box, a 40-segment ring  SMALL   envelope -> ensemble  adds 3 ghost walks x 3 bays                   MEDIUM THE CLOSEST PAIR IS THEREFORE residue = path vs residue = envelope, AND AT tenure = fresh, because two of the three fences are fitted to the record and shrink with it while only the leash ring is constant - at 25% of the run the added wire is at its shortest. THE NUMBER. Union 3.925 x 0.72 x 0.86 m, diagonal 4.0996, radius 2.0498; at framing 0.53 the camera stands 13.501 m out, the visible frame is 4.128 m and the scale is 184.1 px/m. Added wire at fresh: leash ring 2.136 m (constant, 2*pi*0.34) + field fence about 3.2 m + pipe box about 2.6 m, all at 0.008 m diameter = 0.0631 m2 of new mark against a 17.04 m2 frame = 0.37%. Call the floor 0.37% of FRAME. THIS IS A THIN-EDGE CASE AND THE FLOOR IS TWO-SIDED, per the domain limit wave 10 measured. 0.008 m of wire is 1.47 px at this scale, which is exactly the regime where a rasteriser with no antialiasing OVER-registers and Godot at MSAA 4x smears the mark below threshold. So a return under 0.37% does NOT on its own mean broken here - it means the added marks are sub-pixel and the sweep should be read with the per-bay diff rather than the headline. A return ABOVE it is the ordinary case and needs no explanation.",
+				"placements": 0,
+				"measured": "MEASURED 2026-08-14, two captures. 15 variants, rejected=0 both times. FIRST CAPTURE at bay pitch 1.5626 / framing 0.53: closest pair 0.11%, subject 1.3% of frame, box 85% of frame WIDTH and 7% FULL - three bodies of 0.68-0.80 m spread over 3.9 m, so the camera had to retreat far enough to hold the gaps and the hall photographed as air. Pitch closed to 0.95 (daylight 0.95 - 0.400 - 0.340 = 0.210 m, still clear at the widest variant) and framing to 0.62. SECOND CAPTURE: closest 0.16%, subject 2.0%, box 12% full. Better and still sparse; verify_batch reads it as sparse-not-small and says do not tighten. THE PREDICTION MISSED, AND THE REASON IS THE POINT. predicted_degeneracy named residue=path vs residue=envelope at tenure=fresh, reasoning from the nesting that an adjacent rung pair differs by exactly what the higher rung adds, and that path->envelope adds wire only. The measured closest pair is residue=head at tenure=spent vs tenure=worked - THE OTHER AXIS ENTIRELY, and at the lowest rung. WHY I MISSED IT: at residue=head the hall draws three balls and nothing else, because the rungs nest and head is the floor. Changing tenure at that rung only moves three small spheres a little way. I predicted along the axis I was thinking about and never enumerated the cross-axis pairs. The declaring agent in waves 8-10 rasterises EVERY pair and returns a full table; doing this inline by hand I dropped that step and made precisely the error the full table exists to prevent. That is the measured cost of the faster cadence, recorded rather than smoothed over. THE RELATIONSHIP CLAIM STANDS, and it is the falsifiable one: pair(head,tail) and pair(tail,path) both exceed pair(path,envelope) at every tenure, as predicted from the nesting - the sheet accumulates and the wire-only rung adds least of the four. WHAT THE SHEET SHOWS, and it is the artifact working: head is three dots; tail adds ramped recent marks; path brings the three bodies out - the field's raised mound, the pipe's run, the leash tangle; envelope adds the orange fences, the wire box and the ring; ensemble adds the blue ghost walks. The accumulation is legible without a label, which is what LAW 16 predicted from the members' `>=` gates. HEAD IS NEARLY AN EMPTY FRAME AND THAT IS THE DESIGN, not a fault: the lowest rung of a nesting family IS almost nothing, and a hall that hid that would be lying about the ladder it exists to show. It is also why the closest pair lives there."
+			}
+		}
+	}
+}
