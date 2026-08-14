@@ -179,6 +179,18 @@ def free_slot(layers: dict, w: int, d: int, near=None):
             return True                            # occupied
         return False
 
+    # THE GRID CENTRES A BODY ON ITS CELL, IT DOES NOT EXTEND IT RIGHTWARD, and the first
+    # version of this tool assumed the opposite. ladder_hall is 5.85 m; placed at col 4 it
+    # was given cols 4..9 and actually occupies 1.08..6.92 — so three cells were reserved
+    # that needed nothing and three were never checked at all. Col 1 held an
+    # exhibit_furniture plinth, and the two bodies overlap by 0.22 m in the built map.
+    #
+    # NOTHING CAUGHT IT. The footprint fitted, the cells were free, map_pathfinder returned
+    # 1 OK / 0 FAIL, and the semantic diff was exactly one cell. The grid never sees the
+    # mesh, so a collision between two bodies is invisible to every check in this pipeline
+    # except looking at the room. It was found by capturing the map and reading the top view.
+    pad_w, pad_d = (w - 1) // 2, (d - 1) // 2
+
     def near_traffic(r, c):
         for rr in range(r - KEEP_CLEAR, r + KEEP_CLEAR + 1):
             for cc in range(c - KEEP_CLEAR, c + KEEP_CLEAR + 1):
@@ -191,9 +203,11 @@ def free_slot(layers: dict, w: int, d: int, near=None):
     best_score = None
     for r in range(rows):
         for c in range(cols):
+            # (r, c) is where the TOKEN goes; the body straddles it, so test the span the
+            # body will actually occupy rather than a rectangle hanging off one corner.
             ok = True
-            for rr in range(r, r + d):
-                for cc in range(c, c + w):
+            for rr in range(r - pad_d, r + d - pad_d):
+                for cc in range(c - pad_w, c + w - pad_w):
                     if blocked(rr, cc) or near_traffic(rr, cc):
                         ok = False
                         break
@@ -203,8 +217,8 @@ def free_slot(layers: dict, w: int, d: int, near=None):
                 continue
             if near is None:
                 return r, c
-            # distance from the footprint's own centre to the sources' centre
-            cy, cx = r + (d - 1) / 2.0, c + (w - 1) / 2.0
+            # the token cell IS the body's centre now, so that is what to measure from
+            cy, cx = float(r), float(c)
             score = (cy - near[0]) ** 2 + (cx - near[1]) ** 2
             if best_score is None or score < best_score:
                 best_score, best = score, (r, c)
