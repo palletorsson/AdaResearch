@@ -72,6 +72,24 @@ restored — the June capture-resave clobber had been COMMITTED in 8feb9c913,
 so `git checkout` was restoring the broken rig; repaired from 8feb9c913^ and
 the file is now chmod 444 like the action map.
 
+**Fourth session, 08-14: bare hands.** "Left stick still can't move forward,
+I think it's the catalyst / the interactive parts of the hand" → the honest
+experiment is now one toggle away: MOVEMENT-ONLY HANDS
+(`commons/scenes/bare_hands.gd`) strips all 14 hand gadgets — pickups,
+pointers, gaze pointer, ghost hands, per-hand Area3Ds, message console,
+wrist workstation, gravity gun, wrist stats, XP listener — from every
+LOADED scene's rig (the staging menu keeps its pointers), leaving both
+hands' Movement* providers, collision hands, PlayerBody and the calibrator
+untouched. With FunctionPickup gone the catalyst bracelet can never attach.
+Enable any of three ways: `movement_only_hands` export on vr_staging,
+`--bare-hands`, or a `user://movement_only_hands.txt` marker (Quest:
+adb-push an empty file into the app's files dir). `test_bare_hands.gd`
+proves strip + survival + off-mode-untouched. NOTE: whether the earlier
+calibration fix ever RAN in Palle's failing session is unverified — no
+`JoystickCalibrate:` lines have been seen from a live headset run; if the
+next run lacks them, the fix never reached the device (stale Godot or
+un-pushed APK), and that is the first thing to check.
+
 **Open findings (not fixed today).**
 
 - **Autopilot on the full plan FAILS at z 545**, inside the forces segment

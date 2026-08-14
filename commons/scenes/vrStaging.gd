@@ -13,6 +13,7 @@ extends XRToolsStaging
 @export var preferred_grid_map: String = "Lab"
 @export var skip_menu: bool = false  # Skip menu and load directly into lab
 @export var spawn_map_loader_button_actions: PackedStringArray = PackedStringArray()  # disabled 2026-06-03 — no controller button spawns the VR map-loader kiosk (was ["primary_click"]; B is reserved for catalyst map-save). Re-add to restore.
+@export var movement_only_hands: bool = false  # strip every hand gadget from loaded scenes' rigs, keep locomotion — see commons/scenes/bare_hands.gd (also: --bare-hands, or user://movement_only_hands.txt)
 @export var spawn_map_loader_keyboard_key: Key = KEY_B
 @export var map_loader_spawn_distance: float = 1.8
 @export var map_loader_spawn_height: float = 1.6
@@ -44,6 +45,16 @@ func _ready() -> void:
 	# Do not initialise if in the editor
 	if Engine.is_editor_hint():
 		return
+
+	# Movement-only hands: strip gadgets from every LOADED scene's rig (the
+	# staging menu keeps its pointers — a menu you cannot click is a lockout,
+	# not a diagnosis). Deferred so the scene's own _ready has fully run.
+	var bare := preload("res://commons/scenes/bare_hands.gd")  # preload, not class_name — the cache lags new files
+	if movement_only_hands or bare.wanted():
+		scene_loaded.connect(func(scene, _user_data):
+			if scene != null:
+				(func(): bare.apply(scene.find_child("XROrigin3D", true, false))).call_deferred())
+		print("AdaVRStaging: MOVEMENT-ONLY HANDS armed — gadgets stripped on every scene load")
 
 	# Specify the camera to track (logic from XRToolsStaging)
 	if xr_camera:
