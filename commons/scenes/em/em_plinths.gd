@@ -271,6 +271,30 @@ const MIN_LIFT := 0.25
 ## corpus ships. A guard, not a shaper: it binds on nothing in the spine.
 const MAX_LIFT := 1.20
 
+# ── THE HAND'S VIEWING BAND — same pattern as the prop wall ─────────────────
+# The constants above are the CODE's museology. The hand's lives in
+# commons/data/standing_rules.json (written by the reference wall's band
+# zone), and BOTH LANGUAGES read that file: this module at build time, and
+# tools/spatial_contract.py's plinth_band() at plan time — python already
+# treated this .gd file as the owner by parsing its consts, so the file
+# simply becomes the owner one level up. Absent file, absent key: the code
+# constant applies unchanged.
+const STANDING_RULES := "res://commons/data/standing_rules.json"
+static var _band_hand: Dictionary = {}
+static var _band_loaded: bool = false
+
+
+static func band(key: String, code_v: float) -> float:
+	if not _band_loaded:
+		_band_loaded = true
+		if FileAccess.file_exists(STANDING_RULES):
+			var doc: Variant = JSON.parse_string(FileAccess.get_file_as_string(STANDING_RULES))
+			if doc is Dictionary and (doc as Dictionary).get("band") is Dictionary:
+				_band_hand = (doc as Dictionary)["band"]
+				print("[em_plinths] hand viewing band from %s: %s" % [STANDING_RULES, str(_band_hand)])
+	var v: Variant = _band_hand.get(key, null)
+	return float(v) if (v is float or v is int) else code_v
+
 ## Already crosses the band standing on the deck.
 const TALL_H := 2.20
 ## The drawing rule: this tall at most, and this fraction of its own width.
@@ -528,12 +552,14 @@ static func _decide(token: String, cell: Dictionary, h: float, b: float,
 		return _no(token, "ground scale (%.2f m across) — the pedestal would be architecture" % b, source)
 
 	# 8 — the arithmetic, against the riser the template already built.
+	# band() lets the hand's standing_rules.json overrule each constant.
 	var top: float = float(cell.get("top", 0.0))
-	var want: float = TARGET_CENTRE - h * 0.5 - top
-	if want < MIN_LIFT:
+	var want: float = band("target_centre", TARGET_CENTRE) - h * 0.5 - top
+	var min_lift: float = band("min_lift", MIN_LIFT)
+	if want < min_lift:
 		return _no(token, "already in band — centre %.2f m on a %.2f m riser; the lift left to give is %.2f m" % [
 			top + h * 0.5, top, maxf(want, 0.0)], source)
-	var lift: float = clampf(want, MIN_LIFT, MAX_LIFT)
+	var lift: float = clampf(want, min_lift, band("max_lift", MAX_LIFT))
 	var cells: int = _cells_for(b)
 	# THE PARITY CLAMP. The cap may not push the plinth's foot past the cells the
 	# artifact's own AABB already takes out of the walk map.
@@ -599,7 +625,7 @@ static func _decide(token: String, cell: Dictionary, h: float, b: float,
 		"plinth_height": lift,
 		"artifact_y": lift,
 		"why": "%.2f m tall on the deck puts its centre at %.2f m; lifted %.2f m it lands at %.2f m, inside the %.2f–%.2f m band. Cap cut to %.2f m for a %.2f m base." % [
-			h, h * 0.5 + float(cell.get("top", 0.0)), lift, lift + h * 0.5, BAND_LOW, BAND_HIGH, cap, b],
+			h, h * 0.5 + float(cell.get("top", 0.0)), lift, lift + h * 0.5, band("band_low", BAND_LOW), band("band_high", BAND_HIGH), cap, b],
 		"scene": SCENE_PLINTH,
 		"config": {"top_height": lift, "cap_meters": cap, "width_cells": 1,
 			"depth_cells": 1, "top_style": "flat", "glow_light": false},
@@ -670,7 +696,7 @@ static func _ensure_loaded() -> void:
 	if sizes is Dictionary:
 		_sizes = sizes as Dictionary
 	print("[em_plinths] sizes: %d measured artifacts; band %.2f–%.2f m, eye %.2f m" % [
-		_sizes.size(), BAND_LOW, BAND_HIGH, EYE])
+		_sizes.size(), band("band_low", BAND_LOW), band("band_high", BAND_HIGH), EYE])
 
 
 ## A mesh's transform relative to the artifact root, for a node that has not

@@ -20,6 +20,7 @@ extends Node3D
 const EmProps := preload("res://commons/scenes/em/em_props.gd")
 const EmDetail := preload("res://commons/scenes/em/em_detail.gd")
 const EmEditor := preload("res://commons/scenes/em/em_editor.gd")
+const EmPlinths := preload("res://commons/scenes/em/em_plinths.gd")
 
 const SPACING := 3.0
 const REGISTRY_DIR := "res://commons/artifacts/registry"
@@ -27,17 +28,21 @@ const REGISTRY_DIR := "res://commons/artifacts/registry"
 var _cam: Camera3D
 var _yaw: float = 0.0
 var _pitch: float = 0.0
-var _records: Array = []   # [{node, token, label, code_h}]
+var _records: Array = []   # [{node, token, label, code_h, kind, key?}]
 var _sel: int = -1
 var _dirty: bool = false
 var _hud: Label
+var _band_stripe: MeshInstance3D
+var _band_x0: float = 0.0
+var _band_x1: float = 0.0
 
 
 func _ready() -> void:
 	var wall_h: float = float(EmDetail.WALL_H)
 	var defaults: Dictionary = EmProps.mount_defaults()
 	var n: int = defaults.size()
-	var length: float = SPACING * (n + 1)
+	# props stretch + the viewing-band zone at the far end
+	var length: float = SPACING * (n + 1) + 8.0
 
 	# floor and wall, flat museum tones
 	_slab(Vector3(length / 2.0, -0.1, 3.0), Vector3(length, 0.2, 6.0), Color(0.16, 0.16, 0.19))
@@ -76,7 +81,59 @@ func _ready() -> void:
 		_records.append(rec)
 		_update_label(rec)
 
-	_figure(Vector3(SPACING * (n + 1) - 1.0, 0.0, 1.2))
+	# ── THE VIEWING BAND — the standing conventions, editable like the props.
+	# em_plinths lifts every floor artifact so its CENTRE lands here; these
+	# five handles are that museology. Nudging target_centre re-aims every
+	# plinth the museum builds; python's negotiator reads the same file.
+	_band_x0 = SPACING * (n + 1) + 0.5
+	_band_x1 = _band_x0 + 6.0
+	_band_stripe = MeshInstance3D.new()
+	var sb := BoxMesh.new()
+	sb.size = Vector3(1, 1, 1)
+	_band_stripe.mesh = sb
+	var sm := StandardMaterial3D.new()
+	sm.albedo_color = Color(0.95, 0.75, 0.25, 0.22)
+	sm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_band_stripe.material_override = sm
+	add_child(_band_stripe)
+	var band_defs: Array = [
+		["target_centre", EmPlinths.TARGET_CENTRE, "where a standing artifact's CENTRE lands"],
+		["band_low", EmPlinths.BAND_LOW, "the band's floor"],
+		["band_high", EmPlinths.BAND_HIGH, "the band's ceiling"],
+		["min_lift", EmPlinths.MIN_LIFT, "below this, no furniture is worth it"],
+		["max_lift", EmPlinths.MAX_LIFT, "the tallest pedestal the corpus ships"],
+	]
+	var bi: int = 0
+	for bd_v in band_defs:
+		var bd: Array = bd_v
+		var key := String(bd[0])
+		var code_v := float(bd[1])
+		var v: float = EmPlinths.band(key, code_v)
+		var bx: float = _band_x0 + 0.6 + bi * 1.15
+		var handle := Node3D.new()
+		handle.name = "band_" + key
+		handle.position = Vector3(bx, v, 0.1)
+		add_child(handle)
+		var hm2 := MeshInstance3D.new()
+		var hb := BoxMesh.new()
+		hb.size = Vector3(0.9, 0.05, 0.08)
+		hm2.mesh = hb
+		var hmat := StandardMaterial3D.new()
+		hmat.albedo_color = Color(0.95, 0.6, 0.15)
+		hm2.material_override = hmat
+		handle.add_child(hm2)
+		var blbl := Label3D.new()
+		blbl.position = Vector3(bx, wall_h - 0.25 - (bi % 2) * 0.35, 0.15)
+		blbl.font_size = 36
+		add_child(blbl)
+		var brec: Dictionary = {"node": handle, "token": key, "label": blbl,
+			"code_h": code_v, "kind": "band", "key": key}
+		_records.append(brec)
+		_update_label(brec)
+		bi += 1
+	_refresh_band_stripe()
+
+	_figure(Vector3(_band_x1 + 0.8, 0.0, 1.2))
 
 	_cam = Camera3D.new()
 	_cam.position = Vector3(2.0, 1.65, 4.5)
@@ -150,15 +207,39 @@ func _nudge(dy: float) -> void:
 	node.position.y = clampf(node.position.y + dy, 0.1, float(EmDetail.WALL_H) - 0.1)
 	_dirty = true
 	_update_label(r)
+	if String(r.get("kind", "")) == "band":
+		_refresh_band_stripe()
 	_update_hud()
+
+
+func _refresh_band_stripe() -> void:
+	var lo: float = -1.0
+	var hi: float = -1.0
+	for r_v in _records:
+		var r: Dictionary = r_v
+		if String(r.get("key", "")) == "band_low":
+			lo = (r["node"] as Node3D).position.y
+		elif String(r.get("key", "")) == "band_high":
+			hi = (r["node"] as Node3D).position.y
+	if lo < 0.0 or hi <= lo:
+		_band_stripe.visible = false
+		return
+	_band_stripe.visible = true
+	_band_stripe.position = Vector3((_band_x0 + _band_x1) / 2.0, (lo + hi) / 2.0, 0.02)
+	_band_stripe.scale = Vector3(_band_x1 - _band_x0, hi - lo, 0.02)
 
 
 func _save() -> void:
 	var rules: Dictionary = {}
+	var band: Dictionary = {}
 	for r_v in _records:
 		var r: Dictionary = r_v
 		var h: float = (r["node"] as Node3D).position.y
-		if absf(h - float(r["code_h"])) > 0.001:
+		if absf(h - float(r["code_h"])) <= 0.001:
+			continue
+		if String(r.get("kind", "")) == "band":
+			band[String(r["key"])] = snappedf(h, 0.001)
+		else:
 			rules[String(r["token"])] = {"h": snappedf(h, 0.001)}
 	var doc: Dictionary = {
 		"schema": "adaresearch.prop_wall_rules.v1",
@@ -176,14 +257,32 @@ func _save() -> void:
 		return
 	f.store_string(JSON.stringify(doc, "\t"))
 	f.close()
+	# the standing conventions — read by em_plinths AND python's negotiator
+	var bdoc: Dictionary = {
+		"schema": "adaresearch.standing_rules.v1",
+		"_readme": ("The hand's viewing band over em_plinths' code museology, "
+			+ "written by the reference wall's band zone. Read by em_plinths.band() "
+			+ "at build time and tools/spatial_contract.py plinth_band() at plan "
+			+ "time — one file so the two languages cannot disagree. A key absent "
+			+ "keeps the code constant; delete the file to restore all of them."),
+		"band": band,
+	}
+	var bf := FileAccess.open(EmPlinths.STANDING_RULES, FileAccess.WRITE)
+	if bf == null:
+		print("[prop-wall] CANNOT WRITE %s" % EmPlinths.STANDING_RULES)
+		return
+	bf.store_string(JSON.stringify(bdoc, "\t"))
+	bf.close()
 	_dirty = false
-	# the museum's next dress uses these immediately (static cache dropped)
+	# the museum's next dress uses these immediately (static caches dropped)
 	EmProps._hand_loaded = false
 	EmProps._hand_rules = {}
+	EmPlinths._band_loaded = false
+	EmPlinths._band_hand = {}
 	for r in _records:
 		_update_label(r)
 	_update_hud()
-	print("[prop-wall] saved %d hand rule(s) -> %s" % [rules.size(), EmProps.RULES_PATH])
+	print("[prop-wall] saved %d prop rule(s) + %d band rule(s)" % [rules.size(), band.size()])
 
 
 func _update_label(r: Dictionary) -> void:

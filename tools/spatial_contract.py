@@ -196,17 +196,32 @@ PLINTHS_GD = REPO / "commons" / "scenes" / "em" / "em_plinths.gd"
 
 @lru_cache(maxsize=1)
 def plinth_band() -> dict[str, float]:
-    """TARGET_CENTRE / MIN_LIFT / MAX_LIFT as em_plinths.gd declares them."""
+    """The viewing band, from its OWNERS in order.
+
+    1. commons/data/standing_rules.json — the HAND's band, written at the
+       reference wall. em_plinths.band() reads the same file at build time,
+       so the two languages cannot disagree about a hand ruling.
+    2. em_plinths.gd's const declarations — the code's band.
+    3. The literals below — the doc's values, if both files are unreadable.
+    """
     out = {"target_centre": 1.15, "min_lift": 0.25, "max_lift": 1.20}
     try:
         src = PLINTHS_GD.read_text(encoding="utf-8")
     except OSError:
-        return out                      # defaults, and they are the doc's values
+        src = ""
     for key, name in (("target_centre", "TARGET_CENTRE"), ("min_lift", "MIN_LIFT"),
                       ("max_lift", "MAX_LIFT")):
         m = re.search(rf"^const {name} *:= *([0-9.]+)", src, re.M)
         if m:
             out[key] = float(m.group(1))
+    rules_path = REPO / "commons" / "data" / "standing_rules.json"
+    try:
+        band = json.loads(rules_path.read_text(encoding="utf-8")).get("band", {})
+        for key in ("target_centre", "min_lift", "max_lift"):
+            if isinstance(band.get(key), (int, float)):
+                out[key] = float(band[key])
+    except (OSError, ValueError):
+        pass                            # no hand rules — the code's band stands
     return out
 
 

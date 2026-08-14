@@ -143,6 +143,23 @@ layers, and it caught a live bug on arrival:
   museum then reads. `test_prop_wall_rules.gd`: 11 hung, hand rule
   round-trips into em_props, gate holds when the file is deleted.
 
+**Eighth session, 08-14: the standing conventions join the wall.** "Can we
+learn about all the plinths and podiums the same way?" The plinth system's
+"how to put" is the VIEWING BAND (em_plinths: target_centre 1.15, band
+1.05–1.30, lift 0.25–1.20) — and python's negotiator was already treating
+the .gd file as its owner by regex-parsing the consts. The hand's band now
+lives in `commons/data/standing_rules.json`, read by BOTH languages:
+`em_plinths.band()` at build time and `spatial_contract.plinth_band()` at
+plan time (file first, .gd consts second, doc literals last) — verified in
+one run: hand target 1.25 → `lift_for(0.4 m body) = 1.05` in python and
+the same in GDScript. The reference wall grew a BAND ZONE: five amber
+handles (target/low/high/min/max) with a live translucent band stripe,
+edited and saved exactly like the props; F5 writes both files. Trial: 16
+records hung, both round trips, both gates. Palle's five prop rules from
+his first session are committed (`c2e8b3111`). NOT covered v1: podium/
+plinth structural tops (0.4/0.8 — plan-time offers would disagree until
+regen; needs its own pass), ceiling/floor/edge props (no height knob).
+
 **Open findings (not fixed today).**
 
 - **Autopilot on the full plan FAILS at z 545**, inside the forces segment
