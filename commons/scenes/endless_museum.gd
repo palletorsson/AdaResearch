@@ -179,6 +179,35 @@ var _plan_owner: Dictionary = {}
 # The live node move is only a preview of what the next build will do.
 var _edit_mode: bool = false
 var _edit_records: Array = []      # [{node, token, tile_cell, rotation, chapter}]
+
+# ── near-artifact rendering ──────────────────────────────────────────────────
+# Artifacts render only near the eye. A segment is 60-90 m long and 3-4 are
+# alive at once, so without this every procedural body in ~200 m of museum is
+# drawn every frame — in VR, twice. Rulings: show under ART_SHOW_M, hide past
+# ART_HIDE_M (hysteresis so the boundary never flickers), NEVER during a
+# proof shot (a shot documents the whole standpoint), physics untouched
+# (visible=false leaves colliders live, so seals and walls still bite).
+# Architecture (walls, floors, lights) is never culled — the building is the
+# horizon; the artifacts are the crowd.
+const ART_SHOW_M := 32.0
+const ART_HIDE_M := 38.0
+var _vis_records: Array = []       # [{node, p}] every stamped artifact, always
+var _vis_timer: float = 0.0
+var _vis_hidden: int = 0
+var _flat_mats: Dictionary = {}    # Color -> StandardMaterial3D, see _mat
+var _box_meshes: Dictionary = {}   # Vector3 size -> BoxMesh, see _box
+
+# ── box batching ─────────────────────────────────────────────────────────────
+# The architecture is stamped cell by cell — measured 2,118 MeshInstance3D
+# boxes across TWO segments (probe_em_render_load.gd), every one a draw call,
+# and VR draws them twice. Batched: one MultiMeshInstance3D per material per
+# segment — a unit cube scaled per instance, so the varied box sizes cost
+# nothing. UVs are identical (BoxMesh maps 0..1 per face at any size), shading
+# is identical (Godot corrects normals under non-uniform scale), colliders
+# were always separate. ~2,000 draw calls become ~15.
+var _batch_open: bool = false
+var _batch: Dictionary = {}        # material instance id -> {mat, boxes: [{p, s}]}
+var _unit_box: BoxMesh = null
 var _edit_sel: int = -1
 var _edit_overrides: Array = []
 var _edit_dirty: bool = false
@@ -993,8 +1022,15 @@ func _setup_audio() -> void:
 		_mod_audio.call("bind_footsteps", _feel, "footstep")
 
 func _mat(color: Color) -> StandardMaterial3D:
+	# cached by colour: same-coloured cells share ONE material, so the
+	# renderer state-sorts them instead of switching per box. Nothing ever
+	# mutates a flat material after creation, which is what makes this safe.
+	var cached: Variant = _flat_mats.get(color, null)
+	if cached is StandardMaterial3D:
+		return cached
 	var m := StandardMaterial3D.new()
 	m.albedo_color = color
+	_flat_mats[color] = m
 	return m
 
 ## One role out of the resolved library, or null when the library never
@@ -1009,13 +1045,61 @@ func _sm(role: String) -> Material:
 ## the v1 flat fallback, kept per-surface so a partially loaded library still
 ## dresses what it can.
 func _box(parent: Node3D, pos: Vector3, size: Vector3, color: Color, mat: Material = null) -> void:
+	var m: Material = mat if mat != null else _mat(color)
+	if _batch_open:
+		# every _box call site parents to the segment, so the batch needs no
+		# parent key; _flush_boxes owns the emit at _build_segment's end
+		var key: int = m.get_instance_id()
+		if not _batch.has(key):
+			_batch[key] = {"mat": m, "boxes": []}
+		((_batch[key] as Dictionary)["boxes"] as Array).append({"p": pos, "s": size})
+		return
+	# unbatched path (nothing builds here today outside a segment; kept as the
+	# plain v1 stamp): same-size boxes share ONE BoxMesh resource
+	var bm: Variant = _box_meshes.get(size, null)
+	if not (bm is BoxMesh):
+		bm = BoxMesh.new()
+		(bm as BoxMesh).size = size
+		_box_meshes[size] = bm
 	var mi := MeshInstance3D.new()
-	var bm := BoxMesh.new()
-	bm.size = size
 	mi.mesh = bm
-	mi.material_override = mat if mat != null else _mat(color)
+	mi.material_override = m
 	mi.position = pos
 	parent.add_child(mi)
+
+
+## One MultiMeshInstance3D per material, the segment's whole architecture in a
+## handful of draw calls. custom_aabb is set explicitly so culling never
+## guesses at an instance cloud's extent.
+func _flush_boxes(seg: Node3D) -> void:
+	if _batch.is_empty():
+		return
+	if _unit_box == null:
+		_unit_box = BoxMesh.new()
+		_unit_box.size = Vector3.ONE
+	for key in _batch:
+		var g: Dictionary = _batch[key]
+		var boxes: Array = g["boxes"]
+		var mm := MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.mesh = _unit_box
+		mm.instance_count = boxes.size()
+		var lo := Vector3(INF, INF, INF)
+		var hi := Vector3(-INF, -INF, -INF)
+		for i in range(boxes.size()):
+			var b: Dictionary = boxes[i]
+			var p: Vector3 = b["p"]
+			var s: Vector3 = b["s"]
+			mm.set_instance_transform(i, Transform3D(Basis.from_scale(s), p))
+			lo = lo.min(p - s * 0.5)
+			hi = hi.max(p + s * 0.5)
+		var mmi := MultiMeshInstance3D.new()
+		mmi.name = "ArchBatch"
+		mmi.multimesh = mm
+		mmi.material_override = g["mat"]
+		mmi.custom_aabb = AABB(lo, hi - lo)
+		seg.add_child(mmi)
+	_batch.clear()
 
 func _add_col(body: StaticBody3D, pos: Vector3, size: Vector3) -> void:
 	var cs := CollisionShape3D.new()
@@ -1142,6 +1226,7 @@ func _build_segment() -> void:
 	var solid := StaticBody3D.new()
 	solid.name = "Collision"
 	seg.add_child(solid)
+	_batch_open = true    # every _box until _flush_boxes joins the batch
 	# — the vestibule: an open lobby joining the previous museum's exit gap to
 	# this one's entry gap. Closing strips seal the width jump on both edges
 	# (a fully sealed strip at the very first segment, where nothing is behind).
@@ -1379,6 +1464,8 @@ func _build_segment() -> void:
 			(", %d queued" % _court_queue.size()) if not _court_queue.is_empty() else ""])
 		court_depth = _build_courtyard(seg, solid, w, tile.size(), zbase,
 			joint, wall_col, m_wall)
+	_flush_boxes(seg)
+	_batch_open = false
 	_segments.append({"node": seg, "z0": _next_z, "z1": _next_z + float(h) + float(VESTIBULE_H) + float(court_depth), "index": _seg_index, "w": w})
 	_next_z += float(h) + float(VESTIBULE_H) + float(court_depth)
 	_seg_index += 1
@@ -2377,6 +2464,9 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		"cell": Vector2i(int(cell.get("x", 0)), zbase + int(cell.get("y", 0))),
 		"token": lookup,
 	})
+	_vis_records.append({"node": node,
+		"p": Vector3(float(cell.get("x", 0)) + 0.5, 0.0,
+			float(zbase + int(cell.get("y", 0))) + 0.5)})
 	if _edit_mode:
 		# The record's `tile_cell` is the PLAN's frame (segment z minus the
 		# vestibule), because that is the key an override must carry to match
@@ -2865,7 +2955,40 @@ func _process(_delta: float) -> void:
 		var old: Dictionary = _segments.pop_front()
 		var n: Node3D = old["node"]
 		n.queue_free()
+	_vis_timer += _delta
+	if _vis_timer >= 0.3:
+		_vis_timer = 0.0
+		_cull_artifacts()
 	_track_acoustic()
+
+
+## Near-artifact rendering: one cheap pass, a few times a second, over every
+## stamped artifact. Hysteresis (show < 32 m, hide > 38 m) keeps the boundary
+## from flickering; freed records (their segment scrolled off behind) are
+## pruned in place.
+func _cull_artifacts() -> void:
+	var eye: Vector3 = _eye_pos()
+	var i: int = 0
+	_vis_hidden = 0
+	while i < _vis_records.size():
+		var r: Dictionary = _vis_records[i]
+		var node: Node3D = r.get("node") as Node3D
+		if node == null or not is_instance_valid(node):
+			_vis_records.remove_at(i)
+			continue
+		if node.has_meta("em_hand_removed"):
+			i += 1
+			continue
+		var p: Vector3 = r.get("p")
+		var d: float = Vector2(p.x - eye.x, p.z - eye.z).length()
+		if node.visible:
+			if d > ART_HIDE_M:
+				node.visible = false
+		elif d < ART_SHOW_M:
+			node.visible = true
+		if not node.visible:
+			_vis_hidden += 1
+		i += 1
 
 ## The room the walker is actually standing in decides the reverb. Crossing a
 ## threshold retunes the bed and fires the doorway whoosh; the module is a
@@ -3020,7 +3143,12 @@ func _edit_handle_key(key: int) -> bool:
 					var ov: Dictionary = _mod_editor.call(
 						"override_for", _edit_records, _edit_sel, _edit_overrides)
 					ov["remove"] = true
-				(r2.get("node") as Node3D).visible = false
+				# the meta stops _cull_artifacts resurrecting the preview:
+				# culling owns visible for DISTANCE reasons only, and a node
+				# the hand removed must stay gone at any range
+				var rn: Node3D = r2.get("node") as Node3D
+				rn.set_meta("em_hand_removed", true)
+				rn.visible = false
 				_edit_dirty = true
 		KEY_BRACKETLEFT, KEY_BRACKETRIGHT:
 			# palette scoped to the chapter the CAMERA stands in — walk into a

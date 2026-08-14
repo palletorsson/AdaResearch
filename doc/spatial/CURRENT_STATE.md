@@ -29,6 +29,34 @@ ran `substr(17)`, eating the path's first byte — the open failed and the pool
 fell back to the full spine, silently. Found the first time anyone used the
 flag; fixed, and the false exit now names which file refused.
 
+**Second session, 08-14: the left stick, and the frame budget.**
+
+- **"Can't move forward" was a wall the hardware finally hit.** Nothing in the
+  repo touched input in the window — but `joystick_deadzone_fix.gd` has forced
+  a 0.5 y-deadzone since January to mask a left stick already drifting to
+  0.42 at rest. Sticks wear monotonically; when the reachable forward throw
+  sank toward the wall, forward died. Replaced with CALIBRATION: the script
+  samples each stick at rest at boot, writes per-tracker offsets into
+  `XRToolsUserSettings.stick_rest_offsets`, and `get_adjusted_vector2`
+  recentres + rescales so a stick resting at +0.42 recovers the full −1..1;
+  deadzone drops to 0.2. Calibration failure falls back to the old wall
+  EXACTLY. Watch the log for `JoystickCalibrate:` — rest offsets at boot and
+  rolling reach per stick; ONE session gives the wear numbers. Two writers
+  live on these values (this calibrator + the XR Tools settings UI/save) —
+  the hidden-dependencies clause, documented in the script.
+- **Render load, measured then cut** (`probe_em_render_load.gd`, 2 segments):
+  3,078 mesh instances = 2,118 architecture + 960 artifact; 59 lights / 11
+  shadowed (em_lighting's budget holds — lights were never the problem).
+  Two changes, both desktop+VR: (1) **near-artifact rendering** — artifacts
+  show < 32 m, hide > 38 m (hysteresis), never during proof shots, physics
+  and hand-removals untouched; 19 of 40 hidden at spawn. (2) **box batching**
+  — one MultiMesh per material per segment, unit cube scaled per instance:
+  architecture instances 2,118 → 741 (+10 batch nodes), ~1,400 draw calls
+  gone, doubled in stereo. Parity shot confirms the interior renders
+  identically. Heaviest artifact subtrees recorded by the probe (LabRoom 146
+  meshes, Matrix4x4Viewer 142 …) — per-artifact simplification is the next
+  lever if needed.
+
 **Open findings (not fixed today).**
 
 - **Autopilot on the full plan FAILS at z 545**, inside the forces segment
