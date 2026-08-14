@@ -26,7 +26,12 @@ extends Node
 ## min/max reach per stick every few seconds while you push it. One VR
 ## session tells you exactly how worn each axis is.
 
-@export var calibrate: bool = true
+# OFF by default (Palle, 2026-08-14): the 0.5 wall was live for every month
+# movement worked, so it is not the suspect — the gadgets are, and bare-hands
+# mode tests that. With calibrate off this script applies the fallback wall
+# exactly as it has since January; flip to true to try rest-offset
+# calibration (the machinery below and the user_settings.gd patch stay).
+@export var calibrate: bool = false
 @export var deadzone_after_calibration: float = 0.2
 @export var fallback_y_deadzone: float = 0.5   # the January wall, kept as fallback
 @export var fallback_x_deadzone: float = 0.3

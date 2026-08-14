@@ -13,7 +13,7 @@ extends XRToolsStaging
 @export var preferred_grid_map: String = "Lab"
 @export var skip_menu: bool = false  # Skip menu and load directly into lab
 @export var spawn_map_loader_button_actions: PackedStringArray = PackedStringArray()  # disabled 2026-06-03 — no controller button spawns the VR map-loader kiosk (was ["primary_click"]; B is reserved for catalyst map-save). Re-add to restore.
-@export var movement_only_hands: bool = false  # strip every hand gadget from loaded scenes' rigs, keep locomotion — see commons/scenes/bare_hands.gd (also: --bare-hands, or user://movement_only_hands.txt)
+@export var movement_only_hands: bool = true  # DEFAULT ON (Palle, 2026-08-14): just movement, no gadgets. Strips every hand gadget from loaded scenes' rigs, keeps locomotion — see commons/scenes/bare_hands.gd. Uncheck to restore the full gadget rig.
 @export var spawn_map_loader_keyboard_key: Key = KEY_B
 @export var map_loader_spawn_distance: float = 1.8
 @export var map_loader_spawn_height: float = 1.6
