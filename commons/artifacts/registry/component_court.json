@@ -1,0 +1,56 @@
+{
+	"artifacts": {
+		"component_court": {
+			"scene": "res://commons/artifacts/component_court/component_court.tscn",
+			"category": "vectors",
+			"description": "One vector and four ways of taking it apart, asked of the four artifacts that share the word - the components walked tip to tail, the same three leaving the origin, the solid they span, and the vector left whole. The tip never moves.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 3,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			},
+			"dna": {
+				"promoted": "2026-08-14",
+				"stage": "synthesis",
+				"axes": {
+					"decomposition": [
+						"chain",
+						"star",
+						"box",
+						"none"
+					],
+					"obliquity": [
+						"square",
+						"leaning",
+						"skewed"
+					]
+				},
+				"default": "decomposition=chain, obliquity=square. chain is the default of basis_vectors_rig (gd:75) and the reading force_cube's own comment describes most fully; square is the orthogonal basis every member ships with, so the default frame is the picture the family already draws.",
+				"sources": [
+					"basis_vectors_rig",
+					"example_1_5_vector_magnitude_vr",
+					"vector_magnitude_demo",
+					"force_cube"
+				],
+				"framing": 0.6,
+				"note": "WHAT THE FOUR VALUES MEAN, from the members' dispatch and not their prose. chain = the components walked TIP TO TAIL, origin -> x -> xy -> tip; force_cube:132-136 says 'the last leg lands exactly on the resultant's point'. star = the three terms of the sum EACH LEAVING THE ORIGIN; basis_vectors_rig:694-697 names them that way. box = the twelve edges of the solid the components span, whose body diagonal IS the vector; force_cube:138-141 says 'the box closes on the force itself'. none = a bare `pass`, the claim left to the arrow. CHAIN AND STAR DRAW THE SAME THREE VECTORS AND DIFFER ONLY IN WHERE EACH STARTS - addition as a journey against addition as a fact.",
+				"kin": "ONE MEMBER SHIPS THE UNION AND CALLS IT `both`. force_cube:42 declares (both, chain, box, none) with no `star`, and its default branch (:145-153) draws the dashed staircase AND the three legs from the origin - chain UNION star, named as if it were a fifth thing. Rather than argue about it, bay 4 IS force_cube and draws `both` when the sweep asks it for `star`. The refusal is the mark. vector_magnitude_demo declares only (star, chain, none) and has no `box`; that subset is honest and is drawn as an absence.",
+				"declines": "`obliquity` is this artifact's own word. The family NAMES the interaction and never sweeps it: basis_vectors_rig:699-702 says its box is 'a rectangular box under an orthogonal frame, a parallelepiped under a skewed one, which is where the two axes read each other'. Refused as axes: magnitude and any per-member scalar, because each belongs to one bay; and any animation, because the evidence is one still.",
+				"still_note": "THE COMPONENTS ARE SOLVED, NOT SCALED. _basis() runs Cramer's rule so that u+v+w equals RESULTANT exactly at every obliquity - without that solve, shearing the basis would move the tip and the two axes would be entangled, making every number a fact about a moving target. The three `none` frames being byte-identical is the check that the solve holds. No plinth: two members put components below y=0 under a skewed basis and a slab would hide the part that moved.",
+				"predicted_relationship": "THE TIP NEVER MOVES, and it is falsifiable without reference to any percentage. The resultant arrow is drawn AFTER the match block in all four members and no branch touches it, so across all four decomposition values at a fixed obliquity the resultant must land on the same pixels. FALSIFYING THRESHOLD: mask the resultant arrow and diff it across the four decompositions - any displacement at all means a branch is touching what it must not. The stronger form is already the closest pair: at decomposition=none the three obliquities must be byte-identical, because nothing but the resultant is drawn and the resultant is solved to be constant.",
+				"predicted_degeneracy": "PREDICTED BEFORE ANY CAPTURE, and enumerated rather than reasoned at. Wave 11 predicted residue_hall's closest pair by hand along one axis and named the wrong pair entirely - the measured closest was on the OTHER axis. tools/predict_pairs.py now enumerates every pair, same-axis and cross-axis, ranked by a drawn-ink proxy. That is what found this. THE CLOSEST PAIR IS A DESIGNED THREE-WAY BYTE IDENTITY: decomposition=none at obliquity square, leaning and skewed are ONE PICTURE, at 0.00%. At `none` nothing is drawn but the resultant arrow, and _basis() solves the components by Cramer's rule so that u+v+w equals RESULTANT exactly at every obliquity. The tip does not move, so the frame does not change. IT IS A TWO-SIDED GATE AND IT TESTS THE ARTIFACT'S CENTRAL CLAIM. Anything ABOVE 0.00% on those three pairs means obliquity is leaking into the resultant - the solve is wrong and the two axes are entangled, which would make every other number here a fact about a moving target. It cannot be undershot. THE QUIETEST PAIR THAT IS NOT A DESIGNED IDENTITY is CROSS-AXIS: decomposition=chain at square against decomposition=star at leaning, proxy delta 1.121 against 3.105 for the quietest same-axis pair. Chain and star draw the SAME THREE COMPONENT VECTORS and differ only in where each one starts, so their ink totals are close by construction, and a mild shear moves the total about as far as re-rooting the legs does. Predicted floor for that pair: 0.9% of FRAME. THIN-EDGE CAVEAT, per the domain limit wave 10 measured: the legs are 0.009 m and the box edges 0.004 m, which at this framing is roughly 1.5-3.5 px. A sub-floor return on the cross-axis pair does not on its own mean broken - it means the difference is landing under the antialiaser. The three-way null is not subject to that caveat: it is an equality, and equalities cannot be softened by smoothing.",
+				"placements": 0,
+				"measured": "MEASURED 2026-08-14, first capture. 12 variants, rejected=0. Peak 1.41% of frame, subject 1.914% - verify_batch reads it as sparse-not-small (box 80 x 22% of frame, 10% full) and says do not tighten. The verdict line is 'faint, under 2% of the frame moved'. THE DESIGNED NULL HELD EXACTLY, AND IT IS THE POINT. predicted_degeneracy named a three-way byte identity at decomposition=none across all three obliquities. Measured: all three pairs at 0.000%, and they are the ONLY three zeros in the sweep. At `none` nothing is drawn but the resultant, and _basis() solves the components by Cramer's rule so u+v+w equals RESULTANT at every obliquity - so a non-zero there would have meant obliquity leaking into the answer and every other number being a fact about a moving target. It cannot be undershot, and it was not. THE CENTRAL CLAIM IS VERIFIED PIXEL-EXACT, not by eye. predicted_relationship said the resultant must land on the same pixels at every decomposition because it is drawn after the match block and no branch touches it. Taking the `none` frame's subject mask as the resultant and asking what fraction of it survives in every other frame: 100.00% in all twelve. The tip does not move. THE PREDICTION FOUND THE PAIR BECAUSE IT WAS ENUMERATED, NOT REASONED AT. Wave 11 predicted residue_hall by hand along one axis and named the wrong pair; tools/predict_pairs.py now ranks every pair, same-axis and cross-axis, and it put the three-way null first. It was less good on the runner-up: it named the cross-axis pair chain/square vs star/leaning (floor 0.9%, measured 0.665%, 0.74x - inside the thin-edge caveat this entry pre-registered) while the true quietest non-zero pairs are star/skewed against the three `none` frames at 0.274%. Under a skewed basis the solved coefficients shorten the legs, so `star` there is nearly `none` plus three stubs. The ink proxy does not know that a shear shortens what it measures the length of. THE ARTIFACT IS FAINT AND LEGIBLE, WHICH ARE DIFFERENT THINGS. Peak 1.41% is under the 2% BITES line, because the whole court is made of 0.009 m legs and 0.004 m box edges - roughly 1.5-3.5 px. But the sheet reads without a label: chain is a staircase, star is three legs from one point, box shears from rectangles into parallelograms between square and skewed - the interaction basis_vectors_rig:699-702 names and no member ever swept - and bay 4 draws its union when asked for a `star` it does not have. Thickening the marks would raise the number and is not done here, because the number is honest: these four artifacts ARE made of thin arrows, and a court that fattened them would be measuring a different family."
+			}
+		}
+	}
+}
