@@ -1,238 +1,269 @@
 #!/usr/bin/env python3
-"""
-place_syntheses.py — put the synthesized families into the world.
+"""place_syntheses.py — stand each synthesis in the map where its own sources already stand.
 
-THE GAP THIS CLOSES, measured by the description audit: exactly ONE map in 2,049 places any
-artifact at a non-default DNA value, so 911 declared axes exist in the source tree and on
-the test bench and nowhere a player walks. The audit's own recommendation was placement by
-CONTRAST PAIR — the shipped default beside its measured family, one room per sequence —
-"roughly 24 edits, not 5,900."
+WHY THIS EXISTS. Forty-two syntheses have been built across eleven waves and NOT ONE of them
+is placed in a map. They have been swept, measured, predicted, critiqued and published to
+galleries, and no player has ever met one. That is item 4 of doc/spatial/HANDOVER.md and it
+is the largest thing still open in the DNA lineage.
 
-TWO MOVES, both from the verdict file tools/synthesize_heroes.py derived:
+THE PLACEMENT RULE, and it is derived rather than chosen: a synthesis goes where the most of
+its OWN SOURCES already stand. A synthesis exists to make an argument no single member can
+make, so the room that already holds the members is the room where the argument can be
+checked against them. Measured over the corpus, 40 of 42 syntheses have such a room and six
+have one holding every source they declare.
 
-  1. SYNTHESIS_HALL — one new map, built from the verdicts: the strongest SERIES stand as
-     rails (rotated 90 so each rail runs into the hall's depth and the aisle stays
-     walkable), the strongest HEROES in a facing row. The whole DNA system in one walk.
+THE BODY WINS OVER THE AUTHORED ROOM, which is the corpus's standing ruling and matters here
+more than usual: 9 of 39 measured syntheses declare a `footprint_cells` too small for their
+own measured AABB, `foresight_range` worst at 12 declared against 7x19 = 133 needed. Placing
+on the authored number would wedge an oversized body into an undersized hole, so this tool
+reads `measurements.aabb_size` and refuses anything with no measurement at all.
 
-  2. CONTRAST PAIRS — for each spine sequence, the strongest measured family whose subject
-     is PLACED in that sequence gets one compact hero stand, inserted into the map where
-     the subject itself stands, on a free floor cell nearby. The stand next to the shipped
-     instances is the contrast: the default and the argued form in one room.
-
-Every touched map is validated with the pathfinder afterwards; a map that fails is
-reverted and reported, never shipped broken.
+WHAT IT WILL NOT DO:
+  - overwrite an occupied cell, ever
+  - place on anything but floor (structure height 1)
+  - place on or beside a spawn or a teleporter — those cells are the map's entry and exit
+  - place a body it has not measured
 
 Usage:
-  python tools/place_syntheses.py                 # hall + contrast pairs, validate, report
-  python tools/place_syntheses.py --hall-only
-  python tools/place_syntheses.py --dry-run
+  python tools/place_syntheses.py --dry-run          # report only
+  python tools/place_syntheses.py --apply --limit=6  # place at most six
+  python tools/place_syntheses.py --apply --token=ladder_hall
 """
 from __future__ import annotations
-import json
-import subprocess
-import sys
 import collections
-from pathlib import Path
+import glob
+import json
+import math
+import pathlib
+import re
+import sys
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = pathlib.Path(__file__).resolve().parents[1]
 MAPS = REPO / "commons" / "maps"
-VERDICTS = json.loads((REPO / "commons" / "data" / "dna_synthesis.json")
-                      .read_text(encoding="utf-8"))["verdicts"]
+REG = REPO / "commons" / "artifacts" / "registry"
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from check_dna_declarations import registry  # noqa: E402
-
-# Meta-artifacts that instantiate other artifacts; a synthesis of a synthesis is recursion,
-# not curation.
-META = {"lineage_vitrine", "sturtevant_bench", "synthesis_stand", "curation_station"}
+## Cells a body may not stand on or next to. A synthesis dropped on the spawn is a synthesis
+## the player is standing inside at t=0.
+KEEP_CLEAR = 1
 
 
-def extent_of(tok: str, reg: dict) -> float:
-    e = reg.get(tok)
-    if not e:
-        return 1.2
-    m = (e[0].get("measurements") or {})
-    s = m.get("aabb_size")
-    if isinstance(s, list) and len(s) == 3 and max(s) > 0.05:
-        return max(float(s[0]), float(s[2]))
-    return 1.2
-
-
-def spine_sequences() -> list:
-    sp = json.loads((MAPS / "curriculum_spine.json").read_text(encoding="utf-8"))
-    return [s["name"] for s in sorted(sp["spine"]["sequences"], key=lambda x: x.get("order", 0))]
-
-
-def sequence_maps(name: str) -> list:
-    f = MAPS / "sequences" / f"{name}.json"
-    if not f.exists():
-        return []
-    d = json.loads(f.read_text(encoding="utf-8"))
-    body = list(d.get("sequences", {}).values())
-    maps = (body[0].get("maps") if body else []) or []
-    return [m if isinstance(m, str) else (m.get("name") or m.get("map_name") or "") for m in maps]
-
-
-def load_map(name: str):
-    p = MAPS / name / "map_data.json"
-    if not p.exists():
-        return None, None
-    return p, json.loads(p.read_text(encoding="utf-8"))
-
-
-def placements_in(md: dict) -> dict:
-    out = collections.defaultdict(list)
-    rows = (md.get("layers") or {}).get("interactables") or []
-    for y, row in enumerate(rows):
-        for x, c in enumerate(row if isinstance(row, list) else []):
-            if isinstance(c, str) and c.strip():
-                out[c.split("#")[0].split(":")[0].strip()].append((x, y))
+def registry() -> dict:
+    out = {}
+    for f in sorted(glob.glob(str(REG / "*.json"))):
+        try:
+            d = json.loads(pathlib.Path(f).read_text(encoding="utf-8")).get("artifacts", {})
+        except Exception:
+            continue
+        for t, e in (d or {}).items():
+            if isinstance(e, dict):
+                out[t] = e
     return out
 
 
-def free_cell_near(md: dict, ax: int, ay: int):
-    """A walkable, empty cell near (ax, ay) whose 4-neighbourhood is clear of artifacts —
-    a hero slab is ~2 m and must not intersect the subject it contrasts with."""
-    lay = md["layers"]
-    H, W = len(lay["structure"]), len(lay["structure"][0])
-
-    def ok(x, y):
-        if not (0 <= x < W and 0 <= y < H):
-            return False
-        try:
-            if int(str(lay["structure"][y][x]).strip() or 0) < 1:
-                return False
-        except ValueError:
-            return False
-        if str(lay["utilities"][y][x]).strip() or str(lay["interactables"][y][x]).strip():
-            return False
-        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < W and 0 <= ny < H and str(lay["interactables"][ny][nx]).strip():
-                return False
-        return True
-
-    for r in range(2, 7):
-        for dy in range(-r, r + 1):
-            for dx in range(-r, r + 1):
-                if max(abs(dx), abs(dy)) != r:
-                    continue
-                if ok(ax + dx, ay + dy):
-                    return ax + dx, ay + dy
-    return None
+def syntheses(reg: dict) -> dict:
+    return {t: e for t, e in reg.items()
+            if str((e.get("dna") or {}).get("stage", "")) == "synthesis"}
 
 
-def build_hall(reg: dict, dry: bool) -> str:
-    series = sorted((v for v in VERDICTS.values() if v["verdict"] == "series"
-                     and v["prop"] not in META and extent_of(v["prop"], reg) <= 3.2),
-                    key=lambda v: -v["span"][1])[:7]
-    used = {v["prop"] for v in series}
-    heroes = sorted((v for v in VERDICTS.values() if v["verdict"] == "hero"
-                     and v["prop"] not in META and v["prop"] not in used
-                     and extent_of(v["prop"], reg) <= 4.0),
-                    key=lambda v: -v["score"])[:8]
-
-    W, H = 42, 20
-    blank = lambda fill: [[fill] * W for _ in range(H)]
-    structure = blank("1")
-    utilities = blank(" ")
-    inter = blank(" ")
-    utilities[H - 3][2] = "sp"
-    utilities[H - 3][W - 2] = "t"
-    # Series rails across the north half, rotated 90 so each rail runs in DEPTH and the
-    # southern aisle stays walkable past all of them.
-    xs = [4 + i * 5 for i in range(len(series))]
-    for x, v in zip(xs, series):
-        inter[7][x] = f"synthesis_stand:90#subject:{v['prop']}#mode:series"
-    # Heroes in a facing row along the south aisle.
-    hx = [3 + i * 5 for i in range(len(heroes))]
-    for x, v in zip(hx, heroes):
-        inter[H - 6][x] = f"synthesis_stand#subject:{v['prop']}#mode:hero"
-
-    md = {
-        "map_info": {
-            "name": "Synthesis Hall",
-            "lookup_name": "Synthesis_Hall",
-            "version": "2.0",
-            "format": "json",
-            # The grid PLACES NOTHING without declared dimensions: it iterates the declared
-            # depth, and a missing block reads as 0x0 — the first build of this hall loaded
-            # 2702 artifacts, read all 20 rows, and placed zero interactables.
-            "dimensions": {"width": W, "depth": H, "max_height": 4},
-            "description": (
-                "Every promoted family's one best public form, placed. Seven series rails run "
-                "north — families whose measurements form a gradient away from the shipped "
-                "default, shown default-first then by measured departure, because for these "
-                "the progression is the argument. Eight heroes face them — families where one "
-                "variant is the argument, pinned, with the focus number that chose it on the "
-                "plaque. The verdicts are derived from the swept renders by "
-                "tools/synthesize_heroes.py; nothing in this room was picked by taste."),
-        },
-        "settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": True,
-                     "enable_physics": True,
-                     "background": {"type": "sky", "color": [0.55, 0.62, 0.55]}},
-        "layers": {"structure": structure, "utilities": utilities, "interactables": inter},
-    }
-    out = MAPS / "Synthesis_Hall"
-    if not dry:
-        out.mkdir(exist_ok=True)
-        (out / "map_data.json").write_text(json.dumps(md, indent=1), encoding="utf-8")
-    print(f"Synthesis_Hall: {len(series)} series rails + {len(heroes)} heroes"
-          + (" (dry)" if dry else ""))
-    for v in series:
-        print(f"   rail  {v['prop']:30s} {v['axis']}: {' -> '.join(v['order'])}")
-    for v in heroes:
-        print(f"   hero  {v['prop']:30s} {v['score']*100:5.1f}%  "
-              + " ".join(f"{k}={x}" for k, x in v["hero"].items()))
-    return "Synthesis_Hall"
+def footprint(entry: dict):
+    """Cells the MEASURED body needs, or None when it has never been measured."""
+    m = entry.get("measurements") or {}
+    s = m.get("aabb_size")
+    if not (isinstance(s, list) and len(s) == 3):
+        return None
+    return max(1, math.ceil(s[0] - 0.001)), max(1, math.ceil(s[2] - 0.001))
 
 
-def contrast_pairs(reg: dict, dry: bool) -> list:
-    touched = []
-    for seq in spine_sequences():
-        best = None
-        for mname in sequence_maps(seq):
-            p, md = load_map(mname)
-            if md is None:
+def token_of(cell: str) -> str:
+    c = str(cell).strip()
+    return re.split(r"[:#]", c)[0] if c else ""
+
+
+def map_files() -> list:
+    return sorted(glob.glob(str(MAPS / "*" / "map_data.json")))
+
+
+def host_map(sources: list, placed: dict) -> tuple:
+    """The map holding the most of this synthesis's declared sources."""
+    cnt = collections.Counter()
+    for s in sources:
+        for m in placed.get(s, ()):
+            cnt[m] += 1
+    best = cnt.most_common(1)
+    return best[0] if best else (None, 0)
+
+
+def source_centroid(layers: dict, sources: list):
+    """Where this synthesis's own sources are standing in this map, as a row/col centre.
+
+    THE POINT OF PLACING NEAR THEM. A synthesis is the comparison its members cannot make
+    alone, so it has to be READABLE AGAINST THEM — a walker who meets the hall thirty cells
+    away from the four benches it is arguing about is meeting a different artifact. A
+    first-free scan does not do this: it drops bodies in whichever corner it reaches first,
+    which is legal, cheap and curatorially useless.
+    """
+    il = layers.get("interactables") or []
+    want = set(sources)
+    pts = []
+    for r, row in enumerate(il):
+        for c, cell in enumerate(row):
+            if token_of(cell) in want:
+                pts.append((r, c))
+    if not pts:
+        return None
+    return (sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts))
+
+
+def free_slot(layers: dict, w: int, d: int, near=None):
+    """Top-left of a w x d rectangle that is all floor, all empty, and clear of spawn/exit.
+
+    When `near` is given, the CLOSEST such rectangle to that point wins rather than the first
+    one scanning finds.
+    """
+    st = layers.get("structure") or []
+    ut = layers.get("utilities") or []
+    il = layers.get("interactables") or []
+    if not st or not il:
+        return None
+    rows, cols = len(st), len(st[0])
+
+    def blocked(r, c):
+        if r < 0 or c < 0 or r >= rows or c >= len(st[r]):
+            return True
+        if str(st[r][c]).strip() != "1":          # floor only
+            return True
+        if r < len(il) and c < len(il[r]) and str(il[r][c]).strip():
+            return True                            # occupied
+        return False
+
+    def near_traffic(r, c):
+        for rr in range(r - KEEP_CLEAR, r + KEEP_CLEAR + 1):
+            for cc in range(c - KEEP_CLEAR, c + KEEP_CLEAR + 1):
+                if 0 <= rr < len(ut) and 0 <= cc < len(ut[rr]):
+                    if str(ut[rr][cc]).strip():    # spawn, teleporter, ramp, anything
+                        return True
+        return False
+
+    best = None
+    best_score = None
+    for r in range(rows):
+        for c in range(cols):
+            ok = True
+            for rr in range(r, r + d):
+                for cc in range(c, c + w):
+                    if blocked(rr, cc) or near_traffic(rr, cc):
+                        ok = False
+                        break
+                if not ok:
+                    break
+            if not ok:
                 continue
-            for tok, cells in placements_in(md).items():
-                v = VERDICTS.get(tok)
-                if not v or v["verdict"] not in ("hero", "series") or tok in META:
-                    continue
-                score = v.get("score") or (v.get("span") or [0, 0])[1]
-                if best is None or score > best[0]:
-                    best = (score, seq, mname, tok, cells[0], v)
-        if best is None:
-            print(f"  {seq:26s} — no measured family placed in its maps")
-            continue
-        _, _, mname, tok, (ax, ay), v = best
-        p, md = load_map(mname)
-        if f"#subject:{tok}" in json.dumps(md["layers"]["interactables"]):
-            print(f"  {seq:26s} — already has a stand for {tok}")
-            continue
-        cell = free_cell_near(md, ax, ay)
-        if cell is None:
-            print(f"  {seq:26s} — no free cell near {tok} in {mname}")
-            continue
-        x, y = cell
-        md["layers"]["interactables"][y][x] = f"synthesis_stand#subject:{tok}#mode:hero"
-        if not dry:
-            p.write_text(json.dumps(md, indent=1), encoding="utf-8")
-        touched.append(mname)
-        print(f"  {seq:26s} -> {mname}: hero of {tok} at ({x},{y})"
-              f" beside its shipped placement" + (" (dry)" if dry else ""))
-    return touched
+            if near is None:
+                return r, c
+            # distance from the footprint's own centre to the sources' centre
+            cy, cx = r + (d - 1) / 2.0, c + (w - 1) / 2.0
+            score = (cy - near[0]) ** 2 + (cx - near[1]) ** 2
+            if best_score is None or score < best_score:
+                best_score, best = score, (r, c)
+    return best
 
 
 def main() -> int:
-    dry = "--dry-run" in sys.argv
-    hall_only = "--hall-only" in sys.argv
+    apply = "--apply" in sys.argv
+    limit = 0
+    only = ""
+    for a in sys.argv[1:]:
+        if a.startswith("--limit="):
+            limit = int(a.split("=", 1)[1])
+        elif a.startswith("--token="):
+            only = a.split("=", 1)[1]
+
     reg = registry()
-    touched = [build_hall(reg, dry)]
-    if not hall_only:
-        print("\ncontrast pairs, one per spine sequence:")
-        touched += contrast_pairs(reg, dry)
-    print(f"\n{len(touched)} map(s) written" + (" (dry)" if dry else ""))
+    syn = syntheses(reg)
+
+    placed = collections.defaultdict(set)
+    for mp in map_files():
+        name = pathlib.Path(mp).parent.name
+        try:
+            d = json.loads(pathlib.Path(mp).read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for row in ((d.get("layers") or {}).get("interactables") or []):
+            for cell in row:
+                t = token_of(cell)
+                if t:
+                    placed[t].add(name)
+
+    rows = []
+    for t, e in sorted(syn.items()):
+        if only and t != only:
+            continue
+        if placed.get(t):
+            rows.append((t, "-", "already placed in " + sorted(placed[t])[0], None))
+            continue
+        fp = footprint(e)
+        if fp is None:
+            rows.append((t, "-", "NO MEASUREMENT - refusing to place a body of unknown size", None))
+            continue
+        srcs = (e.get("dna") or {}).get("sources") or []
+        hm, n = host_map([str(s) for s in srcs], placed)
+        if not hm:
+            rows.append((t, "-", "no source of this synthesis is placed anywhere", None))
+            continue
+        mp = MAPS / hm / "map_data.json"
+        d = json.loads(mp.read_text(encoding="utf-8"))
+        near = source_centroid(d.get("layers") or {}, [str(s) for s in srcs])
+        slot = free_slot(d.get("layers") or {}, fp[0], fp[1], near)
+        if slot is None:
+            rows.append((t, hm, f"no free {fp[0]}x{fp[1]} floor clear of traffic", None))
+            continue
+        dist = "" if near is None else " %.1f cells from its sources" % math.dist(
+            (slot[0] + (fp[1] - 1) / 2.0, slot[1] + (fp[0] - 1) / 2.0), near)
+        rows.append((t, hm, f"{fp[0]}x{fp[1]} at ({slot[0]},{slot[1]}) · {n}/{len(srcs)} sources here ·{dist}",
+                     (mp, slot, fp, [str(s) for s in srcs])))
+
+    print(f"{'synthesis':<24}{'host map':<38}plan")
+    print("-" * 108)
+    doable = [r for r in rows if r[3]]
+    for t, hm, why, plan in rows:
+        print(f"{t:<24}{str(hm):<38}{why}")
+    print("-" * 108)
+    print(f"{len(doable)} placeable of {len(rows)} considered")
+
+    if not apply:
+        print("\n(dry run — pass --apply to write)")
+        return 0
+
+    done = 0
+    touched = set()
+    for t, hm, why, plan in rows:
+        if not plan:
+            continue
+        if limit and done >= limit:
+            break
+        mp, _slot, (w, d), srcs = plan
+        # RE-READ AND RE-SOLVE AT WRITE TIME. The plan above was computed against the map as
+        # it was before ANY placement, so two syntheses sharing a host can be handed the same
+        # cell — pedagogical_sketchbook and subtraction_suite both wanted (0,1) of the same
+        # map on the first run. Re-solving here means each one sees its predecessor.
+        data = json.loads(mp.read_text(encoding="utf-8"))
+        layers = data.get("layers") or {}
+        near = source_centroid(layers, srcs)
+        slot = free_slot(layers, w, d, near)
+        if slot is None:
+            print(f"  SKIP {t}: its slot in {hm} was taken by an earlier placement")
+            continue
+        r, c = slot
+        # The token sits on the TOP-LEFT cell of its footprint; the grid places one token per
+        # cell and the artifact's own body fills the rest, as every other placement here does.
+        layers["interactables"][r][c] = f"{t}:0:0"
+        mp.write_text(json.dumps(data, indent=1) + "\n", encoding="utf-8")
+        print(f"  placed {t} in {hm} at ({r},{c})")
+        touched.add(hm)
+        done += 1
+    if touched:
+        print("\nmaps touched: " + " ".join(sorted(touched)))
+    print(f"\n{done} placed. Now run: python tools/map_pathfinder.py check <MapName> --verbose")
     return 0
 
 
