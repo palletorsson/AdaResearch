@@ -134,36 +134,41 @@ extends RefCounted
 # endless_museum.gd from here would be a preload cycle) ──────────────────────
 const VESTIBULE_H := 4
 const LOBBY_W := 17
-const WALL_H := 3.0
+# THE wall height — the ONE owner. endless_museum.gd and em_lighting.gd read
+# this constant by preload (this file imports neither, so no cycle). Raised
+# 3.0 -> 4.5 on Palle's walk verdict (2026-08-14): "the wall-work is the
+# right size but walls and ceiling should be higher for a museum."
+const WALL_H := 4.5
 
 # ── skirting ────────────────────────────────────────────────────────────────
 const SKIRT_H := 0.13         # 130 mm — a gallery plinth, not a domestic 100 mm
 const SKIRT_T := 0.045        # centred on the wall face: 22.5 mm proud, 22.5 mm buried
 
 # ── cornice / wall head ─────────────────────────────────────────────────────
-const CORNICE_BOTTOM := 2.72
-const CORNICE_H := 0.28       # top lands exactly on the 3.00 wall head
+const CORNICE_H := 0.28       # top lands exactly on the wall head
+const CORNICE_BOTTOM := WALL_H - CORNICE_H
 const CORNICE_T := 0.12       # 60 mm overhang — enough to throw a line at 55 deg sun
 
 # ── ceiling ─────────────────────────────────────────────────────────────────
 # soffit is set ABOVE the lighting rig's fixture plane on purpose. em_lighting.gd
-# hangs its gear at RIG_Y 2.78 and its top-light at SKY_Y 2.92; a soffit at 3.14
-# with ribs bottoming at 2.96 leaves every one of those fixtures in open air.
-const CEIL_SOFFIT := 3.14
+# hangs its gear at WALL_H - 0.22 and derives its heights from THIS file, so
+# every fixture stays in open air at any wall height. Everything below is
+# arithmetic on WALL_H — one number moves the whole ceiling.
+const SHADOW_GAP := 0.14      # wall head -> soffit, read-only constant
+const CEIL_SOFFIT := WALL_H + SHADOW_GAP
 const CEIL_THICK := 0.26
-const CEIL_TOP := 3.40
-const SHADOW_GAP := 0.14      # 3.00 wall head -> 3.14 soffit, read-only constant
+const CEIL_TOP := CEIL_SOFFIT + CEIL_THICK
 const BAY := 3.0              # structural module, shared with the floor seams
 const SLOT_W := 0.55          # open daylight slot per bay
 const RIB_W := 0.20
-const RIB_DROP := 0.18        # rib underside = 2.96, clear of SKY_Y 2.92
+const RIB_DROP := 0.18        # rib underside = soffit - 0.18, clear of the rig plane
 
 # ── door reveals ────────────────────────────────────────────────────────────
-const DOOR_HEAD := 2.10       # standard door head. 450 mm over the capsule top
+const DOOR_HEAD := 2.80       # museum door head (was 2.10 under the 3.0 wall — domestic)
 const HEAD_LINING := 0.12
 const LINING_T := 0.05        # jamb lining depth: a 1-cell door clears 900 mm
 const MAX_DOOR_CELLS := 3     # wider than 3 m is a room opening, not a door
-const PORTAL_HEAD := 2.40     # the vestibule threshold is monumental, not domestic
+const PORTAL_HEAD := 3.20     # the vestibule threshold is monumental, not domestic (was 2.40 at WALL_H 3.0)
 const PORTAL_LINING := 0.08
 const PORTAL_HEAD_LINING := 0.16
 

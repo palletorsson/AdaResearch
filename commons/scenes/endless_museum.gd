@@ -68,6 +68,11 @@ const CROWNS := "res://commons/data/museum_crowns.json"
 const RELATIONS := "res://commons/data/artifact_relations.json"
 const TextScreenRes = preload("res://commons/ui/text_screen.gd")
 const EYE := 1.65
+# wall height, read from its ONE owner (em_detail.gd) so the stamped walls,
+# the cornice, the ceiling and the lighting rig can never disagree again.
+# 3.0 -> 4.5 on Palle's first walk: "higher for a museum."
+const _DetailLib := preload("res://commons/scenes/em/em_detail.gd")
+const WALL_H: float = _DetailLib.WALL_H
 const WALK_SPEED := 4.0
 const BUILD_AHEAD_M := 24.0
 const KEEP_BEHIND_M := 70.0
@@ -1076,6 +1081,45 @@ func _sm(role: String) -> Material:
 ## `mat` wins when the material library gave us one for this role; `color` is
 ## the v1 flat fallback, kept per-surface so a partially loaded library still
 ## dresses what it can.
+## A standing figure, 1.75 m, grey — the scale reference Palle asked for
+## after the first walk ("add a standing humanoid so we can see the scale of
+## the space, like in the endless module system"). One per vestibule, off
+## the walk line, NO collider: a ruler, not an obstacle. Blunt 8-head-canon
+## capsules — default_body_bay makes the ARGUMENT about default bodies;
+## this one only states a height. Culled with the artifacts.
+func _stamp_scale_figure(seg: Node3D, at: Vector3, zbase: int) -> void:
+	var fig := Node3D.new()
+	fig.name = "ScaleFigure"
+	fig.position = at
+	seg.add_child(fig)
+	var m: Material = _mat(Color(0.58, 0.57, 0.55))
+	for s in [
+		[Vector3(-0.09, 0.47, 0), 0.07, 0.94],   # legs
+		[Vector3(0.09, 0.47, 0), 0.07, 0.94],
+		[Vector3(0, 1.17, 0), 0.14, 0.72],       # torso
+		[Vector3(-0.23, 1.13, 0), 0.05, 0.62],   # arms
+		[Vector3(0.23, 1.13, 0), 0.05, 0.62],
+	]:
+		var cap := CapsuleMesh.new()
+		cap.radius = float((s as Array)[1])
+		cap.height = float((s as Array)[2])
+		var mi := MeshInstance3D.new()
+		mi.mesh = cap
+		mi.material_override = m
+		mi.position = (s as Array)[0]
+		fig.add_child(mi)
+	var head := SphereMesh.new()
+	head.radius = 0.105
+	head.height = 0.21
+	var hm := MeshInstance3D.new()
+	hm.mesh = head
+	hm.material_override = m
+	hm.position = Vector3(0, 1.64, 0)
+	fig.add_child(hm)
+	_vis_records.append({"node": fig,
+		"p": Vector3(at.x, 0.0, float(zbase) + at.z)})
+
+
 func _box(parent: Node3D, pos: Vector3, size: Vector3, color: Color, mat: Material = null) -> void:
 	var m: Material = mat if mat != null else _mat(color)
 	if _batch_open:
@@ -1150,8 +1194,86 @@ func _wall_at(seg: Node3D, solid: StaticBody3D, cells: Dictionary, x: int, z: in
 	if runs_on:
 		cells[Vector2i(x, z)] = true
 		return
-	_box(seg, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1), col, mat)
-	_add_col(solid, Vector3(x + 0.5, 1.5, z + 0.5), Vector3(1, 3.0, 1))
+	_box(seg, Vector3(x + 0.5, WALL_H / 2.0, z + 0.5), Vector3(1, WALL_H, 1), col, mat)
+	_add_col(solid, Vector3(x + 0.5, WALL_H / 2.0, z + 0.5), Vector3(1, WALL_H, 1))
+
+## Passages: a 1-cell gap in a wall run is a 1 m door — domestic, and in VR it
+## reads tighter still. Palle's walk verdict: "the passages are too small."
+## Every 1-cell door widens to 2 m by converting ONE flanking wall cell to
+## floor. This runs on the TILE, before anything derives from it, so walls,
+## colliders, seals, walk cells and em_detail's door list all agree — the
+## alternative (widening at stamp time) would be a second author of the plan.
+## A flank is taken only when it is a straight run cell (no perpendicular
+## wall through it — removing a T-junction would merge two rooms) and the
+## cell beyond still frames the door. Candidates are collected from the
+## ORIGINAL tile and applied once, so widening cannot cascade.
+func _widen_doors(tile_in: Array) -> Array:
+	var h: int = tile_in.size()
+	var tile: Array = []
+	for row in tile_in:
+		tile.append((row as Array).duplicate())
+	var opened: int = 0
+	for y in range(h):
+		var row: Array = tile_in[y]
+		for x in range(row.size()):
+			if String(row[x]) == "4":
+				continue
+			var wl: bool = x > 0 and String(row[x - 1]) == "4"
+			var wr_: bool = x + 1 < row.size() and String(row[x + 1]) == "4"
+			var wu: bool = y > 0 and String((tile_in[y - 1] as Array)[x]) == "4"
+			var wd: bool = y + 1 < h and String((tile_in[y + 1] as Array)[x]) == "4"
+			if wl and wr_ and not (wu or wd):
+				# gap in a wall running along x — widen along x
+				if _flank_ok(tile_in, x + 1, y, 1, 0):
+					(tile[y] as Array)[x + 1] = "1"
+					opened += 1
+				elif _flank_ok(tile_in, x - 1, y, -1, 0):
+					(tile[y] as Array)[x - 1] = "1"
+					opened += 1
+			elif wu and wd and not (wl or wr_):
+				# gap in a wall running along z — widen along z
+				if _flank_ok(tile_in, x, y + 1, 0, 1):
+					(tile[y + 1] as Array)[x] = "1"
+					opened += 1
+				elif _flank_ok(tile_in, x, y - 1, 0, -1):
+					(tile[y - 1] as Array)[x] = "1"
+					opened += 1
+	if opened > 0:
+		print("[em-doors] %d one-cell door(s) widened to 2 m" % opened)
+	return tile
+
+
+## True when the wall cell at (x,y) may become floor: it is a straight run
+## cell of the same wall line (no perpendicular wall through it) and the next
+## cell along (dx,dy) is still wall, so the widened door keeps a jamb.
+func _flank_ok(tile_in: Array, x: int, y: int, dx: int, dy: int) -> bool:
+	var h: int = tile_in.size()
+	if y < 0 or y >= h:
+		return false
+	var row: Array = tile_in[y]
+	if x < 0 or x >= row.size() or String(row[x]) != "4":
+		return false
+	# no perpendicular continuation through the flank
+	if dx != 0:
+		if y > 0 and String((tile_in[y - 1] as Array)[x]) == "4":
+			return false
+		if y + 1 < h and String((tile_in[y + 1] as Array)[x]) == "4":
+			return false
+	else:
+		if x > 0 and String(row[x - 1]) == "4":
+			return false
+		if x + 1 < row.size() and String(row[x + 1]) == "4":
+			return false
+	# the cell beyond still frames the door
+	var bx: int = x + dx
+	var by: int = y + dy
+	if by < 0 or by >= h:
+		return false
+	var brow: Array = tile_in[by]
+	if bx < 0 or bx >= brow.size():
+		return false
+	return String(brow[bx]) == "4"
+
 
 ## Greedy longest-first: take the longest straight run anywhere in the cell set,
 ## emit it as ONE box, remove its cells, repeat. Removing a run can cut a
@@ -1204,8 +1326,8 @@ func _stamp_wall_runs(seg: Node3D, solid: StaticBody3D, cells: Dictionary,
 		for i in range(best_n):
 			left.erase(Vector2i(best_x + ddx * i, best_z + ddz * i))
 		var span: float = float(best_n)
-		var size: Vector3 = Vector3(span, 3.0, 1.0) if best_axis == 0 else Vector3(1.0, 3.0, span)
-		var pos: Vector3 = Vector3(best_x + span * 0.5, 1.5, best_z + 0.5) if best_axis == 0 else Vector3(best_x + 0.5, 1.5, best_z + span * 0.5)
+		var size: Vector3 = Vector3(span, WALL_H, 1.0) if best_axis == 0 else Vector3(1.0, WALL_H, span)
+		var pos: Vector3 = Vector3(best_x + span * 0.5, WALL_H / 2.0, best_z + 0.5) if best_axis == 0 else Vector3(best_x + 0.5, WALL_H / 2.0, best_z + span * 0.5)
 		_box(seg, pos, size, col, mat)
 		_add_col(solid, pos, size)
 		emitted += 1
@@ -1248,7 +1370,7 @@ func _build_segment() -> void:
 		_first_spec = spec
 	var w: int = spec["w"]
 	var h: int = spec["h"]
-	var tile: Array = spec["tile"]
+	var tile: Array = _widen_doors(spec["tile"])
 	var seg := Node3D.new()
 	seg.name = "Seg%d_%s" % [_seg_index, spec["key"]]
 	seg.position = Vector3(0, 0, _next_z)
@@ -1300,6 +1422,7 @@ func _build_segment() -> void:
 		# the tile is sparse. Gated on _vr: the desktop segment is untouched.
 		_add_col(solid, Vector3(LOBBY_W / 2.0, -0.1, VESTIBULE_H / 2.0),
 			Vector3(LOBBY_W, 0.2, VESTIBULE_H))
+	_stamp_scale_figure(seg, Vector3(2.0, 0.0, VESTIBULE_H * 0.5), zbase)
 	for zr in range(VESTIBULE_H):
 		for sx in [0, LOBBY_W - 1]:
 			_wall_at(seg, solid, wcells, int(sx), zr, wall_col, m_wall, wr)

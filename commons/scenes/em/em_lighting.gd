@@ -107,16 +107,19 @@ const MAX_SHADOW_CASTERS := 6
 # lie the moment that landed — with SKY_Y at 2.92 every daylight fixture in the
 # building was mounted 40 mm under a solid lid, and the blown ellipse smeared
 # across the soffit in every proof shot was a slide projector aimed at plaster.
-const WALL_H := 3.0
+# heights derive from em_detail — the ONE owner of the wall height, so the
+# rig plane and soffit stay in agreement at any scale (no preload cycle:
+# em_detail imports neither this file nor the museum)
+const _Detail := preload("res://commons/scenes/em/em_detail.gd")
+const WALL_H := _Detail.WALL_H
 # Fixture plane. BELOW the wall top on purpose: the walls then occlude between
 # rooms, which is what gives an enfilade its dark-bright-dark rhythm. Put the
-# fixtures above 3.0 and every room lights every other room.
-const RIG_Y := 2.78
-# em_detail.gd's section, duplicated here rather than imported (importing it
-# would be a preload cycle). If those numbers move, THESE MUST MOVE.
-#   CEIL_SOFFIT 3.14   CEIL_TOP 3.40   rib underside 2.96
-const CEILING_SOFFIT := 3.14
-const CEILING_TOP := 3.40
+# fixtures above the wall head and every room lights every other room.
+const RIG_Y := WALL_H - 0.22
+# the ceiling section, now genuinely IMPORTED from em_detail (the old comment
+# said importing would cycle — it does not; em_detail imports nothing of ours)
+const CEILING_SOFFIT := _Detail.CEIL_SOFFIT
+const CEILING_TOP := _Detail.CEIL_TOP
 # Top-light plane — a skylight sits ABOVE the roof, not under the ceiling. At
 # CEILING_TOP + 0.22 the daylight family is genuinely outside the building and
 # reaches the floor only through em_detail's 550 mm slots, which is what finally

@@ -101,6 +101,27 @@ z unbounded — still a net under a player who escapes every catch slab.
 `test_em_bounds.gd` proves it on the REAL staged scene the menu loads
 (reshape landed, check still active, z=500 legal).
 
+**Sixth session, 08-14: museum scale.** Palle walked and loved it — and the
+verdict was "too small: wall-work right, passages too small, walls and
+ceiling higher for a museum." Three changes:
+
+- **One number owns the height now.** `em_detail.WALL_H` 3.0 → **4.5** is
+  the single owner; em_lighting and endless_museum read it by preload (the
+  old "importing would cycle" comment was wrong — em_detail imports
+  nothing), and the cornice, soffit (`WALL_H + 0.14`), ceiling top, rig
+  plane (`WALL_H − 0.22`) and sky plane are all arithmetic on it. Door head
+  2.10 → 2.80, portal head 2.40 → 3.20.
+- **Passages widen at the TILE.** `_widen_doors` converts one flanking wall
+  cell of every 1-cell door to floor (straight-run flanks only — never a
+  T-junction, always keeping a jamb), BEFORE anything derives, so walls,
+  colliders, seals, walk cells and the door list agree. 3 doors widened in
+  the first two segments; widening only opens, never closes, so walks
+  strictly improve.
+- **A standing figure, 1.75 m,** grey capsule canon, one per vestibule at
+  (2, VESTIBULE_H/2), no collider — a ruler, not an obstacle (and not
+  default_body_bay, which is an argument). Culled with the artifacts;
+  probe confirms 2 figures in 2 segments.
+
 **Open findings (not fixed today).**
 
 - **Autopilot on the full plan FAILS at z 545**, inside the forces segment
