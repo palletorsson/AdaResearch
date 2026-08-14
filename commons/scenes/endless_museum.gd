@@ -1491,6 +1491,48 @@ func _build_courtyard(seg: Node3D, solid: StaticBody3D, w: int, tile_h: int,
 			continue
 		var cw: int = clampi(int(dims[0]), 3, w)
 		var cd: int = maxi(int(dims[1]), 3)
+		if String(c.get("venue", "courtyard")) == "balcony":
+			# ── THE BALCONY VOID — the aerial venue, spike 08's other half.
+			# The walker keeps a side gallery (x 0..3, walkable); a 1.1 m rail
+			# with collision divides gallery from VOID — floorless, unwalkable,
+			# with a dark catch slab 4 m down so physics has a bottom. The
+			# float hangs over the void with its base above head height. Its
+			# floor claim is zero, which is the whole venue: physical_overlap
+			# cannot fire on a body that owns no floor.
+			var deck_w: int = 4
+			_box(seg, Vector3(deck_w / 2.0, -0.1, zcur + cd / 2.0),
+				Vector3(deck_w, 0.2, cd), Color(0.145, 0.155, 0.145), m_deck)
+			for zz in range(zcur, zcur + cd):
+				for x in range(1, deck_w):
+					_walk_cells[Vector2i(x, zbase + zz)] = true
+			# the rail: one run, collision on, so the walker cannot step into air
+			_box(seg, Vector3(float(deck_w), 0.55, zcur + cd / 2.0),
+				Vector3(0.25, 1.1, cd), wall_col, m_wall)
+			_add_col(solid, Vector3(float(deck_w), 0.55, zcur + cd / 2.0),
+				Vector3(0.25, 1.1, cd))
+			# the void's bottom, far below — matte dark, a shadow not a floor
+			_box(seg, Vector3((deck_w + w) / 2.0, -4.1, zcur + cd / 2.0),
+				Vector3(w - deck_w, 0.2, cd), Color(0.05, 0.05, 0.06), m_deck)
+			# outer parapets frame the joint on both edges, open sky above
+			for zz in range(zcur, zcur + cd):
+				for sx in [0, w - 1]:
+					_box(seg, Vector3(sx + 0.5, 0.55, zz + 0.5),
+						Vector3(1, 1.1, 1), wall_col, m_wall)
+					_add_col(solid, Vector3(sx + 0.5, 0.55, zz + 0.5),
+						Vector3(1, 1.1, 1))
+			# the float, suspended over the void centre, base above head height
+			var vcell: Dictionary = {"x": int((deck_w + w) / 2.0),
+				"y": zcur + int(cd / 2.0), "rank": 2, "top": 2.2}
+			if _stamp(seg, String(c.get("scene", "")), String(c.get("token", "")),
+					vcell, zbase, 1, {}, false, 0.0, float(c.get("rotation", 0.0))):
+				_deal_stats["balconies"] = int(_deal_stats.get("balconies", 0)) + 1
+				print("[em-court] %s HANGS over the void at z %d..%d"
+					% [String(c.get("token", "?")), zcur, zcur + cd])
+			else:
+				print("[em-court] balcony %s refused — %s"
+					% [String(c.get("token", "?")), _stamp_refusal])
+			zcur += cd
+			continue
 		if cw < int(dims[0]):
 			print("[em-court] %s: court width %d clamped to corridor %d"
 				% [String(c.get("token", "?")), int(dims[0]), w])
@@ -1552,7 +1594,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 	for row_v in rows:
 		var row: Dictionary = row_v as Dictionary
 		var venue := String(row.get("venue", ""))
-		if venue == "courtyard" and (row.get("court", []) as Array).size() >= 2:
+		if (venue == "courtyard" or venue == "balcony") 				and (row.get("court", []) as Array).size() >= 2:
 			# A court resident. Not stamped here — the court's ground does not
 			# exist yet; _build_segment builds the joint after the tile and
 			# stamps the resident onto it. Collected with its scene resolved by
@@ -1565,6 +1607,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 			courts.append({"token": ctok, "scene": cscene,
 				"court": row.get("court", []),
 				"rotation": float(row.get("rotation", 0.0)),
+				"venue": venue,
 				"chapter": String(entry.get("sequence", ""))})
 			continue
 		if venue != "interior":

@@ -707,7 +707,12 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
             # plan.width - 2*apron; the walker needs one free column beside a
             # centred body, so the widest crossable body is tile_w - 3.
             tile_w = plan.width - 2 * getattr(plan, "apron", 0)
-            if tile_w >= 6 and int(_m.ceil(contract.body_m[0])) > tile_w - 3:
+            # The crossability rule is COURTYARD-only. A balcony body HANGS —
+            # its floor claim is zero, the walker keeps the side gallery, and
+            # refusing a wide float for severing a floor it never touches is
+            # how weather_vector_field (12.4 m of hanging vectors) ended up
+            # refused from the one venue built for it.
+            if contract.preferred_venue == "courtyard"                     and tile_w >= 6 and int(_m.ceil(contract.body_m[0])) > tile_w - 3:
                 ladder.append(Trace(
                     "escalation", "fail",
                     f"courtyard refused: a {contract.body_m[0]:.1f} m body "
