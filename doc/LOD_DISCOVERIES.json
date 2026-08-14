@@ -486,6 +486,24 @@
       "topic": "dna gate exit code",
       "insight": "check_dna_declarations flagged a token when ANY script in its scene was untracked, so the extends-walk reached the gitignored XR-tools base and called 5 sound declarations broken; now asked per axis, fail-closed. A piped exit code (| tail; echo $?) hid the red gate for 2 days -- use ${PIPESTATUS[0]}.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-08-13T14:41:05.282155+00:00",
+      "topic": "em_autopilot",
+      "insight": "ada_run/em_autopilot.json is a TRACKED verdict file that only its own gate rewrites; the committed ok=true/z=102.04 was written 08-06 against a museum that did not yet consume em_plan.json, so Gate F could fail for days while the repo read green. Re-run the gate, never trust the committed verdict.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-14T07:25:09.931659+00:00",
+      "topic": "dna declarations",
+      "insight": "check_dna_declarations exits with the BROKEN count only, so axes promoted in code but absent from every registry sit green below the summary line — mc_base.plumb, marchingcave.plumb, marchingcubes_portal_landscape.landform were unreachable by the sweep. Unreachable is not the same failure as lying, and only one is gated.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-14T07:25:10.083514+00:00",
+      "topic": "endless museum autopilot",
+      "insight": "Godot's stdout is NOT capturable from the v4.6 Desktop exe (non-console build) — redirecting gives an empty file. file_logging is on in project.godot, so the real log is %APPDATA%/Roaming/Godot/app_userdata/Ada Research Zero One/logs/godot.log. That log is how the courtyard prints (court width 16 clamped to corridor 15) become readable.",
+      "lod": 3
     }
   ]
 }

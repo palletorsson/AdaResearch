@@ -1,0 +1,46 @@
+{
+ "timestamp": "2026-08-14T09:04:00",
+ "phase": "baseline",
+ "head_before": "fbbdccf8a  (read 09:07, docs(state): add-palette landed...)",
+ "head_after": "7bb5e6cbd  (read 09:17, docs(state): the balcony void built and walker-proven)",
+ "straddled_commit": true,
+ "straddle_note": "THIS BASELINE IS PROVISIONAL. A concurrent interactive session saved commons/scenes/endless_museum.gd at 09:11:29 — inside this phase — and committed ccb1b206e + 7bb5e6cbd at 09:15. No single tree produced all four scorers below. Recorded per prop-027, which this breath opened after observing exactly this.",
+ "pipeline_summary": {
+  "global_avg": 6.083,
+  "sequences": 24,
+  "complete": 1,
+  "at_stage_6_vr_testing": 23,
+  "at_stage_8": 1,
+  "derivation": "(23*6 + 8)/24 = 146/24",
+  "measured_at": "09:05 and re-measured 09:23, identical"
+ },
+ "heat_map_top_5": [
+  "museum 80 — active (6 recent commits) [OWNED BY A CONCURRENT SESSION THIS BREATH]",
+  "release gates 60 — deep discovery",
+  "dna gate exit code 60 — deep discovery  [ACTED ON THIS BREATH]",
+  "em_autopilot 60 — deep discovery  [YIELDED: lock contention]"
+ ],
+ "garden_health": {
+  "total_artifacts": 2570,
+  "voiced": 1838,
+  "embodied": 559,
+  "voice_coverage_pct": 71,
+  "embodiment_rate_pct": 30,
+  "phantom_limbs": 1065
+ },
+ "release_gates": {
+  "overall": "FAIL",
+  "enabled_passing": "5/6",
+  "A_sequence_contract": "PASS",
+  "B_registry_integrity": "PASS (missing_map_ready 29)",
+  "C_map_validation": "PASS (A 1884 / B 350 / C 186 / F 0)",
+  "D_lab_continuity": "PASS",
+  "E_museum_templates": "PASS (900/900)",
+  "F_museum_walkthrough": "FAIL — ok=false z=44.65/102.0, 26 cells unlearned, 3 of 4 segments",
+  "F_caveat": "Measured against the straddled tree described above: the walk booted 09:12, 43 s after the concurrent session's mid-edit save and 3 min BEFORE its two commits. Their own 09:14 run wrote ok=true z=144.06/144.0 at museums_target=2, but Gate F runs 3. Gate F's status at current HEAD is UNKNOWN in both directions."
+ },
+ "dna_declaration_gate": {
+  "before": "1053 declared / 1040 verified / 0 broken",
+  "after": "1056 declared / 1043 verified / 0 broken"
+ }
+}
