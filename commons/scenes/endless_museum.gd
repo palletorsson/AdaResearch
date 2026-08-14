@@ -172,6 +172,18 @@ var _court_queue: Array = []       # [{token, scene, court, rotation, chapter}]
 # negotiated its cast into the Uffizi, so the segment fell back to the dealer
 # and the whole chapter was dealt instead of stamped. Two places, one number.
 var _plan_owner: Dictionary = {}
+# ── the curator's hand (--em-edit) ──────────────────────────────────────────
+# Records of every stamped artifact (node + plan identity) so the editor can
+# select and preview; overrides are the TRUTH and live in
+# ada_run/em_overrides.json, applied by _deal_from_plan on top of the plan.
+# The live node move is only a preview of what the next build will do.
+var _edit_mode: bool = false
+var _edit_records: Array = []      # [{node, token, tile_cell, rotation, chapter}]
+var _edit_sel: int = -1
+var _edit_overrides: Array = []
+var _edit_dirty: bool = false
+var _edit_hud: Label = null
+var _mod_editor = null
 const COURT_JOINT_MAX_DEPTH := 40  # metres of court per joint before the next building
 var _force_vr: bool = false       # --em-vr forces the headset path
 var _vr: bool = false             # resolved once in _ready
@@ -264,6 +276,11 @@ func _ready() -> void:
 	var preload_n: int = _shot_segments if _shot_path != "" else 2
 	for i in range(preload_n):
 		_build_segment()
+	if _edit_mode and _mod_has(_mod_editor, "hud"):
+		_edit_hud = _mod_editor.call("hud", self)
+		_edit_hud.text = _mod_editor.call(
+			"hud_text", _edit_records, _edit_sel, _edit_overrides, _edit_dirty)
+		print("[em-edit] editor armed: %d editable placement(s)" % _edit_records.size())
 	# the number the whole set-deal pass exists to move: v1 stamped at most 8
 	# objects per segment for every one of the twenty-six buildings.
 	var segs_built: int = int(_deal_stats.get("segments", 0))
@@ -326,6 +343,8 @@ func _parse_args() -> void:
 	for a in args:
 		if a.begins_with("--em-plan"):
 			_plan_path = EM_PLAN if a == "--em-plan" else a.substr(10)
+		elif a == "--em-edit":
+			_edit_mode = true
 		elif a.begins_with("--em-seed="):
 			_seed = int(a.substr(10))
 		elif a.begins_with("--em-order-file="):
@@ -368,6 +387,7 @@ func _load_modules() -> void:
 	_mod_mult = _load_module("em_multiples.gd")
 	_mod_budget = _load_module("em_budget.gd")
 	_mod_plinths = _load_module("em_plinths.gd")
+	_mod_editor = _load_module("em_editor.gd")
 	_mod_props = _load_module("em_props.gd")
 	_mod_pool = _load_module("em_pool.gd")
 	print("[endless_museum] modules: mats=%s light=%s env=%s detail=%s feel=%s audio=%s" % [
@@ -1353,6 +1373,7 @@ func _build_segment() -> void:
 	# questions and a single total hides all of them: an artifact is the
 	# curriculum, a plinth is whether you can SEE it, a prop is whether the wall
 	# is a wall, a guest is whether the pool is wider than the spine.
+	seg.set_meta("em_chapter", seg_seq)
 	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d/%d (%d leads, %d relatives, %d repeats, %d guests) + %d plinths + %d props, z %.0f..%.0f, lights %d" % [
 		_seg_index - 1, spec["key"], spec["museum"], seg_seq if seg_seq != "" else "-",
 		placed, int(deal.get("max_objects", 0)), int(deal.get("leads", 0)),
@@ -1422,6 +1443,10 @@ func _load_plan() -> void:
 						_plan_owner[sq] = mk
 	print("[em-plan] %d museum(s), %d chapter row(s) planned from %s"
 		% [_plan_db.size(), _plan_by_chapter.size(), _plan_path])
+	if _mod_has(_mod_editor, "load_file"):
+		_edit_overrides = _mod_editor.call("load_file")
+		if not _edit_overrides.is_empty():
+			print("[em-edit] %d hand override(s) loaded" % _edit_overrides.size())
 
 
 ## Stamp one museum exactly as the negotiator resolved it.
@@ -1551,6 +1576,37 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 			continue
 		var tx := int(tc[0])
 		var tz := int(tc[1])
+		# ── THE CURATOR'S HAND. An override matches this row by (token, from);
+		# it moves, turns, or removes the placement, and each application is
+		# SAID. An override whose row the plan no longer places is counted idle
+		# at the end — reported, never guessed at.
+		var yaw_override: float = float(row.get("rotation", 0.0))
+		var removed_by_hand := false
+		for ov_v in _edit_overrides:
+			var ov: Dictionary = ov_v as Dictionary
+			if String(ov.get("token", "")) != tok:
+				continue
+			var fr: Array = ov.get("from", [])
+			if fr.size() < 2 or int(fr[0]) != tx or int(fr[1]) != tz:
+				continue
+			ov["_matched"] = true
+			if bool(ov.get("remove", false)):
+				removed_by_hand = true
+				print("[em-edit] %s removed by hand at [%d,%d]" % [tok, tx, tz])
+				break
+			var to: Array = ov.get("to", [])
+			if to.size() >= 2 and (int(to[0]) != tx or int(to[1]) != tz):
+				print("[em-edit] %s moved by hand [%d,%d] -> [%d,%d]"
+					% [tok, tx, tz, int(to[0]), int(to[1])])
+				tx = int(to[0])
+				tz = int(to[1])
+			if ov.has("rotation") and absf(float(ov["rotation"]) - yaw_override) > 0.5:
+				print("[em-edit] %s turned by hand %.0f -> %.0f"
+					% [tok, yaw_override, float(ov["rotation"])])
+				yaw_override = float(ov["rotation"])
+			break
+		if removed_by_hand:
+			continue
 		if tx < 0 or tz < 0 or tz >= tile.size() or tx >= (tile[tz] as Array).size():
 			off_tile += 1
 			continue
@@ -1585,9 +1641,16 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		# the plan's 507 rows carry a non-zero turn (270:27, 90:20, 180:14) and
 		# all of them were stamped facing 0.
 		if _stamp(seg, scene, tok, cell, zbase, 1, {}, false, 0.0,
-				float(row.get("rotation", 0.0))):
+				yaw_override):
 			placed += 1
 
+	var idle: int = 0
+	for ov_v in _edit_overrides:
+		if String((ov_v as Dictionary).get("chapter", "")) == String(entry.get("sequence", "")) 				and not (ov_v as Dictionary).get("_matched", false):
+			idle += 1
+	if idle > 0:
+		print("[em-edit] %d override(s) idle for %s — their rows are no longer in the plan"
+			% [idle, String(entry.get("sequence", ""))])
 	print("[em-plan] %s: stamped %d interior, %d exterior not hostable%s%s%s"
 		% [key, placed, exterior,
 		   (", %d off-tile" % off_tile) if off_tile > 0 else "",
@@ -2231,6 +2294,14 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 		"cell": Vector2i(int(cell.get("x", 0)), zbase + int(cell.get("y", 0))),
 		"token": lookup,
 	})
+	if _edit_mode:
+		# The record's `tile_cell` is the PLAN's frame (segment z minus the
+		# vestibule), because that is the key an override must carry to match
+		# a plan row on the next build. Chapter resolves lazily off seg meta.
+		_edit_records.append({"node": node, "token": lookup,
+			"tile_cell": [int(cell.get("x", 0)),
+				int(cell.get("y", 0)) - VESTIBULE_H],
+			"rotation": yaw_deg, "chapter": "", "seg": seg})
 	return true
 
 
@@ -2773,6 +2844,9 @@ func _physics_process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if _shot_path != "":
 		return
+	if _edit_mode and event is InputEventKey and event.pressed and not event.echo:
+		if _edit_handle_key((event as InputEventKey).keycode):
+			return
 	if event is InputEventMouseButton and event.pressed:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
@@ -2787,6 +2861,78 @@ func _input(event: InputEvent) -> void:
 		_pitch = clampf(_pitch - event.relative.y * 0.002, -1.2, 1.2)
 		_player.rotation = Vector3(0.0, _yaw, 0.0)
 		_cam.rotation = Vector3(_pitch, 0.0, 0.0)
+
+## The curator's keys. True = consumed. The live node moves as a PREVIEW; the
+## override row is the truth, applied by _deal_from_plan on the next build.
+func _edit_handle_key(key: int) -> bool:
+	if _mod_editor == null:
+		return false
+	match key:
+		KEY_E:
+			_edit_sel = _mod_editor.call("pick", _cam, _edit_records)
+			if _edit_sel >= 0:
+				var r: Dictionary = _edit_records[_edit_sel]
+				# chapter resolves lazily off the segment's meta
+				var sg: Node = r.get("seg")
+				if String(r.get("chapter", "")) == "" and sg != null 						and is_instance_valid(sg) and sg.has_meta("em_chapter"):
+					r["chapter"] = String(sg.get_meta("em_chapter"))
+		KEY_LEFT:  _edit_nudge(-1, 0)
+		KEY_RIGHT: _edit_nudge(1, 0)
+		KEY_UP:    _edit_nudge(0, -1)
+		KEY_DOWN:  _edit_nudge(0, 1)
+		KEY_Q:     _edit_rotate(-90.0)
+		KEY_R:     _edit_rotate(90.0)
+		KEY_DELETE:
+			if _edit_sel >= 0:
+				var r2: Dictionary = _edit_records[_edit_sel]
+				var ov: Dictionary = _mod_editor.call(
+					"override_for", _edit_records, _edit_sel, _edit_overrides)
+				ov["remove"] = true
+				(r2.get("node") as Node3D).visible = false
+				_edit_dirty = true
+		KEY_F5:
+			if _mod_editor.call("save", _edit_overrides):
+				_edit_dirty = false
+				print("[em-edit] %d override(s) saved" % _edit_overrides.size())
+		_:
+			return false
+	if _edit_hud != null:
+		_edit_hud.text = _mod_editor.call(
+			"hud_text", _edit_records, _edit_sel, _edit_overrides, _edit_dirty)
+	return true
+
+
+func _edit_nudge(dx: int, dz: int) -> void:
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	var node: Node3D = r.get("node") as Node3D
+	if node == null or not is_instance_valid(node):
+		return
+	var ov: Dictionary = _mod_editor.call(
+		"override_for", _edit_records, _edit_sel, _edit_overrides)
+	ov["to"] = [int((ov.get("to", [0, 0]) as Array)[0]) + dx,
+		int((ov.get("to", [0, 0]) as Array)[1]) + dz]
+	node.position += Vector3(float(dx), 0.0, float(dz))
+	r["tile_cell"] = [int((r.get("tile_cell", [0, 0]) as Array)[0]) + dx,
+		int((r.get("tile_cell", [0, 0]) as Array)[1]) + dz]
+	_edit_dirty = true
+
+
+func _edit_rotate(deg: float) -> void:
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	var node: Node3D = r.get("node") as Node3D
+	if node == null or not is_instance_valid(node):
+		return
+	var ov: Dictionary = _mod_editor.call(
+		"override_for", _edit_records, _edit_sel, _edit_overrides)
+	ov["rotation"] = fposmod(float(ov.get("rotation", 0.0)) + deg, 360.0)
+	node.rotation_degrees.y = float(ov["rotation"])
+	r["rotation"] = float(ov["rotation"])
+	_edit_dirty = true
+
 
 ## The negative test: drive the walker straight at the west wall for two
 ## seconds. A gliding camera sails through x=1.0 into the void; a body stops at
