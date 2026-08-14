@@ -65,13 +65,47 @@ def syntheses(reg: dict) -> dict:
             if str((e.get("dna") or {}).get("stage", "")) == "synthesis"}
 
 
+## No room in this corpus is larger than this. A body measuring past it has not been
+## measured, it has ESCAPED — and the difference matters because the two failures look
+## identical to a placer that only checks for absence.
+SANE_MAX_M = 60.0
+
+## A synthesis is the comparison its members cannot make alone, so it has to be READABLE
+## against them. Past this many cells it is simply a different artifact in the same postcode:
+## the walker meets it without meeting what it argues about. Measured cases that forced the
+## rule — grain_block offered a slot 101.6 cells from its sources, slack_yard 18.5.
+MAX_CELLS_FROM_SOURCES = 12.0
+
+## Auto_* is the generator's scratch output, not a curated room. Auto_Point_One is 506 rows
+## by 17 with no display name; a body placed there is a body nobody walks to.
+SKIP_MAP_PREFIXES = ("Auto_",)
+
+
 def footprint(entry: dict):
-    """Cells the MEASURED body needs, or None when it has never been measured."""
+    """Cells the MEASURED body needs, or None when it cannot be trusted.
+
+    REFUSING AN ABSURD MEASUREMENT IS AS IMPORTANT AS REFUSING A MISSING ONE, and that was
+    learned the expensive way. A corpus-wide re-measure turned 39 artifacts that had recorded
+    [0,0,0] into boxes of 1000 m, 10000 m and one of 9.4e19 m — runaway particles and float
+    overflow, not bodies. The earlier version of this function refused only `None`, so every
+    one of those would have been placed: a 10 km artifact dropped into a 13-cell room, and
+    the map would still have passed the pathfinder because the grid never sees the mesh.
+    """
     m = entry.get("measurements") or {}
     s = m.get("aabb_size")
     if not (isinstance(s, list) and len(s) == 3):
         return None
-    return max(1, math.ceil(s[0] - 0.001)), max(1, math.ceil(s[2] - 0.001))
+    try:
+        w, h, d = float(s[0]), float(s[1]), float(s[2])
+    except (TypeError, ValueError):
+        return None
+    if not all(math.isfinite(v) for v in (w, h, d)):
+        return None
+    if max(w, h, d) > SANE_MAX_M:
+        return None
+    if max(w, h, d) <= 0.0:
+        return None
+    return max(1, math.ceil(w - 0.001)), max(1, math.ceil(d - 0.001))
 
 
 def token_of(cell: str) -> str:
@@ -83,14 +117,23 @@ def map_files() -> list:
     return sorted(glob.glob(str(MAPS / "*" / "map_data.json")))
 
 
-def host_map(sources: list, placed: dict) -> tuple:
-    """The map holding the most of this synthesis's declared sources."""
+def host_maps(sources: list, placed: dict) -> list:
+    """Every map holding at least one source, richest first.
+
+    RETURNING A LIST RATHER THAN A WINNER, because the first version took
+    `most_common(1)` and gave up when that one map had no room — residue_hall was refused on
+    a map holding 3 of its 4 sources while another map holding 3 of 4 sat empty. The tie is
+    also arbitrary: two maps with equal source counts come back in dict order, so the same
+    query answered differently between a dry run and an apply. Trying them in order removes
+    both faults, and a synthesis that lands in the second-richest room is still standing with
+    its family.
+    """
     cnt = collections.Counter()
     for s in sources:
         for m in placed.get(s, ()):
             cnt[m] += 1
-    best = cnt.most_common(1)
-    return best[0] if best else (None, 0)
+    # sort by source count then name, so the order is stable across runs
+    return sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0]))
 
 
 def source_centroid(layers: dict, sources: list):
@@ -205,22 +248,41 @@ def main() -> int:
         if fp is None:
             rows.append((t, "-", "NO MEASUREMENT - refusing to place a body of unknown size", None))
             continue
-        srcs = (e.get("dna") or {}).get("sources") or []
-        hm, n = host_map([str(s) for s in srcs], placed)
-        if not hm:
+        srcs = [str(s) for s in ((e.get("dna") or {}).get("sources") or [])]
+        cands = host_maps(srcs, placed)
+        if not cands:
             rows.append((t, "-", "no source of this synthesis is placed anywhere", None))
             continue
-        mp = MAPS / hm / "map_data.json"
-        d = json.loads(mp.read_text(encoding="utf-8"))
-        near = source_centroid(d.get("layers") or {}, [str(s) for s in srcs])
-        slot = free_slot(d.get("layers") or {}, fp[0], fp[1], near)
-        if slot is None:
-            rows.append((t, hm, f"no free {fp[0]}x{fp[1]} floor clear of traffic", None))
-            continue
-        dist = "" if near is None else " %.1f cells from its sources" % math.dist(
-            (slot[0] + (fp[1] - 1) / 2.0, slot[1] + (fp[0] - 1) / 2.0), near)
-        rows.append((t, hm, f"{fp[0]}x{fp[1]} at ({slot[0]},{slot[1]}) · {n}/{len(srcs)} sources here ·{dist}",
-                     (mp, slot, fp, [str(s) for s in srcs])))
+        found = None
+        tried = 0
+        for hm, n in cands:
+            tried += 1
+            if hm.startswith(SKIP_MAP_PREFIXES):
+                continue
+            mp = MAPS / hm / "map_data.json"
+            if not mp.exists():
+                continue
+            d = json.loads(mp.read_text(encoding="utf-8"))
+            near = source_centroid(d.get("layers") or {}, srcs)
+            slot = free_slot(d.get("layers") or {}, fp[0], fp[1], near)
+            if slot is None:
+                continue
+            gap = None if near is None else math.dist(
+                (slot[0] + (fp[1] - 1) / 2.0, slot[1] + (fp[0] - 1) / 2.0), near)
+            if gap is not None and gap > MAX_CELLS_FROM_SOURCES:
+                continue                      # in the room, but not with its family
+            dist = "" if gap is None else " %.1f cells from its sources" % gap
+            extra = f" (host {tried} of {len(cands)})" if tried > 1 else ""
+            found = (t, hm,
+                     f"{fp[0]}x{fp[1]} at ({slot[0]},{slot[1]}) · {n}/{len(srcs)} sources here ·{dist}{extra}",
+                     (mp, slot, fp, srcs))
+            break
+        if found:
+            rows.append(found)
+        else:
+            rows.append((t, cands[0][0],
+                         f"no free {fp[0]}x{fp[1]} floor in any of {len(cands)} maps holding a source",
+                         None))
 
     print(f"{'synthesis':<24}{'host map':<38}plan")
     print("-" * 108)
@@ -253,6 +315,9 @@ def main() -> int:
         if slot is None:
             print(f"  SKIP {t}: its slot in {hm} was taken by an earlier placement")
             continue
+        # PRESERVE THE FILE'S OWN FORMAT. json.dumps(indent=1) once reformatted every map it
+        # wrote — one cell in Gallery_BarArray produced a 391/83 diff — so the write below is
+        # followed by the project's canonical compacter.
         r, c = slot
         # The token sits on the TOP-LEFT cell of its footprint; the grid places one token per
         # cell and the artifact's own body fills the rest, as every other placement here does.
