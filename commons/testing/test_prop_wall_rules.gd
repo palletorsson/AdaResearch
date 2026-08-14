@@ -37,9 +37,21 @@ func _run() -> void:
 		await create_timer(0.2).timeout
 
 	var records: Array = inst.get("_records")
-	var want: int = EmProps.mount_defaults().size() + 5  # + the band handles
-	if records.size() != want:
-		fails.append("wall hangs %d records, expected %d (props + 5 band handles)" % [records.size(), want])
+	var n_wall: int = 0
+	var n_band: int = 0
+	var n_spec: int = 0
+	for r_v in records:
+		match String((r_v as Dictionary).get("kind", "")):
+			"band": n_band += 1
+			"specimen": n_spec += 1
+			_: n_wall += 1
+	if n_wall != EmProps.mount_defaults().size():
+		fails.append("wall hangs %d ruled tokens, mount_defaults declares %d"
+			% [n_wall, EmProps.mount_defaults().size()])
+	if n_band != 5:
+		fails.append("%d band handles, expected 5" % n_band)
+	if n_spec < 20:
+		fails.append("only %d specimens — the catalogue's other classes should exceed 20" % n_spec)
 
 	# the hand: raise wall_clock to 1.90 and save through the scene's own code
 	var clock_i: int = -1
@@ -111,7 +123,8 @@ func _run() -> void:
 	inst.queue_free()
 
 	if fails.is_empty():
-		print("PROP WALL RULES: PASS — %d tokens hung, hand rule round-trips, gate holds" % want)
+		print("PROP WALL RULES: PASS — %d ruled + %d band + %d specimens, round-trips and gates hold"
+			% [n_wall, n_band, n_spec])
 	else:
 		print("PROP WALL RULES: FAIL %d" % fails.size())
 		for f2 in fails:

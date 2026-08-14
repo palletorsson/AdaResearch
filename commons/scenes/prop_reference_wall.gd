@@ -41,8 +41,16 @@ func _ready() -> void:
 	var wall_h: float = float(EmDetail.WALL_H)
 	var defaults: Dictionary = EmProps.mount_defaults()
 	var n: int = defaults.size()
-	# props stretch + the viewing-band zone at the far end
-	var length: float = SPACING * (n + 1) + 8.0
+	# corridor zones along +x: ruled wall props · viewing band · ceiling
+	# strip · apertures · floor row · tabletop row · edge row. Specimen
+	# zones are E-inspectable but carry no height rule (their convention is
+	# WHERE they stand, not how high) — the nudge refuses them with a voice.
+	var specs: Dictionary = _specimen_tokens()
+	var n_spec: int = 0
+	for cls in specs:
+		n_spec += (specs[cls] as Array).size()
+	var length: float = SPACING * (n + 1) + 8.0 \
+		+ 10.0 + SPACING * float(n_spec) + 6.0
 
 	# floor and wall, flat museum tones
 	_slab(Vector3(length / 2.0, -0.1, 3.0), Vector3(length, 0.2, 6.0), Color(0.16, 0.16, 0.19))
@@ -135,6 +143,42 @@ func _ready() -> void:
 
 	_figure(Vector3(_band_x1 + 0.8, 0.0, 1.2))
 
+	# ── THE SPECIMEN ZONES — the rest of the catalogue, in situ ─────────────
+	var scenes2: Dictionary = {}
+	var all_spec_tokens: Array = []
+	for cls in specs:
+		all_spec_tokens.append_array(specs[cls])
+	scenes2 = _resolve_scenes(all_spec_tokens)
+	var sx: float = _band_x1 + 2.5
+	# ceiling strip: a genuine soffit slab, with the ceiling class under it
+	var ceil_tokens: Array = specs.get("ceiling", [])
+	if not ceil_tokens.is_empty():
+		var strip_len: float = SPACING * (ceil_tokens.size() + 1)
+		_slab(Vector3(sx + strip_len / 2.0, float(EmDetail.CEIL_SOFFIT) + 0.1, 3.0),
+			Vector3(strip_len, 0.2, 6.0), Color(0.9, 0.89, 0.87))
+		for t in ceil_tokens:
+			sx += SPACING
+			_specimen(String(t), "ceiling", Vector3(sx, float(EmDetail.CEIL_SOFFIT) - 0.05, 3.0),
+				scenes2, wall_h)
+		sx += SPACING
+	# apertures: door leaves against the wall — they LIVE in openings
+	for t in specs.get("aperture", []):
+		sx += SPACING
+		_specimen(String(t), "aperture", Vector3(sx, 0.0, 0.35), scenes2, wall_h)
+	# floor class: stands on the deck
+	for t in specs.get("floor", []):
+		sx += SPACING
+		_specimen(String(t), "floor", Vector3(sx, 0.0, 2.0), scenes2, wall_h)
+	# tabletop class: on a 0.9 m block, the bench convention
+	for t in specs.get("tabletop", []):
+		sx += SPACING
+		_slab(Vector3(sx, 0.45, 2.0), Vector3(1.0, 0.9, 0.7), Color(0.4, 0.38, 0.36))
+		_specimen(String(t), "tabletop", Vector3(sx, 0.9, 2.0), scenes2, wall_h)
+	# edge class: hugs the wall base
+	for t in specs.get("edge", []):
+		sx += SPACING
+		_specimen(String(t), "edge", Vector3(sx, 0.0, 0.6), scenes2, wall_h)
+
 	_cam = Camera3D.new()
 	_cam.position = Vector3(2.0, 1.65, 4.5)
 	add_child(_cam)
@@ -203,6 +247,10 @@ func _nudge(dy: float) -> void:
 	if _sel < 0:
 		return
 	var r: Dictionary = _records[_sel]
+	if String(r.get("kind", "")) == "specimen":
+		print("[prop-wall] %s is a %s specimen — its convention is WHERE it stands, no height rule (v1)"
+			% [String(r["token"]), String(r.get("cls", "?"))])
+		return
 	var node: Node3D = r["node"]
 	node.position.y = clampf(node.position.y + dy, 0.1, float(EmDetail.WALL_H) - 0.1)
 	_dirty = true
@@ -234,6 +282,8 @@ func _save() -> void:
 	var band: Dictionary = {}
 	for r_v in _records:
 		var r: Dictionary = r_v
+		if String(r.get("kind", "")) == "specimen":
+			continue
 		var h: float = (r["node"] as Node3D).position.y
 		if absf(h - float(r["code_h"])) <= 0.001:
 			continue
@@ -286,12 +336,17 @@ func _save() -> void:
 
 
 func _update_label(r: Dictionary) -> void:
+	var lbl: Label3D = r["label"]
+	var selected: bool = _sel >= 0 and _sel < _records.size() and _records[_sel] == r
+	if String(r.get("kind", "")) == "specimen":
+		# specimens keep their class text; selection still burns amber
+		lbl.modulate = Color(1.0, 0.62, 0.1) if selected else Color(0.75, 0.82, 0.9)
+		lbl.font_size = 44 if selected else 32
+		return
 	var h: float = (r["node"] as Node3D).position.y
 	var src: String = "code" if absf(h - float(r["code_h"])) <= 0.001 else "HAND"
-	var lbl: Label3D = r["label"]
 	lbl.text = "%s\nh %.2f  (%s)" % [String(r["token"]), h, src]
 	# the SELECTED prop's label burns amber; everyone else parchment
-	var selected: bool = _sel >= 0 and _sel < _records.size() and _records[_sel] == r
 	lbl.modulate = Color(1.0, 0.62, 0.1) if selected else Color(0.95, 0.9, 0.75)
 	lbl.font_size = 56 if selected else 40
 
@@ -337,6 +392,54 @@ func _make_hud() -> Label:
 	layer.add_child(dot)
 	add_child(layer)
 	return lbl
+
+
+## The specimen classes, read from em_props' own CATALOGUE so the corridor's
+## token list is the code's, never a copy. C_WALL is the ruled wall above;
+## C_EXHIBIT belongs to the museum's dealing, not the corridor.
+func _specimen_tokens() -> Dictionary:
+	var out: Dictionary = {"ceiling": [], "aperture": [], "floor": [], "tabletop": [], "edge": []}
+	var already: Dictionary = EmProps.mount_defaults()
+	for token in EmProps.CATALOGUE:
+		if already.has(String(token)):
+			continue
+		match String((EmProps.CATALOGUE[token] as Dictionary).get("class", "")):
+			"ceiling": (out["ceiling"] as Array).append(String(token))
+			"aperture": (out["aperture"] as Array).append(String(token))
+			"floor": (out["floor"] as Array).append(String(token))
+			"tabletop": (out["tabletop"] as Array).append(String(token))
+			"edge": (out["edge"] as Array).append(String(token))
+	for cls in out:
+		(out[cls] as Array).sort()
+	return out
+
+
+## One specimen: the scene (or a placeholder) at its class's situation, a
+## label naming token + class, and an E-inspectable but rule-less record.
+func _specimen(token: String, cls: String, at: Vector3, scenes: Dictionary, wall_h: float) -> void:
+	var holder := Node3D.new()
+	holder.name = token
+	holder.position = at
+	add_child(holder)
+	var path: String = String(scenes.get(token, ""))
+	if path != "" and ResourceLoader.exists(path):
+		var inst: Node3D = (load(path) as PackedScene).instantiate() as Node3D
+		holder.add_child(inst)
+	else:
+		var ph := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = Vector3(0.4, 0.4, 0.4)
+		ph.mesh = bm
+		ph.position = Vector3(0, 0.2, 0)
+		holder.add_child(ph)
+	var lbl := Label3D.new()
+	lbl.position = Vector3(at.x, wall_h - 0.25 - (int(at.x / SPACING) % 2) * 0.35, 0.15)
+	lbl.font_size = 32
+	lbl.modulate = Color(0.75, 0.82, 0.9)
+	lbl.text = "%s\n(%s)" % [token, cls]
+	add_child(lbl)
+	_records.append({"node": holder, "token": token, "label": lbl,
+		"code_h": at.y, "kind": "specimen", "cls": cls})
 
 
 ## token -> scene path, read from the artifact registries (token-keyed dicts).

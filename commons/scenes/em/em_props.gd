@@ -203,6 +203,11 @@ static func mount_defaults() -> Dictionary:
 		"fire_hose_box": H_HOSE_BOX,
 		"exit_sign": Y_EXIT_WALL,
 		"cable_tray": Y_CABLE_TRAY,
+		# the rest of the wall class, rule-able since the corridor grew
+		# zones (2026-08-14): defaults borrow the nearest band constant
+		"mirror": H_WINDOW,
+		"hangar_wall_panel": H_PANEL,
+		"artifact_readout_screen": H_SCREEN,
 	}
 
 
