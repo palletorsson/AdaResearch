@@ -948,6 +948,26 @@ func _setup_world() -> void:
 	_cam.fov = 75.0
 	_player.add_child(_cam)
 	_cam.make_current()
+	# the desktop hand — the same crosshair interaction the map scenes use:
+	# LMB press/drag on handles and buttons, RMB carry-grab, wheel = hold
+	# distance. Desktop-only by construction (the VR branch returned above;
+	# in a headset the XR rig's own pointers and pickups do this job). The
+	# centre dot matches desktop_player.tscn's crosshair.
+	var hand := Node3D.new()
+	hand.name = "DesktopHand"
+	hand.set_script(load("res://commons/scenes/em/em_desktop_pointer.gd"))
+	hand.set("cam", _cam)
+	_player.add_child(hand)
+	var dot := ColorRect.new()
+	dot.name = "Crosshair"
+	dot.set_anchors_preset(Control.PRESET_CENTER)
+	dot.offset_left = -2.0
+	dot.offset_top = -2.0
+	dot.offset_right = 2.0
+	dot.offset_bottom = 2.0
+	dot.color = Color(1, 1, 1, 0.9)
+	dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_cam.add_child(dot)
 	_setup_antialiasing()
 	var lit := _setup_environment()
 	# The sun. With em_lighting's rig and em_detail's ceiling in place the

@@ -57,6 +57,21 @@ flag; fixed, and the false exit now names which file refused.
   meshes, Matrix4x4Viewer 142 …) — per-artifact simplification is the next
   lever if needed.
 
+**Third session, 08-14: the desktop hand.** The museum walker now mounts the
+SAME crosshair interaction the map scenes prove out daily —
+`DesktopInteractionPointer` (LMB press/drag on handles and buttons, RMB
+carry-grab, wheel = hold distance) via a thin adapter
+(`em/em_desktop_pointer.gd`) that mirrors the walker camera's transform each
+frame, because the shared pointer expects a "Head"/Camera3D sibling pair the
+walker doesn't have. Artifacts ship their interaction layers with their
+scenes, so nothing per-artifact was wired. Crosshair dot matches
+desktop_player.tscn. `test_em_desktop_hand.gd` proves both directions:
+wired on desktop, ABSENT in VR (a second ray would fight the XR rig's own
+pointers). Also on 08-14 (separate commit): base.tscn's ranged grab was
+restored — the June capture-resave clobber had been COMMITTED in 8feb9c913,
+so `git checkout` was restoring the broken rig; repaired from 8feb9c913^ and
+the file is now chmod 444 like the action map.
+
 **Open findings (not fixed today).**
 
 - **Autopilot on the full plan FAILS at z 545**, inside the forces segment
