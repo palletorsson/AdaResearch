@@ -122,6 +122,16 @@ var _auto_last_pos: Vector3 = Vector3.ZERO
 var _auto_beat_t: float = 0.0
 var _auto_t: float = 0.0
 var _auto_learned: int = 0
+# A stall only teaches the planner something if the cell it blames was still on
+# the map. Once BFS has nothing deeper to offer it decides nothing and leaves
+# the old plan standing, so the walker grinds the same wall and every further
+# stall erases a cell that is already gone. Counting the two apart is what keeps
+# the verdict a statement about the corridor rather than about this loop.
+var _auto_stalls: int = 0         # every stall event
+var _auto_idle_stalls: int = 0    # consecutive stalls that erased nothing
+var _auto_frontier: int = -1      # deepest z cell the plan could still reach
+var _auto_reason: String = ""
+const AUTO_IDLE_LIMIT: int = 8
 var _segments: Array = []         # [{node, z0, z1, index}]
 var _next_z: float = 0.0
 var _seg_index: int = 0
@@ -1533,9 +1543,23 @@ func _build_segment() -> void:
 		if int(a["rank"]) != int(b["rank"]):
 			return int(a["rank"]) < int(b["rank"])
 		return int(a["x"]) < int(b["x"]))
+	# the chapter meta goes on BEFORE the deal: plinths and props stamped
+	# inside it key their rulings by chapter, and the later set_meta (kept for
+	# the add pass) is now a no-op re-assert
+	seg.set_meta("em_chapter", next_seq)
 	var deal: Dictionary = _deal_segment(seg, slots, zbase, spec, tile, w, h, next_seq)
 	var placed: int = int(deal.get("placed", 0))
 	var seg_seq: String = String(deal.get("sequence", ""))
+	# the deal may have resolved a different chapter than next_seq (a plan
+	# that owns the building): re-key every record stamped under the early
+	# meta so rulings are keyed by the chapter the deal ACTUALLY used, which
+	# is what the next build will resolve again. One truth, not two.
+	if seg_seq != next_seq:
+		seg.set_meta("em_chapter", seg_seq)
+		for r_v in _edit_records:
+			var rr: Dictionary = r_v
+			if rr.get("seg") == seg and String(rr.get("chapter", "")) == next_seq:
+				rr["chapter"] = seg_seq
 	# museum banner at the threshold — the canonical TextScreen (framed panel,
 	# baked albedo, headless-safe). Properties set before add_child so the one
 	# _ready() rebuild builds the right sign.
@@ -1624,7 +1648,19 @@ func _build_segment() -> void:
 				{"wall_features_max": int(deal.get("wall_features_max", -1)),
 					"fill_walls": bool(deal.get("fill_walls", true)),
 					"hang_min_stretch": int(deal.get("hang_min_stretch", 2)),
-					"label_every": int(deal.get("label_every", 11))})
+					"label_every": int(deal.get("label_every", 11)),
+					# the hand's rulings on this chapter's showings, and the
+					# selectable proxies the editor picks (desktop only)
+					"showing_rules": _furniture_rules(next_seq, "showing"),
+					"showing_proxies": not _vr})
+			# every showing proxy becomes an editor record of kind "showing"
+			if not _vr:
+				for ch_node in seg.get_children():
+					if ch_node.has_meta("em_showing"):
+						_edit_records.append({"node": ch_node, "kind": "showing",
+							"token": "showing", "index": int(ch_node.get_meta("em_showing")),
+							"from": [], "tile_cell": [], "rotation": 0.0,
+							"chapter": next_seq, "seg": seg})
 		else:
 			_mod_detail.call("dress_segment", seg, tile, w, h, _detail_mats, _prev_w)
 	# 1b. FURNITURE. em_detail is contractually forbidden to add collision, and a
@@ -1969,6 +2005,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		var removed_by_hand := false
 		for ov_v in _edit_overrides:
 			var ov: Dictionary = ov_v as Dictionary
+			if ov.has("kind"):
+				continue            # furniture rulings apply where furniture is built
 			if String(ov.get("token", "")) != tok:
 				continue
 			var fr: Array = ov.get("from", [])
@@ -2039,8 +2077,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 
 	var idle: int = 0
 	for ov_v in _edit_overrides:
-		if bool((ov_v as Dictionary).get("add", false)):
-			continue                # adds apply later, at full-segment parity
+		if bool((ov_v as Dictionary).get("add", false)) or (ov_v as Dictionary).has("kind"):
+			continue                # adds apply later; furniture rulings apply where built
 		if String((ov_v as Dictionary).get("chapter", "")) == String(entry.get("sequence", "")) 				and not (ov_v as Dictionary).get("_matched", false):
 			idle += 1
 	if idle > 0:
@@ -2597,6 +2635,20 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 					float(cell.get("top", 0.0)), float(cell.get("y", 0)) + 0.5)
 				seg.add_child(pn)
 				plinth_node = pn
+				if not _vr:
+					var pl_ch: String = String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
+					var pl_from: Array = [int(cell.get("x", 0)), int(cell.get("y", 0)) - VESTIBULE_H]
+					_edit_records.append({"node": pn, "kind": "plinth", "token": lookup,
+						"from": pl_from, "tile_cell": [], "rotation": 0.0,
+						"chapter": pl_ch, "seg": seg, "index": -1})
+					for fr_v in _furniture_rules(pl_ch, "plinth"):
+						var fr: Dictionary = fr_v
+						# JSON hands ints back as floats: compare VALUES, typed
+						var ffrom: Array = fr.get("from", [])
+						if String(fr.get("token", "")) == lookup and ffrom.size() >= 2 								and int(ffrom[0]) == int(pl_from[0]) and int(ffrom[1]) == int(pl_from[1]):
+							var o: Array = fr.get("offset", [])
+							if o.size() >= 3:
+								pn.position += Vector3(float(o[0]), float(o[1]), float(o[2]))
 				lift = float(plan_d.get("artifact_y", 0.0))
 				_seg_plinths += 1
 				_deal_stats["plinths"] = int(_deal_stats.get("plinths", 0)) + 1
@@ -3161,13 +3213,32 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 		# of that token in the museum moves on the next build, which is what
 		# a convention means. Only wall-class tokens in mount_defaults qualify;
 		# floor/ceiling/edge props have no height knob (v1, as in the corridor).
-		if not _vr and String(r.get("surface", "")) == "wall" \
+		if not _vr:
+			var seg_ch: String = String(seg.get_meta("em_chapter")) if seg.has_meta("em_chapter") else ""
+			var rulable_h: bool = String(r.get("surface", "")) == "wall" \
 				and _mod_has(_mod_props, "mount_defaults") \
-				and (_mod_props.call("mount_defaults") as Dictionary).has(tok):
-			_edit_records.append({"node": node, "token": tok, "kind": "prop",
-				"code_h": float((_mod_props.call("mount_defaults") as Dictionary)[tok]),
-				"from": [], "tile_cell": [], "rotation": float(r.get("rot_y", 0.0)),
-				"chapter": "", "seg": seg})
+				and (_mod_props.call("mount_defaults") as Dictionary).has(tok)
+			if rulable_h:
+				# a wall prop with a height convention: UP/DOWN rules the token
+				_edit_records.append({"node": node, "token": tok, "kind": "prop",
+					"code_h": float((_mod_props.call("mount_defaults") as Dictionary)[tok]),
+					"from": [], "tile_cell": [], "rotation": float(r.get("rot_y", 0.0)),
+					"chapter": seg_ch, "seg": seg, "index": n_ok - 1})
+			else:
+				# any other dressed prop: a FURNITURE record - the hand may
+				# offset it (0.2 m) per copy, keyed by its dress index
+				_edit_records.append({"node": node, "token": tok, "kind": "furniture",
+					"from": [], "tile_cell": [], "rotation": float(r.get("rot_y", 0.0)),
+					"chapter": seg_ch, "seg": seg, "index": n_ok - 1})
+			# apply a saved furniture ruling on the way in
+			for fr_v in _furniture_rules(seg_ch, "furniture"):
+				var fr: Dictionary = fr_v
+				if String(fr.get("token", "")) == tok and int(fr.get("index", -1)) == n_ok - 1:
+					var o: Array = fr.get("offset", [])
+					if o.size() >= 3:
+						node.position += Vector3(float(o[0]), float(o[1]), float(o[2]))
+					if fr.has("rotation"):
+						node.rotation_degrees.y = float(fr["rotation"])
 		var surf: String = String(r.get("surface", "?"))
 		kinds[surf] = int(kinds.get(surf, 0)) + 1
 		if bool(r.get("occupies_floor", false)):
@@ -3436,8 +3507,8 @@ func _edit_handle_key(key: int) -> bool:
 		KEY_EQUAL, KEY_PLUS, KEY_KP_ADD:      _edit_scale(1.05)
 		KEY_MINUS, KEY_KP_SUBTRACT:           _edit_scale(1.0 / 1.05)
 		KEY_DELETE:
-			if _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) == "prop":
-				print("[em-edit] props are dressed by em_props' rules, not placed by the plan — no per-copy removal (v1)")
+			if _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) in ["prop", "furniture", "showing", "plinth"]:
+				print("[em-edit] %s is dressed by rule, not placed by the plan — no per-copy removal (v1)" % (_edit_records[_edit_sel] as Dictionary).get("kind"))
 			elif _edit_sel >= 0:
 				var r2: Dictionary = _edit_records[_edit_sel]
 				# an ADDED row's delete erases the add ruling itself; a plan
@@ -3612,6 +3683,50 @@ func _edit_prop_nudge(dy: float) -> void:
 var _edit_shift: bool = false
 
 
+## FURNITURE RULINGS — the hand's offsets on things the PLAN did not place:
+## dressed props (all classes), the plinths under artifacts, and em_detail's
+## wall showings. They live in the same overrides file as artifact rulings,
+## as rows with "kind": "showing" | "furniture" | "plinth", keyed by chapter
+## and by the thing's stable identity within its chapter (showing: hang
+## index; furniture: token + dress index; plinth: artifact token + plan cell).
+## Applied at build where each is created — never a transform the builder
+## does not know about.
+func _furniture_rules(chapter: String, kind: String) -> Array:
+	var out: Array = []
+	for ov_v in _edit_overrides:
+		var ov: Dictionary = ov_v
+		if String(ov.get("kind", "")) == kind and String(ov.get("chapter", "")) == chapter:
+			out.append(ov)
+	return out
+
+
+## The override row for a furniture-kind record, minted on first touch.
+func _furniture_override(r: Dictionary) -> Dictionary:
+	var kind := String(r.get("kind", ""))
+	var ch := String(r.get("chapter", ""))
+	var tok := String(r.get("token", ""))
+	var idx: int = int(r.get("index", -1))
+	var frm: Array = r.get("from", [])
+	for ov_v in _edit_overrides:
+		var ov: Dictionary = ov_v
+		if String(ov.get("kind", "")) != kind or String(ov.get("chapter", "")) != ch:
+			continue
+		if kind == "plinth":
+			var of: Array = ov.get("from", [])
+			if String(ov.get("token", "")) == tok and of.size() >= 2 and frm.size() >= 2 					and int(of[0]) == int(frm[0]) and int(of[1]) == int(frm[1]):
+				return ov
+		elif String(ov.get("token", "")) == tok and int(ov.get("index", -2)) == idx:
+			return ov
+	var nov: Dictionary = {"kind": kind, "chapter": ch, "token": tok,
+		"provenance": "hand"}
+	if kind == "plinth":
+		nov["from"] = frm.duplicate()
+	else:
+		nov["index"] = idx
+	_edit_overrides.append(nov)
+	return nov
+
+
 ## The 0.2 m fine nudge. A visual offset recorded on the override as
 ## `offset` [dx, dy, dz] metres, snapped to 0.2 — applied by _stamp AFTER the
 ## cell places the body, so the seal and the walk map keep the cell. The
@@ -3621,7 +3736,8 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
-	if String(r.get("kind", "")) == "prop":
+	var kind := String(r.get("kind", ""))
+	if kind == "prop":
 		if dy != 0.0:
 			_edit_prop_nudge(dy)   # PGUP/PGDN on a prop = the same 0.2 height ruling
 		else:
@@ -3630,8 +3746,15 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 	var node: Node3D = r.get("node") as Node3D
 	if node == null or not is_instance_valid(node):
 		return
-	var ov: Dictionary = _mod_editor.call(
-		"override_for", _edit_records, _edit_sel, _edit_overrides)
+	var ov: Dictionary
+	if kind in ["showing", "furniture", "plinth"]:
+		ov = _furniture_override(r)
+		if kind == "showing":
+			# a showing proxy is invisible; the picture it stands for is a
+			# batched MultiMesh that only moves on rebuild. Say so.
+			print("[em-edit] showing %d: offset ruled — the picture moves on the next build" % int(r.get("index", -1)))
+	else:
+		ov = _mod_editor.call("override_for", _edit_records, _edit_sel, _edit_overrides)
 	var off: Array = ov.get("offset", [0.0, 0.0, 0.0])
 	if off.size() < 3:
 		off = [0.0, 0.0, 0.0]
@@ -3652,8 +3775,8 @@ func _edit_scale(factor: float) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
-	if String(r.get("kind", "")) == "prop":
-		print("[em-edit] %s is a wall prop — props are not scaled (their bodies are measured)" % r.get("token"))
+	if String(r.get("kind", "")) in ["prop", "furniture", "showing", "plinth"]:
+		print("[em-edit] %s is %s — not scaled (bodies are measured; showings are batched)" % [r.get("token"), r.get("kind")])
 		return
 	var node: Node3D = r.get("node") as Node3D
 	if node == null or not is_instance_valid(node):
@@ -3675,6 +3798,10 @@ func _edit_nudge(dx: int, dz: int) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
+	if String(r.get("kind", "")) in ["showing", "furniture", "plinth"]:
+		# furniture has no plan cell: an unshifted arrow is a 1.0 m offset step
+		_edit_fine(float(dx), 0.0, float(dz))
+		return
 	if String(r.get("kind", "")) == "prop":
 		# a wall prop has no cell to move to — its convention is HEIGHT.
 		# UP/DOWN rule it; LEFT/RIGHT are refused with a voice.
@@ -3702,6 +3829,17 @@ func _edit_rotate(deg: float) -> void:
 	var r: Dictionary = _edit_records[_edit_sel]
 	if String(r.get("kind", "")) == "prop":
 		print("[em-edit] %s is a wall prop — it faces its wall; no rotation ruling" % r.get("token"))
+		return
+	if String(r.get("kind", "")) in ["showing", "plinth"]:
+		print("[em-edit] a %s faces its wall / its artifact — no rotation ruling" % r.get("kind"))
+		return
+	if String(r.get("kind", "")) == "furniture":
+		var fnode: Node3D = r.get("node") as Node3D
+		var fov: Dictionary = _furniture_override(r)
+		fov["rotation"] = fposmod(float(fov.get("rotation", float(r.get("rotation", 0.0)))) + deg, 360.0)
+		if fnode != null and is_instance_valid(fnode):
+			fnode.rotation_degrees.y = float(fov["rotation"])
+		_edit_dirty = true
 		return
 	var node: Node3D = r.get("node") as Node3D
 	if node == null or not is_instance_valid(node):
@@ -3769,13 +3907,32 @@ func _run_autopilot(delta: float) -> void:
 			# passable (an artifact's own collision, usually) — unlearn it and
 			# route around. A bounded budget keeps honesty: a corridor that
 			# needs endless unlearning is a broken corridor.
+			_auto_stalls += 1
+			var erased: bool = false
 			if not _auto_path.is_empty():
 				var blocked := Vector2i(int(floor(_auto_path[0].x)), int(floor(_auto_path[0].z)))
-				_walk_cells.erase(blocked)
-			_auto_learned += 1
+				erased = _walk_cells.erase(blocked)
+			# Spend the budget on information. A stall that removed nothing is
+			# not a lesson learned, it is the same lesson refused, and a run of
+			# them means the plan is dead rather than the corridor expensive.
+			if erased:
+				_auto_learned += 1
+				_auto_idle_stalls = 0
+			else:
+				_auto_idle_stalls += 1
+				if _auto_idle_stalls >= AUTO_IDLE_LIMIT:
+					_auto_reason = "no_route"
+					_auto_write(true, false)
+					print("[endless_museum] AUTOPILOT FAIL (no route): plan exhausted at (%.1f, %.1f), reachable frontier z=%d, %.1f m short of goal %.1f — %d cells unlearned over %d stalls" % [
+						_player.position.x, _player.position.z, _auto_frontier,
+						_auto_goal_z - _player.position.z, _auto_goal_z,
+						_auto_learned, _auto_stalls])
+					get_tree().quit(1)
+					return
 			_auto_stall_t = 0.0
 			_auto_replan = true
 			if _auto_learned > 25:
+				_auto_reason = "unlearn_budget"
 				_auto_write(true, false)
 				print("[endless_museum] AUTOPILOT FAIL: %d cells unlearned and still stuck at (%.1f, %.1f), %.1f m short of goal %.1f" % [
 					_auto_learned, _player.position.x, _player.position.z,
@@ -3817,6 +3974,11 @@ func _auto_plan() -> void:
 			if found:
 				break
 		if not found:
+			# Decide nothing, but SAY nothing too. The old plan is stale by
+			# definition here — its head is the cell the stall handler just
+			# erased — and leaving it standing is what turned this loop into a
+			# grinder. See tools/test_autopilot_planner.py.
+			_auto_path.clear()
 			return
 	var prev: Dictionary = {}
 	var q: Array = [start]
@@ -3833,7 +3995,12 @@ func _auto_plan() -> void:
 			if _walk_cells.has(n) and not prev.has(n):
 				prev[n] = c
 				q.append(n)
+	_auto_frontier = best.y
 	if best == start:
+		# Nothing deeper is reachable on the stamped map. That is a finding, not
+		# a hiccup: report the frontier and drop the plan instead of walking the
+		# corpse of the last one into the wall.
+		_auto_path.clear()
 		return
 	var path: Array = []
 	var c := best
@@ -3850,7 +4017,25 @@ func _auto_write(done: bool, ok: bool) -> void:
 			"goal_z": _auto_goal_z, "z": _player.position.z, "x": _player.position.x,
 			"segments_built": _seg_index, "elapsed_s": _auto_t,
 			"cells_unlearned": _auto_learned,
+			# cells_unlearned used to count stall events and call them cells.
+			# These three are what tell the corridor apart from the planner.
+			"stall_events": _auto_stalls,
+			"frontier_z": _auto_frontier,
+			"reason": _auto_reason,
+			# Where the frontier falls only means something against the seams.
+			# A walk map that dies at a segment boundary is a joining fault; one
+			# that dies mid-room is an obstruction. The verdict could not tell
+			# the two apart, and the scene's stdout is not capturable from the
+			# non-console exe, so the table has to travel in the file.
+			"seams": _auto_seams(),
 		}, " "))
+
+## The z-extent of every segment built so far, for reading frontier_z against.
+func _auto_seams() -> Array:
+	var out: Array = []
+	for s in _segments:
+		out.append([float(s["z0"]), float(s["z1"])])
+	return out
 
 ## THE SHOT IS COMPOSED, NOT AIMED. Three of the four proof stills were the same
 ## picture: perfect one-point perspective, vanishing point dead centre in both

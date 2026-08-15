@@ -430,9 +430,38 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	# The frames cast — a 70 mm proud section at 1.58 throws the only cast shadow
 	# anywhere in the middle of a wall, and that shadow is half of why a hung
 	# object reads as hung rather than as a decal.
+	# THE HAND'S SHOWING RULINGS, applied BEFORE the batches are emitted. A
+	# ruling is keyed by the showing's index in this segment's hang order
+	# (deterministic: same tile, same faces, same order) and carries a
+	# metre offset. Frames are 4 per showing, mount and field 1 each — the
+	# three lists are index-aligned, so one offset moves all seven boxes.
+	var showing_rules: Array = opts.get("showing_rules", [])
+	for rule_v in showing_rules:
+		var rule: Dictionary = rule_v
+		var si: int = int(rule.get("index", -1))
+		var off_a: Array = rule.get("offset", [])
+		if si < 0 or si >= hang_mount_x.size() or off_a.size() < 3:
+			continue
+		var off := Vector3(float(off_a[0]), float(off_a[1]), float(off_a[2]))
+		hang_mount_x[si] = (hang_mount_x[si] as Transform3D).translated(off)
+		hang_field_x[si] = (hang_field_x[si] as Transform3D).translated(off)
+		for k in range(4):
+			var fi: int = si * 4 + k
+			if fi < hang_frame_x.size():
+				hang_frame_x[fi] = (hang_frame_x[fi] as Transform3D).translated(off)
 	_emit(seg, "WallFrames", hang_frame_x, lib.get("plinth"), true)
 	_emit(seg, "WallMounts", hang_mount_x, _hang_mount_mat(), false)
 	_emit(seg, "WallFields", hang_field_x, _hang_field_mat(), false)
+	# one SELECTABLE proxy per showing: an empty Node3D at the mount's centre
+	# carrying its index, so the editor can pick a picture the way it picks an
+	# artifact. Invisible, no mesh, no collider — a handle, not a body.
+	if bool(opts.get("showing_proxies", false)):
+		for si in range(hang_mount_x.size()):
+			var px := Node3D.new()
+			px.name = "Showing%d" % si
+			px.position = (hang_mount_x[si] as Transform3D).origin
+			px.set_meta("em_showing", si)
+			seg.add_child(px)
 	_add_extent_anchor(seg, w, h)
 
 
