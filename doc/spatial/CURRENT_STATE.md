@@ -196,8 +196,22 @@ was corrected — `artifact_sizes.json` is a stale mirror for the WHOLE
 corpus; escalations re-measured from the contract: 6 / 63 / 32, not
 30 / 58 / 14. **NO SPATIAL FINDING MAY CITE artifact_sizes.json AGAIN.**
 
-**NEXT (in order): rung 2 joint budget per segment length (63 bodies) →
-Palle rules the 32 worlds.**
+**Eleventh session, 08-15: rung 2 bites, the editor is complete.**
+Rung 2 (`0e7ece96e`): the court is a rectangle you can TURN in (crossability
+tests the narrow side; a body granted turned gets rotation +90 and swapped
+dims, the assembler stamps the row's rotation), and the joint budget scales
+with the building — clamp(0.6 × length, 40, 80), doubling once when the
+queue backs up. **Measured: placed 900→943, courts 127→164, escalations
+114→95, rejected 256→213.** Autopilot through the new courts PASS z 585/585
+(6 unlearned) — past the z 545 stall. Remaining 95 escalations = the 32
+worlds + square bodies >12 m no turn helps, now named "a WORLD, not an
+exhibit — Palle's ruling" by the refusal text itself. EDITOR: SHIFT+arrows
+0.2 m, PGUP/PGDN 0.2 m y, Q/R 15° (SHIFT 90°), +/- scale 5 % — all as
+override rulings (`offset`, `rotation`, `scale`), all visual-only past the
+cell so the seal and walk map keep the plan's footprint (`3e615b536`).
+
+**NEXT: rung 3 — Palle rules the 32 worlds (walk-in precinct, or exile to
+their own maps).**
 
 **Open findings (not fixed today).**
 
