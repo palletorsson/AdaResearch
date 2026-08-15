@@ -33,6 +33,9 @@
 ##     [--label=token] [--fixture={"k":v}] [--out=res://ada_run/interaction]
 extends SceneTree
 
+## shader instance id -> its uniform names. Names cannot change mid-measurement; values can.
+var _uniform_cache: Dictionary = {}
+
 const SETTLE := 1.1
 const DT := 0.45          ## long enough for a deferred rebuild, short enough to stay cheap
 
@@ -364,10 +367,22 @@ func _appearance(n: Node, acc: Dictionary) -> void:
 		elif m is ShaderMaterial:
 			# A shader's uniforms are where a shader-driven artifact keeps its state, and they
 			# are readable by name off the material without knowing the shader.
+			#
+			# THE NAME LIST IS CACHED PER SHADER, and it has to be. Reading it per material per
+			# snapshot took the corpus pass from about 1,500 artifacts an hour to thirty:
+			# sixteen_cell_net_space_showcase alone carries 4,384 meshes and the walk happens
+			# four times per artifact. The names cannot change during a measurement; only the
+			# values can, so only the values are re-read.
 			var sm := m as ShaderMaterial
 			if sm.shader != null:
-				for u in sm.shader.get_shader_uniform_list():
-					var v: Variant = sm.get_shader_parameter(String(u.get("name", "")))
+				var sid: int = sm.shader.get_instance_id()
+				if not _uniform_cache.has(sid):
+					var names: PackedStringArray = []
+					for u in sm.shader.get_shader_uniform_list():
+						names.append(String(u.get("name", "")))
+					_uniform_cache[sid] = names
+				for uname in (_uniform_cache[sid] as PackedStringArray):
+					var v: Variant = sm.get_shader_parameter(uname)
 					if v is float or v is int:
 						acc["uniforms"] = float(acc["uniforms"]) + float(v)
 					elif v is Color:
