@@ -1965,6 +1965,7 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		# at the end — reported, never guessed at.
 		var yaw_override: float = float(row.get("rotation", 0.0))
 		var fine_override: Array = []          # the hand's 0.2 m offset, if any
+		var scale_override: float = 1.0        # the hand's uniform scale, if any
 		var removed_by_hand := false
 		for ov_v in _edit_overrides:
 			var ov: Dictionary = ov_v as Dictionary
@@ -1990,6 +1991,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 				yaw_override = float(ov["rotation"])
 			if ov.get("offset") is Array:
 				fine_override = (ov["offset"] as Array).duplicate()
+			if ov.has("scale"):
+				scale_override = float(ov["scale"])
 			break
 		if removed_by_hand:
 			continue
@@ -2022,6 +2025,8 @@ func _deal_from_plan(seg: Node3D, zbase: int, key: String, tile: Array,
 		}
 		if not fine_override.is_empty():
 			cell["offset"] = fine_override
+		if not is_equal_approx(scale_override, 1.0):
+			cell["scale"] = scale_override
 		# The rotation is a NEGOTIATED result, not a hint. HANDOVER §6: "one
 		# authored rotation is a preference; two or more is a constraint", and
 		# every turn away from the authored value is recorded on the placement.
@@ -2604,6 +2609,15 @@ func _stamp(seg: Node3D, scene_path: String, lookup: String, cell: Dictionary,
 	var fine: Variant = cell.get("offset", null)
 	if fine is Array and (fine as Array).size() >= 3:
 		node.position += Vector3(float((fine as Array)[0]), float((fine as Array)[1]), float((fine as Array)[2]))
+	# the hand's SCALE ruling — uniform, visual only, same law as the offset:
+	# the seal and the walk map keep the plan's footprint. A body scaled to
+	# 1.4 that now overlaps a neighbour is a ruling the curator can SEE and
+	# revise; a scale that silently re-sealed cells would be a second author
+	# of the plan. Applied to the root, so a scaled artifact's own children
+	# (labels, colliders, plinth logic) scale with it as one body.
+	var sc: float = float(cell.get("scale", 1.0))
+	if not is_equal_approx(sc, 1.0):
+		node.scale = Vector3.ONE * sc
 	# The negotiated turn, applied BEFORE the node enters the tree — the same
 	# order the dressing-room builder and the config sweep both use, so an
 	# artifact that builds differently per facing builds the right one first time.
@@ -3417,6 +3431,10 @@ func _edit_handle_key(key: int) -> bool:
 		KEY_PAGEDOWN: _edit_fine(0, -0.2, 0)
 		KEY_Q:     _edit_rotate(-90.0 if _edit_shift else -15.0)
 		KEY_R:     _edit_rotate(90.0 if _edit_shift else 15.0)
+		# + / - (and keypad): uniform scale in 5 % steps, 0.25..4.0. Visual
+		# only — the plan's footprint and seal are untouched (see _stamp).
+		KEY_EQUAL, KEY_PLUS, KEY_KP_ADD:      _edit_scale(1.05)
+		KEY_MINUS, KEY_KP_SUBTRACT:           _edit_scale(1.0 / 1.05)
 		KEY_DELETE:
 			if _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) == "prop":
 				print("[em-edit] props are dressed by em_props' rules, not placed by the plan — no per-copy removal (v1)")
@@ -3626,6 +3644,31 @@ func _edit_fine(dx: float, dy: float, dz: float) -> void:
 		ov["offset"] = off
 	node.position += Vector3(dx, dy, dz)
 	_edit_dirty = true
+
+
+## Uniform scale ruling. Multiplicative steps so + then - is identity;
+## snapped to 0.05 in the file; 1.0 drops the key (no ruling).
+func _edit_scale(factor: float) -> void:
+	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
+		return
+	var r: Dictionary = _edit_records[_edit_sel]
+	if String(r.get("kind", "")) == "prop":
+		print("[em-edit] %s is a wall prop — props are not scaled (their bodies are measured)" % r.get("token"))
+		return
+	var node: Node3D = r.get("node") as Node3D
+	if node == null or not is_instance_valid(node):
+		return
+	var ov: Dictionary = _mod_editor.call(
+		"override_for", _edit_records, _edit_sel, _edit_overrides)
+	var cur: float = float(ov.get("scale", 1.0))
+	var nxt: float = clampf(snappedf(cur * factor, 0.05), 0.25, 4.0)
+	if is_equal_approx(nxt, 1.0):
+		ov.erase("scale")
+	else:
+		ov["scale"] = nxt
+	node.scale = Vector3.ONE * nxt
+	_edit_dirty = true
+	print("[em-edit] %s scale %.2f (visual; footprint stays the plan's)" % [r.get("token"), nxt])
 
 
 func _edit_nudge(dx: int, dz: int) -> void:

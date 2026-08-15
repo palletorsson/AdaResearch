@@ -81,6 +81,9 @@ func _run() -> void:
 	inst.call("_edit_handle_key", KEY_LEFT)
 	inst.set("_edit_shift", false)
 	inst.call("_edit_handle_key", KEY_PAGEUP)
+	# v4: scale. + twice = 1.05^2 -> snapped 1.10; a `scale` ruling must land.
+	inst.call("_edit_handle_key", KEY_EQUAL)
+	inst.call("_edit_handle_key", KEY_EQUAL)
 	# ── v2: the palette. [ browses the chapter the camera stands in; ENTER
 	# stamps the pick 2.5 m ahead and records an ADD ruling.
 	#
@@ -164,12 +167,14 @@ func _run() -> void:
 					fails.append("no `offset` ruling - the fine nudge wrote nothing")
 				elif absf(float(off[0]) + 0.4) > 0.01 or absf(float(off[1]) - 0.2) > 0.01 or absf(float(off[2])) > 0.01:
 					fails.append("offset %s != [-0.4, 0.2, 0.0]" % str(off))
+				if absf(float(ov.get("scale", -1.0)) - 1.10) > 0.011:
+					fails.append("scale %s != 1.10 after two + presses" % str(ov.get("scale")))
 	_verdict(fails)
 
 
 func _verdict(fails: Array[String]) -> void:
 	if fails.is_empty():
-		print("EDITOR TRIAL: PASS — E picked, arrows moved, SHIFT-arrows fine-nudged, R turned, F5 wrote the ruling")
+		print("EDITOR TRIAL: PASS — E picked, arrows moved, SHIFT-arrows fine-nudged, + scaled, R turned, F5 wrote the ruling")
 	else:
 		print("EDITOR TRIAL: FAIL %d" % fails.size())
 		for f in fails:
