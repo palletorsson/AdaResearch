@@ -676,6 +676,24 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
     ladder: list[Trace] = []
     tried: list[tuple[float, Slot, int, str, list[Trace], list[str]]] = []
 
+    # SPIKE 09 — a genuinely UNMEASURED body must not negotiate: (0,0,0)
+    # would pass every "too big" test and then fail "no venue is large
+    # enough" because no venue has size zero. Written believing four GPU
+    # artifacts hit this; they do not (the contract resolves them at 90-300 m
+    # from a better source than artifact_sizes.json — they are WORLDS, and
+    # the spike record retracts F3). The guard stays: it costs nothing and
+    # names the case honestly the day a zero body arrives.
+    if max(contract.body_m) <= 0.0:
+        ladder.append(Trace(
+            "measurement", "fail",
+            "unmeasured: body (0, 0, 0) — this artifact needs the size probe "
+            "(tools/audit_spine_bodies.py), not a room; nothing was negotiated"))
+        return Placement(
+            artifact=contract.lookup, slot="-", anchor=(0, 0), rotation=0,
+            mode="freestanding", wall=None, wall_rect=None, venue="unmeasured",
+            support_height_m=0.0, score=0.0, result="REJECT",
+            traces=ladder, exceptions=[], masks=None, contract=contract)
+
     # Match first, search second. The table says which slots were made for a
     # body this size; only when none of them work does this become a search.
     if contract.containment == "precinct":
