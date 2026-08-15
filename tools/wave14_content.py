@@ -6,7 +6,7 @@
 # each value by name from the builder's registry note, and a tail with the measurement AND
 # the miss. The H1 and masthead were written AFTER the sweep was scored, never before.
 
-TITLE = "the point nobody can see"
+TITLE = "Wave 14 &mdash; the point nobody can see"
 
 MAST = """
 <div class="wrap">

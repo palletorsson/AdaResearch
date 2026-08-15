@@ -55,6 +55,30 @@ def main() -> int:
             closest=f'{c["a"][axis]} vs {c["b"][axis]}', closest_pct=round(c["changed_pct"],2))
         print(f"{tok:<18}{va+' vs '+vb:<28}#{idx+1:>2}/{len(same):<3} {'HIT ' if idx==0 else 'MISS'}  "
               f"{out[tok]['closest']:<22}{out[tok]['meas']:>6}")
+        # DESIGNED NULLS — pairs the builder said would be identical BY CONSTRUCTION, with a
+        # ceiling. A held null is a negative control that proves the sweep can see a difference
+        # when there is one and reports none when there is not; a broken null is a real finding
+        # about the artifact. Wave 14 scored plumb_room's two by hand; this makes it routine.
+        nulls = []
+        for nd in (pd.get("designed_nulls") or []) + ((e.get("dna") or {}).get("designed_nulls") or []):
+            a, b, cap = nd.get("a") or {}, nd.get("b") or {}, float(nd.get("under_percent") or 0.3)
+            fx = ((e.get("dna") or {}).get("fixture") or {})
+            def _match(row_side, want):
+                return all(str(row_side.get(k)) == str(v) for k, v in want.items() if k not in fx)
+            hitrow = next((r for r in d["variants"]
+                           if (_match(r["a"], a) and _match(r["b"], b)) or (_match(r["a"], b) and _match(r["b"], a))), None)
+            if hitrow is None:
+                # The bite file stores EVERY pair (C(n,2) rows — checked on depth_well: 105 of
+                # 105), so a miss here means the null names a value the sweep did not render
+                # (a dropped value under --max, or a typo in the registered dna). Say so.
+                nulls.append(dict(a=a, b=b, under=cap, measured=None, held=None))
+                print(f"{'':18}  null {a} vs {b}: no such pair in the sweep — value not rendered or misnamed")
+                continue
+            m = round(hitrow["changed_pct"], 2)
+            nulls.append(dict(a=a, b=b, under=cap, measured=m, held=(m <= cap)))
+            print(f"{'':18}  null {a} vs {b}: {m}% {'HELD' if m <= cap else 'BROKEN'} (< {cap}%)")
+        if nulls:
+            out[tok]["nulls"] = nulls
     (REPO/"ada_run"/f"{slug}_scores.json").write_text(json.dumps(out,indent=1),encoding="utf-8")
     print("\n  %d of %d named the closest pair"
           % (sum(1 for v in out.values() if v["hit"]), len(out)))
