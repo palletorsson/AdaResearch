@@ -210,6 +210,17 @@ exhibit — Palle's ruling" by the refusal text itself. EDITOR: SHIFT+arrows
 override rulings (`offset`, `rotation`, `scale`), all visual-only past the
 cell so the seal and walk map keep the plan's footprint (`3e615b536`).
 
+**Twelfth session, 08-15: everything stamped is movable** (`83d38d7d2`).
+Three new record kinds in the same overrides file, `"kind"` field:
+FURNITURE (all dressed props without a height convention; token + dress
+index; arrows 1 m, SHIFT 0.2, PGUP/PGDN, Q/R), PLINTH (artifact token +
+plan cell; offsets), SHOWING (hang index; offsets — pictures stay batched,
+an invisible proxy is selected, the ruling shifts all 7 boxes before
+emit). Applied where each is built. Two trial-caught faults: JSON int→
+float broke the plinth key (typed compares); em_chapter set after the
+deal left "" on plinth/prop records (set early, re-keyed on the deal's
+chapter). Trial: all three ruled, saved, REBUILT at the ruling.
+
 **NEXT: rung 3 — Palle rules the 32 worlds (walk-in precinct, or exile to
 their own maps).**
 
