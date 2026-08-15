@@ -182,8 +182,22 @@ regen; needs its own pass), ceiling/floor/edge props (no height knob).
   `artifact_sizes.json` stale entries; the contract resolves them at
   92–300 m. Fourth "measure what the code reads" of the week.
 
-**NEXT (in order): rung 1 the bay → rung 2 joint budget → Palle rules
-the 14 worlds.**
+**Tenth session, 08-15: rung 1 built — and honestly inert.** `_try_bay` +
+`bay_cells` + exporter `bay` + assembler `_open_bays` (`9cd1b072b`),
+`test_em_bays.gd` both ways. Full regen (mtime checked — a first run was
+cut by a 590 s timeout and compared the OLD plan to itself): **byte-
+identical, 0 bays, 114 escalations.** Not the rung's fault: standalone
+traces show five of six candidates need the ROOF opened (6–14 m tall
+under 4.5 m) and the sixth wants 12 m of clear floor no template has.
+The bay ships as a gated capability the corpus does not exercise. Also
+found and fixed: `FloorPlan.wall_height_m` was a THIRD wall height (4.0);
+`from_museum` reads em_detail.WALL_H now. And the size probe in spike 09
+was corrected — `artifact_sizes.json` is a stale mirror for the WHOLE
+corpus; escalations re-measured from the contract: 6 / 63 / 32, not
+30 / 58 / 14. **NO SPATIAL FINDING MAY CITE artifact_sizes.json AGAIN.**
+
+**NEXT (in order): rung 2 joint budget per segment length (63 bodies) →
+Palle rules the 32 worlds.**
 
 **Open findings (not fixed today).**
 
