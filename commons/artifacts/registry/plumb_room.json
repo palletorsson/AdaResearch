@@ -1,0 +1,61 @@
+{
+	"artifacts": {
+		"plumb_room": {
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"marchingcave",
+					"marchingcubes_inside_cave",
+					"mc_base",
+					"mc_inside_cave"
+				],
+				"axes": {
+				 "plumb": [
+				  "bedded",
+				  "overturned",
+				  "weightless",
+				  "steep"
+				 ],
+				 "reading": [
+				  "rock",
+				  "standing",
+				  "line"
+				 ]
+				},
+				"note": "A CAVE IS DEFINED BY WHICH WAY IS DOWN. One ridged scalar field, one seed, one threshold; the four values of `plumb` are four choices of plumb line drawn through it, and what changes is not the rock but where a walker could stand. THE VALUES ARE THE FAMILY'S NUMBERS, NOT ITS WORDS. Everything the source shader knows about gravity is one term, MarchingCubes.glsl:214/218, `density = -(worldPos.y+100)/300 * plumbScale + density`, the only anisotropic term in an isotropic ridged sum, and TerrainGenerator.gd:89-94 gives the four multipliers. Here the same term is `f(p) = r(p) - iso - k*(p.y - y0)/span` with y0 = -h*100/280 and span = h*300/280, the source's +100 and /300 scaled from its 280 m box to this 0.84 m chunk, so the horizon sits where the source's does, a seventh of the way up. iso is the MEDIAN of r over the interior lattice, so every plumb shares one threshold and weightless is a fifty-percent sponge by construction. Solid where f > 0; the lattice's outer layer is forced to air, so the chunk is a closed core sample whose cut faces are drawn paler and never count as standable.\n\nplumb - bedded: k = +1.0, the source's shipped default (PLUMB_SCALES.bedded). Down is -Y for the field and for the walker. Rock fills the bottom, thinning upward: about 23% of the chunk solid, spires reaching mid-height, a rugged floor with pockets. overturned: k = -1.0, the sign flipped. Rock fills from the horizon UP - about 76% solid, a block whose top is a flat cut face and whose underside is the rough ceiling of a cave you cannot stand in, because the walker's down is still -Y and every up-facing surface is a pocket sealed inside the mass. weightless: k = 0.0, the term deleted. Isotropic sponge, 50% solid at every height, no floor, no ceiling; standable ledges scattered through the whole volume. steep: k = 3.0, the SAME down with three times the weight - NOT a tilt, whatever the word suggests; the code tilts nothing. The crossing band compresses to a third of bedded's, the noise loses to the gradient, and the mass retreats into a slab in the bottom fifth (about 13% solid) with a flatter top and holes clean through it: a crawl space, and the widest standing set per unit of rock.\n\nreading - rock: the isosurface alone, rock plus the paler cut faces of the core sample. standing: rock, plus every triangle a walker under the ROOM's gravity could stand on, laid 3 mm proud of the surface in ochre - air-side normal within 35 degrees of +Y, air at 1.5 and 3 cells above its centre, and not a cut face. The walkable set as patches you can count, not a percentage. line: rock, plus the plumb line itself hung beside the chunk on its +X side: a dark rod the chunk's full height, a brass tick every 0.25 of the bias term (steep packs three into each of bedded's intervals; bedded and overturned share tick positions because the set does not know the sign), a long tick at the term's zero (y0, the shared horizon), and a cone bob at the down end - below the chunk for bedded and steep, above it for overturned. weightless hangs a brass sphere at mid-height with no rod and no ticks: a bob with nowhere to hang has no line and no point.\n\nTHE FIELD ITSELF: three octaves of 1-|snoise| squared, weight-gated by the previous octave, amplitude halving and frequency doubling (the source's loop at MarchingCubes.glsl:187-197 with the clean fold rather than its off-centre `*2-1`), FastNoiseLite simplex-smooth at seed 7, base wavelength ~4.5 cells so the first octave clears the lattice's 2-cell Nyquist limit, the second barely does and the third aliases into grain - the same arithmetic the source does at 4.375 m. Marching TETRAHEDRA (six per cube, 14^3 cubes), triangles wound toward the air by a per-triangle test against the air-side point, drawn cull-disabled.",
+				"default": "plumb=bedded, reading=rock, layout=ladder. bedded is TerrainGenerator.gd:99's `@export_enum(...) var plumb: String = \"bedded\"` and PLUMB_SCALES' shipped 1.0, the value every one of the four tokens' placements renders; rock is what the family draws - all four members ship the isosurface and nothing else. The ladder is the artifact's own default in a map, so a visitor meets four plumbs of one rock side by side; the sweep pins layout to single through dna.fixture.",
+				"kin": "THE FOUR SOURCES ARE TWO SCENES ON ONE SCRIPT, AND ONE OF THE SCENES IS DEAD TO THE AXIS. Checked in the .tscn files, not assumed: marchingcubes_inside_cave.tscn (tokens mc_inside_cave, marchingcubes_inside_cave; noise_scale 3.8, chunk_scale 280, iso 0.88) and marchingcubes.tscn (tokens mc_base, marchingcave; iso 1.11, chunk_scale 300, use_fallback = true) both load TerrainGenerator.gd, uid c2aji3u2bgmv8. With use_fallback = true TerrainGeneratorBase._ready() returns before MarchingCubes.glsl is loaded and the mesh is _create_simple_cave_mesh()'s hand-written sine tunnel, so on mc_base and marchingcave `plumb` is inert BY CONSTRUCTION - TerrainGenerator.gd:26-31 says exactly this and says those two must not be declared, and the registry declares them anyway (a bare axes block on each, no note). So the census is: one vocabulary, one live scene under two names, one dead alias pair. The third scene, marchingcubes_cave.tscn (mc_cave, marchingcubes_cave), carries the same axis and is not in this synthesis's source list. `plumb` is that family's own word, chosen there because a plumb line DEFINES down rather than measures it, and it is kept here for the same reason.",
+				"declines": "REFUSED as an axis: `octaves` (the family's second axis - a count of scales, orthogonal to which way is down, and already swept on the source); `iso_level` (on a field with a vertical gradient a threshold offset is a horizon translation and would measure plumb's own pixels; the source's entry refuses it for the same reason); a tilt value (the brief proposed steep as 'the down-axis tilted' - the code says steep is a tripled weight along the same axis, and inventing a tilted value would declare a member the family does not have); any all-plumbs value inside `plumb` (that is `layout`, pinned by the fixture, per the wave-13 speck lesson).",
+				"predicted_degeneracy": {
+					"pair": "bedded against steep, in the rock reading",
+					"percent": 10,
+					"arithmetic": "Both keep the field's down at -Y and both leave the top half of the chunk as air; they differ only in how far up the rock reaches. Probed in Python before any capture (Casey Duncan simplex standing in for FastNoiseLite, same amplitude class): interior solid fraction bedded 0.226, steep 0.131; per-layer solid fraction from bottom to top bedded 0.57 0.53 0.47 0.40 0.25 0.24 0.15 0.12 0.07 0.07 0.05 0.01 0.01, steep 0.69 0.53 0.31 0.16 0.01 0.01 then zero; the horizon layer (y0, layer 2 of 14) is 0.53 under BOTH by construction because the bias term is zero there. Voxel disagreement bedded-vs-steep 0.113 of the interior, against 0.274 for the runner-up overturned-vs-weightless and 0.281 for bedded-vs-weightless - a margin of 2.4x. In the frame: at a solved framing where the chunk's projected box fills ~78% of frame width the chunk's own vertical extent is ~50% of frame height and its width ~70%; bedded's spires and upper mass occupy a band from ~0.25h to ~0.7h that steep leaves empty, 0.45h * 50% = 22% of frame height * 70% width = 15%, filled at maybe two-thirds by spires seen through 12 cells of depth, so ~10% of frame. At framing 1.0 the same difference is ~4.5% (the box fills 53% of the frame instead of 78%, area scales by 0.46). Runner-up overturned-vs-weightless is predicted near 2.4x this. TWO DESIGNED NEAR-IDENTITIES RIDE ALONG AS CHECKS: overturned.rock against overturned.standing should be under 0.3% - the standable patches under overturned (29 crude cells in the probe) are all pockets sealed inside the mass and out of view from every outside standpoint; and weightless.rock against weightless.line should be under 0.3%, since the line reading adds only a 14 mm sphere. If bedded-vs-steep comes back BELOW 4.5% at framing 1.0, stop: the prediction is a floor, and the only sweep in the corpus that landed under its own floor was broken.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact stands as the whole ladder by default, which is what it is for. The SWEEP must see one plumb at a time: capture_config_sweep unions the AABB across a spec's variants, so an all-plumbs view in the same spec frames every single chunk against a row four times its width and photographs it as a speck. `layout` is therefore an export outside the axes and pinned here, per the wave-13 lesson.",
+				"still_note": "Static and seeded. FastNoiseLite at seed 7, no clock, no _process; every plumb of one rebuild samples the ridged lattice once and shares it, so the four values are four readings of ONE rock and not four rocks. Marching tetrahedra on 14^3 cells builds a chunk in well under a tenth of a second in GDScript; the whole ladder in under half a second."
+			},
+			"scene": "res://commons/artifacts/plumb_room/plumb_room.tscn",
+			"category": "proceduralgeneration",
+			"description": "One small marching-tetrahedra cave chunk read under the four plumbs its family declares - bedded, overturned, weightless, steep - the field's own gravity term at +1, -1, 0 and 3. The rock is one field; what changes is where a walker could stand, shown as standing patches on the rock and as the plumb line itself hung beside it.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 3,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			}
+		}
+	}
+}

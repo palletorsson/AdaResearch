@@ -1,0 +1,63 @@
+{
+	"artifacts": {
+		"assembly_yard": {
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"snap_cube_puzzle",
+					"snap_octahedron_puzzle",
+					"snap_tetra_puzzle",
+					"snap_tetrahedron_puzzle",
+					"cross_line_puzzle",
+					"plus_line_puzzle",
+					"triangle_line_puzzle"
+				],
+				"axes": {
+					"state": [
+						"loose",
+						"closed",
+						"scattered",
+						"short"
+					],
+					"solid": [
+						"tetra",
+						"octa",
+						"cube"
+					]
+				},
+				"default": "state=loose, solid=tetra. loose is the snap family's own default - snap_tetrahedron_puzzle.gd:45 and snap_octahedron_puzzle.gd:50 both declare `var solid: String = \"loose\"` and both build nothing on it. tetra because it is the family's first solid (triangle_line_puzzle's `relationships` line names snap_tetrahedron_puzzle its 3D successor) and the one whose `short` is the case its truth line is about: three points cannot enclose.",
+				"note": "FAMILY CENSUS. Seven artifacts, two axis names, one question - how much of the order is pre-given. The four snap tokens are TWO SCENES UNDER FOUR NAMES: snap_tetra_puzzle (qfep.json) points at snap_tetrahedron_puzzle.tscn and snap_cube_puzzle (qfep.json) points at snap_octahedron_puzzle.tscn. There is no cube scene in the family; the cube exists only as snap_octahedron_puzzle's second axis `dual` (around/inside/both). pick_up_cube also declares `stock` (wire/foam/crate/steel/clay) and is EXCLUDED: its own @identity says stock is what the cube is MADE OF, a material axis wearing the family's word. WHAT EACH `state` VALUE MEANS, from the code and not the word. closed = vertices exact, every edge a built strut (both snap sources' _build_closed: points seated on the vertices, twelve or six solid struts). loose = vertices pulled in to 0.70 of their radius, which is where BOTH .tscn files ship them (tetra base ring 0.11 m against 0.16 built; octa equator 0.141 against 0.20), and struts parked just outside the edge each belongs to at RING_OFF 0.10, triangle_line_puzzle's `ringed` (RING_OFFSET 0.14 on a 0.40 triangle) scaled to the 0.28 edge; every displacement is under snap_point.tscn's snap_distance 0.12. scattered = vertices at twice the loose radius in unrelated directions (snap_octahedron_puzzle: 'twice the shipped radius', 'no two sharing an axis'), struts at unrelated angles and depths (cross/plus `scattered`, triangle `strewn`) - fixed tables, no randf, the tetra taking the first 4/6 entries and the octa the first 6/12 so a shared part lands in the same place across solids. short = the last vertex is not built (both sources: the apex, hidden and taken out of the collision world); struts with both ends present are built solid; struts that needed the absent vertex are dashed ghost stubs stopping in air at 0.55 of the way (snap_octahedron_puzzle.GHOST_STUB; the tetrahedron's 0.87 was the road not taken). MAPPING THE LINE WORDS ONTO THE SNAP WORDS, decided from coordinates: cross/plus `scattered` and triangle `strewn` ARE snap `scattered` (unrelated angles, nothing given). triangle `ringed` IS snap `loose` (each part a snap from its place, 'the whole puzzle is closure'). cross/plus `crossed` is `loose` on the relation dial only - the two lines already cross at their centres but sit at x=0.2, y=-0.3, a full figure-width off the target, so its placement distance is scattered's and its relation distance is loose's; the line vocabulary measures ORDER AMONG THE PARTS where the snap vocabulary measures NEARNESS TO THE FIGURE. `stacked`/`racked` (parallel lines issued from a rack beside the figure) has NO snap equivalent, because a rack of POINTS is indistinguishable from a cluster - struts have an orientation to agree on and points do not - and `closed` and `short` have NO line equivalent, because a stock axis describes the parts before assembly and never the finished figure or a missing part. THE TWO DIALS. closed 0 < loose one snap < scattered twice-loose is one dial; short is at closed's position on it (its vertices are exact) and off it on the other - whether the parts add up to the solid. In the ladder layout the three sit in a row at one spacing and short is set apart by an extra half-spacing and stepped back. WHAT `solid` MEANS: tetra 4 points 6 struts (snap_tetrahedron_puzzle._closed_vertices, edge 0.28); octa 6/12 (snap_octahedron_puzzle, R = edge/sqrt 2 = 0.198); cube 8/12 (the octahedron's CUBE_SIGNS corner table, side = edge) - the solid snap_cube_puzzle is named for and has never built. Same edge for all three: the parts are one stock. Amber points are the octahedron's snap-point amber, cyan struts the tetrahedron's built-strut cyan. Gauges: STRUT_R 0.012, GHOST_R 0.006 as the tetrahedron writes them - the octahedron writes the same digits as diameters, so the two siblings differ by 2x under one number. Layout is not an axis: dna.fixture pins single, per the wave-13 speck lesson. Sources' categories are 'unknown' and 'qfep'; 'puzzles' (19 members) is used here.",
+				"predicted_degeneracy": {
+					"pair": "closed against short, in the cube solid",
+					"percent": 0.6,
+					"arithmetic": "Every other state pair moves every part by more than a strut width, so both the old and the new pixels change - roughly 2x the ink of a closed frame. closed against short changes only the parts the absent vertex takes with it: 1 of 8 points and 3 of 12 struts, and the three ghost stubs put ~14% of a strut back (0.55 length x 0.5 dash duty x 0.5 width). Per strut the projected area is 0.28 x 0.024 = 0.0067 m2; the point is pi x 0.018^2 = 0.0010 m2. Changed area = 3 x 0.0067 x 0.86 + 0.0010 = 0.0183 m2. The framed field, sized by the union of twelve variants (scattered fits a 0.9 m ball), is taken as ~1.4 m wide, so 0.0183 / 1.96 = 0.93% of pixels change, at a mean channel delta of ~0.65 (emissive cyan against near-black) = 0.6%. The tetra pair (3 of 6 struts + 1 of 4 points) is the SAME absolute changed area and is separated only by foreshortening: from yaw 0.62 the cube loses one vertical edge (x0.97), one x-edge (x0.81) and one z-edge (x0.58) = 2.36 edge-lengths, the tetra loses three risers each mostly vertical = ~2.7. So cube by about 15%, and that call can go either way; the octa pair (4 of 12 + 1 of 6) is clearly larger. The number scales as 1/field^2 and is a floor: BELOW ~0.3% means the short branch is not firing (short rendering as closed), which is the failure this prediction exists to catch.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact stands as the whole comparison by default (four states, one solid); the SWEEP must see one state at a time, because capture_config_sweep unions the AABB across a spec's variants and an all-states view frames every single state against a row four times its width - the speck that crashed the critic in wave 13.",
+				"framing": 0.41,
+				"framing_why": "SOLVED, NOT GUESSED, by tools/solve_framing.py. At framing 1.0 this artifact's subject bounding box filled 32.4% of frame width and 31.8% of its height, with a subject share of 1.91%. The visible frame is 2 * PAD * radius * framing metres wide, so the box grows as 1/framing; solving for a target of 78% of the smaller-headroom dimension gives 0.41. THE ARTIFACT WAS NEVER DARK, EMPTY OR MISSING A FIXTURE - the camera was between three and eight times too far away, and the near-zero subject share this token had on record was a fact about the standpoint rather than about the axis."
+			},
+			"scene": "res://commons/artifacts/assembly_yard/assembly_yard.tscn",
+			"category": "puzzles",
+			"description": "One solid of the snap family's own parts - amber points, cyan struts, edge 0.28 - at each of the four states the seven puzzles name under two axis words. closed, loose and scattered are one distance from being itself; short is a different kind of distance, near and incomplete, and stands off the row.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 3,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			}
+		}
+	}
+}

@@ -1,0 +1,63 @@
+{
+	"artifacts": {
+		"intrusion_bench": {
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"GyroidDemo",
+					"gyroid_demo",
+					"marchingcubes_torus_sculpture",
+					"mc_torus_sculpture"
+				],
+				"axes": {
+				 "intrusion": [
+				  "melted",
+				  "formula",
+				  "eroded",
+				  "drifting",
+				  "rippled",
+				  "roughened"
+				 ],
+				 "surface": [
+				  "gyroid",
+				  "torus",
+				  "sphere"
+				 ]
+				},
+				"default": "intrusion=melted, surface=gyroid, layout=ladder. melted because it is the @export default of BOTH member scripts (TerrainGeneratorGyroid.gd:95, TerrainGeneratorTorus.gd:112) and, by both registry notes, the only rung any of the family's eighteen map placements has ever shown - thirteen under the two gyroid names, five under the two torus names, not one passing a config key. gyroid because it is the family's larger body (13 of 18 placements). ladder because the bench is a comparison and stands as one by default, the way frequency_shell does; the sweep pins single.",
+				"note": "FAMILY CENSUS: intrusion - 4 registry names - 2 scenes - 2 vocabularies sharing 2 words. GyroidDemo and gyroid_demo both name GyroidDemo.tscn (procgen_extra.json:324 and isosurfaces.json:202) and declare melted|formula|eroded|drifting; marchingcubes_torus_sculpture and mc_torus_sculpture both name marchingcubes_torus_sculpture.tscn (procgen_extra.json:8066, isosurfaces.json:948) and declare melted|formula|rippled|roughened. So it is two artifacts under four names, and the two vocabularies were written by the same wave-1 pass, which took `melted` and `formula` from the gyroid on purpose so the shipped rung and the null rung would carry the same names on both. THE ARGUMENT, and it is arguable: an intrusion is noise added to the formula's field in one frequency band, and the family's six words are one null, one union and four bands - not the three bands plus one subtraction the words suggest. Read from the shaders: `formula` = the level set with nothing added ([0,0,0] in both members). `drifting` (gyroid) = eroded PLUS snoise(worldPos*0.05)*1.0 added to the density before the isoLevel compare - one noise unit across the 20 m chunk, a threshold that varies through space: the ZERO-frequency band, on the value. `rippled` (torus) = sin(3*angle + 0.1y)*3 + sin(5*angle)*cos(0.15y)*4 added to the distance: three- and five-fold round the ring, deterministic, the LOW band, no randomness. `roughened` (torus) = five octaves of snoise summed raw and multiplied by 8.0, sampled at world*noise_scale/chunk_scale = world*0.002, so the base octave is 0.32 cycles across the whole 158 m torus and the finest is about 1.5 tube radii - the word says grain, the code says a low-to-mid stochastic LUMP. `eroded` (gyroid) = snoise(p*2.0)*0.5 on the density: about twelve cycles per gyroid period, features smaller than the channel - the HIGH band; and it is SIGNED, pits and warts alike, so it is not a subtraction: nothing in either shader subtracts. `melted` = both members' shipped state, i.e. everything that member adds at full strength - and in the gyroid it also displaces the COORDINATES the formula is read at (`p += warp*4.0`, at the same 0.05 wavelength drifting uses), the one operation here that is not a value band. It is not a smoothing; it is every band at once. Two further things the words hide: the gyroid's vocabulary is a NESTED ladder (formula c eroded c drifting c melted, each rung adds one band to the last) while the torus's is a PARTITION (rippled | roughened, melted = both), so the shared word `melted` sits in two different grammars; and none of the four unshared bands has ever been shown on the other body. WHAT THE BENCH BUILDS. One scalar field sampled on a 26^3-cell grid over a 1.12 m box, marched to real triangles with the SDF bus's own tables (commons/morphology/sdf/sdf_marching_cubes.gd), normals from the trilinear gradient, wound outward against that gradient, culling off. Every intrusion is ONE operator with fixed metric parameters applied unchanged to whichever surface is chosen. VALUES OF `intrusion`, each glossed as the bench builds it: formula - d(p), the base distance, nothing added. eroded - d + 0.035 m * simplex(p at 6/m): one octave, features ~0.17 m (four cells), 0.44 of the gyroid channel radius. drifting - eroded + 0.07 m * simplex(p at 1/m): a second band whose features are larger than the body, so it reads as a slow fattening of one side and thinning of the other, 0.9 of the channel radius; the grain is the SAME sample as eroded's, so drifting minus eroded is the DC band alone. rippled - d + 0.0165 sin(3θ + 18y) + 0.022 sin(5θ) cos(27y), θ = atan2(z, x): the torus member's own two terms scaled to an 0.11 m tube (3.0 and 4.0 on a 20 m tube are 0.15 r and 0.20 r; y*0.1 and y*0.15 rad/m are 2 r and 3 r per radian). roughened - d + 0.045 m * sum over five octaves of 0.5^i simplex(p * 2^i at base 0.43/m), raw sum, unnormalised as the member's is; base octave 0.32 cycles across the 0.74 m torus exactly as the member's is across its 158 m one, finest octave ~0.15 m; typical 0.4 r, peaks 0.8 r. melted - the union of both members' shipped recipes: d(p + 0.08 m * warp3(p at 2.5/m)) + eroded's grain + drifting's DC + rippled + roughened. Stacked, the value bands peak near 0.2 m on bodies whose feature radius is 0.08-0.11 m, so melted shatters the gyroid and lumps the torus - which is what both members' shipped melted does (2,859 bodies; a lump whose noise swings three quarters of a tube radius). VALUES OF `surface`: gyroid - Schoen's gyroid sin x cos y + sin y cos z + sin z cos x at k = 13.5 rad/m (period 0.465 m, 1.46 periods across the block; the member ships ~1.6), solid where g >= 0.5 as the member is solid where g >= its iso_level, normalised by k * 1.43 (the mean |grad g| on that level set, measured on a 96^3 replica) so the bands' metres are metres, and cut to a 0.68 m box by max() so an infinite surface has an outside - the box is part of the formula and the bands land on its faces too. torus - the exact torus SDF, major 0.26 m, minor 0.11 m, the member's 50/20 at 1/190. sphere - |p| - 0.32 m, the null surface: no formula-structure of its own, so a band on it is the band alone. The same intrusion reading the same on all three is the honesty check the family never ran.",
+				"kin": "Two scenes under four names, stated so the next pass copies deliberately: gyroid_demo's own kin note names GyroidDemo as the same scene and declines to declare on it; mc_torus_sculpture's declares on both torus names. This bench lists all four as sources because all four are how a MAP reaches the family. `intrusion` is inherited, not coined; the two bodies are the family's two bodies; the sphere is added and said to be added.",
+				"declined": "REFUSED, a `band` axis over the four operators as separate values with melted removed - it would be a cleaner argument and it would not be the family's vocabulary; the six words are what a map can type. REFUSED, `period` (gyroid_demo) and `threshold` (mc_torus_sculpture): each belongs to one body and would confound the cross. REFUSED, amplitude and octave count as axes: they are the parameters of a band, held fixed so the two axes stay orthogonal; they are exports of nothing and constants of the file. REFUSED, cells and noise_seed as axes: a resolution and an arbitrary sample, the same refusals gyroid_demo made of resolution and noise_offset.",
+				"still_note": "Static and a still is a complete account: no _process, no timer, FastNoiseLite at seed 7 is a pure function of seed and position, and marching cubes on the same samples emits the same triangles. Four boots of one rung are one mesh. Build cost per body is one 27^3 field sample (about 20k evaluations, up to eleven noise calls each at melted) plus 17,576 cells - well under a second single, roughly six times that for the ladder at map load.",
+				"predicted_degeneracy": {
+					"pair": "eroded against drifting, on the sphere surface",
+					"percent": 1.6,
+					"arithmetic": "The two differ by the DC band alone (the grain is the same sample in both), and a zero-frequency band is by definition the one that changes a picture least per metre of amplitude. On the sphere the term is 0.07 m * simplex at 1/m across a 0.64 m body: RMS about 0.02 m of near-uniform radius change plus a ramp of about +/-0.045 m across the body. Radius change moves the silhouette by a ring of 2*0.02/0.32 = 12.5% of the subject; at a solved framing the sphere is ~45% of frame, so 5.6% of frame at ~40 grey levels of lit-body-against-ground contrast = 0.9%. The ramp tilts normals by at most ~6 degrees, ~8 grey levels of Lambert peak, ~4 RMS, over 45% of frame = 0.7%. Sum 1.6% of frame, a FLOOR (a rasteriser without shadow or AO undershot the last four such predictions by 1.5x to 6.7x). RUNNER-UP, close enough that which of the two comes first is the falsifiable part: formula against rippled on the sphere, ~2.5% - RMS displacement 0.016 m but tilts to ~12 degrees over the whole visible hemisphere, ~11 grey levels RMS over 45% of frame = 1.9%, plus a five-fold silhouette ring ~0.6%. WHAT WOULD FALSIFY THE READING: if eroded against roughened comes closest, the code was wrong to call roughened a lump and the words were right that they are one grain; if formula against eroded comes closest, the high band does not register at 26 cells and the bench is under-resolved rather than the axis inert. LARGEST PAIR expected: formula against melted on the gyroid, over 25% - a clean perforated block against a warped scatter.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The bench stands as the whole ladder by default, which is what it is for. The SWEEP must see one body at a time: capture_config_sweep unions the AABB across a spec's variants, so an all-rungs view in the same spec frames every single against a row six times its width and photographs it as a speck - wave 13 crashed the critic on exactly that. layout is not an axis and is not in dna.axes."
+			},
+			"scene": "res://commons/artifacts/intrusion_bench/intrusion_bench.tscn",
+			"category": "geometry",
+			"description": "One implicit surface - the family's gyroid or torus, or a sphere as the null - sampled, marched to real triangles, and damaged by each of the six intrusions the two member scenes name between them: the level set alone, one high band of grain, that plus a zero-frequency drift, the torus's two analytic ripples, five octaves of lump, and everything at once with the coordinates warped. Six words, four bands, one null, one union.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 3,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			}
+		}
+	}
+}

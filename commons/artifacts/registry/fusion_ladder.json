@@ -1,0 +1,62 @@
+{
+	"artifacts": {
+		"fusion_ladder": {
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"metaballs",
+					"raymarched_metaballs",
+					"implicit_surface_modeling",
+					"csg_union_demo"
+				],
+				"axes": {
+					"fusion": [
+						"distinct",
+						"necked",
+						"lobed",
+						"single"
+					],
+					"reading": [
+						"skin",
+						"sources",
+						"section"
+					]
+				},
+				"default": "fusion=distinct, reading=skin. distinct is the export default of metaballs.gd:98, which is ONE scene under three registry names (metaballs, raymarched_metaballs, implicit_surface_modeling), so three of the four members default to it; csg_union_demo.gd:128 defaults to lobed and is outvoted three to one. In every member `distinct` means the same thing it means here - the blend never reaches the gap, so the picture is separate spheres. skin is the isosurface alone, which is the only thing any member draws. layout defaults to ladder (all four rungs stacked, distinct at the bottom) because the artifact IS the comparison; the sweep pins single through dna.fixture. Zero placements, so nothing is preserved except the family's meaning of its own default.",
+				"note": "fusion is the family's word, its four values and its order - distinct necked lobed single - taken character for character from metaballs.gd:98 and csg_union_demo.gd:128. THE FIELD IS THE FAMILY'S OWN: two sphere SDFs of radius R = 0.18 folded by metaball.gdshader's polynomial smin(a, b, k), k = 0.24 held fixed, and the dial is what csg_union_demo turns, the separation d of the two centres. Every station is a fixed pair of centres on the x-axis, no RNG anywhere, and the skin is root-found on that field (bisection on each radial ray, poles by bisection on the axis, one lathed body per connected run of the axis, so the component count falls out rather than being asserted). WHAT THE FOUR VALUES MEAN, in metres, against 2R + k = 0.60 (where smin first touches the skin), 2R + k/3 = 0.44 (where the surface connects) and d ~ 0.204 (where the waist vanishes): distinct = d 0.62, gap 0.26 wider than k, so smin never engages and the skin is two exact spheres of radius 0.18 - the metaball members' shipped distinct exactly (k 0.4 against gaps of one to three metres), F(mid) +0.09, two components. necked = d 0.42, two hundredths inside the connect threshold, F(mid) -0.010, neck radius 0.066 at the midplane, about a third of R, one component and the first rung on which that is true. lobed = d 0.34, F(mid) -0.050, waist 0.140 against a lobe radius 0.180, a 22% dip, same topology as necked with a wider neck. single = d 0.16, past the waist threshold, F(mid) -0.140, the profile is widest at the midplane (0.205) and falls monotonically to the poles - one ovoid 0.52 long by 0.41 wide with two centres inside it and no outward sign of either. THE ARGUMENT THE LADDER MAKES: the four names are stations on ONE number, F(mid) = d/2 - R - k/6, and along it exactly two things happen that are not smooth deformation - at 0.44 the topology changes (two bodies become one; the field's midpoint saddle crosses the isovalue) and at ~0.204 the waist vanishes (F_xx on the surface at the midplane changes sign; the curvature class changes, the topology does not). The first event sits between distinct and necked, the second between lobed and single, and between necked and lobed NOTHING happens but widening. csg_union_demo already half-says it - 'there necked is a smooth bridge, here it is a crease' - and the critic's finding that its `join` axis is CONDITIONAL on fusion (no seam at distinct because nothing joined) is the same fact from the other end: the seam is born at the first event. reading is this artifact's own word for what is drawn, and it is the second dial made visible: skin = the isosurface F = 0 alone, opaque, four silhouettes and nothing else. sources = the skin at half opacity with the two spheres it was blended from standing inside it as three great-circle rings each at radius R exactly (rings, not surfaces, because at distinct the source IS the skin and a second surface would be coplanar with it - coincident_face's fault - while a ring of finite tube radius straddles the skin instead); at distinct the rings sit ON the skin, from necked on the skin lifts off them wherever the blend engages. section = the near half of the skin cut away at the plane through both centres, the cut filled dark, and the field's own level sets laid in the cut - c = -0.16, -0.12, -0.08, -0.04, 0, +0.04, +0.08, the c = 0 line heavier because it is the skin. A level set at c is connected iff F(mid) <= c, so every rung of the section shows both regimes and the level that switches is F(mid): at distinct all seven are two loops; at necked -0.04 and below are two loops and 0 and above are one; at lobed the switch is between -0.08 and -0.04; at single only -0.16 is still two loops (two 2.4 cm ovals around the two centres, inside a skin that admits nothing). Turning the isovalue is turning the separation - that is the sentence 'a function plus a threshold is already a shape' with the threshold actually turned.",
+				"declines": "The metaball members' k (their own dial) is held fixed rather than swept, because sweeping k against a fixed d and sweeping d against a fixed k are the same one-parameter family read through F(mid) = d/2 - R - k/6, and the artifact's claim is that there is one dial, not two. csg_union_demo's `join` (flush | seam | tinted | shared) is refused: it is a disclosure ladder about a hard union's seam and this skin has no seam to disclose - the smooth side of that artifact's own sentence has nothing for three of the four values to mean. Any all-rungs value inside the fusion axis is refused for frequency_shell's reason and lives in `layout` instead. Time is refused: every value is standing geometry resolved in _ready.",
+				"predicted_degeneracy": {
+					"pair": "necked against lobed, in the skin reading",
+					"percent": 1.7,
+					"arithmetic": "Silhouette XOR only - orthographic, no shading, no antialiasing - so a FLOOR, not a forecast. The four skins were rasterised from the sweep's own standpoint (yaw 0.62, pitch -0.26, dir (0.561, 0.257, 0.787)) into a 760 x 760 frame 1.49 m wide, which is 2 x radius x PAD x framing for the twelve-variant union AABB of 1.14 x 0.52 x 0.37 (radius 0.653) at PAD 1.9 and framing 0.60. Subject shares: distinct 9.2%, necked 9.2%, lobed 8.8%, single 7.3% of frame. XOR of the masks: necked/lobed 1.68%, lobed/single 2.95%, necked/single 4.6%, distinct/necked 5.3%, distinct/lobed 6.9%, distinct/single 9.6%. necked and lobed are the closest because they are the pair with no event between them: same topology, lengths 0.78 against 0.70 m, waists 0.066 against 0.140. Every prediction on record under-predicted by 1.5x to 6.7x, so measured is expected in 2.5-6%; if the sweep frames the fusion spec alone (union = the distinct skin, 0.98 x 0.36 x 0.36, radius 0.55, frame 1.26 m) the same pair scales by (1.49/1.26)^2 to 2.35%. TWO WAYS TO BE WRONG, both worth the pass: if the closest measured pair is lobed/single or distinct/necked, the picture is saying that an event is quieter than the smooth stretch, and the argument as written is not what the sheet shows; and if necked/lobed comes back BELOW 1.7%, stop - a return under the silhouette floor means a value was rejected or the shape did not move, not that the axis is quiet.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact stands as the whole ladder by default. The SWEEP must see one rung at a time: capture_config_sweep unions the AABB across a spec's variants, so an all-rungs view in the same spec frames every single rung against a stack four times its height and photographs it as a speck - frequency_shell's lesson, paid for in a crashed critic. layout is deliberately NOT a value of the fusion axis for the same reason. Nothing else needs pinning: no _process, no RNG, no clock, every value is standing geometry resolved synchronously in _ready.",
+				"framing": 0.6,
+				"framing_why": "DERIVED, not measured, and the first sweep should correct it. The subject is wide and flat, so fit-by-diagonal over-retreats: the twelve-variant union AABB is 1.14 x 0.52 x 0.37 (x from the section's +0.08 level at distinct, y from the same level, z from the skin), diagonal 1.31, radius 0.653, and at framing 1.0 the frame is 2 x 0.653 x 1.9 = 2.48 m wide while the widest skin (distinct, 0.98 m long) projects to about 1.0 m at yaw 0.62 - 40% of frame width and roughly 3.5% of frame area, under the ~6% dilution floor. At 0.60 the frame is 1.49 m, distinct fills about 67% of the width and the single ovoid about 44%, subject shares 7-9%. Not lower, because if the sweep frames the fusion spec alone the union shrinks to the distinct skin (radius 0.55, frame 1.26 m at 0.60) and distinct then fills 80% of the width - 0.55 would put it at 87% with perspective still to add.",
+				"still_note": "Everything both axes build is standing geometry: no _process, no randf, no clock. The lathe winds every triangle outward by checking its cross product against the field gradient, so nothing is culled by accident; the cut face and the level-set ribbons are two-sided. The half-skin in `section` is the z <= 0 half, the far half from the sweep's camera at +z, so the camera sees the cut face with the level sets in it and the outer skin peeking round its rim - the standard cutaway. From the far side in a map it reads as the cut face with the hollow behind it, which is what a section is."
+			},
+			"scene": "res://commons/artifacts/fusion_ladder/fusion_ladder.tscn",
+			"category": "geometry",
+			"description": "Two implicit blobs at the four separations the family names - distinct, necked, lobed, single - built as real isosurfaces of the members' own smin field. Four names on one dial, and only two of the three gaps between them hide an event: the surface connects between distinct and necked, the waist vanishes between lobed and single, and between necked and lobed nothing happens but widening.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 3,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			}
+		}
+	}
+}

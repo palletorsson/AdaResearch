@@ -1,0 +1,63 @@
+{
+	"artifacts": {
+		"regime_threshold": {
+			"scene": "res://commons/artifacts/regime_threshold/regime_threshold.tscn",
+			"category": "physics",
+			"description": "One mass-spring-damper - anchor bar, coil spring, mass block, a dashpot whose bore is sized by zeta - released from the same 0.20 m in every variant, with the mass's trajectory laid down as a real tube against a rest rail and, in the envelope reading, the region it could occupy as a sheet behind it. Free, underdamped, critical, overdamped and resonance are five settings of one knob, computed in closed form, so the regimes photograph as stations on one dial and the boundary between them as the measure-zero point it is.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 3,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			},
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"control_pendulum",
+					"mass_spring_damper",
+					"rotation_gimbal",
+					"exercise_1_3_solution_3_d_bouncing_ball_vr",
+					"bifurcation_diagram"
+				],
+				"axes": {
+					"regime": [
+						"free",
+						"underdamped",
+						"critical",
+						"overdamped",
+						"resonance"
+					],
+					"reading": [
+						"trace",
+						"bob",
+						"envelope"
+					]
+				},
+				"default": "regime=free, reading=trace. free is control_pendulum's own default (gd:72) and the one value of the family's list that is not a damping at all - here it is taken at its word, zeta 0.00, the pure cosine, and no dashpot is drawn because there is nothing to draw. mass_spring_damper defaults to `all`, which is a layout and not a rung, and is not offered. trace is the reading in which the argument is visible: the body at release and the tube its centre draws over four seconds against the rest rail. control_pendulum's own evidence axis defaults to `result` and pins `trace` for the sweep because a still of the body at one phase is a fact about the camera; a synthesis whose subject is the trajectory opens on the trajectory.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. regime, five values, control_pendulum's list character for character (gd:72) with its zetas (gd:219-228): free = zeta 0.00, no drive, x = -x0 cos(w0 t) forever (control_pendulum's free is a shipped 0.995-per-frame multiplier it measures at 0.037; mass_spring_damper's Underdamped is d 0.5 at k 40, zeta 0.040 - both are this picture over four seconds); underdamped = zeta 0.25, crosses the rest line and decays inside the window, tangent envelope x0 e^(-zeta w0 t)/sqrt(1-zeta^2); critical = zeta 1.00, x0 (1 + w0 t) e^(-w0 t), the fastest return that never crosses - THE POINT, and mass_spring_damper's bench version of it (d 12 at k 40, m 1) is zeta 0.949, five percent underdamped and labelled critical since it was written; overdamped = zeta 2.50, two real exponentials of which the slow one at (zeta - sqrt(zeta^2 - 1)) w0 = 1.32 /s is what you see, slower than critical; resonance = zeta 0.08 and a cosine drive at w0 (control_pendulum gd:227, gd:269-271), steady amplitude 1.25 x0 (its own 0.375 rad against 0.3 rad), the one value that is the OTHER knob turned, drawn with a crank on the anchor. reading, three values: trace = the body at the moment of release plus the tube the mass centre draws on a wall sliding past at 0.225 m/s for `window` seconds, against the rest rail; bob = the body alone frozen half a natural period after release, the moment the free mass reaches the far side (+0.200), with a ghost of the mass at its release height, so underdamped +0.088, critical -0.036, overdamped -0.109, resonance +0.154 each fall short of the far side by their regime; envelope = the trace inside the region the mass could occupy, a translucent sheet from +A(t) to -A(t) behind the tube - the tangent envelope for zeta < 1 (which diverges AT zeta = 1), the trace's own mirror for zeta >= 1 because there is no oscillation left to envelope, and for resonance the drive's beat envelope A_ss (1 - e^(-zeta w0 t)) plus the release's decaying skin, a first-order bound rather than a tangent. The system is mass_spring_damper's bench, k = 40, m = 1, w0 = sqrt 40 = 6.32 rad/s, T0 = 0.993 s, released from rest at 0.20 m down in every variant. THE THESIS SOMEONE COULD DISAGREE WITH: a regime is a name laid over one continuous dial; critical is a measure-zero point promoted by the vocabulary to a peer of the two half-lines beside it, and the family's own bench proves nobody can see the point, because it stands at 0.949 and is called 1.0. The disagreement available: that crossing-or-not-crossing IS a qualitative fact and the names earn their keep - the trace reading shows both sides of that quarrel on one rail.",
+				"kin": "rotation_gimbal (free/approaching/locked/past = where on the approach to gimbal lock, Y at 0/72/90/118), exercise_1_3_solution_3_d_bouncing_ball_vr (stock/elastic/dead/inelastic = e at 0.9/1.0/0.0/0.55) and bifurcation_diagram / bifurcation_walkway (all/stable/cascade/chaos/period3 = windows of r) use the same word `regime` for stations along a different number. Named as sources for the census, not for the geometry: their thresholds are a singular point, a coefficient and a parameter window, and this artifact builds only the damping one.",
+				"predicted_degeneracy": {
+					"pair": "free against resonance, in the envelope reading",
+					"percent": 13,
+					"arithmetic": "Enumerated over all 15 variants with a front-view raster of the planned geometry (2.5 mm pixels), same-reading, same-regime and cross pairs, before any capture. The two envelope sheets are the two large flat fills: free is a band of +/-0.200 m for the full 0.90 m of rail, 0.360 m^2; resonance's is +/-(0.25 (1 - e^(-0.506 t)) + 0.2006 e^(-0.506 t)), 0.2006 at t = 0 rising to 0.2435 at t = 4 s, a mean excess of 0.028 m per side, so the sliver the two sheets do not share is about 0.051 m^2. The two tubes are 16 mm wide and about 1.1 m long, 0.018 m^2 each, and coincide only at the start, about 0.030 m^2 of difference; the bodies at t = 0 are identical to the byte (same release) except resonance's 9 mm dashpot bore and its crank, under 0.01 m^2. Difference about 0.09 m^2 over a union subject of about 0.48 m^2, of which 0.36 m^2 is sheet the two share: 18% by hand, 12.9% by the raster - registered at 13% of the pair's union subject, roughly 5% of frame if the subject fills 40% of it. Runners-up from the same table: underdamped against overdamped in the envelope reading 22%, underdamped against critical in the trace reading 27%, critical against overdamped in the trace reading 31%. The quietest pair the raster found overall is SAME-REGIME and by design: critical in the trace reading against critical in the envelope reading, 22%, because at zeta >= 1 the sheet is the tube's own mirror and adds only the wedge below the rail. THIS IS A LOWER BOUND, and the direction of the miss it cannot see is that a translucent sheet at alpha 0.30 differs from the background by fewer grey levels than a solid tube does, so a critic that thresholds on grey-level change may count the sliver at less than its area - which would push free-against-resonance LOWER than 13%, not higher. If it comes back under about 8% the sheet is being counted as background and the envelope reading should be re-read as edges rather than fill; if free against resonance is not the closest same-reading regime pair at all, the raster's model of the sheet was wrong and the pair to look at is underdamped against overdamped.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all five regimes in a row (layout = ladder, 1.30 m pitch, about 6.5 m wide) but the SWEEP must see one rung at a time: capture_config_sweep unions the AABB across a spec's variants, so a five-wide row in the same spec frames every single rung against six metres and photographs it as a speck. layout is an export and not an axis, and it ships at single so the fixture is a belt over braces.",
+				"framing": 0.44,
+				"framing_why": "SOLVED, NOT GUESSED, by tools/solve_framing.py. At framing 1.0 this artifact's subject bounding box filled 34.6% of frame width and 36.7% of its height, with a subject share of 1.62%. The visible frame is 2 * PAD * radius * framing metres wide, so the box grows as 1/framing; solving for a target of 78% of the smaller-headroom dimension gives 0.44. THE ARTIFACT WAS NEVER DARK, EMPTY OR MISSING A FIXTURE - the camera was between three and eight times too far away, and the near-zero subject share this token had on record was a fact about the standpoint rather than about the axis."
+			}
+		}
+	}
+}

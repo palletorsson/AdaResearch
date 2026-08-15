@@ -1,0 +1,64 @@
+{
+	"artifacts": {
+		"readout_bench": {
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"health_display",
+					"hits_reset_display",
+					"line",
+					"line_interface",
+					"qfep_calibrator",
+					"xyz_coordinates",
+					"xyz_slider_plate",
+					"entropy_jar"
+				],
+				"axes": {
+				 "readout": [
+				  "numeral",
+				  "none",
+				  "gradation",
+				  "lattice"
+				 ],
+				 "quantity": [
+				  "level",
+				  "position",
+				  "count"
+				 ]
+				},
+				"default": "readout=numeral, quantity=level. numeral is the export default of six of the seven members - health_display.gd:63, hits_reset_display.gd:48, line.gd:100 (which line_interface's scene loads), qfep_calibrator.gd:88 and xyz_slider_plate.gd:138 all ship `= \"numeral\"`; only xyz_coordinates (xyz_gadget.gd:49) ships `none`. level is the most literal thing that HAS a value - a fluid standing in a glass - so the default frame is a tank with a nameplate reading 0.62, which is the family's own default rung on the plainest body.",
+				"note": "WHAT THE VALUES MEAN, from the members' code and not their prose. The family's `readout` is one ordered ladder that every member glosses as monotone in EVIDENCE and builds additively (gradation keeps the numeral, lattice keeps both - xyz_slider_plate._build_readout falls through `numeral`, gameplay_readout.gd:24 says 'each rung is everything below it plus one thing more'). This bench reads the same four words as four CLAIMS about the value and mounts each ALONE, because a lattice that still carries the numeral still carries the numeral's promise. none = the body and its plinth, nothing bolted on; the only readout that cannot be wrong. numeral = a bone nameplate on the plinth's front (0.11 x 0.04 m) with the digits and nothing else - '0.62' on level and position, '5' on count; a decimal place is a promise, and this rung can be wrong to the hundredth. gradation = a ruled steel blade beside the measured span, a tooth every 5% (every puck on count), a numbered station every quarter (every puck on count), NO index - the fluid surface, the knob and the top puck are the pointer; it claims an interval and nothing finer. lattice = a wire grid on the face the value is read against - ten cells along the span and cells across a direction the value never uses (five across the tank's front glass, five up the position panel; on count a cage of nine rings and eight bars with the pucks inside); it claims a cell in a two-dimensional space of which one dimension is irrelevant, and so shows the most ink while asserting the least. `quantity` is WHAT is being read, three bodies holding one number, value=0.62. level = a fluid standing 0.62 of the way up a glass tank, continuous and vertical. position = a knob 0.62 of the way along a 0.24 m rail on an upright panel, continuous and horizontal. count = round(0.62 x 8) = 5 pucks on a spindle that holds 8, discrete and vertical, the nearest that body can get (5/8 = 0.625). THE CHECK: on count the numeral says '5' and over-claims by nothing - a puck is a whole thing and the reading is exact; on level the same plate says '0.62' and over-claims by the whole width of the meniscus. gradation on count lands its station 5 exactly on the top puck and on level lands the surface between the .5 and .75 stations, two teeth up. So the readouts diverge in what they claim only where the quantity is continuous, which is why the second axis exists. The value 0.62 is chosen so that it is not a station on any scale (majors on quarters, minors on twentieths, pucks on eighths): every readout has to speak about a value that lies between its own marks.",
+				"kin": "`readout` is taken character for character from xyz_slider_plate.gd, which owns the vocabulary (READOUT_ALIASES, static readout_name()) - line.gd, gameplay_readout.gd, qfep_calibrator and xyz_gadget all parse through it, and so does this bench's apply_grid_config, with the members' fallback that an unrecognised word builds as numeral rather than none. entropy_jar is a COUSIN and is excluded from the ladder: its `readout` is figures | number | verdict | none (entropy_jar.gd:76), which asks whether the second law arrives as a computed figure with commentary, a bare number, words only, or nothing. `number` maps onto numeral and `none` onto none; `figures` and `verdict` have no rung here (a verdict in words is not a claim about a value's precision), so it is named as a source for the word and not built. `quantity` is this artifact's own word: no member sweeps what it reads, each reads one thing.",
+				"declines": "Refused as axes: the members' additivity (a `stacked` bool would double the sweep to test a design choice this bench is arguing against); any rate - the members' own promotion notes each demote a rate for the same reason; `value` and `capacity`, which are numbers and are the constants the argument needs; and `layout`, which is a comparison and not a rung (see fixture_why).",
+				"predicted_degeneracy": {
+					"pair": "none against numeral, on the count quantity",
+					"percent": 1.2,
+					"arithmetic": "The numeral is a 0.11 x 0.04 m nameplate on the plinth's +Z face, 0.0044 m^2, the same on all three bodies; only the digits differ. A single body is about 0.28 x 0.31 x 0.16 m; assume the sweep frames it at roughly half the frame width, so the frame is about 0.56 x 0.56 m = 0.31 m^2 and the plate is 1.4% of it, times cos(0.62 rad) = 0.81 for a +Z face seen from the canonical yaw = 1.14%. The digits add ink inside the plate: '5' is one glyph, about 0.026 x 0.016 m at 40% fill = 0.00017 m^2 = 0.04%; '0.62' is four glyphs, about 0.0006 m^2 = 0.15%. So none->numeral measures about 1.2% on count and about 1.3% on level and position, and the three are the three quietest pairs in the sweep by a margin: the next is none->gradation on position (blade 0.24 x 0.022 plus 21 teeth plus 5 glyphs, about 0.0071 m^2 = 2.3% x 0.81 = 1.8%), then none->lattice on position (17 wires x 0.003 m over a 0.24 x 0.15 face, about 0.0093 m^2 = 2.4%). gradation against lattice is NOT close: their ink lies in different regions (a blade beside the span against a grid on the face), so their pair is roughly the sum, above 3%. TWO THINGS THIS CAN BE WRONG ABOUT, separately: the NUMBER, which is a floor - the corpus's four registered predictions all under-shot by 1.5x to 6.7x, so a return around 2% would still be the plate; and the QUANTITY, which is decided by three glyphs' worth of ink (0.1%): if antialiasing swamps that, level or position comes out lowest and the plate reasoning still stands while the quantity call falls. A return BELOW 1.2% on this pair means the plate is not being seen at all - check that the nameplate is not hidden by the plinth or by the framing. This is line.gd's own 'one weak pair, declared rather than discovered' (line.gd:63) on the same step; it is under the 2% BITES line by design, because a nameplate on a 0.31 m instrument IS small, and fattening it would measure a different family.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact stands as the whole ladder by default - four bodies of one quantity, one readout each, 1.21 m across - which is what it is for. The SWEEP must see one rung at a time: capture_config_sweep unions the AABB across a spec's variants, so an all-rungs view in the same spec frames every single rung against a row four times its width and photographs it as a speck. `layout` is therefore an export and not an axis, and the fixture pins it to `single`."
+			},
+			"scene": "res://commons/artifacts/readout_bench/readout_bench.tscn",
+			"category": "instruments",
+			"description": "One number, 0.62, held by three real bodies - a fluid in a glass tank, a knob on a rail, five pucks on a spindle of eight - and presented under the four readouts the family shares: nothing, a nameplate numeral, a ruled blade beside the span, a grid over the face. Each readout is mounted alone, so what it claims about the value can be seen without the others' claims stacked on top.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			}
+		}
+	}
+}
