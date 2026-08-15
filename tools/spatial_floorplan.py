@@ -368,6 +368,24 @@ def build_enfilade(bays: int = 3, width: int = 15, bay_depth: int = 7,
 REPO = Path(__file__).resolve().parent.parent
 PATTERNS = REPO / "commons" / "data" / "template_patterns.json"
 CAPACITY = REPO / "commons" / "data" / "slot_capacity.json"
+#: THE wall height's one owner is em_detail.gd (WALL_H). The dataclass
+#: default of 4.0 was a THIRD copy — never 3.0 when the building was 3.0, not
+#: 4.5 when it became 4.5 — so the plan refused every body between the two
+#: numbers for a wall the museum was actually tall enough to hold. Read the
+#: owner, the way spatial_contract.plinth_band() reads em_plinths.gd.
+DETAIL_GD = REPO / "commons" / "scenes" / "em" / "em_detail.gd"
+
+
+def museum_wall_height_m() -> float:
+    """em_detail.WALL_H, or 4.0 if the file is unreadable (the old default)."""
+    try:
+        import re as _re
+        m = _re.search(r"^const WALL_H *:= *([0-9.]+)", DETAIL_GD.read_text(encoding="utf-8"), _re.M)
+        if m:
+            return float(m.group(1))
+    except OSError:
+        pass
+    return 4.0
 
 #: Where a body can go when the building itself cannot hold it. Ordered by how
 #: much they still belong to the museum: a courtyard is inside the walls, a
@@ -467,7 +485,7 @@ def from_museum(key: str, apron: int = 14) -> FloorPlan:
     exit_cell = (gap(off + th - 1), off + th - 1)
 
     plan = FloorPlan(width=w, depth=h, grid=grid, route=set(), slots=[],
-                     apron=apron,
+                     apron=apron, wall_height_m=museum_wall_height_m(),
                      walls=[], spawn=spawn, exit=exit_cell, expandable=False)
     plan.route = _route_between(plan, spawn, exit_cell)
 

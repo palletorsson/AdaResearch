@@ -336,6 +336,12 @@ class Placement:
     #: never re-derives it from the body — re-deriving is how the two sides
     #: drift (the 4 m vestibule offset was exactly that, spike 03).
     court_m: list[int] | None = None
+    #: SPIKE 09 rung 1: interior wall cells (plan-grid coords, apron included)
+    #: the tile must open into floor for this placement to exist. Set only by
+    #: the bay rung. The assembler subtracts the apron and applies them to the
+    #: tile before derivation — the plan is the author of the bay, not the
+    #: builder.
+    bay_cells: list[tuple[int, int]] | None = None
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -346,6 +352,7 @@ class Placement:
             "support_height_m": self.support_height_m,
             "score": round(self.score, 3), "result": self.result,
             "court_m": self.court_m,
+            "bay_cells": [list(c) for c in self.bay_cells] if self.bay_cells else None,
             "exceptions": self.exceptions,
             "rules": [t.as_dict() for t in self.traces],
         }
@@ -669,6 +676,96 @@ def hang_on_wall(contract: SpatialContract, wall: WallSurface,
 
 # ── The ladder ──────────────────────────────────────────────────────
 
+#: A bay may open at most this many interior wall cells. Above it the "bay"
+#: is a demolition — the template's rooms stop being rooms.
+BAY_MAX_CELLS = 24
+
+
+def _try_bay(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
+             ladder: list[Trace]) -> Placement | None:
+    """SPIKE 09 rung 1. For a precinct body that would fit the TILE width,
+    try each interior slot on a copy of the plan whose interior wall cells
+    inside the body's envelope are floor. On success the placement carries
+    `bay_cells` — the exact cells opened — and the assembler applies them to
+    the tile before derivation. Rules, each named in the trace:
+
+      * the body's max side must fit inside the tile (width - 2*apron - 2:
+        the exterior skin is never opened);
+      * only INTERIOR wall cells open — never a cell on the tile's border,
+        which is the building's skin and the neighbour's wall;
+      * at most BAY_MAX_CELLS open, else it is a demolition, not a bay;
+      * try_place's own route test still bites — a bay opens walls, it does
+        not put a body on the walk.
+    Returns None (with a trace saying why) when no bay works.
+    """
+    import copy as _copy
+    tile_w = plan.width - 2 * plan.apron
+    tile_h = plan.depth - 2 * plan.apron
+    body_w = max(contract.body_m[0], contract.body_m[1])
+    body_d = min(contract.body_m[0], contract.body_m[1])
+    import math as _m
+    if _m.ceil(body_w) > tile_w - 2 or _m.ceil(body_d) > tile_h - 2:
+        ladder.append(Trace("bay", "fail",
+                            f"body {body_w:.1f} x {body_d:.1f} m exceeds the tile "
+                            f"({tile_w} x {tile_h} cells less the skin) — no bay can hold it"))
+        return None
+    x0, x1 = plan.apron + 1, plan.apron + tile_w - 1     # interior x range
+    z0, z1 = plan.apron + 1, plan.apron + tile_h - 1
+    best: Placement | None = None
+    best_open = 10 ** 6
+    for slot in plan.slots:
+        if slot.venue != "interior":
+            continue
+        for rotation in contract.rotations:
+            m = masks(contract, rotation, "freestanding")
+            for origin in candidate_origins(slot, m, plan):
+                ax, az = origin
+                body = {(c[0] + ax, c[1] + az) for c in m.physical}
+                circ = {(c[0] + ax, c[1] + az) for c in m.circulation}
+                # the BODY may not touch the skin; clearance may — a visitor's
+                # standing room against an exterior wall is every gallery's
+                # normal condition. Circulation cells that fall on wall stay
+                # wall and are judged by try_place's own access/circulation
+                # rules (compromised, or refused, with a voice).
+                if any(plan.in_bounds(*c) and plan.grid[c[1]][c[0]] == "4"
+                       and not (x0 <= c[0] < x1 and z0 <= c[1] < z1) for c in body):
+                    continue
+                to_open = [c for c in (body | circ)
+                           if plan.in_bounds(*c) and plan.grid[c[1]][c[0]] == "4"
+                           and x0 <= c[0] < x1 and z0 <= c[1] < z1]
+                if not to_open or len(to_open) > BAY_MAX_CELLS:
+                    continue
+                trial = _copy.copy(plan)
+                trial.grid = [row[:] for row in plan.grid]
+                for (cx, cz) in to_open:
+                    trial.grid[cz][cx] = "1"
+                ok, score, traces, exc = try_place(
+                    contract, slot, trial, occ, rotation, "freestanding", origin)
+                if ok and len(to_open) < best_open:
+                    best_open = len(to_open)
+                    best = Placement(
+                        artifact=contract.lookup, slot=slot.id, anchor=origin,
+                        rotation=rotation, mode="freestanding",
+                        wall=None, wall_rect=None, venue="interior",
+                        support_height_m=slot.surface_height_m,
+                        score=score * 0.9,   # a bay costs the template something
+                        result="ACCEPT",
+                        traces=ladder + [Trace(
+                            "bay", "applied",
+                            f"opened {len(to_open)} interior wall cell(s) around "
+                            f"slot {slot.id} for a {body_w:.1f} x {body_d:.1f} m body")]
+                        + traces,
+                        exceptions=list(exc) + [
+                            f"a bay: {len(to_open)} interior wall cells became floor"],
+                        masks=m, contract=contract,
+                        bay_cells=sorted(to_open))
+    if best is None:
+        ladder.append(Trace("bay", "fail",
+                            f"no interior slot admits a {body_w:.1f} x {body_d:.1f} m "
+                            f"body even with up to {BAY_MAX_CELLS} interior wall cells opened"))
+    return best
+
+
 def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
               preferred_slot: Slot | None = None) -> Placement:
     """Walk the escalation ladder for one artifact. Returns a Placement whose
@@ -756,6 +853,17 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
                     # and the assembler seals from the same envelope.
                     masks=masks(contract, contract.rotations[0], "freestanding"),
                     contract=contract, court_m=court)
+        # ── SPIKE 09 RUNG 1: THE BAY. A precinct body that would fit the tile
+        # WIDTH but not any room in it is not homeless — the tile can open a
+        # bay: interior wall cells inside the body's envelope become floor.
+        # This is a NEGOTIATOR OUTPUT (bay_cells on the placement, written to
+        # the plan row) that the assembler applies to the tile BEFORE anything
+        # derives, exactly as _widen_doors does — the plan stays the one
+        # author. Tried before the exterior scatter because a body inside the
+        # building is a body the curriculum walks past; the grounds are exile.
+        bay = _try_bay(contract, plan, occ, ladder)
+        if bay is not None:
+            return bay
         for slot in plan.slots:
             if slot.venue == "interior":
                 continue

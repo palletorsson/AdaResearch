@@ -109,7 +109,81 @@ this week paid for four times.
 **F3 was a misread** (see above); the > 40 m tail is 14 tokens, not 10,
 and all of it is rung 3's question for Palle.
 
-## PREDICTION (written before any code)
+## THE PROBE WAS WRONG TOO — corrected before rung 1's measurement
+
+The size histogram above was read from `artifact_sizes.json`. Building
+rung 1 and tracing `facade_grammar_demo` (listed there as small) through the
+ladder printed *"body 16.0 x 14.0 m exceeds the tile"* — the contract reads
+bodies from a better source, and that source is BIGGER. Re-measured against
+`spatial_contract.resolve(token).body_m`, the input the negotiator READS:
+
+```
+101 escalation tokens:  max-side min 10.2   median 25.8   max 300.0
+  fits a 15-wide tile with a bay (<= 13 m):   6   (not 30)
+  13-40 m (a joint would hold it):           63   (not 58)
+  > 40 m (worlds):                           32   (not 14)
+```
+
+Bay candidates: extreme_randomness 10.2, mushrooms 10.4, box_counting_dimension
+11.0, julia_set 12.0, facade_builder 12.0, MeltingBerniniScene 12.9.
+
+So rung 1 is a small rung and rung 2 is where the yield lives. This is the
+FIFTH "measure the input the code reads" of the week, in the same document
+as the fourth. The rule generalises: `artifact_sizes.json` is a stale mirror
+for the whole corpus, not just for four GPU artifacts, and no spatial
+finding may cite it again — resolve the contract.
+
+## RUNG 1 BUILT — and what the standalone traces said before the corpus run
+
+`_try_bay` (spatial_negotiation.py), `bay_cells` on Placement + as_dict,
+`bay` on the exporter row (tile coords, apron subtracted there), `_open_bays`
+in the assembler applied to the tile before derivation. `test_em_bays.gd`
+proves the assembler half both ways (no bay = identity; a bay opens exactly
+its interior cells; the skin refuses with a voice).
+
+Tracing the six candidates through real museums standalone (before the
+regen) found the roof, not the walls: **five of six are too TALL** —
+extreme_randomness 10.6 m, box_counting_dimension 6.0, julia_set 6.3,
+facade_builder 14.0, MeltingBerniniScene 8.1 — every bay attempt (970 for
+box_counting in the Grande Galerie) died on `body_fits_under_ceiling`, and
+a bay opens walls, not the roof. Only `mushrooms` (1.2 m tall, 10.4 m
+square) is a genuine bay case, and it fails on `circulation_on_floor` /
+skin contact / >24 cells: a 10 m square wants a 12 m clear floor, which no
+15-wide template's interior offers even with 24 cells opened. **The bay's
+honest yield on this corpus is ~0.** The right instrument for these bodies
+is the unroofed joint — rung 2 — which is why 127 already live there.
+
+Also fixed on the way: `spatial_floorplan.FloorPlan.wall_height_m` defaulted
+to 4.0 — a THIRD copy of the wall height, never 3.0 nor 4.5. `from_museum`
+now reads em_detail.WALL_H (4.5). And the first regen was cut by a 590 s
+timeout (isosurfaces alone takes 257 s) — its "byte-identical" result was
+the OLD plan compared to itself. Fifth-and-a-half lesson: check the mtime.
+
+## RUNG 1 MEASURED (regen 2026-08-15 06:57, full run, plan mtime checked)
+
+```
+            placed  interior  courts  bays  rejected  escalation
+before         900       442     127     0       256         114
+after          900       442     127     0       256         114
+```
+
+**Byte-identical, for real this time.** The bay admitted 0 of 6; the wall
+height 4.0→4.5 moved nothing (no body sat between the two numbers on an
+otherwise-fitting slot). The prediction's failure clause said "0 of 6 means
+`_try_bay` is too strict" — the traces say otherwise: five of six need the
+ROOF opened (too tall), the sixth needs 12 m of clear floor no template
+interior has. The bay is correct, gated, tested, and inert on this corpus.
+It ships (a body under 4.5 m and under ~8 m wide that meets an interior
+wall will use it), and rung 2 is where the 63 mid-size bodies actually go.
+
+## PREDICTION (revised, still before rung 1's measurement)
+
+Rung 1: escalations 114 → ~106 (the 6 candidates, some in two chapters).
+If it admits 0 of 6, the bay's severance/skin rules are too strict for the
+templates' interiors and the fault is in `_try_bay`, not the idea.
+Rung 2 (joint budget per segment length): → ~40.
+
+## PREDICTION (original, superseded — kept as the record of the misread)
 
 Rung 1 alone: escalations 114 → ~84 (the 30 under 12 m), interior
 placement 38.1% → ~40%. Rung 2: → ~30 escalations. If rung 1 admits fewer

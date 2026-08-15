@@ -1284,6 +1284,51 @@ func _flank_ok(tile_in: Array, x: int, y: int, dx: int, dy: int) -> bool:
 	return String(brow[bx]) == "4"
 
 
+## SPIKE 09 rung 1 — the bays the PLAN ruled. A row carrying `bay` names the
+## tile cells (tile coords, apron already subtracted by the exporter) that
+## must open into floor for that body to exist. Applied here, BEFORE anything
+## derives — same law as _widen_doors — so walls, colliders, seals, walk cells
+## and the door list all agree. Additive and gated: no `bay` on any row, the
+## tile passes through untouched. Refuses (with a voice) a cell that is not a
+## wall, or that lies on the tile's border — the skin is never opened.
+func _open_bays(tile_in: Array, key: String, chapter: String) -> Array:
+	var entry: Dictionary = {}
+	if chapter != "" and _plan_by_chapter.has("%s|%s" % [key, chapter]):
+		entry = _plan_by_chapter["%s|%s" % [key, chapter]]
+	elif _plan_db.has(key):
+		entry = _plan_db[key]
+	if entry.is_empty():
+		return tile_in
+	var rows: Array = entry.get("artifacts", [])
+	var opened: int = 0
+	var tile: Array = tile_in
+	var copied: bool = false
+	for r_v in rows:
+		var r: Dictionary = r_v
+		if not r.has("bay"):
+			continue
+		if not copied:
+			tile = []
+			for row in tile_in:
+				tile.append((row as Array).duplicate())
+			copied = true
+		var h: int = tile.size()
+		for c_v in (r.get("bay", []) as Array):
+			var c: Array = c_v
+			var x: int = int(c[0])
+			var y: int = int(c[1])
+			if y <= 0 or y >= h - 1 or x <= 0 or x >= (tile[y] as Array).size() - 1:
+				print("[em-bay] %s: cell [%d,%d] is on the tile's skin — refused" % [r.get("token"), x, y])
+				continue
+			if String((tile[y] as Array)[x]) != "4":
+				continue     # already floor (another bay, or a widened door)
+			(tile[y] as Array)[x] = "1"
+			opened += 1
+	if opened > 0:
+		print("[em-bay] %d interior wall cell(s) opened into bays for %s" % [opened, chapter])
+	return tile
+
+
 ## Greedy longest-first: take the longest straight run anywhere in the cell set,
 ## emit it as ONE box, remove its cells, repeat. Removing a run can cut a
 ## crossing run in two, so the remainder is re-measured every pass rather than
@@ -1379,7 +1424,7 @@ func _build_segment() -> void:
 		_first_spec = spec
 	var w: int = spec["w"]
 	var h: int = spec["h"]
-	var tile: Array = _widen_doors(spec["tile"])
+	var tile: Array = _open_bays(_widen_doors(spec["tile"]), String(spec["key"]), next_seq)
 	var seg := Node3D.new()
 	seg.name = "Seg%d_%s" % [_seg_index, spec["key"]]
 	seg.position = Vector3(0, 0, _next_z)

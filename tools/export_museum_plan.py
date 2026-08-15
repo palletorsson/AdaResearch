@@ -140,6 +140,11 @@ def plan_museum(key: str, tokens: list[str]) -> dict[str, Any]:
             # court dims ride the row only when the negotiator granted a court;
             # absent otherwise, so v1 rows are byte-identical.
             **({"court": list(p.court_m)} if getattr(p, "court_m", None) else {}),
+            # SPIKE 09 rung 1: the bay the tile must open for this row, in TILE
+            # coordinates (apron subtracted HERE, same law as tile_cell). Absent
+            # on every row the bay rung did not touch — v1 rows byte-identical.
+            **({"bay": [[int(c[0]) - APRON, int(c[1]) - APRON] for c in p.bay_cells]}
+               if getattr(p, "bay_cells", None) else {}),
         })
     return {
         "artifacts": placed,
