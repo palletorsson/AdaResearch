@@ -1,0 +1,1252 @@
+{
+ "schema": "adaresearch.dedicated_world_register.v1",
+ "_readme": "Contract-derived handoff from negotiation to site authorship. A row here is not a museum exception and not an auto-generated map.",
+ "rule": {
+  "containment": "precinct",
+  "venue": "courtyard",
+  "host_condition": "both planar sides exceed host crossable width",
+  "bridge_court_max_m": 40.0,
+  "site_apron_m": 3,
+  "owner": "spatial_negotiation.requires_dedicated_map"
+ },
+ "summary": {
+  "chapter_occurrences": 29,
+  "artifacts": 28,
+  "site_families": 21,
+  "aliases_collapsed": 7,
+  "largest_planar_span_m": 300.0
+ },
+ "artifacts": [
+  {
+   "token": "AntColonyV2",
+   "scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
+   "body_m": [
+    50.0,
+    50.0,
+    2.0
+   ],
+   "site_envelope_m": [
+    56,
+    56,
+    2
+   ],
+   "chapters": [
+    "swarmintelligence"
+   ],
+   "assigned_hosts": [
+    "guggenheim-serpentine"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "enhanced_kmeans",
+   "scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+   "body_m": [
+    50.0,
+    50.0,
+    9.38
+   ],
+   "site_envelope_m": [
+    56,
+    56,
+    10
+   ],
+   "chapters": [
+    "machinelearning"
+   ],
+   "assigned_hosts": [
+    "chichu-buried-cells"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "env_one",
+   "scene": "res://algorithms/randomness/env_one.tscn",
+   "body_m": [
+    57.82,
+    59.14,
+    30.02
+   ],
+   "site_envelope_m": [
+    64,
+    66,
+    31
+   ],
+   "chapters": [
+    "randomness"
+   ],
+   "assigned_hosts": [
+    "soane-cabinet-vista"
+   ],
+   "host_crossable_m": [
+    10
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "FlowFieldMain",
+   "scene": "res://algorithms/pathfinding/flow_field/FlowFieldMain.tscn",
+   "body_m": [
+    50.0,
+    50.0,
+    1.1
+   ],
+   "site_envelope_m": [
+    56,
+    56,
+    2
+   ],
+   "chapters": [
+    "swarmintelligence"
+   ],
+   "assigned_hosts": [
+    "guggenheim-serpentine"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "graphspace",
+   "scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+   "body_m": [
+    93.04,
+    86.59,
+    5.0
+   ],
+   "site_envelope_m": [
+    100,
+    93,
+    5
+   ],
+   "chapters": [
+    "graphtheory"
+   ],
+   "assigned_hosts": [
+    "grande-galerie-axial"
+   ],
+   "host_crossable_m": [
+    10
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "joint_learn_walk",
+   "scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
+   "body_m": [
+    80.0,
+    80.0,
+    1.46
+   ],
+   "site_envelope_m": [
+    86,
+    86,
+    2
+   ],
+   "chapters": [
+    "machinelearning"
+   ],
+   "assigned_hosts": [
+    "chichu-buried-cells"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "KonigsbergBridge",
+   "scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+   "body_m": [
+    50.0,
+    32.0,
+    4.9
+   ],
+   "site_envelope_m": [
+    56,
+    38,
+    5
+   ],
+   "chapters": [
+    "graphtheory"
+   ],
+   "assigned_hosts": [
+    "grande-galerie-axial"
+   ],
+   "host_crossable_m": [
+    10
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "marching_cubes",
+   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
+   "body_m": [
+    73.36,
+    73.36,
+    0.33
+   ],
+   "site_envelope_m": [
+    80,
+    80,
+    1
+   ],
+   "chapters": [
+    "isosurfaces",
+    "postfoundationscrisis"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2",
+    "uffizi-spine-enfilade"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "marchingcave",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn",
+   "body_m": [
+    91.67,
+    200.0,
+    79.47
+   ],
+   "site_envelope_m": [
+    98,
+    206,
+    80
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "marchingcubes_cave",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
+   "body_m": [
+    300.0,
+    300.0,
+    300.0
+   ],
+   "site_envelope_m": [
+    306,
+    306,
+    300
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "marchingcubes_flat_landscape",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+   "body_m": [
+    300.0,
+    300.0,
+    49.62
+   ],
+   "site_envelope_m": [
+    306,
+    306,
+    50
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "marchingcubes_inside_cave",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+   "body_m": [
+    280.0,
+    280.0,
+    280.0
+   ],
+   "site_envelope_m": [
+    286,
+    286,
+    280
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "marchingcubes_torus_sculpture",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
+   "body_m": [
+    158.13,
+    146.02,
+    59.45
+   ],
+   "site_envelope_m": [
+    165,
+    153,
+    60
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "mc_base",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn",
+   "body_m": [
+    91.67,
+    200.0,
+    79.47
+   ],
+   "site_envelope_m": [
+    98,
+    206,
+    80
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "mc_cave",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
+   "body_m": [
+    300.0,
+    300.0,
+    300.0
+   ],
+   "site_envelope_m": [
+    306,
+    306,
+    300
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "mc_flat_landscape",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+   "body_m": [
+    300.0,
+    300.0,
+    49.62
+   ],
+   "site_envelope_m": [
+    306,
+    306,
+    50
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "mc_inside_cave",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+   "body_m": [
+    280.0,
+    280.0,
+    280.0
+   ],
+   "site_envelope_m": [
+    286,
+    286,
+    280
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "mc_terrain_demo",
+   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
+   "body_m": [
+    73.36,
+    73.36,
+    0.89
+   ],
+   "site_envelope_m": [
+    80,
+    80,
+    1
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "mc_torus_sculpture",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
+   "body_m": [
+    158.13,
+    146.02,
+    59.45
+   ],
+   "site_envelope_m": [
+    165,
+    153,
+    60
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "mobius_world",
+   "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn",
+   "body_m": [
+    68.26,
+    71.51,
+    16.0
+   ],
+   "site_envelope_m": [
+    75,
+    78,
+    16
+   ],
+   "chapters": [
+    "fractals"
+   ],
+   "assigned_hosts": [
+    "pompidou-plateau-libre"
+   ],
+   "host_crossable_m": [
+    10
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "mortar_vector_siege",
+   "scene": "res://commons/artifacts/mortar_vector_siege/mortar_vector_siege.tscn",
+   "body_m": [
+    119.49,
+    119.49,
+    120.0
+   ],
+   "site_envelope_m": [
+    126,
+    126,
+    120
+   ],
+   "chapters": [
+    "forces"
+   ],
+   "assigned_hosts": [
+    "sainsbury-false-perspective-enfilade"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "nature_system_demo",
+   "scene": "res://algorithms/nature_system/demo/nature_system_demo.tscn",
+   "body_m": [
+    18.1,
+    53.51,
+    18.2
+   ],
+   "site_envelope_m": [
+    25,
+    60,
+    19
+   ],
+   "chapters": [
+    "randomness"
+   ],
+   "assigned_hosts": [
+    "soane-cabinet-vista"
+   ],
+   "host_crossable_m": [
+    10
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "noise_terrain",
+   "scene": "res://algorithms/randomness/noiseterrain/noiseterrain.tscn",
+   "body_m": [
+    100.0,
+    100.0,
+    17.49
+   ],
+   "site_envelope_m": [
+    106,
+    106,
+    18
+   ],
+   "chapters": [
+    "noise"
+   ],
+   "assigned_hosts": [
+    "kanazawa-room-matrix"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "noiselayers",
+   "scene": "res://algorithms/randomness/noiselayers/noiselayers.tscn",
+   "body_m": [
+    220.0,
+    215.39,
+    124.5
+   ],
+   "site_envelope_m": [
+    226,
+    222,
+    125
+   ],
+   "chapters": [
+    "noise"
+   ],
+   "assigned_hosts": [
+    "kanazawa-room-matrix"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "physarum_colony",
+   "scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+   "body_m": [
+    50.0,
+    50.0,
+    6.4
+   ],
+   "site_envelope_m": [
+    56,
+    56,
+    7
+   ],
+   "chapters": [
+    "swarmintelligence"
+   ],
+   "assigned_hosts": [
+    "guggenheim-serpentine"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "PhysarumColony",
+   "scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+   "body_m": [
+    50.0,
+    50.0,
+    6.4
+   ],
+   "site_envelope_m": [
+    56,
+    56,
+    7
+   ],
+   "chapters": [
+    "swarmintelligence"
+   ],
+   "assigned_hosts": [
+    "guggenheim-serpentine"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "rhizomatic_maze_space",
+   "scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
+   "body_m": [
+    66.8,
+    50.8,
+    146.49
+   ],
+   "site_envelope_m": [
+    73,
+    57,
+    147
+   ],
+   "chapters": [
+    "proceduralgeneration"
+   ],
+   "assigned_hosts": [
+    "dia-beacon-field"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  },
+  {
+   "token": "three_body_problem",
+   "scene": "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
+   "body_m": [
+    199.2,
+    258.55,
+    244.18
+   ],
+   "site_envelope_m": [
+    206,
+    265,
+    245
+   ],
+   "chapters": [
+    "forces"
+   ],
+   "assigned_hosts": [
+    "sainsbury-false-perspective-enfilade"
+   ],
+   "host_crossable_m": [
+    12
+   ],
+   "body_source": "measurements.aabb_size"
+  }
+ ],
+ "sites": [
+  {
+   "site_id": "world-mobius-world-5174190",
+   "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn",
+   "members": [
+    "mobius_world"
+   ],
+   "site_envelope_m": [
+    75,
+    78,
+    16
+   ],
+   "chapters": [
+    "fractals"
+   ],
+   "assigned_hosts": [
+    "pompidou-plateau-libre"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-rhizomaticmazespace-10b003f",
+   "scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
+   "members": [
+    "rhizomatic_maze_space"
+   ],
+   "site_envelope_m": [
+    73,
+    57,
+    147
+   ],
+   "chapters": [
+    "proceduralgeneration"
+   ],
+   "assigned_hosts": [
+    "dia-beacon-field"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-graphspace-e47fd63",
+   "scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+   "members": [
+    "graphspace"
+   ],
+   "site_envelope_m": [
+    100,
+    93,
+    5
+   ],
+   "chapters": [
+    "graphtheory"
+   ],
+   "assigned_hosts": [
+    "grande-galerie-axial"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-konigsberg3d-c025c77",
+   "scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+   "members": [
+    "KonigsbergBridge"
+   ],
+   "site_envelope_m": [
+    56,
+    38,
+    5
+   ],
+   "chapters": [
+    "graphtheory"
+   ],
+   "assigned_hosts": [
+    "grande-galerie-axial"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-enhanced-kmeans-a6f4d4c",
+   "scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+   "members": [
+    "enhanced_kmeans"
+   ],
+   "site_envelope_m": [
+    56,
+    56,
+    10
+   ],
+   "chapters": [
+    "machinelearning"
+   ],
+   "assigned_hosts": [
+    "chichu-buried-cells"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-joint-learn-walk-7258369",
+   "scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
+   "members": [
+    "joint_learn_walk"
+   ],
+   "site_envelope_m": [
+    86,
+    86,
+    2
+   ],
+   "chapters": [
+    "machinelearning"
+   ],
+   "assigned_hosts": [
+    "chichu-buried-cells"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-nature-system-demo-403e49e",
+   "scene": "res://algorithms/nature_system/demo/nature_system_demo.tscn",
+   "members": [
+    "nature_system_demo"
+   ],
+   "site_envelope_m": [
+    25,
+    60,
+    19
+   ],
+   "chapters": [
+    "randomness"
+   ],
+   "assigned_hosts": [
+    "soane-cabinet-vista"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-flowfieldmain-fb60db1",
+   "scene": "res://algorithms/pathfinding/flow_field/FlowFieldMain.tscn",
+   "members": [
+    "FlowFieldMain"
+   ],
+   "site_envelope_m": [
+    56,
+    56,
+    2
+   ],
+   "chapters": [
+    "swarmintelligence"
+   ],
+   "assigned_hosts": [
+    "guggenheim-serpentine"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-threebodyproblem-03fc12c",
+   "scene": "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
+   "members": [
+    "three_body_problem"
+   ],
+   "site_envelope_m": [
+    206,
+    265,
+    245
+   ],
+   "chapters": [
+    "forces"
+   ],
+   "assigned_hosts": [
+    "sainsbury-false-perspective-enfilade"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-marchingcubes-a3553e3",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn",
+   "members": [
+    "marchingcave",
+    "mc_base"
+   ],
+   "site_envelope_m": [
+    98,
+    206,
+    80
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-marchingcubes-cave-028c759",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
+   "members": [
+    "marchingcubes_cave",
+    "mc_cave"
+   ],
+   "site_envelope_m": [
+    306,
+    306,
+    300
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-marchingcubes-flat-landscape-59eab5c",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+   "members": [
+    "marchingcubes_flat_landscape",
+    "mc_flat_landscape"
+   ],
+   "site_envelope_m": [
+    306,
+    306,
+    50
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-marchingcubes-inside-cave-086fa00",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+   "members": [
+    "marchingcubes_inside_cave",
+    "mc_inside_cave"
+   ],
+   "site_envelope_m": [
+    286,
+    286,
+    280
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-marchingcubes-torus-sculpture-a0d80f6",
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
+   "members": [
+    "marchingcubes_torus_sculpture",
+    "mc_torus_sculpture"
+   ],
+   "site_envelope_m": [
+    165,
+    153,
+    60
+   ],
+   "chapters": [
+    "isosurfaces"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-env-one-b57a789",
+   "scene": "res://algorithms/randomness/env_one.tscn",
+   "members": [
+    "env_one"
+   ],
+   "site_envelope_m": [
+    64,
+    66,
+    31
+   ],
+   "chapters": [
+    "randomness"
+   ],
+   "assigned_hosts": [
+    "soane-cabinet-vista"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-noiselayers-3f53a72",
+   "scene": "res://algorithms/randomness/noiselayers/noiselayers.tscn",
+   "members": [
+    "noiselayers"
+   ],
+   "site_envelope_m": [
+    226,
+    222,
+    125
+   ],
+   "chapters": [
+    "noise"
+   ],
+   "assigned_hosts": [
+    "kanazawa-room-matrix"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-noiseterrain-b4827e5",
+   "scene": "res://algorithms/randomness/noiseterrain/noiseterrain.tscn",
+   "members": [
+    "noise_terrain"
+   ],
+   "site_envelope_m": [
+    106,
+    106,
+    18
+   ],
+   "chapters": [
+    "noise"
+   ],
+   "assigned_hosts": [
+    "kanazawa-room-matrix"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-marching-cubes-terrain-demo-459ac6b",
+   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
+   "members": [
+    "marching_cubes",
+    "mc_terrain_demo"
+   ],
+   "site_envelope_m": [
+    80,
+    80,
+    1
+   ],
+   "chapters": [
+    "isosurfaces",
+    "postfoundationscrisis"
+   ],
+   "assigned_hosts": [
+    "castelvecchio-pinch-v2",
+    "uffizi-spine-enfilade"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-antcolonyv2-eb07019",
+   "scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
+   "members": [
+    "AntColonyV2"
+   ],
+   "site_envelope_m": [
+    56,
+    56,
+    2
+   ],
+   "chapters": [
+    "swarmintelligence"
+   ],
+   "assigned_hosts": [
+    "guggenheim-serpentine"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-physarumcolony-7fc8602",
+   "scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+   "members": [
+    "physarum_colony",
+    "PhysarumColony"
+   ],
+   "site_envelope_m": [
+    56,
+    56,
+    7
+   ],
+   "chapters": [
+    "swarmintelligence"
+   ],
+   "assigned_hosts": [
+    "guggenheim-serpentine"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  },
+  {
+   "site_id": "world-mortar-vector-siege-9361562",
+   "scene": "res://commons/artifacts/mortar_vector_siege/mortar_vector_siege.tscn",
+   "members": [
+    "mortar_vector_siege"
+   ],
+   "site_envelope_m": [
+    126,
+    126,
+    120
+   ],
+   "chapters": [
+    "forces"
+   ],
+   "assigned_hosts": [
+    "sainsbury-false-perspective-enfilade"
+   ],
+   "status": "needs_site_authoring",
+   "site_contract": {
+    "grid_m": 1,
+    "apron_m": 3,
+    "body_must_remain_full_scale": true,
+    "continuous_player_route_required": true,
+    "formula": null
+   }
+  }
+ ]
+}

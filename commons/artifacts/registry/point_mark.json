@@ -1,0 +1,167 @@
+{
+	"artifacts": {
+		"point_mark": {
+			"name": "Point Mark",
+			"lookup_name": "point_mark",
+			"scene": "res://commons/artifacts/point_mark/point_mark.tscn",
+			"class_name": "PointMark",
+			"category": "primitives",
+			"artifact_type": "synthesis",
+			"complexity": "beginner",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"auto_ground": false,
+			"size_group": "compact",
+			"description": "One point, at the centre of a 0.50 m cube of empty air, drawn under each of four marks and each of four frames. Klee's point is non-dimensional, so everything you can see of one is notation: the MARK you draw where it is, and the FRAME you measure it against. interactive_point_origin's four marks are here at its own millimetres - bead (a 60 mm ball, size borrowed), crosshair (three 120 mm bars, direction borrowed), cage (the twelve edges of a 100 mm cell, volume borrowed and blamed on the grid), halo (a ring at 51.6-60 mm around a 4 mm speck, which declares itself a drawing). point.gd's four frames are here as bodies rather than captions - world builds the address as three smooth legs, x then y then z, from the far corner of the stage; grid builds the lattice its `%d` rounds to, three cells on a side at the cage's own 0.10 m pitch; local puts the origin ON the point, so all three legs are zero long and nothing is drawn; mute draws nothing either. Those last two are the same picture to the byte, and that is the artifact's thesis in a cell of its own sheet. The stage is pinned by an invisible layers=0 anchor so all sixteen tiles share one camera. Nothing animates, nothing is printed, nothing is random.",
+			"tags": [
+				"point",
+				"primitives",
+				"coordinate",
+				"notation",
+				"klee",
+				"mark",
+				"frame_of_reference",
+				"non_dimensional",
+				"synthesis"
+			],
+			"dev_themes": [
+				"primitives",
+				"klee",
+				"synthesis",
+				"what you can see of a thing that has no extension"
+			],
+			"interactions": [
+				"put frame=local and frame=mute side by side at any mark: one picture, twice - a point cannot locate itself, and the only thing separating the two in point.gd is a caption reading (0.0, 0.0, 0.0)",
+				"walk the mark axis at frame=mute and meet four lies with nothing to check them against: a ball that has size, a cross that has direction, a cage that has volume, a ring that has reach",
+				"then walk the same four at frame=grid and watch them shrink: the same bead-against-crosshair difference falls from 64.67 percent of the hottest pixels to 12.88, because supplying a frame enlarges the picture the mark has to compete in",
+				"stand at mark=cage, frame=grid: the mark redraws the exact cell the lattice already drew - 0.10 m against a 0.10 m pitch - and adds nothing but brightness",
+				"stand at mark=crosshair, frame=world: the three bars are parallel to the three legs. The mark is repeating the frame's axes at the point, which is what a crosshair has always been"
+			],
+			"capacity": "SEE that a point has no extension, so every drawing of one is notation with a property smuggled into it - and that the frame is notation too, measurable as the twenty-fold difference it makes to the same pair of marks",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"point",
+					"interactive_point_origin",
+					"cube_scene_drag_points",
+					"citation_graph_node"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant is the SAME box, because the box is the INVISIBLE anchor: a 0.50 m cube of BoxMesh at layers = 0, centred on the point at y 0.95, built before the axes are consulted. Nothing drawn ever leaves it - the lattice patch is 0.30, the world legs reach the 0.25 corner, the widest mark is the crosshair at 0.12 - so the union AABB is 0.50 x 0.50 x 0.50 in all sixteen cells and one grid cell holds it. auto_ground is FALSE: a point has no base, and grounding a stage that is symmetric about its subject would put the mark at 0.25 m. layout=ladder stands all four marks in a row at 0.62 m pitch (about 2.1 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					0.5,
+					0.5
+				],
+				"aabb_center": [
+					0.0,
+					0.95,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.5,
+				"source": "computed_from_geometry; no Godot was run. The box is the StageAnchor exactly - a BoxMesh of size (0.50, 0.50, 0.50) at (0, 0.95, 0) with layers = 0, which capture_config_sweep's _subtree_aabb (gd:1488) measures because it walks MeshInstance3D and never consults layers. It is IDENTICAL for all sixteen variants by construction, which is the whole reason a bare mark at frame=mute and a lattice at frame=grid are photographed from the same standpoint at the same distance."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.42,
+				"sources": [
+					"point",
+					"interactive_point_origin",
+					"cube_scene_drag_points",
+					"citation_graph_node"
+				],
+				"axes": {
+				 "mark": [
+				  "bead",
+				  "crosshair",
+				  "cage",
+				  "halo"
+				 ],
+				 "frame": [
+				  "world",
+				  "local",
+				  "grid",
+				  "mute"
+				 ]
+				},
+				"default": "mark=bead, frame=world. Both are the members' shipped defaults, character for character. bead is interactive_point_origin's `@export_enum(...) var mark: String = \"bead\"` (gd:110), which its registry describes as the lineage - the 30 mm-radius sphere point_mesh.gd writes into the host MeshInstance3D, no Mark node allocated at all - and which every one of its live placements walks. world is point.gd's `var frame: String = \"world\"` (gd:34), the value its own DNA note says reproduces the pre-promotion label exactly, same format string and same global reading. So the default cell of this sheet is the picture the family already ships: a ball with an address, which is two lies and the ordinary way a point appears in this project.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. THE FAMILY FIRST: four artifacts declare an axis about a point and they carry FOUR disjoint vocabularies, which are not drift but four different things a point can be given. interactive_point_origin names the BODY (mark: bead | crosshair | cage | halo, gd:110, built in _build_mark gd:214-293) - what is drawn where the position is. point names the ADDRESS (frame: world | local | grid | mute, gd:34, plus attach: float | stake | plate) - which origin it measures itself from, and whether the report faces you, stands in the world, or lies flat on the ground. cube_scene_drag_points names the HANDLE (handles: corners | top | diagonal, plus triangulation: fixed | shortest) - a point that exists because you can pull it, and eight of them are a cube. citation_graph_node names the RELATION (reception: cited | contested | overturned | dogma | orphan, _ring_specs gd:176-200) - a claim marked by what orbits it: twelve refutations crowded onto a 0.45 m orbit at `overturned`, and at `orphan` no rings built at all. Body, address, handle, relation. THE SPLIT THAT DECIDED THIS SYNTHESIS, and it is read off the code rather than chosen: ONLY THE FIRST TWO WORK ON ONE POINT. A handle needs seven siblings before it is the corner of anything - cube_scene_drag_points' own registry says its second axis is deformation-visible only and a still of an untouched cube scores its two modes identical - and a reception needs a crowd, which is exactly what `orphan` proves by building nothing. So a single point, alone, can be given exactly two things, and those two are the axes here. MARK, four values, interactive_point_origin's own four and its own millimetres (MARK_SPAN 0.12, MARK_BAR 0.006, MARK_CELL 0.10, CAGE_T = MARK_BAR * 0.85, halo inner/outer = MARK_SPAN * 0.43 / 0.5, speck 0.004, bead radius 0.03 from its .tscn). bead = the 60 mm ball, the lineage, and the lie told so smoothly nobody meets the alternative: it hides that the thing has no size by giving it a comfortable one. crosshair = three bars along X, Y and Z crossing where the point is, nothing at the crossing but the bars themselves; the position is the INTERSECTION of its coordinates and what you see is a reach, so the lie moves from 'it is a ball' to 'it has directions'. cage = the twelve edges of the cell and nothing inside; extension is admitted and blamed on the GRID, which is what a voxel world actually stores - an address with walls, and the continuous position inside it not drawn at all. halo = a thin ring around a 4 mm speck; the visible mark declares itself a mark, the size belongs to the drawing and not to the thing, and the point is very nearly not there. FRAME, four values, point.gd's own four, in its order. world = the address as three lengths from an origin that is NOT the point: three smooth legs from the far-lower corner of the stage, along x, then y, then z, which is the order its label prints them in. They are UNGRADUATED on purpose - world formats '%.1f' metres, a continuous length, where grid formats '%d', a count - and the corner sits at the very edge of the stage because a world origin is somewhere else by definition and cannot be in the picture with the point. local = the origin IS the point. point.gd:103 returns pos - global_position and at rest that is (0.0, 0.0, 0.0), so all three legs are zero long and there is nothing to draw. grid = point.gd:106 rounds to whole cells, so the address stops being three lengths and becomes a CELL; the body is the lattice, three cells on a side at 0.10 m, which is interactive_point_origin's MARK_CELL to the millimetre so that the cage is exactly one cell of it. mute = point.gd:100 returns the empty string and hides the label: no frame at all. THE ONE PLACE THIS BENCH OVERRULES ITS SOURCE, and it is why the null exists: in point.gd all four frames are CAPTIONS, and this bench draws none. What separates local from mute there is a visible label reading 'offset: (0.0, 0.0, 0.0)' against a hidden one - a report of zero against no report - and that distinction lives entirely in typography, which is what postulate_bench and rule_bench both declined their members' Label3D plates for. Strip the text and the two collapse. THE THESIS SOMEONE COULD DISAGREE WITH: a point has no extension, so every mark is a property smuggled in, and the frame is a second piece of notation rather than the world showing through. The disagreement available, and it is a good one: a lattice is not a drawing, it is a fact about a discretised space, and `grid` is therefore the only honest frame here while the other three are decorations on it. The (cage, grid) cell is where that objection is strongest - there the mark redraws the very cell the lattice already drew and adds nothing but brightness - and it is exactly where it costs something, because (cage, mute) sits in the same row drawing the same twelve edges with no lattice anywhere, and the edges are still there.",
+				"predicted_degeneracy": {
+					"pair": "bead against crosshair, in the grid frame",
+					"percent": 12.88,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry rebuilt in Python from the same constants, projected through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.42 on the union AABB, which is the invisible 0.50 m anchor), lit with the frozen default rig (ambient 0.62/0.65/0.72 at 0.55, key 1.25 at rot -42/-35, fill 0.45 at rot -20/130, filmic tonemap), painter-sorted with a z-buffer and flat shading, then run through artifact_dna_critic's pipeline unchanged - subject bbox per frame, crop to the union of the two boxes, neutralise each frame's corner background, grey, resize 160 x 160, mean of the hottest 5%. Closest NON-NULL pair in the sheet: bead vs crosshair at frame=grid, 12.88% focus / 0.64% frame. WHY THAT PAIR: at `grid` the crop is the whole 0.30 m lattice (15.6% of frame is subject) while the two marks differ only inside the middle cell, and the marks that differ least are the two compact ones that share their centre - the bead is a filled disc of radius 0.03 and the crosshair's three bars pass straight through where it sits, so their silhouettes overlap near the middle and the exclusive-or is about 0.0036 m2 against cage's 0.005 and halo's 0.0030-at-radius-0.056. AND THE SAME PAIR IS THE SHEET'S BIGGEST NUMBER SOMEWHERE ELSE: bead vs crosshair at frame=mute is 64.67% focus / 13.16% frame, because there the crop IS the mark. Five times in focus, twenty times in frame, for one pair of marks - that spread is the artifact's claim, and it is a claim about the CROP as much as about the picture: supplying a frame enlarges what the mark has to compete in. Full predicted sheet, focus % / frame %. frame=grid: bead-crosshair 12.88/0.64, bead-halo 13.28/0.66, crosshair-halo 14.58/0.73, cage-halo 34.46/1.78, bead-cage 34.72/1.77, crosshair-cage 34.77/1.79. frame=world: bead-crosshair 61.45/4.10, bead-halo 62.10/4.71, crosshair-halo 62.24/4.60, crosshair-cage 63.83/10.63, bead-cage 63.92/10.00, cage-halo 64.04/10.55. frame=mute and frame=local, IDENTICAL sheets: crosshair-halo 64.56/13.27, bead-crosshair 64.67/13.16, bead-cage 65.38/21.94, bead-halo 65.50/25.38, crosshair-cage 65.75/23.36, cage-halo 66.03/23.20. Frame pairs at fixed mark: local-mute 0.00/0.00 under all four marks (the designed nulls), world-local and world-mute 27.21-29.02 focus / 1.64-2.04 frame, everything involving grid 29.91-30.15 focus / 6.26-6.97 frame. Subject share of frame: 15.6-15.7% at grid, 1.5-2.9% at world, 0.65-2.03% at local and mute - the bare bead is 0.66%, which is 3.3x artifact_dna_critic's BLANK_SUBJECT bar of 0.20% and about the same as floating_sphere_field, the calibration case for legitimately sparse. It is why the stage is 0.50 m and not the 0.80 the brief asked for: at 0.80 the same bead measures 0.30%, one and a half times the bar, and a point is allowed to be a small subject but not an unjudgeable one. THE PREDICTION IS A FLOOR: the replica has flat shading, no shadows, no AO, no antialiasing and no specular, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 12.88% on the named pair, stop and check the harness before the design: (a) tools/check_dna_declarations.py, in case a value the code cannot reach is falling back and printing identical tiles; (b) _rejects.json - both axes are String enums receiving strings, so this is NOT tier_terrarium's numeric trap, but read it anyway; (c) whether the sheet was captured with --max=16, because at the default cap of 9 build_dna_gallery trims the LATER axis from the tail and `frame` becomes [world, local] - which contains neither the predicted pair nor either designed null. If instead the local and mute tiles DIFFER, the fault is in this file, not the harness: _build_frame returns false for both and nothing else in the build reads `frame`.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"mark": "bead",
+							"frame": "local"
+						},
+						"b": {
+							"mark": "bead",
+							"frame": "mute"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION, to the byte, and it is the artifact's thesis rather than a spare check. `local` measures the point from an origin that is the point: point.gd:103 returns pos - global_position, which at rest is (0.0, 0.0, 0.0), so the three legs the `world` frame draws all have length zero and _build_frame returns without adding a vertex. `mute` (point.gd:100) returns the empty string and draws nothing either. A frame carried by the thing it locates is not a frame - a point cannot locate itself - and the only thing that separates the two values in the source is a caption, which this bench declines. Predicted 0.00% focus / 0.00% frame; anything above 0.5% is render noise or a mis-set value, and anything above 2% means the sweep is not sending what it says it is."
+					},
+					{
+						"a": {
+							"mark": "cage",
+							"frame": "local"
+						},
+						"b": {
+							"mark": "cage",
+							"frame": "mute"
+						},
+						"under_percent": 0.5,
+						"why": "The same null under the busiest mark, and registered separately because it is the check that the null is a fact about the APPARATUS and not about the bead. cage is the only mark whose own geometry is a cell - twelve edges at 0.10 m, the same pitch as the grid lattice - so if any mark were going to leak a frame-dependent branch it would be this one. A null that held at bead and broke at cage would mean _build_mark is reading `frame`, which it must never do: the mark is what you draw where the point is, and it does not know what it is being measured against."
+					}
+				],
+				"designed_nulls_why": "Both nulls are the same collapse seen under two marks. THE BRIEF ASKED FOR A DIFFERENT ONE and the code refused it: it proposed that at frame=mute two marks which differ only in how they assert POSITION should be identical, meaning crosshair (which asserts direction) against cage (which asserts a cell), on the grounds that both borrow their geometry from a coordinate system that mute has taken away. interactive_point_origin does not build them that way. _build_mark (gd:214-236) dispatches on `mark` alone and every value builds unconditionally; nothing in that file consults any frame, and there is no frame to consult. Making crosshair and cage collapse at mute would invent a dependency the family does not have, and would publish two tiles with no subject in them at all - below artifact_dna_critic's BLANK_SUBJECT bar of 0.20%, where the tool correctly refuses to return a verdict. So the null moved to the axis that actually has a value meaning 'nothing supplied', and it says the same thing more sharply: it is not that a mark needs a frame, it is that a frame anchored to its own subject is no frame. The tempting third cell - (cage, grid) against (cage, mute) - is deliberately NOT a null and is predicted at 29.91% focus: the cage draws the same twelve edges either way, and the whole difference is the lattice around them.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The bench can stand all four marks in a row (layout=ladder, 0.62 m pitch, about 2.1 m wide) but the SWEEP must see one point at a time: capture_config_sweep unions the AABB across a spec's variants, so a four-wide row in the same spec frames every single against two metres and photographs a 0.12 m mark as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. NOTE WHAT IS NOT FIXTURED, and why nothing needs to be: there is no time knob and no seed here. interactive_point_origin needed neither because its marks are static, and this file inherits that - the whole body is built synchronously in _ready from the constants, there is no _process, no Timer, no randf and no tween anywhere in it, so the frame is complete at frame one and two builds of one cell are the same mesh. What this bench does NOT inherit is the members' interaction debt: interactive_point_origin's line-to-origin and its four coordinate formats are invisible to a still because both only exist while a hand is closed on the object, and its own registry declined them for exactly that reason. They stay declined.",
+				"kin": "grey_point (commons/artifacts/grey_point/, registry dark_spot.json) is the one point in the corpus that refuses to be marked, and it is this artifact's opposite number. It is Klee's non-dimensional origin 'between becoming and passing', built to breathe between rendered and unrendered so that any still catches it mid-transition, to refuse a size, and to drift off-centre without landing; its @identity names its critical parameter as 'none - but as deferral, not pure refusal' and says in as many words that the moment it BITES a still it has been captured, measured and reconciled. It carries no dna block, it is excluded from the sweep and the galleries on purpose, and it is not touched, swept or modified here. point_mark is the same Klee sentence taken the other way: if a point cannot be seen without notation, then enumerate the notation and measure what each piece costs. The two belong in one room and must never be given one axis. Elsewhere in the family: grab_sphere_F/E/lambda/phi carry `grasp` (atom, socket, chorus, hollow, swarm) on a 24 mm sphere in the same folder as point.gd, and interactive_point_origin's registry already ruled that out as the neighbouring question - what your hand closes on, for terms of a formula that have no referent at all - and the ruling is inherited rather than re-litigated. static_point is the same body without the pickable contract and is kin by mechanism; it declares no axis. point's second axis `attach` (float, stake, plate) is the third thing a coordinate can be given - whether the address turns to face the reader, stands in world orientation, or lies flat on the ground where it belongs to the place - and it is declined here for the same reason as the captions: it is an axis about a Label3D.",
+				"declines": [
+					"THE CAPTIONS, which is what `frame` actually is in point.gd. All four of its values are strings in a Label3D - 'local position: (%.1f, %.1f, %.1f)', 'offset: ...', 'cell: (%d, %d, %d)', and the empty string - and this bench draws none of them. Two reasons, and the first is the corpus's own rule: a printed number beside a body is a tile about typography, which is what postulate_bench declined its members' Label3D plates for and what rule_bench declined a legend for. The second is that the sweep bench and the game disagree about billboarded text (capture_config_sweep's own header, LabelFramer), so a sheet full of floating captions is not evidence about the artifact. What is drawn instead is the ARITHMETIC each caption reports - three lengths for world, a cell for grid, zero for local, nothing for mute - and the fact that two of those arithmetics coincide is the designed null. This is the one place the synthesis overrules its source, and it is written down because it is also the thing most likely to be mistaken for a bug.",
+					"The brief's proposed mark-pair null at frame=mute. See designed_nulls_why: interactive_point_origin builds each mark unconditionally and knows nothing about any frame, so no two marks coincide anywhere, and forcing them to would publish two subjectless tiles.",
+					"`attach` (float, stake, plate) as a third axis, and `handles`, `triangulation` and `reception` as fourth and fifth. attach is an axis about a label, declined with the labels. handles and triangulation need eight points to mean anything - cube_scene_drag_points is a cube, not a point - and its own registry records that triangulation is deformation-visible only and scores identical on a still of an untouched cube. reception needs a crowd of other claims; citation_graph_node's `orphan` builds no rings at all, which is the proof that the axis is about a neighbourhood rather than about a point. Naming them here would be declaring values this object cannot reach, which is the science_screen fault.",
+					"A fifth mark and a fifth frame. Both lists are their members' declared lists character for character, in their members' order, with nothing added - unlike rule_bench, which added a fifth rule to make its null. Here the null was already in the source: point.gd shipped `local` and `mute` as separate values of one enum, and the fact that they are one picture is a finding about that file, not an invention of this one.",
+					"Any rotation of the body toward the standpoint. rule_bench turns its wall by FRONT_YAW 0.62 because a wall seen edge-on is not a wall; this body stays axis-aligned, because the canonical standpoint (yaw 0.62, pitch -0.26) is off-axis from all three of X, Y and Z, so every coordinate direction has visible extent - the crosshair's third bar is not end-on and the lattice is seen in three-quarter. That is the anamorphic check made structural rather than left to luck, and it is why an INERT verdict from this sheet would be worth arguing with.",
+					"Graduations on the world legs, a highlighted cell in the grid lattice, and an origin glyph at the corner. The first would make world a counted address, which is grid; the second would make the lattice draw a cage, which is the mark's job and would smear the one cell where the two axes are supposed to collide; the third would put a second mark in the frame, and an origin is not an object - it is where the measuring starts.",
+					"Colour as a carrier. The mark is interactive_point_origin's own palette (albedo 0.95/0.95/0.92, emission white at 2.5 x 0.6 from its .tscn) under every value, and the apparatus is one dim unlit grey under both frames that draw. The axes are about form, in its own words, and the critic is colour-blind on the verdict path anyway.",
+					"Any animation, growth, rate or randomness. The whole body is built synchronously in _ready from the constants; there is no _process, no Timer, no randf and no unseeded anything in the file."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=point-mark --tokens=point_mark --max=16",
+				"sweep_note": "THE FULL SHEET NEEDS --max=16. `mark` is declared first and is never trimmed; `frame` is second and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 4 x 4 sheet renders as 4 x 2 = world and local only. Neither designed null survives that (both live at mute) and neither does the pre-registered closest pair (it lives at grid), so a capped run would publish eight tiles that answer nothing while looking finished.",
+				"placements": 0
+			}
+		}
+	}
+}

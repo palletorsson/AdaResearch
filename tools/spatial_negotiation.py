@@ -695,6 +695,25 @@ BAY_MAX_CELLS = 24
 BRIDGE_COURT_MAX_M = 40.0
 
 
+def requires_dedicated_map(contract: SpatialContract, plan: FloorPlan) -> bool:
+    """True when rung three must hand a precinct to a world-map author.
+
+    This is the shared seam between negotiation and the dedicated-world
+    register.  The register may inventory the decision, but it may not invent
+    a second size rule.  Long, thin works are deliberately excluded: they can
+    turn and leave a walkable column even when their long side exceeds 40 m.
+    """
+    if contract.containment != "precinct" or contract.preferred_venue != "courtyard":
+        return False
+    import math as _m
+    tile_w = plan.width - 2 * getattr(plan, "apron", 0)
+    if tile_w < 6:
+        return False
+    body_x, body_z = float(contract.body_m[0]), float(contract.body_m[1])
+    return (int(_m.ceil(min(body_x, body_z))) > tile_w - 3
+            and max(body_x, body_z) > BRIDGE_COURT_MAX_M)
+
+
 def _try_bay(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
              ladder: list[Trace]) -> Placement | None:
     """SPIKE 09 rung 1. For a precinct body that would fit the TILE width,
@@ -861,14 +880,7 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
             court_access: str | None = None
             if (contract.preferred_venue == "courtyard" and tile_w >= 6
                     and int(_m.ceil(min(body_x, body_z))) > tile_w - 3):
-                if max(body_x, body_z) <= BRIDGE_COURT_MAX_M:
-                    court_access = "bridge"
-                    ladder.append(Trace(
-                        "escalation", "compromised",
-                        f"bridge courtyard granted: {body_x:.1f} x {body_z:.1f} m "
-                        f"would sever the {tile_w}-cell spine even turned, so its "
-                        f"3 m apron expands beside a protected through-bridge"))
-                else:
+                if requires_dedicated_map(contract, plan):
                     ladder.append(Trace(
                         "escalation", "fail",
                         f"courtyard refused: {body_x:.1f} x {body_z:.1f} m body - "
@@ -877,6 +889,13 @@ def negotiate(contract: SpatialContract, plan: FloorPlan, occ: Occupancy,
                         f"over {BRIDGE_COURT_MAX_M:.0f} m is a WORLD, not a bridge "
                         f"court - dedicated map required (Palle's rung 3 ruling)"))
                     court = []
+                else:
+                    court_access = "bridge"
+                    ladder.append(Trace(
+                        "escalation", "compromised",
+                        f"bridge courtyard granted: {body_x:.1f} x {body_z:.1f} m "
+                        f"would sever the {tile_w}-cell spine even turned, so its "
+                        f"3 m apron expands beside a protected through-bridge"))
             if court:
                 ladder.append(Trace(
                     "escalation", "pass",

@@ -40,6 +40,21 @@ Evidence:
   freed-object/process-frame cleanup errors after the route succeeds.
 - Forward capture: `ada_run/spatial_recommendation/bridge_court_dark_oak.png`.
 
+**The refusal tail is now a build queue.**
+`tools/dedicated_world_register.py` calls the same
+`spatial_negotiation.requires_dedicated_map()` predicate as the negotiator and
+writes `ada_run/dedicated_world_register.json`. The current 29 chapter
+occurrences are 28 artifact tokens but only **21 site families**: seven alias
+pairs share an actual scene and therefore one site build. Every row records the
+measured full-scale body, a body-plus-3 m site envelope, its chapters and host
+museums, and leaves `site_contract.formula` null. Negotiation owns why the work
+leaves; architecture still owns what place receives it.
+
+`python tools/test_dedicated_world_register.py` proves the counts, alias
+collapse, full-scale envelope, stable site IDs, and the negative long-thin
+case (`laser_measure` can turn, so length alone never makes it a world).
+`python tools/dedicated_world_register.py --check` is the drift gate.
+
 `ada_run/em_overrides.json` remains absent: this is a negotiated rule and a
 plan/assembler capability, not a hidden hand-placement exception.
 
