@@ -188,11 +188,43 @@ def splice(rp: Path, token: str, axes: dict, dry: bool) -> bool:
         # Replace ONLY the axes sub-object, so hand-written `note`/`default`/`promoted`
         # prose survives a refresh. Losing that prose would quietly delete the record of
         # why an axis exists.
-        newblock, n = re.subn(r'("axes"\s*:\s*)\{.*?\n([ \t]*)\}',
-                              lambda mm: mm.group(1) + json.dumps(axes, indent=1).replace(
-                                  "\n", "\n" + mm.group(2)) , block, count=1, flags=re.S)
-        if n == 0:
+        # BRACE-MATCHED, NOT REGEX-LAZY. The previous pattern was `\{.*?\n([ \t]*)\}` with
+        # re.S, which is fine on a multi-line axes object and catastrophic on an EMPTY one:
+        # `"axes": {}` has no newline inside the braces, so the lazy `.*?` ran forward past
+        # every sibling key until it found a `\n<indent>}` — and swallowed them. Wave 13
+        # seeded six registries with `"axes": {}` so the values could be DERIVED rather than
+        # typed, ran this, and lost every pre-registered `predicted_degeneracy` in silence.
+        # The commit went in without them and the gallery scored the predictions from a
+        # scratch file. Walk the braces instead, and refuse to write if any sibling key of
+        # the dna block would not survive.
+        am = re.search(r'"axes"\s*:\s*\{', block)
+        if am is None:
             raise SystemExit(f"{token}: has a dna block but no axes sub-object to replace")
+        depth, j = 0, am.end() - 1
+        while j < len(block):
+            ch = block[j]
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        if depth != 0:
+            raise SystemExit(f"{token}: axes braces do not close")
+        line_start = block.rfind("\n", 0, am.start()) + 1
+        indent = re.match(r"[ \t]*", block[line_start:]).group(0)
+        rendered = json.dumps(axes, indent=1).replace("\n", "\n" + indent)
+        newblock = block[:am.end() - 1] + rendered + block[j + 1:]
+        before = set(re.findall(r'\n[ \t]*"([A-Za-z_]+)"\s*:', block))
+        after = set(re.findall(r'\n[ \t]*"([A-Za-z_]+)"\s*:', newblock))
+        lost = before - after - {"axes"} - set(axes)
+        # `before` also picks up axis NAMES nested inside the old axes object; only a key that
+        # was a sibling of "axes" and is now gone is a real loss, so subtract old axis names too.
+        old_axes = set(re.findall(r'\n[ \t]*"([A-Za-z_]+)"\s*:', block[am.start():j + 1]))
+        lost -= old_axes
+        if lost:
+            raise SystemExit(f"{token}: REFUSING — replacing axes would drop {sorted(lost)}")
         if newblock == block:
             return False
         if not dry:
