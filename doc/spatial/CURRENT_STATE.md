@@ -160,6 +160,31 @@ his first session are committed (`c2e8b3111`). NOT covered v1: podium/
 plinth structural tops (0.4/0.8 — plan-time offers would disagree until
 regen; needs its own pass), ceiling/floor/edge props (no height knob).
 
+**Ninth session, 08-14: one desktop app, in-situ prop rulings, spike 09.**
+- The shipped game is now the editor suite: **TAB** toggles the curator
+  editor mid-walk (records collected always, so the toggle sees every
+  placement since boot); the sequences picker has a desktop-only
+  **✎ Prop Corridor** card, **F10** returns. `f3741f937`.
+- **In-situ prop rulings** (`d941f4fe7`): TAB, look at a wall prop,
+  UP/DOWN rules the token's CONVENTION (same `prop_wall_rules.json` the
+  corridor writes; every live copy previews); F5 MERGES so corridor rules
+  survive; refusals for cell-move/rotate/delete with a voice. The trial
+  caught that `exit_sign` is dressed at two heights — baseline is now the
+  selected node's live height.
+- **Spike 09** (`doc/spatial/spikes/09_…`, `a245a713d`): "the footprint
+  should change the blueprint" — measured: 114 escalations = 30 bodies
+  ≤12 m (need a BAY), 58 at 12–40 m (need an honest, per-length joint
+  budget — the refusal text calls a cap an impossibility), 14 > 40 m
+  (worlds — the >34 m tail, Palle's ruling). Three rungs proposed under
+  ONE authorship rule (plan stays sole author; bays derive at build like
+  `_widen_doors`). Prediction on record: rung 1 → ~84 escalations.
+  **F3 retracted same session** — the "four zero bodies" were
+  `artifact_sizes.json` stale entries; the contract resolves them at
+  92–300 m. Fourth "measure what the code reads" of the week.
+
+**NEXT (in order): rung 1 the bay → rung 2 joint budget → Palle rules
+the 14 worlds.**
+
 **Open findings (not fixed today).**
 
 - **Autopilot on the full plan FAILS at z 545**, inside the forces segment
