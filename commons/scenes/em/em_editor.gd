@@ -167,6 +167,11 @@ add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
 			line2 = "\nselected PROP: %s  h %.2f (code %.2f) — UP/DOWN rules every %s in the museum" % [
 				String(r.get("token", "?")), h, float(r.get("code_h", 0.0)),
 				String(r.get("token", "?"))]
+		elif String(r.get("kind", "")) in ["furniture", "plinth", "showing"]:
+			var kd := String(r.get("kind", ""))
+			line2 = "\nselected %s: %s  (%s) — arrows 1 m · SHIFT 0.2 m · PGUP/PGDN%s; the ruling is per copy" % [
+				kd.to_upper(), String(r.get("token", "?")), String(r.get("chapter", "?")),
+				" · Q/R turn" if kd == "furniture" else ""]
 		else:
 			line2 = "\nselected: %s  cell %s  rot %.0f  (%s)" % [
 				String(r.get("token", "?")), str(r.get("tile_cell", [])),
