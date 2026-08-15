@@ -168,32 +168,92 @@ func _measure(scene_path: String, label: String, out_dir: String, fixture_json: 
 	var drift: float = _delta(a, b)          # what moves BY ITSELF over one dt
 
 	var fired: Array = []
+	# HOW MANY OF THESE CONTROLS ARE WIRED TO ANYTHING AT ALL. Without this the harness can
+	# say "fired and nothing moved" but not say WHY, and the two whys want opposite repairs:
+	# a signal with zero connections is a dangling control and a real defect, while a signal
+	# with a listener means the handler DID run and changed something in a channel this probe
+	# cannot see — colour, material, label text, audio. Convicting the second kind is the same
+	# fault as convicting a step sequencer with a geometry probe.
+	var wired: int = 0
+	var dangling: Array = []
 	for c in controls:
 		var node: Node = c["node"]
 		var sig: String = c["signal"]
 		if not is_instance_valid(node):
 			continue
+		var conns: int = node.get_signal_connection_list(sig).size()
+		if conns > 0:
+			wired += 1
+		else:
+			dangling.append("%s.%s" % [node.name, sig])
+		# MOVE THE CONTROL, THEN ANNOUNCE IT. Emitting value_changed(0.75) at a spin box does
+		# not change the spin box: the handler reads `slider.value`, finds it exactly where it
+		# was, and rebuilds something identical. A deterministic generator asked to regenerate
+		# with unchanged parameters produces a byte-identical result, which this probe cannot
+		# tell from a generator that ignored the button — and that is most of what was left in
+		# the inert column: recursive_tree, space_colonization_algorithm, wfc_dungeon_generator,
+		# every one of them a builder wired to a slider nobody had actually moved.
+		var moved_value := false
+		if "value" in node and "min_value" in node and "max_value" in node:
+			var lo := float(node.get("min_value"))
+			var hi := float(node.get("max_value"))
+			var cur := float(node.get("value"))
+			if hi > lo:
+				# Somewhere far from where it is now, and inside its own declared range.
+				var want: float = lo + (hi - lo) * (0.28 if cur > lo + (hi - lo) * 0.5 else 0.76)
+				if not is_equal_approx(want, cur):
+					node.set("value", want)
+					moved_value = true
 		var args: Array = _default_args(node, sig)
+		if moved_value and args.size() == 1 and (args[0] is float or args[0] is int):
+			args[0] = float(node.get("value"))
 		# emit_signal with the wrong arity is an error, not a failed test — the args come
 		# from the signal's own declared types.
 		node.callv("emit_signal", [sig] + args)
 		fired.append("%s.%s" % [node.name, sig])
+
+	# THE CONTROLS ARE MEASURED BEFORE ANYTHING IS SHOVED, because measuring the two together
+	# is circular. The grab test moves a pickable 12 cm and then measures the subtree the
+	# pickable is IN, so the response can never come back below 12 cm whether or not a single
+	# thing was listening — "it moved because I moved it" scored as a pass. Splitting the
+	# firing gives one number that owes nothing to the shove.
+	await create_timer(DT).timeout
+	var c1: Dictionary = _snapshot(inst)
+	var response: float = _delta(b, c1)      # controls ONLY — nothing has been pushed yet
+	var look_drift: float = _look_delta(a, b)
+	var look_response: float = _look_delta(b, c1)
+
 	for g in grabs:
 		if g is Node3D and is_instance_valid(g):
 			(g as Node3D).global_position += Vector3(0.12, 0.0, 0.0)
 			fired.append("%s.moved" % g.name)
-
 	await create_timer(DT).timeout
 	var c2: Dictionary = _snapshot(inst)
-	var response: float = _delta(b, c2)      # what moved WITH the firing
+	var grab_response: float = _delta(c1, c2)
+	# What the shove itself accounts for, before anything listens: each pickable carries its
+	# own position into the sum, so 0.12 m per grabbed body is the floor a genuine knock-on
+	# effect has to clear. It is a floor and not a subtraction — a pickable dragging a linkage
+	# with it also moves itself.
+	var grab_floor: float = 0.12 * float(grabs.size())
 
 	# The verdict. A response has to clear the artifact's own drift by a real margin, and
 	# clear an absolute floor so that float noise on a still artifact is not a "yes".
 	var margin: float = response - drift
 	var verdict := "no affordance"
-	if not fired.is_empty():
+	if controls.is_empty() and not grabs.is_empty():
+		# ITS AFFORDANCE IS CARRIAGE, AND THIS TEST CANNOT GRADE THAT. A pickable with no other
+		# control responds by being picked up and carried, which the pickup system does by
+		# moving it — there is nothing for the artifact itself to handle. Calling it RESPONDS
+		# would be scoring my own shove; calling it INERT is what the old build did to nineteen
+		# artifacts including every parametric knot in the corpus.
+		verdict = "grabbable - affordance is carriage, which this test cannot grade"
+	elif not fired.is_empty():
 		if response > maxf(drift * 2.0, 0.0005):
 			verdict = "RESPONDS"
+		elif look_response > maxf(look_drift * 2.0, 0.0005):
+			# It did not move. It changed colour, emission, transparency, a shader uniform or a
+			# line of text — which for a large part of this corpus IS the response.
+			verdict = "RESPONDS in appearance - recoloured or relabelled, did not move"
 		elif int(c2["meshes"]) == 0:
 			# NOT A CONVICTION. Both deltas are built from meshes, positions and boxes, so a
 			# subtree that never built any geometry scores drift 0.0 and response 0.0 no matter
@@ -211,6 +271,10 @@ func _measure(scene_path: String, label: String, out_dir: String, fixture_json: 
 		"controls_found": controls.size(), "grabbables_found": grabs.size(),
 		"fired": fired, "drift": drift, "response": response, "margin": margin,
 		"meshes": int(c2["meshes"]), "spatials": int(c2["spatials"]),
+		"wired": wired, "dangling": dangling.slice(0, 24),
+		"dangling_count": dangling.size(),
+		"grab_response": grab_response, "grab_floor": grab_floor,
+		"look_drift": look_drift, "look_response": look_response,
 		"verdict": verdict,
 	})
 	print("INTERACTION %s  fired=%d drift=%.5f response=%.5f  %s"
@@ -220,19 +284,38 @@ func _measure(scene_path: String, label: String, out_dir: String, fixture_json: 
 
 
 ## Every node carrying a control signal, and every node that reads as grabbable.
+##
+## A NODE THAT DECLARES `grabbed` IS GRABBABLE, WHICH IS NOT THE SAME AS BEING DRIVEN BY IT.
+## The first version of this classified purely by NAME — a node had to be called something
+## containing "grab", "handle" or "knob" — and emitted `grabbed`/`released` on everything else
+## as though they were controls. They are not controls; they are ANNOUNCEMENTS the grab system
+## makes after the hand has already moved the object. Nothing connects to them, and nothing
+## should: a pickable responds by being carried, not by handling its own notification.
+##
+## So the harness fired the announcement and skipped the act. Nineteen artifacts came back
+## with every control dangling and a verdict of INERT — catenoid, torus_knot, force_cube, and
+## color_sets_overview with 288 stickers not one of which was "connected to anything". All of
+## them were grabbable objects the probe had declined to grab, because `Catenoid` does not
+## contain the letters g-r-a-b. Declaring the signal is the evidence; the name never was.
 func _collect(node: Node, controls: Array, grabs: Array) -> void:
 	var stack: Array = [node]
 	while not stack.is_empty():
 		var n: Node = stack.pop_back()
+		var announces_grab := false
 		for s in n.get_signal_list():
 			var sname := String(s.get("name", ""))
-			if CONTROL_SIGNALS.has(sname):
+			if sname == "grabbed" or sname == "released":
+				announces_grab = true
+			elif CONTROL_SIGNALS.has(sname):
 				controls.append({"node": n, "signal": sname})
 		var low := n.name.to_lower()
+		var named_grab := false
 		for hint in GRAB_HINTS:
-			if low.contains(hint) and n is Node3D:
-				grabs.append(n)
+			if low.contains(hint):
+				named_grab = true
 				break
+		if (announces_grab or named_grab) and n is Node3D:
+			grabs.append(n)
 		for c in n.get_children():
 			stack.append(c)
 
@@ -258,6 +341,55 @@ func _default_args(node: Node, sig: String) -> Array:
 
 ## A cheap, sensitive fingerprint of the whole subtree: how many meshes, where they are, how
 ## big they are, and what they are made of. Any of those moving is the artifact responding.
+## A SECOND CHANNEL, BECAUSE MOST OF THIS CORPUS ARGUES IN COLOUR. The geometry channel alone
+## convicted pattern_tile_plate, NoiseColors3D, WhiteNoiseGallery and visual_color_mixing of
+## being inert — artifacts whose entire subject is what colour a surface is. Their handlers
+## ran; the probe was measuring the one thing they do not change. Same fault as judging a step
+## sequencer by its meshes, one channel over, and it is the reason this is reported apart from
+## the geometry number rather than summed into it: "it recoloured but did not move" is a
+## different fact about an artifact than "it moved", and flattening them loses both.
+func _appearance(n: Node, acc: Dictionary) -> void:
+	if n is MeshInstance3D:
+		var mi := n as MeshInstance3D
+		var m: Material = mi.get_active_material(0)
+		if m == null:
+			m = mi.material_override
+		if m is BaseMaterial3D:
+			var bm := m as BaseMaterial3D
+			acc["albedo"] = (acc["albedo"] as Vector3) + Vector3(
+				bm.albedo_color.r, bm.albedo_color.g, bm.albedo_color.b)
+			acc["emission"] = (acc["emission"] as Vector3) + Vector3(
+				bm.emission.r, bm.emission.g, bm.emission.b) * bm.emission_energy_multiplier
+			acc["alpha"] = float(acc["alpha"]) + bm.albedo_color.a
+		elif m is ShaderMaterial:
+			# A shader's uniforms are where a shader-driven artifact keeps its state, and they
+			# are readable by name off the material without knowing the shader.
+			var sm := m as ShaderMaterial
+			if sm.shader != null:
+				for u in sm.shader.get_shader_uniform_list():
+					var v: Variant = sm.get_shader_parameter(String(u.get("name", "")))
+					if v is float or v is int:
+						acc["uniforms"] = float(acc["uniforms"]) + float(v)
+					elif v is Color:
+						var cc := v as Color
+						acc["albedo"] = (acc["albedo"] as Vector3) + Vector3(cc.r, cc.g, cc.b)
+					elif v is Vector3:
+						acc["albedo"] = (acc["albedo"] as Vector3) + (v as Vector3)
+	# ANY node that carries text, not just the two 3D label classes. A whole family of these
+	# artifacts is a 2D UI panel rendered to a quad — infokiosk, HandheldInfoBoard, settings_ui,
+	# panel_bridge_loom with sixty-three buttons — and pressing Next there changes a
+	# RichTextLabel inside a SubViewport. Nothing moves, nothing is recoloured, and the earlier
+	# channel looked only at Label and Label3D, so the page turned and the probe saw a corpse.
+	# Summed length alone would miss a swap between two strings of equal length, so the content
+	# is folded in as well.
+	if "text" in n:
+		var s: String = String(n.get("text"))
+		var h: int = 0
+		for i in range(s.length()):
+			h = (h * 31 + s.unicode_at(i)) % 1000003
+		acc["text"] = int(acc["text"]) + s.length() + h
+
+
 func _snapshot(node: Node) -> Dictionary:
 	var meshes: int = 0
 	var spatials: int = 0
@@ -266,9 +398,12 @@ func _snapshot(node: Node) -> Dictionary:
 	var vis: int = 0
 	var box := AABB()
 	var have := false
+	var look: Dictionary = {"albedo": Vector3.ZERO, "emission": Vector3.ZERO,
+			"alpha": 0.0, "uniforms": 0.0, "text": 0}
 	var stack: Array = [node]
 	while not stack.is_empty():
 		var n: Node = stack.pop_back()
+		_appearance(n, look)
 		if n is Node3D:
 			spatials += 1
 			var n3 := n as Node3D
@@ -285,7 +420,20 @@ func _snapshot(node: Node) -> Dictionary:
 		for c in n.get_children():
 			stack.append(c)
 	return {"meshes": meshes, "spatials": spatials, "pos": pos, "scale": scl, "visible": vis,
-			"box_size": box.size, "box_pos": box.position}
+			"box_size": box.size, "box_pos": box.position, "look": look}
+
+
+## How far apart two snapshots look, ignoring where anything is.
+func _look_delta(a: Dictionary, b: Dictionary) -> float:
+	var x: Dictionary = a["look"]
+	var y: Dictionary = b["look"]
+	var d: float = 0.0
+	d += (x["albedo"] as Vector3).distance_to(y["albedo"] as Vector3)
+	d += (x["emission"] as Vector3).distance_to(y["emission"] as Vector3)
+	d += absf(float(x["alpha"]) - float(y["alpha"]))
+	d += absf(float(x["uniforms"]) - float(y["uniforms"]))
+	d += absf(float(int(x["text"]) - int(y["text"])))
+	return d
 
 
 ## One number for how far two snapshots are apart. Scaled so a mesh appearing or vanishing
