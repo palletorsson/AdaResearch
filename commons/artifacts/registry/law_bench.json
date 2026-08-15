@@ -1,0 +1,190 @@
+{
+	"artifacts": {
+		"law_bench": {
+			"name": "Law Bench",
+			"lookup_name": "law_bench",
+			"scene": "res://commons/artifacts/law_bench/law_bench.tscn",
+			"class_name": "LawBench",
+			"category": "foundations",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "The corpus uses one word, `law`, for three things that differ in what would refute them, and this bench builds all three on one board so the difference is a difference between bodies. Newton's laws are refutable by a single instance. A probability distribution is not refutable by any single draw at all - it needs a statistic and a threshold first, and the bins that make the test possible are drawn into the claim on purpose. x/ln x and the logarithmic integral are neither: they are estimates with error terms, and the Riemann hypothesis is a conjecture about how big one of those error terms is. Every one of the nine values is built as a PREDICTION AND ITS RESIDUAL, both as solids with thickness, and the `reading` axis walks the claim alone, the claim with the world behind it, and the gap alone. The residual is where the three kinds come apart: exactly zero for a physical law inside its own model, never zero and never signed for a sample of 160, and systematic and signed and bounded by a theorem for an approximation. On the Newton wedges height is the displacement error and thickness is the mass, so VOLUME is the momentum error - which is why acceleration's three wedges have identical volume and reaction's two have identical volume and opposite sign. Three cells of the twenty-seven are deliberately empty and that is the argument: a residual reading cannot tell a perfect theory from no theory at all. Nothing animates, nothing is printed, the one sample is drawn from a pinned index hash.",
+			"tags": [
+				"law",
+				"epistemology",
+				"refutation",
+				"residual",
+				"newton",
+				"distribution",
+				"prime_counting",
+				"riemann",
+				"approximation",
+				"error_bound",
+				"foundations",
+				"synthesis"
+			],
+			"dev_themes": [
+				"foundations",
+				"epistemology",
+				"synthesis",
+				"one word, three things that break differently"
+			],
+			"interactions": [
+				"walk the law axis at reading=residual and watch the KIND of the gap change under one word: nothing at inertia, two wedges that cancel at reaction, sixteen unsigned blocks at gaussian, one signed growing band at x_over_log",
+				"stand at law=acceleration, reading=residual and read the three wedges as volumes rather than heights - they are three different depths and one identical volume, because the same force was applied to three masses and momentum error does not care which",
+				"put law=x_over_log and law=logint side by side at reading=residual: one band below the rail and one above, in the two colours riemann_pi already ships, and the low one is 2.7 times the deep one on average",
+				"put law=none at reading=claim beside law=inertia at reading=residual and try to tell them apart - they are the same picture, and one of them is a theory that has never failed while the other is no theory at all",
+				"walk reading=claim through uniform, gaussian and exponential and notice the bin edges: they are not decoration, they are the price of being able to test the claim at all"
+			],
+			"capacity": "SEE that `law` in this corpus names three different relations between a claim and the world - refutable by one instance, refutable only by a statistic over a threshold, and not refutable but bounded - and that the difference is legible in the shape of the residual and nowhere else",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"newtons_laws",
+					"random_space",
+					"riemann_pi",
+					"distribution_sampler",
+					"force_field_visualizer",
+					"bouncing_ball"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant is the SAME body, because the body is the STAGE: a 0.96 x 0.96 m plate, four 0.032 m corner pins 1.00 m tall and four top rails, axis-aligned and drawn before either axis is consulted. Inside it a board spans x -0.40..0.40 and y 0.14..0.90 and is also drawn in all 27 cells. Measured on the replica, everything drawn inside the cage lies within x -0.416..+0.407 (the left bound is a start bead of radius 0.0163 sitting on the board's left edge), y 0.133..0.907 (both bounds are the frame, not the figure - the tallest figure is logint's curve at 0.852), and z -0.149..+0.121 (the board at the back, a Newton step bead in the front lane at the front). So the world box is 0.96 x 1.00 x 0.96 in every cell, set by the stage alone, and one grid cell holds it. The stage exists precisely because the figures do not agree about extent: none/claim draws NOTHING and logint/world draws two 500-sample curves. Nothing is yawed to face the camera; a rotated cage would grow the footprint to 1.34 m. layout=ladder stands the three readings in a row at 1.15 m pitch (about 3.5 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.96,
+					1.0,
+					0.96
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"source": "computed_from_geometry in a Python replica built from the same constants; no Godot was run. The box is the STAGE and nothing else: the plate spans +-0.48 in x and z and the pins run y 0 to 1.00, while the drawn figure runs from an area of exactly zero at none/claim to 0.138 m2 of band at x_over_log/residual. That range is the whole reason the stage exists and why the AABB is identical in all 27 variants by construction."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.52,
+				"sources": [
+					"newtons_laws",
+					"random_space",
+					"riemann_pi"
+				],
+				"axes": {
+				 "law": [
+				  "none",
+				  "inertia",
+				  "acceleration",
+				  "reaction",
+				  "uniform",
+				  "gaussian",
+				  "exponential",
+				  "x_over_log",
+				  "logint"
+				 ],
+				 "reading": [
+				  "world",
+				  "claim",
+				  "residual"
+				 ]
+				},
+				"default": "law=none, reading=world. `none` is the default because it is the one value on the axis that is a member's own default - riemann_pi ships `law: String = \"none\"` and its _setup_law() returns before building anything - and because a bench with no law on it is the honest starting state of a bench about laws. `reading=world` rather than `claim` because at law=none the claim is empty by construction, and an artifact whose default renders nothing is a bad object in a room whatever it is in a sheet. The default therefore draws the bare pi(x) staircase on an empty board: riemann_pi's legacy exhibit, which is exactly the condition the whole bench is about - a fact with nothing to be measured against. NOTE WHAT THIS DOES NOT COST: the default is one of the emptiest cells in the sheet, which would normally be a bad place to solve framing, but framing here is set by the stage and the stage is identical in every variant, so the camera distance is the same whichever cell is measured.",
+				"note": "WHAT THE VALUES MEAN, WHERE EACH WORD CAME FROM, AND WHAT WOULD REFUTE IT. THE FAMILY FIRST, AND IT IS AN ODD ONE: three artifacts share the export name `law` and share not one value. newtons_laws (algorithms/physicssimulation/newtonslaws/NewtonsLaws.gd:58) declares all | inertia | acceleration | reaction and its truth line is 'A law is not a rule about one body - it is a constraint on what relations between bodies are allowed'. random_space (commons/context/walkgrids/RandomSpace.gd:75) declares uniform | gaussian | poisson | exponential, and its own header says why the word is not a metaphor: 'in probability the LAW of a random variable is literally its distribution'. riemann_pi (algorithms/spacetopology/riemann_pi/pi_infinity_surface.gd:58) declares none | x_over_log | logint | both, where the values are two smooth ESTIMATES of the prime counting function. So one export name spans a physical law that one counter-example kills, a model that no single observation can touch, and an approximation that is not the kind of thing that can be false at all. That is the subject. THE THREE NULLS ARE NOT THE SAME KIND OF THING EITHER, and the brief's framing had to be corrected against the code on this: riemann_pi's `none` is a TRUE null - _setup_law() returns on line 241 before a node is constructed. newtons_laws' `all` is NOT a null and is the opposite of one: _law_spec()'s default branch returns three bodies under three DIFFERENT force histories (free, constant, oscillate), the most crowded arrangement the artifact can build, and the member's own comment calls it 'one law, F = ma, demonstrated three times over'. And random_space HAS NO NULL AT ALL - all four of its values are real distributions, and `uniform` is only the shipped default whose branch short-circuits to the original randf_range expression. One member's null builds nothing, one member's supposed null builds the most, and one member has none. LAW, NINE VALUES, THREE FROM EACH MEMBER IN THAT MEMBER'S OWN SPELLING. inertia (newtons_laws) - sum F = 0 so velocity is preserved; three bodies with three starting speeds and the member's three masses 1.0 / 1.5 / 2.0, and mass does not enter the track at all, which IS the content. REFUTED BY one body under no net force whose velocity changes; one instance is enough and that is the whole difference from the middle three. acceleration (newtons_laws) - F = m a, the member's own 5.0 N applied to those same three masses, so the three end in three places and mass is the only thing that separates them. REFUTED BY one measured (F, a) pair whose ratio is not the body's mass. reaction (newtons_laws) - the member's own two-body pair, masses 1.0 and 2.0 at -1.6 and +1.6, driven at each other by forces of equal size and opposite sign; they meet off-centre at x = 0.533 because equal-and-opposite is a statement about FORCE and the masses were never equal, and their centre of mass never moves. REFUTED BY one pair whose centre of mass accelerates under an equal-and-opposite pair alone. uniform (random_space) - every height equally likely, the member's shipped default. REFUTED BY nothing a single draw can do; only by a statistic over a threshold, and on this bench that statistic is chi-squared over 16 bins and it reads 21.20 against the 5 percent critical value of 24.996 on 15 degrees of freedom. gaussian (random_space) - the normal quantile over three sigma, clipped, so a bell of sigma 1/3 in normalised units with a point mass at each clip. Chi-squared 13.69, also under. exponential (random_space) - rate 3, one-sided, a plain at the floor with about one draw in twenty saturating at the ceiling; the only asymmetric law the member declares and the member says so. Chi-squared 19.20, also under. So NOT ONE OF THE THREE IS REFUTED BY THE SAMPLE THIS BENCH DRAWS, and that is the pre-registered finding, not an accident of seed. none (riemann_pi) - the axis's only true null. Nothing is claimed, so `claim` and `residual` are empty boards and `world` is the bare prime count. REFUTED BY nothing, because there is nothing there to be wrong. x_over_log (riemann_pi) - x / ln x, the crude estimate; it sits BELOW the true count at 497 of 500 sampled x and the gap widens to 39.1 counts at the right edge. REFUTED BY nothing - it is not a claim that can be false, only an estimate that can be poor, and the size of its error is the content of the prime number theorem. logint (riemann_pi) - the integral of dt/ln t from 2, the good estimate; ABOVE the true count at 499 of 500 samples, by a mean of 8.51 counts against x/ln x's 22.80, a factor of 2.68. What is at stake here is not truth but SIZE: the Riemann hypothesis in Schoenfeld's form says |pi(x) - li(x)| stays under sqrt(x) ln x / (8 pi) for x above 2657, which at this bench's right edge is 13.53 counts - 0.102 m of board at the residual gain, a sliver you could lay against the drawn band. READING, THREE VALUES, AND THIS AXIS IS THIS SYNTHESIS'S OWN, NOT A MEMBER'S. No source declares it: newtons_laws carries `evidence` (result | trace | longhand | axiom), random_space carries nothing but `law`, riemann_pi carries nothing but `law`. `reading` is therefore SYNTHESIS-INTRODUCED, which is a weaker warrant than a derived axis and is recorded as such rather than dressed up. claim - the law's prediction alone. For the Newton values that is the closed-form trajectory; for the distributions it is the EXPECTED COUNTS PER BIN and not a smooth curve, because a distribution cannot be compared to anything until bins have been chosen and choosing them is the price of the test, so the bin edges are drawn into the claim on purpose; for the estimates it is the smooth curve. REFUTED BY nothing - a claim on its own is not the kind of thing evidence touches, which is why this reading is the one that looks most like science and can settle least. world - the claim with what is actually there behind it: the stepped trajectory a semi-implicit Euler integrator produces at h = 0.125 s (the scheme Godot's own RigidBody3D uses, which is what all three Newton values are made of in the source), the seeded sample's 160-draw histogram, the true pi(x) staircase. Strictly additive - everything in claim is still drawn, in the same place and the same colour. REFUTED BY a mismatch you can see without arithmetic, which happens at exactly none of the nine values. residual - the gap alone, standing on the rail, as a body with thickness. THIS IS THE READING THAT CARRIES THE THESIS. For a physical law the residual is exactly zero inside its own model and the only way to get a number out of it is to introduce a METHOD, at which point the number is a fact about the method: inertia's is zero to the last bit because explicit Euler is exact on a straight line, and reaction's is zero in the centre of mass while being non-zero for each body, because the two per-body errors are 0.5 a h t with a = +F/m1 and -F/m2 and their momentum-weighted sum is 0.5 h t (F - F) = 0. For a distribution the residual is never zero, has no fixed sign, and does not shrink for THIS sample at all - it shrinks like 1/sqrt(N) across samples nobody took. For an approximation it is systematic, signed, growing, and bounded by a theorem. REFUTED BY, for this reading: any cell where the built residual disagrees with the closed form it was built from, which is checkable by hand from the numbers in this note. THE ARITHMETIC OF THE BODY. On the Newton wedges HEIGHT is the displacement error 0.5 a h t and THICKNESS is the mass at 0.035 m per kg, so VOLUME is the momentum error - which is why acceleration's three wedges are 0.3125 / 0.2083 / 0.1563 m deep on thicknesses 0.035 / 0.0525 / 0.070 and all three have volume 0.004200, identical, because m a = F is the same for all three; and why reaction's two are 0.3125 up on 0.035 and 0.1563 down on 0.070, also 0.004200 each, equal and opposite, which IS the third law. Three residual gains, one per vocabulary, each set so that the family's own largest residual reaches exactly 0.300 m of board: Newton 5.053x the position scale (without it the largest wedge is 59 mm and the smallest 30 mm and they are not separable in a still), the sample 1.255x, the count 3.379x. THE READING COMPARES WITHIN A VOCABULARY AND NEVER ACROSS - counts, densities and metres do not share a scale, and a single global gain would have been a number with no referent. What survives the change of gain is the RATIO inside each family, and the ratios are the findings: 1 : 2/3 : 1/2 for acceleration's wedges, 2.68 for x_over_log against logint. THE SAMPLE IS ONE SAMPLE SEEN THREE WAYS, which is random_space's own finding reproduced: 'THE FOUR LAWS ARE MONOTONE TRANSFORMS OF THE SAME DRAW ... vertex i receives the same u under all four'. Draw i here depends only on i - an index hash, not a running state, seeded at 12345 which is random_space's own seed_value - so the order the builder walks the bins can never change the sample, and the three histograms are three views of one 160-draw stream pushed through three quantile functions copied from the member's _draw(). COLOUR IS INHERITED, NOT CHOSEN: riemann_pi already ships law_color = Color(1.0, 0.45, 0.35) for x / ln x, which runs BELOW the staircase, and logint_color = Color(0.45, 1.0, 0.60) for li, which runs ABOVE. The member had already colour-coded the sign of a residual; this bench takes both colours character for character and generalises them to every residual on the board, so a green solid is above the rail and a salmon one is below it in all nine values. THE THREE EMPTY CELLS ARE PRE-DECLARED AND THEY ARE THE ARGUMENT, NOT A BROKEN CAPTURE. none/claim, none/residual and inertia/residual all render an empty board with a rail across it, identical to the byte. One is 'nothing has been claimed', one is 'nothing was claimed so there is no gap', and one is 'a claim was made and the gap is exactly zero'. THE PROPOSITION A REASONABLE PERSON CAN DISAGREE WITH: a residual reading cannot distinguish a perfect theory from no theory, so the very evidence that makes refutability operable is blind to the difference between the two ends of it. The disagreement available, and it is fair: zero-residual-by-construction is an artefact of building the world out of the law, and a bench that ran a real measurement against Newton would find a residual - which is exactly right, and it is why the honest Newton residual here is labelled as the METHOD's and not the law's."
+				,
+				"predicted_degeneracy": {
+					"pair": "x_over_log against logint, in the claim reading",
+					"percent": 10.0,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE from the same constants in a Python replica: the two estimate curves projected onto the board, arc lengths measured on the board (x/ln x 0.9904 m, li 1.0710 m), tube diameter 2 x 0.009 = 0.018 m, so the two ribbons are 0.01783 and 0.01928 m2. They overlap only where the curves are within one tube diameter of each other, which is |li - x/ln x| < 8.05 counts, which is the leftmost 4.8 percent of the width (measured, not guessed - the gap is -2.885 counts at x = 2, crosses zero, passes 8 counts near x = 100 and reaches 51.49 at 1998). Symmetric difference = 0.03641 m2. THE CONTEXT IS THE claim READING and the pool is named: the EIGHT law values that draw a claim at all, excluding `none`, whose claim is empty by construction and is registered below as a designed null - a pool that included `none` would make `none` against x_over_log the closest pair at about half this number and would be answering a question about an empty cell. Within that pool of eight the changed areas are: x_over_log/logint 0.0364, then every other pair above 0.09 - the three Newton values draw 0.070 / 0.070 / 0.047 m2 of ribbon in largely disjoint places, and the three sample values draw 16 blocks each whose symmetric differences run 0.10 to 0.13 m2. At framing 0.52 on the 1.00 m stage the frame is 1.725 m across = 2.976 m2, so 0.03641 m2 is 1.224 percent of frame = 313 of the critic's 25,600 pixels; the hottest 5 percent window is 1,280 pixels, so 313/1280 = 0.245 of it can have changed at all, and an emissive gold tube against the dark board caps the per-pixel difference at about 0.41 of range. 0.245 x 0.41 = 10.0 percent. WHAT THE BRIEF PREDICTED AND WHY IT IS WRONG. The brief nominated this pair as a DESIGNED NULL on the ground that x/ln x and li agree closely at small x. They do not, in the only sense a picture can show. Their RATIO tends to 1 (both are asymptotic to x/ln x, so li/(x/ln x) -> 1) but their DIFFERENCE is asymptotic to x/(ln x)^2 and therefore GROWS without bound: measured on the drawn grid it runs -2.885 counts at x = 2, +8.21 at 100, +30.1 at 1000 and +51.49 at 1998, on a board whose full height is 340 counts. So the two curves fan apart to 15 percent of the board's height, and the pair is the CLOSEST in its reading precisely because both are thin single curves - not because they coincide. A null would need this under 1 percent. THE PREDICTION IS A FLOOR. The replica has one light, flat shading, no shadows, no AO, no antialiasing and no emission, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 10.0 percent on this pair, check the harness before the design: (a) tools/check_dna_declarations.py, because a value the code cannot reach falls back to `none` and prints an empty board; (b) _rejects.json, because both axes are String enums - though note that every value here is non-numeric, so cabinet_sweep.coerce() cannot numericise one into a silent typed-set refusal, which is the one trap this artifact is structurally immune to; (c) whether the sheet was captured with --max=27, because at build_dna_gallery's default cap of 9 the 9 x 3 cross product is trimmed from the tail of the LATER axis and `reading` collapses to [world] alone - the declared order is world, claim, residual, the default first - which deletes the predicted pair's own reading entirely along with two of the three designed nulls. If instead a cell that should carry a band shows an empty board, check whether the band's winding flipped rather than whether the band built: _add_band chooses its winding from the SIGN OF THE MEAN, and the two riemann bands are on opposite sides of the rail.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"law": "none",
+							"reading": "claim"
+						},
+						"b": {
+							"law": "none",
+							"reading": "residual"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION. _build_count returns on its first line when law is `none` and the reading is not `world`, so both cells are the stage, the board, the frame and the rail and nothing else. This is riemann_pi's own null carried through: its _setup_law() returns before constructing a node, and the member's comment says `none` builds 'nothing whatever'. Predicted 0.00 percent focus / 0.00 percent frame; anything above 0.5 percent is render noise, and anything above 2 percent means something outside the axes is moving between frames."
+					},
+					{
+						"a": {
+							"law": "none",
+							"reading": "claim"
+						},
+						"b": {
+							"law": "inertia",
+							"reading": "residual"
+						},
+						"under_percent": 0.5,
+						"why": "THE THESIS-CARRYING NULL, and the only one here that is not a bookkeeping check. These two cells are identical to the byte for COMPLETELY DIFFERENT REASONS. `none`/`claim` is empty because no law has been claimed. `inertia`/`residual` is empty because a law WAS claimed and its residual is exactly zero - explicit Euler is exact on a polynomial of degree one, so the stepped world lies on the predicted line to the last bit and there is no gap to draw. If a residual reading is the evidence that makes refutability operable, then this null says the evidence is blind to the difference between a theory that has never failed and no theory at all. Predicted 0.00 percent. If this pair comes back non-zero, either _build_newton is drawing a wedge for a body with zero acceleration (the guard is absf(acc) < 0.000001) or the rail is not invariant, and in either case nothing else in the sheet can be believed."
+					},
+					{
+						"a": {
+							"law": "none",
+							"reading": "residual"
+						},
+						"b": {
+							"law": "inertia",
+							"reading": "residual"
+						},
+						"under_percent": 0.5,
+						"why": "The third pair, and the one that closes the triangle. All three must be 0.00 together; two zeros and one non-zero is arithmetically impossible for identical images and would be a fact about the harness, not about the bench."
+					}
+				],
+				"designed_nulls_why": "All three nulls are one empty board seen three ways, and the reason they are registered rather than avoided is that they are the finding. THE TEMPTING FOURTH IS DELIBERATELY NOT REGISTERED: inertia/claim against inertia/world is the nearest thing to a null on the `reading` axis, because at inertia the stepped world lies EXACTLY on the claimed line, so the world reading adds only a thin cyan thread inside the gold tube and nine node beads per track - about 0.079 m2 of change, roughly 2.7 percent of frame, and predicted well under the same pair at acceleration or reaction where the stepped path visibly runs ahead of the curve. It is left as a measurement rather than a null because part of that change is a colour swap at similar luminance, and the critic works in grey; a null that depended on a hue would be a claim about the critic's colour handling dressed up as a claim about Newton. THE OTHER CANDIDATE THE BRIEF NAMED - x_over_log against logint in claim, on the ground that the two approximations agree at small x - is REFUTED with numbers in `predicted_degeneracy` and registered there as the closest pair instead of as a null: their ratio converges and their difference diverges, and a picture shows the difference. If any of the three registered zeros comes back above 2 percent, nothing else in this sheet can be believed.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The bench can stand the three readings in a row (layout=ladder, 1.15 m pitch, about 3.5 m wide) but the SWEEP must see one at a time: capture_config_sweep unions the AABB across a spec's variants, so a three-wide row in the same spec would frame every single cell against three and a half metres. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. WHAT IS NOT FIXTURED, AND WHY NOTHING NEEDS TO BE: there is no time knob and no live random one. The whole figure is built synchronously inside _ready from arithmetic on pinned constants; there is no _process, no Timer, no randf and no noise anywhere in the file, and the one sample is an INDEX HASH - draw i depends on i alone, so it cannot drift with build order, node count or frame timing. That matters because all three sources are live: newtons_laws runs a _physics_process that applies forces every tick and whose `all` value contains an explicitly time-varying oscillating force, random_space re-samples every animation tick (and only escapes it because its .tscn sets enable_animation = false), and riemann_pi runs a _process that advances a shader phase every frame. Each of those would have needed a fixture; this bench has no clock to pin."
+			,
+				"kin": "The three sources are the kin and the bench is not a substitute for any of them - each is a walkable or watchable thing and this is a still-photographable one. newtons_laws is the closest in subject and the furthest in method: it is a live rigid-body apparatus whose whole point is that you watch balls fall, and it already carries a second axis, `evidence` (result | trace | longhand | axiom), which asks how much of the working stands beside the bodies. That axis is DECLINED here and the reason is worth stating, because it looks like the obvious thing to unify: `evidence` is about disclosure and `reading` is about which part of a claim is being shown, and they are only superficially alike - `evidence=axiom` withdraws the specimens for the rule, where `reading=residual` withdraws the rule for the gap. Putting both on one bench would have answered two questions in one sheet and attributed neither. random_space is a walkable FLOOR, which this is not; its four laws are the ground you stand on, and the histogram here is the same arithmetic seen from outside the room. riemann_pi has 73 live placements and a known finding recorded in its own header - its .tscn contains a BAKED copy of everything _ready() builds, so every placement renders the prime line, ribbon, horizon and ground twice - which is one more reason this bench rebuilds the count from the sieve rather than instancing the member. ON THE MAP SIDE: distribution_sampler and force_field_visualizer are the other two artifacts carrying the word `law` (a histogram and a field), and a room holding this bench beside either of them is saying the word twice at two levels; a room holding it beside all three sources is the sentence this bench is a compression of. On the value side: every one of the nine law values is a member's own word in the member's own spelling, which is unusual for a synthesis and is the point rather than an economy - `reading` is the only vocabulary invented here.",
+				"declines": [
+					"THE BRIEF'S ACCOUNT OF THE NULLS, corrected from the code. The brief said '`none`/`all` are the null values - say what each member means by them'. Only ONE of the three members has a null. riemann_pi's `none` is real: _setup_law() returns on line 241 before constructing anything. newtons_laws' `all` is the OPPOSITE of a null - _law_spec()'s default branch is the most crowded arrangement the artifact builds, three bodies under three different force histories, and the member's own comment calls it 'one law, F = ma, demonstrated three times over'. And random_space has no null value whatever: uniform, gaussian, poisson and exponential are four real distributions and `uniform` is only the shipped default. Building `all` as a null would have produced an empty cell for a value that is a crowd.",
+					"`all` from newtons_laws, and it is the hardest decline in the file because 11 maps stand on it. It is declined because it is not a law: it is three bodies under three DIFFERENT force histories (free, constant, oscillate) compared with each other, which is a comparison of force regimes and not a statement any counter-example could contradict. It also contains the only time-varying force in the member (an oscillating push driven off `time`), so on a still it would photograph one arbitrary phase - the exact fault that had klee_walking_point fixturing its own speed. It is the honest tenth value and it is the first thing to add if the axis ever needs one, but it would have to arrive with its phase pinned.",
+					"`poisson` from random_space. Not principle, arithmetic: with three values per member the sheet is 27 frames and with four it is 30, and poisson's residual is the same KIND as gaussian's - a sampling fluctuation with no fixed sign - so it would spend three tiles restating a kind already on the board. There is a construction cost too: poisson is DISCRETE, five terraced levels at lambda 1.5, so its claim is a set of five atoms rather than a binned density and the bins that make the other two testable would be doing a different job. It is the strongest candidate for a tenth value and the reason to add it would be that discreteness, not coverage.",
+					"`both` from riemann_pi. It is a compound of two values already on the axis - _setup_law() calls _build_estimate twice for it - so its residual cell is the union of two cells already photographed and it adds no kind. The member built it to make 'which estimate is better' into a difference of areas; on this bench that difference is available by putting x_over_log/residual beside logint/residual, which is what the axis is for.",
+					"newtons_laws' second axis `evidence` (result | trace | longhand | axiom) as a third axis here. It is the closest live axis in the family and it is a different question - see `kin`. A three-axis sheet would also have been 9 x 3 x 4 = 108 frames, which nothing in this pipeline captures.",
+					"Every label, readout and slate. newtons_laws draws Label3D arithmetic at evidence=longhand and a three-line slate at evidence=axiom, and the temptation was to letter the residual bands with their numbers. Declined: a synthesis that has to print its claim has not built it, and the numbers are in this note where they can be checked against the code rather than read off a billboard.",
+					"random_space's animation_type, chaos_level, height_scale and every colour export, on the member's own recorded grounds - animation_type is time-domain and dead in every placement anyway, and chaos_level 'changes how MUCH relief there is, not what the relief claims'. Same for riemann_pi's animate_horizon, horizon_speed and enable_auto_travel, all of which are clocks.",
+					"A live measurement against Newton. The residual for the three Newton values is the INTEGRATOR's error and is labelled as such throughout, not the law's error against the world. That is a real limitation and it is stated rather than papered over: the residual that actually killed Newtonian mechanics is relativistic, it is of order (at/c)^2, and at bench scale it is about 1e-16 of a metre - it cannot be drawn honestly at any gain, and drawing it at a gain of 1e15 would be a picture of a decision rather than of a residual. What can be built honestly is that the gap is zero inside the model and that a number only appears when a method is introduced, which is what the three Newton cells do.",
+					"Grabbing, walking and any interaction at all. random_space is a walkable floor and riemann_pi has a journey mode; this bench is a still, and it exists to put nine values of one word in one frame where they can be compared.",
+					"Board dimensions, bin count, sample size, step size, tube radii, the 2000 limit and the stride of 4. Pinned so the nine values differ in what they claim and in nothing else. The limit and stride are riemann_pi's own max_x and law_step; the seed is random_space's own seed_value; the force, masses and start positions are newtons_laws' own. None of these are exports."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=law-bench --tokens=law_bench --max=27",
+				"sweep_note": "THE FULL SHEET NEEDS --max=27. `law` is declared first and is never trimmed; `reading` is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 9 x 3 sheet renders as 9 x 1 = world only (the declared order is world, claim, residual, because apply_dna_block puts the default first). That cap would delete two of the three designed nulls (none/residual and inertia/residual), delete the entire reading that carries the thesis, and delete the reading the closest pair was predicted in. THREE CELLS ARE LEGITIMATELY EMPTY - none/claim, none/residual and inertia/residual are an empty board with a rail across it, by construction and by argument. Do not read them as NO RENDER: subject share is set by the stage, which is drawn in all 27 cells, so an empty cell still measures a healthy subject percentage. If a cell that should carry a figure comes back empty, the check is whether the stage and board are there (harness fine, figure failed) or absent (harness failed).",
+				"placements": 0
+			}
+		}
+	}
+}

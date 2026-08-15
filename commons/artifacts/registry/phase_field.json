@@ -1,0 +1,172 @@
+{
+	"artifacts": {
+		"phase_field": {
+			"name": "Phase Field",
+			"lookup_name": "phase_field",
+			"scene": "res://commons/artifacts/phase_field/phase_field.tscn",
+			"class_name": "PhaseField",
+			"category": "change",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One analytic surface, one standing point, and the local derivative built as real geometry. f(x,z) = 0.115 sin(Wx) sin(Wz) + 0.215 x over a 0.84 m square, W = PI/0.42 - two hills, two hollows and a tilt, cut as a slab and stood inside a 0.90 x 0.56 x 0.90 m frame that is drawn identically in all eighteen variants so the camera never moves. `phase` says WHERE YOU ARE STANDING: six stations, every word borrowed from one of the three `change` artifacts that already carry an axis called phase, and every position derived from the field rather than chosen. `reading` says HOW MUCH OF THE DERIVATIVE STANDS THERE: the marked point alone, the tangent plane as a 0.26 m plate with the gradient as a rod whose LENGTH IS THE MAGNITUDE, or the two partial derivatives as two separate rods placed on the side their sign points to. At the crest and at the trough the gradient is exactly zero, so the rod is not short - it is absent, and the partials reading becomes the bare point tile to the byte. Nothing animates, nothing is printed, nothing is random.",
+			"tags": [
+				"calculus",
+				"derivative",
+				"gradient",
+				"partial_derivative",
+				"tangent_plane",
+				"critical_point",
+				"height_field",
+				"surface",
+				"change",
+				"synthesis"
+			],
+			"dev_themes": [
+				"change",
+				"calculus",
+				"synthesis",
+				"a taxonomy of critical points, and traverse is the null"
+			],
+			"interactions": [
+				"walk the phase axis at reading=tangent and watch the gradient rod grow and shrink: 0.269 m at steepest, 0.190 at oppose, 0.161 at mirror, 0.159 at traverse, and nothing at all at crest and trough - the length is the number, so a vanishing derivative has to be an absent object",
+				"stand at crest and at trough under reading=tangent: the plate is horizontal in both and the rod is missing from both, because the first derivative cannot tell a maximum from a minimum - the surface underneath is the only thing that says which is which",
+				"put reading=point and reading=partials side by side at crest: they are the same photograph, because at a critical point the two partial derivatives have nothing to say",
+				"compare steepest with mirror: the same lobe of the same field, the point diametrically opposite through the centre, and the gradient is 1.075 pointing one way against 0.645 pointing the other - the tilt is what breaks the symmetry the eye reads",
+				"read the line z = +0.21 across the sheet: dF/dz vanishes identically along it, so trough, steepest and crest are collinear, in exactly the order slope_tangent_demo's own PHASE_T puts them at a quarter, a half and three quarters",
+				"put oppose under reading=partials and count the sides: the red rod stands on the +x side and the green on the -z side, which is the only thing on this bench that a one-variable demo could not have shown at all"
+			],
+			"capacity": "SEE that crest, trough, steepest, agree, oppose, single, bend and mirror are all names for the same kind of thing - places where the derivative says something the function alone does not - and that traverse, the word all three members share, is the name for everywhere else",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"slope_tangent_demo",
+					"partial_derivative_terrain",
+					"velocity_arrow",
+					"derivative_pair",
+					"vector_field_grid",
+					"gradient_descent_visualization"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant is the SAME body, because the body is the FRAME: a 0.90 x 0.90 m base plate, four 0.020 m posts running from y -0.20 to +0.34 and four top rails, axis-aligned and drawn before either axis is consulted. What the axes move is inside it - the bead runs from y -0.059 in the trough to +0.269 on the crest and the gradient rod reaches y +0.302 at steepest - so the world box is 0.90 x 0.56 x 0.90 in all eighteen cells and one grid cell holds it. Nothing is rotated to face the camera: a yawed frame would grow the footprint to 1.27 m and would show the terrain slab edge-on, where a three-quarter view is what makes a height field read as a height field. layout=ladder stands all six stations in a row at 1.05 m pitch (about 5.25 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.56,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.06,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.9,
+				"source": "computed_from_geometry in a Python replica built from the same constants; no Godot was run. The box is the FRAME and nothing else: the base plate spans +-0.45 in x and z, the posts run y -0.20 to +0.34 with the plate 0.02 m below that, and the drawn terrain never leaves +-0.42 or exceeds +-0.163773 in height. Measured across all eighteen variants the per-variant extent is 0.90 x 0.56 x 0.90 in every one, identical to four decimal places, which is exactly why the frame exists."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.52,
+				"sources": [
+					"partial_derivative_terrain",
+					"slope_tangent_demo",
+					"velocity_arrow"
+				],
+				"axes": {
+				 "phase": [
+				  "traverse",
+				  "crest",
+				  "trough",
+				  "steepest",
+				  "oppose",
+				  "mirror"
+				 ],
+				 "reading": [
+				  "tangent",
+				  "point",
+				  "partials"
+				 ]
+				},
+				"default": "phase=traverse, reading=tangent. traverse is the default because it is the default in ALL THREE sources, character for character, and because it is the only word the three of them share; it is also the state every station is a departure from. reading=tangent is the default because it is the shipped state of the family - all three members draw their derivative by default (slope_tangent_demo's tangent line at evidence=trace, velocity_arrow's arrow at evidence=trace, partial_derivative_terrain's two bars at asked=both) and a bench whose default withheld it would be arguing with its own sources. NOTE WHAT THIS COSTS: traverse is deliberately the least interesting station in the sheet, so the default tile is the dullest one. That is affordable only because framing is set by the frame and the frame is identical in every variant, so the camera distance does not depend on which cell is measured.",
+				"note": "WHAT THE VALUES MEAN, AND WHERE EVERY WORD CAME FROM. THE FAMILY FIRST. Three artifacts in the `change` sequence declare an axis literally called `phase` and all three open it with the same word. slope_tangent_demo: traverse | crest | steepest | trough. partial_derivative_terrain: traverse | agree | oppose | single. velocity_arrow: traverse | straight | bend | mirror. In every one of the three, `traverse` is NOT a station - it is the shipped sweep, the marker still running on _process, the value all 25 + 8 + 8 placements carry - and the other values stop it somewhere on purpose. So the one word the family shares is its word for no particular place. THE THESIS, and it is disputable: everything else on that axis names a CRITICAL POINT, a place where the derivative says something the function alone does not, and `traverse` is the null of the axis - the ordinary place, which is almost everywhere. The disagreement available and it is fair: velocity_arrow's `bend` is not a critical point of anything, it is a maximum of CURVATURE, a fact about the second derivative; and partial_derivative_terrain's `agree` is not critical either, it is a sign pattern holding on a whole open region. This bench answers by building the first derivative and only the first derivative, so what the taxonomy costs is visible in the frame. PHASE, six values, every one a member's word, and every position DERIVED from the surface rather than chosen. traverse (+0.248000, -0.126000), height -0.035972, gradient (+0.4102, +0.4853), magnitude 0.6355, slope 32.4 degrees: the shared default, and the only station that is not special. It was found by asking for the point whose gradient magnitude is closest to the patch mean (0.607) while standing furthest from every one of the eleven critical points of this field. Its two partials happen to agree in sign, both positive - that is not a station, it is what an arbitrary point looks like. crest (+0.243781, +0.210000), height +0.163773, gradient (0, 0) - slope_tangent_demo's word, and a true interior local maximum: AW cos(Wx) sin(Wz) + T = 0 with sin(Wz) = 1 gives cos(Wx) = -T/(AW) = -0.25 exactly, and the Hessian there is -A W W times the identity, negative definite. trough (-0.243781, +0.210000), height -0.163773, gradient (0, 0) - slope_tangent_demo's word, the matching interior minimum at the same z with x mirrored, Hessian positive definite. The two differ in height by 0.327546 m and in nothing else. steepest (0.000000, +0.210000), height 0, gradient (+1.0752, 0), slope 47.1 degrees - slope_tangent_demo's word, the unique INTERIOR maximum of gradient magnitude over the patch. The value AW + T = 1.075247 is tied at the corner (-R, -R/2), which is excluded on partial_derivative_terrain's own grounds: a station on the boundary pins the apparatus off the edge of the mesh it measures. oppose (-0.122000, +0.088000), height -0.081887, gradient (+0.5369, -0.5383), magnitude 0.7603, slope 37.2 degrees - partial_derivative_terrain's word and its own fixtured value. The two partials in opposite sign and near-equal size, which that artifact calls the 2D-only case: the thing a one-variable demo cannot have at all. mirror (0.000000, -0.210000), height 0, gradient (-0.6451, 0), slope 32.8 degrees - velocity_arrow's word, taken with its construction and not just its spelling. Its `mirror` is the point diametrically opposite `straight` on the side the bulge does not touch, and its claim is that two places which look symmetric are not moving alike. Here the untilted field sin(Wx) sin(Wz) is exactly invariant under (x,z) -> (-x,-z), so (0, -0.21) is the image of (0, +0.21) - the same lobe, the same shape, the same flat centre line - and the tilt T x makes the gradient 0.645 pointing the other way instead of 1.075 pointing this way. The ratio 0.60 is the same contrast velocity_arrow reports between its own straight (1.700) and mirror (1.100). THREE STATIONS ARE COLLINEAR AND THAT IS NOT A COINCIDENCE: dF/dz vanishes identically along z = +0.21, so that line is a one-dimensional curve carrying its own ordinary derivative, and trough, steepest and crest sit on it at a quarter, a half and three quarters of the way across - exactly where slope_tangent_demo's PHASE_T puts them. That artifact is a slice of this one. READING, three values, and THESE ARE THIS SYNTHESIS'S OWN WORDS, NOT A MEMBER'S, which is a weaker warrant than a derived axis and is recorded as such rather than dressed up. No source enumerates how much of the derivative is drawn; what they carry instead is `evidence` (result | trace | longhand | axiom, in slope_tangent_demo and velocity_arrow) and `asked` (both | partial_x | partial_y | gradient, in partial_derivative_terrain), and `asked` is the near miss - see the declines. point: the surface with the standing point marked, a white annulus lying ON the terrain at (x, z) and a bead on a stem above it, and no derivative at all. tangent: adds the tangent plane as a real 0.26 m square plate lying in it, and the gradient as a rod pointing up the line of steepest ascent whose LENGTH IS THE MAGNITUDE - 0.2688 m at steepest, 0.1901 at oppose, 0.1613 at mirror, 0.1589 at traverse, and NOTHING at crest and trough. partials: drops the plate and the gradient and draws the two partial derivatives separately, a red rod along x of length 0.25 times the absolute value of dF/dx and a green rod along z likewise, each lying along its own slice's tangent and each PLACED ON THE SIDE ITS SIGN POINTS TO. That last is not a flourish: it is partial_derivative_terrain's own 2026-08-05 repair, which its file records - it had always drawn abs(dx) on the +x side, so a negative partial had never been distinguishable from a positive one and the artifact could not show the disagreement it exists to show. Lengths: traverse 0.1026 and 0.1213, steepest 0.2688 and nothing, oppose 0.1342 and 0.1346, mirror 0.1613 and nothing, crest and trough nothing and nothing. THE BODY, NOT A GAUGE: no number is printed anywhere on this bench. A derivative of 1.075 is a rod 0.269 m long and a derivative of 0 is empty air, and the whole reason the frame exists is so that those two can be photographed at the same camera distance. THE LIFT, AND IT COST A WHOLE MEASUREMENT PASS. Everything about the derivative is drawn at the BEAD, 0.105 m above the surface on its stem, not on the surface itself. That is forced, not cosmetic: a tangent plane drawn flush is BURIED BY ITS OWN SURFACE wherever the surface is convex, because the tangent lies below the curve there by definition, and a rod that leaves along the surface's own slope is buried by the same argument. Drawn flush in the replica, the `trough` tile measured 0.00% against `point` in ALL THREE readings - a flawless INERT verdict about apparatus that had been built correctly and was simply underground. partial_derivative_terrain already knew and says so in code: a lift of Vector3(0, 0.05, 0) in _update_arrows and 0.014 on its slice ribbons.",
+				"predicted_degeneracy": {
+					"pair": "steepest against oppose, in the tangent reading",
+					"percent": 9.68,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry rebuilt in Python from the same constants (same R, W, A, T, same six stations, same ring, bead, plate, rod radii and head fractions, same frame), projected through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.52 on the union AABB of all eighteen variants, which IS the frame at 0.90 x 0.56 x 0.90), z-buffered with one directional light and flat shading, then run through artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's own corner background, grey, resize 160 x 160, mean of the hottest 5 percent. THE CONTEXT IS THE tangent READING and the ranking is computed inside it. All fifteen phase pairs, focus percent: steepest-oppose 9.68, traverse-trough 9.98, trough-oppose 10.11, traverse-mirror 11.24, trough-mirror 11.52, crest-mirror 11.56, traverse-oppose 12.53, oppose-mirror 14.00, crest-trough 15.02, traverse-crest 15.66, trough-steepest 16.05, steepest-mirror 16.71, crest-oppose 17.40, traverse-steepest 17.48, crest-steepest 19.52. WHY THAT PAIR, AND WHY IT IS A CLAIM RATHER THAN A MEASUREMENT. steepest stands at (0, 0, 0.21) and oppose at (-0.122, -0.0819, 0.088): 0.1910 m apart in space, the two closest stations on the whole surface. Everything they CARRY is different - a 0.2688 m rod against a 0.1901 m rod, a plate tilted 47.1 degrees against one tilted 37.2, a gradient pointing straight along +x against one pointing at -45 degrees in the ground plane - and the pair is still the closest in the reading. So the pre-registered claim is not that these two look alike; it is that THE PHASE AXIS IS CARRIED MORE BY WHERE THE BEAD IS THAN BY WHAT THE BEAD CARRIES, and the number is the size of that effect. The corroboration is already in the sheet: the `point` reading draws no derivative at all and its fifteen phase pairs already run 4.80 to 14.45 percent (steepest-oppose 4.80, crest-steepest 14.45); adding the tangent apparatus moves the same fifteen to 9.68 to 19.52. Position supplies roughly half of every phase pair in this bench. THE BRIEF PREDICTED A DIFFERENT PAIR AND THE REPLICA SAYS IT IS WRONG, WHICH IS THE ONE RESULT WORTH HAVING. crest against trough was the designated near-null: the gradient vanishes at both, so the plate is horizontal at both and the rod is absent from both, and the two tiles contain LITERALLY THE SAME APPARATUS. It ranks 9th of 15 at 15.02 percent. The reason is arithmetic: crest (+0.2438, +0.1638, 0.21) and trough (-0.2438, -0.1638, 0.21) are 0.5875 m apart, 0.4876 in x and 0.3275 in y, the FURTHEST-separated pair in the set. Identical apparatus in two different places is not a near-null, it is a translation, and translating a bright object across two fifths of a 1.374 m frame is the largest single change this sheet can make. A DENOMINATOR AND A POOL. On the FRAME denominator inside the tangent reading the same pair is still lowest - steepest-oppose 0.48 percent against traverse-trough 0.50 and trough-oppose 0.51 - so the claim survives a change of denominator. It does NOT fully survive a change of pool, and that is recorded rather than hidden: in the `point` reading steepest-oppose is closest (4.80 percent) but in the `partials` reading it is only third (8.32) behind crest-mirror (7.20) and traverse-trough (7.76), because at steepest and at mirror dF/dz is exactly zero so both draw ONE rod and not two, which changes what is being compared. FULL PREDICTED SHEET. Phase pairs in `point`, focus percent: 4.80, 7.06, 7.31, 7.33, 7.69, 8.40, 8.43, 8.67, 9.40, 9.43, 9.67, 12.11, 12.36, 13.45, 14.45. In `partials`: 7.20, 7.76, 8.32, 8.49, 8.67, 9.65, 9.83, 10.56, 12.36, 12.53, 13.71, 13.89, 14.05, 14.43, 18.44. Reading pairs at fixed phase: traverse 3.01 / 3.24 / 3.99, crest 0.00 / 4.43 / 4.43, trough 0.00 / 3.52 / 3.52, steepest 4.92 / 5.29 / 9.49, oppose 2.20 / 4.99 / 5.47, mirror 1.21 / 4.42 / 5.34. Mean over all non-null pairs in the eighteen-tile sheet: 10.91 percent. Subject share runs 31.24 to 32.19 percent of frame in every one of the eighteen, so no tile is anywhere near the blank bar. THE PREDICTION IS A FLOOR. The replica has one light, flat shading, no shadows, no ambient occlusion, no antialiasing and no emission, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 9.68 percent on the named pair, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back to the default and prints identical tiles; (b) _rejects.json - both axes are String enums and Object.set() on a typed property of the wrong type is refused in SILENCE; (c) whether the sheet was captured with --max=18, because at build_dna_gallery's default cap of 9 the 6 x 3 cross product is trimmed from the tail and `reading` collapses to [point] alone, which deletes both designed nulls and every rod and plate in the sheet. If instead a tile shows a frame and a terrain slab and NO BEAD, the figure did not build - and note that a legitimate `partials` tile at crest or trough IS the bare point tile, so check the bead before concluding NO RENDER.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"phase": "crest",
+							"reading": "partials"
+						},
+						"b": {
+							"phase": "crest",
+							"reading": "point"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION, and it is the thesis rather than a spare check. `partials` draws two rods whose lengths are the magnitudes of dF/dx and dF/dz. At crest the gradient is exactly zero - it is a true critical point, cos(Wx) = -0.25 with sin(Wz) = 1, solved rather than eyeballed - so both lengths are zero, both guards in _build_figure fail, neither SurfaceTool is ever begun, and the tile is the `point` tile down to the vertex. The reading that shows only the partial derivatives shows exactly what the reading that shows no derivative shows. Predicted 0.00 percent focus and 0.00 percent frame; anything above 0.5 percent is render noise, and anything above 2 percent means `reading` is reaching geometry it should not be."
+					},
+					{
+						"a": {
+							"phase": "trough",
+							"reading": "partials"
+						},
+						"b": {
+							"phase": "trough",
+							"reading": "point"
+						},
+						"under_percent": 0.5,
+						"why": "The same fact at the other kind of critical point, and registered separately because that is what makes it a test. A maximum and a minimum are opposite in every way the surface can express and IDENTICAL in everything the first derivative can express, so if this null held at crest and broke at trough, the difference would be a fact about the harness - the settle, the background tint, an unseeded value - and not about the mathematics. There is a third check implied and it needs no tile of its own: (crest, partials) against (trough, partials) must equal (crest, point) against (trough, point) to the byte, both predicted 12.36 percent, because the two pairs are the same two pairs of images."
+					}
+				],
+				"designed_nulls_why": "Both nulls are one fact seen twice and they ARE the argument: a critical point is a place where the first derivative has nothing left to say, so the reading that shows only first derivatives has to go blank there. That is what makes `phase` a taxonomy of critical points rather than a list of six views. The tempting third value is `saddle` - the third kind of critical point, where the gradient also vanishes and the surface is neither a maximum nor a minimum - and this field has two of them, at (0, -0.03378) and (0, -0.38622), both exact. It is declined because it is NOBODY'S WORD: no member declares it, and every other value on this axis is borrowed character for character, so adding it would trade the one thing this synthesis can claim without argument for a third copy of a null it already has twice. What is deliberately NOT a null is the nearest thing to one on the reading axis: (crest, tangent) still differs from (crest, point) by 4.43 percent, because the tangent PLANE at a critical point is horizontal and a horizontal plate is a visible fact, where two absent rods are not. Two zeros at `partials` and a non-zero at `tangent`, at the same station, is the whole experiment. If either zero comes back above 2 percent, nothing else in this sheet can be believed.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The bench can stand all six stations in a row (layout=ladder, 1.05 m pitch, about 5.25 m wide) but the SWEEP must see one at a time: capture_config_sweep unions the AABB across a spec's variants, so a six-wide row in the same spec frames every single against five and a quarter metres and photographs the bead as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. WHAT IS NOT FIXTURED, AND WHY NOTHING NEEDS TO BE: there is no time knob and no random one anywhere in this file. The whole figure is built synchronously inside _ready from arithmetic on four field constants and a table of six Vector2s; there is no _process, no Timer, no randf and no noise, so the frame is complete at frame one and two builds of one value are the same mesh. That matters because ALL THREE sources are live and none of them can be photographed as it ships: slope_tangent_demo advances a marker on _process and its registry says a still could never hold one of its four stations long enough to catch its own documentation out; velocity_arrow's registry states it outright, that two traverse frames are a clock and not a bite; partial_derivative_terrain walks its sample point in a circle every frame. All three had to invent `phase` to become photographable at all. This bench inherits the axis and does not inherit the clock."
+				,
+				"kin": "catalyst_foe IS KIN AND IS EXCLUDED, and the exclusion is the reason this synthesis has a subject at all. It declares an axis spelled `phase` with six values - curriculum | foe | wary | neutral | curious | friend - and it is a DIFFERENT SENSE OF THE WORD ENTIRELY: a creature's disposition toward the player along a phase-shift arc, seeded through set_personality at _ready, with a per-value palette running near-black through red, tan and amber to a lineage hue. Its truth line is 'the catalyst doesn't kill - it phase-shifts; what was alone becomes a flock walking toward the next angry thing'. Nothing in it is a place on anything, nothing in it is differentiated, and its default is `curriculum`, a sentinel meaning do-not-seed, where the three geometry members' default is `traverse`, a sentinel meaning don't-stop-anywhere. Two sentinels, two meanings, one spelling. Folding it in would have produced an axis with nine values and no proposition - which is the fault this corpus keeps paying for, a family assembled by string match rather than by argument. It is named here so that the next reader who greps for `phase` finds the ruling instead of repeating the mistake. THE REAL KIN, on the same subject. derivative_pair (algorithms/change) draws the rate as a whole curve rather than at a point, which is what this bench's `reading` deliberately does not do - see the declines on longhand. vector_field_grid is the gradient at EVERY point of a domain at once, which is this bench's `tangent` reading swept over the surface, and partial_derivative_terrain's own @identity names it as its successor: 'precursor to vector_field_grid (a whole field of such slopes)'. gradient_descent_visualization is what happens if you let the rod pull the bead downhill and iterate, and the same @identity names that too: 'feeds gradient_descent in formfinding/ML'. A room holding this bench beside vector_field_grid is saying one point and then all of them; beside gradient_descent_visualization it is saying one reading and then the walk it licenses. ftc_bridge and riemann_pump are the same sequence going the other way, from the rate back to the quantity. ON THE MAP SIDE the `change` sequence already owns this material - slope_tangent_demo is its headline artifact at order 4.5 - and its three phase-carrying members have 41 placements between them, none of which passes `phase` at all.",
+				"declines": [
+					"THE BRIEF'S READING OF partial_derivative_terrain's `crest` AND `trough`, corrected from the code, and it is the whole reason this surface is built the way it is. The brief asked whether crest and trough really sit at a vanishing gradient in the members' surfaces. In slope_tangent_demo they do, exactly: PHASE_T is {crest: 0.75, steepest: 0.5, trough: 0.25} and x_curve = lerp(-PI, PI, t), so crest is x = +PI/2 and trough is x = -PI/2, where the slope cos(x) is zero. In partial_derivative_terrain THEY DO NOT EXIST, and that artifact's own registry block says why in its own words: crest, trough and saddle 'were the obvious borrowing and every critical point of this f lies ON THE BOUNDARY of the drawn terrain (at x=+-1 or y=+-1), so all three would have pinned the arrows off the edge of the mesh they measure'. Measured on its f(x,y) = sin(1.5x) cos(1.5y) h + sin(x+y) 0.12 h with h = 0.35 over its own [-1,1] square, the smallest gradient magnitude anywhere is 0.0588 and it is attained only on the edge - there is no interior critical point at all. That is why it named sign patterns instead. THIS FIELD IS CONSTRUCTED TO REMOVE THAT LIMIT: f = A sin(Wx) sin(Wz) + T x has two interior maxima, two interior minima and two interior saddles, all solved in closed form, and the tilt ratio T = 0.25 A W is chosen so that the crest and the trough sit at x = +-0.243781 rather than on the rim. A synthesis that had simply copied the four words would have inherited a surface that could not hold two of them.",
+					"partial_derivative_terrain's SLICE RIBBONS, which are the loudest thing in its own frame. Its registry calls them 'the ink: two 2 m ribbons against two 4 cm bars', and they are drawn on the surface at every station off its default. They are declined for two reasons and the second is decisive. First, they would drown the rods whose LENGTH is the measurement - a 0.84 m ribbon against a 0.13 m rod is the info_board failure, a working drawn at a size that leaves nothing else legible. Second and fatally, a ribbon is drawn whether or not the derivative is anything: it would say something at crest and trough where the derivative says nothing, and it would destroy the null that is this bench's thesis. A curve that is present regardless of the number it illustrates is decoration in the exact sense the corpus means.",
+					"`agree` and `single` from partial_derivative_terrain, and the reasons are different. `agree` is declined because the sheet already photographs it twice without declaring it: at traverse both partials are positive (+0.4102, +0.4853) and at steepest both are non-negative, so the same-sign picture is on the sheet at the default station. Declaring it would have spent three tiles restating a sign pattern already visible, which is the fault slope_tangent_demo names in its own file - 'zero, steepest and inflection would be three names for one point on this curve ... so declaring them would have shipped three identical stills under three different words'. `single` is declined because THE FIELD'S OWN SYMMETRY ALREADY SUPPLIES IT: dF/dz vanishes identically along z = +-0.21, so at BOTH steepest and mirror one axis carries the entire gradient and the `partials` reading draws exactly one rod. partial_derivative_terrain's single is on this sheet twice, under slope_tangent_demo's word and under velocity_arrow's. Naming it a third time would be two names for one condition.",
+					"velocity_arrow's `straight` and `bend`, and this is the honest hole in the taxonomy. Both are facts about CURVATURE - straight is its minimum, 0.311, and bend its maximum, 2.218 - and curvature is a second derivative. This bench builds the first derivative and nothing else, so there is no honest way to draw them: a surface has a whole curvature tensor at each point, two principal curvatures and their directions, and the object that shows it is a different artifact with a different subject. `mirror` is taken instead because it is the one value of the three that is a claim about the FIRST derivative - that two symmetric-looking places carry different rates - and it survives the transposition intact. That the other two do not survive it is the strongest evidence against this bench's own thesis, and it is written down here rather than argued away.",
+					"partial_derivative_terrain's `asked` (both | partial_x | partial_y | gradient) as the second axis, which is the near miss and was the first design. It is very close to `reading` - gradient against the two partials is exactly the tangent-against-partials distinction - and it is declined because it is a VISIBILITY axis in that artifact, not a construction one: _apply_asked only sets `visible` on nodes that were built anyway, so partial_x and partial_y are the same scene with one arrow hidden. Borrowing the word would have promised the member's semantics and delivered different ones, which is the science_screen fault of declaring values the code cannot reach. `reading` also does something `asked` cannot: `point` withholds the derivative entirely, which is what makes the null at crest measurable.",
+					"The `evidence` family word (result | trace | longhand | axiom), which two of the three members carry with 34 and 38 siblings and which would have been the safest possible second axis. It is declined because its top two values are text: `axiom` writes 'd/dx sin x = cos x' on a plate and velocity_arrow's writes 'v = dP/dt', and `longhand` adds a numeric readout. This bench prints no number anywhere on purpose - the rod IS the number - and an axis whose values are captions would have been a gauge bolted onto a body. It is the right axis for a fourth artifact in this family and the wrong one for this one.",
+					"Animation, a moving sample point, and any form of `traverse` that actually traverses. All three sources ship as animations and all three had to add `phase` to become photographable; inheriting the clock would undo the only thing the axis was invented for. Nothing in this file has a _process.",
+					"Grabbing, and a draggable standing point. slope_tangent_demo's @identity has listed 'grabbable marker so the player chooses where to read the slope' as missing since the file was written, and it is a good artifact. It is not this one: a live reading cannot be photographed, and this bench exists to put six places on one sheet where they can be compared.",
+					"Every constant of the surface, the frame and the apparatus. R, W, A, T, the 44 x 44 grid, the plate size, the rod radius and the head fractions are pinned so that the eighteen tiles differ in where the point is and how much of the derivative stands there, and in nothing else. None of them is an export. The frame in particular is pinned because it IS the fixed AABB."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=phase-field --tokens=phase_field --max=18",
+				"sweep_note": "THE FULL SHEET NEEDS --max=18. `phase` is declared first and is never trimmed; `reading` is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 6 x 3 sheet renders as 6 x 1 = tangent only (apply_dna_block puts the DEFAULT leftmost, which is why the derived order is tangent, point, partials and not the order the note glosses them in). That cap would delete BOTH designed nulls - they are the partials tiles at crest and trough - and both would be unmeasurable rather than merely absent, since the point tiles they are identical to would be gone too. The pre-registered pair would survive, because it lives in the tangent reading, and it would survive UNFALSIFIABLY: with one reading value there is no reading axis left to be wrong about.",
+				"placements": 0
+			}
+		}
+	}
+}

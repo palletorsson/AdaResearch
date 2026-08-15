@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/hand_bench/hand_bench.gd" id="1_hb"]
+
+[node name="HandBench" type="Node3D"]
+script = ExtResource("1_hb")

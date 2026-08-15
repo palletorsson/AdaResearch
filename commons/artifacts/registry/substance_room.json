@@ -1,0 +1,196 @@
+{
+	"artifacts": {
+		"substance_room": {
+			"name": "Substance Room",
+			"lookup_name": "substance_room",
+			"scene": "res://commons/artifacts/substance_room/substance_room.tscn",
+			"class_name": "SubstanceRoom",
+			"category": "materials",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One body, six substances, and the two questions the word substance has been answering as if they were one. A 0.72 x 0.24 x 0.34 m bar spans two piers with 0.30 m of nothing under its middle, in front of an L of high-contrast stripes that stands behind it from any angle in the quadrant. Three artifacts in this corpus declare an axis called substance and between them spend seven words - solid, flesh, glass, fabric, light, mixed, glossy, granular - and in all three of them the axis NEVER TOUCHES GEOMETRY: it is roughness, metallic, alpha, clearcoat and a normal map, every time. Yet four of the words are mechanical words. Flesh yields, fabric drapes, a heap pours, and solid is the word for a thing that does neither. So the vocabulary makes a promise about the body and pays it out in surface. This bench splits the promise in two: `through` pins the shape and shows only what light does, against the stripes, so transmission is a fact and not an impression; `bear` pins the surface to one matte and lets a 0.09 m straightedge come to rest wherever the body lets it - 0.500 m on solid and on glass, 0.448 on flesh, 0.366 on fabric, 0.273 on the slumped heap, and 0.024 on light, which the load falls straight through. Then each rig is blind to the other's question: three substances are one picture under `through` and two are one picture under `bear`. Nothing animates, nothing is random, nothing bakes on a worker thread.",
+			"tags": [
+				"substance",
+				"materials",
+				"transparency",
+				"transmission",
+				"softbody",
+				"drape",
+				"slump",
+				"optics",
+				"vocabulary",
+				"two_axes",
+				"synthesis"
+			],
+			"dev_themes": [
+				"materials",
+				"optics",
+				"soft bodies",
+				"one word doing the work of two axes"
+			],
+			"interactions": [
+				"walk the substance axis at reading=through and watch the stripes: they are undimmed behind glass, half-lost behind light, and gone behind solid, fabric and granular - three words that are one picture because a question about light cannot tell three opaque things apart",
+				"walk the substance axis at reading=bear and watch the straightedge: 0.500 on solid and on glass, 0.366 on fabric, 0.273 on the heap, 0.024 on light - and notice that solid and glass are the same photograph, because a question about force cannot tell two rigid things apart",
+				"put solid and glass side by side under all three readings: identical in bear, wildly apart in through, and different-but-confounded in body. That triple is the whole argument in three tiles",
+				"stand at substance=light, reading=bear and look for the bug: the bar is opaque, the load is on the floor, and nothing is broken - light has no stance to have",
+				"compare fabric against granular in body and then in bear: the first tells you they are different colours with different sheens, the second tells you one hangs and one pours, and only the second is about what they are made of"
+			],
+			"capacity": "SEE that `substance` is one word carrying two independent questions - does light get through, and does the body hold its shape - and that the corpus's three vocabularies answer only the first, in words borrowed from the second",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"breathing_room",
+					"rainbow",
+					"sculpt_one",
+					"exhibit_vitrine",
+					"prism_dispersion",
+					"soft_body_demo"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "The STAGE is the footprint and it is drawn before either axis is consulted: a 1.00 x 0.80 m plate, two piers, and an L of stripes at z = -0.34 and x = -0.44. The drawn body runs 0.720 m across at five of its six values and 0.878 m at granular, and the load can rest anywhere from y 0.500 to y 0.024, so the FIGURE's extent moves by 22 percent and 0.476 m while the world box stays 1.00 x 0.545 x 0.80 in all eighteen cells. That is why the stage exists. Nothing is yawed to face the camera: the stripe screen is an L precisely so that it does not have to be. layout=ladder stands all six substances in a row at 1.30 m pitch, about 7.5 m wide, and is a design view rather than a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.545,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.2725,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"source": "computed_from_geometry in a Python replica built from the same constants; no Godot was run. The box is the STAGE and nothing else: the plate spans x +-0.50 and z +-0.40, the stripe screen tops out at y 0.52, and the highest thing in any cell is the load at y 0.545 in bear/solid. The drawn body's own extent runs 0.720 x 0.240 x 0.340 at solid to 0.878 x 0.249 x 0.442 at granular and 0.720 x 0.385 x 0.340 at fabric, which is exactly why the AABB is identical in all eighteen variants by construction."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.58,
+				"sources": [
+					"breathing_room",
+					"rainbow",
+					"sculpt_one"
+				],
+				"axes": {
+					"substance": [
+						"solid",
+						"glass",
+						"light",
+						"flesh",
+						"fabric",
+						"granular"
+					],
+					"reading": [
+						"body",
+						"through",
+						"bear"
+					]
+				},
+				"default": "substance=solid, reading=body. solid is the default because it is the only word in the family that two members share AND the only one that answers both questions, and because it is the shipped default of both members that carry it - breathing_room's branch is a strict no-op that never constructs a material, rainbow's is the opaque case. body is the default because it is the family's own condition: each of the three members renders exactly this, its own optics on its own geometry, with no rig holding anything still. NOTE WHAT THIS COSTS AND DOES NOT COST: the default cell is the reference bar in the reference neutral, the plainest tile in the sheet - which would normally be a bad thing to solve framing on, except that framing here is set by the stage and the stage is identical in every variant, so the camera distance is the same whichever cell is measured.",
+				"note": "WHAT THE VALUES MEAN, where each word came from, and which of the two questions it answers. THE FAMILY FIRST, and it is a census before it is an argument: three artifacts declare an axis called `substance` and between them spend seven words, three of which appear twice. breathing_room says solid | flesh | glass | fabric; rainbow says light | glass | solid; sculpt_one says mixed | glossy | fabric | granular. TWO OF THE THREE ARE THE line_builder_3d TRAP: the script a reader would open is not the script the scene carries. breathing_room.tscn's root runs breathing_room_scene.gd, and the sibling breathing_room.gd - the one the registry description promises, with the sinusoidal pressure loop - is loaded by nothing at all; sculpt_one.tscn's root runs SculptOne.gd, not a sculpt_one.gd, which does not exist. Both are recorded in that first file's own header. Every number in this artifact comes from the script that actually renders.\n\nTHE THING THE CODE SAYS THAT THE BRIEF DID NOT, and it is the finding. IN ALL THREE MEMBERS, `substance` NEVER TOUCHES GEOMETRY. Not once. breathing_room re-skins two SoftBody3D slabs that are the same slabs under every value - _apply_substance sets material_override and returns. rainbow re-skins arc bands whose vertices were computed before the axis was read - _make_band_material is the entire branch. sculpt_one states the rule in its own header: `substance` rewrites roughness / metallic / clearcoat / normal only, every blob keeps the colour create_materials gave it, and the geometry belongs to a SECOND axis, `hand`, under the law - the axis moves the geometry; it must not move the surfaces underneath it. So the family's `substance` is unanimously a claim about a SURFACE: what light does when it arrives.\n\nAND YET four of the seven words - flesh, fabric, granular, and solid itself - are borrowed from materials whose everyday meaning is MECHANICAL. Flesh yields. Fabric drapes. A granular heap pours. Solid is the word for a thing that does neither. The vocabulary makes a promise about the body and pays it out in roughness and a bump map. That is the two-question collapse, and it is not the one the brief described: the brief said the family's words sort onto two questions it has fused. What the code says is harder - the family asks ONE question and uses a two-question vocabulary to answer it, so the second question has no answer anywhere in the corpus. This bench builds the missing half in order to show that it is missing.\n\nTHE TWO QUESTIONS as this bench puts them. Q1 TRANSMISSION: does light get through? Answered by the members' code, in exactly three ways - alpha, subsurface scatter, unshaded. Q2 STANCE: does the body hold its own shape under a load? Answered by no member's code, so this bench derives it from the ordinary meaning of the word, which is a WEAKER WARRANT than a derived axis and is recorded as such rather than dressed up. What IS derived from the code is the fact that the code answers nothing here.\n\nSUBSTANCE, six values. The union that can be built honestly, with at least one word from each member, and the three shared words kept because that overlap is the subject.\n\n  solid - TWO MEMBERS (breathing_room, rainbow) AND THEY AGREE. breathing_room's branch never constructs a material at all: `if substance == solid: return` before a StandardMaterial3D exists, so the shipped walls are Godot's default grey. rainbow builds it positively - TRANSPARENCY_DISABLED, metallic 0.0, roughness 0.6. One is the absence of a claim and one is a claim, and both mean opaque and diffuse, so the agreement is real and the difference is about authorship rather than about matter. It is also the only word in the family with no albedo anywhere - breathing_room never makes a material and rainbow's albedo is Color.WHITE with vertex_color_use_as_albedo - so it ships the reference neutral here. ANSWERS BOTH QUESTIONS, which is precisely why it is the one word two members share and why it is both members' default and this one's.\n\n  glass - TWO MEMBERS (breathing_room, rainbow) AND THEY AGREE ABOUT THE KIND OF CLAIM, differing about the amount by roughly 2x in every parameter. The brief asked whether glass is implemented as transparency or as a specular change, because those are different claims. THE ANSWER IS BOTH, IN BOTH MEMBERS. breathing_room: albedo (0.55, 0.72, 0.78) at alpha 0.32, TRANSPARENCY_ALPHA, CULL_DISABLED, roughness 0.05, metallic 0.15. rainbow: TRANSPARENCY_ALPHA, CULL_DISABLED, metallic 0.35, roughness 0.15, with alpha 0.70 arriving through the vertex colours (band_color.a *= alpha_multiplier * 0.7). Neither implements it as transparency alone and neither as specular alone. breathing_room's numbers are used here, verbatim, because they are the ones written as a material rather than assembled from a vertex stream. ANSWERS Q1. SILENT ON Q2 in both members and in every line of both files.\n\n  light - rainbow only, and its own truth line is what the value means: a rainbow has no location, it exists only in the geometry between sun, water and eye. The code is TRANSPARENCY_ALPHA plus unshaded. NOTE THE ARITHMETIC, because it reverses the intuition the words invite: rainbow's band alpha is 0.70 and breathing_room's glass alpha is 0.32, so the family's word for pure light is MORE THAN TWICE AS OPAQUE as its word for glass. ANSWERS Q1. HAS NO Q2 ANSWER AT ALL, which is a different thing from being silent about it - glass declines to say whether it holds its shape, light has no shape to hold - and the `bear` reading is built to make that difference visible rather than arguable.\n\n  flesh - breathing_room only, and the one value in the whole family whose optics are neither opaque nor alpha: albedo (0.80, 0.50, 0.50), subsurf_scatter_enabled, strength 0.8, skin mode. Light gets IN and comes back out without going through, which is a third answer to Q1 that no other word gives. breathing_room's header records that this material was lifted character for character out of the orphan breathing_room.gd, so the value is the recovery of a claim the shipped scene had lost. ANSWERS Q1 in its own way; its ordinary meaning answers Q2 as well, and the code does not.\n\n  fabric - TWO MEMBERS (breathing_room, sculpt_one) AND THEY DISAGREE, which is the only disagreement among the three shared words. Both say opaque, fully rough, zero metallic - breathing_room roughness 1.0 with albedo (0.62, 0.60, 0.55); sculpt_one roughness 0.9 with a simplex normal map at bump 2.0 and the hue left alone. So they agree on the Q1 answer and disagree on whether fabric has a WEAVE: only sculpt_one gives it one. Neither gives it a drape. breathing_room's material is used here, verbatim; the weave is declined and the reason is in `declines`. Q2 WORD, SPENT ENTIRELY ON Q1.\n\n  granular - sculpt_one only: roughness 0.7, metallic 0.2, and a CELLULAR normal map at bump 5.0 - the only value in the family that changes the NOISE TYPE rather than its amplitude. A heap has no tensile strength and is the sharpest Q2 answer any of these words could give, and in the source it is a bump map on an object that does not move. Q2 WORD, SPENT ENTIRELY ON Q1.\n\nDO THE THREE SHARED WORDS MEAN THE SAME THING IN EACH MEMBER? solid YES - one member asserts opacity and the other declines to assert anything, and the render is the same kind of surface. glass YES about the kind of claim (transparency AND specular, in both) and NO about the amount, which differs by about 2x in alpha, 3x in roughness and 2.3x in metallic. fabric NO - agreed on roughness and metallic to within 0.1, and only one of the two gives it a weave. Two agreements and one disagreement out of three, which is a better rate than a shared word usually earns in this corpus.\n\nREADING, three values, and it is THIS SYNTHESIS'S OWN AXIS, not a member's. No member declares anything like it: breathing_room's second axis is `aperture` (how far open the corridor stands), rainbow's is `banding` (how many colours the spectrum is cut into), sculpt_one's is `hand` (which sculpting move makes the piece). `reading` is therefore SYNTHESIS-INTRODUCED. What it does is separate the two questions into two rigs, and a rig holds everything but its own question still.\n\n  body - the substance's own optics on the substance's own stance, no load. Both answers at once. THIS IS THE FAMILY'S CONDITION, drawn: a reader cannot tell from this frame alone whether two tiles differ because of what light did or because of what force did. ANSWERS BOTH, DISTINGUISHES NEITHER.\n\n  through - the transmission rig. The bar is pinned to the reference stance and the surface is pinned to one hue, one roughness and zero metallic; what survives is alpha, subsurface scatter and unshaded, the only three ways any member's code lets light past a surface. An L of vertical high-contrast stripes stands behind the bar - two panels meeting at the back-left corner, so the target is behind the body from any standpoint in the quadrant rather than only from yaw 0.62 - and 66.5 percent of the body's silhouette has striped screen behind it, measured on the replica, against 15117 free stripe pixels left unobstructed as the reference. YOU ARE READING THE STRIPES, NOT THE BAR. ISOLATES Q1, SILENT ON Q2 BY CONSTRUCTION.\n\n  bear - the load rig. The bar is at its own stance, every substance wears ONE neutral matte, and a 0.09 m straightedge comes to rest on the bar's own top surface at a height READ OFF THE BUILT LATTICE rather than typed in. Measured: solid 0.5000, glass 0.5000, flesh 0.4479, fabric 0.3655, granular 0.2728, light 0.0240 - light is the override and it is the claim, since there is nothing there to carry anything and the load goes to the floor through a bar that has not moved. THE WIDTH OF THAT STRAIGHTEDGE IS THE WHOLE INSTRUMENT: the first build made it 0.30 m, exactly the width of the gap, and the replica caught what that costs - a plate as wide as the span rests on the SHOULDERS of a sag instead of sinking into it, so fabric's load came to rest at 0.4616 against solid's 0.5000 while the cloth below it hung 0.145 m down, and the gauge disagreed with the body it was gauging. ISOLATES Q2, SILENT ON Q1 BY CONSTRUCTION.\n\nHOW THE SHEET IS PROTECTED FROM THE COLOUR TRAP. The critic measures luminance by default and has a separate per-channel rescue, so a pair separated only by hue at constant brightness reads as a twin in greyscale. Four of the six substances carry a member's albedo verbatim, and on Rec.709 those albedos sit within 0.081 of each other - flesh 0.564, fabric 0.601, granular 0.645 - which is exactly the twin condition. IT IS NOT LOAD-BEARING ANYWHERE. In `through` and in `bear` the hue is pinned to one reference for all six values, so a colour-only difference is not constructible in twelve of the eighteen cells; in `body` every pair also differs in transmission, in specular or in silhouette. If the colour-only rescue ever fires on this sheet it is reporting a fault, not a rescue.\n\nTHE ALPHAS ARE PER FACE AND THE BODY HAS TWO, which is arithmetic a reader should have before mistaking it for a bug. Every material here is CULL_DISABLED, because a transparent hull needs it or the far wall vanishes, so a viewing ray crosses the front face AND the back face and effective opacity is 1 - (1 - a)^2. glass at 0.32 per face is 0.538 through the body, so 46 percent of the stripe pattern survives; light at 0.70 per face is 0.910, so 9 percent survives. THE FAMILY'S WORD FOR PURE LIGHT IS THE ONE THAT PHOTOGRAPHS NEARLY SOLID, and every number in that sentence is rainbow's and breathing_room's rather than this bench's.\n\nTHE THESIS SOMEONE COULD DISAGREE WITH: `substance` is one word doing the work of two independent axes, and the proof is that each of this bench's two rigs is blind to the other's question - three substances collapse into one picture under `through` and two collapse into one picture under `bear`, and no substance collapses under both. THE DISAGREEMENT AVAILABLE, and it is fair: Q2 is not in the family's code, so a reader can say this bench invented the second axis and then proved it exists. The answer is that the WORDS are in the family's code, that four of the seven are mechanical words, and that a vocabulary is a claim about what can be said. The cell where holding the thesis costs something is `light` under `bear`, where a bench that thinks light has no stance is obliged to draw it as an ordinary opaque bar and let a straightedge fall through it - an image that looks like a bug and is the argument.",
+				"predicted_degeneracy": {
+					"pair": "light against solid, in the bear reading",
+					"percent": 19.85,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry rebuilt in Python from the same constants (same lattice, same four stance functions, same stage, same derived carry heights), projected through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.58 on the union AABB of all eighteen variants, which is the STAGE at 1.00 x 0.545 x 0.80 and therefore identical in every cell), z-buffered with the default rig's key at (-42, -35) energy 1.25, fill at (-20, 130) energy 0.45 and ambient (0.62, 0.65, 0.72) at 0.55, FILMIC tonemapped, sRGB out - then run through artifact_dna_critic's pipeline unchanged: subject bbox from pixel (3,3), crop to the union of the two frames' subject boxes, neutralise each frame's own corner, grey, resize 160 x 160, mean of the hottest 5 percent.\n\nTHE CONTEXT IS THE `bear` READING AND THE RANKING IS COMPUTED INSIDE IT. All fifteen pairs, focus percent: solid-glass 0.00 (the designed null), solid-light 19.85, glass-light 19.85, solid-flesh 27.72, glass-flesh 27.72, light-flesh 28.99, flesh-fabric 38.10, solid-fabric 46.79, glass-fabric 46.79, light-fabric 47.40, fabric-granular 71.27, flesh-granular 73.69, solid-granular 74.35, glass-granular 74.35, light-granular 75.11.\n\nIT IS A CLUSTER OF TWO, NOT A SINGLE PAIR, AND THAT IS SAID IN ADVANCE. light against solid and light against glass are the SAME NUMBER TO THE BYTE, because solid and glass are the same frame to the byte - which is the designed null. Naming one of them as `the` closest pair without saying so would be the wave-8 miss repeated.\n\nWHY THAT PAIR. Under `bear` every substance wears one neutral matte and `light` takes the reference stance, so the BODIES IN THESE TWO FRAMES ARE IDENTICAL VERTEX FOR VERTEX AND PIXEL FOR PIXEL. The entire difference in the frame is one object: a 0.09 x 0.045 x 0.34 m straightedge, at y 0.5000 in one tile and y 0.0240 in the other. It is drawn twice over - present at the top in one frame and absent there, absent at the floor in one frame and present there - so the changed area is roughly two straightedge silhouettes. At framing 0.58 the frame is 1.534 m across; the bar's screen-space footprint is about 0.09 x 0.8139 + 0.34 x 0.5810 = 0.271 m wide by about 0.075 m tall including its lit top face, so one silhouette is about 0.0203 m2 of a 2.353 m2 frame = 0.86 percent, and two of them about 1.7 percent. The critic crops to the subject box (29.6 percent of frame) before resizing, so those two silhouettes are about 5.8 percent of the 25600 pixels compared, against a hottest-5-percent window of 1280 pixels - so the window fills entirely with straightedge pixels and the number is set by contrast rather than by area. C_LOAD (0.26, 0.60, 0.72) against C_REF (0.72, 0.71, 0.68) at the top and against C_PLATE (0.19, 0.20, 0.23) at the floor gives a mean separation near 50 of 255 = 19.9 percent. 19.85.\n\nTHE PREDICTION IS A FLOOR, NOT A FORECAST. The replica has one key, one fill, flat shading, no shadows, no AO, no antialiasing and no emission, and every prior prediction in this corpus under-read by 1.5x to 6.7x. IF THE SWEEP COMES BACK BELOW 19.85 ON THE NAMED PAIR, STOP AND INVESTIGATE THE HARNESS BEFORE THE DESIGN: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back to the default and prints identical tiles; (b) _rejects.json - all three exports are String enums and Object.set() on a typed property of the wrong type is refused in SILENCE; (c) whether the sheet was captured with --max=18, because at build_dna_gallery's default cap of 9 the 6 x 3 cross product is trimmed from the tail of the LATER axis and `reading` collapses to [body] alone, which deletes all four designed nulls and both rigs.\n\nTHE PAIR AT REAL RISK IS IN ANOTHER READING AND IS NOT THE REGISTERED NUMBER. In `through`, `flesh` differs from the opaque triple ONLY by subsurface scattering on a 0.24 m slab with the hue pinned - a screen-space diffuse effect the replica cannot render at all, so no honest floor can be computed for it. It is expected between 2 and 8 percent and it is the one place in this sheet where a genuine INERT is possible rather than a harness fault. If it lands under 3 percent, the finding is that the family's third answer to Q1 is not photographable, which is a fact worth having and is NOT a reason to redesign the axis.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"substance": "solid",
+							"reading": "bear"
+						},
+						"b": {
+							"substance": "glass",
+							"reading": "bear"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION AND IT IS THE THESIS, not a spare check. `bear` pins every optical claim to one neutral matte, so the reading is deaf to Q1; solid and glass differ ONLY in Q1, since both hold their shape completely and both take the reference stance and both carry the load at 0.5000. Two substances that hold their shape equally cannot be told apart by a question about force, however far apart they are about light - and solid against glass in `through` is one of the widest pairs in the sheet. Predicted 0.00 percent focus / 0.00 percent frame, confirmed at 0.000 / 0.000 on the replica; anything above 0.5 percent is render noise, and anything above 2 percent means the bear rig is reading a material it must not."
+					},
+					{
+						"a": {
+							"substance": "solid",
+							"reading": "through"
+						},
+						"b": {
+							"substance": "fabric",
+							"reading": "through"
+						},
+						"under_percent": 0.5,
+						"why": "The mirror null, and the other half of the argument. `through` pins the stance to the reference bar and pins hue, roughness and metallic to one reference, so the reading is deaf to Q2 and to surface finish; solid and fabric are both fully opaque, so the two frames are the same mesh under the same material. Two substances that are equally opaque cannot be told apart by a question about light, however far apart they are about shape - and solid against fabric in `bear` is 46.79 percent."
+					},
+					{
+						"a": {
+							"substance": "solid",
+							"reading": "through"
+						},
+						"b": {
+							"substance": "granular",
+							"reading": "through"
+						},
+						"under_percent": 0.5,
+						"why": "The same null, second pair, and registered separately because a null that held for one pair and broke for another would mean `substance` is reaching the through rig somewhere it must not. granular is the widest-silhouetted substance in the sheet - 0.878 m against 0.720 m, and 74.35 percent from solid in `bear` - and here it is the same photograph as solid, which is the strongest single statement the sheet makes."
+					},
+					{
+						"a": {
+							"substance": "fabric",
+							"reading": "through"
+						},
+						"b": {
+							"substance": "granular",
+							"reading": "through"
+						},
+						"under_percent": 0.5,
+						"why": "The third pair, and the one that closes the triangle. All three must be 0.00 together; two zeros and one non-zero is arithmetically impossible for identical images and would be a fact about the harness rather than about the artifact - most likely an unsettled first tile, which is why the critic neutralises each frame's own corner."
+					}
+				],
+				"designed_nulls_why": "FOUR NULLS, TWO FACTS, ONE ARGUMENT. Three of them say that `through` cannot see Q2: solid, fabric and granular are three different bodies and one photograph, because the rig pins the stance and they are equally opaque. The fourth says that `bear` cannot see Q1: solid and glass are two different surfaces and one photograph, because the rig pins the optics and they are equally rigid. Neither collapse is available to the other rig - fabric and granular are 71.27 percent apart in `bear`, solid and glass are far apart in `through` - so the two questions are INDEPENDENT, which is exactly what it means to say one word is carrying two axes. The tempting fifth is `light` against `solid` in `bear`, where the two BODIES are identical to the byte, and it is deliberately NOT a null: the load falls through one of them, and that 19.85 percent is the pre-registered closest pair. If any of the four zeros comes back above 2 percent, nothing else in this sheet can be believed.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The bench can stand all six substances in a row (layout=ladder, 1.30 m pitch, about 7.5 m wide) but the SWEEP must see one at a time: capture_config_sweep unions the AABB across a spec's variants, so a six-wide row in the same spec would frame every single cell against seven and a half metres and photograph the straightedge as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. WHAT IS NOT FIXTURED, AND WHY NOTHING NEEDS TO BE: there is no clock and no random number here. The whole figure is built synchronously inside _ready from arithmetic on eight constants - no _process, no Timer, no randf, no FastNoiseLite, and deliberately no NoiseTexture2D, which bakes on a worker thread and would let the shutter catch an unbaked map. That matters because the sources are not so quiet: sculpt_one had to add a sculpt_seed export to stop a sweep photographing five different objects, and rainbow runs a _process that moves its particle emitter every frame.",
+				"kin": "The three sources are the kin, and the relation is unusually direct because this bench shares their word rather than inventing one. breathing_room is a CORRIDOR - two hand-authored SoftBody3D slabs 4.87 m apart that the player walks between - and its own truth line is that a room that breathes is no longer a container but a body you are inside; its `substance` re-skins those walls and cannot touch them. rainbow is a 15 m double arc overhead whose truth line is that a rainbow has no location, and whose `substance` reifies it into something that could hold a shadow, which its own comment says contradicts the truth line and calls the point. sculpt_one is a still-life of glossy liquids and grainy cloth whose truth line is that materials are choices rather than surfaces, and it is the member that already separates surface from geometry into two named axes - so it is the one this bench agrees with most and borrows least from. A room holding this bench beside breathing_room is saying the same sentence twice about a wall; a room holding it beside sculpt_one is saying the sentence and then asking what the other half would have been. ON THE VALUE SIDE this is the corpus's densest shared vocabulary: `substance` is declared by three artifacts with seven words between them and three of the words in two lists each, which is the one-scene-many-names tell inverted - many scenes, one name.",
+				"declines": [
+					"THE BRIEF'S ARGUMENT, corrected from the code, and it is the biggest change. The brief said the family's words sort onto two questions that `substance` has collapsed into one, with solid/flesh/fabric/granular answering the shape question. THE CODE SAYS NO MEMBER ANSWERS THE SHAPE QUESTION AT ALL. breathing_room's _apply_substance sets material_override and returns; rainbow's branch is a StandardMaterial3D constructor; sculpt_one's header states the separation as law and hands geometry to `hand` instead. So the collapse is not two answers fused into one word - it is one answer given in a vocabulary borrowed from the other question, which is a stronger claim and a worse condition. The bench is built the same way either reading, but the note now says which is true.",
+					"THE BRIEF'S QUESTION ABOUT `glass`, answered against the guess. It asked whether glass is transparency or a specular/roughness change, because those are different claims. It is BOTH, in BOTH members: breathing_room sets TRANSPARENCY_ALPHA at 0.32 AND roughness 0.05 AND metallic 0.15; rainbow sets TRANSPARENCY_ALPHA AND roughness 0.15 AND metallic 0.35, and its own comment says so - still see-through, but it has a surface that catches light. The two members agree about the kind of claim and differ by about 2x in every number.",
+					"`mixed` from sculpt_one, and it is the wave-13 lesson in the axis rather than in the layout. mixed is not a substance, it is ALL OF THEM: the curated palette left untouched, gloss next to weave next to grain, and its branch is a bare early return. An all-rungs value inside an axis makes every other value a subset of one cell and cannot be compared with any of them. It is also the only value anywhere in the family where anything transmits by accident - glossy_clear at alpha 0.6 with refraction, and bubble_material at 0.7 - both of which _apply_substance explicitly switches OFF for every other value, so `mixed` is more transparent than sculpt_one's own transparent-sounding words.",
+					"`glossy` from sculpt_one. It is a real value and it occupies the SAME CELL of the two-question space as solid: opaque, and rigid in its ordinary meaning. What separates it from solid is roughness 0.1 with clearcoat 1.0 against roughness 0.6 - a third question, how smooth, which this bench is not asking. Adding it would spend a sixth of the sheet confirming that solid is opaque. It is the honest seventh value and the first thing to add if the axis ever needs one.",
+					"THE NORMAL MAPS, which is a real deviation and not a principle. sculpt_one's fabric is roughness 0.9 plus a simplex NoiseTexture2D at bump 2.0, and its granular is roughness 0.7 plus a CELLULAR one at bump 5.0 - the weave and the grain are the whole difference between those two surfaces in the source. Neither is built here. NoiseTexture2D bakes on a worker thread, so a headless sweep can photograph an unbaked map and publish a null that is a fact about the scheduler - the stale-shader fault in another costume. Building the relief as deterministic micro-geometry was the alternative and was declined too: it would change the SILHOUETTE, which would break the three `through` nulls that carry the argument. Fabric and granular are separated here by roughness, by metallic and, decisively, by stance.",
+					"SUBSTANCE MOVING THE BODY IN THE `body` READING WITHOUT SAYING SO. Q2 is not in any member's code, so the stances here are derived from the ordinary meaning of the words. That is a weaker warrant than a derived axis and it is written into the note rather than smoothed over. What is derived from the code is only that the code answers nothing - which is checkable in three files and is the finding.",
+					"`aperture` from breathing_room, `banding` from rainbow and `hand` from sculpt_one as a third axis. Each is the member's OTHER question and none of them is about matter: aperture is how far open a corridor stands, banding is how many colours a spectrum is cut into, hand is which sculpting move makes a piece. A bench that swept one of them beside `substance` would be answering two questions in one sheet and could not attribute either.",
+					"ANIMATION, and every rate, duration and phase. breathing_room's registry description promises a room that breathes and the shipped scene has never once inhaled; its own header records that neither of its axes is a rate because the evidence for one is a single still. The same refusal holds here and is stronger, because a load settling onto a body is exactly the thing a still cannot show mid-way: the straightedge is already at rest in every frame.",
+					"GODOT 3 NAMING, FLAGGED RATHER THAN FIXED. rainbow.gd:218 sets material.flags_unshaded = true for its DEFAULT `light` value. That is Godot 3's property name; Godot 4's is shading_mode. This bench uses shading_mode = SHADING_MODE_UNSHADED, which is the same claim in the current API. Whether the member's line still takes effect was NOT verified here, because no Godot was run - it is written down because about twenty other files in the corpus carry the same line, and because if it does not take effect then the value it silently breaks is a default, which is the hardest kind of break to see.",
+					"A LARGER BODY IN THE STAGE. The bar could fill more of the plate and every pair would read hotter, but the plate's margin is what keeps granular's 22 percent spread inside the world box, and the stage is the fixed AABB. The heap already had to be capped; the cap is declared rather than absorbed by quietly growing the plate."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=substance-room --tokens=substance_room --max=18",
+				"sweep_note": "THE FULL SHEET NEEDS --max=18 AND THE COST OF GETTING IT WRONG IS THE WHOLE ARGUMENT. `substance` is declared first and is never trimmed; `reading` is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap. At the default --max=9 the 6 x 3 sheet renders as 6 x 1 = `body` only, which deletes both rigs, all four designed nulls and the pre-registered pair, and leaves a finished-looking sheet of six confounded tiles that cannot be wrong about anything. At --max=12 it renders 6 x 2 = body and through, which keeps the three `through` nulls and deletes the `bear` null - the headline one - along with the registered prediction. Only 18 carries the experiment.",
+				"placements": 0
+			}
+		}
+	}
+}

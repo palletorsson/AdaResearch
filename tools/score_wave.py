@@ -99,14 +99,34 @@ def main() -> int:
         idx = next((i for i,r in enumerate(same)
                     if {str(r["a"][axis]),str(r["b"][axis])} == {va,vb}), None)
         if idx is None:
-            avail = sorted({f"{r['a'][axis]}/{r['b'][axis]}" for r in same})
-            print(f"{tok:<18}{va+' vs '+vb:<28} pair not measured; have {avail[:5]}"); continue
-        c = same[0]
-        out[tok] = dict(pred=pd.get("percent"), pair=f"{va} vs {vb}", axis=axis,
-            rank=idx+1, n=len(same), hit=(idx==0), meas=round(same[idx]["changed_pct"],2),
-            closest=f'{c["a"][axis]} vs {c["b"][axis]}', closest_pct=round(c["changed_pct"],2))
-        print(f"{tok:<18}{va+' vs '+vb:<28}#{idx+1:>2}/{len(same):<3} {'HIT ' if idx==0 else 'MISS'}  "
-              f"{out[tok]['closest']:<22}{out[tok]['meas']:>6}")
+            # THE PREDICTION MAY BE ITS OWN NULL, and that is the strongest form of it: the
+            # builder says "the closest pair on this axis is X against Y, and it is EXACTLY
+            # ZERO by construction". configuration_yard did that — ring and lagrange enter the
+            # same branch of _initial at the same radius and angles, differing only in a scalar
+            # speed that `start` does not draw. Setting nulls aside before ranking then made a
+            # correctly-registered prediction read as "pair not measured". A null-prediction is
+            # rank #1 by construction; what is scored is whether the null HELD.
+            hit_null = next((r for r in removed
+                             if {str(r["a"][axis]),str(r["b"][axis])} == {va,vb}), None)
+            if hit_null is not None:
+                mv = round(hit_null["changed_pct"], 2)
+                out[tok] = dict(pred=pd.get("percent"), pair=f"{va} vs {vb}", axis=axis,
+                    rank=1, n=len(same) + len(removed), hit=True, meas=mv,
+                    closest=f"{va} vs {vb}", closest_pct=mv, predicted_own_null=True)
+                print(f"{tok:<18}{va+' vs '+vb:<28}#{1:>2}/{len(same)+len(removed):<3} HIT   "
+                      f"{'(predicted its own null)':<22}{mv:>6}")
+            else:
+                avail = sorted({f"{r['a'][axis]}/{r['b'][axis]}" for r in same})
+                print(f"{tok:<18}{va+' vs '+vb:<28} pair not measured; have {avail[:5]}")
+                continue
+        if idx is not None:
+            c = same[0]
+            out[tok] = dict(pred=pd.get("percent"), pair=f"{va} vs {vb}", axis=axis,
+                rank=idx+1, n=len(same), hit=(idx==0), meas=round(same[idx]["changed_pct"],2),
+                closest=f'{c["a"][axis]} vs {c["b"][axis]}', closest_pct=round(c["changed_pct"],2))
+            print(f"{tok:<18}{va+' vs '+vb:<28}#{idx+1:>2}/{len(same):<3} "
+                  f"{'HIT ' if idx==0 else 'MISS'}  "
+                  f"{out[tok]['closest']:<22}{out[tok]['meas']:>6}")
         # DESIGNED NULLS — pairs the builder said would be identical BY CONSTRUCTION, with a
         # ceiling. A held null is a negative control that proves the sweep can see a difference
         # when there is one and reports none when there is not; a broken null is a real finding

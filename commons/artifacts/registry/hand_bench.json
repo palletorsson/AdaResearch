@@ -1,0 +1,171 @@
+{
+	"artifacts": {
+		"hand_bench": {
+			"name": "Hand Bench",
+			"lookup_name": "hand_bench",
+			"scene": "res://commons/artifacts/hand_bench/hand_bench.tscn",
+			"class_name": "HandBench",
+			"category": "procedural",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One 0.90 m deposition bed, six hands, three readings of the same deposition. Four artifacts in this corpus carry an axis called `hand` and they are three vocabularies, not four - mc_sculpt_vr and marching_cubes_sculpt_vr are one scene under two names. Two of the vocabularies are gestures (stack, sweep from the marching-cubes sculpt; stipple, spatter from sculpt_one) and one is a list of graph algorithms (prim, labyrinth from maze_generation). Every hand deposits the SAME 9.634 litres: 8 grains of 66 mm, or 27 of 44 mm, or 216 of 22 mm, or 48 corridor bars of 100 x 33.45 x 60 mm, because 8x27 = 27x8 = 216x1 and the bar height is solved from the same total. So `hand` is an axis about division and placement and nothing else - which is what BOTH live members already do, each holding its own material fixed and saying so. Three readings: `deposit` is what landed, `pass` is the path as a real tube threading the deposits in the order they were laid with each deposit ghosted as its own footprint, and `grain` is one unit at true scale standing beside the whole pass fused into a single 0.132 m ball. The pass is where the two vocabularies part: only stack and sweep leave a curve a body could have moved along. Nothing animates, nothing is printed, and the one seeded RNG is consumed by two hands out of six.",
+			"tags": [
+				"hand",
+				"gesture",
+				"deposition",
+				"marching_cubes",
+				"sculpt",
+				"maze",
+				"procedural",
+				"grain",
+				"trajectory",
+				"synthesis"
+			],
+			"dev_themes": [
+				"procedural",
+				"generation",
+				"synthesis",
+				"one word over two unrelated things"
+			],
+			"interactions": [
+				"walk the hand axis at reading=pass and look for the two cells that show a curve rather than a plan: stack's 0.252 m vertical line and sweep's 0.660 m arc are the only trajectories on the bench, and the other four are orders in which decisions were made",
+				"stand at hand=labyrinth, reading=pass and notice it is the shortest many-piece path on the bench at 4.349 m, against 10.23, 10.1 and 11.6 for stipple, spatter and prim - the one value in the ALGORITHM half of the axis whose decision order is also a route",
+				"put reading=grain under all six hands and count: the ball beside the unit is the same 0.132 m ball every time, because the amount is conserved and only the unit changes",
+				"compare hand=stack against hand=sweep at reading=grain, then at reading=deposit: identical to the byte in the first and unrecognisable in the second, which is exactly the claim mc_sculpt_vr makes about its own four rungs",
+				"compare hand=prim against hand=labyrinth at reading=deposit: the same 48 openings on the same lattice, one bushy and isotropic, one a comb with no junction anywhere in it"
+			],
+			"capacity": "SEE that one word is doing two jobs - that a gesture has a trajectory and an algorithm has only a decision order - and see it as a difference between two photographs of the same amount of material rather than as an argument about vocabulary",
+			"dna": {
+				"axes": {
+				 "hand": [
+				  "stack",
+				  "sweep",
+				  "stipple",
+				  "spatter",
+				  "prim",
+				  "labyrinth"
+				 ],
+				 "reading": [
+				  "deposit",
+				  "pass",
+				  "grain"
+				 ]
+				},
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.57,
+				"sources": [
+					"marching_cubes_sculpt_vr",
+					"mc_sculpt_vr",
+					"sculpt_one",
+					"maze_generation"
+				],
+				"default": "hand=stack, reading=deposit. stack is the default because it is the shipped, hardcoded gesture of the marching-cubes sculpt - the one arrangement that tool has been photographed in across all 13 of its map placements - and because it is the only hand on this bench with spread zero, which makes it the state the other five are departures from. deposit is the default because it is what a still of a deposition normally is; pass and grain are the two readings this bench adds. THIS ARTIFACT HAS NO PLACEMENTS, so no default is protecting anything - it is a design choice and is recorded as one rather than dressed up as a compatibility constraint.",
+				"note": "WHAT THE VALUES MEAN, WITH THE NUMBERS. THE FAMILY FIRST, AND ITS CENSUS. `hand` is declared by FOUR registry names and carries THREE vocabularies: mc_sculpt_vr (isosurfaces.json) and marching_cubes_sculpt_vr (procgen_extra.json) declare the identical four words stack|sweep|dab|heap over the identical scene path, res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn, character for character - ONE object under two names, and both entries now carry the declaration. THIS WAS NOT DISCOVERED HERE. mc_sculpt_vr's own `kin` field already states it, names it a hidden family and gives the mirroring command; what this pass did was CONFIRM it by resolving both scene paths, which is the weaker and truer claim. sculpt_one (randomness.json, script SculptOne.gd) declares composition|pour|drape|stipple|spatter. maze_generation (procgen_extra.json, script maze_generator_vr.gd) declares backtracker|prim|binary_tree|sidewinder|labyrinth. THE BRIEF'S ARGUMENT, AND WHERE THE CODE OVERRULES IT. The brief said the sculpt words are gestures that differ in how much material lands per unit time and how it is spread, while maze_generation's are algorithm names with no rate and no spread. The second half holds: _carve_prim builds a frontier edge list and pops a uniformly random member, _carve_binary_tree tosses north-or-east at every cell, _carve_sidewinder runs east and rises once per run, _carve_labyrinth walks a snake and calls no RNG at all. None of them has a knob you could turn a little. The first half does not hold, and both live members say so themselves. MarchingCubesSculptVR.gd's header: 'All four rungs use THE SAME SEVEN DEPOSITS ... Nothing about the amount of material, the threshold or the sampling changes between them. Only the arrangement.' maze_generator_vr.gd's header: 'All five leave exactly the same number of standing wall blocks ... Nothing about the amount of maze changes. What changes is the TEXTURE.' Two of the three vocabularies independently CONSERVE the amount and vary only the arrangement, so the axis was never about rate on either side. This bench therefore conserves it too, and the difference it looks for is elsewhere. WHERE THEY ACTUALLY PART: THE PASS. A gesture has a trajectory - a curve some body moved along, with the material landing as it went. An algorithm has a decision order - a sequence a data structure produced, where the line between consecutive decisions was never traversed by anything. `reading=pass` draws both as the same tube and lets the picture say it. AND THE SPLIT IS THREE WAYS, NOT TWO, which is the correction this bench makes to its own brief. Of the four sculpt words built here only stack and sweep have a continuous hand path; stipple and spatter are sequences of separate touches with the hand lifted between them, so their pass is a plan and not a stroke. And one of the two algorithms, labyrinth, has a decision order that IS a walkable route, because a unicursal labyrinth is a path and carving it means following it - its pass measures 4.349 m against 9 to 12 m for the three scattering hands. So the vocabulary that is supposed to be all gesture contains two non-gestures and the vocabulary that is supposed to be all procedure contains one route. THE MATERIAL BUDGET, WHICH IS ONE IDENTITY. u = 0.022 m. Grain radii are 3u, 2u and u; counts are 8, 27 and 216; and 8x3^3 = 27x2^3 = 216x1^3 = 216, so all three deposit exactly 216 x (4/3)pi u^3 = 9.634 litres. The corridor bar's height is SOLVED from the same total (9.634e-3 / 48 / (0.100 x 0.060) = 33.45 mm) rather than chosen, so the two algorithm hands lay the same 9.634 litres in 48 pieces. The single sphere that fuses the whole pass has radius 6u = 0.132 m exactly, because 216 = 6^3, and it is therefore the SAME sphere in all six cells of the grain reading. HAND, six values. stack (mc_sculpt_vr): 8 grains of radius 0.066 at one point in plan, pitch 0.036 up the y axis. Spread 0. They overlap by 0.096 of a 0.132 diameter, so they fuse into a column 0.132 wide and 0.408 tall - mc's own word for its stack is 'one lump, taller than wide'. sweep (mc_sculpt_vr): THE SAME 8 grains of radius 0.066 dragged along one bowed arc, chord 0.62, sagitta 0.09 in plan, rise 0.05 as a half sine. Grain spacing 0.0945 against a 0.132 diameter, so they fuse into one continuous mark 0.662 m long. The arc runs BROADSIDE, along (0.8139, 0, -0.5811), which is the capture azimuth turned a quarter; that is not taste, it is mc_sculpt_vr's own measured lesson (its earlier +x arc read 4.4 percent of frame against stack where the broadside one reads 9.8), and its own sweep table's endpoints differ by (-0.953, +0.680), which normalises to exactly this line. stipple (sculpt_one): 216 grains of radius 0.022 on 8 concentric rings, ring k at radius 0.045k carrying 6k grains. Eight rings is forced, not chosen: 6(1+2+...+k) = 216 has the single solution k = 8. Arc pitch is TAU x 0.045 / 6 = 0.0471 on every ring by construction (the count grows with the radius) and radial pitch is 0.045, so the tightest centre gap anywhere in the 216 is the radial one at 0.0450 against a grain diameter of 0.044 - 1 mm of clear air, measured on the replica rather than hoped. An even, bounded, controlled peppering, falloff zero out to r = 0.36 and then nothing. spatter (sculpt_one): 27 grains of radius 0.044 thrown at the whole bed, seeded dart-throwing inside |x|,|z| <= 0.34 with a minimum centre separation of 0.092 (4 mm of clear air), 240 attempts per grain and a best-of-attempts fallback so it always places 27 and always the same 27. Coverage 35 percent of the patch against a jamming limit near 55. prim (maze_generation): randomised Prim on a 7x7 lattice at pitch 0.100 - grow from one seed and open the frontier edge the dice picked out of ALL of them. 48 openings laid as bars of 0.100 x 0.03345 x 0.060, short-limbed, bushy, isotropic, and with consecutive decisions anywhere on the lattice. labyrinth (maze_generation): the unicursal one, a boustrophedon snake through all 49 cells - 48 openings, the same bar, no junctions, no dead ends, and no dice. READING, three values. deposit: what landed, at true scale, where it fell, and nothing else. pass: the path as a tube of radius 0.011 threading the deposits in the order they were laid, with each deposit ghosted as the footprint it covers (a 5 mm flat disc or plan rectangle, dark and matte). Path lengths, which are the numbers this reading is for, measured on a Python replica built from the same constants: stack 0.252 m, sweep 0.662 m, stipple 10.228 m and labyrinth 4.349 m are EXACT, because none of those four touches the RNG; spatter is about 10.1 m and prim about 11.6 m, and those two are seed-dependent (over 30 trial seeds spatter ran 8.7 to 11.4 and prim 10.0 to 13.2). Read that list twice. stipple and spatter spend almost exactly the same travel - 10.23 against 10.1 - on grains that differ by a factor of 2 in radius and a factor of 8 in count, so path length is not what separates them; the SHAPE of the path is. And labyrinth, the value that is supposed to be pure procedure, has a path less than half the length of any hand that scatters, because it is a route and a route does not double back. grain: one deposit at true scale, alone, standing 0.36 m along the screen horizontal from a sphere of the WHOLE pass's material fused into one ball of radius 0.132 - identical in all six cells. Same amount, different unit. COLOUR NEVER CARRIES THE AXIS. Every hand deposits the same substance in the same warm lit material, so a difference between two cells is a difference in geometry or it is nothing. What colour reports is ROLE: mark warm and lit, path cool, ghost dark and matte, and the fused mass the mark's own colour with the light taken out of it, because it is the same stuff and not a mark. THE THESIS SOMEONE COULD DISAGREE WITH: `hand` names a trajectory, and four of the six values on this bench do not have one - so the word is doing two jobs and the corpus has been letting it. The disagreement available is fair and it is about the word 'gesture': a stipple IS a hand's doing, and insisting that a gesture must be a continuous curve rules out every repeated, lifted, discrete mark a hand makes - most of drawing, in other words. If you hold that, then `hand` means 'whatever made this' and there is no conflation at all, only a family of makers. The cell where holding this bench's thesis costs something is reading=pass at hand=stipple, where a hand plainly did the work and the picture is a ring diagram.",
+				"predicted_degeneracy": {
+					"pair": "hand spatter against hand prim, in the grain reading",
+					"percent": 3.14,
+					"arithmetic": "Computed BEFORE ANY CAPTURE, by hand, in the critic's own currency and stated as areas so it can be checked. THE CONTEXT IS THE grain READING and the POOL IS THE 15 HAND PAIRS INSIDE IT - the ranking is computed there and nowhere else, because a closest-pair claim inherits its pool and its denominator. THE CAMERA. dist = radius / tan(FOV/2) * PAD * framing with FOV 34, PAD 1.9, framing 0.57 and radius = half the union AABB diagonal, so the frame is diagonal * PAD * framing = 1.35337 * 1.9 * 0.57 = 1.4657 m across at the subject. At yaw 0.62 the bed's 0.90 square projects 1.2553 m wide, which is 85.6 percent of the frame, and the subject box is 1.2553 x 0.7673 m; cropped and resized to 160 x 160 that is 26578 px per square metre. PROJECTED AREAS OF THE UNIT, which is the only thing that moves in this reading: stack and sweep, a 0.066 ball, pi r^2 = 0.013685 m2 = 363.7 px2; spatter, a 0.044 ball, 0.006082 = 161.6 px2; prim and labyrinth, a 0.100 x 0.03345 x 0.060 bar seen at this standpoint (top face 0.006 x 0.2571 + long face 0.003345 x 0.7866 + end face 0.002007 x 0.5615 = 0.005301 m2) = 140.9 px2; stipple, a 0.022 ball, 0.001521 = 40.4 px2. WHY THAT PAIR: a 44 mm ball and a corridor stub are within 13 percent of each other in projected area and they sit on the same seat, so they overlap over about 119.8 px2 and differ over about 62.9. Focus is the mean of the hottest 5 percent, which is 1280 of the 25600 pixels, so with a material-against-bed contrast near 125 grey levels over the symmetric difference and near 35 over the overlap, and 0.85 for the 760 to 160 downsample: 0.85 x (62.9 x 125 + 119.8 x 35) / (255 x 1280) = 3.14 percent focus, 0.16 percent frame. AND THE REASON IT IS THE CLOSEST IS THE THESIS: at the scale of one mark a gesture's unit and an algorithm's non-unit are nearly the same photograph, which is how they came to share a word. FULL PREDICTED SHEET FOR grain, focus percent, all 15 pairs: stack-sweep 0.00 and prim-labyrinth 0.00 (the two designed nulls); spatter-prim 3.14, spatter-labyrinth 3.14; stipple-prim 3.89, stipple-labyrinth 3.89; stipple-spatter 4.31; stack-spatter 8.05, sweep-spatter 8.05; stack-prim 8.54, sweep-prim 8.54, stack-labyrinth 8.54, sweep-labyrinth 8.54; stack-stipple 10.89, sweep-stipple 10.89. Note the internal check: spatter-prim and spatter-labyrinth MUST come back equal, because the second designed null says prim and labyrinth are the same frame here. THE REST OF THE SHEET IS LOUD AND THE HEADLINE WILL BE A PEAK. In deposit every hand pair changes more area than the whole 1280 px focus window - prim against labyrinth, the closest of them, differs over roughly 42 of 96 bar instances, about 5900 px2 - so deposit pairs should land 30 to 50 percent, pass pairs 20 to 45, and the reading axis at fixed hand higher still. READ THE PER-PAIR ROWS. grain is the quiet reading BY DESIGN and a small number there is the experiment, not a fault. THE PREDICTION IS A FLOOR: this arithmetic has one light, flat shading, no shadows, no AO, no antialiasing and no emission, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the named pair comes back BELOW 3.14 percent, check the harness before the design: (a) tools/check_dna_declarations.py, because a value the code cannot reach falls back to the default and prints identical tiles; (b) _rejects.json, because both axes are String enums and Object.set() on a typed property of the wrong type is refused in SILENCE; (c) whether the sheet was captured with --max=18, because at build_dna_gallery's default cap of 16 the 6 x 3 cross product is trimmed from the tail and `reading` collapses to [deposit, pass] - which deletes BOTH designed nulls and the whole predicted table above, since every one of those pairs lives in grain. If instead a grain tile shows a big ball and NO SECOND OBJECT, look again before concluding NO RENDER: a stipple unit is legitimately a 22 mm bead 0.36 m to the right of a 0.132 m sphere, and it is meant to look like almost nothing.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"hand": "stack",
+							"reading": "grain"
+						},
+						"b": {
+							"hand": "sweep",
+							"reading": "grain"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION, and it is the family's own claim rather than a spare check. mc_sculpt_vr's header says its four rungs 'use THE SAME SEVEN DEPOSITS ... Only the arrangement' changes, so stack and sweep are the same material differently placed. This bench honours that literally: both lay 8 grains of radius 0.066, and _build_grain draws ONE grain plus the invariant 0.132 m mass sphere and never consults the arrangement - _stack_centres and _sweep_centres are not called in the grain reading at all. _sphere_lod returns the same (12, 18) tessellation for the same radius, so the two meshes are vertex for vertex the same. Predicted 0.00 percent focus and 0.00 percent frame; above 0.5 percent is render noise, and above 2 percent means the hand value is reaching something in the grain reading that it must not."
+					},
+					{
+						"a": {
+							"hand": "prim",
+							"reading": "grain"
+						},
+						"b": {
+							"hand": "labyrinth",
+							"reading": "grain"
+						},
+						"under_percent": 0.5,
+						"why": "The same fact on the other vocabulary, and again it is the member's own. maze_generator_vr's header says all five of its hands 'leave exactly the same number of standing wall blocks' - 48 openings for a spanning tree of 49 cells, whichever procedure picks them. So an opening is one unit and the unit does not depend on the algorithm: _build_grain draws one 0.100 x 0.03345 x 0.060 bar at a fixed seat and neither _prim_edges nor _labyrinth_edges is called. Registered separately from the first null because these two are the pair that carries the argument: if an algorithm HAD a grain of its own, this would not be zero. It is zero because an algorithm has no unit of material - only a lattice does. Note also that this null forces spatter-prim and spatter-labyrinth to the same number in the predicted table above, so a disagreement between those two rows would convict the harness rather than the design."
+					}
+				],
+				"designed_nulls_why": "Both nulls live in the grain reading and both are quotations rather than inventions: each of the two live members states, in its own file, that its hand axis holds the material fixed. If those statements are true then the unit cannot depend on the value, and the grain reading is the place that shows it. The tempting third - stipple against spatter in grain - is deliberately NOT a null, and it is the one the brief proposed. The code refuses it: sculpt_one's stipple bumps are rng.randf_range(0.05, 0.15) * radius with radius 0.5, so 0.025 to 0.075 with a mean of 0.050, while its spatter droplets are rng.randf_range(0.05, 0.15) unscaled, so 0.05 to 0.15 with a mean of 0.100. Its two scattering moves differ in grain size by a factor of exactly 2, and this bench keeps that factor (0.022 against 0.044) because the counts 216 and 27 are in the ratio 8 and the volume is conserved. So that pair is predicted at 4.31 percent, not zero, and it is the pair whose being non-zero is worth more than either null. If both nulls come back at 0.00 and stipple-spatter comes back at 0.00 as well, the grain reading is not reading the hand at all and nothing else in the sheet can be believed.",
+				"fixture": {
+					"layout": "single",
+					"bench_seed": 20260815
+				},
+				"fixture_why": "TWO PINS, one for each way this sheet could become a fact about the harness. layout: the bench can stand all six hands in a row (layout=ladder, 1.10 m pitch, about 6.6 m wide) and the sweep must see one at a time, because capture_config_sweep unions the AABB across a spec's variants and a six-wide row in the same spec would frame every single bench against six and a half metres and photograph a 22 mm grain as nothing. layout is an export and NOT a value of either axis - that is wave 13's lesson, and it ships at single, so the fixture is a belt over braces. bench_seed: written as a BARE INTEGER and not the string \"20260815\", because a typed int export rejects a string assigned before _ready and that trap has been paid for twice in this corpus. Two of the six hands draw from the RNG - spatter throws 27 darts and prim pops a uniformly random frontier edge 48 times - so an unseeded bench would photograph a different object in every cell of those two columns, and the deposit and pass readings of the same hand would disagree with each other. The other four consume nothing: stipple's rings and labyrinth's snake are closed-form and stack and sweep are arithmetic on two constants. WHAT IS NOT FIXTURED, and why nothing needs to be: there is no clock here. No _process, no Timer, no await, no noise. The whole figure is built synchronously inside _ready, so the frame is complete at frame one and two builds of one value are the same mesh. That matters because THREE of the four sources are live - sculpt_one runs a _process that rotates its composition every frame and had to fixture sculpt_seed, and the marching-cubes sculpt is a GPU compute artifact whose mesh arrives when the mesh thread says so - and none of that is inherited here.",
+				"kin": "THE FOUR SOURCES, and what each one is owed. mc_sculpt_vr and marching_cubes_sculpt_vr are ONE scene under two registry names, which makes this at least the seventh such hidden family in the programme - though it was already found and written down in mc_sculpt_vr's own `kin` field, so this pass confirmed it rather than discovering it. Its argument is that a marching-cubes field can be DEPOSITED rather than given, and that the extractor finds the boundary of whatever was put there; its four rungs are position tables over seven fixed deposits. This bench takes its two arrangement words and drops its two separation words (see declines), and it cannot take its central claim at all, because there is no field and no threshold here - nothing on this bench fuses. sculpt_one is an Omoss-style still life whose five moves ran unconditionally until it was promoted; its axis is which move constitutes the piece, and its `composition` value runs all five. maze_generation is a walkable 15x15 VR maze whose five hands are five carvers writing into one array. ON THE MAP SIDE the three live members are placed in 13, 3 and several map files respectively and none of them has ever been placed at a non-default axis value, which is the corpus-wide gap CLAUDE.md records; this bench has no placements at all and is a test-bench object, not a room fitting. NEAREST KIN BY SUBJECT rather than by word: motion_primitive (wave 17), which also puts a family's implied operation on an invariant stage and also uses colour for role rather than for the axis. The two benches ask opposite questions about the same thing - motion_primitive asks what a move LEAVES, this one asks whether there was a move at all - and a room holding both is asking a complete question. ON THE VALUE SIDE this artifact inherits its whole hand vocabulary from three members and invents none of it, which is the opposite of motion_primitive's `rank` and is a stronger warrant; what is invented here is `reading`, and it is invented rather than inherited because no member has ever photographed its own gesture.",
+				"declines": [
+					"`composition`, sculpt_one's own default, and this is a finding rather than a preference. SculptOne.gd line 360 reads `var every: bool = hand == \"composition\"` and every move below is then guarded `if every or hand == \"drape\"` / `\"pour\"` / `\"stipple\"` / `\"spatter\"`. So composition is not a fifth move - it is the UNION of the other four, and one tile of that artifact's sheet contains all the others. That is exactly the all-rungs-value-inside-an-axis fault that CLAUDE.md's first DNA law names, shipped as a promoted artifact's default. It is declined here on that law, and the same law is why `layout` on this bench is a separate export pinned by dna.fixture rather than a seventh hand.",
+					"`dab` and `heap` from the marching-cubes sculpt. dab is that artifact's best rung and it is untakeable: it pushes the seven deposits to seven corners so that no two extracted SURFACES touch, with the numbers tuned against iso_level 0.3 and opSmoothUnion at k = 0.12, and the whole claim is about what an isosurface extractor does to nearby sources. This bench has no field, no threshold and no fusion - grains here are solid balls that simply sit next to each other - so building dab would be building the word without the argument. heap is a low mound with the top half of the volume empty, which on this bench is spatter with gravity: a near-duplicate of a value already present, and a value that spends a tile confirming another value is decoration.",
+					"`pour` and `drape` from sculpt_one. pour is create_fluid_mass: one sphere plus rng.randi()%5+5 deform spheres of radius 0.3 to 0.7 - between 6 and 10 large lumps in one place, which on this bench is stack with a wider footprint. drape is the honest fifth gesture and the first thing to add if this axis ever needs a seventh value, and it is declined for a reason worth stating: it has NO GRAIN. create_fabric_layer builds a 12 x 12 ImmediateMesh cone of noise-displaced quads - a continuous sheet, not a count of units - so it cannot be given a unit at true scale and would leave a hole in the grain reading and in the volume identity that makes the whole bench comparable.",
+					"`backtracker`, `binary_tree` and `sidewinder` from maze_generation. backtracker is declined because it is the LINEAGE and not a claim: maze_generator_vr._ready branches on `hand != \"backtracker\"` and falls through to the original untouched carving code, so it is the value that means 'nothing new happened'. binary_tree and sidewinder are declined together and for measurement rather than principle - both leave a guaranteed complete corridor along the top row (binary_tree because its top cells have no north, sidewinder because nothing up there can rise), so on a 7x7 at this scale they are two versions of one signature, and the sheet can carry two algorithms. prim was kept because it is the most purely algorithmic of the five - its consecutive decisions can be at opposite ends of the lattice - and labyrinth because it is the one whose decision order is a route, which is the value that complicates this bench's own thesis.",
+					"Time in every form. paint_rate, generation_speed and show_generation are all present in the sources and all invisible to a still - a rate cannot be photographed, and maze_generation's non-default hands already carve instantly for exactly this reason ('the still that this artifact is measured in cannot hold a process, only what the process left'). The pass reading is the honest answer to the same wish: it shows the ORDER without showing the clock.",
+					"Magnitude. brush_radius, cell_size, wall_height and the grain radii themselves are all dials rather than claims, and under an AABB-fitted camera a pure rescale self-cancels - which is the fault grabbable_line's promotion recorded. The grain radii here are not free anyway: they are forced to 3u : 2u : u by the counts and the conserved volume.",
+					"Making the two algorithm hands deposit a DIFFERENT amount from the four gestures, which was the first design and is arguably the more honest one - an opening has no volume of its own, only the lattice does. It was dropped because it would put a real but tiny difference (a 3.6 percent radius change) into the invariant mass sphere and therefore into every gesture-against-algorithm pair in the grain reading, contaminating a pool the whole prediction is computed in. The corridor bar's height is now solved from the gestures' total instead, and the incommensurability is carried by the SHAPE of the unit and by the pass reading, where it belongs.",
+					"A fifth and sixth reading. `spread` - the material collapsed onto a one-dimensional profile along the broadside axis, which would make falloff a number you could read off a ridge - is the best of the rejected ones and would bite hard. It is left out because it would carry no designed null: every hand has a different profile by construction, so a sheet with it in would have nothing in it that must come back zero, and a sheet with nothing that must come back zero cannot tell a working harness from a broken one."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=hand-bench --tokens=hand_bench --max=18",
+				"sweep_note": "THE FULL SHEET NEEDS --max=18 AND THE DEFAULT IS 16. `hand` is declared first and is never trimmed; `reading` is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default 16 the 6 x 3 sheet renders as 6 x 2 - deposit and pass only. That would delete `grain` entirely, and `grain` is where BOTH designed nulls live and where the whole pre-registered prediction table was computed. A sheet captured at 16 would look complete, would publish twelve honest frames, and would have nothing in it that could be checked against this registry.",
+				"placements": 0
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"motion_primitive",
+					"marching_cubes_sculpt_vr",
+					"mc_sculpt_vr",
+					"sculpt_one",
+					"maze_generation"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant is the SAME body, because the body is the BED: a 0.90 x 0.90 m slab 0.024 thick, four 0.030 m corner posts 0.460 m tall and four top rails, axis-aligned and drawn before either axis is consulted. The drawn figure never exceeds x,z +-0.384 or y 0.408, so the world box is 0.900 x 0.460 x 0.900 in all eighteen cells and one grid cell holds it. Nothing is rotated to face the camera: a yawed bed would grow the footprint to 1.26 m and would show the sweep arc end-on, which is the exact framing mistake mc_sculpt_vr measured and corrected in its own sweep table. layout=ladder stands all six hands in a row at 1.10 m pitch (about 6.6 m wide) and is a design view, not a map placement.",
+				"measured_footprint_cells": 1
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.46,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.23,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.9,
+				"source": "computed_from_geometry from the script's own constants; no Godot was run. The box is the BED and nothing else: the slab spans +-0.45 in x and z, the posts run y 0 to 0.460, and the drawn figure's own extent runs from 0.491 m across at reading=grain to 0.768 m at deposit/spatter - a factor of 1.65 - which is why the bed exists and why the AABB is identical in all eighteen variants by construction. The tallest thing the figure ever builds is stack's fused column at y 0.408, which is 52 mm under the posts."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			]
+		}
+	}
+}

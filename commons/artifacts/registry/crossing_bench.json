@@ -1,0 +1,210 @@
+{
+	"artifacts": {
+		"crossing_bench": {
+			"name": "Crossing Bench",
+			"lookup_name": "crossing_bench",
+			"scene": "res://commons/artifacts/crossing_bench/crossing_bench.tscn",
+			"class_name": "CrossingBench",
+			"category": "waves",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "Two artifacts in this corpus own an axis called `crossing` and they are not asking the same question. sine_space and sine_space_explanation ask how two sine directions MEET - product, sum, radial, single. fluency_seam asks how far past the perception threshold a seam has been dragged - smooth, twice, spread, singular, lattice. This bench puts both vocabularies on one axis over one pair of fixed waves, A(x) = sin(6*PI*x) and B(z) = cos(6*PI*z), which are identical in all twenty-one cells so the only thing that ever changes is what was done with them. Seven values in two classes: four OPERATIONS on the waves and three RESULTS done to the answer afterwards. Three readings of each: `field` the combined surface as a real 72 x 72 triangle mesh; `parts` the two operands drawn separately on the two near edges with the middle empty and each one marked consumed, discarded or never asked for; `zero` the nodal set {|h| <= 0.20} as standing fins found by one rule at 96 x 96, which is where multiplying and adding differ absolutely and where quantising stops being cosmetic. Every variant stands in the same 0.96 x 1.00 x 0.96 m cage of plate, four pins and four rails, and the apron rails at y = 0.56 ARE the zero level, drawn as furniture in every cell. Nothing animates, nothing is random, nothing is printed.",
+			"tags": [
+				"waves",
+				"interference",
+				"superposition",
+				"nodal_set",
+				"height_field",
+				"sine",
+				"quantisation",
+				"compression",
+				"fabrication",
+				"homonym",
+				"synthesis"
+			],
+			"dev_themes": [
+				"waves",
+				"synthesis",
+				"one word, two questions",
+				"the nodal set is where the operation is legible"
+			],
+			"interactions": [
+				"stand at reading=zero and walk crossing from product to sum: both rulings are straight lines, both cover about a third of the field, and one is parallel to the axes while the other is at 45 degrees - the difference is orientation, not quantity",
+				"put crossing=radial under reading=zero and count the families: concentric circles that never cross, because radial deleted the second wave and made the argument a distance",
+				"put crossing=lattice under reading=zero and look for a curve: there is none. Twenty-five of the eighty-one cells are exactly zero, so the nodal set has AREA - a quarter of a square metre of it",
+				"walk reading across product, sum and lattice at reading=parts: three tiles, one picture, because the ingredients never changed and the operation is not an ingredient",
+				"find the forgery at crossing=singular: one closed loop in the nodal set that belongs to neither family, 0.0098 m2 of new band against 0.2686 m2 that was already there",
+				"put single beside smooth in any reading but parts: the same picture, arrived at from two different vocabularies, which is the only place the two of them agree"
+			],
+			"capacity": "SEE that `crossing` names two different questions in this corpus - what you did to two waves, and how much of the answer has been put on the table - and that the nodal set is the instrument that tells them apart, because a product's zeros and a sum's zeros are both straight rulings at different angles, a radial field's are circles that never meet, and a compressed field's are not curves at all",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sine_space",
+					"sine_space_explanation",
+					"fluency_seam",
+					"additive_wave_demo",
+					"wave_propagation_3d",
+					"chladni_plate"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every one-layout variant is the SAME body, because the body is the CAGE: a 0.96 x 0.96 m plate, four 0.032 m corner pins 1.00 m tall, four top rails and a 0.024 m apron square at y = 0.56, all axis-aligned and all drawn before either axis is consulted. The field inside spans x,z +-0.45 and y 0.43 to 0.69; the `parts` shelf reaches y 0.92 at the fabricated hump and the `zero` fins reach 0.67. Nothing ever leaves the cage, so the world box is 0.96 x 1.00 x 0.96 in all twenty-one cells and one grid cell holds it. Nothing is rotated to face the camera. layout=row stands all seven crossings in a line at 1.15 m pitch (about 8.0 m wide) and is a design view, not a map placement.",
+				"grid_cells_note": "1 x 1 with two cells of approach in front; the reading is downward onto a 0.90 m field at 0.56 m, so a player wants to stand over it rather than beside it."
+			},
+			"measurements": {
+				"aabb_size": [
+					0.96,
+					1.0,
+					0.96
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"source": "computed_from_geometry in a Python replica built from the same constants; no Godot was run. The box is the CAGE and nothing else: the plate spans +-0.48 in x and z and the pins run y 0 to 1.00. The FIGURE inside varies from 0.90 x 0.26 x 0.90 (`field`, every crossing) to 0.90 x 0.11 x 0.90 (`zero`) to 0.95 x 0.54 x 0.95 (`parts` at singular), which is exactly why the cage exists and why the AABB is identical in all twenty-one variants by construction."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"framing": 0.55,
+				"sources": [
+					"sine_space",
+					"sine_space_explanation",
+					"fluency_seam"
+				],
+				"axes": {
+				 "crossing": [
+				  "product",
+				  "sum",
+				  "radial",
+				  "single",
+				  "smooth",
+				  "lattice",
+				  "singular"
+				 ],
+				 "reading": [
+				  "field",
+				  "parts",
+				  "zero"
+				 ]
+				},
+				"default": "crossing=product, reading=field. product is the default because it is the shipped default of BOTH sine wave twins, byte for byte - sine_space.gd:20 and sine_space_explanation.gd:54 both declare `crossing: String = \"product\"` and both inline a product in the branch the default reaches. field is the default because it is the only reading that shows the thing the axis operates on; parts and zero are both derived views of it. NOTE WHAT THE DEFAULT COSTS: it is also one half of the closest pair in the sheet (product against singular), so the tile every other tile is compared against is the tile with the least to distinguish it from its nearest neighbour. That is deliberate and it is stated rather than dodged - the forgery is supposed to be hard to see next to the thing it forges.",
+				"note": "WHAT THE VALUES MEAN, WHERE EACH WORD CAME FROM, AND WHICH ARE OPERATIONS AND WHICH ARE RESULTS. THE FAMILY FIRST, AND IT IS NOT THE FAMILY THE BRIEF DESCRIBED. Three artifacts declare an axis spelled `crossing`. Two of them are the sine wave twins - sine_space (res://algorithms/wavefunctions/sine_space/sine_space.tscn, script SineSpace.gd) and sine_space_explanation (res://commons/artifacts/sine_space_explanation/, its own script). THEY ARE NOT ONE SCENE UNDER TWO NAMES. Two directories, two .tscn files, two scripts, two renderers - a 625-instance MultiMesh of spheres you stand on, against a SurfaceTool display with Label3D captions you look at - and two different formulas (see `declines`). The corpus's one-scene-many-names pattern has been found five times; this is not the sixth. What they do share is the axis declaration character for character: `@export_enum(\"product\", \"sum\", \"radial\", \"single\") var crossing`. THE THIRD MEMBER IS A HOMONYM, and this is the correction the brief asked for. fluency_seam (commons/interfaces/foundations/fluency_seam.gd:27) declares `crossing` too, and its own header says what it means: 'HOW FAR PAST THE THRESHOLD THE SEAM IS DRAGGED'. Not how two waves meet. How much of a machine's variance has been put on the table beside its confident answer - smooth is the shipped calm, twice is the same question asked again with the disagreements barred, spread is seven runs fanned, singular is a formatted citation that does not exist, lattice is the compression grid behind the plate. The brief proposed that one vocabulary names the OPERATION and the other names the RESULT you see. The code says the second one names neither: it names a distance into disclosure. So this bench does the one honest thing left - it takes fluency_seam's words as a request (show me the answer at this much disclosure) and answers each of them in the medium the first vocabulary works in. CROSSING, SEVEN VALUES, IN TWO CLASSES, AND THE CLASS IS THE ARGUMENT. FOUR OPERATIONS, all four sine_space's words in sine_space's spelling. product = A(x)*B(z), MULTIPLY. A crest survives only where both factors crest, so either factor's zero line cuts the whole surface flat: an egg-crate, and a nodal ruling parallel to the axes at 1/6 m spacing, eleven lines, 9.9 m of it. sum = 0.5*(A(x) + B(z)), SUPERPOSE, which is what two waves meeting in a medium actually does. THE BRIEF SAID A SUM'S ZERO SET IS A FAMILY OF CURVES AND IT IS NOT. sin(u) = -cos(v) solves as u = v - PI/2 + 2n*PI or u = 3PI/2 - v + 2n*PI, both LINEAR: two families of straight diagonals at +-45 degrees, spacing 0.2357 m, ten lines, 6.9 m. Both operations rule the plane with straight lines and the difference is ORIENTATION, not kind. radial = sin(K*sqrt(x*x + z*z)). READ THE CODE BEFORE BELIEVING THE NAME - this is the thing the brief asked to have checked and the answer changes the census. It does not combine the two waves; it DELETES the second one and replaces the first one's argument with a Euclidean distance. One sine, one scalar argument, and x and z stop being independent terms at all. It is a change of variable that makes crossing impossible, not a fourth way of crossing, and its nodal set proves it: concentric circles at r = 1/6, 1/3, 1/2 that never meet, plus an isolated touching zero at the origin where sin(K*r) vanishes without changing sign. single = A(x) alone, the z term withheld: one family of five parallel lines, no crossings anywhere. So the number of FAMILIES in the nodal set is the arity of the operation - two for product, two for sum, one for radial, one for single - and two of sine_space's four values are not crossings at all. THREE RESULTS, all three fluency_seam's words, and none of them is an operation on two waves. smooth = fluency_seam's 'NOT CROSSED ... what you are sold. Perfectly calm.' Built as the uncrossed field, which is `single`'s field EXACTLY, to the byte, in `field` and in `zero`. The two vocabularies name one picture here and nowhere else and that coincidence is registered as a designed null. In `parts` they part company, because sine_space's `single` knows there is a second wave and withholds it (drawn hollow, in grey - given and discarded) while fluency_seam's `smooth` never admits a second run exists and gets its source's own empty ruled bracket instead. lattice = fluency_seam's 'THE SUBSTRATE ... a coarse cell mesh with the answer snapped to it.' Built as the product SNAPPED in both domain and range: 9 x 9 cells of 0.10 m, five height levels at h -> round(2h)/2. It is a compression applied to a crossing, not a crossing, and `zero` is where that stops being a style: the cell census across the five levels is 10 / 18 / 25 / 18 / 10, so TWENTY-FIVE OF EIGHTY-ONE CELLS ARE EXACTLY ZERO and the nodal set is 0.25 m2 of AREA rather than a curve. singular = fluency_seam's 'THE ONCE-OCCURRING THING ... formatted, confident, sealed, false.' Built as the product plus one localised raised-cosine bump, and every number in it is derived rather than dialled: centred on a product minimum where A*B = -1 exactly, radius PI/(2K) = 1/12 m which is exactly half a product cell, so the profile reaches zero height AND zero slope at the cell wall and cannot move a single existing nodal line; height 2.0, which carries the centre from -1 to exactly +1.0, the field's own maximum under every other value, so the forgery is precisely as tall as the tallest honest crest and no clamp is ever reached. Because R = PI/(2K), the loop it opens has a closed form: the product's profile out of the minimum is -cos(K*d) and the bump's is 2*cos^2(K*d), so they cancel at cos(K*d) = 1/2, d = 2R/3 = 1/18 m. A circle of radius 0.0556 m, to within 4 percent - the product's curvature is 4 percent tighter on the diagonals than on the axes. That closed loop belongs to neither family and it is the whole visible difference: 0.0098 m2 of new band against 0.2686 m2 already standing, 3.6 percent. READING, THREE VALUES, AND IT IS THIS SYNTHESIS'S OWN AXIS. No source declares anything like it - sine_space carries `manifold`, sine_space_explanation carries only `crossing`, fluency_seam carries only `crossing`. `reading` is SYNTHESIS-INTRODUCED, which is a weaker warrant than a derived axis and is recorded as such rather than dressed up. field = the combined surface, y = 0.56 + 0.13*h(x,z), a real 72 x 72 triangle mesh flat-shaded per quad (which is exact for lattice's terraces) and coloured with sine_space_explanation's own low/mid/high ramp unchanged. parts = the two source waves drawn separately as profile curtains on the two edges nearest the camera, forming an open V with the middle empty, each marked with what the crossing did to it: solid and lit = consumed, hollow outline in grey = given and discarded, empty ruled bracket = never asked for. NO RESULT IS SHOWN HERE, deliberately - it is the ingredient shelf, which is what makes it the place where the axis is mostly a null. zero = the nodal set, {|h| <= 0.20}, as fins 0.11 m tall standing on a dark deck, found by ONE rule sampled at 96 x 96 and run-length merged, never by seven special cases. The fins stand UP rather than lying flat because the capture pitches only 15 degrees down and a ruling drawn flat on a horizontal plane is compressed to a quarter of itself before anyone can read it. THE DRAWN AREAS, since a nodal set is thin and a hairline falls under the critic's floor: product 0.2686 m2, sum 0.2593, singular 0.2783, lattice 0.2468, single and smooth 0.1012, radial 0.0963, all of a 0.81 m2 field, i.e. 12 to 34 percent of the field carrying 0.11 m of standing wall. Measured subject share in the replica runs 45 to 52 percent of the cropped frame in all three readings, so no tile is anywhere near the blank bar. THE THESIS SOMEONE COULD DISAGREE WITH: `crossing` is a homonym, and the nodal set is the instrument that separates its two senses - because what an operation does to two waves is legible in the SHAPE and COUNT of the zero families, while what a disclosure policy does to an answer is legible only in whether the zero set is a curve at all. The disagreement available, and it is a fair one: fluency_seam's five words were written about language models and a plate of text, and transposing them onto a height field is an analogy the source itself flags as an analogy ('MARKED AS ANALOGY, NOT RIGOROUS', gd:51). If you think the transposition is a pun, then three of these seven values are decoration and the honest artifact is four values wide. The cell where holding the thesis costs something is `parts`, where product, sum and lattice render THE SAME FRAME to the byte - if the three vocabulary classes are real, that null is the proof that a compression is not an ingredient; if they are not, it is three wasted tiles.",
+				"predicted_degeneracy": {
+					"pair": "product against singular, in the zero reading",
+					"percent": 0.35,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry rebuilt in Python from the same constants (same K, same A and B, same 72 x 72 field, same 96 x 96 nodal rule and epsilon, same cage), projected through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.55 on the union AABB, which IS the cage), z-buffered with one directional light and flat shading, then run through artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's own corner background, grey, resize 160 x 160, mean of the hottest 5 percent. THE CONTEXT IS THE zero READING and the ranking is computed inside it: excluding the designed null, the twenty ranked pairs in zero run 0.35 (product-singular), then 12.83, 12.84, 12.84, 12.90, 12.98, 12.98, 13.49, 13.49, 13.82, 13.82, 18.57, 18.65, 18.75, 20.58, 20.58, 20.85, 24.14, 24.33, 24.78. The closest pair is thirty-seven times closer than the second closest, which is the finding rather than a rounding. WHY THAT PAIR: singular is product plus a bump that is zero in height AND slope at its own rim, so nothing outside a 0.167 m disc can differ, and inside that disc the only new nodal geometry is one closed circle of radius 1/18 m - 0.349 m of ruling, 0.0098 m2 of band, 3.6 percent of the 0.2686 m2 the product already had standing. At framing 0.55 the crop is about 1.34 x 1.31 m resized to 160 x 160, so that loop is roughly 90 of 25,600 pixels; the hottest 5 percent is 1,280 pixels, so at most 7 percent of the focus window can have changed at all, and the loop's contrast against fins that are already the same colour caps the rest. FULL PREDICTED SHEET, focus percent, per reading. zero: as listed above, plus the null at 0.00. field: 2.72 (product-singular), 19.22, 19.54, 19.78, 19.85, 22.06, 22.78, 22.78, 24.33, 24.33, 24.49, 24.49, 24.87, 25.03, 25.03, 26.15, 26.15, 26.19, 26.60, 26.67, plus the null at 0.00. parts: three nulls at 0.00, then 7.30, 7.30, 7.30, 10.40, 10.40, 10.40, 16.37, 16.80, 19.22, 21.24, 21.24, 21.24, 21.48, 21.48, 21.48, 21.90, 21.90, 23.23. Axis means excluding the nulls: about 17.0 percent focus in zero, 22.5 in field, 16.6 in parts. THE PREDICTION IS A FLOOR AND THIS ONE IS A WEAK FLOOR, WHICH IS ITSELF THE RESULT. 0.35 percent sits UNDER the 0.5 percent bar this corpus uses for render noise, so on its own it cannot tell a working forgery from a broken one, and pretending otherwise would be the fault this whole programme exists to catch. THE GATE IS THEREFORE THE COMPANION PAIR, not this one: the same two values in `parts` must come back near 7.30 percent, because there the fabricated term is a whole standing hump on the ingredient shelf. If parts also reads near zero, the bump is not building and nothing in the singular column can be believed. If parts reads 7 and zero reads 0.3, the forgery is real and it is two orders below every honest difference in its own reading, which is exactly what fluency_seam claims about seams. AND IF THE SWEEP COMES BACK BELOW 0.35 ON THE NAMED PAIR, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back to the default and prints identical tiles; (b) _rejects.json - both axes are String enums and Object.set() on a typed property of the wrong type is refused in SILENCE; (c) whether the sheet was captured with --max=21, because at build_dna_gallery's default cap of 9 the 7 x 3 cross product is trimmed from the tail and `reading` collapses to [field] alone, which deletes all three parts nulls and the entire thesis reading. Every prior prediction in this corpus under-read by 1.5x to 6.7x - the replica has one light, flat shading, no shadows, no AO, no antialiasing and no emission bloom - so 0.5 to 2.3 percent on the named pair would be an ordinary outcome and would not falsify anything.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"crossing": "product",
+							"reading": "parts"
+						},
+						"b": {
+							"crossing": "sum",
+							"reading": "parts"
+						},
+						"under_percent": 0.5,
+						"why": "IDENTICAL BY CONSTRUCTION AND IT IS THE THESIS, NOT A SPARE CHECK. `parts` draws the two source operands and nothing else, and _operand_state() is the only place it branches. product and sum consume both operands, so the branch returns lit-lit for both and the two builds are the same geometry with the same materials. THE POINT BEING MADE: the operation is not an ingredient. You cannot tell from the shelf whether the cook is going to multiply or add, and every difference the other two readings show between these two values is manufactured entirely by the operation. Predicted 0.00 percent focus / 0.00 percent frame; anything above 0.5 percent is render noise and anything above 2 percent means `parts` is reading the crossing somewhere it should not."
+					},
+					{
+						"a": {
+							"crossing": "product",
+							"reading": "parts"
+						},
+						"b": {
+							"crossing": "lattice",
+							"reading": "parts"
+						},
+						"under_percent": 0.5,
+						"why": "The same null and a sharper claim. lattice is a compression applied to the ANSWER - 9 x 9 cells, five levels - and a compression has no operands of its own, so the shelf is unchanged. This null is the registry's evidence that `lattice` belongs in the RESULT class rather than the OPERATION class, and it is falsifiable: if lattice's shelf differed from product's, the value would be doing something to the waves and the classification in the note would be wrong."
+					},
+					{
+						"a": {
+							"crossing": "sum",
+							"reading": "parts"
+						},
+						"b": {
+							"crossing": "lattice",
+							"reading": "parts"
+						},
+						"under_percent": 0.5,
+						"why": "The third pair, and the one that closes the triangle. All three must be 0.00 together; two zeros and one non-zero is arithmetically impossible for identical images and would be a fact about the harness rather than the artifact. Note what is deliberately NOT in this set: singular's shelf is NOT a null against these three, because a fabricated ingredient has to appear on the ingredient shelf or the reading is lying - it carries a third curtain the other six do not, and it is predicted at 7.30 percent."
+					},
+					{
+						"a": {
+							"crossing": "single",
+							"reading": "field"
+						},
+						"b": {
+							"crossing": "smooth",
+							"reading": "field"
+						},
+						"under_percent": 0.5,
+						"why": "THE CROSS-VOCABULARY NULL, and it is the one worth the whole registration. `single` is sine_space's word for one wave with the z term withheld; `smooth` is fluency_seam's word for the shipped, uncrossed, perfectly calm condition. They come from two different artifacts asking two different questions and they name THE SAME FIELD - _h() returns _op_a(x) for both, from one shared branch, so the meshes are identical to the byte. The two vocabularies are a homonym everywhere except at zero disclosure and zero crossing, where they coincide exactly. Predicted 0.00 / 0.00."
+					},
+					{
+						"a": {
+							"crossing": "single",
+							"reading": "zero"
+						},
+						"b": {
+							"crossing": "smooth",
+							"reading": "zero"
+						},
+						"under_percent": 0.5,
+						"why": "The same coincidence seen through the other derived reading, and registered separately because it must hold in BOTH or the shared branch is not shared. If field is null and zero is not, something outside _h() is reading the crossing value - which would mean the nodal rule has a per-value special case in it, the one thing the `zero` reading is built to avoid. Note that this pair is deliberately NOT a null in `parts`, where it is predicted at 16.80 percent: there the two words separate, because withholding a wave and never asking for one look different on a shelf."
+					}
+				],
+				"designed_nulls_why": "Five nulls in two groups, and they are two different arguments rather than one repeated. The parts triangle (product, sum, lattice) says the operands are innocent: nothing you can do to two waves, and nothing you can do to their answer, shows up in the ingredients. The single/smooth pair says the two vocabularies touch at exactly one point, the point where nothing has been done, and that they touch there is the only evidence in the sheet that the homonym is not merely a collision of spelling. The tempting sixth - product against singular in `parts` - is deliberately NOT a null and is registered instead as the predicted degeneracy in `zero`, because a fabricated term MUST appear on the ingredient shelf; a forgery that is invisible everywhere is not a claim, it is an unbuilt value. If any of the five zeros comes back above 2 percent, nothing else in this sheet can be believed.",
+				"fixture": {
+					"layout": "one"
+				},
+				"fixture_why": "The bench can stand all seven crossings in a row (layout=row, 1.15 m pitch, about 8.0 m wide) but the SWEEP must see one at a time: capture_config_sweep unions the AABB across a spec's variants, so a seven-wide row in the same spec frames every single cell against eight metres and photographs a 0.90 m field as a smear. layout is an export and not an axis, and it ships at `one`, so the fixture is a belt over braces. WHAT IS NOT FIXTURED, and why nothing needs to be: there is no time knob and no random one here. The whole figure is built synchronously inside _ready from arithmetic on two sines and one bump; there is no _process, no Timer, no randf and no noise anywhere in the file, so the frame is complete at frame one and two builds of one cell are the same mesh. That matters because ALL THREE SOURCES ARE LIVE and two of them cannot be photographed in a fixed state at all: sine_space runs a _process that rewrites 625 MultiMesh transforms every frame from frequency = 1.0 + sin(time*0.3)*0.5, amplitude = 1.5 + cos(time*0.2)*0.8 and phase = time*2.0, so its surface has no still; sine_space_explanation has an `animate` export that ships false, which is the only reason it is photographable; fluency_seam is static. A synthesis that inherited any of the first one's clocks would have needed three fixtures before it could be shot once.",
+				"kin": "sine_space_explanation is the nearest kin and the reason this artifact is not a duplicate of it. It is the same two waves on a 1.0 m display with a formula plate that rewrites itself per value ('y = sin(x)*cos(z)', 'y = 1/2(sin(x) + cos(z))', 'y = sin(sqrt(x^2+z^2))', 'y = sin(x)') and a topology caption underneath. But it shows only the surface: it has no reading of the operands, no reading of the nodal set, and no vocabulary from anywhere else. Its own @identity names the pair it belongs to - 'contrasts with sine_space (explanation vs immersion)' - and neither twin has ever been put beside fluency_seam, which is in a different registry file (foundations.json), a different category (philosophy) and a different sequence entirely. A room holding sine_space_explanation at crossing=sum beside this bench at crossing=sum/field is saying the same sentence twice; a room holding it beside crossing=lattice/zero is saying the sentence and then asking what a compressed answer's uncertainty looks like. fluency_seam is the other kin and the harder one: it is a plate of text about language models, built in galton_friction's form (the honest thing beside the cheap thing), and its relationship to this bench is that this bench takes its five words at their word. ON THE MAP SIDE both sine twins live in the wavefunctions material and the additive_wave_demo / wave_propagation_3d / chladni_plate neighbourhood already teaches superposition; what none of those maps contains is a nodal set built as an object you can walk round, which is what `reading=zero` is. On the value side: four of the seven crossing words are sine_space's in its spelling and its order, three are fluency_seam's in its spelling; `reading` is this artifact's own and is declared as such.",
+				"declines": [
+					"THE BRIEF'S CENTRAL CLAIM ABOUT THE FAMILY, corrected from the code. The brief said sine_space and sine_space_explanation are 'very likely ONE scene under two names' and that this would be the seventh such family in the programme. They are not. sine_space resolves to res://algorithms/wavefunctions/sine_space/sine_space.tscn carrying SineSpace.gd - a scene with its own Camera3D, DirectionalLight3D, four CSG control columns and a 625-instance MultiMeshInstance3D built in _ready and rewritten every _process. sine_space_explanation resolves to res://commons/artifacts/sine_space_explanation/sine_space_explanation.tscn carrying its own script - a bare Node3D root that builds a SurfaceTool surface, a wireframe overlay, a base plate and five Label3D captions. Different files, different renderers, different node counts, different apply_grid_config implementations (one guards on change and re-points a topology, the other runs a generic `for key in config_data` setter and then re-reads the axis). The shared thing is the DECLARATION, not the scene.",
+					"THE TWINS DISAGREE ABOUT THE PRODUCT AND THIS BENCH HAD TO PICK ONE. SineSpace.gd:190 returns sin(f*a + phase) * sin(f*b + phase*k) - sine times SINE. sine_space_explanation.gd:237 returns amplitude * sin(a) * cos(b) - sine times COSINE, and its own plate prints 'y = sin(x)*cos(z)'. The two differ by exactly PI/2 on the second operand, and each is internally consistent (both use the same second operand in their sum branch too). This bench takes the EXPLANATION twin's pair, A = sin(Kx) and B = cos(Kz), for two reasons that are about photographability rather than taste: sine_space's phase is time*2.0 and its frequency and amplitude are functions of time, so its surface has no shipped still state to be faithful to, while the explanation twin ships animate=false and phase=0 and therefore has one; and the explanation twin is the one whose caption asserts the formula in writing. The disagreement is recorded here rather than smoothed over, and it does not touch the thesis: both zero sets are two families of straight lines either way, and the choice only slides the z family by a quarter period.",
+					"`twice` and `spread`, two of fluency_seam's five. They are declined for different reasons and both are honest declines. `twice` is that artifact's own DEFAULT and its whole form - one question asked again, mounted beside the first, with a lit bar on every line where the two answers disagree. There is no second run here to mount: the two waves are fixed constants, the build is deterministic, and asking the same question again returns the identical mesh. Transposing `twice` would have meant inventing a second sampling that differs from the first, i.e. manufacturing the disagreement the value is supposed to reveal, which is the science_screen fault of declaring values the code cannot honestly reach. `spread` is seven runs fanned in depth with their heights varying - a VARIANCE, and this artifact has none, because it has no randomness at all. It could have been faked as seven phase offsets fanned in depth, and that was rejected on measurement grounds: seven surfaces stacked in z occlude each other at yaw 0.62 and the tile would have been a picture of the front one. `twice` is the first thing to add if a second, stochastic wave source is ever introduced.",
+					"fluency_seam's `crossing` DEFAULT of `twice`. Both sine twins default to `product`, fluency_seam defaults to `twice`, and since `twice` is declined the default follows the two-thirds majority and the shipped formula. Recorded because a synthesis quietly changing a member's default is how a family's shipped behaviour drifts.",
+					"sine_space's `manifold` axis (cycle | plane | cylinder | sphere | torus | mobius) as a third axis. It is the closest live axis in the family and it is a different question: manifold asks which coordinate system the sine is wrapped onto, which presupposes the wave and says nothing about how two of them meet. A bench that swept both would be answering two questions in one sheet and could not attribute either. It is also the axis whose `cycle` value runs a 5-second timer, so half of it is unphotographable by construction.",
+					"Amplitude, frequency, phase, wave speed, grid resolution and every colour. sine_space_explanation exports all six as free parameters and this bench pins them, because the seven crossing values have to differ in the operation and in nothing else. The one place a pinned value moved from its source is the frequency: 3.0 in the explanation twin's own parametrisation against its shipped 1.5, doubled because at 1.5 the entire nodal set is five lines and `reading=zero` has almost nothing to draw. Both twins carry frequency as a free export that no placement pins, so this sits inside the artifact's own range rather than changing its formula, and it is stated here rather than absorbed.",
+					"Animation of any kind, and it is a stronger refusal here than usual. sine_space's whole surface is a function of time; a still of it is a still of one arbitrary phase. Every one of the four sine_space values is time-domain in its shipped form and a still cannot tell 0.32 from 0.9 - which is the corpus's standing rule about rate, duration and decay being invisible to a photograph. Pinning phase to 0 is what makes the seven values comparable at all.",
+					"Standing on it. sine_space's stated desire is 'stand on a living floor that undulates', and a 0.90 m field at 0.56 m is a table, not a floor. That is a good artifact and it is not this one: a floor cannot be photographed from above with its own nodal set standing on it, and this bench exists to put the seven values in one frame where they can be compared.",
+					"Drawing the nodal set as thin curves. The true zero set has measure zero, and a hairline ruling falls under the critic's blank floor and reads as an unbuilt frame. The band {|h| <= 0.20} is drawn instead: 21.4 mm wide where the slope is steepest, 27 mm on average for product and 38 mm for sum, wider still at every product crossing where BOTH factors vanish and the band swells into a knot. That widening is not a fudge, it is information - the band's width is inversely the field's slope through zero - and the one rule that produces it is also the one rule that lets `lattice` come out as an area instead of a curve without a special case."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=crossing-bench --tokens=crossing_bench --max=21",
+				"sweep_note": "THE FULL SHEET NEEDS --max=21. `crossing` is declared first and is never trimmed; `reading` is second, and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 7 x 3 sheet renders as 7 x 1 = field only. That cap would delete ALL THREE parts nulls, both zero-reading nulls, the entire thesis reading, and the pre-registered pair's own context - leaving a sheet whose closest pair (product against singular in field, 2.72 percent) is not the pair this registry predicted and could not falsify it either way.",
+				"placements": 0
+			}
+		}
+	}
+}
