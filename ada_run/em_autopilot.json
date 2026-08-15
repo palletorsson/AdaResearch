@@ -1,11 +1,28 @@
 {
  "cells_unlearned": 6,
  "done": true,
- "elapsed_s": 176.066666666699,
- "goal_z": 585.0,
- "museums_target": 6,
- "ok": true,
- "segments_built": 7,
- "x": 9.55298614501953,
- "z": 585.030090332031
+ "elapsed_s": 33.1666666666661,
+ "frontier_z": 44,
+ "goal_z": 102.0,
+ "museums_target": 3,
+ "ok": false,
+ "reason": "no_route",
+ "seams": [
+  [
+   0.0,
+   34.0
+  ],
+  [
+   34.0,
+   68.0
+  ],
+  [
+   68.0,
+   102.0
+  ]
+ ],
+ "segments_built": 3,
+ "stall_events": 14,
+ "x": 7.49890041351318,
+ "z": 44.6490669250488
 }
