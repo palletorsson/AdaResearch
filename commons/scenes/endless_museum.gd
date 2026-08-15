@@ -225,6 +225,11 @@ var _batch: Dictionary = {}        # material instance id -> {mat, boxes: [{p, s
 var _unit_box: BoxMesh = null
 var _edit_sel: int = -1
 var _edit_overrides: Array = []
+# WHERE the hand's rulings live. Defaults to the hand's file; TRIALS preset a
+# private path before add_child (the _plan_path pattern), so no gate can ever
+# read, write or delete a curator's saved work. Palle lost two sessions of
+# rulings on 08-15 to test_em_editor deleting this file at start.
+var _overrides_path: String = "res://ada_run/em_overrides.json"
 var _edit_dirty: bool = false
 var _edit_hud: Label = null
 var _edit_pal: Array = []
@@ -1811,7 +1816,7 @@ func _load_plan() -> void:
 	print("[em-plan] %d museum(s), %d chapter row(s) planned from %s"
 		% [_plan_db.size(), _plan_by_chapter.size(), _plan_path])
 	if _mod_has(_mod_editor, "load_file"):
-		_edit_overrides = _mod_editor.call("load_file")
+		_edit_overrides = _mod_editor.call("load_file", _overrides_path)
 		if not _edit_overrides.is_empty():
 			print("[em-edit] %d hand override(s) loaded" % _edit_overrides.size())
 
@@ -3634,8 +3639,8 @@ func _edit_handle_key(key: int) -> bool:
 			_edit_place_from_palette()
 		KEY_F5:
 			var ok := true
-			if _mod_editor.call("save", _edit_overrides):
-				print("[em-edit] %d override(s) saved" % _edit_overrides.size())
+			if _mod_editor.call("save", _edit_overrides, _overrides_path):
+				print("[em-edit] %d override(s) saved -> %s" % [_edit_overrides.size(), _overrides_path])
 			else:
 				ok = false
 			if not _edit_prop_rules.is_empty():
