@@ -43,7 +43,26 @@ def main() -> int:
         axis = next((a for a in axes if any(str(r["a"].get(a)) in (va,vb) for r in d["variants"])), axes[0] if axes else "")
         same = [r for r in d["variants"]
                 if [q for q in r["a"] if str(r["a"][q]) != str(r["b"].get(q))] == [axis]]
+        # DESIGNED NULLS ARE NOT IN THE RACE. A builder who registers "row vs ramp in the
+        # footprint reading is identical by construction" has said in advance that this pair
+        # will be the closest, and that the prediction is for the closest pair that is NOT a
+        # null. Ranking the prediction behind its own declared identities would score the
+        # builder as wrong for being right twice. So null pairs are removed before ranking and
+        # scored separately as HELD / BROKEN.
+        fx0 = ((e.get("dna") or {}).get("fixture") or {})
+        declared = (pd.get("designed_nulls") or []) + ((e.get("dna") or {}).get("designed_nulls") or [])
+        def _is_null(r):
+            for nd in declared:
+                a, b = nd.get("a") or {}, nd.get("b") or {}
+                ma = lambda side, want: all(str(side.get(k)) == str(v) for k, v in want.items() if k not in fx0)
+                if (ma(r["a"], a) and ma(r["b"], b)) or (ma(r["a"], b) and ma(r["b"], a)):
+                    return True
+            return False
+        removed = [r for r in same if _is_null(r)]
+        same = [r for r in same if not _is_null(r)]
         same.sort(key=lambda r: r["changed_pct"])
+        if removed:
+            print(f"{'':18}  ({len(removed)} designed-null pair(s) set aside before ranking)")
         idx = next((i for i,r in enumerate(same)
                     if {str(r["a"][axis]),str(r["b"][axis])} == {va,vb}), None)
         if idx is None:

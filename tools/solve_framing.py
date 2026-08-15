@@ -133,13 +133,22 @@ def main() -> int:
             print(f"{t:<44}{fw*100:>7.1f}%{fh*100:>7.1f}%{share:>7.2f}%{'—':>9}  "
                   f"nothing rendered at all — not a framing fault")
             continue
-        # the box grows as 1/f, and the taller dimension must also fit
+        # The box grows as 1/f, so a SMALLER framing brings the camera CLOSER. Both dimensions
+        # have to fit, which means solving each and taking the LARGER of the two framings —
+        # the one that keeps the wider dimension inside the frame. The first version took the
+        # smaller, i.e. framed for the narrower dimension and let the other overflow: it solved
+        # mounting_yard on its 19% width, put the camera at 0.25, and the 49%-tall pylon variant
+        # clipped off the top of the frame; the critic then reported two occupants as byte-
+        # identical (0.00%) because neither was in the picture. Wave 15 would have done the same
+        # to arrangement_yard's row (50% wide, solved on 16% height -> 240% of frame).
         f_w = PROBE_FRAMING * fw / target
         f_h = PROBE_FRAMING * fh / target
-        solved = round(max(min(f_w, f_h), MIN_FRAMING), 2)
+        solved = round(max(max(f_w, f_h), MIN_FRAMING), 2)
         note = ""
-        if f_h < f_w:
+        if f_h > f_w:
             note = "height-dominant, solved on H"
+        elif f_w > f_h:
+            note = "width-dominant, solved on W"
         if solved <= MIN_FRAMING:
             note = "clamped — runtime AABB is inflated, look for a far-flung mesh"
         print(f"{t:<44}{fw*100:>7.1f}%{fh*100:>7.1f}%{share:>7.2f}%{solved:>9.2f}  {note}")

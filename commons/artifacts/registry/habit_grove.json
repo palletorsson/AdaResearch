@@ -1,0 +1,61 @@
+{
+	"artifacts": {
+		"habit_grove": {
+			"scene": "res://commons/artifacts/habit_grove/habit_grove.tscn",
+			"category": "procedural",
+			"description": "One deterministic plant - branching_vine's rule F -> F[+F][-F]F to generation 4, 256 six-sided rods, fork half-angle 25.0, no randf - built under each of the family's four habits, which in all three members' code are ONE table of four numbers (0 / 30 / 90 / 137.5 degrees) and ONE mechanism: the plane of the next fork is rolled about the parent's axis by that angle once per descent. Rods coloured trunk to tip; a roll reading that draws the angle itself as an arc at every fork; a crown reading of tips only. Four names, one rule, one number.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			},
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"branching_vine",
+					"lsystem_tree",
+					"stochastic_tree_separated"
+				],
+				"axes": {
+					"habit": [
+						"planar",
+						"fanned",
+						"whorled",
+						"spiral"
+					],
+					"reading": [
+						"plant",
+						"roll",
+						"crown"
+					]
+				},
+				"default": "habit=planar, reading=plant. planar is all three members' default (branching_vine.gd:67, lsystem_tree.gd:39, example_8_7_stochastic_tree_separated_vr.gd:82 - three of three), and in every one of them it is the shipped flat drawing: the roll held at exactly 0.0 and SKIPPED rather than applied. Here too: roll_rad == 0.0 skips the rotation, so the planar plant is the turtle's untouched output, every fork in the XY plane facing the approach. plant is the whole body - the reading in which four rolls look like four species, which is what the argument is about. layout defaults to single and is not an axis.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. habit, four values, branching_vine.gd:73-78 verbatim, the table stochastic_tree PRELOADS out of that file (gd:91) and lsystem_tree carries character for character (gd:45-50) - degrees of ROLL of the fork plane about the parent's axis, applied once per descent (the `[` push in the two L-systems, vine gd:318-319 and tree gd:202-203; the recursive call in the stochastic tree, gd:281-285): planar = 0, every fork in the reference plane, the plant flat, the three members' shipped drawing; fanned = 30 per generation, first forks at 30 then 60, 90, 120, planes opening like a hand of cards over 120 degrees; whorled = 90 per generation, 90 / 180 = 0 / 270 = 90 / 0 - TWO planes alternating by generation, each perpendicular to its parent's, which is decussate (the mint family) and not a whorl; spiral = 137.5 per generation, the golden angle - 137.5 / 275 / 52.5 / 190, which as PLANES (a plane is itself again after 180) is 137.5 / 95 / 52.5 / 10, i.e. a fan of 42.5 per generation turning the other way from fanned. reading, three values: plant = every rod of generation 4 (256), coloured with lsystem_tree's trunk brown to tip green (gd:23-24) by depth, radius 10 mm at the trunk shrinking 0.76 per depth; roll = the same rods ghosted at alpha 0.22 plus, at all 85 fork nodes, the roll drawn as geometry - a spoke along the parent's plane, a spoke along the child's, and the arc between them about the parent's axis at 0.6x the child segment (37 mm on the trunk, 19 mm at the last forks), so at planar there is no arc and the fifteen trunk forks are fifteen single spokes pointing +X, and at whorled fifteen identical quarter-arcs stacked; crown = no branches, a bead (11 mm octahedron) at each of the 171 tips (the vine's 170 `]` leaves plus the trunk top) in the vine's leaf greens by depth (gd:341-342), hung on the bare trunk - where the plant ends up, without the mechanism. Rule F -> F[+F][-F]F is the vine's (gd:89-90); fork half-angle 25.0 is the vine's and the stochastic tree's (lsystem_tree 25.7); shortening 0.85 per push is NOT lsystem_tree's 0.72, which with this rule made a needle whose planes a raster could not separate. THE THESIS SOMEONE COULD DISAGREE WITH: a habit is one angle, and the angle is a roll per generation, not a divergence per node - the brief assumed whorled meant n per node around the stem and spiral one per node at the golden angle, and the code does neither: every fork is two children in one plane, the plane is restored on `]` so every fork on one axis is coplanar under every habit (no stem in this family carries a spiral), and because a fork is a plane the golden angle is 137.5 = -42.5 mod 180, so spiral is fanned in a mirror, 12.5 degrees wider. Two of the four names name arrangements the mechanism cannot make. The disagreement available: a name is a picture, not a mechanism, and if a viewer files the 90-degree plant under whorled the word is earned - the plant reading shows both sides. STANDPOINT: reference plane XY (normal +Z, the approach), roll right-handed about local up, exactly the members' convention (vine right=+X dir=UP rotated(dir, roll); tree the same; stochastic tree's plane_axis FORWARD rotated about UP), so from the sweep camera (yaw 0.62) a plane at azimuth phi shows at |cos(phi - 35.6)| of its width: first-fork planes at 81% (planar) / 99% (fanned) / 58% (whorled) / 22% (spiral). Spiral's biggest limbs point nearly at the camera; its deeper planes show at 50 / 96 / 91%, so it does not collapse, but it photographs narrowest (raster subject 1.2% of frame against planar's 2.3% at framing 1.0) and that is a fact about the standpoint first. probe_anamorphic before believing anything about spiral.",
+				"kin": "lsystem_editor.grammar (koch|sierpinski|dragon|plant|bush|fern|binary_tree) is the other axis the family could have taken and both L-system members declined it: this artifact holds the rule fixed and turns one number, and swapping the rule would make it a second editor. branching_coral.growth_form (staghorn|fan|table|whip|brain) is a habit under another name with five coral answers; declined for the same reason as stochastic_tree declined it - the answer here is one table of four angles, not a list of species. evidence (result|trace|longhand|axiom), the two L-system members' other axis, is not taken: it asks whether the derivation is on show, and this synthesis has only one derivation to show.",
+				"declines": "A phyllotaxis reading - one bead per node stepping around the stem - was the brief's suggestion and is DECLINED because the mechanism cannot produce it: siblings share a plane, the parent's frame is restored on `]`, and every fork on one axis is coplanar under every habit, so beads on the stem would show fifteen identical pairs whatever the roll and be a designed null on the whole habit axis. A per-node count (three, four children for `whorled`) was declined because no member has it; adding it would be a fifth artifact, not a synthesis. tropism, pruning, and settlement (stochastic_tree's other axis) are not photographable on a bench or are one member's private argument. randf: none, deliberately, so nothing needs a seed.",
+				"predicted_degeneracy": {
+					"pair": "planar against fanned, in the plant reading",
+					"percent": 40,
+					"arithmetic": "Enumerated over all 12 variants with a front-view raster of the planned geometry from the canonical standpoint (yaw 0.62, pitch -0.26, 760 px, framing 1.0, rods as lines of their true projected width, before any capture). planar's 256 rods lie in one plane the camera sees at 81% width; fanned's first-fork planes at 30 degrees face the camera at 99% and its deeper planes at 60 / 90 / 120 show at 91 / 58 / 10%, so its silhouette is a slightly wider, slightly fuller version of planar's with the same trunk (16 rods, 0.42% of frame, identical to the byte in every variant). Raster: planar-only pixels 0.54% of frame, fanned-only 0.63%, shared 1.75%, union 2.92% - differing pixels are 1.17% of frame and 40.1% of the pair's union subject. Registered at 40% of the pair's union subject, about 3.5% of frame once solve_framing brings the 0.99 m plant from 45% of frame height to 78% (framing 0.58, area x3). RUNNER-UP IS A TIE, 40.5%: planar against whorled in the plant reading (whorled's even-generation planes are back in planar's plane and its odd ones at 90 show at 58%; planar-only 0.71%, whorled-only 0.36%, shared 1.57%). The raster cannot separate 40.1 from 40.5; if whorled-against-planar comes back closer the mask overweighted the fanned limbs it saw face-on. Every pair involving spiral is 58-73% because spiral's largest limbs are 12 degrees from edge-on to this camera - the largest numbers on the axis are standpoint, not roll. The quietest pair overall is cross-reading and by design: spiral plant against spiral crown, 28% - an edge-on spiral is mostly trunk in both readings and the crown's beads sit where the plant's densest rods are. THIS IS A LOWER BOUND: a mask raster has no shading, so two rods that overlap in silhouette but differ in depth-colour count as shared here and as different in the render; the miss it cannot see pushes the number UP, not down. If planar against fanned comes back under about 25% something is being counted as background - look at whether the depth-4 rods (3.3 mm radius, about 2 px at framing 0.58) rendered at all.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all four habits in a row (layout = grove, 0.85 m pitch, about 3.4 m wide) but the SWEEP must see one habit at a time: capture_config_sweep unions the AABB across a spec's variants, so a four-wide row in the same spec frames every single plant against three and a half metres and photographs it as a speck. layout is an export and not an axis, and it ships at single so the fixture is a belt over braces.",
+				"framing": 0.59,
+				"framing_why": "SOLVED, NOT GUESSED, by tools/solve_framing.py. At framing 1.0 this artifact's subject bounding box filled 18.8% of frame width and 46.3% of its height, with a subject share of 2.56%. The visible frame is 2 * PAD * radius * framing metres wide, so the box grows as 1/framing; solving for a target of 78% of the smaller-headroom dimension gives 0.59. THE ARTIFACT WAS NEVER DARK, EMPTY OR MISSING A FIXTURE - the camera was between three and eight times too far away, and the near-zero subject share this token had on record was a fact about the standpoint rather than about the axis."
+			}
+		}
+	}
+}

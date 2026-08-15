@@ -1,0 +1,140 @@
+{
+	"artifacts": {
+		"postulate_bench": {
+			"name": "Postulate Bench",
+			"lookup_name": "postulate_bench",
+			"scene": "res://commons/artifacts/postulate_bench/postulate_bench.tscn",
+			"class_name": "PostulateBench",
+			"category": "geometry",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "compact",
+			"description": "One construction on three real surfaces. A base point P, a transversal geodesic T through it, two geodesics perpendicular to T 0.10 m apart, an equilateral geodesic triangle of circumradius 0.36 m whose corner angles are built as filled wedges, and an 8 x 8 net of geodesics launched 0.125 m apart - drawn on a sphere of R 0.50 (K = +4), a 1.0 m plate (K = 0) and the saddle y = x^2 - z^2 (K = -4 at P), one surface per variant. On the sphere the parallels meet at both poles and the corners open to 75 degrees each; on the plate they hold 0.10 for ever and the corners are 60; on the saddle they splay and the corners close to about 51. `euclid` is Euclid's own page - a flat 0.80 m sheet tangent at P carrying the flat construction - which lies on the plate, touches the ball at one point, and is cut by the saddle's ridge: the same diagram at all three curvatures, true on exactly one. Geodesics are RK4-integrated on the Monge patch (plate and saddle) and closed-form great circles on the sphere. Nothing animates, nothing is printed, nothing is random.",
+			"tags": [
+				"postulate",
+				"parallel_postulate",
+				"curvature",
+				"geodesic",
+				"non_euclidean",
+				"elliptic",
+				"hyperbolic",
+				"euclidean",
+				"synthesis",
+				"geometry"
+			],
+			"dev_themes": [
+				"geometry",
+				"non_euclidean",
+				"synthesis",
+				"the parallel postulate as a claim about a surface"
+			],
+			"interactions": [
+				"walk round the three curvatures at postulate=triangle: the same triangle, three angle sums, read off the wedges' area and not off a label",
+				"at postulate=parallels the two ribbons are 0.10 m apart where they cross T on every surface, and on only one of them do they stay so",
+				"at postulate=euclid hold Euclid's page against each surface: flush on the plate, touching the ball at one point, sliced by the saddle",
+				"at postulate=net count the cells: they shrink toward four points on the ball, hold on the plate, grow toward the rim on the saddle"
+			],
+			"capacity": "SEE that the fifth postulate is not a statement about lines but about the surface they are drawn on - the same construction, on three surfaces, is three geometries",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"elliptic_surface",
+					"hyperbolic_surface",
+					"riemann_sphere",
+					"angle_sum_triangle",
+					"curvature_slider",
+					"poincare_disk"
+				],
+				"preferred_zone": "teaching",
+				"footprint_source": "computed_from_geometry",
+				"footprint_note": "Every single-layout variant sits inside about 1.0 x 1.0 x 1.0 m: the ball is a 1.0 m sphere centred at y 0.5, the plate and saddle are 1.0 m square with P at y 0.5 (saddle y from 0.25 to 0.75), and Euclid's page adds at most 0.16 m in x/z on the sphere. layout=ladder stands the three surfaces in a row at 1.30 m pitch (about 3.6 m wide) and is a design view, not a map placement."
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 1.0,
+				"source": "computed_from_geometry for the DEFAULT variant (postulate=bare, curvature=sphere): a SphereMesh of R 0.50 at (0, 0.5, 0). Re-derived in a Python replica of the same constants; no Godot was run. Union over all 15 variants is 1.155 x 1.07 x 1.187 (min -0.52, -0.035, -0.527; max 0.634, 1.035, 0.66), the excess being Euclid's page tangent to the ball at FRONT_BEARING and the tube lift."
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"elliptic_surface",
+					"hyperbolic_surface",
+					"riemann_sphere"
+				],
+				"axes": {
+				 "postulate": [
+				  "bare",
+				  "parallels",
+				  "triangle",
+				  "net",
+				  "euclid"
+				 ],
+				 "curvature": [
+				  "sphere",
+				  "plane",
+				  "saddle"
+				 ]
+				},
+				"default": "postulate=bare, curvature=sphere. bare is the members' default 3 of 3 (elliptic_surface gd:37, hyperbolic_surface gd:44, riemann_sphere gd:44 all ship `bare`), and it means the same thing here: the surface alone, no argument drawn. sphere because two of the three members are positively curved (elliptic_surface's dome and riemann_sphere's ball) and because the ball is the one body of the three that has a front - the construction faces FRONT_BEARING, the sweep's own standpoint, so the still that solve_framing measures is the still the sheet is read from.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. postulate, five values, the family's list character for character and in its order (all three members: bare | parallels | triangle | net | euclid). bare = the surface alone, a ball / a plate / a saddle, no marks (all three members' bare). parallels = a transversal geodesic T through the base point P (the equator on the sphere; the line z = 0 on the plate and saddle, a plane of symmetry of the saddle and so a true geodesic) and the two geodesics perpendicular to T at 0.05 m either side of P, traced both ways to the rim - 0.10 m apart is the number all three members share (elliptic PARALLEL_GAP, hyperbolic RIBBON_HALF_GAP 0.05, riemann PARALLEL_GAP); on the sphere they are meridians and meet at both poles, marked with a junction ball as elliptic_surface marks its pole; on the plate they hold 0.10 for ever; on the saddle they splay. triangle = the equilateral geodesic triangle of circumradius 0.36 m centred on P (vertices at bearings 90 / 210 / 330 in the frame (e1 along T, e2 = n x e1), hyperbolic_surface's bearings), sides by hyperbolic_surface's shooting solve on the Monge patch or by great-circle slerp on the sphere, and at each corner a FILLED WEDGE of geodesic radius 0.13 m between the two sides - the members draw the corner as an arc at radius 0.05; here it is a sector so the angle is an area. Sums, computed from the built geometry: sphere 225.1 (three corners of 75.0), plate 180.0 (60.0), saddle 154.0 (about 51.3 each; the saddle's |K| falls off from 4 at P as 1/(1+4x^2+4z^2)^2, so its deficit is smaller than the sphere's excess). net = 8 geodesics perpendicular to T and 8 perpendicular to T' (the geodesic through P perpendicular to T), launched at arc offsets +-0.0625, +-0.1875, +-0.3125, +-0.4375 m from P along each - hyperbolic_surface's construction (equal ARC spacing, gd:284-325) rather than elliptic's and riemann's meridians-and-latitude-circles, because latitude circles are not geodesics and a net of geodesics is the one net that can be drawn identically on all three; on the sphere family A are meridians meeting at the poles and family B are great circles through the two equator points 90 degrees from P, so the cells collapse toward four points, each with a junction ball; on the plate an 8 x 8 grid; on the saddle the cells grow toward the rim. euclid = EUCLID'S PAGE: a 0.80 m translucent flat sheet tangent to the surface at P, carrying T as a straight rod, two straight rods 0.10 m apart, a straight-sided triangle of circumradius 0.36 m and three 60-degree wedges - the flat construction, as one rigid object at every curvature. HOW THIS DIFFERS FROM THE MEMBERS, AND WHY: in all three members `euclid` REMOVES THE CURVATURE and then draws parallels and triangle on the flat surface (elliptic gd:138-156 replaces the sphere with a flat disc; hyperbolic gd:369-376 sets h = 0 and runs the same RK4; riemann gd:143-145 builds no sphere and a 1.80 m plane). That meaning is not available to a value of `postulate` once flatness is its own axis - it would make three identical frames and put curvature inside the wrong knob - so `euclid` here is the page and not the surface. The members' euclid tile IS this artifact's (euclid, plane) cell: page flush on the plate, every rod on it a geodesic, sum 180. On the sphere the page touches the ball at P (it stands vertical at the ball's front) and floats off it everywhere else; on the saddle the page lies at the saddle point and the ridge comes up through it and swallows one corner. It is the same object three times and it is TRUE on exactly one of them - on the other two it is a false diagram of the surface it rests on. curvature, three values, named by the body: sphere = R 0.50 m, K = 1/R^2 = +4, elliptic_surface's colour, P on the equator at FRONT_BEARING (the sweep standpoint's bearing, pi/2 - 0.62), T the equator, e2 up the front meridian; plane = a 1.0 m plate, K = 0, P at its centre, T along +X; saddle = y = x^2 - z^2 on the same 1.0 m square, K = -4 at P (hyperbolic_surface's surface at twice its curvature, its integrator verbatim: geodesic equation of a Monge patch, RK4, unit-speed parameter directions so metres are metres on the surface), P at the saddle point, T along the ridge. THE THESIS SOMEONE COULD DISAGREE WITH: the parallel postulate is not a fact about lines but a claim about a surface - the same drawing on three surfaces is three geometries, and Euclid's page is the one that has to be held up against a surface to be true or false at all. The disagreement available: that curvature is a property of the embedding and not of the drawing, i.e. that the plate is the real case and the ball and saddle are pictures of it - the euclid tiles are where that quarrel is visible, because on the plate the page and the surface are indistinguishable and on the other two they are not.",
+				"predicted_degeneracy": {
+					"pair": "triangle against bare, on the saddle curvature",
+					"percent": 7.9,
+					"arithmetic": "Rasterised BEFORE ANY CAPTURE in the critic's own currency: the geometry built in Python from the same constants (same RK4, same shooting solve, same great circles), z-buffered through capture_config_sweep's camera (FOV 34, PAD 1.9, yaw 0.62, pitch -0.26, 760 x 760, framing 0.6 on the union AABB of all 15 variants), then artifact_dna_critic's pipeline unchanged - crop to the union of the two frames' subject boxes, neutralise each frame's corner background, grey, resize 160 x 160, mean of the hottest 5%. Closest pair on the postulate axis: triangle vs bare on the saddle, 7.92% focus / 0.40% frame. WHY THAT PAIR: the saddle's marks lie in the tangent plane at P, which the corpus camera sees at 15 degrees of pitch, so the triangle - three 36 mm ribbons of about 0.6 m and three 0.13 m wedges - is foreshortened four-fold against a 1.0 x 0.5 m body that fills the crop; its whole difference from bare is under 0.5% of frame. Runners-up: parallels vs bare on the saddle 8.99%, triangle vs bare on the plate 9.13%, triangle vs euclid on the plate 11.61%. Full predicted sheet, focus %, postulate pairs (bare|parallels|triangle|net|euclid) - sphere: b-p 22.4, b-t 19.6, b-n 24.6, b-e 27.1, p-t 25.5, p-n 27.3, p-e 24.6, t-n 24.8, t-e 24.5, n-e 23.7; plane: b-p 15.0, b-t 9.1, b-n 12.7, b-e 13.7, p-t 15.5, p-n 16.3, p-e 12.3, t-n 12.7, t-e 11.6, n-e 14.5; saddle: b-p 9.0, b-t 7.9, b-n 21.6, b-e 18.7, p-t 12.7, p-n 23.1, p-e 20.2, t-n 21.4, t-e 18.5, n-e 23.0. Curvature pairs (sphere-plane / sphere-saddle / plane-saddle): bare 42.6 / 39.5 / 36.9, parallels 42.0 / 38.8 / 36.6, triangle 42.3 / 39.1 / 36.9, net 40.4 / 37.1 / 35.2, euclid 31.0 / 32.4 / 36.9. Axis means: postulate 18.5% focus, curvature 37.9% focus. Nothing under the 6% twin bar; the minimum in the whole sheet is 7.92%. Subject share at framing 0.6: sphere about 15% of frame, saddle about 10%, plane about 5% - the plate is a horizontal sheet seen at 15 degrees, so its variants are the smallest subjects and its numbers the least trustworthy. THE PREDICTION IS A FLOOR: the replica has one light, flat shading, no shadows, AO or antialiasing, and every prior prediction in this corpus under-read by 1.5x to 6.7x. If the sweep comes back BELOW 7.9% on this pair, or if any postulate pair on the SPHERE reads under 15%, check the harness before the design: (a) tools/check_dna_declarations.py - a value the code cannot reach falls back and prints identical tiles; (b) _rejects.json - both axes are String enums and a numericised token would be refused in silence; (c) whether the sheet was captured with --max=15, because at the default cap of 9 build_dna_gallery trims `curvature` from the tail to [sphere] and the saddle pair does not exist. If instead the CURVATURE axis reads under 20% anywhere, the two surfaces were built at the same height by mistake - they are meant to differ by their whole body.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [],
+				"designed_nulls_why": "None, honestly. The tempting one is (euclid, plane) against the plate's own parallels and triangle: on the plate the page's rods ARE geodesics, so (euclid, plane) is by construction the union of (parallels, plane) and (triangle, plane) plus a translucent sheet, minus 0.10 m of rod at each end (the page is 0.80 m, the plate 1.0). But the sweep photographs single cells, and a union of two cells is not equal to either of them - predicted 12.3% against parallels and 11.6% against triangle, both a whole figure apart. That relation is registered here as a RELATION and not a null: if (euclid, plane) comes back closer to (parallels, plane) than a triangle's worth, the triangle on the page is not being drawn.",
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all three curvatures in a row (layout=ladder, 1.30 m pitch, about 3.6 m wide) but the SWEEP must see one surface at a time: capture_config_sweep unions the AABB across a spec's variants, so a three-wide row in the same spec frames every single against four metres and photographs it as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces.",
+				"kin": "angle_sum_triangle and curvature_slider declare `opening` = flat | hyperbolic | elliptic (in that order, curvature_slider's word), the same three signs of K as this artifact's `curvature` axis under adjectives instead of bodies. Not taken, for two reasons said on the record: `opening` is also agreement_gauge's word for the angle between two vectors (agreeing | strangers | opposing | parallel), and this artifact's claim is that the geometry belongs to the BODY - a ball you can walk round, a plate, a saddle - so the values name the body. A room holding curvature_slider at `elliptic` and this bench at `sphere` is saying one thing twice, and the mapping is one line: elliptic = sphere, flat = plane, hyperbolic = saddle. riemann_sphere's second axis `infinity` (pole | rays | open | none) is the compactification's own question and not the postulate's; it is named here so nobody looks for it, and declined (see declines). poincare_disk is the same hyperbolic geometry as the saddle in a different model and is kin by subject; angle_sum_triangle draws the same three triangles as three sagittas on chords (its own note says the shipped 60/60/60 labels are nominal, the drawn triangle isoceles) - here the angles are integrated on real surfaces and never printed.",
+				"declines": [
+					"riemann_sphere's `infinity` axis (pole | rays | open | none). It answers a different question - how the point at infinity is shown on a compactified plane - and its own code says every value renders identically under `euclid`, which is the interaction this bench exists to untangle rather than inherit.",
+					"elliptic's and riemann's `net` (meridians and latitude circles). Latitude circles are not geodesics, and a net whose second family is not straight cannot be drawn as the same construction on the plate and the saddle. hyperbolic_surface's geodesic families are taken instead; the sphere's own version of them collapses toward FOUR points rather than two, which is a truer picture of K > 0 than a globe grid and is said in the note.",
+					"The members' `euclid` = flatten the surface. Not refused as a claim - it is exactly this artifact's (euclid, plane) cell - refused as a value of `postulate`, because under two axes it would sweep three identical frames and hide curvature inside the wrong knob. Recorded as the one place this synthesis overrules its brief's phrasing and its members' code at once: the brief asked what the members do for euclid, and the answer is that they do not draw a false diagram on the curved surface, they remove the surface.",
+					"Every caption plate. All three members print their argument (NO PARALLELS, SUM = 180, SUM OVER 180, MANY PARALLELS, SUM UNDER 180, SUM = 270) on a Label3D plate. Nothing is printed here: the parallels' gap, the wedges' area and the page's fit are the argument, and a tile whose value is a rendered word naming its own variant is a tile about typography.",
+					"hyperbolic_surface's `curvature` float, elliptic_surface's `radius`, riemann_sphere's `radius` and every `resolution`. A steeper saddle or a bigger ball photographed at one station is a bigger picture of the same claim. The three surfaces are pinned at K = +4 / 0 / -4 (R 0.50; y = x^2 - z^2) so the sphere's excess and the saddle's deficit are commensurate, and those constants are not exports.",
+					"A `sum` or `angle` axis, or any numeric readout of the angle sum. The wedges are the readout; a number beside them would be the gauge this wave is not building.",
+					"Any animation, rate, or randomness. There is no _process, no Timer, no randf anywhere in the file; every geodesic is deterministic (RK4 with fixed step, a bisection shoot with fixed scan), so two builds of one value are the same mesh."
+				],
+				"sweep_command": "python tools/build_dna_gallery.py --slug=postulate-bench --tokens=postulate_bench --max=15",
+				"sweep_note": "THE FULL SHEET NEEDS --max=15. `postulate` is declared first and is never trimmed; `curvature` is second and build_dna_gallery trims the LATER axis from the tail until the cross product fits its cap, so at the default --max=9 the 5 x 3 sheet renders as 5 x 1 = sphere only, and the plate and the saddle - the two surfaces on which the pre-registered closest pair lives - are never photographed.",
+				"placements": 0
+			}
+		}
+	}
+}

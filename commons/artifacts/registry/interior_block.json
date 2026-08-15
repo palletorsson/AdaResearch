@@ -1,0 +1,102 @@
+{
+	"artifacts": {
+		"interior_block": {
+			"scene": "res://commons/artifacts/interior_block/interior_block.tscn",
+			"category": "geometry",
+			"description": "One 1 m block, a 20 x 20 x 20 census of solid and air meshed as its watertight face-culled shell, with the family's seven interiors carved into it - the wall's corner, court and room (closed in plan, open to the sky, the room entered by a door) and the landscape's undercut, caverned and warren (closed by a roof, entered by a mouth) - read three ways: the solid from outside, which shows only its openings; a section through the middle with the cut filled dark; and the hollow cast as its own glowing body, dark wherever a flood fill from outside cannot reach it, which on all seven words is nowhere.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			},
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"csg_architecture_cavity",
+					"marchingcubes_flat_landscape",
+					"mc_flat_landscape"
+				],
+				"axes": {
+				 "interior": [
+				  "none",
+				  "corner",
+				  "court",
+				  "room",
+				  "undercut",
+				  "caverned",
+				  "warren"
+				 ],
+				 "reading": [
+				  "section",
+				  "solid",
+				  "void"
+				 ]
+				},
+				"default": "interior=none, reading=section, layout=single. none is csg_architecture_cavity's own default (gd:103) and the landscape's `none` is 0.0 in CAVE_STRENGTHS; the landscape itself ships at caverned (gd:195), so by scene the members split 1:1 and by token 1:2 for caverned - none is chosen anyway because it is the ONE rung both vocabularies share, the zero of both dials, and the landscape's own note calls it 'the comparison'. section is the reading in which the argument is visible - a cut block shows whether the void is closed by walls or by a lid and whether it is entered by a door or a mouth - and it is what a map placement should show, because a solid 1 m cube says nothing until it is opened; the solid reading is where the designed nulls live and is reached by the crossed sweep, which renders all 21 = 7 x 3 variants (keep --max at or above 21). No map places this token yet, so there is nothing to preserve.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. interior, seven values, the union of both vocabularies in order of increasing closure around the void, counted on the block (of six faces; roofed = solid above the void in its column, which is exactly what the landscape's replica counted, TerrainGeneratorFlat.gd:31-40): none = csg's shipped single run (gd:53) and the landscape's k 0.0 heightfield (gd:47-53), nothing carved, 8000 solid cells, void 0, closed on nothing because there is nothing to close; corner = csg gd:54 'two runs meeting at a right angle - shelter, a claim on space, no inside', the top-left-front octant of the block removed, 1000 cells (12.5%), floor + two walls, open on -x, +z and above, closed 3 of 6, 0% roofed; court = csg gd:55 'three runs, open at the back - enclosure felt before it is closed', a 10 x 10 x 10 yard cut down from the top face and open toward the camera at +z (the run nearest the camera is built first, csg's own lesson at gd:264-273), floor + three walls, 1000 cells, closed 4 of 6, 0% roofed; room = csg gd:56 'four runs, the doorway in the front one: the first rung on which the player is INSIDE and the void is bounded', a 10 x 10 x 10 pit closed on all four sides and open to the sky, with a 4-wide 7-tall doorway through the 5-cell front wall at floor level (csg gd:293-294, only the FRONT run is entered), 1140 cells (14.25%), closed 5 of 6 - the door is a hole in a wall, not a missing wall - and only its 140 doorway cells are roofed: a room in this family is a plan, not a lid; undercut = the landscape's k 0.3 (CAVE_STRENGTHS, gd:177-182), gd:54-62 'the first rung where the ground stops being single-valued in y', one overhang: a recess at the base of the front face 14 wide, 6 tall, 11 deep, 924 cells (11.55%), 12 cells of block above it and 2 below, floor + roof + three walls, open on the front only, closed 5 of 6 and 100% roofed - the first rung with a lid; caverned = the landscape's SHIPPED k 0.4, gd:42-46 'caves through the mass', a 10 x 10 x 10 chamber in the middle of the block reached by a 4 x 4 mouth through the front face at chamber-floor level, 1080 cells (13.5%), closed 6 of 6 but for the mouth, which is 16 of the front face's 400 cells; warren = the landscape's k 0.8, gd:63-67 'void-dominated relative to the rest ... the caves reach far below the surface band', five chambers - a hub where the cave's chamber was, two deep ones one cell above the base, two high - linked by four tunnels and entered by the SAME 4 x 4 mouth box as caverned, 1720 cells (21.5%), reaching from cell 1 to cell 18 of 20 in y, closed 6 of 6 but for the one mouth, every cell reachable because a warren is connected, that is the word. Volumes are held in one band (11.6-14.3%) for the five carved words that are not warren, so what the axis varies is how the void is closed and not how much of it there is; warren alone is larger, because the landscape's warren is the one rung it calls void-dominated. reading, three values: solid = the block from outside, whole - it shows its openings and nothing else, so caverned and warren are the same picture (one mouth, the rest inside), none differs from either by sixteen cells of mouth, and corner, court, room and undercut show what they are because they are open where you stand; section = the block cut through the middle on x, the +x half taken away so the cut face looks toward the camera, the cut filled dark (poche) where the saw went through solid and left in the body colour where it went through air, with the removed half drawn as its twelve edges - the reading in which the field is visible, walls or lid, door or mouth; void = the hollow cast as its own body, the air cells inside the hull meshed the same way, glowing amber where a flood fill from outside reaches them and DARK where it does not, the block itself absent but for its twelve edges - on none there is nothing to cast and the frame is the empty hull. layout (an export, NOT an axis, pinned single by the fixture): single = one block; ladder = all seven in a row at 1.30 m pitch. THE BODY. One block, 1.0 m, a 20 x 20 x 20 census of 5 cm cells - the object the landscape's replica measured, a grid of solid and air, before marching cubes smooths it - meshed as the face-culled shell: a quad wherever a solid cell meets air or the outside, normal from the solid into the air, so the hull faces out and every cavity wall faces INTO its cavity, closed and watertight by construction with no boolean solver; culling off and normals set on every vertex. The block colour is csg_architecture_cavity's wall_color (gd:104) byte for byte. THE THESIS SOMEONE COULD DISAGREE WITH: the two vocabularies close the void in ORTHOGONAL directions. The wall's ladder is a ladder in plan - two, three, four returning runs of a 2.6 m wall and no roof at any rung, the room entered by a door because the artifact's desire is a space to walk into - and the landscape's ladder was sized by counting columns that go solid-air-solid, that is, ROOF. So room has four walls and no lid; caverned has a lid and, as far as the census can say, no walls. Architecture withholds sideways and geology withholds from above, and the shared rung none is the block with nothing withheld in either direction. Laid on one block the seven words fill a small field, sides closed x roofed, with most cells empty - and one empty cell matters: not one of the seven, in either vocabulary, names a void you cannot reach. The wall's room has a door, the landscape's caves are caves THROUGH the mass, its replica counted roof and never reach. The family called this axis interior and never once meant the sealed pocket, the one thing a solid could actually keep from you. The block builds the marker for it (a sealed void casts dark in the void reading) and reports by flood fill that on all seven words it never fires: sealed = 0 in every census. The disagreement available: that reach is not what interior means at all - that a room is a room because of its plan and a cave is a cave because of its roof, and asking whether you can get in is a different question, about doors - and the solid reading is that quarrel's evidence, because in it the block shows exactly its doors and nothing of its rooms.",
+				"kin": "csg_architecture_cavity's other axis openwork (door | sampler | arcade | screen) asks what a wall's HOLES are, not whether it has an inside, and is not built here. mc_overhang_landscape's landform asks WHICH noise terms, on the same substrate. plumb_room (wave 14) is the nearest kin in the corpus and the one place a sealed void has actually been photographed: its overturned rock holds standable patches that are 'all pockets sealed inside the mass and out of view from every outside standpoint' - the block's dark marker is that case made a named colour. exhibit_vitrine's enclosure (box | bell | cradle | niche | open) is the case AROUND an exhibit and room_shape_demonstrator's plan is a room's figure; both are named in csg's own note as the reason `interior` was coined, and neither is a hollow in a solid. fontana_puncture's breach asks how deep one hole has eaten - a mouth without a room. The landscape's twin token marchingcubes_flat_landscape is the same scene as mc_flat_landscape and is counted once.",
+				"declines": "REFUSED, a numeric hollowness axis (void fraction): it is a fraction, already legible as a number, and the block holds it in one band on purpose so that closure is the only thing that moves. REFUSED, a resolution axis over N: that is how finely the census samples, the landscape's own declined word, and would photograph the same block blockier. REFUSED, a literal replica of the landscape's noise field inside a 1 m block: scaled to 20 x 20 the landscape's own census gives undercut 0.8 columns with an inside and caverned 4.7 of 400 - sub-cell - so none, undercut and caverned would render as one block and the axis would be a fact about the grid, not the words; and unseeded noise is five objects, not five variants. REFUSED, csg's openwork on the block's walls: it is the other axis of one member and asks a different question. REFUSED, a `sealed` (geode) value on the interior axis: no member names it, and its absence is the finding - the marker is built, the value is not, and the empty cell of the field is left empty and pointed at rather than filled by invention. REFUSED, a Label3D naming the rung: csg's label is part of ITS claim; a still of a block should not need a caption to say what it keeps.",
+				"predicted_degeneracy": {
+					"pair": "none against room, in the solid reading",
+					"percent": 2.5,
+					"arithmetic": "Enumerated over all 21 variants with a ray-marched raster of the planned voxel geometry from the sweep's own standpoint (yaw 0.62, pitch -0.26, FOV 34, PAD 1.9, framing 0.60, 200 x 200), one Lambert light, no shadow or AO, and counted in cabinet_sweep's currency: percent of frame pixels, within either subject, that change by more than 26 of 765 RGB - so these are the sweep's numbers in kind, and lower bounds in size. THE THREE DESIGNED NULLS RANK AHEAD OF THIS PAIR BY CONSTRUCTION and are registered under designed_nulls, not here: caverned against warren in the solid reading 0.00% (identical mouth box, everything else inside), none against caverned 0.91% and none against warren 0.91% (the mouth alone: 16 of the front face's 400 cells, the front face about 22% of frame at 0.79 obliquity, so about 0.9%). This entry names the closest pair that is NOT a construction. none against room in the solid reading: the pit's opening is 100 of the top face's 400 cells and the top face is seen at sin(15 deg) = 0.26 foreshortening, about 1.6% of frame; the doorway is 28 of the front face's 400 cells at 0.79, about 0.9%; the raster gives 2.50% for the pair. Runners-up from the same table, in order: room against caverned 3.40% (pit + door + mouth, a superset of this pair's difference, so it cannot come in below it), undercut against caverned 3.86%, none against undercut 4.48% (the recess, 84 front cells at 0.79), then the first section pair, caverned against warren 4.68%, and the first void pair, court against room 5.84%. Everything else on the interior axis is between 5.2% and 24%, and every same-interior cross-reading pair is 24% or more. THE DIRECTION OF THE MISS: a real render puts shadow and occlusion INSIDE every opening, and this raster does not, so the solid-reading numbers should come back higher than predicted, by the 1.5-3x the corpus has measured; if none against room comes back BELOW 2.5%, stop - the prediction is a floor and the only sweep in the corpus to land under its own floor was broken (a top face not lit, or a door not cut). If room against caverned comes in under none against room the geometry is wrong, because one difference contains the other. If the section pair caverned against warren comes back under 3% the cut face is being read too obliquely at 0.56 and the fix is the standpoint, not the axis.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [
+					{
+						"a": {
+							"interior": "caverned",
+							"reading": "solid"
+						},
+						"b": {
+							"interior": "warren",
+							"reading": "solid"
+						},
+						"under_percent": 0.3,
+						"why": "The mouth is the same box, [8,12) x [4,8) x [15,20) in cells, in both carves, and every other cell that differs is inside the hull behind at least one cell of solid. From outside the two are the same shell to the byte: a cave and a warren show the same door. If this comes back above 0.3% the block leaks - a warren cell has reached an outer face, or the two mouth boxes are not the same box."
+					},
+					{
+						"a": {
+							"interior": "none",
+							"reading": "solid"
+						},
+						"b": {
+							"interior": "caverned",
+							"reading": "solid"
+						},
+						"under_percent": 2.0,
+						"why": "The whole chamber - 1000 of 1080 cells - is behind the front face; the only difference the outside shows is the 4 x 4 mouth, 16 of the front face's 400 cells, and the front face is about 22% of frame at framing 0.60, so about 0.9% by the raster and under 2% with a shadowed mouth. The block keeps the room and shows the door."
+					},
+					{
+						"a": {
+							"interior": "none",
+							"reading": "solid"
+						},
+						"b": {
+							"interior": "warren",
+							"reading": "solid"
+						},
+						"under_percent": 2.0,
+						"why": "Same mouth as caverned and 1704 of 1720 cells inside; the identical difference to the pair above, which is the point - from outside a warren of five chambers is indistinguishable from one, and both are one mouth away from a solid."
+					}
+				],
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all seven interiors in a row (layout = ladder, 1.30 m pitch, about 8.8 m wide) but the SWEEP must see one block at a time: capture_config_sweep unions the AABB across a spec's variants, so a seven-wide row in the same spec frames every single block against nine metres and photographs it as a speck. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. Nothing else needs pinning: no RNG, no _process, no deferred build - every variant is a fixed set of boxes carved from a fixed grid and resolved synchronously in _ready, so one frame is a complete account, and the same word gives the same mesh every run.",
+				"framing": 0.6,
+				"framing_why": "DERIVED, not solved by tools/solve_framing.py, because no Godot run was allowed to this builder; to be corrected from the first sheet if it disagrees. The union AABB across all 21 variants is the 1 m hull (solid is the block; section and void carry the hull's twelve edges as MeshInstance3D boxes so their box is the same 1 x 1 x 1), radius 0.866, so at framing 1.0 the camera stands 5.38 m out and the cube's projected width is about 1.35 m in a 3.29 m frame, 14.9% of frame area by the raster. At 0.60 the raster puts the solid block's silhouette between 0.12 and 0.85 of frame width and 0.21 and 0.90 of frame height, 41.8% of frame area, with the top face still in view - a margin on every side and about 8% below, where a staged station would sit. If the first sheet shows the bottom edge cropped, go to 0.65, not the geometry."
+			}
+		}
+	}
+}

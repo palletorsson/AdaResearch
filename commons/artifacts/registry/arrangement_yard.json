@@ -1,0 +1,73 @@
+{
+	"artifacts": {
+		"arrangement_yard": {
+			"scene": "res://commons/artifacts/arrangement_yard/arrangement_yard.tscn",
+			"category": "primitives",
+			"description": "Ten identical bone cubes, 90 mm, filed five ways - grid (5 x 2 on the floor), row (ten in a line), ramp (the row with each body 45 mm above the one before), ring (ten on a 0.30 m circle facing outward) and stack (a brick pyramid of 4 + 3 + 2 + 1) - and read three ways: the bodies alone, the relation each layout claims drawn as amber rods between neighbours (lattice, chain, sloped chain, cycle, bearing) with the bodies pulled back to half size, or the arrangement's floor plan as a slate plate with a pad under each body's plan square (every body projected to the floor, touching it or not) and no bodies at all. Same ten cubes, five theories of what the collection is; deterministic, nothing rolls.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			},
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"grabcolorcollection",
+					"gravity_gun_test_scene",
+					"particle_systems",
+					"scale_lines"
+				],
+				"axes": {
+					"arrangement": [
+						"grid",
+						"row",
+						"ramp",
+						"ring",
+						"stack"
+					],
+					"reading": [
+						"bodies",
+						"relation",
+						"footprint"
+					]
+				},
+				"default": "arrangement=grid, reading=bodies. grid is the default of every member that shares the honest vocabulary, three of three: grabcolorcollection (gd:201, its shipped 5 x 2 catalogue page), gravity_gun_test_scene (gd:47, its shipped 2 x 5 wall) and particle_systems (gd:65, its legacy 2 x 2 corners); scale_lines defaults to `ladder`, which is a spacing law and not a layout, and is kin. bodies is what every member ships - none of the four draws the relation between its members - and the thesis is that the arrangement of the bodies ALREADY makes the claim; the relation reading is the claim drawn out for the quarrel, not the object. Extents at the default: 0.89 x 0.09 x 0.29 m.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. arrangement, five values, the union of the two honest vocabularies (grabcolorcollection gd:201 and gravity_gun_test_scene gd:47 declare grid|ramp|ring|stack character for character; particle_systems gd:65 declares grid|row|ring): grid = 5 x 2 flat on the floor at 0.20 m pitch, grabcolorcollection's page and gravity_gun's wall laid down, every body with the same neighbours in the same directions - the LATTICE, thirteen rods (eight along, five across), none first and none above; interchangeable, an address not an order. row = ten in one line at 0.105 m pitch, particle_systems' `row` ('abreast like specimens on a shelf, read left to right'), nine rods, a CHAIN with two ends; ordered, a first and a last. ramp = the row with each body raised 0.045 m above the one before, 0.405 m over the run - gravity_gun's spawn_ramp_pattern (half-pitch rank, rise 2 x spacing) and grabcolorcollection's `ramp` (each sheet lifted by its own luminance) both raise by HEIGHT, and with identical bodies the only quantity is the rank, so the rank is made metric; the same nine rods, sloped; ordered by how much. ring = ten on a circle of radius 0.30 m, each turned to face outward - gravity_gun's spawn_ring_pattern at 2 x spacing, grabcolorcollection's wheel with 'each tile facing outward' - ten rods, a CYCLE, two neighbours each and no first. stack = a brick pyramid in courses of 4 + 3 + 2 + 1, each upper body seated across the two beneath it - gravity_gun's spawn_stack_pattern count exactly and its gloss 'each level bearing the one above' - twelve rods from each upper body down to the two it rests on, a DEPENDENCY: take a lower one out and the ones above fall. grabcolorcollection's `stack` is the other reading (one pile, ten sheets 12 mm apart, fanned 5 degrees) and lost, because a pile of identical cubes is a row stood on end and its rods are a chain. reading, three values: bodies = the ten cubes alone at full 90 mm edge, what every member ships; relation = each body pulled back to 45 mm about its own centre and the neighbour relation laid between centres as 6 mm amber rods (emissive 0.45), so the arrangement is seen as the graph it claims; footprint = no bodies - a 12 mm slate plate over the convex hull of the bodies' plan squares pushed out 20 mm, with a 30 mm bone pad on it under each body's plan square - every body projected to the floor whether it touches it or not, and where projections overlap (the stack's upper courses over its bottom course) the later square is clipped against what is already drawn, so the stack shows four pads and nothing is drawn twice on one plane - the arrangement as its floor plan knows it. Extents (X x Y x Z, bodies reading): grid 0.89 x 0.09 x 0.29, row 1.035 x 0.09 x 0.09, ramp 1.035 x 0.495 x 0.09, ring 0.69 x 0.09 x 0.69, stack 0.36 x 0.36 x 0.09; the union across all fifteen variants is 1.075 x 0.495 x 0.73 m. Pitches differ per arrangement because the members' do (gravity_gun's ring is at 2 x spacing, its ramp at half), and the members' number - ten - is kept: ten swatches, ten spheres, and a pyramid of 4 + 3 + 2 + 1. THE THESIS SOMEONE COULD DISAGREE WITH: an arrangement of identical things is a claim about the relation between them - grid says interchangeable, row says ordered, ramp says ordered by a quantity, ring says cyclic, stack says each depends on the ones below - and the same ten cubes under five layouts are five theories of what the collection is. The disagreement available: that layout is decoration and the theory lives in the bodies. The relation reading is built to have that quarrel, and the footprint reading is built to lose it - a floor plan cannot tell a row from a ramp, and sees a stack of ten as four.",
+				"kin": "scale_lines declares `arrangement` = ladder|log|ruler (gd:66) over five lines of five DIFFERENT lengths: fixed stacking heights (SLOT_Y), heights by log10 of each length, or every length anchored at one zero instead of centred. Those are the spacing law and the anchor of a set of unlike things, not the filing of a set of like ones, so its words are not offered here - though its `log` (height by the object's own magnitude) is the purest form of what the other members call `ramp`, and is why ramp is read as rank-made-metric. Named as a source for the census, not for the geometry.",
+				"declines": "count stays a constant, not an export: the pyramid is 4 + 3 + 2 + 1 and the grid is 5 x 2, and eleven bodies is a different artifact. edge, pitches, rise, ring radius, rod radius, plate and pad thickness stay constants - a rescale is not an argument, and the extents above are the ones the framing is solved on. Colour is ONE colour across all fifteen variants on purpose: the members colour their bodies (a palette, six sphere colours) and a per-arrangement colour here would add bite the layout did not earn. No `layout` ladder export: nothing here shows every rung at once, so there is nothing to pin and no fixture. Not seeded because nothing is random.",
+				"predicted_degeneracy": {
+					"pair": "row against stack, in the footprint reading",
+					"percent": 1.65,
+					"arithmetic": "Rasterised before any capture from the planned geometry at the canonical standpoint (yaw 0.62, pitch -0.26, FOV 34, PAD 1.9), with one camera placed on the union AABB of all fifteen variants (1.075 x 0.495 x 0.73 m, radius 0.695) and framing solved so the default's projected box fills 78% of frame width (0.644), then counting pixels that differ between two frames of the same reading as a share of the WHOLE frame - the sweep's changed_pct. Every arrangement pair in the bodies reading is far apart (3.27% grid/row up to 7.26% ramp/ring): full-size cubes at ten different places. The relation reading is uniformly closer (2.04% row/stack, 2.39% grid/row, 2.42% row/ramp, then 2.49-2.93%) because its geometry is thin - half-size nodes and 6 mm rods - not because any two layouts agree. The closest pair that is not a designed null is row against stack in the FOOTPRINT reading at 1.65%: the stack's plan is four pads on a 0.40 x 0.13 m plate and the row's is ten pads on a 1.075 x 0.13 m plate, the stack's plate lying inside the row's with its four pads within 8-22 mm of the row's middle four, so what differs is the row's outer 0.675 m of plate and six pads plus four slivers of misalignment, all of it flat and foreshortened to sin(15 deg) of its area. It is a TIE by construction with ramp against stack in the footprint reading, which is the same two pictures (the ramp's floor plan is the row's - see designed_nulls), so the first non-null rank is shared and the sweep's stable sort will put whichever it enumerated first ahead; row is named because it is the honest one, the ramp footprint being a copy. THIS IS A LOWER BOUND: the raster has one light, no shadow, no AO and no antialiasing, and every wave-14 prediction under-read the render by 1.5-6.7x, so the pair is expected at 2.5-5% of frame. The direction of the miss it cannot see: the sweep's showcase ground disc takes shadows, and the row's ten full cubes in the bodies reading cast ten shadows where the relation reading's nodes cast slivers and the footprint's plate casts almost nothing - so the render should push the bodies pairs UP and leave the footprint pair where it is, which favours the prediction; the risk runs the other way if the slate plate reads as near-background against the disc, in which case the footprint pairs collapse toward zero and the closest pair to look at is row against stack in the relation reading at 2.04%. If the named pair comes back UNDER 1.65% that is the signal to check whether the plate rendered at all. The designed null row against ramp in the footprint reading is 0.00% by construction and will hold rank #1 on the axis; the prediction is for the first rank after it.",
+					"registered": "2026-08-15, before the first capture",
+					"designed_nulls": [
+						{
+							"a": {
+								"arrangement": "row",
+								"reading": "footprint"
+							},
+							"b": {
+								"arrangement": "ramp",
+								"reading": "footprint"
+							},
+							"under_percent": 0.3,
+							"why": "The ramp is the row lifted by rank; its bodies stand over the row's ten XZ positions and the footprint reading draws only their plans - the same hull, the same plate, the same ten pads. Identical geometry to the byte, so the two frames should differ only by render noise. A floor plan cannot see height, which is the point of the reading and the reason it is registered here rather than discovered."
+						}
+					]
+				},
+				"framing": 0.65,
+				"framing_why": "SOLVED, NOT GUESSED, by tools/solve_framing.py. At framing 1.0 this artifact's subject bounding box filled 50.4% of frame width and 16.1% of its height, with a subject share of 3.79%. The visible frame is 2 * PAD * radius * framing metres wide, so the box grows as 1/framing; solving for a target of 78% of the smaller-headroom dimension gives 0.65. THE ARTIFACT WAS NEVER DARK, EMPTY OR MISSING A FIXTURE - the camera was between three and eight times too far away, and the near-zero subject share this token had on record was a fact about the standpoint rather than about the axis."
+			}
+		}
+	}
+}

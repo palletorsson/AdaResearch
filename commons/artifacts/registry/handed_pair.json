@@ -1,0 +1,61 @@
+{
+	"artifacts": {
+		"handed_pair": {
+			"scene": "res://commons/artifacts/handed_pair/handed_pair.tscn",
+			"category": "vectors",
+			"description": "One construction under one convention: two vectors a and b in the floor plane, the turning arc from a toward b, and the perpendicular the hand chooses - as VectorCrossProduct's arrow over its ruled parallelogram, as torque_demo's tau standing on a pivot with the force slid to the tip of the lever, or as dna_specimen's double helix wound around the arrow. right is a x b, up; left is the exact reflection of right through the a-b plane, b x a, down; both is the two halves tail to tail, an achiral figure. Deterministic geometry, no readout, no chart.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			},
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"VectorCrossProduct",
+					"torque_demo",
+					"dna_specimen"
+				],
+				"axes": {
+				 "handedness": [
+				  "right",
+				  "left",
+				  "both"
+				 ],
+				 "figure": [
+				  "cross",
+				  "torque",
+				  "helix"
+				 ]
+				},
+				"default": "handedness=right, figure=cross. right is the default of all three members, three of three (VectorCrossProduct gd:37, TorqueDemo gd:56, dna_specimen gd:66 - each the literal expression or winding the file shipped with), and here it is a x b = +Y, the right-hand rule, so the arrow stands up out of the floor plane. cross is the parent bench: VectorCrossProduct is the file whose three values in their order torque_demo took character for character (its kin note says DERIVED from that @export_enum), and the cross product is the construction the torque and the helix are readings of - the torque is the same product with the second vector slid to the tip of the first, the helix is the screw that product drives - so the synthesis opens on the product itself. layout is an export and not an axis, and ships at single.",
+				"note": "WHAT THE VALUES MEAN, from the members' code. handedness, three values in VectorCrossProduct's order (gd:37): right = the perpendicular is a x b, VectorCrossProduct's `a.cross(b)` (gd:120), TorqueDemo's `r.cross(f)` (gd:120), the right-hand rule in Godot's right-hand frame; here a is at azimuth 60 degrees from +X toward -Z and b a quarter turn further, both in the floor plane, so a x b = +Y and the arrow points UP - and in the helix figure the screw that turns a toward b while climbing that arrow, torsion positive; left = the perpendicular is b x a, VectorCrossProduct's `b.cross(a)` (gd:122) and TorqueDemo's `f.cross(r)` (gd:120), the same plane and the same turning sense from a toward b with the third axis on the other side - the exact reflection of right through the a-b plane, so the arrow points DOWN and the helix descends, turning a toward b, which is a left-hand screw, torsion negative; both = the two perpendiculars tail to tail at the origin, one each way, the counter drawn as its member draws it - VectorCrossProduct builds a second arrow `b x a` in teal (0.4,0.9,0.75) (gd:235), TorqueDemo a second `Torque (-tau)` in a dimmer purple (0.45,0.22,0.62) (gd:226), and dna_specimen has no both, so the second helix takes the strand colours at 0.55, TorqueDemo's own dimming ratio; both is the union of right and left and is achiral. figure, three values, WHICH member's body is drawn around the same a, b, arc and arrow: cross = VectorCrossProduct's bench - a in its orange (1.0,0.55,0.2) and b in its blue (0.2,0.7,1.0) from the origin, the parallelogram as the 10 x 10 ruled lattice its span=grid default draws (gd:203-219, two loops over range(grid_n + 1)), unshaded, alpha 0.65, emissive (0.35,0.55,0.9) x 0.6 as its material (gd:146-153), and the product as its lavender (0.75,0.55,1.0) arrow; torque = torque_demo's bench - a is the lever arm r in its cyan (0.3,0.8,1.0) from a pivot ball in force_containment_base's (0.9,0.5,0.8), b is the force F in its red (1.0,0.3,0.3) applied AT THE TIP of r as TorqueDemo positions its force arrow at ball + r (gd:139), and the product is tau in its purple (0.8,0.3,1.0) standing on the pivot at a fixed display length the way TorqueDemo draws `torque * 0.5` (gd:123) - the exhibit's units, not an axis; helix = dna_specimen's body wound around the arrow - two strands in doublehelix.gd's (0.2,0.85,1.0) and (1.0,0.42,0.75) with rungs in (0.7,1.0,0.6), radius 0.09 m, 3 turns over 0.40 m (dna_specimen's HelixContainer scales a radius-0.5 height-2.0 3-turn helix by 0.15: 0.075 m and 0.30 m), strand A starting on a and turning toward b as it advances along the arrow, the arrow itself in the helix's axis colour (0.35,0.65,1.0). Every figure keeps the turning arc from a toward b, a quarter circle at 0.12 m in the plane, because it is the datum every hand shares: only the third axis moves. HOW `right` WAS VERIFIED TO BE ONE CONVENTION ACROSS THE THREE MEMBERS, AND WHERE IT IS NOT: by the sign of the discrete torsion (P1-P0) x (P2-P1) . (P3-P2) over each member's `right` geometry, positive for a right-hand screw. VectorCrossProduct and torque_demo are right-handed by construction - Vector3.cross is the right-hand formula in Godot's right-hand frame and apply_torque spins by the same rule. doublehelix.gd's shipped `right` builds (cos(+i step) r, y rising, sin(+i step) r) (gd:176-198): its torsion is NEGATIVE, -1.4e-4 summed over the 96-point strand against +1.5e-3 for the reference (cos t, sin t, t), so the winding dna_specimen's note calls B-DNA is a LEFT-hand screw in world space, and its `left` is the right-hand one; no negative scale anywhere in dna_specimen.tscn or doublehelix.tscn undoes it. This artifact follows the right-hand rule in all three figures, which means its helix at `right` winds the way dna_specimen's `left` does, and from the sweep standpoint its front strands climb to the right, `/`, where dna_specimen's `right` climbs to the left. Two members agree with the physics; the third has the word on backwards. THE THESIS SOMEONE COULD DISAGREE WITH: handedness is a convention and not a property - the data (a, b, the turning sense) never changes hand, the mirror image of a right-handed construction obeys the same law with the opposite sign, and `both` is an achiral figure that nothing in the geometry prefers a half of. The disagreement available: that a helix's hand is a PROPERTY of the object (B-DNA and Z-DNA are different molecules with different biology), and that only the cross product's sign is the convention - the helix figure puts that quarrel in one frame, because there the convention and the property coincide.",
+				"kin": "VectorSubtraction, example_1_3_vector_subtraction_vr and vector_subtraction_demo declare `order` (a_minus_b, b_minus_a, reciprocal): the same anti-commutativity in the other operation, and `reciprocal` is their `both`. torque_crank was offered `handedness` on 2026-08-05 and refused it for its BODY - its tau runs down an axle out of a pedestal, so the flip photographs as a deletion - which is why torque_demo took the word instead; this artifact keeps nothing under the perpendicular for the same reason. mc_sculpt_vr / marching_cubes_sculpt_vr / sculpt_one / maze_generation declare `hand` for a sculptor's gesture and a generator's method, not a chirality: named for the census, not for the geometry.",
+				"predicted_degeneracy": {
+					"pair": "left against both, in the cross figure",
+					"percent": 12,
+					"arithmetic": "Rastered before any capture from the sweep standpoint (yaw 0.62, pitch -0.26, FOV 34, PAD 1.9, 760 px) with flat albedo colours on the showcase backdrop (158,166,184), all nine variants, then scored with the critic's own metric: crop to the union of the pair's subject boxes, 160 x 160, mean grey change of the hottest 5%, each frame first reduced to L(|frame - background|). The union AABB is 0.455 x 0.907 x 0.566 m, diagonal 1.16 m; a perpendicular arrow (0.45 m, shaft 36 mm, head 90 mm) is about 4.1% of the crop. Cross figure: right vs left 13.1%, left vs both 12.0%, right vs both 17.7%; torque 27.8-29.9%; helix 26.9-31.0%; figure axis 18.8-31.2%. WHY THE CROSS FIGURE IS LOWEST AND WHY left-vs-both IS THE FLOOR: VectorCrossProduct's lavender (191,140,255) sits only 33 grey levels from the backdrop in the critic's L(|diff|) - it has nearly the backdrop's luminance - while torque_demo's purple (204,77,255) sits 74 and its counter (115,56,158) 81. Between left and both the lower arrow is the same shape recoloured lavender to teal (102,230,191, 55 levels off backdrop), and because the critic greys each frame against its background BEFORE differencing, that recolour reads as |33 - 55| = 22 levels rather than the 86 a per-channel diff would give; the top arrow adds 33 over 4.1% of the crop, and the hottest 5% average to 12%. A hand estimate by changed AREA had named right-against-both (one arrow added) as the closest pair; the raster overturned it on the metric's greyscale, so the raster is the registered prediction and the hand estimate is the miss already taken. THIS IS A LOWER BOUND: the raster has no shading, no shadow on the ground disc and no antialiasing, and a lit lavender cylinder's dark side is about 80 levels from the backdrop, so the real number should land higher, likely 18-30%. If it comes back UNDER 12%, the arrow is thinner on screen than modelled or the crop is wider than the subject; if right-against-left in cross comes back under left-against-both, the greyscale model of lavender was wrong. If any cross-figure pair reads under 6% (the twin bar) it is the critic's colour-blindness on VectorCrossProduct's own palette and not the axis, and focus_rgb should be read.",
+					"registered": "2026-08-15, before the first capture"
+				},
+				"designed_nulls": [],
+				"fixture": {
+					"layout": "single"
+				},
+				"fixture_why": "The artifact can stand as all three figures in a row (layout = ladder, 0.95 m pitch, about 2.4 m wide) but the sweep must see one figure at a time: capture_config_sweep unions the AABB across a spec's variants, and a row would frame each single against three times its width. layout is an export and not an axis, and it ships at single, so the fixture is a belt over braces. No other fixture: nothing here is animated, seeded or gated - every variant is meshes resolved in _ready.",
+				"framing": 0.7,
+				"framing_why": "DERIVED FROM THE PRE-CAPTURE RASTER, NOT MEASURED. At framing 1.0 the union subject (0.455 x 0.907 x 0.566 m) projects to about 41% of the frame height and 1.5% of the frame by area, because the union spans both directions of the perpendicular while any single variant fills one; at 0.7 the projected subject box is 283-507 x 163-620 of 760, 60% of the height with margin on every side, and about 3.1% of the frame by area. The critic crops to the subject box, so the bite numbers above do not move with framing; only the tile does. If a spec sweeps figure alone at handedness=right the union is the upper half and 0.7 still fits with room.",
+				"declines": "`span` (VectorCrossProduct's grid|solid|outline|none, what an area is claimed to be) - real, but it lives IN the mirror plane and is identical at every hand, so it would be a second axis over the one part of the picture handedness cannot move; the cross figure takes the member's default, grid. `becoming` (dna_specimen's jarred|cracked|escaped|clouded) - the jar is the specimen's argument, not the helix's; declined for the same reason regime_threshold declined the pendulum's furniture. A `magnitude` or `angle` axis over |a x b| = |a||b| sin(theta) - VectorCrossProduct's slider changes it live, but the perpendicular here is drawn at a fixed display length as torque_demo draws tau*0.5, and an axis over a display scale photographs the exhibit's units as physics (torque_demo's own note, circle_train's refusal). A `mirror` pane in the a-b plane at `both` - no member draws one; the lattice already lies in that plane in the cross figure and the arc marks it in the others."
+			}
+		}
+	}
+}
