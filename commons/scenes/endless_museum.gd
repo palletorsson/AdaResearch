@@ -3072,6 +3072,19 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 		node.rotation_degrees = Vector3(0, float(r.get("rot_y", 0.0)), 0)
 		seg.add_child(node)
 		n_ok += 1
+		# in-situ prop editing: a wall prop with a rulable height becomes an
+		# editor record of kind "prop". Its nudge writes the CONVENTION
+		# (prop_wall_rules.json, same file the corridor writes) — every copy
+		# of that token in the museum moves on the next build, which is what
+		# a convention means. Only wall-class tokens in mount_defaults qualify;
+		# floor/ceiling/edge props have no height knob (v1, as in the corridor).
+		if not _vr and String(r.get("surface", "")) == "wall" \
+				and _mod_has(_mod_props, "mount_defaults") \
+				and (_mod_props.call("mount_defaults") as Dictionary).has(tok):
+			_edit_records.append({"node": node, "token": tok, "kind": "prop",
+				"code_h": float((_mod_props.call("mount_defaults") as Dictionary)[tok]),
+				"from": [], "tile_cell": [], "rotation": float(r.get("rot_y", 0.0)),
+				"chapter": "", "seg": seg})
 		var surf: String = String(r.get("surface", "?"))
 		kinds[surf] = int(kinds.get(surf, 0)) + 1
 		if bool(r.get("occupies_floor", false)):
@@ -3329,7 +3342,9 @@ func _edit_handle_key(key: int) -> bool:
 		KEY_Q:     _edit_rotate(-90.0)
 		KEY_R:     _edit_rotate(90.0)
 		KEY_DELETE:
-			if _edit_sel >= 0:
+			if _edit_sel >= 0 and String((_edit_records[_edit_sel] as Dictionary).get("kind", "")) == "prop":
+				print("[em-edit] props are dressed by em_props' rules, not placed by the plan — no per-copy removal (v1)")
+			elif _edit_sel >= 0:
 				var r2: Dictionary = _edit_records[_edit_sel]
 				# an ADDED row's delete erases the add ruling itself; a plan
 				# row's delete records a removal. Different truths.
@@ -3359,9 +3374,19 @@ func _edit_handle_key(key: int) -> bool:
 		KEY_ENTER:
 			_edit_place_from_palette()
 		KEY_F5:
+			var ok := true
 			if _mod_editor.call("save", _edit_overrides):
-				_edit_dirty = false
 				print("[em-edit] %d override(s) saved" % _edit_overrides.size())
+			else:
+				ok = false
+			if not _edit_prop_rules.is_empty():
+				if _save_prop_rules():
+					print("[em-edit] %d prop convention(s) saved" % _edit_prop_rules.size())
+					_edit_prop_rules.clear()
+				else:
+					ok = false
+			if ok:
+				_edit_dirty = false
 		_:
 			return false
 	if _edit_hud != null:
@@ -3417,10 +3442,91 @@ func _edit_place_from_palette() -> void:
 		return
 
 
+## Prop-height rulings made IN SITU. The selected wall prop's UP/DOWN nudge
+## edits the token's mounting CONVENTION — the same prop_wall_rules.json the
+## corridor writes — and every live copy of that token in the museum
+## previews the new height at once, because a convention is not a placement.
+var _edit_prop_rules: Dictionary = {}   # token -> h, pending until F5
+
+
+## Merge the pending in-situ rules INTO prop_wall_rules.json — read, update
+## the touched tokens, write. Never a rewrite from scratch: the corridor's
+## other rulings live in the same file and must survive a museum save.
+func _save_prop_rules() -> bool:
+	var path := String(_mod_props.get("RULES_PATH"))
+	var doc: Dictionary = {}
+	if FileAccess.file_exists(path):
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if parsed is Dictionary:
+			doc = parsed
+	if not (doc.get("rules") is Dictionary):
+		doc["rules"] = {}
+	if not doc.has("schema"):
+		doc["schema"] = "adaresearch.prop_wall_rules.v1"
+	if not doc.has("_readme"):
+		doc["_readme"] = "Hand mounting heights over em_props' code conventions — written by the prop reference wall and by the museum's in-situ editor (TAB, select a wall prop, UP/DOWN, F5)."
+	var rules: Dictionary = doc["rules"]
+	for tok in _edit_prop_rules:
+		var h: float = snappedf(float(_edit_prop_rules[tok]), 0.001)
+		var code_h: float = -1.0
+		for r_v in _edit_records:
+			if String((r_v as Dictionary).get("token", "")) == String(tok):
+				code_h = float((r_v as Dictionary).get("code_h", -1.0))
+				break
+		if code_h >= 0.0 and absf(h - code_h) <= 0.001:
+			rules.erase(tok)          # back on code: no rule, not a rule saying so
+		else:
+			rules[tok] = {"h": h}
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		print("[em-edit] CANNOT WRITE %s" % path)
+		return false
+	f.store_string(JSON.stringify(doc, "\t"))
+	f.close()
+	# drop em_props' static cache so the next dress reads the hand
+	_mod_props.set("_hand_loaded", false)
+	_mod_props.set("_hand_rules", {})
+	return true
+
+
+func _edit_prop_nudge(dy: float) -> void:
+	var r: Dictionary = _edit_records[_edit_sel]
+	var tok := String(r.get("token", ""))
+	# baseline = the SELECTED node's live height, not the token default. A
+	# token can be dressed at two heights (exit_sign: door head AND portal
+	# head), and the first trial found that out: nudging from the default
+	# yanked a 3.52 m portal sign to 3.10. The curator rules from what they
+	# are looking at; the convention becomes that height for the token.
+	var sel_node: Node3D = r.get("node") as Node3D
+	var cur: float = float(_edit_prop_rules.get(tok,
+		sel_node.position.y if (sel_node != null and is_instance_valid(sel_node)) else float(r.get("code_h", 0.0))))
+	var h: float = clampf(cur + dy, 0.1, WALL_H - 0.1)
+	_edit_prop_rules[tok] = h
+	var moved: int = 0
+	for r2_v in _edit_records:
+		var r2: Dictionary = r2_v
+		if String(r2.get("kind", "")) != "prop" or String(r2.get("token", "")) != tok:
+			continue
+		var n2: Node3D = r2.get("node") as Node3D
+		if n2 != null and is_instance_valid(n2):
+			n2.position.y = h
+			moved += 1
+	_edit_dirty = true
+	print("[em-edit] %s -> h %.2f (convention; %d live copies previewed)" % [tok, h, moved])
+
+
 func _edit_nudge(dx: int, dz: int) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
+	if String(r.get("kind", "")) == "prop":
+		# a wall prop has no cell to move to — its convention is HEIGHT.
+		# UP/DOWN rule it; LEFT/RIGHT are refused with a voice.
+		if dz != 0:
+			_edit_prop_nudge(-0.05 * float(dz))   # UP is dz=-1 -> +5 cm
+		else:
+			print("[em-edit] %s is a wall prop — its convention is height (UP/DOWN); walk to the corridor for the rest" % r.get("token"))
+		return
 	var node: Node3D = r.get("node") as Node3D
 	if node == null or not is_instance_valid(node):
 		return
@@ -3438,6 +3544,9 @@ func _edit_rotate(deg: float) -> void:
 	if _edit_sel < 0 or _edit_sel >= _edit_records.size():
 		return
 	var r: Dictionary = _edit_records[_edit_sel]
+	if String(r.get("kind", "")) == "prop":
+		print("[em-edit] %s is a wall prop — it faces its wall; no rotation ruling" % r.get("token"))
+		return
 	var node: Node3D = r.get("node") as Node3D
 	if node == null or not is_instance_valid(node):
 		return

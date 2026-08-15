@@ -160,9 +160,17 @@ add: %s  (%d/%d) — ENTER places it 2.5 m ahead" % [
 	var line2 := ""
 	if sel >= 0 and sel < records.size():
 		var r: Dictionary = records[sel]
-		line2 = "\nselected: %s  cell %s  rot %.0f  (%s)" % [
-			String(r.get("token", "?")), str(r.get("tile_cell", [])),
-			float(r.get("rotation", 0.0)), String(r.get("chapter", "?"))]
+		if String(r.get("kind", "")) == "prop":
+			# a wall prop: the ruling is its HEIGHT convention, token-wide
+			var n: Node3D = r.get("node") as Node3D
+			var h: float = n.position.y if (n != null and is_instance_valid(n)) else 0.0
+			line2 = "\nselected PROP: %s  h %.2f (code %.2f) — UP/DOWN rules every %s in the museum" % [
+				String(r.get("token", "?")), h, float(r.get("code_h", 0.0)),
+				String(r.get("token", "?"))]
+		else:
+			line2 = "\nselected: %s  cell %s  rot %.0f  (%s)" % [
+				String(r.get("token", "?")), str(r.get("tile_cell", [])),
+				float(r.get("rotation", 0.0)), String(r.get("chapter", "?"))]
 	var pend := overrides.size()
 	return head + line2 + ("\noverrides: %d%s" % [pend, "  *unsaved*" if dirty else ""]
 		if pend > 0 or dirty else "")
