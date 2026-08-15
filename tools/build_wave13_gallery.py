@@ -259,10 +259,11 @@ def main() -> int:
     </table><p class="hint" style="margin-top:8px">Four ladders, one grammar, and the shape of the diminishing return is not in the interface anywhere.</p></div>
     <p class="tail"><b>What this wave does not settle.</b> Four ladders is four, not a law &mdash;
     the corpus has other quantity axes (<span class="tok">resolution</span> alone appears under
-    three more names) and none of them has been asked which curve it is. And the prediction
-    that came in UNDER its floor, octave_stack at 0.5&times;, is the known rasteriser limit on
-    edge-only subjects at sub-pixel displacement, not a fault found; it is on record as a limit
-    and it stays there.</p>
+    three more names) and none of them has been asked which curve it is. And two predictions
+    were near-misses I have not diagnosed: <span class="tok">stencil_quarter</span> and
+    <span class="tok">mounting_yard</span> both ranked their named pair #4, not #1 &mdash; a
+    prediction that lands three places off is not a hit, and it is not the clean opposite-end
+    miss that depth_well is either. They stay open.</p>
   </section>
 
 <footer><span>wave 13</span><span>6 syntheses &middot; 12 axes &middot; 3 of 6 predictions hit</span>
