@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/mounting_yard/mounting_yard.gd" id="1_my"]
+
+[node name="MountingYard" type="Node3D"]
+script = ExtResource("1_my")

@@ -1,0 +1,56 @@
+{
+	"artifacts": {
+		"mounting_yard": {
+			"dna": {
+				"promoted": "2026-08-15",
+				"stage": "synthesis",
+				"sources": [
+					"catalyst_target",
+					"code_display",
+					"info_board",
+					"science_screen",
+					"fire_extinguisher",
+					"fire_hose_box",
+					"double_helix_scene",
+					"pollock_painting_in_3d",
+					"tt",
+					"exit_sign"
+				],
+				"axes": {
+					"support": [
+						"stand",
+						"none",
+						"bracket",
+						"frame",
+						"cabinet",
+						"pylon"
+					],
+					"occupant": [
+						"plate",
+						"vessel",
+						"specimen"
+					]
+				},
+				"framing": 0.46,
+				"framing_why": "SOLVED at 0.25 and then RAISED by hand, which is the only hand-set framing in this wave and it is here because the solve was measured on the default variant. support=stand puts the occupant at 0.66 of body height; support=pylon puts it at 1.02. At the solved framing the pylon variants clipped: subject bbox (317, 0, 443, 760), touching the top edge, with the occupant off-frame entirely. The critic then reported vessel and specimen as 0.00% at pylon - byte-identical, max pixel difference zero - which reads exactly like a rung that swallows its object and was in fact a camera too close to see the top of the post."
+			},
+			"scene": "res://commons/artifacts/mounting_yard/mounting_yard.tscn",
+			"category": "props",
+			"description": "One object mounted six ways, pooled from the six different vocabularies ten artifacts use for the axis support. Underneath thirteen words is one ladder from unsupported to fully housed, and each rung is a different institution: equipment, instrument, picture, specimen, signage.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 6,
+				"clearance": {
+					"front": 3,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"orientation": "face_approach",
+				"preferred_zone": "teaching",
+				"footprint_source": "authored"
+			}
+		}
+	}
+}
