@@ -1,0 +1,388 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "edge_ground",
+ "axis": "disclosure",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.42394,
+ "best_other_view": "opposite",
+ "best_other_mean_focus": 0.45937,
+ "ratio": 1.08,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.42394,
+   "best_pair": {
+    "a": "visible",
+    "b": "corner",
+    "focus": 0.65175,
+    "colour": 0.79776
+   },
+   "pairs": [
+    {
+     "a": "frame",
+     "b": "visible",
+     "focus": 0.06661,
+     "colour": 0.0826
+    },
+    {
+     "a": "frame",
+     "b": "silhouette",
+     "focus": 0.38948,
+     "colour": 0.48233
+    },
+    {
+     "a": "frame",
+     "b": "plan",
+     "focus": 0.5546,
+     "colour": 0.68386
+    },
+    {
+     "a": "frame",
+     "b": "corner",
+     "focus": 0.62902,
+     "colour": 0.77185
+    },
+    {
+     "a": "visible",
+     "b": "silhouette",
+     "focus": 0.33458,
+     "colour": 0.41429
+    },
+    {
+     "a": "visible",
+     "b": "plan",
+     "focus": 0.57197,
+     "colour": 0.70547
+    },
+    {
+     "a": "visible",
+     "b": "corner",
+     "focus": 0.65175,
+     "colour": 0.79776
+    },
+    {
+     "a": "silhouette",
+     "b": "plan",
+     "focus": 0.30308,
+     "colour": 0.37729
+    },
+    {
+     "a": "silhouette",
+     "b": "corner",
+     "focus": 0.50092,
+     "colour": 0.62218
+    },
+    {
+     "a": "plan",
+     "b": "corner",
+     "focus": 0.2374,
+     "colour": 0.29583
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.45937,
+   "best_pair": {
+    "a": "visible",
+    "b": "corner",
+    "focus": 0.65715,
+    "colour": 0.79756
+   },
+   "pairs": [
+    {
+     "a": "frame",
+     "b": "visible",
+     "focus": 0.39545,
+     "colour": 0.48269
+    },
+    {
+     "a": "frame",
+     "b": "silhouette",
+     "focus": 0.46963,
+     "colour": 0.57263
+    },
+    {
+     "a": "frame",
+     "b": "plan",
+     "focus": 0.55769,
+     "colour": 0.67569
+    },
+    {
+     "a": "frame",
+     "b": "corner",
+     "focus": 0.43486,
+     "colour": 0.53869
+    },
+    {
+     "a": "visible",
+     "b": "silhouette",
+     "focus": 0.08161,
+     "colour": 0.09949
+    },
+    {
+     "a": "visible",
+     "b": "plan",
+     "focus": 0.55119,
+     "colour": 0.68417
+    },
+    {
+     "a": "visible",
+     "b": "corner",
+     "focus": 0.65715,
+     "colour": 0.79756
+    },
+    {
+     "a": "silhouette",
+     "b": "plan",
+     "focus": 0.51899,
+     "colour": 0.64727
+    },
+    {
+     "a": "silhouette",
+     "b": "corner",
+     "focus": 0.64436,
+     "colour": 0.78383
+    },
+    {
+     "a": "plan",
+     "b": "corner",
+     "focus": 0.28275,
+     "colour": 0.33592
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.4197,
+   "best_pair": {
+    "a": "visible",
+    "b": "corner",
+    "focus": 0.66059,
+    "colour": 0.83882
+   },
+   "pairs": [
+    {
+     "a": "frame",
+     "b": "visible",
+     "focus": 0.04558,
+     "colour": 0.0582
+    },
+    {
+     "a": "frame",
+     "b": "silhouette",
+     "focus": 0.41115,
+     "colour": 0.53222
+    },
+    {
+     "a": "frame",
+     "b": "plan",
+     "focus": 0.5193,
+     "colour": 0.66766
+    },
+    {
+     "a": "frame",
+     "b": "corner",
+     "focus": 0.65447,
+     "colour": 0.83268
+    },
+    {
+     "a": "visible",
+     "b": "silhouette",
+     "focus": 0.36836,
+     "colour": 0.47801
+    },
+    {
+     "a": "visible",
+     "b": "plan",
+     "focus": 0.51549,
+     "colour": 0.6637
+    },
+    {
+     "a": "visible",
+     "b": "corner",
+     "focus": 0.66059,
+     "colour": 0.83882
+    },
+    {
+     "a": "silhouette",
+     "b": "plan",
+     "focus": 0.16078,
+     "colour": 0.20415
+    },
+    {
+     "a": "silhouette",
+     "b": "corner",
+     "focus": 0.48403,
+     "colour": 0.61449
+    },
+    {
+     "a": "plan",
+     "b": "corner",
+     "focus": 0.37723,
+     "colour": 0.48196
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.41574,
+   "best_pair": {
+    "a": "visible",
+    "b": "corner",
+    "focus": 0.63431,
+    "colour": 0.80484
+   },
+   "pairs": [
+    {
+     "a": "frame",
+     "b": "visible",
+     "focus": 0.0571,
+     "colour": 0.07212
+    },
+    {
+     "a": "frame",
+     "b": "silhouette",
+     "focus": 0.4086,
+     "colour": 0.51927
+    },
+    {
+     "a": "frame",
+     "b": "plan",
+     "focus": 0.59417,
+     "colour": 0.75345
+    },
+    {
+     "a": "frame",
+     "b": "corner",
+     "focus": 0.61333,
+     "colour": 0.77952
+    },
+    {
+     "a": "visible",
+     "b": "silhouette",
+     "focus": 0.35694,
+     "colour": 0.45395
+    },
+    {
+     "a": "visible",
+     "b": "plan",
+     "focus": 0.60521,
+     "colour": 0.76808
+    },
+    {
+     "a": "visible",
+     "b": "corner",
+     "focus": 0.63431,
+     "colour": 0.80484
+    },
+    {
+     "a": "silhouette",
+     "b": "plan",
+     "focus": 0.33791,
+     "colour": 0.4314
+    },
+    {
+     "a": "silhouette",
+     "b": "corner",
+     "focus": 0.42432,
+     "colour": 0.54317
+    },
+    {
+     "a": "plan",
+     "b": "corner",
+     "focus": 0.12555,
+     "colour": 0.16252
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.38023,
+   "best_pair": {
+    "a": "visible",
+    "b": "corner",
+    "focus": 0.60202,
+    "colour": 0.73345
+   },
+   "pairs": [
+    {
+     "a": "frame",
+     "b": "visible",
+     "focus": 0.07861,
+     "colour": 0.09675
+    },
+    {
+     "a": "frame",
+     "b": "silhouette",
+     "focus": 0.34462,
+     "colour": 0.41676
+    },
+    {
+     "a": "frame",
+     "b": "plan",
+     "focus": 0.47081,
+     "colour": 0.57632
+    },
+    {
+     "a": "frame",
+     "b": "corner",
+     "focus": 0.56975,
+     "colour": 0.6954
+    },
+    {
+     "a": "visible",
+     "b": "silhouette",
+     "focus": 0.27709,
+     "colour": 0.33419
+    },
+    {
+     "a": "visible",
+     "b": "plan",
+     "focus": 0.51639,
+     "colour": 0.63064
+    },
+    {
+     "a": "visible",
+     "b": "corner",
+     "focus": 0.60202,
+     "colour": 0.73345
+    },
+    {
+     "a": "silhouette",
+     "b": "plan",
+     "focus": 0.30602,
+     "colour": 0.38178
+    },
+    {
+     "a": "silhouette",
+     "b": "corner",
+     "focus": 0.46196,
+     "colour": 0.57372
+    },
+    {
+     "a": "plan",
+     "b": "corner",
+     "focus": 0.17498,
+     "colour": 0.21625
+    }
+   ]
+  }
+ }
+}

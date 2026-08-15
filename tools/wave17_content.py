@@ -145,7 +145,7 @@ SECTIONS = [
   "&cup; the near-vertex triad, 30.18% apart, and <em>coincident</em> is a 50/50 z-fight award rather "
   "than an erasure, so its column spreads 5.7&ndash;50.3%. The real nulls are at <em>corner</em>, where "
   "every mark lies on a hidden edge so separation has no surface to be a relation to &mdash; both held "
-  "at 0.12%. The prediction, frame against visible, is #1 of 10."),
+  "at 0.12%. The prediction, frame against visible, is #1 of 10. <b>And the probe was then run.</b> The axis bites from all five standpoints (38.0&ndash;45.9% focus, ratio 1.08&times;), so it is not anamorphic in the sense the gate was built for &mdash; the movement is <em>inside one value</em>. silhouette against visible measures 33.46% at canonical and collapses to <b>8.16% at opposite</b>, where it also becomes the closest pair on the axis; everywhere else the closest is frame/visible. A frozen boundary drifts toward the mark it is drawn as. Recomputing the true outline from cube geometry outside Godot confirms the structure: it takes <b>three distinct values</b> across the five standpoints, canonical agreeing with from-above, opposite with from-below, square-on degenerate with two faces exactly edge-on. The edge INDICES are not comparable between the two calculations, so the header's specific list is not confirmed here &mdash; only the grouping, which is the honest limit of the check."),
 
  ("proportion_bench", "proportion &middot; righttriangle's four &middot; all the same theorem",
   "Which right triangle counts as the right triangle is a choice about what you can build and what you find beautiful.",
